@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="true"/>
+		<setting name="useGeneratedKeys" value="true"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="Patent" type="com.lotut.pms.domain.Patent"/>
+		<typeAlias alias="PatentStatus" type="com.lotut.pms.domain.PatentStatus"/>
+		<typeAlias alias="PatentType" type="com.lotut.pms.domain.PatentType"/>
+		<typeAlias alias="PatentSearchCondition" type="com.lotut.pms.domain.PatentSearchCondition"/>
+		<typeAlias alias="SharePatent" type="com.lotut.pms.domain.SharePatent"/>
+		
+		<typeAlias alias="Notice" type="com.lotut.pms.domain.Notice"/>
+		<typeAlias alias="NoticeProcessStatus" type="com.lotut.pms.domain.NoticeProcessStatus"/>
+		<typeAlias alias="NoticeType" type="com.lotut.pms.domain.NoticeType"/>
+		<typeAlias alias="NoticePaperApplyType" type="com.lotut.pms.domain.NoticePaperApplyType"/>
+		<typeAlias alias="NoticeSearchCondition" type="com.lotut.pms.domain.NoticeSearchCondition"/>
+		
+		<typeAlias alias="Fee" type="com.lotut.pms.domain.Fee"/>
+		<typeAlias alias="FeeProcessStatus" type="com.lotut.pms.domain.FeeProcessStatus"/>
+		<typeAlias alias="FeePaymentStatus" type="com.lotut.pms.domain.FeePaymentStatus"/>
+		<typeAlias alias="FeeMonitorStatus" type="com.lotut.pms.domain.FeeMonitorStatus"/>
+		<typeAlias alias="FeeSearchCondition" type="com.lotut.pms.domain.FeeSearchCondition"/>
+		
+		<typeAlias alias="User" type="com.lotut.pms.domain.User"/>
+		<typeAlias alias="Page" type="com.lotut.pms.domain.Page"/>
+		
+	</typeAliases>  
+</configuration>

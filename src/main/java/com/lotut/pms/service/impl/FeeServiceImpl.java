@@ -1,0 +1,133 @@
+package com.lotut.pms.service.impl;
+
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.lotut.pms.constants.Settings;
+import com.lotut.pms.dao.FeeDao;
+import com.lotut.pms.dao.PatentDao;
+import com.lotut.pms.domain.Fee;
+import com.lotut.pms.domain.FeeSearchCondition;
+import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.User;
+import com.lotut.pms.service.FeeService;
+import com.lotut.pms.service.utils.FeeCrawler;
+import com.lotut.pms.service.utils.FeeExcelGenerator;
+import com.lotut.pms.util.PrincipalUtils;
+
+public class FeeServiceImpl implements FeeService {
+	private FeeDao feeDao;
+	private PatentDao patentDao;
+	
+	public FeeServiceImpl(FeeDao feeDao, PatentDao patentDao) {
+		this.feeDao = feeDao;
+		this.patentDao = patentDao;
+	}
+
+	@Override
+	public List<Fee> getUserMonitoredFees(int userId) {
+		return feeDao.getUserMonitoredFees(userId);
+	}
+
+	@Override
+	public void changeFeesInvoiceTitle(List<Long> feeIdList, String invoiceTitle) {
+		feeDao.updateFeesInvoiceTitle(feeIdList, invoiceTitle);
+	}
+
+	@Override
+	public String generateFeeExportExcel(List<Long> feeIdList, String excelName) throws IOException {
+		List<Fee> fees = feeDao.getFeesByIds(feeIdList);
+		String exportExcelPath = Settings.TEMP_DIR + excelName;
+		FeeExcelGenerator.writeFeeRecordsToExcel(fees, exportExcelPath);
+		return exportExcelPath;
+	}
+
+	@Override
+	public List<Fee> searchUserMonitoredFees(FeeSearchCondition searchCondition) {
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		return feeDao.searchUserMonitoredFees(searchCondition);
+	}
+
+	@Override
+	public Map<String, List<?>> batchGrabFees(List<Long> patentIds) {
+		Map<String, List<?>> grabResultMap = new HashMap<>();
+		List<Patent> patents = patentDao.getPatentsByIds(patentIds);
+		FeeCrawler crawler = new FeeCrawler(patents);
+		crawler.grabFees();
+		Map<Patent, List<List<String>>> shouldPayRecordsMap = crawler.getShouldPayRecordsMap();
+		List<Patent> failedPatents = crawler.getFailedPatents();
+		List<Patent> emptyFeePatents = crawler.getEmptyFeePatents();
+		
+		grabResultMap.put("failedPatents", failedPatents);
+		grabResultMap.put("emptyFeePatents", emptyFeePatents);
+		
+		List<Fee> fees = getShouldPayRecords(shouldPayRecordsMap);
+		
+		if (!fees.isEmpty()) {
+			feeDao.insertFees(fees);
+		}
+		
+		List<Fee> resultFees = feeDao.getFeesByPatentIds(patentIds, PrincipalUtils.getCurrentUserId());
+		
+		grabResultMap.put("fees", resultFees);
+		
+		return grabResultMap;
+	}
+	
+	@Override
+	public Map<String, Object> grabFees(long patentId) {
+		Map<String, Object> grabResultMap = new HashMap<>();
+		List<Long> patentIds = new ArrayList<>();
+		patentIds.add(patentId);
+		List<Patent> patents = patentDao.getPatentsByIds(patentIds);
+		FeeCrawler crawler = new FeeCrawler(patents);
+		crawler.grabFees();
+		Map<Patent, List<List<String>>> shouldPayRecordsMap = crawler.getShouldPayRecordsMap();
+		Map<Patent, List<List<String>>> paidRecordsMap = crawler.getPaidRecordsMap();
+		
+		List<Fee> fees = getShouldPayRecords(shouldPayRecordsMap);
+		if (!fees.isEmpty()) {
+			feeDao.insertFees(fees);
+		}
+		
+		List<Fee> resultFees = feeDao.getFeesByPatentIds(patentIds, PrincipalUtils.getCurrentUserId());
+		grabResultMap.put("patent", patents.get(0));
+		grabResultMap.put("fees", resultFees);
+		grabResultMap.put("paidFees", paidRecordsMap.get(patents.get(0)));
+		
+		return grabResultMap;
+	}
+	
+	private List<Fee> getShouldPayRecords(Map<Patent, List<List<String>>> shouldPayRecordsMap) {
+		List<Fee> fees = new ArrayList<>();
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		User user = PrincipalUtils.getCurrentPrincipal();
+		
+		try {
+			for (Map.Entry<Patent, List<List<String>>> shouldPayRecords : shouldPayRecordsMap.entrySet()) {
+				Patent patent = shouldPayRecords.getKey();
+
+				List<List<String>> feeRecords = shouldPayRecords.getValue();
+				for (List<String> feeRecord : feeRecords) {
+					Fee fee = new Fee();
+					fee.setPatent(patent);
+					fee.setFeeType(feeRecord.get(0));
+					fee.setAmount(Integer.parseInt(feeRecord.get(1)));
+					fee.setDeadline(formatter.parse(feeRecord.get(2)));
+					fee.setOwner(user);
+					fees.add(fee);
+				}
+			}
+		} catch (ParseException e) {
+			throw new RuntimeException(e);
+		}
+		
+		return fees;
+	}
+}

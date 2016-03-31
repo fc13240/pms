@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lotut.pms.dao.mapper.FriendMapper">
+	<select id="getUserFriends" parameterType="int" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap">
+		select u.user_id, u.username, u.name
+		  from friends f join users u on f.friend = u.user_id
+		 where user = #{userId};	
+	</select>
+	
+	<delete id="deleteFriend">
+		delete from friends 
+		where user = #{userId} and friend = #{friendId};	
+		delete from friend_requests
+		where from_user = #{userId} and to_user = #{friendId}
+	</delete>
+	
+	<select id="searchFriends" parameterType="string" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap">
+		<if test="keyword != null and keyword != ''">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>		
+		select u.user_id, u.username, u.name
+		  from users u		
+		<where>
+			<if test="keyword != null and keyword != ''">
+				u.username like #{keyword_pattern} or u.name like #{keyword_pattern};
+			</if>
+		</where>
+	</select>
+	
+	<select id="searchUserFriends" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap">
+		<if test="keyword != null and keyword != ''">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>		
+		select u.user_id, u.username, u.name
+		  from users u join friends f on u.user_id = f.friend	
+		 where f.user = #{userId}	
+		<if test="keyword != null and keyword != ''">
+			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern})
+		</if>
+	</select>	
+	
+	<insert id="insertFriendRequest">
+		replace into friend_requests(from_user, to_user)
+		values(#{fromUserId}, #{toUserId});
+	</insert>
+	
+	<select id="getFriendRequests" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap">
+		select u.user_id, u.username, u.name
+		  from friend_requests r join users u on r.from_user = u.user_id
+		 where r.to_user = #{userId} and r.request_process_status = 1
+	</select>
+	
+	<update id="processFriendRequest">
+		delete from friend_requests where from_user = #{requestUserId} and to_user = #{processUserId} and request_process_status = 1;
+		<if test="processStatus == 2">
+			replace into friends(user, friend) values(#{requestUserId}, #{processUserId})
+		</if>	
+	</update>
+</mapper>

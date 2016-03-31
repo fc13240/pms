@@ -1,0 +1,99 @@
+body {
+	font-family: Arial,'Microsoft YaHei',Helvetica,sans-serif;
+}
+
+.submenu-div {
+	margin-bottom: 15px;
+}
+
+.submenu-div  a {
+	width: 120px;
+	margin-right: 15px;
+	font-size: 16px;
+}
+
+div.row .col-lg-12 {
+}
+
+.pagination a {
+	text-align: right;
+}
+
+span.total {
+	margin-left: 20px;
+}
+
+.submenu-type-span {
+	font-size: 16px;
+	font-weight: bold;
+	color: #FF0000;
+	margin-right: 15px;
+}
+
+.navbar-form {
+	padding-left: 0;
+}
+
+.btn-submenu {
+	background-color: #c60204;
+	color: black;
+}
+
+.breadcrumbs li, .breadcrumbs li a {
+	font-size: 16px;
+}
+
+div.div-no-record {
+	font-size: 18px;
+	color: red;
+}
+tr th input.check-item {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+tr td input.check-item {
+	margin-right: 10px;	
+	margin-left: 10px;
+}
+
+table caption {
+	font-size: 20px;
+}
+
+a.processlink {
+	margin-right: 10px;
+}
+
+form button.friend-query {
+	width: 120px;
+}
+
+span.batch-share {
+	margin-left: 10px;
+}
+
+span.batch-share-item {
+	margin-right: 10px;
+}
+
+div.patent-detail-caption {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 20px
+}
+
+span.patent-detail-title {
+	color: green;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+span.patent-item-title {
+	font-weight: bold;
+}
+
+a.submenu {
+	font-size: 14px;
+	width: 120px;
+}

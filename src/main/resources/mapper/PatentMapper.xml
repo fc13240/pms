@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lotut.pms.dao.mapper.PatentMapper">
+	
+	<resultMap type="PatentStatus" id="PatentStatusResultMap">
+		<id property="patentStatusId" column="patent_status_id"/>
+		<result property="statusDescription" column="patent_status_desc"/>
+	</resultMap>		
+	
+	<resultMap type="PatentType" id="PatentTypeResultMap">
+		<id property="patentTypeId" column="patent_type_id"/>
+		<result property="typeDescription" column="patent_type_desc"/>
+	</resultMap>	
+
+	<resultMap type="Patent" id="PatentWithShareUsers">
+		<id property="patentId" column="patent_id"/>
+		<result property="appNo" column="app_no"/>
+		<result property="name" column="patent_name"/>
+		<result property="appDate" column="app_date"/>
+		<result property="appPerson" column="app_person"/>
+		<result property="inventPerson" column="invent_person"/>
+		<result property="internalCode" column="internal_code"/>
+		<result property="ownerId" column="patent_owner"/>
+		<association property="patentStatus" resultMap="PatentStatusResultMap"/>
+		<association property="patentType" resultMap="PatentTypeResultMap"/>
+		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
+	</resultMap>
+	
+	<select id="getUserPatentCount" resultType="int">
+		select count(*) from user_patents where user = #{userId}
+	</select>
+	
+	<select id="getUserPatentIdsByPage" parameterType="int" resultType="int">
+		select patent_id 
+		  from patents p
+		 where p.patent_id in (select patent from user_patents where user = #{userId})
+		 order by p.app_date, p.app_person, p.patent_name
+		 limit #{startIndex}, #{pageSize}
+	</select>
+	
+	<sql id="userPatents">
+		select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, pt.patent_type_id, 
+					 pt.patent_type_desc, ps.patent_status_id, ps.patent_status_desc, p.internal_code, u.user_id, u.username
+		  from patents p join patent_types pt on p.patent_type = pt.patent_type_id join patent_status ps on p.patent_status = ps.patent_status_id 
+			     join user_patents up on up.patent = p.patent_id join users u on u.user_id = up.user
+		 where up.patent in (select patent from user_patents where user = #{userId})	
+	</sql>
+	
+	<select id="getUserPatents" parameterType="Page" resultMap="PatentWithShareUsers">
+		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, pt.patent_type_id, 
+							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username
+		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, p.patent_type,
+				ps.patent_status_id, ps.patent_status_desc
+			from patents p join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
+		 where up.user = #{userId}
+		 order by p.app_date, p.patent_name, p.app_person
+		 limit #{startIndex}, #{pageSize}) as sp join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
+		    join users u on u.user_id = up.user	
+		 order by sp.app_date desc, sp.patent_name, sp.app_person
+	</select>	
+	
+	<select id="getPatentById" parameterType="long" resultMap="PatentWithShareUsers">
+		select p.patent_id, p.app_no, p.patent_name, pt.patent_type_desc, p.app_date, p.app_person, ps.patent_status_desc, u.user_id, u.username
+		  from patents p join patent_status ps on p.patent_status = ps.patent_status_id join patent_types pt on p.patent_type = pt.patent_type_id
+					join user_patents up on p.patent_id = up.patent join users u on u.user_id = up.user 
+		 where up.patent = #{patentId};	
+	</select>	
+	
+	<resultMap type="Patent" id="PatentByIdsResultMap">
+		<id property="patentId" column="patent_id"/>
+		<result property="appNo" column="app_no"/>
+		<result property="name" column="patent_name"/>
+		<result property="appDate" column="app_date"/>
+		<result property="appPerson" column="app_person"/>	
+		<association property="patentStatus" resultMap="PatentStatusResultMap"/>
+	</resultMap>
+
+	<select id="getPatentsByIds" parameterType="list" resultMap="PatentByIdsResultMap">
+		select p.patent_id, p.app_no, p.app_person, p.patent_name, p.app_date, ps.patent_status_id, ps.patent_status_desc
+		  from patents p join patent_status ps on p.patent_status = ps.patent_status_id
+		 where p.patent_id in 
+			<foreach item="patentId" collection="patentIds"
+			     open="(" separator="," close=")">
+			   #{patentId}
+			</foreach>		 
+	</select>	
+	
+	<resultMap type="Patent" id="PatentByAppNoAndOwnerResultMap">
+		<id property="patentId" column="patent_id"/>
+		<result property="appNo" column="app_no"/>
+	</resultMap>
+	
+	<select id="getPatentByAppNoAndOwner" resultMap="PatentByAppNoAndOwnerResultMap">
+		select patent_id, app_no
+		  from patents
+		 where app_no = #{appNo} and patent_owner = #{ownerId}
+	</select>
+	
+	<select id="getUserPatentsByType" resultMap="PatentWithShareUsers">
+		<include refid="userPatents" />		
+				and p.patent_type = #{patentType}
+		 limit 100;			
+	</select>
+	
+	<select id="getUserPatentsByStatus" resultMap="PatentWithShareUsers">
+		<include refid="userPatents" />			
+				and p.patent_status = #{patentStatus}
+		 limit 100;			
+	</select>
+	
+	<select id="searchUserPatentsByPage" parameterType="PatentSearchCondition" resultMap="PatentWithShareUsers">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, pt.patent_type_id, 
+							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username
+		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, p.patent_type,
+				ps.patent_status_id, ps.patent_status_desc
+				from patents p join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
+		 		where up.user = #{userId}
+		 		<if test="patentType != null">
+		 			and p.patent_type = #{patentType}
+		 		</if>	
+			 	<if test="patentStatus != null">
+			 		and p.patent_status = #{patentStatus}
+			 	</if>	
+			 	<if test="startAppDate != null">
+			 		and p.app_date >= #{startAppDate}
+			 	</if>	
+			 	<if test="endAppDate != null">
+			 		<![CDATA[ and p.app_date <= #{endAppDate} ]]>
+			 	</if>	
+			 	<if test="keyword != null">
+					and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
+						 or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} 
+						 or ps.patent_status_desc like #{keyword_pattern})
+				</if>		 		 	
+				 order by p.app_date, p.patent_name, p.app_person
+				 limit #{page.startIndex}, #{page.pageSize}) as sp 
+			join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
+		    join users u on u.user_id = up.user		
+		 order by sp.app_date desc, sp.patent_name, sp.app_person
+	</select>	
+	
+	<select id="searchUserPatents" parameterType="PatentSearchCondition" resultMap="PatentWithShareUsers">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>
+		<include refid="userPatents" />		
+		 	<if test="patentType != null">
+		 		and p.patent_type = #{patentType}
+		 	</if>	
+		 	<if test="patentStatus != null">
+		 		and p.patent_status = #{patentStatus}
+		 	</if>	
+		 	<if test="startAppDate != null">
+		 		and p.app_date >= #{startAppDate}
+		 	</if>	
+		 	<if test="endAppDate != null">
+		 		<![CDATA[ and p.app_date <= #{endAppDate} ]]>
+		 	</if>	
+		 	<if test="keyword != null">
+				<choose>
+					<when test="keywordType=='appNo'">
+						and p.app_no like #{keyword_pattern}
+					</when>
+					<when test="keywordType=='appName'">
+						and p.patent_name like #{keyword_pattern}
+					</when>	
+					<when test="keywordType=='appPerson'">
+						and p.app_person like #{keyword_pattern}
+					</when>		
+					<when test="keywordType=='internalCode'">
+						and p.internal_code like #{keyword_pattern}
+					</when>		
+					<when test="keywordType=='patentStatus'">
+						and ps.patent_status_desc like #{keyword_pattern}
+					</when>	
+					<otherwise>
+						and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
+							 or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} 
+							 or ps.patent_status_desc like #{keyword_pattern})
+					</otherwise>																		
+				</choose>
+			</if>		 		 			 			 	 			 	 			 	
+		 limit 100;	
+	</select>
+	
+	<update id="updateInternalCode">
+		update patents set internal_code = #{internalCode}
+		 where patent_id = #{patentId}
+	</update>
+	
+	<select id="getAllPatentTypes" resultMap="PatentTypeResultMap">
+		select patent_type_id, patent_type_desc
+		  from patent_types
+		 order by patent_type_id asc;	
+	</select>	
+	
+	<select id="getAllPatentStatus" resultMap="PatentStatusResultMap">
+		select patent_status_id, patent_status_desc
+		  from patent_status
+		 order by patent_status_id asc;
+	</select>	
+	
+	<insert id="insertOrUpdatePatent" parameterType="Patent" useGeneratedKeys="true" keyProperty="patentId">
+		insert into patents(app_no, patent_name, app_person, app_date, patent_type, patent_status, patent_owner)
+		values(#{appNo}, #{name,javaType=string,jdbcType=VARCHAR}, #{appPerson,javaType=string,jdbcType=VARCHAR}, #{appDate,javaType=date,jdbcType=DATE}, 
+			   #{patentType.patentTypeId}, #{patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER}, #{ownerId})
+		on duplicate key update 
+			patent_name = #{name,javaType=string,jdbcType=VARCHAR}, app_person = #{appPerson,javaType=string,jdbcType=VARCHAR},
+			app_date = #{appDate,javaType=date,jdbcType=DATE}, patent_type = #{patentType.patentTypeId},
+			patent_status = #{patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER}
+	</insert>
+	
+	<insert id="insertPatent" parameterType="Patent" useGeneratedKeys="true" keyProperty="patentId">
+		insert into patents(app_no, patent_name, app_date, patent_type, patent_owner)
+		values(#{appNo}, #{name,javaType=string,jdbcType=VARCHAR}, #{appDate,javaType=date,jdbcType=DATE}, 
+			   #{patentType.patentTypeId}, #{ownerId})
+	</insert>
+	
+	<update id="updatePatent" parameterType="Patent">
+		update patents 
+		    <set>
+		      <if test="appNo != null">app_no=#{appNo},</if>
+		      <if test="name != null">patent_name=#{name},</if>
+		      <if test="appDate != null">app_date=#{appDate},</if>
+		      <if test="internalCode != null">internal_code=#{internalCode},</if>
+		      <if test="patentType != null">patent_type=#{patentType.patentTypeId}</if>
+		    </set> 
+		 where app_no = #{appNo} and patent_owner = #{ownerId}
+	</update>
+</mapper>

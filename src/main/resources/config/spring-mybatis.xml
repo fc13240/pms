@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:tx="http://www.springframework.org/schema/tx" 
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:aop="http://www.springframework.org/schema/aop" 
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+							http://www.springframework.org/schema/tx 
+							http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+							http://www.springframework.org/schema/aop 
+							http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+							http://www.springframework.org/schema/context 
+							http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	
+	<context:property-placeholder location="classpath:config/db.properties"/>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass"><value>${db.driver_class}</value></property>
+		<property name="jdbcUrl"><value>${db.url}</value></property>
+		<property name="user"><value>${db.username}</value></property>
+		<property name="password"><value>${db.password}</value></property>
+		<property name="minPoolSize" value="5" />  
+		<property name="maxPoolSize" value="60" />       
+		<property name="acquireIncrement" value="5" />   
+		<property name="initialPoolSize" value="5" />      
+		<property name="idleConnectionTestPeriod" value="1800" />
+		<property name="maxConnectionAge" value="64800" />   
+		<property name="maxIdleTime" value="43200" /> 
+		<property name="acquireRetryAttempts" value="30" />
+		<property name="breakAfterAcquireFailure" value="false" />  
+		<property name="preferredTestQuery" value="select 1"/>  
+		<property name="testConnectionOnCheckin" value="true"/> 
+		<property name="testConnectionOnCheckout" value="false" />
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:config/mybatis-config.xml" />
+		<property name="mapperLocations" value="classpath:mapper/*Mapper.xml" />
+	</bean>	
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>	
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.UserMapper" />
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	<bean id="patentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.PatentMapper" />
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>	
+	
+	<bean id="feeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.FeeMapper" />
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>		
+	
+	<bean id="friendMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.FriendMapper" />
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>		
+	
+	<bean id="noticeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.NoticeMapper" />
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>			
+	
+	<bean id="sharePatentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.SharePatentMapper" />
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>		
+	
+	<bean name="userDao" class="com.lotut.pms.dao.mybatis.UserMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="userMapper" ref="userMapper" />
+	</bean>		
+	
+	<bean name="patentDao" class="com.lotut.pms.dao.mybatis.PatentMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="patentMapper" ref="patentMapper" />
+	</bean>		
+	
+	<bean name="sharePatentDao" class="com.lotut.pms.dao.mybatis.SharePatentMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="sharePatentMapper" ref="sharePatentMapper" />
+	</bean>	
+	
+	<bean name="feeDao" class="com.lotut.pms.dao.mybatis.FeeMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="feeMapper" ref="feeMapper" />
+	</bean>		
+	
+	<bean name="friendDao" class="com.lotut.pms.dao.mybatis.FriendMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="friendMapper" ref="friendMapper" />
+	</bean>				
+	
+	<bean name="noticeDao" class="com.lotut.pms.dao.mybatis.NoticeMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="noticeMapper" ref="noticeMapper" />
+	</bean>		
+	
+	<bean name="databaseAuthDao" class="com.lotut.pms.dao.DatabaseAuthProvider">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+			
+</beans>							

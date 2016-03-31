@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lotut.pms.dao.mapper.SharePatentMapper">
+	<resultMap type="SharePatent" id="SharedPatentResultMap">
+		<association property="shareBy" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap" />
+		<association property="patent" javaType="Patent">
+			<id property="patentId" column="patent_id"/>
+			<result property="appNo" column="app_no"/>
+			<result property="name" column="patent_name"/>
+			<result property="appPerson" column="app_person"/>
+		</association>
+	</resultMap>
+	
+	<select id="getUserSharedPatents" parameterType="int" resultMap="SharedPatentResultMap">
+		select u.user_id, u.username, p.patent_id, p.app_no, p.patent_name, p.app_person
+		  from patents p join share_patents sp on p.patent_id = sp.patent join users u on sp.share_by = u.user_id
+		 where sp.share_by = #{userId};		
+	</select>
+		
+	<select id="getFriendsSharedPatents" parameterType="int" resultMap="SharedPatentResultMap">
+		select u.username, p.patent_id, p.app_no, p.patent_name, p.app_person
+		  from patents p join share_patents sp on p.patent_id = sp.patent join users u on sp.share_by = u.user_id
+		 where sp.share_to = #{userId}	
+	</select>	
+	
+	<insert id="insertUserPatents" parameterType="list">
+		replace into user_patents(user, patent) 
+		values
+		<foreach item="userPatentRecord" collection="list" separator=",">
+			(${userPatentRecord.user}, #{userPatentRecord.patent})
+		</foreach>
+	</insert>	
+	
+	<insert id="insertSharePatents" parameterType="list">
+		replace into share_patents(patent, share_by, share_to) 
+		values
+		<foreach item="shareRecord" collection="list" separator=",">
+			(#{shareRecord.patent}, #{shareRecord.shareBy}, #{shareRecord.shareTo})
+		</foreach>
+	</insert>
+	
+	<delete id="deletePatentShare">
+		delete from share_patents where share_by = #{userId} and patent = #{patentId};
+		delete from user_patents where patent = #{patentId} and user != #{userId};
+	</delete>
+</mapper>

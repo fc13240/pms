@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+ 
+	
+
+		
+	<!-- Service Configuration -->
+	<bean name="userService" class="com.lotut.pms.service.impl.UserServiceImpl">
+		<constructor-arg ref="userDao"/>
+	</bean>
+	
+	<bean name="feeService" class="com.lotut.pms.service.impl.FeeServiceImpl">
+		<constructor-arg ref="feeDao"/>
+		<constructor-arg ref="patentDao"/>
+	</bean>
+	
+	<bean name="friendService" class="com.lotut.pms.service.impl.FriendServiceImpl">
+		<constructor-arg ref="friendDao"/>
+	</bean>
+	
+	<bean name="noticeService" class="com.lotut.pms.service.impl.NoticeServiceImpl">
+		<constructor-arg ref="noticeDao"/>
+		<constructor-arg ref="patentDao"/>
+		<constructor-arg ref="sharePatentDao"/>
+	</bean>
+	
+	<bean name="patentService" class="com.lotut.pms.service.impl.PatentServiceImpl">
+		<constructor-arg ref="patentDao"/>
+		<constructor-arg ref="sharePatentDao"/>
+	</bean>
+	
+	<bean name="sharePatentService" class="com.lotut.pms.service.impl.SharePatentServiceImpl">
+		<constructor-arg ref="sharePatentDao"/>
+	</bean>					
+</beans>
