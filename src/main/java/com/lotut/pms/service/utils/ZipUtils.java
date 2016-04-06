@@ -20,7 +20,7 @@ public class ZipUtils {
 		// unZip("C:/Users/Administrator/Desktop/2015113083403.zip", "C:/Users/Administrator/Desktop/testzip/2015113083403");
 	}
 	
-	public static void unZip(String zipPath, String destDir) throws IOException, ZipException {
+	public static void unzip(String zipPath, String destDir) throws IOException, ZipException {
 		File destFile = new File(destDir);
 		if (!destFile.exists()) {
 			destFile.mkdirs();
