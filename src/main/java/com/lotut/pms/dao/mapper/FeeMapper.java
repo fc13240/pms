@@ -19,4 +19,11 @@ public interface FeeMapper {
 	List<Fee> searchUserMonitoredFees(FeeSearchCondition searchCondition);
 	
 	void updateFeesInvoiceTitle(@Param("feeIdList")List<Long> feeIdList, @Param("invoiceTitle")String invoiceTitle);
+	
+	/*
+	 * 费用监控相关
+	 */
+	List<Fee> getFeesForPatent(@Param("feeId")long feeId,@Param("userId")int userId);
+	void updateMonitStatus(@Param("feeIds")List<Long> feeIds,@Param("monitorStatus")int monitorStatus);
+	
 }

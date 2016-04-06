@@ -40,8 +40,8 @@
 			<tr>
 				<th colspan="9">
 					<input type="checkbox" class="fee-check-item">
-					<span class="batch-share"><a href="javascript:updateMonitorStatus(2)">加入监控</a></span>
-					<span class="batch-share"><a href="javascript:updateMonitorStatus(1)">放弃监控</a></span>
+					<span class="batch-share"><a href="javascript:updateMonitorStatus(true)">加入监控</a></span>
+					<span class="batch-share"><a href="javascript:updateMonitorStatus(false)">放弃监控</a></span>
 				</th>		
 			</tr>
 			<tr>
@@ -54,7 +54,7 @@
 			<c:forEach items="${fees}" var="fee" varStatus="status">
 				<tr>
 					<td>
-						<span class="batch-share-item"><input type="checkbox" class="fee-check-item" feeId="${fee.feeId}"></span>
+						<span class="batch-share-item"><input type="checkbox" class="fee-check-item" feeId=""></span>
 						${status.index+1}
 					</td>
 					<td>${fee.feeType}</td>
@@ -109,9 +109,16 @@
 			return;
 		}
 		
-		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'feeId');
+		var feeIds = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'feeId');
+		var add_to_monitored = status ? "True": "False";
 		
-		location.href = "<s:url value='/fee/changeMonitorStatus.html'/>?fees=" + fees + "&monitorStatus=" + status;
+		$.ajax({
+			//url: "{% url "fee:update_monitor_status" %}?feeIds=" + feeIds + "&monitorStatus=" + add_to_monitored, 
+			type: 'get', 
+			success: function(data) {
+				//location.href = "{% url "fee:batch_list_without_update" %}?patentIds=" + "{ request.GET.patentIds }";
+			}
+		});			
 	}
 	
 </script>

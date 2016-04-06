@@ -13,6 +13,7 @@ import com.lotut.pms.constants.Settings;
 import com.lotut.pms.dao.FeeDao;
 import com.lotut.pms.dao.PatentDao;
 import com.lotut.pms.domain.Fee;
+import com.lotut.pms.domain.FeeMonitorStatus;
 import com.lotut.pms.domain.FeeSearchCondition;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.User;
@@ -104,6 +105,8 @@ public class FeeServiceImpl implements FeeService {
 		return grabResultMap;
 	}
 	
+	
+	
 	private List<Fee> getShouldPayRecords(Map<Patent, List<List<String>>> shouldPayRecordsMap) {
 		List<Fee> fees = new ArrayList<>();
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -130,4 +133,17 @@ public class FeeServiceImpl implements FeeService {
 		
 		return fees;
 	}
+	
+	/*
+	 * 费用监控
+	 */
+	@Override
+	public List<Fee> changeMonitorStatus(List<Long> feeIds,int monitorStatus) {
+		feeDao.updateMonitStatus(feeIds,monitorStatus);
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<Fee> fees = feeDao.getFeesForPatent(feeIds.get(0),userId);
+		return fees;
+	}
+	
+	
 }

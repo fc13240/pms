@@ -101,6 +101,8 @@
 					<input type="checkbox" class="check-item">
 					<span class="batch-share"><a href="javascript:batchShare()">批量分享</a></span>
 					<span class="batch-share"><a href="javascript:batchFee()">批量缴费</a></span>
+					<span class="batch-share"><a href="javascript:batchProcessNotice(2)">置为处理中</a></span>
+					<span class="batch-share"><a href="javascript:batchProcessNotice(3)">置为已处理</a></span>
 				</th>
 			</tr>
 			<tr>
@@ -121,7 +123,8 @@
 			<c:forEach items="${notices}" var="notice">
 				<tr>
 					<td>
-						<span class="batch-share-item"><input type="checkbox" class="check-item" patent="<c:out value='${notice.noticeId}'/>"></span>
+						<span class="batch-share-item"><input type="checkbox" class="check-item" patent="<c:out value='${notice.noticeId}'/>" 
+														notice="${notice.noticeId}"></span>
 						
 					</td>
 					<td><a href="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')"><c:out value="${notice.patent.appNo}"/></a></td>
@@ -176,6 +179,57 @@
 <script src="<s:url value='/static/js/formutil.js'/>"></script>
 <script src="<s:url value='/static/js/jquery-ui.min.js'/>"></script>	
 <script type="text/javascript">
+// 通知书处理状态
+function batchProcessNotice(processStatus) {
+		var noticeSelected = false;
+		var notices = []
+
+		var noticeCheckboxes = $('tr td input.check-item');
+		for (var i = 0; i < noticeCheckboxes.length; i++) {
+			if (noticeCheckboxes[i].checked) {
+				noticeSelected = true;
+				break;
+			}
+		}
+		if (!noticeSelected) {
+			$("<div>请选择通知书</div>").dialog({
+				modal: true,
+				buttons: {
+					Ok: function() {
+						$(this).dialog("close");
+					}
+				}	
+			});	
+			return;
+		}
+			
+		for (var i = 0; i < noticeCheckboxes.length; i++) {
+			if (noticeCheckboxes[i].checked) {
+				notices.push(noticeCheckboxes[i].getAttribute("notice"));
+			}
+		}	
+		$.ajax({
+			url: "<s:url value='/notice/processNotices.html'/>?notices=" + notices + "&processStatus=" + processStatus, 
+			type: 'get', 
+			success: function() {
+				$("<div>处理成功</div>").dialog({
+					modal: true,
+					buttons: {
+						Ok: function() {
+							$(this).dialog("close");
+							location.reload();
+						}
+					}	
+				});
+			}
+		});			
+		
+	}
+
+
+
+
+
 function changePaperApplyType(notice, selectElement) {
 	paperApplyType = 1;
 	for (var i = 0; i < selectElement.length; i++) {
@@ -215,6 +269,7 @@ function changePaperApplyType(notice, selectElement) {
 }
 
 function processNotice(notice, selectElement) {
+	
 	processStatus = 1;
 	for (var i = 0; i < selectElement.length; i++) {
 		if (selectElement.options[i].selected == true) {
@@ -223,7 +278,7 @@ function processNotice(notice, selectElement) {
 	}		
 
 	$.ajax({
-		url: "<s:url value='/notice/processNotice.html'/>?notice=" + notice + "&processStatus=" + processStatus,
+		url: "<s:url value='/notice/processNotices.html'/>?notices=" + notice + "&processStatus=" + processStatus,
 		type: 'get', 
 		success: function(data) {
 			$("<div>操作成功</div>").dialog({

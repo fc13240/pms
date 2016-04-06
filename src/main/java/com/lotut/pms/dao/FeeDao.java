@@ -17,4 +17,10 @@ public interface FeeDao {
 	void insertFees(List<Fee> fees);
 	
 	void updateFeesInvoiceTitle(List<Long> feeIdList, String invoiceTitle);
+	/*
+	 * 费用监控
+	 */
+	//List<Fee> getFeesByFeeIds(List<Long> feeIds);
+	void updateMonitStatus(List<Long> feeIds,int monitorStatus);
+	List<Fee> getFeesForPatent(long feeId,int userId);
 }

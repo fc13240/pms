@@ -2,6 +2,8 @@ package com.lotut.pms.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
@@ -9,6 +11,7 @@ import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
 
 public interface PatentDao {
+	int getUserPatentCount(int userId);
 	List<Patent> getUserPatents(Page page);
 	
 	List<Patent> getUserPatentsByType(int userId, int patentType);

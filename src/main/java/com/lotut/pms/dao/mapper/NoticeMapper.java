@@ -26,7 +26,7 @@ public interface NoticeMapper {
 	List<NoticePaperApplyType> getAllNoticePaperApplyType();
 	
 	List<NoticeType> getAllNoticeType();
-	
+	//通知书处理状态
 	void updateNoticesProcessStatus(@Param("noticeIdList")List<Integer> noticeIdList, @Param("noticeProcessStatus")int noticeProcessStatus);
 	
 	void updateNoticePaperApplyType(@Param("noticeId")int noticeId, @Param("paperApplyType")int paperApplyType);

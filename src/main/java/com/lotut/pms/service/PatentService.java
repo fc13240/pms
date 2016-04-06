@@ -11,6 +11,8 @@ import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
 
 public interface PatentService {
+	public long getPatentsCount(int userId);
+	
 	List<Patent> getUserPatents(Page page);
 	
 	List<Patent> getUserPatentsByType(int userId, int patentType);

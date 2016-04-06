@@ -2,10 +2,12 @@ package com.lotut.pms.domain;
 
 public class Page {
 	private int userId;
-	private int totalRecords;
-	private int currentPage;
-	private int pageSize = 10;
-
+	private int totalRecords;//总条数
+	private int currentPage;//当前页
+	private int pageSize = 10;//页面条数
+	
+	
+	
 	public int getTotalRecords() {
 		return totalRecords;
 	}

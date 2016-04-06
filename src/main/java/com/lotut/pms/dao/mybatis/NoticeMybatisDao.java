@@ -2,6 +2,7 @@ package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.NoticeDao;
@@ -72,4 +73,14 @@ public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao 
 	public void insertOrUpdateNotice(Notice notice) {
 		noticeMapper.insertOrUpdateNotice(notice);
 	}
+	
+	//通知书处理状态
+	/*
+	@Override
+	public void updateProcessStatus(int noticeId,int processStatus) {
+		noticeMapper.updateProcessStatus(noticeId,processStatus);
+		
+	}
+	*
+	*/
 }

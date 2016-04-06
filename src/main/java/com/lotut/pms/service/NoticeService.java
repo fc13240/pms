@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Notice;
 import com.lotut.pms.domain.NoticePaperApplyType;
 import com.lotut.pms.domain.NoticeProcessStatus;
@@ -14,6 +17,7 @@ import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
 public interface NoticeService {
+	
 	List<Notice> getUserNotices(int userId);
 	
 	Notice getNoticeById(int noticeId);
@@ -31,7 +35,7 @@ public interface NoticeService {
 	List<NoticeType> getAllNoticeType();
 	
 	void uploadNotices(String zipFilePath) throws IOException, ZipException;
-	
+	//通知书处理状态
 	void updateNoticesProcessStatus(List<Integer> noticeIdList, int noticeProcessStatus);
 	
 	void changeNoticePaperApplyType(int noticeId, int paperApplyType);
