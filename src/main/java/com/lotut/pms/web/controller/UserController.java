@@ -2,9 +2,11 @@ package com.lotut.pms.web.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lotut.pms.domain.User;
@@ -22,8 +24,9 @@ public class UserController {
 	}	
 
 	@RequestMapping(path="/register", method=RequestMethod.POST)
-	public ModelAndView register() {
-		return new ModelAndView();
+	public String register(User user) {
+		 userService.register(user);
+		return "login_form";
 	}
 	
 	@RequestMapping(path="/login", method=RequestMethod.POST)
@@ -44,6 +47,7 @@ public class UserController {
 	public UserController() {
 	}
 	
+	@Autowired
 	public UserController(UserService userService) {
 		this.userService = userService;
 	}

@@ -6,4 +6,7 @@ import com.lotut.pms.domain.User;
 
 public interface UserMapper {
 	List<User> getAllUsers();
+	public User findByName(String username);
+	public void save(User user);
+	public void update(User user);
 }

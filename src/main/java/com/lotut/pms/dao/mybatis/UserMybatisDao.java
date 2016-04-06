@@ -23,5 +23,23 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 	public void setUserMapper(UserMapper userMapper) {
 		this.userMapper = userMapper;
 	}
+
+	@Override
+	public User findByName(String username) {
+		
+		return userMapper.findByName(username);
+	}
+
+	@Override
+	public void save(User user) {
+		userMapper.save(user);
+		
+	}
+
+	@Override
+	public void update(User user) {
+		userMapper.update(user);
+		
+	}
 	
 }

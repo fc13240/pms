@@ -34,71 +34,8 @@
 	<script src="<s:url value='/static/js/html5shiv.js'/>"></script>
 	<script src="<s:url value='/static/js/respond.js'/>"></script>
 	<![endif]-->
-	<!-- 引入JQuery -->
-	<script type="text/javascript" src="<s:url value='/static/js/jquery.min.js'/>">
-	</script>
-	<!-- 引入cookie -->
-	<script type="text/javascript" src="<s:url value='/static/js/cookie.js'/>"></script>
 
-	<!-- 注册 -->
-	<script type="text/javascript">
-		$("#regist_button").click(function(){
-				//清除消息提示
-				$("#warning_1").hide();
-				$("#warning_2").hide();
-				$("#warning_3").hide();
-				//获取请求参数
-				var email=$("#email").val().trim();
-				var actual_name=$("#actual_name").val().trim();
-				var username=$("#username").val().trim();
-				var password=$("#regist_password").val().trim();
-				var final_password=$("#final_password").val().trim();
-			//检查格式
-			var ok=true;
-			if(username==""){
-				ok=false;
-				$("#warning_1 span").html("用户名为空");
-				$("#warning_1").show();
-			}
-			if(password==""){
-				ok=false;
-				$("#warning_2 span").html("密码为空");
-				$("#warning_2").show();
-			}else{
-				if(password.length<6){
-					ok=false;
-					$("#warning_2 span").html("密码需要6位");
-					$("#warning_2").show();
-				}
-			}
-			if(final_password != password){
-				ok=false;
-				$("#warning_3 span").html("确认密码和密码不一致");
-				$("#warning_3").show();
-			}
-			//发送Ajax
-			if(ok){
-				$.ajax({
-					url:"http://localhost:8080/pms/user/register.html",
-					type:"post",
-					data:{"username":username,"password":password,"actual_name":actual_name,"email":email},
-					dataType:"json",
-					success:function(result){
-						if(result.status==0){
-							alert(result.msg);
-							$("#back").click();//切换到登录页面
-						}else if(result.status==1){
-							$("#warning_1 span").html(result.msg);
-							$("#warning_1").show();
-						}
-					},
-					error:function(){
-						alert("注册失败,稍后重试！");
-					}
-				});
-			}
-		});
-	</script>
+	<script src="<s:url value='/static/js/jquery.js'/>"></script>
 </head>
 
 <body class="login-layout" style=" background-image: url(<s:url value='/static/images/bacground.jpg'/>);background-size:cover; ">
@@ -249,18 +186,19 @@
 										<div class="space-6"></div>
 										<p> 输入您的详细信息: </p>
 
-										<form>
+										<form id="registerForm" action="<s:url value='/user/register.html'/>" method="post" >
+										<se:csrfInput/>
 											<fieldset>
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="email" id="email" class="form-control" placeholder="邮箱" />
+														<input type="email" id="email" class="form-control" placeholder="邮箱" name="email"/>
 														<i class="ace-icon fa fa-envelope"></i>
 													</span>
 												</label>
 
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="text" class="form-control" id="username" placeholder="用户名" />
+														<input type="text" class="form-control" id="username" placeholder="用户名" name="username"/>
 														<div class='warning' id='warning_1'><span>该用户名不可用</span></div>
 														<i class="ace-icon fa fa-user"></i>
 													</span>
@@ -268,14 +206,14 @@
 												
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="text" class="form-control" id="actual_name" placeholder="真实姓名" />
+														<input type="text" class="form-control" id="actual_name" placeholder="真实姓名" name="name"/>
 														<i class="ace-icon fa fa-user"></i>
 													</span>
 												</label>
 
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="password" class="form-control" id="regist_password" placeholder="密码" />
+														<input type="password" class="form-control" id="regist_password" placeholder="密码" name="password" />
 														<div class='warning' id='warning_2'><span>密码长度过短</span></div>
 														<i class="ace-icon fa fa-lock"></i>
 													</span>
@@ -304,10 +242,9 @@
 														<i class="ace-icon fa fa-refresh"></i>
 														<span class="bigger-110">重置</span>
 													</button>
-
+													
 													<button type="button" id="regist_button" class="width-65 pull-right btn btn-sm btn-success">
 														<span class="bigger-110">注册</span>
-
 														<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
 													</button>
 												</div>
@@ -365,6 +302,10 @@
 
 	<!-- inline scripts related to this page -->
 	<script type="text/javascript">
+		$("#regist_button").click(function(){
+			$("#registerForm").submit();
+		});
+		
 		jQuery(function($) {
 		 $(document).on('click', '.toolbar a[data-target]', function(e) {
 			e.preventDefault();

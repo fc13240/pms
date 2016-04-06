@@ -13,4 +13,16 @@
 	<select id="getAllUsers" resultMap="UserResultMap">
 		select user_id, username, name from users;
 	</select>
+	<!-- 查找用户 -->
+	<select id="findByName" parameterType="string" resultType="User">
+		select * from users where username=#{username}
+	</select>
+	<!-- 注册方法 -->
+	<insert id="save" parameterType="User">
+		insert into users(username,name,password,email) values(#{username},#{name},#{password},#{email})
+	</insert>
+	<!-- 修改方法 -->
+	<update id="update" parameterType="User">
+		update users set password=#{password} where user_id=#{user_id}
+	</update>
 </mapper>
