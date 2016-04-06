@@ -67,4 +67,10 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 		
 		return feeMapper.getFeesForPatent(feeId, userId);
 	}
+	
+	//CS:deleteFees
+		@Override
+		public void deleteFees(List<Long> feeIdList, int userId) {
+			feeMapper.deleteFees(feeIdList, userId);
+		}
 }

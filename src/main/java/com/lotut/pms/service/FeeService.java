@@ -24,4 +24,7 @@ public interface FeeService {
 	 */
 	List<Fee> changeMonitorStatus(List<Long> feeIds,int monitorStatus);
 	
+	//CS:deleteFees
+	void deleteFees(List<Long> feeIdList, int userId);
+	
 }

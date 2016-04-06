@@ -22,5 +22,10 @@ public interface FeeDao {
 	 */
 	//List<Fee> getFeesByFeeIds(List<Long> feeIds);
 	void updateMonitStatus(List<Long> feeIds,int monitorStatus);
+	
 	List<Fee> getFeesForPatent(long feeId,int userId);
+	
+	//CS:deleteFees
+	void deleteFees(List<Long> feeIdList, int userId);
+
 }

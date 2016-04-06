@@ -145,5 +145,10 @@ public class FeeServiceImpl implements FeeService {
 		return fees;
 	}
 	
+	//CS:deleteFees
+		@Override
+		public void deleteFees(List<Long> feeIds, int userId) {
+			feeDao.deleteFees(feeIds, userId);
+		}
 	
 }
