@@ -27,10 +27,10 @@
 				<th>案件状态</th>
 			</tr>
 			<tr>
-				<td>${patent.appNo}</td>
-				<td>${patent.name}</td>
-				<td>${patent.firstAppPerson}</td>
-				<td>${patent.patentStatus.statusDescription}</td>
+				<td>${fees[0].patent.appNo}</td>
+				<td>${fees[0].patent.name}</td>
+				<td>${fees[0].patent.firstAppPerson}</td>
+				<td>${fees[0].patent.patentStatus.statusDescription}</td>
 			</tr>	
 		</table>	
 		<table class="table table-bordered patent-table table-striped">	
@@ -65,28 +65,6 @@
 			</c:forEach>	
 		</table>	
 	
-	<c:if test="${! empty paidFees}">
-		<table class="table table-bordered patent-table table-striped">	
-			<tr><th colspan="6">已缴费信息</th></tr>
-			<tr>
-				<th>序号</th>
-				<th>缴费种类</th>
-				<th>缴费金额</th>
-				<th>缴费日期</th>
-				<th>缴费人姓名</th>
-				<th>收据号</th>
-			</tr>			
-			
-			<c:forEach items="${paidFees}" var="paidFee" varStatus="status">
-				<tr>
-					<td>${status.index+1}</td>
-					<c:forEach var="field" items="${paidFee}">
-						<td>${field}</td>
-					</c:forEach>
-				</tr>				
-			</c:forEach>
-		</table>
-	</c:if>		
 	</div>
 </div>
 
@@ -112,6 +90,7 @@
 		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'feeId');
 		
 		location.href = "<s:url value='/fee/changeMonitorStatus.html'/>?fees=" + fees + "&monitorStatus=" + status;
+					
 	}
 	
 </script>

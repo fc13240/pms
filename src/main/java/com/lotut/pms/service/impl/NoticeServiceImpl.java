@@ -41,7 +41,6 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDao.getUserNotices(userId);
 	}
 
-
 	@Override
 	public Notice getNoticeById(int noticeId) {
 		return noticeDao.getNoticeById(noticeId);
@@ -81,7 +80,7 @@ public class NoticeServiceImpl implements NoticeService {
 	public List<NoticeType> getAllNoticeType() {
 		return noticeDao.getAllNoticeType();
 	}
-
+	//通知书处理状态
 	@Override
 	public void updateNoticesProcessStatus(List<Integer> noticeIdList, int noticeProcessStatus) {
 		noticeDao.updateNoticesProcessStatus(noticeIdList, noticeProcessStatus);
@@ -157,4 +156,5 @@ public class NoticeServiceImpl implements NoticeService {
 		userPatents.add(userPatentMap);
 		sharePatentDao.insertUserPatents(userPatents);
 	}
+	
 }

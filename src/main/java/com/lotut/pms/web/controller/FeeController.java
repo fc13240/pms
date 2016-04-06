@@ -48,11 +48,21 @@ public class FeeController {
 		return "fee_list";
 	}	
 
+	/*
+	 * 加入监控
+	 */
+	@RequestMapping(path="/changeMonitorStatus", method=RequestMethod.GET)
+	public String changeMonitorStatus(@RequestParam("fees")List<Long> feeIds, @RequestParam("monitorStatus")int monitorStatus,Model model) {
+		List<Fee> fees=feeService.changeMonitorStatus(feeIds, monitorStatus);
+		model.addAttribute("fees", fees);
+		return "fee_list_without_grab";
+	}
+	
+	
 	@RequestMapping(path="/list", method=RequestMethod.GET)
 	public ModelAndView getFeeList() {
 		return null;
 	}
-	
 	
 	@RequestMapping(path="/monitoredFeeList", method=RequestMethod.GET)
 	public String getMonitoredFees(Model model) {
@@ -101,10 +111,8 @@ public class FeeController {
 		}
 	}
 	
-	@RequestMapping(path="/changeMonitorStatus", method=RequestMethod.GET)
-	public void changeMonitorStatus(@RequestParam("fees")List<Long> feeIds) {
-		
-	}	
+	
+	
 	
 	@RequestMapping(path="/delete", method=RequestMethod.GET)
 	public ModelAndView deleteFee() {

@@ -234,6 +234,8 @@
 	                                <span class="input-group-btn" >
 										<a href="javascript:batchShare()"><button style="margin:8px;" type="button" class="btn btn-info btn-sm">批量分享</button></a>
 										<a href="javascript:batchFee()"><button type="button" class="btn btn-purple btn-sm">批量缴费</button></a>
+										<a href="javascript:batchProcessNotice(2)"><button style="margin:8px;" type="button" class="btn btn-info btn-sm">置为处理中</button></a>
+										<a href="javascript:batchProcessNotice(3)"><button type="button" class="btn btn-purple btn-sm">置为已处理</button></a>
 									</span> 
 	                                                    
                           </div>
@@ -263,7 +265,7 @@
                             <c:forEach items="${notices}" var="notice">
 	                              <tr>
 	                                <td class="center"><label class="pos-rel">
-	                                    <span class="batch-share-item"><input type="checkbox" class="patent-check-item" patent="<c:out value='${notice.noticeId}'/>">
+	                                    <span class="batch-share-item"><input type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.noticeId}'/>">
 	                                    <span class="lbl"></span> </label></td>
 	                                <td class="center"><a href="#">1</a></td>
 	                                <td><a href="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')"><c:out value="${notice.patent.appNo}"/></td>
@@ -399,6 +401,80 @@
 
 <!-- inline scripts related to this page --> 
 <script type="text/javascript">
+
+// 通知书处理状态
+function batchProcessNotice(processStatus) {
+		var noticeSelected = false;
+		var notices = []
+
+		var noticeCheckboxes = $('tr td input.check-item');
+		for (var i = 0; i < noticeCheckboxes.length; i++) {
+			if (noticeCheckboxes[i].checked) {
+				noticeSelected = true;
+				break;
+			}
+		}
+		if (!noticeSelected) {
+			$("<div>请选择通知书</div>").dialog({
+				modal: true,
+				buttons: {
+					Ok: function() {
+						$(this).dialog("close");
+					}
+				}	
+			});	
+			return;
+		}
+			
+		for (var i = 0; i < noticeCheckboxes.length; i++) {
+			if (noticeCheckboxes[i].checked) {
+				notices.push(noticeCheckboxes[i].getAttribute("notice"));
+			}
+		}	
+		$.ajax({
+			url: "<s:url value='/notice/processNotices.html'/>?notices=" + notices + "&processStatus=" + processStatus, 
+			type: 'get', 
+			success: function() {
+				$("<div>处理成功</div>").dialog({
+					modal: true,
+					buttons: {
+						Ok: function() {
+							$(this).dialog("close");
+							location.reload();
+						}
+					}	
+				});
+			}
+		});			
+		
+	}
+	
+	
+	
+	function processNotice(notice, selectElement) {
+	
+		processStatus = 1;
+		for (var i = 0; i < selectElement.length; i++) {
+			if (selectElement.options[i].selected == true) {
+				processStatus = selectElement.options[i].value;
+			}
+		}		
+	
+		$.ajax({
+			url: "<s:url value='/notice/processNotices.html'/>?notices=" + notice + "&processStatus=" + processStatus,
+			type: 'get', 
+			success: function(data) {
+			$("<div>操作成功</div>").dialog({
+				modal: true,
+				buttons: {
+					Ok: function() {
+					$(this).dialog("close");
+					}
+				}	
+			});
+			}
+			});
+	}	
 			jQuery(function($) {
 				//initiate dataTables plugin
 

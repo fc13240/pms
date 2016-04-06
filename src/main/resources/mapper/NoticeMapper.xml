@@ -72,6 +72,11 @@
 			join notice_process_status nps on nps.notice_process_status_id = n.process_status
 		 where n.patent in (select patent from user_patents where user = #{userId})	
 	</select>
+	<!-- 通知书处理状态 -->
+	<update id="updateProcessStatus">
+		update notices set process_status = #{processStatus} 
+		where notice_id = #{noticeId}
+	</update>
 
 	<resultMap type="Notice" id="SingleNoticeResultMap">
 		<id property="noticeId" column="notice_id"/>

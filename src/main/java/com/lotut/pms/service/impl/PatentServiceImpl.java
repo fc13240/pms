@@ -28,6 +28,12 @@ public class PatentServiceImpl implements PatentService {
 		this.sharePatentDao = sharePatentDao;
 	}
 	
+	/*
+	 * 分页相关
+	 */
+	public long getPatentsCount(int userId){
+		return patentDao.getUserPatentCount(userId);
+	}
 	@Override
 	public List<Patent> getUserPatents(Page page) {
 		return patentDao.getUserPatents(page);

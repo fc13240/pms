@@ -311,9 +311,6 @@
                   <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
                 </a>
             </div>
-            	      
-        
-        
         </div>
 	</div>        
 
@@ -324,6 +321,44 @@
 		</script>
 
 		<!-- <![endif]--> 
+<!-- 分页功能 start -->
+<div class="row">
+	<div class="col-lg-12">	
+				共 ${page.totalPages} 页    第${page.currentPage} 页
+				<a href="<s:url value='/patent/list.html'/>?currentPage=1">首页</a>
+			<c:choose>
+				<c:when test="${page.currentPage - 1 > 0}">
+					<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage - 1}">上一页</a>
+				</c:when>
+				<c:when test="${page.currentPage - 1 <= 0}">
+					<a href="<s:url value='/patent/list.html'/>?currentPage=1">上一页</a>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${page.totalPages==0}">
+					<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage}">下一页</a>
+				</c:when>
+				<c:when test="${page.currentPage + 1 < page.totalPages}">
+					<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage+1}">下一页</a>
+				</c:when>
+				<c:when test="${page.currentPage + 1 >= page.totalPages}">
+					<a href="<s:url value='/patent/list.html'/>?currentPage=${page.totalPages}">下一页</a>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${page.totalPages==0}">
+					<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage}">尾页</a>
+				</c:when>
+				<c:otherwise>
+					<a href="<s:url value='/patent/list.html'/>?currentPage=${page.totalPages}">尾页</a>
+				</c:otherwise>
+			</c:choose>
+	</div>
+</div>
+ 	<!-- 分页功能 End -->
+<form:form action="" modelAttribute="searchCondition" method="get">
+	<input type="text" id="search.page.nextPage" name="page.nextPage"/><a href="javascript:nextPage()">跳转</a>
+</form:form>
 
 <!--[if IE]>
 <script type="text/javascript">
@@ -372,7 +407,6 @@
 <script type="text/javascript">
 			jQuery(function($) {
 				//initiate dataTables plugin
-
 				//And for the first simple table, which doesn't have TableTools or dataTables
 				//select/deselect all rows according to table header checkbox
 				var active_class = 'active';

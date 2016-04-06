@@ -19,4 +19,9 @@ public interface FeeService {
 	String generateFeeExportExcel(List<Long> feeIdList, String excelName)  throws IOException;
 	
 	void changeFeesInvoiceTitle(List<Long> feeIdList, String invoiceTitle);
+	/*
+	 * 费用监控
+	 */
+	List<Fee> changeMonitorStatus(List<Long> feeIds,int monitorStatus);
+	
 }

@@ -50,4 +50,21 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 	public List<Fee> getFeesByPatentIds(List<Long> patentIds, int userId) {
 		return feeMapper.getFeesByPatentIds(patentIds, userId);
 	}
+	/*
+	 * 费用监控相关
+	 * @see 
+	 */
+	
+
+	@Override
+	public void updateMonitStatus(List<Long> feeIds, int monitorStatus) {
+		feeMapper.updateMonitStatus(feeIds, monitorStatus);
+		
+	}
+
+	@Override
+	public List<Fee> getFeesForPatent(long feeId, int userId) {
+		
+		return feeMapper.getFeesForPatent(feeId, userId);
+	}
 }

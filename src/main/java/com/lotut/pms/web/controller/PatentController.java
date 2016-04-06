@@ -41,8 +41,12 @@ public class PatentController {
 	public String getUserPatents(Model model, Page page) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
+		//分页相关
+		int totalCount=(int)patentService.getPatentsCount(userId);
+		page.setTotalRecords(totalCount);
 		List<Patent> patents = patentService.getUserPatents(page);
 		model.addAttribute("patents", patents);
+		model.addAttribute("page", page);
 		addPatentTypeAndStatusDataToModel(model);
 		return "patent_list";
 	}

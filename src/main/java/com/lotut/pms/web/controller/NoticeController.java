@@ -52,7 +52,9 @@ public class NoticeController {
 		model.addAttribute("notices", userNotices);
 		addSearchTypesDataToModel(model);
 		return "notice_list";
-	}	
+	}
+
+	
 	
 	@RequestMapping(path="/search", method=RequestMethod.GET)
 	public String searchUserNotices(NoticeSearchCondition searchCondition, Model model) {
@@ -103,10 +105,9 @@ public class NoticeController {
 			out.flush();
 		}
 	}		
-	
-	@RequestMapping(path="/processNotice", method=RequestMethod.GET)
-	public String processNotice(@RequestParam("notice")int noticeId, @RequestParam("processStatus")int processStatus) {
-		List<Integer> noticeIdList = Arrays.asList(noticeId);
+	//通知书处理状态
+	@RequestMapping(path="/processNotices", method=RequestMethod.GET)
+	public String processNotice(@RequestParam("notices")List<Integer> noticeIdList, @RequestParam("processStatus")int processStatus) {
 		noticeService.updateNoticesProcessStatus(noticeIdList, processStatus);
 		return "notice_list";
 	}		
