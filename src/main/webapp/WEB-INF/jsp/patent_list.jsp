@@ -311,9 +311,6 @@
                   <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
                 </a>
             </div>
-            	      
-        
-        
         </div>
 	</div>        
 
@@ -324,8 +321,6 @@
 		</script>
 
 		<!-- <![endif]--> 
-
-<<<<<<< HEAD
 <!-- 分页功能 start -->
 <div class="row">
 	<div class="col-lg-12">	
@@ -364,7 +359,7 @@
 <form:form action="" modelAttribute="searchCondition" method="get">
 	<input type="text" id="search.page.nextPage" name="page.nextPage"/><a href="javascript:nextPage()">跳转</a>
 </form:form>
-=======
+
 <!--[if IE]>
 <script type="text/javascript">
  window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/script>");
@@ -412,8 +407,6 @@
 <script type="text/javascript">
 			jQuery(function($) {
 				//initiate dataTables plugin
->>>>>>> 12839dcd062abf46369c95975406aeb71b5ee0f6
-
 				//And for the first simple table, which doesn't have TableTools or dataTables
 				//select/deselect all rows according to table header checkbox
 				var active_class = 'active';
