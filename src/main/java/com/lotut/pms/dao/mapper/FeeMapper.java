@@ -24,6 +24,11 @@ public interface FeeMapper {
 	 * 费用监控相关
 	 */
 	List<Fee> getFeesForPatent(@Param("feeId")long feeId,@Param("userId")int userId);
+	
 	void updateMonitStatus(@Param("feeIds")List<Long> feeIds,@Param("monitorStatus")int monitorStatus);
+	
+	//CS:deleteFees
+	void deleteFees(@Param("feeIdList")List<Long> feeIdList, @Param("userId")int userId);
+
 	
 }

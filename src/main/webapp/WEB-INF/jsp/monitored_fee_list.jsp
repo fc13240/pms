@@ -508,6 +508,26 @@
 		});
 	}	
 	
+	//CS:deleteFees
+	function deleteFees() {
+		var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
+		
+		if (!feeSelected) {
+			formutil.alertMessage('请选择要删除的费用记录');
+			return;
+		}		
+		
+		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'fee');
+		
+			$.ajax({
+				url: "<s:url value='/fee/deleteFees.html'/>?fees=" + fees, 
+				type: 'get', 
+				success: function(data) {
+					location.reload();
+				}
+			});
+		} 
+	
 </script>
 <!-- the following scripts are used in demo only for onpage help and you don't need them -->
 <link rel="stylesheet" href="<s:url value='/static/css/ace.onpage-help.css'/>" />

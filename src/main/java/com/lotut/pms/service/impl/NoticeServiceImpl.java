@@ -121,9 +121,8 @@ public class NoticeServiceImpl implements NoticeService {
 	public void uploadNotices(String zipFilePath) throws IOException, ZipException {
 		String noticeSubPath = zipFilePath.substring(zipFilePath.lastIndexOf("/")+1, zipFilePath.lastIndexOf(".zip"));
 		String noticePath = Settings.NOTICE_ROOT_PATH + noticeSubPath;
-//		String noticePath = "d:/soft/tomcat8/temp/" + noticeSubPath;
 		
-		ZipUtils.unZip(zipFilePath, noticePath);
+		ZipUtils.unzip(zipFilePath, noticePath);
 		
 		List<Notice> notices = NoticeXmlParser.parseNoticeXmlFiles(noticePath);
 		

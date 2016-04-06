@@ -152,4 +152,14 @@
 			#{feeId}
 		</foreach>			
 	</update>
+	
+	<!-- CS:deleteFees -->
+	<delete id="deleteFees" parameterType="list">
+	   delete from fees 
+		 where fee_owner = #{userId}
+		   and fee_id in
+		 <foreach item="feeId" collection="feeIdList" open="(" separator="," close=")">
+			 #{feeId}
+		 </foreach>	
+	</delete>
 </mapper>

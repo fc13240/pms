@@ -118,4 +118,12 @@ public class FeeController {
 	public ModelAndView deleteFee() {
 		return null;
 	}		
+	
+	//CS:deleteFees
+		@RequestMapping(path="/deleteFees", method=RequestMethod.GET)
+		public String deleteFees(@RequestParam("fees")List<Long> feeIds) {
+			int userId = PrincipalUtils.getCurrentUserId();
+			feeService.deleteFees(feeIds, userId);
+			return "monitored_fee_list";
+		}
 }
