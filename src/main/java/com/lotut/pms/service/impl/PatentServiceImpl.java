@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.lotut.pms.dao.PatentDao;
 import com.lotut.pms.dao.SharePatentDao;
 import com.lotut.pms.domain.Page;
@@ -72,6 +74,7 @@ public class PatentServiceImpl implements PatentService {
 	}
 
 	@Override
+	@Transactional
 	public void uploadPatents(InputStream is) throws IOException {
 		List<Patent> patents = PatentExcelParser.parsePatentFile(is);
 		for (Patent patent: patents) {

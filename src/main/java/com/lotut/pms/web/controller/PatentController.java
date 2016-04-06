@@ -65,6 +65,11 @@ public class PatentController {
 		return "patent_list";
 	}	
 	
+	@RequestMapping(path="list", method=RequestMethod.GET, params="user")
+	public String getShareUserPatents(@RequestParam("user") int userId, Model model) {
+		return null;
+	}	
+	
 	
 	@RequestMapping(path="showFriends", method=RequestMethod.GET)
 	public String showFriends(Model model) {
