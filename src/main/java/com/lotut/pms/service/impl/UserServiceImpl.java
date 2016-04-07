@@ -38,11 +38,13 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	//修改密码
-	public boolean update(String lastPassword,String newPassword){
+	public boolean changePassword(String lastPassword,String newPassword){
 		User user=PrincipalUtils.getCurrentPrincipal();
-		BCryptPasswordEncoder encode = new BCryptPasswordEncoder();
-		if(user.getPassword().equals(encode.encode(lastPassword))){
-			user.setPassword(encode.encode(newPassword));
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		if(encoder.matches(lastPassword, user.getPassword()) ){
+			user.setPassword(encoder.encode(newPassword));
+			userDao.updatePassword(user);
 			return true;
 		}
 		return false;

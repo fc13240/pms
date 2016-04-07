@@ -41,7 +41,7 @@ public class UserController {
 	
 	@RequestMapping(path="/changePassword", method=RequestMethod.POST)
 	public String changePassword(String lastPassword,String newPassword) {
-		userService.update(lastPassword, newPassword);
+		userService.changePassword(lastPassword, newPassword);
 		return "changePassword";
 	}
 	

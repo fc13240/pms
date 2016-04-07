@@ -16,5 +16,5 @@ public interface UserService {
 	/*
 	 * 修改密码
 	 */
-	public boolean update(String lastPassword,String newPassword);
+	public boolean changePassword(String lastPassword,String newPassword);
 }
