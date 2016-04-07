@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.lotut.pms.dao.mapper.FeeMapper;
 import com.lotut.pms.service.FeeService;
@@ -20,6 +22,5 @@ public class MyBatisTest {
 		int monitorStatus = 2;
 		
 		mapper.updateMonitStatus(feeIds, monitorStatus);
-		
 	}
 }
