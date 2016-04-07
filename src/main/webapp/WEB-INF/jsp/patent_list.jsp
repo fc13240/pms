@@ -285,6 +285,7 @@
                           </table>
                           	<!-- 分页功能 start -->
 								<div class="row">
+									<form:form action="" modelAttribute="searchCondition" method="get">
 									<div class="col-lg-12">	
 												共 ${page.totalPages} 页    第${page.currentPage} 页
 												<a href="<s:url value='/patent/list.html'/>?currentPage=1">首页</a>
@@ -315,12 +316,15 @@
 													<a href="<s:url value='/patent/list.html'/>?currentPage=${page.totalPages}">尾页</a>
 												</c:otherwise>
 											</c:choose>
-									</div>
-								</div>
 								 	<!-- 分页功能 End -->
-								<form:form action="" modelAttribute="searchCondition" method="get">
-									<input type="text" id="search.page.nextPage" name="page.nextPage"/><a href="javascript:nextPage()">跳转</a>
-								</form:form>
+								
+									<input type="text" id="search.page.nextPage" style="width:50px;" name="page.nextPage"/><a href="javascript:nextPage()">跳转</a>
+								
+											
+									</div>
+									</form:form>
+								</div>
+
                         </div>
                         <!-- /.span --> 
                       </div>
@@ -487,7 +491,7 @@
 			return;
 		}
 			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patentId');
+		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
 		
 		 window.open("<s:url value='/patent/showFriends.html'/>?patentNos=" + patentNos);
 	}	
