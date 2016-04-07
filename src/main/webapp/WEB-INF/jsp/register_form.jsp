@@ -180,42 +180,7 @@
 	<!-- inline scripts related to this page -->
 	<script type="text/javascript">
 		$("#regist_button").click(function(){
-			//清除消息提示
-			$("#warning_1").hide();
-			$("#warning_2").hide();
-			$("#warning_3").hide();
-			//获取请求参数
-			var email=$("#email").val().trim();
-			var name=$("#actual_name").val().trim();
-			var username=$("#username").val().trim();
-			var password=$("#regist_password").val().trim();
-			var finalpassword=$("#final_password").val().trim();
-		//检查格式
-		var ok=true;
-		if(username==""){
-			ok=false;
-			$("#warning_1 span").html("用户名为空");
-			$("#warning_1").show();
-		}
-		if(password==""){
-			ok=false;
-			$("#warning_2 span").html("密码为空");
-			$("#warning_2").show();
-		}else{
-			if(password.length<6){
-				ok=false;
-				$("#warning_2 span").html("密码需要6位以上");
-				$("#warning_2").show();
-			}
-		}
-		if(finalpassword != password){
-			ok=false;
-			$("#warning_3 span").html("确认密码和密码不一致");
-			$("#warning_3").show();
-		}
-			if(ok){
 				$("#registerForm").submit();
-			}
 		});
 		
 		jQuery(function($) {
