@@ -76,7 +76,7 @@
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
 														<input type="text" class="form-control" id="username" placeholder="用户名" name="username"/>
-														<div class='warning' id='warning_1'><span>该用户名不可用</span></div>
+														<div class='warning' id='warning_1'><span></span></div>
 														<i class="ace-icon fa fa-user"></i>
 													</span>
 												</label>
@@ -90,16 +90,16 @@
 
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="password" class="form-control" id="regist_password" placeholder="密码" name="password" />
-														<div class='warning' id='warning_2'><span>密码长度过短</span></div>
+														<input type="password" class="form-control" id="regist_password" placeholder="密码6位以上" name="password" />
+														<div class='warning' id='warning_2'><span></span></div>
 														<i class="ace-icon fa fa-lock"></i>
 													</span>
 												</label>
 
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="password" class="form-control" id="final_password" placeholder="再次输入密码" />
-														<div class='warning' id='warning_3'><span>密码输入不一致</span></div>
+														<input type="password" class="form-control" id="final_password" placeholder="再次输入密码" name="finalpassword"/>
+														<div class='warning' id='warning_3'><span></span></div>
 														<i class="ace-icon fa fa-retweet"></i>
 													</span>
 												</label>
@@ -180,7 +180,42 @@
 	<!-- inline scripts related to this page -->
 	<script type="text/javascript">
 		$("#regist_button").click(function(){
-			$("#registerForm").submit();
+			//清除消息提示
+			$("#warning_1").hide();
+			$("#warning_2").hide();
+			$("#warning_3").hide();
+			//获取请求参数
+			var email=$("#email").val().trim();
+			var name=$("#actual_name").val().trim();
+			var username=$("#username").val().trim();
+			var password=$("#regist_password").val().trim();
+			var finalpassword=$("#final_password").val().trim();
+		//检查格式
+		var ok=true;
+		if(username==""){
+			ok=false;
+			$("#warning_1 span").html("用户名为空");
+			$("#warning_1").show();
+		}
+		if(password==""){
+			ok=false;
+			$("#warning_2 span").html("密码为空");
+			$("#warning_2").show();
+		}else{
+			if(password.length<6){
+				ok=false;
+				$("#warning_2 span").html("密码需要6位以上");
+				$("#warning_2").show();
+			}
+		}
+		if(finalpassword != password){
+			ok=false;
+			$("#warning_3 span").html("确认密码和密码不一致");
+			$("#warning_3").show();
+		}
+			if(ok){
+				$("#registerForm").submit();
+			}
 		});
 		
 		jQuery(function($) {
