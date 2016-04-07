@@ -544,8 +544,24 @@
 			}
 		  }
 		});
-	}	
+	}
 	
+	function nextPage() {
+		var patentType = $("#patentTypeId").val();
+		var patentStatus = $("#patentStatusId").val();
+		var startAppDate = $("#startAppDateId").val();
+		var endAppDate = $("#endAppDateId").val();
+		var keyword = $("#keywordId").val();
+		var nextPage = document.getElementById("search.page.nextPage").value;
+		var url = "<s:url value='/patent/list.html'/>?currentPage=" + nextPage;
+		
+		if (isSearch()) {
+			url = "<s:url value='/patent/search.html'/>?patentType="+patentType + "&patentStatus=" + patentStatus + "&startAppDate=" + startAppDate + 
+				"&endAppDate=" + endAppDate + "&keyword=" + keyword + "&page.currentPage=" + nextPage;;
+		}
+		
+		location.href = url
+	}
 </script>
 <!-- the following scripts are used in demo only for onpage help and you don't need them -->
 <link rel="stylesheet" href="<s:url value='/static/css/ace.onpage-help.css'/>" />
