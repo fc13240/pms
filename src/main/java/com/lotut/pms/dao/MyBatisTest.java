@@ -18,7 +18,7 @@ public class MyBatisTest {
 		FeeMapper mapper = context.getBean("feeMapper", FeeMapper.class);
 		List<Long> feeIds = Arrays.asList(25L, 29L);
 		int monitorStatus = 2;
-		
+
 		mapper.updateMonitorStatus(feeIds, monitorStatus);
 		
 	}
