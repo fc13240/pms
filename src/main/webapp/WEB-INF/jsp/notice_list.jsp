@@ -295,8 +295,7 @@
 										</c:choose>
 									</td>
 									<td>
-										<select class="form-control">
-											<option value="">全部</option>
+										<select class="form-control" onchange="javascript:processNotice('${notice.noticeId}', this)">
 											<c:forEach items="${noticeProcessStatus}" var="processStatus">
 												<option value="<c:out value='${processStatus.processStatusId}'/>" <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>>
 													<c:out value="${processStatus.processStatusDescription}"/>
@@ -461,18 +460,18 @@ function batchProcessNotice(processStatus) {
 		}		
 	
 		$.ajax({
-			url: "<s:url value='/notice/processNotices.html'/>?notices=" + notice + "&processStatus=" + processStatus,
-			type: 'get', 
-			success: function(data) {
-			$("<div>操作成功</div>").dialog({
-				modal: true,
-				buttons: {
-					Ok: function() {
-					$(this).dialog("close");
-					}
-				}	
-			});
-			}
+				url: "<s:url value='/notice/processNotices.html'/>?notices=" + notice + "&processStatus=" + processStatus,
+				type: 'get', 
+				success: function(data) {
+					$("<div>操作成功</div>").dialog({
+						modal: true,
+						buttons: {
+							Ok: function() {
+							$(this).dialog("close");
+							}
+						}	
+					});
+				}
 			});
 	}	
 			jQuery(function($) {
