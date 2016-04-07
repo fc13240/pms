@@ -57,8 +57,8 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 	
 
 	@Override
-	public void updateMonitStatus(List<Long> feeIds, int monitorStatus) {
-		feeMapper.updateMonitStatus(feeIds, monitorStatus);
+	public void updateMonitorStatus(List<Long> feeIds, int monitorStatus) {
+		feeMapper.updateMonitorStatus(feeIds, monitorStatus);
 		
 	}
 

@@ -49,8 +49,9 @@ public class UserController {
     }  	
 	
 	@RequestMapping(path="/changePassword", method=RequestMethod.POST)
-	public ModelAndView changePassword() {
-		return null;
+	public String changePassword(String lastPassword,String newPassword) {
+		userService.changePassword(lastPassword, newPassword);
+		return "changePassword";
 	}
 	
 	public UserController() {

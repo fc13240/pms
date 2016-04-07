@@ -21,7 +21,7 @@ public interface FeeDao {
 	 * 费用监控
 	 */
 	//List<Fee> getFeesByFeeIds(List<Long> feeIds);
-	void updateMonitStatus(List<Long> feeIds,int monitorStatus);
+	void updateMonitorStatus(List<Long> feeIds,int monitorStatus);
 	
 	List<Fee> getFeesForPatent(long feeId,int userId);
 	

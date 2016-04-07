@@ -139,7 +139,7 @@ public class FeeServiceImpl implements FeeService {
 	 */
 	@Override
 	public List<Fee> changeMonitorStatus(List<Long> feeIds,int monitorStatus) {
-		feeDao.updateMonitStatus(feeIds,monitorStatus);
+		feeDao.updateMonitorStatus(feeIds,monitorStatus);
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<Fee> fees = feeDao.getFeesForPatent(feeIds.get(0),userId);
 		return fees;

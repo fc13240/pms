@@ -19,7 +19,7 @@ public class MyBatisTest {
 		List<Long> feeIds = Arrays.asList(25L, 29L);
 		int monitorStatus = 2;
 		
-		mapper.updateMonitStatus(feeIds, monitorStatus);
+		mapper.updateMonitorStatus(feeIds, monitorStatus);
 		
 	}
 }
