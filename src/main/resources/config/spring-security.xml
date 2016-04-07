@@ -11,9 +11,11 @@
 
 	<http use-expressions="false">
 		<intercept-url pattern="/loginForm.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+		<intercept-url pattern="/user/registerForm.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<intercept-url pattern="/user/register.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<intercept-url pattern="/**" access="ROLE_USER"/>
 		<form-login login-page="/loginForm.html" default-target-url="/main.html" />
+		<logout logout-url="/user/logout.html" />
 	</http>
 	
 	<authentication-manager>

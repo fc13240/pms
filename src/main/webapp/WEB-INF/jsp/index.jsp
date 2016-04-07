@@ -75,7 +75,14 @@
         <!-- #section:basics/navbar.user_menu -->
         <li class="light-blue"> <a data-toggle="dropdown" href="#" class="dropdown-toggle"> <img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" /> <span class="user-info" style="line-height:35px;"> 欢迎,admin </span> <i class="ace-icon fa fa-caret-down"></i> </a>
           <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-            <li> <a href="#"> <i class="ace-icon fa fa-power-off"></i> 退出 </a> </li>
+            <li> 
+            <form action="<s:url value='/user/logout.html'/>" method="post" id="logoutForm">
+            <se:csrfInput/>
+            <a href="javascript:$('#logoutForm').submit();" style="z-index: 999;"> <i class="ace-icon fa fa-power-off"></i> 退出 </a>
+             
+            </form>
+            
+            </li>
           </ul>
         </li>
         

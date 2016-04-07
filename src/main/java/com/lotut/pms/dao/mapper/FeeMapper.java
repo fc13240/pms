@@ -25,7 +25,7 @@ public interface FeeMapper {
 	 */
 	List<Fee> getFeesForPatent(@Param("feeId")long feeId,@Param("userId")int userId);
 	
-	void updateMonitStatus(@Param("feeIds")List<Long> feeIds,@Param("monitorStatus")int monitorStatus);
+	void updateMonitorStatus(@Param("feeIds")List<Long> feeIds,@Param("monitorStatus")int monitorStatus);
 	
 	//CS:deleteFees
 	void deleteFees(@Param("feeIdList")List<Long> feeIdList, @Param("userId")int userId);

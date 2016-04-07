@@ -2,6 +2,8 @@ package com.lotut.pms.web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,25 +25,33 @@ public class UserController {
 		return new ModelAndView();
 	}	
 
-	@RequestMapping(path="/register", method=RequestMethod.POST)
-	public String register(User user) {
-		 userService.register(user);
-		return "login_form";
+	@RequestMapping(path="/registerForm", method=RequestMethod.GET)
+	public String showRegisterForm() {
+		return "register_form";
 	}
 	
+	@RequestMapping(path="/register", method=RequestMethod.POST)
+	public String register(User user) {
+		userService.register(user);
+		
+		return "register_success";
+	}
+
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ModelAndView login() {
 		return null;
 	}
 	
-	@RequestMapping(path="/logout", method=RequestMethod.GET)
-	public ModelAndView logout() {
-		return null;
-	}	
+    @RequestMapping(path = "/logout",method = RequestMethod.POST)  
+    public String logout(HttpSession httpSession){  
+    //	httpSession.invalidate();
+        return "login_form";
+    }  	
 	
 	@RequestMapping(path="/changePassword", method=RequestMethod.POST)
-	public ModelAndView changePassword() {
-		return null;
+	public String changePassword(String lastPassword,String newPassword) {
+		userService.changePassword(lastPassword, newPassword);
+		return "changePassword";
 	}
 	
 	public UserController() {

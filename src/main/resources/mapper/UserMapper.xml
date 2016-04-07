@@ -23,7 +23,7 @@
 		insert into group_members(username, group_id) values(#{username}, 1)
 	</insert>
 	<!-- 修改方法 -->
-	<update id="update" parameterType="User">
+	<update id="updatePassword" parameterType="User">
 		update users set password=#{password} where user_id=#{user_id}
 	</update>
 </mapper>

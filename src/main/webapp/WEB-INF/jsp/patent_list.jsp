@@ -283,6 +283,44 @@
                               </c:forEach>
                             </tbody>
                           </table>
+                          	<!-- 分页功能 start -->
+								<div class="row">
+									<div class="col-lg-12">	
+												共 ${page.totalPages} 页    第${page.currentPage} 页
+												<a href="<s:url value='/patent/list.html'/>?currentPage=1">首页</a>
+											<c:choose>
+												<c:when test="${page.currentPage - 1 > 0}">
+													<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage - 1}">上一页</a>
+												</c:when>
+												<c:when test="${page.currentPage - 1 <= 0}">
+													<a href="<s:url value='/patent/list.html'/>?currentPage=1">上一页</a>
+												</c:when>
+											</c:choose>
+											<c:choose>
+												<c:when test="${page.totalPages==0}">
+													<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage}">下一页</a>
+												</c:when>
+												<c:when test="${page.currentPage + 1 < page.totalPages}">
+													<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage+1}">下一页</a>
+												</c:when>
+												<c:when test="${page.currentPage + 1 >= page.totalPages}">
+													<a href="<s:url value='/patent/list.html'/>?currentPage=${page.totalPages}">下一页</a>
+												</c:when>
+											</c:choose>
+											<c:choose>
+												<c:when test="${page.totalPages==0}">
+													<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage}">尾页</a>
+												</c:when>
+												<c:otherwise>
+													<a href="<s:url value='/patent/list.html'/>?currentPage=${page.totalPages}">尾页</a>
+												</c:otherwise>
+											</c:choose>
+									</div>
+								</div>
+								 	<!-- 分页功能 End -->
+								<form:form action="" modelAttribute="searchCondition" method="get">
+									<input type="text" id="search.page.nextPage" name="page.nextPage"/><a href="javascript:nextPage()">跳转</a>
+								</form:form>
                         </div>
                         <!-- /.span --> 
                       </div>
@@ -321,44 +359,7 @@
 		</script>
 
 		<!-- <![endif]--> 
-<!-- 分页功能 start -->
-<div class="row">
-	<div class="col-lg-12">	
-				共 ${page.totalPages} 页    第${page.currentPage} 页
-				<a href="<s:url value='/patent/list.html'/>?currentPage=1">首页</a>
-			<c:choose>
-				<c:when test="${page.currentPage - 1 > 0}">
-					<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage - 1}">上一页</a>
-				</c:when>
-				<c:when test="${page.currentPage - 1 <= 0}">
-					<a href="<s:url value='/patent/list.html'/>?currentPage=1">上一页</a>
-				</c:when>
-			</c:choose>
-			<c:choose>
-				<c:when test="${page.totalPages==0}">
-					<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage}">下一页</a>
-				</c:when>
-				<c:when test="${page.currentPage + 1 < page.totalPages}">
-					<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage+1}">下一页</a>
-				</c:when>
-				<c:when test="${page.currentPage + 1 >= page.totalPages}">
-					<a href="<s:url value='/patent/list.html'/>?currentPage=${page.totalPages}">下一页</a>
-				</c:when>
-			</c:choose>
-			<c:choose>
-				<c:when test="${page.totalPages==0}">
-					<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage}">尾页</a>
-				</c:when>
-				<c:otherwise>
-					<a href="<s:url value='/patent/list.html'/>?currentPage=${page.totalPages}">尾页</a>
-				</c:otherwise>
-			</c:choose>
-	</div>
-</div>
- 	<!-- 分页功能 End -->
-<form:form action="" modelAttribute="searchCondition" method="get">
-	<input type="text" id="search.page.nextPage" name="page.nextPage"/><a href="javascript:nextPage()">跳转</a>
-</form:form>
+
 
 <!--[if IE]>
 <script type="text/javascript">
@@ -543,8 +544,46 @@
 			}
 		  }
 		});
-	}	
+	}
 	
+	function nextPage() {
+		var patentType = $("#patentTypeId").val();
+		var patentStatus = $("#patentStatusId").val();
+		var startAppDate = $("#startAppDateId").val();
+		var endAppDate = $("#endAppDateId").val();
+		var keyword = $("#keywordId").val();
+		var nextPage = document.getElementById("search.page.nextPage").value;
+		var url = "<s:url value='/patent/list.html'/>?currentPage=" + nextPage;
+		
+		if (isSearch()) {
+			url = "<s:url value='/patent/search.html'/>?patentType="+patentType + "&patentStatus=" + patentStatus + "&startAppDate=" + startAppDate + 
+				"&endAppDate=" + endAppDate + "&keyword=" + keyword + "&page.currentPage=" + nextPage;;
+		}
+		
+		location.href = url
+	}
+	
+	function isSearch() {
+		var patentType = $("#patentTypeId").val();
+		var patentStatus = $("#patentStatusId").val();
+		var startAppDate = $("#startAppDateId").val();
+		var endAppDate = $("#endAppDateId").val();
+		var keyword = $("#keywordId").val();
+		
+		if (!isEmpty(patentType) || !isEmpty(patentStatus) || !isEmpty(startAppDate) || !isEmpty(endAppDate) || !isEmpty(keyword)) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	function isEmpty(value) {
+		if (value == null || value == "undefined" || value == "") {
+			return true;
+		}
+		
+		return false;
+	}
 </script>
 <!-- the following scripts are used in demo only for onpage help and you don't need them -->
 <link rel="stylesheet" href="<s:url value='/static/css/ace.onpage-help.css'/>" />

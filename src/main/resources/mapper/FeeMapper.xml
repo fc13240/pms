@@ -60,7 +60,7 @@
 				join patent_status ps on p.patent_status = ps.patent_status_id join patent_types pt on p.patent_type = pt.patent_type_id
 		  WHERE patent = (SELECT patent FROM fees WHERE fee_id = #{feeId}) AND fee_owner=#{userId}
 	</select>
-	<update id="updateMonitStatus">
+	<update id="updateMonitorStatus">
 		update fees set fee_monitor_status = #{monitorStatus} 
 		 where fee_id in
 		<foreach item="feeId" collection="feeIds" open="(" separator="," close=")">

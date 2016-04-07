@@ -8,5 +8,5 @@ public interface UserDao {
 	List<User> getAllUsers();
 	public User findByName(String username);
 	public void save(User user);
-	public void update(User user);
+	public void updatePassword(User user);
 }
