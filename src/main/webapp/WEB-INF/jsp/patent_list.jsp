@@ -562,6 +562,28 @@
 		
 		location.href = url
 	}
+	
+	function isSearch() {
+		var patentType = $("#patentTypeId").val();
+		var patentStatus = $("#patentStatusId").val();
+		var startAppDate = $("#startAppDateId").val();
+		var endAppDate = $("#endAppDateId").val();
+		var keyword = $("#keywordId").val();
+		
+		if (!isEmpty(patentType) || !isEmpty(patentStatus) || !isEmpty(startAppDate) || !isEmpty(endAppDate) || !isEmpty(keyword)) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	function isEmpty(value) {
+		if (value == null || value == "undefined" || value == "") {
+			return true;
+		}
+		
+		return false;
+	}
 </script>
 <!-- the following scripts are used in demo only for onpage help and you don't need them -->
 <link rel="stylesheet" href="<s:url value='/static/css/ace.onpage-help.css'/>" />
