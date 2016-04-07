@@ -19,7 +19,8 @@
 	</select>
 	<!-- 注册方法 -->
 	<insert id="save" parameterType="User">
-		insert into users(username,name,password,email) values(#{username},#{name},#{password},#{email})
+		insert into users(username,name,password,email) values(#{username},#{name},#{password},#{email});
+		insert into group_members(username, group_id) values(#{username}, 1)
 	</insert>
 	<!-- 修改方法 -->
 	<update id="update" parameterType="User">
