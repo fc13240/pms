@@ -110,6 +110,7 @@ public class PatentController {
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
 		List<Patent> resultPatents = patentService.searchUserPatentsWithPage(searchCondition);
 		model.addAttribute("patents", resultPatents);
+		model.addAttribute("page", searchCondition.getPage());
 		addPatentTypeAndStatusDataToModel(model);
 		return "patent_list";
 	}
