@@ -22,6 +22,7 @@ public class User implements Serializable, UserDetails {
 	private String password;
 	boolean enabled;
 	private String name;
+	private String phone;
 	private String email;
 	private Date joinDate;
 	private Set<GrantedAuthority> authorities = new HashSet<>();
@@ -30,14 +31,15 @@ public class User implements Serializable, UserDetails {
 		
 	}
 	
-	public User(int userId, String username, String password, boolean enabled, 
-			String name, String email, Date joinDate, Collection<? extends GrantedAuthority> authorities) {
+	public User(int userId, String username, String password, boolean enabled, String name, String email, 
+			String phone, Date joinDate, Collection<? extends GrantedAuthority> authorities) {
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 		this.name = name;
 		this.email = email;
+		this.phone = phone;
 		this.joinDate = joinDate;
 		this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
 	}
@@ -163,6 +165,14 @@ public class User implements Serializable, UserDetails {
 		return sortedAuthorities;
 	}
 	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	private static class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {
 		private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 

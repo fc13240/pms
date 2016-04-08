@@ -117,7 +117,7 @@ public class DatabaseAuthProvider extends JdbcDaoSupport implements UserDetailsS
 	
 	protected User createUser(User user, List<GrantedAuthority> combinedAuthorities) {
 		return new User(user.getUserId(), user.getUsername(), user.getPassword(), user.isEnabled(), 
-				user.getName(), user.getEmail(), user.getJoinDate(), combinedAuthorities);
+				user.getName(), user.getEmail(), user.getPhone(), user.getJoinDate(), combinedAuthorities);
 	}
 
 	/**
@@ -136,8 +136,9 @@ public class DatabaseAuthProvider extends JdbcDaoSupport implements UserDetailsS
 						String name = rs.getString(5);
 						String email = rs.getString(6);
 						Date joinDate = rs.getDate(7);
+						String phone = rs.getString(8);
 						
-						return new User(userId, username, password, enabled, name, email, joinDate,
+						return new User(userId, username, password, enabled, name, email, phone, joinDate,
 								AuthorityUtils.NO_AUTHORITIES);
 					}
 
