@@ -285,35 +285,36 @@
                           </table>
                           	<!-- 分页功能 start -->
 								<div class="row">
+									<c:if test="${searchCondition == null}">
 									<form:form action="" modelAttribute="searchCondition" method="get">
 									<div class="col-lg-12">	
 												共 ${page.totalPages} 页    第${page.currentPage} 页
-												<a href="<s:url value='/patent/list.html'/>?currentPage=1">首页</a>
+												<a href="?currentPage=1">首页</a>
 											<c:choose>
 												<c:when test="${page.currentPage - 1 > 0}">
-													<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage - 1}">上一页</a>
+													<a href="?currentPage=${page.currentPage - 1}">上一页</a>
 												</c:when>
 												<c:when test="${page.currentPage - 1 <= 0}">
-													<a href="<s:url value='/patent/list.html'/>?currentPage=1">上一页</a>
+													<a href="?currentPage=1">上一页</a>
 												</c:when>
 											</c:choose>
 											<c:choose>
 												<c:when test="${page.totalPages==0}">
-													<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage}">下一页</a>
+													<a href="?currentPage=${page.currentPage}">下一页</a>
 												</c:when>
 												<c:when test="${page.currentPage + 1 < page.totalPages}">
-													<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage+1}">下一页</a>
+													<a href="?currentPage=${page.currentPage+1}">下一页</a>
 												</c:when>
 												<c:when test="${page.currentPage + 1 >= page.totalPages}">
-													<a href="<s:url value='/patent/list.html'/>?currentPage=${page.totalPages}">下一页</a>
+													<a href="?currentPage=${page.totalPages}">下一页</a>
 												</c:when>
 											</c:choose>
 											<c:choose>
 												<c:when test="${page.totalPages==0}">
-													<a href="<s:url value='/patent/list.html'/>?currentPage=${page.currentPage}">尾页</a>
+													<a href="?currentPage=${page.currentPage}">尾页</a>
 												</c:when>
 												<c:otherwise>
-													<a href="<s:url value='/patent/list.html'/>?currentPage=${page.totalPages}">尾页</a>
+													<a href="?currentPage=${page.totalPages}">尾页</a>
 												</c:otherwise>
 											</c:choose>
 								 	<!-- 分页功能 End -->
@@ -323,6 +324,48 @@
 											
 									</div>
 									</form:form>
+									</c:if>
+									<c:if test="${searchCondition != null}">
+									<form:form action="" modelAttribute="searchCondition" method="get">
+									<div class="col-lg-12">	
+												共 ${page.totalPages} 页    第${page.currentPage} 页
+												<a href="?page.currentPage=1&${searchCondition}">首页</a>
+											<c:choose>
+												<c:when test="${page.currentPage - 1 > 0}">
+													<a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a>
+												</c:when>
+												<c:when test="${page.currentPage - 1 <= 0}">
+													<a href="?page.currentPage=1&${searchCondition}">上一页</a>
+												</c:when>
+											</c:choose>
+											<c:choose>
+												<c:when test="${page.totalPages==0}">
+													<a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a>
+												</c:when>
+												<c:when test="${page.currentPage + 1 < page.totalPages}">
+													<a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a>
+												</c:when>
+												<c:when test="${page.currentPage + 1 >= page.totalPages}">
+													<a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a>
+												</c:when>
+											</c:choose>
+											<c:choose>
+												<c:when test="${page.totalPages==0}">
+													<a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a>
+												</c:when>
+												<c:otherwise>
+													<a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a>
+												</c:otherwise>
+											</c:choose>
+								 	<!-- 分页功能 End -->
+								
+									<input type="text" id="search.page.nextPage" style="width:50px;" name="page.nextPage"/><a href="javascript:nextPage()">跳转</a>
+								
+											
+									</div>
+									</form:form>
+									 	
+									</c:if>
 								</div>
 
                         </div>

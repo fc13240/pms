@@ -25,8 +25,10 @@ public interface PatentDao {
 	Patent getPatentByAppNoAndOwner(String appNo, int ownerId);
 	
 	List<Patent> searchUserPatents(PatentSearchCondition searchCondition);
+	//搜索分页
+	int searchUserPatentsCount(PatentSearchCondition searchCondition);
 	
-	List<Patent> searchUserPatentsWithPage(PatentSearchCondition searchCondition);
+	List<Patent> searchUserPatentsByPage(PatentSearchCondition searchCondition);
 	
 	List<PatentType> getAllPatentTypes();
 	

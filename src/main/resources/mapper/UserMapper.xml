@@ -24,6 +24,6 @@
 	</insert>
 	<!-- 修改方法 -->
 	<update id="updatePassword" parameterType="User">
-		update users set password=#{password} where user_id=#{user_id}
+		update users set password=#{password} where user_id=#{userId}
 	</update>
 </mapper>

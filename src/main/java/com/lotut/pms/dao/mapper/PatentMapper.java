@@ -29,6 +29,8 @@ public interface PatentMapper {
 	
 	List<Patent> searchUserPatents(@Param("searchCondtion")PatentSearchCondition searchCondtion);
 	
+	
+	int searchUserPatentsCount(PatentSearchCondition searchCondition);
 	List<Patent> searchUserPatentsByPage(PatentSearchCondition searchCondtion);
 	
 	List<PatentType> getAllPatentTypes();

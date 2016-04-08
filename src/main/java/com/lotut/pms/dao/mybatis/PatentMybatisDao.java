@@ -48,7 +48,7 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	}
 	
 	@Override
-	public List<Patent> searchUserPatentsWithPage(PatentSearchCondition searchCondition) {
+	public List<Patent> searchUserPatentsByPage(PatentSearchCondition searchCondition) {
 		Page page = searchCondition.getPage();
 		page.setUserId(PrincipalUtils.getCurrentUserId());
 		int userPatentCount = patentMapper.getUserPatentCount(page.getUserId());
@@ -98,5 +98,10 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	@Override
 	public int getUserPatentCount(int userId) {
 		return patentMapper.getUserPatentCount(userId);
+	}
+
+	@Override
+	public int searchUserPatentsCount(PatentSearchCondition searchCondition) {
+		return patentMapper.searchUserPatentsCount(searchCondition);
 	}
 }

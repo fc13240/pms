@@ -51,7 +51,7 @@
 						</div>
 
 						<div class="position-relative">
-							<div id="login-box" class="login-box visible widget-box no-border" style="background-color:#5090C1;">
+							<div id="login-box" class="login-box visible widget-box no-border" style="background-color:#5090C1;margin-top:100px;">
 								
 								<div class="widget-body">
 									<div class="widget-main">
@@ -130,7 +130,7 @@
 									</div>
 
 									<div class="toolbar center">
-										<a href="#" data-target="#login-box" id="back" class="back-to-login-link">
+										<a href="<s:url value='/loginForm.html'/>"  >
 											<i class="ace-icon fa fa-arrow-left"></i>
 											返回登录
 										</a>

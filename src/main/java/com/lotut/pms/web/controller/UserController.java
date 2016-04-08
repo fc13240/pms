@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,9 +49,14 @@ public class UserController {
 	}
     
 	@RequestMapping(path="/changePassword", method=RequestMethod.POST)
-	public String changePassword(String lastPassword,String newPassword) {
-		userService.changePassword(lastPassword, newPassword);
-		return "changePassword_success";
+	public String changePassword(@RequestParam("lastPassword")String lastPassword,@RequestParam("newPassword")String newPassword) {
+		boolean success = userService.changePassword(lastPassword, newPassword);
+		
+		if(success){
+			return "changePassword_success";
+		}
+		
+		return "changePassword_form";
 	}
 
 	@RequestMapping(path="/login", method=RequestMethod.POST)
