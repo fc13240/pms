@@ -143,6 +143,32 @@
 		    join users u on u.user_id = up.user		
 		 order by sp.app_date desc, sp.patent_name, sp.app_person
 	</select>	
+	<!-- 查询分页 -->
+	<select id="searchUserPatentsCount" resultType="int">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+		 select Count(*)
+		 from patents p join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
+		 where up.user = #{userId}
+		 		<if test="patentType != null">
+		 			and p.patent_type = #{patentType}
+		 		</if>	
+			 	<if test="patentStatus != null">
+			 		and p.patent_status = #{patentStatus}
+			 	</if>	
+			 	<if test="startAppDate != null">
+			 		and p.app_date >= #{startAppDate}
+			 	</if>	
+			 	<if test="endAppDate != null">
+			 		<![CDATA[ and p.app_date <= #{endAppDate} ]]>
+			 	</if>	
+			 	<if test="keyword != null">
+					and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
+						 or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} 
+						 or ps.patent_status_desc like #{keyword_pattern})
+				</if>		 		 	
+	</select>
 	
 	<select id="searchUserPatents" parameterType="PatentSearchCondition" resultMap="PatentWithShareUsers">
 		<if test="keyword != null">

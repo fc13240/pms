@@ -326,36 +326,35 @@
 									</form:form>
 									</c:if>
 									<c:if test="${searchCondition != null}">
-									<c:set var="queryConditions" value="&keyword=${searchCondition.keyword}&patentType=${searchCondition.patentType}&patentStatus=${searchCondition.patentStatus}&startAppDate=${searchCondition.startAppDate}&endAppDate=${searchCondition.endAppDate}"/>
 									<form:form action="" modelAttribute="searchCondition" method="get">
 									<div class="col-lg-12">	
 												共 ${page.totalPages} 页    第${page.currentPage} 页
-												<a href="?page.currentPage=1${queryConditions}">首页</a>
+												<a href="?page.currentPage=1&${searchCondition}">首页</a>
 											<c:choose>
 												<c:when test="${page.currentPage - 1 > 0}">
-													<a href="?page.currentPage=${page.currentPage - 1}${queryConditions}">上一页</a>
+													<a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a>
 												</c:when>
 												<c:when test="${page.currentPage - 1 <= 0}">
-													<a href="?page.currentPage=1${queryConditions}">上一页</a>
+													<a href="?page.currentPage=1&${searchCondition}">上一页</a>
 												</c:when>
 											</c:choose>
 											<c:choose>
 												<c:when test="${page.totalPages==0}">
-													<a href="?page.currentPage=${page.currentPage}${queryConditions}">下一页</a>
+													<a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a>
 												</c:when>
 												<c:when test="${page.currentPage + 1 < page.totalPages}">
-													<a href="?page.currentPage=${page.currentPage+1}${queryConditions}">下一页</a>
+													<a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a>
 												</c:when>
 												<c:when test="${page.currentPage + 1 >= page.totalPages}">
-													<a href="?page.currentPage=${page.totalPages}${queryConditions}">下一页</a>
+													<a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a>
 												</c:when>
 											</c:choose>
 											<c:choose>
 												<c:when test="${page.totalPages==0}">
-													<a href="?page.currentPage=${page.currentPage}${queryConditions}">尾页</a>
+													<a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a>
 												</c:when>
 												<c:otherwise>
-													<a href="?page.currentPage=${page.totalPages}${queryConditions}">尾页</a>
+													<a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a>
 												</c:otherwise>
 											</c:choose>
 								 	<!-- 分页功能 End -->
