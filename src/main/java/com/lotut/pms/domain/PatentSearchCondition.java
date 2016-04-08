@@ -46,7 +46,6 @@ public class PatentSearchCondition {
 		this.patentStatus = patentStatus;
 	}
 
-	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	public Date getStartAppDate() {
 		return startAppDate;
 	}
@@ -55,7 +54,6 @@ public class PatentSearchCondition {
 		this.startAppDate = startAppDate;
 	}
 
-	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	public Date getEndAppDate() {
 		return endAppDate;
 	}
