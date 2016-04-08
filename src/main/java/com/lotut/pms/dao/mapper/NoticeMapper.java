@@ -9,8 +9,13 @@ import com.lotut.pms.domain.NoticePaperApplyType;
 import com.lotut.pms.domain.NoticeProcessStatus;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
+import com.lotut.pms.domain.Page;
 
 public interface NoticeMapper {
+	//分页
+	int getUserNoticesCount(@Param("userId")int userId);
+	List<Notice> getUserNoticesByPage(Page page);
+	
 	List<Notice> getUserNotices(int userId);
 	
 	Notice getNoticeById(@Param("noticeId")int noticeId);

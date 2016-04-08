@@ -117,12 +117,12 @@
       <ul class="nav nav-list">
         <li> <a href="<s:url value='/main.html'/>"> <i class="menu-icon fa fa-tachometer"></i> <span class="menu-text"> 控制台 </span> </a> <b class="arrow"></b> </li>
         <li class="active"> <a href="<s:url value='/patent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-desktop"></i> <span class="menu-text"> 我的专利 </span> </a> </li>
-        <li class=""> <a href="<s:url value='/notice/list.html'/>"> <i class="menu-icon fa fa-list"></i> <span class="menu-text"> 我的通知书 </span> </a> </li>
-        <li class=""> <a href="<s:url value='/friend/list.html'/>"> <i class="menu-icon fa fa-pencil-square-o"></i> <span class="menu-text"> 好友管理 </span> </a> </li>
-        <li class=""> <a href="<s:url value='/sharePatent/list.html'/>"> <i class="menu-icon fa fa-list-alt"></i> <span class="menu-text"> 分享管理 </span> </a> <b class="arrow"></b> </li>
+        <li class=""> <a href="<s:url value='/notice/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-list"></i> <span class="menu-text"> 我的通知书 </span> </a> </li>
+        <li class=""> <a href="<s:url value='/friend/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-pencil-square-o"></i> <span class="menu-text"> 好友管理 </span> </a> </li>
+        <li class=""> <a href="<s:url value='/sharePatent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-list-alt"></i> <span class="menu-text"> 分享管理 </span> </a> <b class="arrow"></b> </li>
         <li class=""> <a href="<s:url value='/patent/showUploadForm.html'/>"> <i class="menu-icon fa fa-calendar"></i> <span class="menu-text"> 添加专利 </span> </a> <b class="arrow"></b> </li>
         <li class=""> <a href="<s:url value='/notice/showUploadForm.html'/>"> <i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 添加通知书 </span> </a> <b class="arrow"></b> </li>
-        <li class=""> <a href="<s:url value='/fee/monitoredFeeList.html'/>"><i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 官费监控 </span> </a> </li>
+        <li class=""> <a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>"><i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 官费监控 </span> </a> </li>
       </ul>
       <!-- /.nav-list --> 
       
@@ -159,7 +159,8 @@
                 
                             <span class="widget-toolbar" style="border:none;padding:0px;">
                             <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-                            <input type="text" id="form-field-1" style="height:45px;width:450px;" name="keyword" placeholder="申请号/名称/申请人/内部编码" value="" /><button class="btn btn-info" type="submit" style="height:45px;">搜索</button>
+                            <input type="text" style="height:45px;width:450px;" name="keyword" id="keywordId" placeholder="申请号/名称/申请人/内部编码" value="${searchCondition.keyword}" />
+                            	<button class="btn btn-info" type="submit" style="height:45px;">搜索</button>
                             
                                 <a href="#" data-action="collapse" style="margin-left:10px;">
                                     <button type="button" class="btn btn-sm btn-success">高级搜索</button>
@@ -172,7 +173,7 @@
 	                            <div class="widget-main">
 	                                <div>
 	                                专利类型
-	                                <select id="form-field-select-1" name="patentType">
+	                                <select name="patentType" id="patentTypeId">
 	                                    <option value="">全部</option>
 										<c:forEach items="${allPatentTypes}" var="patentType">
 											<option value="<c:out value='${patentType.patentTypeId}'/>"><c:out value="${patentType.typeDescription}"/></option>
@@ -182,7 +183,7 @@
 	                                	
 	                                </div>
 	                                <div style="margin-top:10px;">专利状态
-	                                <select id="form-field-select-1" name="patentStatus">
+	                                <select name="patentStatus" id="patentStatusId">
 	                                    <option value="">全部</option>
 									  	<c:forEach items="${allPatentStatus}" var="patentStatus">
 											<option value="<c:out value='${patentStatus.patentStatusId}'/>"><c:out value="${patentStatus.statusDescription}"/></option>
@@ -319,7 +320,8 @@
 											</c:choose>
 								 	<!-- 分页功能 End -->
 								
-									<input type="text" id="search.page.nextPage" style="width:50px;" name="page.nextPage"/><a href="javascript:nextPage()">跳转</a>
+									<input type="text" id="page.pageNo" style="width:50px;" name="page.nextPage"/>
+										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
 								
 											
 									</div>
@@ -359,7 +361,8 @@
 											</c:choose>
 								 	<!-- 分页功能 End -->
 								
-									<input type="text" id="search.page.nextPage" style="width:50px;" name="page.nextPage"/><a href="javascript:nextPage()">跳转</a>
+									<input type="text" id="page.pageNo" style="width:50px;" name="page.nextPage"/>
+										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
 								
 											
 									</div>
@@ -593,18 +596,18 @@
 		});
 	}
 	
-	function nextPage() {
+	function gotoPage() {
 		var patentType = $("#patentTypeId").val();
 		var patentStatus = $("#patentStatusId").val();
 		var startAppDate = $("#startAppDateId").val();
 		var endAppDate = $("#endAppDateId").val();
 		var keyword = $("#keywordId").val();
-		var nextPage = document.getElementById("search.page.nextPage").value;
-		var url = "<s:url value='/patent/list.html'/>?currentPage=" + nextPage;
+		var pageNo = document.getElementById("page.pageNo").value;
+		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
 		
 		if (isSearch()) {
-			url = "<s:url value='/patent/search.html'/>?patentType="+patentType + "&patentStatus=" + patentStatus + "&startAppDate=" + startAppDate + 
-				"&endAppDate=" + endAppDate + "&keyword=" + keyword + "&page.currentPage=" + nextPage;;
+ 				//url = "<s:url value='/patent/search.html'/>?page.currentPage="+nextPage +"&"+${searchCondition};
+				url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 		}
 		
 		location.href = url

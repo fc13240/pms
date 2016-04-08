@@ -12,11 +12,15 @@ import com.lotut.pms.domain.NoticePaperApplyType;
 import com.lotut.pms.domain.NoticeProcessStatus;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
+import com.lotut.pms.domain.Page;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
 public interface NoticeService {
+	//分页
+	public long getUserNoticesCount(int userId);
+	List<Notice> getUserNoticesByPage(Page page);
 	
 	List<Notice> getUserNotices(int userId);
 	

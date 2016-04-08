@@ -12,6 +12,7 @@ import com.lotut.pms.domain.NoticePaperApplyType;
 import com.lotut.pms.domain.NoticeProcessStatus;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
+import com.lotut.pms.domain.Page;
 
 public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao {
 	private NoticeMapper noticeMapper;
@@ -72,6 +73,16 @@ public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao 
 	@Override
 	public void insertOrUpdateNotice(Notice notice) {
 		noticeMapper.insertOrUpdateNotice(notice);
+	}
+
+	@Override
+	public int getUserNoticesCount(int userId) {
+		return noticeMapper.getUserNoticesCount(userId);
+	}
+
+	@Override
+	public List<Notice> getUserNoticesByPage(Page page) {
+		return noticeMapper.getUserNoticesByPage(page);
 	}
 	
 	//通知书处理状态
