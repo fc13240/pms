@@ -68,65 +68,93 @@
     <!-- #section:basics/navbar.dropdown -->
     <div class="navbar-buttons navbar-header pull-right" role="navigation">
       <ul class="nav ace-nav">
-        <li class="purple"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <i class="ace-icon fa fa-bell icon-animated-bell"></i> <span class="badge badge-important">8</span> </a> </li>
-						<!-- #section:basics/navbar.user_menu -->
-						<li class="light-blue">
-							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" />
-								<span class="user-info">
-									<small>Welcome,</small>
-									Jason
-								</span>
-
-								<i class="ace-icon fa fa-caret-down"></i>
+        <li class="purple"> 
+        	<a data-toggle="dropdown" class="dropdown-toggle" href="#"> 
+        		<i class="ace-icon fa fa-bell icon-animated-bell"></i> 
+        		<span class="badge badge-important">8</span> 
+        	</a>
+			<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+				<li class="dropdown-header">
+					<i class="ace-icon fa fa-exclamation-triangle"></i>
+					8 条消息
+				</li>
+	
+				<li class="dropdown-content">
+					<ul class="dropdown-menu dropdown-navbar navbar-pink">
+						<li>
+							<a href="#">
+								<div class="clearfix">
+									<span class="pull-left">
+										<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
+										新的消息
+									</span>
+									<span class="pull-right badge badge-info">+4</span>
+								</div>
 							</a>
-
-							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-						
-								<li>
-									<a href="<s:url value='/user/changePasswordForm.html'/>">
-										<i class="ace-icon fa fa-user"></i>
-										修改密码
-									</a>
-								</li>
-
-								<li class="divider"></li>
-
-								<li>
-									
-									<form action="<s:url value='/user/logout.html'/>" method="post" id="logoutForm">
-									            <se:csrfInput/>
-									            <a href="javascript:$('#logoutForm').submit();" style=""> 
-									            <i class="ace-icon fa fa-power-off"></i>
-									           		 退出 
-									            </a>
-									             
-									</form>
-									
-								</li>
-							</ul>
 						</li>
+		
+						<li>
+							<a href="#">
+								<div class="clearfix">
+									<span class="pull-left">
+										<i class="btn btn-xs btn-primary fa fa-user"></i>
+										好友请求
+									</span>
+									<span class="pull-right badge badge-success">+4</span>
+								</div>
+							</a>
+						</li>
+	
+					</ul>
+				</li>
+	
+				<li class="dropdown-footer">
+					<a href="#">
+						See all notifications
+						<i class="ace-icon fa fa-arrow-right"></i>
+					</a>
+				</li>
+			</ul>
+ 
+        </li>
+		<!-- #section:basics/navbar.user_menu -->
+		<li class="light-blue">
+			<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+				<img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" />
+			<span class="user-info">
+				<small>Welcome,</small>
+				Jason
+			</span>
+		
+			<i class="ace-icon fa fa-caret-down"></i>
+			</a>
+		
+				<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+				
+					<li>
+						<a href="<s:url value='/user/changePasswordForm.html'/>">
+							<i class="ace-icon fa fa-user"></i>
+							修改密码
+						</a>
+					</li>
+				
+					<li class="divider"></li>
+					<li>
+						<a href="javascript:$('#logoutForm').submit();">
+							<i class="ace-icon fa fa-power-off"></i>
+							退出
+						</a>
+					</li>
+						<form action="<s:url value='/user/logout.html'/>" method="post" id="logoutForm">
+						            <se:csrfInput/>
+									<input type="submit" style="display:none;" />
+						             
+						</form>								
+		
+					</ul>
+		</li>
   
-        
-        
-        
-        <!-- #section:basics/navbar.user_menu 
-        <li class="light-blue"> <a data-toggle="dropdown" href="#" class="dropdown-toggle"> <img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" /> <span class="user-info" style="line-height:35px;"> 欢迎,admin </span> <i class="ace-icon fa fa-caret-down"></i> </a>
-          <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-            <li> 
-            <form action="<s:url value='/user/logout.html'/>" method="post" id="logoutForm">
-            <se:csrfInput/>
-            <a href="javascript:$('#logoutForm').submit();" style="z-index: 999;"> <i class="ace-icon fa fa-power-off"></i> 退出 </a>
-             
-            </form>
-       
-            </li>
-            <li> 
-            <a href="<s:url value='/user/changePasswordForm.html'/>" style="z-index: 999;">修改密码 </a>  
-            </li>            
-          </ul>
-        </li>-->
-        
+
         <!-- /section:basics/navbar.user_menu -->
       </ul>
     </div>
@@ -144,9 +172,7 @@
 
 <!-- sidebar -->
     <div id="sidebar" class="sidebar                  responsive"> 
-      <script type="text/javascript">
-                        try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
-                    </script>
+     
       <div class="sidebar-shortcuts" id="sidebar-shortcuts">
         <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
           <button class="btn btn-success"> <i class="ace-icon fa fa-signal"></i> </button>
@@ -188,9 +214,6 @@
 		<div class="main-content-inner">
     <!-- #section:basics/content.breadcrumbs -->
             <div class="breadcrumbs" id="breadcrumbs"> 
-              <script type="text/javascript">
-                                        try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-                                    </script>
               <ul class="breadcrumb">
                 <li> <i class="ace-icon fa fa-home home-icon"></i> <a href="#">主页</a> </li>
                 <li> <a href="#">控制台</a> </li>
@@ -218,76 +241,7 @@
 									</strong>
 								</div>
 
-								<div class="row">
-									<div class="space-6"></div>
-
-									<div class="col-sm-7 infobox-container">
-										<!-- #section:pages/dashboard.infobox -->
-										
-
-										
-
-										<!-- /section:pages/dashboard.infobox -->
-										<div class="space-6"></div>
-
-										<!-- #section:pages/dashboard.infobox.dark -->
-										<div class="infobox infobox-green infobox-small infobox-dark">
-											<div class="infobox-progress">
-												<!-- #section:pages/dashboard.infobox.easypiechart -->
-												<div class="easy-pie-chart percentage" data-percent="61" data-size="39">
-													<span class="percent">61</span>%
-												</div>
-
-												<!-- /section:pages/dashboard.infobox.easypiechart -->
-											</div>
-
-											<div class="infobox-data">
-												<div class="infobox-content">Task</div>
-												<div class="infobox-content">Completion</div>
-											</div>
-										</div>
-
-										<div class="infobox infobox-blue infobox-small infobox-dark">
-											<!-- #section:pages/dashboard.infobox.sparkline -->
-											<div class="infobox-chart">
-												<span class="sparkline" data-values="3,4,2,3,4,4,2,2"></span>
-											</div>
-
-											<!-- /section:pages/dashboard.infobox.sparkline -->
-											<div class="infobox-data">
-												<div class="infobox-content">Earnings</div>
-												<div class="infobox-content">$32,000</div>
-											</div>
-										</div>
-
-										<div class="infobox infobox-grey infobox-small infobox-dark">
-											<div class="infobox-icon">
-												<i class="ace-icon fa fa-download"></i>
-											</div>
-
-											<div class="infobox-data">
-												<div class="infobox-content">Downloads</div>
-												<div class="infobox-content">1,205</div>
-											</div>
-										</div>
-
-										<!-- /section:pages/dashboard.infobox.dark -->
-									</div>
-
-									<div class="vspace-12-sm"></div>
-
-									<div class="col-sm-5">
-										<div class="widget-box">
-											
-
-											
-										</div><!-- /.widget-box -->
-									</div><!-- /.col -->
-								</div><!-- /.row -->
-
-
-
-					<!-- /.row -->
+								<div class="row"></div><!-- /.row -->
 
 								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
