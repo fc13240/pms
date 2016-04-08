@@ -18,7 +18,11 @@
 		<logout logout-url="/user/logout.html" />
 	</http>
 	
+	<beans:bean name="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>	
+	
 	<authentication-manager>
-		<authentication-provider user-service-ref="databaseAuthDao"/>
+		<authentication-provider user-service-ref="databaseAuthDao">
+			<password-encoder ref="bcryptEncoder"/>	
+		</authentication-provider>
 	</authentication-manager>	
 </beans:beans>

@@ -26,7 +26,7 @@ public interface PatentDao {
 	
 	List<Patent> searchUserPatents(PatentSearchCondition searchCondition);
 	
-	List<Patent> searchUserPatentsWithPage(PatentSearchCondition searchCondition);
+	List<Patent> searchUserPatentsByPage(PatentSearchCondition searchCondition);
 	
 	List<PatentType> getAllPatentTypes();
 	

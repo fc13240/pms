@@ -61,7 +61,7 @@ public class PatentServiceImpl implements PatentService {
 	
 	@Override
 	public List<Patent> searchUserPatentsWithPage(PatentSearchCondition searchCondition) {
-		return patentDao.searchUserPatentsWithPage(searchCondition);
+		return patentDao.searchUserPatentsByPage(searchCondition);
 	}
 	
 	@Override
