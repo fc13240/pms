@@ -23,6 +23,8 @@ public interface PatentService {
 	
 	List<Patent> searchUserPatents(PatentSearchCondition searchCondition);
 	
+	public long searchUserPatentsCount(PatentSearchCondition searchCondition);
+	
 	List<Patent> searchUserPatentsWithPage(PatentSearchCondition searchCondition);
 	
 	List<PatentType> getAllPatentTypes();

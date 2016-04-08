@@ -29,7 +29,7 @@ public class PatentServiceImpl implements PatentService {
 	}
 	
 	/*
-	 * 分页相关
+	 * 专利分页相关
 	 */
 	public long getPatentsCount(int userId){
 		return patentDao.getUserPatentCount(userId);
@@ -57,6 +57,11 @@ public class PatentServiceImpl implements PatentService {
 	@Override
 	public List<Patent> searchUserPatents(PatentSearchCondition searchCondition) {
 		return patentDao.searchUserPatents(searchCondition);
+	}
+	//搜索专利分页
+	@Override
+	public long searchUserPatentsCount(PatentSearchCondition searchCondition){
+		return patentDao.searchUserPatentsCount(searchCondition);
 	}
 	
 	@Override

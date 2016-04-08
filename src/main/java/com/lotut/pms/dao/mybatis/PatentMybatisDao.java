@@ -99,4 +99,9 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	public int getUserPatentCount(int userId) {
 		return patentMapper.getUserPatentCount(userId);
 	}
+
+	@Override
+	public int searchUserPatentsCount(PatentSearchCondition searchCondition) {
+		return patentMapper.searchUserPatentsCount(searchCondition);
+	}
 }
