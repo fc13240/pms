@@ -9,9 +9,6 @@
 <html>
 <head>
 	<title>专利列表</title>
-	<link rel="stylesheet" media="screen" href="<s:url value='/static/css/bootstrap.min.css'/>" />
-	<link rel="stylesheet" media="screen" href="<s:url value='/static/css/jquery-ui.min.css'/>" />
-
 
 <!-- bootstrap & fontawesome -->
 <link rel="stylesheet" href="<s:url value='/static/css/bootstrap.css'/>" />
@@ -71,24 +68,93 @@
     <!-- #section:basics/navbar.dropdown -->
     <div class="navbar-buttons navbar-header pull-right" role="navigation">
       <ul class="nav ace-nav">
-        <li class="purple"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <i class="ace-icon fa fa-bell icon-animated-bell"></i> <span class="badge badge-important">8</span> </a> </li>
-        <!-- #section:basics/navbar.user_menu -->
-        <li class="light-blue"> <a data-toggle="dropdown" href="#" class="dropdown-toggle"> <img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" /> <span class="user-info" style="line-height:35px;"> 欢迎,admin </span> <i class="ace-icon fa fa-caret-down"></i> </a>
-          <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-            <li> 
-            <form action="<s:url value='/user/logout.html'/>" method="post" id="logoutForm">
-            <se:csrfInput/>
-            <a href="javascript:$('#logoutForm').submit();" style="z-index: 999;"> <i class="ace-icon fa fa-power-off"></i> 退出 </a>
-             
-            </form>
-       
-            </li>
-            <li> 
-            <a href="<s:url value='/user/changePasswordForm.html'/>" style="z-index: 999;">修改密码 </a>  
-            </li>            
-          </ul>
+        <li class="purple"> 
+        	<a data-toggle="dropdown" class="dropdown-toggle" href="#"> 
+        		<i class="ace-icon fa fa-bell icon-animated-bell"></i> 
+        		<span class="badge badge-important">8</span> 
+        	</a>
+			<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+				<li class="dropdown-header">
+					<i class="ace-icon fa fa-exclamation-triangle"></i>
+					8 条消息
+				</li>
+	
+				<li class="dropdown-content">
+					<ul class="dropdown-menu dropdown-navbar navbar-pink">
+						<li>
+							<a href="#">
+								<div class="clearfix">
+									<span class="pull-left">
+										<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
+										新的消息
+									</span>
+									<span class="pull-right badge badge-info">+4</span>
+								</div>
+							</a>
+						</li>
+		
+						<li>
+							<a href="#">
+								<div class="clearfix">
+									<span class="pull-left">
+										<i class="btn btn-xs btn-primary fa fa-user"></i>
+										好友请求
+									</span>
+									<span class="pull-right badge badge-success">+4</span>
+								</div>
+							</a>
+						</li>
+	
+					</ul>
+				</li>
+	
+				<li class="dropdown-footer">
+					<a href="#">
+						See all notifications
+						<i class="ace-icon fa fa-arrow-right"></i>
+					</a>
+				</li>
+			</ul>
+ 
         </li>
-        
+		<!-- #section:basics/navbar.user_menu -->
+		<li class="light-blue">
+			<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+				<img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" />
+			<span class="user-info">
+				<small>Welcome,</small>
+				Jason
+			</span>
+		
+			<i class="ace-icon fa fa-caret-down"></i>
+			</a>
+		
+				<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+				
+					<li>
+						<a href="<s:url value='/user/changePasswordForm.html'/>">
+							<i class="ace-icon fa fa-user"></i>
+							修改密码
+						</a>
+					</li>
+				
+					<li class="divider"></li>
+					<li>
+						<a href="javascript:$('#logoutForm').submit();">
+							<i class="ace-icon fa fa-power-off"></i>
+							退出
+						</a>
+					</li>
+						<form action="<s:url value='/user/logout.html'/>" method="post" id="logoutForm">
+						            <se:csrfInput/>
+									<input type="submit" style="display:none;" />
+						             
+						</form>								
+		
+					</ul>
+		</li>
+  
+
         <!-- /section:basics/navbar.user_menu -->
       </ul>
     </div>
@@ -106,9 +172,7 @@
 
 <!-- sidebar -->
     <div id="sidebar" class="sidebar                  responsive"> 
-      <script type="text/javascript">
-                        try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
-                    </script>
+     
       <div class="sidebar-shortcuts" id="sidebar-shortcuts">
         <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
           <button class="btn btn-success"> <i class="ace-icon fa fa-signal"></i> </button>
@@ -150,9 +214,6 @@
 		<div class="main-content-inner">
     <!-- #section:basics/content.breadcrumbs -->
             <div class="breadcrumbs" id="breadcrumbs"> 
-              <script type="text/javascript">
-                                        try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-                                    </script>
               <ul class="breadcrumb">
                 <li> <i class="ace-icon fa fa-home home-icon"></i> <a href="#">主页</a> </li>
                 <li> <a href="#">控制台</a> </li>
@@ -180,246 +241,7 @@
 									</strong>
 								</div>
 
-								<div class="row">
-									<div class="space-6"></div>
-
-									<div class="col-sm-7 infobox-container">
-										<!-- #section:pages/dashboard.infobox -->
-										<div class="infobox infobox-green">
-											<div class="infobox-icon">
-												<i class="ace-icon fa fa-comments"></i>
-											</div>
-
-											<div class="infobox-data">
-												<span class="infobox-data-number">32</span>
-												<div class="infobox-content">comments + 2 reviews</div>
-											</div>
-
-											<!-- #section:pages/dashboard.infobox.stat -->
-											<div class="stat stat-success">8%</div>
-
-											<!-- /section:pages/dashboard.infobox.stat -->
-										</div>
-
-										<div class="infobox infobox-blue">
-											<div class="infobox-icon">
-												<i class="ace-icon fa fa-twitter"></i>
-											</div>
-
-											<div class="infobox-data">
-												<span class="infobox-data-number">11</span>
-												<div class="infobox-content">new followers</div>
-											</div>
-
-											<div class="badge badge-success">
-												+32%
-												<i class="ace-icon fa fa-arrow-up"></i>
-											</div>
-										</div>
-
-										<div class="infobox infobox-pink">
-											<div class="infobox-icon">
-												<i class="ace-icon fa fa-shopping-cart"></i>
-											</div>
-
-											<div class="infobox-data">
-												<span class="infobox-data-number">8</span>
-												<div class="infobox-content">new orders</div>
-											</div>
-											<div class="stat stat-important">4%</div>
-										</div>
-
-										<div class="infobox infobox-red">
-											<div class="infobox-icon">
-												<i class="ace-icon fa fa-flask"></i>
-											</div>
-
-											<div class="infobox-data">
-												<span class="infobox-data-number">7</span>
-												<div class="infobox-content">experiments</div>
-											</div>
-										</div>
-
-										<div class="infobox infobox-orange2">
-											<!-- #section:pages/dashboard.infobox.sparkline -->
-											<div class="infobox-chart">
-												<span class="sparkline" data-values="196,128,202,177,154,94,100,170,224"></span>
-											</div>
-
-											<!-- /section:pages/dashboard.infobox.sparkline -->
-											<div class="infobox-data">
-												<span class="infobox-data-number">6,251</span>
-												<div class="infobox-content">pageviews</div>
-											</div>
-
-											<div class="badge badge-success">
-												7.2%
-												<i class="ace-icon fa fa-arrow-up"></i>
-											</div>
-										</div>
-
-										<div class="infobox infobox-blue2">
-											<div class="infobox-progress">
-												<!-- #section:pages/dashboard.infobox.easypiechart -->
-												<div class="easy-pie-chart percentage" data-percent="42" data-size="46">
-													<span class="percent">42</span>%
-												</div>
-
-												<!-- /section:pages/dashboard.infobox.easypiechart -->
-											</div>
-
-											<div class="infobox-data">
-												<span class="infobox-text">traffic used</span>
-
-												<div class="infobox-content">
-													<span class="bigger-110">~</span>
-													58GB remaining
-												</div>
-											</div>
-										</div>
-
-										<!-- /section:pages/dashboard.infobox -->
-										<div class="space-6"></div>
-
-										<!-- #section:pages/dashboard.infobox.dark -->
-										<div class="infobox infobox-green infobox-small infobox-dark">
-											<div class="infobox-progress">
-												<!-- #section:pages/dashboard.infobox.easypiechart -->
-												<div class="easy-pie-chart percentage" data-percent="61" data-size="39">
-													<span class="percent">61</span>%
-												</div>
-
-												<!-- /section:pages/dashboard.infobox.easypiechart -->
-											</div>
-
-											<div class="infobox-data">
-												<div class="infobox-content">Task</div>
-												<div class="infobox-content">Completion</div>
-											</div>
-										</div>
-
-										<div class="infobox infobox-blue infobox-small infobox-dark">
-											<!-- #section:pages/dashboard.infobox.sparkline -->
-											<div class="infobox-chart">
-												<span class="sparkline" data-values="3,4,2,3,4,4,2,2"></span>
-											</div>
-
-											<!-- /section:pages/dashboard.infobox.sparkline -->
-											<div class="infobox-data">
-												<div class="infobox-content">Earnings</div>
-												<div class="infobox-content">$32,000</div>
-											</div>
-										</div>
-
-										<div class="infobox infobox-grey infobox-small infobox-dark">
-											<div class="infobox-icon">
-												<i class="ace-icon fa fa-download"></i>
-											</div>
-
-											<div class="infobox-data">
-												<div class="infobox-content">Downloads</div>
-												<div class="infobox-content">1,205</div>
-											</div>
-										</div>
-
-										<!-- /section:pages/dashboard.infobox.dark -->
-									</div>
-
-									<div class="vspace-12-sm"></div>
-
-									<div class="col-sm-5">
-										<div class="widget-box">
-											<div class="widget-header widget-header-flat widget-header-small">
-												<h5 class="widget-title">
-													<i class="ace-icon fa fa-signal"></i>
-													Traffic Sources
-												</h5>
-
-												<div class="widget-toolbar no-border">
-													<div class="inline dropdown-hover">
-														<button class="btn btn-minier btn-primary">
-															This Week
-															<i class="ace-icon fa fa-angle-down icon-on-right bigger-110"></i>
-														</button>
-
-														<ul class="dropdown-menu dropdown-menu-right dropdown-125 dropdown-lighter dropdown-close dropdown-caret">
-															<li class="active">
-																<a href="#" class="blue">
-																	<i class="ace-icon fa fa-caret-right bigger-110">&nbsp;</i>
-																	This Week
-																</a>
-															</li>
-
-															<li>
-																<a href="#">
-																	<i class="ace-icon fa fa-caret-right bigger-110 invisible">&nbsp;</i>
-																	Last Week
-																</a>
-															</li>
-
-															<li>
-																<a href="#">
-																	<i class="ace-icon fa fa-caret-right bigger-110 invisible">&nbsp;</i>
-																	This Month
-																</a>
-															</li>
-
-															<li>
-																<a href="#">
-																	<i class="ace-icon fa fa-caret-right bigger-110 invisible">&nbsp;</i>
-																	Last Month
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-
-											<div class="widget-body">
-												<div class="widget-main">
-													<!-- #section:plugins/charts.flotchart -->
-													<div id="piechart-placeholder"></div>
-
-													<!-- /section:plugins/charts.flotchart -->
-													<div class="hr hr8 hr-double"></div>
-
-													<div class="clearfix">
-														<!-- #section:custom/extra.grid -->
-														<div class="grid3">
-															<span class="grey">
-																<i class="ace-icon fa fa-facebook-square fa-2x blue"></i>
-																&nbsp; likes
-															</span>
-															<h4 class="bigger pull-right">1,255</h4>
-														</div>
-
-														<div class="grid3">
-															<span class="grey">
-																<i class="ace-icon fa fa-twitter-square fa-2x purple"></i>
-																&nbsp; tweets
-															</span>
-															<h4 class="bigger pull-right">941</h4>
-														</div>
-
-														<div class="grid3">
-															<span class="grey">
-																<i class="ace-icon fa fa-pinterest-square fa-2x red"></i>
-																&nbsp; pins
-															</span>
-															<h4 class="bigger pull-right">1,050</h4>
-														</div>
-
-														<!-- /section:custom/extra.grid -->
-													</div>
-												</div><!-- /.widget-main -->
-											</div><!-- /.widget-body -->
-										</div><!-- /.widget-box -->
-									</div><!-- /.col -->
-								</div><!-- /.row -->
-
-
-
-					<!-- /.row -->
+								<div class="row"></div><!-- /.row -->
 
 								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
@@ -459,27 +281,14 @@
 			window.jQuery || document.write("<script src='<s:url value='/static/js/jquery.js'/>'>"+"<"+"/script>");
 		</script>
 
-		<!-- <![endif]--> 
+<!-- <![endif]--> 
 
-<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/script>");
-</script>
-<![endif]--> 
 <script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='<s:url value='/static/js/jquery.mobile.custom.js'/>'>"+"<"+"/script>");
 		</script> 
 <script src="<s:url value='/static/js/bootstrap.js'/>"></script> 
 
-<!-- page specific plugin scripts --> 
-<script src="<s:url value='/static/js/dataTables/jquery.dataTables.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/jquery.dataTables.bootstrap.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/dataTables.buttons.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.flash.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.html5.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.print.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.colVis.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/select/dataTables.select.js'/>"></script> 
+
 
 <!-- ace scripts --> 
 <script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 
@@ -504,162 +313,6 @@
 <script src="<s:url value='/static/js/ace/ace.widget-on-reload.js'/>"></script> 
 <script src="<s:url value='/static/js/ace/ace.searchbox-autocomplete.js'/>"></script> 
 
-<!-- inline scripts related to this page --> 
-<script type="text/javascript">
-			jQuery(function($) {
-				//initiate dataTables plugin
-
-				//And for the first simple table, which doesn't have TableTools or dataTables
-				//select/deselect all rows according to table header checkbox
-				var active_class = 'active';
-				$('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
-					var th_checked = this.checked;//checkbox inside "TH" table header
-					
-					$(this).closest('table').find('tbody > tr').each(function(){
-						var row = this;
-						if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
-						else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
-					});
-				});
-				
-				//select/deselect a row when the checkbox is checked/unchecked
-				$('#simple-table').on('click', 'td input[type=checkbox]' , function(){
-					var $row = $(this).closest('tr');
-					if(this.checked) $row.addClass(active_class);
-					else $row.removeClass(active_class);
-				});
-			
-				
-			
-				/********************************/
-				//add tooltip for small view action buttons in dropdown menu
-				$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-				
-				//tooltip placement on right or left
-				function tooltip_placement(context, source) {
-					var $source = $(source);
-					var $parent = $source.closest('table')
-					var off1 = $parent.offset();
-					var w1 = $parent.width();
-			
-					var off2 = $source.offset();
-					//var w2 = $source.width();
-			
-					if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-					return 'left';
-				}
-				
-			
-			})
-		</script> 
-<script src="<s:url value='/static/js/jquery-1.11.3.js'/>"></script>
-<script src="<s:url value='/static/js/bootstrap.min.js'/>"></script>
-<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
-<script src="<s:url value='/static/js/formutil.js'/>"></script>
-<script src="<s:url value='/static/js/jquery-ui.min.js'/>"></script>
-
-<script src="<s:url value='/static/js/bootbox.js'/>"></script>
-
-<script type="text/javascript">
-	$(function(){
-		formutil.clickAllCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
-		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
-	});
-	
-	function batchShare() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		
-		if (!patentSelected) {
-			//formutil.alertMessage('请选择专利');
-			bootbox.alert('请选择专利');
-			return;
-		}
-		
-		var patents = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent').join(",");
-		
-		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
-	}
-	
-	function batchFee() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		
-		if (!patentSelected) {
-			bootbox.alert('请选择专利');
-			return;
-		}
-			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patentId');
-		
-		 window.open("<s:url value='/patent/showFriends.html'/>?patentNos=" + patentNos);
-	}	
-	
-	function getFeeInfo(patentId) {
-		window.open("/fee/list?patentId=" + patentId);
-	}
-	
-	function deleteShare(patentId) {
-		$.ajax({
-			url: "" + patentId, 
-			type: 'get', 
-			dataType: "json",
-			success: function(data) {
-				if (data.result == 'not-owner') {
-					formutil.alertMessage('你不是专利的拥有者，无法取消分享');				
-				} else {
-					formutil.alertMessage('分享已取消', true);	
-				}
-			}
-		});			
-	}
-	
-	function changeInternalCode(patentId, internalCode) {
-		$.ajax({
-			url: "<s:url value='/patent/changeInternalCode.html'/>?patentId=" + patentId + "&internalCode=" + internalCode, 
-			type: 'get', 
-			success: function(data) {
-				//formutil.alertMessage('内部编码修改成功');	
-			},
-			error: function() {
-				formutil.alertMessage('内部编码修改失败');
-			}
-		});	
-	}
-	
-	function deletePatent(url) {
-		$( "<div>确定要删除吗?</div>" ).dialog({
-		  resizable: false,
-		  height:140,
-		  modal: true,
-		  buttons: {
-			"确定": function() {
-				$.ajax({
-					url: url, 
-					type: 'get', 
-					success: function(data) {
-						formutil.alertMessage('删除成功', true);	
-					}
-				});	
-			},
-			"取消": function() {
-			  $( this ).dialog( "close" );
-			}
-		  }
-		});
-	}	
-	
-</script>
-<!-- the following scripts are used in demo only for onpage help and you don't need them -->
-<link rel="stylesheet" href="<s:url value='/static/css/ace.onpage-help.css'/>" />
-<link rel="stylesheet" href="<s:url value='/static/docs/assets/js/themes/sunburst.css'/>" />
-<script type="text/javascript"> ace.vars['base'] = '..'; </script> 
-<script src="<s:url value='/static/js/ace/elements.onpage-help.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.onpage-help.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/rainbow.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/generic.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/html.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/css.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/javascript.js'/>"></script>
-<script src="<s:url value='/static/js/date-time/WdatePicker.js'/>"></script>
 
 </body>
 </html>
