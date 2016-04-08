@@ -1,6 +1,8 @@
 package com.lotut.pms.domain;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,6 +19,7 @@ public class PatentSearchCondition {
 	private String keywordType;
 	private String keyword;
 	private Page page;
+	private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	
 	
 	public int getUserId() {
@@ -81,5 +84,17 @@ public class PatentSearchCondition {
 
 	public void setPage(Page page) {
 		this.page = page;
+	}
+
+	@Override
+	public String toString() {
+		String startAppDateStr = startAppDate == null ? "" : formatter.format(startAppDate);
+		String endAppDateStr = endAppDate == null ? "" : formatter.format(endAppDate);
+		String patentTypeStr = patentType == null ? "" : patentType.toString();
+		String patentStatusStr = patentStatus == null ? "" : patentStatus.toString();
+		String keywordStr = keyword == null ? "" : keyword;
+		
+		return "patentType=" + patentTypeStr + "&patentStatus=" + patentStatusStr + "&startAppDate="
+				+ startAppDateStr + "&endAppDate=" + endAppDateStr + "&keyword=" + keywordStr;
 	}
 }
