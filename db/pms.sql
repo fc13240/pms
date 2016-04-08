@@ -143,15 +143,15 @@ create table if not exists fee_monitor_status (
 
 create table if not exists fees (
 	fee_id bigint auto_increment primary key,
-	deadline date not null comment '½É·Ñ½ØÖ¹ÈÕ', 
-	fee_type varchar(80) not null comment '·ÑÓÃÖÖÀà',
+	deadline date not null comment 'ç¼´è´¹æˆªæ­¢æ—¥', 
+	fee_type varchar(80) not null comment 'è´¹ç”¨ç§ç±»',
 	amount int not null, 
-	fee_payment_status int default 1 comment '½É·Ñ×´Ì¬', 
+	fee_payment_status int default 1 comment 'ç¼´è´¹çŠ¶æ€', 
 	patent bigint not null,
-	process_user int comment '´¦ÀíÓÃ»§', 
-	fee_monitor_status int default 1 comment '¼à¿Ø×´Ì¬', 
-	fee_owner int comment 'ÓµÓĞÈË', 
-	invoice_title varchar(200) comment '·¢Æ±Ì§Í·',
+	process_user int comment 'å¤„ç†ç”¨æˆ·', 
+	fee_monitor_status int default 1 comment 'ç›‘æ§çŠ¶æ€', 
+	fee_owner int comment 'æ‹¥æœ‰äºº', 
+	invoice_title varchar(200) comment 'å‘ç¥¨æŠ¬å¤´',
 	UNIQUE KEY uk_fees_patent_fee (patent, fee_type, deadline, fee_owner),
 	constraint fk_fee_owner foreign key idx_fk_fee_owner (fee_owner) references users(user_id) on delete cascade,
 	constraint fk_fee_payment_status foreign key idx_fk_fee_payment_status (fee_payment_status) references fee_payment_status(fee_payment_status_id),
@@ -177,7 +177,7 @@ create table if not exists friend_requests (
 	from_user int, 
 	to_user int, 
 	message varchar(100),
-	request_process_status int default 1 not null comment '´¦Àí×´Ì¬',
+	request_process_status int default 1 not null comment 'å¤„ç†çŠ¶æ€',
 	constraint pk_friend_requests primary key (from_user, to_user, request_process_status),
 	constraint fk_friend_request_from_user foreign key idx_fk_friend_request_from_user (from_user) references users(user_id) on delete cascade,
 	constraint fk_friend_request_to_user foreign key idx_fk_friend_request_to_user (to_user) references users(user_id) on delete cascade,
@@ -227,61 +227,60 @@ create table if not exists notices (
 	
 INSERT INTO friend_request_process_status (friend_request_process_status_id, friend_request_process_status_desc)
 VALUES
-	(1, 'Î´´¦Àí'),
-	(2, 'Í¨¹ıÑéÖ¤'),
-	(3, '¾Ü¾øÇëÇó');
+	(1, 'æœªå¤„ç†'),
+	(2, 'é€šè¿‡éªŒè¯'),
+	(3, 'æ‹’ç»è¯·æ±‚');
 
 INSERT INTO fee_monitor_status (fee_monitor_status_id, fee_monitor_status_desc)
 VALUES
-	(1, 'Î´¼ÓÈë'),
-	(2, 'ÒÑ¼ÓÈë');
+	(1, 'æœªåŠ å…¥'),
+	(2, 'å·²åŠ å…¥');
 
 INSERT INTO fee_payment_status (fee_payment_status_id, fee_payment_status_desc)
 VALUES
-	(1, 'Î´½É'),
-	(2, 'ÒÑ½É');
+	(1, 'æœªç¼´'),
+	(2, 'å·²ç¼´');
 	
 INSERT INTO notice_paper_apply_types (notice_paper_apply_type_id, notice_paper_apply_type_desc)
 VALUES
-	(1, 'Î´ÉêÇë'),
-	(2, 'ÉêÇëÖ½¼ş'),
-	(3, '´¦ÀíÖĞ'),
-	(4, 'ÒÑ·¢ËÍ'),
-	(5, 'ÎŞÖ½¼ş');
+	(1, 'æœªç”³è¯·'),
+	(2, 'ç”³è¯·çº¸ä»¶'),
+	(3, 'å¤„ç†ä¸­'),
+	(4, 'å·²å‘é€'),
+	(5, 'æ— çº¸ä»¶');
 	
 INSERT INTO notice_process_status (notice_process_status_id, notice_process_status_desc)
 VALUES
-	(1, 'Î´´¦Àí'),
-	(2, '´¦ÀíÖĞ'),
-	(3, 'ÒÑ´¦Àí'),
-	(4, 'ÒÑ·ÅÆú');
+	(1, 'æœªå¤„ç†'),
+	(2, 'å¤„ç†ä¸­'),
+	(3, 'å·²å¤„ç†'),
+	(4, 'å·²æ”¾å¼ƒ');
 
 INSERT INTO notice_types (notice_type_id, notice_type_desc)
 VALUES
-	(1, 'ĞÂ°¸ÊÜÀí'),
-	(2, '·ÑÓÃÏà¹Ø'),
-	(3, '²¹ÕıÉó²é'),
-	(4, 'ÊÚÈ¨µÇ¼Ç'),
-	(5, 'È¨ÀûÉ¥Ê§'),
-	(6, 'ÊÖĞøºÏ¸ñ'),
-	(7, 'ÆäËû');
+	(1, 'æ–°æ¡ˆå—ç†'),
+	(2, 'è´¹ç”¨ç›¸å…³'),
+	(3, 'è¡¥æ­£å®¡æŸ¥'),
+	(4, 'æˆæƒç™»è®°'),
+	(5, 'æƒåˆ©ä¸§å¤±'),
+	(6, 'æ‰‹ç»­åˆæ ¼'),
+	(7, 'å…¶ä»–');
 
 INSERT INTO patent_status (patent_status_id, patent_status_desc)
 VALUES
-	(1, 'µÈ´ıÉêÇë·Ñ'),
-	(2, '´ı´ğ¸´'),
-	(3, 'µÈÄêµÇÓ¡·Ñ'),
-	(4, '´ı»Ö¸´'),
-	(5, 'Ê§Ğ§'),
-	(6, '×¨ÀûÈ¨Î¬³Ö'),
-	(7, 'ÆäËû');
+	(1, 'ç­‰å¾…ç”³è¯·è´¹'),
+	(2, 'å¾…ç­”å¤'),
+	(3, 'ç­‰å¹´ç™»å°è´¹'),
+	(4, 'å¾…æ¢å¤'),
+	(5, 'å¤±æ•ˆ'),
+	(6, 'ä¸“åˆ©æƒç»´æŒ'),
+	(7, 'å…¶ä»–');
 
 INSERT INTO patent_types (patent_type_id, patent_type_desc)
 VALUES
-	(1, '·¢Ã÷'),
-	(2, 'ÊµÓÃĞÂĞÍ'),
-	(3, 'Íâ¹ÛÉè¼Æ');	
-
+	(1, 'å‘æ˜'),
+	(2, 'å®ç”¨æ–°å‹'),
+	(3, 'å¤–è§‚è®¾è®¡');	
 	
 
 	

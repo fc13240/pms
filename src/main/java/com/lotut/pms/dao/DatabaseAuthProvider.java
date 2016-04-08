@@ -25,7 +25,7 @@ import com.lotut.pms.domain.User;
 
 public class DatabaseAuthProvider extends JdbcDaoSupport implements UserDetailsService {
 
-	public static final String DEF_USERS_BY_USERNAME_QUERY = "select user_id,username,password,enabled,name,email,join_date "
+	public static final String DEF_USERS_BY_USERNAME_QUERY = "select user_id,username,password,enabled,name,email,join_date, phone "
 			+ "from users " + "where username = ?";
 	public static final String DEF_AUTHORITIES_BY_USERNAME_QUERY = "select username,authority "
 			+ "from authorities " + "where username = ?";
