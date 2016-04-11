@@ -9,14 +9,11 @@
 <html>
 <head>
 	<title>通知书列表</title>
-	<link rel="stylesheet" media="screen" href="<s:url value='/static/css/bootstrap.min.css'/>" />
-	<link rel="stylesheet" media="screen" href="<s:url value='/static/css/jquery-ui.min.css'/>" />
-
 
 <!-- bootstrap & fontawesome -->
 <link rel="stylesheet" href="<s:url value='/static/css/bootstrap.css'/>" />
 <link rel="stylesheet" href="<s:url value='/static/css/font-awesome.css'/>" />
-
+<link rel="stylesheet" href="<s:url value='/static/css/jquery-ui.min.css'/>" />
 <!-- page specific plugin styles -->
 
 <!-- text fonts -->
@@ -71,14 +68,93 @@
     <!-- #section:basics/navbar.dropdown -->
     <div class="navbar-buttons navbar-header pull-right" role="navigation">
       <ul class="nav ace-nav">
-        <li class="purple"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <i class="ace-icon fa fa-bell icon-animated-bell"></i> <span class="badge badge-important">8</span> </a> </li>
-        <!-- #section:basics/navbar.user_menu -->
-        <li class="light-blue"> <a data-toggle="dropdown" href="#" class="dropdown-toggle"> <img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" /> <span class="user-info" style="line-height:35px;"> 欢迎,admin </span> <i class="ace-icon fa fa-caret-down"></i> </a>
-          <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-            <li> <a href="#"> <i class="ace-icon fa fa-power-off"></i> 退出 </a> </li>
-          </ul>
+        <li class="purple"> 
+        	<a data-toggle="dropdown" class="dropdown-toggle" href="#"> 
+        		<i class="ace-icon fa fa-bell icon-animated-bell"></i> 
+        		<span class="badge badge-important">8</span> 
+        	</a>
+			<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+				<li class="dropdown-header">
+					<i class="ace-icon fa fa-exclamation-triangle"></i>
+					8 条消息
+				</li>
+	
+				<li class="dropdown-content">
+					<ul class="dropdown-menu dropdown-navbar navbar-pink">
+						<li>
+							<a href="#">
+								<div class="clearfix">
+									<span class="pull-left">
+										<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
+										新的消息
+									</span>
+									<span class="pull-right badge badge-info">+4</span>
+								</div>
+							</a>
+						</li>
+		
+						<li>
+							<a href="#">
+								<div class="clearfix">
+									<span class="pull-left">
+										<i class="btn btn-xs btn-primary fa fa-user"></i>
+										好友请求
+									</span>
+									<span class="pull-right badge badge-success">+4</span>
+								</div>
+							</a>
+						</li>
+	
+					</ul>
+				</li>
+	
+				<li class="dropdown-footer">
+					<a href="#">
+						See all notifications
+						<i class="ace-icon fa fa-arrow-right"></i>
+					</a>
+				</li>
+			</ul>
+ 
         </li>
-        
+		<!-- #section:basics/navbar.user_menu -->
+		<li class="light-blue">
+			<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+				<img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" />
+			<span class="user-info">
+				<small>Welcome,</small>
+				Jason
+			</span>
+		
+			<i class="ace-icon fa fa-caret-down"></i>
+			</a>
+		
+				<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+				
+					<li>
+						<a href="<s:url value='/user/changePasswordForm.html'/>">
+							<i class="ace-icon fa fa-user"></i>
+							修改密码
+						</a>
+					</li>
+				
+					<li class="divider"></li>
+					<li>
+						<a href="javascript:$('#logoutForm').submit();">
+							<i class="ace-icon fa fa-power-off"></i>
+							退出
+						</a>
+					</li>
+						<form action="<s:url value='/user/logout.html'/>" method="post" id="logoutForm">
+						            <se:csrfInput/>
+									<input type="submit" style="display:none;" />
+						             
+						</form>								
+		
+					</ul>
+		</li>
+  
+
         <!-- /section:basics/navbar.user_menu -->
       </ul>
     </div>
@@ -96,9 +172,7 @@
 
 <!-- sidebar -->
     <div id="sidebar" class="sidebar                  responsive"> 
-      <script type="text/javascript">
-                        try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
-                    </script>
+     
       <div class="sidebar-shortcuts" id="sidebar-shortcuts">
         <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
           <button class="btn btn-success"> <i class="ace-icon fa fa-signal"></i> </button>
@@ -153,7 +227,7 @@
     		<div class="page-content"> 
 
                 <div class="search-header" style="margin:0 auto;width:610px;">
-                <form action="<s:url value='/notice/search.html'/>" method="get">
+<form action="<s:url value='/notice/search.html'/>" method="get">
                     <div class="widget-box collapsed" style="border:none;">
                         <div class="widget-header" style="background:none;padding:0px;border:none; margin-top:30px;">
                 
@@ -234,8 +308,8 @@
 	                                <span class="input-group-btn" >
 										<a href="javascript:batchShare()"><button style="margin:8px;" type="button" class="btn btn-info btn-sm">批量分享</button></a>
 										<a href="javascript:batchFee()"><button type="button" class="btn btn-purple btn-sm">批量缴费</button></a>
-										<a href="javascript:batchProcessNotice(2)"><button style="margin:8px;" type="button" class="btn btn-info btn-sm">置为处理中</button></a>
-										<a href="javascript:batchProcessNotice(3)"><button type="button" class="btn btn-purple btn-sm">置为已处理</button></a>
+										<a href="javascript:batchProcessNotice(2)"><button style="margin:8px;" type="button" class="btn btn-success btn-sm">置为处理中</button></a>
+										<a href="javascript:batchProcessNotice(3)"><button type="button" class="btn btn-danger btn-sm">置为已处理</button></a>
 									</span> 
 	                                                    
                           </div>
@@ -252,17 +326,17 @@
 								<th>第一申请人</th>
 								<th>案件状态</th>
 								<th>共享人</th>
-								<th>发文日</th>
+								<th >发文日</th>
 								<th>通知书名称</th>		
-								<th>纸件申请</th>
+								<th  >纸件申请</th>
 								<th>期限</th>
-								<th>通知状态</th>			
-								<th>处理人</th>		
+								<th >通知状态</th>			
+								<th >处理人</th>		
 								<th>操作</th>
                               </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${notices}" var="notice">
+								<c:forEach items="${notices}" var="notice">
 	                              <tr>
 	                                <td class="center"><label class="pos-rel">
 	                                    <span class="batch-share-item"><input type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.noticeId}'/>">
@@ -272,10 +346,10 @@
 									<td><c:out value="${notice.patent.name}"/></td>
 									<td><c:out value="${notice.patent.firstAppPerson}"/></td>
 									<td><c:out value="${notice.patent.patentStatus.statusDescription}"/></td>
-									<td><c:out value="${notice.patent.shareUsersAsString}"/></td>
-									<td><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
+									<td  width="120"><c:out value="${notice.patent.shareUsersAsString}"/></td>
+									<td width="85"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
 									<td><c:out value="${notice.name}"/></td>
-									<td>
+									<td width="100">
 										<select class="form-control" onchange="javascript:changePaperApplyType('<c:out value="${notice.paperApplyType.paperTypeId}"/>', this)">
 											<c:forEach items="${paperApplyTypes}" var="paperApplyType">
 												<option value="<c:out value='${paperApplyType.paperTypeId}'/>" <c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>>
@@ -294,7 +368,7 @@
 											</c:otherwise>
 										</c:choose>
 									</td>
-									<td>
+									<td width="100">
 										<select class="form-control" onchange="javascript:processNotice('${notice.noticeId}', this)">
 											<c:forEach items="${noticeProcessStatus}" var="processStatus">
 												<option value="<c:out value='${processStatus.processStatusId}'/>" <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>>
@@ -304,19 +378,20 @@
 										</select>
 									</td>
 									<td><c:out value="${notice.processUser.username}"/></td>
-									<td width="150px">
-										<a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">分享</a>
-										<a id="download" href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}">下载</a>
-										
+									<td width="125">
+										<a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
+										<button type="button" class="btn btn-info btn-sm">分享</button>
+										</a>
+										<a id="download" href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}">
+										<button type="button" class="btn btn-purple btn-sm">下载</button>
+										</a>
 									</td>
 	                              </tr>
                               </c:forEach>
                             </tbody>
-                            	
                           </table>
-                        
-                        			<!-- 分页 -->
-		                          	<div class="row">
+                          	<!-- 分页功能 start -->
+								<div class="row">
 											<c:if test="${searchCondition == null}">
 											<form:form action="" modelAttribute="searchCondition" method="get">
 											<div class="col-lg-12">	
@@ -393,13 +468,14 @@
 											</form:form>
 											 	
 											</c:if>
-		                        </div>
-		                        <!-- 分页结束 -->
+								</div>
+
+                        </div>
+                        <!-- /.span --> 
                       </div>
-                      <!-- /.span --> 
+                      <!-- /.row --> 
+                      
                     </div>
-                    <!-- /.row --> 
-                </div>
                 </div>
                 <div class="footer">
                   <div class="footer-inner">
@@ -422,9 +498,6 @@
                   <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
                 </a>
             </div>
-            	      
-        
-        
         </div>
 	</div>        
 
@@ -434,52 +507,22 @@
 			window.jQuery || document.write("<script src='<s:url value='/static/js/jquery.js'/>'>"+"<"+"/script>");
 		</script>
 
-		<!-- <![endif]--> 
+<!-- <![endif]--> 
 
-<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/script>");
-</script>
-<![endif]--> 
 <script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='<s:url value='/static/js/jquery.mobile.custom.js'/>'>"+"<"+"/script>");
 		</script> 
 <script src="<s:url value='/static/js/bootstrap.js'/>"></script> 
 
-<!-- page specific plugin scripts --> 
-<script src="<s:url value='/static/js/dataTables/jquery.dataTables.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/jquery.dataTables.bootstrap.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/dataTables.buttons.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.flash.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.html5.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.print.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.colVis.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/select/dataTables.select.js'/>"></script> 
 
-<!-- ace scripts --> 
-<script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.colorpicker.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.fileinput.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.typeahead.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.wysiwyg.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.spinner.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.treeview.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.wizard.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.aside.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.ajax-content.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.touch-drag.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.sidebar.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.sidebar-scroll-1.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.submenu-hover.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.widget-box.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.settings.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.settings-rtl.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.settings-skin.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.widget-on-reload.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.searchbox-autocomplete.js'/>"></script> 
 
-<!-- inline scripts related to this page --> 
+
+
+<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
+<script src="<s:url value='/static/js/formutil.js'/>"></script>
+<script src="<s:url value='/static/js/jquery-ui.min.js'/>"></script>
+
+<script src="<s:url value='/static/js/bootbox.js'/>"></script>
 <script type="text/javascript">
 
 // 通知书处理状态
@@ -601,13 +644,6 @@ function batchProcessNotice(processStatus) {
 			
 			})
 		</script> 
-<script src="<s:url value='/static/js/jquery-1.11.3.js'/>"></script>
-<script src="<s:url value='/static/js/bootstrap.min.js'/>"></script>
-<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
-<script src="<s:url value='/static/js/formutil.js'/>"></script>
-<script src="<s:url value='/static/js/jquery-ui.min.js'/>"></script>
-
-<script src="<s:url value='/static/js/bootbox.js'/>"></script>
 
 <script type="text/javascript">
 	$(function(){
@@ -637,7 +673,7 @@ function batchProcessNotice(processStatus) {
 			return;
 		}
 			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patentId');
+		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
 		
 		 window.open("<s:url value='/patent/showFriends.html'/>?patentNos=" + patentNos);
 	}	
@@ -694,7 +730,8 @@ function batchProcessNotice(processStatus) {
 			}
 		  }
 		});
-	}	
+	}
+	
 	function gotoPage() {
 		var patentType = $("#patentTypeId").val();
 		var patentStatus = $("#patentStatusId").val();
@@ -702,11 +739,11 @@ function batchProcessNotice(processStatus) {
 		var endAppDate = $("#endAppDateId").val();
 		var keyword = $("#keywordId").val();
 		var pageNo = document.getElementById("page.pageNo").value;
-		var url = "<s:url value='/notice/list.html'/>?currentPage=" + pageNo;
+		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
 		
 		if (isSearch()) {
  				//url = "<s:url value='/patent/search.html'/>?page.currentPage="+nextPage +"&"+${searchCondition};
-				url = "<s:url value='/notice/list.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+				url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 		}
 		
 		location.href = url
@@ -734,18 +771,30 @@ function batchProcessNotice(processStatus) {
 		return false;
 	}
 </script>
-<!-- the following scripts are used in demo only for onpage help and you don't need them -->
-<link rel="stylesheet" href="<s:url value='/static/css/ace.onpage-help.css'/>" />
-<link rel="stylesheet" href="<s:url value='/static/docs/assets/js/themes/sunburst.css'/>" />
-<script type="text/javascript"> ace.vars['base'] = '..'; </script> 
-<script src="<s:url value='/static/js/ace/elements.onpage-help.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.onpage-help.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/rainbow.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/generic.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/html.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/css.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/javascript.js'/>"></script>
-<script src="<s:url value='/static/js/date-time/WdatePicker.js'/>"></script>
 
+
+
+<!-- ace scripts --> 
+<script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.colorpicker.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.fileinput.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.typeahead.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.wysiwyg.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.spinner.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.treeview.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.wizard.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.aside.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.ajax-content.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.touch-drag.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.sidebar.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.sidebar-scroll-1.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.submenu-hover.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.widget-box.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.settings.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.settings-rtl.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.settings-skin.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.widget-on-reload.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.searchbox-autocomplete.js'/>"></script> 
 </body>
 </html>
