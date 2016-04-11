@@ -69,6 +69,13 @@ public class UserController {
 		
 		return "user_detail";
 	}
+	
+	@RequestMapping(path="/contactAddressAddForm", method=RequestMethod.GET)
+	public String showContactAddressAddForm() {
+		return "contact_address_create_form";
+	}
+	
+	
 
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ModelAndView login() {
