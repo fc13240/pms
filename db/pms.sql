@@ -261,10 +261,12 @@ create table contact_addresses (
   	phone varchar(20),
   	mobile varchar(20),
  	email varchar(50),
+ 	user int not null,
 	constraint fk_contact_addresses_province foreign key(province) references provinces(id),
 	constraint fk_contact_addresses_city foreign key(city) references cities(id),
 	constraint fk_contact_addresses_district foreign key(district) references districts(id),
-	constraint fk_contact_addresses_street foreign key(street) references streets(id)
+	constraint fk_contact_addresses_street foreign key(street) references streets(id),
+	constraint fk_contact_addresses_user foreign key(user) references users(user_id)
 );
 
 	
