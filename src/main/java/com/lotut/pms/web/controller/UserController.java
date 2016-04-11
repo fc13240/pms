@@ -1,6 +1,7 @@
 package com.lotut.pms.web.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -71,11 +74,38 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/contactAddressAddForm", method=RequestMethod.GET)
-	public String showContactAddressAddForm() {
+	public String showContactAddressAddForm(Model model) {
+		List<Map<String, String>> provinces = userService.getAllProvinces();
+		model.addAttribute("provinces", provinces);
 		return "contact_address_create_form";
 	}
 	
+	@RequestMapping(path="/getCitiesByProvince", method=RequestMethod.GET)
+	@ResponseBody
+	public String getCitiesByProvince(@RequestParam("province")int provinceId, Model model) throws JsonProcessingException {
+		List<Map<String, String>> cities = userService.getCitiesByProvinceId(provinceId);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(cities);
+	}
 	
+	@RequestMapping(path="/getDistrictsByCity", method=RequestMethod.GET)
+	@ResponseBody
+	public String getDistrictsByCity(@RequestParam("city")long cityId, Model model) throws JsonProcessingException {
+		List<Map<String, String>> districts = userService.getDistrictsByCityId(cityId);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(districts);
+	}
+	
+	@RequestMapping(path="/getStreetsByDistrict", method=RequestMethod.GET)
+	@ResponseBody
+	public String getStreetsByDistrict(@RequestParam("district")long districtId, Model model) throws JsonProcessingException {
+		List<Map<String, String>> streets = userService.getStreetsByDistrictId(districtId);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(streets);
+	}
 
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ModelAndView login() {

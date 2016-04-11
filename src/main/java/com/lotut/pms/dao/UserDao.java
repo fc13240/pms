@@ -1,14 +1,23 @@
 package com.lotut.pms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lotut.pms.domain.User;
 
 public interface UserDao {
 	List<User> getAllUsers();
-	public User findByName(String username);
-	public void save(User user);
-	public void updatePassword(User user);
+	User findByName(String username);
+	void save(User user);
+	void updatePassword(User user);
 	
-	public User getById(int userId);
+	User getById(int userId);
+	
+	List<Map<String, String>> getAllProvinces();
+	
+	List<Map<String, String>> getCitiesByProvinceId(int provinceId);
+	
+	List<Map<String, String>> getDistrictsByCityId(long cityId);
+	
+	List<Map<String, String>> getStreetsByDistrictId(long districtId);
 }

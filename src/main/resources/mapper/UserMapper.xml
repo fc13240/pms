@@ -33,4 +33,28 @@
 		  from users
 		 where user_id = #{userId}
 	</select>
+	
+	<select id="getAllProvinces" resultType="map">
+		select id, name
+		  from provinces
+	</select>
+	
+	<select id="getCitiesByProvinceId" parameterType="int" resultType="map">
+		select id, name
+		  from cities
+		 where province = #{provinceId}		
+	</select>
+	
+	<select id="getDistrictsByCityId" parameterType="long" resultType="map">
+		select id, name 
+		  from districts 
+		 where city = #{cityId}
+	</select>
+	
+	<select id="getStreetsByDistrictId" parameterType="long" resultType="map">
+		select id, name 
+		  from streets 
+		 where district = #{districtId}
+	</select>	
+	
 </mapper>

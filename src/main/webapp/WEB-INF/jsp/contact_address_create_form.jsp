@@ -237,18 +237,23 @@
 							<form action="<s:url value='/user/'/>" method="post">
 								联系人名称<input type="text" name="reciver">
 								通讯地址
-								<select name="province" id="province" onchange="">
-									<option>请选择</option>
+								<select name="province" id="province" onchange="loadCities()">
+									<option value=''>请选择</option>
+									<c:forEach items="${provinces}" var="province">
+									<option value="${province.id}">${province.name}</option>
+									</c:forEach>
 								</select>
-								<select name="city" id="city">
-									<option>请选择</option>
+								<select name="city" id="city" onchange="loadDistricts()">
+									<option value=''>请选择</option>
 								</select>
-								<select name="district" id="district">
-									<option>请选择</option>
+								<select name="district" id="district" onchange="loadStreets()">
+									<option value=''>请选择</option>
 								</select>
 								<select name="street" id="street">
-									<option>请选择</option>
-								</select>																								
+									<option value=''>请选择</option>
+								</select>
+								详细地址<input type="text" name="detailAddress">		
+								手机或固话<input type="text" name="phone">																								
 							</form>
                         <!-- /.span --> 
                       </div>
@@ -351,9 +356,93 @@
 		</script> 
 
 <script type="text/javascript">
-$("#province").onchange = function() {
-	alert("加载省份");
+function addDefaultOption(selectElem) {
+	selectElem.append("<option value=''>请选择</option>");
 }
+
+function resetSelect(selectElem) {
+	selectElem.empty();
+	addDefaultOption(selectElem);
+}
+
+function loadCities() {
+	var province = $("#province").val();
+	
+	if (province != "") {
+		$.ajax({
+			url: "<s:url value='/user/getCitiesByProvince.html'/>?province=" + province,
+			type: 'get',
+			dataType: 'json',
+			success: function(cities) {
+				var cities = eval( "(" + cities + ")" )
+				var city = $("#city");
+				city.empty();
+				
+				
+				addDefaultOption(city);
+				$.each(cities, function(index, val){
+					city.append("<option value='" + val.id + "'>" + val.name + "</option>");
+				});
+			}
+		})
+	} else {
+		resetSelect($("#city"));
+		resetSelect($("#district"));
+		resetSelect($("#street"));
+	}
+}
+
+function loadDistricts() {
+	var city = $("#city").val();
+	
+	if (city != "") {
+		$.ajax({
+			url: "<s:url value='/user/getDistrictsByCity.html'/>?city=" + city,
+			type: 'get',
+			dataType: 'json',
+			success: function(districts) {
+				var districts = eval( "(" + districts + ")" )
+				var district = $("#district");
+				district.empty();
+				
+				
+				addDefaultOption(district);
+				$.each(districts, function(index, val){
+					district.append("<option value='" + val.id + "'>" + val.name + "</option>");
+				});
+			}
+		})
+	} else {
+		resetSelect($("#district"));
+		resetSelect($("#street"));
+	}
+}
+
+function loadStreets() {
+	var district = $("#district").val();
+	
+	if (district != "") {
+		$.ajax({
+			url: "<s:url value='/user/getStreetsByDistrict.html'/>?district=" + district,
+			type: 'get',
+			dataType: 'json',
+			success: function(streets) {
+				var streets = eval( "(" + streets + ")" )
+				var street = $("#street");
+				street.empty();
+				
+				
+				addDefaultOption(street);
+				$.each(streets, function(index, val){
+					street.append("<option value='" + val.id + "'>" + val.name + "</option>");
+				});
+			}
+		})
+	} else {
+		resetSelect($("#street"));
+	}
+}
+
 </script>
 
 <!-- ace scripts --> 

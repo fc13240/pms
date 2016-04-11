@@ -1,6 +1,7 @@
 package com.lotut.pms.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -53,5 +54,25 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserDetail(int userId) {
 		return userDao.getById(userId);
+	}
+
+	@Override
+	public List<Map<String, String>> getAllProvinces() {
+		return userDao.getAllProvinces();
+	}
+
+	@Override
+	public List<Map<String, String>> getCitiesByProvinceId(int provinceId) {
+		return userDao.getCitiesByProvinceId(provinceId);
+	}
+
+	@Override
+	public List<Map<String, String>> getDistrictsByCityId(long cityId) {
+		return userDao.getDistrictsByCityId(cityId);
+	}
+
+	@Override
+	public List<Map<String, String>> getStreetsByDistrictId(long districtId) {
+		return userDao.getStreetsByDistrictId(districtId);
 	}
 }

@@ -1,8 +1,7 @@
 package com.lotut.pms.service;
 
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 import com.lotut.pms.domain.User;
 
@@ -12,11 +11,19 @@ public interface UserService {
 	/*
 	 * 注册
 	 */
-	public boolean register(User user);
+	boolean register(User user);
 	/*
 	 * 修改密码
 	 */
-	public boolean changePassword(String lastPassword,String newPassword);
+	boolean changePassword(String lastPassword,String newPassword);
 	
-	public User getUserDetail(int userId);
+	User getUserDetail(int userId);
+	
+	List<Map<String, String>> getAllProvinces();
+	
+	List<Map<String, String>> getCitiesByProvinceId(int provinceId);
+	
+	List<Map<String, String>> getDistrictsByCityId(long cityId);
+	
+	List<Map<String, String>> getStreetsByDistrictId(long districtId);
 }

@@ -1,6 +1,7 @@
 package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -46,5 +47,24 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 	public User getById(int userId) {
 		return userMapper.getById(userId);
 	}
-	
+
+	@Override
+	public List<Map<String, String>> getAllProvinces() {
+		return userMapper.getAllProvinces();
+	}
+
+	@Override
+	public List<Map<String, String>> getCitiesByProvinceId(int provinceId) {
+		return userMapper.getCitiesByProvinceId(provinceId);
+	}
+
+	@Override
+	public List<Map<String, String>> getDistrictsByCityId(long cityId) {
+		return userMapper.getDistrictsByCityId(cityId);
+	}
+
+	@Override
+	public List<Map<String, String>> getStreetsByDistrictId(long districtId) {
+		return userMapper.getStreetsByDistrictId(districtId);
+	}
 }
