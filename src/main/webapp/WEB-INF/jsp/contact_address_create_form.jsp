@@ -378,10 +378,8 @@ function loadCities() {
 			type: 'get',
 			dataType: 'json',
 			success: function(cities) {
-				var cities = eval( "(" + cities + ")" )
 				var city = $("#city");
 				city.empty();
-				
 				
 				addDefaultOption(city);
 				$.each(cities, function(index, val){
@@ -404,7 +402,6 @@ function loadDistricts() {
 			type: 'get',
 			dataType: 'json',
 			success: function(districts) {
-				var districts = eval( "(" + districts + ")" )
 				var district = $("#district");
 				district.empty();
 				
@@ -429,7 +426,6 @@ function loadStreets() {
 			type: 'get',
 			dataType: 'json',
 			success: function(streets) {
-				var streets = eval( "(" + streets + ")" )
 				var street = $("#street");
 				street.empty();
 				

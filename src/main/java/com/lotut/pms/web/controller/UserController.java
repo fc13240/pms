@@ -1,8 +1,11 @@
 package com.lotut.pms.web.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,30 +84,40 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/getCitiesByProvince", method=RequestMethod.GET)
-	@ResponseBody
-	public String getCitiesByProvince(@RequestParam("province")int provinceId, Model model) throws JsonProcessingException {
+	public void getCitiesByProvince(@RequestParam("province")int provinceId, Model model, HttpServletResponse response) throws IOException {
+		response.setContentType("application/json;charset=UTF-8");
 		List<Map<String, String>> cities = userService.getCitiesByProvinceId(provinceId);
 		
 		ObjectMapper mapper = new ObjectMapper();
-		return mapper.writeValueAsString(cities);
+		mapper.writeValueAsString(cities);
+		PrintWriter out = response.getWriter();
+		out.write(mapper.writeValueAsString(cities));
+		out.flush();
+		out.close();
 	}
 	
 	@RequestMapping(path="/getDistrictsByCity", method=RequestMethod.GET)
-	@ResponseBody
-	public String getDistrictsByCity(@RequestParam("city")long cityId, Model model) throws JsonProcessingException {
+	public void getDistrictsByCity(@RequestParam("city")long cityId, Model model, HttpServletResponse response) throws IOException {
+		response.setContentType("application/json;charset=UTF-8");
 		List<Map<String, String>> districts = userService.getDistrictsByCityId(cityId);
 		
 		ObjectMapper mapper = new ObjectMapper();
-		return mapper.writeValueAsString(districts);
+		PrintWriter out = response.getWriter();
+		out.write(mapper.writeValueAsString(districts));
+		out.flush();
+		out.close();
 	}
 	
 	@RequestMapping(path="/getStreetsByDistrict", method=RequestMethod.GET)
-	@ResponseBody
-	public String getStreetsByDistrict(@RequestParam("district")long districtId, Model model) throws JsonProcessingException {
+	public void getStreetsByDistrict(@RequestParam("district")long districtId, Model model, HttpServletResponse response) throws IOException {
+		response.setContentType("application/json;charset=UTF-8");
 		List<Map<String, String>> streets = userService.getStreetsByDistrictId(districtId);
 		
 		ObjectMapper mapper = new ObjectMapper();
-		return mapper.writeValueAsString(streets);
+		PrintWriter out = response.getWriter();
+		out.write(mapper.writeValueAsString(streets));
+		out.flush();
+		out.close();
 	}
 
 	@RequestMapping(path="/login", method=RequestMethod.POST)
