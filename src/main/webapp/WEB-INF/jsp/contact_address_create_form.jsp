@@ -368,6 +368,10 @@ function resetSelect(selectElem) {
 function loadCities() {
 	var province = $("#province").val();
 	
+	resetSelect($("#city"));
+	resetSelect($("#district"));
+	resetSelect($("#street"));
+	
 	if (province != "") {
 		$.ajax({
 			url: "<s:url value='/user/getCitiesByProvince.html'/>?province=" + province,
@@ -385,15 +389,14 @@ function loadCities() {
 				});
 			}
 		})
-	} else {
-		resetSelect($("#city"));
-		resetSelect($("#district"));
-		resetSelect($("#street"));
-	}
+	} 
 }
 
 function loadDistricts() {
 	var city = $("#city").val();
+
+	resetSelect($("#district"));
+	resetSelect($("#street"));
 	
 	if (city != "") {
 		$.ajax({
@@ -412,14 +415,13 @@ function loadDistricts() {
 				});
 			}
 		})
-	} else {
-		resetSelect($("#district"));
-		resetSelect($("#street"));
 	}
 }
 
 function loadStreets() {
 	var district = $("#district").val();
+	
+	resetSelect($("#street"));
 	
 	if (district != "") {
 		$.ajax({
@@ -438,9 +440,7 @@ function loadStreets() {
 				});
 			}
 		})
-	} else {
-		resetSelect($("#street"));
-	}
+	} 
 }
 
 </script>
