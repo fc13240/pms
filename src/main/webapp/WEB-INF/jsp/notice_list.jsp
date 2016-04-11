@@ -339,7 +339,7 @@
 								<c:forEach items="${notices}" var="notice">
 	                              <tr>
 	                                <td class="center"><label class="pos-rel">
-	                                    <span class="batch-share-item"><input type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.noticeId}'/>">
+	                                    <span class="batch-share-item"><input type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
 	                                    <span class="lbl"></span> </label></td>
 	                                <td class="center"><a href="#">1</a></td>
 	                                <td><a href="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')"><c:out value="${notice.patent.appNo}"/></td>
@@ -582,7 +582,6 @@ function batchProcessNotice(processStatus) {
 				processStatus = selectElement.options[i].value;
 			}
 		}		
-	
 		$.ajax({
 				url: "<s:url value='/notice/processNotices.html'/>?notices=" + notice + "&processStatus=" + processStatus,
 				type: 'get', 
@@ -647,12 +646,12 @@ function batchProcessNotice(processStatus) {
 
 <script type="text/javascript">
 	$(function(){
-		formutil.clickAllCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
-		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
+		formutil.clickAllCheckbox('tr th input.check-item', 'tr td input.check-item');
+		formutil.clickItemCheckbox('tr th input.check-item', 'tr td input.check-item');
 	});
 	
 	function batchShare() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
 		
 		if (!patentSelected) {
 			//formutil.alertMessage('请选择专利');
@@ -660,20 +659,20 @@ function batchProcessNotice(processStatus) {
 			return;
 		}
 		
-		var patents = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent').join(",");
+		var patents = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent').join(",");
 		
 		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
 	}
 	
 	function batchFee() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
 		
 		if (!patentSelected) {
 			bootbox.alert('请选择专利');
 			return;
 		}
 			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
 		
 		 window.open("<s:url value='/patent/showFriends.html'/>?patentNos=" + patentNos);
 	}	
