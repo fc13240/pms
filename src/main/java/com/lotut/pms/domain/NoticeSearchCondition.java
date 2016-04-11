@@ -1,5 +1,7 @@
 package com.lotut.pms.domain;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,6 +23,8 @@ public class NoticeSearchCondition {
 	private Date endDispatchDate;
 	private String keywordType;
 	private String keyword;
+	private Page page;
+	private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 	public int getUserId() {
 		return userId;
@@ -108,6 +112,32 @@ public class NoticeSearchCondition {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+
+	public Page getPage() {
+		return page;
+	}
+
+	public void setPage(Page page) {
+		this.page = page;
+	}
+	
+	@Override
+	public String toString() {
+		String patentTypeStr = patentType == null ? "" : patentType.toString();
+		String noticeProcessStatusStr = noticeProcessStatus == null ? "" : noticeProcessStatus.toString();
+		String noticeTypeStr = noticeType == null ? "" : noticeType.toString();
+		String paperApplyTypeStr = paperApplyType == null ? "" : paperApplyType.toString();
+		String startAppDateStr = startAppDate == null ? "" : formatter.format(startAppDate);
+		String endAppDateStr = endAppDate == null ? "" : formatter.format(endAppDate);
+		String startDispatchDateStr = startDispatchDate == null ? "" : formatter.format(startDispatchDate);
+		String endDispatchDateStr = endDispatchDate == null ? "" : formatter.format(endDispatchDate);
+		String keywordTypeStr = keyword == null ? "" : keywordType;
+		String keywordStr = keyword == null ? "" : keyword;
+		return "patentType="+patentTypeStr+"&noticeProcessStatus="+noticeProcessStatusStr+
+				"&noticeType="+noticeTypeStr+"&paperApplyType="+paperApplyTypeStr+"&startAppDate="+startAppDateStr+
+				"&endAppDate="+endAppDateStr+"&startDispatchDate="+startDispatchDateStr+"&endDispatchDate="
+				+endDispatchDateStr+"&keywordType="+keywordTypeStr+"&keyword="+keywordStr;
 	}
 
 }

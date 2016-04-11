@@ -73,8 +73,20 @@
 		 where n.patent in (select patent from user_patents where user = #{userId})	
 		 
 	</select>
+	<!-- 分页 -->
+	<select id="getUserNoticesCount" resultType="int">
+		select Count(*)
+		  from patents p join patent_status ps on p.patent_status = ps.patent_status_id
+			join user_patents up on p.patent_id = up.patent 
+			join notices n on n.patent = up.patent
+			left join users pu on pu.user_id = n.process_user
+			join users u on u.user_id = up.user
+			join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
+			join notice_process_status nps on nps.notice_process_status_id = n.process_status
+		 where n.patent in (select patent from user_patents where user = #{userId})	
+	</select>
 	
-	<select id="getUserNoticesByPage" resultMap="NoticeResultMap">
+	<select id="getUserNoticesByPage" parameterType="Page" resultMap="NoticeResultMap">
 		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description, 
 			u.user_id as share_user_id,  u.username as share_username, 
 			n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,

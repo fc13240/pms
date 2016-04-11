@@ -117,12 +117,12 @@
       <ul class="nav nav-list">
         <li> <a href="<s:url value='/main.html'/>"> <i class="menu-icon fa fa-tachometer"></i> <span class="menu-text"> 控制台 </span> </a> <b class="arrow"></b> </li>
         <li class=""> <a href="<s:url value='/patent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-desktop"></i> <span class="menu-text"> 我的专利 </span> </a> </li>
-        <li class="active"> <a href="<s:url value='/notice/list.html'/>"> <i class="menu-icon fa fa-list"></i> <span class="menu-text"> 我的通知书 </span> </a> </li>
-        <li class=""> <a href="<s:url value='/friend/list.html'/>"> <i class="menu-icon fa fa-pencil-square-o"></i> <span class="menu-text"> 好友管理 </span> </a> </li>
-        <li class=""> <a href="<s:url value='/sharePatent/list.html'/>"> <i class="menu-icon fa fa-list-alt"></i> <span class="menu-text"> 分享管理 </span> </a> <b class="arrow"></b> </li>
+        <li class="active"> <a href="<s:url value='/notice/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-list"></i> <span class="menu-text"> 我的通知书 </span> </a> </li>
+        <li class=""> <a href="<s:url value='/friend/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-pencil-square-o"></i> <span class="menu-text"> 好友管理 </span> </a> </li>
+        <li class=""> <a href="<s:url value='/sharePatent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-list-alt"></i> <span class="menu-text"> 分享管理 </span> </a> <b class="arrow"></b> </li>
         <li class=""> <a href="<s:url value='/patent/showUploadForm.html'/>"> <i class="menu-icon fa fa-calendar"></i> <span class="menu-text"> 添加专利 </span> </a> <b class="arrow"></b> </li>
         <li class=""> <a href="<s:url value='/notice/showUploadForm.html'/>"> <i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 添加通知书 </span> </a> <b class="arrow"></b> </li>
-        <li class=""> <a href="<s:url value='/fee/monitoredFeeList.html'/>"><i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 官费监控 </span> </a> </li>
+        <li class=""> <a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>"><i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 官费监控 </span> </a> </li>
       </ul>
       <!-- /.nav-list --> 
       
@@ -312,13 +312,94 @@
 	                              </tr>
                               </c:forEach>
                             </tbody>
+                            	
                           </table>
-                        </div>
-                        <!-- /.span --> 
+                        
+                        			<!-- 分页 -->
+		                          	<div class="row">
+											<c:if test="${searchCondition == null}">
+											<form:form action="" modelAttribute="searchCondition" method="get">
+											<div class="col-lg-12">	
+														共 ${page.totalPages} 页    第${page.currentPage} 页
+														<a href="?currentPage=1">首页</a>
+													<c:choose>
+														<c:when test="${page.currentPage - 1 > 0}">
+															<a href="?currentPage=${page.currentPage - 1}">上一页</a>
+														</c:when>
+														<c:when test="${page.currentPage - 1 <= 0}">
+															<a href="?currentPage=1">上一页</a>
+														</c:when>
+													</c:choose>
+													<c:choose>
+														<c:when test="${page.totalPages==0}">
+															<a href="?currentPage=${page.currentPage}">下一页</a>
+														</c:when>
+														<c:when test="${page.currentPage + 1 < page.totalPages}">
+															<a href="?currentPage=${page.currentPage+1}">下一页</a>
+														</c:when>
+														<c:when test="${page.currentPage + 1 >= page.totalPages}">
+															<a href="?currentPage=${page.totalPages}">下一页</a>
+														</c:when>
+													</c:choose>
+													<c:choose>
+														<c:when test="${page.totalPages==0}">
+															<a href="?currentPage=${page.currentPage}">尾页</a>
+														</c:when>
+														<c:otherwise>
+															<a href="?currentPage=${page.totalPages}">尾页</a>
+														</c:otherwise>
+													</c:choose>
+											<input type="text" id="page.pageNo" style="width:50px;" name="page.nextPage"/>
+												<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>	
+											</div>
+											</form:form>
+											</c:if>
+											<c:if test="${searchCondition != null}">
+											<form:form action="" modelAttribute="searchCondition" method="get">
+											<div class="col-lg-12">	
+														共 ${page.totalPages} 页    第${page.currentPage} 页
+														<a href="?page.currentPage=1&${searchCondition}">首页</a>
+													<c:choose>
+														<c:when test="${page.currentPage - 1 > 0}">
+															<a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a>
+														</c:when>
+														<c:when test="${page.currentPage - 1 <= 0}">
+															<a href="?page.currentPage=1&${searchCondition}">上一页</a>
+														</c:when>
+													</c:choose>
+													<c:choose>
+														<c:when test="${page.totalPages==0}">
+															<a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a>
+														</c:when>
+														<c:when test="${page.currentPage + 1 < page.totalPages}">
+															<a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a>
+														</c:when>
+														<c:when test="${page.currentPage + 1 >= page.totalPages}">
+															<a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a>
+														</c:when>
+													</c:choose>
+													<c:choose>
+														<c:when test="${page.totalPages==0}">
+															<a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a>
+														</c:when>
+														<c:otherwise>
+															<a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a>
+														</c:otherwise>
+													</c:choose>
+										 	<!-- 分页功能 End -->
+											<input type="text" id="page.pageNo" style="width:50px;" name="page.nextPage"/>
+												<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
+											</div>
+											</form:form>
+											 	
+											</c:if>
+		                        </div>
+		                        <!-- 分页结束 -->
                       </div>
-                      <!-- /.row --> 
-                      
+                      <!-- /.span --> 
                     </div>
+                    <!-- /.row --> 
+                </div>
                 </div>
                 <div class="footer">
                   <div class="footer-inner">
@@ -614,7 +695,44 @@ function batchProcessNotice(processStatus) {
 		  }
 		});
 	}	
+	function gotoPage() {
+		var patentType = $("#patentTypeId").val();
+		var patentStatus = $("#patentStatusId").val();
+		var startAppDate = $("#startAppDateId").val();
+		var endAppDate = $("#endAppDateId").val();
+		var keyword = $("#keywordId").val();
+		var pageNo = document.getElementById("page.pageNo").value;
+		var url = "<s:url value='/notice/list.html'/>?currentPage=" + pageNo;
+		
+		if (isSearch()) {
+ 				//url = "<s:url value='/patent/search.html'/>?page.currentPage="+nextPage +"&"+${searchCondition};
+				url = "<s:url value='/notice/list.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		}
+		
+		location.href = url
+	}
 	
+	function isSearch() {
+		var patentType = $("#patentTypeId").val();
+		var patentStatus = $("#patentStatusId").val();
+		var startAppDate = $("#startAppDateId").val();
+		var endAppDate = $("#endAppDateId").val();
+		var keyword = $("#keywordId").val();
+		
+		if (!isEmpty(patentType) || !isEmpty(patentStatus) || !isEmpty(startAppDate) || !isEmpty(endAppDate) || !isEmpty(keyword)) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	function isEmpty(value) {
+		if (value == null || value == "undefined" || value == "") {
+			return true;
+		}
+		
+		return false;
+	}
 </script>
 <!-- the following scripts are used in demo only for onpage help and you don't need them -->
 <link rel="stylesheet" href="<s:url value='/static/css/ace.onpage-help.css'/>" />

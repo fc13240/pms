@@ -25,6 +25,7 @@ import com.lotut.pms.domain.NoticePaperApplyType;
 import com.lotut.pms.domain.NoticeProcessStatus;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.service.NoticeService;
 import com.lotut.pms.service.PatentService;
@@ -46,10 +47,14 @@ public class NoticeController {
 	}
 
 	@RequestMapping(path="/list", method=RequestMethod.GET)
-	public String getNoticeList(Model model) {
+	public String getNoticeList(Model model,Page page) {
 		int userId = PrincipalUtils.getCurrentUserId();
-		List<Notice> userNotices = noticeService.getUserNotices(userId);
+		page.setUserId(userId);
+		List<Notice> userNotices = noticeService.getUserNoticesByPage(page);
+		int totalCount=(int)noticeService.getUserNoticesCount(userId);
+		page.setTotalRecords(totalCount);
 		model.addAttribute("notices", userNotices);
+		model.addAttribute("page", page);
 		addSearchTypesDataToModel(model);
 		return "notice_list";
 	}

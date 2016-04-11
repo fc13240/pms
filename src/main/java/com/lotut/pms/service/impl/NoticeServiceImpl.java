@@ -17,6 +17,7 @@ import com.lotut.pms.domain.NoticePaperApplyType;
 import com.lotut.pms.domain.NoticeProcessStatus;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.service.NoticeService;
 import com.lotut.pms.service.utils.NoticeXmlParser;
@@ -35,7 +36,18 @@ public class NoticeServiceImpl implements NoticeService {
 		this.patentDao = patentDao;
 		this.sharePatentDao = sharePatentDao;
 	}
+	
+	@Override
+	public long getUserNoticesCount(int userId) {
+		return noticeDao.getUserNoticesCount(userId);
+	}
 
+
+	@Override
+	public List<Notice> getUserNoticesByPage(Page page) {
+		return noticeDao.getUserNoticesByPage(page);
+	}
+	
 	@Override
 	public List<Notice> getUserNotices(int userId) {
 		return noticeDao.getUserNotices(userId);
@@ -156,5 +168,8 @@ public class NoticeServiceImpl implements NoticeService {
 		userPatents.add(userPatentMap);
 		sharePatentDao.insertUserPatents(userPatents);
 	}
+
+
+	
 	
 }
