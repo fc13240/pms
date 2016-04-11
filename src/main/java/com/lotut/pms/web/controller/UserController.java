@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.UserService;
+import com.lotut.pms.util.PrincipalUtils;
 
 @Controller
 @RequestMapping(path="/user")
@@ -57,6 +59,15 @@ public class UserController {
 		}
 		
 		return "changePassword_form";
+	}
+	
+	@RequestMapping(path="/detail", method=RequestMethod.GET)
+	public String getUserDetail(Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		User user = userService.getUserDetail(userId);
+		model.addAttribute("user", user);
+		
+		return "user_detail";
 	}
 
 	@RequestMapping(path="/login", method=RequestMethod.POST)

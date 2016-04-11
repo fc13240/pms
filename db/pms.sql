@@ -224,6 +224,49 @@ create table if not exists notices (
 	constraint fk_notice_paper_apply_type foreign key idx_fk_notice_paper_apply_type (paper_apply_type) references notice_paper_apply_types(notice_paper_apply_type_id)
 );
 
+create table provinces (
+	id int primary key,
+	name varchar(30) not null unique
+);
+
+create table cities (
+	id bigint primary key,
+	name varchar(30) not null,
+	province int not null,
+	constraint fk_cities_province foreign key(province) references provinces(id)
+);
+
+create table districts (
+	id bigint primary key,
+	name varchar(30) not null,
+	city bigint not null,
+	constraint fk_districts_city foreign key(city) references cities(id)
+);
+
+create table streets (
+	id bigint primary key,
+	name varchar(50) not null,
+	district bigint not null,
+	constraint fk_streets_district foreign key(district) references districts(id)
+);
+
+create table contact_addresses (
+	id int primary key auto_increment,
+	receiver varchar(50) not null,
+	province int not null,
+	city bigint not null,
+	district bigint not null,
+  	street bigint not null,
+  	detail_address varchar(100) not null,
+  	phone varchar(20),
+  	mobile varchar(20),
+ 	email varchar(50),
+	constraint fk_contact_addresses_province foreign key(province) references provinces(id),
+	constraint fk_contact_addresses_city foreign key(city) references cities(id),
+	constraint fk_contact_addresses_district foreign key(district) references districts(id),
+	constraint fk_contact_addresses_street foreign key(street) references streets(id)
+);
+
 	
 INSERT INTO friend_request_process_status (friend_request_process_status_id, friend_request_process_status_desc)
 VALUES

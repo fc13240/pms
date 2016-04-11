@@ -9,4 +9,6 @@ public interface UserMapper {
 	public User findByName(String username);
 	public void save(User user);
 	public void updatePassword(User user);
+	
+	public User getById(int userId);
 }

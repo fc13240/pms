@@ -8,6 +8,7 @@
 		<result property="username" column="username"/>
 		<result property="name" column="name"/>
 		<result property="email" column="email"/>
+		<result property="phone" column="phone"/>
 	</resultMap>
 	
 	<select id="getAllUsers" resultMap="UserResultMap">
@@ -26,4 +27,10 @@
 	<update id="updatePassword" parameterType="User">
 		update users set password=#{password} where user_id=#{userId}
 	</update>
+	
+	<select id="getById" resultMap="UserResultMap">
+		select username, name, email, phone
+		  from users
+		 where user_id = #{userId}
+	</select>
 </mapper>
