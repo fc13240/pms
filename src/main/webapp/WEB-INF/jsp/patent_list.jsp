@@ -308,7 +308,7 @@
                           <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;">	                                
 	                                <span class="input-group-btn" >
 										<a href="javascript:batchShare()"><button style="margin:8px;" type="button" class="btn btn-info btn-sm">批量分享</button></a>
-										<a href="javascript:batchFee()"><button type="button" class="btn btn-purple btn-sm">批量缴费</button></a>
+										<a href="javascript:batchGrabFees()"><button type="button" class="btn btn-purple btn-sm">批量缴费</button></a>
 									</span> 
 	                                                    
                           </div>
@@ -569,8 +569,7 @@
 		
 		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
 	}
-	
-	function batchFee() {
+	function batchGrabFees(){
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 		
 		if (!patentSelected) {
@@ -580,8 +579,22 @@
 			
 		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
 		
-		 window.open("<s:url value='/patent/showFriends.html'/>?patentNos=" + patentNos);
+		 window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patentNos);		
+		
 	}	
+	
+// 	function batchFee() {
+// 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		
+// 		if (!patentSelected) {
+// 			bootbox.alert('请选择专利');
+// 			return;
+// 		}
+			
+// 		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+		
+// 		 window.open("<s:url value='/fee/grabFees.html'/>?patent=" + patentNos);
+// 	}	
 	
 	function getFeeInfo(patentId) {
 		window.open("/fee/list?patentId=" + patentId);

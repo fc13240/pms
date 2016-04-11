@@ -23,8 +23,8 @@
 			<tr>
 				<th colspan="9">
 					<input type="checkbox" class="fee-check-item">
-					<span class="batch-share"><a href="javascript:updateMonitorStatus(true)">加入监控</a></span>
-					<span class="batch-share"><a href="javascript:updateMonitorStatus(false)">放弃监控</a></span>
+					<span class="batch-share"><a href="javascript:updateMonitorStatus(2)">加入监控</a></span>
+					<span class="batch-share"><a href="javascript:updateMonitorStatus(1)">放弃监控</a></span>
 				</th>		
 			</tr>
 			<tr>
@@ -41,7 +41,7 @@
 			<c:forEach items="${fees}" var="fee" varStatus="status">
 				<tr>
 					<td>
-						<span class="batch-share-item"><input type="checkbox" class="fee-check-item" feeId=""></span>
+						<span class="batch-share-item"><input type="checkbox" class="fee-check-item" feeId="${fee.feeId}"></span>
 						${status.index+1}
 					</td>
 					<td>${fee.patent.appNo}</td>
@@ -119,6 +119,22 @@
 			return;
 		}
 		
+		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'feeId');
+		
+		location.href = "<s:url value='/fee/changeMonitorStatus.html'/>?fees=" + fees + "&monitorStatus=" + status;
+	}	
+	
+	
+	
+	
+	function updateMonitorStatus111(status) {
+		var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
+		
+		if (!feeSelected) {
+			formutil.alertMessage('请选择应缴费记录');
+			return;
+		}
+
 		var feeIds = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'feeId');
 		var add_to_monitored = status ? "True": "False";
 		

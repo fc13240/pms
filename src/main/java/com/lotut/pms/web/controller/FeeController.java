@@ -34,6 +34,9 @@ public class FeeController {
 		this.feeService = feeService;
 	}
 
+	/*
+	 * 批量缴费
+	 */	
 	@RequestMapping(path="/batchGrabFees", method=RequestMethod.GET)
 	public String batchGrabFees(@RequestParam("patents")List<Long> patentIds, Model model) {
 		Map<String, List<?>> grabResultMap = feeService.batchGrabFees(patentIds);
@@ -41,6 +44,9 @@ public class FeeController {
 		return "batch_fee_list";
 	}	
 	
+	/*
+	 * 单个缴费
+	 */		
 	@RequestMapping(path="/grabFees", method=RequestMethod.GET)
 	public String grabFees(@RequestParam("patent")long patentId, Model model) {
 		Map<String, Object> grabResultMap = feeService.grabFees(patentId);
