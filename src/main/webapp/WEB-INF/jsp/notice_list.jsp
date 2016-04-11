@@ -245,36 +245,39 @@
                         	
 	                            <div class="widget-main">
 	                                <div>
-	                                专利类型
-	                                <select id="form-field-select-1" name="patentType">
+	                                通知类型
+	                                <select id="form-field-select-1" name="noticeType">
 	                                    <option value="">全部</option>
-										<c:forEach items="${allPatentTypes}" var="patentType">
-											<option value="<c:out value='${patentType.patentTypeId}'/>"><c:out value="${patentType.typeDescription}"/></option>
+	                                    
+	                                    <c:forEach items="${noticeTypes}" var="noticeType">
+						    				<option value="<c:out value='${noticeType.noticeTypeId}'/>"><c:out value="${noticeType.noticeTypeDescription}"/></option>
 										</c:forEach>
+									
 	                                </select>
 	                                
 	                                	
 	                                </div>
-	                                <div style="margin-top:10px;">专利状态
-	                                <select id="form-field-select-1" name="patentStatus">
+	                                <div style="margin-top:10px;">处理状态
+	                                <select id="form-field-select-1" name="noticeProcessStatus">
 	                                    <option value="">全部</option>
-									  	<c:forEach items="${allPatentStatus}" var="patentStatus">
-											<option value="<c:out value='${patentStatus.patentStatusId}'/>"><c:out value="${patentStatus.statusDescription}"/></option>
-										</c:forEach>
+
+	                                    <c:forEach items="${noticeProcessStatus}" var="processStatus">
+										<option value="<c:out value='${processStatus.processStatusId}'/>"><c:out value="${processStatus.processStatusDescription}"/></option>
+										</c:forEach>									 
 	                                </select>	
 
 	                                
 	                                </div>
 	                                <div style="margin-top:10px;">
 	                                    <div class="input-group">
-	                                    <div style="float:left;line-height: 32px;">申请日</div>
+	                                    <div style="float:left;line-height: 32px;">发文日</div>
 						                <div style="float:left;margin-left: 16px;" class="form-group" style="margin-left:15px;">
-							                <div style="float:left;"><input  type="text" class="form-control" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" onclick="javascript:$('#start_date_img').click()"></div> 
+							                <div style="float:left;"><input  type="text" class="form-control" id="startAppDateId" name="startDispatchDate" placeholder="发文日开始" value="" readonly="readonly" onclick="javascript:$('#start_date_img').click()"></div> 
 											<div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="start_date_img"> - </div>
 							                </div>	
 						                
 						                <div style="float:left;" class="form-group">
-							                <div style="float:left;"><input type="text" class="form-control" id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" onclick="javascript:$('#end_date_img').click()"> </div> 
+							                <div style="float:left;"><input type="text" class="form-control" id="endAppDateId" name="endDispatchDate" placeholder="发文日结束" value="" readonly="readonly" onclick="javascript:$('#end_date_img').click()"> </div> 
 											<div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img"></div>
 				 							</div>
 			 							<div style="clear:both;"></div>	
