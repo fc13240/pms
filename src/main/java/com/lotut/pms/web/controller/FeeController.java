@@ -55,7 +55,7 @@ public class FeeController {
 	}	
 
 	/*
-	 * 加入监控
+	 * 单个加入监控
 	 */
 	@RequestMapping(path="/changeMonitorStatus", method=RequestMethod.GET)
 	public String changeMonitorStatus(@RequestParam("fees")List<Long> feeIds, @RequestParam("monitorStatus")int monitorStatus,Model model) {
