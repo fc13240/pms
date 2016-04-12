@@ -8,10 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>好友列表1</title>
-	<link rel="stylesheet" media="screen" href="<s:url value='/static/css/bootstrap.min.css'/>" />
-	<link rel="stylesheet" media="screen" href="<s:url value='/static/css/jquery-ui.min.css'/>" />
-
+	<title>分享管理</title>
 
 <!-- bootstrap & fontawesome -->
 <link rel="stylesheet" href="<s:url value='/static/css/bootstrap.css'/>" />
@@ -71,14 +68,93 @@
     <!-- #section:basics/navbar.dropdown -->
     <div class="navbar-buttons navbar-header pull-right" role="navigation">
       <ul class="nav ace-nav">
-        <li class="purple"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <i class="ace-icon fa fa-bell icon-animated-bell"></i> <span class="badge badge-important">8</span> </a> </li>
-        <!-- #section:basics/navbar.user_menu -->
-        <li class="light-blue"> <a data-toggle="dropdown" href="#" class="dropdown-toggle"> <img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" /> <span class="user-info" style="line-height:35px;"> 欢迎,admin </span> <i class="ace-icon fa fa-caret-down"></i> </a>
-          <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-            <li> <a href="#"> <i class="ace-icon fa fa-power-off"></i> 退出 </a> </li>
-          </ul>
+        <li class="purple"> 
+        	<a data-toggle="dropdown" class="dropdown-toggle" href="#"> 
+        		<i class="ace-icon fa fa-bell icon-animated-bell"></i> 
+        		<span class="badge badge-important">8</span> 
+        	</a>
+			<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+				<li class="dropdown-header">
+					<i class="ace-icon fa fa-exclamation-triangle"></i>
+					8 条消息
+				</li>
+	
+				<li class="dropdown-content">
+					<ul class="dropdown-menu dropdown-navbar navbar-pink">
+						<li>
+							<a href="#">
+								<div class="clearfix">
+									<span class="pull-left">
+										<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
+										新的消息
+									</span>
+									<span class="pull-right badge badge-info">+4</span>
+								</div>
+							</a>
+						</li>
+		
+						<li>
+							<a href="#">
+								<div class="clearfix">
+									<span class="pull-left">
+										<i class="btn btn-xs btn-primary fa fa-user"></i>
+										好友请求
+									</span>
+									<span class="pull-right badge badge-success">+4</span>
+								</div>
+							</a>
+						</li>
+	
+					</ul>
+				</li>
+	
+				<li class="dropdown-footer">
+					<a href="#">
+						See all notifications
+						<i class="ace-icon fa fa-arrow-right"></i>
+					</a>
+				</li>
+			</ul>
+ 
         </li>
-        
+		<!-- #section:basics/navbar.user_menu -->
+		<li class="light-blue" style="z-index:9999;">
+			<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+				<img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" />
+			<span class="user-info">
+				<small>Welcome,</small>
+				Jason
+			</span>
+		
+			<i class="ace-icon fa fa-caret-down"></i>
+			</a>
+		
+				<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+				
+					<li>
+						<a href="<s:url value='/user/changePasswordForm.html'/>">
+							<i class="ace-icon fa fa-user"></i>
+							修改密码
+						</a>
+					</li>
+				
+					<li class="divider"></li>
+					<li>
+						<a href="javascript:$('#logoutForm').submit();">
+							<i class="ace-icon fa fa-power-off"></i>
+							退出
+						</a>
+					</li>
+						<form action="<s:url value='/user/logout.html'/>" method="post" id="logoutForm">
+						            <se:csrfInput/>
+									<input type="submit" style="display:none;" />
+						             
+						</form>								
+		
+					</ul>
+		</li>
+  
+
         <!-- /section:basics/navbar.user_menu -->
       </ul>
     </div>
@@ -96,9 +172,7 @@
 
 <!-- sidebar -->
     <div id="sidebar" class="sidebar                  responsive"> 
-      <script type="text/javascript">
-                        try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
-                    </script>
+     
       <div class="sidebar-shortcuts" id="sidebar-shortcuts">
         <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
           <button class="btn btn-success"> <i class="ace-icon fa fa-signal"></i> </button>
@@ -117,12 +191,12 @@
       <ul class="nav nav-list">
         <li> <a href="<s:url value='/main.html'/>"> <i class="menu-icon fa fa-tachometer"></i> <span class="menu-text"> 控制台 </span> </a> <b class="arrow"></b> </li>
         <li class=""> <a href="<s:url value='/patent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-desktop"></i> <span class="menu-text"> 我的专利 </span> </a> </li>
-        <li class=""> <a href="<s:url value='/notice/list.html'/>"> <i class="menu-icon fa fa-list"></i> <span class="menu-text"> 我的通知书 </span> </a> </li>
-        <li class=""> <a href="<s:url value='/friend/list.html'/>"> <i class="menu-icon fa fa-pencil-square-o"></i> <span class="menu-text"> 好友管理 </span> </a> </li>
-        <li class="active"> <a href="<s:url value='/sharePatent/list.html'/>"> <i class="menu-icon fa fa-list-alt"></i> <span class="menu-text"> 分享管理 </span> </a> <b class="arrow"></b> </li>
+        <li class=""> <a href="<s:url value='/notice/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-list"></i> <span class="menu-text"> 我的通知书 </span> </a> </li>
+        <li class=""> <a href="<s:url value='/friend/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-pencil-square-o"></i> <span class="menu-text"> 好友管理 </span> </a> </li>
+        <li class="active"> <a href="<s:url value='/sharePatent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-list-alt"></i> <span class="menu-text"> 分享管理 </span> </a> <b class="arrow"></b> </li>
         <li class=""> <a href="<s:url value='/patent/showUploadForm.html'/>"> <i class="menu-icon fa fa-calendar"></i> <span class="menu-text"> 添加专利 </span> </a> <b class="arrow"></b> </li>
         <li class=""> <a href="<s:url value='/notice/showUploadForm.html'/>"> <i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 添加通知书 </span> </a> <b class="arrow"></b> </li>
-        <li class=""> <a href="<s:url value='/fee/monitoredFeeList.html'/>"><i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 官费监控 </span> </a> </li>
+        <li class=""> <a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>"><i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 官费监控 </span> </a> </li>
       </ul>
       <!-- /.nav-list --> 
       
@@ -151,8 +225,7 @@
             </div>
     <!-- /section:basics/content.breadcrumbs -->  
     		<div class="page-content"> 
-
-              
+			<div  class="ace" style="height:30px;width:500px;"></div>
                 <div class="row" style="margin-top:30px;">
                     <div class="col-xs-12"> 
                       <!-- PAGE CONTENT BEGINS -->
@@ -209,9 +282,6 @@
                   <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
                 </a>
             </div>
-            	      
-        
-        
         </div>
 	</div>        
 
@@ -221,56 +291,26 @@
 			window.jQuery || document.write("<script src='<s:url value='/static/js/jquery.js'/>'>"+"<"+"/script>");
 		</script>
 
-		<!-- <![endif]--> 
+<!-- <![endif]--> 
 
-<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/script>");
-</script>
-<![endif]--> 
 <script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='<s:url value='/static/js/jquery.mobile.custom.js'/>'>"+"<"+"/script>");
 		</script> 
 <script src="<s:url value='/static/js/bootstrap.js'/>"></script> 
 
-<!-- page specific plugin scripts --> 
-<script src="<s:url value='/static/js/dataTables/jquery.dataTables.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/jquery.dataTables.bootstrap.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/dataTables.buttons.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.flash.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.html5.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.print.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.colVis.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/select/dataTables.select.js'/>"></script> 
 
-<!-- ace scripts --> 
-<script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.colorpicker.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.fileinput.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.typeahead.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.wysiwyg.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.spinner.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.treeview.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.wizard.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.aside.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.ajax-content.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.touch-drag.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.sidebar.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.sidebar-scroll-1.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.submenu-hover.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.widget-box.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.settings.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.settings-rtl.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.settings-skin.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.widget-on-reload.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.searchbox-autocomplete.js'/>"></script> 
 
+
+
+<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
+<script src="<s:url value='/static/js/formutil.js'/>"></script>
+<script src="<s:url value='/static/js/jquery-ui.min.js'/>"></script>
+
+<script src="<s:url value='/static/js/bootbox.js'/>"></script>
 <!-- inline scripts related to this page --> 
 <script type="text/javascript">
 			jQuery(function($) {
 				//initiate dataTables plugin
-
 				//And for the first simple table, which doesn't have TableTools or dataTables
 				//select/deselect all rows according to table header checkbox
 				var active_class = 'active';
@@ -314,13 +354,6 @@
 			
 			})
 		</script> 
-<script src="<s:url value='/static/js/jquery-1.11.3.js'/>"></script>
-<script src="<s:url value='/static/js/bootstrap.min.js'/>"></script>
-<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
-<script src="<s:url value='/static/js/formutil.js'/>"></script>
-<script src="<s:url value='/static/js/jquery-ui.min.js'/>"></script>
-
-<script src="<s:url value='/static/js/bootbox.js'/>"></script>
 
 <script type="text/javascript">
 	$(function(){
@@ -341,8 +374,7 @@
 		
 		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
 	}
-	
-	function batchFee() {
+	function batchGrabFees(){
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 		
 		if (!patentSelected) {
@@ -350,10 +382,24 @@
 			return;
 		}
 			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patentId');
+		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
 		
-		 window.open("<s:url value='/patent/showFriends.html'/>?patentNos=" + patentNos);
+		 window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patentNos);		
+		
 	}	
+	
+// 	function batchFee() {
+// 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		
+// 		if (!patentSelected) {
+// 			bootbox.alert('请选择专利');
+// 			return;
+// 		}
+			
+// 		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+		
+// 		 window.open("<s:url value='/fee/grabFees.html'/>?patent=" + patentNos);
+// 	}	
 	
 	function getFeeInfo(patentId) {
 		window.open("/fee/list?patentId=" + patentId);
@@ -407,21 +453,72 @@
 			}
 		  }
 		});
-	}	
+	}
 	
-</script>
-<!-- the following scripts are used in demo only for onpage help and you don't need them -->
-<link rel="stylesheet" href="<s:url value='/static/css/ace.onpage-help.css'/>" />
-<link rel="stylesheet" href="<s:url value='/static/docs/assets/js/themes/sunburst.css'/>" />
-<script type="text/javascript"> ace.vars['base'] = '..'; </script> 
-<script src="<s:url value='/static/js/ace/elements.onpage-help.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.onpage-help.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/rainbow.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/generic.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/html.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/css.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/javascript.js'/>"></script>
-<script src="<s:url value='/static/js/date-time/WdatePicker.js'/>"></script>
+	function gotoPage() {
+		var patentType = $("#patentTypeId").val();
+		var patentStatus = $("#patentStatusId").val();
+		var startAppDate = $("#startAppDateId").val();
+		var endAppDate = $("#endAppDateId").val();
+		var keyword = $("#keywordId").val();
+		var pageNo = document.getElementById("page.pageNo").value;
+		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
+		
+		if (isSearch()) {
+ 				//url = "<s:url value='/patent/search.html'/>?page.currentPage="+nextPage +"&"+${searchCondition};
+				url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		}
+		
+		location.href = url
+		
+	}
+	
+	function isSearch() {
+		var patentType = $("#patentTypeId").val();
+		var patentStatus = $("#patentStatusId").val();
+		var startAppDate = $("#startAppDateId").val();
+		var endAppDate = $("#endAppDateId").val();
+		var keyword = $("#keywordId").val();
+		
+		if (!isEmpty(patentType) || !isEmpty(patentStatus) || !isEmpty(startAppDate) || !isEmpty(endAppDate) || !isEmpty(keyword)) {
+			return true;
+		}
+		
+		return false;
+	}
 
+	function isEmpty(value) {
+		if (value == null || value == "undefined" || value == "") {
+			return true;
+		}
+		
+		return false;
+	}
+</script>
+
+
+
+<!-- ace scripts --> 
+<script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.colorpicker.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.fileinput.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.typeahead.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.wysiwyg.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.spinner.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.treeview.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.wizard.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.aside.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.ajax-content.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.touch-drag.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.sidebar.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.sidebar-scroll-1.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.submenu-hover.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.widget-box.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.settings.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.settings-rtl.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.settings-skin.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.widget-on-reload.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.searchbox-autocomplete.js'/>"></script> 
 </body>
 </html>

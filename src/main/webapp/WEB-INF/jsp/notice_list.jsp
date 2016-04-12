@@ -118,7 +118,7 @@
  
         </li>
 		<!-- #section:basics/navbar.user_menu -->
-		<li class="light-blue">
+		<li class="light-blue" style="z-index:9999;">
 			<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 				<img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" />
 			<span class="user-info">
@@ -310,7 +310,7 @@
                           <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;">	                                
 	                                <span class="input-group-btn" >
 										<a href="javascript:batchShare()"><button style="margin:8px;" type="button" class="btn btn-info btn-sm">批量分享</button></a>
-										<a href="javascript:batchFee()"><button type="button" class="btn btn-purple btn-sm">批量缴费</button></a>
+										<a href="javascript:batchGrabFees()"><button type="button" class="btn btn-purple btn-sm">批量缴费</button></a>
 										<a href="javascript:batchProcessNotice(2)"><button style="margin:8px;" type="button" class="btn btn-success btn-sm">置为处理中</button></a>
 										<a href="javascript:batchProcessNotice(3)"><button type="button" class="btn btn-danger btn-sm">置为已处理</button></a>
 									</span> 
@@ -737,6 +737,20 @@ function batchProcessNotice(processStatus) {
 		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
 	}
 	
+	
+	function batchGrabFees(){
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+		
+		if (!patentSelected) {
+			bootbox.alert('请选择专利');
+			return;
+		}
+			
+		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
+		
+		 window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patentNos);		
+		
+	}	
 	function batchFee() {
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
 		
