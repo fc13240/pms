@@ -381,7 +381,7 @@
 	
 	
 	
-	function updateMonitorStatus111(status) {
+	function updateMonitorStatus(status) {
 		var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
 		
 		if (!feeSelected) {
@@ -389,16 +389,9 @@
 			return;
 		}
 
-		var feeIds = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'feeId');
-		var add_to_monitored = status ? "True": "False";
+		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'feeId');
 		
-		$.ajax({
-			//url: "{% url "fee:update_monitor_status" %}?feeIds=" + feeIds + "&monitorStatus=" + add_to_monitored, 
-			type: 'get', 
-			success: function(data) {
-				//location.href = "{% url "fee:batch_list_without_update" %}?patentIds=" + "{ request.GET.patentIds }";
-			}
-		});			
+		location.href = "<s:url value='/fee/batchChangeMonitorStatus.html'/>?fees=" + fees + "&monitorStatus=" + status;
 	}
 	
 </script>
