@@ -232,7 +232,7 @@
 				
 								<form action="<s:url value='/patent/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">
 									<!-- #section:elements.form -->
-
+									<se:csrfInput/>
 									<hr />
 									<div class="row">
 										<div class="col-sm-4">
