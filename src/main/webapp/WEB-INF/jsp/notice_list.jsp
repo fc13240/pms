@@ -358,7 +358,7 @@
 									
 									</td>
 									<td width="100">
-										<select class="form-control" onchange="javascript:changePaperApplyType('<c:out value="${notice.paperApplyType.paperTypeId}"/>', this)">
+										<select class="form-control" onchange="javascript:changePaperApplyType('${notice.noticeId}', this)">
 											<c:forEach items="${paperApplyTypes}" var="paperApplyType">
 												<option value="<c:out value='${paperApplyType.paperTypeId}'/>" <c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>>
 													<c:out value="${paperApplyType.paperTypeDescription}"/>
@@ -580,7 +580,7 @@ function processNotice(notice, selectElement) {
 	}		
 
 	$.ajax({
-		url: "<s:url value='/notice/processNotice.html'/>?notices=" + notice + "&processStatus=" + processStatus,
+		url: "<s:url value='/notice/processNotice.html'/>?notice=" + notice + "&processStatus=" + processStatus,
 		type: 'get', 
 		success: function(data) {
 			$("<div>操作成功</div>").dialog({
