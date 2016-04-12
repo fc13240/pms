@@ -233,7 +233,7 @@
                 
                             <span class="widget-toolbar" style="border:none;padding:0px;">
                             <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-                            <input type="text" id="form-field-1" style="height:45px;width:450px;" name="keyword" placeholder="申请号/名称/申请人/内部编码" value="" /><button class="btn btn-info" type="submit" style="height:45px;">搜索</button>
+                            <input type="text" id="form-field-1" style="height:45px;width:450px;" name="keyword" id="keywordId" placeholder="申请号/名称/申请人/内部编码" value="" /><button class="btn btn-info" type="submit" style="height:45px;">搜索</button>
                             
                                 <a href="#" data-action="collapse" style="margin-left:10px;">
                                     <button type="button" class="btn btn-sm btn-success">高级搜索</button>
@@ -246,7 +246,7 @@
 	                            <div class="widget-main">
 	                                <div>
 	                                通知类型
-	                                <select id="form-field-select-1" name="noticeType">
+	                                <select id="noticeTypeId" name="noticeType" >
 	                                    <option value="">全部</option>
 	                                    
 	                                    <c:forEach items="${noticeTypes}" var="noticeType">
@@ -258,7 +258,7 @@
 	                                	
 	                                </div>
 	                                <div style="margin-top:10px;">处理状态
-	                                <select id="form-field-select-1" name="noticeProcessStatus">
+	                                <select id="noticeProcessStatusId" name="noticeProcessStatus" >
 	                                    <option value="">全部</option>
 
 	                                    <c:forEach items="${noticeProcessStatus}" var="processStatus">
@@ -427,7 +427,7 @@
 															<a href="?currentPage=${page.totalPages}">尾页</a>
 														</c:otherwise>
 													</c:choose>
-											<input type="text" id="page.pageNo" style="width:50px;" name="page.nextPage"/>
+											<input type="text" id="page.pageNo" style="width:50px;" name="currentPage"/>
 												<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>	
 											</div>
 											</form:form>
@@ -465,7 +465,7 @@
 														</c:otherwise>
 													</c:choose>
 										 	<!-- 分页功能 End -->
-											<input type="text" id="page.pageNo" style="width:50px;" name="page.nextPage"/>
+											<input type="text" id="page.pageNo" style="width:50px;" name="currentPage"/>
 												<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
 											</div>
 											</form:form>
@@ -735,30 +735,30 @@ function batchProcessNotice(processStatus) {
 	}
 	
 	function gotoPage() {
-		var patentType = $("#patentTypeId").val();
-		var patentStatus = $("#patentStatusId").val();
-		var startAppDate = $("#startAppDateId").val();
-		var endAppDate = $("#endAppDateId").val();
+		var noticeType = $("#noticeTypeId").val();
+		var noticeProcessStatus = $("#noticeProcessStatusId").val();
+		var startDispatchDate = $("#startAppDateId").val();
+		var endDispatchDate = $("#endAppDateId").val();
 		var keyword = $("#keywordId").val();
 		var pageNo = document.getElementById("page.pageNo").value;
-		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
+		var url = "<s:url value='/notice/list.html'/>?currentPage=" + pageNo;
 		
 		if (isSearch()) {
  				//url = "<s:url value='/patent/search.html'/>?page.currentPage="+nextPage +"&"+${searchCondition};
-				url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+				url = "<s:url value='/notice/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 		}
 		
 		location.href = url
 	}
 	
 	function isSearch() {
-		var patentType = $("#patentTypeId").val();
-		var patentStatus = $("#patentStatusId").val();
-		var startAppDate = $("#startAppDateId").val();
-		var endAppDate = $("#endAppDateId").val();
+		var noticeType = $("#noticeTypeId").val();
+		var noticeProcessStatus = $("#noticeProcessStatusId").val();
+		var startDispatchDate = $("#startAppDateId").val();
+		var endDispatchDate = $("#endAppDateId").val();
 		var keyword = $("#keywordId").val();
 		
-		if (!isEmpty(patentType) || !isEmpty(patentStatus) || !isEmpty(startAppDate) || !isEmpty(endAppDate) || !isEmpty(keyword)) {
+		if (!isEmpty(noticeType) || !isEmpty(noticeProcessStatus) || !isEmpty(startDispatchDate) || !isEmpty(endDispatchDate) || !isEmpty(keywordId)) {
 			return true;
 		}
 		

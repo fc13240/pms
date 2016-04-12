@@ -398,7 +398,7 @@
 											</c:choose>
 								 	<!-- 分页功能 End -->
 								
-									<input type="text" id="page.pageNo" style="width:50px;" name="page.nextPage"/>
+									<input type="text" id="page.pageNo" style="width:50px;" name="currentPage"/>
 										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
 								
 											
@@ -439,7 +439,7 @@
 											</c:choose>
 								 	<!-- 分页功能 End -->
 								
-									<input type="text" id="page.pageNo" style="width:50px;" name="page.nextPage"/>
+									<input type="text" id="page.pageNo" style="width:50px;" name="currentPage"/>
 										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
 								
 											
