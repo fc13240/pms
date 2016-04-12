@@ -360,17 +360,18 @@ function addDefaultOption(selectElem) {
 	selectElem.append("<option value=''>请选择</option>");
 }
 
-function resetSelect(selectElem) {
-	selectElem.empty();
-	addDefaultOption(selectElem);
+function resetSelect() {
+	for (var i = 0; i < arguments.length; i++) {
+		var selectObj = arguments[i];
+		selectObj.empty();
+		addDefaultOption(selectObj);
+	}
 }
 
 function loadCities() {
 	var province = $("#province").val();
 	
-	resetSelect($("#city"));
-	resetSelect($("#district"));
-	resetSelect($("#street"));
+	resetSelect($("#city"), $("#district"), $("#street"));
 	
 	if (province != "") {
 		$.ajax({
@@ -393,8 +394,7 @@ function loadCities() {
 function loadDistricts() {
 	var city = $("#city").val();
 
-	resetSelect($("#district"));
-	resetSelect($("#street"));
+	resetSelect($("#district"), $("#street"));
 	
 	if (city != "") {
 		$.ajax({
