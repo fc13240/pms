@@ -229,9 +229,10 @@
                 <!-- /.page-header -->
                 <div class="row" style="margin-top:30px;">
                     <div class="col-xs-12"> 
-								<form class="form-horizontal" role="form">
+				
+								<form action="<s:url value='/patent/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">
 									<!-- #section:elements.form -->
-
+									<se:csrfInput/>
 									<hr />
 									<div class="row">
 										<div class="col-sm-4">
@@ -256,7 +257,7 @@
 
 														<div class="form-group">
 															<div class="col-xs-12">
-																<input multiple="" type="file" style="display:none;" id="id-input-file-3" />
+																<input multiple="" type="file" name="patentFile" style="display:none;" id="id-input-file-3" />
 
 																<!-- /section:custom/file-input -->
 															</div>
@@ -264,9 +265,11 @@
 
 														<!-- #section:custom/file-input.filter -->
 														<label>
-															<input type="checkbox" name="file-format" id="id-file-format" class="ace" />
-															<span class="lbl"> 只能上传zip压缩包</span>
+															
+															<span class="lbl"> （注：只能上传zip压缩包）</span>
 														</label>
+														<button class="btn btn-info" type="submit" style="height:45px;width：100px">上传</button>
+														
 
 														<!-- /section:custom/file-input.filter -->
 													</div>

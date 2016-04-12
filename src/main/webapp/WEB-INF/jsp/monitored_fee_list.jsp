@@ -8,10 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>官费监控</title>
-	<link rel="stylesheet" media="screen" href="<s:url value='/static/css/bootstrap.min.css'/>" />
-	<link rel="stylesheet" media="screen" href="<s:url value='/static/css/jquery-ui.min.css'/>" />
-
+	<title>官非监控</title>
 
 <!-- bootstrap & fontawesome -->
 <link rel="stylesheet" href="<s:url value='/static/css/bootstrap.css'/>" />
@@ -71,14 +68,93 @@
     <!-- #section:basics/navbar.dropdown -->
     <div class="navbar-buttons navbar-header pull-right" role="navigation">
       <ul class="nav ace-nav">
-        <li class="purple"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <i class="ace-icon fa fa-bell icon-animated-bell"></i> <span class="badge badge-important">8</span> </a> </li>
-        <!-- #section:basics/navbar.user_menu -->
-        <li class="light-blue"> <a data-toggle="dropdown" href="#" class="dropdown-toggle"> <img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" /> <span class="user-info" style="line-height:35px;"> 欢迎,admin </span> <i class="ace-icon fa fa-caret-down"></i> </a>
-          <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-            <li> <a href="#"> <i class="ace-icon fa fa-power-off"></i> 退出 </a> </li>
-          </ul>
+        <li class="purple"> 
+        	<a data-toggle="dropdown" class="dropdown-toggle" href="#"> 
+        		<i class="ace-icon fa fa-bell icon-animated-bell"></i> 
+        		<span class="badge badge-important">8</span> 
+        	</a>
+			<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+				<li class="dropdown-header">
+					<i class="ace-icon fa fa-exclamation-triangle"></i>
+					8 条消息
+				</li>
+	
+				<li class="dropdown-content">
+					<ul class="dropdown-menu dropdown-navbar navbar-pink">
+						<li>
+							<a href="#">
+								<div class="clearfix">
+									<span class="pull-left">
+										<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
+										新的消息
+									</span>
+									<span class="pull-right badge badge-info">+4</span>
+								</div>
+							</a>
+						</li>
+		
+						<li>
+							<a href="#">
+								<div class="clearfix">
+									<span class="pull-left">
+										<i class="btn btn-xs btn-primary fa fa-user"></i>
+										好友请求
+									</span>
+									<span class="pull-right badge badge-success">+4</span>
+								</div>
+							</a>
+						</li>
+	
+					</ul>
+				</li>
+	
+				<li class="dropdown-footer">
+					<a href="#">
+						See all notifications
+						<i class="ace-icon fa fa-arrow-right"></i>
+					</a>
+				</li>
+			</ul>
+ 
         </li>
-        
+		<!-- #section:basics/navbar.user_menu -->
+		<li class="light-blue">
+			<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+				<img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" />
+			<span class="user-info">
+				<small>Welcome,</small>
+				Jason
+			</span>
+		
+			<i class="ace-icon fa fa-caret-down"></i>
+			</a>
+		
+				<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+				
+					<li>
+						<a href="<s:url value='/user/changePasswordForm.html'/>">
+							<i class="ace-icon fa fa-user"></i>
+							修改密码
+						</a>
+					</li>
+				
+					<li class="divider"></li>
+					<li>
+						<a href="javascript:$('#logoutForm').submit();">
+							<i class="ace-icon fa fa-power-off"></i>
+							退出
+						</a>
+					</li>
+						<form action="<s:url value='/user/logout.html'/>" method="post" id="logoutForm">
+						            <se:csrfInput/>
+									<input type="submit" style="display:none;" />
+						             
+						</form>								
+		
+					</ul>
+		</li>
+  
+
         <!-- /section:basics/navbar.user_menu -->
       </ul>
     </div>
@@ -90,15 +166,10 @@
 
 <!-- /section:basics/navbar.layout -->
 <div class="main-container" id="main-container">
-<script type="text/javascript">
-				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-			</script> 
 
 <!-- sidebar -->
     <div id="sidebar" class="sidebar                  responsive"> 
-      <script type="text/javascript">
-                        try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
-                    </script>
+     
       <div class="sidebar-shortcuts" id="sidebar-shortcuts">
         <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
           <button class="btn btn-success"> <i class="ace-icon fa fa-signal"></i> </button>
@@ -116,13 +187,13 @@
       
       <ul class="nav nav-list">
         <li> <a href="<s:url value='/main.html'/>"> <i class="menu-icon fa fa-tachometer"></i> <span class="menu-text"> 控制台 </span> </a> <b class="arrow"></b> </li>
-        <li class="active"> <a href="<s:url value='/patent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-desktop"></i> <span class="menu-text"> 我的专利 </span> </a> </li>
-        <li class=""> <a href="<s:url value='/notice/list.html'/>"> <i class="menu-icon fa fa-list"></i> <span class="menu-text"> 我的通知书 </span> </a> </li>
-        <li class=""> <a href="<s:url value='/friend/list.html'/>"> <i class="menu-icon fa fa-pencil-square-o"></i> <span class="menu-text"> 好友管理 </span> </a> </li>
-        <li class=""> <a href="<s:url value='/sharePatent/list.html'/>"> <i class="menu-icon fa fa-list-alt"></i> <span class="menu-text"> 分享管理 </span> </a> <b class="arrow"></b> </li>
+        <li class=""> <a href="<s:url value='/patent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-desktop"></i> <span class="menu-text"> 我的专利 </span> </a> </li>
+        <li class=""> <a href="<s:url value='/notice/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-list"></i> <span class="menu-text"> 我的通知书 </span> </a> </li>
+        <li class=""> <a href="<s:url value='/friend/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-pencil-square-o"></i> <span class="menu-text"> 好友管理 </span> </a> </li>
+        <li class=""> <a href="<s:url value='/sharePatent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-list-alt"></i> <span class="menu-text"> 分享管理 </span> </a> <b class="arrow"></b> </li>
         <li class=""> <a href="<s:url value='/patent/showUploadForm.html'/>"> <i class="menu-icon fa fa-calendar"></i> <span class="menu-text"> 添加专利 </span> </a> <b class="arrow"></b> </li>
         <li class=""> <a href="<s:url value='/notice/showUploadForm.html'/>"> <i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 添加通知书 </span> </a> <b class="arrow"></b> </li>
-        <li class=""> <a href="<s:url value='/fee/monitoredFeeList.html'/>"><i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 官费监控 </span> </a> </li>
+        <li class="active"> <a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>"><i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 官费监控 </span> </a> </li>
       </ul>
       <!-- /.nav-list --> 
       
@@ -152,79 +223,6 @@
     <!-- /section:basics/content.breadcrumbs -->  
     		<div class="page-content"> 
 
-                <div class="search-header" style="margin:0 auto;width:610px;">
-                <form action="<s:url value='/patent/search.html'/>" method="get">
-                    <div class="widget-box collapsed" style="border:none;">
-                        <div class="widget-header" style="background:none;padding:0px;border:none; margin-top:30px;">
-                
-                            <span class="widget-toolbar" style="border:none;padding:0px;">
-                            <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-                            <input type="text" id="form-field-1" style="height:45px;width:450px;" name="keyword" placeholder="申请号/名称/申请人/内部编码" value="" /><button class="btn btn-info" type="submit" style="height:45px;">搜索</button>
-                            
-                                <a href="#" data-action="collapse" style="margin-left:10px;">
-                                    <button type="button" class="btn btn-sm btn-success">高级搜索</button>
-                                    <i class="ace-icon fa fa-chevron-up" style="display:none;"></i>
-                                </a>
-                            </span>
-                        </div>
-                        <div class="widget-body" style="display: none;border-left:1px solid #CCC;border-right:1px solid #CCC;border-bottom:1px solid #CCC;boder-top:none;width:512px;margin-left:5px;">
-                        	
-	                            <div class="widget-main">
-	                                <div>
-	                                专利类型
-	                                <select id="form-field-select-1" name="patentType">
-	                                    <option value="">全部</option>
-										<c:forEach items="${allPatentTypes}" var="patentType">
-											<option value="<c:out value='${patentType.patentTypeId}'/>"><c:out value="${patentType.typeDescription}"/></option>
-										</c:forEach>
-	                                </select>
-	                                
-	                                	
-	                                </div>
-	                                <div style="margin-top:10px;">专利状态
-	                                <select id="form-field-select-1" name="patentStatus">
-	                                    <option value="">全部</option>
-									  	<c:forEach items="${allPatentStatus}" var="patentStatus">
-											<option value="<c:out value='${patentStatus.patentStatusId}'/>"><c:out value="${patentStatus.statusDescription}"/></option>
-										</c:forEach>
-	                                </select>	
-
-	                                
-	                                </div>
-	                                <div style="margin-top:10px;">
-	                                    <div class="input-group">
-	                                    <div style="float:left;line-height: 32px;">申请日</div>
-						                <div style="float:left;margin-left: 16px;" class="form-group" style="margin-left:15px;">
-							                <div style="float:left;"><input  type="text" class="form-control" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" onclick="javascript:$('#start_date_img').click()"></div> 
-											<div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="start_date_img"> - </div>
-							                </div>	
-						                
-						                <div style="float:left;" class="form-group">
-							                <div style="float:left;"><input type="text" class="form-control" id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" onclick="javascript:$('#end_date_img').click()"> </div> 
-											<div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img"></div>
-				 							</div>
-			 							<div style="clear:both;"></div>	
-						                <style>
-						            
-	                
-							             /*.simple_bag th{background:#f5fafe;}*/
-							                .ui-jqgrid-view {margin-top: 30px;}
-							                #grid-table_cb{border-left: 1px solid #E1E1E1;}
-							                </style>			
-	                                    </div>
-	                                </div>
-	                                <div style="width:60px;margin:0 auto;">
-	                                <span class="input-group-btn">
-										<button type="submit" class="btn btn-purple btn-sm">搜索</button>
-									</span>
-	                                </div>
-	                            </div>
-	                    	        
-                        </div>
-                    </div>
-                </div>
-                </form>
-                <!-- /.page-header -->
                 <div class="row" style="margin-top:30px;">
                     <div class="col-xs-12"> 
                       <!-- PAGE CONTENT BEGINS -->
@@ -287,6 +285,8 @@
                       
                     </div>
                 </div>
+                
+
                 <div class="footer">
                   <div class="footer-inner">
                     <!-- #section:basics/footer -->
@@ -308,9 +308,6 @@
                   <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
                 </a>
             </div>
-            	      
-        
-        
         </div>
 	</div>        
 
@@ -320,56 +317,26 @@
 			window.jQuery || document.write("<script src='<s:url value='/static/js/jquery.js'/>'>"+"<"+"/script>");
 		</script>
 
-		<!-- <![endif]--> 
+<!-- <![endif]--> 
 
-<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/script>");
-</script>
-<![endif]--> 
 <script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='<s:url value='/static/js/jquery.mobile.custom.js'/>'>"+"<"+"/script>");
 		</script> 
 <script src="<s:url value='/static/js/bootstrap.js'/>"></script> 
 
-<!-- page specific plugin scripts --> 
-<script src="<s:url value='/static/js/dataTables/jquery.dataTables.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/jquery.dataTables.bootstrap.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/dataTables.buttons.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.flash.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.html5.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.print.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/buttons/buttons.colVis.js'/>"></script> 
-<script src="<s:url value='/static/js/dataTables/extensions/select/dataTables.select.js'/>"></script> 
 
-<!-- ace scripts --> 
-<script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.colorpicker.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.fileinput.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.typeahead.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.wysiwyg.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.spinner.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.treeview.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.wizard.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/elements.aside.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.ajax-content.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.touch-drag.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.sidebar.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.sidebar-scroll-1.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.submenu-hover.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.widget-box.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.settings.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.settings-rtl.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.settings-skin.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.widget-on-reload.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.searchbox-autocomplete.js'/>"></script> 
 
+
+
+<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
+<script src="<s:url value='/static/js/formutil.js'/>"></script>
+<script src="<s:url value='/static/js/jquery-ui.min.js'/>"></script>
+
+<script src="<s:url value='/static/js/bootbox.js'/>"></script>
 <!-- inline scripts related to this page --> 
 <script type="text/javascript">
 			jQuery(function($) {
 				//initiate dataTables plugin
-
 				//And for the first simple table, which doesn't have TableTools or dataTables
 				//select/deselect all rows according to table header checkbox
 				var active_class = 'active';
@@ -413,13 +380,6 @@
 			
 			})
 		</script> 
-<script src="<s:url value='/static/js/jquery-1.11.3.js'/>"></script>
-<script src="<s:url value='/static/js/bootstrap.min.js'/>"></script>
-<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
-<script src="<s:url value='/static/js/formutil.js'/>"></script>
-<script src="<s:url value='/static/js/jquery-ui.min.js'/>"></script>
-
-<script src="<s:url value='/static/js/bootbox.js'/>"></script>
 
 <script type="text/javascript">
 	$(function(){
@@ -440,8 +400,7 @@
 		
 		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
 	}
-	
-	function batchFee() {
+	function batchGrabFees(){
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 		
 		if (!patentSelected) {
@@ -449,10 +408,24 @@
 			return;
 		}
 			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patentId');
+		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
 		
-		 window.open("<s:url value='/patent/showFriends.html'/>?patentNos=" + patentNos);
+		 window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patentNos);		
+		
 	}	
+	
+// 	function batchFee() {
+// 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		
+// 		if (!patentSelected) {
+// 			bootbox.alert('请选择专利');
+// 			return;
+// 		}
+			
+// 		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+		
+// 		 window.open("<s:url value='/fee/grabFees.html'/>?patent=" + patentNos);
+// 	}	
 	
 	function getFeeInfo(patentId) {
 		window.open("/fee/list?patentId=" + patentId);
@@ -506,41 +479,71 @@
 			}
 		  }
 		});
-	}	
+	}
 	
-	//CS:deleteFees
-	function deleteFees() {
-		var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
+	function gotoPage() {
+		var patentType = $("#patentTypeId").val();
+		var patentStatus = $("#patentStatusId").val();
+		var startAppDate = $("#startAppDateId").val();
+		var endAppDate = $("#endAppDateId").val();
+		var keyword = $("#keywordId").val();
+		var pageNo = document.getElementById("page.pageNo").value;
+		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
 		
-		if (!feeSelected) {
-			formutil.alertMessage('请选择要删除的费用记录');
-			return;
-		}		
+		if (isSearch()) {
+ 				//url = "<s:url value='/patent/search.html'/>?page.currentPage="+nextPage +"&"+${searchCondition};
+				url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		}
 		
-		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'fee');
-		
-			$.ajax({
-				url: "<s:url value='/fee/deleteFees.html'/>?fees=" + fees, 
-				type: 'get', 
-				success: function(data) {
-					location.reload();
-				}
-			});
-		} 
+		location.href = url
+	}
 	
-</script>
-<!-- the following scripts are used in demo only for onpage help and you don't need them -->
-<link rel="stylesheet" href="<s:url value='/static/css/ace.onpage-help.css'/>" />
-<link rel="stylesheet" href="<s:url value='/static/docs/assets/js/themes/sunburst.css'/>" />
-<script type="text/javascript"> ace.vars['base'] = '..'; </script> 
-<script src="<s:url value='/static/js/ace/elements.onpage-help.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.onpage-help.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/rainbow.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/generic.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/html.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/css.js'/>"></script> 
-<script src="<s:url value='/static/docs/assets/js/language/javascript.js'/>"></script>
-<script src="<s:url value='/static/js/date-time/WdatePicker.js'/>"></script>
+	function isSearch() {
+		var patentType = $("#patentTypeId").val();
+		var patentStatus = $("#patentStatusId").val();
+		var startAppDate = $("#startAppDateId").val();
+		var endAppDate = $("#endAppDateId").val();
+		var keyword = $("#keywordId").val();
+		
+		if (!isEmpty(patentType) || !isEmpty(patentStatus) || !isEmpty(startAppDate) || !isEmpty(endAppDate) || !isEmpty(keyword)) {
+			return true;
+		}
+		
+		return false;
+	}
 
+	function isEmpty(value) {
+		if (value == null || value == "undefined" || value == "") {
+			return true;
+		}
+		
+		return false;
+	}
+</script>
+
+
+
+<!-- ace scripts --> 
+<script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.colorpicker.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.fileinput.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.typeahead.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.wysiwyg.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.spinner.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.treeview.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.wizard.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/elements.aside.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.ajax-content.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.touch-drag.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.sidebar.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.sidebar-scroll-1.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.submenu-hover.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.widget-box.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.settings.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.settings-rtl.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.settings-skin.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.widget-on-reload.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.searchbox-autocomplete.js'/>"></script> 
 </body>
 </html>

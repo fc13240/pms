@@ -11,6 +11,8 @@
 	<title>分享</title>
 
 <!-- bootstrap & fontawesome -->
+
+<link rel="stylesheet" href="<s:url value='/static/css/jquery-ui.min.css'/>" />
 <link rel="stylesheet" href="<s:url value='/static/css/bootstrap.css'/>" />
 <link rel="stylesheet" href="<s:url value='/static/css/font-awesome.css'/>" />
 
@@ -319,179 +321,88 @@
 <script src="<s:url value='/static/js/bootbox.js'/>"></script>
 <!-- inline scripts related to this page --> 
 <script type="text/javascript">
-			jQuery(function($) {
-				//initiate dataTables plugin
-				//And for the first simple table, which doesn't have TableTools or dataTables
-				//select/deselect all rows according to table header checkbox
-				var active_class = 'active';
-				$('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
-					var th_checked = this.checked;//checkbox inside "TH" table header
-					
-					$(this).closest('table').find('tbody > tr').each(function(){
-						var row = this;
-						if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
-						else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
-					});
-				});
-				
-				//select/deselect a row when the checkbox is checked/unchecked
-				$('#simple-table').on('click', 'td input[type=checkbox]' , function(){
-					var $row = $(this).closest('tr');
-					if(this.checked) $row.addClass(active_class);
-					else $row.removeClass(active_class);
-				});
-			
-				
-			
-				/********************************/
-				//add tooltip for small view action buttons in dropdown menu
-				$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-				
-				//tooltip placement on right or left
-				function tooltip_placement(context, source) {
-					var $source = $(source);
-					var $parent = $source.closest('table')
-					var off1 = $parent.offset();
-					var w1 = $parent.width();
-			
-					var off2 = $source.offset();
-					//var w2 = $source.width();
-			
-					if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-					return 'left';
-				}
-				
-			
-			})
-		</script> 
-
-<script type="text/javascript">
-	$(function(){
-		formutil.clickAllCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
-		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
+	$('tr th input.check-item').click(function() {
+		var checked = $(this).prop("checked");
+		
+		if (checked) {
+			$('tr td input.check-item').each(function() {
+				$(this).prop("checked", true);
+			});
+		} else {
+			$('tr td input.check-item').each(function() {
+				$(this).prop("checked", false);
+			});
+		}
 	});
 	
-	function batchShare() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+	$('tr td input.check-item').click(function() {
+		var allChecked = true;
+		var friendCheckboxes = $('tr td input.check-item');
 		
-		if (!patentSelected) {
-			//formutil.alertMessage('请选择专利');
-			bootbox.alert('请选择专利');
-			return;
-		}
-		
-		var patents = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent').join(",");
-		
-		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
-	}
-	
-	function batchFee() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		
-		if (!patentSelected) {
-			bootbox.alert('请选择专利');
-			return;
-		}
-			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
-		
-		 window.open("<s:url value='/patent/showFriends.html'/>?patentNos=" + patentNos);
-	}	
-	
-	function getFeeInfo(patentId) {
-		window.open("/fee/list?patentId=" + patentId);
-	}
-	
-	function deleteShare(patentId) {
-		$.ajax({
-			url: "" + patentId, 
-			type: 'get', 
-			dataType: "json",
-			success: function(data) {
-				if (data.result == 'not-owner') {
-					formutil.alertMessage('你不是专利的拥有者，无法取消分享');				
-				} else {
-					formutil.alertMessage('分享已取消', true);	
+		if ($(this).checked) {
+			for (var i = 0; i < friendCheckboxes.length; i++) {
+				if (!friendCheckboxes[i].checked) {
+					allChecked = false;
+					break;
 				}
-			}
-		});			
-	}
+			}			
+		} else {
+			allChecked = false;
+		}
+		
+		if (allChecked) {
+			$('tr th input.check-item').prop("checked", true);
+		} else {
+			$('tr th input.check-item').prop("checked", false);
+		}
+	});
 	
-	function changeInternalCode(patentId, internalCode) {
-		$.ajax({
-			url: "<s:url value='/patent/changeInternalCode.html'/>?patentId=" + patentId + "&internalCode=" + internalCode, 
-			type: 'get', 
-			success: function(data) {
-				//formutil.alertMessage('内部编码修改成功');	
-			},
-			error: function() {
-				formutil.alertMessage('内部编码修改失败');
+	function sharePatents() {
+		var friendSelected = false;
+
+		var friendCheckboxes = $('tr td input.check-item');
+		for (var i = 0; i < friendCheckboxes.length; i++) {
+			if (friendCheckboxes[i].checked) {
+				friendSelected = true;
+				break;
 			}
-		});	
-	}
-	
-	function deletePatent(url) {
-		$( "<div>确定要删除吗?</div>" ).dialog({
-		  resizable: false,
-		  height:140,
-		  modal: true,
-		  buttons: {
-			"确定": function() {
-				$.ajax({
-					url: url, 
-					type: 'get', 
-					success: function(data) {
-						formutil.alertMessage('删除成功', true);	
+		}
+		
+		if (!friendSelected) {
+			$("<div>请选择好友</div>").dialog({
+				modal: true,
+				buttons: {
+					Ok: function() {
+						$(this).dialog("close");
 					}
-				});	
-			},
-			"取消": function() {
-			  $( this ).dialog( "close" );
-			}
-		  }
-		});
+				}	
+			});
+	   				
+		} else {
+			var friends = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'friend').join(",");
+			var patents = $("input[name=patents]").val();
+			$.ajax({
+				url: "<s:url value='/sharePatent/addShares.html'/>?friends=" + friends + "&patents=" + patents, 
+				type: 'GET', 
+				success: function() {
+					$("<div>分享成功</div>").dialog({
+						modal: true,
+						buttons: {
+							Ok: function() {
+								$(this).dialog("close");
+								history.go(-1);
+							}
+						}	
+					});
+				}
+			});			
+		}
 	}
 	
-	function gotoPage() {
-		var patentType = $("#patentTypeId").val();
-		var patentStatus = $("#patentStatusId").val();
-		var startAppDate = $("#startAppDateId").val();
-		var endAppDate = $("#endAppDateId").val();
-		var keyword = $("#keywordId").val();
-		var pageNo = document.getElementById("page.pageNo").value;
-		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
-		
-		if (isSearch()) {
- 				//url = "<s:url value='/patent/search.html'/>?page.currentPage="+nextPage +"&"+${searchCondition};
-				url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
-		}
-		
-		location.href = url
-	}
-	
-	function isSearch() {
-		var patentType = $("#patentTypeId").val();
-		var patentStatus = $("#patentStatusId").val();
-		var startAppDate = $("#startAppDateId").val();
-		var endAppDate = $("#endAppDateId").val();
-		var keyword = $("#keywordId").val();
-		
-		if (!isEmpty(patentType) || !isEmpty(patentStatus) || !isEmpty(startAppDate) || !isEmpty(endAppDate) || !isEmpty(keyword)) {
-			return true;
-		}
-		
-		return false;
-	}
-
-	function isEmpty(value) {
-		if (value == null || value == "undefined" || value == "") {
-			return true;
-		}
-		
-		return false;
-	}
+	$(function() {
+		$('#addShareBtn').click(sharePatents)
+	});
 </script>
-
 
 
 <!-- ace scripts --> 

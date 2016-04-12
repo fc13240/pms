@@ -358,7 +358,7 @@
 									
 									</td>
 									<td width="100">
-										<select class="form-control" onchange="javascript:changePaperApplyType('<c:out value="${notice.paperApplyType.paperTypeId}"/>', this)">
+										<select class="form-control" onchange="javascript:changePaperApplyType('${notice.noticeId}', this)">
 											<c:forEach items="${paperApplyTypes}" var="paperApplyType">
 												<option value="<c:out value='${paperApplyType.paperTypeId}'/>" <c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>>
 													<c:out value="${paperApplyType.paperTypeDescription}"/>
@@ -531,6 +531,71 @@
 <script src="<s:url value='/static/js/jquery-ui.min.js'/>"></script>
 
 <script src="<s:url value='/static/js/bootbox.js'/>"></script>
+
+<script type="text/javascript">
+function changePaperApplyType(notice, selectElement) {
+	paperApplyType = 1;
+	for (var i = 0; i < selectElement.length; i++) {
+		if (selectElement.options[i].selected == true) {
+			paperApplyType = selectElement.options[i].value;
+		}
+	}		
+
+	$.ajax({
+		url: "<s:url value='/notice/changePaperType.html'/>?notice=" + notice + "&paperApplyType=" + paperApplyType,
+		type: 'get', 
+		success: function(data) {
+			if (data == "no-permission") {
+				$("<div>共享人只能把[纸质申请]修改为[申请纸件]</div>").dialog({
+					modal: true,
+					buttons: {
+						Ok: function() {
+							$(this).dialog("close");
+						}
+					}	
+				});		
+
+				return;
+			}
+			
+			$("<div>操作成功</div>").dialog({
+				modal: true,
+				buttons: {
+					Ok: function() {
+						$(this).dialog("close");
+					}
+				}	
+			});
+			
+		}
+	});			
+}
+
+function processNotice(notice, selectElement) {
+	processStatus = 1;
+	for (var i = 0; i < selectElement.length; i++) {
+		if (selectElement.options[i].selected == true) {
+			processStatus = selectElement.options[i].value;
+		}
+	}		
+
+	$.ajax({
+		url: "<s:url value='/notice/processNotice.html'/>?notice=" + notice + "&processStatus=" + processStatus,
+		type: 'get', 
+		success: function(data) {
+			$("<div>操作成功</div>").dialog({
+				modal: true,
+				buttons: {
+					Ok: function() {
+						$(this).dialog("close");
+					}
+				}	
+			});
+		}
+	});			
+}
+</script>
+
 <script type="text/javascript">
 
 // 通知书处理状态
@@ -689,55 +754,9 @@ function batchProcessNotice(processStatus) {
 		window.open("/fee/list?patentId=" + patentId);
 	}
 	
-	function deleteShare(patentId) {
-		$.ajax({
-			url: "" + patentId, 
-			type: 'get', 
-			dataType: "json",
-			success: function(data) {
-				if (data.result == 'not-owner') {
-					formutil.alertMessage('你不是专利的拥有者，无法取消分享');				
-				} else {
-					formutil.alertMessage('分享已取消', true);	
-				}
-			}
-		});			
-	}
-	
-	function changeInternalCode(patentId, internalCode) {
-		$.ajax({
-			url: "<s:url value='/patent/changeInternalCode.html'/>?patentId=" + patentId + "&internalCode=" + internalCode, 
-			type: 'get', 
-			success: function(data) {
-				//formutil.alertMessage('内部编码修改成功');	
-			},
-			error: function() {
-				formutil.alertMessage('内部编码修改失败');
-			}
-		});	
-	}
-	
-	function deletePatent(url) {
-		$( "<div>确定要删除吗?</div>" ).dialog({
-		  resizable: false,
-		  height:140,
-		  modal: true,
-		  buttons: {
-			"确定": function() {
-				$.ajax({
-					url: url, 
-					type: 'get', 
-					success: function(data) {
-						formutil.alertMessage('删除成功', true);	
-					}
-				});	
-			},
-			"取消": function() {
-			  $( this ).dialog( "close" );
-			}
-		  }
-		});
-	}
+
+
+
 	
 	function gotoPage() {
 		var noticeType = $("#noticeTypeId").val();
