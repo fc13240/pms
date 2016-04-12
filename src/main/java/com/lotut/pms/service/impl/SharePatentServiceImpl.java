@@ -3,6 +3,8 @@ package com.lotut.pms.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.lotut.pms.dao.SharePatentDao;
 import com.lotut.pms.domain.SharePatent;
 import com.lotut.pms.service.SharePatentService;
@@ -15,6 +17,7 @@ public class SharePatentServiceImpl implements SharePatentService {
 	}
 
 	@Override
+	@Transactional
 	public void sharePatents(List<Map<String, Integer>> sharePatentRecords,
 			List<Map<String, Integer>> userPatentRecords) {
 		sharePatentDao.insertSharePatents(sharePatentRecords, userPatentRecords);

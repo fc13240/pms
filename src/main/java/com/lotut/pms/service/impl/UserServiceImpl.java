@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lotut.pms.dao.UserDao;
 import com.lotut.pms.domain.User;
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
 	}
 	//注册
 	@Override
+	@Transactional
 	public boolean register(User user) {
 		//注册前检查用户名是否存在
 		User has_user=userDao.findByName(user.getUsername());
@@ -39,6 +41,7 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	//修改密码
+	@Transactional
 	public boolean changePassword(String lastPassword,String newPassword){
 		User user=PrincipalUtils.getCurrentPrincipal();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

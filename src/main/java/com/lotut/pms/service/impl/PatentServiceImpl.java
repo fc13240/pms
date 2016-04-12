@@ -80,6 +80,7 @@ public class PatentServiceImpl implements PatentService {
 	}
 
 	@Override
+	@Transactional
 	public void changeInternalCode(int patentId, String internalCode) {
 		patentDao.updateInternalCode(patentId, internalCode);
 	}
