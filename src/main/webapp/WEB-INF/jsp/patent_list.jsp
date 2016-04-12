@@ -665,6 +665,7 @@
 		}
 		
 		location.href = url
+		
 	}
 	
 	function isSearch() {

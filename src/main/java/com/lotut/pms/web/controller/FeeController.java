@@ -55,15 +55,24 @@ public class FeeController {
 	}	
 
 	/*
-	 * 单个加入监控
+	 * 单个修改监控
 	 */
 	@RequestMapping(path="/changeMonitorStatus", method=RequestMethod.GET)
 	public String changeMonitorStatus(@RequestParam("fees")List<Long> feeIds, @RequestParam("monitorStatus")int monitorStatus,Model model) {
 		List<Fee> fees=feeService.changeMonitorStatus(feeIds, monitorStatus);
-		model.addAttribute("fees", fees);
-		return "fee_list_without_grab";
+			model.addAttribute("fees", fees);
+			return "fee_list_without_grab";
 	}
 	
+	/*
+	 * 批量修改监控
+	 */
+	@RequestMapping(path="/batchChangeMonitorStatus", method=RequestMethod.GET)
+	public String batchChangeMonitorStatus(@RequestParam("fees")List<Long> feeIds, @RequestParam("monitorStatus")int monitorStatus,Model model) {
+		List<Fee> fees=feeService.changeMonitorStatus(feeIds, monitorStatus);
+			model.addAttribute("fees", fees);
+			return "batch_fee_list_withou_grap";
+	}
 	
 	@RequestMapping(path="/list", method=RequestMethod.GET)
 	public ModelAndView getFeeList() {
