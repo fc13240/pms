@@ -441,10 +441,8 @@
 											</c:choose>
 								 	<!-- 分页功能 End -->
 								
-									<input type="text" id="page.pageNo" style="width:50px;" name="currentPage"/>
+									<input type="text" id="page.pageNo" style="width:50px;" name="page.currentPage"/>
 										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
-								
-											
 									</div>
 									</form:form>
 									 	
@@ -690,6 +688,17 @@
 		}
 		
 		return false;
+	}
+	
+	function processPageEnter(event, pageInput) {
+		var keyCode = event.keyCode ? event.keyCode 
+                : event.which ? event.which 
+                        : event.charCode;
+		var isEnterKey = keyCode == 13;
+		if (isEnterKey) {
+			location.href = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageInput.value +"&"+"${searchCondition}";
+			$(pageInput).unbind('keydown');
+		}
 	}
 </script>
 
