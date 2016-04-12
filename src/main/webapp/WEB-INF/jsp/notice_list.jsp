@@ -351,7 +351,12 @@
 									<td><c:out value="${notice.patent.patentStatus.statusDescription}"/></td>
 									<td  width="120"><c:out value="${notice.patent.shareUsersAsString}"/></td>
 									<td width="85"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
-									<td><c:out value="${notice.name}"/></td>
+									<td>
+									<a id="download" href="<s:url value='/notice/preview.html'/>?notice=${notice.noticeId}">
+									 <c:out value="${notice.name}"/>
+									</a>					
+									
+									</td>
 									<td width="100">
 										<select class="form-control" onchange="javascript:changePaperApplyType('<c:out value="${notice.paperApplyType.paperTypeId}"/>', this)">
 											<c:forEach items="${paperApplyTypes}" var="paperApplyType">
