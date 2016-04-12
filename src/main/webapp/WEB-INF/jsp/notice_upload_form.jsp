@@ -263,9 +263,14 @@
 														</div>
 
 														<!-- #section:custom/file-input.filter -->
+														
+														
 														<label>
-															<input type="checkbox" name="file-format" id="id-file-format" class="ace" />
-															<span class="lbl"> 只能上传zip压缩包</span>
+<label>
+															
+															<span class="lbl"> （注：只能上传zip压缩包）</span>
+														</label>
+														<button class="btn btn-info" type="submit" style="height:45px;width：100px">上传</button>
 														</label>
 
 														<!-- /section:custom/file-input.filter -->
