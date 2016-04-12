@@ -229,7 +229,7 @@
                 <!-- /.page-header -->
                 <div class="row" style="margin-top:30px;">
                     <div class="col-xs-12"> 
-								<form class="form-horizontal" role="form">
+								<form action="<s:url value='/notice/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">
 									<!-- #section:elements.form -->
 
 									<hr />
@@ -256,7 +256,7 @@
 
 														<div class="form-group">
 															<div class="col-xs-12">
-																<input multiple="" type="file" style="display:none;" id="id-input-file-3" />
+																<input multiple="" type="file" name="noticeFile" style="display:none;" id="id-input-file-3" />
 
 																<!-- /section:custom/file-input -->
 															</div>
