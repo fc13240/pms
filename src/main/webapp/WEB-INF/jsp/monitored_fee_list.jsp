@@ -8,9 +8,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>官非监控</title>
+	<title>官方监控</title>
 
 <!-- bootstrap & fontawesome -->
+<link rel="stylesheet" href="<s:url value='/static/css/jquery-ui.min.css'/>" />
 <link rel="stylesheet" href="<s:url value='/static/css/bootstrap.css'/>" />
 <link rel="stylesheet" href="<s:url value='/static/css/font-awesome.css'/>" />
 
@@ -230,8 +231,7 @@
                         <div class="col-xs-12">
                           <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;">	                                
 	                                <span class="input-group-btn" >
-										<a href="javascript:batchUpdateInvoiceTitles()"><button style="margin:8px;" type="button" class="btn btn-purple btn-sm">批量修改发票抬头</button></a>
-										<a href="javascript:deleteFees()"><button type="button" class="btn btn-purple btn-sm">批量删除</button></a>
+										<a href="javascript:batchUpdateInvoiceTitles()"><button style="margin:8px;" type="button" class="btn btn-info btn-sm">批量修改发票抬头</button></a>							
 										<a href="javascript:exportFees()"><button type="button" class="btn btn-purple btn-sm">批量导出</button></a>
 									</span> 
 	                                                    
@@ -240,7 +240,7 @@
                             <thead>
                               <tr class="simple_bag">
                                 <th class="center"> <label class="pos-rel">
-                                    <input type="checkbox" class="ace" id="checkall" name="checkall" />
+                                    <input type="checkbox" class="fee-check-item">
                                     <span class="lbl"></span> </label>
                                 </th>
 								<th>序号</th>
@@ -326,200 +326,65 @@
 
 
 
-
+<iframe id="feeExcelFileFrame" style="display:none"></iframe>	
 
 <script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 <script src="<s:url value='/static/js/formutil.js'/>"></script>
 <script src="<s:url value='/static/js/jquery-ui.min.js'/>"></script>
 
 <script src="<s:url value='/static/js/bootbox.js'/>"></script>
-<!-- inline scripts related to this page --> 
 <script type="text/javascript">
-			jQuery(function($) {
-				//initiate dataTables plugin
-				//And for the first simple table, which doesn't have TableTools or dataTables
-				//select/deselect all rows according to table header checkbox
-				var active_class = 'active';
-				$('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
-					var th_checked = this.checked;//checkbox inside "TH" table header
-					
-					$(this).closest('table').find('tbody > tr').each(function(){
-						var row = this;
-						if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
-						else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
-					});
-				});
-				
-				//select/deselect a row when the checkbox is checked/unchecked
-				$('#simple-table').on('click', 'td input[type=checkbox]' , function(){
-					var $row = $(this).closest('tr');
-					if(this.checked) $row.addClass(active_class);
-					else $row.removeClass(active_class);
-				});
-			
-				
-			
-				/********************************/
-				//add tooltip for small view action buttons in dropdown menu
-				$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-				
-				//tooltip placement on right or left
-				function tooltip_placement(context, source) {
-					var $source = $(source);
-					var $parent = $source.closest('table')
-					var off1 = $parent.offset();
-					var w1 = $parent.width();
-			
-					var off2 = $source.offset();
-					//var w2 = $source.width();
-			
-					if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-					return 'left';
-				}
-				
-			
-			})
-		</script> 
+$(function(){
+	formutil.clickAllCheckbox('tr th input.fee-check-item', 'tr td input.fee-check-item');
+	formutil.clickItemCheckbox('tr th input.fee-check-item', 'tr td input.fee-check-item');
+});	
 
-<script type="text/javascript">
-	$(function(){
-		formutil.clickAllCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
-		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
-	});
+function exportFees() {
+	var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
 	
-	function batchShare() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		
-		if (!patentSelected) {
-			//formutil.alertMessage('请选择专利');
-			bootbox.alert('请选择专利');
-			return;
-		}
-		
-		var patents = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent').join(",");
-		
-		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
-	}
-	function batchGrabFees(){
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		
-		if (!patentSelected) {
-			bootbox.alert('请选择专利');
-			return;
-		}
-			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
-		
-		 window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patentNos);		
-		
+	if (!feeSelected) {
+		formutil.alertMessage('请选择要导出的记录');
+		return;
 	}	
 	
-// 	function batchFee() {
-// 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		
-// 		if (!patentSelected) {
-// 			bootbox.alert('请选择专利');
-// 			return;
-// 		}
-			
-// 		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
-		
-// 		 window.open("<s:url value='/fee/grabFees.html'/>?patent=" + patentNos);
-// 	}	
+	var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'fee');
 	
-	function getFeeInfo(patentId) {
-		window.open("/fee/list?patentId=" + patentId);
-	}
-	
-	function deleteShare(patentId) {
-		$.ajax({
-			url: "" + patentId, 
-			type: 'get', 
-			dataType: "json",
-			success: function(data) {
-				if (data.result == 'not-owner') {
-					formutil.alertMessage('你不是专利的拥有者，无法取消分享');				
-				} else {
-					formutil.alertMessage('分享已取消', true);	
-				}
-			}
-		});			
-	}
-	
-	function changeInternalCode(patentId, internalCode) {
-		$.ajax({
-			url: "<s:url value='/patent/changeInternalCode.html'/>?patentId=" + patentId + "&internalCode=" + internalCode, 
-			type: 'get', 
-			success: function(data) {
-				//formutil.alertMessage('内部编码修改成功');	
-			},
-			error: function() {
-				formutil.alertMessage('内部编码修改失败');
-			}
-		});	
-	}
-	
-	function deletePatent(url) {
-		$( "<div>确定要删除吗?</div>" ).dialog({
-		  resizable: false,
-		  height:140,
-		  modal: true,
-		  buttons: {
-			"确定": function() {
-				$.ajax({
-					url: url, 
-					type: 'get', 
-					success: function(data) {
-						formutil.alertMessage('删除成功', true);	
-					}
-				});	
-			},
-			"取消": function() {
-			  $( this ).dialog( "close" );
-			}
-		  }
-		});
-	}
-	
-	function gotoPage() {
-		var patentType = $("#patentTypeId").val();
-		var patentStatus = $("#patentStatusId").val();
-		var startAppDate = $("#startAppDateId").val();
-		var endAppDate = $("#endAppDateId").val();
-		var keyword = $("#keywordId").val();
-		var pageNo = document.getElementById("page.pageNo").value;
-		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
-		
-		if (isSearch()) {
- 				//url = "<s:url value='/patent/search.html'/>?page.currentPage="+nextPage +"&"+${searchCondition};
-				url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
-		}
-		
-		location.href = url
-	}
-	
-	function isSearch() {
-		var patentType = $("#patentTypeId").val();
-		var patentStatus = $("#patentStatusId").val();
-		var startAppDate = $("#startAppDateId").val();
-		var endAppDate = $("#endAppDateId").val();
-		var keyword = $("#keywordId").val();
-		
-		if (!isEmpty(patentType) || !isEmpty(patentStatus) || !isEmpty(startAppDate) || !isEmpty(endAppDate) || !isEmpty(keyword)) {
-			return true;
-		}
-		
-		return false;
-	}
+	var iframe = document.getElementById('feeExcelFileFrame');
+	iframe.src = "<s:url value='/fee/exportFees.html'/>?fees=" + fees;		
+}
 
-	function isEmpty(value) {
-		if (value == null || value == "undefined" || value == "") {
-			return true;
-		}
+function batchUpdateInvoiceTitles() {
+	var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
+	
+	if (!feeSelected) {
+		formutil.alertMessage('请选择费用记录');
+		return;
+	}		
+	
+	var invoiceTitle = prompt("请输入发票抬头", "");
+	if (invoiceTitle != null && invoiceTitle != "") {
+		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'fee');
 		
-		return false;
-	}
-</script>
+		$.ajax({
+			url: "<s:url value='/fee/changeInvoiceTitle.html'/>?fees=" + fees + "&invoiceTitle=" + invoiceTitle, 
+			type: 'get', 
+			success: function(data) {
+				location.reload();
+			}
+		});
+	} 
+}
+
+function changeInvoiceTitle(fee, invoiceTitle) {
+	$.ajax({
+		url: "<s:url value='/fee/changeInvoiceTitle.html'/>?fees=" + fee + "&invoiceTitle=" + invoiceTitle, 
+		type: 'get', 
+		success: function(data) {
+			// location.reload();
+		}
+	});			
+}
+</script>	
 
 
 
