@@ -268,7 +268,139 @@
 							n.notice_name like #{keyword_pattern} or ps.patent_status_desc like #{keyword_pattern})
 					</otherwise>																		
 				</choose>
-			</if>		 	
+			</if> 	
+	</select>
+	
+	<select id="searchUserNoticesByPage" parameterType="NoticeSearchCondition" resultMap="NoticeResultMap">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>
+		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description, 
+			u.user_id as share_user_id,  u.username as share_username, 
+			n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
+			if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+			n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name, 
+			npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
+			nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username
+		  from patents p join patent_status ps on p.patent_status = ps.patent_status_id
+			join user_patents up on p.patent_id = up.patent 
+			join notices n on n.patent = up.patent
+			left join users pu on pu.user_id = n.process_user
+			join users u on u.user_id = up.user
+			join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
+			join notice_process_status nps on nps.notice_process_status_id = n.process_status
+		 where n.patent in (select patent from user_patents where user = #{userId})	
+		 	<if test="patentType != null">
+		 		and p.patent_type = #{patentType}
+		 	</if>	
+		 	<if test="noticeProcessStatus != null">
+		 		and n.process_status = #{noticeProcessStatus}
+		 	</if>	
+		 	<if test="noticeType != null">
+		 		and n.notice_type = #{noticeType}
+		 	</if>	
+		 	<if test="paperApplyType != null">
+		 		and n.paper_apply_type = #{paperApplyType}
+		 	</if>		 			 	
+		 	<if test="startAppDate != null">
+		 		and p.app_date >= #{startAppDate}
+		 	</if>	
+		 	<if test="endAppDate != null">
+		 		<![CDATA[ and p.app_date <= #{endAppDate} ]]>
+		 	</if>	
+		 	<if test="startDispatchDate != null">
+		 		and n.dispatch_date >= #{startDispatchDate}
+		 	</if>	
+		 	<if test="endDispatchDate != null">
+		 		<![CDATA[ and n.dispatch_date <= #{endDispatchDate} ]]>
+		 	</if>		 	
+		 	<if test="keyword != null">
+				<choose>
+					<when test="keywordType=='appNo'">
+						and p.app_no like #{keyword_pattern}
+					</when>
+					<when test="keywordType=='appName'">
+						and p.patent_name like #{keyword_pattern}
+					</when>	
+					<when test="keywordType=='appPerson'">
+						and p.app_person like #{keyword_pattern}
+					</when>		
+					<when test="keywordType=='noticeName'">
+						and n.notice_name like #{keyword_pattern}
+					</when>		
+					<when test="keywordType=='patentStatus'">
+						and ps.patent_status_desc like #{keyword_pattern}
+					</when>	
+					<otherwise>
+						and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern} or
+							n.notice_name like #{keyword_pattern} or ps.patent_status_desc like #{keyword_pattern})
+					</otherwise>																		
+				</choose>
+			</if>
+			limit #{page.startIndex}, #{page.pageSize}		 	
+	</select>
+	
+	<!-- 查询分页 -->
+	<select id="searchUserNoticesCount" resultType="int">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>
+		select Count(*)
+		  from patents p join patent_status ps on p.patent_status = ps.patent_status_id
+			join user_patents up on p.patent_id = up.patent 
+			join notices n on n.patent = up.patent
+			left join users pu on pu.user_id = n.process_user
+			join users u on u.user_id = up.user
+			join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
+			join notice_process_status nps on nps.notice_process_status_id = n.process_status
+		 where n.patent in (select patent from user_patents where user = #{userId})	
+		 	<if test="patentType != null">
+		 		and p.patent_type = #{patentType}
+		 	</if>	
+		 	<if test="noticeProcessStatus != null">
+		 		and n.process_status = #{noticeProcessStatus}
+		 	</if>	
+		 	<if test="noticeType != null">
+		 		and n.notice_type = #{noticeType}
+		 	</if>	
+		 	<if test="paperApplyType != null">
+		 		and n.paper_apply_type = #{paperApplyType}
+		 	</if>		 			 	
+		 	<if test="startAppDate != null">
+		 		and p.app_date >= #{startAppDate}
+		 	</if>	
+		 	<if test="endAppDate != null">
+		 		<![CDATA[ and p.app_date <= #{endAppDate} ]]>
+		 	</if>	
+		 	<if test="startDispatchDate != null">
+		 		and n.dispatch_date >= #{startDispatchDate}
+		 	</if>	
+		 	<if test="endDispatchDate != null">
+		 		<![CDATA[ and n.dispatch_date <= #{endDispatchDate} ]]>
+		 	</if>		 	
+		 	<if test="keyword != null">
+				<choose>
+					<when test="keywordType=='appNo'">
+						and p.app_no like #{keyword_pattern}
+					</when>
+					<when test="keywordType=='appName'">
+						and p.patent_name like #{keyword_pattern}
+					</when>	
+					<when test="keywordType=='appPerson'">
+						and p.app_person like #{keyword_pattern}
+					</when>		
+					<when test="keywordType=='noticeName'">
+						and n.notice_name like #{keyword_pattern}
+					</when>		
+					<when test="keywordType=='patentStatus'">
+						and ps.patent_status_desc like #{keyword_pattern}
+					</when>	
+					<otherwise>
+						and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern} or
+							n.notice_name like #{keyword_pattern} or ps.patent_status_desc like #{keyword_pattern})
+					</otherwise>																		
+				</choose>
+			</if> 	
 	</select>
 	
 	<insert id="insertOrUpdateNotice" parameterType="Notice" useGeneratedKeys="true" keyProperty="noticeId">

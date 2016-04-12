@@ -13,6 +13,8 @@ import com.lotut.pms.domain.NoticeProcessStatus;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.Patent;
+import com.lotut.pms.util.PrincipalUtils;
 
 public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao {
 	private NoticeMapper noticeMapper;
@@ -83,6 +85,20 @@ public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao 
 	@Override
 	public List<Notice> getUserNoticesByPage(Page page) {
 		return noticeMapper.getUserNoticesByPage(page);
+	}
+
+	@Override
+	public int searchUserNoticesCount(NoticeSearchCondition searchCondition) {
+		return noticeMapper.searchUserNoticesCount(searchCondition);
+	}
+
+	@Override
+	public List<Notice> searchUserNoticesByPage(NoticeSearchCondition searchCondition) {
+		Page page = searchCondition.getPage();
+		page.setUserId(PrincipalUtils.getCurrentUserId());
+		int userNoticeCount = noticeMapper.getUserNoticesCount(page.getUserId());
+		page.setTotalRecords(userNoticeCount);
+		return noticeMapper.searchUserNoticesByPage(searchCondition);
 	}
 	
 	//通知书处理状态

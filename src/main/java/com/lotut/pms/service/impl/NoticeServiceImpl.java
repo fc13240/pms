@@ -19,6 +19,7 @@ import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.service.NoticeService;
 import com.lotut.pms.service.utils.NoticeXmlParser;
 import com.lotut.pms.service.utils.ZipUtils;
@@ -76,6 +77,16 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public List<Notice> searchUserNotices(NoticeSearchCondition searchCondition) {
 		return noticeDao.searchUserNotices(searchCondition);
+	}
+	//搜索分页
+	@Override
+	public long searchUserNoticesCount(NoticeSearchCondition searchCondition){
+		return noticeDao.searchUserNoticesCount(searchCondition);
+	}
+	
+	@Override
+	public List<Notice> searchUserNoticesWithPage(NoticeSearchCondition searchCondition) {
+		return noticeDao.searchUserNoticesByPage(searchCondition);
 	}
 
 	@Override

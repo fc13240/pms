@@ -15,6 +15,7 @@ import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,10 +63,14 @@ public class NoticeController {
 	
 	
 	@RequestMapping(path="/search", method=RequestMethod.GET)
-	public String searchUserNotices(NoticeSearchCondition searchCondition, Model model) {
+	public String searchUserNotices(@ModelAttribute("searchCondition")NoticeSearchCondition searchCondition, Model model) {
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
-		List<Notice> resultNotices = noticeService.searchUserNotices(searchCondition);
+		List<Notice> resultNotices = noticeService.searchUserNoticesWithPage(searchCondition);
+		int totalCount=(int)noticeService.searchUserNoticesCount(searchCondition);
+		Page page=searchCondition.getPage();
+		page.setTotalRecords(totalCount);
 		model.addAttribute("notices", resultNotices);
+		model.addAttribute("page", page);
 		addSearchTypesDataToModel(model);
 		return "notice_list";
 	}	

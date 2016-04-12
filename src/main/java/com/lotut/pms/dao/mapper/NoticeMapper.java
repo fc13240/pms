@@ -10,6 +10,7 @@ import com.lotut.pms.domain.NoticeProcessStatus;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.Patent;
 
 public interface NoticeMapper {
 	//分页
@@ -35,4 +36,8 @@ public interface NoticeMapper {
 	void updateNoticesProcessStatus(@Param("noticeIdList")List<Integer> noticeIdList, @Param("noticeProcessStatus")int noticeProcessStatus);
 	
 	void updateNoticePaperApplyType(@Param("noticeId")int noticeId, @Param("paperApplyType")int paperApplyType);
+	//搜索分页
+	int searchUserNoticesCount(NoticeSearchCondition searchCondition);
+	
+	List<Notice> searchUserNoticesByPage(NoticeSearchCondition searchCondition);
 }

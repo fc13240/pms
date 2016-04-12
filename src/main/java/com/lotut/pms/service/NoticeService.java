@@ -13,6 +13,8 @@ import com.lotut.pms.domain.NoticeProcessStatus;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.PatentSearchCondition;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
@@ -45,4 +47,8 @@ public interface NoticeService {
 	void changeNoticePaperApplyType(int noticeId, int paperApplyType);
 	
 	Path createPdfIfNeeded(int noticeId);
+	//搜索分页
+	public long searchUserNoticesCount(NoticeSearchCondition searchCondition);
+	
+	List<Notice> searchUserNoticesWithPage(NoticeSearchCondition searchCondition);
 }

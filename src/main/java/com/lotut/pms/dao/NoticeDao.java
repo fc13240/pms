@@ -10,6 +10,8 @@ import com.lotut.pms.domain.NoticeProcessStatus;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.PatentSearchCondition;
 
 public interface NoticeDao {
 	//分页
@@ -35,4 +37,8 @@ public interface NoticeDao {
 	void updateNoticesProcessStatus(List<Integer> noticeIdList, int noticeProcessStatus);
 	
 	void updateNoticePaperApplyType(int noticeId, int paperApplyType);
+	//搜索分页
+	int searchUserNoticesCount(NoticeSearchCondition searchCondition);
+	
+	List<Notice> searchUserNoticesByPage(NoticeSearchCondition searchCondition);
 }
