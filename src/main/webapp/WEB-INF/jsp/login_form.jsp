@@ -66,7 +66,7 @@
 											<fieldset>
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="text" class="form-control" name="username" id="count" placeholder="用户名" />
+														<input type="text" class="form-control" name="username" id="count" placeholder="用户名" autofocus="autofocus" />
 														<!-- 加一个提示区 --> 
 														<span id="count_span">请输入用户名</span>
 														<i class="ace-icon fa fa-user"></i>
