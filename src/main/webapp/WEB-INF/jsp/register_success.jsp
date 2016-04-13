@@ -59,7 +59,12 @@
 											注册成功
 										</h4>
 									</div><!-- /.widget-main -->
-
+									<div class="toolbar center">
+										<a href="<s:url value='/loginForm.html'/>"  >
+											<i class="ace-icon fa fa-arrow-left"></i>
+											返回登录
+										</a>
+									</div>
 									
 								</div><!-- /.widget-body -->
 							</div><!-- /.login-box -->	

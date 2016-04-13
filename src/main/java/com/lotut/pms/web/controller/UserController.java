@@ -43,9 +43,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/register", method=RequestMethod.POST)
-	public String register(User user,Model model) {
+	public String register(User user,Model model,HttpSession session) {
 		boolean success=userService.register(user);
 		if(success){
+			session.invalidate();
 			return "register_success";
 		}
 			model.addAttribute("success", success);
