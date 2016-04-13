@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="spring" prefix="s" %>
 <%@ taglib uri="security" prefix="se" %>
+<%@ taglib uri="c" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +37,12 @@
 	<![endif]-->
 
 	<script src="<s:url value='/static/js/jquery.js'/>"></script>
+	<style type="text/css">
+			.userNameError{
+				    color:#F00;
+				    font-weight:bold;
+			}
+	</style>
 </head>
 
 <body class="login-layout" style=" background-image: url(<s:url value='/static/images/bacground.jpg'/>);background-size:cover; ">
@@ -68,29 +75,19 @@
 											<fieldset>
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="email" id="email" class="form-control" placeholder="邮箱" name="email"/>
-														<i class="ace-icon fa fa-envelope"></i>
-													</span>
-												</label>
-
-												<label class="block clearfix">
-													<span class="block input-icon input-icon-right">
-														<input type="text" class="form-control" id="username" placeholder="用户名" name="username"/>
-														<div class='warning' id='warning_1'><span></span></div>
+														<input type="text" class="form-control" id="username" minlength="3" maxlength="30" placeholder="用户名" name="username" onkeydown="clearPasswordErrorSpan()" required />
+														<c:if test="${success != null && !success}">
+															<div>
+																<span id="userNameError" class="userNameError">用户名已被注册请重新输入!</span>
+															</div>
+														</c:if>
 														<i class="ace-icon fa fa-user"></i>
 													</span>
 												</label>
 												
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="text" class="form-control" id="actual_name" placeholder="真实姓名" name="name"/>
-														<i class="ace-icon fa fa-user"></i>
-													</span>
-												</label>
-
-												<label class="block clearfix">
-													<span class="block input-icon input-icon-right">
-														<input type="password" class="form-control" id="regist_password" placeholder="密码6位以上" name="password" />
+														<input type="password" class="form-control" id="regist_password" minlength="4" maxlength="30" placeholder="密码4位以上" name="password" required />
 														<div class='warning' id='warning_2'><span></span></div>
 														<i class="ace-icon fa fa-lock"></i>
 													</span>
@@ -98,11 +95,25 @@
 
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="password" class="form-control" id="final_password" placeholder="再次输入密码" name="finalpassword"/>
+														<input type="password" class="form-control" id="final_password" minlength="4" maxlength="30" equalTo="#regist_password" placeholder="再次输入密码" name="finalpassword" required/>
 														<div class='warning' id='warning_3'><span></span></div>
 														<i class="ace-icon fa fa-retweet"></i>
 													</span>
 												</label>
+												
+												<label class="block clearfix">
+													<span class="block input-icon input-icon-right">
+														<input type="text" class="form-control" id="actual_name" placeholder="真实姓名" name="name" maxlength="30" minlength="2" required />
+														<i class="ace-icon fa fa-user"></i>
+													</span>
+												</label>												
+												
+												<label class="block clearfix">
+													<span class="block input-icon input-icon-right">
+														<input type="email" id="email" class="form-control" placeholder="邮箱" name="email" type="email" minlength="3" maxlength="100" required />
+														<i class="ace-icon fa fa-envelope"></i>
+													</span>
+												</label>												
 
 												<label class="block">
 													<input type="checkbox" class="ace" />
@@ -120,7 +131,7 @@
 														<span class="bigger-110">重置</span>
 													</button>
 													
-													<button type="button" id="regist_button" class="width-65 pull-right btn btn-sm btn-success">
+													<button type="submit" id="regist_button" class="width-65 pull-right btn btn-sm btn-success">
 														<span class="bigger-110">注册</span>
 														<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
 													</button>
@@ -179,11 +190,15 @@
 
 	<!-- inline scripts related to this page -->
 	<script type="text/javascript">
-		$("#regist_button").click(function(){
-				$("#registerForm").submit();
-		});
+	
 		
 		jQuery(function($) {
+			$("#registerForm").validate({
+				submitHandler: function(form){ 
+					form.submit();     
+				}
+			});				
+			
 		 $(document).on('click', '.toolbar a[data-target]', function(e) {
 			e.preventDefault();
 			var target = $(this).data('target');
@@ -219,6 +234,13 @@
 		 });
 		 
 		});
+	</script>
+	<script type="text/javascript">
+			function clearPasswordErrorSpan() {
+				$("#userNameError").hide();
+			}
 	</script>	
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	
 </body>
 </html>
