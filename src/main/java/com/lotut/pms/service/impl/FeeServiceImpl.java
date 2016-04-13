@@ -15,7 +15,6 @@ import com.lotut.pms.constants.Settings;
 import com.lotut.pms.dao.FeeDao;
 import com.lotut.pms.dao.PatentDao;
 import com.lotut.pms.domain.Fee;
-import com.lotut.pms.domain.FeeMonitorStatus;
 import com.lotut.pms.domain.FeeSearchCondition;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.User;

@@ -2,7 +2,6 @@ package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.NoticeDao;
@@ -13,7 +12,6 @@ import com.lotut.pms.domain.NoticeProcessStatus;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.Patent;
 import com.lotut.pms.util.PrincipalUtils;
 
 public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao {

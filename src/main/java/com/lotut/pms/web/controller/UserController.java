@@ -14,10 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.UserService;
@@ -34,9 +32,10 @@ public class UserController {
 	}	
 	
 	@RequestMapping(path="/all", method=RequestMethod.GET)
-	public ModelAndView getAllUsers() {
+	public String getAllUsers(Model model) {
 		List<User> allUsers = userService.getAllUsers();
-		return new ModelAndView();
+		model.addAttribute("users", allUsers);
+		return "";
 	}	
 
 	@RequestMapping(path="/registerForm", method=RequestMethod.GET)
@@ -127,7 +126,6 @@ public class UserController {
 	
     @RequestMapping(path = "/logout",method = RequestMethod.POST)  
     public String logout(HttpSession httpSession){  
-    //	httpSession.invalidate();
         return "login_form";
     }  	
 

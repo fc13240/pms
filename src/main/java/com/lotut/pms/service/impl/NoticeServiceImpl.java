@@ -21,7 +21,6 @@ import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
-import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.service.NoticeService;
 import com.lotut.pms.service.utils.NoticeXmlParser;
 import com.lotut.pms.service.utils.ZipUtils;
