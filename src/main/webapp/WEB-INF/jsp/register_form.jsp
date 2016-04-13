@@ -76,7 +76,7 @@
 												
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="password" class="form-control" id="regist_password" minlength="3" maxlength="30" placeholder="密码3位以上" name="password" required />
+														<input type="password" class="form-control" id="regist_password" minlength="4" maxlength="30" placeholder="密码4位以上" name="password" required />
 														<div class='warning' id='warning_2'><span></span></div>
 														<i class="ace-icon fa fa-lock"></i>
 													</span>
@@ -84,7 +84,7 @@
 
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="password" class="form-control" id="final_password" minlength="3" maxlength="30" equalTo="#regist_password" placeholder="再次输入密码" name="finalpassword" required/>
+														<input type="password" class="form-control" id="final_password" minlength="4" maxlength="30" equalTo="#regist_password" placeholder="再次输入密码" name="finalpassword" required/>
 														<div class='warning' id='warning_3'><span></span></div>
 														<i class="ace-icon fa fa-retweet"></i>
 													</span>
