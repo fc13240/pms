@@ -32,6 +32,8 @@ public class ContactAddress {
 	@Email
 	private String email;
 	
+	private int userId;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -85,5 +87,11 @@ public class ContactAddress {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 }

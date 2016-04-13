@@ -369,6 +369,12 @@ function resetSelect() {
 	}
 }
 
+function addOptions(selectObj, options) {
+	$.each(options, function(index, val){
+		selectObj.append("<option value='" + val.id + "'>" + val.name + "</option>");
+	});	
+}
+
 function loadCities() {
 	var province = $("#province").val();
 	
@@ -381,12 +387,9 @@ function loadCities() {
 			dataType: 'json',
 			success: function(cities) {
 				var city = $("#city");
-				city.empty();
 				
-				addDefaultOption(city);
-				$.each(cities, function(index, val){
-					city.append("<option value='" + val.id + "'>" + val.name + "</option>");
-				});
+				resetSelect(city);
+				addOptions(city, cities);
 			}
 		})
 	} 
@@ -404,13 +407,9 @@ function loadDistricts() {
 			dataType: 'json',
 			success: function(districts) {
 				var district = $("#district");
-				district.empty();
 				
-				
-				addDefaultOption(district);
-				$.each(districts, function(index, val){
-					district.append("<option value='" + val.id + "'>" + val.name + "</option>");
-				});
+				resetSelect(district);
+				addOptions(district, districts);
 			}
 		})
 	}
@@ -428,13 +427,9 @@ function loadStreets() {
 			dataType: 'json',
 			success: function(streets) {
 				var street = $("#street");
-				street.empty();
 				
-				
-				addDefaultOption(street);
-				$.each(streets, function(index, val){
-					street.append("<option value='" + val.id + "'>" + val.name + "</option>");
-				});
+				resetSelect(street);
+				addOptions(street, streets);
 			}
 		})
 	} 

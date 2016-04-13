@@ -3,6 +3,7 @@ package com.lotut.pms.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.User;
 
 public interface UserDao {
@@ -20,4 +21,8 @@ public interface UserDao {
 	List<Map<String, String>> getDistrictsByCityId(long cityId);
 	
 	List<Map<String, String>> getStreetsByDistrictId(long districtId);
+	
+	void saveContactAddress(ContactAddress contactAddress);
+	
+	List<ContactAddress> getUserContactAddresses(int userId);
 }

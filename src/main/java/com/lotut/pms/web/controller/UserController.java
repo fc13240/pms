@@ -92,10 +92,20 @@ public class UserController {
 	
 	@RequestMapping(path="/addContactAddress", method=RequestMethod.POST)
 	public String addContactAddress(@Valid ContactAddress contactAddress, Errors errors, Model model) {
-		List<Map<String, String>> provinces = userService.getAllProvinces();
-		model.addAttribute("provinces", provinces);
+		int userId = PrincipalUtils.getCurrentUserId();
+		contactAddress.setUserId(userId);
+		userService.saveContactAddress(contactAddress);
 		
-		return "contact_address_create_form";
+		// FIXME add success page
+		return "";
+	}
+	
+	@RequestMapping(path="/getContactAddresses", method=RequestMethod.POST)
+	public String getUserContactAddresses(Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		
+		// FIXME add contact addresses page
+		return "";
 	}
 	
 	@RequestMapping(path="/getCitiesByProvince", method=RequestMethod.GET)
