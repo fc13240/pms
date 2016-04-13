@@ -234,7 +234,7 @@
                       <div class="row">
                         <div class="col-xs-12">
                 
-							<form action="<s:url value='/user/'/>" method="post">
+							<form action="<s:url value='/user/addContactAddress.html'/>" method="post">
 								联系人名称<input type="text" name="reciver">
 								通讯地址
 								<select name="province" id="province" onchange="loadCities()">
@@ -253,7 +253,8 @@
 									<option value=''>请选择</option>
 								</select>
 								详细地址<input type="text" name="detailAddress">		
-								手机或固话<input type="text" name="phone">																								
+								手机或固话<input type="text" name="phone">
+								<input type="submit" value="保存">																								
 							</form>
                         <!-- /.span --> 
                       </div>

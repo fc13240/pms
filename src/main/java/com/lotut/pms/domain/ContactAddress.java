@@ -1,20 +1,41 @@
 package com.lotut.pms.domain;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class ContactAddress {
 	private int id;
+	
+	@NotBlank
 	private String receiver;
-	private int province;
-	private long city;
-	private long district;
-	private long street;
+	
+	@NotNull
+	private Integer province;
+	
+	@NotNull
+	private Long city;
+	
+	@NotNull
+	private Long district;
+	
+	@NotNull
+	private Long street;
+	
+	@NotBlank
 	private String detailAddress;
+	
+	@NotBlank
 	private String phone;
+	
+	@Email
 	private String email;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getReceiver() {
@@ -23,28 +44,28 @@ public class ContactAddress {
 	public void setReceiver(String receiver) {
 		this.receiver = receiver;
 	}
-	public int getProvince() {
+	public Integer getProvince() {
 		return province;
 	}
-	public void setProvince(int province) {
+	public void setProvince(Integer province) {
 		this.province = province;
 	}
-	public long getCity() {
+	public Long getCity() {
 		return city;
 	}
-	public void setCity(long city) {
+	public void setCity(Long city) {
 		this.city = city;
 	}
-	public long getDistrict() {
+	public Long getDistrict() {
 		return district;
 	}
-	public void setDistrict(long district) {
+	public void setDistrict(Long district) {
 		this.district = district;
 	}
-	public long getStreet() {
+	public Long getStreet() {
 		return street;
 	}
-	public void setStreet(long street) {
+	public void setStreet(Long street) {
 		this.street = street;
 	}
 	public String getDetailAddress() {

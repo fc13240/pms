@@ -6,15 +6,18 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -76,6 +79,14 @@ public class UserController {
 	
 	@RequestMapping(path="/contactAddressAddForm", method=RequestMethod.GET)
 	public String showContactAddressAddForm(Model model) {
+		List<Map<String, String>> provinces = userService.getAllProvinces();
+		model.addAttribute("provinces", provinces);
+		
+		return "contact_address_create_form";
+	}
+	
+	@RequestMapping(path="/addContactAddress", method=RequestMethod.POST)
+	public String addContactAddress(@Valid ContactAddress contactAddress, Errors errors, Model model) {
 		List<Map<String, String>> provinces = userService.getAllProvinces();
 		model.addAttribute("provinces", provinces);
 		
