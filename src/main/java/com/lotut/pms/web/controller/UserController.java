@@ -46,9 +46,11 @@ public class UserController {
 	
 	@RequestMapping(path="/register", method=RequestMethod.POST)
 	public String register(User user) {
-		userService.register(user);
-		
-		return "register_success";
+		boolean success=userService.register(user);
+		if(success){
+			return "register_success";
+		}
+			return "register_form";
 	}
 	
 	@RequestMapping(path="/changePasswordForm", method=RequestMethod.GET)
@@ -57,13 +59,14 @@ public class UserController {
 	}
     
 	@RequestMapping(path="/changePassword", method=RequestMethod.POST)
-	public String changePassword(@RequestParam("lastPassword")String lastPassword,@RequestParam("newPassword")String newPassword) {
+	public String changePassword(@RequestParam("lastPassword")String lastPassword,@RequestParam("newPassword")String newPassword,Model model) {
 		boolean success = userService.changePassword(lastPassword, newPassword);
 		
 		if(success){
 			return "changePassword_success";
 		}
 		
+		model.addAttribute("success", success);
 		return "changePassword_form";
 	}
 	

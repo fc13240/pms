@@ -191,8 +191,7 @@
 										<label class="block clearfix">
 												<span class="block input-icon input-icon-right">
 												修改密码成功！
-												
-											</span>
+												</span>
 										</label>	
 										</form>								
 
