@@ -339,12 +339,14 @@
                               </tr>
                             </thead>
                             <tbody>
-								<c:forEach items="${notices}" var="notice">
+								<c:forEach items="${notices}" var="notice" varStatus="status">
 	                              <tr>
 	                                <td class="center"><label class="pos-rel">
 	                                    <span class="batch-share-item"><input type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
 	                                    <span class="lbl"></span> </label></td>
-	                                <td class="center"><a href="#">1</a></td>
+	                                <td class="center">
+	                                	<a href="#">${status.count + (page.currentPage-1)*page.pageSize}</a>
+	                                </td>
 	                                <td><a href="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')"><c:out value="${notice.patent.appNo}"/></td>
 									<td><c:out value="${notice.patent.name}"/></td>
 									<td><c:out value="${notice.patent.firstAppPerson}"/></td>
@@ -403,7 +405,7 @@
 											<c:if test="${searchCondition == null}">
 											<form:form action="" modelAttribute="searchCondition" method="get">
 											<div class="col-lg-12">	
-														共 ${page.totalPages} 页    第${page.currentPage} 页
+														共 ${page.totalPages} 页${page.totalRecords}条记录    第${page.currentPage} 页
 														<a href="?currentPage=1">首页</a>
 													<c:choose>
 														<c:when test="${page.currentPage - 1 > 0}">
@@ -432,7 +434,7 @@
 															<a href="?currentPage=${page.totalPages}">尾页</a>
 														</c:otherwise>
 													</c:choose>
-											<input type="text" id="page.pageNo" style="width:50px;" name="currentPage"/>
+											<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage"/>
 												<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>	
 											</div>
 											</form:form>
@@ -440,7 +442,7 @@
 											<c:if test="${searchCondition != null}">
 											<form:form action="" modelAttribute="searchCondition" method="get">
 											<div class="col-lg-12">	
-														共 ${page.totalPages} 页    第${page.currentPage} 页
+														共 ${page.totalPages} 页${page.totalRecords}条记录    第${page.currentPage} 页
 														<a href="?page.currentPage=1&${searchCondition}">首页</a>
 													<c:choose>
 														<c:when test="${page.currentPage - 1 > 0}">
@@ -470,7 +472,7 @@
 														</c:otherwise>
 													</c:choose>
 										 	<!-- 分页功能 End -->
-											<input type="text" id="page.pageNo" style="width:50px;" name="currentPage"/>
+											<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage"/>
 												<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
 											</div>
 											</form:form>
