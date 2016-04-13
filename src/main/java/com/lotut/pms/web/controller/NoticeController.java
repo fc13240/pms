@@ -6,7 +6,6 @@ import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -138,7 +137,6 @@ public class NoticeController {
 		String zipFileName = noticeFile.getSubmittedFileName();
 		noticeFile.write(zipFileName);
 		String zipFilePath = Settings.TEMP_DIR + zipFileName;
-//		String zipFilePath = "d:/soft/tomcat8/temp/" + zipFileName;
 		noticeService.uploadNotices(zipFilePath);
 		return "upload_success";
 	}	

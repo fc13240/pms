@@ -10,7 +10,6 @@ import com.lotut.pms.domain.NoticeProcessStatus;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.Patent;
 
 public interface NoticeMapper {
 	//分页

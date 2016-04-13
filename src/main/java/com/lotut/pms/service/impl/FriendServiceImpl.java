@@ -2,6 +2,8 @@ package com.lotut.pms.service.impl;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.lotut.pms.dao.FriendDao;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FriendService;
@@ -19,6 +21,7 @@ public class FriendServiceImpl implements FriendService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteFriend(int userId, int friendId) {
 		friendDao.deleteFriend(userId, friendId);
 	}
@@ -34,6 +37,7 @@ public class FriendServiceImpl implements FriendService {
 	}
 
 	@Override
+	@Transactional
 	public void sendFriendRequst(int fromUserId, int toUserId) {
 		friendDao.insertFriendRequest(fromUserId, toUserId);
 	}
@@ -44,6 +48,7 @@ public class FriendServiceImpl implements FriendService {
 	}
 	
 	@Override
+	@Transactional
 	public void processFriendRequest(int processUserId, int requestUserId, int processStatus) {
 		friendDao.processFriendRequest(processUserId, requestUserId, processStatus);
 	}

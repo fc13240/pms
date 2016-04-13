@@ -1,7 +1,6 @@
 package com.lotut.pms.web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -14,14 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.WebUtils;
 
 @Controller
 @RequestMapping(path="/user")
@@ -34,9 +31,10 @@ public class UserController {
 	}	
 	
 	@RequestMapping(path="/all", method=RequestMethod.GET)
-	public ModelAndView getAllUsers() {
+	public String getAllUsers(Model model) {
 		List<User> allUsers = userService.getAllUsers();
-		return new ModelAndView();
+		model.addAttribute("users", allUsers);
+		return "";
 	}	
 
 	@RequestMapping(path="/registerForm", method=RequestMethod.GET)
@@ -83,6 +81,7 @@ public class UserController {
 	public String showContactAddressAddForm(Model model) {
 		List<Map<String, String>> provinces = userService.getAllProvinces();
 		model.addAttribute("provinces", provinces);
+		
 		return "contact_address_create_form";
 	}
 	
@@ -91,12 +90,7 @@ public class UserController {
 		response.setContentType("application/json;charset=UTF-8");
 		List<Map<String, String>> cities = userService.getCitiesByProvinceId(provinceId);
 		
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.writeValueAsString(cities);
-		PrintWriter out = response.getWriter();
-		out.write(mapper.writeValueAsString(cities));
-		out.flush();
-		out.close();
+		WebUtils.writeJsonStrToResponse(response, cities);
 	}
 	
 	@RequestMapping(path="/getDistrictsByCity", method=RequestMethod.GET)
@@ -104,11 +98,7 @@ public class UserController {
 		response.setContentType("application/json;charset=UTF-8");
 		List<Map<String, String>> districts = userService.getDistrictsByCityId(cityId);
 		
-		ObjectMapper mapper = new ObjectMapper();
-		PrintWriter out = response.getWriter();
-		out.write(mapper.writeValueAsString(districts));
-		out.flush();
-		out.close();
+		WebUtils.writeJsonStrToResponse(response, districts);
 	}
 	
 	@RequestMapping(path="/getStreetsByDistrict", method=RequestMethod.GET)
@@ -116,11 +106,7 @@ public class UserController {
 		response.setContentType("application/json;charset=UTF-8");
 		List<Map<String, String>> streets = userService.getStreetsByDistrictId(districtId);
 		
-		ObjectMapper mapper = new ObjectMapper();
-		PrintWriter out = response.getWriter();
-		out.write(mapper.writeValueAsString(streets));
-		out.flush();
-		out.close();
+		WebUtils.writeJsonStrToResponse(response, streets);
 	}
 
 	@RequestMapping(path="/login", method=RequestMethod.POST)
@@ -130,7 +116,6 @@ public class UserController {
 	
     @RequestMapping(path = "/logout",method = RequestMethod.POST)  
     public String logout(HttpSession httpSession){  
-    //	httpSession.invalidate();
         return "login_form";
     }  	
 

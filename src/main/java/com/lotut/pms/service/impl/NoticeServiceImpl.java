@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.dao.NoticeDao;
 import com.lotut.pms.dao.PatentDao;
@@ -19,7 +21,6 @@ import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
-import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.service.NoticeService;
 import com.lotut.pms.service.utils.NoticeXmlParser;
 import com.lotut.pms.service.utils.ZipUtils;
@@ -105,11 +106,13 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	//通知书处理状态
 	@Override
+	@Transactional
 	public void updateNoticesProcessStatus(List<Integer> noticeIdList, int noticeProcessStatus) {
 		noticeDao.updateNoticesProcessStatus(noticeIdList, noticeProcessStatus);
 	}
 
 	@Override
+	@Transactional
 	public void changeNoticePaperApplyType(int noticeId, int paperApplyType) {
 		noticeDao.updateNoticePaperApplyType(noticeId, paperApplyType);
 	}
@@ -141,6 +144,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
+	@Transactional
 	public void uploadNotices(String zipFilePath) throws IOException, ZipException {
 		String noticeSubPath = zipFilePath.substring(zipFilePath.lastIndexOf("/")+1, zipFilePath.lastIndexOf(".zip"));
 		String noticePath = Settings.NOTICE_ROOT_PATH + noticeSubPath;
@@ -152,6 +156,7 @@ public class NoticeServiceImpl implements NoticeService {
 		saveOrUpdateNotices(notices);
 	}
 	
+	@Transactional
 	public void saveOrUpdateNotices(List<Notice> notices) {
 		for (Notice notice: notices) {
 			Patent patent = notice.getPatent();
@@ -179,8 +184,4 @@ public class NoticeServiceImpl implements NoticeService {
 		userPatents.add(userPatentMap);
 		sharePatentDao.insertUserPatents(userPatents);
 	}
-
-
-	
-	
 }

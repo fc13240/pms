@@ -1,8 +1,8 @@
 package com.lotut.pms.service.utils;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -16,7 +16,7 @@ import com.lotut.pms.service.constants.FeeTypeCode;
 
 public class FeeExcelGenerator {
 	public static void writeFeeRecordsToExcel(List<Fee> feeRecords, String resultExcelPath) throws IOException {
-		try (FileInputStream templateExcelInputStream = new FileInputStream(Settings.FEE_EXPORT_EXCEL_TEMPLATE);
+		try (InputStream templateExcelInputStream = FeeExcelGenerator.class.getResourceAsStream(Settings.FEE_EXPORT_EXCEL_TEMPLATE);
 				FileOutputStream resultExcelOutputStream = new FileOutputStream(resultExcelPath);
 				HSSFWorkbook workbook = new HSSFWorkbook(templateExcelInputStream);) {
 			

@@ -9,11 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.dao.FeeDao;
 import com.lotut.pms.dao.PatentDao;
 import com.lotut.pms.domain.Fee;
-import com.lotut.pms.domain.FeeMonitorStatus;
 import com.lotut.pms.domain.FeeSearchCondition;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.User;
@@ -37,6 +38,7 @@ public class FeeServiceImpl implements FeeService {
 	}
 
 	@Override
+	@Transactional
 	public void changeFeesInvoiceTitle(List<Long> feeIdList, String invoiceTitle) {
 		feeDao.updateFeesInvoiceTitle(feeIdList, invoiceTitle);
 	}
@@ -56,6 +58,7 @@ public class FeeServiceImpl implements FeeService {
 	}
 
 	@Override
+	@Transactional
 	public Map<String, List<?>> batchGrabFees(List<Long> patentIds) {
 		Map<String, List<?>> grabResultMap = new HashMap<>();
 		List<Patent> patents = patentDao.getPatentsByIds(patentIds);
@@ -82,6 +85,7 @@ public class FeeServiceImpl implements FeeService {
 	}
 	
 	@Override
+	@Transactional
 	public Map<String, Object> grabFees(long patentId) {
 		Map<String, Object> grabResultMap = new HashMap<>();
 		List<Long> patentIds = new ArrayList<>();
@@ -138,6 +142,7 @@ public class FeeServiceImpl implements FeeService {
 	 * 费用监控
 	 */
 	@Override
+	@Transactional
 	public List<Fee> changeMonitorStatus(List<Long> feeIds,int monitorStatus) {
 		feeDao.updateMonitorStatus(feeIds,monitorStatus);
 		int userId = PrincipalUtils.getCurrentUserId();

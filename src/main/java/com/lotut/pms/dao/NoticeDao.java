@@ -2,16 +2,12 @@ package com.lotut.pms.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.lotut.pms.domain.Notice;
 import com.lotut.pms.domain.NoticePaperApplyType;
 import com.lotut.pms.domain.NoticeProcessStatus;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.Patent;
-import com.lotut.pms.domain.PatentSearchCondition;
 
 public interface NoticeDao {
 	//分页
