@@ -229,11 +229,12 @@
 														<span id="passwordError" class="passwordError">原密码输入错误!!</span>
 													</div>
 												</c:if>
-												请输入新密码：<input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="新密码" />
-												请确认新密码：<input type="password" class="form-control" name="newPasswordConfirm" id="newPasswordConfirm" placeholder="确认新密码" />
+												请输入新密码：<input type="password" class="form-control" name="newPassword" id="newPassword" minlength="4" maxlength="30" placeholder="新密码至少4位" required/>
+												请确认新密码：<input type="password" class="form-control" name="newPasswordConfirm" id="newPasswordConfirm" minlength="4" maxlength="30" equalTo="#newPassword"placeholder="确认新密码" required/>
 												<div style="margin-top:30px; float:left;width:300px;">
-												<input type="submit" id="resetPassword" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;" value="确认修改" onClick="return checkForm(pwd_change_form)" >
+												<input type="submit" id="resetPassword" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;" value="确认修改" />
 												<input type="reset" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;" value="重置" name="reset" />
+<!-- 												onClick="return checkForm(pwd_change_form)" -->
 												</div>
 										</form>								
 
@@ -354,5 +355,16 @@
 		$("#passwordError").hide();
 	}
 </script>
+<script type="text/javascript">
+	jQuery(function($) {
+		$("#reset-form").validate({
+			submitHandler: function(form){ 
+				form.submit();     
+			}
+		});
+	});
+</script>
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="spring" prefix="s" %>
 <%@ taglib uri="security" prefix="se" %>
+<%@ taglib uri="c" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +37,12 @@
 	<![endif]-->
 
 	<script src="<s:url value='/static/js/jquery.js'/>"></script>
+	<style type="text/css">
+			.userNameError{
+				    color:#F00;
+				    font-weight:bold;
+			}
+	</style>
 </head>
 
 <body class="login-layout" style=" background-image: url(<s:url value='/static/images/bacground.jpg'/>);background-size:cover; ">
@@ -68,8 +75,12 @@
 											<fieldset>
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="text" class="form-control" id="username" minlength="3" maxlength="30" placeholder="用户名" name="username" required />
-														<div class='warning' id='warning_1'><span></span></div>
+														<input type="text" class="form-control" id="username" minlength="3" maxlength="30" placeholder="用户名" name="username" onkeydown="clearPasswordErrorSpan()" required />
+														<c:if test="${success != null && !success}">
+															<div>
+																<span id="userNameError" class="userNameError">用户名已被注册请重新输入!</span>
+															</div>
+														</c:if>
 														<i class="ace-icon fa fa-user"></i>
 													</span>
 												</label>
@@ -223,6 +234,11 @@
 		 });
 		 
 		});
+	</script>
+	<script type="text/javascript">
+			function clearPasswordErrorSpan() {
+				$("#userNameError").hide();
+			}
 	</script>	
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	

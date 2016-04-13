@@ -43,11 +43,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/register", method=RequestMethod.POST)
-	public String register(User user) {
+	public String register(User user,Model model) {
 		boolean success=userService.register(user);
 		if(success){
 			return "register_success";
 		}
+			model.addAttribute("success", success);
 			return "register_form";
 	}
 	
