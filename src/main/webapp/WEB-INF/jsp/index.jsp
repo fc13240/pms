@@ -34,9 +34,7 @@
 <body class="no-skin">
 <!-- #section:basics/navbar.layout -->
 <div id="navbar" class="navbar navbar-default">
-  <script type="text/javascript">
-				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-			</script>
+
   <div class="navbar-container" id="navbar-container">
     <!-- #section:basics/sidebar.mobile.toggle -->
     <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar"> <span class="sr-only">Toggle sidebar</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
@@ -134,12 +132,7 @@
       </div>
       <!-- /section:basics/content.breadcrumbs -->
       <div class="page-content">
-        <div class="alert alert-block alert-success ace">
-          <button type="button" class="close" data-dismiss="alert"> <i class="ace-icon fa fa-times"></i> </button>
-          <i class="ace-icon fa fa-check green"></i> 欢迎来到 <strong class="green"> 龙图腾专利管理系统 <small>(v1.0.0)</small> </strong> 
-		</div>
-        <!--                    <input type="checkbox" class="ace" id="checkall" name="checkall" /> -->
-        <!-- /.page-header -->
+ 
         <div class="row">
           <div class="col-xs-12">
             <!-- PAGE CONTENT BEGINS -->
