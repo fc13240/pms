@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.UserService;
@@ -46,9 +47,16 @@ public class FriendController {
 	}	
 	
 	@RequestMapping(path="/searchForm", method=RequestMethod.GET)
-	public String showSearchForm(Model model) {
-		List<User> users = userSerivce.getAllUsers();
+	public String showSearchForm(Page page,Model model) {
+		if (page.getCurrentPage() < 1) {
+			page.setCurrentPage(1);
+		}
+		
+		int totalCount=(int)userSerivce.getAllUsersCount();
+		page.setTotalRecords(totalCount);
+		List<User> users = userSerivce.getAllUsers(page);
 		model.addAttribute("friends", users);
+		model.addAttribute("Page", page);
 		return "friend_search_from";
 	}
 	

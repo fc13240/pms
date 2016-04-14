@@ -4,11 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 
 
 public interface UserService {
-	List<User> getAllUsers();
+	
+	List<User> getAllUsers(Page page);
+	
+	long getAllUsersCount();
+	
 	/*
 	 * 注册
 	 */

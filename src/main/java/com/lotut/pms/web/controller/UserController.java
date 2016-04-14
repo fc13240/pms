@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -34,8 +35,8 @@ public class UserController {
 	}	
 	
 	@RequestMapping(path="/all", method=RequestMethod.GET)
-	public String getAllUsers(Model model) {
-		List<User> allUsers = userService.getAllUsers();
+	public String getAllUsers(Page page, Model model) {
+		List<User> allUsers = userService.getAllUsers(page);
 		model.addAttribute("users", allUsers);
 		return "";
 	}	
