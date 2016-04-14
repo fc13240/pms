@@ -36,6 +36,7 @@
 	<![endif]-->
 
 	<script src="<s:url value='/static/js/jquery.js'/>"></script>
+	
 </head>
 
 <body class="login-layout" style=" background-image: url(<s:url value='/static/images/bacground.jpg'/>);background-size:cover; ">

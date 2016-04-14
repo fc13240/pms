@@ -42,6 +42,7 @@
 		<script src="../assets/js/respond.js"></script>
 		<![endif]-->	
 	
+	
 </head>
 <body class="no-skin">
 <!-- #section:basics/navbar.layout -->
@@ -228,7 +229,7 @@
 							<div class="form-group">
 							
 							 <input type="text" id="form-field-1" style="height:45px;width:450px;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" />
-							 <button type="submit" class="btn btn-primary friend-query">查询</button>
+							 <button type="submit" class="btn btn-primary friend-query" onclick="javascript:pageHide()">查询</button>
 							</div>
 							
 						</form>	
@@ -252,7 +253,8 @@
 								</tr>
 							</c:forEach>
 						</table>
-										<div class="col-lg-12">	
+										<c:if test="${param.keyword == null}">
+										<div class="col-lg-12" id="page.page" style="display:block;">	
 												共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页
 												<a href="?currentPage=1">首页</a>
 											<c:choose>
@@ -287,6 +289,8 @@
 									<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
 										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
 									</div>
+									</c:if>
+							
 					</div>
 					<div class="col-lg-9"></div>
 				</div>      
@@ -387,7 +391,11 @@ function sendFriendRequest(toUser) {
 		
 		
 </script>
-
+	<script type="text/javascript">
+			function pageHide() {
+				document.getElementById("page.page").style.display="none";
+			}
+	</script>
 <!-- ace scripts --> 
 <script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 
 <script src="<s:url value='/static/js/ace/elements.colorpicker.js'/>"></script> 
