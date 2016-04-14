@@ -73,4 +73,6 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 		public void deleteFees(List<Long> feeIdList, int userId) {
 			feeMapper.deleteFees(feeIdList, userId);
 		}
+
+		
 }

@@ -58,7 +58,6 @@ public class FeeServiceImpl implements FeeService {
 	}
 
 	@Override
-	@Transactional
 	public Map<String, List<?>> batchGrabFees(List<Long> patentIds) {
 		Map<String, List<?>> grabResultMap = new HashMap<>();
 		List<Patent> patents = patentDao.getPatentsByIds(patentIds);
@@ -150,6 +149,16 @@ public class FeeServiceImpl implements FeeService {
 		return fees;
 	}
 	
+	/*
+	 * 批量费用监控
+	 */
+	@Override
+	@Transactional
+	public List<Fee> batchChangeMonitorStatus(List<Long> feeIds,List<Long> patents,int monitorStatus) {
+		feeDao.updateMonitorStatus(feeIds,monitorStatus);
+		List<Fee> resultFees = feeDao.getFeesByPatentIds(patents, PrincipalUtils.getCurrentUserId());
+		return resultFees;
+	}
 	//CS:deleteFees
 		@Override
 		public void deleteFees(List<Long> feeIds, int userId) {
