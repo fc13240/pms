@@ -367,7 +367,6 @@
                           	<!-- 分页功能 start -->
 								<div class="row">
 									<c:if test="${searchCondition == null}">
-									<form:form action="" modelAttribute="searchCondition" method="get">
 									<div class="col-lg-12">	
 												共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页
 												<a href="?currentPage=1">首页</a>
@@ -400,12 +399,11 @@
 											</c:choose>
 								 	<!-- 分页功能 End -->
 								
-									<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage"/>
+									<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
 										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
 								
 											
 									</div>
-									</form:form>
 									</c:if>
 									<c:if test="${searchCondition != null}">
 									<div class="col-lg-12">	
@@ -650,6 +648,19 @@
 	
 	function gotoPage() {
 		var pageNo = document.getElementById("page.pageNo").value;
+		
+		if (isNaN(pageNo)) {
+			alert("请输入数值");
+			return;
+		}
+		
+		pageNo = parseInt(pageNo);
+		
+		if (pageNo < 1 || pageNo > parseInt("${page.totalPages}")) {
+			alert("只能输入1-${page.totalPages}之间的数值");
+			return;
+		}
+		
 		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
 		
 		<c:if test="${searchCondition != null}">
