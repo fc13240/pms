@@ -252,9 +252,9 @@
                               </tr>
                             </thead>
                             <tbody>
-							<c:forEach items="${friends}" var="friend">
+							<c:forEach items="${friends}" var="friend" varStatus="status">
 								<tr>
-									<td></td>
+									<td>${status.count}</td>
 									<td><c:out value="${friend.username}"/></td>
 									<td><c:out value="${friend.name}"/></td>
 									<td><a  href="<s:url value='/friend/delete/'/><c:out value='${friend.userId}.html'/>">删除好友</a></td>
