@@ -226,9 +226,9 @@
 								<th>姓名</th>
 								<th>操作</th>
 							</tr>
-							<c:forEach items="${friendRequests}" var="request">
+							<c:forEach items="${friendRequests}" var="request" varStatus="status">
 								<tr>
-									<td></td>
+									<td>${status.count}</td>
 									<td><c:out value="${request.username}"/></td>
 									<td><c:out value="${request.name}"/></td>
 									<td><a  href='javascript:processFriendRequest("<c:out value='${request.userId}'/>", 2)'>通过验证</a>
