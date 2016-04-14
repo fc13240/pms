@@ -245,7 +245,7 @@
 							</tr>
 							<c:forEach items="${friends}" var="friend" varStatus="status">
 								<tr>
-									<td>${status.index+1}</td>
+									<td>${status.count + page.startIndex}</td>
 									<td><c:out value="${friend.username}"/></td>
 									<td><c:out value="${friend.name}"/></td>
 									<td><a  href='javascript:sendFriendRequest("<c:out value='${friend.userId}'/>");'>请求加为好友</a></td>

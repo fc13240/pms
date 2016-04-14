@@ -216,10 +216,6 @@
 
 	<!-- inline scripts related to this page -->
 	<script type="text/javascript">
-		$("#regist_button").click(function(){
-			$("#registerForm").submit();
-		});
-		
 		jQuery(function($) {
 		 $(document).on('click', '.toolbar a[data-target]', function(e) {
 			e.preventDefault();

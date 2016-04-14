@@ -270,7 +270,7 @@
 							</tr>
 						</c:forEach>
 							<tr>
-								<td colspan="3"><input type="button" class="btn btn-primary btn-block" id="addShareBtn" value="确定"/></td>
+								<td colspan="4"><input type="button" class="btn btn-primary btn-block" id="addShareBtn" value="确定"/></td>
 							</tr>
 						</table>
 					</div>
