@@ -233,7 +233,7 @@
                 
                             <span class="widget-toolbar" style="border:none;padding:0px;">
                             <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-                            <input type="text" style="height:45px;width:450px;" name="keyword" id="keywordId" placeholder="申请号/名称/申请人/内部编码" value="${searchCondition.keyword}" />
+                            <input type="text" style="height:45px;width:450px;" name="keyword" id="keywordId" placeholder="申请号/名称/申请人/内部编码"/>
                             	<button class="btn btn-info" type="submit" style="height:45px;">搜索</button>
                             
                                 <a href="#" data-action="collapse" style="margin-left:10px;">
