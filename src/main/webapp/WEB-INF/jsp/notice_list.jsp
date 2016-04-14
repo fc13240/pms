@@ -434,7 +434,7 @@
 															<a href="?currentPage=${page.totalPages}">尾页</a>
 														</c:otherwise>
 													</c:choose>
-											<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage"/>
+											<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
 												<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>	
 											</div>
 											</form:form>
@@ -472,7 +472,7 @@
 														</c:otherwise>
 													</c:choose>
 										 	<!-- 分页功能 End -->
-											<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage"/>
+											<input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onkeydown="gotoPageForEnter(event)"/>
 												<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
 											</div>
 											</form:form>
@@ -727,15 +727,20 @@ function batchProcessNotice(processStatus) {
 	
 	function batchShare() {
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		
+		var uniquePatentNos = []
 		if (!patentSelected) {
 			//formutil.alertMessage('请选择专利');
 			bootbox.alert('请选择专利');
 			return;
 		}
-		
-		var patents = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent').join(",");
-		
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
+		for (var i = 0; i < patents_checked.length; i++) {
+			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+				uniquePatentNos.push(patents_checked[i]);
+			}
+		}		
+		var patents = uniquePatentNos.join(",");
+				
 		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
 	}
 	
