@@ -23,6 +23,7 @@
 		<dom4j.version>1.6.1</dom4j.version>
 		<spring.version>4.2.5.RELEASE</spring.version>
 		<spring-security.version>4.0.4.RELEASE</spring-security.version>
+		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
 		<mybatis.version>3.3.1</mybatis.version>
 		<mybatis-spring.version>1.2.4</mybatis-spring.version>
 		<mysql.connector.version>5.1.38</mysql.connector.version>
@@ -228,31 +229,13 @@
 			<version>${spring-security.version}</version>
 		</dependency>
 		
-		<!-- ################## Hibernate ################## -->
- 		<dependency>  
-            <groupId>org.hibernate</groupId>  
-            <artifactId>hibernate-core</artifactId>  
-            <version>${hibernate.version}</version>  
-        </dependency>   
-        
- 		<dependency>  
-            <groupId>org.hibernate</groupId>  
-            <artifactId>hibernate-entitymanager</artifactId>  
-            <version>${hibernate.version}</version>  
-        </dependency>    
-        
- 		<dependency>  
-            <groupId>org.hibernate</groupId>  
-            <artifactId>hibernate-c3p0</artifactId>  
-            <version>${hibernate.version}</version>  
-        </dependency>    
-        
- 		<dependency>  
-            <groupId>org.hibernate</groupId>  
-            <artifactId>hibernate-java8</artifactId>  
-            <version>${hibernate.version}</version>  
-        </dependency>         
-        
+		<!-- ################## Hibernate validator ################## --> 
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>		   
+		        
         <!-- ################## mybatis ################## -->             
 		<dependency>
 			<groupId>org.mybatis</groupId>
