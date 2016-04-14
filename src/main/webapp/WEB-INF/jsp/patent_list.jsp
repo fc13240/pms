@@ -670,6 +670,8 @@
 			url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 		</c:if>
 		
+		alert(url);
+		
 		location.href = url
 		
 	}
