@@ -235,14 +235,16 @@
 	</div>
 				<div class="row">
 					<div class="col-lg-12">
-						<form action="<s:url value='/patent/searchFriends.html'/>" method="GET" class="navbar-form navbar-left" role="search">
+						<form action="<s:url value='/patent/searchFriends.html'/>" method="GET"  role="search">
 					<c:forEach items="${paramValues.patents}" var="patent">
 						<input type="hidden" name="patents" value="<c:out value='${patent}'/>">
 					</c:forEach>					
 					<div class="form-group">
-						<input type="text" class="form-control" name="keyword" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>">
+						<input type="text" id="form-field-1" style="height:30px;width:200px;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" />
+						<button class="btn btn-info" type="submit" style="height:30px; line-height:10px;">查询</button>
+	
 					</div>
-					<button type="submit" class="btn btn-primary friend-query">查询</button>
+
 				</form>	
 					</div>
 				</div>

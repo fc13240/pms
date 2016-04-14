@@ -725,15 +725,20 @@ function batchProcessNotice(processStatus) {
 	
 	function batchShare() {
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		
+		var uniquePatentNos = []
 		if (!patentSelected) {
 			//formutil.alertMessage('请选择专利');
 			bootbox.alert('请选择专利');
 			return;
 		}
-		
-		var patents = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent').join(",");
-		
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
+		for (var i = 0; i < patents_checked.length; i++) {
+			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+				uniquePatentNos.push(patents_checked[i]);
+			}
+		}		
+		var patents = uniquePatentNos.join(",");
+				
 		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
 	}
 	
