@@ -367,9 +367,8 @@
                           	<!-- 分页功能 start -->
 								<div class="row">
 									<c:if test="${searchCondition == null}">
-									<form:form action="" modelAttribute="searchCondition" method="get">
 									<div class="col-lg-12">	
-												共 ${page.totalPages} 页    第${page.currentPage} 页
+												共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页
 												<a href="?currentPage=1">首页</a>
 											<c:choose>
 												<c:when test="${page.currentPage - 1 > 0}">
@@ -400,17 +399,15 @@
 											</c:choose>
 								 	<!-- 分页功能 End -->
 								
-									<input type="text" id="page.pageNo" style="width:50px;" name="currentPage"/>
+									<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
 										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
 								
 											
 									</div>
-									</form:form>
 									</c:if>
 									<c:if test="${searchCondition != null}">
-									<form:form action="" modelAttribute="searchCondition" method="get">
 									<div class="col-lg-12">	
-												共 ${page.totalPages} 页    第${page.currentPage} 页
+												共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页
 												<a href="?page.currentPage=1&${searchCondition}">首页</a>
 											<c:choose>
 												<c:when test="${page.currentPage - 1 > 0}">
@@ -441,10 +438,9 @@
 											</c:choose>
 								 	<!-- 分页功能 End -->
 								
-									<input type="text" id="page.pageNo" style="width:50px;" name="page.currentPage"/>
+									<input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onkeydown="gotoPageForEnter(event)"/>
 										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
 									</div>
-									</form:form>
 									 	
 									</c:if>
 								</div>
@@ -654,23 +650,39 @@
 	}
 	
 	function gotoPage() {
-		var patentType = $("#patentTypeId").val();
-		var patentStatus = $("#patentStatusId").val();
-		var startAppDate = $("#startAppDateId").val();
-		var endAppDate = $("#endAppDateId").val();
-		var keyword = $("#keywordId").val();
 		var pageNo = document.getElementById("page.pageNo").value;
+		
+		if (isNaN(pageNo)) {
+			alert("请输入数值");
+			return;
+		}
+		
+		pageNo = parseInt(pageNo);
+		
+		if (pageNo < 1 || pageNo > parseInt("${page.totalPages}")) {
+			alert("只能输入1-${page.totalPages}之间的数值");
+			return;
+		}
+		
 		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
 		
-		if (isSearch()) {
- 				//url = "<s:url value='/patent/search.html'/>?page.currentPage="+nextPage +"&"+${searchCondition};
-				url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
-		}
+		<c:if test="${searchCondition != null}">
+			url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		</c:if>
 		
 		location.href = url
 		
 	}
 	
+	function gotoPageForEnter(event) {
+		var e = event ? event : window.event;
+				
+		if(event.keyCode == 13) {
+			gotoPage();
+		}
+	}
+	
+	/*
 	function isSearch() {
 		var patentType = $("#patentTypeId").val();
 		var patentStatus = $("#patentStatusId").val();
@@ -692,6 +704,7 @@
 		
 		return false;
 	}
+	*/
 	
 	function processPageEnter(event, pageInput) {
 		var keyCode = event.keyCode ? event.keyCode 

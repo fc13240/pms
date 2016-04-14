@@ -67,6 +67,29 @@ formutil.getAllCheckedCheckboxValues = function(itemCheckboxSelector, attr) {
 	return attr_values;
 }
 
+formutil.getAllCheckboxValues = function(itemCheckboxSelector, attr) {
+	var attrValues = [];
+	
+	var itemCheckboxes = $(itemCheckboxSelector);
+	for (var i = 0; i < itemCheckboxes.length; i++) {
+		attrValues.push(itemCheckboxes[i].getAttribute(attr));
+	}	
+	
+	return attrValues;
+}
+
+formutil.removeDuplicate = function(valueArray) {
+	var resultValues = [];
+	
+	for (var i = 0; i < valueArray.length; i++) {
+		if ($.inArray(valueArray[i], resultValues) == -1) {
+			resultValues.push(valueArray[i]);
+		}
+	}	
+	
+	return resultValues;
+}
+
 formutil.alertMessage = function(message, needReload) {
 	needReload = needReload || false;
 	

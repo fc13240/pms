@@ -57,4 +57,17 @@
 		 where district = #{districtId}
 	</select>	
 	
+	<insert id="saveContactAddress" parameterType="ContactAddress" >
+		insert into contact_addresses(receiver, province, city, district, street, detail_address, phone, email, user)
+		values(#{receiver}, #{province}, #{city}, #{district}, #{street}, #{detailAddress}, 
+				#{phone}, #{email,javaType=string,jdbcType=VARCHAR}, #{userId})
+	</insert>
+
+	<select id="getUserContactAddresses" resultType="ContactAddress">
+		select id, receiver, province, city, district, street, 
+				   detail_address as detailAddress, phone, email
+		  from contact_addresses
+		 where user = #{userId}		
+	</select>
+	
 </mapper>

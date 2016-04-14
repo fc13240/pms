@@ -51,5 +51,8 @@
 	<bean id="multipartResolver"  class="org.springframework.web.multipart.support.StandardServletMultipartResolver">  
 	</bean>  
 	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">      
+      	<property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>      
+  	</bean>   	
 	
 </beans>

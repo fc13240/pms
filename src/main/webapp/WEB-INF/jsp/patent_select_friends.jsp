@@ -256,13 +256,15 @@
 					<div class="col-lg-3">
 						<table class="table table-bordered table-striped">
 							<tr>
-								<th><input type="checkbox" class="check-item">序号</th>
+								<th><input type="checkbox" class="check-item"></th>
+								<th>序号</th>
 								<th>用户名</th>
 								<th>姓名</th>
 							</tr>
-							<c:forEach items="${friends}" var="friend">
+							<c:forEach items="${friends}" var="friend" varStatus="status">
 							<tr>
-								<td><input name="friend" type="checkbox" class="check-item" friend="<c:out value='${friend.userId}'/>">编号</td>
+								<td><input name="friend" type="checkbox" class="check-item" friend="<c:out value='${friend.userId}'/>"></td>
+								<td>${status.count}</td>
 								<td><c:out value="${friend.username}"/></td>
 								<td><c:out value="${friend.name}"/></td>
 							</tr>

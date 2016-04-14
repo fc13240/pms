@@ -243,9 +243,9 @@
                               </tr>
                             </thead>
                             <tbody>
-							<c:forEach items="${sharePatents}" var="share">
+							<c:forEach items="${sharePatents}" var="share" varStatus="status">
 								<tr>
-									<td>编号</td>
+									<td>${status.index+1}</td>
 									<td>${share.shareBy.username}</td>
 									<td><a href="javascript:window.open('<s:url value="/patent/detail/"/>${share.patent.patentId}.html')">${share.patent.appNo}</a></td>
 									<td>${share.patent.name}</td>
