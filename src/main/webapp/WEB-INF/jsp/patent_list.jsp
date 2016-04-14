@@ -649,18 +649,12 @@
 	}
 	
 	function gotoPage() {
-		var patentType = $("#patentTypeId").val();
-		var patentStatus = $("#patentStatusId").val();
-		var startAppDate = $("#startAppDateId").val();
-		var endAppDate = $("#endAppDateId").val();
-		var keyword = $("#keywordId").val();
 		var pageNo = document.getElementById("page.pageNo").value;
 		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
 		
-		if (isSearch()) {
- 				//url = "<s:url value='/patent/search.html'/>?page.currentPage="+nextPage +"&"+${searchCondition};
-				url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
-		}
+		<c:if test="${searchCondition != null}">
+			url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		</c:if>
 		
 		location.href = url
 		
@@ -674,6 +668,7 @@
 		}
 	}
 	
+	/*
 	function isSearch() {
 		var patentType = $("#patentTypeId").val();
 		var patentStatus = $("#patentStatusId").val();
@@ -695,6 +690,7 @@
 		
 		return false;
 	}
+	*/
 	
 	function processPageEnter(event, pageInput) {
 		var keyCode = event.keyCode ? event.keyCode 
