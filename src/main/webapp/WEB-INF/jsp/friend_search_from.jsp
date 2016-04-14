@@ -235,7 +235,7 @@
 					</div>
 				</div>		
 				<div class="row">
-					<div class="col-lg-3">
+					<div class="col-lg-8">
 						<table class="table table-bordered table-striped">
 							<tr>
 								<th>序号</th>
