@@ -18,6 +18,18 @@
 		  from patents p join share_patents sp on p.patent_id = sp.patent join users u on sp.share_by = u.user_id
 		 where sp.share_by = #{userId};		
 	</select>
+	<!-- 用户分享专利分页 
+	<select id="getUserSharedPatentsCount" resultType="int">
+		select Count(*)
+		  from patents p join share_patents sp on p.patent_id = sp.patent join users u on sp.share_by = u.user_id
+		 where sp.share_by = #{userId};	
+	</select>
+	<select id="getUserSharedPatents" parameterType="Page" resultMap="SharedPatentResultMap">
+		select u.user_id, u.username, p.patent_id, p.app_no, p.patent_name, p.app_person
+		  from patents p join share_patents sp on p.patent_id = sp.patent join users u on sp.share_by = u.user_id
+		 where sp.share_by = #{userId} order by u.username p.patent_id limit #{startIndex}, #{pageSize};		
+	</select>
+	-->
 		
 	<select id="getFriendsSharedPatents" parameterType="int" resultMap="SharedPatentResultMap">
 		select u.username, p.patent_id, p.app_no, p.patent_name, p.app_person

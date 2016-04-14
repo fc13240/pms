@@ -68,10 +68,10 @@ public class FeeController {
 	 * 批量修改监控
 	 */
 	@RequestMapping(path="/batchChangeMonitorStatus", method=RequestMethod.GET)
-	public String batchChangeMonitorStatus(@RequestParam("fees")List<Long> feeIds, @RequestParam("monitorStatus")int monitorStatus,Model model) {
-		List<Fee> fees=feeService.changeMonitorStatus(feeIds, monitorStatus);
-			model.addAttribute("fees", fees);
-			return "batch_fee_list_withou_grap";
+	public String batchChangeMonitorStatus(@RequestParam("fees")List<Long> feeIds,@RequestParam("patents")List<Long> patents, @RequestParam("monitorStatus")int monitorStatus,Model model) {
+		List<Fee> fees=feeService.batchChangeMonitorStatus(feeIds, patents,monitorStatus);
+		model.addAttribute("fees", fees);
+		return "batch_fee_list_withou_grap";
 	}
 	
 	@RequestMapping(path="/list", method=RequestMethod.GET)
