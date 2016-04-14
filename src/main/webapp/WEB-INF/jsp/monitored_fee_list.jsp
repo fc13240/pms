@@ -257,12 +257,12 @@
                             </thead>
                             <tbody>
 							
-							<c:forEach items="${fees}" var="fee">
+							<c:forEach items="${fees}" var="fee" varStatus="status">
 								<tr>
 									<td>
 										<span class="batch-share-item"><input type="checkbox" class="fee-check-item" fee="${fee.feeId}"></span>
 									</td>
-									<td class="center"><a href="#">1</a></td>
+									<td class="center"><a href="#">${status.index+1}</a></td>
 									<td>${fee.patent.appNo}</td>
 									<td>${fee.patent.name}</td>
 									<td>${fee.patent.firstAppPerson}</td>
