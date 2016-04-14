@@ -49,12 +49,14 @@ public class UserController {
 	@RequestMapping(path="/register", method=RequestMethod.POST)
 	public String register(User user,Model model,HttpSession session) {
 		boolean success=userService.register(user);
+		
 		if(success){
 			session.invalidate();
 			return "register_success";
 		}
-			model.addAttribute("success", success);
-			return "register_form";
+		
+		model.addAttribute("success", success);
+		return "register_form";
 	}
 	
 	@RequestMapping(path="/changePasswordForm", method=RequestMethod.GET)
@@ -152,8 +154,6 @@ public class UserController {
     public String logout(HttpSession httpSession){  
         return "login_form";
     }  	
-
-
 	
 	public UserController() {
 	}
