@@ -66,18 +66,18 @@
 											<fieldset>
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="text" class="form-control" name="username" id="count" placeholder="用户名" autofocus="autofocus" />
+														<input type="text" class="form-control" name="username" id="count" placeholder="用户名" autofocus="autofocus" required/>
 														<!-- 加一个提示区 --> 
-														<span id="count_span">请输入用户名</span>
+<%-- 														<span id="count_span">请输入用户名</span> --%>
 														<i class="ace-icon fa fa-user"></i>
 													</span>
 												</label>
 
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="password" class="form-control" name="password" id="password" placeholder="密码" />
+														<input type="password" class="form-control" name="password" id="password" placeholder="密码" required/>
 														<!-- 加一个提示区 -->
-														<span id="password_span">请输入密码</span>
+<%-- 														<span id="password_span">请输入密码</span> --%>
 														<i class="ace-icon fa fa-lock"></i>
 													</span>
 												</label>
@@ -256,6 +256,8 @@
 		 });
 		 
 		});
-	</script>	
+	</script>
+	<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+	<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	
 </body>
 </html>
