@@ -770,48 +770,61 @@ function batchProcessNotice(processStatus) {
 		window.open("/fee/list?patentId=" + patentId);
 	}
 	
-
-
-
 	
 	function gotoPage() {
-		var noticeType = $("#noticeTypeId").val();
-		var noticeProcessStatus = $("#noticeProcessStatusId").val();
-		var startDispatchDate = $("#startAppDateId").val();
-		var endDispatchDate = $("#endAppDateId").val();
-		var keyword = $("#keywordId").val();
 		var pageNo = document.getElementById("page.pageNo").value;
+		
+		if(isNaN(pageNo)){
+			alert("请输入数值");
+			return;
+		}
+		
+		pageNo=parseInt(pageNo);
+		
+		if(pageNo<1 || pageNo > parseInt("${page.totalPages}")){
+			alert("只能输入1-${page.totalPages}之间的数值");
+			return;
+		}
 		var url = "<s:url value='/notice/list.html'/>?currentPage=" + pageNo;
 		
-		if (isSearch()) {
- 				//url = "<s:url value='/patent/search.html'/>?page.currentPage="+nextPage +"&"+${searchCondition};
+		<c:if test="${searchCondition != null}">
 				url = "<s:url value='/notice/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
-		}
+		</c:if>
 		
 		location.href = url
 	}
 	
-	function isSearch() {
-		var noticeType = $("#noticeTypeId").val();
-		var noticeProcessStatus = $("#noticeProcessStatusId").val();
-		var startDispatchDate = $("#startAppDateId").val();
-		var endDispatchDate = $("#endAppDateId").val();
-		var keyword = $("#keywordId").val();
-		
-		if (!isEmpty(noticeType) || !isEmpty(noticeProcessStatus) || !isEmpty(startDispatchDate) || !isEmpty(endDispatchDate) || !isEmpty(keywordId)) {
-			return true;
+	function gotoPageForEnter(event) {
+		var e = event ? event : window.event;
+				
+		if(event.keyCode == 13) {
+			gotoPage();
 		}
-		
-		return false;
 	}
+// 	function isSearch() {
+// 		var noticeType = $("#noticeTypeId").val();
+// 		var noticeProcessStatus = $("#noticeProcessStatusId").val();
+// 		var startDispatchDate = $("#startAppDateId").val();
+// 		var endDispatchDate = $("#endAppDateId").val();
+// 		var keyword = $("#keywordId").val();
+		
+// 		if (!isEmpty(noticeType) || !isEmpty(noticeProcessStatus) || !isEmpty(startDispatchDate) || !isEmpty(endDispatchDate) || !isEmpty(keywordId)) {
+// 			return true;
+// 		}
+		
+// 		return false;
+// 	}
 
-	function isEmpty(value) {
-		if (value == null || value == "undefined" || value == "") {
-			return true;
-		}
+// 	function isEmpty(value) {
+// 		if (value == null || value == "undefined" || value == "") {
+// 			return true;
+// 		}
 		
-		return false;
-	}
+// 		return false;
+// 	}
+	
+	
+	
 </script>
 
 
