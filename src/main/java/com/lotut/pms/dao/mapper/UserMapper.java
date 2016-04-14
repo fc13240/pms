@@ -6,12 +6,19 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 
 public interface UserMapper {
-	List<User> getAllUsers();
+	List<User> getAllUsers(Page page);
+	
+	
+	int getAllUsersCount();
+	
 	User findByName(String username);
+	
 	void save(User user);
+	
 	void updatePassword(User user);
 	
 	User getById(int userId);

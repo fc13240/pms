@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lotut.pms.dao.UserDao;
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -20,8 +21,8 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public List<User> getAllUsers() {
-		return userDao.getAllUsers();
+	public List<User> getAllUsers(Page page) {
+		return userDao.getAllUsers(page);
 	}
 	//注册
 	@Override
@@ -86,5 +87,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<ContactAddress> getUserContactAddresses(int userId) {
 		return userDao.getUserContactAddresses(userId);
+	}
+
+
+	@Override
+	public long getAllUsersCount() {
+		return userDao.getAllUsersCount();
 	}
 }

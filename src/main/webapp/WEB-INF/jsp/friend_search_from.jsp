@@ -252,6 +252,41 @@
 								</tr>
 							</c:forEach>
 						</table>
+										<div class="col-lg-12">	
+												共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页
+												<a href="?currentPage=1">首页</a>
+											<c:choose>
+												<c:when test="${page.currentPage - 1 > 0}">
+													<a href="?currentPage=${page.currentPage - 1}">上一页</a>
+												</c:when>
+												<c:when test="${page.currentPage - 1 <= 0}">
+													<a href="?currentPage=1">上一页</a>
+												</c:when>
+											</c:choose>
+											<c:choose>
+												<c:when test="${page.totalPages==0}">
+													<a href="?currentPage=${page.currentPage}">下一页</a>
+												</c:when>
+												<c:when test="${page.currentPage + 1 < page.totalPages}">
+													<a href="?currentPage=${page.currentPage+1}">下一页</a>
+												</c:when>
+												<c:when test="${page.currentPage + 1 >= page.totalPages}">
+													<a href="?currentPage=${page.totalPages}">下一页</a>
+												</c:when>
+											</c:choose>
+											<c:choose>
+												<c:when test="${page.totalPages==0}">
+													<a href="?currentPage=${page.currentPage}">尾页</a>
+												</c:when>
+												<c:otherwise>
+													<a href="?currentPage=${page.totalPages}">尾页</a>
+												</c:otherwise>
+											</c:choose>
+								 	<!-- 分页功能 End -->
+								
+									<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
+										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
+									</div>
 					</div>
 					<div class="col-lg-9"></div>
 				</div>      
@@ -320,7 +355,38 @@ function sendFriendRequest(toUser) {
 	});
 }
 </script>
-
+<script type="text/javascript">
+		function gotoPage() {
+			var pageNo = document.getElementById("page.pageNo").value;
+			
+			if (isNaN(pageNo)) {
+				alert("请输入数值");
+				return;
+			}
+			
+			pageNo = parseInt(pageNo);
+			
+			if (pageNo < 1 || pageNo > parseInt("${page.totalPages}")) {
+				alert("只能输入1-${page.totalPages}之间的数值");
+				return;
+			}
+			
+			var url = "<s:url value='/friend/searchForm.html'/>?currentPage=" + pageNo;
+			
+			location.href = url
+			
+		}
+		
+		function gotoPageForEnter(event) {
+			var e = event ? event : window.event;
+					
+			if(event.keyCode == 13) {
+				gotoPage();
+			}
+		}
+		
+		
+</script>
 
 <!-- ace scripts --> 
 <script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 
