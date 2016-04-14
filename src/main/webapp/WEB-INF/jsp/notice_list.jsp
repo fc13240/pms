@@ -347,7 +347,7 @@
 	                                <td class="center">
 	                                	<a href="#">${status.count + (page.currentPage-1)*page.pageSize}</a>
 	                                </td>
-	                                <td><a href="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')"><c:out value="${notice.patent.appNo}"/></td>
+	                                <td><a href="javascript: void;" onclick="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')"><c:out value="${notice.patent.appNo}"/></td>
 									<td><c:out value="${notice.patent.name}"/></td>
 									<td><c:out value="${notice.patent.firstAppPerson}"/></td>
 									<td><c:out value="${notice.patent.patentStatus.statusDescription}"/></td>
