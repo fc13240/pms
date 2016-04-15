@@ -339,12 +339,12 @@
                               </tr>
                             </thead>
                             <tbody>
-								<c:forEach items="${notices}" var="notice">
+								<c:forEach items="${notices}" var="notice" varStatus="status">
 	                              <tr>
 	                                <td class="center"><label class="pos-rel">
 	                                    <span class="batch-share-item"><input type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
 	                                    <span class="lbl"></span> </label></td>
-	                                <td class="center"><a href="#">1</a></td>
+	                                <td class="center"><a href="#">${status.count + (page.currentPage-1)*page.pageSize}</a></td>
 	                                <td><a href="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')"><c:out value="${notice.patent.appNo}"/></td>
 									<td><c:out value="${notice.patent.name}"/></td>
 									<td><c:out value="${notice.patent.firstAppPerson}"/></td>

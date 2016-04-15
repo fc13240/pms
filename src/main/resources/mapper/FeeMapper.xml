@@ -82,6 +82,31 @@
 		 order by p.patent_id, f.deadline	
 	</select>
 	
+	
+	<!-- CS:分页 -->
+	<select id="getUserMonitoredFeesByPage" parameterType="Page" resultMap="FeeResultMap">
+		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
+					 f.fee_id, f.deadline, f.fee_type, f.amount, f.invoice_title, fp.fee_payment_status_id, fp.fee_payment_status_desc,
+					 fs.fee_monitor_status_id, fs.fee_monitor_status_desc
+		  from (fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
+		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
+				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
+				join patent_status ps on p.patent_status = ps.patent_status_id) 
+		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
+		 order by p.patent_id, f.deadline
+		 limit #{startIndex}, #{pageSize}
+	</select>
+	
+	<select id="getUserMonitoredFeesCount"  resultType="int">
+		select count(*)
+		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
+		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
+				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
+				join patent_status ps on p.patent_status = ps.patent_status_id
+		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
+		 order by p.patent_id, f.deadline	
+	</select>
+	
 	<select id="searchUserMonitoredFees" parameterType="FeeSearchCondition" resultMap="FeeResultMap">
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
@@ -115,6 +140,82 @@
 			</if>		 
 		order by p.patent_id, f.deadline
 	</select>	
+	
+	
+	
+	
+	
+	<!-- CS:搜索分页 -->
+	<select id="searchUserMonitoredFeesByPage" parameterType="FeeSearchCondition" resultMap="FeeResultMap">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
+					 f.fee_id, f.deadline, f.fee_type, f.amount, f.invoice_title, fp.fee_payment_status_id, fp.fee_payment_status_desc,
+					 fs.fee_monitor_status_id, fs.fee_monitor_status_desc
+		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
+		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
+				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
+				join patent_status ps on p.patent_status = ps.patent_status_id
+		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
+		 	<if test="patentType != null">
+		 		and p.patent_type = #{patentType}
+		 	</if>	
+		 	<if test="patentStatus != null">
+		 		and p.patent_status = #{patentStatus}
+		 	</if>		 	
+		 	<if test="paymentStatus != null">
+		 		and f.fee_payment_status = #{paymentStatus}
+		 	</if>		 			 	
+		 	<if test="startDeadline != null">
+		 		and f.deadline >= #{startDeadline}
+		 	</if>	
+		 	<if test="endDeadline != null">
+		 		<![CDATA[ and f.deadline <= #{endDeadline} ]]>
+		 	</if>		
+		 	<if test="keyword != null">
+				and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
+					or p.app_person like #{keyword_pattern} or f.fee_type like #{keyword_pattern}) 																	
+			</if>		 
+		order by p.patent_id, f.deadline
+		limit #{startIndex}, #{pageSize}
+	</select>
+	
+	<select id="searchUserMonitoredFeesCount" resultType="int">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+		select count(*)
+		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
+		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
+				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
+				join patent_status ps on p.patent_status = ps.patent_status_id
+		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
+		 	<if test="patentType != null">
+		 		and p.patent_type = #{patentType}
+		 	</if>	
+		 	<if test="patentStatus != null">
+		 		and p.patent_status = #{patentStatus}
+		 	</if>		 	
+		 	<if test="paymentStatus != null">
+		 		and f.fee_payment_status = #{paymentStatus}
+		 	</if>		 			 	
+		 	<if test="startDeadline != null">
+		 		and f.deadline >= #{startDeadline}
+		 	</if>	
+		 	<if test="endDeadline != null">
+		 		<![CDATA[ and f.deadline <= #{endDeadline} ]]>
+		 	</if>		
+		 	<if test="keyword != null">
+				and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
+					or p.app_person like #{keyword_pattern} or f.fee_type like #{keyword_pattern}) 																	
+			</if>		 
+		order by p.patent_id, f.deadline
+	</select>
+	
+	
+	
+	
 	
 	<insert id="insertFees" parameterType="list" useGeneratedKeys="true" keyProperty="feeId">
 		insert into fees(deadline, fee_type, amount, patent, fee_owner) 

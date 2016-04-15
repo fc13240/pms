@@ -16,6 +16,7 @@ import com.lotut.pms.dao.FeeDao;
 import com.lotut.pms.dao.PatentDao;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.FeeSearchCondition;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FeeService;
@@ -155,5 +156,32 @@ public class FeeServiceImpl implements FeeService {
 		public void deleteFees(List<Long> feeIds, int userId) {
 			feeDao.deleteFees(feeIds, userId);
 		}
+
+		
+	//CS:分页	
+
+		@Override
+		public List<Fee> getUserMonitoredFeesByPage(Page page) {
+			return feeDao.getUserMonitoredFeesByPage(page);
+		}
+
+	    @Override
+	    public long getUserMonitoredFeesCounts(int userId) {
+		    return feeDao.getUserMonitoredFeesCount(userId);
+	    }
+
+	    @Override
+	    public long searchUserMonitoredFeesCount(FeeSearchCondition searchCondition) {
+		    return feeDao.searchUserMonitoredFeesCount(searchCondition);
+	    }
+
+		@Override
+		public List<Fee> searchUserMonitoredFeesByPage(FeeSearchCondition searchCondition) {
+			return feeDao.searchUserMonitoredFeesByPage(searchCondition);
+		}
+
 	
+
+        
+		
 }
