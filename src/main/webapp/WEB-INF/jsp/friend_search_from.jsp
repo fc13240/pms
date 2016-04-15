@@ -229,7 +229,7 @@
 							<div class="form-group">
 							
 							 <input type="text" id="form-field-1" style="height:45px;width:450px;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" />
-							 <button type="submit" class="btn btn-primary friend-query" onclick="javascript:pageHide()">查询</button>
+							 <button type="submit" class="btn btn-primary friend-query" >查询</button>
 							</div>
 							
 						</form>	
@@ -365,6 +365,11 @@ function sendFriendRequest(toUser) {
 			
 			if (isNaN(pageNo)) {
 				alert("请输入数值");
+				return;
+			}
+			
+			if(pageNo==""){
+				alert("请输入数值")
 				return;
 			}
 			

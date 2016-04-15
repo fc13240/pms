@@ -657,6 +657,11 @@
 			return;
 		}
 		
+		if(pageNo==""){
+			alert("请输入数值")
+			return;
+		}
+		
 		pageNo = parseInt(pageNo);
 		
 		if (pageNo < 1 || pageNo > parseInt("${page.totalPages}")) {
