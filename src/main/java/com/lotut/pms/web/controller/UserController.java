@@ -49,12 +49,14 @@ public class UserController {
 	@RequestMapping(path="/register", method=RequestMethod.POST)
 	public String register(User user,Model model,HttpSession session) {
 		boolean success=userService.register(user);
+		
 		if(success){
 			session.invalidate();
 			return "register_success";
 		}
-			model.addAttribute("success", success);
-			return "register_form";
+		
+		model.addAttribute("success", success);
+		return "register_form";
 	}
 	
 	@RequestMapping(path="/changePasswordForm", method=RequestMethod.GET)
@@ -63,7 +65,8 @@ public class UserController {
 	}
     
 	@RequestMapping(path="/changePassword", method=RequestMethod.POST)
-	public String changePassword(@RequestParam("lastPassword")String lastPassword,@RequestParam("newPassword")String newPassword,Model model) {
+	public String changePassword(@RequestParam("lastPassword")String lastPassword, 
+			@RequestParam("newPassword")String newPassword, Model model) {
 		boolean success = userService.changePassword(lastPassword, newPassword);
 		
 		if(success){
@@ -92,7 +95,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/addContactAddress", method=RequestMethod.POST)
-	public String addContactAddress(@Valid ContactAddress contactAddress, Errors errors, Model model) {
+	public String addContactAddress(@Valid ContactAddress contactAddress, 
+			Errors errors, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		contactAddress.setUserId(userId);
 		userService.saveContactAddress(contactAddress);
@@ -105,12 +109,16 @@ public class UserController {
 	public String getUserContactAddresses(Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		
+		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
+		model.addAttribute("contactAddresses", contactAddresses);
 		// FIXME add contact addresses page
 		return "";
 	}
 	
 	@RequestMapping(path="/getCitiesByProvince", method=RequestMethod.GET)
-	public void getCitiesByProvince(@RequestParam("province")int provinceId, Model model, HttpServletResponse response) throws IOException {
+	public void getCitiesByProvince(@RequestParam("province")int provinceId, 
+			Model model, HttpServletResponse response) throws IOException {
+		
 		response.setContentType("application/json;charset=UTF-8");
 		List<Map<String, String>> cities = userService.getCitiesByProvinceId(provinceId);
 		
@@ -118,7 +126,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/getDistrictsByCity", method=RequestMethod.GET)
-	public void getDistrictsByCity(@RequestParam("city")long cityId, Model model, HttpServletResponse response) throws IOException {
+	public void getDistrictsByCity(@RequestParam("city")long cityId, 
+			Model model, HttpServletResponse response) throws IOException {
+		
 		response.setContentType("application/json;charset=UTF-8");
 		List<Map<String, String>> districts = userService.getDistrictsByCityId(cityId);
 		
@@ -126,7 +136,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/getStreetsByDistrict", method=RequestMethod.GET)
-	public void getStreetsByDistrict(@RequestParam("district")long districtId, Model model, HttpServletResponse response) throws IOException {
+	public void getStreetsByDistrict(@RequestParam("district")long districtId, 
+			Model model, HttpServletResponse response) throws IOException {
+		
 		response.setContentType("application/json;charset=UTF-8");
 		List<Map<String, String>> streets = userService.getStreetsByDistrictId(districtId);
 		
@@ -142,8 +154,6 @@ public class UserController {
     public String logout(HttpSession httpSession){  
         return "login_form";
     }  	
-
-
 	
 	public UserController() {
 	}
