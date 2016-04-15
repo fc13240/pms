@@ -123,7 +123,7 @@
 				<img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" />
 			<span class="user-info">
 				<small>Welcome,</small>
-				Jason
+				<se:authentication property="principal.username" />
 			</span>
 		
 			<i class="ace-icon fa fa-caret-down"></i>
@@ -256,7 +256,7 @@
 
 														<div class="form-group">
 															<div class="col-xs-12">
-																<input multiple="" type="file" name="noticeFile" style="display:none;" id="id-input-file-3" />
+																<input multiple="" type="file" name="noticeFile" style="display:none;" id="id-input-file-3" required />
 
 																<!-- /section:custom/file-input -->
 															</div>

@@ -123,7 +123,7 @@
 				<img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" />
 			<span class="user-info">
 				<small>Welcome,</small>
-				Jason
+				<se:authentication property="principal.username" />
 			</span>
 		
 			<i class="ace-icon fa fa-caret-down"></i>
@@ -257,7 +257,7 @@
 
 														<div class="form-group">
 															<div class="col-xs-12">
-																<input multiple="" type="file" name="patentFile" style="display:none;" id="id-input-file-3" />
+																<input multiple="" type="file" name="patentFile" style="display:none;" id="id-input-file-3" required />
 
 																<!-- /section:custom/file-input -->
 															</div>
@@ -266,7 +266,7 @@
 														<!-- #section:custom/file-input.filter -->
 														<label>
 															
-															<span class="lbl"> （注：只能上传zip压缩包）</span>
+															<span class="lbl"> （注：只能上传excel文件）</span>
 														</label>
 														<button class="btn btn-info" type="submit" style="height:45px;width：100px">上传</button>
 														

@@ -66,7 +66,7 @@
           </ul>
         </li>
         <!-- #section:basics/navbar.user_menu -->
-        <li class="light-blue" style="z-index:9999;"> <a data-toggle="dropdown" href="#" class="dropdown-toggle"> <img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" /> <span class="user-info"> <small>Welcome,</small> Jason </span> <i class="ace-icon fa fa-caret-down"></i> </a>
+        <li class="light-blue" style="z-index:9999;"> <a data-toggle="dropdown" href="#" class="dropdown-toggle"> <img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" /> <span class="user-info"> <small>Welcome,</small> <se:authentication property="principal.username" /> </span> <i class="ace-icon fa fa-caret-down"></i> </a>
           <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
             <li> <a href="<s:url value='/user/changePasswordForm.html'/>"> <i class="ace-icon fa fa-user"></i> 修改密码 </a> </li>
             <li class="divider"></li>

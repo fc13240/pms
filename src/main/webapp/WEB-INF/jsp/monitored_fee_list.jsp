@@ -124,7 +124,7 @@
 				<img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" />
 			<span class="user-info">
 				<small>Welcome,</small>
-				Jason
+				<se:authentication property="principal.username" />
 			</span>
 		
 			<i class="ace-icon fa fa-caret-down"></i>
@@ -224,6 +224,88 @@
             
     <!-- /section:basics/content.breadcrumbs -->  
     		<div class="page-content"> 
+
+
+               <div class="search-header" style="margin:0 auto;width:610px;">
+				<form action="<s:url value='/fee/search.html'/>" method="get">
+                    <div class="widget-box collapsed" style="border:none;">
+                        <div class="widget-header" style="background:none;padding:0px;border:none; margin-top:30px;">
+                
+                            <span class="widget-toolbar" style="border:none;padding:0px;">
+                            <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
+                            <input type="text" id="form-field-1" style="height:45px;width:450px;" name="keyword" id="keywordId" placeholder="申请号/名称/申请人/内部编码" value="" /><button class="btn btn-info" type="submit" style="height:45px;">搜索</button>
+                            
+                                <a href="#" data-action="collapse" style="margin-left:10px;">
+                                    <button type="button" class="btn btn-sm btn-success">高级搜索</button>
+                                    <i class="ace-icon fa fa-chevron-up" style="display:none;"></i>
+                                </a>
+                            </span>
+                        </div>
+                        <div class="widget-body" style="display: none;border-left:1px solid #CCC;border-right:1px solid #CCC;border-bottom:1px solid #CCC;boder-top:none;width:512px;margin-left:5px;">
+                        	
+	                            <div class="widget-main">
+	                                <div>
+	                                专利类型
+	                                <select id="patentType" name="patentType" >
+									  <option value="">全部</option>
+									  <option value="1">发明</option>
+									  <option value="2">实用新型</option>
+									  <option value="3">外观设计</option>
+									
+	                                </select>
+	                                
+	                                	
+	                                </div>
+	                                <div style="margin-top:10px;">缴费状态
+	                                <select id="paymentStatus" name="paymentStatus" >
+									  <option value="">全部</option>
+									  <option value="1">应缴</option>
+									  <option value="2">已缴</option>								 
+	                                </select>	
+			                  
+	                                </div>
+	                                <div style="margin-top:10px;">费用类型
+	                                <select id="patentStatus" name="patentStatus" >
+									  <option value="">全部</option>
+									  <option value="1">申请费</option>
+									  <option value="3">年登印费</option>
+									  <option value="6">维持年费</option>							 
+	                                </select>	
+			
+	                                </div>
+	                                <div style="margin-top:10px;">
+	                                    <div class="input-group">
+	                                    <div style="float:left;line-height: 32px;">缴费截止日</div>
+						                <div style="float:left;margin-left: 16px;" class="form-group" style="margin-left:15px;">
+							                <div style="float:left;"><input  type="text" class="form-control" id="startAppDateId" name="startDeadline" placeholder="缴费截止日开始" value="" readonly="readonly" onclick="javascript:$('#start_date_img').click()"></div> 
+											<div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="start_date_img"> - </div>
+							                </div>	
+						                
+						                <div style="float:left;" class="form-group">
+							                <div style="float:left;"><input type="text" class="form-control" id="endAppDateId" name="endDeadline" placeholder="缴费截止日结束" value="" readonly="readonly" onclick="javascript:$('#end_date_img').click()"> </div> 
+											<div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img"></div>
+				 							</div>
+			 							<div style="clear:both;"></div>	
+						                <style>
+						            
+	                
+							             /*.simple_bag th{background:#f5fafe;}*/
+							                .ui-jqgrid-view {margin-top: 30px;}
+							                #grid-table_cb{border-left: 1px solid #E1E1E1;}
+							                </style>			
+	                                    </div>
+	                                </div>
+	                                <div style="width:60px;margin:0 auto;">
+	                                <span class="input-group-btn">
+										<button type="submit" class="btn btn-purple btn-sm">搜索</button>
+									</span>
+	                                </div>
+	                            </div>
+	                    	        
+                        </div>
+                    </div>
+                </div>
+                </form>
 
                 <div class="row" style="margin-top:30px;">
                     <div class="col-xs-12"> 
