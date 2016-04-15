@@ -224,6 +224,56 @@
             
     <!-- /section:basics/content.breadcrumbs -->  
     		<div class="page-content"> 
+            
+	<div class="row">
+		<div class="col-lg-12">
+			<p>
+				<span>专利类型</span><span style="margin-left: 62px;">缴费状态</span>
+				<span style="margin-left: 30px;">费用类型</span><span style="margin-left: 60px;">缴费截止日</span>
+			</p>
+			<form action="<s:url value='/fee/search.html'/>" method="get" class="navbar-form navbar-left" role="search">
+				<div class="form-group">
+					<select class="form-control" id="patentType" name="patentType">
+					  <option value="">全部</option>
+					  <option value="1">发明</option>
+					  <option value="2">实用新型</option>
+					  <option value="3">外观设计</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<select class="form-control" id="paymentStatus" name="paymentStatus">
+					  <option value="">全部</option>
+					  <option value="1">应缴</option>
+					  <option value="2">已缴</option>
+					</select>
+				</div>			
+				<div class="form-group">
+					<select class="form-control" id="patentStatus" name="patentStatus">
+					  <option value="">全部</option>
+					  <option value="1">申请费</option>
+					  <option value="3">年登印费</option>
+					  <option value="6">维持年费</option>
+					</select>
+				</div>	
+				<input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>	
+				<div class="form-group">
+					<input type="text" class="form-control" id="startDeadline" name="startDeadline" placeholder="缴费截止日开始" 
+					value="" readonly="readonly" onclick="javascript:$('#start_fee_end_date_img').click()"> 
+					<img onclick="WdatePicker({el:'startDeadline'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="start_fee_end_date_img"> - 
+				</div>	
+				<div class="form-group">
+					<input type="text" class="form-control" id="endDeadline" name="endDeadline" placeholder="缴费截止日结束" 
+					value="" readonly="readonly" onclick="javascript:$('#end_fee_end_date_img').click()"> 
+					<img onclick="WdatePicker({el:'endDeadline'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_fee_end_date_img">
+				</div>					
+				<div class="form-group">
+					<input type="text" class="form-control" id="id_keyword" name="keyword" placeholder="申请号/专利名称/申请人/费用类型"
+					value="">
+				</div>
+				<button type="submit" class="btn btn-primary patent-query">查询</button>
+			</form>	
+		</div>
+	</div>
 
                 <div class="row" style="margin-top:30px;">
                     <div class="col-xs-12"> 
