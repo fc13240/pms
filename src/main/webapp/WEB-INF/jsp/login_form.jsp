@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="spring" prefix="s" %>
+<%@ taglib uri="c" prefix="c" %>
 <%@ taglib uri="security" prefix="se" %>
 <!DOCTYPE html>
 <html>
@@ -36,7 +37,12 @@
 	<![endif]-->
 
 	<script src="<s:url value='/static/js/jquery.js'/>"></script>
-	
+	<style type="text/css">
+			#loginError{
+				    color:#F00;
+				    font-weight:bold;
+			}
+	</style>
 </head>
 
 <body class="login-layout" style=" background-image: url(<s:url value='/static/images/bacground.jpg'/>);background-size:cover; ">
@@ -78,7 +84,10 @@
 													<span class="block input-icon input-icon-right">
 														<input type="password" class="form-control" name="password" id="password" placeholder="密码" required/>
 														<!-- 加一个提示区 -->
-<%-- 														<span id="password_span">请输入密码</span> --%>
+														<c:if test="${param.error!= null}">
+															<span id="loginError">登录失败！请检查用户名或密码！</span>
+														</c:if>
+														
 														<i class="ace-icon fa fa-lock"></i>
 													</span>
 												</label>
@@ -90,6 +99,8 @@
 														<input type="checkbox" class="ace" />
 														<span class="lbl"> 记住密码</span>
 													</label>
+													
+													
 
 											
 													<input type="submit" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;"  value="登陆">
