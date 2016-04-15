@@ -102,12 +102,8 @@
 	
 	<select id="getUserMonitoredFeesCount"  resultType="int">
 		select count(*)
-		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
-		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
-				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
-				join patent_status ps on p.patent_status = ps.patent_status_id
+		  from fees f 
 		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
-		 order by p.patent_id, f.deadline	
 	</select>
 	
 	<select id="searchUserMonitoredFees" parameterType="FeeSearchCondition" resultMap="FeeResultMap">
@@ -189,10 +185,7 @@
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
 		select count(*)
-		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
-		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
-				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
-				join patent_status ps on p.patent_status = ps.patent_status_id
+		  from fees f join patents p on f.patent = p.patent_id
 		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
 		 	<if test="patentType != null">
 		 		and p.patent_type = #{patentType}
@@ -213,7 +206,6 @@
 				and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
 					or p.app_person like #{keyword_pattern} or f.fee_type like #{keyword_pattern}) 																	
 			</if>		 
-		order by p.patent_id, f.deadline
 	</select>
 	
 	
