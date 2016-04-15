@@ -92,7 +92,7 @@
 													</label>
 
 											
-													<input type="submit" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;" value="登陆">
+													<input type="submit" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;"  value="登陆">
 
 													
 												</div>
@@ -253,6 +253,9 @@
 		 });
 		 
 		});
+	</script>
+	<script type="text/javascript">
+			
 	</script>
 	<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 	<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	
