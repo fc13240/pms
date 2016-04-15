@@ -19,7 +19,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lotut.pms.domain.Fee;
+import com.lotut.pms.domain.FeeMonitorStatus;
+import com.lotut.pms.domain.FeePaymentStatus;
+import com.lotut.pms.domain.FeeProcessStatus;
 import com.lotut.pms.domain.FeeSearchCondition;
+import com.lotut.pms.domain.Notice;
+import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.PatentStatus;
+import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FeeService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -78,20 +86,31 @@ public class FeeController {
 	public ModelAndView getFeeList() {
 		return null;
 	}
-	
+	//CS:分页
 	@RequestMapping(path="/monitoredFeeList", method=RequestMethod.GET)
-	public String getMonitoredFees(Model model) {
+	public String getMonitoredFees(Model model,Page page) {
 		int userId = PrincipalUtils.getCurrentUserId();
-		List<Fee> fees = feeService.getUserMonitoredFees(userId);
+		page.setUserId(userId);
+		int totalCount=(int)feeService.getUserMonitoredFeesCounts(userId);
+		page.setTotalRecords(totalCount);
+		List<Fee> fees = feeService.getUserMonitoredFeesByPage(page);
+		model.addAttribute("page", page);
 		model.addAttribute("fees", fees);
 		return "monitored_fee_list";
 	}	
 	
+	//CS:搜索分页
 	@RequestMapping(path="/search", method=RequestMethod.GET)
 	public String searchUserMonitoredFees(FeeSearchCondition searchCondition, Model model) {
-		List<Fee> fees = feeService.searchUserMonitoredFees(searchCondition);
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		List<Fee> fees = feeService.searchUserMonitoredFeesByPage(searchCondition);
+		int totalCount=(int)feeService.searchUserMonitoredFeesCount(searchCondition);
+		Page page=searchCondition.getPage();
+		page.setTotalRecords(totalCount);
 		model.addAttribute("fees", fees);
+		model.addAttribute("page", page);
 		return "monitored_fee_list";
+	
 	}
 	
 	
@@ -141,4 +160,6 @@ public class FeeController {
 			feeService.deleteFees(feeIds, userId);
 			return "monitored_fee_list";
 		}
+		
+	    
 }

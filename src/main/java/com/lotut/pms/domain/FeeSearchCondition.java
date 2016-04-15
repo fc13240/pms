@@ -1,5 +1,7 @@
 package com.lotut.pms.domain;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,6 +17,8 @@ public class FeeSearchCondition {
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date endDeadline;
 	private String keyword;
+	private Page page;
+	private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 	public Integer getPatentType() {
 		return patentType;
@@ -70,5 +74,26 @@ public class FeeSearchCondition {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	
+	public Page getPage() {
+		return page;
+	}
+
+	public void setPage(Page page) {
+		this.page = page;
+	}
+	
+	@Override
+	public String toString() {
+		String patentTypeStr = patentType == null ? "" : patentType.toString();
+		String paymentStatusStr = paymentStatus == null ? "" : paymentStatus.toString();
+		String patentStatusStr = patentStatus == null ? "" : patentStatus.toString();
+		String startDeadlineStr = startDeadline == null ? "" : formatter.format(startDeadline);
+		String endDeadlineStr = endDeadline == null ? "" : formatter.format(endDeadline);
+		String keywordStr = keyword == null ? "" : keyword;
+		return 	"&patentType="+patentTypeStr+
+				"&paymentStatus="+paymentStatusStr+"&patentStatus="+patentStatusStr+"&startDeadline="
+				+startDeadlineStr+"&endDeadline="+endDeadlineStr+"&keyword="+keywordStr;
 	}
 }

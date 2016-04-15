@@ -6,9 +6,27 @@ import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.FeeSearchCondition;
+import com.lotut.pms.domain.Notice;
+import com.lotut.pms.domain.NoticeSearchCondition;
+import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.Patent;
 
 public interface FeeMapper {
+	
+	//CS:分页
 	List<Fee> getUserMonitoredFees(int userId);
+	
+	List<Fee> getUserMonitoredFeesByPage(Page page);
+	
+	int getUserMonitoredFeesCount(int userId);
+	
+	//CS:搜索分页
+	
+    int searchUserMonitoredFeesCount(FeeSearchCondition searchCondition);
+	
+	List<Fee> searchMonitoredFeesByPage(FeeSearchCondition searchCondition);
+	
+	
 	
 	void insertFees(List<Fee> fees);
 	

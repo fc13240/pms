@@ -221,6 +221,7 @@
               </ul>
               <!-- /.breadcrumb --> 
             </div>
+            
     <!-- /section:basics/content.breadcrumbs -->  
     		<div class="page-content"> 
 
@@ -262,7 +263,8 @@
 									<td>
 										<span class="batch-share-item"><input type="checkbox" class="fee-check-item" fee="${fee.feeId}"></span>
 									</td>
-									<td class="center"><a href="#">${status.index+1}</a></td>
+									<td class="center"><a href="#">${status.count + (page.currentPage-1)*page.pageSize}</a></td>
+
 									<td>${fee.patent.appNo}</td>
 									<td>${fee.patent.name}</td>
 									<td>${fee.patent.firstAppPerson}</td>
@@ -278,6 +280,85 @@
 							
                             </tbody>
                           </table>
+                          
+                          
+                        <!-- CS:分页 -->
+								<div class="row">
+											<c:if test="${searchCondition == null}">
+											<div class="col-lg-12">	
+														共 ${page.totalPages} 页${page.totalRecords}条记录    第${page.currentPage} 页
+														<a href="?currentPage=1">首页</a>
+													<c:choose>
+														<c:when test="${page.currentPage - 1 > 0}">
+															<a href="?currentPage=${page.currentPage - 1}">上一页</a>
+														</c:when>
+														<c:when test="${page.currentPage - 1 <= 0}">
+															<a href="?currentPage=1">上一页</a>
+														</c:when>
+													</c:choose>
+													<c:choose>
+														<c:when test="${page.totalPages==0}">
+															<a href="?currentPage=${page.currentPage}">下一页</a>
+														</c:when>
+														<c:when test="${page.currentPage + 1 < page.totalPages}">
+															<a href="?currentPage=${page.currentPage+1}">下一页</a>
+														</c:when>
+														<c:when test="${page.currentPage + 1 >= page.totalPages}">
+															<a href="?currentPage=${page.totalPages}">下一页</a>
+														</c:when>
+													</c:choose>
+													<c:choose>
+														<c:when test="${page.totalPages==0}">
+															<a href="?currentPage=${page.currentPage}">尾页</a>
+														</c:when>
+														<c:otherwise>
+															<a href="?currentPage=${page.totalPages}">尾页</a>
+														</c:otherwise>
+													</c:choose>
+											<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
+												<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>	
+											</div>
+											</c:if>
+											<c:if test="${searchCondition != null}">
+											<div class="col-lg-12">	
+														共 ${page.totalPages} 页${page.totalRecords}条记录    第${page.currentPage} 页
+														<a href="?page.currentPage=1&${searchCondition}">首页</a>
+													<c:choose>
+														<c:when test="${page.currentPage - 1 > 0}">
+															<a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a>
+														</c:when>
+														<c:when test="${page.currentPage - 1 <= 0}">
+															<a href="?page.currentPage=1&${searchCondition}">上一页</a>
+														</c:when>
+													</c:choose>
+													<c:choose>
+														<c:when test="${page.totalPages==0}">
+															<a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a>
+														</c:when>
+														<c:when test="${page.currentPage + 1 < page.totalPages}">
+															<a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a>
+														</c:when>
+														<c:when test="${page.currentPage + 1 >= page.totalPages}">
+															<a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a>
+														</c:when>
+													</c:choose>
+													<c:choose>
+														<c:when test="${page.totalPages==0}">
+															<a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a>
+														</c:when>
+														<c:otherwise>
+															<a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a>
+														</c:otherwise>
+													</c:choose>
+										 	<!-- 分页功能 End -->
+											<input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onkeydown="gotoPageForEnter(event)"/>
+												<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
+											</div>
+											</c:if>
+								</div>
+                                <!-- CS:分页 --> 
+                                
+                                
                         </div>
                         <!-- /.span --> 
                       </div>
@@ -384,6 +465,47 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 		}
 	});			
 }
+
+
+
+//CS:FeesCount
+	function gotoPage() {
+		var pageNo = document.getElementById("page.pageNo").value;
+		
+		if(isNaN(pageNo)){
+			alert("请输入数值");
+			return;
+		}
+		
+		if(pageNo==""){
+			alert("请输入数值")
+			return;
+		}
+		
+		pageNo=parseInt(pageNo);
+		
+		if(pageNo<1 || pageNo > parseInt("${page.totalPages}")){
+			alert("只能输入1-${page.totalPages}之间的数值");
+			return;
+		}
+		var url = "<s:url value='/fee/monitoredFeeList.html'/>?currentPage=" + pageNo;
+		
+		<c:if test="${searchCondition != null}">
+				url = "<s:url value='/fee/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		</c:if>
+		
+		location.href = url
+	}
+	
+	function gotoPageForEnter(event) {
+		var e = event ? event : window.event;
+				
+		if(event.keyCode == 13) {
+			gotoPage();
+		}
+	}
+
+
 </script>	
 
 
