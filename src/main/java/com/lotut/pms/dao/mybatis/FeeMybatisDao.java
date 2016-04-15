@@ -98,6 +98,5 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 			return feeMapper.searchUserMonitoredFeesCount(searchCondition);
 		}
 
-	
-
+		
 }

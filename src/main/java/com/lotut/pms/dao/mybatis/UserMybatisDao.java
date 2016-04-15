@@ -7,14 +7,16 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.UserDao;
 import com.lotut.pms.dao.mapper.UserMapper;
+import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 
 public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 	private UserMapper userMapper;
 	
 	@Override
-	public List<User> getAllUsers() {
-		return userMapper.getAllUsers();
+	public List<User> getAllUsers(Page page) {
+		return userMapper.getAllUsers(page);
 	}
 
 	public UserMapper getUserMapper() {
@@ -67,4 +69,26 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 	public List<Map<String, String>> getStreetsByDistrictId(long districtId) {
 		return userMapper.getStreetsByDistrictId(districtId);
 	}
+
+	@Override
+	public void saveContactAddress(ContactAddress contactAddress) {
+		userMapper.saveContactAddress(contactAddress);
+	}
+
+	@Override
+	public List<ContactAddress> getUserContactAddresses(int userId) {
+		return userMapper.getUserContactAddresses(userId);
+	}
+
+//	@Override
+//	public List<User> getAllUsersBypage(Page page) {
+//		return userMapper.getAllUsersBypage(page);
+//	}
+
+	@Override
+	public int getAllUsersCount() {
+		return userMapper.getAllUsersCount();
+	}
+
+	
 }

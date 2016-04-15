@@ -6,15 +6,19 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -31,8 +35,8 @@ public class UserController {
 	}	
 	
 	@RequestMapping(path="/all", method=RequestMethod.GET)
-	public String getAllUsers(Model model) {
-		List<User> allUsers = userService.getAllUsers();
+	public String getAllUsers(Page page, Model model) {
+		List<User> allUsers = userService.getAllUsers(page);
 		model.addAttribute("users", allUsers);
 		return "";
 	}	
@@ -43,10 +47,16 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/register", method=RequestMethod.POST)
-	public String register(User user) {
-		userService.register(user);
+	public String register(User user,Model model,HttpSession session) {
+		boolean success=userService.register(user);
 		
-		return "register_success";
+		if(success){
+			session.invalidate();
+			return "register_success";
+		}
+		
+		model.addAttribute("success", success);
+		return "register_form";
 	}
 	
 	@RequestMapping(path="/changePasswordForm", method=RequestMethod.GET)
@@ -55,13 +65,15 @@ public class UserController {
 	}
     
 	@RequestMapping(path="/changePassword", method=RequestMethod.POST)
-	public String changePassword(@RequestParam("lastPassword")String lastPassword,@RequestParam("newPassword")String newPassword) {
+	public String changePassword(@RequestParam("lastPassword")String lastPassword, 
+			@RequestParam("newPassword")String newPassword, Model model) {
 		boolean success = userService.changePassword(lastPassword, newPassword);
 		
 		if(success){
 			return "changePassword_success";
 		}
 		
+		model.addAttribute("success", success);
 		return "changePassword_form";
 	}
 	
@@ -82,8 +94,31 @@ public class UserController {
 		return "contact_address_create_form";
 	}
 	
+	@RequestMapping(path="/addContactAddress", method=RequestMethod.POST)
+	public String addContactAddress(@Valid ContactAddress contactAddress, 
+			Errors errors, Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		contactAddress.setUserId(userId);
+		userService.saveContactAddress(contactAddress);
+		
+		// FIXME add success page
+		return "";
+	}
+	
+	@RequestMapping(path="/getContactAddresses", method=RequestMethod.POST)
+	public String getUserContactAddresses(Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		
+		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
+		model.addAttribute("contactAddresses", contactAddresses);
+		// FIXME add contact addresses page
+		return "";
+	}
+	
 	@RequestMapping(path="/getCitiesByProvince", method=RequestMethod.GET)
-	public void getCitiesByProvince(@RequestParam("province")int provinceId, Model model, HttpServletResponse response) throws IOException {
+	public void getCitiesByProvince(@RequestParam("province")int provinceId, 
+			Model model, HttpServletResponse response) throws IOException {
+		
 		response.setContentType("application/json;charset=UTF-8");
 		List<Map<String, String>> cities = userService.getCitiesByProvinceId(provinceId);
 		
@@ -91,7 +126,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/getDistrictsByCity", method=RequestMethod.GET)
-	public void getDistrictsByCity(@RequestParam("city")long cityId, Model model, HttpServletResponse response) throws IOException {
+	public void getDistrictsByCity(@RequestParam("city")long cityId, 
+			Model model, HttpServletResponse response) throws IOException {
+		
 		response.setContentType("application/json;charset=UTF-8");
 		List<Map<String, String>> districts = userService.getDistrictsByCityId(cityId);
 		
@@ -99,7 +136,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/getStreetsByDistrict", method=RequestMethod.GET)
-	public void getStreetsByDistrict(@RequestParam("district")long districtId, Model model, HttpServletResponse response) throws IOException {
+	public void getStreetsByDistrict(@RequestParam("district")long districtId, 
+			Model model, HttpServletResponse response) throws IOException {
+		
 		response.setContentType("application/json;charset=UTF-8");
 		List<Map<String, String>> streets = userService.getStreetsByDistrictId(districtId);
 		
@@ -115,8 +154,6 @@ public class UserController {
     public String logout(HttpSession httpSession){  
         return "login_form";
     }  	
-
-
 	
 	public UserController() {
 	}

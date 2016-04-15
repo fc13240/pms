@@ -225,6 +225,7 @@
             </div>
     <!-- /section:basics/content.breadcrumbs -->  
     		<div class="page-content"> 
+                            <input type="text" style="height:45px;width:450px;" name="keyword" id="keywordId" placeholder="申请号/名称/申请人/内部编码"" />
                 <!-- /.page-header -->
                 <div class="row" style="margin-top:30px;">
                     <div class="col-xs-12"> 
@@ -266,7 +267,7 @@
 	                                <td class="center">
 	                                	<a href="#">${status.count + (page.currentPage-1)*page.pageSize}</a> 
 	                                </td>
-	                                <td><a href="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${patent.patentId}"/>.html')"><c:out value="${patent.appNo}"/></a></td>
+	                                <td><a href="javascript: void;" onclick="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${patent.patentId}"/>.html')"><c:out value="${patent.appNo}"/></a></td>
 	                                <td class="hidden-480"><c:out value="${patent.name}"/></td>
 	                                <td><c:out value="${patent.appPerson}"/></td>
 	                                <td class="hidden-480"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
@@ -293,9 +294,8 @@
                           	<!-- 分页功能 start -->
 								<div class="row">
 									<c:if test="${searchCondition == null}">
-									<form:form action="" modelAttribute="searchCondition" method="get">
 									<div class="col-lg-12">	
-												共 ${page.totalPages} 页    第${page.currentPage} 页
+												共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页
 												<a href="?currentPage=1">首页</a>
 											<c:choose>
 												<c:when test="${page.currentPage - 1 > 0}">
@@ -326,17 +326,15 @@
 											</c:choose>
 								 	<!-- 分页功能 End -->
 								
-									<input type="text" id="page.pageNo" style="width:50px;" name="currentPage"/>
+									<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
 										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
 								
 											
 									</div>
-									</form:form>
 									</c:if>
 									<c:if test="${searchCondition != null}">
-									<form:form action="" modelAttribute="searchCondition" method="get">
 									<div class="col-lg-12">	
-												共 ${page.totalPages} 页    第${page.currentPage} 页
+												共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页
 												<a href="?page.currentPage=1&${searchCondition}">首页</a>
 											<c:choose>
 												<c:when test="${page.currentPage - 1 > 0}">
@@ -367,10 +365,9 @@
 											</c:choose>
 								 	<!-- 分页功能 End -->
 								
-									<input type="text" id="page.pageNo" style="width:50px;" name="page.currentPage"/>
+									<input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onkeydown="gotoPageForEnter(event)"/>
 										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
 									</div>
-									</form:form>
 									 	
 									</c:if>
 								</div>
@@ -484,15 +481,18 @@
 	
 	function batchShare() {
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		
+		var uniquePatentNos = []
 		if (!patentSelected) {
-			//formutil.alertMessage('请选择专利');
 			bootbox.alert('请选择专利');
 			return;
 		}
-		
-		var patents = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent').join(",");
-		
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+		for (var i = 0; i < patents_checked.length; i++) {
+			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+				uniquePatentNos.push(patents_checked[i]);
+			}
+		}		
+		var patents = uniquePatentNos.join(",");		
 		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
 	}
 	function batchGrabFees(){
@@ -577,23 +577,45 @@
 	}
 	
 	function gotoPage() {
-		var patentType = $("#patentTypeId").val();
-		var patentStatus = $("#patentStatusId").val();
-		var startAppDate = $("#startAppDateId").val();
-		var endAppDate = $("#endAppDateId").val();
-		var keyword = $("#keywordId").val();
 		var pageNo = document.getElementById("page.pageNo").value;
+		
+		if (isNaN(pageNo)) {
+			alert("请输入数值");
+			return;
+		}
+		
+		if(pageNo==""){
+			alert("请输入数值")
+			return;
+		}
+		
+		pageNo = parseInt(pageNo);
+		
+		if (pageNo < 1 || pageNo > parseInt("${page.totalPages}")) {
+			alert("只能输入1-${page.totalPages}之间的数值");
+			return;
+		}
+		
 		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
 		
-		if (isSearch()) {
- 				//url = "<s:url value='/patent/search.html'/>?page.currentPage="+nextPage +"&"+${searchCondition};
-				url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
-		}
+		<c:if test="${searchCondition != null}">
+			url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		</c:if>
+		
 		
 		location.href = url
 		
 	}
 	
+	function gotoPageForEnter(event) {
+		var e = event ? event : window.event;
+				
+		if(event.keyCode == 13) {
+			gotoPage();
+		}
+	}
+	
+	/*
 	function isSearch() {
 		var patentType = $("#patentTypeId").val();
 		var patentStatus = $("#patentStatusId").val();
@@ -615,6 +637,7 @@
 		
 		return false;
 	}
+	*/
 	
 	function processPageEnter(event, pageInput) {
 		var keyCode = event.keyCode ? event.keyCode 

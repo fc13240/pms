@@ -3,11 +3,17 @@ package com.lotut.pms.service;
 import java.util.List;
 import java.util.Map;
 
+import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 
 
 public interface UserService {
-	List<User> getAllUsers();
+	
+	List<User> getAllUsers(Page page);
+	
+	long getAllUsersCount();
+	
 	/*
 	 * 注册
 	 */
@@ -26,4 +32,8 @@ public interface UserService {
 	List<Map<String, String>> getDistrictsByCityId(long cityId);
 	
 	List<Map<String, String>> getStreetsByDistrictId(long districtId);
+	
+	void saveContactAddress(ContactAddress contactAddress);
+	
+	List<ContactAddress> getUserContactAddresses(int userId);
 }

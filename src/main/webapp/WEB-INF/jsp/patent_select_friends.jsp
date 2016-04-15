@@ -235,14 +235,16 @@
 	</div>
 				<div class="row">
 					<div class="col-lg-12">
-						<form action="<s:url value='/patent/searchFriends.html'/>" method="GET" class="navbar-form navbar-left" role="search">
+						<form action="<s:url value='/patent/searchFriends.html'/>" method="GET"  role="search">
 					<c:forEach items="${paramValues.patents}" var="patent">
 						<input type="hidden" name="patents" value="<c:out value='${patent}'/>">
 					</c:forEach>					
 					<div class="form-group">
-						<input type="text" class="form-control" name="keyword" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>">
+						<input type="text" id="form-field-1" style="height:30px;width:200px;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" />
+						<button class="btn btn-info" type="submit" style="height:30px; line-height:10px;">查询</button>
+	
 					</div>
-					<button type="submit" class="btn btn-primary friend-query">查询</button>
+
 				</form>	
 					</div>
 				</div>
@@ -254,19 +256,21 @@
 					<div class="col-lg-3">
 						<table class="table table-bordered table-striped">
 							<tr>
-								<th><input type="checkbox" class="check-item">序号</th>
+								<th><input type="checkbox" class="check-item"></th>
+								<th>序号</th>
 								<th>用户名</th>
 								<th>姓名</th>
 							</tr>
-							<c:forEach items="${friends}" var="friend">
+							<c:forEach items="${friends}" var="friend" varStatus="status">
 							<tr>
-								<td><input name="friend" type="checkbox" class="check-item" friend="<c:out value='${friend.userId}'/>">编号</td>
+								<td><input name="friend" type="checkbox" class="check-item" friend="<c:out value='${friend.userId}'/>"></td>
+								<td>${status.count}</td>
 								<td><c:out value="${friend.username}"/></td>
 								<td><c:out value="${friend.name}"/></td>
 							</tr>
 						</c:forEach>
 							<tr>
-								<td colspan="3"><input type="button" class="btn btn-primary btn-block" id="addShareBtn" value="确定"/></td>
+								<td colspan="4"><input type="button" class="btn btn-primary btn-block" id="addShareBtn" value="确定"/></td>
 							</tr>
 						</table>
 					</div>

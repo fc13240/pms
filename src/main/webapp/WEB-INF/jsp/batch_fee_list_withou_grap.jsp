@@ -42,7 +42,7 @@
 			<c:forEach items="${fees}" var="fee" varStatus="status">
 				<tr>
 					<td>
-						<span class="batch-share-item"><input type="checkbox" class="fee-check-item" feeId="${fee.feeId}"></span>
+						<span class="batch-share-item"><input type="checkbox" class="fee-check-item" feeId="${fee.feeId}" patent="${fee.patent.patentId}"></span>
 						${status.index+1}
 					</td>
 					<td>${fee.patent.appNo}</td>
@@ -67,10 +67,10 @@
 <script src="<s:url value='/static/js/formutil.js'/>"></script>
 <script src="<s:url value='/static/js/jquery-ui.min.js'/>"></script>
 <script type="text/javascript">
-	$(function(){
-		formutil.clickAllCheckbox('tr th input.fee-check-item', 'tr td input.fee-check-item');
-		formutil.clickItemCheckbox('tr th input.fee-check-item', 'tr td input.fee-check-item');
-	});
+$(function(){
+	formutil.clickAllCheckbox('tr th input.fee-check-item', 'tr td input.fee-check-item');
+	formutil.clickItemCheckbox('tr th input.fee-check-item', 'tr td input.fee-check-item');
+});
 	
 	function updateMonitorStatus(status) {
 		var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
@@ -79,10 +79,12 @@
 			formutil.alertMessage('请选择应缴费记录');
 			return;
 		}
-		
+
 		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'feeId');
 		
-		location.href = "<s:url value='/fee/batchChangeMonitorStatus.html'/>?fees=" + fees + "&monitorStatus=" + status;
+		var patents = formutil.removeDuplicate(formutil.getAllCheckboxValues('tr td input.fee-check-item', 'patent'));
+		
+		location.href = "<s:url value='/fee/batchChangeMonitorStatus.html'/>?fees=" + fees + "&patents=" + patents + "&monitorStatus=" + status;
 	}
 	
 </script>

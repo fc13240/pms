@@ -189,14 +189,19 @@
 										<form action="<s:url value='/user/changePassword.html'/>" method="post">									
 										<se:csrfInput/>
 										<label class="block clearfix">
-												<span class="block input-icon input-icon-right">
+												<span class="block input-icon input-icon-right" style="font-size:20px;">
 												修改密码成功！
-												
-											</span>
+												</span>
 										</label>	
 										</form>								
-
+										
 										</div><!-- /.widget-box -->
+										<div class="toolbar center">
+										<a href="<s:url value='/loginForm.html'/>"  >
+											<i class="ace-icon fa fa-arrow-left"></i>
+											返回登录
+										</a>
+									</div>
 									</div><!-- /.col -->
 								</div><!-- /.row -->
 

@@ -264,6 +264,7 @@
 										<span class="batch-share-item"><input type="checkbox" class="fee-check-item" fee="${fee.feeId}"></span>
 									</td>
 									<td class="center"><a href="#">${status.count + (page.currentPage-1)*page.pageSize}</a></td>
+
 									<td>${fee.patent.appNo}</td>
 									<td>${fee.patent.name}</td>
 									<td>${fee.patent.firstAppPerson}</td>

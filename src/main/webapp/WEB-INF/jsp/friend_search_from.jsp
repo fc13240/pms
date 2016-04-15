@@ -42,6 +42,7 @@
 		<script src="../assets/js/respond.js"></script>
 		<![endif]-->	
 	
+	
 </head>
 <body class="no-skin">
 <!-- #section:basics/navbar.layout -->
@@ -228,14 +229,14 @@
 							<div class="form-group">
 							
 							 <input type="text" id="form-field-1" style="height:45px;width:450px;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" />
-							 <button type="submit" class="btn btn-primary friend-query">查询</button>
+							 <button type="submit" class="btn btn-primary friend-query" >查询</button>
 							</div>
 							
 						</form>	
 					</div>
 				</div>		
 				<div class="row">
-					<div class="col-lg-3">
+					<div class="col-lg-8">
 						<table class="table table-bordered table-striped">
 							<tr>
 								<th>序号</th>
@@ -245,13 +246,51 @@
 							</tr>
 							<c:forEach items="${friends}" var="friend" varStatus="status">
 								<tr>
-									<td>${status.index+1}</td>
+									<td>${status.count + page.startIndex}</td>
 									<td><c:out value="${friend.username}"/></td>
 									<td><c:out value="${friend.name}"/></td>
 									<td><a  href='javascript:sendFriendRequest("<c:out value='${friend.userId}'/>");'>请求加为好友</a></td>
 								</tr>
 							</c:forEach>
 						</table>
+										<c:if test="${param.keyword == null}">
+										<div class="col-lg-12" id="page.page" style="display:block;">	
+												共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页
+												<a href="?currentPage=1">首页</a>
+											<c:choose>
+												<c:when test="${page.currentPage - 1 > 0}">
+													<a href="?currentPage=${page.currentPage - 1}">上一页</a>
+												</c:when>
+												<c:when test="${page.currentPage - 1 <= 0}">
+													<a href="?currentPage=1">上一页</a>
+												</c:when>
+											</c:choose>
+											<c:choose>
+												<c:when test="${page.totalPages==0}">
+													<a href="?currentPage=${page.currentPage}">下一页</a>
+												</c:when>
+												<c:when test="${page.currentPage + 1 < page.totalPages}">
+													<a href="?currentPage=${page.currentPage+1}">下一页</a>
+												</c:when>
+												<c:when test="${page.currentPage + 1 >= page.totalPages}">
+													<a href="?currentPage=${page.totalPages}">下一页</a>
+												</c:when>
+											</c:choose>
+											<c:choose>
+												<c:when test="${page.totalPages==0}">
+													<a href="?currentPage=${page.currentPage}">尾页</a>
+												</c:when>
+												<c:otherwise>
+													<a href="?currentPage=${page.totalPages}">尾页</a>
+												</c:otherwise>
+											</c:choose>
+								 	<!-- 分页功能 End -->
+								
+									<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
+										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
+									</div>
+									</c:if>
+							
 					</div>
 					<div class="col-lg-9"></div>
 				</div>      
@@ -320,8 +359,48 @@ function sendFriendRequest(toUser) {
 	});
 }
 </script>
-
-
+<script type="text/javascript">
+		function gotoPage() {
+			var pageNo = document.getElementById("page.pageNo").value;
+			
+			if (isNaN(pageNo)) {
+				alert("请输入数值");
+				return;
+			}
+			
+			if(pageNo==""){
+				alert("请输入数值")
+				return;
+			}
+			
+			pageNo = parseInt(pageNo);
+			
+			if (pageNo < 1 || pageNo > parseInt("${page.totalPages}")) {
+				alert("只能输入1-${page.totalPages}之间的数值");
+				return;
+			}
+			
+			var url = "<s:url value='/friend/searchForm.html'/>?currentPage=" + pageNo;
+			
+			location.href = url
+			
+		}
+		
+		function gotoPageForEnter(event) {
+			var e = event ? event : window.event;
+					
+			if(event.keyCode == 13) {
+				gotoPage();
+			}
+		}
+		
+		
+</script>
+	<script type="text/javascript">
+			function pageHide() {
+				document.getElementById("page.page").style.display="none";
+			}
+	</script>
 <!-- ace scripts --> 
 <script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 
 <script src="<s:url value='/static/js/ace/elements.colorpicker.js'/>"></script> 

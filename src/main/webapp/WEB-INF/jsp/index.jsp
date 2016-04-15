@@ -17,26 +17,24 @@
 <!-- ace styles -->
 <link rel="stylesheet" href="<s:url value='/static/css/ace.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 <!--[if lte IE 9]>
-			<link rel="stylesheet" href="../assets/css/ace-part2.css" class="ace-main-stylesheet" />
+			<link rel="stylesheet" href="<s:url value='/static/css/ace-part2.css'/>" class="ace-main-stylesheet" />
 		<![endif]-->
 <!--[if lte IE 9]>
-		  <link rel="stylesheet" href="../assets/css/ace-ie.css" />
+		  <link rel="stylesheet" href="<s:url value='/static/css/ace-ie.css'/>" />
 		<![endif]-->
 <!-- inline styles related to this page -->
 <!-- ace settings handler -->
 <script src="<s:url value='/static/js/ace-extra.js'/>"></script>
 <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 <!--[if lte IE 8]>
-		<script src="../assets/js/html5shiv.js"></script>
-		<script src="../assets/js/respond.js"></script>
+		<script src="<s:url value='/static/js/html5shiv.js'/>"></script>
+		<script src="<s:url value='/static/js/respond.js'/>"></script>
 		<![endif]-->
 </head>
 <body class="no-skin">
 <!-- #section:basics/navbar.layout -->
 <div id="navbar" class="navbar navbar-default">
-  <script type="text/javascript">
-				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-			</script>
+
   <div class="navbar-container" id="navbar-container">
     <!-- #section:basics/sidebar.mobile.toggle -->
     <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar"> <span class="sr-only">Toggle sidebar</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
@@ -134,12 +132,7 @@
       </div>
       <!-- /section:basics/content.breadcrumbs -->
       <div class="page-content">
-        <div class="alert alert-block alert-success ace">
-          <button type="button" class="close" data-dismiss="alert"> <i class="ace-icon fa fa-times"></i> </button>
-          <i class="ace-icon fa fa-check green"></i> 欢迎来到 <strong class="green"> 龙图腾专利管理系统 <small>(v1.0.0)</small> </strong> 
-		</div>
-        <!--                    <input type="checkbox" class="ace" id="checkall" name="checkall" /> -->
-        <!-- /.page-header -->
+ 
         <div class="row">
           <div class="col-xs-12">
             <!-- PAGE CONTENT BEGINS -->

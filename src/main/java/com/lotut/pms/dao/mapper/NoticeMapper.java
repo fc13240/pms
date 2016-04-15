@@ -39,4 +39,5 @@ public interface NoticeMapper {
 	int searchUserNoticesCount(NoticeSearchCondition searchCondition);
 	
 	List<Notice> searchUserNoticesByPage(NoticeSearchCondition searchCondition);
+	
 }

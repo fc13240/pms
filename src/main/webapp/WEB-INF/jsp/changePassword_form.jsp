@@ -4,7 +4,6 @@
 <%@ taglib uri="c" prefix="c" %>
 <%@ taglib uri="fmt" prefix="fmt" %>
 <%@ taglib uri="spring-form" prefix="form" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,8 +42,44 @@
 <!--[if lte IE 8]>
 		<script src="../assets/js/html5shiv.js"></script>
 		<script src="../assets/js/respond.js"></script>
-		<![endif]-->	
-	
+		<![endif]-->
+	<style type="text/css">
+			.passwordError{
+				    color:#F00;
+				    font-weight:bold;
+			}
+	</style>
+	<script type="text/javascript">
+        function checkForm(form){
+        	if(form.lastPassword.value==""){
+                alert("请输入原密码!");
+                form.lastPassword.focus();
+                return false;
+            }
+            if(form.newPassword.value==""){
+                alert("请输入新密码!");
+				form.newPassword.focus();
+				return false;
+            }
+            if (form.newPassword.value.length<4) { 
+                alert("新密码长度不能小于4位!");
+				form.newPassword.focus();
+				return false;
+            }
+            if(form.newPasswordConfirm.value==""){
+                alert("请确认新密码!");
+				form.newPasswordConfirm.focus();
+				return false;
+            }
+            if(form.newPassword.value!=form.newPasswordConfirm.value){
+                alert("您两次输入的新密码不一致，请重新输入!");
+                form.newPassword.value="";
+				form.newPasswordConfirm.value="";
+                form.newPassword.focus();
+				return false;
+            }
+        }
+    </script>
 </head>
 <body class="no-skin">
 <!-- #section:basics/navbar.layout -->
@@ -186,12 +221,20 @@
 
 									<div class="col-sm-5">
 										
-										<form action="<s:url value='/user/changePassword.html'/>" method="post">									
+										<form action="<s:url value='/user/changePassword.html'/>" id="reset-form" name="pwd_change_form" method="post">									
 										<se:csrfInput/>
-												请输入原密码：<input type="text" class="form-control" name="lastPassword" id="count" placeholder="原始密码" />
-												请输入新密码：<input type="text" class="form-control" name="newPassword" id="count" placeholder="新密码" />
+												请输入原密码：<input type="text" class="form-control" name="lastPassword" id="lastPassword" placeholder="原始密码" onkeydown="clearPasswordErrorSpan()" />
+												<c:if test="${success != null && !success}">
+													<div>
+														<span id="passwordError" class="passwordError">原密码输入错误!!</span>
+													</div>
+												</c:if>
+												请输入新密码：<input type="password" class="form-control" name="newPassword" id="newPassword" minlength="4" maxlength="30" placeholder="新密码至少4位" required/>
+												请确认新密码：<input type="password" class="form-control" name="newPasswordConfirm" id="newPasswordConfirm" minlength="4" maxlength="30" equalTo="#newPassword"placeholder="确认新密码" required/>
 												<div style="margin-top:30px; float:left;width:300px;">
-												<input type="submit" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;" value="提交">
+												<input type="submit" id="resetPassword" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;margin-left:30px;" value="确认修改" />
+												<input type="reset" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;" value="重置" name="reset" />
+<!-- 												onClick="return checkForm(pwd_change_form)" -->
 												</div>
 										</form>								
 
@@ -307,6 +350,21 @@
 <script src="<s:url value='/static/docs/assets/js/language/css.js'/>"></script> 
 <script src="<s:url value='/static/docs/assets/js/language/javascript.js'/>"></script>
 <script src="<s:url value='/static/js/date-time/WdatePicker.js'/>"></script>
-
+<script type="text/javascript">
+	function clearPasswordErrorSpan() {
+		$("#passwordError").hide();
+	}
+</script>
+<script type="text/javascript">
+	jQuery(function($) {
+		$("#reset-form").validate({
+			submitHandler: function(form){ 
+				form.submit();     
+			}
+		});
+	});
+</script>
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>
 </body>
 </html>

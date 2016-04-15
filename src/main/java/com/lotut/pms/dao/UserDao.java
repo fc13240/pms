@@ -3,12 +3,20 @@ package com.lotut.pms.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 
 public interface UserDao {
-	List<User> getAllUsers();
+	List<User> getAllUsers(Page page);
+	
+	
+	int getAllUsersCount();
+	
 	User findByName(String username);
+	
 	void save(User user);
+	
 	void updatePassword(User user);
 	
 	User getById(int userId);
@@ -20,4 +28,8 @@ public interface UserDao {
 	List<Map<String, String>> getDistrictsByCityId(long cityId);
 	
 	List<Map<String, String>> getStreetsByDistrictId(long districtId);
+	
+	void saveContactAddress(ContactAddress contactAddress);
+	
+	List<ContactAddress> getUserContactAddresses(int userId);
 }

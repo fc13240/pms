@@ -234,7 +234,7 @@
                       <div class="row">
                         <div class="col-xs-12">
                 
-							<form action="<s:url value='/user/'/>" method="post">
+							<form action="<s:url value='/user/addContactAddress.html'/>" method="post">
 								联系人名称<input type="text" name="reciver">
 								通讯地址
 								<select name="province" id="province" onchange="loadCities()">
@@ -253,7 +253,8 @@
 									<option value=''>请选择</option>
 								</select>
 								详细地址<input type="text" name="detailAddress">		
-								手机或固话<input type="text" name="phone">																								
+								手机或固话<input type="text" name="phone">
+								<input type="submit" value="保存">																								
 							</form>
                         <!-- /.span --> 
                       </div>
@@ -368,6 +369,12 @@ function resetSelect() {
 	}
 }
 
+function addOptions(selectObj, options) {
+	$.each(options, function(index, val){
+		selectObj.append("<option value='" + val.id + "'>" + val.name + "</option>");
+	});	
+}
+
 function loadCities() {
 	var province = $("#province").val();
 	
@@ -380,12 +387,9 @@ function loadCities() {
 			dataType: 'json',
 			success: function(cities) {
 				var city = $("#city");
-				city.empty();
 				
-				addDefaultOption(city);
-				$.each(cities, function(index, val){
-					city.append("<option value='" + val.id + "'>" + val.name + "</option>");
-				});
+				resetSelect(city);
+				addOptions(city, cities);
 			}
 		})
 	} 
@@ -403,13 +407,9 @@ function loadDistricts() {
 			dataType: 'json',
 			success: function(districts) {
 				var district = $("#district");
-				district.empty();
 				
-				
-				addDefaultOption(district);
-				$.each(districts, function(index, val){
-					district.append("<option value='" + val.id + "'>" + val.name + "</option>");
-				});
+				resetSelect(district);
+				addOptions(district, districts);
 			}
 		})
 	}
@@ -427,13 +427,9 @@ function loadStreets() {
 			dataType: 'json',
 			success: function(streets) {
 				var street = $("#street");
-				street.empty();
 				
-				
-				addDefaultOption(street);
-				$.each(streets, function(index, val){
-					street.append("<option value='" + val.id + "'>" + val.name + "</option>");
-				});
+				resetSelect(street);
+				addOptions(street, streets);
 			}
 		})
 	} 
