@@ -237,19 +237,28 @@
 							<div class="patent-detail-caption">个人信息</div>
 							<table class="table table-striped">
 								<tr>
-									<td><span class="patent-item-title">用户名：</span> ${user.username}</td>	
-								</tr>
+		                            <td class="f-tar td-w125"><label class="lab">真实姓名：</label></td>
+		                            <td class="ps-relative"><input class="ipt" name="truename" id="name"   value="${user.name}" maxlength="10">
+		                                <label><input class="radios" type="radio" name="sex" value="0"   checked />先生</label>
+		                                <label><input class="radios" type="radio" name="sex" value="1"   />女士</label>
+		                            </td>
+                        		</tr>
 								<tr>
-									<td><span class="patent-item-title">姓名：</span> ${user.name}</td>	
-								</tr>
+		                            <td class="f-tar td-w125"><label class="lab">电子邮件：</label></td>
+		                            <td> <input type="hidden" name="email_info"  value="1">
+		                            <input class="email"  id="email" type="text" value="${user.email}" maxlength="15" ></td>
+                        		</tr>
 								<tr>
-									<td><span class="patent-item-title">电子邮件：</span> ${user.email}</td>	
-								</tr>
-								<tr>
-									<td><span class="patent-item-title">手机号：</span> ${user.phone}</td>	
-								</tr>																		
+		                            <td class="f-tar td-w125"><label class="lab">手机或电话号：</label></td>
+		                            <td> <input type="hidden" name="phone_info"  value="2">
+		                            <input class="email"  id="phone" type="text" value="${user.phone}" maxlength="15" ></td>
+                        		</tr>
+                        		<tr>
+		                            <td class="f-tar td-w125"></td>
+		                            <td><input class="orange-red-btn" name="dosubmit" id="dosubmit" value="保&nbsp;&nbsp;存" type="button" onclick="javascript:updateDetail()"></td>
+		                            
+                        		</tr>													
 							</table>
-
                         </div>
                         <!-- /.span --> 
                       </div>
@@ -351,8 +360,26 @@
 			})
 		</script> 
 
-
-
+<script type="text/javascript">
+	function updateDetail(){
+		var username = $("#username").val();
+		var name = $("#name").val();
+		var email = $("#email").val();
+		var phone = $("#phone").val();
+		
+		
+		
+		var url = "<s:url value='/user/updateUserDetail.html'/>?username=" +username +"&name="+ name+"&email="+email+"&phone="+phone;
+		location.href = url
+		
+		
+	}
+</script>
+<script type="text/javascript">
+	function clearPasswordErrorSpan() {
+		$("#Span").hide();
+	}
+</script>
 <!-- ace scripts --> 
 <script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 
 <script src="<s:url value='/static/js/ace/elements.colorpicker.js'/>"></script> 

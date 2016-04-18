@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,6 +84,15 @@ public class UserController {
 		User user = userService.getUserDetail(userId);
 		model.addAttribute("user", user);
 		
+		return "user_detail";
+	}
+	
+	@RequestMapping(path="/updateUserDetail", method=RequestMethod.GET)
+	public String updateUserDetail(@ModelAttribute User user,Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		user.setUserId(userId);
+		boolean success=userService.updateUserDetail(user);
+		model.addAttribute("success", success);
 		return "user_detail";
 	}
 	

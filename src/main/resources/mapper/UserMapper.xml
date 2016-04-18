@@ -40,6 +40,10 @@
 		 where user_id = #{userId}
 	</select>
 	
+	<update id="updateUserDetail" parameterType="User">
+		update users set name=#{name},email=#{email},phone=#{phone} where user_id=#{userId}
+	</update>
+	
 	<select id="getAllProvinces" resultType="map">
 		select id, name
 		  from provinces

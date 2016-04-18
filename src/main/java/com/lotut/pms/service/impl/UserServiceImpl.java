@@ -94,4 +94,10 @@ public class UserServiceImpl implements UserService {
 	public long getAllUsersCount() {
 		return userDao.getAllUsersCount();
 	}
+
+	@Override
+	public boolean updateUserDetail(User user) {
+		
+		return userDao.updateUserDetail(user);
+	}
 }

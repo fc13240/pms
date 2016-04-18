@@ -90,5 +90,10 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 		return userMapper.getAllUsersCount();
 	}
 
+	@Override
+	public boolean updateUserDetail(User user) {
+		return userMapper.updateUserDetail(user);
+	}
+
 	
 }
