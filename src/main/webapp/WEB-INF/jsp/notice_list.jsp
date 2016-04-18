@@ -345,7 +345,7 @@
 	                                    <span class="batch-share-item"><input type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
 	                                    <span class="lbl"></span> </label></td>
 	                                <td class="center">
-	                                	<a href="#">${status.count + (page.currentPage-1)*page.pageSize}</a>
+	                                	${status.count + (page.currentPage-1)*page.pageSize}
 	                                </td>
 	                                <td><a href="javascript: void;" onclick="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')"><c:out value="${notice.patent.appNo}"/></td>
 									<td><c:out value="${notice.patent.name}"/></td>

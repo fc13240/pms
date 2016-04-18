@@ -347,7 +347,7 @@
 											<input type="checkbox" class="fee-check-item" fee="${fee.feeId}" amount="${fee.amount}" onclick="calcTotalAmount()">
 										</span>
 									</td>
-									<td class="center"><a href="#">${status.count + (page.currentPage-1)*page.pageSize}</a></td>
+									<td class="center">${status.count + (page.currentPage-1)*page.pageSize}</td>
 
 									<td>${fee.patent.appNo}</td>
 									<td>${fee.patent.name}</td>
