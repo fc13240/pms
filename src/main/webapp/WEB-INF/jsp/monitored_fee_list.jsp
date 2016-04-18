@@ -323,7 +323,7 @@
                             <thead>
                               <tr class="simple_bag">
                                 <th class="center"> <label class="pos-rel">
-                                    <input type="checkbox" class="fee-check-item">
+                                    <input type="checkbox" class="fee-check-item" onclick="calcTotalAmount()">
                                     <span class="lbl"></span> </label>
                                 </th>
 								<th>序号</th>
@@ -366,7 +366,7 @@
 									<c:forEach items="${fees}" var="fee">
 										<c:set var="totalAmount" value="${totalAmount+fee.amount}"></c:set>
 									</c:forEach>
-									<td colspan="10">总计: ￥<span id="totalAmountSpan">${totalAmount}</span></td>
+									<td colspan="11">总计: ￥<span id="totalAmountSpan">${totalAmount}</span></td>
 								</tr>							
                             </tbody>
                           </table>
@@ -599,6 +599,18 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 		var amounts = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'amount');
 		var totalAmount = 0;
 		var totalAmountSpan = $("#totalAmountSpan");
+		var checkAllCheckbox = $("tr th input.fee-check-item");
+		
+		if (checkAllCheckbox.prop("checked")) {
+			var allAmounts = formutil.getAllCheckboxValues('tr td input.fee-check-item', 'amount');
+			
+			for (var i = 0; i < allAmounts.length; i++) {
+				totalAmount += parseInt(allAmounts[i]);
+			}
+			
+			totalAmountSpan.text(totalAmount);
+			return;
+		}
 		
 		for (var i = 0; i < amounts.length; i++) {
 			totalAmount += parseInt(amounts[i]);
@@ -606,6 +618,7 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 		
 		totalAmountSpan.text(totalAmount);
 	}
+	
 
 
 </script>	
