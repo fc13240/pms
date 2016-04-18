@@ -124,7 +124,7 @@
 				<img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" />
 			<span class="user-info">
 				<small>Welcome,</small>
-				Jason
+				<se:authentication property="principal.username" />
 			</span>
 		
 			<i class="ace-icon fa fa-caret-down"></i>

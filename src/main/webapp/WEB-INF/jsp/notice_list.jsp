@@ -123,7 +123,7 @@
 				<img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" />
 			<span class="user-info">
 				<small>Welcome,</small>
-				Jason
+				<se:authentication property="principal.username" />
 			</span>
 		
 			<i class="ace-icon fa fa-caret-down"></i>
@@ -345,7 +345,7 @@
 	                                    <span class="batch-share-item"><input type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
 	                                    <span class="lbl"></span> </label></td>
 	                                <td class="center">
-	                                	<a href="#">${status.count + (page.currentPage-1)*page.pageSize}</a>
+	                                	${status.count + (page.currentPage-1)*page.pageSize}
 	                                </td>
 	                                <td><a href="javascript: void;" onclick="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')"><c:out value="${notice.patent.appNo}"/></td>
 									<td><c:out value="${notice.patent.name}"/></td>
@@ -628,7 +628,7 @@ function batchProcessNotice(processStatus) {
 			url: "<s:url value='/notice/processNotices.html'/>?notices=" + notices + "&processStatus=" + processStatus, 
 			type: 'get', 
 			success: function() {
-				$("<div>处理成功</div>").dialog({
+				$("<div>操作成功</div>").dialog({
 					modal: true,
 					buttons: {
 						Ok: function() {
@@ -722,7 +722,7 @@ function batchProcessNotice(processStatus) {
 	
 	function batchShare() {
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		var uniquePatentNos = []
+		var uniquePatentNos = [];
 		if (!patentSelected) {
 			//formutil.alertMessage('请选择专利');
 			bootbox.alert('请选择专利');
@@ -742,15 +742,21 @@ function batchProcessNotice(processStatus) {
 	
 	function batchGrabFees(){
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		
+		var uniquePatentNos = [];
 		if (!patentSelected) {
 			bootbox.alert('请选择专利');
 			return;
 		}
-			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
 		
-		 window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patentNos);		
+		
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
+		for (var i = 0; i < patents_checked.length; i++) {
+			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+				uniquePatentNos.push(patents_checked[i]);
+			}
+		}		
+		var patents = uniquePatentNos.join(",");		
+		window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patents);		
 		
 	}	
 	function batchFee() {

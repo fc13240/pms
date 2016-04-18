@@ -120,10 +120,10 @@
 		<!-- #section:basics/navbar.user_menu -->
 		<li class="light-blue" style="z-index:9999;">
 			<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-				<img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="Jason's Photo" />
+				<img class="nav-user-photo" src="<s:url value='/static/avatars/user.jpg'/>" alt="<se:authentication property="principal.username" />'s Photo" />
 			<span class="user-info">
 				<small>Welcome,</small>
-				Jason
+				<se:authentication property="principal.username" />
 			</span>
 		
 			<i class="ace-icon fa fa-caret-down"></i>

@@ -40,6 +40,10 @@
 		 where user_id = #{userId}
 	</select>
 	
+	<update id="updateUserDetail" parameterType="User">
+		update users set name=#{name},email=#{email},phone=#{phone} where user_id=#{userId}
+	</update>
+	
 	<select id="getAllProvinces" resultType="map">
 		select id, name
 		  from provinces
@@ -70,9 +74,12 @@
 	</insert>
 
 	<select id="getUserContactAddresses" resultType="ContactAddress">
-		select id, receiver, province, city, district, street, 
-				   detail_address as detailAddress, phone, email
-		  from contact_addresses
+		select ca.id, ca.receiver, ca.province, p.name as provinceName, ca.city, c.name as cityName,
+				ca.district, d.name as districtName, ca.street, s.name as streetName, 
+					 ca.detail_address as detailAddress, ca.phone, ca.email
+		 from contact_addresses ca join provinces p on ca.province = p.id
+			join cities c on ca.city = c.id join districts d on ca.district = d.id
+		    join streets s on ca.street = s.id
 		 where user = #{userId}		
 	</select>
 	
