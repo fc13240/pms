@@ -40,6 +40,8 @@ public class ContactAddress {
 	@Email
 	private String email;
 	
+	private boolean isDefault;
+	
 	private int userId;
 	
 	public String getProvinceName() {
@@ -126,5 +128,11 @@ public class ContactAddress {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public boolean isDefault() {
+		return isDefault;
+	}
+	public void setDefault(boolean isDefault) {
+		this.isDefault = isDefault;
 	}
 }

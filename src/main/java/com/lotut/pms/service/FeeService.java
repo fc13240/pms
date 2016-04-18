@@ -42,5 +42,5 @@ public interface FeeService {
 	//CS:deleteFees
 	void deleteFees(List<Long> feeIdList, int userId);
 	
-	
+	List<Fee> getFeesByIds(List<Long> feeIds);
 }

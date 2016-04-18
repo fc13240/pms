@@ -188,9 +188,9 @@ public class FeeServiceImpl implements FeeService {
 		public List<Fee> searchUserMonitoredFeesByPage(FeeSearchCondition searchCondition) {
 			return feeDao.searchUserMonitoredFeesByPage(searchCondition);
 		}
-
-	
-
-        
 		
+		@Override
+		public List<Fee> getFeesByIds(List<Long> feeIds) {
+			return feeDao.getFeesByIds(feeIds);
+		}
 }

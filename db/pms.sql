@@ -262,6 +262,7 @@ create table contact_addresses (
   	mobile varchar(20),
  	email varchar(50),
  	user int not null,
+ 	is_default boolean not null default 0,
 	constraint fk_contact_addresses_province foreign key(province) references provinces(id),
 	constraint fk_contact_addresses_city foreign key(city) references cities(id),
 	constraint fk_contact_addresses_district foreign key(district) references districts(id),
