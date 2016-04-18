@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -101,7 +102,7 @@ public class FeeController {
 	
 	//CS:搜索分页
 	@RequestMapping(path="/search", method=RequestMethod.GET)
-	public String searchUserMonitoredFees(FeeSearchCondition searchCondition, Model model) {
+	public String searchUserMonitoredFees(@ModelAttribute("searchCondition")FeeSearchCondition searchCondition, Model model) {
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
 		List<Fee> fees = feeService.searchUserMonitoredFeesByPage(searchCondition);
 		int totalCount=(int)feeService.searchUserMonitoredFeesCount(searchCondition);

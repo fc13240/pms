@@ -145,7 +145,7 @@
 	
 	
 	<!-- CS:搜索分页 -->
-	<select id="searchUserMonitoredFeesByPage" parameterType="FeeSearchCondition" resultMap="FeeResultMap">
+	<select id="searchMonitoredFeesByPage" parameterType="FeeSearchCondition" resultMap="FeeResultMap">
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
@@ -177,7 +177,7 @@
 					or p.app_person like #{keyword_pattern} or f.fee_type like #{keyword_pattern}) 																	
 			</if>		 
 		order by p.patent_id, f.deadline
-		limit #{startIndex}, #{pageSize}
+		limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
 	<select id="searchUserMonitoredFeesCount" resultType="int">
