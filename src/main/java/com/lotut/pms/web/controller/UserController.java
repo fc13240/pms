@@ -39,7 +39,7 @@ public class UserController {
 		List<User> allUsers = userService.getAllUsers(page);
 		model.addAttribute("users", allUsers);
 		return "";
-	}	
+	}
 
 	@RequestMapping(path="/registerForm", method=RequestMethod.GET)
 	public String showRegisterForm() {

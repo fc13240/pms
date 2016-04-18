@@ -266,7 +266,11 @@
 														<!-- #section:custom/file-input.filter -->
 														<label>
 															
+<<<<<<< HEAD
+															<span class="lbl"> （注：只能上传Excel表格）</span>
+=======
 															<span class="lbl"> （注：只能上传excel文件）</span>
+>>>>>>> 518e3950e73e7bb91f2cd0b8c09f12b476411763
 														</label>
 														<button class="btn btn-info" type="submit" style="height:45px;width：100px">上传</button>
 														
