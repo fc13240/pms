@@ -235,6 +235,7 @@
                         <div class="col-xs-12">
                 
 							<form action="<s:url value='/user/addContactAddress.html'/>" method="post">
+							<se:csrfInput/>
 								联系人名称<input type="text" name="reciver">
 								通讯地址
 								<select name="province" id="province" onchange="loadCities()">
