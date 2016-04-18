@@ -365,7 +365,8 @@
                           <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;">	                                
 	                                <span class="input-group-btn" >
 										<a href="javascript:batchUpdateInvoiceTitles()"><button style="margin:8px;" type="button" class="btn btn-info btn-sm">批量修改发票抬头</button></a>							
-										<a href="javascript:exportFees()"><button type="button" class="btn btn-purple btn-sm">批量导出</button></a>
+										<a href="javascript:exportFees()"><button type="button" style="margin:8px;"  class="btn btn-purple btn-sm">批量导出</button></a>
+										<a href="javascript:showOrderCreateForm()"><button type="button" class="btn btn-purple btn-sm">在线支付</button></a>
 									</span> 
 	                                                    
                           </div>
@@ -669,7 +670,18 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 		totalAmountSpan.text(totalAmount);
 	}
 	
-
+	function showOrderCreateForm() {
+		var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
+		
+		if (!feeSelected) {
+			formutil.alertMessage('请选择要支付的记录');
+			return;
+		}	
+		
+		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'fee');
+		
+		location.href = "<s:url value='/order/orderCreateForm.html'/>?fees=" + fees;	
+	}
 
 </script>	
 

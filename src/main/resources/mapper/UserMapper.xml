@@ -76,7 +76,7 @@
 	<select id="getUserContactAddresses" resultType="ContactAddress">
 		select ca.id, ca.receiver, ca.province, p.name as provinceName, ca.city, c.name as cityName,
 				ca.district, d.name as districtName, ca.street, s.name as streetName, 
-					 ca.detail_address as detailAddress, ca.phone, ca.email
+					 ca.detail_address as detailAddress, ca.phone, ca.email, ca.is_default isDefault
 		 from contact_addresses ca join provinces p on ca.province = p.id
 			join cities c on ca.city = c.id join districts d on ca.district = d.id
 		    join streets s on ca.street = s.id
