@@ -34,4 +34,6 @@ public interface UserMapper {
 	void saveContactAddress(ContactAddress contactAddress);
 	
 	List<ContactAddress> getUserContactAddresses(@Param("userId")int userId);
+	
+	boolean updateUserDetail(User user);
 }

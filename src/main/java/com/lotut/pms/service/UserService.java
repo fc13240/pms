@@ -36,4 +36,6 @@ public interface UserService {
 	void saveContactAddress(ContactAddress contactAddress);
 	
 	List<ContactAddress> getUserContactAddresses(int userId);
+	
+	boolean updateUserDetail(User user);
 }
