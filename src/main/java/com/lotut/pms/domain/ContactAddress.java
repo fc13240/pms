@@ -14,14 +14,22 @@ public class ContactAddress {
 	@NotNull
 	private Integer province;
 	
+	private String provinceName;
+	
 	@NotNull
 	private Long city;
+	
+	private String cityName;
 	
 	@NotNull
 	private Long district;
 	
+	private String districtName;
+	
 	@NotNull
 	private Long street;
+	
+	private String streetName;
 	
 	@NotBlank
 	private String detailAddress;
@@ -33,6 +41,31 @@ public class ContactAddress {
 	private String email;
 	
 	private int userId;
+	
+	public String getProvinceName() {
+		return provinceName;
+	}
+	public void setProvinceName(String provinceName) {
+		this.provinceName = provinceName;
+	}
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	public String getDistrictName() {
+		return districtName;
+	}
+	public void setDistrictName(String districtName) {
+		this.districtName = districtName;
+	}
+	public String getStreetName() {
+		return streetName;
+	}
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
+	}
 	
 	public Integer getId() {
 		return id;

@@ -269,6 +269,38 @@ create table contact_addresses (
 	constraint fk_contact_addresses_user foreign key(user) references users(user_id)
 );
 
+create table order_status (
+	order_status_id int primary key auto_increment,
+	status_description varchar(20) not null unique
+);
+
+create table orders (
+	order_id varchar(30) primary key,
+	order_status int not null,
+	post_address int,
+	last_update_time timestamp not null,
+	amount int not null,
+	user int not null,
+	process_user int,
+	received boolean default 0,
+	express_company varchar(100),
+	express_no varchar(100),
+	send_time date,
+	courier varchar(20),
+	courier_phone varchar(30),
+	constraint fk_orders_order_status foreign key(order_status) references order_status(order_status_id),
+	constraint fk_orders_user foreign key(user) references users(user_id),
+	constraint fk_orders_process_user foreign key(process_user) references users(user_id)
+);
+
+create table order_items (
+	item_id bigint primary key auto_increment,
+	order_id varchar(30) not null,
+	fee_id bigint not null,
+	constraint fk_order_items_order foreign key(order_id) references orders(order_id),
+	constraint fk_order_items_fee foreign key(fee_id) references fees(fee_id)
+);
+
 	
 INSERT INTO friend_request_process_status (friend_request_process_status_id, friend_request_process_status_desc)
 VALUES
