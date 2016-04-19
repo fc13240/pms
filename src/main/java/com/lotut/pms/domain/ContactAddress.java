@@ -40,7 +40,7 @@ public class ContactAddress {
 	@Email
 	private String email;
 	
-	private boolean isDefault;
+	private boolean defaultAddress;
 	
 	private int userId;
 	
@@ -129,10 +129,10 @@ public class ContactAddress {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public boolean isDefault() {
-		return isDefault;
+	public boolean isDefaultAddress() {
+		return defaultAddress;
 	}
-	public void setDefault(boolean isDefault) {
-		this.isDefault = isDefault;
+	public void setDefault(boolean defaultAddress) {
+		this.defaultAddress = defaultAddress;
 	}
 }

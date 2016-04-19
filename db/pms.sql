@@ -224,33 +224,33 @@ create table if not exists notices (
 	constraint fk_notice_paper_apply_type foreign key idx_fk_notice_paper_apply_type (paper_apply_type) references notice_paper_apply_types(notice_paper_apply_type_id)
 );
 
-create table provinces (
+create table if not exists provinces (
 	id int primary key,
 	name varchar(30) not null unique
 );
 
-create table cities (
+create table if not exists cities (
 	id bigint primary key,
 	name varchar(30) not null,
 	province int not null,
 	constraint fk_cities_province foreign key(province) references provinces(id)
 );
 
-create table districts (
+create table if not exists districts (
 	id bigint primary key,
 	name varchar(30) not null,
 	city bigint not null,
 	constraint fk_districts_city foreign key(city) references cities(id)
 );
 
-create table streets (
+create table if not exists streets (
 	id bigint primary key,
 	name varchar(50) not null,
 	district bigint not null,
 	constraint fk_streets_district foreign key(district) references districts(id)
 );
 
-create table contact_addresses (
+create table if not exists contact_addresses (
 	id int primary key auto_increment,
 	receiver varchar(50) not null,
 	province int not null,
@@ -270,16 +270,16 @@ create table contact_addresses (
 	constraint fk_contact_addresses_user foreign key(user) references users(user_id)
 );
 
-create table order_status (
+create table if not exists order_status (
 	order_status_id int primary key auto_increment,
 	status_description varchar(20) not null unique
 );
 
-create table orders (
-	order_id varchar(30) primary key,
-	order_status int not null,
+create table if not exists orders (
+	order_id bigint primary key auto_increment,
+	order_status int not null default 1,
 	post_address int,
-	last_update_time timestamp not null,
+	last_update_time timestamp default current_timestamp on update current_timestamp not null,
 	amount int not null,
 	user int not null,
 	process_user int,
@@ -289,15 +289,17 @@ create table orders (
 	send_time date,
 	courier varchar(20),
 	courier_phone varchar(30),
+	create_time timestamp default current_timestamp not null,
 	constraint fk_orders_order_status foreign key(order_status) references order_status(order_status_id),
 	constraint fk_orders_user foreign key(user) references users(user_id),
 	constraint fk_orders_process_user foreign key(process_user) references users(user_id)
-);
+) auto_increment=123412341234;
 
-create table order_items (
+create table if not exists order_items (
 	item_id bigint primary key auto_increment,
-	order_id varchar(30) not null,
+	order_id bigint not null,
 	fee_id bigint not null,
+	UNIQUE KEY uk_order_items_order_fee (order_id, fee_id),
 	constraint fk_order_items_order foreign key(order_id) references orders(order_id),
 	constraint fk_order_items_fee foreign key(fee_id) references fees(fee_id)
 );
@@ -361,4 +363,10 @@ VALUES
 	(3, '外观设计');	
 	
 
+INSERT INTO order_status
+VALUES
+	(1, '待支付'),
+	(2, '已支付'),
+	(3, '已取消');
+	
 	
