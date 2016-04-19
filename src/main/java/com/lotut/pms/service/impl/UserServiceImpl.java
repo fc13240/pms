@@ -100,4 +100,32 @@ public class UserServiceImpl implements UserService {
 		
 		return userDao.updateUserDetail(user);
 	}
+
+	@Override
+	public void updateUserContactAddresses(ContactAddress contactAddress) {
+		userDao.updateUserContactAddresses(contactAddress);
+		
+	}
+
+	@Override
+	public void deleteUserContactAddresses(int id) {
+		userDao.deleteUserContactAddresses(id);
+		
+	}
+
+	@Override
+	public void defaultUserContactAddresses(int id) {
+		userDao.defaultUserContactAddresses(id);
+		
+	}
+
+	@Override
+	public void defaulStatus() {
+		userDao.defaulStatus();
+	}
+
+	@Override
+	public ContactAddress getContactAddressesById(int id) {
+		return userDao.getContactAddressesById(id);
+	}
 }

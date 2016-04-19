@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>添加专利</title>
+	<title>专利列表</title>
 
 <!-- bootstrap & fontawesome -->
 <link rel="stylesheet" href="<s:url value='/static/css/bootstrap.css'/>" />
@@ -190,11 +190,11 @@
       
       <ul class="nav nav-list">
         <li> <a href="<s:url value='/main.html'/>"> <i class="menu-icon fa fa-tachometer"></i> <span class="menu-text"> 控制台 </span> </a> <b class="arrow"></b> </li>
-        <li class=""> <a href="<s:url value='/patent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-desktop"></i> <span class="menu-text"> 我的专利 </span> </a> </li>
+        <li class="active"> <a href="<s:url value='/patent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-desktop"></i> <span class="menu-text"> 我的专利 </span> </a> </li>
         <li class=""> <a href="<s:url value='/notice/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-list"></i> <span class="menu-text"> 我的通知书 </span> </a> </li>
         <li class=""> <a href="<s:url value='/friend/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-pencil-square-o"></i> <span class="menu-text"> 好友管理 </span> </a> </li>
         <li class=""> <a href="<s:url value='/sharePatent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-list-alt"></i> <span class="menu-text"> 分享管理 </span> </a> <b class="arrow"></b> </li>
-        <li class="active"> <a href="<s:url value='/patent/showUploadForm.html'/>"> <i class="menu-icon fa fa-calendar"></i> <span class="menu-text"> 添加专利 </span> </a> <b class="arrow"></b> </li>
+        <li class=""> <a href="<s:url value='/patent/showUploadForm.html'/>"> <i class="menu-icon fa fa-calendar"></i> <span class="menu-text"> 添加专利 </span> </a> <b class="arrow"></b> </li>
         <li class=""> <a href="<s:url value='/notice/showUploadForm.html'/>"> <i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 添加通知书 </span> </a> <b class="arrow"></b> </li>
         <li class=""> <a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>"><i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 官费监控 </span> </a> </li>
       </ul>
@@ -226,66 +226,41 @@
     <!-- /section:basics/content.breadcrumbs -->  
     		<div class="page-content"> 
 
-                <!-- /.page-header -->
+            
+
                 <div class="row" style="margin-top:30px;">
                     <div class="col-xs-12"> 
-				
-								<form action="<s:url value='/patent/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">
-									<!-- #section:elements.form -->
-									<se:csrfInput/>
-									<hr />
-									<div class="row">
-										<div class="col-sm-4">
-											<div class="widget-box">
-												<div class="widget-header">
-													<h4 class="widget-title">添加专利</h4>
-
-													<div class="widget-toolbar">
-														<a href="#" data-action="collapse">
-															<i class="ace-icon fa fa-chevron-up"></i>
-														</a>
-
-														<a href="#" data-action="close">
-															<i class="ace-icon fa fa-times"></i>
-														</a>
-													</div>
-												</div>
-
-												<div class="widget-body">
-													<div class="widget-main">
-												
-
-														<div class="form-group">
-															<div class="col-xs-12">
-																<input multiple="" type="file" name="patentFile" style="display:none;" id="id-input-file-3" required />
-
-																<!-- /section:custom/file-input -->
-															</div>
-														</div>
-
-														<!-- #section:custom/file-input.filter -->
-														<label>
-															
-
-															<span class="lbl"> （注：只能上传Excel表格）</span>
-
-															<span class="lbl"> （注：只能上传excel文件）</span>
-
-														</label>
-														<button class="btn btn-info" type="submit" style="height:45px;width：100px">上传</button>
-														
-
-														<!-- /section:custom/file-input.filter -->
-													</div>
-												</div>
-											</div>
-										</div>
-
-										
-									</div>
-
-									
-								</form>
+                      <!-- PAGE CONTENT BEGINS -->
+                      <div class="row">
+                        <div class="col-xs-12">
+                
+							<form action="<s:url value='/user/updateUserContactAddresses.html'/>" method="post">
+							<se:csrfInput/>
+								联系人名称:<input type="text" name="receiver" id="receiver" value="${contactAddresses.receiver}"/>
+								通讯地址:
+								<select name="province" id="province" onchange="loadCities()">
+									<option value='${contactAddresses.province}'>${contactAddresses.provinceName}</option>
+									<c:forEach items="${provinces}" var="province">
+									<option value="${province.id}">${province.name}</option>
+									</c:forEach>
+								</select>
+								<select name="city" id="city" onchange="loadDistricts()">
+									<option value='${contactAddresses.city}'>${contactAddresses.cityName}</option>
+								</select>
+								<select name="district" id="district" onchange="loadStreets()">
+									<option value='${contactAddresses.district}'>${contactAddresses.districtName}</option>
+								</select>
+								<select name="street" id="street">
+									<option value='${contactAddresses.street}'>${contactAddresses.streetName}</option>
+								</select>
+								详细地址<input type="text" name="detailAddress" id="detailAddress"  value="${contactAddresses.detailAddress}" />		
+								手机或固话<input type="text" name="phone" id="phone" value="${contactAddresses.phone}" />
+								<input type="hidden" name="id" id="id" value="${contactAddresses.id}"/>
+								<input type="submit" value="保存">																							
+							</form>
+                        <!-- /.span --> 
+                      </div>
+                      <!-- /.row --> 
                       
                     </div>
                 </div>
@@ -335,60 +310,6 @@
 <script src="<s:url value='/static/js/jquery-ui.min.js'/>"></script>
 
 <script src="<s:url value='/static/js/bootbox.js'/>"></script>
-
-		<script type="text/javascript">
-			jQuery(function($) {
-				$('#id-input-file-3').ace_file_input({
-					style: 'well',
-					btn_choose: '拖动文件或者点击上传',
-					btn_change: null,
-					no_icon: 'ace-icon fa fa-cloud-upload',
-					droppable: true,
-					thumbnail: 'small'//large | fit
-					//,icon_remove:null//set null, to hide remove/reset button
-					/**,before_change:function(files, dropped) {
-						//Check an example below
-						//or examples/file-upload.html
-						return true;
-					}*/
-					/**,before_remove : function() {
-						return true;
-					}*/
-					,
-					preview_error : function(filename, error_code) {
-						//name of the file that failed
-						//error_code values
-						//1 = 'FILE_LOAD_FAILED',
-						//2 = 'IMAGE_LOAD_FAILED',
-						//3 = 'THUMBNAIL_FAILED'
-						//alert(error_code);
-					}
-			
-				}).on('change', function(){
-					//console.log($(this).data('ace_input_files'));
-					//console.log($(this).data('ace_input_method'));
-				});
-				//$('#id-input-file-3')
-				//.ace_file_input('show_file_list', [
-					//{type: 'image', name: 'name of image', path: 'http://path/to/image/for/preview'},
-					//{type: 'file', name: 'hello.txt'}
-				//]);
-				
-				
-				/////////
-				$('#modal-form input[type=file]').ace_file_input({
-					style:'well',
-					btn_choose:'拖动文件或者点击上传',
-					btn_change:null,
-					no_icon:'ace-icon fa fa-cloud-upload',
-					droppable:true,
-					thumbnail:'large'
-				})
-				
-
-			
-			});
-		</script>
 <!-- inline scripts related to this page --> 
 <script type="text/javascript">
 			jQuery(function($) {
@@ -438,139 +359,85 @@
 		</script> 
 
 <script type="text/javascript">
-	$(function(){
-		formutil.clickAllCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
-		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
-	});
-	
-	function batchShare() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		
-		if (!patentSelected) {
-			//formutil.alertMessage('请选择专利');
-			bootbox.alert('请选择专利');
-			return;
-		}
-		
-		var patents = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent').join(",");
-		
-		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
-	}
-	
-	function batchFee() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		
-		if (!patentSelected) {
-			bootbox.alert('请选择专利');
-			return;
-		}
-			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
-		
-		 window.open("<s:url value='/patent/showFriends.html'/>?patentNos=" + patentNos);
-	}	
-	
-	function getFeeInfo(patentId) {
-		window.open("/fee/list?patentId=" + patentId);
-	}
-	
-	function deleteShare(patentId) {
-		$.ajax({
-			url: "" + patentId, 
-			type: 'get', 
-			dataType: "json",
-			success: function(data) {
-				if (data.result == 'not-owner') {
-					formutil.alertMessage('你不是专利的拥有者，无法取消分享');				
-				} else {
-					formutil.alertMessage('分享已取消', true);	
-				}
-			}
-		});			
-	}
-	
-	function changeInternalCode(patentId, internalCode) {
-		$.ajax({
-			url: "<s:url value='/patent/changeInternalCode.html'/>?patentId=" + patentId + "&internalCode=" + internalCode, 
-			type: 'get', 
-			success: function(data) {
-				//formutil.alertMessage('内部编码修改成功');	
-			},
-			error: function() {
-				formutil.alertMessage('内部编码修改失败');
-			}
-		});	
-	}
-	
-	function deletePatent(url) {
-		$( "<div>确定要删除吗?</div>" ).dialog({
-		  resizable: false,
-		  height:140,
-		  modal: true,
-		  buttons: {
-			"确定": function() {
-				$.ajax({
-					url: url, 
-					type: 'get', 
-					success: function(data) {
-						formutil.alertMessage('删除成功', true);	
-					}
-				});	
-			},
-			"取消": function() {
-			  $( this ).dialog( "close" );
-			}
-		  }
-		});
-	}
-	
-	function gotoPage() {
-		var patentType = $("#patentTypeId").val();
-		var patentStatus = $("#patentStatusId").val();
-		var startAppDate = $("#startAppDateId").val();
-		var endAppDate = $("#endAppDateId").val();
-		var keyword = $("#keywordId").val();
-		var pageNo = document.getElementById("page.pageNo").value;
-		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
-		
-		if (isSearch()) {
- 				//url = "<s:url value='/patent/search.html'/>?page.currentPage="+nextPage +"&"+${searchCondition};
-				url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
-		}
-		
-		location.href = url
-	}
-	
-	function isSearch() {
-		var patentType = $("#patentTypeId").val();
-		var patentStatus = $("#patentStatusId").val();
-		var startAppDate = $("#startAppDateId").val();
-		var endAppDate = $("#endAppDateId").val();
-		var keyword = $("#keywordId").val();
-		
-		if (!isEmpty(patentType) || !isEmpty(patentStatus) || !isEmpty(startAppDate) || !isEmpty(endAppDate) || !isEmpty(keyword)) {
-			return true;
-		}
-		
-		return false;
-	}
+function addDefaultOption(selectElem) {
+	selectElem.append("<option value=''>请选择</option>");
+}
 
-	function isEmpty(value) {
-		if (value == null || value == "undefined" || value == "") {
-			return true;
-		}
-		
-		return false;
+function resetSelect() {
+	for (var i = 0; i < arguments.length; i++) {
+		var selectObj = arguments[i];
+		selectObj.empty();
+		addDefaultOption(selectObj);
 	}
+}
+
+function addOptions(selectObj, options) {
+	$.each(options, function(index, val){
+		selectObj.append("<option value='" + val.id + "'>" + val.name + "</option>");
+	});	
+}
+
+function loadCities() {
+	var province = $("#province").val();
+	
+	resetSelect($("#city"), $("#district"), $("#street"));
+	
+	if (province != "") {
+		$.ajax({
+			url: "<s:url value='/user/getCitiesByProvince.html'/>?province=" + province,
+			type: 'get',
+			dataType: 'json',
+			success: function(cities) {
+				var city = $("#city");
+				
+				resetSelect(city);
+				addOptions(city, cities);
+			}
+		})
+	} 
+}
+
+function loadDistricts() {
+	var city = $("#city").val();
+
+	resetSelect($("#district"), $("#street"));
+	
+	if (city != "") {
+		$.ajax({
+			url: "<s:url value='/user/getDistrictsByCity.html'/>?city=" + city,
+			type: 'get',
+			dataType: 'json',
+			success: function(districts) {
+				var district = $("#district");
+				
+				resetSelect(district);
+				addOptions(district, districts);
+			}
+		})
+	}
+}
+
+function loadStreets() {
+	var district = $("#district").val();
+	
+	resetSelect($("#street"));
+	
+	if (district != "") {
+		$.ajax({
+			url: "<s:url value='/user/getStreetsByDistrict.html'/>?district=" + district,
+			type: 'get',
+			dataType: 'json',
+			success: function(streets) {
+				var street = $("#street");
+				
+				resetSelect(street);
+				addOptions(street, streets);
+			}
+		})
+	} 
+}
+
 </script>
-
-
-
-		<script src="<s:url value='/static/js/jquery-ui.custom.js'/>"></script>
-		<script src="<s:url value='/static/js/chosen.jquery.js'/>"></script>
-		<script src="<s:url value='/static/js/autosize.js'/>"></script>
-		<script src="<s:url value='/static/js/jquery.inputlimiter.1.3.1.js'/>"></script>
-		<script src="<s:url value='/static/js/jquery.maskedinput.js'/>"></script>
 
 <!-- ace scripts --> 
 <script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 
