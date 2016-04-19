@@ -8,4 +8,5 @@ import com.lotut.pms.domain.OrderItem;
 public interface OrderDao {
 	int insertOrder(Order order);
 	int insertOrderItems(List<OrderItem> orderItems);
+	List<Order> selectUserOrders(int userId);
 }

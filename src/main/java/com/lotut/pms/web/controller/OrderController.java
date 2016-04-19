@@ -1,6 +1,9 @@
 package com.lotut.pms.web.controller;
 
+import java.util.Arrays;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,14 +46,23 @@ public class OrderController {
 	}
 	
 	@RequestMapping(path="/createOrder")
-	public String createOrder(@RequestParam("fees")List<Long> feeIds, Order order, Model model) {
+	public String createOrder(@RequestParam("feeIds")Long[] feeIds, @Valid Order order, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		order.setUser(userId);
 		
-		List<Fee> fees = feeService.getFeesByIds(feeIds);
+		List<Fee> fees = feeService.getFeesByIds(Arrays.asList(feeIds));
 		orderService.createOrder(order, fees);
 		
 		// FIXME change success page
 		return "upload_success";
+	}
+	
+	@RequestMapping(path="/list")
+	public String createOrder(Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<Order> orders = orderService.getUserOrders(userId);
+		model.addAttribute("orders", orders);
+		
+		return "order_list";
 	}
 }

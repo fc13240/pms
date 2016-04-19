@@ -25,4 +25,9 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	public void setOrderMapper(OrderMapper orderMapper) {
 		this.orderMapper = orderMapper;
 	}
+
+	@Override
+	public List<Order> selectUserOrders(int userId) {
+		return orderMapper.selectUserOrders(userId);
+	}
 }

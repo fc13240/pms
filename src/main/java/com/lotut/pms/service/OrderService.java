@@ -7,4 +7,5 @@ import com.lotut.pms.domain.Order;
 
 public interface OrderService {
 	int createOrder(Order order, List<Fee> fees);
+	List<Order> getUserOrders(int userId);
 }

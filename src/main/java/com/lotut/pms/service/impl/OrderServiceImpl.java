@@ -45,4 +45,9 @@ public class OrderServiceImpl implements OrderService {
 		
 		return 0;
 	}
+
+	@Override
+	public List<Order> getUserOrders(int userId) {
+		return orderDao.selectUserOrders(userId);
+	}
 }
