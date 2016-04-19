@@ -46,7 +46,7 @@
           			<c:forEach items="${contactAddresses}" var="address">
 	          			<tr>
 	          				<td>
-	          					<input type="radio" name="contactAddress" checked="${address.defaultAddress}" value="${address.id}"> 
+	          					<input type="radio" name="postAddress" checked="${address.defaultAddress}" value="${address.id}"> 
 	          					${address.receiver} ${address.provinceName} ${address.cityName} ${address.districtName}
 	          					${address.streetName} ${address.detailAddress} ${address.phone} 
 	          				</td>
@@ -56,7 +56,7 @@
           				<td>支付方式</td>
           			</tr>     
           			<tr>
-          				<td><input type="radio" name="paymentMethod" value="1"> 支付宝支付 <input type="radio" name="paymentMethod" checked="true" value="2"> 银联卡支付 </td>
+          				<td><input type="radio" name="paymentMethod" value="1"> 支付宝支付 <input type="radio" name="paymentMethod" checked="checked" value="2"> 银联卡支付 </td>
           			</tr>    
           			<tr>
           				<td>费用详情</td>
@@ -106,12 +106,11 @@
  						</td>         				
           			</tr>             			       			     			
           		</table>
-          		<input type="submit">
+          		<input type="submit" value="提交订单">
           	</form>
           </div>
         </div>
 		<%@ include file="_footer.jsp"%>
-        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"> <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i> </a> </div>
     </div>
   </div>
 </div>

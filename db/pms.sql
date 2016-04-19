@@ -276,7 +276,7 @@ create table order_status (
 );
 
 create table orders (
-	order_id varchar(30) primary key,
+	order_id bigint primary key auto_increment,
 	order_status int not null default 1,
 	post_address int,
 	last_update_time timestamp not null,
@@ -292,11 +292,11 @@ create table orders (
 	constraint fk_orders_order_status foreign key(order_status) references order_status(order_status_id),
 	constraint fk_orders_user foreign key(user) references users(user_id),
 	constraint fk_orders_process_user foreign key(process_user) references users(user_id)
-);
+) auto_increment=123412341234;
 
 create table order_items (
 	item_id bigint primary key auto_increment,
-	order_id varchar(30) not null,
+	order_id bigint not null,
 	fee_id bigint not null,
 	constraint fk_order_items_order foreign key(order_id) references orders(order_id),
 	constraint fk_order_items_fee foreign key(fee_id) references fees(fee_id)
