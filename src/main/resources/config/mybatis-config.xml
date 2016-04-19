@@ -33,6 +33,7 @@
 
 		<typeAlias alias="Order" type="com.lotut.pms.domain.Order"/>
 		<typeAlias alias="OrderItem" type="com.lotut.pms.domain.OrderItem"/>
+		<typeAlias alias="OrderStatus" type="com.lotut.pms.domain.OrderStatus"/>
 		
 	</typeAliases>  
 </configuration>

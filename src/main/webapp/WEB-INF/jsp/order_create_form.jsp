@@ -35,7 +35,9 @@
         <div class="row">
           <div class="col-xs-12">
           	<form action="<s:url value='/order/createOrder.html'/>" method="post">
-          		<input type="hidden" name="fees" value="${param.fees}">
+          		<c:forEach items="${fees}" var="fee" varStatus="status">
+          			<input type="hidden" name="feeIds" value="${fee.feeId}">
+          		</c:forEach>
           		
           		<table id="simple-table" class="table table-striped table-bordered table-hover">
           			<tr>
@@ -44,7 +46,7 @@
           			<c:forEach items="${contactAddresses}" var="address">
 	          			<tr>
 	          				<td>
-	          					<input type="radio" name="postAddress" checked="${address.defaultAddress}" value="${address.id}"> 
+	          					<input type="radio" name="postAddress.id" checked="${address.defaultAddress}" value="${address.id}"> 
 	          					${address.receiver} ${address.provinceName} ${address.cityName} ${address.districtName}
 	          					${address.streetName} ${address.detailAddress} ${address.phone} 
 	          				</td>

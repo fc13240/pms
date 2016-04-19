@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotut.pms.dao.mapper.OrderMapper">
 	<insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
-		insert into orders(post_address, amount, user) values(#{postAddress}, #{amount}, #{user})
+		insert into orders(post_address, amount, user) values(#{postAddress.id}, #{amount}, #{user})
 	</insert>
 	
 	<insert id="insertOrderItems">
@@ -14,7 +14,48 @@
 		</foreach>		
 	</insert>	
 	
-	<select id="selectUserOrders" parameterType="int">
+	<resultMap type="Patent" id="PatentWithShareUsers">
+		<id property="patentId" column="patent_id"/>
+		<result property="appNo" column="app_no"/>
+		<result property="name" column="patent_name"/>
+		<result property="appDate" column="app_date"/>
+		<result property="appPerson" column="app_person"/>
+		<result property="inventPerson" column="invent_person"/>
+		<result property="internalCode" column="internal_code"/>
+		<result property="ownerId" column="patent_owner"/>
+		<association property="patentStatus" resultMap="PatentStatusResultMap"/>
+		<association property="patentType" resultMap="PatentTypeResultMap"/>
+		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
+	</resultMap>
+	
+	<resultMap type="ContactAddress" id="PostAddressMap">
+		<id property="id" column="address_id"/>
+		<result property="receiver" column="receiver"/>
+	</resultMap>	
 		
+	<resultMap type="Order" id="OrderMap">
+		<id property="id" column="order_id"/>
+		<result property="createTime" column="create_time"/>
+		<result property="amount" column="totalAmount"/>
+		<association property="postAddress" resultMap="PostAddressMap"/>
+		<association property="orderStatus" javaType="OrderStatus">
+			<id property="statusId" column="order_status_id"/>
+			<result property="statusDescription" column="status_description"/>
+		</association>
+		<collection property="feeList"  resultMap="com.lotut.pms.dao.mapper.FeeMapper.FeeResultMap"/>
+	</resultMap>
+	
+	<select id="selectUserOrders" parameterType="int" resultMap="OrderMap">
+		select  o.create_time, o.amount totalAmount, o.order_id, ca.id as address_id, ca.receiver, os.order_status_id, os.status_description,
+			p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
+			f.fee_id, f.deadline, f.amount, f.fee_type, f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc
+		from orders o join order_status os on o.order_status = os.order_status_id
+			join contact_addresses ca on o.post_address = ca.id
+			join order_items oi on oi.order_id = o.order_id 
+			join fees f on oi.fee_id = f.fee_id
+		  join patents p on f.patent = p.patent_id
+			join patent_status ps on p.patent_status = ps.patent_status_id
+			join fee_payment_status fs on f.fee_payment_status = fs.fee_payment_status_id
+		where o.user = #{userId}		
 	</select>
 </mapper>

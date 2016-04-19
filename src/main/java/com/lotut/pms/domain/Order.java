@@ -1,26 +1,25 @@
 package com.lotut.pms.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 public class Order {
 	private long id;
 	private OrderStatus orderStatus;
 	@NotNull
-	@Size(max=Integer.MAX_VALUE, min=0)
-	private int postAddress;
-	@NotNull
-	@Size(max=Integer.MAX_VALUE, min=1)
+	private ContactAddress postAddress;
 	private int amount;
 	private int user;
 	private User processUser;
 	private boolean received;
 	private String expressCompany;
+	private Date createTime;
 	private Date sendTime;
 	private String courier;
 	private String courierPhone;
+	private List<Fee> feeList;
 	
 	public long getId() {
 		return id;
@@ -34,12 +33,7 @@ public class Order {
 	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-	public int getPostAddress() {
-		return postAddress;
-	}
-	public void setPostAddress(int postAddress) {
-		this.postAddress = postAddress;
-	}
+
 	public int getAmount() {
 		return amount;
 	}
@@ -87,5 +81,23 @@ public class Order {
 	}
 	public void setCourierPhone(String courierPhone) {
 		this.courierPhone = courierPhone;
+	}
+	public List<Fee> getFeeList() {
+		return feeList;
+	}
+	public void setFeeList(List<Fee> feeList) {
+		this.feeList = feeList;
+	}
+	public ContactAddress getPostAddress() {
+		return postAddress;
+	}
+	public void setPostAddress(ContactAddress postAddress) {
+		this.postAddress = postAddress;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 }

@@ -10,4 +10,5 @@ import com.lotut.pms.domain.OrderItem;
 public interface OrderMapper {
 	int insertOrder(Order order);
 	int insertOrderItems(@Param("orderItems")List<OrderItem> orderItems);
+	List<Order> selectUserOrders(int userId);
 }
