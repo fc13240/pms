@@ -80,6 +80,11 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>		
 	
+	<bean id="orderMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.OrderMapper" />
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>		
+	
 	<bean name="userDao" class="com.lotut.pms.dao.mybatis.UserMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 		<property name="userMapper" ref="userMapper" />
@@ -114,4 +119,8 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 			
+	<bean name="orderDao" class="com.lotut.pms.dao.mybatis.OrderMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="orderMapper" ref="orderMapper" />
+	</bean>				
 </beans>							

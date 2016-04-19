@@ -34,10 +34,8 @@
  
         <div class="row">
           <div class="col-xs-12">
-          	<form>
-          		<c:forEach items="${param.fees}" var="fee">
-          			<input type="hidden" name="fees" value="${fee}">
-          		</c:forEach>
+          	<form action="<s:url value='/order/createOrder.html'/>" method="post">
+          		<input type="hidden" name="fees" value="${param.fees}">
           		
           		<table id="simple-table" class="table table-striped table-bordered table-hover">
           			<tr>

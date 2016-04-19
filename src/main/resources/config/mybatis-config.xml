@@ -30,6 +30,9 @@
 		<typeAlias alias="User" type="com.lotut.pms.domain.User"/>
 		<typeAlias alias="ContactAddress" type="com.lotut.pms.domain.ContactAddress"/>
 		<typeAlias alias="Page" type="com.lotut.pms.domain.Page"/>
+
+		<typeAlias alias="Order" type="com.lotut.pms.domain.Order"/>
+		<typeAlias alias="OrderItem" type="com.lotut.pms.domain.OrderItem"/>
 		
 	</typeAliases>  
 </configuration>

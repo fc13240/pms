@@ -2,23 +2,30 @@ package com.lotut.pms.domain;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Order {
-	private int id;
+	private long id;
 	private OrderStatus orderStatus;
+	@NotNull
+	@Size(max=Integer.MAX_VALUE, min=0)
 	private int postAddress;
+	@NotNull
+	@Size(max=Integer.MAX_VALUE, min=1)
 	private int amount;
 	private int user;
-	private int processUser;
+	private User processUser;
 	private boolean received;
 	private String expressCompany;
 	private Date sendTime;
 	private String courier;
 	private String courierPhone;
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public OrderStatus getOrderStatus() {
@@ -45,10 +52,10 @@ public class Order {
 	public void setUser(int user) {
 		this.user = user;
 	}
-	public int getProcessUser() {
+	public User getProcessUser() {
 		return processUser;
 	}
-	public void setProcessUser(int processUser) {
+	public void setProcessUser(User processUser) {
 		this.processUser = processUser;
 	}
 	public boolean isReceived() {

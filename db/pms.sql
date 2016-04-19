@@ -279,7 +279,7 @@ create table if not exists orders (
 	order_id bigint primary key auto_increment,
 	order_status int not null default 1,
 	post_address int,
-	last_update_time timestamp not null,
+	last_update_time timestamp default current_timestamp on update current_timestamp not null,
 	amount int not null,
 	user int not null,
 	process_user int,
@@ -289,6 +289,7 @@ create table if not exists orders (
 	send_time date,
 	courier varchar(20),
 	courier_phone varchar(30),
+	create_time timestamp default current_timestamp not null,
 	constraint fk_orders_order_status foreign key(order_status) references order_status(order_status_id),
 	constraint fk_orders_user foreign key(user) references users(user_id),
 	constraint fk_orders_process_user foreign key(process_user) references users(user_id)
@@ -298,6 +299,7 @@ create table if not exists order_items (
 	item_id bigint primary key auto_increment,
 	order_id bigint not null,
 	fee_id bigint not null,
+	UNIQUE KEY uk_order_items_order_fee (order_id, fee_id),
 	constraint fk_order_items_order foreign key(order_id) references orders(order_id),
 	constraint fk_order_items_fee foreign key(fee_id) references fees(fee_id)
 );
