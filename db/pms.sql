@@ -277,7 +277,7 @@ create table order_status (
 
 create table orders (
 	order_id varchar(30) primary key,
-	order_status int not null,
+	order_status int not null default 1,
 	post_address int,
 	last_update_time timestamp not null,
 	amount int not null,
