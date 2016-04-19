@@ -61,10 +61,16 @@
            						<a href="<s:url value='/user/deleteUserContactAddresses.html'/>?id=<c:out value='${address.id}'/>">
            						<button type="button" class="btn btn-purple btn-sm">删除</button>
            						</a>
-           						<a href="<s:url value='/user/defaultUserContactAddresses.html'/>?id=<c:out value='${address.id}'/>">
-           						<button type="button" class="btn btn-purple btn-sm">设为默认收货地址</button>
+           						<c:if test="${!address.defaultAddress}">
+           						<a style="margin-left:30px;" href="<s:url value='/user/defaultUserContactAddresses.html'/>?id=<c:out value='${address.id}'/>">
+           						设为默认
            						</a>
+           						</c:if>
+           						<c:if test="${address.defaultAddress}">
+           							<span style="margin-left:30px;">默认地址</span>
+           						</c:if>
 	                        </td>
+	                        
 						</tr>       
           			</c:forEach>                			       			     			
           		</table>
