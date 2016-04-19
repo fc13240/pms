@@ -234,28 +234,29 @@
                       <div class="row">
                         <div class="col-xs-12">
                 
-							<form action="<s:url value='/user/addContactAddress.html'/>" method="post">
+							<form action="<s:url value='/user/updateUserContactAddresses.html'/>" method="post">
 							<se:csrfInput/>
-								联系人名称<input type="text" name="receiver">
-								通讯地址
+								联系人名称:<input type="text" name="receiver" id="receiver" value="${contactAddresses.receiver}"/>
+								通讯地址:
 								<select name="province" id="province" onchange="loadCities()">
-									<option value=''>请选择</option>
+									<option value='${contactAddresses.province}'>${contactAddresses.provinceName}</option>
 									<c:forEach items="${provinces}" var="province">
 									<option value="${province.id}">${province.name}</option>
 									</c:forEach>
 								</select>
 								<select name="city" id="city" onchange="loadDistricts()">
-									<option value=''>请选择</option>
+									<option value='${contactAddresses.city}'>${contactAddresses.cityName}</option>
 								</select>
 								<select name="district" id="district" onchange="loadStreets()">
-									<option value=''>请选择</option>
+									<option value='${contactAddresses.district}'>${contactAddresses.districtName}</option>
 								</select>
 								<select name="street" id="street">
-									<option value=''>请选择</option>
+									<option value='${contactAddresses.street}'>${contactAddresses.streetName}</option>
 								</select>
-								详细地址<input type="text" name="detailAddress">		
-								手机或固话<input type="text" name="phone">
-								<input type="submit" value="保存">																								
+								详细地址<input type="text" name="detailAddress" id="detailAddress"  value="${contactAddresses.detailAddress}" />		
+								手机或固话<input type="text" name="phone" id="phone" value="${contactAddresses.phone}" />
+								<input type="hidden" name="id" id="id" value="${contactAddresses.id}"/>
+								<input type="submit" value="保存">																							
 							</form>
                         <!-- /.span --> 
                       </div>

@@ -115,14 +115,52 @@ public class UserController {
 		return "";
 	}
 	
-	@RequestMapping(path="/getContactAddresses", method=RequestMethod.POST)
+	@RequestMapping(path="/getContactAddresses", method=RequestMethod.GET)
 	public String getUserContactAddresses(Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
-		
 		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
 		model.addAttribute("contactAddresses", contactAddresses);
 		// FIXME add contact addresses page
-		return "";
+		return "contactAddresses_list";
+	}
+	
+	@RequestMapping(path="/updateUserContactAddressesFrom", method=RequestMethod.GET)
+	public String updateUserContactAddressesFrom(@RequestParam("id")int id,Model model) {
+		ContactAddress contactAddresses=userService.getContactAddressesById(id);
+		List<Map<String, String>> provinces = userService.getAllProvinces();
+		model.addAttribute("provinces", provinces);
+		model.addAttribute("contactAddresses", contactAddresses);
+		return "addresses_list";
+	}
+	
+	@RequestMapping(path="/updateUserContactAddresses", method=RequestMethod.POST)
+	public String updateUserContactAddresses(@Valid ContactAddress contactAddress,Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		contactAddress.setUserId(userId);
+		userService.updateUserContactAddresses(contactAddress);
+		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
+		model.addAttribute("contactAddresses", contactAddresses);
+		return "contactAddresses_list";
+	}
+	
+	
+	@RequestMapping(path="/deleteUserContactAddresses", method=RequestMethod.GET)
+	public String deleteUserContactAddresses(@RequestParam("id")int id,Model model) {
+		userService.deleteUserContactAddresses(id);
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
+		model.addAttribute("contactAddresses", contactAddresses);
+		return "contactAddresses_list";
+	}
+	
+	@RequestMapping(path="/defaultUserContactAddresses", method=RequestMethod.GET)
+	public String defaultUserContactAddresses(@RequestParam("id")int id,Model model) {
+		userService.defaulStatus();
+		userService.defaultUserContactAddresses(id);
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
+		model.addAttribute("contactAddresses", contactAddresses);
+		return "contactAddresses_list";
 	}
 	
 	@RequestMapping(path="/getCitiesByProvince", method=RequestMethod.GET)

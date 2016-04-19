@@ -95,5 +95,33 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 		return userMapper.updateUserDetail(user);
 	}
 
+	@Override
+	public void updateUserContactAddresses(ContactAddress contactAddress) {
+		userMapper.updateUserContactAddresses(contactAddress);
+		
+	}
+
+	@Override
+	public void deleteUserContactAddresses(int id) {
+		userMapper.deleteUserContactAddresses(id);
+		
+	}
+
+	@Override
+	public void defaultUserContactAddresses(int id) {
+		userMapper.defaultUserContactAddresses(id);
+		
+	}
+
+	@Override
+	public void defaulStatus() {
+		userMapper.defaulStatus();
+	}
+
+	@Override
+	public ContactAddress getContactAddressesById(int id) {
+		return userMapper.getContactAddressesById(id);
+	}
+
 	
 }

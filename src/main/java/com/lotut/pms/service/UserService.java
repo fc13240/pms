@@ -38,4 +38,14 @@ public interface UserService {
 	List<ContactAddress> getUserContactAddresses(int userId);
 	
 	boolean updateUserDetail(User user);
+	
+	void updateUserContactAddresses(ContactAddress contactAddress);
+	
+	void deleteUserContactAddresses(int id);
+	
+	void defaultUserContactAddresses(int id);
+	
+	void defaulStatus();
+	
+	ContactAddress getContactAddressesById(int id);
 }
