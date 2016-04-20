@@ -67,7 +67,10 @@ public class OrderController {
 	}
 	
 	@RequestMapping(path="/list")
-	public String createOrder(Model model,Page page) {
+	public String getUserOrders(Model model,Page page) {
+		if (page.getCurrentPage() < 1) {
+			page.setCurrentPage(1);
+		}
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
 		int totalCount=(int)orderService.getUserOrdersCount(userId);
@@ -75,6 +78,23 @@ public class OrderController {
 		List<Order> orders = orderService.getUserOrders(page);
 		model.addAttribute("orders", orders);
 		model.addAttribute("page",page);
+		return "order_list";
+	}
+	
+	@RequestMapping(path="/delete")
+	public String deleteUserOrders(@RequestParam("orderId")long orderId,Model model,Page page){
+		if (page.getCurrentPage() < 1) {
+			page.setCurrentPage(1);
+		}
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		orderService.deleteUserOrders(orderId);
+		int totalCount=(int)orderService.getUserOrdersCount(userId);
+		page.setTotalRecords(totalCount);
+		List<Order> orders = orderService.getUserOrders(page);
+		model.addAttribute("orders", orders);
+		model.addAttribute("page",page);
+		orderService.deleteUserOrders(orderId);
 		return "order_list";
 	}
 }

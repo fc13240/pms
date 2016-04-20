@@ -46,6 +46,10 @@
 <!-- 		order by o.create_time desc -->
 <!-- 	</select> -->
 	
+	<delete id="deleteUserOrders" parameterType="int">
+		delete from orders where order_id=#{orderId}
+	</delete>
+	
 	<select id="getUserOrdersCount" resultType="int">
 		select count(*) from orders where user = #{userId}
 	</select>

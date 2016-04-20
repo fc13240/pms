@@ -17,5 +17,5 @@ public interface OrderMapper {
 	List<Order> selectUserOrders(Page page);
 	
 	int getUserOrdersCount(int userId);
-	
+	void deleteUserOrders(long orderId);
 }

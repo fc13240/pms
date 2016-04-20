@@ -14,4 +14,5 @@ public interface OrderService {
 	List<Order> getUserOrders(Page page);
 	
 	public long getUserOrdersCount(int userId);
+	public int deleteUserOrders(long orderId);
 }

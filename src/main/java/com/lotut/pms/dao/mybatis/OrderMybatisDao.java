@@ -46,4 +46,10 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	public int getUserOrdersCount(int userId) {
 		return orderMapper.getUserOrdersCount(userId);
 	}
+
+	@Override
+	public void deleteUserOrders(long orderId) {
+		orderMapper.deleteUserOrders(orderId);
+		
+	}
 }

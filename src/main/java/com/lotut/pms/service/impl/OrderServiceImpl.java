@@ -66,4 +66,10 @@ public class OrderServiceImpl implements OrderService {
 	public long getUserOrdersCount(int userId) {
 		return orderDao.getUserOrdersCount(userId);
 	}
+
+	@Override
+	public int deleteUserOrders(long orderId) {
+		orderDao.deleteUserOrders(orderId);
+		return 1;
+	}
 }
