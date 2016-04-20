@@ -253,7 +253,7 @@
         </div>
     </div>
     <div class="content">
-        <form action="<s:url value='/alipay/pay.html'/>" class="alipayform" method="POST" target="_blank">
+        <form action="<s:url value='/alipay/pay.html'/>" class="alipayform" method="POST">
         	<input type="hidden" name="orderId" value="${order.id}">
             <div class="element" style="margin-top:60px;">
                 <div class="legend">订单信息 </div>
@@ -275,7 +275,7 @@
                 <br>
             </div>
             <div class="element">
-                <input type="submit" class="alisubmit" value ="确认支付">
+                <input type="submit" class="alisubmit" value ="继续支付">
             </div>
         </form>
     </div>
