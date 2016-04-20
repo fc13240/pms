@@ -97,6 +97,42 @@
                   </table> 					
 			</c:forEach> 						
           </div>
+          		<!-- 分页功能 start -->
+				<div class="row">
+							<div class="col-lg-12">	
+										共 ${page.totalPages} 页${page.totalRecords}条记录    第${page.currentPage} 页
+										<a href="?currentPage=1">首页</a>
+									<c:choose>
+										<c:when test="${page.currentPage - 1 > 0}">
+											<a href="?currentPage=${page.currentPage - 1}">上一页</a>
+										</c:when>
+										<c:when test="${page.currentPage - 1 <= 0}">
+											<a href="?currentPage=1">上一页</a>
+										</c:when>
+									</c:choose>
+									<c:choose>
+										<c:when test="${page.totalPages==0}">
+											<a href="?currentPage=${page.currentPage}">下一页</a>
+										</c:when>
+										<c:when test="${page.currentPage + 1 < page.totalPages}">
+											<a href="?currentPage=${page.currentPage+1}">下一页</a>
+										</c:when>
+										<c:when test="${page.currentPage + 1 >= page.totalPages}">
+											<a href="?currentPage=${page.totalPages}">下一页</a>
+										</c:when>
+									</c:choose>
+									<c:choose>
+										<c:when test="${page.totalPages==0}">
+											<a href="?currentPage=${page.currentPage}">尾页</a>
+										</c:when>
+										<c:otherwise>
+											<a href="?currentPage=${page.totalPages}">尾页</a>
+										</c:otherwise>
+									</c:choose>
+							<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
+								<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
+							</div>
+				</div>
         </div>
 		<%@ include file="_footer.jsp"%>
     </div>
