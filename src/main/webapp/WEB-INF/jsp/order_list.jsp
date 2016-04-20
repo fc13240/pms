@@ -82,7 +82,16 @@
                     	</td>
                     	<td>${order.postAddress.receiver}</td>
                     	<td>总额: ￥${order.amount}</td>
-                    	<td>${order.orderStatus.statusDescription}</td>
+                    	<td>
+                    		${order.orderStatus.statusDescription}
+                    		<c:if test="${order.orderStatus.statusId == 1}">
+                    			<div>
+                    				<a href="javascript:void" onclick="window.open('<s:url value="/alipay/index.html?orderId="/>${order.id}')">支付宝支付</a>
+                    			</div>
+                    			<div>
+                    			</div>                    			
+                    		</c:if>
+                    	</td>
                     </tr>								
                    </tbody>
                   </table> 					

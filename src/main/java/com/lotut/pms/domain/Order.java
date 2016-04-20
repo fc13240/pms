@@ -20,6 +20,8 @@ public class Order {
 	private String courier;
 	private String courierPhone;
 	private List<Fee> feeList;
+	@NotNull
+	private PaymentMethod paymentMethod;
 	
 	public long getId() {
 		return id;
@@ -99,5 +101,11 @@ public class Order {
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	public PaymentMethod getPaymentMethod() {
+		return paymentMethod;
+	}
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
 	}
 }

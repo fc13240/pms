@@ -9,4 +9,5 @@ public interface OrderDao {
 	int insertOrder(Order order);
 	int insertOrderItems(List<OrderItem> orderItems);
 	List<Order> selectUserOrders(int userId);
+	Order getOrderById(long orderId);
 }
