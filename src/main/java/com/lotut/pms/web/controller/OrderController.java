@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -46,12 +47,19 @@ public class OrderController {
 	}
 	
 	@RequestMapping(path="/createOrder")
-	public String createOrder(@RequestParam("feeIds")Long[] feeIds, @Valid Order order, Model model) {
+	public String createOrder(@RequestParam("feeIds")Long[] feeIds, @ModelAttribute @Valid Order order, Model model) {
+		final int ALIPAY = 1;
 		int userId = PrincipalUtils.getCurrentUserId();
 		order.setUser(userId);
 		
 		List<Fee> fees = feeService.getFeesByIds(Arrays.asList(feeIds));
 		orderService.createOrder(order, fees);
+		
+		model.addAttribute("orderId", order.getId());
+		
+		if (order.getPaymentMethod().getPaymentMethodId() == ALIPAY) {
+			return "redirect:/alipay/index.html";
+		}
 		
 		// FIXME change success page
 		return "upload_success";

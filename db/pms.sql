@@ -275,6 +275,11 @@ create table if not exists order_status (
 	status_description varchar(20) not null unique
 );
 
+create table if not exists payment_methods (
+	payment_method_id int primary key auto_increment,
+	payment_method varchar(30) not null unique
+);
+
 create table if not exists orders (
 	order_id bigint primary key auto_increment,
 	order_status int not null default 1,
@@ -290,9 +295,11 @@ create table if not exists orders (
 	courier varchar(20),
 	courier_phone varchar(30),
 	create_time timestamp default current_timestamp not null,
+	payment_method int,
 	constraint fk_orders_order_status foreign key(order_status) references order_status(order_status_id),
 	constraint fk_orders_user foreign key(user) references users(user_id),
-	constraint fk_orders_process_user foreign key(process_user) references users(user_id)
+	constraint fk_orders_process_user foreign key(process_user) references users(user_id),
+	constraint fk_orders_payment_method foreign key(payment_method) references payment_methods(payment_method_id)
 ) auto_increment=123412341234;
 
 create table if not exists order_items (

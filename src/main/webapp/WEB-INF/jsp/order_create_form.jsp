@@ -56,7 +56,7 @@
           				<td>支付方式</td>
           			</tr>     
           			<tr>
-          				<td><input type="radio" name="paymentMethod" value="1"> 支付宝支付 <input type="radio" name="paymentMethod" checked="checked" value="2"> 银联卡支付 </td>
+          				<td><input type="radio" name="paymentMethod.paymentMethodId" value="1" checked="checked"> 支付宝支付 <input type="radio" name="paymentMethod.paymentMethodId" value="2"> 银联卡支付 </td>
           			</tr>    
           			<tr>
           				<td>费用详情</td>
