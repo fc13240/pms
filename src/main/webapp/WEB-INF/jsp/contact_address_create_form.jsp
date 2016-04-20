@@ -236,26 +236,26 @@
                 
 							<form action="<s:url value='/user/addContactAddress.html'/>" method="post">
 							<se:csrfInput/>
-								联系人名称<input type="text" name="receiver">
+								联系人名称<input type="text" name="receiver" required/>
 								通讯地址
-								<select name="province" id="province" onchange="loadCities()">
+								<select name="province" id="province" onchange="loadCities()" required>
 									<option value=''>请选择</option>
 									<c:forEach items="${provinces}" var="province">
 									<option value="${province.id}">${province.name}</option>
 									</c:forEach>
 								</select>
-								<select name="city" id="city" onchange="loadDistricts()">
+								<select name="city" id="city" onchange="loadDistricts()" required>
 									<option value=''>请选择</option>
 								</select>
-								<select name="district" id="district" onchange="loadStreets()">
+								<select name="district" id="district" onchange="loadStreets()" required>
 									<option value=''>请选择</option>
 								</select>
-								<select name="street" id="street">
+								<select name="street" id="street" required>
 									<option value=''>请选择</option>
 								</select>
-								详细地址<input type="text" name="detailAddress">		
-								手机或固话<input type="text" name="phone">
-								<input type="submit" value="保存">																								
+								详细地址<input type="text" name="detailAddress" required/>		
+								手机或固话<input type="text" name="phone" required/>
+								<input type="submit" value="保存"/>																								
 							</form>
                         <!-- /.span --> 
                       </div>
@@ -460,5 +460,7 @@ function loadStreets() {
 <script src="<s:url value='/static/js/ace/ace.settings-skin.js'/>"></script> 
 <script src="<s:url value='/static/js/ace/ace.widget-on-reload.js'/>"></script> 
 <script src="<s:url value='/static/js/ace/ace.searchbox-autocomplete.js'/>"></script> 
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	
 </body>
 </html>
