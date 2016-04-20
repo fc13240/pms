@@ -17,6 +17,6 @@ public interface OrderMapper {
 	List<Order> selectUserOrders(Page page);
 	
 	int getUserOrdersCount(int userId);
-	
+	void deleteUserOrders(long orderId);
 	int updateOrderStatus(@Param("orderId")long orderId, @Param("status")int status);
 }

@@ -71,10 +71,11 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int updateOrderStatus(long orderId, int status) {
-		return orderDao.updateOrderStatus(orderId, status);
+	public int deleteUserOrders(long orderId) {
+		orderDao.deleteUserOrders(orderId);
+		return 1;
 	}
-
+	
 	@Override
 	@Transactional
 	public void processOrderPaidSuccess(long orderId) {
@@ -90,5 +91,10 @@ public class OrderServiceImpl implements OrderService {
 		}
 		
 		int feeUpdateCount = feeDao.updateFeesStatus(feeIdList, FEE_STAUTS_PAID);
+	}
+
+	@Override
+	public int updateOrderStatus(long orderId, int status) {
+		return orderDao.updateOrderStatus(orderId, status);
 	}
 }

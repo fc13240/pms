@@ -17,4 +17,6 @@ public interface OrderDao {
 	int getUserOrdersCount(int userId);
 	
 	int updateOrderStatus(long orderId, int status);
+	
+	void deleteUserOrders(long orderId);
 }

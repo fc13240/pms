@@ -15,6 +15,8 @@ public interface OrderService {
 	
 	long getUserOrdersCount(int userId);
 	
+	int deleteUserOrders(long orderId);
+	
 	void processOrderPaidSuccess(long orderId);
 	
 	int updateOrderStatus(long orderId, int status);
