@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="spring" prefix="s" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -252,7 +253,7 @@
         </div>
     </div>
     <div class="content">
-        <form action="alipayapi.jsp" class="alipayform" method="POST" target="_blank">
+        <form action="<s:url value='/alipay/pay.html'/>" class="alipayform" method="POST" target="_blank">
         	<input type="hidden" name="orderId" value="${order.id}">
             <div class="element" style="margin-top:60px;">
                 <div class="legend">订单信息 </div>
