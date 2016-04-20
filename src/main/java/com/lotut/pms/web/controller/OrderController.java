@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.ContactAddress;
@@ -81,20 +82,19 @@ public class OrderController {
 		return "order_list";
 	}
 	
-	@RequestMapping(path="/delete")
+	@RequestMapping(path="/delete", method=RequestMethod.GET)
 	public String deleteUserOrders(@RequestParam("orderId")long orderId,Model model,Page page){
 		if (page.getCurrentPage() < 1) {
 			page.setCurrentPage(1);
 		}
+		orderService.deleteUserOrders(orderId);
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
-		orderService.deleteUserOrders(orderId);
 		int totalCount=(int)orderService.getUserOrdersCount(userId);
 		page.setTotalRecords(totalCount);
 		List<Order> orders = orderService.getUserOrders(page);
 		model.addAttribute("orders", orders);
 		model.addAttribute("page",page);
-		orderService.deleteUserOrders(orderId);
 		return "order_list";
 	}
 }

@@ -47,7 +47,7 @@
 <!-- 	</select> -->
 	
 	<delete id="deleteUserOrders" parameterType="int">
-		delete from orders where order_id=#{orderId}
+		delete from orders where order_id=#{orderId,javaType=long,jdbcType=BIGINT}
 	</delete>
 	
 	<select id="getUserOrdersCount" resultType="int">
