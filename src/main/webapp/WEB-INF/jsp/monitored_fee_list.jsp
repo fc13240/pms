@@ -650,7 +650,7 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 		
 		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'fee');
 		
-		location.href = "<s:url value='/order/orderCreateForm.html'/>?fees=" + fees;	
+		window.open("<s:url value='/order/orderCreateForm.html'/>?fees=" + fees);	
 	}
 
 </script>	

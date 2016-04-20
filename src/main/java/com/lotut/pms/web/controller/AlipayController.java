@@ -3,8 +3,10 @@ package com.lotut.pms.web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alipay.config.AlipayConfig;
+import com.alipay.util.AlipayNotify;
 import com.alipay.util.AlipaySubmit;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.service.OrderService;
-import com.lotut.pms.web.util.WebUtils;
 
 @Controller
 @RequestMapping(path="/alipay")
@@ -63,22 +65,41 @@ public class AlipayController {
 		String sHtmlText = AlipaySubmit.buildRequest(paramMap,"get","确认");
 		response.setContentType("text/html");
 		try (PrintWriter out = response.getWriter();) {
-			out.write("<!DOCTYPE html>\n");
-			out.write("<html>\n");
-			out.write("<head>\n");
-			out.write("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-			out.write("<title>支付宝即时到账交易接口</title>\n");
-			out.write("</head>\n");
-			out.write("<body>\n");
 			out.write(sHtmlText);
-			out.write("</body>\n");
-			out.write("</html>\n");
 			out.flush();
 		}
 	}	
 	
 	@RequestMapping(path="/notify")
-	public void procesNotify(Model model) {
+	public void procesNotify(HttpServletRequest request, Model model) {
+		Map<String,String> params = new HashMap<String,String>();
+		Map requestParams = request.getParameterMap();
+		for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
+			String name = (String) iter.next();
+			String[] values = (String[]) requestParams.get(name);
+			String valueStr = "";
+			for (int i = 0; i < values.length; i++) {
+				valueStr = (i == values.length - 1) ? valueStr + values[i]
+						: valueStr + values[i] + ",";
+			}
+			
+			params.put(name, valueStr);
+		}
+
+		String orderIdStr = request.getParameter("out_trade_no");
+		String trade_no = request.getParameter("trade_no");
+		String trade_status = request.getParameter("trade_status");
+				
+		boolean verify_result = AlipayNotify.verify(params);
+		
+		if (verify_result) {
+			boolean success = trade_status.equals("TRADE_FINISHED") || trade_status.equals("TRADE_SUCCESS");
+			if(success){
+				
+			}
+		} else {
+			
+		}
 		
 	}	
 	
