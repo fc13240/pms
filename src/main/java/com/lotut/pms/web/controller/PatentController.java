@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.PatentService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.WebUtils;
 
 @Controller
 @RequestMapping(path="/patent")
@@ -38,9 +40,10 @@ public class PatentController {
 	}
 
 	@RequestMapping(path="/list", method=RequestMethod.GET)
-	public String getUserPatents(Model model, Page page) {
+	public String getUserPatents(Model model, Page page, HttpSession session) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
 		//分页相关
 		int totalCount=(int)patentService.getPatentsCount(userId);
 		page.setTotalRecords(totalCount);
@@ -106,11 +109,12 @@ public class PatentController {
 	}
 	
 	@RequestMapping(path="/search", method=RequestMethod.GET)
-	public String searchUserPatents(@ModelAttribute("searchCondition")PatentSearchCondition searchCondition, Model model) {
+	public String searchUserPatents(@ModelAttribute("searchCondition")PatentSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
 		List<Patent> resultPatents = patentService.searchUserPatentsWithPage(searchCondition);
 		int totalCount=(int)patentService.searchUserPatentsCount(searchCondition);
-		Page page=searchCondition.getPage();
 		page.setTotalRecords(totalCount);
 		model.addAttribute("patents", resultPatents);
 		model.addAttribute("page", page);

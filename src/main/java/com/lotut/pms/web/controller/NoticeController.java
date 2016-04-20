@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.service.NoticeService;
 import com.lotut.pms.service.PatentService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.WebUtils;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
@@ -47,7 +49,8 @@ public class NoticeController {
 	}
 
 	@RequestMapping(path="/list", method=RequestMethod.GET)
-	public String getNoticeList(Model model,Page page) {
+	public String getNoticeList(Model model,Page page,HttpSession session) {
+		page.setPageSize(WebUtils.getPageSize(session));
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
 		List<Notice> userNotices = noticeService.getUserNoticesByPage(page);
@@ -62,11 +65,12 @@ public class NoticeController {
 	
 	
 	@RequestMapping(path="/search", method=RequestMethod.GET)
-	public String searchUserNotices(@ModelAttribute("searchCondition")NoticeSearchCondition searchCondition, Model model) {
+	public String searchUserNotices(@ModelAttribute("searchCondition")NoticeSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
 		List<Notice> resultNotices = noticeService.searchUserNoticesWithPage(searchCondition);
 		int totalCount=(int)noticeService.searchUserNoticesCount(searchCondition);
-		Page page=searchCondition.getPage();
 		page.setTotalRecords(totalCount);
 		model.addAttribute("notices", resultNotices);
 		model.addAttribute("page", page);
