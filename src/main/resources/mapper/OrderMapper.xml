@@ -31,20 +31,44 @@
 		<collection property="feeList"  resultMap="com.lotut.pms.dao.mapper.FeeMapper.FeeResultMap"/>
 	</resultMap>
 	
-	<select id="selectUserOrders" parameterType="int" resultMap="OrderMap">
-		select  o.create_time, o.amount totalAmount, o.order_id, ca.id as address_id, ca.receiver, os.order_status_id, os.status_description,
-			p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
-			f.fee_id, f.deadline, f.amount, f.fee_type, f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc
-		from orders o join order_status os on o.order_status = os.order_status_id
-			join contact_addresses ca on o.post_address = ca.id
-			join order_items oi on oi.order_id = o.order_id 
-			join fees f on oi.fee_id = f.fee_id
-		  join patents p on f.patent = p.patent_id
-			join patent_status ps on p.patent_status = ps.patent_status_id
-			join fee_payment_status fs on f.fee_payment_status = fs.fee_payment_status_id
-		where o.user = #{userId}	
-		order by o.create_time desc	
+<!-- 	<select id="selectUserOrders" parameterType="int" resultMap="OrderMap"> -->
+<!-- 		select  o.create_time, o.amount totalAmount, o.order_id, ca.id as address_id, ca.receiver, os.order_status_id, os.status_description, -->
+<!-- 			p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc, -->
+<!-- 			f.fee_id, f.deadline, f.amount, f.fee_type, f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc -->
+<!-- 		from orders o join order_status os on o.order_status = os.order_status_id -->
+<!-- 			join contact_addresses ca on o.post_address = ca.id -->
+<!-- 			join order_items oi on oi.order_id = o.order_id  -->
+<!-- 			join fees f on oi.fee_id = f.fee_id -->
+<!-- 		  join patents p on f.patent = p.patent_id -->
+<!-- 			join patent_status ps on p.patent_status = ps.patent_status_id -->
+<!-- 			join fee_payment_status fs on f.fee_payment_status = fs.fee_payment_status_id -->
+<!-- 		where o.user = #{userId} -->
+<!-- 		order by o.create_time desc -->
+<!-- 	</select> -->
+	
+	<select id="getUserOrdersCount" resultType="int">
+		select count(*) from orders where user = #{userId}
 	</select>
+	
+	<select id="selectUserOrders" parameterType="Page" resultMap="OrderMap">
+		SELECT od.create_time, od.totalAmount, od.order_id, od.address_id, od.receiver, 
+				od.order_status_id, od.status_description, p.patent_id, p.app_no, p.patent_name, 
+				p.app_person, ps.patent_status_id, ps.patent_status_desc, f.fee_id, f.deadline,
+				f.amount, f.fee_type, f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc
+  		FROM 
+				(SELECT o.create_time, o.amount totalAmount, o.order_id, ca.id AS address_id, ca.receiver, os.order_status_id, os.status_description
+				  FROM orders o JOIN order_status os ON o.order_status = os.order_status_id
+					LEFT JOIN contact_addresses ca ON o.post_address = ca.id
+				 WHERE o.user = #{userId}
+				 ORDER BY o.create_time desc
+				limit #{startIndex}, #{pageSize}) od
+			  JOIN order_items oi ON od.order_id = oi.order_id
+			  JOIN fees f ON f.fee_id = oi.fee_id
+			  JOIN patents p ON f.patent = p.patent_id
+			  JOIN patent_status ps ON p.patent_status = ps.patent_status_id
+			  JOIN fee_payment_status fs ON f.fee_payment_status = fs.fee_payment_status_id
+	</select>
+	
 	
 	<select id="getOrderById" parameterType="long" resultMap="OrderMap">
 		select  o.create_time, o.amount totalAmount, o.order_id, ca.id as address_id, ca.receiver, os.order_status_id, os.status_description,

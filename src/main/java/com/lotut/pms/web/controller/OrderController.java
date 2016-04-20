@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Order;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.FeeService;
 import com.lotut.pms.service.OrderService;
 import com.lotut.pms.service.UserService;
@@ -66,11 +67,14 @@ public class OrderController {
 	}
 	
 	@RequestMapping(path="/list")
-	public String createOrder(Model model) {
+	public String createOrder(Model model,Page page) {
 		int userId = PrincipalUtils.getCurrentUserId();
-		List<Order> orders = orderService.getUserOrders(userId);
+		page.setUserId(userId);
+		int totalCount=(int)orderService.getUserOrdersCount(userId);
+		page.setTotalRecords(totalCount);
+		List<Order> orders = orderService.getUserOrders(page);
 		model.addAttribute("orders", orders);
-		
+		model.addAttribute("page",page);
 		return "order_list";
 	}
 }

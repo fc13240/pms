@@ -9,6 +9,7 @@ import com.lotut.pms.dao.OrderDao;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.OrderItem;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.OrderService;
 
 public class OrderServiceImpl implements OrderService {
@@ -54,5 +55,15 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Order getOrderById(long orderId) {
 		return orderDao.getOrderById(orderId);
+	}
+
+	@Override
+	public List<Order> getUserOrders(Page page) {
+		return orderDao.selectUserOrders(page);
+	}
+
+	@Override
+	public long getUserOrdersCount(int userId) {
+		return orderDao.getUserOrdersCount(userId);
 	}
 }

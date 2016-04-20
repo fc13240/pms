@@ -8,6 +8,7 @@ import com.lotut.pms.dao.OrderDao;
 import com.lotut.pms.dao.mapper.OrderMapper;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.OrderItem;
+import com.lotut.pms.domain.Page;
 
 public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	private OrderMapper orderMapper;
@@ -34,5 +35,15 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	@Override
 	public Order getOrderById(long orderId) {
 		return orderMapper.getOrderById(orderId);
+	}
+
+	@Override
+	public List<Order> selectUserOrders(Page page) {
+		return orderMapper.selectUserOrders(page);
+	}
+
+	@Override
+	public int getUserOrdersCount(int userId) {
+		return orderMapper.getUserOrdersCount(userId);
 	}
 }
