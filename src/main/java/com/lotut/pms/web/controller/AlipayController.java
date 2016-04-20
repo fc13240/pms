@@ -74,7 +74,8 @@ public class AlipayController {
 	}	
 	
 	@RequestMapping(path="/notify")
-	public String procesNotify(HttpServletRequest request, Model model) {
+	public void procesNotify(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+		final int ORDER_STATUS_PAID = 2;
 		Map<String,String> params = new HashMap<String,String>();
 		Map requestParams = request.getParameterMap();
 		for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
@@ -94,6 +95,48 @@ public class AlipayController {
 		String trade_status = request.getParameter("trade_status");
 				
 		boolean verify_result = AlipayNotify.verify(params);
+		PrintWriter out = response.getWriter();
+		
+		if (verify_result) {
+			boolean success = trade_status.equals("TRADE_FINISHED") || trade_status.equals("TRADE_SUCCESS");
+			if(success){
+				long orderId = Long.parseLong(orderIdStr);
+				Order order = orderService.getOrderById(orderId);
+				if (order.getOrderStatus().getStatusId() == ORDER_STATUS_PAID) {
+					out.println("success");
+					return;
+				}
+				orderService.processOrderPaidSuccess(orderId);
+				out.println("success");
+			}
+		} else {
+			out.println("fail");
+		}
+		
+		out.flush();
+		out.close();
+	}
+		
+	@RequestMapping(path="/return")
+	public String returnPayResult(HttpServletRequest request, HttpServletResponse response, Model model) {
+		Map<String,String> params = new HashMap<String,String>();
+		Map requestParams = request.getParameterMap();
+		for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
+			String name = (String) iter.next();
+			String[] values = (String[]) requestParams.get(name);
+			String valueStr = "";
+			for (int i = 0; i < values.length; i++) {
+				valueStr = (i == values.length - 1) ? valueStr + values[i]
+						: valueStr + values[i] + ",";
+			}
+			
+			params.put(name, valueStr);
+		}
+
+		String orderIdStr = request.getParameter("out_trade_no");
+		String trade_status = request.getParameter("trade_status");
+				
+		boolean verify_result = AlipayNotify.verify(params);
 		
 		if (verify_result) {
 			boolean success = trade_status.equals("TRADE_FINISHED") || trade_status.equals("TRADE_SUCCESS");
@@ -107,10 +150,6 @@ public class AlipayController {
 		}
 		
 		return "pay_failure";
-	}	
-	
-	@RequestMapping(path="/return")
-	public void returnPayResult(HttpServletRequest request, HttpServletResponse response, Model model) {
+	}
 		
-	}		
 }
