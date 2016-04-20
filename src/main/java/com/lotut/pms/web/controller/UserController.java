@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lotut.pms.domain.ContactAddress;
@@ -193,6 +194,14 @@ public class UserController {
 		WebUtils.writeJsonStrToResponse(response, streets);
 	}
 
+	@RequestMapping(path="/setPageSize", method=RequestMethod.GET)
+	@ResponseBody
+	public void setPageSize(@RequestParam("pageSize")int pageSize, HttpSession session, HttpServletResponse response) throws IOException {
+		session.setAttribute("pageSize", pageSize);
+		//WebUtils.writeJsonStrToResponse(response, "");
+		
+	}
+	
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ModelAndView login() {
 		return null;

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,7 @@ import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FeeService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.WebUtils;
 
 @Controller
 @RequestMapping(path="/fee")
@@ -89,8 +91,9 @@ public class FeeController {
 	}
 	//CS:分页
 	@RequestMapping(path="/monitoredFeeList", method=RequestMethod.GET)
-	public String getMonitoredFees(Model model,Page page) {
+	public String getMonitoredFees(Model model,Page page,HttpSession session) {
 		int userId = PrincipalUtils.getCurrentUserId();
+		page.setPageSize(WebUtils.getPageSize(session));
 		page.setUserId(userId);
 		int totalCount=(int)feeService.getUserMonitoredFeesCounts(userId);
 		page.setTotalRecords(totalCount);
@@ -102,11 +105,12 @@ public class FeeController {
 	
 	//CS:搜索分页
 	@RequestMapping(path="/search", method=RequestMethod.GET)
-	public String searchUserMonitoredFees(@ModelAttribute("searchCondition")FeeSearchCondition searchCondition, Model model) {
+	public String searchUserMonitoredFees(@ModelAttribute("searchCondition")FeeSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
 		List<Fee> fees = feeService.searchUserMonitoredFeesByPage(searchCondition);
 		int totalCount=(int)feeService.searchUserMonitoredFeesCount(searchCondition);
-		Page page=searchCondition.getPage();
 		page.setTotalRecords(totalCount);
 		model.addAttribute("fees", fees);
 		model.addAttribute("page", page);
