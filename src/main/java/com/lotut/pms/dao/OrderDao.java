@@ -15,4 +15,6 @@ public interface OrderDao {
 	List<Order> selectUserOrders(Page page);
 	
 	int getUserOrdersCount(int userId);
+	
+	int updateOrderStatus(long orderId, int status);
 }

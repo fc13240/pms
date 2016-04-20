@@ -41,5 +41,6 @@
 	
 	<bean name="orderService" class="com.lotut.pms.service.impl.OrderServiceImpl">
 		<constructor-arg ref="orderDao"/>
+		<constructor-arg ref="feeDao"/>
 	</bean>				
 </beans>

@@ -98,5 +98,10 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 			return feeMapper.searchUserMonitoredFeesCount(searchCondition);
 		}
 
+		@Override
+		public int updateFeesStatus(List<Long> feeIdList, int status) {
+			return feeMapper.updateFeesStatus(feeIdList, status);
+		}
+
 		
 }

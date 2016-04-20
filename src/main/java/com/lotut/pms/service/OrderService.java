@@ -13,5 +13,9 @@ public interface OrderService {
 	
 	List<Order> getUserOrders(Page page);
 	
-	public long getUserOrdersCount(int userId);
+	long getUserOrdersCount(int userId);
+	
+	void processOrderPaidSuccess(long orderId);
+	
+	int updateOrderStatus(long orderId, int status);
 }

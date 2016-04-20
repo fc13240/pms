@@ -18,4 +18,5 @@ public interface OrderMapper {
 	
 	int getUserOrdersCount(int userId);
 	
+	int updateOrderStatus(@Param("orderId")long orderId, @Param("status")int status);
 }

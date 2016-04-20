@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lotut.pms.dao.FeeDao;
 import com.lotut.pms.dao.OrderDao;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Order;
@@ -14,9 +15,11 @@ import com.lotut.pms.service.OrderService;
 
 public class OrderServiceImpl implements OrderService {
 	private OrderDao orderDao;
+	private FeeDao feeDao;
 	
-	public OrderServiceImpl(OrderDao orderDao) {
+	public OrderServiceImpl(OrderDao orderDao, FeeDao feeDao) {
 		this.orderDao = orderDao;
+		this.feeDao = feeDao;
 	}
 
 	@Override
@@ -65,5 +68,27 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public long getUserOrdersCount(int userId) {
 		return orderDao.getUserOrdersCount(userId);
+	}
+
+	@Override
+	public int updateOrderStatus(long orderId, int status) {
+		return orderDao.updateOrderStatus(orderId, status);
+	}
+
+	@Override
+	@Transactional
+	public void processOrderPaidSuccess(long orderId) {
+		final int ORDER_STATUS_PAID = 2;
+		final int FEE_STAUTS_PAID = 2;
+		Order order = orderDao.getOrderById(orderId);
+		int orderUpdateCount = orderDao.updateOrderStatus(orderId, ORDER_STATUS_PAID);
+		
+		List<Fee> fees = order.getFeeList();
+		List<Long> feeIdList = new ArrayList<>(fees.size());
+		for (Fee fee: fees) {
+			feeIdList.add(fee.getFeeId());
+		}
+		
+		int feeUpdateCount = feeDao.updateFeesStatus(feeIdList, FEE_STAUTS_PAID);
 	}
 }

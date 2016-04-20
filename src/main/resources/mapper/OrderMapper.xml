@@ -83,4 +83,8 @@
 			join fee_payment_status fs on f.fee_payment_status = fs.fee_payment_status_id
 		where o.order_id = #{orderId}		
 	</select>
+	
+	<update id="updateOrderStatus">
+		update orders set order_status = #{status} where order_id = #{orderId}
+	</update>
 </mapper>

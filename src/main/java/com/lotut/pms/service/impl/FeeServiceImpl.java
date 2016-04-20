@@ -193,4 +193,9 @@ public class FeeServiceImpl implements FeeService {
 		public List<Fee> getFeesByIds(List<Long> feeIds) {
 			return feeDao.getFeesByIds(feeIds);
 		}
+
+		@Override
+		public int updateFeesStatus(List<Long> feeIdList, int status) {
+			return feeDao.updateFeesStatus(feeIdList, status);
+		}
 }

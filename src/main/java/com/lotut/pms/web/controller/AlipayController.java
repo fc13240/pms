@@ -19,16 +19,19 @@ import com.alipay.config.AlipayConfig;
 import com.alipay.util.AlipayNotify;
 import com.alipay.util.AlipaySubmit;
 import com.lotut.pms.domain.Order;
+import com.lotut.pms.service.FeeService;
 import com.lotut.pms.service.OrderService;
 
 @Controller
 @RequestMapping(path="/alipay")
 public class AlipayController {
 	private OrderService orderService;
+	private FeeService feeService;
 	
 	@Autowired
-	public AlipayController(OrderService orderService) {
+	public AlipayController(OrderService orderService, FeeService feeService) {
 		this.orderService = orderService;
+		this.feeService = feeService;
 	}
 	
 	@RequestMapping(path="/index")
@@ -71,7 +74,7 @@ public class AlipayController {
 	}	
 	
 	@RequestMapping(path="/notify")
-	public void procesNotify(HttpServletRequest request, Model model) {
+	public String procesNotify(HttpServletRequest request, Model model) {
 		Map<String,String> params = new HashMap<String,String>();
 		Map requestParams = request.getParameterMap();
 		for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
@@ -95,16 +98,19 @@ public class AlipayController {
 		if (verify_result) {
 			boolean success = trade_status.equals("TRADE_FINISHED") || trade_status.equals("TRADE_SUCCESS");
 			if(success){
-				
+				long orderId = Long.parseLong(orderIdStr);
+				orderService.processOrderPaidSuccess(orderId);
+				return "pay_success";
 			}
 		} else {
-			
+			return "pay_failure";
 		}
 		
+		return "pay_failure";
 	}	
 	
 	@RequestMapping(path="/return")
-	public void returnPayResult(Model model) {
+	public void returnPayResult(HttpServletRequest request, HttpServletResponse response, Model model) {
 		
 	}		
 }

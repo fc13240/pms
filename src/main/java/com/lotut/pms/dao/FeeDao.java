@@ -4,10 +4,7 @@ import java.util.List;
 
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.FeeSearchCondition;
-import com.lotut.pms.domain.Notice;
-import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.Patent;
 
 public interface FeeDao {
 	
@@ -49,5 +46,5 @@ public interface FeeDao {
 	void deleteFees(List<Long> feeIdList, int userId);
 	
 	
-
+	int updateFeesStatus(List<Long> feeIdList, int status);
 }

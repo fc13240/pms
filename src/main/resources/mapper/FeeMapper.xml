@@ -237,10 +237,6 @@
 		 </foreach>		
 	</select>
 	
-	
-	
-	
-	
 	<update id="updateFeesInvoiceTitle">
 		update fees set invoice_title = #{invoiceTitle}
 		where fee_id in
@@ -258,4 +254,12 @@
 			 #{feeId}
 		 </foreach>	
 	</delete>
+	
+	<update id="updateFeesStatus">
+		update fees set fee_payment_status = #{status}
+		where fee_id in
+		<foreach item="feeId" collection="feeIdList" open="(" separator="," close=")">
+			#{feeId}
+		</foreach>			
+	</update>
 </mapper>
