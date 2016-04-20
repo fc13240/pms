@@ -112,7 +112,7 @@ public class UserController {
 		userService.saveContactAddress(contactAddress);
 		
 		// FIXME add success page
-		return "";
+		return "addAddresses_success";
 	}
 	
 	@RequestMapping(path="/getContactAddresses", method=RequestMethod.GET)
