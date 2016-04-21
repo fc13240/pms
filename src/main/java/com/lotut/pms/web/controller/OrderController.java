@@ -81,9 +81,9 @@ public class OrderController {
 		page.setUserId(userId);
 		
 		if (PrincipalUtils.isOrderProcessor()) {
-			int totalCount=(int)orderService.getAllUnCacelledOrderCount();
+			int totalCount=(int)orderService.getAllNeedProcessOrderCount();
 			page.setTotalRecords(totalCount);
-			List<Order> orders = orderService.getAllUnCacelledOrders(page);
+			List<Order> orders = orderService.getAllNeedProcessOrders(page);
 			model.addAttribute("orders", orders);
 			model.addAttribute("page",page);
 			return "all_order_list";
@@ -112,7 +112,7 @@ public class OrderController {
 	}
 	
 	
-	@RequestMapping(path="/list", method=RequestMethod.GET, params="orderStatus")
+	@RequestMapping(path="list", method=RequestMethod.GET, params="orderStatus")
 	public String getOrdersByStatus(@RequestParam("orderStatus") int orderStatus, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<Order> orders = orderService.getUserOrdersByStatus(userId, orderStatus);

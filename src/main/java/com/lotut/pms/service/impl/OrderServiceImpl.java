@@ -101,13 +101,13 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int getAllUnCacelledOrderCount() {
-		return orderDao.getAllUnCacelledOrderCount();
+	public int getAllNeedProcessOrderCount() {
+		return orderDao.getAllNeedProcessOrderCount();
 	}
 
 	@Override
-	public List<Order> getAllUnCacelledOrders(Page page) {
-		return orderDao.getAllUnCacelledOrders(page);
+	public List<Order> getAllNeedProcessOrders(Page page) {
+		return orderDao.getAllNeedProcessOrders(page);
 	}
 
 	@Override

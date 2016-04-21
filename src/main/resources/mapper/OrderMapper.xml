@@ -120,7 +120,7 @@
 			 		and o.create_time >= #{startAppDate}
 			 	</if>	
 			 	<if test="endAppDate != null">
-			 		<![CDATA[ and o.create_time <= #{endAppDate} ]]>
+			 		<![CDATA[ and DATE_FORMAT(o.create_time, '%Y-%m-%d') <= #{endAppDate} ]]>
 			 	</if>	
 			 	<if test="keyword != null">
 					and (o.order_id like #{keyword_pattern})
@@ -184,11 +184,11 @@
 		update orders set order_status = #{status} where order_id = #{orderId}
 	</update>
 
-	<select id="getAllUnCacelledOrderCount" resultType="int">
+	<select id="getAllNeedProcessOrderCount" resultType="int">
 		select count(*) from orders where order_status != 3
 	</select>
 	
-	<select id="getAllUnCacelledOrders" parameterType="Page" resultMap="OrderMap">
+	<select id="getAllNeedProcessOrders" parameterType="Page" resultMap="OrderMap">
 		SELECT od.create_time, od.totalAmount, od.order_id, od.address_id, od.receiver, 
 				od.order_status_id, od.status_description, p.patent_id, p.app_no, p.patent_name, 
 				p.app_person, ps.patent_status_id, ps.patent_status_desc, f.fee_id, f.deadline,
@@ -200,7 +200,7 @@
 				  FROM orders o JOIN order_status os ON o.order_status = os.order_status_id
 					LEFT JOIN contact_addresses ca ON o.post_address = ca.id
 					join users u on o.user = u.user_id
-				 WHERE o.order_status != 3
+				 WHERE o.order_status in (2, 4)
 				 ORDER BY o.create_time desc
 				limit #{startIndex}, #{pageSize}) od
 			  JOIN order_items oi ON od.order_id = oi.order_id

@@ -57,7 +57,7 @@
 	                                <select name="orderStatus" id="orderStatusId">
 	                                    <option value="">全部</option>
 									  	<c:forEach items="${allOrderStatus}" var="orderStatus">
-											<option value="<c:out value='${orderStatus.orderStatusId}'/>"><c:out value="${orderStatus.statusDescription}"/></option>
+											<option value="<c:out value='${orderStatus.statusId}'/>"><c:out value="${orderStatus.statusDescription}"/></option>
 										</c:forEach>
 	                                </select>	
 	                                </div>
@@ -89,6 +89,7 @@
 	                            </div>
                         </div>
                     </div>
+                   </form>
                 </div>
  		<!-- 搜索结束 -->
         <div class="row">

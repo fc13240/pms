@@ -22,9 +22,9 @@ public interface OrderDao {
 	
 	void deleteUserOrders(long orderId);
 	
-	int getAllUnCacelledOrderCount();
+	int getAllNeedProcessOrderCount();
 	
-	List<Order> getAllUnCacelledOrders(Page page);
+	List<Order> getAllNeedProcessOrders(Page page);
 	
 	List<OrderStatus> getAllOrderStatus();
 	

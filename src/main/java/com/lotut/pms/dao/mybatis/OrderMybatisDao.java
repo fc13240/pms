@@ -60,13 +60,13 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	}
 
 	@Override
-	public int getAllUnCacelledOrderCount() {
-		return orderMapper.getAllUnCacelledOrderCount();
+	public int getAllNeedProcessOrderCount() {
+		return orderMapper.getAllNeedProcessOrderCount();
 	}
 
 	@Override
-	public List<Order> getAllUnCacelledOrders(Page page) {
-		return orderMapper.getAllUnCacelledOrders(page);
+	public List<Order> getAllNeedProcessOrders(Page page) {
+		return orderMapper.getAllNeedProcessOrders(page);
 	}
 
 	@Override
