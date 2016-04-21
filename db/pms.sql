@@ -381,3 +381,14 @@ INSERT INTO payment_methods
 VALUES
 	(1, '支付宝'),
 	(2, '银联卡');
+	
+INSERT INTO groups
+VALUES
+	(1, 'USER'),
+	(2, 'ORDER');
+	
+INSERT INTO group_authorities
+VALUES
+	(1, 'ROLE_USER'),
+	(2, 'ROLE_ORDER');
+	
