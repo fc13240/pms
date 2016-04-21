@@ -374,6 +374,10 @@ INSERT INTO order_status
 VALUES
 	(1, '待支付'),
 	(2, '已支付'),
-	(3, '已取消');
+	(3, '已取消'),
+	(4, '已缴费');
 	
-	
+INSERT INTO payment_methods
+VALUES
+	(1, '支付宝'),
+	(2, '银联卡');
