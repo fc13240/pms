@@ -154,7 +154,7 @@
     .alipayform {
         width:800px;
         margin:0 auto;
-        height:600px;
+        height:200px;
         border:1px solid #0ae
     }
     .element {
@@ -209,6 +209,7 @@
         width:100%;
         height:120px;
         background-color:#242735
+        margin-top: 50px;
     }
     .footer-sub a,span {
         color:#808080;
@@ -253,7 +254,7 @@
         </div>
     </div>
     <div class="content">
-        <form action="<s:url value='/alipay/pay.html'/>" class="alipayform" method="POST">
+        <form class="alipayform" method="POST">
         	<input type="hidden" name="orderId" value="${order.id}">
             <div class="element" style="margin-top:60px;">
                 <div class="legend">对不起，没能成功支付，请稍后再试</div>

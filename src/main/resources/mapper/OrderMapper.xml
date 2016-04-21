@@ -4,7 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotut.pms.dao.mapper.OrderMapper">
 	<insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
-		insert into orders(post_address, amount, user) values(#{postAddress.id}, #{amount}, #{user})
+		insert into orders(post_address, amount, user) 
+		values(<choose>
+		<when test="postAddress != null and postAddress.id != 0">
+			#{postAddress.id}
+		</when>
+		<otherwise>
+			null
+		</otherwise>
+		</choose>, #{amount}, #{user})
 	</insert>
 	
 	<insert id="insertOrderItems">
@@ -79,7 +87,7 @@
 			p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
 			f.fee_id, f.deadline, f.amount, f.fee_type, f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc
 		from orders o join order_status os on o.order_status = os.order_status_id
-			join contact_addresses ca on o.post_address = ca.id
+			left join contact_addresses ca on o.post_address = ca.id
 			join order_items oi on oi.order_id = o.order_id 
 			join fees f on oi.fee_id = f.fee_id
 		  join patents p on f.patent = p.patent_id
