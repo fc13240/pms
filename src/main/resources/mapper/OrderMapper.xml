@@ -26,15 +26,20 @@
 		<id property="id" column="address_id"/>
 		<result property="receiver" column="receiver"/>
 	</resultMap>	
+	
+	<resultMap type="OrderStatus" id="OrderStatusResultMap">
+		<id property="orderStatusId" column="order_status_id"/>
+		<result property="statusDescription" column="status_description"/>
+	</resultMap>
 		
 	<resultMap type="Order" id="OrderMap">
 		<id property="id" column="order_id"/>
 		<result property="createTime" column="create_time"/>
 		<result property="amount" column="totalAmount"/>
 		<association property="postAddress" resultMap="PostAddressMap"/>
-		<association property="orderStatus" javaType="OrderStatus">
-			<id property="statusId" column="order_status_id"/>
-			<result property="statusDescription" column="status_description"/>
+		<association property="orderStatus" resultMap="OrderStatusResultMap">
+<!-- 			<id property="statusId" column="order_status_id"/> -->
+<!-- 			<result property="statusDescription" column="status_description"/> -->
 		</association>
 		<collection property="feeList"  resultMap="com.lotut.pms.dao.mapper.FeeMapper.FeeResultMap"/>
 	</resultMap>
@@ -99,4 +104,26 @@
 	<update id="updateOrderStatus">
 		update orders set order_status = #{status} where order_id = #{orderId}
 	</update>
+	
+	
+	<select id="getUserOrdersByStatus" resultMap="OrderMap">
+		select  o.create_time, o.amount totalAmount, o.order_id, ca.id as address_id, ca.receiver, os.order_status_id, os.status_description,
+			p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
+			f.fee_id, f.deadline, f.amount, f.fee_type, f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc
+		from orders o join order_status os on o.order_status = os.order_status_id
+			join contact_addresses ca on o.post_address = ca.id
+			join order_items oi on oi.order_id = o.order_id 
+			join fees f on oi.fee_id = f.fee_id
+		  join patents p on f.patent = p.patent_id
+			join patent_status ps on p.patent_status = ps.patent_status_id
+			join fee_payment_status fs on f.fee_payment_status = fs.fee_payment_status_id
+		where o.user = #{userId} and o.order_status = #{orderStatus}
+		order by o.create_time desc		
+	</select>
+	
+	<select id="getAllOrderStatus" resultMap="OrderStatusResultMap">
+		select order_status_id, status_description
+		  from order_status
+		 order by order_status_id asc;
+	</select>
 </mapper>
