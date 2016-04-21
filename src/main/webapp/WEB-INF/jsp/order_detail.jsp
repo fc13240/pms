@@ -109,6 +109,7 @@
 	            </tbody>        	
           	</table>		
           	
+          	<c:if test="${order.postAddress != null}">
          	<table class="table table-striped table-bordered table-hover">
 	            <thead>
 	              <tr class="simple_bag">
@@ -120,7 +121,7 @@
 	            <tbody>
 	            	<tr>
 	            		<td>
-	            			<c:if test="${order.postAddress != null}">
+	            			
 			                 <table class="table table-striped table-bordered table-hover">
 					            <thead>
 					              <tr class="simple_bag">
@@ -136,15 +137,12 @@
 										<td>${order.postAddress.phone}</td>
 									</tr>															
 			                    </tbody>
-			                  </table> 	 
-			                  </c:if>
-			                  <c:if test="${order.postAddress == null}">
-			                  	选择不邮递，没有收货人信息
-			                  </c:if>          		
+			                  </table> 	        		
 	            		</td>
 	            	</tr>
 	            </tbody>        	
-          	</table>    
+          	</table>  
+          	</c:if>  
           	
          	<table class="table table-striped table-bordered table-hover">
 	            <thead>

@@ -17,10 +17,7 @@
 
 <!-- /section:basics/navbar.layout -->
 <div class="main-container" id="main-container">
-
-  <!-- sidebar -->
-	<%@ include file="_main_menu.jsp"%>
-  <!-- sidebar -->
+  <%@ include file="_main_menu.jsp"%>
   <div class="main-content">
     <div class="main-content-inner">
       <!-- #section:basics/content.breadcrumbs -->
@@ -46,7 +43,8 @@
           			<c:forEach items="${contactAddresses}" var="address">
 	          			<tr>
 	          				<td>
-	          					<input type="radio" name="postAddress.id" checked="${address.defaultAddress}" value="${address.id}"> 
+	          					<input type="radio" name="postAddress.id"
+	          						<c:if test="${address.defaultAddress}">checked="checked"</c:if> value="${address.id}" required="required"> 
 	          					${address.receiver} ${address.provinceName} ${address.cityName} ${address.districtName}
 	          					${address.streetName} ${address.detailAddress} ${address.phone} 
 	          				</td>
@@ -54,15 +52,17 @@
           			</c:forEach>
           			<tr>
           				<td>
-          					<input type="radio" name="postAddress.id" value="0" <c:if test="${empty contactAddresses}">checked="checked"</c:if>> 不需要邮寄
-          					<span style="color:red;"><c:if test="${empty contactAddresses}">没有邮寄地址，默认选择不邮寄&nbsp;&nbsp;&nbsp;</c:if></span>
+          					<input type="radio" name="postAddress.id" value="0" 
+          						<c:if test="${empty contactAddresses}">checked="checked"</c:if> required="required"> 不需要邮寄
+          					<span style="color:red;"><c:if test="${empty contactAddresses}">没有联系地址信息，需要邮寄请添加联系地址后再重新支付&nbsp;&nbsp;&nbsp;</c:if></span>
           				</td>
           			</tr>            			
           			<tr>
           				<td>支付方式</td>
           			</tr>     
           			<tr>
-          				<td><input type="radio" name="paymentMethod.paymentMethodId" value="1" checked="checked"> 支付宝支付 <input type="radio" name="paymentMethod.paymentMethodId" value="2"> 银联卡支付 </td>
+          				<td><input type="radio" name="paymentMethod.paymentMethodId" value="1" checked="checked" required="required"> 支付宝支付 
+          				<input type="radio" name="paymentMethod.paymentMethodId" value="2" required="required"> 银联卡支付 </td>
           			</tr>    
           			<tr>
           				<td>费用详情</td>
@@ -120,6 +120,9 @@
     </div>
   </div>
 </div>
+</div>
 <%@ include file="_js.jsp"%>
+<script type="text/javascript">
+</script>
 </body>
 </html>
