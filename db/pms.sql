@@ -326,7 +326,8 @@ VALUES
 INSERT INTO fee_payment_status (fee_payment_status_id, fee_payment_status_desc)
 VALUES
 	(1, '未缴'),
-	(2, '已缴');
+	(2, '已支付'),
+	(3, '已缴');
 	
 INSERT INTO notice_paper_apply_types (notice_paper_apply_type_id, notice_paper_apply_type_desc)
 VALUES
@@ -381,3 +382,14 @@ INSERT INTO payment_methods
 VALUES
 	(1, '支付宝'),
 	(2, '银联卡');
+	
+INSERT INTO groups
+VALUES
+	(1, 'USER'),
+	(2, 'ORDER');
+	
+INSERT INTO group_authorities
+VALUES
+	(1, 'ROLE_USER'),
+	(2, 'ROLE_ORDER');
+	
