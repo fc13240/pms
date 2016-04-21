@@ -19,4 +19,8 @@ public interface OrderDao {
 	int updateOrderStatus(long orderId, int status);
 	
 	void deleteUserOrders(long orderId);
+	
+	int getAllUnCacelledOrderCount();
+	
+	List<Order> getAllUnCacelledOrders();
 }

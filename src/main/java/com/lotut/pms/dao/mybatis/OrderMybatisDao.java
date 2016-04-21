@@ -56,4 +56,14 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	public void deleteUserOrders(long orderId) {
 		orderMapper.deleteUserOrders(orderId);
 	}
+
+	@Override
+	public int getAllUnCacelledOrderCount() {
+		return orderMapper.getAllUnCacelledOrderCount();
+	}
+
+	@Override
+	public List<Order> getAllUnCacelledOrders() {
+		return orderMapper.getAllUnCacelledOrders();
+	}
 }

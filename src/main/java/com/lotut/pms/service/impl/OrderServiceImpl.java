@@ -97,4 +97,14 @@ public class OrderServiceImpl implements OrderService {
 	public int updateOrderStatus(long orderId, int status) {
 		return orderDao.updateOrderStatus(orderId, status);
 	}
+
+	@Override
+	public int getAllUnCacelledOrderCount() {
+		return orderDao.getAllUnCacelledOrderCount();
+	}
+
+	@Override
+	public List<Order> getAllUnCacelledOrders() {
+		return orderDao.getAllUnCacelledOrders();
+	}
 }

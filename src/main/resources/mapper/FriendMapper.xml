@@ -55,7 +55,8 @@
 	<update id="processFriendRequest">
 		delete from friend_requests where from_user = #{requestUserId} and to_user = #{processUserId} and request_process_status = 1;
 		<if test="processStatus == 2">
-			replace into friends(user, friend) values(#{requestUserId}, #{processUserId})
+			replace into friends(user, friend) values(#{requestUserId}, #{processUserId});
+			replace into friends(user, friend) values(#{processUserId}, #{requestUserId})
 		</if>	
 	</update>
 </mapper>
