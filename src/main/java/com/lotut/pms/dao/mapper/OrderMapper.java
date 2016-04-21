@@ -19,11 +19,8 @@ public interface OrderMapper {
 	int getUserOrdersCount(int userId);
 	void deleteUserOrders(long orderId);
 	int updateOrderStatus(@Param("orderId")long orderId,@Param("status")int status);
-<<<<<<< HEAD
-=======
 	
 	int getAllUnCacelledOrderCount();
 	
 	List<Order> getAllUnCacelledOrders();
->>>>>>> dc911c7339ad7957295a8c212b7d1a71b2610ccc
 }
