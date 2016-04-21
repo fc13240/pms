@@ -22,5 +22,5 @@ public interface OrderMapper {
 	
 	int getAllUnCacelledOrderCount();
 	
-	List<Order> getAllUnCacelledOrders();
+	List<Order> getAllUnCacelledOrders(Page page);
 }

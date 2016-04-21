@@ -17,6 +17,7 @@ import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FeeService;
 import com.lotut.pms.service.OrderService;
 import com.lotut.pms.service.UserService;
@@ -51,8 +52,8 @@ public class OrderController {
 	@RequestMapping(path="/createOrder")
 	public String createOrder(@RequestParam("feeIds")Long[] feeIds, @ModelAttribute @Valid Order order, Model model) {
 		final int ALIPAY = 1;
-		int userId = PrincipalUtils.getCurrentUserId();
-		order.setUser(userId);
+		User user = PrincipalUtils.getCurrentPrincipal();
+		order.setOwner(user);
 		
 		List<Fee> fees = feeService.getFeesByIds(Arrays.asList(feeIds));
 		orderService.createOrder(order, fees);
@@ -76,8 +77,11 @@ public class OrderController {
 		page.setUserId(userId);
 		
 		if (PrincipalUtils.isOrderProcessor()) {
-			List<Order> orders = orderService.getAllUnCacelledOrders();
+			int totalCount=(int)orderService.getAllUnCacelledOrderCount();
+			page.setTotalRecords(totalCount);
+			List<Order> orders = orderService.getAllUnCacelledOrders(page);
 			model.addAttribute("orders", orders);
+			model.addAttribute("page",page);
 			return "all_order_list";
 		} else {
 			int totalCount=(int)orderService.getUserOrdersCount(userId);

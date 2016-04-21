@@ -23,5 +23,5 @@ public interface OrderService {
 	
 	int getAllUnCacelledOrderCount();
 	
-	List<Order> getAllUnCacelledOrders();
+	List<Order> getAllUnCacelledOrders(Page page);
 }

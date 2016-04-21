@@ -80,7 +80,7 @@
 			                    </tbody>
 			                  </table> 	                    	
                     	</td>
-                    	<td>${order.postAddress.receiver}</td>
+                    	<td>${order.owner.username}</td>
                     	<td>总额: ￥${order.amount}</td>
                     	<td>
                     		${order.orderStatus.statusDescription}
