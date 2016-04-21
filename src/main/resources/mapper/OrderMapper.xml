@@ -116,10 +116,10 @@
 		    join patents p on f.patent = p.patent_id
 			join patent_status ps on p.patent_status = ps.patent_status_id
 			join fee_payment_status fs on f.fee_payment_status = fs.fee_payment_status_id
-			join provinces on provinces.id = ca.province
-			join cities on cities.id = ca.city
-			join districts on districts.id = ca.district
-			join streets on streets.id = ca.street
+			left join provinces on provinces.id = ca.province
+			left join cities on cities.id = ca.city
+			left join districts on districts.id = ca.district
+			left join streets on streets.id = ca.street
 			left join payment_methods pm on pm.payment_method_id = o.payment_method
 		where o.order_id = #{orderId}		
 	</select>
