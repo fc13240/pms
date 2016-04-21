@@ -25,6 +25,12 @@
 	<resultMap type="ContactAddress" id="PostAddressMap">
 		<id property="id" column="address_id"/>
 		<result property="receiver" column="receiver"/>
+		<result property="provinceName" column="provinceName"/>
+		<result property="cityName" column="cityName"/>
+		<result property="districtName" column="districtName"/>
+		<result property="streetName" column="streetName"/>
+		<result property="detailAddress" column="detailAddress"/>
+		<result property="phone" column="phone"/>
 	</resultMap>	
 	
 	<resultMap type="OrderStatus" id="OrderStatusResultMap">
@@ -37,6 +43,10 @@
 		<result property="createTime" column="create_time"/>
 		<result property="amount" column="totalAmount"/>
 		<association property="postAddress" resultMap="PostAddressMap"/>
+		<association property="paymentMethod" javaType="PaymentMethod">
+			<id property="paymentMethodId" column="paymethod_id"/>
+			<result property="paymentMethod" column="payment_method"/>
+		</association>
 		<association property="owner" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 		<association property="orderStatus" resultMap="OrderStatusResultMap">
 <!-- 			<id property="statusId" column="order_status_id"/> -->
@@ -92,16 +102,25 @@
 	
 	
 	<select id="getOrderById" parameterType="long" resultMap="OrderMap">
-		select  o.create_time, o.amount totalAmount, o.order_id, ca.id as address_id, ca.receiver, os.order_status_id, os.status_description,
-			p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
-			f.fee_id, f.deadline, f.amount, f.fee_type, f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc
+		select  o.create_time, o.amount totalAmount, o.order_id, 
+			ca.id as address_id, ca.receiver, provinces.name provinceName, cities.name cityName,
+			districts.name districtName, streets.name streetName, ca.detail_address detailAddress, ca.phone,
+			os.order_status_id, os.status_description, p.patent_id, p.app_no, p.patent_name, p.app_person, 
+			ps.patent_status_id, ps.patent_status_desc, f.fee_id, f.deadline, f.amount, f.fee_type, 
+			f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc,
+			pm.payment_method_id, pm.payment_method
 		from orders o join order_status os on o.order_status = os.order_status_id
 			left join contact_addresses ca on o.post_address = ca.id
 			join order_items oi on oi.order_id = o.order_id 
 			join fees f on oi.fee_id = f.fee_id
-		  join patents p on f.patent = p.patent_id
+		    join patents p on f.patent = p.patent_id
 			join patent_status ps on p.patent_status = ps.patent_status_id
 			join fee_payment_status fs on f.fee_payment_status = fs.fee_payment_status_id
+			join provinces on provinces.id = ca.province
+			join cities on cities.id = ca.city
+			join districts on districts.id = ca.district
+			join streets on streets.id = ca.street
+			left join payment_methods pm on pm.payment_method_id = o.payment_method
 		where o.order_id = #{orderId}		
 	</select>
 	

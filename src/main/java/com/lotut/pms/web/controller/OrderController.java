@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -107,5 +108,13 @@ public class OrderController {
 		model.addAttribute("orders", orders);
 		model.addAttribute("page",page);
 		return "order_list";
+	}
+	
+	@RequestMapping(path="/detail/{orderId}", method=RequestMethod.GET)
+	public String getOrderDetail(@PathVariable long orderId,Model model){
+		Order order = orderService.getOrderById(orderId);
+		model.addAttribute("order", order);
+		
+		return "order_detail";
 	}
 }
