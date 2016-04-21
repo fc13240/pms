@@ -22,7 +22,7 @@ public interface OrderMapper {
 	void deleteUserOrders(long orderId);
 	int updateOrderStatus(@Param("orderId")long orderId,@Param("status")int status);
 	
-	int getAllUnCacelledOrderCount();
+	int getAllNeedProcessOrderCount();
 	
 	List<OrderStatus> getAllOrderStatus();
 	
@@ -31,5 +31,5 @@ public interface OrderMapper {
 	List<Order> searchUserOrdersByPage(OrderSearchCondition searchCondition);
 	
 	int searchUserOrdersCount(OrderSearchCondition searchCondition);
-	List<Order> getAllUnCacelledOrders(Page page);
+	List<Order> getAllNeedProcessOrders(Page page);
 }

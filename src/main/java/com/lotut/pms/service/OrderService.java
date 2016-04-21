@@ -27,9 +27,9 @@ public interface OrderService {
 	
 	int updateOrderStatus(long orderId, int status);
 	
-	int getAllUnCacelledOrderCount();
+	int getAllNeedProcessOrderCount();
 	
-	List<Order> getAllUnCacelledOrders(Page page);
+	List<Order> getAllNeedProcessOrders(Page page);
 	
 	List<OrderStatus> getAllOrderStatus();
 	
