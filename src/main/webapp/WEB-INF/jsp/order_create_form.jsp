@@ -53,6 +53,11 @@
 	          			</tr>       
           			</c:forEach>
           			<tr>
+          				<td>
+          					<input type="radio" name="postAddress.id" value="0"> 不需要邮寄
+          				</td>
+          			</tr>            			
+          			<tr>
           				<td>支付方式</td>
           			</tr>     
           			<tr>
