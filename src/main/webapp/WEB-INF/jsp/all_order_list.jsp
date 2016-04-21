@@ -38,8 +38,8 @@
                  <table id="simple-table" class="table table-striped table-bordered table-hover">
                     <thead>
                       <tr class="simple_bag">
-                      	<th colspan="4">
-                      		<fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>&nbsp;&nbsp;
+                      	<th colspan="5">
+                      		<fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>&nbsp;&nbsp;&nbsp;
                       		订单号：${order.id}
                       	</th>
                       </tr>
@@ -80,7 +80,12 @@
 			                    </tbody>
 			                  </table> 	                    	
                     	</td>
-                    	<td>${order.owner.username}</td>
+                    	<td>${order.owner.username}
+                    		
+                    	</td>
+                    	<td>
+                    		<div><a href="javascript:void" onclick="window.open('<s:url value="/order/detail/"/>${order.id}.html')">编辑订单</a></div>
+                    	</td>
                     	<td>总额: ￥${order.amount}</td>
                     	<td>
                     		${order.orderStatus.statusDescription}
@@ -91,10 +96,10 @@
                     			<div>
                     			</div>                    			
                     		</c:if>
-                    		<c:if test="${order.orderStatus.statusId == 1}">
+                    		<c:if test="${order.orderStatus.statusId == 2}">
                     			<div>
-	                    			<a href="<s:url value='/order/delete.html'/>?orderId=<c:out value='${order.id}'/>">
-	           						<button type="button" class="btn btn-purple btn-sm">删除</button>
+	                    			<a href="<s:url value='/order/updateUserOrderStatus.html'/>?orderId=<c:out value='${order.id}'/>">
+	           						<button type="button" class="btn btn-purple btn-sm">置为已缴费</button>
 	           						</a>
            						</div>
                     		</c:if>

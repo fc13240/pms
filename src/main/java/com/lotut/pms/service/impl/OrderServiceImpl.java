@@ -129,4 +129,9 @@ public class OrderServiceImpl implements OrderService {
 	public long searchUserOrdersCount(OrderSearchCondition searchCondition) {
 		return orderDao.searchUserOrdersCount(searchCondition);
 	}
+
+	@Override
+	public int updateUserOrderStatus(long orderId) {
+		return orderDao.updateUserOrderStatus(orderId);
+	}
 }
