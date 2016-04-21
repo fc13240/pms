@@ -126,7 +126,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public long searchUserPatentsCount(OrderSearchCondition searchCondition) {
-		return orderDao.searchUserPatentsCount(searchCondition);
+	public long searchUserOrdersCount(OrderSearchCondition searchCondition) {
+		return orderDao.searchUserOrdersCount(searchCondition);
 	}
 }

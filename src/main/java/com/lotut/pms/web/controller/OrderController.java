@@ -103,7 +103,7 @@ public class OrderController {
 		//page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
 		List<Order> resultOrders = orderService.searchUserOrdersByPage(searchCondition);
-		int totalCount=(int)orderService.searchUserPatentsCount(searchCondition);
+		int totalCount=(int)orderService.searchUserOrdersCount(searchCondition);
 		page.setTotalRecords(totalCount);
 		model.addAttribute("orders", resultOrders);
 		model.addAttribute("page", page);
@@ -112,7 +112,7 @@ public class OrderController {
 	}
 	
 	
-	@RequestMapping(path="list", method=RequestMethod.GET, params="orderStatus")
+	@RequestMapping(path="/list", method=RequestMethod.GET, params="orderStatus")
 	public String getOrdersByStatus(@RequestParam("orderStatus") int orderStatus, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<Order> orders = orderService.getUserOrdersByStatus(userId, orderStatus);
