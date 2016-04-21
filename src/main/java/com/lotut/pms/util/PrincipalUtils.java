@@ -26,4 +26,16 @@ public class PrincipalUtils {
 		}
 		return false;
 	}
+	
+	public static boolean isAdmin() {
+		return PrincipalUtils.hasAuthority(Role.ROLE_ADMIN.getRoleName());
+	}
+	
+	public static boolean isOrderProcessor() {
+		return PrincipalUtils.hasAuthority(Role.ROLE_ORDER.getRoleName());
+	}
+	
+	public static boolean isNormalUser() {
+		return PrincipalUtils.hasAuthority(Role.ROLE_USER.getRoleName());
+	}
 }

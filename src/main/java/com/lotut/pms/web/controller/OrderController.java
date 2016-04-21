@@ -74,12 +74,19 @@ public class OrderController {
 		}
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
-		int totalCount=(int)orderService.getUserOrdersCount(userId);
-		page.setTotalRecords(totalCount);
-		List<Order> orders = orderService.getUserOrders(page);
-		model.addAttribute("orders", orders);
-		model.addAttribute("page",page);
-		return "order_list";
+		
+		if (PrincipalUtils.isOrderProcessor()) {
+			List<Order> orders = orderService.getAllUnCacelledOrders();
+			model.addAttribute("orders", orders);
+			return "all_order_list";
+		} else {
+			int totalCount=(int)orderService.getUserOrdersCount(userId);
+			page.setTotalRecords(totalCount);
+			List<Order> orders = orderService.getUserOrders(page);
+			model.addAttribute("orders", orders);
+			model.addAttribute("page",page);
+			return "order_list";
+		}
 	}
 	
 	@RequestMapping(path="/delete", method=RequestMethod.GET)

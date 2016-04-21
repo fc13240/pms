@@ -20,4 +20,8 @@ public interface OrderService {
 	void processOrderPaidSuccess(long orderId);
 	
 	int updateOrderStatus(long orderId, int status);
+	
+	int getAllUnCacelledOrderCount();
+	
+	List<Order> getAllUnCacelledOrders();
 }
