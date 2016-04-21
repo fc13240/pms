@@ -400,10 +400,20 @@
 								
 									<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
 										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
-								
-											
+										<span>
+											每页
+											<select onchange="setPageSize()" id="pageSizeSelect">
+												<option value="10">10</option>
+												<option value="20">20</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+											</select>
+											条记录
+										</span>
+									</div>	
+										</c:if>	
 									</div>
-									</c:if>
+									
 									<c:if test="${searchCondition != null}">
 									<div class="col-lg-12">	
 												共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页
@@ -439,6 +449,16 @@
 								
 									<input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onkeydown="gotoPageForEnter(event)"/>
 										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
+										<span>
+												每页
+												<select onchange="setPageSize()" id="pageSizeSelect">
+													<option value="10">10</option>
+													<option value="20">20</option>
+													<option value="50">50</option>
+													<option value="100">100</option>
+												</select>
+												条记录
+										</span>
 									</div>
 									 	
 									</c:if>
@@ -723,7 +743,23 @@
 	}
 </script>
 
-
+<script type="text/javascript">
+	$(function() {
+		formutil.setElementValue("#pageSizeSelect", ${page.pageSize});
+	});
+	
+	function setPageSize() {
+		var pageSize = $("#pageSizeSelect").val();
+		
+		$.ajax({
+			url: "<s:url value='/user/setPageSize.html'/>?pageSize=" + pageSize, 
+			type: 'get', 
+			success: function() {
+				location.reload();
+			}
+		});		
+	}	
+</script>
 
 <!-- ace scripts --> 
 <script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 

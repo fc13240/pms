@@ -246,7 +246,7 @@
 								<tr>
 		                            <td class="f-tar td-w125"><label class="lab">电子邮件：</label></td>
 		                            <td> <input type="hidden" name="email_info"  value="1">
-		                            <input class="email"  id="email" type="text" value="${user.email}" maxlength="15" ></td>
+		                            <input class="email"  id="email" type="text" value="${user.email}" maxlength="25" ></td>
                         		</tr>
 								<tr>
 		                            <td class="f-tar td-w125"><label class="lab">手机或电话号：</label></td>

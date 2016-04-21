@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lotut.pms.domain.ContactAddress;
@@ -112,17 +113,55 @@ public class UserController {
 		userService.saveContactAddress(contactAddress);
 		
 		// FIXME add success page
-		return "";
+		return "addAddresses_success";
 	}
 	
-	@RequestMapping(path="/getContactAddresses", method=RequestMethod.POST)
+	@RequestMapping(path="/getContactAddresses", method=RequestMethod.GET)
 	public String getUserContactAddresses(Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
-		
 		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
 		model.addAttribute("contactAddresses", contactAddresses);
 		// FIXME add contact addresses page
-		return "";
+		return "contactAddresses_list";
+	}
+	
+	@RequestMapping(path="/updateUserContactAddressesFrom", method=RequestMethod.GET)
+	public String updateUserContactAddressesFrom(@RequestParam("id")int id,Model model) {
+		ContactAddress contactAddresses=userService.getContactAddressesById(id);
+		List<Map<String, String>> provinces = userService.getAllProvinces();
+		model.addAttribute("provinces", provinces);
+		model.addAttribute("contactAddresses", contactAddresses);
+		return "addresses_list";
+	}
+	
+	@RequestMapping(path="/updateUserContactAddresses", method=RequestMethod.POST)
+	public String updateUserContactAddresses(@Valid ContactAddress contactAddress,Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		contactAddress.setUserId(userId);
+		userService.updateUserContactAddresses(contactAddress);
+		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
+		model.addAttribute("contactAddresses", contactAddresses);
+		return "contactAddresses_list";
+	}
+	
+	
+	@RequestMapping(path="/deleteUserContactAddresses", method=RequestMethod.GET)
+	public String deleteUserContactAddresses(@RequestParam("id")int id,Model model) {
+		userService.deleteUserContactAddresses(id);
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
+		model.addAttribute("contactAddresses", contactAddresses);
+		return "contactAddresses_list";
+	}
+	
+	@RequestMapping(path="/defaultUserContactAddresses", method=RequestMethod.GET)
+	public String defaultUserContactAddresses(@RequestParam("id")int id,Model model) {
+		userService.defaulStatus();
+		userService.defaultUserContactAddresses(id);
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
+		model.addAttribute("contactAddresses", contactAddresses);
+		return "contactAddresses_list";
 	}
 	
 	@RequestMapping(path="/getCitiesByProvince", method=RequestMethod.GET)
@@ -155,6 +194,14 @@ public class UserController {
 		WebUtils.writeJsonStrToResponse(response, streets);
 	}
 
+	@RequestMapping(path="/setPageSize", method=RequestMethod.GET)
+	@ResponseBody
+	public void setPageSize(@RequestParam("pageSize")int pageSize, HttpSession session, HttpServletResponse response) throws IOException {
+		session.setAttribute("pageSize", pageSize);
+		//WebUtils.writeJsonStrToResponse(response, "");
+		
+	}
+	
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ModelAndView login() {
 		return null;

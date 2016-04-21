@@ -20,6 +20,8 @@
 		<httpcore.version>4.4.4</httpcore.version>
 		<jsoup.version>1.8.3</jsoup.version>
 		<jackson.version>2.7.3</jackson.version>
+		<codec.version>1.6</codec.version>
+		<commons.httpclient.version>3.0.1</commons.httpclient.version>
 		<dom4j.version>1.6.1</dom4j.version>
 		<spring.version>4.2.5.RELEASE</spring.version>
 		<spring-security.version>4.0.4.RELEASE</spring-security.version>
@@ -80,6 +82,13 @@
 			<version>${httpclient.version}</version>
 		</dependency>		
 		
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>${commons.httpclient.version}</version>
+		</dependency>
+		
+		
 		<!-- ################## httpcore ################## -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -107,6 +116,11 @@
 			<version>${jackson.version}</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${codec.version}</version>
+		</dependency>
 		
 		<!-- ################## dom4j ################## -->			
 		<dependency>

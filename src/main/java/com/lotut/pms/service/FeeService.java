@@ -43,4 +43,6 @@ public interface FeeService {
 	void deleteFees(List<Long> feeIdList, int userId);
 	
 	List<Fee> getFeesByIds(List<Long> feeIds);
+	
+	int updateFeesStatus(List<Long> feeIdList, int status);
 }

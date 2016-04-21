@@ -48,5 +48,5 @@ public interface FeeMapper {
 	//CS:deleteFees
 	void deleteFees(@Param("feeIdList")List<Long> feeIdList, @Param("userId")int userId);
 
-	
+	int updateFeesStatus(@Param("feeIdList")List<Long> feeIdList, @Param("status")int status);
 }

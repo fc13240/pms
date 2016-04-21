@@ -434,7 +434,17 @@
 														</c:otherwise>
 													</c:choose>
 											<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
-												<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>	
+												<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
+												<span>
+													每页
+													<select onchange="setPageSize()" id="pageSizeSelect">
+														<option value="10">10</option>
+														<option value="20">20</option>
+														<option value="50">50</option>
+														<option value="100">100</option>
+													</select>
+													条记录
+												</span>	
 											</div>
 											</c:if>
 											<c:if test="${searchCondition != null}">
@@ -471,6 +481,16 @@
 										 	<!-- 分页功能 End -->
 											<input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onkeydown="gotoPageForEnter(event)"/>
 												<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
+												<span>
+													每页
+													<select onchange="setPageSize()" id="pageSizeSelect">
+														<option value="10">10</option>
+														<option value="20">20</option>
+														<option value="50">50</option>
+														<option value="100">100</option>
+													</select>
+													条记录
+												</span>	
 											</div>
 											</c:if>
 								</div>
@@ -812,33 +832,27 @@ function batchProcessNotice(processStatus) {
 			gotoPage();
 		}
 	}
-// 	function isSearch() {
-// 		var noticeType = $("#noticeTypeId").val();
-// 		var noticeProcessStatus = $("#noticeProcessStatusId").val();
-// 		var startDispatchDate = $("#startAppDateId").val();
-// 		var endDispatchDate = $("#endAppDateId").val();
-// 		var keyword = $("#keywordId").val();
-		
-// 		if (!isEmpty(noticeType) || !isEmpty(noticeProcessStatus) || !isEmpty(startDispatchDate) || !isEmpty(endDispatchDate) || !isEmpty(keywordId)) {
-// 			return true;
-// 		}
-		
-// 		return false;
-// 	}
 
-// 	function isEmpty(value) {
-// 		if (value == null || value == "undefined" || value == "") {
-// 			return true;
-// 		}
-		
-// 		return false;
-// 	}
-	
-	
 	
 </script>
 
-
+<script type="text/javascript">
+	$(function() {
+		formutil.setElementValue("#pageSizeSelect", ${page.pageSize});
+	});
+	
+	function setPageSize() {
+		var pageSize = $("#pageSizeSelect").val();
+		
+		$.ajax({
+			url: "<s:url value='/user/setPageSize.html'/>?pageSize=" + pageSize, 
+			type: 'get', 
+			success: function() {
+				location.reload();
+			}
+		});		
+	}	
+</script>
 
 <!-- ace scripts --> 
 <script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 
