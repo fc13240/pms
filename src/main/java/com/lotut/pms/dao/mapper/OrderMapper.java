@@ -28,8 +28,8 @@ public interface OrderMapper {
 	
 	List<Order> getUserOrdersByStatus(@Param("userId") int userId, @Param("orderStatus")int orderStatus);
 	
-	List<Order> searchUserOrdersByPage(@Param("searchCondtion")OrderSearchCondition searchCondition);
+	List<Order> searchUserOrdersByPage(OrderSearchCondition searchCondition);
 	
-	int searchUserPatentsCount(@Param("searchCondtion")OrderSearchCondition searchCondition);
+	int searchUserOrdersCount(OrderSearchCondition searchCondition);
 	List<Order> getAllUnCacelledOrders(Page page);
 }

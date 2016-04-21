@@ -85,7 +85,7 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	}
 
 	@Override
-	public int searchUserPatentsCount(OrderSearchCondition searchCondition) {
-		return orderMapper.searchUserPatentsCount(searchCondition);
+	public int searchUserOrdersCount(OrderSearchCondition searchCondition) {
+		return orderMapper.searchUserOrdersCount(searchCondition);
 	}
 }

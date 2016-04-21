@@ -7,8 +7,6 @@ import com.lotut.pms.domain.OrderItem;
 import com.lotut.pms.domain.OrderSearchCondition;
 import com.lotut.pms.domain.OrderStatus;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.Patent;
-import com.lotut.pms.domain.PatentSearchCondition;
 
 public interface OrderDao {
 	int insertOrder(Order order);
@@ -34,5 +32,5 @@ public interface OrderDao {
 	
 	List<Order> searchUserOrdersByPage(OrderSearchCondition searchCondition);
 	
-	int searchUserPatentsCount(OrderSearchCondition searchCondition);
+	int searchUserOrdersCount(OrderSearchCondition searchCondition);
 }

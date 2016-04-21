@@ -19,7 +19,7 @@ public interface OrderService {
 	
 	List<Order> searchUserOrdersByPage(OrderSearchCondition searchCondition);
 	
-	long searchUserPatentsCount(OrderSearchCondition searchCondition);
+	long searchUserOrdersCount(OrderSearchCondition searchCondition);
 	
 	int deleteUserOrders(long orderId);
 	
