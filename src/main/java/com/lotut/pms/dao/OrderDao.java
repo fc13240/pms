@@ -26,7 +26,7 @@ public interface OrderDao {
 	
 	int getAllUnCacelledOrderCount();
 	
-	List<Order> getAllUnCacelledOrders();
+	List<Order> getAllUnCacelledOrders(Page page);
 	
 	List<OrderStatus> getAllOrderStatus();
 	
@@ -35,6 +35,4 @@ public interface OrderDao {
 	List<Order> searchUserOrdersByPage(OrderSearchCondition searchCondition);
 	
 	int searchUserPatentsCount(OrderSearchCondition searchCondition);
-	
-	
 }

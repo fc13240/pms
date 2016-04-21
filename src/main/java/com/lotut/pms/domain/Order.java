@@ -11,7 +11,7 @@ public class Order {
 	@NotNull
 	private ContactAddress postAddress;
 	private int amount;
-	private int user;
+	private User owner;
 	private User processUser;
 	private boolean received;
 	private String expressCompany;
@@ -41,12 +41,6 @@ public class Order {
 	}
 	public void setAmount(int amount) {
 		this.amount = amount;
-	}
-	public int getUser() {
-		return user;
-	}
-	public void setUser(int user) {
-		this.user = user;
 	}
 	public User getProcessUser() {
 		return processUser;
@@ -107,5 +101,11 @@ public class Order {
 	}
 	public void setPaymentMethod(PaymentMethod paymentMethod) {
 		this.paymentMethod = paymentMethod;
+	}
+	public User getOwner() {
+		return owner;
+	}
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 }

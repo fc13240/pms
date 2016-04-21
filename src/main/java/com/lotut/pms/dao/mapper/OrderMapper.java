@@ -24,8 +24,6 @@ public interface OrderMapper {
 	
 	int getAllUnCacelledOrderCount();
 	
-	List<Order> getAllUnCacelledOrders();
-	
 	List<OrderStatus> getAllOrderStatus();
 	
 	List<Order> getUserOrdersByStatus(@Param("userId") int userId, @Param("orderStatus")int orderStatus);
@@ -33,4 +31,5 @@ public interface OrderMapper {
 	List<Order> searchUserOrdersByPage(@Param("searchCondtion")OrderSearchCondition searchCondition);
 	
 	int searchUserPatentsCount(@Param("searchCondtion")OrderSearchCondition searchCondition);
+	List<Order> getAllUnCacelledOrders(Page page);
 }

@@ -54,7 +54,8 @@
           			</c:forEach>
           			<tr>
           				<td>
-          					<input type="radio" name="postAddress.id" value="0"> 不需要邮寄
+          					<input type="radio" name="postAddress.id" value="0" <c:if test="${empty contactAddresses}">checked="checked"</c:if>> 不需要邮寄
+          					<span style="color:red;"><c:if test="${empty contactAddresses}">没有邮寄地址，默认选择不邮寄&nbsp;&nbsp;&nbsp;</c:if></span>
           				</td>
           			</tr>            			
           			<tr>

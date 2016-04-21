@@ -139,7 +139,10 @@
 			                    </tbody>
 			                  </table> 	                    	
                     	</td>
-                    	<td>${order.postAddress.receiver}</td>
+                    	<td>
+                    		${order.postAddress.receiver}
+                    		<div><a href="javascript:void" onclick="window.open('<s:url value="/order/detail/"/>${order.id}.html')">订单详情</a></div>
+                    	</td>
                     	<td>总额: ￥${order.amount}</td>
                     	<td>
                     		${order.orderStatus.statusDescription}
@@ -245,6 +248,7 @@
   </div>
 </div>
 <%@ include file="_js.jsp"%>
+</div>
 <script type="text/javascript">
 		function gotoPage() {
 			var pageNo = document.getElementById("page.pageNo").value;
