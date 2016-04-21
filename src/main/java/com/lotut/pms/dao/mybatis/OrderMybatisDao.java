@@ -48,7 +48,7 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	}
 	
 	@Override
-	public int updateOrderStatus(long orderId, int status) {
+	public int updateOrderStatus(long orderId,int status) {
 		return orderMapper.updateOrderStatus(orderId, status);
 	}	
 
