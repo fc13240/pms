@@ -8,6 +8,8 @@ import com.lotut.pms.dao.OrderDao;
 import com.lotut.pms.dao.mapper.OrderMapper;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.OrderItem;
+import com.lotut.pms.domain.OrderSearchCondition;
+import com.lotut.pms.domain.OrderStatus;
 import com.lotut.pms.domain.Page;
 
 public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
@@ -65,5 +67,25 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	@Override
 	public List<Order> getAllUnCacelledOrders() {
 		return orderMapper.getAllUnCacelledOrders();
+	}
+
+	@Override
+	public List<OrderStatus> getAllOrderStatus() {
+		return orderMapper.getAllOrderStatus();
+	}
+
+	@Override
+	public List<Order> getUserOrdersByStatus(int userId, int orderStatus) {
+		return orderMapper.getUserOrdersByStatus(userId, orderStatus);
+	}
+
+	@Override
+	public List<Order> searchUserOrdersByPage(OrderSearchCondition searchCondition) {
+		return orderMapper.searchUserOrdersByPage(searchCondition);
+	}
+
+	@Override
+	public int searchUserPatentsCount(OrderSearchCondition searchCondition) {
+		return orderMapper.searchUserPatentsCount(searchCondition);
 	}
 }

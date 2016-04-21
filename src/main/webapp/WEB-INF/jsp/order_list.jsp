@@ -41,7 +41,7 @@
                 
                             <span class="widget-toolbar" style="border:none;padding:0px;">
                             <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-                            <input type="text" style="height:45px;width:450px;" name="keyword" id="keywordId" placeholder="申请号/名称/申请人/内部编码"/>
+                            <input type="text" style="height:45px;width:450px;" name="keyword" id="keywordId" placeholder="订单号"/>
                             	<button class="btn btn-info" type="submit" style="height:45px;">搜索</button>
                             
                                 <a href="#" data-action="collapse" style="margin-left:10px;">
@@ -65,12 +65,12 @@
 	                                    <div class="input-group">
 	                                    <div style="float:left;line-height: 32px;">查询日期</div>
 						                <div style="float:left;margin-left: 16px;" class="form-group" style="margin-left:15px;">
-							                <div style="float:left;"><input  type="text" class="form-control" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" onclick="javascript:$('#start_date_img').click()"></div> 
+							                <div style="float:left;"><input  type="text" class="form-control" id="startAppDateId" name="startAppDate" placeholder="开始时间" value="" readonly="readonly" onclick="javascript:$('#start_date_img').click()"></div> 
 											<div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="start_date_img"> - </div>
 							                </div>	
 						                
 						                <div style="float:left;" class="form-group">
-							                <div style="float:left;"><input type="text" class="form-control" id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" onclick="javascript:$('#end_date_img').click()"> </div> 
+							                <div style="float:left;"><input type="text" class="form-control" id="endAppDateId" name="endAppDate" placeholder="结束时间" value="" readonly="readonly" onclick="javascript:$('#end_date_img').click()"> </div> 
 											<div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img"></div>
 				 							</div>
 			 							<div style="clear:both;"></div>	
@@ -165,6 +165,7 @@
           </div>
           		<!-- 分页功能 start -->
 				<div class="row">
+					<c:if test="${searchCondition == null}">
 							<div class="col-lg-12">	
 										共 ${page.totalPages} 页${page.totalRecords}条记录    第${page.currentPage} 页
 										<a href="?currentPage=1">首页</a>
@@ -198,7 +199,46 @@
 							<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
 								<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
 							</div>
+						</c:if>
+						<c:if test="${searchCondition != null}">
+									<div class="col-lg-12">	
+												共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页
+												<a href="?page.currentPage=1&${searchCondition}">首页</a>
+											<c:choose>
+												<c:when test="${page.currentPage - 1 > 0}">
+													<a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a>
+												</c:when>
+												<c:when test="${page.currentPage - 1 <= 0}">
+													<a href="?page.currentPage=1&${searchCondition}">上一页</a>
+												</c:when>
+											</c:choose>
+											<c:choose>
+												<c:when test="${page.totalPages==0}">
+													<a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a>
+												</c:when>
+												<c:when test="${page.currentPage + 1 < page.totalPages}">
+													<a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a>
+												</c:when>
+												<c:when test="${page.currentPage + 1 >= page.totalPages}">
+													<a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a>
+												</c:when>
+											</c:choose>
+											<c:choose>
+												<c:when test="${page.totalPages==0}">
+													<a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a>
+												</c:when>
+												<c:otherwise>
+													<a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a>
+												</c:otherwise>
+											</c:choose>
+								 	<!-- 分页功能 End -->
+								
+									<input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onkeydown="gotoPageForEnter(event)"/>
+										<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a>
+									</div>	
+						</c:if>
 				</div>
+				
         </div>
 		<%@ include file="_footer.jsp"%>
     </div>
@@ -241,6 +281,23 @@
 				gotoPage();
 			}
 		}
+</script>
+<script type="text/javascript">
+	$(function() {
+		formutil.setElementValue("#pageSizeSelect", ${page.pageSize});
+	});
+	
+	function setPageSize() {
+		var pageSize = $("#pageSizeSelect").val();
+		
+		$.ajax({
+			url: "<s:url value='/user/setPageSize.html'/>?pageSize=" + pageSize, 
+			type: 'get', 
+			success: function() {
+				location.reload();
+			}
+		});		
+	}	
 </script>
 </body>
 </html>

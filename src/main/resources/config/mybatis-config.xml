@@ -13,6 +13,7 @@
 		<typeAlias alias="PatentStatus" type="com.lotut.pms.domain.PatentStatus"/>
 		<typeAlias alias="PatentType" type="com.lotut.pms.domain.PatentType"/>
 		<typeAlias alias="PatentSearchCondition" type="com.lotut.pms.domain.PatentSearchCondition"/>
+		<typeAlias alias="OrderSearchCondition" type="com.lotut.pms.domain.OrderSearchCondition"/>
 		<typeAlias alias="SharePatent" type="com.lotut.pms.domain.SharePatent"/>
 		
 		<typeAlias alias="Notice" type="com.lotut.pms.domain.Notice"/>

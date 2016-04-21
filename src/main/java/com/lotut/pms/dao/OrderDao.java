@@ -4,7 +4,11 @@ import java.util.List;
 
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.OrderItem;
+import com.lotut.pms.domain.OrderSearchCondition;
+import com.lotut.pms.domain.OrderStatus;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.PatentSearchCondition;
 
 public interface OrderDao {
 	int insertOrder(Order order);
@@ -23,4 +27,14 @@ public interface OrderDao {
 	int getAllUnCacelledOrderCount();
 	
 	List<Order> getAllUnCacelledOrders();
+	
+	List<OrderStatus> getAllOrderStatus();
+	
+	List<Order> getUserOrdersByStatus(int userId, int orderStatus);
+	
+	List<Order> searchUserOrdersByPage(OrderSearchCondition searchCondition);
+	
+	int searchUserPatentsCount(OrderSearchCondition searchCondition);
+	
+	
 }

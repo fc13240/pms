@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.OrderItem;
+import com.lotut.pms.domain.OrderSearchCondition;
+import com.lotut.pms.domain.OrderStatus;
 import com.lotut.pms.domain.Page;
 
 public interface OrderMapper {
@@ -23,4 +25,12 @@ public interface OrderMapper {
 	int getAllUnCacelledOrderCount();
 	
 	List<Order> getAllUnCacelledOrders();
+	
+	List<OrderStatus> getAllOrderStatus();
+	
+	List<Order> getUserOrdersByStatus(@Param("userId") int userId, @Param("orderStatus")int orderStatus);
+	
+	List<Order> searchUserOrdersByPage(@Param("searchCondtion")OrderSearchCondition searchCondition);
+	
+	int searchUserPatentsCount(@Param("searchCondtion")OrderSearchCondition searchCondition);
 }

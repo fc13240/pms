@@ -411,9 +411,9 @@
 											条记录
 										</span>
 									</div>	
-											
+										</c:if>	
 									</div>
-									</c:if>
+									
 									<c:if test="${searchCondition != null}">
 									<div class="col-lg-12">	
 												共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页

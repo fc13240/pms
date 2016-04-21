@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Order;
+import com.lotut.pms.domain.OrderSearchCondition;
+import com.lotut.pms.domain.OrderStatus;
 import com.lotut.pms.domain.Page;
 
 public interface OrderService {
@@ -15,6 +17,10 @@ public interface OrderService {
 	
 	long getUserOrdersCount(int userId);
 	
+	List<Order> searchUserOrdersByPage(OrderSearchCondition searchCondition);
+	
+	long searchUserPatentsCount(OrderSearchCondition searchCondition);
+	
 	int deleteUserOrders(long orderId);
 	
 	void processOrderPaidSuccess(long orderId);
@@ -24,4 +30,8 @@ public interface OrderService {
 	int getAllUnCacelledOrderCount();
 	
 	List<Order> getAllUnCacelledOrders();
+	
+	List<OrderStatus> getAllOrderStatus();
+	
+	List<Order> getUserOrdersByStatus(int userId, int orderStatus);
 }

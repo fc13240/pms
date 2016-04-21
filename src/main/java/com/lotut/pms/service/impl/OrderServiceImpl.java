@@ -10,6 +10,8 @@ import com.lotut.pms.dao.OrderDao;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.OrderItem;
+import com.lotut.pms.domain.OrderSearchCondition;
+import com.lotut.pms.domain.OrderStatus;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.OrderService;
 
@@ -106,5 +108,25 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<Order> getAllUnCacelledOrders() {
 		return orderDao.getAllUnCacelledOrders();
+	}
+
+	@Override
+	public List<OrderStatus> getAllOrderStatus() {
+		return orderDao.getAllOrderStatus();
+	}
+
+	@Override
+	public List<Order> getUserOrdersByStatus(int userId, int orderStatus) {
+		return orderDao.getUserOrdersByStatus(userId, orderStatus);
+	}
+
+	@Override
+	public List<Order> searchUserOrdersByPage(OrderSearchCondition searchCondition) {
+		return orderDao.searchUserOrdersByPage(searchCondition);
+	}
+
+	@Override
+	public long searchUserPatentsCount(OrderSearchCondition searchCondition) {
+		return orderDao.searchUserPatentsCount(searchCondition);
 	}
 }

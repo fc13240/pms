@@ -3,6 +3,7 @@ package com.lotut.pms.web.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Order;
+import com.lotut.pms.domain.OrderSearchCondition;
+import com.lotut.pms.domain.OrderStatus;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.PatentSearchCondition;
+import com.lotut.pms.domain.PatentStatus;
+import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.service.FeeService;
 import com.lotut.pms.service.OrderService;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.WebUtils;
 
 @Controller
 @RequestMapping(path="/order")
@@ -89,6 +97,33 @@ public class OrderController {
 		}
 	}
 	
+	@RequestMapping(path="/search", method=RequestMethod.GET)
+	public String searchUserOrders(@ModelAttribute("searchCondition")OrderSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		//page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		List<Order> resultOrders = orderService.searchUserOrdersByPage(searchCondition);
+		int totalCount=(int)orderService.searchUserPatentsCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		model.addAttribute("orders", resultOrders);
+		model.addAttribute("page", page);
+		statusDataToModel(model);
+		return "order_list";
+	}
+	
+	
+	@RequestMapping(path="list", method=RequestMethod.GET, params="orderStatus")
+	public String getOrdersByStatus(@RequestParam("orderStatus") int orderStatus, Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<Order> orders = orderService.getUserOrdersByStatus(userId, orderStatus);
+		model.addAttribute("orders", orders);
+		statusDataToModel(model);
+		return "order_list";
+	}	
+	
+	
+	
+	
 	@RequestMapping(path="/delete", method=RequestMethod.GET)
 	public String deleteUserOrders(@RequestParam("orderId")long orderId,Model model,Page page){
 		if (page.getCurrentPage() < 1) {
@@ -103,5 +138,10 @@ public class OrderController {
 		model.addAttribute("orders", orders);
 		model.addAttribute("page",page);
 		return "order_list";
+	}
+	
+	private void statusDataToModel(Model model) {
+		List<OrderStatus> allOrderStatus = orderService.getAllOrderStatus();
+		model.addAttribute("allOrderStatus", allOrderStatus);
 	}
 }
