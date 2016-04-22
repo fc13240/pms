@@ -3,9 +3,12 @@ package com.lotut.pms.web.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.GoodsDetail;
 import com.lotut.pms.domain.GoodsFirstColumn;
+import com.lotut.pms.domain.GoodsSecondColumn;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
@@ -138,19 +144,38 @@ public class PatentController {
 	}	
 	
 	@RequestMapping(path="/goods", method=RequestMethod.GET)
-	public String showGoodsForm(@RequestParam("patent_id") int patent_id) throws IOException {
+	public String showGoodsForm(@RequestParam("patent") int patent_id,Model model) throws IOException {
 		
-		List<GoodsFirstColumn>  AllColumns=patentService.getFirstColumn();
+		List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
 		
+		Patent patent = patentService.getPatentDetail(patent_id);
+		model.addAttribute("patent", patent);		
 		
+		model.addAttribute("patentno", patent_id);
+		model.addAttribute("FirstColumns", FirstColumns);
 		return "goods_form";
+	}	
+	@RequestMapping(path="/addGoods", method=RequestMethod.POST)
+	public String addGoods(@Valid GoodsDetail GoodsDetail, Model model) throws IOException {
+		
+		patentService.saveGoods(GoodsDetail);
+		
+		
+		return "goods_add_success";
 	}		
+		
+	@RequestMapping(path="/getGoodsSecoundColumn", method=RequestMethod.GET)
+	public void getGoodsSecoundColumn(@RequestParam("first_column")int firstColumnId, 
+			Model model, HttpServletResponse response) throws IOException {
 
-	@RequestMapping(path="/goods", method=RequestMethod.POST)
-	public String addGoods(@RequestParam("patentFile")Part patentFile) throws IOException {
-		
-		return "goods_form";
-	}		
+		response.setContentType("application/json;charset=UTF-8");
+		List<GoodsSecondColumn>  SecondColumns=patentService.getSecondColumn(firstColumnId);
+		WebUtils.writeJsonStrToResponse(response, SecondColumns);
+	}
+	
+
+	
+	
 	
 	private void addPatentTypeAndStatusDataToModel(Model model) {
 		List<PatentType> allPatentTypes = patentService.getAllPatentTypes();

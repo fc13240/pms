@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import com.lotut.pms.domain.GoodsDetail;
 import com.lotut.pms.domain.GoodsFirstColumn;
+import com.lotut.pms.domain.GoodsSecondColumn;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
@@ -37,4 +39,8 @@ public interface PatentService {
 	void uploadPatents(InputStream is) throws IOException;
 
 	public List<GoodsFirstColumn> getFirstColumn();
+
+	public List<GoodsSecondColumn> getSecondColumn(int firstColumnId);
+
+	public void saveGoods(GoodsDetail goodsDetail);
 }

@@ -40,9 +40,13 @@
 		 limit #{startIndex}, #{pageSize}
 	</select>
 
-	<select id="GoodsFirstColumn"  resultType="GoodsFirstColumn">
+	<select id="getFirstColumn"  resultType="GoodsFirstColumn">
 		select patent_first_column_id id,patent_first_column_name  name
 		  from sell_first_column
+	</select>	
+	<select id="getSecondColumn" parameterType="int" resultType="GoodsSecondColumn">
+		select patent_second_column_id id,patent_second_column_name  name
+		  from sell_second_column where patent_first_column_id=#{firstColumnId}
 	</select>	
 	
 	<sql id="userPatents">
@@ -263,4 +267,9 @@
 		    </set> 
 		 where app_no = #{appNo} and patent_owner = #{ownerId}
 	</update>
+	
+	<insert id="saveGoods" parameterType="GoodsDetail" >
+		insert into sell_patent_goods(patent_id, sell_date, add_date, state, sell_mode, price, patent_second_column)
+		values(#{id}, '0000-00-00',curdate(), '1', '转让', #{price}, #{SecondColumn})				
+	</insert>
 </mapper>
