@@ -294,7 +294,7 @@ create table if not exists orders (
 	send_time date,
 	courier varchar(20),
 	courier_phone varchar(30),
-	create_time timestamp default current_timestamp not null,
+	create_time timestamp not null,
 	payment_method int,
 	constraint fk_orders_order_status foreign key(order_status) references order_status(order_status_id),
 	constraint fk_orders_user foreign key(user) references users(user_id),
