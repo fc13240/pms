@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lotut.pms.dao.PatentDao;
 import com.lotut.pms.dao.SharePatentDao;
+import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
@@ -107,5 +108,11 @@ public class PatentServiceImpl implements PatentService {
 		if (userPatentList.size() > 0) {
 			sharePatentDao.insertUserPatents(userPatentList);
 		}
+	}
+
+	@Override
+	public List<GoodsFirstColumn> getFirstColumn() {
+		// TODO Auto-generated method stub
+		return  patentDao.getFirstColumn();
 	}
 }

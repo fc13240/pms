@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
@@ -44,4 +45,6 @@ public interface PatentMapper {
 	void insertPatent(Patent patent);
 	
 	void updatePatent(Patent patent);
+
+	List<GoodsFirstColumn> getFirstColumn();
 }

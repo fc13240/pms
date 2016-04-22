@@ -6,6 +6,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.PatentDao;
 import com.lotut.pms.dao.mapper.PatentMapper;
+import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
@@ -103,5 +104,11 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	@Override
 	public int searchUserPatentsCount(PatentSearchCondition searchCondition) {
 		return patentMapper.searchUserPatentsCount(searchCondition);
+	}
+
+	@Override
+	public List<GoodsFirstColumn> getFirstColumn() {
+		// TODO Auto-generated method stub
+		return patentMapper.getFirstColumn();
 	}
 }

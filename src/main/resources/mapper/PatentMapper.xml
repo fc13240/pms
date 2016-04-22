@@ -39,6 +39,11 @@
 		 order by p.app_date, p.app_person, p.patent_name
 		 limit #{startIndex}, #{pageSize}
 	</select>
+
+	<select id="GoodsFirstColumn"  resultType="GoodsFirstColumn">
+		select patent_first_column_id id,patent_first_column_name  name
+		  from sell_first_column
+	</select>	
 	
 	<sql id="userPatents">
 		select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, pt.patent_type_id, 

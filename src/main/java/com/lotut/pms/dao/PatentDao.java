@@ -2,6 +2,7 @@ package com.lotut.pms.dao;
 
 import java.util.List;
 
+import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
@@ -39,4 +40,5 @@ public interface PatentDao {
 	void insertPatent(Patent patent);
 	
 	void updatePatent(Patent patent);
+	List<GoodsFirstColumn> getFirstColumn();
 }

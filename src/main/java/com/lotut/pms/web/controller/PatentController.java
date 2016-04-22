@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
@@ -26,6 +27,8 @@ import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.PatentService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
+
+
 
 @Controller
 @RequestMapping(path="/patent")
@@ -135,8 +138,11 @@ public class PatentController {
 	}	
 	
 	@RequestMapping(path="/goods", method=RequestMethod.GET)
-	public String showGoodsForm(@RequestParam("patent") int patent) throws IOException {
-	
+	public String showGoodsForm(@RequestParam("patent_id") int patent_id) throws IOException {
+		
+		List<GoodsFirstColumn>  AllColumns=patentService.getFirstColumn();
+		
+		
 		return "goods_form";
 	}		
 

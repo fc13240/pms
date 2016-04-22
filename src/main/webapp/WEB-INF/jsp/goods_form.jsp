@@ -37,21 +37,22 @@
         <div class="row">
           <div class="col-xs-12">
  
-			<form action="<s:url value='/patent/search.html'/>" method="post" enctype="multipart/form-data">
+			<form action="<s:url value='/patent/search.html'/>" method="post">
 			<se:csrfInput/>
 			<div style="margin-top:15px;">专利名  ：某某专利</div>
 			
-			<div style="margin-top:15px;">      
-			类型：
-			<select name="patentType" id="patentTypeId">
-			<option value="">一级分类</option>
-			<option value="'/>"><c:out value=""/></option>
-			</select>  
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			<select name="patentType" id="patentTypeId">
-			<option value="">二级分类</option>
-			<option value="'/>"><c:out value=""/></option>
-			</select> 			
+			<div style="margin-top:15px;"> 
+			商品类型：
+								<select name="province" id="province" onchange="loadCities()" required>
+									<option value=''>请选择</option>
+									<c:forEach items="${provinces}" var="province">
+									<option value="${province.id}">${province.name}</option>
+									</c:forEach>
+								</select>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<select name="city" id="city" onchange="secoundColumns()" required>
+									<option value=''>请选择</option>
+								</select>				
 			</div> 
 			<div style="margin-top:15px;">     
 			价格：<input type="text" style="height:25px;width:80px;" name="price" id=""price""/>
@@ -70,5 +71,26 @@
   </div>
 </div>
 <%@ include file="_js.jsp"%>
+<script type="text/javascript">
+function secoundColumns() {
+	var city = $("#city").val();
+
+	resetSelect($("#district"), $("#street"));
+	
+	if (city != "") {
+		$.ajax({
+			url: "<s:url value='/user/getDistrictsByCity.html'/>?city=" + city,
+			type: 'get',
+			dataType: 'json',
+			success: function(districts) {
+				var district = $("#district");
+				
+				resetSelect(district);
+				addOptions(district, districts);
+			}
+		})
+	}
+}
+</script>
 </body>
 </html>
