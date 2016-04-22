@@ -1,9 +1,12 @@
 package com.lotut.pms.web.controller;
 
 import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -187,9 +190,20 @@ public class OrderController {
 	}
 	
 	//增加用户订单快递信息
-	@RequestMapping(path="/updateUserOrderExpress", method=RequestMethod.POST)
-	public String updateUserOrderExpress(@Valid Order order,Model model){
-			orderService.updateUserOrderExpress(order);
+	@RequestMapping(path="/updateUserOrderContactAddresses", method=RequestMethod.POST)
+	public String updateUserOrderExpress(HttpServletRequest request,Model model){
+			Enumeration<String> paramNames =  request.getParameterNames();
+			Map<String, String> paramMap = new HashMap<>();
+			while (paramNames.hasMoreElements()) {
+				String paramName = paramNames.nextElement();
+				paramMap.put(paramName, request.getParameter(paramName));
+			}
+			orderService.updateUserOrderExpress(paramMap);
+			long orderId=Long.parseLong(paramMap.get("orderId"));
+			Order order = orderService.getOrderById(orderId);
+			List<Map<String, String>> provinces = userService.getAllProvinces();
+			model.addAttribute("provinces", provinces);
+			model.addAttribute("order", order);
 			return "order_detail_editable";
 	}
 	

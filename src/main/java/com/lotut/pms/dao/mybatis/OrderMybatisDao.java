@@ -1,6 +1,7 @@
 package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -96,8 +97,8 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	}
 
 	@Override
-	public int updateUserOrderExpress(Order order) {
-		orderMapper.updateUserOrderExpress(order);
+	public int updateUserOrderExpress(Map<String, String> expressInfo) {
+		orderMapper.updateUserOrderExpress(expressInfo);
 		return 1;
 	}
 }

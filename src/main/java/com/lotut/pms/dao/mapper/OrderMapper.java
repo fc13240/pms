@@ -1,6 +1,7 @@
 package com.lotut.pms.dao.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -35,5 +36,5 @@ public interface OrderMapper {
 	
 	int updateUserOrderStatus(@Param("orderId")long orderId);
 	
-	int updateUserOrderExpress(@Param("order")Order order);
+	int updateUserOrderExpress(Map<String, String> expressInfo);
 }
