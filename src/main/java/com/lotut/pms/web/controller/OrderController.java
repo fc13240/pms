@@ -90,6 +90,7 @@ public class OrderController {
 			List<Order> orders = orderService.getAllNeedProcessOrders(page);
 			model.addAttribute("orders", orders);
 			model.addAttribute("page",page);
+			statusDataToModel(model);
 			return "all_order_list";
 		} else {
 			int totalCount=(int)orderService.getUserOrdersCount(userId);
@@ -97,6 +98,7 @@ public class OrderController {
 			List<Order> orders = orderService.getUserOrders(page);
 			model.addAttribute("orders", orders);
 			model.addAttribute("page",page);
+			statusDataToModel(model);
 			return "order_list";
 		}
 	}
