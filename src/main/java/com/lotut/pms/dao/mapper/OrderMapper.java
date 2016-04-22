@@ -32,4 +32,6 @@ public interface OrderMapper {
 	
 	int searchUserOrdersCount(OrderSearchCondition searchCondition);
 	List<Order> getAllNeedProcessOrders(Page page);
+	
+	int updateUserOrderStatus(@Param("orderId")long orderId);
 }

@@ -152,4 +152,25 @@ public class OrderController {
 		
 		return "order_detail";
 	}
+	
+	@RequestMapping(path="/updateUserOrderStatus", method=RequestMethod.GET)
+	public String updateUserOrderStatus(@RequestParam("orderId")long orderId,Model model,Page page){
+			if (page.getCurrentPage() < 1) {
+				page.setCurrentPage(1);
+			}
+				int userId = PrincipalUtils.getCurrentUserId();
+				page.setUserId(userId);
+			if (PrincipalUtils.isOrderProcessor()) {
+				orderService.updateUserOrderStatus(orderId);
+				int totalCount=(int)orderService.getAllNeedProcessOrderCount();
+				page.setTotalRecords(totalCount);
+				List<Order> orders = orderService.getAllNeedProcessOrders(page);
+				model.addAttribute("orders", orders);
+				model.addAttribute("page",page);
+				return "all_order_list";
+			}else{
+				//增加修改权限提示
+				return "";
+			}
+	}
 }

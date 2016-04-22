@@ -310,7 +310,8 @@
 	                                <select id="paymentStatus" name="paymentStatus" >
 									  <option value="">全部</option>
 									  <option value="1">应缴</option>
-									  <option value="2">已缴</option>								 
+									  <option value="2">已支付</option>	
+									  <option value="3">已缴</option>							 
 	                                </select>	
 			                  
 	                                </div>
