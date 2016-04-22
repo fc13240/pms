@@ -134,4 +134,9 @@ public class OrderServiceImpl implements OrderService {
 	public int updateUserOrderStatus(long orderId) {
 		return orderDao.updateUserOrderStatus(orderId);
 	}
+
+	@Override
+	public int updateUserOrderContactAddresses(Order order) {
+		return orderDao.updateUserOrderContactAddresses(order);
+	}
 }

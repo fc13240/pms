@@ -36,4 +36,6 @@ public interface OrderService {
 	List<Order> getUserOrdersByStatus(int userId, int orderStatus);
 	
 	int updateUserOrderStatus(long orderId); 
+	
+	int updateUserOrderContactAddresses(Order order);
 }

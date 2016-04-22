@@ -35,4 +35,6 @@ public interface OrderDao {
 	int searchUserOrdersCount(OrderSearchCondition searchCondition);
 	
 	int updateUserOrderStatus(long orderId);
+	
+	int updateUserOrderContactAddresses(Order order);
 }

@@ -122,22 +122,52 @@
 	            	<tr>
 	            		<td>
 	            			
-			                 <table class="table table-striped table-bordered table-hover">
-					            <thead>
-					              <tr class="simple_bag">
-					              	<th>收货人姓名</th>
-					              	<th>地址</th>
-					              	<th>电话</th>
-					              </tr>
-					            </thead>			                 
-			                    <tbody>
-									<tr>
-										<td>${order.postAddress.receiver}</td>
-										<td>${order.postAddress.provinceName}${order.postAddress.cityName}${order.postAddress.districtName}${order.postAddress.streetName}${order.postAddress.detailAddress}</td>
-										<td>${order.postAddress.phone}</td>
-									</tr>															
-			                    </tbody>
-			                  </table> 	        		
+<!-- 			                 <table class="table table-striped table-bordered table-hover"> -->
+<!-- 					            <thead> -->
+<!-- 					              <tr class="simple_bag"> -->
+<!-- 					              	<th>收货人姓名</th> -->
+<!-- 					              	<th>地址</th> -->
+<!-- 					              	<th>电话</th> -->
+<!-- 					              </tr> -->
+<!-- 					            </thead>			                  -->
+<!-- 			                    <tbody> -->
+<!-- 									<tr> -->
+<!-- 										<td> -->
+<%-- 										${order.postAddress.receiver} --%>
+<!-- 										</td> -->
+<!-- 										<td> -->
+<%-- 										${order.postAddress.provinceName}${order.postAddress.cityName}${order.postAddress.districtName}${order.postAddress.streetName}${order.postAddress.detailAddress} --%>
+<!-- 										</td> -->
+<!-- 										<td> -->
+<%-- 										${order.postAddress.phone} --%>
+<!-- 										</td> -->
+<!-- 									</tr>															 -->
+<!-- 			                    </tbody> -->
+<!-- 			                  </table> 	        		 -->
+							<form action="<s:url value='/order/updateUserOrderContactAddresses.html'/>" method="post">
+							<se:csrfInput/>
+								联系人名称:<input type="text" name="receiver" id="receiver" value="${order.postAddress.receiver}" required/>
+								通讯地址:
+								<select name="province" id="province" onchange="loadCities()" required>
+									<option value='${order.postAddress.province}'>${order.postAddress.provinceName}</option>
+									<c:forEach items="${provinces}" var="province">
+									<option value="${province.id}">${province.name}</option>
+									</c:forEach>
+								</select>
+								<select name="city" id="city" onchange="loadDistricts()" required>
+									<option value='${order.postAddress.city}'>${order.postAddress.cityName}</option>
+								</select>
+								<select name="district" id="district" onchange="loadStreets()"required>
+									<option value='${order.postAddress.district}'>${order.postAddress.districtName}</option>
+								</select>
+								<select name="street" id="street" required>
+									<option value='${order.postAddress.street}'>${order.postAddress.streetName}</option>
+								</select>
+								详细地址<input type="text" name="detailAddress" id="detailAddress"  value="${order.postAddress.detailAddress}" required/>		
+								手机或固话<input type="text" name="phone" id="phone" value="${order.postAddress.phone}" required/>
+								<input type="hidden" name="orderId" id="orderId" value="${order.id}"/>
+								<input type="submit" value="保存" />																							
+							</form>
 	            		</td>
 	            	</tr>
 	            </tbody>        	
@@ -176,5 +206,99 @@
 </div>
 <%@ include file="_js.jsp"%>
 </div>
+	<script type="text/javascript">
+			function addDefaultOption(selectElem) {
+				selectElem.append("<option value=''>请选择</option>");
+			}
+			
+			function resetSelect() {
+				for (var i = 0; i < arguments.length; i++) {
+					var selectObj = arguments[i];
+					selectObj.empty();
+					addDefaultOption(selectObj);
+				}
+			}
+			
+			function addOptions(selectObj, options) {
+				$.each(options, function(index, val){
+					selectObj.append("<option value='" + val.id + "'>" + val.name + "</option>");
+				});	
+			}
+			
+			function loadCities() {
+				var province = $("#province").val();
+				
+				resetSelect($("#city"), $("#district"), $("#street"));
+				
+				if (province != "") {
+					$.ajax({
+						url: "<s:url value='/user/getCitiesByProvince.html'/>?province=" + province,
+						type: 'get',
+						dataType: 'json',
+						success: function(cities) {
+							var city = $("#city");
+							
+							resetSelect(city);
+							addOptions(city, cities);
+						}
+					})
+				} 
+			}
+			
+			function loadDistricts() {
+				var city = $("#city").val();
+			
+				resetSelect($("#district"), $("#street"));
+				
+				if (city != "") {
+					$.ajax({
+						url: "<s:url value='/user/getDistrictsByCity.html'/>?city=" + city,
+						type: 'get',
+						dataType: 'json',
+						success: function(districts) {
+							var district = $("#district");
+							
+							resetSelect(district);
+							addOptions(district, districts);
+						}
+					})
+				}
+			}
+			
+			function loadStreets() {
+				var district = $("#district").val();
+				
+				resetSelect($("#street"));
+				
+				if (district != "") {
+					$.ajax({
+						url: "<s:url value='/user/getStreetsByDistrict.html'/>?district=" + district,
+						type: 'get',
+						dataType: 'json',
+						success: function(streets) {
+							var street = $("#street");
+							
+							resetSelect(street);
+							addOptions(street, streets);
+						}
+					})
+				} 
+			}
+	
+	</script>
+	
+	<script type="text/javascript">
+		function remind(){
+			$("<div>操作成功</div>").dialog({
+				modal: true,
+				buttons: {
+					Ok: function() {
+					$(this).dialog("close");
+					}
+				}	
+			});
+		}
+	
+	</script>
 </body>
 </html>

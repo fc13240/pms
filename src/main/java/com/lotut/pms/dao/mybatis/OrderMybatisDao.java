@@ -94,4 +94,10 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 		orderMapper.updateUserOrderStatus(orderId);
 		return 1;
 	}
+
+	@Override
+	public int updateUserOrderContactAddresses(Order order) {
+		orderMapper.updateUserOrderContactAddresses(order);
+		return 1;
+	}
 }
