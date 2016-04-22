@@ -1,6 +1,7 @@
 package com.lotut.pms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.OrderItem;
@@ -36,5 +37,5 @@ public interface OrderDao {
 	
 	int updateUserOrderStatus(long orderId);
 	
-	int updateUserOrderExpress(Order order);
+	int updateUserOrderExpress(Map<String, String> expressInfo);
 }

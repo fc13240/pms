@@ -162,11 +162,28 @@
 	            		<td>
 							<form action="<s:url value='/order/updateUserOrderContactAddresses.html'/>" method="post">
 							<se:csrfInput/>
-								快递单编号:<input type="text" name="receiver" id="receiver" value="${order.postAddress.receiver}" required/>
-								快递公司:<input type="text" name="receiver" id="receiver" value="${order.postAddress.receiver}" required/>
-								发送时间:
-								快递员姓名:<input type="text" name="detailAddress" id="detailAddress"  value="${order.postAddress.detailAddress}" required/>		
-								快递员联系方式:<input type="text" name="phone" id="phone" value="${order.postAddress.phone}" required/>
+								快递单编号:<input type="text" name="expressNo" id="expressNo" value="${order.expressNo}" required/>
+								快递公司:<input type="text" name="expressCompany" id="expressCompany" value="${order.expressCompany}" required/>
+								快递员姓名:<input type="text" name="courier" id="courier"  value="${order.courier}" />		
+								快递员联系方式:<input type="text" name="courierPhone" id="courierPhone" value="${order.courierPhone}" />   
+                                   <div style="margin-top:10px;">
+                                   <div class="input-group">
+ 	                                    <div style="float:left;line-height: 32px;">发送时间</div>
+						                <div style="float:left;margin-left: 16px;" class="form-group" style="margin-left:15px;">
+							                <div style="float:left;">
+							                	<input  type="text" class="form-control" id="startAppDateId" 
+							               			 name="startDispatchDate" placeholder="快递发送日期选择" value="<fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/>"  
+							               			 readonly="readonly" onclick="javascript:$('#start_date_img').click()">
+							                </div> 
+											<div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="start_date_img"></div>
+							                </div>
+<%-- 						                <style> --%>
+<!-- /* 						         		/*.simple_bag th{background:#f5fafe;}*/ */ -->
+<!-- /* 						                .ui-jqgrid-view {margin-top: 30px;} */ -->
+<!-- /* 						                #grid-table_cb{border-left: 1px solid #E1E1E1;} */ -->
+<%-- 						                </style>			 --%>
+	                                </div>
+	                                </div>
 								<input type="hidden" name="orderId" id="orderId" value="${order.id}"/>
 								<input type="submit" value="保存" />																							
 							</form>

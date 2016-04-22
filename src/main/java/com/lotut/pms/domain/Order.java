@@ -15,6 +15,7 @@ public class Order {
 	private User processUser;
 	private boolean received;
 	private String expressCompany;
+	private String expressNo;
 	private Date createTime;
 	private Date sendTime;
 	private String courier;
@@ -108,4 +109,11 @@ public class Order {
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
+	public String getExpressNo() {
+		return expressNo;
+	}
+	public void setExpressNo(String expressNo) {
+		this.expressNo = expressNo;
+	}
+	
 }
