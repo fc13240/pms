@@ -185,7 +185,7 @@
 	</update>
 
 	<select id="getAllNeedProcessOrderCount" resultType="int">
-		select count(*) from orders where order_status != 3
+		select count(*) from orders where order_status in (2, 4)
 	</select>
 	
 	<select id="getAllNeedProcessOrders" parameterType="Page" resultMap="OrderMap">
@@ -229,5 +229,13 @@
 		select order_status_id, status_description
 		  from order_status
 		 order by order_status_id asc;
-	</select>	
+	</select>
+	
+	<update id="updateUserOrderStatus" parameterType="long">
+		update orders set order_status=4 where order_id=#{orderId};
+		update fees SET fee_payment_status=3 WHERE fee_id in
+		(select fee_id from order_items where order_id=#{orderId})
+	</update>
+	
+		
 </mapper>

@@ -88,4 +88,10 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	public int searchUserOrdersCount(OrderSearchCondition searchCondition) {
 		return orderMapper.searchUserOrdersCount(searchCondition);
 	}
+
+	@Override
+	public int updateUserOrderStatus(long orderId) {
+		orderMapper.updateUserOrderStatus(orderId);
+		return 1;
+	}
 }
