@@ -35,5 +35,5 @@ public interface OrderMapper {
 	
 	int updateUserOrderStatus(@Param("orderId")long orderId);
 	
-	int updateUserOrderContactAddresses(@Param("order")Order order);
+	int updateUserOrderExpress(@Param("order")Order order);
 }

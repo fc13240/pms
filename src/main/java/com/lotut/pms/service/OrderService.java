@@ -37,5 +37,5 @@ public interface OrderService {
 	
 	int updateUserOrderStatus(long orderId); 
 	
-	int updateUserOrderContactAddresses(Order order);
+	int updateUserOrderExpress(Order order);
 }

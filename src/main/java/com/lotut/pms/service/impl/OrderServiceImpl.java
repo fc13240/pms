@@ -136,7 +136,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int updateUserOrderContactAddresses(Order order) {
-		return orderDao.updateUserOrderContactAddresses(order);
+	public int updateUserOrderExpress(Order order) {
+		return orderDao.updateUserOrderExpress(order);
 	}
 }

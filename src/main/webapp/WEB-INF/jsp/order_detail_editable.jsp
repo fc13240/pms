@@ -122,57 +122,59 @@
 	            	<tr>
 	            		<td>
 	            			
-<!-- 			                 <table class="table table-striped table-bordered table-hover"> -->
-<!-- 					            <thead> -->
-<!-- 					              <tr class="simple_bag"> -->
-<!-- 					              	<th>收货人姓名</th> -->
-<!-- 					              	<th>地址</th> -->
-<!-- 					              	<th>电话</th> -->
-<!-- 					              </tr> -->
-<!-- 					            </thead>			                  -->
-<!-- 			                    <tbody> -->
-<!-- 									<tr> -->
-<!-- 										<td> -->
-<%-- 										${order.postAddress.receiver} --%>
-<!-- 										</td> -->
-<!-- 										<td> -->
-<%-- 										${order.postAddress.provinceName}${order.postAddress.cityName}${order.postAddress.districtName}${order.postAddress.streetName}${order.postAddress.detailAddress} --%>
-<!-- 										</td> -->
-<!-- 										<td> -->
-<%-- 										${order.postAddress.phone} --%>
-<!-- 										</td> -->
-<!-- 									</tr>															 -->
-<!-- 			                    </tbody> -->
-<!-- 			                  </table> 	        		 -->
+			                 <table class="table table-striped table-bordered table-hover">
+					            <thead>
+					              <tr class="simple_bag">
+					              	<th>收货人姓名</th>
+					              	<th>地址</th>
+					              	<th>电话</th>
+					              </tr>
+					            </thead>			                 
+			                    <tbody>
+									<tr>
+										<td>
+										${order.postAddress.receiver}
+										</td>
+										<td>
+										${order.postAddress.provinceName}${order.postAddress.cityName}${order.postAddress.districtName}${order.postAddress.streetName}${order.postAddress.detailAddress}
+										</td>
+										<td>
+										${order.postAddress.phone}
+										</td>
+									</tr>															
+			                    </tbody>
+			                  </table> 	        		
+	            		</td>
+	            	</tr>
+	            </tbody>        	
+          	</table>  
+          	</c:if>  
+          	<table class="table table-striped table-bordered table-hover">
+	            <thead>
+	              <tr class="simple_bag">
+	              	<th>
+	              		快递信息
+	              	</th>
+	              </tr>
+	            </thead>  
+	            <tbody>
+	            	<tr>
+	            		<td>
 							<form action="<s:url value='/order/updateUserOrderContactAddresses.html'/>" method="post">
 							<se:csrfInput/>
-								联系人名称:<input type="text" name="receiver" id="receiver" value="${order.postAddress.receiver}" required/>
-								通讯地址:
-								<select name="province" id="province" onchange="loadCities()" required>
-									<option value='${order.postAddress.province}'>${order.postAddress.provinceName}</option>
-									<c:forEach items="${provinces}" var="province">
-									<option value="${province.id}">${province.name}</option>
-									</c:forEach>
-								</select>
-								<select name="city" id="city" onchange="loadDistricts()" required>
-									<option value='${order.postAddress.city}'>${order.postAddress.cityName}</option>
-								</select>
-								<select name="district" id="district" onchange="loadStreets()"required>
-									<option value='${order.postAddress.district}'>${order.postAddress.districtName}</option>
-								</select>
-								<select name="street" id="street" required>
-									<option value='${order.postAddress.street}'>${order.postAddress.streetName}</option>
-								</select>
-								详细地址<input type="text" name="detailAddress" id="detailAddress"  value="${order.postAddress.detailAddress}" required/>		
-								手机或固话<input type="text" name="phone" id="phone" value="${order.postAddress.phone}" required/>
+								快递单编号:<input type="text" name="receiver" id="receiver" value="${order.postAddress.receiver}" required/>
+								快递公司:<input type="text" name="receiver" id="receiver" value="${order.postAddress.receiver}" required/>
+								发送时间:
+								快递员姓名:<input type="text" name="detailAddress" id="detailAddress"  value="${order.postAddress.detailAddress}" required/>		
+								快递员联系方式:<input type="text" name="phone" id="phone" value="${order.postAddress.phone}" required/>
 								<input type="hidden" name="orderId" id="orderId" value="${order.id}"/>
 								<input type="submit" value="保存" />																							
 							</form>
 	            		</td>
 	            	</tr>
 	            </tbody>        	
-          	</table>  
-          	</c:if>  
+          	</table>
+          	
           	
          	<table class="table table-striped table-bordered table-hover">
 	            <thead>
