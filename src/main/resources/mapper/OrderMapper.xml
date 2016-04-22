@@ -237,7 +237,7 @@
 		(select fee_id from order_items where order_id=#{orderId})
 	</update>
 	
-	<update id="updateUserOrderContactAddresses" parameterType="Order">
+	<update id="updateUserOrderExpress" parameterType="Order">
 		UPDATE contact_addresses SET receiver=#{receiver},province=#{province},city=#{city},
 				district=#{district},street=#{street},detail_address=#{detailAddress},phone=#{phone}
 		WHERE id=(SELECT  post_address FROM orders WHERE order_id=#{orderId})

@@ -36,5 +36,5 @@ public interface OrderDao {
 	
 	int updateUserOrderStatus(long orderId);
 	
-	int updateUserOrderContactAddresses(Order order);
+	int updateUserOrderExpress(Order order);
 }

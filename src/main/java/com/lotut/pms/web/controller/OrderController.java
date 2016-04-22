@@ -186,10 +186,10 @@ public class OrderController {
 			}
 	}
 	
-	//修改用户订单地址信息
-	@RequestMapping(path="/updateUserOrderContactAddresses", method=RequestMethod.POST)
-	public String updateUserOrderContactAddresses(@Valid Order order,Model model){
-			orderService.updateUserOrderContactAddresses(order);
+	//增加用户订单快递信息
+	@RequestMapping(path="/updateUserOrderExpress", method=RequestMethod.POST)
+	public String updateUserOrderExpress(@Valid Order order,Model model){
+			orderService.updateUserOrderExpress(order);
 			return "order_detail_editable";
 	}
 	
