@@ -129,7 +129,7 @@ public class NoticeServiceImpl implements NoticeService {
 		try {
 			if (!pdfPath.toFile().exists()) {
 				Process pdfGeneratorProcess = Runtime.getRuntime().exec(pdfGenerateCommand);
-				pdfGeneratorProcess.wait(2000);
+				pdfGeneratorProcess.wait(8000);
 			}
 			
 			if (pdfPath.toFile().exists()) {
