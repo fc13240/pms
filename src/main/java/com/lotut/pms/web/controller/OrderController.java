@@ -2,6 +2,7 @@ package com.lotut.pms.web.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -147,10 +148,21 @@ public class OrderController {
 	
 	@RequestMapping(path="/detail/{orderId}", method=RequestMethod.GET)
 	public String getOrderDetail(@PathVariable long orderId,Model model){
-		Order order = orderService.getOrderById(orderId);
-		model.addAttribute("order", order);
 		
-		return "order_detail";
+		if (PrincipalUtils.isOrderProcessor()) {
+			Order order = orderService.getOrderById(orderId);
+			List<Map<String, String>> provinces = userService.getAllProvinces();
+			model.addAttribute("provinces", provinces);
+			model.addAttribute("order", order);
+			
+			return "order_detail_editable";
+		}else{
+			Order order = orderService.getOrderById(orderId);
+			model.addAttribute("order", order);
+			
+			return "order_detail";
+		}
+		
 	}
 	
 	@RequestMapping(path="/updateUserOrderStatus", method=RequestMethod.GET)
@@ -173,4 +185,12 @@ public class OrderController {
 				return "";
 			}
 	}
+	
+	//修改用户订单地址信息
+	@RequestMapping(path="/updateUserOrderContactAddresses", method=RequestMethod.POST)
+	public String updateUserOrderContactAddresses(@Valid Order order,Model model){
+			orderService.updateUserOrderContactAddresses(order);
+			return "order_detail_editable";
+	}
+	
 }

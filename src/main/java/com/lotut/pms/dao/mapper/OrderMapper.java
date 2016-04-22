@@ -34,4 +34,6 @@ public interface OrderMapper {
 	List<Order> getAllNeedProcessOrders(Page page);
 	
 	int updateUserOrderStatus(@Param("orderId")long orderId);
+	
+	int updateUserOrderContactAddresses(@Param("order")Order order);
 }
