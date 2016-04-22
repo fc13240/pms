@@ -259,7 +259,7 @@
                 <div class="legend">订单信息 </div>
             </div>
             <div class="element">
-                <div class="etitle">商户订单号:</div>
+                <div class="etitle">订单号:</div>
                 <div class="einput">${order.id}</div>
                 <br>
             </div>
