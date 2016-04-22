@@ -86,7 +86,7 @@
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
 				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username
-				from patents p join patent_status ps on p.patent_status = ps.patent_status_id
+				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
 						join notices n on n.patent = p.patent_id
 						left join users pu on pu.user_id = n.process_user
 						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
@@ -129,7 +129,7 @@
 			n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name, 
 			npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
 			nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username
-		  from patents p join patent_status ps on p.patent_status = ps.patent_status_id
+		  from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
 			join user_patents up on p.patent_id = up.patent 
 			join notices n on n.patent = up.patent
 			left join users pu on pu.user_id = n.process_user
@@ -148,7 +148,7 @@
 			n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 			npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
 			nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username
-		  from patents p join patent_status ps on p.patent_status = ps.patent_status_id
+		  from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
 			join user_patents up on p.patent_id = up.patent 
 			join notices n on n.patent = up.patent
 			left join users pu on pu.user_id = n.process_user
@@ -166,7 +166,7 @@
 			n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 			npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
 			nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username
-		  from patents p join patent_status ps on p.patent_status = ps.patent_status_id
+		  from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
 			join user_patents up on p.patent_id = up.patent 
 			join notices n on n.patent = up.patent
 			left join users pu on pu.user_id = n.process_user
@@ -207,7 +207,7 @@
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
 				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username
-				from patents p join patent_status ps on p.patent_status = ps.patent_status_id
+				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
 						join notices n on n.patent = p.patent_id
 						left join users pu on pu.user_id = n.process_user
 						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
@@ -253,7 +253,7 @@
 		</if>	
 		select count(*) 
 		  from notices n join patents p on n.patent = p.patent_id
-		  	join patent_status ps on p.patent_status = ps.patent_status_id
+		  	left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where patent in (select patent from user_patents where user = #{userId})	
 		 	<if test="patentType != null">
 		 		and p.patent_type = #{patentType}
@@ -296,7 +296,7 @@
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
 				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username
-				from patents p join patent_status ps on p.patent_status = ps.patent_status_id
+				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
 						join notices n on n.patent = p.patent_id
 						left join users pu on pu.user_id = n.process_user
 						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id

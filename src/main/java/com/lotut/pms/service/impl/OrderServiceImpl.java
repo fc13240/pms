@@ -2,6 +2,7 @@ package com.lotut.pms.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -136,7 +137,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int updateUserOrderExpress(Order order) {
-		return orderDao.updateUserOrderExpress(order);
+	public int updateUserOrderExpress(Map<String, String> expressInfo) {
+		return orderDao.updateUserOrderExpress(expressInfo);
 	}
 }
