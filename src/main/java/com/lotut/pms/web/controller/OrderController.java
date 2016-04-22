@@ -91,6 +91,7 @@ public class OrderController {
 			model.addAttribute("orders", orders);
 			statusDataToModel(model);
 			model.addAttribute("page",page);
+			statusDataToModel(model);
 			return "all_order_list";
 		} else {
 			int totalCount=(int)orderService.getUserOrdersCount(userId);
@@ -99,6 +100,7 @@ public class OrderController {
 			model.addAttribute("orders", orders);
 			statusDataToModel(model);
 			model.addAttribute("page",page);
+			statusDataToModel(model);
 			return "order_list";
 		}
 	}

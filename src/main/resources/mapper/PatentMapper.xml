@@ -53,17 +53,17 @@
 							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username
 		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, p.patent_type,
 				ps.patent_status_id, ps.patent_status_desc
-			from patents p join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
+			from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
 		 where up.user = #{userId}
 		 order by p.app_date, p.patent_name, p.app_person
-		 limit #{startIndex}, #{pageSize}) as sp join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
+		 limit #{startIndex}, #{pageSize}) as sp left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
 		    join users u on u.user_id = up.user	
 		 order by sp.app_date desc, sp.patent_name, sp.app_person
 	</select>	
 	
 	<select id="getPatentById" parameterType="long" resultMap="PatentWithShareUsers">
 		select p.patent_id, p.app_no, p.patent_name, pt.patent_type_desc, p.app_date, p.app_person, ps.patent_status_desc, u.user_id, u.username
-		  from patents p join patent_status ps on p.patent_status = ps.patent_status_id join patent_types pt on p.patent_type = pt.patent_type_id
+		  from patents p left join patent_status ps on p.patent_status = ps.patent_status_id left join patent_types pt on p.patent_type = pt.patent_type_id
 					join user_patents up on p.patent_id = up.patent join users u on u.user_id = up.user 
 		 where up.patent = #{patentId};	
 	</select>	
@@ -79,7 +79,7 @@
 
 	<select id="getPatentsByIds" parameterType="list" resultMap="PatentByIdsResultMap">
 		select p.patent_id, p.app_no, p.app_person, p.patent_name, p.app_date, ps.patent_status_id, ps.patent_status_desc
-		  from patents p join patent_status ps on p.patent_status = ps.patent_status_id
+		  from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where p.patent_id in 
 			<foreach item="patentId" collection="patentIds"
 			     open="(" separator="," close=")">
@@ -118,7 +118,7 @@
 							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username
 		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, p.patent_type,
 				ps.patent_status_id, ps.patent_status_desc
-				from patents p join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
+				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
 		 		where up.user = #{userId}
 		 		<if test="patentType != null">
 		 			and p.patent_type = #{patentType}
@@ -139,7 +139,7 @@
 				</if>		 		 	
 				 order by p.app_date, p.patent_name, p.app_person
 				 limit #{page.startIndex}, #{page.pageSize}) as sp 
-			join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
+			left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
 		    join users u on u.user_id = up.user		
 		 order by sp.app_date desc, sp.patent_name, sp.app_person
 	</select>	
@@ -149,7 +149,7 @@
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
 		 select Count(*)
-		 from patents p join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
+		 from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
 		 where up.user = #{userId}
 		 		<if test="patentType != null">
 		 			and p.patent_type = #{patentType}
@@ -234,7 +234,7 @@
 	<insert id="insertOrUpdatePatent" parameterType="Patent" useGeneratedKeys="true" keyProperty="patentId">
 		insert into patents(app_no, patent_name, app_person, app_date, patent_type, patent_status, patent_owner)
 		values(#{appNo}, #{name,javaType=string,jdbcType=VARCHAR}, #{appPerson,javaType=string,jdbcType=VARCHAR}, #{appDate,javaType=date,jdbcType=DATE}, 
-			   #{patentType.patentTypeId}, #{patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER}, #{ownerId})
+			   #{patentType.patentTypeId,jdbcType=INTEGER}, #{patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER}, #{ownerId})
 		on duplicate key update 
 			patent_name = #{name,javaType=string,jdbcType=VARCHAR}, app_person = #{appPerson,javaType=string,jdbcType=VARCHAR},
 			app_date = #{appDate,javaType=date,jdbcType=DATE}, patent_type = #{patentType.patentTypeId},
@@ -244,7 +244,7 @@
 	<insert id="insertPatent" parameterType="Patent" useGeneratedKeys="true" keyProperty="patentId">
 		insert into patents(app_no, patent_name, app_date, patent_type, patent_owner)
 		values(#{appNo}, #{name,javaType=string,jdbcType=VARCHAR}, #{appDate,javaType=date,jdbcType=DATE}, 
-			   #{patentType.patentTypeId}, #{ownerId})
+			   #{patentType.patentTypeId,jdbcType=INTEGER}, #{ownerId})
 	</insert>
 	
 	<update id="updatePatent" parameterType="Patent">
@@ -254,7 +254,7 @@
 		      <if test="name != null">patent_name=#{name},</if>
 		      <if test="appDate != null">app_date=#{appDate},</if>
 		      <if test="internalCode != null">internal_code=#{internalCode},</if>
-		      <if test="patentType != null">patent_type=#{patentType.patentTypeId}</if>
+		      <if test="patentType != null">patent_type=#{patentType.patentTypeId,jdbcType=INTEGER}</if>
 		    </set> 
 		 where app_no = #{appNo} and patent_owner = #{ownerId}
 	</update>
