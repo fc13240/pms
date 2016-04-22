@@ -95,12 +95,16 @@
         <div class="row">
           <div class="col-xs-12">
 			<c:forEach items="${orders}" var="order">
+				<form action="<s:url value='/fee/exportFees.html'/>" method="get" target="_blank">
+					<c:forEach items="${order.feeList}" var="fee" varStatus="status">
+						<input type="hidden" name="fees" value="${fee.feeId}">
+					</c:forEach>
                  <table id="simple-table" class="table table-striped table-bordered table-hover">
                     <thead>
                       <tr class="simple_bag">
                       	<th colspan="4">
                       		<fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>&nbsp;&nbsp;
-                      		订单号：${order.id}
+                      		订单号：${order.id}<span style="margin-left:100px;"><input type="submit" value="导出费用清单"></span>
                       	</th>
                       </tr>
                     </thead>
@@ -164,7 +168,8 @@
                     	</td>
                     </tr>								
                    </tbody>
-                  </table> 					
+                  </table> 	
+                 </form>				
 			</c:forEach> 						
           </div>
           		<!-- 分页功能 start -->
