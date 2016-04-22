@@ -123,6 +123,7 @@
 									<th>缴费截止日</th>
 									<th>缴费种类</th>
 									<th>缴费金额</th>
+									<th>缴费状态</th>
 									<th>发票抬头</th>
 			                      </tr>
 			                    </thead>
@@ -138,6 +139,7 @@
 									<td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
 									<td>${fee.feeType}</td>
 									<td>${fee.amount} </td>
+									<td>${fee.paymentStatus.payementStatusDescription} </td>
 									<td>${fee.invoiceTitle}</td>
 								</tr>
 								</c:forEach>								

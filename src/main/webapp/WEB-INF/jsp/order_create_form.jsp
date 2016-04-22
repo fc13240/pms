@@ -97,7 +97,9 @@
 										<td>${fee.feeType}</td>
 										<td>${fee.amount} </td>
 										<td>${fee.invoiceTitle}</td>
-										<td>${fee.paymentStatus.payementStatusDescription}</td>
+										<td>${fee.paymentStatus.payementStatusDescription}
+								
+										</td>
 									</tr>
 								</c:forEach>	
 									<tr>

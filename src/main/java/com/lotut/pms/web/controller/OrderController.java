@@ -89,6 +89,7 @@ public class OrderController {
 			page.setTotalRecords(totalCount);
 			List<Order> orders = orderService.getAllNeedProcessOrders(page);
 			model.addAttribute("orders", orders);
+			statusDataToModel(model);
 			model.addAttribute("page",page);
 			return "all_order_list";
 		} else {
@@ -96,6 +97,7 @@ public class OrderController {
 			page.setTotalRecords(totalCount);
 			List<Order> orders = orderService.getUserOrders(page);
 			model.addAttribute("orders", orders);
+			statusDataToModel(model);
 			model.addAttribute("page",page);
 			return "order_list";
 		}
