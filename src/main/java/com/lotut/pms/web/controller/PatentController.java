@@ -134,6 +134,18 @@ public class PatentController {
 		return "upload_success";
 	}	
 	
+	@RequestMapping(path="/goods", method=RequestMethod.GET)
+	public String showGoodsForm(@RequestParam("patent") int patent) throws IOException {
+	
+		return "goods_form";
+	}		
+
+	@RequestMapping(path="/goods", method=RequestMethod.POST)
+	public String addGoods(@RequestParam("patentFile")Part patentFile) throws IOException {
+		
+		return "goods_form";
+	}		
+	
 	private void addPatentTypeAndStatusDataToModel(Model model) {
 		List<PatentType> allPatentTypes = patentService.getAllPatentTypes();
 		List<PatentStatus> allPatentStatus = patentService.getAllPatentStatus();
