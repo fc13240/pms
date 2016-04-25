@@ -347,14 +347,14 @@
 	                                <td class="center">
 	                                	${status.count + (page.currentPage-1)*page.pageSize}
 	                                </td>
-	                                <td><a href="javascript: void;" onclick="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')"><c:out value="${notice.patent.appNo}"/></td>
+	                                <td><a href="javascript: void;" onclick="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')"><c:out value="${notice.patent.appNo}"/></a></td>
 									<td><c:out value="${notice.patent.name}"/></td>
 									<td><c:out value="${notice.patent.firstAppPerson}"/></td>
 									<td><c:out value="${notice.patent.patentStatus.statusDescription}"/></td>
 									<td  width="120"><c:out value="${notice.patent.shareUsersAsString}"/></td>
 									<td width="85"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
 									<td>
-									<a id="download" href="<s:url value='/notice/preview.html'/>?notice=${notice.noticeId}">
+									<a id="download" href="javascript: void;" onclick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}')">
 									 <c:out value="${notice.name}"/>
 									</a>					
 									
