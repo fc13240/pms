@@ -55,7 +55,7 @@
 								</select>				
 			</div> 
 			<div style="margin-top:15px;">     
-			价格：<input type="text" style="height:25px;width:80px;" name="price" id=""price""/>
+			价格：<input type="text" style="height:25px;width:80px;" name="price" id="price"/>
 			</div> 
 			<div style="margin-top:15px;">
 			<button style="margin:8px;" type="submit" class="btn btn-info btn-sm">出售</button>          

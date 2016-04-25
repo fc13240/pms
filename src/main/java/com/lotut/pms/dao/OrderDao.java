@@ -3,6 +3,7 @@ package com.lotut.pms.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.lotut.pms.domain.AdminOrderSearchCondition;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.OrderItem;
 import com.lotut.pms.domain.OrderSearchCondition;
@@ -38,4 +39,8 @@ public interface OrderDao {
 	int updateUserOrderStatus(long orderId);
 	
 	int updateUserOrderExpress(Map<String, String> expressInfo);
+	
+	List<Order> getAllNeedProcessOrdersBySearch(AdminOrderSearchCondition searchCondition);
+	
+	int getAllNeedProcessOrdersBySearchCount(AdminOrderSearchCondition searchCondition);
 }

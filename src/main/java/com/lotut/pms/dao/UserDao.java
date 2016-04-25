@@ -44,4 +44,6 @@ public interface UserDao {
 	void defaulStatus();
 	
 	ContactAddress getContactAddressesById(int id);
+	
+	List<User> getAllUser();
 }
