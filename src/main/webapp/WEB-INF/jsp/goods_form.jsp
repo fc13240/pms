@@ -37,21 +37,22 @@
         <div class="row">
           <div class="col-xs-12">
  
-			<form action="<s:url value='/patent/search.html'/>" method="post" enctype="multipart/form-data">
+			<form action="<s:url value='/patent/addGoods.html'/>" method="post">
 			<se:csrfInput/>
-			<div style="margin-top:15px;">专利名  ：某某专利</div>
-			
-			<div style="margin-top:15px;">      
-			类型：
-			<select name="patentType" id="patentTypeId">
-			<option value="">一级分类</option>
-			<option value="'/>"><c:out value=""/></option>
-			</select>  
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			<select name="patentType" id="patentTypeId">
-			<option value="">二级分类</option>
-			<option value="'/>"><c:out value=""/></option>
-			</select> 			
+			<div style="margin-top:15px;">专利名  ：${patent.name}</div>
+			<input type="hidden"  name="id" value="${patentno}"/>
+			<div style="margin-top:15px;"> 
+			商品类型：
+								<select name="FirstColumn" id="first_column" onchange="loadSecoundColumns()" required>
+									<option value=''>请选择</option>
+									<c:forEach items="${FirstColumns}" var="FirstColumn">
+									<option value="${FirstColumn.id}">${FirstColumn.name}</option>
+									</c:forEach>
+								</select>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<select name="SecondColumn" id="second_column"  required>
+									<option value=''>请选择</option>
+								</select>				
 			</div> 
 			<div style="margin-top:15px;">     
 			价格：<input type="text" style="height:25px;width:80px;" name="price" id=""price""/>
@@ -70,5 +71,45 @@
   </div>
 </div>
 <%@ include file="_js.jsp"%>
+<script type="text/javascript">
+function loadSecoundColumns() {
+	var first_column = $("#first_column").val();
+
+	resetSelect($("#second_column"));
+	
+	if (first_column != "") {
+		$.ajax({
+			url: "<s:url value='/patent/getGoodsSecoundColumn.html'/>?first_column=" + first_column,
+			type: 'get',
+			dataType: 'json',
+			success: function(SecondColumns) {
+				var second_column = $("#second_column");
+				
+				resetSelect(second_column);
+				addOptions(second_column, SecondColumns);
+			}
+		})
+	}
+}
+
+function addDefaultOption(selectElem) {
+	selectElem.append("<option value=''>请选择</option>");
+}
+
+function resetSelect() {
+	for (var i = 0; i < arguments.length; i++) {
+		var selectObj = arguments[i];
+		selectObj.empty();
+		addDefaultOption(selectObj);
+	}
+}
+
+function addOptions(selectObj, options) {
+	$.each(options, function(index, val){
+		selectObj.append("<option value='" + val.id + "'>" + val.name + "</option>");
+	});	
+}
+
+</script>
 </body>
 </html>
