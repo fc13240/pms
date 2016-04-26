@@ -95,7 +95,7 @@
         <div class="row">
           <div class="col-xs-12">
 			<c:forEach items="${orders}" var="order">
-				<form action="<s:url value='/fee/exportFees.html'/>" method="get" target="feeExportFrame">
+				<form action="<s:url value='/fee/exportFees.html'/>" method="get" target="_blank">
 					<c:forEach items="${order.feeList}" var="fee" varStatus="status">
 						<input type="hidden" name="fees" value="${fee.feeId}">
 					</c:forEach>
@@ -257,7 +257,6 @@
 </div>
 <%@ include file="_js.jsp"%>
 </div>
-<iframe id="feeExportFrame" name="feeExportFrame" style="display:none;"></iframe>
 <script type="text/javascript">
 		function gotoPage() {
 			var pageNo = document.getElementById("page.pageNo").value;
