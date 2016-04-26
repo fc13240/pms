@@ -384,5 +384,13 @@
 	<select id="getAllNoticeType" resultType="NoticeType">
 		select notice_type_id as noticeTypeId,  notice_type_desc as noticeTypeDescription
 		  from notice_types
-	</select>		
+	</select>
+	
+	<update id="batchUpdateNoticesNoticePaperType">
+		update notices set paper_apply_type = #{noticePaperApplyType}
+		 where notice_id in 
+		<foreach item="noticeId" collection="noticeIdList" open="(" separator="," close=")">
+			#{noticeId}
+		</foreach>		 
+	</update>		
 </mapper>

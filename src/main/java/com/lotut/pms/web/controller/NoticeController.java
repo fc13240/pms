@@ -156,4 +156,9 @@ public class NoticeController {
 		model.addAttribute("paperApplyTypes", paperApplyTypes);
 	}
 	
+	@RequestMapping(path="/batchChangePaperType", method=RequestMethod.GET)
+	public String batchChangeNoticePaperType(@RequestParam("notices")List<Integer> noticeIdList, @RequestParam("paperApplyType")int paperApplyType) {
+		noticeService.batchUpdateNoticesNoticePaperType(noticeIdList, paperApplyType);
+		return "notice_list";
+	}
 }

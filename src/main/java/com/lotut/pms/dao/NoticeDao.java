@@ -37,4 +37,6 @@ public interface NoticeDao {
 	int searchUserNoticesCount(NoticeSearchCondition searchCondition);
 	
 	List<Notice> searchUserNoticesByPage(NoticeSearchCondition searchCondition);
+	
+	void batchUpdateNoticesNoticePaperType(List<Integer> noticeIdList, int noticePaperApplyType);
 }

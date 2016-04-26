@@ -308,7 +308,7 @@
 	                                <span class="input-group-btn" >
 										<a href="javascript:batchShare()"><button style="margin:8px;" type="button" class="btn btn-info btn-sm">批量分享</button></a>
 										<a href="javascript:batchGrabFees()"><button type="button" class="btn btn-purple btn-sm">批量缴费</button></a>
-										<a href="javascript:addPatent()"><button type="button" class="btn btn-purple btn-sm">增加专利</button></a>
+										<a href="javascript:addPatent()"><button style="margin:8px;" type="button" class="btn btn-purple btn-sm">增加专利</button></a>
 									</span> 
 	                                                    
                           </div>
