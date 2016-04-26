@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.lotut.pms.domain.AdminOrderSearchCondition;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.OrderItem;
 import com.lotut.pms.domain.OrderSearchCondition;
@@ -37,4 +38,8 @@ public interface OrderMapper {
 	int updateUserOrderStatus(@Param("orderId")long orderId);
 	
 	int updateUserOrderExpress(Map<String, String> expressInfo);
+	
+	List<Order> getAllNeedProcessOrdersBySearch(AdminOrderSearchCondition searchCondition);
+	
+	int getAllNeedProcessOrdersBySearchCount(AdminOrderSearchCondition searchCondition);
 }

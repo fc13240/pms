@@ -128,4 +128,9 @@ public class UserServiceImpl implements UserService {
 	public ContactAddress getContactAddressesById(int id) {
 		return userDao.getContactAddressesById(id);
 	}
+
+	@Override
+	public List<User> getAllUser() {
+		return userDao.getAllUser();
+	}
 }

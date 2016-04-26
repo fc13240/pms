@@ -3,6 +3,7 @@ package com.lotut.pms.service;
 import java.util.List;
 import java.util.Map;
 
+import com.lotut.pms.domain.AdminOrderSearchCondition;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.OrderSearchCondition;
@@ -39,4 +40,8 @@ public interface OrderService {
 	int updateUserOrderStatus(long orderId); 
 	
 	int updateUserOrderExpress(Map<String, String> expressInfo);
+	
+	List<Order> getAllNeedProcessOrdersBySearch(AdminOrderSearchCondition searchCondition);
+	
+	long getAllNeedProcessOrdersBySearchCount(AdminOrderSearchCondition searchCondition);
 }
