@@ -257,6 +257,7 @@
 </div>
 <%@ include file="_js.jsp"%>
 </div>
+<iframe name="exportFeeFrame" style="display:none;"></iframe>
 <script type="text/javascript">
 		function gotoPage() {
 			var pageNo = document.getElementById("page.pageNo").value;
@@ -297,6 +298,10 @@
 <script type="text/javascript">
 	$(function() {
 		formutil.setElementValue("#pageSizeSelect", ${page.pageSize});
+		var forms = $("form");
+		if (!/msie/i.test(navigator.userAgent)) {
+			forms.attr('target', "exportFeeFrame");
+		} 
 	});
 	
 	function setPageSize() {
