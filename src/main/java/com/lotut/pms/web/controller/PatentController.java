@@ -183,4 +183,17 @@ public class PatentController {
 		model.addAttribute("allPatentTypes", allPatentTypes);
 		model.addAttribute("allPatentStatus", allPatentStatus);
 	}
+	
+	@RequestMapping(path="/addPatentFrom", method=RequestMethod.GET)
+	public String addPatentFrom(Model model){
+		addPatentTypeAndStatusDataToModel(model);
+		return "addPatentFrom";
+	}
+	
+	@RequestMapping(path="/addPatent", method=RequestMethod.POST)
+	public String addPatent(@ModelAttribute("patent")Patent patent,Model model){
+		patentService.addPatent(patent);
+		return "addAddresses_success";
+	}
+	
 }

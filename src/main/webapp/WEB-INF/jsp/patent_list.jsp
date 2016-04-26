@@ -308,6 +308,7 @@
 	                                <span class="input-group-btn" >
 										<a href="javascript:batchShare()"><button style="margin:8px;" type="button" class="btn btn-info btn-sm">批量分享</button></a>
 										<a href="javascript:batchGrabFees()"><button type="button" class="btn btn-purple btn-sm">批量缴费</button></a>
+										<a href="javascript:addPatent()"><button type="button" class="btn btn-purple btn-sm">增加专利</button></a>
 									</span> 
 	                                                    
                           </div>
@@ -763,7 +764,11 @@
 		});		
 	}	
 </script>
-
+<script type="text/javascript">
+	function addPatent(){
+		window.open("<s:url value='/patent/addPatentFrom.html'/>");
+	}
+</script>
 <!-- ace scripts --> 
 <script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 
 <script src="<s:url value='/static/js/ace/elements.colorpicker.js'/>"></script> 

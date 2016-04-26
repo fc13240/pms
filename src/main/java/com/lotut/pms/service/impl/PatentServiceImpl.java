@@ -129,4 +129,9 @@ public class PatentServiceImpl implements PatentService {
 		// TODO Auto-generated method stub
 		patentDao.saveGoods(goodsDetail);
 	}
+
+	@Override
+	public void addPatent(Patent patent) {
+		patentDao.addPatent(patent);
+	}
 }

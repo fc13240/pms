@@ -116,13 +116,17 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 
 	@Override
 	public List<GoodsSecondColumn> getSecondColumn(int firstColumnId) {
-		// TODO Auto-generated method stub
 		return patentMapper.getSecondColumn(firstColumnId);
 	}
 
 	@Override
 	public void saveGoods(GoodsDetail goodsDetail) {
-		// TODO Auto-generated method stub
 		patentMapper.saveGoods(goodsDetail);
+	}
+
+	@Override
+	public void addPatent(Patent patent) {
+		patentMapper.addPatent(patent);
+		
 	}
 }
