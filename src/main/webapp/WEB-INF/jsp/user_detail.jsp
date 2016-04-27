@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>龙图腾专利</title>
+<title>个人信息</title>
 <%@ include file="_css.jsp" %>
 </head>
 <body>
@@ -32,45 +32,41 @@
 				</div>
                 <div style="height:30px;"></div>
 
-                <div class="row" style="margin-top:30px;margin-left:20px;">
-                    <div class="col-xs-12"> 
-                      <!-- PAGE CONTENT BEGINS -->
-                      <div class="row">
-                        <div class="col-xs-12">
-                
-							<div class="patent-detail-caption">个人信息</div>
-							<table class="table table-striped">
-								<tr>
-		                            <td class="f-tar td-w125"><label class="lab">真实姓名：</label></td>
-		                            <td class="ps-relative"><input class="ipt" name="truename" id="name"   value="${user.name}" maxlength="10">
-		                                <label><input class="radios" type="radio" name="sex" value="0"   checked />先生</label>
-		                                <label><input class="radios" type="radio" name="sex" value="1"   />女士</label>
-		                            </td>
-                        		</tr>
-								<tr>
-		                            <td class="f-tar td-w125"><label class="lab">电子邮件：</label></td>
-		                            <td> <input type="hidden" name="email_info"  value="1">
-		                            <input class="email"  id="email" type="text" value="${user.email}" maxlength="25" ></td>
-                        		</tr>
-								<tr>
-		                            <td class="f-tar td-w125"><label class="lab">手机或电话号：</label></td>
-		                            <td> <input type="hidden" name="phone_info"  value="2">
-		                            <input class="email"  id="phone" type="text" value="${user.phone}" maxlength="15" ></td>
-                        		</tr>
-                        		<tr>
-		                            <td class="f-tar td-w125"></td>
-		                            <td><input class="orange-red-btn" name="dosubmit" id="dosubmit" value="保&nbsp;&nbsp;存" type="button" onclick="javascript:updateDetail()"></td>
-		                            
-                        		</tr>													
-							</table>
-                        </div>
-                        <!-- /.span --> 
-                      </div>
-                      <!-- /.row --> 
+
+
+				<div class="t-third">
+				  <div class="col-xs-12">
+				    <!-- PAGE CONTENT BEGINS -->
+				    <div class="row">
+				      <div class="col-xs-12">
+				        <form action="<s:url value='/user/addContactAddress.html'/>" method="post">
+				          <se:csrfInput/>
+				          <div style="margin-bottom:10px;"> 真实姓名：
+				            <input style="height:20px;" class="ipt" name="truename" id="name"   value="${user.name}" maxlength="10">
+				          </div>
+				          <div style="margin-bottom:10px;"> 电子邮件：
+				            <input style="height:20px;" class="email"  id="email" type="text" value="${user.email}" maxlength="25" >
+				          </div>
+				          <div style="margin-bottom:10px;"> 手机或固话：
+				          <input type="hidden" name="phone_info"  value="2">
+				           <input style="height:20px;" id="phone" type="text" value="${user.phone}" maxlength="15" >
+				          </div>
+				          <div style="margin-bottom:10px;"> 详细地址:
+				            <input style="height:20px;"  name="dosubmit" id="dosubmit" value="保&nbsp;&nbsp;存" type="button" onclick="javascript:updateDetail()">
+				          </div>
+				          <input type="submit" value="保存"/>
+				        </form>
+				        <!-- /.span -->
+				      </div>
+				      <!-- /.row -->
+				    </div>
+				  </div>
+				</div>
+
+
+
                       
-                    </div>
-                </div>
-                             
+              
                 
 			</div>
          

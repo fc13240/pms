@@ -5,72 +5,71 @@
 <%@ taglib uri="fmt" prefix="fmt" %>
 <%@ taglib uri="spring-form" prefix="form" %>
 <!DOCTYPE html>
-<html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>出售专利</title>
 <%@ include file="_css.jsp" %>
-
 </head>
-<body class="no-skin">
-
-<%@ include file="_nav.jsp"%>
-
-<!-- /section:basics/navbar.layout -->
-<div class="main-container" id="main-container">
-
-  <!-- sidebar -->
-	<%@ include file="_main_menu.jsp"%>
-  <!-- sidebar -->
-  <div class="main-content">
-    <div class="main-content-inner">
-      <!-- #section:basics/content.breadcrumbs -->
-      <div class="breadcrumbs" id="breadcrumbs">
-        <ul class="breadcrumb">
-          <li> <i class="ace-icon fa fa-home home-icon"></i> <a href="#">主页</a> </li>
-          <li> <a href="#">出售专利</a> </li>
-        </ul>
-
-      </div>
-
-      <div class="page-content">
+<body>
+<%@ include file="_top.jsp" %>
  
-        <div class="row">
-          <div class="col-xs-12">
- 
-			<form action="<s:url value='/patent/addGoods.html'/>" method="post">
-			<se:csrfInput/>
-			<div style="margin-top:15px;">专利名  ：${patent.name}</div>
-			<input type="hidden"  name="id" value="${patentno}"/>
-			<div style="margin-top:15px;"> 
-			商品类型：
-								<select name="FirstColumn" id="first_column" onchange="loadSecoundColumns()" required>
-									<option value=''>请选择</option>
-									<c:forEach items="${FirstColumns}" var="FirstColumn">
-									<option value="${FirstColumn.id}">${FirstColumn.name}</option>
-									</c:forEach>
-								</select>
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<select name="SecondColumn" id="second_column"  required>
-									<option value=''>请选择</option>
-								</select>				
-			</div> 
-			<div style="margin-top:15px;">     
-			价格：<input type="text" style="height:25px;width:80px;" name="price" id="price"/>
-			</div> 
-			<div style="margin-top:15px;">
-			<button style="margin:8px;" type="submit" class="btn btn-info btn-sm">出售</button>          
-			</div>     
-			</form>  
- 
-          </div>
+<div style="min-width:1300px;height:1500px; background:#F3F3F5;">
+	<div style="float:left;width:5%;">
+		<%@ include file="_left_nav.jsp" %>
+	</div>
+	<div style="float:left;width:95%;">
+
+        <div class="center-cconcenct">
+        	<!-- 代码 开始 -->
+            <div id="change-t"><img src="<s:url value='/temp/images/tab.png'/>"  class="cgh"/></div>
+			<div style="float:left;width:9%;">
+				<%@ include file="_left_nav2.jsp" %>
+			</div>
+			<div class="con-list" style="float:left;width:91%;">
+				<div class="t-ti">
+					<hr class="t-hr">
+					<span style="font-size: 16px;font-weight: 300;line-height: 24px;">专利概况</span>
+				</div>
+                <div style="height:30px;"></div>
+
+		        <div class="row">
+		          <div class="col-xs-12">
+		 
+					<form action="<s:url value='/patent/addGoods.html'/>" method="post">
+					<se:csrfInput/>
+					<div style="margin-top:15px;">专利名  ：${patent.name}</div>
+					<input type="hidden"  name="id" value="${patentno}"/>
+					<div style="margin-top:15px;"> 
+					商品类型：
+										<select name="FirstColumn" id="first_column" onchange="loadSecoundColumns()" required>
+											<option value=''>请选择</option>
+											<c:forEach items="${FirstColumns}" var="FirstColumn">
+											<option value="${FirstColumn.id}">${FirstColumn.name}</option>
+											</c:forEach>
+										</select>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<select name="SecondColumn" id="second_column"  required>
+											<option value=''>请选择</option>
+										</select>				
+					</div> 
+					<div style="margin-top:15px;">     
+					价格：<input type="text" style="height:25px;width:80px;" name="price" id="price"/>
+					</div> 
+					<div style="margin-top:15px;">
+					<button style="margin:8px;" type="submit" class="btn btn-info btn-sm">出售</button>          
+					</div>     
+					</form>  
+		 
+		          </div>
+		        </div>            
+                
+			</div>
+         
         </div>
-
-		<%@ include file="_footer.jsp"%>
-        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"> <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i> </a> </div>
+		<!--container end-->
     </div>
-  </div>
 </div>
-<%@ include file="_js.jsp"%>
+
 <script type="text/javascript">
 function loadSecoundColumns() {
 	var first_column = $("#first_column").val();
@@ -110,6 +109,26 @@ function addOptions(selectObj, options) {
 	});	
 }
 
+</script>
+<script>
+	$(document).ready(function(){
+	
+		$("img[class=cgh]").click(function(){
+			var ol = $('ol[class="hashTabber-nav hashTabber-sandstone"]')[0];
+			var ols =$('.con-list')[0];
+			if(ol.style.display=="inline-block"||ol.style.display==""){
+					this.style.marginLeft="0px";
+					this.src='<s:url value='/temp/images/tabs.png'/>';
+					ol.style.display="none";
+					ols.style.width="97%";
+				}else{
+					ol.style.display="inline-block";
+					this.style.marginLeft="108px";
+					this.src='<s:url value='/temp/images/tab.png'/>';
+					ols.style.width="88%";
+				}
+		});
+	});
 </script>
 </body>
 </html>

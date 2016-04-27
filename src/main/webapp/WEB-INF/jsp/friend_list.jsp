@@ -31,23 +31,23 @@
 					<span style="font-size: 16px;font-weight: 300;line-height: 24px;">好友列表</span>
 				</div>
                 <div style="height:30px;"></div>
+                     
+				<div class="t-third">
+					    <form action="<s:url value='/friend/searchUserFriends.html'/>" method="GET"  role="search">
+					      <div class="form-group">
+					        <input type="text" id="form-field-1" style="height:25px;width:450px;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" />
+					        <button  type="submit" class="t-btn4">查询</button>
+					      </div>
+					    </form>
 
-				<div class="row" style="margin-top:30px;margin-left:20px;width:500px;">
-
-				    <!-- PAGE CONTENT BEGINS -->
-<%-- 				    <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" > <a id="download" href="<s:url value='/notice/preview.html'/>?notice=${notice.noticeId}"> --%>
-<%-- 				      <c:out value="${notice.name}"/> --%>
-<%-- 				      </a> <a id="download" href="<s:url value='/friend/searchForm.html'/>"> --%>
-<!-- 				      <button style="margin:8px;" type="button" class="btn btn-info btn-sm">添加好友</button> -->
-<%-- 				      </a> <a href="<s:url value='/friend/request/list.html'/>">> --%>
-<!-- 				      <button style="margin:8px;" type="button" class="btn btn-purple btn-sm">好友请求处理</button> -->
-<%-- 				      </a> </span> </div> --%>
 				    <table id="simple-table" class="table table-striped table-bordered table-hover">
 				      <thead>
 				        <tr class="simple_bag">
 				          <th>序号</th>
 				          <th>用户名</th>
 				          <th>姓名</th>
+				          <th>邮箱</th>
+						  <th>电话</th>
 				          <th>操作</th>
 				        </tr>
 				      </thead>
@@ -57,13 +57,22 @@
 				            <td>${status.count}</td>
 				            <td><c:out value="${friend.username}"/></td>
 				            <td><c:out value="${friend.name}"/></td>
+							<td><c:out value="${friend.email}"/></td>
+							<td><c:out value="${friend.phone}"/></td>
 				            <td><a  href="<s:url value='/friend/delete/'/><c:out value='${friend.userId}.html'/>">删除好友</a></td>
 				          </tr>
 				        </c:forEach>
 				      </tbody>
 				    </table>
-				</div>               
+		
+ 
+                            	
+                </div>          
                 
+                
+                
+                
+                <!--  -->
 			</div>
          
         </div>

@@ -175,9 +175,9 @@
 							<th width="90px">纸质申请</th>
 							<th>期限</th>
 							<th>通知状态</th>
-							<th>预览</th>
+<!-- 							<th>预览</th> -->
 							<th>下载</th>
-							<th>操作</th>	
+							<th width="60px">操作</th>	
 						  </tr>
 						</thead>
 						<tbody>
@@ -225,15 +225,21 @@
 								</select>
 							</label>
 							</td>
-							<td><a href="javascript: void;" onclick="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')">
-								<img src="<s:url value='/temp/images/look.png'/>" />
-								</a>
-							</td>
-							<td><a id="download" href="javascript: void;" onclick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}')">
+<%-- 							<td><a href="javascript: void;" onclick="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')"> --%>
+<%-- 								<img src="<s:url value='/temp/images/look.png'/>" /> --%>
+<!-- 								</a> -->
+<!-- 							</td> -->
+							<td><a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}">
 								<img src="<s:url value='/temp/images/download.png'/>" />
 								</a>
 							</td>
-							<td>申登年<img src="<s:url value='/temp/images/dpao.png'/>"/></td>
+							<td>
+							
+							<a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
+							<button class="t-btn3">分享</button>
+							</a>
+							
+							</td>
 							</tr>
 						  </c:forEach>
 						</tbody>
@@ -312,14 +318,315 @@
 
 <script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 
+<script type="text/javascript">
+function changePaperApplyType(notice, selectElement) {
+	paperApplyType = 1;
+	for (var i = 0; i < selectElement.length; i++) {
+		if (selectElement.options[i].selected == true) {
+			paperApplyType = selectElement.options[i].value;
+		}
+	}		
 
+	$.ajax({
+		url: "<s:url value='/notice/changePaperType.html'/>?notice=" + notice + "&paperApplyType=" + paperApplyType,
+		type: 'get', 
+		success: function(data) {
+			if (data == "no-permission") {
+				$("<div>共享人只能把[纸质申请]修改为[申请纸件]</div>").dialog({
+					modal: true,
+					buttons: {
+						Ok: function() {
+							$(this).dialog("close");
+						}
+					}	
+				});		
+
+				return;
+			}
+			
+			$("<div>操作成功</div>").dialog({
+				modal: true,
+				buttons: {
+					Ok: function() {
+						$(this).dialog("close");
+					}
+				}	
+			});
+			
+		}
+	});			
+}
+
+function processNotice(notice, selectElement) {
+	processStatus = 1;
+	for (var i = 0; i < selectElement.length; i++) {
+		if (selectElement.options[i].selected == true) {
+			processStatus = selectElement.options[i].value;
+		}
+	}		
+
+	$.ajax({
+		url: "<s:url value='/notice/processNotice.html'/>?notice=" + notice + "&processStatus=" + processStatus,
+		type: 'get', 
+		success: function(data) {
+			$("<div>操作成功</div>").dialog({
+				modal: true,
+				buttons: {
+					Ok: function() {
+						$(this).dialog("close");
+					}
+				}	
+			});
+		}
+	});			
+}
+</script>
 
 <script type="text/javascript">
 
 // 通知书处理状态
 function batchProcessNotice(processStatus) {
+		var noticeSelected = false;
+		var notices = []
+
+		var noticeCheckboxes = $('tr td input.check-item');
+		for (var i = 0; i < noticeCheckboxes.length; i++) {
+			if (noticeCheckboxes[i].checked) {
+				noticeSelected = true;
+				break;
+			}
+		}
+		if (!noticeSelected) {
+			$("<div>请选择通知书</div>").dialog({
+				modal: true,
+				buttons: {
+					Ok: function() {
+						$(this).dialog("close");
+					}
+				}	
+			});	
+			return;
+		}
+			
+		for (var i = 0; i < noticeCheckboxes.length; i++) {
+			if (noticeCheckboxes[i].checked) {
+				notices.push(noticeCheckboxes[i].getAttribute("notice"));
+			}
+		}	
+		$.ajax({
+			url: "<s:url value='/notice/processNotices.html'/>?notices=" + notices + "&processStatus=" + processStatus, 
+			type: 'get', 
+			success: function() {
+				$("<div>操作成功</div>").dialog({
+					modal: true,
+					buttons: {
+						Ok: function() {
+							$(this).dialog("close");
+							location.reload();
+						}
+					}	
+				});
+			}
+		});			
+		
+	}
+	
+	
+	
+	function processNotice(notice, selectElement) {
+	
+		processStatus = 1;
+		for (var i = 0; i < selectElement.length; i++) {
+			if (selectElement.options[i].selected == true) {
+				processStatus = selectElement.options[i].value;
+			}
+		}		
+		$.ajax({
+				url: "<s:url value='/notice/processNotices.html'/>?notices=" + notice + "&processStatus=" + processStatus,
+				type: 'get', 
+				success: function(data) {
+					$("<div>操作成功</div>").dialog({
+						modal: true,
+						buttons: {
+							Ok: function() {
+							$(this).dialog("close");
+							}
+						}	
+					});
+				}
+			});
+	}	
+			jQuery(function($) {
+				//initiate dataTables plugin
+
+				//And for the first simple table, which doesn't have TableTools or dataTables
+				//select/deselect all rows according to table header checkbox
+				var active_class = 'active';
+				$('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
+					var th_checked = this.checked;//checkbox inside "TH" table header
+					
+					$(this).closest('table').find('tbody > tr').each(function(){
+						var row = this;
+						if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
+						else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
+					});
+				});
+				
+				//select/deselect a row when the checkbox is checked/unchecked
+				$('#simple-table').on('click', 'td input[type=checkbox]' , function(){
+					var $row = $(this).closest('tr');
+					if(this.checked) $row.addClass(active_class);
+					else $row.removeClass(active_class);
+				});
+			
+				
+			
+				/********************************/
+				//add tooltip for small view action buttons in dropdown menu
+				$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+				
+				//tooltip placement on right or left
+				function tooltip_placement(context, source) {
+					var $source = $(source);
+					var $parent = $source.closest('table')
+					var off1 = $parent.offset();
+					var w1 = $parent.width();
+			
+					var off2 = $source.offset();
+					//var w2 = $source.width();
+			
+					if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+					return 'left';
+				}
+				
+			
+			})
+		</script> 
+
+<script type="text/javascript">
+	$(function(){
+		formutil.clickAllCheckbox('tr th input.check-item', 'tr td input.check-item');
+		formutil.clickItemCheckbox('tr th input.check-item', 'tr td input.check-item');
+	});
+	
+	function batchShare() {
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+		var uniquePatentNos = [];
+		if (!patentSelected) {
+			//formutil.alertMessage('请选择专利');
+			formutil.alertMessage('请选择专利');
+			return;
+		}
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
+		for (var i = 0; i < patents_checked.length; i++) {
+			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+				uniquePatentNos.push(patents_checked[i]);
+			}
+		}		
+		var patents = uniquePatentNos.join(",");
+				
+		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
+	}
+	
+	
+	function batchGrabFees(){
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+		var uniquePatentNos = [];
+		if (!patentSelected) {
+			formutil.alertMessage('请选择专利');
+			return;
+		}
+		
+		
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
+		for (var i = 0; i < patents_checked.length; i++) {
+			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+				uniquePatentNos.push(patents_checked[i]);
+			}
+		}		
+		var patents = uniquePatentNos.join(",");		
+		window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patents);		
+		
+	}	
+	function batchFee() {
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+		
+		if (!patentSelected) {
+			formutil.alertMessage('请选择专利');
+			return;
+		}
+			
+		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
+		
+		 window.open("<s:url value='/patent/showFriends.html'/>?patentNos=" + patentNos);
+	}	
+	
+	function getFeeInfo(patentId) {
+		window.open("/fee/list?patentId=" + patentId);
+	}
+	
+	
+	function gotoPage() {
+		var pageNo = document.getElementById("page.pageNo").value;
+		
+		if(isNaN(pageNo)){
+			alert("请输入数值");
+			return;
+		}
+		
+		if(pageNo==""){
+			alert("请输入数值")
+			return;
+		}
+		
+		pageNo=parseInt(pageNo);
+		
+		if(pageNo<1 || pageNo > parseInt("${page.totalPages}")){
+			alert("只能输入1-${page.totalPages}之间的数值");
+			return;
+		}
+		var url = "<s:url value='/notice/list.html'/>?currentPage=" + pageNo;
+		
+		<c:if test="${searchCondition != null}">
+				url = "<s:url value='/notice/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		</c:if>
+		
+		location.href = url
+	}
+	
+	function gotoPageForEnter(event) {
+		var e = event ? event : window.event;
+				
+		if(event.keyCode == 13) {
+			gotoPage();
+		}
+	}
+
+	
+</script>
+
+<script type="text/javascript">
+	$(function() {
+		formutil.setElementValue("#pageSizeSelect", ${page.pageSize});
+	});
+	
+	function setPageSize() {
+		var pageSize = $("#pageSizeSelect").val();
+		
+		$.ajax({
+			url: "<s:url value='/user/setPageSize.html'/>?pageSize=" + pageSize, 
+			type: 'get', 
+			success: function() {
+				location.reload();
+			}
+		});		
+	}	
+</script>
+<script type="text/javascript">
+function batchChangeNoticePaperType(paperApplyType) {
 	var noticeSelected = false;
 	var notices = []
+
 	var noticeCheckboxes = $('tr td input.check-item');
 	for (var i = 0; i < noticeCheckboxes.length; i++) {
 		if (noticeCheckboxes[i].checked) {
@@ -328,23 +635,24 @@ function batchProcessNotice(processStatus) {
 		}
 	}
 	if (!noticeSelected) {
-   		$("<div>请选择通知书</div>").dialog({
-   			modal: true,
-   			buttons: {
-   				Ok: function() {
-   					$(this).dialog("close");
-   				}
-   			}
-   		});
+		$("<div>请选择通知书</div>").dialog({
+			modal: true,
+			buttons: {
+				Ok: function() {
+					$(this).dialog("close");
+				}
+			}	
+		});	
 		return;
 	}
+		
 	for (var i = 0; i < noticeCheckboxes.length; i++) {
 		if (noticeCheckboxes[i].checked) {
 			notices.push(noticeCheckboxes[i].getAttribute("notice"));
 		}
 	}	
 	$.ajax({
-		url: "/pms/notice/processNotices.html?notices=" + notices + "&processStatus=" + processStatus, 
+		url: "<s:url value='/notice/batchChangePaperType.html'/>?notices=" + notices + "&paperApplyType=" + paperApplyType, 
 		type: 'get', 
 		success: function() {
 			$("<div>操作成功</div>").dialog({
@@ -358,141 +666,8 @@ function batchProcessNotice(processStatus) {
 			});
 		}
 	});			
-		
+	
 }
-			
-</script> 
-
-
-
-
-<script type="text/javascript">
-	$(function(){
-		formutil.clickAllCheckbox('tr th input.check-item', 'tr td input.check-item');
-		formutil.clickItemCheckbox('tr th input.check-item', 'tr td input.check-item');
-	});
-	
-	function batchShare() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		var uniquePatentNos = []
-		if (!patentSelected) {
-			$("<div>请选择专利</div>").dialog({
-				modal: true,
-				buttons: {
-					Ok: function() {
-						$(this).dialog("close");
-						location.reload();
-					}
-				}	
-			});
-			return;
-		}
-		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
-		for (var i = 0; i < patents_checked.length; i++) {
-			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
-				uniquePatentNos.push(patents_checked[i]);
-			}
-		}		
-		var patents = uniquePatentNos.join(",");		
-		location.href = "/pms/patent/showFriends.html?patents=" + patents;
-	}
-	
-	function batchFee() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		
-		if (!patentSelected) {
-			$("<div>请选择专利</div>").dialog({
-				modal: true,
-				buttons: {
-					Ok: function() {
-						$(this).dialog("close");
-						location.reload();
-					}
-				}	
-			});
-			return;
-		}
-			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentId');
-		
-		 window.open("<s:url value='/patent/showFriends.html'/>?patentNos=" + patentNos);
-	}	
-	
-	
-	
-	function batchGrabFees(){
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		
-		if (!patentSelected) {
-			$("<div>请选择专利</div>").dialog({
-				modal: true,
-				buttons: {
-					Ok: function() {
-						$(this).dialog("close");
-						location.reload();
-					}
-				}	
-			});
-			return;
-		}
-			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
-		
-		 window.open("/pms/fee/batchGrabFees.html?patents=" + patentNos);		
-		
-	}	
-	
-	
-
-
-	
-	function gotoPage() {
-		var pageNo = document.getElementById("page.pageNo").value;
-		
-		if (isNaN(pageNo)) {
-			alert("请输入数值");
-			return;
-		}
-		
-		if(pageNo==""){
-			alert("请输入数值")
-			return;
-		}
-		
-		pageNo = parseInt(pageNo);
-		
-		if (pageNo < 1 || pageNo > parseInt("670")) {
-			alert("只能输入1-670之间的数值");
-			return;
-		}
-		
-		var url = "/pms/patent/list.html?currentPage=" + pageNo;
-		
-		
-		
-		
-		location.href = url
-		
-	}
-	
-	function gotoPageForEnter(event) {
-		var e = event ? event : window.event;
-				
-		if(event.keyCode == 13) {
-			gotoPage();
-		}
-	}
-	
-	function processPageEnter(event, pageInput) {
-		var keyCode = event.keyCode ? event.keyCode 
-                : event.which ? event.which 
-                        : event.charCode;
-		var isEnterKey = keyCode == 13;
-		if (isEnterKey) {
-			location.href = "/pms/patent/search.html?page.currentPage=" + pageInput.value +"&"+"";
-			$(pageInput).unbind('keydown');
-		}
-	}
 </script>
     <%@ include file="_footer_js.jsp" %>
 </body>

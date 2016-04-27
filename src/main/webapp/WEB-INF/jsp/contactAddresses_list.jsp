@@ -31,8 +31,7 @@
 					<span style="font-size: 16px;font-weight: 300;line-height: 24px;">联系地址</span>
 				</div>
                 <div style="height:30px;"></div>
-		        <div class="row">
-		          <div class="col-xs-12">
+					<div class="t-third">
 		          	<form>
 		          		<table id="simple-table" class="table table-striped table-bordered table-hover">
 		          			<thead>
@@ -55,10 +54,11 @@
 									<td>${address.phone}</td>
 									<td>
 		                              	<a href="<s:url value='/user/updateUserContactAddressesFrom.html'/>?id=<c:out value='${address.id}'/>">
-		                              	<button type="button" class="btn btn-info btn-sm">编辑</button> 
+		                              	编辑
 		                              	</a>
 		           						<a href="<s:url value='/user/deleteUserContactAddresses.html'/>?id=<c:out value='${address.id}'/>">
-		           						<button type="button" class="btn btn-purple btn-sm">删除</button>
+<!-- 		           						<button class="t-btn4">删除</button> -->
+										删除
 		           						</a>
 		           						<c:if test="${!address.defaultAddress}">
 		           						<a style="margin-left:30px;" href="<s:url value='/user/defaultUserContactAddresses.html'/>?id=<c:out value='${address.id}'/>">
@@ -75,8 +75,7 @@
 		          		</table>
 		          		<input type="button" onclick="javascript:addAddress()" value="增加地址">
 		          	</form>
-		          </div>
-		        </div>
+					</div>
             
                 
 			</div>
