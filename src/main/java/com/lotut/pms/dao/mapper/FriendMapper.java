@@ -20,4 +20,6 @@ public interface FriendMapper {
 	List<User> getFriendRequests(@Param("userId")int userId);
 	
 	void processFriendRequest(@Param("processUserId")int processUserId, @Param("requestUserId")int requestUserId, @Param("processStatus")int processStatus);
+	
+	List<User> searchUserFriendsByUser(@Param("userId")int userId, @Param("keyword")String keyword);
 }

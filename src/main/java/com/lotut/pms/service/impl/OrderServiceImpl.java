@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lotut.pms.dao.FeeDao;
 import com.lotut.pms.dao.OrderDao;
+import com.lotut.pms.domain.AdminOrderSearchCondition;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.OrderItem;
@@ -74,9 +75,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int deleteUserOrders(long orderId) {
-		orderDao.deleteUserOrders(orderId);
-		return 1;
+	public void deleteUserOrder(long orderId, int userId) {
+		orderDao.deleteUserOrder(orderId, userId);
 	}
 	
 	@Override
@@ -139,5 +139,15 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public int updateUserOrderExpress(Map<String, String> expressInfo) {
 		return orderDao.updateUserOrderExpress(expressInfo);
+	}
+
+	@Override
+	public List<Order> getAllNeedProcessOrdersBySearch(AdminOrderSearchCondition searchCondition) {
+		return orderDao.getAllNeedProcessOrdersBySearch(searchCondition);
+	}
+
+	@Override
+	public long getAllNeedProcessOrdersBySearchCount(AdminOrderSearchCondition searchCondition) {
+		return orderDao.getAllNeedProcessOrdersBySearchCount(searchCondition);
 	}
 }

@@ -190,7 +190,7 @@
 										<se:csrfInput/>
 										<label class="block clearfix">
 												<span class="block input-icon input-icon-right" style="font-size:20px;">
-												保存地址成功！
+												操作成功！
 												</span>
 										</label>	
 										</form>								

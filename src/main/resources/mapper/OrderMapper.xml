@@ -75,9 +75,9 @@
 <!-- 		order by o.create_time desc -->
 <!-- 	</select> -->
 	
-	<update id="deleteUserOrders" parameterType="long">
-		update orders set order_status=3 where order_id=#{orderId,javaType=long,jdbcType=BIGINT}
-	</update>
+	<delete id="deleteUserOrder">
+		delete from orders where order_id=#{orderId} and user = #{userId}
+	</delete>
 	
 	<select id="getUserOrdersCount" resultType="int">
 		select count(*) from orders where user = #{userId}
@@ -246,5 +246,82 @@
 		UPDATE orders SET express_company=#{expressCompany},express_no=#{expressNo},send_time=#{startDispatchDate},
 				courier=#{courier},courier_phone=#{courierPhone}
 		WHERE order_id=#{orderId}
-	</update>	
+	</update>
+	
+	
+	
+	<select id="getAllNeedProcessOrdersBySearch" parameterType="AdminOrderSearchCondition" resultMap="OrderMap">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+		SELECT od.create_time, od.totalAmount, od.order_id, od.address_id, od.receiver, 
+				od.order_status_id, od.status_description, p.patent_id, p.app_no, p.patent_name, 
+				p.app_person, ps.patent_status_id, ps.patent_status_desc, f.fee_id, f.deadline,
+				f.amount, f.fee_type, f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc,
+				od.user_id, od.username, od.name
+  		FROM 
+				(SELECT o.create_time, o.amount totalAmount, o.order_id, ca.id AS address_id, ca.receiver, os.order_status_id, os.status_description,
+					u.user_id, u.username, u.name
+				  FROM orders o JOIN order_status os ON o.order_status = os.order_status_id
+					LEFT JOIN contact_addresses ca ON o.post_address = ca.id
+					join users u on o.user = u.user_id
+				 WHERE o.order_status in (2, 4)
+				<if test="userId != null">
+			 		and u.user_id = #{userId}
+			 	</if>
+			 	<if test="orderStatus != null">
+			 		and o.order_status = #{orderStatus}
+			 	</if>	
+			 	<if test="startAppDate != null">
+			 		and o.create_time >= #{startAppDate}
+			 	</if>	
+			 	<if test="endAppDate != null">
+			 		<![CDATA[ and DATE_FORMAT(o.create_time, '%Y-%m-%d') <= #{endAppDate} ]]>
+			 	</if>	
+			 	<if test="keyword != null">
+					and (o.order_id like #{keyword_pattern})
+				</if>
+				 ORDER BY o.create_time desc
+				limit #{page.startIndex}, #{page.pageSize}) od
+			  JOIN order_items oi ON od.order_id = oi.order_id
+			  JOIN fees f ON f.fee_id = oi.fee_id
+			  JOIN patents p ON f.patent = p.patent_id
+			  JOIN patent_status ps ON p.patent_status = ps.patent_status_id
+			  JOIN fee_payment_status fs ON f.fee_payment_status = fs.fee_payment_status_id	
+	</select>
+	
+	<select id="getAllNeedProcessOrdersBySearchCount"  resultType="int">
+		<if test="keyword != null">
+			<bind name="keyword_order" value="'%' + keyword + '%'" />
+		</if>	
+		SELECT count(*)
+  		FROM 
+				(SELECT o.create_time, o.amount totalAmount, o.order_id, ca.id AS address_id, ca.receiver, os.order_status_id, os.status_description,
+					u.user_id, u.username, u.name
+				  FROM orders o JOIN order_status os ON o.order_status = os.order_status_id
+					LEFT JOIN contact_addresses ca ON o.post_address = ca.id
+					join users u on o.user = u.user_id
+				 WHERE o.order_status in (2, 4)
+				<if test="userId != null">
+			 		and u.user_id = #{userId}
+			 	</if>
+			 	<if test="orderStatus != null">
+			 		and o.order_status = #{orderStatus}
+			 	</if>	
+			 	<if test="startAppDate != null">
+			 		and o.create_time >= #{startAppDate}
+			 	</if>	
+			 	<if test="endAppDate != null">
+			 		<![CDATA[ and DATE_FORMAT(o.create_time, '%Y-%m-%d') <= #{endAppDate} ]]>
+			 	</if>	
+			 	<if test="keyword != null">
+					and (o.order_id like #{keyword_order})
+				</if>
+				 ORDER BY o.create_time desc) od
+			  JOIN order_items oi ON od.order_id = oi.order_id
+			  JOIN fees f ON f.fee_id = oi.fee_id
+			  JOIN patents p ON f.patent = p.patent_id
+			  JOIN patent_status ps ON p.patent_status = ps.patent_status_id
+			  JOIN fee_payment_status fs ON f.fee_payment_status = fs.fee_payment_status_id	
+	</select>	
 </mapper>

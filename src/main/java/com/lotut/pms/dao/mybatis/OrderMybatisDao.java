@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.OrderDao;
 import com.lotut.pms.dao.mapper.OrderMapper;
+import com.lotut.pms.domain.AdminOrderSearchCondition;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.OrderItem;
 import com.lotut.pms.domain.OrderSearchCondition;
@@ -56,8 +57,8 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	}	
 
 	@Override
-	public void deleteUserOrders(long orderId) {
-		orderMapper.deleteUserOrders(orderId);
+	public void deleteUserOrder(long orderId, int userId) {
+		orderMapper.deleteUserOrder(orderId, userId);
 	}
 
 	@Override
@@ -100,5 +101,17 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	public int updateUserOrderExpress(Map<String, String> expressInfo) {
 		orderMapper.updateUserOrderExpress(expressInfo);
 		return 1;
+	}
+
+	@Override
+	public List<Order> getAllNeedProcessOrdersBySearch(AdminOrderSearchCondition searchCondition) {
+		// TODO Auto-generated method stub
+		return orderMapper.getAllNeedProcessOrdersBySearch(searchCondition);
+	}
+
+	@Override
+	public int getAllNeedProcessOrdersBySearchCount(AdminOrderSearchCondition searchCondition) {
+		// TODO Auto-generated method stub
+		return orderMapper.getAllNeedProcessOrdersBySearchCount(searchCondition);
 	}
 }

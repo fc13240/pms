@@ -43,4 +43,6 @@ public interface PatentService {
 	public List<GoodsSecondColumn> getSecondColumn(int firstColumnId);
 
 	public void saveGoods(GoodsDetail goodsDetail);
+	
+	 void addPatent(Patent patent);
 }

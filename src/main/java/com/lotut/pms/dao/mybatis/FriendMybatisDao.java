@@ -55,4 +55,9 @@ public class FriendMybatisDao extends SqlSessionDaoSupport implements FriendDao 
 		this.friendMapper = friendMapper;
 	}
 
+	@Override
+	public List<User> searchUserFriendsByUser(int userId, String keyword) {
+		return friendMapper.searchUserFriendsByUser(userId, keyword);
+	}
+
 }

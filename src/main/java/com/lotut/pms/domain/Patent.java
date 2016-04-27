@@ -4,11 +4,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 public class Patent {
 	private long patentId;
 	private String appNo;
 	private String name;
 	private PatentType patentType;
+	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date appDate;
 	private String appPerson;
 	private String inventPerson;

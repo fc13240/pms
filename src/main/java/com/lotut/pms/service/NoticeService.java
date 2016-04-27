@@ -46,4 +46,6 @@ public interface NoticeService {
 	public long searchUserNoticesCount(NoticeSearchCondition searchCondition);
 	
 	List<Notice> searchUserNoticesWithPage(NoticeSearchCondition searchCondition);
+	
+	void batchUpdateNoticesNoticePaperType(List<Integer> noticeIdList, int noticePaperApplyType);
 }

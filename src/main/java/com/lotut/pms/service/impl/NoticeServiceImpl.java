@@ -186,4 +186,11 @@ public class NoticeServiceImpl implements NoticeService {
 		userPatents.add(userPatentMap);
 		sharePatentDao.insertUserPatents(userPatents);
 	}
+
+	@Override
+	@Transactional
+	public void batchUpdateNoticesNoticePaperType(List<Integer> noticeIdList, int noticePaperApplyType) {
+		noticeDao.batchUpdateNoticesNoticePaperType(noticeIdList, noticePaperApplyType);
+		
+	}
 }

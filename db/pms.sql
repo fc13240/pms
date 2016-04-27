@@ -307,7 +307,7 @@ create table if not exists order_items (
 	order_id bigint not null,
 	fee_id bigint not null,
 	UNIQUE KEY uk_order_items_order_fee (order_id, fee_id),
-	constraint fk_order_items_order foreign key(order_id) references orders(order_id),
+	constraint fk_order_items_order foreign key(order_id) references orders(order_id) on delete cascade,
 	constraint fk_order_items_fee foreign key(fee_id) references fees(fee_id)
 );
 

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lotut.pms.domain.AdminOrderSearchCondition;
 import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Order;
@@ -89,6 +90,7 @@ public class OrderController {
 			page.setTotalRecords(totalCount);
 			List<Order> orders = orderService.getAllNeedProcessOrders(page);
 			model.addAttribute("orders", orders);
+			statusDataToModel(model);
 			model.addAttribute("page",page);
 			statusDataToModel(model);
 			return "all_order_list";
@@ -97,6 +99,7 @@ public class OrderController {
 			page.setTotalRecords(totalCount);
 			List<Order> orders = orderService.getUserOrders(page);
 			model.addAttribute("orders", orders);
+			statusDataToModel(model);
 			model.addAttribute("page",page);
 			statusDataToModel(model);
 			return "order_list";
@@ -135,9 +138,10 @@ public class OrderController {
 		if (page.getCurrentPage() < 1) {
 			page.setCurrentPage(1);
 		}
-		orderService.deleteUserOrders(orderId);
+		
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
+		orderService.deleteUserOrder(orderId, userId);
 		int totalCount=(int)orderService.getUserOrdersCount(userId);
 		page.setTotalRecords(totalCount);
 		List<Order> orders = orderService.getUserOrders(page);
@@ -147,6 +151,8 @@ public class OrderController {
 	}
 	
 	private void statusDataToModel(Model model) {
+		List<User> allUser=userService.getAllUser();
+		model.addAttribute("allUser", allUser);
 		List<OrderStatus> allOrderStatus = orderService.getAllOrderStatus();
 		model.addAttribute("allOrderStatus", allOrderStatus);
 	}
@@ -209,4 +215,17 @@ public class OrderController {
 			return "order_detail_editable";
 	}
 	
+	@RequestMapping(path="/adminSearch", method=RequestMethod.GET)
+	public String adminSearchUserOrders(@ModelAttribute("searchCondition")AdminOrderSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		//page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		List<Order> resultOrders = orderService.getAllNeedProcessOrdersBySearch(searchCondition);
+		int totalCount=(int)orderService.getAllNeedProcessOrdersBySearchCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		model.addAttribute("orders", resultOrders);
+		model.addAttribute("page", page);
+		statusDataToModel(model);
+		return "all_order_list";
+	}
 }
