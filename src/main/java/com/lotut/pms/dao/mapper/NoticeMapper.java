@@ -40,4 +40,5 @@ public interface NoticeMapper {
 	
 	List<Notice> searchUserNoticesByPage(NoticeSearchCondition searchCondition);
 	
+	void batchUpdateNoticesNoticePaperType(@Param("noticeIdList")List<Integer> noticeIdList, @Param("noticePaperApplyType")int noticePaperApplyType);
 }

@@ -18,4 +18,6 @@ public interface FriendService {
 	List<User> getFriendRequests(int userId);
 	
 	void processFriendRequest(int processUserId, int requestUserId, int processStatus);
+	
+	List<User> searchUserFriendsByUser(int userId, String keyword);
 }

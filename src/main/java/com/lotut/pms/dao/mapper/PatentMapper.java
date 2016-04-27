@@ -53,4 +53,6 @@ public interface PatentMapper {
 	List<GoodsSecondColumn> getSecondColumn(int firstColumnId);
 
 	void saveGoods(GoodsDetail goodsDetail);
+	
+	void addPatent(Patent patent);
 }

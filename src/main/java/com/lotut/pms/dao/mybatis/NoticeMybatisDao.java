@@ -98,6 +98,12 @@ public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao 
 		page.setTotalRecords(userNoticeCount);
 		return noticeMapper.searchUserNoticesByPage(searchCondition);
 	}
+
+	@Override
+	public void batchUpdateNoticesNoticePaperType(List<Integer> noticeIdList, int noticePaperApplyType) {
+		noticeMapper.batchUpdateNoticesNoticePaperType(noticeIdList, noticePaperApplyType);
+		
+	}
 	
 	//通知书处理状态
 	/*

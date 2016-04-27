@@ -313,6 +313,7 @@
 										<a href="javascript:batchGrabFees()"><button type="button" class="btn btn-purple btn-sm">批量缴费</button></a>
 										<a href="javascript:batchProcessNotice(2)"><button style="margin:8px;" type="button" class="btn btn-success btn-sm">置为处理中</button></a>
 										<a href="javascript:batchProcessNotice(3)"><button type="button" class="btn btn-danger btn-sm">置为已处理</button></a>
+										<a href="javascript:batchChangeNoticePaperType(2)"><button style="margin:8px;" type="button" class="btn btn-danger btn-sm">批量申请纸件</button></a>
 									</span> 
 	                                                    
                           </div>
@@ -853,7 +854,53 @@ function batchProcessNotice(processStatus) {
 		});		
 	}	
 </script>
+<script type="text/javascript">
+function batchChangeNoticePaperType(paperApplyType) {
+	var noticeSelected = false;
+	var notices = []
 
+	var noticeCheckboxes = $('tr td input.check-item');
+	for (var i = 0; i < noticeCheckboxes.length; i++) {
+		if (noticeCheckboxes[i].checked) {
+			noticeSelected = true;
+			break;
+		}
+	}
+	if (!noticeSelected) {
+		$("<div>请选择通知书</div>").dialog({
+			modal: true,
+			buttons: {
+				Ok: function() {
+					$(this).dialog("close");
+				}
+			}	
+		});	
+		return;
+	}
+		
+	for (var i = 0; i < noticeCheckboxes.length; i++) {
+		if (noticeCheckboxes[i].checked) {
+			notices.push(noticeCheckboxes[i].getAttribute("notice"));
+		}
+	}	
+	$.ajax({
+		url: "<s:url value='/notice/batchChangePaperType.html'/>?notices=" + notices + "&paperApplyType=" + paperApplyType, 
+		type: 'get', 
+		success: function() {
+			$("<div>操作成功</div>").dialog({
+				modal: true,
+				buttons: {
+					Ok: function() {
+						$(this).dialog("close");
+						location.reload();
+					}
+				}	
+			});
+		}
+	});			
+	
+}
+</script>
 <!-- ace scripts --> 
 <script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 
 <script src="<s:url value='/static/js/ace/elements.colorpicker.js'/>"></script> 

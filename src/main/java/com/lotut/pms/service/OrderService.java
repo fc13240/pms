@@ -23,7 +23,7 @@ public interface OrderService {
 	
 	long searchUserOrdersCount(OrderSearchCondition searchCondition);
 	
-	int deleteUserOrders(long orderId);
+	void deleteUserOrder(long orderId, int userId);
 	
 	void processOrderPaidSuccess(long orderId);
 	

@@ -8,12 +8,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>好友管理</title>
+	<title>专利列表</title>
 
 <!-- bootstrap & fontawesome -->
 <link rel="stylesheet" href="<s:url value='/static/css/bootstrap.css'/>" />
 <link rel="stylesheet" href="<s:url value='/static/css/font-awesome.css'/>" />
-<link rel="stylesheet" href="<s:url value='/static/css/jquery-ui.min.css'/>" />
+
 <!-- page specific plugin styles -->
 
 <!-- text fonts -->
@@ -190,9 +190,9 @@
       
       <ul class="nav nav-list">
         <li> <a href="<s:url value='/main.html'/>"> <i class="menu-icon fa fa-tachometer"></i> <span class="menu-text"> 控制台 </span> </a> <b class="arrow"></b> </li>
-        <li class=""> <a href="<s:url value='/patent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-desktop"></i> <span class="menu-text"> 我的专利 </span> </a> </li>
+        <li class="active"> <a href="<s:url value='/patent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-desktop"></i> <span class="menu-text"> 我的专利 </span> </a> </li>
         <li class=""> <a href="<s:url value='/notice/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-list"></i> <span class="menu-text"> 我的通知书 </span> </a> </li>
-        <li class="active"> <a href="<s:url value='/friend/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-pencil-square-o"></i> <span class="menu-text"> 好友管理 </span> </a> </li>
+        <li class=""> <a href="<s:url value='/friend/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-pencil-square-o"></i> <span class="menu-text"> 好友管理 </span> </a> </li>
         <li class=""> <a href="<s:url value='/sharePatent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-list-alt"></i> <span class="menu-text"> 分享管理 </span> </a> <b class="arrow"></b> </li>
         <li class=""> <a href="<s:url value='/patent/showUploadForm.html'/>"> <i class="menu-icon fa fa-calendar"></i> <span class="menu-text"> 添加专利 </span> </a> <b class="arrow"></b> </li>
         <li class=""> <a href="<s:url value='/notice/showUploadForm.html'/>"> <i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 添加通知书 </span> </a> <b class="arrow"></b> </li>
@@ -214,65 +214,66 @@
 		<div class="main-content-inner">
     <!-- #section:basics/content.breadcrumbs -->
             <div class="breadcrumbs" id="breadcrumbs"> 
+              <script type="text/javascript">
+                                        try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                                    </script>
               <ul class="breadcrumb">
                 <li> <i class="ace-icon fa fa-home home-icon"></i> <a href="#">主页</a> </li>
-                <li> <a href="#">好友管理</a> </li>
+                <li> <a href="#">我的专利</a> </li>
               </ul>
               <!-- /.breadcrumb --> 
             </div>
     <!-- /section:basics/content.breadcrumbs -->  
     		<div class="page-content"> 
 
+            
+
                 <div class="row" style="margin-top:30px;">
                     <div class="col-xs-12"> 
                       <!-- PAGE CONTENT BEGINS -->
-
-                          <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;">	                                
-	                                <div class="input-group-btn" >
-										<a id="download" href="<s:url value='/friend/searchForm.html'/>">
-										<button style="margin:8px;" type="button" class="btn btn-info btn-sm">添加好友</button>
-										</a>
-										<a href="<s:url value='/friend/request/list.html'/>">>
-										<button style="margin:8px;" type="button" class="btn btn-purple btn-sm">好友请求处理</button>
-										</a>
-		                                <div>
-											<form action="<s:url value='/friend/searchUserFriends.html'/>" method="GET"  role="search">
-												<div class="form-group">
-												 <input type="text" id="form-field-1" style="height:45px;width:450px;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="" />
-												 <button type="submit" class="btn btn-primary friend-query" >查询</button>
-												</div>
-											</form>		                                
-		                                </div> 										
-									</div> 
-                          </div>      
-                          <table id="simple-table" class="table table-striped table-bordered table-hover">
-                            <thead>
-                              <tr class="simple_bag">
-								<th>序号</th>
-								<th>用户名</th>
-								<th>姓名</th>
-								<th>邮箱</th>
-								<th>电话</th>
-								<th>操作</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-							<c:forEach items="${friends}" var="friend" varStatus="status">
-								<tr>
-									<td>${status.count}</td>
-									<td><c:out value="${friend.username}"/></td>
-									<td><c:out value="${friend.name}"/></td>
-									<td><c:out value="${friend.email}"/></td>
-									<td><c:out value="${friend.phone}"/></td>
-									<td><a  href="<s:url value='/friend/delete/'/><c:out value='${friend.userId}.html'/>">删除好友</a></td>
-								</tr>
-							</c:forEach>
-                            </tbody>
-                          </table>
+                      <div class="row">
+                        <div class="col-xs-12">
+                
+							<form action="<s:url value='/patent/addPatent.html'/>" method="post">
+								
+								专利号:<input type="text" name="appNo" id="appNo"  required/>
+								专利名称:<input type="text" name="name" id="name"  required/>
+								专利类型:
+								<select name="patentType.patentTypeId" id="patentTypeId" required>
+	                                    <option value="">全部</option>
+										<c:forEach items="${allPatentTypes}" var="patentType">
+											<option value="<c:out value='${patentType.patentTypeId}'/>"><c:out value="${patentType.typeDescription}"/></option>
+										</c:forEach>
+	                            </select>
+	                            	专利状态：
+								<select name="patentStatus.patentStatusId" id="patentStatusId">
+	                                    <option value="">全部</option>
+									  	<c:forEach items="${allPatentStatus}" var="patentStatus">
+											<option value="<c:out value='${patentStatus.patentStatusId}'/>"><c:out value="${patentStatus.statusDescription}"/></option>
+										</c:forEach>
+	                            </select>
+								申请人:<input type="text" name="appPerson" id="appPerson" />
+								<div style="margin-top:10px;">
+                                   <div class="input-group">
+ 	                                    <div style="float:left;line-height: 32px;">申请时间</div>
+						                <div style="float:left;margin-left: 16px;" class="form-group" style="margin-left:15px;">
+							                <div style="float:left;">
+							                	<input  type="text" class="form-control" id="startAppDateId" 
+							               			 name="appDate" placeholder="发送日期选择" value="<fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/>"  
+							               			 readonly="readonly" onclick="javascript:$('#start_date_img').click()">
+							                </div> 
+											<div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="start_date_img"></div>
+							                </div>
+	                                </div>
+	                              </div>
+								<input type="submit" value="保存">																							
+							</form>
+                        <!-- /.span --> 
+                      </div>
+                      <!-- /.row --> 
                       
                     </div>
-                </div>            
-               
+                </div>
                 <div class="footer">
                   <div class="footer-inner">
                     <!-- #section:basics/footer -->
@@ -319,148 +320,10 @@
 <script src="<s:url value='/static/js/jquery-ui.min.js'/>"></script>
 
 <script src="<s:url value='/static/js/bootbox.js'/>"></script>
-
+<!-- inline scripts related to this page --> 
 <script type="text/javascript">
-function changePaperApplyType(notice, selectElement) {
-	paperApplyType = 1;
-	for (var i = 0; i < selectElement.length; i++) {
-		if (selectElement.options[i].selected == true) {
-			paperApplyType = selectElement.options[i].value;
-		}
-	}		
-
-	$.ajax({
-		url: "<s:url value='/notice/changePaperType.html'/>?notice=" + notice + "&paperApplyType=" + paperApplyType,
-		type: 'get', 
-		success: function(data) {
-			if (data == "no-permission") {
-				$("<div>共享人只能把[纸质申请]修改为[申请纸件]</div>").dialog({
-					modal: true,
-					buttons: {
-						Ok: function() {
-							$(this).dialog("close");
-						}
-					}	
-				});		
-
-				return;
-			}
-			
-			$("<div>操作成功</div>").dialog({
-				modal: true,
-				buttons: {
-					Ok: function() {
-						$(this).dialog("close");
-					}
-				}	
-			});
-			
-		}
-	});			
-}
-
-function processNotice(notice, selectElement) {
-	processStatus = 1;
-	for (var i = 0; i < selectElement.length; i++) {
-		if (selectElement.options[i].selected == true) {
-			processStatus = selectElement.options[i].value;
-		}
-	}		
-
-	$.ajax({
-		url: "<s:url value='/notice/processNotice.html'/>?notice=" + notice + "&processStatus=" + processStatus,
-		type: 'get', 
-		success: function(data) {
-			$("<div>操作成功</div>").dialog({
-				modal: true,
-				buttons: {
-					Ok: function() {
-						$(this).dialog("close");
-					}
-				}	
-			});
-		}
-	});			
-}
-</script>
-
-<script type="text/javascript">
-
-// 通知书处理状态
-function batchProcessNotice(processStatus) {
-		var noticeSelected = false;
-		var notices = []
-
-		var noticeCheckboxes = $('tr td input.check-item');
-		for (var i = 0; i < noticeCheckboxes.length; i++) {
-			if (noticeCheckboxes[i].checked) {
-				noticeSelected = true;
-				break;
-			}
-		}
-		if (!noticeSelected) {
-			$("<div>请选择通知书</div>").dialog({
-				modal: true,
-				buttons: {
-					Ok: function() {
-						$(this).dialog("close");
-					}
-				}	
-			});	
-			return;
-		}
-			
-		for (var i = 0; i < noticeCheckboxes.length; i++) {
-			if (noticeCheckboxes[i].checked) {
-				notices.push(noticeCheckboxes[i].getAttribute("notice"));
-			}
-		}	
-		$.ajax({
-			url: "<s:url value='/notice/processNotices.html'/>?notices=" + notices + "&processStatus=" + processStatus, 
-			type: 'get', 
-			success: function() {
-				$("<div>处理成功</div>").dialog({
-					modal: true,
-					buttons: {
-						Ok: function() {
-							$(this).dialog("close");
-							location.reload();
-						}
-					}	
-				});
-			}
-		});			
-		
-	}
-	
-	
-	
-	function processNotice(notice, selectElement) {
-	
-		processStatus = 1;
-		for (var i = 0; i < selectElement.length; i++) {
-			if (selectElement.options[i].selected == true) {
-				processStatus = selectElement.options[i].value;
-			}
-		}		
-		$.ajax({
-				url: "<s:url value='/notice/processNotices.html'/>?notices=" + notice + "&processStatus=" + processStatus,
-				type: 'get', 
-				success: function(data) {
-					$("<div>操作成功</div>").dialog({
-						modal: true,
-						buttons: {
-							Ok: function() {
-							$(this).dialog("close");
-							}
-						}	
-					});
-				}
-			});
-	}	
 			jQuery(function($) {
 				//initiate dataTables plugin
-
 				//And for the first simple table, which doesn't have TableTools or dataTables
 				//select/deselect all rows according to table header checkbox
 				var active_class = 'active';
@@ -506,107 +369,85 @@ function batchProcessNotice(processStatus) {
 		</script> 
 
 <script type="text/javascript">
-	$(function(){
-		formutil.clickAllCheckbox('tr th input.check-item', 'tr td input.check-item');
-		formutil.clickItemCheckbox('tr th input.check-item', 'tr td input.check-item');
-	});
-	
-	function batchShare() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		
-		if (!patentSelected) {
-			//formutil.alertMessage('请选择专利');
-			bootbox.alert('请选择专利');
-			return;
-		}
-		
-		var patents = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent').join(",");
-		
-		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
-	}
-	
-	
-	function batchGrabFees(){
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		
-		if (!patentSelected) {
-			bootbox.alert('请选择专利');
-			return;
-		}
-			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
-		
-		 window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patentNos);		
-		
-	}	
-	function batchFee() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		
-		if (!patentSelected) {
-			bootbox.alert('请选择专利');
-			return;
-		}
-			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
-		
-		 window.open("<s:url value='/patent/showFriends.html'/>?patentNos=" + patentNos);
-	}	
-	
-	function getFeeInfo(patentId) {
-		window.open("/fee/list?patentId=" + patentId);
-	}
-	
+function addDefaultOption(selectElem) {
+	selectElem.append("<option value=''>请选择</option>");
+}
 
+function resetSelect() {
+	for (var i = 0; i < arguments.length; i++) {
+		var selectObj = arguments[i];
+		selectObj.empty();
+		addDefaultOption(selectObj);
+	}
+}
 
+function addOptions(selectObj, options) {
+	$.each(options, function(index, val){
+		selectObj.append("<option value='" + val.id + "'>" + val.name + "</option>");
+	});	
+}
 
+function loadCities() {
+	var province = $("#province").val();
 	
-	function gotoPage() {
-		var noticeType = $("#noticeTypeId").val();
-		var noticeProcessStatus = $("#noticeProcessStatusId").val();
-		var startDispatchDate = $("#startAppDateId").val();
-		var endDispatchDate = $("#endAppDateId").val();
-		var keyword = $("#keywordId").val();
-		var pageNo = document.getElementById("page.pageNo").value;
-		var url = "<s:url value='/notice/list.html'/>?currentPage=" + pageNo;
-		
-		if (isSearch()) {
- 				//url = "<s:url value='/patent/search.html'/>?page.currentPage="+nextPage +"&"+${searchCondition};
-				url = "<s:url value='/notice/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
-		}
-		
-		location.href = url
-	}
+	resetSelect($("#city"), $("#district"), $("#street"));
 	
-	function isSearch() {
-		var noticeType = $("#noticeTypeId").val();
-		var noticeProcessStatus = $("#noticeProcessStatusId").val();
-		var startDispatchDate = $("#startAppDateId").val();
-		var endDispatchDate = $("#endAppDateId").val();
-		var keyword = $("#keywordId").val();
-		
-		if (!isEmpty(noticeType) || !isEmpty(noticeProcessStatus) || !isEmpty(startDispatchDate) || !isEmpty(endDispatchDate) || !isEmpty(keywordId)) {
-			return true;
-		}
-		
-		return false;
-	}
+	if (province != "") {
+		$.ajax({
+			url: "<s:url value='/user/getCitiesByProvince.html'/>?province=" + province,
+			type: 'get',
+			dataType: 'json',
+			success: function(cities) {
+				var city = $("#city");
+				
+				resetSelect(city);
+				addOptions(city, cities);
+			}
+		})
+	} 
+}
 
-	function isEmpty(value) {
-		if (value == null || value == "undefined" || value == "") {
-			return true;
-		}
-		
-		return false;
+function loadDistricts() {
+	var city = $("#city").val();
+
+	resetSelect($("#district"), $("#street"));
+	
+	if (city != "") {
+		$.ajax({
+			url: "<s:url value='/user/getDistrictsByCity.html'/>?city=" + city,
+			type: 'get',
+			dataType: 'json',
+			success: function(districts) {
+				var district = $("#district");
+				
+				resetSelect(district);
+				addOptions(district, districts);
+			}
+		})
 	}
+}
+
+function loadStreets() {
+	var district = $("#district").val();
+	
+	resetSelect($("#street"));
+	
+	if (district != "") {
+		$.ajax({
+			url: "<s:url value='/user/getStreetsByDistrict.html'/>?district=" + district,
+			type: 'get',
+			dataType: 'json',
+			success: function(streets) {
+				var street = $("#street");
+				
+				resetSelect(street);
+				addOptions(street, streets);
+			}
+		})
+	} 
+}
+
 </script>
-<script type="text/javascript">
-	function searchUserFriends(){
-		var keyword = $("#keywordId").val();
-		var url = "<s:url value='/friend/searchUserFriends.html'/>?keyword="+keyword;
-		window.open(url);
-	}
-</script>
-
 
 <!-- ace scripts --> 
 <script src="<s:url value='/static/js/ace/elements.scroller.js'/>"></script> 

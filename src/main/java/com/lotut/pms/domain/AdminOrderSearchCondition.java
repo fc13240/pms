@@ -69,8 +69,8 @@ public class AdminOrderSearchCondition {
 		String orderStatusStr = orderStatus == null ? "" : orderStatus.toString();
 		String keywordStr = keyword == null ? "" : keyword;
 		String userIdStr = userId == null ? "" : userId.toString();
-		return "orderStatus=" + orderStatusStr + "&startAppDate="
-				+ startAppDateStr + "&endAppDate=" + endAppDateStr + "&keyword=" + keywordStr+"&userId=" + userIdStr;
+		return "orderStatus=" + orderStatusStr + "&startAppDate="+ startAppDateStr + 
+				"&endAppDate=" + endAppDateStr + "&keyword=" + keywordStr+"&userId=" + userIdStr;
 	}
 	
 }

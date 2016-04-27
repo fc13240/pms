@@ -57,8 +57,8 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	}	
 
 	@Override
-	public void deleteUserOrders(long orderId) {
-		orderMapper.deleteUserOrders(orderId);
+	public void deleteUserOrder(long orderId, int userId) {
+		orderMapper.deleteUserOrder(orderId, userId);
 	}
 
 	@Override

@@ -129,4 +129,16 @@ public class PatentServiceImpl implements PatentService {
 		// TODO Auto-generated method stub
 		patentDao.saveGoods(goodsDetail);
 	}
+
+	@Override
+	@Transactional
+	public void addPatent(Patent patent) {
+		patentDao.insertOrUpdatePatent(patent);
+		List<Map<String, Integer>> userPatentList = new ArrayList<>();
+		HashMap<String, Integer> userPatentMap = new HashMap<>();
+		userPatentMap.put("user", patent.getOwnerId());
+		userPatentMap.put("patent", (int) patent.getPatentId());
+		userPatentList.add(userPatentMap);
+		sharePatentDao.insertUserPatents(userPatentList);
+	}
 }
