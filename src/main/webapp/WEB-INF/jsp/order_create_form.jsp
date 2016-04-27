@@ -15,7 +15,7 @@
 			document.getElementById("span2").style.display="none";
 			}
 			function bCheck2(){ 
-			document.getElementById("span1").style.display="none";  
+			document.getElementById("span1").style.display="none";
 			document.getElementById("span2").style.display="block";
 			}
 		</script>
@@ -126,8 +126,8 @@
                            			</td>
 								</tr>
 								<tr>
-										<td colspan="10">优惠价: ￥
-										<span id="totalAmountSpan" style="color:red">${totalAmount}</span>
+										<td colspan="10">优惠价: 
+										<span id="totalAmountSpan" style="color:red;display:block">￥${totalAmount}</span>
 										</td>
 								</tr>
  						</td>         				
