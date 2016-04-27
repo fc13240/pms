@@ -107,10 +107,15 @@
 										<c:forEach items="${fees}" var="fee">
 											<c:set var="totalAmount" value="${totalAmount+fee.amount}"></c:set>
 										</c:forEach>
-										<td colspan="10">总计: ￥<span id="totalAmountSpan">${totalAmount}</span></td>
 									</tr>							
 	                            </tbody>
-	                          </table> 						
+	                          </table>
+	                           	<tr>
+										<td><span>官费：￥${totalAmount};服务费: ￥100;快递费：￥20; 优惠：￥120</span></td>
+								</tr>
+								<tr>
+										<td colspan="10">优惠价: ￥<span id="totalAmountSpan" style="color:red">${totalAmount}</span></td>
+								</tr>				
  						</td>         				
           			</tr>             			       			     			
           		</table>
