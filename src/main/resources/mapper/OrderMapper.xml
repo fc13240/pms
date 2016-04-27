@@ -75,9 +75,9 @@
 <!-- 		order by o.create_time desc -->
 <!-- 	</select> -->
 	
-	<update id="deleteUserOrders" parameterType="long">
-		update orders set order_status=3 where order_id=#{orderId,javaType=long,jdbcType=BIGINT}
-	</update>
+	<delete id="deleteUserOrder">
+		delete from orders where order_id=#{orderId} and user = #{userId}
+	</delete>
 	
 	<select id="getUserOrdersCount" resultType="int">
 		select count(*) from orders where user = #{userId}

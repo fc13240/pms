@@ -252,7 +252,7 @@
 											<option value="<c:out value='${patentStatus.patentStatusId}'/>"><c:out value="${patentStatus.statusDescription}"/></option>
 										</c:forEach>
 	                            </select>
-								第一申请人:<input type="text" name="appPerson" id="appPerson" />
+								申请人:<input type="text" name="appPerson" id="appPerson" />
 								<div style="margin-top:10px;">
                                    <div class="input-group">
  	                                    <div style="float:left;line-height: 32px;">申请时间</div>

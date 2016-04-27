@@ -192,6 +192,8 @@ public class PatentController {
 	
 	@RequestMapping(path="/addPatent", method=RequestMethod.POST)
 	public String addPatent(@ModelAttribute("patent")Patent patent,Model model){
+		int userId = PrincipalUtils.getCurrentUserId();
+		patent.setOwnerId(userId);
 		patentService.addPatent(patent);
 		return "addAddresses_success";
 	}

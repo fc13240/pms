@@ -138,9 +138,10 @@ public class OrderController {
 		if (page.getCurrentPage() < 1) {
 			page.setCurrentPage(1);
 		}
-		orderService.deleteUserOrders(orderId);
+		
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
+		orderService.deleteUserOrder(orderId, userId);
 		int totalCount=(int)orderService.getUserOrdersCount(userId);
 		page.setTotalRecords(totalCount);
 		List<Order> orders = orderService.getUserOrders(page);

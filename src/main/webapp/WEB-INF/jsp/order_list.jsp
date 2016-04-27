@@ -162,8 +162,8 @@
                     		</c:if>
                     		<c:if test="${order.orderStatus.statusId == 1}">
                     			<div>
-	                    			<a href="<s:url value='/order/delete.html'/>?orderId=<c:out value='${order.id}'/>">
-	           						<button type="button" class="btn btn-purple btn-sm">取消订单</button>
+	                    			<a>
+	           						<button type="button" class="btn btn-purple btn-sm" onclick="deleteOrder('${order.id}')">取消订单</button>
 	           						</a>
            						</div>
                     		</c:if>
@@ -314,7 +314,17 @@
 				location.reload();
 			}
 		});		
-	}	
+	}
+	
+	function deleteOrder(orderId) {
+		$.ajax({
+			url: "<s:url value='/order/delete.html'/>?orderId="+ orderId,
+			type: 'get', 
+			success: function() {
+				location.reload();
+			}
+		});		
+	}
 </script>
 </body>
 </html>

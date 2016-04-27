@@ -272,10 +272,4 @@
 		insert into sell_patent_goods(patent_id, sell_date, add_date, state, sell_mode, price, patent_second_column)
 		values(#{id}, '0000-00-00',curdate(), '1', '转让', #{price}, #{SecondColumn})				
 	</insert>
-	
-	<insert id="addPatent" parameterType="Patent">
-		insert into patents(app_no, patent_name, app_date,app_person, patent_type,patent_status,patent_owner)
-		values(#{appNo}, #{name,javaType=string,jdbcType=VARCHAR}, #{appDate,javaType=date,jdbcType=DATE},#{appPerson}, 
-			   #{patentType.patentTypeId,jdbcType=INTEGER},#{patentStatus.patentStatusId,jdbcType=INTEGER}, #{ownerId})
-	</insert>
 </mapper>

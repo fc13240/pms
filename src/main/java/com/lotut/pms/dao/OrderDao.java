@@ -22,7 +22,7 @@ public interface OrderDao {
 	
 	int updateOrderStatus(long orderId, int status);
 	
-	void deleteUserOrders(long orderId);
+	void deleteUserOrder(long orderId, int userId);
 	
 	int getAllNeedProcessOrderCount();
 	
