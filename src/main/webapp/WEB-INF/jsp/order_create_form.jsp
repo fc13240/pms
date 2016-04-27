@@ -9,7 +9,16 @@
 <head>
 <title>控制台</title>
 <%@ include file="_css.jsp" %>
-
+		<script type="text/javascript">
+			function aCheck1(){
+			document.getElementById("span1").style.display="block";
+			document.getElementById("span2").style.display="none";
+			}
+			function bCheck2(){ 
+			document.getElementById("span1").style.display="none";  
+			document.getElementById("span2").style.display="block";
+			}
+		</script>
 </head>
 <body class="no-skin">
 
@@ -43,7 +52,7 @@
           			<c:forEach items="${contactAddresses}" var="address">
 	          			<tr>
 	          				<td>
-	          					<input type="radio" name="postAddress.id"
+	          					<input type="radio" name="postAddress.id" onclick="aCheck1()"
 	          						<c:if test="${address.defaultAddress}">checked="checked"</c:if> value="${address.id}" required="required"> 
 	          					${address.receiver} ${address.provinceName} ${address.cityName} ${address.districtName}
 	          					${address.streetName} ${address.detailAddress} ${address.phone} 
@@ -52,7 +61,7 @@
           			</c:forEach>
           			<tr>
           				<td>
-          					<input type="radio" name="postAddress.id" value="0" 
+          					<input type="radio" name="postAddress.id" value="0" onclick="bCheck2()"
           						<c:if test="${empty contactAddresses}">checked="checked"</c:if> required="required"> 不需要邮寄
           					<span style="color:red;"><c:if test="${empty contactAddresses}">没有联系地址信息，需要邮寄请添加联系地址后再重新支付&nbsp;&nbsp;&nbsp;</c:if></span>
           				</td>
@@ -111,11 +120,16 @@
 	                            </tbody>
 	                          </table>
 	                           	<tr>
-										<td><span>官费：￥${totalAmount};服务费: ￥100;快递费：￥20; 优惠：￥120</span></td>
+                           			<td>
+                           			<span id="span1" style="display:block">官费：￥${totalAmount};服务费: ￥100;快递费：￥20; 优惠:￥100</span>
+                           			<span id="span2" style="display:none">官费：￥${totalAmount};服务费: ￥100;快递费：￥20; 优惠:￥120</span>
+                           			</td>
 								</tr>
 								<tr>
-										<td colspan="10">优惠价: ￥<span id="totalAmountSpan" style="color:red">${totalAmount}</span></td>
-								</tr>				
+										<td colspan="10">优惠价: ￥
+										<span id="totalAmountSpan" style="color:red">${totalAmount}</span>
+										</td>
+								</tr>
  						</td>         				
           			</tr>             			       			     			
           		</table>

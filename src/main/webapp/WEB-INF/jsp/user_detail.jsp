@@ -239,8 +239,8 @@
 								<tr>
 		                            <td class="f-tar td-w125"><label class="lab">真实姓名：</label></td>
 		                            <td class="ps-relative"><input class="ipt" name="truename" id="name"   value="${user.name}" maxlength="10">
-		                                <label><input class="radios" type="radio" name="sex" value="0"   checked />先生</label>
-		                                <label><input class="radios" type="radio" name="sex" value="1"   />女士</label>
+		                                <label style="display:none"><input class="radios"  type="radio" name="sex" value="0"   checked />先生</label>
+		                                <label style="display:none"><input class="radios"  type="radio" name="sex" value="1"   />女士</label>
 		                            </td>
                         		</tr>
 								<tr>
