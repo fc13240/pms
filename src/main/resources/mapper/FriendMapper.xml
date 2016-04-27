@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotut.pms.dao.mapper.FriendMapper">
 	<select id="getUserFriends" parameterType="int" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap">
-		select u.user_id, u.username, u.name
+		select u.user_id, u.username, u.name,u.email,u.phone
 		  from friends f join users u on f.friend = u.user_id
 		 where user = #{userId};	
 	</select>
@@ -59,4 +59,16 @@
 			replace into friends(user, friend) values(#{processUserId}, #{requestUserId})
 		</if>	
 	</update>
+	
+	<select id="searchUserFriendsByUser" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap">
+		<if test="keyword != null and keyword != ''">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>		
+		select u.user_id, u.username, u.name,u.email,u.phone
+		  from users u join friends f on u.user_id = f.friend	
+		 where f.user = #{userId}	
+		<if test="keyword != null and keyword != ''">
+			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern})
+		</if>
+	</select>	
 </mapper>

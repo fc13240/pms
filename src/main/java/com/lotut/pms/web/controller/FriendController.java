@@ -89,4 +89,12 @@ public class FriendController {
 		return "friend_request_list";
 	}	
 
+	@RequestMapping(path="/searchUserFriends", method=RequestMethod.GET)
+	public String searchUserFriends(@RequestParam(name="keyword") String keyword,Model model) {
+		int userId=PrincipalUtils.getCurrentUserId();
+		List<User> resultFriends = friendService.searchUserFriendsByUser(userId, keyword);
+		model.addAttribute("friends", resultFriends);
+		return "friend_list";
+	}
+	
 }

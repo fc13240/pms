@@ -53,4 +53,9 @@ public class FriendServiceImpl implements FriendService {
 		friendDao.processFriendRequest(processUserId, requestUserId, processStatus);
 	}
 
+	@Override
+	public List<User> searchUserFriendsByUser(int userId,String keyword) {
+		return friendDao.searchUserFriendsByUser(userId,keyword);
+	}
+
 }

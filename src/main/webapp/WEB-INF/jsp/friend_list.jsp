@@ -227,20 +227,23 @@
                     <div class="col-xs-12"> 
                       <!-- PAGE CONTENT BEGINS -->
 
-                          <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;">	                                
-	                                <span class="input-group-btn" >
-	                                <a id="download" href="<s:url value='/notice/preview.html'/>?notice=${notice.noticeId}">
-									 <c:out value="${notice.name}"/>
-									</a>	
-	                                
+                          <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;">	                                
+	                                <div class="input-group-btn" >
 										<a id="download" href="<s:url value='/friend/searchForm.html'/>">
 										<button style="margin:8px;" type="button" class="btn btn-info btn-sm">添加好友</button>
 										</a>
 										<a href="<s:url value='/friend/request/list.html'/>">>
 										<button style="margin:8px;" type="button" class="btn btn-purple btn-sm">好友请求处理</button>
 										</a>
-									</span> 
-	                                                    
+		                                <div>
+											<form action="<s:url value='/friend/searchUserFriends.html'/>" method="GET"  role="search">
+												<div class="form-group">
+												 <input type="text" id="form-field-1" style="height:45px;width:450px;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="" />
+												 <button type="submit" class="btn btn-primary friend-query" >查询</button>
+												</div>
+											</form>		                                
+		                                </div> 										
+									</div> 
                           </div>      
                           <table id="simple-table" class="table table-striped table-bordered table-hover">
                             <thead>
@@ -248,6 +251,8 @@
 								<th>序号</th>
 								<th>用户名</th>
 								<th>姓名</th>
+								<th>邮箱</th>
+								<th>电话</th>
 								<th>操作</th>
                               </tr>
                             </thead>
@@ -257,6 +262,8 @@
 									<td>${status.count}</td>
 									<td><c:out value="${friend.username}"/></td>
 									<td><c:out value="${friend.name}"/></td>
+									<td><c:out value="${friend.email}"/></td>
+									<td><c:out value="${friend.phone}"/></td>
 									<td><a  href="<s:url value='/friend/delete/'/><c:out value='${friend.userId}.html'/>">删除好友</a></td>
 								</tr>
 							</c:forEach>
@@ -592,7 +599,13 @@ function batchProcessNotice(processStatus) {
 		return false;
 	}
 </script>
-
+<script type="text/javascript">
+	function searchUserFriends(){
+		var keyword = $("#keywordId").val();
+		var url = "<s:url value='/friend/searchUserFriends.html'/>?keyword="+keyword;
+		window.open(url);
+	}
+</script>
 
 
 <!-- ace scripts --> 
@@ -616,6 +629,8 @@ function batchProcessNotice(processStatus) {
 <script src="<s:url value='/static/js/ace/ace.settings-rtl.js'/>"></script> 
 <script src="<s:url value='/static/js/ace/ace.settings-skin.js'/>"></script> 
 <script src="<s:url value='/static/js/ace/ace.widget-on-reload.js'/>"></script> 
-<script src="<s:url value='/static/js/ace/ace.searchbox-autocomplete.js'/>"></script> 
+<script src="<s:url value='/static/js/ace/ace.searchbox-autocomplete.js'/>"></script>
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	 
 </body>
 </html>

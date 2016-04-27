@@ -239,14 +239,14 @@
 								专利号:<input type="text" name="appNo" id="appNo"  required/>
 								专利名称:<input type="text" name="name" id="name"  required/>
 								专利类型:
-								<select name="patentTypeId" id="patentTypeId" required>
+								<select name="patentType.patentTypeId" id="patentTypeId" required>
 	                                    <option value="">全部</option>
 										<c:forEach items="${allPatentTypes}" var="patentType">
 											<option value="<c:out value='${patentType.patentTypeId}'/>"><c:out value="${patentType.typeDescription}"/></option>
 										</c:forEach>
 	                            </select>
 	                            	专利状态：
-								<select name="patentStatusId" id="patentStatusId">
+								<select name="patentStatus.patentStatusId" id="patentStatusId">
 	                                    <option value="">全部</option>
 									  	<c:forEach items="${allPatentStatus}" var="patentStatus">
 											<option value="<c:out value='${patentStatus.patentStatusId}'/>"><c:out value="${patentStatus.statusDescription}"/></option>
