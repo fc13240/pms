@@ -5,50 +5,63 @@
 <%@ taglib uri="fmt" prefix="fmt" %>
 <%@ taglib uri="spring-form" prefix="form" %>
 <!DOCTYPE html>
-<html>
 <head>
-<title>控制台</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>龙图腾专利</title>
 <%@ include file="_css.jsp" %>
-
 </head>
-<body class="no-skin">
-
-<%@ include file="_nav.jsp"%>
-
-<!-- /section:basics/navbar.layout -->
-<div class="main-container" id="main-container">
-
-  <!-- sidebar -->
-	<%@ include file="_main_menu.jsp"%>
-  <!-- sidebar -->
-  <div class="main-content">
-    <div class="main-content-inner">
-      <!-- #section:basics/content.breadcrumbs -->
-      <div class="breadcrumbs" id="breadcrumbs">
-        <ul class="breadcrumb">
-          <li> <i class="ace-icon fa fa-home home-icon"></i> <a href="#">主页</a> </li>
-          <li> <a href="#">控制台</a> </li>
-        </ul>
-        <!-- /.breadcrumb -->
-      </div>
-      <!-- /section:basics/content.breadcrumbs -->
-      <div class="page-content">
+<body>
+<%@ include file="_top.jsp" %>
  
-        <div class="row">
-          <div class="col-xs-12">
-            <!-- PAGE CONTENT BEGINS -->
-            <div class="alert alert-block alert-success">
-              <button type="button" class="close" data-dismiss="alert"> <i class="ace-icon fa fa-times"></i> </button>
-              <i class="ace-icon fa fa-check green"></i> 欢迎来到 <strong class="green"> 龙图腾专利管理系统 <small>(v1.0.0)</small> </strong> </div>
-          </div>
-          <!-- /.col -->
+<div style="min-width:1300px;height:1500px; background:#F3F3F5;">
+	<div style="float:left;width:5%;">
+		<%@ include file="_left_nav.jsp" %>
+	</div>
+	<div style="float:left;width:95%;">
+
+        <div class="center-cconcenct">
+        	<!-- 代码 开始 -->
+            <div id="change-t"><img src="<s:url value='/temp/images/tab.png'/>"  class="cgh"/></div>
+			<div style="float:left;width:9%;">
+				<%@ include file="_left_nav2.jsp" %>
+			</div>
+			<div class="con-list" style="float:left;width:91%;">
+				<div class="t-ti">
+					<hr class="t-hr">
+					<span style="font-size: 16px;font-weight: 300;line-height: 24px;">专利概况</span>
+				</div>
+                <div style="height:30px;"></div>
+
+				<div class="t-third">
+                   欢迎使用龙图腾专利管理       
+                            	
+                </div>                
+                
+			</div>
+         
         </div>
-        <!-- /.row -->
-		<%@ include file="_footer.jsp"%>
-        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"> <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i> </a> </div>
+		<!--container end-->
     </div>
-  </div>
 </div>
-<%@ include file="_js.jsp"%>
+<script>
+	$(document).ready(function(){
+	
+		$("img[class=cgh]").click(function(){
+			var ol = $('ol[class="hashTabber-nav hashTabber-sandstone"]')[0];
+			var ols =$('.con-list')[0];
+			if(ol.style.display=="inline-block"||ol.style.display==""){
+					this.style.marginLeft="0px";
+					this.src='<s:url value='/temp/images/tabs.png'/>';
+					ol.style.display="none";
+					ols.style.width="97%";
+				}else{
+					ol.style.display="inline-block";
+					this.style.marginLeft="108px";
+					this.src='<s:url value='/temp/images/tab.png'/>';
+					ols.style.width="88%";
+				}
+		});
+	});
+</script>
 </body>
 </html>

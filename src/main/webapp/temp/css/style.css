@@ -1,0 +1,439 @@
+*{
+	padding:0px;
+	margin:0px;
+}
+html{
+	background: #F3F3F5;
+}
+body{
+	font:12px "微软雅黑";
+}
+button{ font-family:"微软雅黑";}
+img{
+	border:none;
+}
+
+a{
+	cursor:pointer;
+	text-decoration:none;
+	outline:none;
+}
+a:hover{text-decoration:none;}
+ul{
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+input,select{
+	font:14px "微软雅黑";
+	vertical-align:middle;
+}
+
+.top{width:100%;height:80px;background:url(../images/bg.png) no-repeat;}
+.top-left{float:left;margin:10px 0px 0px 20px;}
+.top-right {
+    float: right;
+    width: 445px;
+}
+.top-user {
+    height: 35px;
+    margin: 24px 35px 0px 0px;
+    line-height: 35px;
+    width: 130px;
+    float: right;
+}
+
+.top-user img {
+    width: 35px;
+    height: 35px;
+    border-radius: 20px;
+    position: absolute;
+    margin: 0px 0px 0px -40px;
+}
+.top-user span{color:#fff;font-size:14px;}
+
+.top-exit {
+    width: 14px !important;
+    height: 15px !important;
+    border-radius: 0px !important;
+    margin: 10px 0px 0px 25px !important;
+}
+#Button1{ cursor:pointer;}
+
+.search_box {
+    width: 220px;
+    height: 35px;
+    line-height: 20px;
+    margin-top: 22px;
+    border: none;
+    float: left;
+    margin-left: 0px;
+}
+
+.search_box input{
+width: 202px;
+height: 35px;
+line-height: 16px;
+}
+.search_box a {
+    text-indent: -99999px;
+    display: inline-block;
+    width: 35px;
+    height: 28px;
+    position: absolute;
+    margin-left: -35px;
+    margin-top: 8px;
+    background: url("../images/search1.png") scroll no-repeat 5px 3px;
+}
+
+.top-search {
+    color: #fff;
+    width: 215px;
+    height: 35px;
+	float:left;
+}
+.top-sbtn {
+    color: #fff;
+    font-size: 14px;
+    width: 130px;
+    height: 35px;
+    margin: 22px 9px 0px 85px;
+    line-height: 35px;
+}
+.top-sbtn img {
+    position: absolute;
+    margin: 11px 0px 0px 5px;
+}
+
+
+.left-nav {
+height: 100%;
+background: #2E2C2D;
+padding: 0px 0px 86.3% 0px;
+}
+.left-nav li {
+
+height: 65px;
+color: #fff;
+font-size: 14px;
+text-align: center;
+margin: 3px 0px 0px 0px;
+padding-top:10px;
+}
+.left-nav ul li:hover{background:#CF2D22;}
+.t-ti {
+    margin: 20px 0px 0px 15px;
+    height: 40px;
+    border-bottom: 1px solid #D9DEE4;
+}
+
+.t-hr {
+    height: 25px;
+    width: 7px;
+    border: 1px solid #DC2B21;
+    color: #DC2B21;
+    background: #DC2B21;
+    margin: 0px 12px 0px 0px;
+    float: left;
+}
+.t-ti h3 {
+    font-size: 16px;
+    color: #333;
+    float: left;
+    font-weight: 300;
+    line-height: 24px;
+}
+
+#menu {
+    overflow: hidden;
+    margin: 0px 0px 0px 15px;
+    background: #fff;
+    padding: 30px 0px 0px 20px;
+	border: 1px solid #E6EAED;
+}
+#menu #nav {display:block;width:100%;padding:0;margin:0;list-style:none;}
+#menu #nav li {
+    float: left;
+    width: 90px;
+    font-size: 14px;
+    line-height: 33px;
+    height: 33px;
+}
+#menu #nav li a {display:block;line-height:33px;height:33px;text-decoration:none;padding:0 0 0 5px; text-align:center; color:#333;}
+#menu_con {
+    min-height: 60px;
+    margin: 0px 20px 35px 0px;
+    border: 1px solid #03752F;
+}
+.qxjk-ul li {
+    float: left;
+    font-size: 14px;
+    margin: 20px 35px 0px 10px;
+}
+.qxjk-ul li:hover{ text-decoration:underline;color: #CF2D22;}
+.qxjk-ul a{color:#333;font-size:14px;}
+#nav p {
+float: left;
+width: 90px;
+font-size: 14px;
+line-height: 33px;
+height: 33px;
+width: 73px;
+}
+.selected {
+background: #03752F;
+color: #fff !important;
+border-radius: 5px;
+border-bottom-left-radius: 0;
+border-bottom-right-radius: 0;
+}
+#change-t img {
+position: fixed;
+margin: 250px 0px 0px 108px;
+z-index: 999;
+cursor: pointer;
+}
+.t-third{
+	margin: 0px 0px 0px 15px;
+    background: #fff;
+    padding: 30px 0px 100px 20px;
+	border: 1px solid #E6EAED;}
+.t-third li{float:left;margin: 0px 15px 0px 0px;}
+.t-third li p {
+    font-size: 14px;
+    color: #666;
+    margin: 0px 0px 10px 0px;
+}
+.t-third input {
+    width: 105px;
+    height: 33px;
+    background: #EEEEEE;
+    border-radius: 4px;
+    border: 1px solid #CECCCC;
+}
+.t-input{
+    width: 300px !important;
+    background: #fff !important;
+    border-radius: 4px;
+    border: 1px solid #CECCCC;
+}
+.t-third button {
+    margin: 3px 0px 0px 5px;
+    background: #DC2B21;
+    border: 1px solid #DC2B21;
+    color: #fff;
+    font-size: 14px;
+    width: 70px;
+    height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    position: absolute;
+}
+.t-third button:hover{background: #C1180F; border: 1px solid #C1180F;}
+
+.t-table{
+	margin: 0px 0px 0px 15px;
+    background: #fff;
+    padding: 30px 20px 60px 20px;
+	border: 1px solid #E6EAED;}
+.ta-top{float:left;}
+.t-btn1 {
+    height: 35px !important;
+    color: #fff;
+    border: 1px solid #F1AD4A;
+    background: #F1AD4A;
+    padding: 0px 10px 0px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+	margin:0px 10px 0px 0px;
+	cursor:pointer;
+}
+.t-btn2 {
+    height: 35px !important;
+    color: #fff;
+    border: 1px solid #3279B7;
+    background: #3279B7;
+    padding: 0px 10px 0px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+	margin:0px 10px 0px 0px;
+	cursor:pointer;
+}
+.t-btn3 {
+    height: 35px !important;
+    color: #fff;
+    border: 1px solid #009C3B;
+    background: #009C3B;
+    padding: 0px 10px 0px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+	margin:0px 10px 0px 0px;
+	cursor:pointer;
+}
+.t-btn4 {
+    height: 35px !important;
+    color: #fff;
+    border: 1px solid #DA534D;
+    background: #DA534D;
+    padding: 0px 10px 0px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+	margin:0px 10px 0px 0px;
+	cursor:pointer;
+}
+.t-btn5 {
+    height: 35px !important;
+    color: #fff;
+    border: 1px solid #019237;
+    background: #019237;
+    padding: 0px 10px 0px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+	margin:0px 10px 0px 0px;
+	cursor:pointer;
+}
+.t-btn6 {
+    height: 35px !important;
+    color: #fff;
+    border: 1px solid #3399DB;
+    background: #3399DB;
+    padding: 0px 10px 0px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+	margin:0px 10px 0px 0px;
+	cursor:pointer;
+}
+
+
+.ta-top-roght {
+    float: right;
+    margin: 5px 20px 0px 0px;
+    line-height: 12px;
+}
+.ta-top-roght p{font-size:14px;}
+
+.page-s{
+width: 55px !important;
+height: 30px !important;
+line-height: 30px !important;
+border-radius: 0px !important;
+text-indent: 4pt !important;
+padding-right:0px !important;}
+.t-tabs tr{
+	height:45px;
+	border-top:1px solid #E7E7E7;
+	border-bottom:1px solid #E7E7E7;}
+	.t-tabs th{
+    font-size: 13px;
+    color: #656565;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 30px;
+    word-break:break-all;	
+	
+	}
+.t-tabs td {
+    font-size: 13px;
+    color: #656565;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 30px;
+    text-align: left;
+    word-break:break-all;
+    overflow:hidden;
+    padding: 0px 10px 0px 0px;
+}
+.ac-tr{background:#F9F9F9;height:55px !important;}
+.ac-trs{height:55px !important;}
+.ac-td{color:#03752f !important;cursor:pointer;}
+.ac-td:hover{color:#CF2D22 !important; cursor:pointer;}
+.page-t1{float:left;font-size:16px;font-family:"微软雅黑";padding: 5px 10px 0px 0px;}
+.page-t1 input{
+    width: 25px;
+    text-align: center;
+    height: 20px;
+}
+.page-t1 span{color:#A4A4A4;}
+.page-t1 a{color:#333;}
+#change-t img {
+    position:fixed;
+    margin: 250px 0px 0px 108px;
+    z-index: 999;
+	cursor:pointer;
+}
+
+.btn2s::after {
+    line-height: 22pt !important;
+}
+
+.t-third input:hover{border: 1px solid #CF2D22;}
+select#selectPointOfInterest:hover{border: 1px solid #CF2D22 !important;}
+
+select::-ms-expand { display: none; }
+select#selectTravelCity
+{
+   width                    : 14em;
+   height                   : 3.2em;
+   padding                  : 0.2em 0.4em 0.2em 0.4em;
+   vertical-align           : middle;
+   border                   : 1px solid #E6EAED;
+   -moz-border-radius       : 0.2em;
+   -webkit-border-radius    : 0.2em;
+   border-radius            : 0.2em;
+   box-shadow               : inset 0 0 3px #a0a0a0;
+   -webkit-appearance       : none;
+   -moz-appearance          : none;
+   appearance               : none;
+   /* sample image from the webinfocentral.com */
+   background:url(../images/crl.png);
+   font-size                : 1.1em;
+   color                    : #000099;
+   cursor                   : pointer;
+}
+select#selectTravelCity  option
+{
+	font-size               : 1em;
+	padding                 : 0.2em 0.4em 0.2em 0.4em;
+	
+}
+select#selectTravelCity  option span:hover{background: #CF2D22 !important;}
+
+select#selectTravelCity  option[selected]{ font-weight:300;background:#DC2B21;}
+select#selectTravelCity  option:nth-child(even) { background-color:#f5f5f5; }
+select#selectTravelCity:hover
+{
+	color                   : #101010;
+}    
+select#selectTravelCity:focus {box-shadow: 0 0 2px 1px #555;}
+
+/*SELECT W/DOWN-ARROW*/
+select#selectPointOfInterest {
+    width: 105px;
+    height: 35px;
+    line-height: 35px;
+    text-indent: 4pt;
+    text-align: left;
+    vertical-align: middle;
+    box-shadow: inset 0 0 1px #E7E7E7;
+    border: 1px solid #cecccc;
+    border-radius: 4px;
+    -moz-appearance: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    outline: none;
+}
+select#selectPointOfInterest option
+{
+	padding             : 4px 10px 4px 10px;
+	font-size           : 14px;
+	font-weight         : normal;
+	
+}
+select#selectPointOfInterest option[selected]{ font-weight:bold;}
+select#selectPointOfInterest option:nth-child(even) { background-color:#f5f5f5; }
+select#selectPointOfInterest:hover {font-weight: 300;}
+select#selectPointOfInterest:focus {font-weight: 300;}

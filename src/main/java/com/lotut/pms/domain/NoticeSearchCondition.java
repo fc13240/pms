@@ -134,7 +134,7 @@ public class NoticeSearchCondition {
 		String endDispatchDateStr = endDispatchDate == null ? "" : formatter.format(endDispatchDate);
 		String keywordTypeStr = keyword == null ? "" : keywordType;
 		String keywordStr = keyword == null ? "" : keyword;
-		return 	"&noticeProcessStatus="+noticeProcessStatusStr+
+		return 	"&paperApplyType="+paperApplyTypeStr+"&patentType="+patentTypeStr+"&noticeProcessStatus="+noticeProcessStatusStr+
 				"&noticeType="+noticeTypeStr+"&startDispatchDate="+startDispatchDateStr+"&endDispatchDate="
 				+endDispatchDateStr+"&keyword="+keywordStr;
 	}
