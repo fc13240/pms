@@ -116,7 +116,7 @@
 	                  </c:if>
 	                  <c:if test="${order.orderStatus.statusId == 1}">
 	                    <div style="margin-top:40px;"> <a>
-	                      <button style="width:90px;" class="t-btn6" onclick="deleteOrder('${order.id}')">取消订单</button>
+	                      <button type="button" style="width:90px;" class="t-btn6" onclick="deleteOrder('${order.id}')">取消订单</button>
 	                      </a> </div>
 	                  </c:if>
 	                </td>
