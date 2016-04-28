@@ -159,14 +159,12 @@
 	                <td><c:out value="${patent.shareUsersAsString}"/>
 	                </td>
 	                <td><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
-	                  <button class="t-btn3">分享</button>
+	                  <button class="t-btn2">分享</button>
 	                  </a> <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
-	                  <button class="t-btn4">缴费</button>
-	                  </a> 
-<%-- 	                  <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>"> --%>
-<!-- 	                  <button class="t-btn1">出售</button> -->
-<!-- 	                  </a>  -->
-	                 </td>
+	                  <button class="t-btn2">缴费</button>
+	                  </a> <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
+	                  <button class="t-btn2">出售</button>
+	                  </a> </td>
 	              </tr>
 	            </c:forEach>
 	          </tbody>
