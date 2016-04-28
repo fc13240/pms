@@ -33,6 +33,7 @@
                 <div style="height:30px;"></div>
 					<div class="t-third">
 		          	<form>
+		          		<button type="button" style="width: 100px" class="t-btn3" onclick="javascript:addAddress()">增加地址</button>
 		          		<table id="simple-table" class="table table-striped table-bordered table-hover">
 		          			<thead>
 			                    <tr class="simple_bag">
