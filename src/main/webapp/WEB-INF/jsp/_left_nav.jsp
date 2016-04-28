@@ -2,13 +2,12 @@
 		<div class="left-nav" style="width:76px;position:fixed;top:80px;">
 		  <div style="clear:both;height:20px;"></div>
 		  <ul>
-			<a href="#">
-			<li> <img src="<s:url value='/temp/images/home.png'/>" />
-			  <h5>首页</h5>
-			</li>
-			</a> 
-			
-		    <a href="<s:url value='/main.html'/>">
+<!-- 			<a href="#"> -->
+<%-- 			<li> <img src="<s:url value='/temp/images/home.png'/>" /> --%>
+<!-- 			  <h5>首页</h5> -->
+<!-- 			</li> -->
+<!-- 			</a>  -->
+		    <a href="<s:url value='/patent/list.html?currentPage=1'/>">
 			<li class="left-nav-active"> <img src="<s:url value='/temp/images/setting.png'/>" />
 			  <h5>我的专利</h5>
 			</li>
