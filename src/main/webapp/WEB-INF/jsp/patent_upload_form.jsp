@@ -32,7 +32,11 @@
 				</div>
                 <div style="height:30px;"></div>
 				<div class="t-box">
-				123123
+					<form action="<s:url value='/patent/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+					
+					<input name="" type="file" />
+					<button type="submit" class="t-btn2">上传</button>
+					</form>  
 				</div>
              
                 

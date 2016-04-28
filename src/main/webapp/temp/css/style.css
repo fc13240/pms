@@ -200,6 +200,15 @@ cursor: pointer;
 	border: 1px solid #E6EAED;	
 	
 }
+.lt-con{
+height:4000px;
+width:85%;
+position:absolute;
+left:215px;
+margin-top:90px;
+background:#fff;	
+	
+}
 .t-third{
 	margin: 0px 0px 0px 15px;
     background: #fff;
