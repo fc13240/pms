@@ -34,13 +34,13 @@
 			<table class="table table-striped">
 			  <tr>
 				<td class="f-tar td-w125"><h4 class="lab">真实姓名：</h4></td>
-				<td class="ps-relative"><input class="ipt" name="truename" id="name" style="height:30px;width:200px;"  value="${user.name}" maxlength="10">
-				  <label style="display:none">
-				  <input class="radios"  type="radio" name="sex" value="0"   checked />
-				  先生</label>
-				  <label style="display:none">
-				  <input class="radios"  type="radio" name="sex" value="1"   />
-				  女士</label>
+				<td class="ps-relative"><input class="ipt" type="text" name="truename" id="name" style="height:30px;width:200px;"  value="${user.name}" maxlength="10">
+<!-- 				  <label style=""> -->
+<!-- 				  <input class="radios"  type="radio" name="sex" value="0"   checked /> -->
+<!-- 				  先生</label> -->
+<!-- 				  <label style=""> -->
+<!-- 				  <input class="radios"  type="radio" name="sex" value="1"   /> -->
+<!-- 				  女士</label> -->
 				</td>
 			  </tr>
 			  <tr>
