@@ -39,21 +39,34 @@
 				    <!-- PAGE CONTENT BEGINS -->
 				    <div class="row">
 				      <div class="col-xs-12">
-				        <form action="<s:url value='/user/updateUserDetail.html'/>" method="post">
-				          <div style="margin-bottom:10px;">
-				          <span style="width:100px;">真实姓名：</span>
-				            <label>${user.name}</label>
-				          </div>
-				          <div style="margin-bottom:10px;"> 
-				    		<span style="width:100px;"> 电子邮件：</span>      
-				            <input style="height:20px;" name="email"  id="email" type="text" value="${user.email}" maxlength="25" >
-				          </div>
-				          <div style="margin-bottom:10px;"> 
-				       		<span style="width:100px;"> 手机或固话：</span>     
-				           	<input style="height:20px;" name="phone" type="text" value="${user.phone}" maxlength="15" >
-				          </div>
-				          <input type="submit" class="t-btn3" value="保存"/>
-				        </form>
+					        <div class="patent-detail-caption">
+					        	<h3>个人信息编辑</h3>
+					        </div>
+					        &nbsp&nbsp&nbsp&nbsp
+							<table class="table table-striped">
+								<tr>
+		                            <td class="f-tar td-w125"><h4 class="lab">真实姓名：</h4></td>
+		                            <td class="ps-relative"><input class="ipt" name="truename" id="name" style="height:30px;width:200px;"  value="${user.name}" maxlength="10">
+		                                <label style="display:none"><input class="radios"  type="radio" name="sex" value="0"   checked />先生</label>
+		                                <label style="display:none"><input class="radios"  type="radio" name="sex" value="1"   />女士</label>
+		                            </td>
+                        		</tr>
+								<tr>
+		                            <td class="f-tar td-w125"><h4 class="lab">电子邮件：</h4></td>
+		                            <td> <input type="hidden" name="email_info"  value="1">
+		                            <input class="email"  id="email" type="text" style="height:30px;width:200px;"value="${user.email}" maxlength="25" ></td>
+                        		</tr>
+								<tr>
+		                            <td class="f-tar td-w125"><h4 class="lab">手机或电话号：</h4></td>
+		                            <td> <input type="hidden" name="phone_info"  value="2">
+		                            <input class="phone"  id="phone" type="text" style="height:30px;width:200px;" value="${user.phone}" maxlength="20" ></td>
+                        		</tr>
+                        		<tr>
+		                            <td class="f-tar td-w125"></td>
+		                            <td><input class="orange-red-btn" name="dosubmit" id="dosubmit" value="保&nbsp;&nbsp;存" type="button" onclick="javascript:updateDetail()"></td>
+		                            
+                        		</tr>													
+							</table>
 				        <!-- /.span -->
 				      </div>
 				      <!-- /.row -->
@@ -66,25 +79,35 @@
 		<!--container end-->
     </div>
 </div>
-<script>
-	$(document).ready(function(){
-	
-		$("img[class=cgh]").click(function(){
-			var ol = $('ol[class="hashTabber-nav hashTabber-sandstone"]')[0];
-			var ols =$('.con-list')[0];
-			if(ol.style.display=="inline-block"||ol.style.display==""){
-					this.style.marginLeft="0px";
-					this.src='<s:url value='/temp/images/tabs.png'/>';
-					ol.style.display="none";
-					ols.style.width="97%";
-				}else{
-					ol.style.display="inline-block";
-					this.style.marginLeft="108px";
-					this.src='<s:url value='/temp/images/tab.png'/>';
-					ols.style.width="88%";
-				}
+	<script>
+		$(document).ready(function(){
+		
+			$("img[class=cgh]").click(function(){
+				var ol = $('ol[class="hashTabber-nav hashTabber-sandstone"]')[0];
+				var ols =$('.con-list')[0];
+				if(ol.style.display=="inline-block"||ol.style.display==""){
+						this.style.marginLeft="0px";
+						this.src='<s:url value='/temp/images/tabs.png'/>';
+						ol.style.display="none";
+						ols.style.width="97%";
+					}else{
+						ol.style.display="inline-block";
+						this.style.marginLeft="108px";
+						this.src='<s:url value='/temp/images/tab.png'/>';
+						ols.style.width="88%";
+					}
+			});
 		});
-	});
-</script>
+	</script>
+	<script type="text/javascript">
+		function updateDetail(){
+			var username = $("#username").val();
+			var name = $("#name").val();
+			var email = $("#email").val();
+			var phone = $("#phone").val();
+			var url = "<s:url value='/user/updateUserDetail.html'/>?username=" +username +"&name="+ name+"&email="+email+"&phone="+phone;
+			location.href = url
+		}
+	</script>
 </body>
 </html>
