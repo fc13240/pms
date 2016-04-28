@@ -41,18 +41,23 @@
 				      <div class="col-xs-12">
 				        <form action="<s:url value='/user/addContactAddress.html'/>" method="post">
 				          <se:csrfInput/>
-				          <div style="margin-bottom:10px;"> 真实姓名：
-				            <input style="height:20px;" class="ipt" name="truename" id="name"   value="${user.name}" maxlength="10">
+				          <div style="margin-bottom:10px;">
+				          <span style="width:100px;">真实姓名：</span>
+				            <label>${user.name}</label>
 				          </div>
-				          <div style="margin-bottom:10px;"> 电子邮件：
+				          <div style="margin-bottom:10px;"> 
+				    <span style="width:100px;"> 电子邮件：</span>      
 				            <input style="height:20px;" class="email"  id="email" type="text" value="${user.email}" maxlength="25" >
 				          </div>
-				          <div style="margin-bottom:10px;"> 手机或固话：
+				          <div style="margin-bottom:10px;"> 
+				       <span style="width:100px;"> 手机或固话：</span>     
+				          
 				          <input type="hidden" name="phone_info"  value="2">
 				           <input style="height:20px;" id="phone" type="text" value="${user.phone}" maxlength="15" >
 				          </div>
-				          <div style="margin-bottom:10px;"> 详细地址:
-				            <input style="height:20px;"  name="dosubmit" id="dosubmit" value="保&nbsp;&nbsp;存" type="button" onclick="javascript:updateDetail()">
+				          <div style="margin-bottom:10px;"> 
+				    <span style="width:100px;"> 详细地址：</span>       
+				            <input style="height:20px;"  type="text" name="dosubmit" id="dosubmit" value=""  onclick="javascript:updateDetail()">
 				          </div>
 				          <input type="submit" value="保存"/>
 				        </form>
