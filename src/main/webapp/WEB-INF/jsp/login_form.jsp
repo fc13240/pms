@@ -278,11 +278,8 @@
 	 
 	      <div class="footer-Copy ml50" style="width: 960px;margin: 0 auto;">
 	        <p class="about-us"><a href="http://www.lotut.com/index.php/blog/9jd2r73zgp.html" target="_blank" rel="nofollow">关于我们</a><span>|</span>
-	          <a href="/index.php/blog/k7p3qm2q8e.html" target="_blank" rel="nofollow">交易流程</a><span>|</span>
-	          <a href="/index.php/blog/4n8lj03zqw.html" target="_blank" rel="nofollow">新手教程</a><span>|</span>
-	          
-	          <a href="/index.php/blog/095lzql4ke.html" target="_blank" rel="nofollow">联系我们</a><span>|</span>
-	          <a href="/index.php/products.html" target="_blank">商标市场</a></p>
+	          <a href="http://www.lotut.com/index.php/blog/095lzql4ke.html" target="_blank" rel="nofollow">联系我们</a><span>|</span>
+	          <a href="http://www.lotut.com/index.php/products.html" target="_blank">商标市场</a></p>
 	        <p class="Copyright">Copyright @ 2016龙图腾版权，技术支持龙图腾 </p>
 	      </div>
 	    </div>
