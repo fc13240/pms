@@ -45,7 +45,7 @@
 	      <li>
 	        <p>专利状态</p>
 	        <label id="lblSelect">
-	        <select name="patentStatus.patentStatusId" id="patentStatusId">
+	        <select name="patentStatus.patentStatusId" id="patentStatusId" required>
 	          <option value="">全部</option>
 	          <c:forEach items="${allPatentStatus}" var="patentStatus">
 	            <option value="<c:out value='${patentStatus.patentStatusId}'/>">
