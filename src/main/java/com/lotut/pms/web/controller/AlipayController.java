@@ -47,7 +47,7 @@ public class AlipayController {
 		Order order = orderService.getOrderById(orderId);
 		String out_trade_no = String.valueOf(order.getId());
 		String subject = "专利费用";
-		String total_fee = "0.01";
+		String total_fee = String.valueOf(order.getAmount());
 		String body = "专利费用描述";
 		
 		Map<String, String> paramMap = new HashMap<>();
