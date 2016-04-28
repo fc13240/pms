@@ -34,14 +34,19 @@
 				<div class="t-third">
 				<form action="<s:url value='/user/changePassword.html'/>" id="reset-form" name="pwd_change_form" method="post">									
 				<se:csrfInput/>
-						请输入原密码：<input  style="width:300px;height:25px;" type="text" class="form-control" name="lastPassword" id="lastPassword" placeholder="原始密码" onkeydown="clearPasswordErrorSpan()" />
-						<c:if test="${success != null && !success}">
-							<div>
-								<span id="passwordError" class="passwordError">原密码输入错误!!</span>
-							</div>
-						</c:if>
-						请输入新密码：<input style="width:300px;height:25px;" type="password" class="form-control" name="newPassword" id="newPassword" minlength="4" maxlength="30" placeholder="新密码至少4位" required/>
-						请确认新密码：<input style="width:300px;height:25px;" type="password" class="form-control" name="newPasswordConfirm" id="newPasswordConfirm" minlength="4" maxlength="30" equalTo="#newPassword"placeholder="确认新密码" required/>
+							<h5>请输入原密码：</h5>
+								<input  style="width:300px;height:25px;" type="text" class="form-control" name="lastPassword" id="lastPassword" placeholder="原始密码" onkeydown="clearPasswordErrorSpan()" />
+								<c:if test="${success != null && !success}">
+									<div>
+										<span id="passwordError" class="passwordError" style="color:red">原密码输入错误!!</span>
+									</div>
+								</c:if>
+								<br>
+						<h5>请输入新密码：</h5>
+						<input style="width:300px;height:25px;" type="password" class="form-control" name="newPassword" id="newPassword" minlength="4" maxlength="30" placeholder="新密码至少4位" required/>
+						<br>
+						<h5>请确认新密码：</h5>
+						<input style="width:300px;height:25px;" type="password" class="form-control" name="newPasswordConfirm" id="newPasswordConfirm" minlength="4" maxlength="30" equalTo="#newPassword"placeholder="确认新密码" required/>
 						<div style="margin-top:30px; float:left;width:300px;">
 						<input type="submit" id="resetPassword" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;margin-left:30px;" value="确认修改" />
 						<input type="reset" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;" value="重置" name="reset" />

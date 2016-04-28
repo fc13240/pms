@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div class="top" style="min-width:1300px;">
+<div class="top" style="min-width:1300px">
 	<div class="top-left"><img src="<s:url value='/temp/images/logo.png'/>" /></div>
 	<div class="top-right">
 		<div class="top-search">

@@ -14,7 +14,7 @@
 <%@ include file="_top.jsp" %>
  
 <div style="min-width:1300px;height:1500px; background:#F3F3F5;">
-	<div style="float:left;width:5%;">
+	<div style="float:left;width:70px;">
 		<%@ include file="_left_nav.jsp" %>
 	</div>
 	<div style="float:left;width:95%;">
