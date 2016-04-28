@@ -20,7 +20,12 @@
 				<small>欢迎您!</small>
 				<se:authentication property="principal.username" />
 			</span>
-			<a href="#"><img src="<s:url value='/temp/images/exit.png'/>" class="top-exit"/></a>
+			<a href="javascript:$('#logoutForm').submit();"><img src="<s:url value='/temp/images/exit.png'/>" class="top-exit"/></a>
+	
+			<form action="<s:url value='/user/logout.html'/>" method="post" id="logoutForm">
+			<se:csrfInput/>
+			<input type="submit" style="display:none;" />
+			</form>	
 		</div>
 	</div>
 </div>
