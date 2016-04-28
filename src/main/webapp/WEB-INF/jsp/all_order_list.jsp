@@ -52,14 +52,14 @@
                         <div class="widget-body" style="display: none;border-left:1px solid #CCC;border-right:1px solid #CCC;border-bottom:1px solid #CCC;boder-top:none;width:512px;margin-left:5px;">
                         	
 	                            <div class="widget-main">
-	                            	<div style="margin-top:10px;">用户筛选
-	                                <select name="userId" id="userId">
-	                                    <option value="">全部</option>
-									  	<c:forEach items="${allUser}" var="user">
-											<option value="<c:out value='${user.userId}'/>"><c:out value="${user.username}"/></option>
-										</c:forEach>
-	                                </select>	
-	                                </div>
+<!-- 	                            	<div style="margin-top:10px;">用户筛选 -->
+<%-- 	                                <select name="userId" id="userId"> --%>
+<!-- 	                                    <option value="">全部</option> -->
+<%-- 									  	<c:forEach items="${allUser}" var="user"> --%>
+<%-- 											<option value="<c:out value='${user.userId}'/>"><c:out value="${user.username}"/></option> --%>
+<%-- 										</c:forEach> --%>
+<%-- 	                                </select>	 --%>
+<!-- 	                                </div> -->
 	                                <div style="margin-top:10px;">支付状态
 	                                <select name="orderStatus" id="orderStatusId">
 	                                    <option value="">全部</option>
