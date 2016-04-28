@@ -21,10 +21,7 @@
 		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">好友请求</span>
 	</div>
 	
-	<div class="t-third">
-	  <div class="page-content">
-		<div class="row">
-		  <div class="col-lg-12">
+	<div class="lt-box">
 			<table class="table table-bordered">
 			  <tr>
 				<th>序号</th>
@@ -41,16 +38,7 @@
 				</tr>
 			  </c:forEach>
 			</table>
-		  </div>
-		</div>
-		<div class="footer">
-		  <div class="footer-inner">
-			<!-- #section:basics/footer -->
-			<div class="footer-content"> <span class="bigger-120"> <span class="blue bolder">龙图腾</span> 2013-2014 </span> &nbsp; &nbsp; </div>
-			<!-- /section:basics/footer -->
-		  </div>
-		</div>
-		<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"> <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i> </a> </div>
+
 	</div>
 
 
