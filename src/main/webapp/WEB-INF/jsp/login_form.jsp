@@ -63,7 +63,7 @@
 									<div class="widget-main">
 										<h4 class="header blue lighter bigger">
 											<i class="ace-icon fa fa-coffee green"></i>
-											请输入您的信息
+											LOTUT专利管理系统
 										</h4>
 
 										<div class="space-6"></div>
@@ -269,6 +269,24 @@
 			
 	</script>
 	<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
-	<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	
+	<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>
+	<!-- 页脚 -->
+	<br><br><br><br><br><br><br><br><br><br>
+	<div id="footer">
+	  <div class="container clear">
+	    <div class="footer_r">
+	      <div class="footer-Copy ml50" style="margin: 0px auto;text-align:center">
+	        <p class="about-us"><a href="http://s.lotut.com/" target="_blank" rel="nofollow">关于我们</a><span>|</span>
+	          <a href="http://so.lotut.com/" target="_blank" rel="nofollow">专利检索</a><span>|</span>
+	          <a href="http://www.lotut.com/index.php/blog/095lzql4ke.html" target="_blank" rel="nofollow">联系我们</a><span>|</span>
+	          <a href="http://www.lotut.com/index.php/products.html" target="_blank">商标市场</a></p>
+	        <p class="Copyright">Copyright @ 2016龙图腾版权，技术支持龙图腾信息技术有限公司 </p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+		
 </body>
+
+
 </html>

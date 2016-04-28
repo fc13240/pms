@@ -23,7 +23,7 @@ public class AdminOrderSearchCondition {
 	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 	public Integer getOrderStatus() {

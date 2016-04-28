@@ -73,7 +73,7 @@
 								</tr>       
 		          			</c:forEach>                			       			     			
 		          		</table>
-		          		<input type="button" onclick="javascript:addAddress()" value="增加地址">
+		          		<button type="button" style="width: 100px" class="t-btn3" onclick="javascript:addAddress()">增加地址</button>
 		          	</form>
 					</div>
             
