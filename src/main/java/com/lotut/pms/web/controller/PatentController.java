@@ -195,7 +195,7 @@ public class PatentController {
 		int userId = PrincipalUtils.getCurrentUserId();
 		patent.setOwnerId(userId);
 		patentService.addPatent(patent);
-		return "addAddresses_success";
+		return "add_patent_success";
 	}
 	
 }
