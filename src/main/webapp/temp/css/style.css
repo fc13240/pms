@@ -201,7 +201,7 @@ cursor: pointer;
 	
 }
 .lt-con{
-height:4000px;
+min-height:700px;
 width:85%;
 position:absolute;
 left:215px;
