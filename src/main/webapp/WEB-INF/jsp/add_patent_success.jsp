@@ -26,7 +26,7 @@
 		  <label class="block clearfix"> <span class="block input-icon input-icon-right" style="font-size:20px;"> 操作成功！ </span> </label>
 		</div>
 		<!-- /.widget-box -->
-		<div class="toolbar center"> <a href="<s:url value='/patent/list.html'/>"  > <i class="ace-icon fa fa-arrow-left"></i> 返回 </a> </div>
+		<div class="toolbar center"> <a href="<s:url value='/patent/list.html?currentPage=1'/>"  > <i class="ace-icon fa fa-arrow-left"></i> 返回 </a> </div>
 		</div>
 	</div>
 
