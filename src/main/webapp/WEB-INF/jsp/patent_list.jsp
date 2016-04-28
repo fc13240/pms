@@ -137,7 +137,7 @@
 	              <th width="60">案件状态</th>
 	              <th width="50">内部编码</th>
 	              <th width="110">共享人</th>
-	              <th width="200">操作</th>
+	              <th width="140">操作</th>
 	            </tr>
 	          </thead>
 	          <tbody>
@@ -162,9 +162,11 @@
 	                  <button class="t-btn2">分享</button>
 	                  </a> <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
 	                  <button class="t-btn2">缴费</button>
-	                  </a> <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
-	                  <button class="t-btn2">出售</button>
-	                  </a> </td>
+	                  </a> 
+<%-- 	                  <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>"> --%>
+<!-- 	                  <button class="t-btn2">出售</button> -->
+<!-- 	                  </a>  -->
+	                  </td>
 	              </tr>
 	            </c:forEach>
 	          </tbody>

@@ -115,13 +115,13 @@
 													</span>
 												</label>												
 
-												<label class="block">
-													<input type="checkbox" class="ace" />
-													<span class="lbl">
-														同意
-														<a href="#">用户条约</a>
-													</span>
-												</label>
+<!-- 												<label class="block"> -->
+<!-- 													<input type="checkbox" class="ace" /> -->
+<%-- 													<span class="lbl"> --%>
+<!-- 														同意 -->
+<!-- 														<a href="#">用户条约</a> -->
+<%-- 													</span> --%>
+<!-- 												</label> -->
 
 												<div class="space-24"></div>
 
