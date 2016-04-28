@@ -12,59 +12,21 @@
 </head>
 <body>
 <%@ include file="_top.jsp" %>
- 
-<div style="min-width:1300px;height:1500px; background:#F3F3F5;">
-	<div style="float:left;width:5%;">
-		<%@ include file="_left_nav.jsp" %>
+<%@ include file="_left_nav.jsp" %>
+<%@ include file="_left_nav2.jsp" %>
+<div class="lt-con">
+	<div class="t-ti">
+		<hr class="t-hr">
+		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">上传专利</span>
 	</div>
-	<div style="float:left;width:95%;">
+	<div class="t-box">
+		<form action="<s:url value='/patent/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+		
+		<input name="" type="file" />
+		<button type="submit" class="t-btn2">上传</button>
+		</form>  
+	</div>
 
-        <div class="center-cconcenct">
-        	<!-- 代码 开始 -->
-            <div id="change-t"><img src="<s:url value='/temp/images/tab.png'/>"  class="cgh"/></div>
-			<div style="float:left;width:9%;">
-				<%@ include file="_left_nav2.jsp" %>
-			</div>
-			<div class="con-list" style="float:left;width:91%;">
-				<div class="t-ti">
-					<hr class="t-hr">
-					<span style="font-size: 16px;font-weight: 300;line-height: 24px;">上传专利</span>
-				</div>
-                <div style="height:30px;"></div>
-				<div class="t-box">
-					<form action="<s:url value='/patent/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
-					
-					<input name="" type="file" />
-					<button type="submit" class="t-btn2">上传</button>
-					</form>  
-				</div>
-             
-                
-			</div>
-         
-        </div>
-		<!--container end-->
-    </div>
 </div>
-<script>
-	$(document).ready(function(){
-	
-		$("img[class=cgh]").click(function(){
-			var ol = $('ol[class="hashTabber-nav hashTabber-sandstone"]')[0];
-			var ols =$('.con-list')[0];
-			if(ol.style.display=="inline-block"||ol.style.display==""){
-					this.style.marginLeft="0px";
-					this.src='<s:url value='/temp/images/tabs.png'/>';
-					ol.style.display="none";
-					ols.style.width="97%";
-				}else{
-					ol.style.display="inline-block";
-					this.style.marginLeft="108px";
-					this.src='<s:url value='/temp/images/tab.png'/>';
-					ols.style.width="88%";
-				}
-		});
-	});
-</script>
 </body>
 </html>
