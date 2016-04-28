@@ -200,6 +200,10 @@ cursor: pointer;
 	border: 1px solid #E6EAED;	
 	
 }
+.lt-box{
+	margin:20px;
+	
+}
 .lt-con{
 min-height:700px;
 width:85%;

@@ -20,18 +20,14 @@
 		<hr class="t-hr">
 		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">上传通知书</span>
 	</div>
-	<form action="<s:url value='/notice/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">
-	<!-- #section:elements.form -->
-	<se:csrfInput/>
-	<div class="form-group">
-		<div class="col-xs-12">
-			<input multiple="" type="file" name="noticeFile" style="display:none;" id="id-input-file-3" required />
-	<!-- /section:custom/file-input -->
-		</div>
+	<div class="lt-box">
+		<form action="<s:url value='/notice/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">
+		<!-- #section:elements.form -->
+		<se:csrfInput/>
+		<input multiple="" type="file" name="noticeFile"  />
+		<button class="btn btn-info" type="submit" style="height:45px;width：100px">上传</button>
+		</form> 	
 	</div>
-	<button class="btn btn-info" type="submit" style="height:45px;width：100px">上传</button>
-	</form> 	
-
 
 </div>
 
