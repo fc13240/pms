@@ -23,7 +23,7 @@
         	<!-- 代码 开始 -->
             <div id="change-t"><img src="<s:url value='/temp/images/tab.png'/>"  class="cgh"/></div>
 			<div style="float:left;width:9%;">
-				<%@ include file="_left_nav2.jsp" %>
+				<%@ include file="_left_nav_user.jsp" %>
 			</div>
 			<div class="con-list" style="float:left;width:91%;">
 				<div class="t-ti">
@@ -69,7 +69,7 @@
 					        详细地址:
 					        <input style="height:20px;" type="text" name="detailAddress" required/>
 					        </div>
-					         <input type="submit" value="保存"/>
+					         <button type="submit" class="t-btn3">保存</button>
 					      </form>
 					      <!-- /.span -->
 					    </div>
