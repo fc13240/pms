@@ -50,7 +50,6 @@
 			</tr>
 		  </c:forEach>
 		</table>
-		<button type="button" style="width: 100px" class="t-btn3" onclick="javascript:addAddress()">增加地址</button>
 	  </form>
 	</div>
 
