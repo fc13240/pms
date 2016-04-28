@@ -66,7 +66,7 @@
 	              <tr class="simple_bag">
 	                <th colspan="4"> <fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
 	                  &nbsp;&nbsp;
-	                  订单号：${order.id}<span style="margin-left:100px;">
+	                  	订单号：${order.id}<span style="margin-left:100px;">
 	                  <input type="submit" value="导出费用清单">
 	                  </span> </th>
 	              </tr>
@@ -106,7 +106,7 @@
 	                <td> ${order.postAddress.receiver}
 	                  <div><a href="javascript:void" onClick="window.open('<s:url value="/order/detail/"/>${order.id}.html')">订单详情</a></div></td>
 	                <td>总额: ￥${order.amount}</td>
-	                <td width="100px;"> ${order.orderStatus.statusDescription}
+	                <td width="100px;"> <h5>${order.orderStatus.statusDescription}</h5>
 	                  <div style="clear:both;"></div>
 	                  <c:if test="${order.orderStatus.statusId == 1}">
 	                    <div> <a href="javascript:void" onClick="window.open('<s:url value="/alipay/index.html?orderId="/>${order.id}')">
@@ -115,8 +115,8 @@
 	                    <br>
 	                  </c:if>
 	                  <c:if test="${order.orderStatus.statusId == 1}">
-	                    <div style="margin-top:40px;"> <a href="<s:url value='/order/delete.html'/>?orderId=<c:out value='${order.id}'/>">
-	                      <button style="width:90px;" class="t-btn6">取消订单</button>
+	                    <div style="margin-top:40px;"> <a>
+	                      <button style="width:90px;" class="t-btn6" onclick="deleteOrder('${order.id}')">取消订单</button>
 	                      </a> </div>
 	                  </c:if>
 	                </td>
@@ -193,6 +193,75 @@
 				}
 		});
 	});
+</script>
+
+<script type="text/javascript">
+		function gotoPage() {
+			var pageNo = document.getElementById("page.pageNo").value;
+			
+			if(isNaN(pageNo)){
+				alert("请输入数值");
+				return;
+			}
+			
+			if(pageNo==""){
+				alert("请输入数值")
+				return;
+			}
+			
+			pageNo=parseInt(pageNo);
+			
+			if(pageNo<1 || pageNo > parseInt("${page.totalPages}")){
+				alert("只能输入1-${page.totalPages}之间的数值");
+				return;
+			}
+			var url = "<s:url value='/order/list.html'/>?currentPage=" + pageNo;
+			
+			<c:if test="${searchCondition != null}">
+					url = "<s:url value='/order/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+			</c:if>
+			
+			location.href = url
+		}
+		
+		function gotoPageForEnter(event) {
+			var e = event ? event : window.event;
+					
+			if(event.keyCode == 13) {
+				gotoPage();
+			}
+		}
+</script>
+<script type="text/javascript">
+	$(function() {
+		formutil.setElementValue("#pageSizeSelect", ${page.pageSize});
+		var forms = $("form");
+		if (!/msie/i.test(navigator.userAgent)) {
+			forms.attr('target', "exportFeeFrame");
+		} 
+	});
+	
+	function setPageSize() {
+		var pageSize = $("#pageSizeSelect").val();
+		
+		$.ajax({
+			url: "<s:url value='/user/setPageSize.html'/>?pageSize=" + pageSize, 
+			type: 'get', 
+			success: function() {
+				location.reload();
+			}
+		});		
+	}
+	
+	function deleteOrder(orderId) {
+		$.ajax({
+			url: "<s:url value='/order/delete.html'/>?orderId="+ orderId,
+			type: 'get', 
+			success: function() {
+				location.reload();
+			}
+		});		
+	}
 </script>
 </body>
 </html>
