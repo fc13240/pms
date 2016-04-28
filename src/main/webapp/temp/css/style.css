@@ -6,9 +6,9 @@ html{
 	background: #F3F3F5;
 }
 body{
-	font:12px "微软雅黑";
+	font:12px "΢���ź�";
 }
-button{ font-family:"微软雅黑";}
+button{ font-family:"΢���ź�";}
 img{
 	border:none;
 }
@@ -25,7 +25,7 @@ ul{
 	margin:0px;
 }
 input,select{
-	font:14px "微软雅黑";
+	font:14px "΢���ź�";
 	vertical-align:middle;
 }
 
@@ -193,6 +193,13 @@ margin: 250px 0px 0px 108px;
 z-index: 999;
 cursor: pointer;
 }
+.t-box{
+	margin: 0px 0px 0px 15px;
+    background: #fff;
+    padding: 30px 0px 100px 20px;
+	border: 1px solid #E6EAED;	
+	
+}
 .t-third{
 	margin: 0px 0px 0px 15px;
     background: #fff;
@@ -349,7 +356,7 @@ padding-right:0px !important;}
 .ac-trs{height:55px !important;}
 .ac-td{color:#03752f !important;cursor:pointer;}
 .ac-td:hover{color:#CF2D22 !important; cursor:pointer;}
-.page-t1{float:left;font-size:16px;font-family:"微软雅黑";padding: 5px 10px 0px 0px;}
+.page-t1{float:left;font-size:16px;font-family:"΢���ź�";padding: 5px 10px 0px 0px;}
 .page-t1 input{
     width: 25px;
     text-align: center;
