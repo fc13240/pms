@@ -20,7 +20,7 @@
 <div class="lt-con">
 	<div class="t-ti">
 		<hr class="t-hr">
-		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">我的通知书</span>
+		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">上传专利</span>
 	</div>
 	
 	<div class="lt-box">

@@ -22,7 +22,7 @@
 	</div>
 	
 	<div class="t-box">
-		<form action="<s:url value='/patent/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+		<form action="<s:url value='/notice/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
 		<input style="display:none;" id="id_notice_file" name="noticeFile" type="file" />
 		<input style="width:300px;height:25px;" type="text" id="filename" placeholder="请选择文件" readonly="readonly">
 		<button type="button" onclick="$('input[id=id_notice_file]').click();" class="t-btn3">浏览</button>
