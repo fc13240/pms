@@ -9,7 +9,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>龙图腾专利</title>
 <%@ include file="_css.jsp" %>
-
 </head>
 <body>
 <%@ include file="_top.jsp" %>

@@ -33,8 +33,7 @@
                 <div style="height:30px;"></div>
 
 				<div class="t-third">
-                   欢迎使用龙图腾专利管理       
-                            	
+                  	 欢迎使用龙图腾专利管理          	
                 </div>                
                 
 			</div>

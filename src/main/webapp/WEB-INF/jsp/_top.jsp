@@ -7,11 +7,17 @@
 			<input type="text" name="search" placeholder="&nbsp;&nbsp;搜索你要的..."/>
 			<a href="javascript:;">搜索</a>
 			</div>   
-			<div id="Button1" onClick="hidslt()" style="display:block;" class="top-sbtn">国内外专利检索<img src="<s:url value='/temp/images/search.png'/>" /></div>
+			<div id="Button1" onClick="hidslt()" style="display:block;" class="top-sbtn" >
+			<a href="http://so.lotut.com/" target="_blank" rel="nofollow"><font color="#FFF">国内外专利检索</font></a>
+			<img src="<s:url value='/temp/images/search.png'/>" />
+			</div>
 		</div>
 		<div class="top-user" id="top-user">
 			<img src="<s:url value='/temp/images/user.png'/>" />
-			<span>15555866358</span>
+			<span class="user-info">
+				<small>欢迎您!</small>
+				<se:authentication property="principal.username" />
+			</span>
 			<a href="#"><img src="<s:url value='/temp/images/exit.png'/>" class="top-exit"/></a>
 		</div>
 	</div>

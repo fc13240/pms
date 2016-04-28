@@ -276,7 +276,7 @@
 	  <div class="container clear">
 	    <div class="footer_r">
 	      <div class="footer-Copy ml50" style="margin: 0px auto;text-align:center">
-	        <p class="about-us"><a href="http://s.lotut.com/" target="_blank" rel="nofollow">关于我们</a><span>|</span>
+	        <p class="about-us"><a href="http://cn.lotut.com/" target="_blank" rel="nofollow">关于我们</a><span>|</span>
 	          <a href="http://so.lotut.com/" target="_blank" rel="nofollow">专利检索</a><span>|</span>
 	          <a href="http://www.lotut.com/index.php/blog/095lzql4ke.html" target="_blank" rel="nofollow">联系我们</a><span>|</span>
 	          <a href="http://www.lotut.com/index.php/products.html" target="_blank">商标市场</a></p>

@@ -4,23 +4,23 @@
 		  <ul>
 			<a href="#">
 			<li> <img src="<s:url value='/temp/images/home.png'/>" />
-			  <p>首页</p>
+			  <h4 style="font-family:"微软雅黑">首页</h4>
 			</li>
 			</a> 
 		    <a href="<s:url value='/main.html'/>">
 			<li class="left-nav-active"> <img src="<s:url value='/temp/images/setting.png'/>" />
-			  <p>我的专利</p>
+			  <h4 style="font-family:"微软雅黑">我的专利</h4>
 			</li>
 			</a> 
 			<a href="<s:url value='/notice/list.html?currentPage=1'/>">
 			<li> <img src="<s:url value='/temp/images/purse.png'/>" />
-			  <p>通知书</p>
+			  <h4 style="font-family:"微软雅黑">通知书</h4>
 			</li>
 			</a>			
 			
 			<a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>">
 			<li> <img src="<s:url value='/temp/images/purse.png'/>" />
-			  <p>专利缴费</p>
+			  <h4 style="font-family:"微软雅黑">专利缴费</h4>
 			</li>
 			</a>
 <!-- 			<li class="nav-jy"> -->
@@ -29,13 +29,13 @@
 <!-- 			</li> -->
 			<a href="<s:url value='/friend/list.html'/>">
 			<li> <img src="<s:url value='/temp/images/friend.png'/>" />
-			  <p>我的好友</p>
+			  <h4 style="font-family:"微软雅黑">我的好友</h4>
 			</li>
 			</a>
 
 			<a href="<s:url value='/user/detail.html'/>">
 			<li> <img src="<s:url value='/temp/images/data.png'/>" />
-			  <p>用户中心</p>
+			  <h4 style="font-family:"微软雅黑">用户中心</h4>
 			</li>
 			</a> <a href="#">
 
