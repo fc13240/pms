@@ -39,27 +39,20 @@
 				    <!-- PAGE CONTENT BEGINS -->
 				    <div class="row">
 				      <div class="col-xs-12">
-				        <form action="<s:url value='/user/addContactAddress.html'/>" method="post">
-				          <se:csrfInput/>
+				        <form action="<s:url value='/user/updateUserDetail.html'/>" method="post">
 				          <div style="margin-bottom:10px;">
 				          <span style="width:100px;">真实姓名：</span>
 				            <label>${user.name}</label>
 				          </div>
 				          <div style="margin-bottom:10px;"> 
-				    <span style="width:100px;"> 电子邮件：</span>      
-				            <input style="height:20px;" class="email"  id="email" type="text" value="${user.email}" maxlength="25" >
+				    		<span style="width:100px;"> 电子邮件：</span>      
+				            <input style="height:20px;" name="email"  id="email" type="text" value="${user.email}" maxlength="25" >
 				          </div>
 				          <div style="margin-bottom:10px;"> 
-				       <span style="width:100px;"> 手机或固话：</span>     
-				          
-				          <input type="hidden" name="phone_info"  value="2">
-				           <input style="height:20px;" id="phone" type="text" value="${user.phone}" maxlength="15" >
+				       		<span style="width:100px;"> 手机或固话：</span>     
+				           	<input style="height:20px;" name="phone" type="text" value="${user.phone}" maxlength="15" >
 				          </div>
-				          <div style="margin-bottom:10px;"> 
-				    <span style="width:100px;"> 详细地址：</span>       
-				            <input style="height:20px;"  type="text" name="dosubmit" id="dosubmit" value=""  onclick="javascript:updateDetail()">
-				          </div>
-				          <input type="submit" value="保存"/>
+				          <input type="submit" class="t-btn3" value="保存"/>
 				        </form>
 				        <!-- /.span -->
 				      </div>
@@ -67,12 +60,6 @@
 				    </div>
 				  </div>
 				</div>
-
-
-
-                      
-              
-                
 			</div>
          
         </div>
