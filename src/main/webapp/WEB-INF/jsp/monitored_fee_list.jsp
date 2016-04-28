@@ -245,14 +245,7 @@
 	</div>
 <!-- list end -->
 </div>
-
-
-
-
-
-
-
-
+<iframe id="feeExcelFileFrame" style="display:none"></iframe>	
 
 <script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 
