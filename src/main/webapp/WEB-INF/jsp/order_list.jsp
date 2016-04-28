@@ -31,7 +31,7 @@
 					<span style="font-size: 16px;font-weight: 300;line-height: 24px;">订单</span>
 				</div>
                 <div style="height:30px;"></div>
-			        <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
+                	<form action="<s:url value='/order/search.html'/>" method="get">
 			          <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 			          <div class="t-third">
 			            <ul>
@@ -63,7 +63,8 @@
 			              <li style="width: 385px;">
 			                <p>订单号</p>
 			                <input name="keyword" id="keywordId" value="" placeholder="订单号" class="t-input"/>
-			                <button>查询</button>
+			                <button type="submit">查询</button>
+			                
 			              </li>
 			            </ul>
 			          </div>
