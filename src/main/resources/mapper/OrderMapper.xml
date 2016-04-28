@@ -266,9 +266,6 @@
 					LEFT JOIN contact_addresses ca ON o.post_address = ca.id
 					join users u on o.user = u.user_id
 				 WHERE o.order_status in (2, 4)
-				<if test="userId != null">
-			 		and u.user_id = #{userId}
-			 	</if>
 			 	<if test="orderStatus != null">
 			 		and o.order_status = #{orderStatus}
 			 	</if>	
@@ -302,9 +299,6 @@
 					LEFT JOIN contact_addresses ca ON o.post_address = ca.id
 					join users u on o.user = u.user_id
 				 WHERE o.order_status in (2, 4)
-				<if test="userId != null">
-			 		and u.user_id = #{userId}
-			 	</if>
 			 	<if test="orderStatus != null">
 			 		and o.order_status = #{orderStatus}
 			 	</if>	
