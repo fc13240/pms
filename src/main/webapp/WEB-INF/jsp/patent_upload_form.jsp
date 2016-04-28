@@ -21,12 +21,18 @@
 	</div>
 	<div class="t-box">
 		<form action="<s:url value='/patent/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
-		
-		<input name="" type="file" />
+		<input style="display:none;" id="id_patent_file" name="notice_file" type="file" />
+		<input style="width:300px;height:25px;" type="text" id="filename" placeholder="请选择文件" readonly="readonly">
+		<button type="button" onclick="$('input[id=id_patent_file]').click();" class="t-btn3">浏览</button>
 		<button type="submit" class="t-btn2">上传</button>
 		</form>  
 	</div>
 
 </div>
+<script type="text/javascript">
+	$('input[id=id_patent_file]').change(function() {  
+		$('#filename').val($(this).val());  
+	});
+</script>
 </body>
 </html>
