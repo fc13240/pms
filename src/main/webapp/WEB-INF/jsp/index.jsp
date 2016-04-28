@@ -14,12 +14,17 @@
 <%@ include file="_top.jsp" %>
  
 <div style="min-width:1300px;height:1500px; background:#F3F3F5;">
+<<<<<<< HEAD
 
 	<%@ include file="_left_nav.jsp" %>
 	<%@ include file="_left_nav2.jsp" %>
 	<div style="height:4000px;width:85%;position:absolute;left:210px;margin-top:100px; background:#fff;">
 	<div style="height:200px;background:#deded;">33333</div>
 		<div >123123</div>
+=======
+	<div style="float:left;width:70px;">
+		<%@ include file="_left_nav.jsp" %>
+>>>>>>> bd9f3b21ac0110c0c4dca86081530456b0a0037a
 	</div>
 <!-- 	<div style="float:left;margin-left:206px;min-width:1200px;"> -->
 <!--         <div class="center-cconcenct"> -->

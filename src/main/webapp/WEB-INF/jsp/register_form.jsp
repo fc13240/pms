@@ -68,7 +68,7 @@
 										</h4>
 
 										<div class="space-6"></div>
-										<p> 输入您的详细信息: </p>
+										<h4> 输入您的详细信息: </h4>
 
 										<form id="registerForm" action="<s:url value='/user/register.html'/>" method="post" >
 										<se:csrfInput/>
@@ -141,7 +141,7 @@
 									</div>
 
 									<div class="toolbar center">
-										<a href="<s:url value='/loginForm.html'/>"  >
+										<a href="<s:url value='/loginForm.html'/>"  style="color:yellow">
 											<i class="ace-icon fa fa-arrow-left"></i>
 											返回登录
 										</a>

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <div class="top" style="min-width:1300px;height:80px;position:fixed;top:0px;z-index:10;">
+=======
+<div class="top" style="min-width:1300px">
+>>>>>>> bd9f3b21ac0110c0c4dca86081530456b0a0037a
 	<div class="top-left"><img src="<s:url value='/temp/images/logo.png'/>" /></div>
 	<div class="top-right">
 		<div class="top-search">

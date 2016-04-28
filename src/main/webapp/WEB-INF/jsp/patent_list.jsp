@@ -225,7 +225,147 @@
               </c:if>
             </div>
           </div>
+<<<<<<< HEAD
           <!-- /.span -->
+=======
+        </form>
+        <!--search box end-->
+        <div style="clear:both;height:30px;"></div>
+        <div class="t-table">
+
+			<div class="main-container" id="main-container">
+			  <div class="row">
+				<div class="col-xs-12">
+				  <!-- PAGE CONTENT BEGINS -->
+				  <div class="row">
+					<div class="col-xs-12">
+					  <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> 
+					  <span class="input-group-btn" > 
+						<div class="ta-top" style="margin:8px;">
+							<a href="javascript:batchShare()"><button class="t-btn3">批量分享</button></a>
+							<a href="javascript:batchGrabFees()"><button class="t-btn4">官费查询</button></a>
+<!-- 							<button class="t-btn5">加入交易</button> -->
+						</div>					  
+					  </span> </div>
+					  <table id="simple-table" class="table table-striped table-bordered table-hover">
+						<thead>
+						  <tr class="simple_bag">
+							<th class="center"> <label class="pos-rel">
+							  <input type="checkbox" class="patent-check-item" id="checkall"  name="checkall" />
+							  <span class="lbl"></span> </label>
+							</th>
+							<th class="center" width="45">序号</th>
+							<th>申请号/专利号</th>
+							<th width="170">专利名称</th>
+							<th>第一申请人 </th>
+							<th width="90" class="hidden-480"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申请日</th>
+							<th width="60">专利类型</th>
+							<th width="60">案件状态</th>
+							<th width="50">内部编码</th>
+							<th width="110">共享人</th>
+							<th width="200">操作</th>
+						  </tr>
+						</thead>
+						<tbody>
+						  <c:forEach items="${patents}" var="patent" varStatus="status">
+							<tr>
+							  <td class="center"><label class="pos-rel"> <span class="batch-share-item">
+								<input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.patentId}'/>">
+								<span class="lbl"></span></label></td>
+							  <td class="center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+							  <td>
+								<c:out value="${patent.appNo}"/> 
+							 </td>
+							  <td class="hidden-480"><c:out value="${patent.name}"/></td>
+							  <td><c:out value="${patent.appPerson}"/></td>
+							  <td class="hidden-480"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
+							  <td><c:out value="${patent.patentType.typeDescription}"/></td>
+							  <td><c:out value="${patent.patentStatus.statusDescription}"/></td>
+							  <td><input style="width:60px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
+							  </td>
+							  <td><c:out value="${patent.shareUsersAsString}"/>
+							  </td>
+							  <td>  
+							  
+							   <a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
+								<button class="t-btn3">分享</button>
+								</a> 
+							   <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
+								<button class="t-btn4">缴费</button>
+								</a> 						  
+							   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
+								<button class="t-btn1">出售</button>
+								</a> 
+							   </td>
+							</tr>
+						  </c:forEach>
+						</tbody>
+					  </table>
+					  <!-- 分页功能 start -->
+					  <div class="row">
+						<c:if test="${searchCondition == null}">
+						  <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1">首页</a>
+							<c:choose>
+							  <c:when test="${page.currentPage - 1 > 0}"> <a href="?currentPage=${page.currentPage - 1}">上一页</a> </c:when>
+							  <c:when test="${page.currentPage - 1 <= 0}"> <a href="?currentPage=1">上一页</a> </c:when>
+							</c:choose>
+							<c:choose>
+							  <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">下一页</a> </c:when>
+							  <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?currentPage=${page.currentPage+1}">下一页</a> </c:when>
+							  <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?currentPage=${page.totalPages}">下一页</a> </c:when>
+							</c:choose>
+							<c:choose>
+							  <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">尾页</a> </c:when>
+							  <c:otherwise> <a href="?currentPage=${page.totalPages}">尾页</a> </c:otherwise>
+							</c:choose>
+							<!-- 分页功能 End -->
+							<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onKeyDown="gotoPageForEnter(event)"/>
+							<a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
+							<select onChange="setPageSize()" id="pageSizeSelect">
+							  <option value="10">10</option>
+							  <option value="20">20</option>
+							  <option value="50">50</option>
+							  <option value="100">100</option>
+							</select>
+							条记录 </span> </div>
+						</c:if>
+					  </div>
+					  <c:if test="${searchCondition != null}">
+						<div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?page.currentPage=1&${searchCondition}">首页</a>
+						  <c:choose>
+							<c:when test="${page.currentPage - 1 > 0}"> <a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a> </c:when>
+							<c:when test="${page.currentPage - 1 <= 0}"> <a href="?page.currentPage=1&${searchCondition}">上一页</a> </c:when>
+						  </c:choose>
+						  <c:choose>
+							<c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a> </c:when>
+							<c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a> </c:when>
+							<c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a> </c:when>
+						  </c:choose>
+						  <c:choose>
+							<c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a> </c:when>
+							<c:otherwise> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise>
+						  </c:choose>
+						  <!-- 分页功能 End -->
+						  <input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
+						  <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
+						  <select onChange="setPageSize()" id="pageSizeSelect">
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						  </select>
+						  条记录 </span> </div>
+					  </c:if>
+					</div>
+				  </div>
+				  <!-- /.span -->
+				</div>
+				<!-- /.row -->
+			  </div>
+			</div>
+
+     
+>>>>>>> bd9f3b21ac0110c0c4dca86081530456b0a0037a
         </div>
         <!-- /.row -->
       </div>

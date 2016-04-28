@@ -9,18 +9,30 @@
 			</a> 
 		    <a href="<s:url value='/main.html'/>">
 			<li class="left-nav-active"> <img src="<s:url value='/temp/images/setting.png'/>" />
+<<<<<<< HEAD
 			  <h5 style="font-family:"微软雅黑">我的专利</h5>
+=======
+			<h5 style="font-family:"微软雅黑">我的专利</h5>
+>>>>>>> bd9f3b21ac0110c0c4dca86081530456b0a0037a
 			</li>
 			</a> 
 			<a href="<s:url value='/notice/list.html?currentPage=1'/>">
 			<li> <img src="<s:url value='/temp/images/purse.png'/>" />
+<<<<<<< HEAD
 			  <h5 style="font-family:"微软雅黑">通知书</h5>
+=======
+			<h5 style="font-family:"微软雅黑">通知书</h5>
+>>>>>>> bd9f3b21ac0110c0c4dca86081530456b0a0037a
 			</li>
 			</a>			
 			
 			<a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>">
 			<li> <img src="<s:url value='/temp/images/purse.png'/>" />
+<<<<<<< HEAD
 			  <h5 style="font-family:"微软雅黑">专利缴费</h5>
+=======
+			<h5 style="font-family:"微软雅黑">专利缴费</h5>
+>>>>>>> bd9f3b21ac0110c0c4dca86081530456b0a0037a
 			</li>
 			</a>
 <!-- 			<li class="nav-jy"> -->
@@ -29,13 +41,21 @@
 <!-- 			</li> -->
 			<a href="<s:url value='/friend/list.html'/>">
 			<li> <img src="<s:url value='/temp/images/friend.png'/>" />
+<<<<<<< HEAD
 			  <h5 style="font-family:"微软雅黑">我的好友</h5>
+=======
+			<h5 style="font-family:"微软雅黑">我的好友</h5>
+>>>>>>> bd9f3b21ac0110c0c4dca86081530456b0a0037a
 			</li>
 			</a>
 
 			<a href="<s:url value='/user/detail.html'/>">
 			<li> <img src="<s:url value='/temp/images/data.png'/>" />
+<<<<<<< HEAD
 			  <h5 style="font-family:"微软雅黑">用户中心</h5>
+=======
+				<h5 style="font-family:"微软雅黑">用户中心</h5>
+>>>>>>> bd9f3b21ac0110c0c4dca86081530456b0a0037a
 			</li>
 			</a> <a href="#">
 
