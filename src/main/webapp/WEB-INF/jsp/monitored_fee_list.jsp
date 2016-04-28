@@ -60,6 +60,7 @@
 	</div>
 	<!--menu end-->		
 <!-- list beg -->
+	<div class="lt-box">
 	<form action="<s:url value='/fee/search.html'/>" method="get">
 	  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 	  <div class="t-third">
@@ -240,6 +241,7 @@
 	      <!-- /.row -->
 	    </div>
 	  </div>
+	</div>
 	</div>
 <!-- list end -->
 </div>

@@ -11,233 +11,171 @@
 <%@ include file="_css.jsp" %>
 </head>
 <body>
+
+
 <%@ include file="_top.jsp" %>
- 
-<div style="min-width:1300px;height:1500px; background:#F3F3F5;">
-	<div style="float:left;width:5%;">
-		<%@ include file="_left_nav.jsp" %>
+<%@ include file="_left_nav.jsp" %>
+<%@ include file="_left_nav2.jsp" %>
+<div class="lt-con">
+	<div class="t-ti">
+		<hr class="t-hr">
+		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">订单详情</span>
 	</div>
-	<div style="float:left;width:95%;">
-
-        <div class="center-cconcenct">
-        	<!-- 代码 开始 -->
-            <div id="change-t"><img src="<s:url value='/temp/images/tab.png'/>"  class="cgh"/></div>
-			<div style="float:left;width:9%;">
-				<%@ include file="_left_nav_fee.jsp" %>
-			</div>
-			<div class="con-list" style="float:left;width:91%;">
-				<div class="t-ti">
-					<hr class="t-hr">
-					<span style="font-size: 16px;font-weight: 300;line-height: 24px;">订单详情</span>
-				</div>
-                <div style="height:30px;"></div>
-
-				<div class="t-third">
-		          	<table class="table table-striped table-bordered table-hover">
-			            <thead>
-			              <tr class="simple_bag">
-			              	<th>
-			              		${order.orderStatus.statusDescription}订单
-			              	</th>
-			              </tr>
-			            </thead>  
-			            <tbody>
-			            	<tr>
-			            		<td>
-					                 <table class="table table-striped table-bordered table-hover">
-					                    <thead>
-					                      <tr class="simple_bag">
-					                      	<th>序号</th>
-											<th>申请号/专利号</th>
-											<th>专利名称</th>
-											<th>第一申请人</th>
-											<th>案件状态</th>
-											<th>缴费截止日</th>
-											<th>缴费种类</th>
-											<th>缴费金额</th>
-											<th>缴费状态</th>
-											<th>发票抬头</th>
-					                      </tr>
-					                    </thead>
-					                    <tbody>
-										
-										<c:forEach items="${order.feeList}" var="fee" varStatus="status">
-										<tr>
-											<td class="center">${status.count}</td>
-											<td>${fee.patent.appNo}</td>
-											<td>${fee.patent.name}</td>
-											<td>${fee.patent.firstAppPerson}</td>
-											<td>${fee.patent.patentStatus.statusDescription}</td>
-											<td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
-											<td>${fee.feeType}</td>
-											<td>${fee.amount} </td>
-											<td>${fee.paymentStatus.payementStatusDescription} </td>
-											<td>${fee.invoiceTitle}</td>
-										</tr>
-										</c:forEach>								
-					                    </tbody>
-					                  </table> 	            		
-			            		</td>
-			            	</tr>
-			            </tbody>        	
-		          	</table>
-		          	
-         	<table class="table table-striped table-bordered table-hover">
-	            <thead>
-	              <tr class="simple_bag">
-	              	<th>
-	              		订单信息
-	              	</th>
-	              </tr>
-	            </thead>  
-	            <tbody>
-	            	<tr>
-	            		<td>
-			                 <table class="table table-striped table-bordered table-hover">
-					            <thead>
-					              <tr class="simple_bag">
-					              	<th>订单编号</th>
-					              	<th>支付方式</th>
-					              	<th>下单时间</th>
-					              </tr>
-					            </thead>			                 
-			                    <tbody>
-									<tr>
-										<td>${order.id}</td>
-										<td>${order.paymentMethod.paymentMethod}</td>
-										<td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-									</tr>															
-			                    </tbody>
-			                  </table> 	            		
-	            		</td>
-	            	</tr>
-	            </tbody>        	
-          	</table>		
-          	
-          	<c:if test="${order.postAddress != null}">
-         	<table class="table table-striped table-bordered table-hover">
-	            <thead>
-	              <tr class="simple_bag">
-	              	<th>
-	              		收货人信息
-	              	</th>
-	              </tr>
-	            </thead>  
-	            <tbody>
-	            	<tr>
-	            		<td>
-	            			
-			                 <table class="table table-striped table-bordered table-hover">
-					            <thead>
-					              <tr class="simple_bag">
-					              	<th>收货人姓名</th>
-					              	<th>地址</th>
-					              	<th>电话</th>
-					              </tr>
-					            </thead>			                 
-			                    <tbody>
-									<tr>
-										<td>${order.postAddress.receiver}</td>
-										<td>${order.postAddress.provinceName}${order.postAddress.cityName}${order.postAddress.districtName}${order.postAddress.streetName}${order.postAddress.detailAddress}</td>
-										<td>${order.postAddress.phone}</td>
-									</tr>															
-			                    </tbody>
-			                  </table> 	        		
-	            		</td>
-	            	</tr>
-	            </tbody>        	
-          	</table>  
-          	</c:if>
-          	  
-          	<table class="table table-striped table-bordered table-hover">
-	            <thead>
-	              <tr class="simple_bag">
-	              	<th>
-	              		快递信息
-	              	</th>
-	              </tr>
-	            </thead>  
-	            <tbody>
-	            	<tr>
-	            		<td>
-	            			
-			                 <table class="table table-striped table-bordered table-hover">
-					            <thead>
-					              <tr class="simple_bag">
-					              	<th>快递公司</th>
-					              	<th>快递单号</th>
-					              	<th>快递员</th>
-					              	<th>快递电话</th>
-					              	<th>发货时间</th>
-					              </tr>
-					            </thead>			                 
-			                    <tbody>
-									<tr>
-										<td>${order.expressCompany}</td>
-										<td>${order.expressNo}</td>
-										<td>${order.courier}</td>
-										<td>${order.courierPhone}</td>
-										<td><fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/></td>
-									
-									</tr>															
-			                    </tbody>
-			                  </table> 	        		
-	            		</td>
-	            	</tr>
-	            </tbody>        	
-          	</table>  
-     
-         	<table class="table table-striped table-bordered table-hover">
-	            <thead>
-	              <tr class="simple_bag">
-	              	<th>
-	              		结算信息
-	              	</th>
-	              </tr>
-	            </thead>  
-	            <tbody>
-	            	<tr>
-	            		<td>
-			                 <table class="table table-striped table-bordered table-hover">
-			                    <tbody>
-									<tr>
-										<td>商品金额</td>
-										<td>￥${order.amount}</td>
-									</tr>															
-			                    </tbody>
-			                  </table> 	 
-	            		</td>
-	            	</tr>
-	            </tbody>        	
-          	</table>     
-                            	
-                </div>                
-                
-			</div>
-         
-        </div>
-		<!--container end-->
-    </div>
-</div>
-<script>
-	$(document).ready(function(){
 	
-		$("img[class=cgh]").click(function(){
-			var ol = $('ol[class="hashTabber-nav hashTabber-sandstone"]')[0];
-			var ols =$('.con-list')[0];
-			if(ol.style.display=="inline-block"||ol.style.display==""){
-					this.style.marginLeft="0px";
-					this.src='<s:url value='/temp/images/tabs.png'/>';
-					ol.style.display="none";
-					ols.style.width="97%";
-				}else{
-					ol.style.display="inline-block";
-					this.style.marginLeft="108px";
-					this.src='<s:url value='/temp/images/tab.png'/>';
-					ols.style.width="88%";
-				}
-		});
-	});
-</script>
+<!-- list beg -->
+	<div class="lt-box">
+		<table class="table table-striped table-bordered table-hover">
+		  <thead>
+			<tr class="simple_bag">
+			  <th> ${order.orderStatus.statusDescription}订单 </th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr>
+			  <td><table class="table table-striped table-bordered table-hover">
+				  <thead>
+					<tr class="simple_bag">
+					  <th>序号</th>
+					  <th>申请号/专利号</th>
+					  <th>专利名称</th>
+					  <th>第一申请人</th>
+					  <th>案件状态</th>
+					  <th>缴费截止日</th>
+					  <th>缴费种类</th>
+					  <th>缴费金额</th>
+					  <th>缴费状态</th>
+					  <th>发票抬头</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<c:forEach items="${order.feeList}" var="fee" varStatus="status">
+					  <tr>
+						<td class="center">${status.count}</td>
+						<td>${fee.patent.appNo}</td>
+						<td>${fee.patent.name}</td>
+						<td>${fee.patent.firstAppPerson}</td>
+						<td>${fee.patent.patentStatus.statusDescription}</td>
+						<td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
+						<td>${fee.feeType}</td>
+						<td>${fee.amount} </td>
+						<td>${fee.paymentStatus.payementStatusDescription} </td>
+						<td>${fee.invoiceTitle}</td>
+					  </tr>
+					</c:forEach>
+				  </tbody>
+				</table></td>
+			</tr>
+		  </tbody>
+		</table>
+		<table class="table table-striped table-bordered table-hover">
+		  <thead>
+			<tr class="simple_bag">
+			  <th> 订单信息 </th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr>
+			  <td><table class="table table-striped table-bordered table-hover">
+				  <thead>
+					<tr class="simple_bag">
+					  <th>订单编号</th>
+					  <th>支付方式</th>
+					  <th>下单时间</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<tr>
+					  <td>${order.id}</td>
+					  <td>${order.paymentMethod.paymentMethod}</td>
+					  <td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+					</tr>
+				  </tbody>
+				</table></td>
+			</tr>
+		  </tbody>
+		</table>
+		<c:if test="${order.postAddress != null}">
+		  <table class="table table-striped table-bordered table-hover">
+			<thead>
+			  <tr class="simple_bag">
+				<th> 收货人信息 </th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr>
+				<td><table class="table table-striped table-bordered table-hover">
+					<thead>
+					  <tr class="simple_bag">
+						<th>收货人姓名</th>
+						<th>地址</th>
+						<th>电话</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr>
+						<td>${order.postAddress.receiver}</td>
+						<td>${order.postAddress.provinceName}${order.postAddress.cityName}${order.postAddress.districtName}${order.postAddress.streetName}${order.postAddress.detailAddress}</td>
+						<td>${order.postAddress.phone}</td>
+					  </tr>
+					</tbody>
+				  </table></td>
+			  </tr>
+			</tbody>
+		  </table>
+		</c:if>
+		<table class="table table-striped table-bordered table-hover">
+		  <thead>
+			<tr class="simple_bag">
+			  <th> 快递信息 </th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr>
+			  <td><table class="table table-striped table-bordered table-hover">
+				  <thead>
+					<tr class="simple_bag">
+					  <th>快递公司</th>
+					  <th>快递单号</th>
+					  <th>快递员</th>
+					  <th>快递电话</th>
+					  <th>发货时间</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<tr>
+					  <td>${order.expressCompany}</td>
+					  <td>${order.expressNo}</td>
+					  <td>${order.courier}</td>
+					  <td>${order.courierPhone}</td>
+					  <td><fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/></td>
+					</tr>
+				  </tbody>
+				</table></td>
+			</tr>
+		  </tbody>
+		</table>
+		<table class="table table-striped table-bordered table-hover">
+		  <thead>
+			<tr class="simple_bag">
+			  <th> 结算信息 </th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr>
+			  <td><table class="table table-striped table-bordered table-hover">
+				  <tbody>
+					<tr>
+					  <td>商品金额</td>
+					  <td>￥${order.amount}</td>
+					</tr>
+				  </tbody>
+				</table></td>
+			</tr>
+		  </tbody>
+		</table>
+	</div>
+<!-- list end -->
+</div>
+
 </body>
 </html>

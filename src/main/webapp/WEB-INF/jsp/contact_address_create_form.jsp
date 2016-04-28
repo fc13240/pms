@@ -11,79 +11,50 @@
 <%@ include file="_css.jsp" %>
 </head>
 <body>
+
+
 <%@ include file="_top.jsp" %>
- 
-<div style="min-width:1300px;height:1500px; background:#F3F3F5;">
-	<div style="float:left;width:5%;">
-		<%@ include file="_left_nav.jsp" %>
+<%@ include file="_left_nav.jsp" %>
+<%@ include file="_left_nav_user.jsp" %>
+<div class="lt-con">
+	<div class="t-ti">
+		<hr class="t-hr">
+		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">添加地址</span>
 	</div>
-	<div style="float:left;width:95%;">
+	
+	<div class="lt-box">	
+		<form action="<s:url value='/user/addContactAddress.html'/>" method="post">
+		  <se:csrfInput/>
+		  <div style="margin-bottom:10px;"> 联系人名称:
+			<input style="height:20px;" type="text" name="receiver" required/>
+		  </div>
+		  <div style="margin-bottom:10px;"> 手机或固话:
+			<input style="height:20px;" type="text" name="phone" required/>
+		  </div>
+		  <div style="margin-bottom:10px;"> 通讯地址  :
+			<select name="province" id="province" onchange="loadCities()" required>
+			  <option value=''>请选择</option>
+			  <c:forEach items="${provinces}" var="province">
+				<option value="${province.id}">${province.name}</option>
+			  </c:forEach>
+			</select>
+			<select name="city" id="city" onchange="loadDistricts()" required>
+			  <option value=''>请选择</option>
+			</select>
+			<select name="district" id="district" onchange="loadStreets()" required>
+			  <option value=''>请选择</option>
+			</select>
+			<select name="street" id="street" required>
+			  <option value=''>请选择</option>
+			</select>
+		  </div>
+		  <div style="margin-bottom:10px;"> 详细地址:
+			<input style="height:20px;" type="text" name="detailAddress" required/>
+		  </div>
+		  <button type="submit" class="t-btn3">保存</button>
+		</form>
+	</div>
 
-        <div class="center-cconcenct">
-        	<!-- 代码 开始 -->
-            <div id="change-t"><img src="<s:url value='/temp/images/tab.png'/>"  class="cgh"/></div>
-			<div style="float:left;width:9%;">
-				<%@ include file="_left_nav_user.jsp" %>
-			</div>
-			<div class="con-list" style="float:left;width:91%;">
-				<div class="t-ti">
-					<hr class="t-hr">
-					<span style="font-size: 16px;font-weight: 300;line-height: 24px;">添加地址</span>
-				</div>
-                <div style="height:30px;"></div>
-
-				<div class="t-third">
-					<div class="col-xs-12">
-					  <!-- PAGE CONTENT BEGINS -->
-					  <div class="row">
-					    <div class="col-xs-12">
-					      <form action="<s:url value='/user/addContactAddress.html'/>" method="post">
-					        <se:csrfInput/>
-					        <div style="margin-bottom:10px;">
-					        联系人名称:
-					        <input style="height:20px;" type="text" name="receiver" required/>
-					        </div>
-					        <div style="margin-bottom:10px;">
-					   手机或固话:
-					        <input style="height:20px;" type="text" name="phone" required/>
-					       </div>
-					        <div style="margin-bottom:10px;">  
-					        通讯地址  :
-					        <select name="province" id="province" onchange="loadCities()" required>
-					          <option value=''>请选择</option>
-					          <c:forEach items="${provinces}" var="province">
-					            <option value="${province.id}">${province.name}</option>
-					          </c:forEach>
-					        </select>
-					        <select name="city" id="city" onchange="loadDistricts()" required>
-					          <option value=''>请选择</option>
-					        </select>
-					        <select name="district" id="district" onchange="loadStreets()" required>
-					          <option value=''>请选择</option>
-					        </select>
-					        <select name="street" id="street" required>
-					          <option value=''>请选择</option>
-					        </select>
-					       </div>
-					       <div style="margin-bottom:10px;">
-					        详细地址:
-					        <input style="height:20px;" type="text" name="detailAddress" required/>
-					        </div>
-					         <button type="submit" class="t-btn3">保存</button>
-					      </form>
-					      <!-- /.span -->
-					    </div>
-					    <!-- /.row -->
-					  </div>
-					</div> 
-                            	
-                </div>                
-                
-			</div>
-         
-        </div>
-		<!--container end-->
-    </div>
 </div>
 <script type="text/javascript">
 			jQuery(function($) {
@@ -212,25 +183,12 @@ function loadStreets() {
 }
 
 </script>
-<script>
-	$(document).ready(function(){
-	
-		$("img[class=cgh]").click(function(){
-			var ol = $('ol[class="hashTabber-nav hashTabber-sandstone"]')[0];
-			var ols =$('.con-list')[0];
-			if(ol.style.display=="inline-block"||ol.style.display==""){
-					this.style.marginLeft="0px";
-					this.src='<s:url value='/temp/images/tabs.png'/>';
-					ol.style.display="none";
-					ols.style.width="97%";
-				}else{
-					ol.style.display="inline-block";
-					this.style.marginLeft="108px";
-					this.src='<s:url value='/temp/images/tab.png'/>';
-					ols.style.width="88%";
-				}
-		});
-	});
-</script>
 </body>
 </html>
+
+
+
+
+
+					   
+

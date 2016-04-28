@@ -11,137 +11,106 @@
 <%@ include file="_css.jsp" %>
 </head>
 <body>
+
+
 <%@ include file="_top.jsp" %>
- 
-<div style="min-width:1300px;height:1500px; background:#F3F3F5;">
-	<div style="float:left;width:5%;">
-		<%@ include file="_left_nav.jsp" %>
+<%@ include file="_left_nav.jsp" %>
+<%@ include file="_left_nav2.jsp" %>
+<div class="lt-con">
+	<div class="t-ti">
+		<hr class="t-hr">
+		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">官费查询</span>
 	</div>
-	<div style="float:left;width:95%;">
+	
+<!-- list beg -->
 
-        <div class="center-cconcenct">
-        	<!-- 代码 开始 -->
-            <div id="change-t"><img src="<s:url value='/temp/images/tab.png'/>"  class="cgh"/></div>
-			<div style="float:left;width:9%;">
-				<%@ include file="_left_nav2.jsp" %>
-			</div>
-			<div class="con-list" style="float:left;width:91%;">
-				<div class="t-ti">
-					<hr class="t-hr">
-					<span style="font-size: 16px;font-weight: 300;line-height: 24px;">官费查询</span>
-				</div>
-                <div style="height:30px;"></div>
+	<div class="lt-box">	
+		<table class="table table-bordered patent-table table-striped">
+		  <tr>
+			<th colspan="9">应缴费信息</th>
+		  </tr>
+		  <tr>
+			<th colspan="9"> <input type="checkbox" class="fee-check-item">
+			  <span class="batch-share"><a href="javascript:updateMonitorStatus(2)">加入监控</a></span> <span class="batch-share"><a href="javascript:updateMonitorStatus(1)">放弃监控</a></span> </th>
+		  </tr>
+		  <tr>
+			<th>序号</th>
+			<th>申请号/专利号</th>
+			<th>专利名称</th>
+			<th>第一申请人</th>
+			<th>案件状态</th>
+			<th>缴费种类</th>
+			<th>缴费截止日</th>
+			<th>缴费金额</th>
+			<th>监控状态</th>
+		  </tr>
+		  <c:forEach items="${fees}" var="fee" varStatus="status">
+			<tr>
+			  <td><span class="batch-share-item">
+				<input type="checkbox" class="fee-check-item" feeId="${fee.feeId}" patent="${fee.patent.patentId}">
+				</span> ${status.index+1} </td>
+			  <td>${fee.patent.appNo}</td>
+			  <td>${fee.patent.name}</td>
+			  <td>${fee.patent.firstAppPerson}</td>
+			  <td>${fee.patent.patentStatus.statusDescription}</td>
+			  <td>${fee.feeType}</td>
+			  <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
+			  <td>${fee.amount} </td>
+			  <td>${fee.monitorStatus.monitorStatusDescription}</td>
+			</tr>
+		  </c:forEach>
+		</table>
+		<c:if test="${! empty emptyFeePatents}">
+		  <table class="table table-bordered patent-table table-striped">
+			<tr>
+			  <th colspan="5">以下专利没有查询到应缴费信息</th>
+			</tr>
+			<tr>
+			  <th>序号</th>
+			  <th>申请号/专利号</th>
+			  <th>专利名称</th>
+			  <th>第一申请人</th>
+			</tr>
+			<c:forEach items="${emptyFeePatents}" var="patent" varStatus="status">
+			  <tr>
+				<td>${status.index+1}</td>
+				<td>${patent.appNo}</td>
+				<td>${patent.name}</td>
+				<td>${patent.firstAppPerson}</td>
+			  </tr>
+			</c:forEach>
+		  </table>
+		</c:if>
+		<c:if test="${! empty failedPatents}">
+		  <table class="table table-bordered patent-table table-striped">
+			<tr>
+			  <th colspan="5">以下专利查询应缴费信息失败</th>
+			</tr>
+			<tr>
+			  <th>序号</th>
+			  <th>申请号/专利号</th>
+			  <th>专利名称</th>
+			  <th>第一申请人</th>
+			</tr>
+			<c:forEach items="${failedPatents}" var="patent" varStatus="status">
+			  <tr>
+				<td>${status.index+1}</td>
+				<td>${patent.appNo}</td>
+				<td>${patent.name}</td>
+				<td>${patent.firstAppPerson}</td>
+			  </tr>
+			</c:forEach>
+		  </table>
+		</c:if>
+	</div>
 
-						<table class="table table-bordered patent-table table-striped">	
-							<tr>
-								<th colspan="9">应缴费信息</th>
-							</tr>			
-							<tr>
-								<th colspan="9">
-									<input type="checkbox" class="fee-check-item">
-									<span class="batch-share"><a href="javascript:updateMonitorStatus(2)">加入监控</a></span>
-									<span class="batch-share"><a href="javascript:updateMonitorStatus(1)">放弃监控</a></span>
-								</th>		
-							</tr>
-							<tr>
-								<th>序号</th>
-								<th>申请号/专利号</th>
-								<th>专利名称</th>
-								<th>第一申请人</th>
-								<th>案件状态</th>
-								<th>缴费种类</th>
-								<th>缴费截止日</th>
-								<th>缴费金额</th>
-								<th>监控状态</th>
-							</tr>
-							<c:forEach items="${fees}" var="fee" varStatus="status">
-								<tr>
-									<td>
-										<span class="batch-share-item"><input type="checkbox" class="fee-check-item" feeId="${fee.feeId}" patent="${fee.patent.patentId}"></span>
-										${status.index+1}
-									</td>
-									<td>${fee.patent.appNo}</td>
-									<td>${fee.patent.name}</td>
-									<td>${fee.patent.firstAppPerson}</td>
-									<td>${fee.patent.patentStatus.statusDescription}</td>
-									<td>${fee.feeType}</td>
-									<td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
-									<td>${fee.amount} </td>
-									<td>${fee.monitorStatus.monitorStatusDescription}</td>
-								</tr>
-							</c:forEach>	
-						</table>
-						
-					<c:if test="${! empty emptyFeePatents}">
-						<table class="table table-bordered patent-table table-striped">	
-							<tr><th colspan="5">以下专利没有查询到应缴费信息</th></tr>
-							<tr>
-								<th>序号</th>
-								<th>申请号/专利号</th>
-								<th>专利名称</th>
-								<th>第一申请人</th>
-							</tr>			
-							
-							<c:forEach items="${emptyFeePatents}" var="patent" varStatus="status">
-								<tr>
-									<td>${status.index+1}</td>
-									<td>${patent.appNo}</td>
-									<td>${patent.name}</td>
-									<td>${patent.firstAppPerson}</td>
-								</tr>				
-							</c:forEach>
-						</table>
-					</c:if>		
-					
-					<c:if test="${! empty failedPatents}">
-						<table class="table table-bordered patent-table table-striped">	
-							<tr><th colspan="5">以下专利查询应缴费信息失败</th></tr>
-							<tr>
-								<th>序号</th>
-								<th>申请号/专利号</th>
-								<th>专利名称</th>
-								<th>第一申请人</th>
-							</tr>			
-							
-							<c:forEach items="${failedPatents}" var="patent" varStatus="status">
-								<tr>
-									<td>${status.index+1}</td>
-									<td>${patent.appNo}</td>
-									<td>${patent.name}</td>
-									<td>${patent.firstAppPerson}</td>
-								</tr>				
-							</c:forEach>
-						</table>
-					</c:if>	          
-                
-			</div>
-         
-        </div>
-		<!--container end-->
-    </div>
+<!-- list end -->
 </div>
 <script type="text/javascript">
 	$(function(){
 		formutil.clickAllCheckbox('tr th input.fee-check-item', 'tr td input.fee-check-item');
 		formutil.clickItemCheckbox('tr th input.fee-check-item', 'tr td input.fee-check-item');
 	});
-	
-// 	function updateMonitorStatus(status) {
-// 		var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
-		
-// 		if (!feeSelected) {
-// 			formutil.alertMessage('请选择应缴费记录');
-// 			return;
-// 		}
-		
-// 		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'feeId');
-		
-// 		location.href = "<s:url value='/fee/changeMonitorStatus.html'/>?fees=" + fees + "&monitorStatus=" + status;
-// 	}	
-	
-	
-	
-	
 	function updateMonitorStatus(status) {
 		var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
 		
@@ -157,26 +126,6 @@
 		location.href = "<s:url value='/fee/batchChangeMonitorStatus.html'/>?fees=" + fees + "&patents=" + patents + "&monitorStatus=" + status;
 	}
 	
-</script>
-<script>
-	$(document).ready(function(){
-	
-		$("img[class=cgh]").click(function(){
-			var ol = $('ol[class="hashTabber-nav hashTabber-sandstone"]')[0];
-			var ols =$('.con-list')[0];
-			if(ol.style.display=="inline-block"||ol.style.display==""){
-					this.style.marginLeft="0px";
-					this.src='<s:url value='/temp/images/tabs.png'/>';
-					ol.style.display="none";
-					ols.style.width="97%";
-				}else{
-					ol.style.display="inline-block";
-					this.style.marginLeft="108px";
-					this.src='<s:url value='/temp/images/tab.png'/>';
-					ols.style.width="88%";
-				}
-		});
-	});
 </script>
 </body>
 </html>
