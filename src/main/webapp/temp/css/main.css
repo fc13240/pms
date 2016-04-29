@@ -40,7 +40,7 @@ ol.hashTabber-data>li.active {
 
 
 :focus {
-    outline-color:#00b464;
+    outline-color:#F00;
     outline-style:auto;
     outline-width:0.25rem
 }
