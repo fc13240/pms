@@ -15,7 +15,7 @@
 
 <%@ include file="_top.jsp" %>
 <%@ include file="_left_nav.jsp" %>
-<%@ include file="_left_nav2.jsp" %>
+<%@ include file="_left_nav_fee.jsp" %>
 <div class="lt-con">
 	<div class="t-ti">
 		<hr class="t-hr">
