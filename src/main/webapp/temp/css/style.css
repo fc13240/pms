@@ -53,8 +53,8 @@ input,select{
 .top-user span{color:#fff;font-size:14px;}
 
 .top-exit {
-    width: 14px !important;
-    height: 15px !important;
+    width: 20px !important;
+    height: 20px !important;
     border-radius: 0px !important;
     margin: 10px 0px 0px 25px !important;
 }

@@ -45,7 +45,7 @@
 	</style>
 </head>
 
-<body class="login-layout" style=" background-image: url(<s:url value='/static/images/bacground1.jpg'/>);background-size:cover; ">
+<body class="login-layout" style=" background-image: url(<s:url value='/static/images/bacground2.jpg'/>);background-size:cover; ">
 	<div class="main-container">
 		<div class="main-content">
 			<div class="row">
@@ -58,7 +58,7 @@
 						</div>
 
 						<div class="position-relative">
-							<div id="login-box" class="login-box visible widget-box no-border" style="background-color:#5090C1;margin-top:200px;">
+							<div id="login-box" class="login-box visible widget-box no-border" style="background-color:#D32F30;margin-top:200px;">
 								<div class="widget-body">
 									<div class="widget-main">
 										<h4 class="header blue lighter bigger">
@@ -208,7 +208,7 @@
 	          <a href="http://so.lotut.com/" target="_blank" rel="nofollow">专利检索</a><span>|</span>
 	          <a href="http://www.lotut.com/index.php/blog/095lzql4ke.html" target="_blank" rel="nofollow">联系我们</a><span>|</span>
 	          <a href="http://www.lotut.com/" target="_blank">商标市场</a></p>
-	        <p class="Copyright">Copyright @ 2016龙图腾版权，技术支持龙图腾信息技术有限公司 </p>
+	        <p class="Copyright"><font color="#FFF">Copyright @ 2016龙图腾版权，技术支持龙图腾信息技术有限公司</font> </p>
 	      </div>
 	    </div>
 	  </div>

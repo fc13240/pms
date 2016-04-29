@@ -12558,8 +12558,8 @@ td .lbl:only-child {
   color: #CF7;
 }
 .login-box .toolbar {
-  background: #5090C1;
-  border-top: 2px solid #597597;
+  background: #D32F30;
+  border-top: 2px solid #D32F30;
 }
 .login-box .toolbar > div {
   width: 50%;

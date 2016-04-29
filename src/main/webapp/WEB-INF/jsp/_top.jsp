@@ -11,7 +11,7 @@
 			</div>   
 			<div id="Button1" onClick="hidslt()" style="display:block;" class="top-sbtn" >
 			<a href="http://so.lotut.com/" target="_blank" rel="nofollow"><font color="#FFF">国内外专利检索</font></a>
-			<img src="<s:url value='/temp/images/search.png'/>" />
+			<a href="http://so.lotut.com/" target="_blank" rel="nofollow"><img src="<s:url value='/temp/images/search.png'/>" /></a>
 			</div>
 		</div>
 		<div class="top-user" id="top-user">

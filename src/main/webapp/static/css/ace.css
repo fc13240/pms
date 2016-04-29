@@ -425,13 +425,13 @@ pre.prettyprint {
   color: #ff7777 !important;
 }
 .blue {
-  color: #478fca !important;
+  color: #D53030 !important;
 }
 .light-blue {
   color: #93cbf9 !important;
 }
 .green {
-  color: #69aa46 !important;
+  color: #D03A3C !important;
 }
 .light-green {
   color: #b0d877 !important;
@@ -1058,10 +1058,10 @@ pre.prettyprint {
   border-bottom: 1px solid #CCC;
 }
 .header.blue {
-  border-bottom-color: #d5e3ef;
+  border-bottom-color: #D4383B;
 }
 .header.green {
-  border-bottom-color: #cce2c1;
+  border-bottom-color: #D03A3C;
 }
 .header.purple {
   border-bottom-color: #e0d1ea;
@@ -5497,8 +5497,8 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary,
 .btn-primary:focus {
-  background-color: #428bca !important;
-  border-color: #428bca;
+  background-color: #C43330 !important;
+  border-color: #C43330;
 }
 .btn-primary:hover,
 .btn-primary:active,
@@ -5638,8 +5638,8 @@ fieldset[disabled] .btn-info2.active {
 }
 .btn-success,
 .btn-success:focus {
-  background-color: #87b87f !important;
-  border-color: #87b87f;
+  background-color: #D03A3C !important;
+  border-color: #D03A3C;
 }
 .btn-success:hover,
 .btn-success:active,
@@ -12566,8 +12566,8 @@ td .lbl:only-child {
   color: #CF7;
 }
 .login-box .toolbar {
-  background: #5090C1;
-  border-top: 2px solid #597597;
+  background: #D43230;
+  border-top: 2px solid #D43230;
 }
 .login-box .toolbar > div {
   width: 50%;
