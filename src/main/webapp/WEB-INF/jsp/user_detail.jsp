@@ -19,7 +19,7 @@
 <div class="lt-con">
 	<div class="t-ti">
 		<hr class="t-hr">
-		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">基本信息</span>
+		<span style="font-size: 20px;font-weight: 300;line-height: 24px;">基本信息</span>
 	</div>
 	
 	<div class="t-third">
@@ -30,7 +30,7 @@
 			<div class="patent-detail-caption">
 			  <h3>个人信息编辑</h3>
 			</div>
-			&nbsp&nbsp&nbsp&nbsp
+			&nbsp;&nbsp;&nbsp;&nbsp;
 			<table class="table table-striped">
 			  <tr>
 				<td class="f-tar td-w125"><h4 class="lab">真实姓名：</h4></td>
@@ -55,7 +55,7 @@
 			  </tr>
 			  <tr>
 				<td class="f-tar td-w125"></td>
-				<td><input class="orange-red-btn" name="dosubmit" id="dosubmit" value="保&nbsp;&nbsp;存" type="button" onclick="javascript:updateDetail()"></td>
+				<td><input class="orange-red-btn" name="dosubmit" id="dosubmit" style="background:red;color:#FFF " value="保&nbsp;&nbsp;存" type="button" onclick="javascript:updateDetail()"></td>
 			  </tr>
 			</table>
 			<!-- /.span -->

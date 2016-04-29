@@ -18,7 +18,7 @@
 <div class="lt-con">
 	<div class="t-ti">
 		<hr class="t-hr">
-		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">修改密码</span>
+		<span style="font-size: 20px;font-weight: 300;line-height: 24px;">修改密码</span>
 	</div>
 	
 	<div class="lt-box">	

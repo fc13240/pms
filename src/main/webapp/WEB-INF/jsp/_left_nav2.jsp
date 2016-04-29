@@ -5,7 +5,7 @@
     <li class=""> <a href="<s:url value='/main.html'/>">
       <h5>专利概况</h5>
       </a> </li>
-    <li  class=""> <a target="_blank" href="<s:url value='/patent/addPatentFrom.html'/>">
+    <li  class=""> <a  href="<s:url value='/patent/addPatentFrom.html'/>">
       <h5>添加专利</h5>
       </a> </li>
     <li  class=""> <a href="<s:url value='/patent/showUploadForm.html'/>">
@@ -16,3 +16,4 @@
       </a> </li>
   </ol>
 </div>
+<!-- target="_blank" -->
