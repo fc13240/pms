@@ -19,19 +19,22 @@
 <div class="lt-con">
 	<div class="t-ti">
 		<hr class="t-hr">
-		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">添加地址</span>
+		<span style="font-size: 20px;font-weight: 300;line-height: 24px;">添加地址</span>
 	</div>
-	
 	<div class="lt-box">	
 		<form action="<s:url value='/user/addContactAddress.html'/>" method="post">
 		  <se:csrfInput/>
-		  <div style="margin-bottom:10px;"> 联系人名称:
+		  <div style="margin-bottom:10px;">
+		  	  <span style="font-size:16px">联系人名称:</span>
+		  	 &nbsp;&nbsp;&nbsp;
 			<input style="height:20px;" type="text" name="receiver" required/>
 		  </div>
-		  <div style="margin-bottom:10px;"> 手机或固话:
+		  <div style="margin-bottom:10px;"> <span style="font-size:16px">手机或固话:</span>
+		  	&nbsp;&nbsp;&nbsp;
 			<input style="height:20px;" type="text" name="phone" required/>
 		  </div>
-		  <div style="margin-bottom:10px;"> 通讯地址  :
+		  <div style="margin-bottom:10px;"> <span style="font-size:16px">通讯地址 :</span>
+		  	&nbsp;&nbsp;&nbsp;
 			<select name="province" id="province" onchange="loadCities()" required>
 			  <option value=''>请选择</option>
 			  <c:forEach items="${provinces}" var="province">
@@ -48,13 +51,13 @@
 			  <option value=''>请选择</option>
 			</select>
 		  </div>
-		  <div style="margin-bottom:10px;"> 详细地址:
+		  <div style="margin-bottom:10px;"> <span style="font-size:16px">详细地址:</span>
+		  	&nbsp;&nbsp;&nbsp;&nbsp;
 			<input style="height:20px;" type="text" name="detailAddress" required/>
 		  </div>
-		  <button type="submit" class="t-btn3">保存</button>
+		  <button type="submit" class="t-btn2">保存</button>
 		</form>
 	</div>
-
 </div>
 <script type="text/javascript">
 			jQuery(function($) {

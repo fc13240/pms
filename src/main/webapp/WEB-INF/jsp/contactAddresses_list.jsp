@@ -17,11 +17,11 @@
 <div class="lt-con">
 	<div class="t-ti">
 		<hr class="t-hr">
-		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">联系地址</span>
+		<span style="font-size: 20px;font-weight: 300;line-height: 24px;">联系地址</span>
 	</div>
 	<div class="lt-box">
 	  <form>
-		<button type="button" style="width: 100px;margin-bottom:20px;" class="t-btn3" onclick="javascript:addAddress()">增加地址</button>
+		<button type="button" style="width: 100px;margin-bottom:20px;" class="t-btn2" onclick="javascript:addAddress()">增加地址</button>
 		<table id="simple-table" class="table table-striped table-bordered table-hover">
 		  <thead>
 			<tr class="simple_bag">
