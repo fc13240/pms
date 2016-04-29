@@ -38,7 +38,7 @@
 	    <div class="tag"  style="display:none"> 这里是期限监控 </div>
 	    <div class="tag"  style="display:block">
 	      <ul class="qxjk-ul">
-	        <a href="#">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=1'/>">
 	        <li>新案受理 (6)</li>
 	        </a> <a href="#">
 	        <li>新案受理 (6)</li>
@@ -251,7 +251,7 @@
 	                    <c:otherwise> <a href="?currentPage=${page.totalPages}">尾页</a> </c:otherwise>
 	                  </c:choose>
 	                  <!-- 分页功能 End -->
-	                  <input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onKeyDown="gotoPageForEnter(event)"/>
+	                  <input type="text" id="page.pageNo" style="width:50px;height:15px" name="currentPage" onKeyDown="gotoPageForEnter(event)"/>
 	                  <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
 	                  <select onChange="setPageSize()" id="pageSizeSelect">
 	                    <option value="10">10</option>
@@ -278,7 +278,7 @@
 	                  <c:otherwise> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise>
 	                </c:choose>
 	                <!-- 分页功能 End -->
-	                <input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
+	                <input type="text" id="page.pageNo" style="width:50px;height:15px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
 	                <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
 	                <select onChange="setPageSize()" id="pageSizeSelect">
 	                  <option value="10">10</option>

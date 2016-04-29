@@ -142,7 +142,7 @@
           <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">尾页</a> </c:when>
           <c:otherwise> <a href="?currentPage=${page.totalPages}">尾页</a> </c:otherwise>
         </c:choose>
-        <input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onKeyDown="gotoPageForEnter(event)"/>
+        <input type="text" id="page.pageNo" style="width:50px;height:15px" name="currentPage" onKeyDown="gotoPageForEnter(event)"/>
         <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> </div>
     </c:if>
     <c:if test="${searchCondition != null}">
@@ -161,7 +161,7 @@
           <c:otherwise> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise>
         </c:choose>
         <!-- 分页功能 End -->
-        <input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
+        <input type="text" id="page.pageNo" style="width:50px;height:15px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
         <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> </div>
     </c:if>
   </div>

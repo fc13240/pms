@@ -60,7 +60,7 @@
 		  <c:otherwise> <a href="?currentPage=${page.totalPages}">尾页</a> </c:otherwise>
 		</c:choose>
 		<!-- 分页功能 End -->
-		<input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
+		<input type="text" id="page.pageNo" style="width:50px;height:15px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
 		<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a> </div>
 	</c:if>
 
