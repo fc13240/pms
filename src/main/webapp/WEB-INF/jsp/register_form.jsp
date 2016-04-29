@@ -45,7 +45,7 @@
 	</style>
 </head>
 
-<body class="login-layout" style=" background-image: url(<s:url value='/static/images/bacground.jpg'/>);background-size:cover; ">
+<body class="login-layout" style=" background-image: url(<s:url value='/static/images/bacground1.jpg'/>);background-size:cover; ">
 	<div class="main-container">
 		<div class="main-content">
 			<div class="row">
