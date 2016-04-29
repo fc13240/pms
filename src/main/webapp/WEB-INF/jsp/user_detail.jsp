@@ -28,7 +28,7 @@
 		<div class="row">
 		  <div class="col-xs-12">
 			<div class="patent-detail-caption">
-			  <h3>个人信息编辑</h3>
+			  <h4>个人信息编辑</h4>
 			</div>
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<table class="table table-striped">
