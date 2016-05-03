@@ -1,6 +1,7 @@
 package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -101,6 +102,21 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 		@Override
 		public int updateFeesStatus(List<Long> feeIdList, int status) {
 			return feeMapper.updateFeesStatus(feeIdList, status);
+		}
+
+		@Override
+		public Map<String, Map<String, String>> getMonitoredFeesByType(int userId) {
+			return feeMapper.getMonitoredFeesByType(userId);
+		}
+
+		@Override
+		public Map<String, Map<String, String>> getMonitoredFeesByStatus(int userId) {
+			return feeMapper.getMonitoredFeesByStatus(userId);
+		}
+
+		@Override
+		public Map<String, Map<String, String>> getMonitoredFeesByFeeType(int userId) {
+			return feeMapper.getMonitoredFeesByFeeType(userId);
 		}
 
 		

@@ -35,12 +35,12 @@
 	    <div class="tag" style="display:none"> 
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=1'/>">
-	        <li>发明 ()</li>
+	        <li>发明 (${patentTypeCount[(1).intValue()]["feeCount"]})</li>
 	        </a> <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=2'/>">
-	        <li>实用新型 ()</li>
+	        <li>实用新型 (${patentTypeCount[(2).intValue()]["feeCount"]})</li>
 	        </a> 
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=3'/>">
-	        <li>外观设计 ()</li>
+	        <li>外观设计 (${patentTypeCount[(3).intValue()]["feeCount"]})</li>
 	        </a> 
 	      </ul>		    
 	     </div>
@@ -65,13 +65,13 @@
 	    <div class="tag"  style="display:none"> 
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=1'/>">
-	        <li>未缴费 ()</li>
+	        <li>未缴费 (${feePaymentStatusCount[(1).intValue()]["feeCount"]})</li>
 	        </a> 
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=2'/>">
-	        <li>已支付 ()</li>
+	        <li>已支付 (${feePaymentStatusCount[(2).intValue()]["feeCount"]})</li>
 	        </a>
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=3'/>">
-	        <li>已缴费 ()</li>
+	        <li>已缴费 (${feePaymentStatusCount[(3).intValue()]["feeCount"]})</li>
 	        </a> 
 	      </ul>
 	     
@@ -79,13 +79,13 @@
 	    <div class="tag"  style="display:block">
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=1'/>">
-	        <li>申请费 ()</li>
-	        </a> 
+	        <li>申请费 (${patentStatusCount[(1).intValue()]["feeCount"]})</li>
+	        </a>
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=3'/>">
-	        <li>年登印费 ()</li>
-	        </a> 
+	        <li>年登印费 (${patentStatusCount[(3).intValue()]["feeCount"]})</li>
+	        </a>
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=6'/>">
-	        <li>维持年费 ()</li>
+	        <li>专利权维持年费 (${patentStatusCount[(6).intValue()]["feeCount"]})</li>
 	        </a>
 	      </ul>
 	    </div>

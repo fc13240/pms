@@ -262,4 +262,35 @@
 			#{feeId}
 		</foreach>			
 	</update>
+	
+	<select id="getMonitoredFeesByType"  resultType="map">
+		select p.patent_type patentType,count(*) feeCount
+		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
+		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
+				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
+				join patent_status ps on p.patent_status = ps.patent_status_id
+		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
+		 group by p.patent_type
+	</select>
+	
+	<select id="getMonitoredFeesByStatus"  resultType="map">
+		select f.fee_payment_status feePaymentStatus,count(*) feeCount
+		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
+		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
+				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
+				join patent_status ps on p.patent_status = ps.patent_status_id
+		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
+		 group by f.fee_payment_status
+	</select>
+	
+	<select id="getMonitoredFeesByFeeType"  resultType="map">
+		select p.patent_status patentStatus,count(*) feeCount
+		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
+		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
+				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
+				join patent_status ps on p.patent_status = ps.patent_status_id
+		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
+		 group by p.patent_status
+	</select>
+	
 </mapper>

@@ -1,6 +1,7 @@
 package com.lotut.pms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.FeeSearchCondition;
@@ -47,4 +48,11 @@ public interface FeeDao {
 	
 	
 	int updateFeesStatus(List<Long> feeIdList, int status);
+	
+	Map<String,Map<String,String>> getMonitoredFeesByType(int userId);
+	
+	Map<String,Map<String,String>> getMonitoredFeesByStatus(int userId);
+	
+	Map<String,Map<String,String>> getMonitoredFeesByFeeType(int userId);
+	
 }

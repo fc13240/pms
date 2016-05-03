@@ -198,4 +198,19 @@ public class FeeServiceImpl implements FeeService {
 		public int updateFeesStatus(List<Long> feeIdList, int status) {
 			return feeDao.updateFeesStatus(feeIdList, status);
 		}
+
+		@Override
+		public Map<String, Map<String, String>> getMonitoredFeesByType(int userId) {
+			return feeDao.getMonitoredFeesByType(userId);
+		}
+
+		@Override
+		public Map<String, Map<String, String>> getMonitoredFeesByStatus(int userId) {
+			return feeDao.getMonitoredFeesByStatus(userId);
+		}
+
+		@Override
+		public Map<String, Map<String, String>> getMonitoredFeesByFeeType(int userId) {
+			return feeDao.getMonitoredFeesByFeeType(userId);
+		}
 }

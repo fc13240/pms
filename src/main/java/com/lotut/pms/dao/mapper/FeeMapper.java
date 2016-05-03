@@ -1,7 +1,9 @@
 package com.lotut.pms.dao.mapper;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.Fee;
@@ -49,4 +51,13 @@ public interface FeeMapper {
 	void deleteFees(@Param("feeIdList")List<Long> feeIdList, @Param("userId")int userId);
 
 	int updateFeesStatus(@Param("feeIdList")List<Long> feeIdList, @Param("status")int status);
+	
+	@MapKey("patentType")
+	Map<String,Map<String,String>> getMonitoredFeesByType(int userId);
+	
+	@MapKey("feePaymentStatus")
+	Map<String,Map<String,String>> getMonitoredFeesByStatus(int userId);
+	
+	@MapKey("patentStatus")
+	Map<String,Map<String,String>> getMonitoredFeesByFeeType(int userId);
 }
