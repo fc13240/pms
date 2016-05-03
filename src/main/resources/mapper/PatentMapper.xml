@@ -282,6 +282,6 @@
 	
 	
 	<select id="searchUserPatentsByPatentType" resultType="int">
-		 <include refid="userPatents" /> and p.patent_type = #{patentType}	 		 	
+		 <include refid="UserPatentsBySearch" /> and p.patent_type = #{patentType}	 		 	
 	</select>
 </mapper>
