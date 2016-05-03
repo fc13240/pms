@@ -26,7 +26,7 @@
 	    <ul id="nav">
 	      <p>快捷处理：</p>
 	      <li><a href="#" class="">专利类型</a></li>
-	      <li><a href="#" class="">缴费期限</a></li>
+<!-- 	      <li><a href="#" class="">缴费期限</a></li> -->
 	      <li><a href="#" class="">缴费状态</a></li>
 	      <li><a href="#" class="selected">费用类型</a></li>
 	    </ul>
@@ -34,43 +34,43 @@
 	  <div id="menu_con" style="min-width:1100px;">
 	    <div class="tag" style="display:none"> 
 	      <ul class="qxjk-ul">
-	        <a href="#">
-	        <li>全部 ()</li>
-	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=1'/>">
 	        <li>发明 ()</li>
-	        </a> <a href="#">
+	        </a> <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=2'/>">
 	        <li>实用新型 ()</li>
 	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=3'/>">
 	        <li>外观设计 ()</li>
 	        </a> 
 	      </ul>		    
 	     </div>
-	    <div class="tag" style="display:none"> 
-	      <ul class="qxjk-ul">
-	        <a href="#">
-	        <li>已超期 ()</li>
-	        </a> 
-	        <a href="#">
-	        <li>两周内()</li>
-	        </a> <a href="#">
-	        <li>一月内 ()</li>
-	        </a> 
-	        <a href="#">
-	        <li>两月内 ()</li>
-	        </a> 
-	        <a href="#">
-	        <li>两月以上 ()</li>
-	        </a> 	        
-	      </ul>	 
-	     </div>
+<!-- 	    <div class="tag" style="display:none">  -->
+<!-- 	      <ul class="qxjk-ul"> -->
+<!-- 	        <a href="#"> -->
+<!-- 	        <li>已超期 ()</li> -->
+<!-- 	        </a>  -->
+<!-- 	        <a href="#"> -->
+<!-- 	        <li>两周内()</li> -->
+<!-- 	        </a> <a href="#"> -->
+<!-- 	        <li>一月内 ()</li> -->
+<!-- 	        </a>  -->
+<!-- 	        <a href="#"> -->
+<!-- 	        <li>两月内 ()</li> -->
+<!-- 	        </a>  -->
+<!-- 	        <a href="#"> -->
+<!-- 	        <li>两月以上 ()</li> -->
+<!-- 	        </a> 	         -->
+<!-- 	      </ul>	  -->
+<!-- 	     </div> -->
 	    <div class="tag"  style="display:none"> 
 	      <ul class="qxjk-ul">
-	        <a href="#">
-	        <li>应缴费 ()</li>
+	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=1'/>">
+	        <li>未缴费 ()</li>
 	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=2'/>">
+	        <li>已支付 ()</li>
+	        </a>
+	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=3'/>">
 	        <li>已缴费 ()</li>
 	        </a> 
 	      </ul>
@@ -78,13 +78,13 @@
 	    </div>
 	    <div class="tag"  style="display:block">
 	      <ul class="qxjk-ul">
-	        <a href="#">
+	        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=1'/>">
 	        <li>申请费 ()</li>
 	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=3'/>">
 	        <li>年登印费 ()</li>
 	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=6'/>">
 	        <li>维持年费 ()</li>
 	        </a>
 	      </ul>

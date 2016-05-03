@@ -27,66 +27,62 @@
 	    <ul id="nav">
 	      <p>快捷处理：</p>
 	      <li><a href="#" class="">专利类型</a></li>
-	      <li><a href="#" class="">处理期限</a></li>
+<!-- 	      <li><a href="#" class="">处理期限</a></li> -->
 	      <li><a href="#" class="selected">通知类型</a></li>
 	    </ul>
 	  </div>
 	  <div id="menu_con" style="min-width:1100px;">
 	    <div class="tag" style="display:none"> 
 	      <ul class="qxjk-ul">
-	        <a href="#">
-	        <li>全部 ()</li>
-	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=1'/>">
 	        <li>发明 ()</li>
-	        </a> <a href="#">
+	        </a> <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=2'/>">
 	        <li>实用新型 ()</li>
 	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=3'/>">
 	        <li>外观设计 ()</li>
 	        </a> 
 	      </ul>	
 	     </div>
-	    <div class="tag" style="display:none"> 
-	      <ul class="qxjk-ul">
-	        <a href="#">
-	        <li>已超期 ()</li>
-	        </a> 
-	        <a href="#">
-	        <li>一周内()</li>
-	        </a> <a href="#">
-	        <li>两周内 ()</li>
-	        </a> 
-	        <a href="#">
-	        <li>一月内 ()</li>
-	        </a> 
-	        <a href="#">
-	        <li>一月以上 ()</li>
-	        </a> 	        
-	      </ul>	
-	    
-	    </div>
+<!-- 	    <div class="tag" style="display:none">  -->
+<!-- 	      <ul class="qxjk-ul"> -->
+<!-- 	        <a href="#"> -->
+<!-- 	        <li>已超期 ()</li> -->
+<!-- 	        </a>  -->
+<!-- 	        <a href="#"> -->
+<!-- 	        <li>一周内()</li> -->
+<!-- 	        </a> <a href="#"> -->
+<!-- 	        <li>两周内 ()</li> -->
+<!-- 	        </a>  -->
+<!-- 	        <a href="#"> -->
+<!-- 	        <li>一月内 ()</li> -->
+<!-- 	        </a>  -->
+<!-- 	        <a href="#"> -->
+<!-- 	        <li>一月以上 ()</li> -->
+<!-- 	        </a> 	         -->
+<!-- 	      </ul>	 -->
+<!-- 	    </div> -->
 	    <div class="tag"  style="display:block">
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=1'/>">
 	        <li>新案受理 ()</li>
 	        </a>  
-	        <a href="#">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=2'/>">
 	        <li>费用相关 ()</li>
 	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=3'/>">
 	        <li>补正审查 ()</li>
 	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=4'/>">
 	        <li>授权登记 ()</li>
 	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=5'/>">
 	        <li>权利丧失 ()</li>
 	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=6'/>">
 	        <li>手续合格 ()</li>
 	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=7'/>">
 	        <li>其他 ()</li>
 	        </a>
 	      </ul>
