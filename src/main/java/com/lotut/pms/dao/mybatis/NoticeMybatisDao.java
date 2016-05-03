@@ -1,6 +1,7 @@
 package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -103,6 +104,16 @@ public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao 
 	public void batchUpdateNoticesNoticePaperType(List<Integer> noticeIdList, int noticePaperApplyType) {
 		noticeMapper.batchUpdateNoticesNoticePaperType(noticeIdList, noticePaperApplyType);
 		
+	}
+
+	@Override
+	public Map<String, Map<String, String>> getUserNoticeCountByType(int userId) {
+		return noticeMapper.getUserNoticeCountByType(userId);
+	}
+
+	@Override
+	public Map<String, Map<String, String>> getUserNoticeCountByNoticeType(int userId) {
+		return noticeMapper.getUserNoticeCountByNoticeType(userId);
 	}
 	
 	//通知书处理状态

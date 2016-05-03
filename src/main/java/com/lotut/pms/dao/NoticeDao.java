@@ -1,6 +1,7 @@
 package com.lotut.pms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lotut.pms.domain.Notice;
 import com.lotut.pms.domain.NoticePaperApplyType;
@@ -39,4 +40,8 @@ public interface NoticeDao {
 	List<Notice> searchUserNoticesByPage(NoticeSearchCondition searchCondition);
 	
 	void batchUpdateNoticesNoticePaperType(List<Integer> noticeIdList, int noticePaperApplyType);
+	
+	Map<String , Map<String,String>> getUserNoticeCountByType(int userId);
+	
+	Map<String , Map<String,String>> getUserNoticeCountByNoticeType(int userId);
 }

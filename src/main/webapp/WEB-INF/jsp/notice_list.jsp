@@ -35,12 +35,12 @@
 	    <div class="tag" style="display:none"> 
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=1'/>">
-	        <li>发明 ()</li>
+	        <li>发明 (${patentTypeCount[(1).intValue()]["noticeCount"]})</li>
 	        </a> <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=2'/>">
-	        <li>实用新型 ()</li>
+	        <li>实用新型 (${patentTypeCount[(2).intValue()]["noticeCount"]})</li>
 	        </a> 
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=3'/>">
-	        <li>外观设计 ()</li>
+	        <li>外观设计 (${patentTypeCount[(3).intValue()]["noticeCount"]})</li>
 	        </a> 
 	      </ul>	
 	     </div>
@@ -65,25 +65,25 @@
 	    <div class="tag"  style="display:block">
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=1'/>">
-	        <li>新案受理 ()</li>
+	        <li>新案受理 (${noticeTypeCount[(1).intValue()]["noticeCount"]})</li>
 	        </a>  
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=2'/>">
-	        <li>费用相关 ()</li>
+	        <li>费用相关 (${noticeTypeCount[(2).intValue()]["noticeCount"]})</li>
 	        </a> 
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=3'/>">
-	        <li>补正审查 ()</li>
+	        <li>补正审查 (${noticeTypeCount[(3).intValue()]["noticeCount"]})</li>
 	        </a> 
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=4'/>">
-	        <li>授权登记 ()</li>
+	        <li>授权登记 (${noticeTypeCount[(4).intValue()]["noticeCount"]})</li>
 	        </a> 
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=5'/>">
-	        <li>权利丧失 ()</li>
+	        <li>权利丧失 (${noticeTypeCount[(5).intValue()]["noticeCount"]})</li>
 	        </a> 
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=6'/>">
-	        <li>手续合格 ()</li>
+	        <li>手续合格 (${noticeTypeCount[(6).intValue()]["noticeCount"]})</li>
 	        </a> 
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=7'/>">
-	        <li>其他 ()</li>
+	        <li>其他 (${noticeTypeCount[(7).intValue()]["noticeCount"]})</li>
 	        </a>
 	      </ul>
 	    </div>

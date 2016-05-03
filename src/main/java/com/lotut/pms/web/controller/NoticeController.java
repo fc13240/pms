@@ -7,6 +7,7 @@ import java.net.URLEncoder;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -53,10 +54,14 @@ public class NoticeController {
 		page.setPageSize(WebUtils.getPageSize(session));
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
+		Map<String,Map<String,String>> patentTypeCount=noticeService.getUserNoticeCountByType(userId);
+		Map<String,Map<String,String>> noticeTypeCount=noticeService.getUserNoticeCountByNoticeType(userId);
 		List<Notice> userNotices = noticeService.getUserNoticesByPage(page);
 		int totalCount=(int)noticeService.getUserNoticesCount(userId);
 		page.setTotalRecords(totalCount);
 		model.addAttribute("notices", userNotices);
+		model.addAttribute("patentTypeCount",patentTypeCount);
+		model.addAttribute("noticeTypeCount",noticeTypeCount);
 		model.addAttribute("page", page);
 		addSearchTypesDataToModel(model);
 		return "notice_list";
@@ -70,9 +75,13 @@ public class NoticeController {
 		page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
 		List<Notice> resultNotices = noticeService.searchUserNoticesWithPage(searchCondition);
+		Map<String,Map<String,String>> patentTypeCount=noticeService.getUserNoticeCountByType(searchCondition.getUserId());
+		Map<String,Map<String,String>> noticeTypeCount=noticeService.getUserNoticeCountByNoticeType(searchCondition.getUserId());
 		int totalCount=(int)noticeService.searchUserNoticesCount(searchCondition);
 		page.setTotalRecords(totalCount);
 		model.addAttribute("notices", resultNotices);
+		model.addAttribute("patentTypeCount",patentTypeCount);
+		model.addAttribute("noticeTypeCount",noticeTypeCount);
 		model.addAttribute("page", page);
 		addSearchTypesDataToModel(model);
 		return "notice_list";

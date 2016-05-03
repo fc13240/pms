@@ -392,5 +392,21 @@
 		<foreach item="noticeId" collection="noticeIdList" open="(" separator="," close=")">
 			#{noticeId}
 		</foreach>		 
-	</update>		
+	</update>
+	
+	<select id="getUserNoticeCountByType" resultType="map">
+		select p.patent_type patentType,count(*) noticeCount
+		  from notices n join patents p on n.patent = p.patent_id
+		  	left join patent_status ps on p.patent_status = ps.patent_status_id
+		 where patent in (select patent from user_patents where user = #{userId})	
+		 GROUP BY p.patent_type
+	</select>
+	
+	<select id="getUserNoticeCountByNoticeType" resultType="map">
+		select n.notice_type noticeType,count(*) noticeCount
+		  from notices n join patents p on n.patent = p.patent_id
+		  	left join patent_status ps on p.patent_status = ps.patent_status_id
+		 where patent in (select patent from user_patents where user = #{userId})	
+		 GROUP BY n.notice_type
+	</select>		
 </mapper>

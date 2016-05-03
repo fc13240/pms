@@ -193,4 +193,14 @@ public class NoticeServiceImpl implements NoticeService {
 		noticeDao.batchUpdateNoticesNoticePaperType(noticeIdList, noticePaperApplyType);
 		
 	}
+
+	@Override
+	public Map<String, Map<String, String>> getUserNoticeCountByType(int userId) {
+		return noticeDao.getUserNoticeCountByType(userId);
+	}
+
+	@Override
+	public Map<String, Map<String, String>> getUserNoticeCountByNoticeType(int userId) {
+		return noticeDao.getUserNoticeCountByNoticeType(userId);
+	}
 }

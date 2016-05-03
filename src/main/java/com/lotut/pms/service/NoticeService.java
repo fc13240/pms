@@ -3,6 +3,7 @@ package com.lotut.pms.service;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 
 import com.lotut.pms.domain.Notice;
 import com.lotut.pms.domain.NoticePaperApplyType;
@@ -48,4 +49,8 @@ public interface NoticeService {
 	List<Notice> searchUserNoticesWithPage(NoticeSearchCondition searchCondition);
 	
 	void batchUpdateNoticesNoticePaperType(List<Integer> noticeIdList, int noticePaperApplyType);
+	
+	Map<String, Map<String, String>> getUserNoticeCountByType(int userId);
+
+	Map<String, Map<String, String>> getUserNoticeCountByNoticeType(int userId);
 }

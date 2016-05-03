@@ -1,7 +1,9 @@
 package com.lotut.pms.dao.mapper;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.Notice;
@@ -41,4 +43,10 @@ public interface NoticeMapper {
 	List<Notice> searchUserNoticesByPage(NoticeSearchCondition searchCondition);
 	
 	void batchUpdateNoticesNoticePaperType(@Param("noticeIdList")List<Integer> noticeIdList, @Param("noticePaperApplyType")int noticePaperApplyType);
+	
+	@MapKey("patentType")
+	Map<String , Map<String,String>> getUserNoticeCountByType(int userId);
+	
+	@MapKey("noticeType")
+	Map<String , Map<String,String>> getUserNoticeCountByNoticeType(int userId);
 }
