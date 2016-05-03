@@ -272,4 +272,16 @@
 		insert into sell_patent_goods(patent_id, sell_date, add_date, state, sell_mode, price, patent_second_column)
 		values(#{id}, '0000-00-00',curdate(), '1', '转让', #{price}, #{SecondColumn})				
 	</insert>
+	
+	
+	<sql id="UserPatentsBySearch">
+		select Count(*)
+		 from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
+		 where up.user = #{userId}
+	</sql>
+	
+	
+	<select id="searchUserPatentsByPatentType" resultType="int">
+		 <include refid="userPatents" /> and p.patent_type = #{patentType}	 		 	
+	</select>
 </mapper>
