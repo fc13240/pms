@@ -110,7 +110,7 @@
               <div style="clear:both;"></div>
               <c:if test="${order.orderStatus.statusId == 1}">
                 <div style="margin-top:5px;"> <a href="javascript:void" onClick="window.open('<s:url value="/alipay/index.html?orderId="/>${order.id}')">
-                  <button style="width:95px;" class="t-btn5">支付宝支付</button>
+                  <input type="button"  style="width:95px;" class="t-btn5" value="支付宝支付">
                   </a> </div>
               </c:if>
               <c:if test="${order.orderStatus.statusId == 1}">

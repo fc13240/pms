@@ -22,6 +22,7 @@
 	</div>
 	
 <!-- list beg -->
+	<div class="t-third">
 	<form action="<s:url value='/friend/search.html'/>" method="GET"  role="search">
 	  <div class="form-group">
 		<input type="text" id="form-field-1" style="height:25px;width:450px;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" />
@@ -63,7 +64,7 @@
 		<input type="text" id="page.pageNo" style="width:50px;height:15px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
 		<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a> </div>
 	</c:if>
-
+	</div>
 <!-- list end -->
 </div>
 
