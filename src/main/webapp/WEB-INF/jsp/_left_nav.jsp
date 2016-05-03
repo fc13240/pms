@@ -38,3 +38,20 @@
 			</a> 
 		  </ul>
 		</div>
+<style>
+	.cur{background:#CF2D22;}
+</style>
+<script type="text/javascript">
+  var urlstr = location.href;
+  //alert((urlstr + '/').indexOf($(this).attr('href')));
+  var urlstatus=false;
+  $(".left-nav a").each(function () {
+    if ((urlstr + '/').indexOf($(this).attr('href')) > -1&&$(this).attr('href')!='') {
+    	$('li',this).addClass('cur'); urlstatus = true;
+    } else {
+    	$('li',this).removeClass('cur');
+    }
+  });
+  if (!urlstatus) {$(".left-nav a li").eq(0).addClass('cur'); }
+</script>		
+		
