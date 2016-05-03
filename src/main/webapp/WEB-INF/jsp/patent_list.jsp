@@ -33,15 +33,12 @@
 	  <div id="menu_con" style="min-width:1100px;">
 	    <div class="tag" style="display:block"> 
 	      <ul class="qxjk-ul">
-	        <a href="#">
-	        <li>全部 ()</li>
-	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=1'/>">
 	        <li>发明 ()</li>
-	        </a> <a href="#">
+	        </a> <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=2'/>">
 	        <li>实用新型 ()</li>
 	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=3'/>">
 	        <li>外观设计 ()</li>
 	        </a> 
 	      </ul>	    
@@ -49,28 +46,25 @@
 	    
 	    </div>
 	    <div class="tag"  style="display:none">
-	      <ul class="qxjk-ul">
-	        <a href="#">
-	        <li>全部 ()</li>
-	        </a> 	      
-	        <a href="#">
+	      <ul class="qxjk-ul">	      
+	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=1'/>">
 	        <li>等待申请费 ()</li>
 	        </a> 
-	        <a href="#">
+	       <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=2'/>">
 	        <li>待答复 ()</li>
 	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=3'/>">
 	        <li>等年登印费 ()</li>
 	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=4'/>">
 	        <li>待恢复 ()</li>
 	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=5'/>">
 	        <li>失效()</li>
 	        </a> 
-	        <a href="#">
+	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=6'/>">
 	        <li>专利权维持 ()</li>
-	        </a> <a href="#">
+	        </a> <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=7'/>">
 	        <li>其他 ()</li>
 	        </a>
 	      </ul>
