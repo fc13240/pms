@@ -1,7 +1,9 @@
 package com.lotut.pms.dao.mapper;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.GoodsDetail;
@@ -55,4 +57,10 @@ public interface PatentMapper {
 	void saveGoods(GoodsDetail goodsDetail);
 	
 	void addPatent(Patent patent);
+	
+	@MapKey("patentType")
+	Map<String, Map<String, String>> getUserPatentCountByType(int userId);
+	
+	@MapKey("patentStatus")
+	Map<String, Map<String, String>> searchUserPatentsByPatentStatus(int userId);
 }

@@ -3,6 +3,7 @@ package com.lotut.pms.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import com.lotut.pms.domain.GoodsDetail;
 import com.lotut.pms.domain.GoodsFirstColumn;
@@ -45,4 +46,8 @@ public interface PatentService {
 	public void saveGoods(GoodsDetail goodsDetail);
 	
 	 void addPatent(Patent patent);
+	 
+	 Map<String, Map<String, String>> getUserPatentCountByType( int userId);
+	 
+	 Map<String, Map<String, String>> searchUserPatentsByPatentStatus(int userId);
 }

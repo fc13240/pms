@@ -56,9 +56,13 @@ public class PatentController {
 		//分页相关
 		int totalCount=(int)patentService.getPatentsCount(userId);
 		page.setTotalRecords(totalCount);
+		Map<String, Map<String, String>> patentTypeCount=patentService.getUserPatentCountByType(userId);
+		Map<String, Map<String, String>> patentStatusCount=patentService.searchUserPatentsByPatentStatus(userId);
 		List<Patent> patents = patentService.getUserPatents(page);
 		model.addAttribute("patents", patents);
 		model.addAttribute("page", page);
+		model.addAttribute("patentTypeCount", patentTypeCount);
+		model.addAttribute("patentStatusCount", patentStatusCount);
 		addPatentTypeAndStatusDataToModel(model);
 		return "patent_list";
 	}
@@ -125,8 +129,12 @@ public class PatentController {
 		List<Patent> resultPatents = patentService.searchUserPatentsWithPage(searchCondition);
 		int totalCount=(int)patentService.searchUserPatentsCount(searchCondition);
 		page.setTotalRecords(totalCount);
+		Map<String, Map<String, String>> patentTypeCount=patentService.getUserPatentCountByType(searchCondition.getUserId());
+		Map<String, Map<String, String>> patentStatusCount=patentService.searchUserPatentsByPatentStatus(searchCondition.getUserId());
 		model.addAttribute("patents", resultPatents);
 		model.addAttribute("page", page);
+		model.addAttribute("patentTypeCount",patentTypeCount);
+		model.addAttribute("patentStatusCount",patentStatusCount);
 		addPatentTypeAndStatusDataToModel(model);
 		return "patent_list";
 	}

@@ -141,4 +141,16 @@ public class PatentServiceImpl implements PatentService {
 		userPatentList.add(userPatentMap);
 		sharePatentDao.insertUserPatents(userPatentList);
 	}
+
+	@Override
+	public Map<String, Map<String, String>> getUserPatentCountByType(int userId) {
+		return patentDao.getUserPatentCountByType(userId);
+	}
+
+	@Override
+	public Map<String, Map<String, String>> searchUserPatentsByPatentStatus(int userId) {
+		return patentDao.searchUserPatentsByPatentStatus(userId);
+	}
+
+	
 }

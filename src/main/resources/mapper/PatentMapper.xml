@@ -274,14 +274,15 @@
 	</insert>
 	
 	
-	<sql id="UserPatentsBySearch">
-		select Count(*)
-		 from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
-		 where up.user = #{userId}
-	</sql>
+	<select id="getUserPatentCountByType" resultType="map">
+		 SELECT  p.patent_type patentType, COUNT(*) patentCount
+ 		FROM patents p LEFT JOIN patent_status ps ON p.patent_status = ps.patent_status_id JOIN user_patents up ON p.patent_id = up.patent
+		WHERE up.user = #{userId} GROUP BY p.patent_type;	 		 	
+	</select>
 	
-	
-	<select id="searchUserPatentsByPatentType" resultType="int">
-		 <include refid="UserPatentsBySearch" /> and p.patent_type = #{patentType}	 		 	
+	<select id="searchUserPatentsByPatentStatus" resultType="map">
+		 SELECT  p.patent_status patentStatus,COUNT(*) patentCount
+ 		FROM patents p LEFT JOIN patent_status ps ON p.patent_status = ps.patent_status_id JOIN user_patents up ON p.patent_id = up.patent
+		WHERE up.user = #{userId} GROUP BY p.patent_status;	 		 	
 	</select>
 </mapper>

@@ -28,7 +28,7 @@
 	      <p>快捷处理：</p>
 	      <li><a href="#" class="">专利类型</a></li>
 <!-- 	      <li><a href="#" class="">处理期限</a></li> -->
-	      <li><a href="#" class="selected">通知类型</a></li>
+	      <li><a href="#" class="">通知类型</a></li>
 	    </ul>
 	  </div>
 	  <div id="menu_con" style="min-width:1100px;">

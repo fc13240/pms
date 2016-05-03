@@ -1,6 +1,7 @@
 package com.lotut.pms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lotut.pms.domain.GoodsDetail;
 import com.lotut.pms.domain.GoodsFirstColumn;
@@ -47,4 +48,8 @@ public interface PatentDao {
 	void saveGoods(GoodsDetail goodsDetail);
 	
 	void addPatent(Patent patent);
+	
+	Map<String, Map<String, String>> getUserPatentCountByType(int userId);
+	
+	Map<String, Map<String, String>> searchUserPatentsByPatentStatus(int userId);
 }

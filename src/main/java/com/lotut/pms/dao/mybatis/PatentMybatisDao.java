@@ -1,6 +1,7 @@
 package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -128,5 +129,15 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	public void addPatent(Patent patent) {
 		patentMapper.addPatent(patent);
 		
+	}
+
+	@Override
+	public Map<String, Map<String, String>> getUserPatentCountByType(int userId) {
+		return patentMapper.getUserPatentCountByType(userId);
+	}
+
+	@Override
+	public Map<String, Map<String, String>> searchUserPatentsByPatentStatus(int userId) {
+		return patentMapper.searchUserPatentsByPatentStatus(userId);
 	}
 }
