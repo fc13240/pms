@@ -12,6 +12,8 @@
 	<delete id="deleteFriend">
 		delete from friends 
 		where user = #{userId} and friend = #{friendId};	
+		delete from friends 
+		where user = #{friendId} and friend = #{userId};		
 		delete from friend_requests
 		where from_user = #{userId} and to_user = #{friendId}
 	</delete>
