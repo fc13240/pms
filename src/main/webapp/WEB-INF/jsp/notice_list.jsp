@@ -26,34 +26,68 @@
 	  <div style="height:33px;">
 	    <ul id="nav">
 	      <p>快捷处理：</p>
-	      <li><a href="#" class="">通知状态</a></li>
 	      <li><a href="#" class="">专利类型</a></li>
-	      <li><a href="#" class="">期限监控</a></li>
+	      <li><a href="#" class="">处理期限</a></li>
 	      <li><a href="#" class="selected">通知类型</a></li>
 	    </ul>
 	  </div>
 	  <div id="menu_con" style="min-width:1100px;">
-	    <div class="tag" style="display:none"> 这里是通知状态 </div>
-	    <div class="tag" style="display:none"> 这里是专利类型 </div>
-	    <div class="tag"  style="display:none"> 这里是期限监控 </div>
+	    <div class="tag" style="display:none"> 
+	      <ul class="qxjk-ul">
+	        <a href="#">
+	        <li>全部 ()</li>
+	        </a> 
+	        <a href="#">
+	        <li>发明 ()</li>
+	        </a> <a href="#">
+	        <li>实用新型 ()</li>
+	        </a> 
+	        <a href="#">
+	        <li>外观设计 ()</li>
+	        </a> 
+	      </ul>	
+	     </div>
+	    <div class="tag" style="display:none"> 
+	      <ul class="qxjk-ul">
+	        <a href="#">
+	        <li>已超期 ()</li>
+	        </a> 
+	        <a href="#">
+	        <li>一周内()</li>
+	        </a> <a href="#">
+	        <li>两周内 ()</li>
+	        </a> 
+	        <a href="#">
+	        <li>一月内 ()</li>
+	        </a> 
+	        <a href="#">
+	        <li>一月以上 ()</li>
+	        </a> 	        
+	      </ul>	
+	    
+	    </div>
 	    <div class="tag"  style="display:block">
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=1'/>">
-	        <li>新案受理 (6)</li>
-	        </a> <a href="#">
-	        <li>新案受理 (6)</li>
-	        </a> <a href="#">
-	        <li>费用相关 (6)</li>
-	        </a> <a href="#">
-	        <li>补正审查 (4)</li>
-	        </a> <a href="#">
-	        <li>授权登记 (1)</li>
-	        </a> <a href="#">
-	        <li>权利丧失 (0)</li>
-	        </a> <a href="#">
-	        <li>手续合格 (0)</li>
-	        </a> <a href="#">
-	        <li>其他 (2)</li>
+	        <li>新案受理 ()</li>
+	        </a>  
+	        <a href="#">
+	        <li>费用相关 ()</li>
+	        </a> 
+	        <a href="#">
+	        <li>补正审查 ()</li>
+	        </a> 
+	        <a href="#">
+	        <li>授权登记 ()</li>
+	        </a> 
+	        <a href="#">
+	        <li>权利丧失 ()</li>
+	        </a> 
+	        <a href="#">
+	        <li>手续合格 ()</li>
+	        </a> 
+	        <a href="#">
+	        <li>其他 ()</li>
 	        </a>
 	      </ul>
 	    </div>
