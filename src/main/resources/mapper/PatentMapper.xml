@@ -64,10 +64,10 @@
 				ps.patent_status_id, ps.patent_status_desc
 			from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
 		 where up.user = #{userId}
-		 order by p.app_date, p.patent_name, p.app_person
+		 order by p.app_date desc, p.app_person, p.patent_name
 		 limit #{startIndex}, #{pageSize}) as sp left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
 		    join users u on u.user_id = up.user	
-		 order by sp.app_date desc, sp.patent_name, sp.app_person
+		 order by sp.app_date desc, sp.app_person, sp.patent_name
 	</select>	
 	
 	<select id="getPatentById" parameterType="long" resultMap="PatentWithShareUsers">
@@ -146,11 +146,11 @@
 						 or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} 
 						 or ps.patent_status_desc like #{keyword_pattern})
 				</if>		 		 	
-				 order by p.app_date, p.patent_name, p.app_person
+				 order by p.app_date desc, p.app_person, p.patent_name
 				 limit #{page.startIndex}, #{page.pageSize}) as sp 
 			left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
 		    join users u on u.user_id = up.user		
-		 order by sp.app_date desc, sp.patent_name, sp.app_person
+		 order by sp.app_date desc, sp.app_person, sp.patent_name
 	</select>	
 	<!-- 查询分页 -->
 	<select id="searchUserPatentsCount" resultType="int">

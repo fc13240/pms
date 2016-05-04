@@ -45,7 +45,7 @@
   var urlstr = location.href;
   var tmp= new Array();
   tmp=urlstr.split("/");
-  var cc = tmp[4];
+  var cc = tmp[3];
 //  alert(cc);
   
   switch(cc){
