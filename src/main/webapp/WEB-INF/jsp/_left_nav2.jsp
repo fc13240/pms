@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div  style="position:fixed;left:76px;top:80px;">
   <ol class="hashTabber-nav hashTabber-sandstone">
-    <h2>专利管家</h2>
+    <h2>我的专利</h2>
     <li class=""> <a href="<s:url value='/main.html'/>">
       <h5>专利概况</h5>
       </a> </li>

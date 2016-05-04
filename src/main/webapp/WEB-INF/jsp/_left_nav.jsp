@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 		<div class="left-nav" style="width:76px;position:fixed;top:80px;">
-		  <div style="clear:both;height:20px;"></div>
+		  <div style="clear:both;"></div>
+
 		  <ul>
 <!-- 			<a href="#"> -->
 <%-- 			<li> <img src="<s:url value='/temp/images/home.png'/>" /> --%>
@@ -8,13 +9,13 @@
 <!-- 			</li> -->
 <!-- 			</a>  -->
 		    <a href="<s:url value='/patent/list.html?currentPage=1'/>">
-			<li class="left-nav-active"> <img src="<s:url value='/temp/images/setting.png'/>" />
+			<li class="left-nav-active"> <img src="<s:url value='/temp/images/purse.png'/>" />
 			  <h5>我的专利</h5>
 			</li>
 			</a> 
 			
 			<a href="<s:url value='/notice/list.html?currentPage=1'/>">
-			<li> <img src="<s:url value='/temp/images/purse.png'/>" />
+			<li> <img src="<s:url value='/temp/images/setting.png'/>" />
 			  <h5>通知书</h5>
 			</li>
 			</a>			
