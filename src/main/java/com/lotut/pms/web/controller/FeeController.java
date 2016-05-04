@@ -99,8 +99,8 @@ public class FeeController {
 		page.setTotalRecords(totalCount);
 		List<Fee> fees = feeService.getUserMonitoredFeesByPage(page);
 		Map<String,Map<String,String>> patentTypeCount=feeService.getMonitoredFeesByType(userId);
-		Map<String,Map<String,String>> feePaymentStatusCount=feeService.getMonitoredFeesByFeeType(userId);
-		Map<String,Map<String,String>> patentStatusCount=feeService.getMonitoredFeesByStatus(userId);
+		Map<String,Map<String,String>> feePaymentStatusCount=feeService.getMonitoredFeesByStatus(userId);
+		Map<String,Map<String,String>> patentStatusCount=feeService.getMonitoredFeesByFeeType(userId);
 		model.addAttribute("patentTypeCount", patentTypeCount);
 		model.addAttribute("feePaymentStatusCount", feePaymentStatusCount);
 		model.addAttribute("patentStatusCount", patentStatusCount);
@@ -119,8 +119,8 @@ public class FeeController {
 		int totalCount=(int)feeService.searchUserMonitoredFeesCount(searchCondition);
 		page.setTotalRecords(totalCount);
 		Map<String,Map<String,String>> patentTypeCount=feeService.getMonitoredFeesByType(searchCondition.getUserId());
-		Map<String,Map<String,String>> feePaymentStatusCount=feeService.getMonitoredFeesByFeeType(searchCondition.getUserId());
-		Map<String,Map<String,String>> patentStatusCount=feeService.getMonitoredFeesByStatus(searchCondition.getUserId());
+		Map<String,Map<String,String>> feePaymentStatusCount=feeService.getMonitoredFeesByStatus(searchCondition.getUserId());
+		Map<String,Map<String,String>> patentStatusCount=feeService.getMonitoredFeesByFeeType(searchCondition.getUserId());
 		model.addAttribute("patentTypeCount", patentTypeCount);
 		model.addAttribute("feePaymentStatusCount", feePaymentStatusCount);
 		model.addAttribute("patentStatusCount", patentStatusCount);
