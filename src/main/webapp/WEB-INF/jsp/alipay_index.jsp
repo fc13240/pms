@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="spring" prefix="s" %>
+<%@ taglib uri="c" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -271,7 +272,16 @@
             </div>
             <div class="element">
                 <div class="etitle">付款金额:</div>
-                <div class="einput">${order.amount}</div>
+                <div class="einput">
+					<c:choose>
+						<c:when test="${not empty order.postAddress &&  order.postAddress.id != 0}">
+							${order.amount + 20}
+						</c:when>
+						<c:otherwise>
+							${order.amount}
+						</c:otherwise>
+					</c:choose>	                
+                </div>
                 <br>
             </div>
             <div class="element">
