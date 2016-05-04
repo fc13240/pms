@@ -22,67 +22,56 @@
 		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">订单</span>
 	</div>
 	
-<!--list beg  -->
-	<div class="lt-box">		
-		<form action="<s:url value='/order/adminSearch.html'/>" method="get">
-		  <div class="widget-box collapsed" style="border:none;">
-			<div class="widget-header" style="background:none;padding:0px;border:none; margin-top:30px;"> <span class="widget-toolbar" style="border:none;padding:0px;">
-			  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-			  <input type="text" style="height:45px;width:450px;" name="keyword" id="keywordId" placeholder="订单号"/>
-			  <button class="btn btn-info" type="submit" style="height:45px;">搜索</button>
-			  <a href="#" data-action="collapse" style="margin-left:10px;">
-			  <button type="button" class="btn btn-sm btn-success">高级搜索</button>
-			  <i class="ace-icon fa fa-chevron-up" style="display:none;"></i> </a> </span> </div>
-			<div class="widget-body" style="display: none;border-left:1px solid #CCC;border-right:1px solid #CCC;border-bottom:1px solid #CCC;boder-top:none;width:512px;margin-left:5px;">
-			  <div class="widget-main">
-				<div style="margin-top:10px;">支付状态
-				  <select name="orderStatus" id="orderStatusId">
-					<option value="">全部</option>
-					<c:forEach items="${allOrderStatus}" var="orderStatus">
-					  <option value="<c:out value='${orderStatus.statusId}'/>">
-					  <c:out value="${orderStatus.statusDescription}"/>
-					  </option>
-					</c:forEach>
-				  </select>
-				</div>
-				<div style="margin-top:10px;">
-				  <div class="input-group">
-					<div style="float:left;line-height: 32px;">查询日期</div>
-					<div style="float:left;margin-left: 16px;" class="form-group" style="margin-left:15px;">
-					<div style="float:left;">
-					  <input  type="text" class="form-control" id="startAppDateId" name="startAppDate" placeholder="开始时间" value="" readonly="readonly" onclick="javascript:$('#start_date_img').click()">
-					</div>
-					<div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="start_date_img"> - </div>
-				  </div>
-				  <div style="float:left;" class="form-group">
-					<div style="float:left;">
-					  <input type="text" class="form-control" id="endAppDateId" name="endAppDate" placeholder="结束时间" value="" readonly="readonly" onclick="javascript:$('#end_date_img').click()">
-					</div>
-					<div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img"></div>
-				  </div>
-				  <div style="clear:both;"></div>
-				  <style>
-												 /*.simple_bag th{background:#f5fafe;}*/
-													.ui-jqgrid-view {margin-top: 30px;}
-													#grid-table_cb{border-left: 1px solid #E1E1E1;}
-													</style>
-				</div>
-			  </div>
-			  <div style="width:60px;margin:0 auto;"> <span class="input-group-btn">
-				<button type="submit" class="btn btn-purple btn-sm">搜索</button>
-				</span> </div>
-			</div>
-		  </div>
-		  </div>
-		</form>
-		<!-- 搜索结束 -->
+<div class="lt-box">
+  <form action="<s:url value='/order/adminSearch.html'/>" method="get">
+    <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
+    <div class="t-third">
+      <ul>
+        <li>
+          <p>支付状态</p>
+          <select name="orderStatus" id="orderStatusId">
+            <option value="">全部</option>
+            <c:forEach items="${allOrderStatus}" var="orderStatus">
+              <option value="<c:out value='${orderStatus.statusId}'/>">
+              <c:out value="${orderStatus.statusDescription}"/>
+              </option>
+            </c:forEach>
+          </select>
+        </li>
+        <li>
+          <p>订单日期开始</p>
+          <input  type="text" onclick="WdatePicker({el:'startAppDateId'})" style="height:18px;" id="startAppDateId" name="startAppDate" placeholder="开始时间" value="" readonly="readonly" >
+          <img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="18" align="absmiddle" id="start_date_img"> - </li>
+        <li>
+          <p>订单日期截止</p>
+          <input type="text" onclick="WdatePicker({el:'endAppDateId'})" style="height:18px;" id="endAppDateId" name="endAppDate" placeholder="结束时间" value="" readonly="readonly" >
+          <img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img"> </li>
+        <li style="width: 385px;">
+          <p>订单号</p>
+          <input name="keyword" id="keywordId" value="" placeholder="订单号" class="t-input"/>
+          <button type="submit">查询</button>
+        </li>
+      </ul>
+    </div>
+  </form>
+  </div>
+  
+  <!-- 搜索结束 -->
 		<c:forEach items="${orders}" var="order">
+		<form action="<s:url value='/fee/exportFees.html'/>" method="get" target="feeExportFrame">
+   		 <c:forEach items="${order.feeList}" var="fee" varStatus="status">
+      		<input type="hidden" name="fees" value="${fee.feeId}">
+    	 </c:forEach>
 		  <table id="simple-table" class="table table-striped table-bordered table-hover">
 			<thead>
 			  <tr class="simple_bag">
 				<th colspan="5"> <fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
 				  &nbsp;&nbsp;&nbsp;
-				  订单号：${order.id} </th>
+				  订单号：${order.id}
+				 <span style="margin-left:100px;">
+              		<input type="submit" value="导出费用清单">
+              	</span>
+				</th>
 			  </tr>
 			</thead>
 			<tbody>
@@ -136,6 +125,7 @@
 			  </tr>
 			</tbody>
 		  </table>
+		  </form>
 		</c:forEach>
 		<!-- 分页功能 start -->
 		<div class="row">
