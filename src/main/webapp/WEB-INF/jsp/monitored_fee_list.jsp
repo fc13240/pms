@@ -188,7 +188,7 @@
 	                <c:forEach items="${fees}" var="fee" varStatus="status">
 	                  <tr>
 	                    <td class="center"><span class="batch-share-item">
-	                      <input type="checkbox" class="fee-check-item" fee="${fee.feeId}" amount="${fee.amount}" onclick="calcTotalAmount()">
+	                      <input type="checkbox" class="fee-check-item" fee="${fee.feeId}" amount="${fee.amount}" onclick="calcTotalAmount()" paymentStatus="${fee.paymentStatus.paymentStatusId}">
 	                      </span> </td>
 	                    <td class="center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
 	                    <td>${fee.patent.appNo}</td>
@@ -198,7 +198,16 @@
 	                    <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
 	                    <td>${fee.feeType}</td>
 	                    <td>${fee.amount}</td>
-	                    <td><input type="text" value="${fee.invoiceTitle}" onChange="changeInvoiceTitle('${fee.feeId}', this.value)" size="30">
+	                    <td>
+	                    	<c:choose>
+	                    		<c:when test="${fee.paymentStatus.paymentStatusId == 1}">
+	                    			<input type="text" value="${fee.invoiceTitle}" onChange="changeInvoiceTitle('${fee.feeId}', this.value)" size="30">
+	                    		</c:when>
+	                    		<c:otherwise>
+	                    			${fee.invoiceTitle}
+	                    		</c:otherwise>
+	                    	</c:choose>
+	                    	
 	                    </td>
 	                    <td>${fee.paymentStatus.payementStatusDescription} </td>
 	                  </tr>
@@ -407,6 +416,14 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 		}	
 		
 		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'fee');
+		var paymentStatus = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'paymentStatus');
+		
+		for (var i = 0; i < paymentStatus.length; i++) {
+			if (paymentStatus[i] == 2 || paymentStatus[i] == 3) {
+				formutil.alertMessage('你选择的费用信息包含已缴费记录，请重新选择！');
+				return;
+			}
+		}
 		
 		window.open("<s:url value='/order/orderCreateForm.html'/>?fees=" + fees);	
 	}
