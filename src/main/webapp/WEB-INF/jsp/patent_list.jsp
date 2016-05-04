@@ -143,7 +143,7 @@
 	              <th class="center" width="45">序号</th>
 	              <th>申请号/专利号</th>
 	              <th width="170">专利名称</th>
-	              <th>第一申请人 </th>
+	              <th width="90">第一申请人 </th>
 	              <th width="90" class="hidden-480"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申请日</th>
 	              <th width="60">专利类型</th>
 	              <th width="60">案件状态</th>

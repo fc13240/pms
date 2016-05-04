@@ -173,9 +173,10 @@
 	        <div class="row">
 	          <div class="col-xs-12">
 	            <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-	              <div class="ta-top" style="margin:8px;"> <a href="javascript:batchProcessNotice(2)">
+	              <div class="ta-top" style="margin:8px;"> <a href="javascript:batchProcessNotice(4)">
 	                <button class="t-btn1">置为处理中</button>
-	                </a> <a href="javascript:batchProcessNotice(4)">
+	                </a> 
+	                 <a href="javascript:batchProcessNotice(2)">
 	                <button class="t-btn2">置为已处理</button>
 	                </a> <a href="javascript:batchShare()">
 	                <button class="t-btn3">专利分享</button>
