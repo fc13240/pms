@@ -34,12 +34,12 @@
 	  <div id="menu_con" style="min-width:1100px;">
 	    <div class="tag" style="display:none"> 
 	      <ul class="qxjk-ul">
-	        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=1'/>">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=1&noticeProcessStatus=1'/>">
 	        <li>发明 (${patentTypeCount[(1).intValue()]["noticeCount"]})</li>
-	        </a> <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=2'/>">
+	        </a> <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=2&noticeProcessStatus=1'/>">
 	        <li>实用新型 (${patentTypeCount[(2).intValue()]["noticeCount"]})</li>
 	        </a> 
-	        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=3'/>">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=3&noticeProcessStatus=1'/>">
 	        <li>外观设计 (${patentTypeCount[(3).intValue()]["noticeCount"]})</li>
 	        </a> 
 	      </ul>	
@@ -64,25 +64,25 @@
 <!-- 	    </div> -->
 	    <div class="tag"  style="display:block">
 	      <ul class="qxjk-ul">
-	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=1'/>">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=1&noticeProcessStatus=1'/>">
 	        <li>新案受理 (${noticeTypeCount[(1).intValue()]["noticeCount"]})</li>
 	        </a>  
-	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=2'/>">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=2&noticeProcessStatus=1'/>">
 	        <li>费用相关 (${noticeTypeCount[(2).intValue()]["noticeCount"]})</li>
 	        </a> 
-	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=3'/>">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=3&noticeProcessStatus=1'/>">
 	        <li>补正审查 (${noticeTypeCount[(3).intValue()]["noticeCount"]})</li>
 	        </a> 
-	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=4'/>">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=4&noticeProcessStatus=1'/>">
 	        <li>授权登记 (${noticeTypeCount[(4).intValue()]["noticeCount"]})</li>
 	        </a> 
-	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=5'/>">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=5&noticeProcessStatus=1'/>">
 	        <li>权利丧失 (${noticeTypeCount[(5).intValue()]["noticeCount"]})</li>
 	        </a> 
-	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=6'/>">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=6&noticeProcessStatus=1'/>">
 	        <li>手续合格 (${noticeTypeCount[(6).intValue()]["noticeCount"]})</li>
 	        </a> 
-	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=7'/>">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=7&noticeProcessStatus=1'/>">
 	        <li>其他 (${noticeTypeCount[(7).intValue()]["noticeCount"]})</li>
 	        </a>
 	      </ul>
