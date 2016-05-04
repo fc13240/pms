@@ -31,10 +31,11 @@
 			  <h4>个人信息编辑</h4>
 			</div>
 			&nbsp;&nbsp;&nbsp;&nbsp;
+			<form action="<s:url value='/user/updateUserDetail.html'/>" method="POST">
 			<table class="table table-striped">
 			  <tr>
 				<td class="f-tar td-w125"><h4 class="lab">真实姓名：</h4></td>
-				<td class="ps-relative"><input class="ipt" type="text" name="truename" id="name" style="height:30px;width:200px;"  value="${user.name}" maxlength="10">
+				<td class="ps-relative"><input class="ipt" type="text" name="name" id="name" style="height:30px;width:200px;"  value="${user.name}" maxlength="10">
 <!-- 				  <label style=""> -->
 <!-- 				  <input class="radios"  type="radio" name="sex" value="0"   checked /> -->
 <!-- 				  先生</label> -->
@@ -45,19 +46,20 @@
 			  </tr>
 			  <tr>
 				<td class="f-tar td-w125"><h4 class="lab">电子邮件：</h4></td>
-				<td><input type="hidden" name="email_info"  value="1">
-				  <input class="email"  id="email" type="text" style="height:30px;width:200px;"value="${user.email}" maxlength="25" ></td>
+				<td>
+				  <input class="email"  name="email" id="email" type="text" style="height:30px;width:200px;"value="${user.email}" maxlength="25" ></td>
 			  </tr>
 			  <tr>
 				<td class="f-tar td-w125"><h4 class="lab">手机或电话号：</h4></td>
-				<td><input type="hidden" name="phone_info"  value="2">
-				  <input class="phone"  id="phone" type="text" style="height:30px;width:200px;" value="${user.phone}" maxlength="20" ></td>
+				<td>
+				  <input class="phone" name="phone" id="phone" type="text" style="height:30px;width:200px;" value="${user.phone}" maxlength="20" ></td>
 			  </tr>
 			  <tr>
 				<td class="f-tar td-w125"></td>
-				<td><input class="orange-red-btn" name="dosubmit" id="dosubmit" style="background:red;color:#FFF " value="保&nbsp;&nbsp;存" type="button" onclick="javascript:updateDetail()"></td>
+				<td><input class="orange-red-btn" name="dosubmit" id="dosubmit" style="background:red;color:#FFF " value="保&nbsp;&nbsp;存" type="submit" ></td>
 			  </tr>
 			</table>
+			</form>
 			<!-- /.span -->
 		  </div>
 		  <!-- /.row -->

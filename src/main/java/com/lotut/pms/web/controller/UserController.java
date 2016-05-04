@@ -88,7 +88,7 @@ public class UserController {
 		return "user_detail";
 	}
 	
-	@RequestMapping(path="/updateUserDetail", method=RequestMethod.GET)
+	@RequestMapping(path="/updateUserDetail", method=RequestMethod.POST)
 	public String updateUserDetail(@ModelAttribute User user,Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		user.setUserId(userId);
