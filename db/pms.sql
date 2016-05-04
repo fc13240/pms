@@ -341,8 +341,8 @@ INSERT INTO notice_process_status (notice_process_status_id, notice_process_stat
 VALUES
 	(1, '未处理'),
 	(2, '处理中'),
-	(3, '已处理'),
-	(4, '已放弃');
+	(3, '已放弃'),
+	(4, '已处理');
 
 INSERT INTO notice_types (notice_type_id, notice_type_desc)
 VALUES

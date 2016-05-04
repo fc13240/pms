@@ -238,7 +238,16 @@
 	                      </select>
 	                      </label>
 	                    </td>
-	                    <td>0 </td>
+	                    <td>
+							<c:choose>
+								<c:when test="${notice.remainDays == -1}">
+									已超期
+								</c:when>
+								<c:otherwise>
+									<c:out value="${notice.remainDays}"/>
+								</c:otherwise>
+							</c:choose>	                    
+	                    </td>
 	                    <td><label id="lblSelect">
 	                      <select id="selectPointOfInterest" onchange="javascript:processNotice('${notice.noticeId}', this)">
 	                        <option>全部</option>
