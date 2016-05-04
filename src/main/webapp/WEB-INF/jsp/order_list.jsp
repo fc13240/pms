@@ -105,7 +105,7 @@
               </table></td>
             <td> ${order.postAddress.receiver}
               <div><a href="javascript:void" onClick="window.open('<s:url value="/order/detail/"/>${order.id}.html')">订单详情</a></div></td>
-            <td>总额: ￥${order.amount}</td>
+            <td>总额: ￥${order.totalAmount}</td>
             <td width="100px;"><h5>${order.orderStatus.statusDescription}</h5>
               <div style="clear:both;"></div>
               <c:if test="${order.orderStatus.statusId == 1}">

@@ -273,14 +273,7 @@
             <div class="element">
                 <div class="etitle">付款金额:</div>
                 <div class="einput">
-					<c:choose>
-						<c:when test="${not empty order.postAddress &&  order.postAddress.id != 0}">
-							${order.amount + 20}
-						</c:when>
-						<c:otherwise>
-							${order.amount}
-						</c:otherwise>
-					</c:choose>	                
+					${order.totalAmount}
                 </div>
                 <br>
             </div>

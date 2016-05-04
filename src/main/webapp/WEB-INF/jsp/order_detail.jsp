@@ -166,7 +166,7 @@
 				  <tbody>
 					<tr>
 					  <td>商品金额</td>
-					  <td>￥${order.amount}</td>
+					  <td>￥${order.totalAmount}</td>
 					</tr>
 				  </tbody>
 				</table></td>

@@ -36,6 +36,18 @@ public class Order {
 	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = orderStatus;
 	}
+	
+	public int getPostFee() {
+		if (postAddress != null && postAddress.getId() != 0) {
+			return 20;
+		}
+		
+		return 0;
+	}
+	
+	public int getTotalAmount() {
+		return getAmount() + getPostFee();
+	}
 
 	public int getAmount() {
 		return amount;

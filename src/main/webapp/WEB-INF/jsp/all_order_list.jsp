@@ -121,7 +121,7 @@
 				  </table></td>
 				<td>${order.owner.username} </td>
 				<td><div><a href="javascript:void" onclick="window.open('<s:url value="/order/detail/"/>${order.id}.html')">编辑订单</a></div></td>
-				<td>总额: ￥${order.amount}</td>
+				<td>总额: ￥${order.totalAmount}</td>
 				<td> ${order.orderStatus.statusDescription}
 				  <c:if test="${order.orderStatus.statusId == 1}">
 					<div> <a href="javascript:void" onclick="window.open('<s:url value="/alipay/index.html?orderId="/>${order.id}')">支付宝支付</a> </div>

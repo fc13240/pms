@@ -45,13 +45,9 @@ public class AlipayController {
 	@RequestMapping(path="/pay")
 	public void pay(@RequestParam("orderId")long orderId, Model model, HttpServletResponse response) throws IOException {
 		Order order = orderService.getOrderById(orderId);
-		int totalFee = order.getAmount();
 		String out_trade_no = String.valueOf(order.getId());
 		String subject = "专利费用";
-		if (order.getPostAddress() != null && order.getPostAddress().getId() != 0) {
-			totalFee += 20;
-		}
-		String total_fee = String.valueOf(totalFee);
+		String total_fee = String.valueOf(order.getTotalAmount());
 		String body = "专利费用描述";
 		
 		Map<String, String> paramMap = new HashMap<>();
