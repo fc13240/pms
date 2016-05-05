@@ -164,7 +164,7 @@
 					</a> <a href="javascript:exportFees()">
 					<button class="t-btn6">表格导出</button>
 					</a> <a href="javascript:showOrderCreateForm()">
-					<button class="t-btn5">在线支付</button>
+					<button class="t-btn5">加入订单</button>
 					</a> <a href="javascript:delectFees()">
 					<button class="t-btn2">删除费用</button>
 					</a></div>
@@ -429,7 +429,7 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 		var paymentStatus = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'paymentStatus');
 		
 		for (var i = 0; i < paymentStatus.length; i++) {
-			if (paymentStatus[i] == 2 || paymentStatus[i] == 3) {
+			if (paymentStatus[i] == 2 || paymentStatus[i] == 3 || paymentStatus[i] == 4) {
 				formutil.alertMessage('包含已支付或已加入订单内的记录，请重新选择！');
 				return;
 			}
