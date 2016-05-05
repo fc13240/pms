@@ -430,7 +430,7 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 		
 		for (var i = 0; i < paymentStatus.length; i++) {
 			if (paymentStatus[i] == 2 || paymentStatus[i] == 3) {
-				formutil.alertMessage('你选择的费用信息包含已缴费记录，请重新选择！');
+				formutil.alertMessage('包含已支付或已加入订单内的记录，请重新选择！');
 				return;
 			}
 		}
