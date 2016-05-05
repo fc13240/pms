@@ -26,13 +26,16 @@
 	  <div style="height:33px;">
 	    <ul id="nav">
 	      <p>快捷处理：</p>
-	      <li><a href="#" class="">专利类型</a></li>
+	      <li><a href="#" class="selected">专利类型</a></li>
 <!-- 	      <li><a href="#" class="">处理期限</a></li> -->
+		  <li><a href="#" class="">通知状态</a></li>
 	      <li><a href="#" class="">通知类型</a></li>
+	      <li><a href="#" class="">纸件申请</a></li>
+	      <li><a href="#" class="">期限监控</a></li>
 	    </ul>
 	  </div>
 	  <div id="menu_con" style="min-width:1100px;">
-	    <div class="tag" style="display:none"> 
+	    <div class="tag" style="display:block"> 
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=1&noticeProcessStatus=1'/>">
 	        <li>发明 (${patentTypeCount[(1).intValue()]["noticeCount"]})</li>
@@ -62,7 +65,22 @@
 <!-- 	        </a> 	         -->
 <!-- 	      </ul>	 -->
 <!-- 	    </div> -->
-	    <div class="tag"  style="display:block">
+		<div class="tag" style="display:none"> 
+	      <ul class="qxjk-ul">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=1'/>">
+	        <li>未处理 (${processStatusCount[(1).intValue()]["noticeCount"]})</li>
+	        </a> <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=2'/>">
+	        <li>已处理 (${processStatusCount[(2).intValue()]["noticeCount"]})</li>
+	        </a> 
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=3'/>">
+	        <li>已放弃 (${processStatusCount[(3).intValue()]["noticeCount"]})</li>
+	        </a>
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=4'/>">
+	        <li>处理中 (${processStatusCount[(4).intValue()]["noticeCount"]})</li>
+	        </a> 
+	      </ul>	
+	     </div>
+	    <div class="tag"  style="display:none">
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=1&noticeProcessStatus=1'/>">
 	        <li>新案受理 (${noticeTypeCount[(1).intValue()]["noticeCount"]})</li>
