@@ -147,15 +147,14 @@
 					  <div style="float:left;margin-left: 16px;" class="form-group" style="margin-left:15px;">
 					  <div style="float:left;">
 						<input  type="text" class="form-control" id="startAppDateId" 
-															 name="startDispatchDate" placeholder="快递发送日期选择" value="<fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/>
-						"  
-						readonly="readonly" onclick="javascript:$('#start_date_img').click()"> </div>
-					  <div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="start_date_img"></div>
+						name="startDispatchDate" placeholder="快递发送日期选择" value="<fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/>"  
+						readonly="readonly" onclick="javascript:$('#start_date_img').click()" style="width: 150px;height: 25px"> </div>
+					  <div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" align="absmiddle" id="start_date_img"></div>
 					</div>
 				  </div>
 				  </div>
 				  <input type="hidden" name="orderId" id="orderId" value="${order.id}"/>
-				  <input type="submit" value="保存" />
+				  <input type="submit" value="保存" style="width: 100px;height: 25px;background: #DB0C14; color:#fff" onclick="javascript:submitExp()"/>
 				</form></td>
 			</tr>
 		  </tbody>
@@ -273,8 +272,8 @@
 				}	
 			});
 		}
-	
 </script>
-	
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>		
 </body>
 </html>
