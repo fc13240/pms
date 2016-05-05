@@ -70,7 +70,7 @@ public class OrderController {
 		model.addAttribute("orderId", order.getId());
 		
 		if (order.getPaymentMethod().getPaymentMethodId() == ALIPAY) {
-			return "redirect:/alipay/index.html";
+			return "redirect:/alipay/pay.html";
 		}
 		
 		// FIXME change success page
