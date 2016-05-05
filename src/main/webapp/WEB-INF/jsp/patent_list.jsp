@@ -136,12 +136,12 @@
 	        <table id="simple-table" class="table table-striped table-bordered table-hover">
 	          <thead>
 	            <tr class="simple_bag">
-	              <th class="center"> <label class="pos-rel">
+	              <th class="center" width="25"> <label class="pos-rel">
 	                <input type="checkbox" class="patent-check-item" id="checkall"  name="checkall" />
 	                <span class="lbl"></span> </label>
 	              </th>
-	              <th class="center" width="45">序号</th>
-	              <th>申请号/专利号</th>
+	              <th class="center" width="20">序号</th>
+	              <th width="110">申请号/专利号</th>
 	              <th width="170">专利名称</th>
 	              <th width="90">第一申请人 </th>
 	              <th width="90" class="hidden-480"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申请日</th>

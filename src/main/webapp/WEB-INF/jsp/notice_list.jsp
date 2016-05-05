@@ -90,7 +90,7 @@
 	  </div>
 	</div>
 	<!--menu end-->	
-
+	<div class="lt-box">
 	<form action="<s:url value='/notice/search.html'/>" method="get">
 	  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 	  <div class="t-third">
@@ -163,179 +163,178 @@
 	    </ul>
 	  </div>
 	</form>
+	</div>
 	<!--search box end-->
-	<div style="clear:both;height:30px;"></div>
-	<div class="t-table">
+
+	
+	<div class="lt-box">
 	  <div class="main-container" id="main-container">
-	    <div class="row">
-	      <div class="col-xs-12">
-	        <!-- PAGE CONTENT BEGINS -->
-	        <div class="row">
-	          <div class="col-xs-12">
-	            <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-	              <div class="ta-top" style="margin:8px;"> <a href="javascript:batchProcessNotice(4)">
-	                <button class="t-btn1">置为处理中</button>
-	                </a> 
-	                 <a href="javascript:batchProcessNotice(2)">
-	                <button class="t-btn2">置为已处理</button>
-	                </a> <a href="javascript:batchShare()">
-	                <button class="t-btn3">专利分享</button>
-	                </a> <a href="javascript:batchGrabFees()">
-	                <button class="t-btn4">官费查询</button>
-	                </a> <a href="javascript:batchChangeNoticePaperType(2)">
-	                <button class="t-btn4">批量申请纸件</button>
-	                </a>
-	                <!-- 							<button class="t-btn6">表格导出</button> -->
-	              </div>
-	              </span> </div>
-	            <table id="simple-table" class="table table-striped table-bordered table-hover">
-	              <thead>
-	                <tr class="simple_bag">
-	                  <th class="center"> <label class="pos-rel">
-	                    <input type="checkbox" class="check-item" id="checkall"  name="checkall" />
-	                    <span class="lbl"></span> </label>
-	                  </th>
-	                  <th class="center" width="30">序号</th>
-	                  <th>申请号/专利号</th>
-	                  <th width="170">专利名称</th>
-	                  <th>第一申请人 </th>
-	                  <th>案件状态 </th>
-	                  <th>共享人</th>
-	                  <th>发文日</th>
-	                  <th>通知书名称</th>
-	                  <th width="90px">纸质申请</th>
-	                  <th>期限</th>
-	                  <th>通知状态</th>
-	                  <!-- 							<th>预览</th> -->
-	                  <th>下载</th>
-	                  <th width="60px">操作</th>
-	                </tr>
-	              </thead>
-	              <tbody>
-	                <c:forEach items="${notices}" var="notice" varStatus="status">
-	                  <tr>
-	                    <td class="center"><label class="pos-rel"> <span class="batch-share-item">
-	                      <input type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
-	                      <span class="lbl"></span></label></td>
-	                    <td class="center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
-	                    <td><c:out value="${notice.patent.appNo}"/>
-	                    </td>
-	                    <td><c:out value="${notice.patent.name}"/></td>
-	                    <td><c:out value="${notice.patent.firstAppPerson}"/></td>
-	                    <td><c:out value="${notice.patent.patentStatus.statusDescription}"/></td>
-	                    <td><c:out value="${notice.patent.shareUsersAsString}"/></td>
-	                    <td><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
-	                    <td><a id="download" href="javascript: void;" onclick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}')">
-	                      <c:out value="${notice.name}"/>
-	                      </a> </td>
-	                    <td><label id="lblSelect">
-	                      <select class="form-control" onchange="javascript:changePaperApplyType('${notice.noticeId}', this)">
-	                        <c:forEach items="${paperApplyTypes}" var="paperApplyType"> <option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
-	                          <c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
-	                          >
-	                          <c:out value="${paperApplyType.paperTypeDescription}"/>
-	                          </option>
-	                        </c:forEach>
-	                      </select>
-	                      </label>
-	                    </td>
-	                    <td>
-							<c:choose>
-								<c:when test="${notice.remainDays == -1}">
-									已超期
-								</c:when>
-								<c:otherwise>
-									<c:out value="${notice.remainDays}"/>
-								</c:otherwise>
-							</c:choose>	                    
-	                    </td>
-	                    <td><label id="lblSelect">
-	                      <select id="selectPointOfInterest" onchange="javascript:processNotice('${notice.noticeId}', this)">
-	                        <option>全部</option>
-	                        <c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
-	                          <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
-	                          >
-	                          <c:out value="${processStatus.processStatusDescription}"/>
-	                          </option>
-	                        </c:forEach>
-	                      </select>
-	                      </label>
-	                    </td>
-	                    <%-- 							<td><a href="javascript: void;" onclick="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')"> --%>
-	                    <%-- 								<img src="<s:url value='/temp/images/look.png'/>" /> --%>
-	                    <!-- 								</a> -->
-	                    <!-- 							</td> -->
-	                    <td><a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}"> <img src="<s:url value='/temp/images/download.png'/>" /> </a> </td>
-	                    <td><a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
-	                      <button class="t-btn3">分享</button>
-	                      </a> </td>
-	                  </tr>
-	                </c:forEach>
-	              </tbody>
-	            </table>
-	            <!-- 分页功能 start -->
-	            <div class="row">
-	              <c:if test="${searchCondition == null}">
-	                <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1">首页</a>
-	                  <c:choose>
-	                    <c:when test="${page.currentPage - 1 > 0}"> <a href="?currentPage=${page.currentPage - 1}">上一页</a> </c:when>
-	                    <c:when test="${page.currentPage - 1 <= 0}"> <a href="?currentPage=1">上一页</a> </c:when>
-	                  </c:choose>
-	                  <c:choose>
-	                    <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">下一页</a> </c:when>
-	                    <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?currentPage=${page.currentPage+1}">下一页</a> </c:when>
-	                    <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?currentPage=${page.totalPages}">下一页</a> </c:when>
-	                  </c:choose>
-	                  <c:choose>
-	                    <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">尾页</a> </c:when>
-	                    <c:otherwise> <a href="?currentPage=${page.totalPages}">尾页</a> </c:otherwise>
-	                  </c:choose>
-	                  <!-- 分页功能 End -->
-	                  <input type="text" id="page.pageNo" style="width:50px;height:15px" name="currentPage" onKeyDown="gotoPageForEnter(event)"/>
-	                  <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
-	                  <select onChange="setPageSize()" id="pageSizeSelect">
-	                    <option value="10">10</option>
-	                    <option value="20">20</option>
-	                    <option value="50">50</option>
-	                    <option value="100">100</option>
-	                  </select>
-	                  条记录 </span> </div>
-	              </c:if>
-	            </div>
-	            <c:if test="${searchCondition != null}">
-	              <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?page.currentPage=1&${searchCondition}">首页</a>
-	                <c:choose>
-	                  <c:when test="${page.currentPage - 1 > 0}"> <a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a> </c:when>
-	                  <c:when test="${page.currentPage - 1 <= 0}"> <a href="?page.currentPage=1&${searchCondition}">上一页</a> </c:when>
-	                </c:choose>
-	                <c:choose>
-	                  <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a> </c:when>
-	                  <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a> </c:when>
-	                  <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a> </c:when>
-	                </c:choose>
-	                <c:choose>
-	                  <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a> </c:when>
-	                  <c:otherwise> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise>
-	                </c:choose>
-	                <!-- 分页功能 End -->
-	                <input type="text" id="page.pageNo" style="width:50px;height:15px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
-	                <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
-	                <select onChange="setPageSize()" id="pageSizeSelect">
-	                  <option value="10">10</option>
-	                  <option value="20">20</option>
-	                  <option value="50">50</option>
-	                  <option value="100">100</option>
-	                </select>
-	                条记录 </span> </div>
-	            </c:if>
-	          </div>
-	        </div>
-	        <!-- /.span -->
-	      </div>
-	      <!-- /.row -->
-	    </div>
+		<div class="row">
+		  <div class="col-xs-12">
+			<!-- PAGE CONTENT BEGINS -->
+			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
+			  <div class="ta-top" style="margin:8px;"> <a href="javascript:batchProcessNotice(4)">
+				<button class="t-btn1">置为处理中</button>
+				</a> <a href="javascript:batchProcessNotice(2)">
+				<button class="t-btn2">置为已处理</button>
+				</a> <a href="javascript:batchShare()">
+				<button class="t-btn3">专利分享</button>
+				</a> <a href="javascript:batchGrabFees()">
+				<button class="t-btn4">官费查询</button>
+				</a> <a href="javascript:batchChangeNoticePaperType(2)">
+				<button class="t-btn4">批量申请纸件</button>
+				</a>
+				<!-- 							<button class="t-btn6">表格导出</button> -->
+			  </div>
+			  </span> </div>
+			<table id="simple-table" class="table table-striped table-bordered table-hover">
+			  <thead>
+				<tr class="simple_bag">
+				  <th class="center"> <label class="pos-rel">
+					<input type="checkbox" class="check-item" id="checkall"  name="checkall" />
+					<span class="lbl"></span> </label>
+				  </th>
+				  <th class="center" width="30">序号</th>
+				  <th>申请号/专利号</th>
+				  <th width="170">专利名称</th>
+				  <th>第一申请人 </th>
+				  <th>案件状态 </th>
+				  <th>共享人</th>
+				  <th>发文日</th>
+				  <th>通知书名称</th>
+				  <th width="90px">纸质申请</th>
+				  <th>期限</th>
+				  <th>通知状态</th>
+				  <!-- 							<th>预览</th> -->
+				  <th>下载</th>
+				  <th width="60px">操作</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<c:forEach items="${notices}" var="notice" varStatus="status">
+				  <tr>
+					<td class="center"><label class="pos-rel"> <span class="batch-share-item">
+					  <input type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
+					  <span class="lbl"></span></label></td>
+					<td class="center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+					<td><c:out value="${notice.patent.appNo}"/>
+					</td>
+					<td><c:out value="${notice.patent.name}"/></td>
+					<td><c:out value="${notice.patent.firstAppPerson}"/></td>
+					<td><c:out value="${notice.patent.patentStatus.statusDescription}"/></td>
+					<td><c:out value="${notice.patent.shareUsersAsString}"/></td>
+					<td><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
+					<td><a id="download" href="javascript: void;" onClick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}')">
+					  <c:out value="${notice.name}"/>
+					  </a> </td>
+					<td><label id="lblSelect">
+					  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this)">
+						<c:forEach items="${paperApplyTypes}" var="paperApplyType"> <option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
+								  
+							  
+						  <c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
+						  >
+						  <c:out value="${paperApplyType.paperTypeDescription}"/>
+						  </option>
+						</c:forEach>
+					  </select>
+					  </label>
+					</td>
+					<td><c:choose>
+						<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
+						<c:otherwise>
+						  <c:out value="${notice.remainDays}"/>
+						</c:otherwise>
+					  </c:choose>
+					</td>
+					<td><label id="lblSelect">
+					  <select id="selectPointOfInterest" onChange="javascript:processNotice('${notice.noticeId}', this)">
+						<option>全部</option>
+						<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
+								  
+							  
+						  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
+						  >
+						  <c:out value="${processStatus.processStatusDescription}"/>
+						  </option>
+						</c:forEach>
+					  </select>
+					  </label>
+					</td>
+					<%-- 							<td><a href="javascript: void;" onclick="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')"> --%>
+					<%-- 								<img src="<s:url value='/temp/images/look.png'/>" /> --%>
+					<!-- 								</a> -->
+					<!-- 							</td> -->
+					<td><a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}"> <img src="<s:url value='/temp/images/download.png'/>" /> </a> </td>
+					<td><a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
+					  <button class="t-btn3">分享</button>
+					  </a> </td>
+				  </tr>
+				</c:forEach>
+			  </tbody>
+			</table>
+			<!-- 分页功能 start -->
+			<div style="height:30px;background:#fff;">
+			  <c:if test="${searchCondition == null}">
+				<div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1">首页</a>
+				  <c:choose>
+					<c:when test="${page.currentPage - 1 > 0}"> <a href="?currentPage=${page.currentPage - 1}">上一页</a> </c:when>
+					<c:when test="${page.currentPage - 1 <= 0}"> <a href="?currentPage=1">上一页</a> </c:when>
+				  </c:choose>
+				  <c:choose>
+					<c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">下一页</a> </c:when>
+					<c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?currentPage=${page.currentPage+1}">下一页</a> </c:when>
+					<c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?currentPage=${page.totalPages}">下一页</a> </c:when>
+				  </c:choose>
+				  <c:choose>
+					<c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">尾页</a> </c:when>
+					<c:otherwise> <a href="?currentPage=${page.totalPages}">尾页</a> </c:otherwise>
+				  </c:choose>
+				  <!-- 分页功能 End -->
+				  <input type="text" id="page.pageNo" style="width:50px;height:15px" name="currentPage" onKeyDown="gotoPageForEnter(event)"/>
+				  <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
+				  <select onChange="setPageSize()" id="pageSizeSelect">
+					<option value="10">10</option>
+					<option value="20">20</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+				  </select>
+				  条记录 </span> </div>
+			  </c:if>
+			</div>
+			<c:if test="${searchCondition != null}">
+			  <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?page.currentPage=1&${searchCondition}">首页</a>
+				<c:choose>
+				  <c:when test="${page.currentPage - 1 > 0}"> <a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a> </c:when>
+				  <c:when test="${page.currentPage - 1 <= 0}"> <a href="?page.currentPage=1&${searchCondition}">上一页</a> </c:when>
+				</c:choose>
+				<c:choose>
+				  <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a> </c:when>
+				  <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a> </c:when>
+				  <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a> </c:when>
+				</c:choose>
+				<c:choose>
+				  <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a> </c:when>
+				  <c:otherwise> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise>
+				</c:choose>
+				<!-- 分页功能 End -->
+				<input type="text" id="page.pageNo" style="width:50px;height:15px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
+				<a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
+				<select onChange="setPageSize()" id="pageSizeSelect">
+				  <option value="10">10</option>
+				  <option value="20">20</option>
+				  <option value="50">50</option>
+				  <option value="100">100</option>
+				</select>
+				条记录 </span> </div>
+			</c:if>
+			<!-- /.span -->
+		  </div>
+		  <!-- /.row -->
+		</div>
 	  </div>
 	</div>
+
 
 </div>
 
