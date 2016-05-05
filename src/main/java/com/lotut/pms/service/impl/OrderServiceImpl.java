@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		
 		orderDao.insertOrderItems(orderItems);
-		
+		orderDao.updateOrderFeesStatus(orderItems);
 		return 0;
 	}
 
