@@ -318,7 +318,16 @@ function batchUpdateInvoiceTitles() {
 	if (!feeSelected) {
 		formutil.alertMessage('请选择费用记录');
 		return;
-	}		
+	}	
+	
+	var paymentStatus = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'paymentStatus');
+	
+	for (var i = 0; i < paymentStatus.length; i++) {
+		if (paymentStatus[i] == 2 || paymentStatus[i] == 3) {
+			formutil.alertMessage('已支付记录不能修改发票抬头，请重新选择！');
+			return;
+		}
+	}	
 	
 	var invoiceTitle = prompt("请输入发票抬头", "");
 	if (invoiceTitle != null && invoiceTitle != "") {
