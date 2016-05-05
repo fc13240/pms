@@ -118,6 +118,7 @@
 				<option value="1">未缴</option>
 				<option value="2">已支付</option>
 				<option value="3">已缴</option>
+				<option value="4">已加入订单</option>
 			  </select>
 			  </label>
 			</li>
@@ -164,7 +165,9 @@
 					<button class="t-btn6">表格导出</button>
 					</a> <a href="javascript:showOrderCreateForm()">
 					<button class="t-btn5">在线支付</button>
-					</a> </div>
+					</a> <a href="javascript:delectFees()">
+					<button class="t-btn2">删除费用</button>
+					</a></div>
 				  </span> </div>
 				<table id="simple-table" class="table table-striped table-bordered table-hover">
 				  <thead>
@@ -454,7 +457,30 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 		});		
 	}	
 </script>
-
-    <%@ include file="_footer_js.jsp" %>
+<script type="text/javascript">
+		$(function(){
+			formutil.clickAllCheckbox('tr th input.fee-check-item', 'tr td input.fee-check-item');
+			formutil.clickItemCheckbox('tr th input.fee-check-item', 'tr td input.fee-check-item');
+		});
+		function delectFees() {
+			var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
+			
+			if (!feeSelected) {
+				formutil.alertMessage('请选择要删除的费用信息');
+				return;
+			}
+		
+			var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'fee');
+			var paymentStatus = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'paymentStatus');
+			for (var i = 0; i < paymentStatus.length; i++) {
+				if (paymentStatus[i] == 2 || paymentStatus[i] == 3 || paymentStatus[i] == 4) {
+					formutil.alertMessage('你选择的费用信息包含已支付及订单内信息，请重新选择！');
+					return;
+				}
+			}
+			location.href = "<s:url value='/fee/deleteFees.html'/>?fees=" + fees;
+		}
+</script>
+<%@ include file="_footer_js.jsp" %>
 </body>
 </html>

@@ -170,12 +170,14 @@ public class FeeController {
 		return null;
 	}		
 	
-	//CS:deleteFees
+	/*
+	 * deleteFees
+	 */
 		@RequestMapping(path="/deleteFees", method=RequestMethod.GET)
-		public String deleteFees(@RequestParam("fees")List<Long> feeIds) {
+		public String deleteFees(@RequestParam("fees")List<Long> feeIds,Page page,HttpSession session,Model model) {
 			int userId = PrincipalUtils.getCurrentUserId();
 			feeService.deleteFees(feeIds, userId);
-			return "monitored_fee_list";
+			return "redirect:/fee/monitoredFeeList.html?currentPage=1";
 		}
 		
 	    

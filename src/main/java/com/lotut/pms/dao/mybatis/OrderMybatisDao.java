@@ -114,4 +114,10 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 		// TODO Auto-generated method stub
 		return orderMapper.getAllNeedProcessOrdersBySearchCount(searchCondition);
 	}
+
+	@Override
+	public void updateOrderFeesStatus(List<OrderItem> orderItems) {
+		orderMapper.updateOrderFeesStatus(orderItems);
+		
+	}
 }

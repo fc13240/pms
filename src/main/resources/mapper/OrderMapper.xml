@@ -19,7 +19,7 @@
 		insert into order_items(order_id, fee_id) values
 		<foreach item="orderItem" collection="orderItems" separator=",">
 			(#{orderItem.orderId}, #{orderItem.feeId})
-		</foreach>		
+		</foreach>;
 	</insert>	
 
 	<resultMap type="ContactAddress" id="PostAddressMap">
@@ -76,6 +76,7 @@
 <!-- 	</select> -->
 	
 	<delete id="deleteUserOrder">
+		update fees set fee_payment_status = 1 where fee_id in (select fee_id from order_items where order_id =#{orderId});
 		delete from orders where order_id=#{orderId} and user = #{userId}
 	</delete>
 	
@@ -317,5 +318,12 @@
 			  JOIN patents p ON f.patent = p.patent_id
 			  JOIN patent_status ps ON p.patent_status = ps.patent_status_id
 			  JOIN fee_payment_status fs ON f.fee_payment_status = fs.fee_payment_status_id	
-	</select>	
+	</select>
+	
+	<update id="updateOrderFeesStatus">
+		update fees set fee_payment_status = 4 where fee_id in
+    	<foreach item="orderItem" collection="orderItems" open="(" separator="," close=")">
+			#{orderItem.feeId}
+ 		</foreach>
+	</update>	
 </mapper>

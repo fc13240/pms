@@ -41,7 +41,7 @@ public interface FeeService {
 	 */
 	List<Fee> changeMonitorStatus(List<Long> feeIds,int monitorStatus);
 	List<Fee> batchChangeMonitorStatus(List<Long> feeIds,List<Long> patents,int monitorStatus);
-	//CS:deleteFees
+	//deleteFees
 	void deleteFees(List<Long> feeIdList, int userId);
 	
 	List<Fee> getFeesByIds(List<Long> feeIds);

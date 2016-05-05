@@ -46,7 +46,11 @@
 		  </tr>
 		  <tr>
 			<th colspan="9"> <input type="checkbox" class="fee-check-item">
-			  <span class="batch-share"><a href="javascript:updateMonitorStatus(2)">加入监控</a></span> <span class="batch-share"><a href="javascript:updateMonitorStatus(1)">放弃监控</a></span> </th>
+			  <span class="batch-share"><a href="javascript:updateMonitorStatus(2)">加入监控</a>
+			  </span> 
+<%-- 			  <span class="batch-share"><a href="javascript:updateMonitorStatus(1)">放弃监控</a> --%>
+<%-- 			  </span>  --%>
+			</th>
 		  </tr>
 		  <tr>
 			<th>序号</th>

@@ -42,4 +42,6 @@ public interface OrderMapper {
 	List<Order> getAllNeedProcessOrdersBySearch(AdminOrderSearchCondition searchCondition);
 	
 	int getAllNeedProcessOrdersBySearchCount(AdminOrderSearchCondition searchCondition);
+	
+	void updateOrderFeesStatus(@Param("orderItems")List<OrderItem> orderItems);
 }

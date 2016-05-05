@@ -43,4 +43,6 @@ public interface OrderDao {
 	List<Order> getAllNeedProcessOrdersBySearch(AdminOrderSearchCondition searchCondition);
 	
 	int getAllNeedProcessOrdersBySearchCount(AdminOrderSearchCondition searchCondition);
+	
+	void updateOrderFeesStatus(List<OrderItem> orderItems);
 }

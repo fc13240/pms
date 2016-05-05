@@ -160,7 +160,7 @@ public class FeeServiceImpl implements FeeService {
 		List<Fee> resultFees = feeDao.getFeesByPatentIds(patents, PrincipalUtils.getCurrentUserId());
 		return resultFees;
 	}
-	//CS:deleteFees
+	//deleteFees
 		@Override
 		public void deleteFees(List<Long> feeIds, int userId) {
 			feeDao.deleteFees(feeIds, userId);
