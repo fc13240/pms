@@ -117,19 +117,19 @@ height: 65px;
 color: #fff;
 font-size: 14px;
 text-align: center;
-margin: 3px 0px 0px 0px;
-padding-top:10px;
+margin: 0px 0px 0px 0px;
+padding-top:25px;
 }
 .left-nav ul li:hover{background:#CF2D22;}
 .t-ti {
-    margin: 20px 0px 0px 15px;
+    margin: 20px 0px 0px 5px;
     height: 40px;
     border-bottom: 1px solid #D9DEE4;
 }
 
 .t-hr {
     height: 25px;
-    width: 7px;
+    width: 4px;
     border: 1px solid #DC2B21;
     color: #DC2B21;
     background: #DC2B21;
@@ -146,7 +146,7 @@ padding-top:10px;
 
 #menu {
     overflow: hidden;
-    margin: 0px 0px 0px 15px;
+    margin: 10px 0px 0px 5px;
     background: #fff;
     padding: 30px 0px 0px 20px;
 	border: 1px solid #E6EAED;
@@ -201,7 +201,8 @@ cursor: pointer;
 	
 }
 .lt-box{
-	margin:20px;
+	margin: 10px 0px 0px 5px;
+	background: #fff;
 	
 }
 .lt-con{
@@ -210,12 +211,10 @@ width:85%;
 position:absolute;
 left:215px;
 margin-top:90px;
-background:#fff;	
+background:#f3f3f5;	
 	
 }
-.t-third{
-	margin:20px;
-    background: #fff;
+.t-third{  
     padding: 30px 0px 100px 20px;
 	border: 1px solid #E6EAED;}
 .t-third li{float:left;margin: 0px 15px 0px 0px;}

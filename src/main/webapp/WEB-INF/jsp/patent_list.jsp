@@ -18,7 +18,6 @@
   <div class="t-ti">
     <hr class="t-hr">
     <span style="font-size: 16px;font-weight: 300;line-height: 24px;">我的专利</span> </div>
-  <div style="height:30px;"></div>
 <!-- list beg -->
 
 
@@ -72,7 +71,7 @@
 	  </div>
 	</div>
 	<!--menu end-->
-	<div style="clear:both;height:30px;"></div>
+	<div class="lt-box">
 	<form action="<s:url value='/patent/search.html'/>" method="get">
 	  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 	  <div class="t-third">
@@ -117,9 +116,10 @@
 	    </ul>
 	  </div>
 	</form>
+	</div>
 	<!--search box end-->
-	<div style="clear:both;height:30px;"></div>
-	<div class="t-table">
+
+	<div class="lt-box">
 	  <div class="main-container" id="main-container">
 	    <!-- PAGE CONTENT BEGINS -->
 	    <div class="row">
@@ -184,7 +184,7 @@
 	          </tbody>
 	        </table>
 	        <!-- 分页功能 start -->
-	        <div class="row">
+	        <div style="height:30px;background:#fff;">	
 	          <c:if test="${searchCondition == null}">
 	            <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1">首页</a>
 	              <c:choose>
@@ -211,7 +211,7 @@
 	              </select>
 	              条记录 </span> </div>
 	          </c:if>
-	        </div>
+	       
 	        <c:if test="${searchCondition != null}">
 	          <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?page.currentPage=1&${searchCondition}">首页</a>
 	            <c:choose>
@@ -238,6 +238,7 @@
 	            </select>
 	            条记录 </span> </div>
 	        </c:if>
+	        </div>
 	      </div>
 	    </div>
 	    </form>
