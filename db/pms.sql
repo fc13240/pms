@@ -302,6 +302,8 @@ create table if not exists orders (
 	constraint fk_orders_payment_method foreign key(payment_method) references payment_methods(payment_method_id)
 ) auto_increment=123412341234;
 
+alter table orders add column pay_time timestamp;
+
 create table if not exists order_items (
 	item_id bigint primary key auto_increment,
 	order_id bigint not null,
