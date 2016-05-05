@@ -123,7 +123,7 @@ public class NoticeServiceImpl implements NoticeService {
 		Path previewPath = Paths.get(Settings.NOTICE_ROOT_PATH, notice.getZipfileName(), 
 				notice.getNoticeSequence(), notice.getNoticeSequence(), notice.getNoticeSequence());
 		Path pdfPath = Paths.get(previewPath.toString(), "output.pdf");
-		String pdfGenerateCommand = "convert '" + previewPath + "/*.tif' " + "'" + pdfPath + "'";
+		String[] pdfGenerateCommand = {"convert", previewPath + "/*.tif", pdfPath.toString()};
 		String errorMessage = "Cannot found the preview file " + pdfPath + " for notice [id=" + noticeId + ", name=" + notice.getName() + "]";
 		
 		try {
