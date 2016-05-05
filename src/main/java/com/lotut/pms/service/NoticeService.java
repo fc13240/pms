@@ -53,4 +53,6 @@ public interface NoticeService {
 	Map<String, Map<String, String>> getUserNoticeCountByType(int userId);
 
 	Map<String, Map<String, String>> getUserNoticeCountByNoticeType(int userId);
+	
+	Map<String , Map<String,String>> getUserNoticeCountByProcessStatus(int userId);
 }

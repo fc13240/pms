@@ -474,7 +474,7 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 			var paymentStatus = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'paymentStatus');
 			for (var i = 0; i < paymentStatus.length; i++) {
 				if (paymentStatus[i] == 2 || paymentStatus[i] == 3 || paymentStatus[i] == 4) {
-					formutil.alertMessage('你选择的费用信息包含已支付及订单内信息，请重新选择！');
+					formutil.alertMessage('您选择的费用已支付或已加入订单内，请重新选择！');
 					return;
 				}
 			}

@@ -49,4 +49,7 @@ public interface NoticeMapper {
 	
 	@MapKey("noticeType")
 	Map<String , Map<String,String>> getUserNoticeCountByNoticeType(int userId);
+	
+	@MapKey("processStatus")
+	Map<String , Map<String,String>> getUserNoticeCountByProcessStatus(int userId);
 }

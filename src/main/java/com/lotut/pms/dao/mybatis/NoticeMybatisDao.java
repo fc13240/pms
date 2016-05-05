@@ -115,6 +115,11 @@ public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao 
 	public Map<String, Map<String, String>> getUserNoticeCountByNoticeType(int userId) {
 		return noticeMapper.getUserNoticeCountByNoticeType(userId);
 	}
+
+	@Override
+	public Map<String, Map<String, String>> getUserNoticeCountByProcessStatus(int userId) {
+		return noticeMapper.getUserNoticeCountByProcessStatus(userId);
+	}
 	
 	//通知书处理状态
 	/*
