@@ -25,7 +25,7 @@
 	<div class="t-third">
 	<form action="<s:url value='/friend/search.html'/>" method="GET"  role="search">
 	  <div class="form-group">
-		<input type="text" id="form-field-1" style="height:25px;width:450px;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" />
+		<input type="text" id="form-field-1" style="height:25px;width:450px;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" required/>
 		<button  type="submit" class="t-btn4">查询</button>
 	  </div>
 	</form>
@@ -148,5 +148,7 @@ function sendFriendRequest(toUser) {
 		});
 	});
 </script>
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>
 </body>
 </html>
