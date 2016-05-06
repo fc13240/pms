@@ -29,6 +29,7 @@ import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.StatsHashMap;
 import com.lotut.pms.service.NoticeService;
 import com.lotut.pms.service.PatentService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -57,7 +58,7 @@ public class NoticeController {
 		Map<String,Map<String,String>> patentTypeCount=noticeService.getUserNoticeCountByType(userId);
 		Map<String,Map<String,String>> noticeTypeCount=noticeService.getUserNoticeCountByNoticeType(userId);
 		Map<String,Map<String,String>> processStatusCount=noticeService.getUserNoticeCountByProcessStatus(userId);
-		Map<String,Map<String,String>> paperApplyTypeCount=noticeService.getUserNoticeCountByPaperApplyType(userId);
+		Map<String, Map<String, String>> paperApplyTypeCount=noticeService.getUserNoticeCountByPaperApplyType(userId);
 		Map<String,Map<String,String>> remainDayCount=noticeService.getUserNoticeCountByRemainDay(userId);
 		List<Notice> userNotices = noticeService.getUserNoticesByPage(page);
 		int totalCount=(int)noticeService.getUserNoticesCount(userId);

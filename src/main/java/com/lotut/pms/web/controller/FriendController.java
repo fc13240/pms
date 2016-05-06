@@ -55,7 +55,7 @@ public class FriendController {
 		int totalCount=(int)userSerivce.getAllUsersCount();
 		page.setTotalRecords(totalCount);
 		List<User> users = userSerivce.getAllUsers(page);
-		model.addAttribute("friends", users);
+		//model.addAttribute("friends", users);
 		model.addAttribute("Page", page);
 		return "friend_search_from";
 	}

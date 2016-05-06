@@ -28,13 +28,13 @@
 		<div class="row">
 		  <div class="col-xs-12">
 			<div class="patent-detail-caption">
-			  <h4>个人信息编辑</h4>
+			  <h4>基本信息编辑</h4>
 			</div>
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<form action="<s:url value='/user/updateUserDetail.html'/>" method="POST">
 			<table class="table table-striped">
 			  <tr>
-				<td class="f-tar td-w125"><h4 class="lab">真实姓名：</h4></td>
+				<td class="f-tar td-w125"><h4 class="lab">真实姓名/名称：</h4></td>
 				<td class="ps-relative"><input class="ipt" type="text" name="name" id="name" style="height:30px;width:200px;"  value="${user.name}" maxlength="30">
 <!-- 				  <label style=""> -->
 <!-- 				  <input class="radios"  type="radio" name="sex" value="0"   checked /> -->
@@ -52,7 +52,7 @@
 			  <tr>
 				<td class="f-tar td-w125"><h4 class="lab">手机或电话号：</h4></td>
 				<td>
-				  <input class="phone" name="phone" id="phone" type="text" style="height:30px;width:200px;" value="${user.phone}" maxlength="20" ></td>
+				  <input class="phone" name="phone" id="phone" type="text" style="height:30px;width:200px;" value="${user.phone}" maxlength="30" ></td>
 			  </tr>
 			  <tr>
 				<td class="f-tar td-w125"></td>
