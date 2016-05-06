@@ -41,6 +41,7 @@
 	<resultMap type="Order" id="OrderMap">
 		<id property="id" column="order_id"/>
 		<result property="createTime" column="create_time"/>
+		<result property="payTime" column="pay_time"/>
 		<result property="expressCompany" column="express_company"/>
 		<result property="expressNo" column="express_no"/>
 		<result property="sendTime" column="send_time"/>
@@ -164,7 +165,7 @@
 	</select>
 	
 	<select id="getOrderById" parameterType="long" resultMap="OrderMap">
-		select  o.create_time, o.amount totalAmount, o.order_id,o.express_company,o.express_no,o.courier,o.courier_phone,o.send_time, 
+		select  o.create_time, o.amount totalAmount, o.order_id,o.express_company,o.express_no,o.courier,o.courier_phone,o.send_time, o.pay_time,
 			ca.id as address_id, ca.receiver, provinces.name provinceName, cities.name cityName,
 			districts.name districtName, streets.name streetName, ca.detail_address detailAddress, ca.phone,
 			os.order_status_id, os.status_description, p.patent_id, p.app_no, p.patent_name, p.app_person, 
