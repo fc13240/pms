@@ -70,10 +70,6 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeZipFile;
 	}
 	
-	@Override
-	public List<Notice> getUserNoticesByRemainDays(int userId, int timeLimitType) {
-		return noticeDao.getUserNoticesByRemainDays(userId, timeLimitType);
-	}
 
 	@Override
 	public List<Notice> searchUserNotices(NoticeSearchCondition searchCondition) {
@@ -213,4 +209,11 @@ public class NoticeServiceImpl implements NoticeService {
 	public Map<String, Map<String, String>> getUserNoticeCountByPaperApplyType(int userId) {
 		return noticeDao.getUserNoticeCountByPaperApplyType(userId);
 	}
+
+	@Override
+	public Map<String, Map<String, String>> getUserNoticeCountByRemainDay(int userId) {
+		return noticeDao.getUserNoticeCountByRemainDay(userId);
+	}
+	
+	
 }

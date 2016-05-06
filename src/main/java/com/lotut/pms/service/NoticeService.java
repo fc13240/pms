@@ -26,8 +26,6 @@ public interface NoticeService {
 	
 	ZipFile createNoticeZipFile(Notice notice) throws IOException;
 	
-	List<Notice> getUserNoticesByRemainDays(int userId, int timeLimitType);
-	
 	List<Notice> searchUserNotices(NoticeSearchCondition searchCondition);
 	
 	List<NoticeProcessStatus> getAllNoticeProcessStatus();
@@ -57,4 +55,6 @@ public interface NoticeService {
 	Map<String , Map<String,String>> getUserNoticeCountByProcessStatus(int userId);
 	
 	Map<String , Map<String,String>> getUserNoticeCountByPaperApplyType(int userId);
+	
+	Map<String , Map<String,String>> getUserNoticeCountByRemainDay(int userId);
 }

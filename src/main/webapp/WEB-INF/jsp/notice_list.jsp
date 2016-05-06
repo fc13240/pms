@@ -47,24 +47,6 @@
 	        </a> 
 	      </ul>	
 	     </div>
-<!-- 	    <div class="tag" style="display:none">  -->
-<!-- 	      <ul class="qxjk-ul"> -->
-<!-- 	        <a href="#"> -->
-<!-- 	        <li>已超期 ()</li> -->
-<!-- 	        </a>  -->
-<!-- 	        <a href="#"> -->
-<!-- 	        <li>一周内()</li> -->
-<!-- 	        </a> <a href="#"> -->
-<!-- 	        <li>两周内 ()</li> -->
-<!-- 	        </a>  -->
-<!-- 	        <a href="#"> -->
-<!-- 	        <li>一月内 ()</li> -->
-<!-- 	        </a>  -->
-<!-- 	        <a href="#"> -->
-<!-- 	        <li>一月以上 ()</li> -->
-<!-- 	        </a> 	         -->
-<!-- 	      </ul>	 -->
-<!-- 	    </div> -->
 		<div class="tag" style="display:none"> 
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=1'/>">
@@ -123,6 +105,24 @@
 	        <li>无纸件 (${paperApplyTypeCount[(5).intValue()]["noticeCount"]})</li>
 	        </a> 
 	      </ul>
+	    </div>
+	    <div class="tag" style="display:none">
+	      <ul class="qxjk-ul">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=1'/>">
+	        <li>已超期 (${remainDayCount[(1).intValue()]["count(*)"]})</li>
+	        </a> 
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=2'/>">
+	        <li>一周内(${remainDayCount[(2).intValue()]["count(*)"]})</li>
+	        </a> <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=3'/>">
+	        <li>两周内 (${remainDayCount[(3).intValue()]["count(*)"]})</li>
+	        </a> 
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=4'/>">
+	        <li>一月内 (${remainDayCount[(4).intValue()]["count(*)"]})</li>
+	        </a> 
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=5'/>">
+	        <li>一月以上 (${remainDayCount[(5).intValue()]["count(*)"]})</li>
+	        </a> 	        
+	      </ul>	
 	    </div>
 	  </div>
 	</div>
