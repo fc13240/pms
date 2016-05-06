@@ -159,42 +159,6 @@
 		   and n.patent in (select patent from user_patents where user = #{userId})	
 	</select>
 	
-	<select id="getUserNoticesByRemainDays" resultMap="NoticeResultMap">
-		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description, 
-			u.user_id as share_user_id,  u.username as share_username, 
-			n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date, notice_remain_days.remain_days,
-			n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
-			npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
-			nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username
-		  from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
-			join user_patents up on p.patent_id = up.patent 
-			join notices n on n.patent = up.patent
-			left join users pu on pu.user_id = n.process_user
-			join users u on u.user_id = up.user
-			join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
-			join notice_process_status nps on nps.notice_process_status_id = n.process_status
-			join (select notice_id, if(time_limit - datediff(curdate(), dispatch_date) >= 0, time_limit - datediff(curdate(), dispatch_date), -1)  as remain_days
-						  from notices) as notice_remain_days
-			on n.notice_id = notice_remain_days.notice_id
-		 where n.patent in (select patent from user_patents where user = #{userId})
-		 	<choose>
-		 		<when test="timeLimitType == 1">
-		 			and remain_days = -1
-		 		</when>
-		 		<when test="timeLimitType == 2">
-		 			and remain_days between 0 and 7
-		 		</when>
-		 		<when test="timeLimitType == 3">
-		 			and remain_days between 8 and 14
-		 		</when>
-		 		<when test="timeLimitType == 4">
-		 			and remain_days between 15 and 30
-		 		</when>
-		 		<otherwise>
-		 			and remain_days > 30
-		 		</otherwise>	 				 				 				 		
-		 	</choose>
-	</select>			
 	
 	<select id="searchUserNotices" parameterType="NoticeSearchCondition" resultMap="NoticeResultMap">
 		<if test="keyword != null">
@@ -282,7 +246,26 @@
 		 	<if test="keyword != null">
 				and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern} or
 					n.notice_name like #{keyword_pattern} or ps.patent_status_desc like #{keyword_pattern})
-			</if> 				 		 
+			</if>
+			<if test="timeLimitType != null">
+					<choose>
+			 		<when test="timeLimitType == 1">
+			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) = -1
+			 		</when>
+			 		<when test="timeLimitType == 2">
+			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) between 0 and 7
+			 		</when>
+			 		<when test="timeLimitType == 3">
+			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) between 8 and 14
+			 		</when>
+			 		<when test="timeLimitType == 4">
+			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) between 15 and 30
+			 		</when>
+			 		<otherwise>
+			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) > 30
+			 		</otherwise>	 				 				 				 		
+			 	   </choose>
+		</if> 				 			 		 
 	</select>	
 	
 	<select id="searchUserNoticesByPage" parameterType="NoticeSearchCondition" resultMap="NoticeResultMap">
@@ -329,7 +312,26 @@
 			 	<if test="keyword != null">
 					and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern} or
 						n.notice_name like #{keyword_pattern} or ps.patent_status_desc like #{keyword_pattern})
-				</if> 				 
+				</if>
+				<if test="timeLimitType != null">
+					<choose>
+			 		<when test="timeLimitType == 1">
+			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) = -1
+			 		</when>
+			 		<when test="timeLimitType == 2">
+			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) between 0 and 7
+			 		</when>
+			 		<when test="timeLimitType == 3">
+			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) between 8 and 14
+			 		</when>
+			 		<when test="timeLimitType == 4">
+			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) between 15 and 30
+			 		</when>
+			 		<otherwise>
+			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) > 30
+			 		</otherwise>	 				 				 				 		
+			 	   </choose>
+			 	 </if> 				 
 			  order by n.dispatch_date desc, p.app_person, p.patent_id
 				limit #{page.startIndex}, #{page.pageSize}) as un
 			join user_patents up on un.patent_id = up.patent
@@ -418,11 +420,25 @@
 		 GROUP BY n.process_status
 	</select>
 	
-	<select id="getUserNoticeCountByPaperApplyType" resultType="map">
+	<select id="getUserNoticeCountByPaperApplyType" resultType="StatsHashMap">
 		select n.paper_apply_type paperApplyType,count(*) noticeCount
 		  from notices n join patents p on n.patent = p.patent_id
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where patent in (select patent from user_patents where user = #{userId}) and n.process_status=1	
 		 GROUP BY n.paper_apply_type
+	</select>
+	
+	<select id="getUserNoticeCountByRemainDay" resultType="StatsHashMap">
+		select 
+			case 
+			<![CDATA[when time_limit - datediff(curdate(), dispatch_date) < 0 then 1]]>
+			when time_limit - datediff(curdate(), dispatch_date) between 0 and 7 then 2
+			when time_limit - datediff(curdate(), dispatch_date) between 8 and 14 then 3
+			when time_limit - datediff(curdate(), dispatch_date) between 15 and 30 then 4
+			else 5
+		end as remain_day_type, count(*)
+  		from notices n 
+ 		where n.patent in (select patent from user_patents where user =#{userid})
+ 		group by remain_day_type
 	</select>		
 </mapper>

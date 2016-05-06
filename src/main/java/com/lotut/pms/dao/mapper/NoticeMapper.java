@@ -22,8 +22,6 @@ public interface NoticeMapper {
 	
 	Notice getNoticeById(@Param("noticeId")int noticeId);
 	
-	List<Notice> getUserNoticesByRemainDays(@Param("userId")int userId, @Param("timeLimitType")int timeLimitType);
-	
 	List<Notice> searchUserNotices(NoticeSearchCondition searchCondition);
 	
 	void insertOrUpdateNotice(Notice notice);
@@ -55,4 +53,9 @@ public interface NoticeMapper {
 	
 	@MapKey("paperApplyType")
 	Map<String , Map<String,String>> getUserNoticeCountByPaperApplyType(int userId);
+	
+	int getUserNoticesByRemainDaysCount(@Param("userId")int userId, @Param("timeLimitType")int timeLimitType);
+	
+	@MapKey("remain_day_type")
+	Map<String , Map<String,String>> getUserNoticeCountByRemainDay(int userId);
 }

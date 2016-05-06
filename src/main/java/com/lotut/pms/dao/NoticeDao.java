@@ -19,8 +19,6 @@ public interface NoticeDao {
 	
 	Notice getNoticeById(int noticeId);
 	
-	List<Notice> getUserNoticesByRemainDays(int userId, int timeLimitType);
-	
 	List<Notice> searchUserNotices(NoticeSearchCondition searchCondition);
 	
 	void insertOrUpdateNotice(Notice notice);
@@ -48,4 +46,6 @@ public interface NoticeDao {
 	Map<String , Map<String,String>> getUserNoticeCountByProcessStatus(int userId);
 	
 	Map<String , Map<String,String>> getUserNoticeCountByPaperApplyType(int userId);
+	
+	Map<String , Map<String,String>> getUserNoticeCountByRemainDay(int userId);
 }

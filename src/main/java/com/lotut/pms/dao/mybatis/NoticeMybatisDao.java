@@ -24,11 +24,6 @@ public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao 
 	}
 
 	@Override
-	public List<Notice> getUserNoticesByRemainDays(int userId, int timeLimitType) {
-		return noticeMapper.getUserNoticesByRemainDays(userId, timeLimitType);
-	}
-
-	@Override
 	public List<Notice> searchUserNotices(NoticeSearchCondition searchCondition) {
 		return noticeMapper.searchUserNotices(searchCondition);
 	}
@@ -124,6 +119,12 @@ public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao 
 	@Override
 	public Map<String, Map<String, String>> getUserNoticeCountByPaperApplyType(int userId) {
 		return noticeMapper.getUserNoticeCountByPaperApplyType(userId);
+	}
+
+
+	@Override
+	public Map<String, Map<String, String>> getUserNoticeCountByRemainDay(int userId) {
+		return noticeMapper.getUserNoticeCountByRemainDay(userId);
 	}
 	
 	

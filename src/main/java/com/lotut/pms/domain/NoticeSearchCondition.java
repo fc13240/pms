@@ -24,6 +24,15 @@ public class NoticeSearchCondition {
 	private String keywordType;
 	private String keyword;
 	private Page page;
+	private Integer timeLimitType;
+	public Integer getTimeLimitType() {
+		return timeLimitType;
+	}
+
+	public void setTimeLimitType(Integer timeLimitType) {
+		this.timeLimitType = timeLimitType;
+	}
+
 	private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 	public int getUserId() {
@@ -134,9 +143,10 @@ public class NoticeSearchCondition {
 		String endDispatchDateStr = endDispatchDate == null ? "" : formatter.format(endDispatchDate);
 		String keywordTypeStr = keyword == null ? "" : keywordType;
 		String keywordStr = keyword == null ? "" : keyword;
+		String timeLimitTypeStr = timeLimitType == null ? "" : timeLimitType.toString();
 		return 	"&paperApplyType="+paperApplyTypeStr+"&patentType="+patentTypeStr+"&noticeProcessStatus="+noticeProcessStatusStr+
 				"&noticeType="+noticeTypeStr+"&startDispatchDate="+startDispatchDateStr+"&endDispatchDate="
-				+endDispatchDateStr+"&keyword="+keywordStr;
+				+endDispatchDateStr+"&keyword="+keywordStr+"&timeLimitType="+timeLimitTypeStr;
 	}
 
 }

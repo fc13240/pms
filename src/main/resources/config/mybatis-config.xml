@@ -41,6 +41,7 @@
 		<typeAlias alias="OrderStatus" type="com.lotut.pms.domain.OrderStatus"/>
 		<typeAlias alias="PaymentMethod" type="com.lotut.pms.domain.PaymentMethod"/>
 		<typeAlias alias="AdminOrderSearchCondition" type="com.lotut.pms.domain.AdminOrderSearchCondition"/>
+		<typeAlias alias="StatsHashMap" type="com.lotut.pms.domain.StatsHashMap"/>
 		
 	</typeAliases>  
 </configuration>
