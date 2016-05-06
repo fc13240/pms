@@ -244,7 +244,7 @@
 				  <th>通知状态</th>
 				  <!-- 							<th>预览</th> -->
 				  <th>下载</th>
-				  <th width="60px">操作</th>
+				  <th width="70px">操作</th>
 				</tr>
 			  </thead>
 			  <tbody>
@@ -304,7 +304,10 @@
 					<!-- 							</td> -->
 					<td><a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}"> <img src="<s:url value='/temp/images/download.png'/>" /> </a> </td>
 					<td><a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
-					  <button class="t-btn3">分享</button>
+					  分享
+					  </a>&nbsp;
+					  <a href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${notice.patent.patentId}'/>">
+					  缴费
 					  </a> </td>
 				  </tr>
 				</c:forEach>

@@ -149,7 +149,7 @@
 	              <th width="60">案件状态</th>
 	              <th width="50">内部编码</th>
 	              <th width="110">共享人</th>
-	              <th width="140">操作</th>
+	              <th width="60">操作</th>
 	            </tr>
 	          </thead>
 	          <tbody>
@@ -171,9 +171,10 @@
 	                <td><c:out value="${patent.shareUsersAsString}"/>
 	                </td>
 	                <td><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
-	                  <button class="t-btn3">分享</button>
-	                  </a> <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
-	                  <button class="t-btn4">缴费</button>
+	                  分享
+	                  </a>&nbsp;
+	                  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
+	                  缴费
 	                  </a> 
 <%-- 	                  <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>"> --%>
 <!-- 	                  <button class="t-btn2">出售</button> -->
