@@ -334,7 +334,7 @@ VALUES
 
 INSERT INTO fee_payment_status (fee_payment_status_id, fee_payment_status_desc)
 VALUES
-	(1, '未缴'),
+	(1, '应缴'),
 	(2, '已支付'),
 	(3, '已缴'),
 	(4, '已加入订单');
