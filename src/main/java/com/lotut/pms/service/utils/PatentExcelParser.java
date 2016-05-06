@@ -23,7 +23,7 @@ import com.lotut.pms.util.PrincipalUtils;
 public class PatentExcelParser {
 	
 	public static void main(String[] args) throws Exception {
-		InputStream in = new FileInputStream("C:\\Users\\Administrator\\Desktop\\11548-20160505.xls");
+		InputStream in = new FileInputStream("C:\\Users\\Administrator\\Desktop\\变更20160202.xls");
 		List<Patent> patentRecords = parsePatentFile(in);
 		for (Patent p: patentRecords) {
 			System.out.println(p.getPatentType().getPatentTypeId());
@@ -47,6 +47,9 @@ public class PatentExcelParser {
 		
 		while (rowIter.hasNext()) {
 			Row row = rowIter.next();
+			if (isEmptyRow(row)) {
+				break;
+			}
 			Patent patent = parseRow(row);
 			patentRecords.add(patent);
 		}
@@ -54,8 +57,16 @@ public class PatentExcelParser {
 		return patentRecords;
 	}
 	
+	private static boolean isEmptyRow(Row row) {
+		if (row == null || row.getCell(0) == null || row.getCell(0).getStringCellValue().trim() == "") {
+			return true;
+		}
+		
+		return false;
+	}
+	
 	private static Patent parseRow(Row row) {
-		String appNo = row.getCell(0).getStringCellValue();
+		String appNo = row.getCell(0).getStringCellValue().trim();
 		String name = row.getCell(1).getStringCellValue();
 		String appPerson = row.getCell(2).getStringCellValue();
 		Date appDate = parseDate(row.getCell(3).getStringCellValue());
@@ -101,7 +112,7 @@ public class PatentExcelParser {
 	}
 	
 	private static Date parseDate(String dateStr) {
-		if (dateStr == null) {
+		if (dateStr == null || dateStr.trim() == "") {
 			return null;
 		}
 		
@@ -115,7 +126,7 @@ public class PatentExcelParser {
 		try {
 			return dt.parse(dateStr);
 		} catch (ParseException e) {
-			throw new DateFormatException("申请日格式错误，正确的格式为yyyyMMdd, 文件中的格式为" + dateStr);
+			throw new DateFormatException("申请日格式错误，正确的格式为yyyyMMdd, 文件中的格式为 " + dateStr);
 		}
 	}
 }
