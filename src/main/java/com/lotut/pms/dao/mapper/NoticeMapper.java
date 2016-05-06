@@ -52,4 +52,7 @@ public interface NoticeMapper {
 	
 	@MapKey("processStatus")
 	Map<String , Map<String,String>> getUserNoticeCountByProcessStatus(int userId);
+	
+	@MapKey("paperApplyType")
+	Map<String , Map<String,String>> getUserNoticeCountByPaperApplyType(int userId);
 }

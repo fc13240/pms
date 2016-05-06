@@ -208,4 +208,9 @@ public class NoticeServiceImpl implements NoticeService {
 	public Map<String, Map<String, String>> getUserNoticeCountByProcessStatus(int userId) {
 		return noticeDao.getUserNoticeCountByProcessStatus(userId);
 	}
+
+	@Override
+	public Map<String, Map<String, String>> getUserNoticeCountByPaperApplyType(int userId) {
+		return noticeDao.getUserNoticeCountByPaperApplyType(userId);
+	}
 }

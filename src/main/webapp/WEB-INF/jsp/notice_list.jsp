@@ -105,6 +105,25 @@
 	        </a>
 	      </ul>
 	    </div>
+	    <div class="tag"  style="display:none">
+	      <ul class="qxjk-ul">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=1&noticeProcessStatus=1'/>">
+	        <li>未申请 (${paperApplyTypeCount[(1).intValue()]["noticeCount"]})</li>
+	        </a>  
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=2&noticeProcessStatus=1'/>">
+	        <li>申请纸件 (${paperApplyTypeCount[(2).intValue()]["noticeCount"]})</li>
+	        </a> 
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=3&noticeProcessStatus=1'/>">
+	        <li>处理中 (${paperApplyTypeCount[(3).intValue()]["noticeCount"]})</li>
+	        </a> 
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=4&noticeProcessStatus=1'/>">
+	        <li>无发送 (${paperApplyTypeCount[(4).intValue()]["noticeCount"]})</li>
+	        </a> 
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=5&noticeProcessStatus=1'/>">
+	        <li>无纸件 (${paperApplyTypeCount[(5).intValue()]["noticeCount"]})</li>
+	        </a> 
+	      </ul>
+	    </div>
 	  </div>
 	</div>
 	<!--menu end-->	

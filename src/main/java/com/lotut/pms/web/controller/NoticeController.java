@@ -57,6 +57,7 @@ public class NoticeController {
 		Map<String,Map<String,String>> patentTypeCount=noticeService.getUserNoticeCountByType(userId);
 		Map<String,Map<String,String>> noticeTypeCount=noticeService.getUserNoticeCountByNoticeType(userId);
 		Map<String,Map<String,String>> processStatusCount=noticeService.getUserNoticeCountByProcessStatus(userId);
+		Map<String,Map<String,String>> paperApplyTypeCount=noticeService.getUserNoticeCountByPaperApplyType(userId);
 		List<Notice> userNotices = noticeService.getUserNoticesByPage(page);
 		int totalCount=(int)noticeService.getUserNoticesCount(userId);
 		page.setTotalRecords(totalCount);
@@ -64,6 +65,7 @@ public class NoticeController {
 		model.addAttribute("patentTypeCount",patentTypeCount);
 		model.addAttribute("noticeTypeCount",noticeTypeCount);
 		model.addAttribute("processStatusCount",processStatusCount);
+		model.addAttribute("paperApplyTypeCount",paperApplyTypeCount);
 		model.addAttribute("page", page);
 		addSearchTypesDataToModel(model);
 		return "notice_list";
@@ -80,12 +82,14 @@ public class NoticeController {
 		Map<String,Map<String,String>> patentTypeCount=noticeService.getUserNoticeCountByType(searchCondition.getUserId());
 		Map<String,Map<String,String>> noticeTypeCount=noticeService.getUserNoticeCountByNoticeType(searchCondition.getUserId());
 		Map<String,Map<String,String>> processStatusCount=noticeService.getUserNoticeCountByProcessStatus(searchCondition.getUserId());
+		Map<String,Map<String,String>> paperApplyTypeCount=noticeService.getUserNoticeCountByPaperApplyType(searchCondition.getUserId());
 		int totalCount=(int)noticeService.searchUserNoticesCount(searchCondition);
 		page.setTotalRecords(totalCount);
 		model.addAttribute("notices", resultNotices);
 		model.addAttribute("patentTypeCount",patentTypeCount);
 		model.addAttribute("noticeTypeCount",noticeTypeCount);
 		model.addAttribute("processStatusCount",processStatusCount);
+		model.addAttribute("paperApplyTypeCount",paperApplyTypeCount);
 		model.addAttribute("page", page);
 		addSearchTypesDataToModel(model);
 		return "notice_list";
