@@ -438,7 +438,7 @@
 			else 5
 		end as remain_day_type, count(*)
   		from notices n 
- 		where n.patent in (select patent from user_patents where user =#{userid})
+ 		where n.patent in (select patent from user_patents where user =#{userid}) and n.process_status=1
  		group by remain_day_type
 	</select>		
 </mapper>
