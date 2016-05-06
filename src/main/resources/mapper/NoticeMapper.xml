@@ -396,7 +396,7 @@
 		</foreach>		 
 	</update>
 	
-	<select id="getUserNoticeCountByType" resultType="StatsHashMap">
+	<select id="getUserNoticeCountByType" resultType="map">
 		select p.patent_type patentType,count(*) noticeCount
 		  from notices n join patents p on n.patent = p.patent_id
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
@@ -404,7 +404,7 @@
 		 GROUP BY p.patent_type
 	</select>
 	
-	<select id="getUserNoticeCountByNoticeType" resultType="StatsHashMap">
+	<select id="getUserNoticeCountByNoticeType" resultType="map">
 		select n.notice_type noticeType,count(*) noticeCount
 		  from notices n join patents p on n.patent = p.patent_id
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
@@ -412,7 +412,7 @@
 		 GROUP BY n.notice_type
 	</select>
 	
-	<select id="getUserNoticeCountByProcessStatus" resultType="StatsHashMap">
+	<select id="getUserNoticeCountByProcessStatus" resultType="map">
 		select n.process_status processStatus,count(*) noticeCount
 		  from notices n join patents p on n.patent = p.patent_id
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
@@ -420,7 +420,7 @@
 		 GROUP BY n.process_status
 	</select>
 	
-	<select id="getUserNoticeCountByPaperApplyType" resultType="StatsHashMap">
+	<select id="getUserNoticeCountByPaperApplyType" resultType="map">
 		select n.paper_apply_type paperApplyType,count(*) noticeCount
 		  from notices n join patents p on n.patent = p.patent_id
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
@@ -428,7 +428,7 @@
 		 GROUP BY n.paper_apply_type
 	</select>
 	
-	<select id="getUserNoticeCountByRemainDay" resultType="StatsHashMap">
+	<select id="getUserNoticeCountByRemainDay" resultType="map">
 		select 
 			case 
 			<![CDATA[when time_limit - datediff(curdate(), dispatch_date) < 0 then 1]]>

@@ -33,12 +33,12 @@
 	    <div class="tag" style="display:block"> 
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=1'/>">
-	        <li>发明 (${patentTypeCount[(1).intValue()]["patentCount"]})</li>
+	        <li>发明 (<c:out value='${patentTypeCount[(1).intValue()]["patentCount"]}' default="0"/>)</li>
 	        </a> <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=2'/>">
-	        <li>实用新型 (${patentTypeCount[(2).intValue()]["patentCount"]})</li>
+	        <li>实用新型 (<c:out value='${patentTypeCount[(2).intValue()]["patentCount"]}' default="0"/>)</li>
 	        </a> 
 	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=3'/>">
-	        <li>外观设计 (${patentTypeCount[(3).intValue()]["patentCount"]})</li>
+	        <li>外观设计 (<c:out value='${patentTypeCount[(3).intValue()]["patentCount"]}' default="0"/>)</li>
 	        </a> 
 	      </ul>	    
 	    
@@ -47,24 +47,24 @@
 	    <div class="tag"  style="display:none">
 	      <ul class="qxjk-ul">	      
 	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=1'/>">
-	        <li>等待申请费 (${patentStatusCount[(1).intValue()]["patentCount"]})</li>
+	        <li>等待申请费 (<c:out value='${patentStatusCount[(1).intValue()]["patentCount"]}' default="0"/>)</li>
 	        </a> 
 	       <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=2'/>">
-	        <li>待答复 (${patentStatusCount[(2).intValue()]["patentCount"]})</li>
+	        <li>待答复 (<c:out value='${patentStatusCount[(2).intValue()]["patentCount"]}' default="0"/>)</li>
 	        </a> 
 	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=3'/>">
-	        <li>等年登印费 (${patentStatusCount[(3).intValue()]["patentCount"]})</li>
+	        <li>等年登印费 (<c:out value='${patentStatusCount[(3).intValue()]["patentCount"]}' default="0"/>)</li>
 	        </a> 
 	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=4'/>">
-	        <li>待恢复 (${patentStatusCount[(4).intValue()]["patentCount"]})</li>
+	        <li>待恢复 (<c:out value='${patentStatusCount[(4).intValue()]["patentCount"]}' default="0"/>)</li>
 	        </a> 
 	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=5'/>">
-	        <li>失效(${patentStatusCount[(5).intValue()]["patentCount"]})</li>
+	        <li>失效(<c:out value='${patentStatusCount[(5).intValue()]["patentCount"]}' default="0"/>)</li>
 	        </a> 
 	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=6'/>">
-	        <li>专利权维持 (${patentStatusCount[(6).intValue()]["patentCount"]})</li>
+	        <li>专利权维持 (<c:out value='${patentStatusCount[(6).intValue()]["patentCount"]}' default="0"/>)</li>
 	        </a> <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=7'/>">
-	        <li>其他 (${patentStatusCount[(7).intValue()]["patentCount"]})</li>
+	        <li>其他 (<c:out value='${patentStatusCount[(7).intValue()]["patentCount"]}' default="0"/>)</li>
 	        </a>
 	      </ul>
 	    </div>
