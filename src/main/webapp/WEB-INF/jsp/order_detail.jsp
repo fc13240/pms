@@ -79,15 +79,15 @@
 				  <thead>
 					<tr class="simple_bag">
 					  <th>订单编号</th>
-					  <th>支付方式</th>
 					  <th>下单时间</th>
+					  <th>支付时间</th>
 					</tr>
 				  </thead>
 				  <tbody>
 					<tr>
 					  <td>${order.id}</td>
-					  <td>${order.paymentMethod.paymentMethod}</td>
 					  <td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+					  <td><fmt:formatDate value="${order.payTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 					</tr>
 				  </tbody>
 				</table></td>

@@ -17,6 +17,7 @@ public class Order {
 	private String expressCompany;
 	private String expressNo;
 	private Date createTime;
+	private Date payTime;
 	private Date sendTime;
 	private String courier;
 	private String courierPhone;
@@ -126,6 +127,12 @@ public class Order {
 	}
 	public void setExpressNo(String expressNo) {
 		this.expressNo = expressNo;
+	}
+	public Date getPayTime() {
+		return payTime;
+	}
+	public void setPayTime(Date payTime) {
+		this.payTime = payTime;
 	}
 	
 }

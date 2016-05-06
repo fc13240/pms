@@ -313,6 +313,13 @@ create table if not exists order_items (
 	constraint fk_order_items_fee foreign key(fee_id) references fees(fee_id)
 );
 
+create table fee_types (
+	type_id int primary key auto_increment,
+	patent_type int not null,
+	type_code varchar(30) not null,
+	type_text varchar(100) not null,
+	constraint fk_fee_type_patent foreign key idx_fk_fee_type_patent (patent_type) references patent_types(patent_type_id) on delete cascade 
+);
 	
 INSERT INTO friend_request_process_status (friend_request_process_status_id, friend_request_process_status_desc)
 VALUES
@@ -395,4 +402,89 @@ INSERT INTO group_authorities
 VALUES
 	(1, 'ROLE_USER'),
 	(2, 'ROLE_ORDER');
+	
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405356', '发明专利第17年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083325332', '权利要求附加费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083205320', '发明专利登记印刷费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405358', '发明专利第19年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405354', '发明专利第15年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405352', '发明专利第13年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405341', '发明专利第2年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083335333', '说明书附加费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405346', '发明专利第7年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405348', '发明专利第9年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082105210', '发明专利申请费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405344', '发明专利第5年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082405240', '发明专利复审费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405349', '发明专利第10年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405342', '发明专利第3年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082505250', '变更费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405355', '发明专利第16年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405357', '发明专利第18年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082305230', '发明专利申请审查费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405359', '发明专利第20年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '20761581515151', '印花税');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405353', '发明专利第14年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405340', '发明专利第1年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405351', '发明专利第12年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083315331', '延长费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082115211', '发明专利文印费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083400001', '年费费减');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082705270', '恢复权利请求费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405347', '发明专利第8年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082605260', '优先权要求费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083525381', '发明专利年费滞纳金');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405345', '发明专利第6年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405343', '发明专利第4年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405350', '发明专利第11年年费');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082905290', '发明专利权无效宣告请求费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415365', '实用新型专利第6年年费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083325332', '权利要求附加费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415363', '实用新型专利第4年年费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415367', '实用新型专利第8年年费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082325232', '实用新型专利权评价报告请求费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082415241', '实用新型专利复审费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415361', '实用新型专利第2年年费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083335333', '说明书附加费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415369', '实用新型专利第10年年费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082315231', '实用新型检索费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082505250', '变更费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083535382', '实用新型专利年费滞纳金');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415364', '实用新型专利第5年年费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415362', '实用新型专利第3年年费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415368', '实用新型专利第9年年费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '20761581515151', '印花税');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415366', '实用新型专利第7年年费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083315331', '延长费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083400001', '年费费减');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082135213', '实用新型专利申请费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415360', '实用新型专利第1年年费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082705270', '恢复权利请求费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082605260', '优先权要求费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083225322', '实用新型专利登记印刷费');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082915291', '实用新型专利权无效宣告请求费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083325332', '权利要求附加费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425378', '外观设计专利第9年年费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '20761581515151', '印花税');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872082925292', '外观设计专利权无效宣告请求费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425379', '外观设计专利第10年年费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083315331', '延长费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425374', '外观设计专利第5年年费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083400001', '年费费减');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425375', '外观设计专利第6年年费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425377', '外观设计专利第8年年费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425371', '外观设计专利第2年年费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425376', '外观设计专利第7年年费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425370', '外观设计专利第1年年费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872082145214', '外观设计专利申请费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425372', '外观设计专利第3年年费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425373', '外观设计专利第4年年费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872082425242', '外观设计专利复审费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872082705270', '恢复权利请求费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083335333', '说明书附加费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872082605260', '优先权要求费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872082325233', '外观设计专利权评价报告请求费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872082505250', '变更费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083235323', '外观设计专利登记印刷费');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083545383', '外观设计专利年费滞纳金');	
 	

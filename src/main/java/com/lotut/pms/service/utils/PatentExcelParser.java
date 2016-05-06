@@ -23,7 +23,7 @@ import com.lotut.pms.util.PrincipalUtils;
 public class PatentExcelParser {
 	
 	public static void main(String[] args) throws Exception {
-		InputStream in = new FileInputStream("D:\\code\\python\\automate\\刘备.xls");
+		InputStream in = new FileInputStream("C:\\Users\\Administrator\\Desktop\\11548-20160505.xls");
 		List<Patent> patentRecords = parsePatentFile(in);
 		for (Patent p: patentRecords) {
 			System.out.println(p.getPatentType().getPatentTypeId());
@@ -101,8 +101,18 @@ public class PatentExcelParser {
 	}
 	
 	private static Date parseDate(String dateStr) {
+		if (dateStr == null) {
+			return null;
+		}
+		
+		DateFormat dt = new SimpleDateFormat("yyyyMMdd");
+		if (dateStr.contains("/")) {
+			dt = new SimpleDateFormat("yyyy/MM/dd");
+		} else if (dateStr.contains("-")) {
+			dt = new SimpleDateFormat("yyyy-MM-dd");
+		}
+		
 		try {
-			DateFormat dt = new SimpleDateFormat("yyyyMMdd");
 			return dt.parse(dateStr);
 		} catch (ParseException e) {
 			throw new DateFormatException("申请日格式错误，正确的格式为yyyyMMdd, 文件中的格式为" + dateStr);
