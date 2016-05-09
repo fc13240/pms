@@ -25,27 +25,47 @@
 	    <ul>
 	      <li>
 	        <p>申请号/专利号:</p>
-	        <input style="height:16px;" type="text" name="appNo" id="appNo"  required/>
+	        <select name="patentId" id="patentId" onchange="loadPatent()" required>
+			  <option value=''>请选择专利号</option>
+			  <c:forEach items="${patents}" var="patent">
+				<option value="${patent.patentId}">${patent.patentId}</option>
+			  </c:forEach>
+			</select>
 	      </li>
 	      <li>
 	        <p>专利名称:</p>
-	        <input style="height:16px;" type="text" name="name" id="name"  required/>
+	        <input type="text" name="name" id="name" value=""/>
 	      </li>
 	      <li>
 	        <p>第一申请人:</p>
-	        <input style="height:16px;" type="text" name="name" id="name"  required/>
+	        <input type="text" name="appPerson" id="appPerson" value=""/>
 	      </li>
 	      <li>
 	        <p>案件状态:</p>
-	        <input style="height:16px;" type="text" name="name" id="name"  required/>
+	        <input type="text" name="patentStatus" id="patentStatus" value=""/>
 	      </li>
 	      <li>
 	        <p>缴费截止日:</p>
-	        <input style="height:16px;" type="text" name="name" id="name"  required/>
+	        <div style="margin-top:10px;">
+					<div class="input-group">
+					  <div style="float:left;margin-left: 16px;" class="form-group" style="margin-left:15px;">
+					  <div style="float:left;">
+						<input  type="text" class="form-control" id="startAppDateId" 
+						name="startDispatchDate" placeholder="缴费截止日期选择" value="<fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/>"  
+						readonly="readonly" onclick="javascript:$('#start_date_img').click()" style="width: 150px;height: 25px"> </div>
+					  <div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" align="absmiddle" id="start_date_img"></div>
+					</div>
+				  </div>
+				  </div>
 	      </li>
 	      <li>
 	        <p>缴费种类:</p>
-	        <input style="height:16px;" type="text" name="name" id="name"  required/>
+	        <select name="feeType" id="feeType"  required>
+			  <option value=''>请选择</option>
+			  <c:forEach items="${fee}" var="fee">
+				<option value="${fee.feeType}">${fee.feeType}</option>
+			  </c:forEach>
+			</select>
 	      </li>
 	      <li>
 	        <p>缴费金额:</p>
@@ -68,84 +88,22 @@
  
 
 <script type="text/javascript">
-function addDefaultOption(selectElem) {
-	selectElem.append("<option value=''>请选择</option>");
-}
 
-function resetSelect() {
-	for (var i = 0; i < arguments.length; i++) {
-		var selectObj = arguments[i];
-		selectObj.empty();
-		addDefaultOption(selectObj);
-	}
-}
-
-function addOptions(selectObj, options) {
-	$.each(options, function(index, val){
-		selectObj.append("<option value='" + val.id + "'>" + val.name + "</option>");
-	});	
-}
-
-function loadCities() {
-	var province = $("#province").val();
-	
-	resetSelect($("#city"), $("#district"), $("#street"));
-	
-	if (province != "") {
+function loadPatent() {
+	var patentId = $("#patentId").val();
+	if (patentId != "") {
 		$.ajax({
-			url: "<s:url value='/user/getCitiesByProvince.html'/>?province=" + province,
+			url: "<s:url value='/fee/getPatentByPatentId.html'/>?patentId=" + patentId,
 			type: 'get',
 			dataType: 'json',
-			success: function(cities) {
-				var city = $("#city");
-				
-				resetSelect(city);
-				addOptions(city, cities);
+			success: function(patent) {
+				document.getElmentById("name").value=${param.patent.name};
+				document.getElementById('appPerson').value=${patent.appPerson};
+				document.getElementById('patentStatus').value=${patent.patentStatus.statusDescription};
 			}
 		})
 	} 
 }
-
-function loadDistricts() {
-	var city = $("#city").val();
-
-	resetSelect($("#district"), $("#street"));
-	
-	if (city != "") {
-		$.ajax({
-			url: "<s:url value='/user/getDistrictsByCity.html'/>?city=" + city,
-			type: 'get',
-			dataType: 'json',
-			success: function(districts) {
-				var district = $("#district");
-				
-				resetSelect(district);
-				addOptions(district, districts);
-			}
-		})
-	}
-}
-
-function loadStreets() {
-	var district = $("#district").val();
-	
-	resetSelect($("#street"));
-	
-	if (district != "") {
-		$.ajax({
-			url: "<s:url value='/user/getStreetsByDistrict.html'/>?district=" + district,
-			type: 'get',
-			dataType: 'json',
-			success: function(streets) {
-				var street = $("#street");
-				
-				resetSelect(street);
-				addOptions(street, streets);
-			}
-		})
-	} 
-}
-
 </script>
 </body>
 </html>

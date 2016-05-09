@@ -292,5 +292,7 @@
 		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
 		 group by p.patent_status
 	</select>
-	
+	<select id="getFeesForPatentId" resultMap="FeeResultMap">
+		SELECT fee_type FROM fees WHERE patent=#{patentId}
+	</select>
 </mapper>

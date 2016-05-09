@@ -53,4 +53,6 @@ public interface FeeService {
 	Map<String,Map<String,String>> getMonitoredFeesByStatus(int userId);
 	
 	Map<String,Map<String,String>> getMonitoredFeesByFeeType(int userId);
+	
+	List<Fee> getFeesForPatentId(long patentId);
 }

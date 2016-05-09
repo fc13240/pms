@@ -32,6 +32,7 @@ import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FeeService;
+import com.lotut.pms.service.PatentService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
 
@@ -39,10 +40,12 @@ import com.lotut.pms.web.util.WebUtils;
 @RequestMapping(path="/fee")
 public class FeeController {
 	private FeeService feeService;
+	private PatentService patentService;
 	
 	@Autowired
-	public FeeController(FeeService feeService) {
+	public FeeController(FeeService feeService,PatentService patentService) {
 		this.feeService = feeService;
+		this.patentService=patentService;
 	}
 
 	/*
@@ -182,6 +185,19 @@ public class FeeController {
 		
 		@RequestMapping(path="/addFeeFrom", method=RequestMethod.GET)
 		public String addFeeFrom(Model model){
+			int userId = PrincipalUtils.getCurrentUserId();
+			List<Patent> patents=patentService.getUserPatentsWithFee(userId);
+			model.addAttribute("patents",patents);
 			return "addFeeFrom";
-		}  
+		}
+		
+		@RequestMapping(path="/getPatentByPatentId", method=RequestMethod.GET)
+		public void getCitiesByProvince(@RequestParam("patentId")int patentId, 
+				Model model, HttpServletResponse response) throws IOException {
+			response.setContentType("application/json;charset=UTF-8");
+			Patent patent=patentService.getPatentDetail(patentId);
+			List<Fee> fee=feeService.getFeesForPatentId(patentId);
+			model.addAttribute("fee",fee);
+			WebUtils.writeJsonStrToResponse(response, patent);
+		}
 }

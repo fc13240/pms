@@ -213,4 +213,9 @@ public class FeeServiceImpl implements FeeService {
 		public Map<String, Map<String, String>> getMonitoredFeesByFeeType(int userId) {
 			return feeDao.getMonitoredFeesByFeeType(userId);
 		}
+
+		@Override
+		public List<Fee> getFeesForPatentId(long patentId) {
+			return feeDao.getFeesForPatentId(patentId);
+		}
 }

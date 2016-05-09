@@ -63,4 +63,6 @@ public interface PatentMapper {
 	
 	@MapKey("patentStatus")
 	Map<String, Map<String, String>> searchUserPatentsByPatentStatus(int userId);
+	
+	List<Patent> getUserPatentsWithFee(@Param("userId")int userId);
 }

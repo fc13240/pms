@@ -119,5 +119,10 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 			return feeMapper.getMonitoredFeesByFeeType(userId);
 		}
 
+		@Override
+		public List<Fee> getFeesForPatentId(long patentId) {
+			return feeMapper.getFeesForPatentId(patentId);
+		}
+
 		
 }

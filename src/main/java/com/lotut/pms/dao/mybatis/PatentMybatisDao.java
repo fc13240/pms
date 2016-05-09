@@ -140,4 +140,9 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	public Map<String, Map<String, String>> searchUserPatentsByPatentStatus(int userId) {
 		return patentMapper.searchUserPatentsByPatentStatus(userId);
 	}
+
+	@Override
+	public List<Patent> getUserPatentsWithFee(int userId) {
+		return patentMapper.getUserPatentsWithFee(userId);
+	}
 }

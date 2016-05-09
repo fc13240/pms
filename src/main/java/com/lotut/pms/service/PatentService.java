@@ -50,4 +50,6 @@ public interface PatentService {
 	 Map<String, Map<String, String>> getUserPatentCountByType( int userId);
 	 
 	 Map<String, Map<String, String>> searchUserPatentsByPatentStatus(int userId);
+	 
+	 List<Patent> getUserPatentsWithFee(int userId);
 }

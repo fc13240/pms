@@ -152,5 +152,10 @@ public class PatentServiceImpl implements PatentService {
 		return patentDao.searchUserPatentsByPatentStatus(userId);
 	}
 
+	@Override
+	public List<Patent> getUserPatentsWithFee(int userId) {
+		return patentDao.getUserPatentsWithFee(userId);
+	}
+
 	
 }
