@@ -50,6 +50,8 @@
 			  </span> 
 <%-- 			  <span class="batch-share"><a href="javascript:updateMonitorStatus(1)">放弃监控</a> --%>
 <%-- 			  </span>  --%>
+			  <span class="batch-share">&nbsp;|&nbsp;<a href="javascript:joinOrder()">加入订单</a>
+			  </span>
 			</th>
 		  </tr>
 		  <tr>
@@ -118,6 +120,17 @@
 		location.href = "<s:url value='/fee/changeMonitorStatus.html'/>?fees=" + fees + "&monitorStatus=" + status;
 	}
 	
+	function joinOrder(status) {
+		var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
+		
+		if (!feeSelected) {
+			formutil.alertMessage('请选择应缴费记录');
+			return;
+		}
+		
+		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'feeId');
+		window.open("<s:url value='/order/orderCreateForm.html'/>?fees=" + fees);
+	}
 </script>
 <!-- inline scripts related to this page --> 
 <script type="text/javascript">

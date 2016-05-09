@@ -46,4 +46,6 @@ public interface OrderService {
 	long getAllNeedProcessOrdersBySearchCount(AdminOrderSearchCondition searchCondition);
 	
 	Map<String, Map<String, String>> searchUserOrdersByOrderStatus(int userId);
+	
+	void changeMonitorStatus(List<Long> feeIds,int monitorStatus);
 }

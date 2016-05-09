@@ -155,4 +155,10 @@ public class OrderServiceImpl implements OrderService {
 	public Map<String, Map<String, String>> searchUserOrdersByOrderStatus(int userId) {
 		return orderDao.searchUserOrdersByOrderStatus(userId);
 	}
+
+	@Override
+	public void changeMonitorStatus(List<Long> feeIds, int monitorStatus) {
+		feeDao.updateMonitorStatus(feeIds, monitorStatus);
+		
+	}
 }
