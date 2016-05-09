@@ -6,7 +6,10 @@
 		<a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>"><h5>官费监控</h5></a>
 		</li>
 		<li  class="">
-		<a href="<s:url value='/order/list.html'/>"><h5>订单</h5> </a>
+		<a href="<s:url value='/order/list.html'/>"><h5>我的订单</h5> </a>
+		</li>
+		<li  class="">
+		<a href="<s:url value='/fee/addFeeFrom.html'/>"><h5>添加费用信息</h5> </a>
 		</li>						
 	</ol>
 </div>	

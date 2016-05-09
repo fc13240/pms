@@ -3,6 +3,7 @@ package com.lotut.pms.dao.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.AdminOrderSearchCondition;
@@ -44,4 +45,7 @@ public interface OrderMapper {
 	int getAllNeedProcessOrdersBySearchCount(AdminOrderSearchCondition searchCondition);
 	
 	void updateOrderFeesStatus(@Param("orderItems")List<OrderItem> orderItems);
+	
+	@MapKey("orderStatus")
+	Map<String, Map<String, String>> searchUserOrdersByOrderStatus(int userId);
 }

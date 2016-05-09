@@ -330,5 +330,11 @@
     	<foreach item="orderItem" collection="orderItems" open="(" separator="," close=")">
 			#{orderItem.feeId}
  		</foreach>
-	</update>	
+	</update>
+	
+	<select id="searchUserOrdersByOrderStatus" resultType="map">
+		SELECT o.order_status orderStatus,count(*) orderCount
+		  FROM orders o 
+		 WHERE o.user = #{userId} GROUP BY o.order_status;	 		 	
+	</select>	
 </mapper>

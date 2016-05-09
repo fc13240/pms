@@ -120,4 +120,9 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 		orderMapper.updateOrderFeesStatus(orderItems);
 		
 	}
+
+	@Override
+	public Map<String, Map<String, String>> searchUserOrdersByOrderStatus(int userId) {
+		return orderMapper.searchUserOrdersByOrderStatus(userId);
+	}
 }

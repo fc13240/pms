@@ -45,4 +45,6 @@ public interface OrderDao {
 	int getAllNeedProcessOrdersBySearchCount(AdminOrderSearchCondition searchCondition);
 	
 	void updateOrderFeesStatus(List<OrderItem> orderItems);
+	
+	Map<String, Map<String, String>> searchUserOrdersByOrderStatus(int userId);
 }

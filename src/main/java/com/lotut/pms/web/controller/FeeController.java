@@ -180,5 +180,8 @@ public class FeeController {
 			return "redirect:/fee/monitoredFeeList.html?currentPage=1";
 		}
 		
-	    
+		@RequestMapping(path="/addFeeFrom", method=RequestMethod.GET)
+		public String addFeeFrom(Model model){
+			return "addFeeFrom";
+		}  
 }

@@ -44,4 +44,6 @@ public interface OrderService {
 	List<Order> getAllNeedProcessOrdersBySearch(AdminOrderSearchCondition searchCondition);
 	
 	long getAllNeedProcessOrdersBySearchCount(AdminOrderSearchCondition searchCondition);
+	
+	Map<String, Map<String, String>> searchUserOrdersByOrderStatus(int userId);
 }

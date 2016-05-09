@@ -150,4 +150,9 @@ public class OrderServiceImpl implements OrderService {
 	public long getAllNeedProcessOrdersBySearchCount(AdminOrderSearchCondition searchCondition) {
 		return orderDao.getAllNeedProcessOrdersBySearchCount(searchCondition);
 	}
+
+	@Override
+	public Map<String, Map<String, String>> searchUserOrdersByOrderStatus(int userId) {
+		return orderDao.searchUserOrdersByOrderStatus(userId);
+	}
 }
