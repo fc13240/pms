@@ -306,7 +306,7 @@
 					<td><a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
 					  分享
 					  </a>&nbsp;
-					  <a href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${notice.patent.patentId}'/>">
+					  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${notice.patent.patentId}'/>">
 					  缴费
 					  </a> </td>
 				  </tr>
