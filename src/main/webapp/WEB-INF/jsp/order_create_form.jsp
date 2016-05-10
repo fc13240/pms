@@ -54,7 +54,11 @@
 		  </c:forEach>
 		  <table id="simple-table" class="table table-striped table-bordered table-hover">
 			<tr>
-			  <td>收货人信息</td>
+			  <td>
+			  	收货人信息
+			  	&nbsp;&nbsp;&nbsp;
+			  	<a href="<s:url value='/user/contactAddressAddForm.html'/>" target="_blank" ><font color=red>添加地址</font></a>
+			  </td>
 			</tr>
 			<c:forEach items="${contactAddresses}" var="address">
 			  <tr>
