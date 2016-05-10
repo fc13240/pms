@@ -61,5 +61,7 @@ public interface FeeMapper {
 	@MapKey("patentStatus")
 	Map<String,Map<String,String>> getMonitoredFeesByFeeType(int userId);
 	
-	List<Fee> getFeesForPatentId(@Param("patentId")long patentId);
+	List<String> getFeeTypes(@Param("appNo")String appNo);
+	
+	void saveFee (@Param("fee")Fee fee, @Param("userId")int userId,@Param("patentId")long patentId);
 }

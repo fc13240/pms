@@ -2,8 +2,12 @@ package com.lotut.pms.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 public class Fee {
 	private long feeId;
+	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date deadline;
 	private String feeType;
 	private int amount;

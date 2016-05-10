@@ -57,5 +57,7 @@ public interface FeeDao {
 	
 	Map<String,Map<String,String>> getMonitoredFeesByFeeType(int userId);
 	
-	List<Fee> getFeesForPatentId(long patentId);
+	List<String> getFeeTypes(String appNo);
+	
+	void saveFee (Fee fee,int userId,long patentId);
 }

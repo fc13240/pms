@@ -52,7 +52,7 @@
 	<sql id="userPatents">
 		select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, pt.patent_type_id, 
 					 pt.patent_type_desc, ps.patent_status_id, ps.patent_status_desc, p.internal_code, u.user_id, u.username
-		  from patents p join patent_types pt on p.patent_type = pt.patent_type_id join patent_status ps on p.patent_status = ps.patent_status_id 
+		  from patents p left join patent_types pt on p.patent_type = pt.patent_type_id left join patent_status ps on p.patent_status = ps.patent_status_id 
 			     join user_patents up on up.patent = p.patent_id join users u on u.user_id = up.user
 		 where up.patent in (select patent from user_patents where user = #{userId})	
 	</sql>
@@ -287,6 +287,18 @@
 	</select>
 	
 	<select id="getUserPatentsWithFee" resultMap="PatentWithShareUsers">
-		<include refid="userPatents" />
+		SELECT p.patent_id, p.app_no
+		  FROM patents p JOIN user_patents up ON up.patent = p.patent_id 
+		 WHERE up.patent IN (SELECT patent FROM user_patents WHERE USER = #{userId})
 	</select>
+	
+	<select id="getPatentsByAppNo" parameterType="string" resultMap="PatentByIdsResultMap">
+		select p.patent_id, p.app_no, p.app_person, p.patent_name, p.app_date, ps.patent_status_id, ps.patent_status_desc
+		  from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
+		 where p.app_no=#{appNo}
+	</select>
+	
+	<select id="getPatentIdByAppNo" parameterType="string" resultType="int">
+		SELECT patent_id FROM patents p WHERE p.app_no =#{appNo}
+	</select>	
 </mapper>

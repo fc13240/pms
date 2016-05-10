@@ -20,29 +20,29 @@
 		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">添加费用信息</span>
 	</div>
 	
-	<form action="<s:url value='/patent/addFee.html'/>" method="post">
+	<form action="<s:url value='/fee/addFee.html'/>" method="post">
 	  <div class="t-third">
 	    <ul>
 	      <li>
-	        <p>申请号/专利号:</p>
-	        <select name="patentId" id="patentId" onchange="loadPatent()" required>
+	        <p>专利号:</p>
+	        <select name="appNo" id="appNo" onchange="loadPatent()" required>
 			  <option value=''>请选择专利号</option>
 			  <c:forEach items="${patents}" var="patent">
-				<option value="${patent.patentId}">${patent.patentId}</option>
+				<option value="${patent.appNo}">${patent.appNo}</option>
 			  </c:forEach>
 			</select>
 	      </li>
 	      <li>
 	        <p>专利名称:</p>
-	        <input type="text" name="name" id="name" value=""/>
+	        <input style="height:16px;" type="text" name="name" id="name" value="" readOnly="true"/>
 	      </li>
 	      <li>
 	        <p>第一申请人:</p>
-	        <input type="text" name="appPerson" id="appPerson" value=""/>
+	        <input style="height:16px;" type="text" name="appPerson" id="appPerson" value="" readOnly="true"/>
 	      </li>
 	      <li>
 	        <p>案件状态:</p>
-	        <input type="text" name="patentStatus" id="patentStatus" value=""/>
+	        <input style="height:16px;" type="text" name="patentStatus" id="patentStatus" value="" readOnly="true"/>
 	      </li>
 	      <li>
 	        <p>缴费截止日:</p>
@@ -51,7 +51,7 @@
 					  <div style="float:left;margin-left: 16px;" class="form-group" style="margin-left:15px;">
 					  <div style="float:left;">
 						<input  type="text" class="form-control" id="startAppDateId" 
-						name="startDispatchDate" placeholder="缴费截止日期选择" value="<fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/>"  
+						name="deadline" placeholder="缴费截止日期选择" 
 						readonly="readonly" onclick="javascript:$('#start_date_img').click()" style="width: 150px;height: 25px"> </div>
 					  <div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" align="absmiddle" id="start_date_img"></div>
 					</div>
@@ -62,18 +62,18 @@
 	        <p>缴费种类:</p>
 	        <select name="feeType" id="feeType"  required>
 			  <option value=''>请选择</option>
-			  <c:forEach items="${fee}" var="fee">
-				<option value="${fee.feeType}">${fee.feeType}</option>
+			  <c:forEach items="${feeTypes}" var="feeType">
+				<option value="${feeType}">${feeType}</option>
 			  </c:forEach>
 			</select>
 	      </li>
 	      <li>
 	        <p>缴费金额:</p>
-	        <input style="height:16px;" type="text" name="name" id="name"  required/>
+	        <input style="height:16px;" type="text" name="amount" id="amount"  required/>
 	      </li>
 	      <li>
 	        <p>发票抬头:</p>
-	        <input style="height:16px;" type="text" name="name" id="name"  required/>
+	        <input style="height:16px;" type="text" name="invoiceTitle" id="invoiceTitle"  />
 	      </li>
 	      <li>
 	        <p>&nbsp;</p>
@@ -88,18 +88,37 @@
  
 
 <script type="text/javascript">
+function addDefaultOption(selectElem) {
+	selectElem.append("<option value=''>请选择</option>");
+}
 
+function resetSelect() {
+	for (var i = 0; i < arguments.length; i++) {
+		var selectObj = arguments[i];
+		selectObj.empty();
+		addDefaultOption(selectObj);
+	}
+}
+
+function addOptions(selectObj, options) {
+	$.each(options, function(index, val){
+		selectObj.append("<option value='" + val + "'>" + val + "</option>");
+	});	
+}
 function loadPatent() {
-	var patentId = $("#patentId").val();
-	if (patentId != "") {
+	var appNo = $("#appNo").val();
+	if (appNo != "") {
 		$.ajax({
-			url: "<s:url value='/fee/getPatentByPatentId.html'/>?patentId=" + patentId,
+			url: "<s:url value='/fee/getPatentByPatentId.html'/>?appNo=" + appNo,
 			type: 'get',
 			dataType: 'json',
-			success: function(patent) {
-				document.getElmentById("name").value=${param.patent.name};
-				document.getElementById('appPerson').value=${patent.appPerson};
-				document.getElementById('patentStatus').value=${patent.patentStatus.statusDescription};
+			success: function(result) {
+				$("#name").val(result.patent.name);
+				$('#appPerson').val(result.patent.appPerson);
+				$('#patentStatus').val(result.patent.patentStatus.statusDescription);
+				var feeType = $("#feeType");
+				resetSelect(feeType);
+				addOptions(feeType, result.feeTypes);
 			}
 		})
 	} 

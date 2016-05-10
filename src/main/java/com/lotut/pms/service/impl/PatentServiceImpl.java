@@ -157,5 +157,15 @@ public class PatentServiceImpl implements PatentService {
 		return patentDao.getUserPatentsWithFee(userId);
 	}
 
+	@Override
+	public Patent getPatentsByAppNo(String appNo) {
+		return patentDao.getPatentsByAppNo(appNo);
+	}
+
+	@Override
+	public int getPatentIdByAppNo(String appNo) {
+		return patentDao.getPatentIdByAppNo(appNo);
+	}
+
 	
 }
