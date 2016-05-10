@@ -215,7 +215,12 @@ public class FeeServiceImpl implements FeeService {
 		}
 
 		@Override
-		public List<Fee> getFeesForPatentId(long patentId) {
-			return feeDao.getFeesForPatentId(patentId);
+		public List<String> getFeeTypes(String appNo) {
+			return feeDao.getFeeTypes(appNo);
+		}
+
+		@Override
+		public void saveFee(Fee fee,int userId,long patentId) {
+			feeDao.saveFee(fee,userId,patentId);
 		}
 }

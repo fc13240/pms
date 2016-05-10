@@ -292,7 +292,12 @@
 		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
 		 group by p.patent_status
 	</select>
-	<select id="getFeesForPatentId" resultMap="FeeResultMap">
-		SELECT fee_type FROM fees WHERE patent=#{patentId}
+	<select id="getFeeTypes" resultType="string">
+		SELECT f.type_text FROM fee_types f LEFT JOIN patents p ON f.patent_type = p.patent_type WHERE p.app_no = #{appNo};
 	</select>
+	
+	<insert id="saveFee">
+		insert into fees(deadline, fee_type, amount, patent, fee_monitor_status, invoice_title,fee_owner)
+		values(#{fee.deadline}, #{fee.feeType},#{fee.amount}, #{patentId}, 2, #{fee.invoiceTitle},#{userId})				
+	</insert>
 </mapper>

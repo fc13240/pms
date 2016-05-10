@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -192,12 +193,22 @@ public class FeeController {
 		}
 		
 		@RequestMapping(path="/getPatentByPatentId", method=RequestMethod.GET)
-		public void getCitiesByProvince(@RequestParam("patentId")int patentId, 
+		public void getPatentByPatentId(@RequestParam("appNo")String appNo, 
 				Model model, HttpServletResponse response) throws IOException {
 			response.setContentType("application/json;charset=UTF-8");
-			Patent patent=patentService.getPatentDetail(patentId);
-			List<Fee> fee=feeService.getFeesForPatentId(patentId);
-			model.addAttribute("fee",fee);
-			WebUtils.writeJsonStrToResponse(response, patent);
+			Patent patent=patentService.getPatentsByAppNo(appNo);
+			List<String> feeTypes=feeService.getFeeTypes(appNo);
+			Map<String, Object> map = new HashMap<>();
+			map.put("patent", patent);
+			map.put("feeTypes", feeTypes);
+			WebUtils.writeJsonStrToResponse(response, map);
+		}
+		
+		@RequestMapping(path="/addFee", method=RequestMethod.POST)
+		public String addFee(@RequestParam("appNo")String appNo, @ModelAttribute("fee")Fee fee,Model model){
+			int userId = PrincipalUtils.getCurrentUserId();
+			int patentId=patentService.getPatentIdByAppNo(appNo);
+			feeService.saveFee(fee, userId,patentId);
+			return "add_patent_success";
 		}
 }
