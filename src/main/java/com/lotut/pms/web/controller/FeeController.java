@@ -21,15 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lotut.pms.domain.Fee;
-import com.lotut.pms.domain.FeeMonitorStatus;
-import com.lotut.pms.domain.FeePaymentStatus;
-import com.lotut.pms.domain.FeeProcessStatus;
 import com.lotut.pms.domain.FeeSearchCondition;
-import com.lotut.pms.domain.Notice;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
-import com.lotut.pms.domain.PatentStatus;
-import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FeeService;
 import com.lotut.pms.service.PatentService;
@@ -95,6 +89,7 @@ public class FeeController {
 	//CS:分页
 	@RequestMapping(path="/monitoredFeeList", method=RequestMethod.GET)
 	public String getMonitoredFees(Model model,Page page,HttpSession session) {
+		System.out.println("-----首次进入官费查询---");
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setPageSize(WebUtils.getPageSize(session));
 		page.setUserId(userId);

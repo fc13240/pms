@@ -48,10 +48,11 @@ public class OrderController {
 	
 	@RequestMapping(path="/orderCreateForm")
 	public String showOrderCreateForm(@RequestParam("fees")List<Long> feeIds, Model model) {
+		final int MONITORSTATUS = 2;
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
 		List<Fee> fees = feeService.getFeesByIds(feeIds);
-		
+		orderService.changeMonitorStatus(feeIds, MONITORSTATUS);
 		model.addAttribute("contactAddresses", contactAddresses);
 		model.addAttribute("fees", fees);
 		
@@ -196,12 +197,12 @@ public class OrderController {
 				model.addAttribute("page",page);
 				return "all_order_list";
 			}else{
-				//增加修改权限提示
+				//澧炲姞淇敼鏉冮檺鎻愮ず
 				return "";
 			}
 	}
 	
-	//增加用户订单快递信息
+	//澧炲姞鐢ㄦ埛璁㈠崟蹇�掍俊鎭�
 	@RequestMapping(path="/updateUserOrderContactAddresses", method=RequestMethod.POST)
 	public String updateUserOrderExpress(HttpServletRequest request,Model model){
 			Enumeration<String> paramNames =  request.getParameterNames();

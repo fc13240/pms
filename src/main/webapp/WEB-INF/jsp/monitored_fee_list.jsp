@@ -65,7 +65,7 @@
 	    <div class="tag"  style="display:none"> 
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=1'/>">
-	        <li>未缴费 (<c:out value='${feePaymentStatusCount[(1).intValue()]["feeCount"]}' default="0"/>)</li>
+	        <li>应缴费 (<c:out value='${feePaymentStatusCount[(1).intValue()]["feeCount"]}' default="0"/>)</li>
 	        </a> 
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=2'/>">
 	        <li>已支付 (<c:out value='${feePaymentStatusCount[(2).intValue()]["feeCount"]}' default="0"/>)</li>
@@ -115,7 +115,7 @@
 			  <label id="lblSelect">
 			  <select id="paymentStatus" name="paymentStatus" >
 				<option value="">全部</option>
-				<option value="1">未缴</option>
+				<option value="1">应缴</option>
 				<option value="2">已支付</option>
 				<option value="3">已缴</option>
 				<option value="4">已加入订单</option>
