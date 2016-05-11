@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lotut.pms.domain.Fee;
@@ -88,8 +89,7 @@ public class FeeController {
 	}
 	//CS:分页
 	@RequestMapping(path="/monitoredFeeList", method=RequestMethod.GET)
-	public String getMonitoredFees(Model model,Page page,HttpSession session) {
-		System.out.println("-----首次进入官费查询---");
+	public String getMonitoredFees(Model model, Page page,HttpSession session) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setPageSize(WebUtils.getPageSize(session));
 		page.setUserId(userId);
@@ -99,31 +99,43 @@ public class FeeController {
 		Map<String,Map<String,String>> patentTypeCount=feeService.getMonitoredFeesByType(userId);
 		Map<String,Map<String,String>> feePaymentStatusCount=feeService.getMonitoredFeesByStatus(userId);
 		Map<String,Map<String,String>> patentStatusCount=feeService.getMonitoredFeesByFeeType(userId);
+		int totalFeeCount=feeService.getFeeAllCountByUser(userId);
+		int unpaidFeeCount=feeService.getUnPaidCountByUser(userId);
 		model.addAttribute("patentTypeCount", patentTypeCount);
 		model.addAttribute("feePaymentStatusCount", feePaymentStatusCount);
 		model.addAttribute("patentStatusCount", patentStatusCount);
 		model.addAttribute("page", page);
 		model.addAttribute("fees", fees);
+		model.addAttribute("totalFeeCount",totalFeeCount);
+		model.addAttribute("unpaidFeeCount",unpaidFeeCount);
 		return "monitored_fee_list";
 	}	
 	
 	//CS:搜索分页
 	@RequestMapping(path="/search", method=RequestMethod.GET)
 	public String searchUserMonitoredFees(@ModelAttribute("searchCondition")FeeSearchCondition searchCondition, Model model,HttpSession session) {
+		searchCondition.setDeadlineStatus(WebUtils.getDeadlineStatus(session));
 		Page page=searchCondition.getPage();
 		page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		if(page.getCurrentPage()==0){
+			page.setCurrentPage(1);
+		}
 		List<Fee> fees = feeService.searchUserMonitoredFeesByPage(searchCondition);
 		int totalCount=(int)feeService.searchUserMonitoredFeesCount(searchCondition);
 		page.setTotalRecords(totalCount);
 		Map<String,Map<String,String>> patentTypeCount=feeService.getMonitoredFeesByType(searchCondition.getUserId());
 		Map<String,Map<String,String>> feePaymentStatusCount=feeService.getMonitoredFeesByStatus(searchCondition.getUserId());
 		Map<String,Map<String,String>> patentStatusCount=feeService.getMonitoredFeesByFeeType(searchCondition.getUserId());
+		int totalFeeCount=feeService.getFeeAllCountByUser(PrincipalUtils.getCurrentUserId());
+		int unpaidFeeCount=feeService.getUnPaidCountByUser(PrincipalUtils.getCurrentUserId());
 		model.addAttribute("patentTypeCount", patentTypeCount);
 		model.addAttribute("feePaymentStatusCount", feePaymentStatusCount);
 		model.addAttribute("patentStatusCount", patentStatusCount);
 		model.addAttribute("fees", fees);
 		model.addAttribute("page", page);
+		model.addAttribute("totalFeeCount",totalFeeCount);
+		model.addAttribute("unpaidFeeCount",unpaidFeeCount);
 		return "monitored_fee_list";
 	
 	}
@@ -194,5 +206,12 @@ public class FeeController {
 			List<Fee> fee=feeService.getFeesForPatentId(patentId);
 			model.addAttribute("fee",fee);
 			WebUtils.writeJsonStrToResponse(response, patent);
+		}
+		
+		@RequestMapping(path="/saveDeadlineStatus",method=RequestMethod.POST)
+		public @ResponseBody String saveDeadlineStatus(String deadlineStatus,HttpSession session){
+			session.setAttribute("deadlineStatus", deadlineStatus);
+			System.out.println(deadlineStatus);
+			return "";
 		}
 }

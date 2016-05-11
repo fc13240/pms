@@ -62,4 +62,7 @@ public interface FeeMapper {
 	Map<String,Map<String,String>> getMonitoredFeesByFeeType(int userId);
 	
 	List<Fee> getFeesForPatentId(@Param("patentId")long patentId);
+	
+	int getFeeAllCountByUser(int userId);
+	int getUnPaidCountByUser(int userId);
 }

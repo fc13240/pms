@@ -87,7 +87,52 @@
 	
 	
 	<!-- CS:分页 -->
+	<!-- <sql id="withinThreeYear">
+		and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
+	</sql>
+	<sql id="pastDue">
+		and f.deadline &lt;CURDATE()
+	</sql>
+	<sql id="withinTwoWeek">
+		and f.deadline &gt;=CURDATE() AND f.deadline &lt;=(CURDATE()+INTERVAL 2 WEEK)
+	</sql>
+	<sql id="withinTwoMoth">
+		and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 2 MONTH)
+	</sql>
+	<sql id="overThreeYear">
+		and f.deadline &gt;=(CURDATE()+INTERVAL 3 YEAR)
+	</sql> -->
 	<select id="getUserMonitoredFeesByPage" parameterType="Page" resultMap="FeeResultMap">
+		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
+					 f.fee_id, f.deadline, f.fee_type, f.amount, f.invoice_title, fp.fee_payment_status_id, fp.fee_payment_status_desc,
+					 fs.fee_monitor_status_id, fs.fee_monitor_status_desc
+		  from (fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
+		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
+				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
+				join patent_status ps on p.patent_status = ps.patent_status_id) 	
+		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2 and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
+		 		<!-- <if test="dateTime==1">
+		 			<include refid="withinThreeYear"></include>
+				</if>
+				<if test="dateTime==2">
+		 			<include refid="pastDue"></include>
+				</if>
+				<if test="dateTime==3">
+		 			<include refid="withinTwoWeek"></include>
+				</if>
+				<if test="dateTime==4">
+		 			<include refid="withinTwoMoth"></include>
+				</if>
+				<if test="dateTime==5">
+		 			<include refid="overThreeYear"></include>
+				</if> -->
+		 order by p.patent_id, f.deadline
+		 limit #{startIndex}, #{pageSize}
+	</select>
+	
+	
+	
+<!-- 	<select id="getUserMonitoredFeesByPage" parameterType="Page" resultMap="FeeResultMap">
 		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
 					 f.fee_id, f.deadline, f.fee_type, f.amount, f.invoice_title, fp.fee_payment_status_id, fp.fee_payment_status_desc,
 					 fs.fee_monitor_status_id, fs.fee_monitor_status_desc
@@ -98,7 +143,9 @@
 		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
 		 order by p.patent_id, f.deadline
 		 limit #{startIndex}, #{pageSize}
-	</select>
+	</select> -->
+	
+	
 	
 	<select id="getUserMonitoredFeesCount"  resultType="int">
 		select count(*)
@@ -175,6 +222,21 @@
 		 	<if test="keyword != null">
 				and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
 					or p.app_person like #{keyword_pattern} or f.fee_type like #{keyword_pattern}) 																	
+			</if>
+			<if test="deadlineStatus==1">
+				and f.deadline &lt;CURDATE()
+			</if>
+			<if test="deadlineStatus==2">
+				and f.deadline &gt;=CURDATE() AND f.deadline &lt;=(CURDATE()+INTERVAL 2 WEEK)
+			</if>
+			<if test="deadlineStatus==3">
+				and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 2 MONTH)
+			</if>
+			<if test="deadlineStatus==4">
+				and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
+			</if>
+			<if test="deadlineStatus==5">
+				and f.deadline &gt;=(CURDATE()+INTERVAL 3 YEAR)
 			</if>		 
 		order by p.patent_id, f.deadline
 		limit #{page.startIndex}, #{page.pageSize}
@@ -205,6 +267,21 @@
 		 	<if test="keyword != null">
 				and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
 					or p.app_person like #{keyword_pattern} or f.fee_type like #{keyword_pattern}) 																	
+			</if>
+			<if test="deadlineStatus==1">
+				and f.deadline &lt;CURDATE()
+			</if>
+			<if test="deadlineStatus==2">
+				and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 2 WEEK)
+			</if>
+			<if test="deadlineStatus==3">
+				and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 2 MONTH)
+			</if>
+			<if test="deadlineStatus==4">
+				and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
+			</if>
+			<if test="deadlineStatus==5">
+				and f.deadline &gt;=(CURDATE()+INTERVAL 3 YEAR)
 			</if>		 
 	</select>
 	
@@ -294,5 +371,17 @@
 	</select>
 	<select id="getFeesForPatentId" resultMap="FeeResultMap">
 		SELECT fee_type FROM fees WHERE patent=#{patentId}
+	</select>
+	<!--当前用户已缴纳的金额  -->
+	<select id="getFeeAllCountByUser" parameterType="int" resultType="int">
+		select case when sum is null then 0 else sum end as c
+			    from (select sum(f.amount) as 'sum' from fees f
+			    where f.fee_owner = #{userId} and f.fee_payment_status =3) as a
+	</select>
+	<!--当前用户未缴纳的金额  -->
+	<select id="getUnPaidCountByUser" parameterType="int" resultType="int">
+		select case when sum is null then 0 else sum end as c
+		       from (select sum(f.amount) as 'sum' from fees f 
+		       where f.fee_owner =#{userId} and f.fee_monitor_status = 2) as a
 	</select>
 </mapper>

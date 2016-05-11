@@ -10,7 +10,6 @@ import com.lotut.pms.dao.mapper.FeeMapper;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.FeeSearchCondition;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.Patent;
 
 public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 	private FeeMapper feeMapper;
@@ -83,7 +82,12 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 		public List<Fee> getUserMonitoredFeesByPage(Page page) {
 			return feeMapper.getUserMonitoredFeesByPage(page);
 		}
-
+		
+		/*@Override
+		public List<Fee> getUserMonitoredFeesByPage(Page page,Integer dateTime) {
+			return feeMapper.getUserMonitoredFeesByPage(page, dateTime);
+		}*/
+		
 		@Override
 		public int getUserMonitoredFeesCount(int userId) {
 			return feeMapper.getUserMonitoredFeesCount(userId);
@@ -122,6 +126,16 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 		@Override
 		public List<Fee> getFeesForPatentId(long patentId) {
 			return feeMapper.getFeesForPatentId(patentId);
+		}
+
+		@Override
+		public int getFeeAllCountByUser(int userId) {
+			return feeMapper.getFeeAllCountByUser(userId);
+		}
+
+		@Override
+		public int getUnPaidCountByUser(int userId) {
+			return feeMapper.getUnPaidCountByUser(userId);
 		}
 
 		

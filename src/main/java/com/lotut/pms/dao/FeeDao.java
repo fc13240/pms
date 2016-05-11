@@ -3,8 +3,6 @@ package com.lotut.pms.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.FeeSearchCondition;
 import com.lotut.pms.domain.Page;
@@ -58,4 +56,8 @@ public interface FeeDao {
 	Map<String,Map<String,String>> getMonitoredFeesByFeeType(int userId);
 	
 	List<Fee> getFeesForPatentId(long patentId);
+	
+	int getFeeAllCountByUser(int userId);
+	
+	int getUnPaidCountByUser(int userId);
 }

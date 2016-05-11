@@ -218,4 +218,14 @@ public class FeeServiceImpl implements FeeService {
 		public List<Fee> getFeesForPatentId(long patentId) {
 			return feeDao.getFeesForPatentId(patentId);
 		}
+
+		@Override
+		public int getFeeAllCountByUser(int userId) {
+			return feeDao.getFeeAllCountByUser(userId);
+		}
+
+		@Override
+		public int getUnPaidCountByUser(int userId) {
+			return feeDao.getUnPaidCountByUser(userId);
+		}
 }
