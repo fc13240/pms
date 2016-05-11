@@ -23,6 +23,8 @@ public interface FeeService {
 	
 	List<Fee> getUserMonitoredFeesByPage(Page page);
 	
+
+	
 	long getUserMonitoredFeesCounts(int userId);
 	
 	

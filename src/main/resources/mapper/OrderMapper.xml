@@ -332,6 +332,7 @@
  		</foreach>
 	</update>
 	
+	
 	<select id="searchUserOrdersByOrderStatus" resultType="map">
 		SELECT o.order_status orderStatus,count(*) orderCount
 		  FROM orders o 
