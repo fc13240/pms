@@ -88,8 +88,11 @@ public class NoticeXmlParser {
 			notice.setArchiveNo(archiveNoNode ==  null ? null : archiveNoNode.getStringValue());
 			notice.setZipfileName(zipFileName);
 			NoticeType noticeType = new NoticeType();
+			
 			noticeType.setNoticeTypeId(getNoticeTypeByName(noticeNameNode.getStringValue()));
 			notice.setNoticeType(noticeType);
+			
+			notice.setNoticeStatusText(patentTypeNode.getStringValue());
 			
 			patent.setAppNo(appNoNode.getStringValue());
 			patent.setName(appNameNode ==  null ? null : appNameNode.getStringValue());

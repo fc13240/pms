@@ -258,7 +258,11 @@
 					</td>
 					<td><c:out value="${notice.patent.name}"/></td>
 					<td><c:out value="${notice.patent.firstAppPerson}"/></td>
-					<td><c:out value="${notice.patent.patentStatus.statusDescription}"/></td>
+					<td>
+					
+					${notice.noticeStatusText}
+					
+					</td>
 					<td><c:out value="${notice.patent.shareUsersAsString}"/></td>
 					<td><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
 					<td><a id="download" href="javascript: void(0);" onClick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}')">
