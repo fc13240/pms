@@ -136,8 +136,6 @@
 					<tr class="simple_bag">
 					  <th>快递公司</th>
 					  <th>快递单号</th>
-					  <th>快递员</th>
-					  <th>快递电话</th>
 					  <th>发货时间</th>
 					</tr>
 				  </thead>
@@ -145,9 +143,7 @@
 					<tr>
 					  <td>${order.expressCompany}</td>
 					  <td>${order.expressNo}</td>
-					  <td>${order.courier}</td>
-					  <td>${order.courierPhone}</td>
-					  <td><fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/></td>
+				  <td><fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/></td>
 					</tr>
 				  </tbody>
 				</table></td>

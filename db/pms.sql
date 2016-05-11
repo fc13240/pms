@@ -489,3 +489,6 @@ insert into fee_types(patent_type, type_code, type_text) values(3, '408720832353
 insert into fee_types(patent_type, type_code, type_text) values(3, '40872083545383', '外观设计专利年费滞纳金');	
 
 ALTER TABLE patents ADD COLUMN patent_status_text VARCHAR(150);	
+ALTER TABLE notices ADD COLUMN notice_status_test VARCHAR(150);
+ALTER TABLE orders DROP COLUMN courier;
+ALTER TABLE orders DROP COLUMN courier_phone;
