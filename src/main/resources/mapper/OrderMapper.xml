@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotut.pms.dao.mapper.OrderMapper">
 	<insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
-		insert into orders(post_address, amount, user, create_time) 
+		insert into orders(post_address, amount, user, create_time,payment_method) 
 		values(<choose>
 		<when test="postAddress != null and postAddress.id != 0">
 			#{postAddress.id}
@@ -12,7 +12,7 @@
 		<otherwise>
 			null
 		</otherwise>
-		</choose>, #{amount}, #{owner.userId}, now())
+		</choose>, #{amount}, #{owner.userId}, now(),#{paymentMethod.paymentMethodId})
 	</insert>
 	
 	<insert id="insertOrderItems">

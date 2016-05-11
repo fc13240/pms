@@ -492,3 +492,4 @@ ALTER TABLE patents ADD COLUMN patent_status_text VARCHAR(150);
 ALTER TABLE notices ADD COLUMN notice_status_test VARCHAR(150);
 ALTER TABLE orders DROP COLUMN courier;
 ALTER TABLE orders DROP COLUMN courier_phone;
+ALTER TABLE orders ADD COLUMN order_payment_method VARCHAR(100);
