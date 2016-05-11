@@ -17,6 +17,7 @@ public class Patent {
 	private String appPerson;
 	private String inventPerson;
 	private PatentStatus patentStatus;
+	private String patentStatusText;
 	private String internalCode;
 	private int ownerId;
 	private List<User> shareUsers;
@@ -25,13 +26,14 @@ public class Patent {
 		
 	}
 	
-	public Patent(String appNo, String name, String appPerson, Date appDate, int patentType, int patentStatus) {
+	public Patent(String appNo, String name, String appPerson, Date appDate, int patentType, int patentStatus,String patentStatusText) {
 		this.appNo = appNo;
 		this.name =  name;
 		this.appPerson = appPerson;
 		this.appDate = appDate;
 		this.patentType = new PatentType(patentType);
-		this.patentStatus = new PatentStatus(patentStatus);
+	    this.patentStatus = new PatentStatus(patentStatus);
+	    this.setPatentStatusText(patentStatusText);
 	}
 	
 	public String getFirstAppPerson() {
@@ -162,5 +164,13 @@ public class Patent {
 	@Override
 	public int hashCode() {
 		return (int) this.patentId;
+	}
+
+	public String getPatentStatusText() {
+		return patentStatusText;
+	}
+
+	public void setPatentStatusText(String patentStatusText) {
+		this.patentStatusText = patentStatusText;
 	}
 }

@@ -215,8 +215,8 @@ public class FeeServiceImpl implements FeeService {
 		}
 
 		@Override
-		public List<Fee> getFeesForPatentId(long patentId) {
-			return feeDao.getFeesForPatentId(patentId);
+		public List<String> getFeeTypes(String appNo) {
+			return feeDao.getFeeTypes(appNo);
 		}
 
 		@Override
@@ -228,4 +228,16 @@ public class FeeServiceImpl implements FeeService {
 		public int getUnPaidCountByUser(int userId) {
 			return feeDao.getUnPaidCountByUser(userId);
 		}
+		
+		@Override
+		public void saveFee(Fee fee,int userId,long patentId) {
+			feeDao.saveFee(fee,userId,patentId);
+		}
+
+		@Override
+		public List<Fee> getFeesForPatentId(long patentId) {
+			// TODO Auto-generated method stub
+			return feeDao.getFeesForPatentId(patentId);
+		}
+
 }

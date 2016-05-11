@@ -46,6 +46,11 @@ public class NoticeXmlParser {
 		return noticeXmlFiles;
 	}
 	
+	/**
+	 * @param noticeXmlFile
+	 * @param zipFileName
+	 * @return
+	 */
 	public static Notice parseNoticeXmlFile(File noticeXmlFile, String zipFileName) {
 		try {
 			Notice notice = new Notice();

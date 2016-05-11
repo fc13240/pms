@@ -60,4 +60,8 @@ public interface FeeDao {
 	int getFeeAllCountByUser(int userId);
 	
 	int getUnPaidCountByUser(int userId);
+
+	List<String> getFeeTypes(String appNo);
+	
+	void saveFee (Fee fee,int userId,long patentId);
 }

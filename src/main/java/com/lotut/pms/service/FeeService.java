@@ -19,6 +19,8 @@ public interface FeeService {
 	
 	List<Fee> getUserMonitoredFeesByPage(Page page);
 	
+
+	
 	long getUserMonitoredFeesCounts(int userId);
 	
 	
@@ -55,4 +57,8 @@ public interface FeeService {
 	int getFeeAllCountByUser(int userId);
 	
 	int getUnPaidCountByUser(int userId);
+	
+	List<String> getFeeTypes(String appNo);
+	
+	void saveFee (Fee fee,int userId,long patentId);
 }

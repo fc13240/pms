@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotut.pms.dao.mapper.OrderMapper">
 	<insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
-		insert into orders(post_address, amount, user, create_time) 
+		insert into orders(post_address, amount, user, create_time,payment_method) 
 		values(<choose>
 		<when test="postAddress != null and postAddress.id != 0">
 			#{postAddress.id}
@@ -12,7 +12,7 @@
 		<otherwise>
 			null
 		</otherwise>
-		</choose>, #{amount}, #{owner.userId}, now())
+		</choose>, #{amount}, #{owner.userId}, now(),#{paymentMethod.paymentMethodId})
 	</insert>
 	
 	<insert id="insertOrderItems">
@@ -165,7 +165,7 @@
 	</select>
 	
 	<select id="getOrderById" parameterType="long" resultMap="OrderMap">
-		select  o.create_time, o.amount totalAmount, o.order_id,o.express_company,o.express_no,o.courier,o.courier_phone,o.send_time, o.pay_time,
+		select  o.create_time, o.amount totalAmount, o.order_id,o.express_company,o.express_no,o.send_time, o.pay_time,
 			ca.id as address_id, ca.receiver, provinces.name provinceName, cities.name cityName,
 			districts.name districtName, streets.name streetName, ca.detail_address detailAddress, ca.phone,
 			os.order_status_id, os.status_description, p.patent_id, p.app_no, p.patent_name, p.app_person, 
@@ -331,6 +331,7 @@
 			#{orderItem.feeId}
  		</foreach>
 	</update>
+	
 	
 	<select id="searchUserOrdersByOrderStatus" resultType="map">
 		SELECT o.order_status orderStatus,count(*) orderCount

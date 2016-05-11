@@ -81,6 +81,7 @@
 					  <th>订单编号</th>
 					  <th>下单时间</th>
 					  <th>支付时间</th>
+					  <th>支付方式</th>
 					</tr>
 				  </thead>
 				  <tbody>
@@ -88,6 +89,7 @@
 					  <td>${order.id}</td>
 					  <td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 					  <td><fmt:formatDate value="${order.payTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+					  <td>${order.paymentMethod.paymentMethod}</td>
 					</tr>
 				  </tbody>
 				</table></td>
@@ -136,8 +138,6 @@
 					<tr class="simple_bag">
 					  <th>快递公司</th>
 					  <th>快递单号</th>
-					  <th>快递员</th>
-					  <th>快递电话</th>
 					  <th>发货时间</th>
 					</tr>
 				  </thead>
@@ -145,9 +145,7 @@
 					<tr>
 					  <td>${order.expressCompany}</td>
 					  <td>${order.expressNo}</td>
-					  <td>${order.courier}</td>
-					  <td>${order.courierPhone}</td>
-					  <td><fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/></td>
+				  <td><fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/></td>
 					</tr>
 				  </tbody>
 				</table></td>
