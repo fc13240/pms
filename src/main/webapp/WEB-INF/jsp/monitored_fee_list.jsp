@@ -185,7 +185,7 @@
 					  <th>缴费种类</th>
 					  <th>缴费金额</th>
 					  <th>发票抬头</th>
-					  <th>费用状态</th>
+					  <th>缴费状态</th>
 					</tr>
 				  </thead>
 				  <tbody>
@@ -209,7 +209,23 @@
 							<c:otherwise> ${fee.invoiceTitle} </c:otherwise>
 						  </c:choose>
 						</td>
-						<td>${fee.paymentStatus.payementStatusDescription} </td>
+						<td>
+
+							<c:choose>
+								<c:when test="${fee.paymentStatus.paymentStatusId == 1}">
+								${fee.paymentStatus.payementStatusDescription}
+								</c:when>
+								<c:otherwise> 
+								
+								<a  href="<s:url value="/order/detail/"/>${fee.orderId}.html" target="_black">
+									${fee.paymentStatus.payementStatusDescription}
+	                  			</a>
+								
+								</c:otherwise>
+							</c:choose>
+
+						
+						</td>
 					  </tr>
 					</c:forEach>
 					<tr>
