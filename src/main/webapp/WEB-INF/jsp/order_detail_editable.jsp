@@ -131,16 +131,16 @@
 		  </thead>
 		  <tbody>
 			<tr>
-			  <td><form action="<s:url value='/order/updateUserOrderContactAddresses.html'/>" method="post">
+			  <td><form action="<s:url value='/order/updateUserOrderContactAddresses.html'/>" method="post" id="orderDetail">
 				  <se:csrfInput/>
 				  快递单编号:
 				  <input type="text" name="expressNo" id="expressNo" value="${order.expressNo}" required/>
 				  快递公司:
 				  <input type="text" name="expressCompany" id="expressCompany" value="${order.expressCompany}" required/>
-				  快递员姓名:
-				  <input type="text" name="courier" id="courier"  value="${order.courier}" />
-				  快递员联系方式:
-				  <input type="text" name="courierPhone" id="courierPhone" value="${order.courierPhone}" />
+<!-- 				  快递员姓名: -->
+				  <input type="hidden" name="courier" id="courier"  value="${order.courier}" />
+<!-- 				  快递员联系方式: -->
+				  <input type="hidden" name="courierPhone" id="courierPhone" value="${order.courierPhone}" />
 				  <div style="margin-top:10px;">
 					<div class="input-group">
 					  <div style="float:left;line-height: 32px;">发送时间</div>
@@ -148,7 +148,7 @@
 					  <div style="float:left;">
 						<input  type="text" class="form-control" id="startAppDateId" 
 						name="startDispatchDate" placeholder="快递发送日期选择" value="<fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/>"  
-						readonly="readonly" onclick="javascript:$('#start_date_img').click()" style="width: 150px;height: 25px"> </div>
+						readonly="readonly" onclick="javascript:$('#start_date_img').click()" style="width: 150px;height: 25px" required> </div>
 					  <div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" align="absmiddle" id="start_date_img"></div>
 					</div>
 				  </div>
@@ -262,6 +262,14 @@
 	
 </script>
 <script type="text/javascript">
+$(function() {
+	$("#orderDetail").validate({
+		submitHandler: function(form){ 
+			form.submit();     
+		}
+	});	
+});
+
 		function remind(){
 			$("<div>操作成功</div>").dialog({
 				modal: true,

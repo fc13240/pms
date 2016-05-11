@@ -20,11 +20,11 @@
 		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">添加费用信息</span>
 	</div>
 	
-	<form action="<s:url value='/fee/addFee.html'/>" method="post">
+	<form action="<s:url value='/fee/addFee.html'/>" method="post" id="addFeeForm">
 	  <div class="t-third">
 	    <ul>
 	      <li>
-	        <p>专利号:</p>
+	        <p>申请号:</p>
 	        <select name="appNo" id="appNo" onchange="loadPatent()" required>
 			  <option value=''>请选择专利号</option>
 			  <c:forEach items="${patents}" var="patent">
@@ -46,13 +46,13 @@
 	      </li>
 	      <li>
 	        <p>缴费截止日:</p>
-	        <div style="margin-top:10px;">
+	        <div style="margin-top:10px;" >
 					<div class="input-group">
-					  <div style="float:left;margin-left: 16px;" class="form-group" style="margin-left:15px;">
+					  <div style="float:left;margin-left: 16px;" class="form-group" style="margin-left:15px;" >
 					  <div style="float:left;">
 						<input  type="text" class="form-control" id="startAppDateId" 
 						name="deadline" placeholder="缴费截止日期选择" 
-						readonly="readonly" onclick="javascript:$('#start_date_img').click()" style="width: 150px;height: 25px"> </div>
+						readonly="readonly" onclick="javascript:$('#start_date_img').click()" style="width: 150px;height: 16px" required> </div>
 					  <div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" align="absmiddle" id="start_date_img"></div>
 					</div>
 				  </div>
@@ -69,11 +69,11 @@
 	      </li>
 	      <li>
 	        <p>缴费金额:</p>
-	        <input style="height:16px;" type="text" name="amount" id="amount"  required/>
+	        <input style="height:16px;" type="text" name="amount" id="amount"  required min="1" digits="true"/>
 	      </li>
 	      <li>
 	        <p>发票抬头:</p>
-	        <input style="height:16px;" type="text" name="invoiceTitle" id="invoiceTitle"  />
+	        <input style="height:16px;" type="text" name="invoiceTitle" id="invoiceTitle" value=" " />
 	      </li>
 	      <li>
 	        <p>&nbsp;</p>
@@ -85,9 +85,18 @@
 
 
 </div>
- 
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script> 
 
 <script type="text/javascript">
+$(function() {
+	$("#addFeeForm").validate({
+		submitHandler: function(form){ 
+			form.submit();     
+		}
+	});	
+});
+
 function addDefaultOption(selectElem) {
 	selectElem.append("<option value=''>请选择</option>");
 }
