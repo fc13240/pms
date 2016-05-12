@@ -250,7 +250,7 @@
 		on duplicate key update 
 			patent_name = #{name,javaType=string,jdbcType=VARCHAR}, app_person = #{appPerson,javaType=string,jdbcType=VARCHAR},
 			app_date = #{appDate,javaType=date,jdbcType=DATE},
-			patent_status_text = #{patentStatusText,javaType=int,jdbcType=VARCHAR}, patent_type = #{patentType.patentTypeId},
+			patent_status_text = #{patentStatusText,javaType=string,jdbcType=VARCHAR}, patent_type = #{patentType.patentTypeId},
 			patent_status = #{patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER}
 	</insert>
 	
