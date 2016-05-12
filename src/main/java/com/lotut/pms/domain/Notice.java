@@ -20,7 +20,18 @@ public class Notice {
 	private User processUser;
 	private NoticeType noticeType;
 	private NoticePaperApplyType paperApplyType;
+	
+	private String noticeStatusText;
+	
 
+
+	public String getNoticeStatusText() {
+		return noticeStatusText;
+	}
+
+	public void setNoticeStatusText(String noticeStatusText) {
+		this.noticeStatusText = noticeStatusText;
+	}
 
 	public String getNoticeId() {
 		return noticeId;
@@ -157,4 +168,6 @@ public class Notice {
 	public void setTimeLimt(Integer timeLimt) {
 		this.timeLimt = timeLimt;
 	}
+
+
 }

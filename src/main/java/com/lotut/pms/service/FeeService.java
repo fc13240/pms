@@ -4,14 +4,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.MapKey;
 
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.FeeSearchCondition;
-import com.lotut.pms.domain.Notice;
-import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.Patent;
 
 public interface FeeService {
 	Map<String, List<?>> batchGrabFees(List<Long> patentIds);
@@ -55,6 +51,12 @@ public interface FeeService {
 	Map<String,Map<String,String>> getMonitoredFeesByStatus(int userId);
 	
 	Map<String,Map<String,String>> getMonitoredFeesByFeeType(int userId);
+	
+	List<Fee> getFeesForPatentId(long patentId);
+	
+	int getFeeAllCountByUser(int userId);
+	
+	int getUnPaidCountByUser(int userId);
 	
 	List<String> getFeeTypes(String appNo);
 	

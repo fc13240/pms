@@ -29,6 +29,7 @@
 <!-- 	      <li><a href="#" class="">缴费期限</a></li> -->
 	      <li><a href="#" class="">缴费状态</a></li>
 	      <li><a href="#" class="selected">费用类型</a></li>
+	      <li><a href="#" class="">缴费期限</a></li>
 	    </ul>
 	  </div>
 	  <div id="menu_con" style="min-width:1100px;">
@@ -65,7 +66,7 @@
 	    <div class="tag"  style="display:none"> 
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=1'/>">
-	        <li>未缴费 (<c:out value='${feePaymentStatusCount[(1).intValue()]["feeCount"]}' default="0"/>)</li>
+	        <li>应缴费 (<c:out value='${feePaymentStatusCount[(1).intValue()]["feeCount"]}' default="0"/>)</li>
 	        </a> 
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=2'/>">
 	        <li>已支付 (<c:out value='${feePaymentStatusCount[(2).intValue()]["feeCount"]}' default="0"/>)</li>
@@ -76,7 +77,7 @@
 	      </ul>
 	     
 	    </div>
-	    <div class="tag"  style="display:block">
+	    <div class="tag"  style="display:block;">
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=1'/>">
 	        <li>申请费 (<c:out value='${patentStatusCount[(1).intValue()]["feeCount"]}' default="0"/>)</li>
@@ -89,6 +90,27 @@
 	        </a>
 	      </ul>
 	    </div>
+	    
+	   <div class="tag"  style="display:none">
+	      <ul class="qxjk-ul">
+	        <a href="<s:url value='/fee/search.html?deadlineStatus=1&page.currentPage=1'/>" onclick="changDeadLineStatus(1)">
+	        	<li>已超期</li>
+	        </a>
+	        <a href="<s:url value='/fee/search.html?deadlineStatus=2&page.currentPage=1'/>" onclick="changDeadLineStatus(2)">
+	        	<li>两周内</li>
+	        </a>
+	        <a href="<s:url value='/fee/search.html?deadlineStatus=3&page.currentPage=1'/>" onclick="changDeadLineStatus(3)">
+	        	<li>两月内</li>
+	        </a>
+	        <a href="<s:url value='/fee/search.html?deadlineStatus=4&page.currentPage=1'/>" onclick="changDeadLineStatus(4)">
+	        	<li>三年内</li>
+	        </a>
+	        <a href="<s:url value='/fee/search.html?deadlineStatus=5&page.currentPage=1'/>" onclick="changDeadLineStatus(5)">
+	        	<li>三年以上</li>
+	        </a>
+	      </ul>
+	    </div>
+	     
 	  </div>
 	</div>
 	<!--menu end-->		
@@ -115,7 +137,7 @@
 			  <label id="lblSelect">
 			  <select id="paymentStatus" name="paymentStatus" >
 				<option value="">全部</option>
-				<option value="1">未缴</option>
+				<option value="1">应缴</option>
 				<option value="2">已支付</option>
 				<option value="3">已缴</option>
 				<option value="4">已加入订单</option>
@@ -167,8 +189,12 @@
 					<button class="t-btn5">加入订单</button>
 					</a> <a href="javascript:delectFees()">
 					<button class="t-btn2">删除费用</button>
-					</a></div>
-				  </span> </div>
+					</a>
+					<button class="t-btn4" onmousemove="this.style.cursor=''">应缴费总额：￥${unpaidFeeCount }</button>
+					<button class="t-btn3" onmousemove="this.style.cursor=''">成功缴费总额：￥${totalFeeCount }</button>
+				  </div>
+				  </span> 
+				</div>
 				<table id="simple-table" class="table table-striped table-bordered table-hover">
 				  <thead>
 					<tr class="simple_bag">
@@ -267,17 +293,18 @@
 				  <c:if test="${searchCondition != null}">
 					<div class="col-lg-12"> 共 ${page.totalPages} 页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?page.currentPage=1&${searchCondition}">首页</a>
 					  <c:choose>
-						<c:when test="${page.currentPage - 1 > 0}"> <a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a> </c:when>
-						<c:when test="${page.currentPage - 1 <= 0}"> <a href="?page.currentPage=1&${searchCondition}">上一页</a> </c:when>
+ 						<c:when test="${page.currentPage - 1 > 0}"> <a href="?deadlineStatus=4&page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a> </c:when>
+						<c:when test="${page.currentPage - 1 <= 0}"> <a href="?deadlineStatus=4&page.currentPage=1&${searchCondition}">上一页</a> </c:when>
 					  </c:choose>
 					  <c:choose>
-						<c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a> </c:when>
-						<c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a> </c:when>
-						<c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a> </c:when>
+						
+						<c:when test="${page.totalPages==0}"> <a href="?deadlineStatus=4&page.currentPage=${page.currentPage}&${searchCondition}">下一页</a> </c:when>
+						<c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?deadlineStatus=4&page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a> </c:when>
+						<c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?deadlineStatus=4&page.currentPage=${page.totalPages}&${searchCondition}">下一页</a> </c:when>
 					  </c:choose>
 					  <c:choose>
-						<c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a> </c:when>
-						<c:otherwise> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise>
+ 						<c:when test="${page.totalPages==0}"> <a href="?deadlineStatus=4&page.currentPage=${page.currentPage}&${searchCondition}">尾页</a> </c:when>
+						<c:otherwise> <a href="?deadlineStatus=4&page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise> 
 					  </c:choose>
 					  <!-- 分页功能 End -->
 					  <input type="text" id="page.pageNo" style="width:50px;height:15px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
@@ -495,6 +522,15 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 				}
 			}
 			location.href = "<s:url value='/fee/deleteFees.html'/>?fees=" + fees;
+		}
+		
+		function changDeadLineStatus(status){
+			$.ajax({
+				type : 'post',
+				url : "<s:url value='/fee/saveDeadlineStatus.html'/>?deadlineStatus="+status,
+				success: function(result) {
+				}
+			})
 		}
 </script>
 <%@ include file="_footer_js.jsp" %>

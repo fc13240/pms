@@ -18,6 +18,7 @@ public class FeeSearchCondition {
 	private Date endDeadline;
 	private String keyword;
 	private Page page;
+	private Integer deadlineStatus;
 	private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 	public Integer getPatentType() {
@@ -84,6 +85,14 @@ public class FeeSearchCondition {
 		this.page = page;
 	}
 	
+	public Integer getDeadlineStatus() {
+		return deadlineStatus;
+	}
+
+	public void setDeadlineStatus(Integer deadlineStatus) {
+		this.deadlineStatus = deadlineStatus;
+	}
+
 	@Override
 	public String toString() {
 		String patentTypeStr = patentType == null ? "" : patentType.toString();
