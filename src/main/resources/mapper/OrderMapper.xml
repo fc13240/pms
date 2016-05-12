@@ -168,6 +168,7 @@
 	
 	<select id="getOrderById" parameterType="long" resultMap="OrderMap">
 		select  o.create_time, o.amount totalAmount, o.order_id,o.express_company,o.express_no,o.send_time, o.pay_time,
+			o.invoice,o.express_fee,o.service_fee,invoice_fee,
 			ca.id as address_id, ca.receiver, provinces.name provinceName, cities.name cityName,
 			districts.name districtName, streets.name streetName, ca.detail_address detailAddress, ca.phone,
 			os.order_status_id, os.status_description, p.patent_id, p.app_no, p.patent_name, p.app_person, 
