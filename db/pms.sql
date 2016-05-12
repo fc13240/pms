@@ -486,5 +486,10 @@ insert into fee_types(patent_type, type_code, type_text) values(3, '408720826052
 insert into fee_types(patent_type, type_code, type_text) values(3, '40872082325233', '外观设计专利权评价报告请求费');
 insert into fee_types(patent_type, type_code, type_text) values(3, '40872082505250', '变更费');
 insert into fee_types(patent_type, type_code, type_text) values(3, '40872083235323', '外观设计专利登记印刷费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083545383', '外观设计专利年费滞纳金');	
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083545383', '外观设计专利年费滞纳金');
+
+ALTER TABLE orders ADD invoice VARCHAR(100) NULL;
+ALTER TABLE orders ADD express_fee INT ;
+ALTER TABLE orders ADD service_fee INT ;
+ALTER TABLE orders ADD invoice_fee INT;
 	

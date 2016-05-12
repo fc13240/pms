@@ -11,7 +11,8 @@ import com.lotut.pms.domain.OrderStatus;
 import com.lotut.pms.domain.Page;
 
 public interface OrderService {
-	int createOrder(Order order, List<Fee> fees);
+	int createOrder(Order order, List<Fee> fees,Integer express,Integer nationalInvoice,
+			Integer companyInvoice);
 	List<Order> getUserOrders(int userId);
 	Order getOrderById(long orderId);
 	

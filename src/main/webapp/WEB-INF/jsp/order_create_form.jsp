@@ -10,31 +10,6 @@
 <title>订单</title>
 <%@ include file="_css.jsp" %>
 
-<%-- <script type="text/javascript"> --%>
-// 	var value=$("#postAddressId").val();
-// 	alert(value);
-// 	if(typeof(value) == "undefined"){
-// 		document.getElementById("totalAmountSpan1").style.display="block";
-// 		document.getElementById("totalAmountSpan2").style.display="none";
-// 	}else{
-// 		document.getElementById("totalAmountSpan1").style.display="none";
-// 		document.getElementById("totalAmountSpan2").style.display="block";
-// 	}
-<%-- </script> --%>
-<script type="text/javascript">
-			function aCheck1(){
-			document.getElementById("span1").style.display="block";
-			document.getElementById("span2").style.display="none";
-			document.getElementById("totalAmountSpan2").style.display="block";
-			document.getElementById("totalAmountSpan1").style.display="none";
-			}
-			function bCheck2(){ 
-			document.getElementById("span1").style.display="none";
-			document.getElementById("span2").style.display="block";
-			document.getElementById("totalAmountSpan2").style.display="none";
-			document.getElementById("totalAmountSpan1").style.display="block";
-			}
-		</script>
 </head>
 <body>
 
@@ -62,19 +37,16 @@
 			</tr>
 			<c:forEach items="${contactAddresses}" var="address">
 			  <tr>
-				<td><input type="radio"  name="postAddress.id" onclick="aCheck1()"
-													
-				  <c:if test="${address.defaultAddress}">checked=""</c:if>
+				<td><input type="radio"  name="postAddress.id" onclick="show();hint()"
 				  value="${address.id}" required="required"> 
 				  ${address.receiver} ${address.provinceName} ${address.cityName} ${address.districtName}
 				  ${address.streetName} ${address.detailAddress} ${address.phone} </td>
 			  </tr>
 			</c:forEach>
 			<tr>
-			  <td><input type="radio" id="postAddressId" name="postAddress.id" value="0"  onclick="bCheck2()"
-												
-				<c:if test="${empty contactAddresses}">checked="checked"</c:if>
-				required="required"> 不需要邮寄 <span style="color:red;">
+			  <td><input type="radio" id="postAddressId" name="postAddress.id" value="0"  onclick="hide();hint()"
+				required="required" checked="checked"> 不需要专利局收费收据 
+				<span style="color:red;">
 				<c:if test="${empty contactAddresses}">没有联系地址信息，需要邮寄请添加联系地址后再重新支付&nbsp;&nbsp;&nbsp;</c:if>
 				</span> </td>
 			</tr>
@@ -87,6 +59,41 @@
 				<input type="radio" name="paymentMethod.paymentMethodId" value="2" required="required">
 				银联卡支付 </td>
 			</tr>
+			
+			<tr style="display: none">
+			  <td>快递方式</td>
+			</tr>
+			<tr style="display: none">
+			  <td>
+			  	<input type="radio" name="express" value="0" checked="checked" required="required" onclick="hint()">
+				挂号信(<font color=red>免费</font>)
+				<input type="radio" name="express" value="1" required="required" onclick="hint()">
+				顺丰速运(￥20)
+			  </td>
+			</tr>
+			<tr style="display: none">
+			  <td>发票选择</td>
+			</tr>
+			<tr style="display: none">
+			  <td>
+			  	<span>国家知识产权局专利收费收据:</span>
+			  	<input type="radio" name="nationalInvoice" value="0" checked="checked" required="required" onclick="hint()">
+				不需要
+				<input type="radio" name="nationalInvoice" value="1" required="required" onclick="hint()">
+				需要
+			  </td>
+			</tr>
+			<tr style="display: none">
+			  <td>
+			  	<span>龙图腾公司专利官费代缴增值税发票:</span>
+			  	<input type="radio" name="companyInvoice" value="0" checked="checked" required="required" onclick="hidde();hint()">
+				不需要
+				<input type="radio" name="companyInvoice" value="1" required="required" onclick="showed();hint()">
+				需要
+				<input name="invoice" id="invoice" type="text" placeholder="请输入需要开具的发票抬头" style="height:16px;width: 250px;display: none;">
+			  </td>
+			</tr>
+				
 			<tr>
 			  <td>费用详情</td>
 			</tr>
@@ -131,14 +138,22 @@
 				</table>
 					<tr>
                         <td>
-                			<span id="span1" style="display:block">官费：￥${totalAmount};服务费: ￥100;快递费：￥20; 优惠:￥100</span>
-                			<span id="span2" style="display:none">官费：￥${totalAmount};服务费: ￥100;快递费：￥20; 优惠:￥120</span>
-                 		</td>
+                        	<span>
+                        		官费：￥<span id="patentFee">${totalAmount}</span>
+                        	</span>
+                         	<span>
+                        		服务费：￥<span id="serviceFee">20</span>
+                        	</span>   
+                         	<span>
+                        		快递费：￥<span id="expressFee">0</span>
+                        	</span> 
+                         	<span>
+                        		增值发票税：￥<span id="invoiceFee">0</span>
+                        	</span>                           	                        	                        	                    	
+                        </td>
 					</tr>
 					<tr>
-						<td colspan="10">优惠价: 
-						<span id="totalAmountSpan1" style="color:red;display:block">￥${totalAmount}</span>
-						<span id="totalAmountSpan2" style="color:red;display:none">￥${totalAmount+20}</span>
+						<td colspan="10">总价: ￥<span id="totalAmount">${totalAmount + 20}</span>
 						</td>
 					</tr>
 				</td>
@@ -149,6 +164,171 @@
 	</div>
 
 </div>
+<script type="text/javascript">
 
+	function hint(){
+		var postAddress=$("input:radio[name='postAddress.id']:checked").val();
+		var express=$("input:radio[name='express']:checked").val();
+		var nationalInvoice=$("input:radio[name='nationalInvoice']:checked").val();
+		var companyInvoice=$("input:radio[name='companyInvoice']:checked").val();
+		var patentAmount = parseInt($("#patentFee").text());
+		var serviceFeeAmount = parseInt($("#serviceFee").text());
+		var baseFee = patentAmount + serviceFeeAmount;
+		var expressFee = $("#expressFee");
+		var expressFeeAmount = 20;
+		var invoiceFee = $("#invoiceFee");
+		var totalAmount = $("#totalAmount");
+		var needPost = postAddress!=0;
+		var isShunFengExpress = express==1;
+		var needCompanyInvoice = companyInvoice==1;
+		
+		if (needPost) {
+			if (isShunFengExpress && needCompanyInvoice) {
+				expressFee.text(expressFeeAmount);
+				invoiceFee.text(parseInt(patentAmount * 0.1));
+				totalAmount.text(baseFee + expressFeeAmount + parseInt(patentAmount * 0.1));	
+			} else if (isShunFengExpress) {
+				expressFee.text(expressFeeAmount);
+				invoiceFee.text(0);
+				totalAmount.text(baseFee + expressFeeAmount);
+			} else if (needCompanyInvoice) {
+				expressFee.text(0);
+				invoiceFee.text(parseInt(patentAmount * 0.1));
+				totalAmount.text(baseFee + parseInt(patentAmount * 0.1));				
+			} else {
+				expressFee.text(0);
+				invoiceFee.text(0);
+				totalAmount.text(baseFee);	
+			}
+		} else {
+			expressFee.text(0);
+			invoiceFee.text(0);
+			totalAmount.text(baseFee);			
+		}
+		
+/* 		if(postAddress!=0 && express==0){
+			expressFee.text(0);
+			invoiceFee.text(0);
+			totalAmount.text(baseFee);
+		}
+		if(postAddress!=0 && express==0 && nationalInvoice==0){
+			expressFee.text(0);
+			invoiceFee.text(0);
+			totalAmount.text(baseFee);
+		}
+		if(postAddress!=0 && express==0 && nationalInvoice==1){
+			expressFee.text(0);
+			invoiceFee.text(0);
+			totalAmount.text(baseFee);
+		}
+		
+		if(postAddress!=0 && express==0 && invoice==1){
+			expressFee.text(0);
+			invoiceFee.text(parseInt(patentAmount * 0.1));
+			totalAmount.text(baseFee + parseInt(patentAmount * 0.1));
+		}
+		if(postAddress!=0 && express==1){
+			invoiceFee.text(0);
+			expressFee.text(expressFeeAmount);
+			totalAmount.text(baseFee + expressFeeAmount);
+		}
+		if(postAddress!=0 && express==1 && nationalInvoice==0){
+			invoiceFee.text(0);
+			expressFee.text(expressFeeAmount);
+			totalAmount.text(baseFee + expressFeeAmount);			
+		}
+		if(postAddress!=0 && express==1 && nationalInvoice==1){
+			invoiceFee.text(0);
+			expressFee.text(expressFeeAmount);
+			totalAmount.text(baseFee + expressFeeAmount);				
+		}
+		if(postAddress!=0 && express==1 && invoice==0){
+			invoiceFee.text(0);
+			expressFee.text(expressFeeAmount);
+			totalAmount.text(baseFee + expressFeeAmount);	
+		}
+		if(postAddress!=0 && express==1 && invoice==1){
+			expressFee.text(expressFeeAmount);
+			invoiceFee.text(parseInt(patentAmount * 0.1));
+			totalAmount.text(baseFee + expressFeeAmount + parseInt(patentAmount * 0.1));	
+		}
+		if(postAddress!=0 && express==1 && nationalInvoice==0 && invoice==0){
+			expressFee.text(expressFeeAmount);
+			invoiceFee.text(0);
+			totalAmount.text(baseFee + expressFeeAmount)
+		}
+		if(postAddress!=0 && express==1 && nationalInvoice==1 && invoice==0){
+			expressFee.text(expressFeeAmount);
+			invoiceFee.text(0);
+			totalAmount.text(baseFee + expressFeeAmount)			
+		}
+		if(postAddress!=0 && express==1 && nationalInvoice==0 && invoice==1){
+			expressFee.text(expressFeeAmount);
+			invoiceFee.text(parseInt(patentAmount * 0.1));
+			totalAmount.text(baseFee + expressFeeAmount + parseInt(patentAmount * 0.1));
+		}
+		if(postAddress!=0 && express==1 && nationalInvoice==1 && invoice==1){
+			expressFee.text(expressFeeAmount);
+			invoiceFee.text(parseInt(patentAmount * 0.1));
+			totalAmount.text(baseFee + expressFeeAmount + parseInt(patentAmount * 0.1));
+		}
+		if(postAddress!=0 && express==0 && nationalInvoice==0 && invoice==0){
+			expressFee.text(0);
+			invoiceFee.text(0);
+			totalAmount.text(baseFee);
+		}
+		if(postAddress!=0 && express==0 && nationalInvoice==1 && invoice==0){
+			expressFee.text(0);
+			invoiceFee.text(0);
+			totalAmount.text(baseFee);
+		}
+		if(postAddress!=0 && express==0 && nationalInvoice==1 && invoice==1){
+			expressFee.text(0);
+			invoiceFee.text(parseInt(patentAmount * 0.1));
+			totalAmount.text(baseFee + parseInt(patentAmount * 0.1));			
+		}
+		if(postAddress!=0 && express==0 && nationalInvoice==0 && invoice==1){
+			expressFee.text(0);
+			invoiceFee.text(parseInt(patentAmount * 0.1));
+			totalAmount.text(baseFee + parseInt(patentAmount * 0.1));			
+		} */
+	}
+
+	function hide(){
+		$.each($("#simple-table tr"), function(i){ 
+			if(i > 5 && i<11){ 
+				this.style.display = 'none'; 
+			} 
+			});
+		var express=$("input:radio[name='express']:checked").val();
+		var nationalInvoice=$("input:radio[name='nationalInvoice']:checked").val();
+		var invoice=$("input:radio[name='invoice']:checked").val();
+		var patentAmount = parseInt($("#patentFee").text());
+		var serviceFeeAmount = parseInt($("#serviceFee").text());
+		var baseFee = patentAmount + serviceFeeAmount;
+		var expressFee = $("#expressFee");
+		var expressFeeAmount = 20;
+		var invoiceFee = $("#invoiceFee");
+		var totalAmount = $("#totalAmount");
+		expressFee.text(0);
+		invoiceFee.text(0);
+		totalAmount.text(baseFee);
+		$("#invoice").val("");
+	}
+	function show(){
+		$.each($("#simple-table tr"), function(i){ 
+			if(i > 5 && i<11){ 
+				this.style.display = 'block'; 
+			} 
+			});
+	};
+	function showed(){
+ 		$("#invoice").show();
+ 	}
+ 	function hidde(){
+ 		$("#invoice").hide();
+ 		$("#invoice").val("");
+ 	}
+</script>
 </body>
 </html>

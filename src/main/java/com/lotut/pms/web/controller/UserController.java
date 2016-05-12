@@ -121,7 +121,6 @@ public class UserController {
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
 		model.addAttribute("contactAddresses", contactAddresses);
-		// FIXME add contact addresses page
 		return "contactAddresses_list";
 	}
 	

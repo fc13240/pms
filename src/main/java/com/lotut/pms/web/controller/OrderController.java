@@ -1,6 +1,8 @@
 package com.lotut.pms.web.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,13 +62,19 @@ public class OrderController {
 	}
 	
 	@RequestMapping(path="/createOrder")
-	public String createOrder(@RequestParam("feeIds")Long[] feeIds, @ModelAttribute @Valid Order order, Model model) {
+	public String createOrder(@RequestParam("feeIds")Long[] feeIds, @ModelAttribute @Valid Order order, Model model,
+			@RequestParam("express") Integer express,@RequestParam("nationalInvoice") Integer nationalInvoice,
+			@RequestParam("companyInvoice") Integer companyInvoice) {
 		final int ALIPAY = 1;
 		User user = PrincipalUtils.getCurrentPrincipal();
 		order.setOwner(user);
 		
 		List<Fee> fees = feeService.getFeesByIds(Arrays.asList(feeIds));
-		orderService.createOrder(order, fees);
+		
+		if(order.getPostAddress()==null || order.getPostAddress().getId()==0){
+			feeService.changeFeesInvoiceTitle(Arrays.asList(feeIds),"龙图腾信息技术有限公司");
+		}
+		orderService.createOrder(order, fees,express,nationalInvoice,companyInvoice);
 		
 		model.addAttribute("orderId", order.getId());
 		
