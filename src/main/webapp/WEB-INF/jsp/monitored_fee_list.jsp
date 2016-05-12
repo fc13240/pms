@@ -137,10 +137,11 @@
 			  <label id="lblSelect">
 			  <select id="paymentStatus" name="paymentStatus" >
 				<option value="">全部</option>
-				<option value="1">应缴</option>
+				<option value="1">应缴费</option>
 				<option value="2">已支付</option>
-				<option value="3">已缴</option>
-				<option value="4">已加入订单</option>
+				<option value="3">已缴费</option>
+				<option value="4">待支付</option>
+				<option value="5">缴费成功</option>
 			  </select>
 			  </label>
 			</li>
@@ -190,9 +191,8 @@
 					</a> <a href="javascript:delectFees()">
 					<button class="t-btn2">删除费用</button>
 					</a>
-					<span class="span3" style="font-size:14px;padding-left:320px">应缴费总额：￥${unpaidFeeCount }  </span>
+					<span class="span3" style="font-size:14px;padding-left:600px">应缴费总额：￥${unpaidFeeCount }  </span>
 					<span class="span3" style="font-size:14px;padding-left:20px">成功缴费总额：￥${totalFeeCount }</span>
-					
 				  </div>
 				  </span> 
 				</div>
