@@ -121,6 +121,18 @@
 					  <button type="button" class="btn btn-purple btn-sm">置为已缴费</button>
 					  </a> </div>
 				  </c:if>
+
+					<div style="height:10px;"></div>
+					<div> <a href="<s:url value='/order/updateUserOrderStatus.html'/>?orderId=<c:out value='${order.id}'/>">
+					  <button type="button" class="btn btn-purple btn-sm">置为已发货</button>
+					  </a> </div>
+			
+					<div style="height:10px;"></div>
+					<div> <a href="<s:url value='/order/updateUserOrderStatus.html'/>?orderId=<c:out value='${order.id}'/>">
+					  <button type="button" class="btn btn-purple btn-sm">置为已签收</button>
+					  </a> </div>
+		
+				  
 				</td>
 			  </tr>
 			</tbody>

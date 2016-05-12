@@ -493,3 +493,36 @@ ALTER TABLE notices ADD COLUMN notice_status_test VARCHAR(150);
 ALTER TABLE orders DROP COLUMN courier;
 ALTER TABLE orders DROP COLUMN courier_phone;
 ALTER TABLE orders ADD COLUMN order_payment_method VARCHAR(100);
+
+SET FOREIGN_KEY_CHECKS=0;
+-- ----------------------------
+-- Table structure for `order_send`
+-- ----------------------------
+DROP TABLE IF EXISTS `order_send`;
+CREATE TABLE `order_send` (
+  `id` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `status_send` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of order_send
+-- ----------------------------
+INSERT INTO order_send VALUES ('1', '未发货');
+INSERT INTO order_send VALUES ('2', '已发货');
+
+-- ----------------------------
+-- Table structure for `order_sign`
+-- ----------------------------
+DROP TABLE IF EXISTS `order_sign`;
+CREATE TABLE `order_sign` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `status_sign` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of order_sign
+-- ----------------------------
+INSERT INTO order_sign VALUES ('1', '未签收');
+INSERT INTO order_sign VALUES ('2', '已签收');
