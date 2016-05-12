@@ -29,7 +29,7 @@
 <!-- 	      <li><a href="#" class="">缴费期限</a></li> -->
 	      <li><a href="#" class="">缴费状态</a></li>
 	      <li><a href="#" class="selected">费用类型</a></li>
-	      <li><a href="#" class="">缴费期限</a></li>
+	      <li><a href="#" class="">期限监控</a></li>
 	    </ul>
 	  </div>
 	  <div id="menu_con" style="min-width:1100px;">
