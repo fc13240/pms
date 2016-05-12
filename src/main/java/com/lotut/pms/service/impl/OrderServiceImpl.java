@@ -160,16 +160,15 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int updateUserOrderStatus(long orderId) {
-		return orderDao.updateUserOrderStatus(orderId);
+	public int setUserOrderToPaid(long orderId) {
+		return orderDao.setUserOrderToPaid(orderId);
 	}
 	
 	@Override
-	public int updateUserOrderSend(long orderId) {
-		// TODO Auto-generated method stub
-		
-		return orderDao.updateUserOrderSend(orderId);
-	}	
+	public int setUserOrderToPaidSuccess(long orderId) {
+		return orderDao.setUserOrderToPaidSuccess(orderId);
+	}
+
 
 	@Override
 	public int updateUserOrderExpress(Map<String, String> expressInfo) {

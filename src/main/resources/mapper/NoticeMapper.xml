@@ -22,7 +22,6 @@
 	<resultMap type="Notice" id="NoticeResultMap">
 		<id property="noticeId" column="notice_id"/>
 		<result property="name" column="notice_name"/>
-        <result property="noticeStatusText" column="notice_status_text"/>
 		<result property="noticeSequence" column="notice_sequence"/>
 		<result property="dispatchSequence" column="dispatch_sequence"/>
 		<result property="dispatchDate" column="dispatch_date"/>
@@ -58,24 +57,6 @@
 		</association>		
 	</resultMap>
 	
-	<select id="getUserNotices" resultMap="NoticeResultMap">
-		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description, 
-			u.user_id as share_user_id,  u.username as share_username, 
-			n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date
-			if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
-			n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
-			npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
-			nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username
-		  from patents p join patent_status ps on p.patent_status = ps.patent_status_id
-			join user_patents up on p.patent_id = up.patent 
-			join notices n on n.patent = up.patent
-			left join users pu on pu.user_id = n.process_user
-			join users u on u.user_id = up.user
-			join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
-			join notice_process_status nps on nps.notice_process_status_id = n.process_status
-		 where n.patent in (select patent from user_patents where user = #{userId})	
-		 
-	</select>
 	<!-- 分页 -->
 	<select id="getUserNoticesCount" resultType="int">
 		select count(*) from notices n where patent in (select patent from user_patents where user = #{userId}) and n.process_status=1	
@@ -83,8 +64,8 @@
 	
 	<select id="getUserNoticesByPage" parameterType="Page" resultMap="NoticeResultMap">
 		select un.*, u.user_id as share_user_id,  u.username as share_username
-		from (select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description,
-				n.notice_id,n.notice_name,n.notice_status_text,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
+		from (select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id,p.patent_status_text, ps.patent_status_desc as patent_status_description,
+				n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
 				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
@@ -122,13 +103,13 @@
 		</association>		
 	</resultMap>	
 	<select id="getNoticeById" resultMap="SingleNoticeResultMap">
-		select n.notice_id, n.notice_sequence, n.dispatch_date, n.notice_name, n.zipfile_name, p.patent_id, p.app_no, p.patent_name
+		select n.notice_id, n.notice_sequence,p.patent_status_text, n.dispatch_date, n.notice_name, n.zipfile_name, p.patent_id, p.app_no, p.patent_name
 		  from notices n join patents p on n.patent = p.patent_id
 		 where notice_id = #{noticeId} 
 	</select>
 	
 	<select id="getUserNoticesByPatentType" resultMap="NoticeResultMap">
-		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description, 
+		select p.patent_id, p.app_no, p.patent_name,p.patent_status_text, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description, 
 			u.user_id as share_user_id,  u.username as share_username, 
 			n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
 			if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
@@ -147,7 +128,7 @@
 	</select>	
 	
 	<select id="getUserNoticesByType" resultMap="NoticeResultMap">
-		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description, 
+		select p.patent_id, p.app_no, p.patent_name,p.patent_status_text, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description, 
 			u.user_id as share_user_id,  u.username as share_username, 
 			n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
 			if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
@@ -165,57 +146,6 @@
 		   and n.patent in (select patent from user_patents where user = #{userId})	
 	</select>
 	
-	
-	<select id="searchUserNotices" parameterType="NoticeSearchCondition" resultMap="NoticeResultMap">
-		<if test="keyword != null">
-			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
-		</if>
-		select un.*, u.user_id as share_user_id,  u.username as share_username
-		from (select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description,
-				n.notice_id,n.notice_name,n.notice_status_text,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
-				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
-				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
-				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
-				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username
-				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
-						join notices n on n.patent = p.patent_id
-						left join users pu on pu.user_id = n.process_user
-						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
-						join notice_process_status nps on nps.notice_process_status_id = n.process_status
-			 where n.patent in (select patent from user_patents where user = #{userId})
-			 	<if test="patentType != null">
-			 		and p.patent_type = #{patentType}
-			 	</if>	
-			 	<if test="noticeProcessStatus != null">
-			 		and n.process_status = #{noticeProcessStatus}
-			 	</if>	
-			 	<if test="noticeType != null">
-			 		and n.notice_type = #{noticeType}
-			 	</if>	
-			 	<if test="paperApplyType != null">
-			 		and n.paper_apply_type = #{paperApplyType}
-			 	</if>		 			 	
-			 	<if test="startAppDate != null">
-			 		and p.app_date >= #{startAppDate}
-			 	</if>	
-			 	<if test="endAppDate != null">
-			 		<![CDATA[ and p.app_date <= #{endAppDate} ]]>
-			 	</if>	
-			 	<if test="startDispatchDate != null">
-			 		and n.dispatch_date >= #{startDispatchDate}
-			 	</if>	
-			 	<if test="endDispatchDate != null">
-			 		<![CDATA[ and n.dispatch_date <= #{endDispatchDate} ]]>
-			 	</if>		 	
-			 	<if test="keyword != null">
-					and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern} or
-						n.notice_name like #{keyword_pattern} or ps.patent_status_desc like #{keyword_pattern})
-				</if> 				 
-			  order by n.dispatch_date desc, p.app_person, p.patent_id
-				limit #{startIndex}, #{pageSize}) as un
-			join user_patents up on un.patent_id = up.patent
-		  	join users u on up.user = u.user_id			
-	</select>
 	
 	<select id="searchUserNoticesCount" resultType="int">
 		<if test="keyword != null">
@@ -279,8 +209,8 @@
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>
 		select un.*, u.user_id as share_user_id,  u.username as share_username
-		from (select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description,
-				n.notice_id,n.notice_name, n.notice_status_text, n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
+		from (select p.patent_id, p.app_no, p.patent_name,p.patent_status_text, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description,
+				n.notice_id,n.notice_name, n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
 				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
@@ -345,18 +275,17 @@
 	</select>
 	
 	<insert id="insertOrUpdateNotice" parameterType="Notice" useGeneratedKeys="true" keyProperty="noticeId">
-		insert into notices(notice_sequence, dispatch_sequence, time_limit, dispatch_date, notice_name, notice_code, zip_bid, dmh_flag, archive_no, zipfile_name, notice_type, patent,notice_status_text)
+		insert into notices(notice_sequence, dispatch_sequence, time_limit, dispatch_date, notice_name, notice_code, zip_bid, dmh_flag, archive_no, zipfile_name, notice_type, patent)
 		values(#{noticeSequence}, #{dispatchSequence, javaType=string, jdbcType=VARCHAR}, #{timeLimt, javaType=Integer, jdbcType=INTEGER},
 			   #{dispatchDate, javaType=date, jdbcType=DATE}, #{name, javaType=string, jdbcType=VARCHAR},
 			    #{noticeCode, javaType=string, jdbcType=VARCHAR},#{zipBid, javaType=string, jdbcType=VARCHAR}, #{dmhFlag, javaType=string, jdbcType=VARCHAR}, #{archiveNo, javaType=string, jdbcType=VARCHAR},
-			   #{zipfileName, javaType=string, jdbcType=VARCHAR}, #{noticeType.noticeTypeId, javaType=int, jdbcType=INTEGER}, #{patent.patentId},#{noticeStatusText, javaType=string, jdbcType=VARCHAR})
+			   #{zipfileName, javaType=string, jdbcType=VARCHAR}, #{noticeType.noticeTypeId, javaType=int, jdbcType=INTEGER}, #{patent.patentId})
 		on duplicate key update 
 			notice_sequence = #{noticeSequence},
 			<if test="dispatchSequence != null">dispatch_sequence = #{dispatchSequence},</if>
 			<if test="timeLimt != null">time_limit = #{timeLimt},</if>
 			<if test="dispatchDate != null">dispatch_date = #{dispatchDate},</if>
 			<if test="name != null">notice_name = #{name},</if>
-			<if test="noticeStatusText != null">notice_status_text = #{noticeStatusText},</if>
 			<if test="noticeCode != null">notice_code = #{noticeCode},</if>
 			<if test="zipBid != null">notice_code = #{zipBid},</if>
 			<if test="dmhFlag != null">dmh_flag = #{dmhFlag},</if>

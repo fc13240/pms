@@ -92,8 +92,7 @@ public class NoticeXmlParser {
 			noticeType.setNoticeTypeId(getNoticeTypeByName(noticeNameNode.getStringValue()));
 			notice.setNoticeType(noticeType);
 			
-			notice.setNoticeStatusText(patentTypeNode.getStringValue());
-			
+		
 			patent.setAppNo(appNoNode.getStringValue());
 			patent.setName(appNameNode ==  null ? null : appNameNode.getStringValue());
 			patent.setAppDate(appDateNode == null ? null : new SimpleDateFormat("yyyyMMdd").parse(appDateNode.getStringValue()));

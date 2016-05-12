@@ -37,11 +37,7 @@
 		<id property="statusId" column="order_status_id"/>
 		<result property="statusDescription" column="status_description"/>
 	</resultMap>
-	
-	<resultMap type="OrderSendStatus" id="OrderSendStatusResultMap">
-		<id property="statusSendId" column="status_send_id"/>
-		<result property="statusSendDescription" column="status_send_description"/>
-	</resultMap>		
+			
 		
 	<resultMap type="Order" id="OrderMap">
 		<id property="id" column="order_id"/>
@@ -67,29 +63,9 @@
 		<association property="orderStatus" resultMap="OrderStatusResultMap">
 		</association>
 		
-		<association property="orderSendStatus" resultMap="OrderSendStatusResultMap">
-		</association>	
-		
-		
-		
 		<collection property="feeList"  resultMap="com.lotut.pms.dao.mapper.FeeMapper.FeeResultMap"/>
 	</resultMap>
-	
-<!-- 	<select id="selectUserOrders" parameterType="int" resultMap="OrderMap"> -->
-<!-- 		select  o.create_time, o.amount totalAmount, o.order_id, ca.id as address_id, ca.receiver, os.order_status_id, os.status_description, -->
-<!-- 			p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc, -->
-<!-- 			f.fee_id, f.deadline, f.amount, f.fee_type, f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc -->
-<!-- 		from orders o join order_status os on o.order_status = os.order_status_id -->
-<!-- 			join contact_addresses ca on o.post_address = ca.id -->
-<!-- 			join order_items oi on oi.order_id = o.order_id  -->
-<!-- 			join fees f on oi.fee_id = f.fee_id -->
-<!-- 		  join patents p on f.patent = p.patent_id -->
-<!-- 			join patent_status ps on p.patent_status = ps.patent_status_id -->
-<!-- 			join fee_payment_status fs on f.fee_payment_status = fs.fee_payment_status_id -->
-<!-- 		where o.user = #{userId} -->
-<!-- 		order by o.create_time desc -->
-<!-- 	</select> -->
-	
+
 	<delete id="deleteUserOrder">
 		update fees set fee_payment_status = 1 where fee_id in (select fee_id from order_items where order_id =#{orderId});
 		delete from orders where order_id=#{orderId} and user = #{userId}
@@ -211,7 +187,7 @@
 	</update>
 
 	<select id="getAllNeedProcessOrderCount" resultType="int">
-		select count(*) from orders where order_status in (2, 4)
+		select count(*) from orders where order_status in (2,3,4)
 	</select>
 	
 	
@@ -222,15 +198,15 @@
 				od.order_status_id, od.status_description, p.patent_id, p.app_no, p.patent_name, 
 				p.app_person, ps.patent_status_id, ps.patent_status_desc, f.fee_id, f.deadline,
 				f.amount, f.fee_type, f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc,
-				od.user_id, od.username, od.name,od.status_send as status_send_description,od.order_send_status as  status_send_id
+				od.user_id, od.username, od.name
   		FROM 
-				(SELECT o.create_time, o.amount totalAmount, o.order_id,o.order_send_status, ca.id AS address_id, ca.receiver, os.order_status_id, os.status_description,
-					u.user_id, u.username, u.name,osd.status_send
+				(SELECT o.create_time, o.amount totalAmount, o.order_id, ca.id AS address_id, ca.receiver, os.order_status_id, os.status_description,
+					u.user_id, u.username, u.name
 				  FROM orders o JOIN order_status os ON o.order_status = os.order_status_id
-								LEFT JOIN order_send osd ON o.order_send_status = osd.id
+								
 					LEFT JOIN contact_addresses ca ON o.post_address = ca.id
 					join users u on o.user = u.user_id
-				 WHERE o.order_status in (2, 4)
+				 WHERE o.order_status in (2,3,4)
 				 ORDER BY o.create_time desc
 				limit #{startIndex}, #{pageSize}) od
 			  JOIN order_items oi ON od.order_id = oi.order_id
@@ -261,15 +237,17 @@
 		 order by order_status_id asc;
 	</select>
 	
-	<update id="updateUserOrderStatus" parameterType="long">
+	<update id="setUserOrderToPaidSuccess" parameterType="long">
+		update orders set order_status=3 where order_id=#{orderId};
+		update fees SET fee_payment_status=5 WHERE fee_id in
+		(select fee_id from order_items where order_id=#{orderId})
+	</update>
+	
+	<update id="setUserOrderToPaid" parameterType="long">
 		update orders set order_status=4 where order_id=#{orderId};
 		update fees SET fee_payment_status=3 WHERE fee_id in
 		(select fee_id from order_items where order_id=#{orderId})
 	</update>
-	
-	<update id="updateUserOrderSend" parameterType="long">
-		update orders set order_send_status=2 where order_id=#{orderId};
-	</update>	
 	
 	<update id="updateUserOrderExpress" parameterType="map">
 		UPDATE orders SET express_company=#{expressCompany},express_no=#{expressNo},send_time=#{startDispatchDate}
@@ -293,7 +271,7 @@
 				  FROM orders o JOIN order_status os ON o.order_status = os.order_status_id
 					LEFT JOIN contact_addresses ca ON o.post_address = ca.id
 					join users u on o.user = u.user_id
-				 WHERE o.order_status in (2, 4)
+				 WHERE o.order_status in (2,3,4)
 			 	<if test="orderStatus != null">
 			 		and o.order_status = #{orderStatus}
 			 	</if>	
@@ -326,7 +304,7 @@
 				  FROM orders o JOIN order_status os ON o.order_status = os.order_status_id
 					LEFT JOIN contact_addresses ca ON o.post_address = ca.id
 					join users u on o.user = u.user_id
-				 WHERE o.order_status in (2, 4)
+				 WHERE o.order_status in (2,3,4)
 			 	<if test="orderStatus != null">
 			 		and o.order_status = #{orderStatus}
 			 	</if>	

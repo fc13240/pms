@@ -260,7 +260,7 @@
 					<td><c:out value="${notice.patent.firstAppPerson}"/></td>
 					<td>
 					
-					${notice.noticeStatusText}
+					${notice.patent.patentStatusText}
 					
 					</td>
 					<td><c:out value="${notice.patent.shareUsersAsString}"/></td>

@@ -38,10 +38,9 @@ public interface OrderService {
 	
 	List<Order> getUserOrdersByStatus(int userId, int orderStatus);
 	
-	int updateUserOrderStatus(long orderId); 
+	int setUserOrderToPaid(long orderId);
 	
-	int updateUserOrderSend(long orderId); 
-	
+	int setUserOrderToPaidSuccess(long orderId); 
 	
 	int updateUserOrderExpress(Map<String, String> expressInfo);
 	

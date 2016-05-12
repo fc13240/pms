@@ -36,9 +36,9 @@ public interface OrderMapper {
 	int searchUserOrdersCount(OrderSearchCondition searchCondition);
 	List<Order> getAllNeedProcessOrders(Page page);
 	
-	int updateUserOrderStatus(@Param("orderId")long orderId);
+	int setUserOrderToPaid(@Param("orderId")long orderId);
 	
-	int updateUserOrderSend(@Param("orderId")long orderId);
+	int setUserOrderToPaidSuccess(@Param("orderId")long orderId);
 	
 	int updateUserOrderExpress(Map<String, String> expressInfo);
 	
