@@ -220,7 +220,24 @@ public class FeeServiceImpl implements FeeService {
 		}
 
 		@Override
+		public int getFeeAllCountByUser(int userId) {
+			return feeDao.getFeeAllCountByUser(userId);
+		}
+
+		@Override
+		public int getUnPaidCountByUser(int userId) {
+			return feeDao.getUnPaidCountByUser(userId);
+		}
+		
+		@Override
 		public void saveFee(Fee fee,int userId,long patentId) {
 			feeDao.saveFee(fee,userId,patentId);
 		}
+
+		@Override
+		public List<Fee> getFeesForPatentId(long patentId) {
+			// TODO Auto-generated method stub
+			return feeDao.getFeesForPatentId(patentId);
+		}
+
 }

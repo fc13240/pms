@@ -18,6 +18,8 @@ public class Fee {
 	private User owner;
 	private String invoiceTitle;
 	private Patent patent;
+	private long orderId;
+
 
 	public long getFeeId() {
 		return feeId;
@@ -110,5 +112,13 @@ public class Fee {
 
 	public void setPaymentStatus(FeePaymentStatus paymentStatus) {
 		this.paymentStatus = paymentStatus;
+	}
+
+	public long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
 	}
 }

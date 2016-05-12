@@ -165,7 +165,7 @@
 	                <td><c:out value="${patent.appPerson}"/></td>
 	                <td class="hidden-480"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
 	                <td><c:out value="${patent.patentType.typeDescription}"/></td>
-	                <td><c:out value="${patent.patentStatus.statusDescription}"/></td>
+	                <td><c:out value="${patent.patentStatusText}"/></td>
 	                <td><input style="width:60px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
 	                </td>
 	                <td><c:out value="${patent.shareUsersAsString}"/>

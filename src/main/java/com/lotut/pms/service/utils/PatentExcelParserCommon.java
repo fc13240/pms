@@ -31,11 +31,12 @@ public class PatentExcelParserCommon extends ExcelParser<Patent> {
 		String appNo = row.getCell(0).getStringCellValue();
 		String name = row.getCell(1).getStringCellValue();
 		String appPerson = row.getCell(2).getStringCellValue();
+		String patentStatusText=row.getCell(6).getStringCellValue();
 		Date appDate = parseDate(row.getCell(3).getStringCellValue());
 		int patentType = getPatentType(row.getCell(4).getStringCellValue());
 		int patentStatus = getPatentStatus(row.getCell(6).getStringCellValue());
 		
-		Patent patent = new Patent(appNo, name, appPerson, appDate, patentType, patentStatus);
+		Patent patent = new Patent(appNo, name, appPerson, appDate, patentType, patentStatus,patentStatusText);
 		
 		return patent;
 	}

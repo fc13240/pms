@@ -30,6 +30,8 @@ public interface NoticeService {
 	
 	List<NoticeProcessStatus> getAllNoticeProcessStatus();
 	
+
+	
 	List<NoticePaperApplyType> getAllNoticePaperApplyType();
 	
 	List<NoticeType> getAllNoticeType();

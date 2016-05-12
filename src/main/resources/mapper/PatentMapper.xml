@@ -20,6 +20,7 @@
 		<result property="name" column="patent_name"/>
 		<result property="appDate" column="app_date"/>
 		<result property="appPerson" column="app_person"/>
+		<result property="patentStatusText" column="patent_status_text"/>
 		<result property="inventPerson" column="invent_person"/>
 		<result property="internalCode" column="internal_code"/>
 		<result property="ownerId" column="patent_owner"/>
@@ -58,10 +59,10 @@
 	</sql>
 	
 	<select id="getUserPatents" parameterType="Page" resultMap="PatentWithShareUsers">
-		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, pt.patent_type_id, 
+		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, sp.patent_status_text,pt.patent_type_id, 
 							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username
-		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, p.patent_type,
-				ps.patent_status_id, ps.patent_status_desc
+		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date,  p.internal_code, p.patent_type,
+				ps.patent_status_id, ps.patent_status_desc, p.patent_status_text
 			from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
 		 where up.user = #{userId}
 		 order by p.app_date desc, p.app_person, p.patent_name
@@ -71,7 +72,7 @@
 	</select>	
 	
 	<select id="getPatentById" parameterType="long" resultMap="PatentWithShareUsers">
-		select p.patent_id, p.app_no, p.patent_name, pt.patent_type_desc, p.app_date, p.app_person, ps.patent_status_desc, u.user_id, u.username
+		select p.patent_id, p.app_no, p.patent_name, pt.patent_type_desc, p.app_date,p.patent_status_text, p.app_person, ps.patent_status_desc, u.user_id, u.username
 		  from patents p left join patent_status ps on p.patent_status = ps.patent_status_id left join patent_types pt on p.patent_type = pt.patent_type_id
 					join user_patents up on p.patent_id = up.patent join users u on u.user_id = up.user 
 		 where up.patent = #{patentId};	
@@ -82,12 +83,13 @@
 		<result property="appNo" column="app_no"/>
 		<result property="name" column="patent_name"/>
 		<result property="appDate" column="app_date"/>
+		<result property="patentStatuText" column="patent_status_text"/>
 		<result property="appPerson" column="app_person"/>	
 		<association property="patentStatus" resultMap="PatentStatusResultMap"/>
 	</resultMap>
 
 	<select id="getPatentsByIds" parameterType="list" resultMap="PatentByIdsResultMap">
-		select p.patent_id, p.app_no, p.app_person, p.patent_name, p.app_date, ps.patent_status_id, ps.patent_status_desc
+		select p.patent_id, p.app_no, p.app_person, p.patent_name, p.app_date,p.patent_status_text, ps.patent_status_id, ps.patent_status_desc
 		  from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where p.patent_id in 
 			<foreach item="patentId" collection="patentIds"
@@ -123,10 +125,10 @@
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
-		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, pt.patent_type_id, 
+		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date,sp.patent_status_text, pt.patent_type_id, 
 							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username
 		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, p.patent_type,
-				ps.patent_status_id, ps.patent_status_desc
+				ps.patent_status_id, ps.patent_status_desc, p.patent_status_text
 				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
 		 		where up.user = #{userId}
 		 		<if test="patentType != null">
@@ -165,7 +167,7 @@
 		 		</if>	
 			 	<if test="patentStatus != null">
 			 		and p.patent_status = #{patentStatus}
-			 	</if>	
+			 	</if>
 			 	<if test="startAppDate != null">
 			 		and p.app_date >= #{startAppDate}
 			 	</if>	
@@ -189,7 +191,7 @@
 		 	</if>	
 		 	<if test="patentStatus != null">
 		 		and p.patent_status = #{patentStatus}
-		 	</if>	
+		 	</if>		
 		 	<if test="startAppDate != null">
 		 		and p.app_date >= #{startAppDate}
 		 	</if>	
@@ -241,18 +243,20 @@
 	</select>	
 	
 	<insert id="insertOrUpdatePatent" parameterType="Patent" useGeneratedKeys="true" keyProperty="patentId">
-		insert into patents(app_no, patent_name, app_person, app_date, patent_type, patent_status, patent_owner)
-		values(#{appNo}, #{name,javaType=string,jdbcType=VARCHAR}, #{appPerson,javaType=string,jdbcType=VARCHAR}, #{appDate,javaType=date,jdbcType=DATE}, 
+		insert into patents(app_no, patent_name, app_person, app_date,patent_status_text, patent_type, patent_status, patent_owner)
+		values(#{appNo}, #{name,javaType=string,jdbcType=VARCHAR}, #{appPerson,javaType=string,jdbcType=VARCHAR}, #{appDate,javaType=date,jdbcType=DATE},
+		 #{patentStatusText,javaType=string,jdbcType=VARCHAR}, 
 			   #{patentType.patentTypeId,jdbcType=INTEGER}, #{patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER}, #{ownerId})
 		on duplicate key update 
 			patent_name = #{name,javaType=string,jdbcType=VARCHAR}, app_person = #{appPerson,javaType=string,jdbcType=VARCHAR},
-			app_date = #{appDate,javaType=date,jdbcType=DATE}, patent_type = #{patentType.patentTypeId},
+			app_date = #{appDate,javaType=date,jdbcType=DATE},
+			patent_status_text = #{patentStatusText,javaType=int,jdbcType=VARCHAR}, patent_type = #{patentType.patentTypeId},
 			patent_status = #{patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER}
 	</insert>
 	
 	<insert id="insertPatent" parameterType="Patent" useGeneratedKeys="true" keyProperty="patentId">
 		insert into patents(app_no, patent_name, app_date, patent_type, patent_owner)
-		values(#{appNo}, #{name,javaType=string,jdbcType=VARCHAR}, #{appDate,javaType=date,jdbcType=DATE}, 
+		values(#{appNo}, #{name,javaType=string,jdbcType=VARCHAR}, #{appDate,javaType=date,jdbcType=DATE},
 			   #{patentType.patentTypeId,jdbcType=INTEGER}, #{ownerId})
 	</insert>
 	

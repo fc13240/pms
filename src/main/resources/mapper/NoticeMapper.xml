@@ -16,11 +16,13 @@
 	<resultMap type="NoticeType" id="NoticeTypeResultMap">
 		<id property="noticeTypeId" column="notice_type_id"/>
 		<result property="noticeTypeDescription" column="notice_type_desc"/>	
-	</resultMap>	
+	</resultMap>
+	
 	
 	<resultMap type="Notice" id="NoticeResultMap">
 		<id property="noticeId" column="notice_id"/>
 		<result property="name" column="notice_name"/>
+        <result property="noticeStatusText" column="notice_status_text"/>
 		<result property="noticeSequence" column="notice_sequence"/>
 		<result property="dispatchSequence" column="dispatch_sequence"/>
 		<result property="dispatchDate" column="dispatch_date"/>
@@ -43,6 +45,7 @@
 			<id property="patentId" column="patent_id"/>
 			<result property="appNo" column="app_no"/>
 			<result property="name" column="patent_name"/>
+			<result property="patentStatusText" column="patent_status_text"/>
 			<result property="appPerson" column="app_person"/>
 			<association property="patentStatus" javaType="PatentStatus">
 				<id property="patentStatusId" column="patent_status_id"/>
@@ -58,7 +61,7 @@
 	<select id="getUserNotices" resultMap="NoticeResultMap">
 		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description, 
 			u.user_id as share_user_id,  u.username as share_username, 
-			n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
+			n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date
 			if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 			n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 			npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
@@ -81,7 +84,7 @@
 	<select id="getUserNoticesByPage" parameterType="Page" resultMap="NoticeResultMap">
 		select un.*, u.user_id as share_user_id,  u.username as share_username
 		from (select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description,
-				n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
+				n.notice_id,n.notice_name,n.notice_status_text,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
 				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
@@ -106,6 +109,7 @@
 	<resultMap type="Notice" id="SingleNoticeResultMap">
 		<id property="noticeId" column="notice_id"/>
 		<result property="name" column="notice_name"/>
+		<result property="noticeStatusText" column="notice_status_text"/>
 		<result property="noticeSequence" column="notice_sequence"/>
 		<result property="dispatchDate" column="dispatch_date"/>
 		<result property="zipfileName" column="zipfile_name"/>
@@ -113,6 +117,8 @@
 			<id property="patentId" column="patent_id"/>
 			<result property="appNo" column="app_no"/>
 			<result property="name" column="patent_name"/>
+			<result property="patentStatusText" column="patent_status_text"/>
+			
 		</association>		
 	</resultMap>	
 	<select id="getNoticeById" resultMap="SingleNoticeResultMap">
@@ -166,7 +172,7 @@
 		</if>
 		select un.*, u.user_id as share_user_id,  u.username as share_username
 		from (select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description,
-				n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
+				n.notice_id,n.notice_name,n.notice_status_text,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
 				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
@@ -274,7 +280,7 @@
 		</if>
 		select un.*, u.user_id as share_user_id,  u.username as share_username
 		from (select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description,
-				n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
+				n.notice_id,n.notice_name, n.notice_status_text, n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
 				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
@@ -339,17 +345,18 @@
 	</select>
 	
 	<insert id="insertOrUpdateNotice" parameterType="Notice" useGeneratedKeys="true" keyProperty="noticeId">
-		insert into notices(notice_sequence, dispatch_sequence, time_limit, dispatch_date, notice_name, notice_code, zip_bid, dmh_flag, archive_no, zipfile_name, notice_type, patent)
+		insert into notices(notice_sequence, dispatch_sequence, time_limit, dispatch_date, notice_name, notice_code, zip_bid, dmh_flag, archive_no, zipfile_name, notice_type, patent,notice_status_text)
 		values(#{noticeSequence}, #{dispatchSequence, javaType=string, jdbcType=VARCHAR}, #{timeLimt, javaType=Integer, jdbcType=INTEGER},
-			   #{dispatchDate, javaType=date, jdbcType=DATE}, #{name, javaType=string, jdbcType=VARCHAR}, #{noticeCode, javaType=string, jdbcType=VARCHAR},
-			   #{zipBid, javaType=string, jdbcType=VARCHAR}, #{dmhFlag, javaType=string, jdbcType=VARCHAR}, #{archiveNo, javaType=string, jdbcType=VARCHAR},
-			   #{zipfileName, javaType=string, jdbcType=VARCHAR}, #{noticeType.noticeTypeId, javaType=int, jdbcType=INTEGER}, #{patent.patentId})
+			   #{dispatchDate, javaType=date, jdbcType=DATE}, #{name, javaType=string, jdbcType=VARCHAR},
+			    #{noticeCode, javaType=string, jdbcType=VARCHAR},#{zipBid, javaType=string, jdbcType=VARCHAR}, #{dmhFlag, javaType=string, jdbcType=VARCHAR}, #{archiveNo, javaType=string, jdbcType=VARCHAR},
+			   #{zipfileName, javaType=string, jdbcType=VARCHAR}, #{noticeType.noticeTypeId, javaType=int, jdbcType=INTEGER}, #{patent.patentId},#{noticeStatusText, javaType=string, jdbcType=VARCHAR})
 		on duplicate key update 
 			notice_sequence = #{noticeSequence},
 			<if test="dispatchSequence != null">dispatch_sequence = #{dispatchSequence},</if>
 			<if test="timeLimt != null">time_limit = #{timeLimt},</if>
 			<if test="dispatchDate != null">dispatch_date = #{dispatchDate},</if>
 			<if test="name != null">notice_name = #{name},</if>
+			<if test="noticeStatusText != null">notice_status_text = #{noticeStatusText},</if>
 			<if test="noticeCode != null">notice_code = #{noticeCode},</if>
 			<if test="zipBid != null">notice_code = #{zipBid},</if>
 			<if test="dmhFlag != null">dmh_flag = #{dmhFlag},</if>

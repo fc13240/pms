@@ -46,6 +46,11 @@ public class NoticeXmlParser {
 		return noticeXmlFiles;
 	}
 	
+	/**
+	 * @param noticeXmlFile
+	 * @param zipFileName
+	 * @return
+	 */
 	public static Notice parseNoticeXmlFile(File noticeXmlFile, String zipFileName) {
 		try {
 			Notice notice = new Notice();
@@ -83,8 +88,11 @@ public class NoticeXmlParser {
 			notice.setArchiveNo(archiveNoNode ==  null ? null : archiveNoNode.getStringValue());
 			notice.setZipfileName(zipFileName);
 			NoticeType noticeType = new NoticeType();
+			
 			noticeType.setNoticeTypeId(getNoticeTypeByName(noticeNameNode.getStringValue()));
 			notice.setNoticeType(noticeType);
+			
+			notice.setNoticeStatusText(patentTypeNode.getStringValue());
 			
 			patent.setAppNo(appNoNode.getStringValue());
 			patent.setName(appNameNode ==  null ? null : appNameNode.getStringValue());

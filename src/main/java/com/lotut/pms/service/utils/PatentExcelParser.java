@@ -69,17 +69,15 @@ public class PatentExcelParser {
 		String appNo = row.getCell(0).getStringCellValue().trim();
 		String name = row.getCell(1).getStringCellValue();
 		String appPerson = row.getCell(2).getStringCellValue();
+		String patentStatusText=row.getCell(6).getStringCellValue();
 		Date appDate = parseDate(row.getCell(3).getStringCellValue());
 		int patentType = getPatentType(row.getCell(4).getStringCellValue());
-		int patentStatus = getPatentStatus(row.getCell(6).getStringCellValue());
+		int patentStatus = getPatentStatus(patentStatusText);
 		int userId = PrincipalUtils.getCurrentUserId();
-		
-		Patent patent = new Patent(appNo, name, appPerson, appDate, patentType, patentStatus);
+		Patent patent = new Patent(appNo, name, appPerson ,appDate, patentType, patentStatus,patentStatusText);
 		patent.setOwnerId(userId);
-		
 		return patent;
 	}
-	
 	private static int getPatentType(String patentTypeDescription) {
 		final String INVENT_TYPE = "发明";
 		final String PRACTICAL_TYPE = "实用";

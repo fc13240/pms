@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lotut.pms.domain.Page;
 
 public class WebUtils {
 	public static void writeJsonStrToResponse(HttpServletResponse response, Object value) throws IOException {
@@ -20,11 +21,21 @@ public class WebUtils {
 	
 	public static int getPageSize(HttpSession session) {
 		final int DEFAULT_PAGE_SIZE = 10;
-		
+		System.out.println("-----1----");
 		if (session.getAttribute("pageSize") == null) {
+			System.out.println("-----2-----");
+			System.out.println(session.getAttribute("pageSize")+"-ppp");
 			return DEFAULT_PAGE_SIZE;
 		}
 		
 		return (int) session.getAttribute("pageSize");
+	}
+	
+	public static Integer getDeadlineStatus(HttpSession session){
+		final Integer DEADLINESTATUS= 0;
+		if(session.getAttribute("deadlineStatus")==null){
+			return DEADLINESTATUS;
+		}
+		return Integer.valueOf(session.getAttribute("deadlineStatus").toString());
 	}
 }

@@ -20,7 +20,7 @@
       <li class=""> <a href="<s:url value='/sharePatent/list.html?currentPage=1'/>"> <i class="menu-icon fa fa-list-alt"></i> <span class="menu-text"> 分享管理 </span> </a> <b class="arrow"></b> </li>
       <li class=""> <a href="<s:url value='/patent/showUploadForm.html'/>"> <i class="menu-icon fa fa-calendar"></i> <span class="menu-text"> 添加专利 </span> </a> <b class="arrow"></b> </li>
       <li class=""> <a href="<s:url value='/notice/showUploadForm.html'/>"> <i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 添加通知书 </span> </a> <b class="arrow"></b> </li>
-      <li class=""> <a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>"><i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 官费监控 </span> </a> </li>
+      <li class=""> <a href="<s:url value='/fee/monitoredFeeList.html?page.currentPage=1'/>"><i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 官费监控 </span> </a> </li>
       <li class=""> <a href="<s:url value='/user/detail.html'/>"> <i class="menu-icon fa fa-calendar"></i> <span class="menu-text"> 个人信息 </span> </a> <b class="arrow"></b> </li>
       <li class=""> <a href="<s:url value='/user/getContactAddresses.html'/>"> <i class="menu-icon fa fa-calendar"></i> <span class="menu-text"> 联系地址 </span> </a> <b class="arrow"></b> </li>
       <li class=""> <a href="<s:url value='/order/list.html'/>"> <i class="menu-icon fa fa-calendar"></i> <span class="menu-text"> 订单列表 </span> </a> <b class="arrow"></b> </li>
