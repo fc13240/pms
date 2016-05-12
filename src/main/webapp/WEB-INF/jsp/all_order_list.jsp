@@ -58,6 +58,7 @@
   
   <!-- 搜索结束 -->
 		<c:forEach items="${orders}" var="order">
+
 		<form action="<s:url value='/fee/exportFees.html'/>" method="get" target="feeExportFrame">
    		 <c:forEach items="${order.feeList}" var="fee" varStatus="status">
       		<input type="hidden" name="fees" value="${fee.feeId}">
@@ -126,6 +127,7 @@
 			</tbody>
 		  </table>
 		  </form>
+
 		</c:forEach>
 		<!-- 分页功能 start -->
 		<div class="row">

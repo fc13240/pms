@@ -163,6 +163,13 @@ public class OrderServiceImpl implements OrderService {
 	public int updateUserOrderStatus(long orderId) {
 		return orderDao.updateUserOrderStatus(orderId);
 	}
+	
+	@Override
+	public int updateUserOrderSend(long orderId) {
+		// TODO Auto-generated method stub
+		
+		return orderDao.updateUserOrderSend(orderId);
+	}	
 
 	@Override
 	public int updateUserOrderExpress(Map<String, String> expressInfo) {
@@ -189,4 +196,7 @@ public class OrderServiceImpl implements OrderService {
 		feeDao.updateMonitorStatus(feeIds, monitorStatus);
 		
 	}
+
+
+
 }

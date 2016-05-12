@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 public class Order {
 	private long id;
 	private OrderStatus orderStatus;
+	private OrderSendStatus orderSendStatus;
 	@NotNull
 	private ContactAddress postAddress;
 	private int amount;
@@ -28,6 +29,7 @@ public class Order {
 	private int expressFee;
 	private int serviceFee;
 	private int invoiceFee;
+	private int order_send_status;
 	
 	public int getExpressFee() {
 		return expressFee;

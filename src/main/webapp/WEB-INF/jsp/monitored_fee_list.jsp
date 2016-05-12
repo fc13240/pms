@@ -221,7 +221,7 @@
 						  <input type="checkbox" class="fee-check-item" fee="${fee.feeId}" amount="${fee.amount}" onclick="calcTotalAmount()" paymentStatus="${fee.paymentStatus.paymentStatusId}">
 						  </span> </td>
 						<td class="center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
-						<td>${fee.patent.appNo}</td>
+						<td><a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a></td>
 						<td>${fee.patent.name}</td>
 						<td>${fee.patent.firstAppPerson}</td>
 						<td>${fee.patent.patentStatus.statusDescription}</td>

@@ -210,7 +210,27 @@ public class OrderController {
 				return "";
 			}
 	}
-	
+
+	@RequestMapping(path="/updateUserOrderSend", method=RequestMethod.GET)
+	public String updateUserOrderSend(@RequestParam("orderId")long orderId,Model model,Page page){
+			if (page.getCurrentPage() < 1) {
+				page.setCurrentPage(1);
+			}
+				int userId = PrincipalUtils.getCurrentUserId();
+				page.setUserId(userId);
+				if (PrincipalUtils.isOrderProcessor()) {
+					orderService.updateUserOrderSend(orderId);
+					int totalCount=(int)orderService.getAllNeedProcessOrderCount();
+					page.setTotalRecords(totalCount);
+					List<Order> orders = orderService.getAllNeedProcessOrders(page);
+					model.addAttribute("orders", orders);
+					model.addAttribute("page",page);
+					return "all_order_list";
+				}else{
+					//澧炲姞淇敼鏉冮檺鎻愮ず
+					return "";
+				}
+		}
 	//澧炲姞鐢ㄦ埛璁㈠崟蹇�掍俊鎭�
 	@RequestMapping(path="/updateUserOrderContactAddresses", method=RequestMethod.POST)
 	public String updateUserOrderExpress(HttpServletRequest request,Model model){
