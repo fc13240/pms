@@ -186,16 +186,16 @@
 			  <td><table class="table table-striped table-bordered table-hover">
 				  <thead>
 					<tr class="simple_bag">
-					  <th>快递公司</th>
-					  <th>快递单号</th>
 					  <th>发货时间</th>
+					  <th>快递单号</th>
+					  <th>快递公司</th>
 					</tr>
 				  </thead>
 				  <tbody>
 					<tr>
-					  <td>${order.expressCompany}</td>
-					  <td>${order.expressNo}</td>
 					  <td><fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/></td>
+					  <td>${order.expressNo}</td>
+					  <td>${order.expressCompany}</td>
 					</tr>
 				  </tbody>
 				</table></td>
