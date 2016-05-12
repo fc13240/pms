@@ -36,15 +36,27 @@
 				  <thead>
 					<tr class="simple_bag">
 					  <th>订单编号</th>
-					  <th>支付方式</th>
 					  <th>下单时间</th>
+					  <th>支付时间</th>
+					  <th>支付方式</th>
+					  <th>快递方式</th>
 					</tr>
 				  </thead>
 				  <tbody>
 					<tr>
 					  <td>${order.id}</td>
-					  <td>${order.paymentMethod.paymentMethod}</td>
 					  <td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+					  <td><fmt:formatDate value="${order.payTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+					  <td>${order.paymentMethod.paymentMethod}</td>
+					  <c:if test="${order.expressFee == 20}">
+					   <td>顺丰速运</td>
+					  </c:if>
+					  <c:if test="${order.expressFee == 0 && order.postAddress != null}">
+					   <td>挂号信</td>
+					  </c:if>
+					  <c:if test="${order.expressFee == 0 && order.postAddress == null}">
+					   <td>不快递</td>
+					  </c:if>
 					</tr>
 				  </tbody>
 				</table></td>
@@ -177,10 +189,6 @@
 				  <input type="text" name="expressNo" id="expressNo" value="${order.expressNo}" required/>
 				  快递公司:
 				  <input type="text" name="expressCompany" id="expressCompany" value="${order.expressCompany}" required/>
-<!-- 				  快递员姓名: -->
-				  <input type="hidden" name="courier" id="courier"  value="${order.courier}" />
-<!-- 				  快递员联系方式: -->
-				  <input type="hidden" name="courierPhone" id="courierPhone" value="${order.courierPhone}" />
 				  <div style="margin-top:10px;">
 					<div class="input-group">
 					  <div style="float:left;line-height: 32px;">发送时间</div>
