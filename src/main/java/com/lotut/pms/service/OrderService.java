@@ -11,7 +11,8 @@ import com.lotut.pms.domain.OrderStatus;
 import com.lotut.pms.domain.Page;
 
 public interface OrderService {
-	int createOrder(Order order, List<Fee> fees);
+	int createOrder(Order order, List<Fee> fees,Integer express,Integer nationalInvoice,
+			Integer companyInvoice);
 	List<Order> getUserOrders(int userId);
 	Order getOrderById(long orderId);
 	
@@ -39,6 +40,9 @@ public interface OrderService {
 	
 	int updateUserOrderStatus(long orderId); 
 	
+	int updateUserOrderSend(long orderId); 
+	
+	
 	int updateUserOrderExpress(Map<String, String> expressInfo);
 	
 	List<Order> getAllNeedProcessOrdersBySearch(AdminOrderSearchCondition searchCondition);
@@ -48,4 +52,6 @@ public interface OrderService {
 	Map<String, Map<String, String>> searchUserOrdersByOrderStatus(int userId);
 	
 	void changeMonitorStatus(List<Long> feeIds,int monitorStatus);
+	
+	
 }

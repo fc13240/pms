@@ -38,6 +38,8 @@ public interface OrderMapper {
 	
 	int updateUserOrderStatus(@Param("orderId")long orderId);
 	
+	int updateUserOrderSend(@Param("orderId")long orderId);
+	
 	int updateUserOrderExpress(Map<String, String> expressInfo);
 	
 	List<Order> getAllNeedProcessOrdersBySearch(AdminOrderSearchCondition searchCondition);
@@ -48,4 +50,5 @@ public interface OrderMapper {
 	
 	@MapKey("orderStatus")
 	Map<String, Map<String, String>> searchUserOrdersByOrderStatus(int userId);
+	
 }

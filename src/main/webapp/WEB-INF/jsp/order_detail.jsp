@@ -126,6 +126,18 @@
 		  </table>
 		</c:if>
 		<table class="table table-striped table-bordered table-hover">
+		 <thead>
+			<tr class="simple_bag">
+			  <th>龙图腾增值税发票抬头</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		    	<td>${order.invoice}</td>
+		    </tr>
+		  </tbody>
+		</table>
+		<table class="table table-striped table-bordered table-hover">
 		  <thead>
 			<tr class="simple_bag">
 			  <th> 快递信息 </th>
@@ -145,7 +157,7 @@
 					<tr>
 					  <td>${order.expressCompany}</td>
 					  <td>${order.expressNo}</td>
-				  <td><fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/></td>
+					  <td><fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/></td>
 					</tr>
 				  </tbody>
 				</table></td>

@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 public class Order {
 	private long id;
 	private OrderStatus orderStatus;
+	private OrderSendStatus orderSendStatus;
 	@NotNull
 	private ContactAddress postAddress;
 	private int amount;
@@ -22,8 +23,33 @@ public class Order {
 	private String courier;
 	private String courierPhone;
 	private List<Fee> feeList;
+	private String invoice;
 	@NotNull
 	private PaymentMethod paymentMethod;
+	private int expressFee;
+	private int serviceFee;
+	private int invoiceFee;
+	private int order_send_status;
+	
+	public int getExpressFee() {
+		return expressFee;
+	}
+	public void setExpressFee(int expressFee) {
+		this.expressFee = expressFee;
+	}
+	public int getServiceFee() {
+		return serviceFee;
+	}
+	public void setServiceFee(int serviceFee) {
+		this.serviceFee = serviceFee;
+	}
+	public int getInvoiceFee() {
+		return invoiceFee;
+	}
+	public void setInvoiceFee(int invoiceFee) {
+		this.invoiceFee = invoiceFee;
+	}
+
 	
 	public long getId() {
 		return id;
@@ -38,16 +64,9 @@ public class Order {
 		this.orderStatus = orderStatus;
 	}
 	
-	public int getPostFee() {
-		if (postAddress != null && postAddress.getId() != 0) {
-			return 20;
-		}
-		
-		return 0;
-	}
 	
 	public int getTotalAmount() {
-		return getAmount() + getPostFee();
+		return getAmount();
 	}
 
 	public int getAmount() {
@@ -133,6 +152,12 @@ public class Order {
 	}
 	public void setPayTime(Date payTime) {
 		this.payTime = payTime;
+	}
+	public String getInvoice() {
+		return invoice;
+	}
+	public void setInvoice(String invoice) {
+		this.invoice = invoice;
 	}
 	
 }

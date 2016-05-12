@@ -1,6 +1,8 @@
 package com.lotut.pms.web.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,13 +63,19 @@ public class OrderController {
 	}
 	
 	@RequestMapping(path="/createOrder")
-	public String createOrder(@RequestParam("feeIds")Long[] feeIds, @ModelAttribute @Valid Order order, Model model) {
+	public String createOrder(@RequestParam("feeIds")Long[] feeIds, @ModelAttribute @Valid Order order, Model model,
+			@RequestParam("express") Integer express,@RequestParam("nationalInvoice") Integer nationalInvoice,
+			@RequestParam("companyInvoice") Integer companyInvoice) {
 		final int ALIPAY = 1;
 		User user = PrincipalUtils.getCurrentPrincipal();
 		order.setOwner(user);
 		
 		List<Fee> fees = feeService.getFeesByIds(Arrays.asList(feeIds));
-		orderService.createOrder(order, fees);
+		
+		if(order.getPostAddress()==null || order.getPostAddress().getId()==0){
+			feeService.changeFeesInvoiceTitle(Arrays.asList(feeIds),"龙图腾信息技术有限公司");
+		}
+		orderService.createOrder(order, fees,express,nationalInvoice,companyInvoice);
 		
 		model.addAttribute("orderId", order.getId());
 		
@@ -201,7 +210,27 @@ public class OrderController {
 				return "";
 			}
 	}
-	
+
+	@RequestMapping(path="/updateUserOrderSend", method=RequestMethod.GET)
+	public String updateUserOrderSend(@RequestParam("orderId")long orderId,Model model,Page page){
+			if (page.getCurrentPage() < 1) {
+				page.setCurrentPage(1);
+			}
+				int userId = PrincipalUtils.getCurrentUserId();
+				page.setUserId(userId);
+				if (PrincipalUtils.isOrderProcessor()) {
+					orderService.updateUserOrderSend(orderId);
+					int totalCount=(int)orderService.getAllNeedProcessOrderCount();
+					page.setTotalRecords(totalCount);
+					List<Order> orders = orderService.getAllNeedProcessOrders(page);
+					model.addAttribute("orders", orders);
+					model.addAttribute("page",page);
+					return "all_order_list";
+				}else{
+					//澧炲姞淇敼鏉冮檺鎻愮ず
+					return "";
+				}
+		}
 	//澧炲姞鐢ㄦ埛璁㈠崟蹇�掍俊鎭�
 	@RequestMapping(path="/updateUserOrderContactAddresses", method=RequestMethod.POST)
 	public String updateUserOrderExpress(HttpServletRequest request,Model model){

@@ -58,6 +58,7 @@
   
   <!-- 搜索结束 -->
 		<c:forEach items="${orders}" var="order">
+
 		<form action="<s:url value='/fee/exportFees.html'/>" method="get" target="feeExportFrame">
    		 <c:forEach items="${order.feeList}" var="fee" varStatus="status">
       		<input type="hidden" name="fees" value="${fee.feeId}">
@@ -121,23 +122,12 @@
 					  <button type="button" class="btn btn-purple btn-sm">置为已缴费</button>
 					  </a> </div>
 				  </c:if>
-
-					<div style="height:10px;"></div>
-					<div> <a href="<s:url value='/order/updateUserOrderStatus.html'/>?orderId=<c:out value='${order.id}'/>">
-					  <button type="button" class="btn btn-purple btn-sm">置为已发货</button>
-					  </a> </div>
-			
-					<div style="height:10px;"></div>
-					<div> <a href="<s:url value='/order/updateUserOrderStatus.html'/>?orderId=<c:out value='${order.id}'/>">
-					  <button type="button" class="btn btn-purple btn-sm">置为已签收</button>
-					  </a> </div>
-		
-				  
 				</td>
 			  </tr>
 			</tbody>
 		  </table>
 		  </form>
+
 		</c:forEach>
 		<!-- 分页功能 start -->
 		<div class="row">

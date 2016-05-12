@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.dao.FeeDao;
 import com.lotut.pms.dao.OrderDao;
@@ -21,6 +22,10 @@ public class OrderServiceImpl implements OrderService {
 	private OrderDao orderDao;
 	private FeeDao feeDao;
 	
+	private static final int SERVICE_FEE = 20;
+	private static final int EXPRESS_FEE = 20;
+	private static final double INVOCIE_RATE = 0.1;
+	
 	public OrderServiceImpl(OrderDao orderDao, FeeDao feeDao) {
 		this.orderDao = orderDao;
 		this.feeDao = feeDao;
@@ -28,15 +33,37 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	@Transactional
-	public int createOrder(Order order, List<Fee> fees) {
+	public int createOrder(Order order, List<Fee> fees,Integer express,Integer nationalInvoice,
+			Integer companyInvoice) {
+		
 		int totalAmount = 0;
+		int patentFeeAmount = 0;
 		
 		for (Fee fee: fees) {
-			totalAmount += fee.getAmount();
+			patentFeeAmount += fee.getAmount();
 		}
 		
-		order.setAmount(totalAmount);
+		totalAmount += (patentFeeAmount + SERVICE_FEE);
+		order.setServiceFee(SERVICE_FEE);
 		
+		boolean needPost = order.getPostAddress().getId()!=0;
+		boolean isShunFengExpress = express == 1;
+		boolean needCompanyInvoice = companyInvoice == 1;
+		if (needPost) {
+			if(isShunFengExpress){
+				totalAmount += EXPRESS_FEE;
+				order.setExpressFee(EXPRESS_FEE);
+				order.setServiceFee(SERVICE_FEE);
+			}
+	
+			if (needCompanyInvoice) {
+				int invoiceFee = (int) (patentFeeAmount * INVOCIE_RATE);
+				totalAmount += invoiceFee;
+				order.setInvoiceFee(invoiceFee);
+			}
+		} 
+		
+		order.setAmount(totalAmount);
 		orderDao.insertOrder(order);
 		
 		List<OrderItem> orderItems = new ArrayList<>(fees.size());
@@ -51,6 +78,7 @@ public class OrderServiceImpl implements OrderService {
 		
 		orderDao.insertOrderItems(orderItems);
 		orderDao.updateOrderFeesStatus(orderItems);
+		
 		return 0;
 	}
 
@@ -135,6 +163,13 @@ public class OrderServiceImpl implements OrderService {
 	public int updateUserOrderStatus(long orderId) {
 		return orderDao.updateUserOrderStatus(orderId);
 	}
+	
+	@Override
+	public int updateUserOrderSend(long orderId) {
+		// TODO Auto-generated method stub
+		
+		return orderDao.updateUserOrderSend(orderId);
+	}	
 
 	@Override
 	public int updateUserOrderExpress(Map<String, String> expressInfo) {
@@ -161,4 +196,7 @@ public class OrderServiceImpl implements OrderService {
 		feeDao.updateMonitorStatus(feeIds, monitorStatus);
 		
 	}
+
+
+
 }
