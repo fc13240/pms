@@ -24,6 +24,35 @@
 	
 <!-- list beg -->
 	<div class="lt-box">
+	<table class="table table-striped table-bordered table-hover">
+		  <thead>
+			<tr class="simple_bag">
+			  <th> 订单信息 </th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr>
+			  <td><table class="table table-striped table-bordered table-hover">
+				  <thead>
+					<tr class="simple_bag">
+					  <th>订单编号</th>
+					  <th>下单时间</th>
+					  <th>支付时间</th>
+					  <th>支付方式</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<tr>
+					  <td>${order.id}</td>
+					  <td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+					  <td><fmt:formatDate value="${order.payTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+					  <td>${order.paymentMethod.paymentMethod}</td>
+					</tr>
+				  </tbody>
+				</table></td>
+			</tr>
+		  </tbody>
+		</table>
 		<table class="table table-striped table-bordered table-hover">
 		  <thead>
 			<tr class="simple_bag">
@@ -67,35 +96,7 @@
 			</tr>
 		  </tbody>
 		</table>
-		<table class="table table-striped table-bordered table-hover">
-		  <thead>
-			<tr class="simple_bag">
-			  <th> 订单信息 </th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<tr>
-			  <td><table class="table table-striped table-bordered table-hover">
-				  <thead>
-					<tr class="simple_bag">
-					  <th>订单编号</th>
-					  <th>下单时间</th>
-					  <th>支付时间</th>
-					  <th>支付方式</th>
-					</tr>
-				  </thead>
-				  <tbody>
-					<tr>
-					  <td>${order.id}</td>
-					  <td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-					  <td><fmt:formatDate value="${order.payTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-					  <td>${order.paymentMethod.paymentMethod}</td>
-					</tr>
-				  </tbody>
-				</table></td>
-			</tr>
-		  </tbody>
-		</table>
+
 		<c:if test="${order.postAddress != null}">
 		  <table class="table table-striped table-bordered table-hover">
 			<thead>
@@ -125,6 +126,33 @@
 			</tbody>
 		  </table>
 		</c:if>
+		<table class="table table-striped table-bordered table-hover">
+		  <thead>
+			<tr class="simple_bag">
+			  <th>费用信息</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr>
+			  <td><table class="table table-striped table-bordered table-hover">
+				  <thead>
+					<tr class="simple_bag">
+					  <th>服务费</th>
+					  <th>快递费</th>
+					  <th>龙图腾发票增值税</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<tr>
+					  <td>￥${order.serviceFee}</td>
+					  <td>￥${order.expressFee}</td>
+					  <td>￥${order.invoiceFee}</td>
+					</tr>
+				  </tbody>
+				</table></td>
+			</tr>
+		  </tbody>
+		</table>
 		<table class="table table-striped table-bordered table-hover">
 		 <thead>
 			<tr class="simple_bag">
