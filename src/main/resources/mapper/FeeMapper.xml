@@ -367,4 +367,18 @@
 		insert into fees(deadline, fee_type, amount, patent, fee_monitor_status, invoice_title,fee_owner)
 		values(#{fee.deadline}, #{fee.feeType},#{fee.amount}, #{patentId}, 2, #{fee.invoiceTitle},#{userId})				
 	</insert>
+	
+	<select id="getCountByDeadlinePayment" parameterType="int" resultType="map">
+		select a.overDue,b.withinTwoWeek,c.withinTwoMonth,d.withinThreeYear,e.outThreeYear 
+		       from (select count(*) overDue from fees where fee_owner = 2 and fee_monitor_status = 2 and 
+		       		 deadline &lt;CURDATE()) a
+		            join (select count(*) withinTwoWeek from fees where fee_owner = 2 and fee_monitor_status = 2 and 
+		                  deadline &gt;CURDATE() and deadline &lt;=CURDATE()+INTERVAL 2 WEEK) b ON 1=1
+		            join (select count(*) withinTwoMonth from fees where fee_owner = 2 and fee_monitor_status = 2 and 
+		            	  deadline &gt;CURDATE() and deadline &lt;=CURDATE()+INTERVAL 2 MONTH) c on 1=1 
+		            join (select count(*) withinThreeYear from fees where fee_owner = 2 and fee_monitor_status = 2 and 
+		            	  deadline &gt;CURDATE() and deadline &lt;=CURDATE()+INTERVAL 3 YEAR) d on 1=1 
+	       			join (select count(*) outThreeYear from fees where fee_owner = 2 and fee_monitor_status = 2 and 
+	       			      deadline &gt;=CURDATE()+INTERVAL 2 YEAR) e on 1=1
+	</select>
 </mapper>

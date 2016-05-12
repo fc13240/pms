@@ -61,4 +61,6 @@ public interface FeeService {
 	List<String> getFeeTypes(String appNo);
 	
 	void saveFee (Fee fee,int userId,long patentId);
+	
+	Map<String,Long> getCountByDeadlinePayment(int userId);
 }

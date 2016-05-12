@@ -94,19 +94,19 @@
 	   <div class="tag"  style="display:none">
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/fee/search.html?deadlineStatus=1&page.currentPage=1'/>" onclick="changDeadLineStatus(1)">
-	        	<li>已超期</li>
+	        	<li>已超期(<c:out value='${deadlineMonitor["overDue"] }'/>)</li>
 	        </a>
 	        <a href="<s:url value='/fee/search.html?deadlineStatus=2&page.currentPage=1'/>" onclick="changDeadLineStatus(2)">
-	        	<li>两周内</li>
+	        	<li>两周内(<c:out value='${deadlineMonitor["withinTwoWeek"] }'/>)</li>
 	        </a>
 	        <a href="<s:url value='/fee/search.html?deadlineStatus=3&page.currentPage=1'/>" onclick="changDeadLineStatus(3)">
-	        	<li>两月内</li>
+	        	<li>两月内(<c:out value='${deadlineMonitor["withinTwoMonth"] }'/>)</li>
 	        </a>
 	        <a href="<s:url value='/fee/search.html?deadlineStatus=4&page.currentPage=1'/>" onclick="changDeadLineStatus(4)">
-	        	<li>三年内</li>
+	        	<li>三年内(<c:out value='${deadlineMonitor["withinThreeYear"] }'/>)</li>
 	        </a>
 	        <a href="<s:url value='/fee/search.html?deadlineStatus=5&page.currentPage=1'/>" onclick="changDeadLineStatus(5)">
-	        	<li>三年以上</li>
+	        	<li>三年以上(<c:out value='${deadlineMonitor["outThreeYear"] }'/>)</li>
 	        </a>
 	      </ul>
 	    </div>
@@ -190,8 +190,9 @@
 					</a> <a href="javascript:delectFees()">
 					<button class="t-btn2">删除费用</button>
 					</a>
-					<button class="t-btn4" onmousemove="this.style.cursor=''">应缴费总额：￥${unpaidFeeCount }</button>
-					<button class="t-btn3" onmousemove="this.style.cursor=''">成功缴费总额：￥${totalFeeCount }</button>
+					<span class="span3" style="font-size:14px;">应缴费总额：￥${unpaidFeeCount }  </span>
+					<span class="span3" style="font-size:14px;">成功缴费总额：￥${totalFeeCount }</span>
+					
 				  </div>
 				  </span> 
 				</div>

@@ -236,8 +236,12 @@ public class FeeServiceImpl implements FeeService {
 
 		@Override
 		public List<Fee> getFeesForPatentId(long patentId) {
-			// TODO Auto-generated method stub
 			return feeDao.getFeesForPatentId(patentId);
+		}
+
+		@Override
+		public Map<String, Long> getCountByDeadlinePayment(int userId) {
+			return feeDao.getCountByDeadlinePayment(userId);
 		}
 
 }
