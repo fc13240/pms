@@ -486,7 +486,6 @@ insert into fee_types(patent_type, type_code, type_text) values(3, '408720826052
 insert into fee_types(patent_type, type_code, type_text) values(3, '40872082325233', '外观设计专利权评价报告请求费');
 insert into fee_types(patent_type, type_code, type_text) values(3, '40872082505250', '变更费');
 insert into fee_types(patent_type, type_code, type_text) values(3, '40872083235323', '外观设计专利登记印刷费');
-
 insert into fee_types(patent_type, type_code, type_text) values(3, '40872083545383', '外观设计专利年费滞纳金');
 insert into fee_types(patent_type, type_code, type_text) values(3, '40872083545383', '外观设计专利年费滞纳金');
 
@@ -494,51 +493,7 @@ ALTER TABLE orders ADD invoice VARCHAR(100) NULL;
 ALTER TABLE orders ADD express_fee INT ;
 ALTER TABLE orders ADD service_fee INT ;
 ALTER TABLE orders ADD invoice_fee INT;
-	
-
 
 ALTER TABLE patents ADD COLUMN patent_status_text VARCHAR(150);	
-ALTER TABLE notices ADD COLUMN notice_status_test VARCHAR(150);
 ALTER TABLE orders DROP COLUMN courier;
 ALTER TABLE orders DROP COLUMN courier_phone;
-ALTER TABLE orders ADD COLUMN order_payment_method VARCHAR(100);
-
-<<<<<<< HEAD
-SET FOREIGN_KEY_CHECKS=0;
--- ----------------------------
--- Table structure for `order_send`
--- ----------------------------
-DROP TABLE IF EXISTS `order_send`;
-CREATE TABLE `order_send` (
-  `id` tinyint(4) NOT NULL AUTO_INCREMENT,
-  `status_send` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of order_send
--- ----------------------------
-INSERT INTO order_send VALUES ('1', '未发货');
-INSERT INTO order_send VALUES ('2', '已发货');
-
--- ----------------------------
--- Table structure for `order_sign`
--- ----------------------------
-DROP TABLE IF EXISTS `order_sign`;
-CREATE TABLE `order_sign` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `status_sign` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of order_sign
--- ----------------------------
-INSERT INTO order_sign VALUES ('1', '未签收');
-INSERT INTO order_sign VALUES ('2', '已签收');
-=======
->>>>>>> 26dad691c58ee2ba397bd84b8cf3819f519cdd9d
-
-ALTER TABLE `orders`
-ADD COLUMN `order_sign_status`  int(11) NOT NULL DEFAULT 1 AFTER `order_id`,
-ADD COLUMN `order_send_status`  int(11) NOT NULL DEFAULT 1 AFTER `order_sign_status`;
