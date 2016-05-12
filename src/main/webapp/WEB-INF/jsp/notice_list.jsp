@@ -89,19 +89,19 @@
 	    </div>
 	    <div class="tag"  style="display:none">
 	      <ul class="qxjk-ul">
-	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=1&noticeProcessStatus=1'/>">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=1'/>">
 	        <li>未申请 (<c:out value='${paperApplyTypeCount[(1).intValue()]["noticeCount"]}' default="0"/>)</li>
 	        </a>  
-	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=2&noticeProcessStatus=1'/>">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=2'/>">
 	        <li>申请纸件 (<c:out value='${paperApplyTypeCount[(2).intValue()]["noticeCount"]}' default="0"/>)</li>
 	        </a> 
-	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=3&noticeProcessStatus=1'/>">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=3'/>">
 	        <li>处理中 (<c:out value='${paperApplyTypeCount[(3).intValue()]["noticeCount"]}' default="0"/>)</li>
 	        </a> 
-	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=4&noticeProcessStatus=1'/>">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=4'/>">
 	        <li>无发送 (<c:out value='${paperApplyTypeCount[(4).intValue()]["noticeCount"]}' default="0"/>)</li>
 	        </a> 
-	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=5&noticeProcessStatus=1'/>">
+	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=5'/>">
 	        <li>无纸件 (<c:out value='${paperApplyTypeCount[(5).intValue()]["noticeCount"]}' default="0"/>)</li>
 	        </a> 
 	      </ul>
@@ -260,7 +260,7 @@
 					<td><c:out value="${notice.patent.firstAppPerson}"/></td>
 					<td>
 					
-					${notice.noticeStatusText}
+					${notice.patent.patentStatusText}
 					
 					</td>
 					<td><c:out value="${notice.patent.shareUsersAsString}"/></td>

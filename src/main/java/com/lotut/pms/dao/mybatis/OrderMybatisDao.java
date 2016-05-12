@@ -92,8 +92,14 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	}
 
 	@Override
-	public int updateUserOrderStatus(long orderId) {
-		orderMapper.updateUserOrderStatus(orderId);
+	public int setUserOrderToPaid(long orderId) {
+		orderMapper.setUserOrderToPaid(orderId);
+		return 1;
+	}
+	
+	@Override
+	public int setUserOrderToPaidSuccess(long orderId) {
+		orderMapper.setUserOrderToPaidSuccess(orderId);
 		return 1;
 	}
 
@@ -125,4 +131,6 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	public Map<String, Map<String, String>> searchUserOrdersByOrderStatus(int userId) {
 		return orderMapper.searchUserOrdersByOrderStatus(userId);
 	}
+
+
 }

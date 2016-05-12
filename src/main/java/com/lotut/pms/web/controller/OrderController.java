@@ -190,15 +190,15 @@ public class OrderController {
 		
 	}
 	
-	@RequestMapping(path="/updateUserOrderStatus", method=RequestMethod.GET)
-	public String updateUserOrderStatus(@RequestParam("orderId")long orderId,Model model,Page page){
+	@RequestMapping(path="/setUserOrderToPaid", method=RequestMethod.GET)
+	public String setUserOrderToPaid(@RequestParam("orderId")long orderId,Model model,Page page){
 			if (page.getCurrentPage() < 1) {
 				page.setCurrentPage(1);
 			}
 				int userId = PrincipalUtils.getCurrentUserId();
 				page.setUserId(userId);
 			if (PrincipalUtils.isOrderProcessor()) {
-				orderService.updateUserOrderStatus(orderId);
+				orderService.setUserOrderToPaid(orderId);
 				int totalCount=(int)orderService.getAllNeedProcessOrderCount();
 				page.setTotalRecords(totalCount);
 				List<Order> orders = orderService.getAllNeedProcessOrders(page);
@@ -206,12 +206,32 @@ public class OrderController {
 				model.addAttribute("page",page);
 				return "all_order_list";
 			}else{
-				//澧炲姞淇敼鏉冮檺鎻愮ず
+				
 				return "";
 			}
 	}
 	
-	//澧炲姞鐢ㄦ埛璁㈠崟蹇�掍俊鎭�
+	@RequestMapping(path="/setUserOrderToPaidSuccess", method=RequestMethod.GET)
+	public String setUserOrderToPaidSuccess(@RequestParam("orderId")long orderId,Model model,Page page){
+			if (page.getCurrentPage() < 1) {
+				page.setCurrentPage(1);
+			}
+				int userId = PrincipalUtils.getCurrentUserId();
+				page.setUserId(userId);
+			if (PrincipalUtils.isOrderProcessor()) {
+				orderService.setUserOrderToPaidSuccess(orderId);
+				int totalCount=(int)orderService.getAllNeedProcessOrderCount();
+				page.setTotalRecords(totalCount);
+				List<Order> orders = orderService.getAllNeedProcessOrders(page);
+				model.addAttribute("orders", orders);
+				model.addAttribute("page",page);
+				return "all_order_list";
+			}else{
+				
+				return "";
+			}
+	}
+
 	@RequestMapping(path="/updateUserOrderContactAddresses", method=RequestMethod.POST)
 	public String updateUserOrderExpress(HttpServletRequest request,Model model){
 			Enumeration<String> paramNames =  request.getParameterNames();

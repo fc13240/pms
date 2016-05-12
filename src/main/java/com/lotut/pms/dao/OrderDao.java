@@ -36,7 +36,9 @@ public interface OrderDao {
 	
 	int searchUserOrdersCount(OrderSearchCondition searchCondition);
 	
-	int updateUserOrderStatus(long orderId);
+	int setUserOrderToPaid(long orderId);
+	
+	int setUserOrderToPaidSuccess(long orderId);
 	
 	int updateUserOrderExpress(Map<String, String> expressInfo);
 	

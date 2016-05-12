@@ -72,57 +72,22 @@
 	</update>
 	
 	<!--  -->
-
-
-	<select id="getUserMonitoredFees" parameterType="int" resultMap="FeeResultMap">
-		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
-					 f.fee_id, f.deadline, f.fee_type, f.amount, f.invoice_title, fp.fee_payment_status_id, fp.fee_payment_status_desc,
-					 fs.fee_monitor_status_id, fs.fee_monitor_status_desc
-		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
-		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
-				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
-				join patent_status ps on p.patent_status = ps.patent_status_id
-		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
-		 order by p.patent_id, f.deadline	
-	</select>
-	
-	
 	<!-- CS:分页 -->
 	
 	<select id="getUserMonitoredFeesByPage" parameterType="Page" resultMap="FeeResultMap">
 		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
 					 f.fee_id,f.deadline, f.fee_type, f.amount, f.invoice_title, fp.fee_payment_status_id, fp.fee_payment_status_desc,
-					 fs.fee_monitor_status_id, fs.fee_monitor_status_desc
-		  from (fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
+					 fs.fee_monitor_status_id, fs.fee_monitor_status_desc,oi.order_id
+		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
 		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
-				join patent_status ps on p.patent_status = ps.patent_status_id) 	
+				join patent_status ps on p.patent_status = ps.patent_status_id
+				left join order_items oi on f.fee_id = oi.fee_id
 		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2 and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
 		 order by p.patent_id, f.deadline
 		 limit #{startIndex}, #{pageSize}
 	</select>
-	
-	
-	
-<!-- 	<select id="getUserMonitoredFeesByPage" parameterType="Page" resultMap="FeeResultMap">
-		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
-					 f.fee_id, f.deadline, f.fee_type, f.amount, f.invoice_title, fp.fee_payment_status_id, fp.fee_payment_status_desc,
-					 fs.fee_monitor_status_id, fs.fee_monitor_status_desc
-		  from (fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
-		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
-				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
-				join patent_status ps on p.patent_status = ps.patent_status_id) 
-=======
-				join patent_status ps on p.patent_status = ps.patent_status_id
-				left join order_items oi on f.fee_id = oi.fee_id) 
->>>>>>> 4a23a8cc0e2bf24c9f7be9e78e7f8b319eaf9a47
-		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
-		 order by p.patent_id, f.deadline
-		 limit #{startIndex}, #{pageSize}
-	</select> -->
-	
-	
-	
+
 	<select id="getUserMonitoredFeesCount"  resultType="int">
 		select count(*)
 		  from fees f 

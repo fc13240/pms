@@ -38,7 +38,9 @@ public interface OrderService {
 	
 	List<Order> getUserOrdersByStatus(int userId, int orderStatus);
 	
-	int updateUserOrderStatus(long orderId); 
+	int setUserOrderToPaid(long orderId);
+	
+	int setUserOrderToPaidSuccess(long orderId); 
 	
 	int updateUserOrderExpress(Map<String, String> expressInfo);
 	
@@ -49,4 +51,6 @@ public interface OrderService {
 	Map<String, Map<String, String>> searchUserOrdersByOrderStatus(int userId);
 	
 	void changeMonitorStatus(List<Long> feeIds,int monitorStatus);
+	
+	
 }

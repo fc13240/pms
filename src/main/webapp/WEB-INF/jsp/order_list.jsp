@@ -37,7 +37,7 @@
 	        <li>已支付 (<c:out value='${orderCountsByOrderStatus[(2).intValue()]["orderCount"]}' default="0"/>)</li>
 	        </a> 
 	        <a href="<s:url value='/order/search.html?page.currentPage=1&orderStatus=3'/>">
-	        <li>已取消 (<c:out value='${orderCountsByOrderStatus[(3).intValue()]["orderCount"]}' default="0"/>)</li>
+	        <li>缴费成功 (<c:out value='${orderCountsByOrderStatus[(3).intValue()]["orderCount"]}' default="0"/>)</li>
 	        </a>
 	        <a href="<s:url value='/order/search.html?page.currentPage=1&orderStatus=4'/>">
 	        <li>已缴费 (<c:out value='${orderCountsByOrderStatus[(4).intValue()]["orderCount"]}' default="0"/>)</li>

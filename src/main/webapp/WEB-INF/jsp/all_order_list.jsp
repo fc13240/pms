@@ -58,6 +58,7 @@
   
   <!-- 搜索结束 -->
 		<c:forEach items="${orders}" var="order">
+
 		<form action="<s:url value='/fee/exportFees.html'/>" method="get" target="feeExportFrame">
    		 <c:forEach items="${order.feeList}" var="fee" varStatus="status">
       		<input type="hidden" name="fees" value="${fee.feeId}">
@@ -71,6 +72,19 @@
 				 <span style="margin-left:100px;">
               		<input type="submit" value="导出费用清单">
               	</span>
+              	
+				  <c:if test="${order.orderStatus.statusId == 2}">
+					<div> <a href="<s:url value='/order/setUserOrderToPaid.html'/>?orderId=<c:out value='${order.id}'/>">
+					  <button type="button" class="btn btn-purple btn-sm">置为已缴费</button>
+					  </a> </div>
+				  </c:if>              	
+
+				  <c:if test="${order.orderStatus.statusId == 4}">
+					<div> <a href="<s:url value='/order/setUserOrderToPaidSuccess.html'/>?orderId=<c:out value='${order.id}'/>">
+					  <button type="button" class="btn btn-purple btn-sm">缴费成功</button>
+					  </a> </div>
+				  </c:if>        				                	
+              	
 				</th>
 			  </tr>
 			</thead>
@@ -112,20 +126,14 @@
 				<td><div><a href="javascript:void" onclick="window.open('<s:url value="/order/detail/"/>${order.id}.html')">编辑订单</a></div></td>
 				<td>总额: ￥${order.totalAmount}</td>
 				<td> ${order.orderStatus.statusDescription}
-				  <c:if test="${order.orderStatus.statusId == 1}">
-					<div> <a href="javascript:void" onclick="window.open('<s:url value="/alipay/index.html?orderId="/>${order.id}')">支付宝支付</a> </div>
-					<div> </div>
-				  </c:if>
-				  <c:if test="${order.orderStatus.statusId == 2}">
-					<div> <a href="<s:url value='/order/updateUserOrderStatus.html'/>?orderId=<c:out value='${order.id}'/>">
-					  <button type="button" class="btn btn-purple btn-sm">置为已缴费</button>
-					  </a> </div>
-				  </c:if>
+				
+
 				</td>
 			  </tr>
 			</tbody>
 		  </table>
 		  </form>
+
 		</c:forEach>
 		<!-- 分页功能 start -->
 		<div class="row">

@@ -55,7 +55,7 @@
 					   <td>挂号信</td>
 					  </c:if>
 					  <c:if test="${order.expressFee == 0 && order.postAddress == null}">
-					   <td>不快递</td>
+					   <td>无</td>
 					  </c:if>
 					</tr>
 				  </tbody>

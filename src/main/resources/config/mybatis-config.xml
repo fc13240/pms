@@ -39,6 +39,7 @@
 		<typeAlias alias="Order" type="com.lotut.pms.domain.Order"/>
 		<typeAlias alias="OrderItem" type="com.lotut.pms.domain.OrderItem"/>
 		<typeAlias alias="OrderStatus" type="com.lotut.pms.domain.OrderStatus"/>
+		<typeAlias alias="OrderSendStatus" type="com.lotut.pms.domain.OrderSendStatus"/>
 		<typeAlias alias="PaymentMethod" type="com.lotut.pms.domain.PaymentMethod"/>
 		<typeAlias alias="AdminOrderSearchCondition" type="com.lotut.pms.domain.AdminOrderSearchCondition"/>
 		<typeAlias alias="StatsHashMap" type="com.lotut.pms.domain.StatsHashMap"/>
