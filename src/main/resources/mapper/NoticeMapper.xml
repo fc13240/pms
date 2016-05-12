@@ -431,7 +431,7 @@
 		select n.paper_apply_type paperApplyType,count(*) noticeCount
 		  from notices n join patents p on n.patent = p.patent_id
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
-		 where patent in (select patent from user_patents where user = #{userId}) and n.process_status=1	
+		 where patent in (select patent from user_patents where user = #{userId})	
 		 GROUP BY n.paper_apply_type
 	</select>
 	
