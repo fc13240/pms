@@ -20,19 +20,34 @@
 		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">上传专利</span>
 	</div>
 	<div class="t-box">
-		<form action="<s:url value='/patent/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
-		<input style="display:none;" id="id_patent_file" name="patentFile" type="file" />
-		<input style="width:300px;height:25px;" type="text" id="filename" placeholder="请选择文件" readonly="readonly">
-		<button type="button" onclick="$('input[id=id_patent_file]').click();" class="t-btn3">浏览</button>
+		<form id="patent" action="<s:url value='/patent/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+		<input style="display:none;" id="patentFile" name="patentFile" type="file" />
+		<input style="width:300px;height:25px;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
+		<button type="button" onclick="$('input[id=patentFile]').click();" class="t-btn3">浏览</button>
 		<button type="submit" class="t-btn2">上传</button>
 		</form>  
 	</div>
 
 </div>
 <script type="text/javascript">
-	$('input[id=id_patent_file]').change(function() {  
+	jQuery(function($) {
+		$("#patent").validate({
+			rules: {
+				filename: 'required'
+			},
+			messages: {
+				filename: '请选择要上传的专利表格'
+			},
+			submitHandler: function(form){ 
+				form.submit();     
+			}
+		});
+	});
+	$('input[id=patentFile]').change(function() {  
 		$('#filename').val($(this).val());  
 	});
 </script>
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	
 </body>
 </html>
