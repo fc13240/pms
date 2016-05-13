@@ -197,14 +197,10 @@
 					</a> <a href="javascript:delectFees()">
 					<button class="t-btn2">删除费用</button>
 					</a>
-<<<<<<< HEAD
+
 					<span class="span3" style="font-size:14px;margin-left:50px;">成功缴费总额：￥${totalFeeCount }</span>
 					<span class="span3" style="font-size:14px;margin-left:50px;">应缴费总额：￥${unpaidFeeCount }  </span>
-					
-=======
-					<span class="span3" style="font-size:14px;padding-left:300px">应缴费总额：￥${unpaidFeeCount }  </span>
-					<span class="span3" style="font-size:14px;padding-left:20px">成功缴费总额：￥${totalFeeCount }</span>
->>>>>>> cc2d4dd4fefdcf76f6a56b3863448ffe782cd191
+
 				  </div>
 				  </span> 
 				</div>
