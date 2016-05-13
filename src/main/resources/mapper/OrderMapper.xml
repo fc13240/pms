@@ -250,7 +250,7 @@
 	</update>
 	
 	<update id="updateUserOrderExpress" parameterType="map">
-		UPDATE orders SET express_company=#{expressCompany},express_no=#{expressNo},send_time=#{startDispatchDate}
+		UPDATE orders SET express_no=#{expressNo},send_time=#{startDispatchDate}
 		WHERE order_id=#{orderId}
 	</update>
 	

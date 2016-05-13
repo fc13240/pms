@@ -39,7 +39,7 @@
 					  <th>下单时间</th>
 					  <th>支付时间</th>
 					  <th>支付方式</th>
-<!-- 					  <th>快递方式</th> -->
+					  <th>快递方式</th>
 					</tr>
 				  </thead>
 				  <tbody>
@@ -48,14 +48,14 @@
 					  <td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 					  <td><fmt:formatDate value="${order.payTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 					  <td>${order.paymentMethod.paymentMethod}</td>
-<%-- 					  <c:if test="${order.expressFee == 20}"> --%>
-<!-- 					   <td>顺丰速运</td> -->
-<%-- 					  </c:if> --%>
-<%-- 					  <c:if test="${order.expressFee == 0 && order.postAddress != null}"> --%>
-<!-- 					   <td>挂号信</td> -->
-<%-- 					  </c:if> --%>
-<%-- 					  <c:if test="${order.expressFee == 0 && order.postAddress == null}"> --%>
-<!-- 					   <td>无</td> -->
+					  <c:if test="${order.expressFee == 20}">
+					   	<td>顺丰速运</td>
+					  </c:if>
+					  <c:if test="${order.expressFee == 0 && order.postAddress != null}">
+					   <td>挂号信</td>
+					  </c:if>
+					  <c:if test="${order.expressFee == 0 && order.postAddress == null}">
+					   <td>无</td>
 					  </c:if>
 					</tr>
 				  </tbody>
@@ -136,33 +136,7 @@
 			</tbody>
 		  </table>
 		</c:if>
-		<table class="table table-striped table-bordered table-hover">
-		  <thead>
-			<tr class="simple_bag">
-			  <th>费用信息</th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<tr>
-			  <td><table class="table table-striped table-bordered table-hover">
-				  <thead>
-					<tr class="simple_bag">
-					  <th>服务费</th>
-					  <th>快递费</th>
-					  <th>龙图腾发票增值税</th>
-					</tr>
-				  </thead>
-				  <tbody>
-					<tr>
-					  <td>￥${order.serviceFee}</td>
-					  <td>￥${order.expressFee}</td>
-					  <td>￥${order.invoiceFee}</td>
-					</tr>
-				  </tbody>
-				</table></td>
-			</tr>
-		  </tbody>
-		</table>
+
 		<table class="table table-striped table-bordered table-hover">
 		 <thead>
 			<tr class="simple_bag">
@@ -171,7 +145,7 @@
 		  </thead>
 		  <tbody>
 		    <tr>
-		    	<td>${order.invoice}</td>
+		    	<td><font style="color: red">${order.invoice}</font></td>
 		    </tr>
 		  </tbody>
 		</table>
@@ -188,7 +162,16 @@
 				  快递单编号:
 				  <input type="text" name="expressNo" id="expressNo" value="${order.expressNo}" required/>
 				  快递公司:
-				  <input type="text" name="expressCompany" id="expressCompany" value="${order.expressCompany}" required/>
+				  	 <c:if test="${order.expressFee == 20}">
+					   <span>顺丰速运</span>
+					  </c:if>
+					  <c:if test="${order.expressFee == 0 && order.postAddress != null}">
+					   <span>挂号信</span>
+					  </c:if>
+					  <c:if test="${order.expressFee == 0 && order.postAddress == null}">
+					   <td>无</td>
+					  </c:if>
+<%-- 				  <input type="text" name="expressCompany" id="expressCompany" value="${order.expressCompany}" required/> --%>
 				  <div style="margin-top:10px;">
 					<div class="input-group">
 					  <div style="float:left;line-height: 32px;">发送时间</div>
@@ -204,6 +187,41 @@
 				  <input type="hidden" name="orderId" id="orderId" value="${order.id}"/>
 				  <input type="submit" value="保存" style="width: 100px;height: 25px;background: #DB0C14; color:#fff" onclick="javascript:submitExp()"/>
 				</form></td>
+			</tr>
+		  </tbody>
+		</table>
+		<table class="table table-striped table-bordered table-hover">
+		  <thead>
+			<tr class="simple_bag">
+			  <th>费用信息</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr>
+			  <td><table class="table table-striped table-bordered table-hover">
+				  <thead>
+					<tr class="simple_bag">
+					  <th>官费</th>
+					  <th>服务费</th>
+					  <th>快递费</th>
+					  <th>龙图腾发票增值税</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<tr>
+					  <td>
+					  	<c:set var="totalAmount" value="0"></c:set>
+					  	<c:forEach items="${order.feeList}" var="fee">
+					  		<c:set var="totalAmount" value="${totalAmount+fee.amount}"></c:set>
+					  	</c:forEach>
+					  	${totalAmount }
+					  </td>
+					  <td>￥${order.serviceFee}</td>
+					  <td>￥${order.expressFee}</td>
+					  <td>￥${order.invoiceFee}</td>
+					</tr>
+				  </tbody>
+				</table></td>
 			</tr>
 		  </tbody>
 		</table>

@@ -35,13 +35,13 @@
 	        <li>待支付 (<c:out value='${orderCountsByOrderStatus[(1).intValue()]["orderCount"]}' default="0"/>)</li>
 	        </a> <a href="<s:url value='/order/search.html?page.currentPage=1&orderStatus=2'/>">
 	        <li>已支付 (<c:out value='${orderCountsByOrderStatus[(2).intValue()]["orderCount"]}' default="0"/>)</li>
-	        </a> 
-	        <a href="<s:url value='/order/search.html?page.currentPage=1&orderStatus=3'/>">
-	        <li>缴费成功 (<c:out value='${orderCountsByOrderStatus[(3).intValue()]["orderCount"]}' default="0"/>)</li>
 	        </a>
 	        <a href="<s:url value='/order/search.html?page.currentPage=1&orderStatus=4'/>">
 	        <li>已交局 (<c:out value='${orderCountsByOrderStatus[(4).intValue()]["orderCount"]}' default="0"/>)</li>
-	        </a> 
+	        </a>  
+	        <a href="<s:url value='/order/search.html?page.currentPage=1&orderStatus=3'/>">
+	        <li>缴费成功 (<c:out value='${orderCountsByOrderStatus[(3).intValue()]["orderCount"]}' default="0"/>)</li>
+	        </a>
 	      </ul>		    
 	     </div>
  </div>
@@ -121,6 +121,7 @@
                 
                 
                   <c:forEach items="${order.feeList}" var="fee" varStatus="status">
+<<<<<<< HEAD
            
 					<c:choose>
 						<c:when test="${status.count<=2}">
@@ -181,6 +182,21 @@
 					</c:choose>                  	
 	   	
                     
+=======
+                    <tr>
+                      <td class="center">${status.count}</td>
+                      <td>
+						<a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a>
+                      </td>
+                      <td>${fee.patent.name}</td>
+                      <td>${fee.patent.firstAppPerson}</td>
+                      <td>${fee.patent.patentStatus.statusDescription}</td>
+                      <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
+                      <td>${fee.feeType}</td>
+                      <td>${fee.amount} </td>
+                      <td>${fee.invoiceTitle}</td>
+                    </tr>
+>>>>>>> 4b20e88bc085f51b26723ce3864191c681c4f7bb
                   </c:forEach>
 					<tr>
 					<td colspan="9" class="lt_more">更多/收起</td>
