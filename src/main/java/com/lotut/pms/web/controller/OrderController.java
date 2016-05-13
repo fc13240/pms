@@ -81,7 +81,7 @@ public class OrderController {
 		}
 		
 		// FIXME change success page
-		return "upload_success";
+		return "add_patent_success";
 	}
 	
 	@RequestMapping(path="/list")
