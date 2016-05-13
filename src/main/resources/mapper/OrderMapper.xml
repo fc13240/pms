@@ -337,5 +337,11 @@
 		SELECT o.order_status orderStatus,count(*) orderCount
 		  FROM orders o 
 		 WHERE o.user = #{userId} GROUP BY o.order_status;	 		 	
+	</select>
+		
+	<select id="searchUserAllOrdersByOrderStatus" resultType="map">
+		SELECT o.order_status orderStatus,count(*) orderCount
+		  FROM orders o 
+		GROUP BY o.order_status;	 		 	
 	</select>	
 </mapper>
