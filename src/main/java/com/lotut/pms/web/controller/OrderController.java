@@ -72,9 +72,6 @@ public class OrderController {
 		
 		List<Fee> fees = feeService.getFeesByIds(Arrays.asList(feeIds));
 		
-		if(order.getPostAddress()==null || order.getPostAddress().getId()==0){
-			feeService.changeFeesInvoiceTitle(Arrays.asList(feeIds),"龙图腾信息技术有限公司");
-		}
 		orderService.createOrder(order, fees,express,nationalInvoice,companyInvoice);
 		
 		model.addAttribute("orderId", order.getId());
@@ -84,7 +81,7 @@ public class OrderController {
 		}
 		
 		// FIXME change success page
-		return "upload_success";
+		return "add_patent_success";
 	}
 	
 	@RequestMapping(path="/list")

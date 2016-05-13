@@ -172,13 +172,13 @@
 				and f.deadline &gt;=CURDATE() AND f.deadline &lt;=(CURDATE()+INTERVAL 2 WEEK)
 			</if>
 			<if test="deadlineStatus==3">
-				and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 2 MONTH)
+				and f.deadline &gt;(CURDATE()+INTERVAL 2 WEEK) and f.deadline &lt;=(CURDATE()+INTERVAL 2 MONTH)
 			</if>
 			<if test="deadlineStatus==4">
-				and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
+				and f.deadline &gt;(CURDATE()+INTERVAL 2 MONTH) and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
 			</if>
 			<if test="deadlineStatus==5">
-				and f.deadline &gt;=(CURDATE()+INTERVAL 3 YEAR)
+				and f.deadline &gt;(CURDATE()+INTERVAL 3 YEAR)
 			</if>		 
 		order by p.patent_id, f.deadline
 		limit #{page.startIndex}, #{page.pageSize}
@@ -217,13 +217,13 @@
 				and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 2 WEEK)
 			</if>
 			<if test="deadlineStatus==3">
-				and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 2 MONTH)
+				and f.deadline &gt;(CURDATE()+INTERVAL 2 WEEK) and f.deadline &lt;=(CURDATE()+INTERVAL 2 MONTH)
 			</if>
 			<if test="deadlineStatus==4">
-				and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
+				and f.deadline &gt;(CURDATE()+INTERVAL 2 MONTH) and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
 			</if>
 			<if test="deadlineStatus==5">
-				and f.deadline &gt;=(CURDATE()+INTERVAL 3 YEAR)
+				and f.deadline &gt;(CURDATE()+INTERVAL 3 YEAR)
 			</if>		 
 	</select>
 	
@@ -341,10 +341,10 @@
 		            join (select count(*) withinTwoWeek from fees where fee_owner = 2 and fee_monitor_status = 2 and 
 		                  deadline &gt;CURDATE() and deadline &lt;=CURDATE()+INTERVAL 2 WEEK) b ON 1=1
 		            join (select count(*) withinTwoMonth from fees where fee_owner = 2 and fee_monitor_status = 2 and 
-		            	  deadline &gt;CURDATE() and deadline &lt;=CURDATE()+INTERVAL 2 MONTH) c on 1=1 
+		            	  deadline &gt;CURDATE()+INTERVAL 2 WEEK and deadline &lt;=CURDATE()+INTERVAL 2 MONTH) c on 1=1 
 		            join (select count(*) withinThreeYear from fees where fee_owner = 2 and fee_monitor_status = 2 and 
-		            	  deadline &gt;CURDATE() and deadline &lt;=CURDATE()+INTERVAL 3 YEAR) d on 1=1 
+		            	  deadline &gt;CURDATE()+INTERVAL 2 MONTH and deadline &lt;=CURDATE()+INTERVAL 3 YEAR) d on 1=1 
 	       			join (select count(*) outThreeYear from fees where fee_owner = 2 and fee_monitor_status = 2 and 
-	       			      deadline &gt;=CURDATE()+INTERVAL 2 YEAR) e on 1=1
+	       			      deadline &gt;CURDATE()+INTERVAL 3 YEAR) e on 1=1
 	</select>
 </mapper>
