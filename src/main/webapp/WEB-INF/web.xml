@@ -29,7 +29,11 @@
 	    <taglib>
 	       <taglib-uri>fmt</taglib-uri>
 	       <taglib-location>/WEB-INF/tld/fmt.tld</taglib-location>
-	    </taglib>		    	    
+	    </taglib>
+	    <taglib>
+	       <taglib-uri>fn</taglib-uri>
+	       <taglib-location>/WEB-INF/tld/fn.tld</taglib-location>
+	    </taglib>	    		    	    
 	</jsp-config>
   	
 	<context-param>
