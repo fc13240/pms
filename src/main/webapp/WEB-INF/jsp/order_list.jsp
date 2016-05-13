@@ -113,24 +113,78 @@
                     <th>发票抬头</th>
                   </tr>
                 </thead>
+<style>
+.lt_tr_hiden{display:none;}
+</style>                
+                
                 <tbody>
+                
+                
                   <c:forEach items="${order.feeList}" var="fee" varStatus="status">
-                    <tr>
-                      <td class="center">${status.count}</td>
-                      <td>
-                      
+           
+					<c:choose>
+						<c:when test="${status.count<=2}">
+							<tr>
+							  <td class="center">${status.count}</td>
+							                <td>
+							                
+							
+							<a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a>
+							  </td>
+							  <td>${fee.patent.name}</td>
+							  <td>${fee.patent.firstAppPerson}</td>
+							  <td>${fee.patent.patentStatus.statusDescription}</td>
+							  <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
+							  <td>${fee.feeType}</td>
+							  <td>${fee.amount} </td>
+							  <td>${fee.invoiceTitle}</td>
+							</tr>
+						</c:when>
+						<c:when test="${status.count==3}"> 
+   
+							<tr class="lt_tr_hiden">
+							  <td class="center">${status.count}</td>
+							                <td>
+							                
+							
+							<a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a>
+							  </td>
+							  <td>${fee.patent.name}</td>
+							  <td>${fee.patent.firstAppPerson}</td>
+							  <td>${fee.patent.patentStatus.statusDescription}</td>
+							  <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
+							  <td>${fee.feeType}</td>
+							  <td>${fee.amount} </td>
+							  <td>${fee.invoiceTitle}</td>
+							</tr>
+						</c:when>						
+						<c:otherwise>
+							
+							<tr class="lt_tr_hiden">
+							  <td class="center">${status.count}</td>
+							                <td>
+							                
+							
+							<a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a>
+							  </td>
+							  <td>${fee.patent.name}</td>
+							  <td>${fee.patent.firstAppPerson}</td>
+							  <td>${fee.patent.patentStatus.statusDescription}</td>
+							  <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
+							  <td>${fee.feeType}</td>
+							  <td>${fee.amount} </td>
+							  <td>${fee.invoiceTitle}</td>
+							</tr>
+    					</c:otherwise>
+				
 
-						<a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a>
-                      </td>
-                      <td>${fee.patent.name}</td>
-                      <td>${fee.patent.firstAppPerson}</td>
-                      <td>${fee.patent.patentStatus.statusDescription}</td>
-                      <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
-                      <td>${fee.feeType}</td>
-                      <td>${fee.amount} </td>
-                      <td>${fee.invoiceTitle}</td>
-                    </tr>
+					</c:choose>                  	
+	   	
+                    
                   </c:forEach>
+					<tr>
+					<td colspan="9" class="lt_more">更多/收起</td>
+					</tr> 
                 </tbody>
               </table></td>
             <td>${order.postAddress.receiver}
@@ -221,6 +275,21 @@
 				}
 		});
 	});
+	
+	$(".lt_more").click(function(){
+	//	alert('why');
+	//	$(this).parent().(".lt_tr_hiden").toggle();
+	//	$(".lt_tr_hiden").toggle();	
+	//abc=$(this).parent();
+	//alert(abc);
+		$(this).closest("tbody").find('.lt_tr_hiden').toggle();
+
+	})
+	
+	
+
+	
+	
 </script>
 
 <script type="text/javascript">
