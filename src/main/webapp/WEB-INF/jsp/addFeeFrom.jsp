@@ -9,6 +9,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>添加专利</title>
 <%@ include file="_css.jsp" %>
+    <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
+    <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
 </head>
 <body>
 <%@ include file="_top.jsp" %>
@@ -25,12 +27,13 @@
 	    <ul>
 	      <li>
 	        <p>申请号:</p>
-	        <select name="appNo" id="appNo" onchange="loadPatent()" required>
-			  <option value=''>请选择专利号</option>
-			  <c:forEach items="${patents}" var="patent">
-				<option value="${patent.appNo}">${patent.appNo}</option>
-			  </c:forEach>
-			</select>
+	        <input name="appNo" id="appNo" style="height:16px;width:120px;" type="text" onblur="loadPatent()" required>
+<%-- 	        <select name="appNo" id="appNo" onchange="loadPatent()" required> --%>
+<!-- 			  <option value=''>请选择专利号</option> -->
+<%-- 			  <c:forEach items="${patents}" var="patent"> --%>
+<%-- 				<option value="${patent.appNo}">${patent.appNo}</option> --%>
+<%-- 			  </c:forEach> --%>
+<%-- 			</select> --%>
 	      </li>
 	      <li>
 	        <p>专利名称:</p>
@@ -90,6 +93,16 @@
 
 <script type="text/javascript">
 $(function() {
+	var appNos = [];
+	<c:forEach items="${patents}" var="patent">
+		appNos.push("${patent.appNo}");
+	</c:forEach>
+	
+     $().ready(function() {
+     	$("#appNo").autocomplete(appNos);	
+     });
+	
+	
 	$("#addFeeForm").validate({
 		submitHandler: function(form){ 
 			form.submit();     
@@ -133,5 +146,6 @@ function loadPatent() {
 	} 
 }
 </script>
+
 </body>
 </html>
