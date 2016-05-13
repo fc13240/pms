@@ -83,7 +83,7 @@
 		<result property="appNo" column="app_no"/>
 		<result property="name" column="patent_name"/>
 		<result property="appDate" column="app_date"/>
-		<result property="patentStatuText" column="patent_status_text"/>
+		<result property="patentStatusText" column="patent_status_text"/>
 		<result property="appPerson" column="app_person"/>	
 		<association property="patentStatus" resultMap="PatentStatusResultMap"/>
 	</resultMap>
