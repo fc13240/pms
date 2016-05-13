@@ -4,6 +4,7 @@
 <%@ taglib uri="c" prefix="c" %>
 <%@ taglib uri="fmt" prefix="fmt" %>
 <%@ taglib uri="spring-form" prefix="form" %>
+<%@ taglib uri="fn" prefix="fn" %>
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -130,20 +131,51 @@
 					  </tr>
 					</thead>
 					<tbody>
+					
 					  <c:forEach items="${order.feeList}" var="fee" varStatus="status">
-						<tr>
-						  <td class="center">${status.count}</td>
-						  <td><a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a></td>
-						  <td>${fee.patent.name}</td>
-						  <td>${fee.patent.firstAppPerson}</td>
-						  <td>${fee.patent.patentStatus.statusDescription}</td>
-						  <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
-						  <td>${fee.feeType}</td>
-						  <td>${fee.amount} </td>
-						  <td>${fee.paymentStatus.payementStatusDescription} </td>
-						  <td>${fee.invoiceTitle}</td>
-						</tr>
+					  
+						<c:choose>
+							<c:when test="${status.count<=2}">
+							<tr>
+							  <td class="center">${status.count}</td>
+							  <td><a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a></td>
+							  <td>${fee.patent.name}</td>
+							  <td>${fee.patent.firstAppPerson}</td>
+							  <td>${fee.patent.patentStatus.statusDescription}</td>
+							  <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
+							  <td>${fee.feeType}</td>
+							  <td>${fee.amount} </td>
+							  <td>${fee.paymentStatus.payementStatusDescription} </td>
+							  <td>${fee.invoiceTitle}</td>
+							</tr>
+							</c:when>
+							<c:when test="${status.count>2}"> 
+	   
+								
+							<tr class="lt_tr_hiden">
+							  <td class="center">${status.count}</td>
+							  <td><a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a></td>
+							  <td>${fee.patent.name}</td>
+							  <td>${fee.patent.firstAppPerson}</td>
+							  <td>${fee.patent.patentStatus.statusDescription}</td>
+							  <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
+							  <td>${fee.feeType}</td>
+							  <td>${fee.amount} </td>
+							  <td>${fee.paymentStatus.payementStatusDescription} </td>
+							  <td>${fee.invoiceTitle}</td>
+							</tr>
+							</c:when>						
+						</c:choose> 		  
 					  </c:forEach>
+							<c:if test="${fn:length(order.feeList)>2}">
+							<!-- 	${fn:length(order.feeList)} --> 
+							<tr>
+							<td colspan="9" >
+							
+							<button class="lt_more" type="button" style="width:90px;" class="t-btn6" >更多/收起</button>
+							</td>
+							</tr> 
+							</c:if>					  
 					</tbody>
 				  </table></td>
 				<td>${order.owner.username} </td>
