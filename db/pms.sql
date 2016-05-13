@@ -334,10 +334,11 @@ VALUES
 
 INSERT INTO fee_payment_status (fee_payment_status_id, fee_payment_status_desc)
 VALUES
-	(1, '应缴'),
+	(1, '应缴费'),
 	(2, '已支付'),
-	(3, '已缴'),
-	(4, '已加入订单');
+	(3, '已交局'),
+	(4, '待支付'),
+	(5, '缴费成功');
 	
 INSERT INTO notice_paper_apply_types (notice_paper_apply_type_id, notice_paper_apply_type_desc)
 VALUES

@@ -23,48 +23,33 @@
 	</div>
 	
 	<div class="t-third">
-	  <div class="col-xs-12">
-		<!-- PAGE CONTENT BEGINS -->
-		<div class="row">
-		  <div class="col-xs-12">
-			<div class="patent-detail-caption">
-			  <h4>基本信息编辑</h4>
-			</div>
-			&nbsp;&nbsp;&nbsp;&nbsp;
 			<form action="<s:url value='/user/updateUserDetail.html'/>" method="POST">
-			<table class="table table-striped">
+			<table id="simple-table" class="table table-striped table-bordered table-hover">
 			  <tr>
-				<td class="f-tar td-w125"><h4 class="lab">真实姓名/名称：</h4></td>
-				<td class="ps-relative"><input class="ipt" type="text" name="name" id="name" style="height:30px;width:200px;"  value="${user.name}" maxlength="30">
-<!-- 				  <label style=""> -->
-<!-- 				  <input class="radios"  type="radio" name="sex" value="0"   checked /> -->
-<!-- 				  先生</label> -->
-<!-- 				  <label style=""> -->
-<!-- 				  <input class="radios"  type="radio" name="sex" value="1"   /> -->
-<!-- 				  女士</label> -->
+				<td style="line-height:50px;">真实姓名/名称：</td>
+				<td><input class="ipt" type="text" name="name" id="name" style="height:30px;width:200px;"  value="${user.name}" maxlength="30">
+
 				</td>
 			  </tr>
 			  <tr>
-				<td class="f-tar td-w125"><h4 class="lab">电子邮件：</h4></td>
+				<td class="f-tar td-w125" style="line-height:50px;">电子邮件：</td>
 				<td>
 				  <input class="email"  name="email" id="email" type="text" style="height:30px;width:200px;"value="${user.email}" maxlength="25" ></td>
 			  </tr>
 			  <tr>
-				<td class="f-tar td-w125"><h4 class="lab">手机或电话号：</h4></td>
+				<td class="f-tar td-w125" style="line-height:50px;">手机或电话号：</td>
 				<td>
 				  <input class="phone" name="phone" id="phone" type="text" style="height:30px;width:200px;" value="${user.phone}" maxlength="30" ></td>
 			  </tr>
 			  <tr>
-				<td class="f-tar td-w125"></td>
-				<td><input class="orange-red-btn" name="dosubmit" id="dosubmit" style="background:red;color:#FFF " value="保&nbsp;&nbsp;存" type="submit" ></td>
+				<td class="f-tar td-w125" style="height:47px;"></td>
+				<td>
+					<button  type="submit" type="submit" class="t-btn4">保存</button>
+				</td>
 			  </tr>
 			</table>
 			</form>
-			<!-- /.span -->
-		  </div>
-		  <!-- /.row -->
-		</div>
-	  </div>
+
 	</div>
 
 

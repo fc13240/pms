@@ -96,7 +96,9 @@ public class OrderController {
 			int totalCount=(int)orderService.getAllNeedProcessOrderCount();
 			page.setTotalRecords(totalCount);
 			List<Order> orders = orderService.getAllNeedProcessOrders(page);
+			Map<String,Map<String,String>> orderCountsByOrderStatus=orderService.searchUserAllOrdersByOrderStatus();
 			model.addAttribute("orders", orders);
+			model.addAttribute("orderCountsByOrderStatus",orderCountsByOrderStatus);
 			statusDataToModel(model);
 			model.addAttribute("page",page);
 			statusDataToModel(model);
@@ -252,8 +254,10 @@ public class OrderController {
 		//page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
 		List<Order> resultOrders = orderService.getAllNeedProcessOrdersBySearch(searchCondition);
+		Map<String,Map<String,String>> orderCountsByOrderStatus=orderService.searchUserAllOrdersByOrderStatus();
 		int totalCount=(int)orderService.getAllNeedProcessOrdersBySearchCount(searchCondition);
 		page.setTotalRecords(totalCount);
+		model.addAttribute("orderCountsByOrderStatus",orderCountsByOrderStatus);
 		model.addAttribute("orders", resultOrders);
 		model.addAttribute("page", page);
 		statusDataToModel(model);

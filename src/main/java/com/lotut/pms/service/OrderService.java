@@ -52,5 +52,5 @@ public interface OrderService {
 	
 	void changeMonitorStatus(List<Long> feeIds,int monitorStatus);
 	
-	
+	Map<String, Map<String, String>> searchUserAllOrdersByOrderStatus();
 }

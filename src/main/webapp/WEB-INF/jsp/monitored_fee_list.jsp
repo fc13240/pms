@@ -72,7 +72,7 @@
 	        <li>已支付 (<c:out value='${feePaymentStatusCount[(2).intValue()]["feeCount"]}' default="0"/>)</li>
 	        </a>
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=3'/>">
-	        <li>已缴费 (<c:out value='${feePaymentStatusCount[(3).intValue()]["feeCount"]}' default="0"/>)</li>
+	        <li>已交局 (<c:out value='${feePaymentStatusCount[(3).intValue()]["feeCount"]}' default="0"/>)</li>
 	        </a> 
 	         <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=4'/>">
 	        <li>待支付 (<c:out value='${feePaymentStatusCount[(4).intValue()]["feeCount"]}' default="0"/>)</li>
@@ -172,7 +172,7 @@
 			</li>
 			<li style="width: 385px;">
 			  <p>关键字</p>
-			  <input name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码" class="t-input"/>
+			  <input name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人" class="t-input"/>
 			  <button>查询</button>
 			</li>
 		  </ul>
@@ -197,8 +197,10 @@
 					</a> <a href="javascript:delectFees()">
 					<button class="t-btn2">删除费用</button>
 					</a>
-					<span class="span3" style="font-size:14px;padding-left:300px">应缴费总额：￥${unpaidFeeCount }  </span>
-					<span class="span3" style="font-size:14px;padding-left:20px">成功缴费总额：￥${totalFeeCount }</span>
+
+					<span class="span3" style="font-size:14px;margin-left:50px;">成功缴费总额：￥${totalFeeCount }</span>
+					<span class="span3" style="font-size:14px;margin-left:50px;">应缴费总额：￥${unpaidFeeCount }  </span>
+
 				  </div>
 				  </span> 
 				</div>

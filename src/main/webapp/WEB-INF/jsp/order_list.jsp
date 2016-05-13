@@ -40,7 +40,7 @@
 	        <li>缴费成功 (<c:out value='${orderCountsByOrderStatus[(3).intValue()]["orderCount"]}' default="0"/>)</li>
 	        </a>
 	        <a href="<s:url value='/order/search.html?page.currentPage=1&orderStatus=4'/>">
-	        <li>已缴费 (<c:out value='${orderCountsByOrderStatus[(4).intValue()]["orderCount"]}' default="0"/>)</li>
+	        <li>已交局 (<c:out value='${orderCountsByOrderStatus[(4).intValue()]["orderCount"]}' default="0"/>)</li>
 	        </a> 
 	      </ul>		    
 	     </div>
@@ -117,7 +117,11 @@
                   <c:forEach items="${order.feeList}" var="fee" varStatus="status">
                     <tr>
                       <td class="center">${status.count}</td>
-                      <td>${fee.patent.appNo}</td>
+                      <td>
+                      
+
+						<a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a>
+                      </td>
                       <td>${fee.patent.name}</td>
                       <td>${fee.patent.firstAppPerson}</td>
                       <td>${fee.patent.patentStatus.statusDescription}</td>
