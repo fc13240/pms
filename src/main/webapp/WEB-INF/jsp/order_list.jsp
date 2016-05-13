@@ -4,6 +4,7 @@
 <%@ taglib uri="c" prefix="c" %>
 <%@ taglib uri="fmt" prefix="fmt" %>
 <%@ taglib uri="spring-form" prefix="form" %>
+<%@ taglib uri="fn" prefix="fn" %>
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -162,9 +163,16 @@
 					</c:choose>                  	
 
                   </c:forEach>
-					<tr>
-					<td colspan="9" class="lt_more">更多/收起</td>
-					</tr> 
+							<c:if test="${fn:length(order.feeList)>2}">
+							<!-- 	${fn:length(order.feeList)} --> 
+							<tr>
+							<td colspan="9" >
+							
+							<button class="lt_more" type="button" style="width:90px;" class="t-btn6" >更多/收起</button>
+							</td>
+							</tr> 
+							</c:if>
+					
                 </tbody>
               </table></td>
             <td>${order.postAddress.receiver}
