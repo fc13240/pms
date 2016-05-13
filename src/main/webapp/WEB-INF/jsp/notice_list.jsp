@@ -99,7 +99,7 @@
 	        <li>处理中 (<c:out value='${paperApplyTypeCount[(3).intValue()]["noticeCount"]}' default="0"/>)</li>
 	        </a> 
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=4'/>">
-	        <li>无发送 (<c:out value='${paperApplyTypeCount[(4).intValue()]["noticeCount"]}' default="0"/>)</li>
+	        <li>已发送 (<c:out value='${paperApplyTypeCount[(4).intValue()]["noticeCount"]}' default="0"/>)</li>
 	        </a> 
 	        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=5'/>">
 	        <li>无纸件 (<c:out value='${paperApplyTypeCount[(5).intValue()]["noticeCount"]}' default="0"/>)</li>
@@ -242,9 +242,9 @@
 				  <th width="90px">纸质申请</th>
 				  <th>期限</th>
 				  <th>通知状态</th>
-				  <!-- 							<th>预览</th> -->
-				  <th>下载</th>
-				  <th width="70px">操作</th>
+				  <!-- 							<th>预览</th> 
+				  <th>下载</th>-->
+				  <th width="100px">操作</th>
 				</tr>
 			  </thead>
 			  <tbody>
@@ -302,12 +302,9 @@
 					  </select>
 					  </label>
 					</td>
-					<%-- 							<td><a href="javascript: void;" onclick="javascript:window.open('<s:url value="/patent/detail/"/><c:out value="${notice.patent.patentId}"/>.html')"> --%>
-					<%-- 								<img src="<s:url value='/temp/images/look.png'/>" /> --%>
-					<!-- 								</a> -->
-					<!-- 							</td> -->
-					<td><a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}"> <img src="<s:url value='/temp/images/download.png'/>" /> </a> </td>
-					<td><a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
+					<td>
+					<a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}"> 下载 </a> 
+					<a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
 					  分享
 					  </a>&nbsp;
 					  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${notice.patent.patentId}'/>">
@@ -319,7 +316,7 @@
 			</table>
 			<!-- 分页功能 start -->
 			<div style="height:30px;background:#fff;">
-			  <c:if test="${searchCondition == null}">
+				<c:if test="${searchCondition == null}">
 				<div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1">首页</a>
 				  <c:choose>
 					<c:when test="${page.currentPage - 1 > 0}"> <a href="?currentPage=${page.currentPage - 1}">上一页</a> </c:when>
@@ -344,34 +341,36 @@
 					<option value="100">100</option>
 				  </select>
 				  条记录 </span> </div>
-			  </c:if>
+				</c:if>
+				<c:if test="${searchCondition != null}">
+				  <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?page.currentPage=1&${searchCondition}">首页</a>
+					<c:choose>
+					  <c:when test="${page.currentPage - 1 > 0}"> <a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a> </c:when>
+					  <c:when test="${page.currentPage - 1 <= 0}"> <a href="?page.currentPage=1&${searchCondition}">上一页</a> </c:when>
+					</c:choose>
+					<c:choose>
+					  <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a> </c:when>
+					  <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a> </c:when>
+					  <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a> </c:when>
+					</c:choose>
+					<c:choose>
+					  <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a> </c:when>
+					  <c:otherwise> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise>
+					</c:choose>
+					<!-- 分页功能 End -->
+					<input type="text" id="page.pageNo" style="width:50px;height:15px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
+					<a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
+					<select onChange="setPageSize()" id="pageSizeSelect">
+					  <option value="10">10</option>
+					  <option value="20">20</option>
+					  <option value="50">50</option>
+					  <option value="100">100</option>
+					</select>
+					条记录 </span> </div>
+				</c:if>			  
+				  
 			</div>
-			<c:if test="${searchCondition != null}">
-			  <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?page.currentPage=1&${searchCondition}">首页</a>
-				<c:choose>
-				  <c:when test="${page.currentPage - 1 > 0}"> <a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a> </c:when>
-				  <c:when test="${page.currentPage - 1 <= 0}"> <a href="?page.currentPage=1&${searchCondition}">上一页</a> </c:when>
-				</c:choose>
-				<c:choose>
-				  <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a> </c:when>
-				  <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a> </c:when>
-				  <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a> </c:when>
-				</c:choose>
-				<c:choose>
-				  <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a> </c:when>
-				  <c:otherwise> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise>
-				</c:choose>
-				<!-- 分页功能 End -->
-				<input type="text" id="page.pageNo" style="width:50px;height:15px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
-				<a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
-				<select onChange="setPageSize()" id="pageSizeSelect">
-				  <option value="10">10</option>
-				  <option value="20">20</option>
-				  <option value="50">50</option>
-				  <option value="100">100</option>
-				</select>
-				条记录 </span> </div>
-			</c:if>
+
 			<!-- /.span -->
 		  </div>
 		  <!-- /.row -->

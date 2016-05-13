@@ -33,7 +33,7 @@ public class Patent {
 		this.appDate = appDate;
 		this.patentType = new PatentType(patentType);
 	    this.patentStatus = new PatentStatus(patentStatus);
-	    this.setPatentStatusText(patentStatusText);
+	    this.patentStatusText = patentStatusText;
 	}
 	
 	public String getFirstAppPerson() {

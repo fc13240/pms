@@ -74,6 +74,12 @@
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=3'/>">
 	        <li>已缴费 (<c:out value='${feePaymentStatusCount[(3).intValue()]["feeCount"]}' default="0"/>)</li>
 	        </a> 
+	         <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=4'/>">
+	        <li>待支付 (<c:out value='${feePaymentStatusCount[(4).intValue()]["feeCount"]}' default="0"/>)</li>
+	        </a> 
+	         <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=5'/>">
+	        <li>缴费成功 (<c:out value='${feePaymentStatusCount[(5).intValue()]["feeCount"]}' default="0"/>)</li>
+	        </a> 
 	      </ul>
 	     
 	    </div>
