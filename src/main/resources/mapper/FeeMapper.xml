@@ -318,7 +318,7 @@
 	<select id="getFeeAllCountByUser" parameterType="int" resultType="int">
 		select case when sum is null then 0 else sum end as c
 			    from (select sum(f.amount) as 'sum' from fees f
-			    where f.fee_owner = #{userId} and f.fee_payment_status =3) as a
+			    where f.fee_owner = #{userId} and f.fee_payment_status =3 or f.fee_payment_status = 2 or f.fee_payment_status = 5) as a
 	</select>
 	
 	<!--当前用户未缴纳的金额  -->
