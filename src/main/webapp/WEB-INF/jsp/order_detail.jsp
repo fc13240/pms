@@ -136,41 +136,7 @@
 			</tbody>
 		  </table>
 		</c:if>
-		<table class="table table-striped table-bordered table-hover">
-		  <thead>
-			<tr class="simple_bag">
-			  <th>费用信息</th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<tr>
-			  <td><table class="table table-striped table-bordered table-hover">
-				  <thead>
-					<tr class="simple_bag">
-					  <th>服务费</th>
-					  <th>快递费</th>
-					  <th>龙图腾发票增值税</th>
-					   <th>官费</th>
-					</tr>
-				  </thead>
-				  <tbody>
-					<tr>
-					  <td>￥${order.serviceFee}</td>
-					  <td>￥${order.expressFee}</td>
-					  <td>￥${order.invoiceFee}</td>
-					  <td>
-					  	<c:set var="totalAmount" value="0"></c:set>
-					  	<c:forEach items="${order.feeList}" var="fee">
-					  		<c:set var="totalAmount" value="${totalAmount+fee.amount}"></c:set>
-					  	</c:forEach>
-					  	${totalAmount }
-					  </td>
-					</tr>
-				  </tbody>
-				</table></td>
-			</tr>
-		  </tbody>
-		</table>
+
 		<table class="table table-striped table-bordered table-hover">
 		 <thead>
 			<tr class="simple_bag">
@@ -179,7 +145,7 @@
 		  </thead>
 		  <tbody>
 		    <tr>
-		    	<td>${order.invoice}</td>
+		    	<td><font style="color: red">${order.invoice}</font></td>
 		    </tr>
 		  </tbody>
 		</table>
@@ -213,6 +179,41 @@
 					  <c:if test="${order.expressFee == 0 && order.postAddress == null}">
 					   <td>无</td>
 					  </c:if>
+					</tr>
+				  </tbody>
+				</table></td>
+			</tr>
+		  </tbody>
+		</table>
+		<table class="table table-striped table-bordered table-hover">
+		  <thead>
+			<tr class="simple_bag">
+			  <th>费用信息</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr>
+			  <td><table class="table table-striped table-bordered table-hover">
+				  <thead>
+					<tr class="simple_bag">
+					  <th>官费</th>
+					  <th>服务费</th>
+					  <th>快递费</th>
+					  <th>龙图腾发票增值税</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<tr>
+					  <td>
+					  	<c:set var="totalAmount" value="0"></c:set>
+					  	<c:forEach items="${order.feeList}" var="fee">
+					  		<c:set var="totalAmount" value="${totalAmount+fee.amount}"></c:set>
+					  	</c:forEach>
+					  	${totalAmount }
+					  </td>
+					  <td>￥${order.serviceFee}</td>
+					  <td>￥${order.expressFee}</td>
+					  <td>￥${order.invoiceFee}</td>
 					</tr>
 				  </tbody>
 				</table></td>
