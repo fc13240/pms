@@ -118,8 +118,6 @@
                     <tr>
                       <td class="center">${status.count}</td>
                       <td>
-                      
-
 						<a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a>
                       </td>
                       <td>${fee.patent.name}</td>
