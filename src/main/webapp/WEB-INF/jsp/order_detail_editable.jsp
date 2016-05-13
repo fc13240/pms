@@ -150,6 +150,7 @@
 					  <th>服务费</th>
 					  <th>快递费</th>
 					  <th>龙图腾发票增值税</th>
+					  <th>官费</th>
 					</tr>
 				  </thead>
 				  <tbody>
@@ -157,6 +158,13 @@
 					  <td>￥${order.serviceFee}</td>
 					  <td>￥${order.expressFee}</td>
 					  <td>￥${order.invoiceFee}</td>
+					  <td>
+					  	<c:set var="totalAmount" value="0"></c:set>
+					  	<c:forEach items="${order.feeList}" var="fee">
+					  		<c:set var="totalAmount" value="${totalAmount+fee.amount}"></c:set>
+					  	</c:forEach>
+					  	${totalAmount }
+					  </td>
 					</tr>
 				  </tbody>
 				</table></td>
