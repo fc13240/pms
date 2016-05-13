@@ -227,7 +227,8 @@
 					<c:forEach items="${fees}" var="fee" varStatus="status">
 					  <tr>
 						<td class="center"><span class="batch-share-item">
-						  <input type="checkbox" class="fee-check-item" fee="${fee.feeId}" amount="${fee.amount}" onclick="calcTotalAmount()" paymentStatus="${fee.paymentStatus.paymentStatusId}">
+						  <input type="checkbox" class="fee-check-item" fee="${fee.feeId}" amount="${fee.amount}" onclick="calcTotalAmount()" 
+						  	paymentStatus="${fee.paymentStatus.paymentStatusId}" deadline="<fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/>">
 						  </span> </td>
 						<td class="center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
 						<td><a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a></td>
@@ -480,6 +481,18 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'fee');
 		var paymentStatus = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'paymentStatus');
 		
+		var deadline = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item','deadline');
+		
+		var now =new Date().getTime();
+		
+		for(var k= 0; k < deadline.length; k++){
+			//alert(checkTime(dateFormat(deadline[k],'yyyy-MM-dd HH:mm:ss'),nowDataFormat(new Date(),'yyyy-MM-dd HH:mm:ss')));
+			var isOverDue=checkTime(now,deadline[k]);
+			if(isOverDue){
+				formutil.alertMessage('已超出规定缴费期限！');
+			return;
+			}
+		}
 		for (var i = 0; i < paymentStatus.length; i++) {
 			if (paymentStatus[i] == 2 || paymentStatus[i] == 3 || paymentStatus[i] == 4) {
 				formutil.alertMessage('包含已支付或已加入订单内的记录，请重新选择！');
@@ -489,7 +502,13 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 		
 		window.open("<s:url value='/order/orderCreateForm.html'/>?fees=" + fees);	
 	}
-
+	function checkTime(now,deadline){
+		var deadline = Date.parse(deadline.replace(/-/g, '/'));
+		if(deadline-now>43200000){
+			return false;
+		}
+		return true;
+	}
 </script>	
 
 <script type="text/javascript">
