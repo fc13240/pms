@@ -142,7 +142,9 @@ public class AlipayController {
 			boolean success = trade_status.equals("TRADE_FINISHED") || trade_status.equals("TRADE_SUCCESS");
 			if(success){
 				long orderId = Long.parseLong(orderIdStr);
+				
 				orderService.processOrderPaidSuccess(orderId);
+				
 				return "pay_success";
 			}
 		} else {
