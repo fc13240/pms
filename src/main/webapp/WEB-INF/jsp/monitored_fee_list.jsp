@@ -72,7 +72,7 @@
 	        <li>已支付 (<c:out value='${feePaymentStatusCount[(2).intValue()]["feeCount"]}' default="0"/>)</li>
 	        </a>
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=3'/>">
-	        <li>已缴费 (<c:out value='${feePaymentStatusCount[(3).intValue()]["feeCount"]}' default="0"/>)</li>
+	        <li>已交局 (<c:out value='${feePaymentStatusCount[(3).intValue()]["feeCount"]}' default="0"/>)</li>
 	        </a> 
 	         <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=4'/>">
 	        <li>待支付 (<c:out value='${feePaymentStatusCount[(4).intValue()]["feeCount"]}' default="0"/>)</li>

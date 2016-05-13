@@ -51,4 +51,7 @@ public interface OrderMapper {
 	@MapKey("orderStatus")
 	Map<String, Map<String, String>> searchUserOrdersByOrderStatus(int userId);
 	
+	@MapKey("orderStatus")
+	Map<String, Map<String, String>> searchUserAllOrdersByOrderStatus();
+	
 }

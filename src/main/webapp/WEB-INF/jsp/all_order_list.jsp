@@ -21,7 +21,30 @@
 		<hr class="t-hr">
 		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">订单</span>
 	</div>
-	
+	  <div id="menu">
+	  <div style="height:33px;">
+	    <ul id="nav">
+	      <p>快捷处理：</p>
+	      <li><a href="#" class="selected">支付状态</a></li>
+	    </ul>
+	  </div>
+  
+	  <div id="menu_con" style="min-width:1100px;">
+		    <div class="tag" style="display:block;"> 
+		      <ul class="qxjk-ul">
+		        <a href="<s:url value='/order/adminSearch.html?page.currentPage=1&orderStatus=2'/>">
+		        <li>已支付 (<c:out value='${orderCountsByOrderStatus[(2).intValue()]["orderCount"]}' default="0"/>)</li>
+		        </a> 
+		        <a href="<s:url value='/order/adminSearch.html?page.currentPage=1&orderStatus=3'/>">
+		        <li>缴费成功 (<c:out value='${orderCountsByOrderStatus[(3).intValue()]["orderCount"]}' default="0"/>)</li>
+		        </a>
+		        <a href="<s:url value='/order/adminSearch.html?page.currentPage=1&orderStatus=4'/>">
+		        <li>已交局 (<c:out value='${orderCountsByOrderStatus[(4).intValue()]["orderCount"]}' default="0"/>)</li>
+		        </a> 
+		      </ul>		    
+		     </div>
+	 </div>
+ 	</div>
 <div class="lt-box">
   <form action="<s:url value='/order/adminSearch.html'/>" method="get">
     <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>

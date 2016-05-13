@@ -196,6 +196,11 @@ public class OrderServiceImpl implements OrderService {
 		
 	}
 
+	@Override
+	public Map<String, Map<String, String>> searchUserAllOrdersByOrderStatus() {
+		return orderDao.searchUserAllOrdersByOrderStatus();
+	}
+
 
 
 }

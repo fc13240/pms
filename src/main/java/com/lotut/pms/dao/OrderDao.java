@@ -49,4 +49,6 @@ public interface OrderDao {
 	void updateOrderFeesStatus(List<OrderItem> orderItems);
 	
 	Map<String, Map<String, String>> searchUserOrdersByOrderStatus(int userId);
+	
+	Map<String, Map<String, String>> searchUserAllOrdersByOrderStatus();
 }
