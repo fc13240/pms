@@ -121,7 +121,7 @@
                 
                 
                   <c:forEach items="${order.feeList}" var="fee" varStatus="status">
-<<<<<<< HEAD
+
            
 					<c:choose>
 						<c:when test="${status.count<=2}">
@@ -141,7 +141,7 @@
 							  <td>${fee.invoiceTitle}</td>
 							</tr>
 						</c:when>
-						<c:when test="${status.count==3}"> 
+						<c:when test="${status.count>2}"> 
    
 							<tr class="lt_tr_hiden">
 							  <td class="center">${status.count}</td>
@@ -159,7 +159,7 @@
 							  <td>${fee.invoiceTitle}</td>
 							</tr>
 						</c:when>						
-						<c:otherwise>
+				<!-- 		<c:otherwise>
 							
 							<tr class="lt_tr_hiden">
 							  <td class="center">${status.count}</td>
@@ -176,27 +176,9 @@
 							  <td>${fee.amount} </td>
 							  <td>${fee.invoiceTitle}</td>
 							</tr>
-    					</c:otherwise>
-				
-
+    					</c:otherwise> -->
 					</c:choose>                  	
-	   	
-                    
-=======
-                    <tr>
-                      <td class="center">${status.count}</td>
-                      <td>
-						<a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a>
-                      </td>
-                      <td>${fee.patent.name}</td>
-                      <td>${fee.patent.firstAppPerson}</td>
-                      <td>${fee.patent.patentStatus.statusDescription}</td>
-                      <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
-                      <td>${fee.feeType}</td>
-                      <td>${fee.amount} </td>
-                      <td>${fee.invoiceTitle}</td>
-                    </tr>
->>>>>>> 4b20e88bc085f51b26723ce3864191c681c4f7bb
+
                   </c:forEach>
 					<tr>
 					<td colspan="9" class="lt_more">更多/收起</td>
@@ -293,18 +275,11 @@
 	});
 	
 	$(".lt_more").click(function(){
-	//	alert('why');
-	//	$(this).parent().(".lt_tr_hiden").toggle();
-	//	$(".lt_tr_hiden").toggle();	
-	//abc=$(this).parent();
-	//alert(abc);
 		$(this).closest("tbody").find('.lt_tr_hiden').toggle();
 
 	})
 	
-	
 
-	
 	
 </script>
 
