@@ -345,6 +345,6 @@
 		            join (select count(*) withinThreeYear from fees where fee_owner = 2 and fee_monitor_status = 2 and 
 		            	  deadline &gt;CURDATE() and deadline &lt;=CURDATE()+INTERVAL 3 YEAR) d on 1=1 
 	       			join (select count(*) outThreeYear from fees where fee_owner = 2 and fee_monitor_status = 2 and 
-	       			      deadline &gt;=CURDATE()+INTERVAL 2 YEAR) e on 1=1
+	       			      deadline &gt;=CURDATE()+INTERVAL 3 YEAR) e on 1=1
 	</select>
 </mapper>
