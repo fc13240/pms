@@ -22,9 +22,9 @@
 	</div>
 	
 	<div class="t-box">
-		<form action="<s:url value='/notice/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+		<form id="notice" action="<s:url value='/notice/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
 		<input style="display:none;" id="id_notice_file" name="noticeFile" type="file" />
-		<input style="width:300px;height:25px;" type="text" id="filename" placeholder="请选择文件" readonly="readonly">
+		<input style="width:300px;height:25px;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly" required>
 		<button type="button" onclick="$('input[id=id_notice_file]').click();" class="t-btn3">浏览</button>
 		<button type="submit" class="t-btn2">上传</button>
 		</form>  
@@ -33,10 +33,26 @@
 
 </div>
 <script type="text/javascript">
+	jQuery(function($) {
+		$("#notice").validate({
+			rules: {
+				filename: 'required'
+			},
+			messages: {
+				filename: '请选择要上传的通知书压缩文件'
+			},
+			submitHandler: function(form){ 
+				form.submit();     
+			}
+		});
+	});
+
 	$('input[id=id_notice_file]').change(function() {  
 		$('#filename').val($(this).val());  
 	});
 </script>
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	
 </body>
 </html>
 
