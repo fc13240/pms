@@ -172,7 +172,7 @@
 			</li>
 			<li style="width: 385px;">
 			  <p>关键字</p>
-			  <input name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码" class="t-input"/>
+			  <input name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人" class="t-input"/>
 			  <button>查询</button>
 			</li>
 		  </ul>
