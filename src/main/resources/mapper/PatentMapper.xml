@@ -300,7 +300,7 @@
 		 select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, p.patent_type,
 	                ps.patent_status_id, ps.patent_status_desc, p.patent_status_text from patents p left join patent_status ps on 
 	                p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
-				where up.user = #{userId} and p.app_no= #{app_no};
+				where up.user = #{userId} and p.app_no= #{appNo};
 	</select>
 	
 	<select id="getPatentIdByAppNo" parameterType="string" resultType="int">
