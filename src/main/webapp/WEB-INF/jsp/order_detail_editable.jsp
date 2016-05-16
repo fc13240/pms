@@ -169,7 +169,7 @@
 					   <span>挂号信</span>
 					  </c:if>
 					  <c:if test="${order.expressFee == 0 && order.postAddress == null}">
-					   <td>无</td>
+					   <span>无</span>
 					  </c:if>
 <%-- 				  <input type="text" name="expressCompany" id="expressCompany" value="${order.expressCompany}" required/> --%>
 				  <div style="margin-top:10px;">
