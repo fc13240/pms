@@ -505,7 +505,8 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 	}
 	function checkTime(now,deadline){
 		var deadline = Date.parse(deadline.replace(/-/g, '/'));
-		if(deadline-now>43200000){
+		var twelveHours=43200000;
+		if(deadline-now>twelveHours){
 			return false;
 		}
 		return true;
