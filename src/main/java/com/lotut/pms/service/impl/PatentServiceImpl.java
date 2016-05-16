@@ -163,8 +163,8 @@ public class PatentServiceImpl implements PatentService {
 	}
 
 	@Override
-	public int getPatentIdByAppNo(String appNo) {
-		return patentDao.getPatentIdByAppNo(appNo);
+	public int getPatentIdByAppNo(Integer userId,String appNo) {
+		return patentDao.getPatentIdByAppNo(userId,appNo);
 	}
 
 	

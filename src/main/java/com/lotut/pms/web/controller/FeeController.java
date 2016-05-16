@@ -218,7 +218,7 @@ public class FeeController {
 		@RequestMapping(path="/addFee", method=RequestMethod.POST)
 		public String addFee(@RequestParam("appNo")String appNo, @ModelAttribute("fee")Fee fee,Model model){
 			int userId = PrincipalUtils.getCurrentUserId();
-			int patentId=patentService.getPatentIdByAppNo(appNo);
+			int patentId=patentService.getPatentIdByAppNo(userId,appNo);
 			feeService.saveFee(fee, userId,patentId);
 			return "add_patent_success";
 		}

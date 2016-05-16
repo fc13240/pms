@@ -57,5 +57,5 @@ public interface PatentDao {
 	
 	Patent getPatentsByAppNo(Integer userId,String appNo);
 	
-	int getPatentIdByAppNo(String appNo);
+	int getPatentIdByAppNo(Integer userId,String appNo);
 }
