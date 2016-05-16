@@ -101,8 +101,9 @@ public class FeeSearchCondition {
 		String startDeadlineStr = startDeadline == null ? "" : formatter.format(startDeadline);
 		String endDeadlineStr = endDeadline == null ? "" : formatter.format(endDeadline);
 		String keywordStr = keyword == null ? "" : keyword;
+		String deadlineStatusStr = deadlineStatus == null ? "" : deadlineStatus.toString();
 		return 	"&patentType="+patentTypeStr+
 				"&paymentStatus="+paymentStatusStr+"&patentStatus="+patentStatusStr+"&startDeadline="
-				+startDeadlineStr+"&endDeadline="+endDeadlineStr+"&keyword="+keywordStr;
+				+startDeadlineStr+"&endDeadline="+endDeadlineStr+"&keyword="+keywordStr+"&deadlineStatus="+deadlineStatusStr;
 	}
 }

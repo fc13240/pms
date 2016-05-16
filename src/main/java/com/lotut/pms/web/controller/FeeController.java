@@ -117,7 +117,6 @@ public class FeeController {
 	//CS:搜索分页
 	@RequestMapping(path="/search", method=RequestMethod.GET)
 	public String searchUserMonitoredFees(@ModelAttribute("searchCondition")FeeSearchCondition searchCondition, Model model,HttpSession session) {
-		searchCondition.setDeadlineStatus(WebUtils.getDeadlineStatus(session));
 		Page page=searchCondition.getPage();
 		page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
@@ -221,12 +220,5 @@ public class FeeController {
 			int patentId=patentService.getPatentIdByAppNo(appNo);
 			feeService.saveFee(fee, userId,patentId);
 			return "add_patent_success";
-		}
-		
-		@RequestMapping(path="/saveDeadlineStatus",method=RequestMethod.POST)
-		public @ResponseBody String saveDeadlineStatus(String deadlineStatus,HttpSession session){
-			session.setAttribute("deadlineStatus", deadlineStatus);
-			System.out.println(deadlineStatus);
-			return "";
 		}
 }

@@ -83,7 +83,7 @@
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
 				join patent_status ps on p.patent_status = ps.patent_status_id
 				left join order_items oi on f.fee_id = oi.fee_id
-		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2 and f.fee_payment_status =1 and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
+		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2 and f.fee_payment_status =1 and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
 		 order by p.patent_id, f.deadline
 		 limit #{startIndex}, #{pageSize}
 	</select>
@@ -91,7 +91,7 @@
 	<select id="getUserMonitoredFeesCount"  resultType="int">
 		select count(*)
 		  from fees f 
-		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2 and f.fee_payment_status =1
+		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2 and f.fee_payment_status =1 and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
 	</select>
 	
 	<select id="searchUserMonitoredFees" parameterType="FeeSearchCondition" resultMap="FeeResultMap">
@@ -124,6 +124,21 @@
 		 	<if test="keyword != null">
 				and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
 					or p.app_person like #{keyword_pattern} or f.fee_type like #{keyword_pattern}) 																	
+			</if>
+			<if test="deadlineStatus==1">
+				and f.fee_payment_status =1 and f.deadline &lt;CURDATE()
+			</if>
+			<if test="deadlineStatus==2">
+				and f.fee_payment_status =1 and f.deadline &gt;=CURDATE() AND f.deadline &lt;=(CURDATE()+INTERVAL 2 WEEK)
+			</if>
+			<if test="deadlineStatus==3">
+				and f.fee_payment_status =1 and f.deadline &gt;(CURDATE()+INTERVAL 2 WEEK) and f.deadline &lt;=(CURDATE()+INTERVAL 2 MONTH)
+			</if>
+			<if test="deadlineStatus==4">
+				and f.fee_payment_status =1 and f.deadline &gt;(CURDATE()+INTERVAL 2 MONTH) and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
+			</if>
+			<if test="deadlineStatus==5">
+				and f.fee_payment_status =1 and f.deadline &gt;(CURDATE()+INTERVAL 3 YEAR)
 			</if>		 
 		order by p.patent_id, f.deadline
 	</select>	
