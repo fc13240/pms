@@ -206,8 +206,9 @@ public class FeeController {
 		public void getPatentByPatentId(@RequestParam("appNo")String appNo, 
 				Model model, HttpServletResponse response) throws IOException {
 			response.setContentType("application/json;charset=UTF-8");
-			Patent patent=patentService.getPatentsByAppNo(appNo);
-			List<String> feeTypes=feeService.getFeeTypes(appNo);
+			int userId=PrincipalUtils.getCurrentUserId();
+			Patent patent=patentService.getPatentsByAppNo(userId,appNo);
+			List<String> feeTypes=feeService.getFeeTypes(appNo); 
 			Map<String, Object> map = new HashMap<>();
 			map.put("patent", patent);
 			map.put("feeTypes", feeTypes);

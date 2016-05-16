@@ -147,8 +147,8 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	}
 
 	@Override
-	public Patent getPatentsByAppNo(String appNo) {
-		return patentMapper.getPatentsByAppNo(appNo);
+	public Patent getPatentsByAppNo(Integer userId,String appNo) {
+		return patentMapper.getPatentsByAppNo(userId,appNo);
 	}
 
 	@Override

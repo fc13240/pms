@@ -53,7 +53,7 @@ public interface PatentService {
 	 
 	 List<Patent> getUserPatentsWithFee(int userId);
 	 
-	 Patent getPatentsByAppNo(String appNo);
+	 Patent getPatentsByAppNo(Integer userId,String appNo);
 	 
 	 int getPatentIdByAppNo(String appNo);
 }

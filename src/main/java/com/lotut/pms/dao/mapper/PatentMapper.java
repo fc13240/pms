@@ -66,7 +66,7 @@ public interface PatentMapper {
 	
 	List<Patent> getUserPatentsWithFee(@Param("userId")int userId);
 	
-	Patent getPatentsByAppNo(@Param("appNo")String appNo);
+	Patent getPatentsByAppNo(@Param("userId") Integer user_id, @Param("appNo")String appNo);
 	
 	int getPatentIdByAppNo(@Param("appNo")String appNo);
 }
