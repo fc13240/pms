@@ -504,12 +504,15 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 		window.open("<s:url value='/order/orderCreateForm.html'/>?fees=" + fees);	
 	}
 	function checkTime(now,deadline){
+		
 		var deadline = Date.parse(deadline.replace(/-/g, '/'));
+		
 		var twelveHours=43200000;
-		if(deadline-now>twelveHours){
-			return false;
+		var oneday=twelveHours*2;
+		if(deadline+oneday-now<twelveHours){
+			return true;
 		}
-		return true;
+		return false;
 	}
 </script>	
 
