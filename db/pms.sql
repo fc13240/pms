@@ -499,16 +499,13 @@ ALTER TABLE patents ADD COLUMN patent_status_text VARCHAR(150);
 ALTER TABLE orders DROP COLUMN courier;
 ALTER TABLE orders DROP COLUMN courier_phone;
 
-
-DROP TABLE IF EXISTS `patent_office_account`;
-CREATE TABLE `patent_office_account` (
-  `account_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user` int(11) NOT NULL COMMENT '用户id',
-  `name` varchar(200) DEFAULT NULL COMMENT '电子用户名',
-  `username` varchar(100) NOT NULL COMMENT '电子代码',
-  `password` varchar(100) NOT NULL COMMENT '电子登录密码',
-  `patent_update_time` datetime DEFAULT NULL COMMENT '更新时间',
+CREATE TABLE if not exists patent_office_accounts (
+  account_id int(11) NOT NULL AUTO_INCREMENT,
+  user int(11) NOT NULL COMMENT '用户id',
+  name varchar(200) DEFAULT NULL COMMENT '电子用户名',
+  username varchar(100) NOT NULL COMMENT '电子代码',
+  password varchar(100) NOT NULL COMMENT '电子登录密码',
+  patent_update_time datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`account_id`),
-  KEY `fk_patent_office_account_users` (`username`),
-  CONSTRAINT `fk_patent_office_account_users` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
+  CONSTRAINT `fk_patent_office_account_users` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
