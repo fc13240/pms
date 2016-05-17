@@ -490,9 +490,11 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 			//alert(checkTime(dateFormat(deadline[k],'yyyy-MM-dd HH:mm:ss'),nowDataFormat(new Date(),'yyyy-MM-dd HH:mm:ss')));
 			var isOverDue=checkTime(now,deadline[k]);
 			if(isOverDue){
-				formutil.alertMessage('已超出规定缴费期限！');
-			return;
+				if(!confirm('已超出规定缴费期限！,是否继续操作？'))
+				return;
+				break;
 			}
+			
 		}
 		for (var i = 0; i < paymentStatus.length; i++) {
 			if (paymentStatus[i] == 2 || paymentStatus[i] == 3 || paymentStatus[i] == 4) {
