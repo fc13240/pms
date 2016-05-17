@@ -3,7 +3,7 @@
 	<ol class="hashTabber-nav hashTabber-sandstone">
 		<h2>专利缴费</h2>
 		<li class="">
-		<a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>"><h5>官费监控</h5></a>
+		<a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>"><h5>购物车</h5></a>
 		</li>
 		<li  class="">
 		<a href="<s:url value='/order/list.html'/>"><h5>我的订单</h5> </a>
