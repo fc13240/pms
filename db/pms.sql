@@ -505,7 +505,7 @@ CREATE TABLE if not exists patent_office_accounts (
   name varchar(200) DEFAULT NULL COMMENT '电子用户名',
   username varchar(100) NOT NULL COMMENT '电子代码',
   password varchar(100) NOT NULL COMMENT '电子登录密码',
-  patent_update_time datetime DEFAULT NULL COMMENT '更新时间',
+  patent_update_time datetime DEFAULT NULL COMMENT '专利更新时间',
   PRIMARY KEY (`account_id`),
   CONSTRAINT `fk_patent_office_account_users` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
