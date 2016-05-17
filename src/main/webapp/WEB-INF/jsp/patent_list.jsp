@@ -127,9 +127,12 @@
 	        <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
 	          <div class="ta-top" style="margin:8px;"> <a href="javascript:batchShare()">
 	            <button class="t-btn3">批量分享</button>
-	            </a> <a href="javascript:batchGrabFees()">
-	            <button class="t-btn4">官费查询</button>
+	            </a> 
+	            <div style="float:right;">
+	            <a href="javascript:batchGrabFees()">
+	            <button class="t-btn7">在线缴纳官费</button>
 	            </a>
+	            </div>
 	            <!-- 							<button class="t-btn5">加入交易</button> -->
 	          </div>
 	          </span> </div>

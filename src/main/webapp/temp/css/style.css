@@ -255,7 +255,6 @@ background:#f3f3f5;
     background: #fff;
     padding: 30px 20px 60px 20px;
 	border: 1px solid #E6EAED;}
-.ta-top{float:left;}
 .t-btn1 {
     height: 35px !important;
     color: #fff;
@@ -300,6 +299,19 @@ background:#f3f3f5;
 	margin:0px 10px 0px 0px;
 	cursor:pointer;
 }
+
+.t-btn7 {
+    height: 35px !important;
+    color: #fff;
+    border: 1px solid #FF3333;
+    background: #FF3333;
+    padding: 0px 10px 0px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+	margin:0px 10px 0px 0px;
+	cursor:pointer;
+}
+
 .t-btn5 {
     height: 35px !important;
     color: #fff;
