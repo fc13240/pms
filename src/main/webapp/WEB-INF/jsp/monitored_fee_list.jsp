@@ -492,7 +492,9 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 			if(isOverDue){
 				if(!confirm('已超出规定缴费期限！,是否继续操作？'))
 				return;
+				break;
 			}
+			
 		}
 		for (var i = 0; i < paymentStatus.length; i++) {
 			if (paymentStatus[i] == 2 || paymentStatus[i] == 3 || paymentStatus[i] == 4) {
