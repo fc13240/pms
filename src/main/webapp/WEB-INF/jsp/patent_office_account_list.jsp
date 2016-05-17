@@ -62,7 +62,23 @@
 	                <td><c:out value="${account.username}"/></td>
 	                <td><c:out value="${account.password}"/></td>
 	                <td><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd"/></td>
-	                <td>验证更新 修改 删除</td>
+	                
+	                
+	                <td>验证更新&nbsp; 
+	                	<a  href="<s:url value=''/>?patents=<c:out value='${patent.patentId}'/>">
+	                  		修改</a>&nbsp;
+	                  	<a href="JavaScript:void(0)" onclick="deleteAccount('${account.accountId}')">
+	                                                                  删除 </a> 
+	                                                                  
+	                                                                  
+	                  </td>
+	                
+	                
+	                
+	                
+	                
+	                
+	                
 	              </tr>
 	            </c:forEach>
 	          </tbody>
@@ -86,108 +102,20 @@
 		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
 	});
 	
-	function batchShare() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		var uniquePatentNos = []
-		if (!patentSelected) {
-			formutil.alertMessage('请选择专利');
-			
-			return;
-		}
-		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
-		for (var i = 0; i < patents_checked.length; i++) {
-			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
-				uniquePatentNos.push(patents_checked[i]);
-			}
-		}		
-		var patents = uniquePatentNos.join(",");		
-		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
-	}
-	function batchGrabFees(){
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		
-		if (!patentSelected) {
-			formutil.alertMessage('请选择专利');
-			return;
-		}
-			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
-		
-		 window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patentNos);		
-		
-	}	
+
 	
 	
-	function getFeeInfo(patentId) {
-		window.open("/fee/list?patentId=" + patentId);
-	}
-	
-	
-	function changeInternalCode(patentId, internalCode) {
+	function deleteAccount(accountId) {
 		$.ajax({
-			url: "<s:url value='/patent/changeInternalCode.html'/>?patentId=" + patentId + "&internalCode=" + internalCode, 
+			url: "<s:url value='/patentOfficeAccount/delete.html'/>?accountId="+ accountId,
 			type: 'get', 
-			success: function(data) {
-				//formutil.alertMessage('内部编码修改成功');	
-			},
-			error: function() {
-				formutil.alertMessage('内部编码修改失败');
+			success: function() {
+				location.reload();
 			}
-		});	
+		});		
 	}
 	
-	
-	
-	function gotoPage() {
-		var pageNo = document.getElementById("page.pageNo").value;
-		
-		if (isNaN(pageNo)) {
-			alert("请输入数值");
-			return;
-		}
-		
-		if(pageNo==""){
-			alert("请输入数值")
-			return;
-		}
-		
-		pageNo = parseInt(pageNo);
-		
-		if (pageNo < 1 || pageNo > parseInt("${page.totalPages}")) {
-			alert("只能输入1-${page.totalPages}之间的数值");
-			return;
-		}
-		
-		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
-		
-		<c:if test="${searchCondition != null}">
-			url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
-		</c:if>
-		
-		
-		location.href = url
-		
-	}
-	
-	function gotoPageForEnter(event) {
-		var e = event ? event : window.event;
-				
-		if(event.keyCode == 13) {
-			gotoPage();
-		}
-	}
-	
-	
-	function processPageEnter(event, pageInput) {
-		var keyCode = event.keyCode ? event.keyCode 
-                : event.which ? event.which 
-                        : event.charCode;
-		var isEnterKey = keyCode == 13;
-		if (isEnterKey) {
-			location.href = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageInput.value +"&"+"${searchCondition}";
-			$(pageInput).unbind('keydown');
-		}
-	}
+
 </script>
 
 <script type="text/javascript">

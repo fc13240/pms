@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.PatentOfficeAccount;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
@@ -51,5 +52,11 @@ public class PatentOfficeAccountController {
 		return "patent_office_account_list";
 	}
 	
-
+	@RequestMapping(path="/delete", method=RequestMethod.GET)
+	public String deleteOfficeAccount(@RequestParam("accountId")long accountId,Model model){
+		int userId = PrincipalUtils.getCurrentUserId();
+		patentOfficeAccountService.deleteOfficeAccount(accountId);
+		return "patent_office_account_list";
+	}
+	
 }

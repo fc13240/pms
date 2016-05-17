@@ -15,6 +15,6 @@ public interface PatentOfficeAccountService {
 	
 	List<PatentOfficeAccount> getUserAccounts(int userId);
 	
-	
+	void deleteOfficeAccount(long accountId);
 
 }

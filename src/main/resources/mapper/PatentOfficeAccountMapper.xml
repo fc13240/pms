@@ -18,6 +18,10 @@
 		  from patent_office_accounts
 		 where user = #{userId}
 	</select>
+	
+	<delete id="deleteOfficeAccount">
+		delete from patent_office_accounts where account_id = #{accountId} 
+	</delete>
 
 	
 

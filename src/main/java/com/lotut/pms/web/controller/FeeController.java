@@ -140,8 +140,7 @@ public class FeeController {
 		model.addAttribute("totalFeeCount",totalFeeCount);
 		model.addAttribute("unpaidFeeCount",unpaidFeeCount);
 		model.addAttribute("deadlineMonitor",deadlineMonitor);
-		return "monitored_fee_list";
-	
+		return "monitored_fee_list";	
 	}
 	
 	

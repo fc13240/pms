@@ -13,5 +13,5 @@ public interface PatentOfficeAccountDao {
 	
 	List<PatentOfficeAccount> getUserAccounts(int userId);
 	
-
+	void deleteOfficeAccount(long accountId);
 }
