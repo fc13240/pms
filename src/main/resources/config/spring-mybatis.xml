@@ -83,7 +83,12 @@
 	<bean id="orderMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.OrderMapper" />
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
-	</bean>		
+	</bean>	
+	
+	<bean id="patentOfficeAccountMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.PatentOfficeAccountMapper" />
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>			
 	
 	<bean name="userDao" class="com.lotut.pms.dao.mybatis.UserMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
@@ -122,5 +127,16 @@
 	<bean name="orderDao" class="com.lotut.pms.dao.mybatis.OrderMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 		<property name="orderMapper" ref="orderMapper" />
-	</bean>				
+	</bean>	
+	
+
+	
+	<bean name="patentOfficeAccountDao" class="com.lotut.pms.dao.mybatis.PatentOfficeAccountMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="patentOfficeAccountMapper" ref="patentOfficeAccountMapper" />
+	</bean>	
+	
+	
+	
+		
 </beans>							
