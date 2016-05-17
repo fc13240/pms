@@ -127,7 +127,7 @@
 	        <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
 	          <div class="ta-top" style="margin:8px;"> 
 	            <a href="javascript:batchGrabFees()">
-	            <button class="t-btn7" style="font-weight:500;font-size:16px;">在线缴费</button>
+	            <button class="t-btn7" style="font-weight:500;font-size:16px;">在线交费</button>
 	            </a>	          
 	          
 	          <a href="javascript:batchShare()" style="margin-left:50px;">
