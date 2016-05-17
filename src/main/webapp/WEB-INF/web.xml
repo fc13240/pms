@@ -101,5 +101,12 @@
     
 	<welcome-file-list>
 	    <welcome-file>/main.html</welcome-file>
-	</welcome-file-list>        
+	</welcome-file-list>   
+	
+	<resource-ref>
+	    <description>Patent Management DB Connection</description>
+	    <res-ref-name>jdbc/pmsDataSource</res-ref-name>
+	    <res-type>javax.sql.DataSource</res-type>
+	    <res-auth>Container</res-auth>
+	</resource-ref>
 </web-app>
