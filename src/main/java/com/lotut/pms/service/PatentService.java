@@ -37,7 +37,8 @@ public interface PatentService {
 	
 	void changeInternalCode(int patentId, String internalCode);
 	
-	void uploadPatents(InputStream is,int userId) throws IOException;
+
+	boolean uploadPatents(InputStream is,int userId) throws IOException;
 
 	public List<GoodsFirstColumn> getFirstColumn();
 
@@ -56,6 +57,6 @@ public interface PatentService {
 	 Patent getPatentsByAppNo(Integer userId,String appNo);
 	 
 	 int getPatentIdByAppNo(Integer userId,String appNo);
-	 void autoUpdatePatents(InputStream is) throws IOException;
+	 void autoUpdatePatents(InputStream is,int userId) throws IOException;
 
 }

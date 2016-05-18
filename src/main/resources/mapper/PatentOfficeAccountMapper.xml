@@ -29,17 +29,20 @@
 	</update>
 	
 	<select id="getById" resultMap="patentOfficeAccountResultMap">
-		select name,username,password,account_id from patent_office_accounts 
+		select name,username,password,account_id,user from patent_office_accounts 
 		where account_id = #{accountId}
 	</select>
 	
 	<select id="getAllAccount" resultMap="patentOfficeAccountResultMap">
-		select name,username,password,account_id from patent_office_accounts
+		select name,username,password,account_id,user from patent_office_accounts
 	</select>
 	
 	<insert id="addOfficeAccount" parameterType="PatentOfficeAccount" >
 		insert into patent_office_accounts(user, name, username, password, patent_update_time)
 		values(#{userId}, #{name},#{username}, #{password},now())				
 	</insert>
-
+	
+	<update id="updatePatentsTime" parameterType="long">
+		UPDATE patent_office_accounts SET patent_update_time=NOW() WHERE account_id=#{accountId};
+	</update>
 </mapper>

@@ -71,7 +71,7 @@
 	                
 
 	                <td>
-	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}')">
+	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}')">
 	                  		自动更新
 	                  	</a>&nbsp; 
 	                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
@@ -117,8 +117,7 @@
 			}
 		});		
 	}
-	function autoUpdatePatents(username,password) {
-		
+	function autoUpdatePatents(username,password,accountId) {
 		var opts = {
 				  lines: 13, // The number of lines to draw
 				  length: 7, // The length of each line
@@ -139,10 +138,11 @@
 		var target = document.getElementById('simple-table');
 		var spinner = new Spinner(opts).spin(target);		
 		$.ajax({
-			url: "<s:url value='/patentOfficeAccount/autoUpdatePatents.html'/>?username="+username + "&password="+password,
+			url: "<s:url value='/patentOfficeAccount/autoUpdatePatents.html'/>?username="+username + "&password="+password+"&accountId="+accountId,
 			type: 'get', 
 			success: function() {
 				spinner.stop();
+				location.reload();
 				formutil.alertMessage('更新成功！');
 			},
 			error:function(){

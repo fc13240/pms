@@ -25,5 +25,7 @@ public interface PatentOfficeAccountService {
 	
 	void addOfficeAccount(PatentOfficeAccount patentOfficeAccount);
 	
-
+	void updatePatentsTime(long accountId);
+	
+	List<PatentOfficeAccount> getAllAccount();
 }
