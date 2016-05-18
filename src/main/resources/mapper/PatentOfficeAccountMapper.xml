@@ -36,7 +36,8 @@
 	</select>
 	
 	<select id="getAllAccount" resultMap="patentOfficeAccountResultMap">
-		select name,username,password,account_id,user,patent_update_time from patent_office_accounts
+		select name,username,password,account_id,user,patent_update_time from patent_office_accounts order by 
+		patent_update_time ASC
 	</select>
 	
 	<insert id="addOfficeAccount" parameterType="PatentOfficeAccount" >
