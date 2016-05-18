@@ -94,6 +94,7 @@ public class PatentOfficeAccountController {
 	public String updateOfficeAccount(@ModelAttribute PatentOfficeAccount patentOfficeAccount,Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		boolean success=patentOfficeAccountService.updateOfficeAccount(patentOfficeAccount);
+		
 		model.addAttribute("success", success);
 		return "patent_office_account_detail";
 	}

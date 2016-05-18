@@ -20,10 +20,6 @@
     <span style="font-size: 16px;font-weight: 300;line-height: 24px;">我的专利</span> </div>
 <!-- list beg -->
 
-
-	
-	
-
 	<div class="lt-box">
 	  <div class="main-container" id="main-container">
 	    <!-- PAGE CONTENT BEGINS -->
@@ -69,9 +65,8 @@
 	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}')">
 	                  		自动更新
 	                  	</a>&nbsp; 
-	                	<a  href="<s:url value=''/>?patents=<c:out value='${patent.patentId}'/>">
-	                  		修改
-	                  	</a>&nbsp;
+	                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
+	                  		修改</a>&nbsp;
 	                  	<a href="JavaScript:void(0)" onclick="deleteAccount('${account.accountId}')">
 	                                                             删除 
 	                    </a>                                    
