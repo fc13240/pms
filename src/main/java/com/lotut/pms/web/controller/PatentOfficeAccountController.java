@@ -80,20 +80,6 @@ public class PatentOfficeAccountController {
 			return "patent_office_account_list";
 		}
 		
-<<<<<<< HEAD
-		List<PatentOfficeAccount> accounts = null;
-		
-		if (PrincipalUtils.isOrderProcessor()) {
-			accounts = patentOfficeAccountService.getUserAccounts(null);
-		} else {
-			accounts = patentOfficeAccountService.getUserAccounts(userId);
-		}
-
-		model.addAttribute("accounts", accounts);
-=======
-		
->>>>>>> ed57e60a67ef3000003ec2f06c6cadaeeb59fa53
-		
 	}
 	
 	@RequestMapping(path="/delete", method=RequestMethod.GET)
@@ -130,15 +116,10 @@ public class PatentOfficeAccountController {
 		int userId = PrincipalUtils.getCurrentUserId();
 		patentOfficeAccount.setUserId(userId);
 		patentOfficeAccountService.addOfficeAccount(patentOfficeAccount);
-<<<<<<< HEAD
+
 		//model.addAttribute("success", success);
 				
 		return "redirect:/patentOfficeAccount/list.html";
-=======
-		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
-		model.addAttribute("accounts", accounts);		
-		return "patent_office_account_list";
->>>>>>> ed57e60a67ef3000003ec2f06c6cadaeeb59fa53
 	}	
 	
 	@RequestMapping(path="/autoUpdatePatents", method=RequestMethod.GET)

@@ -68,18 +68,9 @@
 	                <td><c:out value="${account.password}"/></td>
 	                <td><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 	                <td>
-<<<<<<< HEAD
+
 	                
-	            <!--    <se:authorize access="hasRole('supervisor')" >
-	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}')">
-=======
-	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}')">
->>>>>>> ed57e60a67ef3000003ec2f06c6cadaeeb59fa53
-	                  		自动更新
-	                  	</a>&nbsp; 
-	                </se:authorize>
-	
-	                -->    	
+		
 	                  	
 	                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
 	                  		修改</a>&nbsp;
