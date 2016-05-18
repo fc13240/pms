@@ -41,7 +41,7 @@
 	        <li>已交局 (<c:out value='${orderCountsByOrderStatus[(4).intValue()]["orderCount"]}' default="0"/>)</li>
 	        </a>  
 	        <a href="<s:url value='/order/search.html?page.currentPage=1&orderStatus=3'/>">
-	        <li>缴费成功 (<c:out value='${orderCountsByOrderStatus[(3).intValue()]["orderCount"]}' default="0"/>)</li>
+	        <li>交费成功 (<c:out value='${orderCountsByOrderStatus[(3).intValue()]["orderCount"]}' default="0"/>)</li>
 	        </a>
 	      </ul>		    
 	     </div>
@@ -82,122 +82,115 @@
   </div>
   
   <!-- 搜索结束 -->
-  <div class="lt-box">
+
   <c:forEach items="${orders}" var="order">
+  	<div class="lt-box">
     <form action="<s:url value='/fee/exportFees.html'/>" method="get" target="feeExportFrame">
       <c:forEach items="${order.feeList}" var="fee" varStatus="status">
         <input type="hidden" name="fees" value="${fee.feeId}">
       </c:forEach>
+      <div style="height:30px;line-height:30px;padding:10px;font-weight:700;">
+		<fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
+			&nbsp;&nbsp;订单号：${order.id}
+		<span style="margin-left:100px;">
+			<button type="submit" class="t-btn6">导出费用清单</button>
+		</span>
+      </div>
       <table id="simple-table" class="table table-striped table-bordered table-hover">
-        <thead>
-          <tr class="simple_bag">
-            <th colspan="4"> <fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
-              &nbsp;&nbsp;
-              订单号：${order.id}<span style="margin-left:100px;">
-              <input type="submit" value="导出费用清单">
-              </span> </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><table id="simple-table-fee" class="table table-striped table-bordered table-hover">
-                <thead>
-                  <tr class="simple_bag">
-                    <th>序号</th>
-                    <th>申请号/专利号</th>
-                    <th>专利名称</th>
-                    <th>第一申请人</th>
-                    <th>案件状态</th>
-                    <th>缴费截止日</th>
-                    <th>缴费种类</th>
-                    <th>缴费金额</th>
-                    <th>发票抬头</th>
-                  </tr>
-                </thead>
+     
+
+		  <tr>
+	        <td>序号</td>
+	        <td>申请号/专利号</td>
+	        <td>专利名称</td>
+	        <td>第一申请人</td>
+	        <td>案件状态</td>
+	        <td>交费截止日</td>
+	        <td>交费种类</td>
+	        <td>交费金额</td>
+	        <td>发票抬头</td>		  
+		    <td rowspan="4">
+		    <a href="javascript:void" onClick="window.open('<s:url value="/order/detail/"/>${order.id}.html')">订单详情</a>
+		    </td>
+		    <td rowspan="4">总额: ￥${order.totalAmount}</td>
+		    <td rowspan="4">
+				<h5>${order.orderStatus.statusDescription}</h5>
+				<div style="clear:both;"></div>
+				<c:if test="${order.orderStatus.statusId == 1}">
+				<div style="margin-top:5px;"> <a href="javascript:void" onClick="window.open('<s:url value="/alipay/index.html?orderId="/>${order.id}')">
+				<input type="button"  style="width:95px;" class="t-btn5" value="支付宝支付">
+				</a> </div>
+				</c:if>
+				<c:if test="${order.orderStatus.statusId == 1}">
+				<div style="margin-top:10px;"> <a>
+				<button type="button" style="width:90px;" class="t-btn6" onclick="deleteOrder('${order.id}')">取消订单</button>
+				</a> </div>
+				</c:if>		    
+		    </td>
+		  </tr>
+      
 <style>
 .lt_tr_hiden{display:none;}
-</style>                
+</style>     
                 
-                <tbody>
-                
-                
-                  <c:forEach items="${order.feeList}" var="fee" varStatus="status">
+			<c:forEach items="${order.feeList}" var="fee" varStatus="status">
 
            
-					<c:choose>
-						<c:when test="${status.count<=2}">
-							<tr>
-							  <td class="center">${status.count}</td>
-							                <td>
-							                
-							
-							<a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a>
-							  </td>
-							  <td>${fee.patent.name}</td>
-							  <td>${fee.patent.firstAppPerson}</td>
-							  <td>${fee.patent.patentStatus.statusDescription}</td>
-							  <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
-							  <td>${fee.feeType}</td>
-							  <td>${fee.amount} </td>
-							  <td>${fee.invoiceTitle}</td>
-							</tr>
-						</c:when>
-						<c:when test="${status.count>2}"> 
-   
-							<tr class="lt_tr_hiden">
-							  <td class="center">${status.count}</td>
-							                <td>
-							                
-							
-							<a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a>
-							  </td>
-							  <td>${fee.patent.name}</td>
-							  <td>${fee.patent.firstAppPerson}</td>
-							  <td>${fee.patent.patentStatus.statusDescription}</td>
-							  <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
-							  <td>${fee.feeType}</td>
-							  <td>${fee.amount} </td>
-							  <td>${fee.invoiceTitle}</td>
-							</tr>
-						</c:when>						
-					</c:choose>                  	
+			<c:choose>
+			<c:when test="${status.count<=2}">
+			<tr>
+			  <td class="center">${status.count}</td>
+			                <td>
+			                
+			
+			<a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a>
+			</td>
+			<td>${fee.patent.name}</td>
+			<td>${fee.patent.firstAppPerson}</td>
+			<td>${fee.patent.patentStatus.statusDescription}</td>
+			<td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
+			<td>${fee.feeType}</td>
+			<td>${fee.amount} </td>
+			<td>${fee.invoiceTitle}</td>
+			</tr>
+			</c:when>
+			<c:when test="${status.count>2}"> 
+			
+			<tr class="lt_tr_hiden">
+				<td class="center">${status.count}</td>
+				<td>
+				<a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a>
+				</td>
+				<td>${fee.patent.name}</td>
+				<td>${fee.patent.firstAppPerson}</td>
+				<td>${fee.patent.patentStatus.statusDescription}</td>
+				<td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
+				<td>${fee.feeType}</td>
+				<td>${fee.amount} </td>
+				<td>${fee.invoiceTitle}</td>
+			</tr>
+			</c:when>						
+			</c:choose>                  	
+			</c:forEach>
+			<c:if test="${fn:length(order.feeList)>2}">
+			<tr>
+				<td colspan="9" >
+				
+				<button class="lt_more" type="button" style="width:90px;" class="t-btn6" >更多/收起</button>
+				</td>
+			</tr> 
+			</c:if>
 
-                  </c:forEach>
-							<c:if test="${fn:length(order.feeList)>2}">
-							<!-- 	${fn:length(order.feeList)} --> 
-							<tr>
-							<td colspan="9" >
-							
-							<button class="lt_more" type="button" style="width:90px;" class="t-btn6" >更多/收起</button>
-							</td>
-							</tr> 
-							</c:if>
-					
-                </tbody>
-              </table></td>
-            <td>${order.postAddress.receiver}
-               <br>
-              <div><a href="javascript:void" onClick="window.open('<s:url value="/order/detail/"/>${order.id}.html')">订单详情</a></div></td>
-            <td>总额: ￥${order.totalAmount}</td>
-            <td width="100px;"><h5>${order.orderStatus.statusDescription}</h5>
-              <div style="clear:both;"></div>
-              <c:if test="${order.orderStatus.statusId == 1}">
-                <div style="margin-top:5px;"> <a href="javascript:void" onClick="window.open('<s:url value="/alipay/index.html?orderId="/>${order.id}')">
-                  <input type="button"  style="width:95px;" class="t-btn5" value="支付宝支付">
-                  </a> </div>
-              </c:if>
-              <c:if test="${order.orderStatus.statusId == 1}">
-                <div style="margin-top:10px;"> <a>
-                  <button type="button" style="width:90px;" class="t-btn6" onclick="deleteOrder('${order.id}')">取消订单</button>
-                  </a> </div>
-              </c:if>
-            </td>
-          </tr>
-        </tbody>
+
+      
+      
       </table>
+      
+
     </form>
+    </div>
   </c:forEach>
-  </div>
+
   <!-- 分页功能 start -->
   <div class="row">
     <c:if test="${searchCondition == null}">
