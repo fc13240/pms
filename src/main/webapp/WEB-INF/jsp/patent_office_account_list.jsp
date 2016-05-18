@@ -65,19 +65,11 @@
 	                
 	                
 	                <td>验证更新&nbsp; 
-	                	<a  href="<s:url value=''/>?patents=<c:out value='${patent.patentId}'/>">
+	                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
 	                  		修改</a>&nbsp;
 	                  	<a href="JavaScript:void(0)" onclick="deleteAccount('${account.accountId}')">
-	                                                                  删除 </a> 
-	                                                                  
-	                                                                  
-	                  </td>
-	                
-	                
-	                
-	                
-	                
-	                
+	                                                                  删除 </a>                                  
+	                </td>
 	                
 	              </tr>
 	            </c:forEach>
@@ -102,8 +94,9 @@
 		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
 	});
 	
-
-	
+	function updateAccount(accountId) {
+		window.open("<s:url value='/patentOfficeAccount/detail.html'/>?accountId=" + accountId);
+	}
 	
 	function deleteAccount(accountId) {
 		$.ajax({
