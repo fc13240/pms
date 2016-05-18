@@ -65,9 +65,12 @@ public class PatentOfficeAccountController {
 	
 	@RequestMapping(path="/list", method=RequestMethod.GET)
 	public String getUserOffice(Model model) {
+			int accountType=0;
 		if (PrincipalUtils.isOrderProcessor()) {
+			accountType=1;
 			List<PatentOfficeAccount> accounts = patentOfficeAccountService.getAllAccount();
 			model.addAttribute("accounts", accounts);
+			model.addAttribute("accountType", accountType);
 			return "patent_office_account_list";
 		}else{
 			
@@ -76,7 +79,7 @@ public class PatentOfficeAccountController {
 			List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
 			
 			model.addAttribute("accounts", accounts);
-			
+			model.addAttribute("accountType", accountType);
 			return "patent_office_account_list";
 		}
 		
@@ -132,5 +135,11 @@ public class PatentOfficeAccountController {
 		return "add_patent_success";
 	}
 	
-
+	@RequestMapping(path="/checkLogin", method=RequestMethod.GET)
+	public void checkLogin(@ModelAttribute PatentOfficeAccount account,HttpServletResponse response) throws Exception{
+		RequestConfig globalConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.DEFAULT).build();
+		CloseableHttpClient httpClient = HttpClients.custom().setDefaultRequestConfig(globalConfig).build();
+		boolean success=PatentDownload.login(httpClient, account.getUsername(), account.getPassword());
+		WebUtils.writeJsonStrToResponse(response, success);
+	}
 }

@@ -68,19 +68,14 @@
 	                <td><c:out value="${account.password}"/></td>
 	                <td><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 	                <td>
-<<<<<<< HEAD
-	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
-	                  		自动更新
+	                	<c:if test="${accountType==0}">
+	                	<a href="JavaScript:void(0)" onclick="checkLogin('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
+	                  		验证登录
 	                  	</a>&nbsp;
+	                  	</c:if>
 	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
 	                  		自动更新
 	                  	</a>&nbsp; 
-=======
-
-	                
-		
-	                  	
->>>>>>> 8bb842bf4171424d3a1f7638440e1f0df5c1f492
 	                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
 	                  		修改</a>&nbsp;
 	                  	<a href="JavaScript:void(0)" onclick="deleteAccount('${account.accountId}')">
@@ -155,6 +150,23 @@
 			error:function(){
 				spinner.stop();
 				formutil.alertMessage('更新失败，请稍后重试！');
+			}
+		});		
+	}
+	
+	function checkLogin(username,password,accountId,userId) {
+		$.ajax({
+			url: "<s:url value='/patentOfficeAccount/checkLogin.html'/>?username="+username + "&password="+password+"&accountId="+accountId+"&userId="+userId,
+			type: 'get', 
+			success: function(success) {
+				if(success){
+					formutil.alertMessage('验证成功！');
+				}else{
+					formutil.alertMessage('网络繁忙，请稍后重试！');
+				}
+			},
+			error:function(success){
+				formutil.alertMessage('服务器错误!请联系管理员');
 			}
 		});		
 	}

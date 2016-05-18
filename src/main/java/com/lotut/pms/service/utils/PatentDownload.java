@@ -62,7 +62,7 @@ public class PatentDownload {
 		}
 	}
 	
-	private static Boolean login(CloseableHttpClient httpClient,String username,String password) throws ClientProtocolException, IOException {
+	public static Boolean login(CloseableHttpClient httpClient,String username,String password) throws ClientProtocolException, IOException {
 		HttpPost loginRequest = new HttpPost(LOGIN_URL);
 		loginRequest.addHeader(new BasicHeader("X-Requested-With", "XMLHttpRequest"));
 		List<NameValuePair> params = new ArrayList<>();
