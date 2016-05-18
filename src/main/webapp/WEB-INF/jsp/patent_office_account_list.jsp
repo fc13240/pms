@@ -34,7 +34,7 @@
 	    <div class="row">
 	      <div class="col-xs-12">
 	        <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-	          <div class="ta-top" style="margin:8px;"> <a href="javascript:batchShare()">
+	          <div class="ta-top" style="margin:8px;"> <a href="<s:url value='/patentOfficeAccount/add_form.html'/>">
 	            <button class="t-btn3">添加电子账户</button>
 	            </a> 
 	          </div>

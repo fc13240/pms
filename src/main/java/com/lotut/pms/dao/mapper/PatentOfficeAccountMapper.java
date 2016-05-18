@@ -20,4 +20,6 @@ public interface PatentOfficeAccountMapper {
 	boolean updateOfficeAccount(PatentOfficeAccount patentOfficeAccount);
 	
 	PatentOfficeAccount getById(long accountId);
+
+	void addOfficeAccount(PatentOfficeAccount patentOfficeAccount);
 }

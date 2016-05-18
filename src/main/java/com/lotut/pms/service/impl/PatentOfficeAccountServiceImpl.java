@@ -40,4 +40,11 @@ public class PatentOfficeAccountServiceImpl implements PatentOfficeAccountServic
 	public PatentOfficeAccount getOfficeAccountDetail(long accountId) {
 		return patentOfficeAccountDao.getById(accountId);
 	}
+
+	@Override
+	public void addOfficeAccount(PatentOfficeAccount patentOfficeAccount) {
+		// TODO Auto-generated method stub
+		patentOfficeAccountDao.addOfficeAccount(patentOfficeAccount);
+		
+	}
 }

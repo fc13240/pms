@@ -32,5 +32,10 @@
 		select name,username,password,account_id from patent_office_accounts 
 		where account_id = #{accountId}
 	</select>
+	
+	<insert id="addOfficeAccount" parameterType="PatentOfficeAccount" >
+		insert into patent_office_accounts(user, name, username, password, patent_update_time)
+		values(#{userId}, #{name},#{username}, #{password},now())				
+	</insert>
 
 </mapper>

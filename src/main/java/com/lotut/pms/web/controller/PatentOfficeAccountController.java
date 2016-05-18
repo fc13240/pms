@@ -95,10 +95,34 @@ public class PatentOfficeAccountController {
 		int userId = PrincipalUtils.getCurrentUserId();
 		boolean success=patentOfficeAccountService.updateOfficeAccount(patentOfficeAccount);
 		
-		model.addAttribute("success", success);
-		return "patent_office_account_detail";
+		//model.addAttribute("success", success);
+		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
+		model.addAttribute("accounts", accounts);		
+		return "patent_office_account_list";
+	}
+
+	@RequestMapping(path="/add_form", method=RequestMethod.GET)
+	public String addFormOfficeAccount(@ModelAttribute PatentOfficeAccount patentOfficeAccount,Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		//boolean success=patentOfficeAccountService.updateOfficeAccount(patentOfficeAccount);
+		
+		//model.addAttribute("success", success);
+		return "patent_office_account_add_form";
 	}
 	
+	@RequestMapping(path="/add", method=RequestMethod.POST)
+	public String addOfficeAccount(@ModelAttribute PatentOfficeAccount patentOfficeAccount,Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		//boolean success=patentOfficeAccountService.updateOfficeAccount(patentOfficeAccount);
+		// saveOfficeAccount
+		patentOfficeAccount.setUserId(userId);
+		patentOfficeAccountService.addOfficeAccount(patentOfficeAccount);
+		//model.addAttribute("success", success);
+		
+		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
+		model.addAttribute("accounts", accounts);		
+		return "patent_office_account_list";
+	}	
 	
 	@RequestMapping(path="/autoUpdatePatents", method=RequestMethod.GET)
 	public String autoUpdatePatents(@RequestParam("username")String username,@RequestParam("password")String password) throws Exception{

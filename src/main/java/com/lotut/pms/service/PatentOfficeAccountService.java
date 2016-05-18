@@ -22,5 +22,8 @@ public interface PatentOfficeAccountService {
 	boolean updateOfficeAccount(PatentOfficeAccount patentOfficeAccount);
 	
 	PatentOfficeAccount getOfficeAccountDetail(long accountId);
+	
+	void addOfficeAccount(PatentOfficeAccount patentOfficeAccount);
+	
 
 }

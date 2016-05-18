@@ -44,4 +44,10 @@ public class PatentOfficeAccountMybatisDao extends SqlSessionDaoSupport implemen
 	public PatentOfficeAccount getById(long accountId) {
 		return patentOfficeAccountMapper.getById(accountId);
 	}
+
+	@Override
+	public void addOfficeAccount(PatentOfficeAccount patentOfficeAccount) {
+		patentOfficeAccountMapper.addOfficeAccount(patentOfficeAccount);
+		
+	}
 }
