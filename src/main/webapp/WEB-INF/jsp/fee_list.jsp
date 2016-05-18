@@ -29,11 +29,11 @@
 		<div class="row">
 		  <div class="col-xs-12">
 
-			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> 
+			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
 				<span class="input-group-btn" >
 				<div class="ta-top" style="margin:8px;"> 
 				
-				<span style="font-size:16px;font-weight:700;line-height:38px;">专利信息</span>
+				<span style="font-size:14px;font-weight:600;line-height:17px;">专利信息</span>
 				
 				</div>
 				</span> 
@@ -66,11 +66,11 @@
 		<div class="row">
 		  <div class="col-xs-12">
 
-			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> 
+			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
 				<span class="input-group-btn" >
 				<div class="ta-top" style="margin:8px;"> 
 				
-				<span style="font-size:16px;font-weight:700;line-height:38px;">应交费信息</span>
+				<span style="font-size:14px;font-weight:600;line-height:17px;">应交费信息</span>
 				
 				</div>
 				</span> 
@@ -119,11 +119,11 @@
 		<div class="row">
 		  <div class="col-xs-12">
 
-			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> 
+			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
 				<span class="input-group-btn" >
 				<div class="ta-top" style="margin:8px;"> 
 				
-				<span style="font-size:16px;font-weight:700;line-height:38px;">已交费信息</span>
+				<span style="font-size:14px;font-weight:600;line-height:17px;">已交费信息</span>
 				
 				</div>
 				</span> 
