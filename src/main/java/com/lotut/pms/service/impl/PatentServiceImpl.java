@@ -162,9 +162,6 @@ public class PatentServiceImpl implements PatentService {
 		patentDao.insertOrUpdatePatents(patents);
 		List<Map<String, Integer>> userPatentList = new ArrayList<>();
 		UpdatePatentsUtils.updatepatents(userPatentList,patents,sharePatentDao);
-		/*if (userPatentList.size() > 0) {
-			sharePatentDao.insertUserPatents(userPatentList);
-		}*/
 		
 	}
 }
