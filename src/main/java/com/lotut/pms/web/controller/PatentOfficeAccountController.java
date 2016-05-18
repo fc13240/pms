@@ -65,8 +65,22 @@ public class PatentOfficeAccountController {
 	
 	@RequestMapping(path="/list", method=RequestMethod.GET)
 	public String getUserOffice(Model model) {
-		int userId = PrincipalUtils.getCurrentUserId();
+		if (PrincipalUtils.isOrderProcessor()) {
+			List<PatentOfficeAccount> accounts = patentOfficeAccountService.getAllAccount();
+			model.addAttribute("accounts", accounts);
+			return "patent_office_account_list";
+		}else{
+			
+			int userId = PrincipalUtils.getCurrentUserId();
+			
+			List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
+			
+			model.addAttribute("accounts", accounts);
+			
+			return "patent_office_account_list";
+		}
 		
+<<<<<<< HEAD
 		List<PatentOfficeAccount> accounts = null;
 		
 		if (PrincipalUtils.isOrderProcessor()) {
@@ -76,13 +90,14 @@ public class PatentOfficeAccountController {
 		}
 
 		model.addAttribute("accounts", accounts);
+=======
 		
-		return "patent_office_account_list";
+>>>>>>> ed57e60a67ef3000003ec2f06c6cadaeeb59fa53
+		
 	}
 	
 	@RequestMapping(path="/delete", method=RequestMethod.GET)
 	public String deleteOfficeAccount(@RequestParam("accountId")long accountId,Model model){
-		int userId = PrincipalUtils.getCurrentUserId();
 		patentOfficeAccountService.deleteOfficeAccount(accountId);
 		return "patent_office_account_list";
 	}
@@ -90,7 +105,6 @@ public class PatentOfficeAccountController {
 
 	@RequestMapping(path="/detail", method=RequestMethod.GET)
 	public String getOfficeAccountDetail(@RequestParam("accountId")long accountId,Model model) {
-		
 		PatentOfficeAccount patentOfficeAccount = patentOfficeAccountService.getOfficeAccountDetail(accountId);
 		model.addAttribute("patentOfficeAccount", patentOfficeAccount);
 		return "patent_office_account_detail";
@@ -99,9 +113,7 @@ public class PatentOfficeAccountController {
 	@RequestMapping(path="/update", method=RequestMethod.POST)
 	public String updateOfficeAccount(@ModelAttribute PatentOfficeAccount patentOfficeAccount,Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
-		boolean success=patentOfficeAccountService.updateOfficeAccount(patentOfficeAccount);
-		
-		//model.addAttribute("success", success);
+		patentOfficeAccountService.updateOfficeAccount(patentOfficeAccount);
 		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
 		model.addAttribute("accounts", accounts);	
 		
@@ -110,29 +122,32 @@ public class PatentOfficeAccountController {
 
 	@RequestMapping(path="/add_form", method=RequestMethod.GET)
 	public String addFormOfficeAccount(@ModelAttribute PatentOfficeAccount patentOfficeAccount,Model model) {
-		int userId = PrincipalUtils.getCurrentUserId();
-		//boolean success=patentOfficeAccountService.updateOfficeAccount(patentOfficeAccount);
-		
-		//model.addAttribute("success", success);
 		return "patent_office_account_add_form";
 	}
 	
 	@RequestMapping(path="/add", method=RequestMethod.POST)
 	public String addOfficeAccount(@ModelAttribute PatentOfficeAccount patentOfficeAccount,Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
-		//boolean success=patentOfficeAccountService.updateOfficeAccount(patentOfficeAccount);
-		// saveOfficeAccount
 		patentOfficeAccount.setUserId(userId);
 		patentOfficeAccountService.addOfficeAccount(patentOfficeAccount);
+<<<<<<< HEAD
 		//model.addAttribute("success", success);
 				
 		return "redirect:/patentOfficeAccount/list.html";
+=======
+		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
+		model.addAttribute("accounts", accounts);		
+		return "patent_office_account_list";
+>>>>>>> ed57e60a67ef3000003ec2f06c6cadaeeb59fa53
 	}	
 	
 	@RequestMapping(path="/autoUpdatePatents", method=RequestMethod.GET)
-	public String autoUpdatePatents(@RequestParam("username")String username,@RequestParam("password")String password) throws Exception{
-		InputStream is=PatentDownload.downloadPatentExcelFile(username,password);
-		patentService.uploadPatents(is);
+	public String autoUpdatePatents(@ModelAttribute PatentOfficeAccount account) throws Exception{
+		InputStream is=PatentDownload.downloadPatentExcelFile(account.getUsername(),account.getPassword());
+		boolean check=patentService.uploadPatents(is,account.getUserId());
+		if(check){
+			patentOfficeAccountService.updatePatentsTime(account.getAccountId());
+		}
 		return "add_patent_success";
 	}
 	

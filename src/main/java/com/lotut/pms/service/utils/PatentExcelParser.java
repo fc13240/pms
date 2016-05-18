@@ -22,25 +22,25 @@ import com.lotut.pms.util.PrincipalUtils;
 
 public class PatentExcelParser {
 	
-	public static void main(String[] args) throws Exception {
+	/*public static void main(String[] args) throws Exception {
 		InputStream in = new FileInputStream("C:\\Users\\Administrator\\Desktop\\变更20160202.xls");
 		List<Patent> patentRecords = parsePatentFile(in);
 		for (Patent p: patentRecords) {
 			System.out.println(p.getPatentType().getPatentTypeId());
 		}
-	}
+	}*/
 	
-	public static List<Patent> parsePatentFile(InputStream fileInputStream) throws IOException {
+	public static List<Patent> parsePatentFile(InputStream fileInputStream,int userId) throws IOException {
 		try (Workbook wb = new HSSFWorkbook(fileInputStream); ) {
 			Sheet patentSheet = wb.getSheetAt(0);
-			List<Patent> patentRecords = parseSheet(patentSheet);
+			List<Patent> patentRecords = parseSheet(patentSheet,userId);
 			
 			return patentRecords;
 		}
 	}
 	
 	
-	private static List<Patent> parseSheet(Sheet sheet) {
+	private static List<Patent> parseSheet(Sheet sheet,int userId) {
 		List<Patent> patentRecords = new ArrayList<>();
 		Iterator<Row> rowIter = sheet.rowIterator();
 		if (rowIter.hasNext()) rowIter.next();
@@ -50,7 +50,7 @@ public class PatentExcelParser {
 			if (isEmptyRow(row)) {
 				break;
 			}
-			Patent patent = parseRow(row);
+			Patent patent = parseRow(row,userId);
 			patentRecords.add(patent);
 		}
 		
@@ -65,7 +65,7 @@ public class PatentExcelParser {
 		return false;
 	}
 	
-	private static Patent parseRow(Row row) {
+	private static Patent parseRow(Row row,int userId) {
 		String appNo = row.getCell(0).getStringCellValue().trim();
 		String name = row.getCell(1).getStringCellValue();
 		String appPerson = row.getCell(2).getStringCellValue();
@@ -73,7 +73,7 @@ public class PatentExcelParser {
 		Date appDate = parseDate(row.getCell(3).getStringCellValue());
 		int patentType = getPatentType(row.getCell(4).getStringCellValue());
 		int patentStatus = getPatentStatus(patentStatusText);
-		int userId = PrincipalUtils.getCurrentUserId();
+		//int userId = PrincipalUtils.getCurrentUserId();
 		Patent patent = new Patent(appNo, name, appPerson ,appDate, patentType, patentStatus,patentStatusText);
 		patent.setOwnerId(userId);
 		return patent;

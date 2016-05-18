@@ -68,9 +68,13 @@
 	                <td><c:out value="${account.password}"/></td>
 	                <td><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 	                <td>
+<<<<<<< HEAD
 	                
 	            <!--    <se:authorize access="hasRole('supervisor')" >
 	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}')">
+=======
+	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}')">
+>>>>>>> ed57e60a67ef3000003ec2f06c6cadaeeb59fa53
 	                  		自动更新
 	                  	</a>&nbsp; 
 	                </se:authorize>
@@ -120,8 +124,7 @@
 			}
 		});		
 	}
-	function autoUpdatePatents(username,password) {
-		
+	function autoUpdatePatents(username,password,accountId) {
 		var opts = {
 				  lines: 13, // The number of lines to draw
 				  length: 7, // The length of each line
@@ -142,10 +145,11 @@
 		var target = document.getElementById('simple-table');
 		var spinner = new Spinner(opts).spin(target);		
 		$.ajax({
-			url: "<s:url value='/patentOfficeAccount/autoUpdatePatents.html'/>?username="+username + "&password="+password,
+			url: "<s:url value='/patentOfficeAccount/autoUpdatePatents.html'/>?username="+username + "&password="+password+"&accountId="+accountId,
 			type: 'get', 
 			success: function() {
 				spinner.stop();
+				location.reload();
 				formutil.alertMessage('更新成功！');
 			},
 			error:function(){
