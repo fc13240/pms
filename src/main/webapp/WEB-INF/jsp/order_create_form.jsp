@@ -159,7 +159,9 @@
 				</td>
 			</tr>
 		  </table>
-		  <input type="submit" value="提交订单">
+		  <span style="margin-left:10px;margin-bottom:10px;">
+		  <input type="submit" class="t-btn7" value="提交订单">
+		  </span>
 		</form>
 	</div>
 

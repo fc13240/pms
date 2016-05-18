@@ -68,14 +68,33 @@
 	                <td><c:out value="${account.password}"/></td>
 	                <td><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 	                <td>
+<<<<<<< HEAD
 	                	<c:if test="${accountType==0}">
 	                	<a href="JavaScript:void(0)" onclick="checkLogin('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
 	                  		验证登录
+=======
+<<<<<<< HEAD
+	                
+=======
+<<<<<<< HEAD
+	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
+	                  		自动更新
+>>>>>>> a576ada4c74921a7b4a8744a2b2a982511b435f9
 	                  	</a>&nbsp;
 	                  	</c:if>
 	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
 	                  		自动更新
 	                  	</a>&nbsp; 
+<<<<<<< HEAD
+=======
+=======
+
+	                
+		
+	                  	
+>>>>>>> 8bb842bf4171424d3a1f7638440e1f0df5c1f492
+>>>>>>> b49c12f21e1ff4c06160e549bec489e1a143652b
+>>>>>>> a576ada4c74921a7b4a8744a2b2a982511b435f9
 	                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
 	                  		修改</a>&nbsp;
 	                  	<a href="JavaScript:void(0)" onclick="deleteAccount('${account.accountId}')">
