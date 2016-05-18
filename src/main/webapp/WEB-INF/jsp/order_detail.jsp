@@ -23,55 +23,63 @@
 	</div>
 	
 <!-- list beg -->
+<!-- 订单 -->
 	<div class="lt-box">
-	<table class="table table-striped table-bordered table-hover">
-		  <thead>
-			<tr class="simple_bag">
-			  <th> 订单信息 </th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<tr>
-			  <td><table class="table table-striped table-bordered table-hover">
-				  <thead>
-					<tr class="simple_bag">
-					  <th>订单编号</th>
-					  <th>下单时间</th>
-					  <th>支付时间</th>
-					  <th>支付方式</th>
-<!-- 					  <th>快递方式</th> -->
-					</tr>
-				  </thead>
-				  <tbody>
-					<tr>
-					  <td>${order.id}</td>
-					  <td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-					  <td><fmt:formatDate value="${order.payTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-					  <td>${order.paymentMethod.paymentMethod}</td>
-<%-- 					  <c:if test="${order.expressFee == 20}"> --%>
-<!-- 					   <td>顺丰速运</td> -->
-<%-- 					  </c:if> --%>
-<%-- 					  <c:if test="${order.expressFee == 0 && order.postAddress != null}"> --%>
-<!-- 					   <td>挂号信</td> -->
-<%-- 					  </c:if> --%>
-<%-- 					  <c:if test="${order.expressFee == 0 && order.postAddress == null}"> --%>
-<!-- 					   <td>无</td> -->
-<%-- 					  </c:if> --%>
-					</tr>
-				  </tbody>
-				</table></td>
-			</tr>
-		  </tbody>
-		</table>
-		<table class="table table-striped table-bordered table-hover">
-		  <thead>
-			<tr class="simple_bag">
-			  <th> ${order.orderStatus.statusDescription}订单 </th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<tr>
-			  <td><table class="table table-striped table-bordered table-hover">
+	  <div class="main-container" id="main-container">
+		<div class="row">
+		  <div class="col-xs-12">
+
+			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
+				<span class="input-group-btn" >
+				<div class="ta-top" style="margin:8px;"> 
+				
+				<span style="font-size:14px;font-weight:600;line-height:17px;">订单信息</span>
+				
+				</div>
+				</span> 
+			</div>
+			<table id="simple-table" class="table table-striped table-bordered table-hover">
+			  <thead>
+				<tr class="simple_bag">
+				  <th>订单编号</th>
+				  <th>下单时间</th>
+				  <th>支付时间</th>
+				  <th>支付方式</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <td>${order.id}</td>
+				  <td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+				  <td><fmt:formatDate value="${order.payTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+				  <td>${order.paymentMethod.paymentMethod}</td>
+
+				</tr>
+			</table>
+				
+			<!-- /.span -->
+		  </div>
+		  <!-- /.row -->
+		</div>
+	  </div>
+	</div>
+
+<!-- 订单状态 -->
+	<div class="lt-box">
+	  <div class="main-container" id="main-container">
+		<div class="row">
+		  <div class="col-xs-12">
+
+			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
+				<span class="input-group-btn" >
+				<div class="ta-top" style="margin:8px;"> 
+				
+				<span style="font-size:14px;font-weight:600;line-height:17px;">${order.orderStatus.statusDescription}订单</span>
+				
+				</div>
+				</span> 
+			</div>
+			<table id="simple-table" class="table table-striped table-bordered table-hover">
 				  <thead>
 					<tr class="simple_bag">
 					  <th>序号</th>
@@ -102,21 +110,33 @@
 					  </tr>
 					</c:forEach>
 				  </tbody>
-				</table></td>
-			</tr>
-		  </tbody>
-		</table>
+			</table>
+				
+			<!-- /.span -->
+		  </div>
+		  <!-- /.row -->
+		</div>
+	  </div>
+	</div>
+	
+<!-- 收货人信息 -->	
+	<c:if test="${order.postAddress != null}">
+	<div class="lt-box">
+	  <div class="main-container" id="main-container">
+		<div class="row">
+		  <div class="col-xs-12">
 
-		<c:if test="${order.postAddress != null}">
-		  <table class="table table-striped table-bordered table-hover">
-			<thead>
-			  <tr class="simple_bag">
-				<th> 收货人信息 </th>
-			  </tr>
-			</thead>
-			<tbody>
-			  <tr>
-				<td><table class="table table-striped table-bordered table-hover">
+			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
+				<span class="input-group-btn" >
+				<div class="ta-top" style="margin:8px;"> 
+				
+				<span style="font-size:14px;font-weight:600;line-height:17px;">收货人信息</span>
+				
+				</div>
+				</span> 
+			</div>
+			<table id="simple-table" class="table table-striped table-bordered table-hover">
+			 
 					<thead>
 					  <tr class="simple_bag">
 						<th>收货人姓名</th>
@@ -131,33 +151,69 @@
 						<td>${order.postAddress.phone}</td>
 					  </tr>
 					</tbody>
-				  </table></td>
-			  </tr>
-			</tbody>
-		  </table>
-		</c:if>
+			</table>
+				
+			<!-- /.span -->
+		  </div>
+		  <!-- /.row -->
+		</div>
+	  </div>
+	</div>	
+	</c:if>
+	
+<!-- 收货人信息 -->	
+	<c:if test="${order.postAddress != null}">
+	<div class="lt-box">
+	  <div class="main-container" id="main-container">
+		<div class="row">
+		  <div class="col-xs-12">
 
-		<table class="table table-striped table-bordered table-hover">
-		 <thead>
-			<tr class="simple_bag">
-			  <th>龙图腾增值税发票抬头</th>
-			</tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		    	<td><font style="color: red">${order.invoice}</font></td>
-		    </tr>
-		  </tbody>
-		</table>
-		<table class="table table-striped table-bordered table-hover">
-		  <thead>
-			<tr class="simple_bag">
-			  <th> 快递信息 </th>
-			</tr>
-		  </thead>
-		  <tbody>
+			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
+				<span class="input-group-btn" >
+				<div class="ta-top" style="margin:8px;"> 
+				
+				<span style="font-size:14px;font-weight:600;line-height:17px;">龙图腾增值税发票抬头</span>
+				
+				</div>
+				</span> 
+			</div>
+			<table id="simple-table" class="table table-striped table-bordered table-hover">
 			<tr>
 			  <td><table class="table table-striped table-bordered table-hover">
+			  <tr>
+				<td><table class="table table-striped table-bordered table-hover">
+					    <tr>
+					    	<td><font style="color: red">${order.invoice}</font></td>
+					    </tr>
+				</table></td>
+			</tr>
+			</table>
+				
+			<!-- /.span -->
+		  </div>
+		  <!-- /.row -->
+		</div>
+	  </div>
+	</div>	
+	</c:if>
+	
+<!-- 快递信息 -->	
+	<div class="lt-box">
+	  <div class="main-container" id="main-container">
+		<div class="row">
+		  <div class="col-xs-12">
+
+			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
+				<span class="input-group-btn" >
+				<div class="ta-top" style="margin:8px;"> 
+				
+				<span style="font-size:14px;font-weight:600;line-height:17px;">快递信息</span>
+				
+				</div>
+				</span> 
+			</div>
+			<table id="simple-table" class="table table-striped table-bordered table-hover">
+		
 				  <thead>
 					<tr class="simple_bag">
 					  <th>发货时间</th>
@@ -181,19 +237,32 @@
 					  </c:if>
 					</tr>
 				  </tbody>
-				</table></td>
-			</tr>
-		  </tbody>
-		</table>
-		<table class="table table-striped table-bordered table-hover">
-		  <thead>
-			<tr class="simple_bag">
-			  <th>费用信息</th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<tr>
-			  <td><table class="table table-striped table-bordered table-hover">
+
+			</table>
+				
+			<!-- /.span -->
+		  </div>
+		  <!-- /.row -->
+		</div>
+	  </div>
+	</div>	
+
+	<div class="lt-box">
+	  <div class="main-container" id="main-container">
+		<div class="row">
+		  <div class="col-xs-12">
+
+			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
+				<span class="input-group-btn" >
+				<div class="ta-top" style="margin:8px;"> 
+				
+				<span style="font-size:14px;font-weight:600;line-height:17px;">费用信息</span>
+				
+				</div>
+				</span> 
+			</div>
+			<table id="simple-table" class="table table-striped table-bordered table-hover">
+		
 				  <thead>
 					<tr class="simple_bag">
 					  <th>官费</th>
@@ -216,30 +285,47 @@
 					  <td>￥${order.invoiceFee}</td>
 					</tr>
 				  </tbody>
-				</table></td>
-			</tr>
-		  </tbody>
-		</table>
-		<table class="table table-striped table-bordered table-hover">
-		  <thead>
-			<tr class="simple_bag">
-			  <th> 结算信息 </th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<tr>
-			  <td><table class="table table-striped table-bordered table-hover">
+
+			</table>
+				
+			<!-- /.span -->
+		  </div>
+		  <!-- /.row -->
+		</div>
+	  </div>
+	</div>	
+	
+	<!-- 结算信息 -->
+	<div class="lt-box">
+	  <div class="main-container" id="main-container">
+		<div class="row">
+		  <div class="col-xs-12">
+
+			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
+				<span class="input-group-btn" >
+				<div class="ta-top" style="margin:8px;"> 
+				
+				<span style="font-size:14px;font-weight:600;line-height:17px;">结算信息</span>
+				
+				</div>
+				</span> 
+			</div>
+			<table id="simple-table" class="table table-striped table-bordered table-hover">
 				  <tbody>
 					<tr>
 					  <td>商品金额</td>
 					  <td>￥${order.totalAmount}</td>
 					</tr>
 				  </tbody>
-				</table></td>
-			</tr>
-		  </tbody>
-		</table>
-	</div>
+			</table>
+				
+			<!-- /.span -->
+		  </div>
+		  <!-- /.row -->
+		</div>
+	  </div>
+	</div>	
+	
 <!-- list end -->
 </div>
 
