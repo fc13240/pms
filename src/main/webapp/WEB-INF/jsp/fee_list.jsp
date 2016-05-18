@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>缴费</title>
+<title>交费</title>
 <%@ include file="_css.jsp" %>
 </head>
 <body>
@@ -46,11 +46,11 @@
 		  </tr>
 		  <tr>
 			<th colspan="9"> <input type="checkbox" class="fee-check-item">
-			  <span class="batch-share"><a href="javascript:updateMonitorStatus(2)">加入监控</a>
+			  <span class="batch-share"><a href="javascript:updateMonitorStatus(2)">加入购物车</a>
 			  </span> 
 <%-- 			  <span class="batch-share"><a href="javascript:updateMonitorStatus(1)">放弃监控</a> --%>
 <%-- 			  </span>  --%>
-			  <span class="batch-share">&nbsp;|&nbsp;<a href="javascript:joinOrder()">加入订单</a>
+			  <span class="batch-share">&nbsp;|&nbsp;<a href="javascript:joinOrder()">立即交费</a>
 			  </span>
 			</th>
 		  </tr>

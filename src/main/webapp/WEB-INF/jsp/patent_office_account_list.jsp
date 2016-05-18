@@ -68,10 +68,7 @@
 	                <td><c:out value="${account.password}"/></td>
 	                <td><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 	                <td>
-
 	                
-		
-	                  	
 	                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
 	                  		修改</a>&nbsp;
 	                  	<a href="JavaScript:void(0)" onclick="deleteAccount('${account.accountId}')">
