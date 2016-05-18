@@ -125,12 +125,15 @@
 	    <div class="row">
 	      <div class="col-xs-12">
 	        <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-	          <div class="ta-top" style="margin:8px;"> <a href="javascript:batchShare()">
+	          <div class="ta-top" style="margin:8px;"> 
+	            <a href="javascript:batchGrabFees()">
+	            <button class="t-btn7" style="font-weight:500;font-size:16px;">在线交费</button>
+	            </a>	          
+	          
+	          <a href="javascript:batchShare()" style="margin-left:50px;">
 	            <button class="t-btn3">批量分享</button>
-	            </a> <a href="javascript:batchGrabFees()">
-	            <button class="t-btn4">官费查询</button>
-	            </a>
-	            <!-- 							<button class="t-btn5">加入交易</button> -->
+	          </a> 
+
 	          </div>
 	          </span> </div>
 	        <table id="simple-table" class="table table-striped table-bordered table-hover">

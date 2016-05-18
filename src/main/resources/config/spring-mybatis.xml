@@ -3,7 +3,8 @@
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xmlns:tx="http://www.springframework.org/schema/tx" 
 		xmlns:context="http://www.springframework.org/schema/context" 
-		xmlns:aop="http://www.springframework.org/schema/aop" 
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:jee="http://www.springframework.org/schema/jee"  
 		xsi:schemaLocation="http://www.springframework.org/schema/beans 
 							http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
 							http://www.springframework.org/schema/tx 
@@ -11,30 +12,13 @@
 							http://www.springframework.org/schema/aop 
 							http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 							http://www.springframework.org/schema/context 
-							http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+							http://www.springframework.org/schema/context/spring-context-4.2.xsd
+							http://www.springframework.org/schema/jee 
+							http://www.springframework.org/schema/jee/spring-jee-4.0.xsd">
 	
-	<context:property-placeholder location="classpath:config/db.properties"/>
+	<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/pmsDataSource" />  
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
-	
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-		<property name="driverClass"><value>${db.driver_class}</value></property>
-		<property name="jdbcUrl"><value>${db.url}</value></property>
-		<property name="user"><value>${db.username}</value></property>
-		<property name="password"><value>${db.password}</value></property>
-		<property name="minPoolSize" value="5" />  
-		<property name="maxPoolSize" value="60" />       
-		<property name="acquireIncrement" value="5" />   
-		<property name="initialPoolSize" value="5" />      
-		<property name="idleConnectionTestPeriod" value="1800" />
-		<property name="maxConnectionAge" value="64800" />   
-		<property name="maxIdleTime" value="43200" /> 
-		<property name="acquireRetryAttempts" value="30" />
-		<property name="breakAfterAcquireFailure" value="false" />  
-		<property name="preferredTestQuery" value="select 1"/>  
-		<property name="testConnectionOnCheckin" value="true"/> 
-		<property name="testConnectionOnCheckout" value="false" />
-	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -129,14 +113,8 @@
 		<property name="orderMapper" ref="orderMapper" />
 	</bean>	
 	
-
-	
 	<bean name="patentOfficeAccountDao" class="com.lotut.pms.dao.mybatis.PatentOfficeAccountMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 		<property name="patentOfficeAccountMapper" ref="patentOfficeAccountMapper" />
 	</bean>	
-	
-	
-	
-		
 </beans>							
