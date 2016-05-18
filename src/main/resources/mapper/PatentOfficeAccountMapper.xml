@@ -37,5 +37,8 @@
 		insert into patent_office_accounts(user, name, username, password, patent_update_time)
 		values(#{userId}, #{name},#{username}, #{password},now())				
 	</insert>
-
+	
+	<update id="updatePatentsTime" parameterType="long">
+		UPDATE patent_office_accounts SET patent_update_time=NOW() WHERE account_id=#{accountId};
+	</update>
 </mapper>

@@ -125,9 +125,13 @@ public class PatentOfficeAccountController {
 	}	
 	
 	@RequestMapping(path="/autoUpdatePatents", method=RequestMethod.GET)
-	public String autoUpdatePatents(@RequestParam("username")String username,@RequestParam("password")String password) throws Exception{
+	public String autoUpdatePatents(@RequestParam("username")String username,@RequestParam("password")String password,
+			@RequestParam("accountId")long accountId) throws Exception{
 		InputStream is=PatentDownload.downloadPatentExcelFile(username,password);
-		patentService.uploadPatents(is);
+		boolean check=patentService.uploadPatents(is);
+		if(check){
+			patentOfficeAccountService.updatePatentsTime(accountId);
+		}
 		return "add_patent_success";
 	}
 	

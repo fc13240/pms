@@ -91,14 +91,14 @@ public class PatentServiceImpl implements PatentService {
 
 	@Override
 	@Transactional
-	public void uploadPatents(InputStream is) throws IOException {
+	public boolean  uploadPatents(InputStream is) throws IOException {
 		List<Patent> patents = PatentExcelParser.parsePatentFile(is);
 		for (Patent patent: patents) {
 			patentDao.insertOrUpdatePatent(patent);
 		}
 		List<Map<String, Integer>> userPatentList = new ArrayList<>();
 		UpdatePatentsUtils.updatepatents(userPatentList,patents,sharePatentDao);
-		
+		return true;
 	}
 
 	@Override

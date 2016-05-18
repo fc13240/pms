@@ -50,4 +50,9 @@ public class PatentOfficeAccountMybatisDao extends SqlSessionDaoSupport implemen
 		patentOfficeAccountMapper.addOfficeAccount(patentOfficeAccount);
 		
 	}
+
+	@Override
+	public void updatePatentsTime(long accountId) {
+		patentOfficeAccountMapper.updatePatentsTime(accountId);
+	}
 }

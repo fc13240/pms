@@ -22,4 +22,6 @@ public interface PatentOfficeAccountMapper {
 	PatentOfficeAccount getById(long accountId);
 
 	void addOfficeAccount(PatentOfficeAccount patentOfficeAccount);
+	
+	void updatePatentsTime(long accountId);
 }
