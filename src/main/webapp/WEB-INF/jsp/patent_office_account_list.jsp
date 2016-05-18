@@ -71,7 +71,10 @@
 	                
 
 	                <td>
-	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}')">
+	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
+	                  		自动更新
+	                  	</a>&nbsp;
+	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
 	                  		自动更新
 	                  	</a>&nbsp; 
 	                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
@@ -117,7 +120,7 @@
 			}
 		});		
 	}
-	function autoUpdatePatents(username,password,accountId) {
+	function autoUpdatePatents(username,password,accountId,userId) {
 		var opts = {
 				  lines: 13, // The number of lines to draw
 				  length: 7, // The length of each line
@@ -138,7 +141,7 @@
 		var target = document.getElementById('simple-table');
 		var spinner = new Spinner(opts).spin(target);		
 		$.ajax({
-			url: "<s:url value='/patentOfficeAccount/autoUpdatePatents.html'/>?username="+username + "&password="+password+"&accountId="+accountId,
+			url: "<s:url value='/patentOfficeAccount/autoUpdatePatents.html'/>?username="+username + "&password="+password+"&accountId="+accountId+"&userId="+userId,
 			type: 'get', 
 			success: function() {
 				spinner.stop();
