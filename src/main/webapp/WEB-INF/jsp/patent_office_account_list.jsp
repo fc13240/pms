@@ -64,13 +64,12 @@
 	                <td><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd"/></td>
 	                
 	                
-	                <td>验证更新&nbsp; 
+	                <td><a  href="" onclick="autoUpdatePatents(${account.username},${account.password})">
+	                  		自动更新</a>&nbsp; 
 	                	<a  href="<s:url value=''/>?patents=<c:out value='${patent.patentId}'/>">
 	                  		修改</a>&nbsp;
 	                  	<a href="JavaScript:void(0)" onclick="deleteAccount('${account.accountId}')">
-	                                                                  删除 </a> 
-	                                                                  
-	                                                                  
+	                                                                  删除 </a>                                    
 	                  </td>
 	                
 	                
@@ -114,7 +113,15 @@
 			}
 		});		
 	}
-	
+	function autoUpdatePatents(username,password) {
+		$.ajax({
+			url: "<s:url value=/patentOfficeAccount/autoUpdatePatents.html/>?username="+username + "&password="+password,
+			type: 'get', 
+			success: function() {
+				location.href = "<s:url value='/patent/list.html?currentPage=1'/>";
+			}
+		});		
+	}
 
 </script>
 
