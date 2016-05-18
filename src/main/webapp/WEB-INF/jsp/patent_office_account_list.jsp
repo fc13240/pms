@@ -35,9 +35,12 @@
 	    <div class="row">
 	      <div class="col-xs-12">
 	        <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-	          <div class="ta-top" style="margin:8px;"> <a href="<s:url value='/patentOfficeAccount/add_form.html'/>">
-	            <button class="t-btn3">添加电子账户</button>
-	            </a> 
+	          <div class="ta-top" style="margin:8px;">
+	          <c:if test="${accountType==0}"> 
+	          <a href="<s:url value='/patentOfficeAccount/add_form.html'/>">
+	            <button class="t-btn3">添加电子账户</button>  
+	            </a>
+	            </c:if> 
 	          </div>
 	          </span> </div>
 	        <table id="simple-table" class="table table-striped table-bordered table-hover" >
@@ -78,11 +81,13 @@
 	                  		自动更新
 	                  	</a>&nbsp;
 	                  	</c:if>
+	                  	<c:if test="${accountType==0}">
 	                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
 	                  		修改</a>&nbsp;
 	                  	<a href="JavaScript:void(0)" onclick="deleteAccount('${account.accountId}')">
 	                                                             删除 
-	                    </a>                                    
+	                    </a> 
+	                    </c:if>                                   
 	                  </td>
 
 	              </tr>
