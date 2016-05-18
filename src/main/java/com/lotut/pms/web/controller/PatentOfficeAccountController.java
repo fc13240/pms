@@ -81,7 +81,7 @@ public class PatentOfficeAccountController {
 		return "patent_office_account_list";
 	}
 	
-<<<<<<< HEAD
+
 	@RequestMapping(path="/detail", method=RequestMethod.GET)
 	public String getOfficeAccountDetail(@RequestParam("accountId")long accountId,Model model) {
 		
@@ -99,7 +99,6 @@ public class PatentOfficeAccountController {
 	}
 	
 	
-=======
 	@RequestMapping(path="/autoUpdatePatents", method=RequestMethod.GET)
 	public String autoUpdatePatents(@RequestParam("username")String username,@RequestParam("password")String password) throws Exception{
 		InputStream is=PatentDownload.downloadPatentExcelFile(username,password);
@@ -107,7 +106,5 @@ public class PatentOfficeAccountController {
 		return "add_patent_success";
 	}
 	
-	
 
->>>>>>> 78f05ad792460066f5ff25532b20bf4f03a511fd
 }

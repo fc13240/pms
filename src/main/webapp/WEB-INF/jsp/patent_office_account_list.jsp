@@ -64,15 +64,7 @@
 	                <td><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 	                
 	                
-<<<<<<< HEAD
-	                <td>验证更新&nbsp; 
-	                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
-	                  		修改</a>&nbsp;
-	                  	<a href="JavaScript:void(0)" onclick="deleteAccount('${account.accountId}')">
-	                                                                  删除 </a>                                  
-	                </td>
-	                
-=======
+
 	                <td>
 	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}')">
 	                  		自动更新
@@ -84,7 +76,7 @@
 	                                                             删除 
 	                    </a>                                    
 	                  </td>
->>>>>>> 78f05ad792460066f5ff25532b20bf4f03a511fd
+
 	              </tr>
 	            </c:forEach>
 	          </tbody>
