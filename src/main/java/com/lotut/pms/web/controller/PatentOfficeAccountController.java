@@ -81,13 +81,30 @@ public class PatentOfficeAccountController {
 		return "patent_office_account_list";
 	}
 	
+
+	@RequestMapping(path="/detail", method=RequestMethod.GET)
+	public String getOfficeAccountDetail(@RequestParam("accountId")long accountId,Model model) {
+		
+		PatentOfficeAccount patentOfficeAccount = patentOfficeAccountService.getOfficeAccountDetail(accountId);
+		model.addAttribute("patentOfficeAccount", patentOfficeAccount);
+		return "patent_office_account_detail";
+	}
+	
+	@RequestMapping(path="/update", method=RequestMethod.POST)
+	public String updateOfficeAccount(@ModelAttribute PatentOfficeAccount patentOfficeAccount,Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		boolean success=patentOfficeAccountService.updateOfficeAccount(patentOfficeAccount);
+		model.addAttribute("success", success);
+		return "patent_office_account_detail";
+	}
+	
+	
 	@RequestMapping(path="/autoUpdatePatents", method=RequestMethod.GET)
 	public String autoUpdatePatents(@RequestParam("username")String username,@RequestParam("password")String password) throws Exception{
 		InputStream is=PatentDownload.downloadPatentExcelFile(username,password);
 		patentService.uploadPatents(is);
 		return "add_patent_success";
 	}
-	
 	
 
 }

@@ -31,4 +31,13 @@ public class PatentOfficeAccountServiceImpl implements PatentOfficeAccountServic
 	public void deleteOfficeAccount(long accountId){
 		patentOfficeAccountDao.deleteOfficeAccount(accountId);
 	}
+
+	public boolean updateOfficeAccount(PatentOfficeAccount patentOfficeAccount) {
+		return patentOfficeAccountDao.updateOfficeAccount(patentOfficeAccount);
+	}
+
+	@Override
+	public PatentOfficeAccount getOfficeAccountDetail(long accountId) {
+		return patentOfficeAccountDao.getById(accountId);
+	}
 }

@@ -34,4 +34,14 @@ public class PatentOfficeAccountMybatisDao extends SqlSessionDaoSupport implemen
 	public void deleteOfficeAccount(long accountId) {
 		patentOfficeAccountMapper.deleteOfficeAccount(accountId);
 	}
+	
+	@Override
+	public boolean updateOfficeAccount(PatentOfficeAccount patentOfficeAccount) {
+		return patentOfficeAccountMapper.updateOfficeAccount(patentOfficeAccount);
+	}
+	
+	@Override
+	public PatentOfficeAccount getById(long accountId) {
+		return patentOfficeAccountMapper.getById(accountId);
+	}
 }

@@ -16,4 +16,8 @@ public interface PatentOfficeAccountMapper {
 	List<PatentOfficeAccount> getUserAccounts(int userId);
 	
 	void deleteOfficeAccount(@Param("accountId") long accountId);
+	
+	boolean updateOfficeAccount(PatentOfficeAccount patentOfficeAccount);
+	
+	PatentOfficeAccount getById(long accountId);
 }

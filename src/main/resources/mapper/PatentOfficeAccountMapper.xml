@@ -22,7 +22,15 @@
 	<delete id="deleteOfficeAccount">
 		delete from patent_office_accounts where account_id = #{accountId} 
 	</delete>
-
 	
+	<update id="updateOfficeAccount" parameterType="PatentOfficeAccount">
+		update patent_office_accounts set name=#{name},username=#{username},
+			password=#{password} where account_id=#{accountId}
+	</update>
+	
+	<select id="getById" resultMap="patentOfficeAccountResultMap">
+		select name,username,password,patent_update_time from patent_office_accounts 
+		where account_id = #{accountId}
+	</select>
 
 </mapper>
