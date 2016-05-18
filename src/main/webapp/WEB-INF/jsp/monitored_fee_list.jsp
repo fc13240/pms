@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>专利缴费</title>
+<title>专利交费</title>
 <%@ include file="_css.jsp" %>
 
 </head>
@@ -19,15 +19,15 @@
 <div class="lt-con">
 	<div class="t-ti">
 		<hr class="t-hr">
-		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">专利缴费</span>
+		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">专利交费</span>
 	</div>
 	<div id="menu">
 	  <div style="height:33px;">
 	    <ul id="nav">
 	      <p>快捷处理：</p>
 	      <li><a href="#" class="">专利类型</a></li>
-<!-- 	      <li><a href="#" class="">缴费期限</a></li> -->
-	      <li><a href="#" class="">缴费状态</a></li>
+<!-- 	      <li><a href="#" class="">交费期限</a></li> -->
+	      <li><a href="#" class="">交费状态</a></li>
 	      <li><a href="#" class="selected">费用类型</a></li>
 	      <li><a href="#" class="">期限监控</a></li>
 	    </ul>
@@ -66,7 +66,7 @@
 	    <div class="tag"  style="display:none"> 
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=1'/>">
-	        <li>应缴费 (<c:out value='${feePaymentStatusCount[(1).intValue()]["feeCount"]}' default="0"/>)</li>
+	        <li>应交费 (<c:out value='${feePaymentStatusCount[(1).intValue()]["feeCount"]}' default="0"/>)</li>
 	        </a> 
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=2'/>">
 	        <li>已支付 (<c:out value='${feePaymentStatusCount[(2).intValue()]["feeCount"]}' default="0"/>)</li>
@@ -78,7 +78,7 @@
 	        <li>待支付 (<c:out value='${feePaymentStatusCount[(4).intValue()]["feeCount"]}' default="0"/>)</li>
 	        </a> 
 	         <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=5'/>">
-	        <li>缴费成功 (<c:out value='${feePaymentStatusCount[(5).intValue()]["feeCount"]}' default="0"/>)</li>
+	        <li>交费成功 (<c:out value='${feePaymentStatusCount[(5).intValue()]["feeCount"]}' default="0"/>)</li>
 	        </a> 
 	      </ul>
 	     
@@ -140,15 +140,15 @@
 			  </label>
 			</li>
 			<li>
-			  <p>缴费状态</p>
+			  <p>交费状态</p>
 			  <label id="lblSelect">
 			  <select id="paymentStatus" name="paymentStatus" >
 				<option value="">全部</option>
-				<option value="1">应缴费</option>
+				<option value="1">应交费</option>
 				<option value="2">已支付</option>
-				<option value="3">已缴费</option>
+				<option value="3">已交费</option>
 				<option value="4">待支付</option>
-				<option value="5">缴费成功</option>
+				<option value="5">交费成功</option>
 			  </select>
 			  </label>
 			</li>
@@ -164,12 +164,12 @@
 			  </label>
 			</li>
 			<li>
-			  <p>缴费截止日开始</p>
-			  <input  type="text" onclick="WdatePicker({el:'startAppDateId'})" style="height:18px;" class="form-control" id="startAppDateId"  name="startDeadline" placeholder="缴费截止日开始" value="" readonly="readonly" >
+			  <p>交费截止日开始</p>
+			  <input  type="text" onclick="WdatePicker({el:'startAppDateId'})" style="height:18px;" class="form-control" id="startAppDateId"  name="startDeadline" placeholder="交费截止日开始" value="" readonly="readonly" >
 			</li>
 			<li>
-			  <p>缴费截止日结束</p>
-			  <input type="text" onclick="WdatePicker({el:'endAppDateId'})" style="height:18px;" class="form-control" id="endAppDateId" name="endDeadline" placeholder="缴费截止日结束" value="" readonly="readonly" >
+			  <p>交费截止日结束</p>
+			  <input type="text" onclick="WdatePicker({el:'endAppDateId'})" style="height:18px;" class="form-control" id="endAppDateId" name="endDeadline" placeholder="交费截止日结束" value="" readonly="readonly" >
 			</li>
 			<li style="width: 385px;">
 			  <p>关键字</p>
@@ -206,8 +206,8 @@
 					<button class="t-btn2">删除费用</button>
 					</a>
 
-					<span class="span3" style="font-size:14px;margin-left:50px;">成功缴费总额：￥${totalFeeCount }</span>
-					<span class="span3" style="font-size:14px;margin-left:50px;">应缴费总额：￥${unpaidFeeCount }  </span>
+					<span class="span3" style="font-size:14px;margin-left:50px;">成功交费总额：￥${totalFeeCount }</span>
+					<span class="span3" style="font-size:14px;margin-left:50px;">应交费总额：￥${unpaidFeeCount }  </span>
 
 				  </div>
 				  </span> 
@@ -224,11 +224,11 @@
 					  <th>专利名称</th>
 					  <th>第一申请人</th>
 					  <th>案件状态</th>
-					  <th>缴费截止日</th>
-					  <th>缴费种类</th>
-					  <th>缴费金额</th>
+					  <th>交费截止日</th>
+					  <th>交费种类</th>
+					  <th>交费金额</th>
 					  <th>发票抬头</th>
-					  <th>缴费状态</th>
+					  <th>交费状态</th>
 					</tr>
 				  </thead>
 				  <tbody>
@@ -497,7 +497,7 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 			//alert(checkTime(dateFormat(deadline[k],'yyyy-MM-dd HH:mm:ss'),nowDataFormat(new Date(),'yyyy-MM-dd HH:mm:ss')));
 			var isOverDue=checkTime(now,deadline[k]);
 			if(isOverDue){
-				if(!confirm('已超出规定缴费期限！,是否继续操作？')) {
+				if(!confirm('已超出规定交费期限！,是否继续操作？')) {
 					return;
 				} else {
 					break;

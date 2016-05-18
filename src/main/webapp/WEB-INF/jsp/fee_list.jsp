@@ -19,7 +19,7 @@
 <div class="lt-con">
 	<div class="t-ti">
 		<hr class="t-hr">
-		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">缴费</span>
+		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">交费</span>
 	</div>
 <!-- list beg -->	
 
@@ -88,9 +88,9 @@
 			  </tr>
 			  <tr>
 				<th>序号</th>
-				<th>缴费种类</th>
-				<th>缴费截止日</th>
-				<th>缴费金额</th>
+				<th>交费种类</th>
+				<th>交费截止日</th>
+				<th>交费金额</th>
 				<th>监控状态</th>
 			  </tr>
 			  <c:forEach items="${fees}" var="fee" varStatus="status">
@@ -132,10 +132,10 @@
 			<table id="simple-table" class="table table-striped table-bordered table-hover">
 				<tr>
 				  <th>序号</th>
-				  <th>缴费种类</th>
-				  <th>缴费金额</th>
-				  <th>缴费日期</th>
-				  <th>缴费人姓名</th>
+				  <th>交费种类</th>
+				  <th>交费金额</th>
+				  <th>交费日期</th>
+				  <th>交费人姓名</th>
 				  <th>收据号</th>
 				</tr>
 				<c:forEach items="${paidFees}" var="paidFee" varStatus="status">
@@ -170,7 +170,7 @@
 		var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
 		
 		if (!feeSelected) {
-			formutil.alertMessage('请选择应缴费记录');
+			formutil.alertMessage('请选择应交费记录');
 			return;
 		}
 		
@@ -183,7 +183,7 @@
 		var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
 		
 		if (!feeSelected) {
-			formutil.alertMessage('请选择应缴费记录');
+			formutil.alertMessage('请选择应交费记录');
 			return;
 		}
 		
