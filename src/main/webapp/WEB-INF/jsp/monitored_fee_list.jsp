@@ -189,13 +189,20 @@
 			<div class="row">
 			  <div class="col-xs-12">
 				<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-				  <div class="ta-top" style="margin:8px;"> <a href="javascript:batchUpdateInvoiceTitles()">
-					<button class="t-btn1">批量修改发票抬头</button>
-					</a> <a href="javascript:exportFees()">
+				  <div class="ta-top" style="margin:8px;"> 
+
+					<a href="javascript:showOrderCreateForm()">
+					<button class="t-btn7">立即交费</button>
+					</a> 
+									  
+				  	<a href="javascript:batchUpdateInvoiceTitles()">
+					<button class="t-btn1">修改发票抬头</button>
+					</a> 
+					<a href="javascript:exportFees()">
 					<button class="t-btn6">表格导出</button>
-					</a> <a href="javascript:showOrderCreateForm()">
-					<button class="t-btn5">加入订单</button>
-					</a> <a href="javascript:delectFees()">
+					</a> 
+
+					<a href="javascript:delectFees()">
 					<button class="t-btn2">删除费用</button>
 					</a>
 
