@@ -9,6 +9,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>龙图腾专利</title>
 <%@ include file="_css.jsp" %>
+<script type="text/javascript" src="<s:url value='/static/js/modernizr.js'/>"></script>
+<script type="text/javascript" src="<s:url value='/static/js/spin.js'/>"></script>
+	<style type="text/css">
+	  body {
+	    font-family: Helvetica, Arial, sans-serif;
+	    font-size: 16px;
+	  }
+	  </style>
 </head>
 <body style="background:#F3F3F5;">
 <%@ include file="_top.jsp" %>
@@ -64,6 +72,7 @@
 	                <td>
 	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}')">
 	                  		自动更新
+	                  		
 	                  	</a>&nbsp; 
 	                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
 	                  		修改</a>&nbsp;
@@ -79,7 +88,7 @@
 	 
 	      </div>
 	    </div>
-	    </form>
+
 	    <!--search box end-->
 	  </div>
 	</div>
@@ -109,13 +118,35 @@
 		});		
 	}
 	function autoUpdatePatents(username,password) {
+		var opts = {
+				  lines: 13, // The number of lines to draw
+				  length: 7, // The length of each line
+				  width: 4, // The line thickness
+				  radius: 10, // The radius of the inner circle
+				  corners: 1, // Corner roundness (0..1)
+				  rotate: 0, // The rotation offset
+				  color: '#000', // #rgb or #rrggbb
+				  speed: 1, // Rounds per second
+				  trail: 60, // Afterglow percentage
+				  shadow: true, // Whether to render a shadow
+				  hwaccel: false, // Whether to use hardware acceleration
+				  className: 'spinner', // The CSS class to assign to the spinner
+				  zIndex: 2e9, // The z-index (defaults to 2000000000)
+				  top: '200px', // Top position relative to parent in px
+				  left: '600px' // Left position relative to parent in px
+				};
+		var target = document.getElementById('simple-table');
+		var spinner = new Spinner(opts).spin(target);
+				
 		$.ajax({
 			url: "<s:url value='/patentOfficeAccount/autoUpdatePatents.html'/>?username="+username + "&password="+password,
 			type: 'get', 
 			success: function() {
+				spinner.stop();
 				formutil.alertMessage('更新成功！');
 			},
 			error:function(){
+				spinner.stop();
 				formutil.alertMessage('更新失败，请稍后重试！');
 			}
 		});		
@@ -140,5 +171,6 @@
 		});		
 	}	
 </script>
+
 </body>
 </html>
