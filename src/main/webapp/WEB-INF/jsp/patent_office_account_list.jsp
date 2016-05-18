@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>龙图腾专利</title>
 <%@ include file="_css.jsp" %>
+
 <script type="text/javascript" src="<s:url value='/static/js/modernizr.js'/>"></script>
 <script type="text/javascript" src="<s:url value='/static/js/spin.js'/>"></script>
 	<style type="text/css">
@@ -18,7 +19,7 @@
 	  }
 	  </style>
 </head>
-<body style="background:#F3F3F5;">
+<body style="background:#F3F3F5;" id="body" class="body">
 <%@ include file="_top.jsp" %>
 <%@ include file="_left_nav.jsp" %>
 <%@ include file="_left_nav2.jsp" %>
@@ -43,7 +44,7 @@
 	            </a> 
 	          </div>
 	          </span> </div>
-	        <table id="simple-table" class="table table-striped table-bordered table-hover">
+	        <table id="simple-table" class="table table-striped table-bordered table-hover" >
 	          <thead>
 	            <tr class="simple_bag">
 	              <th class="center" width="25"> <label class="pos-rel">
@@ -76,7 +77,6 @@
 	                <td>
 	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}')">
 	                  		自动更新
-	                  		
 	                  	</a>&nbsp; 
 	                	<a  href="<s:url value=''/>?patents=<c:out value='${patent.patentId}'/>">
 	                  		修改
@@ -123,6 +123,7 @@
 		});		
 	}
 	function autoUpdatePatents(username,password) {
+		
 		var opts = {
 				  lines: 13, // The number of lines to draw
 				  length: 7, // The length of each line
@@ -133,7 +134,7 @@
 				  color: '#000', // #rgb or #rrggbb
 				  speed: 1, // Rounds per second
 				  trail: 60, // Afterglow percentage
-				  shadow: true, // Whether to render a shadow
+				  shadow: false, // Whether to render a shadow
 				  hwaccel: false, // Whether to use hardware acceleration
 				  className: 'spinner', // The CSS class to assign to the spinner
 				  zIndex: 2e9, // The z-index (defaults to 2000000000)
@@ -141,8 +142,7 @@
 				  left: '600px' // Left position relative to parent in px
 				};
 		var target = document.getElementById('simple-table');
-		var spinner = new Spinner(opts).spin(target);
-				
+		var spinner = new Spinner(opts).spin(target);		
 		$.ajax({
 			url: "<s:url value='/patentOfficeAccount/autoUpdatePatents.html'/>?username="+username + "&password="+password,
 			type: 'get', 
