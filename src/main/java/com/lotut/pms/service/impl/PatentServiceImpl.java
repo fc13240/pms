@@ -21,7 +21,6 @@ import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.service.PatentService;
 import com.lotut.pms.service.utils.PatentExcelParser;
-import com.lotut.pms.util.UpdatePatentsUtils;
 
 public class PatentServiceImpl implements PatentService {
 	private PatentDao patentDao;
@@ -91,13 +90,24 @@ public class PatentServiceImpl implements PatentService {
 
 	@Override
 	@Transactional
-	public void uploadPatents(InputStream is) throws IOException {
-		List<Patent> patents = PatentExcelParser.parsePatentFile(is);
+	public void uploadPatents(InputStream is,int userId) throws IOException {
+		List<Patent> patents = PatentExcelParser.parsePatentFile(is,userId);
 		for (Patent patent: patents) {
 			patentDao.insertOrUpdatePatent(patent);
 		}
 		List<Map<String, Integer>> userPatentList = new ArrayList<>();
-		UpdatePatentsUtils.updatepatents(userPatentList,patents,sharePatentDao);
+		for (Patent patent: patents) {
+			boolean isNewPatent = patent.getPatentId() != 0;
+			if (isNewPatent) {
+				HashMap<String, Integer> userPatentMap = new HashMap<>();
+				userPatentMap.put("user", patent.getOwnerId());
+				userPatentMap.put("patent", (int) patent.getPatentId());
+				userPatentList.add(userPatentMap);
+			}
+		}
+		if (userPatentList.size() > 0) {
+			sharePatentDao.insertUserPatents(userPatentList);
+		}
 		
 	}
 
@@ -161,7 +171,18 @@ public class PatentServiceImpl implements PatentService {
 		List<Patent> patents = PatentExcelParser.parsePatentFile(is);
 		patentDao.insertOrUpdatePatents(patents);
 		List<Map<String, Integer>> userPatentList = new ArrayList<>();
-		UpdatePatentsUtils.updatepatents(userPatentList,patents,sharePatentDao);
+		for (Patent patent: patents) {
+			boolean isNewPatent = patent.getPatentId() != 0;
+			if (isNewPatent) {
+				HashMap<String, Integer> userPatentMap = new HashMap<>();
+				userPatentMap.put("user", patent.getOwnerId());
+				userPatentMap.put("patent", (int) patent.getPatentId());
+				userPatentList.add(userPatentMap);
+			}
+		}
+		if (userPatentList.size() > 0) {
+			sharePatentDao.insertUserPatents(userPatentList);
+		}
 		
 	}
 }

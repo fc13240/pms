@@ -65,13 +65,27 @@ public class PatentOfficeAccountController {
 	
 	@RequestMapping(path="/list", method=RequestMethod.GET)
 	public String getUserOffice(Model model) {
-		int userId = PrincipalUtils.getCurrentUserId();
+		if (PrincipalUtils.isOrderProcessor()) {
+			int userId = PrincipalUtils.getCurrentUserId();
+			
+			List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
+			
+			model.addAttribute("accounts", accounts);
+			
+			return "patent_office_account_list";
+		}else{
+			
+			int userId = PrincipalUtils.getCurrentUserId();
+			
+			List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
+			
+			model.addAttribute("accounts", accounts);
+			
+			return "patent_office_account_list";
+		}
 		
-		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
 		
-		model.addAttribute("accounts", accounts);
 		
-		return "patent_office_account_list";
 	}
 	
 	@RequestMapping(path="/delete", method=RequestMethod.GET)
@@ -127,7 +141,7 @@ public class PatentOfficeAccountController {
 	@RequestMapping(path="/autoUpdatePatents", method=RequestMethod.GET)
 	public String autoUpdatePatents(@RequestParam("username")String username,@RequestParam("password")String password) throws Exception{
 		InputStream is=PatentDownload.downloadPatentExcelFile(username,password);
-		patentService.uploadPatents(is);
+		//patentService.uploadPatents(is);
 		return "add_patent_success";
 	}
 	

@@ -146,7 +146,8 @@ public class PatentController {
 	@RequestMapping(path="/upload", method=RequestMethod.POST)
 	public String uploadPatents(@RequestParam("patentFile")Part patentFile) throws IOException {
 		InputStream is = patentFile.getInputStream();
-		patentService.uploadPatents(is);
+		int userId = PrincipalUtils.getCurrentUserId();
+		patentService.uploadPatents(is,userId);
 		return "upload_success";
 	}	
 	

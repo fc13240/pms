@@ -37,7 +37,7 @@ public interface PatentService {
 	
 	void changeInternalCode(int patentId, String internalCode);
 	
-	void uploadPatents(InputStream is) throws IOException;
+	void uploadPatents(InputStream is,int userId) throws IOException;
 
 	public List<GoodsFirstColumn> getFirstColumn();
 
