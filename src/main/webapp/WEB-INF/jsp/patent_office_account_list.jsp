@@ -166,13 +166,14 @@
 			url: "<s:url value='/patentOfficeAccount/checkLogin.html'/>?username="+username + "&password="+password+"&accountId="+accountId+"&userId="+userId,
 			type: 'get', 
 			success: function(success) {
-				if(success){
+				
+				if(success=="true"){
 					formutil.alertMessage('验证成功！');
 				}else{
-					formutil.alertMessage('网络繁忙，请稍后重试！');
+					formutil.alertMessage('账户异常或网络繁忙，请检查后重试！');
 				}
 			},
-			error:function(success){
+			error:function(){
 				formutil.alertMessage('服务器错误!请联系管理员');
 			}
 		});		
