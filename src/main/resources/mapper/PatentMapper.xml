@@ -254,6 +254,22 @@
 			patent_status = #{patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER}
 	</insert>
 	
+	<insert id="insertOrUpdatePatents" parameterType="list" useGeneratedKeys="true" keyProperty="patentId">
+		insert into patents(app_no, patent_name, app_person, app_date,patent_status_text, patent_type, patent_status, patent_owner)
+		values
+		<foreach item="patent" collection="patents" separator=",">
+				(#{patent.appNo}, #{patent.name,javaType=string,jdbcType=VARCHAR}, #{patent.appPerson,javaType=string,jdbcType=VARCHAR}, #{patent.appDate,javaType=date,jdbcType=DATE},
+				 #{patent.patentStatusText,javaType=string,jdbcType=VARCHAR}, 
+					   #{patent.patentType.patentTypeId,jdbcType=INTEGER}, #{patent.patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER}, #{ownerId})
+			on duplicate key update 
+				patent_name = #{patent.name,javaType=string,jdbcType=VARCHAR}, app_person = #{patent.appPerson,javaType=string,jdbcType=VARCHAR},
+				app_date = #{patent.appDate,javaType=date,jdbcType=DATE},
+				patent_status_text = #{patent.patentStatusText,javaType=string,jdbcType=VARCHAR}, patent_type = #{patent.patentType.patentTypeId},
+				patent_status = #{patent.patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER}
+		</foreach>		 
+		
+	</insert>
+	
 	<insert id="insertPatent" parameterType="Patent" useGeneratedKeys="true" keyProperty="patentId">
 		insert into patents(app_no, patent_name, app_date, patent_type, patent_owner)
 		values(#{appNo}, #{name,javaType=string,jdbcType=VARCHAR}, #{appDate,javaType=date,jdbcType=DATE},

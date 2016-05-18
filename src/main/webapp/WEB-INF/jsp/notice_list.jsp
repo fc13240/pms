@@ -210,17 +210,29 @@
 		  <div class="col-xs-12">
 			<!-- PAGE CONTENT BEGINS -->
 			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-			  <div class="ta-top" style="margin:8px;"> <a href="javascript:batchProcessNotice(4)">
-				<button class="t-btn1">置为处理中</button>
-				</a> <a href="javascript:batchProcessNotice(2)">
-				<button class="t-btn2">置为已处理</button>
-				</a> <a href="javascript:batchShare()">
-				<button class="t-btn3">专利分享</button>
-				</a> <a href="javascript:batchGrabFees()">
-				<button class="t-btn4">官费查询</button>
-				</a> <a href="javascript:batchChangeNoticePaperType(2)">
-				<button class="t-btn4">批量申请纸件</button>
+			  <div class="ta-top" style="margin:8px;"> 
+			  	<a href="javascript:batchGrabFees()">
+				<button class="t-btn7">在线交费</button>
 				</a>
+			  	<a href="javascript:batchProcessNotice(4)">
+				<button class="t-btn1">置为处理中</button>
+				</a> 
+
+		
+				<a href="javascript:batchProcessNotice(2)">
+				<button class="t-btn2">置为已处理</button>
+				</a> 
+		
+				<a href="javascript:batchShare()">
+				<button class="t-btn3">专利分享</button>
+				</a>  <a href="javascript:batchChangeNoticePaperType(2)">
+				<button class="t-btn4">批量申请纸件</button>
+				
+				
+				</a>
+				
+
+			
 				<!-- 							<button class="t-btn6">表格导出</button> -->
 			  </div>
 			  </span> </div>

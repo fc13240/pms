@@ -21,6 +21,7 @@ import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.service.PatentService;
 import com.lotut.pms.service.utils.PatentExcelParser;
+import com.lotut.pms.util.UpdatePatentsUtils;
 
 public class PatentServiceImpl implements PatentService {
 	private PatentDao patentDao;
@@ -95,21 +96,9 @@ public class PatentServiceImpl implements PatentService {
 		for (Patent patent: patents) {
 			patentDao.insertOrUpdatePatent(patent);
 		}
-		
 		List<Map<String, Integer>> userPatentList = new ArrayList<>();
-		for (Patent patent: patents) {
-			boolean isNewPatent = patent.getPatentId() != 0;
-			if (isNewPatent) {
-				HashMap<String, Integer> userPatentMap = new HashMap<>();
-				userPatentMap.put("user", patent.getOwnerId());
-				userPatentMap.put("patent", (int) patent.getPatentId());
-				userPatentList.add(userPatentMap);
-			}
-		}
+		UpdatePatentsUtils.updatepatents(userPatentList,patents,sharePatentDao);
 		
-		if (userPatentList.size() > 0) {
-			sharePatentDao.insertUserPatents(userPatentList);
-		}
 	}
 
 	@Override
@@ -167,5 +156,12 @@ public class PatentServiceImpl implements PatentService {
 		return patentDao.getPatentIdByAppNo(userId,appNo);
 	}
 
-	
+	@Override
+	public void autoUpdatePatents(InputStream is) throws IOException {
+		List<Patent> patents = PatentExcelParser.parsePatentFile(is);
+		patentDao.insertOrUpdatePatents(patents);
+		List<Map<String, Integer>> userPatentList = new ArrayList<>();
+		UpdatePatentsUtils.updatepatents(userPatentList,patents,sharePatentDao);
+		
+	}
 }

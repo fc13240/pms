@@ -1,6 +1,10 @@
 package com.lotut.pms.web.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,19 +45,22 @@ import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.PatentOfficeAccountService;
+import com.lotut.pms.service.PatentService;
 import com.lotut.pms.service.UserService;
+import com.lotut.pms.service.utils.PatentDownload;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
 
 @Controller
 @RequestMapping(path="/patentOfficeAccount")
 public class PatentOfficeAccountController {
-	
+	private PatentService patentService;
 	private PatentOfficeAccountService patentOfficeAccountService;	
 	
 	@Autowired
-	public PatentOfficeAccountController(PatentOfficeAccountService patentOfficeAccountService) {
+	public PatentOfficeAccountController(PatentOfficeAccountService patentOfficeAccountService,PatentService patentService) {
 		this.patentOfficeAccountService = patentOfficeAccountService;
+		this.patentService = patentService;
 	}	
 	
 	@RequestMapping(path="/list", method=RequestMethod.GET)
@@ -59,6 +81,7 @@ public class PatentOfficeAccountController {
 		return "patent_office_account_list";
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(path="/detail", method=RequestMethod.GET)
 	public String getOfficeAccountDetail(@RequestParam("accountId")long accountId,Model model) {
 		
@@ -76,4 +99,15 @@ public class PatentOfficeAccountController {
 	}
 	
 	
+=======
+	@RequestMapping(path="/autoUpdatePatents", method=RequestMethod.GET)
+	public String autoUpdatePatents(@RequestParam("username")String username,@RequestParam("password")String password) throws Exception{
+		InputStream is=PatentDownload.downloadPatentExcelFile(username,password);
+		patentService.uploadPatents(is);
+		return "add_patent_success";
+	}
+	
+	
+
+>>>>>>> 78f05ad792460066f5ff25532b20bf4f03a511fd
 }
