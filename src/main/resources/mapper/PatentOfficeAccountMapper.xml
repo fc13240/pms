@@ -13,10 +13,12 @@
 	</resultMap>
 	
 
-	<select id="getUserAccounts" resultMap="patentOfficeAccountResultMap">
+	<select id="getUserAccounts" parameterType="int" resultMap="patentOfficeAccountResultMap">
 		select account_id, user,name,username,password,patent_update_time
 		  from patent_office_accounts
+		 <if test="_parameter != null">
 		 where user = #{userId}
+		 </if>
 	</select>
 	
 	<delete id="deleteOfficeAccount">

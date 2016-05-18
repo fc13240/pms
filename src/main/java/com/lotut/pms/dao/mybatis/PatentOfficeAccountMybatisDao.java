@@ -26,7 +26,7 @@ public class PatentOfficeAccountMybatisDao extends SqlSessionDaoSupport implemen
 	}
 
 	@Override
-	public List<PatentOfficeAccount> getUserAccounts(int userId) {
+	public List<PatentOfficeAccount> getUserAccounts(Integer userId) {
 		return patentOfficeAccountMapper.getUserAccounts(userId);
 	}
 	

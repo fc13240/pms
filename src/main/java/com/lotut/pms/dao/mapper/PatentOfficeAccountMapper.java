@@ -13,7 +13,7 @@ import com.lotut.pms.domain.User;
 public interface PatentOfficeAccountMapper {
 
 	
-	List<PatentOfficeAccount> getUserAccounts(int userId);
+	List<PatentOfficeAccount> getUserAccounts(Integer userId);
 	
 	void deleteOfficeAccount(@Param("accountId") long accountId);
 	

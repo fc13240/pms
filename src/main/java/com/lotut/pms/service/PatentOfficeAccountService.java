@@ -15,7 +15,7 @@ import com.lotut.pms.domain.User;
 public interface PatentOfficeAccountService {
 	
 	
-	List<PatentOfficeAccount> getUserAccounts(int userId);
+	List<PatentOfficeAccount> getUserAccounts(Integer userId);
 	
 	void deleteOfficeAccount(long accountId);
 	

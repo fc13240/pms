@@ -67,16 +67,20 @@
 	                <td><c:out value="${account.username}"/></td>
 	                <td><c:out value="${account.password}"/></td>
 	                <td><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-	                
-	                
-
 	                <td>
+<<<<<<< HEAD
 	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
 	                  		自动更新
 	                  	</a>&nbsp;
 	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
 	                  		自动更新
 	                  	</a>&nbsp; 
+=======
+
+	                
+		
+	                  	
+>>>>>>> 8bb842bf4171424d3a1f7638440e1f0df5c1f492
 	                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
 	                  		修改</a>&nbsp;
 	                  	<a href="JavaScript:void(0)" onclick="deleteAccount('${account.accountId}')">

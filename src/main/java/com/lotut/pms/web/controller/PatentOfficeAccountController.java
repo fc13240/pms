@@ -80,8 +80,6 @@ public class PatentOfficeAccountController {
 			return "patent_office_account_list";
 		}
 		
-		
-		
 	}
 	
 	@RequestMapping(path="/delete", method=RequestMethod.GET)
@@ -103,8 +101,9 @@ public class PatentOfficeAccountController {
 		int userId = PrincipalUtils.getCurrentUserId();
 		patentOfficeAccountService.updateOfficeAccount(patentOfficeAccount);
 		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
-		model.addAttribute("accounts", accounts);		
-		return "patent_office_account_list";
+		model.addAttribute("accounts", accounts);	
+		
+		return "redirect:/patentOfficeAccount/list.html";
 	}
 
 	@RequestMapping(path="/add_form", method=RequestMethod.GET)
@@ -117,9 +116,10 @@ public class PatentOfficeAccountController {
 		int userId = PrincipalUtils.getCurrentUserId();
 		patentOfficeAccount.setUserId(userId);
 		patentOfficeAccountService.addOfficeAccount(patentOfficeAccount);
-		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
-		model.addAttribute("accounts", accounts);		
-		return "patent_office_account_list";
+
+		//model.addAttribute("success", success);
+				
+		return "redirect:/patentOfficeAccount/list.html";
 	}	
 	
 	@RequestMapping(path="/autoUpdatePatents", method=RequestMethod.GET)

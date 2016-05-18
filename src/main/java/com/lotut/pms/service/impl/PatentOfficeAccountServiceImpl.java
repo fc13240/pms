@@ -24,7 +24,7 @@ public class PatentOfficeAccountServiceImpl implements PatentOfficeAccountServic
 	}
 	
 	@Override
-	public List<PatentOfficeAccount> getUserAccounts(int userId) {
+	public List<PatentOfficeAccount> getUserAccounts(Integer userId) {
 		return patentOfficeAccountDao.getUserAccounts(userId);
 	}
 
