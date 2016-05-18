@@ -73,7 +73,7 @@ public class PatentExcelParser {
 		Date appDate = parseDate(row.getCell(3).getStringCellValue());
 		int patentType = getPatentType(row.getCell(4).getStringCellValue());
 		int patentStatus = getPatentStatus(patentStatusText);
-		//int userId = PrincipalUtils.getCurrentUserId();
+		//userId = PrincipalUtils.getCurrentUserId();
 		Patent patent = new Patent(appNo, name, appPerson ,appDate, patentType, patentStatus,patentStatusText);
 		patent.setOwnerId(userId);
 		return patent;

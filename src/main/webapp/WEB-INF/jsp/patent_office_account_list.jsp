@@ -68,7 +68,23 @@
 	                <td><c:out value="${account.password}"/></td>
 	                <td><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 	                <td>
+<<<<<<< HEAD
 	                
+=======
+<<<<<<< HEAD
+	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
+	                  		自动更新
+	                  	</a>&nbsp;
+	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
+	                  		自动更新
+	                  	</a>&nbsp; 
+=======
+
+	                
+		
+	                  	
+>>>>>>> 8bb842bf4171424d3a1f7638440e1f0df5c1f492
+>>>>>>> b49c12f21e1ff4c06160e549bec489e1a143652b
 	                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
 	                  		修改</a>&nbsp;
 	                  	<a href="JavaScript:void(0)" onclick="deleteAccount('${account.accountId}')">
@@ -112,7 +128,7 @@
 			}
 		});		
 	}
-	function autoUpdatePatents(username,password,accountId) {
+	function autoUpdatePatents(username,password,accountId,userId) {
 		var opts = {
 				  lines: 13, // The number of lines to draw
 				  length: 7, // The length of each line
@@ -133,7 +149,7 @@
 		var target = document.getElementById('simple-table');
 		var spinner = new Spinner(opts).spin(target);		
 		$.ajax({
-			url: "<s:url value='/patentOfficeAccount/autoUpdatePatents.html'/>?username="+username + "&password="+password+"&accountId="+accountId,
+			url: "<s:url value='/patentOfficeAccount/autoUpdatePatents.html'/>?username="+username + "&password="+password+"&accountId="+accountId+"&userId="+userId,
 			type: 'get', 
 			success: function() {
 				spinner.stop();
