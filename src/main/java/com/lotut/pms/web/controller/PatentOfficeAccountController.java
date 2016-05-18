@@ -67,8 +67,14 @@ public class PatentOfficeAccountController {
 	public String getUserOffice(Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		
-		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
+		List<PatentOfficeAccount> accounts = null;
 		
+		if (PrincipalUtils.isOrderProcessor()) {
+			accounts = patentOfficeAccountService.getUserAccounts(null);
+		} else {
+			accounts = patentOfficeAccountService.getUserAccounts(userId);
+		}
+
 		model.addAttribute("accounts", accounts);
 		
 		return "patent_office_account_list";
@@ -97,8 +103,9 @@ public class PatentOfficeAccountController {
 		
 		//model.addAttribute("success", success);
 		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
-		model.addAttribute("accounts", accounts);		
-		return "patent_office_account_list";
+		model.addAttribute("accounts", accounts);	
+		
+		return "redirect:/patentOfficeAccount/list.html";
 	}
 
 	@RequestMapping(path="/add_form", method=RequestMethod.GET)
@@ -118,10 +125,8 @@ public class PatentOfficeAccountController {
 		patentOfficeAccount.setUserId(userId);
 		patentOfficeAccountService.addOfficeAccount(patentOfficeAccount);
 		//model.addAttribute("success", success);
-		
-		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
-		model.addAttribute("accounts", accounts);		
-		return "patent_office_account_list";
+				
+		return "redirect:/patentOfficeAccount/list.html";
 	}	
 	
 	@RequestMapping(path="/autoUpdatePatents", method=RequestMethod.GET)
