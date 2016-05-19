@@ -84,7 +84,7 @@
   <!-- 搜索结束 -->
   <div class="lt-box">
   <c:forEach items="${orders}" var="order">
-    <form action="<s:url value='/fee/exportFees.html'/>" method="get" target="feeExportFrame">
+    <form action="<s:url value='/fee/exportFees.html?orderId=${order.id}'/>" method="get" target="feeExportFrame">
       <c:forEach items="${order.feeList}" var="fee" varStatus="status">
         <input type="hidden" name="fees" value="${fee.feeId}">
       </c:forEach>
