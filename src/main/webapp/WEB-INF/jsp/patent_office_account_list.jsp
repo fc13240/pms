@@ -149,8 +149,7 @@
 			type: 'get', 
 			success: function() {
 				spinner.stop();
-				location.reload();
-				formutil.alertMessage('更新成功！');
+				formutil.alertMessage('更新成功！',true);
 			},
 			error:function(){
 				spinner.stop();
