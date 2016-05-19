@@ -84,12 +84,13 @@
 		<result property="name" column="patent_name"/>
 		<result property="appDate" column="app_date"/>
 		<result property="patentStatusText" column="patent_status_text"/>
-		<result property="appPerson" column="app_person"/>	
+		<result property="appPerson" column="app_person"/>
+		<result property="internalCode" column="internal_code"/>	
 		<association property="patentStatus" resultMap="PatentStatusResultMap"/>
 	</resultMap>
 
 	<select id="getPatentsByIds" parameterType="list" resultMap="PatentByIdsResultMap">
-		select p.patent_id, p.app_no, p.app_person, p.patent_name, p.app_date,p.patent_status_text, ps.patent_status_id, ps.patent_status_desc
+		select p.patent_id, p.app_no, p.app_person, p.patent_name, p.app_date,p.patent_status_text, ps.patent_status_id, ps.patent_status_desc,p.internal_code
 		  from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where p.patent_id in 
 			<foreach item="patentId" collection="patentIds"
@@ -314,7 +315,7 @@
 	
 	<select id="getPatentsByAppNo" resultMap="PatentByIdsResultMap">
 		 select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, p.patent_type,
-	                ps.patent_status_id, ps.patent_status_desc, p.patent_status_text from patents p left join patent_status ps on 
+	                ps.patent_status_id, ps.patent_status_desc, p.patent_status_text,p.internal_code from patents p left join patent_status ps on 
 	                p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
 				where up.user = #{userId} and p.app_no= #{appNo};
 	</select>

@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lotut.pms.constants.Settings;
 import com.lotut.pms.dao.PatentDao;
 import com.lotut.pms.dao.SharePatentDao;
 import com.lotut.pms.domain.GoodsDetail;
@@ -20,6 +21,7 @@ import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.service.PatentService;
+import com.lotut.pms.service.utils.PatentExcelGenerator;
 import com.lotut.pms.service.utils.PatentExcelParser;
 
 public class PatentServiceImpl implements PatentService {
@@ -185,4 +187,13 @@ public class PatentServiceImpl implements PatentService {
 		}
 		
 	}
+
+	@Override
+	public String generatePatentExportExcel(List<Long> patentIds,String excelName) throws IOException {
+		List<Patent> patents=patentDao.getPatentsByIds(patentIds);
+		String exportExcelPath=Settings.TEMP_DIR+excelName;
+		PatentExcelGenerator.writerPatentRecodesToExcel(patents, exportExcelPath);
+		return exportExcelPath;
+	}
+
 }
