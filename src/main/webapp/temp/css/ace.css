@@ -8749,6 +8749,7 @@ input[type="color"] {
   -webkit-transition-duration: 0.1s;
   transition-duration: 0.1s;
 }
+/*
 textarea:hover,
 input[type="text"]:hover,
 input[type="password"]:hover,
@@ -8787,7 +8788,7 @@ input[type="color"]:focus {
   border-color: #f59942;
   background-color: #ffffff;
   outline: none;
-}
+}*/
 input::-webkit-input-placeholder,
 .form-control::-webkit-input-placeholder {
   color: #c0c0c0;

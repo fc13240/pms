@@ -21,19 +21,19 @@
 	</div>
 	
 	<form action="<s:url value='/patent/addPatent.html'/>" method="post">
-	  <div class="t-third">
+	  <div class="t-third" style="background:#fff;margin-top:10px;">
 	    <ul>
 	      <li>
 	        <p>专利号:</p>
-	        <input style="height:16px;" type="text" name="appNo" id="appNo"  required/>
+	        <input class="selectPointOfInterest"  type="text" name="appNo" id="appNo"  required/>
 	      </li>
 	      <li>
 	        <p>专利名称:</p>
-	        <input style="height:16px;" type="text" name="name" id="name"  required/>
+	        <input class="selectPointOfInterest" type="text" name="name" id="name"  required/>
 	      </li>
 	      <li>
 	        <p>专利类型</p>
-	        <select name="patentType.patentTypeId" id="patentTypeId" required>
+	        <select class="selectPointOfInterest" name="patentType.patentTypeId" id="patentTypeId" required>
 	          <option value="">全部</option>
 	          <c:forEach items="${allPatentTypes}" var="patentType">
 	            <option value="<c:out value='${patentType.patentTypeId}'/>">
@@ -45,7 +45,7 @@
 	      <li>
 	        <p>专利状态</p>
 	        <label id="lblSelect">
-	        <select name="patentStatus.patentStatusId" id="patentStatusId" required>
+	        <select class="selectPointOfInterest" name="patentStatus.patentStatusId" id="patentStatusId" required>
 	          <option value="">全部</option>
 	          <c:forEach items="${allPatentStatus}" var="patentStatus">
 	            <option value="<c:out value='${patentStatus.patentStatusId}'/>">
@@ -57,11 +57,11 @@
 	      </li>
 	      <li>
 	        <p>申请人</p>
-	        <input style="height:16px;" type="text" name="appPerson" id="appPerson" />
+	        <input class="selectPointOfInterest"  type="text" name="appPerson" id="appPerson" />
 	      </li>
 	      <li>
 	        <p>申请日</p>
-	        <input  type="text" onclick="WdatePicker({el:'startAppDateId'})" style="height:18px;" id="startAppDateId" name="appDate" placeholder="申请时间" value="" readonly="readonly" >
+	        <input class="selectPointOfInterest"  type="text" onclick="WdatePicker({el:'startAppDateId'})"  id="startAppDateId" name="appDate" placeholder="申请时间" value="" readonly="readonly" >
 	        <img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="18" align="absmiddle" id="start_date_img"> </li>
 	      <li>
 	        <p>&nbsp;</p>

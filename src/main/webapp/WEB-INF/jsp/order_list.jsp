@@ -54,7 +54,7 @@
       <ul>
         <li>
           <p>支付状态</p>
-          <select name="orderStatus" id="selectPointOfInterest">
+          <select name="orderStatus" class="selectPointOfInterest">
             <option value="">全部</option>
             <c:forEach items="${allOrderStatus}" var="orderStatus">
               <option value="<c:out value='${orderStatus.statusId}'/>">

@@ -22,10 +22,10 @@
 	</div>
 	
 <!-- list beg -->
-	<div class="t-third">
+	<div class="t-third" style="margin-top10px;background:#fff;">
 	<form action="<s:url value='/friend/search.html'/>" method="GET"  role="search">
 	  <div class="form-group">
-		<input type="text" id="form-field-1" style="height:25px;width:450px;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" required/>
+		<input class="selectPointOfInterest" type="text" id="form-field-1" style="width:450px;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" required/>
 		<button  type="submit" class="t-btn4">查询</button>
 	  </div>
 	</form>
@@ -45,25 +45,6 @@
 		</tr>
 	  </c:forEach>
 	</table>
-	<c:if test="${param.keyword == null}">
-	  <div class="col-lg-12" id="page.page" style="display:block;"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1">首页</a>
-		<c:choose>
-		  <c:when test="${page.currentPage - 1 > 0}"> <a href="?currentPage=${page.currentPage - 1}">上一页</a> </c:when>
-		  <c:when test="${page.currentPage - 1 <= 0}"> <a href="?currentPage=1">上一页</a> </c:when>
-		</c:choose>
-		<c:choose>
-		  <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">下一页</a> </c:when>
-		  <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?currentPage=${page.currentPage+1}">下一页</a> </c:when>
-		  <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?currentPage=${page.totalPages}">下一页</a> </c:when>
-		</c:choose>
-		<c:choose>
-		  <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">尾页</a> </c:when>
-		  <c:otherwise> <a href="?currentPage=${page.totalPages}">尾页</a> </c:otherwise>
-		</c:choose>
-		<!-- 分页功能 End -->
-		<input type="text" id="page.pageNo" style="width:50px;height:15px" name="currentPage" onkeydown="gotoPageForEnter(event)"/>
-		<a href="javascript:void;" onclick="javascript:gotoPage()">跳转</a> </div>
-	</c:if>
 	</div>
 <!-- list end -->
 </div>
@@ -86,68 +67,13 @@ function sendFriendRequest(toUser) {
 	});
 }
 </script>
-<script type="text/javascript">
-		function gotoPage() {
-			var pageNo = document.getElementById("page.pageNo").value;
-			
-			if (isNaN(pageNo)) {
-				alert("请输入数值");
-				return;
-			}
-			
-			if(pageNo==""){
-				alert("请输入数值")
-				return;
-			}
-			
-			pageNo = parseInt(pageNo);
-			
-			if (pageNo < 1 || pageNo > parseInt("${page.totalPages}")) {
-				alert("只能输入1-${page.totalPages}之间的数值");
-				return;
-			}
-			
-			var url = "<s:url value='/friend/searchForm.html'/>?currentPage=" + pageNo;
-			
-			location.href = url
-			
-		}
-		
-		function gotoPageForEnter(event) {
-			var e = event ? event : window.event;
-					
-			if(event.keyCode == 13) {
-				gotoPage();
-			}
-		}
-		
-		
-</script>
+
 	<script type="text/javascript">
 			function pageHide() {
 				document.getElementById("page.page").style.display="none";
 			}
 	</script>
-<script>
-	$(document).ready(function(){
-	
-		$("img[class=cgh]").click(function(){
-			var ol = $('ol[class="hashTabber-nav hashTabber-sandstone"]')[0];
-			var ols =$('.con-list')[0];
-			if(ol.style.display=="inline-block"||ol.style.display==""){
-					this.style.marginLeft="0px";
-					this.src='<s:url value='/temp/images/tabs.png'/>';
-					ol.style.display="none";
-					ols.style.width="97%";
-				}else{
-					ol.style.display="inline-block";
-					this.style.marginLeft="108px";
-					this.src='<s:url value='/temp/images/tab.png'/>';
-					ols.style.width="88%";
-				}
-		});
-	});
-</script>
+
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>
 </body>

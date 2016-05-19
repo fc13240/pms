@@ -78,7 +78,7 @@
 	    <ul>
 	      <li>
 	        <p>专利类型</p>
-	        <select  style="height:35px;" id="selectPointOfInterest" name="patentType">
+	        <select  style="height:35px;" class="selectPointOfInterest" name="patentType">
 	          <option value="">全部</option>
 	          <c:forEach items="${allPatentTypes}" var="patentType">
 	            <option value="<c:out value='${patentType.patentTypeId}'/>">
@@ -90,7 +90,7 @@
 	      <li>
 	        <p>专利状态</p>
 	        <label id="lblSelect">
-	        <select style="height:35px;" id="selectPointOfInterest" name="patentStatus">
+	        <select style="height:35px;" class="selectPointOfInterest" name="patentStatus">
 	          <option value="">全部</option>
 	          <c:forEach items="${allPatentStatus}" var="patentStatus">
 	            <option value="<c:out value='${patentStatus.patentStatusId}'/>">

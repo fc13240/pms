@@ -24,7 +24,7 @@
 	<div class="t-third">
 	  <form action="<s:url value='/friend/searchUserFriends.html'/>" method="GET"  role="search">
 	    <div class="form-group">
-	      <input type="text" id="form-field-1" style="height:25px;width:450px;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" />
+	      <input type="text" id="form-field-1" style="width:450px;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" />
 	      <button  type="submit" class="t-btn4">查询</button>
 	    </div>
 	  </form>
