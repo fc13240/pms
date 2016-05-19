@@ -81,10 +81,11 @@
   </form>
   </div>
   
+  
   <!-- 搜索结束 -->
 		<c:forEach items="${orders}" var="order">
 
-		<form action="<s:url value='/fee/exportFees.html?orderId=${order.id}'/>" method="get" target="feeExportFrame">
+		<form action="<s:url value='/fee/exportFees.html'/>?orderId=<c:out value='${order.id}'/>" method="get" target="feeExportFrame">
    		 <c:forEach items="${order.feeList}" var="fee" varStatus="status">
       		<input type="hidden" name="fees" value="${fee.feeId}">
     	 </c:forEach>
