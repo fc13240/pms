@@ -152,13 +152,12 @@ public class PatentOfficeAccountController {
 	/*cron = "0/8 * * * * ?"*/ //每隔8秒更新
     public void autoUpdatePatentOfficeData(){
 		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getAllAccount();
-		for(int i=0;i<accounts.size();i++){  
-				InputStream is;
+		for(PatentOfficeAccount account: accounts){  
 				try {
-					is = PatentDownload.downloadPatentExcelFile(accounts.get(i).getUsername(),accounts.get(i).getPassword());
-					boolean check=patentService.uploadPatents(is,accounts.get(i).getUserId());
-					if(check){
-						patentOfficeAccountService.updatePatentsTime(accounts.get(i).getAccountId());
+					InputStream is = PatentDownload.downloadPatentExcelFile(account.getUsername(),account.getPassword());
+					boolean success = patentService.uploadPatents(is, account.getUserId());
+					if(success){
+						patentOfficeAccountService.updatePatentsTime(account.getAccountId());
 						System.out.println("自动更新成功");
 					}else{
 						System.out.println("自动更新失败");
@@ -167,6 +166,5 @@ public class PatentOfficeAccountController {
 					e.printStackTrace();
 				}
         }
-
     }
 }
