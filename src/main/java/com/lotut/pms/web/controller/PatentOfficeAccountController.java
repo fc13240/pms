@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,7 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -142,4 +144,29 @@ public class PatentOfficeAccountController {
 		boolean success=PatentDownload.login(httpClient, account.getUsername(), account.getPassword());
 		WebUtils.writeJsonStrToResponse(response, success);
 	}
+	
+	/*@Scheduled(cron = "0 0 0 * * ?")*/
+	/*cron = "0 0 0 * * ?"*/ //下午1点50
+	/*cron = "0 0 0 * * ?"*/ //晚上12点
+	/*cron = "0 0 0/1 * * ?"*/ //每隔1小时更新
+	/*cron = "0/8 * * * * ?"*/ //每隔8秒更新
+    public void autoUpdate(){
+		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getAllAccount();
+		for(int i=0;i<accounts.size();i++){  
+				InputStream is;
+				try {
+					is = PatentDownload.downloadPatentExcelFile(accounts.get(i).getUsername(),accounts.get(i).getPassword());
+					boolean check=patentService.uploadPatents(is,accounts.get(i).getUserId());
+					if(check){
+						patentOfficeAccountService.updatePatentsTime(accounts.get(i).getAccountId());
+						System.out.println("成功");
+					}else{
+						System.out.println("失败");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+        }
+
+    }
 }
