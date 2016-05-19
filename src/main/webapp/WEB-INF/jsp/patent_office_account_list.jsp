@@ -76,11 +76,9 @@
 	                  		验证登录 
 	                  	</a>&nbsp;
 	                  	</c:if>
-	                  	<c:if test="${accountType==1}">   
 	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
 	                  		自动更新
 	                  	</a>&nbsp;
-	                  	</c:if>
 	                  	<c:if test="${accountType==0}">
 	                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
 	                  		修改</a>&nbsp;

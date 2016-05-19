@@ -142,7 +142,7 @@
                         		官费：￥<span id="patentFee">${totalAmount}</span>
                         	</span>
                          	<span>
-                        		服务费：￥<span id="serviceFee">20</span>
+                        		服务费：￥<span id="serviceFee">0</span>
                         	</span>   
                          	<span>
                         		快递费：￥<span id="expressFee">0</span>
@@ -153,7 +153,7 @@
                         </td>
 					</tr>
 					<tr>
-						<td colspan="10">总价: ￥<span id="totalAmount">${totalAmount + 20}</span>
+						<td colspan="10">总价: ￥<span id="totalAmount">${totalAmount}</span>
 						</td>
 					</tr>
 				</td>

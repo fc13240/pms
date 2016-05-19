@@ -80,7 +80,8 @@
     </div>
   </form>
   </div>
-  
+
+
   <!-- 搜索结束 -->
 
   <c:forEach items="${orders}" var="order">
@@ -97,6 +98,7 @@
 		</span>
       </div>
       <table id="simple-table" class="table table-striped table-bordered table-hover">
+<<<<<<< HEAD
      
 
 		  <tr>
@@ -129,6 +131,36 @@
 		    </td>
 		  </tr>
       
+=======
+        <thead>
+          <tr class="simple_bag">
+            <th colspan="4"> <fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
+              &nbsp;&nbsp;
+              订单号：${order.id}
+              <input type="hidden" name="orderId" value="${order.id}">
+              <span style="margin-left:100px;">
+              
+              <input type="submit" value="导出费用清单">
+              </span> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><table id="simple-table-fee" class="table table-striped table-bordered table-hover">
+                <thead>
+                  <tr class="simple_bag">
+                    <th>序号</th>
+                    <th>申请号/专利号</th>
+                    <th>专利名称</th>
+                    <th>第一申请人</th>
+                    <th>案件状态</th>
+                    <th>缴费截止日</th>
+                    <th>缴费种类</th>
+                    <th>缴费金额</th>
+                    <th>发票抬头</th>
+                  </tr>
+                </thead>
+>>>>>>> bf06e948fa1a2d35aea6e849ca039932abe1c033
 <style>
 .lt_tr_hiden{display:none;}
 </style>     

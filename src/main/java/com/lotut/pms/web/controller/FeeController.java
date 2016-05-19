@@ -152,11 +152,11 @@ public class FeeController {
 	}
 	
 	@RequestMapping(path="/exportFees", method=RequestMethod.GET)
-	public void exportFees(@RequestParam("fees")List<Long> feeIds, HttpServletResponse response) throws IOException {
+	public void exportFees(@RequestParam("fees")List<Long> feeIds, @RequestParam("orderId")long orderId, HttpServletResponse response) throws IOException {
 		response.setContentType("application/vnd.ms-excel");
 		
 		User user = PrincipalUtils.getCurrentPrincipal();
-		String exportExcelName = user.getUsername() + System.currentTimeMillis() + ".xls";
+		String exportExcelName = user.getUsername() + orderId + ".xls";
 		String exportExcelPath = feeService.generateFeeExportExcel(feeIds, exportExcelName);
 		
 		File excelFile = new File(exportExcelPath);

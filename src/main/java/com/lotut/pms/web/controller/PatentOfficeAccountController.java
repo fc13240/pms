@@ -1,52 +1,26 @@
 package com.lotut.pms.web.controller;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.lotut.pms.domain.ContactAddress;
-import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.PatentOfficeAccount;
-import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.Patent;
-import com.lotut.pms.domain.User;
 import com.lotut.pms.service.PatentOfficeAccountService;
 import com.lotut.pms.service.PatentService;
-import com.lotut.pms.service.UserService;
 import com.lotut.pms.service.utils.PatentDownload;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
@@ -142,4 +116,27 @@ public class PatentOfficeAccountController {
 		boolean success=PatentDownload.login(httpClient, account.getUsername(), account.getPassword());
 		WebUtils.writeJsonStrToResponse(response, success);
 	}
+	
+	@Scheduled(cron = "0 0 0 * * ?")
+	/*cron = "0 50 13 * * ?"*/ //下午1点50
+	/*cron = "0 0 0 * * ?"*/ //晚上12点
+	/*cron = "0 0 0/1 * * ?"*/ //每隔1小时更新
+	/*cron = "0/8 * * * * ?"*/ //每隔8秒更新
+    public void autoUpdatePatentOfficeData(){
+		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getAllAccount();
+		for(PatentOfficeAccount account: accounts){  
+				try {
+					InputStream is = PatentDownload.downloadPatentExcelFile(account.getUsername(),account.getPassword());
+					boolean success = patentService.uploadPatents(is, account.getUserId());
+					if(success){
+						patentOfficeAccountService.updatePatentsTime(account.getAccountId());
+						System.out.println("自动更新成功");
+					}else{
+						System.out.println("自动更新失败");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+        }
+    }
 }

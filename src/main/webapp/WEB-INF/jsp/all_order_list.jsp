@@ -81,6 +81,7 @@
   </form>
   </div>
   
+  
   <!-- 搜索结束 -->
 		<c:forEach items="${orders}" var="order">
 
@@ -94,6 +95,7 @@
 				<th colspan="5"> <fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
 				  &nbsp;&nbsp;&nbsp;
 				  订单号：${order.id}
+				  <input type="hidden" name="orderId" value="${order.id}">
 				 <span style="margin-left:100px;">
               		<input type="submit" value="导出费用清单">
               	</span>
