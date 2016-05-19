@@ -147,7 +147,7 @@
 			 	<if test="keyword != null">
 					and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
 						 or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} 
-						 or ps.patent_status_desc like #{keyword_pattern})
+						 or ps.patent_status_desc like #{keyword_pattern} or p.patent_status_text like #{keyword_pattern})
 				</if>		 		 	
 				 order by p.app_date desc, p.app_person, p.patent_name
 				 limit #{page.startIndex}, #{page.pageSize}) as sp 
@@ -178,7 +178,7 @@
 			 	<if test="keyword != null">
 					and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
 						 or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} 
-						 or ps.patent_status_desc like #{keyword_pattern})
+						 or ps.patent_status_desc like #{keyword_pattern} or p.patent_status_text like #{keyword_pattern})
 				</if>		 		 	
 	</select>
 	

@@ -110,7 +110,7 @@
 	        <img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img"> </li>
 	      <li style="width: 385px;">
 	        <p>关键字</p>
-	        <input name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码" class="t-input"/>
+	        <input name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input"/>
 	        <button>查询</button>
 	      </li>
 	    </ul>
