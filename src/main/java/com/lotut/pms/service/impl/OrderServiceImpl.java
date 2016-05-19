@@ -22,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
 	private OrderDao orderDao;
 	private FeeDao feeDao;
 	
-	private static final int SERVICE_FEE = 20;
+	private static final int SERVICE_FEE = 0;
 	private static final int EXPRESS_FEE = 20;
 	private static final double INVOCIE_RATE = 0.1;
 	
