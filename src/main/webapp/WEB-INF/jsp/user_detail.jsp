@@ -22,34 +22,26 @@
 		<span style="font-size: 20px;font-weight: 300;line-height: 24px;">基本信息</span>
 	</div>
 	
-	<div class="t-third">
-			<form action="<s:url value='/user/updateUserDetail.html'/>" method="POST">
-			<table id="simple-table" class="table table-striped table-bordered table-hover">
-			  <tr>
-				<td style="line-height:50px;">真实姓名/名称：</td>
-				<td><input class="ipt" type="text" name="name" id="name" style="height:30px;width:200px;"  value="${user.name}" maxlength="30">
+	<div class="lt-box" style="padding:20px;">
+		<form action="<s:url value='/user/updateUserDetail.html'/>" method="POST">
+			
+		<h5>真实姓名/名称：</h5>
+		<input class="ipt" type="text" name="name" id="name" style="height:40px;width:300px;"  value="${user.name}" maxlength="30">
 
-				</td>
-			  </tr>
-			  <tr>
-				<td class="f-tar td-w125" style="line-height:50px;">电子邮件：</td>
-				<td>
-				  <input class="email"  name="email" id="email" type="text" style="height:30px;width:200px;"value="${user.email}" maxlength="25" ></td>
-			  </tr>
-			  <tr>
-				<td class="f-tar td-w125" style="line-height:50px;">手机或电话号：</td>
-				<td>
-				  <input class="phone" name="phone" id="phone" type="text" style="height:30px;width:200px;" value="${user.phone}" maxlength="30" ></td>
-			  </tr>
-			  <tr>
-				<td class="f-tar td-w125" style="height:47px;"></td>
-				<td>
-					<button  type="submit" type="submit" class="t-btn4">保存</button>
-				</td>
-			  </tr>
-			</table>
-			</form>
-
+		<h5>电子邮件：</h5>
+		<input class="email"  name="email" id="email" type="text" style="height:40px;width:300px;"value="${user.email}" maxlength="25" ></td>
+		<br>
+		<h5>手机或电话号：</h5>
+		 <input class="phone" name="phone" id="phone" type="text" style="height:40px;width:300px;" value="${user.phone}" maxlength="30" ></td>
+		
+		<br>
+		<h5>手机或电话号：</h5>
+		 <input class="phone" name="phone" id="phone" type="text" style="height:40px;width:300px;" value="${user.phone}" maxlength="30" ></td>
+				
+		<div style="margin-top:30px;width:300px;">
+		<button style="width:100px;height:40px;"  type="submit" type="submit" class="t-btn4">保存</button>
+		</div>	
+		</form>		
 	</div>
 
 

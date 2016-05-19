@@ -21,7 +21,7 @@
 		<span style="font-size: 20px;font-weight: 300;line-height: 24px;">修改密码</span>
 	</div>
 	
-	<div class="lt-box">
+	<div class="lt-box" style="padding:20px;">
 	  <form action="<s:url value='/user/changePassword.html'/>" id="reset-form" name="pwd_change_form" method="post">
 		<se:csrfInput/>
 		<h5>请输入原密码：</h5>
@@ -35,9 +35,9 @@
 		<br>
 		<h5>请确认新密码：</h5>
 		<input style="width:300px;height:25px;" type="password" class="form-control" name="newPasswordConfirm" id="newPasswordConfirm" minlength="4" maxlength="30" equalTo="#newPassword"placeholder="确认新密码" required/>
-		<div style="margin-top:30px; float:left;width:300px;">
-		  <input type="submit" id="resetPassword" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;margin-left:30px;" value="确认修改" />
-		  <input type="reset" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;" value="重置" name="reset" />
+		<div style="margin-top:30px;width:300px;">
+		  <input type="submit" id="resetPassword" class="t-btn2" style="font-size:16px;margin-left:30px;" value="确认修改" />
+		  <input type="reset" class="t-btn1" style="font-size:16px;" value="重置" name="reset" />
 		</div>
 	  </form>
 	</div>
