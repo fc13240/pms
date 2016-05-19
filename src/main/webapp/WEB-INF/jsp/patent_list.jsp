@@ -78,7 +78,7 @@
 	    <ul>
 	      <li>
 	        <p>专利类型</p>
-	        <select id="patentTypeId" name="patentType">
+	        <select  style="height:35px;" id="selectPointOfInterest" name="patentType">
 	          <option value="">全部</option>
 	          <c:forEach items="${allPatentTypes}" var="patentType">
 	            <option value="<c:out value='${patentType.patentTypeId}'/>">
@@ -90,7 +90,7 @@
 	      <li>
 	        <p>专利状态</p>
 	        <label id="lblSelect">
-	        <select id="patentStatus" name="patentStatus">
+	        <select style="height:35px;" id="selectPointOfInterest" name="patentStatus">
 	          <option value="">全部</option>
 	          <c:forEach items="${allPatentStatus}" var="patentStatus">
 	            <option value="<c:out value='${patentStatus.patentStatusId}'/>">
@@ -102,11 +102,11 @@
 	      </li>
 	      <li>
 	        <p>申请期开始</p>
-	        <input  type="text" onclick="WdatePicker({el:'startAppDateId'})" style="height:18px;" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >
+	        <input class="lt-input"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >
 	        <img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="18" align="absmiddle" id="start_date_img"> - </li>
 	      <li>
 	        <p>申请期结束</p>
-	        <input type="text" onclick="WdatePicker({el:'endAppDateId'})" style="height:18px;" id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >
+	        <input class="lt-input" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >
 	        <img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img"> </li>
 	      <li style="width: 385px;">
 	        <p>关键字</p>
@@ -434,25 +434,6 @@ var tabs=function(){
 tabs.set("nav","menu_con");//执行      
 
 </script>
-<script>
-	$(document).ready(function(){
-	
-		$("img[class=cgh]").click(function(){
-			var ol = $('ol[class="hashTabber-nav hashTabber-sandstone"]')[0];
-			var ols =$('.con-list')[0];
-			if(ol.style.display=="inline-block"||ol.style.display==""){
-					this.style.marginLeft="0px";
-					this.src='<s:url value='/temp/images/tabs.png'/>';
-					ol.style.display="none";
-					ols.style.width="97%";
-				}else{
-					ol.style.display="inline-block";
-					this.style.marginLeft="108px";
-					this.src='<s:url value='/temp/images/tab.png'/>';
-					ols.style.width="88%";
-				}
-		});
-	});
-</script>
+
 </body>
 </html>
