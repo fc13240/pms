@@ -85,7 +85,7 @@
   <!-- 搜索结束 -->
 		<c:forEach items="${orders}" var="order">
 
-		<form action="<s:url value='/fee/exportFees.html'/>?orderId=<c:out value='${order.id}'/>" method="get" target="feeExportFrame">
+		<form action="<s:url value='/fee/exportFees.html'/>" method="get" target="feeExportFrame">
    		 <c:forEach items="${order.feeList}" var="fee" varStatus="status">
       		<input type="hidden" name="fees" value="${fee.feeId}">
     	 </c:forEach>
@@ -95,6 +95,7 @@
 				<th colspan="5"> <fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
 				  &nbsp;&nbsp;&nbsp;
 				  订单号：${order.id}
+				  <input type="hidden" name="orderId" value="${order.id}">
 				 <span style="margin-left:100px;">
               		<input type="submit" value="导出费用清单">
               	</span>
