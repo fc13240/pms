@@ -54,7 +54,7 @@
       <ul>
         <li>
           <p>支付状态</p>
-          <select name="orderStatus" id="orderStatusId">
+          <select name="orderStatus" id="selectPointOfInterest">
             <option value="">全部</option>
             <c:forEach items="${allOrderStatus}" var="orderStatus">
               <option value="<c:out value='${orderStatus.statusId}'/>">
@@ -65,16 +65,16 @@
         </li>
         <li>
           <p>订单日期开始</p>
-          <input  type="text" onclick="WdatePicker({el:'startAppDateId'})" style="height:18px;" id="startAppDateId" name="startAppDate" placeholder="开始时间" value="" readonly="readonly" >
+          <input  type="text" onclick="WdatePicker({el:'startAppDateId'})"  id="startAppDateId" name="startAppDate" placeholder="开始时间" value="" readonly="readonly" >
           <img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="18" align="absmiddle" id="start_date_img"> - </li>
         <li>
           <p>订单日期截止</p>
-          <input type="text" onclick="WdatePicker({el:'endAppDateId'})" style="height:18px;" id="endAppDateId" name="endAppDate" placeholder="结束时间" value="" readonly="readonly" >
+          <input type="text" onclick="WdatePicker({el:'endAppDateId'})" id="endAppDateId" name="endAppDate" placeholder="结束时间" value="" readonly="readonly" >
           <img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img"> </li>
         <li style="width: 385px;">
           <p>订单号</p>
           <input name="keyword" id="keywordId" value="" placeholder="订单号" class="t-input"/>
-          <button type="submit">查询</button>
+          <button type="submit" style="height:30px;">查询</button>
         </li>
       </ul>
     </div>
@@ -98,9 +98,6 @@
 		</span>
       </div>
       <table id="simple-table" class="table table-striped table-bordered table-hover">
-<<<<<<< HEAD
-     
-
 		  <tr>
 	        <td>序号</td>
 	        <td>申请号/专利号</td>
@@ -118,6 +115,7 @@
 		    <td rowspan="4">
 				<h5>${order.orderStatus.statusDescription}</h5>
 				<div style="clear:both;"></div>
+				<input type="hidden" name="orderId" value="${order.id}">
 				<c:if test="${order.orderStatus.statusId == 1}">
 				<div style="margin-top:5px;"> <a href="javascript:void" onClick="window.open('<s:url value="/alipay/index.html?orderId="/>${order.id}')">
 				<input type="button"  style="width:95px;" class="t-btn5" value="支付宝支付">
@@ -130,37 +128,7 @@
 				</c:if>		    
 		    </td>
 		  </tr>
-      
-=======
-        <thead>
-          <tr class="simple_bag">
-            <th colspan="4"> <fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
-              &nbsp;&nbsp;
-              订单号：${order.id}
-              <input type="hidden" name="orderId" value="${order.id}">
-              <span style="margin-left:100px;">
-              
-              <input type="submit" value="导出费用清单">
-              </span> </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><table id="simple-table-fee" class="table table-striped table-bordered table-hover">
-                <thead>
-                  <tr class="simple_bag">
-                    <th>序号</th>
-                    <th>申请号/专利号</th>
-                    <th>专利名称</th>
-                    <th>第一申请人</th>
-                    <th>案件状态</th>
-                    <th>缴费截止日</th>
-                    <th>缴费种类</th>
-                    <th>缴费金额</th>
-                    <th>发票抬头</th>
-                  </tr>
-                </thead>
->>>>>>> bf06e948fa1a2d35aea6e849ca039932abe1c033
+     
 <style>
 .lt_tr_hiden{display:none;}
 </style>     

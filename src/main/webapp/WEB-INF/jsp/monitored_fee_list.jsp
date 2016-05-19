@@ -131,7 +131,7 @@
 			<li>
 			  <p>专利类型</p>
 			  <label id="lblSelect">
-			  <select id="patentType" name="patentType" >
+			  <select id="selectPointOfInterest" name="patentType" >
 				<option value="">全部</option>
 				<option value="1">发明</option>
 				<option value="2">实用新型</option>
@@ -142,7 +142,7 @@
 			<li>
 			  <p>交费状态</p>
 			  <label id="lblSelect">
-			  <select id="paymentStatus" name="paymentStatus" >
+			  <select id="selectPointOfInterest" name="paymentStatus" >
 				<option value="">全部</option>
 				<option value="1">应交费</option>
 				<option value="2">已支付</option>
@@ -155,7 +155,7 @@
 			<li>
 			  <p>费用类型</p>
 			  <label id="lblSelect">
-			  <select id="patentStatus" name="patentStatus" >
+			  <select id="selectPointOfInterest" name="patentStatus" >
 				<option value="">全部</option>
 				<option value="1">申请费</option>
 				<option value="3">年登印费</option>
@@ -165,11 +165,11 @@
 			</li>
 			<li>
 			  <p>交费截止日开始</p>
-			  <input  type="text" onclick="WdatePicker({el:'startAppDateId'})" style="height:18px;" class="form-control" id="startAppDateId"  name="startDeadline" placeholder="交费截止日开始" value="" readonly="readonly" >
+			  <input  type="text" onclick="WdatePicker({el:'startAppDateId'})" style="height:22px;" class="form-control" id="startAppDateId"  name="startDeadline" placeholder="交费截止日开始" value="" readonly="readonly" >
 			</li>
 			<li>
 			  <p>交费截止日结束</p>
-			  <input type="text" onclick="WdatePicker({el:'endAppDateId'})" style="height:18px;" class="form-control" id="endAppDateId" name="endDeadline" placeholder="交费截止日结束" value="" readonly="readonly" >
+			  <input type="text" onclick="WdatePicker({el:'endAppDateId'})" style="height:22px;" class="form-control" id="endAppDateId" name="endDeadline" placeholder="交费截止日结束" value="" readonly="readonly" >
 			</li>
 			<li style="width: 385px;">
 			  <p>关键字</p>
