@@ -180,8 +180,8 @@
 		 		<![CDATA[ and n.dispatch_date <= #{endDispatchDate} ]]>
 		 	</if>		 	
 		 	<if test="keyword != null">
-				and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern} or
-					n.notice_name like #{keyword_pattern} or ps.patent_status_desc like #{keyword_pattern})
+				and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern}  or p.patent_status_text like #{keyword_pattern}
+				or n.notice_name like #{keyword_pattern} or ps.patent_status_desc like #{keyword_pattern})
 			</if>
 			<if test="timeLimitType != null">
 					<choose>
@@ -246,8 +246,8 @@
 			 		<![CDATA[ and n.dispatch_date <= #{endDispatchDate} ]]>
 			 	</if>		 	
 			 	<if test="keyword != null">
-					and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern} or
-						n.notice_name like #{keyword_pattern} or ps.patent_status_desc like #{keyword_pattern})
+					and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern}  or p.patent_status_text like #{keyword_pattern} 
+					or n.notice_name like #{keyword_pattern} or ps.patent_status_desc like #{keyword_pattern})
 				</if>
 				<if test="timeLimitType != null">
 					<choose>
