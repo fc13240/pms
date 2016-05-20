@@ -133,7 +133,11 @@
 	          <a href="javascript:batchShare()" style="margin-left:50px;">
 	            <button class="t-btn3">批量分享</button>
 	          </a> 
-
+	          
+			 <a href="javascript:exportFees()">
+				<button class="t-btn6">表格导出</button>
+			 </a>  
+	          
 	          </div>
 	          </span> </div>
 	        <table id="simple-table" class="table table-striped table-bordered table-hover">
@@ -253,7 +257,7 @@
   
  <!--list end --> 
 </div>
-
+<iframe id="patentExcelFileFrame" style="display:none"></iframe>
 <script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 <script type="text/javascript">
 	$(function(){
@@ -362,6 +366,22 @@
 			location.href = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageInput.value +"&"+"${searchCondition}";
 			$(pageInput).unbind('keydown');
 		}
+	}
+	
+	function exportFees(){
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		
+		if (!patentSelected) {
+			formutil.alertMessage('请选择要导出的专利');
+			return;
+		}
+		
+		var patents = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+		
+		var iframe = document.getElementById('patentExcelFileFrame');
+		
+		iframe.src = "<s:url value='/patent/exportPatents.html'/>?patents=" + patents;
+		
 	}
 </script>
 

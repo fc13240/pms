@@ -57,6 +57,9 @@ public interface PatentService {
 	 Patent getPatentsByAppNo(Integer userId,String appNo);
 	 
 	 int getPatentIdByAppNo(Integer userId,String appNo);
+	 
 	 void autoUpdatePatents(InputStream is,int userId) throws IOException;
+	 
+	 String generatePatentExportExcel(List<Long> patentIds,String excelName) throws IOException;
 
 }

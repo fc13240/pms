@@ -1,7 +1,11 @@
 package com.lotut.pms.web.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -206,4 +210,25 @@ public class PatentController {
 		return "add_patent_success";
 	}
 	
+	@RequestMapping(path="/exportPatents",method=RequestMethod.GET)
+	public void exportFees(@ModelAttribute List<Long> patents,HttpServletResponse response) throws IOException{
+		response.setContentType("application/vnd.ms-excel");
+		User user= PrincipalUtils.getCurrentPrincipal();
+		String exportExcelName=user.getUsername()+System.currentTimeMillis()+".xls";
+		String exportExcelPath=patentService.generatePatentExportExcel(patents, exportExcelName);
+		File excelFile = new File(exportExcelPath);
+		response.setContentLength((int)excelFile.length());
+		response.setHeader("Content-Disposition", "attachment;filename="+exportExcelName);
+		int BUFFER_SIZE=8192;
+		byte[] buffer = new byte[BUFFER_SIZE];
+		try(OutputStream out =response.getOutputStream();
+				BufferedInputStream bis= new BufferedInputStream(new FileInputStream(excelFile))){
+			int byteRead = -1;
+			while((byteRead=bis.read(buffer))!=-1){
+				out.write(buffer, 0, byteRead);
+			}
+			out.flush();
+			out.close();
+		}
+	}
 }

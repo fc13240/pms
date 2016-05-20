@@ -51,7 +51,7 @@
 	
 	<!-- 费用监控相关 -->
 	<select id="getFeesForPatent" resultMap="FeeResultMap">
-		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
+		  select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
 			 pt.patent_type_id, pt.patent_type_desc,			
 			 f.fee_id, f.deadline, f.fee_type, f.amount, f.deadline,f.invoice_title, fp.fee_payment_status_id, fp.fee_payment_status_desc,
 			 fs.fee_monitor_status_id, fs.fee_monitor_status_desc
@@ -83,7 +83,7 @@
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
 				join patent_status ps on p.patent_status = ps.patent_status_id
 				left join order_items oi on f.fee_id = oi.fee_id
-		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2 and f.fee_payment_status =1 and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
+		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2 and f.fee_payment_status =1 and <![CDATA[f.deadline <=(CURDATE()+INTERVAL 3 YEAR)]]>
 		 order by p.patent_id, f.deadline
 		 limit #{startIndex}, #{pageSize}
 	</select>
@@ -91,7 +91,7 @@
 	<select id="getUserMonitoredFeesCount"  resultType="int">
 		select count(*)
 		  from fees f 
-		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2 and f.fee_payment_status =1 and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
+		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2 and f.fee_payment_status =1 and <![CDATA[f.deadline <=(CURDATE()+INTERVAL 3 YEAR)]]>
 	</select>
 	
 	<select id="searchUserMonitoredFees" parameterType="FeeSearchCondition" resultMap="FeeResultMap">
@@ -126,19 +126,19 @@
 					or p.app_person like #{keyword_pattern} or f.fee_type like #{keyword_pattern}) 																	
 			</if>
 			<if test="deadlineStatus==1">
-				and f.fee_payment_status =1 and f.deadline &lt;CURDATE()
+				and f.fee_payment_status =1 and <![CDATA[f.deadline < CURDATE()]]>
 			</if>
 			<if test="deadlineStatus==2">
-				and f.fee_payment_status =1 and f.deadline &gt;=CURDATE() AND f.deadline &lt;=(CURDATE()+INTERVAL 2 WEEK)
+				and f.fee_payment_status =1 and <![CDATA[f.deadline > = CURDATE() and f.deadline < = (CURDATE()+INTERVAL 2 WEEK)]]>
 			</if>
 			<if test="deadlineStatus==3">
-				and f.fee_payment_status =1 and f.deadline &gt;(CURDATE()+INTERVAL 2 WEEK) and f.deadline &lt;=(CURDATE()+INTERVAL 2 MONTH)
+			   and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 2 WEEK) and f.deadline < =(CURDATE()+INTERVAL 2 MONTH)]]>
 			</if>
 			<if test="deadlineStatus==4">
-				and f.fee_payment_status =1 and f.deadline &gt;(CURDATE()+INTERVAL 2 MONTH) and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
+				and f.fee_payment_status =1 and <![CDATA[f.deadline >(CURDATE()+INTERVAL 2 MONTH) and f.deadline < = (CURDATE()+INTERVAL 3 YEAR)]]>
 			</if>
 			<if test="deadlineStatus==5">
-				and f.fee_payment_status =1 and f.deadline &gt;(CURDATE()+INTERVAL 3 YEAR)
+				and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 3 YEAR)]]>
 			</if>		 
 		order by p.patent_id, f.deadline
 	</select>	
@@ -181,19 +181,19 @@
 					or p.app_person like #{keyword_pattern} or f.fee_type like #{keyword_pattern}) 																	
 			</if>
 			<if test="deadlineStatus==1">
-				and f.fee_payment_status =1 and f.deadline &lt;CURDATE()
+				and f.fee_payment_status =1 and <![CDATA[f.deadline < CURDATE()]]>
 			</if>
 			<if test="deadlineStatus==2">
-				and f.fee_payment_status =1 and f.deadline &gt;=CURDATE() AND f.deadline &lt;=(CURDATE()+INTERVAL 2 WEEK)
+				and f.fee_payment_status =1 and <![CDATA[f.deadline > = CURDATE() and f.deadline < = (CURDATE()+INTERVAL 2 WEEK)]]>
 			</if>
 			<if test="deadlineStatus==3">
-				and f.fee_payment_status =1 and f.deadline &gt;(CURDATE()+INTERVAL 2 WEEK) and f.deadline &lt;=(CURDATE()+INTERVAL 2 MONTH)
+			   and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 2 WEEK) and f.deadline < =(CURDATE()+INTERVAL 2 MONTH)]]>
 			</if>
 			<if test="deadlineStatus==4">
-				and f.fee_payment_status =1 and f.deadline &gt;(CURDATE()+INTERVAL 2 MONTH) and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
+				and f.fee_payment_status =1 and <![CDATA[f.deadline >(CURDATE()+INTERVAL 2 MONTH) and f.deadline < = (CURDATE()+INTERVAL 3 YEAR)]]>
 			</if>
 			<if test="deadlineStatus==5">
-				and f.fee_payment_status =1 and f.deadline &gt;(CURDATE()+INTERVAL 3 YEAR)
+				and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 3 YEAR)]]>
 			</if>		 
 		order by p.patent_id, f.deadline
 		limit #{page.startIndex}, #{page.pageSize}
@@ -226,20 +226,21 @@
 					or p.app_person like #{keyword_pattern} or f.fee_type like #{keyword_pattern}) 																	
 			</if>
 			<if test="deadlineStatus==1">
-				and f.fee_payment_status =1 and f.deadline &lt;CURDATE()
+				and f.fee_payment_status =1 and <![CDATA[f.deadline < CURDATE()]]>
 			</if>
 			<if test="deadlineStatus==2">
-				and f.fee_payment_status =1 and f.deadline &gt;=CURDATE() and f.deadline &lt;=(CURDATE()+INTERVAL 2 WEEK)
+				and f.fee_payment_status =1 and <![CDATA[f.deadline > = CURDATE()]]> and <![CDATA[f.deadline < = (CURDATE()+INTERVAL 2 WEEK)]]>
 			</if>
 			<if test="deadlineStatus==3">
-				and f.fee_payment_status =1 and f.deadline &gt;(CURDATE()+INTERVAL 2 WEEK) and f.deadline &lt;=(CURDATE()+INTERVAL 2 MONTH)
+			   and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 2 WEEK)]]> and <![CDATA[f.deadline < =(CURDATE()+INTERVAL 2 MONTH)]]>
 			</if>
 			<if test="deadlineStatus==4">
-				and f.fee_payment_status =1 and f.deadline &gt;(CURDATE()+INTERVAL 2 MONTH) and f.deadline &lt;=(CURDATE()+INTERVAL 3 YEAR)
+				and f.fee_payment_status =1 and <![CDATA[f.deadline >(CURDATE()+INTERVAL 2 MONTH)]]>
+			    and <![CDATA[f.deadline < = (CURDATE()+INTERVAL 3 YEAR)]]>
 			</if>
 			<if test="deadlineStatus==5">
-				and f.fee_payment_status =1 and f.deadline &gt;(CURDATE()+INTERVAL 3 YEAR)
-			</if>		 
+				and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 3 YEAR)]]>
+			</if>
 	</select>
 	
 	
@@ -334,7 +335,7 @@
 	<select id="getFeeAllCountByUser" parameterType="int" resultType="int">
 		select case when sum is null then 0 else sum end as c
 			    from (select sum(f.amount) as 'sum' from fees f
-			    where f.fee_owner = #{userId} and f.fee_payment_status =3 or f.fee_payment_status = 2 or f.fee_payment_status = 5) as a
+			    where f.fee_owner = #{userId} and f.fee_payment_status in (2,3,5)) as a
 	</select>
 	
 	<!--当前用户未缴纳的金额  -->
@@ -351,15 +352,16 @@
 	
 	<select id="getCountByDeadlinePayment" parameterType="int" resultType="map">
 		select a.overDue,b.withinTwoWeek,c.withinTwoMonth,d.withinThreeYear,e.outThreeYear 
-		       from (select count(*) overDue from fees where fee_owner = #{userId} and fee_monitor_status = 2 and fee_payment_status =1 and 
-		       		 deadline &lt;CURDATE()) a
+		       from (select count(*) overDue from fees where fee_owner = #{userId} and fee_monitor_status = 2 and fee_payment_status =1 
+		       		 <![CDATA[and deadline<CURDATE()]]>) a
 		            join (select count(*) withinTwoWeek from fees where fee_owner = #{userId} and fee_monitor_status = 2 and fee_payment_status =1 and 
-		                  deadline &gt;CURDATE() and deadline &lt;=CURDATE()+INTERVAL 2 WEEK) b ON 1=1
+		            	<![CDATA[deadline >CURDATE()]]> and <![CDATA[deadline <= CURDATE()+INTERVAL 2 WEEK]]>) b ON 1=1
 		            join (select count(*) withinTwoMonth from fees where fee_owner = #{userId} and fee_monitor_status = 2  and fee_payment_status =1 and 
-		            	  deadline &gt;CURDATE()+INTERVAL 2 WEEK and deadline &lt;=CURDATE()+INTERVAL 2 MONTH) c on 1=1 
+		            	  <![CDATA[deadline >CURDATE()+INTERVAL 2 WEEK]]> and <![CDATA[deadline <= CURDATE()+INTERVAL 2 MONTH]]>) c on 1=1 
 		            join (select count(*) withinThreeYear from fees where fee_owner = #{userId} and fee_monitor_status = 2 and fee_payment_status =1  and 
-		            	  deadline &gt;CURDATE()+INTERVAL 2 MONTH and deadline &lt;=CURDATE()+INTERVAL 3 YEAR) d on 1=1 
+		            	  <![CDATA[deadline > CURDATE()+INTERVAL 2 MONTH]]> and <![CDATA[deadline <= CURDATE()+INTERVAL 3 YEAR]]>) d on 1=1 
 	       			join (select count(*) outThreeYear from fees where fee_owner = #{userId} and fee_monitor_status = 2 and fee_payment_status =1 and 
-	       			      deadline &gt;CURDATE()+INTERVAL 3 YEAR) e on 1=1
+	       			      <![CDATA[deadline > CURDATE()+INTERVAL 3 YEAR]]>) e on 1=1
 	</select>
+	
 </mapper>

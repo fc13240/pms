@@ -20,6 +20,7 @@ import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.service.PatentService;
+import com.lotut.pms.service.utils.PatentExcelGenerator;
 import com.lotut.pms.service.utils.PatentExcelParser;
 
 public class PatentServiceImpl implements PatentService {
@@ -184,5 +185,13 @@ public class PatentServiceImpl implements PatentService {
 			sharePatentDao.insertUserPatents(userPatentList);
 		}
 		
+	}
+
+	@Override
+	public String generatePatentExportExcel(List<Long> patentIds,String excelName) throws IOException {
+		List<Patent> patents=patentDao.getPatentsByIds(patentIds);
+		String exportExcelPath=excelName;
+		PatentExcelGenerator.writerPatentRecodesToExcel(patents, exportExcelPath);
+		return exportExcelPath;
 	}
 }

@@ -63,4 +63,6 @@ public interface FeeService {
 	void saveFee (Fee fee,int userId,long patentId);
 	
 	Map<String,Long> getCountByDeadlinePayment(int userId);
+	
+	String FeeExportExcel(List<Long> feeIdList, String excelName)  throws IOException;
 }
