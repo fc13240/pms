@@ -350,7 +350,7 @@ function exportFees() {
 	}	
 	
 	var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'fee');
-	alert(fees);
+
 	var iframe = document.getElementById('feeExcelFileFrame');
 	iframe.src = "<s:url value='/fee/exportFees.html'/>?fees=" + fees;		
 }
