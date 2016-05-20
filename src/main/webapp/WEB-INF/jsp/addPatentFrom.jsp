@@ -30,7 +30,7 @@
         <input class="selectPointOfInterest" type="text" name="name" id="name"  required/>	  
 	  	<br>
         <h5>专利类型</h5>
-        <select style="width:320px;" class="selectPointOfInterest" name="patentType.patentTypeId" id="patentTypeId" required>
+        <select style="width:332px;" class="selectPointOfInterest" name="patentType.patentTypeId" id="patentTypeId" required>
           <option value="">全部</option>
           <c:forEach items="${allPatentTypes}" var="patentType">
             <option value="<c:out value='${patentType.patentTypeId}'/>">
@@ -41,7 +41,7 @@
         <br>
         <h5>专利状态</h5>
         <label id="lblSelect">
-        <select style="width:320px;" class="selectPointOfInterest" name="patentStatus.patentStatusId" id="patentStatusId" required>
+        <select style="width:332px;" class="selectPointOfInterest" name="patentStatus.patentStatusId" id="patentStatusId" required>
           <option value="">全部</option>
           <c:forEach items="${allPatentStatus}" var="patentStatus">
             <option value="<c:out value='${patentStatus.patentStatusId}'/>">
