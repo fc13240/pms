@@ -35,9 +35,7 @@
 		 <input class="phone" name="phone" id="phone" type="text" style="height:40px;width:300px;" value="${user.phone}" maxlength="30" ></td>
 		
 		<br>
-		<h5>手机或电话号：</h5>
-		 <input class="phone" name="phone" id="phone" type="text" style="height:40px;width:300px;" value="${user.phone}" maxlength="30" ></td>
-				
+		
 		<div style="margin-top:30px;width:300px;">
 		<button style="width:100px;height:40px;"  type="submit" type="submit" class="t-btn4">保存</button>
 		</div>	

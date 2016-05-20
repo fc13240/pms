@@ -69,11 +69,69 @@
 	      </li>
 	    </ul>
 	  </div>
+	  
+	  
+	  
+
+	  
+	  
+	  
 	</form>
 
+	<div class="lt-box" style="padding:20px;">
+	  <form action="<s:url value='/user/changePassword.html'/>" id="reset-form" name="pwd_change_form" method="post">
+		<se:csrfInput/>
+		<h5>专利号：</h5>
+		<input  style="width:300px;height:25px;" type="text" class="form-control" name="lastPassword" id="lastPassword" placeholder="原始密码" onkeydown="clearPasswordErrorSpan()" />
+		<c:if test="${success != null && !success}">
+		  <div> <span id="passwordError" class="passwordError" style="color:red">原密码输入错误!!</span> </div>
+		</c:if>
+		<br>
+		<h5>专利名称：</h5>
+		<input style="width:300px;height:25px;" type="password" class="form-control" name="newPassword" id="newPassword" minlength="4" maxlength="30" placeholder="新密码至少4位" required/>
+		<br>
+		<h5>专利类型：</h5>
+	        <select class="selectPointOfInterest" name="patentType.patentTypeId" id="patentTypeId" required>
+	          <option value="">全部</option>
+	          <c:forEach items="${allPatentTypes}" var="patentType">
+	            <option value="<c:out value='${patentType.patentTypeId}'/>">
+	            <c:out value="${patentType.typeDescription}"/>
+	            </option>
+	          </c:forEach>
+	        </select>
+		<br>
+		<h5>专利状态：</h5>
+	        <select class="selectPointOfInterest" name="patentType.patentTypeId" id="patentTypeId" required>
+	          <option value="">全部</option>
+	          <c:forEach items="${allPatentTypes}" var="patentType">
+	            <option value="<c:out value='${patentType.patentTypeId}'/>">
+	            <c:out value="${patentType.typeDescription}"/>
+	            </option>
+	          </c:forEach>
+	        </select>
+		<br>
+		<h5>申请人：</h5>
+		<input style="width:300px;height:25px;" type="password" class="form-control" name="newPassword" id="newPassword" minlength="4" maxlength="30" placeholder="新密码至少4位" required/>
+		<br>	        
+		<h5>申请日：</h5>
+		<input style="width:300px;height:25px;" type="password" class="form-control" name="newPassword" id="newPassword" minlength="4" maxlength="30" placeholder="新密码至少4位" required/>
+		<br>		        
+		<input class="selectPointOfInterest"  type="text" onclick="WdatePicker({el:'startAppDateId'})"  id="startAppDateId" name="appDate" placeholder="申请时间" value="" readonly="readonly" >
+	    <img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="18" align="absmiddle" id="start_date_img"> </li>
+      
+	        	        
+		<div style="margin-top:30px;width:300px;">
+		  <input type="submit" id="resetPassword" class="t-btn2" style="font-size:16px;margin-left:30px;" value="确认修改" />
+		  <input type="reset" class="t-btn1" style="font-size:16px;" value="重置" name="reset" />
+		</div>
+	  </form>
+	</div>
 
 </div>
  
+
+
+
 
 <script type="text/javascript">
 function addDefaultOption(selectElem) {
