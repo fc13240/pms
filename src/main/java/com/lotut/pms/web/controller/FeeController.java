@@ -151,11 +151,22 @@ public class FeeController {
 	}
 	
 	@RequestMapping(path="/exportFees", method=RequestMethod.GET)
+	public void exportFees(@RequestParam("fees")List<Long> feeIds, HttpServletResponse response) throws IOException {
+		User user = PrincipalUtils.getCurrentPrincipal();
+		String exportExcelName = user.getUsername() + System.currentTimeMillis() + ".xls";
+		exportFeeExcelFile(feeIds, response, exportExcelName);
+	}
+	
+	@RequestMapping(path="/exportOrderFees", method=RequestMethod.GET)
 	public void exportFees(@RequestParam("fees")List<Long> feeIds, @RequestParam("orderId")long orderId, HttpServletResponse response) throws IOException {
-		response.setContentType("application/vnd.ms-excel");
-		
 		User user = PrincipalUtils.getCurrentPrincipal();
 		String exportExcelName = user.getUsername() + orderId + ".xls";
+		exportFeeExcelFile(feeIds, response, exportExcelName);
+	}
+	
+	private void exportFeeExcelFile(List<Long> feeIds, HttpServletResponse response, String exportExcelName) throws IOException {
+		response.setContentType("application/vnd.ms-excel");
+		
 		String exportExcelPath = feeService.generateFeeExportExcel(feeIds, exportExcelName);
 		
 		File excelFile = new File(exportExcelPath);
@@ -174,6 +185,7 @@ public class FeeController {
 		}
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(path="/exportFeesAllMessage", method=RequestMethod.GET)
 	public void exportFeesAllMessage(@RequestParam("fees")List<Long> feeIds, HttpServletResponse response) throws IOException {
 		response.setContentType("application/vnd.ms-excel");
@@ -198,6 +210,8 @@ public class FeeController {
 	}
 	
 	
+=======
+>>>>>>> fed72a3a17ebf8e48adc5c90f12c482026a73f80
 	@RequestMapping(path="/delete", method=RequestMethod.GET)
 	public ModelAndView deleteFee() {
 		return null;

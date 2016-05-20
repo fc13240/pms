@@ -10,12 +10,12 @@
 			<a href="javascript:;">搜索</a>
 			</div>   
 			<div id="Button1" onClick="hidslt()" style="display:block;" class="top-sbtn" >
-			<a href="http://so.lotut.com/" target="_blank" rel="nofollow"><font color="#FFF">国内外专利检索</font></a>
+			<a href="http://so.lotut.com/" target="_blank" rel="nofollow"><font color="#FFF">龙图腾专利检索</font></a>
 			<a href="http://so.lotut.com/" target="_blank" rel="nofollow"><img src="<s:url value='/temp/images/search.png'/>" /></a>
 			</div>
 		</div>
 		<div class="top-user" id="top-user">
-			<img src="<s:url value='/temp/images/user1.png'/>" />
+			<img src="<s:url value='/temp/images/user2.png'/>" />
 			<span class="user-info">
 				<small>欢迎您!</small>
 				<se:authentication property="principal.username" />

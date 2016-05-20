@@ -26,7 +26,6 @@
 	    <ul id="nav">
 	      <p>快捷处理：</p>
 	      <li><a href="#" class="">专利类型</a></li>
-<!-- 	      <li><a href="#" class="">交费期限</a></li> -->
 	      <li><a href="#" class="">交费状态</a></li>
 	      <li><a href="#" class="selected">费用类型</a></li>
 	      <li><a href="#" class="">期限监控</a></li>
@@ -45,24 +44,6 @@
 	        </a> 
 	      </ul>		    
 	     </div>
-<!-- 	    <div class="tag" style="display:none">  -->
-<!-- 	      <ul class="qxjk-ul"> -->
-<!-- 	        <a href="#"> -->
-<!-- 	        <li>已超期 ()</li> -->
-<!-- 	        </a>  -->
-<!-- 	        <a href="#"> -->
-<!-- 	        <li>两周内()</li> -->
-<!-- 	        </a> <a href="#"> -->
-<!-- 	        <li>一月内 ()</li> -->
-<!-- 	        </a>  -->
-<!-- 	        <a href="#"> -->
-<!-- 	        <li>两月内 ()</li> -->
-<!-- 	        </a>  -->
-<!-- 	        <a href="#"> -->
-<!-- 	        <li>两月以上 ()</li> -->
-<!-- 	        </a> 	         -->
-<!-- 	      </ul>	  -->
-<!-- 	     </div> -->
 	    <div class="tag"  style="display:none"> 
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=1'/>">
@@ -131,7 +112,7 @@
 			<li>
 			  <p>专利类型</p>
 			  <label id="lblSelect">
-			  <select id="patentType" name="patentType" >
+			  <select class="selectPointOfInterest" name="patentType" >
 				<option value="">全部</option>
 				<option value="1">发明</option>
 				<option value="2">实用新型</option>
@@ -142,7 +123,7 @@
 			<li>
 			  <p>交费状态</p>
 			  <label id="lblSelect">
-			  <select id="paymentStatus" name="paymentStatus" >
+			  <select class="selectPointOfInterest" name="paymentStatus" >
 				<option value="">全部</option>
 				<option value="1">应交费</option>
 				<option value="2">已支付</option>
@@ -155,7 +136,7 @@
 			<li>
 			  <p>费用类型</p>
 			  <label id="lblSelect">
-			  <select id="patentStatus" name="patentStatus" >
+			  <select class="selectPointOfInterest" name="patentStatus" >
 				<option value="">全部</option>
 				<option value="1">申请费</option>
 				<option value="3">年登印费</option>
@@ -165,11 +146,11 @@
 			</li>
 			<li>
 			  <p>交费截止日开始</p>
-			  <input  type="text" onclick="WdatePicker({el:'startAppDateId'})" style="height:18px;" class="form-control" id="startAppDateId"  name="startDeadline" placeholder="交费截止日开始" value="" readonly="readonly" >
+			  <input class="selectPointOfInterest"  type="text" onclick="WdatePicker({el:'startAppDateId'})"  class="form-control" id="startAppDateId"  name="startDeadline" placeholder="交费截止日开始" value="" readonly="readonly" >
 			</li>
 			<li>
 			  <p>交费截止日结束</p>
-			  <input type="text" onclick="WdatePicker({el:'endAppDateId'})" style="height:18px;" class="form-control" id="endAppDateId" name="endDeadline" placeholder="交费截止日结束" value="" readonly="readonly" >
+			  <input class="selectPointOfInterest" type="text" onclick="WdatePicker({el:'endAppDateId'})"  class="form-control" id="endAppDateId" name="endDeadline" placeholder="交费截止日结束" value="" readonly="readonly" >
 			</li>
 			<li style="width: 385px;">
 			  <p>关键字</p>
@@ -369,7 +350,7 @@ function exportFees() {
 	}	
 	
 	var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'fee');
-	
+
 	var iframe = document.getElementById('feeExcelFileFrame');
 	iframe.src = "<s:url value='/fee/exportFeesAllMessage.html'/>?fees=" + fees;		
 }

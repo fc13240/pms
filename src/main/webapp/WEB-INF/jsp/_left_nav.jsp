@@ -22,7 +22,7 @@
 			
 			<a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>">
 			<li> <img src="<s:url value='/temp/images/purse.png'/>" />
-			  <h5>专利缴费</h5>
+			  <h5>专利交费</h5>
 			</li>
 			</a>
 			
@@ -65,7 +65,6 @@
 	case "user":
 		$(".left-nav a li").eq(4).addClass('cur');
 	break;	
-  
   }
   
  // alert((urlstr + '/').indexOf($(this).attr('href')));

@@ -108,7 +108,7 @@
 		</table>
 
 		<c:if test="${order.postAddress != null}">
-		  <table class="table table-striped table-bordered table-hover">
+		  <table class="table table-striped table-bordered table-hover" id="table1">
 			<thead>
 			  <tr class="simple_bag">
 				<th> 收货人信息 </th>
@@ -197,7 +197,7 @@
 		  </thead>
 		  <tbody>
 			<tr>
-			  <td><table class="table table-striped table-bordered table-hover">
+			  <td><table class="table table-striped table-bordered table-hover" >
 				  <thead>
 					<tr class="simple_bag">
 					  <th>官费</th>
@@ -219,24 +219,8 @@
 					  <td>￥${order.expressFee}</td>
 					  <td>￥${order.invoiceFee}</td>
 					</tr>
-				  </tbody>
-				</table></td>
-			</tr>
-		  </tbody>
-		</table>
-		<table class="table table-striped table-bordered table-hover">
-		  <thead>
-			<tr class="simple_bag">
-			  <th> 结算信息 </th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<tr>
-			  <td><table class="table table-striped table-bordered table-hover">
-				  <tbody>
 					<tr>
-					  <td>商品金额</td>
-					  <td>￥${order.totalAmount}</td>
+					  <td colspan="5" style="font-weight: bold;">商品总额:￥${order.totalAmount}</td>
 					</tr>
 				  </tbody>
 				</table></td>
@@ -327,6 +311,8 @@
 	
 </script>
 <script type="text/javascript">
+$("#table1").style.textAlign="center";
+
 $(function() {
 	$("#orderDetail").validate({
 		submitHandler: function(form){ 

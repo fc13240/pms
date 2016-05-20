@@ -278,43 +278,14 @@
 					  	<c:forEach items="${order.feeList}" var="fee">
 					  		<c:set var="totalAmount" value="${totalAmount+fee.amount}"></c:set>
 					  	</c:forEach>
-					  	${totalAmount }
+					  	￥${totalAmount }
 					  </td>
 					  <td>￥${order.serviceFee}</td>
 					  <td>￥${order.expressFee}</td>
 					  <td>￥${order.invoiceFee}</td>
 					</tr>
-				  </tbody>
-
-			</table>
-				
-			<!-- /.span -->
-		  </div>
-		  <!-- /.row -->
-		</div>
-	  </div>
-	</div>	
-	
-	<!-- 结算信息 -->
-	<div class="lt-box">
-	  <div class="main-container" id="main-container">
-		<div class="row">
-		  <div class="col-xs-12">
-
-			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
-				<span class="input-group-btn" >
-				<div class="ta-top" style="margin:8px;"> 
-				
-				<span style="font-size:14px;font-weight:600;line-height:17px;">结算信息</span>
-				
-				</div>
-				</span> 
-			</div>
-			<table id="simple-table" class="table table-striped table-bordered table-hover">
-				  <tbody>
 					<tr>
-					  <td>商品金额</td>
-					  <td>￥${order.totalAmount}</td>
+					  <td colspan="5" style="font-weight: bold;">商品总额:￥${order.totalAmount}</td>
 					</tr>
 				  </tbody>
 			</table>

@@ -8737,11 +8737,11 @@ input[type="url"],
 input[type="search"],
 input[type="tel"],
 input[type="color"] {
-  border-radius: 0 !important;
+
   color: #858585;
   background-color: #ffffff;
   border: 1px solid #d5d5d5;
-  padding: 5px 4px 6px;
+ 
   font-size: 14px;
   font-family: inherit;
   -webkit-box-shadow: none !important;
@@ -8749,6 +8749,7 @@ input[type="color"] {
   -webkit-transition-duration: 0.1s;
   transition-duration: 0.1s;
 }
+/*
 textarea:hover,
 input[type="text"]:hover,
 input[type="password"]:hover,
@@ -8787,7 +8788,7 @@ input[type="color"]:focus {
   border-color: #f59942;
   background-color: #ffffff;
   outline: none;
-}
+}*/
 input::-webkit-input-placeholder,
 .form-control::-webkit-input-placeholder {
   color: #c0c0c0;

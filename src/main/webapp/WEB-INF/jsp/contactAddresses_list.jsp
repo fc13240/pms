@@ -21,7 +21,7 @@
 	</div>
 	<div class="lt-box">
 	  <form>
-		<button type="button" style="width: 100px;margin-bottom:20px;" class="t-btn2" onclick="javascript:addAddress()">增加地址</button>
+		<button type="button" style="width: 100px;margin:20px;" class="t-btn2" onclick="javascript:addAddress()">增加地址</button>
 		<table id="simple-table" class="table table-striped table-bordered table-hover">
 		  <thead>
 			<tr class="simple_bag">
@@ -51,6 +51,7 @@
 		  </c:forEach>
 		</table>
 	  </form>
+	  <div style="height:50px;"></div>
 	</div>
 
 </div>

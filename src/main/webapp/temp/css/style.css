@@ -223,6 +223,8 @@ background:#f3f3f5;
     color: #666;
     margin: 0px 0px 10px 0px;
 }
+
+
 .t-third input {
     width: 105px;
     height: 33px;
@@ -230,14 +232,36 @@ background:#f3f3f5;
     border-radius: 4px;
     border: 1px solid #CECCCC;
 }
+.lt-third{
+	padding:20px;
+	
+}
+.lt-third input {
+    width: 320px;
+    height: 33px;
+    background: #EEEEEE;
+    border-radius: 4px;
+    border: 1px solid #CECCCC;
+    padding-left:10px;
+}
+
 .t-input{
     width: 300px !important;
     background: #fff !important;
     border-radius: 4px;
     border: 1px solid #CECCCC;
 }
+
+.lt-input{
+border: 1px solid #cccccc;
+background: #fff !important;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+
 .t-third button {
-    margin: 3px 0px 0px 5px;
+    margin: 0px 0px 0px 5px;
     background: #DC2B21;
     border: 1px solid #DC2B21;
     color: #fff;
@@ -440,7 +464,7 @@ select#selectTravelCity:hover
 select#selectTravelCity:focus {box-shadow: 0 0 2px 1px #555;}
 
 /*SELECT W/DOWN-ARROW*/
-select#selectPointOfInterest {
+select.selectPointOfInterest {
     width: 105px;
     height: 35px;
     line-height: 35px;
@@ -457,14 +481,14 @@ select#selectPointOfInterest {
     cursor: pointer;
     outline: none;
 }
-select#selectPointOfInterest option
+select.selectPointOfInterest option
 {
 	padding             : 4px 10px 4px 10px;
 	font-size           : 14px;
 	font-weight         : normal;
 	
 }
-select#selectPointOfInterest option[selected]{ font-weight:bold;}
-select#selectPointOfInterest option:nth-child(even) { background-color:#f5f5f5; }
-select#selectPointOfInterest:hover {font-weight: 300;}
-select#selectPointOfInterest:focus {font-weight: 300;}
+select.selectPointOfInterest option[selected]{ font-weight:bold;}
+select.selectPointOfInterest option:nth-child(even) { background-color:#f5f5f5; }
+select.selectPointOfInterest:hover {font-weight: 300;border: 1px solid #CF2D22;}
+select.selectPointOfInterest:focus {font-weight: 300;}

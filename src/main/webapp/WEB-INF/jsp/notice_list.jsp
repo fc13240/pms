@@ -135,7 +135,7 @@
 	      <li>
 	        <p>专利类型</p>
 	        <label id="lblSelect">
-	        <select id="selectPointOfInterest" name="patentType">
+	        <select class="selectPointOfInterest" name="patentType">
 	          <option value="">全部</option>
 	          <c:forEach items="${patentTypes}" var="patentType">
 	            <option value="<c:out value='${patentType.patentTypeId}'/>">
@@ -148,7 +148,7 @@
 	      <li>
 	        <p>通知状态</p>
 	        <label id="lblSelect">
-	        <select id="selectPointOfInterest" name="noticeProcessStatus">
+	        <select class="selectPointOfInterest" name="noticeProcessStatus">
 	          <option value="">全部</option>
 	          <c:forEach items="${noticeProcessStatus}" var="processStatus">
 	            <option value="<c:out value='${processStatus.processStatusId}'/>">
@@ -161,7 +161,7 @@
 	      <li>
 	        <p>通知类型</p>
 	        <label id="lblSelect">
-	        <select id="selectPointOfInterest" name="noticeType">
+	        <select class="selectPointOfInterest" name="noticeType">
 	          <option value="">全部</option>
 	          <c:forEach items="${noticeTypes}" var="noticeType">
 	            <option value="<c:out value='${noticeType.noticeTypeId}'/>">
@@ -172,9 +172,9 @@
 	        </label>
 	      </li>
 	      <li>
-	        <p>纸质申请</p>
+	        <p>纸件申请</p>
 	        <label id="lblSelect">
-	        <select id="selectPointOfInterest" name="paperApplyType">
+	        <select class="selectPointOfInterest" name="paperApplyType">
 	          <option value="">全部</option>
 	          <c:forEach items="${paperApplyTypes}" var="paperApplyType">
 	            <option value="<c:out value='${paperApplyType.paperTypeId}'/>">
@@ -186,11 +186,11 @@
 	      </li>
 	      <li>
 	        <p>发文日起始</p>
-	        <input  type="text" onclick="WdatePicker({el:'startAppDateId'})" style="height:18px;" class="form-control" id="startAppDateId"  name="startDispatchDate" placeholder="发文日开始" value="" readonly="readonly" >
+	        <input class="selectPointOfInterest"  type="text"  onclick="WdatePicker({el:'startAppDateId'})"  class="form-control" id="startAppDateId"  name="startDispatchDate" placeholder="发文日开始" value="" readonly="readonly" >
 	      </li>
 	      <li>
-	        <p>发文日截止</p>
-	        <input type="text" onclick="WdatePicker({el:'endAppDateId'})" style="height:18px;" class="form-control" id="endAppDateId" name="endDispatchDate" placeholder="发文日结束" value="" readonly="readonly" >
+	        <p>发文日结束</p>
+	        <input class="selectPointOfInterest" type="text"  onclick="WdatePicker({el:'endAppDateId'})"  class="form-control" id="endAppDateId" name="endDispatchDate" placeholder="发文日结束" value="" readonly="readonly" >
 	      </li>
 	      <li style="width: 385px;">
 	        <p>关键字</p>
@@ -244,14 +244,14 @@
 					<span class="lbl"></span> </label>
 				  </th>
 				  <th class="center" width="30">序号</th>
-				  <th>申请号/专利号</th>
+				  <th width="90px">申请号/专利号</th>
 				  <th width="170">专利名称</th>
 				  <th>第一申请人 </th>
 				  <th>案件状态 </th>
 				  <th>共享人</th>
-				  <th>发文日</th>
+				  <th width="75px">发文日</th>
 				  <th>通知书名称</th>
-				  <th width="90px">纸质申请</th>
+				  <th width="90px">纸件申请</th>
 				  <th>期限</th>
 				  <th>通知状态</th>
 				  <!-- 							<th>预览</th> 
@@ -301,7 +301,7 @@
 					  </c:choose>
 					</td>
 					<td><label id="lblSelect">
-					  <select id="selectPointOfInterest" onChange="javascript:processNotice('${notice.noticeId}', this)">
+					  <select class="selectPointOfInterest" onChange="javascript:processNotice('${notice.noticeId}', this)">
 						<option>全部</option>
 						<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 								  
@@ -320,7 +320,7 @@
 					  分享
 					  </a>&nbsp;
 					  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${notice.patent.patentId}'/>">
-					  缴费
+					  交费
 					  </a> </td>
 				  </tr>
 				</c:forEach>

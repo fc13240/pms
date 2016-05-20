@@ -177,7 +177,7 @@
 		 		<![CDATA[ and f.deadline <= #{endDeadline} ]]>
 		 	</if>		
 		 	<if test="keyword != null">
-				and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
+				and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.patent_status_text like #{keyword_pattern} or ps.patent_status_desc like #{keyword_pattern} 
 					or p.app_person like #{keyword_pattern} or f.fee_type like #{keyword_pattern}) 																	
 			</if>
 			<if test="deadlineStatus==1">
@@ -204,7 +204,7 @@
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
 		select count(*)
-		  from fees f join patents p on f.patent = p.patent_id
+		  from fees f join patents p on f.patent = p.patent_id 
 		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
 		 	<if test="patentType != null">
 		 		and p.patent_type = #{patentType}
@@ -222,7 +222,7 @@
 		 		<![CDATA[ and f.deadline <= #{endDeadline} ]]>
 		 	</if>		
 		 	<if test="keyword != null">
-				and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
+				and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.patent_status_text like #{keyword_pattern} 
 					or p.app_person like #{keyword_pattern} or f.fee_type like #{keyword_pattern}) 																	
 			</if>
 			<if test="deadlineStatus==1">

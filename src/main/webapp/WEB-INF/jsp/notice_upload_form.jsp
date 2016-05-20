@@ -24,7 +24,7 @@
 	<div class="t-box">
 		<form id="notice" action="<s:url value='/notice/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
 		<input style="display:none;" id="id_notice_file" name="noticeFile" type="file" />
-		<input style="width:300px;height:25px;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly" required>
+		<input style="width:300px;height:33px;" type="text" class="lt-input" id="filename" name="filename" placeholder="请选择文件" readonly="readonly" required>
 		<button type="button" onclick="$('input[id=id_notice_file]').click();" class="t-btn3">浏览</button>
 		<button type="submit" class="t-btn2">上传</button>
 		</form>  
