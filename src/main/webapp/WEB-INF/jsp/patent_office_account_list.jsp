@@ -69,7 +69,7 @@
 	                </td>
 	                <td><c:out value="${account.username}"/></td>
 	                <td><c:out value="${account.password}"/></td>
-	                <td><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+	                <td><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 	                <td>
 	                	<c:if test="${accountType==0}">
 	                	<a href="JavaScript:void(0)" onclick="checkLogin('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
