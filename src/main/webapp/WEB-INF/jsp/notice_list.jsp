@@ -172,7 +172,7 @@
 	        </label>
 	      </li>
 	      <li>
-	        <p>纸质申请</p>
+	        <p>纸件申请</p>
 	        <label id="lblSelect">
 	        <select class="selectPointOfInterest" name="paperApplyType">
 	          <option value="">全部</option>
@@ -189,7 +189,7 @@
 	        <input class="selectPointOfInterest"  type="text"  onclick="WdatePicker({el:'startAppDateId'})"  class="form-control" id="startAppDateId"  name="startDispatchDate" placeholder="发文日开始" value="" readonly="readonly" >
 	      </li>
 	      <li>
-	        <p>发文日截止</p>
+	        <p>发文日结束</p>
 	        <input class="selectPointOfInterest" type="text"  onclick="WdatePicker({el:'endAppDateId'})"  class="form-control" id="endAppDateId" name="endDispatchDate" placeholder="发文日结束" value="" readonly="readonly" >
 	      </li>
 	      <li style="width: 385px;">
@@ -244,14 +244,14 @@
 					<span class="lbl"></span> </label>
 				  </th>
 				  <th class="center" width="30">序号</th>
-				  <th>申请号/专利号</th>
+				  <th width="90px">申请号/专利号</th>
 				  <th width="170">专利名称</th>
 				  <th>第一申请人 </th>
 				  <th>案件状态 </th>
 				  <th>共享人</th>
-				  <th>发文日</th>
+				  <th width="75px">发文日</th>
 				  <th>通知书名称</th>
-				  <th width="90px">纸质申请</th>
+				  <th width="90px">纸件申请</th>
 				  <th>期限</th>
 				  <th>通知状态</th>
 				  <!-- 							<th>预览</th> 
@@ -320,7 +320,7 @@
 					  分享
 					  </a>&nbsp;
 					  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${notice.patent.patentId}'/>">
-					  缴费
+					  交费
 					  </a> </td>
 				  </tr>
 				</c:forEach>
