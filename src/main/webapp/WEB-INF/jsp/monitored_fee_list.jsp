@@ -26,7 +26,6 @@
 	    <ul id="nav">
 	      <p>快捷处理：</p>
 	      <li><a href="#" class="">专利类型</a></li>
-<!-- 	      <li><a href="#" class="">交费期限</a></li> -->
 	      <li><a href="#" class="">交费状态</a></li>
 	      <li><a href="#" class="selected">费用类型</a></li>
 	      <li><a href="#" class="">期限监控</a></li>
@@ -45,24 +44,6 @@
 	        </a> 
 	      </ul>		    
 	     </div>
-<!-- 	    <div class="tag" style="display:none">  -->
-<!-- 	      <ul class="qxjk-ul"> -->
-<!-- 	        <a href="#"> -->
-<!-- 	        <li>已超期 ()</li> -->
-<!-- 	        </a>  -->
-<!-- 	        <a href="#"> -->
-<!-- 	        <li>两周内()</li> -->
-<!-- 	        </a> <a href="#"> -->
-<!-- 	        <li>一月内 ()</li> -->
-<!-- 	        </a>  -->
-<!-- 	        <a href="#"> -->
-<!-- 	        <li>两月内 ()</li> -->
-<!-- 	        </a>  -->
-<!-- 	        <a href="#"> -->
-<!-- 	        <li>两月以上 ()</li> -->
-<!-- 	        </a> 	         -->
-<!-- 	      </ul>	  -->
-<!-- 	     </div> -->
 	    <div class="tag"  style="display:none"> 
 	      <ul class="qxjk-ul">
 	        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=1'/>">
@@ -369,7 +350,7 @@ function exportFees() {
 	}	
 	
 	var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'fee');
-	
+	alert(fees);
 	var iframe = document.getElementById('feeExcelFileFrame');
 	iframe.src = "<s:url value='/fee/exportFees.html'/>?fees=" + fees;		
 }
