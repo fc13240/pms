@@ -103,7 +103,7 @@
 													
 
 											
-													<input type="submit" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;"  value="登陆">
+													<input type="submit" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;"  value="登录">
 
 													
 												</div>
