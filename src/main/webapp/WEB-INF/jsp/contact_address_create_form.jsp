@@ -21,7 +21,7 @@
 		<hr class="t-hr">
 		<span style="font-size: 20px;font-weight: 300;line-height: 24px;">添加地址</span>
 	</div>
-	<div class="lt-box">	
+	<div class="lt-third" style="background:#fff;margin-top:10px;">	
 		<form action="<s:url value='/user/addContactAddress.html'/>" method="post">
 		  <se:csrfInput/>
 		  <div style="margin-bottom:10px;">
