@@ -53,15 +53,15 @@ public class PatentExcelGenerator {
 		appDateRowName.setCellValue("申请日");
 		appDateRowName.setCellStyle(style);
 		
-		HSSFCell  patentTypeCellRowlName= row.createCell(4);
+		HSSFCell  patentTypeCellRowlName= row.createCell(5);
 		patentTypeCellRowlName.setCellValue("专利类型");
 		patentTypeCellRowlName.setCellStyle(style);
 		
-		HSSFCell  patentStatusTextRowName= row.createCell(4);
+		HSSFCell  patentStatusTextRowName= row.createCell(6);
 		patentStatusTextRowName.setCellValue("案件状态");
 		patentStatusTextRowName.setCellStyle(style);
 		
-		HSSFCell invoiceCodeCellRowName = row.createCell(5);
+		HSSFCell invoiceCodeCellRowName = row.createCell(7);
 		invoiceCodeCellRowName.setCellValue("内部编码");
 		invoiceCodeCellRowName.setCellStyle(style);
 	}
