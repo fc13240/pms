@@ -21,41 +21,37 @@
 		<hr class="t-hr">
 		<span style="font-size: 20px;font-weight: 300;line-height: 24px;">添加地址</span>
 	</div>
-	<div class="lt-box">	
+	<div class="lt-third" style="background:#fff;margin-top:10px;">	
 		<form action="<s:url value='/user/addContactAddress.html'/>" method="post">
 		  <se:csrfInput/>
-		  <div style="margin-bottom:10px;">
-		  	  <span style="font-size:16px">联系人名称:</span>
-		  	 &nbsp;&nbsp;&nbsp;
-			<input style="height:20px;" type="text" name="receiver" required/>
-		  </div>
-		  <div style="margin-bottom:10px;"> <span style="font-size:16px">手机或固话:</span>
-		  	&nbsp;&nbsp;&nbsp;
-			<input style="height:20px;" type="text" name="phone" required/>
-		  </div>
-		  <div style="margin-bottom:10px;"> <span style="font-size:16px">通讯地址 :</span>
-		  	&nbsp;&nbsp;&nbsp;
-			<select name="province" id="province" onchange="loadCities()" required>
-			  <option value=''>请选择</option>
-			  <c:forEach items="${provinces}" var="province">
-				<option value="${province.id}">${province.name}</option>
-			  </c:forEach>
-			</select>
-			<select name="city" id="city" onchange="loadDistricts()" required>
-			  <option value=''>请选择</option>
-			</select>
-			<select name="district" id="district" onchange="loadStreets()" required>
-			  <option value=''>请选择</option>
-			</select>
-			<select name="street" id="street" required>
-			  <option value=''>请选择</option>
-			</select>
-		  </div>
-		  <div style="margin-bottom:10px;"> <span style="font-size:16px">详细地址:</span>
-		  	&nbsp;&nbsp;&nbsp;&nbsp;
-			<input style="height:20px;" type="text" name="detailAddress" required/>
-		  </div>
-		  <button type="submit" class="t-btn2">保存</button>
+       	<h5>联系人名称:</h5>
+		<input class="selectPointOfInterest" type="text" name="receiver" required/>
+		<br>	  
+       	<h5>手机或固话:</h5>
+		<input class="selectPointOfInterest" type="text" name="phone" required/>
+		<br> 
+       	<h5>通讯地址:</h5>
+		<select name="province" id="province" onchange="loadCities()" required>
+		  <option value=''>请选择</option>
+		  <c:forEach items="${provinces}" var="province">
+			<option value="${province.id}">${province.name}</option>
+		  </c:forEach>
+		</select>
+		<select name="city" id="city" onchange="loadDistricts()" required>
+		  <option value=''>请选择</option>
+		</select>
+		<select name="district" id="district" onchange="loadStreets()" required>
+		  <option value=''>请选择</option>
+		</select>
+		<select name="street" id="street" required>
+		  <option value=''>请选择</option>
+		</select>		
+		<br> 		  
+       	<h5>详细地址:</h5>
+		<input class="selectPointOfInterest" type="text" name="detailAddress" required/>
+		<br>   
+		<div style="height:20px;"></div> 
+		<button type="submit" style="width:90px;" class="t-btn2">保存</button>
 		</form>
 	</div>
 </div>

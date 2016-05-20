@@ -22,7 +22,7 @@
 		<span style="font-size: 20px;font-weight: 300;line-height: 24px;">基本信息</span>
 	</div>
 	
-	<div class="lt-box" style="padding:20px;">
+	<div class="lt-third" style="background:#fff;margin-top:10px;">
 		<form action="<s:url value='/user/updateUserDetail.html'/>" method="POST">
 			
 		<h5>真实姓名/名称：</h5>
@@ -34,11 +34,9 @@
 		<h5>手机或电话号：</h5>
 		 <input class="phone" name="phone" id="phone" type="text" style="height:40px;width:300px;" value="${user.phone}" maxlength="30" ></td>
 		
-		<br>
-		
-		<div style="margin-top:30px;width:300px;">
-		<button style="width:100px;height:40px;"  type="submit" type="submit" class="t-btn4">保存</button>
-		</div>	
+		<br>  
+		<div style="height:20px;"></div> 
+		<button type="submit" style="width:90px;" class="t-btn2">保存</button>	
 		</form>		
 	</div>
 

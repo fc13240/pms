@@ -101,11 +101,11 @@
 	        </label>
 	      </li>
 	      <li>
-	        <p>申请期开始</p>
+	        <p>申请日开始</p>
 	        <input class="lt-input"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >
 	        <img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="18" align="absmiddle" id="start_date_img"> - </li>
 	      <li>
-	        <p>申请期结束</p>
+	        <p>申请日结束</p>
 	        <input class="lt-input" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >
 	        <img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img"> </li>
 	      <li style="width: 385px;">
