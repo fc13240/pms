@@ -22,6 +22,7 @@ import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FeeService;
 import com.lotut.pms.service.utils.FeeCrawler;
 import com.lotut.pms.service.utils.FeeExcelGenerator;
+import com.lotut.pms.service.utils.PatentFeeExcelGenerator;
 import com.lotut.pms.util.PrincipalUtils;
 
 public class FeeServiceImpl implements FeeService {
@@ -51,7 +52,15 @@ public class FeeServiceImpl implements FeeService {
 		FeeExcelGenerator.writeFeeRecordsToExcel(fees, exportExcelPath);
 		return exportExcelPath;
 	}
-
+	
+	@Override
+	public String FeeExportExcel(List<Long> feeIdList, String excelName) throws IOException {
+		List<Fee> fees = feeDao.getFeesByIds(feeIdList);
+		String exportExcelPath=excelName;
+		PatentFeeExcelGenerator.writeFeeRecordsToExcel(fees, exportExcelPath);
+		return exportExcelPath;
+	}
+	
 	@Override
 	public List<Fee> searchUserMonitoredFees(FeeSearchCondition searchCondition) {
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());

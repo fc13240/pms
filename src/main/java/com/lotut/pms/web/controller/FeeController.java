@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lotut.pms.domain.Fee;
@@ -175,7 +174,28 @@ public class FeeController {
 		}
 	}
 	
-	
+	@RequestMapping(path="/exportFeesAllMessage", method=RequestMethod.GET)
+	public void exportFeesAllMessage(@RequestParam("fees")List<Long> feeIds, HttpServletResponse response) throws IOException {
+		response.setContentType("application/vnd.ms-excel");
+		
+		User user = PrincipalUtils.getCurrentPrincipal();
+		String exportExcelName = user.getUsername() + System.currentTimeMillis() + ".xls";
+		String exportExcelPath = feeService.FeeExportExcel(feeIds, exportExcelName);
+		File excelFile = new File(exportExcelPath);
+		response.setContentLength((int)excelFile.length());
+		response.setHeader("Content-Disposition", "attachment;filename=" + exportExcelName);
+		
+		int BUFFER_SIZE = 8192;
+		byte[] buffer = new byte[BUFFER_SIZE];
+		try (OutputStream out = response.getOutputStream(); 
+				BufferedInputStream bis = new BufferedInputStream(new FileInputStream(excelFile))) {
+			int bytesRead = -1;
+			while ((bytesRead = bis.read(buffer)) != -1) {
+				out.write(buffer, 0, bytesRead);
+			}
+			out.flush();
+		}
+	}
 	
 	
 	@RequestMapping(path="/delete", method=RequestMethod.GET)

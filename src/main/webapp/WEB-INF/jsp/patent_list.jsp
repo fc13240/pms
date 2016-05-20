@@ -382,8 +382,6 @@
 		
 		iframe.src = "<s:url value='/patent/exportPatents.html'/>?patents=" + patents;
 		
-		alert(patents);
-		
 	}
 </script>
 

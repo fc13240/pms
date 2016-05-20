@@ -210,7 +210,7 @@ public class PatentController {
 		return "add_patent_success";
 	}
 	
-	@RequestMapping(path="/exportPatents")
+	@RequestMapping(path="/exportPatents",method=RequestMethod.GET)
 	public void exportFees(@ModelAttribute List<Long> patents,HttpServletResponse response) throws IOException{
 		response.setContentType("application/vnd.ms-excel");
 		User user= PrincipalUtils.getCurrentPrincipal();
