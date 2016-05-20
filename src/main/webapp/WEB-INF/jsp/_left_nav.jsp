@@ -65,7 +65,6 @@
 	case "user":
 		$(".left-nav a li").eq(4).addClass('cur');
 	break;	
-  
   }
   
  // alert((urlstr + '/').indexOf($(this).attr('href')));
