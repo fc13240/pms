@@ -185,7 +185,6 @@ public class FeeController {
 		}
 	}
 	
-<<<<<<< HEAD
 	@RequestMapping(path="/exportFeesAllMessage", method=RequestMethod.GET)
 	public void exportFeesAllMessage(@RequestParam("fees")List<Long> feeIds, HttpServletResponse response) throws IOException {
 		response.setContentType("application/vnd.ms-excel");
@@ -208,10 +207,6 @@ public class FeeController {
 			out.flush();
 		}
 	}
-	
-	
-=======
->>>>>>> fed72a3a17ebf8e48adc5c90f12c482026a73f80
 	@RequestMapping(path="/delete", method=RequestMethod.GET)
 	public ModelAndView deleteFee() {
 		return null;
