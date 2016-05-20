@@ -167,6 +167,9 @@ public class Patent {
 	}
 
 	public String getPatentStatusText() {
+		if(patentStatusText==null && patentStatus != null){
+			return patentStatus.getStatusDescription();
+		}
 		return patentStatusText;
 	}
 
