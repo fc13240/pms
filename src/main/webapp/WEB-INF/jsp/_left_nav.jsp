@@ -9,13 +9,13 @@
 <!-- 			</li> -->
 <!-- 			</a>  -->
 		    <a href="<s:url value='/patent/list.html?currentPage=1'/>">
-			<li class="left-nav-active"> <img src="<s:url value='/temp/images/purse.png'/>" />
+			<li class="left-nav-active"> <img src="<s:url value='/temp/images/patent.png'/>" />
 			  <h5>我的专利</h5>
 			</li>
 			</a> 
 			
 			<a href="<s:url value='/notice/list.html?currentPage=1'/>">
-			<li> <img src="<s:url value='/temp/images/setting.png'/>" />
+			<li> <img src="<s:url value='/temp/images/notice1.png'/>" />
 			  <h5>通知书</h5>
 			</li>
 			</a>			
