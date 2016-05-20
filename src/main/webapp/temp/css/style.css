@@ -223,6 +223,8 @@ background:#f3f3f5;
     color: #666;
     margin: 0px 0px 10px 0px;
 }
+
+
 .t-third input {
     width: 105px;
     height: 33px;
@@ -230,6 +232,19 @@ background:#f3f3f5;
     border-radius: 4px;
     border: 1px solid #CECCCC;
 }
+.lt-third{
+	padding:20px;
+	
+}
+.lt-third input {
+    width: 320px;
+    height: 33px;
+    background: #EEEEEE;
+    border-radius: 4px;
+    border: 1px solid #CECCCC;
+    padding-left:10px;
+}
+
 .t-input{
     width: 300px !important;
     background: #fff !important;
