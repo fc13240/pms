@@ -2,6 +2,7 @@ package com.lotut.pms.service.utils;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -83,8 +84,9 @@ public class PatentExcelGenerator {
 		firstAppPersonCell.setCellValue(patent.getFirstAppPerson());
 		firstAppPersonCell.setCellStyle(style);
 		
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		HSSFCell  appDateCell= row.createCell(4);
-		appDateCell.setCellValue(patent.getAppDate());
+		appDateCell.setCellValue(sdf.format(patent.getAppDate()));
 		appDateCell.setCellStyle(style);
 		
 		HSSFCell  patentTypeCell= row.createCell(5);
