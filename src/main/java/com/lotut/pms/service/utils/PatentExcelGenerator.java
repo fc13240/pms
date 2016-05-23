@@ -2,6 +2,7 @@ package com.lotut.pms.service.utils;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -53,15 +54,15 @@ public class PatentExcelGenerator {
 		appDateRowName.setCellValue("申请日");
 		appDateRowName.setCellStyle(style);
 		
-		HSSFCell  patentTypeCellRowlName= row.createCell(4);
+		HSSFCell  patentTypeCellRowlName= row.createCell(5);
 		patentTypeCellRowlName.setCellValue("专利类型");
 		patentTypeCellRowlName.setCellStyle(style);
 		
-		HSSFCell  patentStatusTextRowName= row.createCell(4);
+		HSSFCell  patentStatusTextRowName= row.createCell(6);
 		patentStatusTextRowName.setCellValue("案件状态");
 		patentStatusTextRowName.setCellStyle(style);
 		
-		HSSFCell invoiceCodeCellRowName = row.createCell(5);
+		HSSFCell invoiceCodeCellRowName = row.createCell(7);
 		invoiceCodeCellRowName.setCellValue("内部编码");
 		invoiceCodeCellRowName.setCellStyle(style);
 	}
@@ -83,8 +84,9 @@ public class PatentExcelGenerator {
 		firstAppPersonCell.setCellValue(patent.getFirstAppPerson());
 		firstAppPersonCell.setCellStyle(style);
 		
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		HSSFCell  appDateCell= row.createCell(4);
-		appDateCell.setCellValue(patent.getAppDate());
+		appDateCell.setCellValue(sdf.format(patent.getAppDate()));
 		appDateCell.setCellStyle(style);
 		
 		HSSFCell  patentTypeCell= row.createCell(5);

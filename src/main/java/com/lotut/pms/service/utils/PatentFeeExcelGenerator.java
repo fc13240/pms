@@ -2,6 +2,7 @@ package com.lotut.pms.service.utils;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -10,7 +11,6 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.lotut.pms.domain.Fee;
-import com.lotut.pms.service.constants.FeeTypeCode;
 
 public class PatentFeeExcelGenerator {
 	
@@ -85,12 +85,13 @@ public class PatentFeeExcelGenerator {
 		HSSFCell  patentStatusText= row.createCell(4);
 		patentStatusText.setCellValue(fee.getPatent().getPatentStatusText());
 		
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		HSSFCell deadlineCell = row.createCell(5);
-		deadlineCell.setCellValue(fee.getDeadline());
+		deadlineCell.setCellValue(sdf.format(fee.getDeadline()));
 		
 		
 		HSSFCell feeNameCell = row.createCell(6);
-		feeNameCell.setCellValue(getFeeCode(fee.getPatent().getPatentType().getPatentTypeId(), fee.getFeeType()));
+		feeNameCell.setCellValue(fee.getFeeType());
 		
 		HSSFCell amountCell = row.createCell(7);
 		amountCell.setCellValue(fee.getAmount());
@@ -100,9 +101,5 @@ public class PatentFeeExcelGenerator {
 		
 		HSSFCell feePaymentStatus = row.createCell(9);
 		feePaymentStatus.setCellValue(fee.getPaymentStatus().getPayementStatusDescription());
-	}
-	
-	private static String getFeeCode(int patentType, String feeType) {
-		return FeeTypeCode.getFeeCodeByType(patentType, feeType);
 	}
 }
