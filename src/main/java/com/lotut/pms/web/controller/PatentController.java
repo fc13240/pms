@@ -211,11 +211,11 @@ public class PatentController {
 	}
 	
 	@RequestMapping(path="/exportPatents",method=RequestMethod.GET)
-	public void exportFees(@ModelAttribute List<Long> patents,HttpServletResponse response) throws IOException{
+	public void exportPatents(@RequestParam("patentIds") List<Long> patentIds,HttpServletResponse response) throws IOException{
 		response.setContentType("application/vnd.ms-excel");
 		User user= PrincipalUtils.getCurrentPrincipal();
 		String exportExcelName=user.getUsername()+System.currentTimeMillis()+".xls";
-		String exportExcelPath=patentService.generatePatentExportExcel(patents, exportExcelName);
+		String exportExcelPath=patentService.generatePatentExportExcel(patentIds, exportExcelName);
 		File excelFile = new File(exportExcelPath);
 		response.setContentLength((int)excelFile.length());
 		response.setHeader("Content-Disposition", "attachment;filename="+exportExcelName);

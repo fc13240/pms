@@ -176,4 +176,5 @@ public class Patent {
 	public void setPatentStatusText(String patentStatusText) {
 		this.patentStatusText = patentStatusText;
 	}
+	
 }

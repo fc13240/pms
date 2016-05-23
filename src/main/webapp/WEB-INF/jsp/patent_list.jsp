@@ -369,18 +369,20 @@
 	}
 	
 	function exportFees(){
+		alert("--1---");
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 		
 		if (!patentSelected) {
 			formutil.alertMessage('请选择要导出的专利');
 			return;
 		}
-		
+		alert("--2---");
 		var patents = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
-		
+		alert("--3--");
 		var iframe = document.getElementById('patentExcelFileFrame');
-		
-		iframe.src = "<s:url value='/patent/exportPatents.html'/>?patents=" + patents;
+		alert("--4---");
+		iframe.src = "<s:url value='/patent/exportPatents.html'/>?patentIds=" + patents;
+		alert("--5---");
 		
 	}
 </script>
