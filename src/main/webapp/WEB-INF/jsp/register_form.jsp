@@ -110,7 +110,7 @@
 												
 												<label class="block clearfix">
 													<span class="block input-icon input-icon-right">
-														<input type="email" id="email" class="form-control" placeholder="邮箱" name="email" type="email" minlength="3" maxlength="100" required />
+														<input type="email" id="email" class="form-control" placeholder="邮箱" name="email"  minlength="3" maxlength="100" required />
 														<i class="ace-icon fa fa-envelope"></i>
 													</span>
 												</label>												

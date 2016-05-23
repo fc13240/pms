@@ -1396,3 +1396,12 @@ if ( $.ajaxPrefilter ) {
 }
 
 }));
+
+jQuery.validator.addMethod("isPhone", function(value,element) {
+	var length = value.length;
+	var mobile = /^(((13[0-9]{1})|(15[0-9]{1}))+d{8})$/;
+	var tel = /^d{3,4}-?d{7,9}$/;
+	return this.optional(element) || (tel.test(value) || mobile.test(value));
+
+	}, "请正确填写您的联系电话");
+

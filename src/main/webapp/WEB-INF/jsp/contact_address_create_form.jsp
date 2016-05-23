@@ -16,19 +16,24 @@
 <%@ include file="_top.jsp" %>
 <%@ include file="_left_nav.jsp" %>
 <%@ include file="_left_nav_user.jsp" %>
+
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>
+
 <div class="lt-con">
 	<div class="t-ti">
 		<hr class="t-hr">
 		<span style="font-size: 20px;font-weight: 300;line-height: 24px;">添加地址</span>
 	</div>
 	<div class="lt-third" style="background:#fff;margin-top:10px;">	
-		<form action="<s:url value='/user/addContactAddress.html'/>" method="post">
+		<form action="<s:url value='/user/addContactAddress.html'/>" method="post" onsubmit="return check()">
 		  <se:csrfInput/>
        	<h5>联系人名称:</h5>
 		<input class="selectPointOfInterest" type="text" name="receiver" required/>
 		<br>	  
        	<h5>手机或固话:</h5>
-		<input class="selectPointOfInterest" type="text" name="phone" required/>
+		<input class="selectPointOfInterest" id="phoneRece" type="text" name="phone" required onblur="validatePhoneNumber(this.value)"/>
+		<span style="color: red; display: none;" id=phoneError>请输入正确的手机或者电话号</span>
 		<br> 
        	<h5>通讯地址:</h5>
 		<select name="province" id="province" onchange="loadCities()" required>
@@ -180,6 +185,32 @@ function loadStreets() {
 		})
 	} 
 }
+
+function validatePhoneNumber(phoneNumber) {
+	var reg = new RegExp("^[0-9]*$");
+	document.getElementById("phoneError").style.display = "none";
+	if (reg.test(phoneNumber)) {
+		if (phoneNumber.length<7 || phoneNumber.length>13) {
+			document.getElementById("phoneError").style.display = "";
+			return false;
+		} else {
+			return true;
+		}
+	} else {
+		document.getElementById("phoneError").style.display = "";
+		return false;
+	}
+}
+
+function check() {
+	 var phone = document.getElementById("phoneRece").value;  
+	if(validatePhoneNumber(phone)){
+		return true;
+	}else {
+		return false;
+	}
+}
+
 
 </script>
 </body>
