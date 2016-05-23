@@ -94,7 +94,7 @@ public class PatentFeeExcelGenerator {
 		feeNameCell.setCellValue(fee.getFeeType());
 		
 		HSSFCell amountCell = row.createCell(7);
-		amountCell.setCellValue(fee.getAmount());
+		amountCell.setCellValue("￥"+fee.getAmount());
 		
 		HSSFCell internalTitleCell = row.createCell(8);
 		internalTitleCell.setCellValue(fee.getInvoiceTitle());
