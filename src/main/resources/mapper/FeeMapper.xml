@@ -129,13 +129,13 @@
 				and f.fee_payment_status =1 and <![CDATA[f.deadline < CURDATE()]]>
 			</if>
 			<if test="deadlineStatus==2">
-				and f.fee_payment_status =1 and <![CDATA[f.deadline > = CURDATE() and f.deadline < = (CURDATE()+INTERVAL 2 WEEK)]]>
+				and f.fee_payment_status =1 and <![CDATA[f.deadline >= CURDATE() and f.deadline <= (CURDATE()+INTERVAL 2 WEEK)]]>
 			</if>
 			<if test="deadlineStatus==3">
-			   and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 2 WEEK) and f.deadline < =(CURDATE()+INTERVAL 2 MONTH)]]>
+			   and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 2 WEEK) and f.deadline <=(CURDATE()+INTERVAL 2 MONTH)]]>
 			</if>
 			<if test="deadlineStatus==4">
-				and f.fee_payment_status =1 and <![CDATA[f.deadline >(CURDATE()+INTERVAL 2 MONTH) and f.deadline < = (CURDATE()+INTERVAL 3 YEAR)]]>
+				and f.fee_payment_status =1 and <![CDATA[f.deadline >(CURDATE()+INTERVAL 2 MONTH) and f.deadline <= (CURDATE()+INTERVAL 3 YEAR)]]>
 			</if>
 			<if test="deadlineStatus==5">
 				and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 3 YEAR)]]>
@@ -184,13 +184,13 @@
 				and f.fee_payment_status =1 and <![CDATA[f.deadline < CURDATE()]]>
 			</if>
 			<if test="deadlineStatus==2">
-				and f.fee_payment_status =1 and <![CDATA[f.deadline > = CURDATE() and f.deadline < = (CURDATE()+INTERVAL 2 WEEK)]]>
+				and f.fee_payment_status =1 and <![CDATA[f.deadline >= CURDATE() and f.deadline <= (CURDATE()+INTERVAL 2 WEEK)]]>
 			</if>
 			<if test="deadlineStatus==3">
-			   and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 2 WEEK) and f.deadline < =(CURDATE()+INTERVAL 2 MONTH)]]>
+			   and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 2 WEEK) and f.deadline <= (CURDATE()+INTERVAL 2 MONTH)]]>
 			</if>
 			<if test="deadlineStatus==4">
-				and f.fee_payment_status =1 and <![CDATA[f.deadline >(CURDATE()+INTERVAL 2 MONTH) and f.deadline < = (CURDATE()+INTERVAL 3 YEAR)]]>
+				and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 2 MONTH) and f.deadline <= (CURDATE()+INTERVAL 3 YEAR)]]>
 			</if>
 			<if test="deadlineStatus==5">
 				and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 3 YEAR)]]>
@@ -229,14 +229,14 @@
 				and f.fee_payment_status =1 and <![CDATA[f.deadline < CURDATE()]]>
 			</if>
 			<if test="deadlineStatus==2">
-				and f.fee_payment_status =1 and <![CDATA[f.deadline > = CURDATE()]]> and <![CDATA[f.deadline < = (CURDATE()+INTERVAL 2 WEEK)]]>
+				and f.fee_payment_status =1 and <![CDATA[f.deadline >= CURDATE()]]> and <![CDATA[f.deadline <= (CURDATE()+INTERVAL 2 WEEK)]]>
 			</if>
 			<if test="deadlineStatus==3">
-			   and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 2 WEEK)]]> and <![CDATA[f.deadline < =(CURDATE()+INTERVAL 2 MONTH)]]>
+			   and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 2 WEEK)]]> and <![CDATA[f.deadline <=(CURDATE()+INTERVAL 2 MONTH)]]>
 			</if>
 			<if test="deadlineStatus==4">
 				and f.fee_payment_status =1 and <![CDATA[f.deadline >(CURDATE()+INTERVAL 2 MONTH)]]>
-			    and <![CDATA[f.deadline < = (CURDATE()+INTERVAL 3 YEAR)]]>
+			    and <![CDATA[f.deadline <= (CURDATE()+INTERVAL 3 YEAR)]]>
 			</if>
 			<if test="deadlineStatus==5">
 				and f.fee_payment_status =1 and <![CDATA[f.deadline > (CURDATE()+INTERVAL 3 YEAR)]]>
