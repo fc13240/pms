@@ -68,7 +68,7 @@
 						<th colspan="9" style="text-align:left;"> <input type="checkbox" class="fee-check-item">
 						  <span class="batch-share" style="margin-left:10px;">
 							  <a href="javascript:updateMonitorStatus(2)">
-							  <button class="button button-caution button-rounded" style="font-weight:500;font-size:16px;">加入购物车</button>
+							  <button class="button button-caution button-rounded" style="font-weight:500;font-size:16px;width:110px;">加入购物车</button>
 							  </a>
 						  </span> 
 							<%-- <span class="batch-share"><a href="javascript:updateMonitorStatus(1)">放弃监控</a> --%>

@@ -59,14 +59,14 @@
 				
 				</div>
 				<!-- menu end -->
-				  <div class="lt-box">
+				  <div class="lt-box" style="padding:20px;">
 				  <form action="<s:url value='/order/search.html'/>" method="get">
 				    <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 				    <div class="t-third">
 				      <ul>
 				        <li>
 				          <p>支付状态</p>
-				          <select name="orderStatus" class="selectPointOfInterest">
+				          <select name="orderStatus" class="selectPointOfInterest form-control">
 				            <option value="">全部</option>
 				            <c:forEach items="${allOrderStatus}" var="orderStatus">
 				              <option value="<c:out value='${orderStatus.statusId}'/>">
@@ -77,17 +77,18 @@
 				        </li>
 				        <li>
 				          <p>订单日期开始</p>
-				          <input  type="text" onclick="WdatePicker({el:'startAppDateId'})"  id="startAppDateId" name="startAppDate" placeholder="开始时间" value="" readonly="readonly" >
-				          <img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="18" align="absmiddle" id="start_date_img"> - </li>
+				          <input class="form-control"  type="text" onclick="WdatePicker({el:'startAppDateId'})"  id="startAppDateId" name="startAppDate" placeholder="开始时间" value="" readonly="readonly" >
+				          <img style="display:none;" onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="18" align="absmiddle" id="start_date_img"> </li>
 				        <li>
 				          <p>订单日期截止</p>
-				          <input type="text" onclick="WdatePicker({el:'endAppDateId'})" id="endAppDateId" name="endAppDate" placeholder="结束时间" value="" readonly="readonly" >
-				          <img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img"> </li>
+				          <input class="form-control" type="text" onclick="WdatePicker({el:'endAppDateId'})" id="endAppDateId" name="endAppDate" placeholder="结束时间" value="" readonly="readonly" >
+				          <img style="display:none;" onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img"> </li>
 				        <li style="width: 385px;">
 				          <p>订单号</p>
-				          <input name="keyword" id="keywordId" value="" placeholder="订单号" class="t-input"/>
-				          <button type="submit" style="height:30px;">查询</button>
+				          <input name="keyword" style="width:300px; display:inline;" id="keywordId" value="" placeholder="订单号" class="t-input form-control"/>
+				          <button class="button button-caution button-rounded" type="submit">查询</button>
 				        </li>
+				        <div style="clear:both;"></div>
 				      </ul>
 				    </div>
 				  </form>
@@ -95,16 +96,16 @@
 				<!-- search end -->
 				
 				  <c:forEach items="${orders}" var="order">
-				  	<div class="lt-box">
+				  	<div class="lt-box" style="padding:20px;">
 				    <form action="<s:url value='/fee/exportOrderFees.html'/>" method="get" target="feeExportFrame">
 				      <c:forEach items="${order.feeList}" var="fee" varStatus="status">
 				        <input type="hidden" name="fees" value="${fee.feeId}">
 				      </c:forEach>
-				      <div style="height:30px;line-height:30px;padding:10px;font-weight:700;">
+				      <div style="font-weight:700;background:#79BDF4;height:40px;line-height:30px;padding-left:10px;">
 						<fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
 							&nbsp;&nbsp;订单号：${order.id}
 						<span style="margin-left:100px;">
-							<button type="submit" class="t-btn6">导出费用清单</button>
+							<button type="submit" style="margin-top:3px;" class="button button-rounded button-highlight">导出费用清单</button>
 						</span>
 				      </div>
 				      <table id="simple-table" class="table table-striped table-bordered table-hover">
