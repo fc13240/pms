@@ -9,256 +9,285 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>龙图腾专利</title>
 <%@ include file="_css.jsp" %>
-</head>
-<body style="background:#F3F3F5;">
+<body>
 <%@ include file="_top.jsp" %>
-<%@ include file="_left_nav.jsp" %>
-<%@ include file="_left_nav2.jsp" %>
-<div class="lt-con">
-  <div class="t-ti">
-    <hr class="t-hr">
-    <span style="font-size: 16px;font-weight: 300;line-height: 24px;">我的专利</span> </div>
-<!-- list beg -->
 
 
-	<div id="menu">
-	  <div style="height:33px;">
-	    <ul id="nav">
-	      <p>快捷处理：</p>
-	      <li><a href="#" class="selected">专利类型</a></li>
-	      <li><a href="#" class="">案件状态</a></li>
-	    </ul>
-	  </div>
-	  <div id="menu_con" style="min-width:1100px;">
-	    <div class="tag" style="display:block"> 
-	      <ul class="qxjk-ul">
-	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=1'/>">
-	        <li>发明 (<c:out value='${patentTypeCount[(1).intValue()]["patentCount"]}' default="0"/>)</li>
-	        </a> <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=2'/>">
-	        <li>实用新型 (<c:out value='${patentTypeCount[(2).intValue()]["patentCount"]}' default="0"/>)</li>
-	        </a> 
-	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=3'/>">
-	        <li>外观设计 (<c:out value='${patentTypeCount[(3).intValue()]["patentCount"]}' default="0"/>)</li>
-	        </a> 
-	      </ul>	    
-	    
-	    
-	    </div>
-	    <div class="tag"  style="display:none">
-	      <ul class="qxjk-ul">	      
-	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=1'/>">
-	        <li>等待申请费 (<c:out value='${patentStatusCount[(1).intValue()]["patentCount"]}' default="0"/>)</li>
-	        </a> 
-	       <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=2'/>">
-	        <li>待答复 (<c:out value='${patentStatusCount[(2).intValue()]["patentCount"]}' default="0"/>)</li>
-	        </a> 
-	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=3'/>">
-	        <li>等年登印费 (<c:out value='${patentStatusCount[(3).intValue()]["patentCount"]}' default="0"/>)</li>
-	        </a> 
-	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=4'/>">
-	        <li>待恢复 (<c:out value='${patentStatusCount[(4).intValue()]["patentCount"]}' default="0"/>)</li>
-	        </a> 
-	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=5'/>">
-	        <li>失效(<c:out value='${patentStatusCount[(5).intValue()]["patentCount"]}' default="0"/>)</li>
-	        </a> 
-	        <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=6'/>">
-	        <li>专利权维持 (<c:out value='${patentStatusCount[(6).intValue()]["patentCount"]}' default="0"/>)</li>
-	        </a> <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=7'/>">
-	        <li>其他 (<c:out value='${patentStatusCount[(7).intValue()]["patentCount"]}' default="0"/>)</li>
-	        </a>
-	      </ul>
-	    </div>
-	  </div>
-	</div>
-	<!--menu end-->
-	<div class="lt-box">
-	<form action="<s:url value='/patent/search.html'/>" method="get">
-	  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-	  <div class="t-third">
-	    <ul>
-	      <li>
-	        <p>专利类型</p>
-	        <select  style="height:35px;" class="selectPointOfInterest" name="patentType">
-	          <option value="">全部</option>
-	          <c:forEach items="${allPatentTypes}" var="patentType">
-	            <option value="<c:out value='${patentType.patentTypeId}'/>">
-	            <c:out value="${patentType.typeDescription}"/>
-	            </option>
-	          </c:forEach>
-	        </select>
-	      </li>
-	      <li>
-	        <p>专利状态</p>
-	        <label id="lblSelect">
-	        <select style="height:35px;" class="selectPointOfInterest" name="patentStatus">
-	          <option value="">全部</option>
-	          <c:forEach items="${allPatentStatus}" var="patentStatus">
-	            <option value="<c:out value='${patentStatus.patentStatusId}'/>">
-	            <c:out value="${patentStatus.statusDescription}"/>
-	            </option>
-	          </c:forEach>
-	        </select>
-	        </label>
-	      </li>
-	      <li>
-	        <p>申请日开始</p>
-	        <input class="lt-input"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >
-	        <img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="18" align="absmiddle" id="start_date_img"> - </li>
-	      <li>
-	        <p>申请日结束</p>
-	        <input class="lt-input" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >
-	        <img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img"> </li>
-	      <li style="width: 385px;">
-	        <p>关键字</p>
-	        <input name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input"/>
-	        <button>查询</button>
-	      </li>
-	    </ul>
-	  </div>
-	</form>
-	</div>
-	<!--search box end-->
+<div class="lt-con" style="min-width:1100px;">
+	<div class="container-fluid" >
 
-	<div class="lt-box">
-	  <div class="main-container" id="main-container">
-	    <!-- PAGE CONTENT BEGINS -->
-	    <div class="row">
-	      <div class="col-xs-12">
-	        <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-	          <div class="ta-top" style="margin:8px;"> 
-	            <a href="javascript:batchGrabFees()">
-	            <button class="t-btn7" style="font-weight:500;font-size:16px;">在线交费</button>
-	            </a>	          
-	          
-	          <a href="javascript:batchShare()" style="margin-left:50px;">
-	            <button class="t-btn3">批量分享</button>
-	          </a> 
-	          
-			 <a href="javascript:exportFees()">
-				<button class="t-btn6">表格导出</button>
-			 </a>  
-	          
-	          </div>
-	          </span> </div>
-	        <table id="simple-table" class="table table-striped table-bordered table-hover">
-	          <thead>
-	            <tr class="simple_bag">
-	              <th class="center" width="25"> <label class="pos-rel">
-	                <input type="checkbox" class="patent-check-item" id="checkall"  name="checkall" />
-	                <span class="lbl"></span> </label>
-	              </th>
-	              <th class="center" width="20">序号</th>
-	              <th width="110">申请号/专利号</th>
-	              <th width="170">专利名称</th>
-	              <th width="90">第一申请人 </th>
-	              <th width="90" class="hidden-480"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申请日</th>
-	              <th width="60">专利类型</th>
-	              <th width="60">案件状态</th>
-	              <th width="50">内部编码</th>
-	              <th width="110">共享人</th>
-	              <th width="60">操作</th>
-	            </tr>
-	          </thead>
-	          <tbody>
-	            <c:forEach items="${patents}" var="patent" varStatus="status">
-	              <tr>
-	                <td class="center"><label class="pos-rel"> <span class="batch-share-item">
-	                  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.patentId}'/>">
-	                  <span class="lbl"></span></label></td>
-	                <td class="center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
-	                <td><c:out value="${patent.appNo}"/>
-	                </td>
-	                <td class="hidden-480"><c:out value="${patent.name}"/></td>
-	                <td><c:out value="${patent.appPerson}"/></td>
-	                <td class="hidden-480"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
-	                <td><c:out value="${patent.patentType.typeDescription}"/></td>
-	                <td><c:out value="${patent.patentStatusText}"/></td>
-	                <td><input style="width:60px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
-	                </td>
-	                <td><c:out value="${patent.shareUsersAsString}"/>
-	                </td>
-	                <td><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
-	                  分享
-	                  </a>&nbsp;
-	                  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
-	                  交费
-	                  </a> 
-<%-- 	                  <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>"> --%>
-<!-- 	                  <button class="t-btn2">出售</button> -->
-<!-- 	                  </a>  -->
-	                  </td>
-	              </tr>
-	            </c:forEach>
-	          </tbody>
-	        </table>
-	        <!-- 分页功能 start -->
-	        <div style="height:30px;background:#fff;">	
-	          <c:if test="${searchCondition == null}">
-	            <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1">首页</a>
-	              <c:choose>
-	                <c:when test="${page.currentPage - 1 > 0}"> <a href="?currentPage=${page.currentPage - 1}">上一页</a> </c:when>
-	                <c:when test="${page.currentPage - 1 <= 0}"> <a href="?currentPage=1">上一页</a> </c:when>
-	              </c:choose>
-	              <c:choose>
-	                <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">下一页</a> </c:when>
-	                <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?currentPage=${page.currentPage+1}">下一页</a> </c:when>
-	                <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?currentPage=${page.totalPages}">下一页</a> </c:when>
-	              </c:choose>
-	              <c:choose>
-	                <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">尾页</a> </c:when>
-	                <c:otherwise> <a href="?currentPage=${page.totalPages}">尾页</a> </c:otherwise>
-	              </c:choose>
-	              <!-- 分页功能 End -->
-	              <input type="text" id="page.pageNo" style="width:50px;height:15px" name="currentPage" onKeyDown="gotoPageForEnter(event)"/>
-	              <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
-	              <select onChange="setPageSize()" id="pageSizeSelect">
-	                <option value="10">10</option>
-	                <option value="20">20</option>
-	                <option value="50">50</option>
-	                <option value="100">100</option>
-	              </select>
-	              条记录 </span> </div>
-	          </c:if>
-	       
-	        <c:if test="${searchCondition != null}">
-	          <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?page.currentPage=1&${searchCondition}">首页</a>
-	            <c:choose>
-	              <c:when test="${page.currentPage - 1 > 0}"> <a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a> </c:when>
-	              <c:when test="${page.currentPage - 1 <= 0}"> <a href="?page.currentPage=1&${searchCondition}">上一页</a> </c:when>
-	            </c:choose>
-	            <c:choose>
-	              <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a> </c:when>
-	              <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a> </c:when>
-	              <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a> </c:when>
-	            </c:choose>
-	            <c:choose>
-	              <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a> </c:when>
-	              <c:otherwise> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise>
-	            </c:choose>
-	            <!-- 分页功能 End -->
-	            <input type="text" id="page.pageNo" style="width:50px;height:15px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
-	            <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
-	            <select onChange="setPageSize()" id="pageSizeSelect">
-	              <option value="10">10</option>
-	              <option value="20">20</option>
-	              <option value="50">50</option>
-	              <option value="100">100</option>
-	            </select>
-	            条记录 </span> </div>
-	        </c:if>
-	        </div>
-	      </div>
-	    </div>
-	    </form>
-	    <!--search box end-->
-	  </div>
-	</div>
-  
-  
- <!--list end --> 
+		<div class="row" style="margin-left:-30px;min-width:1100px;">
+
+		  <div class="col-xs-1 sidebar" style="min-width:100px;">
+			<%@ include file="_left_nav2.jsp" %>
+		  </div>
+		  <!--left end-->
+		  <div class="col-xs-offset-1 col-xs-11">
+			<div class="lt-right">
+				<div style="height:10px;"></div>
+				<!-- menu begin -->
+				<div class="lt-box">
+
+					<div id="menu">
+					  <div style="height:33px;">
+						<ul id="nav">
+						  <p>快捷处理：</p>
+						  <li><a href="#" class="selected">专利类型</a></li>
+						  <li><a href="#" class="">案件状态</a></li>
+						
+						</ul>
+					  </div>
+						
+					  <div id="menu_con">
+					  						
+						<div class="tag" style="display:block; margin-left:-20px;"> 
+
+						  <ul class="qxjk-ul"><li>
+							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=1'/>">
+							发明 (<c:out value='${patentTypeCount[(1).intValue()]["patentCount"]}' default="0"/>)</a>
+							</li>
+							<li>
+							 <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=2'/>">
+							实用新型 (<c:out value='${patentTypeCount[(2).intValue()]["patentCount"]}' default="0"/>)
+							</a> 
+							</li>
+							
+							<li>
+							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=3'/>">外观设计 (<c:out value='${patentTypeCount[(3).intValue()]["patentCount"]}' default="0"/>)
+							</a> 							
+							</li>
+
+						  </ul>	    
+						
+						
+						</div>
+						<div class="tag"  style="display:none">
+						  <ul class="qxjk-ul">	      
+							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=1'/>">
+							<li>等待申请费 (<c:out value='${patentStatusCount[(1).intValue()]["patentCount"]}' default="0"/>)</li>
+							</a> 
+						   <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=2'/>">
+							<li>待答复 (<c:out value='${patentStatusCount[(2).intValue()]["patentCount"]}' default="0"/>)</li>
+							</a> 
+							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=3'/>">
+							<li>等年登印费 (<c:out value='${patentStatusCount[(3).intValue()]["patentCount"]}' default="0"/>)</li>
+							</a> 
+							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=4'/>">
+							<li>待恢复 (<c:out value='${patentStatusCount[(4).intValue()]["patentCount"]}' default="0"/>)</li>
+							</a> 
+							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=5'/>">
+							<li>失效(<c:out value='${patentStatusCount[(5).intValue()]["patentCount"]}' default="0"/>)</li>
+							</a> 
+							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=6'/>">
+							<li>专利权维持 (<c:out value='${patentStatusCount[(6).intValue()]["patentCount"]}' default="0"/>)</li>
+							</a> <a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=7'/>">
+							<li>其他 (<c:out value='${patentStatusCount[(7).intValue()]["patentCount"]}' default="0"/>)</li>
+							</a>
+						  </ul>
+						</div>
+					  </div>
+					</div>				
+				
+				
+				</div>
+				<!-- menu end -->
+				<!-- search begin -->
+				<div class="lt-box">
+					<div class="search-box">
+						<form action="<s:url value='/patent/search.html'/>" method="get">
+						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
+						  <div class="t-third" style="clear:both;">
+						  
+							<ul >
+							  <li>
+								<p>专利类型</p>
+								<select  style="width:100px;" class="selectPointOfInterest form-control" name="patentType">
+								  <option value="">全部</option>
+								  <c:forEach items="${allPatentTypes}" var="patentType">
+									<option value="<c:out value='${patentType.patentTypeId}'/>">
+									<c:out value="${patentType.typeDescription}"/>
+									</option>
+								  </c:forEach>
+								</select>
+							  </li>
+							  <li>
+								<p>专利状态</p>
+								<label id="lblSelect">
+								<select class="form-control" name="patentStatus">
+								  <option value="">全部</option>
+								  <c:forEach items="${allPatentStatus}" var="patentStatus">
+									<option value="<c:out value='${patentStatus.patentStatusId}'/>">
+									<c:out value="${patentStatus.statusDescription}"/>
+									</option>
+								  </c:forEach>
+								</select>
+								</label>
+							  </li>
+							  <li>
+								<p>申请日开始</p>
+								<input class="form-control"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >
+								</li>
+							  <li>
+								<p>&nbsp;</p>
+								-
+							</li>
+							  						
+							<li>
+							  
+								<p>申请日结束</p>
+								<input class="lt-input form-control" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >
+								<!--<img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img">--> </li>
+							  <li style="width: 300px;margin-right:0px;">
+								<p>关键字</p>
+								<input name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>
+							  </li>
+							  <li style="width: 50px;">
+								<p>&nbsp;</p>
+								<button class="button button-caution button-rounded" style="width:80px;">查询</button>
+								
+								<!--<button class="button button-caution button-rounded button-jumbo">查询123123</button>-->
+								
+							  </li>							  
+							  <div style="clear:both;"></div>
+							</ul>
+						  </div>
+						</form>
+					</div>
+				</div>
+				<!--search form end-->
+				<div class="lt-box">
+					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
+					  <div class="ta-top" style="margin:8px;"> 
+						<a href="javascript:batchGrabFees()">
+						<button class="button button-caution button-rounded">在线交费</button> 
+						</a>	          
+						<a href="javascript:batchShare()" style="margin-left:50px;">
+						<button class="button button-primary  button-rounded">批量分享</button>
+						</a> 
+
+					  </div>
+					  </span> </div>
+					<table id="simple-table" class="table table-striped table-bordered table-hover">
+					  <thead>
+						<tr class="simple_bag">
+						  <th class="center" width="15"> <label class="pos-rel">
+							<input type="checkbox" class="patent-check-item" id="checkall"  name="checkall" />
+							<span class="lbl"></span> </label>
+						  </th>
+						  <th class="center" width="35">序号</th>
+						  <th width="110">申请号/专利号</th>
+						  <th width="170">专利名称</th>
+						  <th width="90">第一申请人 </th>
+						  <th width="90" class="hidden-480"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申请日</th>
+						  <th width="60">专利类型</th>
+						  <th width="70">案件状态</th>
+						  <th width="50">内部编码</th>
+						  <th width="90">共享人</th>
+						  <th width="80">操作</th>
+						</tr>
+					  </thead>
+					  <tbody>
+						<c:forEach items="${patents}" var="patent" varStatus="status">
+						  <tr>
+							<td class="center"><label class="pos-rel"> <span class="batch-share-item">
+							  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.patentId}'/>">
+							  <span class="lbl"></span></label></td>
+							<td class="center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+							<td><c:out value="${patent.appNo}"/>
+							</td>
+							<td class="hidden-480"><c:out value="${patent.name}"/></td>
+							<td><c:out value="${patent.appPerson}"/></td>
+							<td class="hidden-480"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
+							<td><c:out value="${patent.patentType.typeDescription}"/></td>
+							<td><c:out value="${patent.patentStatusText}"/></td>
+							<td><input style="width:60px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
+							</td>
+							<td><c:out value="${patent.shareUsersAsString}"/>
+							</td>
+							<td><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
+							  分享
+							  </a>&nbsp;
+							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
+							  交费
+							  </a> 
+		<%-- 	                  <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>"> --%>
+		<!-- 	                  <button class="t-btn2">出售</button> -->
+		<!-- 	                  </a>  -->
+							  </td>
+						  </tr>
+						</c:forEach>
+					  </tbody>
+					</table>
+					<!-- 分页功能 start -->
+			        <div style="height:30px;background:#fff;">	
+			          <c:if test="${searchCondition == null}">
+			            <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1">首页</a>
+			              <c:choose>
+			                <c:when test="${page.currentPage - 1 > 0}"> <a href="?currentPage=${page.currentPage - 1}">上一页</a> </c:when>
+			                <c:when test="${page.currentPage - 1 <= 0}"> <a href="?currentPage=1">上一页</a> </c:when>
+			              </c:choose>
+			              <c:choose>
+			                <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">下一页</a> </c:when>
+			                <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?currentPage=${page.currentPage+1}">下一页</a> </c:when>
+			                <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?currentPage=${page.totalPages}">下一页</a> </c:when>
+			              </c:choose>
+			              <c:choose>
+			                <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">尾页</a> </c:when>
+			                <c:otherwise> <a href="?currentPage=${page.totalPages}">尾页</a> </c:otherwise>
+			              </c:choose>
+			              <!-- 分页功能 End -->
+			              <input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onKeyDown="gotoPageForEnter(event)"/>
+			              <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
+			              <select onChange="setPageSize()" style="height:25px;" id="pageSizeSelect">
+			                <option value="10">10</option>
+			                <option value="20">20</option>
+			                <option value="50">50</option>
+			                <option value="100">100</option>
+			              </select>
+			              条记录 </span> </div>
+			          </c:if>
+			       
+			        <c:if test="${searchCondition != null}">
+			          <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?page.currentPage=1&${searchCondition}">首页</a>
+			            <c:choose>
+			              <c:when test="${page.currentPage - 1 > 0}"> <a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a> </c:when>
+			              <c:when test="${page.currentPage - 1 <= 0}"> <a href="?page.currentPage=1&${searchCondition}">上一页</a> </c:when>
+			            </c:choose>
+			            <c:choose>
+			              <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a> </c:when>
+			              <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a> </c:when>
+			              <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a> </c:when>
+			            </c:choose>
+			            <c:choose>
+			              <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a> </c:when>
+			              <c:otherwise> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise>
+			            </c:choose>
+			            <!-- 分页功能 End -->
+			            <input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
+			            <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
+			            <select onChange="setPageSize()" style="height:25px;" id="pageSizeSelect">
+			              <option value="10">10</option>
+			              <option value="20">20</option>
+			              <option value="50">50</option>
+			              <option value="100">100</option>
+			            </select>
+			            条记录 </span> </div>
+			        </c:if>
+			        </div>					
+				
+				
+				</div>
+			
+			
+			</div> 
+			
+		  </div>
+		  
+			<!--right end-->
+		</div>
+	</div>	
 </div>
-<iframe id="patentExcelFileFrame" style="display:none"></iframe>
-<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
+
 <script type="text/javascript">
 	$(function(){
 		formutil.clickAllCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
@@ -284,7 +313,6 @@
 	}
 	function batchGrabFees(){
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		
 		if (!patentSelected) {
 			formutil.alertMessage('请选择专利');
 			return;
@@ -381,7 +409,6 @@
 		
 	}
 </script>
-
 <script type="text/javascript">
 	$(function() {
 		formutil.setElementValue("#pageSizeSelect", ${page.pageSize});
@@ -399,8 +426,6 @@
 		});		
 	}	
 </script>
-
-
 <script>
 var tabs=function(){
     function tag(name,elem){
@@ -453,4 +478,3 @@ tabs.set("nav","menu_con");//执行
 </script>
 
 </body>
-</html>

@@ -1,25 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="<s:url value='/temp/css/style.css'/>" />
-<link rel="stylesheet" href="<s:url value='/temp/css/main.css'/>" />
-<link rel="stylesheet" media="screen" href="<s:url value='/temp/css/jquery-ui.min.css'/>" />
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-<script src="<s:url value='/temp/js/jquery.js'/>" type="text/javascript"></script>
+<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="<s:url value='/temp/js/jquery-ui.min.js'/>" type="text/javascript"></script>
 <script src="<s:url value='/temp/js/formutil.js'/>" type="text/javascript"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="<s:url value='/temp/css/common.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
+<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
+<link rel="stylesheet" media="screen" href="<s:url value='/temp/css/jquery-ui.min.css'/>" />
+<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 
-<script src="/pms/static/datepicker/WdatePicker.js"></script>
-<script src="<s:url value='/temp/datepicker/WdatePicker.js'/>" type="text/javascript"></script>
 
-<!-- bootstrap & fontawesome -->
-<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.css'/>" />
-<!-- ace styles -->
-<link rel="stylesheet" href="<s:url value='/temp/css/ace.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
-
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-<script>
-
-</script>
