@@ -15,7 +15,7 @@
 				</div>
 			</div>
 			<div class="top-user" id="top-user">
-				<img src="<s:url value='/temp/images/user1.png'/>" />
+				<img src="<s:url value='/temp/images/user2.png'/>" />
 				<span class="user-info">
 					<small>欢迎您!</small>
 					<se:authentication property="principal.username" />
