@@ -11,55 +11,72 @@
 <%@ include file="_css.jsp" %>
 </head>
 <body>
-
-
 <%@ include file="_top.jsp" %>
-<%@ include file="_left_nav.jsp" %>
-<%@ include file="_left_nav_user.jsp" %>
 
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>
 
-<div class="lt-con">
-	<div class="t-ti">
-		<hr class="t-hr">
-		<span style="font-size: 20px;font-weight: 300;line-height: 24px;">添加地址</span>
+<div class="lt-con" style="min-width:1100px;">
+	<div class="container-fluid" >
+
+		<div class="row" style="margin-left:-30px;min-width:1100px;">
+		
+			<!--left begin-->
+		  <div class="col-xs-1 sidebar" style="min-width:100px;">
+			<%@ include file="_left_nav2.jsp" %>
+		  </div>
+		  <!--left end-->
+		  <!--right begin-->
+		  <div class="col-xs-offset-1 col-xs-11">
+			<div class="lt-right">
+				<div style="height:10px;"></div>
+				<div class="lt-box" style="padding:20px;">
+					<form action="<s:url value='/user/addContactAddress.html'/>" method="post" onsubmit="return check()">
+					  <se:csrfInput/>
+			       	<h5>联系人名称:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="receiver" required/>
+					<br>	  
+			       	<h5>手机或固话:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" name="phone" required onblur="validatePhoneNumber(this.value)"/>
+					<span style="color: red; display: none;" id=phoneError>请输入正确的手机或者电话号</span>
+					<br> 
+			       	<h5>通讯地址:</h5>
+					<select name="province" class="form-control" style="width:113px;display:inline;" id="province" onchange="loadCities()" required>
+					  <option value=''>请选择</option>
+					  <c:forEach items="${provinces}" var="province">
+						<option value="${province.id}">${province.name}</option>
+					  </c:forEach>
+					</select>
+					<select name="city" id="city" style="width:113px;display:inline;" class="form-control" onchange="loadDistricts()" required>
+					  <option value=''>请选择</option>
+					</select>
+					<select name="district" style="width:113px;display:inline;" class="form-control" id="district" onchange="loadStreets()" required>
+					  <option value=''>请选择</option>
+					</select>
+					<select name="street" style="width:113px;display:inline;" class="form-control" id="street" required>
+					  <option value=''>请选择</option>
+					</select>		
+					<br> 		  
+			       	<h5>详细地址:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="detailAddress" required/>
+					<br>   
+					<div style="height:20px;"></div> 
+					<button type="submit" style="width:90px;" class="button button-primary  button-rounded">保存</button>
+					</form>				
+				</div>
+			</div>
+
+		  </div>		
+		  <!--right end-->	
+		  
+		</div>
+
 	</div>
-	<div class="lt-third" style="background:#fff;margin-top:10px;">	
-		<form action="<s:url value='/user/addContactAddress.html'/>" method="post" onsubmit="return check()">
-		  <se:csrfInput/>
-       	<h5>联系人名称:</h5>
-		<input class="selectPointOfInterest" type="text" name="receiver" required/>
-		<br>	  
-       	<h5>手机或固话:</h5>
-		<input class="selectPointOfInterest" id="phoneRece" type="text" name="phone" required onblur="validatePhoneNumber(this.value)"/>
-		<span style="color: red; display: none;" id=phoneError>请输入正确的手机或者电话号</span>
-		<br> 
-       	<h5>通讯地址:</h5>
-		<select name="province" id="province" onchange="loadCities()" required>
-		  <option value=''>请选择</option>
-		  <c:forEach items="${provinces}" var="province">
-			<option value="${province.id}">${province.name}</option>
-		  </c:forEach>
-		</select>
-		<select name="city" id="city" onchange="loadDistricts()" required>
-		  <option value=''>请选择</option>
-		</select>
-		<select name="district" id="district" onchange="loadStreets()" required>
-		  <option value=''>请选择</option>
-		</select>
-		<select name="street" id="street" required>
-		  <option value=''>请选择</option>
-		</select>		
-		<br> 		  
-       	<h5>详细地址:</h5>
-		<input class="selectPointOfInterest" type="text" name="detailAddress" required/>
-		<br>   
-		<div style="height:20px;"></div> 
-		<button type="submit" style="width:90px;" class="t-btn2">保存</button>
-		</form>
-	</div>
-</div>
+
+</div>	
+
+
+
 <script type="text/javascript">
 			jQuery(function($) {
 				//initiate dataTables plugin

@@ -11,159 +11,152 @@
 <%@ include file="_css.jsp" %>
 </head>
 <body>
-
-
 <%@ include file="_top.jsp" %>
-<%@ include file="_left_nav.jsp" %>
-<%@ include file="_left_nav2.jsp" %>
-<div class="lt-con">
-	<div class="t-ti">
-		<hr class="t-hr">
-		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">交费</span>
-	</div>
-<!-- list beg -->	
+<div class="lt-con" style="min-width:1100px;">
+	<div class="container-fluid" >
 
-
-	<div class="lt-box">
-	  <div class="main-container" id="main-container">
-		<div class="row">
-		  <div class="col-xs-12">
-
-			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
-				<span class="input-group-btn" >
-				<div class="ta-top" style="margin:8px;"> 
-				
-				<span style="font-size:14px;font-weight:600;line-height:17px;">专利信息</span>
-				
-				</div>
-				</span> 
-			</div>
-			<table id="simple-table" class="table table-striped table-bordered table-hover">
-			  <tr>
-				<th>申请号/专利号</th>
-				<th>专利名称</th>
-				<th>第一申请人</th>
-				<th>案件状态</th>
-			  </tr>
-			  <tr>
-				<td>${patent.appNo}</td>
-				<td>${patent.name}</td>
-				<td>${patent.firstAppPerson}</td>
-				<td>${patent.patentStatus.statusDescription}</td>
-			  </tr>
-			</table>
-				
-			<!-- /.span -->
+		<div class="row" style="margin-left:-30px;min-width:1100px;">
+		
+			<!--left begin-->
+		  <div class="col-xs-1 sidebar" style="min-width:100px;">
+			<%@ include file="_left_nav2.jsp" %>
 		  </div>
-		  <!-- /.row -->
-		</div>
-	  </div>
-	</div>
-
-
-	<div class="lt-box">
-	  <div class="main-container" id="main-container">
-		<div class="row">
-		  <div class="col-xs-12">
-
-			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
-				<span class="input-group-btn" >
-				<div class="ta-top" style="margin:8px;"> 
+		  <!--left end-->
+		  <!--right begin-->
+		  <div class="col-xs-offset-1 col-xs-11">
+			<div class="lt-right">
+				<div style="height:10px;"></div>
+				<div class="lt-box">
 				
-				<span style="font-size:14px;font-weight:600;line-height:17px;">应交费信息</span>
-				
-				</div>
-				</span> 
-			</div>
-			<table id="simple-table" class="table table-striped table-bordered table-hover">
-			  <tr>
-				<th colspan="9"> <input type="checkbox" class="fee-check-item">
-				  <span class="batch-share" style="margin-left:10px;">
-					  <a href="javascript:updateMonitorStatus(2)">
-					  <button class="t-btn7" style="font-weight:500;font-size:16px;">加入购物车</button>
-					  </a>
-				  </span> 
-					<%-- <span class="batch-share"><a href="javascript:updateMonitorStatus(1)">放弃监控</a> --%>
-					<%-- </span>  --%>
-				  <span class="batch-share">
-				  <a href="javascript:joinOrder()">
-				  <button class="t-btn3" style="font-weight:500;font-size:16px;">立即交费</button>
-				  </a>
-				  </span>
-				</th>
-			  </tr>
-			  <tr>
-				<th>序号</th>
-				<th>交费种类</th>
-				<th>交费截止日</th>
-				<th>交费金额</th>
-				<th>监控状态</th>
-			  </tr>
-			  <c:forEach items="${fees}" var="fee" varStatus="status">
-				<tr>
-				  <td><span class="batch-share-item">
-					<input type="checkbox" class="fee-check-item" feeId="${fee.feeId}">
-					</span> ${status.index+1} </td>
-				  <td>${fee.feeType}</td>
-				  <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
-				  <td>${fee.amount} </td>
-				  <td>${fee.monitorStatus.monitorStatusDescription}</td>
-				</tr>
-			  </c:forEach>
-			</table>
-				
-			<!-- /.span -->
-		  </div>
-		  <!-- /.row -->
-		</div>
-	  </div>
-	</div>
-
-	<c:if test="${! empty paidFees}">
-	<div class="lt-box">
-	  <div class="main-container" id="main-container">
-		<div class="row">
-		  <div class="col-xs-12">
-
-			<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
-				<span class="input-group-btn" >
-				<div class="ta-top" style="margin:8px;"> 
-				
-				<span style="font-size:14px;font-weight:600;line-height:17px;">已交费信息</span>
+					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
+						<span class="input-group-btn" >
+						<div class="ta-top" style="margin:8px;"> 
+						
+						<span style="font-size:14px;font-weight:600;line-height:17px;">专利信息</span>
+						
+						</div>
+						</span> 
+					</div>
+					<table id="simple-table" class="table table-striped table-bordered table-hover">
+					  <tr>
+						<th>申请号/专利号</th>
+						<th>专利名称</th>
+						<th>第一申请人</th>
+						<th>案件状态</th>
+					  </tr>
+					  <tr>
+						<td>${patent.appNo}</td>
+						<td>${patent.name}</td>
+						<td>${patent.firstAppPerson}</td>
+						<td>${patent.patentStatus.statusDescription}</td>
+					  </tr>
+					</table>
 				
 				</div>
-				</span> 
-			</div>
+				<div class="lt-box">
+					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
+						<span class="input-group-btn" >
+						<div class="ta-top" style="margin:8px;"> 
+						
+						<span style="font-size:14px;font-weight:600;line-height:17px;">应交费信息</span>
+						
+						</div>
+						</span> 
+					</div>
+					<table id="simple-table" class="table table-striped table-bordered table-hover">
+					  <tr>
+						<th colspan="9" style="text-align:left;"> <input type="checkbox" class="fee-check-item">
+						  <span class="batch-share" style="margin-left:10px;">
+							  <a href="javascript:updateMonitorStatus(2)">
+							  <button class="button button-caution button-rounded" style="font-weight:500;font-size:16px;">加入购物车</button>
+							  </a>
+						  </span> 
+							<%-- <span class="batch-share"><a href="javascript:updateMonitorStatus(1)">放弃监控</a> --%>
+							<%-- </span>  --%>
+						  <span class="batch-share">
+						  <a href="javascript:joinOrder()">
+						  <button class="button button-primary  button-rounded" style="font-weight:500;font-size:16px;">立即交费</button>
+						  </a>
+						  </span>
+						</th>
+					  </tr>
+					  <tr>
+						<th>序号</th>
+						<th>交费种类</th>
+						<th>交费截止日</th>
+						<th>交费金额</th>
+						<th>监控状态</th>
+					  </tr>
+					  <c:forEach items="${fees}" var="fee" varStatus="status">
+						<tr>
+						  <td><span class="batch-share-item">
+							<input type="checkbox" class="fee-check-item" feeId="${fee.feeId}">
+							</span> ${status.index+1} </td>
+						  <td>${fee.feeType}</td>
+						  <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
+						  <td>${fee.amount} </td>
+						  <td>${fee.monitorStatus.monitorStatusDescription}</td>
+						</tr>
+					  </c:forEach>
+					</table>
+				
+				
+				</div>
+				<c:if test="${! empty paidFees}">
+				<div class="lt-box">
+				  <div class="main-container" id="main-container">
+					<div class="row">
+					  <div class="col-xs-12">
 			
-			<table id="simple-table" class="table table-striped table-bordered table-hover">
-				<tr>
-				  <th>序号</th>
-				  <th>交费种类</th>
-				  <th>交费金额</th>
-				  <th>交费日期</th>
-				  <th>交费人姓名</th>
-				  <th>收据号</th>
-				</tr>
-				<c:forEach items="${paidFees}" var="paidFee" varStatus="status">
-				  <tr>
-					<td>${status.index+1}</td>
-					<c:forEach var="field" items="${paidFee}">
-					  <td>${field}</td>
-					</c:forEach>
-				  </tr>
-				</c:forEach>		
-			</table>
-				
-			<!-- /.span -->
-		  </div>
-		  <!-- /.row -->
-		</div>
-	  </div>
-	</div>
-	</c:if>
+						<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
+							<span class="input-group-btn" >
+							<div class="ta-top" style="margin:8px;"> 
+							
+							<span style="font-size:14px;font-weight:600;line-height:17px;">已交费信息</span>
+							
+							</div>
+							</span> 
+						</div>
+						
+						<table id="simple-table" class="table table-striped table-bordered table-hover">
+							<tr>
+							  <th>序号</th>
+							  <th>交费种类</th>
+							  <th>交费金额</th>
+							  <th>交费日期</th>
+							  <th>交费人姓名</th>
+							  <th>收据号</th>
+							</tr>
+							<c:forEach items="${paidFees}" var="paidFee" varStatus="status">
+							  <tr>
+								<td>${status.index+1}</td>
+								<c:forEach var="field" items="${paidFee}">
+								  <td>${field}</td>
+								</c:forEach>
+							  </tr>
+							</c:forEach>		
+						</table>
+							
+						<!-- /.span -->
+					  </div>
+					  <!-- /.row -->
+					</div>
+				  </div>
+				</div>
+				</c:if>
+			</div>
 
-<!-- list end -->
-</div>
+		  </div>		
+		  <!--right end-->	
+		  
+		</div>
+
+	</div>
+
+</div>	
+
+
+
 
 
 <script type="text/javascript">

@@ -11,67 +11,77 @@
 <%@ include file="_css.jsp" %>
 </head>
 <body>
-
-
 <%@ include file="_top.jsp" %>
-<%@ include file="_left_nav.jsp" %>
-<%@ include file="_left_nav_friend.jsp" %>
-<div class="lt-con">
-	<div class="t-ti">
-		<hr class="t-hr">
-		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">专利分享</span>
-	</div>
-	
-<!--list beg  -->
-	<div class="t-third">
-	  <div class="row">请选择要分配的好友 </div>
-	  <div>
-		<form action="<s:url value='/patent/searchFriends.html'/>" method="get"  id="shareAddForm">
-		  <c:forEach items="${paramValues.patents}" var="patent">
-			<input type="hidden" name="patents" value="<c:out value='${patent}'/>">
-		  </c:forEach>
-		  <ul>
-			<li style="width: 385px;">
-			  <input name="keyword" id="keywordId" value="<c:out value='${param.keyword}'/>" placeholder="用户名/姓名" class="t-input"/>
-			  <button>查询</button>
-			</li>
-		  </ul>
-		</form>
-	  </div>
-	  <div style="margin-top:50px;width:500px;">
-		<form action="<s:url value='/patent/sharePatents.html'/>" method="get"  id="shareAddForm">
-		  <c:forEach items="${paramValues.patents}" var="patent">
-			<input type="hidden" name="patents" value="<c:out value='${patent}'/>">
-		  </c:forEach>
-		  <table id="simple-table" style="width:500px;" class="table table-striped table-bordered table-hover">
-			<thead>
-			  <tr class="simple_bag">
-				<th width="30px"><input style="width:15px;" type="checkbox" class="check-item"></th>
-				<th>序号</th>
-				<th>用户名</th>
-				<th>姓名</th>
-			  </tr>
-			</thead>
-			<tbody>
-			  <c:forEach items="${friends}" var="friend" varStatus="status">
-				<tr>
-				  <td ><input name="friend" style="width:15px;" type="checkbox" class="check-item" friend="<c:out value='${friend.userId}'/>"></td>
-				  <td>${status.count}</td>
-				  <td><c:out value="${friend.username}"/></td>
-				  <td><c:out value="${friend.name}"/></td>
-				</tr>
-			  </c:forEach>
-			  <tr>
-				<td colspan="4"><input type="button" class="btn btn-primary btn-block" id="addShareBtn" value="确定"/></td>
-			  </tr>
-			</tbody>
-		  </table>
-		</form>
-	  </div>
+<div class="lt-con" style="min-width:1100px;">
+	<div class="container-fluid" >
+
+		<div class="row" style="margin-left:-30px;min-width:1100px;">
+		
+			<!--left begin-->
+		  <div class="col-xs-1 sidebar" style="min-width:100px;">
+			<%@ include file="_left_nav2.jsp" %>
+		  </div>
+		  <!--left end-->
+		  <!--right begin-->
+		  <div class="col-xs-offset-1 col-xs-11">
+			<div class="lt-right">
+				<div style="height:10px;"></div>
+				<div class="lt-box" style="padding:20px;height:400px;">
+					  <h4>请选择要分配的好友 </h4>
+					  <div>
+						<form action="<s:url value='/patent/searchFriends.html'/>" method="get"  id="shareAddForm">
+						  <c:forEach items="${paramValues.patents}" var="patent">
+							<input type="hidden" class="form-control" name="patents" value="<c:out value='${patent}'/>">
+						  </c:forEach>
+						  <ul>
+							<li style="width: 385px;">
+							  <input name="keyword" style="display:inline;width:300px;" class="form-control" id="keywordId" value="<c:out value='${param.keyword}'/>" placeholder="用户名/姓名" class="t-input"/>
+							  <button class="button button-caution button-rounded">查询</button>
+							</li>
+						  </ul>
+						</form>
+					  </div>
+					  <div style="margin-top:20px;width:500px;">
+						<form action="<s:url value='/patent/sharePatents.html'/>" method="get"  id="shareAddForm">
+						  <c:forEach items="${paramValues.patents}" var="patent">
+							<input type="hidden" name="patents" value="<c:out value='${patent}'/>">
+						  </c:forEach>
+						  <table id="simple-table" style="width:500px;" class="table table-striped table-bordered table-hover">
+							<thead>
+							  <tr class="simple_bag">
+								<th width="30px"><input style="width:15px;" type="checkbox" class="check-item"></th>
+								<th>序号</th>
+								<th>用户名</th>
+								<th>姓名</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <c:forEach items="${friends}" var="friend" varStatus="status">
+								<tr>
+								  <td ><input name="friend" style="width:15px;" type="checkbox" class="check-item" friend="<c:out value='${friend.userId}'/>"></td>
+								  <td>${status.count}</td>
+								  <td><c:out value="${friend.username}"/></td>
+								  <td><c:out value="${friend.name}"/></td>
+								</tr>
+							  </c:forEach>
+							  <tr>
+								<td colspan="4"><input type="button" class="btn btn-primary btn-block" id="addShareBtn" value="确定"/></td>
+							  </tr>
+							</tbody>
+						  </table>
+						</form>
+					  </div>
+				</div>
+			</div>
+
+		  </div>		
+		  <!--right end-->	
+		  
+		</div>
+
 	</div>
 
-<!--list end  -->
-</div>
+</div>	
 <script type="text/javascript">
 	$('tr th input.check-item').click(function() {
 		var checked = $(this).prop("checked");
