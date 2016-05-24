@@ -137,7 +137,7 @@
 				
 				<div class="lt-box" style="padding: 10px;">
 					<div class="search-box">
-						<form action="<s:url value='/patent/search.html'/>" method="get">
+						<form action="<s:url value='/notice/search.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 						  <div class="t-third" style="clear:both;">
 						  
@@ -312,7 +312,7 @@
 								  </c:choose>
 								</td>
 								<td><label id="lblSelect">
-								  <select class="selectPointOfInterest" onChange="javascript:processNotice('${notice.noticeId}', this)">
+								  <select class="selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
 									<option>全部</option>
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 											  
@@ -355,7 +355,7 @@
 								<c:otherwise> <a href="?currentPage=${page.totalPages}">尾页</a> </c:otherwise>
 							  </c:choose>
 							  <!-- 分页功能 End -->
-							  <input type="text" id="page.pageNo" style="width:50px;height:15px" name="currentPage" onKeyDown="gotoPageForEnter(event)"/>
+							  <input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onKeyDown="gotoPageForEnter(event)"/>
 							  <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
 							  <select onChange="setPageSize()" id="pageSizeSelect">
 								<option value="10">10</option>
@@ -381,7 +381,7 @@
 								  <c:otherwise> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise>
 								</c:choose>
 								<!-- 分页功能 End -->
-								<input type="text" id="page.pageNo" style="width:50px;height:15px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
+								<input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
 								<a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
 								<select onChange="setPageSize()" id="pageSizeSelect">
 								  <option value="10">10</option>
