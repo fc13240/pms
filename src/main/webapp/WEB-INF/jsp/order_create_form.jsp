@@ -146,13 +146,13 @@
 			                        	<span>
 			                        		官费：￥<span id="patentFee">${totalAmount}</span>
 			                        	</span>
-			                         	<span>
+			                         	<span style="margin-left:15px;">
 			                        		服务费：￥<span id="serviceFee">0</span>
 			                        	</span>   
-			                         	<span>
+			                         	<span style="margin-left:15px;">
 			                        		快递费：￥<span id="expressFee">0</span>
 			                        	</span> 
-			                         	<span>
+			                         	<span style="margin-left:15px;">
 			                        		增值发票税：￥<span id="invoiceFee">0</span>
 			                        	</span>                           	                        	                        	                    	
 			                        </td>

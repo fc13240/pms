@@ -17,7 +17,7 @@
 			<div class="top-user" id="top-user">
 				<img src="<s:url value='/temp/images/user1.png'/>" />
 				<span class="user-info">
-					test,<small>欢迎您!</small>
+					<small>欢迎您!</small>
 					<se:authentication property="principal.username" />
 				</span>
 				<a href="javascript:$('#logoutForm').submit();"><img src="<s:url value='/temp/images/exit.png'/>" class="top-exit"/></a>
