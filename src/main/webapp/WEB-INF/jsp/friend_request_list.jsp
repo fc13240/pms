@@ -11,10 +11,54 @@
 <%@ include file="_css.jsp" %>
 </head>
 <body>
-
 <%@ include file="_top.jsp" %>
-<%@ include file="_left_nav.jsp" %>
-<%@ include file="_left_nav_friend.jsp" %>
+<div class="lt-con" style="min-width:1100px;">
+	<div class="container-fluid" >
+
+		<div class="row" style="margin-left:-30px;min-width:1100px;">
+		
+			<!--left begin-->
+		  <div class="col-xs-1 sidebar" style="min-width:100px;">
+			<%@ include file="_left_nav_friend.jsp" %>
+		  </div>
+		  <!--left end-->
+		  <!--right begin-->
+		  <div class="col-xs-offset-1 col-xs-11">
+			<div class="lt-right">
+				<div style="height:10px;"></div>
+				<div class="lt-box" style="padding:20px;">
+					<table class="table table-bordered">
+					  <tr>
+						<th>序号</th>
+						<th>请求用户名</th>
+						<th>姓名</th>
+						<th>操作</th>
+					  </tr>
+					  <c:forEach items="${friendRequests}" var="request" varStatus="status">
+						<tr>
+						  <td>${status.count}</td>
+						  <td><c:out value="${request.username}"/></td>
+						  <td><c:out value="${request.name}"/></td>
+						  <td><a  href='javascript:processFriendRequest("<c:out value='${request.userId}'/>", 2)'>通过验证</a> <a  href='javascript:processFriendRequest("<c:out value='${request.userId}'/>", 3)'>拒绝请求</a></td>
+						</tr>
+					  </c:forEach>
+					</table>				
+				</div>
+			</div>
+
+		  </div>		
+		  <!--right end-->	
+		  
+		</div>
+
+	</div>
+
+</div>
+
+
+
+
+
 <div class="lt-con">
 	<div class="t-ti">
 		<hr class="t-hr">
@@ -22,22 +66,7 @@
 	</div>
 	
 	<div class="lt-box">
-			<table class="table table-bordered">
-			  <tr>
-				<th>序号</th>
-				<th>请求用户名</th>
-				<th>姓名</th>
-				<th>操作</th>
-			  </tr>
-			  <c:forEach items="${friendRequests}" var="request" varStatus="status">
-				<tr>
-				  <td>${status.count}</td>
-				  <td><c:out value="${request.username}"/></td>
-				  <td><c:out value="${request.name}"/></td>
-				  <td><a  href='javascript:processFriendRequest("<c:out value='${request.userId}'/>", 2)'>通过验证</a> <a  href='javascript:processFriendRequest("<c:out value='${request.userId}'/>", 3)'>拒绝请求</a></td>
-				</tr>
-			  </c:forEach>
-			</table>
+
 
 	</div>
 

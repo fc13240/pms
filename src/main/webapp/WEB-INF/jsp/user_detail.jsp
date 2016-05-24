@@ -12,46 +12,61 @@
 <%@ include file="_css.jsp"%>
 </head>
 <body>
+<%@ include file="_top.jsp"%>
+<div class="lt-con" style="min-width:1100px;">
+	<div class="container-fluid" >
 
-	<%@ include file="_top.jsp"%>
-	<%@ include file="_left_nav.jsp"%>
-	<%@ include file="_left_nav_user.jsp"%>
+		<div class="row" style="margin-left:-30px;min-width:1100px;">
+		
+			<!--left begin-->
+		  <div class="col-xs-1 sidebar" style="min-width:100px;">
+			<%@ include file="_left_nav_user.jsp" %>
+		  </div>
+		  <!--left end-->
+		  <!--right begin-->
+		  <div class="col-xs-offset-1 col-xs-11">
+			<div class="lt-right">
+				<div style="height:10px;"></div>
+				<div class="lt-box" style="padding:20px;">
+					<form action="<s:url value='/user/updateUserDetail.html'/>"
+						method="POST" onsubmit="return check()">
+						<h5>真实姓名/名称：</h5>
+						<input class="ipt form-control" type="text" name="name" id="name"
+							style="height: 40px; width: 300px;" value="${user.name}"
+							maxlength="30">
+		
+						<h5>电子邮件：</h5>
+						<input class="email form-control" name="email" id="email" type="email"
+							style="height: 40px; width: 300px;" value="${user.email}"
+							maxlength="25" onblur="validateEmail(this.value)"> <span
+							style="color: red; display: none;" id=emailError>请输入正确的邮件地址</span>
+						<br>
+						<h5>手机或电话号：</h5>
+						<input style="width:300px;" class="phone form-control" name="phone" id="phone" type="text"
+							minlength="6" maxlength="15" value="${user.phone}"
+							onblur="validatePhoneNumber(this.value)"> <span
+							style="color: red; display: none;" id=phoneError>请输入正确的手机或者电话号</span>
+						<br>
+						<div style="height: 20px;"></div>
+		
+						<button type="submit" style="width: 90px;" class="button button-primary  button-rounded">保存</button>
+		
+					</form>				
+				</div>
+			</div>
 
-
-
-	<div class="lt-con">
-		<div class="t-ti">
-			<hr class="t-hr">
-			<span style="font-size: 20px; font-weight: 300; line-height: 24px;">基本信息</span>
+		  </div>		
+		  <!--right end-->	
+		  
 		</div>
 
-		<div class="lt-third" style="background: #fff; margin-top: 10px;">
-			<form action="<s:url value='/user/updateUserDetail.html'/>"
-				method="POST" onsubmit="return check()">
-				<h5>真实姓名/名称：</h5>
-				<input class="ipt" type="text" name="name" id="name"
-					style="height: 40px; width: 300px;" value="${user.name}"
-					maxlength="30">
-
-				<h5>电子邮件：</h5>
-				<input class="email" name="email" id="email" type="email"
-					style="height: 40px; width: 300px;" value="${user.email}"
-					maxlength="25" onblur="validateEmail(this.value)"> <span
-					style="color: red; display: none;" id=emailError>请输入正确的邮件地址</span>
-				<br>
-				<h5>手机或电话号：</h5>
-				<input class="phone" name="phone" id="phone" type="text"
-					minlength="6" maxlength="15" value="${user.phone}"
-					onblur="validatePhoneNumber(this.value)"> <span
-					style="color: red; display: none;" id=phoneError>请输入正确的手机或者电话号</span>
-				<br>
-				<div style="height: 20px;"></div>
-
-				<button type="submit" style="width: 90px;" class="t-btn2">保存</button>
-
-			</form>
-		</div>
 	</div>
+
+</div>
+
+
+
+
 	<script type="text/javascript">
 		function updateDetail() {
 			var username = $("#username").val();

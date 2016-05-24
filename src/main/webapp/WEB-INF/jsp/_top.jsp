@@ -38,11 +38,11 @@
 	
 		<div class="col-xs-11" style="min-width:100px;">
 			<ul>
-			<li class="nav-hover"><h4>我的专利</h4></li>
-			<li><h4>通知书</h4></li>
-			<li><h4>专利缴费</h4></li>
-			<li><h4>我的好友</h4></li>
-			<li><h4>用户中心</h4></li>
+			<a href="<s:url value='/patent/list.html?currentPage=1'/>"><li class="nav-hover"><h4>我的专利</h4></li></a>
+			<a href="<s:url value='/notice/list.html?currentPage=1'/>"><li><h4>通知书</h4></li></a>
+			<a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>"><li><h4>专利缴费</h4></li></a>
+			<a href="<s:url value='/friend/list.html'/>"><li><h4>我的好友</h4></li></a>
+			<a href="<s:url value='/user/detail.html'/>"><li><h4>用户中心</h4></li></a>
 			</ul>		
 		</div>	
 

@@ -14,53 +14,81 @@
 </head>
 <body>
 <%@ include file="_top.jsp" %>
-<%@ include file="_left_nav.jsp" %>
-<%@ include file="_left_nav_fee.jsp" %>
-<div class="lt-con">
-	<div class="t-ti">
-		<hr class="t-hr">
-		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">添加费用信息</span>
+<div class="lt-con" style="min-width:1100px;">
+	<div class="container-fluid" >
+
+		<div class="row" style="margin-left:-30px;min-width:1100px;">
+		
+			<!--left begin-->
+		  <div class="col-xs-1 sidebar" style="min-width:100px;">
+			<%@ include file="_left_nav_fee.jsp" %>
+		  </div>
+		  <!--left end-->
+		  <!--right begin-->
+		  <div class="col-xs-offset-1 col-xs-11">
+			<div class="lt-right">
+				<div style="height:10px;"></div>
+				<div class="lt-box" style="padding:20px;">
+					<form action="<s:url value='/fee/addFee.html'/>" method="post" id="addFeeForm">
+					  <div class="lt-third" style="background:#fff;margin-top:10px;">
+					  
+						<h5>申请号：</h5>
+						<input style="width:400px;" class="selectPointOfInterest form-control" name="appNo" id="appNo"  type="text" onblur="loadPatent()" required>
+					     
+						<br>		
+				       	<h5>专利名称:</h5>
+				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="name" id="name" value="" readOnly="true"/>
+						<br>
+				 		<h5>第一申请人:</h5>
+					    <input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="appPerson" id="appPerson" value="" readOnly="true"/>
+					    <br>
+					    <h5>案件状态:</h5>
+					    <input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="patentStatus" id="patentStatus" value="" readOnly="true"/>
+						<br>
+						<h5>交费截止日:</h5>
+						<input style="width:400px;pisplay:inline;"  class="selectPointOfInterest form-control" type="text" class="form-control" id="startAppDateId" 
+							name="deadline" placeholder="交费截止日期选择" readonly="readonly" onclick="javascript:$('#start_date_img').click()" required> 
+						<img style="display:none;" onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" align="absmiddle" id="start_date_img">
+				        <br>
+				        <h5>交费种类:</h5>
+				        <select style="width:400px;" class="selectPointOfInterest form-control" name="feeType" id="feeType"  required>
+						  <option value=''>请选择</option>
+						  <c:forEach items="${feeTypes}" var="feeType">
+							<option value="${feeType}">${feeType}</option>
+						  </c:forEach>
+						</select>
+						<br>	
+				 		<h5>交费金额:</h5>
+					    <input style="width:400px;"  type="text" name="amount" class="selectPointOfInterest form-control" required min="1" digits="true"/>
+				 		<br>
+				 		<h5>发票抬头:</h5>
+					    <input style="width:400px;" type="text" class="form-control" name="invoiceTitle" id="invoiceTitle" value="" />
+					    <br>
+					    <div style="height:20px;"></div>
+						<button class="button button-primary  button-rounded" type="submit" style="width:90px;">保存</button>		
+					</form>				
+				</div>
+
+				
+				
+			</div>
+
+		  </div>		
+		  <!--right end-->	
+		  
+		</div>
+
 	</div>
+
+</div>
+
+
+
+
+
 	
 
-	<form action="<s:url value='/fee/addFee.html'/>" method="post" id="addFeeForm">
-	  <div class="lt-third" style="background:#fff;margin-top:10px;">
-	  
-		<h5>申请号：</h5>
-		<input class="selectPointOfInterest" name="appNo" id="appNo"  type="text" onblur="loadPatent()" required>
-	     
-		<br>		
-       	<h5>专利名称:</h5>
-       	<input class="selectPointOfInterest" type="text" name="name" id="name" value="" readOnly="true"/>
-		<br>
- 		<h5>第一申请人:</h5>
-	    <input class="selectPointOfInterest" type="text" name="appPerson" id="appPerson" value="" readOnly="true"/>
-	    <br>
-	    <h5>案件状态:</h5>
-	    <input class="selectPointOfInterest" type="text" name="patentStatus" id="patentStatus" value="" readOnly="true"/>
-		<br>
-		<h5>交费截止日:</h5>
-		<input  class="selectPointOfInterest" type="text" class="form-control" id="startAppDateId" 
-			name="deadline" placeholder="交费截止日期选择" readonly="readonly" onclick="javascript:$('#start_date_img').click()" style="width: 322px;" required> 
-		<img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" align="absmiddle" id="start_date_img">
-        <br>
-        <h5>交费种类:</h5>
-        <select style="width:332px;" class="selectPointOfInterest" name="feeType" id="feeType"  required>
-		  <option value=''>请选择</option>
-		  <c:forEach items="${feeTypes}" var="feeType">
-			<option value="${feeType}">${feeType}</option>
-		  </c:forEach>
-		</select>
-		<br>	
- 		<h5>交费金额:</h5>
-	    <input  type="text" name="amount" class="selectPointOfInterest" required min="1" digits="true"/>
- 		<br>
- 		<h5>发票抬头:</h5>
-	    <input type="text" name="invoiceTitle" id="invoiceTitle" value="" />
-	    <br>
-	    <div style="height:20px;"></div>
-		<button class="t-btn2" type="submit" style="width:90px;">保存</button>		
-	</form>
+
 
 
 </div>

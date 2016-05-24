@@ -11,27 +11,42 @@
 <%@ include file="_css.jsp" %>
 </head>
 <body>
-
 <%@ include file="_top.jsp" %>
-<%@ include file="_left_nav.jsp" %>
-<%@ include file="_left_nav_notice.jsp" %>
-<div class="lt-con">
-	<div class="t-ti">
-		<hr class="t-hr">
-		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">上传通知书</span>
+
+<div class="lt-con" style="min-width:1100px;">
+	<div class="container-fluid" >
+
+		<div class="row" style="margin-left:-30px;min-width:1100px;">
+		
+			<!--left begin-->
+		  <div class="col-xs-1 sidebar" style="min-width:100px;">
+			<%@ include file="_left_nav_notice.jsp" %>
+		  </div>
+		  <!--left end-->
+		  <!--right begin-->
+		  <div class="col-xs-offset-1 col-xs-11">
+			<div class="lt-right">
+				<div style="height:10px;"></div>
+				<div class="lt-box" style="height:400px;padding:20px;">
+					<form id="notice" action="<s:url value='/notice/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+					<input style="display:none;" id="id_notice_file" name="noticeFile" type="file" />
+					<input style="width:300px;height:33px;display:inline;" type="text" class="lt-input form-control" id="filename" name="filename" placeholder="请选择文件" readonly="readonly" required>
+					<button type="button" onclick="$('input[id=id_notice_file]').click();" class="button button-primary  button-rounded">浏览</button>
+					<button type="submit" class="button button-caution button-rounded">上传</button>
+					</form>  				
+				</div>
+			</div>
+
+		  </div>		
+		  <!--right end-->	
+		  
+		</div>
+
 	</div>
-	
-	<div class="t-box">
-		<form id="notice" action="<s:url value='/notice/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
-		<input style="display:none;" id="id_notice_file" name="noticeFile" type="file" />
-		<input style="width:300px;height:33px;" type="text" class="lt-input" id="filename" name="filename" placeholder="请选择文件" readonly="readonly" required>
-		<button type="button" onclick="$('input[id=id_notice_file]').click();" class="t-btn3">浏览</button>
-		<button type="submit" class="t-btn2">上传</button>
-		</form>  
-	</div>
-	
 
 </div>
+
+
 <script type="text/javascript">
 	jQuery(function($) {
 		$("#notice").validate({
