@@ -12,58 +12,80 @@
 </head>
 <body>
 <%@ include file="_top.jsp" %>
-<%@ include file="_left_nav.jsp" %>
-<%@ include file="_left_nav2.jsp" %>
-<div class="lt-con">
-	<div class="t-ti">
-		<hr class="t-hr">
-		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">添加专利</span>
+
+
+<div class="lt-con" style="min-width:1100px;">
+	<div class="container-fluid" >
+
+		<div class="row" style="margin-left:-30px;min-width:1100px;">
+		
+			<!--left begin-->
+		  <div class="col-xs-1 sidebar" style="min-width:100px;">
+			<%@ include file="_left_nav2.jsp" %>
+		  </div>
+		  <!--left end-->
+		  <!--right begin-->
+		  <div class="col-xs-offset-1 col-xs-11">
+			<div class="lt-right">
+				<div style="height:10px;"></div>
+				<div class="lt-box" style="padding:20px;">
+
+					<form action="<s:url value='/patent/addPatent.html'/>" method="post">
+					  <div class="lt-third" style="background:#fff;margin-top:10px;">
+					  
+						<h5>专利号：</h5>
+						<input class="selectPointOfInterest form-control" style="width:332px;"  type="text" name="appNo" id="appNo"  required/>
+						<br>	  
+				        <h5>专利名称:</h5>
+				        <input class="selectPointOfInterest form-control" style="width:332px;" type="text" name="name" id="name"  required/>	  
+					  	<br>
+				        <h5>专利类型</h5>
+				        <select style="width:332px;" class="selectPointOfInterest form-control" name="patentType.patentTypeId" id="patentTypeId" required>
+				          <option value="">全部</option>
+				          <c:forEach items="${allPatentTypes}" var="patentType">
+				            <option value="<c:out value='${patentType.patentTypeId}'/>">
+				            <c:out value="${patentType.typeDescription}"/>
+				            </option>
+				          </c:forEach>
+				        </select>
+				        <br>
+				        <h5>专利状态</h5>
+				        
+				        <select style="width:332px;" class="selectPointOfInterest form-control" name="patentStatus.patentStatusId" id="patentStatusId" required>
+				          <option value="">全部</option>
+				          <c:forEach items="${allPatentStatus}" var="patentStatus">
+				            <option value="<c:out value='${patentStatus.patentStatusId}'/>">
+				            <c:out value="${patentStatus.statusDescription}"/>
+				            </option>
+				          </c:forEach>
+				        </select>
+			
+				        <br>
+						<h5>申请人</h5>
+						<input class="selectPointOfInterest form-control" style="width:332px;"  type="text" name="appPerson" id="appPerson" />
+						<br>
+				  		<h5>申请日</h5>
+					    <input class="selectPointOfInterest form-control" style="width:332px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})"  id="startAppDateId" name="appDate" placeholder="申请时间" value="" readonly="readonly" >
+					    </li>
+					    <br>
+					    <div style="height:20px;"></div>
+					    <button class="button button-primary  button-rounded" type="submit">保存</button>
+					  </div>
+					    
+					</form>				
+				
+				</div>
+			</div>
+
+		  </div>		
+		  <!--right end-->	
+		  
+		</div>
+
 	</div>
-	
-	<form action="<s:url value='/patent/addPatent.html'/>" method="post">
-	  <div class="lt-third" style="background:#fff;margin-top:10px;">
-	  
-		<h5>专利号：</h5>
-		<input class="selectPointOfInterest"  type="text" name="appNo" id="appNo"  required/>
-		<br>	  
-        <h5>专利名称:</h5>
-        <input class="selectPointOfInterest" type="text" name="name" id="name"  required/>	  
-	  	<br>
-        <h5>专利类型</h5>
-        <select style="width:332px;" class="selectPointOfInterest" name="patentType.patentTypeId" id="patentTypeId" required>
-          <option value="">全部</option>
-          <c:forEach items="${allPatentTypes}" var="patentType">
-            <option value="<c:out value='${patentType.patentTypeId}'/>">
-            <c:out value="${patentType.typeDescription}"/>
-            </option>
-          </c:forEach>
-        </select>
-        <br>
-        <h5>专利状态</h5>
-        <label id="lblSelect">
-        <select style="width:332px;" class="selectPointOfInterest" name="patentStatus.patentStatusId" id="patentStatusId" required>
-          <option value="">全部</option>
-          <c:forEach items="${allPatentStatus}" var="patentStatus">
-            <option value="<c:out value='${patentStatus.patentStatusId}'/>">
-            <c:out value="${patentStatus.statusDescription}"/>
-            </option>
-          </c:forEach>
-        </select>
-        </label>
-        <br>
-		<h5>申请人</h5>
-		<input class="selectPointOfInterest"  type="text" name="appPerson" id="appPerson" />
-		<br>
-  		<h5>申请日</h5>
-	    <input class="selectPointOfInterest"  type="text" onclick="WdatePicker({el:'startAppDateId'})"  id="startAppDateId" name="appDate" placeholder="申请时间" value="" readonly="readonly" >
-	    <img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="18" align="absmiddle" id="start_date_img"> </li>
-	    <br>
-	    <div style="height:20px;"></div>
-	    <button class="t-btn2" type="submit">保存</button>
-	  </div>
-	    
-	</form>
-</div>
+
+</div>	
+
  
 <script type="text/javascript">
 function addDefaultOption(selectElem) {

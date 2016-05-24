@@ -28,8 +28,9 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box">
-				
-				<span style="padding:20px;">欢迎使用龙图腾专利管理系统，龙腾图一直秉承笃行、守信、努力、创新的核心价值观，成就客户、成就员工、成就企业的经营理念。为客户提供更优质的服务！</span>
+				<div style="padding:10px;">
+				<h4>欢迎使用龙图腾专利管理系统，龙腾图一直秉承笃行、守信、努力、创新的核心价值观，成就客户、成就员工、成就企业的经营理念。为客户提供更优质的服务！</h4>
+				</div>
 				</div>
 			</div>
 
