@@ -12,86 +12,106 @@
 
 <script type="text/javascript" src="<s:url value='/static/js/modernizr.js'/>"></script>
 <script type="text/javascript" src="<s:url value='/static/js/spin.js'/>"></script>
-	<style type="text/css">
-	  body {
-	    font-family: Helvetica, Arial, sans-serif;
-	    font-size: 16px;
-	  }
-	  </style>
+
 </head>
-<body style="background:#F3F3F5;" id="body" class="body">
+<body>
 <%@ include file="_top.jsp" %>
-<%@ include file="_left_nav.jsp" %>
-<%@ include file="_left_nav2.jsp" %>
-<div class="lt-con">
-  <div class="t-ti">
-    <hr class="t-hr">
-    <span style="font-size: 16px;font-weight: 300;line-height: 24px;">我的专利</span> </div>
-<!-- list beg -->
+
+<div class="lt-con" style="min-width:1100px;">
+	<div class="container-fluid" >
+
+		<div class="row" style="margin-left:-30px;min-width:1100px;">
+		
+			<!--left begin-->
+		  <div class="col-xs-1 sidebar" style="min-width:100px;">
+			<%@ include file="_left_nav2.jsp" %>
+		  </div>
+		  <!--left end-->
+		  <!--right begin-->
+		  <div class="col-xs-offset-1 col-xs-11">
+			<div class="lt-right">
+				<div style="height:10px;"></div>
+				<div class="lt-box">
+					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
+			          <div class="ta-top" style="margin:8px;">
+			          <c:if test="${accountType==0}"> 
+			          <a href="<s:url value='/patentOfficeAccount/add_form.html'/>">
+			            <button style="width:130px;" class="button button-primary  button-rounded">添加电子账户</button>  
+			            </a>
+			            </c:if> 
+			          </div>
+			          </span> </div>
+			        <table id="simple-table" class="table table-striped table-bordered table-hover" >
+			          <thead>
+			            <tr class="simple_bag">
+			              <th class="center" width="25"> <label class="pos-rel">
+			                <input type="checkbox" class="patent-check-item" id="checkall"  name="checkall" />
+			                <span class="lbl"></span> </label>
+			              </th>
+			              <th class="center" width="20">序号</th>
+			              <th width="110">中国专利电子申请的用户名</th>
+			              <th width="170">用户代码</th>
+			              <th width="90">登陆密码 </th>
+			              <th width="90" >更新时间</th>
+			              <th width="60">操作</th>
+			            </tr>
+			          </thead>
+			          <tbody>
+			            <c:forEach items="${accounts}" var="account" varStatus="status">
+			              <tr>
+			                <td class="center"><label class="pos-rel"> <span class="batch-share-item">
+			                  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.patentId}'/>">
+			                  <span class="lbl"></span></label></td>
+			                <td class="center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+			                <td><c:out value="${account.name}"/>
+			                </td>
+			                <td><c:out value="${account.username}"/></td>
+			                <td><c:out value="${account.password}"/></td>
+			                <td><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+			                <td>
+			                	<c:if test="${accountType==0}">
+			                	<a href="JavaScript:void(0)" onclick="checkLogin('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
+			                  		验证登录 
+			                  	</a>&nbsp;
+			                  	</c:if>
+			                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
+			                  		自动更新
+			                  	</a>&nbsp;
+			                  	<c:if test="${accountType==0}">
+			                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
+			                  		修改</a>&nbsp;
+			                  	<a href="JavaScript:void(0)" onclick="deleteAccount('${account.accountId}')">
+			                                                             删除 
+			                    </a> 
+			                    </c:if>                                   
+			                  </td>
+		
+			              </tr>
+			            </c:forEach>
+			          </tbody>
+			        </table>				
+				</div>
+			</div>
+
+		  </div>		
+		  <!--right end-->	
+		  
+		</div>
+
+	</div>
+
+</div>	
+
+
+
+
 
 	<div class="lt-box">
 	  <div class="main-container" id="main-container">
 	    <!-- PAGE CONTENT BEGINS -->
 	    <div class="row">
 	      <div class="col-xs-12">
-	        <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-	          <div class="ta-top" style="margin:8px;">
-	          <c:if test="${accountType==0}"> 
-	          <a href="<s:url value='/patentOfficeAccount/add_form.html'/>">
-	            <button class="t-btn3">添加电子账户</button>  
-	            </a>
-	            </c:if> 
-	          </div>
-	          </span> </div>
-	        <table id="simple-table" class="table table-striped table-bordered table-hover" >
-	          <thead>
-	            <tr class="simple_bag">
-	              <th class="center" width="25"> <label class="pos-rel">
-	                <input type="checkbox" class="patent-check-item" id="checkall"  name="checkall" />
-	                <span class="lbl"></span> </label>
-	              </th>
-	              <th class="center" width="20">序号</th>
-	              <th width="110">中国专利电子申请的用户名</th>
-	              <th width="170">用户代码</th>
-	              <th width="90">登陆密码 </th>
-	              <th width="90" >更新时间</th>
-	              <th width="60">操作</th>
-	            </tr>
-	          </thead>
-	          <tbody>
-	            <c:forEach items="${accounts}" var="account" varStatus="status">
-	              <tr>
-	                <td class="center"><label class="pos-rel"> <span class="batch-share-item">
-	                  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.patentId}'/>">
-	                  <span class="lbl"></span></label></td>
-	                <td class="center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
-	                <td><c:out value="${account.name}"/>
-	                </td>
-	                <td><c:out value="${account.username}"/></td>
-	                <td><c:out value="${account.password}"/></td>
-	                <td><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-	                <td>
-	                	<c:if test="${accountType==0}">
-	                	<a href="JavaScript:void(0)" onclick="checkLogin('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
-	                  		验证登录 
-	                  	</a>&nbsp;
-	                  	</c:if>
-	                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
-	                  		自动更新
-	                  	</a>&nbsp;
-	                  	<c:if test="${accountType==0}">
-	                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
-	                  		修改</a>&nbsp;
-	                  	<a href="JavaScript:void(0)" onclick="deleteAccount('${account.accountId}')">
-	                                                             删除 
-	                    </a> 
-	                    </c:if>                                   
-	                  </td>
-
-	              </tr>
-	            </c:forEach>
-	          </tbody>
-	        </table>
+	        
 	 
 	      </div>
 	    </div>

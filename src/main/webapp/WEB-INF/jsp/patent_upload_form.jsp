@@ -12,23 +12,41 @@
 </head>
 <body>
 <%@ include file="_top.jsp" %>
-<%@ include file="_left_nav.jsp" %>
-<%@ include file="_left_nav2.jsp" %>
-<div class="lt-con">
-	<div class="t-ti">
-		<hr class="t-hr">
-		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">上传专利</span>
-	</div>
-	<div class="t-box">
-		<form id="patent" action="<s:url value='/patent/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
-		<input style="display:none;" id="patentFile" name="patentFile" type="file" />
-		<input class="selectPointOfInterest" style="width:300px;height:35px;border: 1px solid #cccccc;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
-		<button type="button" onclick="$('input[id=patentFile]').click();" class="t-btn3">浏览</button>
-		<button type="submit" class="t-btn2">上传</button>
-		</form>  
+
+<div class="lt-con" style="min-width:1100px;">
+	<div class="container-fluid" >
+
+		<div class="row" style="margin-left:-30px;min-width:1100px;">
+		
+			<!--left begin-->
+		  <div class="col-xs-1 sidebar" style="min-width:100px;">
+			<%@ include file="_left_nav2.jsp" %>
+		  </div>
+		  <!--left end-->
+		  <!--right begin-->
+		  <div class="col-xs-offset-1 col-xs-11">
+			<div class="lt-right">
+				<div style="height:10px;"></div>
+				<div class="lt-box" style="height:300px;padding:20px;">
+
+						<form id="patent" action="<s:url value='/patent/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+						<input style="display:none;"  id="patentFile" name="patentFile" type="file" />
+						<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
+						<button type="button" onclick="$('input[id=patentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+						<button type="submit" class="t-btn2 button button-caution button-rounded">上传</button>
+						</form>  
+				</div>
+			</div>
+
+		  </div>		
+		  <!--right end-->	
+		  
+		</div>
+
 	</div>
 
 </div>
+
 <script type="text/javascript">
 	jQuery(function($) {
 		$("#patent").validate({
@@ -36,7 +54,7 @@
 				filename: 'required'
 			},
 			messages: {
-				filename: '请选择要上传的专利表格'
+				filename: '<span style="color:red;">请选择要上传的专利表格</span>'
 			},
 			submitHandler: function(form){ 
 				form.submit();     
