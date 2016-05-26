@@ -15,7 +15,7 @@ margin: 20px 35px 0px 10px;
 
 .sidebar{
 position: fixed;
-top: 99px;
+top: 109px;
 bottom: 0;
 left: 0;
 z-index: 1000;
@@ -51,7 +51,7 @@ line-height:35px;
 .lt-left li:hover{
 background: #FFFFFF;
 }
-.lt-right{min-height:700px;margin-top:99px;margin-left:15px;}
+.lt-right{min-height:700px;margin-top:109px;margin-left:15px;}
 
 .lt-left  li  a {
     display: block;
@@ -127,11 +127,12 @@ margin: 0px 15px 0px 0px;
 
 
 /*top*/
+.top{background:url(../images/bg.png) no-repeat;}
 .search-box{padding: 10px 0px 0px 10px;}
-.top_nav{background:#D31119;width:100%;}
+.top_nav{width:100%;}
 .top_nav ul li{float:left;font-size:18px;height:40px;color:#fff;padding:10px;}
 .top_nav ul li h4{margin-top:3px;}
-.top_nav ul li:hover{color:#E0FD28;background:#930;}
+.top_nav ul li:hover{color:#E0FD28;}
 .top{width: 100%;
 }
 .top-search {

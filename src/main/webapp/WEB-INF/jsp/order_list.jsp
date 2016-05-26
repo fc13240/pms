@@ -101,7 +101,7 @@
 				      <c:forEach items="${order.feeList}" var="fee" varStatus="status">
 				        <input type="hidden" name="fees" value="${fee.feeId}">
 				      </c:forEach>
-				      <div style="font-weight:700;background:#79BDF4;height:40px;line-height:30px;padding-left:10px;">
+				      <div style="font-weight:700;background:#f5fafe;height:40px;line-height:30px;padding-left:10px;">
 						<fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
 							&nbsp;&nbsp;订单号：${order.id}
 						<span style="margin-left:100px;">

@@ -12,101 +12,105 @@
 </head>
 <body>
 <%@ include file="_top.jsp" %>
-<%@ include file="_left_nav.jsp" %>
-<%@ include file="_left_nav_user.jsp" %>
-<div class="lt-con">
-	<div class="t-ti">
-		<hr class="t-hr">
-		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">联系地址</span>
-	</div>
-	<div class="lt-box">
-		<form action="<s:url value='/user/updateUserContactAddresses.html'/>" method="post">
-		  <se:csrfInput/>
-		  联系人名称:
-		  <input type="text" name="receiver" id="receiver" value="${contactAddresses.receiver}" required/>
-		  通讯地址:
-		  <select name="province" id="province" onchange="loadCities()" required>
-			<option value='${contactAddresses.province}'>${contactAddresses.provinceName}</option>
-			<c:forEach items="${provinces}" var="province">
-			  <option value="${province.id}">${province.name}</option>
-			</c:forEach>
-		  </select>
-		  <select name="city" id="city" onchange="loadDistricts()" required>
-			<option value='${contactAddresses.city}'>${contactAddresses.cityName}</option>
-		  </select>
-		  <select name="district" id="district" onchange="loadStreets()"required>
-			<option value='${contactAddresses.district}'>${contactAddresses.districtName}</option>
-		  </select>
-		  <select name="street" id="street" required>
-			<option value='${contactAddresses.street}'>${contactAddresses.streetName}</option>
-		  </select>
-		  详细地址
-		  <input type="text" name="detailAddress" id="detailAddress"  value="${contactAddresses.detailAddress}" required/>
-		  手机或固话
-		  <input type="text" name="phone" id="phone" value="${contactAddresses.phone}" required/>
-		  <input type="hidden" name="id" id="id" value="${contactAddresses.id}"/>
-		  <input type="submit" value="保存">
-		</form>
+<div class="lt-con" style="min-width:1100px;">
+	<div class="container-fluid" >
+
+		<div class="row" style="margin-left:-30px;min-width:1100px;">
+		
+			<!--left begin-->
+		  <div class="col-xs-1 sidebar" style="min-width:100px;">
+			<%@ include file="_left_nav2.jsp" %>
+		  </div>
+		  <!--left end-->
+		  <!--right begin-->
+		  <div class="col-xs-offset-1 col-xs-11">
+			<div class="lt-right">
+				<div style="height:10px;"></div>
+				<div class="lt-box" style="padding:20px;">
+					<form action="<s:url value='/user/updateUserContactAddresses.html'/>" method="post">
+					  <se:csrfInput/>
+					  联系人名称:
+					  <input type="text" name="receiver" id="receiver" value="${contactAddresses.receiver}" required/>
+					  通讯地址:
+					  <select name="province" id="province" onchange="loadCities()" required>
+						<option value='${contactAddresses.province}'>${contactAddresses.provinceName}</option>
+						<c:forEach items="${provinces}" var="province">
+						  <option value="${province.id}">${province.name}</option>
+						</c:forEach>
+					  </select>
+					  <select name="city" id="city" onchange="loadDistricts()" required>
+						<option value='${contactAddresses.city}'>${contactAddresses.cityName}</option>
+					  </select>
+					  <select name="district" id="district" onchange="loadStreets()"required>
+						<option value='${contactAddresses.district}'>${contactAddresses.districtName}</option>
+					  </select>
+					  <select name="street" id="street" required>
+						<option value='${contactAddresses.street}'>${contactAddresses.streetName}</option>
+					  </select>
+					  详细地址
+					  <input type="text" name="detailAddress" id="detailAddress"  value="${contactAddresses.detailAddress}" required/>
+					  手机或固话
+					  <input type="text" name="phone" id="phone" value="${contactAddresses.phone}" required/>
+					  <input type="hidden" name="id" id="id" value="${contactAddresses.id}"/>
+					  <input type="submit" value="保存">
+					</form>
+				</div>
+			</div>
+
+		  </div>		
+		  <!--right end-->	
+		  
+		</div>
+
 	</div>
 
-</div>
-
+</div>	
 </body>
 </html>
-
-
-
-
-            
-
-             
+       
 <script type="text/javascript">
-			jQuery(function($) {
-				//initiate dataTables plugin
-				//And for the first simple table, which doesn't have TableTools or dataTables
-				//select/deselect all rows according to table header checkbox
-				var active_class = 'active';
-				$('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
-					var th_checked = this.checked;//checkbox inside "TH" table header
-					
-					$(this).closest('table').find('tbody > tr').each(function(){
-						var row = this;
-						if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
-						else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
-					});
-				});
-				
-				//select/deselect a row when the checkbox is checked/unchecked
-				$('#simple-table').on('click', 'td input[type=checkbox]' , function(){
-					var $row = $(this).closest('tr');
-					if(this.checked) $row.addClass(active_class);
-					else $row.removeClass(active_class);
-				});
-			
-				
-			
-				/********************************/
-				//add tooltip for small view action buttons in dropdown menu
-				$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-				
-				//tooltip placement on right or left
-				function tooltip_placement(context, source) {
-					var $source = $(source);
-					var $parent = $source.closest('table')
-					var off1 = $parent.offset();
-					var w1 = $parent.width();
-			
-					var off2 = $source.offset();
-					//var w2 = $source.width();
-			
-					if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-					return 'left';
-				}
-				
-			
-			})
-		</script> 
+jQuery(function($) {
+	//initiate dataTables plugin
+	//And for the first simple table, which doesn't have TableTools or dataTables
+	//select/deselect all rows according to table header checkbox
+	var active_class = 'active';
+	$('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
+		var th_checked = this.checked;//checkbox inside "TH" table header
+		
+		$(this).closest('table').find('tbody > tr').each(function(){
+			var row = this;
+			if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
+			else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
+		});
+	});
+	
+	//select/deselect a row when the checkbox is checked/unchecked
+	$('#simple-table').on('click', 'td input[type=checkbox]' , function(){
+		var $row = $(this).closest('tr');
+		if(this.checked) $row.addClass(active_class);
+		else $row.removeClass(active_class);
+	});
 
+	
+
+	/********************************/
+	//add tooltip for small view action buttons in dropdown menu
+	$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+	
+	//tooltip placement on right or left
+	function tooltip_placement(context, source) {
+		var $source = $(source);
+		var $parent = $source.closest('table')
+		var off1 = $parent.offset();
+		var w1 = $parent.width();
+
+		var off2 = $source.offset();
+		//var w2 = $source.width();
+		if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+		return 'left';
+	}
+})
+</script> 
 <script type="text/javascript">
 function addDefaultOption(selectElem) {
 	selectElem.append("<option value=''>请选择</option>");
