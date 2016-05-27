@@ -29,30 +29,34 @@
 				<div class="lt-box" style="padding:20px;">
 					<form action="<s:url value='/user/updateUserContactAddresses.html'/>" method="post">
 					  <se:csrfInput/>
-					  联系人名称:
-					  <input type="text" name="receiver" id="receiver" value="${contactAddresses.receiver}" required/>
-					  通讯地址:
-					  <select name="province" id="province" onchange="loadCities()" required>
+						<h5>联系人名称:</h5>
+	  
+					  	<input type="text" clas="form-control" style="height: 40px; width: 300px;" name="receiver" id="receiver" value="${contactAddresses.receiver}" required/>
+					  
+						<h5>通讯地址:</h5>
+	  
+					  <select name="province" style="width:300px;" clas="form-control" id="province" onchange="loadCities()" required>
 						<option value='${contactAddresses.province}'>${contactAddresses.provinceName}</option>
 						<c:forEach items="${provinces}" var="province">
 						  <option value="${province.id}">${province.name}</option>
 						</c:forEach>
 					  </select>
-					  <select name="city" id="city" onchange="loadDistricts()" required>
+					  <select name="city" clas="form-control" style="width:300px;" id="city" onchange="loadDistricts()" required>
 						<option value='${contactAddresses.city}'>${contactAddresses.cityName}</option>
 					  </select>
-					  <select name="district" id="district" onchange="loadStreets()"required>
+					  <select name="district" clas="form-control" style="width:300px;" id="district" onchange="loadStreets()"required>
 						<option value='${contactAddresses.district}'>${contactAddresses.districtName}</option>
 					  </select>
-					  <select name="street" id="street" required>
+					  <select name="street" clas="form-control" style="width:300px;" id="street" required>
 						<option value='${contactAddresses.street}'>${contactAddresses.streetName}</option>
 					  </select>
-					  详细地址
-					  <input type="text" name="detailAddress" id="detailAddress"  value="${contactAddresses.detailAddress}" required/>
-					  手机或固话
-					  <input type="text" name="phone" id="phone" value="${contactAddresses.phone}" required/>
-					  <input type="hidden" name="id" id="id" value="${contactAddresses.id}"/>
-					  <input type="submit" value="保存">
+					  <h5>详细地址:</h5>
+					  <input type="text" clas="form-control" style="width:300px;" name="detailAddress" id="detailAddress"  value="${contactAddresses.detailAddress}" required/>
+					  <h5>手机或固话</h5>
+					  <input type="text" clas="form-control" style="width:300px;" name="phone" id="phone" value="${contactAddresses.phone}" required/>
+					  <input type="hidden" clas="form-control" name="id" id="id" value="${contactAddresses.id}"/>
+					  <div style="height: 20px;"></div>
+					  <input type="submit" class="button button-primary  button-rounded" value="保存">
 					</form>
 				</div>
 			</div>
