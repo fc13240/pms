@@ -153,6 +153,7 @@ public class PatentController {
 		int userId = PrincipalUtils.getCurrentUserId();
 		patentService.uploadPatents(is,userId);
 		return "upload_success";
+
 	}	
 	
 	@RequestMapping(path="/goods", method=RequestMethod.GET)
