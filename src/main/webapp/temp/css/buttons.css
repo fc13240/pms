@@ -300,6 +300,11 @@
     border-color: #f3ab26;
     color: #e59501; }
 
+.button-highlight.nav-active{
+	background-color:#F73358;
+	color:#fff;
+}
+
 .button-caution,
 .button-caution-flat {
   background-color: #FF4351;
