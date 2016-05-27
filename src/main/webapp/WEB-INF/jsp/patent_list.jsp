@@ -112,7 +112,7 @@
 							  </li>
 							  <li>
 								<p>专利状态</p>
-								<label id="lblSelect">
+							
 								<select class="form-control" name="patentStatus">
 								  <option value="">全部</option>
 								  <c:forEach items="${allPatentStatus}" var="patentStatus">
@@ -121,7 +121,7 @@
 									</option>
 								  </c:forEach>
 								</select>
-								</label>
+							
 							  </li>
 							  <li>
 								<p>申请日开始</p>

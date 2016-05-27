@@ -206,5 +206,5 @@ display: table-row;
 vertical-align: inherit;
 border-color: inherit;
 }
-#simple-table tr td{text-align: center; }
+#simple-table tr td{text-align: left; }
 #simple-table tr th{text-align: center;font-size:8px; }

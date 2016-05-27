@@ -33,7 +33,7 @@
 						<input type="hidden" name="feeIds" value="${fee.feeId}">
 					  </c:forEach>
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
-						<tr>
+						<tr style="text-align:left;">
 						  <td>
 						  	收货人信息
 						  	&nbsp;&nbsp;&nbsp;
