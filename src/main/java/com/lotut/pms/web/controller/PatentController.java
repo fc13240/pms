@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.User;
+import com.lotut.pms.exception.FileNotFoundException;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.PatentService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -148,12 +150,12 @@ public class PatentController {
 	}	
 	
 	@RequestMapping(path="/upload", method=RequestMethod.POST)
+	@ExceptionHandler({FileNotFoundException.class})
 	public String uploadPatents(@RequestParam("patentFile")Part patentFile) throws IOException {
 		InputStream is = patentFile.getInputStream();
 		int userId = PrincipalUtils.getCurrentUserId();
 		patentService.uploadPatents(is,userId);
 		return "upload_success";
-
 	}	
 	
 	@RequestMapping(path="/goods", method=RequestMethod.GET)
