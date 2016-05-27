@@ -10,7 +10,7 @@
 		  
 			<div class="top-search"> 
 				<div id="Button1" onClick="hidslt()" style="display:block;" class="top-sbtn" >
-				<a href="http://so.lotut.com/" target="_blank" rel="nofollow"><font color="#fff">国内外专利检索</font></a>
+				<a href="http://so.lotut.com/" target="_blank" rel="nofollow"><font color="#fff">龙图腾专利检索</font></a>
 				<a href="http://so.lotut.com/" target="_blank" rel="nofollow"><img src="<s:url value='/temp/images/search.png'/>" /></a>
 				</div>
 			</div>
