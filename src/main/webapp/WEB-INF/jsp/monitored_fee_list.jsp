@@ -494,7 +494,7 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 			
 		}
 		for (var i = 0; i < paymentStatus.length; i++) {
-			if (paymentStatus[i] == 2 || paymentStatus[i] == 3 || paymentStatus[i] == 5) {
+			if (paymentStatus[i] == 2 || paymentStatus[i] == 3 || paymentStatus[i] == 4 || paymentStatus[i] == 5) {
 				formutil.alertMessage('包含已支付或已加入订单内的记录，请重新选择！');
 				return;
 			}
