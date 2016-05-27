@@ -2,11 +2,11 @@
 <div class="top navbar-fixed-top">
 	<div class="container-fluid" style="min-width:1100px;" >
 		<div class="row">
-		  <div class="col-xs-9">
+		  <div class="col-xs-8">
 			<img src="<s:url value='/temp/images/logo.png'/>"  />
 		  </div>
 
-		  <div class="col-xs-3">
+		  <div class="col-xs-4">
 		  
 			<div class="top-search"> 
 				<div id="Button1" onClick="hidslt()" style="display:block;" class="top-sbtn" >
