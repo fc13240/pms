@@ -56,7 +56,7 @@ public class FeeServiceImpl implements FeeService {
 	@Override
 	public String FeeExportExcel(List<Long> feeIdList, String excelName) throws IOException {
 		List<Fee> fees = feeDao.getFeesByIds(feeIdList);
-		String exportExcelPath=excelName;
+		String exportExcelPath=Settings.TEMP_DIR+excelName;
 		PatentFeeExcelGenerator.writeFeeRecordsToExcel(fees, exportExcelPath);
 		return exportExcelPath;
 	}
