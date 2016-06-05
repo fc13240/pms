@@ -43,13 +43,17 @@
 				    font-weight:bold;
 			}
 	</style>
+	
+	<link href="<s:url value='/static/css/lrtk.css'/>" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript" src="<s:url value='/static/js/koala.min.1.5.js'/>"></script>	
 </head>
 
 <body class="login-layout" style=" background-image: url(<s:url value='/static/images/bacground2.jpg'/>);background-size:cover; ">
 	<div class="main-container">
 		<div class="main-content">
 			<div class="row">
-				<div class="col-sm-10 col-sm-offset-1">
+				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-container">
 				
 
@@ -95,17 +99,7 @@
 												<div class="space"></div>
 
 												<div class="clearfix">
-<!-- 													<label class="inline"> -->
-<!-- 														<input type="checkbox" class="ace" /> -->
-<%-- 														<span class="lbl"> 记住密码</span> --%>
-<!-- 													</label> -->
-													
-													
-
-											
 													<input type="submit" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;"  value="登录">
-
-													
 												</div>
 
 												<div class="space-4"></div>
@@ -115,8 +109,6 @@
 									</div><!-- /.widget-main -->
 
 									<div class="toolbar clearfix">
-						
-
 										<div>
 											<a href="<s:url value='/user/registerForm.html'/>"  class="user-signup-link" >
 												我要注册
@@ -132,6 +124,64 @@
 
 					</div>
 				</div><!-- /.col -->
+				<div class="lt-flash col-sm-5" style="margin-top:200px;">
+				
+					<!-- 代码 开始 -->
+					<div id="fsD1" class="focus" style="">  
+					    <div id="D1pic1" class="fPic">  
+					        <div class="fcon" style="display: none;">    
+					            <a target="_blank" href="http://www.lanrentuku.com/"><img src="<s:url value='/static/images/01.jpg'/>" style="opacity: 1; "></a>
+					            <span class="shadow"><a target="_blank" href="http://ln.qq.com/a/20140625/015503.htm">专利搜索</a></span>
+					        </div>
+					        
+					        <div class="fcon" style="display: none;">
+					            <a target="_blank" href="http://www.lanrentuku.com/"><img src="<s:url value='/static/images/02.jpg'/>" style="opacity: 1; "></a>
+					            <span class="shadow"><a target="_blank" href="http://ln.qq.com/a/20140625/015503.htm">专利交易</a></span>
+					        </div>
+					        
+					        <div class="fcon" style="display: none;">
+					            <a target="_blank" href="http://www.lanrentuku.com/"><img src="<s:url value='/static/images/03.jpg'/>" style="opacity: 1; "></a>
+					            <span class="shadow"><a target="_blank" href="http://ln.qq.com/a/20140625/015503.htm">专利搜索</a></span>
+					        </div>
+					        
+					        <div class="fcon" style="display: none;">
+					            <a target="_blank" href="http://www.lanrentuku.com/"><img src="<s:url value='/static/images/04.jpg'/>" style="opacity: 1; "></a>
+					            <span class="shadow"><a target="_blank" href="http://ln.qq.com/a/20140625/015503.htm">专利搜索</a></span>
+					        </div>    
+					    </div>
+					    <div class="fbg">  
+					    <div class="D1fBt" id="D1fBt">  
+					        <a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>1</i></a>  
+					        <a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>2</i></a>  
+					        <a href="javascript:void(0)" hidefocus="true" target="_self" class="current"><i>3</i></a>  
+					        <a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>4</i></a>  
+					    </div>  
+					    </div>  
+					    <span class="prev"></span>   
+					    <span class="next"></span>    
+					</div>  
+					<script type="text/javascript">
+						Qfast.add('widgets', { path: "<s:url value='/static/js/terminator2.2.min.js'/>", type: "js", requires: ['fx'] });  
+						Qfast(false, 'widgets', function () {
+							K.tabs({
+								id: 'fsD1',   //焦点图包裹id  
+								conId: "D1pic1",  //** 大图域包裹id  
+								tabId:"D1fBt",  
+								tabTn:"a",
+								conCn: '.fcon', //** 大图域配置class       
+								auto: 1,   //自动播放 1或0
+								effect: 'fade',   //效果配置
+								eType: 'click', //** 鼠标事件
+								pageBt:true,//是否有按钮切换页码
+								bns: ['.prev', '.next'],//** 前后按钮配置class                          
+								interval: 3000  //** 停顿时间  
+							}) 
+						})  
+					</script>
+					<!-- 代码 结束 -->				
+				
+				</div>
+				
 			</div><!-- /.row -->
 		</div><!-- /.main-content -->
 	</div><!-- /.main-container -->
