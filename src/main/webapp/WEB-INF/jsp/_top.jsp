@@ -9,12 +9,12 @@
 		  <div class="mod-sitemap clear">
 		    <div class="head-top-rk f-fr">
 		      <div class="item">
-		      龙图腾首页&nbsp;&nbsp; <a href="http://so.lotut.com/" target="_blank" rel="nofollow"><font style="color:#666">龙图腾专利检索</font></a>
-		     <!-- <img src="<s:url value='/temp/images/user2.png'/>" width="35px;" /> --> 
-			  <span class="user-info">
-			  <small>欢迎您!</small>
+		      <a href="http://so.lotut.com/" target="_blank" rel="nofollow"><font style="color:#666">龙图腾专利检索</font></a>
+		    
+			 
+			 欢迎您!
 			  <se:authentication property="principal.username" />
-			  </span>
+			
 			  <a href="javascript:$('#logoutForm').submit();" style="color:#666;">退出</a>
 		
 			 <form action="<s:url value='/user/logout.html'/>" method="post" id="logoutForm">
