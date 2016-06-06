@@ -49,7 +49,7 @@
 	<script type="text/javascript" src="<s:url value='/static/js/koala.min.1.5.js'/>"></script>	
 </head>
 
-<body class="login-layout" style=" background-image: url(<s:url value='/static/images/bacground2.jpg'/>);background-size:cover; ">
+<body class="login-layout" >
 	<div class="main-container">
 		<div class="main-content">
 			<div class="row">

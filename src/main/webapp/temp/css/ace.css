@@ -12496,9 +12496,7 @@ td .lbl:only-child {
   width: 375px;
   margin: 0 auto;
 }
-.login-layout {
-  background-color: #1D2024;
-}
+
 .login-layout .main-container:before {
   display: none;
 }
@@ -12519,7 +12517,7 @@ td .lbl:only-child {
   border-bottom: none;
   box-shadow: none;
   padding: 6px;
-  background-color: #394557;
+ 
   -moz-transform: scale(0,1) translate(-150px);
   -webkit-transform: scale(0,1) translate(-150px);
   -o-transform: scale(0,1) translate(-150px);

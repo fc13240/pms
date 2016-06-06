@@ -3,7 +3,7 @@ html {
   position: relative;
 }
 body {
-  background-color: #e4e6e9;
+
   min-height: 100%;
   padding-bottom: 0;
   font-family: 'Open Sans';
@@ -12503,9 +12503,7 @@ td .lbl:only-child {
   width: 375px;
   margin: 0 auto;
 }
-.login-layout {
-  background-color: #1D2024;
-}
+
 .login-layout .main-container:before {
   display: none;
 }
