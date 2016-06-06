@@ -130,23 +130,23 @@
 					<div id="fsD1" class="focus" style="">  
 					    <div id="D1pic1" class="fPic">  
 					        <div class="fcon" style="display: none;">    
-					            <a target="_blank" href="http://www.lanrentuku.com/"><img src="<s:url value='/static/images/01.jpg'/>" style="opacity: 1; "></a>
-					            <span class="shadow"><a target="_blank" href="http://ln.qq.com/a/20140625/015503.htm">专利搜索</a></span>
+					            <a target="_blank" href=""><img src="<s:url value='/static/images/01.jpg'/>" style="opacity: 1; "></a>
+					            <span class="shadow"><a target="_blank" href="">专利搜索</a></span>
 					        </div>
 					        
 					        <div class="fcon" style="display: none;">
-					            <a target="_blank" href="http://www.lanrentuku.com/"><img src="<s:url value='/static/images/02.jpg'/>" style="opacity: 1; "></a>
-					            <span class="shadow"><a target="_blank" href="http://ln.qq.com/a/20140625/015503.htm">专利交易</a></span>
+					            <a target="_blank" href=""><img src="<s:url value='/static/images/02.jpg'/>" style="opacity: 1; "></a>
+					            <span class="shadow"><a target="_blank" href="">专利交易</a></span>
 					        </div>
 					        
 					        <div class="fcon" style="display: none;">
-					            <a target="_blank" href="http://www.lanrentuku.com/"><img src="<s:url value='/static/images/03.jpg'/>" style="opacity: 1; "></a>
-					            <span class="shadow"><a target="_blank" href="http://ln.qq.com/a/20140625/015503.htm">专利搜索</a></span>
+					            <a target="_blank" href=""><img src="<s:url value='/static/images/03.jpg'/>" style="opacity: 1; "></a>
+					            <span class="shadow"><a target="_blank" href="">专利搜索</a></span>
 					        </div>
 					        
 					        <div class="fcon" style="display: none;">
-					            <a target="_blank" href="http://www.lanrentuku.com/"><img src="<s:url value='/static/images/04.jpg'/>" style="opacity: 1; "></a>
-					            <span class="shadow"><a target="_blank" href="http://ln.qq.com/a/20140625/015503.htm">专利搜索</a></span>
+					            <a target="_blank" href=""><img src="<s:url value='/static/images/04.jpg'/>" style="opacity: 1; "></a>
+					            <span class="shadow"><a target="_blank" href="">专利搜索</a></span>
 					        </div>    
 					    </div>
 					    <div class="fbg">  
