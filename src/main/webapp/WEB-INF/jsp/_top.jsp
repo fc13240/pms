@@ -37,7 +37,7 @@
 	      <!-- 主菜单-特色服务 all-category end / --> 
 	      <!-- 主菜单-列表 menu  -->
 	      <ul class="menu">
-	        <li><a href="<s:url value='/patent/list.html?currentPage=1'/>" class="active">我的专利</a></li>
+	        <li><a href="<s:url value='/patent/list.html?currentPage=1'/>">我的专利</a></li>
 	        <li><a href="<s:url value='/notice/list.html?currentPage=1'/>" target="_blank">通知书</a></li>
 	        <li><a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>" target="_blank" >专利交费</a></li>
 	        <li><a href="<s:url value='/friend/list.html'/>" target="_blank">我的好友</a></li>
