@@ -130,32 +130,21 @@
 					<div id="fsD1" class="focus" style="">  
 					    <div id="D1pic1" class="fPic">  
 					        <div class="fcon" style="display: none;">    
-					            <a target="_blank" href=""><img src="<s:url value='/static/images/01.jpg'/>" style="opacity: 1; "></a>
-					            <span class="shadow"><a target="_blank" href="">专利搜索</a></span>
+					            <a target="_blank" href="http://so.lotut.com"><img src="<s:url value='/static/images/01.jpg'/>" style="opacity: 1; "></a>
+					            <span class="shadow"><a target="_blank" href="http://so.lotut.com">专利搜索</a></span>
 					        </div>
 					        
 					        <div class="fcon" style="display: none;">
-					            <a target="_blank" href=""><img src="<s:url value='/static/images/02.jpg'/>" style="opacity: 1; "></a>
-					            <span class="shadow"><a target="_blank" href="">专利交易</a></span>
+					            <a target="_blank" href="http://g.lotut.com"><img src="<s:url value='/static/images/02.jpg'/>" style="opacity: 1; "></a>
+					            <span class="shadow"><a target="_blank" href="http://g.lotut.com">专利管理</a></span>
 					        </div>
-					        
-					        <div class="fcon" style="display: none;">
-					            <a target="_blank" href=""><img src="<s:url value='/static/images/03.jpg'/>" style="opacity: 1; "></a>
-					            <span class="shadow"><a target="_blank" href="">专利搜索</a></span>
-					        </div>
-					        
-					        <div class="fcon" style="display: none;">
-					            <a target="_blank" href=""><img src="<s:url value='/static/images/04.jpg'/>" style="opacity: 1; "></a>
-					            <span class="shadow"><a target="_blank" href="">专利搜索</a></span>
-					        </div>    
+					  
 					    </div>
 					    <div class="fbg">  
 					    <div class="D1fBt" id="D1fBt">  
 					        <a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>1</i></a>  
 					        <a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>2</i></a>  
-					        <a href="javascript:void(0)" hidefocus="true" target="_self" class="current"><i>3</i></a>  
-					        <a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>4</i></a>  
-					    </div>  
+					          </div>  
 					    </div>  
 					    <span class="prev"></span>   
 					    <span class="next"></span>    
