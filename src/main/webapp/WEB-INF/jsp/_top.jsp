@@ -28,13 +28,10 @@
 	  </div>
 	</div>
 	<div style="height:80px;padding:5px;">
-	<img src="<s:url value='/temp/images/logo.png'/>">
+		<img src="<s:url value='/temp/images/logo.png'/>">
 	</div>
 	<div class="nav clear">
-	    <div class="container"> 
-	      <!-- 主菜单-特色服务 all-category -->
-
-	      <!-- 主菜单-特色服务 all-category end / --> 
+	    <div class="" style="margin-left:127px;"> 
 	      <!-- 主菜单-列表 menu  -->
 	      <ul class="menu">
 	        <li><a href="<s:url value='/patent/list.html?currentPage=1'/>">我的专利</a></li>

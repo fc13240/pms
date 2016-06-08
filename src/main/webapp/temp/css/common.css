@@ -33,7 +33,7 @@ text-transform: uppercase;
 color: #333333;
 text-align: center;
 height: 50px;
-line-height: 50px;
+line-height: 60px;
 font-weight: 900;
 background: #D9DEE4;
 }
@@ -155,9 +155,10 @@ zoom: 1;
 }
 .nav .menu li {
 float: left;
+width:130px;
 height: 40px;
 line-height: 40px;
-margin-left: 10px;
+
 }
 .nav .menu li a:hover, .nav .menu li a.active {
 text-decoration: none;
