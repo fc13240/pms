@@ -35,15 +35,19 @@
 					  <tr>
 						<th colspan="9"> 
 							<input type="checkbox" class="fee-check-item">
+						
+							<span class="batch-share" style="margin-left:10px;">
+								  <a href="javascript:updateMonitorStatus(2)">
+								  <button class="button button-caution button-rounded" style="font-weight:500;font-size:16px;width:110px;">加入购物车</button>
+								  </a>
+							</span> 
+							
 						    <span class="batch-share">
-						    	<a href="javascript:updateMonitorStatus(2)">加入监控</a>
-						    </span>
-			<%-- 			    <span class="batch-share"> --%>
-			<!-- 			    	<a href="javascript:updateMonitorStatus(1)">放弃监控</a> -->
-			<%-- 			    </span>  --%>
-							<span class="batch-share">
-						    	 &nbsp;|&nbsp;<a href="javascript:joinOrder()">加入订单</a>
-						    </span>
+						    <a href="javascript:joinOrder()">
+						    <button class="button button-primary  button-rounded" style="font-weight:500;font-size:16px;">立即交费</button>
+						   </a>
+						   </span>							
+						
 						</th>
 					  </tr>
 					  <tr>
@@ -55,7 +59,7 @@
 						<th>缴费种类</th>
 						<th>缴费截止日</th>
 						<th>缴费金额</th>
-						<th>监控状态</th>
+						<th>购物车</th>
 					  </tr>
 					  <c:forEach items="${fees}" var="fee" varStatus="status">
 						<tr>

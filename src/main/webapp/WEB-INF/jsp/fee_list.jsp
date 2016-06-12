@@ -85,7 +85,7 @@
 						<th>交费种类</th>
 						<th>交费截止日</th>
 						<th>交费金额</th>
-						<th>监控状态</th>
+						<th>购物车</th>
 					  </tr>
 					  <c:forEach items="${fees}" var="fee" varStatus="status">
 						<tr>
