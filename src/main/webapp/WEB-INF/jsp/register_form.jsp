@@ -7,7 +7,7 @@
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta charset="utf-8" />
-	<title>用户注册</title>
+	<title>龙图腾专利管理系统——用户注册</title>
 
 	<meta name="description" content="User login page" />
 	<!-- bootstrap & fontawesome -->

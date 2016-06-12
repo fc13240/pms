@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>专利详细</title>
+<title>龙图腾专利管理系统——专利详细</title>
 <%@ include file="_css.jsp" %>
 </head>
 <body>

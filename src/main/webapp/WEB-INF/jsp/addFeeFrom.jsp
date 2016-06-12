@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>添加专利</title>
+<title>龙图腾专利管理系统——添加专利</title>
 <%@ include file="_css.jsp" %>
     <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
     <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
