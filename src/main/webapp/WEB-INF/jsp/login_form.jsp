@@ -50,14 +50,19 @@
 </head>
 
 <body class="login-layout" >
+<div style="position:absolute;z-index: 99999; left:20px; top:0px; width:100px; height:100px;">
+<img src="<s:url value='/temp/images/logo_long.png'/>" width="80px;">
+</div>  
 <table width="100%">
 	<tr>             									
-	    <td height="94" align="center" valign="top" background="<s:url value='/static/images/top-di.png'/>"><table width="1000" border="0" cellspacing="0" cellpadding="0">
-	        <tbody><tr>
-	          <td width="560" height="94" background="<s:url value='/static/images/logo-login.png'/>">&nbsp;</td>
-	          <td width="440" align="right" valign="middle"><div style="float:right; margin-right:20px; color:#54a932;">&nbsp;&nbsp;</div></td>
-	        </tr>
-	      </tbody></table></td>
+	    <td height="94" align="center" valign="top" background="<s:url value='/static/images/top-di.png'/>">
+	    	<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+		        <tr>
+		         <td width="100"></td>
+		          <td width="560" height="94" background="<s:url value='/static/images/logo-login.png'/>">&nbsp;</td>
+		          <td align="right" valign="middle"><div style="float:right; margin-right:20px; color:#54a932;">&nbsp;&nbsp;</div></td>
+		        </tr>
+	     	</table></td>
 	</tr>
 </table>
 

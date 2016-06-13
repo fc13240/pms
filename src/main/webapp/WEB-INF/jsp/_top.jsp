@@ -29,8 +29,8 @@
 		  </div>
 	  </div>
 	</div>
-	<div style="height:80px;padding:5px;margin-left:100px;">
-		<img src="<s:url value='/temp/images/logo.png'/>">
+	<div style="height:80px;padding:5px;margin-left:120px;">
+		<img src="<s:url value='/temp/images/logo.png'/>" style="width:250px;">
 	</div>
 	<div class="nav clear">
 	    <div class="" style="margin-left:127px;"> 
