@@ -8,6 +8,7 @@
 
 	
 	<http pattern="/static/**" security="none" />
+	<http pattern="/temp/**" security="none" />
 
 	<http use-expressions="false">
 		<intercept-url pattern="/loginForm.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
