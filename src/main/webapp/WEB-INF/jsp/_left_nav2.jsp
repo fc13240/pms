@@ -17,7 +17,7 @@
 	<h5>单个添加</h5>
 	</a> 
 	</li>
-	<li  class=""> <a  href="<s:url value='/patent/searchAddPatentFrom.html'/>">
+	<li  class=""> <a  href="<s:url value='/patent/searchPatent.html'/>">
 	<h5>查询添加</h5>
 	</a> 
 	</li>	

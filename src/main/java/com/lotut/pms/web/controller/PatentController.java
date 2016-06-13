@@ -232,7 +232,7 @@ public class PatentController {
 		}
 	}
 	
-	@RequestMapping(path="/searchPatent", method=RequestMethod.POST)
+	@RequestMapping(path="/searchPatent")
 	public String searchPatent(){
 
 		return "patent_search";
