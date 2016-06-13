@@ -17,6 +17,10 @@
 	<h5>单个添加</h5>
 	</a> 
 	</li>
+	<li  class=""> <a  href="<s:url value='/patent/searchAddPatentFrom.html'/>">
+	<h5>查询添加</h5>
+	</a> 
+	</li>	
 	<li  class=""> <a href="<s:url value='/patent/showUploadForm.html'/>">
 	<h5>批量上传</h5>
 	</a> 
