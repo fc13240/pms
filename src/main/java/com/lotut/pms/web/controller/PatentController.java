@@ -231,4 +231,10 @@ public class PatentController {
 			out.close();
 		}
 	}
+	
+	@RequestMapping(path="/searchPatent", method=RequestMethod.POST)
+	public String searchPatent(){
+
+		return "patent_search";
+	}
 }
