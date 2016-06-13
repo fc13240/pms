@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
+<div style="position:absolute;z-index: 99999; left:20px; top:0px; width:100px; height:100px;">
+<img src="<s:url value='/temp/images/logo_long.png'/>" width="80px;">
+</div>
 <div class="top navbar-fixed-top" style="background:#ffffff;">
 	<div class="toolbar">
 	  <div class="container clear">
@@ -27,7 +29,7 @@
 		  </div>
 	  </div>
 	</div>
-	<div style="height:80px;padding:5px;">
+	<div style="height:80px;padding:5px;margin-left:100px;">
 		<img src="<s:url value='/temp/images/logo.png'/>">
 	</div>
 	<div class="nav clear">

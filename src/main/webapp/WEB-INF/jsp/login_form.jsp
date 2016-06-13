@@ -54,8 +54,8 @@
 	<tr>             									
 	    <td height="94" align="center" valign="top" background="<s:url value='/static/images/top-di.png'/>"><table width="1000" border="0" cellspacing="0" cellpadding="0">
 	        <tbody><tr>
-	          <td width="500" height="94" background="<s:url value='/static/images/logo-login.png'/>">&nbsp;</td>
-	          <td width="500" align="right" valign="middle"><div style="float:right; margin-right:20px; color:#54a932;">&nbsp;&nbsp;</div></td>
+	          <td width="560" height="94" background="<s:url value='/static/images/logo-login.png'/>">&nbsp;</td>
+	          <td width="440" align="right" valign="middle"><div style="float:right; margin-right:20px; color:#54a932;">&nbsp;&nbsp;</div></td>
 	        </tr>
 	      </tbody></table></td>
 	</tr>
