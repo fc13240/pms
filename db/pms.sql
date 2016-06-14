@@ -509,3 +509,7 @@ CREATE TABLE if not exists patent_office_accounts (
   PRIMARY KEY (`account_id`),
   CONSTRAINT `fk_patent_office_account_users` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE patents ADD COLUMN publish_date DATE;
+ALTER TABLE patents ADD COLUMN publish_no VARCHAR(100);
+ALTER TABLE patents ADD COLUMN proxy_Org VARCHAR(300);

@@ -13,6 +13,11 @@ public class PatentType {
 		this.patentTypeId = patentTypeId;
 	}
 	
+	public PatentType(int patentTypeId, String typeDescription) {
+		this.patentTypeId = patentTypeId;
+		this.typeDescription = typeDescription;
+	}
+	
 
 	public int getPatentTypeId() {
 		return patentTypeId;

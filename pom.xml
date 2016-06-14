@@ -8,7 +8,6 @@
 	<name>Patent Management System</name>
 	<url>http://g.lotut.com</url>
 
-
 	<!-- ################## Properties ################## -->		 
 	<properties>
 		<junit.version>4.12</junit.version>
@@ -36,6 +35,8 @@
 		<logback.version>1.1.6</logback.version>
 		<encoding.utf-8>utf-8</encoding.utf-8>
 		<encoding>${encoding.utf-8}</encoding>
+		<mongodb-driver.version>3.0.4</mongodb-driver.version>
+		<es.version>1.7.3</es.version>
 	</properties>
 	
 	
@@ -284,6 +285,36 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
 			<version>${logback.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.mongodb</groupId>
+		    <artifactId>bson</artifactId>
+		    <version>${mongodb-driver.version}</version>
+		</dependency>	
+		
+		<dependency>
+		    <groupId>org.mongodb</groupId>
+		    <artifactId>mongodb-driver-core</artifactId>
+		    <version>${mongodb-driver.version}</version>
+		</dependency>
+		
+	    <dependency>
+	        <groupId>org.mongodb</groupId>
+	        <artifactId>mongodb-driver</artifactId>
+	        <version>${mongodb-driver.version}</version>
+	    </dependency>		
+	    
+		<dependency>
+		    <groupId>org.elasticsearch</groupId>
+		    <artifactId>elasticsearch</artifactId>
+		    <version>${es.version}</version>
+		</dependency>	 
+		
+		<dependency>
+		    <groupId>org.apache.lucene</groupId>
+		    <artifactId>lucene-core</artifactId>
+		    <version>4.10.4</version>
 		</dependency>		
 	</dependencies>
 	 

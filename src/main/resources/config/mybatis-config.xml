@@ -10,6 +10,7 @@
 
 	<typeAliases>
 		<typeAlias alias="Patent" type="com.lotut.pms.domain.Patent"/>
+		<!-- <typeAlias alias="Patent" type="com.lotut.pms.domain.search.Patent"/> -->
 		<typeAlias alias="GoodsFirstColumn" type="com.lotut.pms.domain.GoodsFirstColumn"/>
 		<typeAlias alias="GoodsSecondColumn" type="com.lotut.pms.domain.GoodsSecondColumn"/>
 		<typeAlias alias="GoodsDetail" type="com.lotut.pms.domain.GoodsDetail"/>
