@@ -50,7 +50,7 @@
 					  </tr>
 					  <tr>
 						<th colspan="9"> <input type="checkbox" class="fee-check-item">
-						  <span class="batch-share"><a href="javascript:updateMonitorStatus(2)">加入监控</a></span> 
+						  <span class="batch-share"><a href="javascript:updateMonitorStatus(2)">进入购物车</a></span> 
 						</th>
 					  </tr>
 					  <tr>
@@ -58,7 +58,7 @@
 						<th>缴费种类</th>
 						<th>缴费截止日</th>
 						<th>缴费金额</th>
-						<th>监控状态</th>
+						<th>购物车</th>
 					  </tr>
 					  <c:forEach items="${fees}" var="fee" varStatus="status">
 						<tr>
