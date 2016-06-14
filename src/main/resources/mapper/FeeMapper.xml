@@ -347,7 +347,7 @@
 	
 	<insert id="saveFee">
 		insert into fees(deadline, fee_type, amount, patent, fee_monitor_status, invoice_title,fee_owner)
-		values(#{fee.deadline}, #{fee.feeType},#{fee.amount}, #{patentId}, 2, #{fee.invoiceTitle},#{userId})				
+		values(#{fee.deadline}, #{fee.feeType},#{fee.amount}, #{patentId}, 2, #{fee.invoiceTitle,javaType=string,jdbcType=VARCHAR},#{userId})				
 	</insert>
 	
 	<select id="getCountByDeadlinePayment" parameterType="int" resultType="map">
