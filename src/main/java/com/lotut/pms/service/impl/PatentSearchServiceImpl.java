@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.lotut.pms.dao.PatentMongoDao;
 import com.lotut.pms.dao.PatentSearchDao;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.service.PatentSearchService;
 
@@ -20,8 +21,8 @@ public class PatentSearchServiceImpl implements PatentSearchService {
 	}
 
 	@Override
-	public List<Patent> search(String keyword) {
-		return patentSearchDao.search(keyword);
+	public List<Patent> search(String keyword,Page page) {
+		return patentSearchDao.search(keyword,page);
 	}
 
 	@Override

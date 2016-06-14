@@ -61,6 +61,7 @@
 						  <th width="110">公布日</th>
 						  <th width="60">专利类型</th>
 						  <th width="110">代理机构</th>
+						  <th width="110">申请人</th>
 						</tr>
 					  </thead>
 					  <tbody>
@@ -95,11 +96,40 @@
 							<td>
 								<c:out value="${patent.proxyOrg}"/>
 							</td>
-							
+							<td>
+								<c:out value="${patent.appPerson}"/>
+							</td>							
 						  </tr>
 						</c:forEach>
 					  </tbody>
-					</table>				
+					</table>
+					<div style="height:30px;background:#fff;">
+			            <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1&q=${param.q}">首页</a>
+			              <c:choose>
+			                <c:when test="${page.currentPage - 1 > 0}"> <a href="?currentPage=${page.currentPage - 1}&q=${param.q}">上一页</a> </c:when>
+			                <c:when test="${page.currentPage - 1 <= 0}"> <a href="?currentPage=1&q=${param.q}">上一页</a> </c:when>
+			              </c:choose>
+			              <c:choose>
+			                <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}&q=${param.q}">下一页</a> </c:when>
+			                <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?currentPage=${page.currentPage+1}&q=${param.q}">下一页</a> </c:when>
+			                <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?currentPage=${page.totalPages}&q=${param.q}">下一页</a> </c:when>
+			              </c:choose>
+			              <c:choose>
+			                <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}&q=${param.q}">尾页</a> </c:when>
+			                <c:otherwise> <a href="?currentPage=${page.totalPages}&q=${param.q}">尾页</a> </c:otherwise>
+			              </c:choose>
+			              <!-- 分页功能 End -->
+			              <input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onKeyDown="gotoPageForEnter(event)"/>
+			              <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
+			              <select onChange="setPageSize()" style="height:25px;" id="pageSizeSelect">
+			                <option value="10">10</option>
+			                <option value="20">20</option>
+			                <option value="50">50</option>
+			                <option value="100">100</option>
+			              </select>
+			              条记录 </span> </div>
+			        </div>					
+									
 				</div>
 			
 			
@@ -132,8 +162,16 @@
 				uniquePatentNos.push(patents_checked[i]);
 			}
 		}		
-		var patents = uniquePatentNos.join(",");		
-		location.href = "<s:url value='/patent/addPatents.html'/>?patents=" + patents;
+		var patents = uniquePatentNos.join(",");
+		
+		$.ajax({
+			url: "<s:url value='/patent/addPatents.html'/>?patents=" + patents, 
+			type: 'get', 
+			success: function(data) {
+				formutil.alertMessage('添加成功!');
+			}
+		});			
+		
 	}
 </script>
 

@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.regex.Pattern;
 
 public class SearchFieldUtils {
-	private static Pattern appNoPattern = Pattern.compile("^\\d{12}\\.?[\\d|X]$", Pattern.CASE_INSENSITIVE);
+	private static Pattern appNoPattern = Pattern.compile("^\\d{8,12}\\.?[\\d|X]$", Pattern.CASE_INSENSITIVE);
 	private static Pattern publishNoPattern = Pattern.compile("^CN\\d{5}.*", Pattern.CASE_INSENSITIVE);
 	private static Pattern datePattern = Pattern.compile("^\\d{4}[-/.]?\\d{2}[-/.]?\\d{2}$", Pattern.CASE_INSENSITIVE);
 	private static int APPNO_NO_DOT_LENGTH = 13;
@@ -58,7 +58,7 @@ public class SearchFieldUtils {
 	}
 	
 	public static void main(String[] args) {
-		String str = "CN201482771U";
-		System.out.println(isPublishNo(str));
+		String str = "88254553.X";
+		System.out.println(isAppNo(str));
 	}
 }

@@ -21,6 +21,7 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.sort.SortOrder;
 
 import com.lotut.pms.dao.PatentSearchDao;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.util.SearchFieldUtils;
@@ -40,15 +41,15 @@ public class PatentSearchDaoImpl implements PatentSearchDao {
 	}
 	
 	@Override
-	public List<Patent> search(String keyword) {
-		List<String> docIds = searchPatents(keyword);
+	public List<Patent> search(String keyword,Page page) {
+		List<String> docIds = searchPatents(keyword,page);
 		List<Document> docs = getPatentsByIds(docIds);
 		List<Patent> patents = convertDocsToPatents(docs);
 		return patents;
 	}
 	
 
-	private List<String> searchPatents(String keyword) {
+	private List<String> searchPatents(String keyword,Page page) {
 		List<String> docIds = new ArrayList<>();
 		SearchRequestBuilder requestBuilder = esClient.prepareSearch("pss")
 				.setTypes("patent");
@@ -57,44 +58,45 @@ public class PatentSearchDaoImpl implements PatentSearchDao {
 			keyword = "\"" + keyword + "\"";
 			requestBuilder.setQuery(queryStringQuery(keyword)
 									.field("appPerson", 2)
-									.field("inventPerson", 2)
-									.field("address.fullAddress", 2)
-									.field("patentName", 8)
-									.field("proxyOrg", 2)
-									.field("proxyPerson", 2)
-									.field("abstract")
-									.field("ipc.fullIpc"));
+									.field("patentName", 1)
+									.field("proxyOrg", 4));
 		} else if (SearchFieldUtils.isAppNo(keyword)) {
 			requestBuilder.setPostFilter(termFilter("appNo", SearchFieldUtils.getAppNo(keyword)));
-		} else if (SearchFieldUtils.isPublishNo(keyword)) {
-			requestBuilder.setPostFilter(termFilter("publishNo", SearchFieldUtils.getPublishNo(keyword)));
-		} else if (SearchFieldUtils.isDate(keyword)) {
-			long dateInMills = SearchFieldUtils.getDate(keyword).getTime();
-			requestBuilder.setPostFilter(termFilter("appDate", dateInMills));
 		} else {
 			requestBuilder.setQuery(boolQuery()
-					.should(matchPhraseQuery("appPerson", keyword).slop(DEFAULT_SLOP))
-					.should(matchPhraseQuery("inventPerson", keyword).slop(DEFAULT_SLOP))
-					.should(matchPhraseQuery("address.fullAddress", keyword).slop(DEFAULT_SLOP))
-					.should(matchPhraseQuery("patentName", keyword).boost(3).slop(DEFAULT_SLOP))
-					.should(matchPhraseQuery("proxyOrg", keyword).slop(DEFAULT_SLOP))
-					.should(matchPhraseQuery("proxyPerson", keyword).slop(DEFAULT_SLOP))
-					.should(matchPhraseQuery("abstract", keyword).slop(DEFAULT_SLOP))
+					.should(matchPhraseQuery("appPerson", keyword).boost(2).slop(DEFAULT_SLOP))
+					.should(matchPhraseQuery("patentName", keyword).slop(DEFAULT_SLOP))
+					.should(matchPhraseQuery("proxyOrg", keyword).boost(4).slop(DEFAULT_SLOP))
 					);
 			
 		}
 		
-		requestBuilder.setFetchSource(false).setSize(100);
-		SortOrder sortOrder = SortOrder.DESC;
-		requestBuilder.addSort("appDate", sortOrder);
+		requestBuilder.setFetchSource(false);
+		requestBuilder.addSort("_score", SortOrder.DESC);
+		requestBuilder.addSort("appDate", SortOrder.DESC);
 
-		// 设置是否按查询匹配度排序
-		/*requestBuilder.setExplain(true);*/
-
+		/*SearchResponse searchResponseCount = requestBuilder.execute().actionGet();
+		searchResponseCount.getHits().getTotalHits();
+		int totalCount=(int)searchResponseCount.getHits().getTotalHits();
+		page.setTotalRecords(totalCount);
+		if ((page.getCurrentPage() > 0) && (page.getPageSize() > 0)) {
+				requestBuilder.setFrom(page.getStartIndex());
+				requestBuilder.setSize(page.getPageSize());
+			}*/
+		
+		if ((page.getCurrentPage() > 0) && (page.getPageSize() > 0)) {
+			requestBuilder.setFrom(page.getStartIndex());
+			requestBuilder.setSize(page.getPageSize());
+		}
 		
 		SearchResponse searchResponse = requestBuilder.execute().actionGet();
 		System.out.println("搜索用时 " + searchResponse.getTookInMillis() / 1000.0 + " 秒");
 		System.out.println(searchResponse.getHits().getTotalHits() + "个匹配文档");
+		
+		int totalCount=(int)searchResponse.getHits().getTotalHits();
+		page.setTotalRecords(totalCount);
+
+		
 		
 		SearchHit[] hits = searchResponse.getHits().getHits();
 		for (SearchHit hit: hits) {
