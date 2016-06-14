@@ -1,19 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<div style="position:absolute;z-index: 99999; left:20px; top:0px; width:100px; height:100px;">
+<div style="position: fixed;z-index: 99999; left:20px; top:0px; width:100px; height:100px;">
 <img src="<s:url value='/temp/images/logo_long.png'/>" width="80px;">
 </div>
 <div class="top navbar-fixed-top" style="background:#ffffff;">
 	<div class="toolbar">
 	  <div class="container clear">
-	      <div class="mod-sitemap-wecome f-fl"> <span>您好，欢迎光临龙图腾软件管理！</span></div>
+	      <div class="mod-sitemap-wecome f-fl"> <span>您好，欢迎光临龙图腾专利管理系统！</span></div>
 	   
 		  <div class="mod-sitemap clear">
 		    <div class="head-top-rk f-fr">
 		      <div class="item">
-		      <a href="http://so.lotut.com/" target="_blank" rel="nofollow"><font style="color:#666">龙图腾专利检索</font></a>
-		    
-			 
 			 欢迎您!
 			  <se:authentication property="principal.username" />
 			
@@ -30,7 +27,7 @@
 	  </div>
 	</div>
 	<div style="height:80px;padding:5px;margin-left:120px;">
-		<img src="<s:url value='/temp/images/logo.png'/>" style="width:250px;">
+		<img src="<s:url value='/temp/images/logo.png'/>" style="width:220px;">
 	</div>
 	<div class="nav clear">
 	    <div class="" style="margin-left:127px;"> 

@@ -34,7 +34,10 @@
 						<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
 						<button type="button" onclick="$('input[id=patentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 						<button type="submit" class="t-btn2 button button-caution button-rounded">上传</button>
-						</form>  
+						</form> 
+						<div style="height:10px;">&nbsp;</div> 
+						<span style="color:#666;">(文件格式：从专利局网站http://cpquery.sipo.gov.cn/下载的表格或者与其格式相同的自制表格。)
+						</span>
 				</div>
 			</div>
 

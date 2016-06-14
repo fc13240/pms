@@ -33,7 +33,10 @@
 					<input style="width:300px;height:33px;display:inline;" type="text" class="lt-input form-control" id="filename" name="filename" placeholder="请选择文件" readonly="readonly" required>
 					<button type="button" onclick="$('input[id=id_notice_file]').click();" class="button button-primary  button-rounded">浏览</button>
 					<button type="submit" class="button button-caution button-rounded">上传</button>
-					</form>  				
+					</form> 
+					<div style="height:10px;">&nbsp;</div> 
+					<span style="color:#666;">(文件格式：从CPC客户端批量导出且未经任何处理的通知书压缩包。)
+					</span>					 				
 				</div>
 			</div>
 
