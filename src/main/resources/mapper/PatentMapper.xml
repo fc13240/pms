@@ -246,31 +246,18 @@
 	</select>	
 	
 	<insert id="insertOrUpdatePatent" parameterType="Patent" useGeneratedKeys="true" keyProperty="patentId">
-		insert into patents(app_no, patent_name, app_person, app_date,patent_status_text, patent_type, patent_status, patent_owner)
+		insert into patents(app_no, patent_name, app_person, app_date,patent_status_text, patent_type, patent_status, patent_owner, proxy_Org, publish_date, publish_no)
 		values(#{appNo}, #{name,javaType=string,jdbcType=VARCHAR}, #{appPerson,javaType=string,jdbcType=VARCHAR}, #{appDate,javaType=date,jdbcType=DATE},
 		 #{patentStatusText,javaType=string,jdbcType=VARCHAR}, 
-			   #{patentType.patentTypeId,jdbcType=INTEGER}, #{patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER}, #{ownerId})
+			   #{patentType.patentTypeId,jdbcType=INTEGER}, #{patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER}, #{ownerId},#{proxyOrg,javaType=string,jdbcType=VARCHAR},#{publishDate,javaType=date,jdbcType=DATE},#{publishNo,javaType=string,jdbcType=VARCHAR})
 		on duplicate key update 
 			patent_name = #{name,javaType=string,jdbcType=VARCHAR}, app_person = #{appPerson,javaType=string,jdbcType=VARCHAR},
 			app_date = #{appDate,javaType=date,jdbcType=DATE},
 			patent_status_text = #{patentStatusText,javaType=string,jdbcType=VARCHAR}, patent_type = #{patentType.patentTypeId},
-			patent_status = #{patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER}
-	</insert>
-	
-	<insert id="insertOrUpdatePatents" parameterType="list" useGeneratedKeys="true" keyProperty="patentId">
-		insert into patents(app_no, patent_name, app_person, app_date,patent_status_text, patent_type, patent_status, patent_owner)
-		values
-		<foreach item="patent" collection="patents" separator=",">
-				(#{patent.appNo}, #{patent.name,javaType=string,jdbcType=VARCHAR}, #{patent.appPerson,javaType=string,jdbcType=VARCHAR}, #{patent.appDate,javaType=date,jdbcType=DATE},
-				 #{patent.patentStatusText,javaType=string,jdbcType=VARCHAR}, 
-					   #{patent.patentType.patentTypeId,jdbcType=INTEGER}, #{patent.patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER}, #{ownerId})
-			on duplicate key update 
-				patent_name = #{patent.name,javaType=string,jdbcType=VARCHAR}, app_person = #{patent.appPerson,javaType=string,jdbcType=VARCHAR},
-				app_date = #{patent.appDate,javaType=date,jdbcType=DATE},
-				patent_status_text = #{patent.patentStatusText,javaType=string,jdbcType=VARCHAR}, patent_type = #{patent.patentType.patentTypeId},
-				patent_status = #{patent.patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER}
-		</foreach>		 
-		
+			patent_status = #{patentStatus.patentStatusId,javaType=int,jdbcType=INTEGER},
+			proxy_Org=#{proxyOrg,javaType=string,jdbcType=VARCHAR},
+			publish_date=#{publishDate,javaType=date,jdbcType=DATE},
+			publish_no=#{publishNo,javaType=string,jdbcType=VARCHAR}
 	</insert>
 	
 	<insert id="insertPatent" parameterType="Patent" useGeneratedKeys="true" keyProperty="patentId">

@@ -91,9 +91,14 @@ public class PatentServiceImpl implements PatentService {
 	}
 
 	@Override
-	@Transactional
 	public boolean  uploadPatents(InputStream is,int userId) throws IOException {
 		List<Patent> patents = PatentExcelParser.parsePatentFile(is,userId);
+		return addOrUpdatePatents(patents, userId);
+	}
+	
+	@Override
+	@Transactional
+	public boolean  addOrUpdatePatents(List<Patent> patents,int userId) {
 		for (Patent patent: patents) {
 			patentDao.insertOrUpdatePatent(patent);
 		}
@@ -171,21 +176,7 @@ public class PatentServiceImpl implements PatentService {
 	@Override
 	public void autoUpdatePatents(InputStream is,int userId) throws IOException {
 		List<Patent> patents = PatentExcelParser.parsePatentFile(is,userId);
-		patentDao.insertOrUpdatePatents(patents);
-		List<Map<String, Integer>> userPatentList = new ArrayList<>();
-		for (Patent patent: patents) {
-			boolean isNewPatent = patent.getPatentId() != 0;
-			if (isNewPatent) {
-				HashMap<String, Integer> userPatentMap = new HashMap<>();
-				userPatentMap.put("user", patent.getOwnerId());
-				userPatentMap.put("patent", (int) patent.getPatentId());
-				userPatentList.add(userPatentMap);
-			}
-		}
-		if (userPatentList.size() > 0) {
-			sharePatentDao.insertUserPatents(userPatentList);
-		}
-		
+		addOrUpdatePatents(patents, userId);
 	}
 
 	@Override

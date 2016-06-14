@@ -4,23 +4,55 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.bson.types.ObjectId;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 public class Patent {
 	private long patentId;
+	private ObjectId objectId;
 	private String appNo;
 	private String name;
+	private String publishNo;
 	private PatentType patentType;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date appDate;
+	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
+	private Date publishDate;
 	private String appPerson;
 	private String inventPerson;
 	private PatentStatus patentStatus;
 	private String patentStatusText;
 	private String internalCode;
 	private int ownerId;
+	private String proxyOrg;
 	private List<User> shareUsers;
+	
+	public String getPublishNo() {
+		return publishNo;
+	}
+
+	public void setPublishNo(String publishNo) {
+		this.publishNo = publishNo;
+	}
+
+	public Date getPublishDate() {
+		return publishDate;
+	}
+
+	public void setPublishDate(Date publishDate) {
+		this.publishDate = publishDate;
+	}
+
+	public String getProxyOrg() {
+		return proxyOrg;
+	}
+
+	public void setProxyOrg(String proxyOrg) {
+		this.proxyOrg = proxyOrg;
+	}
+
+
 	
 	public Patent() {
 		
@@ -176,5 +208,15 @@ public class Patent {
 	public void setPatentStatusText(String patentStatusText) {
 		this.patentStatusText = patentStatusText;
 	}
+
+	public ObjectId getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(ObjectId objectId) {
+		this.objectId = objectId;
+	}
+	
+	
 	
 }

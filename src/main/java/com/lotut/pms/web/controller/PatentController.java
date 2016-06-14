@@ -232,9 +232,5 @@ public class PatentController {
 		}
 	}
 	
-	@RequestMapping(path="/searchPatent")
-	public String searchPatent(){
-
-		return "patent_search";
-	}
+	
 }

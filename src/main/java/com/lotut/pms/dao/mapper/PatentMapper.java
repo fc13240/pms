@@ -46,8 +46,6 @@ public interface PatentMapper {
 	
 	void insertOrUpdatePatent(Patent patent);
 	
-	void insertOrUpdatePatents(List<Patent> patents);
-	
 	void insertPatent(Patent patent);
 	
 	void updatePatent(Patent patent);

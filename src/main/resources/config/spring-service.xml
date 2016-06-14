@@ -46,5 +46,11 @@
 	
 	<bean name="patentOfficeAccountService" class="com.lotut.pms.service.impl.PatentOfficeAccountServiceImpl">
 		<constructor-arg ref="patentOfficeAccountDao"/>
-	</bean>				
+	</bean>
+	
+	<bean id="patentSearchService" class="com.lotut.pms.service.impl.PatentSearchServiceImpl">
+		<constructor-arg ref="patentSearchDao"/>
+		<constructor-arg ref="patentMongoDao"/>
+	</bean>
+	
 </beans>
