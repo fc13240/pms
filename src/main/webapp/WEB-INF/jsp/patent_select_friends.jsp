@@ -33,12 +33,19 @@
 						  <c:forEach items="${paramValues.patents}" var="patent">
 							<input type="hidden" class="form-control" name="patents" value="<c:out value='${patent}'/>">
 						  </c:forEach>
-						  <ul>
-							<li style="width: 385px;">
-							  <input name="keyword" style="display:inline;width:300px;" class="form-control" id="keywordId" value="<c:out value='${param.keyword}'/>" placeholder="用户名/姓名" class="t-input"/>
-							  <button class="button button-caution button-rounded">查询</button>
-							</li>
-						  </ul>
+						<table class="search-table">
+						<tr>
+						<td>
+						<input name="keyword" style="display:inline;width:300px;" class="form-control" id="keywordId" value="<c:out value='${param.keyword}'/>" placeholder="用户名/姓名" class="t-input"/>
+						</td>
+						<td>
+						<button type="submit" class="button button-caution button-rounded">查询</button>
+						</td>
+						</tr>
+						</table>
+							  
+							  
+						
 						</form>
 					  </div>
 					  <div style="margin-top:20px;width:500px;">
@@ -65,7 +72,7 @@
 								</tr>
 							  </c:forEach>
 							  <tr>
-								<td colspan="4"><input type="button" class="btn btn-primary btn-block" id="addShareBtn" value="确定"/></td>
+								<td colspan="4"><input type="button" class="button button-caution button-rounded" id="addShareBtn" value="确定"/></td>
 							  </tr>
 							</tbody>
 						  </table>
