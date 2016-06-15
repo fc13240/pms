@@ -16,17 +16,7 @@
 
 <div class="lt-con" style="min-width:1100px;">
 
-<form class="form-inline">
-  <div class="form-group">
-    <label for="exampleInputName2">Name</label>
-    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputEmail2">Email</label>
-    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
-  </div>
-  <button type="submit" class="btn btn-default">Send invitation</button>
-</form>	
+
 
 	<div class="container-fluid" >
 
@@ -37,7 +27,10 @@
 		  </div>
 		  <!--left end-->
 		  <div class="col-xs-offset-1 col-xs-11">
+		  
 			<div class="lt-right">
+			
+			
 				<div style="height:10px;"></div>
 				<!-- menu begin -->
 				<div class="lt-box">
@@ -120,11 +113,54 @@
 						  
 						  
 						  <div class="t-third">
-						  <table>
+						  
+						  
+						  
+						  <table class="search-table">
 							  <tr>
-							  <td></td>
+							  <td>专利类型</td>
+							  <td>专利状态</td>
+							  <td>申请日开始</td>
+							  <td>-</td>
+							  <td>申请日结束</td>
+							  <td>关键字</td>
+							  <td></td>	
 							  </tr>
-							  
+							  <tr>
+							  <td>
+								<select  style="width:100px;" class="selectPointOfInterest form-control" name="patentType">
+								  <option value="">全部</option>
+								  <c:forEach items="${allPatentTypes}" var="patentType">
+									<option value="<c:out value='${patentType.patentTypeId}'/>">
+									<c:out value="${patentType.typeDescription}"/>
+									</option>
+								  </c:forEach>
+								</select>
+							  </td>
+							  <td>
+								<select style="width:121px;" class="form-control" name="patentStatus">
+								  <option value="">全部</option>
+								  <c:forEach items="${allPatentStatus}" var="patentStatus">
+									<option value="<c:out value='${patentStatus.patentStatusId}'/>">
+									<c:out value="${patentStatus.statusDescription}"/>
+									</option>
+								  </c:forEach>
+								</select>
+							  </td>
+							  <td>
+								<input class="form-control" style="width:179px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >							  
+							  </td>
+							  <td></td>
+							  <td>
+								<input class="lt-input form-control" style="width:179px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >
+							  </td>
+							  <td>
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>							  
+							  </td>
+							  <td>
+							  <button class="button button-caution button-rounded" style="width:80px;">查询</button>
+							  </td>
+							  </tr>							  
 						  </table>
 							<ul >
 							  <li>

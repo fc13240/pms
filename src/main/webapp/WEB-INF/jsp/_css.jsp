@@ -3,7 +3,6 @@
 
 <!-- 可选的Bootstrap主题文件（一般不用引入） -->
 <link rel="stylesheet" href="<s:url value='/temp/css/bootstrap-theme.min.css'/>">
-
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="<s:url value='/temp/js/jquery.min.js'/>"></script>
 <script src="<s:url value='/temp/js/jquery-ui.min.js'/>" type="text/javascript"></script>
