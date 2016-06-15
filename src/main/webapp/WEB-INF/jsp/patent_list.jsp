@@ -94,10 +94,18 @@
 				<!-- search begin -->
 				<div class="lt-box">
 					<div class="search-box">
-						<form action="<s:url value='/patent/search.html'/>" method="get">
+						<form class="form-inline" action="<s:url value='/patent/search.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-						  <div class="t-third" style="clear:both;">
 						  
+						  
+						  
+						  <div class="t-third">
+						  <table>
+							  <tr>
+							  <td></td>
+							  </tr>
+							  
+						  </table>
 							<ul >
 							  <li>
 								<p>专利类型</p>
