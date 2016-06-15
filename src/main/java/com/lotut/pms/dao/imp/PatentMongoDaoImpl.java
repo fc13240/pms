@@ -73,7 +73,7 @@ public class PatentMongoDaoImpl implements PatentMongoDao{
 		return null;
 	}
 	private String getAppNo(String str){
-		if(str.length()==14 &&str.contains(".")){
+		if(str.contains(".")){
 			String[] str1=str.split("\\.");
 			StringBuilder sb=new StringBuilder();
 			sb.append(str1[0]);

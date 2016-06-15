@@ -30,9 +30,9 @@
 				<div class="lt-box">
 					<div class="search-box">
 						<form action="<s:url value='/patent/searchPatent.html'/>" method="get">
-						  <div class="t-third" style="clear:both;">
+						  <div class="t-third" style="clear:both;text-align:center;">
 						  <input type="text" style="width:400px;height:35px;display:inline;" placeholder="申请号/名称/申请人/代理机构" name="q"	 class="text" id="keywordId" />
-							<input type="submit" value="搜索"  id="mc-embedded-subscribe" class="button" />
+							<input type="submit" value="专利库搜索"  id="mc-embedded-subscribe" class="button" style="background: #D31119; color: #fff;width:150px;height:36px;"/>
 						  </div>
 						</form>
 					</div>
@@ -41,8 +41,8 @@
 				<div class="lt-box">
 					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
 					  <div class="ta-top" style="margin:8px;"> 
-						<a href="javascript:batchShare()">
-						<button class="button button-caution button-rounded">一键加入</button> 
+						<a href="javascript:batchAddPatents()">
+						<button class="button button-caution button-rounded" style="width:150px;height:36px;">一键加入管理</button> 
 						</a>	          
 					  </div>
 					  </span> </div>
@@ -55,50 +55,53 @@
 						  </th>
 						  <th class="center" width="35">序号</th>
 						  <th width="110">申请号/专利号</th>
-						  <th width="110">公布号</th>
 						  <th width="170">专利名称</th>
+						  <th width="110">申请人</th>
+						  <th width="110">代理机构</th>
 						  <th width="110">申请日</th>
+						  <th width="110">公布号</th>
 						  <th width="110">公布日</th>
 						  <th width="60">专利类型</th>
-						  <th width="110">代理机构</th>
-						  <th width="110">申请人</th>
+						  
+						  
 						</tr>
 					  </thead>
 					  <tbody>
 						<c:forEach items="${patent}" var="patent" varStatus="status">
 						  <tr>
-							<td class="center">
+							<td class="center" style="text-align:center">
 								<label class="pos-rel"> <span class="batch-share-item">
 									  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.objectId}'/>">
 									  <span class="lbl"></span>
 								</label>
 							</td>
-							<td class="center"> ${status.count} </td>
-							<td>
+							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+							<td style="text-align:center">
 								<c:out value="${patent.appNo}"/>
 							</td>
-							<td>
-								<c:out value="${patent.publishNo}"/>
-							</td>
-							<td>
+							<td style="text-align:center">
 								<c:out value="${patent.name}"/>
 							</td>
-							
-							<td class="hidden-480">
+							<td style="text-align:center">
+								<c:out value="${patent.appPerson}"/>
+							</td>
+							<td style="text-align:center">
+								<c:out value="${patent.proxyOrg}"/>
+							</td>	
+							<td style="text-align:center">
 								<fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/>
 							</td>
-							<td>
+							<td style="text-align:center">
+								<c:out value="${patent.publishNo}"/>
+							</td>
+							<td style="text-align:center">
 								<fmt:formatDate value="${patent.publishDate}" pattern="yyyy-MM-dd"/>
 							</td>
-							<td>
+							<td style="text-align:center">
 								<c:out value="${patent.patentType.typeDescription}"/>
 							</td>
-							<td>
-								<c:out value="${patent.proxyOrg}"/>
-							</td>
-							<td>
-								<c:out value="${patent.appPerson}"/>
-							</td>							
+							
+													
 						  </tr>
 						</c:forEach>
 					  </tbody>
@@ -148,7 +151,7 @@
 		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
 	});
 	
-	function batchShare() {
+	function batchAddPatents() {
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 		var uniquePatentNos = []
 		if (!patentSelected) {
@@ -171,8 +174,58 @@
 				formutil.alertMessage('添加成功!');
 			}
 		});			
+	}
+	
+	function gotoPage() {
+		var pageNo = document.getElementById("page.pageNo").value;
+		
+		if (isNaN(pageNo)) {
+			alert("请输入数值");
+			return;
+		}
+		
+		if(pageNo==""){
+			alert("请输入数值")
+			return;
+		}
+		
+		pageNo = parseInt(pageNo);
+		
+		if (pageNo < 1 || pageNo > parseInt("${page.totalPages}")) {
+			alert("只能输入1-${page.totalPages}之间的数值");
+			return;
+		}
+		
+		var url = "<s:url value='/patent/searchPatent.html'/>?currentPage=" + pageNo+"&q="+"${param.q}";
+		
+		location.href = url
 		
 	}
+	
+	function gotoPageForEnter(event) {
+		var e = event ? event : window.event;
+				
+		if(event.keyCode == 13) {
+			gotoPage();
+		}
+	}
+	
 </script>
-
+<script type="text/javascript">
+	$(function() {
+		formutil.setElementValue("#pageSizeSelect", ${page.pageSize});
+	});
+	
+	function setPageSize() {
+		var pageSize = $("#pageSizeSelect").val();
+		
+		$.ajax({
+			url: "<s:url value='/user/setPageSize.html'/>?pageSize=" + pageSize, 
+			type: 'get', 
+			success: function() {
+				location.reload();
+			}
+		});		
+	}	
+</script>
 </body>
