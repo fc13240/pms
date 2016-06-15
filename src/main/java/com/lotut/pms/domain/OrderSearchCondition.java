@@ -51,7 +51,12 @@ public class OrderSearchCondition {
 		this.keywordType = keywordType;
 	}
 	public String getKeyword() {
-		return keyword;
+		if(keyword==null){
+			return "";
+		}else{
+			return keyword.trim();
+		}
+		
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
@@ -68,7 +73,7 @@ public class OrderSearchCondition {
 		String startAppDateStr = startAppDate == null ? "" : formatter.format(startAppDate);
 		String endAppDateStr = endAppDate == null ? "" : formatter.format(endAppDate);
 		String orderStatusStr = orderStatus == null ? "" : orderStatus.toString();
-		String keywordStr = keyword == null ? "" : keyword;
+		String keywordStr = keyword == null ? "" : keyword.trim();
 		
 		return "orderStatus=" + orderStatusStr + "&startAppDate="
 				+ startAppDateStr + "&endAppDate=" + endAppDateStr + "&keyword=" + keywordStr;
