@@ -18,7 +18,7 @@
 	</a> 
 	</li>
 	<li  class=""> <a  href="<s:url value='/patent/searchPatent.html?q='/>">
-	<h5>查询添加</h5>
+	<h5>搜索添加</h5>
 	</a> 
 	</li>	
 	<li  class=""> <a href="<s:url value='/patent/showUploadForm.html'/>">
