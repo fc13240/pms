@@ -37,13 +37,13 @@
 							<input type="checkbox" class="fee-check-item">
 						
 							<span class="batch-share" style="margin-left:10px;">
-								  <a href="javascript:updateMonitorStatus(2)">
+								  <a href="javascript:return void" onclick="updateMonitorStatus(2)">
 								  <button class="button button-caution button-rounded" style="font-weight:500;font-size:16px;width:110px;">加入购物车</button>
 								  </a>
 							</span> 
 							
 						    <span class="batch-share">
-						    <a href="javascript:joinOrder()">
+						    <a href="javascript:return void" onclick="joinOrder()">
 						    <button class="button button-primary  button-rounded" style="font-weight:500;font-size:16px;">立即交费</button>
 						   </a>
 						   </span>							

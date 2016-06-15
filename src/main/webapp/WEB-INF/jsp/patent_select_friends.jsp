@@ -71,11 +71,10 @@
 								  <td><c:out value="${friend.name}"/></td>
 								</tr>
 							  </c:forEach>
-							  <tr>
-								<td colspan="4"><input type="button" class="button button-caution button-rounded" id="addShareBtn" value="确定"/></td>
-							  </tr>
+							
 							</tbody>
 						  </table>
+						  <input type="button" class="button button-caution button-rounded" id="addShareBtn" value="确定"/>
 						</form>
 					  </div>
 				</div>
