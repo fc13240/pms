@@ -63,33 +63,42 @@
 				  <form action="<s:url value='/order/search.html'/>" method="get">
 				    <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 				    <div class="t-third">
-				      <ul>
-				        <li>
-				          <p>支付状态</p>
-				          <select name="orderStatus" class="selectPointOfInterest form-control">
-				            <option value="">全部</option>
-				            <c:forEach items="${allOrderStatus}" var="orderStatus">
-				              <option value="<c:out value='${orderStatus.statusId}'/>">
-				              <c:out value="${orderStatus.statusDescription}"/>
-				              </option>
-				            </c:forEach>
-				          </select>
-				        </li>
-				        <li>
-				          <p>订单日期开始</p>
-				          <input class="form-control"  type="text" onclick="WdatePicker({el:'startAppDateId'})"  id="startAppDateId" name="startAppDate" placeholder="开始时间" value="" readonly="readonly" >
-				          <img style="display:none;" onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="18" align="absmiddle" id="start_date_img"> </li>
-				        <li>
-				          <p>订单日期截止</p>
-				          <input class="form-control" type="text" onclick="WdatePicker({el:'endAppDateId'})" id="endAppDateId" name="endAppDate" placeholder="结束时间" value="" readonly="readonly" >
-				          <img style="display:none;" onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img"> </li>
-				        <li style="width: 385px;">
-				          <p>订单号</p>
-				          <input name="keyword" style="width:300px; display:inline;" id="keywordId" value="" placeholder="订单号" class="t-input form-control"/>
-				          <button class="button button-caution button-rounded" type="submit">查询</button>
-				        </li>
-				        <div style="clear:both;"></div>
-				      </ul>
+				    
+				    <table class="search-table">
+						<tr>
+							<td>支付状态</td>
+							<td>订单日期开始</td>
+							<td></td>
+							<td>订单日期截止</td>
+							<td>订单号</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>
+					          <select style="width:110px;" name="orderStatus" class="selectPointOfInterest form-control">
+					            <option value="">全部</option>
+					            <c:forEach items="${allOrderStatus}" var="orderStatus">
+					              <option value="<c:out value='${orderStatus.statusId}'/>">
+					              <c:out value="${orderStatus.statusDescription}"/>
+					              </option>
+					            </c:forEach>
+					          </select>
+							</td>
+							<td>
+							<input style="width:110px;" class="form-control"  type="text" onclick="WdatePicker({el:'startAppDateId'})"  id="startAppDateId" name="startAppDate" placeholder="开始时间" value="" readonly="readonly" >
+							</td>
+							<td>-</td>
+							<td>
+							<input style="width:110px;" class="form-control" type="text" onclick="WdatePicker({el:'endAppDateId'})" id="endAppDateId" name="endAppDate" placeholder="结束时间" value="" readonly="readonly" >
+							</td>
+							<td>
+							<input name="keyword" style="width:300px; display:inline;" id="keywordId" value="" placeholder="订单号" class="t-input form-control"/>
+							</td>
+							<td><button type="submit" style="margin-top:3px;" class="button button-rounded button-highlight">导出费用清单</button></td>
+						</tr>
+						
+					</table>		
+				
 				    </div>
 				  </form>
 				  </div>
@@ -105,7 +114,7 @@
 						<fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
 							&nbsp;&nbsp;订单号：${order.id}
 						<span style="margin-left:100px;">
-							<button type="submit" style="margin-top:3px;" class="button button-rounded button-highlight">导出费用清单</button>
+							
 						</span>
 				      </div>
 				      <table id="simple-table" class="table table-striped table-bordered table-hover">
