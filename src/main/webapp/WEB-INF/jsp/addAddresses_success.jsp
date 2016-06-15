@@ -26,12 +26,12 @@
 		  <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
 				<div style="height:10px;"></div>
-				<div class="lt-box">
+				<div class="lt-box" style="padding:30px;">
 					<div class="widget-box">
 					  <label class="block clearfix"> <span class="block input-icon input-icon-right" style="font-size:20px;"> 操作成功！ </span> </label>
 					</div>
 					<!-- /.widget-box -->
-					<div class="toolbar center"> <a href="<s:url value='/user/getContactAddresses.html'/>"  > <i class="ace-icon fa fa-arrow-left"></i> 返回 </a> </div>
+					<div class="toolbar center"> <a href="<s:url value='/user/getContactAddresses.html'/>"  style="margin-left:20px;" > <i class="ace-icon fa fa-arrow-left"></i> 返回 </a> </div>
 					</div>
 				</div>
 			</div>
