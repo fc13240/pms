@@ -75,14 +75,6 @@ public class PatentSearchDaoImpl implements PatentSearchDao {
 		requestBuilder.addSort("_score", SortOrder.DESC);
 		requestBuilder.addSort("appDate", SortOrder.DESC);
 
-		/*SearchResponse searchResponseCount = requestBuilder.execute().actionGet();
-		searchResponseCount.getHits().getTotalHits();
-		int totalCount=(int)searchResponseCount.getHits().getTotalHits();
-		page.setTotalRecords(totalCount);
-		if ((page.getCurrentPage() > 0) && (page.getPageSize() > 0)) {
-				requestBuilder.setFrom(page.getStartIndex());
-				requestBuilder.setSize(page.getPageSize());
-			}*/
 		
 		if ((page.getCurrentPage() > 0) && (page.getPageSize() > 0)) {
 			requestBuilder.setFrom(page.getStartIndex());
