@@ -192,19 +192,19 @@
 							<td class="center"><label class="pos-rel"> <span class="batch-share-item">
 							  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.patentId}'/>">
 							  <span class="lbl"></span></label></td>
-							<td class="center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
-							<td><c:out value="${patent.appNo}"/>
+							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+							<td style="text-align:center"><c:out value="${patent.appNo}"/>
 							</td>
-							<td class="hidden-480"><c:out value="${patent.name}"/></td>
-							<td><c:out value="${patent.appPerson}"/></td>
-							<td class="hidden-480"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
-							<td><c:out value="${patent.patentType.typeDescription}"/></td>
-							<td><c:out value="${patent.patentStatusText}"/></td>
-							<td><input style="width:60px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
+							<td class="hidden-480" style="text-align:center"><c:out value="${patent.name}"/></td>
+							<td style="text-align:center"><c:out value="${patent.appPerson}"/></td>
+							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
+							<td style="text-align:center"><c:out value="${patent.patentType.typeDescription}"/></td>
+							<td style="text-align:center"><c:out value="${patent.patentStatusText}"/></td>
+							<td style="text-align:center"><input style="width:60px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
 							</td>
-							<td><c:out value="${patent.shareUsersAsString}"/>
+							<td style="text-align:center"><c:out value="${patent.shareUsersAsString}"/>
 							</td>
-							<td><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
+							<td ><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
 							  分享
 							  </a>&nbsp;
 							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
