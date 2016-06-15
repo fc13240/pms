@@ -42,7 +42,7 @@
 					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
 					  <div class="ta-top" style="margin:8px;"> 
 						<a href="javascript:batchAddPatents()">
-						<button class="button button-caution button-rounded">一键加入</button> 
+						<button class="button button-caution button-rounded" style="width:150px;height:36px;">一键加入管理</button> 
 						</a>	          
 					  </div>
 					  </span> </div>
@@ -57,18 +57,19 @@
 						  <th width="110">申请号/专利号</th>
 						  <th width="170">专利名称</th>
 						  <th width="110">申请人</th>
+						  <th width="110">代理机构</th>
 						  <th width="110">申请日</th>
 						  <th width="110">公布号</th>
 						  <th width="110">公布日</th>
 						  <th width="60">专利类型</th>
-						  <th width="110">代理机构</th>
+						  
 						  
 						</tr>
 					  </thead>
 					  <tbody>
 						<c:forEach items="${patent}" var="patent" varStatus="status">
 						  <tr>
-							<td class="center">
+							<td class="center" style="text-align:center">
 								<label class="pos-rel"> <span class="batch-share-item">
 									  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.objectId}'/>">
 									  <span class="lbl"></span>
@@ -83,6 +84,9 @@
 							</td>
 							<td style="text-align:center">
 								<c:out value="${patent.appPerson}"/>
+							</td>
+							<td style="text-align:center">
+								<c:out value="${patent.proxyOrg}"/>
 							</td>	
 							<td style="text-align:center">
 								<fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/>
@@ -96,9 +100,7 @@
 							<td style="text-align:center">
 								<c:out value="${patent.patentType.typeDescription}"/>
 							</td>
-							<td style="text-align:center">
-								<c:out value="${patent.proxyOrg}"/>
-							</td>
+							
 													
 						  </tr>
 						</c:forEach>
