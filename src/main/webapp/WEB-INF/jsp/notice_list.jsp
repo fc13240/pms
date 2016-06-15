@@ -141,75 +141,73 @@
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 						  <div class="t-third" style="clear:both;">
 						  
-							<ul >
-							  <li>
-						        <p>专利类型</p>
-						      
-						        <select class="selectPointOfInterest form-control" name="patentType">
+						  
+							<table class="search-table">
+							  <tr>
+							  <td>专利类型</td>
+							  <td>通知状态</td>
+							  <td>通知类型</td>
+							  <td>纸件申请</td>
+							  <td>发文日起始</td>
+							  <td></td>
+							  <td>发文日结束</td>
+							  <td>关键字</td>
+							  <td></td>	
+							  </tr>
+							  <tr>
+							  <td>
+						        <select style="width:100px;" class="selectPointOfInterest form-control" name="patentType">
 						          <option value="">全部</option>
 						          <c:forEach items="${patentTypes}" var="patentType">
 						            <option value="<c:out value='${patentType.patentTypeId}'/>">
 						            <c:out value="${patentType.typeDescription}"/>
 						            </option>
 						          </c:forEach>
-						        </select>
-							  </li>
-							  <li>
-						        <p>通知状态</p>
-						   
-						        <select class="selectPointOfInterest form-control" name="noticeProcessStatus">
+						        </select>							  
+							  </td>
+							  <td>
+						        <select style="width:93px;" class="selectPointOfInterest form-control" name="noticeProcessStatus">
 						          <option value="">全部</option>
 						          <c:forEach items="${noticeProcessStatus}" var="processStatus">
 						            <option value="<c:out value='${processStatus.processStatusId}'/>">
 						            <c:out value="${processStatus.processStatusDescription}"/>
 						            </option>
 						          </c:forEach>
-						        </select>
-						 
-							  </li>
-							  
-						      <li>
-						        <p>通知类型</p>
-						      
-						        <select class="selectPointOfInterest form-control" name="noticeType">
+						        </select>							  
+							  </td>
+							  <td>
+						        <select style="width:100px;" class="selectPointOfInterest form-control" name="noticeType">
 						          <option value="">全部</option>
 						          <c:forEach items="${noticeTypes}" var="noticeType">
 						            <option value="<c:out value='${noticeType.noticeTypeId}'/>">
 						            <c:out value="${noticeType.noticeTypeDescription}"/>
 						            </option>
 						          </c:forEach>
-						        </select>
-						   
-						      </li>
-						      <li>
-						        <p>纸件申请</p>
-						   
-						        <select class="selectPointOfInterest form-control" name="paperApplyType">
+						        </select>							  
+							  </td>
+							  <td>
+						        <select style="width:100px;" class="selectPointOfInterest form-control" name="paperApplyType">
 						          <option value="">全部</option>
 						          <c:forEach items="${paperApplyTypes}" var="paperApplyType">
 						            <option value="<c:out value='${paperApplyType.paperTypeId}'/>">
 						            <c:out value="${paperApplyType.paperTypeDescription}"/>
 						            </option>
 						          </c:forEach>
-						        </select>
-						   
-						      </li>							  
-							  
-				      <li>
-				        <p>发文日起始</p>
-				        <input style="width:160px;" class="selectPointOfInterest form-control"  type="text"  onclick="WdatePicker({el:'startAppDateId'})"  class="form-control" id="startAppDateId"  name="startDispatchDate" placeholder="发文日开始" value="" readonly="readonly" >
-				      </li>
-				      <li>
-				        <p>发文日结束</p>
-				        <input style="width:160px;" class="selectPointOfInterest form-control" type="text"  onclick="WdatePicker({el:'endAppDateId'})"  class="form-control" id="endAppDateId" name="endDispatchDate" placeholder="发文日结束" value="" readonly="readonly" >
-				      </li>
-				      <li>
-				        <p>关键字</p>
-				        <input name="keyword" style="display:inline;width:250px;" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>
-				        <button class="button button-caution button-rounded">查询</button>
-				      </li>						  
-							  <div style="clear:both;"></div>
-							</ul>
+						        </select>							  
+							  </td>
+							  <td>
+								<input style="width:108px;" class="selectPointOfInterest form-control"  type="text"  onclick="WdatePicker({el:'startAppDateId'})"  class="form-control" id="startAppDateId"  name="startDispatchDate" placeholder="发文日开始" value="" readonly="readonly" >							  
+							  </td>
+							  <td>-</td>
+							  <td>
+							  <input style="width:108px;" class="selectPointOfInterest form-control" type="text"  onclick="WdatePicker({el:'endAppDateId'})"  class="form-control" id="endAppDateId" name="endDispatchDate" placeholder="发文日结束" value="" readonly="readonly" >
+							  </td>
+							  <td>
+							  <input name="keyword" style="display:inline;width:250px;" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>
+							  </td>
+							  <td><button class="button button-caution button-rounded">查询</button></td>	
+							  </tr>							  
+							 </table> 
 						  </div>
 						</form>
 					</div>
@@ -221,30 +219,38 @@
 					  <div class="col-xs-12">
 						<!-- PAGE CONTENT BEGINS -->
 						<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-						  <div class="ta-top" style="margin:8px;"> 
-						  	<a href="javascript:batchGrabFees()">
-							<button class="button button-caution button-rounded">在线交费</button>
-							</a>
-						  	<a href="javascript:batchProcessNotice(4)">
-							<button style="width:100px;margin-left:10px;" class="button button-action button-rounded">置为处理中</button>
-							</a> 
-			
-					
-							<a href="javascript:batchProcessNotice(2)">
-							<button style="width:100px;margin-left:10px;" class="button button-rounded button-highlight">置为已处理</button>
-							</a> 
-					
-							<a href="javascript:batchShare()">
-							<button style="margin-left:10px;" class="button button-rounded button-primary">专利分享</button>
-							</a>  <a href="javascript:batchChangeNoticePaperType(2)">
-							<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">批量申请纸件</button>
-							
-							
-							</a>
-							
-			
-						
-							<!-- 							<button class="t-btn6">表格导出</button> -->
+						  <div class="ta-top" style="margin-left:8px;"> 
+						  
+						  	<table class="search-table">
+					  			<tr>
+					  				<td>
+									  	<a href="javascript:batchGrabFees()">
+										<button class="button button-caution button-rounded">在线交费</button>
+										</a>
+					  				</td>
+					  				<td>
+									  	<a href="javascript:batchProcessNotice(4)">
+										<button style="width:100px;margin-left:10px;" class="button button-action button-rounded">置为处理中</button>
+										</a> 
+									</td>	
+					  				<td>
+										<a href="javascript:batchProcessNotice(2)">
+										<button style="width:100px;margin-left:10px;" class="button button-rounded button-highlight">置为已处理</button>
+										</a> 
+					  				</td>
+					  				
+					  				<td>
+										<a href="javascript:batchShare()">
+										<button style="margin-left:10px;" class="button button-rounded button-primary">专利分享</button>
+										</a>
+					  				</td>
+					  				<td>
+										<a href="javascript:batchChangeNoticePaperType(2)">
+										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">批量申请纸件</button>
+										</a>
+					  				</td>						  										  									  				
+					  			</tr>
+					  		</table>		
 						  </div>
 						  </span> </div>
 						<table id="simple-table" class="table table-striped table-bordered table-hover">

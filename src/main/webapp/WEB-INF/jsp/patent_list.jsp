@@ -109,19 +109,14 @@
 					
 						<form class="form-inline" action="<s:url value='/patent/search.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-						  
-						  
-						  
 						  <div class="t-third">
-						  
-						  
-						  
+
 						  <table class="search-table">
 							  <tr>
 							  <td>专利类型</td>
 							  <td>专利状态</td>
 							  <td>申请日开始</td>
-							  <td>-</td>
+							  <td></td>
 							  <td>申请日结束</td>
 							  <td>关键字</td>
 							  <td></td>	
@@ -148,11 +143,11 @@
 								</select>
 							  </td>
 							  <td>
-								<input class="form-control" style="width:179px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >							  
+								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >							  
 							  </td>
-							  <td></td>
+							  <td>-</td>
 							  <td>
-								<input class="lt-input form-control" style="width:179px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >
+								<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >
 							  </td>
 							  <td>
 								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>							  
@@ -162,58 +157,6 @@
 							  </td>
 							  </tr>							  
 						  </table>
-							<ul >
-							  <li>
-								<p>专利类型</p>
-								<select  style="width:100px;" class="selectPointOfInterest form-control" name="patentType">
-								  <option value="">全部</option>
-								  <c:forEach items="${allPatentTypes}" var="patentType">
-									<option value="<c:out value='${patentType.patentTypeId}'/>">
-									<c:out value="${patentType.typeDescription}"/>
-									</option>
-								  </c:forEach>
-								</select>
-							  </li>
-							  <li>
-								<p>专利状态</p>
-							
-								<select style="width:121px;" class="form-control" name="patentStatus">
-								  <option value="">全部</option>
-								  <c:forEach items="${allPatentStatus}" var="patentStatus">
-									<option value="<c:out value='${patentStatus.patentStatusId}'/>">
-									<c:out value="${patentStatus.statusDescription}"/>
-									</option>
-								  </c:forEach>
-								</select>
-							
-							  </li>
-							  <li>
-								<p>申请日开始</p>
-								<input class="form-control" style="width:179px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >
-								</li>
-							  <li>
-								<p>&nbsp;</p>
-								-
-							</li>
-							  						
-							<li>
-							  
-								<p>申请日结束</p>
-								<input class="lt-input form-control" style="width:179px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >
-								<!--<img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img">--> </li>
-							  <li style="width: 300px;margin-right:0px;">
-								<p>关键字</p>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>
-							  </li>
-							  <li style="width: 50px;">
-								<p>&nbsp;</p>
-								<button class="button button-caution button-rounded" style="width:80px;">查询</button>
-								
-								<!--<button class="button button-caution button-rounded button-jumbo">查询123123</button>-->
-								
-							  </li>							  
-							  <div style="clear:both;"></div>
-							</ul>
 						  </div>
 						</form>
 					</div>
@@ -221,14 +164,21 @@
 				<!--search form end-->
 				<div class="lt-box">
 					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-					  <div class="ta-top" style="margin:8px;"> 
-						<a href="javascript:batchGrabFees()">
-						<button class="button button-caution button-rounded">在线交费</button> 
-						</a>	          
-						<a href="javascript:batchShare()" style="margin-left:50px;">
-						<button class="button button-primary  button-rounded">批量分享</button>
-						</a> 
-
+					  <div class="ta-top" style="margin-left:8px;">
+					  	<table class="search-table">
+					  	<tr>
+					  	<td>
+						  	<a href="javascript:batchGrabFees()">
+							<button class="button button-caution button-rounded">在线交费</button> 
+							</a>
+						</td>
+					  	<td>
+							<a href="javascript:batchShare()" style="margin-left:50px;">
+							<button class="button button-primary  button-rounded">批量分享</button>
+							</a> 
+						</td>						
+					  	</tr>
+					  	</table>
 					  </div>
 					  </span> </div>
 					<table id="simple-table" class="table table-striped table-bordered table-hover">

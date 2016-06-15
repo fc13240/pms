@@ -115,6 +115,23 @@
 					<input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 					<input type="hidden" id="deadlineStatus" name="deadlineStatus" value="0"/>
 					<div class="t-third">
+					
+					
+						<table class="search-table">
+							<tr>
+							  <td>专利类型</td>
+							  <td>交费状态</td>
+							  <td>费用类型</td>
+							  <td>专利类型</td>
+							  <td>专利类型</td>
+							  <td>专利类型</td>
+							  <td>专利类型</td>
+							  <td>专利类型</td>
+							  <td>专利类型</td>
+							  <td>专利类型</td>
+							</tr>
+						</table>	  	
+					
 					  <ul>
 						<li>
 						  <p>专利类型</p>
