@@ -202,8 +202,8 @@
 					  </thead>
 					  <tbody>
 						<c:forEach items="${patents}" var="patent" varStatus="status">
-						  <tr>
-							<td class="center"><label class="pos-rel"> <span class="batch-share-item">
+						  <tr >
+							<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
 							  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.patentId}'/>">
 							  <span class="lbl"></span></label></td>
 							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>

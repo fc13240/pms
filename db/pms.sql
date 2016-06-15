@@ -511,5 +511,5 @@ CREATE TABLE if not exists patent_office_accounts (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE patents ADD COLUMN publish_date DATE;
-ALTER TABLE patents ADD COLUMN publish_no VARCHAR(100);
-ALTER TABLE patents ADD COLUMN proxy_Org VARCHAR(300);
+ALTER TABLE patents ADD COLUMN publish_no VARCHAR(30);
+ALTER TABLE patents ADD COLUMN proxy_org VARCHAR(100);

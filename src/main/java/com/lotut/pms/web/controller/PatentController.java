@@ -143,16 +143,24 @@ public class PatentController {
 	}
 	
 	@RequestMapping(path="/showUploadForm", method=RequestMethod.GET)
-	public String showUploadForm() throws IOException {
+	public String showUploadForm() {
 		return "patent_upload_form";
 	}	
 	
 	@RequestMapping(path="/upload", method=RequestMethod.POST)
-	public String uploadPatents(@RequestParam("patentFile")Part patentFile) throws IOException {
-		InputStream is = patentFile.getInputStream();
-		int userId = PrincipalUtils.getCurrentUserId();
-		patentService.uploadPatents(is,userId);
-		return "upload_success";
+	public String uploadPatents(@RequestParam("patentFile")Part patentFile, Model model) {
+		try {
+			if (!patentFile.getSubmittedFileName().endsWith(".xls") && !patentFile.getSubmittedFileName().endsWith(".xlsx")) {
+				throw new RuntimeException("上传的文件不是excel表格");
+			}
+			InputStream is = patentFile.getInputStream();
+			int userId = PrincipalUtils.getCurrentUserId();
+			patentService.uploadPatents(is,userId);
+			return "upload_success";
+		} catch (Exception e) {
+			model.addAttribute("message", "上传失败，请检查文件格式稍后再试！");
+			return "common_message";
+		}
 	}	
 	
 	@RequestMapping(path="/goods", method=RequestMethod.GET)

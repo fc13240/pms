@@ -42,9 +42,10 @@ public class PatentSearchController {
 	}
 	
 	@RequestMapping(path="/addPatents")
-	public void addPatents(@RequestParam("patents")List<String> patentIds,Model model) {
+	public String addPatents(@RequestParam("patents")List<String> patentIds,Model model) {
 		List<Patent> patents=patentSearchService.getPatentsByIds(patentIds);
 		int userId = PrincipalUtils.getCurrentUserId();
 		patentService.addOrUpdatePatents(patents, userId);
+		return "add_patent_success";
 	}
 }
