@@ -94,7 +94,7 @@
 							<td>
 							<input name="keyword" style="width:300px; display:inline;" id="keywordId" value="" placeholder="订单号" class="t-input form-control"/>
 							</td>
-							<td><button type="submit" style="margin-top:3px;" class="button button-rounded button-highlight">导出费用清单</button></td>
+							<td><button class="button button-caution button-rounded" type="submit">查询</button></td>
 						</tr>
 						
 					</table>		
@@ -114,7 +114,7 @@
 						<fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
 							&nbsp;&nbsp;订单号：${order.id}
 						<span style="margin-left:100px;">
-							
+							<button type="submit" style="margin-top:3px;" class="button button-rounded button-highlight">导出费用清单</button>
 						</span>
 				      </div>
 				      <table id="simple-table" class="table table-striped table-bordered table-hover">
