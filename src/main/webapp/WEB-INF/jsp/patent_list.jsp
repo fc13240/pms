@@ -113,7 +113,7 @@
 							  <li>
 								<p>专利状态</p>
 							
-								<select class="form-control" name="patentStatus">
+								<select style="width:121px;" class="form-control" name="patentStatus">
 								  <option value="">全部</option>
 								  <c:forEach items="${allPatentStatus}" var="patentStatus">
 									<option value="<c:out value='${patentStatus.patentStatusId}'/>">
@@ -125,7 +125,7 @@
 							  </li>
 							  <li>
 								<p>申请日开始</p>
-								<input class="form-control"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >
+								<input class="form-control" style="width:179px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >
 								</li>
 							  <li>
 								<p>&nbsp;</p>
@@ -135,11 +135,11 @@
 							<li>
 							  
 								<p>申请日结束</p>
-								<input class="lt-input form-control" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >
+								<input class="lt-input form-control" style="width:179px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >
 								<!--<img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img">--> </li>
 							  <li style="width: 300px;margin-right:0px;">
 								<p>关键字</p>
-								<input name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>
 							  </li>
 							  <li style="width: 50px;">
 								<p>&nbsp;</p>
