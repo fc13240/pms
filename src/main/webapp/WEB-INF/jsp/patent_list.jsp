@@ -13,7 +13,11 @@
 <%@ include file="_top.jsp" %>
 
 
+
 <div class="lt-con" style="min-width:1100px;">
+
+
+
 	<div class="container-fluid" >
 
 		<div class="row" style="margin-left:-30px;min-width:1100px;">
@@ -23,7 +27,10 @@
 		  </div>
 		  <!--left end-->
 		  <div class="col-xs-offset-1 col-xs-11">
+		  
 			<div class="lt-right">
+			
+			
 				<div style="height:10px;"></div>
 				<!-- menu begin -->
 				<div class="lt-box">
@@ -92,12 +99,69 @@
 				</div>
 				<!-- menu end -->
 				<!-- search begin -->
+				
+			
+				
 				<div class="lt-box">
 					<div class="search-box">
-						<form action="<s:url value='/patent/search.html'/>" method="get">
+					
+					
+					
+						<form class="form-inline" action="<s:url value='/patent/search.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-						  <div class="t-third" style="clear:both;">
 						  
+						  
+						  
+						  <div class="t-third">
+						  
+						  
+						  
+						  <table class="search-table">
+							  <tr>
+							  <td>专利类型</td>
+							  <td>专利状态</td>
+							  <td>申请日开始</td>
+							  <td>-</td>
+							  <td>申请日结束</td>
+							  <td>关键字</td>
+							  <td></td>	
+							  </tr>
+							  <tr>
+							  <td>
+								<select  style="width:100px;" class="selectPointOfInterest form-control" name="patentType">
+								  <option value="">全部</option>
+								  <c:forEach items="${allPatentTypes}" var="patentType">
+									<option value="<c:out value='${patentType.patentTypeId}'/>">
+									<c:out value="${patentType.typeDescription}"/>
+									</option>
+								  </c:forEach>
+								</select>
+							  </td>
+							  <td>
+								<select style="width:121px;" class="form-control" name="patentStatus">
+								  <option value="">全部</option>
+								  <c:forEach items="${allPatentStatus}" var="patentStatus">
+									<option value="<c:out value='${patentStatus.patentStatusId}'/>">
+									<c:out value="${patentStatus.statusDescription}"/>
+									</option>
+								  </c:forEach>
+								</select>
+							  </td>
+							  <td>
+								<input class="form-control" style="width:179px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >							  
+							  </td>
+							  <td></td>
+							  <td>
+								<input class="lt-input form-control" style="width:179px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >
+							  </td>
+							  <td>
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>							  
+							  </td>
+							  <td>
+							  <button class="button button-caution button-rounded" style="width:80px;">查询</button>
+							  </td>
+							  </tr>							  
+						  </table>
 							<ul >
 							  <li>
 								<p>专利类型</p>
@@ -188,8 +252,8 @@
 					  </thead>
 					  <tbody>
 						<c:forEach items="${patents}" var="patent" varStatus="status">
-						  <tr>
-							<td class="center"><label class="pos-rel"> <span class="batch-share-item">
+						  <tr >
+							<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
 							  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.patentId}'/>">
 							  <span class="lbl"></span></label></td>
 							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>

@@ -257,3 +257,7 @@ border-color: inherit;
 }
 #simple-table tr td{text-align: left; }
 #simple-table tr th{text-align: center;font-size:12px; }
+
+.search-table tr td{
+	padding:10px;
+}
