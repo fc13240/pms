@@ -153,7 +153,7 @@
 								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>							  
 							  </td>
 							  <td>
-							  <button class="button button-caution button-rounded" style="width:80px;">查询</button>
+							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
 							  </td>
 							  </tr>							  
 						  </table>

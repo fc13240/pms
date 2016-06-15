@@ -169,7 +169,7 @@
 										<input name="keyword" style="width:300px;display:inline;" id="keywordId" value="" placeholder="申请号/名称/申请人/案件状态" class="t-input form-control"/>
 									  </td>
 									  <td>
-									  	<button class="button button-caution button-rounded">查询</button>
+									  	<button type="submit" class="button button-caution button-rounded">查询</button>
 									  </td>
 									</tr>							
 								</table>	  	

@@ -205,7 +205,7 @@
 							  <td>
 							  <input name="keyword" style="display:inline;width:250px;" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>
 							  </td>
-							  <td><button class="button button-caution button-rounded">查询</button></td>	
+							  <td><button type="submit" class="button button-caution button-rounded">查询</button></td>	
 							  </tr>							  
 							 </table> 
 						  </div>
