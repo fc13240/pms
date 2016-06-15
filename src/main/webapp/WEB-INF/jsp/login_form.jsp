@@ -249,7 +249,7 @@
 	<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 	<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>
 	<!-- 页脚 -->
-	<br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br>
 	<div id="footer">
 	  <div class="container clear">
 	    <div class="footer_r">
