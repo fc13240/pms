@@ -13,7 +13,21 @@
 <%@ include file="_top.jsp" %>
 
 
+
 <div class="lt-con" style="min-width:1100px;">
+
+<form class="form-inline">
+  <div class="form-group">
+    <label for="exampleInputName2">Name</label>
+    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail2">Email</label>
+    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+  </div>
+  <button type="submit" class="btn btn-default">Send invitation</button>
+</form>	
+
 	<div class="container-fluid" >
 
 		<div class="row" style="margin-left:-30px;min-width:1100px;">
@@ -92,8 +106,14 @@
 				</div>
 				<!-- menu end -->
 				<!-- search begin -->
+				
+			
+				
 				<div class="lt-box">
 					<div class="search-box">
+					
+					
+					
 						<form class="form-inline" action="<s:url value='/patent/search.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 						  
