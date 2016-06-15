@@ -72,14 +72,15 @@ public class PatentSearchDaoImpl implements PatentSearchDao {
 		}
 		
 		requestBuilder.setFetchSource(false);
-		requestBuilder.addSort("_score", SortOrder.DESC);
-		requestBuilder.addSort("appDate", SortOrder.DESC);
-
-		
 		if ((page.getCurrentPage() > 0) && (page.getPageSize() > 0)) {
 			requestBuilder.setFrom(page.getStartIndex());
 			requestBuilder.setSize(page.getPageSize());
 		}
+		requestBuilder.addSort("_score", SortOrder.DESC);
+		requestBuilder.addSort("appDate", SortOrder.DESC);
+
+		
+		
 		
 		SearchResponse searchResponse = requestBuilder.execute().actionGet();
 		System.out.println("搜索用时 " + searchResponse.getTookInMillis() / 1000.0 + " 秒");

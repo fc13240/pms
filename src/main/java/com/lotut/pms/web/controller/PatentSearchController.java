@@ -29,6 +29,9 @@ public class PatentSearchController {
 	
 	@RequestMapping(path="/searchPatent")
 	public String search(@RequestParam("q")String keyword,Page page,HttpSession session,Model model) {
+		if (page.getCurrentPage() < 1) {
+			page.setCurrentPage(1);
+		}
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
 		page.setPageSize(WebUtils.getPageSize(session));
