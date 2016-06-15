@@ -224,28 +224,28 @@
 						  	<table class="search-table">
 					  			<tr>
 					  				<td>
-									  	<a href="javascript:batchGrabFees()">
+									  	<a href="javascript:return void" onclick="batchGrabFees()">
 										<button class="button button-caution button-rounded">在线交费</button>
 										</a>
 					  				</td>
 					  				<td>
-									  	<a href="javascript:batchProcessNotice(4)">
+									  	<a href="javascript:return void" onclick="batchProcessNotice(4)">
 										<button style="width:100px;margin-left:10px;" class="button button-action button-rounded">置为处理中</button>
 										</a> 
 									</td>	
 					  				<td>
-										<a href="javascript:batchProcessNotice(2)">
+										<a href="javascript:return void" onclick="batchProcessNotice(2)">
 										<button style="width:100px;margin-left:10px;" class="button button-rounded button-highlight">置为已处理</button>
 										</a> 
 					  				</td>
 					  				
 					  				<td>
-										<a href="javascript:batchShare()">
+										<a href="javascript:return void" onclick="batchShare()">
 										<button style="margin-left:10px;" class="button button-rounded button-primary">专利分享</button>
 										</a>
 					  				</td>
 					  				<td>
-										<a href="javascript:batchChangeNoticePaperType(2)">
+										<a href="javascript:return void" onclick="batchChangeNoticePaperType(2)">
 										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">批量申请纸件</button>
 										</a>
 					  				</td>						  										  									  				

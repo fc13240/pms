@@ -168,12 +168,12 @@
 					  	<table class="search-table">
 					  	<tr>
 					  	<td>
-						  	<a href="javascript:batchGrabFees()">
+						  	<a href="javascript:return void"  onclick="batchGrabFees()">
 							<button class="button button-caution button-rounded">在线交费</button> 
 							</a>
 						</td>
 					  	<td>
-							<a href="javascript:batchShare()" style="margin-left:50px;">
+							<a href="javascript:return void" onclick="batchShare()" style="margin-left:50px;">
 							<button class="button button-primary  button-rounded">批量分享</button>
 							</a> 
 						</td>						

@@ -110,106 +110,108 @@
 					</div>
 				</div>	
 				<!-- menu end -->
-				<div class="lt-box" style="padding:10px;">
-				  <form action="<s:url value='/fee/search.html'/>" method="get">
-					<input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-					<input type="hidden" id="deadlineStatus" name="deadlineStatus" value="0"/>
-					<div class="t-third">
+				<div class="lt-box">
+					<div class="search-box">
+				  		<form action="<s:url value='/fee/search.html'/>" method="get">
+							<input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
+							<input type="hidden" id="deadlineStatus" name="deadlineStatus" value="0"/>
+							<div class="t-third">				
 					
-					
-						<table class="search-table">
-							<tr>
-							  <td>专利类型</td>
-							  <td>交费状态</td>
-							  <td>费用类型</td>
-							  <td>交费截止日开始</td>
-							  <td></td>
-							  <td>交费截止日结束</td>
-							  <td>专利类型</td>
-							  <td>专利类型</td>
-							  <td>专利类型</td>
-							  <td>专利类型</td>
-							</tr>
-						</table>	  	
-					
-					  <ul>
-						<li>
-						  <p>专利类型</p>
-						  <label id="lblSelect">
-						  <select class="selectPointOfInterest form-control" name="patentType" >
-							<option value="">全部</option>
-							<option value="1">发明</option>
-							<option value="2">实用新型</option>
-							<option value="3">外观设计</option>
-						  </select>
-						  </label>
-						</li>
-						<li>
-						  <p>交费状态</p>
-						  <label id="lblSelect">
-						  <select class="selectPointOfInterest form-control" name="paymentStatus" >
-							<option value="">全部</option>
-							<option value="1">应交费</option>
-							<option value="2">已支付</option>
-							<option value="3">已交费</option>
-							<option value="4">待支付</option>
-							<option value="5">交费成功</option>
-						  </select>
-						  </label>
-						</li>
-						<li>
-						  <p>费用类型</p>
-						  <label id="lblSelect">
-						  <select class="selectPointOfInterest form-control" name="patentStatus" >
-							<option value="">全部</option>
-							<option value="1">申请费</option>
-							<option value="3">年登印费</option>
-							<option value="6">维持年费</option>
-						  </select>
-						  </label>
-						</li>
-						<li>
-						  <p>交费截止日开始</p>
-						  <input class="selectPointOfInterest form-control"  type="text" onclick="WdatePicker({el:'startAppDateId'})"  class="form-control" id="startAppDateId"  name="startDeadline" placeholder="交费截止日开始" value="" readonly="readonly" >
-						</li>
-						<li>
-						  <p>交费截止日结束</p>
-						  <input class="selectPointOfInterest form-control" type="text" onclick="WdatePicker({el:'endAppDateId'})"  class="form-control" id="endAppDateId" name="endDeadline" placeholder="交费截止日结束" value="" readonly="readonly" >
-						</li>
-						<li style="width: 385px;">
-						  <p>关键字</p>
-						  <input name="keyword" style="width:300px;display:inline;" id="keywordId" value="" placeholder="申请号/名称/申请人/案件状态" class="t-input form-control"/>
-						  <button class="button button-caution button-rounded">查询</button>
-						</li>
-						<div style="clear:both;"></div>
-					  </ul>
-					</div>
-				  </form>
+								<table class="search-table">
+									<tr>
+									  <td>专利类型</td>
+									  <td>交费状态</td>
+									  <td>费用类型</td>
+									  <td>交费截止日开始</td>
+									  <td></td>
+									  <td>交费截止日结束</td>
+									  <td>关键字</td>
+									  <td></td>
+									</tr>
+									<tr>
+									  <td>
+										  <select style="width:100px;" class="selectPointOfInterest form-control" name="patentType" >
+											<option value="">全部</option>
+											<option value="1">发明</option>
+											<option value="2">实用新型</option>
+											<option value="3">外观设计</option>
+										  </select>
+									  </td>
+									  
+									  <td>
+										  <select style="width:100px;" class="selectPointOfInterest form-control" name="paymentStatus" >
+											<option value="">全部</option>
+											<option value="1">应交费</option>
+											<option value="2">已支付</option>
+											<option value="3">已交费</option>
+											<option value="4">待支付</option>
+											<option value="5">交费成功</option>
+										  </select>
+									  </td>
+									  
+									  <td>
+										  <select style="width:100px;" class="selectPointOfInterest form-control" name="patentStatus" >
+											<option value="">全部</option>
+											<option value="1">申请费</option>
+											<option value="3">年登印费</option>
+											<option value="6">维持年费</option>
+										  </select>
+									  </td>
+									  
+									  <td>
+										<input style="width:108px;" class="selectPointOfInterest form-control"  type="text" onclick="WdatePicker({el:'startAppDateId'})"  class="form-control" id="startAppDateId"  name="startDeadline" placeholder="交费截止日开始" value="" readonly="readonly" >
+									  </td>
+									  <td>-</td>
+									  <td>
+										<input style="width:108px;" class="selectPointOfInterest form-control" type="text" onclick="WdatePicker({el:'endAppDateId'})"  class="form-control" id="endAppDateId" name="endDeadline" placeholder="交费截止日结束" value="" readonly="readonly" >
+									  </td>
+									  <td>
+										<input name="keyword" style="width:300px;display:inline;" id="keywordId" value="" placeholder="申请号/名称/申请人/案件状态" class="t-input form-control"/>
+									  </td>
+									  <td>
+									  	<button class="button button-caution button-rounded">查询</button>
+									  </td>
+									</tr>							
+								</table>	  	
+							</div>
+				  		</form>
+				  	</div>	
 				</div>
 				<!--search box end-->	
 				<div class="lt-box">
 	
 					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-					  <div class="ta-top" style="margin:8px;"> 
-	
-						<a href="javascript:showOrderCreateForm()">
-						<button class="button button-caution button-rounded">立即交费</button>
-						</a> 
-										  
-					  	<a href="javascript:batchUpdateInvoiceTitles()">
-						<button style="width:110px;margin-left:10px;" class="button button-action button-rounded">修改发票抬头</button>
-						</a> 
-						<a href="javascript:exportFees()">
-						<button style="margin-left:10px;" class="button button-rounded button-highlight">表格导出</button>
-						</a> 
-	
-						<a href="javascript:delectFees()">
-						<button style="margin-left:10px;" class="button button-rounded button-royal">删除费用</button>
-						</a>
-	
-						<span class="span3" style="font-size:14px;margin-left:50px;">成功交费总额：￥${totalFeeCount }</span>
-						<span class="span3" style="font-size:14px;margin-left:50px;">应交费总额：￥${unpaidFeeCount }  </span>
-	
+					  <div class="ta-top" style="margin-left:8px;"> 
+						<table class="search-table">
+							<tr>
+							  <td>
+								<a href="javascript:return void" onclick="showOrderCreateForm()">
+								<button class="button button-caution button-rounded">立即交费</button>
+								</a> 
+							  </td>
+							  <td>
+							  	<a href="javascript:return void" onclick="batchUpdateInvoiceTitles()">
+								<button style="width:110px;margin-left:10px;" class="button button-action button-rounded">修改发票抬头</button>
+								</a> 
+							  </td>
+							  <td>
+								<a href="javascript:return void" onclick="exportFees()">
+								<button style="margin-left:10px;" class="button button-rounded button-highlight">表格导出</button>
+								</a> 
+							  </td>	
+							  <td>
+								<a href="javascript:return void" onclick="delectFees()">
+								<button style="margin-left:10px;" class="button button-rounded button-royal">删除费用</button>
+								</a>
+							  </td>	
+							  <td>
+								<span class="span3" style="font-size:14px;margin-left:50px;">成功交费总额：￥${totalFeeCount }</span>
+							  </td>	
+							  <td>
+								<span class="span3" style="font-size:14px;margin-left:50px;">应交费总额：￥${unpaidFeeCount }  </span>							  
+							  </td>		  
+							</tr> 
+						</table>	
 					  </div>
 					  </span> 
 					</div>
