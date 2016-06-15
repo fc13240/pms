@@ -258,7 +258,7 @@
 	          <a href="http://so.lotut.com/" target="_blank" rel="nofollow">专利检索</a><span>|</span>
 	          <a href="http://www.lotut.com/index.php/blog/095lzql4ke.html" target="_blank" rel="nofollow">联系我们</a><span>|</span>
 	          <a href="http://www.lotut.com/" target="_blank">商标市场</a></p>
-	        <p class="Copyright"><font color="#FFF">Copyright @ 2016龙图腾版权，技术支持龙图腾信息技术有限公司</font> </p>
+	        <p class="Copyright"><font color="#000">Copyright @ 2016龙图腾版权，技术支持龙图腾信息技术有限公司</font> </p>
 	      </div>
 	    </div>
 	  </div>
