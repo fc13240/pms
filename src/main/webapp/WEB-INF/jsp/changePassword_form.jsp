@@ -43,7 +43,7 @@
 					<input style="width:320px;"  class="selectPointOfInterest form-control" type="password" class="form-control" name="newPasswordConfirm" id="newPasswordConfirm" minlength="4" maxlength="30" equalTo="#newPassword"placeholder="确认新密码" required/>
 					<div style="margin-top:30px;width:300px;">
 					  <input type="submit" id="resetPassword" class="button button-caution button-rounded" style="font-size:16px;margin-left:30px;" value="确认修改" />
-					  <input type="reset" style="width:90px;" class="button button-primary  button-rounded" style="font-size:16px;" value="重置" name="reset" />
+					  <input type="reset" style="width:90px;font-size:16px;margin-left:30px;" class="button button-primary  button-rounded"  value="重置" name="reset" />
 					</div>
 				  </form>
 				</div>
