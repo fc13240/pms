@@ -58,17 +58,17 @@
 			          </thead>
 			          <tbody>
 			            <c:forEach items="${accounts}" var="account" varStatus="status">
-			              <tr>
-			                <td class="center"><label class="pos-rel"> <span class="batch-share-item">
+			              <tr >
+			                <td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
 			                  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.patentId}'/>">
 			                  <span class="lbl"></span></label></td>
-			                <td class="center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
-			                <td><c:out value="${account.name}"/>
+			                <td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+			                <td style="text-align:center"><c:out value="${account.name}"/>
 			                </td>
-			                <td><c:out value="${account.username}"/></td>
-			                <td><c:out value="${account.password}"/></td>
-			                <td><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-			                <td>
+			                <td style="text-align:center"><c:out value="${account.username}"/></td>
+			                <td style="text-align:center"><c:out value="${account.password}"/></td>
+			                <td style="text-align:center"><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+			                <td style="text-align:center">
 			                	<c:if test="${accountType==0}">
 			                	<a href="JavaScript:void(0)" onclick="checkLogin('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
 			                  		验证登录 
