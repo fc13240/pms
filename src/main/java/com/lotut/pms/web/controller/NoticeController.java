@@ -159,12 +159,20 @@ public class NoticeController {
 	}	
 	
 	@RequestMapping(path="/upload", method=RequestMethod.POST)
-	public String uploadNotices(@RequestParam("noticeFile")Part noticeFile) throws IOException, ZipException {
-		String zipFileName = noticeFile.getSubmittedFileName();
-		noticeFile.write(zipFileName);
-		String zipFilePath = Settings.TEMP_DIR + zipFileName;
-		noticeService.uploadNotices(zipFilePath);
-		return "upload_success";
+	public String uploadNotices(@RequestParam("noticeFile")Part noticeFile, Model model) {
+		try {
+			String zipFileName = noticeFile.getSubmittedFileName();
+			if (!zipFileName.endsWith(".zip")) {
+				throw new ZipException("上传的不是zip压缩包");
+			}
+			noticeFile.write(zipFileName);
+			String zipFilePath = Settings.TEMP_DIR + zipFileName;
+			noticeService.uploadNotices(zipFilePath);
+			return "upload_success";
+		} catch (Exception e) {
+			model.addAttribute("message", "上传失败，请检查压缩包格式稍后再试!");
+			return "common_message";
+		}
 	}	
 	
 	private void addSearchTypesDataToModel(Model model) {

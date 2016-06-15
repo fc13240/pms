@@ -21,13 +21,16 @@ public class ZipUtils {
 	}
 	
 	public static void unzip(String zipPath, String destDir) throws IOException, ZipException {
+		ZipFile zipFile = new ZipFile(zipPath);
+		if (!zipFile.isValidZipFile()) {
+			throw new ZipException("不是合法的zip包");
+		}
+		
 		File destFile = new File(destDir);
 		if (!destFile.exists()) {
 			destFile.mkdirs();
 		}
 		
-		ZipFile zipFile = new ZipFile(zipPath);
-
 		@SuppressWarnings("unchecked")
 		List<FileHeader> fileHeaders = zipFile.getFileHeaders();
 		for (FileHeader fileHeader: fileHeaders) {
