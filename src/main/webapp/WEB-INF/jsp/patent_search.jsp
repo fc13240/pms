@@ -41,7 +41,7 @@
 				<div class="lt-box">
 					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
 					  <div class="ta-top" style="margin:8px;"> 
-						<a href="javascript:batchAddPatents()">
+						<a href="javascript:return void" onclick="batchAddPatents()">
 						<button class="button button-caution button-rounded" style="width:150px;height:36px;">一键加入管理</button> 
 						</a>	          
 					  </div>
