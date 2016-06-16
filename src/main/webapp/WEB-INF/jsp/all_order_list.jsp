@@ -112,7 +112,7 @@
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
 						<thead>
 						  <tr class="simple_bag">
-							<th colspan="5"> <fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
+							<th colspan="5"> <fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
 							  &nbsp;&nbsp;&nbsp;
 							  <table>
 							  <tr>

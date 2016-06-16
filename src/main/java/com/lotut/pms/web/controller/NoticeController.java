@@ -3,6 +3,7 @@ package com.lotut.pms.web.controller;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
@@ -104,19 +105,27 @@ public class NoticeController {
 	
 	@RequestMapping(path="/preview", method=RequestMethod.GET)
 	public void previewNotice(@RequestParam("notice")int noticeId, HttpServletResponse response) throws IOException {
-		response.setContentType("application/pdf");
-		Path pdfPath = noticeService.createPdfIfNeeded(noticeId);
-		response.setContentLength((int)pdfPath.toFile().length());
-		int BUFFER_SIZE = 8192;
-		byte[] buffer = new byte[BUFFER_SIZE];
-		try (OutputStream out = response.getOutputStream(); 
-				FileInputStream fis = new FileInputStream(pdfPath.toFile())) {
-			int bytesRead = -1;
-			while ((bytesRead = fis.read(buffer)) != -1) {
-				out.write(buffer, 0, bytesRead);
+		try {
+			response.setContentType("application/pdf");
+			Path pdfPath = noticeService.createPdfIfNeeded(noticeId);
+			response.setContentLength((int)pdfPath.toFile().length());
+			int BUFFER_SIZE = 8192;
+			byte[] buffer = new byte[BUFFER_SIZE];
+			try (OutputStream out = response.getOutputStream(); 
+					FileInputStream fis = new FileInputStream(pdfPath.toFile())) {
+				int bytesRead = -1;
+				while ((bytesRead = fis.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesRead);
+				}
+				out.flush();
 			}
+		} catch (Exception e) {
+			response.setContentType("text/html");
+			PrintWriter out = response.getWriter();
+			out.write("没有可预览的通知书");
 			out.flush();
 		}
+
 	}
 	
 	@RequestMapping(path="/download", method=RequestMethod.GET)
