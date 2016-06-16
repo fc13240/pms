@@ -6,15 +6,15 @@
 <div class="top navbar-fixed-top" style="background:#ffffff;">
 	<div class="toolbar">
 	  <div class="container clear">
-	      <div class="mod-sitemap-wecome f-fl"> <span>您好，欢迎光临龙图腾专利管理系统！</span></div>
+	      <div class="mod-sitemap-wecome f-fl"> <span></span></div>
 	   
 		  <div class="mod-sitemap clear">
 		    <div class="head-top-rk f-fr">
 		      <div class="item">
-			 欢迎您!
-			  <se:authentication property="principal.username" />
-			
-			  <a href="javascript:$('#logoutForm').submit();" style="color:#666;">退出</a>
+			 您好,
+			  <se:authentication property="principal.username" />!
+			欢迎使用龙图腾专利管理系统！
+			  <a href="javascript:$('#logoutForm').submit();" style="color:#666;"><font color="red">退出</font></a>
 		
 			 <form action="<s:url value='/user/logout.html'/>" method="post" id="logoutForm">
 			 <se:csrfInput/>

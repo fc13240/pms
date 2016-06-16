@@ -42,67 +42,112 @@
 					  <div id="menu_con" style="min-width:1100px;">
 					    <div class="tag" style="display:none"> 
 					      <ul class="qxjk-ul">
+					      	<li>
 					        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=1'/>">
-					        <li>发明 (<c:out value='${patentTypeCount[(1).intValue()]["feeCount"]}' default="0"/>)</li>
-					        </a> <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=2'/>">
-					        <li>实用新型 (<c:out value='${patentTypeCount[(2).intValue()]["feeCount"]}' default="0"/>)</li>
-					        </a> 
-					        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=3'/>">
-					        <li>外观设计 (<c:out value='${patentTypeCount[(3).intValue()]["feeCount"]}' default="0"/>)</li>
-					        </a> 
+					        	发明 (<c:out value='${patentTypeCount[(1).intValue()]["feeCount"]}' default="0"/>)
+					        </a>
+					        </li>
+					        
+					        <li>
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=2'/>">
+						        	实用新型 (<c:out value='${patentTypeCount[(2).intValue()]["feeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li> 
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=3'/>">
+						        	外观设计 (<c:out value='${patentTypeCount[(3).intValue()]["feeCount"]}' default="0"/>)
+						        </a>
+					        </li> 
 					      </ul>		    
 					     </div>
 					    <div class="tag"  style="display:none"> 
 					      <ul class="qxjk-ul">
-					        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=1'/>">
-					        <li>应交费 (<c:out value='${feePaymentStatusCount[(1).intValue()]["feeCount"]}' default="0"/>)</li>
-					        </a> 
-					        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=2'/>">
-					        <li>已支付 (<c:out value='${feePaymentStatusCount[(2).intValue()]["feeCount"]}' default="0"/>)</li>
-					        </a>
-					        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=3'/>">
-					        <li>已交局 (<c:out value='${feePaymentStatusCount[(3).intValue()]["feeCount"]}' default="0"/>)</li>
-					        </a> 
-					         <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=4'/>">
-					        <li>待支付 (<c:out value='${feePaymentStatusCount[(4).intValue()]["feeCount"]}' default="0"/>)</li>
-					        </a> 
-					         <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=5'/>">
-					        <li>交费成功 (<c:out value='${feePaymentStatusCount[(5).intValue()]["feeCount"]}' default="0"/>)</li>
-					        </a> 
+					      	<li>
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=1'/>">
+						        	应交费 (<c:out value='${feePaymentStatusCount[(1).intValue()]["feeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li> 
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=2'/>">
+						        	已支付 (<c:out value='${feePaymentStatusCount[(2).intValue()]["feeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li>
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=3'/>">
+						        	已交局 (<c:out value='${feePaymentStatusCount[(3).intValue()]["feeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li>
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=4'/>">
+						        	待支付 (<c:out value='${feePaymentStatusCount[(4).intValue()]["feeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li> 
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=5'/>">
+						        	交费成功 (<c:out value='${feePaymentStatusCount[(5).intValue()]["feeCount"]}' default="0"/>)
+						        </a>
+					        </li> 
 					      </ul>
 					     
 					    </div>
 					    <div class="tag"  style="display:block;">
 					      <ul class="qxjk-ul">
-					        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=1'/>">
-					        <li>申请费 (<c:out value='${patentStatusCount[(1).intValue()]["feeCount"]}' default="0"/>)</li>
-					        </a>
-					        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=3'/>">
-					        <li>年登印费 (<c:out value='${patentStatusCount[(3).intValue()]["feeCount"]}' default="0"/>)</li>
-					        </a>
-					        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=6'/>">
-					        <li>专利权维持年费 (<c:out value='${patentStatusCount[(6).intValue()]["feeCount"]}' default="0"/>)</li>
-					        </a>
+					      	<li>
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=1'/>">
+						        	申请费 (<c:out value='${patentStatusCount[(1).intValue()]["feeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li>
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=3'/>">
+						        	年登印费 (<c:out value='${patentStatusCount[(3).intValue()]["feeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li>
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=6'/>">
+						        	专利权维持年费 (<c:out value='${patentStatusCount[(6).intValue()]["feeCount"]}' default="0"/>)
+						        </a>
+					        </li>
 					      </ul>
 					    </div>
 					    
 					   <div class="tag"  style="display:none">
 					      <ul class="qxjk-ul">
-					        <a href="<s:url value='/fee/search.html?deadlineStatus=1&page.currentPage=1'/>">
-					        	<li>已超期(<c:out value='${deadlineMonitor["overDue"] }'/>)</li>
-					        </a>
-					        <a href="<s:url value='/fee/search.html?deadlineStatus=2&page.currentPage=1'/>">
-					        	<li>两周内(<c:out value='${deadlineMonitor["withinTwoWeek"] }'/>)</li>
-					        </a>
-					        <a href="<s:url value='/fee/search.html?deadlineStatus=3&page.currentPage=1'/>">
-					        	<li>两月内(<c:out value='${deadlineMonitor["withinTwoMonth"] }'/>)</li>
-					        </a>
-					        <a href="<s:url value='/fee/search.html?deadlineStatus=4&page.currentPage=1'/>">
-					        	<li>三年内(<c:out value='${deadlineMonitor["withinThreeYear"] }'/>)</li>
-					        </a>
-					        <a href="<s:url value='/fee/search.html?deadlineStatus=5&page.currentPage=1'/>">
-					        	<li>三年以上(<c:out value='${deadlineMonitor["outThreeYear"] }'/>)</li>
-					        </a>
+					      	<li>
+						        <a href="<s:url value='/fee/search.html?deadlineStatus=1&page.currentPage=1'/>">
+						        	已超期(<c:out value='${deadlineMonitor["overDue"] }'/>)
+						        </a>
+					        </li>
+					        
+					        <li>
+						        <a href="<s:url value='/fee/search.html?deadlineStatus=2&page.currentPage=1'/>">
+						        	两周内(<c:out value='${deadlineMonitor["withinTwoWeek"] }'/>)
+						        </a>
+					        </li>
+					        
+					        <li>
+						        <a href="<s:url value='/fee/search.html?deadlineStatus=3&page.currentPage=1'/>">
+						        	两月内(<c:out value='${deadlineMonitor["withinTwoMonth"] }'/>)
+						        </a>
+					        </li>
+					        
+					        <li>
+						        <a href="<s:url value='/fee/search.html?deadlineStatus=4&page.currentPage=1'/>">
+						        	三年内(<c:out value='${deadlineMonitor["withinThreeYear"] }'/>)
+						        </a>
+					        </li>
+					        
+					        <li>
+						        <a href="<s:url value='/fee/search.html?deadlineStatus=5&page.currentPage=1'/>">
+						        	三年以上(<c:out value='${deadlineMonitor["outThreeYear"] }'/>)
+						        </a>
+					        </li>
 					      </ul>
 					    </div>
 					     
@@ -195,9 +240,9 @@
 								</a> 
 							  </td>
 							  <td>
-								<a href="javascript:return void" onclick="exportFees()">
-								<button style="margin-left:10px;" class="button button-rounded button-highlight">表格导出</button>
-								</a> 
+								
+								<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportFees()">表格导出</button>
+								
 							  </td>	
 							  <td>
 								<a href="javascript:return void" onclick="delectFees()">

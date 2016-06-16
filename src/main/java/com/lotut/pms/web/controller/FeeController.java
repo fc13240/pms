@@ -172,7 +172,8 @@ public class FeeController {
 		File excelFile = new File(exportExcelPath);
 		response.setContentLength((int)excelFile.length());
 		response.setHeader("Content-Disposition", "attachment;filename=" + exportExcelName);
-		
+		response.setHeader("X-FRAME-OPTIONS", "SAMEORIGIN");
+
 		int BUFFER_SIZE = 8192;
 		byte[] buffer = new byte[BUFFER_SIZE];
 		try (OutputStream out = response.getOutputStream(); 
@@ -188,7 +189,8 @@ public class FeeController {
 	@RequestMapping(path="/exportFeesAllMessage", method=RequestMethod.GET)
 	public void exportFeesAllMessage(@RequestParam("fees")List<Long> feeIds, HttpServletResponse response) throws IOException {
 		response.setContentType("application/vnd.ms-excel");
-		
+		response.setHeader("X-FRAME-OPTIONS", "SAMEORIGIN");
+
 		User user = PrincipalUtils.getCurrentPrincipal();
 		String exportExcelName = user.getUsername() + System.currentTimeMillis() + ".xls";
 		String exportExcelPath = feeService.FeeExportExcel(feeIds, exportExcelName);
