@@ -66,7 +66,7 @@
 					  <c:forEach items="${fees}" var="fee" varStatus="status">
 						<tr>
 						  <td><span class="batch-share-item">
-							<input type="checkbox" class="fee-check-item" feeId="${fee.feeId}" patent="${fee.patent.patentId}">
+							<input type="checkbox" class="fee-check-item" feeId="${fee.feeId}" patent="${fee.patent.patentId}" monitorStatus="${fee.monitorStatus.monitorStatusDescription}">
 							</span> ${status.index+1} </td>
 						  <td>${fee.patent.appNo}</td>
 						  <td>${fee.patent.name}</td>
@@ -156,12 +156,17 @@
 	
 	function joinOrder() {
 		var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
-		
+		var monitorStatus=formutil.getAllCheckboxValues('tr td input.fee-check-item','monitorStatus');
 		if (!feeSelected) {
 			formutil.alertMessage('请选择应缴费记录');
 			return;
 		}
-
+		for(var i = 0;i < feeSelected.length;i++){
+			if (monitorStatus[i]=="已加入") {
+				formutil.alertMessage('已经加入购物车，不能重复加入');
+				return;
+			}
+		}
 		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'feeId');
 		
 		window.open("<s:url value='/order/orderCreateForm.html'/>?fees=" + fees);
