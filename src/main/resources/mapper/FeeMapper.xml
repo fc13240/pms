@@ -332,14 +332,14 @@
 	</select>
 	
 	<!--当前用户已缴纳的金额  -->
-	<select id="getFeeAllCountByUser" parameterType="int" resultType="int">
+	<select id="getFeeAllCountByUser" parameterType="int" resultType="long">
 		select case when sum is null then 0 else sum end as c
 			    from (select sum(f.amount) as 'sum' from fees f
 			    where f.fee_owner = #{userId} and f.fee_payment_status in (2,3,5)) as a
 	</select>
 	
 	<!--当前用户未缴纳的金额  -->
-	<select id="getUnPaidCountByUser" parameterType="int" resultType="int">
+	<select id="getUnPaidCountByUser" parameterType="int" resultType="long">
 		select case when sum is null then 0 else sum end as c
 		       from (select sum(f.amount) as 'sum' from fees f 
 		       where f.fee_owner =#{userId} and f.fee_monitor_status = 2 and f.fee_payment_status =1) as a

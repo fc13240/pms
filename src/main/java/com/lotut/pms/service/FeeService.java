@@ -54,9 +54,9 @@ public interface FeeService {
 	
 	List<Fee> getFeesForPatentId(long patentId);
 	
-	int getFeeAllCountByUser(int userId);
+	long getFeeAllCountByUser(int userId);
 	
-	int getUnPaidCountByUser(int userId);
+	long getUnPaidCountByUser(int userId);
 	
 	List<String> getFeeTypes(String appNo);
 	

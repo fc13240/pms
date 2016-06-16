@@ -134,12 +134,12 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 		}
 
 		@Override
-		public int getFeeAllCountByUser(int userId) {
+		public long getFeeAllCountByUser(int userId) {
 			return feeMapper.getFeeAllCountByUser(userId);
 		}
 
 		@Override
-		public int getUnPaidCountByUser(int userId) {
+		public long getUnPaidCountByUser(int userId) {
 			return feeMapper.getUnPaidCountByUser(userId);
 		}
 

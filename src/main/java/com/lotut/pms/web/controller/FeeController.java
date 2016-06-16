@@ -100,8 +100,8 @@ public class FeeController {
 		Map<String,Map<String,String>> feePaymentStatusCount=feeService.getMonitoredFeesByStatus(userId);
 		Map<String,Map<String,String>> patentStatusCount=feeService.getMonitoredFeesByFeeType(userId);
 		Map<String,Long> deadlineMonitor=feeService.getCountByDeadlinePayment(userId);
-		int totalFeeCount=feeService.getFeeAllCountByUser(userId);
-		int unpaidFeeCount=feeService.getUnPaidCountByUser(userId);
+		long totalFeeCount=feeService.getFeeAllCountByUser(userId);
+		long unpaidFeeCount=feeService.getUnPaidCountByUser(userId);
 		model.addAttribute("patentTypeCount", patentTypeCount);
 		model.addAttribute("feePaymentStatusCount", feePaymentStatusCount);
 		model.addAttribute("patentStatusCount", patentStatusCount);
@@ -129,8 +129,8 @@ public class FeeController {
 		Map<String,Map<String,String>> feePaymentStatusCount=feeService.getMonitoredFeesByStatus(searchCondition.getUserId());
 		Map<String,Map<String,String>> patentStatusCount=feeService.getMonitoredFeesByFeeType(searchCondition.getUserId());
 		Map<String,Long> deadlineMonitor=feeService.getCountByDeadlinePayment(PrincipalUtils.getCurrentUserId());
-		int totalFeeCount=feeService.getFeeAllCountByUser(PrincipalUtils.getCurrentUserId());
-		int unpaidFeeCount=feeService.getUnPaidCountByUser(PrincipalUtils.getCurrentUserId());
+		long totalFeeCount=feeService.getFeeAllCountByUser(PrincipalUtils.getCurrentUserId());
+		long unpaidFeeCount=feeService.getUnPaidCountByUser(PrincipalUtils.getCurrentUserId());
 		model.addAttribute("patentTypeCount", patentTypeCount);
 		model.addAttribute("feePaymentStatusCount", feePaymentStatusCount);
 		model.addAttribute("patentStatusCount", patentStatusCount);

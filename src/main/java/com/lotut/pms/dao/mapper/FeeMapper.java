@@ -60,8 +60,8 @@ public interface FeeMapper {
 	
 	List<Fee> getFeesForPatentId(@Param("patentId")long patentId);
 	
-	int getFeeAllCountByUser(int userId);
-	int getUnPaidCountByUser(int userId);
+	long getFeeAllCountByUser(int userId);
+	long getUnPaidCountByUser(int userId);
 
 	List<String> getFeeTypes(@Param("appNo")String appNo);
 	

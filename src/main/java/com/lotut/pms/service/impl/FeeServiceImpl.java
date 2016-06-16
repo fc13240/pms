@@ -229,12 +229,12 @@ public class FeeServiceImpl implements FeeService {
 		}
 
 		@Override
-		public int getFeeAllCountByUser(int userId) {
+		public long getFeeAllCountByUser(int userId) {
 			return feeDao.getFeeAllCountByUser(userId);
 		}
 
 		@Override
-		public int getUnPaidCountByUser(int userId) {
+		public long getUnPaidCountByUser(int userId) {
 			return feeDao.getUnPaidCountByUser(userId);
 		}
 		
