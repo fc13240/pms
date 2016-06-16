@@ -366,7 +366,7 @@
 								<td><a id="download" href="javascript: void(0);" onClick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}')">
 								  <c:out value="${notice.name}"/>
 								  </a> </td>
-								<td><label id="lblSelect">
+								<td>
 								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this)">
 									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> <option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
 											  
@@ -377,7 +377,7 @@
 									  </option>
 									</c:forEach>
 								  </select>
-								  </label>
+								
 								</td>
 								<td><c:choose>
 									<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
@@ -386,7 +386,7 @@
 									</c:otherwise>
 								  </c:choose>
 								</td>
-								<td><label id="lblSelect">
+								<td>
 								  <select class="selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
 									<option>全部</option>
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
@@ -398,7 +398,7 @@
 									  </option>
 									</c:forEach>
 								  </select>
-								  </label>
+								  
 								</td>
 								<td>
 								<a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}"> 下载 </a> 
