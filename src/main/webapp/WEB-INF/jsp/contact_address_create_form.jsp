@@ -43,7 +43,7 @@
 					<span style="color: red; display: none;" id=phoneError>请输入正确的手机或者电话号</span>
 					<br> 
 			       	<h5>通讯地址:</h5>
-					<select name="province" class="form-control" style="width:226px;display:inline;" id="province" onchange="loadCities()" required>
+					<select name="province" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities()" required>
 					  <option value=''>请选择</option>
 					  <c:forEach items="${provinces}" var="province">
 						<option value="${province.id}">${province.name}</option>
@@ -52,7 +52,6 @@
 					<select name="city" id="city" style="width:226px;display:inline;" class="form-control" onchange="loadDistricts()" required>
 					  <option value=''>请选择</option>
 					</select>
-					<h5>&nbsp;</h5>
 					<select name="district" style="width:226px;display:inline;" class="form-control" id="district" onchange="loadStreets()" required>
 					  <option value=''>请选择</option>
 					</select>
