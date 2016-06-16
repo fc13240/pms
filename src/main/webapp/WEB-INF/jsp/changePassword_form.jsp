@@ -59,5 +59,7 @@
 	</div>
 
 </div>
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>
 </body>
 </html>
