@@ -37,19 +37,19 @@
 					  
 						<h5>通讯地址:</h5>
 	  
-					  <select name="province" style="width:300px;" class="form-control" id="province" onchange="loadCities()" required>
+					  <select name="province" style="width:136px;display:inline;" class="form-control" id="province" onchange="loadCities()" required>
 						<option value='${contactAddresses.province}'>${contactAddresses.provinceName}</option>
 						<c:forEach items="${provinces}" var="province">
 						  <option value="${province.id}">${province.name}</option>
 						</c:forEach>
 					  </select>
-					  <select name="city" class="form-control" style="width:300px;" id="city" onchange="loadDistricts()" required>
+					  <select name="city" class="form-control"  style="width:226px;display:inline;" id="city" onchange="loadDistricts()" required>
 						<option value='${contactAddresses.city}'>${contactAddresses.cityName}</option>
 					  </select>
-					  <select name="district" class="form-control" style="width:300px;" id="district" onchange="loadStreets()"required>
+					  <select name="district" class="form-control"  style="width:226px;display:inline;" id="district" onchange="loadStreets()"required>
 						<option value='${contactAddresses.district}'>${contactAddresses.districtName}</option>
 					  </select>
-					  <select name="street" class="form-control" style="width:300px;" id="street" required>
+					  <select name="street" class="form-control"  style="width:226px;display:inline;" id="street" required>
 						<option value='${contactAddresses.street}'>${contactAddresses.streetName}</option>
 					  </select>
 					  <h5>详细地址:</h5>
