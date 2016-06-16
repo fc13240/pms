@@ -348,25 +348,25 @@
 						  <tbody>
 							<c:forEach items="${notices}" var="notice" varStatus="status">
 							  <tr>
-								<td class="center"><label class="pos-rel"> <span class="batch-share-item">
-								  <input type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
+								<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
+								  <input style="text-align:center" type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
 								  <span class="lbl"></span></label></td>
-								<td class="center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
-								<td><c:out value="${notice.patent.appNo}"/>
+								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+								<td style="text-align:center"><c:out value="${notice.patent.appNo}"/>
 								</td>
-								<td><c:out value="${notice.patent.name}"/></td>
-								<td><c:out value="${notice.patent.firstAppPerson}"/></td>
+								<td style="text-align:center"><c:out value="${notice.patent.name}"/></td>
+								<td style="text-align:center"><c:out value="${notice.patent.firstAppPerson}"/></td>
 								<td>
 								
 								${notice.patent.patentStatusText}
 								
 								</td>
-								<td><c:out value="${notice.patent.shareUsersAsString}"/></td>
-								<td><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
-								<td><a id="download" href="javascript: void(0);" onClick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}')">
+								<td style="text-align:center"><c:out value="${notice.patent.shareUsersAsString}"/></td>
+								<td style="text-align:center"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
+								<td style="text-align:center"><a id="download" href="javascript: void(0);" onClick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}')">
 								  <c:out value="${notice.name}"/>
 								  </a> </td>
-								<td>
+								<td style="text-align:center">
 								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this)">
 									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> <option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
 											  
@@ -379,14 +379,14 @@
 								  </select>
 								
 								</td>
-								<td><c:choose>
+								<td style="text-align:center"><c:choose>
 									<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
 									<c:otherwise>
 									  <c:out value="${notice.remainDays}"/>
 									</c:otherwise>
 								  </c:choose>
 								</td>
-								<td>
+								<td style="text-align:center">
 								  <select class="selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
 									<option>全部</option>
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
@@ -400,7 +400,7 @@
 								  </select>
 								  
 								</td>
-								<td>
+								<td style="text-align:center">
 								<a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}"> 下载 </a> 
 								<a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
 								  分享
