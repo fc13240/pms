@@ -65,10 +65,10 @@
 							银联卡支付 </td>
 						</tr>
 						
-						<tr style="display: none">
+						<tr class="lotut_display" style="display: none">
 						  <td>快递方式</td>
 						</tr>
-						<tr style="display: none">
+						<tr class="lotut_display" style="display: none">
 						  <td>
 						  	<input type="radio" name="express" value="0" checked="checked" required="required" onclick="hint()">
 							挂号信(<font color=red>免费</font>)
@@ -76,10 +76,10 @@
 							顺丰速运(￥20)
 						  </td>
 						</tr>
-						<tr style="display: none">
+						<tr class="lotut_display" style="display: none">
 						  <td>发票选择</td>
 						</tr>
-						<tr style="display: none">
+						<tr class="lotut_display" style="display: none">
 						  <td>
 						  	<span>国家知识产权局专利收费收据:</span>
 						  	<input type="radio" name="nationalInvoice" value="0" checked="checked" required="required" onclick="hint()">
@@ -88,7 +88,7 @@
 							需要
 						  </td>
 						</tr>
-						<tr style="display: none">
+						<tr class="lotut_display" style="display: none">
 						  <td>
 						  	<span>龙图腾公司专利官费代缴增值税发票:</span>
 						  	<input type="radio" name="companyInvoice" value="0" checked="checked" required="required" onclick="hidde();hint()">
@@ -227,10 +227,10 @@
 	}
 
 	function hide(){
-		$.each($("#simple-table tr"), function(i){ 
-			if(i > 5 && i<11){ 
+		$.each($("#simple-table .lotut_display"), function(i){ 
+			 
 				this.style.display = 'none'; 
-			} 
+			
 			});
 		var express=$("input:radio[name='express']:checked").val();
 		var nationalInvoice=$("input:radio[name='nationalInvoice']:checked").val();

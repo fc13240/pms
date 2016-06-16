@@ -3,11 +3,6 @@
 	<div class="lt-left-title">我的专利</div>
 	
 	<ul style="maring:0px;padding:0px;">
-	<li class="active"> 
-		<a href="<s:url value='/main.html'/>">
-		专利概况
-		</a> 
-	</li>
 	<li  class=""> <a href="<s:url value='/patent/list.html?currentPage=1'/>">
 	<h5>专利列表</h5>
 	</a> 
