@@ -261,16 +261,16 @@
 								<span class="lbl"></span> </label>
 							  </th>
 							  <th class="center" width="50">序号</th>
-							  <th width="90">申请号/专利号</th>
-							  <th width="150">专利名称</th>
+							  <th width="90px">申请号/专利号</th>
+							  <th width="150px">专利名称</th>
 							  <th>第一申请人 </th>
 							  <th>案件状态 </th>
 							  <th>共享人</th>
-							  <th width="75px">发文日</th>
+							  <th width="100px">发文日</th>
 							  <th>通知书名称</th>
-							  <th width="90px">纸件申请</th>
+							  <th width="120px">纸件申请</th>
 							  <th>期限</th>
-							  <th>通知状态</th>
+							  <th width="120px">通知状态</th>
 							  <!-- 							<th>预览</th> 
 							  <th>下载</th>-->
 							  <th width="130">操作</th>
