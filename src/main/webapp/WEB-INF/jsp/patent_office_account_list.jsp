@@ -49,11 +49,11 @@
 			                <span class="lbl"></span> </label>
 			              </th>
 			              <th class="center" width="20">序号</th>
-			              <th width="110">中国专利电子申请的用户名</th>
-			              <th width="170">用户代码</th>
-			              <th width="90">登陆密码 </th>
-			              <th width="90" >更新时间</th>
-			              <th width="60">操作</th>
+			              <th width="110" align="center">中国专利电子申请的用户名</th>
+			              <th width="170" align="center">用户代码</th>
+			              <th width="90" align="center">登陆密码 </th>
+			              <th width="90" align="center">更新时间</th>
+			              <th width="60"align="center">操作</th>
 			            </tr>
 			          </thead>
 			          <tbody>
