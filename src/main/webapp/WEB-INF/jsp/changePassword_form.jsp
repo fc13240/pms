@@ -59,6 +59,20 @@
 	</div>
 
 </div>
+<script type="text/javascript">
+	function clearPasswordErrorSpan() {
+		$("#passwordError").hide();
+	}
+</script>
+<script type="text/javascript">
+	jQuery(function($) {
+		$("#reset-form").validate({
+			submitHandler: function(form){ 
+				form.submit();     
+			}
+		});
+	});
+</script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>
 </body>
