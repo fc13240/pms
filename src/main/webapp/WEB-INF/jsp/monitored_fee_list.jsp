@@ -282,26 +282,26 @@
 					  <tbody>
 						<c:forEach items="${fees}" var="fee" varStatus="status">
 						  <tr>
-							<td class="center"><span class="batch-share-item">
+							<td class="center" style="text-align:center"><span class="batch-share-item">
 							  <input type="checkbox" class="fee-check-item" fee="${fee.feeId}" amount="${fee.amount}" onclick="calcTotalAmount()" 
 							  	paymentStatus="${fee.paymentStatus.paymentStatusId}" deadline="<fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/>">
 							  </span> </td>
-							<td class="center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
-							<td><a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a></td>
-							<td>${fee.patent.name}</td>
-							<td>${fee.patent.firstAppPerson}</td>
-							<td>${fee.patent.patentStatus.statusDescription}</td>
-							<td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
-							<td>${fee.feeType}</td>
-							<td>${fee.amount}</td>
-							<td><c:choose>
+							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+							<td style="text-align:center"><a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a></td>
+							<td style="text-align:center">${fee.patent.name}</td>
+							<td style="text-align:center">${fee.patent.firstAppPerson}</td>
+							<td style="text-align:center">${fee.patent.patentStatus.statusDescription}</td>
+							<td style="text-align:center"><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
+							<td style="text-align:center">${fee.feeType}</td>
+							<td style="text-align:center">${fee.amount}</td>
+							<td style="text-align:center"><c:choose>
 								<c:when test="${fee.paymentStatus.paymentStatusId == 1}">
 								  <input type="text" value="${fee.invoiceTitle}" onChange="changeInvoiceTitle('${fee.feeId}', this.value)" size="30">
 								</c:when>
 								<c:otherwise> ${fee.invoiceTitle} </c:otherwise>
 							  </c:choose>
 							</td>
-							<td>
+							<td style="text-align:center" >
 	
 								<c:choose>
 									<c:when test="${fee.paymentStatus.paymentStatusId == 1}">
@@ -320,7 +320,7 @@
 							</td>
 						  </tr>
 						</c:forEach>
-						<tr>
+						<tr style="text-align:center">
 						  <c:set var="totalAmount" value="0"></c:set>
 						  <c:forEach items="${fees}" var="fee">
 							<c:set var="totalAmount" value="${totalAmount+fee.amount}"></c:set>

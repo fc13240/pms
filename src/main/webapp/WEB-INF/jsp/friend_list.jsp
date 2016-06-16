@@ -49,12 +49,12 @@
 					    <tbody>
 					      <c:forEach items="${friends}" var="friend" varStatus="status">
 					        <tr>
-					          <td>${status.count}</td>
-					          <td><c:out value="${friend.username}"/></td>
-					          <td><c:out value="${friend.name}"/></td>
-					          <td><c:out value="${friend.email}"/></td>
-					          <td><c:out value="${friend.phone}"/></td>
-					          <td><a  href="<s:url value='/friend/delete/'/><c:out value='${friend.userId}.html'/>">删除好友</a></td>
+					          <td style="text-align:center">${status.count}</td>
+					          <td style="text-align:center"><c:out value="${friend.username}"/></td>
+					          <td style="text-align:center"><c:out value="${friend.name}"/></td>
+					          <td style="text-align:center"><c:out value="${friend.email}"/></td>
+					          <td style="text-align:center"><c:out value="${friend.phone}"/></td>
+					          <td style="text-align:center"><a  href="<s:url value='/friend/delete/'/><c:out value='${friend.userId}.html'/>">删除好友</a></td>
 					        </tr>
 					      </c:forEach>
 					    </tbody>
