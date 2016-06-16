@@ -6,18 +6,18 @@
 	<ul style="maring:0px;padding:0px;">
 	<li class="active"> 
 		<a href="<s:url value='/user/detail.html'/>">
-		<h5 style="font-family:"微软雅黑">个人信息</h5>
+		<h5>个人信息</h5>
 		</a>
 	</li>
 	<li  class=""> 
 		<a href="<s:url value='/user/getContactAddresses.html'/>">
-		<h5 style="font-family:"微软雅黑">联系地址</h5>
+		<h5>联系地址</h5>
 		</a>
 	</li>
 
 	<li  class=""> 
 		<a href="<s:url value='/user/changePasswordForm.html'/>">
-		<h5 style="font-family:"微软雅黑">修改密码</h5>
+		<h5>修改密码</h5>
 		</a>
 	</li>
  			
