@@ -38,27 +38,27 @@
 							  <td><table class="table table-striped table-bordered table-hover">
 								  <thead>
 									<tr class="simple_bag">
-									  <th>订单编号</th>
-									  <th>下单时间</th>
-									  <th>支付时间</th>
-									  <th>支付方式</th>
-									  <th>快递方式</th>
+									  <th style="text-align:center">订单编号</th>
+									  <th style="text-align:center">下单时间</th>
+									  <th style="text-align:center">支付时间</th>
+									  <th style="text-align:center">支付方式</th>
+									  <th style="text-align:center">快递方式</th>
 									</tr>
 								  </thead>
 								  <tbody>
 									<tr>
-									  <td>${order.id}</td>
-									  <td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-									  <td><fmt:formatDate value="${order.payTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-									  <td>${order.paymentMethod.paymentMethod}</td>
+									  <td style="text-align:center">${order.id}</td>
+									  <td style="text-align:center"><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+									  <td style="text-align:center"><fmt:formatDate value="${order.payTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+									  <td style="text-align:center">${order.paymentMethod.paymentMethod}</td>
 									  <c:if test="${order.expressFee == 20}">
-									   	<td>顺丰速运</td>
+									   	<td style="text-align:center">顺丰速运</td>
 									  </c:if>
 									  <c:if test="${order.expressFee == 0 && order.postAddress != null}">
-									   <td>挂号信</td>
+									   <td style="text-align:center">挂号信</td>
 									  </c:if>
 									  <c:if test="${order.expressFee == 0 && order.postAddress == null}">
-									   <td>无</td>
+									   <td style="text-align:center">无</td>
 									  </c:if>
 									</tr>
 								  </tbody>
@@ -77,31 +77,31 @@
 							  <td><table class="table table-striped table-bordered table-hover">
 								  <thead>
 									<tr class="simple_bag">
-									  <th>序号</th>
-									  <th>申请号/专利号</th>
-									  <th>专利名称</th>
-									  <th>第一申请人</th>
-									  <th>案件状态</th>
-									  <th>缴费截止日</th>
-									  <th>缴费种类</th>
-									  <th>缴费金额</th>
-									  <th>缴费状态</th>
-									  <th>发票抬头</th>
+									  <th style="text-align:center">序号</th>
+									  <th style="text-align:center">申请号/专利号</th>
+									  <th style="text-align:center">专利名称</th>
+									  <th style="text-align:center">第一申请人</th>
+									  <th style="text-align:center">案件状态</th>
+									  <th style="text-align:center">缴费截止日</th>
+									  <th style="text-align:center">缴费种类</th>
+									  <th style="text-align:center">缴费金额</th>
+									  <th style="text-align:center">缴费状态</th>
+									  <th style="text-align:center">发票抬头</th>
 									</tr>
 								  </thead>
 								  <tbody>
 									<c:forEach items="${order.feeList}" var="fee" varStatus="status">
 									  <tr>
-										<td class="center">${status.count}</td>
-										<td>${fee.patent.appNo}</td>
-										<td>${fee.patent.name}</td>
-										<td>${fee.patent.firstAppPerson}</td>
-										<td>${fee.patent.patentStatus.statusDescription}</td>
-										<td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
-										<td>${fee.feeType}</td>
-										<td>${fee.amount} </td>
-										<td>${fee.paymentStatus.payementStatusDescription} </td>
-										<td>${fee.invoiceTitle}</td>
+										<td class="center" style="text-align:center">${status.count}</td>
+										<td style="text-align:center">${fee.patent.appNo}</td>
+										<td style="text-align:center">${fee.patent.name}</td>
+										<td style="text-align:center">${fee.patent.firstAppPerson}</td>
+										<td style="text-align:center">${fee.patent.patentStatus.statusDescription}</td>
+										<td style="text-align:center"><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
+										<td style="text-align:center">${fee.feeType}</td>
+										<td style="text-align:center">${fee.amount} </td>
+										<td style="text-align:center">${fee.paymentStatus.payementStatusDescription} </td>
+										<td style="text-align:center">${fee.invoiceTitle}</td>
 									  </tr>
 									</c:forEach>
 								  </tbody>
@@ -122,16 +122,16 @@
 								<td><table class="table table-striped table-bordered table-hover">
 									<thead>
 									  <tr class="simple_bag">
-										<th>收货人姓名</th>
-										<th>地址</th>
-										<th>电话</th>
+										<th style="text-align:center">收货人姓名</th>
+										<th style="text-align:center">地址</th>
+										<th style="text-align:center">电话</th>
 									  </tr>
 									</thead>
 									<tbody>
 									  <tr>
-										<td> ${order.postAddress.receiver} </td>
-										<td> ${order.postAddress.provinceName}${order.postAddress.cityName}${order.postAddress.districtName}${order.postAddress.streetName}${order.postAddress.detailAddress} </td>
-										<td> ${order.postAddress.phone} </td>
+										<td style="text-align:center"> ${order.postAddress.receiver} </td>
+										<td style="text-align:center"> ${order.postAddress.provinceName}${order.postAddress.cityName}${order.postAddress.districtName}${order.postAddress.streetName}${order.postAddress.detailAddress} </td>
+										<td style="text-align:center"> ${order.postAddress.phone} </td>
 									  </tr>
 									</tbody>
 								  </table></td>
@@ -163,7 +163,7 @@
 							  <td><form action="<s:url value='/order/updateUserOrderContactAddresses.html'/>" method="post" id="orderDetail">
 								  <se:csrfInput/>
 								  快递单编号:
-								  <input type="text" name="expressNo" id="expressNo" value="${order.expressNo}" required/>
+								  <input type="text" style="width:210px;height:34px;" name="expressNo" id="expressNo" value="${order.expressNo}" required/>
 								  快递公司:
 								  	 <c:if test="${order.expressFee == 20}">
 									   <span>顺丰速运</span>
@@ -179,7 +179,7 @@
 									  <div style="float:left;line-height: 32px;">发送时间</div>
 									  <div style="float:left;margin-left: 16px;" class="form-group" style="margin-left:15px;">
 									  <div style="float:left;">
-										<input  type="text" class="form-control" id="startAppDateId" 
+										<input  type="text" class="form-control" id="startAppDateId" style="width:108px;height:34px;"
 										name="startDispatchDate" placeholder="快递发送日期选择" value="<fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/>"  
 										readonly="readonly" onclick="javascript:$('#start_date_img').click()" style="width: 150px;height: 25px" required> </div>
 									  <div style="float:left;margin: 8px;"><img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" align="absmiddle" id="start_date_img"></div>
@@ -203,24 +203,24 @@
 							  <td><table class="table table-striped table-bordered table-hover" >
 								  <thead>
 									<tr class="simple_bag">
-									  <th>官费</th>
-									  <th>服务费</th>
-									  <th>快递费</th>
-									  <th>龙图腾发票增值税</th>
+									  <th style="text-align:center">官费</th>
+									  <th style="text-align:center">服务费</th>
+									  <th style="text-align:center">快递费</th>
+									  <th style="text-align:center">龙图腾发票增值税</th>
 									</tr>
 								  </thead>
 								  <tbody>
 									<tr>
-									  <td>
+									  <td style="text-align:center">
 									  	<c:set var="totalAmount" value="0"></c:set>
 									  	<c:forEach items="${order.feeList}" var="fee">
 									  		<c:set var="totalAmount" value="${totalAmount+fee.amount}"></c:set>
 									  	</c:forEach>
-									  	${totalAmount }
+									  	￥${totalAmount }
 									  </td>
-									  <td>￥${order.serviceFee}</td>
-									  <td>￥${order.expressFee}</td>
-									  <td>￥${order.invoiceFee}</td>
+									  <td style="text-align:center">￥${order.serviceFee}</td>
+									  <td style="text-align:center">￥${order.expressFee}</td>
+									  <td style="text-align:center">￥${order.invoiceFee}</td>
 									</tr>
 									<tr>
 									  <td colspan="5" style="font-weight: bold;">商品总额:￥${order.totalAmount}</td>
@@ -338,7 +338,7 @@
 	
 </script>
 <script type="text/javascript">
-$("#table1").style.textAlign="center";
+/* $("#table1").style.textAlign="center"; */
 
 $(function() {
 	$("#orderDetail").validate({
