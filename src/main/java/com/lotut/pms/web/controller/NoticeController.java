@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
@@ -119,7 +120,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(path="/download", method=RequestMethod.GET)
-	public void downloadNotice(@RequestParam("notice")int noticeId, HttpServletResponse response) throws IOException {
+	public void downloadNotice(@RequestParam("notice")int noticeId, HttpServletResponse response,HttpServletRequest request) throws IOException {
 		response.setContentType("application/zip");
 		
 		Notice notice = noticeService.getNoticeById(noticeId);
@@ -127,6 +128,13 @@ public class NoticeController {
 		String dispatchDate = new SimpleDateFormat("yyyy-MM-dd").format(notice.getDispatchDate());
 		String downloadFileName = dispatchDate + URLEncoder.encode(notice.getName(), "UTF8") + 
 				notice.getPatent().getAppNo() + URLEncoder.encode(notice.getPatent().getName(), "UTF8");
+		
+		
+		if("FF".equals(getBrowser(request))){
+		    //针对火狐浏览器处理
+			downloadFileName =dispatchDate+ new String(notice.getName().getBytes("UTF-8"),"iso-8859-1")+
+					notice.getPatent().getAppNo()+new String(notice.getPatent().getName().getBytes("UTF-8"),"iso-8859-1");
+		}
 		response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName + ".zip");
 		response.setContentLength((int)noticeZipFile.getFile().length());
 		int BUFFER_SIZE = 8192;
@@ -191,5 +199,13 @@ public class NoticeController {
 		noticeService.batchUpdateNoticesNoticePaperType(noticeIdList, paperApplyType);
 		return "notice_list";
 	}
-	
+
+	private String getBrowser(HttpServletRequest request){
+	    String UserAgent = request.getHeader("USER-AGENT").toLowerCase();
+	    if(UserAgent!=null){
+	        if (UserAgent.indexOf("msie") >=0 ) return "IE";
+	        if (UserAgent.indexOf("firefox") >= 0) return "FF";
+	    }
+	    return null;
+	}
 }
