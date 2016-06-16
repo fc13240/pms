@@ -100,7 +100,7 @@
     </session-config>   
     
 	<welcome-file-list>
-	    <welcome-file>/main.html</welcome-file>
+	    <welcome-file>/patent/list.html</welcome-file>
 	</welcome-file-list>   
 	
 	<resource-ref>

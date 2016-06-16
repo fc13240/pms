@@ -56,6 +56,9 @@ public class PatentController {
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
 		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
 		//分页相关
 		int totalCount=(int)patentService.getPatentsCount(userId);
 		page.setTotalRecords(totalCount);
