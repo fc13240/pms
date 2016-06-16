@@ -195,9 +195,9 @@
 								</a> 
 							  </td>
 							  <td>
-								<a href="javascript:return void" onclick="exportFees()">
-								<button style="margin-left:10px;" class="button button-rounded button-highlight">表格导出</button>
-								</a> 
+								
+								<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportFees()">表格导出</button>
+								
 							  </td>	
 							  <td>
 								<a href="javascript:return void" onclick="delectFees()">
