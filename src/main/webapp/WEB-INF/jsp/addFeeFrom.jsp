@@ -34,7 +34,7 @@
 					  <div class="lt-third" style="background:#fff;margin-top:10px;">
 					  
 						<h5>申请号：</h5>
-						<input style="width:400px;" class="selectPointOfInterest form-control" name="appNo" id="appNo"  type="text" onblur="loadPatent()" required>
+						<input style="width:400px;" class="selectPointOfInterest form-control" name="appNo" id="appNo"  type="text" onblur="loadPatent()" required />
 					     
 						<br>		
 				       	<h5>专利名称:</h5>

@@ -95,7 +95,7 @@
 							不需要
 							<input type="radio" name="companyInvoice" value="1" required="required" onclick="showed();hint()">
 							需要
-							<input name="invoice" id="invoice" type="text" placeholder="请输入需要开具的发票抬头" style="height:16px;width: 250px;display: none;">
+							<input name="invoice" id="invoice" type="text" placeholder="请输入需要开具的发票抬头" style="height:30px;width: 250px;display: none;">
 						  </td>
 						</tr>
 							
