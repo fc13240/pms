@@ -22,7 +22,7 @@
 		
 			<!--left begin-->
 		  <div class="col-xs-1 sidebar" style="min-width:100px;">
-			<%@ include file="_left_nav2.jsp" %>
+			<%@ include file="_left_nav_fee.jsp" %>
 		  </div>
 		  <!--left end-->
 		  <!--right begin-->
@@ -112,25 +112,27 @@
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
 						<thead>
 						  <tr class="simple_bag">
-							<th colspan="5"> <fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
-							  &nbsp;&nbsp;&nbsp;
+							<th colspan="5"> 
 							  <table>
 							  <tr>
+							  <td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							  &nbsp;&nbsp;&nbsp;</td>
 							  <td>订单号：${order.id}<input type="hidden" name="orderId" value="${order.id}"></td>
 							  <td>							 
 							  	<span style="margin-left:100px;">
-			              		<input type="submit" value="导出费用清单">
+			              		<input type="submit" style="width:108px;" class="button button-rounded button-highlight" value="导出费用清单">
+			              		&nbsp;&nbsp;&nbsp;
 			              		</span>
 			              	  </td>
 							  <td>
 								  <c:if test="${order.orderStatus.statusId == 2}">
 									<div> <a href="<s:url value='/order/setUserOrderToPaid.html'/>?orderId=<c:out value='${order.id}'/>">
-									  <button type="button" class="btn btn-purple btn-sm">置为已交局</button>
+									  <button type="button" class="button button-rounded button-highlight">置为已交局</button>
 									  </a> </div>
 								  </c:if> 
 								  <c:if test="${order.orderStatus.statusId == 4}">
 									<div> <a href="<s:url value='/order/setUserOrderToPaidSuccess.html'/>?orderId=<c:out value='${order.id}'/>">
-									  <button type="button" class="btn btn-purple btn-sm">缴费成功</button>
+									  <button type="button" class="button button-rounded button-highlight">缴费成功</button>
 									  </a> </div>
 								  </c:if> 								  							  
 							  </td>
