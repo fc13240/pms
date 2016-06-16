@@ -47,10 +47,10 @@
 					  </thead>
 					  <tbody>
 						<tr>
-						  <td>${order.id}</td>
-						  <td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-						  <td><fmt:formatDate value="${order.payTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-						  <td>${order.paymentMethod.paymentMethod}</td>
+						  <td style="text-align:center">${order.id}</td>
+						  <td style="text-align:center"><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+						  <td style="text-align:center"><fmt:formatDate value="${order.payTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+						  <td style="text-align:center">${order.paymentMethod.paymentMethod}</td>
 		
 						</tr>
 					</table>				
@@ -83,16 +83,16 @@
 						  <tbody>
 							<c:forEach items="${order.feeList}" var="fee" varStatus="status">
 							  <tr>
-								<td class="center">${status.count}</td>
-								<td>${fee.patent.appNo}</td>
-								<td>${fee.patent.name}</td>
-								<td>${fee.patent.firstAppPerson}</td>
-								<td>${fee.patent.patentStatus.statusDescription}</td>
-								<td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
-								<td>${fee.feeType}</td>
-								<td>${fee.amount} </td>
-								<td>${fee.paymentStatus.payementStatusDescription} </td>
-								<td>${fee.invoiceTitle}</td>
+								<td class="center" style="text-align:center">${status.count}</td>
+								<td style="text-align:center">${fee.patent.appNo}</td>
+								<td style="text-align:center">${fee.patent.name}</td>
+								<td style="text-align:center">${fee.patent.firstAppPerson}</td>
+								<td style="text-align:center">${fee.patent.patentStatus.statusDescription}</td>
+								<td style="text-align:center"><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
+								<td style="text-align:center">${fee.feeType}</td>
+								<td style="text-align:center">${fee.amount} </td>
+								<td style="text-align:center">${fee.paymentStatus.payementStatusDescription} </td>
+								<td style="text-align:center">${fee.invoiceTitle}</td>
 							  </tr>
 							</c:forEach>
 						  </tbody>
@@ -125,9 +125,9 @@
 								</thead>
 								<tbody>
 								  <tr>
-									<td>${order.postAddress.receiver}</td>
-									<td>${order.postAddress.provinceName}${order.postAddress.cityName}${order.postAddress.districtName}${order.postAddress.streetName}${order.postAddress.detailAddress}</td>
-									<td>${order.postAddress.phone}</td>
+									<td style="text-align:center">${order.postAddress.receiver}</td>
+									<td style="text-align:center">${order.postAddress.provinceName}${order.postAddress.cityName}${order.postAddress.districtName}${order.postAddress.streetName}${order.postAddress.detailAddress}</td>
+									<td style="text-align:center">${order.postAddress.phone}</td>
 								  </tr>
 								</tbody>
 						</table>
@@ -140,41 +140,20 @@
 				</div>	
 				</c:if>
 				
-			<!-- 收货人信息 -->	
-				<c:if test="${order.postAddress != null}">
-				<div class="lt-box">
-				  <div class="main-container" id="main-container">
-					<div class="row">
-					  <div class="col-xs-12">
+			<!-- 发票信息 -->
 			
-						<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:30px;"> 
-							<span class="input-group-btn" >
-							<div class="ta-top" style="margin:8px;"> 
-							
-							<span style="font-size:14px;font-weight:600;line-height:17px;">龙图腾增值税发票抬头</span>
-							
-							</div>
-							</span> 
-						</div>
-						<table id="simple-table" class="table table-striped table-bordered table-hover">
-						<tr>
-						  <td><table class="table table-striped table-bordered table-hover">
-						  <tr>
-							<td><table class="table table-striped table-bordered table-hover">
-								    <tr>
-								    	<td><font style="color: red">${order.invoice}</font></td>
-								    </tr>
-							</table></td>
-						</tr>
-						</table>
-							
-						<!-- /.span -->
-					  </div>
-					  <!-- /.row -->
-					</div>
-				  </div>
-				</div>	
-				</c:if>
+		<table class="table table-striped table-bordered table-hover">
+		 <thead>
+			<tr class="simple_bag">
+			  <th>龙图腾增值税发票抬头</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		    	<td><font style="color: red">${order.invoice}</font></td>
+		    </tr>
+		  </tbody>
+		</table>
 				
 			<!-- 快递信息 -->	
 				<div class="lt-box">
@@ -202,17 +181,17 @@
 							  </thead>
 							  <tbody>
 								<tr>
-								  <td><fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/></td>
-								  <td>${order.expressNo}</td>
+								  <td style="text-align:center"><fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/></td>
+								  <td style="text-align:center">${order.expressNo}</td>
 			<%-- 					  <td>${order.expressCompany}</td> --%>
 								  <c:if test="${order.expressFee == 20}">
-								   <td>顺丰速运</td>
+								   <td style="text-align:center">顺丰速运</td>
 								  </c:if>
 								  <c:if test="${order.expressFee == 0 && order.postAddress != null}">
-								   <td>挂号信</td>
+								   <td style="text-align:center">挂号信</td>
 								  </c:if>
 								  <c:if test="${order.expressFee == 0 && order.postAddress == null}">
-								   <td>无</td>
+								   <td style="text-align:center">无</td>
 								  </c:if>
 								</tr>
 							  </tbody>
@@ -252,16 +231,16 @@
 							  </thead>
 							  <tbody>
 								<tr>
-								  <td>
+								  <td style="text-align:center">
 								  	<c:set var="totalAmount" value="0"></c:set>
 								  	<c:forEach items="${order.feeList}" var="fee">
 								  		<c:set var="totalAmount" value="${totalAmount+fee.amount}"></c:set>
 								  	</c:forEach>
 								  	￥${totalAmount }
 								  </td>
-								  <td>￥${order.serviceFee}</td>
-								  <td>￥${order.expressFee}</td>
-								  <td>￥${order.invoiceFee}</td>
+								  <td style="text-align:center">￥${order.serviceFee}</td>
+								  <td style="text-align:center">￥${order.expressFee}</td>
+								  <td style="text-align:center">￥${order.invoiceFee}</td>
 								</tr>
 								<tr>
 								  <td colspan="5" style="font-weight: bold;">商品总额:￥${order.totalAmount}</td>
