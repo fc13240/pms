@@ -35,9 +35,12 @@
 					  </tr>
 					  <tr>
 						<th colspan="9"> <input type="checkbox" class="fee-check-item">
-						  <span class="batch-share"><a href="javascript:updateMonitorStatus(2)">进入购物车</a></span>
+						  <span class="batch-share"><a href="javascript:updateMonitorStatus(2)">加入购物车</a></span>
+						  &nbsp;&nbsp;&nbsp;
+						  <a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>">进入购物车</a>
 						</th>
 					  </tr>
+					  
 					  <tr>
 						<th>序号</th>
 						<th>申请号/专利号</th>
