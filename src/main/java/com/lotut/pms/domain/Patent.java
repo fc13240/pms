@@ -103,6 +103,10 @@ public class Patent {
 	}
 
 	public String getAppNo() {
+		if (appNo != null) {
+			return appNo.trim();
+		}
+		
 		return appNo;
 	}
 
