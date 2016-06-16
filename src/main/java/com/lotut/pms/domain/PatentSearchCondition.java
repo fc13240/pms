@@ -71,6 +71,9 @@ public class PatentSearchCondition {
 	}
 
 	public String getKeyword() {
+		if (keyword != null) {
+			return keyword.trim();
+		}
 		return keyword;
 	}
 

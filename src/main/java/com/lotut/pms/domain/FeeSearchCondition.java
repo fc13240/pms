@@ -70,6 +70,9 @@ public class FeeSearchCondition {
 	}
 
 	public String getKeyword() {
+		if (keyword != null) {
+			return keyword.trim();
+		}
 		return keyword;
 	}
 
