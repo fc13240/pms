@@ -161,9 +161,9 @@
 			formutil.alertMessage('请选择应缴费记录');
 			return;
 		}
-		for(var i = 0;i < feeSelected.length;i++){
+		for(var i = 0;i < monitorStatus.length;i++){
 			if (monitorStatus[i]=="已加入") {
-				formutil.alertMessage('已经加入购物车，不能重复加入');
+				formutil.alertMessage('已经加入购物车，请到购物车支付');
 				return;
 			}
 		}
