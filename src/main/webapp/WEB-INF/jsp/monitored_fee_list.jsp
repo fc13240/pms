@@ -449,7 +449,7 @@ function batchUpdateInvoiceTitles() {
 		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'fee');
 		
 		$.ajax({
-			url: "<s:url value='/fee/changeInvoiceTitle.html'/>?fees=" + fees + "&invoiceTitle=" + invoiceTitle, 
+			url: "<s:url value='/fee/changeInvoiceTitle.html'/>?fees=" + fees + "&invoiceTitle=" + encodeURI(invoiceTitle), 
 			type: 'get', 
 			success: function(data) {
 				location.reload();
@@ -460,7 +460,7 @@ function batchUpdateInvoiceTitles() {
 
 function changeInvoiceTitle(fee, invoiceTitle) {
 	$.ajax({
-		url: "<s:url value='/fee/changeInvoiceTitle.html'/>?fees=" + fee + "&invoiceTitle=" + invoiceTitle, 
+		url: "<s:url value='/fee/changeInvoiceTitle.html'/>?fees=" + fee + "&invoiceTitle=" + encodeURI(invoiceTitle), 
 		type: 'get', 
 		success: function(data) {
 			// location.reload();
