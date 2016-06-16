@@ -59,32 +59,43 @@
 				  <form action="<s:url value='/order/adminSearch.html'/>" method="get">
 				    <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 				    <div class="t-third">
-				      <ul>
-				        <li>
-				          <p>支付状态</p>
-				          <select name="orderStatus" id="orderStatusId">
+				    
+				    <table class="search-table">
+					  <tr>
+					  <td>支付状态</td>
+					  <td>订单日期开始</td>
+					  <td></td>
+					  <td>订单日期截止</td>
+					  <td>订单号</td>
+					  <td></td>
+
+					  </tr>
+					  <tr>
+					  <td>
+				          <select style="width:100px;" class="selectPointOfInterest form-control" name="orderStatus" id="orderStatusId">
 				            <option value="">全部</option>
 				            <c:forEach items="${allOrderStatus}" var="orderStatus">
 				              <option value="<c:out value='${orderStatus.statusId}'/>">
 				              <c:out value="${orderStatus.statusDescription}"/>
 				              </option>
 				            </c:forEach>
-				          </select>
-				        </li>
-				        <li>
-				          <p>订单日期开始</p>
-				          <input  type="text" onclick="WdatePicker({el:'startAppDateId'})" style="height:18px;" id="startAppDateId" name="startAppDate" placeholder="开始时间" value="" readonly="readonly" >
-				          <img onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="18" align="absmiddle" id="start_date_img"> - </li>
-				        <li>
-				          <p>订单日期截止</p>
-				          <input type="text" onclick="WdatePicker({el:'endAppDateId'})" style="height:18px;" id="endAppDateId" name="endAppDate" placeholder="结束时间" value="" readonly="readonly" >
-				          <img onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="16" height="22" align="absmiddle" id="end_date_img"> </li>
-				        <li style="width: 385px;">
-				          <p>订单号</p>
-				          <input name="keyword" id="keywordId" value="" placeholder="订单号" class="t-input"/>
-				          <button type="submit">查询</button>
-				        </li>
-				      </ul>
+				          </select>					  
+					  </td>
+					  <td>
+						<input style="width:108px;height:34px;" class="selectPointOfInterest form-control"  type="text" onclick="WdatePicker({el:'startAppDateId'})"  id="startAppDateId" name="startAppDate" placeholder="开始时间" value="" readonly="readonly" >					  
+					  </td>
+					  <td>-</td>
+					  <td>
+						<input style="width:108px;height:34px;" class="selectPointOfInterest form-control"  type="text" onclick="WdatePicker({el:'endAppDateId'})" style="height:18px;" id="endAppDateId" name="endAppDate" placeholder="结束时间" value="" readonly="readonly" >					  
+					  </td>
+					  <td>
+					  <input style="width:300px;height:34px;" class="t-input form-control" name="keyword" id="keywordId" value="" placeholder="订单号" class="t-input"/>
+					  </td>
+					  <td><button class="button button-caution button-rounded" style="width:80px;" type="submit">查询</button></td>
+
+					  </tr>					  
+					 </table> 
+				    
 				    </div>
 				  </form>
 				
@@ -101,24 +112,29 @@
 						  <tr class="simple_bag">
 							<th colspan="5"> <fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
 							  &nbsp;&nbsp;&nbsp;
-							  订单号：${order.id}
-							 <input type="hidden" name="orderId" value="${order.id}">
-							 <span style="margin-left:100px;">
+							  <table>
+							  <tr>
+							  <td>订单号：${order.id}<input type="hidden" name="orderId" value="${order.id}"></td>
+							  <td>							 
+							  	<span style="margin-left:100px;">
 			              		<input type="submit" value="导出费用清单">
-			              	</span>
-			              	
-							  <c:if test="${order.orderStatus.statusId == 2}">
-								<div> <a href="<s:url value='/order/setUserOrderToPaid.html'/>?orderId=<c:out value='${order.id}'/>">
-								  <button type="button" class="btn btn-purple btn-sm">置为已交局</button>
-								  </a> </div>
-							  </c:if>              	
-			
-							  <c:if test="${order.orderStatus.statusId == 4}">
-								<div> <a href="<s:url value='/order/setUserOrderToPaidSuccess.html'/>?orderId=<c:out value='${order.id}'/>">
-								  <button type="button" class="btn btn-purple btn-sm">缴费成功</button>
-								  </a> </div>
-							  </c:if>        				                	
-			              	
+			              		</span>
+			              	  </td>
+							  <td>
+								  <c:if test="${order.orderStatus.statusId == 2}">
+									<div> <a href="<s:url value='/order/setUserOrderToPaid.html'/>?orderId=<c:out value='${order.id}'/>">
+									  <button type="button" class="btn btn-purple btn-sm">置为已交局</button>
+									  </a> </div>
+								  </c:if> 
+								  <c:if test="${order.orderStatus.statusId == 4}">
+									<div> <a href="<s:url value='/order/setUserOrderToPaidSuccess.html'/>?orderId=<c:out value='${order.id}'/>">
+									  <button type="button" class="btn btn-purple btn-sm">缴费成功</button>
+									  </a> </div>
+								  </c:if> 								  							  
+							  </td>
+							  </tr>
+							  </table>
+
 							</th>
 						  </tr>
 						</thead>
