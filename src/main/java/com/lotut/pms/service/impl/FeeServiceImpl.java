@@ -239,8 +239,8 @@ public class FeeServiceImpl implements FeeService {
 		}
 		
 		@Override
-		public void saveFee(Fee fee,int userId,long patentId) {
-			feeDao.saveFee(fee,userId,patentId);
+		public void saveFee(Fee fee) {
+			feeDao.saveFee(fee);
 		}
 
 		@Override

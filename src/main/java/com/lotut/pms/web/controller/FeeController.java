@@ -247,9 +247,11 @@ public class FeeController {
 		
 		@RequestMapping(path="/addFee", method=RequestMethod.POST)
 		public String addFee(@RequestParam("appNo")String appNo, @ModelAttribute("fee")Fee fee,Model model){
-			int userId = PrincipalUtils.getCurrentUserId();
-			int patentId=patentService.getPatentIdByAppNo(userId,appNo);
-			feeService.saveFee(fee, userId,patentId);
+			User user = PrincipalUtils.getCurrentPrincipal();
+			long patentId=patentService.getPatentIdByAppNo(user.getUserId(),appNo);
+			fee.setOwner(user);
+			fee.setPatent(new Patent(patentId));
+			feeService.saveFee(fee);
 			return "add_patent_success";
 		}
 }

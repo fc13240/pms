@@ -345,9 +345,9 @@
 		       where f.fee_owner =#{userId} and f.fee_monitor_status = 2 and f.fee_payment_status =1) as a
 	</select>
 	
-	<insert id="saveFee">
+	<insert id="saveFee" parameterType="Fee">
 		insert into fees(deadline, fee_type, amount, patent, fee_monitor_status, invoice_title,fee_owner)
-		values(#{fee.deadline}, #{fee.feeType},#{fee.amount}, #{patentId}, 2, #{fee.invoiceTitle,javaType=string,jdbcType=VARCHAR},#{userId})				
+		values(#{deadline}, #{feeType},#{amount}, #{patent.patentId}, 2, #{invoiceTitle,javaType=string,jdbcType=VARCHAR},#{owner.userId})				
 	</insert>
 	
 	<select id="getCountByDeadlinePayment" parameterType="int" resultType="map">

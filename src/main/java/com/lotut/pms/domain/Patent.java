@@ -54,6 +54,10 @@ public class Patent {
 
 
 	
+	public Patent(long patentId) {
+		this.patentId = patentId;
+	}
+	
 	public Patent() {
 		
 	}

@@ -68,5 +68,5 @@ public interface PatentMapper {
 	
 	Patent getPatentsByAppNo(@Param("userId") Integer user_id, @Param("appNo")String appNo);
 	
-	int getPatentIdByAppNo(@Param("userId") Integer user_id,@Param("appNo")String appNo);
+	long getPatentIdByAppNo(@Param("userId") Integer user_id,@Param("appNo")String appNo);
 }

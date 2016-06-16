@@ -63,7 +63,7 @@ public interface FeeDao {
 
 	List<String> getFeeTypes(String appNo);
 	
-	void saveFee (Fee fee,int userId,long patentId);
+	void saveFee (Fee fee);
 	
 	Map<String,Long> getCountByDeadlinePayment(int userId);
 }

@@ -63,7 +63,7 @@
 					    <input style="width:400px;"  type="text" name="amount" class="selectPointOfInterest form-control" required min="1" digits="true"/>
 				 		<br>
 				 		<h5>发票抬头:</h5>
-					    <input style="width:400px;" type="text" class="form-control" name="invoiceTitle" id="invoiceTitle" value=" " />
+					    <input style="width:400px;" type="text" class="form-control" name="invoiceTitle" id="invoiceTitle" />
 					    <br>
 					    <div style="height:20px;"></div>
 						<button class="button button-primary  button-rounded" type="submit" style="width:90px;">保存</button>		
