@@ -61,14 +61,22 @@
 						<tr>
 						  <td><input type="radio" name="paymentMethod.paymentMethodId" value="1" checked="checked" required="required">
 							支付宝支付
-							<input type="radio" name="paymentMethod.paymentMethodId" value="2" required="required">
-							银联卡支付 </td>
+							<input type="hidden" name="paymentMethod.paymentMethodId" value="2" required="required">
+							 
+						 </td>
 						</tr>
 						
+<<<<<<< HEAD
 						<tr class="lotut_display" style="display: none">
 						  <td>快递方式</td>
 						</tr>
 						<tr class="lotut_display" style="display: none">
+=======
+						<tr style="display: none" class="lotut">
+						  <td>快递方式</td>
+						</tr>
+						<tr style="display: none" class="lotut">
+>>>>>>> 5401d6fe880fe2fdf5c2bdfa3c526cc2c7db16ca
 						  <td>
 						  	<input type="radio" name="express" value="0" checked="checked" required="required" onclick="hint()">
 							挂号信(<font color=red>免费</font>)
@@ -76,10 +84,17 @@
 							顺丰速运(￥20)
 						  </td>
 						</tr>
+<<<<<<< HEAD
 						<tr class="lotut_display" style="display: none">
 						  <td>发票选择</td>
 						</tr>
 						<tr class="lotut_display" style="display: none">
+=======
+						<tr style="display: none" class="lotut">
+						  <td>发票选择</td>
+						</tr>
+						<tr style="display: none" class="lotut">
+>>>>>>> 5401d6fe880fe2fdf5c2bdfa3c526cc2c7db16ca
 						  <td>
 						  	<span>国家知识产权局专利收费收据:</span>
 						  	<input type="radio" name="nationalInvoice" value="0" checked="checked" required="required" onclick="hint()">
@@ -88,14 +103,18 @@
 							需要
 						  </td>
 						</tr>
+<<<<<<< HEAD
 						<tr class="lotut_display" style="display: none">
+=======
+						<tr style="display: none" class="lotut">
+>>>>>>> 5401d6fe880fe2fdf5c2bdfa3c526cc2c7db16ca
 						  <td>
 						  	<span>龙图腾公司专利官费代缴增值税发票:</span>
 						  	<input type="radio" name="companyInvoice" value="0" checked="checked" required="required" onclick="hidde();hint()">
 							不需要
 							<input type="radio" name="companyInvoice" value="1" required="required" onclick="showed();hint()">
 							需要
-							<input name="invoice" id="invoice" type="text" placeholder="请输入需要开具的发票抬头" style="height:16px;width: 250px;display: none;">
+							<input name="invoice" id="invoice" type="text" placeholder="请输入需要开具的发票抬头" style="height:30px;width: 250px;display: none;">
 						  </td>
 						</tr>
 							
@@ -225,6 +244,7 @@
 		
 
 	}
+<<<<<<< HEAD
 
 	function hide(){
 		$.each($("#simple-table .lotut_display"), function(i){ 
@@ -232,6 +252,17 @@
 				this.style.display = 'none'; 
 			
 			});
+=======
+	
+	
+			
+		function hide(){
+			var trs = $("tr[class='lotut']");  
+			for(i = 0; i < trs.length; i++){   
+			    trs[i].style.display = "none"; //这里获取的trs[i]是DOM对象而不是jQuery对象，因此不能直接使用hide()方法  
+			} 
+			
+>>>>>>> 5401d6fe880fe2fdf5c2bdfa3c526cc2c7db16ca
 		var express=$("input:radio[name='express']:checked").val();
 		var nationalInvoice=$("input:radio[name='nationalInvoice']:checked").val();
 		var invoice=$("input:radio[name='invoice']:checked").val();
@@ -247,13 +278,14 @@
 		totalAmount.text(baseFee);
 		$("#invoice").val("");
 	}
+
+	
 	function show(){
-		$.each($("#simple-table tr"), function(i){ 
-			if(i > 5 && i<11){ 
-				this.style.display = 'block'; 
-			} 
-			});
-	};
+		var trs = $("tr[class='lotut']");  
+		for(i = 0; i < trs.length; i++){   
+		    trs[i].style.display = "block"; 
+		} 
+		};
 	function showed(){
  		$("#invoice").show();
  	}

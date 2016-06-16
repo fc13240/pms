@@ -73,16 +73,11 @@ public class PatentMongoDaoImpl implements PatentMongoDao{
 		return null;
 	}
 	private String getAppNo(String str){
-		if(str.contains(".")){
-			String[] str1=str.split("\\.");
-			StringBuilder sb=new StringBuilder();
-			sb.append(str1[0]);
-			sb.append(str1[1]);
-			return sb.toString();
-		}else{
-			return str;
+		if (str != null) {
+			return str.replaceAll("\\.", "").trim();
 		}
 		
+		return null;
 	}
 	
 	
