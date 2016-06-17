@@ -157,13 +157,15 @@
 	
 	function joinOrder() {
 		var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
-		var monitorStatus=formutil.getAllCheckboxValues('tr td input.fee-check-item','monitorStatus');
+		var monitorStatus=formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item','monitorStatus');
 		if (!feeSelected) {
 			formutil.alertMessage('请选择应缴费记录');
 			return;
 		}
+		
 		for(var i = 0;i < monitorStatus.length;i++){
 			if (monitorStatus[i]=="已加入") {
+				
 				formutil.alertMessage('部分商品已在购物车中，不能重复添加！');
 				return;
 			}
