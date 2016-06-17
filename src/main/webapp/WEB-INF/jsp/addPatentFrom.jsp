@@ -36,7 +36,8 @@
 					  <div class="lt-third" style="background:#fff;margin-top:10px;">
 					  
 						<h5>专利号：</h5>
-						<input class="selectPointOfInterest form-control" style="width:332px;"  type="text" name="appNo" id="appNo"  required/>
+						<input class="selectPointOfInterest form-control" style="width:332px;display:inline;"  type="text" name="appNo" id="appNo"  required/>
+						<span>(注：不要输入ZL和小数点)</span>
 						<br>	  
 				        <h5>专利名称:</h5>
 				        <input class="selectPointOfInterest form-control" style="width:332px;" type="text" name="name" id="name"  required/>	  
