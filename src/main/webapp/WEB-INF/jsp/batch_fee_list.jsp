@@ -163,7 +163,7 @@
 		}
 		for(var i = 0;i < monitorStatus.length;i++){
 			if (monitorStatus[i]=="已加入") {
-				formutil.alertMessage('已经加入购物车，请到购物车支付');
+				formutil.alertMessage('部分商品已在购物车中，不能重复添加！');
 				return;
 			}
 		}
