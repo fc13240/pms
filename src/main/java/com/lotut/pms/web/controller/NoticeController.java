@@ -122,7 +122,7 @@ public class NoticeController {
 		} catch (Exception e) {
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
-			out.write("没有可预览的通知书");
+			out.write("<html><head><title>通知书预览</title></head><body><h1>没有可预览的通知书</h1></body></html>");
 			out.flush();
 		}
 
