@@ -28,34 +28,21 @@
 		  <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
 				<div style="height:10px;"></div>
-				<div class="lt-box">
+				<div class="lt-box" style="padding:20px;">
 					<form action="<s:url value='/patentOfficeAccount/update.html'/>" method="POST">
-					<table id="simple-table" class="table table-striped table-bordered table-hover">
-					  <tr>
-						<td style="line-height:50px;width:250px;">中国专利电子申请的用户名：</td>
-						<td><input class="ipt" type="text" name="name" id="name" style="height:30px;width:600px;"  value="${patentOfficeAccount.name}" maxlength="30">
-		
-						</td>
-					  </tr>
-					  <tr>
-						<td class="f-tar td-w125" style="line-height:50px;">用户代码：</td>
-						<td>
-						<input name="accountId"  type="hidden" value="${patentOfficeAccount.accountId}">
-						<input class="email"  name="username" id="email" type="text" style="height:30px;width:600px;" value="${patentOfficeAccount.username}" maxlength="25" ></td>
-					  </tr>
-					  <tr>
-						<td class="f-tar td-w125" style="line-height:50px;">登陆密码：</td>
-						<td>
-						  <input class="phone" name="password" id="phone" type="text" style="height:30px;width:600px;" value="${patentOfficeAccount.password}" maxlength="30" ></td>
-					  </tr>
 					
-					  <tr>
-						<td class="f-tar td-w125" style="height:47px;"></td>
-						<td>
-							<button  type="submit" type="submit" class="button button-primary  button-rounded">保存</button>
-						</td>
-					  </tr>
-					</table>
+					<h5>中国专利电子申请的用户名:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" name="name" id="name"  value="${patentOfficeAccount.name}" maxlength="30"/>
+					<br>	  
+			       	<h5>用户代码:</h5>
+						<input name="accountId"  type="hidden" value="${patentOfficeAccount.accountId}">
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" value="${patentOfficeAccount.username}" name="username" maxlength="25"/>
+					<br> 	
+			       	<h5>登陆密码:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" value="${patentOfficeAccount.password}" name="password" required/>
+					
+					<br> 
+					<button  type="submit" class="button button-primary  button-rounded">保存</button>					
 					</form>
 				</div>
 			</div>

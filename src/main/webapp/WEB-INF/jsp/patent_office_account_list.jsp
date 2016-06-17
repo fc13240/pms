@@ -80,8 +80,10 @@
 			                  		自动更新
 			                  	</a>&nbsp;
 			                  	<c:if test="${accountType==0}">
-			                	<a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
-			                  		修改</a>&nbsp;
+
+								<a href="<s:url value='/patentOfficeAccount/detail.html'/>?accountId=<c:out value='${account.accountId}'/>"> 编辑 </a>	                  	
+			                	<!-- <a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
+			                  		修改</a>&nbsp; -->
 			                  	<a href="JavaScript:void(0)" onclick="deleteAccount('${account.accountId}')">
 			                                                             删除 
 			                    </a> 
