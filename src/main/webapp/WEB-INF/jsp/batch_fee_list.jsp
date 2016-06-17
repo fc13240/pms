@@ -66,7 +66,8 @@
 					  <c:forEach items="${fees}" var="fee" varStatus="status">
 						<tr>
 						  <td><span class="batch-share-item">
-							<input type="checkbox" class="fee-check-item" feeId="${fee.feeId}" patent="${fee.patent.patentId}" monitorStatus="${fee.monitorStatus.monitorStatusDescription}">
+							<input type="checkbox" class="fee-check-item" feeId="${fee.feeId}" patent="${fee.patent.patentId}" monitorStatus="${fee.monitorStatus.monitorStatusDescription}"
+								   deadline="<fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/>">
 							</span> ${status.index+1} </td>
 						  <td>${fee.patent.appNo}</td>
 						  <td>${fee.patent.name}</td>
@@ -167,9 +168,32 @@
 				return;
 			}
 		}
+		var deadline = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item','deadline');
+		
+		var now =new Date().getTime();
+		for(var k= 0; k < deadline.length; k++){
+			var isOverDue=checkTime(now,deadline[k]);
+			if(isOverDue){
+				if(!confirm('已超出规定交费期限！,是否继续操作？')) {
+					return;
+				} else {
+					break;
+				}
+			}
+		}
 		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'feeId');
 		
 		window.open("<s:url value='/order/orderCreateForm.html'/>?fees=" + fees);
+	}
+	
+	function checkTime(now,deadline){
+		var deadline = Date.parse(deadline.replace(/-/g, '/'));
+		var twelveHours=43200000;
+		var oneday=twelveHours*2;
+		if(deadline+oneday-now<twelveHours){
+			return true;
+		}
+		return false;
 	}
 </script>
 </body>
