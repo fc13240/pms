@@ -52,7 +52,16 @@
 					  </tr>
 					  <tr>
 						<th colspan="9"> <input type="checkbox" class="fee-check-item">
-						  <span class="batch-share"><a href="javascript:updateMonitorStatus(2)">进入购物车</a></span> 
+						  <span class="batch-share" style="margin-left:10px;">
+								  <a href="javascript:return void" onclick="updateMonitorStatus(2)">
+								  <button class="button button-caution button-rounded" style="font-weight:500;font-size:16px;width:110px;">加入购物车</button>
+								  </a>
+							</span>  
+						  <span class="batch-share">
+						    <a href="javascript:return void" onclick="joinOrder()">
+						    <button class="button button-primary  button-rounded" style="font-weight:500;font-size:16px;">立即交费</button>
+						   </a>
+						   </span>		
 						</th>
 					  </tr>
 					  <tr>
@@ -65,7 +74,8 @@
 					  <c:forEach items="${fees}" var="fee" varStatus="status">
 						<tr>
 						  <td><span class="batch-share-item">
-							<input type="checkbox" class="fee-check-item" feeId="${fee.feeId}">
+							<input type="checkbox" class="fee-check-item" feeId="${fee.feeId}" patent="${fee.patent.patentId}" monitorStatus="${fee.monitorStatus.monitorStatusDescription}"
+								   deadline="<fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/>">
 							</span> ${status.index+1} </td>
 						  <td>${fee.feeType}</td>
 						  <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
@@ -104,6 +114,49 @@
 		
 		location.href = "<s:url value='/fee/changeMonitorStatus.html'/>?fees=" + fees + "&monitorStatus=" + status;
 					
+	}
+	
+	function joinOrder() {
+		var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
+		var monitorStatus=formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item','monitorStatus');
+		if (!feeSelected) {
+			formutil.alertMessage('请选择应缴费记录');
+			return;
+		}
+		
+		for(var i = 0;i < monitorStatus.length;i++){
+			if (monitorStatus[i]=="已加入") {
+				
+				formutil.alertMessage('部分商品已在购物车中，不能重复添加！');
+				return;
+			}
+		}
+		var deadline = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item','deadline');
+		
+		var now =new Date().getTime();
+		for(var k= 0; k < deadline.length; k++){
+			var isOverDue=checkTime(now,deadline[k]);
+			if(isOverDue){
+				if(!confirm('已超出规定交费期限！,是否继续操作？')) {
+					return;
+				} else {
+					break;
+				}
+			}
+		}
+		var fees = formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'feeId');
+		
+		window.open("<s:url value='/order/orderCreateForm.html'/>?fees=" + fees);
+	}
+	
+	function checkTime(now,deadline){
+		var deadline = Date.parse(deadline.replace(/-/g, '/'));
+		var twelveHours=43200000;
+		var oneday=twelveHours*2;
+		if(deadline+oneday-now<twelveHours){
+			return true;
+		}
+		return false;
 	}
 	
 </script>
