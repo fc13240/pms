@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管理系统——查询添加</title>
+<title>龙图腾专利管理系统-查询添加</title>
 <%@ include file="_css.jsp" %>
 <body>
 <%@ include file="_top.jsp" %>
@@ -33,7 +33,7 @@
 					<div class="search-box">
 						<form action="<s:url value='/patent/searchPatent.html'/>" method="get">
 						  <div class="t-third" style="clear:both;text-align:center;">
-						  <input type="text" style="width:400px;height:35px;display:inline;" placeholder="申请号/名称/申请人/代理机构" name="q"	 class="text" id="keywordId" />
+						  <input type="text" style="width:400px;height:35px;display:inline;" placeholder="申请号／申请人／专利名称／代理机构" name="q"	 class="text" id="keywordId" />
 							<input type="submit" value="专利库搜索"  id="mc-embedded-subscribe" class="button" style="background: #D31119; color: #fff;width:150px;height:36px;"/>
 						  </div>
 						</form>
@@ -64,8 +64,6 @@
 						  <th width="110">公布号</th>
 						  <th width="110">公布日</th>
 						  <th width="60">专利类型</th>
-						  
-						  
 						</tr>
 					  </thead>
 					  <tbody>

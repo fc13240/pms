@@ -7,17 +7,16 @@
 	<h5>专利列表</h5>
 	</a> 
 	</li>
-
-	<li  class=""> <a  href="<s:url value='/patent/addPatentFrom.html'/>">
-	<h5>单个添加</h5>
-	</a> 
-	</li>
 	<li  class=""> <a  href="<s:url value='/patent/searchPatent.html?q='/>">
 	<h5>搜索添加</h5>
 	</a> 
 	</li>	
 	<li  class=""> <a href="<s:url value='/patent/showUploadForm.html'/>">
 	<h5>批量上传</h5>
+	</a> 
+	</li>
+	<li  class=""> <a  href="<s:url value='/patent/addPatentFrom.html'/>">
+	<h5>单个添加</h5>
 	</a> 
 	</li>
 	<li  class=""> <a href="<s:url value='/patentOfficeAccount/list.html'/>">
