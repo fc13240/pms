@@ -103,7 +103,7 @@
 			
 			<p class=MsoBodyText style='margin-left:36.0pt;text-indent:-36.0pt'><span
 			lang=EN-US>（3）<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</span></span><span style='font-family:宋体'>在搜索添加栏目可以通过搜索专利号、专利名称、申请人、代理机构等，查询到该关键词在龙图腾专利检索系统（</span><span
+			</span></span><span style='font-family:宋体'>在搜索添加栏目可以通过搜索专利号、专利名称、申请人、代理机构等，查询到该关键词在龙图腾专利管家（</span><span
 			lang=EN-US><a href="http://so.lotut.com/">http://so.lotut.com/</a></span><span
 			style='font-family:宋体'>）内相关专利信息，并添加或者更新到龙图腾专利管家；</span></p>
 			
@@ -129,7 +129,7 @@
 			border="0" width="850"  src="<s:url value='/temp/images/instructions_img/image007.jpg'/>"></p>
 			
 			<p class=MsoBodyText align=left style='margin-left:36.0pt;text-align:left'><span
-			style='font-family:宋体'>首先查看专利信息，如第一申请人、专利类型、案件状态为空，表示龙图腾专利系统收到了相关通知书，但未收到来自</span><span
+			style='font-family:宋体'>首先查看专利信息，如第一申请人、专利类型、案件状态为空，表示龙图腾专利管家收到了相关通知书，但未收到来自</span><span
 			style='font-family:宋体'>专利局网站<span lang=EN-US><a
 			href="http://cpquery.sipo.gov.cn/">http://cpquery.sipo.gov.cn/</a></span>的数据；若内部编码一栏为空，表格已收到</span><span
 			style='font-family:宋体'>来自</span><span style='font-family:宋体'>专利局网站<span
