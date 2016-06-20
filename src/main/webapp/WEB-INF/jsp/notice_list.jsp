@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管理系统——通知书</title>
+<title>龙图腾专利管理系统-通知书</title>
 <%@ include file="_css.jsp" %>
 
 </head>
@@ -496,6 +496,41 @@
 
 
 <script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
+
+
+<Script language="javascript">
+function GetRequest() {
+  
+  var url = location.search; //获取url中"?"符后的字串
+   var theRequest = new Object();
+   if (url.indexOf("?") != -1) {
+      var str = url.substr(1);
+      strs = str.split("&");
+      for(var i = 0; i < strs.length; i ++) {
+         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+      }
+   }
+   return theRequest;
+}
+</Script>
+<Script language="javascript">
+
+var Request = new Object();
+Request = GetRequest();
+var select1;
+selected_type = Request['selectType'];
+//alert(selected_type);
+//如果存在 selected_type,循环清空选中 selected的class，并根据值选中指定的selected
+if(selected_type!=undefined){
+	//alert("存在selected_type");
+	$("#nav li a").removeClass("selected");
+	if(selected_type='5'){
+		$("#nav li a").eq(4).addClass("selected");	
+	}
+		
+}
+</Script>
+
 
 <script type="text/javascript">
 function changePaperApplyType(notice, selectElement) {
