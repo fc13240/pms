@@ -134,7 +134,7 @@ public class FeeServiceImpl implements FeeService {
 					Fee fee = new Fee();
 					fee.setPatent(patent);
 					fee.setFeeType(feeRecord.get(0));
-					fee.setAmount(Integer.parseInt(feeRecord.get(1)));
+					fee.setAmount(Integer.valueOf(feeRecord.get(1)));
 					fee.setDeadline(formatter.parse(feeRecord.get(2)));
 					fee.setOwner(user);
 					fees.add(fee);
