@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管理系统——我的专利</title>
+<title>龙图腾专利管家——我的专利</title>
 <%@ include file="_css.jsp" %>
 
 <script type="text/javascript" src="<s:url value='/static/js/modernizr.js'/>"></script>

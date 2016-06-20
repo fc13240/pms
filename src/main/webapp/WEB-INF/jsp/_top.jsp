@@ -12,7 +12,7 @@
 		      <div class="item">
 			 您好,
 			  <se:authentication property="principal.username" />!
-			欢迎使用龙图腾专利管理系统！
+			欢迎使用龙图腾专利管家！
 			  <a href="javascript:$('#logoutForm').submit();" style="color:#666;"><font color="red">退出</font></a>
 		
 			 <form action="<s:url value='/user/logout.html'/>" method="post" id="logoutForm">

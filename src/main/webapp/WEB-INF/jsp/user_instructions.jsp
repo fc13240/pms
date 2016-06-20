@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管理系统-用户指南</title>
+<title>龙图腾专利管家-用户指南</title>
 <%@ include file="_css.jsp" %>
 </head>
 <body>
@@ -25,13 +25,13 @@
 			<p class=MsoBodyText><a name="_Toc266447619"><b><span lang=EN-US>&nbsp;</span></b></a></p>
 			
 			<p class=MsoBodyText align=center style='text-align:center'><b><span
-			style='font-size:14.0pt;font-family:宋体'>龙图腾专利管理系统</span></b><b><span
+			style='font-size:14.0pt;font-family:宋体'>龙图腾专利管家</span></b><b><span
 			style='font-size:14.0pt;font-family:宋体'>操作指南</span></b></p>
 			
-			<p class=MsoBodyText><a name="_Toc266447621"><b><span style='font-family:宋体'>一：登陆龙图腾专利管理系统</span></b></a><b><span
+			<p class=MsoBodyText><a name="_Toc266447621"><b><span style='font-family:宋体'>一：登陆龙图腾专利管家</span></b></a><b><span
 			style='font-family:宋体'></span></b></p>
 			
-			<p class=MsoBodyText><span style='font-family:宋体'>具体操作：登录龙图腾专利管理系统（</span><span
+			<p class=MsoBodyText><span style='font-family:宋体'>具体操作：登录龙图腾专利管家（</span><span
 			lang=EN-US><a href="http://g.lotut.com/">http://g.lotut.com/</a></span><span
 			style='font-family:宋体'>）进行登录和注册操作。</span></p>
 			
@@ -63,7 +63,7 @@
 			style='font-family:宋体'>）在好友列表栏目中查看好友在其用户中心填写的个人信息，以及查询和删除自己的好友；</span></p>
 			
 			<p class=MsoBodyText><span style='font-family:宋体'>（</span><span lang=EN-US>2</span><span
-			style='font-family:宋体'>）在添加好友栏目中可以搜索龙图腾专利管理系统的用户，并可以向用户发送添加好友的请求；</span><span
+			style='font-family:宋体'>）在添加好友栏目中可以搜索龙图腾专利管家的用户，并可以向用户发送添加好友的请求；</span><span
 			lang=EN-US> </span></p>
 			
 			<p class=MsoBodyText><span style='font-family:宋体'>（</span><span lang=EN-US>3</span><span
@@ -85,7 +85,7 @@
 			</span></span><span style='font-family:宋体'>在自动更新栏目填写如下信息，即可将其中国专利电子申请用户在专利局网站</span><span
 			lang=EN-US style='color:red'><a href="http://cpquery.sipo.gov.cn/"><span
 			style='color:red'>http://cpquery.sipo.gov.cn/</span></a></span><span
-			style='font-family:宋体'>内的专利数据（专利号、专利名称、第一申请人、申请日、案件状态、专利类型）自动添加或更新到龙图腾专利管理系统；<b><span
+			style='font-family:宋体'>内的专利数据（专利号、专利名称、第一申请人、申请日、案件状态、专利类型）自动添加或更新到龙图腾专利管家；<b><span
 			style='color:red'>每天更新一次；</span></b></span></p>
 			
 			<p class=MsoBodyText align=left style='text-align:left'><img border=0
@@ -99,17 +99,17 @@
 			
 			<p class=MsoBodyText align=left style='margin-left:36.0pt;text-align:left'><span
 			style='font-family:宋体'>下载的表格或者与其格式相同的自制表格，将表格内的专利信息</span><span
-			style='font-family:宋体'>添加或者更新到龙图腾专利管理系统；</span></p>
+			style='font-family:宋体'>添加或者更新到龙图腾专利管家；</span></p>
 			
 			<p class=MsoBodyText style='margin-left:36.0pt;text-indent:-36.0pt'><span
 			lang=EN-US>（3）<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</span></span><span style='font-family:宋体'>在搜索添加栏目可以通过搜索专利号、专利名称、申请人、代理机构等，查询到该关键词在龙图腾专利检索系统（</span><span
 			lang=EN-US><a href="http://so.lotut.com/">http://so.lotut.com/</a></span><span
-			style='font-family:宋体'>）内相关专利信息，并添加或者更新到龙图腾专利管理系统；</span></p>
+			style='font-family:宋体'>）内相关专利信息，并添加或者更新到龙图腾专利管家；</span></p>
 			
 			<p class=MsoBodyText style='margin-left:36.0pt;text-indent:-36.0pt'><span
 			lang=EN-US>（4）<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</span></span><span style='font-family:宋体'>通过单个添加栏目，可以手动输入专利号等信息将该专利信息添加或更新到龙图腾专利管理系统；</span></p>
+			</span></span><span style='font-family:宋体'>通过单个添加栏目，可以手动输入专利号等信息将该专利信息添加或更新到龙图腾专利管家；</span></p>
 			
 			<p class=MsoBodyText style='margin-left:36.0pt;text-indent:-36.0pt'><span
 			lang=EN-US>（5）<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
