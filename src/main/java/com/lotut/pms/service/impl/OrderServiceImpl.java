@@ -48,16 +48,16 @@ public class OrderServiceImpl implements OrderService {
 		order.setServiceFee(SERVICE_FEE);
 		
 		boolean needPost = order.getPostAddress().getId()!=0;
-		boolean isShunFengExpress = express == 1;
+		boolean isEmsExpress = express == 1;
 		boolean needCompanyInvoice = companyInvoice == 1;
 		if (needPost) {
-			if(isShunFengExpress){
+			if(isEmsExpress){
 				totalAmount += EMS_EXPRESS_FEE;
 				order.setExpressFee(EMS_EXPRESS_FEE);
 				order.setServiceFee(SERVICE_FEE);
 			}else{
 				totalAmount += EXPRESS_FEE;
-				order.setExpressFee(EMS_EXPRESS_FEE);
+				order.setExpressFee(EXPRESS_FEE);
 				order.setServiceFee(SERVICE_FEE);
 			}
 	
