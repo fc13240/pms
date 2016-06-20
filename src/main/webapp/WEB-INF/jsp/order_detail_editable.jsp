@@ -170,7 +170,7 @@
 								  	 <c:if test="${order.expressFee == 20}">
 									   <span>EMS</span>
 									  </c:if>
-									  <c:if test="${order.expressFee == 0 && order.postAddress != null}">
+									  <c:if test="${order.expressFee == 10 && order.postAddress != null}">
 									   <span>挂号信</span>
 									  </c:if>
 									  <c:if test="${order.expressFee == 0 && order.postAddress == null}">
