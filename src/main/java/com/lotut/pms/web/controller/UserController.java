@@ -48,6 +48,11 @@ public class UserController {
 		return "register_form";
 	}
 	
+	@RequestMapping(path="/instructions", method=RequestMethod.GET)
+	public String instructions() {
+		return "user_instructions";
+	}	
+	
 	@RequestMapping(path="/register", method=RequestMethod.POST)
 	public String register(User user,Model model,HttpSession session) {
 		boolean success=userService.register(user);
