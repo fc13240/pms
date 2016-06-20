@@ -23,7 +23,8 @@ public class OrderServiceImpl implements OrderService {
 	private FeeDao feeDao;
 	
 	private static final int SERVICE_FEE = 0;
-	private static final int EXPRESS_FEE = 20;
+	private static final int EXPRESS_FEE = 10;
+	private static final int EMS_EXPRESS_FEE = 20;
 	private static final double INVOCIE_RATE = 0.1;
 	
 	public OrderServiceImpl(OrderDao orderDao, FeeDao feeDao) {
@@ -51,8 +52,12 @@ public class OrderServiceImpl implements OrderService {
 		boolean needCompanyInvoice = companyInvoice == 1;
 		if (needPost) {
 			if(isShunFengExpress){
+				totalAmount += EMS_EXPRESS_FEE;
+				order.setExpressFee(EMS_EXPRESS_FEE);
+				order.setServiceFee(SERVICE_FEE);
+			}else{
 				totalAmount += EXPRESS_FEE;
-				order.setExpressFee(EXPRESS_FEE);
+				order.setExpressFee(EMS_EXPRESS_FEE);
 				order.setServiceFee(SERVICE_FEE);
 			}
 	
