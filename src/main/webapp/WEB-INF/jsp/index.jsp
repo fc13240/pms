@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管理系统－让专利管理更轻松！</title>
+<title>龙图腾专利管家－让专利管理更轻松！</title>
 <%@ include file="_css.jsp" %>
 <body>
 <%@ include file="_top.jsp" %>
@@ -31,7 +31,7 @@
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="height:300px;">
 				<div style="padding:10px;">
-				<h4>欢迎使用龙图腾专利管理系统，龙腾图一直秉承笃行、守信、努力、创新的核心价值观，成就客户、成就员工、成就企业的经营理念。为客户提供更优质的服务！</h4>
+				<h4>欢迎使用龙图腾专利管家，龙腾图一直秉承笃行、守信、努力、创新的核心价值观，成就客户、成就员工、成就企业的经营理念。为客户提供更优质的服务！</h4>
 				</div>
 				</div>
 			</div>
