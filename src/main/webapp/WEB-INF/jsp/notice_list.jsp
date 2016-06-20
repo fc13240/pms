@@ -524,8 +524,13 @@ selected_type = Request['selectType'];
 if(selected_type!=undefined){
 	//alert("存在selected_type");
 	$("#nav li a").removeClass("selected");
+	
+	$("#menu_con .tag").css('display','none');
 	if(selected_type='5'){
-		$("#nav li a").eq(4).addClass("selected");	
+		$("#nav li a").eq(4).addClass("selected");
+		
+		$("#menu_con .tag").eq(4).css('display','block');
+		
 	}
 		
 }
