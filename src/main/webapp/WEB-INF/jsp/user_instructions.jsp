@@ -236,7 +236,7 @@
 			<p class=MsoBodyText><b><span style='font-family:宋体;color:red'>对于变更费、恢复费等主动缴纳的费用，可以采用添加缴费信息来单个主动添加，然后在购物车内进行缴纳。</span></b></p>
 			
 			<p class=MsoBodyText style='margin-left:36.0pt;text-indent:-36.0pt'><span
-			lang=EN-US>（3）<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			lang=EN-US>（2）<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</span></span><span style='font-family:宋体'>在交费订单栏目，可以查看生成的所有订单，便于用户以后对账。</span></p>
 			
 			<p class=MsoBodyText><span lang=EN-US>&nbsp;</span></p>
