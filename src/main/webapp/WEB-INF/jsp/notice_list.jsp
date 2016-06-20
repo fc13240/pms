@@ -528,11 +528,8 @@ if(selected_type!=undefined){
 	$("#menu_con .tag").css('display','none');
 	if(selected_type='5'){
 		$("#nav li a").eq(4).addClass("selected");
-		
 		$("#menu_con .tag").eq(4).css('display','block');
-		
 	}
-		
 }
 </Script>
 
