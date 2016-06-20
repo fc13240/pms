@@ -185,9 +185,8 @@
 								<tr>
 								  <td style="text-align:center"><fmt:formatDate value="${order.sendTime}" pattern="yyyy-MM-dd"/></td>
 								  <td style="text-align:center">${order.expressNo}</td>
-			<%-- 					  <td>${order.expressCompany}</td> --%>
 								  <c:if test="${order.expressFee == 20}">
-								   <td style="text-align:center">顺丰速运</td>
+								   <td style="text-align:center">EMS</td>
 								  </c:if>
 								  <c:if test="${order.expressFee == 0 && order.postAddress != null}">
 								   <td style="text-align:center">挂号信</td>

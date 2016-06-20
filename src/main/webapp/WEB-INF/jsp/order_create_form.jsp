@@ -74,9 +74,9 @@
 						<tr style="display: none" class="lotut">
 						  <td>
 						  	<input type="radio" name="express" value="0" checked="checked" required="required" onclick="hint()">
-							挂号信(<font color=red>免费</font>)
+							挂号信(<font color=red>￥10</font>)
 							<input type="radio" name="express" value="1" required="required" onclick="hint()">
-							顺丰速运(￥20)
+							EMS(￥20)
 						  </td>
 						</tr>
 						<tr style="display: none" class="lotut">
@@ -93,7 +93,7 @@
 						</tr>
 						<tr style="display: none" class="lotut">
 						  <td>
-						  	<span>龙图腾公司专利官费代缴增值税发票:</span>
+						  	<span>龙图腾公司专利官费代缴发票:</span>
 						  	<input type="radio" name="companyInvoice" value="0" checked="checked" required="required" onclick="hidde();hint()">
 							不需要
 							<input type="radio" name="companyInvoice" value="1" required="required" onclick="showed();hint()">
@@ -156,7 +156,7 @@
 			                        		快递费：￥<span id="expressFee">0</span>
 			                        	</span> 
 			                         	<span style="margin-left:15px;">
-			                        		增值发票税：￥<span id="invoiceFee">0</span>
+			                        		发票税：￥<span id="invoiceFee">0</span>
 			                        	</span>                           	                        	                        	                    	
 			                        </td>
 								</tr>
@@ -196,29 +196,30 @@
 		var baseFee = patentAmount + serviceFeeAmount;
 		var expressFee = $("#expressFee");
 		var expressFeeAmount = 20;
+		var normalExpressFee = 10;
 		var invoiceFee = $("#invoiceFee");
 		var totalAmount = $("#totalAmount");
 		var needPost = postAddress!=0;
-		var isShunFengExpress = express==1;
+		var isEmsExpress = express==1;
 		var needCompanyInvoice = companyInvoice==1;
 		
 		if (needPost) {
-			if (isShunFengExpress && needCompanyInvoice) {
+			if (isEmsExpress && needCompanyInvoice) {
 				expressFee.text(expressFeeAmount);
 				invoiceFee.text(parseInt(patentAmount * 0.1));
 				totalAmount.text(baseFee + expressFeeAmount + parseInt(patentAmount * 0.1));	
-			} else if (isShunFengExpress) {
+			} else if (isEmsExpress) {
 				expressFee.text(expressFeeAmount);
 				invoiceFee.text(0);
 				totalAmount.text(baseFee + expressFeeAmount);
 			} else if (needCompanyInvoice) {
-				expressFee.text(0);
+				expressFee.text(10);
 				invoiceFee.text(parseInt(patentAmount * 0.1));
-				totalAmount.text(baseFee + parseInt(patentAmount * 0.1));				
+				totalAmount.text(baseFee + normalExpressFee + parseInt(patentAmount * 0.1));				
 			} else {
-				expressFee.text(0);
+				expressFee.text(10);
 				invoiceFee.text(0);
-				totalAmount.text(baseFee);	
+				totalAmount.text(baseFee + normalExpressFee);	
 			}
 		} else {
 			expressFee.text(0);

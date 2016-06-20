@@ -54,7 +54,7 @@
 									  <td style="text-align:center"><fmt:formatDate value="${order.payTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 									  <td style="text-align:center">${order.paymentMethod.paymentMethod}</td>
 									  <c:if test="${order.expressFee == 20}">
-									   	<td style="text-align:center">顺丰速运</td>
+									   	<td style="text-align:center">EMS</td>
 									  </c:if>
 									  <c:if test="${order.expressFee == 0 && order.postAddress != null}">
 									   <td style="text-align:center">挂号信</td>
@@ -168,7 +168,7 @@
 								  <input type="text" style="width:210px;height:34px;" name="expressNo" id="expressNo" value="${order.expressNo}" required/>
 								  快递公司:
 								  	 <c:if test="${order.expressFee == 20}">
-									   <span>顺丰速运</span>
+									   <span>EMS</span>
 									  </c:if>
 									  <c:if test="${order.expressFee == 0 && order.postAddress != null}">
 									   <span>挂号信</span>
