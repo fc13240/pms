@@ -196,6 +196,7 @@
 		var baseFee = patentAmount + serviceFeeAmount;
 		var expressFee = $("#expressFee");
 		var expressFeeAmount = 20;
+		var normalExpressFee = 10;
 		var invoiceFee = $("#invoiceFee");
 		var totalAmount = $("#totalAmount");
 		var needPost = postAddress!=0;
@@ -214,11 +215,11 @@
 			} else if (needCompanyInvoice) {
 				expressFee.text(10);
 				invoiceFee.text(parseInt(patentAmount * 0.1));
-				totalAmount.text(baseFee + parseInt(patentAmount * 0.1));				
+				totalAmount.text(baseFee + normalExpressFee + parseInt(patentAmount * 0.1));				
 			} else {
 				expressFee.text(10);
 				invoiceFee.text(0);
-				totalAmount.text(baseFee);	
+				totalAmount.text(baseFee + normalExpressFee);	
 			}
 		} else {
 			expressFee.text(0);
