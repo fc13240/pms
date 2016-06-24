@@ -38,7 +38,7 @@
 			          <div class="ta-top" style="margin:8px;">
 			          <c:if test="${accountType==0}"> 
 			          <a href="<s:url value='/patentOfficeAccount/add_form.html'/>">
-			            <button style="width:130px;" class="button button-primary  button-rounded">添加电子账户</button>  
+			            <button style="width:130px;" class="button button-primary  button-rounded">添加中国专利电子申请的账户</button>  
 			            </a>
 			            </c:if> 
 			          </div>
@@ -51,7 +51,7 @@
 			                <span class="lbl"></span> </label>
 			              </th>
 			              <th class="center" width="20">序号</th>
-			              <th width="110" align="center">中国专利电子申请的用户名</th>
+			              <th width="110" align="center">用户名/名称</th>
 			              <th width="170" align="center">用户代码</th>
 			              <th width="90" align="center">登陆密码 </th>
 			              <th width="90" align="center">更新时间</th>

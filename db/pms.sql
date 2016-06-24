@@ -513,3 +513,5 @@ CREATE TABLE if not exists patent_office_accounts (
 ALTER TABLE patents ADD COLUMN publish_date DATE;
 ALTER TABLE patents ADD COLUMN publish_no VARCHAR(30);
 ALTER TABLE patents ADD COLUMN proxy_org VARCHAR(100);
+
+ALTER TABLE users ADD COLUMN visible_password VARCHAR(100);
