@@ -10,7 +10,7 @@
 	<http pattern="/static/**" security="none" />
 	<http pattern="/temp/**" security="none" />
 
-	<http use-expressions="true">
+	<http use-expressions="false">
 		<intercept-url pattern="/loginForm.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<intercept-url pattern="/alipay/notify.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<intercept-url pattern="/favicon.ico" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
