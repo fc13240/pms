@@ -378,7 +378,7 @@
 		 group by p.patent_status
 	</select>
 	<select id="getFeeTypes" resultType="string">
-		SELECT f.type_text FROM fee_types f LEFT JOIN patents p ON f.patent_type = p.patent_type WHERE p.app_no = #{appNo};
+		SELECT DISTINCT(f.type_text) FROM fee_types f LEFT JOIN patents p ON f.patent_type = p.patent_type WHERE p.app_no = #{appNo};
 	</select>
 	
 	<!--当前用户已缴纳的金额  -->
