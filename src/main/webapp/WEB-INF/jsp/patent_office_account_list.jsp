@@ -38,7 +38,7 @@
 			          <div class="ta-top" style="margin:8px;">
 			          <c:if test="${accountType==0}"> 
 			          <a href="<s:url value='/patentOfficeAccount/add_form.html'/>">
-			            <button style="width:130px;" class="button button-primary  button-rounded">添加中国专利电子申请的账户</button>  
+			            <button style="width:220px;" class="button button-primary  button-rounded">添加中国专利电子申请的账户</button>  
 			            </a>
 			            </c:if> 
 			          </div>
