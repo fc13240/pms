@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
 			return false;
 		}
 		//添加处理
+		user.setVisiblePassword(user.getPassword());
 		BCryptPasswordEncoder encode = new BCryptPasswordEncoder();
 		user.setPassword(encode.encode(user.getPassword()));
 		userDao.save(user);

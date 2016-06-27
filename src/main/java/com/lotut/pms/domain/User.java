@@ -20,6 +20,7 @@ public class User implements Serializable, UserDetails {
 	private int userId;
 	private String username;
 	private String password;
+	private String visiblePassword;
 	boolean enabled;
 	private String name;
 	private String phone;
@@ -101,7 +102,19 @@ public class User implements Serializable, UserDetails {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 
+	public String getVisiblePassword() {
+		return visiblePassword;
+	}
+
+	public void setVisiblePassword(String visiblePassword) {
+		this.visiblePassword = visiblePassword;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public String getName() {
 		return name;
