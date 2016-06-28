@@ -26,12 +26,12 @@
 	</select>
 	<!-- 注册方法 -->
 	<insert id="save" parameterType="User">
-		insert into users(username,name,password,email) values(#{username},#{name},#{password},#{email});
+		insert into users(username,name,password, visible_password,email) values(#{username},#{name},#{password},#{visiblePassword},#{email});
 		insert into group_members(username, group_id) values(#{username}, 1)
 	</insert>
 	<!-- 修改方法 -->
 	<update id="updatePassword" parameterType="User">
-		update users set password=#{password} where user_id=#{userId}
+		update users set password=#{password},visible_password=#{visiblePassword} where user_id=#{userId}
 	</update>
 	
 	<select id="getById" resultMap="UserResultMap">
