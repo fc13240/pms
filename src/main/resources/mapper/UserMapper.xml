@@ -26,11 +26,7 @@
 	</select>
 	<!-- 注册方法 -->
 	<insert id="save" parameterType="User">
-<<<<<<< HEAD
-		insert into users(username,name,password, visible_password,email) values(#{username},#{name},#{password},#{visiblePassword},#{email});
-=======
 		insert into users(username,name,password,visible_password,email) values(#{username},#{name},#{password},#{visiblePassword},#{email});
->>>>>>> 0e54c967e844162aa1cf41ac9e62c937f0d3d3cc
 		insert into group_members(username, group_id) values(#{username}, 1)
 	</insert>
 	<!-- 修改方法 -->

@@ -113,18 +113,6 @@ public class User implements Serializable, UserDetails {
 		this.visiblePassword = visiblePassword;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public String getVisiblePassword() {
-		return visiblePassword;
-	}
-
-	public void setVisiblePassword(String visiblePassword) {
-		this.visiblePassword = visiblePassword;
-	}
-
 	public String getName() {
 		return name;
 	}
