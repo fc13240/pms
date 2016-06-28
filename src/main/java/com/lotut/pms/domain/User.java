@@ -103,7 +103,19 @@ public class User implements Serializable, UserDetails {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 
+	public String getVisiblePassword() {
+		return visiblePassword;
+	}
+
+	public void setVisiblePassword(String visiblePassword) {
+		this.visiblePassword = visiblePassword;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public String getVisiblePassword() {
 		return visiblePassword;

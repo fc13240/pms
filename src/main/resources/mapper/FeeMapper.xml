@@ -41,7 +41,7 @@
 		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
 		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
-				join patent_status ps on p.patent_status = ps.patent_status_id
+				left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where f.fee_owner = #{userId} and f.patent in
 		 <foreach item="patentId" collection="patentIds" open="(" separator="," close=")">
 			 #{patentId}
@@ -58,7 +58,7 @@
 		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
 		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
-				join patent_status ps on p.patent_status = ps.patent_status_id join patent_types pt on p.patent_type = pt.patent_type_id
+				left join patent_status ps on p.patent_status = ps.patent_status_id left join patent_types pt on p.patent_type = pt.patent_type_id
 		  WHERE patent = (SELECT patent FROM fees WHERE fee_id = #{feeId}) AND fee_owner=#{userId}
 	</select>
 	
@@ -81,7 +81,7 @@
 		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
 		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
-				join patent_status ps on p.patent_status = ps.patent_status_id
+				left join patent_status ps on p.patent_status = ps.patent_status_id
 				left join order_items oi on f.fee_id = oi.fee_id
 		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2 and f.fee_payment_status =1 and <![CDATA[f.deadline <=(CURDATE()+INTERVAL 3 YEAR)]]>
 		 order by p.patent_id, f.deadline
@@ -104,7 +104,7 @@
 		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
 		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
-				join patent_status ps on p.patent_status = ps.patent_status_id
+				left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
 		 	<if test="patentType != null">
 		 		and p.patent_type = #{patentType}
@@ -174,7 +174,7 @@
 		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
 		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
-				join patent_status ps on p.patent_status = ps.patent_status_id
+				left join patent_status ps on p.patent_status = ps.patent_status_id
 				left join order_items oi on f.fee_id = oi.fee_id
 		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
 		 	<if test="patentType != null">
@@ -315,7 +315,7 @@
 		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
 		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
-				join patent_status ps on p.patent_status = ps.patent_status_id join patent_types pt on p.patent_type = pt.patent_type_id
+				left join patent_status ps on p.patent_status = ps.patent_status_id left join patent_types pt on p.patent_type = pt.patent_type_id
 		 where f.fee_id in
 		 <foreach item="feeId" collection="feeIdList" open="(" separator="," close=")">
 			 #{feeId}
@@ -353,7 +353,7 @@
 		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
 		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
-				join patent_status ps on p.patent_status = ps.patent_status_id
+				left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
 		 group by p.patent_type
 	</select>
@@ -363,7 +363,7 @@
 		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
 		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
-				join patent_status ps on p.patent_status = ps.patent_status_id
+				left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
 		 group by f.fee_payment_status
 	</select>
@@ -373,12 +373,12 @@
 		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
 		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
-				join patent_status ps on p.patent_status = ps.patent_status_id
+				left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
 		 group by p.patent_status
 	</select>
 	<select id="getFeeTypes" resultType="string">
-		SELECT f.type_text FROM fee_types f LEFT JOIN patents p ON f.patent_type = p.patent_type WHERE p.app_no = #{appNo};
+		SELECT DISTINCT(f.type_text) FROM fee_types f LEFT JOIN patents p ON f.patent_type = p.patent_type WHERE p.app_no = #{appNo};
 	</select>
 	
 	<!--当前用户已缴纳的金额  -->

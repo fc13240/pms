@@ -1,8 +1,6 @@
 package com.lotut.pms.web.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,7 +77,6 @@ public class OrderController {
 			return "redirect:/alipay/pay.html";
 		}
 		
-		// FIXME change success page
 		return "add_patent_success";
 	}
 	
