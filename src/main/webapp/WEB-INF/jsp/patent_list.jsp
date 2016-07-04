@@ -58,12 +58,12 @@
 							</li>
 							<li>
 							 <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=2'/>">
-							实用新型 (<c:out value='${patentTypeCount[(2).intValue()]["patentCount"]}' default="0"/>)
+							实用 (<c:out value='${patentTypeCount[(2).intValue()]["patentCount"]}' default="0"/>)
 							</a> 
 							</li>
 							
 							<li>
-							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=3'/>">外观设计 (<c:out value='${patentTypeCount[(3).intValue()]["patentCount"]}' default="0"/>)
+							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=3'/>">外观 (<c:out value='${patentTypeCount[(3).intValue()]["patentCount"]}' default="0"/>)
 							</a> 							
 							</li>
 
@@ -213,11 +213,12 @@
 							<span class="lbl"></span> </label>
 						  </th>
 						  <th class="center" width="35">序号</th>
+						  <th width="60">专利类型</th>
 						  <th width="110">申请号/专利号</th>
 						  <th width="170">专利名称</th>
 						  <th width="90">第一申请人 </th>
 						  <th width="90" class="hidden-480"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申请日</th>
-						  <th width="60">专利类型</th>
+						  <th width="60">缴费年日</th>
 						  <th width="70">案件状态</th>
 						  <th width="50">内部编码</th>
 						  <th width="90">共享人</th>
@@ -231,12 +232,13 @@
 							  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.patentId}'/>">
 							  <span class="lbl"></span></label></td>
 							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+														<td style="text-align:center"><c:out value="${patent.patentType.typeDescription}"/></td>
 							<td style="text-align:center"><c:out value="${patent.appNo}"/>
 							</td>
 							<td class="hidden-480" style="text-align:center"><c:out value="${patent.name}"/></td>
 							<td style="text-align:center"><c:out value="${patent.appPerson}"/></td>
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
-							<td style="text-align:center"><c:out value="${patent.patentType.typeDescription}"/></td>
+							<td class="hidden-480" style="text-align:center">缴费年日</td>
 							<td style="text-align:center"><c:out value="${patent.patentStatusText}"/></td>
 							<td style="text-align:center"><input style="width:60px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
 							</td>
