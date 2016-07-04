@@ -41,7 +41,7 @@
 					  <div style="height:33px;">
 						<ul id="nav">
 						  <p>快捷处理：</p>
-						  <li><a href="#" class="selected">专利类型</a></li>
+						  <li><a href="#" class="selected">类型</a></li>
 						  <li><a href="#" class="">案件状态</a></li>
 						  <li><a style="color:#FF0000;" href="<s:url value='/notice/list.html?selectType=5&currentPage=1'/>" class="">通知书监控中</a></li>
 						  <li><a style="color:#FF0000;" href="<s:url value='/fee/monitoredFeeList.html?selectType=4&currentPage=1'/>" class="">交费监控中</a></li>
