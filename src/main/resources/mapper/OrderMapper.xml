@@ -93,7 +93,7 @@
 			  JOIN order_items oi ON od.order_id = oi.order_id
 			  JOIN fees f ON f.fee_id = oi.fee_id
 			  JOIN patents p ON f.patent = p.patent_id
-			  JOIN patent_status ps ON p.patent_status = ps.patent_status_id
+			  left JOIN patent_status ps ON p.patent_status = ps.patent_status_id
 			  JOIN fee_payment_status fs ON f.fee_payment_status = fs.fee_payment_status_id
 	</select>
 	
@@ -127,7 +127,7 @@
 			  JOIN order_items oi ON od.order_id = oi.order_id
 			  JOIN fees f ON f.fee_id = oi.fee_id
 			  JOIN patents p ON f.patent = p.patent_id
-			  JOIN patent_status ps ON p.patent_status = ps.patent_status_id
+			  left JOIN patent_status ps ON p.patent_status = ps.patent_status_id
 			  JOIN fee_payment_status fs ON f.fee_payment_status = fs.fee_payment_status_id
 	</select>
 	
@@ -168,7 +168,7 @@
 			join order_items oi on oi.order_id = o.order_id 
 			join fees f on oi.fee_id = f.fee_id
 		    join patents p on f.patent = p.patent_id
-			join patent_status ps on p.patent_status = ps.patent_status_id
+			left join patent_status ps on p.patent_status = ps.patent_status_id
 			join fee_payment_status fs on f.fee_payment_status = fs.fee_payment_status_id
 			left join provinces on provinces.id = ca.province
 			left join cities on cities.id = ca.city
@@ -212,7 +212,7 @@
 			  JOIN order_items oi ON od.order_id = oi.order_id
 			  JOIN fees f ON f.fee_id = oi.fee_id
 			  JOIN patents p ON f.patent = p.patent_id
-			  JOIN patent_status ps ON p.patent_status = ps.patent_status_id
+			  left JOIN patent_status ps ON p.patent_status = ps.patent_status_id
 			  JOIN fee_payment_status fs ON f.fee_payment_status = fs.fee_payment_status_id	
 	</select>	
 	
@@ -225,7 +225,7 @@
 			join order_items oi on oi.order_id = o.order_id 
 			join fees f on oi.fee_id = f.fee_id
 		  join patents p on f.patent = p.patent_id
-			join patent_status ps on p.patent_status = ps.patent_status_id
+			left join patent_status ps on p.patent_status = ps.patent_status_id
 			join fee_payment_status fs on f.fee_payment_status = fs.fee_payment_status_id
 		where o.user = #{userId} and o.order_status = #{orderStatus}
 		order by o.create_time desc		
@@ -289,7 +289,7 @@
 			  JOIN order_items oi ON od.order_id = oi.order_id
 			  JOIN fees f ON f.fee_id = oi.fee_id
 			  JOIN patents p ON f.patent = p.patent_id
-			  JOIN patent_status ps ON p.patent_status = ps.patent_status_id
+			  left JOIN patent_status ps ON p.patent_status = ps.patent_status_id
 			  JOIN fee_payment_status fs ON f.fee_payment_status = fs.fee_payment_status_id	
 	</select>
 	
@@ -321,7 +321,7 @@
 			  JOIN order_items oi ON od.order_id = oi.order_id
 			  JOIN fees f ON f.fee_id = oi.fee_id
 			  JOIN patents p ON f.patent = p.patent_id
-			  JOIN patent_status ps ON p.patent_status = ps.patent_status_id
+			  left JOIN patent_status ps ON p.patent_status = ps.patent_status_id
 			  JOIN fee_payment_status fs ON f.fee_payment_status = fs.fee_payment_status_id	
 	</select>
 	
