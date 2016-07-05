@@ -174,7 +174,7 @@ public class PatentController {
 		Patent patent = patentService.getPatentDetail(patent_id);
 		model.addAttribute("patent", patent);		
 		
-		model.addAttribute("patentno", patent_id);
+		model.addAttribute("patentId", patent_id);
 		model.addAttribute("FirstColumns", FirstColumns);
 		return "goods_form";
 	}	

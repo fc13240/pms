@@ -72,7 +72,7 @@
 	</select>	
 	
 	<select id="getPatentById" parameterType="long" resultMap="PatentWithShareUsers">
-		select p.patent_id, p.app_no, p.patent_name, pt.patent_type_desc, p.app_date,p.patent_status_text, p.app_person, ps.patent_status_desc, u.user_id, u.username
+		select p.patent_id, p.app_no, p.patent_name, pt.patent_type_desc, p.app_date,p.patent_status_text, p.app_person,p.patent_owner, ps.patent_status_desc, u.user_id, u.username
 		  from patents p left join patent_status ps on p.patent_status = ps.patent_status_id left join patent_types pt on p.patent_type = pt.patent_type_id
 					join user_patents up on p.patent_id = up.patent join users u on u.user_id = up.user 
 		 where up.patent = #{patentId};	
@@ -279,8 +279,8 @@
 	</update>
 	
 	<insert id="saveGoods" parameterType="GoodsDetail" >
-		insert into sell_patent_goods(patent_id, sell_date, add_date, state, sell_mode, price, patent_second_column)
-		values(#{id}, '0000-00-00',curdate(), '1', '转让', #{price}, #{SecondColumn})				
+		insert into sell_patent_goods(patent_id, transaction_date, add_date, status, transaction_type, price, patent_second_column,owner)
+		values(#{id}, '0000-00-00',curdate(), '1', #{transactionType}, #{price}, #{SecondColumn},#{userId})				
 	</insert>
 	
 	
