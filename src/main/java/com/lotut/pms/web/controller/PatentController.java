@@ -243,5 +243,19 @@ public class PatentController {
 		}
 	}
 	
-	
+	@RequestMapping(path="/getUserTransactionPatents", method=RequestMethod.GET)
+	public String getUserTransactionPatents(Model model, Page page, HttpSession session) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=(int)patentService.getUserTransactionPatentsCount(userId);
+		page.setTotalRecords(totalCount);
+		List<Patent> patents = patentService.getUserPatents(page);
+		model.addAttribute("patents", patents);
+		model.addAttribute("page", page);
+		return "patent_list";
+	}
 }

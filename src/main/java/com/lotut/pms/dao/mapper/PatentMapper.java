@@ -69,4 +69,8 @@ public interface PatentMapper {
 	Patent getPatentsByAppNo(@Param("userId") Integer user_id, @Param("appNo")String appNo);
 	
 	long getPatentIdByAppNo(@Param("userId") Integer user_id,@Param("appNo")String appNo);
+	
+	List<Patent> getUserTransactionPatents(Page page);
+	
+	int getUserTransactionPatentsCount(@Param("userId")int userId);
 }
