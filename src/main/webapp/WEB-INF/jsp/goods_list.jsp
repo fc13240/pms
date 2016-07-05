@@ -349,10 +349,10 @@
 			return;
 		}
 		
-		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
+		var url = "<s:url value='/patent/getUserTransactionPatents.html'/>?currentPage=" + pageNo;
 		
 		<c:if test="${searchCondition != null}">
-			url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+			url = "<s:url value='/patent/searchTransactionPatents.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 		</c:if>
 		
 		
