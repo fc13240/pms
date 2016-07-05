@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.lotut.pms.domain.GoodsDetail;
 import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
@@ -63,4 +65,8 @@ public interface PatentService {
 	 String generatePatentExportExcel(List<Long> patentIds,String excelName) throws IOException;
 	 
 	 public boolean  addOrUpdatePatents(List<Patent> patents,int userId);
+	 
+	 List<Patent> getUserTransactionPatents(Page page);
+	 
+	 int getUserTransactionPatentsCount(int userId);
 }

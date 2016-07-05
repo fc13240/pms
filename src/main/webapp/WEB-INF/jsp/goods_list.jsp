@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管家－我的专利！</title>
+<title>龙图腾专利管家－商品列表</title>
 <%@ include file="_css.jsp" %>
 <body>
 <%@ include file="_top.jsp" %>
@@ -34,98 +34,7 @@
 			
 			
 				<div style="height:10px;"></div>
-				<!-- menu begin -->
-				<div class="lt-box">
-
-					<div id="menu">
-					  <div style="height:33px;">
-						<ul id="nav">
-						  <p>快捷处理：</p>
-						  <li><a href="#" class="selected">类型</a></li>
-						  <li><a href="#" class="">案件状态</a></li>
-						  <li><a style="color:#FF0000;" href="<s:url value='/notice/list.html?selectType=5&currentPage=1'/>" class="">通知书监控中</a></li>
-						  <li><a style="color:#FF0000;" href="<s:url value='/fee/monitoredFeeList.html?selectType=4&currentPage=1'/>" class="">交费监控中</a></li>
-						</ul>
-					  </div>
-						
-					  <div id="menu_con">
-					  						
-						<div class="tag" style="display:block; margin-left:-20px;"> 
-
-						  <ul class="qxjk-ul"><li>
-							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=1'/>">
-							发明 (<c:out value='${patentTypeCount[(1).intValue()]["patentCount"]}' default="0"/>)</a>
-							</li>
-							<li>
-							 <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=2'/>">
-							实用 (<c:out value='${patentTypeCount[(2).intValue()]["patentCount"]}' default="0"/>)
-							</a> 
-							</li>
-							
-							<li>
-							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=3'/>">外观 (<c:out value='${patentTypeCount[(3).intValue()]["patentCount"]}' default="0"/>)
-							</a> 							
-							</li>
-
-						  </ul>	    
-						
-						
-						</div>
-						<div class="tag"  style="display:none">
-						  <ul class="qxjk-ul">
-						  	<li>	      
-								<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=1'/>">
-								等待申请费 (<c:out value='${patentStatusCount[(1).intValue()]["patentCount"]}' default="0"/>)
-								</a>
-							</li> 
-							
-							<li>
-							   	<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=2'/>">
-								待答复 (<c:out value='${patentStatusCount[(2).intValue()]["patentCount"]}' default="0"/>)
-								</a> 
-							</li>
-							
-							<li>
-								<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=3'/>">
-								等年登印费 (<c:out value='${patentStatusCount[(3).intValue()]["patentCount"]}' default="0"/>)
-								</a>
-							</li>
-							
-							<li>
-								<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=4'/>">
-								待恢复 (<c:out value='${patentStatusCount[(4).intValue()]["patentCount"]}' default="0"/>)
-								</a> 
-							</li>
-							
-							<li>
-							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=5'/>">
-							失效(<c:out value='${patentStatusCount[(5).intValue()]["patentCount"]}' default="0"/>)
-							</a> 
-							</li>
-							
-							<li>
-								<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=6'/>">
-								专利权维持 (<c:out value='${patentStatusCount[(6).intValue()]["patentCount"]}' default="0"/>)
-								</a>
-							</li>
-							
-							<li>
-								<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=7'/>">
-								其他 (<c:out value='${patentStatusCount[(7).intValue()]["patentCount"]}' default="0"/>)
-								</a>
-							</li>
-						  </ul>
-						</div>
-					  </div>
-					</div>				
-				
-				
-				</div>
-				<!-- menu end -->
-				<!-- search begin -->
-				
-			
-				
+		
 				<div class="lt-box">
 					<div class="search-box">
 					
@@ -137,11 +46,11 @@
 
 						  <table class="search-table">
 							  <tr>
-							  <td>专利类型</td>
-							  <td>专利状态</td>
-							  <td>申请日开始</td>
+							  <td>交易状态</td>
+							  <td>交易方式</td>
+							  <td>添加日开始</td>
 							  <td></td>
-							  <td>申请日结束</td>
+							  <td>添加日结束</td>
 							  <td>关键字</td>
 							  <td></td>	
 							  </tr>
@@ -149,29 +58,26 @@
 							  <td>
 								<select  style="width:100px;" class="selectPointOfInterest form-control" name="patentType">
 								  <option value="">全部</option>
-								  <c:forEach items="${allPatentTypes}" var="patentType">
-									<option value="<c:out value='${patentType.patentTypeId}'/>">
-									<c:out value="${patentType.typeDescription}"/>
-									</option>
-								  </c:forEach>
+								 
+								<option value="1">上架中</option>
+								<option value="2">已下架</option>
+
+								
 								</select>
 							  </td>
 							  <td>
 								<select style="width:121px;" class="form-control" name="patentStatus">
 								  <option value="">全部</option>
-								  <c:forEach items="${allPatentStatus}" var="patentStatus">
-									<option value="<c:out value='${patentStatus.patentStatusId}'/>">
-									<c:out value="${patentStatus.statusDescription}"/>
-									</option>
-								  </c:forEach>
+								  <option value="1">转让</option>
+								  <option value="2">许可</option>
 								</select>
 							  </td>
 							  <td>
-								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >							  
+								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="添加日开始" value="" readonly="readonly" >							  
 							  </td>
 							  <td>-</td>
 							  <td>
-								<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >
+								<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="添加日结束" value="" readonly="readonly" >
 							  </td>
 							  <td>
 								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>							  
@@ -189,6 +95,7 @@
 				<div class="lt-box">
 					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
 					  <div class="ta-top" style="margin-left:8px;">
+					  	<!-- 
 					  	<table class="search-table">
 					  	<tr>
 					  	<td>
@@ -203,56 +110,38 @@
 						</td>						
 					  	</tr>
 					  	</table>
+					  	 -->
 					  </div>
 					  </span> </div>
 					<table id="simple-table" class="table table-striped table-bordered table-hover">
 					  <thead>
 						<tr class="simple_bag">
-						  <th class="center" width="15"> <label class="pos-rel">
-							<input type="checkbox" class="patent-check-item" id="checkall"  name="checkall" />
-							<span class="lbl"></span> </label>
-						  </th>
 						  <th class="center" width="35">序号</th>
-						  <th width="60">专利类型</th>
 						  <th width="110">申请号/专利号</th>
 						  <th width="170">专利名称</th>
-						  <th width="90">第一申请人 </th>
-						  <th width="90" class="hidden-480"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申请日</th>
-						  <th width="60">缴费年日</th>
-						  <th width="70">案件状态</th>
-						  <th width="50">内部编码</th>
-						  <th width="90">共享人</th>
+						  <th width="90">添加日 </th>
+						  <th width="90">价格 </th>  <!-- 价格可以做成直接编辑的，可以少加一个编辑页面 -->
 						  <th width="80">操作</th>
 						</tr>
 					  </thead>
 					  <tbody>
 						<c:forEach items="${patents}" var="patent" varStatus="status">
 						  <tr >
-							<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-							  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.patentId}'/>">
-							  <span class="lbl"></span></label></td>
+						
 							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
-														<td style="text-align:center"><c:out value="${patent.patentType.typeDescription}"/></td>
 							<td style="text-align:center"><c:out value="${patent.appNo}"/>
 							</td>
 							<td class="hidden-480" style="text-align:center"><c:out value="${patent.name}"/></td>
 							<td style="text-align:center"><c:out value="${patent.appPerson}"/></td>
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
-							<td class="hidden-480" style="text-align:center">缴费年日</td>
-							<td style="text-align:center"><c:out value="${patent.patentStatusText}"/></td>
-							<td style="text-align:center"><input style="width:60px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
-							</td>
-							<td style="text-align:center"><c:out value="${patent.shareUsersAsString}"/>
-							</td>
+							
 							<td ><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
-							  分享
+							  上架
 							  </a>&nbsp;
 							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
-							  交费
+							  下架
 							  </a> 
-			                  	  <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
-				                  	<button class="t-btn2">出售</button> 
-			 	                  </a>
+			             
 							  </td>
 						  </tr>
 						</c:forEach>

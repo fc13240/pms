@@ -186,4 +186,14 @@ public class PatentServiceImpl implements PatentService {
 		PatentExcelGenerator.writerPatentRecodesToExcel(patents, exportExcelPath);
 		return exportExcelPath;
 	}
+
+	@Override
+	public List<Patent> getUserTransactionPatents(Page page) {
+		return patentDao.getUserTransactionPatents(page);
+	}
+
+	@Override
+	public int getUserTransactionPatentsCount(int userId) {
+		return patentDao.getUserTransactionPatentsCount(userId);
+	}
 }
