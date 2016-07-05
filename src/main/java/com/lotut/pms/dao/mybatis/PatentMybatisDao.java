@@ -157,7 +157,7 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	}
 
 	@Override
-	public List<Patent> getUserTransactionPatents(Page page) {
+	public List<GoodsDetail> getUserTransactionPatents(Page page) {
 		return patentMapper.getUserTransactionPatents(page);
 	}
 

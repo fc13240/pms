@@ -58,7 +58,7 @@ public interface PatentDao {
 	
 	long getPatentIdByAppNo(Integer userId,String appNo);
 	
-	List<Patent> getUserTransactionPatents(Page page);
+	List<GoodsDetail> getUserTransactionPatents(Page page);
 	
 	int getUserTransactionPatentsCount(int userId);
 }

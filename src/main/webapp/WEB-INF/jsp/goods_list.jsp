@@ -119,8 +119,10 @@
 						  <th class="center" width="35">序号</th>
 						  <th width="110">申请号/专利号</th>
 						  <th width="170">专利名称</th>
-						  <th width="90">添加日 </th>
-						  <th width="90">价格 </th>  <!-- 价格可以做成直接编辑的，可以少加一个编辑页面 -->
+						  <th width="90">价格 </th><!-- 价格可以做成直接编辑的，可以少加一个编辑页面 -->
+						  <th width="90">交易状态</th>  
+						  <th width="90">交易类型</th>  
+						  <th width="90">添加日</th>  
 						  <th width="80">操作</th>
 						</tr>
 					  </thead>
@@ -131,17 +133,41 @@
 							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
 							<td style="text-align:center"><c:out value="${patent.appNo}"/>
 							</td>
-							<td class="hidden-480" style="text-align:center"><c:out value="${patent.name}"/></td>
-							<td style="text-align:center"><c:out value="${patent.appPerson}"/></td>
-							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
+							<td class="hidden-480" style="text-align:center"><c:out value="${patent.patentName}"/></td>
+							<td style="text-align:center"><c:out value="${patent.price}"/></td>
 							
-							<td ><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
+							
+							<td style="text-align:center">
+								<c:if test="${patent.status==1}">
+								出售中
+								</c:if>
+								<c:if test="${patent.status==2}">
+								已出售
+								</c:if>							
+							</td>
+							
+							<td style="text-align:center">
+								<c:if test="${patent.transactionType==1}">
+								转让
+								</c:if>
+								<c:if test="${patent.transactionType==2}">
+								许可
+								</c:if>
+							</td>
+						
+							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.addDate}" pattern="yyyy-MM-dd"/></td>
+							
+							<td >
+							<c:if test="${patent.status==2}">
+							  <a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
 							  上架
-							  </a>&nbsp;
+							  </a>
+							</c:if>
+							  <c:if test="${patent.status==1}">
 							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
 							  下架
 							  </a> 
-			             
+			             	  </c:if>
 							  </td>
 						  </tr>
 						</c:forEach>
@@ -175,33 +201,6 @@
 			              </select>
 			              条记录 </span> </div>
 			          </c:if>
-			       
-			        <c:if test="${searchCondition != null}">
-			          <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?page.currentPage=1&${searchCondition}">首页</a>
-			            <c:choose>
-			              <c:when test="${page.currentPage - 1 > 0}"> <a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a> </c:when>
-			              <c:when test="${page.currentPage - 1 <= 0}"> <a href="?page.currentPage=1&${searchCondition}">上一页</a> </c:when>
-			            </c:choose>
-			            <c:choose>
-			              <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a> </c:when>
-			              <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a> </c:when>
-			              <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a> </c:when>
-			            </c:choose>
-			            <c:choose>
-			              <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a> </c:when>
-			              <c:otherwise> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise>
-			            </c:choose>
-			            <!-- 分页功能 End -->
-			            <input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
-			            <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
-			            <select onChange="setPageSize()" style="height:25px;" id="pageSizeSelect">
-			              <option value="10">10</option>
-			              <option value="20">20</option>
-			              <option value="50">50</option>
-			              <option value="100">100</option>
-			            </select>
-			            条记录 </span> </div>
-			        </c:if>
 			        </div>					
 				
 				

@@ -66,7 +66,7 @@ public interface PatentService {
 	 
 	 public boolean  addOrUpdatePatents(List<Patent> patents,int userId);
 	 
-	 List<Patent> getUserTransactionPatents(Page page);
+	 List<GoodsDetail> getUserTransactionPatents(Page page);
 	 
 	 int getUserTransactionPatentsCount(int userId);
 }

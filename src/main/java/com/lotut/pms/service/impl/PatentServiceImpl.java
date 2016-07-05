@@ -188,7 +188,7 @@ public class PatentServiceImpl implements PatentService {
 	}
 
 	@Override
-	public List<Patent> getUserTransactionPatents(Page page) {
+	public List<GoodsDetail> getUserTransactionPatents(Page page) {
 		return patentDao.getUserTransactionPatents(page);
 	}
 

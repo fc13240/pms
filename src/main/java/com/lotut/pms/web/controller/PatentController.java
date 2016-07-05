@@ -253,7 +253,7 @@ public class PatentController {
 		}
 		int totalCount=(int)patentService.getUserTransactionPatentsCount(userId);
 		page.setTotalRecords(totalCount);
-		List<Patent> patents = patentService.getUserPatents(page);
+		List<GoodsDetail> patents = patentService.getUserTransactionPatents(page);
 		model.addAttribute("patents", patents);
 		model.addAttribute("page", page);
 		return "goods_list";

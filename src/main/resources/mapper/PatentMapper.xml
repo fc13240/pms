@@ -314,13 +314,27 @@
 		FROM patents p LEFT JOIN patent_status ps ON p.patent_status = ps.patent_status_id JOIN user_patents up ON p.patent_id = up.patent
 		WHERE up.user = #{userId} AND p.app_no=#{appNo};
 	</select>
+
+	<resultMap type="GoodsDetail" id="TransactionPatent">
+		<id property="patentId" column="patent_id"/>
+		<result property="appNo" column="app_no"/>
+		<result property="patentName" column="patent_name"/>
+		<result property="addDate" column="add_date"/>
+		<result property="price" column="price"/>
+		<result property="transactionType" column="transaction_type"/>
+		<result property="status" column="status"/>	
+	</resultMap>
 	
-	<select id="getUserTransactionPatents" parameterType="page" resultMap="PatentWithShareUsers">
-		SELECT p.patent_id, p.app_no, p.patent_name, pt.patent_type_desc, p.app_date,p.patent_status_text, p.app_person,p.patent_owner, ps.patent_status_desc, u.user_id, u.username
-		FROM patents p LEFT JOIN patent_status ps ON p.patent_status = ps.patent_status_id LEFT JOIN patent_types pt ON p.patent_type = pt.patent_type_id
-		JOIN user_patents up ON p.patent_id = up.patent JOIN users u ON u.user_id = up.user 
-		WHERE up.patent IN (SELECT patent_id FROM sell_patent_goods WHERE OWNER=#{userId} ) limit #{startIndex}, #{pageSize};
+	<select id="getUserTransactionPatents" parameterType="page" resultMap="TransactionPatent">
+
+		SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,p.patent_name,p.app_no
+		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id
+		WHERE  owner=#{userId}  limit #{startIndex}, #{pageSize};
+	
 	</select>
+	
+	
+	
 	
 	<select id="getUserTransactionPatentsCount" resultType="int">
 		SELECT COUNT(*) FROM sell_patent_goods WHERE OWNER = #{userId};
