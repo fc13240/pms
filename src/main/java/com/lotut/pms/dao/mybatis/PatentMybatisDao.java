@@ -15,6 +15,7 @@ import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.TransactionPatentSearchCondition;
 import com.lotut.pms.util.PrincipalUtils;
 
 public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao {
@@ -164,5 +165,15 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	@Override
 	public int getUserTransactionPatentsCount(int userId) {
 		return patentMapper.getUserTransactionPatentsCount(userId);
+	}
+
+	@Override
+	public List<GoodsDetail> searchTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition) {
+		return patentMapper.searchTransactionPatentsByPage(searchCondition);
+	}
+
+	@Override
+	public int searchTransactionPatentsCount(TransactionPatentSearchCondition searchCondition) {
+		return patentMapper.searchTransactionPatentsCount(searchCondition);
 	}
 }

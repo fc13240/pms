@@ -40,7 +40,7 @@
 					
 					
 					
-						<form class="form-inline" action="<s:url value='/patent/search.html'/>" method="get">
+						<form class="form-inline" action="<s:url value='/patent/searchTransactionPatents.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 						  <div class="t-third">
 
@@ -49,31 +49,29 @@
 							  <td>交易状态</td>
 							  <td>交易方式</td>
 							  <td>添加日开始</td>
-							  <td></td>
 							  <td>添加日结束</td>
 							  <td>关键字</td>
-							  <td></td>	
 							  </tr>
 							  <tr>
 							  <td>
-								<select  style="width:100px;" class="selectPointOfInterest form-control" name="patentType">
-								  <option value="">全部</option>
+								<select  style="width:100px;" class="selectPointOfInterest form-control" name="status">
+								  <option value="" >全部</option>
 								 
-								<option value="1">上架中</option>
-								<option value="2">已下架</option>
+								<option value="1" >上架中</option>
+								<option value="2" >已下架</option>
 
 								
 								</select>
 							  </td>
 							  <td>
-								<select style="width:121px;" class="form-control" name="patentStatus">
+								<select style="width:121px;" class="form-control" name="transactionType">
 								  <option value="">全部</option>
 								  <option value="1">转让</option>
 								  <option value="2">许可</option>
 								</select>
 							  </td>
 							  <td>
-								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="添加日开始" value="" readonly="readonly" >							  
+								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAddDate" placeholder="添加日开始" value="" readonly="readonly" >							  
 							  </td>
 							  <td>-</td>
 							  <td>
@@ -201,6 +199,32 @@
 			              </select>
 			              条记录 </span> </div>
 			          </c:if>
+			           <c:if test="${searchCondition != null}">
+			          <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?page.currentPage=1&${searchCondition}">首页</a>
+			            <c:choose>
+			              <c:when test="${page.currentPage - 1 > 0}"> <a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a> </c:when>
+			              <c:when test="${page.currentPage - 1 <= 0}"> <a href="?page.currentPage=1&${searchCondition}">上一页</a> </c:when>
+			            </c:choose>
+			            <c:choose>
+			              <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a> </c:when>
+			              <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a> </c:when>
+			              <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a> </c:when>
+			            </c:choose>
+			            <c:choose>
+			              <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a> </c:when>
+			              <c:otherwise> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise>
+			            </c:choose>
+			            <!-- 分页功能 End -->
+			            <input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
+			            <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
+			            <select onChange="setPageSize()" style="height:25px;" id="pageSizeSelect">
+			              <option value="10">10</option>
+			              <option value="20">20</option>
+			              <option value="50">50</option>
+			              <option value="100">100</option>
+			            </select>
+			            条记录 </span> </div>
+			        </c:if>
 			        </div>					
 				
 				
