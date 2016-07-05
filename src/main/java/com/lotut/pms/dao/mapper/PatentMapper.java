@@ -73,4 +73,12 @@ public interface PatentMapper {
 	List<GoodsDetail> getUserTransactionPatents(Page page);
 	
 	int getUserTransactionPatentsCount(@Param("userId")int userId);
+
+	void downTransactionPatent(int patentId);
+
+	void upTransactionPatent(int patentId);
+
+	void deleteTransactionPatent(int patentId);
+
+
 }

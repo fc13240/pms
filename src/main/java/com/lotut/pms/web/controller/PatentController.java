@@ -258,4 +258,20 @@ public class PatentController {
 		model.addAttribute("page", page);
 		return "goods_list";
 	}
+	
+	@RequestMapping(path="/downTransactionPatent",method=RequestMethod.GET)
+	public void downTransactionPatents(@RequestParam("patentId") int patentId){
+		patentService.downTransactionPatent(patentId);
+		
+	}	
+	@RequestMapping(path="/upTransactionPatent",method=RequestMethod.GET)
+	public void upTransactionPatents(@RequestParam("patentId") int patentId){
+		patentService.upTransactionPatent(patentId);
+		
+	}	
+	@RequestMapping(path="/deleteTransactionPatent",method=RequestMethod.GET)
+	public void deleteTransactionPatents(@RequestParam("patentId") int patentId){
+		patentService.deleteTransactionPatent(patentId);
+		
+	}	
 }

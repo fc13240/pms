@@ -196,4 +196,22 @@ public class PatentServiceImpl implements PatentService {
 	public int getUserTransactionPatentsCount(int userId) {
 		return patentDao.getUserTransactionPatentsCount(userId);
 	}
+
+	@Override
+	public void downTransactionPatent(int patentId) {
+		// TODO Auto-generated method stub
+		patentDao.downTransactionPatent(patentId);
+	}
+
+	@Override
+	public void upTransactionPatent(int patentId) {
+		// TODO Auto-generated method stub
+		patentDao.upTransactionPatent(patentId);
+	}
+
+	@Override
+	public void deleteTransactionPatent(int patentId) {
+		// TODO Auto-generated method stub
+		patentDao.deleteTransactionPatent(patentId);
+	}
 }

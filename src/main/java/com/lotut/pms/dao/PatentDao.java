@@ -61,4 +61,7 @@ public interface PatentDao {
 	List<GoodsDetail> getUserTransactionPatents(Page page);
 	
 	int getUserTransactionPatentsCount(int userId);
+	void downTransactionPatent(int patentId);
+	void upTransactionPatent(int patentId);
+	void deleteTransactionPatent(int patentId);
 }

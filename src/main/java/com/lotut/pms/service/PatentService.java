@@ -69,4 +69,12 @@ public interface PatentService {
 	 List<GoodsDetail> getUserTransactionPatents(Page page);
 	 
 	 int getUserTransactionPatentsCount(int userId);
+
+	public void downTransactionPatent(int patentId);
+
+	public void upTransactionPatent(int patentId);
+
+	public void deleteTransactionPatent(int patentId);
+
+	;
 }

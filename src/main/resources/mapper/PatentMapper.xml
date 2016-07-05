@@ -338,5 +338,18 @@
 	
 	<select id="getUserTransactionPatentsCount" resultType="int">
 		SELECT COUNT(*) FROM sell_patent_goods WHERE OWNER = #{userId};
-	</select>	
+	</select>
+	
+	<update id="downTransactionPatent">
+		update sell_patent_goods set status =2
+		 where patent_id = #{patentId}
+	</update>
+	<update id="upTransactionPatent">
+		update sell_patent_goods set status =1
+		 where patent_id = #{patentId}
+	</update>	
+	<delete id="deleteTransactionPatent">
+		delete from sell_patent_goods where patent_id = #{patentId}
+	</delete>	
+		
 </mapper>

@@ -165,4 +165,22 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	public int getUserTransactionPatentsCount(int userId) {
 		return patentMapper.getUserTransactionPatentsCount(userId);
 	}
+
+	@Override
+	public void downTransactionPatent(int patentId) {
+		// TODO Auto-generated method stub
+		patentMapper.downTransactionPatent(patentId);
+	}
+
+	@Override
+	public void upTransactionPatent(int patentId) {
+		// TODO Auto-generated method stub
+		patentMapper.upTransactionPatent(patentId);
+	}
+
+	@Override
+	public void deleteTransactionPatent(int patentId) {
+		// TODO Auto-generated method stub
+		patentMapper.deleteTransactionPatent(patentId);
+	}
 }

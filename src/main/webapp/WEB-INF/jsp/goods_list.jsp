@@ -159,15 +159,18 @@
 							
 							<td >
 							<c:if test="${patent.status==2}">
-							  <a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
+							  <a href="javascript:return void" onclick="upTransactionPatent(${patent.patentId})">	 
 							  上架
 							  </a>
 							</c:if>
 							  <c:if test="${patent.status==1}">
-							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
+							  <a href="javascript:return void" onclick="downTransactionPatent(${patent.patentId})">
 							  下架
 							  </a> 
 			             	  </c:if>
+							  <a href="javascript:return void" onclick="deleteTransactionPatent(${patent.patentId})">
+							  删除
+							  </a>         	  
 							  </td>
 						  </tr>
 						</c:forEach>
@@ -271,8 +274,36 @@
 		});	
 	}
 	
+	function downTransactionPatent(patentId) {
+		$.ajax({
+			url: "<s:url value='/patent/downTransactionPatent.html'/>?patentId=" + patentId, 
+			type: 'get', 
+			success: function(data) {
+				//formutil.alertMessage('下架成功');	
+			}		
+		
+		});	
+	}	
+
+	function deleteTransactionPatent(patentId) {
+		$.ajax({
+			url: "<s:url value='/patent/deleteTransactionPatent.html'/>?patentId=" + patentId, 
+			type: 'get', 
+			success: function(data) {
+				//formutil.alertMessage('删除成功');	
+			}
+		});	
+	}	
 	
-	
+	function upTransactionPatent(patentId) {
+		$.ajax({
+			url: "<s:url value='/patent/upTransactionPatent.html'/>?patentId=" + patentId, 
+			type: 'get', 
+			success: function(data) {
+				//formutil.alertMessage('上架成功');	
+			}
+		});	
+	}		
 	function gotoPage() {
 		var pageNo = document.getElementById("page.pageNo").value;
 		
