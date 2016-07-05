@@ -74,8 +74,7 @@ public interface PatentService {
 	 List<GoodsDetail> searchTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition);
 		
 	int searchTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
-
-
+	
 	public void downTransactionPatent(int patentId);
 
 	public void upTransactionPatent(int patentId);
