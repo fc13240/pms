@@ -23,7 +23,7 @@
 	<h5>自动更新</h5>
 	</a> 
 	</li>  
-	<li  class=""> <a href="<s:url value=''/>">
+	<li  class=""> <a href="<s:url value='/patent/getUserTransactionPatents.html'/>">
 	<h5>商品列表</h5>
 	</a> 
 	</li> 	 			

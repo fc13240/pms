@@ -256,6 +256,6 @@ public class PatentController {
 		List<Patent> patents = patentService.getUserPatents(page);
 		model.addAttribute("patents", patents);
 		model.addAttribute("page", page);
-		return "patent_list";
+		return "goods_list";
 	}
 }
