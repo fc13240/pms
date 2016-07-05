@@ -34,7 +34,7 @@
 					  <div style="height:33px;">
 					    <ul id="nav">
 					      <p>快捷处理：</p>
-					      <li><a href="#" class="selected">专利类型</a></li>
+					      <li><a href="#" class="selected">类型</a></li>
 						  <li><a href="#" class="">通知状态</a></li>
 					      <li><a href="#" class="">通知类型</a></li>
 					      <li><a href="#" class="">纸件申请</a></li>
@@ -52,13 +52,13 @@
 					        
 					        <li>
 					         <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=2&noticeProcessStatus=1'/>">
-					        	实用新型 (<c:out value='${patentTypeCount[(2).intValue()]["noticeCount"]}' default="0"/>)
+					        	实用 (<c:out value='${patentTypeCount[(2).intValue()]["noticeCount"]}' default="0"/>)
 					        </a>
 					        </li>
 					        
 					        <li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=3&noticeProcessStatus=1'/>">
-						        	外观设计 (<c:out value='${patentTypeCount[(3).intValue()]["noticeCount"]}' default="0"/>)
+						        	外观(<c:out value='${patentTypeCount[(3).intValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li> 
 					      </ul>	
