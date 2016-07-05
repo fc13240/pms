@@ -340,6 +340,7 @@
 		SELECT COUNT(*) FROM sell_patent_goods WHERE OWNER = #{userId};
 	</select>
 	
+
 	
 	<select id="searchTransactionPatentsByPage" parameterType="TransactionPatentSearchCondition" resultMap="TransactionPatent">
 		<if test="keyword != null">
@@ -391,4 +392,17 @@
 						 or sg.patent_id like #{keyword_pattern} or sg.price like #{keyword_pattern})
 				</if>
 	</select>		
+
+	<update id="downTransactionPatent">
+		update sell_patent_goods set status =2
+		 where patent_id = #{patentId}
+	</update>
+	<update id="upTransactionPatent">
+		update sell_patent_goods set status =1
+		 where patent_id = #{patentId}
+	</update>	
+	<delete id="deleteTransactionPatent">
+		delete from sell_patent_goods where patent_id = #{patentId}
+	</delete>	
+		
 </mapper>

@@ -79,4 +79,11 @@ public interface PatentMapper {
 	
 	int searchTransactionPatentsCount(@Param("searchCondtion")TransactionPatentSearchCondition searchCondition);
 	
+
+	void downTransactionPatent(int patentId);
+
+	void upTransactionPatent(int patentId);
+
+	void deleteTransactionPatent(int patentId);
+
 }

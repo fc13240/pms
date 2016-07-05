@@ -207,4 +207,17 @@ public class PatentServiceImpl implements PatentService {
 	public int searchTransactionPatentsCount(TransactionPatentSearchCondition searchCondition) {
 		return patentDao.searchTransactionPatentsCount(searchCondition);
 	}
+	public void downTransactionPatent(int patentId) {
+		patentDao.downTransactionPatent(patentId);
+	}
+
+	@Override
+	public void upTransactionPatent(int patentId) {
+		patentDao.upTransactionPatent(patentId);
+	}
+
+	@Override
+	public void deleteTransactionPatent(int patentId) {
+		patentDao.deleteTransactionPatent(patentId);
+	}
 }

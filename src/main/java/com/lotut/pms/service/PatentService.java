@@ -70,9 +70,16 @@ public interface PatentService {
 	 List<GoodsDetail> getUserTransactionPatents(Page page);
 	 
 	 int getUserTransactionPatentsCount(int userId);
-	 
+
 	 List<GoodsDetail> searchTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition);
 		
 	int searchTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
+
+
+	public void downTransactionPatent(int patentId);
+
+	public void upTransactionPatent(int patentId);
+
+	public void deleteTransactionPatent(int patentId);
 
 }

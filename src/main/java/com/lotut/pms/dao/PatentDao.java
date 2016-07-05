@@ -67,4 +67,8 @@ public interface PatentDao {
 	
 	int searchTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
 
+	void downTransactionPatent(int patentId);
+	void upTransactionPatent(int patentId);
+	void deleteTransactionPatent(int patentId);
+
 }
