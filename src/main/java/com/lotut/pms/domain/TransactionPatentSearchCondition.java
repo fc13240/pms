@@ -15,7 +15,6 @@ public class TransactionPatentSearchCondition {
 	private Date startAddDate;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date endAddDate;
-	private String keywordType;
 	private String keyword;
 	private Page page;
 	private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -49,16 +48,7 @@ public class TransactionPatentSearchCondition {
 	public void setEndAddDate(Date endAddDate) {
 		this.endAddDate = endAddDate;
 	}
-	public String getKeywordType() {
-		return keywordType;
-	}
-	public void setKeywordType(String keywordType) {
-		this.keywordType = keywordType;
-	}
 	public String getKeyword() {
-		if (keyword != null) {
-			return keyword.trim();
-		}
 		return keyword;
 	}
 	public void setKeyword(String keyword) {
