@@ -11,7 +11,7 @@ public class GoodsDetail {
 	private int userId;
 	private int id;
 	private int FirstColumn;
-	
+	private int owner;
 	private int SecondColumn;
 	private int price;
 	private int transactionType;
@@ -26,6 +26,12 @@ public class GoodsDetail {
 	
 	
 	
+	public int getOwner() {
+		return owner;
+	}
+	public void setOwner(int owner) {
+		this.owner = owner;
+	}
 	public int getPatentId() {
 		return patentId;
 	}
@@ -49,12 +55,6 @@ public class GoodsDetail {
 	}
 	public void setAddDate(Date addDate) {
 		this.addDate = addDate;
-	}
-	public static DateFormat getFormatter() {
-		return formatter;
-	}
-	public static void setFormatter(DateFormat formatter) {
-		GoodsDetail.formatter = formatter;
 	}
 	public int getUserId() {
 		return userId;

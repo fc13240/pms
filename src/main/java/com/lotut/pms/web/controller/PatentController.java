@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -273,19 +274,19 @@ public class PatentController {
 		return "goods_list";
 	}
 
-	@RequestMapping(path="/downTransactionPatent",method=RequestMethod.GET)
-	public void downTransactionPatents(@RequestParam("patentId") int patentId){
+	@RequestMapping(path="/downTransactionPatent")
+	public void downTransactionPatents(@RequestParam("patentId") int patentId,PrintWriter writer){
 		patentService.downTransactionPatent(patentId);
-		
+		writer.write(1);
 	}	
-	@RequestMapping(path="/upTransactionPatent",method=RequestMethod.GET)
-	public void upTransactionPatents(@RequestParam("patentId") int patentId){
+	@RequestMapping(path="/upTransactionPatent")
+	public void upTransactionPatents(@RequestParam("patentId") int patentId,PrintWriter writer){
 		patentService.upTransactionPatent(patentId);
-		
+		writer.write(1);
 	}	
-	@RequestMapping(path="/deleteTransactionPatent",method=RequestMethod.GET)
-	public void deleteTransactionPatents(@RequestParam("patentId") int patentId){
+	@RequestMapping(path="/deleteTransactionPatent")
+	public void deleteTransactionPatents(@RequestParam("patentId") int patentId,PrintWriter writer){
 		patentService.deleteTransactionPatent(patentId);
-		
+		writer.write(1);
 	}	
 }

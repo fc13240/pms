@@ -71,12 +71,15 @@
 								  <option value="2">许可</option>
 								</select>
 							  </td>
+					
 							  <td>
-								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAddDate" placeholder="添加日开始" value="" readonly="readonly" >							  
+								
+								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAddDateId'})" id="startAddDateId" name="startAddDate" placeholder="添加日开始" value="" readonly="readonly" >							  
 							  </td>
 							  <td>-</td>
 							  <td>
-								<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="添加日结束" value="" readonly="readonly" >
+								<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAddDateId'})"  id="endAddDateId" name="endAddDate" placeholder="添加日结束" value="" readonly="readonly" >
+
 							  </td>
 							  <td>
 								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>							  
@@ -158,16 +161,16 @@
 							
 							<td >
 							<c:if test="${patent.status==2}">
-							  <a href="javascript:return void" onclick="upTransactionPatent(${patent.patentId})">	 
+							  <a  onclick="upTransactionPatent(${patent.patentId})">	 
 							  上架
 							  </a>
 							</c:if>
 							  <c:if test="${patent.status==1}">
-							  <a href="javascript:return void" onclick="downTransactionPatent(${patent.patentId})">
+							  <a  onclick="downTransactionPatent(${patent.patentId})">
 							  下架
 							  </a> 
 			             	  </c:if>
-							  <a href="javascript:return void" onclick="deleteTransactionPatent(${patent.patentId})">
+							  <a  onclick="deleteTransactionPatent(${patent.patentId})">
 							  删除
 							  </a>         	  
 							  </td>
@@ -250,62 +253,25 @@
 		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
 	});
 	
-	function batchShare() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		var uniquePatentNos = []
-		if (!patentSelected) {
-			formutil.alertMessage('请选择专利');
-			
-			return;
-		}
-		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
-		for (var i = 0; i < patents_checked.length; i++) {
-			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
-				uniquePatentNos.push(patents_checked[i]);
-			}
-		}		
-		var patents = uniquePatentNos.join(",");		
-		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
-	}
-	function batchGrabFees(){
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		if (!patentSelected) {
-			formutil.alertMessage('请选择专利');
-			return;
-		}
-			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
-		
-		 window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patentNos);		
-		
-	}	
-	
-	
-	function getFeeInfo(patentId) {
-		window.open("/fee/list?patentId=" + patentId);
-	}
-	
-	
-	function changeInternalCode(patentId, internalCode) {
-		$.ajax({
-			url: "<s:url value='/patent/changeInternalCode.html'/>?patentId=" + patentId + "&internalCode=" + internalCode, 
-			type: 'get', 
-			success: function(data) {
-				//formutil.alertMessage('内部编码修改成功');	
-			},
-			error: function() {
-				formutil.alertMessage('内部编码修改失败');
-			}
-		});	
-	}
-	
 	function downTransactionPatent(patentId) {
 		$.ajax({
 			url: "<s:url value='/patent/downTransactionPatent.html'/>?patentId=" + patentId, 
+<<<<<<< HEAD
 			type: 'get', 
+			success: function() {
+				alert("123");
+				formutil.alertMessage('下架成功');	
+			},	
+			error: function() {
+				formutil.alertMessage('下架失败');
+			}
+=======
 			success: function(data) {
-				//formutil.alertMessage('下架成功');	
-			}		
+				formutil.alertMessage('下架成功');
+				location.reload();
+			}
+
+>>>>>>> 03032097b5be87c1f01f1725ce94e2b7880adbb7
 		
 		});	
 	}	
@@ -313,19 +279,21 @@
 	function deleteTransactionPatent(patentId) {
 		$.ajax({
 			url: "<s:url value='/patent/deleteTransactionPatent.html'/>?patentId=" + patentId, 
-			type: 'get', 
 			success: function(data) {
-				//formutil.alertMessage('删除成功');	
+				formutil.alertMessage('删除成功');
+				location.reload();
 			}
+
 		});	
 	}	
+		
 	
 	function upTransactionPatent(patentId) {
 		$.ajax({
 			url: "<s:url value='/patent/upTransactionPatent.html'/>?patentId=" + patentId, 
-			type: 'get', 
 			success: function(data) {
-				//formutil.alertMessage('上架成功');	
+				formutil.alertMessage('上架成功');
+				location.reload();
 			}
 		});	
 	}		
