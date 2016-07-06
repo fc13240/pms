@@ -161,16 +161,16 @@
 							
 							<td >
 							<c:if test="${patent.status==2}">
-							  <a href="javascript:return void" onclick="upTransactionPatent(${patent.patentId})">	 
+							  <a  onclick="upTransactionPatent(${patent.patentId})">	 
 							  上架
 							  </a>
 							</c:if>
 							  <c:if test="${patent.status==1}">
-							  <a href="javascript:return void" onclick="downTransactionPatent(${patent.patentId})">
+							  <a  onclick="downTransactionPatent(${patent.patentId})">
 							  下架
 							  </a> 
 			             	  </c:if>
-							  <a href="javascript:return void" onclick="deleteTransactionPatent(${patent.patentId})">
+							  <a  onclick="deleteTransactionPatent(${patent.patentId})">
 							  删除
 							  </a>         	  
 							  </td>
@@ -253,62 +253,14 @@
 		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
 	});
 	
-	function batchShare() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		var uniquePatentNos = []
-		if (!patentSelected) {
-			formutil.alertMessage('请选择专利');
-			
-			return;
-		}
-		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
-		for (var i = 0; i < patents_checked.length; i++) {
-			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
-				uniquePatentNos.push(patents_checked[i]);
-			}
-		}		
-		var patents = uniquePatentNos.join(",");		
-		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
-	}
-	function batchGrabFees(){
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		if (!patentSelected) {
-			formutil.alertMessage('请选择专利');
-			return;
-		}
-			
-		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
-		
-		 window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patentNos);		
-		
-	}	
-	
-	
-	function getFeeInfo(patentId) {
-		window.open("/fee/list?patentId=" + patentId);
-	}
-	
-	
-	function changeInternalCode(patentId, internalCode) {
-		$.ajax({
-			url: "<s:url value='/patent/changeInternalCode.html'/>?patentId=" + patentId + "&internalCode=" + internalCode, 
-			type: 'get', 
-			success: function(data) {
-				//formutil.alertMessage('内部编码修改成功');	
-			},
-			error: function() {
-				formutil.alertMessage('内部编码修改失败');
-			}
-		});	
-	}
-	
 	function downTransactionPatent(patentId) {
 		$.ajax({
 			url: "<s:url value='/patent/downTransactionPatent.html'/>?patentId=" + patentId, 
-			type: 'get', 
 			success: function(data) {
-				//formutil.alertMessage('下架成功');	
-			}		
+				formutil.alertMessage('下架成功');
+				location.reload();
+			}
+
 		
 		});	
 	}	
@@ -316,19 +268,21 @@
 	function deleteTransactionPatent(patentId) {
 		$.ajax({
 			url: "<s:url value='/patent/deleteTransactionPatent.html'/>?patentId=" + patentId, 
-			type: 'get', 
 			success: function(data) {
-				//formutil.alertMessage('删除成功');	
+				formutil.alertMessage('删除成功');
+				location.reload();
 			}
+
 		});	
 	}	
+		
 	
 	function upTransactionPatent(patentId) {
 		$.ajax({
 			url: "<s:url value='/patent/upTransactionPatent.html'/>?patentId=" + patentId, 
-			type: 'get', 
 			success: function(data) {
-				//formutil.alertMessage('上架成功');	
+				formutil.alertMessage('上架成功');
+				location.reload();
 			}
 		});	
 	}		
