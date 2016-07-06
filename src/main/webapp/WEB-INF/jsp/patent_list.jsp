@@ -250,7 +250,7 @@
 							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
 							  交费
 							  </a> 
-<%-- 			                  	  <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
+ 			                  	  <%-- <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
 				                  	<button class="t-btn2">出售</button> 
 			 	                  </a> --%>
 							  </td>
@@ -374,8 +374,8 @@
 		$.ajax({
 			url: "<s:url value='/patent/changeInternalCode.html'/>?patentId=" + patentId + "&internalCode=" + internalCode, 
 			type: 'get', 
-			success: function(data) {
-				//formutil.alertMessage('内部编码修改成功');	
+			success: function() {
+				formutil.alertMessage('内部编码修改成功');	
 			},
 			error: function() {
 				formutil.alertMessage('内部编码修改失败');
