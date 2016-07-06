@@ -58,8 +58,8 @@
 								<select  style="width:100px;" class="selectPointOfInterest form-control" name="status">
 								  <option value="" >全部</option>
 								 
-								<option value="1" >上架中</option>
-								<option value="2" >已下架</option>
+								<option value="1" >出售中</option>
+								<option value="2" >已出售</option>
 
 								
 								</select>
@@ -255,24 +255,12 @@
 	
 	function downTransactionPatent(patentId) {
 		$.ajax({
-			url: "<s:url value='/patent/downTransactionPatent.html'/>?patentId=" + patentId, 
-<<<<<<< HEAD
+			url: "<s:url value='/patent/downTransactionPatent.html'/>?patentId=" + patentId,
 			type: 'get', 
-			success: function() {
-				alert("123");
-				formutil.alertMessage('下架成功');	
-			},	
-			error: function() {
-				formutil.alertMessage('下架失败');
-			}
-=======
 			success: function(data) {
-				formutil.alertMessage('下架成功');
 				location.reload();
+				formutil.alertMessage('下架成功');
 			}
-
->>>>>>> 03032097b5be87c1f01f1725ce94e2b7880adbb7
-		
 		});	
 	}	
 
@@ -280,8 +268,9 @@
 		$.ajax({
 			url: "<s:url value='/patent/deleteTransactionPatent.html'/>?patentId=" + patentId, 
 			success: function(data) {
-				formutil.alertMessage('删除成功');
 				location.reload();
+				formutil.alertMessage('删除成功');
+				
 			}
 
 		});	
@@ -292,8 +281,8 @@
 		$.ajax({
 			url: "<s:url value='/patent/upTransactionPatent.html'/>?patentId=" + patentId, 
 			success: function(data) {
-				formutil.alertMessage('上架成功');
 				location.reload();
+				formutil.alertMessage('上架成功');
 			}
 		});	
 	}		
