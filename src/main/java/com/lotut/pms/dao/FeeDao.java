@@ -66,4 +66,6 @@ public interface FeeDao {
 	void saveFee (Fee fee);
 	
 	Map<String,Long> getCountByDeadlinePayment(int userId);
+	
+	void deleteFeesByPatentIds(List<Long> patentIds, int userId);
 }

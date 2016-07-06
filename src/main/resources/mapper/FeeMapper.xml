@@ -428,4 +428,12 @@
 	       			      <![CDATA[deadline > CURDATE()+INTERVAL 3 YEAR]]>) e on 1=1 -->
 	</select>
 	
+	<delete id="deleteFeesByPatentIds">
+		delete from fees where fee_owner = #{userId} and fee_monitor_status = 1 and 
+		patent in 
+		<foreach item="patentId" collection="patentIds" open="(" separator="," close=")">
+			#{patentId}
+		</foreach>			
+	</delete>
+	
 </mapper>
