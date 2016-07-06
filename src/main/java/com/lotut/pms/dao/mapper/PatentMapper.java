@@ -75,9 +75,9 @@ public interface PatentMapper {
 	
 	int getUserTransactionPatentsCount(@Param("userId")int userId);
 	
-	List<GoodsDetail> searchTransactionPatentsByPage(@Param("searchCondtion")TransactionPatentSearchCondition searchCondition);
+	List<GoodsDetail> searchTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition);
 	
-	int searchTransactionPatentsCount(@Param("searchCondtion")TransactionPatentSearchCondition searchCondition);
+	int searchTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
 	
 	void downTransactionPatent(int patentId);
 

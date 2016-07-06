@@ -49,9 +49,6 @@ public class TransactionPatentSearchCondition {
 		this.endAddDate = endAddDate;
 	}
 	public String getKeyword() {
-		if (keyword != null) {
-			return keyword.trim();
-		}
 		return keyword;
 	}
 	public void setKeyword(String keyword) {
