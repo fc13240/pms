@@ -328,7 +328,7 @@
 						  <thead>
 							<tr class="simple_bag">
 							  <th class="center"> <label class="pos-rel">
-								<input type="checkbox" class="check-item" id="checkall"  name="checkall" />
+								<input type="checkbox" class="check-item" id="checkall"  name="checkall" checked="checked" />
 								<span class="lbl"></span> </label>
 							  </th>
 							  <th class="center" width="50">序号</th>
@@ -351,7 +351,7 @@
 							<c:forEach items="${notices}" var="notice" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-								  <input style="text-align:center" type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
+								  <input style="text-align:center" type="checkbox" checked="checked" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
 								  <span class="lbl"></span></label></td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
 								<td style="text-align:center"><c:out value="${notice.patent.appNo}"/>
