@@ -156,7 +156,7 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 		}
 
 		@Override
-		public void deleteFeesByPatentIds(List<Long> patentIds, int userId) {
-			feeMapper.deleteFeesByPatentIds(patentIds, userId);
+		public void deleteUnmonitoredFeesByPatentIds(List<Long> patentIds, int userId) {
+			feeMapper.deleteUnmonitoredFeesByPatentIds(patentIds, userId);
 		}
 }

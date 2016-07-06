@@ -69,7 +69,7 @@ public class FeeServiceImpl implements FeeService {
 
 	@Override
 	public Map<String, List<?>> batchGrabFees(List<Long> patentIds) {
-		feeDao.deleteFeesByPatentIds(patentIds, PrincipalUtils.getCurrentUserId());
+		feeDao.deleteUnmonitoredFeesByPatentIds(patentIds, PrincipalUtils.getCurrentUserId());
 		Map<String, List<?>> grabResultMap = new HashMap<>();
 		List<Patent> patents = patentDao.getPatentsByIds(patentIds);
 		FeeCrawler crawler = new FeeCrawler(patents);
@@ -100,7 +100,7 @@ public class FeeServiceImpl implements FeeService {
 		Map<String, Object> grabResultMap = new HashMap<>();
 		List<Long> patentIds = new ArrayList<>();
 		patentIds.add(patentId);
-		feeDao.deleteFeesByPatentIds(patentIds, PrincipalUtils.getCurrentUserId());
+		feeDao.deleteUnmonitoredFeesByPatentIds(patentIds, PrincipalUtils.getCurrentUserId());
 		List<Patent> patents = patentDao.getPatentsByIds(patentIds);
 		FeeCrawler crawler = new FeeCrawler(patents);
 		crawler.grabFees();

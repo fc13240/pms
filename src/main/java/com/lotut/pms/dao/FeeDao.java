@@ -67,5 +67,5 @@ public interface FeeDao {
 	
 	Map<String,Long> getCountByDeadlinePayment(int userId);
 	
-	void deleteFeesByPatentIds(List<Long> patentIds, int userId);
+	void deleteUnmonitoredFeesByPatentIds(List<Long> patentIds, int userId);
 }
