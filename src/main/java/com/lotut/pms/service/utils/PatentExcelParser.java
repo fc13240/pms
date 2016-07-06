@@ -67,7 +67,7 @@ public class PatentExcelParser {
 	
 	private static Patent parseRow(Row row,int userId) {
 		String appNo = row.getCell(0).getStringCellValue().trim();
-		String name = row.getCell(1).getStringCellValue();
+		String name = row.getCell(1).getStringCellValue().trim();
 		String appPerson = row.getCell(2).getStringCellValue();
 		String patentStatusText=row.getCell(6).getStringCellValue();
 		Date appDate = parseDate(row.getCell(3).getStringCellValue());

@@ -99,7 +99,7 @@ create table if not exists patent_status (
 create table if not exists patents (
 	patent_id bigint auto_increment primary key,
 	app_no varchar(30) not null , 
-	patent_name varchar(100), 
+	patent_name varchar(200), 
 	patent_type int,
 	app_date date, 
 	app_person varchar(100), 
