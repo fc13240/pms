@@ -38,4 +38,8 @@ public class PrincipalUtils {
 	public static boolean isNormalUser() {
 		return PrincipalUtils.hasAuthority(Role.ROLE_USER.getRoleName());
 	}
+	
+	public static boolean isTraderUser() {
+		return PrincipalUtils.hasAuthority(Role.ROLE_TRADER.getRoleName());
+	}
 }

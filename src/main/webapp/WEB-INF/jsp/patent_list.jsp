@@ -250,9 +250,11 @@
 							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
 							  交费
 							  </a> 
- 			                  	  <%-- <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
+							  <se:authorize access="hasRole('ROLE_TRADER')">
+ 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
 				                  	<button class="t-btn2">出售</button> 
-			 	                  </a> --%>
+			 	                  </a>
+			 	               </se:authorize> 
 							  </td>
 						  </tr>
 						</c:forEach>
