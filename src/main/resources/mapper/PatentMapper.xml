@@ -24,6 +24,7 @@
 		<result property="inventPerson" column="invent_person"/>
 		<result property="internalCode" column="internal_code"/>
 		<result property="ownerId" column="patent_owner"/>
+		<result property="transactionStatus" column="transaction_status"/>
 		<association property="patentStatus" resultMap="PatentStatusResultMap"/>
 		<association property="patentType" resultMap="PatentTypeResultMap"/>
 		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
@@ -59,9 +60,9 @@
 	</sql>
 	
 	<select id="getUserPatents" parameterType="Page" resultMap="PatentWithShareUsers">
-		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, sp.patent_status_text,pt.patent_type_id, 
+		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, sp.patent_status_text,sp.transaction_status,pt.patent_type_id, 
 							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username
-		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date,  p.internal_code, p.patent_type,
+		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date,  p.internal_code, p.patent_type,p.transaction_status,
 				ps.patent_status_id, ps.patent_status_desc, p.patent_status_text
 			from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
 		 where up.user = #{userId}
@@ -85,7 +86,8 @@
 		<result property="appDate" column="app_date"/>
 		<result property="patentStatusText" column="patent_status_text"/>
 		<result property="appPerson" column="app_person"/>
-		<result property="internalCode" column="internal_code"/>	
+		<result property="internalCode" column="internal_code"/>
+		<result property="transactionStatus" column="transaction_status"/>	
 		<association property="patentStatus" resultMap="PatentStatusResultMap"/>
 		<association property="patentType" resultMap="PatentTypeResultMap"/>
 		

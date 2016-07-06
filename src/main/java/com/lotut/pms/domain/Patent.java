@@ -26,8 +26,19 @@ public class Patent {
 	private String internalCode;
 	private int ownerId;
 	private String proxyOrg;
+	private String transactionStatus;
 	private List<User> shareUsers;
 	
+	
+	
+	public String getTransactionStatus() {
+		return transactionStatus;
+	}
+
+	public void setTransactionStatus(String transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+
 	public String getPublishNo() {
 		return publishNo;
 	}

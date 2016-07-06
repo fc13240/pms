@@ -251,9 +251,16 @@
 							  交费
 							  </a> 
 							  <se:authorize access="hasRole('ROLE_TRADER')">
- 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
-				                  	<button class="t-btn2">出售</button> 
-			 	                  </a>
+								  <c:if test="${patent.transactionStatus==null}">
+	 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
+					                  	<button class="t-btn2">出售</button> 
+				 	                  </a>
+				 	                </c:if>
+				 	                 <c:if test="${patent.transactionStatus != null}">
+	 			                  	   <a >
+					                  	${patent.transactionStatus}
+				 	                  </a>
+				 	                  </c:if>
 			 	               </se:authorize> 
 							  </td>
 						  </tr>
