@@ -72,11 +72,11 @@
 								</select>
 							  </td>
 							  <td>
-								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDate" name="startAddDate" placeholder="添加日开始" value="" readonly="readonly" >							  
+								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDate'})" id="startAppDate" name="startAddDate" placeholder="添加日开始" value="" readonly="readonly" >							  
 							  </td>
 							  <td>-</td>
 							  <td>
-								<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDate" name="endAppDate" placeholder="添加日结束" value="" readonly="readonly" >
+								<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDate'})"  id="endAppDate" name="endAppDate" placeholder="添加日结束" value="" readonly="readonly" >
 							  </td>
 							  <td>
 								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>							  
