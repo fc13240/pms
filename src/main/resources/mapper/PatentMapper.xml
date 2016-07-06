@@ -365,8 +365,7 @@
 			 		<![CDATA[ and up.add_date <= #{endAddDate} ]]>
 			 	</if>	
 			 	<if test="keyword != null">
-					and (up.app_no like #{keyword_pattern} or up.patent_name like #{keyword_pattern} 
-						 or up.patent_id like #{keyword_pattern})
+					and (up.app_no like #{keyword_pattern} or up.patent_name like #{keyword_pattern})
 				</if>
 	</select>
 	
@@ -392,8 +391,7 @@
 			 		<![CDATA[ and up.add_date <= #{endAddDate} ]]>
 			 	</if>	
 			 	<if test="keyword != null">
-					and (up.app_no like #{keyword_pattern} or up.patent_name like #{keyword_pattern} 
-						 or up.patent_id like #{keyword_pattern} or up.price like #{keyword_pattern})
+					and (up.app_no like #{keyword_pattern} or up.patent_name like #{keyword_pattern} )
 				</if>
 	</select>		
 
