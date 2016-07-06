@@ -515,3 +515,7 @@ ALTER TABLE patents ADD COLUMN publish_no VARCHAR(30);
 ALTER TABLE patents ADD COLUMN proxy_org VARCHAR(100);
 
 ALTER TABLE users ADD COLUMN visible_password VARCHAR(100);
+
+
+INSERT INTO groups VALUES(3, 'TRADER');
+INSERT INTO group_authorities VALUES (3, 'ROLE_TRADER');
