@@ -387,7 +387,7 @@
 			 	<if test="startAddDate != null">
 			 		and up.add_date >= #{startAddDate}
 			 	</if>	
-			 	<if test="endAppDate != null">
+			 	<if test="endAddDate != null">
 			 		<![CDATA[ and up.add_date <= #{endAddDate} ]]>
 			 	</if>	
 			 	<if test="keyword != null">
