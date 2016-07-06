@@ -410,7 +410,9 @@
 		 update  patents set transaction_status='出售中' where patent_id=#{patentId}	
 	</update>	
 	<delete id="deleteTransactionPatent">
-		delete from sell_patent_goods where patent_id = #{patentId}
+		delete from sell_patent_goods where patent_id = #{patentId};
+		
+		update  patents set transaction_status=null where patent_id=#{patentId}
 	</delete>	
 		
 </mapper>
