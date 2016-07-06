@@ -14,6 +14,7 @@ import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.TransactionPatentSearchCondition;
 
 public interface PatentMapper {
 	int getUserPatentCount(@Param("userId")int userId);
@@ -70,7 +71,18 @@ public interface PatentMapper {
 	
 	long getPatentIdByAppNo(@Param("userId") Integer user_id,@Param("appNo")String appNo);
 	
-	List<Patent> getUserTransactionPatents(Page page);
+	List<GoodsDetail> getUserTransactionPatents(Page page);
 	
 	int getUserTransactionPatentsCount(@Param("userId")int userId);
+	
+	List<GoodsDetail> searchTransactionPatentsByPage(@Param("searchCondtion")TransactionPatentSearchCondition searchCondition);
+	
+	int searchTransactionPatentsCount(@Param("searchCondtion")TransactionPatentSearchCondition searchCondition);
+	
+	void downTransactionPatent(int patentId);
+
+	void upTransactionPatent(int patentId);
+
+	void deleteTransactionPatent(int patentId);
+
 }

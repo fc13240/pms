@@ -11,6 +11,7 @@ import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.TransactionPatentSearchCondition;
 
 public interface PatentDao {
 	int getUserPatentCount(int userId);
@@ -58,7 +59,16 @@ public interface PatentDao {
 	
 	long getPatentIdByAppNo(Integer userId,String appNo);
 	
-	List<Patent> getUserTransactionPatents(Page page);
+	List<GoodsDetail> getUserTransactionPatents(Page page);
 	
 	int getUserTransactionPatentsCount(int userId);
+	
+	List<GoodsDetail> searchTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition);
+	
+	int searchTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
+
+	void downTransactionPatent(int patentId);
+	void upTransactionPatent(int patentId);
+	void deleteTransactionPatent(int patentId);
+
 }

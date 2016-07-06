@@ -15,6 +15,7 @@ import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.TransactionPatentSearchCondition;
 
 public interface PatentService {
 	public long getPatentsCount(int userId);
@@ -66,7 +67,18 @@ public interface PatentService {
 	 
 	 public boolean  addOrUpdatePatents(List<Patent> patents,int userId);
 	 
-	 List<Patent> getUserTransactionPatents(Page page);
+	 List<GoodsDetail> getUserTransactionPatents(Page page);
 	 
 	 int getUserTransactionPatentsCount(int userId);
+
+	 List<GoodsDetail> searchTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition);
+		
+	int searchTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
+	
+	public void downTransactionPatent(int patentId);
+
+	public void upTransactionPatent(int patentId);
+
+	public void deleteTransactionPatent(int patentId);
+
 }

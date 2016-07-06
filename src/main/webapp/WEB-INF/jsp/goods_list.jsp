@@ -40,7 +40,7 @@
 					
 					
 					
-						<form class="form-inline" action="<s:url value='/patent/search.html'/>" method="get">
+						<form class="form-inline" action="<s:url value='/patent/searchTransactionPatents.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 						  <div class="t-third">
 
@@ -52,28 +52,27 @@
 							  <td></td>
 							  <td>添加日结束</td>
 							  <td>关键字</td>
-							  <td></td>	
 							  </tr>
 							  <tr>
 							  <td>
-								<select  style="width:100px;" class="selectPointOfInterest form-control" name="patentType">
-								  <option value="">全部</option>
+								<select  style="width:100px;" class="selectPointOfInterest form-control" name="status">
+								  <option value="" >全部</option>
 								 
-								<option value="1">上架中</option>
-								<option value="2">已下架</option>
+								<option value="1" >上架中</option>
+								<option value="2" >已下架</option>
 
 								
 								</select>
 							  </td>
 							  <td>
-								<select style="width:121px;" class="form-control" name="patentStatus">
+								<select style="width:121px;" class="form-control" name="transactionType">
 								  <option value="">全部</option>
 								  <option value="1">转让</option>
 								  <option value="2">许可</option>
 								</select>
 							  </td>
 							  <td>
-								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="添加日开始" value="" readonly="readonly" >							  
+								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAddDate" placeholder="添加日开始" value="" readonly="readonly" >							  
 							  </td>
 							  <td>-</td>
 							  <td>
@@ -119,8 +118,10 @@
 						  <th class="center" width="35">序号</th>
 						  <th width="110">申请号/专利号</th>
 						  <th width="170">专利名称</th>
-						  <th width="90">添加日 </th>
-						  <th width="90">价格 </th>  <!-- 价格可以做成直接编辑的，可以少加一个编辑页面 -->
+						  <th width="90">价格 </th><!-- 价格可以做成直接编辑的，可以少加一个编辑页面 -->
+						  <th width="90">交易状态</th>  
+						  <th width="90">交易类型</th>  
+						  <th width="90">添加日</th>  
 						  <th width="80">操作</th>
 						</tr>
 					  </thead>
@@ -131,17 +132,44 @@
 							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
 							<td style="text-align:center"><c:out value="${patent.appNo}"/>
 							</td>
-							<td class="hidden-480" style="text-align:center"><c:out value="${patent.name}"/></td>
-							<td style="text-align:center"><c:out value="${patent.appPerson}"/></td>
-							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
+							<td class="hidden-480" style="text-align:center"><c:out value="${patent.patentName}"/></td>
+							<td style="text-align:center"><c:out value="${patent.price}"/></td>
 							
-							<td ><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
+							
+							<td style="text-align:center">
+								<c:if test="${patent.status==1}">
+								出售中
+								</c:if>
+								<c:if test="${patent.status==2}">
+								已出售
+								</c:if>							
+							</td>
+							
+							<td style="text-align:center">
+								<c:if test="${patent.transactionType==1}">
+								转让
+								</c:if>
+								<c:if test="${patent.transactionType==2}">
+								许可
+								</c:if>
+							</td>
+						
+							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.addDate}" pattern="yyyy-MM-dd"/></td>
+							
+							<td >
+							<c:if test="${patent.status==2}">
+							  <a href="javascript:return void" onclick="upTransactionPatent(${patent.patentId})">	 
 							  上架
-							  </a>&nbsp;
-							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
+							  </a>
+							</c:if>
+							  <c:if test="${patent.status==1}">
+							  <a href="javascript:return void" onclick="downTransactionPatent(${patent.patentId})">
 							  下架
 							  </a> 
-			             
+			             	  </c:if>
+							  <a href="javascript:return void" onclick="deleteTransactionPatent(${patent.patentId})">
+							  删除
+							  </a>         	  
 							  </td>
 						  </tr>
 						</c:forEach>
@@ -175,8 +203,7 @@
 			              </select>
 			              条记录 </span> </div>
 			          </c:if>
-			       
-			        <c:if test="${searchCondition != null}">
+			           <c:if test="${searchCondition != null}">
 			          <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?page.currentPage=1&${searchCondition}">首页</a>
 			            <c:choose>
 			              <c:when test="${page.currentPage - 1 > 0}"> <a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a> </c:when>
@@ -272,8 +299,36 @@
 		});	
 	}
 	
+	function downTransactionPatent(patentId) {
+		$.ajax({
+			url: "<s:url value='/patent/downTransactionPatent.html'/>?patentId=" + patentId, 
+			type: 'get', 
+			success: function(data) {
+				//formutil.alertMessage('下架成功');	
+			}		
+		
+		});	
+	}	
+
+	function deleteTransactionPatent(patentId) {
+		$.ajax({
+			url: "<s:url value='/patent/deleteTransactionPatent.html'/>?patentId=" + patentId, 
+			type: 'get', 
+			success: function(data) {
+				//formutil.alertMessage('删除成功');	
+			}
+		});	
+	}	
 	
-	
+	function upTransactionPatent(patentId) {
+		$.ajax({
+			url: "<s:url value='/patent/upTransactionPatent.html'/>?patentId=" + patentId, 
+			type: 'get', 
+			success: function(data) {
+				//formutil.alertMessage('上架成功');	
+			}
+		});	
+	}		
 	function gotoPage() {
 		var pageNo = document.getElementById("page.pageNo").value;
 		
@@ -294,10 +349,10 @@
 			return;
 		}
 		
-		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
+		var url = "<s:url value='/patent/getUserTransactionPatents.html'/>?currentPage=" + pageNo;
 		
 		<c:if test="${searchCondition != null}">
-			url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+			url = "<s:url value='/patent/searchTransactionPatents.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 		</c:if>
 		
 		

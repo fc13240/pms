@@ -31,6 +31,7 @@ import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.TransactionPatentSearchCondition;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.PatentService;
@@ -253,9 +254,38 @@ public class PatentController {
 		}
 		int totalCount=(int)patentService.getUserTransactionPatentsCount(userId);
 		page.setTotalRecords(totalCount);
-		List<Patent> patents = patentService.getUserPatents(page);
+		List<GoodsDetail> patents = patentService.getUserTransactionPatents(page);
 		model.addAttribute("patents", patents);
 		model.addAttribute("page", page);
 		return "goods_list";
 	}
+	
+	@RequestMapping(path="/searchTransactionPatents", method=RequestMethod.GET)
+	public String searchTransactionPatents(@ModelAttribute("searchCondition")TransactionPatentSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		List<GoodsDetail> resultPatents = patentService.searchTransactionPatentsByPage(searchCondition);
+		int totalCount=(int)patentService.searchTransactionPatentsCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		model.addAttribute("patents", resultPatents);
+		model.addAttribute("page", page);
+		return "goods_list";
+	}
+
+	@RequestMapping(path="/downTransactionPatent",method=RequestMethod.GET)
+	public void downTransactionPatents(@RequestParam("patentId") int patentId){
+		patentService.downTransactionPatent(patentId);
+		
+	}	
+	@RequestMapping(path="/upTransactionPatent",method=RequestMethod.GET)
+	public void upTransactionPatents(@RequestParam("patentId") int patentId){
+		patentService.upTransactionPatent(patentId);
+		
+	}	
+	@RequestMapping(path="/deleteTransactionPatent",method=RequestMethod.GET)
+	public void deleteTransactionPatents(@RequestParam("patentId") int patentId){
+		patentService.deleteTransactionPatent(patentId);
+		
+	}	
 }

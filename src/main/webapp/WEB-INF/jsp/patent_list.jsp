@@ -250,9 +250,9 @@
 							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
 							  交费
 							  </a> 
-			                  	  <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
+<%-- 			                  	  <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
 				                  	<button class="t-btn2">出售</button> 
-			 	                  </a>
+			 	                  </a> --%>
 							  </td>
 						  </tr>
 						</c:forEach>
