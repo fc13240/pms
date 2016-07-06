@@ -280,7 +280,8 @@
 	
 	<insert id="saveGoods" parameterType="GoodsDetail" >
 		insert into sell_patent_goods(patent_id, transaction_date, add_date, status, transaction_type, price, patent_second_column,owner)
-		values(#{id}, '0000-00-00',curdate(), '1', #{transactionType}, #{price}, #{SecondColumn},#{userId})				
+		values(#{id}, '0000-00-00',curdate(), '1', #{transactionType}, #{price}, #{SecondColumn},#{userId});
+		update  patents set transaction_status='出售中' where patent_id=#{id}			
 	</insert>
 	
 	

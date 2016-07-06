@@ -60,8 +60,6 @@
 								 
 								<option value="1" >出售中</option>
 								<option value="2" >已出售</option>
-
-								
 								</select>
 							  </td>
 							  <td>
