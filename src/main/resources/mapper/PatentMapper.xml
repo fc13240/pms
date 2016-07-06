@@ -322,7 +322,8 @@
 		<result property="addDate" column="add_date"/>
 		<result property="price" column="price"/>
 		<result property="transactionType" column="transaction_type"/>
-		<result property="status" column="status"/>	
+		<result property="status" column="status"/>
+		<result property="owner" column="owner"/>	
 	</resultMap>
 	
 	<select id="getUserTransactionPatents" parameterType="page" resultMap="TransactionPatent">
@@ -346,50 +347,53 @@
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
-		SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,p.patent_name,p.app_no
-		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id
-		WHERE  owner=#{userId}
+		SELECT up.patent_id,up.price,up.status,up.transaction_type,up.add_date,up.owner,up.patent_name,up.app_no 
+		FROM
+		(SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,sg.owner,p.patent_name,p.app_no
+		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id limit #{page.startIndex}, #{page.pageSize}) up
+		WHERE up.owner=#{userId}
 		 		<if test="status != null">
-		 			and sg.status = #{status}
+		 			and up.status = #{status}
 		 		</if>	
 			 	<if test="transactionType != null">
-			 		and sg.transaction_type = #{transactionType}
+			 		and up.transaction_type = #{transactionType}
 			 	</if>	
 			 	<if test="startAddDate != null">
-			 		and sg.add_date >= #{startAddDate}
+			 		and up.add_date >= #{startAddDate}
 			 	</if>	
 			 	<if test="endAppDate != null">
-			 		<![CDATA[ and sg.add_date <= #{endAddDate} ]]>
+			 		<![CDATA[ and up.add_date <= #{endAddDate} ]]>
 			 	</if>	
 			 	<if test="keyword != null">
-					and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
-						 or sg.patent_id like #{keyword_pattern} or sg.price like #{keyword_pattern})
+					and (up.app_no like #{keyword_pattern} or up.patent_name like #{keyword_pattern} 
+						 or up.patent_id like #{keyword_pattern})
 				</if>
-				 limit #{page.startIndex}, #{page.pageSize};
 	</select>
 	
 		<select id="searchTransactionPatentsCount" parameterType="TransactionPatentSearchCondition" resultType="int">
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
-		SELECT  count(*)
-		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id
-		WHERE  owner=#{userId}
+		SELECT count(*)
+		FROM
+		(SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,sg.owner,p.patent_name,p.app_no
+		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id ) up
+		WHERE up.owner=#{userId}
 		 		<if test="status != null">
-		 			and sg.status = #{status}
+		 			and up.status = #{status}
 		 		</if>	
 			 	<if test="transactionType != null">
-			 		and sg.transaction_type = #{transactionType}
+			 		and up.transaction_type = #{transactionType}
 			 	</if>	
 			 	<if test="startAddDate != null">
-			 		and sg.add_date >= #{startAddDate}
+			 		and up.add_date >= #{startAddDate}
 			 	</if>	
 			 	<if test="endAppDate != null">
-			 		<![CDATA[ and sg.add_date <= #{endAddDate} ]]>
+			 		<![CDATA[ and up.add_date <= #{endAddDate} ]]>
 			 	</if>	
 			 	<if test="keyword != null">
-					and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
-						 or sg.patent_id like #{keyword_pattern} or sg.price like #{keyword_pattern})
+					and (up.app_no like #{keyword_pattern} or up.patent_name like #{keyword_pattern} 
+						 or up.patent_id like #{keyword_pattern} or up.price like #{keyword_pattern})
 				</if>
 	</select>		
 
