@@ -46,7 +46,7 @@ public class AlipayController {
 	public void pay(@RequestParam("orderId")long orderId, Model model, HttpServletResponse response) throws IOException {
 		Order order = orderService.getOrderById(orderId);
 		String out_trade_no = String.valueOf(order.getId());
-		String subject = "专利费用";
+		String subject = "专利官费";
 		String total_fee = String.valueOf(order.getTotalAmount());
 		String body = "专利费用描述";
 		
