@@ -306,9 +306,13 @@
 		$.ajax({
 			url: "<s:url value='/patent/downTransactionPatent.html'/>?patentId=" + patentId, 
 			type: 'get', 
-			success: function(data) {
-				//formutil.alertMessage('下架成功');	
-			}		
+			success: function() {
+				alert("123");
+				formutil.alertMessage('下架成功');	
+			},	
+			error: function() {
+				formutil.alertMessage('下架失败');
+			}
 		
 		});	
 	}	
