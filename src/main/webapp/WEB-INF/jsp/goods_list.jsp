@@ -71,20 +71,15 @@
 								  <option value="2">许可</option>
 								</select>
 							  </td>
+					
 							  <td>
-<<<<<<< HEAD
-								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDate'})" id="startAppDate" name="startAddDate" placeholder="添加日开始" value="" readonly="readonly" >							  
-							  </td>
-							  <td>-</td>
-							  <td>
-								<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDate'})"  id="endAppDate" name="endAppDate" placeholder="添加日结束" value="" readonly="readonly" >
-=======
+								
 								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAddDateId'})" id="startAddDateId" name="startAddDate" placeholder="添加日开始" value="" readonly="readonly" >							  
 							  </td>
 							  <td>-</td>
 							  <td>
 								<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAddDateId'})"  id="endAddDateId" name="endAddDate" placeholder="添加日结束" value="" readonly="readonly" >
->>>>>>> b7c0b6bb87e07715891821dd325fd75c55f45269
+
 							  </td>
 							  <td>
 								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>							  
