@@ -160,16 +160,16 @@
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.transactionDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							<td >
 							<c:if test="${patent.status==2}">
-							  <a  onclick="upTransactionPatent(${patent.patentId})">	 
+							  <a href="javascript:return void;"  onclick="upTransactionPatent(${patent.patentId})">	 
 							  上架
 							  </a>
 							</c:if>
 							  <c:if test="${patent.status==1}">
-							  <a  onclick="downTransactionPatent(${patent.patentId})">
+							  <a href="javascript:return void;"  onclick="downTransactionPatent(${patent.patentId})">
 							  下架
 							  </a> 
 			             	  </c:if>
-							  <a  onclick="deleteTransactionPatent(${patent.patentId})">
+							  <a href="javascript:return void;"  onclick="deleteTransactionPatent(${patent.patentId})">
 							  删除
 							  </a>         	  
 							  </td>
