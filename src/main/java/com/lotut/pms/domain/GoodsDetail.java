@@ -22,7 +22,7 @@ public class GoodsDetail {
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date addDate;
 	private Date transactionDate;
-	private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
 	
 	
 	
