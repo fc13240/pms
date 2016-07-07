@@ -41,7 +41,7 @@
 					  <div style="height:33px;">
 						<ul id="nav">
 						  <p>快捷处理：</p>
-						  <li><a href="#" class="selected">类型</a></li>
+						  <li><a href="#" class="selected">专利类型</a></li>
 						  <li><a href="#" class="">案件状态</a></li>
 						  <li><a style="color:#FF0000;" href="<s:url value='/notice/list.html?selectType=5&currentPage=1'/>" class="">通知书监控中</a></li>
 						  <li><a style="color:#FF0000;" href="<s:url value='/fee/monitoredFeeList.html?selectType=4&currentPage=1'/>" class="">交费监控中</a></li>
@@ -54,16 +54,16 @@
 
 						  <ul class="qxjk-ul"><li>
 							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=1'/>">
-							发明 (<c:out value='${patentTypeCount[(1).intValue()]["patentCount"]}' default="0"/>)</a>
+							发明专利 (<c:out value='${patentTypeCount[(1).intValue()]["patentCount"]}' default="0"/>)</a>
 							</li>
 							<li>
 							 <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=2'/>">
-							实用 (<c:out value='${patentTypeCount[(2).intValue()]["patentCount"]}' default="0"/>)
+							实用新型 (<c:out value='${patentTypeCount[(2).intValue()]["patentCount"]}' default="0"/>)
 							</a> 
 							</li>
 							
 							<li>
-							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=3'/>">外观 (<c:out value='${patentTypeCount[(3).intValue()]["patentCount"]}' default="0"/>)
+							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=3'/>">外观设计(<c:out value='${patentTypeCount[(3).intValue()]["patentCount"]}' default="0"/>)
 							</a> 							
 							</li>
 

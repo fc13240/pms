@@ -35,7 +35,7 @@
 					  <div style="height:33px;">
 					    <ul id="nav">
 					      <p>快捷处理：</p>
-					      <li><a href="#" class="">类型</a></li>
+					      <li><a href="#" class="">专利类型</a></li>
 					      <li><a href="#" class="">交费状态</a></li>
 					      <li><a href="#" class="selected">费用类型</a></li>
 					      <li><a href="#" class="">期限监控</a></li>
@@ -46,19 +46,19 @@
 					      <ul class="qxjk-ul">
 					      	<li>
 					        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=1'/>">
-					        	发明 (<c:out value='${patentTypeCount[(1).intValue()]["feeCount"]}' default="0"/>)
+					        	发明专利 (<c:out value='${patentTypeCount[(1).intValue()]["feeCount"]}' default="0"/>)
 					        </a>
 					        </li>
 					        
 					        <li>
 						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=2'/>">
-						        	实用 (<c:out value='${patentTypeCount[(2).intValue()]["feeCount"]}' default="0"/>)
+						        	实用新型(<c:out value='${patentTypeCount[(2).intValue()]["feeCount"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 					        <li> 
 						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=3'/>">
-						        	外观 (<c:out value='${patentTypeCount[(3).intValue()]["feeCount"]}' default="0"/>)
+						        	外观设计 (<c:out value='${patentTypeCount[(3).intValue()]["feeCount"]}' default="0"/>)
 						        </a>
 					        </li> 
 					      </ul>		    
