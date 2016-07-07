@@ -122,7 +122,8 @@
 						  <th width="90">价格 </th><!-- 价格可以做成直接编辑的，可以少加一个编辑页面 -->
 						  <th width="90">交易状态</th>  
 						  <th width="90">交易类型</th>  
-						  <th width="90">添加日</th>  
+						  <th width="90">添加日</th>
+						  <th width="90">交易日</th>
 						  <th width="80">操作</th>
 						</tr>
 					  </thead>
@@ -156,7 +157,7 @@
 							</td>
 						
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.addDate}" pattern="yyyy-MM-dd"/></td>
-							
+							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.transactionDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							<td >
 							<c:if test="${patent.status==2}">
 							  <a  onclick="upTransactionPatent(${patent.patentId})">	 

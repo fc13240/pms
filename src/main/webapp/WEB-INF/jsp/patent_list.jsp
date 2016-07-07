@@ -249,7 +249,8 @@
 							  </a>&nbsp;
 							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
 							  交费
-							  </a> 
+							  </a>
+							  <br> 
 							  <se:authorize access="hasRole('ROLE_TRADER')">
 								  <c:if test="${patent.transactionStatus==null}">
 	 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
@@ -258,7 +259,7 @@
 				 	                </c:if>
 				 	                 <c:if test="${patent.transactionStatus != null}">
 	 			                  	   <a >
-					                  	${patent.transactionStatus}
+					                  	<font color="red">${patent.transactionStatus}</font>
 				 	                  </a>
 				 	                  </c:if>
 			 	               </se:authorize> 
