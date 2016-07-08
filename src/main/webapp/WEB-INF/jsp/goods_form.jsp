@@ -9,53 +9,76 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管家——出售专利</title>
+<title>龙图腾专利管家——上架专利</title>
 <%@ include file="_css.jsp" %>
+	<script src="<s:url value='/temp/js/jquery.js'/>" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
+    <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
 </head>
 <body>
-
-
 <%@ include file="_top.jsp" %>
-<%@ include file="_left_nav.jsp" %>
-<%@ include file="_left_nav2.jsp" %>
-<div class="lt-con">
-	<div class="t-ti">
-		<hr class="t-hr">
-		<span style="font-size: 16px;font-weight: 300;line-height: 24px;">出售专利</span>
+<div class="lt-con" style="min-width:1100px;">
+	<div class="container-fluid" >
+
+		<div class="row" style="margin-left:-30px;min-width:1100px;">
+		
+			<!--left begin-->
+		  <div class="col-xs-1 sidebar" style="min-width:100px;">
+			<%@ include file="_left_nav_fee.jsp" %>
+		  </div>
+		  <!--left end-->
+		  <!--right begin-->
+		  <div class="col-xs-offset-1 col-xs-11">
+			<div class="lt-right">
+				<div style="height:10px;"></div>
+				<div class="lt-box" style="padding:20px;">
+					<form action="<s:url value='/patent/addGoods.html'/>" method="post">
+					  <se:csrfInput/>
+					  <div style="margin-top:15px;">专利名  ：${patent.name}</div>
+					  <input type="hidden"  name="id" value="${patentId}"/>
+					  <input type="hidden"  name="userId" value="${patent.ownerId}"/>
+					  <div style="margin-top:15px;"> 商品类型：
+						<select name="FirstColumn" id="first_column" onchange="loadSecoundColumns()" required>
+						  <option value=''>请选择</option>
+						  <c:forEach items="${FirstColumns}" var="FirstColumn">
+							<option value="${FirstColumn.id}">${FirstColumn.name}</option>
+						  </c:forEach>
+						</select>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<select name="SecondColumn" id="second_column"  required>
+						  <option value=''>请选择</option>
+						</select>
+					  </div>
+					  <div>
+					  	<input type="radio" name="transactionType" value="1" checked="checked">转让
+					  	<input type="radio" name="transactionType" value="2" >许可
+					  </div>
+					  <div style="margin-top:15px;"> 价格：
+						<input style="width:400px;" class="selectPointOfInterest form-control" type="text" style="height:25px;width:80px;" name="price" id="price"/>
+					  </div>
+					  <div style="margin-top:15px;">
+						<button style="margin:8px;" type="submit" class="btn btn-info btn-sm">出售</button>
+					  </div>
+					</form>
+				</div>
+
+				
+				
+			</div>
+
+		  </div>		
+		  <!--right end-->	
+		  
+		</div>
+
 	</div>
-	
-	<div calss="lt-box">	
-		<form action="<s:url value='/patent/addGoods.html'/>" method="post">
-		  <se:csrfInput/>
-		  <div style="margin-top:15px;">专利名  ：${patent.name}</div>
-		  <input type="hidden"  name="id" value="${patentId}"/>
-		  <input type="hidden"  name="userId" value="${patent.ownerId}"/>
-		  <div style="margin-top:15px;"> 商品类型：
-			<select name="FirstColumn" id="first_column" onchange="loadSecoundColumns()" required>
-			  <option value=''>请选择</option>
-			  <c:forEach items="${FirstColumns}" var="FirstColumn">
-				<option value="${FirstColumn.id}">${FirstColumn.name}</option>
-			  </c:forEach>
-			</select>
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			<select name="SecondColumn" id="second_column"  required>
-			  <option value=''>请选择</option>
-			</select>
-		  </div>
-		  <div>
-		  	<input type="radio" name="transactionType" value="1" checked="checked">转让
-		  	<input type="radio" name="transactionType" value="2" >许可
-		  </div>
-		  <div style="margin-top:15px;"> 价格：
-			<input type="text" style="height:25px;width:80px;" name="price" id="price"/>
-		  </div>
-		  <div style="margin-top:15px;">
-			<button style="margin:8px;" type="submit" class="btn btn-info btn-sm">出售</button>
-		  </div>
-		</form>
-	</div>
+
+
 
 </div>
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script> 
+
 <script type="text/javascript">
 function loadSecoundColumns() {
 	var first_column = $("#first_column").val();
