@@ -157,7 +157,7 @@
 							</td>
 						
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.addDate}" pattern="yyyy-MM-dd"/></td>
-							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.transactionDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.transactionDate}" pattern="yyyy-MM-dd"/></td>
 							<td >
 							<c:if test="${patent.status==2}">
 							  <a href="javascript:return void;"  onclick="upTransactionPatent(${patent.patentId})">	 
