@@ -46,13 +46,13 @@
 					      <ul class="qxjk-ul">
 					      	<li>
 					        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=1'/>">
-					        	发明 (<c:out value='${patentTypeCount[(1).intValue()]["feeCount"]}' default="0"/>)
+					        	发明专利 (<c:out value='${patentTypeCount[(1).intValue()]["feeCount"]}' default="0"/>)
 					        </a>
 					        </li>
 					        
 					        <li>
 						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=2'/>">
-						        	实用新型 (<c:out value='${patentTypeCount[(2).intValue()]["feeCount"]}' default="0"/>)
+						        	实用新型(<c:out value='${patentTypeCount[(2).intValue()]["feeCount"]}' default="0"/>)
 						        </a>
 					        </li>
 					        

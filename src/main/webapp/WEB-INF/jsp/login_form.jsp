@@ -53,16 +53,19 @@
 </head>
 
 <body class="login-layout" >
-<div style="position:absolute;z-index: 99999; left:20px; top:0px; width:100px; height:100px;">
+<div style="position:absolute;z-index: 99999; left:20px; top:30px; width:100px; height:100px;">
 <img src="<s:url value='/temp/images/logo_long.png'/>" width="80px;">
 </div>  
 <table width="100%">
+	<tr>
+	<td height="30">&nbsp;</td>
+	</tr>
 	<tr>             									
 	    <td height="94" align="center" valign="top" background="<s:url value='/static/images/top-di.png'/>">
 	    	<table width="100%"  border="0" cellspacing="0" cellpadding="0">
 		        <tr>
 		         <td width="100"></td>
-		          <td width="560" height="94" background="<s:url value='/static/images/logo-login.png'/>">&nbsp;</td>
+		          <td width="560" height="93" background="<s:url value='/static/images/logo-login.png'/>">&nbsp;</td>
 		          <td align="right" valign="middle"><div style="float:right; margin-right:20px; color:#54a932;">&nbsp;&nbsp;</div></td>
 		        </tr>
 	     	</table></td>
@@ -75,7 +78,7 @@
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-container">
 						<div class="position-relative">
-							<div id="login-box" class="login-box visible widget-box no-border" style="background-color:#D32F30;margin-top:200px;">
+							<div id="login-box" class="login-box visible widget-box no-border" style="background-color:#D32F30;margin-top:150px;">
 								<div class="widget-body">
 									<div class="widget-main">
 										<h4 class="header blue lighter bigger">
@@ -138,7 +141,7 @@
 					</div>
 					
 				</div><!-- /.col -->
-				<div class="lt-flash col-sm-5" style="margin-top:200px;">
+				<div class="lt-flash col-sm-5" style="margin-top:150px;">
 				
 					<!-- 代码 开始 -->
 					<div id="fsD1" class="focus" style="">  

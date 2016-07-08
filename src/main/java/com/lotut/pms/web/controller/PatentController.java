@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,7 @@ import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.TransactionPatentSearchCondition;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.PatentService;
@@ -174,7 +176,7 @@ public class PatentController {
 		Patent patent = patentService.getPatentDetail(patent_id);
 		model.addAttribute("patent", patent);		
 		
-		model.addAttribute("patentno", patent_id);
+		model.addAttribute("patentId", patent_id);
 		model.addAttribute("FirstColumns", FirstColumns);
 		return "goods_form";
 	}	
@@ -243,5 +245,48 @@ public class PatentController {
 		}
 	}
 	
+	@RequestMapping(path="/getUserTransactionPatents", method=RequestMethod.GET)
+	public String getUserTransactionPatents(Model model, Page page, HttpSession session) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=(int)patentService.getUserTransactionPatentsCount(userId);
+		page.setTotalRecords(totalCount);
+		List<GoodsDetail> patents = patentService.getUserTransactionPatents(page);
+		model.addAttribute("patents", patents);
+		model.addAttribute("page", page);
+		return "goods_list";
+	}
 	
+	@RequestMapping(path="/searchTransactionPatents", method=RequestMethod.GET)
+	public String searchTransactionPatents(@ModelAttribute("searchCondition")TransactionPatentSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		List<GoodsDetail> resultPatents = patentService.searchTransactionPatentsByPage(searchCondition);
+		int totalCount=(int)patentService.searchTransactionPatentsCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		model.addAttribute("patents", resultPatents);
+		model.addAttribute("page", page);
+		return "goods_list";
+	}
+
+	@RequestMapping(path="/downTransactionPatent")
+	public void downTransactionPatents(@RequestParam("patentId") int patentId,PrintWriter writer){
+		patentService.downTransactionPatent(patentId);
+		writer.write(1);
+	}	
+	@RequestMapping(path="/upTransactionPatent")
+	public void upTransactionPatents(@RequestParam("patentId") int patentId,PrintWriter writer){
+		patentService.upTransactionPatent(patentId);
+		writer.write(1);
+	}	
+	@RequestMapping(path="/deleteTransactionPatent")
+	public void deleteTransactionPatents(@RequestParam("patentId") int patentId,PrintWriter writer){
+		patentService.deleteTransactionPatent(patentId);
+		writer.write(1);
+	}	
 }

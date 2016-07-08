@@ -15,6 +15,7 @@ import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.TransactionPatentSearchCondition;
 import com.lotut.pms.util.PrincipalUtils;
 
 public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao {
@@ -154,5 +155,38 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	@Override
 	public long getPatentIdByAppNo(Integer userId,String appNo) {
 		return patentMapper.getPatentIdByAppNo(userId,appNo);
+	}
+
+	@Override
+	public List<GoodsDetail> getUserTransactionPatents(Page page) {
+		return patentMapper.getUserTransactionPatents(page);
+	}
+
+	@Override
+	public int getUserTransactionPatentsCount(int userId) {
+		return patentMapper.getUserTransactionPatentsCount(userId);
+	}
+
+	@Override
+	public List<GoodsDetail> searchTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition) {
+		return patentMapper.searchTransactionPatentsByPage(searchCondition);
+	}
+
+	@Override
+	public int searchTransactionPatentsCount(TransactionPatentSearchCondition searchCondition) {
+		return patentMapper.searchTransactionPatentsCount(searchCondition);
+	}
+	public void downTransactionPatent(int patentId) {
+		patentMapper.downTransactionPatent(patentId);
+	}
+
+	@Override
+	public void upTransactionPatent(int patentId) {
+		patentMapper.upTransactionPatent(patentId);
+	}
+
+	@Override
+	public void deleteTransactionPatent(int patentId) {
+		patentMapper.deleteTransactionPatent(patentId);
 	}
 }

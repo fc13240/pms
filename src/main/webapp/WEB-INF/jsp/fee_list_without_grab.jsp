@@ -51,7 +51,7 @@
 						<th colspan="9">应缴费信息</th>
 					  </tr>
 					  <tr>
-						<th colspan="9"> <input type="checkbox" class="fee-check-item">
+						<th colspan="9"> <input type="checkbox" class="fee-check-item" checked="checked">
 						  <span class="batch-share" style="margin-left:10px;">
 								  <a href="javascript:return void" onclick="updateMonitorStatus(2)">
 								  <button class="button button-caution button-rounded" style="font-weight:500;font-size:16px;width:110px;">加入购物车</button>
@@ -74,7 +74,7 @@
 					  <c:forEach items="${fees}" var="fee" varStatus="status">
 						<tr>
 						  <td><span class="batch-share-item">
-							<input type="checkbox" class="fee-check-item" feeId="${fee.feeId}" patent="${fee.patent.patentId}" monitorStatus="${fee.monitorStatus.monitorStatusDescription}"
+							<input type="checkbox" checked="checked" class="fee-check-item" feeId="${fee.feeId}" patent="${fee.patent.patentId}" monitorStatus="${fee.monitorStatus.monitorStatusDescription}"
 								   deadline="<fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/>">
 							</span> ${status.index+1} </td>
 						  <td>${fee.feeType}</td>

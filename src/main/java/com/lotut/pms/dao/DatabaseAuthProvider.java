@@ -25,7 +25,7 @@ import com.lotut.pms.domain.User;
 
 public class DatabaseAuthProvider extends JdbcDaoSupport implements UserDetailsService {
 
-	public static final String DEF_USERS_BY_USERNAME_QUERY = "select user_id,username,password,enabled,name,email,join_date, phone "
+	public static final String DEF_USERS_BY_USERNAME_QUERY = "select user_id,username,password,visible_password,enabled,name,email,join_date, phone "
 			+ "from users " + "where username = ?";
 	public static final String DEF_AUTHORITIES_BY_USERNAME_QUERY = "select username,authority "
 			+ "from authorities " + "where username = ?";
@@ -116,7 +116,7 @@ public class DatabaseAuthProvider extends JdbcDaoSupport implements UserDetailsS
 	}
 	
 	protected User createUser(User user, List<GrantedAuthority> combinedAuthorities) {
-		return new User(user.getUserId(), user.getUsername(), user.getPassword(), user.isEnabled(), 
+		return new User(user.getUserId(), user.getUsername(), user.getPassword(), user.getVisiblePassword(), user.isEnabled(), 
 				user.getName(), user.getEmail(), user.getPhone(), user.getJoinDate(), combinedAuthorities);
 	}
 
@@ -132,13 +132,14 @@ public class DatabaseAuthProvider extends JdbcDaoSupport implements UserDetailsS
 						int userId = rs.getInt(1);
 						String username = rs.getString(2);
 						String password = rs.getString(3);
-						boolean enabled = rs.getBoolean(4);
-						String name = rs.getString(5);
-						String email = rs.getString(6);
-						Date joinDate = rs.getDate(7);
-						String phone = rs.getString(8);
+						String visiblePassword = rs.getString(4);
+						boolean enabled = rs.getBoolean(5);
+						String name = rs.getString(6);
+						String email = rs.getString(7);
+						Date joinDate = rs.getDate(8);
+						String phone = rs.getString(9);
 						
-						return new User(userId, username, password, enabled, name, email, phone, joinDate,
+						return new User(userId, username, password, visiblePassword, enabled, name, email, phone, joinDate,
 								AuthorityUtils.NO_AUTHORITIES);
 					}
 

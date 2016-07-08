@@ -99,7 +99,7 @@ create table if not exists patent_status (
 create table if not exists patents (
 	patent_id bigint auto_increment primary key,
 	app_no varchar(30) not null , 
-	patent_name varchar(100), 
+	patent_name varchar(200), 
 	patent_type int,
 	app_date date, 
 	app_person varchar(100), 
@@ -515,3 +515,8 @@ ALTER TABLE patents ADD COLUMN publish_no VARCHAR(30);
 ALTER TABLE patents ADD COLUMN proxy_org VARCHAR(100);
 
 ALTER TABLE users ADD COLUMN visible_password VARCHAR(100);
+
+
+INSERT INTO groups VALUES(3, 'TRADER');
+INSERT INTO group_authorities VALUES (3, 'ROLE_TRADER');
+ALTER TABLE patents ADD COLUMN transaction_status VARCHAR(100);

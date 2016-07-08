@@ -20,6 +20,7 @@ public class User implements Serializable, UserDetails {
 	private int userId;
 	private String username;
 	private String password;
+	private String visiblePassword;
 	boolean enabled;
 	private String name;
 	private String phone;
@@ -31,11 +32,12 @@ public class User implements Serializable, UserDetails {
 		
 	}
 	
-	public User(int userId, String username, String password, boolean enabled, String name, String email, 
+	public User(int userId, String username, String password, String visiblePassword,boolean enabled, String name, String email, 
 			String phone, Date joinDate, Collection<? extends GrantedAuthority> authorities) {
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
+		this.visiblePassword = visiblePassword;
 		this.enabled = enabled;
 		this.name = name;
 		this.email = email;
@@ -101,7 +103,15 @@ public class User implements Serializable, UserDetails {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 
+	public String getVisiblePassword() {
+		return visiblePassword;
+	}
+
+	public void setVisiblePassword(String visiblePassword) {
+		this.visiblePassword = visiblePassword;
+	}
 
 	public String getName() {
 		return name;

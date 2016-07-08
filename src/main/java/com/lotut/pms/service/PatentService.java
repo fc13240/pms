@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.lotut.pms.domain.GoodsDetail;
 import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
@@ -13,6 +15,7 @@ import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.TransactionPatentSearchCondition;
 
 public interface PatentService {
 	public long getPatentsCount(int userId);
@@ -63,4 +66,19 @@ public interface PatentService {
 	 String generatePatentExportExcel(List<Long> patentIds,String excelName) throws IOException;
 	 
 	 public boolean  addOrUpdatePatents(List<Patent> patents,int userId);
+	 
+	 List<GoodsDetail> getUserTransactionPatents(Page page);
+	 
+	 int getUserTransactionPatentsCount(int userId);
+
+	 List<GoodsDetail> searchTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition);
+		
+	int searchTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
+	
+	public void downTransactionPatent(int patentId);
+
+	public void upTransactionPatent(int patentId);
+
+	public void deleteTransactionPatent(int patentId);
+
 }

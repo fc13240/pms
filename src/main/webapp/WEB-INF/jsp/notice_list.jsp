@@ -46,19 +46,19 @@
 					      <ul class="qxjk-ul">
 					      	<li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=1&noticeProcessStatus=1'/>">
-						        	发明 (<c:out value='${patentTypeCount[(1).intValue()]["noticeCount"]}' default="0"/>)
+						        	发明专利 (<c:out value='${patentTypeCount[(1).intValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 					        <li>
 					         <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=2&noticeProcessStatus=1'/>">
-					        	实用新型 (<c:out value='${patentTypeCount[(2).intValue()]["noticeCount"]}' default="0"/>)
+					        	实用新型(<c:out value='${patentTypeCount[(2).intValue()]["noticeCount"]}' default="0"/>)
 					        </a>
 					        </li>
 					        
 					        <li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=3&noticeProcessStatus=1'/>">
-						        	外观设计 (<c:out value='${patentTypeCount[(3).intValue()]["noticeCount"]}' default="0"/>)
+						        	外观设计(<c:out value='${patentTypeCount[(3).intValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li> 
 					      </ul>	
@@ -67,25 +67,25 @@
 					      <ul class="qxjk-ul">
 					      	<li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=1'/>">
-						        	未处理 (<c:out value='${processStatusCount[(1).intValue()]["noticeCount"]}' default="0"/>)
+						        	应缴费/答复/处理 (<c:out value='${processStatusCount[(1).intValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 					        <li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=2'/>">
-						        	已处理 (<c:out value='${processStatusCount[(2).intValue()]["noticeCount"]}' default="0"/>)
+						        	已缴费/答复/处理 (<c:out value='${processStatusCount[(2).intValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 					        <li> 
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=3'/>">
-						        	已放弃 (<c:out value='${processStatusCount[(3).intValue()]["noticeCount"]}' default="0"/>)
+						        	放弃缴费/答复/处理 (<c:out value='${processStatusCount[(3).intValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 					        <li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=4'/>">
-						       		 处理中 (<c:out value='${processStatusCount[(4).intValue()]["noticeCount"]}' default="0"/>)
+						       		完成缴费/答复/处理 (<c:out value='${processStatusCount[(4).intValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li> 
 					      </ul>	
@@ -328,7 +328,7 @@
 						  <thead>
 							<tr class="simple_bag">
 							  <th class="center"> <label class="pos-rel">
-								<input type="checkbox" class="check-item" id="checkall"  name="checkall" />
+								<input type="checkbox" class="check-item" id="checkall"  name="checkall" checked="checked" />
 								<span class="lbl"></span> </label>
 							  </th>
 							  <th class="center" width="50">序号</th>
@@ -341,7 +341,7 @@
 							  <th>通知书名称</th>
 							  <th width="120px">纸件申请</th>
 							  <th>期限</th>
-							  <th width="120px">通知状态</th>
+							  <th width="180px">通知状态</th>
 							  <!-- 							<th>预览</th> 
 							  <th>下载</th>-->
 							  <th width="130">操作</th>
@@ -351,7 +351,7 @@
 							<c:forEach items="${notices}" var="notice" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-								  <input style="text-align:center" type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
+								  <input style="text-align:center" type="checkbox" checked="checked" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
 								  <span class="lbl"></span></label></td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
 								<td style="text-align:center"><c:out value="${notice.patent.appNo}"/>
@@ -390,7 +390,6 @@
 								</td>
 								<td style="text-align:center">
 								  <select class="selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
-									<option>全部</option>
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 											  
 										  
@@ -572,30 +571,6 @@ function changePaperApplyType(notice, selectElement) {
 		}
 	});			
 }
-
-function processNotice(notice, selectElement) {
-	processStatus = 1;
-	for (var i = 0; i < selectElement.length; i++) {
-		if (selectElement.options[i].selected == true) {
-			processStatus = selectElement.options[i].value;
-		}
-	}		
-
-	$.ajax({
-		url: "<s:url value='/notice/processNotice.html'/>?notice=" + notice + "&processStatus=" + processStatus,
-		type: 'get', 
-		success: function(data) {
-			$("<div>操作成功</div>").dialog({
-				modal: true,
-				buttons: {
-					Ok: function() {
-						$(this).dialog("close");
-					}
-				}	
-			});
-		}
-	});			
-}
 </script>
 
 <script type="text/javascript">
@@ -661,11 +636,13 @@ function batchProcessNotice(processStatus) {
 				url: "<s:url value='/notice/processNotices.html'/>?notices=" + notice + "&processStatus=" + processStatus,
 				type: 'get', 
 				success: function(data) {
-					$("<div>操作成功</div>").dialog({
+				},
+				error : function(){
+					$("<div>操作失败，请稍后重试！</div>").dialog({
 						modal: true,
 						buttons: {
 							Ok: function() {
-							$(this).dialog("close");
+								$(this).dialog("close");
 							}
 						}	
 					});

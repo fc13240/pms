@@ -73,6 +73,7 @@
 								<label class="pos-rel"> <span class="batch-share-item">
 									  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.objectId}'/>">
 									  <span class="lbl"></span>
+									  </span>
 								</label>
 							</td>
 							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>

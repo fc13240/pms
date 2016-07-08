@@ -3,7 +3,8 @@ package com.lotut.pms.util;
 public enum Role {
 	ROLE_ADMIN("ROLE_ADMIN"), 
 	ROLE_ORDER("ROLE_ORDER"),
-	ROLE_USER("ROLE_USER");
+	ROLE_USER("ROLE_USER"),
+	ROLE_TRADER("ROLE_TRADER");
 	
 	private String roleName;
 	

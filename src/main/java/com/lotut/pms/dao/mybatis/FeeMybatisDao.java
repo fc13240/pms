@@ -155,5 +155,8 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 			return feeMapper.getCountByDeadlinePayment(userId);
 		}
 
-		
+		@Override
+		public void deleteUnmonitoredFeesByPatentIds(List<Long> patentIds, int userId) {
+			feeMapper.deleteUnmonitoredFeesByPatentIds(patentIds, userId);
+		}
 }

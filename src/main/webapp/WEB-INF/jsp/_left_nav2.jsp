@@ -22,6 +22,12 @@
 	<li  class=""> <a href="<s:url value='/patentOfficeAccount/list.html'/>">
 	<h5>自动更新</h5>
 	</a> 
-	</li>   			
+	</li>
+	 <se:authorize access="hasRole('ROLE_TRADER')"> 
+  	<li  class=""> <a href="<s:url value='/patent/getUserTransactionPatents.html'/>">
+	<h5>商品列表</h5>
+	</a> 
+	</li>
+	 </se:authorize>			
 	</ul>
 </div>

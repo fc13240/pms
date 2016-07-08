@@ -12,7 +12,7 @@
 		      <div class="item">
 			 您好,
 			  <se:authentication property="principal.username" />!
-			欢迎使用龙图腾专利管家！
+			保密是我们的责任！
 			  <a href="javascript:$('#logoutForm').submit();" style="color:#666;"><font color="red">退出</font></a>
 		
 			 <form action="<s:url value='/user/logout.html'/>" method="post" id="logoutForm">
@@ -26,7 +26,7 @@
 	  </div>
 	</div>
 	<div style="height:80px;padding:5px;margin-left:120px;">
-		<img src="<s:url value='/temp/images/logo.png'/>" style="width:220px;">
+		<img src="<s:url value='/temp/images/logo.png'/>" style="height:47px;">
 	</div>
 	<div class="nav clear">
 	    <div class="" style="margin-left:127px;"> 

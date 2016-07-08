@@ -10,13 +10,13 @@
 	<http pattern="/static/**" security="none" />
 	<http pattern="/temp/**" security="none" />
 
-	<http use-expressions="false">
-		<intercept-url pattern="/loginForm.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-		<intercept-url pattern="/alipay/notify.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-		<intercept-url pattern="/favicon.ico" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-		<intercept-url pattern="/user/registerForm.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-		<intercept-url pattern="/user/register.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-		<intercept-url pattern="/**" access="ROLE_USER, ROLE_ORDER"/>
+	<http use-expressions="true">
+		<intercept-url pattern="/loginForm.html" access="isAnonymous()"/>
+		<intercept-url pattern="/alipay/notify.html" access="isAnonymous()"/>
+		<intercept-url pattern="/favicon.ico" access="isAnonymous()"/>
+		<intercept-url pattern="/user/registerForm.html" access="isAnonymous()"/>
+		<intercept-url pattern="/user/register.html" access="isAnonymous()"/>
+		<intercept-url pattern="/**" access="isAuthenticated()"/>
 		<form-login login-page="/loginForm.html" default-target-url="/patent/list.html" />
 		<logout logout-url="/user/logout.html" />
 		

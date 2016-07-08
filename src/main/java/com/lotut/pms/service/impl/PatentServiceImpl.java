@@ -20,6 +20,7 @@ import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.TransactionPatentSearchCondition;
 import com.lotut.pms.service.PatentService;
 import com.lotut.pms.service.utils.PatentExcelGenerator;
 import com.lotut.pms.service.utils.PatentExcelParser;
@@ -185,5 +186,38 @@ public class PatentServiceImpl implements PatentService {
 		String exportExcelPath=Settings.TEMP_DIR+excelName;
 		PatentExcelGenerator.writerPatentRecodesToExcel(patents, exportExcelPath);
 		return exportExcelPath;
+	}
+
+	@Override
+	public List<GoodsDetail> getUserTransactionPatents(Page page) {
+		return patentDao.getUserTransactionPatents(page);
+	}
+
+	@Override
+	public int getUserTransactionPatentsCount(int userId) {
+		return patentDao.getUserTransactionPatentsCount(userId);
+	}
+
+	@Override
+	public List<GoodsDetail> searchTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition) {
+		return patentDao.searchTransactionPatentsByPage(searchCondition);
+	}
+
+	@Override
+	public int searchTransactionPatentsCount(TransactionPatentSearchCondition searchCondition) {
+		return patentDao.searchTransactionPatentsCount(searchCondition);
+	}
+	public void downTransactionPatent(int patentId) {
+		patentDao.downTransactionPatent(patentId);
+	}
+
+	@Override
+	public void upTransactionPatent(int patentId) {
+		patentDao.upTransactionPatent(patentId);
+	}
+
+	@Override
+	public void deleteTransactionPatent(int patentId) {
+		patentDao.deleteTransactionPatent(patentId);
 	}
 }

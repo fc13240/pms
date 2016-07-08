@@ -68,4 +68,6 @@ public interface FeeMapper {
 	void saveFee (Fee fee);
 	
 	Map<String,Long> getCountByDeadlinePayment(int userId);
+	
+	void deleteUnmonitoredFeesByPatentIds(@Param("patentIds")List<Long> patentIds, @Param("userId")int userId);
 }
