@@ -25,7 +25,7 @@
 		<div class="row" style="margin-left:-30px;min-width:1100px;">
 
 		  <div class="col-xs-1 sidebar" style="min-width:100px;">
-			<%@ include file="_left_nav2.jsp" %>
+			<%@ include file="_left_nav3.jsp" %>
 		  </div>
 		  <!--left end-->
 		  <div class="col-xs-offset-1 col-xs-11">

@@ -34,7 +34,7 @@
 				<div class="lt-box" style="padding:20px;">
 					<form action="<s:url value='/patent/addGoods.html'/>" method="post">
 					  <se:csrfInput/>
-					  <div style="margin-top:15px;">专利名  ：${patent.name}</div>
+					  <div style="margin-top:15px;"><span >专利名  ：${patent.name}</span></div>
 					  <input type="hidden"  name="id" value="${patentId}"/>
 					  <input type="hidden"  name="userId" value="${patent.ownerId}"/>
 					  <div style="margin-top:15px;"> 商品类型：
@@ -49,7 +49,8 @@
 						  <option value=''>请选择</option>
 						</select>
 					  </div>
-					  <div>
+					  <div style="margin-top:15px;"> 交易类型:
+					    
 					  	<input type="radio" name="transactionType" value="1" checked="checked">转让
 					  	<input type="radio" name="transactionType" value="2" >许可
 					  </div>
