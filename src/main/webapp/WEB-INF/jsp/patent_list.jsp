@@ -364,12 +364,6 @@
 
 	 	 }	
 
-		 
-/* 		  if (fee_date==current_type_name)
-		  {
-			  $(this).addClass("current_nav");
-				return;  
-		  } */
 		   
 	   });	
 
