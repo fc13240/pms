@@ -817,7 +817,9 @@ function batchProcessNotice(processStatus) {
 				location.reload();
 			}
 		});		
-	}	
+	}
+
+		
 </script>
 <script type="text/javascript">
 function batchChangeNoticePaperType(paperApplyType) {
