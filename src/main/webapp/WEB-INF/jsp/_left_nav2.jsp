@@ -22,6 +22,10 @@
 	<li  class=""> <a href="<s:url value='/patentOfficeAccount/list.html'/>">
 	<h5>自动更新</h5>
 	</a> 
+	</li>
+	<li  class=""> <a href="<s:url value='/patent/patentRecycled.html?currentPage=1'/>">
+	<h5>回收站</h5>
+	</a> 
 	</li>	
 	</ul>
 </div>

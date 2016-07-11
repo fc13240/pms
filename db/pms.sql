@@ -520,6 +520,9 @@ ALTER TABLE users ADD COLUMN visible_password VARCHAR(100);
 
 INSERT INTO groups VALUES(3, 'TRADER');
 INSERT INTO group_authorities VALUES (3, 'ROLE_TRADER');
+
+ALTER TABLE user_patents ADD COLUMN trash_status INT  DEFAULT 1;
 ALTER TABLE patents ADD COLUMN transaction_status VARCHAR(10);
 
 alter table friends add column remark_name varchar(50);
+

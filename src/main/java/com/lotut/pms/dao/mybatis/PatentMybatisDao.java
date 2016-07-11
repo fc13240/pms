@@ -189,4 +189,31 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	public void deleteTransactionPatent(int patentId) {
 		patentMapper.deleteTransactionPatent(patentId);
 	}
+
+	@Override
+	public void patentsTrash(List<Long> patentIds,int userId) {
+		patentMapper.patentsTrash(patentIds,userId);
+	}
+
+	@Override
+	public List<Patent> getPatentsRecycled(Page page) {
+		return patentMapper.getPatentsRecycled(page);
+	}
+
+	@Override
+	public int getPatentsRecycledCount(int userId) {
+		return patentMapper.getPatentsRecycledCount(userId);
+	}
+
+	@Override
+	public void recoverPatents(List<Long> patentIds, int userId) {
+		patentMapper.recoverPatents(patentIds, userId);
+		
+	}
+
+	@Override
+	public void deleteForeverPatents(List<Long> patentIds, int userId) {
+		patentMapper.deleteForeverPatents(patentIds, userId);
+		
+	}
 }

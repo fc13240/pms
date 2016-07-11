@@ -85,4 +85,13 @@ public interface PatentMapper {
 
 	void deleteTransactionPatent(int patentId);
 
+	void patentsTrash(@Param("patentIds")List<Long> patentIds,@Param("userId")int userId);
+	
+	List<Patent> getPatentsRecycled(Page page);
+	
+	int getPatentsRecycledCount(@Param("userId")int userId);
+	
+	void recoverPatents(@Param("patentIds")List<Long> patentIds,@Param("userId")int userId );
+	
+	void deleteForeverPatents(@Param("patentIds")List<Long> patentIds,@Param("userId")int userId);
 }
