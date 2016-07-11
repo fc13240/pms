@@ -23,6 +23,7 @@
 			<result property="appNo" column="app_no"/>
 			<result property="name" column="patent_name"/>
 			<result property="appPerson" column="app_person"/>
+			<result property="patentStatusText" column="patent_status_text"/>
 			<association property="patentStatus" javaType="PatentStatus">
 				<id property="patentStatusId" column="patent_status_id"/>
 				<result property="statusDescription" column="patent_status_desc"/>			
@@ -35,7 +36,7 @@
 	</resultMap>
 	
 	<select id="getFeesByPatentIds" resultMap="FeeResultMap">
-		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
+		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc, p.patent_status_text,
 					 f.fee_id, f.deadline, f.fee_type, f.amount, f.invoice_title, fp.fee_payment_status_id, fp.fee_payment_status_desc,
 					 fs.fee_monitor_status_id, fs.fee_monitor_status_desc
 		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
@@ -52,7 +53,7 @@
 	
 	<!-- 费用监控相关 -->
 	<select id="getFeesForPatent" resultMap="FeeResultMap">
-		  select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
+		  select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc, p.patent_status_text,
 			 pt.patent_type_id, pt.patent_type_desc,			
 			 f.fee_id, f.deadline, f.fee_type, f.amount, f.deadline,f.invoice_title, fp.fee_payment_status_id, fp.fee_payment_status_desc,
 			 fs.fee_monitor_status_id, fs.fee_monitor_status_desc
@@ -76,7 +77,7 @@
 	<!-- CS:分页 -->
 	
 	<select id="getUserMonitoredFeesByPage" parameterType="Page" resultMap="FeeResultMap">
-		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
+		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc, p.patent_status_text,
 					 f.fee_id,f.deadline, f.fee_type, f.amount, f.invoice_title, fp.fee_payment_status_id, fp.fee_payment_status_desc,
 					 fs.fee_monitor_status_id, fs.fee_monitor_status_desc,oi.order_id
 		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
@@ -99,7 +100,7 @@
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
-		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
+		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc, p.patent_status_text,
 					 f.fee_id, f.deadline, f.fee_type, f.amount, f.invoice_title, fp.fee_payment_status_id, fp.fee_payment_status_desc,
 					 fs.fee_monitor_status_id, fs.fee_monitor_status_desc
 		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
@@ -169,7 +170,7 @@
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
-		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
+		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc, p.patent_status_text,
 					 f.fee_id, f.deadline, f.fee_type, f.amount, f.invoice_title, fp.fee_payment_status_id, fp.fee_payment_status_desc,
 					 fs.fee_monitor_status_id, fs.fee_monitor_status_desc,oi.order_id
 		  from fees f join fee_monitor_status fs on f.fee_monitor_status = fs.fee_monitor_status_id
@@ -309,7 +310,7 @@
 	</insert>
 	
 	<select id="getFeesByIds" resultMap="FeeResultMap">
-		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
+		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc, p.patent_status_text,
 			 pt.patent_type_id, pt.patent_type_desc,			
 			 f.fee_id, f.deadline, f.fee_type, f.amount, f.invoice_title, fp.fee_payment_status_id, fp.fee_payment_status_desc,
 			 fs.fee_monitor_status_id, fs.fee_monitor_status_desc
@@ -355,7 +356,7 @@
 		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
 				left join patent_status ps on p.patent_status = ps.patent_status_id
-		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
+		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2 and f.fee_payment_status = 1
 		 group by p.patent_type
 	</select>
 	
@@ -365,7 +366,7 @@
 		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
 				left join patent_status ps on p.patent_status = ps.patent_status_id
-		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
+		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2 
 		 group by f.fee_payment_status
 	</select>
 	
@@ -375,7 +376,7 @@
 		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
 				left join patent_status ps on p.patent_status = ps.patent_status_id
-		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
+		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2 and f.fee_payment_status = 1
 		 group by p.patent_status
 	</select>
 	<select id="getFeeTypes" resultType="string">

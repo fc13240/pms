@@ -358,12 +358,13 @@ VALUES
 INSERT INTO notice_types (notice_type_id, notice_type_desc)
 VALUES
 	(1, '新案受理'),
-	(2, '费用相关'),
+	(2, '缴费通知'),
 	(3, '补正审查'),
-	(4, '授权登记'),
+	(4, '专利授权'),
 	(5, '权利丧失'),
 	(6, '手续合格'),
-	(7, '其他');
+	(7, '其他'),
+	(8, '驳回决定');
 
 INSERT INTO patent_status (patent_status_id, patent_status_desc)
 VALUES

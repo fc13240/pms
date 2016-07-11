@@ -72,7 +72,7 @@
 						  <td>${fee.patent.appNo}</td>
 						  <td>${fee.patent.name}</td>
 						  <td>${fee.patent.firstAppPerson}</td>
-						  <td>${fee.patent.patentStatus.statusDescription}</td>
+						  <td>${fee.patent.patentStatusText}</td>
 						  <td>${fee.feeType}</td>
 						  <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
 						  <td>${fee.amount} </td>
