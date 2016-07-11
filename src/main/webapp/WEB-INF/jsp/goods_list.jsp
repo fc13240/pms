@@ -25,7 +25,7 @@
 		<div class="row" style="margin-left:-30px;min-width:1100px;">
 
 		  <div class="col-xs-1 sidebar" style="min-width:100px;">
-			<%@ include file="_left_nav2.jsp" %>
+			<%@ include file="_left_nav3.jsp" %>
 		  </div>
 		  <!--left end-->
 		  <div class="col-xs-offset-1 col-xs-11">
@@ -122,7 +122,8 @@
 						  <th width="90">价格 </th><!-- 价格可以做成直接编辑的，可以少加一个编辑页面 -->
 						  <th width="90">交易状态</th>  
 						  <th width="90">交易类型</th>  
-						  <th width="90">添加日</th>  
+						  <th width="90">添加日</th>
+						  <th width="90">交易日</th>
 						  <th width="80">操作</th>
 						</tr>
 					  </thead>
@@ -156,19 +157,19 @@
 							</td>
 						
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.addDate}" pattern="yyyy-MM-dd"/></td>
-							
+							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.transactionDate}" pattern="yyyy-MM-dd"/></td>
 							<td >
 							<c:if test="${patent.status==2}">
-							  <a  onclick="upTransactionPatent(${patent.patentId})">	 
+							  <a href="javascript:return void;"  onclick="upTransactionPatent(${patent.patentId})">	 
 							  上架
 							  </a>
 							</c:if>
 							  <c:if test="${patent.status==1}">
-							  <a  onclick="downTransactionPatent(${patent.patentId})">
+							  <a href="javascript:return void;"  onclick="downTransactionPatent(${patent.patentId})">
 							  下架
 							  </a> 
 			             	  </c:if>
-							  <a  onclick="deleteTransactionPatent(${patent.patentId})">
+							  <a href="javascript:return void;"  onclick="deleteTransactionPatent(${patent.patentId})">
 							  删除
 							  </a>         	  
 							  </td>

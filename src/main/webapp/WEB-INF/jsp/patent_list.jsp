@@ -41,7 +41,7 @@
 					  <div style="height:33px;">
 						<ul id="nav">
 						  <p>快捷处理：</p>
-						  <li><a href="#" class="selected">类型</a></li>
+						  <li><a href="#" class="selected">专利类型</a></li>
 						  <li><a href="#" class="">案件状态</a></li>
 						  <li><a style="color:#FF0000;" href="<s:url value='/notice/list.html?selectType=5&currentPage=1'/>" class="">通知书监控中</a></li>
 						  <li><a style="color:#FF0000;" href="<s:url value='/fee/monitoredFeeList.html?selectType=4&currentPage=1'/>" class="">交费监控中</a></li>
@@ -54,16 +54,16 @@
 
 						  <ul class="qxjk-ul"><li>
 							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=1'/>">
-							发明 (<c:out value='${patentTypeCount[(1).intValue()]["patentCount"]}' default="0"/>)</a>
+							发明专利 (<c:out value='${patentTypeCount[(1).intValue()]["patentCount"]}' default="0"/>)</a>
 							</li>
 							<li>
 							 <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=2'/>">
-							实用 (<c:out value='${patentTypeCount[(2).intValue()]["patentCount"]}' default="0"/>)
+							实用新型 (<c:out value='${patentTypeCount[(2).intValue()]["patentCount"]}' default="0"/>)
 							</a> 
 							</li>
 							
 							<li>
-							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=3'/>">外观 (<c:out value='${patentTypeCount[(3).intValue()]["patentCount"]}' default="0"/>)
+							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=3'/>">外观设计(<c:out value='${patentTypeCount[(3).intValue()]["patentCount"]}' default="0"/>)
 							</a> 							
 							</li>
 
@@ -218,7 +218,7 @@
 						  <th width="170">专利名称</th>
 						  <th width="90">第一申请人 </th>
 						  <th width="90" class="hidden-480"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申请日</th>
-						  <th width="60">缴费年日</th>
+						  <th width="60">缴年费日</th>
 						  <th width="70">案件状态</th>
 						  <th width="50">内部编码</th>
 						  <th width="90">共享人</th>
@@ -238,27 +238,28 @@
 							<td class="hidden-480" style="text-align:center"><c:out value="${patent.name}"/></td>
 							<td style="text-align:center"><c:out value="${patent.appPerson}"/></td>
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
-							<td class="hidden-480" style="text-align:center">缴费年日</td>
+							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="M月dd日"/></td>
 							<td style="text-align:center"><c:out value="${patent.patentStatusText}"/></td>
 							<td style="text-align:center"><input style="width:60px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
 							</td>
 							<td style="text-align:center"><c:out value="${patent.shareUsersAsString}"/>
 							</td>
-							<td ><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
+							<td style="text-align:center"><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
 							  分享
 							  </a>&nbsp;
 							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
 							  交费
-							  </a> 
+							  </a>
+							  <br> 
 							  <se:authorize access="hasRole('ROLE_TRADER')">
 								  <c:if test="${patent.transactionStatus==null}">
 	 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
-					                  	<button class="t-btn2">出售</button> 
+					                  	<button class="t-btn2">发布至交易网</button> 
 				 	                  </a>
 				 	                </c:if>
 				 	                 <c:if test="${patent.transactionStatus != null}">
 	 			                  	   <a >
-					                  	${patent.transactionStatus}
+					                  	<font color="red">${patent.transactionStatus}</font>
 				 	                  </a>
 				 	                  </c:if>
 			 	               </se:authorize> 

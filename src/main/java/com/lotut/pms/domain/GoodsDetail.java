@@ -21,7 +21,8 @@ public class GoodsDetail {
 	private String patentName;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date addDate;
-	private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	private Date transactionDate;
+
 	
 	
 	
@@ -97,6 +98,12 @@ public class GoodsDetail {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public Date getTransactionDate() {
+		return transactionDate;
+	}
+	public void setTransactionDate(Date transactionDate) {
+		this.transactionDate = transactionDate;
 	}
 	
 }
