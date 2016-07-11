@@ -100,7 +100,7 @@
 					        
 					        <li> 
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=2&noticeProcessStatus=1'/>">
-						        	费用相关 (<c:out value='${noticeTypeCount[(2).intValue()]["noticeCount"]}' default="0"/>)
+						        	缴费通知 (<c:out value='${noticeTypeCount[(2).intValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li> 
 					        
@@ -112,7 +112,7 @@
 					        
 					         <li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=4&noticeProcessStatus=1'/>">
-						        	授权登记 (<c:out value='${noticeTypeCount[(4).intValue()]["noticeCount"]}' default="0"/>)
+						        	专利授权 (<c:out value='${noticeTypeCount[(4).intValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li> 
 					        
@@ -127,12 +127,17 @@
 						        	手续合格 (<c:out value='${noticeTypeCount[(6).intValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li>
-					        
+					         <li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=8&noticeProcessStatus=1'/>">
+						        	驳回决定 (<c:out value='${noticeTypeCount[(8).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li>					        
 					         <li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=7&noticeProcessStatus=1'/>">
 						        	其他 (<c:out value='${noticeTypeCount[(7).intValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li>
+					        
 					      </ul>
 					    </div>
 					    <div class="tag"  style="display:none">
@@ -300,16 +305,15 @@
 										</a>
 					  				</td>
 					  				<td>
-									  	<a href="javascript:return void" onclick="batchProcessNotice(4)">
-										<button style="width:100px;margin-left:10px;" class="button button-action button-rounded">置为处理中</button>
-										</a> 
-									</td>	
-					  				<td>
 										<a href="javascript:return void" onclick="batchProcessNotice(2)">
 										<button style="width:100px;margin-left:10px;" class="button button-rounded button-highlight">置为已处理</button>
 										</a> 
-					  				</td>
-					  				
+					  				</td>					  				
+					  				<td>
+									  	<a href="javascript:return void" onclick="batchProcessNotice(4)">
+										<button style="width:100px;margin-left:10px;" class="button button-action button-rounded">完成处理</button>
+										</a> 
+									</td>	
 					  				<td>
 										<a href="javascript:return void" onclick="batchShare()">
 										<button style="margin-left:10px;" class="button button-rounded button-primary">专利分享</button>
@@ -328,7 +332,7 @@
 						  <thead>
 							<tr class="simple_bag">
 							  <th class="center"> <label class="pos-rel">
-								<input type="checkbox" class="check-item" id="checkall"  name="checkall" checked="checked" />
+								<input type="checkbox" class="check-item" id="checkall"  name="checkall" />
 								<span class="lbl"></span> </label>
 							  </th>
 							  <th class="center" width="50">序号</th>
@@ -341,7 +345,7 @@
 							  <th>通知书名称</th>
 							  <th width="120px">纸件申请</th>
 							  <th>期限</th>
-							  <th width="180px">通知状态</th>
+							  <th width="190px">通知状态</th>
 							  <!-- 							<th>预览</th> 
 							  <th>下载</th>-->
 							  <th width="130">操作</th>
@@ -351,7 +355,7 @@
 							<c:forEach items="${notices}" var="notice" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-								  <input style="text-align:center" type="checkbox" checked="checked" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
+								  <input style="text-align:center" type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
 								  <span class="lbl"></span></label></td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
 								<td style="text-align:center"><c:out value="${notice.patent.appNo}"/>
@@ -813,7 +817,9 @@ function batchProcessNotice(processStatus) {
 				location.reload();
 			}
 		});		
-	}	
+	}
+
+		
 </script>
 <script type="text/javascript">
 function batchChangeNoticePaperType(paperApplyType) {

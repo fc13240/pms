@@ -243,7 +243,7 @@
 							<td class="hidden-480" style="text-align:center"><c:out value="${patent.name}"/></td>
 							<td style="text-align:center"><c:out value="${patent.appPerson}"/></td>
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
-							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="M月dd日"/></td>
+							<td class="hidden-480 fee_date" fee_date="${patent.appDate}" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="M月dd日"/></td>
 							<td style="text-align:center"><c:out value="${patent.patentStatusText}"/></td>
 							<td style="text-align:center"><input style="width:60px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
 							</td>
@@ -377,6 +377,39 @@
 	}
 	
 	
+
+	//改变日期显示颜色
+	$(function() {
+	   $(".fee_date").each(function (){
+		 var fee_date=$(this).html();
+		 var value = fee_date.replace(/[^0-9]/ig,"|");
+		 var array_fee_date = value.split("|");
+		 var fee_month=array_fee_date[0];
+		 var fee_day=array_fee_date[1];
+		 var fee_days=Number(fee_month)*30+Number(fee_day);
+
+		 oDate = new Date();
+		 var month=oDate.getMonth()+1;
+		 var day=oDate.getDate();
+		 var current_days=month*30+day;
+		 var Differ=current_days-fee_days;
+		 
+	     if(Differ<31&&Differ>-31){
+	 		$(this).addClass("red");
+
+	 	 }	
+
+		 
+/* 		  if (fee_date==current_type_name)
+		  {
+			  $(this).addClass("current_nav");
+				return;  
+		  } */
+		   
+	   });	
+
+	});	
+
 	function batchShare() {
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 		var uniquePatentNos = []

@@ -45,19 +45,19 @@
 					    <div class="tag" style="display:none"> 
 					      <ul class="qxjk-ul">
 					      	<li>
-					        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=1'/>">
+					        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=1&paymentStatus=1'/>">
 					        	发明专利 (<c:out value='${patentTypeCount[(1).intValue()]["feeCount"]}' default="0"/>)
 					        </a>
 					        </li>
 					        
 					        <li>
-						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=2'/>">
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=2&paymentStatus=1'/>">
 						        	实用新型(<c:out value='${patentTypeCount[(2).intValue()]["feeCount"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 					        <li> 
-						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=3'/>">
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentType=3&paymentStatus=1'/>">
 						        	外观设计 (<c:out value='${patentTypeCount[(3).intValue()]["feeCount"]}' default="0"/>)
 						        </a>
 					        </li> 
@@ -100,19 +100,19 @@
 					    <div class="tag"  style="display:block;">
 					      <ul class="qxjk-ul">
 					      	<li>
-						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=1'/>">
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=1&paymentStatus=1'/>">
 						        	申请费 (<c:out value='${patentStatusCount[(1).intValue()]["feeCount"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 					        <li>
-						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=3'/>">
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=3&paymentStatus=1'/>">
 						        	年登印费 (<c:out value='${patentStatusCount[(3).intValue()]["feeCount"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 					        <li>
-						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=6'/>">
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&patentStatus=6&paymentStatus=1'/>">
 						        	专利权维持年费 (<c:out value='${patentStatusCount[(6).intValue()]["feeCount"]}' default="0"/>)
 						        </a>
 					        </li>
@@ -292,7 +292,7 @@
 							<td style="text-align:center"><a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a></td>
 							<td style="text-align:center">${fee.patent.name}</td>
 							<td style="text-align:center">${fee.patent.firstAppPerson}</td>
-							<td style="text-align:center">${fee.patent.patentStatus.statusDescription}</td>
+							<td style="text-align:center">${fee.patent.patentStatusText}</td>
 							<td style="text-align:center"><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
 							<td style="text-align:center">${fee.feeType}</td>
 							<td style="text-align:center">${fee.amount}</td>

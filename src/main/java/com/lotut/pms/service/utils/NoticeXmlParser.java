@@ -135,28 +135,32 @@ public class NoticeXmlParser {
 	}
 	
 	private static int getNoticeTypeByName(String noticeName) {
-	    if (noticeName.contains("受理")) {
+	    if (noticeName.contains("受理") || noticeName.contains("申请费") || noticeName.contains("费用减缓")) {
 	        return 1;
 	    }
 	    
-	    if (noticeName.contains("费")) {
+	    if (noticeName.contains("缴费") || noticeName.contains("恢复费")) {
 	        return 2;
 	    }
 	    
-	    if (noticeName.contains("补正") || noticeName.contains("审查")) {
+	    if (noticeName.contains("补正") || noticeName.contains("审查意见")) {
 	        return 3;
 	    }
 	    
-	    if (noticeName.contains("授权") || noticeName.contains("登记")) {
+	    if (noticeName.contains("授予") || noticeName.contains("登记")) {
 	    	return 4;
 	    }
 	    
-	    if (noticeName.contains("视为") || noticeName.contains("驳回") || noticeName.contains("终止")) {
+	    if (noticeName.contains("视为") || noticeName.contains("终止")) {
 	    	return 5;
 	    }
 
-	    if (noticeName.contains("合格")) {
+	    if (noticeName.contains("手续合格")) {
 	    	return 6;
+	    }
+	    
+	    if (noticeName.contains("驳回")) {
+	    	return 8;
 	    }
 
 	    return 7;

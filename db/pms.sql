@@ -358,12 +358,13 @@ VALUES
 INSERT INTO notice_types (notice_type_id, notice_type_desc)
 VALUES
 	(1, '新案受理'),
-	(2, '费用相关'),
+	(2, '缴费通知'),
 	(3, '补正审查'),
-	(4, '授权登记'),
+	(4, '专利授权'),
 	(5, '权利丧失'),
 	(6, '手续合格'),
-	(7, '其他');
+	(7, '其他'),
+	(8, '驳回决定');
 
 INSERT INTO patent_status (patent_status_id, patent_status_desc)
 VALUES
@@ -519,6 +520,9 @@ ALTER TABLE users ADD COLUMN visible_password VARCHAR(100);
 
 INSERT INTO groups VALUES(3, 'TRADER');
 INSERT INTO group_authorities VALUES (3, 'ROLE_TRADER');
-ALTER TABLE patents ADD COLUMN transaction_status VARCHAR(100);
 
 ALTER TABLE user_patents ADD COLUMN trash_status INT  DEFAULT 1;
+ALTER TABLE patents ADD COLUMN transaction_status VARCHAR(10);
+
+alter table friends add column remark_name varchar(50);
+

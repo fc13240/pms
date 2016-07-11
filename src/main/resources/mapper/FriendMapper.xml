@@ -3,8 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotut.pms.dao.mapper.FriendMapper">
-	<select id="getUserFriends" parameterType="int" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap">
-		select u.user_id, u.username, u.name,u.email,u.phone
+	<select id="getUserFriends" parameterType="int" resultType="Friend">
+		select u.user_id as friendId, u.username, u.name as realname,u.email,u.phone, f.remark_name as remarkName
 		  from friends f join users u on f.friend = u.user_id
 		 where user = #{userId};	
 	</select>
@@ -31,15 +31,15 @@
 		</where>
 	</select>
 	
-	<select id="searchUserFriends" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap">
+	<select id="searchUserFriends" resultType="Friend">
 		<if test="keyword != null and keyword != ''">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>		
-		select u.user_id, u.username, u.name
+		select u.user_id as friendId, u.username, u.name as realname, f.remark_name as remarkName
 		  from users u join friends f on u.user_id = f.friend	
 		 where f.user = #{userId}	
 		<if test="keyword != null and keyword != ''">
-			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern})
+			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern} or f.remark_name like #{keyword_pattern})
 		</if>
 	</select>	
 	
@@ -62,15 +62,19 @@
 		</if>	
 	</update>
 	
-	<select id="searchUserFriendsByUser" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap">
+	<select id="searchUserFriendsByUser" resultType="Friend">
 		<if test="keyword != null and keyword != ''">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>		
-		select u.user_id, u.username, u.name,u.email,u.phone
+		select u.user_id as friendId, u.username, u.name as realname,u.email,u.phone, f.remark_name as remarkName
 		  from users u join friends f on u.user_id = f.friend	
 		 where f.user = #{userId}	
 		<if test="keyword != null and keyword != ''">
-			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern})
+			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern} or f.remark_name like #{keyword_pattern})
 		</if>
 	</select>	
+	
+	<update id="updateRemarkName">
+		update friends set remark_name = #{remarkName} where user = #{userId} and friend = #{friendId}
+	</update>
 </mapper>
