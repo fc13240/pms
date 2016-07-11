@@ -40,14 +40,14 @@
 					  <input type="hidden"  name="id" value="${patentId}"/>
 					  <input type="hidden"  name="userId" value="${patent.ownerId}"/>
 					  <div style="margin-top:15px;"> 商品类型：
-						<select name="FirstColumn" id="first_column" style="width:121px;" class="form-control" onchange="loadSecoundColumns()" required>
+						<select name="FirstColumn" id="first_column" style="width:400px;" class="form-control" onchange="loadSecoundColumns()" required>
 						  <option value=''>请选择</option>
 						  <c:forEach items="${FirstColumns}" var="FirstColumn">
 							<option value="${FirstColumn.id}">${FirstColumn.name}</option>
 						  </c:forEach>
 						</select>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						<select name="SecondColumn" id="second_column"  style="width:121px;" class="form-control" required>
+						<select name="SecondColumn" id="second_column"  style="width:400px;" class="form-control" required>
 						  <option value=''>请选择</option>
 						</select>
 					  </div>
