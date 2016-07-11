@@ -62,15 +62,17 @@
 								<th>序号</th>
 								<th>用户名</th>
 								<th>姓名</th>
+								<th>备注名</th>
 							  </tr>
 							</thead>
 							<tbody>
 							  <c:forEach items="${friends}" var="friend" varStatus="status">
 								<tr>
-								  <td ><input name="friend" style="width:15px;" type="checkbox" class="check-item" friend="<c:out value='${friend.userId}'/>"></td>
+								  <td ><input name="friend" style="width:15px;" type="checkbox" class="check-item" friend="<c:out value='${friend.friendId}'/>"></td>
 								  <td>${status.count}</td>
 								  <td><c:out value="${friend.username}"/></td>
-								  <td><c:out value="${friend.name}"/></td>
+								  <td><c:out value="${friend.realname}"/></td>
+								  <td><c:out value="${friend.remarkName}"/></td>
 								</tr>
 							  </c:forEach>
 							
