@@ -42,7 +42,8 @@
 		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
 				left join patent_status ps on p.patent_status = ps.patent_status_id
-		 where f.fee_owner = #{userId} and f.patent in
+		 where f.fee_owner = #{userId} 
+		 	and f.fee_payment_status = 1 and f.patent in
 		 <foreach item="patentId" collection="patentIds" open="(" separator="," close=")">
 			 #{patentId}
 		 </foreach>		
@@ -59,7 +60,7 @@
 		       join fee_payment_status fp on f.fee_payment_status = fp.fee_payment_status_id
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
 				left join patent_status ps on p.patent_status = ps.patent_status_id left join patent_types pt on p.patent_type = pt.patent_type_id
-		  WHERE patent = (SELECT patent FROM fees WHERE fee_id = #{feeId}) AND fee_owner=#{userId}
+		  WHERE patent = (SELECT patent FROM fees WHERE fee_id = #{feeId}) AND fee_owner=#{userId} and f.fee_payment_status = 1
 	</select>
 	
 	
