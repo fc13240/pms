@@ -185,6 +185,7 @@
 			url:"<s:url value='/patent/recoverPatents.html'/>?patentIds=" + patentIds,
 			type:"get",
 				success: function(data) {
+					location.reload();
 					formutil.alertMessage('还原操作成功');	
 				},
 				error: function() {
@@ -212,6 +213,7 @@
 			url:"<s:url value='/patent/deleteForeverPatents.html'/>?patentIds=" + patentIds,
 			type:"get",
 				success: function(data) {
+					location.reload();
 					formutil.alertMessage('删除成功');	
 				},
 				error: function() {
