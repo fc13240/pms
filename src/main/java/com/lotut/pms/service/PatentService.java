@@ -80,5 +80,14 @@ public interface PatentService {
 	public void upTransactionPatent(int patentId);
 
 	public void deleteTransactionPatent(int patentId);
+	
+	void patentsTrash(List<Long> patentIds,int userId);
 
+	List<Patent> getPatentsRecycled(Page page);
+	
+	int getPatentsRecycledCount(int userId);
+	
+	void recoverPatents(List<Long> patentIds,int userId );
+	
+	void deleteForeverPatents(List<Long> patentIds,int userId);
 }
