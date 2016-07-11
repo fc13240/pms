@@ -20,4 +20,6 @@ public interface FriendDao {
 	void processFriendRequest(int processUserId, int requestUserId, int processStatus);
 	
 	List<User> searchUserFriendsByUser(int userId,String keyword);
+	
+	void updateRemarkName(int userId, int friendId, String remarkName);
 }

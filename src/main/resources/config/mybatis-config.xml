@@ -35,6 +35,7 @@
 		<typeAlias alias="FeeSearchCondition" type="com.lotut.pms.domain.FeeSearchCondition"/>
 		
 		<typeAlias alias="User" type="com.lotut.pms.domain.User"/>
+		<typeAlias alias="Friend" type="com.lotut.pms.domain.Friend"/>
 		<typeAlias alias="ContactAddress" type="com.lotut.pms.domain.ContactAddress"/>
 		<typeAlias alias="Page" type="com.lotut.pms.domain.Page"/>
 
