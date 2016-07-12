@@ -38,7 +38,6 @@
 					  	<input style="width:400px;" class="selectPointOfInterest form-control" readonly="true" type="text" style="height:25px;width:80px;" value="${patent.name}"/>
 					  </div>
 					  <input type="hidden"  name="id" value="${patentId}"/>
-					  <input type="hidden"  name="userId" value="${patent.ownerId}"/>
 					  <div style="margin-top:15px;"> 商品类型：
 						<select name="FirstColumn" id="first_column" style="width:400px;" class="form-control" onchange="loadSecoundColumns()" required>
 						  <option value=''>请选择</option>

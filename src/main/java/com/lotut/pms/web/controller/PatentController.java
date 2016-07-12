@@ -181,9 +181,9 @@ public class PatentController {
 		return "goods_form";
 	}	
 	@RequestMapping(path="/addGoods", method=RequestMethod.POST)
-	public String addGoods(@Valid GoodsDetail GoodsDetail, Model model) throws IOException {
-		
-		patentService.saveGoods(GoodsDetail);
+	public String addGoods(@Valid GoodsDetail goodDetail, Model model) throws IOException {
+		goodDetail.setUserId(PrincipalUtils.getCurrentUserId());
+		patentService.saveGoods(goodDetail);
 		
 		
 		return "goods_add_success";

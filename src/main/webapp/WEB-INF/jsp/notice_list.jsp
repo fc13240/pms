@@ -73,19 +73,19 @@
 					        
 					        <li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=2'/>">
-						        	已缴费/答复/处理 (<c:out value='${processStatusCount[(2).intValue()]["noticeCount"]}' default="0"/>)
+						        	初步处理 (<c:out value='${processStatusCount[(2).intValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 					        <li> 
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=3'/>">
-						        	放弃缴费/答复/处理 (<c:out value='${processStatusCount[(3).intValue()]["noticeCount"]}' default="0"/>)
+						        	放弃处理 (<c:out value='${processStatusCount[(3).intValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 					        <li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=4'/>">
-						       		完成缴费/答复/处理 (<c:out value='${processStatusCount[(4).intValue()]["noticeCount"]}' default="0"/>)
+						       		完成处理 (<c:out value='${processStatusCount[(4).intValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li> 
 					      </ul>	
@@ -306,12 +306,12 @@
 					  				</td>
 					  				<td>
 										<a href="javascript:return void" onclick="batchProcessNotice(2)">
-										<button style="width:100px;margin-left:10px;" class="button button-rounded button-highlight">置为已处理</button>
+										<button style="width:120px;margin-left:10px;" class="button button-rounded button-highlight">置为初步处理</button>
 										</a> 
 					  				</td>					  				
 					  				<td>
 									  	<a href="javascript:return void" onclick="batchProcessNotice(4)">
-										<button style="width:100px;margin-left:10px;" class="button button-action button-rounded">完成处理</button>
+										<button style="width:120px;margin-left:10px;" class="button button-action button-rounded">置为完成处理</button>
 										</a> 
 									</td>	
 					  				<td>
