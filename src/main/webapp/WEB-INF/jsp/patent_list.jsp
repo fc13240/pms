@@ -197,17 +197,17 @@
 							</a>
 						</td>
 					  	<td>
-							<a href="javascript:return void" onclick="batchShare()" style="margin-left:50px;">
+							<a href="javascript:return void" onclick="batchShare()" >
 							<button class="button button-primary  button-rounded">批量分享</button>
 							</a> 
 						</td>
 						<td>
-							<a href="javascript:return void" onclick="delectPatents()" style="margin-left:50px;">
+							<a href="javascript:return void" onclick="delectPatents()" >
 							<button class="button button-primary  button-rounded" style="width:70px;">删除</button>
 							</a> 
 						</td>
 						<td>
-							<a href="<s:url value='/patent/listByCreateTime.html'/>?currentPage=1"  style="margin-left:50px;">
+							<a href="<s:url value='/patent/listByCreateTime.html'/>?currentPage=1" >
 							<button class="button button-primary  button-rounded" style="width:90px;">添加日降序</button>
 							</a> 
 						</td>									
