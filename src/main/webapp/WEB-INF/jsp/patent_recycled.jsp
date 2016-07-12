@@ -185,11 +185,10 @@
 			url:"<s:url value='/patent/recoverPatents.html'/>?patentIds=" + patentIds,
 			type:"get",
 				success: function(data) {
-					location.reload();
-					formutil.alertMessage('还原操作成功');	
+					formutil.alertMessage('还原操作成功',true);	
 				},
 				error: function() {
-					formutil.alertMessage('还原操作失败');
+					formutil.alertMessage('还原操作失败',true);
 				}
 		});
 	}
@@ -213,11 +212,10 @@
 			url:"<s:url value='/patent/deleteForeverPatents.html'/>?patentIds=" + patentIds,
 			type:"get",
 				success: function(data) {
-					location.reload();
-					formutil.alertMessage('删除成功');	
+					formutil.alertMessage('删除成功',true);	
 				},
 				error: function() {
-					formutil.alertMessage('删除失败');
+					formutil.alertMessage('删除失败',true);
 				}
 		});
 	}

@@ -368,10 +368,10 @@
 			url:"<s:url value='/patent/deletePatents.html'/>?patentIds=" + patentIds,
 			type:"get",
 				success: function(data) {
-					formutil.alertMessage('删除操作成功');	
+					formutil.alertMessage('删除操作成功',true);	
 				},
 				error: function() {
-					formutil.alertMessage('删除操作失败');
+					formutil.alertMessage('删除操作失败',true);
 				}
 		});
 	}
