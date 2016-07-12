@@ -349,4 +349,16 @@ public class PatentController {
 		addPatentTypeAndStatusDataToModel(model);
 		return "patent_list";
 	}
+	
+	
+	@RequestMapping(path="/batchAddGoods", method=RequestMethod.GET)
+	public String batchAddGoods(@RequestParam("patentIds") List<Long> patentIds,Model model) throws IOException {
+/*		for(Long id: patentIds){
+			GoodsDetail goodDetail=new GoodsDetail();
+			goodDetail.setId(new Long(id).intValue());
+			goodDetail.setUserId(PrincipalUtils.getCurrentUserId());
+			patentService.saveGoods(goodDetail);
+		}*/
+		return "goods_add_success";
+	}		
 }

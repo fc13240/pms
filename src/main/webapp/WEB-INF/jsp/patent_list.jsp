@@ -210,7 +210,13 @@
 							<a href="<s:url value='/patent/listByCreateTime.html'/>?currentPage=1" >
 							<button class="button button-primary  button-rounded" style="width:90px;">添加日降序</button>
 							</a> 
-						</td>									
+						</td>
+						
+						 <td>
+							<a href="javascript:return void" onclick="batchAddGoods()" >
+							<button class="button button-primary  button-rounded" style="width:70px;">批量发布交易</button>
+							</a> 
+						</td>	 								
 					  	</tr>
 					  	</table>
 					  </div>
@@ -356,6 +362,39 @@
 		formutil.clickAllCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
 		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
 	});
+	
+	
+ 	function batchAddGoods() {
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		var uniquePatentNos = []
+		if (!patentSelected) {
+			formutil.alertMessage('请选择专利');
+			
+			return;
+		}
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+		for (var i = 0; i < patents_checked.length; i++) {
+			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+				uniquePatentNos.push(patents_checked[i]);
+			}
+		}		
+		var patentIds = uniquePatentNos.join(",");
+		$.ajax({
+			url:"<s:url value='/patent/batchAddGoods.html'/>?patentIds=" + patentIds,
+			type:"get",
+				success: function(data) {
+					formutil.alertMessage('批量发布成功',true);	
+				},
+				error: function() {
+					formutil.alertMessage('批量发布失败',true);
+				}
+		});
+	}
+	 
+	
+	
+	
+	
 	
 	function delectPatents() {
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');

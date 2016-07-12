@@ -474,5 +474,13 @@
 		 limit #{startIndex}, #{pageSize}) as sp left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
 		    join users u on u.user_id = up.user	
 		 order by sp.create_time desc
-	</select>		
+	</select>
+	
+	
+<!-- 	<insert id="batchSaveGoods" parameterType="GoodsDetail" >
+		insert into sell_patent_goods(patent_id, transaction_date, add_date, status, transaction_type, price, patent_second_column,owner)
+		values(#{id}, null,curdate(), 1, 1, #{price,javaType=int, jdbcType=INT}, 96,#{userId});
+		
+		update  patents set transaction_status='出售中' where patent_id=#{id}			
+	</insert> -->		
 </mapper>
