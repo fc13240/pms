@@ -53,12 +53,12 @@
 	驳回决定 
 	 </a>
 	</li>					        
-	 <li>
+	<!--  <li>
 	 <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=7&noticeProcessStatus=1'/>">
 	其他 
 	 </a>
 	</li>
-					 			
+		 -->			 			
   			
 	</ul>
 </div>	
