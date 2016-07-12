@@ -247,4 +247,9 @@ public class PatentServiceImpl implements PatentService {
 	public void deleteForeverPatents(List<Long> patentIds, int userId) {
 		patentDao.deleteForeverPatents(patentIds, userId);
 	}
+
+	@Override
+	public List<Patent> getUserPatentsByCreateTime(Page page) {
+		return patentDao.getUserPatentsByCreateTime(page);
+	}
 }

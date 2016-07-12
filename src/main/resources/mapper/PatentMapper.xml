@@ -25,6 +25,7 @@
 		<result property="internalCode" column="internal_code"/>
 		<result property="ownerId" column="patent_owner"/>
 		<result property="transactionStatus" column="transaction_status"/>
+		<result property="createTime" column="create_time"/>
 		<association property="patentStatus" resultMap="PatentStatusResultMap"/>
 		<association property="patentType" resultMap="PatentTypeResultMap"/>
 		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
@@ -56,13 +57,13 @@
 					 pt.patent_type_desc, ps.patent_status_id, ps.patent_status_desc, p.internal_code, u.user_id, u.username
 		  from patents p left join patent_types pt on p.patent_type = pt.patent_type_id left join patent_status ps on p.patent_status = ps.patent_status_id 
 			     join user_patents up on up.patent = p.patent_id join users u on u.user_id = up.user
-		 where up.patent in (select patent from user_patents where user = #{userId})	
+		 where up.patent in (select patent from user_patents where user = #{userId} and trash_status=1)	order by p.app_date desc
 	</sql>
 	
 	<select id="getUserPatents" parameterType="Page" resultMap="PatentWithShareUsers">
-		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, sp.patent_status_text,sp.transaction_status,pt.patent_type_id, 
+		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, sp.patent_status_text,sp.transaction_status,sp.create_time,pt.patent_type_id, 
 							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username
-		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date,  p.internal_code, p.patent_type,p.transaction_status,
+		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date,  p.internal_code, p.patent_type,p.transaction_status,p.create_time,
 				ps.patent_status_id, ps.patent_status_desc, p.patent_status_text
 			from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
 		 where up.user = #{userId} and up.trash_status=1
@@ -130,9 +131,9 @@
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
-		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date,sp.patent_status_text,sp.transaction_status, pt.patent_type_id, 
+		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date,sp.patent_status_text,sp.transaction_status,sp.create_time, pt.patent_type_id, 
 							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username
-		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, p.patent_type,p.transaction_status,
+		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, p.patent_type,p.transaction_status,p.create_time,
 				ps.patent_status_id, ps.patent_status_desc, p.patent_status_text
 				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
 		 		where up.user = #{userId} and up.trash_status=1
@@ -459,5 +460,19 @@
 			     open="(" separator="," close=")">
 			   #{patentId}
 			</foreach>		 
-	</delete>		
+	</delete>
+	
+	
+	<select id="getUserPatentsByCreateTime" parameterType="Page" resultMap="PatentWithShareUsers">
+		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, sp.patent_status_text,sp.transaction_status,sp.create_time,pt.patent_type_id, 
+							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username
+		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date,  p.internal_code, p.patent_type,p.transaction_status,p.create_time,
+				ps.patent_status_id, ps.patent_status_desc, p.patent_status_text
+			from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
+		 where up.user = #{userId} and up.trash_status=1
+		 order by p.create_time desc
+		 limit #{startIndex}, #{pageSize}) as sp left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
+		    join users u on u.user_id = up.user	
+		 order by sp.create_time desc
+	</select>		
 </mapper>

@@ -205,7 +205,12 @@
 							<a href="javascript:return void" onclick="delectPatents()" style="margin-left:50px;">
 							<button class="button button-primary  button-rounded" style="width:70px;">删除</button>
 							</a> 
-						</td>						
+						</td>
+						<td>
+							<a href="<s:url value='/patent/listByCreateTime.html'/>?currentPage=1"  style="margin-left:50px;">
+							<button class="button button-primary  button-rounded" style="width:90px;">添加日降序</button>
+							</a> 
+						</td>									
 					  	</tr>
 					  	</table>
 					  </div>
@@ -220,13 +225,15 @@
 						  <th class="center" width="35">序号</th>
 						  <th width="60">专利类型</th>
 						  <th width="110">申请号/专利号</th>
-						  <th width="170">专利名称</th>
+						  <th width="130">专利名称</th>
 						  <th width="90">第一申请人 </th>
 						  <th width="90" class="hidden-480"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申请日</th>
 						  <th width="60">缴年费日</th>
+						  <th width="60">添加日</th>
 						  <th width="70">案件状态</th>
 						  <th width="50">内部编码</th>
 						  <th width="90">共享人</th>
+
 						  <th width="80">操作</th>
 						</tr>
 					  </thead>
@@ -244,6 +251,7 @@
 							<td style="text-align:center"><c:out value="${patent.appPerson}"/></td>
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
 							<td class="hidden-480 fee_date" fee_date="${patent.appDate}" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="M月dd日"/></td>
+							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							<td style="text-align:center"><c:out value="${patent.patentStatusText}"/></td>
 							<td style="text-align:center"><input style="width:60px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
 							</td>

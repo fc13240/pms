@@ -216,4 +216,9 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		patentMapper.deleteForeverPatents(patentIds, userId);
 		
 	}
+
+	@Override
+	public List<Patent> getUserPatentsByCreateTime(Page page) {
+		return patentMapper.getUserPatentsByCreateTime(page);
+	}
 }

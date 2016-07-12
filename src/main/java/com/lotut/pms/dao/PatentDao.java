@@ -80,4 +80,6 @@ public interface PatentDao {
 	void recoverPatents(List<Long> patentIds,int userId );
 	
 	void deleteForeverPatents(List<Long> patentIds,int userId);
+	
+	List<Patent> getUserPatentsByCreateTime(Page page);
 }

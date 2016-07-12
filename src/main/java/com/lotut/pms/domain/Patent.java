@@ -1,5 +1,7 @@
 package com.lotut.pms.domain;
 
+
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,9 +30,18 @@ public class Patent {
 	private String proxyOrg;
 	private String transactionStatus;
 	private List<User> shareUsers;
+	private Timestamp createTime;
 	
 	
 	
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
+
 	public String getTransactionStatus() {
 		return transactionStatus;
 	}

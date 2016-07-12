@@ -326,4 +326,27 @@ public class PatentController {
 		patentService.deleteForeverPatents(patentIds, userId);
 		writer.write(1);
 	}
+	
+	
+	@RequestMapping(path="/listByCreateTime", method=RequestMethod.GET)
+	public String getUserPatentsByCreateTime(Model model, Page page, HttpSession session) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		//分页相关
+		int totalCount=(int)patentService.getPatentsCount(userId);
+		page.setTotalRecords(totalCount);
+		Map<String, Map<String, String>> patentTypeCount=patentService.getUserPatentCountByType(userId);
+		Map<String, Map<String, String>> patentStatusCount=patentService.searchUserPatentsByPatentStatus(userId);
+		List<Patent> patents = patentService.getUserPatentsByCreateTime(page);
+		model.addAttribute("patents", patents);
+		model.addAttribute("page", page);
+		model.addAttribute("patentTypeCount", patentTypeCount);
+		model.addAttribute("patentStatusCount", patentStatusCount);
+		addPatentTypeAndStatusDataToModel(model);
+		return "patent_list";
+	}
 }
