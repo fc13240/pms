@@ -116,7 +116,7 @@ public class FeeServiceImpl implements FeeService {
 		grabResultMap.put("patent", patents.get(0));
 		grabResultMap.put("fees", resultFees);
 		grabResultMap.put("paidFees", paidRecordsMap.get(patents.get(0)));
-		
+		System.out.println(grabResultMap.values());
 		return grabResultMap;
 	}
 	

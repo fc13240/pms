@@ -257,8 +257,7 @@
 			url: "<s:url value='/patent/downTransactionPatent.html'/>?patentId=" + patentId,
 			type: 'get', 
 			success: function(data) {
-				location.reload();
-				formutil.alertMessage('下架成功');
+				formutil.alertMessage('下架成功',true);
 			}
 		});	
 	}	
@@ -267,8 +266,7 @@
 		$.ajax({
 			url: "<s:url value='/patent/deleteTransactionPatent.html'/>?patentId=" + patentId, 
 			success: function(data) {
-				location.reload();
-				formutil.alertMessage('删除成功');
+				formutil.alertMessage('删除成功',true);
 				
 			}
 
@@ -280,8 +278,7 @@
 		$.ajax({
 			url: "<s:url value='/patent/upTransactionPatent.html'/>?patentId=" + patentId, 
 			success: function(data) {
-				location.reload();
-				formutil.alertMessage('上架成功');
+				formutil.alertMessage('上架成功',true);
 			}
 		});	
 	}		

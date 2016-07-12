@@ -21,6 +21,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.lotut.pms.domain.Patent;
+import com.mchange.v2.cfg.PropertiesConfigSource.Parse;
 
 public class FeeCrawler {
 	private List<Patent> patents;
@@ -72,8 +73,7 @@ public class FeeCrawler {
 	}
 	
 		
-	public static void main(String[] args) throws Exception {
-	}
+	
 	
 	private Map<String, List<List<String>>> getFeeRecords(Patent patent) {
 		Map<String, List<List<String>>> feeRecordsMap = new HashMap<>();
@@ -138,7 +138,7 @@ public class FeeCrawler {
 		
 		feeRecordsMap.put("shouldPay", shouldPayRecords);
 		feeRecordsMap.put("paid", paidRecords);
-		
+		System.out.println(feeRecordsMap);
 		return feeRecordsMap;
 	}
 	
@@ -198,7 +198,7 @@ public class FeeCrawler {
 		return b2.toString().split(",");
 	}
 	
-	private String grabFeeHtml(String appNo, boolean isUnpublisedPatent) {
+	public String grabFeeHtml(String appNo, boolean isUnpublisedPatent) {
 		final String host = "cpquery.sipo.gov.cn";
 		final String feeQueryPath = "/txnQueryFeeData.do";
 		URIBuilder uriBuilder = new URIBuilder()
@@ -262,4 +262,11 @@ public class FeeCrawler {
 	        super(cause);
 	    }
 	}	
+//	public static Map<String, List<List<String>>> main(String[] args) throws Exception {
+//		String appNo="87216690";
+//		String html=grabFeeHtml(appNo , false);
+//		return parseHtml(html);
+//		
+//		
+//	}
 }

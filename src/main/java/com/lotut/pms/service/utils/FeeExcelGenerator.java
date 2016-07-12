@@ -60,11 +60,7 @@ public class FeeExcelGenerator {
 		appNoCell.setCellValue(fee.getPatent().getAppNo());
 		userCell.setCellValue(fee.getInvoiceTitle());
 		feeNameCell.setCellValue(fee.getFeeType());
-		feeCodeCell.setCellValue(getFeeCode(fee.getPatent().getPatentType().getPatentTypeId(), fee.getFeeType()));
+		feeCodeCell.setCellValue(FeeTypeCode.getFeeCodeByType(fee.getFeeType().trim()));
 		amountCell.setCellValue(fee.getAmount());
-	}
-	
-	private static String getFeeCode(int patentType, String feeType) {
-		return FeeTypeCode.getFeeCodeByType(patentType, feeType);
 	}
 }

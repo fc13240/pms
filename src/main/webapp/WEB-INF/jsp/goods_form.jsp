@@ -38,7 +38,6 @@
 					  	<input style="width:400px;" class="selectPointOfInterest form-control" readonly="true" type="text" style="height:25px;width:80px;" value="${patent.name}"/>
 					  </div>
 					  <input type="hidden"  name="id" value="${patentId}"/>
-					  <input type="hidden"  name="userId" value="${patent.ownerId}"/>
 					  <div style="margin-top:15px;"> 商品类型：
 						<select name="FirstColumn" id="first_column" style="width:400px;" class="form-control" onchange="loadSecoundColumns()" required>
 						  <option value=''>请选择</option>
@@ -57,7 +56,7 @@
 					  	<input type="radio" name="transactionType" value="2" >许可
 					  </div>
 					  <div style="margin-top:15px;"> 价格：
-						<input style="width:400px;" class="selectPointOfInterest form-control" type="text" style="height:25px;width:80px;" name="price" id="price"/>
+						<input style="width:400px;" class="selectPointOfInterest form-control" type="text" style="height:25px;width:80px;" name="price" id="price" required/>
 					  </div>
 					  <div style="margin-top:15px;">
 						<button style="margin:8px;" type="submit" class="btn btn-info btn-sm">出售</button>

@@ -181,9 +181,9 @@ public class PatentController {
 		return "goods_form";
 	}	
 	@RequestMapping(path="/addGoods", method=RequestMethod.POST)
-	public String addGoods(@Valid GoodsDetail GoodsDetail, Model model) throws IOException {
-		
-		patentService.saveGoods(GoodsDetail);
+	public String addGoods(@Valid GoodsDetail goodDetail, Model model) throws IOException {
+		goodDetail.setUserId(PrincipalUtils.getCurrentUserId());
+		patentService.saveGoods(goodDetail);
 		
 		
 		return "goods_add_success";
@@ -325,5 +325,28 @@ public class PatentController {
 		int userId = PrincipalUtils.getCurrentUserId();
 		patentService.deleteForeverPatents(patentIds, userId);
 		writer.write(1);
+	}
+	
+	
+	@RequestMapping(path="/listByCreateTime", method=RequestMethod.GET)
+	public String getUserPatentsByCreateTime(Model model, Page page, HttpSession session) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		//分页相关
+		int totalCount=(int)patentService.getPatentsCount(userId);
+		page.setTotalRecords(totalCount);
+		Map<String, Map<String, String>> patentTypeCount=patentService.getUserPatentCountByType(userId);
+		Map<String, Map<String, String>> patentStatusCount=patentService.searchUserPatentsByPatentStatus(userId);
+		List<Patent> patents = patentService.getUserPatentsByCreateTime(page);
+		model.addAttribute("patents", patents);
+		model.addAttribute("page", page);
+		model.addAttribute("patentTypeCount", patentTypeCount);
+		model.addAttribute("patentStatusCount", patentStatusCount);
+		addPatentTypeAndStatusDataToModel(model);
+		return "patent_list";
 	}
 }

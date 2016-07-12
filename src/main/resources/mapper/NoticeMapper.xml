@@ -75,7 +75,7 @@
 						left join users pu on pu.user_id = n.process_user
 						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
 						join notice_process_status nps on nps.notice_process_status_id = n.process_status
-			 where n.patent in (select patent from user_patents where user = #{userId}) and n.process_status=1
+			 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1) and n.process_status=1
 			  order by n.dispatch_date desc, p.app_person, p.patent_id
 				limit #{startIndex}, #{pageSize}) as un
 			join user_patents up on un.patent_id = up.patent
@@ -124,7 +124,7 @@
 			join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
 			join notice_process_status nps on nps.notice_process_status_id = n.process_status
 		 where p.patent_type = #{patentType}
-		   and n.patent in (select patent from user_patents where user = #{userId})	
+		   and n.patent in (select patent from user_patents where user = #{userId} and trash_status=1)	
 	</select>	
 	
 	<select id="getUserNoticesByType" resultMap="NoticeResultMap">
@@ -143,7 +143,7 @@
 			join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
 			join notice_process_status nps on nps.notice_process_status_id = n.process_status
 		 where n.notice_type = #{noticeType}
-		   and n.patent in (select patent from user_patents where user = #{userId})	
+		   and n.patent in (select patent from user_patents where user = #{userId} and trash_status=1)	
 	</select>
 	
 	
@@ -154,7 +154,7 @@
 		select count(*) 
 		  from notices n join patents p on n.patent = p.patent_id
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
-		 where patent in (select patent from user_patents where user = #{userId})	
+		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1)	
 		 	<if test="patentType != null">
 		 		and p.patent_type = #{patentType}
 		 	</if>	
@@ -220,7 +220,7 @@
 						left join users pu on pu.user_id = n.process_user
 						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
 						join notice_process_status nps on nps.notice_process_status_id = n.process_status
-			 where n.patent in (select patent from user_patents where user = #{userId})
+			 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1)
 			 	<if test="patentType != null">
 			 		and p.patent_type = #{patentType}
 			 	</if>	
@@ -336,7 +336,7 @@
 		select p.patent_type patentType,count(*) noticeCount
 		  from notices n join patents p on n.patent = p.patent_id
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
-		 where patent in (select patent from user_patents where user = #{userId}) and n.process_status=1	
+		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1) and n.process_status=1	
 		 GROUP BY p.patent_type
 	</select>
 	
@@ -344,7 +344,7 @@
 		select n.notice_type noticeType,count(*) noticeCount
 		  from notices n join patents p on n.patent = p.patent_id
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
-		 where patent in (select patent from user_patents where user = #{userId}) and n.process_status=1	
+		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1) and n.process_status=1	
 		 GROUP BY n.notice_type
 	</select>
 	
@@ -352,7 +352,7 @@
 		select n.process_status processStatus,count(*) noticeCount
 		  from notices n join patents p on n.patent = p.patent_id
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
-		 where patent in (select patent from user_patents where user = #{userId})
+		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1)
 		 GROUP BY n.process_status
 	</select>
 	
@@ -360,7 +360,7 @@
 		select n.paper_apply_type paperApplyType,count(*) noticeCount
 		  from notices n join patents p on n.patent = p.patent_id
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
-		 where patent in (select patent from user_patents where user = #{userId})	
+		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1)	
 		 GROUP BY n.paper_apply_type
 	</select>
 	
@@ -374,7 +374,7 @@
 			else 5
 		end as remain_day_type, count(*)
   		from notices n 
- 		where n.patent in (select patent from user_patents where user =#{userid}) and n.process_status=1
+ 		where n.patent in (select patent from user_patents where user =#{userid} and trash_status=1) and n.process_status=1
  		group by remain_day_type
 	</select>		
 </mapper>
