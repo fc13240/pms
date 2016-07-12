@@ -221,4 +221,16 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	public List<Patent> getUserPatentsByCreateTime(Page page) {
 		return patentMapper.getUserPatentsByCreateTime(page);
 	}
+
+	@Override
+	public void batchSaveGoods(List<Long> patentIds, int userId) {
+		patentMapper.batchSaveGoods(patentIds, userId);
+		
+	}
+
+	@Override
+	public void updatePatentsGoodsStatus(List<Long> patentIds) {
+		patentMapper.updatePatentsGoodsStatus(patentIds);
+		
+	}
 }

@@ -82,4 +82,8 @@ public interface PatentDao {
 	void deleteForeverPatents(List<Long> patentIds,int userId);
 	
 	List<Patent> getUserPatentsByCreateTime(Page page);
+	
+	void batchSaveGoods(List<Long> patentIds,int userId);
+	
+	void updatePatentsGoodsStatus(List<Long> patentIds);
 }

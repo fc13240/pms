@@ -252,4 +252,16 @@ public class PatentServiceImpl implements PatentService {
 	public List<Patent> getUserPatentsByCreateTime(Page page) {
 		return patentDao.getUserPatentsByCreateTime(page);
 	}
+
+	@Override
+	public void batchSaveGoods(List<Long> patentIds, int userId) {
+		patentDao.batchSaveGoods(patentIds, userId);
+		
+	}
+
+	@Override
+	public void updatePatentsGoodsStatus(List<Long> patentIds) {
+		patentDao.updatePatentsGoodsStatus(patentIds);
+		
+	}
 }

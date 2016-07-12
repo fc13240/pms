@@ -477,10 +477,20 @@
 	</select>
 	
 	
-<!-- 	<insert id="batchSaveGoods" parameterType="GoodsDetail" >
+ 	<insert id="batchSaveGoods"  >
 		insert into sell_patent_goods(patent_id, transaction_date, add_date, status, transaction_type, price, patent_second_column,owner)
-		values(#{id}, null,curdate(), 1, 1, #{price,javaType=int, jdbcType=INT}, 96,#{userId});
-		
-		update  patents set transaction_status='出售中' where patent_id=#{id}			
-	</insert> -->		
+		values 
+		<foreach item="patentId" collection="patentIds"
+			     open="(" separator="," close=")">
+		(#{patentId}, null,curdate(), 1, 1, null, 96,#{userId});
+		</foreach>
+	</insert>
+	
+	<update id="updatePatentsGoodsStatus"  >
+		update  patents set transaction_status='出售中' where patent_id in
+			<foreach item="patentId" collection="patentIds"
+			     open="(" separator="," close=")">
+			   #{patentId}
+			</foreach>		 
+	</update>		
 </mapper>

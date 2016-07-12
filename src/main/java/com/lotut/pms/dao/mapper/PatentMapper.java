@@ -96,4 +96,8 @@ public interface PatentMapper {
 	void deleteForeverPatents(@Param("patentIds")List<Long> patentIds,@Param("userId")int userId);
 	
 	List<Patent> getUserPatentsByCreateTime(Page page);
+	
+	void batchSaveGoods(List<Long> patentIds,int userId);
+	
+	void updatePatentsGoodsStatus(@Param("patentIds")List<Long> patentIds);
 }

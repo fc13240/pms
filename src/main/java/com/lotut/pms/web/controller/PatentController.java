@@ -353,12 +353,9 @@ public class PatentController {
 	
 	@RequestMapping(path="/batchAddGoods", method=RequestMethod.GET)
 	public String batchAddGoods(@RequestParam("patentIds") List<Long> patentIds,Model model) throws IOException {
-/*		for(Long id: patentIds){
-			GoodsDetail goodDetail=new GoodsDetail();
-			goodDetail.setId(new Long(id).intValue());
-			goodDetail.setUserId(PrincipalUtils.getCurrentUserId());
-			patentService.saveGoods(goodDetail);
-		}*/
+			int userId=PrincipalUtils.getCurrentUserId();
+			patentService.batchSaveGoods(patentIds, userId);
+			patentService.updatePatentsGoodsStatus(patentIds);
 		return "goods_add_success";
 	}		
 }
