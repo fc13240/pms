@@ -59,5 +59,9 @@ public class FriendMybatisDao extends SqlSessionDaoSupport implements FriendDao 
 	public List<User> searchUserFriendsByUser(int userId, String keyword) {
 		return friendMapper.searchUserFriendsByUser(userId, keyword);
 	}
-
+	
+	@Override
+	public void updateRemarkName(int userId, int friendId, String remarkName) {
+		friendMapper.updateRemarkName(userId, friendId, remarkName);
+	}
 }

@@ -45,6 +45,7 @@
 					        <th>姓名</th>
 					        <th>邮箱</th>
 					        <th>电话</th>
+					        <th width="260px">备注名</th>
 					        <th>操作</th>
 					      </tr>
 					    </thead>
@@ -53,10 +54,11 @@
 					        <tr>
 					          <td style="text-align:center">${status.count}</td>
 					          <td style="text-align:center"><c:out value="${friend.username}"/></td>
-					          <td style="text-align:center"><c:out value="${friend.name}"/></td>
+					          <td style="text-align:center"><c:out value="${friend.realname}"/></td>
 					          <td style="text-align:center"><c:out value="${friend.email}"/></td>
 					          <td style="text-align:center"><c:out value="${friend.phone}"/></td>
-					          <td style="text-align:center"><a  href="<s:url value='/friend/delete/'/><c:out value='${friend.userId}.html'/>">删除好友</a></td>
+					          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${friend.remarkName}' onChange="changeRemarkName('<c:out value='${friend.friendId}'/>', this.value)"/></td>
+					          <td style="text-align:center"><a  href="<s:url value='/friend/delete/'/><c:out value='${friend.friendId}.html'/>">删除好友</a></td>
 					        </tr>
 					      </c:forEach>
 					    </tbody>
@@ -73,5 +75,16 @@
 	</div>
 
 </div>
+<script type="text/javascript">
+function changeRemarkName(friendId, remarkName) {
+	$.ajax({
+		url: "<s:url value='/friend/changeRemarkName.html'/>?friendId=" + friendId + "&remarkName=" + remarkName, 
+		type: 'get', 
+		error: function() {
+			formutil.alertMessage('修改失败，请稍后重试!');
+		}
+	});	
+}
+</script>
 </body>
 </html>

@@ -34,22 +34,24 @@
 				<div class="lt-box" style="padding:20px;">
 					<form action="<s:url value='/patent/addGoods.html'/>" method="post">
 					  <se:csrfInput/>
-					  <div style="margin-top:15px;">专利名  ：${patent.name}</div>
+					  <div style="margin-top:15px;">专利名:
+					  	<input style="width:400px;" class="selectPointOfInterest form-control" readonly="true" type="text" style="height:25px;width:80px;" value="${patent.name}"/>
+					  </div>
 					  <input type="hidden"  name="id" value="${patentId}"/>
-					  <input type="hidden"  name="userId" value="${patent.ownerId}"/>
 					  <div style="margin-top:15px;"> 商品类型：
-						<select name="FirstColumn" id="first_column" onchange="loadSecoundColumns()" required>
+						<select name="FirstColumn" id="first_column" style="width:400px;" class="form-control" onchange="loadSecoundColumns()" required>
 						  <option value=''>请选择</option>
 						  <c:forEach items="${FirstColumns}" var="FirstColumn">
 							<option value="${FirstColumn.id}">${FirstColumn.name}</option>
 						  </c:forEach>
 						</select>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						<select name="SecondColumn" id="second_column"  required>
+						<select name="SecondColumn" id="second_column"  style="width:400px;" class="form-control" required>
 						  <option value=''>请选择</option>
 						</select>
 					  </div>
-					  <div>
+					  <div style="margin-top:15px;"> 交易类型:
+					    
 					  	<input type="radio" name="transactionType" value="1" checked="checked">转让
 					  	<input type="radio" name="transactionType" value="2" >许可
 					  </div>

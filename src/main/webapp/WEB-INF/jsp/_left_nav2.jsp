@@ -23,11 +23,9 @@
 	<h5>自动更新</h5>
 	</a> 
 	</li>
-	 <se:authorize access="hasRole('ROLE_TRADER')"> 
-  	<li  class=""> <a href="<s:url value='/patent/getUserTransactionPatents.html'/>">
-	<h5>商品列表</h5>
+	<li  class=""> <a href="<s:url value='/patent/patentRecycled.html?currentPage=1'/>">
+	<h5>回收站</h5>
 	</a> 
-	</li>
-	 </se:authorize>			
+	</li>	
 	</ul>
 </div>

@@ -35,6 +35,9 @@
 	        <li><a href="<s:url value='/patent/list.html?currentPage=1'/>">我的专利</a></li>
 	        <li><a href="<s:url value='/notice/list.html?currentPage=1'/>" >通知书</a></li>
 	        <li><a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>" >专利交费</a></li>
+	         <se:authorize access="hasRole('ROLE_TRADER')">
+	        <li><a href="<s:url value='/patent/getUserTransactionPatents.html?currentPage=1'/>" >专利交易</a></li>
+	        </se:authorize>
 	        <li><a href="<s:url value='/friend/list.html'/>">我的好友</a></li>
 	        <li><a href="<s:url value='/user/detail.html'/>">用户中心</a></li>
 	        <li><a href="<s:url value='/user/instructions.html'/>">操作指南</a></li>

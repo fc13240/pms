@@ -50,7 +50,7 @@
 						<td>${patent.appNo}</td>
 						<td>${patent.name}</td>
 						<td>${patent.firstAppPerson}</td>
-						<td>${patent.patentStatus.statusDescription}</td>
+						<td>${patent.patentStatusText}</td>
 					  </tr>
 					</table>
 				

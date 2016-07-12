@@ -20,4 +20,6 @@ public interface FriendService {
 	void processFriendRequest(int processUserId, int requestUserId, int processStatus);
 	
 	List<User> searchUserFriendsByUser(int userId, String keyword);
+	
+	void changeRemarkName(int userId, int friendId, String remarkName);
 }

@@ -43,7 +43,7 @@
 						<td>${fees[0].patent.appNo}</td>
 						<td>${fees[0].patent.name}</td>
 						<td>${fees[0].patent.firstAppPerson}</td>
-						<td>${fees[0].patent.patentStatus.statusDescription}</td>
+						<td>${fees[0].patent.patentStatusText}</td>
 					  </tr>
 					</table>
 					<table class="table table-bordered patent-table table-striped">

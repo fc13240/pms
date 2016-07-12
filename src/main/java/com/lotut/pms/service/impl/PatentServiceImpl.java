@@ -220,4 +220,31 @@ public class PatentServiceImpl implements PatentService {
 	public void deleteTransactionPatent(int patentId) {
 		patentDao.deleteTransactionPatent(patentId);
 	}
+
+	@Override
+	public void patentsTrash(List<Long> patentIds,int userId) {
+		patentDao.patentsTrash(patentIds,userId);
+		
+	}
+
+	@Override
+	public List<Patent> getPatentsRecycled(Page page) {
+		return patentDao.getPatentsRecycled(page);
+	}
+
+	@Override
+	public int getPatentsRecycledCount(int userId) {
+		return patentDao.getPatentsRecycledCount(userId);
+	}
+
+	@Override
+	public void recoverPatents(List<Long> patentIds, int userId) {
+		patentDao.recoverPatents(patentIds, userId);
+		
+	}
+
+	@Override
+	public void deleteForeverPatents(List<Long> patentIds, int userId) {
+		patentDao.deleteForeverPatents(patentIds, userId);
+	}
 }

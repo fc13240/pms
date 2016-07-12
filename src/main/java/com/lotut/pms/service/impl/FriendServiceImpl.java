@@ -58,4 +58,8 @@ public class FriendServiceImpl implements FriendService {
 		return friendDao.searchUserFriendsByUser(userId,keyword);
 	}
 
+	@Override
+	public void changeRemarkName(int userId, int friendId, String remarkName) {
+		friendDao.updateRemarkName(userId, friendId, remarkName);
+	}
 }

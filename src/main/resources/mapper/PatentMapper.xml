@@ -31,7 +31,7 @@
 	</resultMap>
 	
 	<select id="getUserPatentCount" resultType="int">
-		select count(*) from user_patents where user = #{userId}
+		select count(*) from user_patents where user = #{userId} and trash_status=1
 	</select>
 	
 	<select id="getUserPatentIdsByPage" parameterType="int" resultType="int">
@@ -65,7 +65,7 @@
 		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date,  p.internal_code, p.patent_type,p.transaction_status,
 				ps.patent_status_id, ps.patent_status_desc, p.patent_status_text
 			from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
-		 where up.user = #{userId}
+		 where up.user = #{userId} and up.trash_status=1
 		 order by p.app_date desc, p.app_person, p.patent_name
 		 limit #{startIndex}, #{pageSize}) as sp left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
 		    join users u on u.user_id = up.user	
@@ -135,7 +135,7 @@
 		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, p.patent_type,p.transaction_status,
 				ps.patent_status_id, ps.patent_status_desc, p.patent_status_text
 				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
-		 		where up.user = #{userId}
+		 		where up.user = #{userId} and up.trash_status=1
 		 		<if test="patentType != null">
 		 			and p.patent_type = #{patentType}
 		 		</if>	
@@ -166,7 +166,7 @@
 		</if>	
 		 select Count(*)
 		 from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
-		 where up.user = #{userId}
+		 where up.user = #{userId} and up.trash_status=1
 		 		<if test="patentType != null">
 		 			and p.patent_type = #{patentType}
 		 		</if>	
@@ -417,5 +417,47 @@
 		
 		update  patents set transaction_status=null where patent_id=#{patentId}
 	</delete>	
-		
+	
+	
+	<update id="patentsTrash"  >
+		update user_patents up set up.trash_status=2
+		 where up.user=#{userId} and up.patent in 
+			<foreach item="patentId" collection="patentIds"
+			     open="(" separator="," close=")">
+			   #{patentId}
+			</foreach>		 
+	</update>	
+	
+	<select id="getPatentsRecycled" parameterType="Page" resultMap="PatentWithShareUsers">
+		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, sp.patent_status_text,sp.transaction_status,pt.patent_type_id, 
+							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username
+		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date,  p.internal_code, p.patent_type,p.transaction_status,
+				ps.patent_status_id, ps.patent_status_desc, p.patent_status_text
+			from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
+		 where up.user = #{userId} and up.trash_status=2
+		 order by p.app_date desc, p.app_person, p.patent_name
+		 limit #{startIndex}, #{pageSize}) as sp left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
+		    join users u on u.user_id = up.user	
+		 order by sp.app_date desc, sp.app_person, sp.patent_name
+	</select>
+	
+	<select id="getPatentsRecycledCount" resultType="int">
+		select count(*) from user_patents where user = #{userId} and trash_status=2
+	</select>
+	
+	<update id="recoverPatents"  >
+		update user_patents up set up.trash_status=1
+		 where up.user=#{userId} and up.patent in 
+			<foreach item="patentId" collection="patentIds"
+			     open="(" separator="," close=")">
+			   #{patentId}
+			</foreach>		 
+	</update>
+	<delete id="deleteForeverPatents">
+		delete from user_patents  where user = #{userId} and patent in 
+			<foreach item="patentId" collection="patentIds"
+			     open="(" separator="," close=")">
+			   #{patentId}
+			</foreach>		 
+	</delete>		
 </mapper>

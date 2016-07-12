@@ -97,4 +97,10 @@ public class FriendController {
 		return "friend_list";
 	}
 	
+	@RequestMapping(path="/changeRemarkName", method=RequestMethod.GET)
+	public String changeRemarkName(int friendId, String remarkName) {
+		int userId=PrincipalUtils.getCurrentUserId();
+		friendService.changeRemarkName(userId, friendId, remarkName);
+		return "friend_list";
+	}
 }

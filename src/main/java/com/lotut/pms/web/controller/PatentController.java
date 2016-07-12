@@ -181,9 +181,9 @@ public class PatentController {
 		return "goods_form";
 	}	
 	@RequestMapping(path="/addGoods", method=RequestMethod.POST)
-	public String addGoods(@Valid GoodsDetail GoodsDetail, Model model) throws IOException {
-		
-		patentService.saveGoods(GoodsDetail);
+	public String addGoods(@Valid GoodsDetail goodDetail, Model model) throws IOException {
+		goodDetail.setUserId(PrincipalUtils.getCurrentUserId());
+		patentService.saveGoods(goodDetail);
 		
 		
 		return "goods_add_success";
@@ -288,5 +288,42 @@ public class PatentController {
 	public void deleteTransactionPatents(@RequestParam("patentId") int patentId,PrintWriter writer){
 		patentService.deleteTransactionPatent(patentId);
 		writer.write(1);
-	}	
+	}
+	
+	@RequestMapping(path="/deletePatents", method=RequestMethod.GET)
+	public void deletePatents(@RequestParam("patentIds") List<Long> patentIds,PrintWriter writer){
+		int userId = PrincipalUtils.getCurrentUserId();
+		patentService.patentsTrash(patentIds,userId);
+		writer.write(1);
+	}
+	
+	@RequestMapping(path="/patentRecycled", method=RequestMethod.GET)
+	public String patentRecycled(Model model, Page page, HttpSession session){
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=patentService.getPatentsRecycledCount(userId);
+		page.setTotalRecords(totalCount);
+		List<Patent> patents=patentService.getPatentsRecycled(page);
+		model.addAttribute("patents", patents);
+		model.addAttribute("page", page);
+		return "patent_recycled";
+	}
+	@RequestMapping(path="/recoverPatents", method=RequestMethod.GET)
+	public void recoverPatent(@RequestParam("patentIds") List<Long> patentIds,PrintWriter writer){
+		int userId = PrincipalUtils.getCurrentUserId();
+		patentService.recoverPatents(patentIds, userId);
+		writer.write(1);
+		
+	}
+	
+	@RequestMapping(path="/deleteForeverPatents", method=RequestMethod.GET)
+	public void deleteForeverPatents(@RequestParam("patentIds") List<Long> patentIds,PrintWriter writer){
+		int userId = PrincipalUtils.getCurrentUserId();
+		patentService.deleteForeverPatents(patentIds, userId);
+		writer.write(1);
+	}
 }

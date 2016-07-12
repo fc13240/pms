@@ -200,6 +200,11 @@
 							<a href="javascript:return void" onclick="batchShare()" style="margin-left:50px;">
 							<button class="button button-primary  button-rounded">批量分享</button>
 							</a> 
+						</td>
+						<td>
+							<a href="javascript:return void" onclick="delectPatents()" style="margin-left:50px;">
+							<button class="button button-primary  button-rounded" style="width:70px;">删除</button>
+							</a> 
 						</td>						
 					  	</tr>
 					  	</table>
@@ -238,13 +243,13 @@
 							<td class="hidden-480" style="text-align:center"><c:out value="${patent.name}"/></td>
 							<td style="text-align:center"><c:out value="${patent.appPerson}"/></td>
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
-							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="M月dd日"/></td>
+							<td class="hidden-480 fee_date" fee_date="${patent.appDate}" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="M月dd日"/></td>
 							<td style="text-align:center"><c:out value="${patent.patentStatusText}"/></td>
 							<td style="text-align:center"><input style="width:60px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
 							</td>
 							<td style="text-align:center"><c:out value="${patent.shareUsersAsString}"/>
 							</td>
-							<td ><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
+							<td style="text-align:center"><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
 							  分享
 							  </a>&nbsp;
 							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
@@ -344,6 +349,61 @@
 		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
 	});
 	
+	function delectPatents() {
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		var uniquePatentNos = []
+		if (!patentSelected) {
+			formutil.alertMessage('请选择专利');
+			
+			return;
+		}
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+		for (var i = 0; i < patents_checked.length; i++) {
+			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+				uniquePatentNos.push(patents_checked[i]);
+			}
+		}		
+		var patentIds = uniquePatentNos.join(",");
+		$.ajax({
+			url:"<s:url value='/patent/deletePatents.html'/>?patentIds=" + patentIds,
+			type:"get",
+				success: function(data) {
+					formutil.alertMessage('删除操作成功',true);	
+				},
+				error: function() {
+					formutil.alertMessage('删除操作失败',true);
+				}
+		});
+	}
+	
+	
+
+	//改变日期显示颜色
+	$(function() {
+	   $(".fee_date").each(function (){
+		 var fee_date=$(this).html();
+		 var value = fee_date.replace(/[^0-9]/ig,"|");
+		 var array_fee_date = value.split("|");
+		 var fee_month=array_fee_date[0];
+		 var fee_day=array_fee_date[1];
+		 var fee_days=Number(fee_month)*30+Number(fee_day);
+
+		 oDate = new Date();
+		 var month=oDate.getMonth()+1;
+		 var day=oDate.getDate();
+		 var current_days=month*30+day;
+		 var Differ=current_days-fee_days;
+		 
+	     if(Differ<31&&Differ>-31){
+	 		$(this).addClass("red");
+
+	 	 }	
+
+		   
+	   });	
+
+	});	
+
 	function batchShare() {
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 		var uniquePatentNos = []
