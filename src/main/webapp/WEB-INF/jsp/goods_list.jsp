@@ -99,8 +99,8 @@
 					  	<table class="search-table">
 					  	<tr>
 					  	<td>
-							<a href="javascript:return void" onclick="batchChangePrice()" style="margin-left:50px;">
-							<button class="button button-primary  button-rounded">批量修改价格</button>
+							<a href="javascript:return void" onclick="batchChangePrice()" >
+							<button class="button button-primary  button-rounded" style="width:110px;">批量修改价格</button>
 							</a> 
 						</td>						
 					  	</tr>

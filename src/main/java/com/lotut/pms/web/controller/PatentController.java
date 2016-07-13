@@ -375,7 +375,7 @@ public class PatentController {
 	}
 	
 	@RequestMapping(path="/batchChangePrice", method=RequestMethod.GET)
-	public void batchChangePrice(int price,@RequestParam("patentIds") List<Long> patentIds,PrintWriter writer) throws IOException {
+	public void batchChangePrice(@RequestParam("price")int price,@RequestParam("patentIds") List<Long> patentIds,PrintWriter writer) throws IOException {
 		patentService.batchChangePrice(price, patentIds);
 		
 	}
