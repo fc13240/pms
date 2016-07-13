@@ -153,7 +153,7 @@
 									<option value="${FirstColumn.id}">${FirstColumn.name}</option>
 								  	</c:forEach>
 									</select>
-									<select name="SecondColumn"   class="form-control second_column" onchange="loadSecoundColumns('<c:out value='${patent.patentId}'/>', this.value)" required>
+									<select name="SecondColumn"   class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', this.value)" required>
 								  <option value=''>请选择</option>
 									</select>
 						  		</div>
