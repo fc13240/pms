@@ -80,7 +80,7 @@
 
 							  </td>
 							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>							  
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称" class="t-input form-control"/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
@@ -120,6 +120,7 @@
 						  <th width="110">申请号/专利号</th>
 						  <th width="170">专利名称</th>
 						  <th width="90">价格 </th><!-- 价格可以做成直接编辑的，可以少加一个编辑页面 -->
+						  <th width="90">类别</th>  
 						  <th width="90">交易状态</th>  
 						  <th width="90">交易类型</th>  
 						  <th width="90">添加日</th>
@@ -128,16 +129,36 @@
 						</tr>
 					  </thead>
 					  <tbody>
+					  <div class="lt-box" ">
+					  
 						<c:forEach items="${patents}" var="patent" varStatus="status">
+						<form action="<s:url value='/patent/updateGoods.html'/>" method="post">
+					  	<se:csrfInput/>
 						  <tr >
-						
+							<input type="hidden"  name="patentId" value="${patent.patentId}"/>
 							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
-							<td style="text-align:center"><c:out value="${patent.appNo}"/>
+							<td style="text-align:center">
+								<c:out value="${patent.appNo}"/>
 							</td>
-							<td class="hidden-480" style="text-align:center"><c:out value="${patent.patentName}"/></td>
-							<td style="text-align:center"><c:out value="${patent.price}"/></td>
-							
-							
+							<td class="hidden-480" style="text-align:center">
+								<c:out value="${patent.patentName}"/>
+							</td>
+							<td style="text-align:center">
+								<input type="text" name="price" class="form-control" value="${patent.price}">
+							</td>
+							<td>
+								<div >
+									<select name="FirstColumn" id="first_column" class="form-control" onchange="loadSecoundColumns()" required>
+								  	<option value=''>请选择</option>
+								  	<c:forEach items="${FirstColumns}" var="FirstColumn">
+									<option value="${FirstColumn.id}">${FirstColumn.name}</option>
+								  	</c:forEach>
+									</select>
+									<select name="SecondColumn" id="second_column"   class="form-control" required>
+								  <option value=''>请选择</option>
+									</select>
+						  		</div>
+							</td>
 							<td style="text-align:center">
 								<c:if test="${patent.status==1}">
 								出售中
@@ -147,7 +168,7 @@
 								</c:if>							
 							</td>
 							
-							<td style="text-align:center">
+							<td style="text-align:center" >
 								<c:if test="${patent.transactionType==1}">
 								转让
 								</c:if>
@@ -171,10 +192,14 @@
 			             	  </c:if>
 							  <a href="javascript:return void;"  onclick="deleteTransactionPatent(${patent.patentId})">
 							  删除
-							  </a>         	  
+							  </a>
+							  <input type="submit" class="button button-primary  button-rounded" value="保存">         	  
 							  </td>
 						  </tr>
+						  </form>
 						</c:forEach>
+						
+						</div>
 					  </tbody>
 					</table>
 					<!-- 分页功能 start -->
@@ -413,5 +438,44 @@ var tabs=function(){
 tabs.set("nav","menu_con");//执行      
 
 </script>
+<script type="text/javascript">
+function loadSecoundColumns() {
+	var first_column = $("#first_column").val();
 
+	resetSelect($("#second_column"));
+	
+	if (first_column != "") {
+		$.ajax({
+			url: "<s:url value='/patent/getGoodsSecoundColumn.html'/>?first_column=" + first_column,
+			type: 'get',
+			dataType: 'json',
+			success: function(SecondColumns) {
+				var second_column = $("#second_column");
+				
+				resetSelect(second_column);
+				addOptions(second_column, SecondColumns);
+			}
+		})
+	}
+}
+
+function addDefaultOption(selectElem) {
+	selectElem.append("<option value=''>请选择</option>");
+}
+
+function resetSelect() {
+	for (var i = 0; i < arguments.length; i++) {
+		var selectObj = arguments[i];
+		selectObj.empty();
+		addDefaultOption(selectObj);
+	}
+}
+
+function addOptions(selectObj, options) {
+	$.each(options, function(index, val){
+		selectObj.append("<option value='" + val.id + "'>" + val.name + "</option>");
+	});	
+}
+
+</script>
 </body>

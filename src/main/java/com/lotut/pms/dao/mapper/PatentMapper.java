@@ -97,7 +97,9 @@ public interface PatentMapper {
 	
 	List<Patent> getUserPatentsByCreateTime(Page page);
 	
-	void batchSaveGoods(List<Long> patentIds,int userId);
+	void batchSaveGoods(@Param("patentIds")List<Long> patentIds,@Param("userId")int userId);
 	
 	void updatePatentsGoodsStatus(@Param("patentIds")List<Long> patentIds);
+	
+	void updateGoodPatents(@Param("price")int price,@Param("patentSecondColumn")int patentSecondColumn,@Param("patentId")int patentId);
 }

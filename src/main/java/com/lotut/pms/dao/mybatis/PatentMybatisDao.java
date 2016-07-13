@@ -233,4 +233,9 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		patentMapper.updatePatentsGoodsStatus(patentIds);
 		
 	}
+
+	@Override
+	public void updateGoodPatents(int price, int patentSecondColumn, int patentId) {
+		patentMapper.updateGoodPatents(price, patentSecondColumn, patentId);
+	}
 }
