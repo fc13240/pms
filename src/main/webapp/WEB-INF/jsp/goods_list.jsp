@@ -451,7 +451,7 @@ function loadSecoundColumns() {
 			dataType: 'json',
 			success: function(SecondColumns) {
 				var second_column = $("#second_column");
-				
+				alert(second_column);
 				resetSelect(second_column);
 				addOptions(second_column, SecondColumns);
 			}

@@ -364,6 +364,6 @@ public class PatentController {
 	@RequestMapping(path="/updateGoods", method=RequestMethod.GET)
 	public String updateGoods(int price,int SecondColumn,int patentId) throws IOException {
 		patentService.updateGoodPatents(price, SecondColumn, patentId);
-		return "goods_add_success";
+		return "goods_list";
 	}
 }
