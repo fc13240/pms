@@ -387,10 +387,11 @@
 
 								<td style="text-align:center" class="date_status">
 								<span class="qixian">
+								
 									<c:choose>
 										<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-										<c:otherwise>
-									  	<c:out value="${notice.remainDays}"/>
+										<c:otherwise>期限：
+									  	<c:out value="${notice.remainDays}"/>天
 										</c:otherwise>
 								  	</c:choose>
 								<br>
@@ -715,13 +716,12 @@ function batchProcessNotice(processStatus) {
 		
 		
 		  $(".date_status").each(function () {
-			  var list_name=$(this .treatment_status).find("option:selected").text();
-			 alert(list_name);
-			 // alert(list_name);
-			  if (list_name==current_type_name)
+			  var list_name=$(this).children(".treatment_status").find("option:selected").val();
+			 //alert(list_name);
+			  if (list_name!=1)
 			  {
-				  $(this).addClass("current_nav");
-					return;  
+				  $(this).children(".qixian").css("display","none");
+			 
 			  }
 			   
 		   });	
