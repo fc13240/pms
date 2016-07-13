@@ -273,7 +273,7 @@
 							  <se:authorize access="hasRole('ROLE_TRADER')">
 								  <c:if test="${patent.transactionStatus==null}">
 	 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
-					                  	<button class="t-btn2">发布至交易网</button> 
+					                  	<button class="t-btn2" value="1">发布至交易网</button> 
 				 	                  </a>
 				 	                </c:if>
 				 	                 <c:if test="${patent.transactionStatus != null}">
@@ -376,8 +376,11 @@
 		for (var i = 0; i < patents_checked.length; i++) {
 			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
 				uniquePatentNos.push(patents_checked[i]);
+				
 			}
-		}		
+			
+		}
+		
 		var patentIds = uniquePatentNos.join(",");
 		$.ajax({
 			url:"<s:url value='/patent/batchAddGoods.html'/>?patentIds=" + patentIds,

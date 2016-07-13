@@ -132,7 +132,7 @@
 					  <div class="lt-box" ">
 					  
 						<c:forEach items="${patents}" var="patent" varStatus="status">
-						<form action="<s:url value='/patent/updateGoods.html'/>" method="post">
+						<form action="<s:url value='/patent/updateGoods.html'/>" method="get">
 					  	<se:csrfInput/>
 						  <tr >
 							<input type="hidden"  name="patentId" value="${patent.patentId}"/>
