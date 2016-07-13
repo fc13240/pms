@@ -119,7 +119,7 @@
 						  <th width="110">申请号/专利号</th>
 						  <th width="170">专利名称</th>
 						  <th width="90">价格 </th><!-- 价格可以做成直接编辑的，可以少加一个编辑页面 -->
-						  <th width="90">类别</th>  
+						  <th width="90">所属领域</th>  
 						  <th width="90">交易状态</th>  
 						  <th width="90">交易类型</th>  
 						  <th width="90">添加日</th>
@@ -145,16 +145,16 @@
 							<td style="text-align:center">
 								<input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)">
 							</td>
-							<td>
-								<div class="form-column">
-									<select name="FirstColumn"  class="form-control first_column"  required>
+							<td style="text-align:center">
+								<div class="form-column" style="width:260px;margin: auto" >
+									<select style="display:inline;width:150px" name="FirstColumn"  class="form-control first_column"  required>
 								  	<option value=''>请选择</option>
 								  	<c:forEach items="${FirstColumns}" var="FirstColumn">
 									<option value="${FirstColumn.id}">${FirstColumn.name}</option>
 								  	</c:forEach>
 									</select>
-									<select name="SecondColumn"   class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', this.value)" required>
-								  <option value=''>请选择</option>
+									<select style="display:inline;width:100px" name="SecondColumn"   class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', this.value)" required>
+								  		<option value=''>请选择</option>
 									</select>
 						  		</div>
 							</td>
@@ -189,6 +189,7 @@
 							  下架
 							  </a> 
 			             	  </c:if>
+			             	  &nbsp;&nbsp;&nbsp;
 							  <a href="javascript:return void;"  onclick="deleteTransactionPatent(${patent.patentId})">
 							  删除
 							  </a>       	  
