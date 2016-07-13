@@ -526,7 +526,7 @@ ALTER TABLE patents ADD COLUMN transaction_status VARCHAR(10);
 
 alter table friends add column remark_name varchar(50);
 
-ALTER TABLE patents ADD COLUMN  create_time TIMESTAMP  NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ;
+ALTER TABLE patents ADD COLUMN  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间';
 
 ALTER TABLE contact_addresses DROP FOREIGN KEY  fk_contact_addresses_street 
 
