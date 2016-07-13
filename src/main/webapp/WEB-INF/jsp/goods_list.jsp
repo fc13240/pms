@@ -147,13 +147,14 @@
 							</td>
 							<td style="text-align:center">
 								<div class="form-column" style="width:260px;margin: auto" >
-									<select style="display:inline;width:150px" name="FirstColumn"  class="form-control first_column"  required>
+									<select style="display:inline;width:150px" name="FirstColumn" id="firstColumn${status.index}"  class="form-control first_column" required>
 								  	<option value=''>请选择</option>
 								  	<c:forEach items="${FirstColumns}" var="FirstColumn">
-									<option value="${FirstColumn.id}">${FirstColumn.name}</option>
+									<option value="${FirstColumn.id}" 
+										<c:if test="${FirstColumn.id==patent.firstColumn}">selected="selected"</c:if>>${FirstColumn.name}</option>
 								  	</c:forEach>
 									</select>
-									<select style="display:inline;width:100px" name="SecondColumn"   class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', this.value)" required>
+									<select style="display:inline;width:100px" name="SecondColumn"  subColumn="${patent.secondColumn}"  id="secondColumn${status.index}" class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', this.value)" required>
 								  		<option value=''>请选择</option>
 									</select>
 						  		</div>
@@ -455,7 +456,16 @@ $(function(){
 				})
 			}
 	   })
-	});
+	   
+	   $(".first_column").trigger("change");
+	   setTimeout(function(){
+		   $(".second_column").each(function(){
+			   $(this).val($(this).attr("subColumn"));
+		   })
+		}, 100);
+});
+	
+	
 
 function addDefaultOption(selectElem) {
 	selectElem.append("<option value=''>请选择</option>");
@@ -481,7 +491,7 @@ function changePrice(patentId, price) {
 		url: "<s:url value='/patent/changePrice.html'/>?price=" + price + "&patentId=" + patentId, 
 		type: 'get', 
 		success: function(data) {
-			formutil.alertMessage('修改成功');	
+			//formutil.alertMessage('修改成功');	
 		},
 		error: function() {
 			formutil.alertMessage('修改失败');
@@ -494,7 +504,7 @@ function changSecondColume(patentId, SecondColumn) {
 		url: "<s:url value='/patent/changSecondColume.html'/>?SecondColumn=" + SecondColumn + "&patentId=" + patentId, 
 		type: 'get', 
 		success: function(data) {
-			formutil.alertMessage('修改成功');	
+			//formutil.alertMessage('修改成功');	
 		},
 		error: function() {
 			formutil.alertMessage('修改失败');
@@ -521,7 +531,6 @@ function changSecondColume(patentId, SecondColumn) {
 		var price = prompt("请输入价格", "");
 		
 		var patentIds = uniquePatentNos.join(",");
-		alert(patentIds);
 		$.ajax({
 			url:"<s:url value='/patent/batchChangePrice.html'/>?price=" +price+"&patentIds="+ patentIds,
 			type:"get",
