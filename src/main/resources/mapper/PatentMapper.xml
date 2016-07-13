@@ -498,7 +498,7 @@
 		update sell_patent_goods  set price=#{price},patent_second_column =#{SecondColumn} where patent_id=#{patentId}
 	</update>
 	
-<<<<<<< HEAD
+
 	<update id="changePrice">
 		update sell_patent_goods  set price=#{price} where patent_id=#{patentId}
 	</update>
