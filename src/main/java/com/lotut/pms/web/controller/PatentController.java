@@ -361,9 +361,20 @@ public class PatentController {
 		return "goods_add_success";
 	}
 	
-	@RequestMapping(path="/updateGoods", method=RequestMethod.GET)
-	public String updateGoods(int price,int SecondColumn,int patentId) throws IOException {
-		patentService.updateGoodPatents(price, SecondColumn, patentId);
-		return "goods_list";
+	@RequestMapping(path="/changePrice", method=RequestMethod.GET)
+	public void changePrice(int price,int patentId,PrintWriter writer) throws IOException {
+		patentService.changePrice(price, patentId);
+		writer.write(1);
+	}
+	
+	@RequestMapping(path="/changSecondColume", method=RequestMethod.GET)
+	public void changSecondColume(int SecondColumn,int patentId,PrintWriter writer) throws IOException {
+		patentService.changSecondColume(SecondColumn, patentId);
+	}
+	
+	@RequestMapping(path="/batchChangePrice", method=RequestMethod.GET)
+	public void batchChangePrice(int price,@RequestParam("patentIds") List<Long> patentIds,PrintWriter writer) throws IOException {
+		patentService.batchChangePrice(price, patentIds);
+		
 	}
 }

@@ -269,4 +269,20 @@ public class PatentServiceImpl implements PatentService {
 	public void updateGoodPatents(int price, int SecondColumn, int patentId) {
 		patentDao.updateGoodPatents(price, SecondColumn, patentId);
 	}
+
+	@Override
+	public void changePrice(int price, int patentId) {
+		patentDao.changePrice(price, patentId);
+		
+	}
+
+	@Override
+	public void changSecondColume(int SecondColumn, int patentId) {
+		patentDao.changSecondColume(SecondColumn, patentId);
+	}
+
+	@Override
+	public void batchChangePrice(int price, List<Long> patentIds) {
+		patentDao.batchChangePrice(price, patentIds);
+	}
 }

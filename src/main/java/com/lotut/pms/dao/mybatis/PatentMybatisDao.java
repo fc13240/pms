@@ -238,4 +238,19 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	public void updateGoodPatents(int price, int patentSecondColumn, int patentId) {
 		patentMapper.updateGoodPatents(price, patentSecondColumn, patentId);
 	}
+
+	@Override
+	public void changePrice(int price, int patentId) {
+		patentMapper.changePrice(price, patentId);
+	}
+
+	@Override
+	public void changSecondColume(int SecondColumn, int patentId) {
+		patentMapper.changSecondColume(SecondColumn, patentId);
+	}
+
+	@Override
+	public void batchChangePrice(int price, List<Long> patentIds) {
+		patentMapper.batchChangePrice(price, patentIds);
+	}
 }

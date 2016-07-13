@@ -496,5 +496,22 @@
 	
 	<update id="updateGoodPatents">
 		update sell_patent_goods  set price=#{price},patent_second_column =#{SecondColumn} where patent_id=#{patentId}
+	</update>
+	
+	<update id="changePrice">
+		update sell_patent_goods  set price=#{price} where patent_id=#{patentId}
+	</update>
+	
+	<update id="changSecondColume">
+		update sell_patent_goods  set patent_second_column =#{SecondColumn} where patent_id=#{patentId}
+	</update>
+	
+	
+	<update id="batchChangePrice">
+		update sell_patent_goods  set price=#{price} where patent_id in
+		<foreach item="patentId" collection="patentIds"
+			     open="(" separator="," close=")">
+			   #{patentId}
+			</foreach>		 
 	</update>	
 </mapper>
