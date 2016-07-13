@@ -95,22 +95,17 @@
 				<div class="lt-box">
 					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
 					  <div class="ta-top" style="margin-left:8px;">
-					  	<!-- 
+
 					  	<table class="search-table">
 					  	<tr>
 					  	<td>
-						  	<a href="javascript:return void"  onclick="batchGrabFees()">
-							<button class="button button-caution button-rounded">在线交费</button> 
-							</a>
-						</td>
-					  	<td>
-							<a href="javascript:return void" onclick="batchShare()" style="margin-left:50px;">
-							<button class="button button-primary  button-rounded">批量分享</button>
+							<a href="javascript:return void" onclick="batchChangePrice()" >
+							<button class="button button-primary  button-rounded" style="width:110px;">批量修改价格</button>
 							</a> 
 						</td>						
 					  	</tr>
 					  	</table>
-					  	 -->
+
 					  </div>
 					  </span> </div>
 					<table id="simple-table" class="table table-striped table-bordered table-hover">
@@ -151,14 +146,14 @@
 								<input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)">
 							</td>
 							<td>
-								<div >
-									<select name="FirstColumn" id="first_column" class="form-control" onchange="loadSecoundColumns()" required>
+								<div class="form-column">
+									<select name="FirstColumn"  class="form-control first_column"  required>
 								  	<option value=''>请选择</option>
 								  	<c:forEach items="${FirstColumns}" var="FirstColumn">
 									<option value="${FirstColumn.id}">${FirstColumn.name}</option>
 								  	</c:forEach>
 									</select>
-									<select name="SecondColumn" id="second_column"   class="form-control" required>
+									<select name="SecondColumn"   class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', this.value)" required>
 								  <option value=''>请选择</option>
 									</select>
 						  		</div>
@@ -441,24 +436,25 @@ tabs.set("nav","menu_con");//执行
 
 </script>
 <script type="text/javascript">
-function loadSecoundColumns() {
-	var first_column = $("#first_column").val();
-
-	resetSelect($("#second_column"));
-	
-	if (first_column != "") {
-		$.ajax({
-			url: "<s:url value='/patent/getGoodsSecoundColumn.html'/>?first_column=" + first_column,
-			type: 'get',
-			dataType: 'json',
-			success: function(SecondColumns) {
-				var second_column = $("#second_column");
-				resetSelect(second_column);
-				addOptions(second_column, SecondColumns);
+$(function(){
+	   $(".first_column").change(function () {
+		  var first_column=$(this).val();
+		 // alert(first_column);
+		  var second_column=$(this).parent(".form-column").children(".second_column");
+		  resetSelect(second_column);
+			if (first_column != "") {
+				$.ajax({
+					url: "<s:url value='/patent/getGoodsSecoundColumn.html'/>?first_column=" + first_column,
+					type: 'get',
+					dataType: 'json',
+					success: function(SecondColumns){
+						resetSelect(second_column);
+						addOptions(second_column, SecondColumns);
+					}
+				})
 			}
-		})
-	}
-}
+	   })
+	});
 
 function addDefaultOption(selectElem) {
 	selectElem.append("<option value=''>请选择</option>");
@@ -492,6 +488,19 @@ function changePrice(patentId, price) {
 	});	
 }
 
+function changSecondColume(patentId, SecondColumn) {
+	$.ajax({
+		url: "<s:url value='/patent/changSecondColume.html'/>?SecondColumn=" + SecondColumn + "&patentId=" + patentId, 
+		type: 'get', 
+		success: function(data) {
+			formutil.alertMessage('修改成功');	
+		},
+		error: function() {
+			formutil.alertMessage('修改失败');
+		}
+	});	
+}
+
 	function batchChangePrice() {
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 		var uniquePatentNos = []
@@ -508,10 +517,12 @@ function changePrice(patentId, price) {
 			}
 			
 		}
+		var price = prompt("请输入价格", "");
 		
 		var patentIds = uniquePatentNos.join(",");
+		alert(patentIds);
 		$.ajax({
-			url:"<s:url value='/patent/batchChangePrice.html'/>?price=" +price+"&patentId="+ patentIds,
+			url:"<s:url value='/patent/batchChangePrice.html'/>?price=" +price+"&patentIds="+ patentIds,
 			type:"get",
 				success: function(data) {
 					formutil.alertMessage('批量修改成功',true);	
