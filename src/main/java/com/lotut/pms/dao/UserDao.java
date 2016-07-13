@@ -27,8 +27,6 @@ public interface UserDao {
 	
 	List<Map<String, String>> getDistrictsByCityId(long cityId);
 	
-	List<Map<String, String>> getStreetsByDistrictId(long districtId);
-	
 	void saveContactAddress(ContactAddress contactAddress);
 	
 	List<ContactAddress> getUserContactAddresses(int userId);

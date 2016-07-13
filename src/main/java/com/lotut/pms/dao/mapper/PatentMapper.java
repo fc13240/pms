@@ -102,4 +102,6 @@ public interface PatentMapper {
 	void updatePatentsGoodsStatus(@Param("patentIds")List<Long> patentIds);
 	
 	void updateGoodPatents(@Param("price")int price,@Param("SecondColumn")int SecondColumn,@Param("patentId")int patentId);
+	
+	int bacthsaveGoodsCheckOut(@Param("patentIds")List<Long> patentIds);
 }

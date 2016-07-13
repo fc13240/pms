@@ -65,10 +65,6 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 		return userMapper.getDistrictsByCityId(cityId);
 	}
 
-	@Override
-	public List<Map<String, String>> getStreetsByDistrictId(long districtId) {
-		return userMapper.getStreetsByDistrictId(districtId);
-	}
 
 	@Override
 	public void saveContactAddress(ContactAddress contactAddress) {

@@ -47,7 +47,7 @@
 						  <td class="center">${status.count}</td>
 						  <td>${address.receiver}</td>
 						  <td>${address.provinceName} ${address.cityName} ${address.districtName}
-							${address.streetName}</td>
+						  </td>
 						  <td>${address.detailAddress}</td>
 						  <td>${address.phone}</td>
 						  <td><a href="<s:url value='/user/updateUserContactAddressesFrom.html'/>?id=<c:out value='${address.id}'/>"> 编辑 </a> <a href="<s:url value='/user/deleteUserContactAddresses.html'/>?id=<c:out value='${address.id}'/>">

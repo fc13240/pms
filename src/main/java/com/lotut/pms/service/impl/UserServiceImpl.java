@@ -78,11 +78,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<Map<String, String>> getStreetsByDistrictId(long districtId) {
-		return userDao.getStreetsByDistrictId(districtId);
-	}
-
-	@Override
 	public void saveContactAddress(ContactAddress contactAddress) {
 		userDao.saveContactAddress(contactAddress);
 	}

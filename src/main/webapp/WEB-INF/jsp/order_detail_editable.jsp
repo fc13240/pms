@@ -132,7 +132,7 @@
 									<tbody>
 									  <tr>
 										<td style="text-align:center"> ${order.postAddress.receiver} </td>
-										<td style="text-align:center"> ${order.postAddress.provinceName}${order.postAddress.cityName}${order.postAddress.districtName}${order.postAddress.streetName}${order.postAddress.detailAddress} </td>
+										<td style="text-align:center"> ${order.postAddress.provinceName}${order.postAddress.cityName}${order.postAddress.districtName}${order.postAddress.detailAddress} </td>
 										<td style="text-align:center"> ${order.postAddress.phone} </td>
 									  </tr>
 									</tbody>

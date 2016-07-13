@@ -269,4 +269,10 @@ public class PatentServiceImpl implements PatentService {
 	public void updateGoodPatents(int price, int SecondColumn, int patentId) {
 		patentDao.updateGoodPatents(price, SecondColumn, patentId);
 	}
+
+	@Override
+	public int bacthsaveGoodsCheckOut(List<Long> patentIds) {
+		// TODO Auto-generated method stub
+		return patentDao.bacthsaveGoodsCheckOut(patentIds);
+	}
 }

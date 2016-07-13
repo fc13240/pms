@@ -98,4 +98,6 @@ public interface PatentService {
 	void updatePatentsGoodsStatus(List<Long> patentIds);
 	
 	void updateGoodPatents(int price,int SecondColumn,int patentId);
+	
+	int bacthsaveGoodsCheckOut(List<Long> patentIds);
 }
