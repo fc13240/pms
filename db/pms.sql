@@ -530,4 +530,4 @@ ALTER TABLE patents ADD COLUMN  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 
 ALTER TABLE contact_addresses DROP FOREIGN KEY  fk_contact_addresses_street; 
 
-ALTER TABLE contact_addresses DROP COLUMN street 
+ALTER TABLE contact_addresses DROP COLUMN street; 
