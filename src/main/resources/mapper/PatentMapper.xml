@@ -515,11 +515,10 @@
 			   #{patentId}
 			</foreach>		 
 	</update>	
-	<select id="bacthsaveGoodsCheckOut">
+	<select id="bacthsaveGoodsCheckOut" resultType="int">
 		select count(*) from sell_patent_goods WHERE patent_id in
-		<foreach collection="">
-		
-		
+		<foreach collection="patentIds" item="patentId" open="(" separator="," close=")">
+			#{patentId}
 		</foreach>
 	
 	</select>	
