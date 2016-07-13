@@ -264,4 +264,9 @@ public class PatentServiceImpl implements PatentService {
 		patentDao.updatePatentsGoodsStatus(patentIds);
 		
 	}
+
+	@Override
+	public void updateGoodPatents(int price, int patentSecondColumn, int patentId) {
+		patentDao.updateGoodPatents(price, patentSecondColumn, patentId);
+	}
 }

@@ -256,6 +256,8 @@ public class PatentController {
 		int totalCount=(int)patentService.getUserTransactionPatentsCount(userId);
 		page.setTotalRecords(totalCount);
 		List<GoodsDetail> patents = patentService.getUserTransactionPatents(page);
+		List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
+		model.addAttribute("FirstColumns", FirstColumns);
 		model.addAttribute("patents", patents);
 		model.addAttribute("page", page);
 		return "goods_list";
@@ -357,5 +359,11 @@ public class PatentController {
 			patentService.batchSaveGoods(patentIds, userId);
 			patentService.updatePatentsGoodsStatus(patentIds);
 		return "goods_add_success";
-	}		
+	}
+	
+	@RequestMapping(path="/updateGoods", method=RequestMethod.GET)
+	public String updateGoods(int price,int patentSecondColumn,int patentId) throws IOException {
+		patentService.updateGoodPatents(price, patentSecondColumn, patentId);
+		return "goods_add_success";
+	}
 }

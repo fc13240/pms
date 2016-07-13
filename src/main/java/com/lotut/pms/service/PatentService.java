@@ -96,4 +96,6 @@ public interface PatentService {
 	void batchSaveGoods(List<Long> patentIds,int userId);
 	
 	void updatePatentsGoodsStatus(List<Long> patentIds);
+	
+	void updateGoodPatents(int price,int patentSecondColumn,int patentId);
 }
