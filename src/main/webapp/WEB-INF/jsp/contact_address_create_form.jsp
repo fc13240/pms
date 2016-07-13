@@ -52,12 +52,9 @@
 					<select name="city" id="city" style="width:226px;display:inline;" class="form-control" onchange="loadDistricts()" required>
 					  <option value=''>请选择</option>
 					</select>
-					<select name="district" style="width:226px;display:inline;" class="form-control" id="district" onchange="loadStreets()" required>
+					<select name="district" style="width:226px;display:inline;" class="form-control" id="district" required>
 					  <option value=''>请选择</option>
-					</select>
-					<select name="street" style="width:226px;display:inline;" class="form-control" id="street" required>
-					  <option value=''>请选择</option>
-					</select>		
+					</select>	
 					<br> 		  
 			       	<h5>详细地址:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="detailAddress" required/>
@@ -183,26 +180,6 @@ function loadDistricts() {
 			}
 		})
 	}
-}
-
-function loadStreets() {
-	var district = $("#district").val();
-	
-	resetSelect($("#street"));
-	
-	if (district != "") {
-		$.ajax({
-			url: "<s:url value='/user/getStreetsByDistrict.html'/>?district=" + district,
-			type: 'get',
-			dataType: 'json',
-			success: function(streets) {
-				var street = $("#street");
-				
-				resetSelect(street);
-				addOptions(street, streets);
-			}
-		})
-	} 
 }
 
 function validatePhoneNumber(phoneNumber) {

@@ -47,7 +47,7 @@
 							<td><input type="radio"  name="postAddress.id" onclick="show();hint()"
 							  value="${address.id}" required="required"> 
 							  ${address.receiver} ${address.provinceName} ${address.cityName} ${address.districtName}
-							  ${address.streetName} ${address.detailAddress} ${address.phone} </td>
+							  ${address.detailAddress} ${address.phone} </td>
 						  </tr>
 						</c:forEach>
 						<tr>

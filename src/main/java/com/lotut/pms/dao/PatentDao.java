@@ -3,6 +3,8 @@ package com.lotut.pms.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.lotut.pms.domain.GoodsDetail;
 import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
@@ -89,9 +91,13 @@ public interface PatentDao {
 	
 	void updateGoodPatents(int price,int SecondColumn,int patentId);
 	
+
 	void changePrice(int price,int patentId);
 	
 	void changSecondColume(int SecondColumn,int patentId);
 	
 	void batchChangePrice(int price,List<Long> patentIds);
+
+	int bacthsaveGoodsCheckOut(List<Long> patentIds);
+
 }

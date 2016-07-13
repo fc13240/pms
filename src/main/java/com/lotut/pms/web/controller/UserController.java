@@ -188,15 +188,6 @@ public class UserController {
 		WebUtils.writeJsonStrToResponse(response, districts);
 	}
 	
-	@RequestMapping(path="/getStreetsByDistrict", method=RequestMethod.GET)
-	public void getStreetsByDistrict(@RequestParam("district")long districtId, 
-			Model model, HttpServletResponse response) throws IOException {
-		
-		response.setContentType("application/json;charset=UTF-8");
-		List<Map<String, String>> streets = userService.getStreetsByDistrictId(districtId);
-		
-		WebUtils.writeJsonStrToResponse(response, streets);
-	}
 
 	@RequestMapping(path="/setPageSize", method=RequestMethod.GET)
 	@ResponseBody

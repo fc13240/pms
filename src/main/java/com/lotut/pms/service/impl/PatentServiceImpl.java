@@ -285,4 +285,9 @@ public class PatentServiceImpl implements PatentService {
 	public void batchChangePrice(int price, List<Long> patentIds) {
 		patentDao.batchChangePrice(price, patentIds);
 	}
+	public int bacthsaveGoodsCheckOut(List<Long> patentIds) {
+		// TODO Auto-generated method stub
+		return patentDao.bacthsaveGoodsCheckOut(patentIds);
+
+	}
 }

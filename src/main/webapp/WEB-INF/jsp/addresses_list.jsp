@@ -49,9 +49,6 @@
 					  <select name="district" class="form-control"  style="width:226px;display:inline;" id="district" onchange="loadStreets()"required>
 						<option value='${contactAddresses.district}'>${contactAddresses.districtName}</option>
 					  </select>
-					  <select name="street" class="form-control"  style="width:226px;display:inline;" id="street" required>
-						<option value='${contactAddresses.street}'>${contactAddresses.streetName}</option>
-					  </select>
 					  <h5>详细地址:</h5>
 					  <input type="text" class="form-control" style="width:300px;" name="detailAddress" id="detailAddress"  value="${contactAddresses.detailAddress}" required/>
 					  <h5>手机或固话</h5>

@@ -26,11 +26,6 @@ public class ContactAddress {
 	
 	private String districtName;
 	
-	@NotNull
-	private Long street;
-	
-	private String streetName;
-	
 	@NotBlank
 	private String detailAddress;
 	
@@ -62,12 +57,6 @@ public class ContactAddress {
 	public void setDistrictName(String districtName) {
 		this.districtName = districtName;
 	}
-	public String getStreetName() {
-		return streetName;
-	}
-	public void setStreetName(String streetName) {
-		this.streetName = streetName;
-	}
 	
 	public int getId() {
 		return id;
@@ -98,12 +87,6 @@ public class ContactAddress {
 	}
 	public void setDistrict(Long district) {
 		this.district = district;
-	}
-	public Long getStreet() {
-		return street;
-	}
-	public void setStreet(Long street) {
-		this.street = street;
 	}
 	public String getDetailAddress() {
 		return detailAddress;
