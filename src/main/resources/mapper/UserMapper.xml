@@ -105,7 +105,6 @@
 	</select>
 	
 	<select id="getAllUser" resultMap="UserResultMap">
-<!-- 		select user_id, username, name from users -->
 		SELECT * FROM users
 		WHERE EXISTS (SELECT 1 FROM orders WHERE orders.user = users.user_id);
 	</select>

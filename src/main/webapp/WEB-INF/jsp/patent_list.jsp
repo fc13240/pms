@@ -389,7 +389,7 @@
 					formutil.alertMessage('批量发布成功',true);	
 				},
 				error: function() {
-					formutil.alertMessage('批量发布失败',true);
+					formutil.alertMessage('批量发布失败');
 				}
 		});
 	}

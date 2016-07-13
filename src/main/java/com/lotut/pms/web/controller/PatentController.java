@@ -354,18 +354,37 @@ public class PatentController {
 	
 	
 	@RequestMapping(path="/batchAddGoods", method=RequestMethod.GET)
-	public String batchAddGoods(@RequestParam("patentIds") List<Long> patentIds,Model model) throws IOException {
-		
-		
-			int userId=PrincipalUtils.getCurrentUserId();
+	public void batchAddGoods(@RequestParam("patentIds") List<Long> patentIds,PrintWriter out) throws IOException {
+		boolean notExistGoods = patentService.bacthsaveGoodsCheckOut(patentIds);
+		int userId=PrincipalUtils.getCurrentUserId();
+		  System.out.println(patentService.bacthsaveGoodsCheckOut(patentIds));
+		if(!notExistGoods){
 			patentService.batchSaveGoods(patentIds, userId);
 			patentService.updatePatentsGoodsStatus(patentIds);
-		return "goods_add_success";
+			out.write("批量发布成功");
+		}else {
+			out.write("所选择的专利中包含了已发布的专利，请和核对后再进行发布！");
+		}
+//			int userId=PrincipalUtils.getCurrentUserId();
+//			patentService.batchSaveGoods(patentIds, userId);
+//			patentService.updatePatentsGoodsStatus(patentIds);
+		
 	}
 	
-	@RequestMapping(path="/updateGoods", method=RequestMethod.GET)
-	public String updateGoods(int price,int SecondColumn,int patentId) throws IOException {
-		patentService.updateGoodPatents(price, SecondColumn, patentId);
-		return "goods_list";
+	@RequestMapping(path="/changePrice", method=RequestMethod.GET)
+	public void changePrice(int price,int patentId,PrintWriter writer) throws IOException {
+		patentService.changePrice(price, patentId);
+		writer.write(1);
+	}
+	
+	@RequestMapping(path="/changSecondColume", method=RequestMethod.GET)
+	public void changSecondColume(int SecondColumn,int patentId,PrintWriter writer) throws IOException {
+		patentService.changSecondColume(SecondColumn, patentId);
+	}
+	
+	@RequestMapping(path="/batchChangePrice", method=RequestMethod.GET)
+	public void batchChangePrice(@RequestParam("price")int price,@RequestParam("patentIds") List<Long> patentIds,PrintWriter writer) throws IOException {
+		patentService.batchChangePrice(price, patentIds);
+		
 	}
 }

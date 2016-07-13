@@ -329,13 +329,15 @@
 		<result property="price" column="price"/>
 		<result property="transactionType" column="transaction_type"/>
 		<result property="status" column="status"/>
-		<result property="owner" column="owner"/>	
+		<result property="owner" column="owner"/>
+		<result property="FirstColumn" column="patent_first_column_id"/>
+		<result property="SecondColumn" column="patent_second_column"/>	
 	</resultMap>
 	
 	<select id="getUserTransactionPatents" parameterType="page" resultMap="TransactionPatent">
-
-		SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,sg.transaction_date,p.patent_name,p.app_no
-		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id
+		
+		SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,sg.transaction_date,p.patent_name,p.app_no,ss.patent_first_column_id,sg.patent_second_column
+		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id JOIN sell_second_column  ss ON ss.patent_second_column_id=sg.patent_second_column
 		WHERE  owner=#{userId}  limit #{startIndex}, #{pageSize};
 	
 	</select>
@@ -498,11 +500,27 @@
 		update sell_patent_goods  set price=#{price},patent_second_column =#{SecondColumn} where patent_id=#{patentId}
 	</update>
 	
-	<select id="bacthsaveGoodsCheckOut">
+
+	<update id="changePrice">
+		update sell_patent_goods  set price=#{price} where patent_id=#{patentId}
+	</update>
+	
+	<update id="changSecondColume">
+		update sell_patent_goods  set patent_second_column =#{SecondColumn} where patent_id=#{patentId}
+	</update>
+	
+	
+	<update id="batchChangePrice">
+		update sell_patent_goods  set price=#{price} where patent_id in
+		<foreach item="patentId" collection="patentIds"
+			     open="(" separator="," close=")">
+			   #{patentId}
+			</foreach>		 
+	</update>	
+	<select id="bacthsaveGoodsCheckOut" resultType="int">
 		select count(*) from sell_patent_goods WHERE patent_id in
-		<foreach collection="">
-		
-		
+		<foreach collection="patentIds" item="patentId" open="(" separator="," close=")">
+			#{patentId}
 		</foreach>
 	
 	</select>	

@@ -528,6 +528,6 @@ alter table friends add column remark_name varchar(50);
 
 ALTER TABLE patents ADD COLUMN  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间';
 
-ALTER TABLE contact_addresses DROP FOREIGN KEY  fk_contact_addresses_street 
+ALTER TABLE contact_addresses DROP FOREIGN KEY  fk_contact_addresses_street; 
 
 ALTER TABLE contact_addresses DROP COLUMN street 

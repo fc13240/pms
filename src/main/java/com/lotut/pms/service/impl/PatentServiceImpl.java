@@ -271,8 +271,28 @@ public class PatentServiceImpl implements PatentService {
 	}
 
 	@Override
-	public int bacthsaveGoodsCheckOut(List<Long> patentIds) {
-		// TODO Auto-generated method stub
-		return patentDao.bacthsaveGoodsCheckOut(patentIds);
+	public void changePrice(int price, int patentId) {
+		patentDao.changePrice(price, patentId);
+		
+	}
+
+	@Override
+	public void changSecondColume(int SecondColumn, int patentId) {
+		patentDao.changSecondColume(SecondColumn, patentId);
+	}
+
+	@Override
+	public void batchChangePrice(int price, List<Long> patentIds) {
+		patentDao.batchChangePrice(price, patentIds);
+	}
+	public boolean bacthsaveGoodsCheckOut(List<Long> patentIds) {
+		int findPatentSize = patentDao.bacthsaveGoodsCheckOut(patentIds);
+		if(findPatentSize>0){
+			return true;
+		}else {
+			
+			return false;
+		}
+
 	}
 }

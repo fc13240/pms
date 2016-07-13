@@ -95,32 +95,31 @@
 				<div class="lt-box">
 					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
 					  <div class="ta-top" style="margin-left:8px;">
-					  	<!-- 
+
 					  	<table class="search-table">
 					  	<tr>
 					  	<td>
-						  	<a href="javascript:return void"  onclick="batchGrabFees()">
-							<button class="button button-caution button-rounded">在线交费</button> 
-							</a>
-						</td>
-					  	<td>
-							<a href="javascript:return void" onclick="batchShare()" style="margin-left:50px;">
-							<button class="button button-primary  button-rounded">批量分享</button>
+							<a href="javascript:return void" onclick="batchChangePrice()" >
+							<button class="button button-primary  button-rounded" style="width:110px;">批量修改价格</button>
 							</a> 
 						</td>						
 					  	</tr>
 					  	</table>
-					  	 -->
+
 					  </div>
 					  </span> </div>
 					<table id="simple-table" class="table table-striped table-bordered table-hover">
 					  <thead>
 						<tr class="simple_bag">
+						   <th class="center" width="15"> <label class="pos-rel">
+							<input type="checkbox" class="patent-check-item" id="checkall"  name="checkall" />
+							<span class="lbl"></span> </label>
+						  </th>
 						  <th class="center" width="35">序号</th>
 						  <th width="110">申请号/专利号</th>
 						  <th width="170">专利名称</th>
 						  <th width="90">价格 </th><!-- 价格可以做成直接编辑的，可以少加一个编辑页面 -->
-						  <th width="90">类别</th>  
+						  <th width="90">所属领域</th>  
 						  <th width="90">交易状态</th>  
 						  <th width="90">交易类型</th>  
 						  <th width="90">添加日</th>
@@ -132,10 +131,10 @@
 					  <div class="lt-box" ">
 					  
 						<c:forEach items="${patents}" var="patent" varStatus="status">
-						<form action="<s:url value='/patent/updateGoods.html'/>" method="get">
-					  	<se:csrfInput/>
 						  <tr >
-							<input type="hidden"  name="patentId" value="${patent.patentId}"/>
+						  <td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
+							  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.patentId}'/>">
+							  <span class="lbl"></span></label></td>
 							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
 							<td style="text-align:center">
 								<c:out value="${patent.appNo}"/>
@@ -144,18 +143,19 @@
 								<c:out value="${patent.patentName}"/>
 							</td>
 							<td style="text-align:center">
-								<input type="text" name="price" class="form-control" value="${patent.price}">
+								<input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)">
 							</td>
-							<td>
-								<div >
-									<select name="FirstColumn" id="first_column" class="form-control" onchange="loadSecoundColumns()" required>
+							<td style="text-align:center">
+								<div class="form-column" style="width:260px;margin: auto" >
+									<select style="display:inline;width:150px" name="FirstColumn" id="firstColumn${status.index}"  class="form-control first_column" required>
 								  	<option value=''>请选择</option>
 								  	<c:forEach items="${FirstColumns}" var="FirstColumn">
-									<option value="${FirstColumn.id}">${FirstColumn.name}</option>
+									<option value="${FirstColumn.id}" 
+										<c:if test="${FirstColumn.id==patent.firstColumn}">selected="selected"</c:if>>${FirstColumn.name}</option>
 								  	</c:forEach>
 									</select>
-									<select name="SecondColumn" id="second_column"   class="form-control" required>
-								  <option value=''>请选择</option>
+									<select style="display:inline;width:100px" name="SecondColumn"  subColumn="${patent.secondColumn}"  id="secondColumn${status.index}" class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', this.value)" required>
+								  		<option value=''>请选择</option>
 									</select>
 						  		</div>
 							</td>
@@ -190,13 +190,12 @@
 							  下架
 							  </a> 
 			             	  </c:if>
+			             	  &nbsp;&nbsp;&nbsp;
 							  <a href="javascript:return void;"  onclick="deleteTransactionPatent(${patent.patentId})">
 							  删除
-							  </a>
-							  <input type="submit" class="button button-primary  button-rounded" value="保存">         	  
+							  </a>       	  
 							  </td>
 						  </tr>
-						  </form>
 						</c:forEach>
 						
 						</div>
@@ -439,25 +438,34 @@ tabs.set("nav","menu_con");//执行
 
 </script>
 <script type="text/javascript">
-function loadSecoundColumns() {
-	var first_column = $("#first_column").val();
-
-	resetSelect($("#second_column"));
-	
-	if (first_column != "") {
-		$.ajax({
-			url: "<s:url value='/patent/getGoodsSecoundColumn.html'/>?first_column=" + first_column,
-			type: 'get',
-			dataType: 'json',
-			success: function(SecondColumns) {
-				var second_column = $("#second_column");
-				alert(second_column);
-				resetSelect(second_column);
-				addOptions(second_column, SecondColumns);
+$(function(){
+	   $(".first_column").change(function () {
+		  var first_column=$(this).val();
+		 // alert(first_column);
+		  var second_column=$(this).parent(".form-column").children(".second_column");
+		  resetSelect(second_column);
+			if (first_column != "") {
+				$.ajax({
+					url: "<s:url value='/patent/getGoodsSecoundColumn.html'/>?first_column=" + first_column,
+					type: 'get',
+					dataType: 'json',
+					success: function(SecondColumns){
+						resetSelect(second_column);
+						addOptions(second_column, SecondColumns);
+					}
+				})
 			}
-		})
-	}
-}
+	   })
+	   
+	   $(".first_column").trigger("change");
+	   setTimeout(function(){
+		   $(".second_column").each(function(){
+			   $(this).val($(this).attr("subColumn"));
+		   })
+		}, 100);
+});
+	
+	
 
 function addDefaultOption(selectElem) {
 	selectElem.append("<option value=''>请选择</option>");
@@ -476,6 +484,64 @@ function addOptions(selectObj, options) {
 		selectObj.append("<option value='" + val.id + "'>" + val.name + "</option>");
 	});	
 }
+
+
+function changePrice(patentId, price) {
+	$.ajax({
+		url: "<s:url value='/patent/changePrice.html'/>?price=" + price + "&patentId=" + patentId, 
+		type: 'get', 
+		success: function(data) {
+			//formutil.alertMessage('修改成功');	
+		},
+		error: function() {
+			formutil.alertMessage('修改失败');
+		}
+	});	
+}
+
+function changSecondColume(patentId, SecondColumn) {
+	$.ajax({
+		url: "<s:url value='/patent/changSecondColume.html'/>?SecondColumn=" + SecondColumn + "&patentId=" + patentId, 
+		type: 'get', 
+		success: function(data) {
+			//formutil.alertMessage('修改成功');	
+		},
+		error: function() {
+			formutil.alertMessage('修改失败');
+		}
+	});	
+}
+
+	function batchChangePrice() {
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		var uniquePatentNos = []
+		if (!patentSelected) {
+			formutil.alertMessage('请选择专利');
+			
+			return;
+		}
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+		for (var i = 0; i < patents_checked.length; i++) {
+			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+				uniquePatentNos.push(patents_checked[i]);
+				
+			}
+			
+		}
+		var price = prompt("请输入价格", "");
+		
+		var patentIds = uniquePatentNos.join(",");
+		$.ajax({
+			url:"<s:url value='/patent/batchChangePrice.html'/>?price=" +price+"&patentIds="+ patentIds,
+			type:"get",
+				success: function(data) {
+					formutil.alertMessage('批量修改成功',true);	
+				},
+				error: function() {
+					formutil.alertMessage('批量修改失败',true);
+				}
+		});
+	}
 
 </script>
 </body>
