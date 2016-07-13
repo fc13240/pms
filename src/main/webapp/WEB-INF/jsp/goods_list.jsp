@@ -522,7 +522,7 @@ function changSecondColume(patentId, SecondColumn) {
 		var patentIds = uniquePatentNos.join(",");
 		alert(patentIds);
 		$.ajax({
-			url:"<s:url value='/patent/batchChangePrice.html'/>?price=" +price+"&patentId="+ patentIds,
+			url:"<s:url value='/patent/batchChangePrice.html'/>?price=" +price+"&patentIds="+ patentIds,
 			type:"get",
 				success: function(data) {
 					formutil.alertMessage('批量修改成功',true);	
