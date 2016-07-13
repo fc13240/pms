@@ -344,8 +344,7 @@
 							  <th width="100px">发文日</th>
 							  <th>通知书名称</th>
 							  <th width="120px">纸件申请</th>
-							  <th>期限</th>
-							  <th width="190px">通知状态</th>
+							  <th width="190px">期限和通知状态</th>
 							  <!-- 							<th>预览</th> 
 							  <th>下载</th>-->
 							  <th width="130">操作</th>
@@ -385,15 +384,19 @@
 								  </select>
 								
 								</td>
-								<td style="text-align:center"><c:choose>
-									<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-									<c:otherwise>
-									  <c:out value="${notice.remainDays}"/>
-									</c:otherwise>
-								  </c:choose>
-								</td>
-								<td style="text-align:center">
-								  <select class="selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
+
+								<td style="text-align:center" class="date_status">
+								<span class="qixian">
+									<c:choose>
+										<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
+										<c:otherwise>
+									  	<c:out value="${notice.remainDays}"/>
+										</c:otherwise>
+								  	</c:choose>
+								<br>
+								</span>  	
+								
+								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 											  
 										  
@@ -706,6 +709,25 @@ function batchProcessNotice(processStatus) {
 		formutil.clickItemCheckbox('tr th input.check-item', 'tr td input.check-item');
 	});
 	
+	$(function(){
+		//date_status  treatment_status qixian
+		
+		
+		
+		  $(".date_status").each(function () {
+			  var list_name=$(this .treatment_status).find("option:selected").text();
+			 alert(list_name);
+			 // alert(list_name);
+			  if (list_name==current_type_name)
+			  {
+				  $(this).addClass("current_nav");
+					return;  
+			  }
+			   
+		   });	
+		
+		
+	});	
 	function batchShare() {
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
 		var uniquePatentNos = [];
