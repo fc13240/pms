@@ -99,5 +99,7 @@ public interface PatentDao {
 	void batchChangePrice(int price,List<Long> patentIds);
 
 	int bacthsaveGoodsCheckOut(List<Long> patentIds);
+	
+
 
 }

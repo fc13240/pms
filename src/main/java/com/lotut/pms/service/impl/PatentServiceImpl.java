@@ -295,4 +295,5 @@ public class PatentServiceImpl implements PatentService {
 		}
 
 	}
+
 }

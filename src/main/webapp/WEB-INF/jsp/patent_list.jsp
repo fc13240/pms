@@ -202,8 +202,8 @@
 							</a> 
 						</td>
 						<td>
-							<a href="javascript:return void" onclick="delectPatents()" >
-							<button class="button button-primary  button-rounded" style="width:70px;">删除</button>
+							<a href="javascript:return void" onclick="batchDelectPatents()" >
+							<button class="button button-primary  button-rounded" style="width:70px;">批量删除</button>
 							</a> 
 						</td>
 						<td>
@@ -270,11 +270,15 @@
 							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
 							  交费
 							  </a>
+							  <br>
+							   <a   style="color:red" href="javascript:return void" onclick="delectPatent('<c:out value='${patent.patentId}'/>')">
+							  删除
+							  </a>
 							  <br> 
 							  <se:authorize access="hasRole('ROLE_TRADER')">
 								  <c:if test="${patent.transactionStatus==null}">
 	 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
-					                  	<button class="t-btn2" value="1">发布至交易网</button> 
+					                  	<button class="t-btn2" value="1">加入交易</button> 
 				 	                  </a>
 				 	                </c:if>
 				 	                 <c:if test="${patent.transactionStatus != null}">
@@ -400,7 +404,7 @@
 	
 	
 	
-	function delectPatents() {
+	function batchDelectPatents() {
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 		var uniquePatentNos = []
 		if (!patentSelected) {
@@ -635,6 +639,19 @@ var tabs=function(){
     }
 }();
 tabs.set("nav","menu_con");//执行      
+
+function  delectPatent(patentIds){
+	$.ajax({
+		url:"<s:url value='/patent/deletePatents.html'/>?patentIds=" + patentIds,
+		type:"get",
+			success: function(data) {
+				formutil.alertMessage('删除操作成功',true);	
+			},
+			error: function() {
+				formutil.alertMessage('删除操作失败',true);
+			}
+	});
+}
 
 </script>
 

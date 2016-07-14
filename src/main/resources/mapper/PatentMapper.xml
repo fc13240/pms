@@ -523,5 +523,7 @@
 			#{patentId}
 		</foreach>
 	
-	</select>	
+	</select>
+	
+	
 </mapper>

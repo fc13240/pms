@@ -386,4 +386,6 @@ public class PatentController {
 		patentService.batchChangePrice(price, patentIds);
 		
 	}
+	
+
 }
