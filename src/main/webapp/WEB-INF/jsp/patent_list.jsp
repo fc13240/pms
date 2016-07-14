@@ -387,7 +387,7 @@
 			url:"<s:url value='/patent/batchAddGoods.html'/>?patentIds=" + patentIds,
 			type:"get",
 				success: function(data) {
-					formutil.alertMessage('批量发布成功',true);	
+					formutil.alertMessage(data,true);	
 				},
 				error: function() {
 					formutil.alertMessage('批量发布失败');

@@ -367,9 +367,6 @@ public class PatentController {
 		}else {
 			out.write("所选择的专利中包含了已发布的专利，请和核对后再进行发布！");
 		}
-//			int userId=PrincipalUtils.getCurrentUserId();
-//			patentService.batchSaveGoods(patentIds, userId);
-//			patentService.updatePatentsGoodsStatus(patentIds);
 		
 	}
 	
