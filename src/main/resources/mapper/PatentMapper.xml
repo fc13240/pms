@@ -355,10 +355,10 @@
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
-		SELECT up.patent_id,up.price,up.status,up.transaction_type,up.add_date,up.transaction_date,up.owner,up.patent_name,up.app_no 
+		SELECT up.patent_id,up.price,up.status,up.transaction_type,up.add_date,up.transaction_date,up.owner,up.patent_name,up.app_no,up.patent_first_column_id,up.patent_second_column 
 		FROM
-		(SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,sg.owner,sg.transaction_date,p.patent_name,p.app_no
-		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id limit #{page.startIndex}, #{page.pageSize}) up
+		(SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,sg.owner,sg.transaction_date,p.patent_name,p.app_no,ss.patent_first_column_id,sg.patent_second_column
+		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id JOIN sell_second_column  ss ON ss.patent_second_column_id=sg.patent_second_column limit #{page.startIndex}, #{page.pageSize}) up
 		WHERE up.owner=#{userId}
 		 		<if test="status != null">
 		 			and up.status = #{status}

@@ -462,7 +462,7 @@ $(function(){
 		   $(".second_column").each(function(){
 			   $(this).val($(this).attr("subColumn"));
 		   })
-		}, 100);
+		}, 200);
 });
 	
 	
