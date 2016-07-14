@@ -258,4 +258,5 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		return patentMapper.bacthsaveGoodsCheckOut(patentIds);
 
 	}
+
 }
