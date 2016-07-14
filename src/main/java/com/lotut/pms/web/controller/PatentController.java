@@ -271,6 +271,8 @@ public class PatentController {
 		List<GoodsDetail> resultPatents = patentService.searchTransactionPatentsByPage(searchCondition);
 		int totalCount=(int)patentService.searchTransactionPatentsCount(searchCondition);
 		page.setTotalRecords(totalCount);
+		List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
+		model.addAttribute("FirstColumns", FirstColumns);
 		model.addAttribute("patents", resultPatents);
 		model.addAttribute("page", page);
 		return "goods_list";
