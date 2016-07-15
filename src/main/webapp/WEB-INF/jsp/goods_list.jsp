@@ -126,7 +126,7 @@
 						  <th width="90">交易类型</th>  
 						  <th width="90">添加日</th>
 						  <th width="90">交易日</th>
-						  <th width="80">操作</th>
+						  <th width="90">操作</th>
 						</tr>
 					  </thead>
 					  <tbody>
@@ -148,7 +148,7 @@
 								<input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)">
 							</td>
 							<td style="text-align:center">
-								<div class="form-column" style="width:270px;margin: auto" >
+								<div class="form-column" style="width:320px;margin: auto" >
 									<select style="display:inline;width:150px" name="FirstColumn" id="firstColumn${status.index}"  class="form-control first_column" required>
 								  	<option value=''>请选择</option>
 								  	<c:forEach items="${FirstColumns}" var="FirstColumn">
@@ -156,7 +156,7 @@
 										<c:if test="${FirstColumn.id==patent.firstColumn}">selected="selected"</c:if>>${FirstColumn.name}</option>
 								  	</c:forEach>
 									</select>
-									<select style="display:inline;width:110px" name="SecondColumn"  subColumn="${patent.secondColumn}"  id="secondColumn${status.index}" class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', this.value)" required>
+									<select style="display:inline;width:150px" name="SecondColumn"  subColumn="${patent.secondColumn}"  id="secondColumn${status.index}" class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', this.value)" required>
 								  		<option value=''>请选择</option>
 									</select>
 						  		</div>

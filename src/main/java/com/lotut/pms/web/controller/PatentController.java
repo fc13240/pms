@@ -198,10 +198,6 @@ public class PatentController {
 		WebUtils.writeJsonStrToResponse(response, SecondColumns);
 	}
 	
-
-	
-	
-	
 	private void addPatentTypeAndStatusDataToModel(Model model) {
 		List<PatentType> allPatentTypes = patentService.getAllPatentTypes();
 		List<PatentStatus> allPatentStatus = patentService.getAllPatentStatus();
@@ -386,4 +382,6 @@ public class PatentController {
 		patentService.batchChangePrice(price, patentIds);
 		
 	}
+	
+
 }

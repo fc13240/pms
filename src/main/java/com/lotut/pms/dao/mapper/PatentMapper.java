@@ -111,5 +111,6 @@ public interface PatentMapper {
 	void batchChangePrice(@Param("price")int price,@Param("patentIds")List<Long> patentIds);
 
 	int bacthsaveGoodsCheckOut(@Param("patentIds")List<Long> patentIds);
+	
 
 }

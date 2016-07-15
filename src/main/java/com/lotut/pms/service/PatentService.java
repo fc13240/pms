@@ -107,5 +107,7 @@ public interface PatentService {
 	void batchChangePrice(int price,List<Long> patentIds);
 
 	boolean bacthsaveGoodsCheckOut(List<Long> patentIds);
+	
+
 
 }
