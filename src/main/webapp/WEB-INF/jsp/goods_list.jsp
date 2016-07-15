@@ -9,6 +9,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
+<script src="<s:url value='/static/js/sweetalert.min.js'/>"></script>
+<link rel="stylesheet" type="text/css" href="<s:url value='/static/css/sweetalert.css'/>">
 <title>龙图腾专利管家－商品列表</title>
 <%@ include file="_css.jsp" %>
 <body>
@@ -527,20 +529,43 @@ function changSecondColume(patentId, SecondColumn) {
 				
 			}
 			
-		}
-		var price = prompt("请输入价格", "");
-		
+		};
+		var price = 0;
 		var patentIds = uniquePatentNos.join(",");
-		$.ajax({
+		//var price = prompt("请输入价格", "");
+		swal({   
+			title: "批量修改价格",   
+			//text: "这里可以输入并确认:",   
+			type: "input",   
+			showCancelButton: true,   
+			closeOnConfirm: false,   
+			animation: "slide-from-top",   
+			inputPlaceholder: "请输入价格:￥" 
+		}, function(inputValue) {
+			price = inputValue;
+			$.ajax({
+				url: "<s:url value='/patent/batchChangePrice.html'/>?price=" +price+"&patentIds="+ patentIds,
+				type: "get"
+			}).done(function(data) {
+				swal("操作成功!", "已成功修改价格！", "success");
+				location.reload();
+			}).error(function(data) {
+				swal("操作失败!", "修改价格失败！", "error");
+				//swal("OMG", "删除操作失败了!", "error");
+			});
+		});
+
+		//var price = prompt("请输入价格", "");
+		/* $.ajax({
 			url:"<s:url value='/patent/batchChangePrice.html'/>?price=" +price+"&patentIds="+ patentIds,
 			type:"get",
 				success: function(data) {
-					formutil.alertMessage('批量修改成功',true);	
+					//formutil.alertMessage('批量修改成功',true);	
 				},
 				error: function() {
 					formutil.alertMessage('批量修改失败',true);
 				}
-		});
+		}); */
 	}
 
 </script>
