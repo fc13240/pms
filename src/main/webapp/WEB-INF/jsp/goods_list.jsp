@@ -550,8 +550,7 @@ function changSecondColume(patentId, SecondColumn) {
 				swal("操作成功!", "已成功修改价格！", "success");
 				location.reload();
 			}).error(function(data) {
-				swal("操作失败!", "修改价格失败！", "error");
-				//swal("OMG", "删除操作失败了!", "error");
+				swal("操作失败!", "修改价格失败！", "error"); 
 			});
 		});
 
