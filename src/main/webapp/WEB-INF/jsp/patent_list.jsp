@@ -203,7 +203,7 @@
 						</td>
 						<td>
 							<a href="javascript:return void" onclick="batchDelectPatents()" >
-							<button class="button button-primary  button-rounded" style="width:70px;">批量删除</button>
+							<button class="button button-primary  button-rounded" style="width:80px;">批量删除</button>
 							</a> 
 						</td>
 						<td>
@@ -214,7 +214,7 @@
 						<se:authorize access="hasRole('ROLE_TRADER')">
 						 <td>
 							<a href="javascript:return void" onclick="batchAddGoods()" >
-							<button class="button button-primary  button-rounded" style="width:70px;">批量发布交易</button>
+							<button class="button button-primary  button-rounded" style="width:110px;">批量发布交易</button>
 							</a> 
 						</td>	 
 						</se:authorize>								
