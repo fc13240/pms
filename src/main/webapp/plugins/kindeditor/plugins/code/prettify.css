@@ -10,4 +10,10 @@ pre.prettyprint {
 	font-family: "Consolas", "Monaco", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
 	margin: 1em 0px;
 	white-space: pre;
+	/* 自定义代码高亮 */
+	width: 630px;
+	margin: 1em auto;
+	padding: 1em;
+	white-space: pre-wrap;
 }
+

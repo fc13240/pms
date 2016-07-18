@@ -12,13 +12,13 @@
 	<!-- 编辑器控件 -->
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/default/default.css" />
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/simple/simple.css" />
-	<link rel="stylesheet" href="${base }/plugins/code/prettify.css" />
+	<link rel="stylesheet" href="${base }/plugins/kindeditor/plugins/code/prettify.css" />
 	<script type="text/javascript">
 			var editor;
 			KindEditor.ready(function(K) {
 				editor = K.create('textarea[name="content"]', {
-					cssPath : '${base}/plugins/code/prettify.css',
- 					uploadJson : "<s:url value='/kindeditor/file_upload.html'/>",
+					cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
+ 					uploadJson : "${base}/kindeditor/file_upload.html",
 					fileManagerJson : '已经上传的文件的文件列表地址', 
 					allowFileManager : true,
 				   resizeType : 0,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
