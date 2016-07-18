@@ -1,6 +1,9 @@
 package com.lotut.pms.web.util;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +19,20 @@ public class WebUtils {
 			out.write(mapper.writeValueAsString(value));
 			out.flush();
 		}
+	}
+	
+	public static void writeStreamToResponse(HttpServletResponse response, InputStream in) throws IOException {
+		int BUFFER_SIZE = 8 * 1024;
+		byte[] buffer = new byte[BUFFER_SIZE];
+		try (OutputStream out = response.getOutputStream();
+				BufferedInputStream bis = new BufferedInputStream(in))
+			{
+				int bytesRead = -1;
+				while ((bytesRead = bis.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesRead);
+				}
+				out.flush();
+			}
 	}
 	
 	public static int getPageSize(HttpSession session) {
