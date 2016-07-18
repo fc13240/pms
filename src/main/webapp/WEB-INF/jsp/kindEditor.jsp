@@ -50,9 +50,8 @@
 	<h1>${msg }</h1>  
 	<div>
 		<br/>
-		&nbsp;&nbsp;从官网下直接下载KindEditor来使用，还不太行,因为对于KindEditor中的文件上传是针对php使用的，所以现在要在java中嵌入使用还得修整一下。把KindEditor包下所有的file_manager.php(文件管理地址)及其file_upload.php(文件上传地址)换成自己实现的地址。具体实现方法代码在附件中。
+		&nbsp;&nbsp;KindEditor中的文件上传是针对php使用的，所以现在要在java中嵌入使用还得修整一下。把KindEditor包下所有的file_manager.php(文件管理地址)及其file_upload.php(文件上传地址)换成自己实现的地址。
 		<br/>  
-		【注意】<font color=red>对应的文件上传和文件管理地址要全部替换掉成自己实现的哦</font>这样才能保证正常使用哦
 		<br/>
 		<br/>
 	</div>
