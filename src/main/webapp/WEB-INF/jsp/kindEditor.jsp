@@ -11,6 +11,7 @@
 	<title>测试页面</title>
 	<!-- 编辑器控件 -->
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/default/default.css" />
+	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/simple/simple.css" />
 	<%-- <link rel="stylesheet" type="text/css" href="<s:url value='/plugins/kindeditor/themes/default/default.css'/>"/> --%>
 	<script type="text/javascript">
 			var editor;
@@ -20,14 +21,13 @@
 					fileManagerJson : '已经上传的文件的文件列表地址',
 					allowFileManager : true,
 				   resizeType : 0,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
-				   themeType : 'simple',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
+				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
 				   height  : '500px',
 				   readonlyMode : false, //只读模式 默认为false
 				   allowFileManager : true,  //显示浏览远程服务器按钮
 				   afterChange : function() {
 					      $('.word_count1').html(this.count()); //字数统计包含HTML代码
 					      $('.word_count2').html(this.count('text'));  //字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字
-					      //////////
 					      //限制字数
 					      var limitNum = 100;  //设定限制字数
 					      var pattern = '还可以输入' + limitNum + '字'; 
