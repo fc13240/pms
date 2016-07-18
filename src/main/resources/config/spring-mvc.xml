@@ -25,6 +25,11 @@
   	<task:executor id="executor" pool-size="1" />
     <task:scheduler id="scheduler" pool-size="1" />
     <task:annotation-driven executor="executor" scheduler="scheduler" />
+     <!-- 图片,css,js等静态资源配置 -->
+    <mvc:resources location="/plugins/" mapping="/plugins/**"/>
+    <!-- 开启@MatrixVariable注解 -->
+    <mvc:annotation-driven enable-matrix-variables="true">
+    </mvc:annotation-driven>
 <!-- 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>   -->
   
 	<!--  

@@ -38,6 +38,9 @@
 		<encoding>${encoding.utf-8}</encoding>
 		<mongodb-driver.version>3.0.4</mongodb-driver.version>
 		<es.version>1.7.3</es.version>
+		<commons-fileupload.version>1.2.1</commons-fileupload.version>
+		<commons-io.version>1.4</commons-io.version>
+		<json_simple.version>1.1</json_simple.version>
 	</properties>
 	
 	
@@ -303,7 +306,36 @@
 		    <groupId>org.apache.lucene</groupId>
 		    <artifactId>lucene-core</artifactId>
 		    <version>4.10.4</version>
-		</dependency>		
+		</dependency>
+		
+		
+		<!-- ################kindEditor################# -->	
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>${commons-fileupload.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>${commons-io.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>${json_simple.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>commons-logging</groupId>
+		    <artifactId>commons-logging</artifactId>
+		    <version>1.2</version>
+		</dependency>
+		 	<!-- fastjson -->
+	 	<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.33</version>
+		</dependency>	
 	</dependencies>
 	 
 	<!-- ################## Build ################## -->		 
