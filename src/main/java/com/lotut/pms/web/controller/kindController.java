@@ -18,7 +18,7 @@ public class kindController
 	@RequestMapping(value="/index",method=RequestMethod.GET)
 	public String test(Model model){
 		model.addAttribute("msg", "Hello FindEditor");
-		return "test";
+		return "kindEditor";
 	}
 	
 	/**
