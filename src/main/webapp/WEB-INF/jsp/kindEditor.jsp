@@ -20,27 +20,6 @@
 				});
 				editor.html("你可以测试一下插入文件和插入图片功能，提交后可以在下方看见预览！");
 			});
-			
-			
-			
-			function submitForm(){
-				$.ajax({
-					type: "POST",
-					url: "<s:url value='/kindEditor/ajaxForm.html'/>",
-					data: {"content":editor.html()},
-					success: function(data){
-						if(data){
-							$("#contentView").html(data);
-							$("textarea[name=content]").val("");
-							editor.html("");
-							
-						}
-					},
-					error: function(){
-						alert("操作失败");
-					}
-				});
-			}
 	</script>
 </head>
 
@@ -78,5 +57,26 @@
 	<div id="contentView">
 		
 	</div>
+	
+	<script type="text/javascript">
+			function submitForm(){
+				$.ajax({
+					type: "POST",
+					url: "<s:url value='/kindEditor/ajaxForm.html'/>",
+					data: {"content":editor.html()},
+					success: function(data){
+						if(data){
+							$("#contentView").html(data);
+							$("textarea[name=content]").val("");
+							editor.html("");
+							
+						}
+					},
+					error: function(){
+						alert("操作失败");
+					}
+				});
+			}
+	</script>
 </body>
 </html>
