@@ -10,7 +10,7 @@
 	<c:import url="common/header.jsp"></c:import>
 	<title>测试页面</title>
 	<!-- 编辑器控件 -->
-	<link rel="stylesheet" href="plugins/kindeditor/themes/default/default.css" />
+	<link rel="stylesheet" type="text/css" href="<s:url value='/plugins/kindeditor/themes/default/default.css'/>"/>
 	<script>
 			var editor;
 			KindEditor.ready(function(K) {
