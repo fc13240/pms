@@ -4,12 +4,11 @@
 <%@ taglib uri="security" prefix="se" %>
 <%@ taglib uri="c" prefix="c" %>
 <%@ taglib uri="fmt" prefix="fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 	<c:import url="common/header.jsp"></c:import>
 	<title>测试页面</title>
-	
 	<!-- 编辑器控件 -->
 	<link rel="stylesheet" href="plugins/kindeditor/themes/default/default.css" />
 	<script>
@@ -23,24 +22,20 @@
 			
 			
 			
-			function submitForm()
-			{
+			function submitForm(){
 				$.ajax({
 					type: "POST",
 					url: "<s:url value='/kindEditor/ajaxForm.html'/>",
 					data: {"content":editor.html()},
-					success: function(data)
-					{
-						if(data)
-						{
+					success: function(data){
+						if(data){
 							$("#contentView").html(data);
 							$("textarea[name=content]").val("");
 							editor.html("");
 							
 						}
 					},
-					error: function()
-					{
+					error: function(){
 						alert("操作失败");
 					}
 				});

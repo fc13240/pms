@@ -24,7 +24,7 @@ public class kindController
 	/**
 	 * 提交表单操作
 	 */
-	@RequestMapping(value="ajaxForm",method=RequestMethod.POST)
+	@RequestMapping(value="/ajaxForm",method=RequestMethod.POST)
 	public void ajaxForm(HttpServletResponse response, String content)
 	{
         response.setCharacterEncoding("UTF-8");
