@@ -29,6 +29,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 
@@ -41,7 +42,7 @@ public class KindEditorController {
 
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "file_upload.html")
-	//@ResponseBody
+	@ResponseBody
 	public void fileUpload(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException,
 			FileUploadException {
