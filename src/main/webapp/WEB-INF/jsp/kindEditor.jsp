@@ -18,7 +18,8 @@
 			KindEditor.ready(function(K) {
 				editor = K.create('textarea[name="content"]', {
 					cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
- 					uploadJson : "${base}/kindeditor/file_upload.html",
+ 					 uploadJson : "${base}/kindeditor/file_upload.html", 
+ 					/* uploadJson :"<s:url value='/kindeditor/file_upload.html'/>", */
 					fileManagerJson : '已经上传的文件的文件列表地址', 
 					allowFileManager : true,
 				   resizeType : 0,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
