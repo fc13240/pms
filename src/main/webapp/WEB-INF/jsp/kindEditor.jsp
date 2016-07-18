@@ -12,19 +12,32 @@
 	<!-- 编辑器控件 -->
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/default/default.css" />
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/simple/simple.css" />
-	<%-- <link rel="stylesheet" type="text/css" href="<s:url value='/plugins/kindeditor/themes/default/default.css'/>"/> --%>
+	<link rel="stylesheet" href="${base }/plugins/code/prettify.css" />
 	<script type="text/javascript">
 			var editor;
 			KindEditor.ready(function(K) {
 				editor = K.create('textarea[name="content"]', {
-					uploadJson : '上传文件的地址',
-					fileManagerJson : '已经上传的文件的文件列表地址',
+					cssPath : '${base}/plugins/code/prettify.css',
+ 					uploadJson : "<s:url value='/kindeditor/file_upload.html'/>",
+					fileManagerJson : '已经上传的文件的文件列表地址', 
 					allowFileManager : true,
 				   resizeType : 0,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
 				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
 				   height  : '500px',
 				   readonlyMode : false, //只读模式 默认为false
 				   allowFileManager : true,  //显示浏览远程服务器按钮
+				   afterCreate : function() {
+						var self = this;
+						K.ctrl(document, 13, function() {
+							self.sync();
+							document.forms['form'].submit();
+						});
+						K.ctrl(self.edit.doc, 13, function() {
+							self.sync();
+							document.forms['form'].submit();
+						});
+					},
+				   
 				   afterChange : function() {
 					      $('.word_count1').html(this.count()); //字数统计包含HTML代码
 					      $('.word_count2').html(this.count('text'));  //字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字
@@ -44,7 +57,8 @@
 					       pattern = '还可以输入' +  result + '字'; 
 					       }
 					       $('.word_surplus').html(pattern); //输入显示
-				   }
+				   },
+
 				});
 				editor.html("你可以测试一下插入文件和插入图片功能，提交后可以在下方看见预览！");
 			});
@@ -97,7 +111,7 @@
 			function submitForm(){
 				$.ajax({
 					type: "POST",
-					url: "<s:url value='/kindEditor/ajaxForm.html'/>",
+					url: "<s:url value='/ajaxForm.html'/>",
 					data: {"content":editor.html()},
 					success: function(data){
 						if(data){
@@ -111,7 +125,9 @@
 						alert("操作失败");
 					}
 				});
-			}
+			};
+			
+
 	</script>
 </body>
 </html>

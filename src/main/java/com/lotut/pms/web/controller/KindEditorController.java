@@ -41,7 +41,7 @@ import com.alibaba.fastjson.JSON;
 public class KindEditorController {
 
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value = "file_upload.html")
+	@RequestMapping(value = "file_upload")
 	@ResponseBody
 	public void fileUpload(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException,
