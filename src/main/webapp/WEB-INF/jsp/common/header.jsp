@@ -9,6 +9,10 @@
 <c:set var="base" value="<%=basePath%>" scope="application"></c:set>
 
 <!-- 引入findeditor.js -->
-<script src="<s:url value='/plugins/kindeditor/kindeditor-all-min.js'/>"></script>
-<script src="<s:url value='/plugins/kindeditor/lang/zh_CN.js'/>"></script>
-<script src="<s:url value='/temp/js/jquery.min.js'/>"></script>
+<script type="text/javascript" src="${base }/plugins/kindeditor/kindeditor-all-min.js"></script>
+<script type="text/javascript" src="${base }/plugins/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript" src="${base }/temp/js/jquery.min.js"></script>
+<%-- <script src="<s:url value='/plugins/kindeditor/kindeditor-all-min.js'/>"></script>
+<script src="<s:url value='/plugins/kindeditor/lang/zh_CN.js'/>"></script> --%>
+
+<%-- <script src="<s:url value='/temp/js/jquery.min.js'/>"></script> --%>
