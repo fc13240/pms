@@ -8,6 +8,7 @@
 <html>
 <head>
 	<c:import url="common/header.jsp"></c:import>
+	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN"> 
 	<title>测试页面</title>
 	<!-- 编辑器控件 -->
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/default/default.css" />
@@ -18,9 +19,9 @@
 			KindEditor.ready(function(K) {
 				editor1 = K.create('textarea[name="editorContent"]', {
 					cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
- 					 uploadJson : "/kindeditor/file_upload.html", 
+ 					 uploadJson : "${base}/kindeditor/file_upload.html", 
  					 /* uploadJson :"<s:url value='/kindeditor/file_upload.html'/>", */ 
-					fileManagerJson : '/kindeditor/file_manager_json.html', 
+					fileManagerJson : '${base}/kindeditor/file_manager_json.html',
 					allowFileManager : true,
 				   resizeType : 0,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
 				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
@@ -196,5 +197,7 @@
 			};
 
 	</script>
+	
+	
 </body>
 </html>
