@@ -18,9 +18,9 @@
 			KindEditor.ready(function(K) {
 				editor1 = K.create('textarea[name="editorContent"]', {
 					cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
- 					 uploadJson : "${base}/kindeditor/file_upload.html", 
+ 					 uploadJson : "/kindeditor/file_upload.html", 
  					 /* uploadJson :"<s:url value='/kindeditor/file_upload.html'/>", */ 
-					fileManagerJson : '${base}/kindeditor/file_manager_json.html', 
+					fileManagerJson : '/kindeditor/file_manager_json.html', 
 					allowFileManager : true,
 				   resizeType : 0,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
 				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
@@ -65,6 +65,7 @@
 				});
 				prettyPrint();
 				editor1.html("你可以测试一下插入文件和插入图片功能，提交后可以在下方看见预览！");
+				
 			});
 			
 	</script>
