@@ -16,7 +16,7 @@
 	<script type="text/javascript">
 			var editor;
 			KindEditor.ready(function(K) {
-				editor = K.create('textarea[name="content"]', {
+				editor = K.create('textarea[name="editorContent"]', {
 					cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
  					 uploadJson : "${base}/kindeditor/file_upload.html", 
  					 /* uploadJson :"<s:url value='/kindeditor/file_upload.html'/>", */ 
@@ -124,7 +124,7 @@
 	            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 	            	<tr>
 	                    <td style="width:520px;">
-	                    	<textarea rows="3" cols="10" id="content1" name="content" style="width:520px;height:400px;visibility:hidden;"></textarea>
+	                    	<textarea rows="3" cols="10" id="editorContent" name="editorContent" style="width:520px;height:400px;visibility:hidden;"></textarea>
 	                    </td>
 	            	</tr>
 	                <tr>
@@ -156,6 +156,13 @@
 
 	    </div>
 	</div>
+	<div>
+		<select id="editorid" onchange="findText(this.value)">
+			<c:forEach items="${editorIds }" var="editorId">
+				<option value="${editorId }">文档:${editorId }</option>
+			</c:forEach>		
+		</select>
+	</div>
 	<div id="contentView">
 		
 	</div>
@@ -164,12 +171,12 @@
 			function submitForm(){
 				$.ajax({
 					type: "POST",
-					url: "<s:url value='/ajaxForm.html'/>",
-					data: {"content":editor.html()},
+					url: "<s:url value='/editor/addEditorText.html'/>",
+					data: {"editorContent":editor.html()},
 					success: function(data){
 						if(data){
 							$("#contentView").html(data);
-							$("textarea[name=content]").val("");
+							$("textarea[name=editorContent]").val("");
 							editor.html("");
 							
 						}
@@ -180,6 +187,13 @@
 				});
 			};
 			
+
+
+
+			function findText(editorId){
+				var url = "<c:url value='/editor/findTextById.html'/>?editorId="+editorId;
+				location.href=url;
+			};
 
 	</script>
 </body>

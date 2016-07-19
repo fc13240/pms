@@ -53,4 +53,8 @@
 		<constructor-arg ref="patentMongoDao"/>
 	</bean>
 	
+	<bean id="editorService" class="com.lotut.pms.service.impl.EditorServiceImp">
+		<constructor-arg ref="textEditorDao"/>
+	</bean>
+	
 </beans>
