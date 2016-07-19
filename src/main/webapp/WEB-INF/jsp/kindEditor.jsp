@@ -69,7 +69,7 @@
 		<script type="text/javascript">
 			var editor;
 			KindEditor.ready(function(K) {
-				editor = K.create('textarea[name="content"]', {
+				editor = K.create('textarea[name="kind"]', {
 					cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
 					allowFileManager : true,
 				   resizeType : 0,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
@@ -129,21 +129,14 @@
 	        <br>
 
 	    </div>
-	</div>
-	<div class="main">
-	    <div class="wraper">
+	    	    <div class="wraper">
 	        <form id="form" name="form" class="registerform" action="" onsubmit="return false;" method="post">
 	            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 	            	<tr>
 	                    <td style="width:520px;">
-	                    	<textarea rows="3" cols="10" name="kind" id="kind" style="width:520px;height:400px;visibility:hidden;"></textarea>
+	                    	<textarea rows="3" cols="10" name="kind" style="width:520px;height:400px;visibility:hidden;"></textarea>
 	                    </td>
 	            	</tr>
-	                <tr>
-	                    <td style="padding:10px 0 18px 0;">
-	                        <input type="button" value="提 交" class="ajaxpost" id="submit" onclick="submitForm();"/> 
-	                    </td>
-	                </tr>
 	            </table>
 	        </form>
 	        <br>
