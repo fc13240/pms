@@ -149,7 +149,7 @@
 	            	</tr>
 	            	 <tr>
 	                    <td style="padding:10px 0 18px 0;">
-	                        <input type="button" value="插入" name="getHtml" class="ajaxpost" id="submit" /> 
+	                        <input type="button" value="插入" name="getHtml" class="ajaxpost" id="insert" /> 
 	                    </td>
 	                </tr>
 	            </table>

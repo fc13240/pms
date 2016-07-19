@@ -29,9 +29,9 @@
 					data: {"editorContent":editor.html()},
 					success: function(data){
 						if(data){
-							$("#contentView").html(data);
-							$("textarea[name=editorContent]").val("");
-							editor.html("");
+							//$("#contentView").html(data);
+							$("textarea[name=editorContent]").val(editor.html());
+							editor.html(editor.html());
 							
 						}
 					},
@@ -40,14 +40,6 @@
 					}
 				});
 			};
-			KindEditor.ready(function(K) {
-				K.create('textarea[name="content"]', {
-					afterChange : function() {
-						K('.word_count1').html(this.count());
-						K('.word_count2').html(this.count('text'));
-					}
-				});
-			});
 	</script>
 </head>
 
@@ -94,10 +86,6 @@
 				<option value="${editorId }">文档：${editorId }</option>
 			</c:forEach>		
 		</select>
-	
-	<div id="contentView">
-	
-	</div>
 <script type="text/javascript">
 	function findText(editorId){
 		var url = "<c:url value='/editor/findTextById.html'/>?editorId="+editorId;
