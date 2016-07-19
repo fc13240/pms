@@ -77,6 +77,8 @@
 				   height  : '500px',
 				   readonlyMode : true, //只读模式 默认为false
 				   allowFileManager : true,  //显示浏览远程服务器按钮
+				   afterBlur: function(){this.sync();},
+				   syncType:"auto",
 				   afterCreate : function() {
 						var self = this;
 						K.ctrl(document, 13, function() {
@@ -91,6 +93,12 @@
 				});
 				prettyPrint();
 				editor.html("测试测试测试的的卡卡健康的卡卡卡了！");
+				/* 代码插入 */
+				K('input[name=getHtml]').click(function (e) {
+	                alert(editor.html());
+	                var text=editor.html();
+	                K.insertHtml('#content1', text);
+	            });
 			});
 			
 	</script>
@@ -129,7 +137,7 @@
 	        <br>
 
 	    </div>
-	    	    <div class="wraper">
+	   <div class="wraper">
 	        <form id="form" name="form" class="registerform" action="" onsubmit="return false;" method="post">
 	            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 	            	<tr>
@@ -139,7 +147,7 @@
 	            	</tr>
 	            	 <tr>
 	                    <td style="padding:10px 0 18px 0;">
-	                        <input type="button" value="插入" class="ajaxpost" id="submit" onclick="insert();"/> 
+	                        <input type="button" value="插入" name="getHtml" class="ajaxpost" id="submit" /> 
 	                    </td>
 	                </tr>
 	            </table>
@@ -171,11 +179,6 @@
 					}
 				});
 			};
-			
-			function insert(){
-				//var text = editor.text("#kind");
-				K.insertHtml('#content1', "dhajkdjkakd");
-			}
 			
 
 	</script>

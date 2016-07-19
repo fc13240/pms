@@ -1,6 +1,8 @@
 package com.lotut.pms.web.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+
 
 public class kindEditorFileController {
 	/** 
@@ -32,6 +36,7 @@ public class kindEditorFileController {
      * @param request {@link HttpServletRequest} 
      * @param response {@link HttpServletResponse} 
      * @return json response 
+     * 绝对路径保存照片文件
      */  
    @RequestMapping(path = "/fileUpload", method = RequestMethod.POST)  
    @ResponseBody  
@@ -278,6 +283,36 @@ public class kindEditorFileController {
                return ((String)hashA.get("filetype")).compareTo((String)hashB.get("filetype"));  
            }  
        }  
-   }  
+   }
+   
+   
+	/**
+	 *输出json
+	 * @param response
+	 * @param msg
+	 */
+	private void writeJson(HttpServletResponse response, Object msg){
+		response.reset();
+       response.setCharacterEncoding("UTF-8");
+       response.setContentType("text/html");
+       PrintWriter writer = null;
+       try {
+           writer = response.getWriter();
+           
+			writer.println(JSON.toJSONString(msg));
+           
+           writer.flush();
+       } catch (IOException e) {
+           e.printStackTrace();
+       } finally {
+           if (writer != null) {
+               try {
+                   writer.close();
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
+           }
+       }
+	}
 
 }
