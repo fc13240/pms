@@ -75,7 +75,7 @@
 				   resizeType : 0,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
 				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
 				   height  : '500px',
-				   readonlyMode : false, //只读模式 默认为false
+				   readonlyMode : true, //只读模式 默认为false
 				   allowFileManager : true,  //显示浏览远程服务器按钮
 				   afterCreate : function() {
 						var self = this;
@@ -116,7 +116,7 @@
 	            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 	            	<tr>
 	                    <td style="width:520px;">
-	                    	<textarea rows="3" cols="10" name="content" style="width:520px;height:400px;visibility:hidden;"></textarea>
+	                    	<textarea rows="3" cols="10" id="content1" name="content" style="width:520px;height:400px;visibility:hidden;"></textarea>
 	                    </td>
 	            	</tr>
 	                <tr>
@@ -134,9 +134,14 @@
 	            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 	            	<tr>
 	                    <td style="width:520px;">
-	                    	<textarea rows="3" cols="10" name="kind" style="width:520px;height:400px;visibility:hidden;"></textarea>
+	                    	<textarea rows="3" cols="10" id="kind1" name="kind" style="width:520px;height:400px;visibility:hidden;"></textarea>
 	                    </td>
 	            	</tr>
+	            	 <tr>
+	                    <td style="padding:10px 0 18px 0;">
+	                        <input type="button" value="插入" class="ajaxpost" id="submit" onclick="insert();"/> 
+	                    </td>
+	                </tr>
 	            </table>
 	        </form>
 	        <br>
@@ -166,6 +171,11 @@
 					}
 				});
 			};
+			
+			function insert(){
+				//var text = editor.text("#kind");
+				K.insertHtml('#content1', "dhajkdjkakd");
+			}
 			
 
 	</script>
