@@ -14,9 +14,9 @@
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/simple/simple.css" />
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/plugins/code/prettify.css" />
 	<script type="text/javascript">
-			var editor;
+			var editor1;
 			KindEditor.ready(function(K) {
-				editor = K.create('textarea[name="editorContent"]', {
+				editor1 = K.create('textarea[name="editorContent"]', {
 					cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
  					 uploadJson : "${base}/kindeditor/file_upload.html", 
  					 /* uploadJson :"<s:url value='/kindeditor/file_upload.html'/>", */ 
@@ -27,15 +27,17 @@
 				   height  : '500px',
 				   readonlyMode : false, //只读模式 默认为false
 				   allowFileManager : true,  //显示浏览远程服务器按钮
+				   afterBlur: function(){this.sync();},
+				   syncType:"auto",
 				   afterCreate : function() {
 						var self = this;
 						K.ctrl(document, 13, function() {
 							self.sync();
-							document.forms['form'].submit();
+							document.forms['form1'].submit();
 						});
 						K.ctrl(self.edit.doc, 13, function() {
 							self.sync();
-							document.forms['form'].submit();
+							document.forms['form1'].submit();
 						});
 					},
 				   
@@ -62,7 +64,7 @@
 
 				});
 				prettyPrint();
-				editor.html("你可以测试一下插入文件和插入图片功能，提交后可以在下方看见预览！");
+				editor1.html("你可以测试一下插入文件和插入图片功能，提交后可以在下方看见预览！");
 			});
 			
 	</script>
@@ -83,11 +85,11 @@
 						var self = this;
 						K.ctrl(document, 13, function() {
 							self.sync();
-							document.forms['form'].submit();
+							document.forms['form2'].submit();
 						});
 						K.ctrl(self.edit.doc, 13, function() {
 							self.sync();
-							document.forms['form'].submit();
+							document.forms['form2'].submit();
 						});
 					},
 				});
@@ -97,7 +99,7 @@
 				K('input[name=getHtml]').click(function (e) {
 	                alert(editor.html());
 	                var text=editor.html();
-	                K.insertHtml('#content1', text);
+	                K.insertHtml('#editorContent1', text);
 	            });
 			});
 			
@@ -120,11 +122,11 @@
 	<!-- 主内容 start -->
 	<div class="main">
 	    <div class="wraper">
-	        <form id="form" name="form" class="registerform" action="" onsubmit="return false;" method="post">
+	        <form id="form1" name="form1" class="registerform" action="" onsubmit="return false;" method="post">
 	            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 	            	<tr>
 	                    <td style="width:520px;">
-	                    	<textarea rows="3" cols="10" id="editorContent" name="editorContent" style="width:520px;height:400px;visibility:hidden;"></textarea>
+	                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent" style="width:520px;height:400px;visibility:hidden;"></textarea>
 	                    </td>
 	            	</tr>
 	                <tr>
@@ -138,7 +140,7 @@
 
 	    </div>
 	   <div class="wraper">
-	        <form id="form" name="form" class="registerform" action="" onsubmit="return false;" method="post">
+	        <form id="form2" name="form2" class="registerform" action="" onsubmit="return false;" method="post">
 	            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 	            	<tr>
 	                    <td style="width:520px;">
@@ -163,21 +165,18 @@
 			</c:forEach>		
 		</select>
 	</div>
-	<div id="contentView">
-		
-	</div>
 	
 	<script type="text/javascript">
 			function submitForm(){
 				$.ajax({
 					type: "POST",
 					url: "<s:url value='/editor/addEditorText.html'/>",
-					data: {"editorContent":editor.html()},
+					data: {"editorContent":editor1.html()},
 					success: function(data){
 						if(data){
-							$("#contentView").html(data);
+							// $("#contentView").html(data);
 							$("textarea[name=editorContent]").val("");
-							editor.html("");
+							editor1.html("");
 							
 						}
 					},
