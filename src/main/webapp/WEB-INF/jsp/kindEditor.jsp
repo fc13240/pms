@@ -10,26 +10,13 @@
 	<c:import url="common/header.jsp"></c:import>
 	<title>测试页面</title>
 	<!-- 编辑器控件 -->
-<<<<<<< HEAD
-	<link rel="stylesheet" href="<c:url value='plugins/kindeditor/themes/default/default.css'/>" />
-	<script>
-			var editor;
-			KindEditor.ready(function(K) {
-				editor = K.create('textarea[name="editorContent"]', {
-					allowFileManager : true,
-					afterChange : function() {
-						K('.word_count1').html(this.count());
-						K('.word_count2').html(this.count('text'));
-					}
-				
-=======
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/default/default.css" />
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/simple/simple.css" />
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/plugins/code/prettify.css" />
 	<script type="text/javascript">
 			var editor;
 			KindEditor.ready(function(K) {
-				editor = K.create('textarea[name="content"]', {
+				editor = K.create('textarea[name="editorContent"]', {
 					cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
  					 uploadJson : "${base}/kindeditor/file_upload.html", 
  					 /* uploadJson :"<s:url value='/kindeditor/file_upload.html'/>", */ 
@@ -73,28 +60,11 @@
 					       $('.word_surplus').html(pattern); //输入显示
 				   },
 
->>>>>>> 7b72a2b5470678bc3db30f1823507a18b360e1d8
 				});
 				prettyPrint();
 				editor.html("你可以测试一下插入文件和插入图片功能，提交后可以在下方看见预览！");
 			});
 			
-<<<<<<< HEAD
-			
-			
-			function submitForm(){
-				$.ajax({
-					type: "POST",
-					url: "<s:url value='/editor/addEditorText.html'/>",
-					data: {"editorContent":editor.html()},
-					success: function(data){
-						if(data){
-							$("#contentView").html(data);
-							$("textarea[name=editorContent]").val("");
-							editor.html("");
-							
-						}
-=======
 	</script>
 		<script type="text/javascript">
 			var editor;
@@ -107,6 +77,8 @@
 				   height  : '500px',
 				   readonlyMode : true, //只读模式 默认为false
 				   allowFileManager : true,  //显示浏览远程服务器按钮
+				   afterBlur: function(){this.sync();},
+				   syncType:"auto",
 				   afterCreate : function() {
 						var self = this;
 						K.ctrl(document, 13, function() {
@@ -117,31 +89,22 @@
 							self.sync();
 							document.forms['form'].submit();
 						});
->>>>>>> 7b72a2b5470678bc3db30f1823507a18b360e1d8
 					},
 				});
-<<<<<<< HEAD
-			};
-
-		/* KindEditor.ready(function(K) {
-			K.create('textarea[name="editorContent"]', {
-				afterChange : function() {
-					K('.word_count1').html(this.count());
-					K('.word_count2').html(this.count('text'));
-				}
-			});
-		}); */
-=======
 				prettyPrint();
 				editor.html("测试测试测试的的卡卡健康的卡卡卡了！");
+				/* 代码插入 */
+				K('input[name=getHtml]').click(function (e) {
+	                alert(editor.html());
+	                var text=editor.html();
+	                K.insertHtml('#content1', text);
+	            });
 			});
 			
->>>>>>> 7b72a2b5470678bc3db30f1823507a18b360e1d8
 	</script>
 </head>
 
 <body style="background-color: #FFF">
-
 	${base }
 	<p>
 	<h1>${msg }</h1>  
@@ -161,15 +124,7 @@
 	            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 	            	<tr>
 	                    <td style="width:520px;">
-<<<<<<< HEAD
-	                    	<textarea rows="3" cols="10" name="editorContent" style="width:520px;height:400px;visibility:hidden;"></textarea>
-	                    	<p>
-								您当前输入了 <span class="word_count1">0</span> 个文字。（字数统计包含HTML代码。）<br />
-								您当前输入了 <span class="word_count2">0</span> 个文字。（字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字。）
-							</p>
-=======
-	                    	<textarea rows="3" cols="10" id="content1" name="content" style="width:520px;height:400px;visibility:hidden;"></textarea>
->>>>>>> 7b72a2b5470678bc3db30f1823507a18b360e1d8
+	                    	<textarea rows="3" cols="10" id="editorContent" name="editorContent" style="width:520px;height:400px;visibility:hidden;"></textarea>
 	                    </td>
 	            	</tr>
 	                <tr>
@@ -182,7 +137,7 @@
 	        <br>
 
 	    </div>
-	    	    <div class="wraper">
+	   <div class="wraper">
 	        <form id="form" name="form" class="registerform" action="" onsubmit="return false;" method="post">
 	            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 	            	<tr>
@@ -192,7 +147,7 @@
 	            	</tr>
 	            	 <tr>
 	                    <td style="padding:10px 0 18px 0;">
-	                        <input type="button" value="插入" class="ajaxpost" id="submit" onclick="insert();"/> 
+	                        <input type="button" value="插入" name="getHtml" class="ajaxpost" id="submit" /> 
 	                    </td>
 	                </tr>
 	            </table>
@@ -201,37 +156,27 @@
 
 	    </div>
 	</div>
-<<<<<<< HEAD
+	<div>
 		<select id="editorid" onchange="findText(this.value)">
 			<c:forEach items="${editorIds }" var="editorId">
 				<option value="${editorId }">文档:${editorId }</option>
 			</c:forEach>		
 		</select>
-	
-=======
->>>>>>> 7b72a2b5470678bc3db30f1823507a18b360e1d8
-	<div id="contentView">
-	
 	</div>
-<<<<<<< HEAD
-<script type="text/javascript">
-	function findText(editorId){
-		var url = "<c:url value='/editor/findTextById.html'/>?editorId="+editorId;
-		location.href=url;
-	}
-</script>
-=======
+	<div id="contentView">
+		
+	</div>
 	
 	<script type="text/javascript">
 			function submitForm(){
 				$.ajax({
 					type: "POST",
-					url: "<s:url value='/ajaxForm.html'/>",
-					data: {"content":editor.html()},
+					url: "<s:url value='/editor/addEditorText.html'/>",
+					data: {"editorContent":editor.html()},
 					success: function(data){
 						if(data){
 							$("#contentView").html(data);
-							$("textarea[name=content]").val("");
+							$("textarea[name=editorContent]").val("");
 							editor.html("");
 							
 						}
@@ -242,13 +187,10 @@
 				});
 			};
 			
-			function insert(){
-				//var text = editor.text("#kind");
-				K.insertHtml('#content1', "dhajkdjkakd");
-			}
-			
-
+			function findText(editorId){
+				var url = "<c:url value='/editor/findTextById.html'/>?editorId="+editorId;
+				location.href=url;
+			};
 	</script>
->>>>>>> 7b72a2b5470678bc3db30f1823507a18b360e1d8
 </body>
 </html>
