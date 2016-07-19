@@ -72,18 +72,27 @@ public class KindEditorController {
 
 		response.setContentType("text/html; charset=UTF-8");
 		response.setHeader("X-Frame-OPTIONS", "SAMEORIGIN");
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6d3e73adfe3de198cbcdaae4510d431574afeb0a
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			writeMsg(response, "请选择文件。");
 			return;
 		}
+<<<<<<< HEAD
 /*		// 检查目录
 		File uploadDir = new File(savePath);
+=======
+		// 检查目录
+	/*	File uploadDir = new File(savePath);
+>>>>>>> 6d3e73adfe3de198cbcdaae4510d431574afeb0a
 		if (!uploadDir.isDirectory()) {
 			writeMsg(response, "上传目录不存在。");
 			return;
-		}
+		}*/
 		// 检查目录写权限
-		if (!uploadDir.canWrite()) {
+/*		if (!uploadDir.canWrite()) {
 			writeMsg(response, "上传目录没有写权限。");
 			return;
 		}*/
