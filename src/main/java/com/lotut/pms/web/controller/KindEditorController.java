@@ -1,8 +1,10 @@
 package com.lotut.pms.web.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -51,9 +53,8 @@ public class KindEditorController {
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(path = "/file_upload")
 	@ResponseBody
-	public void fileUpload(HttpServletRequest request,
-			@RequestParam("imgFile")Part imgFile, HttpServletResponse response) throws ServletException, IOException,
-			FileUploadException {
+	public void fileUpload(HttpServletRequest request, @RequestParam("imgFile") Part imgFile,
+			HttpServletResponse response) throws ServletException, IOException, FileUploadException {
 		ServletContext application = request.getSession().getServletContext();
 		String savePath = application.getRealPath("/") + "attached/";
 
@@ -78,16 +79,15 @@ public class KindEditorController {
 			return;
 		}
 		// 检查目录
-	/*	File uploadDir = new File(savePath);
-		if (!uploadDir.isDirectory()) {
-			writeMsg(response, "上传目录不存在。");
-			return;
-		}*/
+		/*
+		 * File uploadDir = new File(savePath); if (!uploadDir.isDirectory()) {
+		 * writeMsg(response, "上传目录不存在。"); return; }
+		 */
 		// 检查目录写权限
-/*		if (!uploadDir.canWrite()) {
-			writeMsg(response, "上传目录没有写权限。");
-			return;
-		}*/
+		/*
+		 * if (!uploadDir.canWrite()) { writeMsg(response, "上传目录没有写权限。");
+		 * return; }
+		 */
 
 		String dirName = request.getParameter("dir");
 		if (dirName == null) {
@@ -112,62 +112,20 @@ public class KindEditorController {
 		if (!dirFile.exists()) {
 			dirFile.mkdirs();
 		}
-
-
-		
-		
-		
-		FileItemFactory factory = new DiskFileItemFactory();
-		ServletFileUpload upload = new ServletFileUpload(factory);
-		upload.setHeaderEncoding("UTF-8");
-		List items = upload.parseRequest(request);
-		Iterator itr = items.iterator();
-		while (itr.hasNext()) {
-			FileItem item = (FileItem) itr.next();
-			String fileName = item.getName();
-			if (!item.isFormField()) {
-				// 检查文件大小
-				if (item.getSize() > maxSize) {
-					writeMsg(response, "上传文件大小超过限制。");
-					return;
-				}
-				// 检查扩展名
-				String fileExt = fileName.substring(
-						fileName.lastIndexOf(".") + 1).toLowerCase();
-				if (!Arrays.<String> asList(extMap.get(dirName).split(","))
-						.contains(fileExt)) {
-					writeMsg(response, "上传文件扩展名是不允许的扩展名。\n只允许"
-							+ extMap.get(dirName) + "格式。");
-					return;
-				}
-
-				SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-				String newFileName = df.format(new Date()) + "_"
-						+ new Random().nextInt(1000) + "." + fileExt;
-				try {
-					File uploadedFile = new File(savePath, newFileName);
-					item.write(uploadedFile);
-				} catch (Exception e) {
-					writeMsg(response, "上传文件失败。");
-					return;
-				}
-				
-				Map<String, Object> msg = new HashMap<String, Object>();
-				msg.put("error", 0);
-				msg.put("url", saveUrl + newFileName);
-				//WebUtil.writerJson(response, msg);
-				writeJson(response, msg);
+		String fileName = imgFile.getSubmittedFileName();
+		String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+		String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
+		InputStream is = imgFile.getInputStream();
+		int BUFFER_SIZE = 8 * 1024;
+		byte[] buffer = new byte[BUFFER_SIZE];
+		try (OutputStream out = new FileOutputStream(saveUrl + newFileName);) {
+			int bytesRead = -1;
+			while ((bytesRead = is.read(buffer)) != -1) {
+				out.write(buffer, 0, bytesRead);
 			}
-		/*	InputStream is = imgFile.getInputStream();
-	        OutputStream os = null; 
-	        byte[] buffer = new byte[is.available()];  
-	        is.read(buffer);  
-	          
-	        os = new BufferedOutputStream(new OutputStream(saveUrl+newFileName));  
-	        os.write(buffer);  
-	        os.flush(); */
+			out.flush();
 		}
-		
 	}
 
 	/**
