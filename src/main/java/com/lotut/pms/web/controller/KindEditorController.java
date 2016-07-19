@@ -56,7 +56,7 @@ public class KindEditorController {
 	public void fileUpload(HttpServletRequest request, @RequestParam("imgFile") Part imgFile,
 			HttpServletResponse response) throws ServletException, IOException, FileUploadException {
 		ServletContext application = request.getSession().getServletContext();
-		String savePath = application.getRealPath("/") + "attached/";
+		String savePath = "/home/lotut/attached/";
 
 		// 文件保存目录URL
 		String saveUrl = request.getContextPath() + "/attached/";
