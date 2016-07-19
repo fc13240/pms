@@ -37,11 +37,11 @@ import com.alibaba.fastjson.JSON;
  * kindeditor文件上传控制器
  */
 @Controller
-@RequestMapping("kindeditor")
+@RequestMapping(path="/kindeditor")
 public class KindEditorController {
 
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value = "file_upload")
+	@RequestMapping(path = "/file_upload")
 	@ResponseBody
 	public void fileUpload(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException,
@@ -204,7 +204,7 @@ public class KindEditorController {
 	 * @throws IOException
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "file_manager_json.html")
+	@RequestMapping(path = "/file_manager_json")
 	public void fileManager(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		ServletContext application = request.getSession().getServletContext();

@@ -33,7 +33,7 @@ public class kindEditorFileController {
      * @param response {@link HttpServletResponse} 
      * @return json response 
      */  
-   @RequestMapping(value = "/fileUpload", method = RequestMethod.POST)  
+   @RequestMapping(path = "/fileUpload", method = RequestMethod.POST)  
    @ResponseBody  
    public Map<String, Object> fileUpload(HttpServletRequest request, HttpServletResponse response) {  
        //文件保存本地目录路径  
@@ -145,7 +145,7 @@ public class kindEditorFileController {
      * @param response {@link HttpServletResponse} 
      * @return json 
      */  
-   @RequestMapping(value = "/fileManager")  
+   @RequestMapping(path = "/fileManager")  
    @ResponseBody  
    public Object fileManager(HttpServletRequest request, HttpServletResponse response) {  
        //根目录路径，可以指定绝对路径  

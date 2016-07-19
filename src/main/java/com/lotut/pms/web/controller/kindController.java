@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class kindController
 {
 	
-	@RequestMapping(value="/index",method=RequestMethod.GET)
+	@RequestMapping(path="/index",method=RequestMethod.GET)
 	public String test(Model model){
 		model.addAttribute("msg", "Hello FindEditor");
 		return "kindEditor";
@@ -23,7 +23,7 @@ public class kindController
 	/**
 	 * 提交表单操作
 	 */
-	@RequestMapping(value="/ajaxForm",method=RequestMethod.POST)
+	@RequestMapping(path="/ajaxForm",method=RequestMethod.POST)
 	public void ajaxForm(HttpServletResponse response, String content)
 	{
         response.setCharacterEncoding("UTF-8");

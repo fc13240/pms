@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AttachedController {
 	private static final Logger LOGGER = Logger.getLogger(AttachedController.class);  
     
-    @RequestMapping("/attached/{fileType}/{uploadDate}/{fileName}.{suffix}")  
+    @RequestMapping(path="/attached/{fileType}/{uploadDate}/{fileName}.{suffix}")  
     public void attached(HttpServletRequest request, HttpServletResponse response,   
             @PathVariable String fileType,  
             @PathVariable String uploadDate,  
