@@ -119,7 +119,7 @@ public class KindEditorController {
 		InputStream is = imgFile.getInputStream();
 		int BUFFER_SIZE = 8 * 1024;
 		byte[] buffer = new byte[BUFFER_SIZE];
-		try (OutputStream out = new FileOutputStream(saveUrl + newFileName);) {
+		try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
 			int bytesRead = -1;
 			while ((bytesRead = is.read(buffer)) != -1) {
 				out.write(buffer, 0, bytesRead);
