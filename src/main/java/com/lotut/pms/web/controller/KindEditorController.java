@@ -77,12 +77,8 @@ public class KindEditorController {
 			writeMsg(response, "请选择文件。");
 			return;
 		}
-/*		// 检查目录
-		File uploadDir = new File(savePath);
-=======
 		// 检查目录
 	/*	File uploadDir = new File(savePath);
->>>>>>> 6d3e73adfe3de198cbcdaae4510d431574afeb0a
 		if (!uploadDir.isDirectory()) {
 			writeMsg(response, "上传目录不存在。");
 			return;

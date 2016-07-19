@@ -43,7 +43,7 @@ public class kindEditorFileController {
    @ResponseBody  
    public Map<String, Object> fileUpload(HttpServletRequest request, HttpServletResponse response) {  
        //文件保存本地目录路径  
-       String savePath = "d:/attached/";  
+       String savePath = "/home/lotut/";  
        //文件保存目录URL  
        String saveUrl = request.getContextPath() + savePath.substring(2);  
  
@@ -155,7 +155,7 @@ public class kindEditorFileController {
    @ResponseBody  
    public Object fileManager(HttpServletRequest request, HttpServletResponse response) {  
        //根目录路径，可以指定绝对路径  
-       String rootPath = "d:/attached/";  
+       String rootPath = "/home/lotut/";  
        //根目录URL，可以指定绝对路径，比如 http://www.yoursite.com/attached/  
        String rootUrl  = request.getContextPath() + rootPath.substring(2);  
        //图片扩展名  
