@@ -42,6 +42,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.lotut.pms.web.util.WebUtils;
 
 /**
  * kindeditor文件上传控制器
@@ -126,6 +127,10 @@ public class KindEditorController {
 			}
 			out.flush();
 		}
+		 Map<String, Object> succMap = new HashMap<String, Object>();  
+         succMap.put("error", 0);  
+         succMap.put("url", saveUrl + newFileName);  
+         WebUtils.writeJsonStrToResponse(response, succMap);
 	}
 
 	/**
