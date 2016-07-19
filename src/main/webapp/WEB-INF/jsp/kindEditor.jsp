@@ -10,12 +10,17 @@
 	<c:import url="common/header.jsp"></c:import>
 	<title>测试页面</title>
 	<!-- 编辑器控件 -->
-	<link rel="stylesheet" href="plugins/kindeditor/themes/default/default.css" />
+	<link rel="stylesheet" href="<c:url value='plugins/kindeditor/themes/default/default.css'/>" />
 	<script>
 			var editor;
 			KindEditor.ready(function(K) {
-				editor = K.create('textarea[name="content"]', {
-					allowFileManager : true
+				editor = K.create('textarea[name="editorContent"]', {
+					allowFileManager : true,
+					afterChange : function() {
+						K('.word_count1').html(this.count());
+						K('.word_count2').html(this.count('text'));
+					}
+				
 				});
 				editor.html("你可以测试一下插入文件和插入图片功能，提交后可以在下方看见预览！");
 			});
@@ -25,12 +30,12 @@
 			function submitForm(){
 				$.ajax({
 					type: "POST",
-					url: "<s:url value='/kindEditor/ajaxForm.html'/>",
-					data: {"content":editor.html()},
+					url: "<s:url value='/editor/addEditorText.html'/>",
+					data: {"editorContent":editor.html()},
 					success: function(data){
 						if(data){
 							$("#contentView").html(data);
-							$("textarea[name=content]").val("");
+							$("textarea[name=editorContent]").val("");
 							editor.html("");
 							
 						}
@@ -39,11 +44,21 @@
 						alert("操作失败");
 					}
 				});
-			}
+			};
+
+		/* KindEditor.ready(function(K) {
+			K.create('textarea[name="editorContent"]', {
+				afterChange : function() {
+					K('.word_count1').html(this.count());
+					K('.word_count2').html(this.count('text'));
+				}
+			});
+		}); */
 	</script>
 </head>
 
 <body style="background-color: #FFF">
+
 	${base }
 	<p>
 	<h1>${msg }</h1>  
@@ -62,7 +77,11 @@
 	            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 	            	<tr>
 	                    <td style="width:520px;">
-	                    	<textarea rows="3" cols="10" name="content" style="width:520px;height:400px;visibility:hidden;"></textarea>
+	                    	<textarea rows="3" cols="10" name="editorContent" style="width:520px;height:400px;visibility:hidden;"></textarea>
+	                    	<p>
+								您当前输入了 <span class="word_count1">0</span> 个文字。（字数统计包含HTML代码。）<br />
+								您当前输入了 <span class="word_count2">0</span> 个文字。（字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字。）
+							</p>
 	                    </td>
 	            	</tr>
 	                <tr>
@@ -74,9 +93,20 @@
 	        </form>
 	    </div>
 	</div>
+		<select id="editorid" onchange="findText(this.value)">
+			<c:forEach items="${editorIds }" var="editorId">
+				<option value="${editorId }">文档:${editorId }</option>
+			</c:forEach>		
+		</select>
 	
 	<div id="contentView">
-		
+	
 	</div>
+<script type="text/javascript">
+	function findText(editorId){
+		var url = "<c:url value='/editor/findTextById.html'/>?editorId="+editorId;
+		location.href=url;
+	}
+</script>
 </body>
 </html>
