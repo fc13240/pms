@@ -71,10 +71,10 @@
 	<p>
 	<h1>${msg }</h1>  
 	<div>
-		<br/>
-		&nbsp;&nbsp;KindEditor中的文件上传是针对php使用的，所以现在要在java中嵌入使用还得修整一下。把KindEditor包下所有的file_manager.php(文件管理地址)及其file_upload.php(文件上传地址)换成自己实现的地址。
-		<br/>  
-		<br/>
+		<p> 您当前输入了 <span class="word_count1">0</span> 个文字。（字数统计包含HTML代码。）<br />
+ 			您当前输入了 <span class="word_count2">0</span> 个文字。（字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字。）<br>
+   			<span class="word_surplus"></span> 
+		</p>
 		<br/>
 
 		
@@ -97,10 +97,7 @@
 	            </table>
 	        </form>
 	        <br>
-	        <p> 您当前输入了 <span class="word_count1">0</span> 个文字。（字数统计包含HTML代码。）<br />
- 				 您当前输入了 <span class="word_count2">0</span> 个文字。（字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字。）<br>
-   			<span class="word_surplus"></span> 
-			</p>
+
 	    </div>
 	</div>
 	
