@@ -1,7 +1,11 @@
 package com.lotut.pms.web.controller;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,6 +25,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
@@ -29,7 +35,8 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
@@ -45,7 +52,7 @@ public class KindEditorController {
 	@RequestMapping(path = "/file_upload")
 	@ResponseBody
 	public void fileUpload(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException,
+			@RequestParam("imgFile")Part imgFile, HttpServletResponse response) throws ServletException, IOException,
 			FileUploadException {
 		ServletContext application = request.getSession().getServletContext();
 		String savePath = application.getRealPath("/") + "attached/";
@@ -64,12 +71,12 @@ public class KindEditorController {
 		long maxSize = 10000000;
 
 		response.setContentType("text/html; charset=UTF-8");
-
+		response.setHeader("X-Frame-OPTIONS", "SAMEORIGIN");
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			writeMsg(response, "请选择文件。");
 			return;
 		}
-		// 检查目录
+/*		// 检查目录
 		File uploadDir = new File(savePath);
 		if (!uploadDir.isDirectory()) {
 			writeMsg(response, "上传目录不存在。");
@@ -79,7 +86,7 @@ public class KindEditorController {
 		if (!uploadDir.canWrite()) {
 			writeMsg(response, "上传目录没有写权限。");
 			return;
-		}
+		}*/
 
 		String dirName = request.getParameter("dir");
 		if (dirName == null) {
@@ -105,6 +112,10 @@ public class KindEditorController {
 			dirFile.mkdirs();
 		}
 
+
+		
+		
+		
 		FileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setHeaderEncoding("UTF-8");
@@ -139,14 +150,23 @@ public class KindEditorController {
 					writeMsg(response, "上传文件失败。");
 					return;
 				}
-
+				
 				Map<String, Object> msg = new HashMap<String, Object>();
 				msg.put("error", 0);
 				msg.put("url", saveUrl + newFileName);
 				//WebUtil.writerJson(response, msg);
 				writeJson(response, msg);
 			}
+		/*	InputStream is = imgFile.getInputStream();
+	        OutputStream os = null; 
+	        byte[] buffer = new byte[is.available()];  
+	        is.read(buffer);  
+	          
+	        os = new BufferedOutputStream(new OutputStream(saveUrl+newFileName));  
+	        os.write(buffer);  
+	        os.flush(); */
 		}
+		
 	}
 
 	/**

@@ -8,6 +8,7 @@
 <html>
 <head>
 	<c:import url="common/header.jsp"></c:import>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN"> 
 	<title>测试页面</title>
 	<!-- 编辑器控件 -->
@@ -19,15 +20,15 @@
 			KindEditor.ready(function(K) {
 				editor1 = K.create('textarea[name="editorContent"]', {
 					cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
- 					 uploadJson : "${base}/kindeditor/file_upload.html", 
+ 					 uploadJson : "${pageContext.request.contextPath }/kindeditor/file_upload.html", 
  					 /* uploadJson :"<s:url value='/kindeditor/file_upload.html'/>", */ 
-					fileManagerJson : '${base}/kindeditor/file_manager_json.html',
-					allowFileManager : true,
+					fileManagerJson : '${pageContext.request.contextPath }/kindeditor/file_manager_json.html',
 				   resizeType : 0,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
 				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
 				   height  : '500px',
 				   readonlyMode : false, //只读模式 默认为false
 				   allowFileManager : true,  //显示浏览远程服务器按钮
+				   allowImageUpload : true,
 				   afterBlur: function(){this.sync();},
 				   syncType:"auto",
 				   afterCreate : function() {
@@ -62,7 +63,7 @@
 					       }
 					       $('.word_surplus').html(pattern); //输入显示
 				   },
-
+				   
 				});
 				prettyPrint();
 				editor1.html("你可以测试一下插入文件和插入图片功能，提交后可以在下方看见预览！");
