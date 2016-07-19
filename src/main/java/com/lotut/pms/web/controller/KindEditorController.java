@@ -64,22 +64,23 @@ public class KindEditorController {
 		long maxSize = 10000000;
 
 		response.setContentType("text/html; charset=UTF-8");
+		response.setHeader("X-Frame-OPTIONS", "SAMEORIGIN");
 
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			writeMsg(response, "请选择文件。");
 			return;
 		}
 		// 检查目录
-		File uploadDir = new File(savePath);
+	/*	File uploadDir = new File(savePath);
 		if (!uploadDir.isDirectory()) {
 			writeMsg(response, "上传目录不存在。");
 			return;
-		}
+		}*/
 		// 检查目录写权限
-		if (!uploadDir.canWrite()) {
+/*		if (!uploadDir.canWrite()) {
 			writeMsg(response, "上传目录没有写权限。");
 			return;
-		}
+		}*/
 
 		String dirName = request.getParameter("dir");
 		if (dirName == null) {
