@@ -91,10 +91,6 @@
 	                    	<textarea rows="3" cols="10" name="editorContent" id="editorContent" style="width:520px;height:400px;visibility:hidden;">
 	                    		${editorTest.editorContent }
 	                    	</textarea>
-	                    	<p>
-								您当前输入了 <span class="word_count1">0</span> 个文字。（字数统计包含HTML代码。）<br />
-								您当前输入了 <span class="word_count2">0</span> 个文字。（字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字。）
-							</p>
 	                    </td>
 	            	</tr>
 	                <tr>
