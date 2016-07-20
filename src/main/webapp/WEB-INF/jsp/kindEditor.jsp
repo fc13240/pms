@@ -19,10 +19,9 @@
 			var editor1;
 			KindEditor.ready(function(K) {
 				editor1 = K.create('textarea[name="editorContent"]', {
-					cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
- 					 uploadJson : "${base}/kindeditor/file_upload.html", 
- 					 /* uploadJson :"<s:url value='/kindeditor/file_upload.html'/>", */ 
-					fileManagerJson : '${base}/kindeditor/file_manager_json.html',
+				   cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
+ 				   uploadJson : "${base}/kindeditor/file_upload.html", 
+				   fileManagerJson : '${base}/kindeditor/file_manager_json.html',
 				   resizeType : 0,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
 				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
 				   height  : '500px',
@@ -122,6 +121,13 @@
 		</p>
 		<br/>
 	</div>
+		<div>
+		<select id="editorid" onchange="findText(this.value)">
+			<c:forEach items="${editorIds }" var="editorId">
+				<option value="${editorId }">文档:${editorId }</option>
+			</c:forEach>		
+		</select>
+	</div>
 	<!-- 主内容 start -->
 	<div class="main">
 	    <div class="wraper">
@@ -158,13 +164,7 @@
 	        </form>
 	    </div>
 	</div>
-	<div>
-		<select id="editorid" onchange="findText(this.value)">
-			<c:forEach items="${editorIds }" var="editorId">
-				<option value="${editorId }">文档:${editorId }</option>
-			</c:forEach>		
-		</select>
-	</div>
+
 	
 	<script type="text/javascript">
 			function submitForm(){
@@ -174,7 +174,7 @@
 					data: {"editorContent":editor1.html()},
 					success: function(data){
 						if(data){
-							// $("#contentView").html(data);
+							alert(data)
 							$("textarea[name=editorContent]").val("");
 							editor1.html("");
 							
