@@ -28,7 +28,24 @@
 				   readonlyMode : false, //只读模式 默认为false
 				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : true,
-				   afterBlur: function(){this.sync();},
+				   afterBlur: function(){this.sync();
+						$.ajax({
+							type: "POST",
+							url: "<s:url value='/editor/addEditorText.html'/>",
+							data: {"editorContent":editor1.html()},
+							success: function(data){
+								if(data){
+									$("textarea[name=editorContent]").val("");
+									editor1.html("");
+									
+								}
+							},
+							error: function(){
+								alert("操作失败");
+							}
+						});
+				   
+				   },
 				   syncType:"auto",
 				   afterCreate : function() {
 						var self = this;
@@ -101,7 +118,7 @@
 					},
 				});
 				prettyPrint();
-				editor.html("这是一段测试文字，用于文档插入测试！");
+				editor.html("一种 （产品类型的名称）  [碳石墨环轴密封结构] ");
 				/* 代码插入 */
 				K('input[name=getHtml]').click(function (e) {
 	                var text=editor.html();
@@ -135,7 +152,7 @@
 	            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 	            	<tr>
 	                    <td style="width:520px;">
-	                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent" style="width:520px;height:400px;visibility:hidden;"></textarea>
+	                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent" style="width:520px;height:400px;visibility:hidden;" ></textarea>
 	                    </td>
 	            	</tr>
 	                <tr>
