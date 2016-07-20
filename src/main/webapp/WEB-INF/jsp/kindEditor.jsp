@@ -101,7 +101,7 @@
 					},
 				});
 				prettyPrint();
-				editor.html("一种 （产品类型的名称）  [碳石墨环轴密封结构] ");
+				editor.html("这是一段测试文字，用于文档插入测试！");
 				/* 代码插入 */
 				K('input[name=getHtml]').click(function (e) {
 	                var text=editor.html();
