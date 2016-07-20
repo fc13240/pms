@@ -66,7 +66,7 @@
 				   
 				});
 				prettyPrint();
-				editor1.html("你可以测试一下插入文件和插入图片功能，提交后可以在下方看见预览！");
+				editor1.html("你可以测试一下插入文件和插入图片功能！");
 				
 			});
 			
@@ -97,7 +97,7 @@
 					},
 				});
 				prettyPrint();
-				editor.html("测试测试测试的的卡卡健康的卡卡卡了！");
+				editor.html("这是一段测试文字，用于文档插入测试！");
 				/* 代码插入 */
 				K('input[name=getHtml]').click(function (e) {
 	                alert(editor.html());
