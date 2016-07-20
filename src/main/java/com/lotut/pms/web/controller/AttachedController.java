@@ -15,30 +15,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.lotut.pms.constants.Settings;
+import com.lotut.pms.web.util.WebUtils;
+
 @Controller 
 public class AttachedController {
 	private static final Logger LOGGER = Logger.getLogger(AttachedController.class);  
     
-    @RequestMapping(path="/attached/{fileType}/{uploadDate}/{fileName}.{suffix}")  
+    @RequestMapping(path="/patentDocImage/{fileType}/{uploadDate}/{fileName}.{suffix}.html")  
     public void attached(HttpServletRequest request, HttpServletResponse response,   
             @PathVariable String fileType,  
             @PathVariable String uploadDate,  
             @PathVariable String suffix,  
             @PathVariable String fileName) {  
-        //根据suffix设置响应ContentType  
-        //response.setContentType("text/html; charset=UTF-8");  
           
         InputStream is = null;  
         OutputStream os = null;  
         try {  
-            File file = new File("d:/attached/" + fileType + "/" + uploadDate + "/" + fileName + "." + suffix);  
-            is = new FileInputStream(file);  
-            byte[] buffer = new byte[is.available()];  
-            is.read(buffer);  
-              
-            os = new BufferedOutputStream(response.getOutputStream());  
-            os.write(buffer);  
-            os.flush();  
+            File file = new File(Settings.PATENTDOC_IMAGE_PATH + fileType + "/" + uploadDate + "/" + fileName + "." + suffix);  
+            
+            WebUtils.writeStreamToResponse(response, new FileInputStream(file));
         } catch (Exception e) {  
             //判断suffix  
             //图片请求可以在此显示一个默认图片  

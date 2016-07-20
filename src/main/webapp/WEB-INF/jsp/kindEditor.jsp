@@ -27,7 +27,7 @@
 				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
 				   height  : '500px',
 				   readonlyMode : false, //只读模式 默认为false
-				   allowFileManager : true,  //显示浏览远程服务器按钮
+				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : true,
 				   afterBlur: function(){this.sync();},
 				   syncType:"auto",
@@ -81,7 +81,7 @@
 				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
 				   height  : '500px',
 				   readonlyMode : true, //只读模式 默认为false
-				   allowFileManager : true,  //显示浏览远程服务器按钮
+				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   afterBlur: function(){this.sync();},
 				   syncType:"auto",
 				   afterCreate : function() {
