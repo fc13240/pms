@@ -151,6 +151,7 @@
 	                    <td style="padding:10px 0 18px 0;">
 	                        <input type="button" value="插入" name="getHtml" class="ajaxpost" id="insert" />
 	                        <input type="button" value="插入文本"  onclick="inserTest();"/> 
+	                        <input type="button" value="弹出窗口测试"  onclick="pop();"/> 
 	                    </td>
 	                </tr>
 	            </table>
@@ -184,10 +185,6 @@
 					}
 				});
 			};
-			
-
-
-
 			function findText(editorId){
 				var url = "<c:url value='/editor/findTextById.html'/>?editorId="+editorId;
 				location.href=url;
@@ -196,6 +193,32 @@
 			function inserTest(){
 				var text=editor.text();
 				KindEditor.insertHtml('#editorContent1', text);
+			};
+			function pop(){
+					var text=editor.text();
+					var dialog = KindEditor.dialog({
+				        width : 500,
+				        title : '测试窗口',
+				        body : '<div style="margin:10px;"><strong>'+text+'</strong></div>',
+				        closeBtn : {
+				                name : '关闭',
+				                click : function(e) {
+				                        dialog.remove();
+				                }
+				        },
+				        yesBtn : {
+				                name : '确定',
+				                click : function(e) {
+				                        alert(this.value);
+				                }
+				        },
+				        noBtn : {
+				                name : '取消',
+				                click : function(e) {
+				                        dialog.remove();
+				                }
+				        }
+				});
 			}
 	</script>
 	
