@@ -149,7 +149,8 @@
 	            	</tr>
 	            	 <tr>
 	                    <td style="padding:10px 0 18px 0;">
-	                        <input type="button" value="插入" name="getHtml" class="ajaxpost" id="insert" /> 
+	                        <input type="button" value="插入" name="getHtml" class="ajaxpost" id="insert" />
+	                        <input type="button" value="插入文本"  onclick="inserTest();"/> 
 	                    </td>
 	                </tr>
 	            </table>
@@ -191,7 +192,11 @@
 				var url = "<c:url value='/editor/findTextById.html'/>?editorId="+editorId;
 				location.href=url;
 			};
-
+			
+			function inserTest(){
+				var text=editor.text();
+				KindEditor.insertHtml('#editorContent1', text);
+			}
 	</script>
 	
 	
