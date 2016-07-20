@@ -77,13 +77,17 @@
 				editor = K.create('textarea[name="kind"]', {
 					cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
 				   resizeType : 0,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
-				   themeType : 'simple',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
+				   //themeType : 'simple',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
 				   height  : '500px',
 				   readonlyMode : true, //只读模式 默认为false
 				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : true,
 				   afterBlur: function(){this.sync();},
 				   syncType:"auto",
+				   items : [
+							'fontname', 'fontsize', '|', 'textcolor', 'bgcolor', 'bold', 'italic', 'underline',
+							'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+							'insertunorderedlist', '|', 'emoticons', 'image', 'link'],
 				   afterCreate : function() {
 						var self = this;
 						K.ctrl(document, 13, function() {
@@ -100,7 +104,6 @@
 				editor.html("这是一段测试文字，用于文档插入测试！");
 				/* 代码插入 */
 				K('input[name=getHtml]').click(function (e) {
-	                alert(editor.html());
 	                var text=editor.html();
 	                K.insertHtml('#editorContent1', text);
 	            });
@@ -110,8 +113,6 @@
 </head>
 
 <body style="background-color: #FFF">
-	${base }
-	<p>
 	<h1>${msg }</h1>  
 	<div>
 		<p> 您当前输入了 <span class="word_count1">0</span> 个文字。（字数统计包含HTML代码。）<br />
@@ -119,8 +120,6 @@
    			<span class="word_surplus"></span> 
 		</p>
 		<br/>
-
-		
 	</div>
 	<!-- 主内容 start -->
 	<div class="main">
@@ -146,8 +145,8 @@
 	        <form id="form2" name="form2" class="registerform" action="" onsubmit="return false;" method="post">
 	            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 	            	<tr>
-	                    <td style="width:520px;">
-	                    	<textarea rows="3" cols="10" id="kind1" name="kind" style="width:520px;height:400px;visibility:hidden;"></textarea>
+	                    <td style="width:200px;">
+	                    	<textarea rows="3" cols="10" id="kind1" name="kind" style="width:200px;height:200px;visibility:hidden;"></textarea>
 	                    </td>
 	            	</tr>
 	            	 <tr>
