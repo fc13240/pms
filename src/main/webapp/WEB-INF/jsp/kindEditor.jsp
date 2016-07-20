@@ -79,7 +79,7 @@
 				   resizeType : 0,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
 				   //themeType : 'simple',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
 				   height  : '200px',
-				   width:'200px',
+				   width:'30%',
 				   readonlyMode : true, //只读模式 默认为false
 				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : true,
