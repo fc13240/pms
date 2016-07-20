@@ -27,6 +27,7 @@ public class FindEditorController {
 	@RequestMapping(path="/editorForm")
 	public String editorForm(Model model){
 		List<Integer> editorIds = editorService.findTextId();
+		model.addAttribute("msg", "Hello FindEditor");
 		model.addAttribute("editorIds", editorIds);
 		return "kindEditor";
 	}

@@ -22,7 +22,7 @@
 					cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
  					 uploadJson : "${base}/kindeditor/file_upload.html", 
  					 /* uploadJson :"<s:url value='/kindeditor/file_upload.html'/>", */ 
-					fileManagerJson : '${pageContext.request.contextPath }/kindeditor/file_manager_json.html',
+					fileManagerJson : '${base}/kindeditor/file_manager_json.html',
 				   resizeType : 0,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
 				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
 				   height  : '500px',
