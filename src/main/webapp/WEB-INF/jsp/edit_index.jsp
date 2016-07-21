@@ -377,7 +377,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent1" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -413,7 +413,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent2" name="editorContent" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent2" name="editorContent2" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -446,7 +446,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent3" name="editorContent"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent3" name="editorContent3"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -472,7 +472,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent4" name="editorContent" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent4" name="editorContent4" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -499,7 +499,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent5" name="editorContent" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent5" name="editorContent5" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -533,7 +533,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent6" name="editorContent" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent6" name="editorContent6" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -572,7 +572,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent7" name="editorContent" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent7" name="editorContent7" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -622,7 +622,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent8" name="editorContent" class="editorContent"style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent8" name="editorContent8" class="editorContent"style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
