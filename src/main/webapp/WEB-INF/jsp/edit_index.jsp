@@ -356,7 +356,7 @@
 										            	</tr>
 										                <tr>
 										                    <td style="padding:10px 0 18px 0;">
-										                        <input type="button" value="提 交" class="ajaxpost" id="submit" onclick="submitForm();"/> 
+										                        <input type="button" value="提 交" class="ajaxpost" id="submit" onclick="alertText();"/> 
 										                    </td>
 										                </tr>
 										            </table>
@@ -1392,6 +1392,12 @@
 					}
 				});
 			};
+			function alertText(){
+				var x=$("#editorContent").val();
+				alert(x);
+				
+			};
+			
 			function findText(editorId){
 				var url = "<c:url value='/editor/findTextById.html'/>?editorId="+editorId;
 				location.href=url;
