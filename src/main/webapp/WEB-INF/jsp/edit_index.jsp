@@ -143,7 +143,7 @@
 	                        
 	                    </div>
 	                </div>
-	                <div id="overflowcenter" style="overflow-y: auto; overflow-x: hidden; width: 998px;">
+	                <div id="overflowcenter" style="overflow-y: auto; overflow-x: hidden;height:610px; width: 998px;">
 	                    <!-- center-top end-->
 	                    <!-- 撰写小贴士start-->
 	                    
@@ -392,7 +392,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="content" id="content2" style="display: block;">
+						<div class="content" id="content2" style="display: none;">
 							<div class="title">
 								背景技术
 							</div>
