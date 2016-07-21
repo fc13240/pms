@@ -68,7 +68,7 @@
 				   
 				});
 				prettyPrint();
-				editor1.html("你可以测试一下插入文件和插入图片功能！");
+				editor1.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
 			});
 			
 		</script>
