@@ -79,7 +79,7 @@ public class KindEditorController {
 		response.setHeader("X-Frame-OPTIONS", "SAMEORIGIN");
 		
 		if (!ServletFileUpload.isMultipartContent(request)) {
-			 getError("请选择文件！");
+			 getError(response,"请选择文件！");
 			 return;
 		}
 
@@ -88,7 +88,7 @@ public class KindEditorController {
 			dirName = "image";
 		}
 		if (!extMap.containsKey(dirName)) {
-			getError("目录名不正确。");
+			getError(response,"目录名不正确。");
 			return;
 		}
 		// 创建文件夹
@@ -127,10 +127,14 @@ public class KindEditorController {
 	}
 	
 	
-	   private Map<String, Object> getError(String errorMsg) {  
-	       Map<String, Object> errorMap = new HashMap<String, Object>();  
-	       errorMap.put("error", 1);  
-	       errorMap.put("message", errorMsg);  
-	       return errorMap;  
+	   private void getError(HttpServletResponse response,String errorMsg) {  
+	       try {
+	    	   Map<String, Object> errorMap = new HashMap<String, Object>();  
+		       errorMap.put("error", 1);  
+		       errorMap.put("message", errorMsg);  
+		       WebUtils.writeJsonStrToResponse(response, errorMap);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}  
 	   } 
 }

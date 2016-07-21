@@ -14,7 +14,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class WebUtils {
 	public static void writeJsonStrToResponse(HttpServletResponse response, Object value) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
-		
+		response.reset();
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html");
 		try (PrintWriter out = response.getWriter();) {
 			out.write(mapper.writeValueAsString(value));
 			out.flush();
