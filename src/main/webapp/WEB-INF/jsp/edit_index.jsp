@@ -46,7 +46,7 @@
 					},
 				   
 				   afterChange : function() {
-					      $('.word_count1').html(this.count()); //字数统计包含HTML代码
+					     // $('.word_count1').html(this.count()); //字数统计包含HTML代码
 					      $('.word_count2').html(this.count('text'));  //字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字
 					      //限制字数
 					      var limitNum = 100;  //设定限制字数
@@ -61,7 +61,7 @@
 					       } else {
 					       //计算剩余字数
 					       var result = limitNum - this.count('text'); 
-					       pattern = '还可以输入' +  result + '字'; 
+					       pattern = '<font color="red">还可以输入' +  result + '字<font>'; 
 					       }
 					       $('.word_surplus').html(pattern); //输入显示
 				   },
@@ -338,22 +338,13 @@
 									</div>
 									<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
 									<input type="hidden" value="" id="divtitletips">
-									<div>
-										<p>
-											您当前输入了 <span class="word_count1">0</span> 个文字。（字数统计包含HTML代码。）<br />
-											您当前输入了 <span class="word_count2">0</span>
-											个文字。（字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字。）<br> <span
-												class="word_surplus"></span>
-										</p>
-										<br />
-									</div>
 									<div class="textarea" name="tooltip">
 										    <div class="wraper">
 										        <form id="form1" name="form1" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent"  style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -364,10 +355,13 @@
 										            </table>
 										        </form>
 										   </div>
-										</div>
+									</div>
 								</div>
 							</div>
-							<div id="error_content0" style="margin-left: -50px; float: left; color: Red; text-align: right;" class="textarea">还可以输入15字</div>
+							<div id="error_content0" style="margin-left: -50px; float: left; color: Red; text-align: right;" class="textarea">
+								您当前输入了 <span class="word_count2">0</span>个文字。<br> 
+								<span class="word_surplus"></span>
+							</div>
 						</div>
 						<div class="content" id="content1" style="display: none;">
 							<div class="title">
