@@ -20,7 +20,7 @@
 		<script type="text/javascript">
 			var editor1;
 			KindEditor.ready(function(K) {
-				editor1 = K.create('textarea[name="editorContent"]', {
+				editor1 = K.create('.editorContent', {
 				   cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
  				   uploadJson : "${base}/kindeditor/file_upload.html", 
 				   fileManagerJson : '${base}/kindeditor/file_manager_json.html',
@@ -342,7 +342,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent"  style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent" name="editorContent" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -377,7 +377,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -413,7 +413,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent2" name="editorContent" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -446,7 +446,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent"  style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent3" name="editorContent"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -472,7 +472,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent4" name="editorContent" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -499,7 +499,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent5" name="editorContent" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -533,7 +533,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent6" name="editorContent" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -572,7 +572,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent7" name="editorContent" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -622,7 +622,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent8" name="editorContent" class="editorContent"style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
