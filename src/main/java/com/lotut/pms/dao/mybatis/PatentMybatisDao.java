@@ -12,6 +12,7 @@ import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.PatentRemark;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
@@ -257,6 +258,17 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	public int bacthsaveGoodsCheckOut(List<Long> patentIds) {
 		return patentMapper.bacthsaveGoodsCheckOut(patentIds);
 
+	}
+
+	@Override
+	public List<PatentRemark> getPatentRemarks(long patentId) {
+		
+		return patentMapper.getPatentRemarks(patentId);
+	}
+
+	@Override
+	public void addPatentRemark(long patentId, String content,int userId) {
+		patentMapper.addPatentRemark(patentId,content,userId);
 	}
 
 }

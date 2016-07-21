@@ -531,3 +531,14 @@ ALTER TABLE patents ADD COLUMN  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 ALTER TABLE contact_addresses DROP FOREIGN KEY  fk_contact_addresses_street; 
 
 ALTER TABLE contact_addresses DROP COLUMN street; 
+
+
+CREATE TABLE IF NOT EXISTS patent_remarks (
+	remark_id INT AUTO_INCREMENT PRIMARY KEY  ,
+	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+	content  VARCHAR(1000),
+	patent_id BIGINT NOT NULL,
+	user_id INT NOT NULL,
+	CONSTRAINT fk_patent_remarks_patent_id FOREIGN KEY idx_fk_patent_remarks_patent_id (patent_id) REFERENCES patents(patent_id) , 
+	CONSTRAINT fk_patent_remarks_user_id FOREIGN KEY idx_fk_patent_remarks_user_id (user_id) REFERENCES users(user_id) 
+);
