@@ -17,6 +17,7 @@ import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.PatentRemark;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
@@ -296,4 +297,14 @@ public class PatentServiceImpl implements PatentService {
 
 	}
 
+	@Override
+	public List<PatentRemark> getPatentRemarks(long patentId) {
+		return patentDao.getPatentRemarks(patentId);
+	}
+
+	@Override
+	public void addPatentRemark(long patentId, String content,int userId) {
+		// TODO Auto-generated method stub
+		 patentDao.addPatentRemark(patentId,content,userId);
+	}
 }

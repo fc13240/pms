@@ -12,6 +12,7 @@ import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.PatentRemark;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
@@ -108,6 +109,8 @@ public interface PatentService {
 
 	boolean bacthsaveGoodsCheckOut(List<Long> patentIds);
 	
-
+	List<PatentRemark> getPatentRemarks(long patentId);
+	
+	void addPatentRemark(long patentId,String content,int userId);
 
 }

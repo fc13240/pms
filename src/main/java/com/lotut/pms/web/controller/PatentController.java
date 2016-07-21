@@ -29,6 +29,7 @@ import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.PatentRemark;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
@@ -105,7 +106,22 @@ public class PatentController {
 		List<User> friends = friendService.getUserFriends(userId);
 		model.addAttribute("friends", friends);
 		return "patent_select_friends";
-	}	
+	}
+	
+	@RequestMapping(path="showRemarks", method=RequestMethod.GET)
+	public String showRemarks(@RequestParam("patentId")long patentId, Model model) {		
+		List<PatentRemark> remarks = patentService.getPatentRemarks(patentId);
+		model.addAttribute("remarks", remarks);
+		model.addAttribute("addPatentId", patentId);
+		return "patent_remarks";
+	}
+	
+	@RequestMapping(path="addPatentRemark", method=RequestMethod.POST)
+	public String addPatentRemark(@RequestParam("patentId")long patentId, @RequestParam("content") String content,Model model) {		
+		int userId = PrincipalUtils.getCurrentUserId();
+		patentService.addPatentRemark(patentId,content,userId);		
+		return "patent_remarks";
+	}
 	
 	@RequestMapping(path="searchFriends", method=RequestMethod.GET)
 	public String searchFriends(@RequestParam("keyword")String keyword, Model model) {

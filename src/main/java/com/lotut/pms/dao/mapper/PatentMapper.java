@@ -11,6 +11,7 @@ import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.PatentRemark;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
@@ -112,5 +113,8 @@ public interface PatentMapper {
 
 	int bacthsaveGoodsCheckOut(@Param("patentIds")List<Long> patentIds);
 	
-
+	List<PatentRemark> getPatentRemarks(long patentId);
+	
+	void addPatentRemark(@Param("patentId")long patentId,@Param("content")String content,@Param("userId")int userId);
+	
 }

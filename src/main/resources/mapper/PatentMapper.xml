@@ -525,5 +525,28 @@
 	
 	</select>
 	
+	<resultMap type="PatentRemark" id="patentRemarkResultMap">
+		<id property="remarkId" column="remark_id" />		
+		<result property="createTime" column="create_time"/>
+		<result property="content" column="content"/>
+		<result property="patentId" column="patent_id"/>
+		<association property="user"  javaType="User">
+			<id property="userId" column="user_id"/>
+			<result property="username" column="username"/>
+		</association>
+			
+	</resultMap>
+	
+	<select id="getPatentRemarks" parameterType="long" resultMap="patentRemarkResultMap">
+		SELECT  remark_id, patent_id , create_time, content,u.username as username FROM patent_remarks pr
+		join users u on u.user_id = pr.user_id
+		WHERE patent_id=#{patentId}		
+	</select>
+	
+		
+	<insert id="addPatentRemark">
+		INSERT INTO patent_remarks(create_time,content,patent_id,user_id)
+		values(now(),#{content},#{patentId},#{userId})				
+	</insert>
 	
 </mapper>
