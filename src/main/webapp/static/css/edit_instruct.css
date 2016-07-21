@@ -1681,3 +1681,14 @@ textarea:hover .texta_bt
 { 
      margin-top:10px;
     }
+.title2 .title2span1 {
+    color: #12ceda;
+    font-size: 13px;
+    font-weight: normal;
+}
+.title2 .title2span2 {
+    color: #91a960;
+    font-size: 13px;
+    font-weight: normal;
+}   
+ 
