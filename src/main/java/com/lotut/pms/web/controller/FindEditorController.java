@@ -29,7 +29,7 @@ public class FindEditorController {
 		List<Integer> editorIds = editorService.findTextId();
 		model.addAttribute("msg", "Hello FindEditor");
 		model.addAttribute("editorIds", editorIds);
-		return "edit_kindeditor";
+		return "edit_index";
 	}
 	
 	@RequestMapping(path="/addEditorText")
