@@ -507,7 +507,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="content" id="content4" style="display: none;">
+						<div class="content" id="content4" style="display: none;overflow: auto;" >
 							<div class="title">
 								具体实施方式
 							</div>
