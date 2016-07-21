@@ -29,13 +29,13 @@ public class FindEditorController {
 		List<Integer> editorIds = editorService.findTextId();
 		model.addAttribute("msg", "Hello FindEditor");
 		model.addAttribute("editorIds", editorIds);
-		return "kindEditor";
+		return "edit_kindeditor";
 	}
 	
 	@RequestMapping(path="/addEditorText")
 	public String  addEditorText(@ModelAttribute("editorText") EditorTest editorTest){
 		editorService.saveEditorText(editorTest);
-		return "kindEditor";
+		return "edit_kindeditor";
 	}
 	
 	@RequestMapping(path="/findTextById")
@@ -44,7 +44,7 @@ public class FindEditorController {
 		model.addAttribute("editorTest", editorTest);
 		List<Integer> editorIds = editorService.findTextId();
 		model.addAttribute("editorIds", editorIds);
-		return "displayKindEditor";
+		return "edit_display_kindeditor";
 	}
 	
 //	@RequestMapping(path="/findTextId")

@@ -1,0 +1,198 @@
+.sr_a
+{
+    color: #666;
+    padding-left: 10px;
+}
+.sr_a:hover
+{
+    color: #075db3;
+}
+.cd_body
+{
+    color: #000;
+    font-size: 12px;
+    margin: 0;
+    background: #fff;
+}
+*
+{
+    /* color: #000;     font-family:"microsoft yahei",ËÎÌו;     font-size: 12px;     text-decoration: none;*/
+    margin: 0;
+    padding: 0;
+}
+.cidian
+{
+    line-height: 18px;
+    background: #fff;
+    width: 380px;
+    border: #bdd5ee 1px solid;
+    border-radius: 4px;
+    height: 300px;
+}
+
+.cd_top
+{
+    white-space: nowrap;
+    width: 380px;
+    clear: both;
+    height: 28px;
+    background: rgb(227, 237, 249);
+}
+.cd_top .span
+{
+    color: #709cec;
+    font-size: 14px;
+    float: left;
+    padding-left: 10px;
+    line-height: 26px;
+}
+
+
+/*
+.top{
+	clear:both;
+	background:rgb(227, 237, 249);
+ 
+}
+.top span{color:#709cec;
+	font-size:14px;
+	padding-left:10px;
+	line-height:26px;}
+*/
+.cd_top .img
+{
+    float: right;
+    padding: 5px 3px 0 0;
+}
+.cd_top .bt
+{
+    float: left;
+    padding-right: 8px;
+    background: url(images/cidian.png) no-repeat scroll 0 0;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+.cd_top .bth
+{
+    float: left;
+    padding-right: 8px;
+    background: url(images/cidian.png) no-repeat scroll 0 -13px;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+.cd_top .clo
+{
+    float: left;
+    cursor: pointer;
+    background: url(images/cidian.png) no-repeat scroll 0 -28px;
+    width: 14px;
+    height: 14px;
+}
+.cd_sear
+{
+    clear: both;
+    margin: 20px auto 0;
+    width: 300px;
+    position: relative;
+    height: 30px;
+}
+.cd_sear input
+{
+    float: left;
+    height: 26px;
+    padding: 0 3px;
+    width: 240px;
+}
+.cd_sear .sbt
+{
+    position: absolute;
+    left: 248px;
+    top: 0;
+    width: 50px;
+    background: #2063d9;
+    color: #fff;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    font-size: 14px;
+    line-height: 28px;
+    text-align: center;
+    width: 50px;
+    cursor: pointer;
+}
+.sorry
+{
+    background: url(images/said.png) no-repeat left center;
+    line-height: 40px;
+    color: #999;
+    padding-left: 30px;
+    margin-top: 10px;
+    clear: both;
+    margin-left: 39px;
+    margin-bottom: 10px;
+    border-bottom: #ccc 1px dotted;
+    width: 270px;
+}
+.cankao
+{
+    clear: both;
+    margin: 10px auto 0;
+    width: 300px;
+    position: absolute;
+    bottom: 60px;
+    left: 40px;
+}
+.cankao a
+{
+    color: #075db3;
+    padding: 0 10px 5px 0;
+}
+.cd_title
+{
+    clear: both;
+    line-height: 30px;
+    margin: 0x auto;
+    width: 300px;
+}
+.cd_title span
+{
+    color: #666;
+    padding-left: 10px;
+}
+.add
+{
+    clear: both;
+    line-height: 30px;
+    padding: 0 0 0 40px;
+    width: 300px;
+}
+.add .span
+{
+    line-height: 30px;
+    float: left;
+    padding-top: 10px;
+}
+.add .img
+{
+    cursor: pointer;
+    float: left;
+    padding: 17px 0 0 4px;
+}
+.cd_bottom
+{
+    color: #709cec;
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    height: 24px;
+    width: 66px;
+    text-align: right;
+    background: url(images/jishi.png) no-repeat scroll 0 4px;
+    cursor: pointer;
+}
+.cd_bottom:hover
+{
+    color: #075db3;
+    background: url(images/jishi.png) no-repeat scroll 0 -25px;
+}

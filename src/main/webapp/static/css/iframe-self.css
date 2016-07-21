@@ -1,0 +1,325 @@
+﻿/*浮动 start*/
+a{ text-decoration:none}
+a:hover{ text-decoration:none}
+.flo {
+    float: right;
+    position: absolute;
+	right:80px;
+    width:60px;
+    z-index: 1000;
+	background:#f8f8f8;
+	border:#0088cc 1px solid; 
+}
+
+.flo table{ width:60px; margin:0;padding:0}
+.flo table td{margin:0; padding:0;line-height:22px; color:#999; font-size:12px; cursor:pointer}
+.flo .cyms {background:url("images/cyms.png") no-repeat scroll top center;
+            padding-top:44px;
+            line-height:20px;
+            border-bottom:#e6e6e6 1px solid;
+            float:left;
+            width:60px;
+            font-size:12px;
+            color:#666}
+ .flo .cyms:hover{background:url("images/cymsh.png") no-repeat scroll top center #0088cc;
+	color:#fff;}
+ .flo .kstj {background:url("images/kstj.png") no-repeat scroll top center;
+            padding-top:44px;
+           	border-bottom:#e6e6e6 1px solid;
+            line-height:20px;
+            float:left;
+            width:60px;
+            font-size:12px;
+            color:#666}
+ .flo .kstj:hover {background:url("images/kstjh.png") no-repeat scroll top center #0088cc;
+	color:#fff;}
+ .flo .zzzx {background:url("images/zzzx.png") no-repeat scroll top center;
+            padding-top:44px;
+            line-height:20px;
+          	border-bottom:#e6e6e6 1px solid;
+            float:left;
+            width:60px;
+            font-size:12px;
+            color:#666}
+ .flo .zzzx:hover {background:url("images/zzzxh.png") no-repeat scroll top center #0088cc;
+	color:#fff;}
+/*.flo table td a{ }
+.flo table td a:hover{ color:#fff}*/
+.flo .up_top {
+    float: left;
+}
+.flo .borderb{
+}
+.flo .qq{
+	background:url(images/fd_03.png) no-repeat center center;
+	border-bottom:#e6e6e6 1px solid; height:64px; 
+}
+.flo .qqh{
+	border-bottom:#e6e6e6 1px solid;
+	background:#0088cc; height:64px; 
+	color:#fff;
+}
+.flo .qqh a{
+	color:#fff;
+}
+.flo .zhid{
+	background:url(images/fd_06.png) no-repeat center center;
+	height:64px; 
+}
+.flo .zhidh{
+	background:#0088cc;
+	color:#fff; height:64px; 
+}
+.flo .zhidh a{
+	color:#fff;
+}
+
+/*浮动 end*/ 
+
+/* bottom */
+.bottom *
+{
+     color: #000;
+    font-family:  "microsoft yahei" ,宋体;line-height: 18px;
+    font-size: 12px;
+  text-decoration: none;
+    }
+.bottom
+{
+    clear: both;
+    background: #1381cc;
+    padding: 10px 0;
+    bottom: 0;
+    overflow: auto;
+    margin-top: 2px;
+    width: 100%;
+}
+.bottomh
+{
+    clear: both;
+    background: #none;
+    padding: 10px;
+    margin: 50px auto;
+    width: 980px;
+    overflow: auto;
+    border-top: #ccc 1px solid;
+}
+.bottom .line
+{
+    clear: both;
+    margin: 0 auto;
+    width: 1000px;
+    text-align: center;
+    line-height: 28px;
+    color: #fff;
+}
+.bottom .line1
+{
+    clear: both;
+    margin: 0 auto;
+    width: 1000px;
+    border-top: #279ceb 1px solid;
+    line-height: 30px;
+    color: #ccc;
+}
+.bottomh .line
+{
+    clear: both;
+    margin: 0 auto;
+    width: 980px;
+    text-align: center;
+    line-height: 28px;
+}
+.bottomh .line1
+{
+    clear: both;
+    margin: 0 auto;
+    width: 980px;
+    border-top: #279ceb 1px solid;
+    line-height: 30px;
+}
+
+/* bottomend */
+/*login*/
+.login
+{
+    margin-top: 3px;
+    float: right;
+    line-height: 18px;
+    width: 170px;
+}
+
+
+.zc
+{
+    float: left;
+    padding: 0 10px;
+    cursor: pointer;
+}
+.zc a
+{
+    color: #fff;
+    font-size: 14px;
+    text-decoration:none
+}
+
+
+
+.login .dl
+{
+    float: left;
+    text-align: right;
+    width: 106px;
+    color: #000; 
+}
+.login .dlh
+{
+    float: left;
+    text-align: right;
+    width: 116px;
+    color: #000;
+    margin-top: 6px;
+    margin-right: 10px;
+    border: #ddd 1px solid;
+    background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 10px #ddd;
+}
+.login .dl .name a
+{
+    float: left;
+    text-align: right;
+    width: 84px;
+    color: #fff;
+    text-decoration:none;
+    font-size: 14px;
+    padding-right: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 84px;
+    _width: expression(document.body.clientWidth > 84 ? "84px": "auto");
+}
+.login .dlh .name a
+{
+    float: left;
+    text-align: right;
+    width: 84px;
+    color: #6c6c6c;
+    text-decoration:none;
+    font-size: 14px;
+    padding-right: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 84px;
+    _width: expression(document.body.clientWidth > 84 ? "84px": "auto");
+}
+.nameh a
+{
+    float: left;
+    text-align: center;
+    line-height: 26px;
+    height: 26px;
+    width: 116px;
+    padding:0;
+    color: #6c6c6c;text-decoration:none;
+}
+.namehh a
+{
+    float: left;
+    text-align: center;
+    line-height: 26px;
+    height: 26px;
+    width: 116px;
+    color: #6c6c6c;
+    padding:0;
+    background: #f7f7f7;
+    text-decoration:none;
+}
+.login .dl img, .login .dlh img
+{
+    float: left;
+    margin: 10px 0 0 0;
+    border: none;
+    padding-right: 10px;
+}
+
+/*login end*/
+body
+{
+    
+    margin: 0;
+   /* position: absolute;*/ 
+    /*
+    color: #000; font-size: 12px;
+    font-family:  "microsoft yahei" ,宋体;*/ 
+    left: 0;
+    right: 0;
+    top: 0;
+}
+*
+{
+    /*  color: #000;
+    font-family:  "microsoft yahei" ,宋体;
+    font-size: 12px;
+  text-decoration: none;
+*/ 
+    
+    margin: 0;
+    padding: 0;
+  
+} 
+.head
+{
+     color: #000;
+    font-family:  "microsoft yahei" ,宋体;line-height: 18px;
+    font-size: 12px;
+  text-decoration: none;
+    }
+.head
+{  
+    background: #0085d0;
+    padding: 10px;
+    overflow: auto;
+}
+.menu
+{
+    cursor: pointer;
+    background: url(images/menu_bg.png) no-repeat center right;
+    padding: 0 20px;
+    float: left;
+    text-decoration:none;
+}
+.menuh
+{
+    cursor: pointer;
+    padding: 0 20px;
+    float: left;
+}
+.menu a, .menuh a
+{
+    color: #fff;
+    font-size: 14px;
+    text-decoration:none;
+}
+.menu a:hover, .menuh a:hover
+{
+    color: #b9e1f6;
+    font-size: 14px;
+    text-decoration: underline;
+}
+.login
+{
+    float: right;
+}
+.zc
+{
+    float: left;
+    padding: 0 10px;
+    cursor: pointer;
+}
+.zc a
+{
+    color: #fff;
+    font-size: 14px;
+}
