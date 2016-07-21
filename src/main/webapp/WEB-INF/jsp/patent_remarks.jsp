@@ -11,9 +11,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
 <script src="<s:url value='/static/js/sweetalert.min.js'/>"></script>
-<link rel="stylesheet" type="text/css" href="<s:url value='/static/css/sweetalert.css'/>">
+<link rel="stylesheet" type="text/css"
+	href="<s:url value='/static/css/sweetalert.css'/>">
 <title>龙图腾专利管家——我的专利</title>
 <%@ include file="_css.jsp"%>
+<style type="text/css">
+.textarea {
+	height: 150px;
+	width: 800px;
+}
+</style>
 </head>
 <body>
 	<%@ include file="_top.jsp"%>
@@ -32,28 +39,32 @@
 					<div class="lt-right">
 						<div style="height: 10px;"></div>
 						<div class="lt-box" style="padding: 20px; height: 400px;">
-							
+
 							<div>
-								<button class="button button-caution button-rounded" onclick="addPatentRemark()">添加备注</button>
+								<textarea rows="5" cols="100" id="content_area" class="textarea"
+									style="resize: none;" placeholder="在这里添加备注："></textarea>
+								<br />
+								<button class="button button-caution button-rounded"
+									onclick="addPatentRemark()">添加</button>
 							</div>
 							<div style="height: 10px"></div>
-						
-							<div class="lt-box">
-							  <table id="simple-table" class="table table-striped table-bordered table-hover">
-										<c:forEach items="${remarks}" var="remark">
-													<tr class="simple_bag">
-														<td>用户：${remark.user.username}</td>
-														<td>备注时间：<fmt:formatDate value="${remark.createTime}"
-																pattern="yyyy-MM-dd HH:mm:ss" />
-													     		<input id="patentId" type="hidden" value="${remark.patentId}"/>
-													     </td>
-													</tr>
-													<tr>
-														<td colspan="2">
-															内容：${remark.content}
-														</td>
-													</tr>
-										</c:forEach>
+
+							<div class="lt-box" style="width: 800px;">
+								<table id="simple-table"
+									class="table table-striped table-bordered table-hover"
+									style="word-break: break-all" width="800px">
+									<c:forEach items="${remarks}" var="remark">
+										<tr class="simple_bag">
+											<td>用户：${remark.user.username}</td>
+											<td>备注时间：<fmt:formatDate value="${remark.createTime}"
+													pattern="yyyy-MM-dd HH:mm:ss" /> <input id="patentId"
+												type="hidden" value="${remark.patentId}" />
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">内容：${remark.content}</td>
+										</tr>
+									</c:forEach>
 								</table>
 							</div>
 						</div>
@@ -65,27 +76,31 @@
 			</div>
 		</div>
 	</div>
-<script type="text/javascript">
-	function addPatentRemark(){
-		var content= prompt("请输入备注");
-		var patentId = ${addPatentId}; 
-		
-		if(content!=null && content!=""){
-			$.ajax({
-				url : "<s:url value='/patent/addPatentRemark.html'/>?content=" +content+"&patentId="+ patentId,
-				type : "post",
-				success : function (date){
-					alert("添加备注成功");
-					location.reload();
-				},
-				error : function(){
-					alert("添加备注失败，请重新操作一次!");
-				}
-			})	
-		}	
-		
-	}
-	
-</script>
+	<script type="text/javascript">
+		function addPatentRemark() {
+			var patentId = $
+			{
+				addPatentId
+			}
+			;
+			var content = document.getElementById('content_area').value;
+			if (content != null && content != "") {
+				$
+						.ajax({
+							url : "<s:url value='/patent/addPatentRemark.html'/>?content="
+									+ content + "&patentId=" + patentId,
+							type : "post",
+							success : function(date) {
+								alert("添加备注成功");
+								location.reload();
+							},
+							error : function() {
+								alert("添加备注失败，请重新操作一次!");
+							}
+						})
+			}
+		}
+	</script>
+
 </body>
 </html>

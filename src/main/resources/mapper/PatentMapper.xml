@@ -540,7 +540,7 @@
 	<select id="getPatentRemarks" parameterType="long" resultMap="patentRemarkResultMap">
 		SELECT  remark_id, patent_id , create_time, content,u.username as username FROM patent_remarks pr
 		join users u on u.user_id = pr.user_id
-		WHERE patent_id=#{patentId}		
+		WHERE patent_id=#{patentId}	order by create_time desc
 	</select>
 	
 		
