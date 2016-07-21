@@ -18,9 +18,12 @@
 	<link href="${base }/static/css/edit_instruct.css?v=2.3.20150415" type="text/css" rel="stylesheet" />
 	<script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
 		<script type="text/javascript">
-			var editor1;
+
+		
+		function edit(id,fromId){
+			var editor;
 			KindEditor.ready(function(K) {
-				editor1 = K.create('.editorContent', {
+				   editor = K.create('#'+id, {
 				   cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
  				   uploadJson : "${base}/kindeditor/file_upload.html", 
 				   fileManagerJson : '${base}/kindeditor/file_manager_json.html',
@@ -37,11 +40,11 @@
 						var self = this;
 						K.ctrl(document, 13, function() {
 							self.sync();
-							document.forms['form1'].submit();
+							document.forms[fromId].submit();
 						});
 						K.ctrl(self.edit.doc, 13, function() {
 							self.sync();
-							document.forms['form1'].submit();
+							document.forms[fromId].submit();
 						});
 					},
 				   
@@ -68,13 +71,19 @@
 				   
 				});
 				prettyPrint();
-				editor1.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
 			});
-			
+		};
+		$(document).ready(function(){
+			  edit('editorContent','from');
+			  for (var i = 1; i <= 8; i++) {
+				  edit('editorContent'+i,'from'+i);
+			  }		  
+		});
 		</script>
 </head>
 
-<body style="background-color: #FFF">
+<body style="background-color: #FFF" id="dlstCircleArticle">
 <style>
 .model1:hover .button{display:block}
 </style>	
@@ -338,11 +347,11 @@
 									<input type="hidden" value="" id="divtitletips">
 									<div class="textarea" name="tooltip">
 										    <div class="wraper">
-										        <form id="form1" name="form1" class="registerform" action="" onsubmit="return false;" method="post">
+										        <form id="form" name="form" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent" name="editorContent" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent" name="patentName" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -377,7 +386,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="editorContent1" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent1" name="techDomain" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -409,11 +418,11 @@
 									</div>
 									<div class="textarea" name="tooltip">
 										<div class="wraper">
-										        <form id="form1" name="form1" class="registerform" action="" onsubmit="return false;" method="post">
+										        <form id="form2" name="form2" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent2" name="editorContent2" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent2" name="backgoundTech" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -442,11 +451,11 @@
 									</div>
 									<div class="textarea" name="tooltip">
 											<div class="wraper">
-										        <form id="form1" name="form1" class="registerform" action="" onsubmit="return false;" method="post">
+										        <form id="form3" name="form3" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent3" name="editorContent3"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent3" name="contentTechProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -468,11 +477,11 @@
 									</div>
 									<div class="textarea" name="tooltip">
 										<div class="wraper">
-										        <form id="form1" name="form1" class="registerform" action="" onsubmit="return false;" method="post">
+										        <form id="form4" name="form4" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent4" name="editorContent4" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent4" name="contentRightClaim" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -495,11 +504,11 @@
 									</div>
 									<div class="textarea" name="tooltip">
 											<div class="wraper">
-										        <form id="form1" name="form1" class="registerform" action="" onsubmit="return false;" method="post">
+										        <form id="form5" name="form5" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent5" name="editorContent5" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent5" name="contentTechEffect" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -529,11 +538,11 @@
 									</div>
 									<div class="textarea" name="tooltip">
 											<div class="wraper">
-										        <form id="form1" name="form1" class="registerform" action="" onsubmit="return false;" method="post">
+										        <form id="form6" name="form6" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent6" name="editorContent6" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent6" name="implementWay" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -568,11 +577,11 @@
 									</div>
 									<div class="textarea" name="tooltip"> 
 										<div class="wraper">
-										        <form id="form1" name="form1" class="registerform" action="" onsubmit="return false;" method="post">
+										        <form id="form7" name="form7" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent7" name="editorContent7" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent7" name="abstractDescription" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -618,11 +627,11 @@
 										<input type="hidden" value="" id="divclaimtips">
 										<div class="textarea" name="tooltip">
 											<div class="wraper">
-										        <form id="form1" name="form1" class="registerform" action="" onsubmit="return false;" method="post">
+										        <form id="form8" name="form8" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent8" name="editorContent8" class="editorContent"style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent8" name="rightClaim" class="editorContent"style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
