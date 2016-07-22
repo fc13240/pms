@@ -43,6 +43,18 @@
 				    color:#F00;
 				    font-weight:bold;
 			}
+			.input-remark{
+					display:block;
+					float:left;
+					height:34px;
+					width:85px;
+					margin-right:10px;
+					line-height:34px;
+					font-size:15px;
+					color:#666;
+					font-weight:500;
+					text-align:right;
+			}
 	</style>
 </head>
 
@@ -51,7 +63,7 @@
 		<div class="main-content">
 			<div class="row">
 				<div class="col-sm-10 col-sm-offset-1">
-					<div class="login-container">
+					<div class="login-container" style="width:500px;">
 				
 
 						<div class="space-6">
@@ -69,13 +81,13 @@
 										</h4>
 
 										<div class="space-6"></div>
-										<h4> 输入您的详细信息: </h4>
 
 										<form id="registerForm" action="<s:url value='/user/register.html'/>" method="post" >
 										<se:csrfInput/>
 											<fieldset>
 												<label class="block clearfix">
-													<span class="block input-icon input-icon-right">
+													<span class="input-remark">用户名：</span>
+													<span class="input-icon input-icon-right" style="width:290px;">
 														<input type="text" class="form-control" id="username" minlength="3" maxlength="30" placeholder="用户名" name="username" onkeydown="clearPasswordErrorSpan()" required />
 														<c:if test="${success != null && !success}">
 															<div>
@@ -87,7 +99,8 @@
 												</label>
 												
 												<label class="block clearfix">
-													<span class="block input-icon input-icon-right">
+													<span class="input-remark">密码：</span>
+													<span class="input-icon input-icon-right" style="width:290px;">
 														<input type="password" class="form-control" id="regist_password" minlength="4" maxlength="30" placeholder="密码4位以上" name="password" required />
 														<div class='warning' id='warning_2'><span></span></div>
 														<i class="ace-icon fa fa-lock"></i>
@@ -95,7 +108,8 @@
 												</label>
 
 												<label class="block clearfix">
-													<span class="block input-icon input-icon-right">
+													<span class="input-remark">确认密码：</span>
+													<span class="input-icon input-icon-right" style="width:290px;">
 														<input type="password" class="form-control" id="final_password" minlength="4" maxlength="30" equalTo="#regist_password" placeholder="再次输入密码" name="finalpassword" required/>
 														<div class='warning' id='warning_3'><span></span></div>
 														<i class="ace-icon fa fa-retweet"></i>
@@ -103,14 +117,16 @@
 												</label>
 												
 												<label class="block clearfix">
-													<span class="block input-icon input-icon-right">
+													<span class="input-remark">真实姓名：</span>
+													<span class="input-icon input-icon-right" style="width:290px;">
 														<input type="text" class="form-control" id="actual_name" placeholder="真实姓名" name="name" maxlength="30" minlength="2" required />
 														<i class="ace-icon fa fa-user"></i>
 													</span>
 												</label>												
 												
 												<label class="block clearfix">
-													<span class="block input-icon input-icon-right">
+													<span class="input-remark">邮箱：</span>
+													<span class="input-icon input-icon-right" style="width:290px;">
 														<input type="email" id="email" class="form-control" placeholder="邮箱" name="email"  minlength="3" maxlength="100" required />
 														<i class="ace-icon fa fa-envelope"></i>
 													</span>
@@ -206,9 +222,7 @@
 			$('.widget-box.visible').removeClass('visible');//hide others
 			$(target).addClass('visible');//show target
 		 });
-		});
-		
-		
+		});		
 		
 		//you don't need this, just used for changing background
 		jQuery(function($) {
