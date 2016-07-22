@@ -9,17 +9,21 @@
 	
 	
 	<resultMap type="PatentDoc" id="PatentDocMap">
-		<id property="patentId" column="patent_id"/>
+		<id property="patentDocsId" column="patent_docs_id"/>
 		<result property="appNo" column="app_no"/>
-		<result property="name" column="patent_name"/>
-		<result property="appDate" column="app_date"/>
-		<result property="appPerson" column="app_person"/>
-		<result property="patentStatusText" column="patent_status_text"/>
-		<result property="inventPerson" column="invent_person"/>
-		<result property="internalCode" column="internal_code"/>
-		<result property="ownerId" column="patent_owner"/>
-		<result property="transactionStatus" column="transaction_status"/>
+		<result property="userId" column="user_id"/>
+		<result property="patentType" column="patent_type"/>
 		<result property="createTime" column="create_time"/>
+		<result property="lastUpdateTime" column="last_update_time"/>
+		<result property="name" column="patent_name"/>
+		<result property="techDomain" column="tech_domain"/>
+		<result property="backgoundTech" column="background_tech"/>
+		<result property="contentProblem" column="content_problem"/>
+		<result property="contentRight" column="content_right"/>
+		<result property="contentEffect" column="content_effect"/>
+		<result property="implementWay" column="implement_way"/>
+		<result property="rightClaim" column="right_claim"/>
+		<result property="abstractDescription" column="abstract_desc"/>
 	</resultMap>
 	
 	

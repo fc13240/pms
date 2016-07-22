@@ -10,7 +10,7 @@ public class PatentDoc {
 	private long patentDocsId;
 	private String appNo;
 	private int userId;
-	private int patent_type;
+	private int patentType;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date createTime;
 	private Timestamp lastUpdateTime;
@@ -41,11 +41,11 @@ public class PatentDoc {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public int getPatent_type() {
-		return patent_type;
+	public int getPatentType() {
+		return patentType;
 	}
-	public void setPatent_type(int patent_type) {
-		this.patent_type = patent_type;
+	public void setPatentType(int patentType) {
+		this.patentType = patentType;
 	}
 	public Date getCreateTime() {
 		return createTime;
