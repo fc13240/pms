@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.lotut.pms.dao.mapper.PatentDocMapper">
+<!-- 	<insert id="saveEditorText" parameterType="Editor">
+		insert into editor(editor_content) values(#{editorContent,javaType=string,jdbcType=CLOB});
+	</insert> -->
+	
+	
+	<resultMap type="PatentDoc" id="PatentDocMap">
+		<id column="editor_id" property="editorId"/>
+		<result column="editor_content" property="editorContent" javaType="string" jdbcType="CLOB"/>
+	</resultMap>
+	
+	
+</mapper>
