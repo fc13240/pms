@@ -49,5 +49,7 @@
 		<typeAlias alias="PatentOfficeAccount" type="com.lotut.pms.domain.PatentOfficeAccount"/>
 		
 		<typeAlias type="com.lotut.pms.domain.PatentRemark" alias="PatentRemark"/>
+		<typeAlias type="com.lotut.pms.domain.PatentDocSectionType" alias="PatentDocSectionType"/>
+		<typeAlias type="com.lotut.pms.domain.PatentDocumentTemplate" alias="PatentDocumentTemplate"/>
 	</typeAliases>  
 </configuration>
