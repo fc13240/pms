@@ -48,7 +48,6 @@
 		<typeAlias alias="StatsHashMap" type="com.lotut.pms.domain.StatsHashMap"/>
 		<typeAlias alias="PatentOfficeAccount" type="com.lotut.pms.domain.PatentOfficeAccount"/>
 		
-		<typeAlias type="com.lotut.pms.domain.EditorTest" alias="Editor"/>
 		<typeAlias type="com.lotut.pms.domain.PatentRemark" alias="PatentRemark"/>
 	</typeAliases>  
 </configuration>

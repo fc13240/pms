@@ -125,8 +125,8 @@
 		<property name="patentOfficeAccountMapper" ref="patentOfficeAccountMapper" />
 	</bean>	
 	
-	<bean name="textEditorDao" class="com.lotut.pms.dao.mybatis.TextEditorMybatisDao">
+	<bean name="patentDocDao" class="com.lotut.pms.dao.mybatis.PatentDocMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
-		<property name="textEditorMapper" ref="textEditorMapper" />
-	</bean>	
+		<property name="patentDocMapper" ref="patentDocMapper" />
+	</bean>		
 </beans>							
