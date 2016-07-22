@@ -13,14 +13,13 @@ import com.lotut.pms.service.PatentDocService;
 @RequestMapping(path="/editor")
 public class PatentWriteDocController {
 	private PatentDocService patentDocService;
-
-	public PatentDocService getPatentDocService() {
-		return patentDocService;
-	}
+	
 	@Autowired
-	public void setPatentDocService(PatentDocService patentDocService) {
+	public PatentWriteDocController(PatentDocService patentDocService) {
 		this.patentDocService = patentDocService;
 	}
+	
+
 	@RequestMapping(path="/writeForm")
 	public String editorForm(Model model){
 		return "edit_index";
