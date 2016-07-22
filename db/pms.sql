@@ -542,3 +542,25 @@ CREATE TABLE IF NOT EXISTS patent_remarks (
 	CONSTRAINT fk_patent_remarks_patent_id FOREIGN KEY idx_fk_patent_remarks_patent_id (patent_id) REFERENCES patents(patent_id) , 
 	CONSTRAINT fk_patent_remarks_user_id FOREIGN KEY idx_fk_patent_remarks_user_id (user_id) REFERENCES users(user_id) 
 );
+
+CREATE TABLE patent_documents(
+	patent_docs_id BIGINT PRIMARY KEY,
+	app_no VARCHAR(30) ,
+	user_id INT(11),
+	patent_type INT NOT NULL COMMENT '专利类型',
+	create_time DATE DEFAULT NULL COMMENT '专利创建时间',
+	last_update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '专利更新时间',
+	patent_name VARCHAR(1000) COMMENT '专利名称',
+	tech_domain MEDIUMTEXT COMMENT '技术领域',
+	background_tech MEDIUMTEXT COMMENT '背景技术',
+	content_problem MEDIUMTEXT COMMENT '发明问题',
+	content_right MEDIUMTEXT COMMENT '发明内容',
+	content_effect MEDIUMTEXT COMMENT '发明作用',
+	implement_way MEDIUMTEXT COMMENT '实施方式',
+	figure_and_explaintion LONGBLOB  COMMENT '附图及说明',
+	right_claim MEDIUMTEXT COMMENT '权利要求',
+	abstract_desc VARCHAR(50000) COMMENT '摘要',
+	CONSTRAINT fk_patent_documents_patent_type FOREIGN KEY idx_fk_patent_documents_patent_type(patent_type) REFERENCES patent_types(patent_type_id),
+	CONSTRAINT fk_patent_documents_doc_owner_id FOREIGN KEY idx_fk_patent_documents_doc_owner_id(user_id) REFERENCES users(user_id)
+
+);
