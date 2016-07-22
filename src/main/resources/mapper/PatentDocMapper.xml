@@ -9,8 +9,17 @@
 	
 	
 	<resultMap type="PatentDoc" id="PatentDocMap">
-		<id column="editor_id" property="editorId"/>
-		<result column="editor_content" property="editorContent" javaType="string" jdbcType="CLOB"/>
+		<id property="patentId" column="patent_id"/>
+		<result property="appNo" column="app_no"/>
+		<result property="name" column="patent_name"/>
+		<result property="appDate" column="app_date"/>
+		<result property="appPerson" column="app_person"/>
+		<result property="patentStatusText" column="patent_status_text"/>
+		<result property="inventPerson" column="invent_person"/>
+		<result property="internalCode" column="internal_code"/>
+		<result property="ownerId" column="patent_owner"/>
+		<result property="transactionStatus" column="transaction_status"/>
+		<result property="createTime" column="create_time"/>
 	</resultMap>
 	
 	
