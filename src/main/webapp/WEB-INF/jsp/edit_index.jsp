@@ -1395,6 +1395,7 @@
 			function alertText(){
 				var x=$("#editorContent").val();
 				alert(x);
+				KindEditor.appendHtml('#editorContent1', x);
 				
 			};
 			
