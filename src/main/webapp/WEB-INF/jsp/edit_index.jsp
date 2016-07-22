@@ -351,7 +351,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent" name="patentName" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -508,7 +508,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent5" name="contentEffect," class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent5" name="contentEffect" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
