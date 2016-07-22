@@ -50,5 +50,7 @@
 		
 		<typeAlias type="com.lotut.pms.domain.EditorTest" alias="Editor"/>
 		<typeAlias type="com.lotut.pms.domain.PatentRemark" alias="PatentRemark"/>
+		<typeAlias type="com.lotut.pms.domain.PatentDocSectionType" alias="PatentDocSectionType"/>
+		<typeAlias type="com.lotut.pms.domain.PatentDocumentTemplate" alias="PatentDocumentTemplate"/>
 	</typeAliases>  
 </configuration>
