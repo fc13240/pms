@@ -544,7 +544,7 @@ CREATE TABLE IF NOT EXISTS patent_remarks (
 );
 
 CREATE TABLE patent_documents(
-	patent_docs_id BIGINT PRIMARY KEY,
+	patent_docs_id BIGINT(20) NOT NULL AUTO_INCREMENT,
 	app_no VARCHAR(30) ,
 	user_id INT(11),
 	patent_type INT NOT NULL COMMENT '专利类型',
@@ -560,6 +560,7 @@ CREATE TABLE patent_documents(
 	figure_and_explaintion LONGBLOB  COMMENT '附图及说明',
 	right_claim MEDIUMTEXT COMMENT '权利要求',
 	abstract_desc VARCHAR(50000) COMMENT '摘要',
+	PRIMARY KEY (patent_docs_id),
 	CONSTRAINT fk_patent_documents_patent_type FOREIGN KEY idx_fk_patent_documents_patent_type(patent_type) REFERENCES patent_types(patent_type_id),
 	CONSTRAINT fk_patent_documents_doc_owner_id FOREIGN KEY idx_fk_patent_documents_doc_owner_id(user_id) REFERENCES users(user_id)
 
