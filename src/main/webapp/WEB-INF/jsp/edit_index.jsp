@@ -28,7 +28,7 @@
  				   uploadJson : "${base}/kindeditor/file_upload.html", 
 				   fileManagerJson : '${base}/kindeditor/file_manager_json.html',
 				   resizeType : 0,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
-				   themeType : 'simple',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
+				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
 				   height  : '270px',
 				   width:'850px',
 				   readonlyMode : false, //只读模式 默认为false
@@ -152,7 +152,7 @@
 	                        
 	                    </div>
 	                </div>
-	                <div id="overflowcenter" style="overflow-y: auto; overflow-x: hidden;height:610px; width: 998px;">
+	                <div id="overflowcenter" style="overflow-y: auto; overflow-x: hidden;height:610px; width: 1060px;">
 	                    <!-- center-top end-->
 	                    <!-- 撰写小贴士start-->
 	                    

@@ -11,7 +11,7 @@
 <c:set var="base" value="<%=basePath%>" scope="application"></c:set>
 
 <!-- 引入findeditor.js -->
-<script type="text/javascript" src="${base }/plugins/kindeditor/kindeditor-all.js"></script>
+<script type="text/javascript" src="${base }/plugins/kindeditor/kindeditor-all-min.js"></script>
 <script type="text/javascript" src="${base }/plugins/kindeditor/lang/zh_CN.js"></script>
 <script type="text/javascript" src="${base }/temp/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base }/plugins/kindeditor/plugins/code/prettify.js"></script>
