@@ -35,7 +35,7 @@
 				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : true,
 				   afterBlur: function(){this.sync();},
-				   syncType:"auto",
+				   syncType:"from",
 				   afterCreate : function() {
 						var self = this;
 						K.ctrl(document, 13, function() {
