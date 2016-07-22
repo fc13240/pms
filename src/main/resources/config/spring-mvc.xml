@@ -19,7 +19,7 @@
 		<property name="suffix" value=".jsp" />      
 	</bean> 	
 	
-	<context:component-scan base-package="com.lotut.pms.web.controller" /> 	
+	<context:component-scan base-package="com.lotut.pms.web" /> 	
 	<mvc:annotation-driven />
 	<context:annotation-config/>
   	<task:executor id="executor" pool-size="1" />
