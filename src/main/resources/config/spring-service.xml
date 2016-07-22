@@ -53,13 +53,10 @@
 		<constructor-arg ref="patentMongoDao"/>
 	</bean>
 	
-	
-<<<<<<< HEAD
 	<bean id="PatentDocumentTemplateService" class="com.lotut.pms.service.impl.PatentDocumentTemplateServiceImp">
 		<constructor-arg ref="patentDocumentTemplateDao"/>	
-=======
+	</bean>
 	<bean id="patentDocService" class="com.lotut.pms.service.impl.PatentDocServiceImp">
 		<constructor-arg ref="patentDocDao"/>
->>>>>>> f3582b7a259bb4141d6560aa5c671f393bc6eb6d
 	</bean>
 </beans>
