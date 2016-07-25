@@ -105,4 +105,7 @@ public interface PatentDao {
 	
 	void addPatentRemark(long patentId,String content,int userId);
 
+	Patent showPatentDetail(long patentId);
+	
+	boolean savePatentDetail(Patent patent);
 }

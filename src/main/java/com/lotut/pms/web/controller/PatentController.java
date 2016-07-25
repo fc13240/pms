@@ -29,6 +29,7 @@ import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.PatentOfficeAccount;
 import com.lotut.pms.domain.PatentRemark;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
@@ -115,13 +116,45 @@ public class PatentController {
 		model.addAttribute("addPatentId", patentId);
 		return "patent_remarks";
 	}
-	
+
 	@RequestMapping(path="addPatentRemark", method=RequestMethod.POST)
 	public String addPatentRemark(@RequestParam("patentId")long patentId, @RequestParam("content") String content,Model model) {		
 		int userId = PrincipalUtils.getCurrentUserId();
 		patentService.addPatentRemark(patentId,content,userId);		
 		return "patent_remarks";
 	}
+	
+	
+	@RequestMapping(path="showPatentDetail", method=RequestMethod.GET)
+	public String showPatentDetail(@RequestParam("patentId")long patentId,Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		Patent patent = patentService.showPatentDetail(patentId);
+		Map<String, Map<String, String>> patentTypeCount=patentService.getUserPatentCountByType(userId);
+		Map<String, Map<String, String>> patentStatusCount=patentService.searchUserPatentsByPatentStatus(userId);
+		model.addAttribute("patent", patent);
+		model.addAttribute("patentTypeCount", patentTypeCount);
+		model.addAttribute("patentStatusCount", patentStatusCount);
+		System.out.println("-------------------"+patent.getPatentType().getPatentTypeId());
+		System.out.println("-------------------"+patent.getPatentStatus().getPatentStatusId());
+		addPatentTypeAndStatusDataToModel(model);
+		return "patent_update_information";
+	}
+	
+	@RequestMapping(path="savePatentDetail", method=RequestMethod.POST)
+	public String savePatentDetail(@ModelAttribute Patent patent,Model model) {
+		boolean success=patentService.savePatentDetail(patent);
+		System.out.println("-------------------"+patent.getPatentType().getPatentTypeId());
+		System.out.println("-------------------"+patent.getPatentStatus().getPatentStatusId());
+		long patentId=patent.getPatentId();
+		model.addAttribute("patentId", patentId);
+		//return "patent_update_information";
+		return "redirect:/patent/list.html"; 
+	}
+	
+	
+	
+	
+	
 	
 	@RequestMapping(path="searchFriends", method=RequestMethod.GET)
 	public String searchFriends(@RequestParam("keyword")String keyword, Model model) {

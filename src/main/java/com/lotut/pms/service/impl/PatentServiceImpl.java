@@ -307,4 +307,17 @@ public class PatentServiceImpl implements PatentService {
 		// TODO Auto-generated method stub
 		 patentDao.addPatentRemark(patentId,content,userId);
 	}
+
+	@Override
+	public Patent showPatentDetail(long patentId) {
+		// TODO Auto-generated method stub
+		return  patentDao.showPatentDetail(patentId);
+	}
+
+	@Override
+	public boolean savePatentDetail(Patent patent) {
+		// TODO Auto-generated method stub
+		return patentDao.savePatentDetail(patent);
+	}
+		
 }

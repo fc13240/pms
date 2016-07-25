@@ -43,11 +43,10 @@
 							<div>
 								<textarea rows="5" cols="100" id="content_area" class="textarea"
 									style="resize: none;" placeholder="在这里添加备注："></textarea>
-								<br />
-								<button class="button button-caution button-rounded"
-									onclick="addPatentRemark()">添加</button>
+								<br/><br/>	
+								<button class="button button-caution button-rounded" onclick="addPatentRemark()">添加</button>
 							</div>
-							<div style="height: 10px"></div>
+							<div style="height: 20px"></div>
 
 							<div class="lt-box" style="width: 800px;">
 								<table id="simple-table"
@@ -78,29 +77,24 @@
 	</div>
 	<script type="text/javascript">
 		function addPatentRemark() {
-			var patentId = $
-			{
-				addPatentId
-			}
-			;
+			var patentId = ${addPatentId};
 			var content = document.getElementById('content_area').value;
 			if (content != null && content != "") {
-				$
-						.ajax({
-							url : "<s:url value='/patent/addPatentRemark.html'/>?content="
-									+ content + "&patentId=" + patentId,
-							type : "post",
-							success : function(date) {
-								alert("添加备注成功");
-								location.reload();
-							},
-							error : function() {
-								alert("添加备注失败，请重新操作一次!");
-							}
-						})
+				$.ajax({
+					url : "<s:url value='/patent/addPatentRemark.html'/>?content="+ content + "&patentId=" + patentId,
+					type : "post",
+					success : function(date) {
+						alert("添加备注成功");
+						location.reload();
+					},
+					error : function() {
+						alert("添加备注失败，请重新操作一次!");
+					}
+				})
 			}
 		}
 	</script>
 
 </body>
 </html>
+

@@ -117,4 +117,8 @@ public interface PatentMapper {
 	
 	void addPatentRemark(@Param("patentId")long patentId,@Param("content")String content,@Param("userId")int userId);
 	
+	Patent showPatentDetail(long patentId);
+	
+	boolean savePatentDetail(Patent patent);
+	
 }

@@ -271,4 +271,16 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		patentMapper.addPatentRemark(patentId,content,userId);
 	}
 
+	@Override
+	public Patent showPatentDetail(long patentId) {
+		// TODO Auto-generated method stub
+		return patentMapper.showPatentDetail(patentId);
+	}
+
+	@Override
+	public boolean savePatentDetail(Patent patent) {
+		// TODO Auto-generated method stub
+		return patentMapper.savePatentDetail(patent);
+	}
+
 }
