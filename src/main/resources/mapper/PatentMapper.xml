@@ -549,4 +549,37 @@
 		values(now(),#{content},#{patentId},#{userId})				
 	</insert>
 	
+	
+	
+	
+	<resultMap type="Patent" id="patentDetail">
+		<id property="patentId" column="patent_id"/>
+		<result property="name" column="patent_name"/>
+		<result property="appDate" column="app_date"/>
+		<result property="appPerson" column="app_person"/>
+		<result property="internalCode" column="internal_code"/>
+		<association property="patentType" resultMap="PatentTypeResultMap"/>
+		<association property="patentStatus" resultMap="PatentStatusResultMap"/>
+		<!-- <collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/> -->
+	</resultMap>
+	
+	
+	<select id="showPatentDetail" parameterType="long" resultMap="patentDetail">
+		SELECT p.patent_id , p.patent_name, pt.patent_type_desc, p.app_date, p.app_person, p.internal_code, ps.patent_status_desc,pt.patent_type_id,ps.patent_status_id 
+		FROM patents p
+		LEFT JOIN patent_status ps ON p.patent_status = ps.patent_status_id
+		LEFT JOIN patent_types pt ON p.patent_type = pt.patent_type_id
+		where p.patent_id=#{patentId} 
+	</select>	
+
+	<update id="savePatentDetail">
+		UPDATE patents  SET  patent_name=#{name}, patent_type=#{patentType.patentTypeId},app_date=#{appDate},app_person=#{appPerson},
+			patent_status=#{patentStatus.patentStatusId},internal_code=#{internalCode},
+			patent_status_text=(select patent_status_desc from patent_status where patent_status_id = #{patentStatus.patentStatusId})
+		WHERE patent_id=#{patentId}
+	</update>
+	
+	
+	
+	
 </mapper>

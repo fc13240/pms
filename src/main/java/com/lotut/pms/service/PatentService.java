@@ -112,5 +112,10 @@ public interface PatentService {
 	List<PatentRemark> getPatentRemarks(long patentId);
 	
 	void addPatentRemark(long patentId,String content,int userId);
+	
+	Patent showPatentDetail(long patentId);
+	
+	boolean savePatentDetail(Patent patent);
 
 }
+

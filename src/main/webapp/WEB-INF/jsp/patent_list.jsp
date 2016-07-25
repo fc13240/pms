@@ -273,9 +273,12 @@
 							  <br>
 							   <a   style="color:red" href="javascript:return void" onclick="delectPatent('<c:out value='${patent.patentId}'/>')">
 							  删除
-							  </a>&nbsp;
+							  </a>
 							  <a href="<s:url value='/patent/showRemarks.html'/>?patentId=<c:out value='${patent.patentId}'/>">
 							  备注
+							  </a>
+							  <a href="<s:url value='/patent/showPatentDetail.html'/>?patentId=<c:out value='${patent.patentId}'/>">
+							  修改
 							  </a>
 							  <br> 
 							  <se:authorize access="hasRole('ROLE_TRADER')">
