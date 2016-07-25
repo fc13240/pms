@@ -567,8 +567,7 @@ CREATE TABLE patent_documents(
 );
 
 
-DROP TABLE IF EXISTS patent_doc_section_types;
-CREATE TABLE patent_doc_section_types(
+CREATE TABLE IF NOT EXISTS patent_doc_section_types(
 	patent_doc_section_id INT PRIMARY KEY,
 	patent_doc_section_desc VARCHAR(10) NOT NULL COMMENT '专利主题'
 	
@@ -582,8 +581,7 @@ INSERT INTO patent_doc_section_types VALUES(7,'权利要求');
 INSERT INTO patent_doc_section_types VALUES(8,'摘要');
 INSERT INTO patent_doc_section_types VALUES(9,'实用新型名称');
 
-DROP TABLE IF EXISTS patent_document_templates;
-CREATE TABLE patent_document_templates(
+CREATE TABLE IF NOT EXISTS patent_document_templates(
 	template_id INT AUTO_INCREMENT PRIMARY KEY,
 	content VARCHAR(400) NOT NULL COMMENT '专利模块部分',
 	template_title VARCHAR(400) NOT NULL COMMENT '模板说明',

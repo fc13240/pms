@@ -9,12 +9,15 @@ import com.lotut.pms.domain.PatentDocumentTemplate;
 public class PatentDocumentTemplateMybatisDao extends SqlSessionDaoSupport implements PatentDocumentTemplateDao{
 	private PatentDocumentTemplateMapper patentDocumentTemplateMapper;
 	
-	public void setPatentDocumentTemplateMapper(PatentDocumentTemplateMapper patentDocumentTemplateMapper){
-		this.patentDocumentTemplateMapper = patentDocumentTemplateMapper;
-	}
+	
 	@Override
 	public void savePatentDocumentTemplate(PatentDocumentTemplate patentDocumentTemplate) {
 		patentDocumentTemplateMapper.savePatentDocumentTemplate(patentDocumentTemplate);
+	}
+
+
+	public void setPatentDocumentTemplateMapper(PatentDocumentTemplateMapper patentDocumentTemplateMapper) {
+		this.patentDocumentTemplateMapper = patentDocumentTemplateMapper;
 	}
 
 }

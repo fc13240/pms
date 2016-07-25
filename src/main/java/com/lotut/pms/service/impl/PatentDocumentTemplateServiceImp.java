@@ -8,7 +8,6 @@ public class PatentDocumentTemplateServiceImp implements PatentDocumentTemplateS
 	private PatentDocumentTemplateDao  patentDocumentTemplateDao;
 
 	public PatentDocumentTemplateServiceImp(PatentDocumentTemplateDao patentDocumentTemplateDao) {
-		super();
 		this.patentDocumentTemplateDao = patentDocumentTemplateDao;
 	}
 
