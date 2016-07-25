@@ -79,7 +79,7 @@
 	                        <i class="icon"></i>导出文件
 	                    </div>
 	         			<div>
-						<select id="editorid" onchange="findText(this.value)">
+						<select id="editorid" onchange="findPatentDoc(this.value)">
 							<option value="">请选择</option>
 							<c:forEach items="${patentDoc}" var="patentDoc">
 								<option value="${patentDoc.patentDocsId }">${patentDoc.name }</option>
