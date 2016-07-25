@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.lotut.pms.dao.mapper.PatentDocMapper">
+<!-- 	<insert id="saveEditorText" parameterType="Editor">
+		insert into editor(editor_content) values(#{editorContent,javaType=string,jdbcType=CLOB});
+	</insert> -->
+	
+	
+	<resultMap type="PatentDoc" id="PatentDocMap">
+		<id property="patentDocsId" column="patent_docs_id"/>
+		<result property="appNo" column="app_no"/>
+		<result property="userId" column="user_id"/>
+		<result property="patentType" column="patent_type"/>
+		<result property="createTime" column="create_time"/>
+		<result property="lastUpdateTime" column="last_update_time"/>
+		<result property="name" column="patent_name"/>
+		<result property="techDomain" column="tech_domain"/>
+		<result property="backgoundTech" column="background_tech"/>
+		<result property="contentProblem" column="content_problem"/>
+		<result property="contentRight" column="content_right"/>
+		<result property="contentEffect" column="content_effect"/>
+		<result property="implementWay" column="implement_way"/>
+		<result property="rightClaim" column="right_claim"/>
+		<result property="abstractDescription" column="abstract_desc"/>
+	</resultMap>
+	
+	
+ 	<insert id="savePatentDoc" parameterType="PatentDoc">
+		insert into patent_documents(patent_docs_id,app_no,user_id,patent_type,create_time,patent_name,tech_domain,background_tech,content_problem,content_right,content_effect,
+		implement_way,figure_and_explaintion,right_claim,abstract_desc) values
+		(#{patentDocsId},#{appNo,javaType=string,jdbcType=VARCHAR},#{userId},#{patentType,javaType=int,jdbcType=INTEGER},now(),#{name},#{techDomain,javaType=string,jdbcType=CLOB},#{backgoundTech,javaType=string,jdbcType=CLOB},#{contentProblem,javaType=string,jdbcType=CLOB},#{contentRight,javaType=string,jdbcType=CLOB},#{contentEffect,javaType=string,jdbcType=CLOB},
+		#{implementWay,javaType=string,jdbcType=CLOB},#{rightClaim,javaType=string,jdbcType=CLOB},#{abstractDescription,javaType=string,jdbcType=CLOB});
+	</insert> 
+	
+</mapper>

@@ -75,8 +75,14 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>			
 	
-	<bean id="textEditorMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.TextEditorMapper"/>
+	
+	<bean name="patentDocMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.PatentDocMapper" />
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>	
+	
+	<bean id="patentDocumentTemplateMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.PatentDocumentTemplateMapper"/>
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	
@@ -125,8 +131,13 @@
 		<property name="patentOfficeAccountMapper" ref="patentOfficeAccountMapper" />
 	</bean>	
 	
-	<bean name="textEditorDao" class="com.lotut.pms.dao.mybatis.TextEditorMybatisDao">
+	<bean name="patentDocDao" class="com.lotut.pms.dao.mybatis.PatentDocMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
-		<property name="textEditorMapper" ref="textEditorMapper" />
+		<property name="patentDocMapper" ref="patentDocMapper" />
+	</bean>	
+	
+	<bean name="patentDocumentTemplateDao" class="com.lotut.pms.dao.mybatis.PatentDocumentTemplateMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+		<property name="patentDocumentTemplateMapper" ref="patentDocumentTemplateMapper"/>
 	</bean>	
 </beans>							

@@ -10,7 +10,7 @@
 
 	<typeAliases>
 		<typeAlias alias="Patent" type="com.lotut.pms.domain.Patent"/>
-		<!-- <typeAlias alias="Patent" type="com.lotut.pms.domain.search.Patent"/> -->
+		<typeAlias alias="PatentDoc" type="com.lotut.pms.domain.PatentDoc"/>
 		<typeAlias alias="GoodsFirstColumn" type="com.lotut.pms.domain.GoodsFirstColumn"/>
 		<typeAlias alias="GoodsSecondColumn" type="com.lotut.pms.domain.GoodsSecondColumn"/>
 		<typeAlias alias="GoodsDetail" type="com.lotut.pms.domain.GoodsDetail"/>
@@ -48,7 +48,8 @@
 		<typeAlias alias="StatsHashMap" type="com.lotut.pms.domain.StatsHashMap"/>
 		<typeAlias alias="PatentOfficeAccount" type="com.lotut.pms.domain.PatentOfficeAccount"/>
 		
-		<typeAlias type="com.lotut.pms.domain.EditorTest" alias="Editor"/>
 		<typeAlias type="com.lotut.pms.domain.PatentRemark" alias="PatentRemark"/>
+		<typeAlias type="com.lotut.pms.domain.PatentDocSectionType" alias="PatentDocSectionType"/>
+		<typeAlias type="com.lotut.pms.domain.PatentDocumentTemplate" alias="PatentDocumentTemplate"/>
 	</typeAliases>  
 </configuration>

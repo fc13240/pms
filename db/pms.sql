@@ -542,3 +542,56 @@ CREATE TABLE IF NOT EXISTS patent_remarks (
 	CONSTRAINT fk_patent_remarks_patent_id FOREIGN KEY idx_fk_patent_remarks_patent_id (patent_id) REFERENCES patents(patent_id) , 
 	CONSTRAINT fk_patent_remarks_user_id FOREIGN KEY idx_fk_patent_remarks_user_id (user_id) REFERENCES users(user_id) 
 );
+
+CREATE TABLE patent_documents(
+	patent_docs_id BIGINT(20) NOT NULL AUTO_INCREMENT,
+	app_no VARCHAR(30) ,
+	user_id INT(11),
+	patent_type INT NOT NULL COMMENT '专利类型',
+	create_time DATE DEFAULT NULL COMMENT '专利创建时间',
+	last_update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '专利更新时间',
+	patent_name VARCHAR(1000) COMMENT '专利名称',
+	tech_domain MEDIUMTEXT COMMENT '技术领域',
+	background_tech MEDIUMTEXT COMMENT '背景技术',
+	content_problem MEDIUMTEXT COMMENT '发明问题',
+	content_right MEDIUMTEXT COMMENT '发明内容',
+	content_effect MEDIUMTEXT COMMENT '发明作用',
+	implement_way MEDIUMTEXT COMMENT '实施方式',
+	figure_and_explaintion LONGBLOB  COMMENT '附图及说明',
+	right_claim MEDIUMTEXT COMMENT '权利要求',
+	abstract_desc VARCHAR(50000) COMMENT '摘要',
+	PRIMARY KEY (patent_docs_id),
+	CONSTRAINT fk_patent_documents_patent_type FOREIGN KEY idx_fk_patent_documents_patent_type(patent_type) REFERENCES patent_types(patent_type_id),
+	CONSTRAINT fk_patent_documents_doc_owner_id FOREIGN KEY idx_fk_patent_documents_doc_owner_id(user_id) REFERENCES users(user_id)
+
+);
+
+
+CREATE TABLE IF NOT EXISTS patent_doc_section_types(
+	patent_doc_section_id INT PRIMARY KEY,
+	patent_doc_section_desc VARCHAR(10) NOT NULL COMMENT '专利主题'
+	
+);
+INSERT INTO patent_doc_section_types VALUES(1,'发明名称');
+INSERT INTO patent_doc_section_types VALUES(3,'技术领域');
+INSERT INTO patent_doc_section_types VALUES(4,'背景技术');
+INSERT INTO patent_doc_section_types VALUES(5,'发明内容');
+INSERT INTO patent_doc_section_types VALUES(6,'具体实施方式');
+INSERT INTO patent_doc_section_types VALUES(7,'权利要求');
+INSERT INTO patent_doc_section_types VALUES(8,'摘要');
+INSERT INTO patent_doc_section_types VALUES(9,'实用新型名称');
+
+CREATE TABLE IF NOT EXISTS patent_document_templates(
+	template_id INT AUTO_INCREMENT PRIMARY KEY,
+	content VARCHAR(400) NOT NULL COMMENT '专利模块部分',
+	template_title VARCHAR(400) NOT NULL COMMENT '模板说明',
+	patent_type INT NOT NULL COMMENT '专利类型',
+	patent_doc_section INT NOT NULL COMMENT '专利主题',
+	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	last_update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT'最近修改时间',
+	creator_id INT NOT NULL COMMENT '创建者',
+	CONSTRAINT fk_patent_document_template_patent_type FOREIGN KEY ids_fk_patent_name_template_patent_type(patent_type) REFERENCES patent_types(patent_type_id),
+	CONSTRAINT fk_patent_document_template_creator_id FOREIGN KEY ids_fk_patent_name_template_creator_id(creator_id) REFERENCES users(user_id),
+	CONSTRAINT fk_patent_document_template_patent_doc_section FOREIGN KEY ids_fk_patent_document_template_doc_section(patent_doc_section) REFERENCES patent_doc_section_types(patent_doc_section_id)
+	
+);
