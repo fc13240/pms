@@ -27,6 +27,7 @@
 	
 		<div id="mincontent" style="min-height: 581px;">
 	        
+	        
 	    <input id="hiduserid" type="hidden" value="UC1706F442C97E4C58977D24E340EBF66">
 	    <div class="body">
 	        <div class="left" style="height: 612px;">
@@ -77,7 +78,14 @@
 	                    <div class="export" onclick="export_selfwrite();" id="export_selfwrite">
 	                        <i class="icon"></i>导出文件
 	                    </div>
-	         
+	         			<div>
+						<select id="editorid" onchange="findPatentDoc(this.value)">
+							<option value="">请选择</option>
+							<c:forEach items="${patentDoc}" var="patentDoc">
+								<option value="${patentDoc.patentDocsId }">${patentDoc.name }</option>
+							</c:forEach>		
+						</select>
+						</div>
 	                    
 	                    <div class="top_right">
 	                        <div class="review" onclick="preview_selfwrite();">
