@@ -28,9 +28,9 @@
 	
 	
  	<insert id="savePatentDoc" parameterType="PatentDoc">
-		insert into patent_documents(patent_docs_id,app_no,user_id,patent_type,create_time,patent_name,tech_domain,background_tech,content_problem,content_right,content_effect,
-		implement_way,figure_and_explaintion,right_claim,abstract_desc) values
-		(#{patentDocsId},#{appNo,javaType=string,jdbcType=VARCHAR},#{userId},#{patentType,javaType=int,jdbcType=INTEGER},now(),#{name},#{techDomain,javaType=string,jdbcType=CLOB},#{backgoundTech,javaType=string,jdbcType=CLOB},#{contentProblem,javaType=string,jdbcType=CLOB},#{contentRight,javaType=string,jdbcType=CLOB},#{contentEffect,javaType=string,jdbcType=CLOB},
+		insert into patent_documents(app_no,user_id,patent_type,create_time,patent_name,tech_domain,background_tech,content_problem,content_right,content_effect,
+		implement_way,right_claim,abstract_desc) values
+		(#{appNo,javaType=string,jdbcType=VARCHAR},#{userId},1,now(),#{name},#{techDomain,javaType=string,jdbcType=CLOB},#{backgoundTech,javaType=string,jdbcType=CLOB},#{contentProblem,javaType=string,jdbcType=CLOB},#{contentRight,javaType=string,jdbcType=CLOB},#{contentEffect,javaType=string,jdbcType=CLOB},
 		#{implementWay,javaType=string,jdbcType=CLOB},#{rightClaim,javaType=string,jdbcType=CLOB},#{abstractDescription,javaType=string,jdbcType=CLOB});
 	</insert> 
 	

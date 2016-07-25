@@ -1342,24 +1342,24 @@
 			};
 			
 			function savePatentDoc(){
-				var a=$("#editorContent").val();
+				var name=$("#editorContent").val();
 				var aa=editor.html();
 				alert(aa);
-				var b=$("#editorContent1").val();
-				var c=$("#editorContent2").val();
-				var d=$("#editorContent3").val();
-				var e=$("#editorContent4").val();
-				var f=$("#editorContent5").val();
-				var g=$("#editorContent6").val();
-				var h=$("#editorContent7").val();
-				var i=$("#editorContent8").val();
+				var techDomain=$("#editorContent1").val();
+				var backgoundTech=$("#editorContent2").val();
+				var contentProblem=$("#editorContent3").val();
+				var contentRight=$("#editorContent4").val();
+				var contentEffect=$("#editorContent5").val();
+				var implementWay=$("#editorContent6").val();
+				var abstractDescription=$("#editorContent7").val();
+				var rightClaim=$("#editorContent8").val();
 				$.ajax({
 					type: "POST",
 					url: "<s:url value='/editor/addPatentDoc.html'/>",
-					data: {"name":a,"techDomain":b,"backgoundTech":c,"contentProblem":d,"contentRight":e,
-							"contentEffect":f,"implementWay":g,"abstractDescription":h,"rightClaim":i},
+					data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
+							"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim},
 					success: function(data){
-						
+						alert("操作成功");
 					},
 					error: function(){
 						alert("操作失败");

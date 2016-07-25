@@ -165,7 +165,7 @@
 		<script type="text/javascript">
 			var editor3;
 			KindEditor.ready(function(K) {
-				   editor = K.create('#editorContent3', {
+				   editor3 = K.create('#editorContent3', {
 				   cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
  				   uploadJson : "${base}/kindeditor/file_upload.html", 
 				   fileManagerJson : '${base}/kindeditor/file_manager_json.html',
@@ -273,7 +273,7 @@
 		<script type="text/javascript">
 			var editor5;
 			KindEditor.ready(function(K) {
-				   editor = K.create('#editorContent5', {
+				   editor5 = K.create('#editorContent5', {
 				   cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
  				   uploadJson : "${base}/kindeditor/file_upload.html", 
 				   fileManagerJson : '${base}/kindeditor/file_manager_json.html',

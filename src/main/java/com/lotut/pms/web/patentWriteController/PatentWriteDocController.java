@@ -34,7 +34,7 @@ public class PatentWriteDocController {
 	}
 	
 	@RequestMapping(path="/addPatentDoc",method=RequestMethod.POST)
-	public String  addEditorText(@ModelAttribute("patentDoc") PatentDoc patentDoc,HttpServletRequest request){
+	public void  addEditorText(@ModelAttribute("patentDoc") PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
 		String name =request.getParameter("name");
@@ -56,7 +56,7 @@ public class PatentWriteDocController {
 		String rightClaim =request.getParameter("rightClaim");
 		patentDoc.setRightClaim(rightClaim);
 		patentDocService.savePatentDoc(patentDoc);
-		return "edit_index";
+		writer.write(1);
 	}
 	
 	
