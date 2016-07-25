@@ -25,4 +25,10 @@ public class PatentDocServiceImp implements PatentDocService{
 		public List<PatentDoc> getUserPatentDoc(int userId) {
 			return patentDocDao.getUserPatentDoc(userId);
 		}
+
+
+		@Override
+		public List<PatentDoc> getUserPatentDocById(int userId, long patentDocsId) {
+			return patentDocDao.getUserPatentDocById(userId, patentDocsId);
+		}
 }
