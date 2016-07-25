@@ -5,6 +5,9 @@ import java.sql.Timestamp;
 public class PatentDocumentTemplate {
 	private int template_id;
 	private String content;
+	private String contentProblem;
+	private String contentRight;
+	private String contentEffect;
 	private String templateTitle;
 	private PatentType patentType;
 	private PatentDocSectionType patentDocSectionType;
@@ -59,6 +62,24 @@ public class PatentDocumentTemplate {
 	}
 	public void setCreatorId(int creatorId) {
 		this.creatorId = creatorId;
+	}
+	public String getContentProblem() {
+		return contentProblem;
+	}
+	public void setContentProblem(String contentProblem) {
+		this.contentProblem = contentProblem;
+	}
+	public String getContentRight() {
+		return contentRight;
+	}
+	public void setContentRight(String contentRight) {
+		this.contentRight = contentRight;
+	}
+	public String getContentEffect() {
+		return contentEffect;
+	}
+	public void setContentEffect(String contentEffect) {
+		this.contentEffect = contentEffect;
 	}
 	
 	
