@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.lotut.pms.domain.PatentDoc;
@@ -34,27 +35,9 @@ public class PatentWriteDocController {
 	}
 	
 	@RequestMapping(path="/addPatentDoc",method=RequestMethod.POST)
-	public void  addEditorText(@ModelAttribute("patentDoc") PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){
+	public void  addEditorText(PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
-		String name =request.getParameter("name");
-		patentDoc.setName(name);
-		String techDomain =request.getParameter("techDomain");
-		patentDoc.setTechDomain(techDomain);
-		String backgoundTech =request.getParameter("backgoundTech");
-		patentDoc.setBackgoundTech(backgoundTech);
-		String contentProblem =request.getParameter("contentProblem");
-		patentDoc.setContentProblem(contentProblem);
-		String contentRight =request.getParameter("contentRight");
-		patentDoc.setContentRight(contentRight);
-		String contentEffect =request.getParameter("contentEffect");
-		patentDoc.setContentEffect(contentEffect);
-		String implementWay =request.getParameter("implementWay");
-		patentDoc.setImplementWay(implementWay);
-		String abstractDescription =request.getParameter("abstractDescription");
-		patentDoc.setAbstractDescription(abstractDescription);
-		String rightClaim =request.getParameter("rightClaim");
-		patentDoc.setRightClaim(rightClaim);
 		patentDocService.savePatentDoc(patentDoc);
 		writer.write(1);
 	}

@@ -1343,8 +1343,6 @@
 			
 			function savePatentDoc(){
 				var name=$("#editorContent").val();
-				var aa=editor.html();
-				alert(aa);
 				var techDomain=$("#editorContent1").val();
 				var backgoundTech=$("#editorContent2").val();
 				var contentProblem=$("#editorContent3").val();
@@ -1355,7 +1353,7 @@
 				var rightClaim=$("#editorContent8").val();
 				$.ajax({
 					type: "POST",
-					url: "<s:url value='/editor/addPatentDoc.html'/>",
+					url: "<s:url value='/editor/addPatentDoc.html'/>", 
 					data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
 							"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim},
 					success: function(data){

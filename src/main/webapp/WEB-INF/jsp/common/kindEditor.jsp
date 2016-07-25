@@ -51,7 +51,7 @@
 				   
 				});
 				prettyPrint();
-				editor.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor.html("<strong>请输入发明标题！</strong>");
 			});
 		</script>
 		<script type="text/javascript">
@@ -105,7 +105,7 @@
 				   
 				});
 				prettyPrint();
-				editor1.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor1.html("<strong>请填写专利所在的技术领域！</strong>");
 			});
 		</script>
 		<script type="text/javascript">
@@ -159,7 +159,7 @@
 				   
 				});
 				prettyPrint();
-				editor2.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor2.html("<strong>请填写专利创建的背景技术！</strong>");
 			});
 		</script>
 		<script type="text/javascript">
@@ -213,7 +213,7 @@
 				   
 				});
 				prettyPrint();
-				editor3.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor3.html("<strong>请填写存在的技术问题！</strong>");
 			});
 		</script>
 		<script type="text/javascript">
@@ -267,7 +267,7 @@
 				   
 				});
 				prettyPrint();
-				editor4.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor4.html("<strong>请填写权利要求部分！</strong>");
 			});
 		</script>
 		<script type="text/javascript">
@@ -321,7 +321,7 @@
 				   
 				});
 				prettyPrint();
-				/* editor5.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>"); */
+				 editor5.html("<strong>请填写技术特征！</strong>"); 
 			});
 		</script>
 		<script type="text/javascript">
@@ -375,7 +375,7 @@
 				   
 				});
 				prettyPrint();
-				editor6.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor6.html("<strong>请填写具体的实施方式！</strong>");
 			});
 		</script>
 		<script type="text/javascript">
@@ -429,7 +429,7 @@
 				   
 				});
 				prettyPrint();
-				editor7.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor7.html("<strong>请填写群里要求部分！</strong>");
 			});
 		</script>
 		<script type="text/javascript">
@@ -483,6 +483,6 @@
 				   
 				});
 				prettyPrint();
-				editor8.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor8.html("<strong>请填写专利的摘要！</strong>");
 			});
 		</script>
