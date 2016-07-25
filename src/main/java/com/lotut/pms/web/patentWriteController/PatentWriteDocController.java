@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +34,19 @@ public class PatentWriteDocController {
 	}
 	
 	@RequestMapping(path="/addPatentDoc",method=RequestMethod.POST)
-	public String  addEditorText(@ModelAttribute("patentDoc") PatentDoc patentDoc){
+	public String  addEditorText(@ModelAttribute("patentDoc") PatentDoc patentDoc,HttpServletRequest request){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
+		String name =request.getParameter("name");
+		patentDoc.setName(name);
 		patentDocService.savePatentDoc(patentDoc);
 		return "edit_index";
 	}
+	
+	
+	
+	
+	
 	
 	/**
 	 * 提交表单操作

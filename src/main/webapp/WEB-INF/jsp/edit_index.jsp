@@ -1356,7 +1356,8 @@
 				$.ajax({
 					type: "POST",
 					url: "<s:url value='/editor/addPatentDoc.html'/>",
-					data: {name:a,techDomain:b,backgoundTech:c,contentProblem:d,contentRight:e,contentEffect:f,implementWay:g,abstractDescription:h,rightClaim:i},
+					data: {"name":a,"techDomain":b,"backgoundTech":c,"contentProblem":d,"contentRight":e,
+							"contentEffect":f,"implementWay":g,"abstractDescription":h,"rightClaim":i},
 					success: function(data){
 						
 					},
