@@ -7,5 +7,4 @@ import com.lotut.pms.dao.mapper.PatentDocMapper;
 
 public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentDocDao{
 	private PatentDocMapper patentDocMapper;
-
 }
