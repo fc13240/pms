@@ -76,6 +76,11 @@
 	</bean>			
 	
 	
+	<bean name="patentDocMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.PatentDocMapper" />
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>	
+	
 	<bean id="patentDocumentTemplateMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.PatentDocumentTemplateMapper"/>
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
