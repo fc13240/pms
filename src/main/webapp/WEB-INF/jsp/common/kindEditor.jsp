@@ -105,7 +105,7 @@
 				   
 				});
 				prettyPrint();
-				editor.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor1.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
 			});
 		</script>
 		<script type="text/javascript">
@@ -159,7 +159,7 @@
 				   
 				});
 				prettyPrint();
-				editor.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor2.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
 			});
 		</script>
 		<script type="text/javascript">
@@ -213,7 +213,7 @@
 				   
 				});
 				prettyPrint();
-				editor.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor3.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
 			});
 		</script>
 		<script type="text/javascript">
@@ -267,7 +267,7 @@
 				   
 				});
 				prettyPrint();
-				editor.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor4.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
 			});
 		</script>
 		<script type="text/javascript">
@@ -321,7 +321,7 @@
 				   
 				});
 				prettyPrint();
-				editor.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor5.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
 			});
 		</script>
 		<script type="text/javascript">
@@ -375,7 +375,7 @@
 				   
 				});
 				prettyPrint();
-				editor.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor6.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
 			});
 		</script>
 		<script type="text/javascript">
@@ -429,7 +429,7 @@
 				   
 				});
 				prettyPrint();
-				editor.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor7.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
 			});
 		</script>
 		<script type="text/javascript">
@@ -483,6 +483,6 @@
 				   
 				});
 				prettyPrint();
-				editor.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				editor8.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
 			});
 		</script>
