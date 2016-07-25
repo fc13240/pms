@@ -13,6 +13,7 @@ public class PatentDoc {
 	private int patentType;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date createTime;
+	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Timestamp lastUpdateTime;
 	private String name;
 	private String techDomain;

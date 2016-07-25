@@ -32,7 +32,7 @@ public class PatentWriteDocController {
 	}
 	
 	@RequestMapping(path="/addPatentDoc")
-	public String  addEditorText(@ModelAttribute("") PatentDoc patentDoc){
+	public String  addEditorText(@ModelAttribute("patentDoc") PatentDoc patentDoc){
 
 		return "edit_index";
 	}
