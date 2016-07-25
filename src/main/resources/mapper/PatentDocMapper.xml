@@ -36,12 +36,12 @@
 	
 	<select id="getUserPatentDoc"  resultMap="PatentDocMap">
 		select app_no,patent_type,create_time,patent_name,tech_domain,background_tech,content_problem,content_right,content_effect,
-		implement_way,right_claim,abstract_desc from patent_decuments where userId=#{userId}
+		implement_way,right_claim,abstract_desc from patent_documents where user_Id=#{userId}
 	</select> 
 	
 	
 	<select id="getUserPatentDocById"  resultMap="PatentDocMap">
 		select app_no,patent_type,create_time,patent_name,tech_domain,background_tech,content_problem,content_right,content_effect,
-		implement_way,right_claim,abstract_desc from patent_decuments where userId=#{userId} and patent_docs_id=#{patentDocsId}
+		implement_way,right_claim,abstract_desc from patent_decuments where user_Id=#{userId} and patent_docs_id=#{patentDocsId}
 	</select> 
 </mapper>
