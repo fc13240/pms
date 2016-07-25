@@ -75,14 +75,10 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>			
 	
-	<bean id="textEditorMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.TextEditorMapper"/>
-		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
-	</bean>
 	
 	<bean id="patentDocumentTemplateMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.PatentDocumentTemplateMapper"/>
-		<property name="sqlSessionTemlate" ref="sqlSessionTemplate" />
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	
 	
