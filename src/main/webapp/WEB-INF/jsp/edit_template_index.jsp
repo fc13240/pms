@@ -1323,18 +1323,16 @@
 	    <script type="text/javascript">
 	    /* 添加专利名称 */
 		    function addInventTemp(){
-		    	alert(editor.html());
-		    	alert($("#editorContent").html());
+		    	var content = $("#editorContent").val();
 		    	$.ajax({
 		    		type : "POST",
 		    		url : "<s:url value='/editor1/addInventTemplate.html'/>",
-		    		data : {"content":editor.html()},
+		    		data : {"content":content},
 		    		success : function(data){
-		    			if(data){
-							$("textarea[name=content]").val("");
-							editor.html("");
-							
-						}
+		    			alert("----");
+		    			$("#editorContent").val("");
+						editor.html("");
+
 		    		}
 		    	})
 		    }
