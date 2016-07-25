@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.service.PatentDocService;
+import com.lotut.pms.util.PrincipalUtils;
 
 @Controller
 @RequestMapping(path="/editor")
@@ -31,9 +32,11 @@ public class PatentWriteDocController {
 		return "edit_index";
 	}
 	
-	@RequestMapping(path="/addPatentDoc")
+	@RequestMapping(path="/addPatentDoc",method=RequestMethod.POST)
 	public String  addEditorText(@ModelAttribute("patentDoc") PatentDoc patentDoc){
-
+		int userId=PrincipalUtils.getCurrentUserId();
+		patentDoc.setUserId(userId);
+		patentDocService.savePatentDoc(patentDoc);
 		return "edit_index";
 	}
 	
@@ -41,8 +44,7 @@ public class PatentWriteDocController {
 	 * 提交表单操作
 	 */
 	@RequestMapping(path="/ajaxForm",method=RequestMethod.POST)
-	public void ajaxForm(HttpServletResponse response, String content)
-	{
+	public void ajaxForm(HttpServletResponse response, String content){
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
         PrintWriter writer = null;

@@ -70,7 +70,7 @@
 	                <div class="center_top">
 	                    <div class="backedit">
 	                        <a href="selfwritelist.aspx" target="_blank">返回撰写列表</a></div>
-	                    <div class="save" onclick="save_selfwrite();">
+	                    <div class="save" onclick="savePatentDoc();">
 	                        <i class="icon"></i>
 	                        <div class="span">保存</div>
 	                    </div>
@@ -1341,34 +1341,28 @@
 				location.href=url;
 			};
 			
-			function inserTest(){
-				var text=editor.text();
-				KindEditor.insertHtml('#editorContent1', text);
-			};
-			function pop(){
-					var text=editor.text();
-					var dialog = KindEditor.dialog({
-				        width : 500,
-				        title : '测试窗口',
-				        body : '<div style="margin:10px;"><strong>'+text+'</strong></div>',
-				        closeBtn : {
-				                name : '关闭',
-				                click : function(e) {
-				                        dialog.remove();
-				                }
-				        },
-				        yesBtn : {
-				                name : '确定',
-				                click : function(e) {
-				                        alert(this.value);
-				                }
-				        },
-				        noBtn : {
-				                name : '取消',
-				                click : function(e) {
-				                        dialog.remove();
-				                }
-				        }
+			function savePatentDoc(){
+				var a=$("#editorContent").val();
+				var aa=editor.html();
+				alert(aa);
+				var b=$("#editorContent1").val();
+				var c=$("#editorContent2").val();
+				var d=$("#editorContent3").val();
+				var e=$("#editorContent4").val();
+				var f=$("#editorContent5").val();
+				var g=$("#editorContent6").val();
+				var h=$("#editorContent7").val();
+				var i=$("#editorContent8").val();
+				$.ajax({
+					type: "POST",
+					url: "<s:url value='/editor/addPatentDoc.html'/>",
+					data: {name:a,techDomain:b,backgoundTech:c,contentProblem:d,contentRight:e,contentEffect:f,implementWay:g,abstractDescription:h,rightClaim:i},
+					success: function(data){
+						
+					},
+					error: function(){
+						alert("操作失败");
+					}
 				});
 			}
 	</script>	

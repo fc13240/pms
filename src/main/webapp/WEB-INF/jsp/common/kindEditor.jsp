@@ -15,7 +15,7 @@
 				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : true,
 				   afterBlur: function(){this.sync();},
-				   syncType:"from",
+				   syncType:"auto",
 				   afterCreate : function() {
 						var self = this;
 						K.ctrl(document, 13, function() {
@@ -69,7 +69,7 @@
 				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : true,
 				   afterBlur: function(){this.sync();},
-				   syncType:"from",
+				   syncType:"auto",
 				   afterCreate : function() {
 						var self = this;
 						K.ctrl(document, 13, function() {
@@ -123,7 +123,7 @@
 				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : true,
 				   afterBlur: function(){this.sync();},
-				   syncType:"from",
+				   syncType:"auto",
 				   afterCreate : function() {
 						var self = this;
 						K.ctrl(document, 13, function() {
@@ -177,7 +177,7 @@
 				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : true,
 				   afterBlur: function(){this.sync();},
-				   syncType:"from",
+				   syncType:"auto",
 				   afterCreate : function() {
 						var self = this;
 						K.ctrl(document, 13, function() {
@@ -231,7 +231,7 @@
 				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : true,
 				   afterBlur: function(){this.sync();},
-				   syncType:"from",
+				   syncType:"auto",
 				   afterCreate : function() {
 						var self = this;
 						K.ctrl(document, 13, function() {
@@ -285,7 +285,7 @@
 				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : true,
 				   afterBlur: function(){this.sync();},
-				   syncType:"from",
+				   syncType:"auto",
 				   afterCreate : function() {
 						var self = this;
 						K.ctrl(document, 13, function() {
@@ -321,7 +321,7 @@
 				   
 				});
 				prettyPrint();
-				editor5.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>");
+				/* editor5.html("<strong>你可以测试一下插入文件和插入图片功能！</strong>"); */
 			});
 		</script>
 		<script type="text/javascript">
@@ -339,7 +339,7 @@
 				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : true,
 				   afterBlur: function(){this.sync();},
-				   syncType:"from",
+				   syncType:"auto",
 				   afterCreate : function() {
 						var self = this;
 						K.ctrl(document, 13, function() {
@@ -393,7 +393,7 @@
 				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : true,
 				   afterBlur: function(){this.sync();},
-				   syncType:"from",
+				   syncType:"auto",
 				   afterCreate : function() {
 						var self = this;
 						K.ctrl(document, 13, function() {
@@ -447,7 +447,7 @@
 				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : true,
 				   afterBlur: function(){this.sync();},
-				   syncType:"from",
+				   syncType:"auto",
 				   afterCreate : function() {
 						var self = this;
 						K.ctrl(document, 13, function() {
