@@ -39,6 +39,22 @@ public class PatentWriteDocController {
 		patentDoc.setUserId(userId);
 		String name =request.getParameter("name");
 		patentDoc.setName(name);
+		String techDomain =request.getParameter("techDomain");
+		patentDoc.setTechDomain(techDomain);
+		String backgoundTech =request.getParameter("backgoundTech");
+		patentDoc.setBackgoundTech(backgoundTech);
+		String contentProblem =request.getParameter("contentProblem");
+		patentDoc.setContentProblem(contentProblem);
+		String contentRight =request.getParameter("contentRight");
+		patentDoc.setContentRight(contentRight);
+		String contentEffect =request.getParameter("contentEffect");
+		patentDoc.setContentEffect(contentEffect);
+		String implementWay =request.getParameter("implementWay");
+		patentDoc.setImplementWay(implementWay);
+		String abstractDescription =request.getParameter("abstractDescription");
+		patentDoc.setAbstractDescription(abstractDescription);
+		String rightClaim =request.getParameter("rightClaim");
+		patentDoc.setRightClaim(rightClaim);
 		patentDocService.savePatentDoc(patentDoc);
 		return "edit_index";
 	}
