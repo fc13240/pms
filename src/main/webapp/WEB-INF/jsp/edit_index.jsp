@@ -27,6 +27,7 @@
 	
 		<div id="mincontent" style="min-height: 581px;">
 	        
+	        
 	    <input id="hiduserid" type="hidden" value="UC1706F442C97E4C58977D24E340EBF66">
 	    <div class="body">
 	        <div class="left" style="height: 612px;">
