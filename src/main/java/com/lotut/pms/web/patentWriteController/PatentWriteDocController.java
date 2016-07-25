@@ -31,6 +31,9 @@ public class PatentWriteDocController {
 
 	@RequestMapping(path="/writeForm")
 	public String editorForm(Model model){
+		int userId=PrincipalUtils.getCurrentUserId();
+		List<PatentDoc> patentDoc=patentDocService.getUserPatentDoc(userId);
+		model.addAttribute("patentDoc", patentDoc);
 		return "patentDoc_editor";
 	}
 	

@@ -81,8 +81,8 @@
 	         			<div>
 						<select id="editorid" onchange="findText(this.value)">
 							<option value="">请选择</option>
-							<c:forEach items="${editorIds }" var="editorId">
-								<option value="${editorId }">文档:${editorId }</option>
+							<c:forEach items="${patentDoc}" var="patentDoc">
+								<option value="${patentDoc.patentDocsId }">${patentDoc.name }</option>
 							</c:forEach>		
 						</select>
 						</div>
