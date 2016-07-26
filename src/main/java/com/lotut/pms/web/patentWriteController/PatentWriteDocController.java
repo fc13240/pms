@@ -58,7 +58,14 @@ public class PatentWriteDocController {
 		
 	}
 	
-	
+	@RequestMapping(path="/PatentDocList",method=RequestMethod.GET)
+	public String  PatentDocList(Model model){
+		int userId=PrincipalUtils.getCurrentUserId();
+		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
+		model.addAttribute("patentDocs", patentDocs);
+		return "patentDoc_list";
+		
+	}
 	
 	
 	/**
