@@ -1347,20 +1347,8 @@
 			};
 			
 			function findPatentDoc(patentDocsId){
-				
-				//var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocsId="+patentDocsId;
-				//location.href=url;
-				$.ajax({
-					url:"<c:url value='/editor/findPatentDoc.html'/>?patentDocsId="+patentDocsId,
-					type:"get",
-						success: function(data) {
-							editor.html();
-						},
-						error: function() {
-							formutil.alertMessage('删除操作失败');
-						}
-				});
-				
+				var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocsId="+patentDocsId;
+				location.href=url;
 			};
 			
 			function savePatentDoc(){
