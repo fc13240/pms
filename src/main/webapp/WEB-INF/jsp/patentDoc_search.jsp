@@ -1354,7 +1354,7 @@
 			};
 			
 			function savePatentDoc(){
-				var name=$("#editorContent").val();
+				var name=editor.text();
 				var techDomain=$("#editorContent1").val();
 				var backgoundTech=$("#editorContent2").val();
 				var contentProblem=$("#editorContent3").val();
@@ -1379,7 +1379,7 @@
 	</script>
 		<script type="text/javascript">
 		$(document).ready(function(){
-			  editor.html('<p>变量测试</p>');
+			KindEditor.appendHtml("#editorContent",'<p>变量测试</p>');
 		});
 	</script>	
 </body>
