@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -45,7 +47,13 @@ public class PatentWriteDocController {
 		writer.write(1);
 	}
 	
-	
+	@RequestMapping(path="/findPatentDoc",method=RequestMethod.POST)
+	public void  findPatentDoc(@RequestParam("patentDocsId")long patentDocsId){
+		int userId=PrincipalUtils.getCurrentUserId();
+		PatentDoc patentDocs=patentDocService.getUserPatentDocById(userId, patentDocsId);
+		
+		
+	}
 	
 	
 	

@@ -9,6 +9,6 @@ public interface PatentDocService {
 	
 	List<PatentDoc> getUserPatentDoc(int userId);
 	
-	List<PatentDoc> getUserPatentDocById(int userId,long patentDocsId);
+	PatentDoc getUserPatentDocById(int userId,long patentDocsId);
 	
 }

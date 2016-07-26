@@ -8,6 +8,8 @@ import com.lotut.pms.domain.PatentDoc;
 
 public interface PatentDocMapper {
 	void savePatentDoc(PatentDoc patentDoc);
+	
 	List<PatentDoc> getUserPatentDoc(@Param("userId")int userId);
-	List<PatentDoc> getUserPatentDocById(@Param("userId")int userId,@Param("patentDocsId")long patentDocsId);
+	
+	PatentDoc getUserPatentDocById(@Param("userId")int userId,@Param("patentDocsId")long patentDocsId);
 }
