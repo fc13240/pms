@@ -1344,8 +1344,8 @@
 				
 			};
 			
-			function findText(editorId){
-				var url = "<c:url value='/editor/findTextById.html'/>?editorId="+editorId;
+			function findPatentDoc(editorId){
+				var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocsId="+patentDocsId;
 				location.href=url;
 			};
 			
