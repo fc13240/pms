@@ -230,8 +230,8 @@
 							<span class="lbl"></span> </label>
 						  </th>
 						  <th class="center" width="35">序号</th>
-						  <th width="60">专利类型</th>
-						  <th width="110">申请号/专利号</th>
+						  <th width="65">专利类型</th>
+						  <th width="100">申请号/专利号</th>
 						  <th width="130">专利名称</th>
 						  <th width="90">第一申请人 </th>
 						  <th width="90" class="hidden-480"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申请日</th>
@@ -240,7 +240,6 @@
 						  <th width="70">案件状态</th>
 						  <th width="120">内部编码</th>
 						  <th width="90">共享人</th>
-
 						  <th width="80">操作</th>
 						</tr>
 					  </thead>
@@ -260,7 +259,7 @@
 							<td class="hidden-480 fee_date" fee_date="${patent.appDate}" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="M月dd日"/></td>
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							<td style="text-align:center"><c:out value="${patent.patentStatusText}"/></td>
-							<td style="text-align:center"><input style="width:60px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
+							<td style="text-align:center"><input style="width:120px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
 							</td>
 							<td style="text-align:center"><c:out value="${patent.shareUsersAsString}"/>
 							</td>
