@@ -104,7 +104,7 @@
 									<span>模板介绍</span>
 								</p>
 								<p>
-									<input type="text" style="width: 848px" class="form-control" placeholder="简要说明模板适用于什么类型，大致能够体现是用于什么方向的"/>
+									<input type="text" style="width: 848px" class="form-control" placeholder="简要说明模板适用于什么类型，大致能够体现是用于什么方向的" onmouseout="acquireIntroduce(1,this.value)"/>
 								</p>
 							</div>
 							<div class="Writing_tips tip1" name="tips" style="display: none;">
@@ -290,7 +290,7 @@
 										            	<tr>
 										                    <td style="width:520px;">
 										                    	<textarea rows="3" cols="10" id="editorContent" name="content" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
-										                    	<input type="hidden" name="patentType.patentTypeId" value="1"/>
+										                    	<input type="hidden" id="inventIntroduce" value=""/>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -1323,19 +1323,61 @@
 	    <script type="text/javascript">
 	    /* 添加专利名称 */
 		    function addInventTemp(){
-		    	var content = $("#editorContent").val();
+	    	alert("lll");
+	    	var inventIntroduce = $("#inventIntroduce").val();
 		    	$.ajax({
 		    		type : "POST",
 		    		url : "<s:url value='/editor1/addInventTemplate.html'/>",
-		    		data : {"content":content},
+		    		data : {"content":editor.html(),"templateTitle":inventIntroduce},
 		    		success : function(data){
-		    			alert("----");
+		    			alert(data);
 		    			$("#editorContent").val("");
 						editor.html("");
 
+		    		},
+		    		error : function(){
+		    			alert("--错误----");
 		    		}
 		    	})
 		    }
+	    
+
+	    function acquireIntroduce(patentSection,templateIntroduce){
+	    	if(patentSection==1){
+	    		$("#inventIntroduce").val(templateIntroduce);
+	    	}else if(patentSection==1){
+	    		alert(patentSection+"---"+templateIntroduce);
+	    	}else if(patentSection==2){
+	    		alert(patentSection+"---"+templateIntroduce);
+	    	}else if(patentSection==3){
+	    		alert(patentSection+"---"+templateIntroduce);
+	    	}else if(patentSection==4){
+	    		alert(patentSection+"---"+templateIntroduce);
+	    	}else if(patentSection==5){
+	    		alert(patentSection+"---"+templateIntroduce);
+	    	}else if(patentSection==6){
+	    		alert(patentSection+"---"+templateIntroduce);
+	    	}else if(patentSection==7){
+	    		alert(patentSection+"---"+templateIntroduce);
+	    	}else if(patentSection==8){
+	    		alert(patentSection+"---"+templateIntroduce);
+	    	}else if(patentSection==9){
+	    		alert(patentSection+"---"+templateIntroduce);
+	    	}else if(patentSection==10){
+	    		alert(patentSection+"---"+templateIntroduce);
+	    	}
+	    }
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
 
 			function submitForm(){
 				$.ajax({
