@@ -34,8 +34,8 @@ public class PatentWriteDocController {
 	@RequestMapping(path="/writeForm")
 	public String editorForm(Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
-		List<PatentDoc> patentDoc=patentDocService.getUserPatentDoc(userId);
-		model.addAttribute("patentDoc", patentDoc);
+		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
+		model.addAttribute("patentDocs", patentDocs);
 		return "patentDoc_editor";
 	}
 	
@@ -47,11 +47,14 @@ public class PatentWriteDocController {
 		writer.write(1);
 	}
 	
-	@RequestMapping(path="/findPatentDoc",method=RequestMethod.POST)
-	public void  findPatentDoc(@RequestParam("patentDocsId")long patentDocsId){
+	@RequestMapping(path="/findPatentDoc",method=RequestMethod.GET)
+	public String  findPatentDoc(@RequestParam("patentDocsId")long patentDocsId,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
-		PatentDoc patentDocs=patentDocService.getUserPatentDocById(userId, patentDocsId);
-		
+		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocsId);
+		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
+		model.addAttribute("patentDoc", patentDoc);
+		model.addAttribute("patentDocs", patentDocs);
+		return "patentDoc_editor";
 		
 	}
 	

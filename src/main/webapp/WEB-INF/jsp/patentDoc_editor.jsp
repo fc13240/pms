@@ -81,7 +81,7 @@
 	         			<div>
 						<select id="editorid" onchange="findPatentDoc(this.value)">
 							<option value="">请选择</option>
-							<c:forEach items="${patentDoc}" var="patentDoc">
+							<c:forEach items="${patentDocs}" var="patentDoc">
 								<option value="${patentDoc.patentDocsId }">${patentDoc.name }</option>
 							</c:forEach>		
 						</select>
@@ -1344,9 +1344,10 @@
 				
 			};
 			
-			function findPatentDoc(editorId){
+			function findPatentDoc(patentDocsId){
 				var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocsId="+patentDocsId;
 				location.href=url;
+				
 			};
 			
 			function savePatentDoc(){
