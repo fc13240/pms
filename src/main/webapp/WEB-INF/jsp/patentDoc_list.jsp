@@ -15,7 +15,7 @@
 </head>
 
 <body style="background-color: #FFF" id="dlstCircleArticle">
-	<table >
+	<table width="100%" border="1" cellpadding="2" cellspacing="0">
 		<thead>
 			<tr class="simple_bag">
 			  <th class="center" width="15"> <label class="pos-rel">
@@ -44,7 +44,7 @@
 								<fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
 							</td>
 							<td style="text-align:center">
-								<a target="_blank" href="<s:url value=''/>">
+								<a target="_blank" href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
 								 编辑
 								  </a>
 								  <a target="_blank" href="<s:url value=''/>">
