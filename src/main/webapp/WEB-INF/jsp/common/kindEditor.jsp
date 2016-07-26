@@ -51,7 +51,7 @@
 				   
 				});
 				prettyPrint();
-				editor.html("<strong>请输入发明标题！</strong>");
+				editor.html("<strong>请填写发明名称！</strong>");
 			});
 		</script>
 		<script type="text/javascript">

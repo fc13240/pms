@@ -18,6 +18,8 @@
 	<link href="${base }/static/css/edit_instruct.css?v=2.3.20150415" type="text/css" rel="stylesheet" />
 	<script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
 	<c:import url="common/kindEditor.jsp"></c:import>
+
+	
 </head>
 
 <body style="background-color: #FFF" id="dlstCircleArticle">
@@ -1346,9 +1348,18 @@
 			
 			function findPatentDoc(patentDocsId){
 				
-				var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocsId="+patentDocsId;
-				location.href=url;
-				
+				//var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocsId="+patentDocsId;
+				//location.href=url;
+				$.ajax({
+					url:"<c:url value='/editor/findPatentDoc.html'/>?patentDocsId="+patentDocsId,
+					type:"get",
+						success: function(data) {
+							editor.html();
+						},
+						error: function() {
+							formutil.alertMessage('删除操作失败');
+						}
+				});
 				
 			};
 			
@@ -1375,6 +1386,11 @@
 					}
 				});
 			}
+	</script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			  editor.html('<p>变量测试</p>');
+		});
 	</script>	
 </body>
 </html>

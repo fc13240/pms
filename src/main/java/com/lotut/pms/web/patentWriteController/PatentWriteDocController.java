@@ -54,7 +54,7 @@ public class PatentWriteDocController {
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		model.addAttribute("patentDoc", patentDoc);
 		model.addAttribute("patentDocs", patentDocs);
-		return "patentDoc_editor";
+		return "patentDoc_search";
 		
 	}
 	
