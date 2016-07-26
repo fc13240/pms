@@ -238,7 +238,7 @@
 						  <th width="60">缴年费日</th>
 						  <th width="60">添加日</th>
 						  <th width="70">案件状态</th>
-						  <th width="50">内部编码</th>
+						  <th width="120">内部编码</th>
 						  <th width="90">共享人</th>
 
 						  <th width="80">操作</th>
