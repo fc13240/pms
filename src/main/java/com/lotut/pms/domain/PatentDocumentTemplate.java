@@ -3,7 +3,7 @@ package com.lotut.pms.domain;
 import java.sql.Timestamp;
 
 public class PatentDocumentTemplate {
-	private int template_id;
+	private int templateId;
 	private String content;
 	private String contentProblem;
 	private String contentRight;
@@ -15,11 +15,11 @@ public class PatentDocumentTemplate {
 	private Timestamp lastUpdateTime;
 	private int creatorId;
 	
-	public int getTemplate_id() {
-		return template_id;
+	public int getTemplateId() {
+		return templateId;
 	}
-	public void setTemplate_id(int template_id) {
-		this.template_id = template_id;
+	public void setTemplateId(int templateId) {
+		this.templateId = templateId;
 	}
 	public String getContent() {
 		return content;
