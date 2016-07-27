@@ -56,3 +56,34 @@ function modelbuttonclick(list_no) {
 	
 	
 }
+
+function settipcType(patentTypeId){
+	var patentTypeId=patentTypeId;
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+function templateChange(patentTypeId,patentDocSection){
+	var patentTypeId=patentTypeId;
+	var patentDocSection=patentDocSection;
+	$.ajax({
+		
+		
+		
+		
+	})
+	
+	
+	
+	
+	
+	
+	
+	
+}
