@@ -29,7 +29,6 @@ import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
-import com.lotut.pms.domain.PatentOfficeAccount;
 import com.lotut.pms.domain.PatentRemark;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
@@ -40,8 +39,6 @@ import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.PatentService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
-
-
 
 @Controller
 @RequestMapping(path="/patent")
@@ -126,34 +123,35 @@ public class PatentController {
 	
 	
 	@RequestMapping(path="showPatentDetail", method=RequestMethod.GET)
-	public String showPatentDetail(@RequestParam("patentId")long patentId,Model model) {
+	public String showPatentDetail(@RequestParam("patentId")long patentId,@RequestParam("ownerId")int ownerId,Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
-		Patent patent = patentService.showPatentDetail(patentId);
+		Patent patent = patentService.showPatentDetail(patentId);		
 		Map<String, Map<String, String>> patentTypeCount=patentService.getUserPatentCountByType(userId);
 		Map<String, Map<String, String>> patentStatusCount=patentService.searchUserPatentsByPatentStatus(userId);
 		model.addAttribute("patent", patent);
+		model.addAttribute("userId",userId);
 		model.addAttribute("patentTypeCount", patentTypeCount);
 		model.addAttribute("patentStatusCount", patentStatusCount);
-		System.out.println("-------------------"+patent.getPatentType().getPatentTypeId());
-		System.out.println("-------------------"+patent.getPatentStatus().getPatentStatusId());
 		addPatentTypeAndStatusDataToModel(model);
 		return "patent_update_information";
 	}
 	
+	
 	@RequestMapping(path="savePatentDetail", method=RequestMethod.POST)
 	public String savePatentDetail(@ModelAttribute Patent patent,Model model) {
-		boolean success=patentService.savePatentDetail(patent);
-		System.out.println("-------------------"+patent.getPatentType().getPatentTypeId());
-		System.out.println("-------------------"+patent.getPatentStatus().getPatentStatusId());
+		patentService.savePatentDetail(patent);
 		long patentId=patent.getPatentId();
 		model.addAttribute("patentId", patentId);
-		//return "patent_update_information";
 		return "redirect:/patent/list.html"; 
 	}
 	
 	
-	
-	
+	@RequestMapping(path="/deleteShareUser", method=RequestMethod.GET)
+	public void deleteShareUser(@RequestParam("patentId")long patentId,@RequestParam("ownerId")int ownerId,@RequestParam("shareUserId")int shareUserId,Model model,
+			HttpServletResponse response) throws IOException{
+		patentService.deleteShareUser(patentId,ownerId,shareUserId);
+		WebUtils.writeJsonStrToResponse(response, "success");
+	}
 	
 	
 	@RequestMapping(path="searchFriends", method=RequestMethod.GET)
@@ -233,8 +231,6 @@ public class PatentController {
 	public String addGoods(@Valid GoodsDetail goodDetail, Model model) throws IOException {
 		goodDetail.setUserId(PrincipalUtils.getCurrentUserId());
 		patentService.saveGoods(goodDetail);
-		
-		
 		return "goods_add_success";
 	}		
 		

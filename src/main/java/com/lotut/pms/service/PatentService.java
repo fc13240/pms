@@ -116,6 +116,8 @@ public interface PatentService {
 	Patent showPatentDetail(long patentId);
 	
 	boolean savePatentDetail(Patent patent);
-
+	
+	void deleteShareUser(long patentId,int ownerId,int shareUserId);
+	
 }
 

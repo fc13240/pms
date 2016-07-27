@@ -276,9 +276,9 @@
 							  <a href="<s:url value='/patent/showRemarks.html'/>?patentId=<c:out value='${patent.patentId}'/>">
 							  备注
 							  </a>
-							  <a href="<s:url value='/patent/showPatentDetail.html'/>?patentId=<c:out value='${patent.patentId}'/>">
+							 <a href="<s:url value='/patent/showPatentDetail.html'/>?patentId=${patent.patentId}&ownerId=${patent.ownerId}">
 							  修改
-							  </a>
+							  </a> 
 							  <br> 
 							  <se:authorize access="hasRole('ROLE_TRADER')">
 								  <c:if test="${patent.transactionStatus==null}">

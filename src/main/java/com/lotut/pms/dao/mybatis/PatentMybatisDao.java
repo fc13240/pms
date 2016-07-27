@@ -283,4 +283,11 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		return patentMapper.savePatentDetail(patent);
 	}
 
+	@Override
+	public void deleteShareUser(long patentId, int ownerId, int shareUserId) {
+		// TODO Auto-generated method stub
+		patentMapper.deleteShareUser(patentId,ownerId,shareUserId);
+	}
+
+
 }
