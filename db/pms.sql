@@ -567,23 +567,26 @@ CREATE TABLE patent_documents(
 );
 
 
-CREATE TABLE IF NOT EXISTS patent_doc_section_types(
+CREATE TABLE IF EXISTS patent_doc_section_types(
 	patent_doc_section_id INT PRIMARY KEY,
 	patent_doc_section_desc VARCHAR(10) NOT NULL COMMENT '专利主题'
 	
 );
-INSERT INTO patent_doc_section_types VALUES(1,'发明名称');
-INSERT INTO patent_doc_section_types VALUES(3,'技术领域');
-INSERT INTO patent_doc_section_types VALUES(4,'背景技术');
-INSERT INTO patent_doc_section_types VALUES(5,'发明内容');
-INSERT INTO patent_doc_section_types VALUES(6,'具体实施方式');
-INSERT INTO patent_doc_section_types VALUES(7,'权利要求');
-INSERT INTO patent_doc_section_types VALUES(8,'摘要');
-INSERT INTO patent_doc_section_types VALUES(9,'实用新型名称');
 
-CREATE TABLE IF NOT EXISTS patent_document_templates(
+INSERT INTO patent_doc_section_types VALUES(1,'发明名称');
+INSERT INTO patent_doc_section_types VALUES(2,'技术领域');
+INSERT INTO patent_doc_section_types VALUES(3,'背景技术');
+INSERT INTO patent_doc_section_types VALUES(4,'发明内容-问题描述');
+INSERT INTO patent_doc_section_types VALUES(5,'发明内容-权利要求');
+INSERT INTO patent_doc_section_types VALUES(6,'发明内容-效果');
+INSERT INTO patent_doc_section_types VALUES(7,'具体实施方式');
+INSERT INTO patent_doc_section_types VALUES(8,'权利要求');
+INSERT INTO patent_doc_section_types VALUES(9,'摘要');
+INSERT INTO patent_doc_section_types VALUES(10,'实用新型名称');
+
+CREATE TABLE IF EXISTS patent_document_templates(
 	template_id INT AUTO_INCREMENT PRIMARY KEY,
-	content VARCHAR(400) NOT NULL COMMENT '专利模块部分',
+	content VARCHAR(65000) NULL COMMENT '专利模块部分',
 	template_title VARCHAR(400) NOT NULL COMMENT '模板说明',
 	patent_type INT NOT NULL COMMENT '专利类型',
 	patent_doc_section INT NOT NULL COMMENT '专利主题',
