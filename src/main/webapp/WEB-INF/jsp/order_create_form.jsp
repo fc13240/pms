@@ -37,7 +37,7 @@
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
 						<tr style="text-align:left;">
 						  <td>
-						  	收货人信息
+						  	收货人信息:
 						  	&nbsp;&nbsp;&nbsp;
 						  	<a href="<s:url value='/user/contactAddressAddForm.html'/>" target="_blank" ><font color=red>添加地址</font></a>
 						  </td>
@@ -58,7 +58,7 @@
 							</span> </td>
 						</tr>
 						<tr>
-						  <td>支付方式</td>
+						  <td>支付方式:</td>
 						</tr>
 						<tr>
 						  <td><input type="radio" name="paymentMethod.paymentMethodId" value="1" checked="checked" required="required">
@@ -69,18 +69,18 @@
 						</tr>
 						
 						<tr style="display: none" class="lotut">
-						  <td>快递方式</td>
+						  <td>快递方式:</td>
 						</tr>
 						<tr style="display: none" class="lotut">
 						  <td>
-						  	<input type="radio" name="express" value="0" checked="checked" required="required" onclick="hint()">
-							挂号信(<font color=red>￥10</font>)
-							<input type="radio" name="express" value="1" required="required" onclick="hint()">
+<!-- 						  	<input type="radio" name="express" value="0"  required="required" onclick="hint()">
+							挂号信(<font color=red>￥10</font>) -->
+							<input type="radio" name="express" value="1" checked="checked" required="required" onclick="hint()">
 							EMS(￥20)
 						  </td>
 						</tr>
 						<tr style="display: none" class="lotut">
-						  <td>发票选择</td>
+						  <td>发票选择:</td>
 						</tr>
 						<tr style="display: none" class="lotut">
 						  <td>

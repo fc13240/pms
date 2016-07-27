@@ -9,6 +9,6 @@ public interface PatentDocDao {
 	
 	List<PatentDoc> getUserPatentDoc(int userId);
 	
-	PatentDoc getUserPatentDocById(int userId,long patentDocsId);
+	PatentDoc getUserPatentDocById(long patentDocsId);
 	
 }

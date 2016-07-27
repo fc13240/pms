@@ -9,6 +9,8 @@
 <head>
 	<c:import url="common/header.jsp"></c:import>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN"> 
 	<title>测试页面</title>
 	<!-- 编辑器控件 -->
@@ -70,7 +72,7 @@
 	                <!--center-top start -->
 	                <div class="center_top">
 	                    <div class="backedit">
-	                        <a href="selfwritelist.aspx" target="_blank">返回撰写列表</a></div>
+	                        <a href="<s:url value='/editor/PatentDocList.html'/>" >返回撰写列表</a></div>
 	                    <div class="save" onclick="savePatentDoc();">
 	                        <i class="icon"></i>
 	                        <div class="span">保存</div>
@@ -81,7 +83,7 @@
 	         			<div>
 						<select id="editorid" onchange="findPatentDoc(this.value)">
 							<option value="">请选择</option>
-							<c:forEach items="${patentDoc}" var="patentDoc">
+							<c:forEach items="${patentDocs}" var="patentDoc">
 								<option value="${patentDoc.patentDocsId }">${patentDoc.name }</option>
 							</c:forEach>		
 						</select>
@@ -1344,13 +1346,16 @@
 				
 			};
 			
-			function findPatentDoc(editorId){
+			function findPatentDoc(patentDocsId){
+				
 				var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocsId="+patentDocsId;
 				location.href=url;
+				
+				
 			};
 			
 			function savePatentDoc(){
-				var name=$("#editorContent").val();
+				var name=editor.text();
 				var techDomain=$("#editorContent1").val();
 				var backgoundTech=$("#editorContent2").val();
 				var contentProblem=$("#editorContent3").val();

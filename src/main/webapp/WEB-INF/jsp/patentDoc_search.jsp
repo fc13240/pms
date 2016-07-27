@@ -9,6 +9,8 @@
 <head>
 	<c:import url="common/header.jsp"></c:import>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN"> 
 	<title>测试页面</title>
 	<!-- 编辑器控件 -->
@@ -18,7 +20,6 @@
 	<link href="${base }/static/css/edit_instruct.css?v=2.3.20150415" type="text/css" rel="stylesheet" />
 	<script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
 	<c:import url="common/kindEditor.jsp"></c:import>
-	<%@ include file="_css.jsp" %>
 </head>
 
 <body style="background-color: #FFF" id="dlstCircleArticle">
@@ -28,6 +29,7 @@
 	
 		<div id="mincontent" style="min-height: 581px;">
 	        
+	        
 	    <input id="hiduserid" type="hidden" value="UC1706F442C97E4C58977D24E340EBF66">
 	    <div class="body">
 	        <div class="left" style="height: 612px;">
@@ -35,11 +37,11 @@
 	                <div class="cl" id="div_ipctype">
 	                    <div class="bt" value="1" onclick="setipcType(1,this);">
 	                        发明</div>
-	                    <div class="bth" value="2" onclick="setipcType(2,this);" style="margin-left: 0px;">
+	                    <div class="bth" value="2" onclick="setipcType(2,this);" style="margin-left: 10px;">
 	                        实用新型</div>
 	                </div>
 	                <div class="left_help">
-	                    <a href="javascript:void(0);" onclick="helperv6();">专利模板类型选择</a>
+	                    <a href="javascript:void(0);" onclick="helperv6();">专利类型选择</a>
 	                </div>
 	            </div>
 	            
@@ -70,15 +72,22 @@
 	                <!--center-top start -->
 	                <div class="center_top">
 	                    <div class="backedit">
-	                        <a href="selfwritelist.aspx" target="_blank">返回模板列表</a></div>
-	                    <div class="save" onclick="save_selfwrite();">
+	                        <a href="<s:url value='/editor/PatentDocList.html'/>" >返回撰写列表</a></div>
+	                    <div class="save" onclick="savePatentDoc();">
 	                        <i class="icon"></i>
 	                        <div class="span">保存</div>
 	                    </div>
 	                    <div class="export" onclick="export_selfwrite();" id="export_selfwrite">
 	                        <i class="icon"></i>导出文件
 	                    </div>
-	         
+	         			<div>
+						<select id="editorid" onchange="findPatentDoc(this.value)">
+							<option value="">请选择</option>
+							<c:forEach items="${patentDocs}" var="patentDoc">
+								<option value="${patentDoc.patentDocsId }">${patentDoc.name }</option>
+							</c:forEach>		
+						</select>
+						</div>
 	                    
 	                    <div class="top_right">
 	                        <div class="review" onclick="preview_selfwrite();">
@@ -101,10 +110,10 @@
 						<div id="tipsList" style="border-top: #0085d0 1px solid; z-index: 6000000;">
 							<div class="Writing_tips tip0" name="tips" style="display: block;">
 								<p>
-									<span>模板介绍</span>
+									<span>撰写指南</span>
 								</p>
 								<p>
-									<input type="text" style="width: 848px" class="form-control" placeholder="简要说明模板适用于什么类型，大致能够体现是用于什么方向的" onmouseout="acquireIntroduce(1,this.value)"/>
+									专利名称就是根据要申请专利的技术内容给专利起个名字，模板库中已经涵盖了所有的专利名称模板，都是经过专家审核过的，直接选择一个套用就可以了哦。
 								</p>
 							</div>
 							<div class="Writing_tips tip1" name="tips" style="display: none;">
@@ -279,7 +288,7 @@
 								<div id="editor0" thistempid="1">
 									<div class="instru">
 										<div class="title2">
-										 <br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。</div>
+											注意套用模板时专利名称不得超过25个字，化学领域的某些申请允许最多到40个字，这个规定可要注意哦。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。</div>
 									</div>
 									<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
 									<input type="hidden" value="" id="divtitletips">
@@ -289,13 +298,12 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent" name="content" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
-										                    	<input type="hidden" id="inventIntroduce" value=""/>
+										                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.name }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
 										                    <td style="padding:10px 0 18px 0;">
-										                        <button type="button" class="btn btn-default" id="submit" onclick="addInventTemp();">提 交</button>
+										                        <input type="button" value="提 交" class="ajaxpost" id="submit" onclick="alertText();"/> 
 										                    </td>
 										                </tr>
 										            </table>
@@ -325,8 +333,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="content" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
-										                    	<input type="hidden" name="patentType.patentTypeId" value="2"/>
+										                    	<textarea rows="3" cols="10" id="editorContent1" name="techDomain" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.techDomain }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -362,8 +369,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent2" name="content" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
-										                    	<input type="hidden" name="patentType.patentTypeId" value="3"/>
+										                    	<textarea rows="3" cols="10" id="editorContent2" name="backgoundTech" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.backgoundTech }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -396,8 +402,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent3" name="contentProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
-										                    	<input type="hidden" name="patentType.patentTypeId" value="4"/>
+										                    	<textarea rows="3" cols="10" id="editorContent3" name="contentProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.contentProblem }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -423,8 +428,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent4" name="contentRight" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
-										                    	<input type="hidden" name="patentType.patentTypeId" value="4"/>
+										                    	<textarea rows="3" cols="10" id="editorContent4" name="contentRight" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.contentRight }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -451,8 +455,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent5" name="contentEffect" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
-										                    	<input type="hidden" name="patentType.patentTypeId" value="4"/>
+										                    	<textarea rows="3" cols="10" id="editorContent5" name="contentEffect" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.contentEffect }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -486,8 +489,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent6" name="content" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
-										                    	<input type="hidden" name="patentType.patentTypeId" value="5"/>
+										                    	<textarea rows="3" cols="10" id="editorContent6" name="implementWay" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.implementWay }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -526,8 +528,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent7" name="content" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
-										                    	<input type="hidden" name="patentType.patentTypeId" value="7"/>
+										                    	<textarea rows="3" cols="10" id="editorContent7" name="abstractDescription" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.abstractDescription }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -577,8 +578,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent8" name="content" class="editorContent"style="width:520px;height:200px;visibility:hidden;" ></textarea>
-										                    	<input type="hidden" name="patentType.patentTypeId" value="6"/>
+										                    	<textarea rows="3" cols="10" id="editorContent8" name="rightClaim" class="editorContent"style="width:520px;height:200px;visibility:hidden;" >${patent.rightClaim }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -1321,69 +1321,11 @@
 	    
 	    
 	    <script type="text/javascript">
-	    /* 添加专利名称 */
-		    function addInventTemp(){
-	    	alert("lll");
-	    	var inventIntroduce = $("#inventIntroduce").val();
-		    	$.ajax({
-		    		type : "POST",
-		    		url : "<s:url value='/editor1/addInventTemplate.html'/>",
-		    		data : {"content":editor.html(),"templateTitle":inventIntroduce},
-		    		success : function(data){
-		    			alert(data);
-		    			$("#editorContent").val("");
-						editor.html("");
-
-		    		},
-		    		error : function(){
-		    			alert("--错误----");
-		    		}
-		    	})
-		    }
-	    
-
-	    function acquireIntroduce(patentSection,templateIntroduce){
-	    	if(patentSection==1){
-	    		$("#inventIntroduce").val(templateIntroduce);
-	    	}else if(patentSection==1){
-	    		alert(patentSection+"---"+templateIntroduce);
-	    	}else if(patentSection==2){
-	    		alert(patentSection+"---"+templateIntroduce);
-	    	}else if(patentSection==3){
-	    		alert(patentSection+"---"+templateIntroduce);
-	    	}else if(patentSection==4){
-	    		alert(patentSection+"---"+templateIntroduce);
-	    	}else if(patentSection==5){
-	    		alert(patentSection+"---"+templateIntroduce);
-	    	}else if(patentSection==6){
-	    		alert(patentSection+"---"+templateIntroduce);
-	    	}else if(patentSection==7){
-	    		alert(patentSection+"---"+templateIntroduce);
-	    	}else if(patentSection==8){
-	    		alert(patentSection+"---"+templateIntroduce);
-	    	}else if(patentSection==9){
-	    		alert(patentSection+"---"+templateIntroduce);
-	    	}else if(patentSection==10){
-	    		alert(patentSection+"---"+templateIntroduce);
-	    	}
-	    }
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-
 			function submitForm(){
 				$.ajax({
 					type: "POST",
 					url: "<s:url value='/editor/addEditorText.html'/>",
-					data: {"":editor1.html()},
+					data: {"editorContent":editor1.html()},
 					success: function(data){
 						if(data){
 							alert(data)
@@ -1404,41 +1346,34 @@
 				
 			};
 			
-			function findText(editorId){
-				var url = "<c:url value='/editor/findTextById.html'/>?editorId="+editorId;
+			function findPatentDoc(patentDocsId){
+				var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocsId="+patentDocsId;
 				location.href=url;
 			};
 			
-			function inserTest(){
-				var text=editor.text();
-				KindEditor.insertHtml('#editorContent1', text);
-			};
-			function pop(){
-					var text=editor.text();
-					var dialog = KindEditor.dialog({
-				        width : 500,
-				        title : '测试窗口',
-				        body : '<div style="margin:10px;"><strong>'+text+'</strong></div>',
-				        closeBtn : {
-				                name : '关闭',
-				                click : function(e) {
-				                        dialog.remove();
-				                }
-				        },
-				        yesBtn : {
-				                name : '确定',
-				                click : function(e) {
-				                        alert(this.value);
-				                }
-				        },
-				        noBtn : {
-				                name : '取消',
-				                click : function(e) {
-				                        dialog.remove();
-				                }
-				        }
+			function savePatentDoc(){
+				var name=editor.text();
+				var techDomain=$("#editorContent1").val();
+				var backgoundTech=$("#editorContent2").val();
+				var contentProblem=$("#editorContent3").val();
+				var contentRight=$("#editorContent4").val();
+				var contentEffect=$("#editorContent5").val();
+				var implementWay=$("#editorContent6").val();
+				var abstractDescription=$("#editorContent7").val();
+				var rightClaim=$("#editorContent8").val();
+				$.ajax({
+					type: "POST",
+					url: "<s:url value='/editor/addPatentDoc.html'/>", 
+					data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
+							"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim},
+					success: function(data){
+						alert("操作成功");
+					},
+					error: function(){
+						alert("操作失败");
+					}
 				});
 			}
-	</script>	
+	</script>
 </body>
 </html>

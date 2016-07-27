@@ -29,7 +29,7 @@
 					},
 				   
 				   afterChange : function() {
-					     // $('.word_count1').html(this.count()); //字数统计包含HTML代码
+					   this.sync();
 					      $('.word_count2').html(this.count('text'));  //字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字
 					      //限制字数
 					      var limitNum = 100;  //设定限制字数
@@ -51,7 +51,7 @@
 				   
 				});
 				prettyPrint();
-				editor.html("<strong>请输入发明标题！</strong>");
+				/* editor.html("<strong>请填写发明名称！</strong>"); */
 			});
 		</script>
 		<script type="text/javascript">
@@ -83,29 +83,12 @@
 					},
 				   
 				   afterChange : function() {
-					     // $('.word_count1').html(this.count()); //字数统计包含HTML代码
-					      $('.word_count2').html(this.count('text'));  //字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字
-					      //限制字数
-					      var limitNum = 100;  //设定限制字数
-					      var pattern = '还可以输入' + limitNum + '字'; 
-					      $('.word_surplus').html(pattern); //输入显示
-					      if(this.count('text') > limitNum) {
-					       pattern = ('字数超过限制，请适当删除部分内容');
-					       //超过字数限制自动截取
-					       var strValue = editor.text();
-					       strValue = strValue.substring(0,limitNum);
-					       editor.text(strValue);      
-					       } else {
-					       //计算剩余字数
-					       var result = limitNum - this.count('text'); 
-					       pattern = '<font color="red">还可以输入' +  result + '字<font>'; 
-					       }
-					       $('.word_surplus').html(pattern); //输入显示
+					   this.sync();
 				   },
 				   
 				});
 				prettyPrint();
-				editor1.html("<strong>请填写专利所在的技术领域！</strong>");
+				/* editor1.html("<strong>请填写专利所在的技术领域！</strong>"); */
 			});
 		</script>
 		<script type="text/javascript">
@@ -137,29 +120,12 @@
 					},
 				   
 				   afterChange : function() {
-					     // $('.word_count1').html(this.count()); //字数统计包含HTML代码
-					      $('.word_count2').html(this.count('text'));  //字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字
-					      //限制字数
-					      var limitNum = 100;  //设定限制字数
-					      var pattern = '还可以输入' + limitNum + '字'; 
-					      $('.word_surplus').html(pattern); //输入显示
-					      if(this.count('text') > limitNum) {
-					       pattern = ('字数超过限制，请适当删除部分内容');
-					       //超过字数限制自动截取
-					       var strValue = editor.text();
-					       strValue = strValue.substring(0,limitNum);
-					       editor.text(strValue);      
-					       } else {
-					       //计算剩余字数
-					       var result = limitNum - this.count('text'); 
-					       pattern = '<font color="red">还可以输入' +  result + '字<font>'; 
-					       }
-					       $('.word_surplus').html(pattern); //输入显示
+					   this.sync();
 				   },
 				   
 				});
 				prettyPrint();
-				editor2.html("<strong>请填写专利创建的背景技术！</strong>");
+				/* editor2.html("<strong>请填写专利创建的背景技术！</strong>"); */
 			});
 		</script>
 		<script type="text/javascript">
@@ -191,29 +157,12 @@
 					},
 				   
 				   afterChange : function() {
-					     // $('.word_count1').html(this.count()); //字数统计包含HTML代码
-					      $('.word_count2').html(this.count('text'));  //字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字
-					      //限制字数
-					      var limitNum = 100;  //设定限制字数
-					      var pattern = '还可以输入' + limitNum + '字'; 
-					      $('.word_surplus').html(pattern); //输入显示
-					      if(this.count('text') > limitNum) {
-					       pattern = ('字数超过限制，请适当删除部分内容');
-					       //超过字数限制自动截取
-					       var strValue = editor.text();
-					       strValue = strValue.substring(0,limitNum);
-					       editor.text(strValue);      
-					       } else {
-					       //计算剩余字数
-					       var result = limitNum - this.count('text'); 
-					       pattern = '<font color="red">还可以输入' +  result + '字<font>'; 
-					       }
-					       $('.word_surplus').html(pattern); //输入显示
+					   this.sync();
 				   },
 				   
 				});
 				prettyPrint();
-				editor3.html("<strong>请填写存在的技术问题！</strong>");
+				/* editor3.html("<strong>请填写存在的技术问题！</strong>"); */
 			});
 		</script>
 		<script type="text/javascript">
@@ -245,29 +194,12 @@
 					},
 				   
 				   afterChange : function() {
-					     // $('.word_count1').html(this.count()); //字数统计包含HTML代码
-					      $('.word_count2').html(this.count('text'));  //字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字
-					      //限制字数
-					      var limitNum = 100;  //设定限制字数
-					      var pattern = '还可以输入' + limitNum + '字'; 
-					      $('.word_surplus').html(pattern); //输入显示
-					      if(this.count('text') > limitNum) {
-					       pattern = ('字数超过限制，请适当删除部分内容');
-					       //超过字数限制自动截取
-					       var strValue = editor.text();
-					       strValue = strValue.substring(0,limitNum);
-					       editor.text(strValue);      
-					       } else {
-					       //计算剩余字数
-					       var result = limitNum - this.count('text'); 
-					       pattern = '<font color="red">还可以输入' +  result + '字<font>'; 
-					       }
-					       $('.word_surplus').html(pattern); //输入显示
+					   this.sync();
 				   },
 				   
 				});
 				prettyPrint();
-				editor4.html("<strong>请填写权利要求部分！</strong>");
+				/* editor4.html("<strong>请填写权利要求部分！</strong>"); */
 			});
 		</script>
 		<script type="text/javascript">
@@ -299,29 +231,12 @@
 					},
 				   
 				   afterChange : function() {
-					     // $('.word_count1').html(this.count()); //字数统计包含HTML代码
-					      $('.word_count2').html(this.count('text'));  //字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字
-					      //限制字数
-					      var limitNum = 100;  //设定限制字数
-					      var pattern = '还可以输入' + limitNum + '字'; 
-					      $('.word_surplus').html(pattern); //输入显示
-					      if(this.count('text') > limitNum) {
-					       pattern = ('字数超过限制，请适当删除部分内容');
-					       //超过字数限制自动截取
-					       var strValue = editor.text();
-					       strValue = strValue.substring(0,limitNum);
-					       editor.text(strValue);      
-					       } else {
-					       //计算剩余字数
-					       var result = limitNum - this.count('text'); 
-					       pattern = '<font color="red">还可以输入' +  result + '字<font>'; 
-					       }
-					       $('.word_surplus').html(pattern); //输入显示
+					   this.sync();
 				   },
 				   
 				});
 				prettyPrint();
-				 editor5.html("<strong>请填写技术特征！</strong>"); 
+				 /* editor5.html("<strong>请填写技术特征！</strong>");  */
 			});
 		</script>
 		<script type="text/javascript">
@@ -353,29 +268,12 @@
 					},
 				   
 				   afterChange : function() {
-					     // $('.word_count1').html(this.count()); //字数统计包含HTML代码
-					      $('.word_count2').html(this.count('text'));  //字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字
-					      //限制字数
-					      var limitNum = 100;  //设定限制字数
-					      var pattern = '还可以输入' + limitNum + '字'; 
-					      $('.word_surplus').html(pattern); //输入显示
-					      if(this.count('text') > limitNum) {
-					       pattern = ('字数超过限制，请适当删除部分内容');
-					       //超过字数限制自动截取
-					       var strValue = editor.text();
-					       strValue = strValue.substring(0,limitNum);
-					       editor.text(strValue);      
-					       } else {
-					       //计算剩余字数
-					       var result = limitNum - this.count('text'); 
-					       pattern = '<font color="red">还可以输入' +  result + '字<font>'; 
-					       }
-					       $('.word_surplus').html(pattern); //输入显示
+					   this.sync();
 				   },
 				   
 				});
 				prettyPrint();
-				editor6.html("<strong>请填写具体的实施方式！</strong>");
+				/* editor6.html("<strong>请填写具体的实施方式！</strong>"); */
 			});
 		</script>
 		<script type="text/javascript">
@@ -407,29 +305,12 @@
 					},
 				   
 				   afterChange : function() {
-					     // $('.word_count1').html(this.count()); //字数统计包含HTML代码
-					      $('.word_count2').html(this.count('text'));  //字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字
-					      //限制字数
-					      var limitNum = 100;  //设定限制字数
-					      var pattern = '还可以输入' + limitNum + '字'; 
-					      $('.word_surplus').html(pattern); //输入显示
-					      if(this.count('text') > limitNum) {
-					       pattern = ('字数超过限制，请适当删除部分内容');
-					       //超过字数限制自动截取
-					       var strValue = editor.text();
-					       strValue = strValue.substring(0,limitNum);
-					       editor.text(strValue);      
-					       } else {
-					       //计算剩余字数
-					       var result = limitNum - this.count('text'); 
-					       pattern = '<font color="red">还可以输入' +  result + '字<font>'; 
-					       }
-					       $('.word_surplus').html(pattern); //输入显示
+					   this.sync();
 				   },
 				   
 				});
 				prettyPrint();
-				editor7.html("<strong>请填写群里要求部分！</strong>");
+				/* editor7.html("<strong>请填写群里要求部分！</strong>"); */
 			});
 		</script>
 		<script type="text/javascript">
@@ -461,28 +342,11 @@
 					},
 				   
 				   afterChange : function() {
-					     // $('.word_count1').html(this.count()); //字数统计包含HTML代码
-					      $('.word_count2').html(this.count('text'));  //字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字
-					      //限制字数
-					      var limitNum = 100;  //设定限制字数
-					      var pattern = '还可以输入' + limitNum + '字'; 
-					      $('.word_surplus').html(pattern); //输入显示
-					      if(this.count('text') > limitNum) {
-					       pattern = ('字数超过限制，请适当删除部分内容');
-					       //超过字数限制自动截取
-					       var strValue = editor.text();
-					       strValue = strValue.substring(0,limitNum);
-					       editor.text(strValue);      
-					       } else {
-					       //计算剩余字数
-					       var result = limitNum - this.count('text'); 
-					       pattern = '<font color="red">还可以输入' +  result + '字<font>'; 
-					       }
-					       $('.word_surplus').html(pattern); //输入显示
+					   this.sync();
 				   },
 				   
 				});
 				prettyPrint();
-				editor8.html("<strong>请填写专利的摘要！</strong>");
+				/* editor8.html("<strong>请填写专利的摘要！</strong>"); */
 			});
 		</script>
