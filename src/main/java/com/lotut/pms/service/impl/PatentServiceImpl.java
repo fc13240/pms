@@ -319,5 +319,12 @@ public class PatentServiceImpl implements PatentService {
 		// TODO Auto-generated method stub
 		return patentDao.savePatentDetail(patent);
 	}
-		
+
+	@Override
+	@Transactional
+	public void deleteShareUser(long patentId, int ownerId, int shareUserId) {
+		// TODO Auto-generated method stub
+		 patentDao.deleteShareUser(patentId,ownerId,shareUserId);
+	}
+
 }

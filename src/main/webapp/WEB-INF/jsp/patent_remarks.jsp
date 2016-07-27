@@ -16,9 +16,9 @@
 <title>龙图腾专利管家——我的专利</title>
 <%@ include file="_css.jsp"%>
 <style type="text/css">
-.textarea {
-	height: 150px;
-	width: 800px;
+	.textarea {
+		height: 150px;
+		width: 800px;
 }
 </style>
 </head>
