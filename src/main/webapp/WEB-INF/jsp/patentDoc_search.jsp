@@ -80,14 +80,6 @@
 	                    <div class="export" onclick="export_selfwrite();" id="export_selfwrite">
 	                        <i class="icon"></i>导出文件
 	                    </div>
-	         			<div>
-						<select id="editorid" onchange="findPatentDoc(this.value)">
-							<option value="">请选择</option>
-							<c:forEach items="${patentDocs}" var="patentDoc">
-								<option value="${patentDoc.patentDocsId }">${patentDoc.name }</option>
-							</c:forEach>		
-						</select>
-						</div>
 	                    
 	                    <div class="top_right">
 	                        <div class="review" onclick="preview_selfwrite();">
