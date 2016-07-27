@@ -11,4 +11,5 @@ public interface PatentDocDao {
 	
 	PatentDoc getUserPatentDocById(long patentDocsId);
 	
+	void updatePatentDoc(PatentDoc patentDoc);
 }

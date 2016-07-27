@@ -73,7 +73,7 @@
 	                <div class="center_top">
 	                    <div class="backedit">
 	                        <a href="<s:url value='/editor/PatentDocList.html'/>" >返回撰写列表</a></div>
-	                    <div class="save" onclick="savePatentDoc();">
+	                    <div class="save" onclick="updatePatentDoc(${patent.patentDocsId});">
 	                        <i class="icon"></i>
 	                        <div class="span">保存</div>
 	                    </div>
@@ -1351,7 +1351,7 @@
 				location.href=url;
 			};
 			
-			function savePatentDoc(){
+			function updatePatentDoc(patentDocsId){
 				var name=editor.text();
 				var techDomain=$("#editorContent1").val();
 				var backgoundTech=$("#editorContent2").val();
@@ -1363,7 +1363,7 @@
 				var rightClaim=$("#editorContent8").val();
 				$.ajax({
 					type: "POST",
-					url: "<s:url value='/editor/addPatentDoc.html'/>", 
+					url: "<s:url value='/editor/updatePatentDoc.html?patentDocsId='/>"+patentDocsId, 
 					data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
 							"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim},
 					success: function(data){

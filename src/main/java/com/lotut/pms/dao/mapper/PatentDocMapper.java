@@ -12,4 +12,6 @@ public interface PatentDocMapper {
 	List<PatentDoc> getUserPatentDoc(@Param("userId")int userId);
 	
 	PatentDoc getUserPatentDocById(@Param("patentDocsId")long patentDocsId);
+	
+	void updatePatentDoc(PatentDoc patentDoc);
 }

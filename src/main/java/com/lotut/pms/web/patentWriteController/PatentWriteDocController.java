@@ -68,6 +68,16 @@ public class PatentWriteDocController {
 	}
 	
 	
+	@RequestMapping(path="/updatePatentDoc",method=RequestMethod.POST)
+	public void  updatePatentDoc(@RequestParam("patentDocsId")long patentDocsId,PatentDoc patentDoc,Model model,PrintWriter writer){
+		int userId=PrincipalUtils.getCurrentUserId();
+		patentDoc.setUserId(userId);
+		patentDocService.updatePatentDoc(patentDoc);
+		writer.write(1);
+	}
+	
+	
+	
 	/**
 	 * 提交表单操作
 	 */

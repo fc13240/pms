@@ -37,4 +37,12 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	public PatentDoc getUserPatentDocById( long patentDocsId) {
 		return patentDocMapper.getUserPatentDocById( patentDocsId);
 	}
+
+
+
+	@Override
+	public void updatePatentDoc(PatentDoc patentDoc) {
+		patentDocMapper.updatePatentDoc(patentDoc);
+		
+	}
 }
