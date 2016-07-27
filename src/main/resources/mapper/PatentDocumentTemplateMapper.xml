@@ -3,8 +3,36 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotut.pms.dao.mapper.PatentDocumentTemplateMapper">
+	<resultMap id="patentDocTemplateListMap" type="PatentDocumentTemplate">
+		<id column="template_id" property="templateId"/>
+		<result column="template_title" property="templateTitle"/>
+		<result column="content" property="content"/>
+		<result column="create_time" property="createTime"/>
+		<result column="last_update_time" property="lastUpdateTime"/>
+		<result column="creator_id" property="creatorId"/>
+		<association property="patentType" javaType="PatentType">
+			<id column="patent_type" property="patentTypeId"/>
+			<result column="patent_type_desc" property="typeDescription"/>
+		</association>
+		<association property="patentDocSectionType" javaType="PatentDocSectionType">
+			<id column="patent_doc_section" property="patentDocSectionId"/>
+			<result column="patent_doc_section_desc" property="patentDocSectionDesc"/> 
+		</association>
+	</resultMap>
+	
+
+
 	<insert id="savePatentDocumentTemplate" parameterType="PatentDocumentTemplate" >
 		insert into patent_document_templates(content,template_title,patent_type,patent_doc_section,creator_id)
 		values(#{content},#{templateTitle},#{patentType.patentTypeId},#{patentDocSectionType.patentDocSectionId},#{creatorId})
 	</insert>
+	
+	
+	
+	<select id="getPatentDocTemplateListByUserId" resultMap="patentDocTemplateListMap">
+		select pdt.template_id,pdt.patent_type,pt.patent_type_desc,pdt.patent_doc_section,pdst.patent_doc_section_desc,pdt.template_title,pdt.content,pdt.create_time,pdt.last_update_time,pdt.creator_id  
+		  from patent_document_templates pdt LEFT JOIN patent_types pt ON pdt.patent_type = pt.patent_type_id LEFT JOIN patent_doc_section_types pdst ON pdt.patent_doc_section = pdst.patent_doc_section_id 
+		     LEFT JOIN users u ON pdt.creator_id = u.user_id
+ 			   where pdt.creator_id = #{userId} and pdt.patent_doc_section = #{patentDocSectionId}
+	</select>
 </mapper>

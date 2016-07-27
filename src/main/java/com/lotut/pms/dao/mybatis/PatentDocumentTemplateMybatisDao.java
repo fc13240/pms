@@ -1,5 +1,7 @@
 package com.lotut.pms.dao.mybatis;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.PatentDocumentTemplateDao;
@@ -18,6 +20,13 @@ public class PatentDocumentTemplateMybatisDao extends SqlSessionDaoSupport imple
 
 	public void setPatentDocumentTemplateMapper(PatentDocumentTemplateMapper patentDocumentTemplateMapper) {
 		this.patentDocumentTemplateMapper = patentDocumentTemplateMapper;
+	}
+
+
+	@Override
+	public List<PatentDocumentTemplate> getPatentDocTemplateListByUserId(int userId, int patentDocSectionId) {
+		// TODO Auto-generated method stub
+		return patentDocumentTemplateMapper.getPatentDocTemplateListByUserId(userId, patentDocSectionId);
 	}
 
 }
