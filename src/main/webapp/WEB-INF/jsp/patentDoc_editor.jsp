@@ -20,6 +20,7 @@
 	<link href="${base }/static/css/edit_instruct.css?v=2.3.20150415" type="text/css" rel="stylesheet" />
 	<script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
 	<c:import url="common/kindEditor.jsp"></c:import>
+	<script src="${base }/plugins/kindeditor/selfwritefigure.js" type="text/javascript"></script>   <!--uploadImg-->
 </head>
 
 <body style="background-color: #FFF" id="dlstCircleArticle">
