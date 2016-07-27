@@ -11,7 +11,6 @@
     if (flag)//切换标签时，flag=true，保存上一标签的内容再切换标签
     {
 		var oldtab = $("#tabWrap").find(".tab1").attr("value");
-		alert(whichTab);
         if (oldtab != whichTab) {      //如果前后tab不同，保存上一个tab内容
 
 			//  保存之前的记录  结束

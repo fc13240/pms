@@ -52,7 +52,7 @@ public class PatentWriteDocController {
 		int userId=PrincipalUtils.getCurrentUserId();
 		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocsId);
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
-		model.addAttribute("patentDoc", patentDoc);
+		model.addAttribute("patent", patentDoc);
 		model.addAttribute("patentDocs", patentDocs);
 		return "patentDoc_search";
 		
@@ -66,6 +66,16 @@ public class PatentWriteDocController {
 		return "patentDoc_list";
 		
 	}
+	
+	
+	@RequestMapping(path="/updatePatentDoc",method=RequestMethod.POST)
+	public void  updatePatentDoc(@RequestParam("patentDocsId")long patentDocsId,PatentDoc patentDoc,Model model,PrintWriter writer){
+		int userId=PrincipalUtils.getCurrentUserId();
+		patentDoc.setUserId(userId);
+		patentDocService.updatePatentDoc(patentDoc);
+		writer.write(1);
+	}
+	
 	
 	
 	/**

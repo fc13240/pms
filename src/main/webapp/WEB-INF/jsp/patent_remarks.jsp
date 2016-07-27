@@ -16,9 +16,9 @@
 <title>龙图腾专利管家——我的专利</title>
 <%@ include file="_css.jsp"%>
 <style type="text/css">
-.textarea {
-	height: 150px;
-	width: 800px;
+	.textarea {
+		height: 150px;
+		width: 800px;
 }
 </style>
 </head>
@@ -39,15 +39,7 @@
 					<div class="lt-right">
 						<div style="height: 10px;"></div>
 						<div class="lt-box" style="padding: 20px; height: 400px;">
-
-							<div>
-								<textarea rows="5" cols="100" id="content_area" class="textarea"
-									style="resize: none;" placeholder="在这里添加备注："></textarea>
-								<br/><br/>	
-								<button class="button button-caution button-rounded" onclick="addPatentRemark()">添加</button>
-							</div>
 							<div style="height: 20px"></div>
-
 							<div class="lt-box" style="width: 800px;">
 								<table id="simple-table"
 									class="table table-striped table-bordered table-hover"
@@ -65,10 +57,15 @@
 										</tr>
 									</c:forEach>
 								</table>
+								<div>
+								<textarea rows="5" cols="100" id="content_area" class="textarea"
+									style="resize: none;" placeholder="在这里添加备注："></textarea>
+								<br/><br/>	
+								 <button class="button button-caution button-rounded" onclick="addPatentRemark()">添加</button> 
+							</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
 				<!--right end-->
 

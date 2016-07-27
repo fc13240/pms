@@ -114,6 +114,15 @@ public class PatentDoc {
 	public void setAbstractDescription(String abstractDescription) {
 		this.abstractDescription = abstractDescription;
 	}
+	@Override
+	public String toString() {
+		return "PatentDoc [patentDocsId=" + patentDocsId + ", appNo=" + appNo + ", userId=" + userId + ", patentType="
+				+ patentType + ", createTime=" + createTime + ", lastUpdateTime=" + lastUpdateTime + ", name=" + name
+				+ ", techDomain=" + techDomain + ", backgoundTech=" + backgoundTech + ", contentProblem="
+				+ contentProblem + ", contentRight=" + contentRight + ", contentEffect=" + contentEffect
+				+ ", implementWay=" + implementWay + ", rightClaim=" + rightClaim + ", abstractDescription="
+				+ abstractDescription + "]";
+	}
 	
 	
 	
