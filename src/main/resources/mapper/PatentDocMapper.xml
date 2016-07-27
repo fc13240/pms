@@ -40,7 +40,7 @@
 	</select> 
 	
 	
-	<select id="getUserPatentDocById"  resultType="patentDoc">
+	<select id="getUserPatentDocById"  resultMap="PatentDocMap">
 		select app_no,patent_type,create_time,last_update_time,patent_name,tech_domain,background_tech,content_problem,content_right,content_effect,
 		implement_way,right_claim,abstract_desc from patent_documents where  patent_docs_id=#{patentDocsId}
 	</select> 
