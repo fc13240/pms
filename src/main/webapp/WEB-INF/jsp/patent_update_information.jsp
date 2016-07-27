@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="com.lotut.pms.util.PrincipalUtils"%>
 <%@ taglib uri="spring" prefix="s" %>
 <%@ taglib uri="security" prefix="se" %>
 <%@ taglib uri="c" prefix="c" %>
@@ -95,8 +94,7 @@
 						<input class="selectPointOfInterest form-control" style="width:332px;"  type="text" name="internalCode" id="appPerson" value="${patent.internalCode}"/>
 						<br>						
 						
-						
-						<c:if test="${patent.ownerId}==<%=PrincipalUtils.getCurrentUserId()%>}">
+						<c:if test="${success}">
 							<h5>共享人：</h5>
 							<c:forEach items="${patent.shareUsers}" var="sharePatent" varStatus="status">	
 								<span class='ss-item' id="shareUser${status.index}">${sharePatent.username}
