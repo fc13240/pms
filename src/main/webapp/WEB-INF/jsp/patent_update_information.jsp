@@ -75,7 +75,7 @@
 				        <h5>专利名称:</h5>
 				        <input class="selectPointOfInterest form-control" style="width:332px;" type="text" name="name" id="name" value="${patent.name}" required/>	  
 					  	<br>
-				        <h5>第一申请人：</h5>
+				        <h5>申请人：</h5>
 				        <input class="selectPointOfInterest form-control" style="width:332px;" type="text" name="appPerson" id="name"  value="${patent.appPerson}"required/>	  
 					  	<br>
 				        <h5>申请日：</h5>
