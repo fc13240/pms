@@ -19,7 +19,10 @@
 			<result column="patent_doc_section_desc" property="patentDocSectionDesc"/> 
 		</association>
 	</resultMap>
-	
+	<resultMap id="patentDocSectionTypeMap" type="PatentDocSectionType">
+		<id column="patent_doc_section_id" property="patentDocSectionId"/>
+		<result column="patent_doc_section_desc" property="patentDocSectionDesc"/>
+	</resultMap>
 
 
 	<insert id="savePatentDocumentTemplate" parameterType="PatentDocumentTemplate" >
@@ -35,4 +38,19 @@
 		     LEFT JOIN users u ON pdt.creator_id = u.user_id
  			   where pdt.creator_id = #{userId} and pdt.patent_doc_section = #{patentDocSectionId}
 	</select>
+	
+	<select id="getPatentDocSectionTypes" resultMap="patentDocSectionTypeMap">
+		select patent_doc_section_id,patent_doc_section_desc from patent_doc_section_types
+	</select>
+	
+	<select id="findTemplateDocByTemplateId" resultMap="patentDocTemplateListMap">
+		select pdt.template_id,pdt.patent_type,pt.patent_type_desc,pdt.patent_doc_section,pdst.patent_doc_section_desc,pdt.template_title,pdt.content,pdt.create_time,pdt.last_update_time,pdt.creator_id  
+		  from patent_document_templates pdt LEFT JOIN patent_types pt ON pdt.patent_type = pt.patent_type_id LEFT JOIN patent_doc_section_types pdst ON pdt.patent_doc_section = pdst.patent_doc_section_id 
+		     LEFT JOIN users u ON pdt.creator_id = u.user_id
+ 			   where pdt.template_id = #{templateId}
+	</select>
+	
+	<update id="updateTemplateDoc" parameterType="PatentDocumentTemplate">
+		update patent_document_templates set template_title = #{templateTitle},content = #{content} where template_id = #{templateId};
+	</update>
 </mapper>
