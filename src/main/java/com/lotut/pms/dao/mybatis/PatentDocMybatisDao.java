@@ -11,6 +11,7 @@ import com.lotut.pms.domain.PatentDoc;
 
 public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentDocDao{
 	private PatentDocMapper patentDocMapper;
+	private PatentDoc patentDoc;
 
 	public void setPatentDocMapper(PatentDocMapper patentDocMapper) {
 		this.patentDocMapper = patentDocMapper;
@@ -44,5 +45,14 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	public void updatePatentDoc(PatentDoc patentDoc) {
 		patentDocMapper.updatePatentDoc(patentDoc);
 		
+	}
+
+
+
+
+	@Override
+	public void deletePatentDoc(long patentDocsId) {
+	
+		patentDocMapper.deletePatentDoc(patentDocsId);
 	}
 }

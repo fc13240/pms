@@ -14,4 +14,8 @@ public interface PatentDocMapper {
 	PatentDoc getUserPatentDocById(@Param("patentDocsId")long patentDocsId);
 	
 	void updatePatentDoc(PatentDoc patentDoc);
+	
+	void deletePatentDoc(long patentDocsId);
+
+
 }

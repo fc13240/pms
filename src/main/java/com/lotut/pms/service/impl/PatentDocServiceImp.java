@@ -38,4 +38,12 @@ public class PatentDocServiceImp implements PatentDocService{
 			patentDocDao.updatePatentDoc(patentDoc);
 			
 		}
+
+
+		@Override
+		public void deletePatentDoc(long patentDocsId) {
+		
+			patentDocDao.deletePatentDoc(patentDocsId);
+			
+		}
 }

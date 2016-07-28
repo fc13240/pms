@@ -12,4 +12,10 @@ public interface PatentDocService {
 	PatentDoc getUserPatentDocById(long patentDocsId);
 	
 	void updatePatentDoc(PatentDoc patentDoc);
+
+	void deletePatentDoc(long patentDocsId);
+
+	
+	
+	
 }
