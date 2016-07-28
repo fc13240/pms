@@ -175,7 +175,7 @@ table td a {
                 <td width="27%" valign="middle" align="left">
                     <a target="_blank" href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
 								 编辑
-					</a><a onclick="preView('3197');">预览</a>
+					</a><a href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">预览</a>
                     <a onclick=" exportLayerShow('3197');">导出</a>
                     <a href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">删除</a><a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>
                 </td>
