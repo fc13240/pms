@@ -1,4 +1,11 @@
- 
+
+var _SkinPath = "/skins/default/";
+var _RootPath = "/";
+var _RootUrl = "http://www.izhiliao.com.cn/";
+var _AgencyUrl = "http://agency.izhiliao.com.cn/";
+var _UserUrl = "http://user.izhiliao.com.cn/";
+var _SelfWriteUrl = "http://self.izhiliao.com.cn/";
+var _IdeaUrl = "http://idea.izhiliao.com.cn/";
 
 
 function deletePic(picId) {

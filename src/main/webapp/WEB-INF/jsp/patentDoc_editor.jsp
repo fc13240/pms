@@ -26,57 +26,125 @@
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/swfupload.queue.js"></script>
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/fileprogress.js"></script>
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers.js"></script>
+	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers2.js"></script>
 	<script type="text/javascript">
-	var upload1;
+	//上传插件使用脚本
+    var swfu;   //上传插件使用脚本
+    var swfuab;
+    window.onload = function () {
+        swfu = new SWFUpload({
+            // Backend Settings
+            upload_url: "/UploadFile.aspx", //单文件上传
+           /*  post_params: {
+                "ASPSESSID": "s2m5cueveh4lly0yhtyvs4dn"
+            }, */
 
-	window.onload = function() {
-		upload1 = new SWFUpload({
-			
-			// Backend Settings
-			upload_url: "FileUploadServlet?saveDataId=saveDataId1",
-			//post_params: {"PHPSESSID" : "<?php echo session_id(); ?>"},
+            // File Upload Settings
+            file_size_limit: "5 MB",
+            file_types: "*.jpg;*.png;*.bmp;*.gif",
+            file_types_description: "允许上传文件类型*.jpg;*.png;*.bmp;*.gif",
+            file_upload_limit: 0,    // Zero means unlimited 
+            // Event Handler Settings - these functions as defined in Handlers.js
+            //  The handlers are not part of SWFUpload but are part of my website and control how
+            //  my website reacts to the SWFUpload events.
+            swfupload_preload_handler: preLoad,
+            swfupload_load_failed_handler: loadFailed,
+            file_queue_error_handler: fileQueueError,
+            file_dialog_complete_handler: fileDialogComplete,
+            upload_progress_handler: uploadProgress,
+            upload_error_handler: uploadError,
+            upload_success_handler: uploadSuccess,
+            upload_complete_handler: uploadComplete,
 
-			// File Upload Settings
-			file_size_limit : "20 MB",	// 100MB
-			file_types : "*.*",
-			file_types_description : "All Files",
-			file_upload_limit : 10,
-			file_queue_limit : 0,
+            // Button settings
+            button_image_url: "/skins/default/self/images/szzt1.jpg",
+            button_placeholder_id: "spanButtonPlaceholder",
+            button_width: 89,
+            button_height: 33,
+            button_text: '',
+            button_text_style: '',
 
-			// Event Handler Settings (all my handlers are in the Handler.js file)
-			swfupload_preload_handler : preLoad,
-			swfupload_load_failed_handler : loadFailed,
-			file_dialog_start_handler : fileDialogStart,
-			file_queued_handler : fileQueued,
-			file_queue_error_handler : fileQueueError,
-			file_dialog_complete_handler : fileDialogComplete,
-			upload_start_handler : uploadStart,
-			upload_progress_handler : uploadProgress,
-			upload_error_handler : uploadError,
-			upload_success_handler : uploadSuccess,
-			upload_complete_handler : uploadComplete,
+            /* 
+            button_image_url: "",
+            button_placeholder_id: "spanButtonPlaceholder",
+            button_width: 65,
+            button_height: 20,
+            button_text: "<a class='btn-txt'> &nbsp;上传头像</a>", //按钮文字
+            button_text_style: ".btn-txt{color: #0A81A7; font-size:12px;font-family:'微软雅黑';cursor:pointer;}",
+            */
+            button_text_top_padding: 0,
+            button_text_left_padding: 0,
+            button_window_mode: "transparent",
+            button_disabled: false,
+            // Flash Settings
+            flash_url: "${base}/plugins/kindeditor/swfupload/swfupload.swf", // Relative to this file
+            flash9_url: "${base}/plugins/kindeditor/swfupload/swfupload_fp9.swf", // Relative to this file 
+            custom_settings: {
+                upload_target: "divFileProgressContainer"
+            },
+            // Debug Settings
+            debug: false
+        });
+        swfuab = new SWFUpload({
+            // Backend Settings
+            upload_url: "/UploadFile.aspx", //单文件上传
+/*             post_params: {
+                "ASPSESSID": "s2m5cueveh4lly0yhtyvs4dn"
+            }, */
 
-			// Button Settings
-			button_image_url : "./static/img/glyphicons-halflings-white.png",
-			button_placeholder_id : "swfu-placeholder",
-			button_text: '请选择要上传的图片',
-			button_width: 120,
-			button_height: 22,
-			
-			// Flash Settings
-			flash_url : "${base}/plugins/kindeditor/swfupload/swfupload.swf",
-			flash9_url : "${base}/plugins/kindeditor/swfupload/swfupload_fp9.swf",
-		
+            // File Upload Settings
+            file_size_limit: "5 MB",
+            file_types: "*.jpg;*.png;*.bmp;*.gif",
+            file_types_description: "允许上传文件类型*.jpg;*.png;*.bmp;*.gif",
+            file_upload_limit: 0,    // Zero means unlimited 
+            // Event Handler Settings - these functions as defined in Handlers.js
+            //  The handlers are not part of SWFUpload but are part of my website and control how
+            //  my website reacts to the SWFUpload events.
+            swfupload_preload_handler: preLoadab,
+            swfupload_load_failed_handler: loadFailedab,
+            file_queue_error_handler: fileQueueErrorab,
+            file_dialog_complete_handler: fileDialogCompleteab,
+            upload_progress_handler: uploadProgressab,
+            upload_error_handler: uploadErrorab,
+            upload_success_handler: uploadSuccessab,
+            upload_complete_handler: uploadCompleteab,
 
-			custom_settings : {
-				progressTarget : "fsUploadProgress1",
-				cancelButtonId : "btnCancel1"
-			},
-			
-			// Debug Settings
-			debug: false
-		});
-     }	
+            // Button settings
+            button_image_url: "/skins/default/self/images/bzyft.jpg",
+            button_placeholder_id: "spanButtonPlaceholder_ab",
+            button_width: 125,
+            button_height: 40,
+            button_text: '',
+            button_text_style: ' ',
+
+            /* 
+            button_image_url: "",
+            button_placeholder_id: "spanButtonPlaceholder_ab",
+            button_width: 65,
+            button_height: 20,
+            button_text: "<a class='btn-txt'> &nbsp;上传头像</a>", //按钮文字
+            button_text_style: ".btn-txt{color: #0A81A7; font-size:12px;font-family:'微软雅黑';cursor:pointer;}",
+            */
+            button_text_top_padding: 0,
+            button_text_left_padding: 0,
+            button_window_mode: "transparent",
+
+            button_disabled: false,
+            // Flash Settings
+            flash_url: "${base}/plugins/kindeditor/swfupload/swfupload.swf", // Relative to this file
+            flash9_url: "${base}/plugins/kindeditor/swfupload/swfupload_fp9.swf", // Relative to this file 
+            custom_settings: {
+                upload_target: "divFileProgressContainerab"
+            },
+            // Debug Settings
+            debug: false
+        });
+    }
+//    function () {
+//        var hh = $(window).height() + 133;
+//        $("body").css({ 'overflow': hidden, "height": hh + "px" });
+//    }
+
 	</script>
 </head>
 
@@ -753,7 +821,7 @@
 							<div style="height: 10px">
 							</div>
 							    <div class="cl" style="padding-left: 40px; float: left;">
-								       <div class="upimg1" id="swfu-placeholder"><!-- 上传flash插件 --></div>
+								       <div class="upimg1" id="spanButtonPlaceholder"><!-- 上传flash插件 --></div>
     							</div>
 							
 							
@@ -805,6 +873,8 @@
 							<div style="height: 80px">
 							</div>
 						   <div style="float:left; margin-left:50px;">
+						   		<div id="spanButtonPlaceholder_ab" class="upimg1" style="float:left;">
+						   		</div></div>
 								<div class="upimg1" onclick="chooseFromList();" id="choseAbs" style="
 									left: 280px; margin-top: 0;float:left;">
 									从附图中选择</div>
@@ -827,7 +897,8 @@
 						</div>
 						<!-- content end-->
 	
-	
+						<div id="div_float_show" style="position: absolute; display: none; width: 1000px">
+					</div>
 	
 	                </div>
 	                <!-- content end-->
