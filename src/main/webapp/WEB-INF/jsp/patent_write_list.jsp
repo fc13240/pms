@@ -32,7 +32,7 @@
 
 .tit_top {
     clear: both;
-    margin: 9px 55px;
+    margin: 9px 58px;
     width: 90%;
     border-bottom: #f2f2f2 3px solid;
     overflow: auto;
@@ -127,6 +127,13 @@ table td a {
             撰写列表</div>
         <div class="uppic2" onclick="adduser();">
             新建专利</div>
+            <div class="uppic2" onclick="adduser();">
+            新建专利</div>
+            <div class="uppic2" onclick="adduser();">
+            新建专利</div>
+            <div class="uppic2" onclick="adduser();">
+            发明</div>
+            
     </div>
     <div class="cl top1">
         
