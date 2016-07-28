@@ -54,8 +54,7 @@ public class PatentWriteDocController {
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		model.addAttribute("patent", patentDoc);
 		model.addAttribute("patentDocs", patentDocs);
-		return "patentDoc_search";
-		
+		return "patentDoc_search";		
 	}
 	
 	@RequestMapping(path="/PatentDocList",method=RequestMethod.GET)
@@ -63,8 +62,7 @@ public class PatentWriteDocController {
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		model.addAttribute("patentDocs", patentDocs);
-		return "patentDoc_list";
-		
+		return "patentDoc_list";		
 	}
 	@RequestMapping(path="/deletePatentDoc",method=RequestMethod.GET)
 	public String  deletePatentDoc(@RequestParam("patentDocsId")long patentDocsId,Model model){
@@ -82,7 +80,12 @@ public class PatentWriteDocController {
 		writer.write(1);
 	}
 	
-	
+	@RequestMapping(path="/previewPatentDoc",method=RequestMethod.GET)
+	public String previewPatentDoc(@RequestParam("patentDocsId")long patentDocsId,Model model,PrintWriter writer){
+		PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocsId);
+		model.addAttribute("patentDoc", patentDoc);
+		return "patentDoc_preview";
+	}
 	
 	/**
 	 * 提交表单操作
