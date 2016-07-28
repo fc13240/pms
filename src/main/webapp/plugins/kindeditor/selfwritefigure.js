@@ -90,7 +90,7 @@ if (hidSrc!=undefined) { //说明展示过编辑页面
     $('#content5_build').show();
     $('#piclist').show();
     var tab = getselfwriteTab();
-    seteditorheight(tab);
+    //seteditorheight(tab);
 
 }
 function getPicListOrAb(pOa) { //得到附图列表和摘要附图  //  pOa=="p"得到附图列表的图片地址   pOa=="a"得到摘要图片的地址   

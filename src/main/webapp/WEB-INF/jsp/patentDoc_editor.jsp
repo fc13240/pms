@@ -9,9 +9,9 @@
 <head>
 	<c:import url="common/header.jsp"></c:import>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<!--  	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
-	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN"> 
+	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  -->
 	<title>测试页面</title>
 	<!-- 编辑器控件 -->
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/default/default.css" />
@@ -36,7 +36,7 @@
     window.onload = function () {
         swfu = new SWFUpload({
             // Backend Settings
-            upload_url: "/UploadFile.aspx", //单文件上传
+            upload_url: "<s:url value='/kindeditor/attachment_upload.html'/>", //单文件上传
            /*  post_params: {
                 "ASPSESSID": "s2m5cueveh4lly0yhtyvs4dn"
             }, */
@@ -63,7 +63,7 @@
             button_placeholder_id: "spanButtonPlaceholder",
             button_width: 89,
             button_height: 33,
-            button_text: '',
+            button_text: '请选择要上传的图片',
             button_text_style: '',
 
             /* 
@@ -116,7 +116,7 @@
             button_placeholder_id: "spanButtonPlaceholder_ab",
             button_width: 125,
             button_height: 40,
-            button_text: '',
+            button_text: '上传图片',
             button_text_style: ' ',
 
             /* 
@@ -843,7 +843,7 @@
 								<div id="divFileProgressContainer" style="height: 75px; display: none;">
 								</div>
 								<div id="thumbnails" class="imgreview" style="overflow: hidden;">
-									<img alt="" id="imghead" style="padding-right: 20px;">
+									<img alt="" id="imghead" name="imghead" style="padding-right: 20px;">
 									
 								</div>
 								<div class="daochu_cancelh">
