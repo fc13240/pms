@@ -61,16 +61,34 @@
 		   				<tr>
 		   					<td style="text-align:center">${status.count }</td>
 		   					<td style="text-align:center">${templateDoc.templateTitle }</td>
-		   					<td style="text-align:center"><button type="button" class="btn btn-default" onclick="preViem('${templateDocList[status.index].content}')">预览</button></td>
 		   					<td style="text-align:center">${templateDoc.patentType.typeDescription }</td>
+		   					<td style="text-align:center"><a href="javascript:preViem()">点我预览</a></td>
 		   					<td style="text-align:center"> <fmt:formatDate value="${templateDoc.createTime }" pattern="yyyy-MM-dd hh:mm:ss"/> </td>
 		   					<td style="text-align:center"> <fmt:formatDate value="${templateDoc.lastUpdateTime }" pattern="yyyy-MM-dd hh:mm:ss"/> </td>
 		   					<td style="text-align:center">
 		   						<div>
-		   						<button type="button" class="btn btn-default" data-toggle = "modal" data-target = "#myModal">修改</button>
+		   						<button type="button" class="btn btn-default" onclick="findTemplateDocData(${templateDoc.templateId })">修改</button>
 		   						<button type="button" class="btn btn-danger">删除</button>
 		   						</div>
 		   					</td>
+		   					<td style="display: none;">
+		   						<div class="content" id="content0">
+									<div class="cl">
+									
+										<div id="editor0" thistempid="1">
+											<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
+											<input type="hidden" value="" id="divtitletips">
+											<div class="textarea" name="tooltip">
+												    <div class="wraper">
+								                    	<textarea rows="3" cols="10" id="editorContent" name="content" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
+								                    		${templateDoc.content }
+								                    	</textarea>
+												   </div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
 		   				</tr>
 		   			
 		   			</c:forEach>
@@ -153,13 +171,38 @@
 </div> --%>
 <!-- modal -->
 
+<button id="hiddenButton" type="button" style="font-size: 12px;display: none;" class = "btn btn-primary btn-lg" data-toggle = "modal" data-target = "#myModal">
+复层
+</button>
+<div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true">
+   
+   <div class = "modal-dialog" style="width:935px">
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+               ×
+            </button>
+            
+            <h4 class = "modal-title" id = "myModalLabel">
+               	修改模板
+            </h4>
+         </div>
 
+         <div class = "modal-body" id="modalDiv">
+           	
+         </div>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+   
+</div>
 <script>
    function chooseSection(patentDocSectionId){
 	   alert(patentDocSectionId);
 	   location.href="<s:url value='/editor1/templateList.html'/>?patentDocSectionId="+patentDocSectionId;
    }
-   function preViem(content){
+   function preViem(){
 	   alert(content);
    }
    function findTemplateDocData(templateId){
@@ -174,6 +217,12 @@
 				editor.html(data);
 		   }
 	   }) */
+   }
+   
+   function preViem(){
+	   $("#modalDiv").html($("#editorContent").val());
+	   $("#hiddenButton").trigger("click");
+	   
    }
 </script>
 </body>
