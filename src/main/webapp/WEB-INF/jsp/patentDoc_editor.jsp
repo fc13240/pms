@@ -696,8 +696,14 @@
 							<div style="height: 10px">
 							</div>
 							<div class="cl" style="padding-left: 40px; float: left;">
-								<object id="SWFUpload_0" type="application/x-shockwave-flash" data="/js/swfupload.swf?preventswfcaching=1468807943565" width="89" height="33" class="swfupload"><param name="wmode" value="transparent"><param name="movie" value="/js/swfupload.swf?preventswfcaching=1468807943565"><param name="quality" value="high"><param name="allowScriptAccess" value="always"><param name="flashvars" value="movieName=SWFUpload_0&amp;uploadURL=%2FUploadFile.aspx&amp;useQueryString=false&amp;requeueOnError=false&amp;httpSuccess=&amp;assumeSuccessTimeout=0&amp;params=ASPSESSID%3Dqqi3n0miuogvgyxnvqhgnam1&amp;filePostName=Filedata&amp;fileTypes=*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileTypesDescription=%E5%85%81%E8%AE%B8%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileSizeLimit=5%20MB&amp;fileUploadLimit=0&amp;fileQueueLimit=0&amp;debugEnabled=false&amp;buttonImageURL=%2Fskins%2Fdefault%2Fself%2Fimages%2Fszzt1.jpg&amp;buttonWidth=89&amp;buttonHeight=33&amp;buttonText=&amp;buttonTextTopPadding=0&amp;buttonTextLeftPadding=0&amp;buttonTextStyle=&amp;buttonAction=-110&amp;buttonDisabled=false&amp;buttonCursor=-1"></object>
-								
+								<object id="SWFUpload_0" type="application/x-shockwave-flash" data="/js/swfupload.swf?preventswfcaching=1468807943565" width="89" height="33" class="swfupload">
+								<param name="wmode" value="transparent">
+								<param name="movie" value="/js/swfupload.swf?preventswfcaching=1468807943565">
+								<param name="quality" value="high">
+								<param name="allowScriptAccess" value="always">
+								<param name="flashvars" value="movieName=SWFUpload_0&amp;uploadURL=%2FUploadFile.aspx&amp;useQueryString=false&amp;requeueOnError=false&amp;httpSuccess=&amp;assumeSuccessTimeout=0&amp;params=ASPSESSID%3Dqqi3n0miuogvgyxnvqhgnam1&amp;filePostName=Filedata&amp;fileTypes=*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileTypesDescription=%E5%85%81%E8%AE%B8%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileSizeLimit=5%20MB&amp;fileUploadLimit=0&amp;fileQueueLimit=0&amp;debugEnabled=false&amp;buttonImageURL=%2Fskins%2Fdefault%2Fself%2Fimages%2Fszzt1.jpg&amp;buttonWidth=89&amp;buttonHeight=33&amp;buttonText=&amp;buttonTextTopPadding=0&amp;buttonTextLeftPadding=0&amp;buttonTextStyle=&amp;buttonAction=-110&amp;buttonDisabled=false&amp;buttonCursor=-1">
+								</object>
+								<input   id="patentFile" name="patentFile" type="file" />
 							</div>
 							<div style="left: 280px; margin-top: 0; float: left;" onclick="openwin('http://www.autodesk.com.cn/free-trials');" class="upimg1">
 								下载CAD绘图</div>

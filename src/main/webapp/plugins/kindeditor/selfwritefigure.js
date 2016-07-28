@@ -64,9 +64,9 @@ function addPic() {
     //清除之前痕迹
     $('#piciLlus2').val("请填写附图说明，例如”图1为本发明实施例XX的方法流程示意图”。").css('color', '#999');
     $('#picMarkiLlus2').val("请填写附图标记说明，例如“1杯子主体，2杯子把手”。").css('color', '#999');
-    $("#imghead").attr('src', _SkinPath + 'self/images/Figurenull.jpg');
-    //$("#imghead").attr('src', '/SelfWrite/skins/default/self/images/Figurenull.jpg'); //  显示新增时候的默认图片
-
+    //$("#imghead").attr('src', _SkinPath + 'self/images/Figurenull.jpg');
+    $("#imghead").attr('src', "/static/img/Figurenull.jpg"); //  显示新增时候的默认图片
+    
 
 var hidSrc=$('#rePicStc').val(); 
 if (hidSrc!=undefined) { //说明展示过编辑页面 
