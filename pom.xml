@@ -122,11 +122,16 @@
 		</dependency>
 		
 		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		    <version>${jackson.version}</version>
+		</dependency>
+		
+		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>${codec.version}</version>
 		</dependency>
-		
 		<!-- ################## dom4j ################## -->			
 		<dependency>
 			<groupId>dom4j</groupId>

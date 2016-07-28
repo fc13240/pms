@@ -69,7 +69,7 @@
 	                <!--center-top start -->
 	                <div class="center_top">
 	                    <div class="backedit">
-	                        <a href="<s:url value='/editor1/templateList.html'/>" target="_blank">返回模板列表</a></div>
+	                        <a href="<s:url value='/editor1/templateList.html?patentDocSectionId=1'/>" target="_blank">返回模板列表</a></div>
 	                    <div class="save" onclick="save_selfwrite();">
 	                        <i class="icon"></i>
 	                        <div class="span">保存</div>

@@ -9,9 +9,9 @@
 <head>
 	<c:import url="common/header.jsp"></c:import>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<!--  	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
-	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN"> 
+	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  -->
 	<title>测试页面</title>
 	<!-- 编辑器控件 -->
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/default/default.css" />
@@ -20,6 +20,134 @@
 	<link href="${base }/static/css/edit_instruct.css?v=2.3.20150415" type="text/css" rel="stylesheet" />
 	<script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
 	<c:import url="common/kindEditor.jsp"></c:import>
+	<script src="${base }/plugins/kindeditor/layer.min.js" type="text/javascript"></script>
+	<script src="${base }/plugins/kindeditor/js-selfwrite.js" type="text/javascript"></script>
+	<script src="${base }/plugins/kindeditor/selfwritefigure.js" type="text/javascript"></script>   <!--uploadImg-->
+	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg-->
+	<script src="${base }/plugins/kindeditor/swfupload/swfupload.js" type="text/javascript"></script>   <!--swfupload-->
+	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/swfupload.queue.js"></script>
+	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/fileprogress.js"></script>
+	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers.js"></script>
+	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers2.js"></script>
+	<script type="text/javascript">
+	//上传插件使用脚本
+    var swfu;   //上传插件使用脚本
+    var swfuab;
+    window.onload = function () {
+        swfu = new SWFUpload({
+            // Backend Settings
+            upload_url: "<s:url value='/kindeditor/attachment_upload.html'/>", //单文件上传
+           /*  post_params: {
+                "ASPSESSID": "s2m5cueveh4lly0yhtyvs4dn"
+            }, */
+
+            // File Upload Settings
+            file_size_limit: "5 MB",
+            file_types: "*.jpg;*.png;*.bmp;*.gif",
+            file_types_description: "允许上传文件类型*.jpg;*.png;*.bmp;*.gif",
+            file_upload_limit: 0,    // Zero means unlimited 
+            // Event Handler Settings - these functions as defined in Handlers.js
+            //  The handlers are not part of SWFUpload but are part of my website and control how
+            //  my website reacts to the SWFUpload events.
+            swfupload_preload_handler: preLoad,
+            swfupload_load_failed_handler: loadFailed,
+            file_queue_error_handler: fileQueueError,
+            file_dialog_complete_handler: fileDialogComplete,
+            upload_progress_handler: uploadProgress,
+            upload_error_handler: uploadError,
+            upload_success_handler: uploadSuccess,
+            upload_complete_handler: uploadComplete,
+
+            // Button settings
+            button_image_url: "/skins/default/self/images/szzt1.jpg",
+            button_placeholder_id: "spanButtonPlaceholder",
+            button_width: 89,
+            button_height: 33,
+            button_text: '请选择要上传的图片',
+            button_text_style: '',
+
+            /* 
+            button_image_url: "",
+            button_placeholder_id: "spanButtonPlaceholder",
+            button_width: 65,
+            button_height: 20,
+            button_text: "<a class='btn-txt'> &nbsp;上传头像</a>", //按钮文字
+            button_text_style: ".btn-txt{color: #0A81A7; font-size:12px;font-family:'微软雅黑';cursor:pointer;}",
+            */
+            button_text_top_padding: 0,
+            button_text_left_padding: 0,
+            button_window_mode: "transparent",
+            button_disabled: false,
+            // Flash Settings
+            flash_url: "${base}/plugins/kindeditor/swfupload/swfupload.swf", // Relative to this file
+            flash9_url: "${base}/plugins/kindeditor/swfupload/swfupload_fp9.swf", // Relative to this file 
+            custom_settings: {
+                upload_target: "divFileProgressContainer"
+            },
+            // Debug Settings
+            debug: false
+        });
+        swfuab = new SWFUpload({
+            // Backend Settings
+            upload_url: "/UploadFile.aspx", //单文件上传
+/*             post_params: {
+                "ASPSESSID": "s2m5cueveh4lly0yhtyvs4dn"
+            }, */
+
+            // File Upload Settings
+            file_size_limit: "5 MB",
+            file_types: "*.jpg;*.png;*.bmp;*.gif",
+            file_types_description: "允许上传文件类型*.jpg;*.png;*.bmp;*.gif",
+            file_upload_limit: 0,    // Zero means unlimited 
+            // Event Handler Settings - these functions as defined in Handlers.js
+            //  The handlers are not part of SWFUpload but are part of my website and control how
+            //  my website reacts to the SWFUpload events.
+            swfupload_preload_handler: preLoadab,
+            swfupload_load_failed_handler: loadFailedab,
+            file_queue_error_handler: fileQueueErrorab,
+            file_dialog_complete_handler: fileDialogCompleteab,
+            upload_progress_handler: uploadProgressab,
+            upload_error_handler: uploadErrorab,
+            upload_success_handler: uploadSuccessab,
+            upload_complete_handler: uploadCompleteab,
+
+            // Button settings
+            button_image_url: "/skins/default/self/images/bzyft.jpg",
+            button_placeholder_id: "spanButtonPlaceholder_ab",
+            button_width: 125,
+            button_height: 40,
+            button_text: '上传图片',
+            button_text_style: ' ',
+
+            /* 
+            button_image_url: "",
+            button_placeholder_id: "spanButtonPlaceholder_ab",
+            button_width: 65,
+            button_height: 20,
+            button_text: "<a class='btn-txt'> &nbsp;上传头像</a>", //按钮文字
+            button_text_style: ".btn-txt{color: #0A81A7; font-size:12px;font-family:'微软雅黑';cursor:pointer;}",
+            */
+            button_text_top_padding: 0,
+            button_text_left_padding: 0,
+            button_window_mode: "transparent",
+
+            button_disabled: false,
+            // Flash Settings
+            flash_url: "${base}/plugins/kindeditor/swfupload/swfupload.swf", // Relative to this file
+            flash9_url: "${base}/plugins/kindeditor/swfupload/swfupload_fp9.swf", // Relative to this file 
+            custom_settings: {
+                upload_target: "divFileProgressContainerab"
+            },
+            // Debug Settings
+            debug: false
+        });
+    }
+//    function () {
+//        var hh = $(window).height() + 133;
+//        $("body").css({ 'overflow': hidden, "height": hh + "px" });
+//    }
+
+	</script>
 </head>
 
 <body style="background-color: #FFF" id="dlstCircleArticle">
@@ -694,21 +822,17 @@
 							</div>
 							<div style="height: 10px">
 							</div>
-							<div class="cl" style="padding-left: 40px; float: left;">
-								<object id="SWFUpload_0" type="application/x-shockwave-flash" data="/js/swfupload.swf?preventswfcaching=1468807943565" width="89" height="33" class="swfupload"><param name="wmode" value="transparent"><param name="movie" value="/js/swfupload.swf?preventswfcaching=1468807943565"><param name="quality" value="high"><param name="allowScriptAccess" value="always"><param name="flashvars" value="movieName=SWFUpload_0&amp;uploadURL=%2FUploadFile.aspx&amp;useQueryString=false&amp;requeueOnError=false&amp;httpSuccess=&amp;assumeSuccessTimeout=0&amp;params=ASPSESSID%3Dqqi3n0miuogvgyxnvqhgnam1&amp;filePostName=Filedata&amp;fileTypes=*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileTypesDescription=%E5%85%81%E8%AE%B8%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileSizeLimit=5%20MB&amp;fileUploadLimit=0&amp;fileQueueLimit=0&amp;debugEnabled=false&amp;buttonImageURL=%2Fskins%2Fdefault%2Fself%2Fimages%2Fszzt1.jpg&amp;buttonWidth=89&amp;buttonHeight=33&amp;buttonText=&amp;buttonTextTopPadding=0&amp;buttonTextLeftPadding=0&amp;buttonTextStyle=&amp;buttonAction=-110&amp;buttonDisabled=false&amp;buttonCursor=-1"></object>
-								
-							</div>
-							<div style="left: 280px; margin-top: 0; float: left;" onclick="openwin('http://www.autodesk.com.cn/free-trials');" class="upimg1">
-								下载CAD绘图</div>
-							<div style="left: 280px; margin-top: 0; float: left;" onclick="openwin('http://download.pchome.net/industry/geography/detail-17098.html');" class="upimg1">
-								下载化学编辑器</div>
+							    <div class="cl" style="padding-left: 40px; float: left;">
+								       <div class="upimg1" id="spanButtonPlaceholder"><!-- 上传flash插件 --></div>
+    							</div>
+							
 							
 							<div class="img_edit" id="origin">
 								<div class="imgfl" id="picBianHao">
 								</div>
 								<div class="imgfr">
-									<input id="piciLlus2" name="" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="请填写附图说明，例如”图1为本发明实施例XX的方法流程示意图”。" autocomplete="off">
-									<input id="picMarkiLlus2" name="" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="请填写附图标记说明，例如“1杯子主体，2杯子把手”。" autocomplete="off">
+									<input id="piciLlus2" name="" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off">
+									<input id="picMarkiLlus2" name="" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off">
 								</div>
 							</div>
 							<div class="img_edit" id="reHtml" style="display: none">
@@ -719,7 +843,7 @@
 								<div id="divFileProgressContainer" style="height: 75px; display: none;">
 								</div>
 								<div id="thumbnails" class="imgreview" style="overflow: hidden;">
-									<img alt="" id="imghead" style="padding-right: 20px;">
+									<img alt="" id="imghead" name="imghead" style="padding-right: 20px;">
 									
 								</div>
 								<div class="daochu_cancelh">
@@ -751,7 +875,8 @@
 							<div style="height: 80px">
 							</div>
 						   <div style="float:left; margin-left:50px;">
-								<object id="SWFUpload_1" type="application/x-shockwave-flash" data="/js/swfupload.swf?preventswfcaching=1468807943567" width="125" height="40" class="swfupload"><param name="wmode" value="transparent"><param name="movie" value="/js/swfupload.swf?preventswfcaching=1468807943567"><param name="quality" value="high"><param name="allowScriptAccess" value="always"><param name="flashvars" value="movieName=SWFUpload_1&amp;uploadURL=%2FUploadFile.aspx&amp;useQueryString=false&amp;requeueOnError=false&amp;httpSuccess=&amp;assumeSuccessTimeout=0&amp;params=ASPSESSID%3Dqqi3n0miuogvgyxnvqhgnam1&amp;filePostName=Filedata&amp;fileTypes=*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileTypesDescription=%E5%85%81%E8%AE%B8%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileSizeLimit=5%20MB&amp;fileUploadLimit=0&amp;fileQueueLimit=0&amp;debugEnabled=false&amp;buttonImageURL=%2Fskins%2Fdefault%2Fself%2Fimages%2Fbzyft.jpg&amp;buttonWidth=125&amp;buttonHeight=40&amp;buttonText=&amp;buttonTextTopPadding=0&amp;buttonTextLeftPadding=0&amp;buttonTextStyle=%20&amp;buttonAction=-110&amp;buttonDisabled=false&amp;buttonCursor=-1"></object></div>
+						   		<div id="spanButtonPlaceholder_ab" class="upimg1" style="float:left;">
+						   		</div></div>
 								<div class="upimg1" onclick="chooseFromList();" id="choseAbs" style="
 									left: 280px; margin-top: 0;float:left;">
 									从附图中选择</div>
@@ -774,7 +899,8 @@
 						</div>
 						<!-- content end-->
 	
-	
+						<div id="div_float_show" style="position: absolute; display: none; width: 1000px">
+					</div>
 	
 	                </div>
 	                <!-- content end-->

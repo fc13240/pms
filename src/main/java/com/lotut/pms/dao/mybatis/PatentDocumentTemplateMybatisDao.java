@@ -6,6 +6,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.PatentDocumentTemplateDao;
 import com.lotut.pms.dao.mapper.PatentDocumentTemplateMapper;
+import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
 
 public class PatentDocumentTemplateMybatisDao extends SqlSessionDaoSupport implements PatentDocumentTemplateDao{
@@ -25,8 +26,29 @@ public class PatentDocumentTemplateMybatisDao extends SqlSessionDaoSupport imple
 
 	@Override
 	public List<PatentDocumentTemplate> getPatentDocTemplateListByUserId(int userId, int patentDocSectionId) {
-		// TODO Auto-generated method stub
+		
 		return patentDocumentTemplateMapper.getPatentDocTemplateListByUserId(userId, patentDocSectionId);
+	}
+
+
+	@Override
+	public List<PatentDocSectionType> getPatentDocSectionTypes() {
+		
+		return patentDocumentTemplateMapper.getPatentDocSectionTypes();
+	}
+
+
+	@Override
+	public PatentDocumentTemplate findTemplateDocByTemplateId(int templateId) {
+		
+		return patentDocumentTemplateMapper.findTemplateDocByTemplateId(templateId);
+	}
+
+
+	@Override
+	public void updateTemplateDoc(PatentDocumentTemplate patentDocumentTemplate) {
+		
+		patentDocumentTemplateMapper.updateTemplateDoc(patentDocumentTemplate);
 	}
 
 }

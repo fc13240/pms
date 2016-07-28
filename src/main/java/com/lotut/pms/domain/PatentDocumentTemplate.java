@@ -83,4 +83,15 @@ public class PatentDocumentTemplate {
 	}
 	
 	
+	@Override
+	public String toString() {
+		return "{templateId"+":" + templateId + ", content"+":" + content + ", contentProblem="
+				+ contentProblem + ", contentRight=" + contentRight + ", contentEffect=" + contentEffect
+				+ ", templateTitle=" + templateTitle + ", patentType=" + patentType + ", patentDocSectionType="
+				+ patentDocSectionType + ", createTime=" + createTime + ", lastUpdateTime=" + lastUpdateTime
+				+ ", creatorId=" + creatorId + "}";
+	}
+	
+	
+	
 }
