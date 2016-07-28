@@ -64,6 +64,12 @@ public class PatentWriteDocController {
 		model.addAttribute("patentDocs", patentDocs);
 		return "patentDoc_list";		
 	}
+	@RequestMapping(path="/deletePatentDoc",method=RequestMethod.GET)
+	public String  deletePatentDoc(@RequestParam("patentDocsId")long patentDocsId,Model model){
+		patentDocService.deletePatentDoc(patentDocsId);
+	    return "redirect:/editor/PatentDocList.html";
+		
+	}
 	
 	
 	@RequestMapping(path="/updatePatentDoc",method=RequestMethod.POST)

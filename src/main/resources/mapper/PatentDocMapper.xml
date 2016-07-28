@@ -51,4 +51,9 @@
 		implement_way=#{implementWay,javaType=string,jdbcType=CLOB},right_claim=#{rightClaim,javaType=string,jdbcType=CLOB},abstract_desc=#{abstractDescription,javaType=string,jdbcType=CLOB}
 		where  patent_docs_id=#{patentDocsId}
 	</update> 
+	
+	<delete id="deletePatentDoc">
+		delete  from  patent_documents  where  patent_docs_id=#{patentDocsId} 
+		
+	</delete>
 </mapper>
