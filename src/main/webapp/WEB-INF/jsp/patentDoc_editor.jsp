@@ -21,6 +21,62 @@
 	<script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
 	<c:import url="common/kindEditor.jsp"></c:import>
 	<script src="${base }/plugins/kindeditor/selfwritefigure.js" type="text/javascript"></script>   <!--uploadImg-->
+	<script src="${base }/plugins/kindeditor/swfupload/swfupload.js" type="text/javascript"></script>   <!--swfupload-->
+	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/swfupload.queue.js"></script>
+	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/fileprogress.js"></script>
+	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers.js"></script>
+	<script type="text/javascript">
+	var upload1;
+
+	window.onload = function() {
+		upload1 = new SWFUpload({
+			
+			// Backend Settings
+			upload_url: "FileUploadServlet?saveDataId=saveDataId1",
+			//post_params: {"PHPSESSID" : "<?php echo session_id(); ?>"},
+
+			// File Upload Settings
+			file_size_limit : "20 MB",	// 100MB
+			file_types : "*.*",
+			file_types_description : "All Files",
+			file_upload_limit : 10,
+			file_queue_limit : 0,
+
+			// Event Handler Settings (all my handlers are in the Handler.js file)
+			swfupload_preload_handler : preLoad,
+			swfupload_load_failed_handler : loadFailed,
+			file_dialog_start_handler : fileDialogStart,
+			file_queued_handler : fileQueued,
+			file_queue_error_handler : fileQueueError,
+			file_dialog_complete_handler : fileDialogComplete,
+			upload_start_handler : uploadStart,
+			upload_progress_handler : uploadProgress,
+			upload_error_handler : uploadError,
+			upload_success_handler : uploadSuccess,
+			upload_complete_handler : uploadComplete,
+
+			// Button Settings
+			button_image_url : "./static/img/glyphicons-halflings-white.png",
+			button_placeholder_id : "swfu-placeholder",
+			button_text: '请选择要上传的图片',
+			button_width: 120,
+			button_height: 22,
+			
+			// Flash Settings
+			flash_url : "${base}/plugins/kindeditor/swfupload/swfupload.swf",
+			flash9_url : "${base}/plugins/kindeditor/swfupload/swfupload_fp9.swf",
+		
+
+			custom_settings : {
+				progressTarget : "fsUploadProgress1",
+				cancelButtonId : "btnCancel1"
+			},
+			
+			// Debug Settings
+			debug: false
+		});
+     }	
+	</script>
 </head>
 
 <body style="background-color: #FFF" id="dlstCircleArticle">
@@ -695,20 +751,10 @@
 							</div>
 							<div style="height: 10px">
 							</div>
-							<div class="cl" style="padding-left: 40px; float: left;">
-								<object id="SWFUpload_0" type="application/x-shockwave-flash" data="/js/swfupload.swf?preventswfcaching=1468807943565" width="89" height="33" class="swfupload">
-								<param name="wmode" value="transparent">
-								<param name="movie" value="/js/swfupload.swf?preventswfcaching=1468807943565">
-								<param name="quality" value="high">
-								<param name="allowScriptAccess" value="always">
-								<param name="flashvars" value="movieName=SWFUpload_0&amp;uploadURL=%2FUploadFile.aspx&amp;useQueryString=false&amp;requeueOnError=false&amp;httpSuccess=&amp;assumeSuccessTimeout=0&amp;params=ASPSESSID%3Dqqi3n0miuogvgyxnvqhgnam1&amp;filePostName=Filedata&amp;fileTypes=*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileTypesDescription=%E5%85%81%E8%AE%B8%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileSizeLimit=5%20MB&amp;fileUploadLimit=0&amp;fileQueueLimit=0&amp;debugEnabled=false&amp;buttonImageURL=%2Fskins%2Fdefault%2Fself%2Fimages%2Fszzt1.jpg&amp;buttonWidth=89&amp;buttonHeight=33&amp;buttonText=&amp;buttonTextTopPadding=0&amp;buttonTextLeftPadding=0&amp;buttonTextStyle=&amp;buttonAction=-110&amp;buttonDisabled=false&amp;buttonCursor=-1">
-								</object>
-								<input   id="patentFile" name="patentFile" type="file" />
-							</div>
-							<div style="left: 280px; margin-top: 0; float: left;" onclick="openwin('http://www.autodesk.com.cn/free-trials');" class="upimg1">
-								下载CAD绘图</div>
-							<div style="left: 280px; margin-top: 0; float: left;" onclick="openwin('http://download.pchome.net/industry/geography/detail-17098.html');" class="upimg1">
-								下载化学编辑器</div>
+							    <div class="cl" style="padding-left: 40px; float: left;">
+								       <div class="upimg1" id="swfu-placeholder"><!-- 上传flash插件 --></div>
+    							</div>
+							
 							
 							<div class="img_edit" id="origin">
 								<div class="imgfl" id="picBianHao">
@@ -758,7 +804,6 @@
 							<div style="height: 80px">
 							</div>
 						   <div style="float:left; margin-left:50px;">
-								<object id="SWFUpload_1" type="application/x-shockwave-flash" data="/js/swfupload.swf?preventswfcaching=1468807943567" width="125" height="40" class="swfupload"><param name="wmode" value="transparent"><param name="movie" value="/js/swfupload.swf?preventswfcaching=1468807943567"><param name="quality" value="high"><param name="allowScriptAccess" value="always"><param name="flashvars" value="movieName=SWFUpload_1&amp;uploadURL=%2FUploadFile.aspx&amp;useQueryString=false&amp;requeueOnError=false&amp;httpSuccess=&amp;assumeSuccessTimeout=0&amp;params=ASPSESSID%3Dqqi3n0miuogvgyxnvqhgnam1&amp;filePostName=Filedata&amp;fileTypes=*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileTypesDescription=%E5%85%81%E8%AE%B8%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileSizeLimit=5%20MB&amp;fileUploadLimit=0&amp;fileQueueLimit=0&amp;debugEnabled=false&amp;buttonImageURL=%2Fskins%2Fdefault%2Fself%2Fimages%2Fbzyft.jpg&amp;buttonWidth=125&amp;buttonHeight=40&amp;buttonText=&amp;buttonTextTopPadding=0&amp;buttonTextLeftPadding=0&amp;buttonTextStyle=%20&amp;buttonAction=-110&amp;buttonDisabled=false&amp;buttonCursor=-1"></object></div>
 								<div class="upimg1" onclick="chooseFromList();" id="choseAbs" style="
 									left: 280px; margin-top: 0;float:left;">
 									从附图中选择</div>
