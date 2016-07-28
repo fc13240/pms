@@ -12,4 +12,5 @@ public interface PatentDocService {
 	PatentDoc getUserPatentDocById(long patentDocsId);
 	
 	void updatePatentDoc(PatentDoc patentDoc);
+
 }

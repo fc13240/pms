@@ -47,11 +47,11 @@
 								<a target="_blank" href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
 								 编辑
 								  </a>
-								  <a target="_blank" href="<s:url value=''/>">
+								  <a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
 								 预览
 								  </a>
 								  
-								<a target="_blank" href="<s:url value=''/>">
+								<a href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
 								 删除
 								  </a>
 								  <a target="_blank" href="<s:url value=''/>">
