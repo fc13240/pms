@@ -53,16 +53,16 @@ import com.lotut.pms.web.util.WebUtils;
 @RequestMapping(path="/kindeditor")
 public class UploadController {
 
-	@RequestMapping(path = "/attachment_upload",method=RequestMethod.POST)
+	@RequestMapping(path = "/attachment_upload")
 	@ResponseBody
 	public void fileUpload(HttpServletRequest request,  @RequestParam("patentFile")Part imgFile,
 			HttpServletResponse response) throws ServletException, IOException, FileUploadException {
 		String savePath = Settings.PATENTDOC_ATTACHMENT_PATH;
 		
-/*		String uploadSign = request.getParameter("upload");  
+		String uploadSign = request.getParameter("upload");  
 		 String rootPath = request.getParameter("rootPath");  
 		 String path1 = request.getParameter("path"); 
-		 System.out.println(uploadSign+rootPath+path1);*/
+		 System.out.println(uploadSign+rootPath+path1);
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 		+ path;

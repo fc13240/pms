@@ -85,6 +85,7 @@
                 upload_target: "divFileProgressContainer"
             },
             // Debug Settings
+            use_query_string : true,
             debug: false
         });
         swfuab = new SWFUpload({
