@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="lt-left">
-	<div class="lt-left-title">我的专利</div>
+	<div class="lt-left-title">专利撰写</div>
 	
 	<ul style="maring:0px;padding:0px;">
 	<li  class=""> <a href="<s:url value='/patent/list.html?currentPage=1'/>">
