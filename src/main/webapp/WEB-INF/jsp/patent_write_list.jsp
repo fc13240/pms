@@ -120,6 +120,9 @@ table td a {
 
 	<body>
 	<%@ include file="_top.jsp" %>
+	<div class="col-xs-1 sidebar" style="min-width:100px;">
+			<%@ include file="_left_nav4.jsp" %>
+		  </div>
 	<div id="replaceHere" style="">
 <div class="main2">
     <div class="tit_top">
