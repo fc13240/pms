@@ -1,6 +1,9 @@
 package com.lotut.pms.web.patentWriteController;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.lotut.pms.constants.patentDocSectionTyeps;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
@@ -49,10 +53,10 @@ public class PatentWriterController1 {
 	}
 	
 	@RequestMapping(path="/templateList")
-	public String templateList(Model model){
+	public String templateList(Model model,Integer patentDocSectionId,HttpSession session){
 		//发明名称
 		int userId = PrincipalUtils.getCurrentUserId();
-		List<PatentDocumentTemplate> inventNameTemplates = patentDocumentTemplateService.getPatentDocTemplateListByUserId(userId,patentDocSectionTyeps.SectionTyepMap.get("inventName"));
+		/*List<PatentDocumentTemplate> inventNameTemplates = patentDocumentTemplateService.getPatentDocTemplateListByUserId(userId,patentDocSectionTyeps.SectionTyepMap.get("inventName"));
 		//技术领域
 		List<PatentDocumentTemplate> techDomainTemplates = patentDocumentTemplateService.getPatentDocTemplateListByUserId(userId,patentDocSectionTyeps.SectionTyepMap.get("techDomain"));
 		//背景技术
@@ -80,8 +84,46 @@ public class PatentWriterController1 {
 		model.addAttribute("contentEffectTemplates", contentEffectTemplates);
 		model.addAttribute("implementWayTemplates", implementWayTemplates);
 		model.addAttribute("rightClaimTemplates", rightClaimTemplates);
-		model.addAttribute("abstractTemplates", abstractTemplates);
+		model.addAttribute("abstractTemplates", abstractTemplates);*/
+		List<PatentDocumentTemplate> templateDocList  = patentDocumentTemplateService.getPatentDocTemplateListByUserId(userId,patentDocSectionId);
+		List<PatentDocSectionType> patentDocSectionTypes = patentDocumentTemplateService.getPatentDocSectionTypes();
+		model.addAttribute("templateDocList", templateDocList);
+		model.addAttribute("patentDocSectionTypes", patentDocSectionTypes);
+		model.addAttribute("sectionValue", patentDocSectionId);
 		return "patentDoc_template_list";
 	}
+	
+	/*@RequestMapping(path="/findTemplateDocByTemplateId",produces={"text/html;charset=UTF-8;","application/json;"},method=RequestMethod.POST)
+	@ResponseBody
+	public @ResponseBody String findTemplateDocByTemplateId(int templateId){
+		return ";;;;;;;";
+	}
+	
+	public  String findTemplateDocByTemplateId(int templateId){
+		PatentDocumentTemplate patentDocumentTemplate = patentDocumentTemplateService.findTemplateDocByTemplateId(templateId);
+		return patentDocumentTemplate.getContent();
+	}*/
+	
+	@RequestMapping(path="/findTemplateDocByTemplateId",method=RequestMethod.GET)
+	public String findTemplateDocByTemplateId(int templateId,Model model,int patentDocSectionId){
+		PatentDocumentTemplate patentDocumentTemplate = patentDocumentTemplateService.findTemplateDocByTemplateId(templateId);
+		model.addAttribute("patentDocumentTemplate", patentDocumentTemplate);
+		model.addAttribute("patentDocSectionId", patentDocSectionId);
+		return "patentDoc_template_update"; 
+	}
+	
+	@RequestMapping(path="/updateTemplateDoc",method=RequestMethod.POST)
+	public String updateTemplateDoc(@ModelAttribute("patentDocumentTemplate") PatentDocumentTemplate updatePatentDocumentTemplate, Model model){
+		patentDocumentTemplateService.updateTemplateDoc(updatePatentDocumentTemplate);
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<PatentDocumentTemplate> templateDocList  = patentDocumentTemplateService.getPatentDocTemplateListByUserId(userId,updatePatentDocumentTemplate.getPatentDocSectionType().getPatentDocSectionId());
+		List<PatentDocSectionType> patentDocSectionTypes = patentDocumentTemplateService.getPatentDocSectionTypes();
+		model.addAttribute("templateDocList", templateDocList);
+		model.addAttribute("patentDocSectionTypes", patentDocSectionTypes);
+		model.addAttribute("sectionValue", updatePatentDocumentTemplate.getPatentDocSectionType().getPatentDocSectionId());
+		return "patentDoc_template_list";
+	}
+	
+	
 }
 

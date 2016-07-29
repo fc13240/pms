@@ -16,6 +16,5 @@ public interface PatentDocService {
 	void deletePatentDoc(long patentDocsId);
 
 	
-	
-	
+
 }

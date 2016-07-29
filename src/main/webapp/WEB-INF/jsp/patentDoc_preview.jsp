@@ -1,0 +1,164 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib uri="spring" prefix="s"%>
+<%@ taglib uri="security" prefix="se"%>
+<%@ taglib uri="c" prefix="c"%>
+<%@ taglib uri="fmt" prefix="fmt"%>
+<!DOCTYPE html >
+<html>
+<head>
+<c:import url="common/header.jsp"></c:import>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<script src="<s:url value='/static/js/sweetalert.min.js'/>"></script>
+<link rel="stylesheet" type="text/css"
+	href="<s:url value='/static/css/sweetalert.css'/>">
+<%@ include file="_css.jsp"%>
+<%@ include file="_top.jsp"%>
+<title>预览页面</title>
+
+<style type="text/css">
+	.main {
+		clear: both;
+		background: #fff;
+		border: #e6e6e6 1px solid;
+		margin: 10px auto;
+		width: 900px;
+		border-radius: 8px;
+		box-shadow: 0 0 4px #e6e6e6;
+		padding: 0 0 30px 0;
+		overflow: auto;
+	}
+	
+	.tit_top {
+		clear: both;
+		margin: 0 40px;
+		width: 810px;
+		border-bottom: #f2f2f2 3px solid;
+		overflow: auto;
+	}
+	
+	.pre_title {
+		color: #333;
+		font-size: 18px;
+		padding: 30px 20px 15px 4px;
+		float: left;
+	}
+	
+	.pre_clo {
+		float: right;
+		background: url(/temp/images/easyicon_pen.png) no-repeat left;
+		color: rgb(120, 140, 156);
+		line-height: 20px;
+		cursor: pointer;
+		padding-left: 20px;
+		margin-top: 30px;
+		padding-right: 10px;
+	}
+	
+	.pre_text {
+		clear: both;
+		margin: 15px 40px;
+		width: 810px;
+		line-height: 28px;
+		text-indent: 2em;
+		text-align: left;
+		overflow: auto;
+		color: #666;
+		font-size: 14px;
+	}
+</style>
+</head>
+<body style="background-color: #FFF;" id="dlstCircleArticle">
+	<div style="height:150px;"></div>
+	<div id="mincontent" style="min-height: 577px;">
+
+		<div class="main">
+			<div class="tit_top">
+				<div class="pre_title">摘要</div>
+				<div class="pre_clo">
+					<a href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
+						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
+				</div>
+			</div>
+			<div class="pre_text" id="div_8">${patentDoc.abstractDescription }</div>
+			<div class="tit_top">
+				<div class="pre_title">摘要附图</div>
+				<div class="pre_clo">
+					<a href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
+						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
+				</div>
+			</div>
+			<div class="pre_text" id="div_9"></div>
+			<div class="tit_top">
+				<div class="pre_title">权利要求书</div>
+				<div class="pre_clo">
+					<a href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
+						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
+				</div>
+			</div>
+			<div class="pre_text" id="div_7">${patentDoc.rightClaim }</div>
+			<div class="tit_top">
+				<div class="pre_title">发明名称</div>
+				<div class="pre_clo">
+					<a href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
+						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
+				</div>
+			</div>
+			<div class="pre_text" id="div_1">${patentDoc.name }</div>
+			<div class="tit_top">
+				<div class="pre_title">技术领域</div>
+				<div class="pre_clo">
+					<a href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
+						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
+				</div>
+			</div>
+			<div class="pre_text" id="div_2">${patentDoc.techDomain }</div>
+			<div class="tit_top">
+				<div class="pre_title">背景技术</div>
+				<div class="pre_clo">
+					<a href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
+						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
+				</div>
+			</div>
+			<div class="pre_text" id="div_3">${patentDoc.techDomain }</div>
+			<div class="tit_top">
+				<div class="pre_title">发明内容</div>
+				<div class="pre_clo">
+					<a href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
+						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
+				</div>
+			</div>
+			<div class="pre_text" id="div_4">${patentDoc.contentRight }</div>
+			<div class="tit_top">
+				<div class="pre_title">附图说明</div>
+				<div class="pre_clo">
+					<a href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
+						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
+				</div>
+			</div>
+			<div id="div_6"></div>
+			<div class="tit_top">
+				<div class="pre_title">具体实施方式</div>
+				<div class="pre_clo">
+					<a href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
+						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
+				</div>
+			</div>
+			<div class="pre_text" id="div_5">${patentDoc.implementWay }</div>
+			<div class="tit_top">
+				<div class="pre_title">附图</div>
+				<div class="pre_clo">
+					<a href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
+						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
+				</div>
+			</div>
+			<div class="pre_text" id="div_6_img"></div>
+		</div>
+
+	</div>
+
+</body>
+</html>
