@@ -804,7 +804,7 @@
 									<input style="display:none;"  id="patentFile" name="patentFile" type="file" />
 									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
 									<button type="button" onclick="$('input[id=patentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
-									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="savePic()">上传</button>
+									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" id="btn" onclick="savePic()">上传</button>
 							<div style="height: 10px">
 							</div>
 							    <div class="cl" style="padding-left: 40px; float: left;">
@@ -1500,11 +1500,12 @@
 	});
 	</script>
 	<script type="text/javascript">
+
 	 function savePic() {
          $.ajaxFileUpload
          (
              {
-                 url: '<s:url value='/kindeditor/attachment_upload.html'/>', //用于文件上传的服务器端请求地址
+                 url: "<s:url value='/kindeditor/attachment_upload.html'/>", //用于文件上传的服务器端请求地址
                  secureuri: false, //是否需要安全协议，一般设置为false
                  fileElementId: 'patentFile', //文件上传域的ID
                  dataType: 'json', //返回值类型 一般设置为json

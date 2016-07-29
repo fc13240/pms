@@ -58,10 +58,6 @@ public class UploadController {
 			HttpServletResponse response,PrintWriter writer) throws ServletException, IOException, FileUploadException {
 		String savePath = Settings.PATENTDOC_ATTACHMENT_PATH;
 		
-		String uploadSign = request.getParameter("upload");  
-		 String rootPath = request.getParameter("rootPath");  
-		 String path1 = request.getParameter("path"); 
-		 System.out.println(uploadSign+rootPath+path1);
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 		+ path;
@@ -119,7 +115,10 @@ public class UploadController {
 /*		 Map<String, Object> succMap = new HashMap<String, Object>(); 
          succMap.put("url", saveUrl + newFileName+".html");  
          WebUtils.writeJsonStrToResponse(response, succMap);*/
-		writer.write(url);
+		String error="";
+		String msg="aa";
+		String res = "{ error:'" + error + "', msg:'" + msg + "',imgurl:'" + url + "'}";
+        writer.write(res);
 	}
 	
 	
