@@ -126,14 +126,9 @@ table td a {
         <div class="title2">
             撰写列表</div>
         <div class="uppic2" onclick="adduser();">
-            新建专利</div>
-            <div class="uppic2" onclick="adduser();">
-            新建专利</div>
-            <div class="uppic2" onclick="adduser();">
-            新建专利</div>
-            <div class="uppic2" onclick="adduser();">
-            发明</div>
-            
+        新建专利
+            </div>
+               
     </div>
     <div class="cl top1">
         
@@ -162,7 +157,7 @@ table td a {
                 <td width="47%" valign="middle" align="left">
                     <div class="title1">
                         
-                        <a onclick="editOne('3197');">
+                        <a target="_blank" href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
                             <c:out value="${patentDoc.name}"/></a></div>
                     
                 </td>
@@ -175,7 +170,7 @@ table td a {
                 <td width="27%" valign="middle" align="left">
                     <a target="_blank" href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
 								 编辑
-					</a><a href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">预览</a>
+					</a><a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">预览</a>
                     <a onclick=" exportLayerShow('3197');">导出</a>
                     <a href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">删除</a><a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>
                 </td>
@@ -197,6 +192,14 @@ table td a {
 </div>
 
 </div>
-	
+<script type="text/javascript">
+	function adduser(){
+		window.open("<s:url value='/editor/inventionWriterForm.html'/>");
+	}
+
+
+
+
+</script>	
 	</body>
 </html>

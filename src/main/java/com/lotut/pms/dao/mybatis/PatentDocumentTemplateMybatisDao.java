@@ -47,8 +47,14 @@ public class PatentDocumentTemplateMybatisDao extends SqlSessionDaoSupport imple
 
 	@Override
 	public void updateTemplateDoc(PatentDocumentTemplate patentDocumentTemplate) {
-		
 		patentDocumentTemplateMapper.updateTemplateDoc(patentDocumentTemplate);
+	}
+
+
+	@Override
+	public void deleteTemplateDoc(int templateId) {
+		
+		patentDocumentTemplateMapper.deleteTemplateDoc(templateId);
 	}
 
 }
