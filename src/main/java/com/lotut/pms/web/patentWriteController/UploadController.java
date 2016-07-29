@@ -136,6 +136,7 @@ public class UploadController {
 	   
 	   
 	   @RequestMapping(path = "/uploadPic",method=RequestMethod.POST)
+	   @ResponseBody
 		public void uploadPic(HttpServletRequest request1 ,
 				HttpServletResponse response) {
 			String uploadSign1 = request1.getParameter("upload");  
