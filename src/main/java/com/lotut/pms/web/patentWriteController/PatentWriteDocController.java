@@ -40,12 +40,20 @@ public class PatentWriteDocController {
 	
 
 	@RequestMapping(path="/inventionWriterForm")
-	public String editorForm(Model model){
+	public String inventionEditorForm(Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		model.addAttribute("patentDocs", patentDocs);
 		return "patentDoc_invention_editor";
 	}
+
+	@RequestMapping(path="/practicalWriterForm")
+	public String practicalEditorForm(Model model){
+		int userId=PrincipalUtils.getCurrentUserId();
+		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
+		model.addAttribute("patentDocs", patentDocs);
+		return "patentDoc_practical_editor";
+	}	
 	
 	@RequestMapping(path="/addPatentDoc",method=RequestMethod.POST)
 	public void  addEditorText(PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){

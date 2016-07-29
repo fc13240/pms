@@ -12,7 +12,7 @@
 <!--  	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  -->
-	<title>测试页面</title>
+	<title>发明撰写</title>
 	<!-- 编辑器控件 -->
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/default/default.css" />
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/simple/simple.css" />
