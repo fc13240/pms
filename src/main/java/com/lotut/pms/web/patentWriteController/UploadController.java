@@ -40,6 +40,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.lotut.pms.constants.Settings;
@@ -52,10 +55,14 @@ public class UploadController {
 
 	@RequestMapping(path = "/attachment_upload")
 	@ResponseBody
-	public void fileUpload(HttpServletRequest request, @RequestParam("imghead") Part imgFile,
+	public void fileUpload(HttpServletRequest request,  Part imgFile,
 			HttpServletResponse response) throws ServletException, IOException, FileUploadException {
 		String savePath = Settings.PATENTDOC_ATTACHMENT_PATH;
 		
+		String uploadSign = request.getParameter("upload");  
+		 String rootPath = request.getParameter("rootPath");  
+		 String path1 = request.getParameter("path"); 
+
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 		+ path;
@@ -126,4 +133,7 @@ public class UploadController {
 			e.printStackTrace();
 		}  
 	   } 
+	   
+	   
+	   
 }

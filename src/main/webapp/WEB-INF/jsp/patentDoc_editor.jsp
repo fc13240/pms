@@ -820,6 +820,12 @@
 								display: none; cursor: pointer">
 								返回附图列表
 							</div>
+<%-- 							<form id="patent" action="<s:url value=''/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+								<input style="display:none;"  id="patentFile" name="patentFile" type="file" />
+								<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择照片" readonly="readonly">
+								<button type="button" onclick="$('input[id=patentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+								<button style="margin-left:5px;" type="submit" class="t-btn2 button button-caution button-rounded">上传</button>
+							</form>  --%>
 							<div style="height: 10px">
 							</div>
 							    <div class="cl" style="padding-left: 40px; float: left;">
@@ -1495,6 +1501,24 @@
 					}
 				});
 			}
-	</script>	
+	</script>
+	<script type="text/javascript">
+	jQuery(function($) {
+		$("#patent").validate({
+			rules: {
+				filename: 'required'
+			},
+			messages: {
+				filename: '<span style="color:red;">请选择要上传的专利表格</span>'
+			},
+			submitHandler: function(form){ 
+				form.submit();     
+			}
+		});
+	});
+	$('input[id=patentFile]').change(function() {  
+		$('#filename').val($(this).val());  
+	});
+</script>	
 </body>
 </html>
