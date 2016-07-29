@@ -70,7 +70,7 @@ public class PatentWriteDocController {
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		model.addAttribute("patentDocs", patentDocs);
-		return "patent_write_list";
+		return "patentDoc_list";
 		
 	}
 	@RequestMapping(path="/deletePatentDoc",method=RequestMethod.GET)
