@@ -136,12 +136,10 @@ public class UploadController {
 	   
 	   
 	   @RequestMapping(path = "/uploadPic",method=RequestMethod.POST)
-	   @ResponseBody
-		public void uploadPic(HttpServletRequest request1 ,
-				HttpServletResponse response) {
-			String uploadSign1 = request1.getParameter("upload");  
-			 String rootPath1 = request1.getParameter("rootPath");  
-			 String path11= request1.getParameter("path"); 
+		public void uploadPic(HttpServletRequest request1 ,HttpServletResponse response1) {
+			String uploadSign1 = request1.getParameter("Filedata");  
+			 String rootPath1 = request1.getParameter("Filename");  
+			 String path11= request1.getParameter("Upload"); 
 			 System.out.println(uploadSign1+rootPath1+path11);
 		
 		}

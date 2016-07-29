@@ -36,7 +36,7 @@
     window.onload = function () {
         swfu = new SWFUpload({
             // Backend Settings
-            upload_url: "<s:url value='/kindeditor/attachment_upload.html'/>", //单文件上传
+            upload_url: "<s:url value='/kindeditor/uploadPic.html'/>", //单文件上传
            /*  post_params: {
                 "ASPSESSID": "s2m5cueveh4lly0yhtyvs4dn"
             }, */
@@ -65,15 +65,6 @@
             button_height: 33,
             button_text: '请选择要上传的图片',
             button_text_style: '',
-
-            /* 
-            button_image_url: "",
-            button_placeholder_id: "spanButtonPlaceholder",
-            button_width: 65,
-            button_height: 20,
-            button_text: "<a class='btn-txt'> &nbsp;上传头像</a>", //按钮文字
-            button_text_style: ".btn-txt{color: #0A81A7; font-size:12px;font-family:'微软雅黑';cursor:pointer;}",
-            */
             button_text_top_padding: 0,
             button_text_left_padding: 0,
             button_window_mode: "transparent",
