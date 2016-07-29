@@ -40,7 +40,7 @@
 				    		<span style="color:red;font-weight: bold;">专利类型:${patentDocumentTemplate.patentType.typeDescription }</span><br/>
 				    		<span style="font-weight: bold;">所属专利部分:</span>${patentDocumentTemplate.patentDocSectionType.patentDocSectionDesc }
 				    	</div>
-				        <form id="form" name="form" class="registerform" action="<s:url value='/editor1/updateTemplateDoc.html'/>" method="post">
+				        <form id="form" name="form" class="registerform" action="<s:url value='/editor/updateTemplateDoc.html'/>" method="post">
 				        	<div class="title" style="margin-left: 0px;">
 								<span>模板简述</span> <br/>
 								<span >

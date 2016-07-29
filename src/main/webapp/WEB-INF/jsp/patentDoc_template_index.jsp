@@ -69,24 +69,7 @@
 	                <!--center-top start -->
 	                <div class="center_top">
 	                    <div class="backedit">
-	                        <a href="<s:url value='/editor1/templateList.html?patentDocSectionId=1'/>" target="_blank">返回模板列表</a></div>
-	                    <div class="save" onclick="save_selfwrite();">
-	                        <i class="icon"></i>
-	                        <div class="span">保存</div>
-	                    </div>
-	                    <div class="export" onclick="export_selfwrite();" id="export_selfwrite">
-	                        <i class="icon"></i>导出文件
-	                    </div>
-	         
-	                    
-	                    <div class="top_right">
-	                        <div class="review" onclick="preview_selfwrite();">
-	                            <i class="icon"></i>预览
-	                        </div>
-	                        <div class="usehelp" onclick="helperv1('1');" style="margin-left: 20px">
-	                            <i class="icon"></i>使用帮助
-	                        </div>
-	                        
+	                        <a href="<s:url value='/editor/templateList.html?patentDocSectionId=1'/>" target="_blank">返回模板列表</a>
 	                    </div>
 	                </div>
 	                <div id="overflowcenter" style="overflow-y: auto; overflow-x: hidden;height:610px; width: 1060px;">
@@ -899,7 +882,7 @@
 				var content=editorValue.html();
 				$.ajax({
 					type : "POST",
-					url : "<s:url value='/editor1/addPatentTemplate.html'/>",
+					url : "<s:url value='/editor/addPatentTemplate.html'/>",
 					data : {"content":content,"templateTitle":templateTitle,"patentDocSectionType.patentDocSectionId":patentPatentDocSectionTypeId},
 					success : function(data){
 						alert(data);
