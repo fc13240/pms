@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,19 +16,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lotut.pms.domain.PatentDoc;
+import com.lotut.pms.domain.PatentDocSectionType;
+import com.lotut.pms.domain.PatentDocumentTemplate;
+import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.service.PatentDocService;
+import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.util.PrincipalUtils;
 
 @Controller
 @RequestMapping(path="/editor")
 public class PatentWriteDocController {
 	private PatentDocService patentDocService;
+	private PatentDocumentTemplateService patentDocumentTemplateService;
 	
 	@Autowired
-	public PatentWriteDocController(PatentDocService patentDocService) {
+	public PatentWriteDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService) {
 		this.patentDocService = patentDocService;
+		this.patentDocumentTemplateService = patentDocumentTemplateService;
 	}
 	
 
@@ -87,6 +95,63 @@ public class PatentWriteDocController {
 		PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocsId);
 		model.addAttribute("patentDoc", patentDoc);
 		return "patentDoc_preview";
+	}
+	
+	/*合并代码*/
+	
+	@RequestMapping(path="/patentDocTemplate")
+	public String patentDocTemplate(){
+		return "patentDoc_template_index";
+	}
+	
+	@RequestMapping(path="/addPatentTemplate",produces={"text/html;charset=UTF-8;","application/json;"},method=RequestMethod.POST)
+	public @ResponseBody String addBackTech(@ModelAttribute("patentDocumentTemplate") PatentDocumentTemplate patentDocumentTemplate){
+		int UserId = PrincipalUtils.getCurrentUserId();
+		patentDocumentTemplate.setCreatorId(UserId);
+		PatentType pt=new PatentType();
+		pt.setPatentTypeId(1);
+		patentDocumentTemplate.setPatentType(pt);
+		patentDocumentTemplateService.savePatentDocumentTemplate(patentDocumentTemplate);
+		return "添加模板成功！";
+	}
+	
+	@RequestMapping(path="/templateList")
+	public String templateList(Model model,Integer patentDocSectionId,HttpSession session){
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<PatentDocumentTemplate> templateDocList  = patentDocumentTemplateService.getPatentDocTemplateListByUserId(userId,patentDocSectionId);
+		List<PatentDocSectionType> patentDocSectionTypes = patentDocumentTemplateService.getPatentDocSectionTypes();
+		model.addAttribute("templateDocList", templateDocList);
+		model.addAttribute("patentDocSectionTypes", patentDocSectionTypes);
+		model.addAttribute("sectionValue", patentDocSectionId);
+		return "patentDoc_template_list";
+	}
+
+	@RequestMapping(path="/findTemplateDocByTemplateId",method=RequestMethod.GET)
+	public String findTemplateDocByTemplateId(int templateId,Model model,int patentDocSectionId){
+		PatentDocumentTemplate patentDocumentTemplate = patentDocumentTemplateService.findTemplateDocByTemplateId(templateId);
+		model.addAttribute("patentDocumentTemplate", patentDocumentTemplate);
+		model.addAttribute("patentDocSectionId", patentDocSectionId);
+		return "patentDoc_template_update"; 
+	}
+	
+	@RequestMapping(path="/updateTemplateDoc",method=RequestMethod.POST)
+	public String updateTemplateDoc(@ModelAttribute("patentDocumentTemplate") PatentDocumentTemplate updatePatentDocumentTemplate, Model model){
+		patentDocumentTemplateService.updateTemplateDoc(updatePatentDocumentTemplate);
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<PatentDocumentTemplate> templateDocList  = patentDocumentTemplateService.getPatentDocTemplateListByUserId(userId,updatePatentDocumentTemplate.getPatentDocSectionType().getPatentDocSectionId());
+		List<PatentDocSectionType> patentDocSectionTypes = patentDocumentTemplateService.getPatentDocSectionTypes();
+		model.addAttribute("templateDocList", templateDocList);
+		model.addAttribute("patentDocSectionTypes", patentDocSectionTypes);
+		model.addAttribute("sectionValue", updatePatentDocumentTemplate.getPatentDocSectionType().getPatentDocSectionId());
+		return "patentDoc_template_list";
+	}
+	
+	
+	@RequestMapping(path="/deletTemplateDocById",method=RequestMethod.POST,produces={"text/html;charset=UTF-8;","application/json"})
+	@ResponseBody
+	public String deletTemplateDocById(@RequestParam("templateId") int templateId){
+		patentDocumentTemplateService.deleteTemplateDoc(templateId);
+		return "删除成功！";
 	}
 	
 	/**

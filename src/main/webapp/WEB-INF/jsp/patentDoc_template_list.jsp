@@ -62,7 +62,7 @@
 		   					<td style="text-align:center">${status.count }</td>
 		   					<td style="text-align:center">${templateDoc.templateTitle }</td>
 		   					<td style="text-align:center">${templateDoc.patentType.typeDescription }</td>
-		   					<td style="text-align:center"><a href="javascript:preViem()">点我预览</a></td>
+		   					<td style="text-align:center"><a href="javascript:preViem(${status.index })">点我预览</a></td>
 		   					<td style="text-align:center"> <fmt:formatDate value="${templateDoc.createTime }" pattern="yyyy-MM-dd hh:mm:ss"/> </td>
 		   					<td style="text-align:center"> <fmt:formatDate value="${templateDoc.lastUpdateTime }" pattern="yyyy-MM-dd hh:mm:ss"/> </td>
 		   					<td style="text-align:center">
@@ -71,23 +71,10 @@
 		   						<button type="button" class="btn btn-danger" onclick="deletTemplateDoc(${templateDoc.templateId})">删除</button>
 		   						</div>
 		   					</td>
-		   					<td style="display: none;">
-		   						<div class="content" id="content0">
-									<div class="cl">
-									
-										<div id="editor0" thistempid="1">
-											<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
-											<input type="hidden" value="" id="divtitletips">
-											<div class="textarea" name="tooltip">
-												    <div class="wraper">
-								                    	<textarea rows="3" cols="10" id="editorContent" name="content" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
-								                    		${templateDoc.content }
-								                    	</textarea>
-												   </div>
-											</div>
-										</div>
-									</div>
-								</div>
+		   					<td style="display : none;">
+		   						<div id="hiddenEditor${status.index}">
+		   							${templateDoc.content }
+		   						</div>
 							</td>
 		   				</tr>
 		   			
@@ -199,10 +186,10 @@
 </div>
 <script>
    function chooseSection(patentDocSectionId){
-	   location.href="<s:url value='/editor1/templateList.html'/>?patentDocSectionId="+patentDocSectionId;
+	   location.href="<s:url value='/editor/templateList.html'/>?patentDocSectionId="+patentDocSectionId;
    }
    function findTemplateDocData(templateId){
-	   location.href="<s:url value='/editor1/findTemplateDocByTemplateId.html'/>?templateId="+templateId+"&patentDocSectionId=${sectionValue}";
+	   location.href="<s:url value='/editor/findTemplateDocByTemplateId.html'/>?templateId="+templateId+"&patentDocSectionId=${sectionValue}";
 	   /* $.ajax({
 		   type :"POST",
 		   url : "<s:url value='/editor1/findTemplateDocByTemplateId.html'/>",
@@ -215,15 +202,16 @@
 	   }) */
    }
    
-   function preViem(){
-	   $("#modalDiv").html($("#editorContent").val());
+   function preViem(index){
+	   var content = $("#hiddenEditor"+index+"").html();
+	   $("#modalDiv").html(content);
 	   $("#hiddenButton").trigger("click");
    }
    
    function deletTemplateDoc(templateId){
 	   $.ajax({
 		   type : "POST",
-		   url : "<s:url value='/editor1/deletTemplateDocById.html'/>",
+		   url : "<s:url value='/editor/deletTemplateDocById.html'/>",
 		   data : {"templateId":templateId},
 		   success : function (data){
 			   alert(data);
