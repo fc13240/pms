@@ -36,7 +36,7 @@
     window.onload = function () {
         swfu = new SWFUpload({
             // Backend Settings
-            upload_url: "<s:url value='/kindeditor/attachment_upload.html'/>", //单文件上传
+            upload_url: "<s:url value='/kindeditor/uploadPic.html'/>", //单文件上传
            /*  post_params: {
                 "ASPSESSID": "s2m5cueveh4lly0yhtyvs4dn"
             }, */
