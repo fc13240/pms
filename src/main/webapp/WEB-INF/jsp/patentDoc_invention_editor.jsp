@@ -36,7 +36,7 @@
     window.onload = function () {
         swfu = new SWFUpload({
             // Backend Settings
-            upload_url: "<s:url value='/kindeditor/attachment_upload.html'/>", //单文件上传
+            upload_url: "<s:url value='/kindeditor/uploadPic.html'/>", //单文件上传
            /*  post_params: {
                 "ASPSESSID": "s2m5cueveh4lly0yhtyvs4dn"
             }, */
@@ -65,15 +65,6 @@
             button_height: 33,
             button_text: '请选择要上传的图片',
             button_text_style: '',
-
-            /* 
-            button_image_url: "",
-            button_placeholder_id: "spanButtonPlaceholder",
-            button_width: 65,
-            button_height: 20,
-            button_text: "<a class='btn-txt'> &nbsp;上传头像</a>", //按钮文字
-            button_text_style: ".btn-txt{color: #0A81A7; font-size:12px;font-family:'微软雅黑';cursor:pointer;}",
-            */
             button_text_top_padding: 0,
             button_text_left_padding: 0,
             button_window_mode: "transparent",
@@ -85,6 +76,7 @@
                 upload_target: "divFileProgressContainer"
             },
             // Debug Settings
+            use_query_string : true,
             debug: false
         });
         swfuab = new SWFUpload({
@@ -820,6 +812,12 @@
 								display: none; cursor: pointer">
 								返回附图列表
 							</div>
+							<form id="patent" action="<s:url value='/kindeditor/attachment_upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+									<input style="display:none;"  id="patentFile" name="patentFile" type="file" />
+									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
+									<button type="button" onclick="$('input[id=patentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+									<button style="margin-left:5px;" type="submit" class="t-btn2 button button-caution button-rounded">上传</button>
+							</form>
 							<div style="height: 10px">
 							</div>
 							    <div class="cl" style="padding-left: 40px; float: left;">
@@ -1495,6 +1493,24 @@
 					}
 				});
 			}
-	</script>	
+	</script>
+	<script type="text/javascript">
+	jQuery(function($) {
+		$("#patent").validate({
+			rules: {
+				filename: 'required'
+			},
+			messages: {
+				filename: '<span style="color:red;">请选择要上传的图片</span>'
+			},
+			submitHandler: function(form){ 
+				form.submit();     
+			}
+		});
+	});
+	$('input[id=patentFile]').change(function() {  
+		$('#filename').val($(this).val());  
+	});
+	</script>
 </body>
 </html>

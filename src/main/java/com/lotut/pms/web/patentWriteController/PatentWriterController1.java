@@ -1,6 +1,5 @@
 package com.lotut.pms.web.patentWriteController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,17 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
-import com.lotut.pms.constants.patentDocSectionTyeps;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.util.PrincipalUtils;
-
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 
 @Controller
@@ -99,9 +95,9 @@ public class PatentWriterController1 {
 		return ";;;;;;;";
 	}
 	
-	public  String findTemplateDocByTemplateId(int templateId){
+	public PatentDocumentTemplate findTemplateDocByTemplateId(int templateId){
 		PatentDocumentTemplate patentDocumentTemplate = patentDocumentTemplateService.findTemplateDocByTemplateId(templateId);
-		return patentDocumentTemplate.getContent();
+		return patentDocumentTemplate;
 	}*/
 	
 	@RequestMapping(path="/findTemplateDocByTemplateId",method=RequestMethod.GET)
@@ -124,6 +120,13 @@ public class PatentWriterController1 {
 		return "patentDoc_template_list";
 	}
 	
+	
+	@RequestMapping(path="/deletTemplateDocById",method=RequestMethod.POST,produces={"text/html;charset=UTF-8;","application/json"})
+	@ResponseBody
+	public String deletTemplateDocById(@RequestParam("templateId") int templateId){
+		patentDocumentTemplateService.deleteTemplateDoc(templateId);
+		return "删除成功！";
+	}
 	
 }
 

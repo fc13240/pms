@@ -53,4 +53,8 @@
 	<update id="updateTemplateDoc" parameterType="PatentDocumentTemplate">
 		update patent_document_templates set template_title = #{templateTitle},content = #{content} where template_id = #{templateId};
 	</update>
+	
+	<delete id="deleteTemplateDoc">
+		delete from patent_document_templates where template_id = #{templateId};
+	</delete>
 </mapper>

@@ -17,4 +17,6 @@ public interface PatentDocumentTemplateService {
 	PatentDocumentTemplate findTemplateDocByTemplateId( int templateId);
 	
 	void updateTemplateDoc(PatentDocumentTemplate patentDocumentTemplate);
+	
+	void deleteTemplateDoc(int templateId);
 }
