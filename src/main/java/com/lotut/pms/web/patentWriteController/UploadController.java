@@ -54,9 +54,8 @@ import com.lotut.pms.web.util.WebUtils;
 public class UploadController {
 
 	@RequestMapping(path = "/attachment_upload")
-	@ResponseBody
 	public void fileUpload(HttpServletRequest request,  @RequestParam("patentFile")Part imgFile,
-			HttpServletResponse response) throws ServletException, IOException, FileUploadException {
+			HttpServletResponse response,PrintWriter writer) throws ServletException, IOException, FileUploadException {
 		String savePath = Settings.PATENTDOC_ATTACHMENT_PATH;
 		
 		String uploadSign = request.getParameter("upload");  
@@ -116,10 +115,11 @@ public class UploadController {
 			}
 			out.flush();
 		}
-		 Map<String, Object> succMap = new HashMap<String, Object>();  
-         succMap.put("error", 0);  
-         succMap.put("url", saveUrl + newFileName);  
-         WebUtils.writeJsonStrToResponse(response, succMap);
+		String url=saveUrl+newFileName+".html";
+/*		 Map<String, Object> succMap = new HashMap<String, Object>(); 
+         succMap.put("url", saveUrl + newFileName+".html");  
+         WebUtils.writeJsonStrToResponse(response, succMap);*/
+		writer.write(url);
 	}
 	
 	
@@ -135,9 +135,10 @@ public class UploadController {
 	   } 
 	   
 	   
-	   @RequestMapping(path = "/uploadPic",method=RequestMethod.POST)
+	   @RequestMapping(path = "/uploadPic")
 		public void uploadPic(HttpServletRequest request1 ,HttpServletResponse response1) {
-			String uploadSign1 = request1.getParameter("Filedata");  
+		   System.out.println("进入程序");
+			String uploadSign1 = request1.getParameter("name");  
 			 String rootPath1 = request1.getParameter("Filename");  
 			 String path11= request1.getParameter("Upload"); 
 			 System.out.println(uploadSign1+rootPath1+path11);

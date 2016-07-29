@@ -20,6 +20,7 @@
 	<link href="${base }/static/css/edit_instruct.css?v=2.3.20150415" type="text/css" rel="stylesheet" />
 	<script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
 	<c:import url="common/kindEditor.jsp"></c:import>
+	<script src="${base }/plugins/kindeditor/ajaxfileupload.js" type="text/javascript"></script>
 	<script src="${base }/plugins/kindeditor/layer.min.js" type="text/javascript"></script>
 	<script src="${base }/plugins/kindeditor/js-selfwrite.js" type="text/javascript"></script>
 	<script src="${base }/plugins/kindeditor/selfwritefigure.js" type="text/javascript"></script>   <!--uploadImg-->
@@ -37,9 +38,9 @@
         swfu = new SWFUpload({
             // Backend Settings
             upload_url: "<s:url value='/kindeditor/uploadPic.html'/>", //单文件上传
-           /*  post_params: {
-                "ASPSESSID": "s2m5cueveh4lly0yhtyvs4dn"
-            }, */
+              post_params: {
+                "name": "1"
+            },  
 
             // File Upload Settings
             file_size_limit: "5 MB",
@@ -811,13 +812,11 @@
 							<div id="piclist" class="title1" onclick="piclistShow();" style="padding-left: 40px; color:#444; font-size:14px; font-weight:bold;
 								display: none; cursor: pointer">
 								返回附图列表
-							</div>
-							<form id="patent" action="<s:url value='/kindeditor/attachment_upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+							</div> 
 									<input style="display:none;"  id="patentFile" name="patentFile" type="file" />
 									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
 									<button type="button" onclick="$('input[id=patentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
-									<button style="margin-left:5px;" type="submit" class="t-btn2 button button-caution button-rounded">上传</button>
-							</form>
+									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="savePic()">上传</button>
 							<div style="height: 10px">
 							</div>
 							    <div class="cl" style="padding-left: 40px; float: left;">
@@ -1511,6 +1510,27 @@
 	$('input[id=patentFile]').change(function() {  
 		$('#filename').val($(this).val());  
 	});
+	</script>
+	<script type="text/javascript">
+	 function savePic() {
+         $.ajaxFileUpload
+         (
+             {
+                 url: '<s:url value='/kindeditor/attachment_upload.html'/>', //用于文件上传的服务器端请求地址
+                 secureuri: false, //是否需要安全协议，一般设置为false
+                 fileElementId: 'patentFile', //文件上传域的ID
+                 dataType: 'json', //返回值类型 一般设置为json
+                 success: function (data){  
+                    alert(data);
+                 },
+                 error: function ()
+                 {
+                     alert(e);
+                 }
+             }
+         )
+         return false;
+	 }
 	</script>
 </body>
 </html>
