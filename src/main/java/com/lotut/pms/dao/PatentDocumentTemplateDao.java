@@ -17,4 +17,6 @@ public interface PatentDocumentTemplateDao {
 	PatentDocumentTemplate findTemplateDocByTemplateId( int templateId);
 	
 	void updateTemplateDoc(PatentDocumentTemplate patentDocumentTemplate);
+	
+	void deleteTemplateDoc(int templateId);
 }

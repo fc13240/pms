@@ -2,6 +2,8 @@ package com.lotut.pms.service.impl;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.lotut.pms.dao.PatentDocumentTemplateDao;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
@@ -15,6 +17,7 @@ public class PatentDocumentTemplateServiceImp implements PatentDocumentTemplateS
 	}
 
 	@Override
+	@Transactional
 	public void savePatentDocumentTemplate(PatentDocumentTemplate patentDocumentTemplate) {
 		patentDocumentTemplateDao.savePatentDocumentTemplate(patentDocumentTemplate);
 	}
@@ -35,8 +38,15 @@ public class PatentDocumentTemplateServiceImp implements PatentDocumentTemplateS
 	}
 
 	@Override
+	@Transactional
 	public void updateTemplateDoc(PatentDocumentTemplate patentDocumentTemplate) {
 		patentDocumentTemplateDao.updateTemplateDoc(patentDocumentTemplate);
+	}
+
+	@Override
+	@Transactional
+	public void deleteTemplateDoc(int templateId) {
+		patentDocumentTemplateDao.deleteTemplateDoc(templateId);
 	}
 	
 }

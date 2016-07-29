@@ -68,7 +68,7 @@
 		   					<td style="text-align:center">
 		   						<div>
 		   						<button type="button" class="btn btn-default" onclick="findTemplateDocData(${templateDoc.templateId })">修改</button>
-		   						<button type="button" class="btn btn-danger">删除</button>
+		   						<button type="button" class="btn btn-danger" onclick="deletTemplateDoc(${templateDoc.templateId})">删除</button>
 		   						</div>
 		   					</td>
 		   					<td style="display: none;">
@@ -186,7 +186,7 @@
             </button>
             
             <h4 class = "modal-title" id = "myModalLabel">
-               	修改模板
+               	预览模板
             </h4>
          </div>
 
@@ -199,11 +199,7 @@
 </div>
 <script>
    function chooseSection(patentDocSectionId){
-	   alert(patentDocSectionId);
 	   location.href="<s:url value='/editor1/templateList.html'/>?patentDocSectionId="+patentDocSectionId;
-   }
-   function preViem(){
-	   alert(content);
    }
    function findTemplateDocData(templateId){
 	   location.href="<s:url value='/editor1/findTemplateDocByTemplateId.html'/>?templateId="+templateId+"&patentDocSectionId=${sectionValue}";
@@ -222,7 +218,21 @@
    function preViem(){
 	   $("#modalDiv").html($("#editorContent").val());
 	   $("#hiddenButton").trigger("click");
-	   
+   }
+   
+   function deletTemplateDoc(templateId){
+	   $.ajax({
+		   type : "POST",
+		   url : "<s:url value='/editor1/deletTemplateDocById.html'/>",
+		   data : {"templateId":templateId},
+		   success : function (data){
+			   alert(data);
+			   location.reload();
+		   },
+		   error : function(){
+			   alert("未知错误!请稍后重试.");
+		   }
+	   })
    }
 </script>
 </body>
