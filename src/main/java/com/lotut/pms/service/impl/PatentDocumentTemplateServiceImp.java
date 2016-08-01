@@ -48,5 +48,10 @@ public class PatentDocumentTemplateServiceImp implements PatentDocumentTemplateS
 	public void deleteTemplateDoc(int templateId) {
 		patentDocumentTemplateDao.deleteTemplateDoc(templateId);
 	}
+
+	@Override
+	public List<PatentDocumentTemplate> getTemplateList(int sectionId) {
+		return patentDocumentTemplateDao.getTemplateList(sectionId);
+	}
 	
 }

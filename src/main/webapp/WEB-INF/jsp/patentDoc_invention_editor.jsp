@@ -20,7 +20,7 @@
 	<link href="${base }/static/css/edit_instruct.css?v=2.3.20150415" type="text/css" rel="stylesheet" />
 	<script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
 	<c:import url="common/kindEditor.jsp"></c:import>
-	<script src="${base }/plugins/kindeditor/ajaxfileupload.js" type="text/javascript"></script>
+	<%-- <script src="${base }/plugins/kindeditor/ajaxfileupload.js" type="text/javascript"></script> --%>
 	<script src="${base }/plugins/kindeditor/layer.min.js" type="text/javascript"></script>
 	<script src="${base }/plugins/kindeditor/js-selfwrite.js" type="text/javascript"></script>
 	<script src="${base }/plugins/kindeditor/selfwritefigure.js" type="text/javascript"></script>   <!--uploadImg-->
@@ -382,13 +382,13 @@
 	                    
 						<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
 						<div class="content" id="content0">
-							<div class="title">
+							<div class="title" onclick="loadingTemplate(1)">
 								发明名称
 							</div>
 							<div class="cl">
 								<div id="editor0" thistempid="1">
 									<div class="instru">
-										<div class="title2">
+										<div class="title2" onclick="loadingTemplate(1)" >
 											注意套用模板时专利名称不得超过25个字，化学领域的某些申请允许最多到40个字，这个规定可要注意哦。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。</div>
 									</div>
 									<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
@@ -398,8 +398,10 @@
 										        <form id="form" name="form" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    <td style="width:520px;" onclick="loadingTemplate(1)" >
+										                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
+										                    	
+										                    	</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -433,7 +435,7 @@
 										        <form id="form1" name="form1" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;">
+										                    <td style="width:520px;"  onclick="loadingTemplate(2)" >
 										                    	<textarea rows="3" cols="10" id="editorContent1" name="techDomain" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
@@ -469,7 +471,7 @@
 										        <form id="form2" name="form2" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;">
+										                    <td style="width:520px;" onclick="loadingTemplate(3)" >
 										                    	<textarea rows="3" cols="10" id="editorContent2" name="backgoundTech" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
@@ -502,7 +504,7 @@
 										        <form id="form3" name="form3" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;">
+										                    <td style="width:520px;" onclick="loadingTemplate(4)" >
 										                    	<textarea rows="3" cols="10" id="editorContent3" name="contentProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
@@ -528,7 +530,7 @@
 										        <form id="form4" name="form4" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;">
+										                    <td style="width:520px;" onclick="loadingTemplate(5)" >
 										                    	<textarea rows="3" cols="10" id="editorContent4" name="contentRight" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
@@ -555,7 +557,7 @@
 										        <form id="form5" name="form5" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;">
+										                    <td style="width:520px;" onclick="loadingTemplate(6)" >
 										                    	<textarea rows="3" cols="10" id="editorContent5" name="contentEffect" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
@@ -589,7 +591,7 @@
 										        <form id="form6" name="form6" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;">
+										                    <td style="width:520px;" onclick="loadingTemplate(7)" >
 										                    	<textarea rows="3" cols="10" id="editorContent6" name="implementWay" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
@@ -628,7 +630,7 @@
 										        <form id="form7" name="form7" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;">
+										                    <td style="width:520px;" onclick="loadingTemplate(9)" >
 										                    	<textarea rows="3" cols="10" id="editorContent7" name="abstractDescription" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
@@ -678,7 +680,7 @@
 										        <form id="form8" name="form8" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;">
+										                    <td style="width:520px;" onclick="loadingTemplate(8)" >
 										                    	<textarea rows="3" cols="10" id="editorContent8" name="rightClaim" class="editorContent"style="width:520px;height:200px;visibility:hidden;" ></textarea>
 										                    </td>
 										            	</tr>
@@ -805,7 +807,7 @@
 									<input style="display:none;"  id="patentFile" name="patentFile" type="file" />
 									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
 									<button type="button" onclick="$('input[id=patentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
-									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" id="btn" onclick="savePic()">上传</button>
+									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" id="btn" >上传</button>
 								</form>
 							<div style="height: 10px">
 							</div>
@@ -912,34 +914,8 @@
 	
 	        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><a style="color:#ccc" href="javascript:void(0);">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:showKindsDragModel(1,2,2);">下一页</a></div>
 	        <div class="model" style="overflow-x: hidden; overflow-y: auto;">
-	            <div id="modelWrap" style="display: block;">
-					<div class="model1 model_list0" id="100070010000" style="overflow-x: hidden; overflow-y: hidden;">
-						<div class="title">模板 1：适用于发明；产品；机械结构；碳石墨环；轴密封；螺纹；凹槽；筛网环</div>
-						<div class="content">
-							<p class="small">
-								<span>背景技术：</span>
-								（本发明提出的技术背景）[航空发动机中为了提高性能，使用接触式碳石墨环密封的部位越来越多。对于航空发动机来说，
-							</p>
-							<p class="big" style="display:none">
-								<span>背景技术：</span>
-								（本发明提出的技术背景）[航空发动机中为了提高性能，使用接果更好的碳石墨环轴密封结构已成为影响发动机性能的一个主要因素]。<br>（描述最接近的现有技术）
-							</p>
-							<div class="button" style="z-index:500000;" onclick="modelbuttonclick(0)">+使用模板</div>
-						</div>
-					</div>
-					<div class="model1 model_list1" id="100070020000" style="overflow-x: hidden; overflow-y: hidden;">
-						<div class="title">模板 2：适用于发明；中药组合物；产品；药物制剂；中药</div>
-						<div class="content">
-							<p class="small"><span>背景技术：</span>
-								（描述治疗适应症的技术背景）[支气管哮喘是一种常见多发性、严重危害人体健康的慢性呼吸道疾病。据文献报道，哮喘的
-							</p>
-							<p class="big" style="display:none"><span>背景技术：</span>
-							（描述治疗适应症的技术背景）[支气管哮喘是一种常达40亿美</p>
-							<div class="button" style="z-index:500000;" onclick="modelbuttonclick(1)">+设为模板</div>
-						</div>
-					</div>
-				</div>
-	           
+	            <div id="modelWrap" style="display: block;"></div>
+				<div id="hiddenmodel" style="display: none;"></div>
 	        </div>
 	        
 	        <div style="float: right; padding-right: 15px; padding-top: 5px; display: block;" id="kbpage2"><a style="color:#ccc" href="javascript:void(0);">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:showKindsDragModel(1,2,2);">下一页</a></div>
@@ -1484,25 +1460,26 @@
 			}
 	</script>
 	<script type="text/javascript">
-	jQuery(function($) {
-		$("#patent").validate({
-			rules: {
-				filename: 'required'
-			},
-			messages: {
-				filename: '<span style="color:red;">请选择要上传的图片</span>'
-			},
-			submitHandler: function(form){ 
-				form.submit();     
-			}
-		});
-	});
 	$('input[id=patentFile]').change(function() {  
 		$('#filename').val($(this).val());  
 	});
-	</script>
-	<script type="text/javascript">
-	 function savePic() {
+	
+	$(function () {
+		 var ajaxFormOption = {
+				 type: 'POST',
+					dataType: 'json',
+					url:"<s:url value='/kindeditor/uploadPic.html'/>",
+					data: $('#picFrom').formSerialize(),
+					success:function(data){
+						alert(data);
+					}
+		 };
+		 $("#btn").click(function () {
+			                  $("#picFrom").submit(ajaxFormOption);
+			                 return false;
+			              });
+	});
+/* 	 function savePic() {
 				$('#picFrom').ajaxSubmit({
 					type: 'POST',
 					dataType: 'json',
@@ -1512,6 +1489,38 @@
 						alert(data);
 					}
 				});
+	 }*/
+	 function loadingTemplate(sectionId){
+		 $.ajax({
+			 type : "POST",
+			 url : "<s:url value='/editor1/getTemplateList.html'/>?sectionId="+sectionId,
+			 success : function (data){
+				 var obj= $.parseJSON(data);
+				 $("#modelWrap").empty();
+				 $("#hiddenmodel").empty();
+				 $.each(obj,function(i,item){
+					 $("#modelWrap").append("<div class='model1 model_list"+i+"' style='overflow-x: hidden; overflow-y: hidden;height:158px;'>"+
+						 "<div class='title'>模板"+(i+1)+":"+item.templateTitle+"</div>"+
+						 	 "<div class='content'>"+
+				 				"<p class='small'>"+
+									"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
+								"</p>"+
+							"</p>"+
+						    "<div class='button' style='z-index:500000;' onclick='templatebuttonclick("+i+")'>+使用模板</div>"+
+						  "</div>"+
+					   "</div>");
+					 $("#modelWrap span").css("color","black");
+				 	 $("#hiddenmodel").append("<p id='templateContent"+i+"'>"+item.content+"</p>");
+				 });
+			 },error : function (){
+				 
+			 }
+		 })
+	 }
+	 
+	 function templatebuttonclick(i){
+		 editor.html($("#templateContent"+i).html());
+		 //alert($("#templateContent"+i).html());
 	 }
 	</script>
 
