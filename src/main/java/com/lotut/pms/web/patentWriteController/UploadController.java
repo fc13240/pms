@@ -135,8 +135,7 @@ public class UploadController {
 	   
 	   
 	   @RequestMapping(path = "/uploadPic",method=RequestMethod.POST)
-	   @ResponseBody
-		public void uploadPic(HttpServletRequest request1 ,HttpServletResponse response1) {
+		public void uploadPic(HttpServletRequest request1 ,HttpServletResponse response1) throws IOException {
 		   
 		   String savePath = Settings.PATENTDOC_ATTACHMENT_PATH;
 			
@@ -196,5 +195,6 @@ public class UploadController {
 		   
 		    
 	   
+	   }
 	   }
 }
