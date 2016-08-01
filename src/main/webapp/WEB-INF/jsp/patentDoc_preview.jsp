@@ -76,7 +76,7 @@
 	<div class="col-xs-1 sidebar" style="min-width:100px;">
 		<%@ include file="_left_nav_editor.jsp" %>
 	</div>
-	<div id="mincontent" style="min-height: 577px;">
+	<div id="mincontent" style="min-height: 577px;margin:-35px;">
 
 		<div class="main">
 			<div class="tit_top">
