@@ -1,7 +1,9 @@
 package com.lotut.pms.web.patentWriteController;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import com.lotut.pms.domain.PatentDocumentTemplate;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.WebUtils;
 
 
 @Controller
@@ -126,6 +129,12 @@ public class PatentWriterController1 {
 	public String deletTemplateDocById(@RequestParam("templateId") int templateId){
 		patentDocumentTemplateService.deleteTemplateDoc(templateId);
 		return "删除成功！";
+	}
+	
+	@RequestMapping(path="/getTemplateList")
+	public void getTemplateList(@RequestParam("sectionId")int sectionId,HttpServletResponse response) throws IOException{
+		List<PatentDocumentTemplate> DocTemplates = patentDocumentTemplateService.getTemplateList(sectionId);
+		WebUtils.writeJsonStrToResponse(response, DocTemplates);
 	}
 	
 }

@@ -57,4 +57,10 @@ public class PatentDocumentTemplateMybatisDao extends SqlSessionDaoSupport imple
 		patentDocumentTemplateMapper.deleteTemplateDoc(templateId);
 	}
 
+
+	@Override
+	public List<PatentDocumentTemplate> getTemplateList(int sectionId) {
+		return patentDocumentTemplateMapper.getTemplateList(sectionId);
+	}
+
 }

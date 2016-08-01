@@ -19,4 +19,6 @@ public interface PatentDocumentTemplateMapper {
 	void updateTemplateDoc(PatentDocumentTemplate patentDocumentTemplate);
 	
 	void deleteTemplateDoc(@Param("templateId") int templateId);
+	
+	List<PatentDocumentTemplate> getTemplateList(@Param("sectionId") int sectionId);
 }
