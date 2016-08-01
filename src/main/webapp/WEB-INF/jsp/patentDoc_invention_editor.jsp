@@ -1481,6 +1481,7 @@
 			};
 			
 			function savePatentDoc(){
+				var patentType=${patentType};
 				var name=editor.text();
 				var techDomain=$("#editorContent1").val();
 				var backgoundTech=$("#editorContent2").val();
@@ -1493,7 +1494,7 @@
 				$.ajax({
 					type: "POST",
 					url: "<s:url value='/editor/addPatentDoc.html'/>", 
-					data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
+					data: {"name":name,"patentType":patentType,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
 							"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim},
 					success: function(data){
 						alert("操作成功");
