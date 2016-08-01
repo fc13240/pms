@@ -9,9 +9,9 @@
 <head>
 	<c:import url="common/header.jsp"></c:import>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
-	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  
+	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN"> 
 	<title>测试页面</title>
 	<!-- 编辑器控件 -->
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/default/default.css" />
@@ -20,197 +20,20 @@
 	<link href="${base }/static/css/edit_instruct.css?v=2.3.20150415" type="text/css" rel="stylesheet" />
 	<script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
 	<c:import url="common/kindEditor.jsp"></c:import>
-	<%-- <script src="${base }/plugins/kindeditor/ajaxfileupload.js" type="text/javascript"></script> --%>
-	<%-- <script src="${base }/plugins/kindeditor/layer.min.js" type="text/javascript"></script> --%>
-	 <script src="${base }/plugins/kindeditor/js-selfwrite.js" type="text/javascript"></script>
-	<script src="${base }/plugins/kindeditor/selfwritefigure.js" type="text/javascript"></script>   <!--uploadImg-->
-<<<<<<< HEAD
-	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg-->
-	<script src="${base }/plugins/kindeditor/swfupload/swfupload.js" type="text/javascript"></script>   <!--swfupload-->
-	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/swfupload.queue.js"></script>
-	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/fileprogress.js"></script>
-	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers.js"></script>
-	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers2.js"></script>
-	<script type="text/javascript">
-	//上传插件使用脚本
-    var swfu;   //上传插件使用脚本
-    var swfuab;
-    window.onload = function () {
-        swfu = new SWFUpload({
-            // Backend Settings
-            upload_url: "<s:url value='/kindeditor/uploadPic.html'/>", //单文件上传
-              post_params: {
-                "name": "1"
-            },  
-
-            // File Upload Settings
-            file_size_limit: "5 MB",
-            file_types: "*.jpg;*.png;*.bmp;*.gif",
-            file_types_description: "允许上传文件类型*.jpg;*.png;*.bmp;*.gif",
-            file_upload_limit: 0,    // Zero means unlimited 
-            // Event Handler Settings - these functions as defined in Handlers.js
-            //  The handlers are not part of SWFUpload but are part of my website and control how
-            //  my website reacts to the SWFUpload events.
-            swfupload_preload_handler: preLoad,
-            swfupload_load_failed_handler: loadFailed,
-            file_queue_error_handler: fileQueueError,
-            file_dialog_complete_handler: fileDialogComplete,
-            upload_progress_handler: uploadProgress,
-            upload_error_handler: uploadError,
-            upload_success_handler: uploadSuccess,
-            upload_complete_handler: uploadComplete,
-
-            // Button settings
-            button_image_url: "/skins/default/self/images/szzt1.jpg",
-            button_placeholder_id: "spanButtonPlaceholder",
-            button_width: 89,
-            button_height: 33,
-            button_text: '请选择要上传的图片',
-            button_text_style: '',
-            button_text_top_padding: 0,
-            button_text_left_padding: 0,
-            button_window_mode: "transparent",
-            button_disabled: false,
-            // Flash Settings
-            flash_url: "${base}/plugins/kindeditor/swfupload/swfupload.swf", // Relative to this file
-            flash9_url: "${base}/plugins/kindeditor/swfupload/swfupload_fp9.swf", // Relative to this file 
-            custom_settings: {
-                upload_target: "divFileProgressContainer"
-            },
-            // Debug Settings
-            use_query_string : true,
-            debug: false
-        });
-        swfuab = new SWFUpload({
-            // Backend Settings
-            upload_url: "/UploadFile.aspx", //单文件上传
-/*             post_params: {
-                "ASPSESSID": "s2m5cueveh4lly0yhtyvs4dn"
-            }, */
-
-            // File Upload Settings
-            file_size_limit: "5 MB",
-            file_types: "*.jpg;*.png;*.bmp;*.gif",
-            file_types_description: "允许上传文件类型*.jpg;*.png;*.bmp;*.gif",
-            file_upload_limit: 0,    // Zero means unlimited 
-            // Event Handler Settings - these functions as defined in Handlers.js
-            //  The handlers are not part of SWFUpload but are part of my website and control how
-            //  my website reacts to the SWFUpload events.
-            swfupload_preload_handler: preLoadab,
-            swfupload_load_failed_handler: loadFailedab,
-            file_queue_error_handler: fileQueueErrorab,
-            file_dialog_complete_handler: fileDialogCompleteab,
-            upload_progress_handler: uploadProgressab,
-            upload_error_handler: uploadErrorab,
-            upload_success_handler: uploadSuccessab,
-            upload_complete_handler: uploadCompleteab,
-
-            // Button settings
-            button_image_url: "/skins/default/self/images/bzyft.jpg",
-            button_placeholder_id: "spanButtonPlaceholder_ab",
-            button_width: 125,
-            button_height: 40,
-            button_text: '上传图片',
-            button_text_style: ' ',
-
-            /* 
-            button_image_url: "",
-            button_placeholder_id: "spanButtonPlaceholder_ab",
-            button_width: 65,
-            button_height: 20,
-            button_text: "<a class='btn-txt'> &nbsp;上传头像</a>", //按钮文字
-            button_text_style: ".btn-txt{color: #0A81A7; font-size:12px;font-family:'微软雅黑';cursor:pointer;}",
-            */
-            button_text_top_padding: 0,
-            button_text_left_padding: 0,
-            button_window_mode: "transparent",
-
-            button_disabled: false,
-            // Flash Settings
-            flash_url: "${base}/plugins/kindeditor/swfupload/swfupload.swf", // Relative to this file
-            flash9_url: "${base}/plugins/kindeditor/swfupload/swfupload_fp9.swf", // Relative to this file 
-            custom_settings: {
-                upload_target: "divFileProgressContainerab"
-            },
-            // Debug Settings
-            debug: false
-        });
-    }
-//    function () {
-//        var hh = $(window).height() + 133;
-//        $("body").css({ 'overflow': hidden, "height": hh + "px" });
-//    }
-
-	</script>
-=======
-	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg--> 
-	<link rel="stylesheet" href="${base }/temp/zyupload/skins/zyupload-1.0.0.min.css " type="text/css">
-	<script type="text/javascript" src="${base }/temp/zyupload/zyupload.basic-1.0.0.min.js"></script>
-	<script type="text/javascript">
-	var i= 1;
-			$(function(){
-				// 初始化插件
-				$("#zyupload").zyUpload({
-					width            :   "650px",                 // 宽度
-					height           :   "400px",                 // 宽度
-					itemWidth        :   "140px",                 // 文件项的宽度
-					itemHeight       :   "115px",                 // 文件项的高度
-					url              :   "<s:url value='/kindeditor/uploadPic.html'/>",  // 上传文件的路径
-					fileType         :   ["jpg","png","js","exe"],// 上传文件的类型
-					fileSize         :   51200000,                // 上传文件的大小
-					multiple         :   false,                    // 是否可以多个文件上传
-					dragDrop         :   false,                   // 是否可以拖动上传文件
-					tailor           :   false,                   // 是否可以裁剪图片
-					del              :   true,                    // 是否可以删除文件
-					finishDel        :   false,  				  // 是否在上传文件完成后删除预览
-					/* 外部获得的回调接口 */
-					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
-						console.info("当前选择了以下文件：");
-						console.info(selectFiles);
-					},
-					onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
-						console.info("当前删除了此文件：");
-						console.info(file.name);
-					},
-					onSuccess: function(file, response){
-						// 文件上传成功的回调方法
-						var Jresponse=$.parseJSON(response);
-						console.info("此文件上传成功：");
-						console.info(file.name);
-						console.info("此文件上传到服务器地址：");
-						console.info(response);
-						$("#uploadInf").append("<p>上传成功，文件地址是：" + Jresponse["url"] + "</p>");
-						$("#patentImgUrl").append("<input type='text' name='patenturl"+i+"' value='"+Jresponse["url"]+"'/>");
-						i=++i;
-						
-					},
-					onFailure: function(file, response){          // 文件上传失败的回调方法
-						console.info("此文件上传失败：");
-						console.info(file.name);
-					},
-					onComplete: function(response){           	  // 上传完成的回调方法
-						console.info("文件上传完成");
-						console.info(response);
-					}
-				});
-				
-			});
-		
-		</script> 
->>>>>>> 1a53bcdfb39af8c2973bc4056f9d8dc5348d798b
+	<script src="${base }/plugins/kindeditor/selfwritefigure.js" type="text/javascript"></script>   <!--uploadImg--> 
 </head>
 
 <body style="background-color: #FFF" id="dlstCircleArticle">
 <style>
 .model1:hover .button{display:block}
 </style>	
-		
+	
 		<div id="mincontent" style="min-height: 581px;">
 	        
 	        
 	    <input id="hiduserid" type="hidden" value="UC1706F442C97E4C58977D24E340EBF66">
 	    <div class="body">
-	        <div class="left" style="height: 700px;">
+	        <div class="left" style="height: 700px;">   
 				<!--申请文件九部分标签切换 -->
 				<div class="tab" id="tabWrap"> 
 					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">发明名称</div>
@@ -239,7 +62,7 @@
 	                <div class="center_top">
 	                    <div class="backedit">
 	                        <a href="<s:url value='/editor/PatentDocList.html'/>" >返回撰写列表</a></div>
-	                    <div class="save" onclick="savePatentDoc();">
+	                    <div class="save" onclick="updatePatentDoc(${patent.patentDocsId});">
 	                        <i class="icon"></i>
 	                        <div class="span">保存</div>
 	                    </div>
@@ -322,16 +145,13 @@
 										收起</i></p>
 							</div>
 							<div class="Writing_tips tip5" name="tips" style="display: none;">
-							
 								<p>
 									<span>撰写指南</span>
-									
 								</p>
 								<p>
 									此部分应当详细、具体地描述实现发明或实用新型的优选方式，在适当情况下举例说明，有需要的话可以结合附图说明。每一条独立权利要求需要给出一个最佳实施方式或具体实施方式。此外从属权利要求的优先方案也应当在这一部分的具体实施方式中体现。
 									具体实施方式部分所述的技术方案用于清楚、完整地说明权利要求所限定的相应技术方案。
 								</p>
-								
 							</div>
 							<div id="futushuomingS" class="Writing_tips tip6" name="tips" style="display: none;">
 								<p>
@@ -442,13 +262,13 @@
 	                    
 						<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
 						<div class="content" id="content0">
-							<div class="title" onclick="loadingTemplate(1)">
+							<div class="title">
 								发明名称
 							</div>
 							<div class="cl">
 								<div id="editor0" thistempid="1">
 									<div class="instru">
-										<div class="title2" onclick="loadingTemplate(1)" >
+										<div class="title2">
 											注意套用模板时专利名称不得超过25个字，化学领域的某些申请允许最多到40个字，这个规定可要注意哦。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。</div>
 									</div>
 									<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
@@ -458,10 +278,8 @@
 										        <form id="form" name="form" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;" onclick="loadingTemplate(1)" >
-										                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
-										                    	
-										                    	</textarea>
+										                    <td style="width:520px;">
+										                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.name }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -495,8 +313,8 @@
 										        <form id="form1" name="form1" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;"  onclick="loadingTemplate(2)" >
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="techDomain" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    <td style="width:520px;">
+										                    	<textarea rows="3" cols="10" id="editorContent1" name="techDomain" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.techDomain }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -531,8 +349,8 @@
 										        <form id="form2" name="form2" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;" onclick="loadingTemplate(3)" >
-										                    	<textarea rows="3" cols="10" id="editorContent2" name="backgoundTech" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    <td style="width:520px;">
+										                    	<textarea rows="3" cols="10" id="editorContent2" name="backgoundTech" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.backgoundTech }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -564,8 +382,8 @@
 										        <form id="form3" name="form3" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;" onclick="loadingTemplate(4)" >
-										                    	<textarea rows="3" cols="10" id="editorContent3" name="contentProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    <td style="width:520px;">
+										                    	<textarea rows="3" cols="10" id="editorContent3" name="contentProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.contentProblem }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -590,8 +408,8 @@
 										        <form id="form4" name="form4" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;" onclick="loadingTemplate(5)" >
-										                    	<textarea rows="3" cols="10" id="editorContent4" name="contentRight" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    <td style="width:520px;">
+										                    	<textarea rows="3" cols="10" id="editorContent4" name="contentRight" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.contentRight }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -617,8 +435,8 @@
 										        <form id="form5" name="form5" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;" onclick="loadingTemplate(6)" >
-										                    	<textarea rows="3" cols="10" id="editorContent5" name="contentEffect" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    <td style="width:520px;">
+										                    	<textarea rows="3" cols="10" id="editorContent5" name="contentEffect" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.contentEffect }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -651,8 +469,8 @@
 										        <form id="form6" name="form6" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;" onclick="loadingTemplate(7)" >
-										                    	<textarea rows="3" cols="10" id="editorContent6" name="implementWay" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    <td style="width:520px;">
+										                    	<textarea rows="3" cols="10" id="editorContent6" name="implementWay" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.implementWay }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -690,8 +508,8 @@
 										        <form id="form7" name="form7" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;" onclick="loadingTemplate(9)" >
-										                    	<textarea rows="3" cols="10" id="editorContent7" name="abstractDescription" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    <td style="width:520px;">
+										                    	<textarea rows="3" cols="10" id="editorContent7" name="abstractDescription" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.abstractDescription }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -740,8 +558,8 @@
 										        <form id="form8" name="form8" class="registerform" action="" onsubmit="return false;" method="post">
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
-										                    <td style="width:520px;" onclick="loadingTemplate(8)" >
-										                    	<textarea rows="3" cols="10" id="editorContent8" name="rightClaim" class="editorContent"style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    <td style="width:520px;">
+										                    	<textarea rows="3" cols="10" id="editorContent8" name="rightClaim" class="editorContent"style="width:520px;height:200px;visibility:hidden;" >${patent.rightClaim }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -842,12 +660,11 @@
 						</div>
 	              
 						<!-- 附图及说明 -->
-						
+	
 						<!-- content start-->
 						<input type="hidden" id="ft_hidSrc" value="">
 						<input type="hidden" id="ft_hidFid" value="">
 						<div class="content" id="content5" style="display: none;">
-							
 							<div class="box">
 								<div class="upimg1" onclick="addPic();">
 									新增附图</div>
@@ -858,32 +675,44 @@
 						<!-- content end-->
 						<!-- content start-->
 						<div class="content" id="content5_build" style="display: none;">
-							
 							<div style="height: 20px">
 							</div>
 							<div id="piclist" class="title1" onclick="piclistShow();" style="padding-left: 40px; color:#444; font-size:14px; font-weight:bold;
 								display: none; cursor: pointer">
 								返回附图列表
 							</div>
-							 
+							<div style="height: 10px">
+							</div>
+							<div class="cl" style="padding-left: 40px; float: left;">
+								<object id="SWFUpload_0" type="application/x-shockwave-flash" data="/js/swfupload.swf?preventswfcaching=1468807943565" width="89" height="33" class="swfupload"><param name="wmode" value="transparent"><param name="movie" value="/js/swfupload.swf?preventswfcaching=1468807943565"><param name="quality" value="high"><param name="allowScriptAccess" value="always"><param name="flashvars" value="movieName=SWFUpload_0&amp;uploadURL=%2FUploadFile.aspx&amp;useQueryString=false&amp;requeueOnError=false&amp;httpSuccess=&amp;assumeSuccessTimeout=0&amp;params=ASPSESSID%3Dqqi3n0miuogvgyxnvqhgnam1&amp;filePostName=Filedata&amp;fileTypes=*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileTypesDescription=%E5%85%81%E8%AE%B8%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileSizeLimit=5%20MB&amp;fileUploadLimit=0&amp;fileQueueLimit=0&amp;debugEnabled=false&amp;buttonImageURL=%2Fskins%2Fdefault%2Fself%2Fimages%2Fszzt1.jpg&amp;buttonWidth=89&amp;buttonHeight=33&amp;buttonText=&amp;buttonTextTopPadding=0&amp;buttonTextLeftPadding=0&amp;buttonTextStyle=&amp;buttonAction=-110&amp;buttonDisabled=false&amp;buttonCursor=-1"></object>
+								
+							</div>
+							<div style="left: 280px; margin-top: 0; float: left;" onclick="openwin('http://www.autodesk.com.cn/free-trials');" class="upimg1">
+								下载CAD绘图</div>
+							<div style="left: 280px; margin-top: 0; float: left;" onclick="openwin('http://download.pchome.net/industry/geography/detail-17098.html');" class="upimg1">
+								下载化学编辑器</div>
 							
 							<div class="img_edit" id="origin">
 								<div class="imgfl" id="picBianHao">
 								</div>
 								<div class="imgfr">
-								 <form id="patentUrlFrom" name="patentUrlFrom" action="<s:url value='/editor/savePatentImgUrl.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">
-									<input id="piciLlus2" name="" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off">
-									<input id="picMarkiLlus2" name="" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off">
-									<div id=patentImgUrl style="display:block"></div>
-								
-								</form>
-									<div id="zyupload" class="zyupload"></div>
-								 	
+									<input id="piciLlus2" name="" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="请填写附图说明，例如”图1为本发明实施例XX的方法流程示意图”。" autocomplete="off">
+									<input id="picMarkiLlus2" name="" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="请填写附图标记说明，例如“1杯子主体，2杯子把手”。" autocomplete="off">
 								</div>
 							</div>
+							<div class="img_edit" id="reHtml" style="display: none">
+							</div>
 							<div class="cl">
+								<div id="swfu_container" style="margin: 0px 10px;">
+								</div>
+								<div id="divFileProgressContainer" style="height: 75px; display: none;">
+								</div>
+								<div id="thumbnails" class="imgreview" style="overflow: hidden;">
+									<img alt="" id="imghead" style="padding-right: 20px;">
+									
+								</div>
 								<div class="daochu_cancelh">
-									<div class="daochu_cancel1" onclick="savePatentImgUrl()">
+									<div class="daochu_cancel1" onclick="savePicNiLlu();return false;">
 										保存
 									</div>
 									<div class="daochu_cancel1h" onclick="piclistShow();">
@@ -911,8 +740,7 @@
 							<div style="height: 80px">
 							</div>
 						   <div style="float:left; margin-left:50px;">
-						   		<div id="spanButtonPlaceholder_ab" class="upimg1" style="float:left;">
-						   		</div></div>
+								<object id="SWFUpload_1" type="application/x-shockwave-flash" data="/js/swfupload.swf?preventswfcaching=1468807943567" width="125" height="40" class="swfupload"><param name="wmode" value="transparent"><param name="movie" value="/js/swfupload.swf?preventswfcaching=1468807943567"><param name="quality" value="high"><param name="allowScriptAccess" value="always"><param name="flashvars" value="movieName=SWFUpload_1&amp;uploadURL=%2FUploadFile.aspx&amp;useQueryString=false&amp;requeueOnError=false&amp;httpSuccess=&amp;assumeSuccessTimeout=0&amp;params=ASPSESSID%3Dqqi3n0miuogvgyxnvqhgnam1&amp;filePostName=Filedata&amp;fileTypes=*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileTypesDescription=%E5%85%81%E8%AE%B8%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B*.jpg%3B*.png%3B*.bmp%3B*.gif&amp;fileSizeLimit=5%20MB&amp;fileUploadLimit=0&amp;fileQueueLimit=0&amp;debugEnabled=false&amp;buttonImageURL=%2Fskins%2Fdefault%2Fself%2Fimages%2Fbzyft.jpg&amp;buttonWidth=125&amp;buttonHeight=40&amp;buttonText=&amp;buttonTextTopPadding=0&amp;buttonTextLeftPadding=0&amp;buttonTextStyle=%20&amp;buttonAction=-110&amp;buttonDisabled=false&amp;buttonCursor=-1"></object></div>
 								<div class="upimg1" onclick="chooseFromList();" id="choseAbs" style="
 									left: 280px; margin-top: 0;float:left;">
 									从附图中选择</div>
@@ -935,8 +763,7 @@
 						</div>
 						<!-- content end-->
 	
-						<div id="div_float_show" style="position: absolute; display: none; width: 1000px">
-					</div>
+	
 	
 	                </div>
 	                <!-- content end-->
@@ -961,8 +788,34 @@
 	
 	        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><a style="color:#ccc" href="javascript:void(0);">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:showKindsDragModel(1,2,2);">下一页</a></div>
 	        <div class="model" style="overflow-x: hidden; overflow-y: auto;">
-	            <div id="modelWrap" style="display: block;"></div>
-				<div id="hiddenmodel" style="display: none;"></div>
+	            <div id="modelWrap" style="display: block;">
+					<div class="model1 model_list0" id="100070010000" style="overflow-x: hidden; overflow-y: hidden;">
+						<div class="title">模板 1：适用于发明；产品；机械结构；碳石墨环；轴密封；螺纹；凹槽；筛网环</div>
+						<div class="content">
+							<p class="small">
+								<span>背景技术：</span>
+								（本发明提出的技术背景）[航空发动机中为了提高性能，使用接触式碳石墨环密封的部位越来越多。对于航空发动机来说，
+							</p>
+							<p class="big" style="display:none">
+								<span>背景技术：</span>
+								（本发明提出的技术背景）[航空发动机中为了提高性能，使用接果更好的碳石墨环轴密封结构已成为影响发动机性能的一个主要因素]。<br>（描述最接近的现有技术）
+							</p>
+							<div class="button" style="z-index:500000;" onclick="modelbuttonclick(0)">+使用模板</div>
+						</div>
+					</div>
+					<div class="model1 model_list1" id="100070020000" style="overflow-x: hidden; overflow-y: hidden;">
+						<div class="title">模板 2：适用于发明；中药组合物；产品；药物制剂；中药</div>
+						<div class="content">
+							<p class="small"><span>背景技术：</span>
+								（描述治疗适应症的技术背景）[支气管哮喘是一种常见多发性、严重危害人体健康的慢性呼吸道疾病。据文献报道，哮喘的
+							</p>
+							<p class="big" style="display:none"><span>背景技术：</span>
+							（描述治疗适应症的技术背景）[支气管哮喘是一种常达40亿美</p>
+							<div class="button" style="z-index:500000;" onclick="modelbuttonclick(1)">+设为模板</div>
+						</div>
+					</div>
+				</div>
+	           
 	        </div>
 	        
 	        <div style="float: right; padding-right: 15px; padding-top: 5px; display: block;" id="kbpage2"><a style="color:#ccc" href="javascript:void(0);">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:showKindsDragModel(1,2,2);">下一页</a></div>
@@ -1051,10 +904,7 @@
 	        <div class="step3_top">
 	            <div class="left_top" style="border: none">
 	                <div class="cl">
-	                    <div class="bth" onclick="setipcTypeByID(1,this);">
-	                        发明</div>
-	                    <div class="bth" style="margin-left: 10px;" onclick="setipcTypeByID(2,this);">
-	                        实用新型</div>
+	                    <div class="bth" onclick="setipcTypeByID(1,this);">发明</div>
 	                </div>
 	                <div class="left_help">
 	                    <a href="javascript:void(0);" onclick="helperv6();">如何设置专利类型？</a>
@@ -1475,14 +1325,11 @@
 			};
 			
 			function findPatentDoc(patentDocsId){
-				
 				var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocsId="+patentDocsId;
 				location.href=url;
-				
-				
 			};
 			
-			function savePatentDoc(){
+			function updatePatentDoc(patentDocsId){
 				var name=editor.text();
 				var techDomain=$("#editorContent1").val();
 				var backgoundTech=$("#editorContent2").val();
@@ -1494,7 +1341,7 @@
 				var rightClaim=$("#editorContent8").val();
 				$.ajax({
 					type: "POST",
-					url: "<s:url value='/editor/addPatentDoc.html'/>", 
+					url: "<s:url value='/editor/updatePatentDoc.html?patentDocsId='/>"+patentDocsId, 
 					data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
 							"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim},
 					success: function(data){
@@ -1505,78 +1352,23 @@
 					}
 				});
 			}
-	</script>
-	<script type="text/javascript">
-	$('input[id=patentFile]').change(function() {  
-		$('#filename').val($(this).val());  
-	});
-	
+			
+			$(function(){
+					var oldtab = $("#tabWrap").find(".tab1").attr("value");
+					var tab=${tab};
+				 $("div[name='tabs']:eq("+tab+")").attr('class', 'tab1').siblings().attr('class', 'tab1h');
 
-	$(function () {
-		 var ajaxFormOption = {
-				 type: 'POST',
-					dataType: 'json',
-					url:"<s:url value='/kindeditor/uploadPic.html'/>",
-					data: $('#picFrom').formSerialize(),
-					success:function(data){
-						alert(data);
-					}
-		 };
-		 $("#btn").click(function () {
-			                  $("#picFrom").submit(ajaxFormOption);
-			                 return false;
-			              });
-	});
-/* 	 function savePic() {
-				$('#picFrom').ajaxSubmit({
-					type: 'POST',
-					dataType: 'json',
-					url:"<s:url value='/kindeditor/uploadPic.html'/>",
-					data: $('#picFrom').formSerialize(),
-					success:function(data){
-						alert(data);
-					}
-				});
-	 }*/
-
-	 function loadingTemplate(sectionId){
-		 $.ajax({
-			 type : "POST",
-			 url : "<s:url value='/editor1/getTemplateList.html'/>?sectionId="+sectionId,
-			 success : function (data){
-				 var obj= $.parseJSON(data);
-				 $("#modelWrap").empty();
-				 $("#hiddenmodel").empty();
-				 $.each(obj,function(i,item){
-					 $("#modelWrap").append("<div class='model1 model_list"+i+"' style='overflow-x: hidden; overflow-y: hidden;height:158px;'>"+
-						 "<div class='title'>模板"+(i+1)+":"+item.templateTitle+"</div>"+
-						 	 "<div class='content'>"+
-				 				"<p class='small'>"+
-									"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
-								"</p>"+
-							"</p>"+
-						    "<div class='button' style='z-index:500000;' onclick='templatebuttonclick("+i+")'>+使用模板</div>"+
-						  "</div>"+
-					   "</div>");
-					 $("#modelWrap span").css("color","black");
-				 	 $("#hiddenmodel").append("<p id='templateContent"+i+"'>"+item.content+"</p>");
-				 });
-			 },error : function (){
-				 
-			 }
-		 })
-	 }
-	 
-	 function templatebuttonclick(i){
-		 editor.html($("#templateContent"+i).html());
-		 //alert($("#templateContent"+i).html());
-		 
-		 
-	 }
-	 function savePatentImgUrl(){
-		 document.getElementById('patentUrlFrom').submit();
-	 }
+					var old_name="content"+oldtab;
+					var new_name="content"+tab;
+					
+					var old_tip_name="tip"+oldtab;
+					var new_tip_name="tip"+tab;
+					
+					$('#'+old_name).hide();
+					$('#'+new_name).show();
+					$('.'+old_tip_name).hide();
+					$('.'+new_tip_name).show();	
+			})
 	</script>
-	
 </body>
 </html>
