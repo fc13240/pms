@@ -1463,8 +1463,7 @@
 	$('input[id=patentFile]').change(function() {  
 		$('#filename').val($(this).val());  
 	});
-	</script>
-	<script type="text/javascript">
+	
 	$(function () {
 		 var ajaxFormOption = {
 				 type: 'POST',
