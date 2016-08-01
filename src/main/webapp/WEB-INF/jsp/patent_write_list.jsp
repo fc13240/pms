@@ -123,7 +123,7 @@ table td a {
 	<div class="col-xs-1 sidebar" style="min-width:100px;">
 			<%@ include file="_left_nav_editor.jsp" %>
 		  </div>
-	<div id="replaceHere" style="">
+	<div id="replaceHere" style="margin:-23px 0 0 40px;">
 <div class="main2">
     <div class="tit_top">
         <div class="title2">
