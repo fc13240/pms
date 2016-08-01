@@ -174,6 +174,13 @@ public class PatentWriteDocController {
 		return "删除成功！";
 	}
 	
+	
+	@RequestMapping(path="/savePatentImgUrl",method=RequestMethod.POST)
+	public String savePatentImgUrl(Model model){
+		return "patentDoc_invention_editor";
+	}
+	
+	
 	/**
 	 * 提交表单操作
 	 */

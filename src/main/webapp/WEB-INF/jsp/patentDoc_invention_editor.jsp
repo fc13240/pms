@@ -147,6 +147,7 @@
 	<link rel="stylesheet" href="${base }/temp/zyupload/skins/zyupload-1.0.0.min.css " type="text/css">
 	<script type="text/javascript" src="${base }/temp/zyupload/zyupload.basic-1.0.0.min.js"></script>
 	<script type="text/javascript">
+	var i= 1;
 			$(function(){
 				// 初始化插件
 				$("#zyupload").zyUpload({
@@ -157,7 +158,7 @@
 					url              :   "<s:url value='/kindeditor/uploadPic.html'/>",  // 上传文件的路径
 					fileType         :   ["jpg","png","js","exe"],// 上传文件的类型
 					fileSize         :   51200000,                // 上传文件的大小
-					multiple         :   true,                    // 是否可以多个文件上传
+					multiple         :   false,                    // 是否可以多个文件上传
 					dragDrop         :   false,                   // 是否可以拖动上传文件
 					tailor           :   false,                   // 是否可以裁剪图片
 					del              :   true,                    // 是否可以删除文件
@@ -171,12 +172,17 @@
 						console.info("当前删除了此文件：");
 						console.info(file.name);
 					},
-					onSuccess: function(file, response){          // 文件上传成功的回调方法
+					onSuccess: function(file, response){
+						// 文件上传成功的回调方法
+						var Jresponse=$.parseJSON(response);
 						console.info("此文件上传成功：");
 						console.info(file.name);
 						console.info("此文件上传到服务器地址：");
 						console.info(response);
-						$("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
+						$("#uploadInf").append("<p>上传成功，文件地址是：" + Jresponse["url"] + "</p>");
+						$("#patentImgUrl").append("<input type='text' name='patenturl"+i+"' value='"+Jresponse["url"]+"'/>");
+						i=++i;
+						
 					},
 					onFailure: function(file, response){          // 文件上传失败的回调方法
 						console.info("此文件上传失败：");
@@ -865,23 +871,19 @@
 								<div class="imgfl" id="picBianHao">
 								</div>
 								<div class="imgfr">
-									
+								 <form id="patentUrlFrom" name="patentUrlFrom" action="<s:url value='/editor/savePatentImgUrl.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">
 									<input id="piciLlus2" name="" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off">
 									<input id="picMarkiLlus2" name="" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off">
-									<div id="zyupload" class="zyupload"></div>
-								</div>
-							</div>
-							<div class="img_edit" id="reHtml" style="display: none">
+									<div id=patentImgUrl style="display:block"></div>
 								
+								</form>
+									<div id="zyupload" class="zyupload"></div>
+								 	
+								</div>
 							</div>
 							<div class="cl">
-								<div id="swfu_container" style="margin: 0px 10px;">
-								</div>
-								<div id="divFileProgressContainer" style="height: 75px; display: none;">
-								</div>
-								
 								<div class="daochu_cancelh">
-									<div class="daochu_cancel1" onclick="savePicNiLlu();return false;">
+									<div class="daochu_cancel1" onclick="savePatentImgUrl()">
 										保存
 									</div>
 									<div class="daochu_cancel1h" onclick="piclistShow();">
@@ -1569,6 +1571,11 @@
 	 function templatebuttonclick(i){
 		 editor.html($("#templateContent"+i).html());
 		 //alert($("#templateContent"+i).html());
+		 
+		 
+	 }
+	 function savePatentImgUrl(){
+		 document.getElementById('patentUrlFrom').submit();
 	 }
 	</script>
 	
