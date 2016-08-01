@@ -121,7 +121,7 @@ table td a {
 	<body>
 	<%@ include file="_top.jsp" %>
 	<div class="col-xs-1 sidebar" style="min-width:100px;">
-			<%@ include file="_left_nav4.jsp" %>
+			<%@ include file="_left_nav_editor.jsp" %>
 		  </div>
 	<div id="replaceHere" style="">
 <div class="main2">
