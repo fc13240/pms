@@ -36,10 +36,12 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -112,13 +114,13 @@ public class UploadController {
 			out.flush();
 		}
 		String url=saveUrl+newFileName+".html";
-/*		 Map<String, Object> succMap = new HashMap<String, Object>(); 
+		 Map<String, Object> succMap = new HashMap<String, Object>(); 
          succMap.put("url", saveUrl + newFileName+".html");  
-         WebUtils.writeJsonStrToResponse(response, succMap);*/
-		String error="";
+         WebUtils.writeJsonStrToResponse(response, succMap);
+/*		String error="";
 		String msg="aa";
 		String res = "{ error:'" + error + "', msg:'" + msg + "',imgurl:'" + url + "'}";
-        writer.write(res);
+        writer.write(res);*/
 	}
 	
 	
@@ -135,12 +137,12 @@ public class UploadController {
 	   
 	   
 	   @RequestMapping(path = "/uploadPic")
-		public void uploadPic(HttpServletRequest request1 ,HttpServletResponse response1) {
-		   System.out.println("进入程序");
-			String uploadSign1 = request1.getParameter("name");  
-			 String rootPath1 = request1.getParameter("Filename");  
-			 String path11= request1.getParameter("Upload"); 
-			 System.out.println(uploadSign1+rootPath1+path11);
-		
+		public void uploadPic(HttpServletRequest request1 ,HttpServletResponse response1,PrintWriter writer) {
+		      MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request1;
+		      CommonsMultipartFile file = (CommonsMultipartFile) multipartRequest.getFile("patentFile");
+		      writer.write(1);
 		}
+	   
+	   
+
 }

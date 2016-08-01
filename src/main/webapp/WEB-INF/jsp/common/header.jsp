@@ -13,5 +13,6 @@
 <!-- 引入findeditor.js -->
 <script type="text/javascript" src="${base }/plugins/kindeditor/kindeditor-all-min.js"></script>
 <script type="text/javascript" src="${base }/plugins/kindeditor/lang/zh_CN.js"></script>
-<script type="text/javascript" src="${base }/temp/js/jquery.min.js"></script>
+<script type="text/javascript" src="${base }/temp/js/jquery.js"></script>
+<script type="text/javascript" src="${base }/temp/js/jquery_from.js"></script>
 <script type="text/javascript" src="${base }/plugins/kindeditor/plugins/code/prettify.js"></script>
