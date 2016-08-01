@@ -46,7 +46,7 @@
 	</select>
 	
 	<update id="updatePatentDoc" parameterType="PatentDoc">
-		update patent_documents set app_no=#{appNo,javaType=string,jdbcType=VARCHAR},user_id=#{userId},patent_type=1,patent_name=#{name},tech_domain=#{techDomain,javaType=string,jdbcType=CLOB},
+		update patent_documents set app_no=#{appNo,javaType=string,jdbcType=VARCHAR},user_id=#{userId},patent_name=#{name},tech_domain=#{techDomain,javaType=string,jdbcType=CLOB},
 		background_tech=#{backgoundTech,javaType=string,jdbcType=CLOB},content_problem=#{contentProblem,javaType=string,jdbcType=CLOB},content_right=#{contentRight,javaType=string,jdbcType=CLOB},content_effect=#{contentEffect,javaType=string,jdbcType=CLOB},
 		implement_way=#{implementWay,javaType=string,jdbcType=CLOB},right_claim=#{rightClaim,javaType=string,jdbcType=CLOB},abstract_desc=#{abstractDescription,javaType=string,jdbcType=CLOB}
 		where  patent_docs_id=#{patentDocsId}
