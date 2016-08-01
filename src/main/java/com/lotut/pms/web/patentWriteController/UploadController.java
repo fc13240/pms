@@ -136,7 +136,7 @@ public class UploadController {
 	   } 
 	   
 	   
-	   @RequestMapping(path = "/uploadPic")
+	   @RequestMapping(path = "/uploadPic",method=RequestMethod.POST)
 		public void uploadPic(HttpServletRequest request1 ,HttpServletResponse response1,PrintWriter writer) {
 		      MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request1;
 		      CommonsMultipartFile file = (CommonsMultipartFile) multipartRequest.getFile("patentFile");
