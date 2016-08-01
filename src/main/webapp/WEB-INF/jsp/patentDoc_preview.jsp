@@ -25,7 +25,7 @@
 		background: #fff;
 		border: #e6e6e6 1px solid;
 		margin: 10px auto;
-		width: 900px;
+		width: 1000px;
 		border-radius: 8px;
 		box-shadow: 0 0 4px #e6e6e6;
 		padding: 0 0 30px 0;
@@ -34,8 +34,8 @@
 	
 	.tit_top {
 		clear: both;
-		margin: 0 40px;
-		width: 810px;
+		margin: 0 60px;
+		width: 90%;
 		border-bottom: #f2f2f2 3px solid;
 		overflow: auto;
 	}
@@ -72,7 +72,10 @@
 </style>
 </head>
 <body style="background-color: #FFF;" id="dlstCircleArticle">
-	<div style="height:150px;"></div>
+	<div style="height:180px;"></div>
+	<div class="col-xs-1 sidebar" style="min-width:100px;">
+		<%@ include file="_left_nav_editor.jsp" %>
+	</div>
 	<div id="mincontent" style="min-height: 577px;">
 
 		<div class="main">
