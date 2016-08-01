@@ -33,19 +33,7 @@
 	        
 	    <input id="hiduserid" type="hidden" value="UC1706F442C97E4C58977D24E340EBF66">
 	    <div class="body">
-	        <div class="left" style="height: 700px;">
-	            <div class="left_top">
-	                <div class="cl" id="div_ipctype">
-	                    <div class="bt" value="1" onclick="setipcType(1,this);">
-	                        发明</div>
-	                    <div class="bth" value="2" onclick="setipcType(2,this);" style="margin-left: 10px;">
-	                        实用新型</div>
-	                </div>
-	                <div class="left_help">
-	                    <a href="javascript:void(0);" onclick="helperv6();">专利类型选择</a>
-	                </div>
-	            </div>
-	            
+	        <div class="left" style="height: 700px;">   
 				<!--申请文件九部分标签切换 -->
 				<div class="tab" id="tabWrap"> 
 					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">发明名称</div>
