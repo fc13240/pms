@@ -20,7 +20,7 @@
 	<link href="${base }/static/css/edit_instruct.css?v=2.3.20150415" type="text/css" rel="stylesheet" />
 	<script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
 	<c:import url="common/kindEditor.jsp"></c:import>
-	<script src="${base }/plugins/kindeditor/ajaxfileupload.js" type="text/javascript"></script>
+	<%-- <script src="${base }/plugins/kindeditor/ajaxfileupload.js" type="text/javascript"></script> --%>
 	<script src="${base }/plugins/kindeditor/layer.min.js" type="text/javascript"></script>
 	<script src="${base }/plugins/kindeditor/js-selfwrite.js" type="text/javascript"></script>
 	<script src="${base }/plugins/kindeditor/selfwritefigure.js" type="text/javascript"></script>   <!--uploadImg-->
@@ -807,7 +807,7 @@
 									<input style="display:none;"  id="patentFile" name="patentFile" type="file" />
 									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
 									<button type="button" onclick="$('input[id=patentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
-									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" id="btn" onclick="savePic()">上传</button>
+									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" id="btn" >上传</button>
 								</form>
 							<div style="height: 10px">
 							</div>
@@ -1460,25 +1460,27 @@
 			}
 	</script>
 	<script type="text/javascript">
-	jQuery(function($) {
-		$("#patent").validate({
-			rules: {
-				filename: 'required'
-			},
-			messages: {
-				filename: '<span style="color:red;">请选择要上传的图片</span>'
-			},
-			submitHandler: function(form){ 
-				form.submit();     
-			}
-		});
-	});
 	$('input[id=patentFile]').change(function() {  
 		$('#filename').val($(this).val());  
 	});
 	</script>
 	<script type="text/javascript">
-	 function savePic() {
+	$(function () {
+		 var ajaxFormOption = {
+				 type: 'POST',
+					dataType: 'json',
+					url:"<s:url value='/kindeditor/uploadPic.html'/>",
+					data: $('#picFrom').formSerialize(),
+					success:function(data){
+						alert(data);
+					}
+		 };
+		 $("#btn").click(function () {
+			                  $("#picFrom").submit(ajaxFormOption);
+			                 return false;
+			              });
+	});
+/* 	 function savePic() {
 				$('#picFrom').ajaxSubmit({
 					type: 'POST',
 					dataType: 'json',
@@ -1489,6 +1491,7 @@
 					}
 				});
 	 }
+<<<<<<< HEAD
 	 function loadingTemplate(sectionId){
 		 $.ajax({
 			 type : "POST",
@@ -1521,6 +1524,9 @@
 		 editor.html($("#templateContent"+i).html());
 		 //alert($("#templateContent"+i).html());
 	 }
+=======
+	  */
+>>>>>>> ba5209d3b43a5cfd3622137037445b4fa17fc8d6
 	</script>
 
 </body>
