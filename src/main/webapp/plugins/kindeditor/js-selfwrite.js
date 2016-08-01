@@ -2,7 +2,8 @@ $(function () {
     $('html, body').css({
         "background": "#FFFFFF"
     });
-    initshowrelation();
+   // initshowrelation();
+    
     //如果是新建项目判断是否首次进入
     var url = _UserUrl + "default.aspx?jsoncallback=?";
     var postData = {
