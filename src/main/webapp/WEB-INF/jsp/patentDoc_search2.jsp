@@ -1299,6 +1299,49 @@
 	    
 	    
 	    <script type="text/javascript">
+	    
+	    function setipcTypeByID(id, eve) {
+	        if ($(eve).attr("class") == "bt")//已经是选中状态无效果
+	        {
+	            return;
+	        }
+	        $(eve).parent().find(".bt").attr("class", "bth");
+	        $(eve).attr("class", "bt");
+	        //获取选中的专利类型的备选大类模板 id
+	        var url = _RootPath + "SelfWriteOperator.aspx";
+	        $.ajax({
+	            type: "post",
+	            url: url,
+	            dataType: "json", //返回值类型
+	            data: {
+	                action: "gettemplatelist",
+	                patenttype: id
+	            },
+	            success: function (sender) {
+	                if (sender.ReturnValue != '0') {
+	                    layer.alert(sender.ErrorInfo);
+	                }
+	                else {
+	                    var obj = sender.Option;
+	                    var s = [];
+	                    for (var i = 0; i < obj.length && i < 3; i++) {
+	                        s.push(' <div class="step51" onclick="seltemp(\'' + obj[i].Template_No + '\');"> ' + clearkbfontcolor(obj[i].Title) + '></div>');
+	                    }
+	                    $("#helper_templist").html(s.join(""));
+	                }
+	            },
+	            error: function (sender) { layer.alert("出现未知错误，请重新打开页面。"); }
+	        });
+
+
+	        if (id == 1) {
+	            $("#div_ipctype").find("div:eq(0)").click();
+	        }
+	        else if (id == 2) {
+	            $("#div_ipctype").find("div:eq(1)").click();
+	        }
+	    }
+
 			function submitForm(){
 				$.ajax({
 					type: "POST",
