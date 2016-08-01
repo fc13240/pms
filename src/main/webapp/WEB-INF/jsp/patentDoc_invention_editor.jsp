@@ -30,117 +30,7 @@
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/fileprogress.js"></script>
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers.js"></script>
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers2.js"></script>
-	<script type="text/javascript">
-	//上传插件使用脚本
-    var swfu;   //上传插件使用脚本
-    var swfuab;
-    window.onload = function () {
-        swfu = new SWFUpload({
-            // Backend Settings
-            upload_url: "<s:url value='/kindeditor/uploadPic.html'/>", //单文件上传
-              post_params: {
-                "name": "1"
-            },  
-
-            // File Upload Settings
-            file_size_limit: "5 MB",
-            file_types: "*.jpg;*.png;*.bmp;*.gif",
-            file_types_description: "允许上传文件类型*.jpg;*.png;*.bmp;*.gif",
-            file_upload_limit: 0,    // Zero means unlimited 
-            // Event Handler Settings - these functions as defined in Handlers.js
-            //  The handlers are not part of SWFUpload but are part of my website and control how
-            //  my website reacts to the SWFUpload events.
-            swfupload_preload_handler: preLoad,
-            swfupload_load_failed_handler: loadFailed,
-            file_queue_error_handler: fileQueueError,
-            file_dialog_complete_handler: fileDialogComplete,
-            upload_progress_handler: uploadProgress,
-            upload_error_handler: uploadError,
-            upload_success_handler: uploadSuccess,
-            upload_complete_handler: uploadComplete,
-
-            // Button settings
-            button_image_url: "/skins/default/self/images/szzt1.jpg",
-            button_placeholder_id: "spanButtonPlaceholder",
-            button_width: 89,
-            button_height: 33,
-            button_text: '请选择要上传的图片',
-            button_text_style: '',
-            button_text_top_padding: 0,
-            button_text_left_padding: 0,
-            button_window_mode: "transparent",
-            button_disabled: false,
-            // Flash Settings
-            flash_url: "${base}/plugins/kindeditor/swfupload/swfupload.swf", // Relative to this file
-            flash9_url: "${base}/plugins/kindeditor/swfupload/swfupload_fp9.swf", // Relative to this file 
-            custom_settings: {
-                upload_target: "divFileProgressContainer"
-            },
-            // Debug Settings
-            use_query_string : true,
-            debug: false
-        });
-        swfuab = new SWFUpload({
-            // Backend Settings
-            upload_url: "/UploadFile.aspx", //单文件上传
-/*             post_params: {
-                "ASPSESSID": "s2m5cueveh4lly0yhtyvs4dn"
-            }, */
-
-            // File Upload Settings
-            file_size_limit: "5 MB",
-            file_types: "*.jpg;*.png;*.bmp;*.gif",
-            file_types_description: "允许上传文件类型*.jpg;*.png;*.bmp;*.gif",
-            file_upload_limit: 0,    // Zero means unlimited 
-            // Event Handler Settings - these functions as defined in Handlers.js
-            //  The handlers are not part of SWFUpload but are part of my website and control how
-            //  my website reacts to the SWFUpload events.
-            swfupload_preload_handler: preLoadab,
-            swfupload_load_failed_handler: loadFailedab,
-            file_queue_error_handler: fileQueueErrorab,
-            file_dialog_complete_handler: fileDialogCompleteab,
-            upload_progress_handler: uploadProgressab,
-            upload_error_handler: uploadErrorab,
-            upload_success_handler: uploadSuccessab,
-            upload_complete_handler: uploadCompleteab,
-
-            // Button settings
-            button_image_url: "/skins/default/self/images/bzyft.jpg",
-            button_placeholder_id: "spanButtonPlaceholder_ab",
-            button_width: 125,
-            button_height: 40,
-            button_text: '上传图片',
-            button_text_style: ' ',
-
-            /* 
-            button_image_url: "",
-            button_placeholder_id: "spanButtonPlaceholder_ab",
-            button_width: 65,
-            button_height: 20,
-            button_text: "<a class='btn-txt'> &nbsp;上传头像</a>", //按钮文字
-            button_text_style: ".btn-txt{color: #0A81A7; font-size:12px;font-family:'微软雅黑';cursor:pointer;}",
-            */
-            button_text_top_padding: 0,
-            button_text_left_padding: 0,
-            button_window_mode: "transparent",
-
-            button_disabled: false,
-            // Flash Settings
-            flash_url: "${base}/plugins/kindeditor/swfupload/swfupload.swf", // Relative to this file
-            flash9_url: "${base}/plugins/kindeditor/swfupload/swfupload_fp9.swf", // Relative to this file 
-            custom_settings: {
-                upload_target: "divFileProgressContainerab"
-            },
-            // Debug Settings
-            debug: false
-        });
-    }
-//    function () {
-//        var hh = $(window).height() + 133;
-//        $("body").css({ 'overflow': hidden, "height": hh + "px" });
-//    }
-
-	</script>
+	<script type="text/javascript" src="${base }/temp/js/jquery_from.js"></script>
 </head>
 
 <body style="background-color: #FFF" id="dlstCircleArticle">
@@ -1464,7 +1354,7 @@
 		$('#filename').val($(this).val());  
 	});
 	
-	$(function () {
+ 	$(function () {
 		 var ajaxFormOption = {
 				 type: 'POST',
 					dataType: 'json',
@@ -1478,8 +1368,9 @@
 			                  $("#picFrom").submit(ajaxFormOption);
 			                 return false;
 			              });
-	});
-/* 	 function savePic() {
+	}); 
+/*  	 function savePic() {
+				alert(1);
 				$('#picFrom').ajaxSubmit({
 					type: 'POST',
 					dataType: 'json',
@@ -1489,7 +1380,7 @@
 						alert(data);
 					}
 				});
-	 }*/
+	 } */
 	 function loadingTemplate(sectionId){
 		 $.ajax({
 			 type : "POST",
