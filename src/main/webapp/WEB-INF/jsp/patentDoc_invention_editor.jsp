@@ -1490,8 +1490,7 @@
 						alert(data);
 					}
 				});
-	 }
-<<<<<<< HEAD
+	 }*/
 	 function loadingTemplate(sectionId){
 		 $.ajax({
 			 type : "POST",
@@ -1524,9 +1523,6 @@
 		 editor.html($("#templateContent"+i).html());
 		 //alert($("#templateContent"+i).html());
 	 }
-=======
-	  */
->>>>>>> ba5209d3b43a5cfd3622137037445b4fa17fc8d6
 	</script>
 
 </body>
