@@ -21,23 +21,19 @@
 	<script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
 	<c:import url="common/kindEditor.jsp"></c:import>
 	<%-- <script src="${base }/plugins/kindeditor/ajaxfileupload.js" type="text/javascript"></script> --%>
-	<script src="${base }/plugins/kindeditor/layer.min.js" type="text/javascript"></script>
-	<script src="${base }/plugins/kindeditor/js-selfwrite.js" type="text/javascript"></script>
+	<%-- <script src="${base }/plugins/kindeditor/layer.min.js" type="text/javascript"></script> --%>
+	 <script src="${base }/plugins/kindeditor/js-selfwrite.js" type="text/javascript"></script>
 	<script src="${base }/plugins/kindeditor/selfwritefigure.js" type="text/javascript"></script>   <!--uploadImg-->
-	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg-->
-	<script src="${base }/plugins/kindeditor/swfupload/swfupload.js" type="text/javascript"></script>   <!--swfupload-->
-	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/swfupload.queue.js"></script>
-	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/fileprogress.js"></script>
-	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers.js"></script>
-	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers2.js"></script>
-	<script type="text/javascript" src="${base }/temp/js/jquery_from.js"></script>
+	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg--> 
+	<link rel="stylesheet" href="${base }/temp/zyupload/skins/zyupload-1.0.0.min.css " type="text/css">
+	<script type="text/javascript" src="${base }/temp/zyupload/zyupload.basic-1.0.0.min.js"></script>
 </head>
 
 <body style="background-color: #FFF" id="dlstCircleArticle">
 <style>
 .model1:hover .button{display:block}
 </style>	
-	
+		
 		<div id="mincontent" style="min-height: 581px;">
 	        
 	        
@@ -162,6 +158,7 @@
 									此部分应当详细、具体地描述实现发明或实用新型的优选方式，在适当情况下举例说明，有需要的话可以结合附图说明。每一条独立权利要求需要给出一个最佳实施方式或具体实施方式。此外从属权利要求的优先方案也应当在这一部分的具体实施方式中体现。
 									具体实施方式部分所述的技术方案用于清楚、完整地说明权利要求所限定的相应技术方案。
 								</p>
+								
 							</div>
 							<div id="futushuomingS" class="Writing_tips tip6" name="tips" style="display: none;">
 								<p>
@@ -672,11 +669,12 @@
 						</div>
 	              
 						<!-- 附图及说明 -->
-	
+						
 						<!-- content start-->
 						<input type="hidden" id="ft_hidSrc" value="">
 						<input type="hidden" id="ft_hidFid" value="">
 						<div class="content" id="content5" style="display: none;">
+							
 							<div class="box">
 								<div class="upimg1" onclick="addPic();">
 									新增附图</div>
@@ -687,25 +685,15 @@
 						<!-- content end-->
 						<!-- content start-->
 						<div class="content" id="content5_build" style="display: none;">
+							
 							<div style="height: 20px">
 							</div>
 							<div id="piclist" class="title1" onclick="piclistShow();" style="padding-left: 40px; color:#444; font-size:14px; font-weight:bold;
 								display: none; cursor: pointer">
 								返回附图列表
-							</div> 
-								<form id="patent" id="picFrom" name="picFrom"  method="post" enctype="multipart/form-data" class="form-horizontal">
-									<input style="display:none;"  id="patentFile" name="patentFile" type="file" />
-									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
-									<button type="button" onclick="$('input[id=patentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
-									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" id="btn" >上传</button>
-								</form>
-							<div style="height: 10px">
 							</div>
-							    <div class="cl" style="padding-left: 40px; float: left;">
-								       <div class="upimg1" id="spanButtonPlaceholder"><!-- 上传flash插件 --></div>
-    							</div>
-							
-							
+							 
+							<div id="zyupload" class="zyupload"></div>
 							<div class="img_edit" id="origin">
 								<div class="imgfl" id="picBianHao">
 								</div>
@@ -721,10 +709,7 @@
 								</div>
 								<div id="divFileProgressContainer" style="height: 75px; display: none;">
 								</div>
-								<div id="thumbnails" class="imgreview" style="overflow: hidden;">
-									<img alt="" id="imghead" name="imghead" style="padding-right: 20px;">
-									
-								</div>
+								
 								<div class="daochu_cancelh">
 									<div class="daochu_cancel1" onclick="savePicNiLlu();return false;">
 										保存
@@ -1354,33 +1339,6 @@
 		$('#filename').val($(this).val());  
 	});
 	
- 	$(function () {
-		 var ajaxFormOption = {
-				 type: 'POST',
-					dataType: 'json',
-					url:"<s:url value='/kindeditor/uploadPic.html'/>",
-					data: $('#picFrom').formSerialize(),
-					success:function(data){
-						alert(data);
-					}
-		 };
-		 $("#btn").click(function () {
-			                  $("#picFrom").submit(ajaxFormOption);
-			                 return false;
-			              });
-	}); 
-/*  	 function savePic() {
-				alert(1);
-				$('#picFrom').ajaxSubmit({
-					type: 'POST',
-					dataType: 'json',
-					url:"<s:url value='/kindeditor/uploadPic.html'/>",
-					data: $('#picFrom').formSerialize(),
-					success:function(data){
-						alert(data);
-					}
-				});
-	 } */
 	 function loadingTemplate(sectionId){
 		 $.ajax({
 			 type : "POST",
@@ -1414,6 +1372,50 @@
 		 //alert($("#templateContent"+i).html());
 	 }
 	</script>
-
+	<script type="text/javascript">
+			$(function(){
+				// 初始化插件
+				$("#zyupload").zyUpload({
+					width            :   "650px",                 // 宽度
+					height           :   "400px",                 // 宽度
+					itemWidth        :   "140px",                 // 文件项的宽度
+					itemHeight       :   "115px",                 // 文件项的高度
+					url              :   "/upload/UploadAction",  // 上传文件的路径
+					fileType         :   ["jpg","png","js","exe"],// 上传文件的类型
+					fileSize         :   51200000,                // 上传文件的大小
+					multiple         :   true,                    // 是否可以多个文件上传
+					dragDrop         :   false,                   // 是否可以拖动上传文件
+					tailor           :   false,                   // 是否可以裁剪图片
+					del              :   true,                    // 是否可以删除文件
+					finishDel        :   false,  				  // 是否在上传文件完成后删除预览
+					/* 外部获得的回调接口 */
+					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+						console.info("当前选择了以下文件：");
+						console.info(selectFiles);
+					},
+					onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+						console.info("当前删除了此文件：");
+						console.info(file.name);
+					},
+					onSuccess: function(file, response){          // 文件上传成功的回调方法
+						console.info("此文件上传成功：");
+						console.info(file.name);
+						console.info("此文件上传到服务器地址：");
+						console.info(response);
+						$("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
+					},
+					onFailure: function(file, response){          // 文件上传失败的回调方法
+						console.info("此文件上传失败：");
+						console.info(file.name);
+					},
+					onComplete: function(response){           	  // 上传完成的回调方法
+						console.info("文件上传完成");
+						console.info(response);
+					}
+				});
+				
+			});
+		
+		</script> 
 </body>
 </html>

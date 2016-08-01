@@ -117,10 +117,7 @@ public class UploadController {
 		 Map<String, Object> succMap = new HashMap<String, Object>(); 
          succMap.put("url", saveUrl + newFileName+".html");  
          WebUtils.writeJsonStrToResponse(response, succMap);
-/*		String error="";
-		String msg="aa";
-		String res = "{ error:'" + error + "', msg:'" + msg + "',imgurl:'" + url + "'}";
-        writer.write(res);*/
+         /*writer.write(url);*/
 	}
 	
 	
