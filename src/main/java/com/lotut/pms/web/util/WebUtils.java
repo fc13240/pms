@@ -40,7 +40,6 @@ public class WebUtils {
 	public static int getPageSize(HttpSession session) {
 		final int DEFAULT_PAGE_SIZE = 10;
 		if (session.getAttribute("pageSize") == null) {
-			System.out.println(session.getAttribute("pageSize")+"-ppp");
 			return DEFAULT_PAGE_SIZE;
 		}
 		

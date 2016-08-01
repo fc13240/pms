@@ -180,7 +180,7 @@
 						console.info("此文件上传到服务器地址：");
 						console.info(response);
 						$("#uploadInf").append("<p>上传成功，文件地址是：" + Jresponse["url"] + "</p>");
-						$("#patentImgUrl").append("<input type='text' name='patenturl"+i+"' value='"+Jresponse["url"]+"'/>");
+						$("#patentImgUrl").append("<input type='text' id='patentUrl"+i+"' name='patentUrl"+i+"' value='"+Jresponse["url"]+"'/>");
 						i=++i;
 						
 					},
@@ -871,11 +871,11 @@
 								<div class="imgfl" id="picBianHao">
 								</div>
 								<div class="imgfr">
-								 <form id="patentUrlFrom" name="patentUrlFrom" action="<s:url value='/editor/savePatentImgUrl.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">
-									<input id="piciLlus2" name="" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off">
-									<input id="picMarkiLlus2" name="" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off">
+								 <form id="patentUrlFrom" name="patentUrlFrom"  method="post" enctype="multipart/form-data" class="form-horizontal">
+									<input id="piciLlus2" name="state" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
+									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<div id=patentImgUrl style="display:block"></div>
-								
+									
 								</form>
 									<div id="zyupload" class="zyupload"></div>
 								 	
@@ -1512,32 +1512,6 @@
 	});
 	
 
-	$(function () {
-		 var ajaxFormOption = {
-				 type: 'POST',
-					dataType: 'json',
-					url:"<s:url value='/kindeditor/uploadPic.html'/>",
-					data: $('#picFrom').formSerialize(),
-					success:function(data){
-						alert(data);
-					}
-		 };
-		 $("#btn").click(function () {
-			                  $("#picFrom").submit(ajaxFormOption);
-			                 return false;
-			              });
-	});
-/* 	 function savePic() {
-				$('#picFrom').ajaxSubmit({
-					type: 'POST',
-					dataType: 'json',
-					url:"<s:url value='/kindeditor/uploadPic.html'/>",
-					data: $('#picFrom').formSerialize(),
-					success:function(data){
-						alert(data);
-					}
-				});
-	 }*/
 
 	 function loadingTemplate(sectionId){
 		 $.ajax({
@@ -1574,7 +1548,27 @@
 		 
 	 }
 	 function savePatentImgUrl(){
-		 document.getElementById('patentUrlFrom').submit();
+		 var  state=$("#piciLlus2").val();
+		 var label=$("#picMarkiLlus2").val();
+		var patentUrl1=$("#patentUrl1").val();
+		 var patentUrl2=$("#patentUrl2").val();
+		var patentUrl3=$("#patentUrl3").val();
+		var patentUrl4=$("#patentUrl4").val();
+		var patentUrl5=$("#patentUrl5").val();
+		 
+		 $.ajax({
+				type: "POST",
+				url: "<s:url value='/editor/savePatentImgUrl.html'/>", 
+				data: {"state":state,"label":label,"patentUrl1":patentUrl1,"patentUrl2":patentUrl2,"patentUrl3":patentUrl3,
+						"patentUrl4":patentUrl4,"patentUrl5":patentUrl5},
+				success: function(data){
+					alert("操作成功");
+				},
+				error: function(){
+					alert("操作失败");
+				}
+			});
+		 
 	 }
 	</script>
 	

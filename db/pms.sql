@@ -599,3 +599,18 @@ CREATE TABLE IF NOT EXISTS patent_document_templates(
 	CONSTRAINT fk_patent_document_template_patent_doc_section FOREIGN KEY ids_fk_patent_document_template_doc_section(patent_doc_section) REFERENCES patent_doc_section_types(patent_doc_section_id)
 	
 );
+
+
+CREATE TABLE patent_attachment (
+  attachment_id BIGINT(20) NOT NULL AUTO_INCREMENT,
+  patenturl1 VARCHAR(200) DEFAULT NULL,
+  patenturl2 VARCHAR(200) DEFAULT NULL,
+  patenturl3 VARCHAR(200) DEFAULT NULL,
+  patenturl4 VARCHAR(200) DEFAULT NULL,
+  patenturl5 VARCHAR(200) DEFAULT NULL,
+  state VARCHAR(30) NOT NULL COMMENT '说明',
+  user_id INT(11) DEFAULT NULL,
+  label VARCHAR(30) NOT NULL COMMENT '标记',
+  sign_Id BIGINT(20),
+  PRIMARY KEY (attachment_id)
+)

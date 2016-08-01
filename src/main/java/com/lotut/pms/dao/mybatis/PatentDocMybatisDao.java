@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.PatentDocDao;
 import com.lotut.pms.dao.mapper.PatentDocMapper;
 import com.lotut.pms.dao.mapper.PatentMapper;
+import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
 
 public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentDocDao{
@@ -54,5 +55,13 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	public void deletePatentDoc(long patentDocsId) {
 	
 		patentDocMapper.deletePatentDoc(patentDocsId);
+	}
+
+
+
+	@Override
+	public void savePatentImgUrl(Attachment attachment) {
+		patentDocMapper.savePatentImgUrl(attachment);
+		
 	}
 }
