@@ -196,8 +196,10 @@
 										收起</i></p>
 							</div>
 							<div class="Writing_tips tip5" name="tips" style="display: none;">
+							
 								<p>
 									<span>撰写指南</span>
+									
 								</p>
 								<p>
 									此部分应当详细、具体地描述实现发明或实用新型的优选方式，在适当情况下举例说明，有需要的话可以结合附图说明。每一条独立权利要求需要给出一个最佳实施方式或具体实施方式。此外从属权利要求的优先方案也应当在这一部分的具体实施方式中体现。
@@ -743,12 +745,14 @@
 								<div class="imgfl" id="picBianHao">
 								</div>
 								<div class="imgfr">
-									<div id="zyupload" class="zyupload"></div>
+									
 									<input id="piciLlus2" name="" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off">
 									<input id="picMarkiLlus2" name="" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off">
+									<div id="zyupload" class="zyupload"></div>
 								</div>
 							</div>
 							<div class="img_edit" id="reHtml" style="display: none">
+								
 							</div>
 							<div class="cl">
 								<div id="swfu_container" style="margin: 0px 10px;">
