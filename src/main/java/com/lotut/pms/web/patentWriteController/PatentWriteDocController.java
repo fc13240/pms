@@ -73,6 +73,16 @@ public class PatentWriteDocController {
 		return "patentDoc_search";		
 	}
 	
+	@RequestMapping(path="/compilePatentDoc",method=RequestMethod.GET)
+	public String  compilePatentDoc(@RequestParam("patentDocsId")long patentDocsId,@RequestParam("tab")int tab,Model model){
+		int userId=PrincipalUtils.getCurrentUserId();
+		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocsId);
+		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
+		model.addAttribute("patent", patentDoc);
+		model.addAttribute("patentDocs", patentDocs);
+		model.addAttribute("tab", tab);
+		return "patentDoc_search2";		
+	}
 	@RequestMapping(path="/PatentDocList",method=RequestMethod.GET)
 	public String  PatentDocList(Model model){
 		int userId=PrincipalUtils.getCurrentUserId();

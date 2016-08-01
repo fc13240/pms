@@ -918,9 +918,9 @@
 	                <div class="cl">
 	                    <div class="bth" onclick="setipcTypeByID(1,this);">
 	                        发明</div>
-	                    <div class="bth" style="margin-left: 10px;" onclick="setipcTypeByID(2,this);">
+	                  <!--   <div class="bth" style="margin-left: 10px;" onclick="setipcTypeByID(2,this);">
 	                        实用新型</div>
-	                </div>
+ -->	                </div>
 	                <div class="left_help">
 	                    <a href="javascript:void(0);" onclick="helperv6();">如何设置专利类型？</a>
 	                </div>
