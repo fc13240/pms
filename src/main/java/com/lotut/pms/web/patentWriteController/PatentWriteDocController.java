@@ -177,14 +177,12 @@ public class PatentWriteDocController {
 	
 	@RequestMapping(path="/savePatentImgUrl",method=RequestMethod.POST)
 	public void savePatentImgUrl(Attachment attachment,HttpSession session,PrintWriter writer){
-		int userId = PrincipalUtils.getCurrentUserId();
 		patentDocService.savePatentImgUrl(attachment);
 		writer.write(1);
 	}
 	
 	@RequestMapping(path="/savePracticalPatentImgUrl",method=RequestMethod.POST)
 	public void savePracticalPatentImgUrl(Attachment attachment,HttpSession session,PrintWriter writer){
-		int userId = PrincipalUtils.getCurrentUserId();
 		patentDocService.savePatentImgUrl(attachment);
 		writer.write(1);
 	}
