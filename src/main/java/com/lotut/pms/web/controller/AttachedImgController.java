@@ -18,8 +18,8 @@ import com.lotut.pms.constants.Settings;
 import com.lotut.pms.web.util.WebUtils;
 
 @Controller 
-public class AttachedController2 {
-	private static final Logger LOGGER = Logger.getLogger(AttachedController2.class);  
+public class AttachedImgController {
+private static final Logger LOGGER = Logger.getLogger(AttachedImgController.class);  
     
     @RequestMapping(path="/patentDocAttachment/{fileType}/{uploadDate}/{fileName}.{suffix}.html")  
     public void attached(HttpServletRequest request, HttpServletResponse response,   

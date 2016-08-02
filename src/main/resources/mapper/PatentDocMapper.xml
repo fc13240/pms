@@ -3,11 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper  namespace="com.lotut.pms.dao.mapper.PatentDocMapper">
-<!-- 	<insert id="saveEditorText" parameterType="Editor">
-		insert into editor(editor_content) values(#{editorContent,javaType=string,jdbcType=CLOB});
-	</insert> -->
-	
-	
+
 	<resultMap type="PatentDoc" id="PatentDocMap">
 		<id property="patentDocsId" column="patent_docs_id"/>
 		<result property="appNo" column="app_no"/>
@@ -25,12 +21,24 @@
 		<result property="rightClaim" column="right_claim"/>
 		<result property="abstractDescription" column="abstract_desc"/>
 	</resultMap>
-	
+
+		<resultMap type="Attachment" id="PatentImgMap">
+			<id property="attachmentId" column="attachment_id"/>
+			<id property="userId" column="user_id"/>
+			<id property="signId" column="sign_Id"/>
+			<result property="state" column="state"/>
+			<result property="label" column="label"/>
+			<result property="patentUrl1" column="patenturl1"/>
+			<result property="patentUrl2" column="patenturl2"/>
+			<result property="patentUrl3" column="patenturl3"/>
+			<result property="patentUrl4" column="patenturl4"/>
+			<result property="patentUrl5" column="patenturl5"/>
+		</resultMap>
 	
  	<insert id="savePatentDoc" parameterType="PatentDoc">
 		insert into patent_documents(app_no,user_id,patent_type,create_time,patent_name,tech_domain,background_tech,content_problem,content_right,content_effect,
 		implement_way,right_claim,abstract_desc) values
-		(#{appNo,javaType=string,jdbcType=VARCHAR},#{userId},1,now(),#{name},#{techDomain,javaType=string,jdbcType=CLOB},#{backgoundTech,javaType=string,jdbcType=CLOB},#{contentProblem,javaType=string,jdbcType=CLOB},#{contentRight,javaType=string,jdbcType=CLOB},#{contentEffect,javaType=string,jdbcType=CLOB},
+		(#{appNo,javaType=string,jdbcType=VARCHAR},#{userId},#{patentType},now(),#{name},#{techDomain,javaType=string,jdbcType=CLOB},#{backgoundTech,javaType=string,jdbcType=CLOB},#{contentProblem,javaType=string,jdbcType=CLOB},#{contentRight,javaType=string,jdbcType=CLOB},#{contentEffect,javaType=string,jdbcType=CLOB},
 		#{implementWay,javaType=string,jdbcType=CLOB},#{rightClaim,javaType=string,jdbcType=CLOB},#{abstractDescription,javaType=string,jdbcType=CLOB});
 	</insert>
 	
@@ -46,7 +54,7 @@
 	</select>
 	
 	<update id="updatePatentDoc" parameterType="PatentDoc">
-		update patent_documents set app_no=#{appNo,javaType=string,jdbcType=VARCHAR},user_id=#{userId},patent_type=1,patent_name=#{name},tech_domain=#{techDomain,javaType=string,jdbcType=CLOB},
+		update patent_documents set app_no=#{appNo,javaType=string,jdbcType=VARCHAR},user_id=#{userId},patent_name=#{name},tech_domain=#{techDomain,javaType=string,jdbcType=CLOB},
 		background_tech=#{backgoundTech,javaType=string,jdbcType=CLOB},content_problem=#{contentProblem,javaType=string,jdbcType=CLOB},content_right=#{contentRight,javaType=string,jdbcType=CLOB},content_effect=#{contentEffect,javaType=string,jdbcType=CLOB},
 		implement_way=#{implementWay,javaType=string,jdbcType=CLOB},right_claim=#{rightClaim,javaType=string,jdbcType=CLOB},abstract_desc=#{abstractDescription,javaType=string,jdbcType=CLOB}
 		where  patent_docs_id=#{patentDocsId}
@@ -54,6 +62,10 @@
 	
 	<delete id="deletePatentDoc">
 		delete  from  patent_documents  where  patent_docs_id=#{patentDocsId} 
-		
 	</delete>
+	
+	<insert id="savePatentImgUrl" parameterType="Attachment">
+		insert into patent_attachment(user_id,state,label,patenturl1,patenturl2,patenturl3,patenturl4,patenturl5,sign_Id) values
+		(#{userId},#{state},#{label},#{patentUrl1,javaType=string,jdbcType=VARCHAR},#{patentUrl2,javaType=string,jdbcType=VARCHAR},#{patentUrl3,javaType=string,jdbcType=VARCHAR},#{patentUrl4,javaType=string,jdbcType=VARCHAR},#{patentUrl5,javaType=string,jdbcType=VARCHAR},#{signId});
+	</insert>
 </mapper>

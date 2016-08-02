@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
@@ -40,18 +41,21 @@ public class PatentWriteDocController {
 	
 
 	@RequestMapping(path="/inventionWriterForm")
-	public String inventionEditorForm(Model model){
+	public String inventionEditorForm(@RequestParam("patentType")int patentType, HttpSession session,Model model){
+		session.setAttribute("signId", System.currentTimeMillis());
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		model.addAttribute("patentDocs", patentDocs);
+		model.addAttribute("patentType",patentType);
 		return "patentDoc_invention_editor";
 	}
 
 	@RequestMapping(path="/practicalWriterForm")
-	public String practicalEditorForm(Model model){
+	public String practicalEditorForm(@RequestParam("patentType")int patentType,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		model.addAttribute("patentDocs", patentDocs);
+		model.addAttribute("patentType",patentType);
 		return "patentDoc_practical_editor";
 	}	
 	
@@ -73,6 +77,16 @@ public class PatentWriteDocController {
 		return "patentDoc_search";		
 	}
 	
+	@RequestMapping(path="/compilePatentDoc",method=RequestMethod.GET)
+	public String  compilePatentDoc(@RequestParam("patentDocsId")long patentDocsId,@RequestParam("tab")int tab,Model model){
+		int userId=PrincipalUtils.getCurrentUserId();
+		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocsId);
+		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
+		model.addAttribute("patent", patentDoc);
+		model.addAttribute("patentDocs", patentDocs);
+		model.addAttribute("tab", tab);
+		return "patentDoc_search2";		
+	}
 	@RequestMapping(path="/PatentDocList",method=RequestMethod.GET)
 	public String  PatentDocList(Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
@@ -161,6 +175,18 @@ public class PatentWriteDocController {
 		patentDocumentTemplateService.deleteTemplateDoc(templateId);
 		return "删除成功！";
 	}
+	
+	
+	@RequestMapping(path="/savePatentImgUrl",method=RequestMethod.POST)
+	public void savePatentImgUrl(Attachment attachment,HttpSession session,PrintWriter writer){
+		long signId=(Long)session.getAttribute("signId");
+		attachment.setSignId(signId);
+		int userId = PrincipalUtils.getCurrentUserId();
+		attachment.setUserId(userId);
+		patentDocService.savePatentImgUrl(attachment);
+		writer.write(1);
+	}
+	
 	
 	/**
 	 * 提交表单操作

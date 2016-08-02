@@ -33,7 +33,7 @@
 	        
 	    <input id="hiduserid" type="hidden" value="UC1706F442C97E4C58977D24E340EBF66">
 	    <div class="body">
-	        <div class="left" style="height: 700px;">
+	        <div class="left" style="height: 700px;">   
 				<!--申请文件九部分标签切换 -->
 				<div class="tab" id="tabWrap"> 
 					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">发明名称</div>
@@ -904,11 +904,8 @@
 	        <div class="step3_top">
 	            <div class="left_top" style="border: none">
 	                <div class="cl">
-	                    <div class="bth" onclick="setipcTypeByID(1,this);">
-	                        发明</div>
-	                  <!--   <div class="bth" style="margin-left: 10px;" onclick="setipcTypeByID(2,this);">
-	                        实用新型</div>
- -->	                </div>
+	                    <div class="bth" onclick="setipcTypeByID(1,this);">发明</div>
+	                </div>
 	                <div class="left_help">
 	                    <a href="javascript:void(0);" onclick="helperv6();">如何设置专利类型？</a>
 	                </div>
@@ -1302,6 +1299,49 @@
 	    
 	    
 	    <script type="text/javascript">
+	    
+	    function setipcTypeByID(id, eve) {
+	        if ($(eve).attr("class") == "bt")//已经是选中状态无效果
+	        {
+	            return;
+	        }
+	        $(eve).parent().find(".bt").attr("class", "bth");
+	        $(eve).attr("class", "bt");
+	        //获取选中的专利类型的备选大类模板 id
+	        var url = _RootPath + "SelfWriteOperator.aspx";
+	        $.ajax({
+	            type: "post",
+	            url: url,
+	            dataType: "json", //返回值类型
+	            data: {
+	                action: "gettemplatelist",
+	                patenttype: id
+	            },
+	            success: function (sender) {
+	                if (sender.ReturnValue != '0') {
+	                    layer.alert(sender.ErrorInfo);
+	                }
+	                else {
+	                    var obj = sender.Option;
+	                    var s = [];
+	                    for (var i = 0; i < obj.length && i < 3; i++) {
+	                        s.push(' <div class="step51" onclick="seltemp(\'' + obj[i].Template_No + '\');"> ' + clearkbfontcolor(obj[i].Title) + '></div>');
+	                    }
+	                    $("#helper_templist").html(s.join(""));
+	                }
+	            },
+	            error: function (sender) { layer.alert("出现未知错误，请重新打开页面。"); }
+	        });
+
+
+	        if (id == 1) {
+	            $("#div_ipctype").find("div:eq(0)").click();
+	        }
+	        else if (id == 2) {
+	            $("#div_ipctype").find("div:eq(1)").click();
+	        }
+	    }
+
 			function submitForm(){
 				$.ajax({
 					type: "POST",
@@ -1355,6 +1395,23 @@
 					}
 				});
 			}
+			
+			$(function(){
+					var oldtab = $("#tabWrap").find(".tab1").attr("value");
+					var tab=${tab};
+				 $("div[name='tabs']:eq("+tab+")").attr('class', 'tab1').siblings().attr('class', 'tab1h');
+
+					var old_name="content"+oldtab;
+					var new_name="content"+tab;
+					
+					var old_tip_name="tip"+oldtab;
+					var new_tip_name="tip"+tab;
+					
+					$('#'+old_name).hide();
+					$('#'+new_name).show();
+					$('.'+old_tip_name).hide();
+					$('.'+new_tip_name).show();	
+			})
 	</script>
 </body>
 </html>
