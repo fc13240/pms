@@ -55,15 +55,6 @@ public class PatentWriteDocController {
 		
 	}
 
-	@RequestMapping(path="/practicalWriterForm")
-	public String practicalEditorForm(@RequestParam("patentType")int patentType,Model model,HttpSession session){
-		session.setAttribute("practicalId", System.currentTimeMillis());
-		int userId=PrincipalUtils.getCurrentUserId();
-		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
-		model.addAttribute("patentDocs", patentDocs);
-		model.addAttribute("patentType",patentType);
-		return "patentDoc_practical_editor";
-	}	
 	
 	@RequestMapping(path="/addPatentDoc",method=RequestMethod.POST)
 	public void  addEditorText(PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){
@@ -185,8 +176,6 @@ public class PatentWriteDocController {
 	
 	@RequestMapping(path="/savePatentImgUrl",method=RequestMethod.POST)
 	public void savePatentImgUrl(Attachment attachment,HttpSession session,PrintWriter writer){
-		long signId=(Long)session.getAttribute("signId");
-		attachment.setSignId(signId);
 		int userId = PrincipalUtils.getCurrentUserId();
 		attachment.setUserId(userId);
 		patentDocService.savePatentImgUrl(attachment);
@@ -195,8 +184,6 @@ public class PatentWriteDocController {
 	
 	@RequestMapping(path="/savePracticalPatentImgUrl",method=RequestMethod.POST)
 	public void savePracticalPatentImgUrl(Attachment attachment,HttpSession session,PrintWriter writer){
-		long signId=(Long)session.getAttribute("practicalId");
-		attachment.setSignId(signId);
 		int userId = PrincipalUtils.getCurrentUserId();
 		attachment.setUserId(userId);
 		patentDocService.savePatentImgUrl(attachment);
