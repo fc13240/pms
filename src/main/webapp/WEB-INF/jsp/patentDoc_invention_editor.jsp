@@ -350,7 +350,7 @@
 									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 									            	<tr>
 									                    <td style="width:520px;" >
-									                    	<textarea rows="3" cols="10" id="editorContent" name="name" onmousedown ="testEvent(1)" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
+									                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
 									                    	
 									                    	</textarea>
 									                    </td>
@@ -1347,7 +1347,7 @@
 	 function loadingTemplate(sectionId){
 		 $.ajax({
 			 type : "POST",
-			 url : "<s:url value='/editor1/getTemplateList.html'/>?sectionId="+sectionId,
+			 url : "<s:url value='/editor/getTemplateList.html'/>?sectionId="+sectionId,
 			 success : function (data){
 				 var obj= $.parseJSON(data);
 				 $("#modelWrap").empty();
@@ -1355,7 +1355,7 @@
 				 $.each(obj,function(i,item){
 					 $("#modelWrap").append("<div class='model1 model_list"+i+"' style='overflow-x: hidden; overflow-y: hidden;height:158px;'>"+
 						 "<div class='title'>模板"+(i+1)+":"+item.templateTitle+"</div>"+
-						 	 "<div class='content'>"+
+						 	 "<div class='content' style='height:105px;overflow-y:hidden;'>"+
 				 				"<p class='small'>"+
 									"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
 								"</p>"+
@@ -1389,15 +1389,15 @@
 						"patentDocId":patentDocId
 					},
 						success: function(data){
+						alert("操作成功");
 
-							alert("操作成功");
-						},
-						error : function() {
-							alert("操作失败");
-						}
-				});
-			}
+					},
+					error : function() {
+						alert("操作失败");
+					}
+			});
 		}
+	}
 	 function templatebuttonclick(i,patentDocSectionId){
 		 if(patentDocSectionId==1){
 			 editor.html($("#templateContent"+i).html());
@@ -1431,14 +1431,7 @@
 		 }else{
 			 
 		 }
-		 }
-	</script>
-	<script type="text/javascript">
-		function testEvent(index){
-			alert(index);
-		}
-	
-	</script>
-
+	}
+</script>
 </body>
 </html>
