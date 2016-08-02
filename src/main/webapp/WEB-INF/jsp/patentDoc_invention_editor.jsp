@@ -1424,6 +1424,7 @@
 				data : {"patentDocId":patentDocId
 				},
 					success: function(data){
+						$("#picLsy").empty();
 					var obj= $.parseJSON(data);
 					$.each(obj,function(i,item){
 						 $("#picLsy").append(
@@ -1431,7 +1432,7 @@
 									"<a href='#'><img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/></a>"+
 									"<div class='text'>"+
 										"<b>"+item.caption+"</b>"+
-										"<p><a href='#'>"+item.label+"</a></p>"+
+										"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
 									"</div>"
 								+"</li>"
 						);

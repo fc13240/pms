@@ -68,6 +68,10 @@
 	</insert>
 	
 	<select id="getAttachmentById"  resultMap="PatentImgMap">
-		select caption,label, attachment_url from patent_attachment where  patent_doc_id=#{patentDocId}
+		select attachment_id,caption,label, attachment_url from patent_attachment where  patent_doc_id=#{patentDocId}
 	</select>
+	
+	<delete id="delectAttachmentById"  >
+		delete from patent_attachment where  attachment_id=#{attachmentId}
+	</delete>
 </mapper>
