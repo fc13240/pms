@@ -29,7 +29,7 @@
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers.js"></script>
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers2.js"></script>
 	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg--> 
-	<link rel="stylesheet" href="${base }/temp/zyupload/skins/zyupload-1.0.0.min.css " type="text/css">
+	<link rel="stylesheet" href="${base }/temp/zyupload/skins/zyupload-1.0.0.css " type="text/css">
 	<script type="text/javascript" src="${base }/temp/zyupload/zyupload.basic-1.0.0.js"></script>
 	<script type="text/javascript">
 	var i= 1;
@@ -76,6 +76,7 @@
 						$("#uploadInf").append("<p>上传成功，文件地址是：" + Jresponse["url"] + "</p>");
 						$("#patentImgUrl").append("<input type='hidden' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
 						savePatentImgUrl();
+						$("#patentImgUrl").empty();
 						$('#piciLlus2').val("请填写附图说明，例如”图1为本发明实施例XX的方法流程示意图”。").css('color', '#999');
 					    $('#picMarkiLlus2').val("请填写附图标记说明，例如“1杯子主体，2杯子把手”。").css('color', '#999');
 					},

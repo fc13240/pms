@@ -38,7 +38,7 @@ pre{font-family:'simsun';}
 
 
 .andArea{
-	background: url("images/add_img.png") no-repeat scroll center 5px rgba(0, 0, 0, 0);
+	background: url("/pms/temp/zyupload/skins/images/add_img.png") no-repeat scroll center 5px rgba(0, 0, 0, 0);
     border: 1px dashed #E0E0E0;
     color: #CCCCCC;
     font-size: 18px;
