@@ -1396,6 +1396,8 @@
 						alert("操作失败");
 					}
 			});
+		}else{
+			alert("请选择上传图片!");
 		}
 	}
 	 function templatebuttonclick(i,patentDocSectionId){
