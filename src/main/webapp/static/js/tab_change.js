@@ -60,7 +60,7 @@ function modelbuttonclick(list_no) {
 function loadingTemplateBYTab(sectionId){
 	 $.ajax({
 		 type : "POST",
-		 url : "/getTemplateList.html?sectionId="+sectionId,
+		 url : "../editor/getTemplateList.html?sectionId="+sectionId,
 		 success : function (data){
 			 var obj= $.parseJSON(data);
 			 $("#modelWrap").empty();

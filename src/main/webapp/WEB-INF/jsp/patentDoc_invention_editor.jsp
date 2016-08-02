@@ -1425,14 +1425,7 @@
 			 }
 		 })
 	 }
-<<<<<<< HEAD
-	 
-	 function templatebuttonclick(i){
-		 editor.html($("#templateContent"+i).html());
-		 //alert($("#templateContent"+i).html());
-		 
-		 
-	 }
+
 
 		function savePatentImgUrl() {
 			if ($("#patentUrl1").length > 0) {
@@ -1456,8 +1449,16 @@
 						"patentUrl4" : patentUrl4,
 						"patentUrl5" : patentUrl5
 					},
-					success : function(data) {
-=======
+						success: function(data){
+
+							alert("操作成功");
+						},
+						error : function() {
+							alert("操作失败");
+						}
+				});
+			}
+		}
 	 function templatebuttonclick(i,patentDocSectionId){
 		 if(patentDocSectionId==1){
 			 editor.html($("#templateContent"+i).html());
@@ -1491,46 +1492,7 @@
 		 }else{
 			 
 		 }
-	 function savePatentImgUrl(){
-		 if($("#patentUrl1").length>0){    
-			 var  state=$("#piciLlus2").val();
-			 var label=$("#picMarkiLlus2").val();
-			var patentUrl1=$("#patentUrl1").val();
-			 var patentUrl2=$("#patentUrl2").val();
-			var patentUrl3=$("#patentUrl3").val();
-			var patentUrl4=$("#patentUrl4").val();
-			var patentUrl5=$("#patentUrl5").val();
-			 
-			 $.ajax({
-					type: "POST",
-					url: "<s:url value='/editor/savePatentImgUrl.html'/>", 
-					data: {"state":state,"label":label,"patentUrl1":patentUrl1,"patentUrl2":patentUrl2,"patentUrl3":patentUrl3,
-							"patentUrl4":patentUrl4,"patentUrl5":patentUrl5},
-					success: function(data){
->>>>>>> 9ceafd1a19fd6fbf8c0ffe7d04ce3e29e8ea01df
-						alert("操作成功");
-					},
-					error : function() {
-						alert("操作失败");
-					}
-				});
-<<<<<<< HEAD
-
-			} else {
-				alert("请选择图片");
-			}
-
-		}
-=======
-			     
-		    }else{
-		    	alert("请选择图片");
-		    }
-	 }
-	</script>
->>>>>>> 9ceafd1a19fd6fbf8c0ffe7d04ce3e29e8ea01df
-	
-		
+		 }
 	</script>
 
 </body>

@@ -25,6 +25,7 @@ import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.WebUtils;
 
 @Controller
 @RequestMapping(path="/editor")
@@ -50,7 +51,8 @@ public class PatentWriteDocController {
 	}
 
 	@RequestMapping(path="/practicalWriterForm")
-	public String practicalEditorForm(@RequestParam("patentType")int patentType,Model model){
+	public String practicalEditorForm(@RequestParam("patentType")int patentType,Model model,HttpSession session){
+		session.setAttribute("practicalId", System.currentTimeMillis());
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		model.addAttribute("patentDocs", patentDocs);
@@ -186,7 +188,21 @@ public class PatentWriteDocController {
 		writer.write(1);
 	}
 	
+	@RequestMapping(path="/savePracticalPatentImgUrl",method=RequestMethod.POST)
+	public void savePracticalPatentImgUrl(Attachment attachment,HttpSession session,PrintWriter writer){
+		long signId=(Long)session.getAttribute("practicalId");
+		attachment.setSignId(signId);
+		int userId = PrincipalUtils.getCurrentUserId();
+		attachment.setUserId(userId);
+		patentDocService.savePatentImgUrl(attachment);
+		writer.write(1);
+	}
 	
+	@RequestMapping(path="/getTemplateList")
+	public void getTemplateList(@RequestParam("sectionId")int sectionId,HttpServletResponse response) throws IOException{
+		List<PatentDocumentTemplate> DocTemplates = patentDocumentTemplateService.getTemplateList(sectionId);
+		WebUtils.writeJsonStrToResponse(response, DocTemplates);
+	}
 	/**
 	 * 提交表单操作
 	 */

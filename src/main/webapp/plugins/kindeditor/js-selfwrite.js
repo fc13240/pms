@@ -16,7 +16,7 @@ $(function () {
             var returnurl = _UserUrl + "user/login.aspx?referrUrl=" + encodeURI(_SelfWriteUrl + "self/selfwrite.aspx?id=" + id);
             if (id == "")
                 returnurl = _UserUrl + "user/login.aspx?referrUrl=" + encodeURI(_SelfWriteUrl + "self/selfwrite.aspx");
-            locationwin(returnurl);
+            //locationwin(returnurl);
         }
         else { //如果登录了的操作，不登陆上面做了跳转到登录页面的处理 
             $("#hiduserid").val(sender.Option.UID);
@@ -165,7 +165,7 @@ function tuiAgency() {//simple_title
             newnameSearch = nameSearch;
         }
 
-        locationwin(_AgencyUrl + 'apply/applyresult.aspx?tPoints=' + encodeURI(newnameSearch) + '&ipcText=&pType=0&pro=&city=');
+        //locationwin(_AgencyUrl + 'apply/applyresult.aspx?tPoints=' + encodeURI(newnameSearch) + '&ipcText=&pType=0&pro=&city=');
     }
 }
 

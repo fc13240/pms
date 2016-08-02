@@ -613,4 +613,5 @@ CREATE TABLE patent_attachment (
   label VARCHAR(30) NOT NULL COMMENT '标记',
   sign_Id BIGINT(20),
   PRIMARY KEY (attachment_id)
-)
+);
+alter table patent_documents add column sign_Id BIGINT(20);
