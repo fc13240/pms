@@ -191,7 +191,7 @@ public class PatentWriteDocController {
 	
 	@RequestMapping(path="/savePracticalPatentImgUrl",method=RequestMethod.POST)
 	public void savePracticalPatentImgUrl(Attachment attachment,HttpSession session,PrintWriter writer){
-		long signId=(Long)session.getAttribute("practical");
+		long signId=(Long)session.getAttribute("practicalId");
 		attachment.setSignId(signId);
 		int userId = PrincipalUtils.getCurrentUserId();
 		attachment.setUserId(userId);
