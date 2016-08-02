@@ -316,13 +316,13 @@
 	                    
 						<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
 						<div class="content" id="content0">
-							<div class="title" onclick="loadingTemplate(1)">
+							<div class="title">
 								发明名称
 							</div>
 							<div class="cl">
 								<div id="editor0" thistempid="1">
 									<div class="instru">
-										<div class="title2" onclick="loadingTemplate(1)" >
+										<div class="title2">
 											注意套用模板时专利名称不得超过25个字，化学领域的某些申请允许最多到40个字，这个规定可要注意哦。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。</div>
 									</div>
 									<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
@@ -1405,7 +1405,7 @@
 									"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
 								"</p>"+
 							"</p>"+
-						    "<div class='button' style='z-index:500000;' onclick='templatebuttonclick("+i+")'>+使用模板</div>"+
+						    "<div class='button' style='z-index:500000;' onclick='templatebuttonclick("+i+","+item.patentDocSectionType.patentDocSectionId+")'>+使用模板</div>"+
 						  "</div>"+
 					   "</div>");
 					 $("#modelWrap span").css("color","black");
@@ -1417,9 +1417,39 @@
 		 })
 	 }
 	 
-	 function templatebuttonclick(i){
-		 editor.html($("#templateContent"+i).html());
-		 //alert($("#templateContent"+i).html());
+	 function templatebuttonclick(i,patentDocSectionId){
+		 if(patentDocSectionId==1){
+			 editor.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==2){
+			 editor1.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==3){
+			 editor2.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==4){
+			 editor3.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==5){
+			 editor4.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==6){
+			 editor5.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==7){
+			 editor6.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==8){
+			 editor7.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==9){
+			 editor8.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==10){
+			 editor9.html($("#templateContent"+i).html());
+		 }else{
+			 
+		 }
 	 }
 	</script>
 	
