@@ -52,8 +52,12 @@ public class PatentWriteDocController {
 		model.addAttribute("patentType",patentType);
 		if(patentType==1){
 			return "patentDoc_invention_editor";
-		}
+		}else if(patentType==2){
 			return "patentDoc_practical_editor";
+		}
+		return "";	
+
+			
 		
 	}
 
