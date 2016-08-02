@@ -64,6 +64,6 @@
 	
 	<insert id="savePatentImgUrl" parameterType="Attachment">
 		insert into patent_attachment(patent_doc_id,caption,label,attachment_url) values
-		(#{patentDocId},#{caption},#{label},#{attachmentItem,javaType=string,jdbcType=VARCHAR})
+		(#{patentDocId},#{caption},#{label},#{attachmentUrl,javaType=string,jdbcType=VARCHAR})
 	</insert>
 </mapper>
