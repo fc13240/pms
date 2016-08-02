@@ -175,7 +175,8 @@ table td a {
 								 编辑
 					</a><a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">预览</a>
                     <a onclick=" exportLayerShow('3197');">导出</a>
-                    <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">删除</a><a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>
+                    <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">删除</a>
+                    <a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>
                 </td>
             </tr>
             
@@ -200,7 +201,6 @@ table td a {
 		window.open("<s:url value='/editor/inventionWriterForm.html'/>");
 	}
 		    
-		}
 
 
 </script>	
