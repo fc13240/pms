@@ -51,7 +51,8 @@ public class PatentWriteDocController {
 	}
 
 	@RequestMapping(path="/practicalWriterForm")
-	public String practicalEditorForm(@RequestParam("patentType")int patentType,Model model){
+	public String practicalEditorForm(@RequestParam("patentType")int patentType,Model model,HttpSession session){
+		session.setAttribute("practicalId", System.currentTimeMillis());
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		model.addAttribute("patentDocs", patentDocs);
