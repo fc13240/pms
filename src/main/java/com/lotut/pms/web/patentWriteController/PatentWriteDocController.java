@@ -44,10 +44,10 @@ public class PatentWriteDocController {
 	public String inventionEditorForm(@RequestParam("patentType")int patentType, PatentDoc patentDoc,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
-		patentDocService.savePatentDoc(patentDoc);
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		patentDocService.savePatentDoc(patentDoc);
-		model.addAttribute("patentDoc",patentDoc);
+		long patentDocId=patentDoc.getPatentDocsId();
+		model.addAttribute("patentDocId",patentDocId);
 		model.addAttribute("patentDocs", patentDocs);
 		model.addAttribute("patentType",patentType);
 		if(patentType==1){
