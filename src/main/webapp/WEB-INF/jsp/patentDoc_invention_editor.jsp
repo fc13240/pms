@@ -31,6 +31,8 @@
 	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg--> 
 	<link rel="stylesheet" href="${base }/temp/zyupload/skins/zyupload-1.0.0.css " type="text/css">
 	<script type="text/javascript" src="${base }/temp/zyupload/zyupload.basic-1.0.0.js"></script>
+	<script type="text/javascript" src="${base }/temp/zyupload/jquery.easing.min.js"></script>
+	<link type="text/css" rel="stylesheet" media="screen" href="${base }/temp/zyupload/style.css" />
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -734,19 +736,13 @@
 						<div class="content" id="content8" style="display: none;">
 							<div style="height: 80px">
 							</div>
-								<div class="upimg1" onclick="chooseFromList();" id="choseAbs" style="
+								<div class="upimg1" onclick="findAttachmentImg();" id="choseAbs" style="
 									left: 280px; margin-top: 0;float:left;">
 									从附图中选择</div>
-							<div class="cl">
-								<div id="thumbnailsab" class="imgreview" style="overflow: hidden;">
-									<img alt="" id="imgheadab" style="padding-right: 20px;">
-									
-									
-								</div>
-								
-								
+							<div class="picBox">
+								<ul class="picL" id="picLsy" >
+								</ul>
 							</div>
-							
 						</div>
 						<!-- content end-->
 	
@@ -1419,6 +1415,33 @@
 			 
 		 }
 	}
+	 function findAttachmentImg(){
+		 var patentDocId=$("#patentDocId").val();
+		 $.ajax({
+				type : "POST",
+				url : "<s:url value='/editor/getAttachmentById.html'/>",
+				data : {"patentDocId":patentDocId
+				},
+					success: function(data){
+					alert("操作成功");
+
+				},
+				error : function() {
+					alert("操作失败");
+				}
+		});
+	 }
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$("#picLsy li").hover(function(){
+		$(this).find('.text:not(:animated)').animate({top:"0px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	},function () {
+		$(this).find('.text').animate({top:"149px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	});
+
+});
 </script>
 </body>
 </html>

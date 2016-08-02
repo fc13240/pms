@@ -188,11 +188,14 @@ public class PatentWriteDocController {
 		writer.write(1);
 	}
 	
-	@RequestMapping(path="/getAttachmentById",method=RequestMethod.GET)
-	public void getAttachmentById(@RequestParam("patentDocId")long patentDocId,Model model,PrintWriter writer){
-		List<Attachment> attachmentImg=patentDocService.getAttachmentById(patentDocId);
-		model.addAttribute("attachmentImg", attachmentImg);
-		writer.write(1);
+	@RequestMapping(path="/getAttachmentById",method=RequestMethod.POST)
+	public void getAttachmentById(@RequestParam("patentDocId")long patentDocId,Model model,HttpServletResponse response,PrintWriter writer){
+		try {
+			List<Attachment> attachmentImg=patentDocService.getAttachmentById(patentDocId);
+			WebUtils.writeJsonStrToResponse(response, attachmentImg);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping(path="/getTemplateList")
