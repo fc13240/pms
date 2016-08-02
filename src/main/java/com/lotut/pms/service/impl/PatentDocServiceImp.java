@@ -4,6 +4,7 @@ package com.lotut.pms.service.impl;
 import java.util.List;
 
 import com.lotut.pms.dao.PatentDocDao;
+import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.service.PatentDocService;
 
@@ -43,6 +44,13 @@ public class PatentDocServiceImp implements PatentDocService{
 		public void deletePatentDoc(long patentDocsId) {
 		
 			patentDocDao.deletePatentDoc(patentDocsId);
+			
+		}
+
+
+		@Override
+		public void savePatentImgUrl(Attachment attachment) {
+			patentDocDao.savePatentImgUrl(attachment);
 			
 		}
 

@@ -37,6 +37,15 @@
 	$('.'+old_tip_name).hide();
 	$('.'+new_tip_name).show();	
 //	$(.right_right_bot).attr("tab_name",new_name);
+	if(whichTab<=3){
+		loadingTemplateBYTab(whichTab+1);
+	}else if(whichTab==4){
+		loadingTemplateBYTab(7);
+	}else if(whichTab==6){
+		loadingTemplateBYTab(8);
+	}else if(whichTab==7){
+		loadingTemplateBYTab(9);
+	}
 	
 }
 
@@ -46,14 +55,34 @@ function modelbuttonclick(list_no) {
     var modelid = $("."+list_name+" .big").html();
 	alert(modelid);
 	//还差一步，把内容写进编辑框中。
-
 	
-	
-	
-	
-	
-	
-	
+}
+function loadingTemplateBYTab(sectionId){
+	 $.ajax({
+		 type : "POST",
+		 url : "/getTemplateList.html?sectionId="+sectionId,
+		 success : function (data){
+			 var obj= $.parseJSON(data);
+			 $("#modelWrap").empty();
+			 $("#hiddenmodel").empty();
+			 $.each(obj,function(i,item){
+				 $("#modelWrap").append("<div class='model1 model_list"+i+"' style='overflow-x: hidden; overflow-y: hidden;height:158px;'>"+
+					 "<div class='title'>模板"+(i+1)+":"+item.templateTitle+"</div>"+
+					 	 "<div class='content'>"+
+			 				"<p class='small'>"+
+								"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
+							"</p>"+
+						"</p>"+
+					    "<div class='button' style='z-index:500000;' onclick='templatebuttonclick("+i+","+item.patentDocSectionType.patentDocSectionId+")'>+使用模板</div>"+
+					  "</div>"+
+				   "</div>");
+				 $("#modelWrap span").css("color","black");
+			 	 $("#hiddenmodel").append("<p id='templateContent"+i+"'>"+item.content+"</p>");
+			 });
+		 },error : function (){
+			 
+		 }
+	 })
 }
 
 	

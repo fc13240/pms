@@ -20,11 +20,8 @@
 	<link href="${base }/static/css/edit_instruct.css?v=2.3.20150415" type="text/css" rel="stylesheet" />
 	<script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
 	<c:import url="common/kindEditor.jsp"></c:import>
-	<%-- <script src="${base }/plugins/kindeditor/ajaxfileupload.js" type="text/javascript"></script> --%>
-	<%-- <script src="${base }/plugins/kindeditor/layer.min.js" type="text/javascript"></script> --%>
 	 <script src="${base }/plugins/kindeditor/js-selfwrite.js" type="text/javascript"></script>
 	<script src="${base }/plugins/kindeditor/selfwritefigure.js" type="text/javascript"></script>   <!--uploadImg-->
-<<<<<<< HEAD
 	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg-->
 	<script src="${base }/plugins/kindeditor/swfupload/swfupload.js" type="text/javascript"></script>   <!--swfupload-->
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/swfupload.queue.js"></script>
@@ -142,7 +139,6 @@
 //    }
 
 	</script>
-=======
 	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg--> 
 	<link rel="stylesheet" href="${base }/temp/zyupload/skins/zyupload-1.0.0.min.css " type="text/css">
 	<script type="text/javascript" src="${base }/temp/zyupload/zyupload.basic-1.0.0.min.js"></script>
@@ -180,7 +176,7 @@
 						console.info("此文件上传到服务器地址：");
 						console.info(response);
 						$("#uploadInf").append("<p>上传成功，文件地址是：" + Jresponse["url"] + "</p>");
-						$("#patentImgUrl").append("<input type='text' name='patenturl"+i+"' value='"+Jresponse["url"]+"'/>");
+						$("#patentImgUrl").append("<input type='hidden' id='patentUrl"+i+"' name='patentUrl"+i+"' value='"+Jresponse["url"]+"'/>");
 						i=++i;
 						
 					},
@@ -197,7 +193,6 @@
 			});
 		
 		</script> 
->>>>>>> 1a53bcdfb39af8c2973bc4056f9d8dc5348d798b
 </head>
 
 <body style="background-color: #FFF" id="dlstCircleArticle">
@@ -442,13 +437,13 @@
 	                    
 						<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
 						<div class="content" id="content0">
-							<div class="title" onclick="loadingTemplate(1)">
+							<div class="title">
 								发明名称
 							</div>
 							<div class="cl">
 								<div id="editor0" thistempid="1">
 									<div class="instru">
-										<div class="title2" onclick="loadingTemplate(1)" >
+										<div class="title2">
 											注意套用模板时专利名称不得超过25个字，化学领域的某些申请允许最多到40个字，这个规定可要注意哦。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。</div>
 									</div>
 									<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
@@ -871,11 +866,11 @@
 								<div class="imgfl" id="picBianHao">
 								</div>
 								<div class="imgfr">
-								 <form id="patentUrlFrom" name="patentUrlFrom" action="<s:url value='/editor/savePatentImgUrl.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">
-									<input id="piciLlus2" name="" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off">
-									<input id="picMarkiLlus2" name="" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off">
-									<div id=patentImgUrl style="display:block"></div>
-								
+								 <form id="patentUrlFrom" name="patentUrlFrom"  method="post" enctype="multipart/form-data" class="form-horizontal">
+									<input id="piciLlus2" name="state" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
+									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
+									<div id=patentImgUrl style="display:none"></div>
+									
 								</form>
 									<div id="zyupload" class="zyupload"></div>
 								 	
@@ -1513,32 +1508,6 @@
 	});
 	
 
-	$(function () {
-		 var ajaxFormOption = {
-				 type: 'POST',
-					dataType: 'json',
-					url:"<s:url value='/kindeditor/uploadPic.html'/>",
-					data: $('#picFrom').formSerialize(),
-					success:function(data){
-						alert(data);
-					}
-		 };
-		 $("#btn").click(function () {
-			                  $("#picFrom").submit(ajaxFormOption);
-			                 return false;
-			              });
-	});
-/* 	 function savePic() {
-				$('#picFrom').ajaxSubmit({
-					type: 'POST',
-					dataType: 'json',
-					url:"<s:url value='/kindeditor/uploadPic.html'/>",
-					data: $('#picFrom').formSerialize(),
-					success:function(data){
-						alert(data);
-					}
-				});
-	 }*/
 
 	 function loadingTemplate(sectionId){
 		 $.ajax({
@@ -1556,7 +1525,7 @@
 									"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
 								"</p>"+
 							"</p>"+
-						    "<div class='button' style='z-index:500000;' onclick='templatebuttonclick("+i+")'>+使用模板</div>"+
+						    "<div class='button' style='z-index:500000;' onclick='templatebuttonclick("+i+","+item.patentDocSectionType.patentDocSectionId+")'>+使用模板</div>"+
 						  "</div>"+
 					   "</div>");
 					 $("#modelWrap span").css("color","black");
@@ -1567,15 +1536,65 @@
 			 }
 		 })
 	 }
-	 
-	 function templatebuttonclick(i){
-		 editor.html($("#templateContent"+i).html());
-		 //alert($("#templateContent"+i).html());
-		 
-		 
-	 }
+	 function templatebuttonclick(i,patentDocSectionId){
+		 if(patentDocSectionId==1){
+			 editor.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==2){
+			 editor1.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==3){
+			 editor2.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==4){
+			 editor3.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==5){
+			 editor4.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==6){
+			 editor5.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==7){
+			 editor6.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==8){
+			 editor7.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==9){
+			 editor8.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==10){
+			 editor9.html($("#templateContent"+i).html());
+		 }else{
+			 
+		 }
 	 function savePatentImgUrl(){
-		 document.getElementById('patentUrlFrom').submit();
+		 if($("#patentUrl1").length>0){    
+			 var  state=$("#piciLlus2").val();
+			 var label=$("#picMarkiLlus2").val();
+			var patentUrl1=$("#patentUrl1").val();
+			 var patentUrl2=$("#patentUrl2").val();
+			var patentUrl3=$("#patentUrl3").val();
+			var patentUrl4=$("#patentUrl4").val();
+			var patentUrl5=$("#patentUrl5").val();
+			 
+			 $.ajax({
+					type: "POST",
+					url: "<s:url value='/editor/savePatentImgUrl.html'/>", 
+					data: {"state":state,"label":label,"patentUrl1":patentUrl1,"patentUrl2":patentUrl2,"patentUrl3":patentUrl3,
+							"patentUrl4":patentUrl4,"patentUrl5":patentUrl5},
+					success: function(data){
+						alert("操作成功");
+					},
+					error: function(){
+						alert("操作失败");
+					}
+				});
+			     
+		    }else{
+		    	alert("请选择图片");
+		    }
 	 }
 	</script>
 	

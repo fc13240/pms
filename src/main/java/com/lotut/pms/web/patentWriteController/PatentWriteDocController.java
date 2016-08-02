@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
@@ -40,7 +41,8 @@ public class PatentWriteDocController {
 	
 
 	@RequestMapping(path="/inventionWriterForm")
-	public String inventionEditorForm(@RequestParam("patentType")int patentType, Model model){
+	public String inventionEditorForm(@RequestParam("patentType")int patentType, HttpSession session,Model model){
+		session.setAttribute("signId", System.currentTimeMillis());
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		model.addAttribute("patentDocs", patentDocs);
@@ -176,8 +178,13 @@ public class PatentWriteDocController {
 	
 	
 	@RequestMapping(path="/savePatentImgUrl",method=RequestMethod.POST)
-	public String savePatentImgUrl(Model model){
-		return "patentDoc_invention_editor";
+	public void savePatentImgUrl(Attachment attachment,HttpSession session,PrintWriter writer){
+		long signId=(Long)session.getAttribute("signId");
+		attachment.setSignId(signId);
+		int userId = PrincipalUtils.getCurrentUserId();
+		attachment.setUserId(userId);
+		patentDocService.savePatentImgUrl(attachment);
+		writer.write(1);
 	}
 	
 	

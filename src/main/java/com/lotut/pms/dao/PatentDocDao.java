@@ -2,6 +2,7 @@ package com.lotut.pms.dao;
 
 import java.util.List;
 
+import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
 
 public interface PatentDocDao {
@@ -14,4 +15,6 @@ public interface PatentDocDao {
 	void updatePatentDoc(PatentDoc patentDoc);
 	
 	void deletePatentDoc(long patentDocsId);
+	
+	void savePatentImgUrl(Attachment attachment);
 }
