@@ -741,6 +741,7 @@
 									从附图中选择</div>
 							<div class="picBox">
 								<ul class="picL" id="picLsy" >
+									
 								</ul>
 							</div>
 						</div>
@@ -1423,8 +1424,19 @@
 				data : {"patentDocId":patentDocId
 				},
 					success: function(data){
-					alert("操作成功");
-
+					var obj= $.parseJSON(data);
+					$.each(obj,function(i,item){
+						 $("#picLsy").append(
+								 "<li>"+
+									"<a href='#'><img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/></a>"+
+									"<div class='text'>"+
+										"<b>"+item.caption+"</b>"+
+										"<p><a href='#'>"+item.label+"</a></p>"+
+									"</div>"
+								+"</li>"
+						);
+					 });
+					hoverImg();
 				},
 				error : function() {
 					alert("操作失败");
@@ -1433,7 +1445,7 @@
 	 }
 </script>
 <script type="text/javascript">
-$(document).ready(function(){
+function hoverImg(){
 
 	$("#picLsy li").hover(function(){
 		$(this).find('.text:not(:animated)').animate({top:"0px"}, {easing:"easeInOutExpo"}, 50, function(){});
@@ -1441,7 +1453,7 @@ $(document).ready(function(){
 		$(this).find('.text').animate({top:"149px"}, {easing:"easeInOutExpo"}, 50, function(){});
 	});
 
-});
+};
 </script>
 </body>
 </html>
