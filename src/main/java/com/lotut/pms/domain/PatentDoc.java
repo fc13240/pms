@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 public class PatentDoc {
-	private long patentDocId;
+	private long patentDocsId;
 	private String appNo;
 	private int userId;
 	private int patentType;
@@ -25,10 +25,10 @@ public class PatentDoc {
 	private String rightClaim;
 	private String abstractDescription;
 	public long getPatentDocId() {
-		return patentDocId;
+		return patentDocsId;
 	}
-	public void setPatentDocId(long patentDocId) {
-		this.patentDocId = patentDocId;
+	public void setPatentDocId(long patentDocsId) {
+		this.patentDocsId = patentDocsId;
 	}
 	public String getAppNo() {
 		return appNo;
@@ -116,7 +116,7 @@ public class PatentDoc {
 	}
 	@Override
 	public String toString() {
-		return "PatentDoc [patentDocId=" + patentDocId + ", appNo=" + appNo + ", userId=" + userId + ", patentType="
+		return "PatentDoc [patentDocsId=" + patentDocsId + ", appNo=" + appNo + ", userId=" + userId + ", patentType="
 				+ patentType + ", createTime=" + createTime + ", lastUpdateTime=" + lastUpdateTime + ", name=" + name
 				+ ", techDomain=" + techDomain + ", backgoundTech=" + backgoundTech + ", contentProblem="
 				+ contentProblem + ", contentRight=" + contentRight + ", contentEffect=" + contentEffect

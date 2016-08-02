@@ -5,7 +5,7 @@
 <mapper  namespace="com.lotut.pms.dao.mapper.PatentDocMapper">
 
 	<resultMap type="PatentDoc" id="PatentDocMap">
-		<id property="patentDocId" column="patent_docs_id"/>
+		<id property="patentDocsId" column="patent_docs_id"/>
 		<result property="appNo" column="app_no"/>
 		<result property="userId" column="user_id"/>
 		<result property="patentType" column="patent_type"/>
