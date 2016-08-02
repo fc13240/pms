@@ -148,7 +148,7 @@
 						<!--撰写小贴士 -->
 						<input id="whichTip" type="hidden" name="name" value="2">
 						<input id="tipIdHid" type="hidden" name="name" value="1223">
-						<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
+						
 						<div id="tipsList" style="border-top: #0085d0 1px solid; z-index: 6000000;">
 							<div class="Writing_tips tip0" name="tips" style="display: block;">
 								<p>
@@ -693,6 +693,7 @@
 								</div>
 								<div class="imgfr">
 								 <form id="patentUrlFrom" name="patentUrlFrom"  method="post" enctype="multipart/form-data" class="form-horizontal">
+								 	<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDocId}">
 									<input id="piciLlus2" name="caption" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<div id=patentImgUrl style="display:none"></div>
