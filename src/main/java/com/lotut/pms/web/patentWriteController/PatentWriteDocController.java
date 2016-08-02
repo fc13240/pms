@@ -198,6 +198,12 @@ public class PatentWriteDocController {
 			}
 	}
 	
+	@RequestMapping(path="/getAttachmentById",method=RequestMethod.POST)
+	public void delectAttachmentById(@RequestParam("attachmentId")long attachmentId,Model model,HttpServletResponse response,PrintWriter writer){
+		patentDocService.delectAttachmentById(attachmentId);
+		writer.write(1);
+	}
+	
 	@RequestMapping(path="/getTemplateList")
 	public void getTemplateList(@RequestParam("sectionId")int sectionId,HttpServletResponse response) throws IOException{
 		List<PatentDocumentTemplate> DocTemplates = patentDocumentTemplateService.getTemplateList(sectionId);
