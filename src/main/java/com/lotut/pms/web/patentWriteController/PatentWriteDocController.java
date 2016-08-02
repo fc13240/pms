@@ -181,7 +181,7 @@ public class PatentWriteDocController {
 	
 	
 	@RequestMapping(path="/savePatentImgUrl",method=RequestMethod.POST)
-	public void savePatentImgUrl(Attachment attachment,HttpSession session,PrintWriter writer){
+	public void savePatentImgUrl(List<String> attachmentUrls,Attachment attachment,HttpSession session,PrintWriter writer){
 		patentDocService.savePatentImgUrl(attachment);
 		writer.write(1);
 	}

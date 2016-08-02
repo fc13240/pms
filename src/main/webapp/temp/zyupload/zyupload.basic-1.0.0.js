@@ -553,7 +553,10 @@ var ZYFILE = {
 						return self.funFilterEligibleFile(files);
 					},
 					onSelect: function(selectFiles, allFiles) {
-						para.onSelect(selectFiles, allFiles);  // 回调方法
+						var allowMore = para.onSelect(selectFiles, allFiles);  // 回调方法
+						if (!allowMore) {
+							return;
+						}
 						self.funSetStatusInfo(ZYFILE.funReturnNeedFiles());  // 显示统计信息
 						var html = '', i = 0;
 						// 组织预览html

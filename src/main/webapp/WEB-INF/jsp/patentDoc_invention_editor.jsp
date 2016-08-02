@@ -30,7 +30,7 @@
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers2.js"></script>
 	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg--> 
 	<link rel="stylesheet" href="${base }/temp/zyupload/skins/zyupload-1.0.0.min.css " type="text/css">
-	<script type="text/javascript" src="${base }/temp/zyupload/zyupload.basic-1.0.0.min.js"></script>
+	<script type="text/javascript" src="${base }/temp/zyupload/zyupload.basic-1.0.0.js"></script>
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -52,6 +52,15 @@
 					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
 						console.info("当前选择了以下文件：");
 						console.info(selectFiles);
+						if (allFiles.length > 1) {
+							alert("每次只能上传一张，请先上传之前的图片再选择！");
+							for (var i = 1; i < allFiles.length; i++) {
+								console.log(allFiles[i]);
+								ZYFILE.funDeleteFile(allFiles[i].index, true);
+								return false;
+							}
+						}
+						return true;
 					},
 					onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
 						console.info("当前删除了此文件：");
@@ -65,9 +74,8 @@
 						console.info("此文件上传到服务器地址：");
 						console.info(response);
 						$("#uploadInf").append("<p>上传成功，文件地址是：" + Jresponse["url"] + "</p>");
-						$("#patentImgUrl").append("<input type='hidden' id='patentUrl"+i+"' name='patentUrl"+i+"' value='"+Jresponse["url"]+"'/>");
-						i=++i;
-						
+						$("#patentImgUrl").append("<input type='hidden' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
+						savePatentImgUrl();
 					},
 					onFailure: function(file, response){          // 文件上传失败的回调方法
 						console.info("此文件上传失败：");
@@ -696,7 +704,7 @@
 								 	<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDocId}">
 									<input id="piciLlus2" name="caption" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
-									<div id=patentImgUrl style="display:none"></div>
+									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
 									
 								</form>
 									<div id="zyupload" class="zyupload"></div>
@@ -1369,11 +1377,7 @@
 			if ($("#patentUrl1").length > 0) {
 				var caption = $("#piciLlus2").val();
 				var label = $("#picMarkiLlus2").val();
-				var attachmentUrl = $("#patentUrl1").val();
-				var attachmentUrl = $("#patentUrl2").val();
-				var attachmentUrl = $("#patentUrl3").val();
-				var attachmentUrl = $("#patentUrl4").val();
-				var attachmentUrl = $("#patentUrl5").val();
+				var attachmentUrl = $("#patentUrl").val();
 				var patentDocId=$("#patentDocId").val();
 				$.ajax({
 					type : "POST",
@@ -1382,10 +1386,7 @@
 						"caption" : caption,
 						"label" : label,
 						"attachmentUrl" : attachmentUrl,
-						"attachmentUrl" : patentUrl2,
-						"attachmentUrl" : patentUrl3,
-						"attachmentUrl" : patentUrl4,
-						"attachmentUrl" : patentUrl5
+						"patentDocId":patentDocId
 					},
 						success: function(data){
 
