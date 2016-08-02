@@ -17,4 +17,6 @@ public interface PatentDocDao {
 	void deletePatentDoc(long patentDocsId);
 	
 	void savePatentImgUrl(Attachment attachment);
+	
+	List<Attachment> getAttachmentById(long patentDocId);
 }

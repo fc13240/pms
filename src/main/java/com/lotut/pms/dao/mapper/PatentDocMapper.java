@@ -19,4 +19,6 @@ public interface PatentDocMapper {
 	void deletePatentDoc(long patentDocsId);
 
 	void savePatentImgUrl(Attachment attachment);
+	
+	List<Attachment> getAttachmentById(@Param("patentDocId")long patentDocId);
 }

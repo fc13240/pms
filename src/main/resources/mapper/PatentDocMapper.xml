@@ -66,4 +66,8 @@
 		insert into patent_attachment(patent_doc_id,caption,label,attachment_url) values
 		(#{patentDocId},#{caption},#{label},#{attachmentUrl,javaType=string,jdbcType=VARCHAR})
 	</insert>
+	
+	<select id="getAttachmentById"  resultMap="PatentImgMap">
+		select caption,label, attachment_url from patent_attachment where  patent_doc_id=#{patentDocId}
+	</select>
 </mapper>

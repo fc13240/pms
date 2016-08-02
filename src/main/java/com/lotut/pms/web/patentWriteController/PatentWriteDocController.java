@@ -48,6 +48,8 @@ public class PatentWriteDocController {
 		patentDocService.savePatentDoc(patentDoc);
 		long patentDocId=patentDoc.getPatentDocsId();
 		model.addAttribute("patentDocId",patentDocId);
+		List<Attachment> attachmentImg=patentDocService.getAttachmentById(patentDocId);
+		model.addAttribute("attachmentImg", attachmentImg);
 		model.addAttribute("patentDocs", patentDocs);
 		model.addAttribute("patentType",patentType);
 		if(patentType==1){
@@ -56,9 +58,6 @@ public class PatentWriteDocController {
 			return "patentDoc_practical_editor";
 		}
 		return "";	
-
-			
-		
 	}
 
 	
@@ -66,7 +65,7 @@ public class PatentWriteDocController {
 	public void  addEditorText(PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
-		patentDocService.savePatentDoc(patentDoc);
+		patentDocService.updatePatentDoc(patentDoc);
 		writer.write(1);
 	}
 	
