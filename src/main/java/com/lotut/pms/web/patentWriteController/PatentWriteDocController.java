@@ -46,6 +46,7 @@ public class PatentWriteDocController {
 		patentDoc.setUserId(userId);
 		patentDocService.savePatentDoc(patentDoc);
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
+		model.addAttribute("patentDoc",patentDoc);
 		model.addAttribute("patentDocs", patentDocs);
 		model.addAttribute("patentType",patentType);
 		if(patentType==1){
@@ -177,7 +178,6 @@ public class PatentWriteDocController {
 	@RequestMapping(path="/savePatentImgUrl",method=RequestMethod.POST)
 	public void savePatentImgUrl(Attachment attachment,HttpSession session,PrintWriter writer){
 		int userId = PrincipalUtils.getCurrentUserId();
-		attachment.setUserId(userId);
 		patentDocService.savePatentImgUrl(attachment);
 		writer.write(1);
 	}
@@ -185,7 +185,6 @@ public class PatentWriteDocController {
 	@RequestMapping(path="/savePracticalPatentImgUrl",method=RequestMethod.POST)
 	public void savePracticalPatentImgUrl(Attachment attachment,HttpSession session,PrintWriter writer){
 		int userId = PrincipalUtils.getCurrentUserId();
-		attachment.setUserId(userId);
 		patentDocService.savePatentImgUrl(attachment);
 		writer.write(1);
 	}

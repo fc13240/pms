@@ -8,14 +8,9 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 public class Attachment {
 	private long attachmentId;
-	private int userId;
-	private long signId;
-	private String  patentUrl1;
-	private String  patentUrl2;
-	private String  patentUrl3;
-	private String  patentUrl4;
-	private String  patentUrl5;
-	private String state;
+	private String  attachmentUrl;
+	private long patentDocId;
+	private String caption;
 	private String label;
 	
 	
@@ -25,23 +20,24 @@ public class Attachment {
 	public void setAttachmentId(long attachmentId) {
 		this.attachmentId = attachmentId;
 	}
-	public int getUserId() {
-		return userId;
+	
+	public String getAttachmentUrl() {
+		return attachmentUrl;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setAttachmentUrl(String attachmentUrl) {
+		this.attachmentUrl = attachmentUrl;
 	}
-	public long getSignId() {
-		return signId;
+	public long getPatentDocId() {
+		return patentDocId;
 	}
-	public void setSignId(long signId) {
-		this.signId = signId;
+	public void setPatentDocId(long patentDocId) {
+		this.patentDocId = patentDocId;
 	}
-	public String getState() {
-		return state;
+	public String getCaption() {
+		return caption;
 	}
-	public void setState(String state) {
-		this.state = state;
+	public void setCaption(String caption) {
+		this.caption = caption;
 	}
 	public String getLabel() {
 		return label;
@@ -49,36 +45,9 @@ public class Attachment {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	public String getPatentUrl1() {
-		return patentUrl1;
-	}
-	public void setPatentUrl1(String patentUrl1) {
-		this.patentUrl1 = patentUrl1;
-	}
-	public String getPatentUrl2() {
-		return patentUrl2;
-	}
-	public void setPatentUrl2(String patentUrl2) {
-		this.patentUrl2 = patentUrl2;
-	}
-	public String getPatentUrl3() {
-		return patentUrl3;
-	}
-	public void setPatentUrl3(String patentUrl3) {
-		this.patentUrl3 = patentUrl3;
-	}
-	public String getPatentUrl4() {
-		return patentUrl4;
-	}
-	public void setPatentUrl4(String patentUrl4) {
-		this.patentUrl4 = patentUrl4;
-	}
-	public String getPatentUrl5() {
-		return patentUrl5;
-	}
-	public void setPatentUrl5(String patentUrl5) {
-		this.patentUrl5 = patentUrl5;
-	}
+	
+	
+	
 	
 	
 	
