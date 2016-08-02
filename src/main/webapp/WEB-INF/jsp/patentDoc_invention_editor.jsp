@@ -711,16 +711,6 @@
 								 	
 								</div>
 							</div>
-							<div class="cl">
-								<div class="daochu_cancelh">
-									<div class="daochu_cancel1" onclick="savePatentImgUrl()">
-										保存
-									</div>
-									<div class="daochu_cancel1h" onclick="piclistShow();">
-										取消
-									</div>
-								</div>
-							</div>
 						</div>
 	
 	                    
@@ -1374,7 +1364,7 @@
 
 
 		function savePatentImgUrl() {
-			if ($("#patentUrl1").length > 0) {
+			if ($("#patentUrl").length > 0) {
 				var caption = $("#piciLlus2").val();
 				var label = $("#picMarkiLlus2").val();
 				var attachmentUrl = $("#patentUrl").val();
