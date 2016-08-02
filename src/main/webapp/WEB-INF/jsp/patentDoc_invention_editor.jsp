@@ -342,7 +342,7 @@
 									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 									            	<tr>
 									                    <td style="width:520px;" >
-									                    	<textarea rows="3" cols="10" id="editorContent" name="name" onmousedown ="testEvent(1)" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
+									                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
 									                    	
 									                    	</textarea>
 									                    </td>
@@ -1338,7 +1338,7 @@
 	 function loadingTemplate(sectionId){
 		 $.ajax({
 			 type : "POST",
-			 url : "<s:url value='/editor1/getTemplateList.html'/>?sectionId="+sectionId,
+			 url : "<s:url value='/editor/getTemplateList.html'/>?sectionId="+sectionId,
 			 success : function (data){
 				 var obj= $.parseJSON(data);
 				 $("#modelWrap").empty();
@@ -1363,39 +1363,38 @@
 		 })
 	 }
 
+	function savePatentImgUrl() {
+		if ($("#patentUrl1").length > 0) {
+			var caption = $("#piciLlus2").val();
+			var label = $("#picMarkiLlus2").val();
+			var attachmentUrl = $("#patentUrl1").val();
+			var attachmentUrl = $("#patentUrl2").val();
+			var attachmentUrl = $("#patentUrl3").val();
+			var attachmentUrl = $("#patentUrl4").val();
+			var attachmentUrl = $("#patentUrl5").val();
+			var patentDocId=$("#patentDocId").val();
+			$.ajax({
+				type : "POST",
+				url : "<s:url value='/editor/savePatentImgUrl.html'/>",
+				data : {
+					"caption" : caption,
+					"label" : label,
+					"attachmentUrl" : attachmentUrl,
+					"attachmentUrl" : patentUrl2,
+					"attachmentUrl" : patentUrl3,
+					"attachmentUrl" : patentUrl4,
+					"attachmentUrl" : patentUrl5
+				},
+					success: function(data){
 
-		function savePatentImgUrl() {
-			if ($("#patentUrl1").length > 0) {
-				var caption = $("#piciLlus2").val();
-				var label = $("#picMarkiLlus2").val();
-				var attachmentUrl = $("#patentUrl1").val();
-				var attachmentUrl = $("#patentUrl2").val();
-				var attachmentUrl = $("#patentUrl3").val();
-				var attachmentUrl = $("#patentUrl4").val();
-				var attachmentUrl = $("#patentUrl5").val();
-				var patentDocId=$("#patentDocId").val();
-				$.ajax({
-					type : "POST",
-					url : "<s:url value='/editor/savePatentImgUrl.html'/>",
-					data : {
-						"caption" : caption,
-						"label" : label,
-						"attachmentUrl" : attachmentUrl,
-						"attachmentUrl" : patentUrl2,
-						"attachmentUrl" : patentUrl3,
-						"attachmentUrl" : patentUrl4,
-						"attachmentUrl" : patentUrl5
+						alert("操作成功");
 					},
-						success: function(data){
-
-							alert("操作成功");
-						},
-						error : function() {
-							alert("操作失败");
-						}
-				});
-			}
+					error : function() {
+						alert("操作失败");
+					}
+			});
 		}
+	}
 	 function templatebuttonclick(i,patentDocSectionId){
 		 if(patentDocSectionId==1){
 			 editor.html($("#templateContent"+i).html());
@@ -1429,14 +1428,7 @@
 		 }else{
 			 
 		 }
-		 }
-	</script>
-	<script type="text/javascript">
-		function testEvent(index){
-			alert(index);
-		}
-	
-	</script>
-
+	}
+</script>
 </body>
 </html>
