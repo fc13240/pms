@@ -1455,6 +1455,20 @@ function hoverImg(){
 	});
 
 };
+
+function delectImg(value){
+	 $.ajax({
+			type : "POST",
+			url : "<s:url value='/editor/delectAttachmentById.html'/>",
+			data : {"attachmentId":value},
+				success: function(data){
+					alert("删除成功！");
+			},
+			error : function() {
+				alert("操作失败");
+			}
+	});
+}
 </script>
 </body>
 </html>

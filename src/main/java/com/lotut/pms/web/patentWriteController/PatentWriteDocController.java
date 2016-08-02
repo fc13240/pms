@@ -198,7 +198,7 @@ public class PatentWriteDocController {
 			}
 	}
 	
-	@RequestMapping(path="/getAttachmentById",method=RequestMethod.POST)
+	@RequestMapping(path="/delectAttachmentById",method=RequestMethod.POST)
 	public void delectAttachmentById(@RequestParam("attachmentId")long attachmentId,Model model,HttpServletResponse response,PrintWriter writer){
 		patentDocService.delectAttachmentById(attachmentId);
 		writer.write(1);
