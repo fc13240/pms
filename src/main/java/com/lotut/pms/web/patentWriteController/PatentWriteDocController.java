@@ -42,13 +42,18 @@ public class PatentWriteDocController {
 	
 
 	@RequestMapping(path="/inventionWriterForm")
-	public String inventionEditorForm(@RequestParam("patentType")int patentType, HttpSession session,Model model){
-		session.setAttribute("signId", System.currentTimeMillis());
+	public String inventionEditorForm(@RequestParam("patentType")int patentType, PatentDoc patentDoc,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
+		patentDoc.setUserId(userId);
+		patentDocService.savePatentDoc(patentDoc);
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		model.addAttribute("patentDocs", patentDocs);
 		model.addAttribute("patentType",patentType);
-		return "patentDoc_invention_editor";
+		if(patentType==1){
+			return "patentDoc_invention_editor";
+		}
+			return "patentDoc_practical_editor";
+		
 	}
 
 	@RequestMapping(path="/practicalWriterForm")

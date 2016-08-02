@@ -5,7 +5,7 @@
 <mapper  namespace="com.lotut.pms.dao.mapper.PatentDocMapper">
 
 	<resultMap type="PatentDoc" id="PatentDocMap">
-		<id property="patentDocsId" column="patent_docs_id"/>
+		<id property="patentDocId" column="patent_docs_id"/>
 		<result property="appNo" column="app_no"/>
 		<result property="userId" column="user_id"/>
 		<result property="patentType" column="patent_type"/>
@@ -38,7 +38,7 @@
 	
 
 	
- 	<insert id="savePatentDoc" parameterType="PatentDoc">
+ 	<insert id="savePatentDoc" parameterType="PatentDoc" useGeneratedKeys="true" keyProperty="patentDocId">
 		insert into patent_documents(app_no,user_id,patent_type,create_time,patent_name,tech_domain,background_tech,content_problem,content_right,content_effect,
 		implement_way,right_claim,abstract_desc) values
 		(#{appNo,javaType=string,jdbcType=VARCHAR},#{userId},#{patentType},now(),#{name},#{techDomain,javaType=string,jdbcType=CLOB},#{backgoundTech,javaType=string,jdbcType=CLOB},#{contentProblem,javaType=string,jdbcType=CLOB},#{contentRight,javaType=string,jdbcType=CLOB},#{contentEffect,javaType=string,jdbcType=CLOB},
