@@ -684,6 +684,7 @@
 								<div class="upimg1" onclick="addPic();">
 									新增附图</div>
 								<div class="img_box" id="askPicList">
+									
 								</div>
 							</div>
 						</div>
