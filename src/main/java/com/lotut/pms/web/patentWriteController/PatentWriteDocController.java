@@ -46,6 +46,7 @@ public class PatentWriteDocController {
 		patentDoc.setUserId(userId);
 		patentDocService.savePatentDoc(patentDoc);
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
+		patentDocService.savePatentDoc(patentDoc);
 		model.addAttribute("patentDoc",patentDoc);
 		model.addAttribute("patentDocs", patentDocs);
 		model.addAttribute("patentType",patentType);
