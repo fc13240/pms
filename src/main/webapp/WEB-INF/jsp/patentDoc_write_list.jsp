@@ -128,9 +128,9 @@ table td a {
     <div class="tit_top">
         <div class="title2">
             撰写列表</div>
-        <div class="uppic2" onclick="adduser();">
+   <!--      <div class="uppic2" onclick="adduser();">
         新建专利
-            </div>
+            </div> -->
                
     </div>
     <div class="cl top1">

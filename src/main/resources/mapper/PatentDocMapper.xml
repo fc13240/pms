@@ -20,22 +20,20 @@
 		<result property="implementWay" column="implement_way"/>
 		<result property="rightClaim" column="right_claim"/>
 		<result property="abstractDescription" column="abstract_desc"/>
+		<result property="signId" column="sign_Id"/>
 	</resultMap>
 
 		<resultMap type="Attachment" id="PatentImgMap">
 			<id property="attachmentId" column="attachment_id"/>
-			<id property="userId" column="user_id"/>
-			<id property="signId" column="sign_Id"/>
-			<result property="state" column="state"/>
+			<result property="caption" column="caption"/>
 			<result property="label" column="label"/>
-			<result property="patentUrl1" column="patenturl1"/>
-			<result property="patentUrl2" column="patenturl2"/>
-			<result property="patentUrl3" column="patenturl3"/>
-			<result property="patentUrl4" column="patenturl4"/>
-			<result property="patentUrl5" column="patenturl5"/>
+			<result property="patentDocId" column="patent_doc_id"/>
+			<result property="attachmentUrl" column="attachment_url"/>
 		</resultMap>
 	
- 	<insert id="savePatentDoc" parameterType="PatentDoc">
+
+	
+ 	<insert id="savePatentDoc" parameterType="PatentDoc" useGeneratedKeys="true" keyProperty="patentDocId">
 		insert into patent_documents(app_no,user_id,patent_type,create_time,patent_name,tech_domain,background_tech,content_problem,content_right,content_effect,
 		implement_way,right_claim,abstract_desc) values
 		(#{appNo,javaType=string,jdbcType=VARCHAR},#{userId},#{patentType},now(),#{name},#{techDomain,javaType=string,jdbcType=CLOB},#{backgoundTech,javaType=string,jdbcType=CLOB},#{contentProblem,javaType=string,jdbcType=CLOB},#{contentRight,javaType=string,jdbcType=CLOB},#{contentEffect,javaType=string,jdbcType=CLOB},
@@ -65,7 +63,7 @@
 	</delete>
 	
 	<insert id="savePatentImgUrl" parameterType="Attachment">
-		insert into patent_attachment(user_id,state,label,patenturl1,patenturl2,patenturl3,patenturl4,patenturl5,sign_Id) values
-		(#{userId},#{state},#{label},#{patentUrl1,javaType=string,jdbcType=VARCHAR},#{patentUrl2,javaType=string,jdbcType=VARCHAR},#{patentUrl3,javaType=string,jdbcType=VARCHAR},#{patentUrl4,javaType=string,jdbcType=VARCHAR},#{patentUrl5,javaType=string,jdbcType=VARCHAR},#{signId});
+		insert into patent_attachment(patent_doc_id,caption,label,attachment_url) values
+		(#{patentDocId},#{caption},#{label},#{attachmentUrl,javaType=string,jdbcType=VARCHAR});
 	</insert>
 </mapper>
