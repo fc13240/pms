@@ -47,8 +47,7 @@
 					       pattern = '<font color="red">还可以输入' +  result + '字<font>'; 
 					       }
 					       $('.word_surplus').html(pattern); //输入显示
-				   },
-				   
+				   }
 				});
 				prettyPrint();
 				/* editor.html("<strong>请填写发明名称！</strong>"); */
@@ -84,8 +83,7 @@
 				   
 				   afterChange : function() {
 					   this.sync();
-				   },
-				   
+				   }
 				});
 				prettyPrint();
 				/* editor1.html("<strong>请填写专利所在的技术领域！</strong>"); */
@@ -121,8 +119,7 @@
 				   
 				   afterChange : function() {
 					   this.sync();
-				   },
-				   
+				   }
 				});
 				prettyPrint();
 				/* editor2.html("<strong>请填写专利创建的背景技术！</strong>"); */
@@ -159,7 +156,9 @@
 				   afterChange : function() {
 					   this.sync();
 				   },
-				   
+				   afterFocus: function() {
+					   loadingTemplate(4);
+				   }
 				});
 				prettyPrint();
 				/* editor3.html("<strong>请填写存在的技术问题！</strong>"); */
@@ -196,6 +195,9 @@
 				   afterChange : function() {
 					   this.sync();
 				   },
+				   afterFocus: function() {
+					   loadingTemplate(5);
+				   }
 				   
 				});
 				prettyPrint();
@@ -233,7 +235,9 @@
 				   afterChange : function() {
 					   this.sync();
 				   },
-				   
+				   afterFocus: function() {
+					   loadingTemplate(6);
+				   }
 				});
 				prettyPrint();
 				 /* editor5.html("<strong>请填写技术特征！</strong>");  */
