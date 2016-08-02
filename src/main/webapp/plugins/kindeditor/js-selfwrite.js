@@ -165,7 +165,7 @@ function tuiAgency() {//simple_title
             newnameSearch = nameSearch;
         }
 
-        locationwin(_AgencyUrl + 'apply/applyresult.aspx?tPoints=' + encodeURI(newnameSearch) + '&ipcText=&pType=0&pro=&city=');
+        //locationwin(_AgencyUrl + 'apply/applyresult.aspx?tPoints=' + encodeURI(newnameSearch) + '&ipcText=&pType=0&pro=&city=');
     }
 }
 
