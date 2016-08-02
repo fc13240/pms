@@ -734,19 +734,10 @@
 						<div class="content" id="content8" style="display: none;">
 							<div style="height: 80px">
 							</div>
-						   <div style="float:left; margin-left:50px;">
-						   		<div id="spanButtonPlaceholder_ab" class="upimg1" style="float:left;">
-						   		</div></div>
 								<div class="upimg1" onclick="chooseFromList();" id="choseAbs" style="
 									left: 280px; margin-top: 0;float:left;">
 									从附图中选择</div>
-						   
-							
 							<div class="cl">
-								<div id="swfu_container" style="margin: 0px 10px;">
-								</div>
-								<div id="divFileProgressContainerab">
-								</div>
 								<div id="thumbnailsab" class="imgreview" style="overflow: hidden;">
 									<img alt="" id="imgheadab" style="padding-right: 20px;">
 									

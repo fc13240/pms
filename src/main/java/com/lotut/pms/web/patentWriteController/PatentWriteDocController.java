@@ -48,8 +48,7 @@ public class PatentWriteDocController {
 		patentDocService.savePatentDoc(patentDoc);
 		long patentDocId=patentDoc.getPatentDocsId();
 		model.addAttribute("patentDocId",patentDocId);
-		List<Attachment> attachmentImg=patentDocService.getAttachmentById(patentDocId);
-		model.addAttribute("attachmentImg", attachmentImg);
+		
 		model.addAttribute("patentDocs", patentDocs);
 		model.addAttribute("patentType",patentType);
 		if(patentType==1){
@@ -101,8 +100,6 @@ public class PatentWriteDocController {
 	public String  deletePatentDoc(@RequestParam("patentDocsId")long patentDocsId,Model model){
 		patentDocService.deletePatentDoc(patentDocsId);
 	    return "redirect:/editor/PatentDocList.html";
-
-		
 	}
 	
 	
@@ -188,6 +185,13 @@ public class PatentWriteDocController {
 	@RequestMapping(path="/savePracticalPatentImgUrl",method=RequestMethod.POST)
 	public void savePracticalPatentImgUrl(Attachment attachment,HttpSession session,PrintWriter writer){
 		patentDocService.savePatentImgUrl(attachment);
+		writer.write(1);
+	}
+	
+	@RequestMapping(path="/getAttachmentById",method=RequestMethod.GET)
+	public void getAttachmentById(@RequestParam("patentDocId")long patentDocId,Model model,PrintWriter writer){
+		List<Attachment> attachmentImg=patentDocService.getAttachmentById(patentDocId);
+		model.addAttribute("attachmentImg", attachmentImg);
 		writer.write(1);
 	}
 	
