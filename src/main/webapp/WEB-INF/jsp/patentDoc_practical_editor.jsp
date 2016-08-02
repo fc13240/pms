@@ -148,7 +148,7 @@
 						<!--撰写小贴士 -->
 						<input id="whichTip" type="hidden" name="name" value="2">
 						<input id="tipIdHid" type="hidden" name="name" value="1223">
-	
+						<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
 						<div id="tipsList" style="border-top: #0085d0 1px solid; z-index: 6000000;">
 							<div class="Writing_tips tip0" name="tips" style="display: block;">
 								<p>
