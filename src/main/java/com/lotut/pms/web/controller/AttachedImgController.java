@@ -31,7 +31,7 @@ private static final Logger LOGGER = Logger.getLogger(AttachedImgController.clas
         InputStream is = null;  
         OutputStream os = null;  
         try {  
-            File file = new File(Settings.PATENTDOC_IMAGE_PATH + fileType + "/" + uploadDate + "/" + fileName + "." + suffix);  
+            File file = new File(Settings.PATENTDOC_ATTACHMENT_PATH + fileType + "/" + uploadDate + "/" + fileName + "." + suffix);  
             
             WebUtils.writeStreamToResponse(response, new FileInputStream(file));
         } catch (Exception e) {  
