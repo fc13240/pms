@@ -9,7 +9,7 @@
 		</a>
 	</li>
 	<li  class=""> 
-		<a href="<s:url value='/editor/practicalWriterForm.html'/>?patentType=2">
+		<a href="<s:url value='/editor/inventionWriterForm.html'/>?patentType=2">
 		<h5>实用新型</h5>
 		</a>
 	</li>

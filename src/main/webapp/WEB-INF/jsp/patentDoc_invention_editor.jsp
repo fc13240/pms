@@ -148,7 +148,7 @@
 						<!--撰写小贴士 -->
 						<input id="whichTip" type="hidden" name="name" value="2">
 						<input id="tipIdHid" type="hidden" name="name" value="1223">
-	
+						<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
 						<div id="tipsList" style="border-top: #0085d0 1px solid; z-index: 6000000;">
 							<div class="Writing_tips tip0" name="tips" style="display: block;">
 								<p>
@@ -693,7 +693,7 @@
 								</div>
 								<div class="imgfr">
 								 <form id="patentUrlFrom" name="patentUrlFrom"  method="post" enctype="multipart/form-data" class="form-horizontal">
-									<input id="piciLlus2" name="state" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
+									<input id="piciLlus2" name="caption" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<div id=patentImgUrl style="display:none"></div>
 									
@@ -1366,25 +1366,25 @@
 
 		function savePatentImgUrl() {
 			if ($("#patentUrl1").length > 0) {
-				var state = $("#piciLlus2").val();
+				var caption = $("#piciLlus2").val();
 				var label = $("#picMarkiLlus2").val();
-				var patentUrl1 = $("#patentUrl1").val();
-				var patentUrl2 = $("#patentUrl2").val();
-				var patentUrl3 = $("#patentUrl3").val();
-				var patentUrl4 = $("#patentUrl4").val();
-				var patentUrl5 = $("#patentUrl5").val();
-
+				var attachmentUrl = $("#patentUrl1").val();
+				var attachmentUrl = $("#patentUrl2").val();
+				var attachmentUrl = $("#patentUrl3").val();
+				var attachmentUrl = $("#patentUrl4").val();
+				var attachmentUrl = $("#patentUrl5").val();
+				var patentDocId=$("#patentDocId").val();
 				$.ajax({
 					type : "POST",
 					url : "<s:url value='/editor/savePatentImgUrl.html'/>",
 					data : {
-						"state" : state,
+						"caption" : caption,
 						"label" : label,
-						"patentUrl1" : patentUrl1,
-						"patentUrl2" : patentUrl2,
-						"patentUrl3" : patentUrl3,
-						"patentUrl4" : patentUrl4,
-						"patentUrl5" : patentUrl5
+						"attachmentUrl" : attachmentUrl,
+						"attachmentUrl" : patentUrl2,
+						"attachmentUrl" : patentUrl3,
+						"attachmentUrl" : patentUrl4,
+						"attachmentUrl" : patentUrl5
 					},
 						success: function(data){
 

@@ -9,9 +9,9 @@
 <head>
 	<c:import url="common/header.jsp"></c:import>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!--  	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
-	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  -->
+	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  
 	<title>实用新型撰写</title>
 	<!-- 编辑器控件 -->
 	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/default/default.css" />
@@ -20,7 +20,6 @@
 	<link href="${base }/static/css/edit_instruct.css?v=2.3.20150415" type="text/css" rel="stylesheet" />
 	<script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
 	<c:import url="common/kindEditor.jsp"></c:import>
-	<script src="${base }/plugins/kindeditor/layer.min.js" type="text/javascript"></script>
 	<script src="${base }/plugins/kindeditor/js-selfwrite.js" type="text/javascript"></script>
 	<script src="${base }/plugins/kindeditor/selfwritefigure.js" type="text/javascript"></script>   <!--uploadImg-->
 	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg-->
@@ -29,125 +28,60 @@
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/fileprogress.js"></script>
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers.js"></script>
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers2.js"></script>
+	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg--> 
+	<link rel="stylesheet" href="${base }/temp/zyupload/skins/zyupload-1.0.0.min.css " type="text/css">
+	<script type="text/javascript" src="${base }/temp/zyupload/zyupload.basic-1.0.0.min.js"></script>
 	<script type="text/javascript">
-	//上传插件使用脚本
-    var swfu;   //上传插件使用脚本
-    var swfuab;
-    window.onload = function () {
-        swfu = new SWFUpload({
-            // Backend Settings
-            upload_url: "<s:url value='/kindeditor/attachment_upload.html'/>", //单文件上传
-           /*  post_params: {
-                "ASPSESSID": "s2m5cueveh4lly0yhtyvs4dn"
-            }, */
-
-            // File Upload Settings
-            file_size_limit: "5 MB",
-            file_types: "*.jpg;*.png;*.bmp;*.gif",
-            file_types_description: "允许上传文件类型*.jpg;*.png;*.bmp;*.gif",
-            file_upload_limit: 0,    // Zero means unlimited 
-            // Event Handler Settings - these functions as defined in Handlers.js
-            //  The handlers are not part of SWFUpload but are part of my website and control how
-            //  my website reacts to the SWFUpload events.
-            swfupload_preload_handler: preLoad,
-            swfupload_load_failed_handler: loadFailed,
-            file_queue_error_handler: fileQueueError,
-            file_dialog_complete_handler: fileDialogComplete,
-            upload_progress_handler: uploadProgress,
-            upload_error_handler: uploadError,
-            upload_success_handler: uploadSuccess,
-            upload_complete_handler: uploadComplete,
-
-            // Button settings
-            button_image_url: "/skins/default/self/images/szzt1.jpg",
-            button_placeholder_id: "spanButtonPlaceholder",
-            button_width: 89,
-            button_height: 33,
-            button_text: '请选择要上传的图片',
-            button_text_style: '',
-
-            /* 
-            button_image_url: "",
-            button_placeholder_id: "spanButtonPlaceholder",
-            button_width: 65,
-            button_height: 20,
-            button_text: "<a class='btn-txt'> &nbsp;上传头像</a>", //按钮文字
-            button_text_style: ".btn-txt{color: #0A81A7; font-size:12px;font-family:'微软雅黑';cursor:pointer;}",
-            */
-            button_text_top_padding: 0,
-            button_text_left_padding: 0,
-            button_window_mode: "transparent",
-            button_disabled: false,
-            // Flash Settings
-            flash_url: "${base}/plugins/kindeditor/swfupload/swfupload.swf", // Relative to this file
-            flash9_url: "${base}/plugins/kindeditor/swfupload/swfupload_fp9.swf", // Relative to this file 
-            custom_settings: {
-                upload_target: "divFileProgressContainer"
-            },
-            // Debug Settings
-            debug: false
-        });
-        swfuab = new SWFUpload({
-            // Backend Settings
-            upload_url: "/UploadFile.aspx", //单文件上传
-/*             post_params: {
-                "ASPSESSID": "s2m5cueveh4lly0yhtyvs4dn"
-            }, */
-
-            // File Upload Settings
-            file_size_limit: "5 MB",
-            file_types: "*.jpg;*.png;*.bmp;*.gif",
-            file_types_description: "允许上传文件类型*.jpg;*.png;*.bmp;*.gif",
-            file_upload_limit: 0,    // Zero means unlimited 
-            // Event Handler Settings - these functions as defined in Handlers.js
-            //  The handlers are not part of SWFUpload but are part of my website and control how
-            //  my website reacts to the SWFUpload events.
-            swfupload_preload_handler: preLoadab,
-            swfupload_load_failed_handler: loadFailedab,
-            file_queue_error_handler: fileQueueErrorab,
-            file_dialog_complete_handler: fileDialogCompleteab,
-            upload_progress_handler: uploadProgressab,
-            upload_error_handler: uploadErrorab,
-            upload_success_handler: uploadSuccessab,
-            upload_complete_handler: uploadCompleteab,
-
-            // Button settings
-            button_image_url: "/skins/default/self/images/bzyft.jpg",
-            button_placeholder_id: "spanButtonPlaceholder_ab",
-            button_width: 125,
-            button_height: 40,
-            button_text: '上传图片',
-            button_text_style: ' ',
-
-            /* 
-            button_image_url: "",
-            button_placeholder_id: "spanButtonPlaceholder_ab",
-            button_width: 65,
-            button_height: 20,
-            button_text: "<a class='btn-txt'> &nbsp;上传头像</a>", //按钮文字
-            button_text_style: ".btn-txt{color: #0A81A7; font-size:12px;font-family:'微软雅黑';cursor:pointer;}",
-            */
-            button_text_top_padding: 0,
-            button_text_left_padding: 0,
-            button_window_mode: "transparent",
-
-            button_disabled: false,
-            // Flash Settings
-            flash_url: "${base}/plugins/kindeditor/swfupload/swfupload.swf", // Relative to this file
-            flash9_url: "${base}/plugins/kindeditor/swfupload/swfupload_fp9.swf", // Relative to this file 
-            custom_settings: {
-                upload_target: "divFileProgressContainerab"
-            },
-            // Debug Settings
-            debug: false
-        });
-    }
-//    function () {
-//        var hh = $(window).height() + 133;
-//        $("body").css({ 'overflow': hidden, "height": hh + "px" });
-//    }
-
-	</script>
+	var i= 1;
+			$(function(){
+				// 初始化插件
+				$("#zyupload").zyUpload({
+					width            :   "650px",                 // 宽度
+					height           :   "400px",                 // 宽度
+					itemWidth        :   "140px",                 // 文件项的宽度
+					itemHeight       :   "115px",                 // 文件项的高度
+					url              :   "<s:url value='/kindeditor/uploadPic.html'/>",  // 上传文件的路径
+					fileType         :   ["jpg","png","js","exe"],// 上传文件的类型
+					fileSize         :   51200000,                // 上传文件的大小
+					multiple         :   false,                    // 是否可以多个文件上传
+					dragDrop         :   false,                   // 是否可以拖动上传文件
+					tailor           :   false,                   // 是否可以裁剪图片
+					del              :   true,                    // 是否可以删除文件
+					finishDel        :   false,  				  // 是否在上传文件完成后删除预览
+					/* 外部获得的回调接口 */
+					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+						console.info("当前选择了以下文件：");
+						console.info(selectFiles);
+					},
+					onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+						console.info("当前删除了此文件：");
+						console.info(file.name);
+					},
+					onSuccess: function(file, response){
+						// 文件上传成功的回调方法
+						var Jresponse=$.parseJSON(response);
+						console.info("此文件上传成功：");
+						console.info(file.name);
+						console.info("此文件上传到服务器地址：");
+						console.info(response);
+						$("#uploadInf").append("<p>上传成功，文件地址是：" + Jresponse["url"] + "</p>");
+						$("#patentImgUrl").append("<input type='hidden' id='patentUrl"+i+"' name='patentUrl"+i+"' value='"+Jresponse["url"]+"'/>");
+						i=++i;
+						
+					},
+					onFailure: function(file, response){          // 文件上传失败的回调方法
+						console.info("此文件上传失败：");
+						console.info(file.name);
+					},
+					onComplete: function(response){           	  // 上传完成的回调方法
+						console.info("文件上传完成");
+						console.info(response);
+					}
+				});
+				
+			});
+		
+		</script> 
 </head>
 
 <body style="background-color: #FFF" id="dlstCircleArticle">
@@ -214,7 +148,7 @@
 						<!--撰写小贴士 -->
 						<input id="whichTip" type="hidden" name="name" value="2">
 						<input id="tipIdHid" type="hidden" name="name" value="1223">
-	
+						<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
 						<div id="tipsList" style="border-top: #0085d0 1px solid; z-index: 6000000;">
 							<div class="Writing_tips tip0" name="tips" style="display: block;">
 								<p>
@@ -810,32 +744,24 @@
 							</div>
 							<div style="height: 10px">
 							</div>
-							    <div class="cl" style="padding-left: 40px; float: left;">
-								       <div class="upimg1" id="spanButtonPlaceholder"><!-- 上传flash插件 --></div>
-    							</div>
-							
 							
 							<div class="img_edit" id="origin">
 								<div class="imgfl" id="picBianHao">
 								</div>
 								<div class="imgfr">
-									<input id="piciLlus2" name="" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off">
-									<input id="picMarkiLlus2" name="" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off">
+									<form id="patentUrlFrom" name="patentUrlFrom"  method="post" enctype="multipart/form-data" class="form-horizontal">
+									<input id="piciLlus2" name="state" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
+									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
+									<div id=patentImgUrl style="display:none"></div>
+								</form>
+									<div id="zyupload" class="zyupload"></div>
 								</div>
 							</div>
 							<div class="img_edit" id="reHtml" style="display: none">
 							</div>
 							<div class="cl">
-								<div id="swfu_container" style="margin: 0px 10px;">
-								</div>
-								<div id="divFileProgressContainer" style="height: 75px; display: none;">
-								</div>
-								<div id="thumbnails" class="imgreview" style="overflow: hidden;">
-									<img alt="" id="imghead" name="imghead" style="padding-right: 20px;">
-									
-								</div>
 								<div class="daochu_cancelh">
-									<div class="daochu_cancel1" onclick="savePicNiLlu();return false;">
+									<div class="daochu_cancel1" onclick="savePatentImgUrl()">
 										保存
 									</div>
 									<div class="daochu_cancel1h" onclick="piclistShow();">
@@ -1483,6 +1409,39 @@
 						alert("操作失败");
 					}
 				});
+			}
+			
+			function savePatentImgUrl() {
+				if ($("#patentUrl1").length > 0) {
+					var state = $("#piciLlus2").val();
+					var label = $("#picMarkiLlus2").val();
+					var patentUrl1 = $("#patentUrl1").val();
+					var patentUrl2 = $("#patentUrl2").val();
+					var patentUrl3 = $("#patentUrl3").val();
+					var patentUrl4 = $("#patentUrl4").val();
+					var patentUrl5 = $("#patentUrl5").val();
+
+					$.ajax({
+						type : "POST",
+						url : "<s:url value='/editor/savePracticalPatentImgUrl.html'/>",
+						data : {
+							"state" : state,
+							"label" : label,
+							"patentUrl1" : patentUrl1,
+							"patentUrl2" : patentUrl2,
+							"patentUrl3" : patentUrl3,
+							"patentUrl4" : patentUrl4,
+							"patentUrl5" : patentUrl5
+						},
+							success: function(data){
+
+								alert("操作成功");
+							},
+							error : function() {
+								alert("操作失败");
+							}
+					});
+				}
 			}
 	</script>	
 </body>

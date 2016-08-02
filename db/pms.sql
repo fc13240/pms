@@ -602,15 +602,11 @@ CREATE TABLE IF NOT EXISTS patent_document_templates(
 
 
 CREATE TABLE patent_attachment (
-  attachment_id BIGINT(20) NOT NULL AUTO_INCREMENT,
-  patenturl1 VARCHAR(200) DEFAULT NULL,
-  patenturl2 VARCHAR(200) DEFAULT NULL,
-  patenturl3 VARCHAR(200) DEFAULT NULL,
-  patenturl4 VARCHAR(200) DEFAULT NULL,
-  patenturl5 VARCHAR(200) DEFAULT NULL,
-  state VARCHAR(30) NOT NULL COMMENT '说明',
-  user_id INT(11) DEFAULT NULL,
+  attachment_id BIGINT NOT NULL AUTO_INCREMENT,
+  attachment_url VARCHAR(200) DEFAULT NULL,
+  patent_doc_id BIGINT,
+  caption VARCHAR(30) NOT NULL COMMENT '说明',
   label VARCHAR(30) NOT NULL COMMENT '标记',
-  sign_Id BIGINT(20),
-  PRIMARY KEY (attachment_id)
+  PRIMARY KEY (attachment_id),
+  CONSTRAINT fk_patent_documents_doc_id FOREIGN KEY idx_fk_patent_documents_doc_id(patent_doc_id) REFERENCES patent_documents(patent_docs_id)
 )
