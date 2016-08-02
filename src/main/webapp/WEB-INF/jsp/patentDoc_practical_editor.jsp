@@ -743,32 +743,24 @@
 							</div>
 							<div style="height: 10px">
 							</div>
-							    <div class="cl" style="padding-left: 40px; float: left;">
-								       <div class="upimg1" id="spanButtonPlaceholder"><!-- 上传flash插件 --></div>
-    							</div>
-							
 							
 							<div class="img_edit" id="origin">
 								<div class="imgfl" id="picBianHao">
 								</div>
 								<div class="imgfr">
-									<input id="piciLlus2" name="" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off">
-									<input id="picMarkiLlus2" name="" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off">
+									<form id="patentUrlFrom" name="patentUrlFrom"  method="post" enctype="multipart/form-data" class="form-horizontal">
+									<input id="piciLlus2" name="state" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
+									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
+									<div id=patentImgUrl style="display:none"></div>
+								</form>
+									<div id="zyupload" class="zyupload"></div>
 								</div>
 							</div>
 							<div class="img_edit" id="reHtml" style="display: none">
 							</div>
 							<div class="cl">
-								<div id="swfu_container" style="margin: 0px 10px;">
-								</div>
-								<div id="divFileProgressContainer" style="height: 75px; display: none;">
-								</div>
-								<div id="thumbnails" class="imgreview" style="overflow: hidden;">
-									<img alt="" id="imghead" name="imghead" style="padding-right: 20px;">
-									
-								</div>
 								<div class="daochu_cancelh">
-									<div class="daochu_cancel1" onclick="savePicNiLlu();return false;">
+									<div class="daochu_cancel1" onclick="savePatentImgUrl()">
 										保存
 									</div>
 									<div class="daochu_cancel1h" onclick="piclistShow();">
@@ -1416,6 +1408,39 @@
 						alert("操作失败");
 					}
 				});
+			}
+			
+			function savePatentImgUrl() {
+				if ($("#patentUrl1").length > 0) {
+					var state = $("#piciLlus2").val();
+					var label = $("#picMarkiLlus2").val();
+					var patentUrl1 = $("#patentUrl1").val();
+					var patentUrl2 = $("#patentUrl2").val();
+					var patentUrl3 = $("#patentUrl3").val();
+					var patentUrl4 = $("#patentUrl4").val();
+					var patentUrl5 = $("#patentUrl5").val();
+
+					$.ajax({
+						type : "POST",
+						url : "<s:url value='/editor/savePracticalPatentImgUrl.html'/>",
+						data : {
+							"state" : state,
+							"label" : label,
+							"patentUrl1" : patentUrl1,
+							"patentUrl2" : patentUrl2,
+							"patentUrl3" : patentUrl3,
+							"patentUrl4" : patentUrl4,
+							"patentUrl5" : patentUrl5
+						},
+							success: function(data){
+
+								alert("操作成功");
+							},
+							error : function() {
+								alert("操作失败");
+							}
+					});
+				}
 			}
 	</script>	
 </body>

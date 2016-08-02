@@ -189,6 +189,16 @@ public class PatentWriteDocController {
 		writer.write(1);
 	}
 	
+	@RequestMapping(path="/savePracticalPatentImgUrl",method=RequestMethod.POST)
+	public void savePracticalPatentImgUrl(Attachment attachment,HttpSession session,PrintWriter writer){
+		long signId=(Long)session.getAttribute("practical");
+		attachment.setSignId(signId);
+		int userId = PrincipalUtils.getCurrentUserId();
+		attachment.setUserId(userId);
+		patentDocService.savePatentImgUrl(attachment);
+		writer.write(1);
+	}
+	
 	@RequestMapping(path="/getTemplateList")
 	public void getTemplateList(@RequestParam("sectionId")int sectionId,HttpServletResponse response) throws IOException{
 		List<PatentDocumentTemplate> DocTemplates = patentDocumentTemplateService.getTemplateList(sectionId);
