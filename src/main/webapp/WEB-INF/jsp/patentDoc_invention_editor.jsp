@@ -1347,7 +1347,7 @@
 				 $.each(obj,function(i,item){
 					 $("#modelWrap").append("<div class='model1 model_list"+i+"' style='overflow-x: hidden; overflow-y: hidden;height:158px;'>"+
 						 "<div class='title'>模板"+(i+1)+":"+item.templateTitle+"</div>"+
-						 	 "<div class='content'>"+
+						 	 "<div class='content' style='height:105px;overflow-y:hidden;'>"+
 				 				"<p class='small'>"+
 									"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
 								"</p>"+
