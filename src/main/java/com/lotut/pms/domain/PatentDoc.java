@@ -24,10 +24,10 @@ public class PatentDoc {
 	private String implementWay;
 	private String rightClaim;
 	private String abstractDescription;
-	public long getPatentDocId() {
+	public long getPatentDocsId() {
 		return patentDocsId;
 	}
-	public void setPatentDocId(long patentDocsId) {
+	public void setPatentDocsId(long patentDocsId) {
 		this.patentDocsId = patentDocsId;
 	}
 	public String getAppNo() {
