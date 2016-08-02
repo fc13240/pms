@@ -1458,6 +1458,7 @@
 						}
 				});
 			}
+		}
 	 function templatebuttonclick(i,patentDocSectionId){
 		 if(patentDocSectionId==1){
 			 editor.html($("#templateContent"+i).html());
