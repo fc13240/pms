@@ -20,6 +20,7 @@
 		<result property="implementWay" column="implement_way"/>
 		<result property="rightClaim" column="right_claim"/>
 		<result property="abstractDescription" column="abstract_desc"/>
+		<result property="signId" column="sign_Id"/>
 	</resultMap>
 
 		<resultMap type="Attachment" id="PatentImgMap">
@@ -34,6 +35,8 @@
 			<result property="patentUrl4" column="patenturl4"/>
 			<result property="patentUrl5" column="patenturl5"/>
 		</resultMap>
+	
+
 	
  	<insert id="savePatentDoc" parameterType="PatentDoc">
 		insert into patent_documents(app_no,user_id,patent_type,create_time,patent_name,tech_domain,background_tech,content_problem,content_right,content_effect,
@@ -67,5 +70,6 @@
 	<insert id="savePatentImgUrl" parameterType="Attachment">
 		insert into patent_attachment(user_id,state,label,patenturl1,patenturl2,patenturl3,patenturl4,patenturl5,sign_Id) values
 		(#{userId},#{state},#{label},#{patentUrl1,javaType=string,jdbcType=VARCHAR},#{patentUrl2,javaType=string,jdbcType=VARCHAR},#{patentUrl3,javaType=string,jdbcType=VARCHAR},#{patentUrl4,javaType=string,jdbcType=VARCHAR},#{patentUrl5,javaType=string,jdbcType=VARCHAR},#{signId});
+		
 	</insert>
 </mapper>
