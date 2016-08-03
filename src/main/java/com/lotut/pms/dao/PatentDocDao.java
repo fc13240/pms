@@ -10,11 +10,11 @@ public interface PatentDocDao {
 	
 	List<PatentDoc> getUserPatentDoc(int userId);
 	
-	PatentDoc getUserPatentDocById(long patentDocsId);
+	PatentDoc getUserPatentDocById(long patentDocId);
 	
 	void updatePatentDoc(PatentDoc patentDoc);
 	
-	void deletePatentDoc(long patentDocsId);
+	void deletePatentDoc(long patentDocId);
 	
 	void savePatentImgUrl(Attachment attachment);
 	

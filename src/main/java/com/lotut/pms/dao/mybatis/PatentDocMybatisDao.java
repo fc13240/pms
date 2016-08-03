@@ -36,8 +36,8 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 
 
 	@Override
-	public PatentDoc getUserPatentDocById( long patentDocsId) {
-		return patentDocMapper.getUserPatentDocById( patentDocsId);
+	public PatentDoc getUserPatentDocById( long patentDocId) {
+		return patentDocMapper.getUserPatentDocById( patentDocId);
 	}
 
 
@@ -52,9 +52,9 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 
 
 	@Override
-	public void deletePatentDoc(long patentDocsId) {
+	public void deletePatentDoc(long patentDocId) {
 	
-		patentDocMapper.deletePatentDoc(patentDocsId);
+		patentDocMapper.deletePatentDoc(patentDocId);
 	}
 
 

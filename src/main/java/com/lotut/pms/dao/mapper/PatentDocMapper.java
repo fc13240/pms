@@ -12,11 +12,11 @@ public interface PatentDocMapper {
 	
 	List<PatentDoc> getUserPatentDoc(@Param("userId")int userId);
 	
-	PatentDoc getUserPatentDocById(@Param("patentDocsId")long patentDocsId);
+	PatentDoc getUserPatentDocById(@Param("patentDocId")long patentDocId);
 	
 	void updatePatentDoc(PatentDoc patentDoc);
 	
-	void deletePatentDoc(long patentDocsId);
+	void deletePatentDoc(long patentDocId);
 
 	void savePatentImgUrl(Attachment attachment);
 	

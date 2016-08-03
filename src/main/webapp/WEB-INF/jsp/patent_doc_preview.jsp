@@ -82,7 +82,7 @@
 			<div class="tit_top">
 				<div class="pre_title">摘要</div>
 				<%-- <div class="pre_clo">
-					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>&tab=7">
+					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=7">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
 			</div>
@@ -90,7 +90,7 @@
 			<div class="tit_top">
 				<div class="pre_title">摘要附图</div>
 				<%-- <div class="pre_clo">
-					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>&tab=8">
+					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=8">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
 			</div>
@@ -98,7 +98,7 @@
 			<div class="tit_top">
 				<div class="pre_title">权利要求书</div>
 				<%-- <div class="pre_clo">
-					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>&tab=6">
+					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=6">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
 			</div>
@@ -106,7 +106,7 @@
 			<div class="tit_top">
 				<div class="pre_title">发明名称</div>
 				<%-- <div class="pre_clo">
-					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>&tab=0">
+					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=0">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
 			</div>
@@ -114,7 +114,7 @@
 			<div class="tit_top">
 				<div class="pre_title">技术领域</div>
 				<%-- <div class="pre_clo">
-					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>&tab=1">
+					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=1">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
 			</div>
@@ -122,7 +122,7 @@
 			<div class="tit_top">
 				<div class="pre_title">背景技术</div>
 				<%-- <div class="pre_clo">
-					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>&tab=2">
+					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=2">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
 			</div>
@@ -130,7 +130,7 @@
 			<div class="tit_top">
 				<div class="pre_title">发明内容</div>
 				<%-- <div class="pre_clo">
-					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>&tab=3">
+					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=3">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
 			</div>
@@ -140,7 +140,7 @@
 			<div class="tit_top">
 				<div class="pre_title">附图说明</div>
 				<%-- <div class="pre_clo">
-					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>&tab=5">
+					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=5">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
 			</div>
@@ -148,7 +148,7 @@
 			<div class="tit_top">
 				<div class="pre_title">具体实施方式</div>
 				<%-- <div class="pre_clo">
-					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>&tab=4">
+					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=4">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
 			</div>
@@ -156,7 +156,7 @@
 			<div class="tit_top">
 				<div class="pre_title">附图</div>
 				<%-- <div class="pre_clo">
-					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>&tab=5">
+					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=5">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
 			</div>

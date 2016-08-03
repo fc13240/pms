@@ -5,7 +5,7 @@
 <mapper  namespace="com.lotut.pms.dao.mapper.PatentDocMapper">
 
 	<resultMap type="PatentDoc" id="PatentDocMap">
-		<id property="patentDocsId" column="patent_docs_id"/>
+		<id property="patentDocId" column="patent_doc_id"/>
 		<result property="appNo" column="app_no"/>
 		<result property="userId" column="user_id"/>
 		<result property="patentType" column="patent_type"/>
@@ -33,7 +33,7 @@
 	
 
 	
- 	<insert id="savePatentDoc" parameterType="PatentDoc" useGeneratedKeys="true" keyProperty="patentDocsId">
+ 	<insert id="savePatentDoc" parameterType="PatentDoc" useGeneratedKeys="true" keyProperty="patentDocId">
 		insert into patent_documents(app_no,user_id,patent_type,create_time,patent_name,tech_domain,background_tech,content_problem,content_right,content_effect,
 		implement_way,right_claim,abstract_desc) values
 		(#{appNo,javaType=string,jdbcType=VARCHAR},#{userId},#{patentType},now(),#{name},#{techDomain,javaType=string,jdbcType=CLOB},#{backgoundTech,javaType=string,jdbcType=CLOB},#{contentProblem,javaType=string,jdbcType=CLOB},#{contentRight,javaType=string,jdbcType=CLOB},#{contentEffect,javaType=string,jdbcType=CLOB},
@@ -41,25 +41,25 @@
 	</insert>
 	
 	<select id="getUserPatentDoc"  resultMap="PatentDocMap">
-		select patent_docs_id,app_no,patent_type,create_time,last_update_time,patent_name,tech_domain,background_tech,content_problem,content_right,content_effect,
+		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,tech_domain,background_tech,content_problem,content_right,content_effect,
 		implement_way,right_claim,abstract_desc from patent_documents where user_Id=#{userId}
 	</select> 
 	
 	
 	<select id="getUserPatentDocById"  resultMap="PatentDocMap">
-		select patent_docs_id,app_no,patent_type,create_time,last_update_time,patent_name,tech_domain,background_tech,content_problem,content_right,content_effect,
-		implement_way,right_claim,abstract_desc from patent_documents where  patent_docs_id=#{patentDocsId}
+		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,tech_domain,background_tech,content_problem,content_right,content_effect,
+		implement_way,right_claim,abstract_desc from patent_documents where  patent_doc_id=#{patentDocId}
 	</select>
 	
 	<update id="updatePatentDoc" parameterType="PatentDoc">
 		update patent_documents set app_no=#{appNo,javaType=string,jdbcType=VARCHAR},user_id=#{userId},patent_name=#{name},tech_domain=#{techDomain,javaType=string,jdbcType=CLOB},
 		background_tech=#{backgoundTech,javaType=string,jdbcType=CLOB},last_update_time=now(),content_problem=#{contentProblem,javaType=string,jdbcType=CLOB},content_right=#{contentRight,javaType=string,jdbcType=CLOB},content_effect=#{contentEffect,javaType=string,jdbcType=CLOB},
 		implement_way=#{implementWay,javaType=string,jdbcType=CLOB},right_claim=#{rightClaim,javaType=string,jdbcType=CLOB},abstract_desc=#{abstractDescription,javaType=string,jdbcType=CLOB}
-		where  patent_docs_id=#{patentDocsId}
+		where  patent_doc_id=#{patentDocId}
 	</update> 
 	
 	<delete id="deletePatentDoc">
-		delete  from  patent_documents  where  patent_docs_id=#{patentDocsId} 
+		delete  from  patent_documents  where  patent_doc_id=#{patentDocId} 
 	</delete>
 	
 	<insert id="savePatentImgUrl" parameterType="Attachment">

@@ -1379,9 +1379,9 @@
 				
 			};
 			
-			function findPatentDoc(patentDocsId){
+			function findPatentDoc(patentDocId){
 				
-				var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocsId="+patentDocsId;
+				var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocId="+patentDocId;
 				location.href=url;
 				
 				

@@ -29,8 +29,8 @@ public class PatentDocServiceImp implements PatentDocService{
 
 
 		@Override
-		public PatentDoc getUserPatentDocById(long patentDocsId) {
-			return patentDocDao.getUserPatentDocById( patentDocsId);
+		public PatentDoc getUserPatentDocById(long patentDocId) {
+			return patentDocDao.getUserPatentDocById( patentDocId);
 		}
 
 
@@ -41,9 +41,9 @@ public class PatentDocServiceImp implements PatentDocService{
 		}
 
 		@Override
-		public void deletePatentDoc(long patentDocsId) {
+		public void deletePatentDoc(long patentDocId) {
 		
-			patentDocDao.deletePatentDoc(patentDocsId);
+			patentDocDao.deletePatentDoc(patentDocId);
 			
 		}
 
