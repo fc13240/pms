@@ -41,7 +41,7 @@ public class PatentWriteDocController {
 	}
 	
 
-	@RequestMapping(path="/inventionWriterForm")
+	@RequestMapping(path="/inventionWriterForm")//newPatentDoc
 	public String inventionEditorForm(@RequestParam("patentType")int patentType, PatentDoc patentDoc,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
@@ -53,33 +53,33 @@ public class PatentWriteDocController {
 		model.addAttribute("patentDocs", patentDocs);
 		model.addAttribute("patentType",patentType);
 		if(patentType==1){
-			return "patentDoc_invention_editor";
+			return "patent_doc_invent_edit";
 		}else if(patentType==2){
-			return "patentDoc_practical_editor";
+			return "patent_doc_practical_edit";
 		}
 		return "";	
 	}
 
 	
-	@RequestMapping(path="/addPatentDoc",method=RequestMethod.POST)
+	@RequestMapping(path="/addPatentDoc",method=RequestMethod.POST)//savePatentDoc
 	public void  addEditorText(PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
 		patentDocService.updatePatentDoc(patentDoc);
 		writer.write(1);
-	}
+	}//暂时有问题，待删除
 	
-	@RequestMapping(path="/findPatentDoc",method=RequestMethod.GET)
+	@RequestMapping(path="/findPatentDoc",method=RequestMethod.GET)//editPatentDoc
 	public String  findPatentDoc(@RequestParam("patentDocsId")long patentDocsId,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocsId);
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		model.addAttribute("patent", patentDoc);
 		model.addAttribute("patentDocs", patentDocs);
-		return "patentDoc_search";		
+		return "patentDoc_search";//删除		
 	}
 	
-	@RequestMapping(path="/compilePatentDoc",method=RequestMethod.GET)
+/*	@RequestMapping(path="/compilePatentDoc",method=RequestMethod.GET)//
 	public String  compilePatentDoc(@RequestParam("patentDocsId")long patentDocsId,@RequestParam("tab")int tab,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocsId);
@@ -87,14 +87,14 @@ public class PatentWriteDocController {
 		model.addAttribute("patent", patentDoc);
 		model.addAttribute("patentDocs", patentDocs);
 		model.addAttribute("tab", tab);
-		return "patentDoc_search2";		
-	}
-	@RequestMapping(path="/PatentDocList",method=RequestMethod.GET)
+		return "patentDoc_search2";	//	
+	}*///暂时不做了
+	@RequestMapping(path="/PatentDocList",method=RequestMethod.GET)//patentDocList
 	public String  PatentDocList(Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		model.addAttribute("patentDocs", patentDocs);
-		return "patentDoc_write_list";
+		return "patent_doc_list";
 		
 	}
 	@RequestMapping(path="/deletePatentDoc",method=RequestMethod.GET)
@@ -104,7 +104,7 @@ public class PatentWriteDocController {
 	}
 	
 	
-	@RequestMapping(path="/updatePatentDoc",method=RequestMethod.POST)
+	@RequestMapping(path="/updatePatentDoc",method=RequestMethod.POST)//savePatentDoc
 	public void  updatePatentDoc(@RequestParam("patentDocsId")long patentDocsId,PatentDoc patentDoc,Model model,PrintWriter writer){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
@@ -116,7 +116,7 @@ public class PatentWriteDocController {
 	public String previewPatentDoc(@RequestParam("patentDocsId")long patentDocsId,Model model,PrintWriter writer){
 		PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocsId);
 		model.addAttribute("patentDoc", patentDoc);
-		return "patentDoc_preview";
+		return "patent_doc_preview";
 	}
 	
 	/*合并代码*/
@@ -145,7 +145,7 @@ public class PatentWriteDocController {
 		model.addAttribute("templateDocList", templateDocList);
 		model.addAttribute("patentDocSectionTypes", patentDocSectionTypes);
 		model.addAttribute("sectionValue", patentDocSectionId);
-		return "patentDoc_template_list";
+		return "patent_doc_template_list";
 	}
 
 	@RequestMapping(path="/findTemplateDocByTemplateId",method=RequestMethod.GET)
@@ -153,7 +153,7 @@ public class PatentWriteDocController {
 		PatentDocumentTemplate patentDocumentTemplate = patentDocumentTemplateService.findTemplateDocByTemplateId(templateId);
 		model.addAttribute("patentDocumentTemplate", patentDocumentTemplate);
 		model.addAttribute("patentDocSectionId", patentDocSectionId);
-		return "patentDoc_template_update"; 
+		return "patent_doc_template_modify"; 
 	}
 	
 	@RequestMapping(path="/updateTemplateDoc",method=RequestMethod.POST)
@@ -165,7 +165,7 @@ public class PatentWriteDocController {
 		model.addAttribute("templateDocList", templateDocList);
 		model.addAttribute("patentDocSectionTypes", patentDocSectionTypes);
 		model.addAttribute("sectionValue", updatePatentDocumentTemplate.getPatentDocSectionType().getPatentDocSectionId());
-		return "patentDoc_template_list";
+		return "patent_doc_template_list";
 	}
 	
 	
