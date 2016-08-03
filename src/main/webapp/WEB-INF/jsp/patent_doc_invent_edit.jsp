@@ -133,7 +133,7 @@
 	                        <a href="<s:url value='/editor/PatentDocList.html'/>" >返回撰写列表</a></div>
 	                    <div class="save" onclick="savePatentDoc();">
 	                        <i class="icon"></i>
-	                        <div class="span">保存</div>
+	                        <div class="span" >保存</div>
 	                    </div>
 	                    <div class="export" onclick="export_selfwrite();" id="export_selfwrite">
 	                        <i class="icon"></i>导出文件
@@ -1290,31 +1290,7 @@
 			};
 			
 
-			function savePatentDoc(){
-				var patentDocId=$("#patentDocId").val();
-				var patentType=${patentType};
-				var name=editor.text();
-				var techDomain=$("#editorContent1").val();
-				var backgoundTech=$("#editorContent2").val();
-				var contentProblem=$("#editorContent3").val();
-				var contentRight=$("#editorContent4").val();
-				var contentEffect=$("#editorContent5").val();
-				var implementWay=$("#editorContent6").val();
-				var abstractDescription=$("#editorContent7").val();
-				var rightClaim=$("#editorContent8").val();
-				$.ajax({
-					type: "POST",
-					url: "<s:url value='/editor/savePatentDoc.html'/>", 
-					data: {"name":name,"patentType":patentType,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
-							"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocsId":patentDocId},
-					success: function(data){
-						alert("操作成功");
-					},
-					error: function(){
-						alert("操作失败");
-					}
-				});
-			}
+
 	</script>
 	<script type="text/javascript">
 	var p=2;
@@ -1514,6 +1490,33 @@ function delectImg(value){
 			error : function() {
 				alert("操作失败");
 			}
+	});
+}
+</script>
+<script type="text/javascript">
+function savePatentDoc(){
+	var patentDocId=$("#patentDocId").val();
+	var patentType=${patentType};
+	var name=editor.text();
+	var techDomain=$("#editorContent1").val();
+	var backgoundTech=$("#editorContent2").val();
+	var contentProblem=$("#editorContent3").val();
+	var contentRight=$("#editorContent4").val();
+	var contentEffect=$("#editorContent5").val();
+	var implementWay=$("#editorContent6").val();
+	var abstractDescription=$("#editorContent7").val();
+	var rightClaim=$("#editorContent8").val();
+	$.ajax({
+		type: "POST",
+		url: "<s:url value='/editor/savePatentDoc.html'/>", 
+		data: {"name":name,"patentType":patentType,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
+				"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocsId":patentDocId},
+		success: function(data){
+			alert("操作成功");
+		},
+		error: function(){
+			alert("操作失败");
+		}
 	});
 }
 </script>
