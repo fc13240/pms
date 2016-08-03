@@ -7,14 +7,12 @@
 <!DOCTYPE html >
 <html>
 <head>
-	<c:import url="common/header.jsp"></c:import>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  
 	<title>实用新型撰写</title>
 	<c:import url="common/kindEditor.jsp"></c:import>
-
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
