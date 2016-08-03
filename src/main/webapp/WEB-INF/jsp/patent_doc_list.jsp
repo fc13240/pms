@@ -168,7 +168,7 @@ table td a {
                     <fmt:formatDate value="${patentDoc.createTime}" pattern="yyyy-MM-dd"/>
                 </td>
                 <td width="13%" valign="middle" align="left" class="td4">
-                    <fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd"/>
+                    <fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
                 </td>
                 <td width="27%" valign="middle" align="left">
                     <a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">

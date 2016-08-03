@@ -61,7 +61,7 @@ public class PatentWriteDocController {
 	}
 
 	
-	@RequestMapping(path="/savePatentDoc",method=RequestMethod.POST)//savePatentDoc
+	@RequestMapping(path="/savePatentDoc",method=RequestMethod.POST)
 	public void  addEditorText(PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
@@ -69,7 +69,7 @@ public class PatentWriteDocController {
 		writer.write(1);
 	}
 	
-	@RequestMapping(path="/editPatentDoc",method=RequestMethod.GET)//editPatentDoc
+	@RequestMapping(path="/editPatentDoc",method=RequestMethod.GET)
 	public String  findPatentDoc(@RequestParam("patentDocsId")long patentDocsId,@RequestParam("patentType")int patentType,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocsId);
@@ -95,6 +95,9 @@ public class PatentWriteDocController {
 		model.addAttribute("tab", tab);
 		return "patentDoc_search2";	//	
 	}*///暂时不做了
+	
+	
+	
 	@RequestMapping(path="/PatentDocList",method=RequestMethod.GET)//patentDocList
 	public String  PatentDocList(Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
