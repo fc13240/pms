@@ -131,11 +131,11 @@ public class PatentWriterController1 {
 		return "删除成功！";
 	}
 	
-	@RequestMapping(path="/getTemplateList")
+	/*@RequestMapping(path="/getTemplateList")
 	public void getTemplateList(@RequestParam("sectionId")int sectionId,HttpServletResponse response) throws IOException{
 		List<PatentDocumentTemplate> DocTemplates = patentDocumentTemplateService.getTemplateList(sectionId);
 		WebUtils.writeJsonStrToResponse(response, DocTemplates);
-	}
+	}*/
 	
 }
 

@@ -60,6 +60,11 @@
 	
 	<select id="getTemplateList" resultMap="patentDocTemplateListMap">
 		select pdt.template_id,pdt.content,pdt.template_title,pdt.patent_doc_section,pdst.patent_doc_section_desc from patent_document_templates pdt LEFT JOIN patent_doc_section_types pdst ON pdt.patent_doc_section = pdst.patent_doc_section_id
-		where patent_doc_section = #{sectionId};
+		where patent_doc_section = #{sectionId} limit 0,#{pageSize};
+	</select>
+	
+	<select id="getTemplateListByPage"  parameterType="TemplatePage" resultMap="patentDocTemplateListMap">
+		select pdt.template_id,pdt.content,pdt.template_title,pdt.patent_doc_section,pdst.patent_doc_section_desc from patent_document_templates pdt LEFT JOIN patent_doc_section_types pdst ON pdt.patent_doc_section = pdst.patent_doc_section_id
+		where patent_doc_section = #{sectionId} limit #{startIndex},#{pageSize};
 	</select>
 </mapper>
