@@ -327,7 +327,7 @@ var ZYFILE = {
 				    html += '				<div class="add_upload">';
 				    html += '					<a style="height:'+para.itemHeight+';width:'+para.itemWidth+';" title="点击添加文件" id="rapidAddImg" class="add_imgBox" href="javascript:void(0)">';
 				    html += '						<div class="uploadImg" style="width:'+imgWidth+'px">';
-				    html += '							<img class="upload_image" src="zyupload/skins/images/add_img.png" style="width:expression(this.width > '+imgWidth+' ? '+imgWidth+'px : this.width)" />';
+				    html += '							<img class="upload_image" src="/pms/temp/zyupload/skins/images/add_img.png" style="width:expression(this.width > '+imgWidth+' ? '+imgWidth+'px : this.width)" />';
 				    html += '						</div>'; 
 				    html += '					</a>';
 				    html += '				</div>';
@@ -553,7 +553,10 @@ var ZYFILE = {
 						return self.funFilterEligibleFile(files);
 					},
 					onSelect: function(selectFiles, allFiles) {
-						para.onSelect(selectFiles, allFiles);  // 回调方法
+						var allowMore = para.onSelect(selectFiles, allFiles);  // 回调方法
+						if (!allowMore) {
+							return;
+						}
 						self.funSetStatusInfo(ZYFILE.funReturnNeedFiles());  // 显示统计信息
 						var html = '', i = 0;
 						// 组织预览html

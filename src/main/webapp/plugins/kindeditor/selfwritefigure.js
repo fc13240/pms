@@ -118,7 +118,7 @@ $.ajax({ url: _RootPath + 'self/selfwritefigure2.aspx', //后台返回编辑页�
     success: function (resultHtml) {  //:FILE38738337A61C8D04BA6C5A2FCD50039A    
         $('#askPicList').html(resultHtml).show();
         var tab = getselfwriteTab(); //这两句是ry控制编辑区高度的
-        seteditorheight(tab);
+        //seteditorheight(tab);
     },
     error: function () {
     }

@@ -49,6 +49,7 @@ public class PatentWriteDocController {
 		patentDocService.savePatentDoc(patentDoc);
 		long patentDocId=patentDoc.getPatentDocsId();
 		model.addAttribute("patentDocId",patentDocId);
+		
 		model.addAttribute("patentDocs", patentDocs);
 		model.addAttribute("patentType",patentType);
 		if(patentType==1){
@@ -57,9 +58,6 @@ public class PatentWriteDocController {
 			return "patentDoc_practical_editor";
 		}
 		return "";	
-
-			
-		
 	}
 
 	
@@ -67,7 +65,7 @@ public class PatentWriteDocController {
 	public void  addEditorText(PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
-		patentDocService.savePatentDoc(patentDoc);
+		patentDocService.updatePatentDoc(patentDoc);
 		writer.write(1);
 	}
 	
@@ -103,8 +101,6 @@ public class PatentWriteDocController {
 	public String  deletePatentDoc(@RequestParam("patentDocsId")long patentDocsId,Model model){
 		patentDocService.deletePatentDoc(patentDocsId);
 	    return "redirect:/editor/PatentDocList.html";
-
-		
 	}
 	
 	
@@ -190,6 +186,22 @@ public class PatentWriteDocController {
 	@RequestMapping(path="/savePracticalPatentImgUrl",method=RequestMethod.POST)
 	public void savePracticalPatentImgUrl(Attachment attachment,HttpSession session,PrintWriter writer){
 		patentDocService.savePatentImgUrl(attachment);
+		writer.write(1);
+	}
+	
+	@RequestMapping(path="/getAttachmentById",method=RequestMethod.POST)
+	public void getAttachmentById(@RequestParam("patentDocId")long patentDocId,Model model,HttpServletResponse response,PrintWriter writer){
+			try {
+				List<Attachment> attachmentImg=patentDocService.getAttachmentById(patentDocId);
+				WebUtils.writeJsonStrToResponse(response, attachmentImg);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
+	
+	@RequestMapping(path="/delectAttachmentById",method=RequestMethod.POST)
+	public void delectAttachmentById(@RequestParam("attachmentId")long attachmentId,Model model,HttpServletResponse response,PrintWriter writer){
+		patentDocService.delectAttachmentById(attachmentId);
 		writer.write(1);
 	}
 	

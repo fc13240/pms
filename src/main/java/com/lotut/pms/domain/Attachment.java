@@ -1,18 +1,11 @@
 package com.lotut.pms.domain;
 
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-
 public class Attachment {
 	private long attachmentId;
-	private String  attachmentUrl;
 	private long patentDocId;
+	private String attachmentUrl;
 	private String caption;
 	private String label;
-	
 	
 	public long getAttachmentId() {
 		return attachmentId;
@@ -21,12 +14,6 @@ public class Attachment {
 		this.attachmentId = attachmentId;
 	}
 	
-	public String getAttachmentUrl() {
-		return attachmentUrl;
-	}
-	public void setAttachmentUrl(String attachmentUrl) {
-		this.attachmentUrl = attachmentUrl;
-	}
 	public long getPatentDocId() {
 		return patentDocId;
 	}
@@ -45,11 +32,11 @@ public class Attachment {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	
-	
-	
-	
-	
-	
+	public String getAttachmentUrl() {
+		return attachmentUrl;
+	}
+	public void setAttachmentUrl(String attachmentUrl) {
+		this.attachmentUrl = attachmentUrl;
+	}
 	
 }

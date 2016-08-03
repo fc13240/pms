@@ -54,4 +54,17 @@ public class PatentDocServiceImp implements PatentDocService{
 			
 		}
 
+
+		@Override
+		public List<Attachment> getAttachmentById(long patentDocId) {
+			return patentDocDao.getAttachmentById(patentDocId);
+		}
+
+
+		@Override
+		public void delectAttachmentById(long attachmentId) {
+			patentDocDao.delectAttachmentById(attachmentId);
+			
+		}
+
 }

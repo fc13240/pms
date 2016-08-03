@@ -29,8 +29,10 @@
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers.js"></script>
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers2.js"></script>
 	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg--> 
-	<link rel="stylesheet" href="${base }/temp/zyupload/skins/zyupload-1.0.0.min.css " type="text/css">
-	<script type="text/javascript" src="${base }/temp/zyupload/zyupload.basic-1.0.0.min.js"></script>
+	<link rel="stylesheet" href="${base }/temp/zyupload/skins/zyupload-1.0.0.css " type="text/css">
+	<script type="text/javascript" src="${base }/temp/zyupload/zyupload.basic-1.0.0.js"></script>
+	<script type="text/javascript" src="${base }/temp/zyupload/jquery.easing.min.js"></script>
+	<link type="text/css" rel="stylesheet" media="screen" href="${base }/temp/zyupload/style.css" />
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -52,6 +54,15 @@
 					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
 						console.info("当前选择了以下文件：");
 						console.info(selectFiles);
+						if (allFiles.length > 1) {
+							alert("每次只能上传一张，请先上传之前的图片再选择！");
+							for (var i = 1; i < allFiles.length; i++) {
+								console.log(allFiles[i]);
+								ZYFILE.funDeleteFile(allFiles[i].index, true);
+								return false;
+							}
+						}
+						return true;
 					},
 					onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
 						console.info("当前删除了此文件：");
@@ -65,9 +76,11 @@
 						console.info("此文件上传到服务器地址：");
 						console.info(response);
 						$("#uploadInf").append("<p>上传成功，文件地址是：" + Jresponse["url"] + "</p>");
-						$("#patentImgUrl").append("<input type='hidden' id='patentUrl"+i+"' name='patentUrl"+i+"' value='"+Jresponse["url"]+"'/>");
-						i=++i;
-						
+						$("#patentImgUrl").append("<input type='hidden' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
+						savePatentImgUrl();
+						$("#patentImgUrl").empty();
+						$('#piciLlus2').val("请填写附图说明，例如”图1为本发明实施例XX的方法流程示意图”。").css('color', '#999');
+					    $('#picMarkiLlus2').val("请填写附图标记说明，例如“1杯子主体，2杯子把手”。").css('color', '#999');
 					},
 					onFailure: function(file, response){          // 文件上传失败的回调方法
 						console.info("此文件上传失败：");
@@ -673,6 +686,7 @@
 								<div class="upimg1" onclick="addPic();">
 									新增附图</div>
 								<div class="img_box" id="askPicList">
+									
 								</div>
 							</div>
 						</div>
@@ -696,21 +710,11 @@
 								 	<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDocId}">
 									<input id="piciLlus2" name="caption" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
-									<div id=patentImgUrl style="display:none"></div>
+									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
 									
 								</form>
 									<div id="zyupload" class="zyupload"></div>
 								 	
-								</div>
-							</div>
-							<div class="cl">
-								<div class="daochu_cancelh">
-									<div class="daochu_cancel1" onclick="savePatentImgUrl()">
-										保存
-									</div>
-									<div class="daochu_cancel1h" onclick="piclistShow();">
-										取消
-									</div>
 								</div>
 							</div>
 						</div>
@@ -732,28 +736,14 @@
 						<div class="content" id="content8" style="display: none;">
 							<div style="height: 80px">
 							</div>
-						   <div style="float:left; margin-left:50px;">
-						   		<div id="spanButtonPlaceholder_ab" class="upimg1" style="float:left;">
-						   		</div></div>
-								<div class="upimg1" onclick="chooseFromList();" id="choseAbs" style="
+								<div class="upimg1" onclick="findAttachmentImg();" id="choseAbs" style="
 									left: 280px; margin-top: 0;float:left;">
 									从附图中选择</div>
-						   
-							
-							<div class="cl">
-								<div id="swfu_container" style="margin: 0px 10px;">
-								</div>
-								<div id="divFileProgressContainerab">
-								</div>
-								<div id="thumbnailsab" class="imgreview" style="overflow: hidden;">
-									<img alt="" id="imgheadab" style="padding-right: 20px;">
+							<div class="picBox">
+								<ul class="picL" id="picLsy" >
 									
-									
-								</div>
-								
-								
+								</ul>
 							</div>
-							
 						</div>
 						<!-- content end-->
 	
@@ -1367,36 +1357,32 @@
 		 })
 	 }
 
-	function savePatentImgUrl() {
-		if ($("#patentUrl1").length > 0) {
-			var caption = $("#piciLlus2").val();
-			var label = $("#picMarkiLlus2").val();
-			var attachmentUrl = $("#patentUrl1").val();
-			var attachmentUrl = $("#patentUrl2").val();
-			var attachmentUrl = $("#patentUrl3").val();
-			var attachmentUrl = $("#patentUrl4").val();
-			var attachmentUrl = $("#patentUrl5").val();
-			var patentDocId=$("#patentDocId").val();
-			$.ajax({
-				type : "POST",
-				url : "<s:url value='/editor/savePatentImgUrl.html'/>",
-				data : {
-					"caption" : caption,
-					"label" : label,
-					"attachmentUrl" : attachmentUrl,
-					"attachmentUrl" : patentUrl2,
-					"attachmentUrl" : patentUrl3,
-					"attachmentUrl" : patentUrl4,
-					"attachmentUrl" : patentUrl5
-				},
-					success: function(data){
 
+		function savePatentImgUrl() {
+			if ($("#patentUrl").length > 0) {
+				var caption = $("#piciLlus2").val();
+				var label = $("#picMarkiLlus2").val();
+				var attachmentUrl = $("#patentUrl").val();
+				var patentDocId=$("#patentDocId").val();
+				$.ajax({
+					type : "POST",
+					url : "<s:url value='/editor/savePatentImgUrl.html'/>",
+					data : {
+						"caption" : caption,
+						"label" : label,
+						"attachmentUrl" : attachmentUrl,
+						"patentDocId":patentDocId
+					},
+						success: function(data){
 						alert("操作成功");
+
 					},
 					error : function() {
 						alert("操作失败");
 					}
 			});
+		}else{
+			alert("请选择上传图片!");
 		}
 	}
 	 function templatebuttonclick(i,patentDocSectionId){
@@ -1433,6 +1419,7 @@
 			 
 		 }
 	}
+<<<<<<< HEAD
 	 
 	 function downPage(currentPage){
 		 var sectionId = $("#templateSectionId").html();
@@ -1479,6 +1466,61 @@
 		 })
 	 }
 
+=======
+	 function findAttachmentImg(){
+		 var patentDocId=$("#patentDocId").val();
+		 $.ajax({
+				type : "POST",
+				url : "<s:url value='/editor/getAttachmentById.html'/>",
+				data : {"patentDocId":patentDocId
+				},
+					success: function(data){
+						$("#picLsy").empty();
+					var obj= $.parseJSON(data);
+					$.each(obj,function(i,item){
+						 $("#picLsy").append(
+								 "<li id="+item.attachmentId+">"+
+									"<a href='#'><img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/></a>"+
+									"<div class='text'>"+
+										"<b>"+item.caption+"</b>"+
+										"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
+									"</div>"
+								+"</li>"
+						);
+					 });
+					hoverImg();
+				},
+				error : function() {
+					alert("操作失败");
+				}
+		});
+	 }
+</script>
+<script type="text/javascript">
+function hoverImg(){
+
+	$("#picLsy li").hover(function(){
+		$(this).find('.text:not(:animated)').animate({top:"0px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	},function () {
+		$(this).find('.text').animate({top:"149px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	});
+
+};
+
+function delectImg(value){
+	 $.ajax({
+			type : "POST",
+			url : "<s:url value='/editor/delectAttachmentById.html'/>",
+			data : {"attachmentId":value},
+				success: function(data){
+					alert("删除成功！");
+			},
+			error : function() {
+				alert("操作失败");
+			}
+	});
+}
+>>>>>>> 30c9b95dde4966d3a1a17498d36467b0dd1bec16
 </script>
 </body>
 </html>
