@@ -171,7 +171,7 @@ table td a {
                     <fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd"/>
                 </td>
                 <td width="27%" valign="middle" align="left">
-                    <a target="_blank" href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
+                    <a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>&patentType=<c:out value='${patentDoc.patentDocsId}'/>">
 								 编辑
 					</a><a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">预览</a>
                     <a onclick=" exportLayerShow('3197');">导出</a>
