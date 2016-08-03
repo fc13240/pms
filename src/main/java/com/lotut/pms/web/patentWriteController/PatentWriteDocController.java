@@ -22,6 +22,7 @@ import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.TemplatePage;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -194,9 +195,19 @@ public class PatentWriteDocController {
 	
 	@RequestMapping(path="/getTemplateList")
 	public void getTemplateList(@RequestParam("sectionId")int sectionId,HttpServletResponse response) throws IOException{
-		List<PatentDocumentTemplate> DocTemplates = patentDocumentTemplateService.getTemplateList(sectionId);
+		TemplatePage	templatePage = new TemplatePage();
+		List<PatentDocumentTemplate> DocTemplates = patentDocumentTemplateService.getTemplateList(sectionId,templatePage.getPageSize());
 		WebUtils.writeJsonStrToResponse(response, DocTemplates);
 	}
+	@RequestMapping(path="/getTemplateListByPage")
+	public void getTemplateListByPage(@RequestParam("sectionId")int sectionId,@ModelAttribute("templatePage") TemplatePage templatePage ,HttpServletResponse response) throws IOException{
+		templatePage.setSectionId(sectionId);
+		List<PatentDocumentTemplate> DocTemplates = patentDocumentTemplateService.getTemplateListByPage(templatePage);
+		WebUtils.writeJsonStrToResponse(response, DocTemplates);
+	}
+	
+	
+	
 	/**
 	 * 提交表单操作
 	 */

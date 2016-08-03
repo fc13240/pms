@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
+import com.lotut.pms.domain.TemplatePage;
 
 public interface PatentDocumentTemplateMapper {
 	void savePatentDocumentTemplate(PatentDocumentTemplate patentDocumentTemplate);
@@ -20,5 +21,7 @@ public interface PatentDocumentTemplateMapper {
 	
 	void deleteTemplateDoc(@Param("templateId") int templateId);
 	
-	List<PatentDocumentTemplate> getTemplateList(@Param("sectionId") int sectionId);
+	List<PatentDocumentTemplate> getTemplateList(@Param("sectionId") int sectionId,@Param("pageSize") int pageSize);
+	
+	List<PatentDocumentTemplate> getTemplateListByPage(TemplatePage templatePage);
 }

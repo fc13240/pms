@@ -781,7 +781,7 @@
 	
 	        </div>
 	
-	        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><a style="color:#ccc" href="javascript:void(0);">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:showKindsDragModel(1,2,2);">下一页</a></div>
+	        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><span id="templateSectionId" style="display:none;">1</span><a style="color:#ccc" href="javascript:upPage(0);">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage(2);">下一页</a></div>
 	        <div class="model" style="overflow-x: hidden; overflow-y: auto;">
 	            <div id="modelWrap" style="display: block;"></div>
 				<div id="hiddenmodel" style="display: none;"></div>
@@ -1330,6 +1330,7 @@
 			}
 	</script>
 	<script type="text/javascript">
+	var p=2;
 	$('input[id=patentFile]').change(function() {  
 		$('#filename').val($(this).val());  
 	});
@@ -1337,6 +1338,8 @@
 
 
 	 function loadingTemplate(sectionId){
+		 
+		 $("#templateSectionId").html(sectionId);
 		 $.ajax({
 			 type : "POST",
 			 url : "<s:url value='/editor/getTemplateList.html'/>?sectionId="+sectionId,
@@ -1430,6 +1433,52 @@
 			 
 		 }
 	}
+	 
+	 function downPage(currentPage){
+		 var sectionId = $("#templateSectionId").html();
+		 loading(sectionId,p);
+		 p=++p;
+		 
+		 
+	 }
+	 function upPage(currentPage){
+		 var sectionId = $("#templateSectionId").html();
+		 p=--p;
+		 loading(sectionId,p);
+		 
+		 
+	 }
+	 
+ 	function loading(sectionId,currentPage){
+		 
+		 $("#templateSectionId").html(sectionId);
+		 $.ajax({
+			 type : "POST",
+			 url : "<s:url value='/editor/getTemplateListByPage.html'/>?sectionId="+sectionId+"&currentPage="+currentPage,
+			 success : function (data){
+				 var obj= $.parseJSON(data);
+				 $("#modelWrap").empty();
+				 $("#hiddenmodel").empty();
+				 $.each(obj,function(i,item){
+					 $("#modelWrap").append("<div class='model1 model_list"+i+"' style='overflow-x: hidden; overflow-y: hidden;height:158px;'>"+
+						 "<div class='title'>模板"+(i+1)+":"+item.templateTitle+"</div>"+
+						 	 "<div class='content' style='height:105px;overflow-y:hidden;'>"+
+				 				"<p class='small'>"+
+									"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
+								"</p>"+
+							"</p>"+
+						    "<div class='button' style='z-index:500000;' onclick='templatebuttonclick("+i+","+item.patentDocSectionType.patentDocSectionId+")'>+使用模板</div>"+
+						  "</div>"+
+					   "</div>");
+					 $("#modelWrap span").css("color","black");
+				 	 $("#hiddenmodel").append("<p id='templateContent"+i+"'>"+item.content+"</p>");
+				 });
+			 },error : function (){
+				 
+			 }
+		 })
+	 }
+
 </script>
 </body>
 </html>

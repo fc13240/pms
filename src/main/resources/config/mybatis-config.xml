@@ -52,5 +52,6 @@
 		<typeAlias type="com.lotut.pms.domain.PatentDocSectionType" alias="PatentDocSectionType"/>
 		<typeAlias type="com.lotut.pms.domain.PatentDocumentTemplate" alias="PatentDocumentTemplate"/>
 		<typeAlias type="com.lotut.pms.domain.Attachment" alias="Attachment"/>
+		<typeAlias type="com.lotut.pms.domain.TemplatePage" alias="TemplatePage"/>
 	</typeAliases>  
 </configuration>

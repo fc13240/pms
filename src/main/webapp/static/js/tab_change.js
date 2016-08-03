@@ -21,7 +21,6 @@
 		}
                	
     }
-
     //3、标签切换到当前标签；
     $("div[name='tabs']:eq(" + whichTab + ")").attr('class', 'tab1').siblings().attr('class', 'tab1h');
   //切花到当前编辑框
@@ -38,12 +37,16 @@
 	$('.'+new_tip_name).show();	
 //	$(.right_right_bot).attr("tab_name",new_name);
 	if(whichTab<=3){
+	    $("#templateSectionId").html(whichTab+1);
 		loadingTemplateBYTab(whichTab+1);
 	}else if(whichTab==4){
+		$("#templateSectionId").html(whichTab);
 		loadingTemplateBYTab(7);
 	}else if(whichTab==6){
+		$("#templateSectionId").html(whichTab);
 		loadingTemplateBYTab(8);
 	}else if(whichTab==7){
+		$("#templateSectionId").html(whichTab);
 		loadingTemplateBYTab(9);
 	}
 	

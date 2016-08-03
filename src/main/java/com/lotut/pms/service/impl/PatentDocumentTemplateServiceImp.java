@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lotut.pms.dao.PatentDocumentTemplateDao;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
+import com.lotut.pms.domain.TemplatePage;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 
 public class PatentDocumentTemplateServiceImp implements PatentDocumentTemplateService{
@@ -50,8 +51,13 @@ public class PatentDocumentTemplateServiceImp implements PatentDocumentTemplateS
 	}
 
 	@Override
-	public List<PatentDocumentTemplate> getTemplateList(int sectionId) {
-		return patentDocumentTemplateDao.getTemplateList(sectionId);
+	public List<PatentDocumentTemplate> getTemplateList(int sectionId,int pageSize) {
+		return patentDocumentTemplateDao.getTemplateList(sectionId,pageSize);
+	}
+
+	@Override
+	public List<PatentDocumentTemplate> getTemplateListByPage(TemplatePage templatePage) {
+		return patentDocumentTemplateDao.getTemplateListByPage(templatePage);
 	}
 	
 }
