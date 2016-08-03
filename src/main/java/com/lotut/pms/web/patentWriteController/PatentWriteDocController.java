@@ -129,7 +129,7 @@ public class PatentWriteDocController {
 	
 	@RequestMapping(path="/patentDocTemplate")
 	public String patentDocTemplate(){
-		return "patentDoc_template_index";
+		return "patent_doc_template_index";
 	}
 	
 	@RequestMapping(path="/addPatentTemplate",produces={"text/html;charset=UTF-8;","application/json;"},method=RequestMethod.POST)
@@ -220,7 +220,22 @@ public class PatentWriteDocController {
 	@RequestMapping(path="/getTemplateListByPage")
 	public void getTemplateListByPage(@RequestParam("sectionId")int sectionId,@ModelAttribute("templatePage") TemplatePage templatePage ,HttpServletResponse response) throws IOException{
 		templatePage.setSectionId(sectionId);
+		int i =0;
+		PatentDocumentTemplate p = new PatentDocumentTemplate();
+		int totalCount = patentDocumentTemplateService.getTemlateSizeBySectionId(sectionId);
+		int currentTotalCount = templatePage.getCurrentPage()*templatePage.getPageSize();
+		if(templatePage.getCurrentPage()<=1){
+			templatePage.setCurrentPage(1);
+		}
+		if(currentTotalCount>=totalCount){
+			templatePage.setCurrentPage((int)Math.ceil(totalCount/(double)templatePage.getPageSize()));
+			i=2;
+		}
 		List<PatentDocumentTemplate> DocTemplates = patentDocumentTemplateService.getTemplateListByPage(templatePage);
+		/*if(){
+			
+		}
+		DocTemplates.add(index, p.setCreatorId(creatorId););*/
 		WebUtils.writeJsonStrToResponse(response, DocTemplates);
 	}
 	

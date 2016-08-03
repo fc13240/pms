@@ -2,8 +2,6 @@ package com.lotut.pms.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
 import com.lotut.pms.domain.TemplatePage;
@@ -24,5 +22,7 @@ public interface PatentDocumentTemplateService {
 	List<PatentDocumentTemplate> getTemplateList(int sectionId,int pagSize);
 
 	List<PatentDocumentTemplate> getTemplateListByPage(TemplatePage templatePage);
+	
+	int getTemlateSizeBySectionId(int sectionId);
 	
 }

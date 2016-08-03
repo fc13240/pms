@@ -767,13 +767,13 @@
 	
 	        </div>
 	
-	        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><span id="templateSectionId" style="display:none;">1</span><a style="color:#ccc" href="javascript:upPage(0);">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage(2);">下一页</a></div>
+	        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><span id="templateSectionId" style="display:none;">1</span><a style="color:#ccc" href="javascript:upPage();">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();">下一页</a></div>
 	        <div class="model" style="overflow-x: hidden; overflow-y: auto;">
 	            <div id="modelWrap" style="display: block;"></div>
 				<div id="hiddenmodel" style="display: none;"></div>
 	        </div>
 	        
-	        <div style="float: right; padding-right: 15px; padding-top: 5px; display: block;" id="kbpage2"><a style="color:#ccc" href="javascript:void(0);">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:showKindsDragModel(1,2,2);">下一页</a></div>
+	        <div style="float: right; padding-right: 15px; padding-top: 5px; display: block;" id="kbpage2"><a style="color:#ccc" href="javascript:upPage();">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();">下一页</a></div>
 	        <div id="scBs" class="shousou" onclick="bigSmall(this);">
 	        </div>
 	        <input type="hidden" name="name" value="small" id="hidBorS">
@@ -1294,7 +1294,7 @@
 
 	</script>
 	<script type="text/javascript">
-	var p=2;
+	var p=1;
 	$('input[id=patentFile]').change(function() {  
 		$('#filename').val($(this).val());  
 	});
@@ -1313,7 +1313,7 @@
 				 $("#hiddenmodel").empty();
 				 $.each(obj,function(i,item){
 					 $("#modelWrap").append("<div class='model1 model_list"+i+"' style='overflow-x: hidden; overflow-y: hidden;height:158px;'>"+
-						 "<div class='title'>模板"+(i+1)+":"+item.templateTitle+"</div>"+
+						 "<div class='title'>模板  "+(i+1)+":"+item.templateTitle+"</div>"+
 						 	 "<div class='content' style='height:105px;overflow-y:hidden;'>"+
 				 				"<p class='small'>"+
 									"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
@@ -1396,17 +1396,19 @@
 	 
 	 function downPage(currentPage){
 		 var sectionId = $("#templateSectionId").html();
+		 ++p;
 		 loading(sectionId,p);
-		 p=++p;
-		 
-		 
+		 console.info(p);
+		
 	 }
 	 function upPage(currentPage){
 		 var sectionId = $("#templateSectionId").html();
-		 p=--p;
+		 --p;
+		 if(p<1){
+			 p=1;
+		 }
 		 loading(sectionId,p);
-		 
-		 
+		 console.info(p);
 	 }
 	 
  	function loading(sectionId,currentPage){
@@ -1421,7 +1423,7 @@
 				 $("#hiddenmodel").empty();
 				 $.each(obj,function(i,item){
 					 $("#modelWrap").append("<div class='model1 model_list"+i+"' style='overflow-x: hidden; overflow-y: hidden;height:158px;'>"+
-						 "<div class='title'>模板"+(i+1)+":"+item.templateTitle+"</div>"+
+						 "<div class='title'>模板&nbsp;"+(i+1)+":"+item.templateTitle+"</div>"+
 						 	 "<div class='content' style='height:105px;overflow-y:hidden;'>"+
 				 				"<p class='small'>"+
 									"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+

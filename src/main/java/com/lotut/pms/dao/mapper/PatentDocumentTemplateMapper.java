@@ -24,4 +24,6 @@ public interface PatentDocumentTemplateMapper {
 	List<PatentDocumentTemplate> getTemplateList(@Param("sectionId") int sectionId,@Param("pageSize") int pageSize);
 	
 	List<PatentDocumentTemplate> getTemplateListByPage(TemplatePage templatePage);
+	
+	int getTemlateSizeBySectionId(@Param("sectionId") int sectionId);
 }

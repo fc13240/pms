@@ -24,4 +24,6 @@ public interface PatentDocumentTemplateDao {
 	List<PatentDocumentTemplate> getTemplateList(@Param("sectionId") int sectionId,int pageSize);
 	
 	List<PatentDocumentTemplate> getTemplateListByPage(TemplatePage templatePage);
+	
+	int getTemlateSizeBySectionId(@Param("sectionId") int sectionId);
 }
