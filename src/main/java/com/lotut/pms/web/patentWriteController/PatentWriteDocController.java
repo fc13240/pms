@@ -110,13 +110,6 @@ public class PatentWriteDocController {
 	}
 	
 	
-/*	@RequestMapping(path="/updatePatentDoc",method=RequestMethod.POST)//savePatentDoc
-	public void  updatePatentDoc(@RequestParam("patentDocsId")long patentDocsId,PatentDoc patentDoc,Model model,PrintWriter writer){
-		int userId=PrincipalUtils.getCurrentUserId();
-		patentDoc.setUserId(userId);
-		patentDocService.updatePatentDoc(patentDoc);
-		writer.write(1);
-	}*/
 	
 	@RequestMapping(path="/previewPatentDoc",method=RequestMethod.GET)
 	public String previewPatentDoc(@RequestParam("patentDocsId")long patentDocsId,Model model,PrintWriter writer){
