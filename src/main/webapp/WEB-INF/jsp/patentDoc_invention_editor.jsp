@@ -1419,7 +1419,6 @@
 			 
 		 }
 	}
-<<<<<<< HEAD
 	 
 	 function downPage(currentPage){
 		 var sectionId = $("#templateSectionId").html();
@@ -1465,8 +1464,7 @@
 			 }
 		 })
 	 }
-
-=======
+ 	
 	 function findAttachmentImg(){
 		 var patentDocId=$("#patentDocId").val();
 		 $.ajax({
@@ -1520,7 +1518,6 @@ function delectImg(value){
 			}
 	});
 }
->>>>>>> 30c9b95dde4966d3a1a17498d36467b0dd1bec16
 </script>
 </body>
 </html>
