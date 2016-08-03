@@ -161,7 +161,7 @@ table td a {
                     <fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd"/>
                 </td>
                 <td width="27%" valign="middle" align="left">
-                    <a target="_blank" href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
+                    <a target="_blank" href="<s:url value='/editor/findPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">
 								 编辑
 					</a><a onclick="preView('3197');">预览</a>
                     <a onclick=" exportLayerShow('3197');">导出</a><a onclick="deleteOne('3197','1',7);">删除</a><a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>

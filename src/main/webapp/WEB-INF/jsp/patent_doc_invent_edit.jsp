@@ -7,28 +7,12 @@
 <!DOCTYPE html >
 <html>
 <head>
-	<c:import url="common/header.jsp"></c:import>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  
 	<title>测试页面</title>
-	<!-- 编辑器控件 -->
-	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/default/default.css" />
-	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/simple/simple.css" />
-	<link rel="stylesheet" href="${base }/plugins/kindeditor/plugins/code/prettify.css" />
-	<link href="${base }/static/css/edit_instruct.css?v=2.3.20150415" type="text/css" rel="stylesheet" />
-	<script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
 	<c:import url="common/kindEditor.jsp"></c:import>
-	 <script src="${base }/plugins/kindeditor/js-selfwrite.js" type="text/javascript"></script>
-	<script src="${base }/plugins/kindeditor/selfwritefigure.js" type="text/javascript"></script>   <!--uploadImg-->
-	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg-->
-	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg--> 
-	<link rel="stylesheet" href="${base }/temp/zyupload/skins/zyupload-1.0.0.css " type="text/css">
-	<script type="text/javascript" src="${base }/temp/zyupload/zyupload.basic-1.0.0.js"></script>
-	<script type="text/javascript" src="${base }/temp/zyupload/jquery.easing.min.js"></script>
-	<link type="text/css" rel="stylesheet" media="screen" href="${base }/temp/zyupload/style.css" />
-	<script src="${base }/plugins/kindeditor/layer.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -131,8 +115,8 @@
 	                <!--center-top start -->
 	                <div class="center_top">
 	                    <div class="backedit">
-	                        <a href="<s:url value='/editor/PatentDocList.html'/>" >返回撰写列表</a></div>
-	                    <div class="save" onclick="savePatentDoc();">
+	                        <a href="<s:url value='/editor/patentDocList.html'/>" >返回撰写列表</a></div>
+	                    <div class="save" onclick="savePatentDoc(${patentDoc.patentDocId});">
 	                        <i class="icon"></i>
 	                        <div class="span" >保存</div>
 	                    </div>
@@ -352,7 +336,7 @@
 									            	<tr>
 									                    <td style="width:520px;" >
 									                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
-									                    	${patent.name }
+									                    	${patentDoc.name }
 									                    	</textarea>
 									                    </td>
 									            	</tr>
@@ -381,7 +365,7 @@
 									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 									            	<tr>
 									                    <td style="width:520px;">
-									                    	<textarea rows="3" cols="10" id="editorContent1" name="techDomain" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.techDomain }</textarea>
+									                    	<textarea rows="3" cols="10" id="editorContent1" name="techDomain" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.techDomain }</textarea>
 									                    </td>
 									            	</tr>
 									            </table>
@@ -410,7 +394,7 @@
 								            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 								            	<tr>
 								                    <td style="width:520px;" >
-								                    	<textarea rows="3" cols="10" id="editorContent2" name="backgoundTech" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.backgoundTech }</textarea>
+								                    	<textarea rows="3" cols="10" id="editorContent2" name="backgoundTech" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.backgoundTech }</textarea>
 								                    </td>
 								            	</tr>
 								            </table>
@@ -436,7 +420,7 @@
 									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 									            	<tr>
 									                    <td style="width:520px;" >
-									                    	<textarea rows="3" cols="10" id="editorContent3" name="contentProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.contentProblem }</textarea>
+									                    	<textarea rows="3" cols="10" id="editorContent3" name="contentProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.contentProblem }</textarea>
 									                    </td>
 									            	</tr>
 									            </table>
@@ -455,7 +439,7 @@
 								            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 								            	<tr>
 								                    <td style="width:520px;">
-								                    	<textarea rows="3" cols="10" id="editorContent4" name="contentRight" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.contentRight }</textarea>
+								                    	<textarea rows="3" cols="10" id="editorContent4" name="contentRight" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.contentRight }</textarea>
 								                    </td>
 								            	</tr>
 								            </table>
@@ -475,7 +459,7 @@
 									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 									            	<tr>
 									                    <td style="width:520px;">
-									                    	<textarea rows="3" cols="10" id="editorContent5" name="contentEffect" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.contentEffect }</textarea>
+									                    	<textarea rows="3" cols="10" id="editorContent5" name="contentEffect" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.contentEffect }</textarea>
 									                    </td>
 									            	</tr>
 									            </table>
@@ -502,7 +486,7 @@
 									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 									            	<tr>
 									                    <td style="width:520px;" >
-									                    	<textarea rows="3" cols="10" id="editorContent6" name="implementWay" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.implementWay }</textarea>
+									                    	<textarea rows="3" cols="10" id="editorContent6" name="implementWay" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.implementWay }</textarea>
 									                    </td>
 									            	</tr>
 									            </table>
@@ -534,7 +518,7 @@
 								            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 								            	<tr>
 								                    <td style="width:520px;">
-								                    	<textarea rows="3" cols="10" id="editorContent7" name="abstractDescription" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.abstractDescription }</textarea>
+								                    	<textarea rows="3" cols="10" id="editorContent7" name="abstractDescription" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.abstractDescription }</textarea>
 								                    </td>
 								            	</tr>
 								            </table>
@@ -577,7 +561,7 @@
 									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 									            	<tr>
 									                    <td style="width:520px;">
-									                    	<textarea rows="3" cols="10" id="editorContent8" name="rightClaim" class="editorContent"style="width:520px;height:200px;visibility:hidden;" >${patent.rightClaim }</textarea>
+									                    	<textarea rows="3" cols="10" id="editorContent8" name="rightClaim" class="editorContent"style="width:520px;height:200px;visibility:hidden;" >${patentDoc.rightClaim }</textarea>
 									                    </td>
 									            	</tr>
 									            </table>
@@ -703,7 +687,7 @@
 								</div>
 								<div class="imgfr">
 								 <form id="patentUrlFrom" name="patentUrlFrom"  method="post" enctype="multipart/form-data" class="form-horizontal">
-								 	<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDocId}">
+								 	<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
 									<input id="piciLlus2" name="caption" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
@@ -1282,9 +1266,9 @@
 				
 			};
 			
-			function findPatentDoc(patentDocsId){
+			function findPatentDoc(patentDocId){
 				
-				var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocsId="+patentDocsId;
+				var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocId="+patentDocId;
 				location.href=url;
 				
 				
@@ -1497,9 +1481,7 @@ function delectImg(value){
 }
 </script>
 <script type="text/javascript">
-function savePatentDoc(){
-	var patentDocId=$("#patentDocId").val();
-	var patentType=${patentType};
+function savePatentDoc(value){
 	var name=editor.text();
 	var techDomain=$("#editorContent1").val();
 	var backgoundTech=$("#editorContent2").val();
@@ -1511,9 +1493,9 @@ function savePatentDoc(){
 	var rightClaim=$("#editorContent8").val();
 	$.ajax({
 		type: "POST",
-		url: "<s:url value='/editor/savePatentDoc.html'/>", 
-		data: {"name":name,"patentType":patentType,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
-				"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocsId":patentDocId},
+		url: "<s:url value='/editor/savePatentDoc.html'/>",
+		data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
+				"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
 		success: function(data){
 			alert("操作成功");
 		},

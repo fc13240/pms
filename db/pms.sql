@@ -544,7 +544,7 @@ CREATE TABLE IF NOT EXISTS patent_remarks (
 );
 
 CREATE TABLE IF NOT EXISTS patent_documents (
-  patent_docs_id bigint(20) NOT NULL AUTO_INCREMENT,
+  patent_doc_id bigint(20) NOT NULL AUTO_INCREMENT,
   app_no varchar(30) DEFAULT NULL,
   user_id int(11) DEFAULT NULL,
   patent_type int(11) NOT NULL COMMENT '专利类型',
@@ -560,7 +560,7 @@ CREATE TABLE IF NOT EXISTS patent_documents (
   figure_and_explaintion longblob COMMENT '附图及说明',
   right_claim mediumtext COMMENT '权利要求',
   abstract_desc mediumtext COMMENT '摘要',
-  PRIMARY KEY (`patent_docs_id`),
+  PRIMARY KEY (`patent_doc_id`),
   KEY `fk_patent_documents_patent_type` (`patent_type`),
   KEY `fk_patent_documents_doc_owner_id` (`user_id`),
   CONSTRAINT `fk_patent_documents_doc_owner_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
@@ -608,5 +608,5 @@ CREATE TABLE patent_attachment (
   caption VARCHAR(30) NOT NULL COMMENT '说明',
   label VARCHAR(30) NOT NULL COMMENT '标记',
   PRIMARY KEY (attachment_id),
-  CONSTRAINT fk_patent_documents_doc_id FOREIGN KEY idx_fk_patent_documents_doc_id(patent_doc_id) REFERENCES patent_documents(patent_docs_id)
+  CONSTRAINT fk_patent_documents_doc_id FOREIGN KEY idx_fk_patent_documents_doc_id(patent_doc_id) REFERENCES patent_documents(patent_doc_id) on delete cascade
 )

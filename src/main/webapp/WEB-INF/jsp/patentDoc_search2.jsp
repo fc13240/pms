@@ -61,8 +61,8 @@
 	                <!--center-top start -->
 	                <div class="center_top">
 	                    <div class="backedit">
-	                        <a href="<s:url value='/editor/PatentDocList.html'/>" >返回撰写列表</a></div>
-	                    <div class="save" onclick="updatePatentDoc(${patent.patentDocsId});">
+	                        <a href="<s:url value='/editor/patentDocList.html'/>" >返回撰写列表</a></div>
+	                    <div class="save" onclick="updatePatentDoc(${patent.patentDocId});">
 	                        <i class="icon"></i>
 	                        <div class="span">保存</div>
 	                    </div>
@@ -1367,12 +1367,12 @@
 				
 			};
 			
-			function findPatentDoc(patentDocsId){
-				var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocsId="+patentDocsId;
+			function findPatentDoc(patentDocId){
+				var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocId="+patentDocId;
 				location.href=url;
 			};
 			
-			function updatePatentDoc(patentDocsId){
+			function updatePatentDoc(patentDocId){
 				var name=editor.text();
 				var techDomain=$("#editorContent1").val();
 				var backgoundTech=$("#editorContent2").val();
@@ -1384,7 +1384,7 @@
 				var rightClaim=$("#editorContent8").val();
 				$.ajax({
 					type: "POST",
-					url: "<s:url value='/editor/updatePatentDoc.html?patentDocsId='/>"+patentDocsId, 
+					url: "<s:url value='/editor/updatePatentDoc.html?patentDocId='/>"+patentDocId, 
 					data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
 							"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim},
 					success: function(data){

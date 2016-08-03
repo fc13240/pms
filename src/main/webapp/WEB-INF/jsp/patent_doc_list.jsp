@@ -159,23 +159,21 @@ table td a {
             <tr >
                 <td width="47%" valign="middle" align="left">
                     <div class="title1">
-                        
-                        <a target="_blank" href="<s:url value='/editor/findPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">
-                            <c:out value="${patentDoc.name}"/></a></div>
-                    
+                    	<c:out value="${patentDoc.name}"/>
+                    </div>
                 </td>
                 <td width="13%" valign="middle" align="left">
                     <fmt:formatDate value="${patentDoc.createTime}" pattern="yyyy-MM-dd"/>
                 </td>
                 <td width="13%" valign="middle" align="left" class="td4">
-                    <fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd"/>
+                    <fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
                 </td>
                 <td width="27%" valign="middle" align="left">
-                    <a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
+                    <a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 								 编辑
-					</a><a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">预览</a>
+					</a><a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">预览</a>
                     <a onclick=" exportLayerShow('3197');">导出</a>
-                    <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocsId=<c:out value='${patentDoc.patentDocsId}'/>">删除</a>
+                    <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">删除</a>
                     <a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>
                 </td>
             </tr>
@@ -196,13 +194,5 @@ table td a {
 </div>
 
 </div>
-<script type="text/javascript">
-	function adduser(){
-		window.open("<s:url value='/editor/inventionWriterForm.html'/>");
-	}
-		    
-
-
-</script>	
-	</body>
+</body>
 </html>
