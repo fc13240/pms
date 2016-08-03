@@ -340,7 +340,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.name }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -375,7 +375,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="techDomain" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent1" name="techDomain" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.techDomain }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -411,7 +411,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent2" name="backgoundTech" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent2" name="backgoundTech" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.backgoundTech }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -444,7 +444,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent3" name="contentProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent3" name="contentProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.contentProblem }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -470,7 +470,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent4" name="contentRight" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent4" name="contentRight" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.contentRight }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -497,7 +497,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent5" name="contentEffect" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent5" name="contentEffect" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.contentEffect }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -531,7 +531,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent6" name="implementWay" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent6" name="implementWay" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.implementWay }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -570,7 +570,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent7" name="abstractDescription" class="editorContent" style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent7" name="abstractDescription" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patent.abstractDescription }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
@@ -620,7 +620,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent8" name="rightClaim" class="editorContent"style="width:520px;height:200px;visibility:hidden;" ></textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent8" name="rightClaim" class="editorContent"style="width:520px;height:200px;visibility:hidden;" >${patent.rightClaim }</textarea>
 										                    </td>
 										            	</tr>
 										                <tr>
