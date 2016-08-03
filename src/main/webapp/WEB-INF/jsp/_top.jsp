@@ -41,7 +41,7 @@
 	        <li><a href="<s:url value='/friend/list.html'/>">我的好友</a></li>
 	        <li><a href="<s:url value='/user/detail.html'/>">用户中心</a></li>
 	        <se:authorize access="hasRole('ROLE_TRADER')">
-	         <li><a href="<s:url value='/editor/PatentDocList.html'/>">专利撰写</a></li>
+	         <li><a href="<s:url value='/editor/patentDocList.html'/>">专利撰写</a></li>
 	         <li><a href="<s:url value='/editor/patentDocTemplate.html'/>">专利模板</a></li>
 	        </se:authorize>
 	        <li><a href="<s:url value='/user/instructions.html'/>">操作指南</a></li>

@@ -159,10 +159,8 @@ table td a {
             <tr >
                 <td width="47%" valign="middle" align="left">
                     <div class="title1">
-                        
-                        <a target="_blank" href="<s:url value='/editor/findPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">
-                            <c:out value="${patentDoc.name}"/></a></div>
-                    
+                    	<c:out value="${patentDoc.name}"/>
+                    </div>
                 </td>
                 <td width="13%" valign="middle" align="left">
                     <fmt:formatDate value="${patentDoc.createTime}" pattern="yyyy-MM-dd"/>
@@ -196,13 +194,5 @@ table td a {
 </div>
 
 </div>
-<script type="text/javascript">
-	function adduser(){
-		window.open("<s:url value='/editor/inventionWriterForm.html'/>");
-	}
-		    
-
-
-</script>	
-	</body>
+</body>
 </html>

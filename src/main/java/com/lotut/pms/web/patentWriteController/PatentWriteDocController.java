@@ -41,18 +41,15 @@ public class PatentWriteDocController {
 	}
 	
 
-	@RequestMapping(path="/inventionWriterForm")//newPatentDoc
+	@RequestMapping(path="/newPatentDoc")
 	public String inventionEditorForm(@RequestParam("patentType")int patentType, PatentDoc patentDoc,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
 		patentDoc.setPatentType(patentType);
-		//List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		patentDocService.savePatentDoc(patentDoc);
 		long patentDocId=patentDoc.getPatentDocId();
 		model.addAttribute("patentDocId",patentDocId);
 		model.addAttribute("patentDoc",patentDoc);
-		//model.addAttribute("patentDocs", patentDocs);
-		//model.addAttribute("patentType",patentType);
 		if(patentType==1){
 			return "patent_doc_invent_edit";
 		}else if(patentType==2){
@@ -63,7 +60,7 @@ public class PatentWriteDocController {
 
 	
 	@RequestMapping(path="/savePatentDoc",method=RequestMethod.POST)
-	public void  addEditorText(PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){
+	public void  savePatentDoc(PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
 		patentDocService.updatePatentDoc(patentDoc);
@@ -71,7 +68,7 @@ public class PatentWriteDocController {
 	}
 	
 	@RequestMapping(path="/editPatentDoc",method=RequestMethod.GET)
-	public String  findPatentDoc(@RequestParam("patentDocId")long patentDocId,@RequestParam("patentType")int patentType,Model model){
+	public String  editPatentDoc(@RequestParam("patentDocId")long patentDocId,@RequestParam("patentType")int patentType,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocId);
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
@@ -86,21 +83,9 @@ public class PatentWriteDocController {
 		return "";		
 	}
 	
-/*	@RequestMapping(path="/compilePatentDoc",method=RequestMethod.GET)//
-	public String  compilePatentDoc(@RequestParam("patentDocId")long patentDocId,@RequestParam("tab")int tab,Model model){
-		int userId=PrincipalUtils.getCurrentUserId();
-		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocId);
-		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
-		model.addAttribute("patent", patentDoc);
-		model.addAttribute("patentDocs", patentDocs);
-		model.addAttribute("tab", tab);
-		return "patentDoc_search2";	//	
-	}*///暂时不做了
 	
-	
-	
-	@RequestMapping(path="/PatentDocList",method=RequestMethod.GET)//patentDocList
-	public String  PatentDocList(Model model){
+	@RequestMapping(path="/patentDocList",method=RequestMethod.GET)//patentDocList
+	public String  patentDocList(Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		model.addAttribute("patentDocs", patentDocs);

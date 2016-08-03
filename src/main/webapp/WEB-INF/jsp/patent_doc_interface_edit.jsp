@@ -200,7 +200,7 @@
 	                <!--center-top start -->
 	                <div class="center_top">
 	                    <div class="backedit">
-	                        <a href="<s:url value='/editor/PatentDocList.html'/>" >返回撰写列表</a></div>
+	                        <a href="<s:url value='/editor/patentDocList.html'/>" >返回撰写列表</a></div>
 	                    <div class="save" onclick="savePatentDoc();">
 	                        <i class="icon"></i>
 	                        <div class="span">保存</div>
