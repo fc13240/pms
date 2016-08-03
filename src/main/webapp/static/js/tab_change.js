@@ -39,15 +39,19 @@
 	if(whichTab<=3){
 	    $("#templateSectionId").html(whichTab+1);
 		loadingTemplateBYTab(whichTab+1);
+		p=1;
 	}else if(whichTab==4){
 		$("#templateSectionId").html(whichTab);
+		p=1;
 		loadingTemplateBYTab(7);
 	}else if(whichTab==6){
 		$("#templateSectionId").html(whichTab);
+		p=1;
 		loadingTemplateBYTab(8);
 	}else if(whichTab==7){
 		$("#templateSectionId").html(whichTab);
 		loadingTemplateBYTab(9);
+		p=1;
 	}
 	
 }

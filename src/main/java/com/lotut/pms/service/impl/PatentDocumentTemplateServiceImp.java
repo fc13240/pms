@@ -59,5 +59,10 @@ public class PatentDocumentTemplateServiceImp implements PatentDocumentTemplateS
 	public List<PatentDocumentTemplate> getTemplateListByPage(TemplatePage templatePage) {
 		return patentDocumentTemplateDao.getTemplateListByPage(templatePage);
 	}
+
+	@Override
+	public int getTemlateSizeBySectionId(int sectionId) {
+		return patentDocumentTemplateDao.getTemlateSizeBySectionId(sectionId);
+	}
 	
 }

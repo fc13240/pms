@@ -2,7 +2,6 @@ package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.PatentDocumentTemplateDao;
@@ -67,5 +66,11 @@ public class PatentDocumentTemplateMybatisDao extends SqlSessionDaoSupport imple
 
 	public List<PatentDocumentTemplate> getTemplateListByPage(TemplatePage templatePage) {
 		return patentDocumentTemplateMapper.getTemplateListByPage(templatePage);
+	}
+
+
+	@Override
+	public int getTemlateSizeBySectionId(int sectionId) {
+		return patentDocumentTemplateMapper.getTemlateSizeBySectionId(sectionId);
 	}
 }
