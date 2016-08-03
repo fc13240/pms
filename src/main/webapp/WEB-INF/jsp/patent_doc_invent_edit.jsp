@@ -35,6 +35,7 @@
 						console.info("当前选择了以下文件：");
 						console.info(selectFiles);
 						if (allFiles.length > 1) {
+							
 							alert("每次只能上传一张，请先上传之前的图片再选择！");
 							for (var i = 1; i < allFiles.length; i++) {
 								console.log(allFiles[i]);
@@ -42,6 +43,8 @@
 								return false;
 							}
 						}
+						
+
 						return true;
 					},
 					onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
@@ -51,11 +54,6 @@
 					onSuccess: function(file, response){
 						// 文件上传成功的回调方法
 						var Jresponse=$.parseJSON(response);
-						console.info("此文件上传成功：");
-						console.info(file.name);
-						console.info("此文件上传到服务器地址：");
-						console.info(response);
-						$("#uploadInf").append("<p>上传成功，文件地址是：" + Jresponse["url"] + "</p>");
 						$("#patentImgUrl").append("<input type='hidden' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
 						savePatentImgUrl();
 						$("#patentImgUrl").empty();
@@ -72,8 +70,40 @@
 					}
 				});
 				
+				
+				var patentDocId=$("#patentDocId").val();
+				 $.ajax({
+						type : "POST",
+						url : "<s:url value='/editor/getAttachmentById.html'/>",
+						data : {"patentDocId":patentDocId
+						},
+							success: function(data){
+								$("#picLsy2").empty();
+								var obj= $.parseJSON(data);
+								$.each(obj,function(i,item){
+									 $("#picLsy2").append(
+											 "<li id="+item.attachmentId+'2'+">"+
+												"<a href='#'><img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/></a>"+
+												"<div class='text'>"+
+													"<b>"+item.caption+"</b>"+
+													"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
+												"</div>"
+											+"</li>"
+									);
+									 
+								 });
+								hoverImg();
+						},
+						error : function() {
+							alert("操作失败");
+						}
+				});
+				
+				
+				
+				
 			});
-		
+			
 		</script> 
 </head>
 
@@ -665,8 +695,10 @@
 							<div class="box">
 								<div class="upimg1" onclick="addPic();">
 									新增附图</div>
-								<div class="img_box" id="askPicList">
-									
+								<div class="picBox">
+									<ul class="picL" id="picLsy2" >
+										
+									</ul>
 								</div>
 							</div>
 						</div>
@@ -1332,11 +1364,9 @@
 						"patentDocId":patentDocId
 					},
 						success: function(data){
-						alert("操作成功");
-
 					},
 					error : function() {
-						alert("操作失败");
+						alert("上传失败！稍后再试！");
 					}
 			});
 		}else{
@@ -1432,6 +1462,7 @@
 				},
 					success: function(data){
 						$("#picLsy").empty();
+						
 					var obj= $.parseJSON(data);
 					$.each(obj,function(i,item){
 						 $("#picLsy").append(
@@ -1443,6 +1474,7 @@
 									"</div>"
 								+"</li>"
 						);
+						 
 					 });
 					hoverImg();
 				},
@@ -1501,7 +1533,9 @@ function savePatentDoc(value){
 			alert("操作失败");
 		}
 	});
-}
+};
+
+
 </script>
 </body>
 </html>
