@@ -1289,6 +1289,7 @@
 				
 			};
 			
+
 			function savePatentDoc(){
 				var patentDocId=$("#patentDocId").val();
 				var patentType=${patentType};

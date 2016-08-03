@@ -70,15 +70,16 @@ public class PatentWriteDocController {
 	}
 	
 	@RequestMapping(path="/editPatentDoc",method=RequestMethod.GET)//editPatentDoc
-	public String  findPatentDoc(@RequestParam("patentDocsId")long patentDocsId,@RequestParam("patentType")int patenType,Model model){
+	public String  findPatentDoc(@RequestParam("patentDocsId")long patentDocsId,@RequestParam("patentType")int patentType,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocsId);
 		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
 		model.addAttribute("patent", patentDoc);
 		model.addAttribute("patentDocs", patentDocs);
-		if(patenType==1){
+		model.addAttribute("patenType",patentType);
+		if(patentType==1){
 			return "patent_doc_invent_edit";
-		}else if(patenType==2){
+		}else if(patentType==2){
 			return "patent_doc_practical_edit";
 		}
 		return "";		
