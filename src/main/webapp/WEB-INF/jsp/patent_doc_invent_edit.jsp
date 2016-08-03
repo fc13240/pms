@@ -1495,6 +1495,29 @@ function delectImg(value){
 }
 </script>
 <script type="text/javascript">
+function updatePatentDoc(patentDocsId){
+	var name=editor.text();
+	var techDomain=$("#editorContent1").val();
+	var backgoundTech=$("#editorContent2").val();
+	var contentProblem=$("#editorContent3").val();
+	var contentRight=$("#editorContent4").val();
+	var contentEffect=$("#editorContent5").val();
+	var implementWay=$("#editorContent6").val();
+	var abstractDescription=$("#editorContent7").val();
+	var rightClaim=$("#editorContent8").val();
+	$.ajax({
+		type: "POST",
+		url: "<s:url value='/editor/updatePatentDoc.html?patentDocsId='/>"+patentDocsId, 
+		data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
+				"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim},
+		success: function(data){
+			alert("操作成功");
+		},
+		error: function(){
+			alert("操作失败");
+		}
+	});
+}
 function savePatentDoc(){
 	var patentDocId=$("#patentDocId").val();
 	var patentType=${patentType};
