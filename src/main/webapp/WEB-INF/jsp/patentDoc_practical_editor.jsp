@@ -29,8 +29,8 @@
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers.js"></script>
 	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers2.js"></script>
 	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg--> 
-	<link rel="stylesheet" href="${base }/temp/zyupload/skins/zyupload-1.0.0.min.css " type="text/css">
-	<script type="text/javascript" src="${base }/temp/zyupload/zyupload.basic-1.0.0.min.js"></script>
+	<link rel="stylesheet" href="${base }/temp/zyupload/skins/zyupload-1.0.0.css " type="text/css">
+	<script type="text/javascript" src="${base }/temp/zyupload/zyupload.basic-1.0.0.js"></script>
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){

@@ -61,7 +61,7 @@ function editPic(picId, sqaureIndex, picSrc,fid) {//sqaureIndex:方框里那个�
             $('#content5_build').show();
             $('#piclist').show();
             var tab = getselfwriteTab();
-            seteditorheight(tab);
+            //seteditorheight(tab);
         },
         error: function () {
         }
@@ -128,7 +128,7 @@ $.ajax({ url: _RootPath + 'self/selfwritefigure2.aspx', //后台返回编辑页�
     $('#content5_build').hide();
     $('#piclist').hide();
     var tab = getselfwriteTab();
-    seteditorheight(tab);
+    //seteditorheight(tab);
    
 }
 function savePicNiLlu() { 

@@ -23,11 +23,6 @@
 	 <script src="${base }/plugins/kindeditor/js-selfwrite.js" type="text/javascript"></script>
 	<script src="${base }/plugins/kindeditor/selfwritefigure.js" type="text/javascript"></script>   <!--uploadImg-->
 	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg-->
-	<script src="${base }/plugins/kindeditor/swfupload/swfupload.js" type="text/javascript"></script>   <!--swfupload-->
-	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/swfupload.queue.js"></script>
-	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/fileprogress.js"></script>
-	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers.js"></script>
-	<script type="text/javascript" src="${base }/plugins/kindeditor/swfupload/handlers2.js"></script>
 	<script src="${base }/plugins/kindeditor/selfwritefigure2.js" type="text/javascript"></script>   <!--uploadImg--> 
 	<link rel="stylesheet" href="${base }/temp/zyupload/skins/zyupload-1.0.0.css " type="text/css">
 	<script type="text/javascript" src="${base }/temp/zyupload/zyupload.basic-1.0.0.js"></script>
@@ -1295,6 +1290,7 @@
 			};
 			
 			function savePatentDoc(){
+				var patentDocId=$("#patentDocId").val();
 				var patentType=${patentType};
 				var name=editor.text();
 				var techDomain=$("#editorContent1").val();
@@ -1309,7 +1305,7 @@
 					type: "POST",
 					url: "<s:url value='/editor/addPatentDoc.html'/>", 
 					data: {"name":name,"patentType":patentType,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
-							"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim},
+							"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocsId":patentDocId},
 					success: function(data){
 						alert("操作成功");
 					},
@@ -1463,6 +1459,7 @@ function delectImg(value){
 			data : {"attachmentId":value},
 				success: function(data){
 					alert("删除成功！");
+					$("#"+value).hide();
 			},
 			error : function() {
 				alert("操作失败");
