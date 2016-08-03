@@ -1428,7 +1428,7 @@
 					var obj= $.parseJSON(data);
 					$.each(obj,function(i,item){
 						 $("#picLsy").append(
-								 "<li>"+
+								 "<li id="+item.attachmentId+">"+
 									"<a href='#'><img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/></a>"+
 									"<div class='text'>"+
 										"<b>"+item.caption+"</b>"+
