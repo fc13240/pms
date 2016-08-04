@@ -1425,7 +1425,7 @@
 						);
 						 
 					 });
-					hoverImg();
+					<!--hoverImg();-->
 				},
 				error : function() {
 					alert("操作失败");
