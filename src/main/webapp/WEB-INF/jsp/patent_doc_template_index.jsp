@@ -7,16 +7,9 @@
 <!DOCTYPE html >
 <html>
 <head>
-	<c:import url="common/header.jsp"></c:import>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN"> 
 	<title>测试页面</title>
-	<!-- 编辑器控件 -->
-	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/default/default.css" />
-	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/simple/simple.css" />
-	<link rel="stylesheet" href="${base }/plugins/kindeditor/plugins/code/prettify.css" />
-	<link href="${base }/static/css/edit_instruct.css?v=2.3.20150415" type="text/css" rel="stylesheet" />
-	<script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
 	<c:import url="common/kindEditor.jsp"></c:import>
 	<%@ include file="_css.jsp" %>
 </head>

@@ -560,6 +560,7 @@ CREATE TABLE IF NOT EXISTS patent_documents (
   figure_and_explaintion longblob COMMENT '附图及说明',
   right_claim mediumtext COMMENT '权利要求',
   abstract_desc mediumtext COMMENT '摘要',
+  abstract_img varchar(200) COMMENT '摘要附图',
   PRIMARY KEY (`patent_doc_id`),
   KEY `fk_patent_documents_patent_type` (`patent_type`),
   KEY `fk_patent_documents_doc_owner_id` (`user_id`),

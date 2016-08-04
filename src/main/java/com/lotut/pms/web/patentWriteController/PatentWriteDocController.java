@@ -216,8 +216,6 @@ public class PatentWriteDocController {
 	@RequestMapping(path="/getTemplateListByPage")
 	public void getTemplateListByPage(@RequestParam("sectionId")int sectionId,@ModelAttribute("templatePage") TemplatePage templatePage ,HttpServletResponse response) throws IOException{
 		templatePage.setSectionId(sectionId);
-		int i =0;
-		PatentDocumentTemplate p = new PatentDocumentTemplate();
 		int totalCount = patentDocumentTemplateService.getTemlateSizeBySectionId(sectionId);
 		int currentTotalCount = templatePage.getCurrentPage()*templatePage.getPageSize();
 		if(templatePage.getCurrentPage()<=1){
@@ -225,16 +223,23 @@ public class PatentWriteDocController {
 		}
 		if(currentTotalCount>=totalCount){
 			templatePage.setCurrentPage((int)Math.ceil(totalCount/(double)templatePage.getPageSize()));
-			i=2;
 		}
 		List<PatentDocumentTemplate> DocTemplates = patentDocumentTemplateService.getTemplateListByPage(templatePage);
-		/*if(){
-			
-		}
-		DocTemplates.add(index, p.setCreatorId(creatorId););*/
 		WebUtils.writeJsonStrToResponse(response, DocTemplates);
 	}
 	
+	@RequestMapping(path="/getTotalPage")
+	public void getTotalPage(@RequestParam("sectionId")int sectionId,HttpServletResponse response){
+		int totalCount = patentDocumentTemplateService.getTemlateSizeBySectionId(sectionId);
+		TemplatePage templatePage = new TemplatePage();
+		int totalPage = (int)Math.ceil(totalCount/(double)templatePage.getPageSize());
+		try{
+			WebUtils.writeJsonStrToResponse(response, totalPage);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
+	}
 	
 	
 	/**

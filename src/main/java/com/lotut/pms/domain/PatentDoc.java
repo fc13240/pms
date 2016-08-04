@@ -24,6 +24,17 @@ public class PatentDoc {
 	private String implementWay;
 	private String rightClaim;
 	private String abstractDescription;
+	private String abstractImg;
+	
+	
+	
+	
+	public String getAbstractImg() {
+		return abstractImg;
+	}
+	public void setAbstractImg(String abstractImg) {
+		this.abstractImg = abstractImg;
+	}
 	public long getPatentDocId() {
 		return patentDocId;
 	}
