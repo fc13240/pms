@@ -81,7 +81,7 @@
 		</script> 
 </head>
 
-<body style="background-color: #FFF" id="dlstCircleArticle">
+<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1)">
 <style>
 .model1:hover .button{display:block}
 </style>	
@@ -730,6 +730,14 @@
 									
 								</ul>
 							</div>
+							<div>
+							<h3 style="margin-left: 30px;font-family:微软雅黑;margin-top: 50px;">摘要附图：</h3>
+							</div>
+							<div class="picBox" id="picLsy3">
+								<c:if test="${patentDoc.abstractImg != null || patentDoc.abstractImg==''}">
+										<img src='${patentDoc.abstractImg}' alt='' width='400' height='300'/>
+								</c:if>
+							</div>
 						</div>
 						<!-- content end-->
 	
@@ -1369,7 +1377,35 @@
 		 loading(sectionId,p);
 		 console.info(p);
 	 }
-	 
+	function loadingTemplate(sectionId){
+		 
+		 $("#templateSectionId").html(sectionId);
+		 $.ajax({
+			 type : "POST",
+			 url : "<s:url value='/editor/getTemplateList.html'/>?sectionId="+sectionId,
+			 success : function (data){
+				 var obj= $.parseJSON(data);
+				 $("#modelWrap").empty();
+				 $("#hiddenmodel").empty();
+				 $.each(obj,function(i,item){
+					 $("#modelWrap").append("<div class='model1 model_list"+i+"' style='overflow-x: hidden; overflow-y: hidden;height:158px;'>"+
+						 "<div class='title'>模板"+(i+1)+":"+item.templateTitle+"</div>"+
+						 	 "<div class='content' style='height:105px;overflow-y:hidden;'>"+
+				 				"<p class='small'>"+
+									"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
+								"</p>"+
+							"</p>"+
+						    "<div class='button' style='z-index:500000;' onclick='templatebuttonclick("+i+","+item.patentDocSectionType.patentDocSectionId+")'>+使用模板</div>"+
+						  "</div>"+
+					   "</div>");
+					 $("#modelWrap span").css("color","black");
+				 	 $("#hiddenmodel").append("<p id='templateContent"+i+"'>"+item.content+"</p>");
+				 });
+			 },error : function (){
+				 
+			 }
+		 })
+	 } 
  	function loading(sectionId,currentPage){
 		 
 		 $("#templateSectionId").html(sectionId);
@@ -1414,10 +1450,13 @@
 					$.each(obj,function(i,item){
 						 $("#picLsy").append(
 								 "<li id="+item.attachmentId+">"+
-									"<a href='#'><img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/></a>"+
+									"<a href='#'>"+
+										"<img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/>"+
+									"</a>"+
 									"<div class='text'>"+
 										"<b>"+item.caption+"</b>"+
-										"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
+										"<p>"+"<a href='javascript:settingAbstractImg("+"&apos;"+item.attachmentUrl+"&apos;"+")'>设为摘要附图</a>"+
+										"</p>"+
 									"</div>"
 								+"</li>"
 						);
@@ -1481,6 +1520,25 @@ function delectImg(value){
 			}
 	});
 }
+
+function settingAbstractImg(value){
+	var patentDocId=$("#patentDocId").val();
+	$.ajax({
+		type : "POST",
+		url : "<s:url value='/editor/savePatentAbstractImg.html'/>",
+		data : {"abstractImg":value,"patentDocId":patentDocId},
+			success: function(data){
+				 $("#picLsy3").html(
+							"<a href='#'>"+
+							"<img src='"+value+"' alt='' width='400' height='300'/>"+
+							"</a>"
+						);
+		},
+		error : function() {
+			alert("操作失败");
+		}
+});
+}
 </script>
 <script type="text/javascript">
 function savePatentDoc(value){
@@ -1520,7 +1578,9 @@ function loadImgs(){
 					$.each(obj,function(i,item){
 						 $("#picLsy2").append(
 								 "<li id="+item.attachmentId+">"+
-									"<a href='#'><img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/></a>"+
+									"<a href='javascript:delectImg("+item.attachmentId+")'>"+
+									"<img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/>"+
+									"</a>"+
 									"<div class='text'>"+
 										"<b>"+item.caption+"</b>"+
 										"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
