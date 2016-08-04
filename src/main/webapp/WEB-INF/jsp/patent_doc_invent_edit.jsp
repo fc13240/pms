@@ -1526,14 +1526,14 @@ function loadImgs(){
 									"<img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/>"+
 									"</a>"+
 									"<div class='text'>"+
-										"<b>"+item.caption+"</b>"+
-										"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
+									"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
+									"<b>"+item.caption+"</b>"+
 									"</div>"
 								+"</li>"
 						);
 						 
 					 });
-					hoverImg2();
+					<!--hoverImg2();-->
 			},
 			error : function() {
 				alert("操作失败");
