@@ -2,6 +2,7 @@ package com.lotut.pms.web.patentWriteController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,6 +64,7 @@ public class PatentWriteDocController {
 	public void  savePatentDoc(PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
+	
 		patentDocService.updatePatentDoc(patentDoc);
 		writer.write(1);
 	}
@@ -83,11 +85,23 @@ public class PatentWriteDocController {
 		return "";		
 	}
 	
-	
+
 	@RequestMapping(path="/patentDocList",method=RequestMethod.GET)//patentDocList
 	public String  patentDocList(Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
-		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
+		List<PatentDoc> patentDocss=patentDocService.getUserPatentDoc(userId);
+		List<PatentDoc> patentDocs= new ArrayList<>();
+		for (PatentDoc patentDoc:patentDocss) {
+			if(patentDoc.getAppNo()==null&patentDoc.getAbstractDescription()==null
+					&patentDoc.getBackgoundTech()==null&patentDoc.getContentEffect()==null
+					&patentDoc.getContentEffect()==null&patentDoc.getContentProblem()==null
+					&patentDoc.getContentRight()==null&patentDoc.getImplementWay()==null
+					&patentDoc.getName()==null&patentDoc.getRightClaim()==null
+					&patentDoc.getTechDomain()==null){
+			}else{
+				patentDocs.add(patentDoc);
+			}
+		}
 		model.addAttribute("patentDocs", patentDocs);
 		return "patent_doc_list";
 		
