@@ -730,6 +730,14 @@
 									
 								</ul>
 							</div>
+							<div>
+							<h3 style="margin-left: 30px;font-family:微软雅黑;margin-top: 50px;">摘要附图：</h3>
+							</div>
+							<div class="picBox" id="picLsy3">
+								<c:if test="${patentDoc.abstractImg != null || patentDoc.abstractImg==''}">
+										<img src='${patentDoc.abstractImg}' alt='' width='400' height='300'/>
+								</c:if>
+							</div>
 						</div>
 						<!-- content end-->
 	
@@ -1419,7 +1427,7 @@
 									"</a>"+
 									"<div class='text'>"+
 										"<b>"+item.caption+"</b>"+
-										"<p>"+"<a href='javascript:settingAbstractImg("+item.attachmentUrl+")'>设为摘要附图</a>"+
+										"<p>"+"<a href='javascript:settingAbstractImg("+"&apos;"+item.attachmentUrl+"&apos;"+")'>设为摘要附图</a>"+
 										"</p>"+
 									"</div>"
 								+"</li>"
@@ -1487,15 +1495,17 @@ function delectImg(value){
 
 function settingAbstractImg(value){
 	var patentDocId=$("#patentDocId").val();
-	
-	var abstractImg=value+"";
-	alert(abstractImg);
+	alert(value);
 	$.ajax({
 		type : "POST",
 		url : "<s:url value='/editor/savePatentDoc.html'/>",
-		data : {"abstractImg":abstractImg,"patentDocId":patentDocId},
+		data : {"abstractImg":value,"patentDocId":patentDocId},
 			success: function(data){
-				alert("设置成功！");
+				 $("#picLsy3").html(
+							"<a href='#'>"+
+							"<img src='"+value+"' alt='' width='400' height='300'/>"+
+							"</a>"
+						);
 		},
 		error : function() {
 			alert("操作失败");
@@ -1541,7 +1551,7 @@ function loadImgs(){
 					$.each(obj,function(i,item){
 						 $("#picLsy2").append(
 								 "<li id="+item.attachmentId+">"+
-									"<a href='#'>"+
+									"<a href='javascript:delectImg("+item.attachmentId+")'>"+
 									"<img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/>"+
 									"</a>"+
 									"<div class='text'>"+
