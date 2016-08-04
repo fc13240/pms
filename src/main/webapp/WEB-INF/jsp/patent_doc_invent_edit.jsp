@@ -1414,7 +1414,9 @@
 					$.each(obj,function(i,item){
 						 $("#picLsy").append(
 								 "<li id="+item.attachmentId+">"+
-									"<a href='#'><img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/></a>"+
+									"<a href='#'>"+
+										"<img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/>"+
+									"</a>"+
 									"<div class='text'>"+
 										"<b>"+item.caption+"</b>"+
 										"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
@@ -1520,7 +1522,9 @@ function loadImgs(){
 					$.each(obj,function(i,item){
 						 $("#picLsy2").append(
 								 "<li id="+item.attachmentId+">"+
-									"<a href='#'><img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/></a>"+
+									"<a href='#'>"+
+									"<img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/>"+
+									"</a>"+
 									"<div class='text'>"+
 										"<b>"+item.caption+"</b>"+
 										"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
