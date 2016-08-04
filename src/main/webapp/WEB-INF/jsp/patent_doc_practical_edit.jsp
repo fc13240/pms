@@ -34,6 +34,18 @@
 					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
 						console.info("当前选择了以下文件：");
 						console.info(selectFiles);
+						if (allFiles.length > 1) {
+							
+							alert("每次只能上传一张，请先上传之前的图片再选择！");
+							for (var i = 1; i < allFiles.length; i++) {
+								console.log(allFiles[i]);
+								ZYFILE.funDeleteFile(allFiles[i].index, true);
+								return false;
+							}
+						}
+						
+
+						return true;
 					},
 					onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
 						console.info("当前删除了此文件：");
@@ -42,14 +54,11 @@
 					onSuccess: function(file, response){
 						// 文件上传成功的回调方法
 						var Jresponse=$.parseJSON(response);
-						console.info("此文件上传成功：");
-						console.info(file.name);
-						console.info("此文件上传到服务器地址：");
-						console.info(response);
-						$("#uploadInf").append("<p>上传成功，文件地址是：" + Jresponse["url"] + "</p>");
-						$("#patentImgUrl").append("<input type='hidden' id='patentUrl"+i+"' name='patentUrl"+i+"' value='"+Jresponse["url"]+"'/>");
-						i=++i;
-						
+						$("#patentImgUrl").append("<input type='hidden' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
+						savePatentImgUrl();
+						$("#patentImgUrl").empty();
+						$('#piciLlus2').val("请填写附图说明，例如”图1为本发明实施例XX的方法流程示意图”。").css('color', '#999');
+					    $('#picMarkiLlus2').val("请填写附图标记说明，例如“1杯子主体，2杯子把手”。").css('color', '#999');
 					},
 					onFailure: function(file, response){          // 文件上传失败的回调方法
 						console.info("此文件上传失败：");
@@ -61,8 +70,14 @@
 					}
 				});
 				
+				
+
+				loadImgs();
+				
+				
+				
 			});
-		
+			
 		</script> 
 </head>
 
@@ -1335,7 +1350,7 @@
 	    </div>
 	    
 	    
-	    <script type="text/javascript">
+	     <script type="text/javascript">
 			function submitForm(){
 				$.ajax({
 					type: "POST",
@@ -1369,63 +1384,314 @@
 				
 			};
 			
-			function savePatentDoc(){
-				var patentType=${patentType};
-				var name=editor.text();
-				var techDomain=$("#editorContent1").val();
-				var backgoundTech=$("#editorContent2").val();
-				var contentProblem=$("#editorContent3").val();
-				var contentRight=$("#editorContent4").val();
-				var contentEffect=$("#editorContent5").val();
-				var implementWay=$("#editorContent6").val();
-				var abstractDescription=$("#editorContent7").val();
-				var rightClaim=$("#editorContent8").val();
-				$.ajax({
-					type: "POST",
-					url: "<s:url value='/editor/addPatentDoc.html'/>", 
-					data: {"name":name,"patentType":patentType,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
-							"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim},
+
+
+	</script>
+	<script type="text/javascript">
+	var p=1;
+	$('input[id=patentFile]').change(function() {  
+		$('#filename').val($(this).val());  
+	});
+	function savePatentImgUrl() {
+		if ($("#patentUrl").length > 0) {
+			var caption = $("#piciLlus2").val();
+			var label = $("#picMarkiLlus2").val();
+			var attachmentUrl = $("#patentUrl").val();
+			var patentDocId=$("#patentDocId").val();
+			$.ajax({
+				type : "POST",
+				url : "<s:url value='/editor/savePatentImgUrl.html'/>",
+				data : {
+					"caption" : caption,
+					"label" : label,
+					"attachmentUrl" : attachmentUrl,
+					"patentDocId":patentDocId
+				},
 					success: function(data){
-						alert("操作成功");
-					},
-					error: function(){
-						alert("操作失败");
-					}
-				});
-			}
-			
-			function savePatentImgUrl() {
-				if ($("#patentUrl1").length > 0) {
-					var state = $("#piciLlus2").val();
-					var label = $("#picMarkiLlus2").val();
-					var patentUrl1 = $("#patentUrl1").val();
-					var patentUrl2 = $("#patentUrl2").val();
-					var patentUrl3 = $("#patentUrl3").val();
-					var patentUrl4 = $("#patentUrl4").val();
-					var patentUrl5 = $("#patentUrl5").val();
-
-					$.ajax({
-						type : "POST",
-						url : "<s:url value='/editor/savePracticalPatentImgUrl.html'/>",
-						data : {
-							"state" : state,
-							"label" : label,
-							"patentUrl1" : patentUrl1,
-							"patentUrl2" : patentUrl2,
-							"patentUrl3" : patentUrl3,
-							"patentUrl4" : patentUrl4,
-							"patentUrl5" : patentUrl5
-						},
-							success: function(data){
-
-								alert("操作成功");
-							},
-							error : function() {
-								alert("操作失败");
-							}
-					});
+				},
+				error : function() {
+					alert("上传失败！稍后再试！");
 				}
+			});
+		}else{
+			alert("请选择上传图片!");
+		}
+	}
+	 function templatebuttonclick(i,patentDocSectionId){
+		 if(patentDocSectionId==1){
+			 editor.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==2){
+			 editor1.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==3){
+			 editor2.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==4){
+			 editor3.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==5){
+			 editor4.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==6){
+			 editor5.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==7){
+			 editor6.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==8){
+			 editor7.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==9){
+			 editor8.html($("#templateContent"+i).html());
+		 }
+		 else if(patentDocSectionId==10){
+			 editor9.html($("#templateContent"+i).html());
+		 }else{
+			 
+		 }
+	}
+	 
+	 function downPage(){
+		 var sectionId = $("#templateSectionId").html();
+		 ++p;
+		 var totoalPage=getTotalPageBySectionId(sectionId);
+		 
+		 if(p>=totoalPage){
+			p=totoalPage;
+		 }
+		 loading(sectionId,p);
+		 console.info(p);
+		
+	 }
+	 function upPage(){
+		 var sectionId = $("#templateSectionId").html();
+		 --p;
+		 if(p<1){
+			 p=1;
+		 }
+		 loading(sectionId,p);
+		 console.info(p);
+	 }
+	function loadingTemplate(sectionId){
+		 
+		 $("#templateSectionId").html(sectionId);
+		 $.ajax({
+			 type : "POST",
+			 url : "<s:url value='/editor/getTemplateList.html'/>?sectionId="+sectionId,
+			 success : function (data){
+				 var obj= $.parseJSON(data);
+				 $("#modelWrap").empty();
+				 $("#hiddenmodel").empty();
+				 $.each(obj,function(i,item){
+					 $("#modelWrap").append("<div class='model1 model_list"+i+"' style='overflow-x: hidden; overflow-y: hidden;height:158px;'>"+
+						 "<div class='title'>模板"+(i+1)+":"+item.templateTitle+"</div>"+
+						 	 "<div class='content' style='height:105px;overflow-y:hidden;'>"+
+				 				"<p class='small'>"+
+									"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
+								"</p>"+
+							"</p>"+
+						    "<div class='button' style='z-index:500000;' onclick='templatebuttonclick("+i+","+item.patentDocSectionType.patentDocSectionId+")'>+使用模板</div>"+
+						  "</div>"+
+					   "</div>");
+					 $("#modelWrap span").css("color","black");
+				 	 $("#hiddenmodel").append("<p id='templateContent"+i+"'>"+item.content+"</p>");
+				 });
+			 },error : function (){
+				 
+			 }
+		 })
+	 } 
+ 	function loading(sectionId,currentPage){
+		 
+		 $("#templateSectionId").html(sectionId);
+		 $.ajax({
+			 type : "POST",
+			 url : "<s:url value='/editor/getTemplateListByPage.html'/>?sectionId="+sectionId+"&currentPage="+currentPage,
+			 success : function (data){
+				 var obj= $.parseJSON(data);
+				 $("#modelWrap").empty();
+				 $("#hiddenmodel").empty();
+				 $.each(obj,function(i,item){
+					 $("#modelWrap").append("<div class='model1 model_list"+i+"' style='overflow-x: hidden; overflow-y: hidden;height:158px;'>"+
+						 "<div class='title'>模板&nbsp;"+(i+1)+":"+item.templateTitle+"</div>"+
+						 	 "<div class='content' style='height:105px;overflow-y:hidden;'>"+
+				 				"<p class='small'>"+
+									"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
+								"</p>"+
+							"</p>"+
+						    "<div class='button' style='z-index:500000;' onclick='templatebuttonclick("+i+","+item.patentDocSectionType.patentDocSectionId+")'>+使用模板</div>"+
+						  "</div>"+
+					   "</div>");
+					 $("#modelWrap span").css("color","black");
+				 	 $("#hiddenmodel").append("<p id='templateContent"+i+"'>"+item.content+"</p>");
+				 });
+			 },error : function (){
+				 
+			 }
+		 });
+	 }
+ 	
+	 function findAttachmentImg(){
+		 var patentDocId=$("#patentDocId").val();
+		 $.ajax({
+				type : "POST",
+				url : "<s:url value='/editor/getAttachmentById.html'/>",
+				data : {"patentDocId":patentDocId
+				},
+					success: function(data){
+						$("#picLsy").empty();
+						
+					var obj= $.parseJSON(data);
+					$.each(obj,function(i,item){
+						 $("#picLsy").append(
+								 "<li id="+item.attachmentId+">"+
+									"<a href='#'>"+
+										"<img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/>"+
+									"</a>"+
+									"<div class='text'>"+
+										"<b>"+item.caption+"</b>"+
+										"<p>"+"<a href='javascript:settingAbstractImg("+"&apos;"+item.attachmentUrl+"&apos;"+")'>设为摘要附图</a>"+
+										"</p>"+
+									"</div>"
+								+"</li>"
+						);
+						 
+					 });
+					hoverImg();
+				},
+				error : function() {
+					alert("操作失败");
+				}
+		});
+	 }
+	 
+	 
+	 
+	function getTotalPageBySectionId(sectionId){
+		var totalPageForSectionId=0;
+		 $.ajax({
+			 type : "POST",
+			 url : "<s:url value='/editor/getTotalPage.html'/>?sectionId="+sectionId,
+			 async: false,
+			 success : function (data){
+				 totalPageForSectionId=data;
+			 },error : function (){
+			 }
+		 });
+		 return totalPageForSectionId;
+	 }
+</script>
+<script type="text/javascript">
+function hoverImg(){
+
+	$("#picLsy li").hover(function(){
+		$(this).find('.text:not(:animated)').animate({top:"0px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	},function () {
+		$(this).find('.text').animate({top:"149px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	});
+
+};
+function hoverImg2(){
+
+	$("#picLsy2 li").hover(function(){
+		$(this).find('.text:not(:animated)').animate({top:"0px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	},function () {
+		$(this).find('.text').animate({top:"149px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	});
+
+};
+
+function delectImg(value){
+	 $.ajax({
+			type : "POST",
+			url : "<s:url value='/editor/delectAttachmentById.html'/>",
+			data : {"attachmentId":value},
+				success: function(data){
+					alert("删除成功！");
+					$("#"+value).hide();
+			},
+			error : function() {
+				alert("操作失败");
 			}
-	</script>	
+	});
+}
+
+function settingAbstractImg(value){
+	var patentDocId=$("#patentDocId").val();
+	$.ajax({
+		type : "POST",
+		url : "<s:url value='/editor/savePatentAbstractImg.html'/>",
+		data : {"abstractImg":value,"patentDocId":patentDocId},
+			success: function(data){
+				 $("#picLsy3").html(
+							"<a href='#'>"+
+							"<img src='"+value+"' alt='' width='400' height='300'/>"+
+							"</a>"
+						);
+		},
+		error : function() {
+			alert("操作失败");
+		}
+});
+}
+</script>
+<script type="text/javascript">
+function savePatentDoc(value){
+	var name=editor.text();
+	var techDomain=$("#editorContent1").val();
+	var backgoundTech=$("#editorContent2").val();
+	var contentProblem=$("#editorContent3").val();
+	var contentRight=$("#editorContent4").val();
+	var contentEffect=$("#editorContent5").val();
+	var implementWay=$("#editorContent6").val();
+	var abstractDescription=$("#editorContent7").val();
+	var rightClaim=$("#editorContent8").val();
+	$.ajax({
+		type: "POST",
+		url: "<s:url value='/editor/savePatentDoc.html'/>",
+		data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
+				"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
+		success: function(data){
+			alert("操作成功");
+		},
+		error: function(){
+			alert("操作失败");
+		}
+	});
+};
+
+function loadImgs(){
+	var patentDocId=$("#patentDocId").val();
+	 $.ajax({
+			type : "POST",
+			url : "<s:url value='/editor/getAttachmentById.html'/>",
+			data : {"patentDocId":patentDocId
+			},
+				success: function(data){
+					$("#picLsy2").empty();
+					var obj= $.parseJSON(data);
+					$.each(obj,function(i,item){
+						 $("#picLsy2").append(
+								 "<li id="+item.attachmentId+">"+
+									"<a href='javascript:delectImg("+item.attachmentId+")'>"+
+									"<img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/>"+
+									"</a>"+
+									"<div class='text'>"+
+										"<b>"+item.caption+"</b>"+
+										"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
+									"</div>"
+								+"</li>"
+						);
+						 
+					 });
+					hoverImg2();
+			},
+			error : function() {
+				alert("操作失败");
+			}
+	});
+}
+</script>
 </body>
 </html>
