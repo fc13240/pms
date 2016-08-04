@@ -733,38 +733,28 @@
 						<!-- content end-->
 						<!-- content start-->
 						<div class="content" id="content5_build" style="display: none;">
+							
 							<div style="height: 20px">
 							</div>
-							<div id="piclist" class="title1" onclick="piclistShow();" style="padding-left: 40px; color:#444; font-size:14px; font-weight:bold;
+							<div id="piclist" class="title1" onclick="piclistShow();loadImgs()" style="padding-left: 40px; color:#444; font-size:14px; font-weight:bold;
 								display: none; cursor: pointer">
 								返回附图列表
 							</div>
-							<div style="height: 10px">
-							</div>
+							 
 							
 							<div class="img_edit" id="origin">
 								<div class="imgfl" id="picBianHao">
 								</div>
 								<div class="imgfr">
-									<form id="patentUrlFrom" name="patentUrlFrom"  method="post" enctype="multipart/form-data" class="form-horizontal">
-									<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDocId}">
-									<input id="piciLlus2" name="state" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
+								 <form id="patentUrlForm" name="patentUrlForm"  method="post" enctype="multipart/form-data" class="form-horizontal">
+								 	<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
+									<input id="piciLlus2" name="caption" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
-									<div id=patentImgUrl style="display:none"></div>
+									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
+									
 								</form>
 									<div id="zyupload" class="zyupload"></div>
-								</div>
-							</div>
-							<div class="img_edit" id="reHtml" style="display: none">
-							</div>
-							<div class="cl">
-								<div class="daochu_cancelh">
-									<div class="daochu_cancel1" onclick="savePatentImgUrl()">
-										保存
-									</div>
-									<div class="daochu_cancel1h" onclick="piclistShow();">
-										取消
-									</div>
+								 	
 								</div>
 							</div>
 						</div>
