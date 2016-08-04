@@ -1495,7 +1495,6 @@ function delectImg(value){
 
 function settingAbstractImg(value){
 	var patentDocId=$("#patentDocId").val();
-	alert(value);
 	$.ajax({
 		type : "POST",
 		url : "<s:url value='/editor/savePatentAbstractImg.html'/>",
