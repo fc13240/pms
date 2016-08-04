@@ -1526,8 +1526,7 @@ function loadImgs(){
 									"<img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/>"+
 									"</a>"+
 									"<div class='text'>"+
-									"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
-									"<b>"+item.caption+"</b>"+
+										"<b>删除图片"+"</b>"+
 									"</div>"
 								+"</li>"
 						);
