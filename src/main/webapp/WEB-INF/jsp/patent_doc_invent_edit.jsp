@@ -81,7 +81,7 @@
 		</script> 
 </head>
 
-<body style="background-color: #FFF" id="dlstCircleArticle">
+<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1)">
 <style>
 .model1:hover .button{display:block}
 </style>	
@@ -1377,7 +1377,35 @@
 		 loading(sectionId,p);
 		 console.info(p);
 	 }
-	 
+	function loadingTemplate(sectionId){
+		 
+		 $("#templateSectionId").html(sectionId);
+		 $.ajax({
+			 type : "POST",
+			 url : "<s:url value='/editor/getTemplateList.html'/>?sectionId="+sectionId,
+			 success : function (data){
+				 var obj= $.parseJSON(data);
+				 $("#modelWrap").empty();
+				 $("#hiddenmodel").empty();
+				 $.each(obj,function(i,item){
+					 $("#modelWrap").append("<div class='model1 model_list"+i+"' style='overflow-x: hidden; overflow-y: hidden;height:158px;'>"+
+						 "<div class='title'>模板"+(i+1)+":"+item.templateTitle+"</div>"+
+						 	 "<div class='content' style='height:105px;overflow-y:hidden;'>"+
+				 				"<p class='small'>"+
+									"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
+								"</p>"+
+							"</p>"+
+						    "<div class='button' style='z-index:500000;' onclick='templatebuttonclick("+i+","+item.patentDocSectionType.patentDocSectionId+")'>+使用模板</div>"+
+						  "</div>"+
+					   "</div>");
+					 $("#modelWrap span").css("color","black");
+				 	 $("#hiddenmodel").append("<p id='templateContent"+i+"'>"+item.content+"</p>");
+				 });
+			 },error : function (){
+				 
+			 }
+		 })
+	 } 
  	function loading(sectionId,currentPage){
 		 
 		 $("#templateSectionId").html(sectionId);

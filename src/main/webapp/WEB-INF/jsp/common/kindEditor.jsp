@@ -77,6 +77,7 @@
 					       $('.word_surplus').html(pattern); //输入显示
 				   }
 				});
+				
 				prettyPrint();
 				/* editor.html("<strong>请填写发明名称！</strong>"); */
 			});
