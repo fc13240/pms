@@ -1419,13 +1419,14 @@
 									"</a>"+
 									"<div class='text'>"+
 										"<b>"+item.caption+"</b>"+
-										"<p><a href='javascript:delectImg("+item.attachmentId+")'>设为摘要附图</a></p>"+
+										"<p>"+"<a href='javascript:settingAbstractImg("+item.attachmentUrl+")'>设为摘要附图</a>"+
+										"</p>"+
 									"</div>"
 								+"</li>"
 						);
 						 
 					 });
-					<!--hoverImg();-->
+					hoverImg();
 				},
 				error : function() {
 					alert("操作失败");
@@ -1482,6 +1483,24 @@ function delectImg(value){
 				alert("操作失败");
 			}
 	});
+}
+
+function settingAbstractImg(value){
+	var patentDocId=$("#patentDocId").val();
+	
+	var abstractImg=value+"";
+	alert(abstractImg);
+	$.ajax({
+		type : "POST",
+		url : "<s:url value='/editor/savePatentDoc.html'/>",
+		data : {"abstractImg":abstractImg,"patentDocId":patentDocId},
+			success: function(data){
+				alert("设置成功！");
+		},
+		error : function() {
+			alert("操作失败");
+		}
+});
 }
 </script>
 <script type="text/javascript">

@@ -74,4 +74,5 @@
 	<delete id="delectAttachmentById"  >
 		delete from patent_attachment where  attachment_id=#{attachmentId}
 	</delete>
+	
 </mapper>
