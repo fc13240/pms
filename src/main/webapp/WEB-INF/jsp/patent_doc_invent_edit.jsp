@@ -1498,7 +1498,7 @@ function settingAbstractImg(value){
 	alert(value);
 	$.ajax({
 		type : "POST",
-		url : "<s:url value='/editor/savePatentDoc.html'/>",
+		url : "<s:url value='/editor/savePatentAbstractImg.html'/>",
 		data : {"abstractImg":value,"patentDocId":patentDocId},
 			success: function(data){
 				 $("#picLsy3").html(

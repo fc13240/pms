@@ -6,7 +6,7 @@ import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
 
 public interface PatentDocDao {
-	void savePatentDoc(PatentDoc patentDoc);
+	void savePatentDoc(PatentDoc PatentDoc);
 	
 	List<PatentDoc> getUserPatentDoc(int userId);
 	
@@ -23,4 +23,6 @@ public interface PatentDocDao {
 	void delectAttachmentById(long attachmentId);
 	
 	void deleteNullPatentDoc();
+	
+	void savePatentAbstractImg(PatentDoc PatentDoc);
 }

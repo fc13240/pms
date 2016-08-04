@@ -74,4 +74,11 @@ public class PatentDocServiceImp implements PatentDocService{
 			
 		}
 
+
+		@Override
+		public void savePatentAbstractImg(PatentDoc PatentDoc) {
+			patentDocDao.savePatentAbstractImg(PatentDoc);
+			
+		}
+
 }

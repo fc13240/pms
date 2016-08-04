@@ -58,6 +58,11 @@
 		where  patent_doc_id=#{patentDocId}
 	</update> 
 	
+	<update id="savePatentAbstractImg" parameterType="PatentDoc">
+		update patent_documents set abstract_img=#{abstractImg,javaType=string,jdbcType=VARCHAR}
+		where  patent_doc_id=#{patentDocId}
+	</update> 
+	
 	<delete id="deletePatentDoc">
 		delete  from  patent_documents  where  patent_doc_id=#{patentDocId} 
 	</delete>

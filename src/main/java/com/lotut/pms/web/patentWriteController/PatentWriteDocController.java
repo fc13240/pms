@@ -69,6 +69,14 @@ public class PatentWriteDocController {
 		writer.write(1);
 	}
 	
+	@RequestMapping(path="/savePatentAbstractImg",method=RequestMethod.POST)
+	public void  savePatentAbstractImg(PatentDoc patentDoc,PrintWriter writer){
+		int userId=PrincipalUtils.getCurrentUserId();
+		patentDoc.setUserId(userId);
+		patentDocService.savePatentAbstractImg(patentDoc);
+		writer.write(1);
+	}
+	
 	@RequestMapping(path="/editPatentDoc",method=RequestMethod.GET)
 	public String  editPatentDoc(@RequestParam("patentDocId")long patentDocId,@RequestParam("patentType")int patentType,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
