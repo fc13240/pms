@@ -238,7 +238,7 @@
 						  <th width="60">缴年费日</th>
 						  <th width="60">添加日</th>
 						  <th width="70">案件状态</th>
-						  <th width="120">内部编码</th>
+						  <th width="180">内部编码</th>
 						  <th width="90">共享人</th>
 						  <th width="80">操作</th>
 						</tr>
@@ -259,7 +259,7 @@
 							<td class="hidden-480 fee_date" fee_date="${patent.appDate}" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="M月dd日"/></td>
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							<td style="text-align:center"><c:out value="${patent.patentStatusText}"/></td>
-							<td style="text-align:center"><input style="width:120px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
+							<td style="text-align:center"><input style="width:180px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="90" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
 							</td>
 							<td style="text-align:center"><c:out value="${patent.shareUsersAsString}"/>
 							</td>
