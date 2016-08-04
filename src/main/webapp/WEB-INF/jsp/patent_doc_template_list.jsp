@@ -7,16 +7,10 @@
 <!DOCTYPE html >
 <html>
 <head>
-	<c:import url="common/header.jsp"></c:import>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<title>专利模板列表！</title>
-	<!-- 编辑器控件 -->
-	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/default/default.css" />
-	<link rel="stylesheet" href="${base }/plugins/kindeditor/themes/simple/simple.css" />
-	<link rel="stylesheet" href="${base }/plugins/kindeditor/plugins/code/prettify.css" />
-	<link href="${base }/static/css/edit_instruct.css?v=2.3.20150415" type="text/css" rel="stylesheet" />
 	<c:import url="common/kindEditor.jsp"></c:import>
 	<link href="<s:url value="/static/css/bootstrap.css"/>" rel="stylesheet"/>
 	<%@ include file="_css.jsp" %>

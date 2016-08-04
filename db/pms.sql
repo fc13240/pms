@@ -605,8 +605,8 @@ CREATE TABLE patent_attachment (
   attachment_id BIGINT NOT NULL AUTO_INCREMENT,
   attachment_url VARCHAR(200) DEFAULT NULL,
   patent_doc_id BIGINT,
-  caption VARCHAR(30) NOT NULL COMMENT '说明',
-  label VARCHAR(30) NOT NULL COMMENT '标记',
+  caption VARCHAR(200) NOT NULL COMMENT '说明',
+  label VARCHAR(200) NOT NULL COMMENT '标记',
   PRIMARY KEY (attachment_id),
   CONSTRAINT fk_patent_documents_doc_id FOREIGN KEY idx_fk_patent_documents_doc_id(patent_doc_id) REFERENCES patent_documents(patent_doc_id) on delete cascade
 )
