@@ -67,6 +67,10 @@
 		(#{patentDocId},#{caption},#{label},#{attachmentUrl,javaType=string,jdbcType=VARCHAR})
 	</insert>
 	
+	<delete id="deleteNullPatentDoc">
+		delete from patent_documents where patent_name is null and tech_domain is null and background_tech is null and content_problem is null and 
+		content_effect is null and implement_way is null and  right_claim is null and abstract_desc is null  and abstract_img is null
+	</delete>
 	<select id="getAttachmentById"  resultMap="PatentImgMap">
 		select attachment_id,caption,label, attachment_url from patent_attachment where  patent_doc_id=#{patentDocId}
 	</select>

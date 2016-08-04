@@ -21,4 +21,6 @@ public interface PatentDocDao {
 	List<Attachment> getAttachmentById(long patentDocId);
 	
 	void delectAttachmentById(long attachmentId);
+	
+	void deleteNullPatentDoc();
 }

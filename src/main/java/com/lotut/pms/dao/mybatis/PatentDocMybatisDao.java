@@ -79,4 +79,12 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 		patentDocMapper.delectAttachmentById(attachmentId);
 		
 	}
+
+
+
+	@Override
+	public void deleteNullPatentDoc() {
+		patentDocMapper.deleteNullPatentDoc();
+		
+	}
 }

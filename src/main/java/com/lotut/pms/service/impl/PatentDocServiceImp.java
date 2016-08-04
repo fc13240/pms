@@ -67,4 +67,11 @@ public class PatentDocServiceImp implements PatentDocService{
 			
 		}
 
+
+		@Override
+		public void deleteNullPatentDoc() {
+			patentDocDao.deleteNullPatentDoc();
+			
+		}
+
 }
