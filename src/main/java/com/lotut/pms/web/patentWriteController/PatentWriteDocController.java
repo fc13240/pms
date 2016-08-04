@@ -97,7 +97,8 @@ public class PatentWriteDocController {
 					&patentDoc.getContentEffect()==null&patentDoc.getContentProblem()==null
 					&patentDoc.getContentRight()==null&patentDoc.getImplementWay()==null
 					&patentDoc.getName()==null&patentDoc.getRightClaim()==null
-					&patentDoc.getTechDomain()==null){
+					&patentDoc.getTechDomain()==null&patentDoc.getAbstractImg()==null
+					){patentDocService.deleteNullPatentDoc();
 			}else{
 				patentDocs.add(patentDoc);
 			}
