@@ -1523,7 +1523,7 @@ function loadImgs(){
 					var obj= $.parseJSON(data);
 					$.each(obj,function(i,item){
 						 $("#picLsy2").append(
-								 "<li id="+item.attachmentId+'2'+">"+
+								 "<li id="+item.attachmentId+">"+
 									"<a href='#'><img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/></a>"+
 									"<div class='text'>"+
 										"<b>"+item.caption+"</b>"+
