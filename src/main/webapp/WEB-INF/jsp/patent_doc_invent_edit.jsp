@@ -692,7 +692,7 @@
 								<div class="imgfl" id="picBianHao">
 								</div>
 								<div class="imgfr">
-								 <form id="patentUrlFrom" name="patentUrlFrom"  method="post" enctype="multipart/form-data" class="form-horizontal">
+								 <form id="patentUrlForm" name="patentUrlForm"  method="post" enctype="multipart/form-data" class="form-horizontal">
 								 	<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
 									<input id="piciLlus2" name="caption" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
