@@ -1425,7 +1425,7 @@
 						);
 						 
 					 });
-					hoverImg();
+					<!--hoverImg();-->
 				},
 				error : function() {
 					alert("操作失败");
@@ -1526,13 +1526,14 @@ function loadImgs(){
 									"<img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/>"+
 									"</a>"+
 									"<div class='text'>"+
-										"<b>删除图片"+"</b>"+
+										"<b>"+item.caption+"</b>"+
+										"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
 									"</div>"
 								+"</li>"
 						);
 						 
 					 });
-					<!--hoverImg2();-->
+					hoverImg2();
 			},
 			error : function() {
 				alert("操作失败");
