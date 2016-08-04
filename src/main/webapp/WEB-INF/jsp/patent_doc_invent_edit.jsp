@@ -71,34 +71,8 @@
 				});
 				
 				
-				var patentDocId=$("#patentDocId").val();
-				 $.ajax({
-						type : "POST",
-						url : "<s:url value='/editor/getAttachmentById.html'/>",
-						data : {"patentDocId":patentDocId
-						},
-							success: function(data){
-								$("#picLsy2").empty();
-								var obj= $.parseJSON(data);
-								$.each(obj,function(i,item){
-									 $("#picLsy2").append(
-											 "<li id="+item.attachmentId+'2'+">"+
-												"<a href='#'><img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/></a>"+
-												"<div class='text'>"+
-													"<b>"+item.caption+"</b>"+
-													"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
-												"</div>"
-											+"</li>"
-									);
-									 
-								 });
-								hoverImg();
-						},
-						error : function() {
-							alert("操作失败");
-						}
-				});
-				
+
+				loadImgs();
 				
 				
 				
@@ -708,7 +682,7 @@
 							
 							<div style="height: 20px">
 							</div>
-							<div id="piclist" class="title1" onclick="piclistShow();" style="padding-left: 40px; color:#444; font-size:14px; font-weight:bold;
+							<div id="piclist" class="title1" onclick="piclistShow();loadImgs()" style="padding-left: 40px; color:#444; font-size:14px; font-weight:bold;
 								display: none; cursor: pointer">
 								返回附图列表
 							</div>
@@ -1537,7 +1511,35 @@ function savePatentDoc(value){
 	});
 };
 
-
+function loadImgs(){
+	var patentDocId=$("#patentDocId").val();
+	 $.ajax({
+			type : "POST",
+			url : "<s:url value='/editor/getAttachmentById.html'/>",
+			data : {"patentDocId":patentDocId
+			},
+				success: function(data){
+					$("#picLsy2").empty();
+					var obj= $.parseJSON(data);
+					$.each(obj,function(i,item){
+						 $("#picLsy2").append(
+								 "<li id="+item.attachmentId+'2'+">"+
+									"<a href='#'><img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/></a>"+
+									"<div class='text'>"+
+										"<b>"+item.caption+"</b>"+
+										"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
+									"</div>"
+								+"</li>"
+						);
+						 
+					 });
+					hoverImg();
+			},
+			error : function() {
+				alert("操作失败");
+			}
+	});
+}
 </script>
 </body>
 </html>
