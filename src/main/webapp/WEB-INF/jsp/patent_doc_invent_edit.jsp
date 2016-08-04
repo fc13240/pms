@@ -1419,13 +1419,13 @@
 									"</a>"+
 									"<div class='text'>"+
 										"<b>"+item.caption+"</b>"+
-										"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
+										"<p><a href='javascript:delectImg("+item.attachmentId+")'>设为摘要附图</a></p>"+
 									"</div>"
 								+"</li>"
 						);
 						 
 					 });
-					hoverImg();
+					<!--hoverImg();-->
 				},
 				error : function() {
 					alert("操作失败");
