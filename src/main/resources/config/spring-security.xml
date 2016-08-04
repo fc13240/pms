@@ -12,7 +12,7 @@
 	<http pattern="/plugins/**" security="none" />
 
 	<http use-expressions="true">
-		<intercept-url pattern="/loginForm.html" access="isAnonymous()"/>
+		<intercept-url pattern="/loginForm.html" access="permitAll"/>
 		<intercept-url pattern="/alipay/notify.html" access="isAnonymous()"/>
 		<intercept-url pattern="/favicon.ico" access="isAnonymous()"/>
 		<intercept-url pattern="/user/registerForm.html" access="isAnonymous()"/>
