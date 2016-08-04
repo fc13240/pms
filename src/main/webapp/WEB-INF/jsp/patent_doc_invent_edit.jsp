@@ -1457,6 +1457,15 @@ function hoverImg(){
 	});
 
 };
+function hoverImg2(){
+
+	$("#picLsy2 li").hover(function(){
+		$(this).find('.text:not(:animated)').animate({top:"0px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	},function () {
+		$(this).find('.text').animate({top:"149px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	});
+
+};
 
 function delectImg(value){
 	 $.ajax({
@@ -1520,7 +1529,7 @@ function loadImgs(){
 						);
 						 
 					 });
-					hoverImg();
+					hoverImg2();
 			},
 			error : function() {
 				alert("操作失败");
