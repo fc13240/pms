@@ -157,12 +157,12 @@
 				</div> --%>
 			</div>
 			<div class="pre_text" id="div_5">${patentDoc.implementWay }</div>
-			<div class="tit_top">
+			<%-- <div class="tit_top">
 				<div class="pre_title">附图:</div>
-				<%-- <div class="pre_clo">
+				<div class="pre_clo">
 					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=5">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
-				</div> --%>
+				</div>
 				<br/><br/><br/>
 					<div class="picBox">
 						<ul class="picL" id="picLsy" >
@@ -182,7 +182,50 @@
 			
 		</div>
 
-	</div>
+	</div> --%>
+	<div class="tit_top">
+				<div class="pre_title">附图:</div>
+				<%-- <div class="pre_clo">
+					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=5">
+						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
+				</div> --%>
+			
+			</div>
+			<div class="pre_text" id="div_6_img"></div>
+		</div>
 
+	</div>
+<script type="text/javascript">
+$(function(){
+	 var patentDocId=${patentDoc.patentDocId};
+	 $.ajax({
+			type : "POST",
+			url : "<s:url value='/editor/getAttachmentById.html'/>",
+			data : {"patentDocId":patentDocId
+			},
+				success: function(data){
+				/* 	$("#picLsy").empty(); */
+					
+				var obj= $.parseJSON(data);
+				$.each(obj,function(i,item){
+					 $("#div_6_img").append(
+							 "<li id="+item.attachmentId+">"+
+								"<a href='#'>"+
+									"<img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/>"+
+								"</a>"
+							
+							+"</li>"+"<br/>"
+					);
+					 
+				 });
+				hoverImg();
+			},
+			error : function() {
+				alert("操作失败");
+			}
+	});
+}
+)
+</script>
 </body>
 </html>
