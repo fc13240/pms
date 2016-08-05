@@ -185,10 +185,10 @@ $(function(){
 					 $("#div_6_img").append(
 							 "<li id="+item.attachmentId+">"+
 								"<a href='#'>"+
-									"<img src='"+item.attachmentUrl+"' alt='' width='800' height='600'/>"+
+									"<img src='"+item.attachmentUrl+"' alt='' width='600' height='500'/>"+
 								"</a>"
 							
-							+"</li>"
+							+"</li>"+"<br/>"
 					);
 					 
 				 });
