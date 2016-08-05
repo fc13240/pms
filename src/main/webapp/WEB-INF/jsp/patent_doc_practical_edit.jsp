@@ -340,11 +340,6 @@
 										                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.name }</textarea>
 										                    </td>
 										            	</tr>
-										                <tr>
-										                    <td style="padding:10px 0 18px 0;">
-										                        <input type="button" value="提 交" class="ajaxpost" id="submit" onclick="alertText();"/> 
-										                    </td>
-										                </tr>
 										            </table>
 										        </form>
 										   </div>
@@ -375,11 +370,6 @@
 										                    	<textarea rows="3" cols="10" id="editorContent1" name="techDomain" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.techDomain }</textarea>
 										                    </td>
 										            	</tr>
-										                <tr>
-										                    <td style="padding:10px 0 18px 0;">
-										                        <input type="button" value="提 交" class="ajaxpost" id="submit" onclick="submitForm();"/> 
-										                    </td>
-										                </tr>
 										            </table>
 										        </form>
 										   </div>
@@ -411,11 +401,6 @@
 										                    	<textarea rows="3" cols="10" id="editorContent2" name="backgoundTech" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.backgoundTech }</textarea>
 										                    </td>
 										            	</tr>
-										                <tr>
-										                    <td style="padding:10px 0 18px 0;">
-										                        <input type="button" value="提 交" class="ajaxpost" id="submit" onclick="submitForm();"/> 
-										                    </td>
-										                </tr>
 										            </table>
 										        </form>
 										   </div>
@@ -444,11 +429,6 @@
 										                    	<textarea rows="3" cols="10" id="editorContent3" name="contentProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.contentProblem }</textarea>
 										                    </td>
 										            	</tr>
-										                <tr>
-										                    <td style="padding:10px 0 18px 0;">
-										                        <input type="button" value="提 交" class="ajaxpost" id="submit" onclick="submitForm();"/> 
-										                    </td>
-										                </tr>
 										            </table>
 										        </form>
 										   </div>
@@ -470,11 +450,6 @@
 										                    	<textarea rows="3" cols="10" id="editorContent4" name="contentRight" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.contentRight }</textarea>
 										                    </td>
 										            	</tr>
-										                <tr>
-										                    <td style="padding:10px 0 18px 0;">
-										                        <input type="button" value="提 交" class="ajaxpost" id="submit" onclick="submitForm();"/> 
-										                    </td>
-										                </tr>
 										            </table>
 										        </form>
 										   </div>
@@ -497,11 +472,6 @@
 										                    	<textarea rows="3" cols="10" id="editorContent5" name="contentEffect" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.contentEffect }</textarea>
 										                    </td>
 										            	</tr>
-										                <tr>
-										                    <td style="padding:10px 0 18px 0;">
-										                        <input type="button" value="提 交" class="ajaxpost" id="submit" onclick="submitForm();"/> 
-										                    </td>
-										                </tr>
 										            </table>
 										        </form>
 										   </div>
@@ -531,11 +501,6 @@
 										                    	<textarea rows="3" cols="10" id="editorContent6" name="implementWay" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.implementWay }</textarea>
 										                    </td>
 										            	</tr>
-										                <tr>
-										                    <td style="padding:10px 0 18px 0;">
-										                        <input type="button" value="提 交" class="ajaxpost" id="submit" onclick="submitForm();"/> 
-										                    </td>
-										                </tr>
 										            </table>
 										        </form>
 										   </div>
@@ -570,11 +535,6 @@
 										                    	<textarea rows="3" cols="10" id="editorContent7" name="abstractDescription" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.abstractDescription }</textarea>
 										                    </td>
 										            	</tr>
-										                <tr>
-										                    <td style="padding:10px 0 18px 0;">
-										                        <input type="button" value="提 交" class="ajaxpost" id="submit" onclick="submitForm();"/> 
-										                    </td>
-										                </tr>
 										            </table>
 										        </form>
 										   </div>
@@ -620,11 +580,6 @@
 										                    	<textarea rows="3" cols="10" id="editorContent8" name="rightClaim" class="editorContent"style="width:520px;height:200px;visibility:hidden;" >${patentDoc.rightClaim }</textarea>
 										                    </td>
 										            	</tr>
-										                <tr>
-										                    <td style="padding:10px 0 18px 0;">
-										                        <input type="button" value="提 交" class="ajaxpost" id="submit" onclick="submitForm();"/> 
-										                    </td>
-										                </tr>
 										            </table>
 										        </form>
 										   </div>
