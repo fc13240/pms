@@ -164,9 +164,19 @@
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
 				<br/><br/><br/>
-				<div>
-					<img src='${patentDoc.abstractImg}' alt='' width='800' height='600'/>
-				</div>
+					<div class="picBox">
+						<ul class="picL" id="picLsy" >
+							<c:forEach items="${Attachments}" var="Attachment">
+								<li>
+									<a href="#"><img src="${Attachment.attachmentUrl}" alt="" width="200" height="150"/></a>
+									<div class="text">
+										<b>${Attachment.caption}</b>
+										<p><a href="#">${Attachment.attachmentUrl}</a></p>
+									</div>
+								</li>
+							</c:forEach>
+						</ul>
+					</div>
 				
 			</div>
 			<div class="pre_text" id="div_6_img"></div>

@@ -127,6 +127,8 @@ public class PatentWriteDocController {
 	public String previewPatentDoc(@RequestParam("patentDocId")long patentDocId,Model model,PrintWriter writer){
 		PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
 		model.addAttribute("patentDoc", patentDoc);
+		List<Attachment> Attachments=patentDocService.getAttachmentById(patentDocId);
+		model.addAttribute("Attachments", Attachments);
 		return "patent_doc_preview";
 	}
 	
@@ -263,30 +265,5 @@ public class PatentWriteDocController {
 	}*/
 	
 	
-	/**
-	 * 提交表单操作
-	 */
-	@RequestMapping(path="/ajaxForm",method=RequestMethod.POST)
-	public void ajaxForm(HttpServletResponse response, String content){
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
-        PrintWriter writer = null;
-        try {
-            writer = response.getWriter();
-            
-			writer.println(content);
-            
-            writer.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-	}
+
 }
