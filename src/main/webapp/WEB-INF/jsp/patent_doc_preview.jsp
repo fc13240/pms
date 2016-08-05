@@ -159,10 +159,10 @@
 			<div class="pre_text" id="div_5">${patentDoc.implementWay }</div>
 			 <div class="tit_top">
 				<div class="pre_title">附图:</div>
-				<div class="pre_clo">
+<%-- 				<div class="pre_clo">
 					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=5">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
-				</div>
+				</div> --%>
 				<br/><br/><br/>
 					<div class="picBox">
 						<ul class="picL" id="picLsy" >
