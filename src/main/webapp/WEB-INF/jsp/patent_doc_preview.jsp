@@ -94,7 +94,11 @@
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
 			</div>
-			<div class="pre_text" id="div_9"></div>
+			<div class="pre_text" id="div_9">
+			<c:if test="${patentDoc.abstractImg != null || patentDoc.abstractImg==''}">
+				<img src='${patentDoc.abstractImg}' alt='' width='400' height='300'/>
+			</c:if>
+			</div>
 			<div class="tit_top">
 				<div class="pre_title">权利要求书</div>
 				<%-- <div class="pre_clo">
@@ -154,11 +158,16 @@
 			</div>
 			<div class="pre_text" id="div_5">${patentDoc.implementWay }</div>
 			<div class="tit_top">
-				<div class="pre_title">附图</div>
+				<div class="pre_title">附图:</div>
 				<%-- <div class="pre_clo">
 					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=5">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
+				<br/><br/><br/>
+				<div>
+					<img src='${patentDoc.abstractImg}' alt='' width='800' height='600'/>
+				</div>
+				
 			</div>
 			<div class="pre_text" id="div_6_img"></div>
 		</div>
