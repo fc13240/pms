@@ -765,13 +765,13 @@
 	
 	        </div>
 	
-	        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><span id="templateSectionId" style="display:none;">1</span><a style="color:#ccc" href="javascript:upPage();">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();">下一页</a></div>
+	        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><span id="templateSectionId" style="display:none;">1</span><a style="color:#ccc" href="javascript:upPage();" id="topUpPage">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="topDownPage">下一页</a></div>
 	        <div class="model" style="overflow-x: hidden; overflow-y: auto;">
 	            <div id="modelWrap" style="display: block;"></div>
 				<div id="hiddenmodel" style="display: none;"></div>
 	        </div>
 	        
-	        <div style="float: right; padding-right: 15px; padding-top: 5px; display: block;" id="kbpage2"><a style="color:#ccc" href="javascript:upPage();">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();">下一页</a></div>
+	        <div style="float: right; padding-right: 15px; padding-top: 5px; display: block;" id="kbpage2"><a style="color:#ccc" href="javascript:upPage();" id="bottomUpPage">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="bottomDownPage">下一页</a></div>
 	        <div id="scBs" class="shousou" onclick="bigSmall(this);">
 	        </div>
 	        <input type="hidden" name="name" value="small" id="hidBorS">
@@ -1363,7 +1363,11 @@
 		 
 		 if(p>=totoalPage){
 			p=totoalPage;
+			$("#topDownPage").css("color","#ccc");
+			$("#bottomDownPage").css("color","#ccc");
 		 }
+		 $("#topUpPage").css("color","#0085d0");
+		 $("#bottomUpPage").css("color","#0085d0");
 		 loading(sectionId,p);
 		 console.info(p);
 		
@@ -1373,7 +1377,11 @@
 		 --p;
 		 if(p<1){
 			 p=1;
+			$("#topUpPage").css("color","#ccc");
+			$("#bottomUpPage").css("color","#ccc");
 		 }
+		$("#topDownPage").css("color","#0085d0");
+		$("#bottomDownPage").css("color","#0085d0");
 		 loading(sectionId,p);
 		 console.info(p);
 	 }
