@@ -159,6 +159,10 @@
 					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=5">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
+				<div>
+					<img src='${patentDoc.abstractImg}' alt='' width='800' height='600'/>
+				</div>
+				
 			</div>
 			<div class="pre_text" id="div_6_img"></div>
 		</div>
