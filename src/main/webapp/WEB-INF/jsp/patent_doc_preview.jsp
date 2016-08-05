@@ -179,41 +179,10 @@
 					</div>
 
 			</div>
-			<div class="pre_text" id="div_6_img"></div>
+			
 		</div>
 
 	</div>
-<script type="text/javascript">
-$(function(){
-	 var patentDocId=${patentDoc.patentDocId};
-	 $.ajax({
-			type : "POST",
-			url : "<s:url value='/editor/getAttachmentById.html'/>",
-			data : {"patentDocId":patentDocId
-			},
-				success: function(data){
-				/* 	$("#picLsy").empty(); */
-					
-				var obj= $.parseJSON(data);
-				$.each(obj,function(i,item){
-					 $("#div_6_img").append(
-							 "<li id="+item.attachmentId+">"+
-								"<a href='#'>"+
-									"<img src='"+item.attachmentUrl+"' alt='' width='600' height='500'/>"+
-								"</a>"
-							
-							+"</li>"+"<br/>"
-					);
-					 
-				 });
-				hoverImg();
-			},
-			error : function() {
-				alert("操作失败");
-			}
-	});
-}
-)
-</script>
+
 </body>
 </html>
