@@ -94,7 +94,7 @@
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
 			</div>
-			<div class="pre_text" id="div_9"></div>
+			<div class="pre_text" id="div_9"><img src="+${patentDocattachmentUrl}+" alt='' width='200' height='150'/></div>
 			<div class="tit_top">
 				<div class="pre_title">权利要求书</div>
 				<%-- <div class="pre_clo">
