@@ -250,6 +250,18 @@ public class PatentWriteDocController {
 		
 	}
 	
+	//预览编辑功能
+/*	@RequestMapping(path="/compilePatentDoc",method=RequestMethod.GET)
+	public String  compilePatentDoc(@RequestParam("patentDocId")long patentDocId,@RequestParam("tab")int tab,Model model){
+		int userId=PrincipalUtils.getCurrentUserId();
+		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocId);
+		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
+		model.addAttribute("patent", patentDoc);
+		model.addAttribute("patentDocs", patentDocs);
+		model.addAttribute("tab", tab);
+		return "patentDoc_search2";
+	}*/
+	
 	
 	/**
 	 * 提交表单操作
