@@ -141,13 +141,13 @@
 			<div class="pre_text" id="div_4">${patentDoc.contentProblem }</div>
 			<div class="pre_text" id="div_4">${patentDoc.contentRight }</div>
 			<div class="pre_text" id="div_4">${patentDoc.contentEffect }</div>
-			<div class="tit_top">
+			<%-- <div class="tit_top">
 				<div class="pre_title">附图说明</div>
-				<%-- <div class="pre_clo">
+				<div class="pre_clo">
 					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=5">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
-				</div> --%>
-			</div>
+				</div>
+			</div> --%>
 			<div id="div_6"></div>
 			<div class="tit_top">
 				<div class="pre_title">具体实施方式</div>
@@ -158,12 +158,12 @@
 			</div>
 			<div class="pre_text" id="div_5">${patentDoc.implementWay }</div>
 			 <div class="tit_top">
-				<div class="pre_title">附图:</div>
+				<div class="pre_title">附图及说明</div>
 <%-- 				<div class="pre_clo">
 					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=5">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
-				<br/><br/><br/>
+			<%-- 	<br/><br/><br/>
 					<div class="picBox">
 						<ul class="picL" id="picLsy" >
 							<c:forEach items="${Attachments}" var="Attachment">
@@ -176,14 +176,65 @@
 								</li>
 							</c:forEach>
 						</ul>
-					</div>
+					</div> --%>
 
 			</div>
-			
+			<div class="pre_text" id="div_6_img"></div>
 		</div>
 
 	</div>
 
+<script type="text/javascript">
+$(function(){
+	 var patentDocId=${patentDoc.patentDocId};
+	 $.ajax({
+			type : "POST",
+			url : "<s:url value='/editor/getAttachmentById.html'/>",
+			data : {"patentDocId":patentDocId
+			},
+				success: function(data){
+				/* 	$("#picLsy").empty(); */
+					
+				var obj= $.parseJSON(data);
+				$.each(obj,function(i,item){
+					 $("#div_6_img").append(
+							 "<li id="+item.attachmentId+">"+
+								"<a href='#'>"+
+									"<img src='"+item.attachmentUrl+"' alt='' width='400' height='300'/>"+
+								"</a>"+"<div class='text'>"+
+								"<b>"+item.caption+"</b>"+"<p>"+"<a href='#'>"+item.label+"</a>"+"</p>"+"</div>"
+							
+							+"</li>"+"<br/>"
+					);
+					 
+				 });
+				hoverImg();
+			},
+			error : function() {
+				alert("操作失败");
+			}
+	});
+}
+)
 
+function hoverImg(){
+
+	$("#div_6_img li").hover(function(){
+		$(this).find('.text:not(:animated)').animate({top:"0px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	},function () {
+		$(this).find('.text').animate({top:"149px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	});
+
+};
+function hoverImg2(){
+
+	$("#picLsy2 li").hover(function(){
+		$(this).find('.text:not(:animated)').animate({top:"0px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	},function () {
+		$(this).find('.text').animate({top:"149px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	});
+
+};
+</script>
 </body>
 </html>
