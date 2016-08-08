@@ -678,15 +678,12 @@
 						<input type="hidden" id="ft_hidSrc" value="">
 						<input type="hidden" id="ft_hidFid" value="">
 						<div class="content" id="content5" style="display: none;">
-							<div class="box">
+							<div class="box" id="content5-1">
 								<div class="upimg1" onclick="addPic();">
 									新增附图</div>
 								<div class="img_box" id="askPicList">
 								</div>
 							</div>
-						</div>
-						<!-- content end-->
-						<!-- content start-->
 						<div class="content" id="content5_build" style="display: none;">
 							
 							<div style="height: 20px">
@@ -715,7 +712,11 @@
 						</div>
 	
 	                    
-						<!-- 摘要附图 -->
+						<!-- 摘要附图 -->							
+						</div>
+						<!-- content end-->
+						<!-- content start-->
+
 						<style type="text/css">
 							.borderRed
 							{

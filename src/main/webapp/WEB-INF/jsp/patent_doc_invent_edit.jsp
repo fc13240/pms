@@ -675,8 +675,6 @@
 									</ul>
 								</div>
 							</div>
-						</div>
-						<!-- content end-->
 						<!-- content start-->
 						<div class="content" id="content5_build" style="display: none;">
 							
@@ -706,7 +704,10 @@
 						</div>
 	
 	                    
-						<!-- 摘要附图 -->
+						<!-- 摘要附图 -->							
+						</div>
+						<!-- content end-->
+
 						<style type="text/css">
 							.borderRed
 							{
