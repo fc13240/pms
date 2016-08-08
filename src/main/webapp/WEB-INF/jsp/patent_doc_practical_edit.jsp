@@ -745,7 +745,7 @@
 							</div>
 							<div class="picBox" id="picLsy3">
 								<c:if test="${patentDoc.abstractImg != null || patentDoc.abstractImg==''}">
-										<img src='${patentDoc.abstractImg}' alt='' width='400' height='300'/>
+										<img src='${base}${patentDoc.abstractImg}' alt='' width='400' height='300'/>
 								</c:if>
 							</div>
 						</div>
@@ -1492,6 +1492,7 @@
 										"<img src='"+httpImgUrl+"' alt='' width='200' height='150'/>"+
 									"</a>"+
 									"<div class='text'>"+
+									
 										"<b>"+item.caption+"</b>"+
 										"<p>"+"<a href='javascript:settingAbstractImg("+"&apos;"+item.attachmentUrl+"&apos;"+")'>设为摘要附图</a>"+
 										"</p>"+

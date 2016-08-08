@@ -96,7 +96,8 @@
 			</div>
 			<div class="pre_text" id="div_9">
 			<c:if test="${patentDoc.abstractImg != null || patentDoc.abstractImg==''}">
-				<img src='${patentDoc.abstractImg}' alt='' width='400' height='300'/>
+			
+				<img src='${base}${patentDoc.abstractImg}' alt='' width='400' height='300'/>
 			</c:if>
 			</div>
 			<div class="tit_top">
@@ -168,7 +169,7 @@
 						<ul class="picL" id="picLsy" >
 							<c:forEach items="${Attachments}" var="Attachment">
 								<li>
-									<a href="#"><img src="${Attachment.attachmentUrl}" alt="" width="200" height="150"/></a>
+									<a href="#"><img src="${base}${Attachment.attachmentUrl}" alt="" width="200" height="150"/></a>
 									<div class="text">
 										<b>${Attachment.caption}</b>
 										<p><a href="#">${Attachment.label}</a></p>

@@ -736,7 +736,7 @@
 							</div>
 							<div class="picBox" id="picLsy3">
 								<c:if test="${patentDoc.abstractImg != null || patentDoc.abstractImg==''}">
-										<img src='${patentDoc.abstractImg}' alt='' width='400' height='300'/>
+										<img src='${base}${patentDoc.abstractImg}' alt='' width='400' height='300'/>
 								</c:if>
 							</div>
 						</div>
