@@ -543,7 +543,7 @@ CREATE TABLE IF NOT EXISTS patent_remarks (
 	CONSTRAINT fk_patent_remarks_user_id FOREIGN KEY idx_fk_patent_remarks_user_id (user_id) REFERENCES users(user_id) 
 );
 
-CREATE TABLE IF NOT EXISTS patent_documents (
+CREATE TABLE  patent_documents (
   patent_doc_id bigint(20) NOT NULL AUTO_INCREMENT,
   app_no varchar(30) DEFAULT NULL,
   user_id int(11) DEFAULT NULL,
@@ -561,11 +561,11 @@ CREATE TABLE IF NOT EXISTS patent_documents (
   right_claim mediumtext COMMENT '权利要求',
   abstract_desc mediumtext COMMENT '摘要',
   abstract_img varchar(200) COMMENT '摘要附图',
-  PRIMARY KEY (`patent_doc_id`),
-  KEY `fk_patent_documents_patent_type` (`patent_type`),
-  KEY `fk_patent_documents_doc_owner_id` (`user_id`),
-  CONSTRAINT `fk_patent_documents_doc_owner_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  CONSTRAINT `fk_patent_documents_patent_type` FOREIGN KEY (`patent_type`) REFERENCES `patent_types` (`patent_type_id`)
+  PRIMARY KEY (patent_doc_id),
+  KEY fk_patent_documents_patent_type (patent_type),
+  KEY fk_patent_documents_doc_owner_id (user_id),
+  CONSTRAINT fk_patent_documents_doc_owner_id FOREIGN KEY (user_id) REFERENCES users (user_id),
+  CONSTRAINT fk_patent_documents_patent_type FOREIGN KEY (patent_type) REFERENCES patent_types (patent_type_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 
@@ -588,7 +588,7 @@ INSERT INTO patent_doc_section_types VALUES(10,'实用新型名称');
 
 CREATE TABLE IF NOT EXISTS patent_document_templates(
 	template_id INT AUTO_INCREMENT PRIMARY KEY,
-	content VARCHAR(65000) NULL COMMENT '专利模块部分',
+	content mediumtext NULL COMMENT '专利模块部分',
 	template_title VARCHAR(400) NOT NULL COMMENT '模板说明',
 	patent_type INT NOT NULL COMMENT '专利类型',
 	patent_doc_section INT NOT NULL COMMENT '专利主题',
