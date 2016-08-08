@@ -1474,6 +1474,7 @@
  	
 	 function findAttachmentImg(){
 		 var patentDocId=$("#patentDocId").val();
+		 var base = "${base}";
 		 $.ajax({
 				type : "POST",
 				url : "<s:url value='/editor/getAttachmentById.html'/>",
@@ -1484,10 +1485,11 @@
 						
 					var obj= $.parseJSON(data);
 					$.each(obj,function(i,item){
+						var  httpImgUrl=base+item.attachmentUrl;
 						 $("#picLsy").append(
 								 "<li id="+item.attachmentId+">"+
 									"<a href='#'>"+
-										"<img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/>"+
+										"<img src='"+httpImgUrl+"' alt='' width='200' height='150'/>"+
 									"</a>"+
 									"<div class='text'>"+
 										"<b>"+item.caption+"</b>"+
@@ -1559,14 +1561,16 @@ function delectImg(value){
 
 function settingAbstractImg(value){
 	var patentDocId=$("#patentDocId").val();
+	var base = "${base}";
 	$.ajax({
 		type : "POST",
 		url : "<s:url value='/editor/savePatentAbstractImg.html'/>",
 		data : {"abstractImg":value,"patentDocId":patentDocId},
 			success: function(data){
+				var httpImgUrl=base+value;
 				 $("#picLsy3").html(
 							"<a href='#'>"+
-							"<img src='"+value+"' alt='' width='400' height='300'/>"+
+							"<img src='"+httpImgUrl+"' alt='' width='400' height='300'/>"+
 							"</a>"
 						);
 		},
@@ -1603,6 +1607,7 @@ function savePatentDoc(value){
 
 function loadImgs(){
 	var patentDocId=$("#patentDocId").val();
+	var base = "${base}";
 	 $.ajax({
 			type : "POST",
 			url : "<s:url value='/editor/getAttachmentById.html'/>",
@@ -1612,10 +1617,11 @@ function loadImgs(){
 					$("#picLsy2").empty();
 					var obj= $.parseJSON(data);
 					$.each(obj,function(i,item){
+						var  httpImgUrl=base+item.attachmentUrl;
 						 $("#picLsy2").append(
 								 "<li id="+item.attachmentId+">"+
 									"<a href='javascript:delectImg("+item.attachmentId+")'>"+
-									"<img src='"+item.attachmentUrl+"' alt='' width='200' height='150'/>"+
+									"<img src='"+httpImgUrl+"' alt='' width='200' height='150'/>"+
 									"</a>"+
 									"<div class='text'>"+
 										"<b>"+item.caption+"</b>"+
