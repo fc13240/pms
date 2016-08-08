@@ -141,13 +141,13 @@
 			<div class="pre_text" id="div_4">${patentDoc.contentProblem }</div>
 			<div class="pre_text" id="div_4">${patentDoc.contentRight }</div>
 			<div class="pre_text" id="div_4">${patentDoc.contentEffect }</div>
-			<div class="tit_top">
+			<%-- <div class="tit_top">
 				<div class="pre_title">附图说明</div>
-				<%-- <div class="pre_clo">
+				<div class="pre_clo">
 					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=5">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
-				</div> --%>
-			</div>
+				</div>
+			</div> --%>
 			<div id="div_6"></div>
 			<div class="tit_top">
 				<div class="pre_title">具体实施方式</div>
@@ -158,7 +158,7 @@
 			</div>
 			<div class="pre_text" id="div_5">${patentDoc.implementWay }</div>
 			 <div class="tit_top">
-				<div class="pre_title">附图:</div>
+				<div class="pre_title">附图及说明</div>
 <%-- 				<div class="pre_clo">
 					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=5">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
