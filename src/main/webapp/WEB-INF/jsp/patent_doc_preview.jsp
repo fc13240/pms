@@ -100,14 +100,14 @@
 				<img src='${base}${patentDoc.abstractImg}' alt='' width='400' height='300'/>
 			</c:if>
 			</div>
-			<div class="tit_top">
+			<%-- <div class="tit_top">
 				<div class="pre_title">摘要附图说明</div>
 				<div class="pre_clo">
 					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=5">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div>
 			</div>
-			<div id="div_6"></div>
+			<div id="div_6"></div> --%>
 			<div class="tit_top">
 				<div class="pre_title">权利要求书</div>
 				<%-- <div class="pre_clo">
