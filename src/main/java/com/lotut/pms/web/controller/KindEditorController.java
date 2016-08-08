@@ -61,7 +61,7 @@ public class KindEditorController {
 		String savePath = Settings.PATENTDOC_IMAGE_PATH;
 		
 		String path = request.getContextPath();
-		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+		String basePath = request.getScheme() + "://" + request.getLocalAddr() + ":" + request.getServerPort()
 		+ path;
 		
 		// 文件保存目录URL
