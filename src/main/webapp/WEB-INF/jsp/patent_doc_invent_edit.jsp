@@ -1581,7 +1581,6 @@ function loadImgs(){
 			data : {"patentDocId":patentDocId
 			},
 				success: function(data){
-					alert(data);
 					$("#picLsy2").empty();
 					var obj= $.parseJSON(data);
 					$.each(obj,function(i,item){
