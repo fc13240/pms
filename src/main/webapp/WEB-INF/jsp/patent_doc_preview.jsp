@@ -219,7 +219,7 @@ $(function(){
 
 function hoverImg(){
 
-	$("#picLsy li").hover(function(){
+	$("#div_6_img li").hover(function(){
 		$(this).find('.text:not(:animated)').animate({top:"0px"}, {easing:"easeInOutExpo"}, 50, function(){});
 	},function () {
 		$(this).find('.text').animate({top:"149px"}, {easing:"easeInOutExpo"}, 50, function(){});
