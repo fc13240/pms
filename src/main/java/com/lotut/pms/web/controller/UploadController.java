@@ -65,7 +65,7 @@ public class UploadController {
 				String basePath = request1.getContextPath();
 /*				String basePath = request1.getScheme() + "://" + request1.getLocalAddr() + ":" + request1.getServerPort()
 				+ path;*/
-				String saveUrl = basePath + "/patentDocAttachment/";
+				String saveUrl ="/patentDocAttachment/";
 				String dirName = request1.getParameter("dir");
 				if (dirName == null) {
 					dirName = "image";
