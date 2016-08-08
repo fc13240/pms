@@ -83,7 +83,7 @@ if (hidSrc!=undefined) { //说明展示过编辑页面
   var bh = parseInt($("#askPicList").children(".img_box1").length) + 1; 
   $('#picBianHao').html(bh+"、");
    
-    $('#content5').hide();
+    $('#content5-1').hide();
     $('#content5_build').show();
     $('#piclist').show();
     var tab = getselfwriteTab();

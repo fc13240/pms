@@ -59,7 +59,7 @@
 						<input style="width:400px;" class="selectPointOfInterest form-control" type="text" style="height:25px;width:80px;" name="price" id="price" required/>
 					  </div>
 					  <div style="margin-top:15px;">
-						<button style="margin:8px;" type="submit" class="btn btn-info btn-sm">出售</button>
+						<button style="margin:8px;" type="submit" class="btn btn-info btn-sm">发布交易</button>
 					  </div>
 					</form>
 				</div>
