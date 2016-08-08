@@ -666,7 +666,7 @@
 						<input type="hidden" id="ft_hidFid" value="">
 						<div class="content" id="content5" style="display: none;">
 							
-							<div class="box">
+							<div class="box" id="content5-1">
 								<div class="upimg1" onclick="addPic();">
 									新增附图</div>
 								<div class="picBox">
@@ -696,7 +696,7 @@
 									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
 									
-								</form>
+								  </form>
 									<div id="zyupload" class="zyupload"></div>
 								 	
 								</div>

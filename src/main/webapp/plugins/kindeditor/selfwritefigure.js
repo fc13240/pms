@@ -117,12 +117,14 @@ $.ajax({ url: _RootPath + 'self/selfwritefigure2.aspx', //后台返回编辑页�
         $('#askPicList').html(resultHtml).show();
         var tab = getselfwriteTab(); //这两句是ry控制编辑区高度的
         //seteditorheight(tab);
+        
     },
     error: function () {
     }
 });   
      
     $('#content5').show();
+    $('#content5-1').show();
     $('#content5_build').hide();
     $('#piclist').hide();
     var tab = getselfwriteTab();
