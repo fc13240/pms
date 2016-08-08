@@ -202,7 +202,7 @@ $(function(){
 								"<a href='#'>"+
 									"<img src='"+item.attachmentUrl+"' alt='' width='400' height='300'/>"+
 								"</a>"+"<div class='text'>"+
-								"<b>"+item.caption+"</b>"+"<p>"+"<a href='#'>"+item.label+"</a>"+"</p>"+"<div/>"
+								"<b>"+item.caption+"</b>"+"<p>"+"<a href='#'>"+item.label+"</a>"+"</p>"+"</div>"
 							
 							+"</li>"+"<br/>"
 					);
