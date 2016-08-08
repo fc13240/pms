@@ -1,4 +1,4 @@
-package com.lotut.pms.web.patentWriteController;
+package com.lotut.pms.web.controller;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -55,93 +55,16 @@ import com.lotut.pms.web.util.WebUtils;
 @Controller
 @RequestMapping(path="/kindeditor")
 public class UploadController {
-
-	@RequestMapping(path = "/attachment_upload")
-	public void fileUpload(HttpServletRequest request,  @RequestParam("patentFile")Part imgFile,
-			HttpServletResponse response,PrintWriter writer) throws ServletException, IOException, FileUploadException {
-		String savePath = Settings.PATENTDOC_ATTACHMENT_PATH;
-		
-		String path = request.getContextPath();
-		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-		+ path;
-		String saveUrl = basePath + "/patentDocAttachment/";
-		// 定义允许上传的文件扩展名
-		HashMap<String, String> extMap = new HashMap<String, String>();
-		extMap.put("image", "gif,jpg,jpeg,png,bmp");
-
-		response.setContentType("text/html; charset=UTF-8");
-		response.setHeader("X-Frame-OPTIONS", "SAMEORIGIN");
-		
-		if (!ServletFileUpload.isMultipartContent(request)) {
-			 getError(response,"请选择文件！");
-			 return;
-		}
-
-		String dirName = request.getParameter("dir");
-		if (dirName == null) {
-			dirName = "image";
-		}
-		if (!extMap.containsKey(dirName)) {
-			getError(response,"目录名不正确。");
-			return;
-		}
-		// 创建文件夹
-		savePath += dirName + "/";
-		saveUrl += dirName + "/";
-		File saveDirFile = new File(savePath);
-		if (!saveDirFile.exists()) {
-			saveDirFile.mkdirs();
-		}
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String ymd = sdf.format(new Date());
-		savePath += ymd + "/";
-		saveUrl += ymd + "/";
-		File dirFile = new File(savePath);
-		if (!dirFile.exists()) {
-			dirFile.mkdirs();
-		}
-		String fileName = imgFile.getSubmittedFileName();
-		String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-		String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
-		InputStream is = imgFile.getInputStream();
-		int BUFFER_SIZE = 8 * 1024;
-		byte[] buffer = new byte[BUFFER_SIZE];
-		try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
-			int bytesRead = -1;
-			while ((bytesRead = is.read(buffer)) != -1) {
-				out.write(buffer, 0, bytesRead);
-			}
-			out.flush();
-		}
-		String url=saveUrl+newFileName+".html";
-		 Map<String, Object> succMap = new HashMap<String, Object>(); 
-         succMap.put("url", saveUrl + newFileName+".html");  
-         WebUtils.writeJsonStrToResponse(response, succMap);
-         /*writer.write(url);*/
-	}
-	
-	
-	   private void getError(HttpServletResponse response,String errorMsg) {  
-	       try {
-	    	   Map<String, Object> errorMap = new HashMap<String, Object>();  
-		       errorMap.put("error", 1);  
-		       errorMap.put("message", errorMsg);  
-		       WebUtils.writeJsonStrToResponse(response, errorMap);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}  
-	   } 
-	   
+  
 	   
 	   @RequestMapping(path = "/uploadPic",method=RequestMethod.POST)
 		public void uploadPic(HttpServletRequest request1 ,HttpServletResponse response1)  {
 		   try{
 			   String savePath = Settings.PATENTDOC_ATTACHMENT_PATH;
 				
-				String path = request1.getContextPath();
-				String basePath = request1.getScheme() + "://" + request1.getServerName() + ":" + request1.getServerPort()
-				+ path;
+				String basePath = request1.getContextPath();
+/*				String basePath = request1.getScheme() + "://" + request1.getLocalAddr() + ":" + request1.getServerPort()
+				+ path;*/
 				String saveUrl = basePath + "/patentDocAttachment/";
 				String dirName = request1.getParameter("dir");
 				if (dirName == null) {

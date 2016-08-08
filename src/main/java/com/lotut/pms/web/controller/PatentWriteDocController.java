@@ -1,4 +1,4 @@
-package com.lotut.pms.web.patentWriteController;
+package com.lotut.pms.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
