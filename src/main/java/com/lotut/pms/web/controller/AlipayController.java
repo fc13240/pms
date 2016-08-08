@@ -103,11 +103,9 @@ public class AlipayController {
 			if(success){
 				long orderId = Long.parseLong(orderIdStr);
 				Order order = orderService.getOrderById(orderId);
-				if (order.getOrderStatus().getStatusId() != NEED_PAY_STATUS) {
-					out.println("success");
-					return;
+				if (order.getOrderStatus().getStatusId() == NEED_PAY_STATUS) {
+					orderService.processOrderPaidSuccess(orderId);
 				}
-				orderService.processOrderPaidSuccess(orderId);
 				out.println("success");
 			}
 		} else {
