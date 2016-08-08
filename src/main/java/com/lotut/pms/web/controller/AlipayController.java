@@ -27,6 +27,7 @@ import com.lotut.pms.service.OrderService;
 public class AlipayController {
 	private OrderService orderService;
 	private FeeService feeService;
+	private static int NEED_PAY_STATUS = 1;
 	
 	@Autowired
 	public AlipayController(OrderService orderService, FeeService feeService) {
@@ -102,7 +103,7 @@ public class AlipayController {
 			if(success){
 				long orderId = Long.parseLong(orderIdStr);
 				Order order = orderService.getOrderById(orderId);
-				if (order.getOrderStatus().getStatusId() == ORDER_STATUS_PAID) {
+				if (order.getOrderStatus().getStatusId() != NEED_PAY_STATUS) {
 					out.println("success");
 					return;
 				}
