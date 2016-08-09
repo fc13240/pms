@@ -194,9 +194,11 @@ table td a {
 </div>
 
 </div>
+
+<iframe id="patentWorkFileFrame" style="display:none"></iframe>	
 <script type="text/javascript">
 	 function exportWord(value){
-		 $.ajax({
+		/*  $.ajax({
 			 type : "POST",
 			 url : "<s:url value='/editor/exportWord.html'/>?patentDocId="+value,
 			 data : {"patentDocId":value},
@@ -205,7 +207,11 @@ table td a {
 			 },error : function (){
 				 
 			 }
-		 });
+		 }); */
+		 
+		 var iframe = document.getElementById('patentWorkFileFrame');
+		iframe.src = "<s:url value='/editor/exportWord.html'/>?patentDocId="+value;
+		 
 	}
 
 </script>
