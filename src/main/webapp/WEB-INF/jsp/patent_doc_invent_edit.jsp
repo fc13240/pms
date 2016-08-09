@@ -424,14 +424,14 @@
 									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 									            	<tr>
 									                    <td style="width:520px;" >
-									                    	<textarea rows="3" cols="10" id="editorContent3" name="contentProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.contentProblem }</textarea>
+									                    	<textarea rows="3" cols="10" id="editorContent3" name="contentProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.content }</textarea>
 									                    </td>
 									            	</tr>
 									            </table>
 										   </div>
 									</div>
 								</div>
-								<div id="editor3_1" thisid="5633" thistempid="0">
+<%-- 								<div id="editor3_1" thisid="5633" thistempid="0">
 									<div class="instru">
 										<div class="title2">
 											这部分内容看似不少，其实就是权利要求部分的内容，建议先看看模板吧，看完之后就会发现原来是对权利要求的进一步描述。<br>
@@ -469,7 +469,7 @@
 									            </table>
 										   </div>
 									</div>
-								</div>
+								</div> --%>
 							</div>
 						</div>
 						<div class="content" id="content4" style="display: none;overflow: auto;" >
@@ -1558,17 +1558,15 @@ function savePatentDoc(value){
 	var name=editor.text();
 	var techDomain=$("#editorContent1").val();
 	var backgoundTech=$("#editorContent2").val();
-	var contentProblem=$("#editorContent3").val();
-	var contentRight=$("#editorContent4").val();
-	var contentEffect=$("#editorContent5").val();
+	var content=$("#editorContent3").val();
 	var implementWay=$("#editorContent6").val();
 	var abstractDescription=$("#editorContent7").val();
 	var rightClaim=$("#editorContent8").val();
 	$.ajax({
 		type: "POST",
 		url: "<s:url value='/editor/savePatentDoc.html'/>",
-		data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"contentProblem":contentProblem,"contentRight":contentRight,
-				"contentEffect":contentEffect,"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
+		data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"content":content,
+				"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
 		success: function(data){
 			alert("操作成功");
 		},
