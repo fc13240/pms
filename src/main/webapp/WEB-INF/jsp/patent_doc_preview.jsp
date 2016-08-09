@@ -200,7 +200,7 @@
 			data:{"ImgUrl":abstractImg},
 			success: function(data){
 				var obj= $.parseJSON(data);
-					$("div_6").append(
+					$("#div_6").append(
 							"<span>"+"附图说明："+obj.caption+"</span>"+"<br/>"+"<span>"+"标记说明"+obj.caption+"</span>"
 					);
 					 
