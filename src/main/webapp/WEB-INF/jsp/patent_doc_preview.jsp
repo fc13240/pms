@@ -201,7 +201,7 @@
 			success: function(data){
 				var obj= $.parseJSON(data);
 					$("#div_6").append(
-							"<span>"+"附图说明："+obj.caption+"</span>"+"<br/>"+"<span>"+"标记说明:"+obj.caption+"</span>"
+							"<span>"+"附图说明："+obj.caption+"</span>"+"<br/>"+"&nbsp;"+"&nbsp;"+"<span>"+"标记说明:"+obj.caption+"</span>"
 					);
 					 
 				}
