@@ -85,6 +85,6 @@
 	</delete>
 	
 	<select id="getLabelByUrl" resultMap="PatentImgMap" parameterType="String">
-		select caption,label from patent_attachment where attachment_url=#{abstractImg,javaType=string,jdbcType=VARCHAR}
+		select attachment_id,caption,label,attachment_url from patent_attachment where attachment_url=#{abstractImg,javaType=string,jdbcType=VARCHAR}
 	</select>
 </mapper>
