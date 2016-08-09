@@ -31,12 +31,12 @@ import com.lotut.pms.web.util.WebUtils;
 
 @Controller
 @RequestMapping(path="/editor")
-public class PatentWriteDocController {
+public class PatentEditDocController {
 	private PatentDocService patentDocService;
 	private PatentDocumentTemplateService patentDocumentTemplateService;
 	
 	@Autowired
-	public PatentWriteDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService) {
+	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService) {
 		this.patentDocService = patentDocService;
 		this.patentDocumentTemplateService = patentDocumentTemplateService;
 	}
@@ -263,6 +263,13 @@ public class PatentWriteDocController {
 		}
 		
 	}
+	
+	@RequestMapping(path="/exportWord")
+	public void exportWord(@RequestParam("patentDocId")long patentDocId,PrintWriter writer){
+		
+		writer.write(1);
+	}
+	
 	
 	//预览编辑功能
 /*	@RequestMapping(path="/compilePatentDoc",method=RequestMethod.GET)
