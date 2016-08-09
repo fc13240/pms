@@ -81,4 +81,10 @@ public class PatentDocServiceImp implements PatentDocService{
 			
 		}
 
+
+		@Override
+		public Attachment getLabelByUrl(String url) {
+			return patentDocDao.getLabelByUrl(url);
+		}
+
 }

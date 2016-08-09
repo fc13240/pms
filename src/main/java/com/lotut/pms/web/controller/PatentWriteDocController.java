@@ -212,6 +212,18 @@ public class PatentWriteDocController {
 			}
 	}
 	
+	@RequestMapping(path="/getLabelByUrl",method=RequestMethod.POST)
+		public void getLabelById(@RequestParam("ImgUrl") String ImgUrl,Model model,HttpServletResponse response,PrintWriter writer){
+		try {
+			Attachment attachment=patentDocService.getLabelByUrl(ImgUrl);
+			WebUtils.writeJsonStrToResponse(response, attachment);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 	@RequestMapping(path="/delectAttachmentById",method=RequestMethod.POST)
 	public void delectAttachmentById(@RequestParam("attachmentId")long attachmentId,Model model,HttpServletResponse response,PrintWriter writer){
 		patentDocService.delectAttachmentById(attachmentId);

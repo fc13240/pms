@@ -100,14 +100,10 @@
 				<img src='${base}${patentDoc.abstractImg}' alt='' width='400' height='300'/>
 			</c:if>
 			</div>
-			<%-- <div class="tit_top">
+			<div class="tit_top">
 				<div class="pre_title">摘要附图说明</div>
-				<div class="pre_clo">
-					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=5">
-						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
-				</div>
 			</div>
-			<div id="div_6"></div> --%>
+			<div id="div_6"></div>
 			<div class="tit_top">
 				<div class="pre_title">权利要求书</div>
 				<%-- <div class="pre_clo">
@@ -189,15 +185,33 @@
 <script type="text/javascript">
 
 
-
-
+	$(function (){
+		var abstractImg =${patentDoc.abstractImg};
+		$.ajax({
+			url:"<s:url value='/editor/getLabelByUrl.html'/>",
+			data:{"ImgUrl":abstractImg},
+			success: function(data){
+				var obj= $.parseJSON(data);
+				$.each(obj,function(i,item){
+					$("div_6").append(
+							"<b>"+item.caption+"</b>"+"<br/>"+"<b>"+item.caption+"</b>"
+					);
+					 
+				 });}
+		});
+	})
+		
+			
 	$("#picLsy li").hover(function(){
 		$(this).find('.text:not(:animated)').animate({top:"0px"}, {easing:"easeInOutExpo"}, 50, function(){});
 	},function () {
 		$(this).find('.text').animate({top:"149px"}, {easing:"easeInOutExpo"}, 50, function(){});
 	});
 
-
+	
+		
+		
+	
 
 </script>
 </body>

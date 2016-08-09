@@ -27,4 +27,6 @@ public interface PatentDocMapper {
 	void deleteNullPatentDoc();
 	
 	void savePatentAbstractImg(PatentDoc PatentDoc);
+	
+	Attachment getLabelByUrl(String url);
 }

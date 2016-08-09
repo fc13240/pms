@@ -25,4 +25,6 @@ public interface PatentDocService {
 	void deleteNullPatentDoc();
 	
 	void savePatentAbstractImg(PatentDoc PatentDoc);
+	
+	Attachment getLabelByUrl(String url);
 }
