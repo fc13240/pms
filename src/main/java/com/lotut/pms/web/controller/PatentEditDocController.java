@@ -104,10 +104,8 @@ public class PatentEditDocController {
 		List<PatentDoc> patentDocs= new ArrayList<>();
 		for (PatentDoc patentDoc:patentDocss) {
 			if(patentDoc.getAppNo()==null&patentDoc.getAbstractDescription()==null
-					&patentDoc.getBackgoundTech()==null&patentDoc.getContentEffect()==null
-					&patentDoc.getContentEffect()==null&patentDoc.getContentProblem()==null
-					&patentDoc.getContentRight()==null&patentDoc.getImplementWay()==null
-					&patentDoc.getName()==null&patentDoc.getRightClaim()==null
+					&patentDoc.getBackgoundTech()==null&patentDoc.getContent()==null
+					&patentDoc.getImplementWay()==null&patentDoc.getName()==null&patentDoc.getRightClaim()==null
 					&patentDoc.getTechDomain()==null&patentDoc.getAbstractImg()==null){
 					patentDocService.deleteNullPatentDoc();
 			}else{

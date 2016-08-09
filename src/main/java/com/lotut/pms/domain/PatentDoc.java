@@ -18,9 +18,7 @@ public class PatentDoc {
 	private String name;
 	private String techDomain;
 	private String backgoundTech;
-	private String contentProblem;
-	private String contentRight;
-	private String contentEffect;
+	private String content;
 	private String implementWay;
 	private String rightClaim;
 	private String abstractDescription;
@@ -29,6 +27,12 @@ public class PatentDoc {
 	
 	
 	
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public String getAbstractImg() {
 		return abstractImg;
 	}
@@ -89,24 +93,7 @@ public class PatentDoc {
 	public void setBackgoundTech(String backgoundTech) {
 		this.backgoundTech = backgoundTech;
 	}
-	public String getContentProblem() {
-		return contentProblem;
-	}
-	public void setContentProblem(String contentProblem) {
-		this.contentProblem = contentProblem;
-	}
-	public String getContentRight() {
-		return contentRight;
-	}
-	public void setContentRight(String contentRight) {
-		this.contentRight = contentRight;
-	}
-	public String getContentEffect() {
-		return contentEffect;
-	}
-	public void setContentEffect(String contentEffect) {
-		this.contentEffect = contentEffect;
-	}
+	
 	public String getImplementWay() {
 		return implementWay;
 	}
@@ -125,16 +112,7 @@ public class PatentDoc {
 	public void setAbstractDescription(String abstractDescription) {
 		this.abstractDescription = abstractDescription;
 	}
-	@Override
-	public String toString() {
-		return "PatentDoc [patentDocId=" + patentDocId + ", appNo=" + appNo + ", userId=" + userId + ", patentType="
-				+ patentType + ", createTime=" + createTime + ", lastUpdateTime=" + lastUpdateTime + ", name=" + name
-				+ ", techDomain=" + techDomain + ", backgoundTech=" + backgoundTech + ", contentProblem="
-				+ contentProblem + ", contentRight=" + contentRight + ", contentEffect=" + contentEffect
-				+ ", implementWay=" + implementWay + ", rightClaim=" + rightClaim + ", abstractDescription="
-				+ abstractDescription + "]";
-	}
-	
+
 	
 	
 }
