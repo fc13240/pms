@@ -193,7 +193,7 @@
 				/* editor3.html("<strong>请填写存在的技术问题！</strong>"); */
 			});
 		</script>
-		<script type="text/javascript">
+		<%-- <script type="text/javascript">
 			var editor4;
 			KindEditor.ready(function(K) {
 				   editor4 = K.create('#editorContent4', {
@@ -271,7 +271,7 @@
 				prettyPrint();
 				 /* editor5.html("<strong>请填写技术特征！</strong>");  */
 			});
-		</script>
+		</script> --%>
 		<script type="text/javascript">
 			var editor6;
 			KindEditor.ready(function(K) {

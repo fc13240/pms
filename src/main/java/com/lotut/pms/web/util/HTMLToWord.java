@@ -50,7 +50,8 @@ public class HTMLToWord {
 	                    ByteArrayInputStream bais = new ByteArrayInputStream(b);  
 	                    POIFSFileSystem poifs = new POIFSFileSystem();  
 	                    DirectoryEntry directory = poifs.getRoot();  
-	                    DocumentEntry documentEntry = directory.createDocument("WordDocument", bais);  
+	                    DocumentEntry documentEntry = directory.createDocument("WordDocument", bais);
+	                    
 	                    FileOutputStream ostream = new FileOutputStream(path+ fileName);  
 	                    poifs.writeFilesystem(ostream);  
 	                    bais.close();  
