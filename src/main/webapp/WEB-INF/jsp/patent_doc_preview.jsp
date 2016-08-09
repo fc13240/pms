@@ -200,12 +200,11 @@
 			data:{"ImgUrl":abstractImg},
 			success: function(data){
 				var obj= $.parseJSON(data);
-				$.each(obj,function(i,item){
 					$("div_6").append(
-							"<span>"+"附图说明："+item.caption+"</span>"+"<br/>"+"<span>"+"标记说明"+item.caption+"</span>"
+							"<span>"+"附图说明："+obj.caption+"</span>"+"<br/>"+"<span>"+"标记说明"+obj.caption+"</span>"
 					);
 					 
-				 });}
+				}
 		});
 	})
 		
