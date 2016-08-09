@@ -28,6 +28,7 @@ import com.lotut.pms.domain.TemplatePage;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.HTMLToWord;
 import com.lotut.pms.web.util.WebUtils;
 
 @Controller
@@ -266,13 +267,11 @@ public class PatentEditDocController {
 	}
 	
 	@RequestMapping(path="/exportWord")
-	public void exportWord(@RequestParam("patentDocId")long patentDocId,PrintWriter writer,HttpServletRequest req, HttpServletResponse resp) throws IOException{
-		
-		
+	public void exportWord(@RequestParam("patentDocId")long patentDocId,PrintWriter writer,HttpServletRequest req, HttpServletResponse resp,PrintWriter writer){
+		PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
+		HTMLToWord.writeWordFile(patentDoc);
 		writer.write(1);
 	}
-	
-	
 	//预览编辑功能
 /*	@RequestMapping(path="/compilePatentDoc",method=RequestMethod.GET)
 	public String  compilePatentDoc(@RequestParam("patentDocId")long patentDocId,@RequestParam("tab")int tab,Model model){
