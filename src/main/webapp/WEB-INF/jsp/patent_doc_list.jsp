@@ -201,7 +201,7 @@ table td a {
 			 url : "<s:url value='/editor/exportWord.html'/>?patentDocId="+value,
 			 data : {"patentDocId":value},
 			 success : function (data){
-				 alert(导出成功);
+				 alert("导出成功");
 			 },error : function (){
 				 
 			 }
