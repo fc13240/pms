@@ -184,9 +184,16 @@
 
 <script type="text/javascript">
 
+	$("#picLsy li").hover(function(){
+		$(this).find('.text:not(:animated)').animate({top:"0px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	},function () {
+		$(this).find('.text').animate({top:"149px"}, {easing:"easeInOutExpo"}, 50, function(){});
+	});
+
+	
 
 	$(function (){
-		var abstractImg =${patentDoc.abstractImg};
+		var abstractImg ="${patentDoc.abstractImg}";
 		$.ajax({
 			url:"<s:url value='/editor/getLabelByUrl.html'/>",
 			data:{"ImgUrl":abstractImg},
@@ -201,14 +208,7 @@
 		});
 	})
 		
-		$(function (){	
-	$("#picLsy li").hover(function(){
-		$(this).find('.text:not(:animated)').animate({top:"0px"}, {easing:"easeInOutExpo"}, 50, function(){});
-	},function () {
-		$(this).find('.text').animate({top:"149px"}, {easing:"easeInOutExpo"}, 50, function(){});
-	});}
-)
-	
+
 		
 		
 	
