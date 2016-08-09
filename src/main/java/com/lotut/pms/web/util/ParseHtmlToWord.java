@@ -2,6 +2,7 @@ package com.lotut.pms.web.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,12 +12,10 @@ import java.util.Date;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Range;
 
-import org.junit.Test;
-
 public class ParseHtmlToWord {
 	    
-		   @Test  
-		   public void testWrite() throws Exception {  
+		     
+		   public static void main(String[] args) throws IOException { 
 		      String templatePath = "D:\\test.doc";  
 		      InputStream is = new FileInputStream(templatePath);  
 		      HWPFDocument doc = new HWPFDocument(is);  
@@ -29,15 +28,15 @@ public class ParseHtmlToWord {
 		      OutputStream os = new FileOutputStream("D:\\test.doc");  
 		      //把doc输出到输出流中  
 		      doc.write(os);  
-		      this.closeStream(os);  
-		      this.closeStream(is);  
+		      closeStream(os);  
+		      closeStream(is);  
 		   }  
 		    
 		   /** 
 		    * 关闭输入流 
 		    * @param is 
 		    */  
-		   private void closeStream(InputStream is) {  
+		   private static void closeStream(InputStream is) {  
 		      if (is != null) {  
 		         try {  
 		            is.close();  
@@ -51,7 +50,7 @@ public class ParseHtmlToWord {
 		    * 关闭输出流 
 		    * @param os 
 		    */  
-		   private void closeStream(OutputStream os) {  
+		   private static void closeStream(OutputStream os) {  
 		      if (os != null) {  
 		         try {  
 		            os.close();  
