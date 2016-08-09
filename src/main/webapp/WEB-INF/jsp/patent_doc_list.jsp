@@ -172,7 +172,7 @@ table td a {
                     <a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 								 编辑
 					</a><a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">预览</a>
-                    <a onclick=" exportLayerShow('3197');">导出</a>
+                    <a onclick=" exportWord(${patentDoc.patentDocId});">导出</a>
                     <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">删除</a>
                     <a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>
                 </td>
@@ -194,5 +194,20 @@ table td a {
 </div>
 
 </div>
+<script type="text/javascript">
+	 function exportWord(value){
+		 $.ajax({
+			 type : "POST",
+			 url : "<s:url value='/editor/exportWord.html'/>?patentDocId="+value,
+			 data : {"patentDocId":value},
+			 success : function (data){
+				 alert("导出成功");
+			 },error : function (){
+				 
+			 }
+		 });
+	}
+
+</script>
 </body>
 </html>
