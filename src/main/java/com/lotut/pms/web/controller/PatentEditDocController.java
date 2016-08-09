@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,10 +109,8 @@ public class PatentEditDocController {
 		List<PatentDoc> patentDocs= new ArrayList<>();
 		for (PatentDoc patentDoc:patentDocss) {
 			if(patentDoc.getAppNo()==null&patentDoc.getAbstractDescription()==null
-					&patentDoc.getBackgoundTech()==null&patentDoc.getContentEffect()==null
-					&patentDoc.getContentEffect()==null&patentDoc.getContentProblem()==null
-					&patentDoc.getContentRight()==null&patentDoc.getImplementWay()==null
-					&patentDoc.getName()==null&patentDoc.getRightClaim()==null
+					&patentDoc.getBackgoundTech()==null&patentDoc.getContent()==null
+					&patentDoc.getImplementWay()==null&patentDoc.getName()==null&patentDoc.getRightClaim()==null
 					&patentDoc.getTechDomain()==null&patentDoc.getAbstractImg()==null){
 					patentDocService.deleteNullPatentDoc();
 			}else{

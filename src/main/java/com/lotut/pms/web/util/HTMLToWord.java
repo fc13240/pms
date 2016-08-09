@@ -27,19 +27,15 @@ public class HTMLToWord {
 	                    String name=patentDoc.getName();
 	                    String techDomain=patentDoc.getTechDomain();
 	                    String backTech=patentDoc.getBackgoundTech();
-	                    String contentProblem=patentDoc.getContentProblem();
-	                    String contentRight=patentDoc.getContentRight();
-	                    String contentEffect=patentDoc.getContentEffect();
+	                    String content=patentDoc.getContent();
 	                    String implementWay=patentDoc.getImplementWay();
 	                    String rightClaim=patentDoc.getRightClaim();
 	                    String abstractDescription=patentDoc.getAbstractDescription();
-	                    String content = "<html><head>"+name+"</head><div style=\"text-align: center\"><span style=\"font-size: 12px\"><span style=\"font-family: 宋体\">" +
-	                    					"技术领域"+"<br /> <br />"+techDomain+
-	                    					"背景技术"+"<br /> <br />"+backTech+
-	                    					"发明内容"+"<br /> <br />"+contentProblem+
-	                    					"<br /> <br />"+contentRight+
-	                    					"<br /> <br />"+contentEffect+
-	                    					"附图说明"+"<br /> <br />"+"null"+
+	                    String content1 = "<html><head style=\"text-align: center\">"+name+"</head><div style=\"text-align: center\"><span style=\"font-size: 12px\"><span style=\"font-family: 宋体\">" +
+	                    		"<br /> <br />"+"技术领域"+"<br /> <br />"+techDomain+
+	                    					"<br /> <br />"+"背景技术"+"<br /> <br />"+backTech+
+	                    					"<br /> <br />"+"发明内容"+"<br /> <br />"+content+
+	                    					"<br /> <br />"+"附图说明"+"<br /> <br />"+"null"+
 	                    					"实施方式"+"<br /> <br />"+implementWay+
 	                    		            "<br /> <br /> </span></span></div></html>";
 	                    byte b[] = content.getBytes("GBK");
@@ -49,6 +45,7 @@ public class HTMLToWord {
 	                    DirectoryEntry directory = poifs.getRoot();  
 	                    DocumentEntry documentEntry = directory.createDocument("WordDocument", bais);  
 	                    FileOutputStream ostream = new FileOutputStream(exportExcelPath+ fileName);  
+
 	                    poifs.writeFilesystem(ostream);  
 	                    bais.close();  
 	                    ostream.close();  
