@@ -278,7 +278,7 @@ public class PatentEditDocController {
 		response.setHeader("X-FRAME-OPTIONS", "SAMEORIGIN");
 
 		User user = PrincipalUtils.getCurrentPrincipal();
-		String exportFileName = user.getUsername() + System.currentTimeMillis() + ".xls";
+		String exportFileName = user.getUsername() + System.currentTimeMillis() + ".doc";
 		PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
 		String exportExcelPath =HTMLToWord.writeWordFile(patentDoc, exportFileName);
 		
