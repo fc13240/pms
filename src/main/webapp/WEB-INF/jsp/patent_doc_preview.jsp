@@ -103,7 +103,7 @@
 			<div class="tit_top">
 				<div class="pre_title">摘要附图说明</div>
 			</div>
-			<div id="div_6"></div>
+			<div  class="pre_text" id="div_6"></div>
 			<div class="tit_top">
 				<div class="pre_title">权利要求书</div>
 				<%-- <div class="pre_clo">
@@ -201,7 +201,7 @@
 			success: function(data){
 				var obj= $.parseJSON(data);
 					$("#div_6").append(
-							"<span>"+"附图说明："+obj.caption+"</span>"+"<br/>"+"<span>"+"标记说明"+obj.caption+"</span>"
+							"<span>"+"附图说明："+obj.caption+"</span>"+"<br/>"+"<span>"+"标记说明:"+obj.caption+"</span>"
 					);
 					 
 				}
