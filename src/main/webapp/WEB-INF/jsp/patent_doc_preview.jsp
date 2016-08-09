@@ -194,20 +194,20 @@
 				var obj= $.parseJSON(data);
 				$.each(obj,function(i,item){
 					$("div_6").append(
-							"<b>"+item.caption+"</b>"+"<br/>"+"<b>"+item.caption+"</b>"
+							+"附图说明："+item.caption+"<br/>"+"标记说明"+item.caption
 					);
 					 
 				 });}
 		});
 	})
 		
-			
+		$(function (){	
 	$("#picLsy li").hover(function(){
 		$(this).find('.text:not(:animated)').animate({top:"0px"}, {easing:"easeInOutExpo"}, 50, function(){});
 	},function () {
 		$(this).find('.text').animate({top:"149px"}, {easing:"easeInOutExpo"}, 50, function(){});
-	});
-
+	});}
+)
 	
 		
 		
