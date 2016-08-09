@@ -2,6 +2,7 @@ package com.lotut.pms.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -265,7 +266,8 @@ public class PatentEditDocController {
 	}
 	
 	@RequestMapping(path="/exportWord")
-	public void exportWord(@RequestParam("patentDocId")long patentDocId,PrintWriter writer){
+	public void exportWord(@RequestParam("patentDocId")long patentDocId,PrintWriter writer,HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		
 		
 		writer.write(1);
 	}
