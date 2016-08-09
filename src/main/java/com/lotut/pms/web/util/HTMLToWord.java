@@ -36,16 +36,14 @@ public class HTMLToWord {
 	                    String implementWay=patentDoc.getImplementWay();
 	                    String rightClaim=patentDoc.getRightClaim();
 	                    String abstractDescription=patentDoc.getAbstractDescription();
-	                    String content = "<html><head>"+name+"</head><div style=\"text-align: center\"><span style=\"font-size: 28px\"><span style=\"font-family: 黑体\">" +
-	                    					"摘要"+"<br /> <br />"+abstractDescription+
-	                    					"专利名称"+"<br /> <br />"+name+
+	                    String content = "<html><head>"+name+"</head><div style=\"text-align: center\"><span style=\"font-size: 12px\"><span style=\"font-family: 宋体\">" +
 	                    					"技术领域"+"<br /> <br />"+techDomain+
 	                    					"背景技术"+"<br /> <br />"+backTech+
-	                    					"发明问题"+"<br /> <br />"+contentProblem+
-	                    					"发明权利"+"<br /> <br />"+contentRight+
-	                    					"发明效果"+"<br /> <br />"+contentEffect+
+	                    					"发明内容"+"<br /> <br />"+contentProblem+
+	                    					"<br /> <br />"+contentRight+
+	                    					"<br /> <br />"+contentEffect+
+	                    					"附图说明"+"<br /> <br />"+"null"+
 	                    					"实施方式"+"<br /> <br />"+implementWay+
-	                    					"权利要求"+"<br /> <br />"+rightClaim+
 	                    		            "<br /> <br /> </span></span></div></html>";
 	                    byte b[] = content.getBytes("GBK");
 	                    
