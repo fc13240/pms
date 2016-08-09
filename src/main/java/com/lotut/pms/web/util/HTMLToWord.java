@@ -26,10 +26,7 @@ public class HTMLToWord {
 	                File fileDir = new File(path);  
 	                if (fileDir.exists()) {  
 	                    // 生成临时文件名称  
-	                    String fileName = "a.doc";  
-	                    /*String content = "<html><div style=\"text-align: center\"><span style=\"font-size: 28px\"><span style=\"font-family: 黑体\">" +  
-	                        "制度发布通知<br /> <br /> </span></span></div></html>";
-	                    */
+	                    String fileName = "a.doc";
 	                    String name=patentDoc.getName();
 	                    String techDomain=patentDoc.getTechDomain();
 	                    String backTech=patentDoc.getBackgoundTech();
@@ -39,7 +36,7 @@ public class HTMLToWord {
 	                    String implementWay=patentDoc.getImplementWay();
 	                    String rightClaim=patentDoc.getRightClaim();
 	                    String abstractDescription=patentDoc.getAbstractDescription();
-	                    String content = "<html><div style=\"text-align: center\"><span style=\"font-size: 28px\"><span style=\"font-family: 黑体\">" +
+	                    String content = "<html><head>"+name+"</head><div style=\"text-align: center\"><span style=\"font-size: 28px\"><span style=\"font-family: 黑体\">" +
 	                    					"摘要"+"<br /> <br />"+abstractDescription+
 	                    					"专利名称"+"<br /> <br />"+name+
 	                    					"技术领域"+"<br /> <br />"+techDomain+

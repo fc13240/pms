@@ -267,10 +267,10 @@ public class PatentEditDocController {
 	}
 	
 	@RequestMapping(path="/exportWord")
-	public void exportWord(@RequestParam("patentDocId")long patentDocId,PrintWriter writer,HttpServletRequest req, HttpServletResponse resp,PrintWriter writer1){
+	public void exportWord(@RequestParam("patentDocId")long patentDocId,PrintWriter writer,HttpServletRequest req, HttpServletResponse resp){
 		PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
 		HTMLToWord.writeWordFile(patentDoc);
-		writer1.write(1);
+		writer.write(1);
 	}
 	//预览编辑功能
 /*	@RequestMapping(path="/compilePatentDoc",method=RequestMethod.GET)
