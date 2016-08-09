@@ -202,7 +202,7 @@
 				var obj= $.parseJSON(data);
 				$.each(obj,function(i,item){
 					$("div_6").append(
-							+"附图说明："+item.caption+"<br/>"+"标记说明"+item.caption
+							"<span>"+"附图说明："+item.caption+"</span>"+"<br/>"+"<span>"+"标记说明"+item.caption+"</span>"
 					);
 					 
 				 });}
