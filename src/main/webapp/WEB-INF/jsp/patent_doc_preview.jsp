@@ -195,6 +195,7 @@
 	$(function (){
 		var abstractImg ="${patentDoc.abstractImg}";
 		$.ajax({
+			type:"post",
 			url:"<s:url value='/editor/getLabelByUrl.html'/>",
 			data:{"ImgUrl":abstractImg},
 			success: function(data){
