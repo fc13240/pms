@@ -184,24 +184,6 @@
 
 <script type="text/javascript">
 
-
-	$(function (){
-		var abstractImg =${patentDoc.abstractImg};
-		$.ajax({
-			url:"<s:url value='/editor/getLabelByUrl.html'/>",
-			data:{"ImgUrl":abstractImg},
-			success: function(data){
-				var obj= $.parseJSON(data);
-				$.each(obj,function(i,item){
-					$("div_6").append(
-							"<b>"+item.caption+"</b>"+"<br/>"+"<b>"+item.caption+"</b>"
-					);
-					 
-				 });}
-		});
-	})
-		
-			
 	$("#picLsy li").hover(function(){
 		$(this).find('.text:not(:animated)').animate({top:"0px"}, {easing:"easeInOutExpo"}, 50, function(){});
 	},function () {
@@ -209,6 +191,24 @@
 	});
 
 	
+
+	$(function (){
+		var abstractImg ="${patentDoc.abstractImg}";
+		$.ajax({
+			type:"post",
+			url:"<s:url value='/editor/getLabelByUrl.html'/>",
+			data:{"ImgUrl":abstractImg},
+			success: function(data){
+				var obj= $.parseJSON(data);
+					$("#div_6").append(
+							"<span>"+"附图说明："+obj.caption+"</span>"+"<br/>"+"<span>"+"标记说明"+obj.caption+"</span>"
+					);
+					 
+				}
+		});
+	})
+		
+
 		
 		
 	

@@ -84,7 +84,7 @@
 		delete from patent_attachment where  attachment_id=#{attachmentId}
 	</delete>
 	
-	<select id="getLabelByUrl" resultMap="PatentImgMap">
-		select caption,label from patent_attachment where attachment_url=#{abstractImg}
+	<select id="getLabelByUrl" resultMap="PatentImgMap" parameterType="String">
+		select attachment_id,caption,label,attachment_url from patent_attachment where attachment_url=#{abstractImg,javaType=string,jdbcType=VARCHAR}
 	</select>
 </mapper>
