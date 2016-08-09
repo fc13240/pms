@@ -1,6 +1,10 @@
 package com.lotut.pms.web.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -26,6 +30,7 @@ import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.TemplatePage;
+import com.lotut.pms.domain.User;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -266,10 +271,32 @@ public class PatentEditDocController {
 	}
 	
 	@RequestMapping(path="/exportWord")
-	public void exportWord(@RequestParam("patentDocId")long patentDocId,PrintWriter writer,HttpServletRequest req, HttpServletResponse resp){
+	public void exportWord(@RequestParam("patentDocId")long patentDocId,PrintWriter writer,HttpServletRequest reqeust, HttpServletResponse response) throws IOException{
+		
+		
+		response.setContentType("application/vnd.ms-word");
+		response.setHeader("X-FRAME-OPTIONS", "SAMEORIGIN");
+
+		User user = PrincipalUtils.getCurrentPrincipal();
+		String exportFileName = user.getUsername() + System.currentTimeMillis() + ".xls";
 		PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
-		HTMLToWord.writeWordFile(patentDoc);
-		writer.write(1);
+		String exportExcelPath =HTMLToWord.writeWordFile(patentDoc, exportFileName);
+		
+		
+		File excelFile = new File(exportExcelPath);
+		response.setContentLength((int)excelFile.length());
+		response.setHeader("Content-Disposition", "attachment;filename=" + exportFileName);
+		
+		int BUFFER_SIZE = 8192;
+		byte[] buffer = new byte[BUFFER_SIZE];
+		try (OutputStream out = response.getOutputStream(); 
+				BufferedInputStream bis = new BufferedInputStream(new FileInputStream(excelFile))) {
+			int bytesRead = -1;
+			while ((bytesRead = bis.read(buffer)) != -1) {
+				out.write(buffer, 0, bytesRead);
+			}
+			out.flush();
+		}
 	}
 	//预览编辑功能
 /*	@RequestMapping(path="/compilePatentDoc",method=RequestMethod.GET)

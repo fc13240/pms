@@ -1,32 +1,29 @@
 package com.lotut.pms.web.util;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 
 import org.apache.poi.poifs.filesystem.DirectoryEntry;
 import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
+import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.PatentDoc;
 
 public class HTMLToWord {
-	 public static boolean writeWordFile(PatentDoc patentDoc) {  
-	        boolean w = false;  
-	        String path = "d:/";  
+	 public static String writeWordFile(PatentDoc patentDoc,String fileName) {  
+	        //boolean w = false;
+	        String exportExcelPath = Settings.TEMP_DIR + fileName;
+	        //String path = "d:/";  
 	        try {  
-	            if (!"".equals(path)) {  
+	            if (!"".equals(exportExcelPath)) {  
 	                // 检查目录是否存在  
-	                File fileDir = new File(path);  
+	                File fileDir = new File(exportExcelPath);  
 	                if (fileDir.exists()) {  
 	                    // 生成临时文件名称  
-	                    String fileName = "a.doc";
+	                    //String fileName = "a.doc";
 	                    String name=patentDoc.getName();
 	                    String techDomain=patentDoc.getTechDomain();
 	                    String backTech=patentDoc.getBackgoundTech();
@@ -46,9 +43,9 @@ public class HTMLToWord {
 	                    ByteArrayInputStream bais = new ByteArrayInputStream(b);  
 	                    POIFSFileSystem poifs = new POIFSFileSystem();  
 	                    DirectoryEntry directory = poifs.getRoot();  
-	                    DocumentEntry documentEntry = directory.createDocument("WordDocument", bais);
-	                    
-	                    FileOutputStream ostream = new FileOutputStream(path+ fileName);  
+	                    DocumentEntry documentEntry = directory.createDocument("WordDocument", bais);  
+	                    FileOutputStream ostream = new FileOutputStream(exportExcelPath+ fileName);  
+
 	                    poifs.writeFilesystem(ostream);  
 	                    bais.close();  
 	                    ostream.close();  
@@ -57,11 +54,11 @@ public class HTMLToWord {
 	        } catch (IOException e) {  
 	            e.printStackTrace();  
 	      }  
-	      return w;  
+	      return exportExcelPath;  
 	    }  
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		PatentDoc patentDoc=new PatentDoc();
 		 writeWordFile(patentDoc);
-	}
+	}*/
 }
