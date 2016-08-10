@@ -13,8 +13,14 @@ import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
 
 public class HTMLToWord {
-
-	 public static  String writeWordManualFile(String saveWordPathDir,PatentDoc patentDoc,String fileName,List<Attachment> AttachmentIntrodurces) {
+	public static String getAttachments(List<Attachment> AttachmentIntrodurces){
+		String attachmentIntroduces =null;
+		for (Attachment Introdurce:AttachmentIntrodurces) {
+			attachmentIntroduces+=Introdurce.getCaption()+"<br/>"+Introdurce.getLabel();
+		}
+		return attachmentIntroduces;
+	}
+	 public static  String writeWordManualFile(String saveWordPathDir,PatentDoc patentDoc,String fileName,List<Attachment> attachmentIntrodurces) {
 		    String saveWordPath=saveWordPathDir+"/"+ fileName;
 	        try {  
 
@@ -23,7 +29,7 @@ public class HTMLToWord {
 	                    String backTech=patentDoc.getBackgoundTech();
 	                    String content=patentDoc.getContent();
 	                    String implementWay=patentDoc.getImplementWay();
-
+	                    String attachmentIntroduces = getAttachments(attachmentIntrodurces);
 	                    String content2="<html>";
 	                    content2+="<div style=\"text-align: center\"><span style=\"font-size: 24px\"><span style=\"font-family: 黑体\">"       
 	                            +name+"<br /> <br /> </span></span></div>";
@@ -34,7 +40,7 @@ public class HTMLToWord {
 	                    content2+="<div style=\"text-align: left\"><span style=\"font-family: 黑体\">发明内容</span><br/><span >"       
 	                            +content+"<br /> <br /> </span></span></div>";
 	                    content2+="<div style=\"text-align: left\"><span style=\"font-family: 黑体\">附图说明</span><br/><span >"       
-	                            +implementWay+"<br /> <br /> </span></span></div>";
+	                            +attachmentIntroduces+"<br /> <br /> </span></span></div>";
 	                    content2+="<div style=\"text-align: left\"><span style=\"font-family: 黑体\">具体实施方式</span><br/><span >"       
 	                            +implementWay+"<br /> <br /> </span></span></div>";
 	                    

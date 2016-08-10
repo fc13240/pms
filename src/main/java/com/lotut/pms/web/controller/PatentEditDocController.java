@@ -290,8 +290,7 @@ public class PatentEditDocController {
 		 PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
 		 
 		 List<Attachment> AttachmentIntrodurces=patentDocService.getAttachmentById(patentDocId);
-		 
-		 
+
 		 SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 		 String contentName = df.format(new Date()) + "_" + new Random().nextInt(1000);
 		 String patentExportWord = Settings.PATENT_EXPORT_WORD_NAME;
