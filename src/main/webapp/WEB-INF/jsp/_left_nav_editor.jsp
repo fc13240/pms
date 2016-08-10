@@ -4,6 +4,12 @@
 	
 	<ul style="maring:0px;padding:0px;">
 	<li class="active"> 
+		<a href="<s:url value='/editor/newPatentType.html'/>">
+		<h5>新建专利</h5>
+		</a>
+	</li>	
+	<!-- 
+	<li class="active"> 
 		<a href="<s:url value='/editor/newPatentDoc.html'/>?patentType=1">
 		<h5>新建发明</h5>
 		</a>
@@ -19,6 +25,6 @@
 		<h5>新建外观设计</h5>
 		</a>
 	</li>
- 			
+ 	 -->		
 	</ul>
 </div>
