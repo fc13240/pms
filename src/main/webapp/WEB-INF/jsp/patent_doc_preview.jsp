@@ -160,7 +160,7 @@
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
 			</div>
-				<<br/>
+				<br/>
 				
 					<div class="pre_text">
 						<ul class="picL" id="picLsy" >
