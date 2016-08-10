@@ -57,7 +57,12 @@ public class PatentEditDocController {
 		this.patentDocService = patentDocService;
 		this.patentDocumentTemplateService = patentDocumentTemplateService;
 	}
-	
+
+	@RequestMapping(path="/newPatentType")
+	public String newPatentTypeForm(Model model){
+			
+			return "patent_doc_type_list";
+	}
 
 	@RequestMapping(path="/newPatentDoc")
 	public String inventionEditorForm(@RequestParam("patentType")int patentType, PatentDoc patentDoc,Model model){

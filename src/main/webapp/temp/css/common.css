@@ -261,3 +261,105 @@ border-color: inherit;
 .search-table tr td{
 	padding:2px;
 }
+
+.list-app {
+width: 262px;
+padding-top: 133px;
+float: left;
+margin-right: 40px;
+background: rgb(247, 247, 247);
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+transition: all .3s ease-in;
+position: relative;
+-webkit-box-shadow: 0 3px 2px rgb(240, 240, 240);
+-moz-box-shadow: 0 3px 2px rgb(240, 240, 240);
+box-shadow: 0 3px 2px rgb(240, 240, 240);
+}
+.list-app i {
+position: absolute;
+top: 25px;
+left: 50%;
+-webkit-transform: translateX(-50%);
+-moz-transform: translateX(-50%);
+-ms-transform: translateX(-50%);
+transform: translateX(-50%);
+}
+.apply-four li:nth-child(1) i {
+background: url(../images/icon_index.png) -14px 0 no-repeat;
+}
+.apply-four li:nth-child(2) i {
+  background: url(../images/icon_index.png) -186px 0 no-repeat;
+}
+.apply-four li:nth-child(3) i {
+  background: url(../images/icon_index.png) -348px 0 no-repeat;
+}
+.apply-four li:nth-child(4) i {
+  background: url(../images/icon_index.png) -470px 0 no-repeat;
+}
+.list-app h5 {
+text-align: center;
+font-size: 22px;
+color: rgb(94, 104, 119);
+padding-bottom: 14px;
+}
+.list-app .apply-price {
+color: rgb(156, 163, 175);
+text-align: center;
+padding-bottom: 10px;
+height: 34px;
+}
+.list-app .apply-des {
+padding: 0 40px;
+font-size: 14px;
+text-align: center;
+color: rgb(94, 104, 119);
+line-height: 1.5;
+}
+.index-btn {
+text-decoration: none;
+display: block;
+margin: 0 auto;
+margin-top: 14px;
+width: 156px;
+line-height: 40px;
+text-align: center;
+background: rgb(27, 184, 182);
+border: none;
+margin-bottom: 21px;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+color: rgb(255, 255, 255);
+opacity: .8;
+filter: alpha(opacity=80);
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+transition: all .3s ease-in;
+}
+.apply-four li:hover {
+  background: rgb(229, 239, 240);
+  -webkit-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  transition: all .3s ease-in;
+}
+
+.apply-four li:hover .index-btn {
+  -webkit-transition: background .3s ease-in;
+  -moz-transition: background .3s ease-in;
+  transition: background .3s ease-in;
+  background: rgb(255, 131, 131);
+}
+
+.apply-four li:nth-child(1):hover i {
+  background:  url(../images/icon_index.png) -100px 0 no-repeat;
+}
+.apply-four li:nth-child(2):hover i {
+  background:  url(../images/icon_index.png) -267px 0 no-repeat;
+}
+.apply-four li:nth-child(3):hover i {
+  background:  url(../images/icon_index.png) -409px 0 no-repeat;
+}
+.apply-four li:nth-child(4):hover i {
+  background:  url(../images/icon_index.png) -549px 0 no-repeat;
+}
