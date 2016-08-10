@@ -54,4 +54,13 @@ public class DocUtil {
     	   dataMap.put("name", "<span style=\"color:red;\">标题</span>");
     	   doc.createDoc(dataMap,"resume","d:/Tmpl.doc");
 	}
+       
+       public  String txtContent(String content) {  
+           
+  		 String txtcontent = content.replaceAll("</?[^>]+>", ""); //剔出<html>的标签  
+           txtcontent = txtcontent.replace("&nbsp;", " ");
+           txtcontent.replaceAll("<a>\\s*|\t|\r|</a>", "");//去除字符串中的空格,回车,换行符,制表符  
+           txtcontent=txtcontent.replaceAll("(<(\\/)?p>)|\\s", "\n");
+           return txtcontent;
+  	 }
 }
