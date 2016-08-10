@@ -320,23 +320,24 @@ public class PatentEditDocController {
 			e.printStackTrace();
 		}
 		
-		String fileName=contentName+".zip";
-		response.setContentType("multipart/form-data");
-		response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
-		File wordFile = new File(zipPath);
-		int BUFFER_SIZE = 8192;
-		byte[] buffer = new byte[BUFFER_SIZE];
-		try (OutputStream out = response.getOutputStream(); 
-				BufferedInputStream bis = new BufferedInputStream(new FileInputStream(wordFile))) {
-			int bytesRead = -1;
-			while ((bytesRead = bis.read(buffer)) != -1) {
-				out.write(buffer, 0, bytesRead);
+			String fileName=contentName+".zip";
+			response.setContentType("multipart/form-data");
+			response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
+			File wordFile = new File(zipPath);
+			int BUFFER_SIZE = 8192;
+			byte[] buffer = new byte[BUFFER_SIZE];
+			try (OutputStream out = response.getOutputStream(); 
+					BufferedInputStream bis = new BufferedInputStream(new FileInputStream(wordFile))) {
+				int bytesRead = -1;
+				while ((bytesRead = bis.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesRead);
+				}
+				bis.close();
+				out.close();
+				out.flush();
+				
 			}
-			bis.close();
-			out.close();
-			out.flush();
-
-		}
+			HTMLToWord.deleteDir(new File(saveWordPathDir));
 		}catch(Exception e){
 			e.printStackTrace();
 		}

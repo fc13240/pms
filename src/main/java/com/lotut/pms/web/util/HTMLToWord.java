@@ -1,6 +1,7 @@
 package com.lotut.pms.web.util;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -198,5 +199,19 @@ public class HTMLToWord {
 	            e.printStackTrace();  
 	      }  
 	      return saveWordPath;  
-	    }  
+	    }
+	 
+	 public static  boolean deleteDir(File dir) {
+	        if (dir.isDirectory()) {
+	            String[] children = dir.list();
+	            for (int i=0; i<children.length; i++) {
+	                boolean success = deleteDir(new File(dir, children[i]));
+	                if (!success) {
+	                    return false;
+	                }
+	            }
+	        }
+	        // 目录此时为空，可以删除
+	        return dir.delete();
+	    }
 }
