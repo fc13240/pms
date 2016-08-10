@@ -315,10 +315,9 @@ public class PatentEditDocController {
 		} catch (ZipException e) {
 			e.printStackTrace();
 		}
+		String fileName=contentName+".zip";
 		response.setContentType("application/x-msdownload");
-		response.setCharacterEncoding("utf-8");
-		response.setHeader("Content-Disposition", "attachment;filename=" + contentName+".zip");
-		response.setHeader("X-FRAME-OPTIONS", "SAMEORIGIN");
+		response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
 		File wordFile = new File(zipPath);
 		int BUFFER_SIZE = 8192;
 		byte[] buffer = new byte[BUFFER_SIZE];
