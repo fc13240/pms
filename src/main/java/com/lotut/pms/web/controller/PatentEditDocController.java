@@ -280,13 +280,17 @@ public class PatentEditDocController {
 	}
 	
 	@RequestMapping(path="/exportWord")
-	public void exportWord(@RequestParam("patentDocId")long patentDocId,PrintWriter writer,HttpServletRequest reqeust, HttpServletResponse response) throws IOException{
+	public void exportWord(@RequestParam("patentDocId")long patentDocId,HttpServletRequest reqeust, HttpServletResponse response) {
+		try{
 		String manualFileName = "说明书" +".doc";
 		String rightFileName = "权利要求书"+ ".doc";
 		String manualAbstractFileName = "说明书摘要"  + ".doc";
 		String manualImgFileName = "说明书附图" + ".doc";
 		String abstractFileName = "摘要附图" + ".doc";
 		 PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
+		 
+		 List<Attachment> AttachmentIntrodurces=patentDocService.getAttachmentById(patentDocId);
+
 		 SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 		 String contentName = df.format(new Date()) + "_" + new Random().nextInt(1000);
 		 String patentExportWord = Settings.PATENT_EXPORT_WORD_NAME;
@@ -295,7 +299,7 @@ public class PatentEditDocController {
 		 if (!dirFile.exists()) {
 				dirFile.mkdirs();
 		 }
-		HTMLToWord.writeWordManualFile(saveWordPathDir,patentDoc, manualFileName);
+		HTMLToWord.writeWordManualFile(saveWordPathDir,patentDoc, manualFileName,AttachmentIntrodurces);
 		HTMLToWord.writeWordRightFile(saveWordPathDir,patentDoc, rightFileName);
 		HTMLToWord.writeWordManualAbstractFile(saveWordPathDir,patentDoc, manualAbstractFileName);
 		HTMLToWord.writeWordManualAttachmentFile(saveWordPathDir,patentDoc, manualImgFileName);
@@ -315,22 +319,28 @@ public class PatentEditDocController {
 		} catch (ZipException e) {
 			e.printStackTrace();
 		}
-		String fileName=contentName+".zip";
-		response.setContentType("application/x-msdownload");
-		response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
-		File wordFile = new File(zipPath);
-		int BUFFER_SIZE = 8192;
-		byte[] buffer = new byte[BUFFER_SIZE];
-		try (OutputStream out = response.getOutputStream(); 
-				BufferedInputStream bis = new BufferedInputStream(new FileInputStream(wordFile))) {
-			int bytesRead = -1;
-			while ((bytesRead = bis.read(buffer)) != -1) {
-				out.write(buffer, 0, bytesRead);
-			}
-			out.flush();
-
-		}
 		
+			String fileName=contentName+".zip";
+			response.setContentType("multipart/form-data");
+			response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
+			File wordFile = new File(zipPath);
+			int BUFFER_SIZE = 8192;
+			byte[] buffer = new byte[BUFFER_SIZE];
+			try (OutputStream out = response.getOutputStream(); 
+					BufferedInputStream bis = new BufferedInputStream(new FileInputStream(wordFile))) {
+				int bytesRead = -1;
+				while ((bytesRead = bis.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesRead);
+				}
+				bis.close();
+				out.close();
+				out.flush();
+				
+			}
+			HTMLToWord.deleteDir(new File(saveWordPathDir));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	
