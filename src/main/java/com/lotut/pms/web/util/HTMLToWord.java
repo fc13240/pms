@@ -62,7 +62,7 @@ public class HTMLToWord {
 	 public static String writeWordFileExam(PatentDoc patentDoc) {  
 	        //boolean w = false;
 	        //String exportExcelPath = Settings.TEMP_DIR + fileName;
-	        String path = Settings.TEMP_DIR;  
+	        String path = Settings.PATENT_EXPORT_WORD_NAME;  
 	        try {  
 	            if (!"".equals(path)) {  
 	                // 检查目录是否存在  

@@ -7,4 +7,5 @@ public interface Settings {
 	final String TEMP_DIR = "/tmp/";
 	final String FEE_EXPORT_EXCEL_TEMPLATE = "/template/国内申请号支付模板.xls";
 	final String FEE_EXPORT_EXCEL_SHEET_NAME = "国家申请号缴费";
+	final String PATENT_EXPORT_WORD_NAME = "/opt/media/word/";
 }
