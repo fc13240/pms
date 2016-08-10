@@ -143,10 +143,8 @@
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
 			</div>
-			<div class="pre_text" id="div_4">${patentDoc.contentProblem }</div>
-			<div class="pre_text" id="div_4">${patentDoc.contentRight }</div>
-			<div class="pre_text" id="div_4">${patentDoc.contentEffect }</div>
-			
+			<div class="pre_text" id="div_4">${patentDoc.content}</div>
+		
 			<div class="tit_top">
 				<div class="pre_title">具体实施方式</div>
 				<%-- <div class="pre_clo">
