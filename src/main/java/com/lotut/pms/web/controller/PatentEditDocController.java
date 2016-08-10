@@ -38,6 +38,7 @@ import com.lotut.pms.domain.User;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.CreateWord;
 import com.lotut.pms.web.util.HTMLToWord;
 import com.lotut.pms.web.util.WebUtils;
 
@@ -304,7 +305,7 @@ public class PatentEditDocController {
 		 if (!dirFile.exists()) {
 				dirFile.mkdirs();
 		 }
-		HTMLToWord.writeWordManualFile(saveWordPathDir,patentDoc, manualFileName,AttachmentIntrodurces);
+		CreateWord.writeWordManualFile(saveWordPathDir,patentDoc, manualFileName,AttachmentIntrodurces);
 		HTMLToWord.writeWordRightFile(saveWordPathDir,patentDoc, rightFileName);
 		HTMLToWord.writeWordManualAbstractFile(saveWordPathDir,patentDoc, manualAbstractFileName);
 		HTMLToWord.writeWordManualAttachmentFile(saveWordPathDir,patentDoc, manualImgFileName);
