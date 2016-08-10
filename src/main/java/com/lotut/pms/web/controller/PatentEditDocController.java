@@ -280,17 +280,17 @@ public class PatentEditDocController {
 		User user = PrincipalUtils.getCurrentPrincipal();
 		String exportFileName = user.getUsername() + System.currentTimeMillis() + ".doc";
 		PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
-		String exportExcelPath =HTMLToWord.writeWordFile(patentDoc, exportFileName);
+		String exportWordPath =HTMLToWord.writeWordFile(patentDoc, exportFileName);
 		
 		
-		File excelFile = new File(exportExcelPath);
-		response.setContentLength((int)excelFile.length());
+		File wordFile = new File(exportWordPath);
+		response.setContentLength((int)wordFile.length());
 		response.setHeader("Content-Disposition", "attachment;filename=" + exportFileName);
 		
 		int BUFFER_SIZE = 8192;
 		byte[] buffer = new byte[BUFFER_SIZE];
 		try (OutputStream out = response.getOutputStream(); 
-				BufferedInputStream bis = new BufferedInputStream(new FileInputStream(excelFile))) {
+				BufferedInputStream bis = new BufferedInputStream(new FileInputStream(wordFile))) {
 			int bytesRead = -1;
 			while ((bytesRead = bis.read(buffer)) != -1) {
 				out.write(buffer, 0, bytesRead);
