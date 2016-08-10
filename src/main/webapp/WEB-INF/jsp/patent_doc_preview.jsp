@@ -69,6 +69,19 @@
 		color: #666;
 		font-size: 14px;
 	}
+	
+	.pre_picture1{
+		clear: both;
+		margin: 15px 40px;
+		width: 810px;
+		line-height: 28px;
+		text-indent: 0em;
+		text-align: left;
+		overflow: auto;
+		color: #666;
+		font-size: 14px;
+	
+	}
 </style>
 </head>
 <body style="background-color: #FFF;" id="dlstCircleArticle">
@@ -162,7 +175,7 @@
 			</div>
 				<br/>
 				
-					<div class="pre_text">
+					<div class="pre_picture1">
 						<ul class="picL" id="picLsy" >
 							<c:forEach items="${Attachments}" var="Attachment">
 								<li>
