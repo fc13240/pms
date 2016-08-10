@@ -30,7 +30,7 @@ public class HTMLToWord {
 	 public static  String writeWordManualFile(String saveWordPathDir,PatentDoc patentDoc,String fileName,List<Attachment> attachmentIntrodurces) {
 		    String saveWordPath=saveWordPathDir+"/"+ fileName;
 	        try {  
-			        	InputStream is = new FileInputStream(Settings.EXPORT_WORD_TEMPLATE);  
+			        	InputStream is = new FileInputStream(Settings.WORD_MANUAL_TEMPLATE);  
 			            WordExtractor extractor = new WordExtractor(is);
 			            String header=extractor.getHeaderText();
 			            String footer=extractor.getFooterText();
@@ -58,7 +58,7 @@ public class HTMLToWord {
 	                            +attachmentIntroduces+"<br /> <br /> </span></span></div>";
 	                    content2+="<div style=\"text-align: left\"><span style=\"font-family: 黑体\">具体实施方式</span><br/><span >"       
 	                            +implementWay+"<br /> <br /> </span></span></div>";
-	                    content2+="<div style=\"text-align: center\"><span style=\"font-size: 18px\"><span style=\"font-family: 黑体\">" +      
+	                    content2+="<div style=\"text-align: left\"><span style=\"font-size: 18px\"><span style=\"font-family: 黑体\">" +      
 	                    		footer+"<br /> <br /> </span></span></div>";
 	                    content2 += "</html>";
 	                    byte b[] = content2.getBytes("UTF-8");
@@ -81,20 +81,20 @@ public class HTMLToWord {
 	 public static String writeWordRightFile(String saveWordPathDir,PatentDoc patentDoc,String fileName) {
 		    String saveWordPath=saveWordPathDir+"/"+ fileName;
 	        try {   
-	                    String name=patentDoc.getName();
-	                    String techDomain=patentDoc.getTechDomain();
-	                    String backTech=patentDoc.getBackgoundTech();
-	                    String content=patentDoc.getContent();
-	                    String implementWay=patentDoc.getImplementWay();
+			        	InputStream is = new FileInputStream(Settings.WORD_RIGHT_TEMPLATE);  
+			            WordExtractor extractor = new WordExtractor(is);
+			            String header=extractor.getHeaderText();
+			            String footer=extractor.getFooterText();
+	            
 	                    String rightClaim=patentDoc.getRightClaim();
-	                    String abstractDescription=patentDoc.getAbstractDescription();
-	                    String content1 = "<html><head style=\"text-align: center\">"+name+"</head><div style=\"text-align: center\"><span style=\"font-size: 12px\"><span style=\"font-family: 宋体\">" +
-	                    		"<br /> <br />"+"技术领域"+"<br /> <br />"+techDomain+
-	                    					"<br /> <br />"+"背景技术"+"<br /> <br />"+backTech+
-	                    					"<br /> <br />"+"发明内容"+"<br /> <br />"+content+
-	                    					"<br /> <br />"+"附图说明"+"<br /> <br />"+"null"+
-	                    					"实施方式"+"<br /> <br />"+implementWay+
-	                    		            "<br /> <br /> </span></span></div></html>";
+	                    String content="<html>";
+	                    content+="<div style=\"text-align: center\"><span style=\"font-size: 18px\"><span style=\"font-family: 黑体\">" +      
+	                    		header+"<br /> <br /> </span></span></div>";
+	                    content+="<div style=\"text-align: left\"><span >"       
+	                            +rightClaim+"<br /> <br /> </span></span></div>";
+	                    content+="<div style=\"text-align: left\"><span style=\"font-size: 18px\"><span style=\"font-family: 黑体\">" +      
+	                    		footer+"<br /> <br /> </span></span></div>";
+	                    content += "</html>";
 	                    byte b[] = content.getBytes("UTF-8");
 	                    
 	                    ByteArrayInputStream bais = new ByteArrayInputStream(b);  
@@ -117,20 +117,20 @@ public class HTMLToWord {
 	 public static String writeWordManualAbstractFile(String saveWordPathDir,PatentDoc patentDoc,String fileName) {
 		    String saveWordPath=saveWordPathDir+"/"+ fileName;
 	        try {   
-	                    String name=patentDoc.getName();
-	                    String techDomain=patentDoc.getTechDomain();
-	                    String backTech=patentDoc.getBackgoundTech();
-	                    String content=patentDoc.getContent();
-	                    String implementWay=patentDoc.getImplementWay();
-	                    String rightClaim=patentDoc.getRightClaim();
+			        	InputStream is = new FileInputStream(Settings.WORD_MANUAL_ABSTRACT_TEMPLATE);  
+			            WordExtractor extractor = new WordExtractor(is);
+			            String header=extractor.getHeaderText();
+			            String footer=extractor.getFooterText();
+	        			
 	                    String abstractDescription=patentDoc.getAbstractDescription();
-	                    String content1 = "<html><head style=\"text-align: center\">"+name+"</head><div style=\"text-align: center\"><span style=\"font-size: 12px\"><span style=\"font-family: 宋体\">" +
-	                    		"<br /> <br />"+"技术领域"+"<br /> <br />"+techDomain+
-	                    					"<br /> <br />"+"背景技术"+"<br /> <br />"+backTech+
-	                    					"<br /> <br />"+"发明内容"+"<br /> <br />"+content+
-	                    					"<br /> <br />"+"附图说明"+"<br /> <br />"+"null"+
-	                    					"实施方式"+"<br /> <br />"+implementWay+
-	                    		            "<br /> <br /> </span></span></div></html>";
+	                    String content="<html>";
+	                    content+="<div style=\"text-align: center\"><span style=\"font-size: 18px\"><span style=\"font-family: 黑体\">" +      
+	                    		header+"<br /> <br /> </span></span></div>";
+	                    content+="<div style=\"text-align: left\"><span >"       
+	                            +abstractDescription+"<br /> <br /> </span></span></div>";
+	                    content+="<div style=\"text-align: left\"><span style=\"font-size: 18px\"><span style=\"font-family: 黑体\">" +      
+	                    		footer+"<br /> <br /> </span></span></div>";
+	                    content += "</html>";
 	                    byte b[] = content.getBytes("UTF-8");
 	                    
 	                    ByteArrayInputStream bais = new ByteArrayInputStream(b);  
@@ -152,20 +152,20 @@ public class HTMLToWord {
 	 public static String writeWordManualAttachmentFile(String saveWordPathDir,PatentDoc patentDoc,String fileName) {
 		    String saveWordPath=saveWordPathDir+"/"+ fileName;
 	        try {  
-	                    String name=patentDoc.getName();
-	                    String techDomain=patentDoc.getTechDomain();
-	                    String backTech=patentDoc.getBackgoundTech();
-	                    String content=patentDoc.getContent();
-	                    String implementWay=patentDoc.getImplementWay();
-	                    String rightClaim=patentDoc.getRightClaim();
-	                    String abstractDescription=patentDoc.getAbstractDescription();
-	                    String content1 = "<html><head style=\"text-align: center\">"+name+"</head><div style=\"text-align: center\"><span style=\"font-size: 12px\"><span style=\"font-family: 宋体\">" +
-	                    		"<br /> <br />"+"技术领域"+"<br /> <br />"+techDomain+
-	                    					"<br /> <br />"+"背景技术"+"<br /> <br />"+backTech+
-	                    					"<br /> <br />"+"发明内容"+"<br /> <br />"+content+
-	                    					"<br /> <br />"+"附图说明"+"<br /> <br />"+"null"+
-	                    					"实施方式"+"<br /> <br />"+implementWay+
-	                    		            "<br /> <br /> </span></span></div></html>";
+			        	InputStream is = new FileInputStream(Settings.WORD_MANUAL_ATTACHMENT_TEMPLATE);  
+			            WordExtractor extractor = new WordExtractor(is);
+			            String header=extractor.getHeaderText();
+			            String footer=extractor.getFooterText();
+			            
+	                    String Img=null;
+	                    String content="<html>";
+	                    content+="<div style=\"text-align: center\"><span style=\"font-size: 18px\"><span style=\"font-family: 黑体\">" +      
+	                    		header+"<br /> <br /> </span></span></div>";
+	                    content+="<div style=\"text-align: left\"><span >"       
+	                            +Img+"<br /> <br /> </span></span></div>";
+	                    content+="<div style=\"text-align: left\"><span style=\"font-size: 18px\"><span style=\"font-family: 黑体\">" +      
+	                    		footer+"<br /> <br /> </span></span></div>";
+	                    content += "</html>";
 	                    byte b[] = content.getBytes("UTF-8");
 	                    
 	                    ByteArrayInputStream bais = new ByteArrayInputStream(b);  
@@ -186,20 +186,20 @@ public class HTMLToWord {
 	 public static String writeWordAbstractImgFile(String saveWordPathDir,PatentDoc patentDoc,String fileName) {
 		    String saveWordPath=saveWordPathDir+"/"+fileName;
 	        try {  
-	                    String name=patentDoc.getName();
-	                    String techDomain=patentDoc.getTechDomain();
-	                    String backTech=patentDoc.getBackgoundTech();
-	                    String content=patentDoc.getContent();
-	                    String implementWay=patentDoc.getImplementWay();
-	                    String rightClaim=patentDoc.getRightClaim();
-	                    String abstractDescription=patentDoc.getAbstractDescription();
-	                    String content1 = "<html><head style=\"text-align: center\">"+name+"</head><div style=\"text-align: center\"><span style=\"font-size: 12px\"><span style=\"font-family: 宋体\">" +
-	                    		"<br /> <br />"+"技术领域"+"<br /> <br />"+techDomain+
-	                    					"<br /> <br />"+"背景技术"+"<br /> <br />"+backTech+
-	                    					"<br /> <br />"+"发明内容"+"<br /> <br />"+content+
-	                    					"<br /> <br />"+"附图说明"+"<br /> <br />"+"null"+
-	                    					"实施方式"+"<br /> <br />"+implementWay+
-	                    		            "<br /> <br /> </span></span></div></html>";
+			        	InputStream is = new FileInputStream(Settings.WORD_ABSTRACTIMG_TEMPLATE);  
+			            WordExtractor extractor = new WordExtractor(is);
+			            String header=extractor.getHeaderText();
+			            String footer=extractor.getFooterText();
+			            
+		                String Img=null;
+		                String content="<html>";
+		                content+="<div style=\"text-align: center\"><span style=\"font-size: 18px\"><span style=\"font-family: 黑体\">" +      
+		                		header+"<br /> <br /> </span></span></div>";
+		                content+="<div style=\"text-align: left\"><span >"       
+		                        +Img+"<br /> <br /> </span></span></div>";
+		                content+="<div style=\"text-align: left\"><span style=\"font-size: 18px\"><span style=\"font-family: 黑体\">" +      
+		                		footer+"<br /> <br /> </span></span></div>";
+		                content += "</html>";
 	                    byte b[] = content.getBytes("UTF-8");
 	                    
 	                    ByteArrayInputStream bais = new ByteArrayInputStream(b);  
