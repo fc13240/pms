@@ -1,6 +1,6 @@
 package com.lotut.pms.web.util;
 
-public class Test {
+public class Innercoding {
 	public static String leftPading(String strSrc,String flag,int strSrcLength) {
         String strReturn = "";
         String strtemp = "";
