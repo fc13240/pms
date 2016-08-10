@@ -272,18 +272,22 @@ public class PatentEditDocController {
 	
 	@RequestMapping(path="/exportWord")
 	public void exportWord(@RequestParam("patentDocId")long patentDocId,PrintWriter writer,HttpServletRequest reqeust, HttpServletResponse response) throws IOException{
-		/*
 		
 		response.setContentType("application/vnd.ms-word");
 		response.setHeader("X-FRAME-OPTIONS", "SAMEORIGIN");
-
-		User user = PrincipalUtils.getCurrentPrincipal();
-		String exportFileName = user.getUsername() + System.currentTimeMillis() + ".doc";
+		String manualFileName = "说明书_" + System.currentTimeMillis() + ".doc";
+		String rightFileName = "权利要求书" + System.currentTimeMillis() + ".doc";
+		String manualAbstractFileName = "说明书摘要" + System.currentTimeMillis() + ".doc";
+		String manualImgFileName = "说明书附图" + System.currentTimeMillis() + ".doc";
+		String abstractFileName = "摘要附图" + System.currentTimeMillis() + ".doc";
 		PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
-		String exportWordPath =HTMLToWord.writeWordFile(patentDoc, exportFileName);
+		String manualFilePath =HTMLToWord.writeWordManualFile(patentDoc, manualFileName);
+		String rightFilePath =HTMLToWord.writeWordRightFile(patentDoc, rightFileName);
+		String manualAbstractFilePath =HTMLToWord.writeWordManualAbstractFile(patentDoc, manualAbstractFileName);
+		String manualImgFilePath =HTMLToWord.writeWordManualAttachmentFile(patentDoc, manualImgFileName);
+		String abstractFilePath =HTMLToWord.writeWordAbstractImgFile(patentDoc, abstractFileName);
 		
-		
-		File wordFile = new File(exportWordPath);
+		/*File wordFile = new File(exportWordPath);
 		response.setContentLength((int)wordFile.length());
 		response.setHeader("Content-Disposition", "attachment;filename=" + exportFileName);
 		
@@ -299,9 +303,6 @@ public class PatentEditDocController {
 
 		}*/
 		
-		PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
-		HTMLToWord.writeWordFileExam(patentDoc);
-		writer.write(1);
 	}
 	//预览编辑功能
 /*	@RequestMapping(path="/compilePatentDoc",method=RequestMethod.GET)

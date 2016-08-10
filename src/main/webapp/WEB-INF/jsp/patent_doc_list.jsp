@@ -198,19 +198,19 @@ table td a {
 <iframe id="patentWorkFileFrame" style="display:none"></iframe>	
 <script type="text/javascript">
 	 function exportWord(value){
-		  $.ajax({
+ 		  $.ajax({
 			 type : "POST",
 			 url : "<s:url value='/editor/exportWord.html'/>?patentDocId="+value,
 			 data : {"patentDocId":value},
 			 success : function (data){
-				 alert("导出成功");
+				 alert(data);
 			 },error : function (){
 				 
 			 }
-		 });
-		/*  
-		 var iframe = document.getElementById('patentWorkFileFrame');
-		iframe.src = "<s:url value='/editor/exportWord.html'/>?patentDocId="+value; */
+		 }); 
+		  
+		 /* var iframe = document.getElementById('patentWorkFileFrame');
+		iframe.src = "<s:url value='/editor/exportWord.html'/>?patentDocId="+value;  */
 		 
 	}
 
