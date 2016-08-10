@@ -19,14 +19,23 @@ public class HTMLToWord {
 	                    String backTech=patentDoc.getBackgoundTech();
 	                    String content=patentDoc.getContent();
 	                    String implementWay=patentDoc.getImplementWay();
-	                    String content1 = "<html><head></head><div style=\"text-align: center\"><span style=\"font-size: 12px\"><span style=\"font-family: 宋体\">" +
-	                    		"<br /> <br />"+"技术领域"+"<br /> <br />"+techDomain+
-	                    					"<br /> <br />"+"背景技术"+"<br /> <br />"+backTech+
-	                    					"<br /> <br />"+"发明内容"+"<br /> <br />"+content+
-	                    					"<br /> <br />"+"附图说明"+"<br /> <br />"+"null"+
-	                    					"实施方式"+"<br /> <br />"+implementWay+
-	                    		            "<br /> <br /> </span></span></div></html>";
-	                    byte b[] = content1.getBytes("UTF-8");
+
+	                    String content2="<html>";
+	                    content2+="<div style=\"text-align: center\"><span style=\"font-size: 24px\"><span style=\"font-family: 黑体\">"       
+	                            +name+"<br /> <br /> </span></span></div>";
+	                    content2+="<div style=\"text-align: left\"><span style=\"font-family: 黑体\">技术领域</span><br/><span >"       
+	                            +techDomain+"<br /> <br /> </span></span></div>";
+	                    content2+="<div style=\"text-align: left\"><span style=\"font-family: 黑体\">背景技术</span><br/><span >"       
+	                            +backTech+"<br /> <br /> </span></span></div>";
+	                    content2+="<div style=\"text-align: left\"><span style=\"font-family: 黑体\">发明内容</span><br/><span >"       
+	                            +content+"<br /> <br /> </span></span></div>";
+	                    content2+="<div style=\"text-align: left\"><span style=\"font-family: 黑体\">附图说明</span><br/><span >"       
+	                            +implementWay+"<br /> <br /> </span></span></div>";
+	                    content2+="<div style=\"text-align: left\"><span style=\"font-family: 黑体\">具体实施方式</span><br/><span >"       
+	                            +implementWay+"<br /> <br /> </span></span></div>";
+	                    
+	                    content2 += "</html>";
+	                    byte b[] = content2.getBytes("UTF-8");
 	                    
 	                    ByteArrayInputStream bais = new ByteArrayInputStream(b);  
 	                    POIFSFileSystem poifs = new POIFSFileSystem();  
