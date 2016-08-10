@@ -272,7 +272,7 @@ public class PatentEditDocController {
 	
 	@RequestMapping(path="/exportWord")
 	public void exportWord(@RequestParam("patentDocId")long patentDocId,PrintWriter writer,HttpServletRequest reqeust, HttpServletResponse response) throws IOException{
-		
+		/*
 		
 		response.setContentType("application/vnd.ms-word");
 		response.setHeader("X-FRAME-OPTIONS", "SAMEORIGIN");
@@ -296,7 +296,12 @@ public class PatentEditDocController {
 				out.write(buffer, 0, bytesRead);
 			}
 			out.flush();
-		}
+
+		}*/
+		
+		PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
+		HTMLToWord.writeWordFileExam(patentDoc);
+		writer.write(1);
 	}
 	//预览编辑功能
 /*	@RequestMapping(path="/compilePatentDoc",method=RequestMethod.GET)
