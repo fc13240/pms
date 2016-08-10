@@ -46,12 +46,8 @@ public class DocUtil {
                      e.printStackTrace();
               }
        }
-       //替换html标签
-       public  String txtContent(String content) {  
-    	    String txtcontent = content.replaceAll("</?[^>]+>", "");
-    	     txtcontent = txtcontent.replaceAll("<a>\\s*|\t|\r|\n</a>", "");
-    	     return txtcontent;
-    	 }
+       
+
        
        
        public static void main(String[] args) {
@@ -61,8 +57,9 @@ public class DocUtil {
     	   doc.createDoc(dataMap,"resume","d:/Tmpl.doc");
 	}
        
+       
+     //替换html标签
        public  String txtContent(String content) {  
-           
   		 String txtcontent = content.replaceAll("</?[^>]+>", ""); //剔出<html>的标签  
            txtcontent = txtcontent.replace("&nbsp;", " ");
            txtcontent.replaceAll("<a>\\s*|\t|\r|</a>", "");//去除字符串中的空格,回车,换行符,制表符  
