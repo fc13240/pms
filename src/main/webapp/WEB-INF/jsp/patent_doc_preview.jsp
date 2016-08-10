@@ -202,7 +202,7 @@
 							"<span>"+"附图说明： "+obj.caption+"</span>"+
 							"<br/>"+"<br/>"+
 							"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+
-					        "<span>"+"标记说明: "+obj.caption+"</span>"
+					        "<span>"+"标记说明: "+obj.label+"</span>"
 					);
 					 
 				}
