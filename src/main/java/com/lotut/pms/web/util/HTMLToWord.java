@@ -17,7 +17,7 @@ import com.lotut.pms.domain.PatentDoc;
 
 public class HTMLToWord {
 
-	 public static String writeWordManualFile(String saveWordPathDir,PatentDoc patentDoc,String fileName) {
+	 public static  String writeWordManualFile(String saveWordPathDir,PatentDoc patentDoc,String fileName) {
 		    String saveWordPath=saveWordPathDir+"/"+ fileName;
 	        try {  
 
