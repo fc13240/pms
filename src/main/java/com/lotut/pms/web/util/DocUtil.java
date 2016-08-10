@@ -30,7 +30,7 @@ public class DocUtil {
                      //加载需要装填的模板
                      Template template  = null;
                      //加载模板文件
-                     configure.setClassForTemplateLoading(this.getClass(),"d:/");
+                     configure.setClassForTemplateLoading(this.getClass(),"/com/lotut/pms/web/util");
                      //设置对象包装器
                      configure.setObjectWrapper(new DefaultObjectWrapper());
                      //设置异常处理器
@@ -51,7 +51,7 @@ public class DocUtil {
        public static void main(String[] args) {
     	   DocUtil doc=new DocUtil();
     	   Map<String, Object> dataMap=new HashMap<>();
-    	   dataMap.put("${name}", "<span style=\"font-family: 黑体\">标题</span>");
+    	   dataMap.put("name", "<span style=\"color:red;\">标题</span>");
     	   doc.createDoc(dataMap,"resume","d:/Tmpl.doc");
 	}
 }
