@@ -332,19 +332,34 @@
 		</foreach>		 
 	</update>
 	
-	<select id="getUserNoticeCountByType" resultType="map">
+	<!-- <select id="getUserNoticeCountByType" resultType="map">
 		select p.patent_type patentType,count(*) noticeCount
 		  from notices n join patents p on n.patent = p.patent_id
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1) and n.process_status=1	
 		 GROUP BY p.patent_type
+	</select> -->
+	
+	<select id="getUserNoticeCountByType" resultType="map">
+		select p.patent_type patentType,count(*) noticeCount
+		  from notices n join patents p on n.patent = p.patent_id
+		  	left join patent_status ps on p.patent_status = ps.patent_status_id
+		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1)
+		 GROUP BY p.patent_type
 	</select>
 	
-	<select id="getUserNoticeCountByNoticeType" resultType="map">
+	<!-- <select id="getUserNoticeCountByNoticeType" resultType="map">
 		select n.notice_type noticeType,count(*) noticeCount
 		  from notices n join patents p on n.patent = p.patent_id
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1) and n.process_status=1	
+		 GROUP BY n.notice_type
+	</select> -->
+	<select id="getUserNoticeCountByNoticeType" resultType="map">
+		select n.notice_type noticeType,count(*) noticeCount
+		  from notices n join patents p on n.patent = p.patent_id
+		  	left join patent_status ps on p.patent_status = ps.patent_status_id
+		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1)
 		 GROUP BY n.notice_type
 	</select>
 	
@@ -364,7 +379,8 @@
 		 GROUP BY n.paper_apply_type
 	</select>
 	
-	<select id="getUserNoticeCountByRemainDay" resultType="map">
+	
+	<!-- <select id="getUserNoticeCountByRemainDay" resultType="map">
 		select 
 			case 
 			<![CDATA[when time_limit - datediff(curdate(), dispatch_date) < 0 then 1]]>
@@ -375,6 +391,20 @@
 		end as remain_day_type, count(*)
   		from notices n 
  		where n.patent in (select patent from user_patents where user =#{userid} and trash_status=1) and n.process_status=1
+ 		group by remain_day_type
+	</select>	 -->
+	
+	<select id="getUserNoticeCountByRemainDay" resultType="map">
+		select 
+			case 
+			<![CDATA[when time_limit - datediff(curdate(), dispatch_date) < 0 then 1]]>
+			when time_limit - datediff(curdate(), dispatch_date) between 0 and 7 then 2
+			when time_limit - datediff(curdate(), dispatch_date) between 8 and 14 then 3
+			when time_limit - datediff(curdate(), dispatch_date) between 15 and 30 then 4
+			else 5
+		end as remain_day_type, count(*)
+  		from notices n 
+ 		where n.patent in (select patent from user_patents where user =#{userid} and trash_status=1)
  		group by remain_day_type
 	</select>		
 </mapper>
