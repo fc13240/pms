@@ -8,4 +8,5 @@ public interface Settings {
 	final String FEE_EXPORT_EXCEL_TEMPLATE = "/template/国内申请号支付模板.xls";
 	final String FEE_EXPORT_EXCEL_SHEET_NAME = "国家申请号缴费";
 	final String PATENT_EXPORT_WORD_NAME = "/opt/media/word/";
+	final String EXPORT_WORD_TEMPLATE = "/opt/media/word/10002说明书.doc";
 }

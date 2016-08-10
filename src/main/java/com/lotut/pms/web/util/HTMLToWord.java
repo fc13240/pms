@@ -2,14 +2,20 @@ package com.lotut.pms.web.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.extractor.WordExtractor;
+import org.apache.poi.hwpf.usermodel.Range;
 import org.apache.poi.poifs.filesystem.DirectoryEntry;
 import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
+import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
 
@@ -24,7 +30,13 @@ public class HTMLToWord {
 	 public static  String writeWordManualFile(String saveWordPathDir,PatentDoc patentDoc,String fileName,List<Attachment> attachmentIntrodurces) {
 		    String saveWordPath=saveWordPathDir+"/"+ fileName;
 	        try {  
-
+			        	InputStream is = new FileInputStream(Settings.EXPORT_WORD_TEMPLATE);  
+			            WordExtractor extractor = new WordExtractor(is);
+			            String header=extractor.getHeaderText();
+			            String footer=extractor.getFooterText();
+			          
+			            
+			            
 	                    String name=patentDoc.getName();
 	                    String techDomain=patentDoc.getTechDomain();
 	                    String backTech=patentDoc.getBackgoundTech();
@@ -32,8 +44,10 @@ public class HTMLToWord {
 	                    String implementWay=patentDoc.getImplementWay();
 	                    String attachmentIntroduces = getAttachments(attachmentIntrodurces);
 	                    String content2="<html>";
-	                    content2+="<div style=\"text-align: center\"><span style=\"font-size: 24px\"><span style=\"font-family: 黑体\">"       
-	                            +name+"<br /> <br /> </span></span></div>";
+	                    content2+="<div style=\"text-align: center\"><span style=\"font-size: 18px\"><span style=\"font-family: 黑体\">" +      
+	                    		header+"<br /> <br /> </span></span></div>";
+	                    content2+="<div style=\"text-align: center\"><span style=\"font-size: 16px\"><span style=\"font-family: 黑体\">" +      
+	                    		name+"<br /> <br /> </span></span></div>";
 	                    content2+="<div style=\"text-align: left\"><span style=\"font-family: 黑体\">技术领域</span><br/><span >"       
 	                            +techDomain+"<br /> <br /> </span></span></div>";
 	                    content2+="<div style=\"text-align: left\"><span style=\"font-family: 黑体\">背景技术</span><br/><span >"       
@@ -44,7 +58,8 @@ public class HTMLToWord {
 	                            +attachmentIntroduces+"<br /> <br /> </span></span></div>";
 	                    content2+="<div style=\"text-align: left\"><span style=\"font-family: 黑体\">具体实施方式</span><br/><span >"       
 	                            +implementWay+"<br /> <br /> </span></span></div>";
-	                    
+	                    content2+="<div style=\"text-align: center\"><span style=\"font-size: 18px\"><span style=\"font-family: 黑体\">" +      
+	                    		footer+"<br /> <br /> </span></span></div>";
 	                    content2 += "</html>";
 	                    byte b[] = content2.getBytes("UTF-8");
 	                    
