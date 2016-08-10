@@ -3,14 +3,18 @@ package com.lotut.pms.web.util;
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
+
 import org.apache.poi.poifs.filesystem.DirectoryEntry;
 import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+
+import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
 
 public class HTMLToWord {
 
-	 public static  String writeWordManualFile(String saveWordPathDir,PatentDoc patentDoc,String fileName) {
+	 public static  String writeWordManualFile(String saveWordPathDir,PatentDoc patentDoc,String fileName,List<Attachment> AttachmentIntrodurces) {
 		    String saveWordPath=saveWordPathDir+"/"+ fileName;
 	        try {  
 

@@ -288,6 +288,10 @@ public class PatentEditDocController {
 		String manualImgFileName = "说明书附图" + ".doc";
 		String abstractFileName = "摘要附图" + ".doc";
 		 PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
+		 
+		 List<Attachment> AttachmentIntrodurces=patentDocService.getAttachmentById(patentDocId);
+		 
+		 
 		 SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 		 String contentName = df.format(new Date()) + "_" + new Random().nextInt(1000);
 		 String patentExportWord = Settings.PATENT_EXPORT_WORD_NAME;
@@ -296,7 +300,7 @@ public class PatentEditDocController {
 		 if (!dirFile.exists()) {
 				dirFile.mkdirs();
 		 }
-		HTMLToWord.writeWordManualFile(saveWordPathDir,patentDoc, manualFileName);
+		HTMLToWord.writeWordManualFile(saveWordPathDir,patentDoc, manualFileName,AttachmentIntrodurces);
 		HTMLToWord.writeWordRightFile(saveWordPathDir,patentDoc, rightFileName);
 		HTMLToWord.writeWordManualAbstractFile(saveWordPathDir,patentDoc, manualAbstractFileName);
 		HTMLToWord.writeWordManualAttachmentFile(saveWordPathDir,patentDoc, manualImgFileName);
