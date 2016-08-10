@@ -8,8 +8,11 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSectionType;
@@ -36,6 +40,11 @@ import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.HTMLToWord;
 import com.lotut.pms.web.util.WebUtils;
+
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
+import net.lingala.zip4j.model.ZipParameters;
+import net.lingala.zip4j.util.Zip4jConstants;
 
 @Controller
 @RequestMapping(path="/editor")
@@ -272,25 +281,45 @@ public class PatentEditDocController {
 	
 	@RequestMapping(path="/exportWord")
 	public void exportWord(@RequestParam("patentDocId")long patentDocId,PrintWriter writer,HttpServletRequest reqeust, HttpServletResponse response) throws IOException{
+		String manualFileName = "说明书" +".doc";
+		String rightFileName = "权利要求书"+ ".doc";
+		String manualAbstractFileName = "说明书摘要"  + ".doc";
+		String manualImgFileName = "说明书附图" + ".doc";
+		String abstractFileName = "摘要附图" + ".doc";
+		 PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
+		 SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+		 String contentName = df.format(new Date()) + "_" + new Random().nextInt(1000);
+		 String patentExportWord = Settings.PATENT_EXPORT_WORD_NAME;
+		 String saveWordPathDir=patentExportWord+contentName;
+		 File dirFile = new File(saveWordPathDir);
+		 if (!dirFile.exists()) {
+				dirFile.mkdirs();
+		 }
+		HTMLToWord.writeWordManualFile(saveWordPathDir,patentDoc, manualFileName);
+		HTMLToWord.writeWordRightFile(saveWordPathDir,patentDoc, rightFileName);
+		HTMLToWord.writeWordManualAbstractFile(saveWordPathDir,patentDoc, manualAbstractFileName);
+		HTMLToWord.writeWordManualAttachmentFile(saveWordPathDir,patentDoc, manualImgFileName);
+		HTMLToWord.writeWordAbstractImgFile(saveWordPathDir,patentDoc, abstractFileName);
+		String zipPath=saveWordPathDir+"/"+contentName+".zip";
+		try {
+			
+			ZipFile zipFile = new ZipFile(zipPath);
+			String folderToAdd = saveWordPathDir;
 		
-		response.setContentType("application/vnd.ms-word");
+			ZipParameters parameters = new ZipParameters();
+			
+			parameters.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
+			parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
+			zipFile.addFolder(folderToAdd, parameters);
+			zipFile.getFile().getName();
+		} catch (ZipException e) {
+			e.printStackTrace();
+		}
+		response.setContentType("application/x-msdownload");
+		response.setCharacterEncoding("utf-8");
+		response.setHeader("Content-Disposition", "attachment;filename=" + contentName+".zip");
 		response.setHeader("X-FRAME-OPTIONS", "SAMEORIGIN");
-		String manualFileName = "说明书_" + System.currentTimeMillis() + ".doc";
-		String rightFileName = "权利要求书" + System.currentTimeMillis() + ".doc";
-		String manualAbstractFileName = "说明书摘要" + System.currentTimeMillis() + ".doc";
-		String manualImgFileName = "说明书附图" + System.currentTimeMillis() + ".doc";
-		String abstractFileName = "摘要附图" + System.currentTimeMillis() + ".doc";
-		PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
-		String manualFilePath =HTMLToWord.writeWordManualFile(patentDoc, manualFileName);
-		String rightFilePath =HTMLToWord.writeWordRightFile(patentDoc, rightFileName);
-		String manualAbstractFilePath =HTMLToWord.writeWordManualAbstractFile(patentDoc, manualAbstractFileName);
-		String manualImgFilePath =HTMLToWord.writeWordManualAttachmentFile(patentDoc, manualImgFileName);
-		String abstractFilePath =HTMLToWord.writeWordAbstractImgFile(patentDoc, abstractFileName);
-		
-		/*File wordFile = new File(exportWordPath);
-		response.setContentLength((int)wordFile.length());
-		response.setHeader("Content-Disposition", "attachment;filename=" + exportFileName);
-		
+		File wordFile = new File(zipPath);
 		int BUFFER_SIZE = 8192;
 		byte[] buffer = new byte[BUFFER_SIZE];
 		try (OutputStream out = response.getOutputStream(); 
@@ -301,20 +330,10 @@ public class PatentEditDocController {
 			}
 			out.flush();
 
-		}*/
+		}
 		
 	}
-	//预览编辑功能
-/*	@RequestMapping(path="/compilePatentDoc",method=RequestMethod.GET)
-	public String  compilePatentDoc(@RequestParam("patentDocId")long patentDocId,@RequestParam("tab")int tab,Model model){
-		int userId=PrincipalUtils.getCurrentUserId();
-		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocId);
-		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
-		model.addAttribute("patent", patentDoc);
-		model.addAttribute("patentDocs", patentDocs);
-		model.addAttribute("tab", tab);
-		return "patentDoc_search2";
-	}*/
+	
 	
 	
 
