@@ -46,12 +46,14 @@ public class DocUtil {
                      e.printStackTrace();
               }
        }
-       
+       //替换html标签
        public  String txtContent(String content) {  
     	    String txtcontent = content.replaceAll("</?[^>]+>", "");
     	     txtcontent = txtcontent.replaceAll("<a>\\s*|\t|\r|\n</a>", "");
     	     return txtcontent;
     	 }
+       
+       
        public static void main(String[] args) {
     	   DocUtil doc=new DocUtil();
     	   Map<String, Object> dataMap=new HashMap<>();
