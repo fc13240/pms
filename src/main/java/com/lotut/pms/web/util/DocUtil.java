@@ -47,7 +47,11 @@ public class DocUtil {
               }
        }
        
-      
+       public  String txtContent(String content) {  
+    	    String txtcontent = content.replaceAll("</?[^>]+>", "");
+    	     txtcontent = txtcontent.replaceAll("<a>\\s*|\t|\r|\n</a>", "");
+    	     return txtcontent;
+    	 }
        public static void main(String[] args) {
     	   DocUtil doc=new DocUtil();
     	   Map<String, Object> dataMap=new HashMap<>();
