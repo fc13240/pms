@@ -345,7 +345,7 @@ public class PatentEditDocController {
 				out.flush();
 				
 			}
-			CreateWord.deleteDir(new File(saveWordPathDir));
+			//CreateWord.deleteDir(new File(saveWordPathDir));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
