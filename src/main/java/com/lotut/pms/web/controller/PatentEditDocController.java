@@ -296,7 +296,6 @@ public class PatentEditDocController {
 		String manualImgFileName = "说明书附图" + ".doc";
 		String abstractFileName = "摘要附图" + ".doc";
 		 PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
-		 
 		 List<Attachment> AttachmentIntrodurces=patentDocService.getAttachmentById(patentDocId);
 
 		 SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
