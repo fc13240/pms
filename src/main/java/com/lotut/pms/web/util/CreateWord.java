@@ -19,6 +19,7 @@ import org.apache.poi.hwpf.usermodel.Range;
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
+import com.sun.javafx.collections.MappingChange.Map;
 
 public class CreateWord {
 	
@@ -88,7 +89,20 @@ public class CreateWord {
             String abstractDescription=DocUtil.txtContent(patentDoc.getAbstractDescription());
             InputStream is = new FileInputStream(templatePath);  
 		    HWPFDocument doc = new HWPFDocument(is);  
-		    Range range = doc.getRange();  
+		    Range range = doc.getRange();
+		    
+		    
+		 /*   
+		    Map<String,Object> header = new HashMap<String, Object>();  
+	        header.put("width", 100);  
+	        header.put("height", 150);  
+	        header.put("type", "jpg");  
+	        header.put("content", WordUtil.inputStream2ByteArray(new FileInputStream("c:\\new.jpg"), true));  
+	        param.put("${header}",header);
+		    
+		    */
+		    
+		    
 		    range.replaceText("${manualAbstract}", abstractDescription);  
 		    OutputStream os = new FileOutputStream(saveWordPath);   
 		    doc.write(os);

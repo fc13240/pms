@@ -10,4 +10,15 @@ public class DocUtil {
            txtcontent=txtcontent.replaceAll("(<(\\/)?p>)|\\s", "\n");
            return txtcontent;
   	 }
+       
+      public static String ImagUrltoImagAddress(String imagUrl){
+    	  String imagAddress = null;
+    	  String[]  imagUrlArray=imagUrl.split("\\.");
+    	  imagAddress=imagUrlArray[0]+"."+imagUrlArray[1];
+    	  return imagAddress;
+      }
+      public static void main(String[] args) {
+    	  String imagUrl="/patentDocAttachment/image/20160810/20160810152445_708.jpg.html";
+    	  System.out.println(ImagUrltoImagAddress(imagUrl));
+	}
 }
