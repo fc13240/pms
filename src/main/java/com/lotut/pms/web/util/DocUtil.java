@@ -2,6 +2,17 @@ package com.lotut.pms.web.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
+import java.io.ByteArrayInputStream;  
+import java.util.Iterator;  
+import java.util.List;    
+import org.apache.poi.POIXMLDocument;  
+import org.apache.poi.openxml4j.opc.OPCPackage;  
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;  
+import org.apache.poi.xwpf.usermodel.XWPFRun;  
+import org.apache.poi.xwpf.usermodel.XWPFTable;  
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;  
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 public class DocUtil {
 
@@ -41,7 +52,12 @@ public class DocUtil {
                }  
            }  
            return byteArray;  
-       }  
+       }
+       
+       
+       
+
+       
    }    
        
        

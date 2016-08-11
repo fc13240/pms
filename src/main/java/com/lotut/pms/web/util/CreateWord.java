@@ -10,7 +10,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Range;
@@ -124,11 +126,18 @@ public class CreateWord {
 		    String saveWordPath=saveWordPathDir+"/"+fileName;
 	        try {  
 	        	String templatePath = Settings.WORD_ABSTRACTIMG_TEMPLATE;
-	        	String Img=null;
+	        	/*Map<String, Object> param = new HashMap<String, Object>();
+	        	Map<String,Object> abstractImg = new HashMap<String, Object>();  
+	        	abstractImg.put("width", 100);  
+	        	abstractImg.put("height", 150);  
+	        	abstractImg.put("type", "jpg");  
+	        	abstractImg.put("content", DocUtil.inputStream2ByteArray(new FileInputStream("c:\\new.jpg"), true));
+	            param.put("${abstractImg}",abstractImg);*/ 
+	            String abstractImg="";
 	            InputStream is = new FileInputStream(templatePath);  
 			    HWPFDocument doc = new HWPFDocument(is);  
 			    Range range = doc.getRange();  
-			    range.replaceText("${abstractImg}", Img);  
+			    range.replaceText("${abstractImg}", abstractImg);  
 			    OutputStream os = new FileOutputStream(saveWordPath);   
 			    doc.write(os);
 			    os.close();

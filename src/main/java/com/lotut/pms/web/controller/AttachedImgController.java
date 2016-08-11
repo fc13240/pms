@@ -21,7 +21,7 @@ import com.lotut.pms.web.util.WebUtils;
 public class AttachedImgController {
 private static final Logger LOGGER = Logger.getLogger(AttachedImgController.class);  
     
-    @RequestMapping(path="/patentDocAttachment/{fileType}/{uploadDate}/{fileName}.{suffix}.html")  
+    @RequestMapping(path="/attachmentImg/{fileType}/{uploadDate}/{fileName}.{suffix}.html")  
     public void attached(HttpServletRequest request, HttpServletResponse response,   
             @PathVariable String fileType,  
             @PathVariable String uploadDate,  
