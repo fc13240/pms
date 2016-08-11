@@ -1,8 +1,39 @@
 package com.lotut.pms.web.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.apache.poi.POIXMLDocument;
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.usermodel.Picture;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.util.IOUtils;
+import org.apache.poi.util.Units;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFPictureData;
+import java.io.ByteArrayInputStream;  
+import java.io.IOException;  
+import java.io.InputStream;  
+import java.util.Iterator;  
+import java.util.List;  
+import java.util.Map;  
+import java.util.Map.Entry;  
+import org.apache.poi.POIXMLDocument;  
+import org.apache.poi.openxml4j.opc.OPCPackage;  
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;  
+import org.apache.poi.xwpf.usermodel.XWPFRun;  
+import org.apache.poi.xwpf.usermodel.XWPFTable;  
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;  
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 public class DocUtil {
 
      /**
@@ -22,31 +53,18 @@ public class DocUtil {
     	  String imagAddress = null;
     	  String[]  imagUrlArray=imagUrl.split("\\.");
     	  imagAddress=imagUrlArray[0]+"."+imagUrlArray[1];
-    	  return imagAddress;
+    	  return "opt/media"+imagAddress;
       }
 
-       /** 
-        * 将输入流中的数据写入字节数组 
-        * @param in 
-        * @return 
-        */  
-       public static byte[] inputStream2ByteArray(InputStream in,boolean isClose){  
-           byte[] byteArray = null;  
-           try {  
-               int total = in.available();  
-               byteArray = new byte[total];  
-               in.read(byteArray);  
-           } catch (IOException e) {  
-               e.printStackTrace();  
-           }finally{  
-               if(isClose){  
-                   try {  
-                       in.close();  
-                   } catch (Exception e2) {  
-                       System.out.println("关闭流失败");  
-                   }  
-               }  
-           }  
-           return byteArray;  
+       
+
+       
+      
+       
+       public static void main(String[] args) throws Exception {
+    	   
+           
+  
        }
+
    }

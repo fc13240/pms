@@ -116,7 +116,8 @@ public class CreateWord {
 	            InputStream is = new FileInputStream(templatePath);  
 			    HWPFDocument doc = new HWPFDocument(is);  
 			    Range range = doc.getRange();  
-			    range.replaceText("${manualImg}", Img);  
+			    range.replaceText("${manualImg}", Img); 
+			    doc.getPicturesTable().getAllPictures();
 			    OutputStream os = new FileOutputStream(saveWordPath);   
 			    doc.write(os);
 			    os.close();
