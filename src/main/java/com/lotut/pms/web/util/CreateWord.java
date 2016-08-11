@@ -13,11 +13,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.hwpf.usermodel.Range;
-import org.apache.poi.poifs.filesystem.DirectoryEntry;
-import org.apache.poi.poifs.filesystem.DocumentEntry;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+
 
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Attachment;
