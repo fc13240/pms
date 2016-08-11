@@ -609,3 +609,87 @@ CREATE TABLE patent_attachment (
   PRIMARY KEY (attachment_id),
   CONSTRAINT fk_patent_documents_doc_id FOREIGN KEY idx_fk_patent_documents_doc_id(patent_doc_id) REFERENCES patent_documents(patent_doc_id) on delete cascade
 )
+
+<<<<<<< HEAD
+CREATE TABLE common_proposer (
+  proposer_id BIGINT NOT NULL AUTO_INCREMENT,
+  proposer_name VARCHAR(20) DEFAULT NULL COMMENT'申请人姓名',
+  proposer_type INT(11) NOT NULL COMMENT'申请人类型',
+  proposer_id_nubmer  NVARCHAR(20) DEFAULT NULL COMMENT '证件号码',
+  proposer_postcode_address VARCHAR(50) DEFAULT NULL COMMENT '邮编及地址',
+  proposer_record_status VARCHAR(20) DEFAULT NULL COMMENT '案件状态',
+  proposer_other_information VARCHAR(50) DEFAULT NULL COMMENT '其他信息',
+  user_id INT(11)  DEFAULT NULL ,
+  PRIMARY KEY(proposer_id),
+  KEY fk_common_proposer_owner_id (user_id),
+  KEY fk_common_proposer_type(proposer_type),
+  CONSTRAINT fk_common_proposer_owner_id FOREIGN KEY(user_id) REFERENCES users (user_id),
+  CONSTRAINT fk_common_proposer_type FOREIGN KEY (proposer_type) REFERENCES proposer_types (proposer_type_id)
+)
+ 
+CREATE TABLE share_proposer(
+  proposer BIGINT NOT NULL DEFAULT '0',
+  share_by INT(11) NOT NULL DEFAULT '0',
+  share_to INT(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (proposer,share_by,share_to),
+  KEY fk_share_proposer_share_by (`share_by`),
+  KEY `fk_share_proposer_to` (`share_to`),
+  CONSTRAINT `fk_share_proposer` FOREIGN KEY (`proposer`) REFERENCES `common_proposer` (`proposer_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_share_proposer_share_by` FOREIGN KEY (`share_by`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_share_proposer_share_to` FOREIGN KEY (`share_to`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8
+
+CREATE TABLE user_proposer(
+  user_id INT(11) NOT NULL DEFAULT '0',
+  proposer BIGINT(20) NOT NULL DEFAULT '0',
+  trash_status INT(11) DEFAULT '1',
+  PRIMARY KEY (`user_id`,`proposer`),
+  KEY `fk_user_proposer_proposer` (`proposer`),
+  CONSTRAINT `fk_user_proposer_proposer` FOREIGN KEY (`proposer`) REFERENCES `common_proposer` (`proposer_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_user_proposer_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8
+
+CREATE TABLE proposer_types(
+proposer_type_id INT(11) NOT NULL PRIMARY KEY,
+proposer_type_desc CHAR(12) NOT NULL
+
+)
+INSERT INTO proposer_types VALUES('1','个人')
+INSERT INTO proposer_types VALUES('2','非个人')
+=======
+
+INSERT INTO groups
+VALUES
+	(4, 'PROXY_ORG'),	
+	(5, 'CUSTOMER_SUPPORT'),
+	(6, 'TECH'),
+	(7, 'PROCESS');
+
+INSERT INTO group_authorities
+VALUES
+	(4, 'ROLE_PROXY_ORG'),	
+	(5, 'ROLE_CUSTOMER_SUPPORT'),
+	(6, 'ROLE_TECH'),
+	(7, 'ROLE_PROCESS');
+	
+CREATE TABLE IF NOT EXISTS customer_supports (
+	customer_id INT PRIMARY KEY AUTO_INCREMENT,
+	proxy_org_id INT NOT NULL,
+	remark_name VARCHAR(30) ,	
+	CONSTRAINT fk_customer_supports_customer_id FOREIGN KEY(customer_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS techs (
+	tech_id INT PRIMARY KEY AUTO_INCREMENT,
+	proxy_org_id INT NOT NULL,
+	remark_name VARCHAR(30) ,	
+	CONSTRAINT fk_techs_tech_id FOREIGN KEY(tech_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS processes (
+	process_id INT PRIMARY KEY AUTO_INCREMENT,
+	proxy_org_id INT NOT NULL,
+	remark_name VARCHAR(30) ,	
+	CONSTRAINT fk_processes_process_id FOREIGN KEY(process_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+>>>>>>> b4d13e172c4298b43c1537c92ce51eab054d3f0f

@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.hwpf.HWPFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -294,7 +296,6 @@ public class PatentEditDocController {
 		String manualImgFileName = "说明书附图" + ".doc";
 		String abstractFileName = "摘要附图" + ".doc";
 		 PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
-		 
 		 List<Attachment> AttachmentIntrodurces=patentDocService.getAttachmentById(patentDocId);
 
 		 SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -305,11 +306,12 @@ public class PatentEditDocController {
 		 if (!dirFile.exists()) {
 				dirFile.mkdirs();
 		 }
+		 
 		CreateWord.writeWordManualFile(saveWordPathDir,patentDoc, manualFileName,AttachmentIntrodurces);
-		HTMLToWord.writeWordRightFile(saveWordPathDir,patentDoc, rightFileName);
-		HTMLToWord.writeWordManualAbstractFile(saveWordPathDir,patentDoc, manualAbstractFileName);
-		HTMLToWord.writeWordManualAttachmentFile(saveWordPathDir,patentDoc, manualImgFileName);
-		HTMLToWord.writeWordAbstractImgFile(saveWordPathDir,patentDoc, abstractFileName);
+		CreateWord.writeWordRightFile(saveWordPathDir,patentDoc, rightFileName);
+		CreateWord.writeWordManualAbstractFile(saveWordPathDir,patentDoc, manualAbstractFileName);
+		CreateWord.writeWordManualAttachmentFile(saveWordPathDir,patentDoc, manualImgFileName);
+		CreateWord.writeWordAbstractImgFile(saveWordPathDir,patentDoc, abstractFileName);
 		String zipPath=saveWordPathDir+"/"+contentName+".zip";
 		try {
 			
@@ -343,7 +345,7 @@ public class PatentEditDocController {
 				out.flush();
 				
 			}
-			HTMLToWord.deleteDir(new File(saveWordPathDir));
+			//CreateWord.deleteDir(new File(saveWordPathDir));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
