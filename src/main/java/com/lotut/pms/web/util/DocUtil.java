@@ -1,8 +1,15 @@
 package com.lotut.pms.web.util;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class DocUtil {
 
-     //替换html标签
+     /**
+      * html内容过滤
+      * @param content
+      * @return
+      */
        public  static String txtContent(String content) {  
   		 String txtcontent = content.replaceAll("</?[^>]+>", ""); //剔出<html>的标签  
            txtcontent = txtcontent.replace("&nbsp;", " ");
@@ -10,4 +17,31 @@ public class DocUtil {
            txtcontent=txtcontent.replaceAll("(<(\\/)?p>)|\\s", "\n");
            return txtcontent;
   	 }
-}
+       
+       /** 
+        * 将输入流中的数据写入字节数组 
+        * @param in 
+        * @return 
+        */  
+       public static byte[] inputStream2ByteArray(InputStream in,boolean isClose){  
+           byte[] byteArray = null;  
+           try {  
+               int total = in.available();  
+               byteArray = new byte[total];  
+               in.read(byteArray);  
+           } catch (IOException e) {  
+               e.printStackTrace();  
+           }finally{  
+               if(isClose){  
+                   try {  
+                       in.close();  
+                   } catch (Exception e2) {  
+                       System.out.println("关闭流失败");  
+                   }  
+               }  
+           }  
+           return byteArray;  
+       }  
+   }    
+       
+       
