@@ -69,6 +69,19 @@
 		color: #666;
 		font-size: 14px;
 	}
+	
+	.pre_picture1{
+		clear: both;
+		margin: 15px 40px;
+		width: 810px;
+		line-height: 28px;
+		text-indent: 0em;
+		text-align: left;
+		overflow: auto;
+		color: #666;
+		font-size: 14px;
+	
+	}
 </style>
 </head>
 <body style="background-color: #FFF;" id="dlstCircleArticle">
@@ -159,8 +172,10 @@
 					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=5">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>
 				</div> --%>
-				<br/><br/><br/>
-					<div class="picBox">
+			</div>
+				<br/>
+				
+					<div class="pre_picture1">
 						<ul class="picL" id="picLsy" >
 							<c:forEach items="${Attachments}" var="Attachment">
 								<li>
@@ -172,9 +187,8 @@
 								</li>
 							</c:forEach>
 						</ul>
-					</div>
-
-			</div>
+					
+     </div>
 			
 		</div>
 
@@ -199,8 +213,10 @@
 			success: function(data){
 				var obj= $.parseJSON(data);
 					$("#div_6").append(
-							"<span>"+"附图说明："+obj.caption+"</span>"+"<br/>"+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+
-							"&nbsp;"+"<span>"+"标记说明: "+obj.caption+"</span>"
+							"<span>"+"附图说明： "+obj.caption+"</span>"+
+							"<br/>"+"<br/>"+
+							"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+
+					        "<span>"+"标记说明 : "+obj.label+"</span>"
 					);
 					 
 				}

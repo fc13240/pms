@@ -38,6 +38,7 @@ import com.lotut.pms.domain.User;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.CreateWord;
 import com.lotut.pms.web.util.HTMLToWord;
 import com.lotut.pms.web.util.WebUtils;
 
@@ -57,7 +58,12 @@ public class PatentEditDocController {
 		this.patentDocService = patentDocService;
 		this.patentDocumentTemplateService = patentDocumentTemplateService;
 	}
-	
+
+	@RequestMapping(path="/newPatentType")
+	public String newPatentTypeForm(Model model){
+			
+			return "patent_doc_type_list";
+	}
 
 	@RequestMapping(path="/newPatentDoc")
 	public String inventionEditorForm(@RequestParam("patentType")int patentType, PatentDoc patentDoc,Model model){
@@ -288,6 +294,9 @@ public class PatentEditDocController {
 		String manualImgFileName = "说明书附图" + ".doc";
 		String abstractFileName = "摘要附图" + ".doc";
 		 PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
+		 
+		 List<Attachment> AttachmentIntrodurces=patentDocService.getAttachmentById(patentDocId);
+
 		 SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 		 String contentName = df.format(new Date()) + "_" + new Random().nextInt(1000);
 		 String patentExportWord = Settings.PATENT_EXPORT_WORD_NAME;
@@ -296,7 +305,7 @@ public class PatentEditDocController {
 		 if (!dirFile.exists()) {
 				dirFile.mkdirs();
 		 }
-		HTMLToWord.writeWordManualFile(saveWordPathDir,patentDoc, manualFileName);
+		CreateWord.writeWordManualFile(saveWordPathDir,patentDoc, manualFileName,AttachmentIntrodurces);
 		HTMLToWord.writeWordRightFile(saveWordPathDir,patentDoc, rightFileName);
 		HTMLToWord.writeWordManualAbstractFile(saveWordPathDir,patentDoc, manualAbstractFileName);
 		HTMLToWord.writeWordManualAttachmentFile(saveWordPathDir,patentDoc, manualImgFileName);
@@ -317,23 +326,24 @@ public class PatentEditDocController {
 			e.printStackTrace();
 		}
 		
-		String fileName=contentName+".zip";
-		response.setContentType("multipart/form-data");
-		response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
-		File wordFile = new File(zipPath);
-		int BUFFER_SIZE = 8192;
-		byte[] buffer = new byte[BUFFER_SIZE];
-		try (OutputStream out = response.getOutputStream(); 
-				BufferedInputStream bis = new BufferedInputStream(new FileInputStream(wordFile))) {
-			int bytesRead = -1;
-			while ((bytesRead = bis.read(buffer)) != -1) {
-				out.write(buffer, 0, bytesRead);
+			String fileName=contentName+".zip";
+			response.setContentType("multipart/form-data");
+			response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
+			File wordFile = new File(zipPath);
+			int BUFFER_SIZE = 8192;
+			byte[] buffer = new byte[BUFFER_SIZE];
+			try (OutputStream out = response.getOutputStream(); 
+					BufferedInputStream bis = new BufferedInputStream(new FileInputStream(wordFile))) {
+				int bytesRead = -1;
+				while ((bytesRead = bis.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesRead);
+				}
+				bis.close();
+				out.close();
+				out.flush();
+				
 			}
-			bis.close();
-			out.close();
-			out.flush();
-
-		}
+			HTMLToWord.deleteDir(new File(saveWordPathDir));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
