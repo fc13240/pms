@@ -610,6 +610,7 @@ CREATE TABLE patent_attachment (
   CONSTRAINT fk_patent_documents_doc_id FOREIGN KEY idx_fk_patent_documents_doc_id(patent_doc_id) REFERENCES patent_documents(patent_doc_id) on delete cascade
 )
 
+<<<<<<< HEAD
 CREATE TABLE common_proposer (
   proposer_id BIGINT NOT NULL AUTO_INCREMENT,
   proposer_name VARCHAR(20) DEFAULT NULL COMMENT'申请人姓名',
@@ -655,3 +656,40 @@ proposer_type_desc CHAR(12) NOT NULL
 )
 INSERT INTO proposer_types VALUES('1','个人')
 INSERT INTO proposer_types VALUES('2','非个人')
+=======
+
+INSERT INTO groups
+VALUES
+	(4, 'PROXY_ORG'),	
+	(5, 'CUSTOMER_SUPPORT'),
+	(6, 'TECH'),
+	(7, 'PROCESS');
+
+INSERT INTO group_authorities
+VALUES
+	(4, 'ROLE_PROXY_ORG'),	
+	(5, 'ROLE_CUSTOMER_SUPPORT'),
+	(6, 'ROLE_TECH'),
+	(7, 'ROLE_PROCESS');
+	
+CREATE TABLE IF NOT EXISTS customer_supports (
+	customer_id INT PRIMARY KEY AUTO_INCREMENT,
+	proxy_org_id INT NOT NULL,
+	remark_name VARCHAR(30) ,	
+	CONSTRAINT fk_customer_supports_customer_id FOREIGN KEY(customer_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS techs (
+	tech_id INT PRIMARY KEY AUTO_INCREMENT,
+	proxy_org_id INT NOT NULL,
+	remark_name VARCHAR(30) ,	
+	CONSTRAINT fk_techs_tech_id FOREIGN KEY(tech_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS processes (
+	process_id INT PRIMARY KEY AUTO_INCREMENT,
+	proxy_org_id INT NOT NULL,
+	remark_name VARCHAR(30) ,	
+	CONSTRAINT fk_processes_process_id FOREIGN KEY(process_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+>>>>>>> b4d13e172c4298b43c1537c92ce51eab054d3f0f
