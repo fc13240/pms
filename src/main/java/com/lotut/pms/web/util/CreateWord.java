@@ -112,7 +112,7 @@ public class CreateWord {
 		    String saveWordPath=saveWordPathDir+"/"+ fileName;
 	        try {  
 	        	String templatePath = Settings.WORD_MANUAL_ATTACHMENT_TEMPLATE;
-	        	String Img=null;
+	        	String Img="null";
 	            InputStream is = new FileInputStream(templatePath);  
 			    HWPFDocument doc = new HWPFDocument(is);  
 			    Range range = doc.getRange();  
@@ -139,7 +139,7 @@ public class CreateWord {
 	        	abstractImg.put("type", "jpg");  
 	        	abstractImg.put("content", DocUtil.inputStream2ByteArray(new FileInputStream("c:\\new.jpg"), true));
 	            param.put("${abstractImg}",abstractImg);*/ 
-	            String abstractImg="";
+	            String abstractImg="null";
 	            InputStream is = new FileInputStream(templatePath);  
 			    HWPFDocument doc = new HWPFDocument(is);  
 			    Range range = doc.getRange();  
