@@ -142,12 +142,16 @@ public class PatentServiceImpl implements PatentService {
 	@Transactional
 	public void addPatent(Patent patent) {
 		patentDao.insertOrUpdatePatent(patent);
-		List<Map<String, Integer>> userPatentList = new ArrayList<>();
-		HashMap<String, Integer> userPatentMap = new HashMap<>();
-		userPatentMap.put("user", patent.getOwnerId());
-		userPatentMap.put("patent", (int) patent.getPatentId());
-		userPatentList.add(userPatentMap);
-		sharePatentDao.insertUserPatents(userPatentList);
+		long patentId = patent.getPatentId();
+		boolean isNewPatent = patentId != 0;
+		if (isNewPatent) {
+			List<Map<String, Integer>> userPatentList = new ArrayList<>();
+			HashMap<String, Integer> userPatentMap = new HashMap<>();
+			userPatentMap.put("user", patent.getOwnerId());
+			userPatentMap.put("patent", (int) patentId);
+			userPatentList.add(userPatentMap);
+			sharePatentDao.insertUserPatents(userPatentList);
+		}
 	}
 
 	@Override
