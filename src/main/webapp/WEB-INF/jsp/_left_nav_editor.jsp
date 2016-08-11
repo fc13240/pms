@@ -7,7 +7,18 @@
 		<a href="<s:url value='/editor/newPatentType.html'/>">
 		<h5>新建专利</h5>
 		</a>
+	</li>
+	<li class="active"> 
+		<a href="<s:url value='/proposer/list.html'/>">
+		<h5>常用申请人</h5>
+		</a>
 	</li>	
+	
+	<li class="active"> 
+		<a href="<s:url value='/editor/newPatentType.html'/>">
+		<h5>常用发明人</h5>
+		</a>
+	</li>		
 	<!-- 
 	<li class="active"> 
 		<a href="<s:url value='/editor/newPatentDoc.html'/>?patentType=1">

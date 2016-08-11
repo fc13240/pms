@@ -59,4 +59,7 @@
 	<bean id="patentDocService" class="com.lotut.pms.service.impl.PatentDocServiceImp">
 		<constructor-arg ref="patentDocDao"/>
 	</bean>
+	<bean id="proposerService" class="com.lotut.pms.service.impl.ProposerServiceImpl">
+		<constructor-arg ref="proposerDao"/>
+	</bean>
 </beans>
