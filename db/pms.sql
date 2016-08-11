@@ -609,3 +609,39 @@ CREATE TABLE patent_attachment (
   PRIMARY KEY (attachment_id),
   CONSTRAINT fk_patent_documents_doc_id FOREIGN KEY idx_fk_patent_documents_doc_id(patent_doc_id) REFERENCES patent_documents(patent_doc_id) on delete cascade
 )
+
+
+INSERT INTO groups
+VALUES
+	(4, 'PROXY_ORG'),	
+	(5, 'CUSTOMER_SUPPORT'),
+	(6, 'TECH'),
+	(7, 'PROCESS');
+
+INSERT INTO group_authorities
+VALUES
+	(4, 'ROLE_PROXY_ORG'),	
+	(5, 'ROLE_CUSTOMER_SUPPORT'),
+	(6, 'ROLE_TECH'),
+	(7, 'ROLE_PROCESS');
+	
+CREATE TABLE IF NOT EXISTS customer_supports (
+	customer_id INT PRIMARY KEY AUTO_INCREMENT,
+	proxy_org_id INT NOT NULL,
+	remark_name VARCHAR(30) ,	
+	CONSTRAINT fk_customer_supports_customer_id FOREIGN KEY(customer_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS techs (
+	tech_id INT PRIMARY KEY AUTO_INCREMENT,
+	proxy_org_id INT NOT NULL,
+	remark_name VARCHAR(30) ,	
+	CONSTRAINT fk_techs_tech_id FOREIGN KEY(tech_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS processes (
+	process_id INT PRIMARY KEY AUTO_INCREMENT,
+	proxy_org_id INT NOT NULL,
+	remark_name VARCHAR(30) ,	
+	CONSTRAINT fk_processes_process_id FOREIGN KEY(process_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
