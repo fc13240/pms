@@ -31,7 +31,14 @@ public class ProposerController {
 	
 	@RequestMapping(path="/list" ,method=RequestMethod.GET)
 	public String getList(){
-		System.out.println("=============================");
 		return "common_proposer";
+	}
+	
+	@RequestMapping(path="/addContactInfo")
+	public String addContactInfo(){
+		proposerService.addProposer();
+		
+		return "redirect:/proposer/list.html";
+		
 	}
 }
