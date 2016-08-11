@@ -39,7 +39,6 @@ import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.CreateWord;
-import com.lotut.pms.web.util.HTMLToWord;
 import com.lotut.pms.web.util.WebUtils;
 
 import net.lingala.zip4j.core.ZipFile;
@@ -306,10 +305,10 @@ public class PatentEditDocController {
 				dirFile.mkdirs();
 		 }
 		CreateWord.writeWordManualFile(saveWordPathDir,patentDoc, manualFileName,AttachmentIntrodurces);
-		HTMLToWord.writeWordRightFile(saveWordPathDir,patentDoc, rightFileName);
-		HTMLToWord.writeWordManualAbstractFile(saveWordPathDir,patentDoc, manualAbstractFileName);
-		HTMLToWord.writeWordManualAttachmentFile(saveWordPathDir,patentDoc, manualImgFileName);
-		HTMLToWord.writeWordAbstractImgFile(saveWordPathDir,patentDoc, abstractFileName);
+		CreateWord.writeWordRightFile(saveWordPathDir,patentDoc, rightFileName);
+		CreateWord.writeWordManualAbstractFile(saveWordPathDir,patentDoc, manualAbstractFileName);
+		CreateWord.writeWordManualAttachmentFile(saveWordPathDir,patentDoc, manualImgFileName);
+		CreateWord.writeWordAbstractImgFile(saveWordPathDir,patentDoc, abstractFileName);
 		String zipPath=saveWordPathDir+"/"+contentName+".zip";
 		try {
 			
@@ -343,7 +342,7 @@ public class PatentEditDocController {
 				out.flush();
 				
 			}
-			HTMLToWord.deleteDir(new File(saveWordPathDir));
+			CreateWord.deleteDir(new File(saveWordPathDir));
 		}catch(Exception e){
 			e.printStackTrace();
 		}

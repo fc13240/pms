@@ -1,5 +1,7 @@
 package com.lotut.pms.web.util;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -11,7 +13,11 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.hwpf.usermodel.Range;
+import org.apache.poi.poifs.filesystem.DirectoryEntry;
+import org.apache.poi.poifs.filesystem.DocumentEntry;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Attachment;
@@ -30,8 +36,6 @@ public class CreateWord {
 	public  static String writeWordManualFile(String saveWordPathDir,PatentDoc patentDoc,String fileName,List<Attachment> attachmentIntrodurces) {
 		String saveWordPath=saveWordPathDir+"/"+ fileName;
 		try{
-		
-				
 				String templatePath = Settings.WORD_MANUAL_TEMPLATE;
 				
 				String name=DocUtil.txtContent(patentDoc.getName());
@@ -60,8 +64,97 @@ public class CreateWord {
 			return saveWordPath;
 	}
  
+	public static String writeWordRightFile(String saveWordPathDir,PatentDoc patentDoc,String fileName) {
+	    String saveWordPath=saveWordPathDir+"/"+ fileName;
+        try {   
+        	String templatePath = Settings.WORD_RIGHT_TEMPLATE;
+        	String rightClaim=DocUtil.txtContent(patentDoc.getRightClaim());
+        	InputStream is = new FileInputStream(templatePath);  
+		    HWPFDocument doc = new HWPFDocument(is);  
+		    Range range = doc.getRange();  
+		    range.replaceText("${right}", rightClaim);  
+		    OutputStream os = new FileOutputStream(saveWordPath);   
+		    doc.write(os);
+		    os.close();
+		    is.close();
+        } catch (IOException e) {  
+            e.printStackTrace();  
+      }  
+      return saveWordPath;  
+    }
+	
+	
+	public static String writeWordManualAbstractFile(String saveWordPathDir,PatentDoc patentDoc,String fileName) {
+	    String saveWordPath=saveWordPathDir+"/"+ fileName;
+        try {   
+        	String templatePath = Settings.WORD_MANUAL_ABSTRACT_TEMPLATE;	
+            String abstractDescription=DocUtil.txtContent(patentDoc.getAbstractDescription());
+            InputStream is = new FileInputStream(templatePath);  
+		    HWPFDocument doc = new HWPFDocument(is);  
+		    Range range = doc.getRange();  
+		    range.replaceText("${manualAbstract}", abstractDescription);  
+		    OutputStream os = new FileOutputStream(saveWordPath);   
+		    doc.write(os);
+		    os.close();
+		    is.close();       
+        } catch (IOException e) {  
+            e.printStackTrace();  
+      }  
+      return saveWordPath;  
+    } 
     
-    
-     
+	 public static String writeWordManualAttachmentFile(String saveWordPathDir,PatentDoc patentDoc,String fileName) {
+		    String saveWordPath=saveWordPathDir+"/"+ fileName;
+	        try {  
+	        	String templatePath = Settings.WORD_MANUAL_ATTACHMENT_TEMPLATE;
+	        	String Img=null;
+	            InputStream is = new FileInputStream(templatePath);  
+			    HWPFDocument doc = new HWPFDocument(is);  
+			    Range range = doc.getRange();  
+			    range.replaceText("${manualImg}", Img);  
+			    OutputStream os = new FileOutputStream(saveWordPath);   
+			    doc.write(os);
+			    os.close();
+			    is.close();       
+	        } catch (IOException e) {  
+	            e.printStackTrace();  
+	      }  
+	      return saveWordPath;  
+	    }
+	 
+	 
+	 public static String writeWordAbstractImgFile(String saveWordPathDir,PatentDoc patentDoc,String fileName) {
+		    String saveWordPath=saveWordPathDir+"/"+fileName;
+	        try {  
+	        	String templatePath = Settings.WORD_ABSTRACTIMG_TEMPLATE;
+	        	String Img=null;
+	            InputStream is = new FileInputStream(templatePath);  
+			    HWPFDocument doc = new HWPFDocument(is);  
+			    Range range = doc.getRange();  
+			    range.replaceText("${abstractImg}", Img);  
+			    OutputStream os = new FileOutputStream(saveWordPath);   
+			    doc.write(os);
+			    os.close();
+			    is.close();       
+	        } catch (IOException e) {  
+	            e.printStackTrace();  
+	      }  
+	      return saveWordPath;  
+	    }
+	 
+	 
+	 public static  boolean deleteDir(File dir) {
+	        if (dir.isDirectory()) {
+	            String[] children = dir.list();
+	            for (int i=0; i<children.length; i++) {
+	                boolean success = deleteDir(new File(dir, children[i]));
+	                if (!success) {
+	                    return false;
+	                }
+	            }
+	        }
+	        // 目录此时为空，可以删除
+	        return dir.delete();
+	    }
 
 }
