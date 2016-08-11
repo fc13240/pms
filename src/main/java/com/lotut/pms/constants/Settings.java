@@ -9,8 +9,8 @@ public interface Settings {
 	final String FEE_EXPORT_EXCEL_SHEET_NAME = "国家申请号缴费";
 	final String PATENT_EXPORT_WORD_NAME = "/opt/media/word/";
 	final String WORD_MANUAL_TEMPLATE = "/opt/media/word/10002说明书.doc";
-	final String WORD_RIGHT_TEMPLATE = "/opt/media/word/10002权利要求书.doc";
-	final String WORD_MANUAL_ATTACHMENT_TEMPLATE = "/opt/media/word/10002说明书附图.doc";
-	final String WORD_MANUAL_ABSTRACT_TEMPLATE = "/opt/media/word/10002说明书摘要.doc";
-	final String WORD_ABSTRACTIMG_TEMPLATE = "/opt/media/word/10002摘要附图.doc";
+	final String WORD_RIGHT_TEMPLATE = "/opt/media/word/10001权利要求书.doc";
+	final String WORD_MANUAL_ATTACHMENT_TEMPLATE = "/opt/media/word/10003说明书附图.doc";
+	final String WORD_MANUAL_ABSTRACT_TEMPLATE = "/opt/media/word/10004说明书摘要.doc";
+	final String WORD_ABSTRACTIMG_TEMPLATE = "/opt/media/word/10005摘要附图.doc";
 }
