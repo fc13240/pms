@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管家-通知书</title>
+<title>龙图腾专利管家-专利撰写</title>
 <%@ include file="_css.jsp" %>
 
 </head>

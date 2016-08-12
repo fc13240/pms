@@ -673,23 +673,29 @@ VALUES
 	(7, 'ROLE_PROCESS');
 	
 CREATE TABLE IF NOT EXISTS customer_supports (
-	customer_id INT PRIMARY KEY AUTO_INCREMENT,
+	id INT NOT NULL AUTO_INCREMENT UNIQUE,
+	user_id INT NOT NULL,
 	proxy_org_id INT NOT NULL,
-	remark_name VARCHAR(30) ,	
-	CONSTRAINT fk_customer_supports_customer_id FOREIGN KEY(customer_id) REFERENCES users(user_id) ON DELETE CASCADE
+	remark_name VARCHAR(30) ,
+	PRIMARY KEY (user_id,proxy_org_id),	
+	CONSTRAINT fk_customer_supports_user_id FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS techs (
-	tech_id INT PRIMARY KEY AUTO_INCREMENT,
+	id INT NOT NULL AUTO_INCREMENT UNIQUE,
+	user_id INT NOT NULL,
 	proxy_org_id INT NOT NULL,
-	remark_name VARCHAR(30) ,	
-	CONSTRAINT fk_techs_tech_id FOREIGN KEY(tech_id) REFERENCES users(user_id) ON DELETE CASCADE
+	remark_name VARCHAR(30) ,
+	PRIMARY KEY(user_id,proxy_org_id),	
+	CONSTRAINT fk_techs_user_id FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS processes (
-	process_id INT PRIMARY KEY AUTO_INCREMENT,
+	id INT NOT NULL AUTO_INCREMENT UNIQUE,
+	user_id INT NOT NULL,
 	proxy_org_id INT NOT NULL,
-	remark_name VARCHAR(30) ,	
-	CONSTRAINT fk_processes_process_id FOREIGN KEY(process_id) REFERENCES users(user_id) ON DELETE CASCADE
+	remark_name VARCHAR(30) ,
+	PRIMARY KEY(user_id,proxy_org_id),	
+	CONSTRAINT fk_processes_user_id FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
->>>>>>> b4d13e172c4298b43c1537c92ce51eab054d3f0f
+

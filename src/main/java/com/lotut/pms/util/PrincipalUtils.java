@@ -42,4 +42,20 @@ public class PrincipalUtils {
 	public static boolean isTraderUser() {
 		return PrincipalUtils.hasAuthority(Role.ROLE_TRADER.getRoleName());
 	}
+	
+	public static boolean isProxyOrg() {
+		return PrincipalUtils.hasAuthority(Role.ROLE_PROXY_ORG.getRoleName());
+	}
+	
+	public static boolean isCustomerSupport() {
+		return PrincipalUtils.hasAuthority(Role.ROLE_CUSTOMER_SUPPORT.getRoleName());
+	}
+	
+	public static boolean isTech() {
+		return PrincipalUtils.hasAuthority(Role.ROLE_TECH.getRoleName());
+	}
+	
+	public static boolean isProcess() {
+		return PrincipalUtils.hasAuthority(Role.ROLE_PROCESS.getRoleName());
+	}
 }

@@ -8,6 +8,26 @@
 		<h5>新建专利</h5>
 		</a>
 	</li>
+	
+	<se:authorize access="hasRole('ROLE_PROXY_ORG')">
+		<li class="active"> 
+			<a href="<s:url value='/employee/getCustomerSupportList.html'/>?proxyOrgId=2">
+			<h5>客服管理</h5>
+			</a>
+		</li>
+		<li class="active"> 
+			<a href="<s:url value='/editor/newPatentDoc.html'/>?patentType=1">
+			<h5>技术员管理</h5>
+			</a>
+		</li>
+		<li class="active"> 
+			<a href="<s:url value='/editor/newPatentDoc.html'/>?patentType=1">
+			<h5>流程员管理</h5>
+			</a>
+		</li>
+	</se:authorize>
+	
+	
 	<li class="active"> 
 		<a href="<s:url value='/proposer/list.html'/>">
 		<h5>常用申请人</h5>
