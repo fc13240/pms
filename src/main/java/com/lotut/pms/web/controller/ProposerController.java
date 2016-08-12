@@ -78,7 +78,8 @@ public class ProposerController {
 	}
 	
 	@RequestMapping(path="/deleteProposerInfo")
-	public void deleteProposerInfo(@RequestParam("proposerId")int proposerId){
+	public String deleteProposerInfo(@RequestParam("proposerId")int proposerId){
 		proposerService.deleteProposerById(proposerId);
+		return "redirect:/proposer/list.html";
 	}
 }
