@@ -62,8 +62,8 @@
 								</td>
 								<td style="text-align:center"><c:out value="${proposer.otherInfo}"/></td>
 								<td style="text-align:center"><c:out value="${notice.patent.name}"/></td>
-								<td><a href="<s:url value='/proposer/updateProposerInfo.html'/>?id=<c:out value='${address.id}'/>"> 编辑 </a> 
-								<a href="<s:url value='/proposer/deleteProposerInfo.html'/>?id=<c:out value='${address.id}'/>">删除 </a>
+								<td><a href="<s:url value='/proposer/findOneProposerInfo.html'/>?proposerId=<c:out value='${proposer.proposerId}'/>"> 编辑 </a> 
+								<a href="<s:url value='/proposer/deleteProposerInfo.html'/>?proposerId=<c:out value='${proposer.proposerId}'/>">删除 </a>
 								</td>
 							  </tr>
 							</c:forEach>

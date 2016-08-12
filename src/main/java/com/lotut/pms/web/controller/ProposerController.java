@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.CommonProposer;
 import com.lotut.pms.domain.ProposerType;
@@ -41,7 +42,6 @@ public class ProposerController {
 	public String getList(Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<CommonProposer> proposers=proposerService.getAllProposerByUser(userId);
-		System.out.println(proposers.get(1).getProposerName()+"===========================");
 		model.addAttribute("proposers", proposers);
 		
 		return "common_proposer";
@@ -52,9 +52,30 @@ public class ProposerController {
 		int userId=PrincipalUtils.getCurrentUserId();
 		proposer.setUseId(userId);
 		proposerService.addProposer( proposer);
+		return "redirect:/proposer/list.html";
+	}
 	
+	@RequestMapping(path="/findOneProposerInfo")
+	public String findOneProposerInfo(@RequestParam("proposerId")int proposerId,Model model ){
+		CommonProposer proposer=proposerService.getOneProposerByid(proposerId);
+		List<ProposerType> proposerTypes=proposerService.getProposerTypes();
+		model.addAttribute("proposerTypes",proposerTypes);
+		model.addAttribute("proposer", proposer);
+		return "update_proposer_list";
+		
+	}
+	@RequestMapping(path="/updateProposerInfo")
+	public String updateProposerInfo(@ModelAttribute CommonProposer proposer,Model model ){
+		int userId=PrincipalUtils.getCurrentUserId();
+		proposer.setUseId(userId);
+		proposerService.updateProposer(proposer);
 		
 		return "redirect:/proposer/list.html";
 		
+	}
+	
+	@RequestMapping(path="/deleteProposerInfo")
+	public void deleteProposerInfo(@RequestParam("proposerId")int proposerId){
+		proposerService.deleteProposerById(proposerId);
 	}
 }

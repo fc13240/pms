@@ -40,7 +40,7 @@
   	</select>
   	
   	<select id="getOneProposerByid"	parameterType="int" resultType="CommonProposer">
-  		select p.proposer_id proposerId,p.proposer_name as proposerName,t.proposer_type_desc as proposerTypeName,p.proposer_id_nubmer as proposerPeopleNubmer,
+  		select p.proposer_id as proposerId,p.proposer_name as proposerName,t.proposer_type_desc as proposerTypeName,p.proposer_id_nubmer as proposerPeopleNubmer,
   		p.proposer_postcode_address as postcodeAddress,p.proposer_other_information otherInfo from common_proposer p 
   		join proposer_types t on p.proposer_type=t.proposer_type_id where p.proposer_id=#{proposerId}
   	</select>

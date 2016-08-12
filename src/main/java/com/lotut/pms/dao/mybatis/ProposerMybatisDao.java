@@ -29,5 +29,17 @@ public class ProposerMybatisDao extends SqlSessionDaoSupport implements Proposer
 		// TODO Auto-generated method stub
 		return proposerMapper.getAllProposerByUser(userId) ;
 	}
+	public CommonProposer getOneProposerByid(int id) {
+		// TODO Auto-generated method stub
+		return proposerMapper.getOneProposerByid(id);
+	}
+	public void updateProposer(CommonProposer proposer) {
+		proposerMapper.updateProposer(proposer);
+		
+	}
+	public void deleteProposerById(int id) {
+		// TODO Auto-generated method stub
+		proposerMapper.deleteProposerById(id);
+	}
 
 }
