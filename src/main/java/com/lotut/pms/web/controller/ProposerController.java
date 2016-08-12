@@ -49,7 +49,7 @@ public class ProposerController {
 		return "common_proposer";
 	}
 	
-	@RequestMapping(path="/addContactInfo")
+	@RequestMapping(path="/addContactInfo",method=RequestMethod.POST)
 	public String addContactInfo(@ModelAttribute CommonProposer proposer,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		proposer.setUseId(userId);
@@ -68,11 +68,10 @@ public class ProposerController {
 	}
 	@RequestMapping(path="/updateProposerInfo",method=RequestMethod.POST)
 	public String updateProposerInfo(@Valid CommonProposer proposer,Model model ){
-		System.out.println(proposer.getProposerName());
+		System.out.println(proposer.getProposerType());
 		int userId=PrincipalUtils.getCurrentUserId();
 		proposer.setUseId(userId);
 		proposerService.updateProposer(proposer);
-		
 		return "redirect:/proposer/list.html";
 		
 	}
