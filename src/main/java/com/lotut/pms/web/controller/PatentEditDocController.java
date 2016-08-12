@@ -3,6 +3,7 @@ package com.lotut.pms.web.controller;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -11,14 +12,18 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,6 +46,7 @@ import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.CreateWord;
+import com.lotut.pms.web.util.DocUtil;
 import com.lotut.pms.web.util.HTMLToWord;
 import com.lotut.pms.web.util.WebUtils;
 
@@ -288,7 +294,7 @@ public class PatentEditDocController {
 	}
 	
 	@RequestMapping(path="/exportWord")
-	public void exportWord(@RequestParam("patentDocId")long patentDocId,HttpServletRequest reqeust, HttpServletResponse response) {
+	public void exportWord(@RequestParam("patentDocId")long patentDocId,HttpServletRequest reqeust, HttpServletResponse response) throws IOException {
 		try{
 		String manualFileName = "说明书" +".doc";
 		String rightFileName = "权利要求书"+ ".doc";
@@ -307,6 +313,9 @@ public class PatentEditDocController {
 				dirFile.mkdirs();
 		 }
 		 
+		 List<String> ImgUrl=getAttachmentImgUrl(patentDocId);
+		 List<String> ImgPath=getPicPath(ImgUrl);
+		 copyImg(ImgPath,saveWordPathDir);
 		CreateWord.writeWordManualFile(saveWordPathDir,patentDoc, manualFileName,AttachmentIntrodurces);
 		CreateWord.writeWordRightFile(saveWordPathDir,patentDoc, rightFileName);
 		CreateWord.writeWordManualAbstractFile(saveWordPathDir,patentDoc, manualAbstractFileName);
@@ -345,12 +354,42 @@ public class PatentEditDocController {
 				out.flush();
 				
 			}
-			//CreateWord.deleteDir(new File(saveWordPathDir));
+			CreateWord.deleteDir(new File(saveWordPathDir));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 	
+	public List<String> getAttachmentImgUrl(long patentDocId){
+		List<Attachment> Imgs=patentDocService.getAttachmentById(patentDocId);
+		List<String> ImgUrls=new ArrayList<>();
+		for(Attachment Img: Imgs){
+			String url=Img.getAttachmentUrl();
+			ImgUrls.add(url);
+		}
+		return ImgUrls;
+	}
+	
+	public  List<String> getPicPath(List<String> ImgUrls){
+		List<String> savePath=new ArrayList<>();
+		for(String ImgURl:ImgUrls){
+			String url=DocUtil.ImagUrltoImagAddress(ImgURl);
+			savePath.add(url);
+		}
+		return savePath;
+	}
+	
+	public void copyImg(List<String> saveImgPath,String saveWordPathDir){
+		try{
+			for(String imgPath:saveImgPath){
+				File from = new File(imgPath);
+		        File to = new File(saveWordPathDir+"/"+from.getName());
+		        FileUtils.copyFile(from, to);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	
 	
 
