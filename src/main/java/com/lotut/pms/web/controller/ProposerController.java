@@ -2,6 +2,8 @@ package com.lotut.pms.web.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,8 +66,9 @@ public class ProposerController {
 		return "update_proposer_list";
 		
 	}
-	@RequestMapping(path="/updateProposerInfo")
-	public String updateProposerInfo(@ModelAttribute CommonProposer proposer,Model model ){
+	@RequestMapping(path="/updateProposerInfo",method=RequestMethod.POST)
+	public String updateProposerInfo(@Valid CommonProposer proposer,Model model ){
+		System.out.println(proposer.getProposerName());
 		int userId=PrincipalUtils.getCurrentUserId();
 		proposer.setUseId(userId);
 		proposerService.updateProposer(proposer);

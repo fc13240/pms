@@ -38,7 +38,7 @@
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" value="${proposer.proposerName}" name="proposerName" required/>
 					<br>	   
 			       	<h5>申请人类型:</h5>
-					<select name="proposerType" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities()" required>
+					<select name="proposerType" class="form-control" style="width:136px;display:inline;"  required>
 						<option value="${proposer.proposerType}">${proposer.proposerTypeName}</option>
 						<c:forEach items="${proposerTypes}" var="proposerType">
 							<option value="${proposerType.proposerTypeId}">${proposerType.proposerTypeDescription}</option>
@@ -56,6 +56,7 @@
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" value="${proposer.otherInfo}" name="otherInfo" required/>
 					<br>      
 					<div style="height:20px;"></div> 
+					<input type="hidden" class="form-control" name="proposerId"  value="${proposer.proposerId}"/>
 					<button type="submit" style="width:90px;" class="button button-primary  button-rounded">保存</button>
 					</form>				
 				</div>
