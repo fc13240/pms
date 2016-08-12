@@ -30,12 +30,12 @@ public class CreateWord {
 		try{
 				String templatePath = Settings.WORD_MANUAL_TEMPLATE;
 				
-				String name=DocUtil.txtContent(patentDoc.getName());
-		        String techDomain=DocUtil.txtContent(patentDoc.getTechDomain());
-		        String backTech=DocUtil.txtContent(patentDoc.getBackgoundTech());
-		        String content=DocUtil.txtContent(patentDoc.getContent());
-		        String implementWay=DocUtil.txtContent(patentDoc.getImplementWay());
-		        String attachmentIntroduces = DocUtil.txtContent(getAttachments(attachmentIntrodurces));
+				String name=DocUtil.delHTMLTag(patentDoc.getName());
+		        String techDomain=DocUtil.delHTMLTag(patentDoc.getTechDomain());
+		        String backTech=DocUtil.delHTMLTag(patentDoc.getBackgoundTech());
+		        String content=DocUtil.delHTMLTag(patentDoc.getContent());
+		        String implementWay=DocUtil.delHTMLTag(patentDoc.getImplementWay());
+		        String attachmentIntroduces = DocUtil.delHTMLTag(getAttachments(attachmentIntrodurces));
 				
 			    InputStream is = new FileInputStream(templatePath);  
 			    HWPFDocument doc = new HWPFDocument(is);  

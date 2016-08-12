@@ -12,8 +12,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -352,7 +355,7 @@ public class PatentEditDocController {
 				out.flush();
 				
 			}
-			//CreateWord.deleteDir(new File(saveWordPathDir));
+			CreateWord.deleteDir(new File(saveWordPathDir));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -368,7 +371,7 @@ public class PatentEditDocController {
 		return ImgUrls;
 	}
 	
-	public List<String> getPicPath(List<String> ImgUrls){
+	public  List<String> getPicPath(List<String> ImgUrls){
 		List<String> savePath=new ArrayList<>();
 		for(String ImgURl:ImgUrls){
 			String url=DocUtil.ImagUrltoImagAddress(ImgURl);
@@ -388,4 +391,7 @@ public class PatentEditDocController {
 			e.printStackTrace();
 		}
 	}
+	
+	
+
 }
