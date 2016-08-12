@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管家——添加地址</title>
+<title>龙图腾专利管家——联系地址</title>
 <%@ include file="_css.jsp" %>
 </head>
 <body>
@@ -17,7 +17,6 @@
 
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>
-
 <div class="lt-con" style="min-width:1100px;">
 	<div class="container-fluid" >
 
@@ -25,7 +24,7 @@
 		
 			<!--left begin-->
 		  <div class="col-xs-1 sidebar" style="min-width:100px;">
-			<%@ include file="_left_nav_editor.jsp" %>
+			<%@ include file="_left_nav_user.jsp" %>
 		  </div>
 		  <!--left end-->
 		  <!--right begin-->
@@ -40,10 +39,7 @@
 					<br>	   
 			       	<h5>申请人类型:</h5>
 					<select name="proposerType" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities()" required>
-					  <option value=''>请选择</option>
-					  <c:forEach items="${proposerTypes}" var="proposerType">
 						<option value="${proposerType.proposerTypeId}">${proposerType.proposerTypeDescription}</option>
-					  </c:forEach>
 					</select>
 					<br>
 					<h5>证件号码:</h5>
@@ -89,6 +85,5 @@ function validatePhoneNumber(phoneNumber) {
 
 
 </script>
-
 </body>
 </html>

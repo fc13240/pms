@@ -6,11 +6,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;  
-import java.util.regex.Pattern;  
+import java.util.regex.Pattern;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.POIXMLDocument;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Picture;
@@ -35,6 +38,8 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;  
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;  
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+
+import com.lotut.pms.domain.Attachment;
 public class DocUtil {
 
      /**
@@ -108,14 +113,8 @@ public class DocUtil {
       Matcher m=p.matcher(html);   
       String s=m.replaceAll("");   
       return s;   
-  }  
-       public static void main(String[] args) throws Exception {
-    	   
-           
+  }
   
-       }
-
-       
-       
-       
+	
+  
    }

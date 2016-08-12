@@ -30,12 +30,12 @@ public class CreateWord {
 		try{
 				String templatePath = Settings.WORD_MANUAL_TEMPLATE;
 				
-				String name=DocUtil.delHTMLTag(patentDoc.getName());
-		        String techDomain=DocUtil.delHTMLTag(patentDoc.getTechDomain());
-		        String backTech=DocUtil.delHTMLTag(patentDoc.getBackgoundTech());
-		        String content=DocUtil.delHTMLTag(patentDoc.getContent());
-		        String implementWay=DocUtil.delHTMLTag(patentDoc.getImplementWay());
-		        String attachmentIntroduces = DocUtil.delHTMLTag(getAttachments(attachmentIntrodurces));
+				String name=DocUtil.stripHtml(patentDoc.getName());
+		        String techDomain=DocUtil.stripHtml(patentDoc.getTechDomain());
+		        String backTech=DocUtil.stripHtml(patentDoc.getBackgoundTech());
+		        String content=DocUtil.stripHtml(patentDoc.getContent());
+		        String implementWay=DocUtil.stripHtml(patentDoc.getImplementWay());
+		        String attachmentIntroduces = DocUtil.stripHtml(getAttachments(attachmentIntrodurces));
 				
 			    InputStream is = new FileInputStream(templatePath);  
 			    HWPFDocument doc = new HWPFDocument(is);  
@@ -84,19 +84,6 @@ public class CreateWord {
             InputStream is = new FileInputStream(templatePath);  
 		    HWPFDocument doc = new HWPFDocument(is);  
 		    Range range = doc.getRange();
-		    
-		    
-		 /*   
-		    Map<String,Object> header = new HashMap<String, Object>();  
-	        header.put("width", 100);  
-	        header.put("height", 150);  
-	        header.put("type", "jpg");  
-	        header.put("content", WordUtil.inputStream2ByteArray(new FileInputStream("c:\\new.jpg"), true));  
-	        param.put("${header}",header);
-		    
-		    */
-		    
-		    
 		    range.replaceText("${manualAbstract}", abstractDescription);  
 		    OutputStream os = new FileOutputStream(saveWordPath);   
 		    doc.write(os);
@@ -133,13 +120,6 @@ public class CreateWord {
 		    String saveWordPath=saveWordPathDir+"/"+fileName;
 	        try {  
 	        	String templatePath = Settings.WORD_ABSTRACTIMG_TEMPLATE;
-	        	/*Map<String, Object> param = new HashMap<String, Object>();
-	        	Map<String,Object> abstractImg = new HashMap<String, Object>();  
-	        	abstractImg.put("width", 100);  
-	        	abstractImg.put("height", 150);  
-	        	abstractImg.put("type", "jpg");  
-	        	abstractImg.put("content", DocUtil.inputStream2ByteArray(new FileInputStream("c:\\new.jpg"), true));
-	            param.put("${abstractImg}",abstractImg);*/ 
 	            String abstractImg="null";
 	            InputStream is = new FileInputStream(templatePath);  
 			    HWPFDocument doc = new HWPFDocument(is);  
