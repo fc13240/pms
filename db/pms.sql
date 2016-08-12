@@ -610,7 +610,7 @@ CREATE TABLE patent_attachment (
   CONSTRAINT fk_patent_documents_doc_id FOREIGN KEY idx_fk_patent_documents_doc_id(patent_doc_id) REFERENCES patent_documents(patent_doc_id) on delete cascade
 )
 
-<<<<<<< HEAD
+
 CREATE TABLE common_proposer (
   proposer_id BIGINT NOT NULL AUTO_INCREMENT,
   proposer_name VARCHAR(20) DEFAULT NULL COMMENT'申请人姓名',
@@ -656,7 +656,7 @@ proposer_type_desc CHAR(12) NOT NULL
 )
 INSERT INTO proposer_types VALUES('1','个人')
 INSERT INTO proposer_types VALUES('2','非个人')
-=======
+
 
 INSERT INTO groups
 VALUES

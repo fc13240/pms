@@ -87,7 +87,7 @@
 	
 	function addCustomerSupport(){
 		var url = "<s:url value='/employee/searchCustomerSupport.html'/>";
-		location.href = url
+		location.href = url;
 	}
 </script>
 </body>
