@@ -52,6 +52,8 @@
   		
   	</update>
   	
-  	<delete id="deleteProposerById"></delete>
+  	<delete id="deleteProposerById" parameterType="int">
+  		delete from common_propose where proposer_id =#{proposerId}
+  	</delete>
   </mapper>
   
