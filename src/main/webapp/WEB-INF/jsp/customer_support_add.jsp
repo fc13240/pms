@@ -35,12 +35,13 @@
 					<form action="<s:url value='/employee/searchUsers.html'/>" method="GET"  role="search">
 					  <div class="form-group">
 						<input class="selectPointOfInterest form-control" type="text" id="form-field-1" style="width:450px;display:inline;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" required/>
-						<button  type="submit" class="button button-caution button-rounded">查询</button>
-						<button  type="button" class="button button-caution button-rounded" onclick="javascript:searchFriends()">从好友添加</button>
+						<button  type="submit" class="button button-caution button-rounded" >查询</button>
+						
+						<button  type="button" class="button button-caution button-rounded" onclick="javascript:searchFriends()">好友查询</button>
 					  </div>
 					</form>
 					
-					<table class="table table-bordered table-striped">
+					<table class="table table-bordered table-striped" >
 					  <tr>
 						<th>序号</th>
 						<th>用户名</th>
@@ -56,6 +57,9 @@
 						</tr>
 					  </c:forEach>
 					</table>
+					
+					
+	
 					</div>
 				<!-- list end -->				
 				</div>
@@ -73,29 +77,31 @@
 
 
 <script type="text/javascript">
-function sendCustomerSupportRequest(userId) {
+	function sendCustomerSupportRequest(userId) {
+		$.ajax({
+			url: "<s:url value='/employee/request.html'/>?userId=" + userId,
+			success: function() {
+		   		$("<div>添加客服成功</div>").dialog({
+		   			modal: true,
+		   			buttons: {
+		   				Ok: function() {
+		   					$(this).dialog("close");
+		   				}
+		   			}
+		   		});
+			}
+		});
+	}
 	
-	$.ajax({
-		url: "<s:url value='/employee/request.html'/>?userId=" + userId,
-		success: function() {
-	   		$("<div>添加客服成功</div>").dialog({
-	   			modal: true,
-	   			buttons: {
-	   				Ok: function() {
-	   					$(this).dialog("close");
-	   				}
-	   			}
-	   		});
-		}
-	});
-}
+	function searchFriends(){
+		var keyword = $("input[name='keyword']").val();
+		var url = "<s:url value='/employee/searchFriends.html'/>?keyword=" + keyword;
+		location.href = url;
+	}
+	
+	
 </script>
 
-	<script type="text/javascript">
-			function pageHide() {
-				document.getElementById("page.page").style.display="none";
-			}
-	</script>
 
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>

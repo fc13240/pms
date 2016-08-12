@@ -77,4 +77,16 @@
 	<update id="updateRemarkName">
 		update friends set remark_name = #{remarkName} where user = #{userId} and friend = #{friendId}
 	</update>
+	
+	<select id="findFriendsByUserId" resultType="User">
+		<if test="keyword != null and keyword != ''">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>		
+		select u.user_id as userId, u.username, u.name as name 
+		  from users u join friends f on u.user_id = f.friend	
+		 where f.user = #{userId}	
+		<if test="keyword != null and keyword != ''">
+			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern} or f.remark_name like #{keyword_pattern})
+		</if>
+	</select>
 </mapper>

@@ -24,4 +24,6 @@ public interface FriendMapper {
 	List<User> searchUserFriendsByUser(@Param("userId")int userId, @Param("keyword")String keyword);
 	
 	void updateRemarkName(@Param("userId")int userId, @Param("friendId")int friendId, @Param("remarkName")String remarkName);
+
+	List<User> findFriendsByUserId(@Param("userId")int userId,@Param("keyword") String keyword);
 }

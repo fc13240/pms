@@ -49,13 +49,19 @@ public class EmployeeController {
 		return "customer_support_add";
 	}	
 	
+	@RequestMapping(path="/searchFriends", method=RequestMethod.GET)
+	public String searchFriends(@RequestParam("keyword") String keyword, Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> resultUsers = friendService.findFriendsByUserId(userId,keyword);
+		model.addAttribute("users", resultUsers);
+		return "customer_support_add";
+	}	
+	
 	
 	@RequestMapping(path="/request", method=RequestMethod.GET)
 	public String addOrUpdateCustomerSupport(@ModelAttribute("customerSupport")CustomerSupport customerSupport,Model model) {
 		int proxyOrgId = PrincipalUtils.getCurrentUserId();
-		System.out.println("---------1----"+customerSupport);
 		customerSupport.setProxyOrgId(proxyOrgId);
-		System.out.println("---------2----"+customerSupport);
 		employeeService.addOrUpdateCustomerSupport(customerSupport);
 		return "customer_support_add";
 	}

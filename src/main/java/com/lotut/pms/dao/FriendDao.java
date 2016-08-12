@@ -22,4 +22,6 @@ public interface FriendDao {
 	List<User> searchUserFriendsByUser(int userId,String keyword);
 	
 	void updateRemarkName(int userId, int friendId, String remarkName);
+
+	List<User> findFriendsByUserId(int userId, String keyword);
 }
