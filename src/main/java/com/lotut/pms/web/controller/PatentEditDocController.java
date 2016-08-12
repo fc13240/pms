@@ -3,11 +3,11 @@ package com.lotut.pms.web.controller;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,8 +18,9 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
-import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,12 +37,11 @@ import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.TemplatePage;
-import com.lotut.pms.domain.User;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.CreateWord;
-import com.lotut.pms.web.util.HTMLToWord;
+import com.lotut.pms.web.util.DocUtil;
 import com.lotut.pms.web.util.WebUtils;
 
 import net.lingala.zip4j.core.ZipFile;
@@ -288,7 +288,7 @@ public class PatentEditDocController {
 	}
 	
 	@RequestMapping(path="/exportWord")
-	public void exportWord(@RequestParam("patentDocId")long patentDocId,HttpServletRequest reqeust, HttpServletResponse response) {
+	public void exportWord(@RequestParam("patentDocId")long patentDocId,HttpServletRequest reqeust, HttpServletResponse response) throws IOException {
 		try{
 		String manualFileName = "说明书" +".doc";
 		String rightFileName = "权利要求书"+ ".doc";
@@ -307,6 +307,9 @@ public class PatentEditDocController {
 				dirFile.mkdirs();
 		 }
 		 
+		 List<String> ImgUrl=getAttachmentImgUrl(patentDocId);
+		 List<String> ImgPath=getPicPath(ImgUrl);
+		 copyImg(ImgPath,saveWordPathDir);
 		CreateWord.writeWordManualFile(saveWordPathDir,patentDoc, manualFileName,AttachmentIntrodurces);
 		CreateWord.writeWordRightFile(saveWordPathDir,patentDoc, rightFileName);
 		CreateWord.writeWordManualAbstractFile(saveWordPathDir,patentDoc, manualAbstractFileName);
@@ -345,12 +348,77 @@ public class PatentEditDocController {
 				out.flush();
 				
 			}
-			//CreateWord.deleteDir(new File(saveWordPathDir));
+			CreateWord.deleteDir(new File(saveWordPathDir));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 	
+	@RequestMapping(path="/editor/uploadFile")
+	public void uploadPatentAttachment(@RequestParam("filename") Part filename,@RequestParam("patentDocId") long patentDocId,PrintWriter printOut){
+		try {
+			if (!filename.getSubmittedFileName().endsWith(".zip") && !filename.getSubmittedFileName().endsWith(".rar")){
+				printOut.write("上传文件不是一个压缩文件，请核对后再进行上传!");
+			}else{
+				
+				String savePath=Settings.PATENTDOC_ATTACHMENT_FILE_PATH;
+				String uploadFile="uploadFile";
+				savePath += uploadFile + "/";
+				
+				File file =new File(savePath);    
+				if  (!file .exists()  && !file .isDirectory()){       
+					file .mkdir();    
+				}
+				String usename = PrincipalUtils.getCurrentPrincipal().getName();
+				String newFileName =usename+"_"+filename.getName();
+				InputStream is = filename.getInputStream();
+				int BUFFER_SIZE = 8 * 1024;
+	    		byte[] buffer = new byte[BUFFER_SIZE];
+	    		try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
+	    			int bytesRead = -1;
+	    			while ((bytesRead = is.read(buffer)) != -1) {
+	    				out.write(buffer, 0, bytesRead);
+	    			}
+	    			out.flush();
+	    			out.close();
+	    		}
+	    		printOut.write("上传成功");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<String> getAttachmentImgUrl(long patentDocId){
+		List<Attachment> Imgs=patentDocService.getAttachmentById(patentDocId);
+		List<String> ImgUrls=new ArrayList<>();
+		for(Attachment Img: Imgs){
+			String url=Img.getAttachmentUrl();
+			ImgUrls.add(url);
+		}
+		return ImgUrls;
+	}
+	
+	public  List<String> getPicPath(List<String> ImgUrls){
+		List<String> savePath=new ArrayList<>();
+		for(String ImgURl:ImgUrls){
+			String url=DocUtil.ImagUrltoImagAddress(ImgURl);
+			savePath.add(url);
+		}
+		return savePath;
+	}
+	
+	public void copyImg(List<String> saveImgPath,String saveWordPathDir){
+		try{
+			for(String imgPath:saveImgPath){
+				File from = new File(imgPath);
+		        File to = new File(saveWordPathDir+"/"+from.getName());
+		        FileUtils.copyFile(from, to);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	
 	
 

@@ -56,6 +56,9 @@
 		<typeAlias type="com.lotut.pms.domain.CustomerSupport" alias="CustomerSupport"/>
 		<typeAlias type="com.lotut.pms.domain.Tech" alias="Tech"/>
 		<typeAlias type="com.lotut.pms.domain.Process" alias="Process"/>
-		
+	
+		<typeAlias type="com.lotut.pms.domain.CommonProposer" alias="CommonProposer"/>
+		<typeAlias type="com.lotut.pms.domain.ProposerType" alias="ProposerType"/>
+
 	</typeAliases>  
 </configuration>

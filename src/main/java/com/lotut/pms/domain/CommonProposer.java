@@ -1,24 +1,27 @@
 package com.lotut.pms.domain;
 
 public class CommonProposer {
+	private int proposerId;
 	private String proposerName;
-	private String proposerType;
+	private int proposerType;
+	private String proposerTypeName;
 	private String proposerPeopleNubmer;
 	private String postcodeAddress;
 	private String recordStatus;
 	private String otherInfo;
-	private String shareBy;
+	private int useId;
+	
+	public int getUseId() {
+		return useId;
+	}
+	public void setUseId(int useId) {
+		this.useId = useId;
+	}
 	public String getProposerName() {
 		return proposerName;
 	}
 	public void setProposerName(String proposerName) {
 		this.proposerName = proposerName;
-	}
-	public String getProposerType() {
-		return proposerType;
-	}
-	public void setProposerType(String proposerType) {
-		this.proposerType = proposerType;
 	}
 	public String getProposerPeopleNubmer() {
 		return proposerPeopleNubmer;
@@ -44,12 +47,24 @@ public class CommonProposer {
 	public void setOtherInfo(String otherInfo) {
 		this.otherInfo = otherInfo;
 	}
-	public String getShareBy() {
-		return shareBy;
-	}
-	public void setShareBy(String shareBy) {
-		this.shareBy = shareBy;
-	}
 	
+	public int getProposerType() {
+		return proposerType;
+	}
+	public void setProposerType(int proposerType) {
+		this.proposerType = proposerType;
+	}
+	public String getProposerTypeName() {
+		return proposerTypeName;
+	}
+	public void setProposerTypeName(String proposerTypeName) {
+		this.proposerTypeName = proposerTypeName;
+	}
+	public int getProposerId() {
+		return proposerId;
+	}
+	public void setProposerId(int proposerId) {
+		this.proposerId = proposerId;
+	}
 	
 }

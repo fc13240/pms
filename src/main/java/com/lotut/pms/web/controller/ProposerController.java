@@ -1,0 +1,60 @@
+package com.lotut.pms.web.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.lotut.pms.domain.CommonProposer;
+import com.lotut.pms.domain.ProposerType;
+import com.lotut.pms.service.ProposerService;
+import com.lotut.pms.service.UserService;
+import com.lotut.pms.util.PrincipalUtils;
+
+@Controller
+@RequestMapping(path="/proposer")
+public class ProposerController {
+	private ProposerService proposerService;
+	private UserService userSerivce;
+	
+	public ProposerController() {
+	}
+	@Autowired
+	public ProposerController(ProposerService proposerService, UserService userSerivce) {
+		this.proposerService = proposerService;
+		this.userSerivce = userSerivce;
+	}
+	
+	@RequestMapping(path="/contactProposerAddForm")
+	public String contactProposerAddForm(Model model){
+		List<ProposerType> proposerTypes=proposerService.getProposerTypes();
+		model.addAttribute("proposerTypes",proposerTypes);
+		return "proposer_create";
+		
+	}
+	
+	@RequestMapping(path="/list" ,method=RequestMethod.GET)
+	public String getList(Model model){
+		int userId=PrincipalUtils.getCurrentUserId();
+		List<CommonProposer> proposers=proposerService.getAllProposerByUser(userId);
+		System.out.println(proposers.get(1).getProposerName()+"===========================");
+		model.addAttribute("proposers", proposers);
+		
+		return "common_proposer";
+	}
+	
+	@RequestMapping(path="/addContactInfo")
+	public String addContactInfo(@ModelAttribute CommonProposer proposer,Model model){
+		int userId=PrincipalUtils.getCurrentUserId();
+		proposer.setUseId(userId);
+		proposerService.addProposer( proposer);
+	
+		
+		return "redirect:/proposer/list.html";
+		
+	}
+}
