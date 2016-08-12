@@ -316,7 +316,6 @@ public class PatentEditDocController {
 		 List<String> ImgUrl=getAttachmentImgUrl(patentDocId);
 		 List<String> ImgPath=getPicPath(ImgUrl);
 		 copyImg(ImgPath,saveWordPathDir);
-		 
 		CreateWord.writeWordManualFile(saveWordPathDir,patentDoc, manualFileName,AttachmentIntrodurces);
 		CreateWord.writeWordRightFile(saveWordPathDir,patentDoc, rightFileName);
 		CreateWord.writeWordManualAbstractFile(saveWordPathDir,patentDoc, manualAbstractFileName);
