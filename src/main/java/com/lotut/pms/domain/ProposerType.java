@@ -16,6 +16,4 @@ public class ProposerType {
 		this.proposerTypeDescription = proposerTypeDescription;
 	}
 	
-	
-
 }

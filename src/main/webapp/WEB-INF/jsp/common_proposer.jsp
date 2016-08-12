@@ -27,10 +27,10 @@
 	<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
-							  <th class="center"> <label class="pos-rel">
+							  <%-- <th class="center"> <label class="pos-rel">
 								<input type="checkbox" class="check-item" id="checkall"  name="checkall" />
 								<span class="lbl"></span> </label>
-							  </th>
+							  </th> --%>
 							  <th class="center" width="50">序号</th>
 							  <th width="90px">姓名或名称</th>
 							  <th width="150px">申请人类型</th>
@@ -47,25 +47,24 @@
 							</tr>
 						  </thead>
 						  <tbody>
-							<c:forEach items="" var="notice" varStatus="status">
+							<c:forEach items="${proposers}" var="proposer" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"> ${status.count} </td>
-								<td style="text-align:center"><c:out value="${notice.patent.appNo}"/></td>
-								<td style="text-align:center"><c:out value="${notice.patent.name}"/></td>
-								<td style="text-align:center"><c:out value="${notice.patent.firstAppPerson}"/></td>
-								<td>
-								
-								${notice.patent.patentStatusText}
-								
-								</td>
-								<td style="text-align:center"><c:out value="${notice.patent.shareUsersAsString}"/></td>
-								<td style="text-align:center"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
-								<td style="text-align:center"><a id="download" href="javascript: void(0);" onClick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}')">
+								<td style="text-align:center"><c:out value="${proposer.proposerName}"/></td>
+								<td style="text-align:center"><c:out value="${proposer.proposerTypeName}"/></td>
+								<td style="text-align:center"><c:out value="${proposer.proposerPeopleNubmer}"/></td>
+								<td>${proposer.postcodeAddress}</td>
+								<td style="text-align:center"><c:out value=""/></td>
+								<td style="text-align:center"></td>
+								<td style="text-align:center"><a id="download" href="javascript: void(0);" >
 								  <c:out value="${notice.name}"/>
 								  </a> 
 								</td>
-								<td style="text-align:center"><c:out value="${notice.patent.appNo}"/></td>
+								<td style="text-align:center"><c:out value="${proposer.otherInfo}"/></td>
 								<td style="text-align:center"><c:out value="${notice.patent.name}"/></td>
+								<td><a href="<s:url value='/proposer/updateProposerInfo.html'/>?id=<c:out value='${address.id}'/>"> 编辑 </a> 
+								<a href="<s:url value='/proposer/deleteProposerInfo.html'/>?id=<c:out value='${address.id}'/>">删除 </a>
+								</td>
 							  </tr>
 							</c:forEach>
 						  </tbody>
