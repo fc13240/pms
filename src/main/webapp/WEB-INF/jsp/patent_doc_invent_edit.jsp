@@ -13,6 +13,7 @@
 	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  
 	<title>测试页面</title>
 	<c:import url="common/kindEditor.jsp"></c:import>
+	<%@ include file="_css.jsp" %>
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -111,6 +112,10 @@
 						摘要</div>
 					<div class="tab1h" value="8" name="tabs" onclick="tabChange(8);">
 						摘要附图</div>
+					<div class="tab1h" value="9" name="tabs" onclick="tabChange(9);">
+						上传附件</div>
+					<div class="tab1h" value="10" name="tabs" onclick="tabChange(10);">
+						请求协议书</div>
 				</div>
 	
 	        </div>
@@ -252,7 +257,7 @@
 									权利要求包括独立权利要求和从属权利要求，每一项权利要求都是一个独立的保护范围，从属权利要求是对独立权利要求技术内容的进一步限定，审查人员先审独立权利要求，如果独立权利要求具备授予专利权的条件，从属权利要求就不用审了...<i class="cancelh" onclick="doLong('quanli');">展开</i>
 								</p>
 							</div>
-							<div id="quanliL" class="Writing_tipsh tip9" name="tips_2" style="display: none;">
+							<%-- <div id="quanliL" class="Writing_tipsh tip9" name="tips_2" style="display: none;">
 								<p>
 									<span>撰写指南</span>
 								</p>
@@ -298,7 +303,7 @@
 									4)权利要求所限定的相应技术方案与（说明书中）发明内容部分所述的技术方案的表述一致； 权利要求所限定的相应技术方案对（说明书中）具体实施方式部分所述的技术方案做清楚、简要地限定。
 									<i class="cancelhh" onclick="doShort('quanli');">收起</i>
 								</p>
-							</div>
+							</div> --%>
 							<div class="Writing_tips" name="tips tip10" style="display: none;">
 								<p>
 									<span>撰写指南</span>
@@ -431,45 +436,40 @@
 										   </div>
 									</div>
 								</div>
-<%-- 								<div id="editor3_1" thisid="5633" thistempid="0">
-									<div class="instru">
-										<div class="title2">
-											这部分内容看似不少，其实就是权利要求部分的内容，建议先看看模板吧，看完之后就会发现原来是对权利要求的进一步描述。<br>
-											写好权利要求这部分就解决了，还没写的还不快去写，一部分可是当两部分用啊。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-										<div class="wraper">
-								            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-								            	<tr>
-								                    <td style="width:520px;">
-								                    	<textarea rows="3" cols="10" id="editorContent4" name="contentRight" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.contentRight }</textarea>
-								                    </td>
-								            	</tr>
-								            </table>
-										   </div>
-									</div>
+							</div>
+						</div>
+						
+						
+						<!--上传附件div  -->
+						<div class="content" id="content9" thisid="2514" style="display: none;">
+							<div class="title">
+								请求协议书
+							</div>
+							
+							<div class="cl">
+								<div class="lt-box" style="height:300px;padding:20px;">
+	
+									<form id="patentDocAttachment" action="<s:url value='/editor/uploadFile.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+									<input style="display:none;"  id="patentFile" name="patentFile" type="file" />
+									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
+									<button type="button" onclick="$('input[id=patentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="">上传</button>
+									</form> 
+									<div style="height:10px;">&nbsp;</div> 
+									<span style="color:#666;">友情提示：将所需的附件一次性生成压缩文格式(zip,rar等)形式上传，不建议上传其他格式的文件!
+									</span>
 								</div>
-								<div id="editor3_2" thisid="5634" thistempid="0">
-									<div class="instru">
-										<div class="title2">
-											即由您申请专利的技术特征直接带来的，或者是由这些技术特征必然产生的效果。<br>
-											通常可以通过对申请专利的技术的结构特点与理论分析的结合而得出，或通过列出实验数据的方式予以说明。<br>
-											无论哪种方式都应通过与现有技术的比较而得出。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-											<div class="wraper">
-									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-									            	<tr>
-									                    <td style="width:520px;">
-									                    	<textarea rows="3" cols="10" id="editorContent5" name="contentEffect" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.contentEffect }</textarea>
-									                    </td>
-									            	</tr>
-									            </table>
-										   </div>
-									</div>
-								</div> --%>
+							</div>
+						</div>
+						
+						<!--请求协议书div  -->
+						<div class="content" id="content10" thisid="2514" style="display: none;">
+							
+							<div class="title">
+								请求协议书
+							</div>
+							<div class="cl">
+								
 							</div>
 						</div>
 						<div class="content" id="content4" style="display: none;overflow: auto;" >
@@ -1610,5 +1610,48 @@ function loadImgs(){
 	});
 }
 </script>
+
+<script type="text/javascript">
+	jQuery(function($) {
+		$("#patentDocAttachment").validate({
+			rules: {
+				filename: 'required'
+			},
+			messages: {
+				filename: '<span style="color:red;">请选择要上传的专利表格</span>'
+			},
+			submitHandler: function(form){ 
+				form.submit();     
+			}
+		});
+	});
+	$('input[id=patentFile]').change(function() {  
+		$('#filename').val($(this).val());  
+	});
+	
+	function uploadAttachmentFile(){
+		var formData = new FormData($( "#patentDocAttachment" )[0]);  
+	    $.ajax({  
+	         url: "<s:url value='/editor/uploadFile.html'/>" ,  
+	         type: 'POST',  
+	         data: formData,  
+	         async: false,  
+	         cache: false,  
+	         contentType: false,  
+	         processData: false,  
+	         success: function (returndata) {  
+	             alert(returndata);  
+	         },  
+	         error: function (returndata) {  
+	             alert(returndata);  
+	         }  
+    	});  
+	}
+	
+</script>
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	
+
+
 </body>
 </html>
