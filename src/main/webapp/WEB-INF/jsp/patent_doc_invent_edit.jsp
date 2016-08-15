@@ -1629,7 +1629,6 @@ function loadImgs(){
 				alert("正在上传");
 			}, 
 			success : function(result) {
-				deleteFile(filePath);
 				uploadSuccess(result); 
 			}, 
 			error : function() {
