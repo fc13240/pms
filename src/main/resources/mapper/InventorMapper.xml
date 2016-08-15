@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lotut.pms.dao.mapper.InventorMapper">
+	<insert id="addInventor" parameterType="CommonInventor">
+		insert into common_inventor (inventor_name,inventor_id_nubmer,inventor_nationality,inventor_mobile,inventor_email,inventor_other_information
+		,user_id)
+		values(#{InventorName},#{InventorNumber},#{InventorNationality},#{InventorMobile},#{InventorEmail},#{InventorComment},#{userId})
+	
+	</insert>
+
+	<select id="getAllInventorsByUser" parameterType="int" resultType="CommonInventor">
+		select inventor_id as InventorId ,inventor_name as InventorName,inventor_id_nubmer as InventorNumber,
+		inventor_nationality as InventorNationality,inventor_mobile as InventorMobile,inventor_email as InventorEmail,
+		inventor_other_information as InventorComment,user_id  as userId
+		from common_inventor where user_id =#{userId}
+	
+	</select>
+
+
+
+
+
+
+
+
+
+</mapper>
