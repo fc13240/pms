@@ -12,29 +12,29 @@ import com.lotut.pms.domain.Tech;
 public interface EmployeeMapper {
 
 	List<CustomerSupport> getCustomerSupportList(int proxyOrgId);
+	
+	List<Tech> getTechList(int proxyOrgId);
+	
+	List<Process> getProcessList(int proxyOrgId);
 
 	void addOrUpdateCustomerSupport(CustomerSupport customerSupport);
+	
+	void addOrUpdateTech(Tech tech);
+	
+	void addOrUpdateProcess(Process process);
 
 	void deleteCustomerSupport(int id);
+	
+	void deleteTech(int id);
+	
+	void deleteProcess(int id);
 
 	void changeCustomerSupportRemarkName(@Param("id") int id,@Param("remarkName") String remarkName);
 
-	void insertGroupMember(@Param("userId") int userId,@Param("roleName") String roleName);
-
-	List<Tech> getTechList(int proxyOrgId);
-
-	void addOrUpdateTech(Tech tech);
-
-	void deleteTech(int id);
-
 	void changeTechRemarkName(@Param("id") int id, @Param("remarkName") String remarkName);
 
-	List<Process> getProcessList(int proxyOrgId);
-
-	void addOrUpdateProcess(Process process);
-
-	void deleteProcess(int id);
-
 	void changeProcessRemarkName(@Param("id") int id, @Param("remarkName") String remarkName);
+	
+	void insertGroupMember(@Param("userId") int userId,@Param("roleName") String roleName);
 
 }

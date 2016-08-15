@@ -18,10 +18,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public EmployeeServiceImpl(EmployeeDao employeeDao) {
 		this.employeeDao = employeeDao;
 	}
+	
+	
 	@Override
 	public List<CustomerSupport> getCustomerSupportList(int proxyOrgId) {
 		return employeeDao.getCustomerSupportList(proxyOrgId);
 	}
+	
+	@Override
+	public List<Tech> getTechList(int proxyOrgId) {
+		return employeeDao.getTechList(proxyOrgId);
+	}
+	
+	@Override
+	public List<Process> getProcessList(int proxyOrgId) {
+		return  employeeDao.getProcessList(proxyOrgId);
+	}
+	
+	
 	@Override
 	@Transactional
 	public void addOrUpdateCustomerSupport(CustomerSupport customerSupport) {
@@ -42,37 +56,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 	}
 	
-	
 	@Override
 	@Transactional
-	public void deleteCustomerSupport(int id) {
-		employeeDao.deleteCustomerSupport(id);	
-		
-	}
-	@Override
-	public void changeCustomerSupportRemarkName(int id, String remarkName) {
-		employeeDao.changeCustomerSupportRemarkName(id, remarkName);	
-		
-	}
-	@Override
-	public List<Tech> getTechList(int proxyOrgId) {
-		return employeeDao.getTechList(proxyOrgId);
-	}
-	@Override
-	@Transactional
-	public void deleteTech(int id) {
-		employeeDao.deleteTech(id);	
-		
-	}
-	@Override
-	public void changeTechRemarkName(int id, String remarkName) {
-		employeeDao.changeTechRemarkName(id, remarkName);	
-	}
-	@Override
-	public List<Process> getProcessList(int proxyOrgId) {
-		return  employeeDao.getProcessList(proxyOrgId);
-	}
-	@Override
 	public void addOrUpdateProcess(Process process) {
 		employeeDao.addOrUpdateProcess(process);
 		boolean isNewProcess = process.getId() != 0;
@@ -80,17 +65,40 @@ public class EmployeeServiceImpl implements EmployeeService {
 			employeeDao.insertGroupMember(process.getUserId(),Role.ROLE_PROCESS.getRoleName());
 		}
 	}
+	
+	
+	@Override
+	@Transactional
+	public void deleteCustomerSupport(int id) {
+		employeeDao.deleteCustomerSupport(id);		
+	}
+	
+	@Override
+	@Transactional
+	public void deleteTech(int id) {
+		employeeDao.deleteTech(id);	
+	}
+	
 	@Override
 	@Transactional
 	public void deleteProcess(int id) {
 		employeeDao.deleteProcess(id);	
-		
 	}
+	
+	
+	@Override
+	public void changeCustomerSupportRemarkName(int id, String remarkName) {
+		employeeDao.changeCustomerSupportRemarkName(id, remarkName);	
+	}
+	
+	@Override
+	public void changeTechRemarkName(int id, String remarkName) {
+		employeeDao.changeTechRemarkName(id, remarkName);	
+	}
+	
 	@Override
 	public void changeProcessRemarkName(int id, String remarkName) {
 		employeeDao.changeProcessRemarkName(id, remarkName);
-		
 	}
-
 }
 

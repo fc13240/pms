@@ -10,28 +10,28 @@ public interface EmployeeDao {
 
 	List<CustomerSupport> getCustomerSupportList(int proxyOrgId);
 
+	List<Tech> getTechList(int proxyOrgId);
+	
+	List<Process> getProcessList(int proxyOrgId);
+	
 	void addOrUpdateCustomerSupport(CustomerSupport customerSupport);
 
+	void addOrUpdateTech(Tech tech);
+	
+	void addOrUpdateProcess(Process process);
+	
 	void deleteCustomerSupport(int id);
+	
+	void deleteTech(int id);
+	
+	void deleteProcess(int id);
 
 	void changeCustomerSupportRemarkName(int id, String remarkName);
 
-	void insertGroupMember(int userId,String roleName);
-
-	List<Tech> getTechList(int proxyOrgId);
-
-	void addOrUpdateTech(Tech tech);
-
-	void deleteTech(int id);
-
 	void changeTechRemarkName(int id, String remarkName);
 
-	List<Process> getProcessList(int proxyOrgId);
-
-	void addOrUpdateProcess(Process process);
-
-	void deleteProcess(int id);
-
 	void changeProcessRemarkName(int id, String remarkName);
+	
+	void insertGroupMember(int userId,String roleName);
 
 }

@@ -71,6 +71,7 @@ public class EmployeeController {
 		return "process_add";
 	}
 	
+	
 	@RequestMapping(path="/searchCustomerSupportUsers", method=RequestMethod.GET)
 	public String searchCustomerSupportUsers(@RequestParam(name="keyword") String keyword, Model model) {
 		List<User> resultUsers = friendService.searchFriends(keyword);
@@ -91,6 +92,7 @@ public class EmployeeController {
 		model.addAttribute("users", resultUsers);
 		return "process_add";
 	}
+	
 	
 	@RequestMapping(path="/searchCustomerSupportFriends", method=RequestMethod.GET)
 	public String searchCustomerSupportFriends(@RequestParam("keyword") String keyword, Model model) {
@@ -141,6 +143,7 @@ public class EmployeeController {
 		return "process_add";
 	}
 	
+	
 	@RequestMapping(path="/deleteCustomerSupport", method=RequestMethod.GET)
 	public String deleteCustomerSupport(@RequestParam("id")int id,Model model) {
 		int proxyOrgId = PrincipalUtils.getCurrentUserId();
@@ -166,7 +169,6 @@ public class EmployeeController {
 	}
 	
 	
-	
 	@RequestMapping(path="/changeCustomerSupportRemarkName", method=RequestMethod.GET)
 	public String changeCustomerSupportRemarkName(int id, String remarkName) {
 		employeeService.changeCustomerSupportRemarkName(id, remarkName);
@@ -184,6 +186,4 @@ public class EmployeeController {
 		employeeService.changeProcessRemarkName(id, remarkName);
 		return "process_list";
 	}
-	
-	
 }
