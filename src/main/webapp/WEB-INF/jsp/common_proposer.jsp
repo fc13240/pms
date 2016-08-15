@@ -51,7 +51,17 @@
 							  <tr>
 								<td class="center" style="text-align:center"> ${status.count} </td>
 								<td style="text-align:center"><c:out value="${proposer.proposerName}"/></td>
-								<td style="text-align:center"><c:out value="${proposer.proposerTypeName}"/></td>
+								
+								<td style="text-align:center">
+									<select name="proposerType" class="form-control" style="width:136px;display:inline;"  required>
+										<option value="${proposer.proposerType}">${proposer.proposerTypeName}</option>
+										<c:forEach items="${proposerTypes}" var="proposerType">
+											<option value="${proposerType.proposerTypeId}">${proposerType.proposerTypeDescription}</option>
+					 					</c:forEach>
+									</select>
+								</td>
+								
+								
 								<td style="text-align:center"><c:out value="${proposer.proposerPeopleNubmer}"/></td>
 								<td>${proposer.postcodeAddress}</td>
 								<td style="text-align:center"><c:out value=""/></td>

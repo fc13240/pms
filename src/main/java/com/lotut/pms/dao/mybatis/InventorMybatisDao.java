@@ -26,5 +26,25 @@ public class InventorMybatisDao extends SqlSessionDaoSupport implements Inventor
 		// TODO Auto-generated method stub
 		return inventorMapper.getAllInventorsByUser( id);
 	}
+
+	@Override
+	public CommonInventor getInventorById(int id) {
+		// TODO Auto-generated method stub
+		return inventorMapper.getInventorById(id);
+	}
+
+	@Override
+	public void updateById(CommonInventor inventor) {
+		 inventorMapper.updateById(inventor);
+	
+		
+	}
+
+	@Override
+	public void deleteById(int id) {
+		// TODO Auto-generated method stub
+		inventorMapper.deleteById(id);
+		
+	}
 	
 }

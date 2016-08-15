@@ -22,5 +22,21 @@ public class InventorServiceImpl implements InventorService{
 		// TODO Auto-generated method stub
 		return inventorDao.getAllInventorsByUser(id);
 	}
+	@Override
+	public CommonInventor getInventorById(int id) {
+		// TODO Auto-generated method stub
+		return inventorDao.getInventorById(id);
+	}
+	@Override
+	public void updateById(CommonInventor inventor) {
+		// TODO Auto-generated method stub
+		inventorDao.updateById(inventor);
+	}
+	@Override
+	public void deleteById(int id) {
+		// TODO Auto-generated method stub
+		inventorDao.deleteById(id);
+		
+	}
 	
 }
