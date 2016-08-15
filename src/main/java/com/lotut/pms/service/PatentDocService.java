@@ -27,4 +27,8 @@ public interface PatentDocService {
 	void savePatentAbstractImg(PatentDoc PatentDoc);
 	
 	Attachment getLabelByUrl(String url);
+	
+	void savePatentDocAttachmentFile(PatentDoc PatentDoc);
+	
+	String getPatentDocAttachmentFile(long patentDocId);
 }

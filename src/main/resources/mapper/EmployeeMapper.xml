@@ -27,6 +27,18 @@
 		</association>
 	</resultMap>
 	
+	<resultMap type="Process" id="ProcessResultMap">
+		<id property="id" column="id"/>
+		<result property="userId" column="user_id"/>
+		<result property="proxyOrgId" column="proxy_org_id"/>
+		<result property="remarkName" column="remark_name"/>
+		<association property="user"  javaType="User">
+			<id property="userId" column="user_id"/>
+			<result property="username" column="username"/>
+			<result property="name" column="name"/>
+		</association>
+	</resultMap>
+	
 	<select id="getCustomerSupportList"  parameterType="int" resultMap="CustomerSupportResultMap">
 		select cs.id,cs.user_id, cs.remark_name,cs.proxy_org_id,u.username,u.name from customer_supports cs
 		join users u on u.user_id = cs.user_id
@@ -39,6 +51,11 @@
 		where t.proxy_org_id=#{proxyOrgId}
 	</select>
 	
+	<select id="getProcessList"  parameterType="int" resultMap="ProcessResultMap">
+		select p.id,p.user_id, p.remark_name,p.proxy_org_id,u.username,u.name from processes p
+		join users u on u.user_id = p.user_id
+		where p.proxy_org_id=#{proxyOrgId}
+	</select>
 	
 	
 	<insert id="addOrUpdateCustomerSupport" parameterType="CustomerSupport" useGeneratedKeys="true" keyProperty="id">
@@ -53,7 +70,11 @@
 			user_id=#{userId},proxy_org_id=#{proxyOrgId}
 	</insert>
 		
-		
+	<insert id="addOrUpdateProcess" parameterType="Process" useGeneratedKeys="true" keyProperty="id">
+		insert into Processes(user_id,proxy_org_id,remark_name) values(#{userId},#{proxyOrgId},'')
+		on duplicate key update
+			user_id=#{userId},proxy_org_id=#{proxyOrgId}
+	</insert>
 		
 
 	
@@ -67,17 +88,24 @@
 	
 	
 	<delete id="deleteCustomerSupport" >
-		delete from customer_supports  where id=#{id} ;
 		delete from group_members where username=(select username from users where user_id = 
 			(select user_id from customer_supports where id=#{id}))	and group_id=
-			(SELECT group_id FROM group_authorities WHERE authority="ROLE_CUSTOMER_SUPPORT")	
+			(SELECT group_id FROM group_authorities WHERE authority="ROLE_CUSTOMER_SUPPORT");	
+		delete from customer_supports  where id=#{id}
 	</delete>
 	
 	<delete id="deleteTech" >
-		delete from techs  where id=#{id} ;
 		delete from group_members where username=(select username from users where user_id = 
-			(select user_id from customer_supports where id=#{id}))	and group_id=
-			(SELECT group_id FROM group_authorities WHERE authority="ROLE_TECH")	
+			(select user_id from techs where id=#{id}))	and group_id=
+			(SELECT group_id FROM group_authorities WHERE authority="ROLE_TECH");
+		delete from techs  where id=#{id} 	
+	</delete>
+	
+	<delete id="deleteProcess" >
+		delete from group_members where username=(select username from users where user_id = 
+			(select user_id from processes where id=#{id}))	and group_id=
+			(SELECT group_id FROM group_authorities WHERE authority="ROLE_PROCESS");
+		delete from processes  where id=#{id} 	
 	</delete>
 	
 	<update id="changeCustomerSupportRemarkName">
@@ -86,6 +114,10 @@
 	
 	<update id="changeTechRemarkName">
 		update techs set remark_name=#{remarkName} where id=#{id}
+	</update>
+	
+	<update id="changeProcessRemarkName">
+		update processes set remark_name=#{remarkName} where id=#{id}
 	</update>
 	
 </mapper>

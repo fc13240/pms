@@ -87,4 +87,16 @@ public class PatentDocServiceImp implements PatentDocService{
 			return patentDocDao.getLabelByUrl(url);
 		}
 
+
+		@Override
+		public void savePatentDocAttachmentFile(PatentDoc PatentDoc) {
+			patentDocDao.savePatentDocAttachmentFile(PatentDoc);
+		}
+
+
+		@Override
+		public String getPatentDocAttachmentFile(long patentDocId) {
+			return patentDocDao.getPatentDocAttachmentFile(patentDocId);
+		}
+
 }

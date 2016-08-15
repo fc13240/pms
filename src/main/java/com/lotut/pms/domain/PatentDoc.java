@@ -23,10 +23,16 @@ public class PatentDoc {
 	private String rightClaim;
 	private String abstractDescription;
 	private String abstractImg;
+	private String patentDocAttachmentFile;
 	
 	
 	
-	
+	public String getPatentDocAttachmentFile() {
+		return patentDocAttachmentFile;
+	}
+	public void setPatentDocAttachmentFile(String patentDocAttachmentFile) {
+		this.patentDocAttachmentFile = patentDocAttachmentFile;
+	}
 	public String getContent() {
 		return content;
 	}
