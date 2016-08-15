@@ -52,7 +52,7 @@
 					          <td style="text-align:center">${status.count}</td>
 					          <td style="text-align:center"><c:out value="${customerSupport.user.username}"/></td>
 					          <td style="text-align:center"><c:out value="${customerSupport.user.name}"/></td>
-					          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${customerSupport.remarkName}' onChange="changeRemarkName('<c:out value='${customerSupport.id}'/>', this.value)"/></td>
+					          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${customerSupport.remarkName}' onChange="changeCustomerSupportRemarkName('<c:out value='${customerSupport.id}'/>', this.value)"/></td>
 					          <td style="text-align:center">
 					          <a href="<s:url value='/employee/deleteCustomerSupport.html'/>?id=<c:out value='${customerSupport.id}'/>">
 					          	删除客服
@@ -75,9 +75,9 @@
 
 </div>
 <script type="text/javascript">
-	function changeRemarkName(id, remarkName) {
+	function changeCustomerSupportRemarkName(id, remarkName) {
 		$.ajax({
-			url: "<s:url value='/employee/changeRemarkName.html'/>?id=" + id + "&remarkName=" + remarkName, 
+			url: "<s:url value='/employee/changeCustomerSupportRemarkName.html'/>?id=" + id + "&remarkName=" + remarkName, 
 			type: 'get', 
 			error: function() {
 				formutil.alertMessage('修改失败，请稍后重试!');

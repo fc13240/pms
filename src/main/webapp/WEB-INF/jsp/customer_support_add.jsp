@@ -18,7 +18,8 @@
 	<div class="container-fluid" >
 
 		<div class="row" style="margin-left:-30px;min-width:1100px;">
-		
+
+      
 			<!--left begin-->
 		  <div class="col-xs-1 sidebar" style="min-width:100px;">
 			<%@ include file="_left_nav_editor.jsp" %>
@@ -32,21 +33,21 @@
 
 				<!-- list beg -->
 					<div class="t-third" style="margin-top10px;background:#fff;">
-					<form action="<s:url value='/employee/searchUsers.html'/>" method="GET"  role="search">
+					<form action="<s:url value='/employee/searchCustomerSupportUsers.html'/>" method="GET"  role="search">
 					  <div class="form-group">
 						<input class="selectPointOfInterest form-control" type="text" id="form-field-1" style="width:450px;display:inline;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" required/>
 						<button  type="submit" class="button button-caution button-rounded" >查询</button>
 						
-						<button  type="button" class="button button-caution button-rounded" onclick="javascript:searchFriends()">好友查询</button>
+						<button  type="button" class="button button-caution button-rounded" onclick="javascript:searchCustomerSupportFriends()">好友查询</button>
 					  </div>
 					</form>
-					
+					<div style="margin-top:22px;text-align: center;">
 					<table class="table table-bordered table-striped" >
 					  <tr>
-						<th>序号</th>
-						<th>用户名</th>
-						<th>姓名</th>
-						<th>操作</th>
+						<th width="200px"  style="text-align:center;">序号</th>
+						<th width="400px"  style="text-align:center;">用户名</th>
+						<th width="400px"  style="text-align:center;">姓名</th>
+						<th width="400px"  style="text-align:center;">操作</th>
 					  </tr>
 					  <c:forEach items="${users}" var="user" varStatus="status">
 						<tr>
@@ -73,13 +74,13 @@
 	</div>
 
 </div>
-
+</div>
 
 
 <script type="text/javascript">
 	function sendCustomerSupportRequest(userId) {
 		$.ajax({
-			url: "<s:url value='/employee/request.html'/>?userId=" + userId,
+			url: "<s:url value='/employee/customerSupportRequest.html'/>?userId=" + userId,
 			success: function() {
 		   		$("<div>添加客服成功</div>").dialog({
 		   			modal: true,
@@ -93,9 +94,9 @@
 		});
 	}
 	
-	function searchFriends(){
+	function searchCustomerSupportFriends(){
 		var keyword = $("input[name='keyword']").val();
-		var url = "<s:url value='/employee/searchFriends.html'/>?keyword=" + keyword;
+		var url = "<s:url value='/employee/searchCustomerSupportFriends.html'/>?keyword=" + keyword;
 		location.href = url;
 	}
 	
