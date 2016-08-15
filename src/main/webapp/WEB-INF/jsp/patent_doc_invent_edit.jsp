@@ -457,7 +457,7 @@
 									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
 									</form> 
 									<div style="height:10px;">&nbsp;</div> 
-									<span style="color:#666;">友情提示：将所需的附件一次性生成压缩文格式(zip,rar等)形式上传，不建议上传其他格式的文件!
+									<span style="color:#666;">友情提示：将所需的附件一次性打包成压缩文件格式上传(zip,rar等)，不建议上传其他格式的文件!
 									</span>
 								</div>
 							</div>
