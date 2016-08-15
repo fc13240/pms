@@ -1,16 +1,12 @@
 package com.lotut.pms.domain;
 
 public class Process {
-	private int processId;
+	private int id;
+	private int userId;
 	private int proxyOrgId;
 	private String remarkName;
-	private User processUser;
-	public int getProcessId() {
-		return processId;
-	}
-	public void setProcessId(int processId) {
-		this.processId = processId;
-	}
+	private User user;
+	
 	public int getProxyOrgId() {
 		return proxyOrgId;
 	}
@@ -23,12 +19,25 @@ public class Process {
 	public void setRemarkName(String remarkName) {
 		this.remarkName = remarkName;
 	}
-	public User getProcessUser() {
-		return processUser;
+	public int getId() {
+		return id;
 	}
-	public void setProcessUser(User processUser) {
-		this.processUser = processUser;
+	public void setId(int id) {
+		this.id = id;
 	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	
 	
 }

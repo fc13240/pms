@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管家——添加客服</title>
+<title>龙图腾专利管家——添加技术员</title>
 <%@ include file="_css.jsp" %>
 </head>
 <body>
@@ -33,12 +33,12 @@
 
 				<!-- list beg -->
 					<div class="t-third" style="margin-top10px;background:#fff;">
-					<form action="<s:url value='/employee/searchCustomerSupportUsers.html'/>" method="GET"  role="search">
+					<form action="<s:url value='/employee/searchTechUsers.html'/>" method="GET"  role="search">
 					  <div class="form-group">
 						<input class="selectPointOfInterest form-control" type="text" id="form-field-1" style="width:450px;display:inline;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" required/>
 						<button  type="submit" class="button button-caution button-rounded" >查询</button>
 						
-						<button  type="button" class="button button-caution button-rounded" onclick="javascript:searchCustomerSupportFriends()">好友查询</button>
+						<button  type="button" class="button button-caution button-rounded" onclick="javascript:searchTechFriends()">好友查询</button>
 					  </div>
 					</form>
 					<div style="margin-top:22px;text-align: center;">
@@ -54,7 +54,7 @@
 						  <td>${status.count + page.startIndex}</td>
 						  <td><c:out value="${user.username}"/></td>
 						  <td><c:out value="${user.name}"/></td>
-						  <td><a  href='javascript:sendCustomerSupportRequest(${user.userId});'>添加为客服</a></td>
+						  <td><a  href='javascript:sendTechRequest(${user.userId});'>添加为技术员</a></td>
 						</tr>
 					  </c:forEach>
 					</table>
@@ -78,11 +78,11 @@
 
 
 <script type="text/javascript">
-	function sendCustomerSupportRequest(userId) {
+	function sendTechRequest(userId) {
 		$.ajax({
-			url: "<s:url value='/employee/customerSupportRequest.html'/>?userId=" + userId,
+			url: "<s:url value='/employee/techRequest.html'/>?userId=" + userId,
 			success: function() {
-		   		$("<div>添加客服成功</div>").dialog({
+		   		$("<div>添加技术员成功</div>").dialog({
 		   			modal: true,
 		   			buttons: {
 		   				Ok: function() {
@@ -94,9 +94,9 @@
 		});
 	}
 	
-	function searchCustomerSupportFriends(){
+	function searchTechFriends(){
 		var keyword = $("input[name='keyword']").val();
-		var url = "<s:url value='/employee/searchCustomerSupportFriends.html'/>?keyword=" + keyword;
+		var url = "<s:url value='/employee/searchTechFriends.html'/>?keyword=" + keyword;
 		location.href = url;
 	}
 	

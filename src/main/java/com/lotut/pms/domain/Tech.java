@@ -1,16 +1,12 @@
 package com.lotut.pms.domain;
 
 public class Tech {
-	private int techId;
+	private int id;
+	private int userId;
 	private int proxyOrgId;
 	private String remarkName;
-	private User techUser;
-	public int getTechId() {
-		return techId;
-	}
-	public void setTechId(int techId) {
-		this.techId = techId;
-	}
+	private User user;
+	
 	public int getProxyOrgId() {
 		return proxyOrgId;
 	}
@@ -23,11 +19,23 @@ public class Tech {
 	public void setRemarkName(String remarkName) {
 		this.remarkName = remarkName;
 	}
-	public User getTechUser() {
-		return techUser;
+	public int getId() {
+		return id;
 	}
-	public void setTechUser(User techUser) {
-		this.techUser = techUser;
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

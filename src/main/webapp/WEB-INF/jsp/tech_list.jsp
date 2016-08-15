@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管家——客服列表</title>
+<title>龙图腾专利管家——技术员列表</title>
 <%@ include file="_css.jsp" %>
 </head>
 <body>
@@ -33,7 +33,7 @@
 					<div class="t-third">
 					  <form action="<s:url value='/friend/searchUserFriends.html'/>" method="GET"  role="search">
 					    <div class="form-group">
-					      <button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addCustomerSupport()">增加客服</button>
+					      <button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addTech()">增加技术员</button>
 					    </div>
 					  </form>
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
@@ -47,15 +47,15 @@
 					      </tr>
 					    </thead>
 					    <tbody>
-					      <c:forEach items="${customerSupports}" var="customerSupport" varStatus="status">
+					      <c:forEach items="${techs}" var="tech" varStatus="status">
 					        <tr>
 					          <td style="text-align:center">${status.count}</td>
-					          <td style="text-align:center"><c:out value="${customerSupport.user.username}"/></td>
-					          <td style="text-align:center"><c:out value="${customerSupport.user.name}"/></td>
-					          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${customerSupport.remarkName}' onChange="changeCustomerSupportRemarkName('<c:out value='${customerSupport.id}'/>', this.value)"/></td>
+					          <td style="text-align:center"><c:out value="${tech.user.username}"/></td>
+					          <td style="text-align:center"><c:out value="${tech.user.name}"/></td>
+					          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${tech.remarkName}' onChange="changeTechRemarkName('<c:out value='${tech.id}'/>', this.value)"/></td>
 					          <td style="text-align:center">
-					          <a href="<s:url value='/employee/deleteCustomerSupport.html'/>?id=<c:out value='${customerSupport.id}'/>">
-					          	删除客服
+					          <a href="<s:url value='/employee/deleteTech.html'/>?id=<c:out value='${tech.id}'/>">
+					          	删除技术员
 					          </a>
 					          </td>
 					        </tr>
@@ -75,9 +75,9 @@
 
 </div>
 <script type="text/javascript">
-	function changeCustomerSupportRemarkName(id, remarkName) {
+	function changeTechRemarkName(id, remarkName) {
 		$.ajax({
-			url: "<s:url value='/employee/changeCustomerSupportRemarkName.html'/>?id=" + id + "&remarkName=" + remarkName, 
+			url: "<s:url value='/employee/changeTechRemarkName.html'/>?id=" + id + "&remarkName=" + remarkName, 
 			type: 'get', 
 			error: function() {
 				formutil.alertMessage('修改失败，请稍后重试!');
@@ -85,8 +85,8 @@
 		});	
 	}
 	
-	function addCustomerSupport(){
-		var url = "<s:url value='/employee/searchCustomerSupport.html'/>";
+	function addTech(){
+		var url = "<s:url value='/employee/searchTech.html'/>";
 		location.href = url;
 	}
 </script>
