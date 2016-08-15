@@ -1626,7 +1626,13 @@ function loadImgs(){
 			dataType : "json", 
 			data: {'file': $("#patentAttachmentFile").val()},
 			beforeSubmit : function() {
-				alert("正在上传");
+				var name=$("#filename").val();
+				var mime = name.toLowerCase().substr(name.lastIndexOf("."));
+				if(mime ==".zip" || mime ==".rar"){
+					return true;
+				}else{
+					return false;
+				}
 			}, 
 			success : function(result) {
 				uploadSuccess(result); 
