@@ -1620,6 +1620,7 @@ function loadImgs(){
 	});
 	
 	function uploadAttachmentFile(){
+		var filePath=${"#patentDocAttachmentFile"}.val();
 		var hideForm = $('#patentDocAttachment'); 
 		var options = {
 			dataType : "json", 
@@ -1627,7 +1628,8 @@ function loadImgs(){
 			beforeSubmit : function() {
 				alert("正在上传");
 			}, 
-			success : function(result) { 
+			success : function(result) {
+				deleteFile(filePath);
 				uploadSuccess(result); 
 			}, 
 			error : function() {
@@ -1647,6 +1649,19 @@ function loadImgs(){
 			},
 			error: function(){
 				alert("保存失败");
+			}
+		});
+	}
+	function deleteFile(value){
+		$.ajax({
+			type: "POST",
+			url: "<s:url value='/editor/deletePatentDocAttachmentFile.html'/>",
+			data: {"filePath":value},
+			success: function(data){
+				alert("删除成功");
+			},
+			error: function(){
+				alert("删除失败");
 			}
 		});
 	}

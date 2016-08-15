@@ -427,6 +427,13 @@ public class PatentEditDocController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping(path="/deletePatentDocAttachmentFile",method=RequestMethod.GET)
+	public void deletePatentDocAttachmentFile(@RequestParam("filePath")String filePath,PrintWriter writer){
+		CreateWord.deleteDir(new File(filePath));
+		writer.write(1);
+	}
+	
 	public List<String> getAttachmentImgUrl(long patentDocId){
 		List<Attachment> Imgs=patentDocService.getAttachmentById(patentDocId);
 		List<String> ImgUrls=new ArrayList<>();
