@@ -449,7 +449,7 @@
 							
 							<div class="cl">
 								<div class="lt-box" style="height:300px;padding:20px;">
-									 <%-- action="<s:url value='/editor/uploadFile.html'/>" method="post" enctype="multipart/form-data" --%>
+
 									<form id="patentDocAttachment" action="<s:url value='/editor/uploadFile.html'/>"  method="post" enctype="multipart/form-data" class="form-horizontal">  
 									<input style="display:none;"  id="patentAttachmentFile" name="file" type="file" />
 									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
@@ -1613,7 +1613,7 @@ function loadImgs(){
 </script>
 
 <script type="text/javascript">
-	jQuery(function($) {
+/* 	jQuery(function($) {
 		$("#patentDocAttachment").validate({
 			rules: {
 				filename: 'required'
@@ -1625,25 +1625,26 @@ function loadImgs(){
 				form.submit();     
 			}
 		});
-	});
+	}); */
 	$('input[id="patentAttachmentFile"]').change(function() {
-		//alert($(this).val());
 		$('#filename').val($(this).val());  
 	});
 	
 	function uploadAttachmentFile(){
 		var hideForm = $('#patentDocAttachment'); 
-		var options = { 
-		dataType : "json", 
-		data: {'file': $("#patentAttachmentFile").val()},
-		beforeSubmit : function() { 
-		}, 
-		success : function(result) { 
-		alert(result); 
-		}, 
-		error : function(result) {
-			alert("上传失败"); 
-		} 
+		var options = {
+			type : "POST",
+			dataType : "json", 
+			data: {'file': $("#patentAttachmentFile").val()},
+			beforeSubmit : function() {
+				alert("正在上传");
+			}, 
+			success : function(data) { 
+			alert(data); 
+			}, 
+			error : function(data) {
+				alert("上传失败"); 
+			} 
 		}; 
 		hideForm.ajaxSubmit(options); 
 	}
