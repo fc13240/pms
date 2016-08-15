@@ -12,6 +12,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -29,6 +30,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Attachment;
@@ -354,24 +358,28 @@ public class PatentEditDocController {
 		}
 	}
 	
-	@RequestMapping(path="/editor/uploadFile")
-	public void uploadPatentAttachment(@RequestParam("filename") Part filename,@RequestParam("patentDocId") long patentDocId,PrintWriter printOut){
+	@RequestMapping(path="/uploadFile",method=RequestMethod.POST)
+	public void uploadPatentAttachment(@RequestParam("file")MultipartFile file,PrintWriter printOut){
 		try {
-			if (!filename.getSubmittedFileName().endsWith(".zip") && !filename.getSubmittedFileName().endsWith(".rar")){
+			if (! file.getOriginalFilename().endsWith(".zip") || !file.getOriginalFilename().endsWith(".rar")){
 				printOut.write("上传文件不是一个压缩文件，请核对后再进行上传!");
 			}else{
 				
 				String savePath=Settings.PATENTDOC_ATTACHMENT_FILE_PATH;
 				String uploadFile="uploadFile";
 				savePath += uploadFile + "/";
-				
-				File file =new File(savePath);    
-				if  (!file .exists()  && !file .isDirectory()){       
-					file .mkdir();    
+				String fileName = file.getOriginalFilename(); 
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        		String ymd = sdf.format(new Date());
+        		savePath += ymd + "/";
+				File saveDirFile =new File(savePath);    
+				if  (!saveDirFile .exists()){       
+					saveDirFile .mkdir();    
 				}
-				String usename = PrincipalUtils.getCurrentPrincipal().getName();
-				String newFileName =usename+"_"+filename.getName();
-				InputStream is = filename.getInputStream();
+				String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+        		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+        		String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
+				InputStream is = file.getInputStream();
 				int BUFFER_SIZE = 8 * 1024;
 	    		byte[] buffer = new byte[BUFFER_SIZE];
 	    		try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
@@ -382,7 +390,7 @@ public class PatentEditDocController {
 	    			out.flush();
 	    			out.close();
 	    		}
-	    		printOut.write("上传成功");
+	    		printOut.write(savePath+newFileName);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -11,17 +11,17 @@
 	
 	<se:authorize access="hasRole('ROLE_PROXY_ORG')">
 		<li class="active"> 
-			<a href="<s:url value='/employee/getCustomerSupportList.html'/>?proxyOrgId=2">
+			<a href="<s:url value='/employee/getCustomerSupportList.html'/>">
 			<h5>客服管理</h5>
 			</a>
 		</li>
 		<li class="active"> 
-			<a href="<s:url value='/editor/newPatentDoc.html'/>?patentType=1">
+			<a href="<s:url value='/employee/getTechList.html'/>">
 			<h5>技术员管理</h5>
 			</a>
 		</li>
 		<li class="active"> 
-			<a href="<s:url value='/editor/newPatentDoc.html'/>?patentType=1">
+			<a href="<s:url value='/employee/getProcessList.html'/>">
 			<h5>流程员管理</h5>
 			</a>
 		</li>
