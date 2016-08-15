@@ -14,6 +14,7 @@
 	<title>测试页面</title>
 	<c:import url="common/kindEditor.jsp"></c:import>
 	<%@ include file="_css.jsp" %>
+	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -448,12 +449,12 @@
 							
 							<div class="cl">
 								<div class="lt-box" style="height:300px;padding:20px;">
-	
-									<form id="patentDocAttachment" action="<s:url value='/editor/uploadFile.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
-									<input style="display:none;"  id="patentFile" name="patentFile" type="file" />
+									 <%-- action="<s:url value='/editor/uploadFile.html'/>" method="post" enctype="multipart/form-data" --%>
+									<form id="patentDocAttachment" action="<s:url value='/editor/uploadFile.html'/>" method="post" method="post" enctype="multipart/form-data" class="form-horizontal">  
+									<input style="display:none;"  id="patentAttachmentFile" name="file" type="file" />
 									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
-									<button type="button" onclick="$('input[id=patentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
-									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="">上传</button>
+									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
 									</form> 
 									<div style="height:10px;">&nbsp;</div> 
 									<span style="color:#666;">友情提示：将所需的附件一次性生成压缩文格式(zip,rar等)形式上传，不建议上传其他格式的文件!
@@ -1625,27 +1626,26 @@ function loadImgs(){
 			}
 		});
 	});
-	$('input[id=patentFile]').change(function() {  
-		$('#filename').val($(this).val());  
+	$('input[id="patentAttachmentFile"]').change(function() {
+		alert($(this).val());
+		//$('#filename').val($(this).val());  
 	});
 	
 	function uploadAttachmentFile(){
-		var formData = new FormData($( "#patentDocAttachment" )[0]);  
-	    $.ajax({  
-	         url: "<s:url value='/editor/uploadFile.html'/>" ,  
-	         type: 'POST',  
-	         data: formData,  
-	         async: false,  
-	         cache: false,  
-	         contentType: false,  
-	         processData: false,  
-	         success: function (returndata) {  
-	             alert(returndata);  
-	         },  
-	         error: function (returndata) {  
-	             alert(returndata);  
-	         }  
-    	});  
+		var hideForm = $('#patentDocAttachment'); 
+		var options = { 
+		dataType : "json", 
+		data: {'file': $("#patentAttachmentFile").val()},
+		beforeSubmit : function() { 
+		}, 
+		success : function(result) { 
+		alert(result); 
+		}, 
+		error : function(result) {
+			alert("上传失败"); 
+		} 
+		}; 
+		hideForm.ajaxSubmit(options); 
 	}
 	
 </script>

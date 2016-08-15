@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Attachment;
@@ -354,10 +355,12 @@ public class PatentEditDocController {
 		}
 	}
 	
-	@RequestMapping(path="/editor/uploadFile")
-	public void uploadPatentAttachment(@RequestParam("filename") Part filename,@RequestParam("patentDocId") long patentDocId,PrintWriter printOut){
-		try {
-			if (!filename.getSubmittedFileName().endsWith(".zip") && !filename.getSubmittedFileName().endsWith(".rar")){
+	@RequestMapping(path="/uploadFile")
+	public void uploadPatentAttachment(MultipartFile file,PrintWriter printOut){
+		
+		System.out.println("文件大小:"+file.getSize());
+		/*try {
+			if (!file.getSubmittedFileName().endsWith(".zip") && !filename.getSubmittedFileName().endsWith(".rar")){
 				printOut.write("上传文件不是一个压缩文件，请核对后再进行上传!");
 			}else{
 				
@@ -371,7 +374,7 @@ public class PatentEditDocController {
 				}
 				String usename = PrincipalUtils.getCurrentPrincipal().getName();
 				String newFileName =usename+"_"+filename.getName();
-				InputStream is = filename.getInputStream();
+				InputStream is = file.getParentFile()
 				int BUFFER_SIZE = 8 * 1024;
 	    		byte[] buffer = new byte[BUFFER_SIZE];
 	    		try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
@@ -386,7 +389,8 @@ public class PatentEditDocController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
+		printOut.write(file.getSize()+"--");
 	}
 
 	public List<String> getAttachmentImgUrl(long patentDocId){
