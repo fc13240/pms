@@ -7,8 +7,8 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.EmployeeDao;
 import com.lotut.pms.dao.mapper.EmployeeMapper;
 import com.lotut.pms.domain.CustomerSupport;
-import com.lotut.pms.domain.Tech;
-import com.lotut.pms.domain.Process;
+import com.lotut.pms.domain.TechPerson;
+import com.lotut.pms.domain.ProcessPerson;
 
 public class EmployeeMybatisDao extends SqlSessionDaoSupport implements EmployeeDao{
 	private EmployeeMapper employeeMapper;
@@ -29,13 +29,13 @@ public class EmployeeMybatisDao extends SqlSessionDaoSupport implements Employee
 	}
 
 	@Override
-	public List<Tech> getTechList(int proxyOrgId) {
-		return employeeMapper.getTechList(proxyOrgId);
+	public List<TechPerson> getTechPersonList(int proxyOrgId) {
+		return employeeMapper.getTechPersonList(proxyOrgId);
 	}
 	
 	@Override
-	public List<Process> getProcessList(int proxyOrgId) {
-		return employeeMapper.getProcessList(proxyOrgId);
+	public List<ProcessPerson> getProcessPersonList(int proxyOrgId) {
+		return employeeMapper.getProcessPersonList(proxyOrgId);
 	}
 	
 	
@@ -45,13 +45,13 @@ public class EmployeeMybatisDao extends SqlSessionDaoSupport implements Employee
 	}
 
 	@Override
-	public void addOrUpdateTech(Tech tech) {
-		employeeMapper.addOrUpdateTech(tech);
+	public void addOrUpdateTechPerson(TechPerson techPerson) {
+		employeeMapper.addOrUpdateTechPerson(techPerson);
 	}
 	
 	@Override
-	public void addOrUpdateProcess(Process process) {
-		employeeMapper.addOrUpdateProcess(process);
+	public void addOrUpdateProcessPerson(ProcessPerson processPerson) {
+		employeeMapper.addOrUpdateProcessPerson(processPerson);
 	}
 	
 	
@@ -61,13 +61,13 @@ public class EmployeeMybatisDao extends SqlSessionDaoSupport implements Employee
 	}
 
 	@Override
-	public void deleteTech(int id) {
-		employeeMapper.deleteTech(id);
+	public void deleteTechPerson(int id) {
+		employeeMapper.deleteTechPerson(id);
 	}
 	
 	@Override
-	public void deleteProcess(int id) {
-		employeeMapper.deleteProcess(id);
+	public void deleteProcessPerson(int id) {
+		employeeMapper.deleteProcessPerson(id);
 	}
 	
 	
@@ -77,13 +77,13 @@ public class EmployeeMybatisDao extends SqlSessionDaoSupport implements Employee
 	}
 
 	@Override
-	public void changeTechRemarkName(int id, String remarkName) {
-		employeeMapper.changeTechRemarkName(id,remarkName);
+	public void changeTechPersonRemarkName(int id, String remarkName) {
+		employeeMapper.changeTechPersonRemarkName(id,remarkName);
 	}
 
 	@Override
-	public void changeProcessRemarkName(int id, String remarkName) {
-		employeeMapper.changeProcessRemarkName(id,remarkName);
+	public void changeProcessPersonRemarkName(int id, String remarkName) {
+		employeeMapper.changeProcessPersonRemarkName(id,remarkName);
 	}
 
 	

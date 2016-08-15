@@ -15,7 +15,7 @@
 		</association>
 	</resultMap>
 	
-	<resultMap type="Tech" id="TechResultMap">
+	<resultMap type="TechPerson" id="TechPersonResultMap">
 		<id property="id" column="id"/>
 		<result property="userId" column="user_id"/>
 		<result property="proxyOrgId" column="proxy_org_id"/>
@@ -27,7 +27,7 @@
 		</association>
 	</resultMap>
 	
-	<resultMap type="Process" id="ProcessResultMap">
+	<resultMap type="ProcessPerson" id="ProcessPersonResultMap">
 		<id property="id" column="id"/>
 		<result property="userId" column="user_id"/>
 		<result property="proxyOrgId" column="proxy_org_id"/>
@@ -45,14 +45,14 @@
 		where cs.proxy_org_id=#{proxyOrgId}
 	</select>
 	
-	<select id="getTechList"  parameterType="int" resultMap="TechResultMap">
-		select t.id,t.user_id, t.remark_name,t.proxy_org_id,u.username,u.name from techs t
+	<select id="getTechPersonList"  parameterType="int" resultMap="TechPersonResultMap">
+		select t.id,t.user_id, t.remark_name,t.proxy_org_id,u.username,u.name from tech_person t
 		join users u on u.user_id = t.user_id
 		where t.proxy_org_id=#{proxyOrgId}
 	</select>
 	
-	<select id="getProcessList"  parameterType="int" resultMap="ProcessResultMap">
-		select p.id,p.user_id, p.remark_name,p.proxy_org_id,u.username,u.name from processes p
+	<select id="getProcessPersonList"  parameterType="int" resultMap="ProcessPersonResultMap">
+		select p.id,p.user_id, p.remark_name,p.proxy_org_id,u.username,u.name from process_person p
 		join users u on u.user_id = p.user_id
 		where p.proxy_org_id=#{proxyOrgId}
 	</select>
@@ -64,14 +64,14 @@
 			user_id=#{userId},proxy_org_id=#{proxyOrgId}
 	</insert>
 	
-	<insert id="addOrUpdateTech" parameterType="Tech" useGeneratedKeys="true" keyProperty="id">
-		insert into techs(user_id,proxy_org_id,remark_name) values(#{userId},#{proxyOrgId},'')
+	<insert id="addOrUpdateTechPerson" parameterType="TechPerson" useGeneratedKeys="true" keyProperty="id">
+		insert into tech_person(user_id,proxy_org_id,remark_name) values(#{userId},#{proxyOrgId},'')
 		on duplicate key update
 			user_id=#{userId},proxy_org_id=#{proxyOrgId}
 	</insert>
 		
-	<insert id="addOrUpdateProcess" parameterType="Process" useGeneratedKeys="true" keyProperty="id">
-		insert into Processes(user_id,proxy_org_id,remark_name) values(#{userId},#{proxyOrgId},'')
+	<insert id="addOrUpdateProcessPerson" parameterType="ProcessPerson" useGeneratedKeys="true" keyProperty="id">
+		insert into process_person(user_id,proxy_org_id,remark_name) values(#{userId},#{proxyOrgId},'')
 		on duplicate key update
 			user_id=#{userId},proxy_org_id=#{proxyOrgId}
 	</insert>
@@ -94,30 +94,30 @@
 		delete from customer_supports  where id=#{id}
 	</delete>
 	
-	<delete id="deleteTech" >
+	<delete id="deleteTechPerson" >
 		delete from group_members where username=(select username from users where user_id = 
-			(select user_id from techs where id=#{id}))	and group_id=
+			(select user_id from tech_person where id=#{id}))	and group_id=
 			(SELECT group_id FROM group_authorities WHERE authority="ROLE_TECH");
-		delete from techs  where id=#{id} 	
+		delete from tech_person  where id=#{id} 	
 	</delete>
 	
-	<delete id="deleteProcess" >
+	<delete id="deleteProcessPerson" >
 		delete from group_members where username=(select username from users where user_id = 
-			(select user_id from processes where id=#{id}))	and group_id=
+			(select user_id from process_person where id=#{id}))	and group_id=
 			(SELECT group_id FROM group_authorities WHERE authority="ROLE_PROCESS");
-		delete from processes  where id=#{id} 	
+		delete from process_person  where id=#{id} 	
 	</delete>
 	
 	<update id="changeCustomerSupportRemarkName">
 		update customer_supports set remark_name=#{remarkName} where id=#{id}
 	</update>
 	
-	<update id="changeTechRemarkName">
-		update techs set remark_name=#{remarkName} where id=#{id}
+	<update id="changeTechPersonRemarkName">
+		update tech_person set remark_name=#{remarkName} where id=#{id}
 	</update>
 	
-	<update id="changeProcessRemarkName">
-		update processes set remark_name=#{remarkName} where id=#{id}
+	<update id="changeProcessPersonRemarkName">
+		update process_person set remark_name=#{remarkName} where id=#{id}
 	</update>
 	
 </mapper>

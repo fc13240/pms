@@ -16,12 +16,12 @@
 			</a>
 		</li>
 		<li class="active"> 
-			<a href="<s:url value='/employee/getTechList.html'/>">
+			<a href="<s:url value='/employee/getTechPersonList.html'/>">
 			<h5>技术员管理</h5>
 			</a>
 		</li>
 		<li class="active"> 
-			<a href="<s:url value='/employee/getProcessList.html'/>">
+			<a href="<s:url value='/employee/getProcessPersonList.html'/>">
 			<h5>流程员管理</h5>
 			</a>
 		</li>

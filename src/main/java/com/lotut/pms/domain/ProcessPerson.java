@@ -1,6 +1,6 @@
 package com.lotut.pms.domain;
 
-public class Process {
+public class ProcessPerson {
 	private int id;
 	private int userId;
 	private int proxyOrgId;
