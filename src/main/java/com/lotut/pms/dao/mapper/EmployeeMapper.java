@@ -5,7 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.CustomerSupport;
+import com.lotut.pms.domain.Process;
 import com.lotut.pms.domain.Tech;
+
 
 public interface EmployeeMapper {
 
@@ -26,5 +28,13 @@ public interface EmployeeMapper {
 	void deleteTech(int id);
 
 	void changeTechRemarkName(@Param("id") int id, @Param("remarkName") String remarkName);
+
+	List<Process> getProcessList(int proxyOrgId);
+
+	void addOrUpdateProcess(Process process);
+
+	void deleteProcess(int id);
+
+	void changeProcessRemarkName(@Param("id") int id, @Param("remarkName") String remarkName);
 
 }

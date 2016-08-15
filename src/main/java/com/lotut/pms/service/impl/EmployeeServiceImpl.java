@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lotut.pms.dao.EmployeeDao;
 import com.lotut.pms.domain.CustomerSupport;
 import com.lotut.pms.domain.Tech;
+import com.lotut.pms.domain.Process;
 import com.lotut.pms.service.EmployeeService;
 import com.lotut.pms.util.Role;
 
@@ -58,6 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDao.getTechList(proxyOrgId);
 	}
 	@Override
+	@Transactional
 	public void deleteTech(int id) {
 		employeeDao.deleteTech(id);	
 		
@@ -65,6 +67,29 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public void changeTechRemarkName(int id, String remarkName) {
 		employeeDao.changeTechRemarkName(id, remarkName);	
+	}
+	@Override
+	public List<Process> getProcessList(int proxyOrgId) {
+		return  employeeDao.getProcessList(proxyOrgId);
+	}
+	@Override
+	public void addOrUpdateProcess(Process process) {
+		employeeDao.addOrUpdateProcess(process);
+		boolean isNewProcess = process.getId() != 0;
+		if (isNewProcess) {
+			employeeDao.insertGroupMember(process.getUserId(),Role.ROLE_PROCESS.getRoleName());
+		}
+	}
+	@Override
+	@Transactional
+	public void deleteProcess(int id) {
+		employeeDao.deleteProcess(id);	
+		
+	}
+	@Override
+	public void changeProcessRemarkName(int id, String remarkName) {
+		employeeDao.changeProcessRemarkName(id, remarkName);
+		
 	}
 
 }

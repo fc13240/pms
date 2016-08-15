@@ -8,6 +8,7 @@ import com.lotut.pms.dao.EmployeeDao;
 import com.lotut.pms.dao.mapper.EmployeeMapper;
 import com.lotut.pms.domain.CustomerSupport;
 import com.lotut.pms.domain.Tech;
+import com.lotut.pms.domain.Process;
 
 public class EmployeeMybatisDao extends SqlSessionDaoSupport implements EmployeeDao{
 	private EmployeeMapper employeeMapper;
@@ -69,6 +70,29 @@ public class EmployeeMybatisDao extends SqlSessionDaoSupport implements Employee
 	@Override
 	public void changeTechRemarkName(int id, String remarkName) {
 		employeeMapper.changeTechRemarkName(id,remarkName);
+		
+	}
+
+	@Override
+	public List<Process> getProcessList(int proxyOrgId) {
+		return employeeMapper.getProcessList(proxyOrgId);
+	}
+
+	@Override
+	public void addOrUpdateProcess(Process process) {
+		employeeMapper.addOrUpdateProcess(process);
+		
+	}
+
+	@Override
+	public void deleteProcess(int id) {
+		employeeMapper.deleteProcess(id);
+		
+	}
+
+	@Override
+	public void changeProcessRemarkName(int id, String remarkName) {
+		employeeMapper.changeProcessRemarkName(id,remarkName);
 		
 	}
 

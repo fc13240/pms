@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.lotut.pms.domain.CustomerSupport;
 import com.lotut.pms.domain.Tech;
 import com.lotut.pms.domain.User;
+import com.lotut.pms.domain.Process;
 import com.lotut.pms.service.EmployeeService;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -46,6 +47,14 @@ public class EmployeeController {
 		return "tech_list";
 	}
 	
+	@RequestMapping(path="/getProcessList", method=RequestMethod.GET)
+	public String getProcessList(Model model) {
+		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+		List<Process> processes = employeeService.getProcessList(proxyOrgId);
+		model.addAttribute("processes", processes);
+		return "process_list";
+	}
+	
 	
 	@RequestMapping(path="/searchCustomerSupport", method=RequestMethod.GET)
 	public String searchCustomerSupport(Model model) {
@@ -55,6 +64,11 @@ public class EmployeeController {
 	@RequestMapping(path="/searchTech", method=RequestMethod.GET)
 	public String searchTech(Model model) {
 		return "tech_add";
+	}
+	
+	@RequestMapping(path="/searchProcess", method=RequestMethod.GET)
+	public String searchProcess(Model model) {
+		return "process_add";
 	}
 	
 	@RequestMapping(path="/searchCustomerSupportUsers", method=RequestMethod.GET)
@@ -71,6 +85,13 @@ public class EmployeeController {
 		return "tech_add";
 	}
 	
+	@RequestMapping(path="/searchProcessUsers", method=RequestMethod.GET)
+	public String searchProcessUsers(@RequestParam(name="keyword") String keyword, Model model) {
+		List<User> resultUsers = friendService.searchFriends(keyword);
+		model.addAttribute("users", resultUsers);
+		return "process_add";
+	}
+	
 	@RequestMapping(path="/searchCustomerSupportFriends", method=RequestMethod.GET)
 	public String searchCustomerSupportFriends(@RequestParam("keyword") String keyword, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
@@ -85,6 +106,14 @@ public class EmployeeController {
 		List<User> resultUsers = friendService.findFriendsByUserId(userId,keyword);
 		model.addAttribute("users", resultUsers);
 		return "tech_add";
+	}	
+	
+	@RequestMapping(path="/searchProcessFriends", method=RequestMethod.GET)
+	public String searchProcessFriends(@RequestParam("keyword") String keyword, Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> resultUsers = friendService.findFriendsByUserId(userId,keyword);
+		model.addAttribute("users", resultUsers);
+		return "process_add";
 	}	
 	
 	
@@ -104,6 +133,14 @@ public class EmployeeController {
 		return "tech_add";
 	}
 	
+	@RequestMapping(path="/processRequest", method=RequestMethod.GET)
+	public String addOrUpdateProcess(@ModelAttribute("process")Process process,Model model) {
+		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+		process.setProxyOrgId(proxyOrgId);
+		employeeService.addOrUpdateProcess(process);
+		return "process_add";
+	}
+	
 	@RequestMapping(path="/deleteCustomerSupport", method=RequestMethod.GET)
 	public String deleteCustomerSupport(@RequestParam("id")int id,Model model) {
 		int proxyOrgId = PrincipalUtils.getCurrentUserId();
@@ -120,6 +157,16 @@ public class EmployeeController {
 		return "redirect:/employee/getTechList.html";
 	}
 	
+	@RequestMapping(path="/deleteProcess", method=RequestMethod.GET)
+	public String deleteProcess(@RequestParam("id")int id,Model model) {
+		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+		employeeService.deleteProcess(id);
+		model.addAttribute("proxyOrgId",proxyOrgId);
+		return "redirect:/employee/getProcessList.html";
+	}
+	
+	
+	
 	@RequestMapping(path="/changeCustomerSupportRemarkName", method=RequestMethod.GET)
 	public String changeCustomerSupportRemarkName(int id, String remarkName) {
 		employeeService.changeCustomerSupportRemarkName(id, remarkName);
@@ -132,6 +179,11 @@ public class EmployeeController {
 		return "tech_list";
 	}
 	
+	@RequestMapping(path="/changeProcessRemarkName", method=RequestMethod.GET)
+	public String changeProcessRemarkName(int id, String remarkName) {
+		employeeService.changeProcessRemarkName(id, remarkName);
+		return "process_list";
+	}
 	
 	
 }

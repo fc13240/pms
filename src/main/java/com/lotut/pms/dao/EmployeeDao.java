@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.lotut.pms.domain.CustomerSupport;
 import com.lotut.pms.domain.Tech;
+import com.lotut.pms.domain.Process;
 
 public interface EmployeeDao {
 
@@ -24,5 +25,13 @@ public interface EmployeeDao {
 	void deleteTech(int id);
 
 	void changeTechRemarkName(int id, String remarkName);
+
+	List<Process> getProcessList(int proxyOrgId);
+
+	void addOrUpdateProcess(Process process);
+
+	void deleteProcess(int id);
+
+	void changeProcessRemarkName(int id, String remarkName);
 
 }
