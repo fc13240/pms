@@ -450,7 +450,7 @@
 							<div class="cl">
 								<div class="lt-box" style="height:300px;padding:20px;">
 									 <%-- action="<s:url value='/editor/uploadFile.html'/>" method="post" enctype="multipart/form-data" --%>
-									<form id="patentDocAttachment" action="<s:url value='/editor/uploadFile.html'/>" method="post" method="post" enctype="multipart/form-data" class="form-horizontal">  
+									<form id="patentDocAttachment" action="<s:url value='/editor/uploadFile.html'/>"  method="post" enctype="multipart/form-data" class="form-horizontal">  
 									<input style="display:none;"  id="patentAttachmentFile" name="file" type="file" />
 									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
 									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
