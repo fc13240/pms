@@ -43,6 +43,7 @@ import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.TemplatePage;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
+import com.lotut.pms.service.PatentService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.CreateWord;
 import com.lotut.pms.web.util.DocUtil;
@@ -359,44 +360,57 @@ public class PatentEditDocController {
 	}
 	
 	@RequestMapping(path="/uploadFile",method=RequestMethod.POST)
-	public void uploadPatentAttachment(@RequestParam("file")MultipartFile file,PrintWriter printOut){
-		try {
-			if (! file.getOriginalFilename().endsWith(".zip") || !file.getOriginalFilename().endsWith(".rar")){
-				printOut.write("上传文件不是一个压缩文件，请核对后再进行上传!");
-			}else{
-				
-				String savePath=Settings.PATENTDOC_ATTACHMENT_FILE_PATH;
-				String uploadFile="uploadFile";
-				savePath += uploadFile + "/";
-				String fileName = file.getOriginalFilename(); 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        		String ymd = sdf.format(new Date());
-        		savePath += ymd + "/";
-				File saveDirFile =new File(savePath);    
-				if  (!saveDirFile .exists()){       
-					saveDirFile .mkdir();    
-				}
-				String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
-        		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-        		String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
-				InputStream is = file.getInputStream();
-				int BUFFER_SIZE = 8 * 1024;
-	    		byte[] buffer = new byte[BUFFER_SIZE];
-	    		try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
-	    			int bytesRead = -1;
-	    			while ((bytesRead = is.read(buffer)) != -1) {
-	    				out.write(buffer, 0, bytesRead);
-	    			}
-	    			out.flush();
-	    			out.close();
-	    		}
-	    		printOut.write(savePath+newFileName);
+	public void uploadPatentAttachment(HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
+		try{
+			String savePath=Settings.PATENTDOC_ATTACHMENT_FILE_PATH;
+			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+			MultipartFile file1 = multipartRequest.getFile("file");
+			String fileName = file1.getOriginalFilename(); 
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String ymd = sdf.format(new Date());
+			savePath += ymd + "/";
+			File dirFile = new File(savePath);
+			if (!dirFile.exists()) {
+				dirFile.mkdirs();
 			}
-		} catch (Exception e) {
+			String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+			String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
+			InputStream is = file1.getInputStream();
+			int BUFFER_SIZE = 8 * 1024;
+			byte[] buffer = new byte[BUFFER_SIZE];
+			try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
+				int bytesRead = -1;
+				while ((bytesRead = is.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesRead);
+				}
+				out.flush();
+				out.close();
+			}
+			WebUtils.writeJsonStrToResponse(response,savePath+newFileName);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+	}
+	
+	@RequestMapping(path="/savePatentDocAttachmentFile",method=RequestMethod.POST)
+	public void savePatentDocAttachmentFile(PatentDoc patentDoc,PrintWriter writer){
+		patentDocService.savePatentDocAttachmentFile(patentDoc);
+		writer.write(1);
+	}
+	
+	@RequestMapping(path="/getPatentDocAttachmentFile",method=RequestMethod.GET)
+	public void  getPatentDocAttachmentFile(@RequestParam("patentDocId")long patentDocId,HttpServletResponse response,Model model){
+		String filePath=patentDocService.getPatentDocAttachmentFile(patentDocId);
+		try {
+			WebUtils.writeJsonStrToResponse(response,filePath);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	
 	public List<String> getAttachmentImgUrl(long patentDocId){
 		List<Attachment> Imgs=patentDocService.getAttachmentById(patentDocId);
 		List<String> ImgUrls=new ArrayList<>();
@@ -428,6 +442,6 @@ public class PatentEditDocController {
 		}
 	}
 	
-	
+
 
 }

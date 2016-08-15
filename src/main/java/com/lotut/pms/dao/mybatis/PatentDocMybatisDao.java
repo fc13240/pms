@@ -102,4 +102,18 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	public Attachment getLabelByUrl(String url) {
 		return patentDocMapper.getLabelByUrl(url);
 	}
+
+
+
+	@Override
+	public void savePatentDocAttachmentFile(PatentDoc PatentDoc) {
+		patentDocMapper.savePatentDocAttachmentFile(PatentDoc);
+	}
+
+
+
+	@Override
+	public String getPatentDocAttachmentFile(long patentDocId) {
+		return patentDocMapper.getPatentDocAttachmentFile(patentDocId);
+	}
 }

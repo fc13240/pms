@@ -19,6 +19,7 @@
 		<result property="rightClaim" column="right_claim"/>
 		<result property="abstractDescription" column="abstract_desc"/>
 		<result property="abstractImg" column="abstract_img"/>
+		<result property="patentDocAttachmentFile" column="patent_doc_attachment_file"/>
 	</resultMap>
 
 		<resultMap type="Attachment" id="PatentImgMap">
@@ -40,13 +41,13 @@
 	
 	<select id="getUserPatentDoc"  resultMap="PatentDocMap">
 		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,tech_domain,background_tech,content,
-		implement_way,right_claim,abstract_desc,abstract_img from patent_documents where user_Id=#{userId} order by create_time desc ,last_update_time desc
+		implement_way,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file from patent_documents where user_Id=#{userId} order by create_time desc ,last_update_time desc
 	</select> 
 	
 	
 	<select id="getUserPatentDocById"  resultMap="PatentDocMap">
 		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,tech_domain,background_tech,content,
-		implement_way,right_claim,abstract_desc,abstract_img from patent_documents where  patent_doc_id=#{patentDocId}
+		implement_way,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file from patent_documents where  patent_doc_id=#{patentDocId}
 	</select>
 	
 	<update id="updatePatentDoc" parameterType="PatentDoc">
@@ -84,5 +85,14 @@
 	
 	<select id="getLabelByUrl" resultMap="PatentImgMap" parameterType="String">
 		select attachment_id,caption,label,attachment_url from patent_attachment where attachment_url=#{abstractImg,javaType=string,jdbcType=VARCHAR}
+	</select>
+	
+	<update id="savePatentDocAttachmentFile" parameterType="PatentDoc">
+		update patent_documents set patent_doc_attachment_file=#{patentDocAttachmentFile,javaType=string,jdbcType=VARCHAR}
+		where  patent_doc_id=#{patentDocId}
+	</update>
+	
+	<select id="getPatentDocAttachmentFile"  >
+		select patent_doc_attachment_file from patent_documents where  patent_doc_id=#{patentDocId}
 	</select>
 </mapper>

@@ -29,4 +29,8 @@ public interface PatentDocMapper {
 	void savePatentAbstractImg(PatentDoc PatentDoc);
 	
 	Attachment getLabelByUrl(String url);
+	
+	void savePatentDocAttachmentFile(PatentDoc PatentDoc);
+	
+	String getPatentDocAttachmentFile(@Param("patentDocId")long patentDocId);
 }

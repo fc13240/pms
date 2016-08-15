@@ -693,6 +693,7 @@
 								<div class="imgfr">
 								 <form id="patentUrlForm" name="patentUrlForm"  method="post" enctype="multipart/form-data" class="form-horizontal">
 								 	<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
+								 	<input id="patentDocAttachmentFile" type="hidden" name="patentDocAttachmentFile" value="${patentDoc.patentDocAttachmentFile}">
 									<input id="piciLlus2" name="caption" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
@@ -1613,19 +1614,7 @@ function loadImgs(){
 </script>
 
 <script type="text/javascript">
-/* 	jQuery(function($) {
-		$("#patentDocAttachment").validate({
-			rules: {
-				filename: 'required'
-			},
-			messages: {
-				filename: '<span style="color:red;">请选择要上传的专利表格</span>'
-			},
-			submitHandler: function(form){ 
-				form.submit();     
-			}
-		});
-	}); */
+
 	$('input[id="patentAttachmentFile"]').change(function() {
 		$('#filename').val($(this).val());  
 	});
@@ -1633,20 +1622,33 @@ function loadImgs(){
 	function uploadAttachmentFile(){
 		var hideForm = $('#patentDocAttachment'); 
 		var options = {
-			type : "POST",
 			dataType : "json", 
 			data: {'file': $("#patentAttachmentFile").val()},
 			beforeSubmit : function() {
 				alert("正在上传");
 			}, 
-			success : function(data) { 
-			alert(data); 
+			success : function(result) { 
+				uploadSuccess(result); 
 			}, 
-			error : function(data) {
+			error : function() {
 				alert("上传失败"); 
 			} 
 		}; 
 		hideForm.ajaxSubmit(options); 
+	}
+	function uploadSuccess(value){
+		var patentDocId=$("#patentDocId").val();
+		$.ajax({
+			type: "POST",
+			url: "<s:url value='/editor/savePatentDocAttachmentFile.html'/>",
+			data: {"patentDocId":patentDocId,"patentDocAttachmentFile":value},
+			success: function(data){
+				alert("保存成功");
+			},
+			error: function(){
+				alert("保存失败");
+			}
+		});
 	}
 	
 </script>
