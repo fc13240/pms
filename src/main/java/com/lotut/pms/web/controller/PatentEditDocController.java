@@ -403,8 +403,9 @@ public class PatentEditDocController {
 	@RequestMapping(path="/getPatentDocAttachmentFile",method=RequestMethod.GET)
 	public void  getPatentDocAttachmentFile(@RequestParam("patentDocId")long patentDocId,HttpServletResponse response,Model model){
 		String filePath=patentDocService.getPatentDocAttachmentFile(patentDocId);
+		File file=new File(filePath);
 		try {
-			WebUtils.writeJsonStrToResponse(response,filePath);
+			WebUtils.writeJsonStrToResponse(response,file);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

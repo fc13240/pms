@@ -92,7 +92,7 @@
 		where  patent_doc_id=#{patentDocId}
 	</update>
 	
-	<select id="getPatentDocAttachmentFile"  >
+	<select id="getPatentDocAttachmentFile"  resultType="string">
 		select patent_doc_attachment_file from patent_documents where  patent_doc_id=#{patentDocId}
 	</select>
 </mapper>
