@@ -4,18 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.lotut.pms.dao.mapper.ProposerMapper">
-  <!-- <resultMap type="CommonProposer" id="CommonProposerMap">
-  		<id property="proposerId" column="proposer_id"/>
-		<result property="proposerName" column="proposer_name"/>
-		<result property="proposerPeopleNubmer" column="proposer_id_nubmer"/>
-		<result property="postcodeAddress" column="proposer_postcode_address"/>
-		<result property="otherInfo" column="proposer_other_information"/>
-		<association property="proposerType" javaType="ProposerType">
-			<id property="proposerTypeId" column="proposer_type_id" />
-			<result property="proposerTypeDescription" column="proposer_type_desc"/>
-		</association>
-  	</resultMap> -->
-  	
+
   <insert id="addProposer" parameterType="CommonProposer" >
   	insert into common_proposer(proposer_name,proposer_type,proposer_id_nubmer,proposer_postcode_address,proposer_other_information,user_id) 
   	values(#{proposerName},#{proposerType},#{proposerPeopleNubmer},#{postcodeAddress},#{otherInfo},#{userId})

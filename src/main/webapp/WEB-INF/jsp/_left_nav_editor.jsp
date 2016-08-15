@@ -35,7 +35,7 @@
 	</li>	
 	
 	<li class="active"> 
-		<a href="<s:url value='/editor/newPatentType.html'/>">
+		<a href="<s:url value='/inventor/list.html'/>">
 		<h5>常用发明人</h5>
 		</a>
 	</li>		

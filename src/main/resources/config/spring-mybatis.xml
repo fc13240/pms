@@ -94,6 +94,10 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	
+	<bean id="inventorMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.InventorMapper" />
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
 	
 	
 	
@@ -159,6 +163,12 @@
 	<bean name="proposerDao" class="com.lotut.pms.dao.mybatis.ProposerMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 		<property name="proposerMapper" ref="proposerMapper" />
+
+	</bean>	
+	
+	<bean name="inventorDao" class="com.lotut.pms.dao.mybatis.InventorMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="inventorMapper" ref="inventorMapper" />
 
 	</bean>	
 </beans>							

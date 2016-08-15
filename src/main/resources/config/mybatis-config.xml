@@ -59,6 +59,7 @@
 	
 		<typeAlias type="com.lotut.pms.domain.CommonProposer" alias="CommonProposer"/>
 		<typeAlias type="com.lotut.pms.domain.ProposerType" alias="ProposerType"/>
+		<typeAlias type="com.lotut.pms.domain.CommonInventor" alias="CommonInventor"/>
 
 	</typeAliases>  
 </configuration>

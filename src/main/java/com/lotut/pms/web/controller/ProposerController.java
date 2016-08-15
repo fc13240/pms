@@ -68,7 +68,6 @@ public class ProposerController {
 	}
 	@RequestMapping(path="/updateProposerInfo",method=RequestMethod.POST)
 	public String updateProposerInfo(@Valid CommonProposer proposer,Model model ){
-		System.out.println(proposer.getProposerType());
 		int userId=PrincipalUtils.getCurrentUserId();
 		proposer.setUseId(userId);
 		proposerService.updateProposer(proposer);

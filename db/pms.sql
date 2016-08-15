@@ -700,3 +700,16 @@ CREATE TABLE IF NOT EXISTS processes (
 	CONSTRAINT fk_processes_user_id FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
+CREATE TABLE common_inventor (
+  inventor_id BIGINT NOT NULL AUTO_INCREMENT,
+  inventor_name VARCHAR(20) DEFAULT NULL COMMENT'发明姓名',
+  inventor_id_nubmer  NVARCHAR(20) DEFAULT NULL COMMENT '证件号码',
+  inventor_nationality VARCHAR(20) DEFAULT NULL COMMENT '发明人国籍',
+  inventor_mobile INT(20) DEFAULT NULL COMMENT '电话号码',
+  inventor_email VARCHAR(20) DEFAULT NULL COMMENT '邮箱' ,
+  inventor_other_information VARCHAR(50) DEFAULT NULL COMMENT '其他信息',
+  user_id INT(11)  DEFAULT NULL ,
+  PRIMARY KEY(inventor_id),
+  KEY fk_common_inventor_owner_id (user_id),
+  CONSTRAINT fk_common_inventor_owner_id FOREIGN KEY(user_id) REFERENCES users (user_id) 
+)
