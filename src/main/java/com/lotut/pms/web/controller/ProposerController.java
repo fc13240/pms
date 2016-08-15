@@ -44,6 +44,8 @@ public class ProposerController {
 	public String getList(Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<CommonProposer> proposers=proposerService.getAllProposerByUser(userId);
+		List<ProposerType> proposerTypes=proposerService.getProposerTypes();
+		model.addAttribute("proposerTypes",proposerTypes);
 		model.addAttribute("proposers", proposers);
 		
 		return "common_proposer";

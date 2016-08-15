@@ -2,11 +2,15 @@ package com.lotut.pms.web.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.service.InventorService;
@@ -36,11 +40,34 @@ public class InventorController {
 		
 	}
 	
-	@RequestMapping(path="/addContactInfo")
+	@RequestMapping(path="/addContactInfo",method=RequestMethod.POST)
 	public String addContactInfo(@ModelAttribute CommonInventor inventor,Model model ){
 		int userId=PrincipalUtils.getCurrentUserId();
 		inventor.setUserId(userId);
 		inventorService.addInventor(inventor);
+		return "redirect:/inventor/list.html";
+		
+	}
+	
+	@RequestMapping(path="/findOneInventorInfo")
+	public String findOneInventorInfo(@RequestParam("inventorId")int id,Model model){
+		CommonInventor inventor = inventorService.getInventorById(id);
+		model.addAttribute("inventor",inventor);
+		return "inventor_update";
+		
+		
+	}
+	
+	@RequestMapping(path="/updContactInfo",method=RequestMethod.POST)
+	public String updContactInfo(@Valid CommonInventor inventor,Model model){
+		inventorService.updateById(inventor);
+		return "redirect:/inventor/list.html";
+		
+	}
+	
+	@RequestMapping(path="/deleteInventorrInfo")
+	public String deleteInventorrInfo(@RequestParam("inventorId")int id,Model model){
+		inventorService.deleteById(id);
 		return "redirect:/inventor/list.html";
 		
 	}

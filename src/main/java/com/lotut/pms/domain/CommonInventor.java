@@ -1,63 +1,65 @@
 package com.lotut.pms.domain;
 
 public class CommonInventor {
-	private int InventorId;
-	private String InventorName;
-	private String InventorNumber;
-	private String InventorNationality;
-	private	int InventorMobile;
-	private String  InventorEmail;
-	private String  InventorComment;
+	private int inventorId;
+	private String inventorName;
+	private String inventorNumber;
+	private String inventorNationality;
+	private	int inventorMobile;
+	private String  inventorEmail;
+	private String  inventorComment;
 	private int userId;
-	
+	public int getInventorId() {
+		return inventorId;
+	}
+	public void setInventorId(int inventorId) {
+		this.inventorId = inventorId;
+	}
+	public String getInventorName() {
+		return inventorName;
+	}
+	public void setInventorName(String inventorName) {
+		this.inventorName = inventorName;
+	}
+	public String getInventorNumber() {
+		return inventorNumber;
+	}
+	public void setInventorNumber(String inventorNumber) {
+		this.inventorNumber = inventorNumber;
+	}
+	public String getInventorNationality() {
+		return inventorNationality;
+	}
+	public void setInventorNationality(String inventorNationality) {
+		this.inventorNationality = inventorNationality;
+	}
+	public int getInventorMobile() {
+		return inventorMobile;
+	}
+	public void setInventorMobile(int inventorMobile) {
+		this.inventorMobile = inventorMobile;
+	}
+	public String getInventorEmail() {
+		return inventorEmail;
+	}
+	public void setInventorEmail(String inventorEmail) {
+		this.inventorEmail = inventorEmail;
+	}
+	public String getInventorComment() {
+		return inventorComment;
+	}
+	public void setInventorComment(String inventorComment) {
+		this.inventorComment = inventorComment;
+	}
 	public int getUserId() {
 		return userId;
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public int getInventorId() {
-		return InventorId;
-	}
-	public void setInventorId(int inventorId) {
-		InventorId = inventorId;
-	}
-	public String getInventorName() {
-		return InventorName;
-	}
-	public void setInventorName(String inventorName) {
-		InventorName = inventorName;
-	}
-	public String getInventorNationality() {
-		return InventorNationality;
-	}
-	public void setInventorNationality(String inventorNationality) {
-		InventorNationality = inventorNationality;
-	}
-	public int getInventorMobile() {
-		return InventorMobile;
-	}
-	public void setInventorMobile(int inventorMobile) {
-		InventorMobile = inventorMobile;
-	}
-	public String getInventorEmail() {
-		return InventorEmail;
-	}
-	public void setInventorEmail(String inventorEmail) {
-		InventorEmail = inventorEmail;
-	}
-	public String getInventorComment() {
-		return InventorComment;
-	}
-	public void setInventorComment(String inventorComment) {
-		InventorComment = inventorComment;
-	}
-	public String getInventorNumber() {
-		return InventorNumber;
-	}
-	public void setInventorNumber(String inventorNumber) {
-		InventorNumber = inventorNumber;
-	}
+	
+	
+	
 	
 
 }

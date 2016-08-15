@@ -61,7 +61,7 @@
 								</td>
 								<td style="text-align:center"><c:out value="${inventor.inventorComment}"/></td>
 								<td><a href="<s:url value='/inventor/findOneInventorInfo.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>"> 编辑 </a> 
-								<a href="<s:url value='/inventor/deleteInventorrInfo.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>">删除 </a>
+								<a onclick="return confirm('确认要删除？')" href="<s:url value='/inventor/deleteInventorrInfo.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>">删除 </a>
 								</td>
 							  </tr>
 							</c:forEach>
