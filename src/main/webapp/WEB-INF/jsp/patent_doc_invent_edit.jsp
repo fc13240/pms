@@ -1627,8 +1627,8 @@ function loadImgs(){
 		});
 	});
 	$('input[id="patentAttachmentFile"]').change(function() {
-		alert($(this).val());
-		//$('#filename').val($(this).val());  
+		//alert($(this).val());
+		$('#filename').val($(this).val());  
 	});
 	
 	function uploadAttachmentFile(){
