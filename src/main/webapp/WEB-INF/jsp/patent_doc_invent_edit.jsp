@@ -1631,6 +1631,7 @@ function loadImgs(){
 				if(mime ==".zip" || mime ==".rar"){
 					return true;
 				}else{
+					alert("请上传压缩文件包！");
 					return false;
 				}
 			}, 
