@@ -9,4 +9,7 @@ public interface ProposerDao {
 	void addProposer(CommonProposer commonProposer);
 	List<ProposerType>  getProposerTypes();
 	List<CommonProposer> getAllProposerByUser(int userId) ;
+	void updateProposer(CommonProposer proposer);
+	CommonProposer getOneProposerByid(int id);
+	void deleteProposerById(int id);
 }

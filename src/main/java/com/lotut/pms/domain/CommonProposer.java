@@ -9,13 +9,13 @@ public class CommonProposer {
 	private String postcodeAddress;
 	private String recordStatus;
 	private String otherInfo;
-	private int useId;
+	private int userId;
 	
 	public int getUseId() {
-		return useId;
+		return userId;
 	}
 	public void setUseId(int useId) {
-		this.useId = useId;
+		this.userId = useId;
 	}
 	public String getProposerName() {
 		return proposerName;

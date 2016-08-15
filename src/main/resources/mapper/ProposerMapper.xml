@@ -18,7 +18,7 @@
   	
   <insert id="addProposer" parameterType="CommonProposer" >
   	insert into common_proposer(proposer_name,proposer_type,proposer_id_nubmer,proposer_postcode_address,proposer_other_information,user_id) 
-  	values(#{proposerName},#{proposerType},#{proposerPeopleNubmer},#{postcodeAddress},#{otherInfo},#{useId})
+  	values(#{proposerName},#{proposerType},#{proposerPeopleNubmer},#{postcodeAddress},#{otherInfo},#{userId})
   
   </insert>
   
@@ -33,27 +33,27 @@
   	</select>
   	
   	<select id="getAllProposerByUser" parameterType="int" resultType="CommonProposer">
-  		select p.proposer_id as proposerId,p.proposer_name as proposerName,t.proposer_type_desc as proposerTypeName,p.proposer_id_nubmer as proposerPeopleNubmer,
-  		p.proposer_postcode_address as postcodeAddress,p.proposer_other_information otherInfo from common_proposer p 
+  		select p.proposer_id as proposerId,p.proposer_type as proposerType,p.proposer_name as proposerName,t.proposer_type_desc as proposerTypeName,p.proposer_id_nubmer as proposerPeopleNubmer,
+  		p.proposer_postcode_address as postcodeAddress,p.proposer_other_information as otherInfo from common_proposer p 
   		join proposer_types t on p.proposer_type=t.proposer_type_id where user_Id=#{userId}
   		
   	</select>
   	
   	<select id="getOneProposerByid"	parameterType="int" resultType="CommonProposer">
-  		select p.proposer_id proposerId,p.proposer_name as proposerName,t.proposer_type_desc as proposerTypeName,p.proposer_id_nubmer as proposerPeopleNubmer,
+  		select p.proposer_id as proposerId,p.proposer_type as proposerType,  p.proposer_name as proposerName,t.proposer_type_desc as proposerTypeName,p.proposer_id_nubmer as proposerPeopleNubmer,
   		p.proposer_postcode_address as postcodeAddress,p.proposer_other_information otherInfo from common_proposer p 
   		join proposer_types t on p.proposer_type=t.proposer_type_id where p.proposer_id=#{proposerId}
   	</select>
   	
   	<update id="updateProposer" parameterType="CommonProposer">
   		update common_proposer  set proposer_name=#{proposerName},proposer_type=#{proposerType},proposer_id_nubmer=#{proposerPeopleNubmer},
-  		proposer_postcode_address=#{postcodeAddress},proposer_other_informatio=#{otherInfo}
+  		proposer_postcode_address=#{postcodeAddress},proposer_other_information=#{otherInfo}
   		where proposer_id=#{proposerId}
   		
   	</update>
   	
   	<delete id="deleteProposerById" parameterType="int">
-  		delete from common_propose where proposer_id =#{proposerId}
+  		delete from common_proposer where proposer_id =#{proposerId}
   	</delete>
   </mapper>
   

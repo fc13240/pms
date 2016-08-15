@@ -9,4 +9,7 @@ public interface ProposerService {
 	void addProposer(CommonProposer commonProposer);
 	List<ProposerType>  getProposerTypes();
 	List<CommonProposer> getAllProposerByUser(int userId);
+	CommonProposer getOneProposerByid(int id);
+	void updateProposer(CommonProposer proposer);
+	void deleteProposerById(int id);
 }

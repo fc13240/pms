@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lotut.pms.dao.mapper.EmployeeMapper">
+	<resultMap type="CustomerSupport" id="CustomerSupportResultMap">
+		<id property="id" column="id"/>
+		<result property="userId" column="user_id"/>
+		<result property="proxyOrgId" column="proxy_org_id"/>
+		<result property="remarkName" column="remark_name"/>
+		<association property="user"  javaType="User">
+			<id property="userId" column="user_id"/>
+			<result property="username" column="username"/>
+			<result property="name" column="name"/>
+		</association>
+	</resultMap>
+	
+	<select id="getCustomerSupportList"  parameterType="int" resultMap="CustomerSupportResultMap">
+		select cs.id,cs.user_id, cs.remark_name,cs.proxy_org_id,u.username,u.name from customer_supports cs
+		join users u on u.user_id = cs.user_id
+		where cs.proxy_org_id=#{proxyOrgId}
+	</select>
+	
+	
+	
+	<insert id="addOrUpdateCustomerSupport" parameterType="CustomerSupport" useGeneratedKeys="true" keyProperty="id">
+		insert into customer_supports(user_id,proxy_org_id,remark_name) values(#{userId},#{proxyOrgId},'')
+		on duplicate key update
+			user_id=#{userId},proxy_org_id=#{proxyOrgId}
+	</insert>
+		
+		
+		
+
+	
+	
+		
+	<insert id="insertGroupMember" parameterType="int">
+		INSERT INTO group_members(username, group_id) VALUES((select username from users where user_id =#{userId}), 5)		
+	</insert>
+	
+	
+	<delete id="deleteCustomerSupport" >
+		delete from customer_supports  where id=#{id} ;
+		delete from group_members where username=(select username from users where user_id = 
+			(select user_id from customer_supports where id=#{id}))	and group_id=5	
+	</delete>
+	
+	<update id="changeRemarkName">
+		update customer_supports set remark_name=#{remarkName} where id=#{id}
+	</update>
+	
+	
+</mapper>

@@ -34,4 +34,24 @@ public class ProposerServiceImpl implements ProposerService {
 		// TODO Auto-generated method stub
 		return proposerDao.getAllProposerByUser(userId) ;
 	}
+
+
+	@Override
+	public CommonProposer getOneProposerByid(int id) {
+		return proposerDao.getOneProposerByid(id);
+	}
+
+
+	@Override
+	public void updateProposer(CommonProposer proposer) {
+		proposerDao.updateProposer(proposer);
+		
+	}
+
+
+	@Override
+	public void deleteProposerById(int id) {
+		proposerDao.deleteProposerById(id);
+		
+	}
 }

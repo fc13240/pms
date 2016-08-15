@@ -22,4 +22,6 @@ public interface FriendService {
 	List<User> searchUserFriendsByUser(int userId, String keyword);
 	
 	void changeRemarkName(int userId, int friendId, String remarkName);
+
+	List<User> findFriendsByUserId(int userId, String keyword);
 }

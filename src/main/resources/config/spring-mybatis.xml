@@ -89,6 +89,13 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	
+	<bean id="employeeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.EmployeeMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
+	
+	
 	
 	<bean name="userDao" class="com.lotut.pms.dao.mybatis.UserMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
@@ -143,9 +150,15 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 		<property name="patentDocumentTemplateMapper" ref="patentDocumentTemplateMapper"/>
 	</bean>	
-	
+
+	<bean name="employeeDao" class="com.lotut.pms.dao.mybatis.EmployeeMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+		<property name="employeeMapper" ref="employeeMapper"/>
+
+	</bean>
 	<bean name="proposerDao" class="com.lotut.pms.dao.mybatis.ProposerMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 		<property name="proposerMapper" ref="proposerMapper" />
+
 	</bean>	
 </beans>							
