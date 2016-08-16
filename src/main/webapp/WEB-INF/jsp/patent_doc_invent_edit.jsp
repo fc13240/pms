@@ -104,11 +104,11 @@
 				<div class="tab" id="tabWrap"> 
 					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">说明书</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
-						附图及说明</div>
+						说明书附图</div>
 					<div class="tab1h" value="6" name="tabs" onclick="tabChange(6,true,false);">
-						权利要求</div>
+						权利要求书</div>
 					<div class="tab1h" value="7" name="tabs" onclick="tabChange(7);">
-						摘要</div>
+						说明书摘要</div>
 					<div class="tab1h" value="8" name="tabs" onclick="tabChange(8);">
 						摘要附图</div>
 					<div class="tab1h" value="9" name="tabs" onclick="tabChange(9);">
