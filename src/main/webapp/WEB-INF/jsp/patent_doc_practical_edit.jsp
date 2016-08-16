@@ -19,7 +19,7 @@
 	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
     <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
 	
-	<script src="<s:url value='/temp/js/jquery-ui.min.js'/>" type="text/javascript"></script>
+	
 	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="<s:url value='/temp/css/common.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
@@ -373,6 +373,9 @@
 									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
 									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
+									<c:if test="${not empty patentDoc.patentDocAttachmentFile }">
+										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="downloadFile()">下载附件</button>
+				                    </c:if>
 									</form> 
 									<div style="height:10px;">&nbsp;</div> 
 									<span style="color:#666;">友情提示：将所需的附件一次性打包成压缩文件格式上传(zip,rar等)，不建议上传其他格式的文件!
@@ -1552,5 +1555,64 @@ function loadImgs(){
 	});
 }
 </script>
+<script type="text/javascript">
+
+	$('input[id="patentAttachmentFile"]').change(function() {
+		$('#filename').val($(this).val());  
+	});
+	
+	function uploadAttachmentFile(){
+		
+		var hideForm = $('#patentDocAttachment'); 
+		var options = {
+			dataType : "json", 
+			data: {'file': $("#patentAttachmentFile").val()},
+			beforeSubmit : function() {
+				var name=$("#filename").val();
+				var mime = name.toLowerCase().substr(name.lastIndexOf("."));
+				if(mime ==".zip" || mime ==".rar"){
+					return true;
+				}else{
+					alert("请上传压缩文件包！");
+					return false;
+				}
+			}, 
+			success : function(result) {
+				uploadSuccess(result); 
+			}, 
+			error : function() {
+				alert("上传失败"); 
+			} 
+		}; 
+		hideForm.ajaxSubmit(options); 
+	}
+	function uploadSuccess(value){
+		var patentDocId=$("#patentDocId").val();
+		$.ajax({
+			type: "POST",
+			url: "<s:url value='/editor/savePatentDocAttachmentFile.html'/>",
+			data: {"patentDocId":patentDocId,"patentDocAttachmentFile":value},
+			success: function(data){
+				alert("保存成功");
+			},
+			error: function(){
+				alert("保存失败");
+			}
+		});
+	}
+	function downloadFile(){
+		var patentDocId=$("#patentDocId").val();
+		$.ajax({
+			type :'GET',
+			url : "<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+patentDocId,
+			success : function(){
+				
+			},
+			error: function(){
+				alert("下载失败");
+			}
+		})
+	}
+	</script>
 </body>
 </html>
