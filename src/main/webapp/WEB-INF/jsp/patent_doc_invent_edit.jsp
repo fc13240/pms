@@ -376,10 +376,11 @@
 									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
 									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
-									</form> 
 									<c:if test="${not empty patentDoc.patentDocAttachmentFile }">
-				                    	<a  href="<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载附件</a>
+										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="downloadFile(${patentDoc.patentDocId})">下载附件</button>
 				                    </c:if>
+									</form> 
+
 									<div style="height:10px;">&nbsp;</div> 
 									<span style="color:#666;">友情提示：将所需的附件一次性打包成压缩文件格式上传(zip,rar等)，不建议上传其他格式的文件!
 									</span>
@@ -1631,6 +1632,18 @@ function loadImgs(){
 			success : function(result){
 				 resetSelect();
 				addOptions(result.inventors);
+			}
+		})
+	}
+	function downloadFile(value){
+		$.ajax({
+			type :'GET',
+			url : "<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+value,
+			success : function(data){
+				
+			},
+			error: function(){
+				alert("下载失败");
 			}
 		})
 	}

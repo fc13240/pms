@@ -428,7 +428,7 @@ public class PatentEditDocController {
 				out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
-	}
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
