@@ -21,14 +21,24 @@ public class PatentDoc {
 	private String abstractDescription;
 	private String abstractImg;
 	private String patentDocAttachmentFile;
+	private String patentDocUrl;
 	
 	
 	
+
+	public String getPatentDocUrl() {
+		return patentDocUrl;
+	}
+	public void setPatentDocUrl(String patentDocUrl) {
+		this.patentDocUrl = patentDocUrl;
+	}
+
 	public String getManual() {
 		return manual;
 	}
 	public void setManual(String manual) {
 		this.manual = manual;
+
 	}
 	public String getPatentDocAttachmentFile() {
 		return patentDocAttachmentFile;

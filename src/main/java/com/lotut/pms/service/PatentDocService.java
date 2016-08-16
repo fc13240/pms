@@ -31,4 +31,6 @@ public interface PatentDocService {
 	void savePatentDocAttachmentFile(PatentDoc PatentDoc);
 	
 	String getPatentDocAttachmentFile(long patentDocId);
+
+	void savePatentDocFile(PatentDoc patentDoc);
 }
