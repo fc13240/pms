@@ -23,7 +23,7 @@
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
 				  <form>
-		  <button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addProposer()">新增申请人</button>
+		  <button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">新增申请人</button>
 	<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
@@ -47,33 +47,23 @@
 							</tr>
 						  </thead>
 						  <tbody>
-							<c:forEach items="${proposers}" var="proposer" varStatus="status">
+							<c:forEach items="${appPersons}" var="appPerson" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"> ${status.count} </td>
-								<td style="text-align:center"><c:out value="${proposer.proposerName}"/></td>
-								
-								<td style="text-align:center">
-									<select name="proposerType" class="form-control" style="width:136px;display:inline;"  required>
-										<option value="${proposer.proposerType}">${proposer.proposerTypeName}</option>
-										<c:forEach items="${proposerTypes}" var="proposerType">
-											<option value="${proposerType.proposerTypeId}">${proposerType.proposerTypeDescription}</option>
-					 					</c:forEach>
-									</select>
-								</td>
-								
-								
-								<td style="text-align:center"><c:out value="${proposer.proposerPeopleNubmer}"/></td>
-								<td>${proposer.postcodeAddress}</td>
+								<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
+								<td style="text-align:center"><c:out value="${appPerson.typeName}"/></td>
+								<td style="text-align:center"><c:out value="${appPerson.peopleNumber}"/></td>
+								<td>${appPerson.postcodeAddress}</td>
 								<td style="text-align:center"><c:out value=""/></td>
 								<td style="text-align:center"></td>
 								<td style="text-align:center"><a id="download" href="javascript: void(0);" >
 								  <c:out value="${notice.name}"/>
 								  </a> 
 								</td>
-								<td style="text-align:center"><c:out value="${proposer.otherInfo}"/></td>
+								<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
 								<td style="text-align:center"><c:out value="${notice.patent.name}"/></td>
-								<td><a href="<s:url value='/proposer/findOneProposerInfo.html'/>?proposerId=<c:out value='${proposer.proposerId}'/>"> 编辑 </a> 
-								<a href="<s:url value='/proposer/deleteProposerInfo.html'/>?proposerId=<c:out value='${proposer.proposerId}'/>">删除 </a>
+								<td><a href="<s:url value='/appPerson/findOneAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a> 
+								<a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteappPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">删除 </a>
 								</td>
 							  </tr>
 							</c:forEach>
@@ -82,8 +72,8 @@
 						</form>
 						</div></div></div>
 <script type="text/javascript">
-	function addProposer(){
-		var url = "<s:url value='/proposer/contactProposerAddForm.html'/>";
+	function addAppPerson(){
+		var url = "<s:url value='/appPerson/contactAppPersonAddForm.html'/>";
 		location.href = url
 	}
 </script>

@@ -57,8 +57,8 @@
 		<typeAlias type="com.lotut.pms.domain.TechPerson" alias="TechPerson"/>
 		<typeAlias type="com.lotut.pms.domain.ProcessPerson" alias="ProcessPerson"/>
 	
-		<typeAlias type="com.lotut.pms.domain.CommonProposer" alias="CommonProposer"/>
-		<typeAlias type="com.lotut.pms.domain.ProposerType" alias="ProposerType"/>
+		<typeAlias type="com.lotut.pms.domain.CommonAppPerson" alias="CommonAppPerson"/>
+		<typeAlias type="com.lotut.pms.domain.AppPersonType" alias="AppPersonType"/>
 		<typeAlias type="com.lotut.pms.domain.CommonInventor" alias="CommonInventor"/>
 
 	</typeAliases>  

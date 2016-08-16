@@ -612,51 +612,6 @@ CREATE TABLE patent_attachment (
 )
 
 
-CREATE TABLE common_proposer (
-  proposer_id BIGINT NOT NULL AUTO_INCREMENT,
-  proposer_name VARCHAR(20) DEFAULT NULL COMMENT'申请人姓名',
-  proposer_type INT(11) NOT NULL COMMENT'申请人类型',
-  proposer_id_nubmer  NVARCHAR(20) DEFAULT NULL COMMENT '证件号码',
-  proposer_postcode_address VARCHAR(50) DEFAULT NULL COMMENT '邮编及地址',
-  proposer_record_status VARCHAR(20) DEFAULT NULL COMMENT '案件状态',
-  proposer_other_information VARCHAR(50) DEFAULT NULL COMMENT '其他信息',
-  user_id INT(11)  DEFAULT NULL ,
-  PRIMARY KEY(proposer_id),
-  KEY fk_common_proposer_owner_id (user_id),
-  KEY fk_common_proposer_type(proposer_type),
-  CONSTRAINT fk_common_proposer_owner_id FOREIGN KEY(user_id) REFERENCES users (user_id),
-  CONSTRAINT fk_common_proposer_type FOREIGN KEY (proposer_type) REFERENCES proposer_types (proposer_type_id)
-)
- 
-CREATE TABLE share_proposer(
-  proposer BIGINT NOT NULL DEFAULT '0',
-  share_by INT(11) NOT NULL DEFAULT '0',
-  share_to INT(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (proposer,share_by,share_to),
-  KEY fk_share_proposer_share_by (`share_by`),
-  KEY `fk_share_proposer_to` (`share_to`),
-  CONSTRAINT `fk_share_proposer` FOREIGN KEY (`proposer`) REFERENCES `common_proposer` (`proposer_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_share_proposer_share_by` FOREIGN KEY (`share_by`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_share_proposer_share_to` FOREIGN KEY (`share_to`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
-) ENGINE=INNODB DEFAULT CHARSET=utf8
-
-CREATE TABLE user_proposer(
-  user_id INT(11) NOT NULL DEFAULT '0',
-  proposer BIGINT(20) NOT NULL DEFAULT '0',
-  trash_status INT(11) DEFAULT '1',
-  PRIMARY KEY (`user_id`,`proposer`),
-  KEY `fk_user_proposer_proposer` (`proposer`),
-  CONSTRAINT `fk_user_proposer_proposer` FOREIGN KEY (`proposer`) REFERENCES `common_proposer` (`proposer_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_user_proposer_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
-) ENGINE=INNODB DEFAULT CHARSET=utf8
-
-CREATE TABLE proposer_types(
-proposer_type_id INT(11) NOT NULL PRIMARY KEY,
-proposer_type_desc CHAR(12) NOT NULL
-
-)
-INSERT INTO proposer_types VALUES('1','个人')
-INSERT INTO proposer_types VALUES('2','非个人')
 
 
 INSERT INTO groups
@@ -715,3 +670,35 @@ CREATE TABLE common_inventor (
   KEY fk_common_inventor_owner_id (user_id),
   CONSTRAINT fk_common_inventor_owner_id FOREIGN KEY(user_id) REFERENCES users (user_id) 
 )
+
+DROP TABLE if exists common_proposer
+
+DROP TABLE  if exists proposer_types
+
+drop table if exists user_proposer 
+drop table if exists share_proposer
+
+CREATE TABLE common_app_person (
+  app_person_id BIGINT NOT NULL AUTO_INCREMENT,
+  NAME VARCHAR(20) DEFAULT NULL COMMENT'申请人姓名',
+  TYPE INT(11) NOT NULL COMMENT'申请人类型',
+  id_number  NVARCHAR(20) DEFAULT NULL COMMENT '证件号码',
+  postcode_address VARCHAR(50) DEFAULT NULL COMMENT '邮编及地址',
+  record_status VARCHAR(20) DEFAULT NULL COMMENT '案件状态',
+  other_information VARCHAR(50) DEFAULT NULL COMMENT '其他信息',
+  user_id INT(11)  NOT NULL,
+  PRIMARY KEY(app_person_id),
+  KEY fk_common_app_person_owner_id (user_id),
+  KEY fk_common_app_person_type(TYPE),
+  CONSTRAINT fk_common_app_person_owner_id FOREIGN KEY(user_id) REFERENCES users (user_id),
+  CONSTRAINT fk_common_app_person_type FOREIGN KEY (TYPE) REFERENCES app_person_types (type_id) ON   DELETE   CASCADE   ON   UPDATE   CASCADE 
+)
+
+CREATE TABLE app_person_types(
+type_id INT(11) NOT NULL PRIMARY KEY,
+type_desc CHAR(12) NOT NULL
+
+)
+
+INSERT INTO app_person_types VALUES('1','个人')
+INSERT INTO app_person_types VALUES('2','非个人')

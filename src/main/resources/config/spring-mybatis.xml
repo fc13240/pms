@@ -68,8 +68,8 @@
 		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.OrderMapper" />
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>	
-	<bean id="proposerMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.ProposerMapper" />
+	<bean id="appPersonMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.AppPersonMapper" />
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	
@@ -160,9 +160,9 @@
 		<property name="employeeMapper" ref="employeeMapper"/>
 
 	</bean>
-	<bean name="proposerDao" class="com.lotut.pms.dao.mybatis.ProposerMybatisDao">
+	<bean name="appPersonDao" class="com.lotut.pms.dao.mybatis.AppPersonMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
-		<property name="proposerMapper" ref="proposerMapper" />
+		<property name="appPersonMapper" ref="appPersonMapper" />
 
 	</bean>	
 	
