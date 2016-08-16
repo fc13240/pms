@@ -36,11 +36,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Attachment;
+import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.TemplatePage;
+import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.service.PatentService;
@@ -59,11 +61,13 @@ import net.lingala.zip4j.util.Zip4jConstants;
 public class PatentEditDocController {
 	private PatentDocService patentDocService;
 	private PatentDocumentTemplateService patentDocumentTemplateService;
+	private InventorService inventorService ;
 	
 	@Autowired
-	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService) {
+	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService,InventorService inventorService) {
 		this.patentDocService = patentDocService;
 		this.patentDocumentTemplateService = patentDocumentTemplateService;
+		this.inventorService = inventorService;
 	}
 
 	@RequestMapping(path="/newPatentType")
@@ -78,9 +82,12 @@ public class PatentEditDocController {
 		patentDoc.setUserId(userId);
 		patentDoc.setPatentType(patentType);
 		patentDocService.savePatentDoc(patentDoc);
+		
+		List<CommonInventor> inventors = inventorService.getAllInventorsByUser(userId);
 		long patentDocId=patentDoc.getPatentDocId();
 		model.addAttribute("patentDocId",patentDocId);
 		model.addAttribute("patentDoc",patentDoc);
+		model.addAttribute("inventors",inventors);
 		if(patentType==1){
 			return "patent_doc_invent_edit";
 		}else if(patentType==2){
@@ -131,9 +138,8 @@ public class PatentEditDocController {
 		List<PatentDoc> patentDocs= new ArrayList<>();
 		for (PatentDoc patentDoc:patentDocss) {
 			if(patentDoc.getAppNo()==null&patentDoc.getAbstractDescription()==null
-					&patentDoc.getBackgoundTech()==null&patentDoc.getContent()==null
-					&patentDoc.getImplementWay()==null&patentDoc.getName()==null&patentDoc.getRightClaim()==null
-					&patentDoc.getTechDomain()==null&patentDoc.getAbstractImg()==null){
+					&patentDoc.getName()==null&patentDoc.getManual()==null&patentDoc.getRightClaim()==null
+					&patentDoc.getAbstractImg()==null){
 					patentDocService.deleteNullPatentDoc();
 			}else{
 				patentDocs.add(patentDoc);

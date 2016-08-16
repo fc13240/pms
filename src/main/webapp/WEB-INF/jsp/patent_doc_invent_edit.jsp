@@ -12,12 +12,21 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  
 	<title>测试页面</title>
-	<c:import url="common/kindEditor.jsp"></c:import>
-	<%-- <%@ include file="_css.jsp" %> --%>
-	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
-	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.min.css'/>">
+	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
 	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap-theme.min.css'/>">
+	<c:import url="common/kindEditor.jsp"></c:import>
+	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
+	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
+    <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
+	
+	<script src="<s:url value='/temp/js/jquery-ui.min.js'/>" type="text/javascript"></script>
+	
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="<s:url value='/temp/css/common.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
+	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
+	<link rel="stylesheet" media="screen" href="<s:url value='/temp/css/jquery-ui.min.css'/>" />
+	<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -101,11 +110,11 @@
 				<div class="tab" id="tabWrap"> 
 					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">说明书</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
-						附图及说明</div>
+						说明书附图</div>
 					<div class="tab1h" value="6" name="tabs" onclick="tabChange(6,true,false);">
-						权利要求</div>
+						权利要求书</div>
 					<div class="tab1h" value="7" name="tabs" onclick="tabChange(7);">
-						摘要</div>
+						说明书摘要</div>
 					<div class="tab1h" value="8" name="tabs" onclick="tabChange(8);">
 						摘要附图</div>
 					<div class="tab1h" value="9" name="tabs" onclick="tabChange(9);">
@@ -326,6 +335,9 @@
 						<div class="content" id="content0">
 							<div class="title">
 								发明名称
+								<div style="margin-left: 33px;">
+									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入发明名称"  value="${patentDoc.name}">
+								</div>
 							</div>
 							<div class="cl">
 								<div id="editor0" thistempid="1">
@@ -341,7 +353,7 @@
 									            	<tr>
 									                    <td style="width:520px;" >
 									                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
-									                    	${patentDoc.name }
+									                    	${patentDoc.manual }
 									                    	</textarea>
 									                    </td>
 									            	</tr>
@@ -349,10 +361,6 @@
 										   </div>
 									</div>
 								</div>
-							</div>
-							<div id="error_content0" style="margin-left: -50px; float: left; color: Red; text-align: right;" class="textarea">
-								您当前输入了 <span class="word_count2">0</span>个文字。<br> 
-								<span class="word_surplus"></span>
 							</div>
 						</div>
 						
@@ -398,7 +406,7 @@
 									</tr>
 									<tr>
 									<td>
-									发明人：<input class="t-input form-control" type="text" name="inventor" placeholder="在已有发明人中搜索" style="width: 200px" onblur="loadInventor()"/>
+									发明人：<input class="t-input form-control" type="text" name="inventor" id="inventor" placeholder="在已有发明人中搜索" style="width: 200px" onblur="loadInventor()"/>
 									</td>
 									<td>
 									<button class="button button-caution button-rounded" type="button">新增</button><br/>
@@ -660,7 +668,7 @@
 							<h3 style="margin-left: 30px;font-family:微软雅黑;margin-top: 50px;">摘要附图：</h3>
 							</div>
 							<div class="picBox" id="picLsy3">
-								<c:if test="${patentDoc.abstractImg != null || patentDoc.abstractImg==''}">
+								<c:if test="${patentDoc.abstractImg != null || patentDoc.abstractImg !=''}">
 										<img src='${base}${patentDoc.abstractImg}' alt='' width='400' height='300'/>
 								</c:if>
 							</div>
@@ -1480,18 +1488,14 @@ function settingAbstractImg(value){
 </script>
 <script type="text/javascript">
 function savePatentDoc(value){
-	var name=editor.text();
-	var techDomain=$("#editorContent1").val();
-	var backgoundTech=$("#editorContent2").val();
-	var content=$("#editorContent3").val();
-	var implementWay=$("#editorContent6").val();
+	var name=$("#patentName").val();
+	var manual=$("#editorContent").val();
 	var abstractDescription=$("#editorContent7").val();
 	var rightClaim=$("#editorContent8").val();
 	$.ajax({
 		type: "POST",
 		url: "<s:url value='/editor/savePatentDoc.html'/>",
-		data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"content":content,
-				"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
+		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
 		success: function(data){
 			alert("操作成功");
 		},
@@ -1595,16 +1599,74 @@ function loadImgs(){
 			//}
 		//});
 	//} 
+	$(function() {
+		var inventors = [];
+		<c:forEach items="${inventors}" var="inventor">
+			inventors.push("${inventor.inventorName}");
+		</c:forEach>
+		
+	     $().ready(function() {
+	     	$("#inventor").autocomplete(inventors);	
+	     });
+		/* 
+		$("#addFeeForm").validate({
+			submitHandler: function(form){ 
+				form.submit();     
+			}
+		});	 */
+	});
+
+	function addDefaultOption(selectElem) {
+		selectElem.append("<option value=''>请选择</option>");
+	}
+
+	function resetSelect() {
+		for (var i = 0; i < arguments.length; i++) {
+			var selectObj = arguments[i];
+			selectObj.empty();
+			addDefaultOption(selectObj);
+		}
+	}
+
+	function addOptions(selectObj, options) {
+		$.each(options, function(index, val){
+			selectObj.append("<option value='" + val + "'>" + val + "</option>");
+		});	
+	}
+	function loadPatent() {
+		var appNo = $("#appNo").val();
+		if (appNo != "") {
+			$.ajax({
+				url: "<s:url value='/fee/getPatentByPatentId.html'/>?appNo=" + appNo,
+				type: 'get',
+				dataType: 'json',
+				success: function(result) {
+					$("#name").val(result.patent.name);
+					$('#appPerson').val(result.patent.appPerson);
+					$('#patentStatus').val(result.patent.patentStatus.statusDescription);
+					resetSelect();
+					addOptions(result.);
+				}
+			})
+		} 
+	}
 	
 	function loadInventor(){
+		var inventor = $("#inventor").val();
 		$.ajax({
 			type :'POST',
-			url : "<s:url value='/proposer/loadInventor.html'/>",
-			success : function(){
-				
+			url : "<s:url value='/proposer/loadInventor.html'/>?inventor="+inventor,
+			success : function(result){
+				alert(result);
+				/* resetSelect(feeType);
+				addOptions(result.feeTypes); */
 			}
 		})
 	}
+	
+	
+	
+	
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	

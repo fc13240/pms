@@ -94,7 +94,7 @@
 	        <div class="left" style="height: 700px;">
 				<!--申请文件九部分标签切换 -->
 				<div class="tab" id="tabWrap"> 
-					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">实用名称</div>
+					<!-- <div class="tab1" value="0" name="tabs" onclick="tabChange(0);">实用名称</div>
 					<div class="tab1h" value="1" name="tabs" onclick="tabChange(1);">
 						技术领域</div>
 					<div class="tab1h" value="2" name="tabs" onclick="tabChange(2);">
@@ -109,6 +109,15 @@
 						权利要求</div>
 					<div class="tab1h" value="7" name="tabs" onclick="tabChange(7);">
 						摘要</div>
+					<div class="tab1h" value="8" name="tabs" onclick="tabChange(8);">
+						摘要附图</div> -->
+					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">说明书</div>
+					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
+						说明书附图</div>
+					<div class="tab1h" value="6" name="tabs" onclick="tabChange(6,true,false);">
+						权利要求书</div>
+					<div class="tab1h" value="7" name="tabs" onclick="tabChange(7);">
+						说明书摘要</div>
 					<div class="tab1h" value="8" name="tabs" onclick="tabChange(8);">
 						摘要附图</div>
 				</div>
@@ -322,6 +331,9 @@
 						<div class="content" id="content0">
 							<div class="title">
 								发明名称
+								<div style="margin-left: 33px;">
+									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入发明名称"  value="${patentDoc.name}">
+								</div>
 							</div>
 							<div class="cl">
 								<div id="editor0" thistempid="1">
@@ -337,37 +349,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.name }</textarea>
-										                    </td>
-										            	</tr>
-										            </table>
-										        </form>
-										   </div>
-									</div>
-								</div>
-							</div>
-							<div id="error_content0" style="margin-left: -50px; float: left; color: Red; text-align: right;" class="textarea">
-								您当前输入了 <span class="word_count2">0</span>个文字。<br> 
-								<span class="word_surplus"></span>
-							</div>
-						</div>
-						<div class="content" id="content1" style="display: none;">
-							<div class="title">
-								技术领域
-							</div>
-							<div class="cl">
-								<div id="editor1" thisid="2124" thistempid="0">
-									<div class="instru">
-										<div class="title2">蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-										    <div class="wraper">
-										        <form id="form1" name="form1" class="registerform" action="" onsubmit="return false;" method="post">
-										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="techDomain" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.techDomain }</textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.manual }</textarea>
 										                    </td>
 										            	</tr>
 										            </table>
@@ -377,137 +359,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="content" id="content2" style="display: none;">
-							<div class="title">
-								背景技术
-							</div>
-							<div class="cl">
-								<div id="editor2" thisid="2293" thistempid="0">
-									<div class="instru">
-										<div class="title2">
-											引证文件应当是公开出版物，可以是专利文件，也可以是非专利文件，例如期刊、杂志、手册和书籍等。<br>
-											引证专利文件的，至少要写明专利文件的国别、公开号；<br>
-											引证非专利文件的，要写明这些文件的标题和详细出处，必要时给出译文并将译文放置在括号中。<br>
-											引用专利：美国专利US 3676315号；<br>
-											引用论文格式：Niyogi 等，“Solution Properties of Graphite and Graphene”， Nature，2006，128，7720<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-										<div class="wraper">
-										        <form id="form2" name="form2" class="registerform" action="" onsubmit="return false;" method="post">
-										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent2" name="backgoundTech" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.backgoundTech }</textarea>
-										                    </td>
-										            	</tr>
-										            </table>
-										        </form>
-										   </div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="content" id="content3" style="display: none;">
-							<div class="title">
-								发明内容
-							</div>
-							<div class="cl">
-								<div id="editor3" thisid="5632" thistempid="0">
-									<div class="instru">
-										<div class="title2">
-											针对现有技术存在的问题，结合您的技术所能取得的效果，说说您的技术要解决的技术问题，简单说一下要解决的问题就可以了，不用说效果。<br>
-											一般别人都是写一小段，写多了审查人员也不介意，不过还是先看看模板吧，毕竟专利的表述是采用法律文书的形式，套路都比较固定了。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-											<div class="wraper">
-										        <form id="form3" name="form3" class="registerform" action="" onsubmit="return false;" method="post">
-										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent3" name="contentProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.content }</textarea>
-										                    </td>
-										            	</tr>
-										            </table>
-										        </form>
-										   </div>
-									</div>
-								</div>
-<%-- 								<div id="editor3_1" thisid="5633" thistempid="0">
-									<div class="instru">
-										<div class="title2">
-											这部分内容看似不少，其实就是权利要求部分的内容，建议先看看模板吧，看完之后就会发现原来是对权利要求的进一步描述。<br>
-											写好权利要求这部分就解决了，还没写的还不快去写，一部分可是当两部分用啊。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-										<div class="wraper">
-										        <form id="form4" name="form4" class="registerform" action="" onsubmit="return false;" method="post">
-										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent4" name="contentRight" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.contentRight }</textarea>
-										                    </td>
-										            	</tr>
-										            </table>
-										        </form>
-										   </div>
-									</div>
-								</div>
-								<div id="editor3_2" thisid="5634" thistempid="0">
-									<div class="instru">
-										<div class="title2">
-											即由您申请专利的技术特征直接带来的，或者是由这些技术特征必然产生的效果。<br>
-											通常可以通过对申请专利的技术的结构特点与理论分析的结合而得出，或通过列出实验数据的方式予以说明。<br>
-											无论哪种方式都应通过与现有技术的比较而得出。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-											<div class="wraper">
-										        <form id="form5" name="form5" class="registerform" action="" onsubmit="return false;" method="post">
-										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent5" name="contentEffect" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.contentEffect }</textarea>
-										                    </td>
-										            	</tr>
-										            </table>
-										        </form>
-										   </div>
-									</div>
-								</div> --%>
-							</div>
-						</div>
-						<div class="content" id="content4" style="display: none;overflow: auto;" >
-							<div class="title">
-								具体实施方式
-							</div>
-							<div class="cl">
-								<div id="editor4" thisid="2514" thistempid="0">
-									<div class="instru">
-										<div class="title2">
-											详细说明解决技术问题所采用的技术方案，并应当对权利要求的技术特征给予详细说明，以支持权利要求。<br>
-											有附图的应当对照附图进行说明。<br>
-											实施例是对具体实施方式的举例说明。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-											<div class="wraper">
-										        <form id="form6" name="form6" class="registerform" action="" onsubmit="return false;" method="post">
-										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent6" name="implementWay" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.implementWay }</textarea>
-										                    </td>
-										            	</tr>
-										            </table>
-										        </form>
-										   </div>
-									</div>
-								</div>
-							</div>
-						</div>
+					
 						<input id="hideditor3id" type="hidden" autocomplete="off">
 						<input id="hidtempid" type="hidden">
 						<input id="hidtooltip" type="hidden">
@@ -1584,18 +1436,14 @@ function settingAbstractImg(value){
 </script>
 <script type="text/javascript">
 function savePatentDoc(value){
-	var name=editor.text();
-	var techDomain=$("#editorContent1").val();
-	var backgoundTech=$("#editorContent2").val();
-	var content=$("#editorContent3").val();
-	var implementWay=$("#editorContent6").val();
+	var name=$("#patentName").val();
+	var manual=$("#editorContent").val();
 	var abstractDescription=$("#editorContent7").val();
 	var rightClaim=$("#editorContent8").val();
 	$.ajax({
 		type: "POST",
 		url: "<s:url value='/editor/savePatentDoc.html'/>",
-		data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"content":content,
-				"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
+		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
 		success: function(data){
 			alert("操作成功");
 		},
