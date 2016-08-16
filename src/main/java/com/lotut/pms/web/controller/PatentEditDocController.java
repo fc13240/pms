@@ -423,9 +423,9 @@ public class PatentEditDocController {
 				while ((bytesRead = bis.read(buffer)) != -1) {
 					out.write(buffer, 0, bytesRead);
 				}
+				out.flush();
 				bis.close();
 				out.close();
-				out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 			}
