@@ -13,7 +13,6 @@
 	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  
 	<title>测试页面</title>
 	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.min.css'/>">
-	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
 	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap-theme.min.css'/>">
 	<c:import url="common/kindEditor.jsp"></c:import>
 	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
@@ -21,7 +20,6 @@
     <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
 	
 	<script src="<s:url value='/temp/js/jquery-ui.min.js'/>" type="text/javascript"></script>
-	
 	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="<s:url value='/temp/css/common.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
