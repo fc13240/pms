@@ -54,4 +54,10 @@ public class AppPersonServiceImpl implements AppPersonService {
 		AppPersonDao.deleteAppPersonById(id);
 		
 	}
+
+
+	@Override
+	public List<CommonAppPerson> getAppPersonByName(String appPerson) {
+		return AppPersonDao.getAppPersonByName(appPerson);
+	}
 }

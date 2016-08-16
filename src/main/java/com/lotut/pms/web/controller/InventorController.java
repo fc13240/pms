@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.CommonInventor;
-import com.lotut.pms.domain.Patent;
 import com.lotut.pms.service.InventorService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
@@ -82,7 +81,6 @@ public class InventorController {
 	public void loadInventor(@RequestParam("inventor") String inventor, HttpServletResponse response){
 		response.setContentType("application/json;charset=UTF-8");
 		List<CommonInventor> inventors=inventorService.getInventor(inventor);
-		System.out.println(inventors.size()+"--------size");
 		try{
 			Map<String, Object> map = new HashMap<>();
 			map.put("inventors", inventors);

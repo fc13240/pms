@@ -12,14 +12,12 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,20 +30,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Attachment;
+import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.TemplatePage;
+import com.lotut.pms.service.AppPersonService;
 import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
-import com.lotut.pms.service.PatentService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.CreateWord;
 import com.lotut.pms.web.util.DocUtil;
@@ -62,12 +60,14 @@ public class PatentEditDocController {
 	private PatentDocService patentDocService;
 	private PatentDocumentTemplateService patentDocumentTemplateService;
 	private InventorService inventorService ;
+	private AppPersonService appPersonService ;
 	
 	@Autowired
-	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService,InventorService inventorService) {
+	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService,InventorService inventorService,AppPersonService appPersonService) {
 		this.patentDocService = patentDocService;
 		this.patentDocumentTemplateService = patentDocumentTemplateService;
 		this.inventorService = inventorService;
+		this.appPersonService = appPersonService;
 	}
 
 	@RequestMapping(path="/newPatentType")
@@ -84,10 +84,12 @@ public class PatentEditDocController {
 		patentDocService.savePatentDoc(patentDoc);
 		
 		List<CommonInventor> inventors = inventorService.getAllInventorsByUser(userId);
+		List<CommonAppPerson> appPersons= appPersonService.getAllAppPersonByUser(userId);
 		long patentDocId=patentDoc.getPatentDocId();
 		model.addAttribute("patentDocId",patentDocId);
 		model.addAttribute("patentDoc",patentDoc);
 		model.addAttribute("inventors",inventors);
+		model.addAttribute("appPersons",appPersons);
 		if(patentType==1){
 			return "patent_doc_invent_edit";
 		}else if(patentType==2){

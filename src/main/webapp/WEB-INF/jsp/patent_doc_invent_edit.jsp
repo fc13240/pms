@@ -1601,12 +1601,18 @@ function loadImgs(){
 	//} 
 	$(function() {
 		var inventors = [];
+		var appPersons = [];
 		<c:forEach items="${inventors}" var="inventor">
 			inventors.push("${inventor.inventorName}");
+		</c:forEach>;
+		
+		<c:forEach items="${appPersons}" var="appPerson">
+			appPersons.push("${appPerson.name}");
 		</c:forEach>
 		
 	     $().ready(function() {
 	     	$("#inventor").autocomplete(inventors);	
+	     	$("#appPerson").autocomplete(appPersons);	
 	     });
 	});
 
@@ -1618,7 +1624,7 @@ function loadImgs(){
 		}
 	}
 
-	function addOptions(options) {
+	function addInventorOptions(options) {
 		$.each(options, function(index, inventor){
 			selectObj.append("<option value='" + inventor.inventorName + "'>" + inventor.inventorName + "</option>");
 		});	
@@ -1630,10 +1636,27 @@ function loadImgs(){
 			url : "<s:url value='/inventor/loadInventor.html'/>?inventor="+inventor,
 			success : function(result){
 				 resetSelect();
-				addOptions(result.inventors);
+				addInventorOptions(result.inventors);
 			}
 		})
 	}
+	
+	/* function addProposeOptions(options) {
+		$.each(options, function(index, inventor){
+			selectObj.append("<option value='" + inventor.inventorName + "'>" + inventor.inventorName + "</option>");
+		});	
+	}
+	function loadProposer(){
+		var inventor = $("#inventor").val();
+		$.ajax({
+			type :'POST',
+			url : "<s:url value='/inventor/loadInventor.html'/>?inventor="+inventor,
+			success : function(result){
+				 resetSelect();
+				addProposerOptions(result.inventors);
+			}
+		})
+	} */
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	
