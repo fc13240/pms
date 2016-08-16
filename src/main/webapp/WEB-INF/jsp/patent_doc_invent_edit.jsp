@@ -353,10 +353,6 @@
 									</div>
 								</div>
 							</div>
-							<div id="error_content0" style="margin-left: -50px; float: left; color: Red; text-align: right;" class="textarea">
-								您当前输入了 <span class="word_count2">0</span>个文字。<br> 
-								<span class="word_surplus"></span>
-							</div>
 						</div>
 						
 						
