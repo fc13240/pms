@@ -258,7 +258,7 @@
 									权利要求包括独立权利要求和从属权利要求，每一项权利要求都是一个独立的保护范围，从属权利要求是对独立权利要求技术内容的进一步限定，审查人员先审独立权利要求，如果独立权利要求具备授予专利权的条件，从属权利要求就不用审了...<i class="cancelh" onclick="doLong('quanli');">展开</i>
 								</p>
 							</div>
-							<%-- <div id="quanliL" class="Writing_tipsh tip9" name="tips_2" style="display: none;">
+							 <div id="quanliL" class="Writing_tipsh tip9" name="tips_2" style="display: none;">
 								<p>
 									<span>撰写指南</span>
 								</p>
@@ -304,7 +304,7 @@
 									4)权利要求所限定的相应技术方案与（说明书中）发明内容部分所述的技术方案的表述一致； 权利要求所限定的相应技术方案对（说明书中）具体实施方式部分所述的技术方案做清楚、简要地限定。
 									<i class="cancelhh" onclick="doShort('quanli');">收起</i>
 								</p>
-							</div> --%>
+							</div> 
 							<div class="Writing_tips" name="tips tip10" style="display: none;">
 								<p>
 									<span>撰写指南</span>
@@ -457,7 +457,7 @@
 									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
 									</form> 
 									<div style="height:10px;">&nbsp;</div> 
-									<span style="color:#666;">友情提示：将所需的附件一次性生成压缩文格式(zip,rar等)形式上传，不建议上传其他格式的文件!
+									<span style="color:#666;">友情提示：将所需的附件一次性打包成压缩文件格式上传(zip,rar等)，不建议上传其他格式的文件!
 									</span>
 								</div>
 							</div>
@@ -1620,14 +1620,22 @@ function loadImgs(){
 	});
 	
 	function uploadAttachmentFile(){
+		
 		var hideForm = $('#patentDocAttachment'); 
 		var options = {
 			dataType : "json", 
 			data: {'file': $("#patentAttachmentFile").val()},
 			beforeSubmit : function() {
-				alert("正在上传");
+				var name=$("#filename").val();
+				var mime = name.toLowerCase().substr(name.lastIndexOf("."));
+				if(mime ==".zip" || mime ==".rar"){
+					return true;
+				}else{
+					alert("请上传压缩文件包！");
+					return false;
+				}
 			}, 
-			success : function(result) { 
+			success : function(result) {
 				uploadSuccess(result); 
 			}, 
 			error : function() {
@@ -1650,6 +1658,20 @@ function loadImgs(){
 			}
 		});
 	}
+	
+// 	function deleteFile(value){
+		//$.ajax({
+			//type: "GET",
+			//url: "<s:url value='/editor/deletePatentDocAttachmentFile.html'/>",
+			//data: {"filePath":value},
+			//success: function(data){
+				//alert("删除成功");
+			//},
+			//error: function(){
+				//alert("删除失败");
+			//}
+		//});
+	//} 
 	
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>

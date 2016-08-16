@@ -628,6 +628,8 @@ VALUES
 	(6, 'ROLE_TECH'),
 	(7, 'ROLE_PROCESS');
 	
+INSERT INTO group_members(username,group_id) VALUES('test',4);
+	
 CREATE TABLE IF NOT EXISTS customer_supports (
 	id INT NOT NULL AUTO_INCREMENT UNIQUE,
 	user_id INT NOT NULL,
@@ -637,22 +639,22 @@ CREATE TABLE IF NOT EXISTS customer_supports (
 	CONSTRAINT fk_customer_supports_user_id FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS techs (
+CREATE TABLE IF NOT EXISTS tech_person (
 	id INT NOT NULL AUTO_INCREMENT UNIQUE,
 	user_id INT NOT NULL,
 	proxy_org_id INT NOT NULL,
 	remark_name VARCHAR(30) ,
 	PRIMARY KEY(user_id,proxy_org_id),	
-	CONSTRAINT fk_techs_user_id FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
+	CONSTRAINT fk_tech_person_user_id FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS processes (
+CREATE TABLE IF NOT EXISTS process_person (
 	id INT NOT NULL AUTO_INCREMENT UNIQUE,
 	user_id INT NOT NULL,
 	proxy_org_id INT NOT NULL,
 	remark_name VARCHAR(30) ,
 	PRIMARY KEY(user_id,proxy_org_id),	
-	CONSTRAINT fk_processes_user_id FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
+	CONSTRAINT fk_process_person_user_id FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE common_inventor (

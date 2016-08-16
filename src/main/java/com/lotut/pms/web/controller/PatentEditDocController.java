@@ -402,14 +402,37 @@ public class PatentEditDocController {
 	
 	@RequestMapping(path="/getPatentDocAttachmentFile",method=RequestMethod.GET)
 	public void  getPatentDocAttachmentFile(@RequestParam("patentDocId")long patentDocId,HttpServletResponse response,Model model){
-		String filePath=patentDocService.getPatentDocAttachmentFile(patentDocId);
-		try {
-			WebUtils.writeJsonStrToResponse(response,filePath);
+		try{
+			String filePath=patentDocService.getPatentDocAttachmentFile(patentDocId);
+			String[] file=filePath.split("/.");
+			String fileName=file[file.length-1];
+			response.setContentType("multipart/form-data");
+			response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
+			File wordFile = new File(filePath);
+			int BUFFER_SIZE = 8192;
+			byte[] buffer = new byte[BUFFER_SIZE];
+			try (OutputStream out = response.getOutputStream(); 
+					BufferedInputStream bis = new BufferedInputStream(new FileInputStream(wordFile))) {
+				int bytesRead = -1;
+				while ((bytesRead = bis.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesRead);
+				}
+				bis.close();
+				out.close();
+				out.flush();
 		} catch (IOException e) {
+			e.printStackTrace();
+	}
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 	
+	@RequestMapping(path="/deletePatentDocAttachmentFile",method=RequestMethod.GET)
+	public void deletePatentDocAttachmentFile(@RequestParam("filePath")String filePath,PrintWriter writer){
+		CreateWord.deleteDir(new File(filePath));
+		writer.write(1);
+	}
 	
 	public List<String> getAttachmentImgUrl(long patentDocId){
 		List<Attachment> Imgs=patentDocService.getAttachmentById(patentDocId);

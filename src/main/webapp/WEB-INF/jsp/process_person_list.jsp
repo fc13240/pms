@@ -31,9 +31,9 @@
 				<div class="lt-box" style="padding:20px;">
 					<!-- list beg -->
 					<div class="t-third">
-					  <form action="<s:url value='/friend/searchUserFriends.html'/>" method="GET"  role="search">
+					  <form  method="GET"  role="search">
 					    <div class="form-group">
-					      <button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addProcess()">增加流程员</button>
+					      <button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addProcessPerson()">增加流程员</button>
 					    </div>
 					  </form>
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
@@ -47,14 +47,14 @@
 					      </tr>
 					    </thead>
 					    <tbody>
-					      <c:forEach items="${processes}" var="process" varStatus="status">
+					      <c:forEach items="${processPersons}" var="processPerson" varStatus="status">
 					        <tr>
 					          <td style="text-align:center">${status.count}</td>
-					          <td style="text-align:center"><c:out value="${process.user.username}"/></td>
-					          <td style="text-align:center"><c:out value="${process.user.name}"/></td>
-					          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${process.remarkName}' onChange="changeProcessRemarkName('<c:out value='${process.id}'/>', this.value)"/></td>
+					          <td style="text-align:center"><c:out value="${processPerson.user.username}"/></td>
+					          <td style="text-align:center"><c:out value="${processPerson.user.name}"/></td>
+					          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${processPerson.remarkName}' onChange="changeProcessPersonRemarkName('<c:out value='${processPerson.id}'/>', this.value)"/></td>
 					          <td style="text-align:center">
-					          <a href="<s:url value='/employee/deleteProcess.html'/>?id=<c:out value='${process.id}'/>">
+					          <a href="<s:url value='/employee/deleteProcessPerson.html'/>?id=<c:out value='${processPerson.id}'/>">
 					          	删除流程员
 					          </a>
 					          </td>
@@ -75,9 +75,9 @@
 
 </div>
 <script type="text/javascript">
-	function changeProcessRemarkName(id, remarkName) {
+	function changeProcessPersonRemarkName(id, remarkName) {
 		$.ajax({
-			url: "<s:url value='/employee/changeProcessRemarkName.html'/>?id=" + id + "&remarkName=" + remarkName, 
+			url: "<s:url value='/employee/changeProcessPersonRemarkName.html'/>?id=" + id + "&remarkName=" + remarkName, 
 			type: 'get', 
 			error: function() {
 				formutil.alertMessage('修改失败，请稍后重试!');
@@ -85,8 +85,8 @@
 		});	
 	}
 	
-	function addProcess(){
-		var url = "<s:url value='/employee/searchProcess.html'/>";
+	function addProcessPerson(){
+		var url = "<s:url value='/employee/searchProcessPerson.html'/>";
 		location.href = url;
 	}
 </script>

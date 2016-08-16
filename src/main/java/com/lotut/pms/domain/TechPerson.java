@@ -1,6 +1,6 @@
 package com.lotut.pms.domain;
 
-public class Tech {
+public class TechPerson {
 	private int id;
 	private int userId;
 	private int proxyOrgId;

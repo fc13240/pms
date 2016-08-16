@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.CustomerSupport;
-import com.lotut.pms.domain.Tech;
+import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.domain.User;
-import com.lotut.pms.domain.Process;
+import com.lotut.pms.domain.ProcessPerson;
 import com.lotut.pms.service.EmployeeService;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -39,20 +39,20 @@ public class EmployeeController {
 		return "customer_support_list";
 	}
 	
-	@RequestMapping(path="/getTechList", method=RequestMethod.GET)
-	public String getTechList(Model model) {
+	@RequestMapping(path="/getTechPersonList", method=RequestMethod.GET)
+	public String getTechPersonList(Model model) {
 		int proxyOrgId = PrincipalUtils.getCurrentUserId();
-		List<Tech> techs = employeeService.getTechList(proxyOrgId);
-		model.addAttribute("techs", techs);
-		return "tech_list";
+		List<TechPerson> techPersons = employeeService.getTechPersonList(proxyOrgId);
+		model.addAttribute("techPersons", techPersons);
+		return "tech_person_list";
 	}
 	
-	@RequestMapping(path="/getProcessList", method=RequestMethod.GET)
-	public String getProcessList(Model model) {
+	@RequestMapping(path="/getProcessPersonList", method=RequestMethod.GET)
+	public String getProcessPersonList(Model model) {
 		int proxyOrgId = PrincipalUtils.getCurrentUserId();
-		List<Process> processes = employeeService.getProcessList(proxyOrgId);
-		model.addAttribute("processes", processes);
-		return "process_list";
+		List<ProcessPerson> processPersons = employeeService.getProcessPersonList(proxyOrgId);
+		model.addAttribute("processPersons", processPersons);
+		return "process_person_list";
 	}
 	
 	
@@ -61,14 +61,14 @@ public class EmployeeController {
 		return "customer_support_add";
 	}
 	
-	@RequestMapping(path="/searchTech", method=RequestMethod.GET)
-	public String searchTech(Model model) {
-		return "tech_add";
+	@RequestMapping(path="/searchTechPerson", method=RequestMethod.GET)
+	public String searchTechPerson(Model model) {
+		return "tech_person_add";
 	}
 	
-	@RequestMapping(path="/searchProcess", method=RequestMethod.GET)
-	public String searchProcess(Model model) {
-		return "process_add";
+	@RequestMapping(path="/searchProcessPerson", method=RequestMethod.GET)
+	public String searchProcessPerson(Model model) {
+		return "process_person_add";
 	}
 	
 	
@@ -79,18 +79,18 @@ public class EmployeeController {
 		return "customer_support_add";
 	}
 	
-	@RequestMapping(path="/searchTechUsers", method=RequestMethod.GET)
-	public String searchTechUsers(@RequestParam(name="keyword") String keyword, Model model) {
+	@RequestMapping(path="/searchTechPersonUsers", method=RequestMethod.GET)
+	public String searchTechPersonUsers(@RequestParam(name="keyword") String keyword, Model model) {
 		List<User> resultUsers = friendService.searchFriends(keyword);
 		model.addAttribute("users", resultUsers);
-		return "tech_add";
+		return "tech_person_add";
 	}
 	
-	@RequestMapping(path="/searchProcessUsers", method=RequestMethod.GET)
-	public String searchProcessUsers(@RequestParam(name="keyword") String keyword, Model model) {
+	@RequestMapping(path="/searchProcessPersonUsers", method=RequestMethod.GET)
+	public String searchProcessPersonUsers(@RequestParam(name="keyword") String keyword, Model model) {
 		List<User> resultUsers = friendService.searchFriends(keyword);
 		model.addAttribute("users", resultUsers);
-		return "process_add";
+		return "process_person_add";
 	}
 	
 	
@@ -102,20 +102,20 @@ public class EmployeeController {
 		return "customer_support_add";
 	}	
 	
-	@RequestMapping(path="/searchTechFriends", method=RequestMethod.GET)
-	public String searchTechFriends(@RequestParam("keyword") String keyword, Model model) {
+	@RequestMapping(path="/searchTechPersonFriends", method=RequestMethod.GET)
+	public String searchTechPersonFriends(@RequestParam("keyword") String keyword, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<User> resultUsers = friendService.findFriendsByUserId(userId,keyword);
 		model.addAttribute("users", resultUsers);
-		return "tech_add";
+		return "tech_person_add";
 	}	
 	
-	@RequestMapping(path="/searchProcessFriends", method=RequestMethod.GET)
-	public String searchProcessFriends(@RequestParam("keyword") String keyword, Model model) {
+	@RequestMapping(path="/searchProcessPersonFriends", method=RequestMethod.GET)
+	public String searchProcessPersonFriends(@RequestParam("keyword") String keyword, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<User> resultUsers = friendService.findFriendsByUserId(userId,keyword);
 		model.addAttribute("users", resultUsers);
-		return "process_add";
+		return "process_person_add";
 	}	
 	
 	
@@ -127,20 +127,20 @@ public class EmployeeController {
 		return "customer_support_add";
 	}
 	
-	@RequestMapping(path="/techRequest", method=RequestMethod.GET)
-	public String addOrUpdateTech(@ModelAttribute("tech")Tech tech,Model model) {
+	@RequestMapping(path="/techPersonRequest", method=RequestMethod.GET)
+	public String addOrUpdateTechPerson(@ModelAttribute("techPerson")TechPerson techPerson,Model model) {
 		int proxyOrgId = PrincipalUtils.getCurrentUserId();
-		tech.setProxyOrgId(proxyOrgId);
-		employeeService.addOrUpdateTech(tech);
-		return "tech_add";
+		techPerson.setProxyOrgId(proxyOrgId);
+		employeeService.addOrUpdateTechPerson(techPerson);
+		return "tech_person_add";
 	}
 	
-	@RequestMapping(path="/processRequest", method=RequestMethod.GET)
-	public String addOrUpdateProcess(@ModelAttribute("process")Process process,Model model) {
+	@RequestMapping(path="/processPersonRequest", method=RequestMethod.GET)
+	public String addOrUpdateProcessPerson(@ModelAttribute("processPerson")ProcessPerson processPerson,Model model) {
 		int proxyOrgId = PrincipalUtils.getCurrentUserId();
-		process.setProxyOrgId(proxyOrgId);
-		employeeService.addOrUpdateProcess(process);
-		return "process_add";
+		processPerson.setProxyOrgId(proxyOrgId);
+		employeeService.addOrUpdateProcessPerson(processPerson);
+		return "process_person_add";
 	}
 	
 	
@@ -152,20 +152,20 @@ public class EmployeeController {
 		return "redirect:/employee/getCustomerSupportList.html";
 	}
 	
-	@RequestMapping(path="/deleteTech", method=RequestMethod.GET)
-	public String deleteTech(@RequestParam("id")int id,Model model) {
+	@RequestMapping(path="/deleteTechPerson", method=RequestMethod.GET)
+	public String deleteTechPerson(@RequestParam("id")int id,Model model) {
 		int proxyOrgId = PrincipalUtils.getCurrentUserId();
-		employeeService.deleteTech(id);
+		employeeService.deleteTechPerson(id);
 		model.addAttribute("proxyOrgId",proxyOrgId);
-		return "redirect:/employee/getTechList.html";
+		return "redirect:/employee/getTechPersonList.html";
 	}
 	
-	@RequestMapping(path="/deleteProcess", method=RequestMethod.GET)
-	public String deleteProcess(@RequestParam("id")int id,Model model) {
+	@RequestMapping(path="/deleteProcessPerson", method=RequestMethod.GET)
+	public String deleteProcessPerson(@RequestParam("id")int id,Model model) {
 		int proxyOrgId = PrincipalUtils.getCurrentUserId();
-		employeeService.deleteProcess(id);
+		employeeService.deleteProcessPerson(id);
 		model.addAttribute("proxyOrgId",proxyOrgId);
-		return "redirect:/employee/getProcessList.html";
+		return "redirect:/employee/getProcessPersonList.html";
 	}
 	
 	
@@ -175,15 +175,15 @@ public class EmployeeController {
 		return "customer_support_list";
 	}
 	
-	@RequestMapping(path="/changeTechRemarkName", method=RequestMethod.GET)
-	public String changeTechRemarkName(int id, String remarkName) {
-		employeeService.changeTechRemarkName(id, remarkName);
-		return "tech_list";
+	@RequestMapping(path="/changeTechPersonRemarkName", method=RequestMethod.GET)
+	public String changeTechPersonRemarkName(int id, String remarkName) {
+		employeeService.changeTechPersonRemarkName(id, remarkName);
+		return "tech_person_list";
 	}
 	
-	@RequestMapping(path="/changeProcessRemarkName", method=RequestMethod.GET)
-	public String changeProcessRemarkName(int id, String remarkName) {
-		employeeService.changeProcessRemarkName(id, remarkName);
-		return "process_list";
+	@RequestMapping(path="/changeProcessPersonRemarkName", method=RequestMethod.GET)
+	public String changeProcessPersonRemarkName(int id, String remarkName) {
+		employeeService.changeProcessPersonRemarkName(id, remarkName);
+		return "process_person_list";
 	}
 }
