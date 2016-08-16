@@ -1427,18 +1427,14 @@ function settingAbstractImg(value){
 </script>
 <script type="text/javascript">
 function savePatentDoc(value){
-	var name=editor.text();
-	var techDomain=$("#editorContent1").val();
-	var backgoundTech=$("#editorContent2").val();
-	var content=$("#editorContent3").val();
-	var implementWay=$("#editorContent6").val();
+	var name=$("#patentName").val();
+	var manual=$("#editorContent").val();
 	var abstractDescription=$("#editorContent7").val();
 	var rightClaim=$("#editorContent8").val();
 	$.ajax({
 		type: "POST",
 		url: "<s:url value='/editor/savePatentDoc.html'/>",
-		data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"content":content,
-				"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
+		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
 		success: function(data){
 			alert("操作成功");
 		},

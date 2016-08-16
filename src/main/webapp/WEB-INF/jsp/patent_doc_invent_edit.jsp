@@ -1480,9 +1480,7 @@ function settingAbstractImg(value){
 <script type="text/javascript">
 function savePatentDoc(value){
 	var name=$("#patentName").val();
-	alert(name);
 	var manual=$("#editorContent").val();
-	alert(manual);
 	var abstractDescription=$("#editorContent7").val();
 	var rightClaim=$("#editorContent8").val();
 	$.ajax({
