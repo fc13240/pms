@@ -13,8 +13,11 @@
 	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  
 	<title>测试页面</title>
 	<c:import url="common/kindEditor.jsp"></c:import>
-	<%@ include file="_css.jsp" %>
+	<%-- <%@ include file="_css.jsp" %> --%>
 	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.min.css'/>">
+	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap-theme.min.css'/>">
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -96,15 +99,7 @@
 	        <div class="left" style="height: 700px;">
 				<!--申请文件九部分标签切换 -->
 				<div class="tab" id="tabWrap"> 
-					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">发明名称</div>
-					<div class="tab1h" value="1" name="tabs" onclick="tabChange(1);">
-						技术领域</div>
-					<div class="tab1h" value="2" name="tabs" onclick="tabChange(2);">
-						背景技术</div>
-					<div class="tab1h" value="3" name="tabs" onclick="tabChange(3);">
-						发明内容</div>
-					<div class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
-						具体实施方式</div>
+					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">说明书</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						附图及说明</div>
 					<div class="tab1h" value="6" name="tabs" onclick="tabChange(6,true,false);">
@@ -360,85 +355,6 @@
 								<span class="word_surplus"></span>
 							</div>
 						</div>
-						<div class="content" id="content1" style="display: none;">
-							<div class="title">
-								技术领域
-							</div>
-							<div class="cl">
-								<div id="editor1" thisid="2124" thistempid="0">
-									<div class="instru">
-										<div class="title2">蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-										    <div class="wraper">
-									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-									            	<tr>
-									                    <td style="width:520px;">
-									                    	<textarea rows="3" cols="10" id="editorContent1" name="techDomain" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.techDomain }</textarea>
-									                    </td>
-									            	</tr>
-									            </table>
-										   </div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="content" id="content2" style="display: none;">
-							<div class="title">
-								背景技术
-							</div>
-							<div class="cl">
-								<div id="editor2" thisid="2293" thistempid="0">
-									<div class="instru">
-										<div class="title2">
-											引证文件应当是公开出版物，可以是专利文件，也可以是非专利文件，例如期刊、杂志、手册和书籍等。<br>
-											引证专利文件的，至少要写明专利文件的国别、公开号；<br>
-											引证非专利文件的，要写明这些文件的标题和详细出处，必要时给出译文并将译文放置在括号中。<br>
-											引用专利：美国专利US 3676315号；<br>
-											引用论文格式：Niyogi 等，“Solution Properties of Graphite and Graphene”， Nature，2006，128，7720<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-										<div class="wraper">
-								            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-								            	<tr>
-								                    <td style="width:520px;" >
-								                    	<textarea rows="3" cols="10" id="editorContent2" name="backgoundTech" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.backgoundTech }</textarea>
-								                    </td>
-								            	</tr>
-								            </table>
-										   </div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="content" id="content3" style="display: none;">
-							<div class="title">
-								发明内容
-							</div>
-							<div class="cl">
-								<div id="editor3" thisid="5632" thistempid="0">
-									<div class="instru">
-										<div class="title2">
-											针对现有技术存在的问题，结合您的技术所能取得的效果，说说您的技术要解决的技术问题，简单说一下要解决的问题就可以了，不用说效果。<br>
-											一般别人都是写一小段，写多了审查人员也不介意，不过还是先看看模板吧，毕竟专利的表述是采用法律文书的形式，套路都比较固定了。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-											<div class="wraper">
-									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-									            	<tr>
-									                    <td style="width:520px;" >
-									                    	<textarea rows="3" cols="10" id="editorContent3" name="contentProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.content }</textarea>
-									                    </td>
-									            	</tr>
-									            </table>
-										   </div>
-									</div>
-								</div>
-							</div>
-						</div>
 						
 						
 						<!--上传附件div  -->
@@ -471,33 +387,6 @@
 							</div>
 							<div class="cl">
 								
-							</div>
-						</div>
-						<div class="content" id="content4" style="display: none;overflow: auto;" >
-							<div class="title">
-								具体实施方式
-							</div>
-							<div class="cl">
-								<div id="editor4" thisid="2514" thistempid="0">
-									<div class="instru">
-										<div class="title2">
-											详细说明解决技术问题所采用的技术方案，并应当对权利要求的技术特征给予详细说明，以支持权利要求。<br>
-											有附图的应当对照附图进行说明。<br>
-											实施例是对具体实施方式的举例说明。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-											<div class="wraper">
-									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-									            	<tr>
-									                    <td style="width:520px;" >
-									                    	<textarea rows="3" cols="10" id="editorContent6" name="implementWay" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.implementWay }</textarea>
-									                    </td>
-									            	</tr>
-									            </table>
-										   </div>
-									</div>
-								</div>
 							</div>
 						</div>
 						<input id="hideditor3id" type="hidden" autocomplete="off">
