@@ -15,6 +15,8 @@
 	<c:import url="common/kindEditor.jsp"></c:import>
 	<%@ include file="_css.jsp" %>
 	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
+	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
+    <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -482,7 +484,7 @@
 									</tr>
 									<tr>
 									<td>
-									发明人：<input class="t-input form-control" type="text" name="inventor" placeholder="在已有发明人中搜索" style="width: 200px" onblur="loadInventor()"/>
+									发明人：<input class="t-input form-control" type="text" name="inventor" id="inventor" placeholder="在已有发明人中搜索" style="width: 200px" onblur="loadInventor()"/>
 									</td>
 									<td>
 									<button class="button button-caution button-rounded" type="button">新增</button><br/>
@@ -1706,16 +1708,74 @@ function loadImgs(){
 			//}
 		//});
 	//} 
+	$(function() {
+		var inventors = [];
+		<c:forEach items="${inventors}" var="inventor">
+			inventors.push("${inventor.inventorName}");
+		</c:forEach>
+		
+	     $().ready(function() {
+	     	$("#inventor").autocomplete(inventors);	
+	     });
+		/* 
+		$("#addFeeForm").validate({
+			submitHandler: function(form){ 
+				form.submit();     
+			}
+		});	 */
+	});
+
+	function addDefaultOption(selectElem) {
+		selectElem.append("<option value=''>请选择</option>");
+	}
+
+	function resetSelect() {
+		for (var i = 0; i < arguments.length; i++) {
+			var selectObj = arguments[i];
+			selectObj.empty();
+			addDefaultOption(selectObj);
+		}
+	}
+
+	function addOptions(selectObj, options) {
+		$.each(options, function(index, val){
+			selectObj.append("<option value='" + val + "'>" + val + "</option>");
+		});	
+	}
+	function loadPatent() {
+		var appNo = $("#appNo").val();
+		if (appNo != "") {
+			$.ajax({
+				url: "<s:url value='/fee/getPatentByPatentId.html'/>?appNo=" + appNo,
+				type: 'get',
+				dataType: 'json',
+				success: function(result) {
+					$("#name").val(result.patent.name);
+					$('#appPerson').val(result.patent.appPerson);
+					$('#patentStatus').val(result.patent.patentStatus.statusDescription);
+					resetSelect();
+					addOptions(result.);
+				}
+			})
+		} 
+	}
 	
 	function loadInventor(){
+		var inventor = $("#inventor").val();
 		$.ajax({
 			type :'POST',
-			url : "<s:url value='/proposer/loadInventor.html'/>",
-			success : function(){
-				
+			url : "<s:url value='/proposer/loadInventor.html'/>?inventor="+inventor,
+			success : function(result){
+				alert(result);
+				/* resetSelect(feeType);
+				addOptions(result.feeTypes); */
 			}
 		})
 	}
+	
+	
+	
+	
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	

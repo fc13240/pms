@@ -1,7 +1,11 @@
 package com.lotut.pms.web.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.CommonInventor;
+import com.lotut.pms.domain.Patent;
 import com.lotut.pms.service.InventorService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.WebUtils;
 
 @Controller
 @RequestMapping(path="/inventor")
@@ -71,4 +77,16 @@ public class InventorController {
 		return "redirect:/inventor/list.html";
 		
 	}
+	
+	@RequestMapping(path="/loadInventor")
+	public void loadInventor(@RequestParam("inventor") String inventor, HttpServletResponse response){
+		response.setContentType("application/json;charset=UTF-8");
+		/*//List<CommonInventor> inventors=inventorService.getInventor();
+		try{
+			WebUtils.writeJsonStrToResponse(response, inventors);
+		}catch(IOException e){
+			e.printStackTrace();
+		}*/
+	}
+	
 }

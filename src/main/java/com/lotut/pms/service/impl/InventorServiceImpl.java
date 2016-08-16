@@ -38,5 +38,9 @@ public class InventorServiceImpl implements InventorService{
 		inventorDao.deleteById(id);
 		
 	}
+	@Override
+	public List<CommonInventor> getInventor(String inventor) {
+		return inventorDao.getInventorByName(inventor);
+	}
 	
 }
