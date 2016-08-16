@@ -471,6 +471,50 @@ public class PatentEditDocController {
 		}
 	}
 	
-
-
+	
+	@RequestMapping(path="/showUploadForm",method=RequestMethod.GET)
+	public String showUploadForm(@RequestParam("patentDocId")long patentDocId,Model model){
+		model.addAttribute("patentDocId", patentDocId);
+		return "patent_doc_upload_form";
+	}
+	
+	
+	@RequestMapping(path="/uploadPatentDocFile",method=RequestMethod.POST)
+	public void uploadPatentDocFile(HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
+		try{
+			String savePath=Settings.PATENTDOC_FILE_PATH;
+			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+			MultipartFile file1 = multipartRequest.getFile("file");
+			String fileName = file1.getOriginalFilename();
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String ymd = sdf.format(new Date());
+			savePath += ymd + "/";
+			File dirFile = new File(savePath);
+			if (!dirFile.exists()) {
+				dirFile.mkdirs();
+			}
+			String newFileName = new Random().nextInt(10000) + "_" + fileName;
+			InputStream is = file1.getInputStream();
+			int BUFFER_SIZE = 8 * 1024;
+			byte[] buffer = new byte[BUFFER_SIZE];
+			try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
+				int bytesRead = -1;
+				while ((bytesRead = is.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesRead);
+				}
+				out.flush();
+				out.close();
+			}
+			WebUtils.writeJsonStrToResponse(response,savePath+newFileName);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}	
+	
+	
+	@RequestMapping(path="/savePatentDocFile",method=RequestMethod.POST)
+	public void savePatentDocFile(PatentDoc patentDoc,PrintWriter writer){
+		patentDocService.savePatentDocFile(patentDoc);
+		writer.write(1);
+	}
 }

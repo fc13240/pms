@@ -12,15 +12,19 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  
 	<title>测试页面</title>
+	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.min.css'/>">
+	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap-theme.min.css'/>">
 	<c:import url="common/kindEditor.jsp"></c:import>
-	<%-- <%@ include file="_css.jsp" %> --%>
 	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
     <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
-
+	
+	<script src="<s:url value='/temp/js/jquery-ui.min.js'/>" type="text/javascript"></script>
 	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.min.css'/>">
-	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap-theme.min.css'/>">
+	<link rel="stylesheet" href="<s:url value='/temp/css/common.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
+	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
+	<link rel="stylesheet" media="screen" href="<s:url value='/temp/css/jquery-ui.min.css'/>" />
+	<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -103,17 +107,17 @@
 				<!--申请文件九部分标签切换 -->
 				<div class="tab" id="tabWrap"> 
 					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">说明书</div>
-					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
-						说明书附图</div>
-					<div class="tab1h" value="6" name="tabs" onclick="tabChange(6,true,false);">
-						权利要求书</div>
-					<div class="tab1h" value="7" name="tabs" onclick="tabChange(7);">
-						说明书摘要</div>
-					<div class="tab1h" value="8" name="tabs" onclick="tabChange(8);">
+					<div class="tab1h" value="1" name="tabs" onclick="tabChange(1);">
+						附图及说明</div>
+					<div class="tab1h" value="2" name="tabs" onclick="tabChange(2,true,false);">
+						权利要求</div>
+					<div class="tab1h" value="3" name="tabs" onclick="tabChange(3);">
+						摘要</div>
+					<div class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
 						摘要附图</div>
-					<div class="tab1h" value="9" name="tabs" onclick="tabChange(9);">
+					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件</div>
-					<div class="tab1h" value="10" name="tabs" onclick="tabChange(10);">
+					<div class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
 						请求协议书</div>
 				</div>
 	
@@ -360,7 +364,7 @@
 						
 						
 						<!--上传附件div  -->
-						<div class="content" id="content9" thisid="2514" style="display: none;">
+						<div class="content" id="content5" thisid="2514" style="display: none;">
 							<div class="title">
 								上传附件
 							</div>
@@ -382,7 +386,7 @@
 						</div>
 						
 						<!--请求协议书div  -->
-						<div class="content" id="content10" thisid="2514" style="display: none;">
+						<div class="content" id="content6" thisid="2514" style="display: none;">
 							
 							<div class="title">
 								请求书
@@ -430,7 +434,7 @@
 						<input id="hidtooltip" type="hidden">
 											
 						<!-- 摘要 -->
-						<div class="content" id="content7" thisid="" style="display: none;">
+						<div class="content" id="content3" thisid="" style="display: none;">
 							
 							<div class="title">
 								摘要
@@ -466,7 +470,7 @@
 	
 	                    
 						<!-- 权利要求及要素表 -->
-						<div class="content" id="content6" style="display: none; overflow: hidden;">
+						<div class="content" id="content2" style="display: none; overflow: hidden;">
 							<div name="claims" style="float: left; width: 98%">
 								<div class="title">
 									权利要求书
@@ -590,7 +594,7 @@
 						<!-- content start-->
 						<input type="hidden" id="ft_hidSrc" value="">
 						<input type="hidden" id="ft_hidFid" value="">
-						<div class="content" id="content5" style="display: none;">
+						<div class="content" id="content1" style="display: none;">
 							
 							<div class="box" id="content5-1">
 								<div class="upimg1" onclick="addPic();">
@@ -647,7 +651,7 @@
 							}
 						</style>
 						<!-- content start-->
-						<div class="content" id="content8" style="display: none;">
+						<div class="content" id="content4" style="display: none;">
 							<div style="height: 80px">
 							</div>
 								<div class="upimg1" onclick="findAttachmentImg();" id="choseAbs" style="

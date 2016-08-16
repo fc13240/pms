@@ -12,7 +12,19 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  
 	<title>实用新型撰写</title>
+	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.min.css'/>">
+	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap-theme.min.css'/>">
 	<c:import url="common/kindEditor.jsp"></c:import>
+	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
+	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
+    <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
+	
+	<script src="<s:url value='/temp/js/jquery-ui.min.js'/>" type="text/javascript"></script>
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="<s:url value='/temp/css/common.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
+	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
+	<link rel="stylesheet" media="screen" href="<s:url value='/temp/css/jquery-ui.min.css'/>" />
+	<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -94,32 +106,19 @@
 	        <div class="left" style="height: 700px;">
 				<!--申请文件九部分标签切换 -->
 				<div class="tab" id="tabWrap"> 
-					<!-- <div class="tab1" value="0" name="tabs" onclick="tabChange(0);">实用名称</div>
-					<div class="tab1h" value="1" name="tabs" onclick="tabChange(1);">
-						技术领域</div>
-					<div class="tab1h" value="2" name="tabs" onclick="tabChange(2);">
-						背景技术</div>
-					<div class="tab1h" value="3" name="tabs" onclick="tabChange(3);">
-						发明内容</div>
-					<div class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
-						具体实施方式</div>
-					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
-						附图及说明</div>
-					<div class="tab1h" value="6" name="tabs" onclick="tabChange(6,true,false);">
-						权利要求</div>
-					<div class="tab1h" value="7" name="tabs" onclick="tabChange(7);">
-						摘要</div>
-					<div class="tab1h" value="8" name="tabs" onclick="tabChange(8);">
-						摘要附图</div> -->
 					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">说明书</div>
-					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
-						说明书附图</div>
-					<div class="tab1h" value="6" name="tabs" onclick="tabChange(6,true,false);">
-						权利要求书</div>
-					<div class="tab1h" value="7" name="tabs" onclick="tabChange(7);">
-						说明书摘要</div>
-					<div class="tab1h" value="8" name="tabs" onclick="tabChange(8);">
+					<div class="tab1h" value="1" name="tabs" onclick="tabChange(1);">
+						附图及说明</div>
+					<div class="tab1h" value="2" name="tabs" onclick="tabChange(2,true,false);">
+						权利要求</div>
+					<div class="tab1h" value="3" name="tabs" onclick="tabChange(3);">
+						摘要</div>
+					<div class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
 						摘要附图</div>
+					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
+						上传附件</div>
+					<div class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
+						请求协议书</div>
 				</div>
 	
 	        </div>
@@ -359,13 +358,79 @@
 								</div>
 							</div>
 						</div>
-					
+						
+						<!--上传附件div  -->
+						<div class="content" id="content5" thisid="2514" style="display: none;">
+							<div class="title">
+								上传附件
+							</div>
+							
+							<div class="cl">
+								<div class="lt-box" style="height:300px;padding:20px;">
+
+									<form id="patentDocAttachment" action="<s:url value='/editor/uploadFile.html'/>"  method="post" enctype="multipart/form-data" class="form-horizontal">  
+									<input style="display:none;"  id="patentAttachmentFile" name="file" type="file" />
+									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
+									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
+									</form> 
+									<div style="height:10px;">&nbsp;</div> 
+									<span style="color:#666;">友情提示：将所需的附件一次性打包成压缩文件格式上传(zip,rar等)，不建议上传其他格式的文件!
+									</span>
+								</div>
+							</div>
+						</div>
+						
+						<!--请求协议书div  -->
+						<div class="content" id="content6" thisid="2514" style="display: none;">
+							
+							<div class="title">
+								请求书
+							</div>
+							<div class="cl">
+								<div>
+									<table>
+									<tr>
+									<td>
+									申请人:<input class="t-input form-control" type="text" name="proposer" placeholder="在已有申请人中搜索" style="width: 200px" onblur="loadProposer()"/> 
+									</td>
+									<td>
+									<button class="button button-caution button-rounded" type="button">新增</button>
+									</td>
+									</tr>
+									<tr>
+									<td>
+									发明人：<input class="t-input form-control" type="text" name="inventor" id="inventor" placeholder="在已有发明人中搜索" style="width: 200px" onblur="loadInventor()"/>
+									</td>
+									<td>
+									<button class="button button-caution button-rounded" type="button">新增</button><br/>
+									</td>
+									</tr>
+									<tr>
+									<td>
+									联系人：<input class="t-input form-control" type="text" name="contacts" placeholder="在已有联系人中搜索" style="width: 200px"/>
+									</td>
+									<td>
+									<button class="button button-caution button-rounded" type="button">新增</button>
+									</td>
+									</tr>
+									</table>
+								</div>
+								
+								
+								
+								
+								
+								
+								
+							</div>
+						</div>
 						<input id="hideditor3id" type="hidden" autocomplete="off">
 						<input id="hidtempid" type="hidden">
 						<input id="hidtooltip" type="hidden">
 											
 						<!-- 摘要 -->
-						<div class="content" id="content7" thisid="" style="display: none;">
+						<div class="content" id="content3" thisid="" style="display: none;">
 							
 							<div class="title">
 								摘要
@@ -403,7 +468,7 @@
 	
 	                    
 						<!-- 权利要求及要素表 -->
-						<div class="content" id="content6" style="display: none; overflow: hidden;">
+						<div class="content" id="content2" style="display: none; overflow: hidden;">
 							<div name="claims" style="float: left; width: 98%">
 								<div class="title">
 									权利要求书
@@ -529,7 +594,7 @@
 						<!-- content start-->
 						<input type="hidden" id="ft_hidSrc" value="">
 						<input type="hidden" id="ft_hidFid" value="">
-						<div class="content" id="content5" style="display: none;">
+						<div class="content" id="content1" style="display: none;">
 							<div class="box" id="content5-1">
 								<div class="upimg1" onclick="addPic();">
 									新增附图</div>
