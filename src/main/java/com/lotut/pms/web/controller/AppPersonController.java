@@ -82,4 +82,10 @@ public class AppPersonController {
 		AppPersonService.deleteAppPersonById(AppPersonId);
 		return "redirect:/appPerson/list.html";
 	}
+	
+	@RequestMapping(path="/loadAppPersoner")
+	public void loadInventor(){
+		//inventorService.deleteById(id);
+		
+	}
 }
