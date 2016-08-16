@@ -29,7 +29,7 @@
 	
 	
 	<li class="active"> 
-		<a href="<s:url value='/proposer/list.html'/>">
+		<a href="<s:url value='/appPerson/list.html'/>">
 		<h5>常用申请人</h5>
 		</a>
 	</li>	

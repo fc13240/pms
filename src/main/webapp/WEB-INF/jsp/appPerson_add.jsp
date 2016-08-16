@@ -33,28 +33,28 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
-					<form action="<s:url value='/proposer/addContactInfo.html'/>" method="post" onsubmit="">
+					<form action="<s:url value='/appPerson/addContactInfo.html'/>" method="post" onsubmit="">
 					  <se:csrfInput/>
 			       	<h5>姓名或名称:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="proposerName" required/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="name" required/>
 					<br>	   
 			       	<h5>申请人类型:</h5>
-					<select name="proposerType" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities()" required>
+					<select name="type" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities()" required>
 					  <option value=''>请选择</option>
-					  <c:forEach items="${proposerTypes}" var="proposerType">
-						<option value="${proposerType.proposerTypeId}">${proposerType.proposerTypeDescription}</option>
+					  <c:forEach items="${appPersonTypes}" var="appPersonType">
+						<option value="${appPersonType.typeId}">${appPersonType.typeDescription}</option>
 					  </c:forEach>
 					</select>
 					<br>
 					<h5>证件号码:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" name="proposerPeopleNubmer" required onblur="validatePhoneNumber(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" name="peopleNumber" required onblur="validatePhoneNumber(this.value)"/>
 					<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
 					<br>		  
 			       	<h5>邮编及地址:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="postcodeAddress" required/>
 					<br>
 					<h5>其他信息:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="otherInfo" required/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="otherInfo" />
 					<br>      
 					<div style="height:20px;"></div> 
 					<button type="submit" style="width:90px;" class="button button-primary  button-rounded">保存</button>
