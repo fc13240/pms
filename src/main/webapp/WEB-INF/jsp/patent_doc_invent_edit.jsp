@@ -377,7 +377,7 @@
 									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
 									<c:if test="${not empty patentDoc.patentDocAttachmentFile }">
-										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="downloadFile(${patentDoc.patentDocId})">下载附件</button>
+										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="downloadFile()">下载附件</button>
 				                    </c:if>
 									</form> 
 
@@ -1635,11 +1635,12 @@ function loadImgs(){
 			}
 		})
 	}
-	function downloadFile(value){
+	function downloadFile(){
+		var patentDocId=$("#patentDocId").val();
 		$.ajax({
 			type :'GET',
-			url : "<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+value,
-			success : function(data){
+			url : "<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+patentDocId,
+			success : function(){
 				
 			},
 			error: function(){
