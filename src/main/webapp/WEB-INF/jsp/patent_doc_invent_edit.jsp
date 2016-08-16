@@ -666,7 +666,7 @@
 							<h3 style="margin-left: 30px;font-family:微软雅黑;margin-top: 50px;">摘要附图：</h3>
 							</div>
 							<div class="picBox" id="picLsy3">
-								<c:if test="${patentDoc.abstractImg != null || patentDoc.abstractImg !=''}">
+								<c:if test="${patentDoc.abstractImg != null}">
 										<img src='${base}${patentDoc.abstractImg}' alt='' width='400' height='300'/>
 								</c:if>
 							</div>
