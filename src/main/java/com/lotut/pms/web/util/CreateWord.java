@@ -31,10 +31,10 @@ public class CreateWord {
 				String templatePath = Settings.WORD_MANUAL_TEMPLATE;
 				
 				String name=DocUtil.stripHtml(patentDoc.getName());
-		        String techDomain=DocUtil.stripHtml(patentDoc.getTechDomain());
-		        String backTech=DocUtil.stripHtml(patentDoc.getBackgoundTech());
-		        String content=DocUtil.stripHtml(patentDoc.getContent());
-		        String implementWay=DocUtil.stripHtml(patentDoc.getImplementWay());
+		        String techDomain=DocUtil.stripHtml(patentDoc.getName());
+		        String backTech=DocUtil.stripHtml(patentDoc.getName());
+		        String content=DocUtil.stripHtml(patentDoc.getName());
+		        String implementWay=DocUtil.stripHtml(patentDoc.getName());
 		        String attachmentIntroduces = DocUtil.stripHtml(getAttachments(attachmentIntrodurces));
 				
 			    InputStream is = new FileInputStream(templatePath);  
