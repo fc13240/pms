@@ -58,9 +58,6 @@
 						</tr>
 					  </c:forEach>
 					</table>
-					
-					
-	
 					</div>
 				<!-- list end -->				
 				</div>

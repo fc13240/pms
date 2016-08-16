@@ -3,34 +3,34 @@ package com.lotut.pms.service;
 import java.util.List;
 
 import com.lotut.pms.domain.CustomerSupport;
-import com.lotut.pms.domain.Tech;
-import com.lotut.pms.domain.Process;
+import com.lotut.pms.domain.TechPerson;
+import com.lotut.pms.domain.ProcessPerson;
 
 public interface EmployeeService {
 
 	List<CustomerSupport> getCustomerSupportList(int proxyOrgId);
 	
-	List<Tech> getTechList(int proxyOrgId);
+	List<TechPerson> getTechPersonList(int proxyOrgId);
 	
-	List<Process> getProcessList(int proxyOrgId);
+	List<ProcessPerson> getProcessPersonList(int proxyOrgId);
 
 	void addOrUpdateCustomerSupport(CustomerSupport customerSupport);
 	
-	void addOrUpdateTech(Tech tech);
+	void addOrUpdateTechPerson(TechPerson techPerson);
 	
-	void addOrUpdateProcess(Process process);
+	void addOrUpdateProcessPerson(ProcessPerson processPerson);
 
 	void deleteCustomerSupport(int id);
 	
-	void deleteTech(int id);
+	void deleteTechPerson(int id);
 	
-	void deleteProcess(int id);
+	void deleteProcessPerson(int id);
 
 	void changeCustomerSupportRemarkName(int id, String remarkName);
 
-	void changeTechRemarkName(int id, String remarkName);
+	void changeTechPersonRemarkName(int id, String remarkName);
 
-	void changeProcessRemarkName(int id, String remarkName);
+	void changeProcessPersonRemarkName(int id, String remarkName);
 	
 	
 

@@ -36,32 +36,30 @@
 					      <button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addCustomerSupport()">增加客服</button>
 					    </div>
 					  </form>
-					  <table id="simple-table" class="table table-striped table-bordered table-hover">
-					    <thead>
-					      <tr class="simple_bag">
-					        <th>序号</th>
-					        <th width="300px">用户名</th>
-					        <th width="300px">姓名</th>
-					        <th width="300px">备注名</th>
-					        <th>操作</th>
-					      </tr>
-					    </thead>
-					    <tbody>
-					      <c:forEach items="${customerSupports}" var="customerSupport" varStatus="status">
-					        <tr>
-					          <td style="text-align:center">${status.count}</td>
-					          <td style="text-align:center"><c:out value="${customerSupport.user.username}"/></td>
-					          <td style="text-align:center"><c:out value="${customerSupport.user.name}"/></td>
-					          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${customerSupport.remarkName}' onChange="changeCustomerSupportRemarkName('<c:out value='${customerSupport.id}'/>', this.value)"/></td>
-					          <td style="text-align:center">
-					          <a href="<s:url value='/employee/deleteCustomerSupport.html'/>?id=<c:out value='${customerSupport.id}'/>">
-					          	删除客服
-					          </a>
-					          </td>
-					        </tr>
-					      </c:forEach>
-					    </tbody>
-					  </table>
+					  <div style="margin-top:22px;text-align: center;">
+						  <table  class="table table-bordered table-striped">
+						      <tr >
+						        <th style="text-align:center">序号</th>
+						        <th width="300px" style="text-align:center">用户名</th>
+						        <th width="300px" style="text-align:center">姓名</th>
+						        <th width="300px" style="text-align:center">备注名</th>
+						        <th style="text-align:center">操作</th>
+						      </tr>
+						      <c:forEach items="${customerSupports}" var="customerSupport" varStatus="status">
+						        <tr>
+						          <td>${status.count}</td>
+						          <td><c:out value="${customerSupport.user.username}"/></td>
+						          <td><c:out value="${customerSupport.user.name}"/></td>
+						          <td><input type="text" maxlength="40" size="30" value='${customerSupport.remarkName}' onChange="changeCustomerSupportRemarkName('<c:out value='${customerSupport.id}'/>', this.value)"/></td>
+						          <td>
+						          <a href="<s:url value='/employee/deleteCustomerSupport.html'/>?id=<c:out value='${customerSupport.id}'/>">
+						          	删除客服
+						          </a>
+						          </td>
+						        </tr>
+						      </c:forEach>
+						  </table>
+					  </div>
 					</div>				
 				</div>
 			</div>

@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 import com.lotut.pms.dao.EmployeeDao;
 import com.lotut.pms.domain.CustomerSupport;
-import com.lotut.pms.domain.Tech;
-import com.lotut.pms.domain.Process;
+import com.lotut.pms.domain.TechPerson;
+import com.lotut.pms.domain.ProcessPerson;
 import com.lotut.pms.service.EmployeeService;
 import com.lotut.pms.util.Role;
 
@@ -26,13 +26,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	@Override
-	public List<Tech> getTechList(int proxyOrgId) {
-		return employeeDao.getTechList(proxyOrgId);
+	public List<TechPerson> getTechPersonList(int proxyOrgId) {
+		return employeeDao.getTechPersonList(proxyOrgId);
 	}
 	
 	@Override
-	public List<Process> getProcessList(int proxyOrgId) {
-		return  employeeDao.getProcessList(proxyOrgId);
+	public List<ProcessPerson> getProcessPersonList(int proxyOrgId) {
+		return  employeeDao.getProcessPersonList(proxyOrgId);
 	}
 	
 	
@@ -48,21 +48,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Override
 	@Transactional
-	public void addOrUpdateTech(Tech tech) {
-		employeeDao.addOrUpdateTech(tech);
-		boolean isNewTech = tech.getId() != 0;
-		if (isNewTech) {
-			employeeDao.insertGroupMember(tech.getUserId(),Role.ROLE_TECH.getRoleName());
+	public void addOrUpdateTechPerson(TechPerson techPerson) {
+		employeeDao.addOrUpdateTechPerson(techPerson);
+		boolean isNewTechPerson = techPerson.getId() != 0;
+		if (isNewTechPerson) {
+			employeeDao.insertGroupMember(techPerson.getUserId(),Role.ROLE_TECH.getRoleName());
 		}
 	}
 	
 	@Override
 	@Transactional
-	public void addOrUpdateProcess(Process process) {
-		employeeDao.addOrUpdateProcess(process);
-		boolean isNewProcess = process.getId() != 0;
-		if (isNewProcess) {
-			employeeDao.insertGroupMember(process.getUserId(),Role.ROLE_PROCESS.getRoleName());
+	public void addOrUpdateProcessPerson(ProcessPerson processPerson) {
+		employeeDao.addOrUpdateProcessPerson(processPerson);
+		boolean isNewProcessPerson = processPerson.getId() != 0;
+		if (isNewProcessPerson) {
+			employeeDao.insertGroupMember(processPerson.getUserId(),Role.ROLE_PROCESS.getRoleName());
 		}
 	}
 	
@@ -75,14 +75,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Override
 	@Transactional
-	public void deleteTech(int id) {
-		employeeDao.deleteTech(id);	
+	public void deleteTechPerson(int id) {
+		employeeDao.deleteTechPerson(id);	
 	}
 	
 	@Override
 	@Transactional
-	public void deleteProcess(int id) {
-		employeeDao.deleteProcess(id);	
+	public void deleteProcessPerson(int id) {
+		employeeDao.deleteProcessPerson(id);	
 	}
 	
 	
@@ -92,13 +92,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	@Override
-	public void changeTechRemarkName(int id, String remarkName) {
-		employeeDao.changeTechRemarkName(id, remarkName);	
+	public void changeTechPersonRemarkName(int id, String remarkName) {
+		employeeDao.changeTechPersonRemarkName(id, remarkName);	
 	}
 	
 	@Override
-	public void changeProcessRemarkName(int id, String remarkName) {
-		employeeDao.changeProcessRemarkName(id, remarkName);
+	public void changeProcessPersonRemarkName(int id, String remarkName) {
+		employeeDao.changeProcessPersonRemarkName(id, remarkName);
 	}
 }
 

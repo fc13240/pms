@@ -31,9 +31,9 @@
 				<div class="lt-box" style="padding:20px;">
 					<!-- list beg -->
 					<div class="t-third">
-					  <form action="<s:url value='/friend/searchUserFriends.html'/>" method="GET"  role="search">
+					  <form  method="GET"  role="search">
 					    <div class="form-group">
-					      <button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addTech()">增加技术员</button>
+					      <button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addTechPerson()">增加技术员</button>
 					    </div>
 					  </form>
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
@@ -47,14 +47,14 @@
 					      </tr>
 					    </thead>
 					    <tbody>
-					      <c:forEach items="${techs}" var="tech" varStatus="status">
+					      <c:forEach items="${techPersons}" var="techPerson" varStatus="status">
 					        <tr>
 					          <td style="text-align:center">${status.count}</td>
-					          <td style="text-align:center"><c:out value="${tech.user.username}"/></td>
-					          <td style="text-align:center"><c:out value="${tech.user.name}"/></td>
-					          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${tech.remarkName}' onChange="changeTechRemarkName('<c:out value='${tech.id}'/>', this.value)"/></td>
+					          <td style="text-align:center"><c:out value="${techPerson.user.username}"/></td>
+					          <td style="text-align:center"><c:out value="${techPerson.user.name}"/></td>
+					          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${techPerson.remarkName}' onChange="changeTechPersonRemarkName('<c:out value='${techPerson.id}'/>', this.value)"/></td>
 					          <td style="text-align:center">
-					          <a href="<s:url value='/employee/deleteTech.html'/>?id=<c:out value='${tech.id}'/>">
+					          <a href="<s:url value='/employee/deleteTechPerson.html'/>?id=<c:out value='${techPerson.id}'/>">
 					          	删除技术员
 					          </a>
 					          </td>
@@ -75,9 +75,9 @@
 
 </div>
 <script type="text/javascript">
-	function changeTechRemarkName(id, remarkName) {
+	function changeTechPersonRemarkName(id, remarkName) {
 		$.ajax({
-			url: "<s:url value='/employee/changeTechRemarkName.html'/>?id=" + id + "&remarkName=" + remarkName, 
+			url: "<s:url value='/employee/changeTechPersonRemarkName.html'/>?id=" + id + "&remarkName=" + remarkName, 
 			type: 'get', 
 			error: function() {
 				formutil.alertMessage('修改失败，请稍后重试!');
@@ -85,8 +85,8 @@
 		});	
 	}
 	
-	function addTech(){
-		var url = "<s:url value='/employee/searchTech.html'/>";
+	function addTechPerson(){
+		var url = "<s:url value='/employee/searchTechPerson.html'/>";
 		location.href = url;
 	}
 </script>

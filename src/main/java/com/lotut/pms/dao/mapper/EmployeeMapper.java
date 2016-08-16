@@ -5,35 +5,35 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.CustomerSupport;
-import com.lotut.pms.domain.Process;
-import com.lotut.pms.domain.Tech;
+import com.lotut.pms.domain.ProcessPerson;
+import com.lotut.pms.domain.TechPerson;
 
 
 public interface EmployeeMapper {
 
 	List<CustomerSupport> getCustomerSupportList(int proxyOrgId);
 	
-	List<Tech> getTechList(int proxyOrgId);
+	List<TechPerson> getTechPersonList(int proxyOrgId);
 	
-	List<Process> getProcessList(int proxyOrgId);
+	List<ProcessPerson> getProcessPersonList(int proxyOrgId);
 
 	void addOrUpdateCustomerSupport(CustomerSupport customerSupport);
 	
-	void addOrUpdateTech(Tech tech);
+	void addOrUpdateTechPerson(TechPerson techPerson);
 	
-	void addOrUpdateProcess(Process process);
+	void addOrUpdateProcessPerson(ProcessPerson processPerson);
 
 	void deleteCustomerSupport(int id);
 	
-	void deleteTech(int id);
+	void deleteTechPerson(int id);
 	
-	void deleteProcess(int id);
+	void deleteProcessPerson(int id);
 
 	void changeCustomerSupportRemarkName(@Param("id") int id,@Param("remarkName") String remarkName);
 
-	void changeTechRemarkName(@Param("id") int id, @Param("remarkName") String remarkName);
+	void changeTechPersonRemarkName(@Param("id") int id, @Param("remarkName") String remarkName);
 
-	void changeProcessRemarkName(@Param("id") int id, @Param("remarkName") String remarkName);
+	void changeProcessPersonRemarkName(@Param("id") int id, @Param("remarkName") String remarkName);
 	
 	void insertGroupMember(@Param("userId") int userId,@Param("roleName") String roleName);
 
