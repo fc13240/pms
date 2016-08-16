@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.lotut.pms.dao.mapper.AppPersonMapper">
+
+  <insert id="addAppPerson" parameterType="CommonAppPerson" >
+  	insert into common_app_person(name,type,id_number,postcode_address,other_information,user_id) 
+  	values(#{name},#{type},#{peopleNumber},#{postcodeAddress},#{otherInfo},#{userId})
+  
+  </insert>
+  
+  	<resultMap type="AppPersonType" id="AppPersonTypeMap">
+  		<id property="typeId" column="type_id"/>
+		<result property="typeDescription" column="type_desc"/>
+  	</resultMap>
+  	
+  	<select id="getAppPersonTypes" resultMap="AppPersonTypeMap">
+  		select type_id,type_desc from app_person_types
+  	
+  	</select>
+  	
+  	<select id="getAllAppPersonByUser" parameterType="int" resultType="CommonAppPerson">
+  		select p.app_person_id as appPersonId,p.type as type,p.name as name,t.type_desc as typeName,p.id_number as peopleNumber,
+  		p.postcode_address as postcodeAddress,p.other_information as otherInfo from common_app_person p 
+  		join app_person_types t on p.type=t.type_id where user_Id=#{userId}
+  		
+  	</select>
+  	
+  	<select id="getOneAppPersonById"	parameterType="int" resultType="CommonAppPerson">
+  		select p.app_person_id as appPersonId,p.type as type,  p.name as name,t.type_desc as typeName,p.id_number as peopleNumber,
+  		p.postcode_address as postcodeAddress,p.other_information otherInfo from common_app_person p 
+  		join app_person_types t on p.type=t.type_id where p.app_person_id=#{appPersonId}
+  	</select>
+  	
+  	<update id="updateAppPerson" parameterType="CommonAppPerson">
+  		update common_app_person  set name=#{name},type=#{type},id_number=#{peopleNumber},
+  		postcode_address=#{postcodeAddress},other_information=#{otherInfo}
+  		where app_person_id=#{appPersonId}
+  		
+  	</update>
+  	
+  	<delete id="deleteAppPersonById" parameterType="int">
+  		delete from common_app_person where app_person_id =#{appPersonId}
+  	</delete>
+  </mapper>
+  
