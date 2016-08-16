@@ -444,7 +444,7 @@
 						<!--上传附件div  -->
 						<div class="content" id="content9" thisid="2514" style="display: none;">
 							<div class="title">
-								请求协议书
+								上传附件
 							</div>
 							
 							<div class="cl">
@@ -467,9 +467,43 @@
 						<div class="content" id="content10" thisid="2514" style="display: none;">
 							
 							<div class="title">
-								请求协议书
+								请求书
 							</div>
 							<div class="cl">
+								<div>
+									<table>
+									<tr>
+									<td>
+									申请人:<input class="t-input form-control" type="text" name="proposer" placeholder="在已有申请人中搜索" style="width: 200px" onblur="loadProposer()"/> 
+									</td>
+									<td>
+									<button class="button button-caution button-rounded" type="button">新增</button>
+									</td>
+									</tr>
+									<tr>
+									<td>
+									发明人：<input class="t-input form-control" type="text" name="inventor" placeholder="在已有发明人中搜索" style="width: 200px" onblur="loadInventor()"/>
+									</td>
+									<td>
+									<button class="button button-caution button-rounded" type="button">新增</button><br/>
+									</td>
+									</tr>
+									<tr>
+									<td>
+									联系人：<input class="t-input form-control" type="text" name="contacts" placeholder="在已有联系人中搜索" style="width: 200px"/>
+									</td>
+									<td>
+									<button class="button button-caution button-rounded" type="button">新增</button>
+									</td>
+									</tr>
+									</table>
+								</div>
+								
+								
+								
+								
+								
+								
 								
 							</div>
 						</div>
@@ -1673,6 +1707,15 @@ function loadImgs(){
 		//});
 	//} 
 	
+	function loadInventor(){
+		$.ajax({
+			type :'POST',
+			url : "<s:url value='/proposer/loadInventor.html'/>",
+			success : function(){
+				
+			}
+		})
+	}
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	
