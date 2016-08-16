@@ -82,6 +82,7 @@ public class InventorController {
 	public void loadInventor(@RequestParam("inventor") String inventor, HttpServletResponse response){
 		response.setContentType("application/json;charset=UTF-8");
 		List<CommonInventor> inventors=inventorService.getInventor(inventor);
+		System.out.println(inventors.size()+"--------size");
 		try{
 			Map<String, Object> map = new HashMap<>();
 			map.put("inventors", inventors);

@@ -19,7 +19,6 @@
 	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
     <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
 	
-	<script src="<s:url value='/temp/js/jquery-ui.min.js'/>" type="text/javascript"></script>
 	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="<s:url value='/temp/css/common.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
@@ -1606,12 +1605,6 @@ function loadImgs(){
 	     $().ready(function() {
 	     	$("#inventor").autocomplete(inventors);	
 	     });
-		/* 
-		$("#addFeeForm").validate({
-			submitHandler: function(form){ 
-				form.submit();     
-			}
-		});	 */
 	});
 
 	function addDefaultOption(selectElem) {
