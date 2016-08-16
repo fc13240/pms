@@ -699,5 +699,5 @@ type_desc CHAR(12) NOT NULL
 
 )
 
-INSERT INTO app_person_types VALUES('1','个人')
-INSERT INTO app_person_types VALUES('2','非个人')
+INSERT INTO app_person_types VALUES('1','个人');
+INSERT INTO app_person_types VALUES('2','非个人');

@@ -377,6 +377,9 @@
 									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
 									</form> 
+									<c:if test="${not empty patentDoc.patentDocAttachmentFile }">
+				                    	<a  href="<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载附件</a>
+				                    </c:if>
 									<div style="height:10px;">&nbsp;</div> 
 									<span style="color:#666;">友情提示：将所需的附件一次性打包成压缩文件格式上传(zip,rar等)，不建议上传其他格式的文件!
 									</span>
@@ -665,7 +668,7 @@
 							<h3 style="margin-left: 30px;font-family:微软雅黑;margin-top: 50px;">摘要附图：</h3>
 							</div>
 							<div class="picBox" id="picLsy3">
-								<c:if test="${patentDoc.abstractImg != null || patentDoc.abstractImg !=''}">
+								<c:if test="${patentDoc.abstractImg != null}">
 										<img src='${base}${patentDoc.abstractImg}' alt='' width='400' height='300'/>
 								</c:if>
 							</div>
@@ -1607,10 +1610,6 @@ function loadImgs(){
 	     });
 	});
 
-	function addDefaultOption(selectElem) {
-		selectElem.append("<option value=''>请选择</option>");
-	}
-
 	function resetSelect() {
 		for (var i = 0; i < arguments.length; i++) {
 			var selectObj = arguments[i];
@@ -1635,10 +1634,6 @@ function loadImgs(){
 			}
 		})
 	}
-	
-	
-	
-	
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	
