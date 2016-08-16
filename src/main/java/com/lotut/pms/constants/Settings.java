@@ -14,4 +14,5 @@ public interface Settings {
 	final String WORD_MANUAL_ABSTRACT_TEMPLATE = "/opt/media/word/10004说明书摘要.doc";
 	final String WORD_ABSTRACTIMG_TEMPLATE = "/opt/media/word/10005摘要附图.doc";
 	final String PATENTDOC_ATTACHMENT_FILE_PATH = "/opt/media/attachmentFile/";
+	final String PATENTDOC_FILE_PATH="/opt/media/patent/patentDoc/";
 }

@@ -33,4 +33,6 @@ public interface PatentDocMapper {
 	void savePatentDocAttachmentFile(PatentDoc PatentDoc);
 	
 	String getPatentDocAttachmentFile(@Param("patentDocId")long patentDocId);
+
+	void savePatentDocFile(PatentDoc patentDoc);
 }

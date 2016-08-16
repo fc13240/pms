@@ -99,4 +99,11 @@ public class PatentDocServiceImp implements PatentDocService{
 			return patentDocDao.getPatentDocAttachmentFile(patentDocId);
 		}
 
+
+		@Override
+		public void savePatentDocFile(PatentDoc patentDoc) {
+			patentDocDao.savePatentDocFile(patentDoc);
+			
+		}
+
 }

@@ -178,6 +178,7 @@ table td a {
                     <c:if test="${not empty patentDoc.patentDocAttachmentFile }">
                     <a  href="<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载附件</a>
                     </c:if>
+                    <a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传文档</a>
                 </td>
             </tr>
             

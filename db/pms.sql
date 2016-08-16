@@ -568,6 +568,8 @@ CREATE TABLE  patent_documents (
 
 alter table patent_documents add column patent_doc_attachment_file varchar(200);
 
+ALTER TABLE patent_documents ADD COLUMN patent_doc_url VARCHAR(200);
+
 CREATE TABLE IF NOT EXISTS patent_doc_section_types(
 	patent_doc_section_id INT PRIMARY KEY,
 	patent_doc_section_desc VARCHAR(10) NOT NULL COMMENT '专利主题'
