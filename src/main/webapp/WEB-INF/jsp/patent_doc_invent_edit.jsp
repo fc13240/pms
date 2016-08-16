@@ -326,6 +326,9 @@
 						<div class="content" id="content0">
 							<div class="title">
 								发明名称
+								<div style="margin-left: 33px;">
+									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入发明名称"  value="${patentDoc.name}">
+								</div>
 							</div>
 							<div class="cl">
 								<div id="editor0" thistempid="1">
@@ -341,7 +344,7 @@
 									            	<tr>
 									                    <td style="width:520px;" >
 									                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
-									                    	${patentDoc.name }
+									                    	${patentDoc.manual }
 									                    	</textarea>
 									                    </td>
 									            	</tr>
@@ -660,7 +663,7 @@
 							<h3 style="margin-left: 30px;font-family:微软雅黑;margin-top: 50px;">摘要附图：</h3>
 							</div>
 							<div class="picBox" id="picLsy3">
-								<c:if test="${patentDoc.abstractImg != null || patentDoc.abstractImg==''}">
+								<c:if test="${patentDoc.abstractImg != null || patentDoc.abstractImg !=''}">
 										<img src='${base}${patentDoc.abstractImg}' alt='' width='400' height='300'/>
 								</c:if>
 							</div>
@@ -1480,18 +1483,16 @@ function settingAbstractImg(value){
 </script>
 <script type="text/javascript">
 function savePatentDoc(value){
-	var name=editor.text();
-	var techDomain=$("#editorContent1").val();
-	var backgoundTech=$("#editorContent2").val();
-	var content=$("#editorContent3").val();
-	var implementWay=$("#editorContent6").val();
+	var name=$("#patentName").val();
+	alert(name);
+	var manual=$("#editorContent").val();
+	alert(manual);
 	var abstractDescription=$("#editorContent7").val();
 	var rightClaim=$("#editorContent8").val();
 	$.ajax({
 		type: "POST",
 		url: "<s:url value='/editor/savePatentDoc.html'/>",
-		data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"content":content,
-				"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
+		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
 		success: function(data){
 			alert("操作成功");
 		},

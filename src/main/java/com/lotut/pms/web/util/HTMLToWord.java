@@ -44,10 +44,10 @@ public class HTMLToWord {
 	        try {  
 			        
 	                    String name=patentDoc.getName();
-	                    String techDomain=patentDoc.getTechDomain();
-	                    String backTech=patentDoc.getBackgoundTech();
-	                    String content=patentDoc.getContent();
-	                    String implementWay=patentDoc.getImplementWay();
+	                    String techDomain=patentDoc.getName();
+	                    String backTech=patentDoc.getName();
+	                    String content=patentDoc.getName();
+	                    String implementWay=patentDoc.getName();
 	                    String attachmentIntroduces = getAttachments(attachmentIntrodurces);
 	                    String content2="<html>";
 	                    content2+="<div style=\"text-align: center\"><span style=\"font-size: 16px\"><span style=\"font-family: 黑体\">" +      
@@ -84,10 +84,10 @@ public class HTMLToWord {
 		    String saveWordPath=saveWordPathDir+"/"+ fileName;
 	        try {   
 	                    String name=patentDoc.getName();
-	                    String techDomain=patentDoc.getTechDomain();
-	                    String backTech=patentDoc.getBackgoundTech();
-	                    String content=patentDoc.getContent();
-	                    String implementWay=patentDoc.getImplementWay();
+	                    String techDomain=patentDoc.getName();
+	                    String backTech=patentDoc.getName();
+	                    String content=patentDoc.getName();
+	                    String implementWay=patentDoc.getName();
 	                    String rightClaim=patentDoc.getRightClaim();
 	                    String abstractDescription=patentDoc.getAbstractDescription();
 	                    String content1 = "<html><head style=\"text-align: center\">"+name+"</head><div style=\"text-align: center\"><span style=\"font-size: 12px\"><span style=\"font-family: 宋体\">" +
@@ -120,10 +120,10 @@ public class HTMLToWord {
 		    String saveWordPath=saveWordPathDir+"/"+ fileName;
 	        try {   
 	                    String name=patentDoc.getName();
-	                    String techDomain=patentDoc.getTechDomain();
-	                    String backTech=patentDoc.getBackgoundTech();
-	                    String content=patentDoc.getContent();
-	                    String implementWay=patentDoc.getImplementWay();
+	                    String techDomain=patentDoc.getName();
+	                    String backTech=patentDoc.getName();
+	                    String content=patentDoc.getName();
+	                    String implementWay=patentDoc.getName();
 	                    String rightClaim=patentDoc.getRightClaim();
 	                    String abstractDescription=patentDoc.getAbstractDescription();
 	                    String content1 = "<html><head style=\"text-align: center\">"+name+"</head><div style=\"text-align: center\"><span style=\"font-size: 12px\"><span style=\"font-family: 宋体\">" +
@@ -155,10 +155,10 @@ public class HTMLToWord {
 		    String saveWordPath=saveWordPathDir+"/"+ fileName;
 	        try {  
 	                    String name=patentDoc.getName();
-	                    String techDomain=patentDoc.getTechDomain();
-	                    String backTech=patentDoc.getBackgoundTech();
-	                    String content=patentDoc.getContent();
-	                    String implementWay=patentDoc.getImplementWay();
+	                    String techDomain=patentDoc.getName();
+	                    String backTech=patentDoc.getName();
+	                    String content=patentDoc.getName();
+	                    String implementWay=patentDoc.getName();
 	                    String rightClaim=patentDoc.getRightClaim();
 	                    String abstractDescription=patentDoc.getAbstractDescription();
 	                    String content1 = "<html><head style=\"text-align: center\">"+name+"</head><div style=\"text-align: center\"><span style=\"font-size: 12px\"><span style=\"font-family: 宋体\">" +
@@ -189,10 +189,10 @@ public class HTMLToWord {
 		    String saveWordPath=saveWordPathDir+"/"+fileName;
 	        try {  
 	                    String name=patentDoc.getName();
-	                    String techDomain=patentDoc.getTechDomain();
-	                    String backTech=patentDoc.getBackgoundTech();
-	                    String content=patentDoc.getContent();
-	                    String implementWay=patentDoc.getImplementWay();
+	                    String techDomain=patentDoc.getName();
+	                    String backTech=patentDoc.getName();
+	                    String content=patentDoc.getName();
+	                    String implementWay=patentDoc.getName();
 	                    String rightClaim=patentDoc.getRightClaim();
 	                    String abstractDescription=patentDoc.getAbstractDescription();
 	                    String content1 = "<html><head style=\"text-align: center\">"+name+"</head><div style=\"text-align: center\"><span style=\"font-size: 12px\"><span style=\"font-family: 宋体\">" +

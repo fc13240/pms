@@ -551,14 +551,12 @@ CREATE TABLE  patent_documents (
   create_time date DEFAULT NULL COMMENT '专利创建时间',
   last_update_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '专利更新时间',
   patent_name varchar(1000) DEFAULT NULL COMMENT '专利名称',
-  tech_domain mediumtext COMMENT '技术领域',
-  background_tech mediumtext COMMENT '背景技术',
-  content mediumtext COMMENT '发明内容',
-  implement_way mediumtext COMMENT '实施方式',
+  manual mediumtext COMMENT '说明书',
   figure_and_explaintion longblob COMMENT '附图及说明',
   right_claim mediumtext COMMENT '权利要求',
   abstract_desc mediumtext COMMENT '摘要',
-  abstract_img varchar(200) COMMENT '摘要附图',
+  abstract_img varchar(200) DEFAULT NULL COMMENT '摘要附图',
+  patent_doc_attachment_file varchar(200) DEFAULT NULL COMMENT '上传附件保存地址',
   PRIMARY KEY (patent_doc_id),
   KEY fk_patent_documents_patent_type (patent_type),
   KEY fk_patent_documents_doc_owner_id (user_id),
@@ -566,7 +564,6 @@ CREATE TABLE  patent_documents (
   CONSTRAINT fk_patent_documents_patent_type FOREIGN KEY (patent_type) REFERENCES patent_types (patent_type_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
-alter table patent_documents add column patent_doc_attachment_file varchar(200);
 
 CREATE TABLE IF NOT EXISTS patent_doc_section_types(
 	patent_doc_section_id INT PRIMARY KEY,
