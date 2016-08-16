@@ -1609,12 +1609,7 @@ function loadImgs(){
 	     $().ready(function() {
 	     	$("#inventor").autocomplete(inventors);	
 	     });
-		/* 
-		$("#addFeeForm").validate({
-			submitHandler: function(form){ 
-				form.submit();     
-			}
-		});	 */
+
 	});
 
 	function addDefaultOption(selectElem) {
