@@ -81,12 +81,15 @@ public class InventorController {
 	@RequestMapping(path="/loadInventor")
 	public void loadInventor(@RequestParam("inventor") String inventor, HttpServletResponse response){
 		response.setContentType("application/json;charset=UTF-8");
-		/*//List<CommonInventor> inventors=inventorService.getInventor();
+		List<CommonInventor> inventors=inventorService.getInventor(inventor);
 		try{
-			WebUtils.writeJsonStrToResponse(response, inventors);
+			Map<String, Object> map = new HashMap<>();
+			map.put("inventors", inventors);
+			WebUtils.writeJsonStrToResponse(response, map);
+			//WebUtils.writeJsonStrToResponse(response, inventors);
 		}catch(IOException e){
 			e.printStackTrace();
-		}*/
+		}
 	}
 	
 }

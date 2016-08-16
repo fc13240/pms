@@ -1622,38 +1622,19 @@ function loadImgs(){
 		}
 	}
 
-	function addOptions(selectObj, options) {
-		$.each(options, function(index, val){
-			selectObj.append("<option value='" + val + "'>" + val + "</option>");
+	function addOptions(options) {
+		$.each(options, function(index, inventor){
+			selectObj.append("<option value='" + inventor.inventorName + "'>" + inventor.inventorName + "</option>");
 		});	
 	}
-	function loadPatent() {
-		var appNo = $("#appNo").val();
-		if (appNo != "") {
-			$.ajax({
-				url: "<s:url value='/fee/getPatentByPatentId.html'/>?appNo=" + appNo,
-				type: 'get',
-				dataType: 'json',
-				success: function(result) {
-					$("#name").val(result.patent.name);
-					$('#appPerson').val(result.patent.appPerson);
-					$('#patentStatus').val(result.patent.patentStatus.statusDescription);
-					resetSelect();
-					addOptions(result.);
-				}
-			})
-		} 
-	}
-	
 	function loadInventor(){
 		var inventor = $("#inventor").val();
 		$.ajax({
 			type :'POST',
-			url : "<s:url value='/proposer/loadInventor.html'/>?inventor="+inventor,
+			url : "<s:url value='/inventor/loadInventor.html'/>?inventor="+inventor,
 			success : function(result){
-				alert(result);
-				/* resetSelect(feeType);
-				addOptions(result.feeTypes); */
+				 resetSelect();
+				addOptions(result.inventors);
 			}
 		})
 	}

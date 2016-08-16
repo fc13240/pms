@@ -197,6 +197,9 @@ $.Autocompleter = function(input, options) {
 		select.unbind();
 		$input.unbind();
 		$(input.form).unbind(".autocomplete");
+	}).bind("input", function() {
+	    // @hack by xuesong:firefox中文输入支持
+	    onChange(0, true);
 	});
 	
 	
