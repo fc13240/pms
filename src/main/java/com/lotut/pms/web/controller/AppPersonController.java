@@ -13,23 +13,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.CommonAppPerson;
+import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.AppPersonType;
 import com.lotut.pms.service.AppPersonService;
-import com.lotut.pms.service.UserService;
+import com.lotut.pms.service.FriendService;
 import com.lotut.pms.util.PrincipalUtils;
 
 @Controller
 @RequestMapping(path="/appPerson")
 public class AppPersonController {
 	private AppPersonService AppPersonService;
-	private UserService userSerivce;
+	private FriendService friendService;
 	
 	public AppPersonController() {
 	}
 	@Autowired
-	public AppPersonController(AppPersonService AppPersonService, UserService userSerivce) {
+	public AppPersonController(AppPersonService AppPersonService, FriendService friendService) {
 		this.AppPersonService = AppPersonService;
-		this.userSerivce = userSerivce;
+		this.friendService = friendService;
 	}
 	
 	@RequestMapping(path="/contactAppPersonAddForm")
@@ -43,12 +44,12 @@ public class AppPersonController {
 	@RequestMapping(path="/list" ,method=RequestMethod.GET)
 	public String getList(Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
-		List<CommonAppPerson> appPersons=AppPersonService.getAllAppPersonByUser(userId);
+		List<CommonAppPerson> appPersons=AppPersonService.getUserAppPersons(userId);
 		List<AppPersonType> appPersonTypes=AppPersonService.getAppPersonTypes();
 		model.addAttribute("appPersonTypes",appPersonTypes);
 		model.addAttribute("appPersons", appPersons);
 		
-		return "appPerson_list";
+		return "app_person_list";
 	}
 	
 	@RequestMapping(path="/addContactInfo",method=RequestMethod.POST)
@@ -82,4 +83,21 @@ public class AppPersonController {
 		AppPersonService.deleteAppPersonById(AppPersonId);
 		return "redirect:/appPerson/list.html";
 	}
+	
+
+	@RequestMapping(path="showFriends", method=RequestMethod.GET)
+	public String showFriends(Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> friends = friendService.getUserFriends(userId);
+		model.addAttribute("friends", friends);
+		return "app_person_select_friends";
+	}
+	
+	@RequestMapping(path="searchFriends", method=RequestMethod.GET)
+	public String searchFriends(@RequestParam("keyword")String keyword, Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> friends = friendService.searchUserFriends(userId, keyword);
+		model.addAttribute("friends", friends);
+		return "app_person_select_friends";
+	}	
 }

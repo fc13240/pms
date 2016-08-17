@@ -54,4 +54,11 @@ public class AppPersonServiceImpl implements AppPersonService {
 		AppPersonDao.deleteAppPersonById(id);
 		
 	}
+
+
+	@Override
+	public List<CommonAppPerson> getUserAppPersons(int userId) {
+		// TODO Auto-generated method stub
+		return AppPersonDao.getUserAppPersons(userId);
+	}
 }

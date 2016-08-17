@@ -15,6 +15,18 @@ public class AppPersonType {
 	public void setTypeDescription(String typeDescription) {
 		TypeDescription = typeDescription;
 	}
+	public AppPersonType() {
+		
+	}
+	public AppPersonType(int typeId, String typeDescription) {
+		super();
+		TypeId = typeId;
+		TypeDescription = typeDescription;
+	}
+	public AppPersonType(int typeId) {
+		super();
+		TypeId = typeId;
+	}
 	
 	
 }

@@ -60,6 +60,6 @@
 		<typeAlias type="com.lotut.pms.domain.CommonAppPerson" alias="CommonAppPerson"/>
 		<typeAlias type="com.lotut.pms.domain.AppPersonType" alias="AppPersonType"/>
 		<typeAlias type="com.lotut.pms.domain.CommonInventor" alias="CommonInventor"/>
-
+		<typeAlias alias="ShareAppPerson" type="com.lotut.pms.domain.ShareAppPerson"/>
 	</typeAliases>  
 </configuration>

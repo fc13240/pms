@@ -14,4 +14,5 @@ public interface AppPersonMapper {
 	CommonAppPerson getOneAppPersonById(int id);
 	void updateAppPerson(CommonAppPerson AppPerson);
 	void deleteAppPersonById(int id);
+	List<CommonAppPerson> getUserAppPersons(int userId);
 }

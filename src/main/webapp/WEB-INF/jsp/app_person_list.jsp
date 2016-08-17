@@ -21,16 +21,21 @@
 		  <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
 				<div style="height:10px;"></div>
-				<div class="lt-box" style="padding:20px;">
-				  <form>
-		  <button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">新增申请人</button>
-	<table id="simple-table" class="table table-striped table-bordered table-hover">
+					  	
+				  		<form>
+				  		
+		  				<button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">新增申请人</button>
+		  				
+							<a href="javascript:return void" onclick="batchShare()" >
+							<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
+							</a> 
+						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
-							  <%-- <th class="center"> <label class="pos-rel">
-								<input type="checkbox" class="check-item" id="checkall"  name="checkall" />
+							  <th class="center"> <label class="pos-rel">
+								<input type="checkbox" class="appPerson_check-item" id="checkall"  name="checkall" />
 								<span class="lbl"></span> </label>
-							  </th> --%>
+							  </th>
 							  <th class="center" width="50">序号</th>
 							  <th width="90px">姓名或名称</th>
 							  <th width="150px">申请人类型</th>
@@ -49,9 +54,13 @@
 						  <tbody>
 							<c:forEach items="${appPersons}" var="appPerson" varStatus="status">
 							  <tr>
+								<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
+								<input type="checkbox" class="appPerson-check-item" appPerson="<c:out value='${appPerson.appPersonId}'/>">
+								<span class="lbl"></span></label>
+								</td>
 								<td class="center" style="text-align:center"> ${status.count} </td>
 								<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
-								<td style="text-align:center"><c:out value="${appPerson.typeName}"/></td>
+								<td style="text-align:center"><c:out value="${appPerson.appPersonType.typeDescription}"/></td>
 								<td style="text-align:center"><c:out value="${appPerson.peopleNumber}"/></td>
 								<td>${appPerson.postcodeAddress}</td>
 								<td style="text-align:center"><c:out value=""/></td>
@@ -61,9 +70,10 @@
 								  </a> 
 								</td>
 								<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
-								<td style="text-align:center"><c:out value="${notice.patent.name}"/></td>
+								<td style="text-align:center"><c:out value="${appPerson.shareUsersAsString}"/></td>
 								<td><a href="<s:url value='/appPerson/findOneAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a> 
 								<a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteappPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">删除 </a>
+								<a href="<s:url value='/appPerson/showFriends.html'/>?appPersons=<c:out value='${appPerson.appPersonId}'/>">分享</a>
 								</td>
 							  </tr>
 							</c:forEach>
@@ -72,9 +82,64 @@
 						</form>
 						</div></div></div>
 <script type="text/javascript">
+
 	function addAppPerson(){
 		var url = "<s:url value='/appPerson/contactAppPersonAddForm.html'/>";
 		location.href = url
+	}
+	
+	$('tr th input.appPerson-check-item').click(function() {
+		var checked = $(this).prop("checked");
+		
+		if (checked) {
+			$('tr td input.appPerson-check-item').each(function() {
+				$(this).prop("checked", true);
+			});
+		} else {
+			$('tr td input.appPerson-check-item').each(function() {
+				$(this).prop("checked", false);
+			});
+		}
+	});
+	
+	$('tr td input.appPerson-check-item').click(function() {
+		var allChecked = true;
+		var friendCheckboxes = $('tr td input.appPerson-check-item');
+		
+		if ($(this).checked) {
+			for (var i = 0; i < friendCheckboxes.length; i++) {
+				if (!friendCheckboxes[i].checked) {
+					allChecked = false;
+					break;
+				}
+			}			
+		} else {
+			allChecked = false;
+		}
+		
+		if (allChecked) {
+			$('tr th input.appPerson-check-item').prop("checked", true);
+		} else {
+			$('tr th input.appPerson-heck-item').prop("checked", false);
+		}
+	});
+	
+	function batchShare() {
+		var appPersonSelected = formutil.anyCheckboxItemSelected('tr td input.appPerson-check-item');
+		var uniqueAppPersonNos = []
+		if (!appPersonSelected) {
+			formutil.alertMessage('请选择申请人');
+			
+			return;
+		}
+		var appPersons_checked=formutil.getAllCheckedCheckboxValues('tr td input.appPerson-check-item', 'appPerson');
+		for (var i = 0; i < appPersons_checked.length; i++) {
+			if ($.inArray(appPersons_checked[i], uniqueappPersonNos) == -1) {
+				uniqueAppPersonNos.push(appPersons_checked[i]);
+			}
+		}		
+		var appPersons = uniqueappPersonNos.join(",");		
+		location.href = "<s:url value='/appPerson/showFriends.html'/>?appPersons=" + appPersons;
 	}
 </script>
 <script>

@@ -12,4 +12,5 @@ public interface AppPersonService {
 	CommonAppPerson getOneAppPersonById(int id);
 	void updateAppPerson(CommonAppPerson AppPerson);
 	void deleteAppPersonById(int id);
+	List<CommonAppPerson> getUserAppPersons(int userId);
 }
