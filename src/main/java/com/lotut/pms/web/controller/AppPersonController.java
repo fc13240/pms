@@ -1,7 +1,11 @@
 package com.lotut.pms.web.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,23 +17,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.CommonAppPerson;
+import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.AppPersonType;
 import com.lotut.pms.service.AppPersonService;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.WebUtils;
 
 @Controller
 @RequestMapping(path="/appPerson")
 public class AppPersonController {
 	private AppPersonService AppPersonService;
 	private UserService userSerivce;
+	private AppPersonService appPersonService;
 	
 	public AppPersonController() {
 	}
 	@Autowired
-	public AppPersonController(AppPersonService AppPersonService, UserService userSerivce) {
+	public AppPersonController(AppPersonService AppPersonService, UserService userSerivce,AppPersonService appPersonService) {
 		this.AppPersonService = AppPersonService;
 		this.userSerivce = userSerivce;
+		this.appPersonService = appPersonService;
 	}
 	
 	@RequestMapping(path="/contactAppPersonAddForm")
@@ -84,8 +92,16 @@ public class AppPersonController {
 	}
 	
 	@RequestMapping(path="/loadAppPersoner")
-	public void loadInventor(){
-		//inventorService.deleteById(id);
-		
+	public void loadInventor(@RequestParam("appPersoner") String appPersoner, HttpServletResponse response){
+		response.setContentType("application/json;charset=UTF-8");
+		List<CommonAppPerson> appPersoners=appPersonService.getAppPersonByName(appPersoner);
+		try{
+			Map<String, Object> map = new HashMap<>();
+			map.put("appPersoners", appPersoners);
+			WebUtils.writeJsonStrToResponse(response, map);
+			//WebUtils.writeJsonStrToResponse(response, inventors);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 }

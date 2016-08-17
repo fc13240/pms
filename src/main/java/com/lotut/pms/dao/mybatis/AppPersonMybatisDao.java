@@ -41,6 +41,10 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 		// TODO Auto-generated method stub
 		AppPersonMapper.deleteAppPersonById(id);
 	}
+	@Override
+	public List<CommonAppPerson> getAppPersonByName(String appPerson) {
+		return AppPersonMapper.getAppPersonByName(appPerson);
+	}
 
 	
 
