@@ -38,7 +38,6 @@
   		join app_person_types t on p.type=t.type_id join user_app_person up on p.app_person_id = up.app_person 
   		join users u on u.user_id = up.user	
   		where up.user=#{userId}
-  	
   	</select>
   	<select id="getAllAppPersonByUser" parameterType="int" resultType="CommonAppPerson">
   		select p.app_person_id as appPersonId,p.type as type,p.name as name,t.type_desc as typeName,p.id_number as peopleNumber,
@@ -63,11 +62,5 @@
   	<delete id="deleteAppPersonById" parameterType="int">
   		delete from common_app_person where app_person_id =#{appPersonId}
   	</delete>
-  	
-  	<select id="getAppPersonByName" resultType="CommonAppPerson">
-  		select p.app_person_id as appPersonId,p.type as type,p.name as name,t.type_desc as typeName,p.id_number as peopleNumber,
-  		p.postcode_address as postcodeAddress,p.other_information as otherInfo from common_app_person p 
-  		join app_person_types t on p.type=t.type_id where p.name like #{appPerson}
-  	</select>
   </mapper>
   

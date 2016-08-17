@@ -17,14 +17,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.CommonAppPerson;
-<<<<<<< HEAD
+
 import com.lotut.pms.domain.User;
-=======
+
 import com.lotut.pms.domain.CommonInventor;
->>>>>>> 11828c8b664468145c2208b258b9980c2fc85eac
+
 import com.lotut.pms.domain.AppPersonType;
 import com.lotut.pms.service.AppPersonService;
 import com.lotut.pms.service.FriendService;
+import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
 
@@ -32,26 +33,26 @@ import com.lotut.pms.web.util.WebUtils;
 @RequestMapping(path="/appPerson")
 public class AppPersonController {
 	private AppPersonService AppPersonService;
-<<<<<<< HEAD
+
 	private FriendService friendService;
-=======
+
 	private UserService userSerivce;
 	private AppPersonService appPersonService;
->>>>>>> 11828c8b664468145c2208b258b9980c2fc85eac
+
 	
 	public AppPersonController() {
 	}
 	@Autowired
-<<<<<<< HEAD
+
 	public AppPersonController(AppPersonService AppPersonService, FriendService friendService) {
 		this.AppPersonService = AppPersonService;
-		this.friendService = friendService;
-=======
+		this.friendService = friendService;}
+
 	public AppPersonController(AppPersonService AppPersonService, UserService userSerivce,AppPersonService appPersonService) {
 		this.AppPersonService = AppPersonService;
 		this.userSerivce = userSerivce;
 		this.appPersonService = appPersonService;
->>>>>>> 11828c8b664468145c2208b258b9980c2fc85eac
+
 	}
 	
 	@RequestMapping(path="/contactAppPersonAddForm")
@@ -105,7 +106,6 @@ public class AppPersonController {
 		return "redirect:/appPerson/list.html";
 	}
 	
-<<<<<<< HEAD
 
 	@RequestMapping(path="showFriends", method=RequestMethod.GET)
 	public String showFriends(Model model) {
@@ -122,7 +122,7 @@ public class AppPersonController {
 		model.addAttribute("friends", friends);
 		return "app_person_select_friends";
 	}	
-=======
+
 	@RequestMapping(path="/loadAppPersoner")
 	public void loadInventor(@RequestParam("appPersoner") String appPersoner, HttpServletResponse response){
 		response.setContentType("application/json;charset=UTF-8");
@@ -136,5 +136,5 @@ public class AppPersonController {
 			e.printStackTrace();
 		}
 	}
->>>>>>> 11828c8b664468145c2208b258b9980c2fc85eac
+
 }
