@@ -377,7 +377,9 @@
 									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
 									<c:if test="${not empty patentDoc.patentDocAttachmentFile }">
-										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="downloadFile()">下载附件</button>
+										<a href="<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>" >
+										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" >下载附件</button>
+										</a>
 				                    </c:if>
 									</form> 
 
