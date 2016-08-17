@@ -117,7 +117,7 @@
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件</div>
 					<div class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
-						请求协议书</div>
+						请求书</div>
 				</div>
 	
 	        </div>
@@ -401,7 +401,7 @@
 									<table>
 									<tr>
 									<td>
-									申请人:<input class="t-input form-control" type="text" name="proposer" placeholder="在已有申请人中搜索" style="width: 200px" onblur="loadProposer()"/> 
+									申请人:<input class="t-input form-control" type="text" name="appPerson" id="appPerson" placeholder="在已有申请人中搜索" style="width: 200px" onblur="loadProposer()"/> 
 									</td>
 									<td>
 									<button class="button button-caution button-rounded" type="button">新增</button>
@@ -1644,22 +1644,23 @@ function loadImgs(){
 		})
 	}
 	
-	/* function addProposeOptions(options) {
-		$.each(options, function(index, inventor){
-			selectObj.append("<option value='" + inventor.inventorName + "'>" + inventor.inventorName + "</option>");
+	function addProposeOptions(options) {
+		$.each(options, function(index, proposer){
+			selectObj.append("<option value='" + proposer.name + "'>" + proposer.name + "</option>");
 		});	
 	}
 	function loadProposer(){
-		var inventor = $("#inventor").val();
+		var appPersoner = $("#appPerson").val();
 		$.ajax({
 			type :'POST',
-			url : "<s:url value='/inventor/loadInventor.html'/>?inventor="+inventor,
+			url : "<s:url value='/appPerson/loadAppPersoner.html'/>",
+			data : {"appPersoner":appPersoner},
 			success : function(result){
 				 resetSelect();
-				addProposerOptions(result.inventors);
+				addProposerOptions(result.appPersoners);
 			}
 		})
-	} */
+	}
 	function downloadFile(){
 		var patentDocId=$("#patentDocId").val();
 		$.ajax({
