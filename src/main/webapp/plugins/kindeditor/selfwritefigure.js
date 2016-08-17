@@ -109,21 +109,9 @@ function getPicListOrAb(pOa) { //得到附图列表和摘要附图  //  pOa=="p"
 }
 function piclistShow() {  
 var patentId=getselfwriteID();
-$.ajax({ url: _RootPath + 'self/selfwritefigure2.aspx', //后台返回编辑页面的html
-    type: 'POST',
-    data: { patentId: patentId },
-    dataType: 'html',
-    success: function (resultHtml) {  //:FILE38738337A61C8D04BA6C5A2FCD50039A    
-        $('#askPicList').html(resultHtml).show();
-        var tab = getselfwriteTab(); //这两句是ry控制编辑区高度的
-        //seteditorheight(tab);
-        
-    },
-    error: function () {
-    }
-});   
+
      
-    $('#content5').show();
+    $('#content5').hide();
     $('#content5-1').show();
     $('#content5_build').hide();
     $('#piclist').hide();
