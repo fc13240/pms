@@ -71,7 +71,7 @@
 
 </div>	
 <script type="text/javascript">
-function validatePhoneNumber(phoneNumber) {
+/* function validatePhoneNumber(phoneNumber) {
 	var reg = new RegExp("^[0-9]*$");
 	document.getElementById("phoneError").style.display = "none";
 	if (reg.test(phoneNumber)) {
@@ -86,7 +86,7 @@ function validatePhoneNumber(phoneNumber) {
 		return false;
 	}
 }
-
+ */
 
 </script>
 

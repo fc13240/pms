@@ -37,6 +37,7 @@ import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
+import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
@@ -46,6 +47,7 @@ import com.lotut.pms.service.AppPersonService;
 import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
+import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.CreateWord;
 import com.lotut.pms.web.util.DocUtil;
@@ -62,14 +64,16 @@ public class PatentEditDocController {
 	private PatentDocService patentDocService;
 	private PatentDocumentTemplateService patentDocumentTemplateService;
 	private InventorService inventorService ;
-	private AppPersonService appPersonService ;
+	private AppPersonService appPersonService;
+	private UserService userService;
 	
 	@Autowired
-	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService,InventorService inventorService,AppPersonService appPersonService) {
+	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService,InventorService inventorService,AppPersonService appPersonService,UserService userService) {
 		this.patentDocService = patentDocService;
 		this.patentDocumentTemplateService = patentDocumentTemplateService;
 		this.inventorService = inventorService;
 		this.appPersonService = appPersonService;
+		this.userService = userService;
 	}
 
 	@RequestMapping(path="/newPatentType")
@@ -84,14 +88,15 @@ public class PatentEditDocController {
 		patentDoc.setUserId(userId);
 		patentDoc.setPatentType(patentType);
 		patentDocService.savePatentDoc(patentDoc);
-		
+		long patentDocId=patentDoc.getPatentDocId();
 		List<CommonInventor> inventors = inventorService.getAllInventorsByUser(userId);
 		List<CommonAppPerson> appPersons= appPersonService.getAllAppPersonByUser(userId);
-		long patentDocId=patentDoc.getPatentDocId();
+		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
 		model.addAttribute("patentDocId",patentDocId);
 		model.addAttribute("patentDoc",patentDoc);
 		model.addAttribute("inventors",inventors);
 		model.addAttribute("appPersons",appPersons);
+		model.addAttribute("contactAddresses", contactAddresses);
 		if(patentType==1){
 			return "patent_doc_invent_edit";
 		}else if(patentType==2){

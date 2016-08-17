@@ -75,7 +75,7 @@
 						console.info("此文件上传失败：");
 						console.info(file.name);
 					},
-					onComplete: function(response){           	  // 上传完成的回调方法
+					onComplete: function(response){
 						console.info("文件上传完成");
 						console.info(response);
 					}
@@ -131,17 +131,13 @@
 	                        <i class="icon"></i>
 	                        <div class="span" >保存</div>
 	                    </div>
-	                    <div class="export" onclick="export_selfwrite();" id="export_selfwrite">
-	                        <i class="icon"></i>导出文件
-	                    </div>
+
 	                    
 	                    <div class="top_right">
 	                        <div class="review" onclick="preview_selfwrite();">
 	                            <i class="icon"></i>预览
 	                        </div>
-	                        <div class="usehelp" onclick="helperv1('1');" style="margin-left: 20px">
-	                            <i class="icon"></i>使用帮助
-	                        </div>
+
 	                        
 	                    </div>
 	                </div>
@@ -417,7 +413,7 @@
 									</tr>
 									<tr>
 									<td>
-									联系人：<input class="t-input form-control" type="text" name="contacts" placeholder="在已有联系人中搜索" style="width: 200px"/>
+									联系人：<input class="t-input form-control" type="text" name="contacts" id="contacts" placeholder="在已有联系人中搜索" style="width: 200px" onblur="loadContacts(this.value)"/>
 									</td>
 									<td>
 									<button class="button button-caution button-rounded" type="button">新增</button>
@@ -446,8 +442,6 @@
 							</div>
 							<div class="cl">
 								<div id="editor7" thisid="" thistempid="" photo_fid="">
-									<div class="upimg1" onclick="autoabstract();" style=" margin-left:50px">
-										自动生成摘要</div>
 									<div class="instru">
 										<div class="title2">蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
 										</div>
@@ -511,88 +505,9 @@
 							</div>
 							<div name="claims_ele" class="power_right" style="float: right; margin-top: 10px; width: 98%; display: none;">
 							</div>
-							<div style="clear: both; height: 260px;">
-								<div class="upimg1" onclick="addnewclaim();" style=" margin-left:40px">
-									+添加权利要求</div>
-								<div class="upimg1" onclick="showclaimelement();">
-									添加发明要素表</div>
-								<div class="upimg1" onclick="showhelper(1);" id="noele">
-									看看别人怎么写</div>
-								<div class="upimg1" onclick="showhelper(3);" id="hasele" style="display: none;">
-									看看别人怎么写</div>
-							</div>
+
 						</div>
-						<div class="content" id="content6_ele" style="display: none; box-shadow: rgb(238, 238, 238) 2px 2px 2px inset; -webkit-box-shadow: rgb(238, 238, 238) 2px 2px 2px inset;">
-							<div class="box" style="padding-top: 0">
-								<div class="upimg1" onclick="returnclaims();">
-									返回权利要求</div>
-								<div class="power">
-									<table id="content6_ele_table" width="100%" border="0" cellspacing="0" cellpadding="0">
-										<tbody><tr>
-											<td width="4%" align="left" class="tr1" style="min-width: 40px;">
-												编号
-											</td>
-											<td width="18%" align="left" class="tr1">
-												要素名称
-											</td>
-											<td width="40%" align="left" class="tr1">
-												要素描述（组成部件、连接关系、方法流程、操作条件）
-											</td>
-											<td width="30%" align="left" class="tr1">
-												要素限定（材料、形状）
-											</td>
-											<td width="8%" align="left" class="tr1">
-												要素关系
-											</td>
-										</tr>
-									</tbody></table>
-									<table width="100%" border="0" cellspacing="0" cellpadding="0">
-										<tbody><tr>
-											<td width="4%" valign="middle" class="td" style="min-width: 40px;">
-												如：
-											</td>
-											<td width="18%" valign="middle" class="td">
-												手写笔
-											</td>
-											<td width="40%" valign="middle" class="td">
-												包括笔杆、书写头及弹性元件
-											</td>
-											<td width="30%" valign="middle" class="td">
-												无
-											</td>
-											<td width="8%" valign="middle" class="td">
-												无
-											</td>
-										</tr>
-										<tr>
-											<td valign="middle" class="instruct">
-												说明：
-											</td>
-											<td valign="middle" class="instruct">
-												该发明是手写笔
-											</td>
-											<td valign="middle" class="instruct">
-												组成该发明手写笔的部件有：笔杆、书写头、弹性元件
-											</td>
-											<td valign="middle" class="instruct">
-												针对该要素没有材料、形状等的限定
-											</td>
-											<td valign="middle" class="instruct">
-												无要素关系
-											</td>
-										</tr>
-									</tbody></table>
-								</div>
-								<div class="cl" style="padding-left: 20px;">
-									<div class="upimg2" onclick="addnewclaimelement();">
-										+添加要素</div>
-									<div class="upimg3" onclick="showhelper(2);">
-										看看别人怎么写</div>
-									<div class="upimg3" onclick="showclaims();">
-										添加到权利要求</div>
-								</div>
-							</div>
-						</div>
+
 	              
 						<!-- 附图及说明 -->
 						
@@ -761,221 +676,6 @@
 	    top: -15px; 
 	}
 	</style>
-	<div id="helperv1" style="display: none; left: 100px; top: 100px">
-	    <div class="step1">
-	        <img width="843" height="575" border="0" usemap="#Map" src="/skins/default/self/images/yindao_02.png">
-	        <map name="Map">
-	            <area href="javascript:void(0);" id="nextv1" coords="746,224,817,253" shape="rect">
-	        </map>
-	    </div>
-	</div>
-	<div id="helperv1_2" style="display: none;">
-	    <div class="step2">
-	        <img src="/skins/default/self/images/yindao_05.png" width="935" height="600" border="0" usemap="#Map2">
-	        <map name="Map2">
-	            <area shape="rect" id="nextv1_2" href="javascript:void(0);" coords="822,206,897,233">
-	        </map>
-	    </div>
-	</div>
-	<div id="helperv1_3" style="display: none;">
-	    <div class="step4">
-	        <img width="523" height="600" border="0" usemap="#Map4" src="/skins/default/self/images/yindao_16.png">
-	        <map name="Map4">
-	            <area id="nextv1_3" href="javascript:void(0);" coords="381,104,480,150" shape="rect">
-	        </map>
-	    </div>
-	</div>
-	<div id="helperv2" style="display: none;">
-	    <div class="step3" style="display: none;">
-	        <img alt="" src="/skins/default/self/images/yindao_24.png" width="616" height="600" border="0" usemap="#Map3">
-	        <map name="Map3">
-	            <area shape="rect" coords="502,332,571,373" id="nextv2" href="javascript:void(0);">
-	        </map>
-	        <div class="step3_top">
-	            <div class="left_top" style="border: none">
-	                <div class="cl">
-	                    <div class="bth" onclick="setipcTypeByID(1,this);">
-	                        发明</div>
-	                    <div class="bth" style="margin-left: 10px;" onclick="setipcTypeByID(2,this);">
-	                        实用新型</div>
-	                </div>
-	                <div class="left_help">
-	                    <a href="javascript:void(0);" onclick="helperv6();">如何设置专利类型？</a>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-	<div id="helperv7" style="display: none;">
-	    <div class="step3">
-	        <img alt="" src="/skins/default/self/images/yindao_24h.png" width="616" height="600" border="0" usemap="#Map3">
-	        <div class="step3_top">
-	            <div class="left_top" style="border: none">
-	                <div class="cl">
-	                    <div class="bth" onclick="setipcTypeByID(1,this);$('#nextv7').click();">
-	                        发明</div>
-	                    <div class="bth" style="margin-left: 10px;" onclick="setipcTypeByID(2,this);$('#nextv7').click();">
-	                        实用新型</div>
-	                </div>
-	                <div class="left_help">
-	                    <a href="javascript:void(0);" onclick="helperv6();">如何设置专利类型？</a>
-	                    <input id="nextv7" type="button" style="display: none;">
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-	<div id="helperv2_2" style="display: none;">
-	    <div class="step5hh">
-	        <div class="step5hhn" id="nextv2_2">
-	        </div>
-	        <div class="step5h" id="helper_templist" style="top:170px;">
-	            <div class="step51" onclick="seltemp(1);">
-	                备选模板1</div>
-	            <div class="step51" onclick="seltemp(2);">
-	                备选模板2</div>
-	            <div class="step51" onclick="seltemp(3);">
-	                备选模板3</div>
-	        </div>
-	    </div>
-	    <input style="display: none;" id="nextv2_3" type="button" value="下一步">
-	</div>
-	<div id="helperv3" style="display: none;">
-	    <div class="step3" style="display: none;">
-	        <img alt="" src="/skins/default/self/images/yindao_24.png" width="616" height="600" border="0" usemap="#Map3">
-	        <map name="Map3">
-	            <area shape="rect" coords="502,332,571,373" id="nextv3" href="javascript:void(0);">
-	        </map>
-	        <div class="step3_top">
-	            <div class="left_top" style="border: none">
-	                <div class="cl">
-	                    <div class="bth" style="cursor: inherit;">
-	                        发明</div>
-	                    <div class="bth" style="margin-left: 10px; cursor: inherit;">
-	                        实用新型</div>
-	                </div>
-	                <div class="left_help">
-	                    <a href="javascript:void(0);" style="cursor: inherit;">如何设置专利类型？</a>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-	<div id="helperv3_1" style="display: none;">
-	    <div class="step5">
-	        <div class="step5cl" id="nextv3_1">
-	        </div>
-	        <img width="502" height="161" src="/skins/default/self/images/yindao_09h.png">
-	        <div class="step5h">
-	            <div class="step52">
-	                一种碳石墨环轴密封结构
-	            </div>
-	            <div class="step52">
-	                治疗咳喘的中药组合物</div>
-	            <div class="step52">
-	                抓斗及其刮泥器</div>
-	        </div>
-	    </div>
-	</div>
-	<div id="helperv4" style="display: none;">
-	    <div style="clear: both;">
-	        新手上路</div>
-	    <div style="clear: both;">
-	        新手上路九个标签的帮助内容</div>
-	    <div style="clear: both;">
-	        <input type="checkbox" autocomplete="off" onchange="nohintv4();" id="nohintv4">不再提示</div>
-	    <div style="clear: both;">
-	        <input id="nextv4" type="button" value="跳过"></div>
-	</div>
-	<div id="helperv5" style="display: none;">
-	    <div class="daochu_cl" style="height: 135px">
-	        <div class="help_text" style="width: 270px; height: 150px">
-	            专利撰写两步走：<br>
-	            &nbsp;&nbsp;&nbsp;&nbsp;第一步，选择专利类型，<br>
-	            &nbsp;&nbsp;&nbsp;&nbsp;第二步，选择撰写模板，<br>
-	            &nbsp;&nbsp;&nbsp;&nbsp;接下来，开始撰写吧。
-	        </div>
-	    </div>
-	    <div class="daochu_cancel1" style="clear: both; float: right">
-	        <div class="daochu_cancel1" id="nextv5">
-	            开始撰写
-	        </div>
-	    </div>
-	</div>
-	
-	<div id="helperv6" style="display: none; position:relative">  
-	        <div id="close_tc" class="step5_lb">
-	        </div>
-	       <div class="wrapper" style=" background:none;">   
-	        <div class="v_out v_out_p">
-	<div class="prev" style="opacity: 0.5;"><a href="javascript:void(0)"></a></div>
-	<div class="v_show">
-	
-	<div class="v_cont">
-	<ul>
-	<li index="0"><img src="/self/usercontrol/lbt_01.png"></li>
-	<li index="1"><img src="/self/usercontrol/lbt_04.png"></li>
-	<li index="2"><img src="/self/usercontrol/lbt_06.png"></li>
-	 
-	</ul>
-	</div>
-	
-	</div>
-	
-	<div class="next" style="opacity: 0.5;"><a href="javascript:void(0)"></a> </div>
-	
-	 
-	</div>
-	
-		</div><!-- wrapper end -->
-	         
-	
-	     
-	</div>
-	
-	        
-	<!--  创意描述 -->
-	<div id="idealist" class="select" style="height: 300px; display:none;">
-	    <div class="delete_top">
-	        <div class="daochu_tit">
-	            导入创意方案</div>
-	        <div class="close" onclick="$('#idealistcancel').click();">
-	        </div>
-	    </div>
-	    <div class="daochu_cl" style="height:180px;overflow-x:hidden;overflow-y:auto; ">
-	        <div class="delete_text">
-	            
-	            
-	        </div>
-	    </div>
-	    <div class="daochu_cancel">
-	        <div class="daochu_cancel1" onclick="addschemebyid();">
-	            确定
-	        </div>
-	        <div id="idealistcancel" class="daochu_cancel1h">
-	            取消
-	        </div>
-	    </div>
-	</div>
-	<div class="select" id="ideanone" style="display:none;">
-	    <div class="delete_top">
-	        <div class="daochu_tit">
-	            导入创意方案</div>
-	        <div class="close" onclick="$('#ideanonecancel').click();">
-	        </div>
-	    </div>
-	    <div class="daochu_cl">
-	        <div class="delete_text">
-	            您的创意暂时为空，无法导入<br>
-	            <a href="http://idea.izhiliao.com.cn/Templete/TempleteList.aspx" target="_blank">马上去填创意方案</a>
-	        </div>
-	    </div>
-	    <div class="daochu_cancel">
-	        <div id="ideanonecancel" class="daochu_cancel1">
-	            确定
-	        </div>
-	    </div>
-	</div>
 	
 	<div id="choosePicDiv" style="display: none; position:absolute; width: 1000px">
 	    <div class="daochu_bg">
@@ -1043,149 +743,11 @@
 	<input type="hidden" name="name" value="" id="patentIdHid">
 	
 	
-	
-	<div id="exportFile" style="display:none">
-	
-	
-	
-	<div class="daochu" style="width:420px;margin-left:-155px;">
-	<div class="daochu_top"><div class="daochu_tit">导出申请文件</div><div class="close" onclick="fileClose();"></div></div>
-	<div class="daochu_cl">
-	<div class="daochu_text">
-	文件名：
-	</div>
-	<div class="daochu_input"><input id="name" name="" type="text" class="input">
-	
-	
-	
-	</div>
-	</div> 
-	<div class="daochu_cl1">
-	<div class="daochu_clf">
-	<div class="daochu_text1">
-	设置字号
-	</div>
-	<div class="daochu_text2">
-	<div class="daochu_type"><div id="wordsLess" value="1" class="active" onclick="fontMark1('wordsLess');">
-	字数少
-	</div>
-	 四号字
-	</div>
-	<div class="daochu_type"><div id="wordsMore" value="2" class="daochu_type1" onclick="fontMark1('wordsMore');">
-	字数多
-	</div>
-	 小四号字
-	</div>
-	</div>
-	</div>
-	<div class="daochu_clf">
-	<div class="daochu_text1">
-	设置字体
-	</div>
-	<div class="daochu_text2">
-	<div class="daochu_typeh"><div id="song" value="3" class="active2" onclick="fontMark2('song');">
-	宋体
-	</div>
-	</div>
-	<div class="daochu_typeh"><div id="fsong" value="4" class="daochu_type1" onclick="fontMark2('fsong');">
-	仿宋
-	</div>
-	</div>
-	<div class="daochu_typeh"><div id="kaiti" value="5" class="daochu_type1" onclick="fontMark2('kaiti');">
-	楷体
-	</div>
-	</div></div>
-	</div>
-	</div>
-	<div class="daochu_cl1">  
-	
-	   <div class="wrap" id="process" style="display:none"> 
-	        <div class="progressbar_1">
-	            <div class="bar" id="bar">
-	            </div>
-	        </div> 
-	    </div>
-	    
-	</div>
-	 
-	
-	<div class="daochu_cancel">
-	
-	<div class="daochu_cancel1" onclick="fileExport();">
-	导出
-	</div> 
-	<div class="daochu_cancel1h" id="closefile">
-	取消
-	</div>
-	</div>
-	
-	</div>
-	 
-	</div>
-	
-	
-	  <div id="div_float_show" style="position: absolute;  display: none;
-	        width: 1000px">
-	    </div> 
-	
-	<div id="tipSuc" style="display:none;margin:40px 160px;text-align:left;">  
-	    <ul>
-	        <li>文件已经成功导出。</li>
-	        <li>成功存至：D:\Program Files</li>
-	        <li>
-	            <input type="button" name="name" value="打开文件夹" id="opnFile"></li>
-	    </ul> 
-	</div>
-	<div id="tipFail" style="display:none;margin:40px 160px;text-align:left;">  
-	    <div class="daochu_cl2">
-	  <div class="delete_text">
-	文件导出失败，请重试。
-	
-	</div>
-	</div>
-	<div class="daochu_cancel">
-	  <div class="daochu_cancel1" id="again">
-	重试
-	</div>
-	<div class="daochu_cancel1h" id="cancle">
-	取消
-	</div>
-	</div> 
-	</div>
+
+
 	
 	    </div>
 	    <div id="getPA">
-	    </div>
-	
-	    <div id="exportFile2" style="display: none">
-	        <div class="daochu" style="width: 420px; margin-left: -155px; height: 260px;">
-	            <div class="daochu_top">
-	                <div class="daochu_tit">
-	                    保存提示</div>
-	                <div class="close" onclick="fileClose2();">
-	                </div>
-	            </div>
-	            <div class="daochu_cl" style="text-align: center; font-weight: bold; font-size: 18px;
-	                padding-top: 10px">
-	                保存成功！
-	            </div>
-	            <div class="daochu_cl1">
-	                <div class="daochu_clf">
-	                    <div class="daochu_text1" style="width: 300px; font-weight: normal; line-height: 18px;
-	                        font-size: 13px;">
-	                        为了方便保管您的申请文件，建议保存之后导出申请文件到本地，同时提高您账户的安全等级设置。
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="daochu_cancel" style="left: 20%; width: 230px;">
-	                <div class="daochu_cancel1" onclick="export_inst();">
-	                    立即导出
-	                </div>
-	                <div class="daochu_cancel1h" id="closefile2" style="float: right;">
-	                    继续撰写
-	                </div>
-	            </div>
-	        </div>
 	    </div>
 	
 	    </div>
@@ -1605,17 +1167,22 @@ function loadImgs(){
 	$(function() {
 		var inventors = [];
 		var appPersons = [];
+		var contacts = [];
 		<c:forEach items="${inventors}" var="inventor">
 			inventors.push("${inventor.inventorName}");
 		</c:forEach>;
 		
 		<c:forEach items="${appPersons}" var="appPerson">
 			appPersons.push("${appPerson.name}");
-		</c:forEach>
+		</c:forEach>;
 		
+		<c:forEach items="${contactAddresses}" var="contactAddress">
+			contacts.push("${contactAddress.receiver}");
+		</c:forEach>;
 	     $().ready(function() {
 	     	$("#inventor").autocomplete(inventors);	
-	     	$("#appPerson").autocomplete(appPersons);	
+	     	$("#appPerson").autocomplete(appPersons);
+	     	$("#contacts").autocomplete(contacts);
 	     });
 	});
 
@@ -1671,6 +1238,23 @@ function loadImgs(){
 			},
 			error: function(){
 				alert("下载失败");
+			}
+		})
+	}
+	
+	function addContactsOptions(options){
+		$.each(options,function(index,contact){
+			selectObj.append("option value='"+contact.id+"'>'"+contact.receiver+"'</option>")
+		})
+	}
+	function loadContacts(contact){
+		$.ajax({
+			type : 'POST',
+			url : "<s:url value='/user/getContactAddressByReceiver.html'/>",
+			data :{"receiver":contact},
+			success : function (result){
+				resetSelect();
+				addContactsOptions(result);
 			}
 		})
 	}

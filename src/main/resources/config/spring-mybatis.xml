@@ -99,6 +99,11 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	
+	<bean id="shareAppPersonMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.ShareAppPersonMapper" />
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
 	
 	
 	<bean name="userDao" class="com.lotut.pms.dao.mybatis.UserMybatisDao">
@@ -169,6 +174,10 @@
 	<bean name="inventorDao" class="com.lotut.pms.dao.mybatis.InventorMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 		<property name="inventorMapper" ref="inventorMapper" />
-
+	</bean>	
+	
+	<bean name="shareAppPersonDao" class="com.lotut.pms.dao.mybatis.ShareAppPersonMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="shareAppPersonMapper" ref="shareAppPersonMapper" />
 	</bean>	
 </beans>							
