@@ -111,8 +111,9 @@ function piclistShow() {
 var patentId=getselfwriteID();
 
      
-    $('#content5').hide();
+    
     $('#content5-1').show();
+    $('#content5').hide();
     $('#content5_build').hide();
     $('#piclist').hide();
     var tab = getselfwriteTab();
