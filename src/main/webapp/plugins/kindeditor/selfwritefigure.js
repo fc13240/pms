@@ -1,13 +1,4 @@
 
-var _SkinPath = "/skins/default/";
-var _RootPath = "/";
-var _RootUrl = "http://www.izhiliao.com.cn/";
-var _AgencyUrl = "http://agency.izhiliao.com.cn/";
-var _UserUrl = "http://user.izhiliao.com.cn/";
-var _SelfWriteUrl = "http://self.izhiliao.com.cn/";
-var _IdeaUrl = "http://idea.izhiliao.com.cn/";
-
-
 function addPic() {
     //清除之前痕迹
     $('#piciLlus2').val("请填写附图说明，例如”图1为本发明实施例XX的方法流程示意图”。").css('color', '#999');
