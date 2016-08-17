@@ -1246,7 +1246,7 @@ function loadImgs(){
 	function loadContacts(contact){
 		$.ajax({
 			type : 'POST',
-			url : "<s:url value='/user/getContactAddressByReceiver.html'",
+			url : "<s:url value='/user/getContactAddressByReceiver.html'/>",
 			data :{"receiver":contact},
 			success : function (result){
 				resetSelect();
