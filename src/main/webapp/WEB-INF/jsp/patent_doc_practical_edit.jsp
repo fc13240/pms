@@ -12,7 +12,19 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  
 	<title>实用新型撰写</title>
+	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.min.css'/>">
+	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap-theme.min.css'/>">
 	<c:import url="common/kindEditor.jsp"></c:import>
+	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
+	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
+    <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
+	
+	
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="<s:url value='/temp/css/common.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
+	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
+	<link rel="stylesheet" media="screen" href="<s:url value='/temp/css/jquery-ui.min.css'/>" />
+	<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -94,23 +106,19 @@
 	        <div class="left" style="height: 700px;">
 				<!--申请文件九部分标签切换 -->
 				<div class="tab" id="tabWrap"> 
-					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">实用名称</div>
+					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">说明书</div>
 					<div class="tab1h" value="1" name="tabs" onclick="tabChange(1);">
-						技术领域</div>
-					<div class="tab1h" value="2" name="tabs" onclick="tabChange(2);">
-						背景技术</div>
-					<div class="tab1h" value="3" name="tabs" onclick="tabChange(3);">
-						发明内容</div>
-					<div class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
-						具体实施方式</div>
-					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						附图及说明</div>
-					<div class="tab1h" value="6" name="tabs" onclick="tabChange(6,true,false);">
+					<div class="tab1h" value="2" name="tabs" onclick="tabChange(2,true,false);">
 						权利要求</div>
-					<div class="tab1h" value="7" name="tabs" onclick="tabChange(7);">
+					<div class="tab1h" value="3" name="tabs" onclick="tabChange(3);">
 						摘要</div>
-					<div class="tab1h" value="8" name="tabs" onclick="tabChange(8);">
+					<div class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
 						摘要附图</div>
+					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
+						上传附件</div>
+					<div class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
+						请求协议书</div>
 				</div>
 	
 	        </div>
@@ -124,16 +132,10 @@
 	                        <i class="icon"></i>
 	                        <div class="span">保存</div>
 	                    </div>
-	                    <div class="export" onclick="export_selfwrite();" id="export_selfwrite">
-	                        <i class="icon"></i>导出文件
-	                    </div>
 	                    
 	                    <div class="top_right">
 	                        <div class="review" onclick="preview_selfwrite();">
 	                            <i class="icon"></i>预览
-	                        </div>
-	                        <div class="usehelp" onclick="helperv1('1');" style="margin-left: 20px">
-	                            <i class="icon"></i>使用帮助
 	                        </div>
 	                        
 	                    </div>
@@ -322,6 +324,9 @@
 						<div class="content" id="content0">
 							<div class="title">
 								发明名称
+								<div style="margin-left: 33px;">
+									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入发明名称"  value="${patentDoc.name}">
+								</div>
 							</div>
 							<div class="cl">
 								<div id="editor0" thistempid="1">
@@ -337,37 +342,7 @@
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
 										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.name }</textarea>
-										                    </td>
-										            	</tr>
-										            </table>
-										        </form>
-										   </div>
-									</div>
-								</div>
-							</div>
-							<div id="error_content0" style="margin-left: -50px; float: left; color: Red; text-align: right;" class="textarea">
-								您当前输入了 <span class="word_count2">0</span>个文字。<br> 
-								<span class="word_surplus"></span>
-							</div>
-						</div>
-						<div class="content" id="content1" style="display: none;">
-							<div class="title">
-								技术领域
-							</div>
-							<div class="cl">
-								<div id="editor1" thisid="2124" thistempid="0">
-									<div class="instru">
-										<div class="title2">蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-										    <div class="wraper">
-										        <form id="form1" name="form1" class="registerform" action="" onsubmit="return false;" method="post">
-										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent1" name="techDomain" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.techDomain }</textarea>
+										                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.manual }</textarea>
 										                    </td>
 										            	</tr>
 										            </table>
@@ -377,135 +352,76 @@
 								</div>
 							</div>
 						</div>
-						<div class="content" id="content2" style="display: none;">
+						
+						<!--上传附件div  -->
+						<div class="content" id="content5" thisid="2514" style="display: none;">
 							<div class="title">
-								背景技术
+								上传附件
 							</div>
+							
 							<div class="cl">
-								<div id="editor2" thisid="2293" thistempid="0">
-									<div class="instru">
-										<div class="title2">
-											引证文件应当是公开出版物，可以是专利文件，也可以是非专利文件，例如期刊、杂志、手册和书籍等。<br>
-											引证专利文件的，至少要写明专利文件的国别、公开号；<br>
-											引证非专利文件的，要写明这些文件的标题和详细出处，必要时给出译文并将译文放置在括号中。<br>
-											引用专利：美国专利US 3676315号；<br>
-											引用论文格式：Niyogi 等，“Solution Properties of Graphite and Graphene”， Nature，2006，128，7720<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-										<div class="wraper">
-										        <form id="form2" name="form2" class="registerform" action="" onsubmit="return false;" method="post">
-										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent2" name="backgoundTech" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.backgoundTech }</textarea>
-										                    </td>
-										            	</tr>
-										            </table>
-										        </form>
-										   </div>
-									</div>
+								<div class="lt-box" style="height:300px;padding:20px;">
+
+									<form id="patentDocAttachment" action="<s:url value='/editor/uploadFile.html'/>"  method="post" enctype="multipart/form-data" class="form-horizontal">  
+									<input style="display:none;"  id="patentAttachmentFile" name="file" type="file" />
+									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
+									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
+									<c:if test="${not empty patentDoc.patentDocAttachmentFile }">
+										<a href="<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>" >
+										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" >下载附件</button>
+										</a>
+				                    </c:if>
+									</form> 
+									<div style="height:10px;">&nbsp;</div> 
+									<span style="color:#666;">友情提示：将所需的附件一次性打包成压缩文件格式上传(zip,rar等)，不建议上传其他格式的文件!
+									</span>
 								</div>
 							</div>
 						</div>
-						<div class="content" id="content3" style="display: none;">
+						
+						<!--请求协议书div  -->
+						<div class="content" id="content6" thisid="2514" style="display: none;">
+							
 							<div class="title">
-								发明内容
+								请求书
 							</div>
 							<div class="cl">
-								<div id="editor3" thisid="5632" thistempid="0">
-									<div class="instru">
-										<div class="title2">
-											针对现有技术存在的问题，结合您的技术所能取得的效果，说说您的技术要解决的技术问题，简单说一下要解决的问题就可以了，不用说效果。<br>
-											一般别人都是写一小段，写多了审查人员也不介意，不过还是先看看模板吧，毕竟专利的表述是采用法律文书的形式，套路都比较固定了。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-											<div class="wraper">
-										        <form id="form3" name="form3" class="registerform" action="" onsubmit="return false;" method="post">
-										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent3" name="contentProblem"  class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.content }</textarea>
-										                    </td>
-										            	</tr>
-										            </table>
-										        </form>
-										   </div>
-									</div>
+								<div>
+									<table>
+									<tr>
+									<td>
+									申请人:<input class="t-input form-control" type="text" name="proposer" placeholder="在已有申请人中搜索" style="width: 200px" onblur="loadProposer()"/> 
+									</td>
+									<td>
+									<button class="button button-caution button-rounded" type="button">新增</button>
+									</td>
+									</tr>
+									<tr>
+									<td>
+									发明人：<input class="t-input form-control" type="text" name="inventor" id="inventor" placeholder="在已有发明人中搜索" style="width: 200px" onblur="loadInventor()"/>
+									</td>
+									<td>
+									<button class="button button-caution button-rounded" type="button">新增</button><br/>
+									</td>
+									</tr>
+									<tr>
+									<td>
+									联系人：<input class="t-input form-control" type="text" name="contacts" placeholder="在已有联系人中搜索" style="width: 200px"/>
+									</td>
+									<td>
+									<button class="button button-caution button-rounded" type="button">新增</button>
+									</td>
+									</tr>
+									</table>
 								</div>
-<%-- 								<div id="editor3_1" thisid="5633" thistempid="0">
-									<div class="instru">
-										<div class="title2">
-											这部分内容看似不少，其实就是权利要求部分的内容，建议先看看模板吧，看完之后就会发现原来是对权利要求的进一步描述。<br>
-											写好权利要求这部分就解决了，还没写的还不快去写，一部分可是当两部分用啊。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-										<div class="wraper">
-										        <form id="form4" name="form4" class="registerform" action="" onsubmit="return false;" method="post">
-										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent4" name="contentRight" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.contentRight }</textarea>
-										                    </td>
-										            	</tr>
-										            </table>
-										        </form>
-										   </div>
-									</div>
-								</div>
-								<div id="editor3_2" thisid="5634" thistempid="0">
-									<div class="instru">
-										<div class="title2">
-											即由您申请专利的技术特征直接带来的，或者是由这些技术特征必然产生的效果。<br>
-											通常可以通过对申请专利的技术的结构特点与理论分析的结合而得出，或通过列出实验数据的方式予以说明。<br>
-											无论哪种方式都应通过与现有技术的比较而得出。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-											<div class="wraper">
-										        <form id="form5" name="form5" class="registerform" action="" onsubmit="return false;" method="post">
-										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent5" name="contentEffect" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.contentEffect }</textarea>
-										                    </td>
-										            	</tr>
-										            </table>
-										        </form>
-										   </div>
-									</div>
-								</div> --%>
-							</div>
-						</div>
-						<div class="content" id="content4" style="display: none;overflow: auto;" >
-							<div class="title">
-								具体实施方式
-							</div>
-							<div class="cl">
-								<div id="editor4" thisid="2514" thistempid="0">
-									<div class="instru">
-										<div class="title2">
-											详细说明解决技术问题所采用的技术方案，并应当对权利要求的技术特征给予详细说明，以支持权利要求。<br>
-											有附图的应当对照附图进行说明。<br>
-											实施例是对具体实施方式的举例说明。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
-									<div class="textarea" name="tooltip">
-											<div class="wraper">
-										        <form id="form6" name="form6" class="registerform" action="" onsubmit="return false;" method="post">
-										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent6" name="implementWay" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.implementWay }</textarea>
-										                    </td>
-										            	</tr>
-										            </table>
-										        </form>
-										   </div>
-									</div>
-								</div>
+								
+								
+								
+								
+								
+								
+								
 							</div>
 						</div>
 						<input id="hideditor3id" type="hidden" autocomplete="off">
@@ -513,7 +429,7 @@
 						<input id="hidtooltip" type="hidden">
 											
 						<!-- 摘要 -->
-						<div class="content" id="content7" thisid="" style="display: none;">
+						<div class="content" id="content3" thisid="" style="display: none;">
 							
 							<div class="title">
 								摘要
@@ -551,7 +467,7 @@
 	
 	                    
 						<!-- 权利要求及要素表 -->
-						<div class="content" id="content6" style="display: none; overflow: hidden;">
+						<div class="content" id="content2" style="display: none; overflow: hidden;">
 							<div name="claims" style="float: left; width: 98%">
 								<div class="title">
 									权利要求书
@@ -589,87 +505,6 @@
 							</div>
 							<div name="claims_ele" class="power_right" style="float: right; margin-top: 10px; width: 98%; display: none;">
 							</div>
-							<div style="clear: both; height: 260px;">
-								<div class="upimg1" onclick="addnewclaim();" style=" margin-left:40px">
-									+添加权利要求</div>
-								<div class="upimg1" onclick="showclaimelement();">
-									添加发明要素表</div>
-								<div class="upimg1" onclick="showhelper(1);" id="noele">
-									看看别人怎么写</div>
-								<div class="upimg1" onclick="showhelper(3);" id="hasele" style="display: none;">
-									看看别人怎么写</div>
-							</div>
-						</div>
-						<div class="content" id="content6_ele" style="display: none; box-shadow: rgb(238, 238, 238) 2px 2px 2px inset; -webkit-box-shadow: rgb(238, 238, 238) 2px 2px 2px inset;">
-							<div class="box" style="padding-top: 0">
-								<div class="upimg1" onclick="returnclaims();">
-									返回权利要求</div>
-								<div class="power">
-									<table id="content6_ele_table" width="100%" border="0" cellspacing="0" cellpadding="0">
-										<tbody><tr>
-											<td width="4%" align="left" class="tr1" style="min-width: 40px;">
-												编号
-											</td>
-											<td width="18%" align="left" class="tr1">
-												要素名称
-											</td>
-											<td width="40%" align="left" class="tr1">
-												要素描述（组成部件、连接关系、方法流程、操作条件）
-											</td>
-											<td width="30%" align="left" class="tr1">
-												要素限定（材料、形状）
-											</td>
-											<td width="8%" align="left" class="tr1">
-												要素关系
-											</td>
-										</tr>
-									</tbody></table>
-									<table width="100%" border="0" cellspacing="0" cellpadding="0">
-										<tbody><tr>
-											<td width="4%" valign="middle" class="td" style="min-width: 40px;">
-												如：
-											</td>
-											<td width="18%" valign="middle" class="td">
-												手写笔
-											</td>
-											<td width="40%" valign="middle" class="td">
-												包括笔杆、书写头及弹性元件
-											</td>
-											<td width="30%" valign="middle" class="td">
-												无
-											</td>
-											<td width="8%" valign="middle" class="td">
-												无
-											</td>
-										</tr>
-										<tr>
-											<td valign="middle" class="instruct">
-												说明：
-											</td>
-											<td valign="middle" class="instruct">
-												该发明是手写笔
-											</td>
-											<td valign="middle" class="instruct">
-												组成该发明手写笔的部件有：笔杆、书写头、弹性元件
-											</td>
-											<td valign="middle" class="instruct">
-												针对该要素没有材料、形状等的限定
-											</td>
-											<td valign="middle" class="instruct">
-												无要素关系
-											</td>
-										</tr>
-									</tbody></table>
-								</div>
-								<div class="cl" style="padding-left: 20px;">
-									<div class="upimg2" onclick="addnewclaimelement();">
-										+添加要素</div>
-									<div class="upimg3" onclick="showhelper(2);">
-										看看别人怎么写</div>
-									<div class="upimg3" onclick="showclaims();">
-										添加到权利要求</div>
-								</div>
-							</div>
 						</div>
 	              
 						<!-- 附图及说明 -->
@@ -677,7 +512,7 @@
 						<!-- content start-->
 						<input type="hidden" id="ft_hidSrc" value="">
 						<input type="hidden" id="ft_hidFid" value="">
-						<div class="content" id="content5" style="display: none;">
+						<div class="content" id="content1" style="display: none;">
 							<div class="box" id="content5-1">
 								<div class="upimg1" onclick="addPic();">
 									新增附图</div>
@@ -730,7 +565,7 @@
 							}
 						</style>
 						<!-- content start-->
-						<div class="content" id="content8" style="display: none;">
+						<div class="content" id="content4" style="display: none;">
 							<div style="height: 80px">
 							</div>
 								<div class="upimg1" onclick="findAttachmentImg();" id="choseAbs" style="
@@ -745,7 +580,7 @@
 							<h3 style="margin-left: 30px;font-family:微软雅黑;margin-top: 50px;">摘要附图：</h3>
 							</div>
 							<div class="picBox" id="picLsy3">
-								<c:if test="${patentDoc.abstractImg != null || patentDoc.abstractImg==''}">
+								<c:if test="${patentDoc.abstractImg != null}">
 										<img src='${base}${patentDoc.abstractImg}' alt='' width='400' height='300'/>
 								</c:if>
 							</div>
@@ -861,221 +696,9 @@
 	    top: -15px; 
 	}
 	</style>
-	<div id="helperv1" style="display: none; left: 100px; top: 100px">
-	    <div class="step1">
-	        <img width="843" height="575" border="0" usemap="#Map" src="/skins/default/self/images/yindao_02.png">
-	        <map name="Map">
-	            <area href="javascript:void(0);" id="nextv1" coords="746,224,817,253" shape="rect">
-	        </map>
-	    </div>
-	</div>
-	<div id="helperv1_2" style="display: none;">
-	    <div class="step2">
-	        <img src="/skins/default/self/images/yindao_05.png" width="935" height="600" border="0" usemap="#Map2">
-	        <map name="Map2">
-	            <area shape="rect" id="nextv1_2" href="javascript:void(0);" coords="822,206,897,233">
-	        </map>
-	    </div>
-	</div>
-	<div id="helperv1_3" style="display: none;">
-	    <div class="step4">
-	        <img width="523" height="600" border="0" usemap="#Map4" src="/skins/default/self/images/yindao_16.png">
-	        <map name="Map4">
-	            <area id="nextv1_3" href="javascript:void(0);" coords="381,104,480,150" shape="rect">
-	        </map>
-	    </div>
-	</div>
-	<div id="helperv2" style="display: none;">
-	    <div class="step3" style="display: none;">
-	        <img alt="" src="/skins/default/self/images/yindao_24.png" width="616" height="600" border="0" usemap="#Map3">
-	        <map name="Map3">
-	            <area shape="rect" coords="502,332,571,373" id="nextv2" href="javascript:void(0);">
-	        </map>
-	        <div class="step3_top">
-	            <div class="left_top" style="border: none">
-	                <div class="cl">
-	                    <div class="bth" onclick="setipcTypeByID(1,this);">
-	                        发明</div>
-	                    <div class="bth" style="margin-left: 10px;" onclick="setipcTypeByID(2,this);">
-	                        实用新型</div>
-	                </div>
-	                <div class="left_help">
-	                    <a href="javascript:void(0);" onclick="helperv6();">如何设置专利类型？</a>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-	<div id="helperv7" style="display: none;">
-	    <div class="step3">
-	        <img alt="" src="/skins/default/self/images/yindao_24h.png" width="616" height="600" border="0" usemap="#Map3">
-	        <div class="step3_top">
-	            <div class="left_top" style="border: none">
-	                <div class="cl">
-	                    <div class="bth" onclick="setipcTypeByID(1,this);$('#nextv7').click();">
-	                        发明</div>
-	                    <div class="bth" style="margin-left: 10px;" onclick="setipcTypeByID(2,this);$('#nextv7').click();">
-	                        实用新型</div>
-	                </div>
-	                <div class="left_help">
-	                    <a href="javascript:void(0);" onclick="helperv6();">如何设置专利类型？</a>
-	                    <input id="nextv7" type="button" style="display: none;">
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-	<div id="helperv2_2" style="display: none;">
-	    <div class="step5hh">
-	        <div class="step5hhn" id="nextv2_2">
-	        </div>
-	        <div class="step5h" id="helper_templist" style="top:170px;">
-	            <div class="step51" onclick="seltemp(1);">
-	                备选模板1</div>
-	            <div class="step51" onclick="seltemp(2);">
-	                备选模板2</div>
-	            <div class="step51" onclick="seltemp(3);">
-	                备选模板3</div>
-	        </div>
-	    </div>
-	    <input style="display: none;" id="nextv2_3" type="button" value="下一步">
-	</div>
-	<div id="helperv3" style="display: none;">
-	    <div class="step3" style="display: none;">
-	        <img alt="" src="/skins/default/self/images/yindao_24.png" width="616" height="600" border="0" usemap="#Map3">
-	        <map name="Map3">
-	            <area shape="rect" coords="502,332,571,373" id="nextv3" href="javascript:void(0);">
-	        </map>
-	        <div class="step3_top">
-	            <div class="left_top" style="border: none">
-	                <div class="cl">
-	                    <div class="bth" style="cursor: inherit;">
-	                        发明</div>
-	                    <div class="bth" style="margin-left: 10px; cursor: inherit;">
-	                        实用新型</div>
-	                </div>
-	                <div class="left_help">
-	                    <a href="javascript:void(0);" style="cursor: inherit;">如何设置专利类型？</a>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-	<div id="helperv3_1" style="display: none;">
-	    <div class="step5">
-	        <div class="step5cl" id="nextv3_1">
-	        </div>
-	        <img width="502" height="161" src="/skins/default/self/images/yindao_09h.png">
-	        <div class="step5h">
-	            <div class="step52">
-	                一种碳石墨环轴密封结构
-	            </div>
-	            <div class="step52">
-	                治疗咳喘的中药组合物</div>
-	            <div class="step52">
-	                抓斗及其刮泥器</div>
-	        </div>
-	    </div>
-	</div>
-	<div id="helperv4" style="display: none;">
-	    <div style="clear: both;">
-	        新手上路</div>
-	    <div style="clear: both;">
-	        新手上路九个标签的帮助内容</div>
-	    <div style="clear: both;">
-	        <input type="checkbox" autocomplete="off" onchange="nohintv4();" id="nohintv4">不再提示</div>
-	    <div style="clear: both;">
-	        <input id="nextv4" type="button" value="跳过"></div>
-	</div>
-	<div id="helperv5" style="display: none;">
-	    <div class="daochu_cl" style="height: 135px">
-	        <div class="help_text" style="width: 270px; height: 150px">
-	            专利撰写两步走：<br>
-	            &nbsp;&nbsp;&nbsp;&nbsp;第一步，选择专利类型，<br>
-	            &nbsp;&nbsp;&nbsp;&nbsp;第二步，选择撰写模板，<br>
-	            &nbsp;&nbsp;&nbsp;&nbsp;接下来，开始撰写吧。
-	        </div>
-	    </div>
-	    <div class="daochu_cancel1" style="clear: both; float: right">
-	        <div class="daochu_cancel1" id="nextv5">
-	            开始撰写
-	        </div>
-	    </div>
-	</div>
+
 	
-	<div id="helperv6" style="display: none; position:relative">  
-	        <div id="close_tc" class="step5_lb">
-	        </div>
-	       <div class="wrapper" style=" background:none;">   
-	        <div class="v_out v_out_p">
-	<div class="prev" style="opacity: 0.5;"><a href="javascript:void(0)"></a></div>
-	<div class="v_show">
-	
-	<div class="v_cont">
-	<ul>
-	<li index="0"><img src="/self/usercontrol/lbt_01.png"></li>
-	<li index="1"><img src="/self/usercontrol/lbt_04.png"></li>
-	<li index="2"><img src="/self/usercontrol/lbt_06.png"></li>
-	 
-	</ul>
-	</div>
-	
-	</div>
-	
-	<div class="next" style="opacity: 0.5;"><a href="javascript:void(0)"></a> </div>
-	
-	 
-	</div>
-	
-		</div><!-- wrapper end -->
-	         
-	
-	     
-	</div>
-	
-	        
-	<!--  创意描述 -->
-	<div id="idealist" class="select" style="height: 300px; display:none;">
-	    <div class="delete_top">
-	        <div class="daochu_tit">
-	            导入创意方案</div>
-	        <div class="close" onclick="$('#idealistcancel').click();">
-	        </div>
-	    </div>
-	    <div class="daochu_cl" style="height:180px;overflow-x:hidden;overflow-y:auto; ">
-	        <div class="delete_text">
-	            
-	            
-	        </div>
-	    </div>
-	    <div class="daochu_cancel">
-	        <div class="daochu_cancel1" onclick="addschemebyid();">
-	            确定
-	        </div>
-	        <div id="idealistcancel" class="daochu_cancel1h">
-	            取消
-	        </div>
-	    </div>
-	</div>
-	<div class="select" id="ideanone" style="display:none;">
-	    <div class="delete_top">
-	        <div class="daochu_tit">
-	            导入创意方案</div>
-	        <div class="close" onclick="$('#ideanonecancel').click();">
-	        </div>
-	    </div>
-	    <div class="daochu_cl">
-	        <div class="delete_text">
-	            您的创意暂时为空，无法导入<br>
-	            <a href="http://idea.izhiliao.com.cn/Templete/TempleteList.aspx" target="_blank">马上去填创意方案</a>
-	        </div>
-	    </div>
-	    <div class="daochu_cancel">
-	        <div id="ideanonecancel" class="daochu_cancel1">
-	            确定
-	        </div>
-	    </div>
-	</div>
+
 	
 	<div id="choosePicDiv" style="display: none; position:absolute; width: 1000px">
 	    <div class="daochu_bg">
@@ -1141,151 +764,11 @@
 	} 
 	</style>
 	<input type="hidden" name="name" value="" id="patentIdHid">
-	
-	
-	
-	<div id="exportFile" style="display:none">
-	
-	
-	
-	<div class="daochu" style="width:420px;margin-left:-155px;">
-	<div class="daochu_top"><div class="daochu_tit">导出申请文件</div><div class="close" onclick="fileClose();"></div></div>
-	<div class="daochu_cl">
-	<div class="daochu_text">
-	文件名：
 	</div>
-	<div class="daochu_input"><input id="name" name="" type="text" class="input">
-	
-	
-	
-	</div>
-	</div> 
-	<div class="daochu_cl1">
-	<div class="daochu_clf">
-	<div class="daochu_text1">
-	设置字号
-	</div>
-	<div class="daochu_text2">
-	<div class="daochu_type"><div id="wordsLess" value="1" class="active" onclick="fontMark1('wordsLess');">
-	字数少
-	</div>
-	 四号字
-	</div>
-	<div class="daochu_type"><div id="wordsMore" value="2" class="daochu_type1" onclick="fontMark1('wordsMore');">
-	字数多
-	</div>
-	 小四号字
-	</div>
-	</div>
-	</div>
-	<div class="daochu_clf">
-	<div class="daochu_text1">
-	设置字体
-	</div>
-	<div class="daochu_text2">
-	<div class="daochu_typeh"><div id="song" value="3" class="active2" onclick="fontMark2('song');">
-	宋体
-	</div>
-	</div>
-	<div class="daochu_typeh"><div id="fsong" value="4" class="daochu_type1" onclick="fontMark2('fsong');">
-	仿宋
-	</div>
-	</div>
-	<div class="daochu_typeh"><div id="kaiti" value="5" class="daochu_type1" onclick="fontMark2('kaiti');">
-	楷体
-	</div>
-	</div></div>
-	</div>
-	</div>
-	<div class="daochu_cl1">  
-	
-	   <div class="wrap" id="process" style="display:none"> 
-	        <div class="progressbar_1">
-	            <div class="bar" id="bar">
-	            </div>
-	        </div> 
-	    </div>
-	    
-	</div>
-	 
-	
-	<div class="daochu_cancel">
-	
-	<div class="daochu_cancel1" onclick="fileExport();">
-	导出
-	</div> 
-	<div class="daochu_cancel1h" id="closefile">
-	取消
-	</div>
-	</div>
-	
-	</div>
-	 
-	</div>
-	
-	
-	  <div id="div_float_show" style="position: absolute;  display: none;
-	        width: 1000px">
-	    </div> 
-	
-	<div id="tipSuc" style="display:none;margin:40px 160px;text-align:left;">  
-	    <ul>
-	        <li>文件已经成功导出。</li>
-	        <li>成功存至：D:\Program Files</li>
-	        <li>
-	            <input type="button" name="name" value="打开文件夹" id="opnFile"></li>
-	    </ul> 
-	</div>
-	<div id="tipFail" style="display:none;margin:40px 160px;text-align:left;">  
-	    <div class="daochu_cl2">
-	  <div class="delete_text">
-	文件导出失败，请重试。
-	
-	</div>
-	</div>
-	<div class="daochu_cancel">
-	  <div class="daochu_cancel1" id="again">
-	重试
-	</div>
-	<div class="daochu_cancel1h" id="cancle">
-	取消
-	</div>
-	</div> 
 	</div>
 	
 	    </div>
 	    <div id="getPA">
-	    </div>
-	
-	    <div id="exportFile2" style="display: none">
-	        <div class="daochu" style="width: 420px; margin-left: -155px; height: 260px;">
-	            <div class="daochu_top">
-	                <div class="daochu_tit">
-	                    保存提示</div>
-	                <div class="close" onclick="fileClose2();">
-	                </div>
-	            </div>
-	            <div class="daochu_cl" style="text-align: center; font-weight: bold; font-size: 18px;
-	                padding-top: 10px">
-	                保存成功！
-	            </div>
-	            <div class="daochu_cl1">
-	                <div class="daochu_clf">
-	                    <div class="daochu_text1" style="width: 300px; font-weight: normal; line-height: 18px;
-	                        font-size: 13px;">
-	                        为了方便保管您的申请文件，建议保存之后导出申请文件到本地，同时提高您账户的安全等级设置。
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="daochu_cancel" style="left: 20%; width: 230px;">
-	                <div class="daochu_cancel1" onclick="export_inst();">
-	                    立即导出
-	                </div>
-	                <div class="daochu_cancel1h" id="closefile2" style="float: right;">
-	                    继续撰写
-	                </div>
-	            </div>
-	        </div>
 	    </div>
 	
 	    </div>
@@ -1584,18 +1067,14 @@ function settingAbstractImg(value){
 </script>
 <script type="text/javascript">
 function savePatentDoc(value){
-	var name=editor.text();
-	var techDomain=$("#editorContent1").val();
-	var backgoundTech=$("#editorContent2").val();
-	var content=$("#editorContent3").val();
-	var implementWay=$("#editorContent6").val();
+	var name=$("#patentName").val();
+	var manual=$("#editorContent").val();
 	var abstractDescription=$("#editorContent7").val();
 	var rightClaim=$("#editorContent8").val();
 	$.ajax({
 		type: "POST",
 		url: "<s:url value='/editor/savePatentDoc.html'/>",
-		data: {"name":name,"techDomain":techDomain,"backgoundTech":backgoundTech,"content":content,
-				"implementWay":implementWay,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
+		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
 		success: function(data){
 			alert("操作成功");
 		},
@@ -1639,5 +1118,64 @@ function loadImgs(){
 	});
 }
 </script>
+<script type="text/javascript">
+
+	$('input[id="patentAttachmentFile"]').change(function() {
+		$('#filename').val($(this).val());  
+	});
+	
+	function uploadAttachmentFile(){
+		
+		var hideForm = $('#patentDocAttachment'); 
+		var options = {
+			dataType : "json", 
+			data: {'file': $("#patentAttachmentFile").val()},
+			beforeSubmit : function() {
+				var name=$("#filename").val();
+				var mime = name.toLowerCase().substr(name.lastIndexOf("."));
+				if(mime ==".zip" || mime ==".rar"){
+					return true;
+				}else{
+					alert("请上传压缩文件包！");
+					return false;
+				}
+			}, 
+			success : function(result) {
+				uploadSuccess(result); 
+			}, 
+			error : function() {
+				alert("上传失败"); 
+			} 
+		}; 
+		hideForm.ajaxSubmit(options); 
+	}
+	function uploadSuccess(value){
+		var patentDocId=$("#patentDocId").val();
+		$.ajax({
+			type: "POST",
+			url: "<s:url value='/editor/savePatentDocAttachmentFile.html'/>",
+			data: {"patentDocId":patentDocId,"patentDocAttachmentFile":value},
+			success: function(data){
+				alert("保存成功");
+			},
+			error: function(){
+				alert("保存失败");
+			}
+		});
+	}
+	function downloadFile(){
+		var patentDocId=$("#patentDocId").val();
+		$.ajax({
+			type :'GET',
+			url : "<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+patentDocId,
+			success : function(){
+				
+			},
+			error: function(){
+				alert("下载失败");
+			}
+		})
+	}
+	</script>
 </body>
 </html>

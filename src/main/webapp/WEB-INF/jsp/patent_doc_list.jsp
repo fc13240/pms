@@ -172,12 +172,11 @@ table td a {
                     <a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 								 编辑
 					</a><a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">预览</a>
-                    <a onclick=" exportWord(${patentDoc.patentDocId});">导出</a>
+                    <%-- <a onclick=" exportWord(${patentDoc.patentDocId});">导出</a> --%>
                     <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">删除</a>
                     <a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>
-                    <c:if test="${not empty patentDoc.patentDocAttachmentFile }">
-                    <a  href="<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载附件</a>
-                    </c:if>
+
+                    <a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传文档</a>
                 </td>
             </tr>
             

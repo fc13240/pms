@@ -131,4 +131,9 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAllUser() {
 		return userDao.getAllUser();
 	}
+
+	@Override
+	public List<ContactAddress> getContactAddressesByReceiver(int userId, String receiver) {
+		return userDao.getContactAddressesByReceiver(userId, receiver);
+	}
 }

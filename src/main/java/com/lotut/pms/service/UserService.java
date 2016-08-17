@@ -48,4 +48,6 @@ public interface UserService {
 	ContactAddress getContactAddressesById(int id);
 	
 	List<User> getAllUser();
+	
+	List<ContactAddress> getContactAddressesByReceiver(int userId,String receiver);
 }

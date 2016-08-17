@@ -12,10 +12,7 @@
 		<result property="createTime" column="create_time"/>
 		<result property="lastUpdateTime" column="last_update_time"/>
 		<result property="name" column="patent_name"/>
-		<result property="techDomain" column="tech_domain"/>
-		<result property="backgoundTech" column="background_tech"/>
-		<result property="content" column="content"/>
-		<result property="implementWay" column="implement_way"/>
+		<result property="manual" column="manual"/>
 		<result property="rightClaim" column="right_claim"/>
 		<result property="abstractDescription" column="abstract_desc"/>
 		<result property="abstractImg" column="abstract_img"/>
@@ -33,27 +30,25 @@
 
 	
  	<insert id="savePatentDoc" parameterType="PatentDoc" useGeneratedKeys="true" keyProperty="patentDocId">
-		insert into patent_documents(app_no,user_id,patent_type,create_time,patent_name,tech_domain,background_tech,content,
-		implement_way,right_claim,abstract_desc,abstract_img) values
-		(#{appNo,javaType=string,jdbcType=VARCHAR},#{userId},#{patentType},now(),#{name,javaType=string,jdbcType=BIGINT},#{techDomain,javaType=string,jdbcType=CLOB},#{backgoundTech,javaType=string,jdbcType=CLOB},#{content,javaType=string,jdbcType=CLOB},
-		#{implementWay,javaType=string,jdbcType=CLOB},#{rightClaim,javaType=string,jdbcType=CLOB},#{abstractDescription,javaType=string,jdbcType=CLOB},#{abstractImg,javaType=string,jdbcType=VARCHAR});
+		insert into patent_documents(app_no,user_id,patent_type,create_time,patent_name,manual,right_claim,abstract_desc,abstract_img) values
+		(#{appNo,javaType=string,jdbcType=VARCHAR},#{userId},#{patentType},now(),#{name,javaType=string,jdbcType=BIGINT},
+		#{manual,javaType=string,jdbcType=CLOB},#{rightClaim,javaType=string,jdbcType=CLOB},#{abstractDescription,javaType=string,jdbcType=CLOB},#{abstractImg,javaType=string,jdbcType=VARCHAR});
 	</insert>
 	
 	<select id="getUserPatentDoc"  resultMap="PatentDocMap">
-		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,tech_domain,background_tech,content,
-		implement_way,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file from patent_documents where user_Id=#{userId} order by create_time desc ,last_update_time desc
+		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
+		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file from patent_documents where user_Id=#{userId} order by create_time desc ,last_update_time desc
 	</select> 
 	
 	
 	<select id="getUserPatentDocById"  resultMap="PatentDocMap">
-		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,tech_domain,background_tech,content,
-		implement_way,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file from patent_documents where  patent_doc_id=#{patentDocId}
+		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
+		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file from patent_documents where  patent_doc_id=#{patentDocId}
 	</select>
 	
 	<update id="updatePatentDoc" parameterType="PatentDoc">
-		update patent_documents set app_no=#{appNo,javaType=string,jdbcType=VARCHAR},user_id=#{userId},patent_name=#{name,javaType=string,jdbcType=BIGINT},tech_domain=#{techDomain,javaType=string,jdbcType=CLOB},
-		background_tech=#{backgoundTech,javaType=string,jdbcType=CLOB},last_update_time=now(),content=#{content,javaType=string,jdbcType=CLOB},
-		implement_way=#{implementWay,javaType=string,jdbcType=CLOB},right_claim=#{rightClaim,javaType=string,jdbcType=CLOB},abstract_desc=#{abstractDescription,javaType=string,jdbcType=CLOB}
+		update patent_documents set app_no=#{appNo,javaType=string,jdbcType=VARCHAR},user_id=#{userId},patent_name=#{name,javaType=string,jdbcType=BIGINT},manual=#{manual,javaType=string,jdbcType=CLOB},
+		last_update_time=now(),right_claim=#{rightClaim,javaType=string,jdbcType=CLOB},abstract_desc=#{abstractDescription,javaType=string,jdbcType=CLOB}
 		where  patent_doc_id=#{patentDocId}
 	</update> 
 	
@@ -72,8 +67,7 @@
 	</insert>
 	
 	<delete id="deleteNullPatentDoc">
-		delete from patent_documents where patent_name is null and tech_domain is null and background_tech is null and content is null and 
-		 implement_way is null and  right_claim is null and abstract_desc is null  and abstract_img is null
+		delete from patent_documents where patent_name is null and  manual is null and  right_claim is null and abstract_desc is null  and abstract_img is null
 	</delete>
 	<select id="getAttachmentById"  resultMap="PatentImgMap">
 		select attachment_id,caption,label, attachment_url from patent_attachment where  patent_doc_id=#{patentDocId}
@@ -95,4 +89,9 @@
 	<select id="getPatentDocAttachmentFile"  resultType="string">
 		select patent_doc_attachment_file from patent_documents where  patent_doc_id=#{patentDocId}
 	</select>
+	
+	<update id="savePatentDocFile" parameterType="PatentDoc">
+		update patent_documents set patent_doc_url=#{patentDocUrl,javaType=string,jdbcType=VARCHAR}
+		where  patent_doc_id=#{patentDocId}
+	</update>
 </mapper>

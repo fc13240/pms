@@ -12,14 +12,12 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,18 +30,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Attachment;
+import com.lotut.pms.domain.CommonAppPerson;
+import com.lotut.pms.domain.CommonInventor;
+import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.TemplatePage;
+import com.lotut.pms.service.AppPersonService;
+import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
-import com.lotut.pms.service.PatentService;
+import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.CreateWord;
 import com.lotut.pms.web.util.DocUtil;
@@ -59,11 +61,17 @@ import net.lingala.zip4j.util.Zip4jConstants;
 public class PatentEditDocController {
 	private PatentDocService patentDocService;
 	private PatentDocumentTemplateService patentDocumentTemplateService;
+	private InventorService inventorService ;
+	private AppPersonService appPersonService;
+	private UserService userService;
 	
 	@Autowired
-	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService) {
+	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService,InventorService inventorService,AppPersonService appPersonService,UserService userService) {
 		this.patentDocService = patentDocService;
 		this.patentDocumentTemplateService = patentDocumentTemplateService;
+		this.inventorService = inventorService;
+		this.appPersonService = appPersonService;
+		this.userService = userService;
 	}
 
 	@RequestMapping(path="/newPatentType")
@@ -79,8 +87,14 @@ public class PatentEditDocController {
 		patentDoc.setPatentType(patentType);
 		patentDocService.savePatentDoc(patentDoc);
 		long patentDocId=patentDoc.getPatentDocId();
+		List<CommonInventor> inventors = inventorService.getAllInventorsByUser(userId);
+		List<CommonAppPerson> appPersons= appPersonService.getAllAppPersonByUser(userId);
+		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
 		model.addAttribute("patentDocId",patentDocId);
 		model.addAttribute("patentDoc",patentDoc);
+		model.addAttribute("inventors",inventors);
+		model.addAttribute("appPersons",appPersons);
+		model.addAttribute("contactAddresses", contactAddresses);
 		if(patentType==1){
 			return "patent_doc_invent_edit";
 		}else if(patentType==2){
@@ -131,9 +145,8 @@ public class PatentEditDocController {
 		List<PatentDoc> patentDocs= new ArrayList<>();
 		for (PatentDoc patentDoc:patentDocss) {
 			if(patentDoc.getAppNo()==null&patentDoc.getAbstractDescription()==null
-					&patentDoc.getBackgoundTech()==null&patentDoc.getContent()==null
-					&patentDoc.getImplementWay()==null&patentDoc.getName()==null&patentDoc.getRightClaim()==null
-					&patentDoc.getTechDomain()==null&patentDoc.getAbstractImg()==null){
+					&patentDoc.getName()==null&patentDoc.getManual()==null&patentDoc.getRightClaim()==null
+					&patentDoc.getAbstractImg()==null){
 					patentDocService.deleteNullPatentDoc();
 			}else{
 				patentDocs.add(patentDoc);
@@ -417,12 +430,12 @@ public class PatentEditDocController {
 				while ((bytesRead = bis.read(buffer)) != -1) {
 					out.write(buffer, 0, bytesRead);
 				}
+				out.flush();
 				bis.close();
 				out.close();
-				out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
-	}
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -465,6 +478,50 @@ public class PatentEditDocController {
 		}
 	}
 	
-
-
+	
+	@RequestMapping(path="/showUploadForm",method=RequestMethod.GET)
+	public String showUploadForm(@RequestParam("patentDocId")long patentDocId,Model model){
+		model.addAttribute("patentDocId", patentDocId);
+		return "patent_doc_upload_form";
+	}
+	
+	
+	@RequestMapping(path="/uploadPatentDocFile",method=RequestMethod.POST)
+	public void uploadPatentDocFile(HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
+		try{
+			String savePath=Settings.PATENTDOC_FILE_PATH;
+			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+			MultipartFile file1 = multipartRequest.getFile("file");
+			String fileName = file1.getOriginalFilename();
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String ymd = sdf.format(new Date());
+			savePath += ymd + "/";
+			File dirFile = new File(savePath);
+			if (!dirFile.exists()) {
+				dirFile.mkdirs();
+			}
+			String newFileName = new Random().nextInt(10000) + "_" + fileName;
+			InputStream is = file1.getInputStream();
+			int BUFFER_SIZE = 8 * 1024;
+			byte[] buffer = new byte[BUFFER_SIZE];
+			try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
+				int bytesRead = -1;
+				while ((bytesRead = is.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesRead);
+				}
+				out.flush();
+				out.close();
+			}
+			WebUtils.writeJsonStrToResponse(response,savePath+newFileName);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}	
+	
+	
+	@RequestMapping(path="/savePatentDocFile",method=RequestMethod.POST)
+	public void savePatentDocFile(PatentDoc patentDoc,PrintWriter writer){
+		patentDocService.savePatentDocFile(patentDoc);
+		writer.write(1);
+	}
 }

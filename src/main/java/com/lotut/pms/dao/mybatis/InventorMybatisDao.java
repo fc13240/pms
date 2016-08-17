@@ -46,5 +46,10 @@ public class InventorMybatisDao extends SqlSessionDaoSupport implements Inventor
 		inventorMapper.deleteById(id);
 		
 	}
+
+	@Override
+	public List<CommonInventor> getInventorByName(String inventor) {
+		return inventorMapper.getInventorByName(inventor);
+	}
 	
 }

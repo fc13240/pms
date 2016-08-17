@@ -9,7 +9,7 @@
  *
  * Revision: $Id: jquery.autocomplete.js 15 2009-08-22 10:30:27Z joern.zaefferer $
  */
-
+$.browser = navigator.userAgent; 
 ;(function($) {
 	
 $.fn.extend({
@@ -197,6 +197,9 @@ $.Autocompleter = function(input, options) {
 		select.unbind();
 		$input.unbind();
 		$(input.form).unbind(".autocomplete");
+	}).bind("input", function() {
+	    // @hack by xuesong:firefox中文输入支持
+	    onChange(0, true);
 	});
 	
 	

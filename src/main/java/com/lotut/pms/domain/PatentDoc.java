@@ -16,29 +16,37 @@ public class PatentDoc {
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Timestamp lastUpdateTime;
 	private String name;
-	private String techDomain;
-	private String backgoundTech;
-	private String content;
-	private String implementWay;
+	private String manual;
 	private String rightClaim;
 	private String abstractDescription;
 	private String abstractImg;
 	private String patentDocAttachmentFile;
+	private String patentDocUrl;
 	
 	
 	
+
+	public String getPatentDocUrl() {
+		return patentDocUrl;
+	}
+	public void setPatentDocUrl(String patentDocUrl) {
+		this.patentDocUrl = patentDocUrl;
+	}
+
+	public String getManual() {
+		return manual;
+	}
+	public void setManual(String manual) {
+		this.manual = manual;
+
+	}
 	public String getPatentDocAttachmentFile() {
 		return patentDocAttachmentFile;
 	}
 	public void setPatentDocAttachmentFile(String patentDocAttachmentFile) {
 		this.patentDocAttachmentFile = patentDocAttachmentFile;
 	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
+
 	public String getAbstractImg() {
 		return abstractImg;
 	}
@@ -87,25 +95,7 @@ public class PatentDoc {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getTechDomain() {
-		return techDomain;
-	}
-	public void setTechDomain(String techDomain) {
-		this.techDomain = techDomain;
-	}
-	public String getBackgoundTech() {
-		return backgoundTech;
-	}
-	public void setBackgoundTech(String backgoundTech) {
-		this.backgoundTech = backgoundTech;
-	}
 	
-	public String getImplementWay() {
-		return implementWay;
-	}
-	public void setImplementWay(String implementWay) {
-		this.implementWay = implementWay;
-	}
 	public String getRightClaim() {
 		return rightClaim;
 	}
