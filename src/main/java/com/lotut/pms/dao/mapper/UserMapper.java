@@ -47,4 +47,6 @@ public interface UserMapper {
 	ContactAddress getContactAddressesById(int id);
 	
 	List<User> getAllUser();
+	
+	List<ContactAddress> getContactAddressesByReceiver(@Param("userId") int userId,@Param("receiver") String receiver);
 }

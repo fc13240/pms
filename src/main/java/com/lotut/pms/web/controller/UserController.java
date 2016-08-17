@@ -1,6 +1,7 @@
 package com.lotut.pms.web.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alipay.util.httpClient.HttpResponse;
 import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
@@ -207,6 +209,23 @@ public class UserController {
         return "login_form";
     }  	
 	
+    
+    @RequestMapping(path="/getContactAddressByReceiver")
+    public void getContactAddressByReceiver(@RequestParam("receiver") String receiver,HttpServletResponse response){
+    	response.setContentType("application/json;charset=UTF-8");
+    	int userId = PrincipalUtils.getCurrentUserId();
+    	List<ContactAddress> contactAddresses = userService.getContactAddressesByReceiver(userId, receiver);
+    	Map<String,Object> map =new HashMap<>();
+    	map.put("contactAddresses", contactAddresses);
+    	try{
+    		WebUtils.writeJsonStrToResponse(response, map);
+    	}catch(IOException e){
+    		e.printStackTrace();
+    	}
+   }
+    
+    
+    
 	public UserController() {
 	}
 	
