@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -483,6 +485,7 @@ public class PatentEditDocController {
 	
 	@RequestMapping(path="/uploadPatentDocFile",method=RequestMethod.POST)
 	public void uploadPatentDocFile(HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
+		int userId = PrincipalUtils.getCurrentUserId();
 		try{
 			String savePath=Settings.PATENTDOC_FILE_PATH;
 			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -495,7 +498,7 @@ public class PatentEditDocController {
 			if (!dirFile.exists()) {
 				dirFile.mkdirs();
 			}
-			String newFileName = new Random().nextInt(10000) + "_" + fileName;
+			String newFileName = userId + "_" + new Random().nextInt(10000) + "_" + fileName;
 			InputStream is = file1.getInputStream();
 			int BUFFER_SIZE = 8 * 1024;
 			byte[] buffer = new byte[BUFFER_SIZE];
@@ -507,7 +510,7 @@ public class PatentEditDocController {
 				out.flush();
 				out.close();
 			}
-			WebUtils.writeJsonStrToResponse(response,savePath+newFileName);
+			WebUtils.writeJsonStrToResponse(response,ymd + "/"+newFileName);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -518,5 +521,30 @@ public class PatentEditDocController {
 	public void savePatentDocFile(PatentDoc patentDoc,PrintWriter writer){
 		patentDocService.savePatentDocFile(patentDoc);
 		writer.write(1);
+	}
+	
+	@RequestMapping(path="/downloadPatentFile", method=RequestMethod.GET)
+	public void downloadPatentFile(@RequestParam("patentDocId")long patentDocId, HttpServletResponse response,HttpServletRequest request) throws IOException {
+		response.setContentType("application/doc");
+		String relativeUrl = patentDocService.getPatentDocUrlById(patentDocId);
+		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
+		String filePath = Settings.PATENTDOC_FILE_PATH + relativeUrl;
+		File patentDocFile = new File(filePath);
+		if("FF".equals(getBrowser(request))){
+		    //针对火狐浏览器处理
+			downloadFileName =new String(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
+		}
+		response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
+		response.setContentLength((int)patentDocFile.length());
+		WebUtils.writeStreamToResponse(response, new FileInputStream(patentDocFile));
+	}
+	
+	private String getBrowser(HttpServletRequest request){
+	    String UserAgent = request.getHeader("USER-AGENT").toLowerCase();
+	    if(UserAgent!=null){
+	        if (UserAgent.indexOf("msie") >=0 ) return "IE";
+	        if (UserAgent.indexOf("firefox") >= 0) return "FF";
+	    }
+	    return null;
 	}
 }
