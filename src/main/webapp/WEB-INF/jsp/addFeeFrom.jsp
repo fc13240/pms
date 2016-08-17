@@ -130,7 +130,7 @@ function resetSelect() {
 }
 
 function addOptions(selectObj, options) {
-	$.each(options, function(index, val){
+	$.each(options, function(index, val,val2){
 		selectObj.append("<option value='" + val + "'>" + val + "</option>");
 	});	
 }

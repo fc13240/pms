@@ -516,7 +516,10 @@
 							<div class="box" id="content5-1">
 								<div class="upimg1" onclick="addPic();">
 									新增附图</div>
-								<div class="img_box" id="askPicList">
+								<div class="picBox">
+									<ul class="picL" id="picLsy2" >
+										
+									</ul>
 								</div>
 							</div>
 						<div class="content" id="content5_build" style="display: none;">

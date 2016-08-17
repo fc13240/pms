@@ -1,8 +1,8 @@
 package com.lotut.pms.service.impl;
 
 
-import java.util.List;
 
+import java.util.List;
 import com.lotut.pms.dao.PatentDocDao;
 import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
@@ -105,5 +105,12 @@ public class PatentDocServiceImp implements PatentDocService{
 			patentDocDao.savePatentDocFile(patentDoc);
 			
 		}
+
+
+		@Override
+		public String getPatentDocUrlById(long patentDocId) {
+			return patentDocDao.getPatentDocUrlById(patentDocId);
+		}
+
 
 }

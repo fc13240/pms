@@ -12,6 +12,11 @@ public interface AppPersonDao {
 	void updateAppPerson(CommonAppPerson AppPerson);
 	CommonAppPerson getOneAppPersonById(int id);
 	void deleteAppPersonById(int id);
-	
+
+	List<CommonAppPerson> getUserAppPersons(int userId);
+
 	List<CommonAppPerson> getAppPersonByName(String appPerson,int userId);
+
+	List<CommonAppPerson> getAppPersonByName(String appPerson);
+
 }

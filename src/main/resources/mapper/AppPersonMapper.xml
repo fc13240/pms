@@ -4,6 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.lotut.pms.dao.mapper.AppPersonMapper">
+  <resultMap type="CommonAppPerson" id="AppPersonWithShareUsers">
+  	<id property="appPersonId" column="app_person_id"/>
+		<result property="name" column="name"/>
+		<result property="peopleNumber" column="id_number"/>
+		<result property="postcodeAddress" column="postcode_address"/>
+		<result property="recordStatus" column="record_status"/>
+		<result property="otherInfo" column="other_information"/>
+		<result property="userId" column="user_id"/>
+		<association property="appPersonType" resultMap="AppPersonTypeMap"/>
+		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
+  </resultMap>
 
   <insert id="addAppPerson" parameterType="CommonAppPerson" >
   	insert into common_app_person(name,type,id_number,postcode_address,other_information,user_id) 
@@ -21,10 +32,17 @@
   	
   	</select>
   	
+  	<select id="getUserAppPersons" parameterType="int" resultMap="AppPersonWithShareUsers">
+  	    select p.app_person_id ,p.type ,p.name ,p.id_number,t.type_id,type_desc ,
+  		p.postcode_address ,p.other_information  ,u.user_id, u.username from common_app_person p 
+  		join app_person_types t on p.type=t.type_id join user_app_person up on p.app_person_id = up.app_person 
+  		join users u on u.user_id = up.user	
+  		where up.user=#{userId}
+  	</select>
   	<select id="getAllAppPersonByUser" parameterType="int" resultType="CommonAppPerson">
   		select p.app_person_id as appPersonId,p.type as type,p.name as name,t.type_desc as typeName,p.id_number as peopleNumber,
   		p.postcode_address as postcodeAddress,p.other_information as otherInfo from common_app_person p 
-  		join app_person_types t on p.type=t.type_id where user_Id=#{userId}
+  		join app_person_types t on p.type=t.type_id where user_id=#{userId}
   		
   	</select>
   	

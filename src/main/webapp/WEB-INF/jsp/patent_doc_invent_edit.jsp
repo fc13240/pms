@@ -80,7 +80,13 @@
 						console.info(response);
 					}
 				});
+				
+				
+
 				loadImgs();
+				
+				
+				
 			});
 			
 		</script> 
@@ -453,8 +459,6 @@
 							</div>
 							<div class="cl">
 								<div id="editor7" thisid="" thistempid="" photo_fid="">
-									<div class="upimg1" onclick="autoabstract();" style=" margin-left:50px">
-										自动生成摘要</div>
 									<div class="instru">
 										<div class="title2">蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
 										</div>
