@@ -699,19 +699,11 @@ type_desc CHAR(12) NOT NULL
 
 )
 
-<<<<<<< HEAD
+
 INSERT INTO app_person_types VALUES('1','个人')
 INSERT INTO app_person_types VALUES('2','非个人')
 
-CREATE TABLE user_app_person(
-  USER INT(11) NOT NULL DEFAULT '0',
-  app_person BIGINT(20) NOT NULL DEFAULT '0',
-  trash_status INT(11) DEFAULT '1',
-  PRIMARY KEY (`USER`,`app_person`),
-  KEY `fk_user_app_person` (`app_person`),
-  CONSTRAINT `fk_share_app_person_person` FOREIGN KEY (`app_person`) REFERENCES `common_app_person` (`app_person_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_user_app_person_user` FOREIGN KEY (`USER`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
-) ENGINE=INNODB DEFAULT CHARSET=utf8
+
 
 CREATE TABLE share_app_persons(
   app_person BIGINT(20) NOT NULL DEFAULT '0',
@@ -724,7 +716,4 @@ CREATE TABLE share_app_persons(
   CONSTRAINT `fk_share_app_person_share_by` FOREIGN KEY (`share_by`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_share_app_person_share_to` FOREIGN KEY (`share_to`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
-=======
-INSERT INTO app_person_types VALUES('1','个人');
-INSERT INTO app_person_types VALUES('2','非个人');
->>>>>>> 11828c8b664468145c2208b258b9980c2fc85eac
+
