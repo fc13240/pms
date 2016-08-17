@@ -80,7 +80,13 @@
 						console.info(response);
 					}
 				});
+				
+				
+
 				loadImgs();
+				
+				
+				
 			});
 			
 		</script> 
