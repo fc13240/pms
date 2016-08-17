@@ -1254,7 +1254,7 @@ function loadImgs(){
 			data :{"receiver":contact},
 			success : function (result){
 				resetSelect();
-				//addContactsOptions(result);
+				addContactsOptions(result);
 			}
 		})
 	}
