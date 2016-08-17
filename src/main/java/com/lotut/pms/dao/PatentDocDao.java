@@ -33,4 +33,6 @@ public interface PatentDocDao {
 	String getPatentDocAttachmentFile(long patentDocId);
 
 	void savePatentDocFile(PatentDoc patentDoc);
+
+	String getPatentDocUrlById(long patentDocId);
 }
