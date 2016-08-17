@@ -80,13 +80,7 @@
 						console.info(response);
 					}
 				});
-				
-				
-
 				loadImgs();
-				
-				
-				
 			});
 			
 		</script> 
@@ -413,7 +407,7 @@
 									</tr>
 									<tr>
 									<td>
-									联系人：<input class="t-input form-control" type="text" name="contacts" placeholder="在已有联系人中搜索" style="width: 200px"/>
+									联系人：<input class="t-input form-control" type="text" name="contacts" id="contacts" placeholder="在已有联系人中搜索" style="width: 200px" onblur="loadContacts(this.value)"/>
 									</td>
 									<td>
 									<button class="button button-caution button-rounded" type="button">新增</button>
@@ -1169,17 +1163,22 @@ function loadImgs(){
 	$(function() {
 		var inventors = [];
 		var appPersons = [];
+		var contacts = [];
 		<c:forEach items="${inventors}" var="inventor">
 			inventors.push("${inventor.inventorName}");
 		</c:forEach>;
 		
 		<c:forEach items="${appPersons}" var="appPerson">
 			appPersons.push("${appPerson.name}");
-		</c:forEach>
+		</c:forEach>;
 		
+		<c:foreach items="${contactAddresses}" var="contactAddress">
+			contacts.push("${contactAddress.receiver}");
+		</c:foreach>;
 	     $().ready(function() {
 	     	$("#inventor").autocomplete(inventors);	
-	     	$("#appPerson").autocomplete(appPersons);	
+	     	$("#appPerson").autocomplete(appPersons);
+	     	$("#contacts").autocomplete(contacts);
 	     });
 	});
 
@@ -1235,6 +1234,23 @@ function loadImgs(){
 			},
 			error: function(){
 				alert("下载失败");
+			}
+		})
+	}
+	
+	function addContactsOptions(options){
+		$.each(options,function(index,contact){
+			selectObj.append("option value='"+contact.id+"'>'"+contact.receiver+"'</option>")
+		})
+	}
+	function loadContacts(contact){
+		$.ajax({
+			type : 'POST',
+			url : "<s:url value='/user/getContactAddressByReceiver.html'",
+			data :{"receiver":contact},
+			success : function (result){
+				resetSelect();
+				addContactsOptions(result);
 			}
 		})
 	}
