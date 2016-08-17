@@ -13,5 +13,5 @@ public interface AppPersonDao {
 	CommonAppPerson getOneAppPersonById(int id);
 	void deleteAppPersonById(int id);
 	
-	List<CommonAppPerson> getAppPersonByName(String appPerson);
+	List<CommonAppPerson> getAppPersonByName(String appPerson,int userId);
 }

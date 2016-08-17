@@ -42,8 +42,8 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 		AppPersonMapper.deleteAppPersonById(id);
 	}
 	@Override
-	public List<CommonAppPerson> getAppPersonByName(String appPerson) {
-		return AppPersonMapper.getAppPersonByName(appPerson);
+	public List<CommonAppPerson> getAppPersonByName(String appPerson,int userId) {
+		return AppPersonMapper.getAppPersonByName(appPerson,userId);
 	}
 
 	

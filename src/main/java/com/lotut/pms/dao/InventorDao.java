@@ -11,5 +11,5 @@ public interface InventorDao {
 	void updateById(CommonInventor inventor);
 	 void deleteById(int id);
 	 
-	 List<CommonInventor> getInventorByName(String inventor);
+	 List<CommonInventor> getInventorByName(String inventor,int userId);
 }

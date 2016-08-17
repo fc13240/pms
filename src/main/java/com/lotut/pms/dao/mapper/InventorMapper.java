@@ -12,6 +12,6 @@ public interface InventorMapper {
 	 CommonInventor getInventorById(int id);
 	 void updateById(CommonInventor inventor);
 	 void deleteById(int id);
-	 List<CommonInventor> getInventorByName(@Param("inventor") String inventor);
+	 List<CommonInventor> getInventorByName(@Param("inventor") String inventor,@Param("userId") int userId);
 
 }

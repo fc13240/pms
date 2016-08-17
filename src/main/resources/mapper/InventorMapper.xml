@@ -43,6 +43,6 @@
 		select inventor_id as inventorId ,inventor_name as inventorName,inventor_id_nubmer as inventorNumber,
 		inventor_nationality as inventorNationality,inventor_mobile as inventorMobile,inventor_email as inventorEmail,
 		inventor_other_information as inventorComment,user_id  as userId
-		from common_inventor where inventor_name like #{inventor}
+		from common_inventor where inventor_name like #{inventor} and userId=#{userId}
 	</select>
 </mapper>

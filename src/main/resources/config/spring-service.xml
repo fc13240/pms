@@ -74,5 +74,8 @@
 
 	</bean>
 	
+	<bean id="petitionService" class="com.lotut.pms.service.impl.PetitionServiceImpl">
+		<constructor-arg ref="petitionDao"/>
+	</bean>
 	
 </beans>

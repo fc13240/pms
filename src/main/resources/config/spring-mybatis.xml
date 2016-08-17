@@ -99,6 +99,10 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	
+	<bean id="petitionMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.PetitionMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
 	
 	
 	<bean name="userDao" class="com.lotut.pms.dao.mybatis.UserMybatisDao">
@@ -170,5 +174,10 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 		<property name="inventorMapper" ref="inventorMapper" />
 
+	</bean>
+	
+	<bean name="petitionDao" class="com.lotut.pms.dao.mybatis.PetitionMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+		<property name="petitionMapper" ref="petitionMapper"/>
 	</bean>	
 </beans>							

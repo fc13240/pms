@@ -13,5 +13,5 @@ public interface AppPersonService {
 	void updateAppPerson(CommonAppPerson AppPerson);
 	void deleteAppPersonById(int id);
 	
-	List<CommonAppPerson> getAppPersonByName(String appPerson);
+	List<CommonAppPerson> getAppPersonByName(String appPerson,int userId);
 }

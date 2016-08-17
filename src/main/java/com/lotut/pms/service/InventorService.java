@@ -11,5 +11,5 @@ public interface InventorService {
 	 void updateById(CommonInventor inventor);
 	 void deleteById(int id);
 	 
-	 List<CommonInventor> getInventor(String inventor);
+	 List<CommonInventor> getInventor(String inventor,int userId);
 }

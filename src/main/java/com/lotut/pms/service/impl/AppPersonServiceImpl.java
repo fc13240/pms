@@ -57,7 +57,7 @@ public class AppPersonServiceImpl implements AppPersonService {
 
 
 	@Override
-	public List<CommonAppPerson> getAppPersonByName(String appPerson) {
-		return AppPersonDao.getAppPersonByName(appPerson);
+	public List<CommonAppPerson> getAppPersonByName(String appPerson,int userId) {
+		return AppPersonDao.getAppPersonByName(appPerson,userId);
 	}
 }

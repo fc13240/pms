@@ -80,7 +80,8 @@ public class InventorController {
 	@RequestMapping(path="/loadInventor")
 	public void loadInventor(@RequestParam("inventor") String inventor, HttpServletResponse response){
 		response.setContentType("application/json;charset=UTF-8");
-		List<CommonInventor> inventors=inventorService.getInventor(inventor);
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<CommonInventor> inventors=inventorService.getInventor(inventor,userId);
 		try{
 			Map<String, Object> map = new HashMap<>();
 			map.put("inventors", inventors);
