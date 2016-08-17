@@ -124,5 +124,10 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 		return userMapper.getAllUser();
 	}
 
+	@Override
+	public List<ContactAddress> getContactAddressesByReceiver(int userId, String receiver) {
+		return userMapper.getContactAddressesByReceiver(userId, receiver);
+	}
+
 	
 }

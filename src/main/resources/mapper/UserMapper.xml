@@ -108,4 +108,13 @@
 		SELECT * FROM users
 		WHERE EXISTS (SELECT 1 FROM orders WHERE orders.user = users.user_id);
 	</select>
+	
+	<select id="getContactAddressesByReceiver" resultType="ContactAddress">
+		select ca.id, ca.receiver, ca.province, p.name as provinceName, ca.city, c.name as cityName,
+				ca.district, d.name as districtName,
+					 ca.detail_address as detailAddress, ca.phone, ca.email, ca.is_default defaultAddress
+		 from contact_addresses ca join provinces p on ca.province = p.id
+			join cities c on ca.city = c.id join districts d on ca.district = d.id
+		 where ca.user = #{userId} and ca.receiver like #{receiver}
+	</select>
 </mapper>

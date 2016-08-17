@@ -75,7 +75,7 @@
 						console.info("此文件上传失败：");
 						console.info(file.name);
 					},
-					onComplete: function(response){           	  // 上传完成的回调方法
+					onComplete: function(response){
 						console.info("文件上传完成");
 						console.info(response);
 					}
@@ -1172,9 +1172,9 @@ function loadImgs(){
 			appPersons.push("${appPerson.name}");
 		</c:forEach>;
 		
-		<c:foreach items="${contactAddresses}" var="contactAddress">
+		<c:forEach items="${contactAddresses}" var="contactAddress">
 			contacts.push("${contactAddress.receiver}");
-		</c:foreach>;
+		</c:forEach>;
 	     $().ready(function() {
 	     	$("#inventor").autocomplete(inventors);	
 	     	$("#appPerson").autocomplete(appPersons);
@@ -1250,7 +1250,7 @@ function loadImgs(){
 			data :{"receiver":contact},
 			success : function (result){
 				resetSelect();
-				addContactsOptions(result);
+				//addContactsOptions(result);
 			}
 		})
 	}
