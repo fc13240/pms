@@ -331,7 +331,7 @@
 						<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
 						<div class="content" id="content0">
 							<div class="title">
-								发明名称
+								发明名称:
 								<div style="margin-left: 33px;">
 									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入发明名称"  value="${patentDoc.name}">
 								</div>
@@ -342,8 +342,8 @@
 										<div class="title2">
 											注意套用模板时专利名称不得超过25个字，化学领域的某些申请允许最多到40个字，这个规定可要注意哦。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。</div>
 									</div>
-									<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
-									<input type="hidden" value="" id="divtitletips">
+ 									<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
+									<input type="hidden" value="" id="divtitletips"> 
 									<div class="textarea" name="tooltip">
 										    <div class="wraper">
 									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
