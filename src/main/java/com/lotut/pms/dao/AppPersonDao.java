@@ -15,8 +15,8 @@ public interface AppPersonDao {
 
 	List<CommonAppPerson> getUserAppPersons(int userId);
 
-	List<CommonAppPerson> getAppPersonByName(String appPerson,int userId);
+/*	List<CommonAppPerson> getAppPersonByName(String appPerson,int userId);
 
-	List<CommonAppPerson> getAppPersonByName(String appPerson);
+	List<CommonAppPerson> getAppPersonByName(String appPerson);*/
 
 }
