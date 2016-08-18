@@ -717,7 +717,7 @@ CREATE TABLE share_app_persons(
   CONSTRAINT `fk_share_app_person_share_to` FOREIGN KEY (`share_to`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 
-<<<<<<< HEAD
+
 DROP TABLE common_inventor
 CREATE TABLE common_inventor (
   inventor_id BIGINT NOT NULL AUTO_INCREMENT,
@@ -743,5 +743,4 @@ CREATE TABLE user_inventor(
   CONSTRAINT `fk_share_inventor` FOREIGN KEY (inventor) REFERENCES `common_inventor` (inventor_id) ON DELETE CASCADE,
   CONSTRAINT `fk_user_inventor_user` FOREIGN KEY (USER) REFERENCES `users` (user_id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
-=======
->>>>>>> e291817510070760d64ed99f894cdb1267f785a4
+
