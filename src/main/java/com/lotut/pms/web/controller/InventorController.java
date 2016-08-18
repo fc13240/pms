@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.CommonInventor;
+import com.lotut.pms.domain.User;
+import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.InventorService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
@@ -24,10 +26,12 @@ import com.lotut.pms.web.util.WebUtils;
 @Controller
 @RequestMapping(path="/inventor")
 public class InventorController {
-	InventorService inventorService;
+	private InventorService inventorService;
+	private FriendService friendService;
 	@Autowired
-	public InventorController(InventorService inventorService){
+	public InventorController(InventorService inventorService,FriendService friendService){
 		this.inventorService=inventorService;
+		this.friendService=friendService;
 	}
 	
 	@RequestMapping(path="/contactInventorAddForm")
@@ -39,7 +43,7 @@ public class InventorController {
 	@RequestMapping(path="/list")
 	public String getList(Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
-		List<CommonInventor> inventors=inventorService.getAllInventorsByUser(userId);
+		List<CommonInventor> inventors=inventorService.getUserInventors(userId);
 		model.addAttribute("inventors", inventors);
 		return "inventor_list";
 		
@@ -91,5 +95,23 @@ public class InventorController {
 			e.printStackTrace();
 		}
 	}
+	
+
+	@RequestMapping(path="/showFriends", method=RequestMethod.GET)
+	public String showFriends(Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> friends = friendService.getUserFriends(userId);
+		model.addAttribute("friends", friends);
+		return "inventor_select_friends";
+	}
+	
+	@RequestMapping(path="searchFriends", method=RequestMethod.GET)
+	public String searchFriends(@RequestParam("keyword")String keyword, Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> friends = friendService.searchUserFriends(userId, keyword);
+		model.addAttribute("friends", friends);
+		return "inventor_select_friends";
+	}	
+	
 	
 }

@@ -31,9 +31,9 @@
 				<div class="lt-box" style="padding:20px;height:400px;">
 					  <h4>请选择要分配的好友 </h4>
 					  <div>
-						<form action="<s:url value='/appPerson/searchFriends.html'/>" method="get"  id="shareAddForm">
-						  <c:forEach items="${paramValues.appPersons}" var="appPerson">
-							<input type="hidden" class="form-control" name="appPersons" value="<c:out value='${appPerson}'/>">
+						<form action="<s:url value='/inventor/searchFriends.html'/>" method="get"  id="shareAddForm">
+						  <c:forEach items="${paramValues.inventors}" var="inventor">
+							<input type="hidden" class="form-control" name="inventors" value="<c:out value='${inventor}'/>">
 						  </c:forEach>
 						<table class="search-table">
 						<tr>
@@ -51,9 +51,9 @@
 						</form>
 					  </div>
 					  <div style="margin-top:20px;width:500px;">
-						<form action="<s:url value='/appPerson/shareAppPersons.html'/>" method="get"  id="shareAddForm">
-						  <c:forEach items="${paramValues.appPersons}" var="appPerson">
-							<input type="hidden" name="appPersons" value="<c:out value='${appPerson}'/>">
+						<form action="<s:url value='/inventor/shareinventors.html'/>" method="get"  id="shareAddForm">
+						  <c:forEach items="${paramValues.inventors}" var="inventor">
+							<input type="hidden" name="inventors" value="<c:out value='${inventor}'/>">
 						  </c:forEach>
 						  <table id="simple-table" style="width:500px;" class="table table-striped table-bordered table-hover">
 							<thead>
@@ -129,7 +129,7 @@
 		}
 	});
 	
-	function shareAppPersons() {
+	function shareInventors() {
 		var friendSelected = false;
 
 		var friendCheckboxes = $('tr td input.check-item');
@@ -152,9 +152,9 @@
 	   				
 		} else {
 			var friends = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'friend').join(",");
-			var appPersons = $("input[name=appPersons]").val();
+			var inventors = $("input[name=inventors]").val();
 			$.ajax({
-				url: "<s:url value='/shareAppPerson/addShares.html'/>?friends=" + friends + "&appPersons=" + appPersons, 
+				url: "<s:url value='/shareInventor/addShares.html'/>?friends=" + friends + "&inventors=" + inventors, 
 				type: 'GET', 
 				success: function() {
 					$("<div>分享成功</div>").dialog({
@@ -172,7 +172,7 @@
 	}
 	
 	$(function() {
-		$('#addShareBtn').click(shareAppPersons)
+		$('#addShareBtn').click(shareInventors)
 	});
 </script>
 </body>

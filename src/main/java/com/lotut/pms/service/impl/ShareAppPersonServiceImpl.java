@@ -20,12 +20,11 @@ public class ShareAppPersonServiceImpl implements ShareAppPersonService {
 		shareAppPersonDao.insertUserAppPersons(userAppPersonRecords);
 	}
 
-
 	@Override
-	public void insertShareAppPersons(List<Map<String, Integer>> shareAppPersonRecords,
+	public void shareAppPersons(List<Map<String, Integer>> shareAppPersonRecords,
 			List<Map<String, Integer>> userAppPersonRecords) {
 		// TODO Auto-generated method stub
-		shareAppPersonDao.insertShareAppPersons(shareAppPersonRecords, userAppPersonRecords);
+		shareAppPersonDao.shareAppPersons(shareAppPersonRecords, userAppPersonRecords);
 	}
 
 }

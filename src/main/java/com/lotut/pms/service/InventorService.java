@@ -10,6 +10,11 @@ public interface InventorService {
 	 CommonInventor getInventorById(int id);
 	 void updateById(CommonInventor inventor);
 	 void deleteById(int id);
+
+	 List<CommonInventor> getUserInventors(int userId);
+	 List<CommonInventor> getInventor(String inventor);
+
 	 
 	 List<CommonInventor> getInventor(String inventor,int userId);
+
 }

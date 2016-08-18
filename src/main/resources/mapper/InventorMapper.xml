@@ -4,15 +4,36 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.lotut.pms.dao.mapper.InventorMapper">
+	<resultMap type="CommonInventor" id="InventorWithShareUsers">
+			<id property="inventorId" column="inventor_id"/>
+			<result property="inventorName" column="inventor_name"/>
+			<result property="inventorNumber" column="inventor_id_number"/>
+			<result property="inventorNationality" column="inventor_nationality"/>
+			<result property="inventorMobile" column="inventor_mobile"/>
+			<result property="inventorEmail" column="inventor_email"/>
+			<result property="inventorComment" column="inventor_other_information"/>
+			<result property="userId" column="user_id"/>
+			<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
+	</resultMap>
+
+	<select id="getUserInventors" parameterType="int" resultMap="InventorWithShareUsers">
+  	   SELECT p.inventor_id ,p.inventor_name,p.inventor_id_number,p.inventor_nationality ,p.inventor_mobile ,p.inventor_email,
+  		p.inventor_other_information ,u.user_id,u.username  FROM common_inventor p
+  		 LEFT JOIN user_inventor up ON p.inventor_id = up.inventor 
+  		LEFT JOIN users u ON u.user_id = up.user
+  		WHERE p.user_id=#{userId}
+  	</select>
+	
+	
 	<insert id="addInventor" parameterType="CommonInventor">
-		insert into common_inventor (inventor_name,inventor_id_nubmer,inventor_nationality,inventor_mobile,inventor_email,inventor_other_information
+		insert into common_inventor (inventor_name,inventor_id_number,inventor_nationality,inventor_mobile,inventor_email,inventor_other_information
 		,user_Id)
 		values(#{inventorName},#{inventorNumber},#{inventorNationality},#{inventorMobile},#{inventorEmail},#{inventorComment},#{userId})
 	
 	</insert>
 
 	<select id="getAllInventorsByUser" parameterType="int" resultType="CommonInventor">
-		select inventor_id as inventorId ,inventor_name as inventorName,inventor_id_nubmer as inventorNumber,
+		select inventor_id as inventorId ,inventor_name as inventorName,inventor_id_number as inventorNumber,
 		inventor_nationality as inventorNationality,inventor_mobile as inventorMobile,inventor_email as inventorEmail,
 		inventor_other_information as inventorComment,user_id  as userId
 		from common_inventor where user_id =#{userId}
@@ -20,7 +41,7 @@
 	</select>
 	
 	<select id="getInventorById" parameterType="int" resultType="CommonInventor">
-		select inventor_id as inventorId ,inventor_name as inventorName,inventor_id_nubmer as inventorNumber,
+		select inventor_id as inventorId ,inventor_name as inventorName,inventor_id_number as inventorNumber,
 		inventor_nationality as inventorNationality,inventor_mobile as inventorMobile,inventor_email as inventorEmail,
 		inventor_other_information as inventorComment,user_id  as userId
 		from common_inventor where inventor_id =#{inventorId}
@@ -28,7 +49,7 @@
 	</select>
 	
 	<update id="updateById" parameterType="CommonInventor">
-		update common_inventor set inventor_name=#{inventorName} ,inventor_id_nubmer=#{inventorNationality},
+		update common_inventor set inventor_name=#{inventorName} ,inventor_id_number=#{inventorNationality},
 		inventor_nationality=#{inventorNationality},inventor_mobile=#{inventorMobile},inventor_email=#{inventorEmail},
 		inventor_other_information=#{inventorComment} where inventor_id=#{inventorId}
 	
@@ -40,9 +61,11 @@
 	
 	</delete>
 	<select id="getInventorByName" resultType="CommonInventor">
-		select inventor_id as inventorId ,inventor_name as inventorName,inventor_id_nubmer as inventorNumber,
+		select inventor_id as inventorId ,inventor_name as inventorName,inventor_id_number as inventorNumber,
 		inventor_nationality as inventorNationality,inventor_mobile as inventorMobile,inventor_email as inventorEmail,
 		inventor_other_information as inventorComment,user_id  as userId
 		from common_inventor where inventor_name like #{inventor} and userId=#{userId}
 	</select>
+	
+	
 </mapper>

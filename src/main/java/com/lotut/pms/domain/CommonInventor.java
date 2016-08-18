@@ -1,5 +1,8 @@
 package com.lotut.pms.domain;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class CommonInventor {
 	private int inventorId;
 	private String inventorName;
@@ -9,6 +12,8 @@ public class CommonInventor {
 	private String  inventorEmail;
 	private String  inventorComment;
 	private int userId;
+	private List<User> shareUsers;
+	
 	public int getInventorId() {
 		return inventorId;
 	}
@@ -57,7 +62,19 @@ public class CommonInventor {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	
+	public List<User> getShareUsers() {
+		return shareUsers;
+	}
+	public void setShareUsers(List<User> shareUsers) {
+		this.shareUsers = shareUsers;
+	}
+	public String getShareUsersAsString() {
+		if (this.shareUsers != null) {
+			return String.join(";", this.shareUsers.stream().map(User::getUsername).collect(Collectors.toList()));
+		}
+		
+		return "";
+	}
 	
 	
 	

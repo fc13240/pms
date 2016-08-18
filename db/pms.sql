@@ -659,7 +659,7 @@ CREATE TABLE IF NOT EXISTS process_person (
 CREATE TABLE common_inventor (
   inventor_id BIGINT NOT NULL AUTO_INCREMENT,
   inventor_name VARCHAR(20) DEFAULT NULL COMMENT'发明姓名',
-  inventor_id_nubmer  NVARCHAR(20) DEFAULT NULL COMMENT '证件号码',
+  inventor_id_number  NVARCHAR(20) DEFAULT NULL COMMENT '证件号码',
   inventor_nationality VARCHAR(20) DEFAULT NULL COMMENT '发明人国籍',
   inventor_mobile INT(20) DEFAULT NULL COMMENT '电话号码',
   inventor_email VARCHAR(20) DEFAULT NULL COMMENT '邮箱' ,
@@ -715,5 +715,44 @@ CREATE TABLE share_app_persons(
   CONSTRAINT `fk_share_app_person` FOREIGN KEY (`app_person`) REFERENCES `common_app_person` (`app_person_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_share_app_person_share_by` FOREIGN KEY (`share_by`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_share_app_person_share_to` FOREIGN KEY (`share_to`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8
+
+
+DROP TABLE common_inventor
+CREATE TABLE common_inventor (
+  inventor_id BIGINT NOT NULL AUTO_INCREMENT,
+  inventor_name VARCHAR(20) DEFAULT NULL COMMENT'发明姓名',
+  inventor_id_number  NVARCHAR(20) DEFAULT NULL COMMENT '证件号码',
+  inventor_nationality VARCHAR(20) DEFAULT NULL COMMENT '发明人国籍',
+  inventor_mobile INT(20) DEFAULT NULL COMMENT '电话号码',
+  inventor_email VARCHAR(20) DEFAULT NULL COMMENT '邮箱' ,
+  inventor_other_information VARCHAR(50) DEFAULT NULL COMMENT '其他信息',
+  user_id INT(11)  NOT NULL ,
+  PRIMARY KEY(inventor_id),
+  KEY fk_common_inventor_owner_id (user_id),
+  CONSTRAINT fk_common_inventor_owner_id FOREIGN KEY(user_id) REFERENCES users (user_id) 
+  
+)	
+
+CREATE TABLE user_inventor(
+  USER INT(11) NOT NULL DEFAULT '0',
+  inventor BIGINT(20) NOT NULL DEFAULT '0',
+  trash_status INT(11) DEFAULT '1',
+  PRIMARY KEY (`user`,`inventor`),
+  KEY `fk_user_inventor` (`inventor`),
+  CONSTRAINT `fk_share_inventor` FOREIGN KEY (inventor) REFERENCES `common_inventor` (inventor_id) ON DELETE CASCADE,
+  CONSTRAINT `fk_user_inventor_user` FOREIGN KEY (USER) REFERENCES `users` (user_id) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8
+
+
+
+CREATE TABLE user_app_person(
+  USER INT(11) NOT NULL DEFAULT '0',
+  app_person BIGINT(20) NOT NULL DEFAULT '0',
+  trash_status INT(11) DEFAULT '1',
+  PRIMARY KEY (`user`,`app_person`),
+  KEY `fk_user_app_person` (`app_person`),
+  CONSTRAINT `fk_share_app_person_person` FOREIGN KEY (app_person) REFERENCES `common_app_person` (app_person_id) ON DELETE CASCADE,
+  CONSTRAINT `fk_user_app_person_user` FOREIGN KEY (USER) REFERENCES `users` (user_id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 
