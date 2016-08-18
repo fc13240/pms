@@ -756,3 +756,15 @@ CREATE TABLE user_app_person(
   CONSTRAINT `fk_user_app_person_user` FOREIGN KEY (USER) REFERENCES `users` (user_id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 
+
+CREATE TABLE patent_doc_app_person(
+	person_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	patent_doc_id BIGINT NOT NULL,
+	NAME VARCHAR(20) NOT  NULL,
+	TYPE INT NOT  NULL,
+	id_number VARCHAR(20) NOT  NULL,
+	postcode_address VARCHAR(300) NOT  NULL,
+	other_information VARCHAR(50),
+	user_id INT NOT NULL,
+	CONSTRAINT fk_patent_doc_app_person_doc_id FOREIGN KEY idx_fk_patent_doc_app_person_doc_id(patent_doc_id) REFERENCES patent_documents(patent_doc_id) ON   DELETE   CASCADE
+)ENGINE=INNODB DEFAULT CHARSET=utf8; 

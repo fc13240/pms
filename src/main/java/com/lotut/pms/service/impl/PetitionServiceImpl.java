@@ -9,17 +9,4 @@ public class PetitionServiceImpl implements PetitionService {
 	public PetitionServiceImpl(PetitionDao petitionDao) {
 		this.petitionDao = petitionDao;
 	}
-
-
-	@Override
-	public void addAppPerson(long patentDocId, long appPersonId) {
-		petitionDao.addAppPerson(patentDocId, appPersonId);
-	}
-
-
-	@Override
-	public int checkAppPerson(long patentDocId, long appPersonId) {
-		return petitionDao.checkAppPerson(patentDocId, appPersonId);
-	}
-
 }

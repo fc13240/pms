@@ -60,4 +60,10 @@ public class AppPersonServiceImpl implements AppPersonService {
 		return AppPersonDao.getUserAppPersons(userId);
 	}
 
+
+	@Override
+	public void addCommonAppPerson(CommonAppPerson CommonAppPerson) {
+		AppPersonDao.addCommonAppPerson(CommonAppPerson);
+	}
+
 }

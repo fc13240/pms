@@ -69,5 +69,12 @@
   		p.postcode_address as postcodeAddress,p.other_information as otherInfo from common_app_person p 
   		join app_person_types t on p.type=t.type_id where p.name like #{appPerson} and p.user_id=#{userId}
   	</select>
+  	
+  	
+  	<insert id="addCommonAppPerson" parameterType="CommonAppPerson"  useGeneratedKeys="true" keyProperty="appPersonId">
+	  	insert into common_app_person(name,type,id_number,postcode_address,other_information,user_id) 
+	  	values(#{name},#{type},#{peopleNumber},#{postcodeAddress},#{otherInfo},#{userId})
+
+  	</insert>
   </mapper>
   

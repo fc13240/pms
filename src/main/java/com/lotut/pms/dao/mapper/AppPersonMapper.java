@@ -16,7 +16,8 @@ public interface AppPersonMapper {
 	void deleteAppPersonById(int id);
 
 	List<CommonAppPerson> getUserAppPersons(int userId);
-
+	
+	void addCommonAppPerson(CommonAppPerson CommonAppPerson);
 
 /*	List<CommonAppPerson> getAppPersonByName(@Param("appPerson") String appPerson,@Param("userId") int userId);
 

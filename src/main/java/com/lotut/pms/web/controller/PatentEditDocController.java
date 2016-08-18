@@ -34,6 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.lotut.pms.constants.Settings;
+import com.lotut.pms.domain.AppPersonType;
 import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
@@ -92,11 +93,13 @@ public class PatentEditDocController {
 		List<CommonInventor> inventors = inventorService.getAllInventorsByUser(userId);
 		List<CommonAppPerson> appPersons= appPersonService.getAllAppPersonByUser(userId);
 		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
+		List<AppPersonType> appPersonTypes=appPersonService.getAppPersonTypes();
 		model.addAttribute("patentDocId",patentDocId);
 		model.addAttribute("patentDoc",patentDoc);
 		model.addAttribute("inventors",inventors);
 		model.addAttribute("appPersons",appPersons);
 		model.addAttribute("contactAddresses", contactAddresses);
+		model.addAttribute("appPersonTypes",appPersonTypes);
 		if(patentType==1){
 			return "patent_doc_invent_edit";
 		}else if(patentType==2){
