@@ -269,6 +269,12 @@
 	          <a href="http://www.lotut.com/index.php/blog/095lzql4ke.html" target="_blank" rel="nofollow">联系我们</a><span>|</span>
 	          <a href="http://www.lotut.com/" target="_blank">商标市场</a></p>
 	        <p class="Copyright"><font color="#000">Copyright @ 2016龙图腾版权，技术支持龙图腾信息技术有限公司</font> </p>
+			<span style="display:inline-block;position:relative;width:auto;">
+				<a href="https://ss.knet.cn/verifyseal.dll?sn=e16072934010064299rolh000000&amp;ct=df&amp;a=1&amp;pa=0.09530572313815355" id="kx_verify" tabindex="-1" target="_blank" kx_type="图标式" style="display:inline-block;">
+					<img src="http://rr.knet.cn/static/images/logo/cnnic.png" style="border:none;height:25px;" oncontextmenu="return false;" alt="可信网站">
+				</a>
+			</span>
+
 	      </div>
 	    </div>
 	  </div>

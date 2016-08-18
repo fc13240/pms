@@ -27,7 +27,7 @@
 	
 	<insert id="addInventor" parameterType="CommonInventor">
 		insert into common_inventor (inventor_name,inventor_id_number,inventor_nationality,inventor_mobile,inventor_email,inventor_other_information
-		,user_Id)
+		,user_id)
 		values(#{inventorName},#{inventorNumber},#{inventorNationality},#{inventorMobile},#{inventorEmail},#{inventorComment},#{userId})
 	
 	</insert>
@@ -49,7 +49,7 @@
 	</select>
 	
 	<update id="updateById" parameterType="CommonInventor">
-		update common_inventor set inventor_name=#{inventorName} ,inventor_id_number=#{inventorNationality},
+		update common_inventor set inventor_name=#{inventorName} ,inventor_id_number=#{inventorNumber},
 		inventor_nationality=#{inventorNationality},inventor_mobile=#{inventorMobile},inventor_email=#{inventorEmail},
 		inventor_other_information=#{inventorComment} where inventor_id=#{inventorId}
 	

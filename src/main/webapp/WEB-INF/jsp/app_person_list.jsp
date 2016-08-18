@@ -18,9 +18,10 @@
 <div class="col-xs-1 sidebar" style="min-width:100px;">
 			<%@ include file="_left_nav_editor.jsp" %>
 		  </div>
-		  <div class="col-xs-offset-1 col-xs-11">
+					  <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
 				<div style="height:10px;"></div>
+					<div class="lt-box" style="padding:20px;">
 		  				<button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">新增申请人</button>
 		  				
 							<a href="javascript:return void" onclick="batchShareAppPerson()" >
@@ -69,14 +70,14 @@
 								<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
 								<td style="text-align:center"><c:out value="${appPerson.shareUsersAsString}"/></td>
 								<td><a href="<s:url value='/appPerson/findOneAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a> 
-								<a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteappPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">删除 </a>
+								<a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">删除 </a>
 								<a href="<s:url value='/appPerson/showFriends.html'/>?appPersons=<c:out value='${appPerson.appPersonId}'/>">分享</a>
 								</td>
 							  </tr>
 							</c:forEach>
 						  </tbody>
 						</table>
-						</div></div>
+						</div></div></div>
 <script type="text/javascript">
 
 	function addAppPerson(){

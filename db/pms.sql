@@ -628,7 +628,10 @@ VALUES
 	(7, 'ROLE_PROCESS');
 	
 INSERT INTO group_members(username,group_id) VALUES('test',4);
-	
+
+drop table if exists techs;
+drop table if exists processes;
+
 CREATE TABLE IF NOT EXISTS customer_supports (
 	id INT NOT NULL AUTO_INCREMENT UNIQUE,
 	user_id INT NOT NULL,

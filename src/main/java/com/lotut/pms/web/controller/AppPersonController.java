@@ -96,7 +96,7 @@ public class AppPersonController {
 	}
 	
 	@RequestMapping(path="/deleteAppPersonInfo")
-	public String deleteAppPersonInfo(@RequestParam("AppPersonId")int AppPersonId){
+	public String deleteAppPersonInfo(@RequestParam("appPersonId")int AppPersonId){
 		AppPersonService.deleteAppPersonById(AppPersonId);
 		return "redirect:/appPerson/list.html";
 	}
