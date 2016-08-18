@@ -33,7 +33,7 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
-					<form action="<s:url value='/appPerson/updContactInfo.html'/>" method="post" onsubmit="return check()">
+					<form action="<s:url value='/appPerson/updateAppPersonInfo.html'/>" method="post" onsubmit="return check()">
 					  <se:csrfInput/>
 			       	<h5>姓名或名称:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;"  id="numberRece" type="text" value="${appPerson.name }" name="name" required onblur="validateInfoNumber(this.value)"/>
@@ -41,7 +41,7 @@
 					<br>	   
 			       	<h5>申请人类型:</h5>
 					<select name="type" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities()" required>
-					  <option value=''>请选择</option>
+					  <option value="${appPerson.type}">${appPerson.typeName}</option>
 					  <c:forEach items="${appPersonTypes}" var="appPersonType">
 						<option value="${appPersonType.typeId}">${appPersonType.typeDescription}</option>
 					  </c:forEach>
