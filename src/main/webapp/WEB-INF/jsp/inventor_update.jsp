@@ -96,15 +96,12 @@ function validatePhoneNumber(phoneNumber) {
 function validateInfoNumber1(phoneNumber) {
 	var reg = new RegExp("^[0-9]*$");
 	document.getElementById("numberError1").style.display = "none";
-	if (reg.test(phoneNumber)) {
 		if (phoneNumber.length>20) {
 			document.getElementById("numberError1").style.display = "";
 			return false;
 		} else {
 			return true;
 		}
-	}
-	return true;
 }
 
 function validateInfoNumber2(phoneNumber) {
@@ -133,16 +130,13 @@ function validateInfoNumber3(phoneNumber) {
 		} else {
 			return true;
 		}
-	} else {
-		document.getElementById("numberError3").style.display = "";
-		return false;
 	}
 }
 
 function validateInfoNumber(phoneNumber) {
 	var reg = new RegExp("^[0-9]*$");
 	document.getElementById("numberError").style.display = "none";
-	if (reg.test(phoneNumber)) {
+
 		if (phoneNumber.length>20) {
 			document.getElementById("numberError").style.display = "";
 			return false;
@@ -150,21 +144,18 @@ function validateInfoNumber(phoneNumber) {
 			return true;
 		}
 	} 
-	return true;
-}
+	
+
 
 function validateCommentNumber(phoneNumber) {
 	var reg = new RegExp("^[0-9]*$");
 	document.getElementById("phoneError").style.display = "none";
-	if (reg.test(phoneNumber)) {
 		if (phoneNumber.length>50) {
 			document.getElementById("commentError").style.display = "";
 			return false;
 		} else {
 			return true;
 		}
-	} 
-	return true;
 }
 
 function check() {
@@ -182,8 +173,7 @@ function check() {
 		return true;
 	}else {
 		return false;
-	}
-	
+	}	
 }
 </script>
 

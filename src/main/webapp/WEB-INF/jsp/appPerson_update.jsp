@@ -56,7 +56,7 @@
 					<span style="color: red; display: none;" id=numberError1>请输入正确的证件号码</span>
 					<br>
 					<h5>其他信息:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" value="${appPerson.otherInfo }" name="otherInfo"  onblur="validateCommentNumber(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" value="${appPerson.otherInfo }" name="otherInfo" required onblur="validateCommentNumber(this.value)"/>
 					<span style="color: red; display: none;" id=numberError>该处应输入不大于50字段</span>
 					<br>      
 					<input type="hidden" class="form-control" name="appPersonId"  value="${appPerson.appPersonId}"/>
@@ -151,6 +151,5 @@
 	}
 
 </script>
-
 </body>
 </html>
