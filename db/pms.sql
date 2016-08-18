@@ -745,6 +745,7 @@ CREATE TABLE user_inventor(
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 
 
+
 CREATE TABLE user_app_person(
   USER INT(11) NOT NULL DEFAULT '0',
   app_person BIGINT(20) NOT NULL DEFAULT '0',
@@ -754,3 +755,4 @@ CREATE TABLE user_app_person(
   CONSTRAINT `fk_share_app_person_person` FOREIGN KEY (app_person) REFERENCES `common_app_person` (app_person_id) ON DELETE CASCADE,
   CONSTRAINT `fk_user_app_person_user` FOREIGN KEY (USER) REFERENCES `users` (user_id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
+
