@@ -23,12 +23,15 @@ public class ShareAppPersonMybatisDao extends SqlSessionDaoSupport implements Sh
 		
 	}
 
-
 	@Override
-	public void insertShareAppPersons(List<Map<String, Integer>> shareAppPersonRecords,
+	public void shareAppPersons(List<Map<String, Integer>> shareAppPersonRecords,
 			List<Map<String, Integer>> userAppPersonRecords) {
+		// TODO Auto-generated method stub
 		shareAppPersonMapper.insertShareAppPersons(shareAppPersonRecords);
 		shareAppPersonMapper.insertUserAppPersons(userAppPersonRecords);
 	}
+
+
+	
 
 }

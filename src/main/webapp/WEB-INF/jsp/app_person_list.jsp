@@ -21,19 +21,16 @@
 		  <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
 				<div style="height:10px;"></div>
-					  	
-				  		<form>
-				  		
 		  				<button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">新增申请人</button>
 		  				
-							<a href="javascript:return void" onclick="batchShare()" >
+							<a href="javascript:return void" onclick="batchShareAppPerson()" >
 							<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
 							</a> 
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
 							  <th class="center"> <label class="pos-rel">
-								<input type="checkbox" class="appPerson_check-item" id="checkall"  name="checkall" />
+								<input style="width:15px;" type="checkbox" class="check-item">
 								<span class="lbl"></span> </label>
 							  </th>
 							  <th class="center" width="50">序号</th>
@@ -55,7 +52,7 @@
 							<c:forEach items="${appPersons}" var="appPerson" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-								<input type="checkbox" class="appPerson-check-item" appPerson="<c:out value='${appPerson.appPersonId}'/>">
+								<input type="checkbox" class="check-item" appPerson="<c:out value='${appPerson.appPersonId}'/>">
 								<span class="lbl"></span></label>
 								</td>
 								<td class="center" style="text-align:center"> ${status.count} </td>
@@ -79,8 +76,7 @@
 							</c:forEach>
 						  </tbody>
 						</table>
-						</form>
-						</div></div></div>
+						</div></div>
 <script type="text/javascript">
 
 	function addAppPerson(){
@@ -88,23 +84,23 @@
 		location.href = url
 	}
 	
-	$('tr th input.appPerson-check-item').click(function() {
+	$('tr th input.check-item').click(function() {
 		var checked = $(this).prop("checked");
 		
 		if (checked) {
-			$('tr td input.appPerson-check-item').each(function() {
+			$('tr td input.check-item').each(function() {
 				$(this).prop("checked", true);
 			});
 		} else {
-			$('tr td input.appPerson-check-item').each(function() {
+			$('tr td input.check-item').each(function() {
 				$(this).prop("checked", false);
 			});
 		}
 	});
 	
-	$('tr td input.appPerson-check-item').click(function() {
+	$('tr td input.check-item').click(function() {
 		var allChecked = true;
-		var friendCheckboxes = $('tr td input.appPerson-check-item');
+		var friendCheckboxes = $('tr td input.check-item');
 		
 		if ($(this).checked) {
 			for (var i = 0; i < friendCheckboxes.length; i++) {
@@ -118,31 +114,32 @@
 		}
 		
 		if (allChecked) {
-			$('tr th input.appPerson-check-item').prop("checked", true);
+			$('tr th input.check-item').prop("checked", true);
 		} else {
-			$('tr th input.appPerson-heck-item').prop("checked", false);
+			$('tr th input.check-item').prop("checked", false);
 		}
 	});
 	
-	function batchShare() {
-		var appPersonSelected = formutil.anyCheckboxItemSelected('tr td input.appPerson-check-item');
+	function batchShareAppPerson() {
+		var appPersonSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
 		var uniqueAppPersonNos = []
 		if (!appPersonSelected) {
 			formutil.alertMessage('请选择申请人');
 			
 			return;
 		}
-		var appPersons_checked=formutil.getAllCheckedCheckboxValues('tr td input.appPerson-check-item', 'appPerson');
+		var appPersons_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'appPerson');
 		for (var i = 0; i < appPersons_checked.length; i++) {
-			if ($.inArray(appPersons_checked[i], uniqueappPersonNos) == -1) {
+			if ($.inArray(appPersons_checked[i], uniqueAppPersonNos) == -1) {
 				uniqueAppPersonNos.push(appPersons_checked[i]);
 			}
 		}		
-		var appPersons = uniqueappPersonNos.join(",");		
-		location.href = "<s:url value='/appPerson/showFriends.html'/>?appPersons=" + appPersons;
+		var appPersons = uniqueAppPersonNos.join(",");		
+		var url = "<s:url value='/appPerson/showFriends.html'/>?appPersons=" + appPersons;
+		location.href= url
 	}
 </script>
-<script>
+<%-- <script>
 	 $(document).ready(function(){
 	
 		$("img[class=cgh]").click(function(){
@@ -161,6 +158,6 @@
 				}
 		});
 	});
-</script>						
+</script>				 --%>		
 </body>
 </html>

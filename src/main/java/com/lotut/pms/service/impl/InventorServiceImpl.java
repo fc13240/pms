@@ -42,5 +42,10 @@ public class InventorServiceImpl implements InventorService{
 	public List<CommonInventor> getInventor(String inventor) {
 		return inventorDao.getInventorByName(inventor);
 	}
+	@Override
+	public List<CommonInventor> getUserInventors(int userId) {
+		// TODO Auto-generated method stub
+		return inventorDao.getUserInventors(userId);
+	}
 	
 }

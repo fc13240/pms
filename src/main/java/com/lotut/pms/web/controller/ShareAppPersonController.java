@@ -45,7 +45,7 @@ public class ShareAppPersonController {
 			}
 		}
 		
-		shareAppPersonService.insertShareAppPersons(shareAppPersonRecords, userAppPersonRecords);
+		shareAppPersonService.shareAppPersons(shareAppPersonRecords, userAppPersonRecords);
 		return "app_person_list";
 	}
 

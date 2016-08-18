@@ -5,6 +5,6 @@ import java.util.Map;
 
 public interface ShareAppPersonDao {
 	void insertUserAppPersons(List<Map<String, Integer>> userAppPersonRecords);
-	void insertShareAppPersons(List<Map<String, Integer>> shareAppPersonRecords,
+	void shareAppPersons(List<Map<String, Integer>> shareAppPersonRecords,
 			List<Map<String, Integer>> userAppPersonRecords);
 }

@@ -10,6 +10,6 @@ public interface InventorDao {
 	CommonInventor getInventorById(int id);
 	void updateById(CommonInventor inventor);
 	 void deleteById(int id);
-	 
+	 List<CommonInventor> getUserInventors(int userId);
 	 List<CommonInventor> getInventorByName(String inventor);
 }
