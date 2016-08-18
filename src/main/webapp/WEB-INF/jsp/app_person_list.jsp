@@ -70,7 +70,7 @@
 								<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
 								<td style="text-align:center"><c:out value="${appPerson.shareUsersAsString}"/></td>
 								<td><a href="<s:url value='/appPerson/findOneAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a> 
-								<a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteappPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">删除 </a>
+								<a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">删除 </a>
 								<a href="<s:url value='/appPerson/showFriends.html'/>?appPersons=<c:out value='${appPerson.appPersonId}'/>">分享</a>
 								</td>
 							  </tr>
