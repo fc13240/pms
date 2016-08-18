@@ -17,6 +17,7 @@
 		<result property="abstractDescription" column="abstract_desc"/>
 		<result property="abstractImg" column="abstract_img"/>
 		<result property="patentDocAttachmentFile" column="patent_doc_attachment_file"/>
+		<result property="patentDocUrl" column="patent_doc_url"/>
 	</resultMap>
 
 		<resultMap type="Attachment" id="PatentImgMap">
@@ -37,7 +38,7 @@
 	
 	<select id="getUserPatentDoc"  resultMap="PatentDocMap">
 		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
-		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file from patent_documents where user_Id=#{userId} order by create_time desc ,last_update_time desc
+		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,patent_doc_url from patent_documents where user_Id=#{userId} order by create_time desc ,last_update_time desc
 	</select> 
 	
 	
