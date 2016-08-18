@@ -33,7 +33,7 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
-					<form action="<s:url value='/appPerson/addContactInfo.html'/>" method="post" onsubmit="return check()">
+					<form action="<s:url value='/appPerson/updContactInfo.html'/>" method="post" onsubmit="return check()">
 					  <se:csrfInput/>
 			       	<h5>姓名或名称:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;"  id="numberRece" type="text" value="${appPerson.name }" name="name" required onblur="validateInfoNumber(this.value)"/>
@@ -53,10 +53,10 @@
 					<br>		  
 			       	<h5>邮编及地址:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" value="${appPerson.postcodeAddress }" name="postcodeAddress" required onblur="validateInfoNumber1(this.value)"/>
-					<span style="color: red; display: none;" id=numberError1>该处应输入不大于20字段</span>
+					<span style="color: red; display: none;" id=numberError1>请输入正确的证件号码</span>
 					<br>
 					<h5>其他信息:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" value="${appPerson.otherInfo }" name="otherInfo" required onblur="validateCommentNumber(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" value="${appPerson.otherInfo }" name="otherInfo"  onblur="validateCommentNumber(this.value)"/>
 					<span style="color: red; display: none;" id=numberError>该处应输入不大于50字段</span>
 					<br>      
 					<input type="hidden" class="form-control" name="appPersonId"  value="${appPerson.appPersonId}"/>
@@ -102,6 +102,7 @@
 				return true;
 			}
 		}
+		return true;
 	}
 
 	function validateInfoNumber(phoneNumber) {
@@ -131,6 +132,7 @@
 				return true;
 			}
 		} 
+		return true;
 	}
 
 	function check() {

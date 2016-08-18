@@ -53,10 +53,10 @@
 					<br>		  
 			       	<h5>邮编及地址:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" name="postcodeAddress" required onblur="validateInfoNumber1(this.value)"/>
-					<span style="color: red; display: none;" id=numberError1>该处应输入不大于20字段</span>
+					<span style="color: red; display: none;" id=numberError1>邮编及地址</span>
 					<br>
 					<h5>其他信息:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" name="otherInfo" required onblur="validateCommentNumber(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" name="otherInfo"  onblur="validateCommentNumber(this.value)"/>
 					<span style="color: red; display: none;" id=numberError>该处应输入不大于50字段</span>
 					<br>      
 					<div style="height:20px;"></div> 
@@ -101,6 +101,7 @@
 				return true;
 			}
 		}
+		return true;
 	}
 
 	function validateInfoNumber(phoneNumber) {
@@ -113,10 +114,8 @@
 			} else {
 				return true;
 			}
-		} else {
-			document.getElementById("numberError").style.display = "";
-			return false;
-		}
+		} 
+		return true;
 	}
 
 	function validateCommentNumber(phoneNumber) {
@@ -130,6 +129,7 @@
 				return true;
 			}
 		} 
+		return true;
 	}
 
 	function check() {

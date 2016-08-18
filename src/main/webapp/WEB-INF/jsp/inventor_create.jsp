@@ -36,27 +36,27 @@
 					<form action="<s:url value='/inventor/addContactInfo.html'/>" method="post" onsubmit="return check()">
 					  <se:csrfInput/>
 			       	<h5>姓名:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece" type="text" name="InventorName" required onblur="validateInfoNumber(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece" type="text" name="inventorName" required onblur="validateInfoNumber(this.value)"/>
 					<span style="color: red; display: none;" id=numberError>该处应输入不大于20字段</span>
 					<br>	   
 					<h5>证件号码:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" name="InventorNumber" required onblur="validatePhoneNumber(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" name="inventorNumber" required onblur="validatePhoneNumber(this.value)"/>
 					<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
 					<br>		  
 			       	<h5>国籍:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" name="InventorNationality" value="中国" required onblur="validateInfoNumber1(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" name="inventorNationality" value="中国" required onblur="validateInfoNumber1(this.value)"/>
 					<span style="color: red; display: none;" id=numberError1>该处应输入不大于20字段</span>
 					<br>		  
 			       	<h5>电话:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" name="InventorMobile" required onblur="validateInfoNumber2(this.value)"/>
-					<span style="color: red; display: none;" id=numberError2>该处应输入不大于20字段</span>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" name="inventorMobile" required onblur="validateInfoNumber2(this.value)"/>
+					<span style="color: red; display: none;" id=numberError2>请输入正确的电话号码</span>
 					<br>		  
 			       	<h5>邮箱:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece3" type="text" name="InventorEmail" required onblur="validateInfoNumber3(this.value)"/>
-					<span style="color: red; display: none;" id=numberError3>该处应输入不大于20字段</span>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece3" type="text" name="inventorEmail" required onblur="validateInfoNumber3(this.value)"/>
+					<span style="color: red; display: none;" id=numberError3>请输入正确的邮箱</span>
 					<br>
 					<h5>其他信息:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" name="InventorComment"  onblur="validateCommentNumber(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" name="inventorComment"  onblur="validateCommentNumber(this.value)"/>
 					<span style="color: red; display: none;" id=commentError>该处应输入不大于50字段</span>
 					<br>      
 					<div style="height:20px;"></div> 
@@ -103,6 +103,7 @@ function validateInfoNumber1(phoneNumber) {
 			return true;
 		}
 	}
+	return true;
 }
 
 function validateInfoNumber2(phoneNumber) {
@@ -147,10 +148,8 @@ function validateInfoNumber(phoneNumber) {
 		} else {
 			return true;
 		}
-	} else {
-		document.getElementById("numberError").style.display = "";
-		return false;
-	}
+	} 
+	return true;
 }
 
 function validateCommentNumber(phoneNumber) {
@@ -164,6 +163,7 @@ function validateCommentNumber(phoneNumber) {
 			return true;
 		}
 	} 
+	return true;
 }
 
 function check() {
