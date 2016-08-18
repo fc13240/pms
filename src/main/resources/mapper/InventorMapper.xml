@@ -49,7 +49,7 @@
 	</select>
 	
 	<update id="updateById" parameterType="CommonInventor">
-		update common_inventor set inventor_name=#{inventorName} ,inventor_id_number=#{inventorNationality},
+		update common_inventor set inventor_name=#{inventorName} ,inventor_id_number=#{inventorNumber},
 		inventor_nationality=#{inventorNationality},inventor_mobile=#{inventorMobile},inventor_email=#{inventorEmail},
 		inventor_other_information=#{inventorComment} where inventor_id=#{inventorId}
 	
