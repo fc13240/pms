@@ -408,7 +408,8 @@
 										</select> 
 									</td>
 									<td>
-									<button id="appPersonBtn" style="display: none;" class="button button-caution button-rounded" type="button">点我新增</button>
+									<button id="appPersonBtn" style="display: none;" class="button button-caution button-rounded" type="button" onclick="">点我新增</button>
+									<button id="appPersonBtn" style="font-size: 12px;" class = "btn btn-primary btn-lg" data-toggle = "modal" data-target = "#myModal" onclick="lockWindow()">新增</button>
 									</td>
 									</tr>
 									<tr>
@@ -769,44 +770,101 @@
 	
 	    </div>
 	    
-	    
-	    <script type="text/javascript">
-			function submitForm(){
-				$.ajax({
-					type: "POST",
-					url: "<s:url value='/editor/addEditorText.html'/>",
-					data: {"editorContent":editor1.html()},
-					success: function(data){
-						if(data){
-							alert(data)
-							$("textarea[name=editorContent]").val("");
-							editor1.html("");
-							
-						}
-					},
-					error: function(){
-						alert("操作失败");
-					}
-				});
-			};
-			function alertText(){
-				var x=$("#editorContent").val();
-				alert(x);
-				KindEditor.appendHtml('#editorContent1', x);
+<!-- Modal -->
+<div style="display: none;">
+<button id="hiddenButton" type="button" style="font-size: 12px;" class = "btn btn-primary btn-lg" data-toggle = "modal" data-target = "#myModal">
+		隐藏按钮
+</button>
+</div>
+<div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true">
+   
+   <div class = "modal-dialog">
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+               ×
+            </button>
+            
+            <h4 class = "modal-title" id = "myModalLabel">
+               	编辑广告信息
+            </h4>
+         </div>
+         
+          <form role="form"  action="<s:url value='/patent/advertisement/addAdvertisement.html'/>" id="advertisement" method="post">
+	         <div class = "modal-body">
+	           
+					<div class="form-group">
+					<label for="male">商铺网站链接</label>
+					<input type="text" class="form-control" name="storeLink" placeholder="请输入商铺链接" value="http://">
+					<label for="male">申请人网站链接</label>
+					<input type="text" class="form-control" name="personLink" placeholder="请输入申请人链接" value="http://">
+					<label for="male">代理机构网站链接</label>
+					<input type="text" class="form-control" name="proxyOrgLink" placeholder="请输入代理商链接" value="http://">
+					<input type="hidden" name="appNo" id="appNo" value="">
+					<input type="hidden" name="patentName" id="patentName" value="">
+					<input type="hidden" name="patentId" id="patentId" value="">
+					<input type="hidden" name="patentIds" id="patentIds" value="">
+					</div>
 				
-			};
-			
-			function findPatentDoc(patentDocId){
-				
-				var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocId="+patentDocId;
-				location.href=url;
-				
-				
-			};
-			
-
-
-	</script>
+	         </div>
+	         
+	         <div class = "modal-footer">
+	            <button type = "button" class = "btn btn-default" data-dismiss = "modal" id="closeButton">
+	              	关闭
+	            </button>
+	            
+	            <button type = "submit" class = "btn btn-primary">
+	               	确认
+	            </button>
+	         </div>
+         </form>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+<!-- /.modal -->	
+</div>
+	
+<script>
+	function lockWindow()() { 
+		$('#myModal').modal({backdrop: 'static'})
+	}
+   
+</script>
+ <script type="text/javascript">
+	function submitForm(){
+		$.ajax({
+			type: "POST",
+			url: "<s:url value='/editor/addEditorText.html'/>",
+			data: {"editorContent":editor1.html()},
+			success: function(data){
+				if(data){
+					alert(data)
+					$("textarea[name=editorContent]").val("");
+					editor1.html("");
+					
+				}
+			},
+			error: function(){
+				alert("操作失败");
+			}
+		});
+	};
+	function alertText(){
+		var x=$("#editorContent").val();
+		alert(x);
+		KindEditor.appendHtml('#editorContent1', x);
+		
+	};
+	
+	function findPatentDoc(patentDocId){
+		
+		var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocId="+patentDocId;
+		location.href=url;
+		
+		
+	};
+</script>
 	<script type="text/javascript">
 	var p=1;
 	$('input[id=patentFile]').change(function() {  
