@@ -12,11 +12,11 @@ public interface InventorMapper {
 	 CommonInventor getInventorById(int id);
 	 void updateById(CommonInventor inventor);
 	 void deleteById(int id);
-<<<<<<< HEAD
+
 	 List<CommonInventor> getInventorByName(@Param("inventor") String inventor);
 	 List<CommonInventor> getUserInventors(int userId);
-=======
+
 	 List<CommonInventor> getInventorByName(@Param("inventor") String inventor,@Param("userId") int userId);
->>>>>>> e291817510070760d64ed99f894cdb1267f785a4
+
 
 }

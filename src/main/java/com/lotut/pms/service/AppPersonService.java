@@ -14,12 +14,9 @@ public interface AppPersonService {
 	void deleteAppPersonById(int id);
 
 	List<CommonAppPerson> getUserAppPersons(int userId);
-
-	
-<<<<<<< HEAD
+/*
 	List<CommonAppPerson> getAppPersonByName(String appPerson,int userId);
-=======
-	List<CommonAppPerson> getAppPersonByName(String appPerson);
 
->>>>>>> 873ed05ffa0c6cefc5b6da50ed50971790d8e800
+	List<CommonAppPerson> getAppPersonByName(String appPerson);*/
+
 }
