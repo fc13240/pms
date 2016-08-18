@@ -906,7 +906,7 @@
 		  <thead>
 			<tr class="simple_bag">
 			  <th class="center"> <label class="pos-rel">
-				<input style="width:15px;" type="checkbox" class="check-item">
+				<input style="width:15px;" type="checkbox" class="check-item" id="checkall">
 				<span class="lbl"></span> </label>
 			  </th>
 			  <th class="center" width="50">序号</th>
@@ -962,21 +962,18 @@
 			
 		})
 	}
-	
-	
+
+	$("#checkall").click(function(){
+		alert("-----");
+		   if ($(this).is(':checked')) {
+		        $('.check-item').prop('checked','checked');
+		    }else{
+		        $('.check-item').removeProp('checked');
+		    }
+	 })
    
 </script>
  <script type="text/javascript">
- 
- $(function () {
-	  $('[data-toggle="tooltip"]').tooltip()
-	});
-	$(function(){
-		formutil.clickAllCheckbox('tr td input.check-item', 'tr td input.check-item');
-		formutil.clickItemCheckbox('tr td input.check-item', 'tr td input.check-item');
-	});
-	
-	
 	function batchShare() {
 		var appPersonSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
 		var uniquePatentNos = []
