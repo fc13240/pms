@@ -48,8 +48,8 @@ public class InventorMybatisDao extends SqlSessionDaoSupport implements Inventor
 	}
 
 	@Override
-	public List<CommonInventor> getInventorByName(String inventor) {
-		return inventorMapper.getInventorByName(inventor);
+	public List<CommonInventor> getInventorByName(String inventor,int userId) {
+		return inventorMapper.getInventorByName(inventor,userId);
 	}
 
 	@Override

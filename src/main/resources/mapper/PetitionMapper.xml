@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.lotut.pms.dao.mapper.PetitionMapper">
+	<insert id="addAppPerson">
+		insert into petition_applicant(app_person_id,patent_doc_id) values(#{appPersonId},#{patentDocId});
+	</insert>
+	
+	<select id="checkAppPerson" resultType="int">
+		select count(*) from petition_applicant where app_person_id=#{appPersonId} and patent_doc_id=#{patentDocId}
+	</select>
+  </mapper>
+  

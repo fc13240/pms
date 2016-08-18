@@ -94,4 +94,9 @@
 		update patent_documents set patent_doc_url=#{patentDocUrl,javaType=string,jdbcType=VARCHAR}
 		where  patent_doc_id=#{patentDocId}
 	</update>
+	
+	<select id="getPatentDocUrlById"  resultType="string">
+		select patent_doc_url from patent_documents where  patent_doc_id=#{patentDocId}
+	</select>
+	
 </mapper>

@@ -108,7 +108,12 @@ public class AppPersonController {
 	@RequestMapping(path="/loadAppPersoner")
 	public void loadInventor(@RequestParam("appPersoner") String appPersoner, HttpServletResponse response){
 		response.setContentType("application/json;charset=UTF-8");
+<<<<<<< HEAD
 		List<CommonAppPerson> appPersoners=AppPersonService.getAppPersonByName(appPersoner);
+=======
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<CommonAppPerson> appPersoners=appPersonService.getAppPersonByName(appPersoner,userId);
+>>>>>>> e291817510070760d64ed99f894cdb1267f785a4
 		try{
 			Map<String, Object> map = new HashMap<>();
 			map.put("appPersoners", appPersoners);

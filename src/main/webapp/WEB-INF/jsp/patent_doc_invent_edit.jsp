@@ -397,37 +397,54 @@
 									<table>
 									<tr>
 									<td>
-									申请人:<input class="t-input form-control" type="text" name="appPerson" id="appPerson" placeholder="在已有申请人中搜索" style="width: 200px" onblur="loadProposer()"/> 
+									申请人:
 									</td>
 									<td>
-									<button class="button button-caution button-rounded" type="button">新增</button>
+									<select id="appPerson" style="width:100px;" class="selectPointOfInterest form-control" onclick="displayBtn('appPersonBtn')" onchange="addAppPerson(this.value)">
+											<option value="-1" selected="selected">请选择</option>
+											<c:forEach items="${appPersons}" var="appPerson">
+												<option value="${appPerson.appPersonId}">${appPerson.name}</option>
+											</c:forEach>
+										</select> 
+									</td>
+									<td>
+									<button id="appPersonBtn" style="display: none;" class="button button-caution button-rounded" type="button">点我新增</button>
 									</td>
 									</tr>
 									<tr>
 									<td>
-									发明人：<input class="t-input form-control" type="text" name="inventor" id="inventor" placeholder="在已有发明人中搜索" style="width: 200px" onblur="loadInventor()"/>
+									发明人:
 									</td>
 									<td>
-									<button class="button button-caution button-rounded" type="button">新增</button><br/>
+									<select id="inventor" style="width:100px;" class="selectPointOfInterest form-control" onclick="displayBtn('inventorBtn')" onchange="">
+											<option value="-1" selected="selected">请选择</option>
+											<c:forEach items="${inventors}" var="inventor">
+												<option value="${inventor.inventorId}">${inventor.inventorName}</option>
+											</c:forEach>
+										  </select> 
+									</td>
+									<td>
+									<button id="inventorBtn" style="display: none;" class="button button-caution button-rounded" type="button">点我新增</button><br/>
 									</td>
 									</tr>
 									<tr>
 									<td>
-									联系人：<input class="t-input form-control" type="text" name="contacts" id="contacts" placeholder="在已有联系人中搜索" style="width: 200px" onblur="loadContacts(this.value)"/>
+									联系人:
 									</td>
 									<td>
-									<button class="button button-caution button-rounded" type="button">新增</button>
+									<select id="contact" style="width:100px;" class="selectPointOfInterest form-control" onclick="displayBtn('contactBtn')" onchange="">
+											<option value="-1" selected="selected">请选择</option>
+											<c:forEach items="${contactAddresses}" var="contactAddress">
+												<option value="${contactAddress.userId}">${contactAddress.receiver}</option>
+											</c:forEach>
+										  </select>
+									</td>
+									<td>
+									<button id="contactBtn" style="display: none;" class="button button-caution button-rounded" type="button">点我新增</button>
 									</td>
 									</tr>
 									</table>
 								</div>
-								
-								
-								
-								
-								
-								
-								
 							</div>
 						</div>
 						<input id="hideditor3id" type="hidden" autocomplete="off">
@@ -442,8 +459,6 @@
 							</div>
 							<div class="cl">
 								<div id="editor7" thisid="" thistempid="" photo_fid="">
-									<div class="upimg1" onclick="autoabstract();" style=" margin-left:50px">
-										自动生成摘要</div>
 									<div class="instru">
 										<div class="title2">蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
 										</div>
@@ -1166,70 +1181,7 @@ function loadImgs(){
 			//}
 		//});
 	//} 
-	$(function() {
-		var inventors = [];
-		var appPersons = [];
-		var contacts = [];
-		<c:forEach items="${inventors}" var="inventor">
-			inventors.push("${inventor.inventorName}");
-		</c:forEach>;
-		
-		<c:forEach items="${appPersons}" var="appPerson">
-			appPersons.push("${appPerson.name}");
-		</c:forEach>;
-		
-		<c:forEach items="${contactAddresses}" var="contactAddress">
-			contacts.push("${contactAddress.receiver}");
-		</c:forEach>;
-	     $().ready(function() {
-	     	$("#inventor").autocomplete(inventors);	
-	     	$("#appPerson").autocomplete(appPersons);
-	     	$("#contacts").autocomplete(contacts);
-	     });
-	});
-
-	function resetSelect() {
-		for (var i = 0; i < arguments.length; i++) {
-			var selectObj = arguments[i];
-			selectObj.empty();
-			addDefaultOption(selectObj);
-		}
-	}
-
-	function addInventorOptions(options) {
-		$.each(options, function(index, inventor){
-			selectObj.append("<option value='" + inventor.inventorName + "'>" + inventor.inventorName + "</option>");
-		});	
-	}
-	function loadInventor(){
-		var inventor = $("#inventor").val();
-		$.ajax({
-			type :'POST',
-			url : "<s:url value='/inventor/loadInventor.html'/>?inventor="+inventor,
-			success : function(result){
-				 resetSelect();
-				addInventorOptions(result.inventors);
-			}
-		})
-	}
 	
-	function addProposeOptions(options) {
-		$.each(options, function(index, proposer){
-			selectObj.append("<option value='" + proposer.name + "'>" + proposer.name + "</option>");
-		});	
-	}
-	function loadProposer(){
-		var appPersoner = $("#appPerson").val();
-		$.ajax({
-			type :'POST',
-			url : "<s:url value='/appPerson/loadAppPersoner.html'/>",
-			data : {"appPersoner":appPersoner},
-			success : function(result){
-				 resetSelect();
-				addProposerOptions(result.appPersoners);
-			}
-		})
-	}
 	function downloadFile(){
 		var patentDocId=$("#patentDocId").val();
 		$.ajax({
@@ -1244,21 +1196,50 @@ function loadImgs(){
 		})
 	}
 	
-	function addContactsOptions(options){
-		$.each(options,function(index,contact){
-			selectObj.append("option value='"+contact.id+"'>'"+contact.receiver+"'</option>")
-		})
+	function displayBtn(id){
+		$("#"+id).css("display","block");
 	}
-	function loadContacts(contact){
+	
+	
+	function addAppPerson(appPersonId){
+		var patentDocId =$("#patentDocId").val();
+		var exitPetition = checkAppPerson(appPersonId,patentDocId);
+		if(appPersonId!=-1){
+			if(exitPetition){
+				 $.ajax({
+					type :'POST',
+					url : "<s:url value='/petition/addAppPerson.html'/>",
+					data :{"appPersonId":appPersonId,"patentDocId":patentDocId},
+					success : function (data){
+						alert(data);
+					},error: function (){
+						
+					}
+				})
+			}else{
+				alert("已经添加过该申请人,请不要重复添加!");
+			}
+		}
+	}
+	
+	function checkAppPerson(appPersonId,patentDocId){
+		var result = false;
 		$.ajax({
-			type : 'POST',
-			url : "<s:url value='/user/getContactAddressByReceiver.html'/>",
-			data :{"receiver":contact},
-			success : function (result){
-				resetSelect();
-				//addContactsOptions(result);
+			type :'POST',
+			url : "<s:url value='/petition/checkAppPerson.html'/>",
+			data :{"appPersonId":appPersonId,"patentDocId":patentDocId},
+			async: false,
+			success : function (data){
+				if(data>0){
+					result = false;
+				}else{
+					result =  true;
+				}
+			},error: function (){
 			}
 		})
+		
+		return result;
 	}
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>

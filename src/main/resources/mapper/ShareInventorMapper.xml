@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lotut.pms.dao.mapper.ShareInventorMapper">
+	<resultMap type="ShareInventor" id="SharedInventorResultMap">
+		<association property="shareBy" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap" />
+		<association property="inventor" javaType="CommonInventor">
+			<id property="inventorId" column="inventor_id"/>
+			<result property="inventorName" column="inventor_name"/>
+			<result property="inventorNationality" column="inventor_nationality"/>
+			<result property="inventorMobile" column="inventor_mobile"/>
+			<result property="inventorEmail" column="inventor_email"/>
+			<result property="inventorComment" column="inventor_other_information"/>
+		</association>
+	</resultMap>
+	
+	
+	
+	<insert id="insertUserInventors" parameterType="list">
+		replace into user_inventor(user, inventor) 
+		values
+		<foreach item="userInventorRecord" collection="list" separator=",">
+			(#{userInventorRecord.user}, #{userInventorRecord.inventor})
+		</foreach>
+	</insert>	
+	
+	
+</mapper>

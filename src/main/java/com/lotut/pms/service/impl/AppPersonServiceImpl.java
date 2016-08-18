@@ -55,13 +55,12 @@ public class AppPersonServiceImpl implements AppPersonService {
 		
 	}
 
-
 	@Override
-
 	public List<CommonAppPerson> getUserAppPersons(int userId) {
 		// TODO Auto-generated method stub
 		return AppPersonDao.getUserAppPersons(userId);}
 
+	@Override
 	public List<CommonAppPerson> getAppPersonByName(String appPerson) {
 		return AppPersonDao.getAppPersonByName(appPerson);
 

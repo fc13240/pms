@@ -49,7 +49,7 @@ public class ZipUtils {
 			
 			return zipFile;
 		} catch (ZipException e) {
-			throw new RuntimeException("Input zip file parameter 'destFile' cannnot be null");
+			throw new RuntimeException(e);
 		}
 	}
 }

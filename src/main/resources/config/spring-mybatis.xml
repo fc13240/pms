@@ -98,12 +98,18 @@
 		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.InventorMapper" />
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
-	
+
+	<bean id="petitionMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.PetitionMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+
 	<bean id="shareAppPersonMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.ShareAppPersonMapper" />
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	
+<<<<<<< HEAD
 	<bean id="shareInventorMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.ShareInventorMapper" />
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
@@ -112,6 +118,8 @@
 	
 	
 	
+=======
+>>>>>>> e291817510070760d64ed99f894cdb1267f785a4
 	<bean name="userDao" class="com.lotut.pms.dao.mybatis.UserMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 		<property name="userMapper" ref="userMapper" />
@@ -180,6 +188,12 @@
 	<bean name="inventorDao" class="com.lotut.pms.dao.mybatis.InventorMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 		<property name="inventorMapper" ref="inventorMapper" />
+	</bean>
+	
+	<bean name="petitionDao" class="com.lotut.pms.dao.mybatis.PetitionMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+		<property name="petitionMapper" ref="petitionMapper"/>
+
 	</bean>	
 	
 	<bean name="shareAppPersonDao" class="com.lotut.pms.dao.mybatis.ShareAppPersonMybatisDao">
