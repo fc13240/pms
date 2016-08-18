@@ -892,15 +892,9 @@
 <div id="appPersonListDiv" style="display:none;">
 	<div>
 		<div>
-			<table>
-			<tr>
-			 <td>
-				<a href="javascript:return void" onclick="batchShare()" >
-				<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
-				</a> 
-			</td>
-			</tr>
-			</table>
+			<a href="javascript:return void" onclick="batchShareAppPerson()" >
+							<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
+			</a> 
 		</div>
 		<table id="simple-table" class="table table-striped table-bordered table-hover">
 		  <thead>
@@ -972,8 +966,8 @@
 	  $('[data-toggle="tooltip"]').tooltip()
 	});
 	$(function(){
-		formutil.clickAllCheckbox('tr td input.check-item', 'tr td input.check-item');
-		formutil.clickItemCheckbox('tr td input.check-item', 'tr td input.check-item');
+		formutil.clickAllCheckbox('tr th input.check-item', 'tr td input.check-item');
+		formutil.clickItemCheckbox('tr th input.check-item', 'tr td input.check-item');
 	});
 	
 	
