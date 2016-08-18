@@ -763,7 +763,7 @@
 </button>
 </div>
 <div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" 
-   aria-labelledby = "myModalLabel" aria-hidden = "true">
+   aria-labelledby = "myModalLabel" aria-hidden = "true" >
    
    <div class = "modal-dialog">
       <div class = "modal-content">
@@ -890,25 +890,23 @@
 
 
 <div id="appPersonListDiv" style="display:none;">
-	<div>
 		<div>
-			<a href="javascript:return void" onclick="batchShareAppPerson()" >
+			<a href="javascript:return void" onclick="batchShareAppPerson()" id="batchShareAppPerson" >
 							<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
 			</a> 
 		</div>
-		<table id="simple-table" class="table table-striped table-bordered table-hover">
+		<table id="simple-table" class="table table-striped table-bordered table-hover" style="width:800px">
 		  <thead>
 			<tr class="simple_bag">
-			  <th class="center"> <label class="pos-rel">
+			  <th class="center">
 				<input style="width:15px;" type="checkbox" class="check-item" id="checkall">
-				<span class="lbl"></span> </label>
 			  </th>
-			  <th class="center" width="50">序号</th>
-			  <th width="90px">姓名或名称</th>
-			  <th width="150px">申请人类型</th>
+			  <th class="center" >序号</th>
+			  <th>姓名或名称</th>
+			  <th>申请人类型</th>
 			  <th>证件号码 </th>
 			  <th>邮编及地址</th>
-			  <th width="120px">其它信息</th>
+			  <th>其它信息</th>
 			</tr>
 		  </thead>
 		  <tbody>
@@ -929,86 +927,10 @@
 			</c:forEach>
 		  </tbody>
 	 </table>
-	
-	
-	
-	</div>
 </div>
-
-<script>
-	
-	function submitForm(formId){
-		var appPersonName = $("#appPersonName").val();
-		var appPersonType = $("#appPersonType").val();
-		var phoneRece = $("#phoneRece").val();
-		var postcodeAddress = $("#postcodeAddress").val();
-		var otherInfo = $("#otherInfo").val();
-		var patentDocId =$("#patentDocId").val();
-		 $.ajax({
-			type :"POST",
-			url : "<s:url value='/petition/addCommonAppPerson.html'/>",
-			data :{"name":appPersonName,"type":appPersonType,"phoneRece":phoneRece,"postcodeAddress":postcodeAddress,"otherInfo":otherInfo,"patentDocId":patentDocId},
-			dataType : 'text',
-			success : function (data){
-				$("#resetBtn").trigger("click");
-				alert(data);
-			}
-			
-		})
-	}
-
-	$("#checkall").click(function(){
-		alert("-----");
-		   if ($(this).is(':checked')) {
-		        $('.check-item').prop('checked','checked');
-		    }else{
-		        $('.check-item').removeProp('checked');
-		    }
-	 })
-   
-</script>
- <script type="text/javascript">
- $(function () {
-	  $('[data-toggle="tooltip"]').tooltip()
-	});
-	$(function(){
-		formutil.clickAllCheckbox('tr th input.check-item', 'tr td input.check-item');
-		formutil.clickItemCheckbox('tr th input.check-item', 'tr td input.check-item');
-	});
-	function batchShare() {
-		var appPersonSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		var uniquePatentNos = []
-		if (!patentSelected) {
-			formutil.alertMessage('请选择申请人');
-			
-			return;
-		}
-		var appPerson_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'appPerson');
-		for (var i = 0; i < appPerson_checked.length; i++) {
-			if ($.inArray(appPerson_checked[i], uniquePatentNos) == -1) {
-				uniquePatentNos.push(appPerson_checked[i]);
-			}
-		}		
-		var patents = uniquePatentNos.join(",");		
-		//location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
-	}
-
-	function alertText(){
-		var x=$("#editorContent").val();
-		alert(x);
-		KindEditor.appendHtml('#editorContent1', x);
-		
-	};
-	
-	function findPatentDoc(patentDocId){
-		
-		var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocId="+patentDocId;
-		location.href=url;
-		
-		
-	};
-</script>
 	<script type="text/javascript">
+
+	
 	var p=1;
 	$('input[id=patentFile]').change(function() {  
 		$('#filename').val($(this).val());  
@@ -1416,7 +1338,8 @@ function loadImgs(){
 		}
 		$("#modal-body").html(form);
 		$("#hiddenButton").trigger("click");
-		lockWindow();
+		formutil.clickAllCheckbox('tr th input.check-item', 'tr td input.check-item');
+		formutil.clickItemCheckbox('tr th input.check-item', 'tr td input.check-item');		
 	}
 	
 	
