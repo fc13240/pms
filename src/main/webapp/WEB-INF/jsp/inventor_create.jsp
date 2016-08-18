@@ -56,7 +56,7 @@
 					<span style="color: red; display: none;" id=numberError3>该处应输入不大于20字段</span>
 					<br>
 					<h5>其他信息:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" name="InventorComment" required onblur="validateCommentNumber(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" name="InventorComment"  onblur="validateCommentNumber(this.value)"/>
 					<span style="color: red; display: none;" id=commentError>该处应输入不大于50字段</span>
 					<br>      
 					<div style="height:20px;"></div> 
@@ -163,10 +163,7 @@ function validateCommentNumber(phoneNumber) {
 		} else {
 			return true;
 		}
-	} else {
-		document.getElementById("commentError").style.display = "";
-		return false;
-	}
+	} 
 }
 
 function check() {

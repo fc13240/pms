@@ -56,7 +56,7 @@
 					<span style="color: red; display: none;" id=numberError1>该处应输入不大于20字段</span>
 					<br>
 					<h5>其他信息:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" name="otherInfo" />
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" name="otherInfo" required onblur="validateCommentNumber(this.value)"/>
 					<span style="color: red; display: none;" id=numberError>该处应输入不大于50字段</span>
 					<br>      
 					<div style="height:20px;"></div> 
@@ -121,7 +121,7 @@
 
 	function validateCommentNumber(phoneNumber) {
 		var reg = new RegExp("^[0-9]*$");
-		document.getElementById("phoneError").style.display = "none";
+		document.getElementById("commentError").style.display = "none";
 		if (reg.test(phoneNumber)) {
 			if (phoneNumber.length>50) {
 				document.getElementById("commentError").style.display = "";
@@ -129,10 +129,7 @@
 			} else {
 				return true;
 			}
-		} else {
-			document.getElementById("commentError").style.display = "";
-			return false;
-		}
+		} 
 	}
 
 	function check() {
