@@ -9,4 +9,6 @@ public interface PetitionService {
 	List<CommonInventor> findInventorNameById(List<Long> inventorIds,int userId );
 	
 	List<CommonAppPerson> findAppPersonNameById(List<Integer> appPersonIds,int userId);
+	
+	void addCommonAppPerson(CommonAppPerson commonAppPerson);
 }

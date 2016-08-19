@@ -25,4 +25,9 @@ public class PetitionServiceImpl implements PetitionService {
 		// TODO Auto-generated method stub
 		return petitionDao.findAppPersonNameById(appPersonIds, userId);
 	}
+
+	@Override
+	public void addCommonAppPerson(CommonAppPerson commonAppPerson) {
+		petitionDao.addCommonAppPerson(commonAppPerson);	
+	}
 }

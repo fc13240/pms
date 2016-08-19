@@ -23,6 +23,12 @@
 			#{inventorId}
 		</foreach>
 	</select>
+	
+	<insert id="addCommonAppPerson" parameterType="CommonAppPerson"  useGeneratedKeys="true" keyProperty="appPersonId">
+	  	insert into common_app_person(name,type,id_number,postcode_address,other_information,user_id) 
+	  	values(#{name},#{type},#{peopleNumber},#{postcodeAddress},#{otherInfo},#{userId})
+
+  	</insert>
 
   </mapper>
   
