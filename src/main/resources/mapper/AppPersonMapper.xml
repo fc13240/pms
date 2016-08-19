@@ -19,7 +19,7 @@
 
   <insert id="addAppPerson" parameterType="CommonAppPerson" >
   	insert into common_app_person(name,type,id_number,postcode_address,other_information,user_id,fee_reduce_transaction_status) 
-  	values(#{name},#{type},#{peopleNumber},#{postcodeAddress},#{otherInfo},#{userId}),#{feeReduceTransactionStatus}
+  	values(#{name},#{type},#{peopleNumber},#{postcodeAddress},#{otherInfo},#{userId},#{feeReduceTransactionStatus})
   
   </insert>
   
@@ -80,7 +80,7 @@
   		where app_person_id =#{appPersonId}
   	</update>
   	
-  	<select id="getAppPersonUrlById" parameterType="int">
+  	<select id="getAppPersonUrlById" parameterType="int" resultType="String">
   		select app_person_attachment_file from common_app_person where app_person_id =#{appPersonId}
   	</select>
 
