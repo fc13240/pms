@@ -1468,8 +1468,8 @@ function loadImgs(){
 				$.each(obj,function(i,item){
 					
 					$("#appersonDiv").append(
-							"<span class='ss-item' id='"+item.appPersonId+"' style='margin-left:20px'>"+item.name+""+
-							"<a class='icon-btn-x' href='#' onclick='deleteAppPerson("+item.appPersonId+")'"+
+							"<span class='ss-item' id='appPerson"+item.appPersonId+"' style='margin-left:20px'>"+item.name+""+
+							"<a class='icon-btn-x' href='#' onclick='deleteTag(appPerson"+item.appPersonId+")'"+
 								">"+								
 								"<img src='<s:url value='/temp/images/remove.png'/>' style='float:left;'' />"+
 							"</a>"+
@@ -1487,12 +1487,6 @@ function loadImgs(){
 		$("#appersonModalCloseBtn").trigger("click");
 		
 	}
-	
-	function deleteAppPerson(appPerson){
-		$("#"+appPerson).remove();
-	}
-	
-	
 	
 	function batchAddInventor(){
 		var inventorSelected = formutil.anyCheckboxItemSelected('tr td input.inventor-check-item');
@@ -1519,7 +1513,7 @@ function loadImgs(){
 				$.each(obj,function(i,item){
 					$("#inventorDiv").append(
 							"<span class='ss-item' id='inventor"+item.inventorId+"' style='margin-left:20px'>"+item.inventorName+""+
-							"<a class='icon-btn-x' href='#' onclick='deleteInventor(inventor"+item.inventorId+")'"+
+							"<a class='icon-btn-x' href='#' onclick='deleteTag(inventor"+item.inventorId+")'"+
 								">"+								
 								"<img src='<s:url value='/temp/images/remove.png'/>' style='float:left;'' />"+
 							"</a>"+
@@ -1534,8 +1528,8 @@ function loadImgs(){
 		
 	}
 	
-	function deleteInventor(inventor){
-		$("#"+inventor).remove();
+	function deleteTag(tag){
+		tag.parentNode.removeChild(tag); 
 	}
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
