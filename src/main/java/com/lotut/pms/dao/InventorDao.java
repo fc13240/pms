@@ -9,12 +9,12 @@ public interface InventorDao {
 	List<CommonInventor> getAllInventorsByUser(int id);
 	CommonInventor getInventorById(int id);
 	void updateById(CommonInventor inventor);
-	 void deleteById(int id);
+	void deleteById(int id);
+	List<CommonInventor> getUserInventors(int userId);
+	List<CommonInventor> getInventorByName(String inventor);
+	List<CommonInventor> getInventorByName(String inventor,int userId);
+	void saveAttachmentFile(CommonInventor CommonInventor);
+	String  getInventorUrlById(int id);
 
-	 List<CommonInventor> getUserInventors(int userId);
-	 List<CommonInventor> getInventorByName(String inventor);
-
-	 
-	 List<CommonInventor> getInventorByName(String inventor,int userId);
 
 }

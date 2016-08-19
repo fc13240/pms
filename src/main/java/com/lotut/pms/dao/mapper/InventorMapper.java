@@ -18,6 +18,8 @@ public interface InventorMapper {
 
 	 List<CommonInventor> getInventorByName(@Param("inventor") String inventor,@Param("userId") int userId);
 	 
-
+	 void saveAttachmentFile(CommonInventor CommonInventor);
+	 
+	 String  getInventorUrlById(int id);
 
 }
