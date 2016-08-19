@@ -756,3 +756,7 @@ CREATE TABLE user_app_person(
   CONSTRAINT `fk_user_app_person_user` FOREIGN KEY (USER) REFERENCES `users` (user_id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 
+ALTER TABLE common_app_person DROP COLUMN record_status
+
+ALTER TABLE common_app_person ADD COLUMN  fee_reduce_transaction_status  VARCHAR(20) DEFAULT '未备案' COMMENT '费减备案'
+ALTER TABLE common_app_person ADD COLUMN  app_person_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址'

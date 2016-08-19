@@ -60,4 +60,18 @@ public class AppPersonServiceImpl implements AppPersonService {
 		return AppPersonDao.getUserAppPersons(userId);
 	}
 
+
+	@Override
+	public void saveAttachmentFile(CommonAppPerson AppPerson) {
+		// TODO Auto-generated method stub
+		AppPersonDao.saveAttachmentFile(AppPerson);
+	}
+
+
+	@Override
+	public String getAppPersonUrlById(int id) {
+		// TODO Auto-generated method stub
+		return AppPersonDao.getAppPersonUrlById(id);
+	}
+
 }

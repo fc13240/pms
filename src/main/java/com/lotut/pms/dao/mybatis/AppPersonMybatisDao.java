@@ -46,6 +46,16 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 		// TODO Auto-generated method stub
 		return AppPersonMapper.getUserAppPersons(userId);
 	}
+	@Override
+	public void saveAttachmentFile(CommonAppPerson AppPerson) {
+		// TODO Auto-generated method stub
+		AppPersonMapper.saveAttachmentFile(AppPerson);
+	}
+	@Override
+	public String getAppPersonUrlById(int id) {
+		// TODO Auto-generated method stub
+		return AppPersonMapper.getAppPersonUrlById(id);
+	}
 
 
 	

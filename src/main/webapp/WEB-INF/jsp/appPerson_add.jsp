@@ -55,6 +55,15 @@
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" name="postcodeAddress" required onblur="validateInfoNumber1(this.value)"/>
 					<span style="color: red; display: none;" id=numberError1>邮编及地址</span>
 					<br>
+					<h5>费减方案:</h5>
+					<select name="feeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;"  required>
+					  <option value=''>请选择</option> 	
+					  <option value="未备案">未备案</option>
+					  <option value="委托中">委托中</option>
+					  <option value="备案成功">备案成功</option>
+					  <option value="备案失败">备案失败</option>
+					</select>
+					<br>
 					<h5>其他信息:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" name="otherInfo"  onblur="validateCommentNumber(this.value)"/>
 					<span style="color: red; display: none;" id=numberError>该处应输入不大于50字段</span>
