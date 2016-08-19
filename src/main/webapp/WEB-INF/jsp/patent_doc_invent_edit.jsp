@@ -397,61 +397,48 @@
 									<table>
 										<tr>
 											<td>
-											申请人:
-											</td>
-											
-											<td>
-												<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
-															从常用申请人中选择
-													</button>
+												<button type="button" style="width:180px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
+													从常用申请人中选择
+												</button>
 											</td>
 											<td>
 												<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addAppPersonModal">
-														新增
+														新增申请人
 												</button>
-											</td>
-										</tr>
-									</table>
-									
-									<div id="appersonDiv">
-										
-									</div>
-									<table>
-										<tr>
-											<td>
-											发明人:
+											
 											</td>
 											<td>
-												<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonInventorModal">
+												<button type="button" style="width:180px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonInventorModal">
 														从常用发明人中选择
 												</button>
 											</td>
 											<td>
-											<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addInventorModal">
-														从常用发明人中选择
+												<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addInventorModal">
+														新增发明人
 											</button>
 											</td>
+											<td>
+												<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">从常用联系人中选择</button>
+											</td>
+										
+											<td>
+												<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addContactModal">新增联系人</button>
+											</td>
+										
 										</tr>
 									</table>
-									<div id="inventorDiv">
+									<div>
+										<h2>申请人:</h2>
+										<div id="appersonDiv">
+									
+										</div>
+										<br/>
+										
+										<h2>发明人:</h2>
+										<div id="inventorDiv">
 										
 									</div>
-								
-									<table>
-									<tr>
-									<td>
-									联系人:
-									</td>
-									<td>
-										<!-- <button id="appPersonBtn" class="button button-caution button-rounded" type="button">从常用联系人中选择</button> -->
-									</td>
-									<td>
-										<textarea rows="3" cols="3">
-										
-										</textarea>
-									</td>
-									</tr>
-									</table>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -841,6 +828,7 @@
 <!--addAppPersonModal  -->
 <div class = "modal fade" id = "addAppPersonModal" tabindex = "-1" role = "dialog" 
    aria-labelledby = "myModalLabel" aria-hidden = "true" >
+   
    <div class = "modal-dialog" >
       <div class = "modal-content">
          
@@ -1426,7 +1414,7 @@ function loadImgs(){
 							"<span class='ss-item' id='appPerson"+item.appPersonId+"' style='margin-left:20px'>"+item.name+""+
 							"<a class='icon-btn-x' href='#' onclick='deleteTag(appPerson"+item.appPersonId+")'"+
 								">"+								
-								"<img src='<s:url value='/temp/images/remove.png'/>' style='float:left;'' />"+
+								"<img src='<s:url value='/temp/images/remove.png'/>'  />"+
 							"</a>"+
 						 "</span>"
 					)
@@ -1442,6 +1430,12 @@ function loadImgs(){
 		$("#appersonModalCloseBtn").trigger("click");
 		
 	}
+	
+	function deleteAppPerson(appPerson){
+		$("#"+appPerson).remove();
+	}
+	
+	
 	
 	function batchAddInventor(){
 		var inventorSelected = formutil.anyCheckboxItemSelected('tr td input.inventor-check-item');
@@ -1467,10 +1461,10 @@ function loadImgs(){
 				var obj= $.parseJSON(data);
 				$.each(obj,function(i,item){
 					$("#inventorDiv").append(
-							"<span class='ss-item' id='inventor"+item.inventorId+"' style='margin-left:20px'>"+item.inventorName+
+							"<span class='ss-item' id='inventor"+item.inventorId+"' style='margin-left:20px'>"+item.inventorName+""+
 							"<a class='icon-btn-x' href='#' onclick='deleteTag(inventor"+item.inventorId+")'"+
 								">"+								
-								"<img src='<s:url value='/temp/images/remove.png'/>' style='float:left;'/>"+
+								"<img src='<s:url value='/temp/images/remove.png'/>' />"+
 							"</a>"+
 						 "</span>"
 					)
@@ -1482,7 +1476,6 @@ function loadImgs(){
 		$("#inventorModalCloseBtn").trigger("click");
 		
 	}
-
 	function deleteTag(tag){
 		tag.parentNode.removeChild(tag); 
 	}

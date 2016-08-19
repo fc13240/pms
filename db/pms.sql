@@ -778,3 +778,5 @@ CREATE TABLE patent_doc_app_person(
 	CONSTRAINT fk_patent_doc_app_person_doc_id FOREIGN KEY idx_fk_patent_doc_app_person_doc_id(patent_doc_id) REFERENCES patent_documents(patent_doc_id) ON   DELETE   CASCADE
 )ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
+ALTER TABLE common_inventor ADD COLUMN  inventor_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址'
+

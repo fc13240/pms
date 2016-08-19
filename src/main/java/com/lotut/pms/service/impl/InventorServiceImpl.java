@@ -52,4 +52,14 @@ public class InventorServiceImpl implements InventorService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public void saveAttachmentFile(CommonInventor CommonInventor) {
+		// TODO Auto-generated method stub
+		inventorDao.saveAttachmentFile(CommonInventor);
+	}
+	@Override
+	public String getInventorUrlById(int id) {
+		// TODO Auto-generated method stub
+		return inventorDao.getInventorUrlById(id);
+	}
 }

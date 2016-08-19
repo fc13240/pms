@@ -1,10 +1,21 @@
 package com.lotut.pms.web.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -15,7 +26,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FriendService;
@@ -113,5 +127,75 @@ public class InventorController {
 		return "inventor_select_friends";
 	}	
 	
+	@RequestMapping(path="/showUploadForm",method=RequestMethod.GET)
+	public String showUploadForm(@RequestParam("inventorId")long inventorId,Model model){
+		model.addAttribute("inventorId", inventorId);
+		return "inventor_upload_form";
+	}
+	
+	@RequestMapping(path="/uploadAttachmentFile",method=RequestMethod.POST)
+	public void uploadAttachmentFile(HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
+		int userId = PrincipalUtils.getCurrentUserId();
+		try{
+			String savePath=Settings.INVENTOR_ATTACHMENT_FILE_PATH;
+			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+			MultipartFile file1 = multipartRequest.getFile("file");
+			String fileName = file1.getOriginalFilename();
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String ymd = sdf.format(new Date());
+			savePath += ymd + "/";
+			File dirFile = new File(savePath);
+			if (!dirFile.exists()) {
+				dirFile.mkdirs();
+			}
+			String newFileName = userId + "_" + new Random().nextInt(10000) + "_" + fileName;
+			InputStream is = file1.getInputStream();
+			int BUFFER_SIZE = 8 * 1024;
+			byte[] buffer = new byte[BUFFER_SIZE];
+			try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
+				int bytesRead = -1;
+				while ((bytesRead = is.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesRead);
+				}
+				out.flush();
+				out.close();
+			}
+			WebUtils.writeJsonStrToResponse(response,ymd + "/"+newFileName);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}	
+	
+
+	@RequestMapping(path="/saveInventorFile",method=RequestMethod.POST)
+	public void saveAttachmentFile(CommonInventor Inventor,PrintWriter writer){
+		inventorService.saveAttachmentFile(Inventor);
+		writer.write(1);
+	}
+	
+	@RequestMapping(path="/downloadAttachmentFile", method=RequestMethod.GET)
+	public void downloadPatentFile(@RequestParam("inventorId")int InventorId, HttpServletResponse response,HttpServletRequest request) throws IOException {
+		response.setContentType("application/doc");
+		String relativeUrl = inventorService.getInventorUrlById(InventorId);
+		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
+		String filePath = Settings.INVENTOR_ATTACHMENT_FILE_PATH + relativeUrl;
+		File InventorFile = new File(filePath);
+		if("FF".equals(getBrowser(request))){
+		    //针对火狐浏览器处理
+			downloadFileName =new String(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
+		}
+		response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
+		response.setContentLength((int)InventorFile.length());
+		WebUtils.writeStreamToResponse(response, new FileInputStream(InventorFile));
+	}
+	
+	private String getBrowser(HttpServletRequest request){
+	    String UserAgent = request.getHeader("USER-AGENT").toLowerCase();
+	    if(UserAgent!=null){
+	        if (UserAgent.indexOf("msie") >=0 ) return "IE";
+	        if (UserAgent.indexOf("firefox") >= 0) return "FF";
+	    }
+	    return null;
+	}
 	
 }

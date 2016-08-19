@@ -13,7 +13,15 @@ public class CommonInventor {
 	private String  inventorComment;
 	private int userId;
 	private List<User> shareUsers;
+	private String inventorUrl;
 	
+	
+	public String getInventorUrl() {
+		return inventorUrl;
+	}
+	public void setInventorUrl(String inventorUrl) {
+		this.inventorUrl = inventorUrl;
+	}
 	public int getInventorId() {
 		return inventorId;
 	}
