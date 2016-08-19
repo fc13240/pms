@@ -60,12 +60,15 @@
 								<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
 								<td style="text-align:center"><c:out value="${appPerson.appPersonType.typeDescription}"/></td>
 								<td style="text-align:center"><c:out value="${appPerson.peopleNumber}"/></td>
-								<td>${appPerson.postcodeAddress}</td>
-								<td style="text-align:center"><c:out value=""/></td>
-								<td style="text-align:center"></td>
-								<td style="text-align:center"><a id="download" href="javascript: void(0);" >
-								  <c:out value="${notice.name}"/>
-								  </a> 
+								<td style="text-align:center"><c:out value="${appPerson.postcodeAddress}"/></td>
+								<td style="text-align:center"><c:out value="${appPerson.feeReduceTransactionStatus}"/></td>
+								<td style="text-align:center">
+									<a id="download" href="javascript: void(0); " >上传</a> 
+									<a id="download" href="javascript: void(0); " >下载</a> 
+								</td>
+								<td style="text-align:center">
+									<a  href="<s:url value='/appPerson/showAttachmentUploadForm.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">上传</a>
+                    				<a  href="<s:url value='/appPerson/downloadAttachmentFile.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">下载</a>
 								</td>
 								<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
 								<td style="text-align:center"><c:out value="${appPerson.shareUsersAsString}"/></td>

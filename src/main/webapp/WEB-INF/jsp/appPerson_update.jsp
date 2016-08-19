@@ -55,6 +55,14 @@
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" value="${appPerson.postcodeAddress }" name="postcodeAddress" required onblur="validateInfoNumber1(this.value)"/>
 					<span style="color: red; display: none;" id=numberError1>请输入正确的证件号码</span>
 					<br>
+					<h5>费减方案:</h5>
+					<select name="feeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;"  required>
+					  <option value="${appPerson.feeReduceTransactionStatus}">${appPerson.feeReduceTransactionStatus}</option>
+					  <option value="委托中">委托中</option>
+					  <option value="备案成功">备案成功</option>
+					  <option value="备案失败">备案失败</option>
+					</select>
+					<br>
 					<h5>其他信息:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" value="${appPerson.otherInfo }" name="otherInfo" required onblur="validateCommentNumber(this.value)"/>
 					<span style="color: red; display: none;" id=numberError>该处应输入不大于50字段</span>
