@@ -905,12 +905,11 @@
             	从常用发明人中选择
             </h4>
          </div>
-
-          <form role="form"  action="<s:url value=''/>" method="post">
 	         <div class = "modal-body">
 	           
-	            <a href="javascript:void(0)" onclick="batchAddInventor()" >
-					<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个发明人批量哦！">添加发明人</button>
+	           
+	           <a href="javascript:return void" onclick="batchAddInventor()" >
+				<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个发明人批量哦！">添加发明人</button>
 				</a> 
 				<table id="simple-table" class="table table-striped table-bordered table-hover">
 				<thead>
@@ -949,7 +948,6 @@
 				</table>
 	           
 	         </div>
-         </form>
       </div>
    </div>
 </div>
@@ -1532,7 +1530,7 @@ function loadImgs(){
 			
 		});
 		
-		//$("#inventorModalCloseBtn").trigger("click");
+		$("#inventorModalCloseBtn").trigger("click");
 		
 	}
 	
