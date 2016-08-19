@@ -63,5 +63,5 @@ public class InventorMybatisDao extends SqlSessionDaoSupport implements Inventor
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 }

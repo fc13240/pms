@@ -16,4 +16,5 @@ public interface InventorDao {
 
 	 
 	 List<CommonInventor> getInventorByName(String inventor,int userId);
+
 }

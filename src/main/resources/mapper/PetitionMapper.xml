@@ -4,12 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.lotut.pms.dao.mapper.PetitionMapper">
-	
-	<select id="checkAppPerson" resultType="int">
-		select count(*) from petition_applicant where app_person_id=#{appPersonId} and patent_doc_id=#{patentDocId}
+	<select id="findAppPersonNameById" resultType="CommonAppPerson">
+  		select p.app_person_id as appPersonId,p.type as type,p.name as name,t.type_desc as typeName,p.id_number as peopleNumber,
+  		p.postcode_address as postcodeAddress,p.other_information as otherInfo from common_app_person p 
+  		join app_person_types t on p.type=t.type_id where  p.user_id=#{userId} and p.app_person_id in
+
+  		<foreach collection="appPersonIds" item="appPersonId" open="(" separator="," close=")">
+			#{appPersonId}
+		</foreach>
+  	</select>
+  	
+  	<select id="findInventorNameById" resultType="CommonInventor">
+		select inventor_id as inventorId ,inventor_name as inventorName,inventor_id_number as inventorNumber,
+		inventor_nationality as inventorNationality,inventor_mobile as inventorMobile,inventor_email as inventorEmail,
+		inventor_other_information as inventorComment,user_id  as userId
+		from common_inventor where user_id=#{userId} and inventor_id in 
+		<foreach collection="inventorIds" item="inventorId" open="(" close=")">
+			#{inventorId}
+		</foreach>
 	</select>
-	<select id="checkInventor" resultType="int">
-		select count(*) from petition_inventors where inventor_id=#{inventorId} and patent_doc_id=#{patentDocId}
-	</select>
+
   </mapper>
   
