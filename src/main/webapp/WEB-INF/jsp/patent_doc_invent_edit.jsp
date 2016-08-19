@@ -134,7 +134,7 @@
 
 	                    
 	                    <div class="top_right">
-	                        <div class="review" onclick="preview_selfwrite();">
+	                        <div class="review" onclick="preview_selfwrite(${patentDoc.patentDocId});">
 	                            <i class="icon"></i>预览
 	                        </div>
 
@@ -1529,6 +1529,11 @@ function loadImgs(){
 	
 	function deleteTag(tag){
 		tag.parentNode.removeChild(tag); 
+	}
+	
+	function preview_selfwrite(value){
+		window.open("<s:url value='/editor/previewPatentDoc.html'/>?patentDocId="+value)
+		
 	}
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>

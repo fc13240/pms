@@ -779,4 +779,5 @@ CREATE TABLE patent_doc_app_person(
 )ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE common_inventor ADD COLUMN  inventor_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址'
-
+ALTER TABLE common_app_person ADD COLUMN transaction_identity_id  VARCHAR(50) DEFAULT NULL COMMENT '备案证件号'
+ ALTER TABLE common_app_person ADD COLUMN transaction_year  VARCHAR(20) DEFAULT NULL COMMENT '备案年度'

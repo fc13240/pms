@@ -16,8 +16,23 @@ public class CommonAppPerson {
 	private int userId;
 	private List<User> shareUsers;
 	private String appPersonUrl;
+	private String transactionIdentityId;
+	private String transactionYear ;
 	
 	
+	
+	public String getTransactionIdentityId() {
+		return transactionIdentityId;
+	}
+	public void setTransactionIdentityId(String transactionIdentityId) {
+		this.transactionIdentityId = transactionIdentityId;
+	}
+	public String getTransactionYear() {
+		return transactionYear;
+	}
+	public void setTransactionYear(String transactionYear) {
+		this.transactionYear = transactionYear;
+	}
 	public String getAppPersonUrl() {
 		return appPersonUrl;
 	}
