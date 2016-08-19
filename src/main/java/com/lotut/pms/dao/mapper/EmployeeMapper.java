@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.CustomerSupport;
 import com.lotut.pms.domain.ProcessPerson;
+import com.lotut.pms.domain.ProxyOrg;
 import com.lotut.pms.domain.TechPerson;
 
 
@@ -36,5 +37,15 @@ public interface EmployeeMapper {
 	void changeProcessPersonRemarkName(@Param("id") int id, @Param("remarkName") String remarkName);
 	
 	void insertGroupMember(@Param("userId") int userId,@Param("roleName") String roleName);
+
+	List<ProxyOrg> getProxyOrgList(int parentOrgId);
+
+	void addOrUpdateProxyOrg(ProxyOrg proxyOrg);
+
+	void changeProxyOrgRemarkName(@Param("orgId") int orgId, @Param("remarkName") String remarkName);
+
+	void deleteProxyOrg(int orgId);
+
+	int getParentOrgIdByUserId(int currentUserId);
 
 }

@@ -11,4 +11,5 @@ public interface PetitionDao {
 	
 	List<CommonAppPerson> findAppPersonNameById(List<Integer> appPersonIds,int userId);
 
+	void addCommonAppPerson(CommonAppPerson commonAppPerson);
 }

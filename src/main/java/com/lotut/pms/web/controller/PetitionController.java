@@ -7,13 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
-import com.lotut.pms.service.AppPersonService;
-import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PetitionService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
@@ -48,6 +47,19 @@ public class PetitionController {
 		try{
 			WebUtils.writeJsonStrToResponse(response, inventors);
 			
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(path="/addCommonAppPerson")
+	public void addCommonAppPerson(@ModelAttribute("commonAppPerson") CommonAppPerson commonAppPerson,HttpServletResponse response){
+		int userId = PrincipalUtils.getCurrentUserId();
+		commonAppPerson.setUserId(userId);
+		petitionService.addCommonAppPerson(commonAppPerson);
+		
+		try{
+			WebUtils.writeJsonStrToResponse(response, commonAppPerson);
 		}catch(IOException e){
 			e.printStackTrace();
 		}

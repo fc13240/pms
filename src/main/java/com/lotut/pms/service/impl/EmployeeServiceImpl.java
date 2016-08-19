@@ -9,6 +9,7 @@ import com.lotut.pms.dao.EmployeeDao;
 import com.lotut.pms.domain.CustomerSupport;
 import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.domain.ProcessPerson;
+import com.lotut.pms.domain.ProxyOrg;
 import com.lotut.pms.service.EmployeeService;
 import com.lotut.pms.util.Role;
 
@@ -85,6 +86,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeDao.deleteProcessPerson(id);	
 	}
 	
+	@Override
+	@Transactional
+	public void deleteProxyOrg(int orgId) {
+		employeeDao.deleteProxyOrg(orgId);
+	}
 	
 	@Override
 	public void changeCustomerSupportRemarkName(int id, String remarkName) {
@@ -100,5 +106,41 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public void changeProcessPersonRemarkName(int id, String remarkName) {
 		employeeDao.changeProcessPersonRemarkName(id, remarkName);
 	}
+
+	
+	@Override
+	public void changeProxyOrgRemarkName(int orgId, String remarkName) {
+		employeeDao.changeProxyOrgRemarkName(orgId, remarkName);
+		
+	}
+
+	@Override
+	public List<ProxyOrg> getProxyOrgList(int parentOrgId) {
+		return employeeDao.getProxyOrgList(parentOrgId);
+	}
+
+
+	@Override
+	@Transactional
+	public void addOrUpdateProxyOrg(ProxyOrg proxyOrg) {
+		employeeDao.addOrUpdateProxyOrg(proxyOrg);
+		boolean isNewProxyOrg = proxyOrg.getOrgId() != 0;
+		if (isNewProxyOrg) {
+			employeeDao.insertGroupMember(proxyOrg.getOrgUserId(),Role.ROLE_PROXY_ORG.getRoleName());
+		}
+		
+	}
+
+
+	@Override
+	public int getParentOrgIdByUserId(int currentUserId) {
+		return employeeDao.getParentOrgIdByUserId(currentUserId);
+	}
+
+
+	
+
+
+	
 }
 

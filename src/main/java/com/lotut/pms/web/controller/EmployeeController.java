@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.CustomerSupport;
+import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.ProcessPerson;
+import com.lotut.pms.domain.ProxyOrg;
 import com.lotut.pms.service.EmployeeService;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -30,6 +32,7 @@ public class EmployeeController {
 		this.employeeService = employeeService;
 		this.friendService = friendService;
 	}	
+	
 	
 	@RequestMapping(path="/getCustomerSupportList", method=RequestMethod.GET)
 	public String getCustomerSupportList(Model model) {
@@ -55,6 +58,14 @@ public class EmployeeController {
 		return "process_person_list";
 	}
 	
+	@RequestMapping(path="/getProxyOrgList", method=RequestMethod.GET)
+	public String getProxyOrgList(Model model) {
+		int parentOrgId = employeeService.getParentOrgIdByUserId(PrincipalUtils.getCurrentUserId());
+		List<ProxyOrg> proxyOrgs = employeeService.getProxyOrgList(parentOrgId);
+		model.addAttribute("proxyOrgs", proxyOrgs);
+		return "proxy_org_list";
+	}
+	
 	
 	@RequestMapping(path="/searchCustomerSupport", method=RequestMethod.GET)
 	public String searchCustomerSupport(Model model) {
@@ -69,6 +80,11 @@ public class EmployeeController {
 	@RequestMapping(path="/searchProcessPerson", method=RequestMethod.GET)
 	public String searchProcessPerson(Model model) {
 		return "process_person_add";
+	}
+	
+	@RequestMapping(path="/searchProxyOrg", method=RequestMethod.GET)
+	public String searchProxyOrg(Model model) {
+		return "proxy_org_add";
 	}
 	
 	
@@ -93,6 +109,18 @@ public class EmployeeController {
 		return "process_person_add";
 	}
 	
+	@RequestMapping(path="/searchProxyOrgUsers", method=RequestMethod.GET)
+	public String searchProxyOrgUsers(@RequestParam(name="keyword") String keyword, Model model) {
+		List<User> resultUsers = friendService.searchFriends(keyword);
+		for (User user:resultUsers) {
+			if(user.getUserId() == PrincipalUtils.getCurrentUserId()){
+				resultUsers.remove(user);
+				break;
+			}
+		}
+		model.addAttribute("users", resultUsers);
+		return "proxy_org_add";
+	}
 	
 	@RequestMapping(path="/searchCustomerSupportFriends", method=RequestMethod.GET)
 	public String searchCustomerSupportFriends(@RequestParam("keyword") String keyword, Model model) {
@@ -117,6 +145,20 @@ public class EmployeeController {
 		model.addAttribute("users", resultUsers);
 		return "process_person_add";
 	}	
+	
+	@RequestMapping(path="/searchProxyOrgFriends", method=RequestMethod.GET)
+	public String searchProxyOrgFriends(@RequestParam("keyword") String keyword, Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> resultUsers = friendService.findFriendsByUserId(userId,keyword);
+		for (User user:resultUsers) {
+			if(user.getUserId() == PrincipalUtils.getCurrentUserId()){
+				resultUsers.remove(user);
+				break;
+			}
+		}
+		model.addAttribute("users", resultUsers);
+		return "proxy_org_add";
+	}
 	
 	
 	@RequestMapping(path="/customerSupportRequest", method=RequestMethod.GET)
@@ -143,6 +185,13 @@ public class EmployeeController {
 		return "process_person_add";
 	}
 	
+	@RequestMapping(path="/proxyOrgRequest", method=RequestMethod.GET)
+	public String addOrUpdateProxyOrg(@ModelAttribute("proxyOrg")ProxyOrg proxyOrg,Model model) {
+		int parentOrgId = employeeService.getParentOrgIdByUserId(PrincipalUtils.getCurrentUserId());
+		proxyOrg.setParentOrgId(parentOrgId);
+		employeeService.addOrUpdateProxyOrg(proxyOrg);
+		return "proxy_org_add";
+	}
 	
 	@RequestMapping(path="/deleteCustomerSupport", method=RequestMethod.GET)
 	public String deleteCustomerSupport(@RequestParam("id")int id,Model model) {
@@ -168,6 +217,13 @@ public class EmployeeController {
 		return "redirect:/employee/getProcessPersonList.html";
 	}
 	
+	@RequestMapping(path="/deleteProxyOrg", method=RequestMethod.GET)
+	public String deleteProxyOrg(@RequestParam("orgId")int orgId,Model model) {
+		int parentOrgId = employeeService.getParentOrgIdByUserId(PrincipalUtils.getCurrentUserId());
+		employeeService.deleteProxyOrg(orgId);
+		model.addAttribute("parentOrgId",parentOrgId);
+		return "redirect:/employee/getProxyOrgList.html";
+	}
 	
 	@RequestMapping(path="/changeCustomerSupportRemarkName", method=RequestMethod.GET)
 	public String changeCustomerSupportRemarkName(int id, String remarkName) {
@@ -185,5 +241,11 @@ public class EmployeeController {
 	public String changeProcessPersonRemarkName(int id, String remarkName) {
 		employeeService.changeProcessPersonRemarkName(id, remarkName);
 		return "process_person_list";
+	}
+	
+	@RequestMapping(path="/changeProxyOrgRemarkName", method=RequestMethod.GET)
+	public String changeProxyOrgRemarkName(int orgId, String remarkName) {
+		employeeService.changeProxyOrgRemarkName(orgId, remarkName);
+		return "proxy_org_list";
 	}
 }

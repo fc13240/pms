@@ -5,6 +5,7 @@ import java.util.List;
 import com.lotut.pms.domain.CustomerSupport;
 import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.domain.ProcessPerson;
+import com.lotut.pms.domain.ProxyOrg;
 
 public interface EmployeeService {
 
@@ -31,6 +32,16 @@ public interface EmployeeService {
 	void changeTechPersonRemarkName(int id, String remarkName);
 
 	void changeProcessPersonRemarkName(int id, String remarkName);
+
+	List<ProxyOrg> getProxyOrgList(int parentOrgId);
+
+	void addOrUpdateProxyOrg(ProxyOrg proxyOrg);
+
+	void changeProxyOrgRemarkName(int orgId, String remarkName);
+
+	void deleteProxyOrg(int orgId);
+
+	int getParentOrgIdByUserId(int currentUserId);
 	
 	
 

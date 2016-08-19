@@ -30,6 +30,11 @@ public class PetitionMybatisDao extends SqlSessionDaoSupport implements Petition
 	public List<CommonAppPerson> findAppPersonNameById(List<Integer> appPersonIds, int userId) {
 		return petitionMapper.findAppPersonNameById(appPersonIds, userId);
 	}
+
+	@Override
+	public void addCommonAppPerson(CommonAppPerson commonAppPerson) {
+		petitionMapper.addCommonAppPerson(commonAppPerson);
+	}
 	
 	
 

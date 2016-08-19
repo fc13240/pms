@@ -12,4 +12,6 @@ public interface PetitionMapper {
 	List<CommonAppPerson> findAppPersonNameById(@Param("appPersonIds") List<Integer> appPersonIds,@Param("userId") int userId);
 	
 	List<CommonInventor> findInventorNameById(@Param("inventorIds") List<Long> inventorIds, @Param("userId") int userId );
+	
+	void addCommonAppPerson(CommonAppPerson commonAppPerson);
 }

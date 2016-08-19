@@ -397,61 +397,48 @@
 									<table>
 										<tr>
 											<td>
-											申请人:
-											</td>
-											
-											<td>
-												<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
-															从常用申请人中选择
-													</button>
+												<button type="button" style="width:180px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
+													从常用申请人中选择
+												</button>
 											</td>
 											<td>
 												<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addAppPersonModal">
-														新增
+														新增申请人
 												</button>
-											</td>
-										</tr>
-									</table>
-									
-									<div id="appersonDiv">
-										
-									</div>
-									<table>
-										<tr>
-											<td>
-											发明人:
+											
 											</td>
 											<td>
-												<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonInventorModal">
+												<button type="button" style="width:180px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonInventorModal">
 														从常用发明人中选择
 												</button>
 											</td>
 											<td>
-											<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addInventorModal">
-														从常用发明人中选择
+												<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addInventorModal">
+														新增发明人
 											</button>
 											</td>
+											<td>
+												<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">从常用联系人中选择</button>
+											</td>
+										
+											<td>
+												<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addContactModal">新增联系人</button>
+											</td>
+										
 										</tr>
 									</table>
-									<div id="inventorDiv">
+									<div>
+										<h2>申请人:</h2>
+										<div id="appersonDiv">
+									
+										</div>
+										<br/>
+										
+										<h2>发明人:</h2>
+										<div id="inventorDiv">
 										
 									</div>
-								
-									<table>
-									<tr>
-									<td>
-									联系人:
-									</td>
-									<td>
-										<!-- <button id="appPersonBtn" class="button button-caution button-rounded" type="button">从常用联系人中选择</button> -->
-									</td>
-									<td>
-										<textarea rows="3" cols="3">
-										
-										</textarea>
-									</td>
-									</tr>
-									</table>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -841,6 +828,7 @@
 <!--addAppPersonModal  -->
 <div class = "modal fade" id = "addAppPersonModal" tabindex = "-1" role = "dialog" 
    aria-labelledby = "myModalLabel" aria-hidden = "true" >
+   
    <div class = "modal-dialog" >
       <div class = "modal-content">
          
@@ -854,12 +842,11 @@
             </h4>
          </div>
 	         <div class = "modal-body" id="modal-body">
-	           <form id="appPersonForm">
 					 <h5>姓名或名称:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="name" id="appPersonName" required/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalAppPersonName" required/>
 					<br>	   
 					     	<h5>申请人类型:</h5>
-					<select name="type" class="form-control" style="width:136px;display:inline;" onchange="loadCities()" id="appPersonType" required>
+					<select class="form-control" style="width:136px;display:inline;" onchange="loadCities()" id="modalAppPersonType" required>
 					  <option value=''>请选择</option>
 					  <c:forEach items="${appPersonTypes}" var="appPersonType">
 						<option value="${appPersonType.typeId}">${appPersonType.typeDescription}</option>
@@ -867,21 +854,18 @@
 					</select>
 					<br>
 					<h5>证件号码:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" name="peopleNumber" required onblur="validatePhoneNumber(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="modalPhoneRece" type="text" required onblur="validatePhoneNumber(this.value)"/>
 					<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
 					<br>		  
 					     	<h5>邮编及地址:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="postcodeAddress" type="text" name="postcodeAddress" required/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="modalPostcodeAddress" type="text" required/>
 					<br>
 					<h5>其他信息:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="otherInfo" name="otherInfo" />
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalOtherInfo"/>
 					<input type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
 					<br/>
-					<button type="button" style="width:90px;" class="button button-primary  button-rounded" onclick="submitForm('appPersonForm')">保存</button>
-					<button type="button" style="width:90px;margin-left:280px" class="button button-primary  button-rounded">取消</button>
-					
-					<input type="reset" style="display: none;" id="resetBtn" />
-				</form>		
+					<button type="button" style="width:90px;" class="button button-primary  button-rounded" onclick="submitAppPersonForm()">保存</button>
+					<button type="reset" style="width:90px;margin-left:280px" class="button button-primary  button-rounded">取消</button>
 	         </div>
       </div>
    </div>
@@ -1017,47 +1001,7 @@
 	</div>
 </div>
 
-
-<div id="appPersonListDiv" style="display:none;">
-		<div>
-			<a href="javascript:return void" onclick="batchShareAppPerson()" id="batchShareAppPerson" >
-							<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
-			</a> 
-		</div>
-		<table id="simple-table" class="table table-striped table-bordered table-hover" style="width:800px">
-		  <thead>
-			<tr class="simple_bag">
-			  <th class="center">
-				<input style="width:15px;" type="checkbox" class="check-item" id="checkall">
-			  </th>
-			  <th class="center" >序号</th>
-			  <th>姓名或名称</th>
-			  <th>申请人类型</th>
-			  <th>证件号码 </th>
-			  <th>邮编及地址</th>
-			  <th>其它信息</th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<c:forEach items="${appPersons}" var="appPerson" varStatus="status">
-			  <tr>
-				<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-				<input type="checkbox" class="check-item" appPerson="<c:out value='${appPerson.appPersonId}'/>">
-				<span class="lbl"></span></label>
-				</td>
-				<td class="center" style="text-align:center"> ${status.count} </td>
-				<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
-				<td style="text-align:center"><c:out value="${appPerson.typeName}"/></td>
-				<td style="text-align:center"><c:out value="${appPerson.peopleNumber}"/></td>
-				<td>${appPerson.postcodeAddress}</td>
-				<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
-		
-			  </tr>
-			</c:forEach>
-		  </tbody>
-	 </table>
-</div>
-	<script type="text/javascript">
+<script type="text/javascript">
 
 	
 	var p=1;
@@ -1470,7 +1414,7 @@ function loadImgs(){
 							"<span class='ss-item' id='appPerson"+item.appPersonId+"' style='margin-left:20px'>"+item.name+""+
 							"<a class='icon-btn-x' href='#' onclick='deleteTag(appPerson"+item.appPersonId+")'"+
 								">"+								
-								"<img src='<s:url value='/temp/images/remove.png'/>' style='float:left;'' />"+
+								"<img src='<s:url value='/temp/images/remove.png'/>'  />"+
 							"</a>"+
 						 "</span>"
 					)
@@ -1486,6 +1430,12 @@ function loadImgs(){
 		$("#appersonModalCloseBtn").trigger("click");
 		
 	}
+	
+	function deleteAppPerson(appPerson){
+		$("#"+appPerson).remove();
+	}
+	
+	
 	
 	function batchAddInventor(){
 		var inventorSelected = formutil.anyCheckboxItemSelected('tr td input.inventor-check-item');
@@ -1511,10 +1461,10 @@ function loadImgs(){
 				var obj= $.parseJSON(data);
 				$.each(obj,function(i,item){
 					$("#inventorDiv").append(
-							"<span class='ss-item' id='inventor"+item.inventorId+"' style='margin-left:20px'>"+item.inventorName+
+							"<span class='ss-item' id='inventor"+item.inventorId+"' style='margin-left:20px'>"+item.inventorName+""+
 							"<a class='icon-btn-x' href='#' onclick='deleteTag(inventor"+item.inventorId+")'"+
 								">"+								
-								"<img src='<s:url value='/temp/images/remove.png'/>' style='float:left;'/>"+
+								"<img src='<s:url value='/temp/images/remove.png'/>' />"+
 							"</a>"+
 						 "</span>"
 					)
@@ -1526,15 +1476,50 @@ function loadImgs(){
 		$("#inventorModalCloseBtn").trigger("click");
 		
 	}
-	
 	function deleteTag(tag){
 		tag.parentNode.removeChild(tag); 
 	}
 	
+
 	function preview_selfwrite(value){
 		window.open("<s:url value='/editor/previewPatentDoc.html'/>?patentDocId="+value)
 		
 	}
+
+	function submitAppPersonForm(){
+		var appPersonName =$("#modalAppPersonName").val();
+		var appPersonType =$("#modalAppPersonType").val();
+		var phoneRece =$("#modalPhoneRece").val();
+		var postcodeAddress =$("#modalPostcodeAddress").val();
+		var otherInfo =$("#modalOtherInfo").val();
+		var formData ={"name":appPersonName,"type":appPersonType,"peopleNumber":phoneRece,"postcodeAddress":postcodeAddress,"otherInfo":otherInfo};
+		
+		$.ajax({
+			type : "POST",
+			url : "<s:url value='/petition/addCommonAppPerson.html'/>",
+			data : formData,
+			async : false,
+			success : function(data){
+				var obj= $.parseJSON(data);
+				$("#appersonDiv").append(
+						"<span class='ss-item' id='appPerson"+obj["appPersonId"]+"' style='margin-left:20px'>"+obj["name"]+""+
+						"<a class='icon-btn-x' href='#' onclick='deleteTag(appPerson"+obj["appPersonId"]+")'"+
+							">"+								
+							"<img src='<s:url value='/temp/images/remove.png'/>'/>"+
+						"</a>"+
+					 "</span>"
+				)
+				
+			},error:function (){
+				
+			}
+			
+		})
+		
+	}
+	
+	
+
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	
