@@ -90,6 +90,6 @@
 	  	values(#{name},#{type},#{peopleNumber},#{postcodeAddress},#{otherInfo},#{userId})
 
   	</insert>
->>>>>>> 370d9fa8ee5ecf87afb226e2fc781d52299b37f1
+
   </mapper>
   
