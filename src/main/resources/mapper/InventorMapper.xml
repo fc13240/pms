@@ -67,4 +67,11 @@
 		from common_inventor where inventor_name like #{inventor} and userId=#{userId}
 	</select>
 	
+	<select id="getInventorUrlById" parameterType="int" resultType="String">
+		select inventor_attachment_file from common_inventor where inventor_id = #{inventorId}
+	</select>
+	
+	<update id="saveAttachmentFile" parameterType="CommonInventor">
+		update common_inventor set inventor_attachment_file = #{inventorUrl} inventor_id = #{inventorId}
+	</update>
 </mapper>

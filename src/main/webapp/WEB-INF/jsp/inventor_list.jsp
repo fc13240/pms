@@ -60,11 +60,9 @@
 								<td style="text-align:center"><c:out value="${inventor.inventorNationality}"/></td>
 								<td>${inventor.inventorMobile}</td>
 								<td style="text-align:center"><c:out value="${inventor.inventorEmail}"/></td>
-								<td style="text-align:center"><a id="download" href="javascript: void(0);" >
-								  上传
-								  </a> <a id="download" href="javascript: void(0);" >
-								 下载
-								  </a> 
+								<td style="text-align:center">
+									<a  href="<s:url value='/inventor/showAttachmentUploadForm.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>">上传</a>
+                    				<a  href="<s:url value='/inventor/downloadAttachmentFile.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>">下载</a>
 								</td>
 								<td style="text-align:center"><c:out value="${inventor.inventorComment}"/></td>
 								<td><a href="<s:url value='/inventor/findOneInventorInfo.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>"> 编辑 </a> 
