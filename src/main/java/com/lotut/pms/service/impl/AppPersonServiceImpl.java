@@ -62,6 +62,7 @@ public class AppPersonServiceImpl implements AppPersonService {
 
 
 	@Override
+
 	public void saveAttachmentFile(CommonAppPerson AppPerson) {
 		// TODO Auto-generated method stub
 		AppPersonDao.saveAttachmentFile(AppPerson);
@@ -72,6 +73,10 @@ public class AppPersonServiceImpl implements AppPersonService {
 	public String getAppPersonUrlById(int id) {
 		// TODO Auto-generated method stub
 		return AppPersonDao.getAppPersonUrlById(id);
+	}
+	public void addCommonAppPerson(CommonAppPerson CommonAppPerson) {
+		AppPersonDao.addCommonAppPerson(CommonAppPerson);
+
 	}
 
 }

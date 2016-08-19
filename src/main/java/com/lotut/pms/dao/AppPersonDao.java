@@ -14,8 +14,13 @@ public interface AppPersonDao {
 	void deleteAppPersonById(int id);
 
 	List<CommonAppPerson> getUserAppPersons(int userId);
+
 	void saveAttachmentFile(CommonAppPerson AppPerson);
 	String getAppPersonUrlById(int id);
+
+	
+	void addCommonAppPerson(CommonAppPerson CommonAppPerson);
+
 
 /*	List<CommonAppPerson> getAppPersonByName(String appPerson,int userId);
 

@@ -400,16 +400,10 @@
 									申请人:
 									</td>
 									<td>
-									<select id="appPerson" style="width:100px;" class="selectPointOfInterest form-control" onclick="displayBtn('appPersonBtn')" onchange="addAppPerson(this.value)">
-											<option value="-1" selected="selected">请选择</option>
-											<c:forEach items="${appPersons}" var="appPerson">
-												<option value="${appPerson.appPersonId}">${appPerson.name}</option>
-											</c:forEach>
-										</select> 
+									<button id="appPersonBtn" class="button button-caution button-rounded" type="button" onclick="openModal('appPersonListDiv')">从常用申请人中选择</button>
 									</td>
 									<td>
-									<button id="appPersonBtn" style="display: none;" class="button button-caution button-rounded" type="button" onclick="">点我新增</button>
-									<button id="appPersonBtn" style="font-size: 12px;" class = "btn btn-primary btn-lg" data-toggle = "modal" data-target = "#myModal" onclick="lockWindow()">新增</button>
+									<button id="appPersonBtn" class="button button-caution button-rounded" type="button" onclick="openModal('appPersonDiv')">新增申请人</button>
 									</td>
 									</tr>
 									<tr>
@@ -417,15 +411,10 @@
 									发明人:
 									</td>
 									<td>
-									<select id="inventor" style="width:100px;" class="selectPointOfInterest form-control" onclick="displayBtn('inventorBtn')" onchange="">
-											<option value="-1" selected="selected">请选择</option>
-											<c:forEach items="${inventors}" var="inventor">
-												<option value="${inventor.inventorId}">${inventor.inventorName}</option>
-											</c:forEach>
-										  </select> 
+										<button id="appPersonBtn" class="button button-caution button-rounded" type="button" onclick="">从常用发明人中选择</button>
 									</td>
 									<td>
-									<button id="inventorBtn" style="display: none;" class="button button-caution button-rounded" type="button">点我新增</button><br/>
+									<button id="inventorBtn" class="button button-caution button-rounded" type="button" onclick="openModal('inventorDiv')">新增发明人</button><br/>
 									</td>
 									</tr>
 									<tr>
@@ -433,15 +422,12 @@
 									联系人:
 									</td>
 									<td>
-									<select id="contact" style="width:100px;" class="selectPointOfInterest form-control" onclick="displayBtn('contactBtn')" onchange="">
-											<option value="-1" selected="selected">请选择</option>
-											<c:forEach items="${contactAddresses}" var="contactAddress">
-												<option value="${contactAddress.userId}">${contactAddress.receiver}</option>
-											</c:forEach>
-										  </select>
+										<button id="appPersonBtn" class="button button-caution button-rounded" type="button">从常用联系人中选择</button>
 									</td>
 									<td>
-									<button id="contactBtn" style="display: none;" class="button button-caution button-rounded" type="button">点我新增</button>
+										<textarea rows="3" cols="3">
+										
+										</textarea>
 									</td>
 									</tr>
 									</table>
@@ -777,7 +763,7 @@
 </button>
 </div>
 <div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" 
-   aria-labelledby = "myModalLabel" aria-hidden = "true">
+   aria-labelledby = "myModalLabel" aria-hidden = "true" >
    
    <div class = "modal-dialog">
       <div class = "modal-content">
@@ -788,84 +774,163 @@
             </button>
             
             <h4 class = "modal-title" id = "myModalLabel">
-               	编辑广告信息
             </h4>
          </div>
-         
-          <form role="form"  action="<s:url value='/patent/advertisement/addAdvertisement.html'/>" id="advertisement" method="post">
-	         <div class = "modal-body">
+
+          <form role="form"  action="<s:url value=''/>" method="post">
+	         <div class = "modal-body" id="modal-body">
 	           
-					<div class="form-group">
-					<label for="male">商铺网站链接</label>
-					<input type="text" class="form-control" name="storeLink" placeholder="请输入商铺链接" value="http://">
-					<label for="male">申请人网站链接</label>
-					<input type="text" class="form-control" name="personLink" placeholder="请输入申请人链接" value="http://">
-					<label for="male">代理机构网站链接</label>
-					<input type="text" class="form-control" name="proxyOrgLink" placeholder="请输入代理商链接" value="http://">
-					<input type="hidden" name="appNo" id="appNo" value="">
-					<input type="hidden" name="patentName" id="patentName" value="">
-					<input type="hidden" name="patentId" id="patentId" value="">
-					<input type="hidden" name="patentIds" id="patentIds" value="">
-					</div>
-				
 	         </div>
 	         
-	         <div class = "modal-footer">
+	         <!-- <div class = "modal-footer">
 	            <button type = "button" class = "btn btn-default" data-dismiss = "modal" id="closeButton">
 	              	关闭
 	            </button>
 	            
-	            <button type = "submit" class = "btn btn-primary">
+	            <button type = "submit" class = "button button-primary  button-rounded">
 	               	确认
 	            </button>
-	         </div>
+	         </div> -->
          </form>
       </div><!-- /.modal-content -->
    </div><!-- /.modal-dialog -->
 <!-- /.modal -->	
 </div>
-	
-<script>
-	function lockWindow()() { 
-		$('#myModal').modal({backdrop: 'static'})
-	}
-   
-</script>
- <script type="text/javascript">
-	function submitForm(){
-		$.ajax({
-			type: "POST",
-			url: "<s:url value='/editor/addEditorText.html'/>",
-			data: {"editorContent":editor1.html()},
-			success: function(data){
-				if(data){
-					alert(data)
-					$("textarea[name=editorContent]").val("");
-					editor1.html("");
-					
-				}
-			},
-			error: function(){
-				alert("操作失败");
-			}
-		});
-	};
-	function alertText(){
-		var x=$("#editorContent").val();
-		alert(x);
-		KindEditor.appendHtml('#editorContent1', x);
+<!--申请人  -->
+<div id="appPersonDiv" style="display:none;">
+	<div class="lt-box" style="padding:20px;">
+	<!--  action="<s:url value='/petition/addCommonAppPerson.html'/>" method="post" -->
+		<form id="appPersonForm">
+			 <h5>姓名或名称:</h5>
+			<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="name" id="appPersonName" required/>
+			<br>	   
+			     	<h5>申请人类型:</h5>
+			<select name="type" class="form-control" style="width:136px;display:inline;" onchange="loadCities()" id="appPersonType" required>
+			  <option value=''>请选择</option>
+			  <c:forEach items="${appPersonTypes}" var="appPersonType">
+				<option value="${appPersonType.typeId}">${appPersonType.typeDescription}</option>
+			  </c:forEach>
+			</select>
+			<br>
+			<h5>证件号码:</h5>
+			<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" name="peopleNumber" required onblur="validatePhoneNumber(this.value)"/>
+			<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
+			<br>		  
+			     	<h5>邮编及地址:</h5>
+			<input class="selectPointOfInterest form-control" style="width:460px;" id="postcodeAddress" type="text" name="postcodeAddress" required/>
+			<br>
+			<h5>其他信息:</h5>
+			<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="otherInfo" name="otherInfo" />
+			<input type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
+			<br/>
+			<button type="button" style="width:90px;" class="button button-primary  button-rounded" onclick="submitForm('appPersonForm')">保存</button>
+			<button type="button" style="width:90px;margin-left:280px" class="button button-primary  button-rounded">取消</button>
+			
+			<input type="reset" style="display: none;" id="resetBtn" />
+		</form>		
+	</div>
+</div>
+<!--发明人  -->
+<div id="inventorDiv" style="display:none;">
+	<div class="lt-box" style="padding:20px;">
+		<form id="inventorForm" action="<s:url value='/petition/addCommonInventor.html'/>" method="post" onsubmit="">
+	       	<h5>姓名:</h5>
+			<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="InventorName" required/>
+			<br>	   
+			<h5>证件号码:</h5>
+			<input class="selectPointOfInterest form-control" style="width:460px;" id="" type="text" name="InventorNumber" required onblur="validatePhoneNumber(this.value)"/>
+			<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
+			<br>		  
+	       	<h5>国籍:</h5>
+			<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="InventorNationality" required/>
+			<br>		  
+	       	<h5>电话:</h5>
+			<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="InventorMobile" required/>
+			<br>		  
+	       	<h5>邮箱:</h5>
+			<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="InventorEmail" required/>
+			<br>
+			<h5>其他信息:</h5>
+			<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="InventorComment" required/>
+			<br>      
+			<div style="height:20px;"></div> 
+			<button type="submit" style="width:90px;" class="button button-primary  button-rounded">保存</button>
+			<button type="button" style="width:90px;margin-left:280px" class="button button-primary  button-rounded">取消</button>
+		</form>				
+	</div>
+</div>
+<div id="contactDiv" style="display:none;">
+	<div class="lt-box" style="padding:20px;">
+		<form id="contactForm" action="">
+		     	<h5>姓名或名称:</h5>
+		<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="name" required/>
+		<br>	   
+		     	<h5>申请人类型:</h5>
+		<select name="type" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities()" required>
+		  <option value=''>请选择</option>
+		  <c:forEach items="${appPersonTypes}" var="appPersonType">
+			<option value="${appPersonType.typeId}">${appPersonType.typeDescription}</option>
+		  </c:forEach>
+		</select>
+		<br>
+		<h5>证件号码:</h5>
+		<input class="selectPointOfInterest form-control" style="width:460px;" id="" type="text" name="peopleNumber" required onblur="validatePhoneNumber(this.value)"/>
+		<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
+		<br>		  
+		     	<h5>邮编及地址:</h5>
+		<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="postcodeAddress" required/>
+		<br>
+		<h5>其他信息:</h5>
+		<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="otherInfo" />
 		
-	};
-	
-	function findPatentDoc(patentDocId){
 		
-		var url = "<c:url value='/editor/findPatentDoc.html'/>?patentDocId="+patentDocId;
-		location.href=url;
+		</form>
+	</div>
+</div>
+
+
+<div id="appPersonListDiv" style="display:none;">
+		<div>
+			<a href="javascript:return void" onclick="batchShareAppPerson()" id="batchShareAppPerson" >
+							<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
+			</a> 
+		</div>
+		<table id="simple-table" class="table table-striped table-bordered table-hover" style="width:800px">
+		  <thead>
+			<tr class="simple_bag">
+			  <th class="center">
+				<input style="width:15px;" type="checkbox" class="check-item" id="checkall">
+			  </th>
+			  <th class="center" >序号</th>
+			  <th>姓名或名称</th>
+			  <th>申请人类型</th>
+			  <th>证件号码 </th>
+			  <th>邮编及地址</th>
+			  <th>其它信息</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<c:forEach items="${appPersons}" var="appPerson" varStatus="status">
+			  <tr>
+				<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
+				<input type="checkbox" class="check-item" appPerson="<c:out value='${appPerson.appPersonId}'/>">
+				<span class="lbl"></span></label>
+				</td>
+				<td class="center" style="text-align:center"> ${status.count} </td>
+				<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
+				<td style="text-align:center"><c:out value="${appPerson.typeName}"/></td>
+				<td style="text-align:center"><c:out value="${appPerson.peopleNumber}"/></td>
+				<td>${appPerson.postcodeAddress}</td>
+				<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
 		
-		
-	};
-</script>
+			  </tr>
+			</c:forEach>
+		  </tbody>
+	 </table>
+</div>
 	<script type="text/javascript">
+
+	
 	var p=1;
 	$('input[id=patentFile]').change(function() {  
 		$('#filename').val($(this).val());  
@@ -1259,46 +1324,25 @@ function loadImgs(){
 	}
 	
 	
-	function addAppPerson(appPersonId){
-		var patentDocId =$("#patentDocId").val();
-		var exitPetition = checkAppPerson(appPersonId,patentDocId);
-		if(appPersonId!=-1){
-			if(exitPetition){
-				 $.ajax({
-					type :'POST',
-					url : "<s:url value='/petition/addAppPerson.html'/>",
-					data :{"appPersonId":appPersonId,"patentDocId":patentDocId},
-					success : function (data){
-						alert(data);
-					},error: function (){
-						
-					}
-				})
-			}else{
-				alert("已经添加过该申请人,请不要重复添加!");
-			}
+	
+	function openModal(id){
+		var form=$("#"+id).html();
+		if(id=="appPersonDiv"){
+			$("#myModalLabel").html("新增申请人信息");
 		}
+		if(id=="inventorDiv"){
+			$("#myModalLabel").html("新增发明人信息");
+		}
+		if(id=="contactDiv"){
+			$("#myModalLabel").html("新增联系人信息");
+		}
+		$("#modal-body").html(form);
+		$("#hiddenButton").trigger("click");
+		formutil.clickAllCheckbox('tr th input.check-item', 'tr td input.check-item');
+		formutil.clickItemCheckbox('tr th input.check-item', 'tr td input.check-item');		
 	}
 	
-	function checkAppPerson(appPersonId,patentDocId){
-		var result = false;
-		$.ajax({
-			type :'POST',
-			url : "<s:url value='/petition/checkAppPerson.html'/>",
-			data :{"appPersonId":appPersonId,"patentDocId":patentDocId},
-			async: false,
-			success : function (data){
-				if(data>0){
-					result = false;
-				}else{
-					result =  true;
-				}
-			},error: function (){
-			}
-		})
-		
-		return result;
-	}
+	
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	

@@ -74,6 +74,7 @@
   		join app_person_types t on p.type=t.type_id where p.name like #{appPerson} and p.user_id=#{userId}
   	</select>
   	
+
   	<update id="saveAttachmentFile" parameterType="CommonAppPerson">
   		update common_app_person set app_person_attachment_file=#{appPersonUrl}
   		where app_person_id =#{appPersonId}
@@ -82,5 +83,13 @@
   	<select id="getAppPersonUrlById" parameterType="int">
   		select app_person_attachment_file from common_app_person where app_person_id =#{appPersonId}
   	</select>
+
+	
+  	<insert id="addCommonAppPerson" parameterType="CommonAppPerson"  useGeneratedKeys="true" keyProperty="appPersonId">
+	  	insert into common_app_person(name,type,id_number,postcode_address,other_information,user_id) 
+	  	values(#{name},#{type},#{peopleNumber},#{postcodeAddress},#{otherInfo},#{userId})
+
+  	</insert>
+>>>>>>> 370d9fa8ee5ecf87afb226e2fc781d52299b37f1
   </mapper>
   

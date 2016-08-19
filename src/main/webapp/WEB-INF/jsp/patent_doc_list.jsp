@@ -177,7 +177,9 @@ table td a {
                     <a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>
 
                     <a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
+                    <c:if test="${patentDoc.patentDocUrl != null}">
                     <a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
+                    </c:if>
                 </td>
             </tr>
             

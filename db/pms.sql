@@ -628,7 +628,10 @@ VALUES
 	(7, 'ROLE_PROCESS');
 	
 INSERT INTO group_members(username,group_id) VALUES('test',4);
-	
+
+drop table if exists techs;
+drop table if exists processes;
+
 CREATE TABLE IF NOT EXISTS customer_supports (
 	id INT NOT NULL AUTO_INCREMENT UNIQUE,
 	user_id INT NOT NULL,
@@ -756,7 +759,22 @@ CREATE TABLE user_app_person(
   CONSTRAINT `fk_user_app_person_user` FOREIGN KEY (USER) REFERENCES `users` (user_id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 
+
 ALTER TABLE common_app_person DROP COLUMN record_status
 
 ALTER TABLE common_app_person ADD COLUMN  fee_reduce_transaction_status  VARCHAR(20) DEFAULT '未备案' COMMENT '费减备案'
 ALTER TABLE common_app_person ADD COLUMN  app_person_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址'
+
+
+CREATE TABLE patent_doc_app_person(
+	person_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	patent_doc_id BIGINT NOT NULL,
+	NAME VARCHAR(20) NOT  NULL,
+	TYPE INT NOT  NULL,
+	id_number VARCHAR(20) NOT  NULL,
+	postcode_address VARCHAR(300) NOT  NULL,
+	other_information VARCHAR(50),
+	user_id INT NOT NULL,
+	CONSTRAINT fk_patent_doc_app_person_doc_id FOREIGN KEY idx_fk_patent_doc_app_person_doc_id(patent_doc_id) REFERENCES patent_documents(patent_doc_id) ON   DELETE   CASCADE
+)ENGINE=INNODB DEFAULT CHARSET=utf8; 
+
