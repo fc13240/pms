@@ -67,5 +67,4 @@
 		from common_inventor where inventor_name like #{inventor} and userId=#{userId}
 	</select>
 	
-	
 </mapper>

@@ -2,8 +2,8 @@ package com.lotut.pms.service;
 
 import java.util.List;
 
-import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.AppPersonType;
+import com.lotut.pms.domain.CommonAppPerson;
 
 public interface AppPersonService {
 	void addAppPerson(CommonAppPerson commonAppPerson);
@@ -16,9 +16,5 @@ public interface AppPersonService {
 	List<CommonAppPerson> getUserAppPersons(int userId);
 	
 	void addCommonAppPerson(CommonAppPerson CommonAppPerson);
-/*
-	List<CommonAppPerson> getAppPersonByName(String appPerson,int userId);
-
-	List<CommonAppPerson> getAppPersonByName(String appPerson);*/
 
 }

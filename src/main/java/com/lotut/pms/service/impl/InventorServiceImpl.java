@@ -52,5 +52,4 @@ public class InventorServiceImpl implements InventorService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 }

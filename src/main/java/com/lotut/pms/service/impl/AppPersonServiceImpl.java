@@ -65,5 +65,4 @@ public class AppPersonServiceImpl implements AppPersonService {
 	public void addCommonAppPerson(CommonAppPerson CommonAppPerson) {
 		AppPersonDao.addCommonAppPerson(CommonAppPerson);
 	}
-
 }

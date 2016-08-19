@@ -50,8 +50,4 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 	public void addCommonAppPerson(CommonAppPerson CommonAppPerson) {
 		AppPersonMapper.addCommonAppPerson(CommonAppPerson);
 	}
-
-
-	
-
 }

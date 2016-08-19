@@ -76,5 +76,6 @@
 	  	values(#{name},#{type},#{peopleNumber},#{postcodeAddress},#{otherInfo},#{userId})
 
   	</insert>
+  
   </mapper>
   
