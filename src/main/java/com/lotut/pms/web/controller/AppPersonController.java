@@ -142,8 +142,8 @@ public class AppPersonController {
 		
 	}
 	
-	@RequestMapping(path="/uploadAttachmentUploadForm",method=RequestMethod.POST)
-	public void uploadAttachmentUploadForm(HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
+	@RequestMapping(path="/uploadAttachmentFile",method=RequestMethod.POST)
+	public void uploadAttachmentFile(HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
 		int userId = PrincipalUtils.getCurrentUserId();
 		try{
 			String savePath=Settings.APP_PERSON_ATTACHMENT_FILE_PATH;
@@ -176,7 +176,7 @@ public class AppPersonController {
 	}	
 	
 
-	@RequestMapping(path="/saveAttachmentFile",method=RequestMethod.POST)
+	@RequestMapping(path="/saveAppPersonFile",method=RequestMethod.POST)
 	public void saveAttachmentFile(CommonAppPerson appPerson,PrintWriter writer){
 		AppPersonService.saveAttachmentFile(appPerson);
 		writer.write(1);
