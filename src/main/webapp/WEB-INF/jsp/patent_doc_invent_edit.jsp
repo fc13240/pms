@@ -841,7 +841,6 @@
 <!--addAppPersonModal  -->
 <div class = "modal fade" id = "addAppPersonModal" tabindex = "-1" role = "dialog" 
    aria-labelledby = "myModalLabel" aria-hidden = "true" >
-   
    <div class = "modal-dialog" >
       <div class = "modal-content">
          
@@ -905,12 +904,11 @@
             	从常用发明人中选择
             </h4>
          </div>
-
-          <form role="form"  action="<s:url value=''/>" method="post">
 	         <div class = "modal-body">
 	           
-	            <a href="javascript:void(0)" onclick="batchAddInventor()" >
-					<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个发明人批量哦！">添加发明人</button>
+	           
+	           <a href="javascript:return void" onclick="batchAddInventor()" >
+				<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个发明人批量哦！">添加发明人</button>
 				</a> 
 				<table id="simple-table" class="table table-striped table-bordered table-hover">
 				<thead>
@@ -949,7 +947,6 @@
 				</table>
 	           
 	         </div>
-         </form>
       </div>
    </div>
 </div>
@@ -1470,8 +1467,8 @@ function loadImgs(){
 				$.each(obj,function(i,item){
 					
 					$("#appersonDiv").append(
-							"<span class='ss-item' id='"+item.appPersonId+"' style='margin-left:20px'>"+item.name+""+
-							"<a class='icon-btn-x' href='#' onclick='deleteAppPerson("+item.appPersonId+")'"+
+							"<span class='ss-item' id='appPerson"+item.appPersonId+"' style='margin-left:20px'>"+item.name+""+
+							"<a class='icon-btn-x' href='#' onclick='deleteTag(appPerson"+item.appPersonId+")'"+
 								">"+								
 								"<img src='<s:url value='/temp/images/remove.png'/>' style='float:left;'' />"+
 							"</a>"+
@@ -1489,12 +1486,6 @@ function loadImgs(){
 		$("#appersonModalCloseBtn").trigger("click");
 		
 	}
-	
-	function deleteAppPerson(appPerson){
-		$("#"+appPerson).remove();
-	}
-	
-	
 	
 	function batchAddInventor(){
 		var inventorSelected = formutil.anyCheckboxItemSelected('tr td input.inventor-check-item');
@@ -1520,10 +1511,10 @@ function loadImgs(){
 				var obj= $.parseJSON(data);
 				$.each(obj,function(i,item){
 					$("#inventorDiv").append(
-							"<span class='ss-item' id='inventor"+item.inventorId+"' style='margin-left:20px'>"+item.inventorName+""+
-							"<a class='icon-btn-x' href='#' onclick='deleteInventor(inventor"+item.inventorId+")'"+
+							"<span class='ss-item' id='inventor"+item.inventorId+"' style='margin-left:20px'>"+item.inventorName+
+							"<a class='icon-btn-x' href='#' onclick='deleteTag(inventor"+item.inventorId+")'"+
 								">"+								
-								"<img src='<s:url value='/temp/images/remove.png'/>' style='float:left;'' />"+
+								"<img src='<s:url value='/temp/images/remove.png'/>' style='float:left;'/>"+
 							"</a>"+
 						 "</span>"
 					)
@@ -1532,12 +1523,12 @@ function loadImgs(){
 			
 		});
 		
-		//$("#inventorModalCloseBtn").trigger("click");
+		$("#inventorModalCloseBtn").trigger("click");
 		
 	}
 	
-	function deleteInventor(inventor){
-		$("#"+inventor).remove();
+	function deleteTag(tag){
+		tag.parentNode.removeChild(tag); 
 	}
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
