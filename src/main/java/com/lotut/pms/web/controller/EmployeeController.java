@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.CustomerSupport;
+import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.ProcessPerson;
@@ -59,7 +60,7 @@ public class EmployeeController {
 	
 	@RequestMapping(path="/getProxyOrgList", method=RequestMethod.GET)
 	public String getProxyOrgList(Model model) {
-		int parentOrgId = PrincipalUtils.getCurrentUserId(); 
+		int parentOrgId = employeeService.getParentOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		List<ProxyOrg> proxyOrgs = employeeService.getProxyOrgList(parentOrgId);
 		model.addAttribute("proxyOrgs", proxyOrgs);
 		return "proxy_org_list";
@@ -111,6 +112,12 @@ public class EmployeeController {
 	@RequestMapping(path="/searchProxyOrgUsers", method=RequestMethod.GET)
 	public String searchProxyOrgUsers(@RequestParam(name="keyword") String keyword, Model model) {
 		List<User> resultUsers = friendService.searchFriends(keyword);
+		for (User user:resultUsers) {
+			if(user.getUserId() == PrincipalUtils.getCurrentUserId()){
+				resultUsers.remove(user);
+				break;
+			}
+		}
 		model.addAttribute("users", resultUsers);
 		return "proxy_org_add";
 	}
@@ -143,6 +150,12 @@ public class EmployeeController {
 	public String searchProxyOrgFriends(@RequestParam("keyword") String keyword, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<User> resultUsers = friendService.findFriendsByUserId(userId,keyword);
+		for (User user:resultUsers) {
+			if(user.getUserId() == PrincipalUtils.getCurrentUserId()){
+				resultUsers.remove(user);
+				break;
+			}
+		}
 		model.addAttribute("users", resultUsers);
 		return "proxy_org_add";
 	}
@@ -174,7 +187,7 @@ public class EmployeeController {
 	
 	@RequestMapping(path="/proxyOrgRequest", method=RequestMethod.GET)
 	public String addOrUpdateProxyOrg(@ModelAttribute("proxyOrg")ProxyOrg proxyOrg,Model model) {
-		int parentOrgId = PrincipalUtils.getCurrentUserId();
+		int parentOrgId = employeeService.getParentOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		proxyOrg.setParentOrgId(parentOrgId);
 		employeeService.addOrUpdateProxyOrg(proxyOrg);
 		return "proxy_org_add";
@@ -206,7 +219,7 @@ public class EmployeeController {
 	
 	@RequestMapping(path="/deleteProxyOrg", method=RequestMethod.GET)
 	public String deleteProxyOrg(@RequestParam("orgId")int orgId,Model model) {
-		int parentOrgId = PrincipalUtils.getCurrentUserId();
+		int parentOrgId = employeeService.getParentOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		employeeService.deleteProxyOrg(orgId);
 		model.addAttribute("parentOrgId",parentOrgId);
 		return "redirect:/employee/getProxyOrgList.html";

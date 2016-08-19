@@ -132,6 +132,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 
+	@Override
+	public int getParentOrgIdByUserId(int currentUserId) {
+		return employeeDao.getParentOrgIdByUserId(currentUserId);
+	}
+
+
 	
 
 

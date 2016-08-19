@@ -782,6 +782,7 @@ CREATE TABLE patent_doc_app_person(
 
 ALTER TABLE common_inventor ADD COLUMN  inventor_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址'
 
+drop table if exists proxy_org;
 
 CREATE TABLE IF NOT EXISTS proxy_org (
 	org_id INT PRIMARY KEY  AUTO_INCREMENT ,
@@ -789,8 +790,8 @@ CREATE TABLE IF NOT EXISTS proxy_org (
 	remark_name VARCHAR(30) ,
 	parent_org_id INT ,
 	UNIQUE(org_user_id,parent_org_id),	
-	CONSTRAINT fk_proxy_org_parent_org_id FOREIGN KEY(parent_org_id) REFERENCES proxy_org(org_user_id), 
+	CONSTRAINT fk_proxy_org_parent_org_id FOREIGN KEY(parent_org_id) REFERENCES proxy_org(org_id), 
     CONSTRAINT fk_proxy_org_org_user_id FOREIGN KEY(org_user_id) REFERENCES users(user_id) ON DELETE CASCADE
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-insert into proxy_org(org_user_id) values (2);
+INSERT INTO proxy_org(org_user_id) VALUES (2);

@@ -40,6 +40,8 @@ public interface EmployeeService {
 	void changeProxyOrgRemarkName(int orgId, String remarkName);
 
 	void deleteProxyOrg(int orgId);
+
+	int getParentOrgIdByUserId(int currentUserId);
 	
 	
 
