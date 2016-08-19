@@ -11,6 +11,11 @@
 	
 	<se:authorize access="hasRole('ROLE_PROXY_ORG')">
 		<li class="active"> 
+			<a href="<s:url value='/employee/getProxyOrgList.html'/>">
+			<h5>合作机构</h5>
+			</a>
+		</li>
+		<li class="active"> 
 			<a href="<s:url value='/employee/getCustomerSupportList.html'/>">
 			<h5>客服管理</h5>
 			</a>
@@ -26,6 +31,10 @@
 			</a>
 		</li>
 	</se:authorize>
+	
+	
+	
+	
 	
 	
 	<li class="active"> 

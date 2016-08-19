@@ -39,6 +39,20 @@
 		</association>
 	</resultMap>
 	
+	<resultMap type="ProxyOrg" id="ProxyOrgResultMap">
+		<id property="orgId" column="org_id"/>
+		<result property="orgUserId" column="org_user_id"/>
+		<result property="parentOrgId" column="parent_org_id"/>
+		<result property="remarkName" column="remark_name"/>
+		<association property="user"  javaType="User">
+			<id property="userId" column="user_id"/>
+			<result property="username" column="username"/>
+			<result property="name" column="name"/>
+		</association>
+	</resultMap>
+	
+	
+	
 	<select id="getCustomerSupportList"  parameterType="int" resultMap="CustomerSupportResultMap">
 		select cs.id,cs.user_id, cs.remark_name,cs.proxy_org_id,u.username,u.name from customer_supports cs
 		join users u on u.user_id = cs.user_id
@@ -55,6 +69,13 @@
 		select p.id,p.user_id, p.remark_name,p.proxy_org_id,u.username,u.name from process_person p
 		join users u on u.user_id = p.user_id
 		where p.proxy_org_id=#{proxyOrgId}
+	</select>
+	
+	
+	<select id="getProxyOrgList"  parameterType="int" resultMap="ProxyOrgResultMap">
+		select p.org_id,p.org_user_id, p.remark_name,p.parent_org_id,u.username,u.name from proxy_org  p
+		join users u on u.user_id = p.org_user_id
+		where p.parent_org_id=#{parentOrgId}
 	</select>
 	
 	
@@ -76,7 +97,13 @@
 			user_id=#{userId},proxy_org_id=#{proxyOrgId}
 	</insert>
 		
-
+		
+		
+    <insert id="addOrUpdateProxyOrg" parameterType="ProxyOrg" useGeneratedKeys="true" keyProperty="orgId">
+		insert into proxy_org(org_user_id,parent_org_id,remark_name) values(#{orgUserId},#{parentOrgId},'')
+		on duplicate key update
+			org_user_id=#{orgUserId},parent_org_id=#{parentOrgId}
+	</insert>
 	
 	
 		
@@ -108,6 +135,13 @@
 		delete from process_person  where id=#{id} 	
 	</delete>
 	
+	<delete id="deleteProxyOrg" >
+		delete from group_members where username=(select username from users where user_id = 
+			(select org_user_id from proxy_org where org_id=#{orgId}))	and group_id=
+			(SELECT group_id FROM group_authorities WHERE authority="ROLE_PROXY_ORG");
+		delete from proxy_org  where org_id=#{orgId} 	
+	</delete>
+	
 	<update id="changeCustomerSupportRemarkName">
 		update customer_supports set remark_name=#{remarkName} where id=#{id}
 	</update>
@@ -119,5 +153,10 @@
 	<update id="changeProcessPersonRemarkName">
 		update process_person set remark_name=#{remarkName} where id=#{id}
 	</update>
+	
+	<update id="changeProxyOrgRemarkName">
+		update proxy_org set remark_name=#{remarkName} where org_id=#{orgId}
+	</update>
+	
 	
 </mapper>
