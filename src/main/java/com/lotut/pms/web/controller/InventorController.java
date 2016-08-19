@@ -174,7 +174,7 @@ public class InventorController {
 	}
 	
 	@RequestMapping(path="/downloadAttachmentFile", method=RequestMethod.GET)
-	public void downloadPatentFile(@RequestParam("InventorId")int InventorId, HttpServletResponse response,HttpServletRequest request) throws IOException {
+	public void downloadPatentFile(@RequestParam("inventorId")int InventorId, HttpServletResponse response,HttpServletRequest request) throws IOException {
 		response.setContentType("application/doc");
 		String relativeUrl = inventorService.getInventorUrlById(InventorId);
 		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");

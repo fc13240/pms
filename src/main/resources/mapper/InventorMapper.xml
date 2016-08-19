@@ -35,7 +35,8 @@
 	<select id="getAllInventorsByUser" parameterType="int" resultType="CommonInventor">
 		select inventor_id as inventorId ,inventor_name as inventorName,inventor_id_number as inventorNumber,
 		inventor_nationality as inventorNationality,inventor_mobile as inventorMobile,inventor_email as inventorEmail,
-		inventor_other_information as inventorComment,user_id  as userId
+		inventor_other_information as inventorComment,user_id  as userId,
+		inventor_attachment_file as inventorUrl 
 		from common_inventor where user_id =#{userId}
 	
 	</select>
