@@ -841,7 +841,6 @@
 <!--addAppPersonModal  -->
 <div class = "modal fade" id = "addAppPersonModal" tabindex = "-1" role = "dialog" 
    aria-labelledby = "myModalLabel" aria-hidden = "true" >
-   
    <div class = "modal-dialog" >
       <div class = "modal-content">
          
@@ -1512,10 +1511,10 @@ function loadImgs(){
 				var obj= $.parseJSON(data);
 				$.each(obj,function(i,item){
 					$("#inventorDiv").append(
-							"<span class='ss-item' id='inventor"+item.inventorId+"' style='margin-left:20px'>"+item.inventorName+""+
+							"<span class='ss-item' id='inventor"+item.inventorId+"' style='margin-left:20px'>"+item.inventorName+
 							"<a class='icon-btn-x' href='#' onclick='deleteTag(inventor"+item.inventorId+")'"+
 								">"+								
-								"<img src='<s:url value='/temp/images/remove.png'/>' style='float:left;'' />"+
+								"<img src='<s:url value='/temp/images/remove.png'/>' style='float:left;'/>"+
 							"</a>"+
 						 "</span>"
 					)
