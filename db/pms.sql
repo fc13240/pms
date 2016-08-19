@@ -760,6 +760,12 @@ CREATE TABLE user_app_person(
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 
 
+ALTER TABLE common_app_person DROP COLUMN record_status
+
+ALTER TABLE common_app_person ADD COLUMN  fee_reduce_transaction_status  VARCHAR(20) DEFAULT '未备案' COMMENT '费减备案'
+ALTER TABLE common_app_person ADD COLUMN  app_person_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址'
+
+
 CREATE TABLE patent_doc_app_person(
 	person_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	patent_doc_id BIGINT NOT NULL,
@@ -770,7 +776,12 @@ CREATE TABLE patent_doc_app_person(
 	other_information VARCHAR(50),
 	user_id INT NOT NULL,
 	CONSTRAINT fk_patent_doc_app_person_doc_id FOREIGN KEY idx_fk_patent_doc_app_person_doc_id(patent_doc_id) REFERENCES patent_documents(patent_doc_id) ON   DELETE   CASCADE
+
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE common_inventor ADD COLUMN  inventor_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址'
+
 
 CREATE TABLE IF NOT EXISTS proxy_org (
 	org_id INT PRIMARY KEY  AUTO_INCREMENT ,

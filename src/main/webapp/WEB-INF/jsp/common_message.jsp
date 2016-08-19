@@ -32,13 +32,6 @@
 				<div class="lt-box" style="padding:20px;">
 				  <div>${message}</div>
 				  <a href="javascript:history.go(-1)">返回上一步</a>
-				  <div class="footer">
-					<div class="footer-inner">
-					  <!-- #section:basics/footer -->
-					  <div class="footer-content"> <span class="bigger-120"> <span class="blue bolder">龙图腾</span> 2013-2014 </span> &nbsp; &nbsp; </div>
-					  <!-- /section:basics/footer -->
-					</div>
-				  </div>
 				</div>
 			</div>
 

@@ -63,5 +63,17 @@ public class InventorMybatisDao extends SqlSessionDaoSupport implements Inventor
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+	@Override
+	public void saveAttachmentFile(CommonInventor commonInventor) {
+		// TODO Auto-generated method stub
+		inventorMapper.saveAttachmentFile(commonInventor);
+	}
+
+	@Override
+	public String getInventorUrlById(int id) {
+		// TODO Auto-generated method stub
+		return inventorMapper.getInventorUrlById(id);
+	}
+
 }

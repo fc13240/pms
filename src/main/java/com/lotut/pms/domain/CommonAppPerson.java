@@ -11,12 +11,19 @@ public class CommonAppPerson {
 	private AppPersonType appPersonType;
 	private String peopleNumber;
 	private String postcodeAddress;
-	private String recordStatus;
+	private String feeReduceTransactionStatus;
 	private String otherInfo;
 	private int userId;
 	private List<User> shareUsers;
+	private String appPersonUrl;
 	
 	
+	public String getAppPersonUrl() {
+		return appPersonUrl;
+	}
+	public void setAppPersonUrl(String appPersonUrl) {
+		this.appPersonUrl = appPersonUrl;
+	}
 	public String getTypeName() {
 		return typeName;
 	}
@@ -66,11 +73,12 @@ public class CommonAppPerson {
 	public void setPostcodeAddress(String postcodeAddress) {
 		this.postcodeAddress = postcodeAddress;
 	}
-	public String getRecordStatus() {
-		return recordStatus;
+	
+	public String getFeeReduceTransactionStatus() {
+		return feeReduceTransactionStatus;
 	}
-	public void setRecordStatus(String recordStatus) {
-		this.recordStatus = recordStatus;
+	public void setFeeReduceTransactionStatus(String feeReduceTransactionStatus) {
+		this.feeReduceTransactionStatus = feeReduceTransactionStatus;
 	}
 	public String getOtherInfo() {
 		return otherInfo;

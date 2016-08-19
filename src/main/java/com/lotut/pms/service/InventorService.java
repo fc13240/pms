@@ -16,5 +16,8 @@ public interface InventorService {
 
 	 
 	 List<CommonInventor> getInventor(String inventor,int userId);
+	 void saveAttachmentFile(CommonInventor CommonInventor);
+	 String  getInventorUrlById(int id);
+	 
 
 }
