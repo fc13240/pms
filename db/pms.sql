@@ -795,3 +795,13 @@ CREATE TABLE IF NOT EXISTS proxy_org (
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 INSERT INTO proxy_org(org_user_id) VALUES (2);
+
+CREATE TABLE IF NOT EXISTS notice_remarks (
+	remark_id INT AUTO_INCREMENT PRIMARY KEY  ,
+	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+	content  VARCHAR(1000),
+	notice_id BIGINT NOT NULL,
+	user_id INT NOT NULL,
+	CONSTRAINT fk_notice_remarks_notice_id FOREIGN KEY(notice_id) REFERENCES notices(notice_id) , 
+	CONSTRAINT fk_notice_remarks_user_id FOREIGN KEY (user_id) REFERENCES users(user_id)	
+);
