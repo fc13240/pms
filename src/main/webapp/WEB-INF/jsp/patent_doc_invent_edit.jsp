@@ -626,19 +626,28 @@
 	        <div class="data_menu">
 	            <div class="menud" id="modelS" onclick="searModel(this)">
 	                模板库</div>
-	
+	            <div class="menud" id="modelS" onclick="searGuide(this)">
+	                撰写指南</div>	
 	        </div>
-	
-	        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><span id="templateSectionId" style="display:none;">1</span><a style="color:#ccc" href="javascript:upPage();" id="topUpPage">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="topDownPage">下一页</a></div>
-	        <div class="model" style="overflow-x: hidden; overflow-y: auto;">
-	            <div id="modelWrap" style="display: block;"></div>
-				<div id="hiddenmodel" style="display: none;"></div>
-	        </div>
-	        
-	        <div style="float: right; padding-right: 15px; padding-top: 5px; display: block;" id="kbpage2"><a style="color:#ccc" href="javascript:upPage();" id="bottomUpPage">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="bottomDownPage">下一页</a></div>
-	        <div id="scBs" class="shousou" onclick="bigSmall(this);">
-	        </div>
-	        <input type="hidden" name="name" value="small" id="hidBorS">
+			<div>
+				<div class="model-list">
+			        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><span id="templateSectionId" style="display:none;">1</span><a style="color:#ccc" href="javascript:upPage();" id="topUpPage">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="topDownPage">下一页</a></div>
+			        <div class="model" style="overflow-x: hidden; overflow-y: auto;">
+			            <div id="modelWrap" style="display: block;"></div>
+		
+						<div id="hiddenmodel" style="display: none;"></div>
+			        </div>
+			        
+			        <div style="float: right; padding-right: 15px; padding-top: 5px; display: block;" id="kbpage2"><a style="color:#ccc" href="javascript:upPage();" id="bottomUpPage">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="bottomDownPage">下一页</a></div>
+			        
+			        <div id="scBs" class="shousou" onclick="bigSmall(this);">
+			        </div>
+			        <input type="hidden" name="name" value="small" id="hidBorS">
+		        </div>
+		        <div class="guide-list" style="display:none;"><!--load 指南 然后控制 display -->
+		        <span>撰写指南:</span>
+		        </div>
+			</div> 
 	    </div>
 	</div>
 	
@@ -1518,8 +1527,18 @@ function loadImgs(){
 		
 	}
 	
-	
-
+	function searModel(){
+		
+		$('.model-list').show();
+		$('.guide-list').hide();
+		
+	}
+	function searGuide(){
+		
+		$('.model-list').hide();
+		$('.guide-list').show();
+		
+	}
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	

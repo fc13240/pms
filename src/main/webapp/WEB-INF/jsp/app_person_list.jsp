@@ -18,10 +18,6 @@
 <div class="col-xs-1 sidebar" style="min-width:100px;">
 			<%@ include file="_left_nav_editor.jsp" %>
 		  </div>
-			<!-- 		  <div class="col-xs-offset-1 col-xs-11">
-			<div class="lt-right">
-				<div style="height:10px;"></div>
-					<div class="lt-box" style="padding:20px;"> -->
 		<div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
 				<div style="height:10px;"></div>
