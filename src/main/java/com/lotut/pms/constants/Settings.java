@@ -17,5 +17,6 @@ public interface Settings {
 	final String APP_PERSON_ATTACHMENT_FILE_PATH="/opt/media/patent/appPersonFile/";
 	final String INVENTOR_ATTACHMENT_FILE_PATH="/opt/media/patent/inventorFile/";
 	final String PATENTDOC_FILE_PATH="/opt/media/patent/patentDoc/";
-
+	final String PROXY_FILE_PATH="/opt/media/patent/proxyFile/";
+	final String PROXY_TEMPLATE_FILE_PATH ="/opt/media/patent/proxyTemplate/";
 }

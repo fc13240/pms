@@ -14,11 +14,12 @@ public interface AppPersonMapper {
 	CommonAppPerson getOneAppPersonById(int id);
 	void updateAppPerson(CommonAppPerson AppPerson);
 	void deleteAppPersonById(int id);
-
 	List<CommonAppPerson> getUserAppPersons(int userId);
-
 	void saveAttachmentFile(CommonAppPerson AppPerson);
 	String getAppPersonUrlById(int id);
-
 	void addCommonAppPerson(CommonAppPerson CommonAppPerson);
+	void saveProxyFile(CommonAppPerson AppPerson);
+	String getProxyUrlById(int id);
+	void deleteAttachmentFileById(int id);
+	void deleteProxyFileById(int id);
 }

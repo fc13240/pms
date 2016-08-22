@@ -78,4 +78,25 @@ public class AppPersonServiceImpl implements AppPersonService {
 		AppPersonDao.addCommonAppPerson(CommonAppPerson);
 
 	}
+
+
+	@Override
+	public void saveProxyFile(CommonAppPerson AppPerson) {
+		// TODO Auto-generated method stub
+		AppPersonDao.saveProxyFile(AppPerson);
+	}
+
+
+	@Override
+	public String getProxyUrlById(int id) {
+		// TODO Auto-generated method stub
+		return AppPersonDao.getProxyUrlById(id);
+	}
+
+
+	@Override
+	public void deleteAttachmentFileById(int id) {
+		// TODO Auto-generated method stub
+		AppPersonDao.deleteAttachmentFileById(id);
+	}
 }

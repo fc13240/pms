@@ -27,9 +27,11 @@ import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Notice;
 import com.lotut.pms.domain.NoticePaperApplyType;
 import com.lotut.pms.domain.NoticeProcessStatus;
+import com.lotut.pms.domain.NoticeRemark;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.PatentRemark;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.StatsHashMap;
 import com.lotut.pms.service.NoticeService;
@@ -217,4 +219,21 @@ public class NoticeController {
 	    }
 	    return null;
 	}
+	
+	
+	@RequestMapping(path="/showRemarks", method=RequestMethod.GET)
+	public String showRemarks(@RequestParam("noticeId") String noticeId, Model model) {
+		List<NoticeRemark> remarks = noticeService.getNoticeRemarks(noticeId);
+		model.addAttribute("remarks", remarks);
+		model.addAttribute("addNoticeId", noticeId);
+		return "notice_remarks";
+	}	
+	
+	@RequestMapping(path="addNoticeRemark", method=RequestMethod.POST)
+	public String addNoticeRemark(@RequestParam("noticeId") String noticeId, @RequestParam("content") String content,Model model) {		
+		int userId = PrincipalUtils.getCurrentUserId();
+		noticeService.addNoticeRemark(noticeId,content,userId);		
+		return "notice_remarks";
+	}	
+	
 }

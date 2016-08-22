@@ -61,4 +61,19 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 		AppPersonMapper.addCommonAppPerson(CommonAppPerson);
 
 	}
+	@Override
+	public void saveProxyFile(CommonAppPerson AppPerson) {
+		// TODO Auto-generated method stub
+		AppPersonMapper.saveProxyFile(AppPerson);
+	}
+	@Override
+	public String getProxyUrlById(int id) {
+		// TODO Auto-generated method stub
+		return AppPersonMapper.getProxyUrlById(id);
+	}
+	@Override
+	public void deleteAttachmentFileById(int id) {
+		// TODO Auto-generated method stub
+		AppPersonMapper.deleteAttachmentFileById(id);
+	}
 }

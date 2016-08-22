@@ -49,6 +49,7 @@
 		<typeAlias alias="PatentOfficeAccount" type="com.lotut.pms.domain.PatentOfficeAccount"/>
 		
 		<typeAlias type="com.lotut.pms.domain.PatentRemark" alias="PatentRemark"/>
+		<typeAlias type="com.lotut.pms.domain.NoticeRemark" alias="NoticeRemark"/>
 		<typeAlias type="com.lotut.pms.domain.PatentDocSectionType" alias="PatentDocSectionType"/>
 		<typeAlias type="com.lotut.pms.domain.PatentDocumentTemplate" alias="PatentDocumentTemplate"/>
 		<typeAlias type="com.lotut.pms.domain.Attachment" alias="Attachment"/>
@@ -56,12 +57,13 @@
 		<typeAlias type="com.lotut.pms.domain.CustomerSupport" alias="CustomerSupport"/>
 		<typeAlias type="com.lotut.pms.domain.TechPerson" alias="TechPerson"/>
 		<typeAlias type="com.lotut.pms.domain.ProcessPerson" alias="ProcessPerson"/>
-		<typeAlias type="com.lotut.pms.domain.ProxyOrg" alias="ProxyOrg"/>
+		<typeAlias type="com.lotut.pms.domain.ProxyOrg" alias="ProxyOrg"/>		
 	
 		<typeAlias type="com.lotut.pms.domain.CommonAppPerson" alias="CommonAppPerson"/>
 		<typeAlias type="com.lotut.pms.domain.AppPersonType" alias="AppPersonType"/>
 		<typeAlias type="com.lotut.pms.domain.CommonInventor" alias="CommonInventor"/>
 		<typeAlias alias="ShareAppPerson" type="com.lotut.pms.domain.ShareAppPerson"/>
 		<typeAlias alias="ShareInventor" type="com.lotut.pms.domain.ShareInventor"/>
+		<typeAlias alias="PatentDocStatus" type="com.lotut.pms.domain.PatentDocStatus"/>
 	</typeAliases>  
 </configuration>
