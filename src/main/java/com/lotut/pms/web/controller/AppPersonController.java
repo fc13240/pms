@@ -183,33 +183,35 @@ public class AppPersonController {
 			e.printStackTrace();
 		}}else{
 			try{
-			AppPersonService.deleteAttachmentFileById(appPersonId);
-			String savePath=Settings.APP_PERSON_ATTACHMENT_FILE_PATH;
-			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-			MultipartFile file1 = multipartRequest.getFile("file");
-			String fileName = file1.getOriginalFilename();
-	        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			String ymd = sdf.format(new Date());
-			savePath += ymd + "/";
-			File dirFile = new File(savePath);
-			if (!dirFile.exists()) {
-				dirFile.mkdirs();
-			}
-			String newFileName = userId + "_" + appPersonId + "_" + fileName;
-			InputStream is = file1.getInputStream();
-			int BUFFER_SIZE = 8 * 1024;
-			byte[] buffer = new byte[BUFFER_SIZE];
-			try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
-				int bytesRead = -1;
-				while ((bytesRead = is.read(buffer)) != -1) {
-					out.write(buffer, 0, bytesRead);
+				String filePath = Settings.APP_PERSON_ATTACHMENT_FILE_PATH + relativeUrl;
+				File file2=new File(filePath);
+				file2.delete();
+				String savePath=Settings.APP_PERSON_ATTACHMENT_FILE_PATH;
+				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+				MultipartFile file1 = multipartRequest.getFile("file");
+				String fileName = file1.getOriginalFilename();
+		        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+				String ymd = sdf.format(new Date());
+				savePath += ymd + "/";
+				File dirFile = new File(savePath);
+				if (!dirFile.exists()) {
+					dirFile.mkdirs();
 				}
-				out.flush();
-				out.close();
-			}
-			WebUtils.writeJsonStrToResponse(response,ymd + "/"+newFileName);
-			}catch(Exception e){
-				e.printStackTrace();
+				String newFileName = userId + "_" + appPersonId + "_" + fileName;
+				InputStream is = file1.getInputStream();
+				int BUFFER_SIZE = 8 * 1024;
+				byte[] buffer = new byte[BUFFER_SIZE];
+				try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
+					int bytesRead = -1;
+					while ((bytesRead = is.read(buffer)) != -1) {
+						out.write(buffer, 0, bytesRead);
+					}
+					out.flush();
+					out.close();
+				}
+				WebUtils.writeJsonStrToResponse(response,ymd + "/"+newFileName);
+				}catch(Exception e){
+					e.printStackTrace();
 			}
 		}
 	}	
@@ -264,10 +266,12 @@ public class AppPersonController {
 //		}
 //	}
 	@RequestMapping(path="/uploadProxyFile",method=RequestMethod.POST)
-	public void uploadProxyFile(HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
+	public void uploadProxyFile(@RequestParam("appPersonId") int appPersonId,HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
 		int userId = PrincipalUtils.getCurrentUserId();
+		String relativeUrl = AppPersonService.getProxyUrlById(appPersonId);
+		if(relativeUrl==null){
 		try{
-			String savePath=Settings.APP_PERSON_ATTACHMENT_FILE_PATH;
+			String savePath=Settings.PROXY_FILE_PATH;
 			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 			MultipartFile file1 = multipartRequest.getFile("file");
 			String fileName = file1.getOriginalFilename();
@@ -278,7 +282,7 @@ public class AppPersonController {
 			if (!dirFile.exists()) {
 				dirFile.mkdirs();
 			}
-			String newFileName = userId + "_" + new Random().nextInt(10000) + "_" + fileName;
+			String newFileName = userId + "_" + appPersonId + "_" + fileName;
 			InputStream is = file1.getInputStream();
 			int BUFFER_SIZE = 8 * 1024;
 			byte[] buffer = new byte[BUFFER_SIZE];
@@ -293,6 +297,38 @@ public class AppPersonController {
 			WebUtils.writeJsonStrToResponse(response,ymd + "/"+newFileName);
 		}catch(Exception e){
 			e.printStackTrace();
+		}}else{
+			try{
+				String filePath = Settings.PROXY_FILE_PATH + relativeUrl;
+				File file2=new File(filePath);
+				file2.delete();
+				String savePath=Settings.PROXY_FILE_PATH;
+				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+				MultipartFile file1 = multipartRequest.getFile("file");
+				String fileName = file1.getOriginalFilename();
+		        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+				String ymd = sdf.format(new Date());
+				savePath += ymd + "/";
+				File dirFile = new File(savePath);
+				if (!dirFile.exists()) {
+					dirFile.mkdirs();
+				}
+				String newFileName = userId + "_" + appPersonId + "_" + fileName;
+				InputStream is = file1.getInputStream();
+				int BUFFER_SIZE = 8 * 1024;
+				byte[] buffer = new byte[BUFFER_SIZE];
+				try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
+					int bytesRead = -1;
+					while ((bytesRead = is.read(buffer)) != -1) {
+						out.write(buffer, 0, bytesRead);
+					}
+					out.flush();
+					out.close();
+				}
+				WebUtils.writeJsonStrToResponse(response,ymd + "/"+newFileName);
+				}catch(Exception e){
+					e.printStackTrace();
+			}
 		}
 	}	
 	
@@ -308,7 +344,7 @@ public class AppPersonController {
 		response.setContentType("application/doc");
 		String relativeUrl = AppPersonService.getProxyUrlById(appPersonId);
 		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
-		String filePath = Settings.APP_PERSON_ATTACHMENT_FILE_PATH + relativeUrl;
+		String filePath = Settings.PROXY_FILE_PATH + relativeUrl;
 		File appPersonFile = new File(filePath);
 		if("FF".equals(getBrowser(request))){
 		    //针对火狐浏览器处理

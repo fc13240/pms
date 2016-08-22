@@ -21,4 +21,5 @@ public interface AppPersonMapper {
 	void saveProxyFile(CommonAppPerson AppPerson);
 	String getProxyUrlById(int id);
 	void deleteAttachmentFileById(int id);
+	void deleteProxyFileById(int id);
 }

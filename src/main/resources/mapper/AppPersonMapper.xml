@@ -103,5 +103,6 @@
   	<update id="deleteAttachmentFileById" parameterType="CommonAppPerson">
   		update common_app_person set app_person_attachment_file=null where app_person_id =#{appPersonId}
   	</update>
+  
   </mapper>
   
