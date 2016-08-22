@@ -30,11 +30,11 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="height:300px;padding:20px;">
-					<form id="appPersonFileForm" action="<s:url value='/appPerson/uploadAttachmentFile.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
-						<input style="display:none;"  id="appPersonFile" name="file" type="file" />
+					<form id="proxyFileForm" action="<s:url value='/appPerson/uploadProxytFile.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+						<input style="display:none;"  id="proxyFile" name="file" type="file" />
 						<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
-						<button type="button" onclick="$('input[id=appPersonFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
-						<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAppPersonFile()">上传</button>
+						<button type="button" onclick="$('input[id=proxyFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+						<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadProxyFile()">上传</button>
 						<input type="hidden" id="appPersonId" name="appPersonId" value="${appPersonId}">
 					</form> 
 					<div style="height:10px;">&nbsp;</div> 
@@ -54,15 +54,16 @@
 
 
 <script type="text/javascript">
-	$('input[id="appPersonFile"]').change(function() {
+	$('input[id="proxyFile"]').change(function() {
 		$('#filename').val($(this).val());  
 	});
 	
-	function uploadAppPersonFile(value){
-		var hideForm = $('#appPersonFileForm'); 
+	function uploadProxyFile(){
+		
+		var hideForm = $('#proxyFileForm'); 
 		var options = {
 			dataType : "json", 
-			data: {'file': $("#appPersonFile").val()},
+			data: {'file': $("#proxyFile").val()},
 			beforeSubmit : function() {
 				var name=$("#filename").val();
 				var mime = name.toLowerCase().substr(name.lastIndexOf("."));
@@ -86,8 +87,8 @@
 		var appPersonId=$("#appPersonId").val();
 		$.ajax({
 			type: "POST",
-			url: "<s:url value='/appPerson/saveAppPersonFile.html'/>",
-			data: {"appPersonId":appPersonId,"appPersonUrl":value},
+			url: "<s:url value='/appPerson/saveProxyFile.html'/>",
+			data: {"appPersonId":appPersonId,"proxyUrl":value},
 			success: function(data){
 				alert("保存成功");
 			},
