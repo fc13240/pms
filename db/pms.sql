@@ -557,7 +557,7 @@ CREATE TABLE  patent_documents (
   abstract_desc mediumtext COMMENT '摘要',
   abstract_img varchar(200) DEFAULT NULL COMMENT '摘要附图',
   patent_doc_attachment_file varchar(200) DEFAULT NULL COMMENT '上传附件保存地址',
-  patent_doc_status int NOT NULL COMMENT '文档状态'
+  patent_doc_status int NOT NULL COMMENT '文档状态',
   PRIMARY KEY (patent_doc_id),
   KEY fk_patent_documents_patent_type (patent_type),
   KEY fk_patent_documents_doc_owner_id (user_id),
