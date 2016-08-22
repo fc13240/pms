@@ -557,11 +557,13 @@ CREATE TABLE  patent_documents (
   abstract_desc mediumtext COMMENT '摘要',
   abstract_img varchar(200) DEFAULT NULL COMMENT '摘要附图',
   patent_doc_attachment_file varchar(200) DEFAULT NULL COMMENT '上传附件保存地址',
+  patent_doc_status int NOT NULL COMMENT '文档状态',
   PRIMARY KEY (patent_doc_id),
   KEY fk_patent_documents_patent_type (patent_type),
   KEY fk_patent_documents_doc_owner_id (user_id),
   CONSTRAINT fk_patent_documents_doc_owner_id FOREIGN KEY (user_id) REFERENCES users (user_id),
-  CONSTRAINT fk_patent_documents_patent_type FOREIGN KEY (patent_type) REFERENCES patent_types (patent_type_id)
+  CONSTRAINT fk_patent_documents_patent_type FOREIGN KEY (patent_type) REFERENCES patent_types (patent_type_id),
+  constraint fk_patent_documents_status foreign key idx_fk_patent_doc_status (patent_doc_status) references patent_doc_status(patent_doc_status_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 
@@ -802,7 +804,13 @@ INSERT INTO proxy_org(org_user_id) VALUES (2);
 
 
 
+
+ALTER TABLE common_inventor ADD COLUMN  proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址'
+
+
+
 ALTER TABLE common_app_person ADD COLUMN  proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址'
+
 
 
 CREATE TABLE IF NOT EXISTS notice_remarks (
@@ -816,3 +824,30 @@ CREATE TABLE IF NOT EXISTS notice_remarks (
 );
 
 
+//专利文档状态表
+CREATE TABLE IF NOT EXISTS patent_doc_status (
+	patent_doc_status_id INT AUTO_INCREMENT PRIMARY KEY,
+	patent_doc_status_desc VARCHAR(10) NOT NULL UNIQUE
+);
+
+INSERT INTO patent_doc_status (patent_doc_status_id, patent_doc_status_desc)
+VALUES
+	(1, '草稿'),
+	(2, '已委托'),
+	(3, '立案分配'),
+	(4, '已分配'),
+	(5, '专家撰写'),
+	(6, '待确认'),
+	(7, '待修改'),
+	(8, '定稿'),
+	(9, '已制作标准申请文件'),
+	(10, '待交局'),
+	(11, '已交局');
+
+create table if not exists user_patent_docs (
+	user int,
+	patent_doc bigint,
+	constraint pk_user_patent_docs primary key (user, patent_doc),
+	constraint fk_user_patent_doc_user foreign key idx_fk_user_patent_doc_user (user) references users(user_id) on delete cascade,
+	constraint fk_user_patent_docs_patent_docs foreign key idx_fk_user_patent_docs_patent_docs (patent_doc) references patent_documents(patent_doc_id) on delete cascade
+);

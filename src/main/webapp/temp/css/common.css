@@ -155,7 +155,7 @@ zoom: 1;
 }
 .nav .menu li {
 float: left;
-width:130px;
+width:100px;
 height: 40px;
 line-height: 40px;
 
@@ -167,12 +167,12 @@ background: #930;
 .nav .menu li a {
 position: relative;
 display: inline-block;
-padding: 0 28px;
+
 height: 40px;
 line-height: 40px;
 font-size: 16px;
 text-align: center;
-width: 130px;
+width: 100px;
 color: #ffffff;
 }
 
