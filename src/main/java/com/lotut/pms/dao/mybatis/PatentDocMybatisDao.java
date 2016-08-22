@@ -1,6 +1,7 @@
 package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -130,5 +131,13 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	@Override
 	public String getPatentDocUrlById(long patentDocId) {
 		return patentDocMapper.getPatentDocUrlById(patentDocId);
+	}
+
+
+
+	@Override
+	public void insertUserPatentDoc(List<Map<String, Integer>> userPatentDocRecords) {
+		patentDocMapper.insertUserPatentDoc(userPatentDocRecords);
+		
 	}
 }
