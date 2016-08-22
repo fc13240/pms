@@ -186,6 +186,14 @@ public class AppPersonController {
 				String filePath = Settings.APP_PERSON_ATTACHMENT_FILE_PATH + relativeUrl;
 				File file2=new File(filePath);
 				file2.delete();
+				String filePath2=filePath.substring(0, filePath.lastIndexOf("/"));
+				File file3=new File(filePath2);
+				if(file3.isDirectory()){
+					String[] files=file3.list();
+					if(files.length==0){
+						file3.delete();
+					}
+				}
 				String savePath=Settings.APP_PERSON_ATTACHMENT_FILE_PATH;
 				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 				MultipartFile file1 = multipartRequest.getFile("file");
@@ -302,6 +310,14 @@ public class AppPersonController {
 				String filePath = Settings.PROXY_FILE_PATH + relativeUrl;
 				File file2=new File(filePath);
 				file2.delete();
+				String filePath2=filePath.substring(0, filePath.lastIndexOf("/"));
+				File file3=new File(filePath2);
+				if(file3.isDirectory()){
+					String[] files=file3.list();
+					if(files.length==0){
+						file3.delete();
+					}
+				}
 				String savePath=Settings.PROXY_FILE_PATH;
 				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 				MultipartFile file1 = multipartRequest.getFile("file");
