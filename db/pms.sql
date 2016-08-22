@@ -800,7 +800,7 @@ CREATE TABLE IF NOT EXISTS proxy_org (
 
 INSERT INTO proxy_org(org_user_id) VALUES (2);
 
-<<<<<<< HEAD
+
 CREATE TABLE IF NOT EXISTS notice_remarks (
 	remark_id INT AUTO_INCREMENT PRIMARY KEY  ,
 	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
@@ -810,5 +810,5 @@ CREATE TABLE IF NOT EXISTS notice_remarks (
 	CONSTRAINT fk_notice_remarks_notice_id FOREIGN KEY(notice_id) REFERENCES notices(notice_id) , 
 	CONSTRAINT fk_notice_remarks_user_id FOREIGN KEY (user_id) REFERENCES users(user_id)	
 );
-=======
->>>>>>> 4c3bf2388b86bf7efaf2ec01b1dc1f8b456fc29e
+
+
