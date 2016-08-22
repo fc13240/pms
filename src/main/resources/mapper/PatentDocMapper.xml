@@ -37,10 +37,16 @@
 
 	
  	<insert id="savePatentDoc" parameterType="PatentDoc" useGeneratedKeys="true" keyProperty="patentDocId">
-		insert into patent_documents(app_no,user_id,patent_type,create_time,patent_name,manual,right_claim,abstract_desc,abstract_img) values
+		insert into patent_documents(app_no,user_id,patent_type,create_time,patent_name,manual,right_claim,abstract_desc,abstract_img,patent_doc_status) values
 		(#{appNo,javaType=string,jdbcType=VARCHAR},#{userId},#{patentType},now(),#{name,javaType=string,jdbcType=BIGINT},
-		#{manual,javaType=string,jdbcType=CLOB},#{rightClaim,javaType=string,jdbcType=CLOB},#{abstractDescription,javaType=string,jdbcType=CLOB},#{abstractImg,javaType=string,jdbcType=VARCHAR});
+		#{manual,javaType=string,jdbcType=CLOB},#{rightClaim,javaType=string,jdbcType=CLOB},#{abstractDescription,javaType=string,jdbcType=CLOB},#{abstractImg,javaType=string,jdbcType=VARCHAR},1);
 	</insert>
+	
+	<insert id="saveUserPatentDoc"  >
+		insert into user_patent_docs(user_id,patent_doc) values
+		(#{userId},#{patentDocId});
+	</insert>
+	
 	
 	<select id="getUserPatentDoc"  resultMap="PatentDocMap">
 		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
