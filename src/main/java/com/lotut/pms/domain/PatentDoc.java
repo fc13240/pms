@@ -22,10 +22,17 @@ public class PatentDoc {
 	private String abstractImg;
 	private String patentDocAttachmentFile;
 	private String patentDocUrl;
+	private PatentDocStatus patentDocStatus;
 	
 	
 	
 
+	public PatentDocStatus getPatentDocStatus() {
+		return patentDocStatus;
+	}
+	public void setPatentDocStatus(PatentDocStatus patentDocStatus) {
+		this.patentDocStatus = patentDocStatus;
+	}
 	public String getPatentDocUrl() {
 		return patentDocUrl;
 	}
