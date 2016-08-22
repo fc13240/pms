@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管家——上传发明人文档</title>
+<title>龙图腾专利管家——上传申请人文档</title>
 <%@ include file="_css.jsp" %>
 </head>
 <body>
@@ -30,12 +30,12 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="height:300px;padding:20px;">
-					<form id="inventorFileForm" action="<s:url value='/inventor/uploadAttachmentFile.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
-						<input style="display:none;"  id="inventorFile" name="file" type="file" />
+					<form id="proxyFileForm" action="<s:url value='/appPerson/uploadProxyFile.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+						<input style="display:none;"  id="proxyFile" name="file" type="file" />
 						<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
-						<button type="button" onclick="$('input[id=inventorFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
-						<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadInventorFile()">上传</button>
-						<input type="hidden" id="inventorId" name="inventorId" value="${inventorId}">
+						<button type="button" onclick="$('input[id=proxyFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+						<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadProxyFile()">上传</button>
+						<input type="hidden" id="appPersonId" name="appPersonId" value="${appPersonId}">
 					</form> 
 					<div style="height:10px;">&nbsp;</div> 
 					<span style="color:#666;">友情提示：建议上传后缀名为.doc或.docx格式的专利文档!
@@ -54,16 +54,16 @@
 
 
 <script type="text/javascript">
-	$('input[id="inventorFile"]').change(function() {
+	$('input[id="proxyFile"]').change(function() {
 		$('#filename').val($(this).val());  
 	});
 	
-	function uploadInventorFile(){
+	function uploadProxyFile(){
 		
-		var hideForm = $('#inventorFileForm'); 
+		var hideForm = $('#proxyFileForm'); 
 		var options = {
 			dataType : "json", 
-			data: {'file': $("#inventorFile").val()},
+			data: {'file': $("#proxyFile").val()},
 			beforeSubmit : function() {
 				var name=$("#filename").val();
 				var mime = name.toLowerCase().substr(name.lastIndexOf("."));
@@ -84,11 +84,11 @@
 		hideForm.ajaxSubmit(options); 
 	}
 	function uploadSuccess(value){
-		var inventorId=$("#inventorId").val();
+		var appPersonId=$("#appPersonId").val();
 		$.ajax({
 			type: "POST",
-			url: "<s:url value='/inventor/saveInventorFile.html'/>",
-			data: {"inventorId":inventorId,"inventorUrl":value},
+			url: "<s:url value='/appPerson/saveProxyFile.html'/>",
+			data: {"appPersonId":appPersonId,"proxyUrl":value},
 			success: function(data){
 				alert("保存成功");
 			},

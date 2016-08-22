@@ -3,7 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper  namespace="com.lotut.pms.dao.mapper.PatentDocMapper">
-
+	
+	<resultMap type="PatentDocStatus" id="PatentDocStatusResultMap">
+		<id property="patentDocStatusId" column="patent_doc_status_id"/>
+		<result property="statusDescription" column="patent_doc_status_desc"/>
+	</resultMap>
+	
 	<resultMap type="PatentDoc" id="PatentDocMap">
 		<id property="patentDocId" column="patent_doc_id"/>
 		<result property="appNo" column="app_no"/>
@@ -18,6 +23,7 @@
 		<result property="abstractImg" column="abstract_img"/>
 		<result property="patentDocAttachmentFile" column="patent_doc_attachment_file"/>
 		<result property="patentDocUrl" column="patent_doc_url"/>
+		<association property="PatentDocStatus" resultMap="PatentDocStatusResultMap"/>
 	</resultMap>
 
 		<resultMap type="Attachment" id="PatentImgMap">
@@ -31,10 +37,16 @@
 
 	
  	<insert id="savePatentDoc" parameterType="PatentDoc" useGeneratedKeys="true" keyProperty="patentDocId">
-		insert into patent_documents(app_no,user_id,patent_type,create_time,patent_name,manual,right_claim,abstract_desc,abstract_img) values
+		insert into patent_documents(app_no,user_id,patent_type,create_time,patent_name,manual,right_claim,abstract_desc,abstract_img,patent_doc_status) values
 		(#{appNo,javaType=string,jdbcType=VARCHAR},#{userId},#{patentType},now(),#{name,javaType=string,jdbcType=BIGINT},
-		#{manual,javaType=string,jdbcType=CLOB},#{rightClaim,javaType=string,jdbcType=CLOB},#{abstractDescription,javaType=string,jdbcType=CLOB},#{abstractImg,javaType=string,jdbcType=VARCHAR});
+		#{manual,javaType=string,jdbcType=CLOB},#{rightClaim,javaType=string,jdbcType=CLOB},#{abstractDescription,javaType=string,jdbcType=CLOB},#{abstractImg,javaType=string,jdbcType=VARCHAR},1);
 	</insert>
+	
+	<insert id="saveUserPatentDoc"  >
+		insert into user_patent_docs(user_id,patent_doc) values
+		(#{userId},#{patentDocId});
+	</insert>
+	
 	
 	<select id="getUserPatentDoc"  resultMap="PatentDocMap">
 		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,

@@ -273,10 +273,10 @@
 							   <a   style="color:red" href="javascript:return void" onclick="delectPatent('<c:out value='${patent.patentId}'/>')">
 							  删除
 							  </a>
-							  <a href="<s:url value='/patent/showRemarks.html'/>?patentId=<c:out value='${patent.patentId}'/>">
+							  <a target="_blank" href="<s:url value='/patent/showRemarks.html'/>?patentId=<c:out value='${patent.patentId}'/>">
 							  备注
 							  </a>
-							 <a href="<s:url value='/patent/showPatentDetail.html'/>?patentId=${patent.patentId}&ownerId=${patent.ownerId}">
+							 <a target="_blank" href="<s:url value='/patent/showPatentDetail.html'/>?patentId=${patent.patentId}&ownerId=${patent.ownerId}">
 							  修改
 							  </a> 
 							  <br> 

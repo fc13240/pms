@@ -134,8 +134,10 @@ public class InventorController {
 	}
 	
 	@RequestMapping(path="/uploadAttachmentFile",method=RequestMethod.POST)
-	public void uploadAttachmentFile(HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
+	public void uploadProxyFile(@RequestParam("inventorId") int inventorId,HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
 		int userId = PrincipalUtils.getCurrentUserId();
+		String relativeUrl = inventorService.getInventorUrlById(inventorId);
+		if(relativeUrl==null){
 		try{
 			String savePath=Settings.INVENTOR_ATTACHMENT_FILE_PATH;
 			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -148,7 +150,7 @@ public class InventorController {
 			if (!dirFile.exists()) {
 				dirFile.mkdirs();
 			}
-			String newFileName = userId + "_" + new Random().nextInt(10000) + "_" + fileName;
+			String newFileName = userId + "_" + inventorId + "_" + fileName;
 			InputStream is = file1.getInputStream();
 			int BUFFER_SIZE = 8 * 1024;
 			byte[] buffer = new byte[BUFFER_SIZE];
@@ -163,6 +165,46 @@ public class InventorController {
 			WebUtils.writeJsonStrToResponse(response,ymd + "/"+newFileName);
 		}catch(Exception e){
 			e.printStackTrace();
+		}}else{
+			try{
+				String filePath = Settings.INVENTOR_ATTACHMENT_FILE_PATH + relativeUrl;
+				File file2=new File(filePath);
+				file2.delete();
+				String filePath2=filePath.substring(0, filePath.lastIndexOf("/"));
+				File file3=new File(filePath2);
+				if(file3.isDirectory()){
+					String[] files=file3.list();
+					if(files.length==0){
+						file3.delete();
+					}
+				}
+				String savePath=Settings.INVENTOR_ATTACHMENT_FILE_PATH;
+				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+				MultipartFile file1 = multipartRequest.getFile("file");
+				String fileName = file1.getOriginalFilename();
+		        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+				String ymd = sdf.format(new Date());
+				savePath += ymd + "/";
+				File dirFile = new File(savePath);
+				if (!dirFile.exists()) {
+					dirFile.mkdirs();
+				}
+				String newFileName = userId + "_" + inventorId + "_" + fileName;
+				InputStream is = file1.getInputStream();
+				int BUFFER_SIZE = 8 * 1024;
+				byte[] buffer = new byte[BUFFER_SIZE];
+				try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
+					int bytesRead = -1;
+					while ((bytesRead = is.read(buffer)) != -1) {
+						out.write(buffer, 0, bytesRead);
+					}
+					out.flush();
+					out.close();
+				}
+				WebUtils.writeJsonStrToResponse(response,ymd + "/"+newFileName);
+				}catch(Exception e){
+					e.printStackTrace();
+			}
 		}
 	}	
 	

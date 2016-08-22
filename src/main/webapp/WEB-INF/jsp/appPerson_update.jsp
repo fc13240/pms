@@ -55,13 +55,22 @@
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" value="${appPerson.postcodeAddress }" name="postcodeAddress" required onblur="validateInfoNumber1(this.value)"/>
 					<span style="color: red; display: none;" id=numberError1>请输入正确的证件号码</span>
 					<br>
-					<h5>费减方案:</h5>
+					<h5>费减备案状态:</h5>
 					<select name="feeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;"  required>
 					  <option value="${appPerson.feeReduceTransactionStatus}">${appPerson.feeReduceTransactionStatus}</option>
+					  <option value="未备案">未备案</option>
 					  <option value="委托中">委托中</option>
 					  <option value="备案成功">备案成功</option>
 					  <option value="备案失败">备案失败</option>
 					</select>
+					<br>
+					<h5>备案证件号:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" name="transactionIdentityId" required onblur="validateInfoNumber2(this.value)"/>
+					<span style="color: red; display: none;" id=numberError2>请输入合理的备案证件号</span>
+					<br>
+					<h5>备案年度:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece3" type="text" name="transactionYear" required onblur="validateInfoNumber3(this.value)"/>
+					<span style="color: red; display: none;" id=numberError3>请输入合理的备案年度</span>
 					<br>
 					<h5>其他信息:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" value="${appPerson.otherInfo }" name="otherInfo" required onblur="validateCommentNumber(this.value)"/>
@@ -129,27 +138,50 @@
 		}
 	}
 
+	function validateInfoNumber2(phoneNumber) {
+		var reg = new RegExp("^[0-9]*$");
+		document.getElementById("numberError2").style.display = "none";
+			if (phoneNumber.length>20) {
+				document.getElementById("numberError2").style.display = "";
+				return false;
+			} else {
+				return true;
+			}
+	}
+	
+	function validateInfoNumber3(phoneNumber) {
+		var reg = new RegExp("^[0-9]*$");
+		document.getElementById("numberError3").style.display = "none";
+			if (phoneNumber.length>20) {
+				document.getElementById("numberError3").style.display = "";
+				return false;
+			} else {
+				return true;
+			}
+	}
 	function validateCommentNumber(phoneNumber) {
 		var reg = new RegExp("^[0-9]*$");
 		document.getElementById("commentError").style.display = "none";
-		if (reg.test(phoneNumber)) {
 			if (phoneNumber.length>50) {
 				document.getElementById("commentError").style.display = "";
 				return false;
 			} else {
 				return true;
 			}
-		} 
-		return true;
+		
 	}
 
 	function check() {
 		 var phone = document.getElementById("phoneRece").value;  
 		 var number=document.getElementById("numberRece").value;
 		 var number1=document.getElementById("numberRece1").value;
+		 var number2=document.getElementById("numberRece2").value;
+		 var number3=document.getElementById("numberRece3").value;
 		 var comment=document.getElementById("commentRece").value;
 		if(validatePhoneNumber(phone)&validateInfoNumber(number)
 				&validateInfoNumber1(number1)
+				&validateInfoNumber2(number2)
+				&validateInfoNumber3(number3)
 				&validateCommentNumber(comment)){
 			return true;
 		}else {
@@ -159,5 +191,6 @@
 	}
 
 </script>
+
 </body>
 </html>

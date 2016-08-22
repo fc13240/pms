@@ -5,11 +5,16 @@
 	<ul style="maring:0px;padding:0px;">
 	<li class="active"> 
 		<a href="<s:url value='/editor/newPatentType.html'/>">
-		<h5>新建专利</h5>
+		<h5>在线撰写</h5>
 		</a>
 	</li>
 	
 	<se:authorize access="hasRole('ROLE_PROXY_ORG')">
+		<li class="active"> 
+			<a href="<s:url value='/employee/getProxyOrgList.html'/>">
+			<h5>合作机构</h5>
+			</a>
+		</li>
 		<li class="active"> 
 			<a href="<s:url value='/employee/getCustomerSupportList.html'/>">
 			<h5>客服管理</h5>
@@ -26,6 +31,10 @@
 			</a>
 		</li>
 	</se:authorize>
+	
+	
+	
+	
 	
 	
 	<li class="active"> 

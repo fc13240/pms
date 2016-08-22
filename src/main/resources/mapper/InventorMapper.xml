@@ -73,6 +73,6 @@
 	</select>
 	
 	<update id="saveAttachmentFile" parameterType="CommonInventor">
-		update common_inventor set inventor_attachment_file = #{inventorUrl} inventor_id = #{inventorId}
+		update common_inventor set inventor_attachment_file = #{inventorUrl} where inventor_id = #{inventorId}
 	</update>
 </mapper>

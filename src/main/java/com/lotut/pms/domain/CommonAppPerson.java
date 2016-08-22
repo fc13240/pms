@@ -16,8 +16,23 @@ public class CommonAppPerson {
 	private int userId;
 	private List<User> shareUsers;
 	private String appPersonUrl;
+	private String transactionIdentityId;
+	private String transactionYear ;
+	private String proxyUrl;
 	
 	
+	public String getTransactionIdentityId() {
+		return transactionIdentityId;
+	}
+	public void setTransactionIdentityId(String transactionIdentityId) {
+		this.transactionIdentityId = transactionIdentityId;
+	}
+	public String getTransactionYear() {
+		return transactionYear;
+	}
+	public void setTransactionYear(String transactionYear) {
+		this.transactionYear = transactionYear;
+	}
 	public String getAppPersonUrl() {
 		return appPersonUrl;
 	}
@@ -100,19 +115,12 @@ public class CommonAppPerson {
 		
 		return "";
 	}
-//	public CommonAppPerson(int appPersonId, String name, int type, String typeName, AppPersonType appPersonType,
-//			String peopleNumber, String postcodeAddress, String recordStatus, String otherInfo) {
-//		super();
-//		this.appPersonId = appPersonId;
-//		this.name = name;
-//		this.type = type;
-//		this.typeName = typeName;
-//		this.appPersonType = new AppPersonType(type);
-//		this.peopleNumber = peopleNumber;
-//		this.postcodeAddress = postcodeAddress;
-//		this.recordStatus = recordStatus;
-//		this.otherInfo = otherInfo;
-//	}
+	public String getProxyUrl() {
+		return proxyUrl;
+	}
+	public void setProxyUrl(String proxyUrl) {
+		this.proxyUrl = proxyUrl;
+	}
 	
 	
 	

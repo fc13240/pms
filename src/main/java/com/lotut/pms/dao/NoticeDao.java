@@ -6,6 +6,7 @@ import java.util.Map;
 import com.lotut.pms.domain.Notice;
 import com.lotut.pms.domain.NoticePaperApplyType;
 import com.lotut.pms.domain.NoticeProcessStatus;
+import com.lotut.pms.domain.NoticeRemark;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
@@ -48,4 +49,8 @@ public interface NoticeDao {
 	Map<String , Map<String,String>> getUserNoticeCountByPaperApplyType(int userId);
 	
 	Map<String , Map<String,String>> getUserNoticeCountByRemainDay(int userId);
+	
+	List<NoticeRemark> getNoticeRemarks(String noticeId);
+	
+	void addNoticeRemark(String noticeId, String content, int userId);
 }

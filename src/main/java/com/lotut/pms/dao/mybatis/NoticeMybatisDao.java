@@ -10,6 +10,7 @@ import com.lotut.pms.dao.mapper.NoticeMapper;
 import com.lotut.pms.domain.Notice;
 import com.lotut.pms.domain.NoticePaperApplyType;
 import com.lotut.pms.domain.NoticeProcessStatus;
+import com.lotut.pms.domain.NoticeRemark;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
@@ -125,6 +126,17 @@ public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao 
 	@Override
 	public Map<String, Map<String, String>> getUserNoticeCountByRemainDay(int userId) {
 		return noticeMapper.getUserNoticeCountByRemainDay(userId);
+	}
+
+	@Override
+	public List<NoticeRemark> getNoticeRemarks(String noticeId) {
+		return noticeMapper.getNoticeRemarks(noticeId);
+	}
+
+	@Override
+	public void addNoticeRemark(String noticeId, String content, int userId) {
+		 noticeMapper.addNoticeRemark(noticeId,content,userId);
+		
 	}
 	
 	

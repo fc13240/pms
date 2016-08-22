@@ -18,7 +18,7 @@
 <div class="col-xs-1 sidebar" style="min-width:100px;">
 			<%@ include file="_left_nav_editor.jsp" %>
 		  </div>
-					  <div class="col-xs-offset-1 col-xs-11">
+		<div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 					<div class="lt-box" style="padding:20px;">
@@ -27,6 +27,10 @@
 							<a href="javascript:return void" onclick="batchShareAppPerson()" >
 							<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
 							</a> 
+							
+							<button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="downloadProxyTemplate()">下载委托书模板</button>
+					
+						
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
@@ -35,11 +39,13 @@
 								<span class="lbl"></span> </label>
 							  </th>
 							  <th class="center" width="50">序号</th>
-							  <th width="90px">姓名或名称</th>
-							  <th width="150px">申请人类型</th>
+							  <th width="60x">姓名或名称</th>
+							  <th width="60px">申请人类型</th>
 							  <th>证件号码 </th>
 							  <th>邮编及地址</th>
-							  <th>费减方案</th>
+							  <th>费减备案状态</th>
+							  <th>备案证件号</th>
+							  <th>备案年度</th>
 							  <th >委托书</th>
 							  <th>附件</th>
 							  <th width="120px">其它信息</th>
@@ -58,13 +64,15 @@
 								</td>
 								<td class="center" style="text-align:center"> ${status.count} </td>
 								<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
-								<td style="text-align:center"><c:out value="${appPerson.appPersonType.typeDescription}"/></td>
-								<td style="text-align:center"><c:out value="${appPerson.peopleNumber}"/></td>
-								<td style="text-align:center"><c:out value="${appPerson.postcodeAddress}"/></td>
-								<td style="text-align:center"><c:out value="${appPerson.feeReduceTransactionStatus}"/></td>
+								<td ><c:out value="${appPerson.appPersonType.typeDescription}"/></td>
+								<td ><c:out value="${appPerson.peopleNumber}"/></td>
+								<td class="hidden-480" ><c:out value="${appPerson.postcodeAddress}"/></td>
+								<td ><c:out value="${appPerson.feeReduceTransactionStatus}"/></td>
+								<td><c:out value="${appPerson.transactionIdentityId}"/></td>
+								<td ><c:out value="${appPerson.transactionYear}"/></td>
 								<td style="text-align:center">
-									<a id="download" href="javascript: void(0); " >上传</a> 
-									<a id="download" href="javascript: void(0); " >下载</a> 
+									<a  href="<s:url value='/appPerson/showProxyUploadForm.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">上传</a>
+                    				<a  href="<s:url value='/appPerson/downloadProxyFile.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">下载</a> 
 								</td>
 								<td style="text-align:center">
 									<a  href="<s:url value='/appPerson/showAttachmentUploadForm.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">上传</a>
@@ -142,6 +150,10 @@
 		var url = "<s:url value='/appPerson/showFriends.html'/>?appPersons=" + appPersons;
 		location.href= url
 	}
+		
+		function downloadProxyTemplate(){
+			location.href="<s:url value='/appPerson/downloadProxyTemplate.html'/>";
+		}
 </script>
 <%-- <script>
 	 $(document).ready(function(){

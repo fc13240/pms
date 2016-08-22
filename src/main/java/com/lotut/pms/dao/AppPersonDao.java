@@ -12,12 +12,11 @@ public interface AppPersonDao {
 	void updateAppPerson(CommonAppPerson AppPerson);
 	CommonAppPerson getOneAppPersonById(int id);
 	void deleteAppPersonById(int id);
-
 	List<CommonAppPerson> getUserAppPersons(int userId);
-
 	void saveAttachmentFile(CommonAppPerson AppPerson);
 	String getAppPersonUrlById(int id);
-
-	
 	void addCommonAppPerson(CommonAppPerson CommonAppPerson);
+	void saveProxyFile(CommonAppPerson AppPerson);
+	String getProxyUrlById(int id);
+	void deleteAttachmentFileById(int id);
 }

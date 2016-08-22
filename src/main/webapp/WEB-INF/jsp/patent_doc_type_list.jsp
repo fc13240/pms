@@ -38,23 +38,23 @@
 			          <li class="list-app">
 			            <i style="width: 81px;height: 89px;"></i>
 			            <h5>发明专利</h5>
-			            <p class="apply-price"><span>2999 </span>元起/件</p>
+			            
 			            <p class="apply-des">保护产品创新和方法创新<br>1-2年授权，20年保护期</p>
-			            <a class="index-btn" target="_blank" href="<s:url value='/editor/newPatentDoc.html'/>?patentType=1">开始新建</a>
+			            <a class="index-btn" target="_blank" href="<s:url value='/editor/newPatentDoc.html'/>?patentType=1">立即撰写</a>
 			          </li>
 			          <li class="list-app">
 			            <i style="width: 76px;height: 89px;"></i>
 			            <h5>实用新型</h5>
-			            <p class="apply-price"><span>1500 </span>元起/件</p>
+			           
 			            <p class="apply-des">保护产品型状、构造等微创新<br>3-6个月授权，10年保护期</p>
-			            <a class="index-btn" target="_blank" href="<s:url value='/editor/newPatentDoc.html'/>?patentType=2">开始新建</a>
+			            <a class="index-btn" target="_blank" href="<s:url value='/editor/newPatentDoc.html'/>?patentType=2">立即撰写</a>
 			          </li>
 			          <li class="list-app">
 			            <i style="width: 56px;height: 89px;"></i>
 			            <h5>外观专利</h5>
-			            <p class="apply-price"><span>500 </span>元起/件</p>
+			            
 			            <p class="apply-des">保护产品外形、包装等<br>3-6个月授权，10年保护期</p>
-			           <a class="index-btn" target="_blank" href="<s:url value='/editor/newPatentDoc.html'/>?patentType=3">开始新建</a>
+			           <a class="index-btn" target="_blank" href="<s:url value='/editor/newPatentDoc.html'/>?patentType=3">立即撰写</a>
 			          </li>
 			 
 			        </ul>

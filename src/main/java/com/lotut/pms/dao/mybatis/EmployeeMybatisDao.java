@@ -9,6 +9,7 @@ import com.lotut.pms.dao.mapper.EmployeeMapper;
 import com.lotut.pms.domain.CustomerSupport;
 import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.domain.ProcessPerson;
+import com.lotut.pms.domain.ProxyOrg;
 
 public class EmployeeMybatisDao extends SqlSessionDaoSupport implements EmployeeDao{
 	private EmployeeMapper employeeMapper;
@@ -70,6 +71,11 @@ public class EmployeeMybatisDao extends SqlSessionDaoSupport implements Employee
 		employeeMapper.deleteProcessPerson(id);
 	}
 	
+	@Override
+	public void deleteProxyOrg(int orgId) {
+		employeeMapper.deleteProxyOrg(orgId);
+		
+	}
 	
 	@Override
 	public void changeCustomerSupportRemarkName(int id, String remarkName) {
@@ -86,9 +92,34 @@ public class EmployeeMybatisDao extends SqlSessionDaoSupport implements Employee
 		employeeMapper.changeProcessPersonRemarkName(id,remarkName);
 	}
 
+	@Override
+	public void changeProxyOrgRemarkName(int orgId, String remarkName) {
+		employeeMapper.changeProxyOrgRemarkName(orgId,remarkName);
+		
+	}
 	
 	@Override
 	public void insertGroupMember(int userId,String roleName) {
 		employeeMapper.insertGroupMember(userId,roleName);
 	}
+
+	@Override
+	public List<ProxyOrg> getProxyOrgList(int parentOrgId) {
+		return employeeMapper.getProxyOrgList(parentOrgId);
+	}
+
+	@Override
+	public void addOrUpdateProxyOrg(ProxyOrg proxyOrg) {
+		employeeMapper.addOrUpdateProxyOrg(proxyOrg);
+		
+	}
+
+	@Override
+	public int getParentOrgIdByUserId(int currentUserId) {
+		return employeeMapper.getParentOrgIdByUserId(currentUserId);
+	}
+
+
+
+	
 }

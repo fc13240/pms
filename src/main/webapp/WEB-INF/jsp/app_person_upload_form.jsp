@@ -58,8 +58,7 @@
 		$('#filename').val($(this).val());  
 	});
 	
-	function uploadAppPersonFile(){
-		
+	function uploadAppPersonFile(value){
 		var hideForm = $('#appPersonFileForm'); 
 		var options = {
 			dataType : "json", 
