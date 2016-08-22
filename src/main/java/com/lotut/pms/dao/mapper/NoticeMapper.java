@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import com.lotut.pms.domain.Notice;
 import com.lotut.pms.domain.NoticePaperApplyType;
 import com.lotut.pms.domain.NoticeProcessStatus;
+import com.lotut.pms.domain.NoticeRemark;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
@@ -58,4 +59,8 @@ public interface NoticeMapper {
 	
 	@MapKey("remain_day_type")
 	Map<String , Map<String,String>> getUserNoticeCountByRemainDay(int userId);
+	
+	List<NoticeRemark> getNoticeRemarks(String noticeId);
+	
+	void addNoticeRemark(@Param("noticeId")String noticeId, @Param("content")String content,@Param("userId") int userId);
 }

@@ -800,4 +800,16 @@ CREATE TABLE IF NOT EXISTS proxy_org (
 
 INSERT INTO proxy_org(org_user_id) VALUES (2);
 
+
 ALTER TABLE common_inventor ADD COLUMN  proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址'
+
+CREATE TABLE IF NOT EXISTS notice_remarks (
+	remark_id INT AUTO_INCREMENT PRIMARY KEY  ,
+	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+	content  VARCHAR(1000),
+	notice_id BIGINT NOT NULL,
+	user_id INT NOT NULL,
+	CONSTRAINT fk_notice_remarks_notice_id FOREIGN KEY(notice_id) REFERENCES notices(notice_id) , 
+	CONSTRAINT fk_notice_remarks_user_id FOREIGN KEY (user_id) REFERENCES users(user_id)	
+);
+

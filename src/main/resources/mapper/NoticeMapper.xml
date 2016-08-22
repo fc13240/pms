@@ -57,6 +57,18 @@
 		</association>		
 	</resultMap>
 	
+	<resultMap type="NoticeRemark" id="noticeRemarkResultMap">
+		<id property="remarkId" column="remark_id" />		
+		<result property="createTime" column="create_time"/>
+		<result property="content" column="content"/>
+		<result property="noticeId" column="notice_id"/>
+		<association property="user"  javaType="User">
+			<id property="userId" column="user_id"/>
+			<result property="username" column="username"/>
+		</association>
+			
+	</resultMap>
+	
 	<!-- 分页 -->
 	<select id="getUserNoticesCount" resultType="int">
 		select count(*) from notices n where patent in (select patent from user_patents where user = #{userId})
@@ -376,5 +388,16 @@
   		from notices n 
  		where n.patent in (select patent from user_patents where user =#{userid} and trash_status=1) and n.process_status=1
  		group by remain_day_type
-	</select>		
+	</select>	
+	
+	<select id="getNoticeRemarks" parameterType="string" resultMap="noticeRemarkResultMap">
+		SELECT  remark_id, notice_id , create_time, content,u.username as username FROM notice_remarks nr
+		join users u on u.user_id = nr.user_id
+		WHERE notice_id=#{noticeId}	order by create_time desc
+	</select>
+	
+	<insert id="addNoticeRemark">
+		INSERT INTO notice_remarks(create_time,content,notice_id,user_id)
+		values(now(),#{content},#{noticeId},#{userId})				
+	</insert>
 </mapper>
