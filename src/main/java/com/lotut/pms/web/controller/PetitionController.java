@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
+import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.service.PetitionService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
@@ -65,4 +67,29 @@ public class PetitionController {
 		}
 	}
 	
+	
+	@RequestMapping(path="/addCommonInventor",method=RequestMethod.POST)
+	public void addCommonInventor(@ModelAttribute("commonInventor") CommonInventor commonInventor,HttpServletResponse response){
+		int userId = PrincipalUtils.getCurrentUserId();
+		commonInventor.setUserId(userId);
+		petitionService.addCommonInventor(commonInventor);
+		
+		try{
+			WebUtils.writeJsonStrToResponse(response, commonInventor);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@RequestMapping(path="/findContactNameById",method=RequestMethod.POST)
+	public void findContactNameById(@RequestParam("contactIds") List<Integer> contactIds,HttpServletResponse response){
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<ContactAddress> addresses = petitionService.findContactNameById(contactIds, userId);
+		try{
+			WebUtils.writeJsonStrToResponse(response, addresses);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
 }
