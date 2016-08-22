@@ -801,11 +801,10 @@ CREATE TABLE IF NOT EXISTS proxy_org (
 INSERT INTO proxy_org(org_user_id) VALUES (2);
 
 
-<<<<<<< HEAD
+
 ALTER TABLE common_inventor ADD COLUMN  proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址'
 
-=======
->>>>>>> b14084e78a5fe39da612d67b6f97d41154fddbf9
+
 CREATE TABLE IF NOT EXISTS notice_remarks (
 	remark_id INT AUTO_INCREMENT PRIMARY KEY  ,
 	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
@@ -816,7 +815,22 @@ CREATE TABLE IF NOT EXISTS notice_remarks (
 	CONSTRAINT fk_notice_remarks_user_id FOREIGN KEY (user_id) REFERENCES users(user_id)	
 );
 
-<<<<<<< HEAD
-=======
+//专利文档状态表
+CREATE TABLE IF NOT EXISTS patent_doc_status (
+	patent_doc_status_id INT AUTO_INCREMENT PRIMARY KEY,
+	patent_doc_status_desc VARCHAR(10) NOT NULL UNIQUE
+);
 
->>>>>>> b14084e78a5fe39da612d67b6f97d41154fddbf9
+INSERT INTO patent_doc_status (patent_doc_status_id, patent_doc_status_desc)
+VALUES
+	(1, '草稿'),
+	(2, '已委托'),
+	(3, '立案分配'),
+	(4, '已分配'),
+	(5, '专家撰写'),
+	(6, '待确认'),
+	(7, '待修改'),
+	(8, '定稿'),
+	(9, '已制作标准申请文件'),
+	(10, '待交局'),
+	(11, '已交局');
