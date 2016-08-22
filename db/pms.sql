@@ -844,3 +844,10 @@ VALUES
 	(10, '待交局'),
 	(11, '已交局');
 
+create table if not exists user_patent_docs (
+	user int,
+	patent_doc bigint,
+	constraint pk_user_patent_docs primary key (user, patent_doc),
+	constraint fk_user_patent_doc_user foreign key idx_fk_user_patent_doc_user (user) references users(user_id) on delete cascade,
+	constraint fk_user_patent_docs_patent_docs foreign key idx_fk_user_patent_docs_patent_docs (patent_doc) references patent_documents(patent_doc_id) on delete cascade
+);
