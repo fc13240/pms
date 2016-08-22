@@ -134,7 +134,7 @@
 
 	                    
 	                    <div class="top_right">
-	                        <div class="review" onclick="preview_selfwrite();">
+	                        <div class="review" onclick="preview_selfwrite(${patentDoc.patentDocId});">
 	                            <i class="icon"></i>预览
 	                        </div>
 
@@ -1480,6 +1480,12 @@ function loadImgs(){
 		tag.parentNode.removeChild(tag); 
 	}
 	
+
+	function preview_selfwrite(value){
+		window.open("<s:url value='/editor/previewPatentDoc.html'/>?patentDocId="+value)
+		
+	}
+
 	function submitAppPersonForm(){
 		var appPersonName =$("#modalAppPersonName").val();
 		var appPersonType =$("#modalAppPersonType").val();
@@ -1513,6 +1519,7 @@ function loadImgs(){
 	}
 	
 	
+
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	

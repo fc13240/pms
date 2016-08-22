@@ -87,7 +87,7 @@
 		var inventorId=$("#inventorId").val();
 		$.ajax({
 			type: "POST",
-			url: "<s:url value='/inventor/saveinventorFile.html'/>",
+			url: "<s:url value='/inventor/saveInventorFile.html'/>",
 			data: {"inventorId":inventorId,"inventorUrl":value},
 			success: function(data){
 				alert("保存成功");

@@ -35,11 +35,13 @@
 								<span class="lbl"></span> </label>
 							  </th>
 							  <th class="center" width="50">序号</th>
-							  <th width="90px">姓名或名称</th>
-							  <th width="150px">申请人类型</th>
+							  <th width="60x">姓名或名称</th>
+							  <th width="60px">申请人类型</th>
 							  <th>证件号码 </th>
 							  <th>邮编及地址</th>
-							  <th>费减方案</th>
+							  <th>费减备案状态</th>
+							  <th>备案证件号</th>
+							  <th>备案年度</th>
 							  <th >委托书</th>
 							  <th>附件</th>
 							  <th width="120px">其它信息</th>
@@ -58,10 +60,12 @@
 								</td>
 								<td class="center" style="text-align:center"> ${status.count} </td>
 								<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
-								<td style="text-align:center"><c:out value="${appPerson.appPersonType.typeDescription}"/></td>
-								<td style="text-align:center"><c:out value="${appPerson.peopleNumber}"/></td>
-								<td style="text-align:center"><c:out value="${appPerson.postcodeAddress}"/></td>
-								<td style="text-align:center"><c:out value="${appPerson.feeReduceTransactionStatus}"/></td>
+								<td ><c:out value="${appPerson.appPersonType.typeDescription}"/></td>
+								<td ><c:out value="${appPerson.peopleNumber}"/></td>
+								<td class="hidden-480" ><c:out value="${appPerson.postcodeAddress}"/></td>
+								<td ><c:out value="${appPerson.feeReduceTransactionStatus}"/></td>
+								<td><c:out value="${appPerson.transactionIdentityId}"/></td>
+								<td ><c:out value="${appPerson.transactionYear}"/></td>
 								<td style="text-align:center">
 									<a id="download" href="javascript: void(0); " >上传</a> 
 									<a id="download" href="javascript: void(0); " >下载</a> 
