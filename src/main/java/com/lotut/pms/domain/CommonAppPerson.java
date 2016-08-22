@@ -18,7 +18,7 @@ public class CommonAppPerson {
 	private String appPersonUrl;
 	private String transactionIdentityId;
 	private String transactionYear ;
-	
+	private String proxyUrl;
 	
 	
 	public String getTransactionIdentityId() {
@@ -115,19 +115,12 @@ public class CommonAppPerson {
 		
 		return "";
 	}
-//	public CommonAppPerson(int appPersonId, String name, int type, String typeName, AppPersonType appPersonType,
-//			String peopleNumber, String postcodeAddress, String recordStatus, String otherInfo) {
-//		super();
-//		this.appPersonId = appPersonId;
-//		this.name = name;
-//		this.type = type;
-//		this.typeName = typeName;
-//		this.appPersonType = new AppPersonType(type);
-//		this.peopleNumber = peopleNumber;
-//		this.postcodeAddress = postcodeAddress;
-//		this.recordStatus = recordStatus;
-//		this.otherInfo = otherInfo;
-//	}
+	public String getProxyUrl() {
+		return proxyUrl;
+	}
+	public void setProxyUrl(String proxyUrl) {
+		this.proxyUrl = proxyUrl;
+	}
 	
 	
 	

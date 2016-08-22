@@ -87,8 +87,21 @@
   		where app_person_id =#{appPersonId}
   	</update>
   	
+  	<update id="saveProxyFile" parameterType="CommonAppPerson">
+  		update common_app_person set proxy_file =#{proxyUrl}
+  		where app_person_id -#{appPersonId}
+  	</update>
+  	
   	<select id="getAppPersonUrlById" parameterType="int" resultType="String">
   		select app_person_attachment_file from common_app_person where app_person_id =#{appPersonId}
   	</select>
+  	
+  	<select id="getProxyUrlById" parameterType="int" resultType="String">
+  		select proxy_file from common_app_person where app_person_id =#{appPersonId}
+  	</select>
+  	
+  	<update id="deleteAttachmentFileById" parameterType="CommonAppPerson">
+  		update common_app_person set app_person_attachment_file=null where app_person_id =#{appPersonId}
+  	</update>
   </mapper>
   

@@ -800,3 +800,4 @@ CREATE TABLE IF NOT EXISTS proxy_org (
 
 INSERT INTO proxy_org(org_user_id) VALUES (2);
 
+ALTER TABLE common_inventor ADD COLUMN  proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址'

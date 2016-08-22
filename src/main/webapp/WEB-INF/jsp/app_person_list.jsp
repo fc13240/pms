@@ -27,6 +27,9 @@
 							<a href="javascript:return void" onclick="batchShareAppPerson()" >
 							<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
 							</a> 
+							<a href="javascript:return void" onclick="downloadProxyTemplate()" >
+							<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="在此下载委托书模板哦！">下载委托书模板</button>
+							</a> 
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
@@ -67,8 +70,8 @@
 								<td><c:out value="${appPerson.transactionIdentityId}"/></td>
 								<td ><c:out value="${appPerson.transactionYear}"/></td>
 								<td style="text-align:center">
-									<a id="download" href="javascript: void(0); " >上传</a> 
-									<a id="download" href="javascript: void(0); " >下载</a> 
+									<a  href="<s:url value='/appPerson/showProxyUploadForm.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">上传</a>
+                    				<a  href="<s:url value='/appPerson/downloadProxyFile.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">下载</a> 
 								</td>
 								<td style="text-align:center">
 									<a  href="<s:url value='/appPerson/showAttachmentUploadForm.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">上传</a>
@@ -146,6 +149,10 @@
 		var url = "<s:url value='/appPerson/showFriends.html'/>?appPersons=" + appPersons;
 		location.href= url
 	}
+		
+		function downloadProxyTemplate(){
+			location.href="<s:url value='/appPerson/downloadProxyTemplate.html'/>";
+		}
 </script>
 <%-- <script>
 	 $(document).ready(function(){
