@@ -27,9 +27,10 @@
 							<a href="javascript:return void" onclick="batchShareAppPerson()" >
 							<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
 							</a> 
-							<a href="javascript:return void" onclick="downloadProxyTemplate()" >
-							<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="在此下载委托书模板哦！">下载委托书模板</button>
-							</a> 
+							
+							<button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="downloadProxyTemplate()">下载委托书模板</button>
+					
+						
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
