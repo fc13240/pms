@@ -13,6 +13,8 @@ import com.lotut.pms.domain.PatentDocSearchCondition;
 public interface PatentDocMapper {
 	void savePatentDoc(PatentDoc patentDoc);
 	
+	List<PatentDoc> getUserPatentDocEditor(@Param("userId")int userId);
+	
 	int getUserPatentDocCount(@Param("userId")int userId);
 	
 	List<PatentDoc> getUserPatentDoc(Page page);

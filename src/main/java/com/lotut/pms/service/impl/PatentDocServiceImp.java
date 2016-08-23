@@ -156,6 +156,12 @@ public class PatentDocServiceImp implements PatentDocService{
 		}
 
 
+		@Override
+		public List<PatentDoc> getUserPatentDocEditor(int userId) {
+			return patentDocDao.getUserPatentDocEditor(userId);
+		}
+
+
 
 
 }

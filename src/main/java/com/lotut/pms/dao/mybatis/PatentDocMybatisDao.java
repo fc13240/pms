@@ -163,4 +163,11 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	public int getUserPatentDocCount(int userId) {
 		return patentDocMapper.getUserPatentDocCount(userId);
 	}
+
+
+
+	@Override
+	public List<PatentDoc> getUserPatentDocEditor(int userId) {
+		return patentDocMapper.getUserPatentDocEditor(userId);
+	}
 }
