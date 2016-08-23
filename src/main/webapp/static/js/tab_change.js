@@ -70,6 +70,8 @@
 		$("#templateSectionId").html(3);
 		p=1;
 		loadingTemplateBYTab(3);
+	}else{
+		loadingTemplateBYTab(-1);
 	}
 	
 	
