@@ -39,7 +39,9 @@ import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentDoc;
+import com.lotut.pms.domain.PatentDocSearchCondition;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
 import com.lotut.pms.domain.TemplatePage;
@@ -164,6 +166,33 @@ public class PatentEditDocController {
 		return "patent_doc_list";
 		
 	}
+	
+	@RequestMapping(path="/searchPatentDoc", method=RequestMethod.GET)
+	public String searchUserPatents(@ModelAttribute("searchCondition")PatentDocSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		List<PatentDoc> patentDocs= new ArrayList<>();
+		List<PatentDoc> resultPatentDocs = patentDocService.searchUserPatentDocsByPage(searchCondition);
+		for (PatentDoc patentDoc:resultPatentDocs) {
+			if(patentDoc.getAppNo()==null&patentDoc.getAbstractDescription()==null
+					&patentDoc.getName()==null&patentDoc.getManual()==null&patentDoc.getRightClaim()==null
+					&patentDoc.getAbstractImg()==null){
+					patentDocService.deleteNullPatentDoc();
+			}else{
+				patentDocs.add(patentDoc);
+			}
+		}
+		int totalCount=(int)patentDocService.searchUserPatentDocsCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		model.addAttribute("patentDocs", patentDocs);
+		model.addAttribute("page", page);
+		return "patent_doc_list";
+	}
+	
 	@RequestMapping(path="/deletePatentDoc",method=RequestMethod.GET)
 	public String  deletePatentDoc(@RequestParam("patentDocId")long patentDocId,Model model){
 		patentDocService.deletePatentDoc(patentDocId);

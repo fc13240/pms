@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.lotut.pms.domain.Attachment;
+import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentDoc;
+import com.lotut.pms.domain.PatentDocSearchCondition;
+import com.lotut.pms.domain.PatentSearchCondition;
 
 public interface PatentDocDao {
 	void savePatentDoc(PatentDoc PatentDoc);
@@ -39,5 +42,7 @@ public interface PatentDocDao {
 	
 	void insertUserPatentDoc(List<Map<String, Integer>> userPatentDocRecords);
 	
+	List<PatentDoc> searchUserPatentDocsByPage(PatentDocSearchCondition searchCondition);
 	
+	int searchUserPatentDocsCount(PatentDocSearchCondition searchCondition);
 }
