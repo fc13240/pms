@@ -7,9 +7,8 @@
   <resultMap type="CommonAppPerson" id="AppPersonWithShareUsers">
   	<id property="appPersonId" column="app_person_id"/>
 		<result property="name" column="name"/>
-		<result property="peopleNumber" column="id_number"/>
+		<result property="idNumber" column="id_number"/>
 		<result property="postcodeAddress" column="postcode_address"/>
-		<result property="recordStatus" column="record_status"/>
 		<result property="otherInfo" column="other_information"/>
 		<result property="feeReduceTransactionStatus" column="fee_reduce_transaction_status"/>
 		<result property="transactionIdentityId" column="transaction_identity_id"/>
@@ -17,14 +16,13 @@
 		<result property="appPersonUrl" column="app_person_attachment_file"/>
 		<result property="userId" column="user_id"/>
 		<result property="proxyUrl" column="proxy_file"/>
-		<!-- <association property="appPersonType" resultMap="AppPersonTypeMap"/> -->
 		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
   </resultMap>
 
   <insert id="addAppPerson" parameterType="CommonAppPerson" >
-  	insert into common_app_person(name,type,id_number,postcode_address,other_information,user_id,
+  	insert into common_app_person(name,id_number,postcode_address,other_information,user_id,
   	fee_reduce_transaction_status,transaction_identity_id,transaction_year) 
-  	values(#{name},#{type},#{peopleNumber},#{postcodeAddress},#{otherInfo},#{userId},
+  	values(#{name},#{idNumber},#{postcodeAddress},#{otherInfo},#{userId},
   	#{feeReduceTransactionStatus},#{transactionIdentityId},#{transactionYear})
   	
   </insert>
@@ -34,42 +32,33 @@
   
   </insert>
   
-  	<resultMap type="AppPersonType" id="AppPersonTypeMap">
-  		<id property="typeId" column="type_id"/>
-		<result property="typeDescription" column="type_desc"/>
-  	</resultMap>
-  	
-  	<select id="getAppPersonTypes" resultMap="AppPersonTypeMap">
-  		select type_id,type_desc from app_person_types
-  	
-  	</select>
   	
   	<select id="getUserAppPersons" parameterType="int" resultMap="AppPersonWithShareUsers">
-  	   SELECT p.app_person_id ,p.type ,p.name ,p.id_number,t.type_id,type_desc ,p.fee_reduce_transaction_status,
+  	   SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
   	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
   		p.postcode_address ,p.other_information ,u.user_id,u.username  FROM common_app_person p
-  		JOIN app_person_types t ON p.type=t.type_id LEFT JOIN user_app_person up ON p.app_person_id = up.app_person 
+  		 LEFT JOIN user_app_person up ON p.app_person_id = up.app_person 
   		LEFT JOIN users u ON u.user_id = up.user
   		WHERE up.user=#{userId}
   	</select>
   	
   	<select id="getAllAppPersonByUser" parameterType="int" resultType="CommonAppPerson">
-  		select p.app_person_id as appPersonId,p.type as type,p.name as name,t.type_desc as typeName,p.id_number as peopleNumber,
+  		select p.app_person_id as appPersonId,p.name as name,p.id_number as idNumber,
   		p.postcode_address as postcodeAddress,p.other_information as otherInfo from common_app_person p 
-  		join app_person_types t on p.type=t.type_id where user_id=#{userId}
+  		 where user_id=#{userId}
   		
   	</select>
   	
   	<select id="getOneAppPersonById"	parameterType="int" resultType="CommonAppPerson">
-  		select p.app_person_id as appPersonId,p.type as type,  p.name as name,t.type_desc as typeName,p.id_number as peopleNumber,
+  		select p.app_person_id as appPersonId,  p.name as name,p.id_number as idNumber,
   		p.fee_reduce_transaction_status as feeReduceTransactionStatus, p.transaction_identity_id as transactionIdentityId,
   		p.transaction_year as transactionYear,
   		p.postcode_address as postcodeAddress,p.other_information otherInfo from common_app_person p 
-  		join app_person_types t on p.type=t.type_id where p.app_person_id=#{appPersonId}
+  		 where p.app_person_id=#{appPersonId}
   	</select>
   	
   	<update id="updateAppPerson" parameterType="CommonAppPerson">
-  		update common_app_person  set name=#{name},type=#{type},id_number=#{peopleNumber},
+  		update common_app_person  set name=#{name},id_number=#{idNumber},
   		fee_reduce_transaction_status=#{feeReduceTransactionStatus},transaction_identity_id=#{transactionIdentityId},
   		transaction_year=#{transactionYear},
   		postcode_address=#{postcodeAddress},other_information=#{otherInfo}
@@ -82,10 +71,10 @@
   	</delete>
   	
   	<select id="getAppPersonByName" resultType="CommonAppPerson">
-  		select p.app_person_id as appPersonId,p.type as type,p.name as name,t.type_desc as typeName,p.id_number as peopleNumber,
+  		select p.app_person_id as appPersonId,p.name as name,p.id_number as idNumber,
   		p.fee_reduce_transaction_status as feeReduceTransactionStatus,
-  		p.postcode_address as postcodeAddress,p.other_information as otherInfo from common_app_person p 
-  		join app_person_types t on p.type=t.type_id where p.name like #{appPerson} and p.user_id=#{userId}
+  		p.postcode_address as postcodeAddress,p.other_information as otherInfo from common_app_person p  
+  		where p.name like #{appPerson} and p.user_id=#{userId}
   	</select>
   	
 
@@ -96,7 +85,7 @@
   	
   	<update id="saveProxyFile" parameterType="CommonAppPerson">
   		update common_app_person set proxy_file =#{proxyUrl}
-  		where app_person_id -#{appPersonId}
+  		where app_person_id =#{appPersonId}
   	</update>
   	
   	<select id="getAppPersonUrlById" parameterType="int" resultType="String">
@@ -112,7 +101,7 @@
   	</update>
   
   	<select id="getIdbyAppPerson" resultType="int" parameterType="CommonAppPerson">
-  		select app_person_id from common_app_person where name=#{name} and type=#{type} and id_number=#{peopleNumber} and 
+  		select app_person_id from common_app_person where name=#{name}  and id_number=#{idNumber} and 
   		fee_reduce_transaction_status=#{feeReduceTransactionStatus} and transaction_identity_id=#{transactionIdentityId} and 
   		transaction_year=#{transactionYear} and 
   		postcode_address=#{postcodeAddress} and other_information=#{otherInfo}

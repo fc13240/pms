@@ -8,7 +8,7 @@ import com.lotut.pms.dao.AppPersonDao;
 import com.lotut.pms.dao.mapper.AppPersonMapper;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.UserAppPerson;
-import com.lotut.pms.domain.AppPersonType;
+
 
 public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPersonDao{
 	private AppPersonMapper appPersonMapper;
@@ -20,11 +20,7 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 		appPersonMapper.addAppPerson(commonAppPerson);
 		
 	}
-	@Override
-	public List<AppPersonType> getAppPersonTypes() {
-		
-		return appPersonMapper.getAppPersonTypes();
-	}
+	
 	@Override
 	public List<CommonAppPerson> getAllAppPersonByUser(int userId) {
 		

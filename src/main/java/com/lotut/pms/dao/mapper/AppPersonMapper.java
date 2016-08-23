@@ -1,8 +1,6 @@
 package com.lotut.pms.dao.mapper;
 
 import java.util.List;
-
-import com.lotut.pms.domain.AppPersonType;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.UserAppPerson;
 
@@ -10,7 +8,6 @@ import com.lotut.pms.domain.UserAppPerson;
 
 public interface AppPersonMapper {
 	void addAppPerson(CommonAppPerson commonAppPerson);
-	List<AppPersonType>  getAppPersonTypes();
 	List<CommonAppPerson> getAllAppPersonByUser(int useId) ;
 	CommonAppPerson getOneAppPersonById(int id);
 	void updateAppPerson(CommonAppPerson appPerson);

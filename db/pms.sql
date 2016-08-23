@@ -664,7 +664,7 @@ CREATE TABLE IF NOT EXISTS common_inventor (
 CREATE TABLE IF NOT EXISTS common_app_person (
   app_person_id BIGINT NOT NULL AUTO_INCREMENT,
   NAME VARCHAR(20) DEFAULT NULL COMMENT'申请人姓名',
-  TYPE INT(11) NOT NULL COMMENT'申请人类型',
+  TYPE INT(11) DEFAULT 0 COMMENT'申请人类型',
   id_number  NVARCHAR(20) DEFAULT NULL COMMENT '证件号码',
   postcode_address VARCHAR(50) DEFAULT NULL COMMENT '邮编及地址',
   record_status VARCHAR(20) DEFAULT NULL COMMENT '案件状态',
@@ -804,3 +804,5 @@ DELETE FROM  patent_doc_section_types;
 INSERT INTO patent_doc_section_types VALUES(1,'说明书');
 INSERT INTO patent_doc_section_types VALUES(2,'权利要求');
 INSERT INTO patent_doc_section_types VALUES(3,'摘要');
+
+ALTER TABLE common_app_person ALTER TYPE SET DEFAULT 0;
