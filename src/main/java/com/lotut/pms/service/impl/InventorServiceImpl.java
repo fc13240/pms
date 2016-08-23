@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.lotut.pms.dao.InventorDao;
 import com.lotut.pms.domain.CommonInventor;
+import com.lotut.pms.domain.UserInventor;
 import com.lotut.pms.service.InventorService;
 
 public class InventorServiceImpl implements InventorService{
@@ -14,27 +15,27 @@ public class InventorServiceImpl implements InventorService{
 	}
 	@Override
 	public void addInventor(CommonInventor inventor) {
-		// TODO Auto-generated method stub
+		
 		inventorDao.addInventor(inventor);
 	}
 	@Override
 	public List<CommonInventor> getAllInventorsByUser(int id) {
-		// TODO Auto-generated method stub
+		
 		return inventorDao.getAllInventorsByUser(id);
 	}
 	@Override
 	public CommonInventor getInventorById(int id) {
-		// TODO Auto-generated method stub
+		
 		return inventorDao.getInventorById(id);
 	}
 	@Override
 	public void updateById(CommonInventor inventor) {
-		// TODO Auto-generated method stub
+		
 		inventorDao.updateById(inventor);
 	}
 	@Override
 	public void deleteById(int id) {
-		// TODO Auto-generated method stub
+		
 		inventorDao.deleteById(id);
 		
 	}
@@ -44,22 +45,38 @@ public class InventorServiceImpl implements InventorService{
 	}
 	@Override
 	public List<CommonInventor> getUserInventors(int userId) {
-		// TODO Auto-generated method stub
+		
 		return inventorDao.getUserInventors(userId);
 	}
 	@Override
 	public List<CommonInventor> getInventor(String inventor) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	@Override
 	public void saveAttachmentFile(CommonInventor CommonInventor) {
-		// TODO Auto-generated method stub
+		
 		inventorDao.saveAttachmentFile(CommonInventor);
 	}
 	@Override
 	public String getInventorUrlById(int id) {
-		// TODO Auto-generated method stub
+		
 		return inventorDao.getInventorUrlById(id);
+	}
+	@Override
+	public void addUserInventor(UserInventor userInventor) {
+		inventorDao.addUserInventor(userInventor);
+		
+	}
+
+	@Override
+	public void deleteUserInventorById(UserInventor userInventor) {
+		inventorDao.deleteUserInventorById(userInventor);
+		
+	}
+	@Override
+	public int getIdByInventor(CommonInventor commonInventor) {
+		// TODO Auto-generated method stub
+		return inventorDao.getIdByInventor(commonInventor);
 	}
 }

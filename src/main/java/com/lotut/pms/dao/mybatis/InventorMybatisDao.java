@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.InventorDao;
 import com.lotut.pms.dao.mapper.InventorMapper;
 import com.lotut.pms.domain.CommonInventor;
+import com.lotut.pms.domain.UserInventor;
 
 public class InventorMybatisDao extends SqlSessionDaoSupport implements InventorDao {
 	private InventorMapper inventorMapper;
@@ -23,13 +24,13 @@ public class InventorMybatisDao extends SqlSessionDaoSupport implements Inventor
 
 	@Override
 	public List<CommonInventor> getAllInventorsByUser(int id) {
-		// TODO Auto-generated method stub
+		
 		return inventorMapper.getAllInventorsByUser( id);
 	}
 
 	@Override
 	public CommonInventor getInventorById(int id) {
-		// TODO Auto-generated method stub
+		
 		return inventorMapper.getInventorById(id);
 	}
 
@@ -42,7 +43,7 @@ public class InventorMybatisDao extends SqlSessionDaoSupport implements Inventor
 
 	@Override
 	public void deleteById(int id) {
-		// TODO Auto-generated method stub
+		
 		inventorMapper.deleteById(id);
 		
 	}
@@ -54,26 +55,45 @@ public class InventorMybatisDao extends SqlSessionDaoSupport implements Inventor
 
 	@Override
 	public List<CommonInventor> getUserInventors(int userId) {
-		// TODO Auto-generated method stub
+		
 		return inventorMapper.getUserInventors(userId);
 	}
 
 	@Override
 	public List<CommonInventor> getInventorByName(String inventor) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public void saveAttachmentFile(CommonInventor commonInventor) {
-		// TODO Auto-generated method stub
+		
 		inventorMapper.saveAttachmentFile(commonInventor);
 	}
 
 	@Override
 	public String getInventorUrlById(int id) {
-		// TODO Auto-generated method stub
+		
 		return inventorMapper.getInventorUrlById(id);
+	}
+
+	@Override
+	public void addUserInventor(UserInventor userInventor) {
+		inventorMapper.addUserInventor(userInventor);
+		
+	}
+
+	
+	@Override
+	public void deleteUserInventorById(UserInventor userInventor) {
+		inventorMapper.addUserInventor(userInventor);
+		
+	}
+
+	@Override
+	public int getIdByInventor(CommonInventor commonInventor) {
+		// TODO Auto-generated method stub
+		return inventorMapper.getIdByInventor(commonInventor);
 	}
 
 }
