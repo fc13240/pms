@@ -279,16 +279,16 @@ public class AppPersonController {
 				String filePath = Settings.PROXY_FILE_PATH + relativeUrl;
 				File file2=new File(filePath);
 				file2.delete();
-//				String filePath2=filePath.substring(0, filePath.lastIndexOf("/"));
-				String[] s=relativeUrl.split("/");
-				String filePath2=Settings.PROXY_FILE_PATH+s[0];
-				File file3=new File(filePath2);
-				if(file3.isDirectory()){
-					String[] files=file3.list();
-					if(files.length==0){
-						file3.delete();
-					}
-				}
+////				String filePath2=filePath.substring(0, filePath.lastIndexOf("/"));
+//				String[] s=relativeUrl.split("/");
+//				String filePath2=Settings.PROXY_FILE_PATH+s[0];
+//				File file3=new File(filePath2);
+//				if(file3.isDirectory()){
+//					String[] files=file3.list();
+//					if(files.length==0){
+//						file3.delete();
+//					}
+//				}
 				String savePath=Settings.PROXY_FILE_PATH;
 				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 				MultipartFile file1 = multipartRequest.getFile("file");
@@ -337,7 +337,7 @@ public class AppPersonController {
 		    //针对火狐浏览器处理
 			downloadFileName =new String(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
 		}
-		response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
+		response.setHeader("Content-Disposition", "proxy;filename=" + downloadFileName);
 		response.setContentLength((int)appPersonFile.length());
 		WebUtils.writeStreamToResponse(response, new FileInputStream(appPersonFile));
 	}

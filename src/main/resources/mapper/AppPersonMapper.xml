@@ -17,7 +17,7 @@
 		<result property="appPersonUrl" column="app_person_attachment_file"/>
 		<result property="userId" column="user_id"/>
 		<result property="proxyUrl" column="proxy_file"/>
-		<association property="appPersonType" resultMap="AppPersonTypeMap"/>
+		<!-- <association property="appPersonType" resultMap="AppPersonTypeMap"/> -->
 		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
   </resultMap>
 
