@@ -67,7 +67,7 @@
 		<typeAlias alias="PatentDocStatus" type="com.lotut.pms.domain.PatentDocStatus"/>
 		<typeAlias type="com.lotut.pms.domain.UserAppPerson" alias="UserAppPerson"/>
 		<typeAlias alias="PatentDocSearchCondition" type="com.lotut.pms.domain.PatentDocSearchCondition"/>
-		<typeAlias type="com.lotut.pms.domain.UserInventor" alias="UserIventor"/>
+		<typeAlias type="com.lotut.pms.domain.UserInventor" alias="UserInventor"/>
 
 	</typeAliases>  
 </configuration>
