@@ -233,6 +233,46 @@ function batchShare() {
 	var patentDocIds = uniquePatentNos.join(",");	
 	location.href = "<s:url value='/editor/showFriends.html'/>?patentDocIds=" + patentDocIds;
 }
+
+
+function gotoPage() {
+	var pageNo = document.getElementById("page.pageNo").value;
+	
+	if (isNaN(pageNo)) {
+		alert("请输入数值");
+		return;
+	}
+	
+	if(pageNo==""){
+		alert("请输入数值")
+		return;
+	}
+	
+	pageNo = parseInt(pageNo);
+	
+	if (pageNo < 1 || pageNo > parseInt("${page.totalPages}")) {
+		alert("只能输入1-${page.totalPages}之间的数值");
+		return;
+	}
+	
+	var url = "<s:url value='/editor/patentDocList.html'/>?currentPage=" + pageNo;
+	
+	<c:if test="${searchCondition != null}">
+		url = "<s:url value='/editor/searchPatentDoc.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+	</c:if>
+	
+	
+	location.href = url
+	
+}
+
+function gotoPageForEnter(event) {
+	var e = event ? event : window.event;
+			
+	if(event.keyCode == 13) {
+		gotoPage();
+	}
+}
 </script>
 </body>
 </html>
