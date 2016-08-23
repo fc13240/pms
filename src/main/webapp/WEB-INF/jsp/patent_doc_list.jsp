@@ -28,20 +28,17 @@
 
 		  <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
-				    <div class="cl top1">
+				    <div class="cl top1" style="height:10px;margin-left: 460px;">
         				<form class="form-inline" action="<s:url value='/editor/searchPatentDoc.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-						 <div class="t-third">
+						 <div class="t-third" >
 						  <table class="search-table">
-							  <tr>
-							  <td>关键字</td>
-							  </tr>
 							  <tr>
 							  <td>
 								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="文档名称" class="t-input form-control"/>							  
 							  </td>
 							  <td>
-							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
+							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">搜索文档</button>
 							  </td>
 							  </tr>							  
 						  </table>
@@ -234,7 +231,6 @@ function batchShare() {
 		}
 	}		
 	var patentDocIds = uniquePatentNos.join(",");	
-	alert(patentDocIds);
 	location.href = "<s:url value='/editor/showFriends.html'/>?patentDocIds=" + patentDocIds;
 }
 </script>
