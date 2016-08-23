@@ -72,11 +72,15 @@
 								<td ><c:out value="${appPerson.transactionYear}"/></td>
 								<td style="text-align:center">
 									<a  href="<s:url value='/appPerson/showProxyUploadForm.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">上传</a>
-                    				<a  href="<s:url value='/appPerson/downloadProxyFile.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">下载</a> 
+									<c:if test="${not empty appPerson.proxyUrl}">
+                    				<a href="<s:url value='/appPerson/downloadProxyFile.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">下载</a> 
+                    				</c:if>
 								</td>
 								<td style="text-align:center">
 									<a  href="<s:url value='/appPerson/showAttachmentUploadForm.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">上传</a>
-                    				<a  href="<s:url value='/appPerson/downloadAttachmentFile.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">下载</a>
+									<c:if test="${not empty appPerson.appPersonUrl }">
+                    				<a   href="<s:url value='/appPerson/downloadAttachmentFile.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">下载</a>
+                    				</c:if>
 								</td>
 								<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
 								<td style="text-align:center"><c:out value="${appPerson.shareUsersAsString}"/></td>
@@ -154,6 +158,11 @@
 		function downloadProxyTemplate(){
 			location.href="<s:url value='/appPerson/downloadProxyTemplate.html'/>";
 		}
+		
+		$(function(){
+			
+			
+		})
 </script>
 <%-- <script>
 	 $(document).ready(function(){
