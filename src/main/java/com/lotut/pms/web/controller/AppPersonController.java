@@ -186,7 +186,9 @@ public class AppPersonController {
 				String filePath = Settings.APP_PERSON_ATTACHMENT_FILE_PATH + relativeUrl;
 				File file2=new File(filePath);
 				file2.delete();
-				String filePath2=filePath.substring(0, filePath.lastIndexOf("/"));
+//				String filePath2=filePath.substring(0, filePath.lastIndexOf("/"));
+				String[] s=relativeUrl.split("/");
+				String filePath2=Settings.APP_PERSON_ATTACHMENT_FILE_PATH+s[0];
 				File file3=new File(filePath2);
 				if(file3.isDirectory()){
 					String[] files=file3.list();
@@ -310,7 +312,9 @@ public class AppPersonController {
 				String filePath = Settings.PROXY_FILE_PATH + relativeUrl;
 				File file2=new File(filePath);
 				file2.delete();
-				String filePath2=filePath.substring(0, filePath.lastIndexOf("/"));
+//				String filePath2=filePath.substring(0, filePath.lastIndexOf("/"));
+				String[] s=relativeUrl.split("/");
+				String filePath2=Settings.PROXY_FILE_PATH+s[0];
 				File file3=new File(filePath2);
 				if(file3.isDirectory()){
 					String[] files=file3.list();
