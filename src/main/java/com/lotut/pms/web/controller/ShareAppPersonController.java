@@ -26,18 +26,10 @@ public class ShareAppPersonController {
 	
 	@RequestMapping(path="/addShares", method=RequestMethod.GET)
 	public String shareAppPersons(@RequestParam("appPersons")List<Integer> appPersonIds, @RequestParam("friends")List<Integer> friendIds) {
-		List<Map<String, Integer>> shareAppPersonRecords = new ArrayList<>();
 		List<Map<String, Integer>> userAppPersonRecords = new ArrayList<>();
-		int userId = PrincipalUtils.getCurrentUserId();
 		
 		for (int appPersonId: appPersonIds) {
 			for (int friendId: friendIds) {
-				Map<String, Integer> shareAppPersonRecord =  new HashMap<String, Integer>();
-				shareAppPersonRecord.put("appPerson", appPersonId);
-				shareAppPersonRecord.put("shareBy", userId);
-				shareAppPersonRecord.put("shareTo", friendId);
-				shareAppPersonRecords.add(shareAppPersonRecord);
-				
 				Map<String, Integer> userAppPersonRecord =  new HashMap<String, Integer>();
 				userAppPersonRecord.put("user", friendId);
 				userAppPersonRecord.put("appPerson", appPersonId);
@@ -45,7 +37,7 @@ public class ShareAppPersonController {
 			}
 		}
 		
-		shareAppPersonService.shareAppPersons(shareAppPersonRecords, userAppPersonRecords);
+		shareAppPersonService.insertUserAppPersons(userAppPersonRecords);
 		return "app_person_list";
 	}
 
