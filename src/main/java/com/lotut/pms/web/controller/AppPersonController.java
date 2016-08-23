@@ -63,8 +63,6 @@ public class AppPersonController {
 	public String getList(Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<CommonAppPerson> appPersons=appPersonService.getUserAppPersons(userId);
-		List<AppPersonType> appPersonTypes=appPersonService.getAppPersonTypes();
-		model.addAttribute("appPersonTypes",appPersonTypes);
 		model.addAttribute("appPersons", appPersons);
 		return "app_person_list";
 	}

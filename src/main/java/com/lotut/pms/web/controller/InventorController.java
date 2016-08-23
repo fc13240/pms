@@ -32,6 +32,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.User;
+import com.lotut.pms.domain.UserInventor;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.InventorService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -67,6 +68,11 @@ public class InventorController {
 	public String addContactInfo(@ModelAttribute CommonInventor inventor,Model model ){
 		int userId=PrincipalUtils.getCurrentUserId();
 		inventor.setUserId(userId);
+		UserInventor userInventor=new UserInventor();
+		userInventor.setUserId(userId);
+		int inventorId=inventorService.getIdByInventor(inventor);
+		userInventor.setInventorId(inventorId);
+		inventorService.addUserInventor(userInventor);
 		inventorService.addInventor(inventor);
 		return "redirect:/inventor/list.html";
 		
@@ -89,8 +95,12 @@ public class InventorController {
 	}
 	
 	@RequestMapping(path="/deleteInventorrInfo")
-	public String deleteInventorrInfo(@RequestParam("inventorId")int id,Model model){
-		inventorService.deleteById(id);
+	public String deleteInventorrInfo(@RequestParam("inventorId")int inventorId,Model model){
+		int userId=PrincipalUtils.getCurrentUserId();
+		UserInventor userInventor = new UserInventor();
+		userInventor.setUserId(userId);
+		userInventor.setInventorId(inventorId);
+		inventorService.deleteUserInventorById(userInventor);
 		return "redirect:/inventor/list.html";
 		
 	}

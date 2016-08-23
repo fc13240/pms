@@ -60,15 +60,15 @@
 	
 	<select id="getTemplateList" resultMap="patentDocTemplateListMap">
 		select pdt.template_id,pdt.content,pdt.template_title,pdt.patent_doc_section,pdst.patent_doc_section_desc from patent_document_templates pdt LEFT JOIN patent_doc_section_types pdst ON pdt.patent_doc_section = pdst.patent_doc_section_id
-		where patent_doc_section = #{sectionId} limit 0,#{pageSize};
+		where patent_doc_section = #{sectionId} and pdt.patent_type=#{patentType} limit 0,#{pageSize};
 	</select>
 	
 	<select id="getTemplateListByPage"  parameterType="TemplatePage" resultMap="patentDocTemplateListMap">
 		select pdt.template_id,pdt.content,pdt.template_title,pdt.patent_doc_section,pdst.patent_doc_section_desc from patent_document_templates pdt LEFT JOIN patent_doc_section_types pdst ON pdt.patent_doc_section = pdst.patent_doc_section_id
-		where patent_doc_section = #{sectionId} limit #{startIndex},#{pageSize};
+		where patent_doc_section = #{sectionId} and pdt.patent_type=#{patentType} limit #{startIndex},#{pageSize};
 	</select>
 	
 	<select id="getTemlateSizeBySectionId" resultType="int">
-		select count(*) from patent_document_templates where patent_doc_section=#{sectionId};
+		select count(*) from patent_document_templates where patent_doc_section=#{sectionId} and patent_type=#{patentType};
 	</select>
 </mapper>

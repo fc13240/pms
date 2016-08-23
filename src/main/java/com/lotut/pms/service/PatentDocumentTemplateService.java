@@ -19,10 +19,10 @@ public interface PatentDocumentTemplateService {
 	
 	void deleteTemplateDoc(int templateId);
 	
-	List<PatentDocumentTemplate> getTemplateList(int sectionId,int pagSize);
+	List<PatentDocumentTemplate> getTemplateList(int sectionId,int pagSize,int patentType);
 
 	List<PatentDocumentTemplate> getTemplateListByPage(TemplatePage templatePage);
 	
-	int getTemlateSizeBySectionId(int sectionId);
+	int getTemlateSizeBySectionId(int sectionId,int patentType);
 	
 }

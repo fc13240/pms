@@ -108,7 +108,7 @@
 				<div class="tab" id="tabWrap"> 
 					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">说明书</div>
 					<div class="tab1h" value="1" name="tabs" onclick="tabChange(1);">
-						附图及说明</div>
+						说明书附图</div>
 					<div class="tab1h" value="2" name="tabs" onclick="tabChange(2,true,false);">
 						权利要求</div>
 					<div class="tab1h" value="3" name="tabs" onclick="tabChange(3);">
@@ -118,7 +118,7 @@
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件</div>
 					<div style="display:none;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
-						请求协议书</div>
+						请求书</div>
 				</div>
 	
 	        </div>
@@ -137,7 +137,7 @@
 	                        <div class="review" onclick="preview_selfwrite();">
 	                            <i class="icon"></i>预览
 	                        </div>
-	                        
+	                        <input type="hidden" id="patentType" value="${patentDoc.patentType }"/>
 	                    </div>
 	                </div>
 	                <div id="overflowcenter" style="overflow-y: auto; overflow-x: hidden;height:610px; width: 1060px;">
@@ -148,177 +148,6 @@
 						<input id="whichTip" type="hidden" name="name" value="2">
 						<input id="tipIdHid" type="hidden" name="name" value="1223">
 						
-						<div id="tipsList" style="border-top: #0085d0 1px solid; z-index: 6000000;">
-							<div class="Writing_tips tip0" name="tips" style="display: block;">
-								<p>
-									<span>撰写指南</span>
-								</p>
-								<p>
-									专利名称就是根据要申请专利的技术内容给专利起个名字，模板库中已经涵盖了所有的专利名称模板，都是经过专家审核过的，直接选择一个套用就可以了哦。
-								</p>
-							</div>
-							<div class="Writing_tips tip1" name="tips" style="display: none;">
-								<p>
-									<span>撰写指南</span>
-								</p>
-								<p>
-									这里指专利要求保护的技术所属或者直接应用的具体技术领域，这部分文字并不多^_^，选个模板填写你的内容吧。
-								</p>
-							</div>
-							<div class="Writing_tips tip2" name="tips" style="display: none;">
-								<p>
-									<span>撰写指南</span>
-								</p>
-								<p>
-									不能光顾着写要申请的专利技术，总要告诉审查员们，你为什么要申请这件专利吧？这里只要讲一下目前的现有技术即可，如果能引用一篇或几篇相关专利或文献，结合分析，就能让大审们对你更有好感了。当然了，撰写仍有模板辅助，这件事瞬间就简单了，快去看看专业人员怎么写的吧。
-								</p>
-							</div>
-							<div id="farmingS" class="Writing_tips tip3" name="tips" style="display: none;">
-								<p>
-									<span>撰写指南</span>
-								</p>
-								<p>
-									1)要解决的技术问题</p>
-								<p>
-									针对现有技术存在的问题，结合您的技术所能取得的效果，说说您的技术要解决的技术问题，简单说一下要解决的问题就可以了，不用说效果。一般别人都是写一小段，写多了审查人员也不介意，不过还是先看看模板吧，毕竟专利的表述是采用法律文书...<i class="cancelh" onclick="doLong('farming');">展开</i>
-								</p>
-							</div>
-							<div class="Writing_tipsh tip4" name="tips_2" id="farmingL" style="display: none;">
-								<p>
-									<span>撰写指南</span>
-								</p>
-								<p>
-									1)要解决的技术问题</p>
-								<p>
-									针对现有技术存在的问题，结合您的技术所能取得的效果，说说您的技术要解决的技术问题，简单说一下要解决的问题就可以了，不用说效果。一般别人都是写一小段，写多了审查人员也不介意，不过还是先看看模板吧，毕竟专利的表述是采用法律文书的形式，套路都比较固定了。
-								</p>
-								<p>
-									2)技术方案</p>
-								<p>
-									这部分内容看似不少，其实就是权利要求部分的内容，建议先看看模板吧，看完之后就会发现原来是对权利要求的进一步描述。写好权利要求这部分就解决了，还没写的还不快去写，一部分可是当两部分用啊。</p>
-								<p>
-									3)有益效果</p>
-								<p>
-									即由您申请专利的技术特征直接带来的，或者是由这些技术特征必然产生的效果。通常可以通过对申请专利的技术的结构特点与理论分析的结合而得出，或通过列出实验数据的方式予以说明。无论哪种方式都应通过与现有技术的比较而得出。</p>
-								<p>
-									4)发明内容部分所述的技术方案与权利要求所限定的相应技术方案的表述一致。 <i class="cancelhh" onclick="doShort('farming');">
-										收起</i></p>
-							</div>
-							<div class="Writing_tips tip5" name="tips" style="display: none;">
-								<p>
-									<span>撰写指南</span>
-								</p>
-								<p>
-									此部分应当详细、具体地描述实现发明或实用新型的优选方式，在适当情况下举例说明，有需要的话可以结合附图说明。每一条独立权利要求需要给出一个最佳实施方式或具体实施方式。此外从属权利要求的优先方案也应当在这一部分的具体实施方式中体现。
-									具体实施方式部分所述的技术方案用于清楚、完整地说明权利要求所限定的相应技术方案。
-								</p>
-							</div>
-							<div id="futushuomingS" class="Writing_tips tip6" name="tips" style="display: none;">
-								<p>
-									<span>撰写指南</span>
-								</p>
-								<p>
-									图1是燃煤锅炉节能装置的主视图；</p>
-								<p>
-									图2是图1所示节能装置的侧视图；</p>
-								<p>
-									图3是图2中的A向视图；<i class="cancelh" onclick="doLong('futushuoming');">展开</i></p>
-							</div>
-							<div id="futushuomingL" class="Writing_tipsh tip7" name="tips_2" style="display: none;">
-								<p>
-									<span>撰写指南</span>
-								</p>
-								<p>
-									图1是燃煤锅炉节能装置的主视图；</p>
-								<p>
-									图2是图1所示节能装置的侧视图；</p>
-								<p>
-									图3是图2中的A向视图；</p>
-								<p>
-									图4是沿图1中B-B线的剖视图；</p>
-								<p>
-									图5是示意性地显示制备石墨烯片的方法的示例性图；</p>
-								<p>
-									针对视图作简要说明即可，每一幅附图都要有附图说明，在零部件较多的情况下允许用列表的方式列出附图中具体零部件的名称。实用新型专利至少应当有一幅附图。<i class="cancelhh" onclick="doShort('futushuoming');">收起</i></p>
-							</div>
-							<div id="quanliS" class="Writing_tips tip8" name="tips" style="display: none;">
-								<p>
-									<span>撰写指南</span>
-								</p>
-								<p>
-									1)要解决的技术问题</p>
-								<p>
-									权利要求包括独立权利要求和从属权利要求，每一项权利要求都是一个独立的保护范围，从属权利要求是对独立权利要求技术内容的进一步限定，审查人员先审独立权利要求，如果独立权利要求具备授予专利权的条件，从属权利要求就不用审了...<i class="cancelh" onclick="doLong('quanli');">展开</i>
-								</p>
-							</div>
-							<div id="quanliL" class="Writing_tipsh tip9" name="tips_2" style="display: none;">
-								<p>
-									<span>撰写指南</span>
-								</p>
-								<p>
-									1)要解决的技术问题</p>
-								<p>
-									权利要求包括独立权利要求和从属权利要求，每一项权利要求都是一个独立的保护范围，从属权利要求是对独立权利要求技术内容的进一步限定，审查人员先审独立权利要求，如果独立权利要求具备授予专利权的条件，从属权利要求就不用审了，如果独立权利要求不具备条件，由于从属权利要求又对独立权利要求的技术方案做了限定，这时从属权利要求就有作用了。
-								</p>
-								<p>
-									2)独立权利要求
-								</p>
-								<p>
-									①权利要求是提炼描述技术内容的主要特征，以后只要有这些特征的发明就都属于您的权利范围了。
-								</p>
-								<p>
-									②技术特征其实就是您的技术新在哪里，要是审查人员发现别人已经申请过了，那就不能给您授权咯。
-								</p>
-								<p>
-									③独立权利要求的表述分为前序部分和特征部分，不懂不要担心，权利要求的语句结构特别固定，模板库中已经为您准备了丰富的模板，马上参考改写吧。
-								</p>
-								<p>
-									④对于产品的技术特征，主要指组合和连接关系，对于方法类的技术特征主要指流程步骤，都有讲解请参考模板，特征越少保护的范围越大，不要太啰嗦哦。
-								</p>
-								<p>
-									⑤特征部分要求体现申请专利的技术的创新性点，没有创新怎么能作为技术特征呢？
-								</p>
-								<p>
-									3)从属权利要求
-								</p>
-								<p>
-									①从属权利要求的内容包括引用部分和限定部分，从属权利要求的语句结构更加简单，模板库中已经为您列出了从属权利要求的表述公式，马上参考改写吧。
-								</p>
-								<p>
-									②可是为什么要从属权利要求呢？因为独立权利要求保护的范围较广，审查人员要是觉着您的独立权利要求描述的技术方案不新怎么办，所以要有从属权利要求，但是莫担心，从属权利要求的存在不会影响独立权利要求保护范围的。
-								</p>
-								<p>
-									③那为什么会分成引用部分和限定部分呢，既然从属权利要求是对技术特征的进一步限定，那就要包含被引用的权利要求的所有特征了，这样引用就可以了，总不要再重新写一遍吧（*&gt;.&lt;*），限定部分就不一样了，它是对在前的权利要求中的技术特征进行限定。
-								</p>
-								<p>
-									④从属权利要求写起来特别简单，快快去看看模板吧。
-								</p>
-								<p>
-									4)权利要求所限定的相应技术方案与（说明书中）发明内容部分所述的技术方案的表述一致； 权利要求所限定的相应技术方案对（说明书中）具体实施方式部分所述的技术方案做清楚、简要地限定。
-									<i class="cancelhh" onclick="doShort('quanli');">收起</i>
-								</p>
-							</div>
-							<div class="Writing_tips" name="tips tip10" style="display: none;">
-								<p>
-									<span>撰写指南</span>
-								</p>
-								<p>
-									要文字部分应当写明发明或实用新型的名称和所属技术领域、所要解决的技术问题、 解决该问题的技术方案的要点以及主要用途。摘要的重点放到技术方案的要点上，将发明或实用新型的最本质内容公开出来。摘要文字部分出现的附图标记应当加上括号。摘要简明扼要，全部文字部分
-									(包括标点符号)不得超过300个字。
-								</p>
-							</div>
-							<div class="Writing_tips" name="tips tip11" style="display: none;">
-								<p>
-									<span>撰写指南</span>
-								</p>
-								<p>
-									对于说明书中有附图的申请案，应当指定并提供一幅最能说明技术方案要点的附图。
-								</p>
-							</div>
-						</div>
-	
-	                    <!-- 撰写小贴士 end-->
-	                    <!-- content start-->
 	                    
 						<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
 						<div class="content" id="content0">
@@ -330,10 +159,6 @@
 							</div>
 							<div class="cl">
 								<div id="editor0" thistempid="1">
-									<div class="instru">
-										<div class="title2">
-											注意套用模板时专利名称不得超过25个字，化学领域的某些申请允许最多到40个字，这个规定可要注意哦。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。</div>
-									</div>
 									<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
 									<input type="hidden" value="" id="divtitletips">
 									<div class="textarea" name="tooltip">
@@ -436,12 +261,6 @@
 							</div>
 							<div class="cl">
 								<div id="editor7" thisid="" thistempid="" photo_fid="">
-									<div class="upimg1" onclick="autoabstract();" style=" margin-left:50px">
-										自动生成摘要</div>
-									<div class="instru">
-										<div class="title2">蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-										</div>
-									</div>
 									<div class="textarea" name="tooltip"> 
 										<div class="wraper">
 										        <form id="form7" name="form7" class="registerform" action="" onsubmit="return false;" method="post">
@@ -474,17 +293,6 @@
 								</div>
 								<div class="cl">
 									<div id="editor6" thistempid="" thisid="">
-										<div class="instru">
-											<div class="title1">
-												权利要求1</div>
-											<div class="title2">
-												独立权利要求：<br>
-												①一项权利要求中有且只能有一个句号，且句号放在结尾，请参考模板格式。<br>
-												②权利要求中可以有化学式或者数学式，必要时也可以有表格，但不得有插图。<br>
-												③不要使用“如说明书……部分所述” 或者“如图……所示”的用语。<br>
-												④一件专利申请应当至少有一项独立权利要求，如果有多个独立权利要求，那么他们描述的技术方案之间要包含一个或多个相同的或相应的特定技术特征，及属于一个总的发明构思，毕竟您只交一件专利申请的费用，怎么能要求国知局保护您的多个发明构思呢。<br>蓝色标记文字为撰写提示，例如<span class="title2span1">（产品类型的名称）</span>；草绿色标记文字为参考示例，例如<span class="title2span2">[碳石墨环轴密封结构]</span>。
-											</div>
-										</div>
 										<div id="divclaim" style="clear:both;display:block;float:left;width:80%;"></div>
 										<input type="hidden" value="" id="divclaimtips">
 										<div class="textarea" name="tooltip">
@@ -615,37 +423,6 @@
 	        </div>
 	
 	        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><a style="color:#ccc" href="javascript:void(0);">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:showKindsDragModel(1,2,2);">下一页</a></div>
-	        <div class="model" style="overflow-x: hidden; overflow-y: auto;">
-	            <div id="modelWrap" style="display: block;">
-					<div class="model1 model_list0" id="100070010000" style="overflow-x: hidden; overflow-y: hidden;">
-						<div class="title">模板 1：适用于发明；产品；机械结构；碳石墨环；轴密封；螺纹；凹槽；筛网环</div>
-						<div class="content">
-							<p class="small">
-								<span>背景技术：</span>
-								（本发明提出的技术背景）[航空发动机中为了提高性能，使用接触式碳石墨环密封的部位越来越多。对于航空发动机来说，
-							</p>
-							<p class="big" style="display:none">
-								<span>背景技术：</span>
-								（本发明提出的技术背景）[航空发动机中为了提高性能，使用接果更好的碳石墨环轴密封结构已成为影响发动机性能的一个主要因素]。<br>（描述最接近的现有技术）
-							</p>
-							<div class="button" style="z-index:500000;" onclick="modelbuttonclick(0)">+使用模板</div>
-						</div>
-					</div>
-					<div class="model1 model_list1" id="100070020000" style="overflow-x: hidden; overflow-y: hidden;">
-						<div class="title">模板 2：适用于发明；中药组合物；产品；药物制剂；中药</div>
-						<div class="content">
-							<p class="small"><span>背景技术：</span>
-								（描述治疗适应症的技术背景）[支气管哮喘是一种常见多发性、严重危害人体健康的慢性呼吸道疾病。据文献报道，哮喘的
-							</p>
-							<p class="big" style="display:none"><span>背景技术：</span>
-							（描述治疗适应症的技术背景）[支气管哮喘是一种常达40亿美</p>
-							<div class="button" style="z-index:500000;" onclick="modelbuttonclick(1)">+设为模板</div>
-						</div>
-					</div>
-				</div>
-	           
-	        </div>
-	        
 	        <div style="float: right; padding-right: 15px; padding-top: 5px; display: block;" id="kbpage2"><a style="color:#ccc" href="javascript:void(0);">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:showKindsDragModel(1,2,2);">下一页</a></div>
 	        <div id="scBs" class="shousou" onclick="bigSmall(this);">
 	        </div>
@@ -846,7 +623,7 @@
 	}
 	 function templatebuttonclick(i,patentDocSectionId){
 		 if(patentDocSectionId==1){
-			 editor.html($("#templateContent"+i).html());
+			 editor.apppendHtml($("#templateContent"+i).html());
 		 }
 		 else if(patentDocSectionId==2){
 			 editor1.html($("#templateContent"+i).html());

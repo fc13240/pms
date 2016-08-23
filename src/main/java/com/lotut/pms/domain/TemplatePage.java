@@ -5,6 +5,14 @@ public class TemplatePage {
 	private int currentPage = 1;
 	private int pageSize = INITIAL_CURRENT_PAG;
 	private int sectionId;
+	private int patentType;
+	
+	public int getPatentType() {
+		return patentType;
+	}
+	public void setPatentType(int patentType) {
+		this.patentType = patentType;
+	}
 	public int getCurrentPage() {
 		return currentPage;
 	}

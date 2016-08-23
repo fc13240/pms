@@ -138,7 +138,7 @@
 	                            <i class="icon"></i>预览
 	                        </div>
 
-	                        
+	                        <input type="hidden" id="patentType" value="${patentDoc.patentType }"/>
 	                    </div>
 	                </div>
 	                <div id="overflowcenter" style="overflow-y: auto; overflow-x: hidden;height:610px; width: 1060px;">
@@ -897,35 +897,15 @@
 	}
 	 function templatebuttonclick(i,patentDocSectionId){
 		 if(patentDocSectionId==1){
-			 editor.html($("#templateContent"+i).html());
+			 editor.appendHtml($("#templateContent"+i).html());
 		 }
 		 else if(patentDocSectionId==2){
-			 editor1.html($("#templateContent"+i).html());
+			 editor8.appendHtml($("#templateContent"+i).html());
 		 }
 		 else if(patentDocSectionId==3){
-			 editor2.html($("#templateContent"+i).html());
+			 editor7.appendHtml($("#templateContent"+i).html());
 		 }
-		 else if(patentDocSectionId==4){
-			 editor3.html($("#templateContent"+i).html());
-		 }
-		 else if(patentDocSectionId==5){
-			 editor4.html($("#templateContent"+i).html());
-		 }
-		 else if(patentDocSectionId==6){
-			 editor5.html($("#templateContent"+i).html());
-		 }
-		 else if(patentDocSectionId==7){
-			 editor6.html($("#templateContent"+i).html());
-		 }
-		 else if(patentDocSectionId==8){
-			 editor7.html($("#templateContent"+i).html());
-		 }
-		 else if(patentDocSectionId==9){
-			 editor8.html($("#templateContent"+i).html());
-		 }
-		 else if(patentDocSectionId==10){
-			 editor9.html($("#templateContent"+i).html());
-		 }else{
+		 else{
 			 
 		 }
 	}
@@ -957,14 +937,14 @@
 		$("#topDownPage").css("color","#0085d0");
 		$("#bottomDownPage").css("color","#0085d0");
 		 loading(sectionId,p);
-		 console.info(p);
 	 }
 	function loadingTemplate(sectionId){
-		 
+		 var patentType=${patentDoc.patentType };
 		 $("#templateSectionId").html(sectionId);
 		 $.ajax({
 			 type : "POST",
-			 url : "<s:url value='/editor/getTemplateList.html'/>?sectionId="+sectionId,
+			 url : "<s:url value='/editor/getTemplateList.html'/>",
+			 data : {"sectionId":sectionId,"patentType":patentType},
 			 success : function (data){
 				 var obj= $.parseJSON(data);
 				 $("#modelWrap").empty();
@@ -977,7 +957,7 @@
 									"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
 								"</p>"+
 							"</p>"+
-						    "<div class='button' style='z-index:500000;' onclick='templatebuttonclick("+i+","+item.patentDocSectionType.patentDocSectionId+")'>+使用模板</div>"+
+						    "<div class='button' style='z-index:500000;width:100px;' onclick='templatebuttonclick("+i+","+item.patentDocSectionType.patentDocSectionId+")'>+使用模板</div>"+
 						  "</div>"+
 					   "</div>");
 					 $("#modelWrap span").css("color","black");
@@ -989,11 +969,12 @@
 		 })
 	 } 
  	function loading(sectionId,currentPage){
-		 
+ 		var patentType=${patentDoc.patentType };
 		 $("#templateSectionId").html(sectionId);
 		 $.ajax({
 			 type : "POST",
-			 url : "<s:url value='/editor/getTemplateListByPage.html'/>?sectionId="+sectionId+"&currentPage="+currentPage,
+			 url : "<s:url value='/editor/getTemplateListByPage.html'/>",
+			 data : {"sectionId":sectionId,"currentPage":currentPage,"patentType":patentType},
 			 success : function (data){
 				 var obj= $.parseJSON(data);
 				 $("#modelWrap").empty();
@@ -1058,9 +1039,11 @@
 	 
 	function getTotalPageBySectionId(sectionId){
 		var totalPageForSectionId=0;
+		var patentType=${patentDoc.patentType };
 		 $.ajax({
 			 type : "POST",
-			 url : "<s:url value='/editor/getTotalPage.html'/>?sectionId="+sectionId,
+			 url : "<s:url value='/editor/getTotalPage.html'/>",
+			 data : {"sectionId":sectionId,"patentType":patentType},
 			 async: false,
 			 success : function (data){
 				 totalPageForSectionId=data;
