@@ -39,7 +39,9 @@ import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentDoc;
+import com.lotut.pms.domain.PatentDocSearchCondition;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
 import com.lotut.pms.domain.TemplatePage;
@@ -130,10 +132,11 @@ public class PatentEditDocController {
 	}
 	
 	@RequestMapping(path="/editPatentDoc",method=RequestMethod.GET)
-	public String  editPatentDoc(@RequestParam("patentDocId")long patentDocId,@RequestParam("patentType")int patentType,Model model){
+	public String  editPatentDoc(@RequestParam("patentDocId")long patentDocId,@RequestParam("patentType")int patentType,Model model,Page page){
 		int userId=PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
 		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocId);
-		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
+		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(page);
 		model.addAttribute("patentDoc", patentDoc);
 		model.addAttribute("patentDocs", patentDocs);
 		model.addAttribute("patenType",patentType);
@@ -147,9 +150,16 @@ public class PatentEditDocController {
 	
 
 	@RequestMapping(path="/patentDocList",method=RequestMethod.GET)//patentDocList
-	public String  patentDocList(Model model){
-		int userId=PrincipalUtils.getCurrentUserId();
-		List<PatentDoc> patentDocss=patentDocService.getUserPatentDoc(userId);
+	public String  patentDocList(Model model, Page page, HttpSession session){
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=(int)patentDocService.getUserPatentDocCount(userId);
+		page.setTotalRecords(totalCount);
+		List<PatentDoc> patentDocss=patentDocService.getUserPatentDoc(page);
 		List<PatentDoc> patentDocs= new ArrayList<>();
 		for (PatentDoc patentDoc:patentDocss) {
 			if(patentDoc.getAppNo()==null&patentDoc.getAbstractDescription()==null
@@ -161,9 +171,37 @@ public class PatentEditDocController {
 			}
 		}
 		model.addAttribute("patentDocs", patentDocs);
+		model.addAttribute("page", page);
 		return "patent_doc_list";
 		
 	}
+	
+	@RequestMapping(path="/searchPatentDoc", method=RequestMethod.GET)
+	public String searchUserPatents(@ModelAttribute("searchCondition")PatentDocSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		List<PatentDoc> patentDocs= new ArrayList<>();
+		List<PatentDoc> resultPatentDocs = patentDocService.searchUserPatentDocsByPage(searchCondition);
+		for (PatentDoc patentDoc:resultPatentDocs) {
+			if(patentDoc.getAppNo()==null&patentDoc.getAbstractDescription()==null
+					&patentDoc.getName()==null&patentDoc.getManual()==null&patentDoc.getRightClaim()==null
+					&patentDoc.getAbstractImg()==null){
+					patentDocService.deleteNullPatentDoc();
+			}else{
+				patentDocs.add(patentDoc);
+			}
+		}
+		int totalCount=(int)patentDocService.searchUserPatentDocsCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		model.addAttribute("patentDocs", patentDocs);
+		model.addAttribute("page", page);
+		return "patent_doc_list";
+	}
+	
 	@RequestMapping(path="/deletePatentDoc",method=RequestMethod.GET)
 	public String  deletePatentDoc(@RequestParam("patentDocId")long patentDocId,Model model){
 		patentDocService.deletePatentDoc(patentDocId);
@@ -544,25 +582,14 @@ public class PatentEditDocController {
 		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
 		String filePath = Settings.PATENTDOC_FILE_PATH + relativeUrl;
 		File patentDocFile = new File(filePath);
-		if("FF".equals(getBrowser(request))){
-		    //针对火狐浏览器处理
+		if(WebUtils.isFireFox(request)){
 			downloadFileName =new String(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
 		}
 		response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
 		response.setContentLength((int)patentDocFile.length());
 		WebUtils.writeStreamToResponse(response, new FileInputStream(patentDocFile));
 	}
-	
-	private String getBrowser(HttpServletRequest request){
-	    String UserAgent = request.getHeader("USER-AGENT").toLowerCase();
-	    if(UserAgent!=null){
-	        if (UserAgent.indexOf("msie") >=0 ) return "IE";
-	        if (UserAgent.indexOf("firefox") >= 0) return "FF";
-	    }
-	    return null;
-	}
-	
-	
+		
 	@RequestMapping(path="showFriends", method=RequestMethod.GET)
 	public String showFriends(Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();

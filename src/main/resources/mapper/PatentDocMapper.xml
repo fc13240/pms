@@ -50,12 +50,16 @@
 		</foreach>
 	</insert>
 	
-	<select id="getUserPatentDoc"  resultMap="PatentDocMap">
+	<select id="getUserPatentDocCount" resultType="int">
+		select count(*) from user_patent_docs where user_id = #{userId}
+	</select>
+	
+	<select id="getUserPatentDoc" parameterType="Page" resultMap="PatentDocMap">
 		SELECT patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
 		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,patent_doc_url 
 		FROM patent_documents p
-		WHERE p.patent_doc_id IN (SELECT patent_doc FROM user_patent_docs WHERE user_id = 2)
-		ORDER BY create_time DESC ,last_update_time DESC
+		WHERE p.patent_doc_id IN (SELECT patent_doc FROM user_patent_docs WHERE user_id = 2) 
+		ORDER BY create_time DESC ,last_update_time DESC limit #{startIndex}, #{pageSize}
 	</select> 
 	
 	
@@ -117,4 +121,34 @@
 		select patent_doc_url from patent_documents where  patent_doc_id=#{patentDocId}
 	</select>
 	
+	
+	<select id="searchUserPatentDocsByPage" parameterType="PatentDocSearchCondition" resultMap="PatentDocMap">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+		select sp.patent_doc_id, sp.user_id,sp.app_no,sp.patent_type,sp.create_time,sp.last_update_time,sp.patent_name,
+				sp.manual,sp.right_claim,sp.abstract_desc,sp.abstract_img,sp.patent_doc_attachment_file,sp.patent_doc_url 
+		from (SELECT p.patent_doc_id, p.user_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
+				p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url 
+				FROM patent_documents p  LEFT JOIN user_patent_docs up ON p.patent_doc_id = up.patent_doc
+				WHERE up.user_id = #{userId}
+			 	<if test="keyword != null">
+					and ( p.patent_name like #{keyword_pattern})
+				</if>		 		 	
+				 ORDER BY p.create_time DESC ,p.last_update_time DESC
+				 limit #{page.startIndex}, #{page.pageSize}) as sp 		
+		 order by sp.create_time DESC, sp.last_update_time DESC
+	</select>	
+	
+	<select id="searchUserPatentDocsCount" parameterType="PatentDocSearchCondition" resultType="int">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+				SELECT Count(*)
+				FROM patent_documents p  LEFT JOIN user_patent_docs up ON p.patent_doc_id = up.patent_doc
+				WHERE up.user_id = #{userId}
+			 	<if test="keyword != null">
+					and ( p.patent_name like #{keyword_pattern})
+				</if>
+	</select>	
 </mapper>

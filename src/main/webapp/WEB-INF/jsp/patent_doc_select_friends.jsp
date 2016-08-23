@@ -21,7 +21,7 @@
 		
 			<!--left begin-->
 		  <div class="col-xs-1 sidebar" style="min-width:100px;">
-			<%@ include file="_left_nav2.jsp" %>
+			<%@ include file="_left_nav_editor.jsp" %>
 		  </div>
 		  <!--left end-->
 		  <!--right begin-->
@@ -59,10 +59,10 @@
 							<thead>
 							  <tr class="simple_bag">
 								<th width="30px"><input style="width:15px;" type="checkbox" class="check-item"></th>
-								<th>序号</th>
-								<th>用户名</th>
-								<th>姓名</th>
-								<th>备注名</th>
+								<th >序号</th>
+								<th >用户名</th>
+								<th >姓名</th>
+								<th  >备注名</th>
 							  </tr>
 							</thead>
 							<tbody>

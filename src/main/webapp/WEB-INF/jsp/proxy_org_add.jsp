@@ -80,7 +80,7 @@
 <script type="text/javascript">
 	function sendProxyOrgRequest(orgUserId) {
 		$.ajax({
-			url: "<s:url value='/employee/proxyOrgRequest.html'/>?orgUserId=" + orgUserId,
+			url: "<s:url value='/employee/sendProxyOrgRequest.html'/>?orgUserId=" + orgUserId,
 			success: function() {
 		   		$("<div>添加合作机构成功</div>").dialog({
 		   			modal: true,

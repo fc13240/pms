@@ -80,7 +80,7 @@
 <script type="text/javascript">
 	function sendProcessPersonRequest(userId) {
 		$.ajax({
-			url: "<s:url value='/employee/processPersonRequest.html'/>?userId=" + userId,
+			url: "<s:url value='/employee/sendProcessPersonRequest.html'/>?userId=" + userId,
 			success: function() {
 		   		$("<div>添加流程员成功</div>").dialog({
 		   			modal: true,
