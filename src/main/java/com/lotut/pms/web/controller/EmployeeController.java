@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.CustomerSupport;
-import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.ProcessPerson;
@@ -161,7 +160,7 @@ public class EmployeeController {
 	}
 	
 	
-	@RequestMapping(path="/customerSupportRequest", method=RequestMethod.GET)
+	@RequestMapping(path="/sendCustomerSupportRequest", method=RequestMethod.GET)
 	public String addOrUpdateCustomerSupport(@ModelAttribute("customerSupport")CustomerSupport customerSupport,Model model) {
 		int proxyOrgId = PrincipalUtils.getCurrentUserId();
 		customerSupport.setProxyOrgId(proxyOrgId);
@@ -169,7 +168,7 @@ public class EmployeeController {
 		return "customer_support_add";
 	}
 	
-	@RequestMapping(path="/techPersonRequest", method=RequestMethod.GET)
+	@RequestMapping(path="/sendTechPersonRequest", method=RequestMethod.GET)
 	public String addOrUpdateTechPerson(@ModelAttribute("techPerson")TechPerson techPerson,Model model) {
 		int proxyOrgId = PrincipalUtils.getCurrentUserId();
 		techPerson.setProxyOrgId(proxyOrgId);
@@ -177,7 +176,7 @@ public class EmployeeController {
 		return "tech_person_add";
 	}
 	
-	@RequestMapping(path="/processPersonRequest", method=RequestMethod.GET)
+	@RequestMapping(path="/sendProcessPersonRequest", method=RequestMethod.GET)
 	public String addOrUpdateProcessPerson(@ModelAttribute("processPerson")ProcessPerson processPerson,Model model) {
 		int proxyOrgId = PrincipalUtils.getCurrentUserId();
 		processPerson.setProxyOrgId(proxyOrgId);
@@ -185,7 +184,7 @@ public class EmployeeController {
 		return "process_person_add";
 	}
 	
-	@RequestMapping(path="/proxyOrgRequest", method=RequestMethod.GET)
+	@RequestMapping(path="/sendProxyOrgRequest", method=RequestMethod.GET)
 	public String addOrUpdateProxyOrg(@ModelAttribute("proxyOrg")ProxyOrg proxyOrg,Model model) {
 		int parentOrgId = employeeService.getParentOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		proxyOrg.setParentOrgId(parentOrgId);

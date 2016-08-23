@@ -77,7 +77,7 @@
 <script type="text/javascript">
 	function sendCustomerSupportRequest(userId) {
 		$.ajax({
-			url: "<s:url value='/employee/customerSupportRequest.html'/>?userId=" + userId,
+			url: "<s:url value='/employee/sendCustomerSupportRequest.html'/>?userId=" + userId,
 			success: function() {
 		   		$("<div>添加客服成功</div>").dialog({
 		   			modal: true,

@@ -542,25 +542,14 @@ public class PatentEditDocController {
 		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
 		String filePath = Settings.PATENTDOC_FILE_PATH + relativeUrl;
 		File patentDocFile = new File(filePath);
-		if("FF".equals(getBrowser(request))){
-		    //针对火狐浏览器处理
+		if(WebUtils.isFireFox(request)){
 			downloadFileName =new String(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
 		}
 		response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
 		response.setContentLength((int)patentDocFile.length());
 		WebUtils.writeStreamToResponse(response, new FileInputStream(patentDocFile));
 	}
-	
-	private String getBrowser(HttpServletRequest request){
-	    String UserAgent = request.getHeader("USER-AGENT").toLowerCase();
-	    if(UserAgent!=null){
-	        if (UserAgent.indexOf("msie") >=0 ) return "IE";
-	        if (UserAgent.indexOf("firefox") >= 0) return "FF";
-	    }
-	    return null;
-	}
-	
-	
+		
 	@RequestMapping(path="showFriends", method=RequestMethod.GET)
 	public String showFriends(Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();

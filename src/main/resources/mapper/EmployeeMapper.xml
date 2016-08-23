@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotut.pms.dao.mapper.EmployeeMapper">
-	<resultMap type="CustomerSupport" id="CustomerSupportResultMap">
+	<resultMap type="CustomerSupport" id="customerSupportResultMap">
 		<id property="id" column="id"/>
 		<result property="userId" column="user_id"/>
 		<result property="proxyOrgId" column="proxy_org_id"/>
@@ -15,7 +15,7 @@
 		</association>
 	</resultMap>
 	
-	<resultMap type="TechPerson" id="TechPersonResultMap">
+	<resultMap type="TechPerson" id="techPersonResultMap">
 		<id property="id" column="id"/>
 		<result property="userId" column="user_id"/>
 		<result property="proxyOrgId" column="proxy_org_id"/>
@@ -27,7 +27,7 @@
 		</association>
 	</resultMap>
 	
-	<resultMap type="ProcessPerson" id="ProcessPersonResultMap">
+	<resultMap type="ProcessPerson" id="processPersonResultMap">
 		<id property="id" column="id"/>
 		<result property="userId" column="user_id"/>
 		<result property="proxyOrgId" column="proxy_org_id"/>
@@ -39,7 +39,7 @@
 		</association>
 	</resultMap>
 	
-	<resultMap type="ProxyOrg" id="ProxyOrgResultMap">
+	<resultMap type="ProxyOrg" id="proxyOrgResultMap">
 		<id property="orgId" column="org_id"/>
 		<result property="orgUserId" column="org_user_id"/>
 		<result property="parentOrgId" column="parent_org_id"/>
@@ -53,19 +53,19 @@
 	
 	
 	
-	<select id="getCustomerSupportList"  parameterType="int" resultMap="CustomerSupportResultMap">
+	<select id="getCustomerSupportList"  parameterType="int" resultMap="customerSupportResultMap">
 		select cs.id,cs.user_id, cs.remark_name,cs.proxy_org_id,u.username,u.name from customer_supports cs
 		join users u on u.user_id = cs.user_id
 		where cs.proxy_org_id=#{proxyOrgId}
 	</select>
 	
-	<select id="getTechPersonList"  parameterType="int" resultMap="TechPersonResultMap">
+	<select id="getTechPersonList"  parameterType="int" resultMap="techPersonResultMap">
 		select t.id,t.user_id, t.remark_name,t.proxy_org_id,u.username,u.name from tech_person t
 		join users u on u.user_id = t.user_id
 		where t.proxy_org_id=#{proxyOrgId}
 	</select>
 	
-	<select id="getProcessPersonList"  parameterType="int" resultMap="ProcessPersonResultMap">
+	<select id="getProcessPersonList"  parameterType="int" resultMap="processPersonResultMap">
 		select p.id,p.user_id, p.remark_name,p.proxy_org_id,u.username,u.name from process_person p
 		join users u on u.user_id = p.user_id
 		where p.proxy_org_id=#{proxyOrgId}
@@ -75,7 +75,7 @@
 		select org_id from proxy_org where org_user_id = #{currentUserId}
 	</select>
 	
-	<select id="getProxyOrgList"  parameterType="int" resultMap="ProxyOrgResultMap">
+	<select id="getProxyOrgList"  parameterType="int" resultMap="proxyOrgResultMap">
 		select p.org_id,p.org_user_id, p.remark_name,p.parent_org_id,u.username,u.name from proxy_org  p
 		join users u on u.user_id = p.org_user_id
 		where p.parent_org_id=#{parentOrgId}
