@@ -128,6 +128,14 @@ public class PatentDocServiceImp implements PatentDocService{
 		}
 
 
+		@Override
+		@Transactional
+		public void insertUserPatentDoc(List<Map<String, Integer>> userPatentDocRecords) {
+			patentDocDao.insertUserPatentDoc(userPatentDocRecords);
+			
+		}
+
+
 
 
 }

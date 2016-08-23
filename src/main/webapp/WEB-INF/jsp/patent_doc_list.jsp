@@ -181,6 +181,11 @@ table td a {
                     <a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
                     </c:if>
                 </td>
+              	<td>
+					<a href="javascript:return void" onclick="batchShare()" >
+					<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
+					</a> 
+				</td>
             </tr>
             
            
@@ -219,6 +224,25 @@ table td a {
 		 
 	}
 
+</script>
+<script type="text/javascript">
+function batchShare() {
+	var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+	var uniquePatentNos = []
+	if (!patentSelected) {
+		formutil.alertMessage('请选择专利');
+		
+		return;
+	}
+	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+	for (var i = 0; i < patents_checked.length; i++) {
+		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+			uniquePatentNos.push(patents_checked[i]);
+		}
+	}		
+	var patentDocIds = uniquePatentNos.join(",");		
+	location.href = "<s:url value='/editor/showFriends.html'/>?patentDocIds=" + patentDocIds;
+}
 </script>
 </body>
 </html>

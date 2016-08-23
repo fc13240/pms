@@ -808,6 +808,7 @@ INSERT INTO proxy_org(org_user_id) VALUES (2);
 ALTER TABLE common_inventor ADD COLUMN  proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址'
 
 
+ALTER TABLE  patent_documents ADD COLUMN patent_doc_status int NOT NULL COMMENT '文档状态',
 
 ALTER TABLE common_app_person ADD COLUMN  proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址'
 
