@@ -60,8 +60,8 @@ public class PatentDocumentTemplateMybatisDao extends SqlSessionDaoSupport imple
 
 
 	@Override
-	public List<PatentDocumentTemplate> getTemplateList(int sectionId,int pagSize) {
-		return patentDocumentTemplateMapper.getTemplateList(sectionId,pagSize);
+	public List<PatentDocumentTemplate> getTemplateList(int sectionId,int pagSize,int patentType) {
+		return patentDocumentTemplateMapper.getTemplateList(sectionId,pagSize,patentType);
 	}
 
 	public List<PatentDocumentTemplate> getTemplateListByPage(TemplatePage templatePage) {
@@ -70,7 +70,7 @@ public class PatentDocumentTemplateMybatisDao extends SqlSessionDaoSupport imple
 
 
 	@Override
-	public int getTemlateSizeBySectionId(int sectionId) {
-		return patentDocumentTemplateMapper.getTemlateSizeBySectionId(sectionId);
+	public int getTemlateSizeBySectionId(int sectionId,int patentType) {
+		return patentDocumentTemplateMapper.getTemlateSizeBySectionId(sectionId,patentType);
 	}
 }

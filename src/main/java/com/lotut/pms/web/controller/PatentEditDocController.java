@@ -312,15 +312,15 @@ public class PatentEditDocController {
 	}
 	
 	@RequestMapping(path="/getTemplateList")
-	public void getTemplateList(@RequestParam("sectionId")int sectionId,HttpServletResponse response) throws IOException{
+	public void getTemplateList(@RequestParam("sectionId")int sectionId,@RequestParam("patentType")int patentType,HttpServletResponse response) throws IOException{
 		TemplatePage	templatePage = new TemplatePage();
-		List<PatentDocumentTemplate> DocTemplates = patentDocumentTemplateService.getTemplateList(sectionId,templatePage.getPageSize());
+		List<PatentDocumentTemplate> DocTemplates = patentDocumentTemplateService.getTemplateList(sectionId,templatePage.getPageSize(),patentType);
 		WebUtils.writeJsonStrToResponse(response, DocTemplates);
 	}
 	@RequestMapping(path="/getTemplateListByPage")
 	public void getTemplateListByPage(@RequestParam("sectionId")int sectionId,@ModelAttribute("templatePage") TemplatePage templatePage ,HttpServletResponse response) throws IOException{
 		templatePage.setSectionId(sectionId);
-		int totalCount = patentDocumentTemplateService.getTemlateSizeBySectionId(sectionId);
+		int totalCount = patentDocumentTemplateService.getTemlateSizeBySectionId(sectionId,templatePage.getPatentType());
 		int currentTotalCount = templatePage.getCurrentPage()*templatePage.getPageSize();
 		if(templatePage.getCurrentPage()<=1){
 			templatePage.setCurrentPage(1);
@@ -333,8 +333,8 @@ public class PatentEditDocController {
 	}
 	
 	@RequestMapping(path="/getTotalPage")
-	public void getTotalPage(@RequestParam("sectionId")int sectionId,HttpServletResponse response){
-		int totalCount = patentDocumentTemplateService.getTemlateSizeBySectionId(sectionId);
+	public void getTotalPage(@RequestParam("sectionId")int sectionId,@RequestParam("patentType")int patentType,HttpServletResponse response){
+		int totalCount = patentDocumentTemplateService.getTemlateSizeBySectionId(sectionId,patentType);
 		TemplatePage templatePage = new TemplatePage();
 		int totalPage = (int)Math.ceil(totalCount/(double)templatePage.getPageSize());
 		try{

@@ -21,9 +21,9 @@ public interface PatentDocumentTemplateMapper {
 	
 	void deleteTemplateDoc(@Param("templateId") int templateId);
 	
-	List<PatentDocumentTemplate> getTemplateList(@Param("sectionId") int sectionId,@Param("pageSize") int pageSize);
+	List<PatentDocumentTemplate> getTemplateList(@Param("sectionId") int sectionId,@Param("pageSize") int pageSize,@Param("patentType") int patentType);
 	
 	List<PatentDocumentTemplate> getTemplateListByPage(TemplatePage templatePage);
 	
-	int getTemlateSizeBySectionId(@Param("sectionId") int sectionId);
+	int getTemlateSizeBySectionId(@Param("sectionId") int sectionId,@Param("patentType") int patentType);
 }

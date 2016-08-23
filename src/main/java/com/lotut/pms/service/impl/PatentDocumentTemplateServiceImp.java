@@ -51,8 +51,8 @@ public class PatentDocumentTemplateServiceImp implements PatentDocumentTemplateS
 	}
 
 	@Override
-	public List<PatentDocumentTemplate> getTemplateList(int sectionId,int pageSize) {
-		return patentDocumentTemplateDao.getTemplateList(sectionId,pageSize);
+	public List<PatentDocumentTemplate> getTemplateList(int sectionId,int pageSize,int patentType) {
+		return patentDocumentTemplateDao.getTemplateList(sectionId,pageSize,patentType);
 	}
 
 	@Override
@@ -61,8 +61,8 @@ public class PatentDocumentTemplateServiceImp implements PatentDocumentTemplateS
 	}
 
 	@Override
-	public int getTemlateSizeBySectionId(int sectionId) {
-		return patentDocumentTemplateDao.getTemlateSizeBySectionId(sectionId);
+	public int getTemlateSizeBySectionId(int sectionId,int patentType) {
+		return patentDocumentTemplateDao.getTemlateSizeBySectionId(sectionId,patentType);
 	}
 	
 }

@@ -132,9 +132,11 @@ function loadingGuideBYTab(sectionId){
 }
 
 function loadingTemplateBYTab(sectionId){
+	var patentType=$("#patentType").val();
 	 $.ajax({
 		 type : "POST",
-		 url : "../editor/getTemplateList.html?sectionId="+sectionId,
+		 url : "../editor/getTemplateList.html",
+		 data : {"sectionId":sectionId,"patentType":patentType},
 		 success : function (data){
 			 var obj= $.parseJSON(data);
 			 $("#modelWrap").empty();
@@ -147,7 +149,7 @@ function loadingTemplateBYTab(sectionId){
 								"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
 							"</p>"+
 						"</p>"+
-					    "<div class='button' style='z-index:500000;' onclick='templatebuttonclick("+i+","+item.patentDocSectionType.patentDocSectionId+")'>+使用模板</div>"+
+					    "<div class='button' style='z-index:500000;width:100px;' onclick='templatebuttonclick("+i+","+item.patentDocSectionType.patentDocSectionId+")'>+使用模板</div>"+
 					  "</div>"+
 				   "</div>");
 				 $("#modelWrap span").css("color","black");
