@@ -58,7 +58,7 @@
 								<td style="text-align:center"><c:out value="${inventor.inventorName}"/></td>
 								<td style="text-align:center"><c:out value="${inventor.inventorNumber}"/></td>
 								<td style="text-align:center"><c:out value="${inventor.inventorNationality}"/></td>
-								<td>${inventor.inventorMobile}</td>
+								<td	style="text-align:center">${inventor.inventorMobile}</td>
 								<td style="text-align:center"><c:out value="${inventor.inventorEmail}"/></td>
 								<td style="text-align:center">
 									<a  href="<s:url value='/inventor/showUploadForm.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>">上传</a>
