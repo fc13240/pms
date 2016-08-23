@@ -42,7 +42,6 @@ import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
-import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.TemplatePage;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.AppPersonService;
@@ -184,8 +183,14 @@ public class PatentEditDocController {
 	
 	/*合并代码*/
 	
-	@RequestMapping(path="/patentDocTemplate")
-	public String patentDocTemplate(){
+	@RequestMapping(path="/choicePatentDocTemplateType")
+	public String choicePatentDocTemplateType(){
+		return "patent_doc_template_type_list";
+	}
+
+	@RequestMapping(path="/newPatentDocTemplate")
+	public String newPatentDocTemplate(@RequestParam("patentType") int patentType,Model model){
+		model.addAttribute("patentType", patentType);
 		return "patent_doc_template_index";
 	}
 	
@@ -193,9 +198,6 @@ public class PatentEditDocController {
 	public @ResponseBody String addBackTech(@ModelAttribute("patentDocumentTemplate") PatentDocumentTemplate patentDocumentTemplate){
 		int UserId = PrincipalUtils.getCurrentUserId();
 		patentDocumentTemplate.setCreatorId(UserId);
-		PatentType pt=new PatentType();
-		pt.setPatentTypeId(1);
-		patentDocumentTemplate.setPatentType(pt);
 		patentDocumentTemplateService.savePatentDocumentTemplate(patentDocumentTemplate);
 		return "添加模板成功！";
 	}

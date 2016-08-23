@@ -18,11 +18,43 @@
 <div class="col-xs-1 sidebar" style="min-width:100px;">
 			<%@ include file="_left_nav_editor.jsp" %>
 		  </div>
+    <div class="tit_top">
+        <div class="title2">
+            撰写列表</div>
+               
+    </div>
+
+
 
 		  <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
+				    <div class="cl top1">
+        				<form class="form-inline" action="<s:url value='/editor/search.html'/>" method="get">
+						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
+						 <div class="t-third">
+						  <table class="search-table">
+							  <tr>
+							  <td>关键字</td>
+							  </tr>
+							  <tr>
+							  <td>
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="文档名称" class="t-input form-control"/>							  
+							  </td>
+							  <td>
+							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
+							  </td>
+							  </tr>							  
+						  </table>
+						 </div>
+				</form>
+    </div>
+			 
+			
 				<div style="height:10px;"></div>
 					<div class="lt-box" style="padding:20px;">
+					<a href="javascript:return void" onclick="batchShare()" >
+								<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
+								</a> 
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						<thead>
 						<tr class="simple_bag">
@@ -41,7 +73,7 @@
 							<c:forEach items="${patentDocs}" var="patentDoc" varStatus="status">
 							  <tr>
 							  	<td class="center" style="text-align:center" width="10px"><label class="pos-rel"> <span class="batch-share-item">
-								<input type="checkbox" class="check-item" inventor="<c:out value='${patentDoc.patentDocId}'/>">
+								<input type="checkbox" class="check-item" patentDocId="<c:out value='${patentDoc.patentDocId}'/>">
 								<span class="lbl"></span></label>
 								</td>
 								<td class="center" style="text-align:center"> ${status.count} </td>
@@ -130,20 +162,21 @@ $('tr td input.check-item').click(function() {
 });
 
 function batchShare() {
-	var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+	var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
 	var uniquePatentNos = []
 	if (!patentSelected) {
 		formutil.alertMessage('请选择专利');
 		
 		return;
 	}
-	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
 	for (var i = 0; i < patents_checked.length; i++) {
 		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
 			uniquePatentNos.push(patents_checked[i]);
 		}
 	}		
-	var patentDocIds = uniquePatentNos.join(",");		
+	var patentDocIds = uniquePatentNos.join(",");	
+	alert(patentDocIds);
 	location.href = "<s:url value='/editor/showFriends.html'/>?patentDocIds=" + patentDocIds;
 }
 </script>
