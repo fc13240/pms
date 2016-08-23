@@ -33,10 +33,7 @@
 	      <!-- 主菜单-列表 menu  -->
 	      <ul class="menu">
 	        <li><a href="<s:url value='/patent/list.html?currentPage=1'/>">我的专利</a></li>
-	        <se:authorize access="hasRole('ROLE_TRADER')">
-	         <li><a href="<s:url value='/editor/patentDocList.html'/>">专利撰写</a></li>
-	        
-	        </se:authorize>	        
+	         <li><a href="<s:url value='/editor/patentDocList.html'/>">专利撰写</a></li>     
 	        <li><a href="<s:url value='/notice/list.html?currentPage=1'/>" >通知书</a></li>
 	        <li><a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>" >专利交费</a></li>
 	         <se:authorize access="hasRole('ROLE_TRADER')">
