@@ -162,20 +162,21 @@ $('tr td input.check-item').click(function() {
 });
 
 function batchShare() {
-	var patentSelected = formutil.anyCheckboxItemSelected('tr th input.check-item');
+	var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
 	var uniquePatentNos = []
 	if (!patentSelected) {
 		formutil.alertMessage('请选择专利');
 		
 		return;
 	}
-	var patents_checked=formutil.getAllCheckedCheckboxValues('tr th input.check-item', 'patentDocId');
+	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
 	for (var i = 0; i < patents_checked.length; i++) {
 		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
 			uniquePatentNos.push(patents_checked[i]);
 		}
 	}		
-	var patentDocIds = uniquePatentNos.join(",");		
+	var patentDocIds = uniquePatentNos.join(",");	
+	alert(patentDocIds);
 	location.href = "<s:url value='/editor/showFriends.html'/>?patentDocIds=" + patentDocIds;
 }
 </script>
