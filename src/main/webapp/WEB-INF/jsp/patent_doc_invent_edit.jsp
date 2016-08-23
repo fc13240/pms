@@ -920,27 +920,32 @@
 			$("#topDownPage").css("color","#ccc");
 			$("#bottomDownPage").css("color","#ccc");
 		 }
-		 $("#topUpPage").css("color","#0085d0");
-		 $("#bottomUpPage").css("color","#0085d0");
-		 loading(sectionId,p);
-		 console.info(p);
+		 	loading(sectionId,p);
+		 	$("#topUpPage").css("color","#0085d0");
+		 	$("#bottomUpPage").css("color","#0085d0");
 		
 	 }
 	 function upPage(){
 		 var sectionId = $("#templateSectionId").html();
 		 --p;
-		 if(p<1){
+		 if(p<=1){
 			 p=1;
 			$("#topUpPage").css("color","#ccc");
 			$("#bottomUpPage").css("color","#ccc");
 		 }
-		$("#topDownPage").css("color","#0085d0");
-		$("#bottomDownPage").css("color","#0085d0");
 		 loading(sectionId,p);
+		 $("#topDownPage").css("color","#0085d0");
+		 $("#bottomDownPage").css("color","#0085d0");
 	 }
 	function loadingTemplate(sectionId){
 		 var patentType=${patentDoc.patentType };
 		 $("#templateSectionId").html(sectionId);
+		 var totoalPage=getTotalPageBySectionId(sectionId);
+		/*  if(p>=totoalPage){
+				p=totoalPage;
+				$("#topDownPage").css("color","#ccc");
+				$("#bottomDownPage").css("color","#ccc");
+		 }; */
 		 $.ajax({
 			 type : "POST",
 			 url : "<s:url value='/editor/getTemplateList.html'/>",

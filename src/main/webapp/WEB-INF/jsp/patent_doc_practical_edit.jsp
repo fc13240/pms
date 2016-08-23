@@ -93,7 +93,7 @@
 		</script> 
 </head>
 
-<body style="background-color: #FFF" id="dlstCircleArticle">
+<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1)">
 <style>
 .model1:hover .button{display:block}
 </style>	
@@ -419,14 +419,28 @@
 	        <div class="data_menu">
 	            <div class="menud" id="modelS" onclick="searModel(this)">
 	                模板库</div>
-	
+	            <div class="menud" id="modelS" onclick="searGuide(this)">
+	                撰写指南</div>	
 	        </div>
-	
-	        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><a style="color:#ccc" href="javascript:void(0);">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:showKindsDragModel(1,2,2);">下一页</a></div>
-	        <div style="float: right; padding-right: 15px; padding-top: 5px; display: block;" id="kbpage2"><a style="color:#ccc" href="javascript:void(0);">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:showKindsDragModel(1,2,2);">下一页</a></div>
-	        <div id="scBs" class="shousou" onclick="bigSmall(this);">
-	        </div>
-	        <input type="hidden" name="name" value="small" id="hidBorS">
+			<div>
+				<div class="model-list">
+			        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><span id="templateSectionId" style="display:none;">1</span><a style="color:#ccc" href="javascript:upPage();" id="topUpPage">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="topDownPage">下一页</a></div>
+			        <div class="model" style="overflow-x: hidden; overflow-y: auto;">
+			            <div id="modelWrap" style="display: block;"></div>
+		
+						<div id="hiddenmodel" style="display: none;"></div>
+			        </div>
+			        
+			        <div style="float: right; padding-right: 15px; padding-top: 5px; display: block;" id="kbpage2"><a style="color:#ccc" href="javascript:upPage();" id="bottomUpPage">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="bottomDownPage">下一页</a></div>
+			        
+			        <div id="scBs" class="shousou" onclick="bigSmall(this);">
+			        </div>
+			        <input type="hidden" name="name" value="small" id="hidBorS">
+		        </div>
+		        <div class="guide-list" style="display:none;"><!--load 指南 然后控制 display -->
+		        <span>撰写指南:</span>
+		        </div>
+			</div> 
 	    </div>
 	</div>
 	
@@ -623,35 +637,15 @@
 	}
 	 function templatebuttonclick(i,patentDocSectionId){
 		 if(patentDocSectionId==1){
-			 editor.apppendHtml($("#templateContent"+i).html());
+			 editor.appendHtml($("#templateContent"+i).html());
 		 }
 		 else if(patentDocSectionId==2){
-			 editor1.html($("#templateContent"+i).html());
+			 editor8.appendHtml($("#templateContent"+i).html());
 		 }
 		 else if(patentDocSectionId==3){
-			 editor2.html($("#templateContent"+i).html());
+			 editor7.appendHtml($("#templateContent"+i).html());
 		 }
-		 else if(patentDocSectionId==4){
-			 editor3.html($("#templateContent"+i).html());
-		 }
-		 else if(patentDocSectionId==5){
-			 editor4.html($("#templateContent"+i).html());
-		 }
-		 else if(patentDocSectionId==6){
-			 editor5.html($("#templateContent"+i).html());
-		 }
-		 else if(patentDocSectionId==7){
-			 editor6.html($("#templateContent"+i).html());
-		 }
-		 else if(patentDocSectionId==8){
-			 editor7.html($("#templateContent"+i).html());
-		 }
-		 else if(patentDocSectionId==9){
-			 editor8.html($("#templateContent"+i).html());
-		 }
-		 else if(patentDocSectionId==10){
-			 editor9.html($("#templateContent"+i).html());
-		 }else{
+		 else{
 			 
 		 }
 	}
@@ -660,29 +654,42 @@
 		 var sectionId = $("#templateSectionId").html();
 		 ++p;
 		 var totoalPage=getTotalPageBySectionId(sectionId);
-		 
-		 if(p>=totoalPage){
-			p=totoalPage;
+		 if(totoalPage>1){
+			 if(p>=totoalPage){
+				p=totoalPage;
+				$("#topDownPage").css("color","#ccc");
+				$("#bottomDownPage").css("color","#ccc");
+			 }
+		 	loading(sectionId,p);
+		 	$("#topUpPage").css("color","#0085d0");
+		 	$("#bottomUpPage").css("color","#0085d0");
+		 }else{
+			$("#topDownPage").css("color","#ccc");
+			$("#bottomDownPage").css("color","#ccc");
+			$("#topUpPage").css("color","#ccc");
+		 	$("#bottomUpPage").css("color","#ccc");
 		 }
-		 loading(sectionId,p);
-		 console.info(p);
-		
 	 }
 	 function upPage(){
 		 var sectionId = $("#templateSectionId").html();
 		 --p;
-		 if(p<1){
+		 if(p<=1){
 			 p=1;
+			$("#topUpPage").css("color","#ccc");
+			$("#bottomUpPage").css("color","#ccc");
 		 }
+		$("#topDownPage").css("color","#0085d0");
+		$("#bottomDownPage").css("color","#0085d0");
 		 loading(sectionId,p);
-		 console.info(p);
 	 }
 	function loadingTemplate(sectionId){
-		 
+		 var patentType=${patentDoc.patentType };
 		 $("#templateSectionId").html(sectionId);
+		 var totoalPage=getTotalPageBySectionId(sectionId);
 		 $.ajax({
 			 type : "POST",
-			 url : "<s:url value='/editor/getTemplateList.html'/>?sectionId="+sectionId,
+			 url : "<s:url value='/editor/getTemplateList.html'/>",
+			 data : {"sectionId":sectionId,"patentType":patentType},
 			 success : function (data){
 				 var obj= $.parseJSON(data);
 				 $("#modelWrap").empty();
@@ -704,14 +711,17 @@
 			 },error : function (){
 				 
 			 }
-		 })
+		 });
+		 
+		 
 	 } 
  	function loading(sectionId,currentPage){
-		 
+ 		 var patentType=${patentDoc.patentType };
 		 $("#templateSectionId").html(sectionId);
 		 $.ajax({
 			 type : "POST",
-			 url : "<s:url value='/editor/getTemplateListByPage.html'/>?sectionId="+sectionId+"&currentPage="+currentPage,
+			 url : "<s:url value='/editor/getTemplateListByPage.html'/>",
+			 data : {"sectionId":sectionId,"currentPage":currentPage,"patentType":patentType},
 			 success : function (data){
 				 var obj= $.parseJSON(data);
 				 $("#modelWrap").empty();
@@ -777,9 +787,11 @@
 	 
 	function getTotalPageBySectionId(sectionId){
 		var totalPageForSectionId=0;
+		var patentType=${patentDoc.patentType};
 		 $.ajax({
 			 type : "POST",
-			 url : "<s:url value='/editor/getTotalPage.html'/>?sectionId="+sectionId,
+			 url : "<s:url value='/editor/getTotalPage.html'/>",
+			 data : {"sectionId":sectionId,"patentType":patentType},
 			 async: false,
 			 success : function (data){
 				 totalPageForSectionId=data;

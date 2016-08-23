@@ -1,6 +1,7 @@
 ﻿function tabChange(whichTab, flag, isclaim) {//whichTab:0-8代表第1-第9个选项卡,增加一个flag用于切换时候看是否需要判断专利类型 
     //标签操作要做的几个重点：提示是否选择了专利类型；保存上一个标签编辑区；标签切换到当前标签；切换撰写小贴士；获取当前标签编辑区；获取当前标签的模版库内容；
-    if (flag == undefined)
+	p=1;
+	if (flag == undefined)
         flag = true;
     if (isclaim == undefined)
         isclaim = true;
@@ -55,26 +56,21 @@
 		loadingTemplateBYTab(9);
 		p=1;
 	}*/
-	
 	loadingGuideBYTab(whichTab+1);
 	if(whichTab==0){
 	    $("#templateSectionId").html(1);
 		loadingTemplateBYTab(1);
 
-		p=1;
 	}else if(whichTab==2){
 		$("#templateSectionId").html(2);
-		p=1;
 		loadingTemplateBYTab(2);
+
 	}else if(whichTab==3){
 		$("#templateSectionId").html(3);
-		p=1;
 		loadingTemplateBYTab(3);
 	}else{
 		loadingTemplateBYTab(-1);
 	}
-	
-	
 }
 
 //点击设为模板，开始使用，把内容显示到编辑框
