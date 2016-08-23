@@ -23,7 +23,7 @@ public interface PatentDocMapper {
 	
 	void updatePatentDoc(PatentDoc patentDoc);
 	
-	void deletePatentDoc(long patentDocId);
+	void deletePatentDoc(@Param("patentDocId")long patentDocId,@Param("userId")int userId);
 
 	void savePatentImgUrl(Attachment attachment);
 	

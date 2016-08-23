@@ -85,7 +85,7 @@
 	</update> 
 	
 	<delete id="deletePatentDoc">
-		delete  from  patent_documents  where  patent_doc_id=#{patentDocId} 
+		delete  from  user_patent_docs  where  patent_doc=#{patentDocId} and user_id=#{userId}
 	</delete>
 	
 	<insert id="savePatentImgUrl" parameterType="Attachment">
