@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
+import com.lotut.pms.domain.PatentDocSearchCondition;
+import com.lotut.pms.domain.PatentSearchCondition;
 
 public interface PatentDocService {
 	void savePatentDoc(PatentDoc patentDoc);
@@ -38,5 +40,9 @@ public interface PatentDocService {
 	String getPatentDocUrlById(long patentDocId);
 	
 	void insertUserPatentDoc(List<Map<String, Integer>> userPatentDocRecords);
+	
+	List<PatentDoc> searchUserPatentDocsByPage(PatentDocSearchCondition searchCondition);
+	
+	int searchUserPatentDocsCount(PatentDocSearchCondition searchCondition);
 
 }
