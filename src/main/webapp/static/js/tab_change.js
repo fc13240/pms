@@ -38,7 +38,9 @@
 //	$(.right_right_bot).attr("tab_name",new_name);
 	if(whichTab<=3){
 	    $("#templateSectionId").html(whichTab+1);
+	    loadingGuideBYTab(whichTab+1);
 		loadingTemplateBYTab(whichTab+1);
+
 		p=1;
 	}else if(whichTab==4){
 		$("#templateSectionId").html(whichTab);
@@ -64,6 +66,16 @@ function modelbuttonclick(list_no) {
 	//还差一步，把内容写进编辑框中。
 	
 }
+function loadingGuideBYTab(sectionId){
+	$(".guide-list").empty();
+	alert(sectionId);
+
+		$(".guide-list").append("说明书");	
+		
+		
+	
+}
+
 function loadingTemplateBYTab(sectionId){
 	 $.ajax({
 		 type : "POST",
