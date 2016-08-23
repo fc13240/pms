@@ -9,6 +9,7 @@ import com.lotut.pms.dao.PatentDocDao;
 import com.lotut.pms.dao.mapper.PatentDocMapper;
 import com.lotut.pms.dao.mapper.PatentMapper;
 import com.lotut.pms.domain.Attachment;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSearchCondition;
 
@@ -31,8 +32,8 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 
 
 	@Override
-	public List<PatentDoc> getUserPatentDoc(int userId) {
-		return patentDocMapper.getUserPatentDoc(userId);
+	public List<PatentDoc> getUserPatentDoc(Page page) {
+		return patentDocMapper.getUserPatentDoc(page);
 	}
 
 
@@ -154,5 +155,12 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	@Override
 	public int searchUserPatentDocsCount(PatentDocSearchCondition searchCondition) {
 		return patentDocMapper.searchUserPatentDocsCount(searchCondition);
+	}
+
+
+
+	@Override
+	public int getUserPatentDocCount(int userId) {
+		return patentDocMapper.getUserPatentDocCount(userId);
 	}
 }

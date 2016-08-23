@@ -132,10 +132,11 @@ public class PatentEditDocController {
 	}
 	
 	@RequestMapping(path="/editPatentDoc",method=RequestMethod.GET)
-	public String  editPatentDoc(@RequestParam("patentDocId")long patentDocId,@RequestParam("patentType")int patentType,Model model){
+	public String  editPatentDoc(@RequestParam("patentDocId")long patentDocId,@RequestParam("patentType")int patentType,Model model,Page page){
 		int userId=PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
 		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocId);
-		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
+		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(page);
 		model.addAttribute("patentDoc", patentDoc);
 		model.addAttribute("patentDocs", patentDocs);
 		model.addAttribute("patenType",patentType);
@@ -149,9 +150,16 @@ public class PatentEditDocController {
 	
 
 	@RequestMapping(path="/patentDocList",method=RequestMethod.GET)//patentDocList
-	public String  patentDocList(Model model){
-		int userId=PrincipalUtils.getCurrentUserId();
-		List<PatentDoc> patentDocss=patentDocService.getUserPatentDoc(userId);
+	public String  patentDocList(Model model, Page page, HttpSession session){
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=(int)patentDocService.getUserPatentDocCount(userId);
+		page.setTotalRecords(totalCount);
+		List<PatentDoc> patentDocss=patentDocService.getUserPatentDoc(page);
 		List<PatentDoc> patentDocs= new ArrayList<>();
 		for (PatentDoc patentDoc:patentDocss) {
 			if(patentDoc.getAppNo()==null&patentDoc.getAbstractDescription()==null
@@ -163,6 +171,7 @@ public class PatentEditDocController {
 			}
 		}
 		model.addAttribute("patentDocs", patentDocs);
+		model.addAttribute("page", page);
 		return "patent_doc_list";
 		
 	}
