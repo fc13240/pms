@@ -7,73 +7,84 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.AppPersonDao;
 import com.lotut.pms.dao.mapper.AppPersonMapper;
 import com.lotut.pms.domain.CommonAppPerson;
+import com.lotut.pms.domain.UserAppPerson;
 import com.lotut.pms.domain.AppPersonType;
 
 public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPersonDao{
-	private AppPersonMapper AppPersonMapper;
+	private AppPersonMapper appPersonMapper;
 	
-	public void setAppPersonMapper(AppPersonMapper AppPersonMapper){
-		this.AppPersonMapper=AppPersonMapper;
+	public void setAppPersonMapper(AppPersonMapper appPersonMapper){
+		this.appPersonMapper=appPersonMapper;
 	}
 	public void addAppPerson(CommonAppPerson commonAppPerson) {
-		AppPersonMapper.addAppPerson(commonAppPerson);
+		appPersonMapper.addAppPerson(commonAppPerson);
 		
 	}
 	@Override
 	public List<AppPersonType> getAppPersonTypes() {
-		// TODO Auto-generated method stub
-		return AppPersonMapper.getAppPersonTypes();
+		
+		return appPersonMapper.getAppPersonTypes();
 	}
 	@Override
 	public List<CommonAppPerson> getAllAppPersonByUser(int userId) {
-		// TODO Auto-generated method stub
-		return AppPersonMapper.getAllAppPersonByUser(userId) ;
+		
+		return appPersonMapper.getAllAppPersonByUser(userId) ;
 	}
 	public CommonAppPerson getOneAppPersonById(int id) {
-		// TODO Auto-generated method stub
-		return AppPersonMapper.getOneAppPersonById(id);
+		
+		return appPersonMapper.getOneAppPersonById(id);
 	}
 	public void updateAppPerson(CommonAppPerson AppPerson) {
-		AppPersonMapper.updateAppPerson(AppPerson);
+		appPersonMapper.updateAppPerson(AppPerson);
 		
 	}
 	public void deleteAppPersonById(int id) {
-		// TODO Auto-generated method stub
-		AppPersonMapper.deleteAppPersonById(id);
+		
+		appPersonMapper.deleteAppPersonById(id);
 	}
 	@Override
 	public List<CommonAppPerson> getUserAppPersons(int userId) {
-		// TODO Auto-generated method stub
-		return AppPersonMapper.getUserAppPersons(userId);
+		
+		return appPersonMapper.getUserAppPersons(userId);
 	}
 	@Override
 
 	public void saveAttachmentFile(CommonAppPerson AppPerson) {
-		// TODO Auto-generated method stub
-		AppPersonMapper.saveAttachmentFile(AppPerson);
+		
+		appPersonMapper.saveAttachmentFile(AppPerson);
 	}
 	@Override
 	public String getAppPersonUrlById(int id) {
-		// TODO Auto-generated method stub
-		return AppPersonMapper.getAppPersonUrlById(id);
+		
+		return appPersonMapper.getAppPersonUrlById(id);
 	}
 	public void addCommonAppPerson(CommonAppPerson CommonAppPerson) {
-		AppPersonMapper.addCommonAppPerson(CommonAppPerson);
+		appPersonMapper.addCommonAppPerson(CommonAppPerson);
 
 	}
 	@Override
 	public void saveProxyFile(CommonAppPerson AppPerson) {
-		// TODO Auto-generated method stub
-		AppPersonMapper.saveProxyFile(AppPerson);
+		
+		appPersonMapper.saveProxyFile(AppPerson);
 	}
 	@Override
 	public String getProxyUrlById(int id) {
-		// TODO Auto-generated method stub
-		return AppPersonMapper.getProxyUrlById(id);
+		
+		return appPersonMapper.getProxyUrlById(id);
 	}
 	@Override
 	public void deleteAttachmentFileById(int id) {
-		// TODO Auto-generated method stub
-		AppPersonMapper.deleteAttachmentFileById(id);
+		
+		appPersonMapper.deleteAttachmentFileById(id);
 	}
+	@Override
+	public void addUserAppPerson(UserAppPerson userAppPerson) {
+		appPersonMapper.addUserAppPerson(userAppPerson);
+		
+	}
+	@Override
+	public Integer getIdbyAppPerson(CommonAppPerson commonAppPerson) {
+		return appPersonMapper.getIdbyAppPerson(commonAppPerson);
+	}
+	
 }

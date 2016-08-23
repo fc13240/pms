@@ -26,6 +26,11 @@
   	fee_reduce_transaction_status,transaction_identity_id,transaction_year) 
   	values(#{name},#{type},#{peopleNumber},#{postcodeAddress},#{otherInfo},#{userId},
   	#{feeReduceTransactionStatus},#{transactionIdentityId},#{transactionYear})
+  	
+  	
+  </insert>
+  <insert id="addUserAppPerson" parameterType="UserAppPerson">
+  	insert into user_app_person (user,app_person)values(#{userId},#{appPersonId})
   
   </insert>
   
@@ -106,5 +111,11 @@
   		update common_app_person set app_person_attachment_file=null where app_person_id =#{appPersonId}
   	</update>
   
+  	<select id="getIdbyAppPerson" resultType="int" parameterType="CommonAppPerson">
+  		select app_person_id from common_app_person where name=#{name},type=#{type},id_number=#{peopleNumber},
+  		fee_reduce_transaction_status=#{feeReduceTransactionStatus},transaction_identity_id=#{transactionIdentityId},
+  		transaction_year=#{transactionYear},
+  		postcode_address=#{postcodeAddress},other_information=#{otherInfo}
+  	</select>
   </mapper>
   

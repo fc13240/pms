@@ -65,5 +65,6 @@
 		<typeAlias alias="ShareAppPerson" type="com.lotut.pms.domain.ShareAppPerson"/>
 		<typeAlias alias="ShareInventor" type="com.lotut.pms.domain.ShareInventor"/>
 		<typeAlias alias="PatentDocStatus" type="com.lotut.pms.domain.PatentDocStatus"/>
+		<typeAlias type="com.lotut.pms.domain.UserAppPerson" alias="UserAppPerson"/>
 	</typeAliases>  
 </configuration>

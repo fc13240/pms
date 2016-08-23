@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.lotut.pms.domain.AppPersonType;
 import com.lotut.pms.domain.CommonAppPerson;
+import com.lotut.pms.domain.UserAppPerson;
 
 public interface AppPersonDao {
 	void addAppPerson(CommonAppPerson commonAppPerson);
@@ -15,8 +16,10 @@ public interface AppPersonDao {
 	List<CommonAppPerson> getUserAppPersons(int userId);
 	void saveAttachmentFile(CommonAppPerson AppPerson);
 	String getAppPersonUrlById(int id);
-	void addCommonAppPerson(CommonAppPerson CommonAppPerson);
+	void addCommonAppPerson(CommonAppPerson commonAppPerson);
 	void saveProxyFile(CommonAppPerson AppPerson);
 	String getProxyUrlById(int id);
 	void deleteAttachmentFileById(int id);
+	void addUserAppPerson(UserAppPerson userAppPerson);
+	Integer getIdbyAppPerson(CommonAppPerson commonAppPerson);
 }
