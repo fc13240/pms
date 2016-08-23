@@ -62,7 +62,9 @@
 								<td style="text-align:center"><c:out value="${inventor.inventorEmail}"/></td>
 								<td style="text-align:center">
 									<a  href="<s:url value='/inventor/showUploadForm.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>">上传</a>
+									<c:if test="${not empty inventor.inventorUrl }">
                     				<a  href="<s:url value='/inventor/downloadAttachmentFile.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>">下载</a>
+                    				</c:if>
 								</td>
 								<td style="text-align:center"><c:out value="${inventor.inventorComment}"/></td>
 								<td><a href="<s:url value='/inventor/findOneInventorInfo.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>"> 编辑 </a> 

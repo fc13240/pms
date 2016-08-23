@@ -14,8 +14,10 @@
 		<result property="feeReduceTransactionStatus" column="fee_reduce_transaction_status"/>
 		<result property="transactionIdentityId" column="transaction_identity_id"/>
 		<result property="transactionYear" column="transaction_year"/>
+		<result property="appPersonUrl" column="app_person_attachment_file"/>
 		<result property="userId" column="user_id"/>
-		<association property="appPersonType" resultMap="AppPersonTypeMap"/>
+		<result property="proxyUrl" column="proxy_file"/>
+		<!-- <association property="appPersonType" resultMap="AppPersonTypeMap"/> -->
 		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
   </resultMap>
 
@@ -39,7 +41,7 @@
   	
   	<select id="getUserAppPersons" parameterType="int" resultMap="AppPersonWithShareUsers">
   	   SELECT p.app_person_id ,p.type ,p.name ,p.id_number,t.type_id,type_desc ,p.fee_reduce_transaction_status,
-  	   p.transaction_identity_id,p.transaction_year,
+  	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
   		p.postcode_address ,p.other_information ,u.user_id,u.username  FROM common_app_person p
   		JOIN app_person_types t ON p.type=t.type_id LEFT JOIN user_app_person up ON p.app_person_id = up.app_person 
   		LEFT JOIN users u ON u.user_id = up.user

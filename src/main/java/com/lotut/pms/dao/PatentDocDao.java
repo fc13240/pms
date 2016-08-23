@@ -38,4 +38,6 @@ public interface PatentDocDao {
 	String getPatentDocUrlById(long patentDocId);
 	
 	void insertUserPatentDoc(List<Map<String, Integer>> userPatentDocRecords);
+	
+	
 }

@@ -10,18 +10,12 @@ import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import java.util.List;
-
-
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,12 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.lotut.pms.domain.CommonAppPerson;
-import com.lotut.pms.domain.User;
 import com.lotut.pms.constants.Settings;
-import com.lotut.pms.domain.AppPersonType;
-
-
 import com.lotut.pms.domain.AppPersonType;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.User;
@@ -50,26 +39,20 @@ import com.lotut.pms.web.util.WebUtils;
 @RequestMapping(path="/appPerson")
 public class AppPersonController {
 	private FriendService friendService;
-	private AppPersonService AppPersonService;
-
-
-
+	private AppPersonService appPersonService;
 	
 	public AppPersonController() {
 	}
 	
 	@Autowired
-
-
 	public AppPersonController(AppPersonService AppPersonService, FriendService friendService) {
-		this.AppPersonService = AppPersonService;
+		this.appPersonService = AppPersonService;
 		this.friendService = friendService;
-
-
 	}
+	
 	@RequestMapping(path="/contactAppPersonAddForm")
 	public String contactAppPersonAddForm(Model model){
-		List<AppPersonType> appPersonTypes=AppPersonService.getAppPersonTypes();
+		List<AppPersonType> appPersonTypes=appPersonService.getAppPersonTypes();
 		model.addAttribute("appPersonTypes",appPersonTypes);
 		return "appPerson_add";
 		
@@ -78,8 +61,8 @@ public class AppPersonController {
 	@RequestMapping(path="/list" ,method=RequestMethod.GET)
 	public String getList(Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
-		List<CommonAppPerson> appPersons=AppPersonService.getUserAppPersons(userId);
-		List<AppPersonType> appPersonTypes=AppPersonService.getAppPersonTypes();
+		List<CommonAppPerson> appPersons=appPersonService.getUserAppPersons(userId);
+		List<AppPersonType> appPersonTypes=appPersonService.getAppPersonTypes();
 		model.addAttribute("appPersonTypes",appPersonTypes);
 		model.addAttribute("appPersons", appPersons);
 		return "app_person_list";
@@ -89,14 +72,14 @@ public class AppPersonController {
 	public String addContactInfo(@ModelAttribute CommonAppPerson AppPerson,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		AppPerson.setUserId(userId);
-		AppPersonService.addAppPerson( AppPerson);
+		appPersonService.addAppPerson( AppPerson);
 		return "redirect:/appPerson/list.html";
 	}
 	
 	@RequestMapping(path="/findOneAppPersonInfo")
 	public String findOneAppPersonInfo(@RequestParam("appPersonId")int AppPersonId,Model model ){
-		CommonAppPerson appPerson=AppPersonService.getOneAppPersonById(AppPersonId);
-		List<AppPersonType> appPersonTypes=AppPersonService.getAppPersonTypes();
+		CommonAppPerson appPerson=appPersonService.getOneAppPersonById(AppPersonId);
+		List<AppPersonType> appPersonTypes=appPersonService.getAppPersonTypes();
 		model.addAttribute("appPersonTypes",appPersonTypes);
 		model.addAttribute("appPerson", appPerson);
 		return "appPerson_update";
@@ -106,14 +89,14 @@ public class AppPersonController {
 	public String updateAppPersonInfo(@Valid CommonAppPerson AppPerson,Model model ){
 		int userId=PrincipalUtils.getCurrentUserId();
 		AppPerson.setUserId(userId);
-		AppPersonService.updateAppPerson(AppPerson);
+		appPersonService.updateAppPerson(AppPerson);
 		return "redirect:/appPerson/list.html";
 		
 	}
 	
 	@RequestMapping(path="/deleteAppPersonInfo")
 	public String deleteAppPersonInfo(@RequestParam("appPersonId")int AppPersonId){
-		AppPersonService.deleteAppPersonById(AppPersonId);
+		appPersonService.deleteAppPersonById(AppPersonId);
 		return "redirect:/appPerson/list.html";
 	}
 	
@@ -152,7 +135,7 @@ public class AppPersonController {
 	@RequestMapping(path="/uploadAttachmentFile",method=RequestMethod.POST)
 	public void uploadAttachmentFile(@RequestParam("appPersonId") int appPersonId,  HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
 		int userId = PrincipalUtils.getCurrentUserId();
-		String relativeUrl = AppPersonService.getAppPersonUrlById(appPersonId);
+		String relativeUrl = appPersonService.getAppPersonUrlById(appPersonId);
 		if(relativeUrl==null){
 		try{
 			String savePath=Settings.APP_PERSON_ATTACHMENT_FILE_PATH;
@@ -186,7 +169,9 @@ public class AppPersonController {
 				String filePath = Settings.APP_PERSON_ATTACHMENT_FILE_PATH + relativeUrl;
 				File file2=new File(filePath);
 				file2.delete();
-				String filePath2=filePath.substring(0, filePath.lastIndexOf("/"));
+//				String filePath2=filePath.substring(0, filePath.lastIndexOf("/"));
+				String[] s=relativeUrl.split("/");
+				String filePath2=Settings.APP_PERSON_ATTACHMENT_FILE_PATH+s[0];
 				File file3=new File(filePath2);
 				if(file3.isDirectory()){
 					String[] files=file3.list();
@@ -227,14 +212,14 @@ public class AppPersonController {
 
 	@RequestMapping(path="/saveAppPersonFile",method=RequestMethod.POST)
 	public void saveAttachmentFile(CommonAppPerson appPerson,PrintWriter writer){
-		AppPersonService.saveAttachmentFile(appPerson);
+		appPersonService.saveAttachmentFile(appPerson);
 		writer.write(1);
 	}
 	
 	@RequestMapping(path="/downloadAttachmentFile", method=RequestMethod.GET)
 	public void downloadPatentFile(@RequestParam("appPersonId")int appPersonId, HttpServletResponse response,HttpServletRequest request) throws IOException {
 		response.setContentType("application/doc");
-		String relativeUrl = AppPersonService.getAppPersonUrlById(appPersonId);
+		String relativeUrl = appPersonService.getAppPersonUrlById(appPersonId);
 		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
 		String filePath = Settings.APP_PERSON_ATTACHMENT_FILE_PATH + relativeUrl;
 		File appPersonFile = new File(filePath);
@@ -255,28 +240,12 @@ public class AppPersonController {
 	    }
 	    return null;
 	}
-//	@RequestMapping(path="/loadAppPersoner")
-//	public void loadInventor(@RequestParam("appPersoner") String appPersoner, HttpServletResponse response){
-//		response.setContentType("application/json;charset=UTF-8");
-//
-//		List<CommonAppPerson> appPersoners=AppPersonService.getAppPersonByName(appPersoner);
-//
-//		int userId = PrincipalUtils.getCurrentUserId();
-//		List<CommonAppPerson> appPersoners=appPersonService.getAppPersonByName(appPersoner,userId);
-//
-//		try{
-//			Map<String, Object> map = new HashMap<>();
-//			map.put("appPersoners", appPersoners);
-//			WebUtils.writeJsonStrToResponse(response, map);
-//			//WebUtils.writeJsonStrToResponse(response, inventors);
-//		}catch(IOException e){
-//			e.printStackTrace();
-//		}
-//	}
+
+
 	@RequestMapping(path="/uploadProxyFile",method=RequestMethod.POST)
 	public void uploadProxyFile(@RequestParam("appPersonId") int appPersonId,HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
 		int userId = PrincipalUtils.getCurrentUserId();
-		String relativeUrl = AppPersonService.getProxyUrlById(appPersonId);
+		String relativeUrl = appPersonService.getProxyUrlById(appPersonId);
 		if(relativeUrl==null){
 		try{
 			String savePath=Settings.PROXY_FILE_PATH;
@@ -310,14 +279,16 @@ public class AppPersonController {
 				String filePath = Settings.PROXY_FILE_PATH + relativeUrl;
 				File file2=new File(filePath);
 				file2.delete();
-				String filePath2=filePath.substring(0, filePath.lastIndexOf("/"));
-				File file3=new File(filePath2);
-				if(file3.isDirectory()){
-					String[] files=file3.list();
-					if(files.length==0){
-						file3.delete();
-					}
-				}
+////				String filePath2=filePath.substring(0, filePath.lastIndexOf("/"));
+//				String[] s=relativeUrl.split("/");
+//				String filePath2=Settings.PROXY_FILE_PATH+s[0];
+//				File file3=new File(filePath2);
+//				if(file3.isDirectory()){
+//					String[] files=file3.list();
+//					if(files.length==0){
+//						file3.delete();
+//					}
+//				}
 				String savePath=Settings.PROXY_FILE_PATH;
 				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 				MultipartFile file1 = multipartRequest.getFile("file");
@@ -351,14 +322,14 @@ public class AppPersonController {
 
 	@RequestMapping(path="/saveProxyFile",method=RequestMethod.POST)
 	public void saveProxyFile(CommonAppPerson appPerson,PrintWriter writer){
-		AppPersonService.saveProxyFile(appPerson);
+		appPersonService.saveProxyFile(appPerson);
 		writer.write(1);
 	}
 	
 	@RequestMapping(path="/downloadProxyFile", method=RequestMethod.GET)
 	public void downloadProxyFile(@RequestParam("appPersonId")int appPersonId, HttpServletResponse response,HttpServletRequest request) throws IOException {
 		response.setContentType("application/doc");
-		String relativeUrl = AppPersonService.getProxyUrlById(appPersonId);
+		String relativeUrl = appPersonService.getProxyUrlById(appPersonId);
 		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
 		String filePath = Settings.PROXY_FILE_PATH + relativeUrl;
 		File appPersonFile = new File(filePath);
@@ -366,7 +337,7 @@ public class AppPersonController {
 		    //针对火狐浏览器处理
 			downloadFileName =new String(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
 		}
-		response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
+		response.setHeader("Content-Disposition", "proxy;filename=" + downloadFileName);
 		response.setContentLength((int)appPersonFile.length());
 		WebUtils.writeStreamToResponse(response, new FileInputStream(appPersonFile));
 	}
