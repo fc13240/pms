@@ -631,9 +631,6 @@ VALUES
 	
 INSERT INTO group_members(username,group_id) VALUES('test',4);
 
-drop table if exists techs;
-drop table if exists processes;
-
 CREATE TABLE IF NOT EXISTS customer_supports (
 	id INT NOT NULL AUTO_INCREMENT UNIQUE,
 	user_id INT NOT NULL,
@@ -661,7 +658,7 @@ CREATE TABLE IF NOT EXISTS process_person (
 	CONSTRAINT fk_process_person_user_id FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
-CREATE TABLE common_inventor (
+CREATE TABLE IF NOT EXISTS common_inventor (
   inventor_id BIGINT NOT NULL AUTO_INCREMENT,
   inventor_name VARCHAR(20) DEFAULT NULL COMMENT'发明姓名',
   inventor_id_number  NVARCHAR(20) DEFAULT NULL COMMENT '证件号码',
@@ -675,14 +672,7 @@ CREATE TABLE common_inventor (
   CONSTRAINT fk_common_inventor_owner_id FOREIGN KEY(user_id) REFERENCES users (user_id) 
 )
 
-DROP TABLE if exists common_proposer
-
-DROP TABLE  if exists proposer_types
-
-drop table if exists user_proposer 
-drop table if exists share_proposer
-
-CREATE TABLE common_app_person (
+CREATE TABLE IF NOT EXISTS common_app_person (
   app_person_id BIGINT NOT NULL AUTO_INCREMENT,
   NAME VARCHAR(20) DEFAULT NULL COMMENT'申请人姓名',
   TYPE INT(11) NOT NULL COMMENT'申请人类型',
@@ -698,33 +688,7 @@ CREATE TABLE common_app_person (
   CONSTRAINT fk_common_app_person_type FOREIGN KEY (TYPE) REFERENCES app_person_types (type_id) ON   DELETE   CASCADE   ON   UPDATE   CASCADE 
 )
 
-CREATE TABLE app_person_types(
-type_id INT(11) NOT NULL PRIMARY KEY,
-type_desc CHAR(12) NOT NULL
-
-)
-
-
-INSERT INTO app_person_types VALUES('1','个人')
-INSERT INTO app_person_types VALUES('2','非个人')
-
-
-
-CREATE TABLE share_app_persons(
-  app_person BIGINT(20) NOT NULL DEFAULT '0',
-  share_by INT(11) NOT NULL DEFAULT '0',
-  share_to INT(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (app_person,share_by,share_to),
-  KEY fk_share_app_person_share_by (`share_by`),
-  KEY `fk_share_app_person_to` (`share_to`),
-  CONSTRAINT `fk_share_app_person` FOREIGN KEY (`app_person`) REFERENCES `common_app_person` (`app_person_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_share_app_person_share_by` FOREIGN KEY (`share_by`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_share_app_person_share_to` FOREIGN KEY (`share_to`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
-) ENGINE=INNODB DEFAULT CHARSET=utf8
-
-
-DROP TABLE common_inventor
-CREATE TABLE common_inventor (
+CREATE TABLE IF NOT EXISTS common_inventor (
   inventor_id BIGINT NOT NULL AUTO_INCREMENT,
   inventor_name VARCHAR(20) DEFAULT NULL COMMENT'发明姓名',
   inventor_id_number  NVARCHAR(20) DEFAULT NULL COMMENT '证件号码',
@@ -739,10 +703,9 @@ CREATE TABLE common_inventor (
   
 )	
 
-CREATE TABLE user_inventor(
+CREATE TABLE IF NOT EXISTS user_inventor(
   USER INT(11) NOT NULL DEFAULT '0',
   inventor BIGINT(20) NOT NULL DEFAULT '0',
-  trash_status INT(11) DEFAULT '1',
   PRIMARY KEY (`user`,`inventor`),
   KEY `fk_user_inventor` (`inventor`),
   CONSTRAINT `fk_share_inventor` FOREIGN KEY (inventor) REFERENCES `common_inventor` (inventor_id) ON DELETE CASCADE,
@@ -751,7 +714,7 @@ CREATE TABLE user_inventor(
 
 
 
-CREATE TABLE user_app_person(
+CREATE TABLE IF NOT EXISTS user_app_person (
   USER INT(11) NOT NULL DEFAULT '0',
   app_person BIGINT(20) NOT NULL DEFAULT '0',
   trash_status INT(11) DEFAULT '1',
@@ -768,7 +731,7 @@ ALTER TABLE common_app_person ADD COLUMN  fee_reduce_transaction_status  VARCHAR
 ALTER TABLE common_app_person ADD COLUMN  app_person_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址'
 
 
-CREATE TABLE patent_doc_app_person(
+CREATE TABLE IF NOT EXISTS patent_doc_app_person(
 	person_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	patent_doc_id BIGINT NOT NULL,
 	NAME VARCHAR(20) NOT  NULL,
@@ -785,10 +748,7 @@ CREATE TABLE patent_doc_app_person(
 ALTER TABLE common_inventor ADD COLUMN  inventor_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址'
 
 ALTER TABLE common_app_person ADD COLUMN transaction_identity_id  VARCHAR(50) DEFAULT NULL COMMENT '备案证件号'
- ALTER TABLE common_app_person ADD COLUMN transaction_year  VARCHAR(20) DEFAULT NULL COMMENT '备案年度'
-
-
-drop table if exists proxy_org;
+ALTER TABLE common_app_person ADD COLUMN transaction_year  VARCHAR(20) DEFAULT NULL COMMENT '备案年度'
 
 CREATE TABLE IF NOT EXISTS proxy_org (
 	org_id INT PRIMARY KEY  AUTO_INCREMENT ,
@@ -803,15 +763,9 @@ CREATE TABLE IF NOT EXISTS proxy_org (
 INSERT INTO proxy_org(org_user_id) VALUES (2);
 
 
-
-
 ALTER TABLE common_inventor ADD COLUMN  proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址'
 
-
-
 ALTER TABLE common_app_person ADD COLUMN  proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址'
-
-
 
 CREATE TABLE IF NOT EXISTS notice_remarks (
 	remark_id INT AUTO_INCREMENT PRIMARY KEY  ,
@@ -823,8 +777,6 @@ CREATE TABLE IF NOT EXISTS notice_remarks (
 	CONSTRAINT fk_notice_remarks_user_id FOREIGN KEY (user_id) REFERENCES users(user_id)	
 );
 
-
-//专利文档状态表
 CREATE TABLE IF NOT EXISTS patent_doc_status (
 	patent_doc_status_id INT AUTO_INCREMENT PRIMARY KEY,
 	patent_doc_status_desc VARCHAR(10) NOT NULL UNIQUE
