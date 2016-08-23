@@ -74,9 +74,10 @@ public class InventorServiceImpl implements InventorService{
 		inventorDao.deleteUserInventorById(userInventor);
 		
 	}
+	
 	@Override
 	public int getIdByInventor(CommonInventor commonInventor) {
-		// TODO Auto-generated method stub
 		return inventorDao.getIdByInventor(commonInventor);
 	}
+	
 }
