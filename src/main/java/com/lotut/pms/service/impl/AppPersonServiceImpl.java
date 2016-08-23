@@ -3,7 +3,6 @@ package com.lotut.pms.service.impl;
 import java.util.List;
 
 import com.lotut.pms.dao.AppPersonDao;
-import com.lotut.pms.domain.AppPersonType;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.UserAppPerson;
 import com.lotut.pms.service.AppPersonService;
@@ -24,13 +23,6 @@ public class AppPersonServiceImpl implements AppPersonService {
 		appPersonDao.addAppPerson(commonappPerson);
 		
 	}
-
-
-	@Override
-	public List<AppPersonType> getAppPersonTypes() {
-		return appPersonDao.getAppPersonTypes();
-	}
-
 
 	@Override
 	public List<CommonAppPerson> getAllAppPersonByUser(int userId) {

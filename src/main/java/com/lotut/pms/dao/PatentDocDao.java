@@ -23,7 +23,7 @@ public interface PatentDocDao {
 	
 	void updatePatentDoc(PatentDoc patentDoc);
 	
-	void deletePatentDoc(long patentDocId);
+	void deletePatentDoc(long patentDocId,int userId);
 	
 	void savePatentImgUrl(Attachment attachment);
 	

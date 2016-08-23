@@ -6,10 +6,8 @@ import java.util.stream.Collectors;
 public class CommonAppPerson {
 	private int appPersonId;
 	private String name;
-	private int type;
 	private String typeName;
-	private AppPersonType appPersonType;
-	private String peopleNumber;
+	private String idNumber;
 	private String postcodeAddress;
 	private String feeReduceTransactionStatus;
 	private String otherInfo;
@@ -63,25 +61,7 @@ public class CommonAppPerson {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getType() {
-		return type;
-	}
-	public void setType(int type) {
-		this.type = type;
-	}
 	
-	public AppPersonType getAppPersonType() {
-		return appPersonType;
-	}
-	public void setAppPersonType(AppPersonType appPersonType) {
-		this.appPersonType = appPersonType;
-	}
-	public String getPeopleNumber() {
-		return peopleNumber;
-	}
-	public void setPeopleNumber(String peopleNumber) {
-		this.peopleNumber = peopleNumber;
-	}
 	public String getPostcodeAddress() {
 		return postcodeAddress;
 	}
@@ -120,6 +100,12 @@ public class CommonAppPerson {
 	}
 	public void setProxyUrl(String proxyUrl) {
 		this.proxyUrl = proxyUrl;
+	}
+	public String getIdNumber() {
+		return idNumber;
+	}
+	public void setIdNumber(String idNumber) {
+		this.idNumber = idNumber;
 	}
 	
 	

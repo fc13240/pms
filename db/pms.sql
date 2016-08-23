@@ -664,17 +664,18 @@ CREATE TABLE IF NOT EXISTS common_inventor (
 CREATE TABLE IF NOT EXISTS common_app_person (
   app_person_id BIGINT NOT NULL AUTO_INCREMENT,
   NAME VARCHAR(20) DEFAULT NULL COMMENT'申请人姓名',
-  TYPE INT(11) NOT NULL COMMENT'申请人类型',
   id_number  NVARCHAR(20) DEFAULT NULL COMMENT '证件号码',
   postcode_address VARCHAR(50) DEFAULT NULL COMMENT '邮编及地址',
-  record_status VARCHAR(20) DEFAULT NULL COMMENT '案件状态',
   other_information VARCHAR(50) DEFAULT NULL COMMENT '其他信息',
   user_id INT(11)  NOT NULL,
+  proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址',
+  transaction_identity_id  VARCHAR(50) DEFAULT NULL COMMENT '备案证件号',
+  fee_reduce_transaction_status  VARCHAR(20) DEFAULT '未备案' COMMENT '费减备案',
+  transaction_year  VARCHAR(20) DEFAULT NULL COMMENT '备案年度',
+  app_person_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址',
   PRIMARY KEY(app_person_id),
   KEY fk_common_app_person_owner_id (user_id),
-  KEY fk_common_app_person_type(TYPE),
-  CONSTRAINT fk_common_app_person_owner_id FOREIGN KEY(user_id) REFERENCES users (user_id),
-  CONSTRAINT fk_common_app_person_type FOREIGN KEY (TYPE) REFERENCES app_person_types (type_id) ON   DELETE   CASCADE   ON   UPDATE   CASCADE 
+  CONSTRAINT fk_common_app_person_owner_id FOREIGN KEY(user_id) REFERENCES users (user_id) ON   DELETE   CASCADE   ON   UPDATE   CASCADE 
 )
 
 CREATE TABLE IF NOT EXISTS common_inventor (
@@ -714,11 +715,6 @@ CREATE TABLE IF NOT EXISTS user_app_person (
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 
 
-ALTER TABLE common_app_person DROP COLUMN record_status
-
-ALTER TABLE common_app_person ADD COLUMN  fee_reduce_transaction_status  VARCHAR(20) DEFAULT '未备案' COMMENT '费减备案'
-ALTER TABLE common_app_person ADD COLUMN  app_person_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址'
-
 
 CREATE TABLE IF NOT EXISTS patent_doc_app_person(
 	person_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -735,9 +731,6 @@ CREATE TABLE IF NOT EXISTS patent_doc_app_person(
 
 
 ALTER TABLE common_inventor ADD COLUMN  inventor_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址'
-
-ALTER TABLE common_app_person ADD COLUMN transaction_identity_id  VARCHAR(50) DEFAULT NULL COMMENT '备案证件号'
-ALTER TABLE common_app_person ADD COLUMN transaction_year  VARCHAR(20) DEFAULT NULL COMMENT '备案年度'
 
 CREATE TABLE IF NOT EXISTS proxy_org (
 	org_id INT PRIMARY KEY  AUTO_INCREMENT ,
@@ -756,7 +749,6 @@ ALTER TABLE common_inventor ADD COLUMN  proxy_file  VARCHAR(200) DEFAULT NULL CO
 
 ALTER TABLE  patent_documents ADD COLUMN patent_doc_status int NOT NULL COMMENT '文档状态',
 
-ALTER TABLE common_app_person ADD COLUMN  proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址'
 
 CREATE TABLE IF NOT EXISTS notice_remarks (
 	remark_id INT AUTO_INCREMENT PRIMARY KEY  ,
@@ -804,3 +796,4 @@ DELETE FROM  patent_doc_section_types;
 INSERT INTO patent_doc_section_types VALUES(1,'说明书');
 INSERT INTO patent_doc_section_types VALUES(2,'权利要求');
 INSERT INTO patent_doc_section_types VALUES(3,'摘要');
+

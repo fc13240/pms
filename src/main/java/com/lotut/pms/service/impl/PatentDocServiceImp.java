@@ -58,9 +58,9 @@ public class PatentDocServiceImp implements PatentDocService{
 		}
 
 		@Override
-		public void deletePatentDoc(long patentDocId) {
+		public void deletePatentDoc(long patentDocId,int userId) {
 		
-			patentDocDao.deletePatentDoc(patentDocId);
+			patentDocDao.deletePatentDoc(patentDocId, userId);
 			
 		}
 

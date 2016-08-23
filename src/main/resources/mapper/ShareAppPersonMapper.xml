@@ -3,15 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotut.pms.dao.mapper.ShareAppPersonMapper">
-	<resultMap type="ShareAppPerson" id="SharedAppPersonResultMap">
-		<association property="shareBy" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap" />
-		<association property="appPerson" javaType="CommonAppPerson">
-			<id property="appPersonId" column="app_person_id"/>
-			<result property="type" column="type"/>
-			<result property="name" column="name"/>
-			<result property="id_number" column="peopleNumber"/>
-		</association>
-	</resultMap>
+	
 	
 	
 	
@@ -23,12 +15,6 @@
 		</foreach>
 	</insert>	
 	
-	<insert id="insertShareAppPersons" parameterType="list">
-		replace into share_app_persons(app_person, share_by, share_to) 
-		values
-		<foreach item="shareRecord" collection="list" separator=",">
-			(#{shareRecord.appPerson}, #{shareRecord.shareBy}, #{shareRecord.shareTo})
-		</foreach>
-	</insert>
+	
 	
 </mapper>

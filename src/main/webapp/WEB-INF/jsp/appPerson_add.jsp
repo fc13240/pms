@@ -39,16 +39,8 @@
 					<input class="selectPointOfInterest form-control" style="width:460px;"  id="numberRece" type="text" name="name" required onblur="validateInfoNumber(this.value)"/>
 					<span style="color: red; display: none;" id=numberError>该处应输入不大于20字段</span>
 					<br>	   
-			       	<h5>申请人类型:</h5>
-					<select name="type" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities()" required>
-					  <option value=''>请选择</option>
-					  <c:forEach items="${appPersonTypes}" var="appPersonType">
-						<option value="${appPersonType.typeId}">${appPersonType.typeDescription}</option>
-					  </c:forEach>
-					</select>
-					<br>
 					<h5>证件号码:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" name="peopleNumber" required onblur="validatePhoneNumber(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" name="idNumber" required onblur="validatePhoneNumber(this.value)"/>
 					<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
 					<br>		  
 			       	<h5>邮编及地址:</h5>
