@@ -22,4 +22,5 @@ public interface AppPersonDao {
 	void deleteAttachmentFileById(int id);
 	void addUserAppPerson(UserAppPerson userAppPerson);
 	Integer getIdbyAppPerson(CommonAppPerson commonAppPerson);
+	void deleteUserAppPersonbyId(UserAppPerson userAppPerson);
 }

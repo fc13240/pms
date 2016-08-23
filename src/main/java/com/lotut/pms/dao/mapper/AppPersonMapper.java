@@ -25,4 +25,5 @@ public interface AppPersonMapper {
 	void deleteProxyFileById(int id);
 	void addUserAppPerson(UserAppPerson userAppPerson);
 	Integer getIdbyAppPerson(CommonAppPerson commonAppPerson);
+	void deleteUserAppPersonbyId(UserAppPerson userAppPerson);
 }

@@ -130,4 +130,10 @@ public class AppPersonServiceImpl implements AppPersonService {
 	
 		return appPersonDao.getIdbyAppPerson(commonAppPerson);
 	}
+
+	@Override
+	public void deleteUserAppPersonbyId(UserAppPerson userAppPerson) {
+		appPersonDao.deleteUserAppPersonbyId(userAppPerson);
+		
+	}
 }

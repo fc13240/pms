@@ -86,5 +86,11 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 	public Integer getIdbyAppPerson(CommonAppPerson commonAppPerson) {
 		return appPersonMapper.getIdbyAppPerson(commonAppPerson);
 	}
+	@Override
+	public void deleteUserAppPersonbyId(UserAppPerson userAppPerson) {
+		appPersonMapper.deleteUserAppPersonbyId(userAppPerson);
+	}
+
+	
 	
 }
