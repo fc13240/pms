@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -44,5 +45,13 @@ public class WebUtils {
 		}
 		
 		return (int) session.getAttribute("pageSize");
+	}
+	
+	public static boolean isFireFox(HttpServletRequest request) {
+		  String UserAgent = request.getHeader("USER-AGENT").toLowerCase();
+		    if(UserAgent!=null && UserAgent.indexOf("firefox") >= 0){
+		    	return true;
+		    }
+		    return false;
 	}
 }

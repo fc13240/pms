@@ -36,7 +36,7 @@
 	$('.'+old_tip_name).hide();
 	$('.'+new_tip_name).show();	
 //	$(.right_right_bot).attr("tab_name",new_name);
-	if(whichTab<=3){
+	/*if(whichTab<=3){
 	    $("#templateSectionId").html(whichTab+1);
 	    loadingGuideBYTab(whichTab+1);
 		loadingTemplateBYTab(whichTab+1);
@@ -54,7 +54,26 @@
 		$("#templateSectionId").html(whichTab);
 		loadingTemplateBYTab(9);
 		p=1;
+	}*/
+	
+	loadingGuideBYTab(whichTab+1);
+	if(whichTab==0){
+	    $("#templateSectionId").html(1);
+		loadingTemplateBYTab(1);
+
+		p=1;
+	}else if(whichTab==2){
+		$("#templateSectionId").html(2);
+		p=1;
+		loadingTemplateBYTab(2);
+	}else if(whichTab==3){
+		$("#templateSectionId").html(3);
+		p=1;
+		loadingTemplateBYTab(3);
+	}else{
+		loadingTemplateBYTab(-1);
 	}
+	
 	
 }
 
@@ -68,9 +87,7 @@ function modelbuttonclick(list_no) {
 }
 function loadingGuideBYTab(sectionId){
 	$(".guide-list").empty();
-	alert(sectionId);
-
-		$(".guide-list").append("说明书");	
+	$(".guide-list").append("说明书");	
 		
 		
 	

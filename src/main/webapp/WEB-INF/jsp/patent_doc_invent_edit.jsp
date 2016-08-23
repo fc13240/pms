@@ -107,7 +107,7 @@
 				<div class="tab" id="tabWrap"> 
 					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">说明书</div>
 					<div class="tab1h" value="1" name="tabs" onclick="tabChange(1);">
-						附图及说明</div>
+						说明书附图</div>
 					<div class="tab1h" value="2" name="tabs" onclick="tabChange(2,true,false);">
 						权利要求</div>
 					<div class="tab1h" value="3" name="tabs" onclick="tabChange(3);">
@@ -116,7 +116,7 @@
 						摘要附图</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件</div>
-					<div class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
+					<div style="display:none;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
 						请求书</div>
 				</div>
 	
