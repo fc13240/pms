@@ -158,10 +158,10 @@ public class PatentEditDocController {
 		List<PatentDoc> patentDocss=patentDocService.getUserPatentDoc(page);
 		List<PatentDoc> patentDocs= new ArrayList<>();
 		for (PatentDoc patentDoc:patentDocss) {
-			if(patentDoc.getAppNo()==null&patentDoc.getAbstractDescription()==null
+			if(patentDoc.getAbstractDescription()==null
 					&patentDoc.getName()==null&patentDoc.getManual()==null&patentDoc.getRightClaim()==null
 					&patentDoc.getAbstractImg()==null){
-					patentDocService.deleteNullPatentDoc();
+				patentDocService.deleteNullPatentDoc();
 			}else{
 				patentDocs.add(patentDoc);
 			}
@@ -183,7 +183,7 @@ public class PatentEditDocController {
 		List<PatentDoc> patentDocs= new ArrayList<>();
 		List<PatentDoc> resultPatentDocs = patentDocService.searchUserPatentDocsByPage(searchCondition);
 		for (PatentDoc patentDoc:resultPatentDocs) {
-			if(patentDoc.getAppNo()==null&patentDoc.getAbstractDescription()==null
+			if(patentDoc.getAbstractDescription()==null
 					&patentDoc.getName()==null&patentDoc.getManual()==null&patentDoc.getRightClaim()==null
 					&patentDoc.getAbstractImg()==null){
 					patentDocService.deleteNullPatentDoc();
@@ -200,7 +200,8 @@ public class PatentEditDocController {
 	
 	@RequestMapping(path="/deletePatentDoc",method=RequestMethod.GET)
 	public String  deletePatentDoc(@RequestParam("patentDocId")long patentDocId,Model model){
-		patentDocService.deletePatentDoc(patentDocId);
+		int userId = PrincipalUtils.getCurrentUserId();
+		patentDocService.deletePatentDoc(patentDocId,userId);
 	    return "redirect:/editor/patentDocList.html";
 	}
 	
