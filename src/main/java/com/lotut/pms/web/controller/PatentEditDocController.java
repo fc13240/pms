@@ -132,11 +132,10 @@ public class PatentEditDocController {
 	}
 	
 	@RequestMapping(path="/editPatentDoc",method=RequestMethod.GET)
-	public String  editPatentDoc(@RequestParam("patentDocId")long patentDocId,@RequestParam("patentType")int patentType,Model model,Page page){
+	public String  editPatentDoc(@RequestParam("patentDocId")long patentDocId,@RequestParam("patentType")int patentType,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
-		page.setUserId(userId);
 		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocId);
-		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(page);
+		List<PatentDoc> patentDocs=patentDocService.getUserPatentDocEditor(userId);
 		model.addAttribute("patentDoc", patentDoc);
 		model.addAttribute("patentDocs", patentDocs);
 		model.addAttribute("patenType",patentType);

@@ -16,6 +16,8 @@ public interface PatentDocDao {
 	int getUserPatentDocCount(int userId);
 	
 	List<PatentDoc> getUserPatentDoc(Page page);
+
+	List<PatentDoc> getUserPatentDocEditor(int userId);
 	
 	PatentDoc getUserPatentDocById(long patentDocId);
 	

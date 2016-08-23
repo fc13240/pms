@@ -62,6 +62,11 @@
 		ORDER BY create_time DESC ,last_update_time DESC limit #{startIndex}, #{pageSize}
 	</select> 
 	
+	<select id="getUserPatentDocEditor"  resultMap="PatentDocMap">
+		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
+		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,patent_doc_url from patent_documents where user_Id=#{userId} order by create_time desc ,last_update_time desc
+	</select> 
+	
 	
 	<select id="getUserPatentDocById"  resultMap="PatentDocMap">
 		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
