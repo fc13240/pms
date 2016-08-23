@@ -58,7 +58,7 @@
 		SELECT patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
 		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,patent_doc_url 
 		FROM patent_documents p
-		WHERE p.patent_doc_id IN (SELECT patent_doc FROM user_patent_docs WHERE user_id = 2) 
+		WHERE p.patent_doc_id IN (SELECT patent_doc FROM user_patent_docs WHERE user_id = #{userId}) 
 		ORDER BY create_time DESC ,last_update_time DESC limit #{startIndex}, #{pageSize}
 	</select> 
 	

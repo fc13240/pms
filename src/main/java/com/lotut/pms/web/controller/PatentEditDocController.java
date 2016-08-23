@@ -161,10 +161,10 @@ public class PatentEditDocController {
 		List<PatentDoc> patentDocss=patentDocService.getUserPatentDoc(page);
 		List<PatentDoc> patentDocs= new ArrayList<>();
 		for (PatentDoc patentDoc:patentDocss) {
-			if(patentDoc.getAppNo()==null&patentDoc.getAbstractDescription()==null
+			if(patentDoc.getAbstractDescription()==null
 					&patentDoc.getName()==null&patentDoc.getManual()==null&patentDoc.getRightClaim()==null
 					&patentDoc.getAbstractImg()==null){
-					patentDocService.deleteNullPatentDoc();
+				patentDocService.deletePatentDoc(patentDoc.getPatentDocId());
 			}else{
 				patentDocs.add(patentDoc);
 			}
@@ -186,10 +186,10 @@ public class PatentEditDocController {
 		List<PatentDoc> patentDocs= new ArrayList<>();
 		List<PatentDoc> resultPatentDocs = patentDocService.searchUserPatentDocsByPage(searchCondition);
 		for (PatentDoc patentDoc:resultPatentDocs) {
-			if(patentDoc.getAppNo()==null&patentDoc.getAbstractDescription()==null
+			if(patentDoc.getAbstractDescription()==null
 					&patentDoc.getName()==null&patentDoc.getManual()==null&patentDoc.getRightClaim()==null
 					&patentDoc.getAbstractImg()==null){
-					patentDocService.deleteNullPatentDoc();
+					patentDocService.deletePatentDoc(patentDoc.getPatentDocId());
 			}else{
 				patentDocs.add(patentDoc);
 			}
