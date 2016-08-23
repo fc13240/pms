@@ -27,8 +27,8 @@
   	values(#{name},#{type},#{peopleNumber},#{postcodeAddress},#{otherInfo},#{userId},
   	#{feeReduceTransactionStatus},#{transactionIdentityId},#{transactionYear})
   	
- 
   </insert>
+  
   <insert id="addUserAppPerson" parameterType="UserAppPerson">
   	insert into user_app_person (user,app_person)values(#{userId},#{appPersonId})
   
@@ -50,7 +50,7 @@
   		p.postcode_address ,p.other_information ,u.user_id,u.username  FROM common_app_person p
   		JOIN app_person_types t ON p.type=t.type_id LEFT JOIN user_app_person up ON p.app_person_id = up.app_person 
   		LEFT JOIN users u ON u.user_id = up.user
-  		WHERE p.user_id=#{userId}
+  		WHERE up.user=#{userId}
   	</select>
   	
   	<select id="getAllAppPersonByUser" parameterType="int" resultType="CommonAppPerson">

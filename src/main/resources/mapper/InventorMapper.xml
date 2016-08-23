@@ -22,9 +22,22 @@
   		p.inventor_other_information ,u.user_id,u.username  FROM common_inventor p
   		 LEFT JOIN user_inventor up ON p.inventor_id = up.inventor 
   		LEFT JOIN users u ON u.user_id = up.user
-  		WHERE p.user_id=#{userId}
+  		WHERE up.user=#{userId}
   	</select>
 	
+	<!-- <insert id="addUserInventor" parameterType="UserInventor">
+		insert into user_inventor (user,inventor) values(#{userId},#{inventorId})
+	</insert>
+	
+	<select id="getIdByInventor" resultType="int"  parameterType="CommonInventor">
+		select inventor_id from common_inventor where inventor_name=#{inventorName}  and inventor_id_number=#{inventorNumber} and 
+		inventor_nationality=#{inventorNationality} and inventor_mobile=#{inventorMobile} and inventor_email=#{inventorEmail} and 
+		inventor_other_information=#{inventorComment} 
+	</select>
+	
+	<delete id="deleteUserInventorById" parameterType="UserInventor">
+		delete from  user_inventor where user=#{user_id} and inventor =#{inventorId}
+	</delete> -->
 	
 	<insert id="addInventor" parameterType="CommonInventor">
 		insert into common_inventor (inventor_name,inventor_id_number,inventor_nationality,inventor_mobile,inventor_email,inventor_other_information
@@ -32,7 +45,8 @@
 		values(#{inventorName},#{inventorNumber},#{inventorNationality},#{inventorMobile},#{inventorEmail},#{inventorComment},#{userId})
 	
 	</insert>
-
+	
+	<insert id=""></insert>
 	<select id="getAllInventorsByUser" parameterType="int" resultType="CommonInventor">
 		select inventor_id as inventorId ,inventor_name as inventorName,inventor_id_number as inventorNumber,
 		inventor_nationality as inventorNationality,inventor_mobile as inventorMobile,inventor_email as inventorEmail,
