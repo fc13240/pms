@@ -68,9 +68,7 @@ function modelbuttonclick(list_no) {
 }
 function loadingGuideBYTab(sectionId){
 	$(".guide-list").empty();
-	alert(sectionId);
-
-		$(".guide-list").append("说明书");	
+	$(".guide-list").append("说明书");	
 		
 		
 	

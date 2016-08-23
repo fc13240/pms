@@ -23,7 +23,7 @@
 		<result property="abstractImg" column="abstract_img"/>
 		<result property="patentDocAttachmentFile" column="patent_doc_attachment_file"/>
 		<result property="patentDocUrl" column="patent_doc_url"/>
-		<association property="PatentDocStatus" resultMap="PatentDocStatusResultMap"/>
+		<association property="patentDocStatus" resultMap="PatentDocStatusResultMap"/>
 	</resultMap>
 
 		<resultMap type="Attachment" id="PatentImgMap">
