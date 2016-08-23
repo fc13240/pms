@@ -164,7 +164,7 @@ public class PatentEditDocController {
 			if(patentDoc.getAbstractDescription()==null
 					&patentDoc.getName()==null&patentDoc.getManual()==null&patentDoc.getRightClaim()==null
 					&patentDoc.getAbstractImg()==null){
-				patentDocService.deletePatentDoc(patentDoc.getPatentDocId());
+				patentDocService.deleteNullPatentDoc();
 			}else{
 				patentDocs.add(patentDoc);
 			}
@@ -189,7 +189,7 @@ public class PatentEditDocController {
 			if(patentDoc.getAbstractDescription()==null
 					&patentDoc.getName()==null&patentDoc.getManual()==null&patentDoc.getRightClaim()==null
 					&patentDoc.getAbstractImg()==null){
-					patentDocService.deletePatentDoc(patentDoc.getPatentDocId());
+					patentDocService.deleteNullPatentDoc();
 			}else{
 				patentDocs.add(patentDoc);
 			}
