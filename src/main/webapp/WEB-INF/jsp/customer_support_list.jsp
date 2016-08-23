@@ -75,7 +75,7 @@
 
 </div>
 <script type="text/javascript">
-	function changeCustomerSupportnRemarkName(id, remarkName) {
+	function changeCustomerSupportRemarkName(id, remarkName) {
 		$.ajax({
 			url: "<s:url value='/employee/changeCustomerSupportRemarkName.html'/>?id=" + id + "&remarkName=" + remarkName, 
 			type: 'get', 

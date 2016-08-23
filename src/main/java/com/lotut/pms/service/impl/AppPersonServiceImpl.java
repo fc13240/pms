@@ -3,100 +3,137 @@ package com.lotut.pms.service.impl;
 import java.util.List;
 
 import com.lotut.pms.dao.AppPersonDao;
-import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.AppPersonType;
+import com.lotut.pms.domain.CommonAppPerson;
+import com.lotut.pms.domain.UserAppPerson;
 import com.lotut.pms.service.AppPersonService;
 
+
+
 public class AppPersonServiceImpl implements AppPersonService {
-	private AppPersonDao AppPersonDao;
+	private AppPersonDao appPersonDao;
 	
 	
 	
-	public AppPersonServiceImpl(AppPersonDao AppPersonDao) {
-		this.AppPersonDao = AppPersonDao;
+	public AppPersonServiceImpl(AppPersonDao appPersonDao) {
+		this.appPersonDao =appPersonDao;
 	}
 
 
-	public void addAppPerson(CommonAppPerson commonAppPerson) {
-		AppPersonDao.addAppPerson(commonAppPerson);
+	public void addappPerson(CommonAppPerson commonappPerson) {
+		appPersonDao.addAppPerson(commonappPerson);
 		
 	}
 
 
 	@Override
 	public List<AppPersonType> getAppPersonTypes() {
-		return AppPersonDao.getAppPersonTypes();
+		return appPersonDao.getAppPersonTypes();
 	}
 
 
 	@Override
 	public List<CommonAppPerson> getAllAppPersonByUser(int userId) {
-		// TODO Auto-generated method stub
-		return AppPersonDao.getAllAppPersonByUser(userId) ;
+		
+		return appPersonDao.getAllAppPersonByUser(userId) ;
 	}
 
 
 	@Override
 	public CommonAppPerson getOneAppPersonById(int id) {
-		return AppPersonDao.getOneAppPersonById(id);
+		return appPersonDao.getOneAppPersonById(id);
 	}
 
 
 	@Override
-	public void updateAppPerson(CommonAppPerson AppPerson) {
-		AppPersonDao.updateAppPerson(AppPerson);
+	public void updateAppPerson(CommonAppPerson appPerson) {
+		appPersonDao.updateAppPerson(appPerson);
 		
 	}
 
 
 	@Override
 	public void deleteAppPersonById(int id) {
-		AppPersonDao.deleteAppPersonById(id);
+		appPersonDao.deleteAppPersonById(id);
 		
 	}
 	@Override
 	public List<CommonAppPerson> getUserAppPersons(int userId) {
-		// TODO Auto-generated method stub
-		return AppPersonDao.getUserAppPersons(userId);
+		
+		return appPersonDao.getUserAppPersons(userId);
 	}
 
 
 	@Override
 
-	public void saveAttachmentFile(CommonAppPerson AppPerson) {
-		// TODO Auto-generated method stub
-		AppPersonDao.saveAttachmentFile(AppPerson);
+	public void saveAttachmentFile(CommonAppPerson appPerson) {
+		
+		appPersonDao.saveAttachmentFile(appPerson);
 	}
 
 
 	@Override
 	public String getAppPersonUrlById(int id) {
-		// TODO Auto-generated method stub
-		return AppPersonDao.getAppPersonUrlById(id);
+		
+		return appPersonDao.getAppPersonUrlById(id);
 	}
-	public void addCommonAppPerson(CommonAppPerson CommonAppPerson) {
-		AppPersonDao.addCommonAppPerson(CommonAppPerson);
+	public void addCommonappPerson(CommonAppPerson CommonappPerson) {
+		appPersonDao.addCommonAppPerson(CommonappPerson);
 
 	}
 
 
 	@Override
-	public void saveProxyFile(CommonAppPerson AppPerson) {
-		// TODO Auto-generated method stub
-		AppPersonDao.saveProxyFile(AppPerson);
+	public void saveProxyFile(CommonAppPerson appPerson) {
+		
+		appPersonDao.saveProxyFile(appPerson);
 	}
 
 
 	@Override
 	public String getProxyUrlById(int id) {
-		// TODO Auto-generated method stub
-		return AppPersonDao.getProxyUrlById(id);
+		
+		return appPersonDao.getProxyUrlById(id);
 	}
 
 
 	@Override
 	public void deleteAttachmentFileById(int id) {
-		// TODO Auto-generated method stub
-		AppPersonDao.deleteAttachmentFileById(id);
+		
+		appPersonDao.deleteAttachmentFileById(id);
+	}
+
+
+	@Override
+	public void addAppPerson(CommonAppPerson commonAppPerson) {
+		
+		appPersonDao.addAppPerson(commonAppPerson);
+	}
+
+
+	@Override
+	public void addCommonAppPerson(CommonAppPerson CommonAppPerson) {
+		
+		appPersonDao.addCommonAppPerson(CommonAppPerson);
+	}
+
+
+	@Override
+	public void addUserAppPerson(UserAppPerson userAppPerson) {
+		
+		appPersonDao.addUserAppPerson(userAppPerson);
+	}
+
+
+	@Override
+	public Integer getIdbyAppPerson(CommonAppPerson commonAppPerson) {
+	
+		return appPersonDao.getIdbyAppPerson(commonAppPerson);
+	}
+
+	@Override
+	public void deleteUserAppPersonbyId(UserAppPerson userAppPerson) {
+		appPersonDao.deleteUserAppPersonbyId(userAppPerson);
+		
 	}
 }

@@ -30,6 +30,7 @@ import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.AppPersonType;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.User;
+import com.lotut.pms.domain.UserAppPerson;
 import com.lotut.pms.service.AppPersonService;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -69,10 +70,15 @@ public class AppPersonController {
 	}
 	
 	@RequestMapping(path="/addContactInfo",method=RequestMethod.POST)
-	public String addContactInfo(@ModelAttribute CommonAppPerson AppPerson,Model model){
+	public String addContactInfo(@ModelAttribute CommonAppPerson appPerson,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
-		AppPerson.setUserId(userId);
-		appPersonService.addAppPerson( AppPerson);
+		appPerson.setUserId(userId);
+		appPersonService.addAppPerson( appPerson);
+		UserAppPerson userAppPerson=new UserAppPerson();
+		userAppPerson.setUserId(userId);
+		Integer appPersonId=appPersonService.getIdbyAppPerson(appPerson);
+		userAppPerson.setAppPersonId(appPersonId);
+		appPersonService.addUserAppPerson(userAppPerson);
 		return "redirect:/appPerson/list.html";
 	}
 	
@@ -95,8 +101,12 @@ public class AppPersonController {
 	}
 	
 	@RequestMapping(path="/deleteAppPersonInfo")
-	public String deleteAppPersonInfo(@RequestParam("appPersonId")int AppPersonId){
-		appPersonService.deleteAppPersonById(AppPersonId);
+	public String deleteAppPersonInfo(@RequestParam("appPersonId")int appPersonId){
+		int userId=PrincipalUtils.getCurrentUserId();
+		UserAppPerson userAppPerson=new UserAppPerson();
+		userAppPerson.setUserId(userId);
+		userAppPerson.setAppPersonId(appPersonId);
+		appPersonService.deleteUserAppPersonbyId(userAppPerson);
 		return "redirect:/appPerson/list.html";
 	}
 	

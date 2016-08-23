@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lotut.pms.dao.PatentDocDao;
 import com.lotut.pms.domain.Attachment;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSearchCondition;
 import com.lotut.pms.service.PatentDocService;
@@ -39,8 +40,8 @@ public class PatentDocServiceImp implements PatentDocService{
 
 
 		@Override
-		public List<PatentDoc> getUserPatentDoc(int userId) {
-			return patentDocDao.getUserPatentDoc(userId);
+		public List<PatentDoc> getUserPatentDoc(Page page ) {
+			return patentDocDao.getUserPatentDoc(page);
 		}
 
 
@@ -146,6 +147,18 @@ public class PatentDocServiceImp implements PatentDocService{
 		@Override
 		public int searchUserPatentDocsCount(PatentDocSearchCondition searchCondition) {
 			return patentDocDao.searchUserPatentDocsCount(searchCondition);
+		}
+
+
+		@Override
+		public int getUserPatentDocCount(int userId) {
+			return patentDocDao.getUserPatentDocCount(userId);
+		}
+
+
+		@Override
+		public List<PatentDoc> getUserPatentDocEditor(int userId) {
+			return patentDocDao.getUserPatentDocEditor(userId);
 		}
 
 

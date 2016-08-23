@@ -80,7 +80,7 @@
 <script type="text/javascript">
 	function sendTechPersonRequest(userId) {
 		$.ajax({
-			url: "<s:url value='/employee/techPersonRequest.html'/>?userId=" + userId,
+			url: "<s:url value='/employee/sendTechPersonRequest.html'/>?userId=" + userId,
 			success: function() {
 		   		$("<div>添加技术员成功</div>").dialog({
 		   			modal: true,

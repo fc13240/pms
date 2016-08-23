@@ -135,7 +135,7 @@ public class PatentEditDocController {
 	public String  editPatentDoc(@RequestParam("patentDocId")long patentDocId,@RequestParam("patentType")int patentType,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocId);
-		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(userId);
+		List<PatentDoc> patentDocs=patentDocService.getUserPatentDocEditor(userId);
 		model.addAttribute("patentDoc", patentDoc);
 		model.addAttribute("patentDocs", patentDocs);
 		model.addAttribute("patenType",patentType);
@@ -149,9 +149,16 @@ public class PatentEditDocController {
 	
 
 	@RequestMapping(path="/patentDocList",method=RequestMethod.GET)//patentDocList
-	public String  patentDocList(Model model){
-		int userId=PrincipalUtils.getCurrentUserId();
-		List<PatentDoc> patentDocss=patentDocService.getUserPatentDoc(userId);
+	public String  patentDocList(Model model, Page page, HttpSession session){
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=(int)patentDocService.getUserPatentDocCount(userId);
+		page.setTotalRecords(totalCount);
+		List<PatentDoc> patentDocss=patentDocService.getUserPatentDoc(page);
 		List<PatentDoc> patentDocs= new ArrayList<>();
 		for (PatentDoc patentDoc:patentDocss) {
 			if(patentDoc.getAppNo()==null&patentDoc.getAbstractDescription()==null
@@ -163,6 +170,7 @@ public class PatentEditDocController {
 			}
 		}
 		model.addAttribute("patentDocs", patentDocs);
+		model.addAttribute("page", page);
 		return "patent_doc_list";
 		
 	}
@@ -573,25 +581,14 @@ public class PatentEditDocController {
 		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
 		String filePath = Settings.PATENTDOC_FILE_PATH + relativeUrl;
 		File patentDocFile = new File(filePath);
-		if("FF".equals(getBrowser(request))){
-		    //针对火狐浏览器处理
+		if(WebUtils.isFireFox(request)){
 			downloadFileName =new String(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
 		}
 		response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
 		response.setContentLength((int)patentDocFile.length());
 		WebUtils.writeStreamToResponse(response, new FileInputStream(patentDocFile));
 	}
-	
-	private String getBrowser(HttpServletRequest request){
-	    String UserAgent = request.getHeader("USER-AGENT").toLowerCase();
-	    if(UserAgent!=null){
-	        if (UserAgent.indexOf("msie") >=0 ) return "IE";
-	        if (UserAgent.indexOf("firefox") >= 0) return "FF";
-	    }
-	    return null;
-	}
-	
-	
+		
 	@RequestMapping(path="showFriends", method=RequestMethod.GET)
 	public String showFriends(Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
