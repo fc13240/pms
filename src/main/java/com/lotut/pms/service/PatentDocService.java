@@ -1,6 +1,7 @@
 package com.lotut.pms.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
@@ -35,5 +36,6 @@ public interface PatentDocService {
 	void savePatentDocFile(PatentDoc patentDoc);
 
 	String getPatentDocUrlById(long patentDocId);
+	
 
 }

@@ -2,7 +2,13 @@ package com.lotut.pms.service.impl;
 
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.transaction.annotation.Transactional;
+
 import com.lotut.pms.dao.PatentDocDao;
 import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
@@ -17,8 +23,17 @@ public class PatentDocServiceImp implements PatentDocService{
 		
 
 		@Override
+		@Transactional
 		public void savePatentDoc(PatentDoc patentDoc) {
 			patentDocDao.savePatentDoc(patentDoc);
+			long patentDocId=patentDoc.getPatentDocId();
+			List<Map<String, Integer>> userPatentList = new ArrayList<>();
+			HashMap<String, Integer> userPatentMap = new HashMap<>();
+			userPatentMap.put("userId", patentDoc.getUserId());
+			userPatentMap.put("patentDocId", (int)patentDocId);
+			userPatentList.add(userPatentMap);
+			patentDocDao.insertUserPatentDoc(userPatentList);
+			
 		}
 
 
@@ -111,6 +126,8 @@ public class PatentDocServiceImp implements PatentDocService{
 		public String getPatentDocUrlById(long patentDocId) {
 			return patentDocDao.getPatentDocUrlById(patentDocId);
 		}
+
+
 
 
 }
