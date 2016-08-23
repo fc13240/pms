@@ -44,7 +44,9 @@ import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.TemplatePage;
+import com.lotut.pms.domain.User;
 import com.lotut.pms.service.AppPersonService;
+import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
@@ -67,14 +69,16 @@ public class PatentEditDocController {
 	private InventorService inventorService ;
 	private AppPersonService appPersonService;
 	private UserService userService;
+	private FriendService friendService;
 	
 	@Autowired
-	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService,InventorService inventorService,AppPersonService appPersonService,UserService userService) {
+	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService,InventorService inventorService,AppPersonService appPersonService,UserService userService,FriendService friendService) {
 		this.patentDocService = patentDocService;
 		this.patentDocumentTemplateService = patentDocumentTemplateService;
 		this.inventorService = inventorService;
 		this.appPersonService = appPersonService;
 		this.userService = userService;
+		this.friendService = friendService;
 	}
 
 	@RequestMapping(path="/newPatentType")
@@ -554,5 +558,42 @@ public class PatentEditDocController {
 	        if (UserAgent.indexOf("firefox") >= 0) return "FF";
 	    }
 	    return null;
+	}
+	
+	
+	@RequestMapping(path="showFriends", method=RequestMethod.GET)
+	public String showFriends(Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> friends = friendService.getUserFriends(userId);
+		model.addAttribute("friends", friends);
+		return "patent_doc_select_friends";
+	}
+	
+	
+	
+	@RequestMapping(path="searchFriends", method=RequestMethod.GET)
+	public String searchFriends(@RequestParam("keyword")String keyword, Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> friends = friendService.searchUserFriends(userId, keyword);
+		model.addAttribute("friends", friends);
+		return "patent_doc_select_friends";
+	}
+	
+	@RequestMapping(path="/addShares", method=RequestMethod.GET)
+	public String sharePatents(@RequestParam("patentDocIds")List<Integer> patentDocIds, @RequestParam("friends")List<Integer> friendIds) {
+		List<Map<String, Integer>> userPatentDocRecords = new ArrayList<>();
+		int userId = PrincipalUtils.getCurrentUserId();
+		
+		for (int patentDocId: patentDocIds) {
+			for (int friendId: friendIds) {
+				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
+				userPatentRecord.put("userId", friendId);
+				userPatentRecord.put("patentDocId", patentDocId);
+				userPatentDocRecords.add(userPatentRecord);
+			}
+		}
+		
+		patentDocService.insertUserPatentDoc(userPatentDocRecords);
+		return "patent_list";
 	}
 }

@@ -18,6 +18,7 @@
 <div class="col-xs-1 sidebar" style="min-width:100px;">
 			<%@ include file="_left_nav_editor.jsp" %>
 		  </div>
+
 		  <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
 				<div style="height:10px;"></div>
@@ -67,6 +68,7 @@
 						</table>
 						</div></div></div>
 						
+
 <iframe id="patentWorkFileFrame" style="display:none"></iframe>	
 <script type="text/javascript">
 	 function exportWord(value){
@@ -86,6 +88,28 @@
 		 
 	}
 
+
 </script>		
+
+</script>
+<script type="text/javascript">
+function batchShare() {
+	var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+	var uniquePatentNos = []
+	if (!patentSelected) {
+		formutil.alertMessage('请选择专利');
+		
+		return;
+	}
+	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+	for (var i = 0; i < patents_checked.length; i++) {
+		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+			uniquePatentNos.push(patents_checked[i]);
+		}
+	}		
+	var patentDocIds = uniquePatentNos.join(",");		
+	location.href = "<s:url value='/editor/showFriends.html'/>?patentDocIds=" + patentDocIds;
+}
+</script>
 </body>
 </html>
