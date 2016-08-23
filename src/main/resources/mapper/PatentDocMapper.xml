@@ -23,7 +23,7 @@
 		<result property="abstractImg" column="abstract_img"/>
 		<result property="patentDocAttachmentFile" column="patent_doc_attachment_file"/>
 		<result property="patentDocUrl" column="patent_doc_url"/>
-		<association property="PatentDocStatus" resultMap="PatentDocStatusResultMap"/>
+		<association property="patentDocStatus" resultMap="PatentDocStatusResultMap"/>
 	</resultMap>
 
 		<resultMap type="Attachment" id="PatentImgMap">
@@ -42,11 +42,13 @@
 		#{manual,javaType=string,jdbcType=CLOB},#{rightClaim,javaType=string,jdbcType=CLOB},#{abstractDescription,javaType=string,jdbcType=CLOB},#{abstractImg,javaType=string,jdbcType=VARCHAR},1);
 	</insert>
 	
-	<insert id="saveUserPatentDoc"  >
-		insert into user_patent_docs(user_id,patent_doc) values
-		(#{userId},#{patentDocId});
+	<insert id="insertUserPatentDoc" parameterType="list">
+		replace into user_patent_docs(user_id, patent_doc) 
+		values
+		<foreach item="userPatentDocRecords" collection="list" separator=",">
+			(${userPatentDocRecords.userId}, #{userPatentDocRecords.patentDocId})
+		</foreach>
 	</insert>
-	
 	
 	<select id="getUserPatentDoc"  resultMap="PatentDocMap">
 		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,

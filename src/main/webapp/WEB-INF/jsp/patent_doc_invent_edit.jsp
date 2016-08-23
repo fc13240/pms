@@ -394,7 +394,8 @@
 							</div>
 							<div class="cl">
 								<div>
-									<table>
+									<div>
+									<!-- <table>
 										<tr>
 											<td>
 												<button type="button" style="width:180px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
@@ -426,18 +427,57 @@
 											</td>
 										
 										</tr>
-									</table>
+									</table> -->
+									</div>
 									<div>
+										<button type="button" style="width:120px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
+											选择常用申请人
+										</button>
+										<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addAppPersonModal">
+												新增申请人
+										</button>
+										<br/>
+										<br/>
 										<h2>申请人:</h2>
 										<div id="appersonDiv">
 									
 										</div>
+									</div>
+									
+									
+									<div style="margin-top: 60px;">
+										<hr>
+										<button type="button" style="width:120px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonInventorModal">
+											选择常用发明人
+										</button>
+										<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addInventorModal">
+											新增发明人
+										</button>
 										<br/>
-										
+										<br/>
 										<h2>发明人:</h2>
 										<div id="inventorDiv">
 										
+										</div>
 									</div>
+									<div style="margin-top: 60px;">	
+										<hr>
+										<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">选择常用联系人</button>
+										<br/>
+										<br/>
+										<h2>联系人:</h2>
+										<div id="contactDiv">
+											<textarea rows="6" cols="50" id="contactTextarea" style="resize: none;" placeholder="选择或添加地址">
+												
+											</textarea>
+										</div>
+									</div>
+									<div>
+										<button type="button" class = "button button-caution button-rounded" >保存</button>
+										<button type="button" class = "button button-caution button-rounded" >取消</button>
+									</div>
+									<div style="margin-top: 20px;">
+									
 									</div>
 								</div>
 							</div>
@@ -842,7 +882,7 @@
       <div class = "modal-content">
          
          <div class = "modal-header">
-            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true" id="addAppPersonModalCloseBtn">
                ×
             </button>
             
@@ -856,7 +896,7 @@
 					<br>	   
 					     	<h5>申请人类型:</h5>
 					<select class="form-control" style="width:136px;display:inline;" onchange="loadCities()" id="modalAppPersonType" required>
-					  <option value=''>请选择</option>
+					  <option value='-1'>请选择</option>
 					  <c:forEach items="${appPersonTypes}" var="appPersonType">
 						<option value="${appPersonType.typeId}">${appPersonType.typeDescription}</option>
 					  </c:forEach>
@@ -874,7 +914,7 @@
 					<input type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
 					<br/>
 					<button type="button" style="width:90px;" class="button button-primary  button-rounded" onclick="submitAppPersonForm()">保存</button>
-					<button type="reset" style="width:90px;margin-left:280px" class="button button-primary  button-rounded">取消</button>
+					<button type="button" style="width:90px;margin-left:280px" class="button button-primary  button-rounded" onclick="resetAppPersonForm()">取消</button>
 	         </div>
       </div>
    </div>
@@ -923,7 +963,7 @@
 					<c:forEach items="${inventors}" var="inventor" varStatus="status">
 					  <tr>
 					  	<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-						<input type="checkbox" class="inventor-check-item" inventor="<c:out value='${inventor.inventorId}'/>">
+						<input type="checkbox" class="inventor-check-item" inventor="<c:out value='${inventor.inventorId}'/>"/></span>
 						<span class="lbl"></span></label>
 						</td>
 						<td class="center" style="text-align:center"> ${status.count} </td>
@@ -949,11 +989,11 @@
 <div class = "modal fade" id = "addInventorModal" tabindex = "-1" role = "dialog" 
    aria-labelledby = "myModalLabel" aria-hidden = "true" >
    
-   <div class = "modal-dialog" >
+   <div class = "modal-dialog" style="width:540px">
       <div class = "modal-content">
          
          <div class = "modal-header">
-            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true" id="addInventorModalCloseBtn">
                ×
             </button>
             
@@ -961,54 +1001,98 @@
             	添加新的发明人
             </h4>
          </div>
+	         <div class = "modal-body">
 
-          <form role="form"  action="<s:url value=''/>" method="post">
-	         <div class = "modal-body" id="modal-body">
-	           
-	         </div>
-	         
-	          <div class = "modal-footer">
-	            <button type = "button" class = "btn btn-default" data-dismiss = "modal" id="closeButton">
-	              	关闭
-	            </button>
-	            
-	            <button type = "submit" class = "button button-primary  button-rounded">
-	               	确认
-	            </button>
-	         </div>
-         </form>
-      </div>
-   </div>
-</div>
-
-<div id="contactDiv" style="display:none;">
-	<div class="lt-box" style="padding:20px;">
-		<form id="contactForm" action="">
-		     	<h5>姓名或名称:</h5>
-		<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="name" required/>
-		<br>	   
-		     	<h5>申请人类型:</h5>
-		<select name="type" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities()" required>
-		  <option value=''>请选择</option>
-		  <c:forEach items="${appPersonTypes}" var="appPersonType">
-			<option value="${appPersonType.typeId}">${appPersonType.typeDescription}</option>
-		  </c:forEach>
-		</select>
-		<br>
-		<h5>证件号码:</h5>
-		<input class="selectPointOfInterest form-control" style="width:460px;" id="" type="text" name="peopleNumber" required onblur="validatePhoneNumber(this.value)"/>
-		<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
-		<br>		  
-		     	<h5>邮编及地址:</h5>
-		<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="postcodeAddress" required/>
-		<br>
-		<h5>其他信息:</h5>
-		<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="otherInfo" />
-		
-		
-		</form>
+	           <div class="lt-box" style="padding:20px;">
+			       	<h5>姓名:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorName" required onblur="validateInfoNumber(this.value)"/>
+					<span style="color: red; display: none;" id=numberError>该处应输入不大于20字段</span>
+					<br>	   
+					<h5>证件号码:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorNumber" required onblur="validatePhoneNumber(this.value)"/>
+					<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
+					<br>		  
+			       	<h5>国籍:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;"  type="text" id="modalInventorNationality" value="中国" required onblur="validateInfoNumber1(this.value)"/>
+					<span style="color: red; display: none;" id=numberError1>该处应输入不大于20字段</span>
+					<br>		  
+			       	<h5>电话:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorMobile" required onblur="validateInfoNumber2(this.value)"/>
+					<span style="color: red; display: none;" id=numberError2>请输入正确的电话号码</span>
+					<br>		  
+			       	<h5>邮箱:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorEmail" required onblur="validateInfoNumber3(this.value)"/>
+					<span style="color: red; display: none;" id=numberError3>请输入正确的邮箱</span>
+					<br>
+					<h5>其他信息:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorComment"  onblur="validateCommentNumber(this.value)"/>
+					<span style="color: red; display: none;" id=commentError>该处应输入不大于50字段</span>
+					<br>      
+					<div style="height:20px;"></div> 
+					<button type="button" style="width:90px;" class="button button-primary  button-rounded" onclick="submitInventorForm()">保存</button>		
+					<button type="button" style="width:90px;margin-left:275px;" class="button button-primary  button-rounded" onclick="resetAddInventorModal()">取消</button>		
+				</div>
+	      </div>
+	   </div>
 	</div>
 </div>
+
+
+<!--commonContactModal  -->
+<div class = "modal fade" id = "commonContactModal" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true" >
+   
+   <div class = "modal-dialog" style="width:750px">
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true" id="addInventorModalCloseBtn">
+               ×
+            </button>
+            
+            <h4 class = "modal-title" id = "myModalLabel">
+            	从常用联系人中选择
+            </h4>
+         </div>
+	         <div class = "modal-body">
+				<div class="lt-box" style="padding:20px;">
+					<button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="batchAddAddress()" title="可以添加多个联系人哦!">添加联系人</button>
+					<table id="simple-table" class="table table-striped table-bordered table-hover">
+					  <thead>
+						<tr class="simple_bag">
+						  <th class="center"> <label class="pos-rel">
+							<input type="checkbox" class="contact-check-item" name="checkall" />
+							<span class="lbl"></span> </label>
+						  </th>
+						  <th>序号</th>
+						  <th>联系人</th>
+						  <th>所在地区</th>
+						  <th>地址</th>
+						  <th>联系电话</th>
+						</tr>
+					  </thead>
+					  <c:forEach items="${contactAddresses}" var="address" varStatus="status">
+						<tr>
+						  <td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
+							<input type="checkbox" class="contact-check-item" contact="<c:out value='${address.id}'/>"/></span>
+							<span class="lbl"></span></label>
+						  </td>
+						  <td class="center">${status.count}</td>
+						  <td>${address.receiver}</td>
+						  <td>${address.provinceName} ${address.cityName} ${address.districtName}
+						  </td>
+						  <td>${address.detailAddress}</td>
+						  <td>${address.phone}</td>
+						</tr>
+					  </c:forEach>
+					</table>
+				</div>
+	           
+	      </div>
+	   </div>
+	</div>
+</div>
+
 
 <script type="text/javascript">
 
@@ -1393,8 +1477,10 @@ function loadImgs(){
 	
 		formutil.clickAllCheckbox('tr th input.inventor-check-item', 'tr td input.inventor-check-item');
 		formutil.clickItemCheckbox('tr th input.inventor-check-item', 'tr td input.inventor-check-item');		
-	});
 	
+		formutil.clickAllCheckbox('tr th input.contact-check-item', 'tr td input.contact-check-item');
+		formutil.clickItemCheckbox('tr th input.contact-check-item', 'tr td input.contact-check-item');		
+	});
 	function batchAddAppPerson(){
 		var appPersonSelected = formutil.anyCheckboxItemSelected('tr td input.apperson-check-item');
 		var uniqueappPersonNos = []
@@ -1423,14 +1509,11 @@ function loadImgs(){
 							"<span class='ss-item' id='appPerson"+item.appPersonId+"' style='margin-left:20px'>"+item.name+""+
 							"<a class='icon-btn-x' href='#' onclick='deleteTag(appPerson"+item.appPersonId+")'"+
 								">"+								
-								"<img src='<s:url value='/temp/images/remove.png'/>'  />"+
+								"<img src='<s:url value='/temp/images/delete.ico'/>' style='width:30px;height:25px' />"+
 							"</a>"+
+							"<input type='text' name='commonAppPerson["+item.appPersonId+"].appPersonId' value='"+item.appPersonId+"'/>"+
 						 "</span>"
 					)
-					
-					
-					
-					
 				})
 			}
 			
@@ -1473,8 +1556,9 @@ function loadImgs(){
 							"<span class='ss-item' id='inventor"+item.inventorId+"' style='margin-left:20px'>"+item.inventorName+""+
 							"<a class='icon-btn-x' href='#' onclick='deleteTag(inventor"+item.inventorId+")'"+
 								">"+								
-								"<img src='<s:url value='/temp/images/remove.png'/>' />"+
+								"<img src='<s:url value='/temp/images/delete.ico'/>' style='width:30px;height:25px'/>"+
 							"</a>"+
+							"<input type='text' name='commonInventor["+item.inventorId+"].inventorId' value='"+item.inventorId+"'/>"+
 						 "</span>"
 					)
 				})
@@ -1514,19 +1598,102 @@ function loadImgs(){
 						"<span class='ss-item' id='appPerson"+obj["appPersonId"]+"' style='margin-left:20px'>"+obj["name"]+""+
 						"<a class='icon-btn-x' href='#' onclick='deleteTag(appPerson"+obj["appPersonId"]+")'"+
 							">"+								
-							"<img src='<s:url value='/temp/images/remove.png'/>'/>"+
+							"<img src='<s:url value='/temp/images/delete.ico'/>' style='width:30px;height:25px'/>"+
 						"</a>"+
+						"<input type='text' name='commonAppPerson["+obj["appPersonId"]+"].appPersonId' value='"+obj["appPersonId"]+"'/>"+
 					 "</span>"
 				)
 				
 			},error:function (){
 				
 			}
-			
 		})
+
+	}
+	
+	
+	function resetDefaultValue(){
+		$("#addAppPersonModalCloseBtn").trigger("click");
+		$("#modalAppPersonName").val("");
+		$("#modalAppPersonType").val("-1");
+		$("#modalPhoneRece").val("");
+		$("#modalPostcodeAddress").val("");
+		$("#modalOtherInfo").val("");
+	}
+	function resetAppPersonForm(){
+		$("#addAppPersonModalCloseBtn").trigger("click");
+		resetDefaultValue();
+	}
+	function submitInventorForm(){
+		var  modalInventorName= $("#modalInventorName").val();
+		var  modalInventorNumber= $("#modalInventorNumber").val();
+		var  modalInventorNationality = $("#modalInventorNationality").val();
+		var  modalInventorMobile = $("#modalInventorMobile").val();
+		var  modalInventorEmail= $("#modalInventorEmail").val();
+		var  modalInventorComment= $("#modalInventorComment").val();
+		var formData={"inventorName":modalInventorName,"inventorNumber":modalInventorNumber,"inventorNationality":modalInventorNationality,"inventorMobile":modalInventorMobile,"inventorEmail":modalInventorEmail,"inventorComment":modalInventorComment};
+		$.ajax({
+			type : "POST",
+			url : "<s:url value='/petition/addCommonInventor.html'/>",
+			data : formData,
+			success : function (data){
+				var obj = $.parseJSON(data);
+				$("#inventorDiv").append(
+						"<span class='ss-item' id='inventor"+obj["inventorId"]+"' style='margin-left:20px'>"+obj["inventorName"]+
+						"<a class='icon-btn-x' href='#' onclick='deleteTag(inventor"+obj["inventorId"]+")'"+
+							">"+								
+							"<img src='<s:url value='/temp/images/delete.ico'/>' style='width:30px;height:25px'/>"+
+						"</a>"+
+						"<input type='text' name='commonInventor["+obj["inventorId"]+"].inventorId' value='"+obj["inventorId"]+"'/>"+
+					 "</span>"
+				)
+			}
+		});
+		resetAddInventorModal();
 		
 	}
 	
+	function resetAddInventorModal(){
+		$("#addInventorModalCloseBtn").trigger("click");
+		$("#modalInventorName").val("");
+		$("#modalInventorNumber").val("");
+		$("#modalInventorNationality").val("中国");
+		$("#modalInventorMobile").val("");
+		$("#modalInventorEmail").val("");
+		$("#modalInventorComment").val("");
+	}
+	
+	function batchAddAddress(){
+		var contactSelected = formutil.anyCheckboxItemSelected('tr td input.contact-check-item');
+		var uniqueContactNos = []
+		if (!contactSelected) {
+			formutil.alertMessage('请选择联系人');
+			
+			return;
+		}
+		var contact_checked=formutil.getAllCheckedCheckboxValues('tr td input.contact-check-item', 'contact');
+		for (var i = 0; i < contact_checked.length; i++) {
+			if ($.inArray(contact_checked[i], uniqueContactNos) == -1) {
+				uniqueContactNos.push(contact_checked[i]);
+			}
+		}		
+		var contactIds = uniqueContactNos.join(",");
+		alert(contactIds);
+		
+		$.ajax({
+			type : 'POST',
+			url : "<s:url value='/petition/findContactNameById.html'/>?contactIds="+contactIds,
+			success : function (data){
+				var obj = $.parseJSON(data);
+				$.each(obj,function(i,item){
+					$("#contactTextarea").append(item.receiver+"&nbsp;"+item.provinceName+item.cityName+item.districtName+"&nbsp;"+item.phone+";"+"&nbsp;")
+				})
+			},error :function (){
+				
+			}
+			
+		})
+	}
 	function searModel(){
 		
 		$('.model-list').show();

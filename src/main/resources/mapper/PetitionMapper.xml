@@ -19,7 +19,7 @@
 		inventor_nationality as inventorNationality,inventor_mobile as inventorMobile,inventor_email as inventorEmail,
 		inventor_other_information as inventorComment,user_id  as userId
 		from common_inventor where user_id=#{userId} and inventor_id in 
-		<foreach collection="inventorIds" item="inventorId" open="(" close=")">
+		<foreach collection="inventorIds" item="inventorId" open="(" separator="," close=")">
 			#{inventorId}
 		</foreach>
 	</select>
@@ -29,6 +29,31 @@
 	  	values(#{name},#{type},#{peopleNumber},#{postcodeAddress},#{otherInfo},#{userId})
 
   	</insert>
+  	
+  	<insert id="addCommonInventor" parameterType="CommonInventor" useGeneratedKeys="true" keyProperty="inventorId">
+		insert into common_inventor (inventor_name,inventor_id_number,inventor_nationality,inventor_mobile,inventor_email,inventor_other_information
+		,user_id)
+		values(#{inventorName},#{inventorNumber},#{inventorNationality},#{inventorMobile},#{inventorEmail},#{inventorComment},#{userId})
+	
+	</insert>
+	
+	<select id="findContactNameById" resultType="ContactAddress">
+<!-- 		select id,receiver from contact_addresses where user=#{userId} and id in
+		<foreach collection="contactIds" item="contactId" open="(" separator="," close=")">
+			#{contactId}
+		</foreach>
+		 -->
+		select ca.id, ca.receiver, ca.province, p.name as provinceName, ca.city, c.name as cityName,
+				ca.district, d.name as districtName,
+					 ca.detail_address as detailAddress, ca.phone, ca.email, ca.is_default defaultAddress
+		 from contact_addresses ca join provinces p on ca.province = p.id
+			join cities c on ca.city = c.id join districts d on ca.district = d.id
+		 where ca.user = #{userId} and ca.id in
+		<foreach collection="contactIds" item="contactId" open="(" separator="," close=")">
+			#{contactId}
+		</foreach>
+		
+	</select>
 
   </mapper>
   
