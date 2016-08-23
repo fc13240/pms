@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.PatentDoc;
+import com.lotut.pms.domain.PatentDocSearchCondition;
 
 public interface PatentDocMapper {
 	void savePatentDoc(PatentDoc patentDoc);
@@ -40,4 +41,8 @@ public interface PatentDocMapper {
 	String getPatentDocUrlById(long patentDocId);
 	
 	void insertUserPatentDoc(List<Map<String, Integer>> userPatentDocRecords);
+	
+	List<PatentDoc> searchUserPatentDocsByPage(@Param("searchCondition")PatentDocSearchCondition searchCondition);
+	
+	int searchUserPatentDocsCount(@Param("searchCondition")PatentDocSearchCondition searchCondition);
 }

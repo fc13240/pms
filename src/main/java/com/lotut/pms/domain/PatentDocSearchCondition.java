@@ -11,6 +11,9 @@ public class PatentDocSearchCondition {
 		this.userId = userId;
 	}
 	public String getKeyword() {
+		if (keyword != null) {
+			return keyword.trim();
+		}
 		return keyword;
 	}
 	public void setKeyword(String keyword) {
@@ -26,6 +29,6 @@ public class PatentDocSearchCondition {
 	@Override
 	public String toString() {
 		String keywordStr = keyword == null ? "" : keyword;
-		return "keyword=" + keywordStr;
+		return "&keyword=" + keywordStr;
 	}
 }

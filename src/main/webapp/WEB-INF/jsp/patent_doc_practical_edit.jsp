@@ -117,7 +117,7 @@
 						摘要附图</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件</div>
-					<div class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
+					<div style="display:none;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
 						请求协议书</div>
 				</div>
 	

@@ -39,10 +39,11 @@ import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentDoc;
+import com.lotut.pms.domain.PatentDocSearchCondition;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
-import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.TemplatePage;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.AppPersonService;
@@ -165,6 +166,33 @@ public class PatentEditDocController {
 		return "patent_doc_list";
 		
 	}
+	
+	@RequestMapping(path="/searchPatentDoc", method=RequestMethod.GET)
+	public String searchUserPatents(@ModelAttribute("searchCondition")PatentDocSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		List<PatentDoc> patentDocs= new ArrayList<>();
+		List<PatentDoc> resultPatentDocs = patentDocService.searchUserPatentDocsByPage(searchCondition);
+		for (PatentDoc patentDoc:resultPatentDocs) {
+			if(patentDoc.getAppNo()==null&patentDoc.getAbstractDescription()==null
+					&patentDoc.getName()==null&patentDoc.getManual()==null&patentDoc.getRightClaim()==null
+					&patentDoc.getAbstractImg()==null){
+					patentDocService.deleteNullPatentDoc();
+			}else{
+				patentDocs.add(patentDoc);
+			}
+		}
+		int totalCount=(int)patentDocService.searchUserPatentDocsCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		model.addAttribute("patentDocs", patentDocs);
+		model.addAttribute("page", page);
+		return "patent_doc_list";
+	}
+	
 	@RequestMapping(path="/deletePatentDoc",method=RequestMethod.GET)
 	public String  deletePatentDoc(@RequestParam("patentDocId")long patentDocId,Model model){
 		patentDocService.deletePatentDoc(patentDocId);
@@ -184,8 +212,14 @@ public class PatentEditDocController {
 	
 	/*合并代码*/
 	
-	@RequestMapping(path="/patentDocTemplate")
-	public String patentDocTemplate(){
+	@RequestMapping(path="/choicePatentDocTemplateType")
+	public String choicePatentDocTemplateType(){
+		return "patent_doc_template_type_list";
+	}
+
+	@RequestMapping(path="/newPatentDocTemplate")
+	public String newPatentDocTemplate(@RequestParam("patentType") int patentType,Model model){
+		model.addAttribute("patentType", patentType);
 		return "patent_doc_template_index";
 	}
 	
@@ -193,9 +227,6 @@ public class PatentEditDocController {
 	public @ResponseBody String addBackTech(@ModelAttribute("patentDocumentTemplate") PatentDocumentTemplate patentDocumentTemplate){
 		int UserId = PrincipalUtils.getCurrentUserId();
 		patentDocumentTemplate.setCreatorId(UserId);
-		PatentType pt=new PatentType();
-		pt.setPatentTypeId(1);
-		patentDocumentTemplate.setPatentType(pt);
 		patentDocumentTemplateService.savePatentDocumentTemplate(patentDocumentTemplate);
 		return "添加模板成功！";
 	}

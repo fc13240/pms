@@ -29,7 +29,7 @@
 		  <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
 				    <div class="cl top1">
-        				<form class="form-inline" action="<s:url value='/editor/search.html'/>" method="get">
+        				<form class="form-inline" action="<s:url value='/editor/searchPatentDoc.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 						 <div class="t-third">
 						  <table class="search-table">

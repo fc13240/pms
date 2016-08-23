@@ -7,8 +7,15 @@
 		<a href="<s:url value='/editor/newPatentType.html'/>">
 		<h5>在线撰写</h5>
 		</a>
-	</li>
-	
+	</li> 		
+	 <se:authorize access="hasAnyRole('ROLE_TRADER','ADMIN')">
+	   <li>
+   		<a href="<s:url value='/editor/choicePatentDocTemplateType.html'/>">
+   		 	<h5>专利模板</h5>
+   		</a>
+	   		
+	   </li>
+	 </se:authorize>	
 	<se:authorize access="hasRole('ROLE_PROXY_ORG')">
 		<li class="active"> 
 			<a href="<s:url value='/employee/getProxyOrgList.html'/>">
@@ -47,7 +54,8 @@
 		<a href="<s:url value='/inventor/list.html'/>">
 		<h5>常用发明人</h5>
 		</a>
-	</li>		
+	</li>
+	
 	<!-- 
 	<li class="active"> 
 		<a href="<s:url value='/editor/newPatentDoc.html'/>?patentType=1">
