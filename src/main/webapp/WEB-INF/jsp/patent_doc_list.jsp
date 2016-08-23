@@ -91,8 +91,44 @@
 
 </script>		
 
-</script>
 <script type="text/javascript">
+
+$('tr th input.check-item').click(function() {
+	var checked = $(this).prop("checked");
+	
+	if (checked) {
+		$('tr td input.check-item').each(function() {
+			$(this).prop("checked", true);
+		});
+	} else {
+		$('tr td input.check-item').each(function() {
+			$(this).prop("checked", false);
+		});
+	}
+});
+
+$('tr td input.check-item').click(function() {
+	var allChecked = true;
+	var friendCheckboxes = $('tr td input.check-item');
+	
+	if ($(this).checked) {
+		for (var i = 0; i < friendCheckboxes.length; i++) {
+			if (!friendCheckboxes[i].checked) {
+				allChecked = false;
+				break;
+			}
+		}			
+	} else {
+		allChecked = false;
+	}
+	
+	if (allChecked) {
+		$('tr th input.check-item').prop("checked", true);
+	} else {
+		$('tr th input.check-item').prop("checked", false);
+	}
+});
+
 function batchShare() {
 	var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 	var uniquePatentNos = []
