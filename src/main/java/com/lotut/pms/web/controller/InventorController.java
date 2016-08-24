@@ -68,12 +68,12 @@ public class InventorController {
 	public String addContactInfo(@ModelAttribute CommonInventor inventor,Model model ){
 		int userId=PrincipalUtils.getCurrentUserId();
 		inventor.setUserId(userId);
+		inventorService.addInventor(inventor);
 		UserInventor userInventor=new UserInventor();
 		userInventor.setUserId(userId);
 		int inventorId=inventorService.getIdByInventor(inventor);
 		userInventor.setInventorId(inventorId);
 		inventorService.addUserInventor(userInventor);
-		inventorService.addInventor(inventor);
 		return "redirect:/inventor/list.html";
 		
 	}
