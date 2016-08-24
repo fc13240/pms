@@ -71,11 +71,11 @@
 								</td>
 								<td class="center" style="text-align:center"> ${status.count} </td>
 								<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
-								<td ><c:out value="${appPerson.idNumber}"/></td>
-								<td class="hidden-480" ><c:out value="${appPerson.postcodeAddress}"/></td>
-								<td ><c:out value="${appPerson.feeReduceTransactionStatus}"/></td>
-								<td><c:out value="${appPerson.transactionIdentityId}"/></td>
-								<td ><c:out value="${appPerson.transactionYear}"/></td>
+								<td style="text-align:center"><c:out value="${appPerson.idNumber}"/></td>
+								<td style="text-align:center" class="hidden-480" ><c:out value="${appPerson.postcodeAddress}"/></td>
+								<td style="text-align:center"><c:out value="${appPerson.feeReduceTransactionStatus}"/></td>
+								<td	style="text-align:center"><c:out value="${appPerson.transactionIdentityId}"/></td>
+								<td style="text-align:center"><c:out value="${appPerson.transactionYear}"/></td>
 								<td style="text-align:center">
 									<a  href="<s:url value='/appPerson/showProxyUploadForm.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">上传</a>
 									<c:if test="${not empty appPerson.proxyUrl}">
