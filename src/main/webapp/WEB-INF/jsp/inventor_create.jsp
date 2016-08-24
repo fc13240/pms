@@ -77,18 +77,14 @@
 function validatePhoneNumber(phoneNumber) {
 	var reg = new RegExp("^[0-9]*$");
 	document.getElementById("phoneError").style.display = "none";
-	if (reg.test(phoneNumber)) {
+
 		if ( phoneNumber.length>20) {
 			document.getElementById("phoneError").style.display = "";
 			return false;
 		} else {
 			return true;
 		}
-	} else {
-		document.getElementById("phoneError").style.display = "";
-		return false;
-	}
-}
+	} 
 
 
 

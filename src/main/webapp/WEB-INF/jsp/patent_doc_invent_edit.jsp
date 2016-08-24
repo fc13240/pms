@@ -1137,7 +1137,7 @@ function savePatentDoc(value){
 			alert("操作失败");
 		}
 	});
-};
+}
 
 function loadImgs(){
 	var patentDocId=$("#patentDocId").val();
@@ -1338,7 +1338,20 @@ function loadImgs(){
 	
 
 	function preview_selfwrite(value){
-		savePatentDoc(value);
+		var name=$("#patentName").val();
+		var manual=$("#editorContent").val();
+		var abstractDescription=$("#editorContent7").val();
+		var rightClaim=$("#editorContent8").val();
+		$.ajax({
+			type: "POST",
+			url: "<s:url value='/editor/savePatentDoc.html'/>",
+			data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
+			success: function(data){
+			},
+			error: function(){
+				alert("操作失败");
+			}
+		});
 		window.open("<s:url value='/editor/previewPatentDoc.html'/>?patentDocId="+value)
 		
 	}

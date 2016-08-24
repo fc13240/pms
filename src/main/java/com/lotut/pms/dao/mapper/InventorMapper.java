@@ -30,7 +30,7 @@ public interface InventorMapper {
 
 	void addUserInventor(UserInventor userInventor);
 
-	int getIdByInventor(CommonInventor commonInventor);
+	Integer getIdByInventor(CommonInventor commonInventor);
 
 	void deleteUserInventorById(UserInventor userInventor);
 
