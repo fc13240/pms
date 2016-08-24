@@ -268,13 +268,9 @@
 									</div>
 								</div>
 							</div>
-							<div id="error_content7" style="margin-left: -50px; float: left; color: Red; text-align: right;" class="textarea"> 还可以输入300字
-							</div>
+							
 						</div>
-	<script type="text/plain" id="myEditor7_tools" style="display: none; width: 800px;
-	    height: 240px;">
- 
-	</script>
+
 	
 	                    
 						<!-- 权利要求及要素表 -->
@@ -406,7 +402,7 @@
 	<input type="hidden" id="tempId" name="name" value="">
 	<div class="right1" style="height: 647px; width: 25%;">
 	    <div class="data_title">
-	        <i class="icon"></i>撰写知识库
+	        <i class="icon"></i>撰写指南和模板
 	        
 	    </div>
 	    <input type="hidden" id="hidmodelbutton" value="100060010000">
