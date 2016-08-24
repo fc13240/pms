@@ -287,5 +287,22 @@ function gotoPageForEnter(event) {
 	}
 }
 </script>
+<script type="text/javascript">
+	$(function() {
+		formutil.setElementValue("#pageSizeSelect", ${page.pageSize});
+	});
+	
+	function setPageSize() {
+		var pageSize = $("#pageSizeSelect").val();
+		
+		$.ajax({
+			url: "<s:url value='/user/setPageSize.html'/>?pageSize=" + pageSize, 
+			type: 'get', 
+			success: function() {
+				location.reload();
+			}
+		});		
+	}	
+</script>
 </body>
 </html>
