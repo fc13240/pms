@@ -93,6 +93,26 @@
 
 		<div class="main">
 			<div class="tit_top">
+				<div class="pre_title">发明名称</div>
+			</div>
+			<div class="pre_text" id="div_1">${patentDoc.name }</div>
+			
+			<div class="tit_top">
+				<div class="pre_title">说明书</div>
+			</div>
+			<div class="pre_text" id="div_3">${patentDoc.manual}</div>
+			
+			<div class="tit_top">
+				<div class="pre_title">说明书附图</div>
+			</div>
+			<div  class="pre_text" id="div_6"></div>
+			
+			<div class="tit_top">
+				<div class="pre_title">权利要求</div>
+			</div>
+			<div class="pre_text" id="div_7">${patentDoc.rightClaim }</div>
+			
+			<div class="tit_top">
 				<div class="pre_title">摘要</div>
 				<%-- <div class="pre_clo">
 					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=7">
@@ -113,23 +133,9 @@
 				<img src='${base}${patentDoc.abstractImg}' alt='' width='400' height='300'/>
 			</c:if>
 			</div>
-			<div class="tit_top">
-				<div class="pre_title">摘要附图说明</div>
-			</div>
-			<div  class="pre_text" id="div_6"></div>
-			<div class="tit_top">
-				<div class="pre_title">权利要求书</div>
-			</div>
-			<div class="pre_text" id="div_7">${patentDoc.rightClaim }</div>
-			<div class="tit_top">
-				<div class="pre_title">发明名称</div>
-			</div>
-			<div class="pre_text" id="div_1">${patentDoc.name }</div>
 			
-			<div class="tit_top">
-				<div class="pre_title">说明书</div>
-				<div class="pre_text" id="div_3">${patentDoc.manual}</div>
-			</div>
+			
+			
 		<%-- 
 			<div class="tit_top">
 				<div class="pre_title">具体实施方式</div>
@@ -140,7 +146,7 @@
 			</div> --%>
 			<%-- <div class="pre_text" id="div_5">${patentDoc.implementWay }</div> --%>
 			 <div class="tit_top">
-				<div class="pre_title">附图及说明</div>
+				<div class="pre_title">摘要附图及说明</div>
 			</div>
 				<br/>
 				
