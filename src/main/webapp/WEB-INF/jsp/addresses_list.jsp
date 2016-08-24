@@ -52,7 +52,9 @@
 					  <h5>详细地址:</h5>
 					  <input type="text" class="form-control" style="width:300px;" name="detailAddress" id="detailAddress"  value="${contactAddresses.detailAddress}" required/>
 					  <h5>手机或固话</h5>
-					  <input type="text" class="form-control" style="width:300px;" name="phone" id="phone" value="${contactAddresses.phone}" required/>
+					  <input type="text" class="form-control" style="width:300px;" name="phone" id="phone" value="${contactAddresses.phone}" 
+					  		minlength="6" maxlength="15" onblur="validatePhoneNumber(this.value)" required/>
+					  <span	style="color: red; display: none;" id=phoneError>请输入正确的手机或者电话号</span>
 					  <input type="hidden" class="form-control" name="id" id="id" value="${contactAddresses.id}"/>
 					  <div style="height: 20px;"></div>
 					  <input type="submit" class="button button-primary  button-rounded" value="保存">
@@ -192,6 +194,33 @@ function loadStreets() {
 		})
 	} 
 }
+
+function validatePhoneNumber(phoneNumber) {
+	var reg = new RegExp("^[0-9]*$");
+	document.getElementById("phoneError").style.display = "none";
+	if (reg.test(phoneNumber)) {
+		if (phoneNumber.length<7 || phoneNumber.length>13) {
+			document.getElementById("phoneError").style.display = "";
+			return false;
+		} else {
+			return true;
+		}
+	} else {
+		document.getElementById("phoneError").style.display = "";
+		return false;
+	}
+}
+
+function check() {
+	var phone = document.getElementById("phone").value;
+	if (validatePhoneNumber(phone)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+	
 
 </script>
 
