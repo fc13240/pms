@@ -17,4 +17,6 @@ public interface PetitionDao {
 	void addCommonInventor(CommonInventor commonInventor);
 	
 	List<ContactAddress> findContactNameById(List<Integer> contactIds,int userId);
+	
+	void addPatentDocAppPerson(List<CommonAppPerson> commonAppPersons,Long patentDocId);
 }
