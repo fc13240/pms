@@ -22,7 +22,7 @@ if (hidSrc!=undefined) { //说明展示过编辑页面
 
   //控制那个编号↓
   var bh = parseInt($("#askPicList").children(".img_box1").length) + 1; 
-  $('#picBianHao').html(bh+"、");
+  //$('#picBianHao').html(bh+"、");
    
     $('#content5-1').hide();
     $('#content5_build').show();
