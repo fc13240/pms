@@ -22,7 +22,7 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 					<div class="lt-box" style="padding:20px;">
-						  <div class="ta-top" style="margin-left:8px;"> 
+						  
 							<table class="search-table">
 						<tr>
 							<td>
@@ -34,11 +34,11 @@
 							</a> 
 							</td>
 							<td>
-							<button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="downloadProxyTemplate()">下载委托书模板</button>
+							<button type="button" style="width: 100px;margin:25px;" class="button button-rounded button-primary" onclick="downloadProxyTemplate()">下载委托书模板</button>
 							</td>
 						</tr>
 						</table>
-						</div>
+						
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
