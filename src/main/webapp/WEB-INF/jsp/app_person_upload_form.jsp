@@ -69,7 +69,7 @@
 				if(mime ==".doc" || mime ==".docx"){
 					return true;
 				}else{
-					alert("请上传后缀名为.doc或.docx格式的专利文档！");
+					alert("请上传后缀名为.doc或.docx格式的文档！");
 					return false;
 				}
 			}, 
