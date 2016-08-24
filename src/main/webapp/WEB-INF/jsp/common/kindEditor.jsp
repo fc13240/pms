@@ -32,14 +32,17 @@
 <script type="text/javascript">
 			var editor;
 			KindEditor.ready(function(K) {
+	
+			       
 				   editor = K.create('#editorContent', {
 				   cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
+				   cssData: 'body {font-family: "宋体"; font-size: 14px}',
  				   uploadJson : "${base}/kindeditor/file_upload.html", 
 				   fileManagerJson : '${base}/kindeditor/file_manager_json.html',
 				   resizeType : 2,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
 				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
-				   height  : '700px',
-				   width:'950px',
+				   height  : '510px',
+				   width:'990px',
 				   readonlyMode : false, //只读模式 默认为false
 				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : true,
@@ -71,6 +74,7 @@
 			KindEditor.ready(function(K) {
 				   editor7 = K.create('#editorContent7', {
 				   cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
+				   cssData: 'body {font-family: "宋体"; font-size: 14px}',
  				   uploadJson : "${base}/kindeditor/file_upload.html", 
 				   fileManagerJson : '${base}/kindeditor/file_manager_json.html',
 				   resizeType : 2,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
@@ -100,7 +104,6 @@
 				   
 				});
 				prettyPrint();
-				/* editor7.html("<strong>请填写群里要求部分！</strong>"); */
 			});
 		</script>
 		<script type="text/javascript">
@@ -109,6 +112,7 @@
 				   editor8 = K.create('#editorContent8', {
 				   cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
  				   uploadJson : "${base}/kindeditor/file_upload.html", 
+ 				  cssData: 'body {font-family: "宋体"; font-size: 14px}',
 				   fileManagerJson : '${base}/kindeditor/file_manager_json.html',
 				   resizeType : 2,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
 				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
@@ -137,6 +141,6 @@
 				   
 				});
 				prettyPrint();
-				/* editor8.html("<strong>请填写专利的摘要！</strong>"); */
+
 			});
 		</script>

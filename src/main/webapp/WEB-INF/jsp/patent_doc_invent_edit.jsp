@@ -92,7 +92,7 @@
 		</script> 
 </head>
 
-<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1)">
+<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1);searGuide(this)">
 <style>
 .model1:hover .button{display:block}
 </style>	
@@ -127,11 +127,11 @@
 	                <div class="center_top">
 	                    <div class="backedit">
 	                        <a href="<s:url value='/editor/patentDocList.html'/>" >返回撰写列表</a></div>
-	                    <div class="save" onclick="savePatentDoc(${patentDoc.patentDocId});">
-	                        <i class="icon"></i>
-	                        <div class="span" >保存</div>
-	                    </div>
-
+						<div>
+							<a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
+							<button class="button button-primary  button-rounded"  data-placement="bottom" >保存</button>
+							</a>
+						</div>
 	                    
 	                    <div class="top_right">
 	                        <div class="review" onclick="preview_selfwrite(${patentDoc.patentDocId});">
@@ -147,9 +147,9 @@
 						<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
 						<div class="content" id="content0">
 							<div class="title">
-								发明名称:
+								说明书:
 								<div style="margin-left: 33px;">
-									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入发明名称"  value="${patentDoc.name}">
+									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入说明书名称"  value="${patentDoc.name}">
 								</div>
 							</div>
 							<div class="cl">
@@ -160,7 +160,7 @@
 										    <div class="wraper">
 									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 									            	<tr>
-									                    <td style="width:520px;" >
+									                    <td>
 									                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
 									                    	${patentDoc.manual }
 									                    	</textarea>
@@ -366,7 +366,9 @@
 								 	<input id="patentDocAttachmentFile" type="hidden" name="patentDocAttachmentFile" value="${patentDoc.patentDocAttachmentFile}">
 								 	<font size="3" font_family="Microsoft YaHei" color="black">附图说明:</font>
 									<input id="piciLlus2" name="caption" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
-									<font size="3" font_family="Microsoft YaHei" color="black">附图说明:</font>
+									<p>
+									<font size="3" font_family="Microsoft YaHei" color="black">附图标记:</font>
+									</p>
 									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
 									
@@ -435,10 +437,12 @@
 	        +设为模板</div>
 	    <div class="right_right_bot" tab_name="content0" style="height: 600px; overflow-x: hidden; overflow-y: auto;">
 	        <div class="data_menu">
-	            <div class="menud" id="modelS" onclick="searModel(this)">
-	                模板库</div>
 	            <div class="menud" id="modelS" onclick="searGuide(this)">
-	                撰写指南</div>	
+	            	 撰写指南
+	            </div>	
+	            <div class="menud" id="modelS" onclick="searModel(this)">
+	               	 模板库
+	            </div>
 	        </div>
 			<div>
 				<div class="model-list">
