@@ -47,7 +47,7 @@
 								<span class="lbl"></span> </label>
 							  </th>
 							  <th class="center" width="50">序号</th>
-							  <th width="60x">姓名或名称</th>
+							  <th width="75px">姓名或名称</th>
 							  <th>证件号码 </th>
 							  <th>邮编及地址</th>
 							  <th>费减备案状态</th>
