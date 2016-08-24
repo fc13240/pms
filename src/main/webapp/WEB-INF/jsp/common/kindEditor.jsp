@@ -104,7 +104,6 @@
 				   
 				});
 				prettyPrint();
-				/* editor7.html("<strong>请填写群里要求部分！</strong>"); */
 			});
 		</script>
 		<script type="text/javascript">
@@ -142,6 +141,6 @@
 				   
 				});
 				prettyPrint();
-				/* editor8.html("<strong>请填写专利的摘要！</strong>"); */
+
 			});
 		</script>

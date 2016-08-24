@@ -127,11 +127,11 @@
 	                <div class="center_top">
 	                    <div class="backedit">
 	                        <a href="<s:url value='/editor/patentDocList.html'/>" >返回撰写列表</a></div>
-	                    <div class="save" onclick="savePatentDoc(${patentDoc.patentDocId});">
-	                        <i class="icon"></i>
-	                        <div class="span" >保存</div>
-	                    </div>
-
+						<div>
+							<a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
+							<button class="button button-primary  button-rounded"  data-placement="bottom" >保存</button>
+							</a>
+						</div>
 	                    
 	                    <div class="top_right">
 	                        <div class="review" onclick="preview_selfwrite(${patentDoc.patentDocId});">
@@ -366,7 +366,9 @@
 								 	<input id="patentDocAttachmentFile" type="hidden" name="patentDocAttachmentFile" value="${patentDoc.patentDocAttachmentFile}">
 								 	<font size="3" font_family="Microsoft YaHei" color="black">附图说明:</font>
 									<input id="piciLlus2" name="caption" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
-									<font size="3" font_family="Microsoft YaHei" color="black">附图说明:</font>
+									<p>
+									<font size="3" font_family="Microsoft YaHei" color="black">附图标记:</font>
+									</p>
 									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
 									

@@ -343,7 +343,9 @@
 								 	<input id="patentDocAttachmentFile" type="hidden" name="patentDocAttachmentFile" value="${patentDoc.patentDocAttachmentFile}">
 									<font size="3" font_family="Microsoft YaHei" color="black">附图说明:</font>
 									<input id="piciLlus2" name="caption" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
-									<font size="3" font_family="Microsoft YaHei" color="black">附图说明:</font>
+									<p>
+									<font size="3" font_family="Microsoft YaHei" color="black">附图标记:</font>
+									</p>
 									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
 									

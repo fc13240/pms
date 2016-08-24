@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
-<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
 <title>龙图腾专利管家-通知书</title>
 <%@ include file="_css.jsp" %>
 
@@ -22,15 +22,23 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 					<div class="lt-box" style="padding:20px;">
-		  				<button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">新增申请人</button>
-		  				
+						  <div class="ta-top" style="margin-left:8px;"> 
+							<table class="search-table">
+						<tr>
+							<td>
+			  					<button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">新增申请人</button>
+			  				</td>
+			  				<td>
 							<a href="javascript:return void" onclick="batchShareAppPerson()" >
-							<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
+								<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
 							</a> 
-							
+							</td>
+							<td>
 							<button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="downloadProxyTemplate()">下载委托书模板</button>
-					
-						
+							</td>
+						</tr>
+						</table>
+						</div>
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
