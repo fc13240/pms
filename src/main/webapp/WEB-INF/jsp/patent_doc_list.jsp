@@ -75,7 +75,7 @@
 								<input type="checkbox" class="check-item" patentDocId="<c:out value='${patentDoc.patentDocId}'/>">
 								<span class="lbl"></span></label>
 								</td>
-								<td class="center" style="text-align:center"> ${status.count} </td>
+								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
 								<c:if test="${patentDoc.patentType==1}">
 									<td style="text-align:center"><c:out value="发明专利"/></td>
 								</c:if>
