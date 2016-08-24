@@ -116,7 +116,7 @@
 						摘要附图</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件</div>
-					<div style="display:none;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
+					<div style="display:block;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
 						请求书</div>
 				</div>
 	
@@ -224,7 +224,40 @@
 										<br/>
 										<h2>申请人:</h2>
 										<div id="appersonDiv">
-									
+											<%-- <a href="javascript:return void" onclick="batchAddAppPerson()" >
+											<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个申请人哦！">添加申请人</button>
+											</a> 
+											<table id="simple-table" class="table table-striped table-bordered table-hover">
+											  <thead>
+												<tr class="simple_bag">
+												  <th class="center"> <label class="pos-rel">
+													<input style="width:15px;" type="checkbox" class="apperson-check-item">
+													<span class="lbl"></span> </label>
+												  </th>
+												  <th class="center" width="50">序号</th>
+												  <th width="90px">姓名或名称</th>
+												  <th>证件号码 </th>
+												  <th>邮编及地址</th>
+												  <th width="120px">其它信息</th>
+												</tr>
+											  </thead>
+											  <tbody>
+												<c:forEach items="${appPersons}" var="appPerson" varStatus="status">
+												  <tr>
+													<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
+													<input type="checkbox" class="apperson-check-item" appPerson="<c:out value='${appPerson.appPersonId}'/>"></span>
+													<span class="lbl"></span></label>
+													</td>
+													<td class="center" style="text-align:center"> ${status.count} </td>
+													<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
+													<td style="text-align:center"><c:out value="${appPerson.idNumber}"/></td>
+													<td>${appPerson.postcodeAddress}</td>
+													<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
+												  </tr>
+												</c:forEach>
+											  </tbody>
+											</table> --%>
+	      									</div>
 										</div>
 									</div>
 									
@@ -619,7 +652,6 @@
 					  </th>
 					  <th class="center" width="50">序号</th>
 					  <th width="90px">姓名或名称</th>
-					  <th width="150px">申请人类型</th>
 					  <th>证件号码 </th>
 					  <th>邮编及地址</th>
 					  <th width="120px">其它信息</th>
@@ -634,8 +666,7 @@
 						</td>
 						<td class="center" style="text-align:center"> ${status.count} </td>
 						<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
-						<td style="text-align:center"><c:out value="${appPerson.typeName}"/></td>
-						<td style="text-align:center"><c:out value="${appPerson.peopleNumber}"/></td>
+						<td style="text-align:center"><c:out value="${appPerson.idNumber}"/></td>
 						<td>${appPerson.postcodeAddress}</td>
 						<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
 					  </tr>
@@ -668,14 +699,6 @@
 	         <div class = "modal-body" id="modal-body">
 					 <h5>姓名或名称:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalAppPersonName" required/>
-					<br>	   
-					     	<h5>申请人类型:</h5>
-					<select class="form-control" style="width:136px;display:inline;" onchange="loadCities()" id="modalAppPersonType" required>
-					  <option value='-1'>请选择</option>
-					  <c:forEach items="${appPersonTypes}" var="appPersonType">
-						<option value="${appPersonType.typeId}">${appPersonType.typeDescription}</option>
-					  </c:forEach>
-					</select>
 					<br>
 					<h5>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="modalPhoneRece" type="text" required onblur="validatePhoneNumber(this.value)"/>
@@ -920,7 +943,6 @@
 		 var sectionId = $("#templateSectionId").html();
 		 ++p;
 		 var totoalPage=getTotalPageBySectionId(sectionId);
-		 
 		 if(p>=totoalPage){
 			p=totoalPage;
 			$("#topDownPage").css("color","#ccc");
@@ -947,11 +969,6 @@
 		 var patentType=${patentDoc.patentType };
 		 $("#templateSectionId").html(sectionId);
 		 var totoalPage=getTotalPageBySectionId(sectionId);
-		/*  if(p>=totoalPage){
-				p=totoalPage;
-				$("#topDownPage").css("color","#ccc");
-				$("#bottomDownPage").css("color","#ccc");
-		 }; */
 		 $.ajax({
 			 type : "POST",
 			 url : "<s:url value='/editor/getTemplateList.html'/>",
@@ -1349,7 +1366,7 @@ function loadImgs(){
 		var phoneRece =$("#modalPhoneRece").val();
 		var postcodeAddress =$("#modalPostcodeAddress").val();
 		var otherInfo =$("#modalOtherInfo").val();
-		var formData ={"name":appPersonName,"type":appPersonType,"peopleNumber":phoneRece,"postcodeAddress":postcodeAddress,"otherInfo":otherInfo};
+		var formData ={"name":appPersonName,"type":appPersonType,"idNumber":phoneRece,"postcodeAddress":postcodeAddress,"otherInfo":otherInfo};
 		
 		$.ajax({
 			type : "POST",
