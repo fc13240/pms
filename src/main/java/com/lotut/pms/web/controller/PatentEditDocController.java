@@ -87,7 +87,7 @@ public class PatentEditDocController {
 			return "patent_doc_type_list";
 	}
 
-	@RequestMapping(path="/newPatentDoc")
+	@RequestMapping(path="/newPatentDoc",method=RequestMethod.GET)
 	public String inventionEditorForm(@RequestParam("patentType")int patentType, PatentDoc patentDoc,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
