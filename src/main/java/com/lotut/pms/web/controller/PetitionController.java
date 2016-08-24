@@ -95,9 +95,9 @@ public class PetitionController {
 	}
 	
 	@RequestMapping(path="/addPatentDocAppPerson",method=RequestMethod.POST)
-	public void addPatentDocAppPerson(@RequestParam("appPersonIds") List<Integer> appPersonIds,HttpResponse response){
+	public void addPatentDocAppPerson(@RequestParam("appPersonIds") List<Integer> appPersonIds,@RequestParam("patentDocId") Long patentDocId,HttpResponse response){
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<CommonAppPerson>  appersons = petitionService.findAppPersonNameById(appPersonIds,userId);
-
+		petitionService.addPatentDocAppPerson(appersons, patentDocId);
 	}
 }

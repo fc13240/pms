@@ -155,7 +155,7 @@
 							<div class="title">
 								专利名称
 								<div style="margin-left: 33px;">
-									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入专利名称"  value="${patentDoc.name}">
+									<input class="selectPointOfInterest form-control"  style="width:600px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入专利名称"  value="${patentDoc.name}">
 								</div>
 							</div>
 							<div class="cl">

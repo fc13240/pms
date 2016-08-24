@@ -227,10 +227,6 @@
 											<table id="simple-table" class="table table-striped table-bordered table-hover">
 											  <thead>
 												<tr class="simple_bag">
-												  <th class="center"> <label class="pos-rel">
-													<input type="checkbox" class="contact-check-item" name="checkall" />
-													<span class="lbl"></span> </label>
-												  </th>
 												  <th>序号</th>
 												  <th>联系人</th>
 												  <th>所在地区</th>
