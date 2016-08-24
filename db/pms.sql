@@ -574,6 +574,9 @@ CREATE TABLE IF NOT EXISTS patent_doc_section_types(
 	patent_doc_section_desc VARCHAR(10) NOT NULL COMMENT '专利主题'
 	
 );
+INSERT INTO patent_doc_section_types VALUES(1,'说明书');
+INSERT INTO patent_doc_section_types VALUES(2,'权利要求');
+INSERT INTO patent_doc_section_types VALUES(3,'摘要');
 
 CREATE TABLE IF NOT EXISTS patent_document_templates(
 	template_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -784,14 +787,4 @@ CREATE TABLE IF NOT EXISTS user_patent_docs (
 	CONSTRAINT fk_user_patent_doc_user FOREIGN KEY idx_fk_user_patent_doc_user (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
 	CONSTRAINT fk_user_patent_docs_patent_docs FOREIGN KEY idx_fk_user_patent_docs_patent_docs (patent_doc) REFERENCES patent_documents(patent_doc_id) ON DELETE CASCADE
 );
-
-
-
-DELETE FROM patent_document_templates;
-
-DELETE FROM  patent_doc_section_types;
-
-INSERT INTO patent_doc_section_types VALUES(1,'说明书');
-INSERT INTO patent_doc_section_types VALUES(2,'权利要求');
-INSERT INTO patent_doc_section_types VALUES(3,'摘要');
 
