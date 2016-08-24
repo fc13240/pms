@@ -36,4 +36,6 @@ public interface AppPersonMapper {
 	Integer getIdbyAppPerson(CommonAppPerson commonAppPerson);
 
 	void deleteUserAppPersonbyId(UserAppPerson userAppPerson);
+	
+	void updateAppPersonUserIdNull(CommonAppPerson commonAppPerson);
 }

@@ -128,4 +128,12 @@ public class AppPersonServiceImpl implements AppPersonService {
 		appPersonDao.deleteUserAppPersonbyId(userAppPerson);
 		
 	}
+
+
+	@Override
+	public void updateAppPersonUserIdNull(CommonAppPerson commonAppPerson) {
+		
+		appPersonDao.updateAppPersonUserIdNull(commonAppPerson);
+		
+	}
 }

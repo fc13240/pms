@@ -34,7 +34,7 @@
 					itemWidth        :   "140px",                 // 文件项的宽度
 					itemHeight       :   "115px",                 // 文件项的高度
 					url              :   "<s:url value='/kindeditor/uploadPic.html'/>",  // 上传文件的路径
-					fileType         :   ["jpg","png","jpeg"],// 上传文件的类型
+					fileType         :   ["jpg","png"],// 上传文件的类型
 					fileSize         :   51200000,                // 上传文件的大小
 					multiple         :   false,                    // 是否可以多个文件上传
 					dragDrop         :   false,                   // 是否可以拖动上传文件
@@ -116,7 +116,7 @@
 						摘要附图</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件</div>
-					<div style="display:none;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
+					<div style="display:block;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
 						请求书</div>
 				</div>
 	
@@ -224,7 +224,7 @@
 										<br/>
 										<h2>申请人:</h2>
 										<div id="appersonDiv">
-									
+											
 										</div>
 									</div>
 									
@@ -619,7 +619,6 @@
 					  </th>
 					  <th class="center" width="50">序号</th>
 					  <th width="90px">姓名或名称</th>
-					  <th width="150px">申请人类型</th>
 					  <th>证件号码 </th>
 					  <th>邮编及地址</th>
 					  <th width="120px">其它信息</th>
@@ -634,7 +633,6 @@
 						</td>
 						<td class="center" style="text-align:center"> ${status.count} </td>
 						<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
-						<td style="text-align:center"><c:out value="${appPerson.typeName}"/></td>
 						<td style="text-align:center"><c:out value="${appPerson.idNumber}"/></td>
 						<td>${appPerson.postcodeAddress}</td>
 						<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
@@ -668,14 +666,6 @@
 	         <div class = "modal-body" id="modal-body">
 					 <h5>姓名或名称:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalAppPersonName" required/>
-					<br>	   
-					     	<h5>申请人类型:</h5>
-					<select class="form-control" style="width:136px;display:inline;" onchange="loadCities()" id="modalAppPersonType" required>
-					  <option value='-1'>请选择</option>
-					  <c:forEach items="${appPersonTypes}" var="appPersonType">
-						<option value="${appPersonType.typeId}">${appPersonType.typeDescription}</option>
-					  </c:forEach>
-					</select>
 					<br>
 					<h5>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="modalPhoneRece" type="text" required onblur="validatePhoneNumber(this.value)"/>
@@ -920,7 +910,6 @@
 		 var sectionId = $("#templateSectionId").html();
 		 ++p;
 		 var totoalPage=getTotalPageBySectionId(sectionId);
-		 
 		 if(p>=totoalPage){
 			p=totoalPage;
 			$("#topDownPage").css("color","#ccc");
@@ -947,11 +936,6 @@
 		 var patentType=${patentDoc.patentType };
 		 $("#templateSectionId").html(sectionId);
 		 var totoalPage=getTotalPageBySectionId(sectionId);
-		/*  if(p>=totoalPage){
-				p=totoalPage;
-				$("#topDownPage").css("color","#ccc");
-				$("#bottomDownPage").css("color","#ccc");
-		 }; */
 		 $.ajax({
 			 type : "POST",
 			 url : "<s:url value='/editor/getTemplateList.html'/>",
@@ -1349,7 +1333,7 @@ function loadImgs(){
 		var phoneRece =$("#modalPhoneRece").val();
 		var postcodeAddress =$("#modalPostcodeAddress").val();
 		var otherInfo =$("#modalOtherInfo").val();
-		var formData ={"name":appPersonName,"type":appPersonType,"peopleNumber":phoneRece,"postcodeAddress":postcodeAddress,"otherInfo":otherInfo};
+		var formData ={"name":appPersonName,"type":appPersonType,"idNumber":phoneRece,"postcodeAddress":postcodeAddress,"otherInfo":otherInfo};
 		
 		$.ajax({
 			type : "POST",
