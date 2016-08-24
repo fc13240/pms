@@ -686,7 +686,7 @@ CREATE TABLE IF NOT EXISTS common_inventor (
   inventor_mobile INT(20) DEFAULT NULL COMMENT '电话号码',
   inventor_email VARCHAR(20) DEFAULT NULL COMMENT '邮箱' ,
   inventor_other_information VARCHAR(50) DEFAULT NULL COMMENT '其他信息',
-   proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址',
+  inventor_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址'
   user_id INT(11)  NOT NULL ,
   PRIMARY KEY(inventor_id),
   KEY fk_common_inventor_owner_id (user_id),
@@ -730,8 +730,6 @@ CREATE TABLE IF NOT EXISTS patent_doc_app_person(
 
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-
-ALTER TABLE common_inventor ADD COLUMN  inventor_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址'
 
 CREATE TABLE IF NOT EXISTS proxy_org (
 	org_id INT PRIMARY KEY  AUTO_INCREMENT ,
