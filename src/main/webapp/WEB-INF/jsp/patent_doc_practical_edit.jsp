@@ -35,7 +35,7 @@
 					itemWidth        :   "140px",                 // 文件项的宽度
 					itemHeight       :   "115px",                 // 文件项的高度
 					url              :   "<s:url value='/kindeditor/uploadPic.html'/>",  // 上传文件的路径
-					fileType         :   ["jpg","png"],// 上传文件的类型
+					fileType         :   ["jpg","png","jpeg"],// 上传文件的类型
 					fileSize         :   51200000,                // 上传文件的大小
 					multiple         :   false,                    // 是否可以多个文件上传
 					dragDrop         :   false,                   // 是否可以拖动上传文件

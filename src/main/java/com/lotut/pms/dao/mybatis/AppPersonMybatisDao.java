@@ -86,6 +86,12 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 	public void deleteUserAppPersonbyId(UserAppPerson userAppPerson) {
 		appPersonMapper.deleteUserAppPersonbyId(userAppPerson);
 	}
+	@Override
+	public void updateAppPersonUserIdNull(CommonAppPerson commonAppPerson) {
+		
+		appPersonMapper.updateAppPersonUserIdNull(commonAppPerson);
+		
+	}
 
 	
 	

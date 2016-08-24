@@ -37,8 +37,8 @@
   	   SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
   	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
   		p.postcode_address ,p.other_information ,u.user_id,u.username  FROM common_app_person p
-  		  left JOIN user_app_person up ON p.app_person_id = up.app_person 
-  		LEFT JOIN users u ON u.user_id = up.user
+  		   JOIN user_app_person up ON p.app_person_id = up.app_person AND p.user_id =up.user
+  		JOIN users u ON u.user_id = up.user
   		WHERE p.user_id=#{userId}
   	</select>
   	
@@ -110,5 +110,10 @@
   	<delete id="deleteUserAppPersonbyId" parameterType="UserAppPerson">
   		delete from  user_app_person where user=#{userId} and app_person = #{appPersonId}
   	</delete>
+  	
+  	<update id="updateAppPersonUserIdNull" parameterType="CommonAppPerson">
+  		update common_app_person set user_id = null where app_person_id = =#{appPersonId}
+  	
+  	</update>
   </mapper>
   

@@ -557,7 +557,7 @@ CREATE TABLE  IF NOT EXISTS patent_documents (
   abstract_img varchar(200) DEFAULT NULL COMMENT '摘要附图',
   patent_doc_attachment_file varchar(200) DEFAULT NULL COMMENT '上传附件保存地址',
   patent_doc_status int NOT NULL COMMENT '文档状态',
-  patent_doc_url varchar(200) default null,
+  patent_doc_url VARCHAR(200) default null COMMENT '文档保存地址',
   PRIMARY KEY (patent_doc_id),
   KEY fk_patent_documents_patent_type (patent_type),
   KEY fk_patent_documents_doc_owner_id (user_id),
@@ -565,7 +565,6 @@ CREATE TABLE  IF NOT EXISTS patent_documents (
   CONSTRAINT fk_patent_documents_patent_type FOREIGN KEY (patent_type) REFERENCES patent_types (patent_type_id),
   constraint fk_patent_documents_status foreign key idx_fk_patent_doc_status (patent_doc_status) references patent_doc_status(patent_doc_status_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE IF NOT EXISTS patent_doc_section_types(
 	patent_doc_section_id INT PRIMARY KEY,
@@ -660,7 +659,7 @@ CREATE TABLE IF NOT EXISTS common_inventor (
   PRIMARY KEY(inventor_id),
   KEY fk_common_inventor_owner_id (user_id),
   CONSTRAINT fk_common_inventor_owner_id FOREIGN KEY(user_id) REFERENCES users (user_id) 
-)
+);
 
 CREATE TABLE IF NOT EXISTS common_app_person (
   app_person_id BIGINT NOT NULL AUTO_INCREMENT,
@@ -677,7 +676,7 @@ CREATE TABLE IF NOT EXISTS common_app_person (
   PRIMARY KEY(app_person_id),
   KEY fk_common_app_person_owner_id (user_id),
   CONSTRAINT fk_common_app_person_owner_id FOREIGN KEY(user_id) REFERENCES users (user_id) ON   DELETE   CASCADE   ON   UPDATE   CASCADE 
-)
+);
 
 CREATE TABLE IF NOT EXISTS common_inventor (
   inventor_id BIGINT NOT NULL AUTO_INCREMENT,
@@ -693,7 +692,7 @@ CREATE TABLE IF NOT EXISTS common_inventor (
   KEY fk_common_inventor_owner_id (user_id),
   CONSTRAINT fk_common_inventor_owner_id FOREIGN KEY(user_id) REFERENCES users (user_id) 
   
-)	
+);	
 
 CREATE TABLE IF NOT EXISTS user_inventor(
   USER INT(11) NOT NULL DEFAULT '0',
@@ -702,7 +701,7 @@ CREATE TABLE IF NOT EXISTS user_inventor(
   KEY `fk_user_inventor` (`inventor`),
   CONSTRAINT `fk_share_inventor` FOREIGN KEY (inventor) REFERENCES `common_inventor` (inventor_id) ON DELETE CASCADE,
   CONSTRAINT `fk_user_inventor_user` FOREIGN KEY (USER) REFERENCES `users` (user_id) ON DELETE CASCADE
-) ENGINE=INNODB DEFAULT CHARSET=utf8
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
 
@@ -714,7 +713,7 @@ CREATE TABLE IF NOT EXISTS user_app_person (
   KEY `fk_user_app_person` (`app_person`),
   CONSTRAINT `fk_share_app_person_person` FOREIGN KEY (app_person) REFERENCES `common_app_person` (app_person_id) ON DELETE CASCADE,
   CONSTRAINT `fk_user_app_person_user` FOREIGN KEY (USER) REFERENCES `users` (user_id) ON DELETE CASCADE
-) ENGINE=INNODB DEFAULT CHARSET=utf8
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
 
@@ -781,4 +780,8 @@ CREATE TABLE IF NOT EXISTS user_patent_docs (
 	CONSTRAINT fk_user_patent_doc_user FOREIGN KEY idx_fk_user_patent_doc_user (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
 	CONSTRAINT fk_user_patent_docs_patent_docs FOREIGN KEY idx_fk_user_patent_docs_patent_docs (patent_doc) REFERENCES patent_documents(patent_doc_id) ON DELETE CASCADE
 );
+
+INSERT INTO patent_doc_section_types VALUES(1,'说明书');
+INSERT INTO patent_doc_section_types VALUES(2,'权利要求');
+INSERT INTO patent_doc_section_types VALUES(3,'摘要');
 
