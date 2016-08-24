@@ -92,7 +92,7 @@
 		</script> 
 </head>
 
-<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1)">
+<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1);searGuide(this)">
 <style>
 .model1:hover .button{display:block}
 </style>	
@@ -147,9 +147,9 @@
 						<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
 						<div class="content" id="content0">
 							<div class="title">
-								发明名称:
+								说明书:
 								<div style="margin-left: 33px;">
-									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入发明名称"  value="${patentDoc.name}">
+									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入说明书名称"  value="${patentDoc.name}">
 								</div>
 							</div>
 							<div class="cl">
@@ -160,7 +160,7 @@
 										    <div class="wraper">
 									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 									            	<tr>
-									                    <td style="width:520px;" >
+									                    <td>
 									                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
 									                    	${patentDoc.manual }
 									                    	</textarea>
@@ -433,10 +433,12 @@
 	        +设为模板</div>
 	    <div class="right_right_bot" tab_name="content0" style="height: 600px; overflow-x: hidden; overflow-y: auto;">
 	        <div class="data_menu">
-	            <div class="menud" id="modelS" onclick="searModel(this)">
-	                模板库</div>
 	            <div class="menud" id="modelS" onclick="searGuide(this)">
-	                撰写指南</div>	
+	            	 撰写指南
+	            </div>	
+	            <div class="menud" id="modelS" onclick="searModel(this)">
+	               	 模板库
+	            </div>
 	        </div>
 			<div>
 				<div class="model-list">
