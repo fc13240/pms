@@ -60,11 +60,9 @@
 	if(whichTab==0){
 	    $("#templateSectionId").html(1);
 		loadingTemplateBYTab(1);
-
 	}else if(whichTab==2){
 		$("#templateSectionId").html(2);
 		loadingTemplateBYTab(2);
-
 	}else if(whichTab==3){
 		$("#templateSectionId").html(3);
 		loadingTemplateBYTab(3);
@@ -129,6 +127,8 @@ function loadingGuideBYTab(sectionId){
 
 function loadingTemplateBYTab(sectionId){
 	var patentType=$("#patentType").val();
+	$("#topUpPage").css("color","#ccc");
+	$("#bottonUpPage").css("color","#ccc");
 	 $.ajax({
 		 type : "POST",
 		 url : "../editor/getTemplateList.html",

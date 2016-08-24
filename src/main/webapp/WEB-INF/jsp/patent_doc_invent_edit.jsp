@@ -10,7 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
-	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">  
+	 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 	<title>测试页面</title>
 	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.min.css'/>">
 	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap-theme.min.css'/>">
@@ -34,7 +34,7 @@
 					itemWidth        :   "140px",                 // 文件项的宽度
 					itemHeight       :   "115px",                 // 文件项的高度
 					url              :   "<s:url value='/kindeditor/uploadPic.html'/>",  // 上传文件的路径
-					fileType         :   ["jpg","png"],// 上传文件的类型
+					fileType         :   ["jpg","png","jpeg"],// 上传文件的类型
 					fileSize         :   51200000,                // 上传文件的大小
 					multiple         :   false,                    // 是否可以多个文件上传
 					dragDrop         :   false,                   // 是否可以拖动上传文件
@@ -629,7 +629,7 @@
 					<c:forEach items="${appPersons}" var="appPerson" varStatus="status">
 					  <tr>
 						<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-						<input type="checkbox" class="apperson-check-item" appPerson="<c:out value='${appPerson.appPersonId}'/>">
+						<input type="checkbox" class="apperson-check-item" appPerson="<c:out value='${appPerson.appPersonId}'/>"></span>
 						<span class="lbl"></span></label>
 						</td>
 						<td class="center" style="text-align:center"> ${status.count} </td>
