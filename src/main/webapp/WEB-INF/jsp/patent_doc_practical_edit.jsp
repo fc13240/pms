@@ -406,7 +406,7 @@
 	<input type="hidden" id="tempId" name="name" value="">
 	<div class="right1" style="height: 647px; width: 25%;">
 	    <div class="data_title">
-	        <i class="icon"></i>撰写知识库
+	        <i class="icon"></i>撰写指南和模板
 	        
 	    </div>
 	    <input type="hidden" id="hidmodelbutton" value="100060010000">
