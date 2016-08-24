@@ -93,7 +93,7 @@
 		</script> 
 </head>
 
-<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1)">
+<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1);searGuide(this)">
 <style>
 .model1:hover .button{display:block}
 </style>	
@@ -240,13 +240,6 @@
 									</tr>
 									</table>
 								</div>
-								
-								
-								
-								
-								
-								
-								
 							</div>
 						</div>
 						<input id="hideditor3id" type="hidden" autocomplete="off">
@@ -422,10 +415,10 @@
 	        +设为模板</div>
 	    <div class="right_right_bot" tab_name="content0" style="height: 600px; overflow-x: hidden; overflow-y: auto;">
 	        <div class="data_menu">
-	            <div class="menud" id="modelS" onclick="searModel(this)">
-	                模板库</div>
 	            <div class="menud" id="modelS" onclick="searGuide(this)">
 	                撰写指南</div>	
+	            <div class="menud" id="modelS" onclick="searModel(this)">
+	                模板库</div>
 	        </div>
 			<div>
 				<div class="model-list">
@@ -972,6 +965,19 @@ function loadImgs(){
 				alert("下载失败");
 			}
 		})
+	}
+	
+	function searModel(){
+		
+		$('.model-list').show();
+		$('.guide-list').hide();
+		
+	}
+	function searGuide(){
+		
+		$('.model-list').hide();
+		$('.guide-list').show();
+		
 	}
 	</script>
 </body>

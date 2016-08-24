@@ -20,7 +20,7 @@
 	</a> 
 	</li>
 	<li  class=""> <a href="<s:url value='/patentOfficeAccount/list.html'/>">
-	<h5>自动更新</h5>
+	<h5>数字证书</h5>
 	</a> 
 	</li>
 	<li  class=""> <a href="<s:url value='/patent/patentRecycled.html?currentPage=1'/>">

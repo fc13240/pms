@@ -65,6 +65,8 @@
 										        <form id="form" name="form" class="registerform" action="" onsubmit="return false;" method="post">
 										        	<div class="title" style="margin-left: 0px;">
 														<span>模板简述</span> <br/>
+													</div>
+													<div>
 														<span >
 															<input type="text" id="inventIntroduce" style="width: 848px" class="form-control" placeholder="请填写说明书模板简述" required="required"/>
 														</span>
@@ -99,9 +101,12 @@
 										        <form id="form1" name="form1" class="registerform" action="" onsubmit="return false;" method="post">
 										        	<div class="title" style="margin-left: 0px;">
 														<span>模板简述</span> <br/>
+													</div>
+													<div>
 														<span >
 															<input type="text" id="techDomain" style="width: 848px" class="form-control" placeholder="技术领域"/>
 														</span>
+													
 													</div>
 													<div style="height:20px;"></div>
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
@@ -135,6 +140,9 @@
 										        <form id="form2" name="form2" class="registerform" action="" onsubmit="return false;" method="post">
 										        	<div class="title" style="margin-left: 0px;">
 														<span>模板简述</span> <br/>
+														
+													</div>
+													<div>
 														<span >
 															<input type="text" id="rightClaim" style="width: 848px" class="form-control" placeholder="请填写权利要求模板简述" required="required"/>
 														</span>
@@ -169,6 +177,9 @@
 										        <form id="form3" name="form3" class="registerform" action="" onsubmit="return false;" method="post">
 										        <div class="title" style="margin-left: 0px;">
 													<span>模板简述</span> <br/>
+													
+												</div>
+												<div>
 													<span >
 														<input type="text" id="abstract" style="width: 848px" class="form-control" placeholder="请填写摘要模板简述" required="required"/>
 													</span>
@@ -203,6 +214,9 @@
 										        <form id="form6" name="form6" class="registerform" action="" onsubmit="return false;" method="post">
 										        	<div class="title" style="margin-left: 0px;">
 														<span>模板简述</span> <br/>
+														
+													</div>
+													<div>
 														<span >
 															<input type="text" id="implementWay" style="width: 848px" class="form-control" placeholder="具体实施方式" />
 														</span>
@@ -243,6 +257,8 @@
 										        <form id="form7" name="form7" class="registerform" action="" onsubmit="return false;" method="post">
 										            <div class="title" style="margin-left: 0px;">
 														<span>模板简述</span> <br/>
+													</div>
+													<div>
 														<span >
 															<input type="text" style="width: 848px" class="form-control" placeholder="摘要" />
 														</span>
@@ -285,6 +301,8 @@
 										        <form id="form8" name="form8" class="registerform" action="" onsubmit="return false;" method="post">
 										        	<div class="title" style="margin-left: 0px;">
 														<span>模板简述</span> <br/>
+													</div>
+													<div>
 														<span >
 															<input type="text" id="requestBook" style="width: 848px" class="form-control" placeholder="摘要" />
 														</span>
