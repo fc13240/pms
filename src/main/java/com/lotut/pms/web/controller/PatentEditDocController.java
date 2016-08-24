@@ -155,17 +155,8 @@ public class PatentEditDocController {
 		}
 		int totalCount=(int)patentDocService.getUserPatentDocCount(userId);
 		page.setTotalRecords(totalCount);
-		List<PatentDoc> patentDocss=patentDocService.getUserPatentDoc(page);
-		List<PatentDoc> patentDocs= new ArrayList<>();
-		for (PatentDoc patentDoc:patentDocss) {
-			if(patentDoc.getAbstractDescription()==null
-					&patentDoc.getName()==null&patentDoc.getManual()==null&patentDoc.getRightClaim()==null
-					&patentDoc.getAbstractImg()==null){
-				patentDocService.deleteNullPatentDoc();
-			}else{
-				patentDocs.add(patentDoc);
-			}
-		}
+		List<PatentDoc> patentDocs=patentDocService.getUserPatentDoc(page);
+
 		model.addAttribute("patentDocs", patentDocs);
 		model.addAttribute("page", page);
 		return "patent_doc_list";
@@ -180,20 +171,10 @@ public class PatentEditDocController {
 		}
 		page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
-		List<PatentDoc> patentDocs= new ArrayList<>();
 		List<PatentDoc> resultPatentDocs = patentDocService.searchUserPatentDocsByPage(searchCondition);
-		for (PatentDoc patentDoc:resultPatentDocs) {
-			if(patentDoc.getAbstractDescription()==null
-					&patentDoc.getName()==null&patentDoc.getManual()==null&patentDoc.getRightClaim()==null
-					&patentDoc.getAbstractImg()==null){
-					patentDocService.deleteNullPatentDoc();
-			}else{
-				patentDocs.add(patentDoc);
-			}
-		}
 		int totalCount=(int)patentDocService.searchUserPatentDocsCount(searchCondition);
 		page.setTotalRecords(totalCount);
-		model.addAttribute("patentDocs", patentDocs);
+		model.addAttribute("patentDocs", resultPatentDocs);
 		model.addAttribute("page", page);
 		return "patent_doc_list";
 	}
