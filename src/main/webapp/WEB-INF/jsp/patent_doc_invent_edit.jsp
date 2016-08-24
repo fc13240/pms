@@ -294,10 +294,10 @@
 							<div id="error_content7" style="margin-left: -50px; float: left; color: Red; text-align: right;" class="textarea"> 还可以输入300字
 							</div>
 						</div>
-	<script type="text/plain" id="myEditor7_tools" style="display: none; width: 800px;
+<%-- 	<script type="text/plain" id="myEditor7_tools" style="display: none; width: 800px;
 	    height: 240px;">
  
-	</script>
+	</script> --%>
 	
 	                    
 						<!-- 权利要求及要素表 -->
