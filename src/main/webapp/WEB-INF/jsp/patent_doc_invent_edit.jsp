@@ -303,15 +303,8 @@
 									</div>
 								</div>
 							</div>
-							<div id="error_content7" style="margin-left: -50px; float: left; color: Red; text-align: right;" class="textarea"> 还可以输入300字
 							</div>
 						</div>
-<%-- 	<script type="text/plain" id="myEditor7_tools" style="display: none; width: 800px;
-	    height: 240px;">
- 
-	</script> --%>
-	
-	                    
 						<!-- 权利要求及要素表 -->
 						<div class="content" id="content2" style="display: none; overflow: hidden;">
 							<div name="claims" style="float: left; width: 98%">
@@ -441,7 +434,7 @@
 	<input type="hidden" id="tempId" name="name" value="">
 	<div class="right1" style="height: 1000px; width: 25%;">
 	    <div class="data_title">
-	        <i class="icon"></i>撰写知识库
+	        <i class="icon"></i>撰写指南和模板
 	        
 	    </div>
 	    <input type="hidden" id="hidmodelbutton" value="100060010000">
@@ -1133,7 +1126,7 @@ function savePatentDoc(value){
 			alert("操作失败");
 		}
 	});
-};
+}
 
 function loadImgs(){
 	var patentDocId=$("#patentDocId").val();
@@ -1242,7 +1235,8 @@ function loadImgs(){
 	});
 	function batchAddAppPerson(){
 		var appPersonSelected = formutil.anyCheckboxItemSelected('tr td input.apperson-check-item');
-		var uniqueappPersonNos = []
+		var uniqueappPersonNos = [];
+		var patentDocId = ${patentDoc.patentDocId};
 		if (!appPersonSelected) {
 			formutil.alertMessage('请选择申请人');
 			
@@ -1259,7 +1253,7 @@ function loadImgs(){
 		$.ajax({
 			type : "POST",
 			//url : "<s:url value='/petition/findAppPersonNameById.html'/>?appPersonIds="+appPersonIds,
-			url : "<s:url value='/petition/addPatentDocAppPerson.html'/>?appPersonIds="+appPersonIds,
+			url : "<s:url value='/petition/addPatentDocAppPerson.html'/>?appPersonIds="+appPersonIds+"&patentDocId="+patentDocId,		
 			async :false,
 			success : function (data){
 				var obj= $.parseJSON(data);
@@ -1335,7 +1329,20 @@ function loadImgs(){
 	
 
 	function preview_selfwrite(value){
-		savePatentDoc(value);
+		var name=$("#patentName").val();
+		var manual=$("#editorContent").val();
+		var abstractDescription=$("#editorContent7").val();
+		var rightClaim=$("#editorContent8").val();
+		$.ajax({
+			type: "POST",
+			url: "<s:url value='/editor/savePatentDoc.html'/>",
+			data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
+			success: function(data){
+			},
+			error: function(){
+				alert("操作失败");
+			}
+		});
 		window.open("<s:url value='/editor/previewPatentDoc.html'/>?patentDocId="+value)
 		
 	}

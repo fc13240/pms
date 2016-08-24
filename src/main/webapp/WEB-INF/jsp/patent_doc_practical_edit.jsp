@@ -127,13 +127,11 @@
 	                <!--center-top start -->
 	                <div class="center_top">
 	                    <div class="backedit">
-	                        <a href="<s:url value='/editor/patentDocList.html'/>" >返回撰写列表</a></div>
-						<div>
-							<a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
-							<button class="button button-primary  button-rounded"  data-placement="bottom" >保存</button>
-							</a>
-						</div>
-	                    
+	                        <a href="<s:url value='/editor/patentDocList.html'/>" >返回撰写列表</a>
+	                         <a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
+								<button class="button button-primary  button-rounded"  data-placement="bottom" >保存</button>
+							 </a>
+	                    </div>
 	                    <div class="top_right">
 	                        <div class="review" onclick="preview_selfwrite();">
 	                            <i class="icon"></i>预览

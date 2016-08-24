@@ -33,14 +33,39 @@
   </insert>
   
   	
+  	<!-- <select id="getUserAppPersons" parameterType="int" resultMap="AppPersonWithShareUsers">
+  	    		
+  SELECT n.app_person_id ,n.name ,n.id_number,n.fee_reduce_transaction_status,
+	   n.transaction_identity_id,n.transaction_year,n.app_person_attachment_file,n.proxy_file,
+		n.postcode_address ,n.other_information ,u.user_id,u.username FROM (
+ (SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
+  	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
+  		p.postcode_address ,p.other_information ,u.user_id,u.username  FROM common_app_person p
+  		   JOIN user_app_person up ON p.app_person_id = up.app_person AND p.user_id= up.user
+  		 JOIN users u ON u.user_id = up.user
+  		WHERE p.user_id=#{userId}) m JOIN user_app_person a ON m.app_person_id = a.app_person) n
+  	</select>
+  	 -->
+  <!-- 	<select id="getUserAppPersons" parameterType="int" resultMap="AppPersonWithShareUsers">
+  		  SELECT  * FROM (
+(SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
+  	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
+  		p.postcode_address ,p.other_information ,u.username  FROM common_app_person p
+  		   JOIN user_app_person up ON p.app_person_id = up.app_person AND p.user_id= up.user
+  		 JOIN users u ON u.user_id = up.user
+  		WHERE p.user_id=2) m JOIN user_app_person a ON m.app_person_id = a.app_person )	
+  	</select> -->
+  	
+  	 	
   	<select id="getUserAppPersons" parameterType="int" resultMap="AppPersonWithShareUsers">
   	   SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
   	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
   		p.postcode_address ,p.other_information ,u.user_id,u.username  FROM common_app_person p
-  		   JOIN user_app_person up ON p.app_person_id = up.app_person AND p.user_id =up.user
-  		JOIN users u ON u.user_id = up.user
+  		   JOIN user_app_person up ON p.app_person_id = up.app_person and p.user_id=up.user
+  		 JOIN users u ON u.user_id = up.user
   		WHERE p.user_id=#{userId}
   	</select>
+ 
   	
   	<select id="getAllAppPersonByUser" parameterType="int" resultType="CommonAppPerson">
   		select p.app_person_id as appPersonId,p.name as name,p.id_number as idNumber,
@@ -112,7 +137,7 @@
   	</delete>
   	
   	<update id="updateAppPersonUserIdNull" parameterType="CommonAppPerson">
-  		update common_app_person set user_id = null where app_person_id = =#{appPersonId}
+  		update common_app_person set user_id = 0 where app_person_id=#{appPersonId} and user_id = #{userId}
   	
   	</update>
   </mapper>

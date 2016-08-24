@@ -71,7 +71,7 @@ public class InventorController {
 		inventorService.addInventor(inventor);
 		UserInventor userInventor=new UserInventor();
 		userInventor.setUserId(userId);
-		int inventorId=inventorService.getIdByInventor(inventor);
+		Integer inventorId=inventorService.getIdByInventor(inventor);
 		userInventor.setInventorId(inventorId);
 		inventorService.addUserInventor(userInventor);
 		return "redirect:/inventor/list.html";
@@ -94,14 +94,17 @@ public class InventorController {
 		
 	}
 	
-	@RequestMapping(path="/deleteInventorrInfo")
-	public String deleteInventorrInfo(@RequestParam("inventorId")int inventorId,Model model){
+	@RequestMapping(path="/deleteInventorInfo",method=RequestMethod.GET)
+	public String deleteInventorInfo(@RequestParam("inventorId")int inventorId){
+		System.out.println(inventorId);
 		int userId=PrincipalUtils.getCurrentUserId();
 		UserInventor userInventor = new UserInventor();
 		userInventor.setUserId(userId);
 		userInventor.setInventorId(inventorId);
+		System.out.println(userInventor.getInventorId()+"==================="+userInventor.getUserId());
 		inventorService.deleteUserInventorById(userInventor);
 		return "redirect:/inventor/list.html";
+	
 		
 	}
 	

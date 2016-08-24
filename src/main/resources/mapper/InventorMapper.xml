@@ -20,9 +20,9 @@
 	<select id="getUserInventors" parameterType="int" resultMap="InventorWithShareUsers">
   	   SELECT p.inventor_id ,p.inventor_name,p.inventor_id_number,p.inventor_nationality ,p.inventor_mobile ,p.inventor_email,p.inventor_attachment_file,
   		p.inventor_other_information ,u.user_id,u.username  FROM common_inventor p
-  		 LEFT JOIN user_inventor up ON p.inventor_id = up.inventor 
-  		LEFT JOIN users u ON u.user_id = up.user
-  		WHERE up.user=#{userId}
+  		   JOIN user_inventor up ON p.inventor_id = up.inventor and p.user_id= up.user
+  		 JOIN users u ON u.user_id = up.user
+  		WHERE p.user_id=#{userId}
   	</select>
 	
 	<insert id="addUserInventor" parameterType="UserInventor">
@@ -36,7 +36,7 @@
 	</select>
 	
 	<delete id="deleteUserInventorById" parameterType="UserInventor">
-		delete from  user_inventor where user=#{user_id} and inventor =#{inventorId}
+		delete from  user_inventor where user=#{userId} and inventor =#{inventorId}
 	</delete>
 	
 	<insert id="addInventor" parameterType="CommonInventor">
@@ -46,7 +46,6 @@
 	
 	</insert>
 	
-	<insert id=""></insert>
 	<select id="getAllInventorsByUser" parameterType="int" resultType="CommonInventor">
 		select inventor_id as inventorId ,inventor_name as inventorName,inventor_id_number as inventorNumber,
 		inventor_nationality as inventorNationality,inventor_mobile as inventorMobile,inventor_email as inventorEmail,

@@ -76,7 +76,7 @@ public class InventorServiceImpl implements InventorService{
 	}
 	
 	@Override
-	public int getIdByInventor(CommonInventor commonInventor) {
+	public Integer getIdByInventor(CommonInventor commonInventor) {
 		return inventorDao.getIdByInventor(commonInventor);
 	}
 	

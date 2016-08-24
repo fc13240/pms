@@ -2,23 +2,51 @@ package com.lotut.pms.domain;
 
 public class PatentDocAppPerson {
 	private long personId;
-	private long patent_doc_id;
+	private long patentDocId;
 	private String name;
-	private String id_number;
-	private String postcode_address;
-	private String other_information;
-	private int user_id;
+	private String idNumber;
+	private String postcodeAddress;
+	private String otherInformation;
+	private String transactionIdentity;
+	private String feeReduceTransactionStatus;
+	private String transactionYear;
+	private int userId;
+	
+	public String getOtherInformation() {
+		return otherInformation;
+	}
+	public void setOtherInformation(String otherInformation) {
+		this.otherInformation = otherInformation;
+	}
+	public String getTransactionIdentity() {
+		return transactionIdentity;
+	}
+	public void setTransactionIdentity(String transactionIdentity) {
+		this.transactionIdentity = transactionIdentity;
+	}
+	public String getFeeReduceTransactionStatus() {
+		return feeReduceTransactionStatus;
+	}
+	public void setFeeReduceTransactionStatus(String feeReduceTransactionStatus) {
+		this.feeReduceTransactionStatus = feeReduceTransactionStatus;
+	}
+	public String getTransactionYear() {
+		return transactionYear;
+	}
+	public void setTransactionYear(String transactionYear) {
+		this.transactionYear = transactionYear;
+	}
 	public long getPersonId() {
 		return personId;
 	}
 	public void setPersonId(long personId) {
 		this.personId = personId;
 	}
-	public long getPatent_doc_id() {
-		return patent_doc_id;
+	public long getPatentDocId() {
+		return patentDocId;
 	}
-	public void setPatent_doc_id(long patent_doc_id) {
-		this.patent_doc_id = patent_doc_id;
+	public void setPatent_doc_id(long patentDocId) {
+		this.patentDocId = patentDocId;
 	}
 	public String getName() {
 		return name;
@@ -26,28 +54,23 @@ public class PatentDocAppPerson {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getId_number() {
-		return id_number;
+	public String getIdNumber() {
+		return idNumber;
 	}
-	public void setId_number(String id_number) {
-		this.id_number = id_number;
+	public void setId_number(String idNumber) {
+		this.idNumber = idNumber;
 	}
-	public String getPostcode_address() {
-		return postcode_address;
+	public String getPostcodeAddress() {
+		return postcodeAddress;
 	}
-	public void setPostcode_address(String postcode_address) {
-		this.postcode_address = postcode_address;
+	public void setPostcodeAddress(String postcodeAddress) {
+		this.postcodeAddress = postcodeAddress;
 	}
-	public String getOther_information() {
-		return other_information;
+	
+	public int getUserId() {
+		return userId;
 	}
-	public void setOther_information(String other_information) {
-		this.other_information = other_information;
-	}
-	public int getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUser_id(int userId) {
+		this.userId = userId;
 	}
 }
