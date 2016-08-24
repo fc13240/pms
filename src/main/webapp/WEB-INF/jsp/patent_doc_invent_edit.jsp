@@ -102,7 +102,7 @@
 	        
 	    <input id="hiduserid" type="hidden" value="UC1706F442C97E4C58977D24E340EBF66">
 	    <div class="body">
-	        <div class="left" style="height: 700px;">
+	        <div class="left" style="height: 1000px;">
 				<!--申请文件九部分标签切换 -->
 				<div class="tab" id="tabWrap"> 
 					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">说明书</div>
@@ -122,7 +122,7 @@
 	
 	        </div>
 	        <div class="right">
-	            <div class="center" style="overflow: hidden; height: 642px; width: 75%;">
+	            <div class="center" style="overflow: hidden; height: 1000px; width: 75%;">
 	                <!--center-top start -->
 	                <div class="center_top">
 	                    <div class="backedit">
@@ -439,7 +439,7 @@
 	            
 	
 	<input type="hidden" id="tempId" name="name" value="">
-	<div class="right1" style="height: 647px; width: 25%;">
+	<div class="right1" style="height: 1000px; width: 25%;">
 	    <div class="data_title">
 	        <i class="icon"></i>撰写知识库
 	        
