@@ -29,7 +29,7 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;height:400px;">
-					  <h4>请选择要分配的好友 </h4>
+					  <h4>请选择要分享的好友 </h4>
 					  <div>
 						<form action="<s:url value='/patent/searchFriends.html'/>" method="get"  id="shareAddForm">
 						  <c:forEach items="${paramValues.patentDocIds}" var="patentDocId">
