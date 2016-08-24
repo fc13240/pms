@@ -966,6 +966,19 @@ function loadImgs(){
 			}
 		})
 	}
+	
+	function searModel(){
+		
+		$('.model-list').show();
+		$('.guide-list').hide();
+		
+	}
+	function searGuide(){
+		
+		$('.model-list').hide();
+		$('.guide-list').show();
+		
+	}
 	</script>
 </body>
 </html>
