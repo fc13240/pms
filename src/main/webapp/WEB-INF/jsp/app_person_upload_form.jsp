@@ -38,7 +38,7 @@
 						<input type="hidden" id="appPersonId" name="appPersonId" value="${appPersonId}">
 					</form> 
 					<div style="height:10px;">&nbsp;</div> 
-					<span style="color:#666;">友情提示：建议上传后缀名为.doc或.docx格式的专利文档!
+					<span style="color:#666;">友情提示：建议上传后缀名为.doc或.docx格式的文档!
 					</span>
 				</div>
 			</div>
