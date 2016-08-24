@@ -153,9 +153,9 @@
 						<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
 						<div class="content" id="content0">
 							<div class="title">
-								发明名称
+								专利名称
 								<div style="margin-left: 33px;">
-									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入发明名称"  value="${patentDoc.name}">
+									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入专利名称"  value="${patentDoc.name}">
 								</div>
 							</div>
 							<div class="cl">

@@ -224,7 +224,24 @@
 										<br/>
 										<h2>申请人:</h2>
 										<div id="appersonDiv">
-											
+											<table id="simple-table" class="table table-striped table-bordered table-hover">
+											  <thead>
+												<tr class="simple_bag">
+												  <th class="center"> <label class="pos-rel">
+													<input type="checkbox" class="contact-check-item" name="checkall" />
+													<span class="lbl"></span> </label>
+												  </th>
+												  <th>序号</th>
+												  <th>联系人</th>
+												  <th>所在地区</th>
+												  <th>地址</th>
+												  <th>联系电话</th>
+												</tr>
+											  </thead>
+											  <tbody>
+											  
+											  </tbody>
+											</table>
 										</div>
 									</div>
 									
@@ -1246,7 +1263,8 @@ function loadImgs(){
 		
 		$.ajax({
 			type : "POST",
-			url : "<s:url value='/petition/findAppPersonNameById.html'/>?appPersonIds="+appPersonIds,
+			//url : "<s:url value='/petition/findAppPersonNameById.html'/>?appPersonIds="+appPersonIds,
+			url : "<s:url value='/petition/addPatentDocAppPerson.html'/>?appPersonIds="+appPersonIds,
 			async :false,
 			success : function (data){
 				var obj= $.parseJSON(data);

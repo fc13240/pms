@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.alipay.util.httpClient.HttpResponse;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
@@ -91,5 +92,12 @@ public class PetitionController {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(path="/addPatentDocAppPerson",method=RequestMethod.POST)
+	public void addPatentDocAppPerson(@RequestParam("appPersonIds") List<Integer> appPersonIds,HttpResponse response){
+		int userId=PrincipalUtils.getCurrentUserId();
+		List<CommonAppPerson>  appersons = petitionService.findAppPersonNameById(appPersonIds,userId);
+
 	}
 }

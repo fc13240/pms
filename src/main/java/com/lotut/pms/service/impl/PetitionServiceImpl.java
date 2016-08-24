@@ -17,13 +17,11 @@ public class PetitionServiceImpl implements PetitionService {
 
 	@Override
 	public List<CommonInventor> findInventorNameById(List<Long> inventorIds, int userId) {
-		// TODO Auto-generated method stub
 		return petitionDao.findInventorNameById(inventorIds, userId);
 	}
 
 	@Override
 	public List<CommonAppPerson> findAppPersonNameById(List<Integer> appPersonIds, int userId) {
-		// TODO Auto-generated method stub
 		return petitionDao.findAppPersonNameById(appPersonIds, userId);
 	}
 
@@ -40,5 +38,10 @@ public class PetitionServiceImpl implements PetitionService {
 	@Override
 	public List<ContactAddress> findContactNameById(List<Integer> contactIds, int userId) {
 		return petitionDao.findContactNameById(contactIds, userId);
+	}
+
+	@Override
+	public void addPatentDocAppPerson(List<CommonAppPerson> commonAppPersons,Long patentDocId) {
+		petitionDao.addPatentDocAppPerson(commonAppPersons,patentDocId);
 	}
 }

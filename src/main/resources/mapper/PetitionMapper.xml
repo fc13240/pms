@@ -5,10 +5,9 @@
   
   <mapper namespace="com.lotut.pms.dao.mapper.PetitionMapper">
 	<select id="findAppPersonNameById" resultType="CommonAppPerson">
-  		select p.app_person_id as appPersonId,p.type as type,p.name as name,t.type_desc as typeName,p.id_number as peopleNumber,
-  		p.postcode_address as postcodeAddress,p.other_information as otherInfo from common_app_person p 
-  		join app_person_types t on p.type=t.type_id where  p.user_id=#{userId} and p.app_person_id in
-
+  		select app_person_id as appPersonId,name as name,id_number as idNumber,
+  		postcode_address as postcodeAddress,other_information as otherInfo from common_app_person 
+  		where user_id=#{userId} and app_person_id in
   		<foreach collection="appPersonIds" item="appPersonId" open="(" separator="," close=")">
 			#{appPersonId}
 		</foreach>
@@ -54,6 +53,13 @@
 		</foreach>
 		
 	</select>
+	
+	<insert id="addPatentDocAppPerson" >
+		insert into patent_doc_app_person(patent_doc_id,name,id_number,postcode_address,other_information,user_id) values
+		<foreach collection="commonAppPersons" item="commonAppPerson" separator=",">
+			(#{patentDocId},#{commonAppPerson.name},#{commonAppPerson.idNumber},#{commonAppPerson.postcodeAddress},#{commonAppPerson.otherInformation},#{commonAppPerson.userId})
+		</foreach>
+	</insert>
 
   </mapper>
   

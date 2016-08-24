@@ -46,6 +46,11 @@ public class PetitionMybatisDao extends SqlSessionDaoSupport implements Petition
 	public List<ContactAddress> findContactNameById(List<Integer> contactIds, int userId) {
 		return petitionMapper.findContactNameById(contactIds, userId);
 	}
+
+	@Override
+	public void addPatentDocAppPerson(List<CommonAppPerson> commonAppPersons,Long patentDocId) {
+		petitionMapper.addPatentDocAppPerson(commonAppPersons,patentDocId);
+	}
 	
 	
 

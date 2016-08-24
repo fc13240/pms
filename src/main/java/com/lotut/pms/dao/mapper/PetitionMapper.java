@@ -19,4 +19,6 @@ public interface PetitionMapper {
 	void addCommonInventor(CommonInventor commonInventor);
 	
 	List<ContactAddress> findContactNameById(@Param("contactIds") List<Integer> contactIds,@Param("userId") int userId);
+	
+	void addPatentDocAppPerson(@Param("commonAppPersons") List<CommonAppPerson> commonAppPersons,@Param("userId") Long patentDocId);
 }
