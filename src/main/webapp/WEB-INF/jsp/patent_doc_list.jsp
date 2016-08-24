@@ -64,7 +64,7 @@
 							  <th width="90px">标题</th>
 							  <th width="60px">创建时间</th>
 							  <th width="80px">更新时间</th>
-							  <th width="90px">文档状态</th>
+							  <!-- <th width="90px">文档状态</th> -->
 							  <th width="130px">操作</th>
 							</tr>
 						  </thead>
@@ -88,17 +88,18 @@
 								<td style="text-align:center"><c:out value="${patentDoc.name}"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.createTime}" pattern="yyyy-MM-dd"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td>
+								<%-- <td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> --%>
 								<td style="text-align:center">
 									<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 									编辑
 									</a><a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">预览</a>
 				                    <%-- <a onclick=" exportWord(${patentDoc.patentDocId});">导出</a> --%>
 				                    <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">删除</a>
-				                    <a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>
-				
-				                    <a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
-				                    <c:if test="${patentDoc.patentDocUrl != null}">
+				                    
+				                   <%--  <a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>
+				                    <a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a> --%>
+				                   
+				                   <c:if test="${patentDoc.patentDocUrl != null}">
 				                    <a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
 								</td>
