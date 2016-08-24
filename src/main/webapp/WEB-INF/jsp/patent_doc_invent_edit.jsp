@@ -39,7 +39,7 @@
 					multiple         :   false,                    // 是否可以多个文件上传
 					dragDrop         :   false,                   // 是否可以拖动上传文件
 					tailor           :   false,                   // 是否可以裁剪图片
-					del              :   true,                    // 是否可以删除文件
+					del              :   false,                    // 是否可以删除文件
 					finishDel        :   false,  				  // 是否在上传文件完成后删除预览
 					/* 外部获得的回调接口 */
 					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
