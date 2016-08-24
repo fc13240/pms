@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.alipay.util.httpClient.HttpResponse;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.PatentDocAppPerson;
 import com.lotut.pms.service.PetitionService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
@@ -95,9 +95,16 @@ public class PetitionController {
 	}
 	
 	@RequestMapping(path="/addPatentDocAppPerson",method=RequestMethod.POST)
-	public void addPatentDocAppPerson(@RequestParam("appPersonIds") List<Integer> appPersonIds,@RequestParam("patentDocId") Long patentDocId,HttpResponse response){
+	public void addPatentDocAppPerson(@RequestParam("appPersonIds") List<Integer> appPersonIds,@RequestParam("patentDocId") Long patentDocId,HttpServletResponse response){
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<CommonAppPerson>  appersons = petitionService.findAppPersonNameById(appPersonIds,userId);
-		petitionService.addPatentDocAppPerson(appersons, patentDocId);
+		petitionService.addPatentDocAppPerson(appersons, patentDocId,userId);
+		
+		List<PatentDocAppPerson> patentDocAppPersons = petitionService.findPatentDocAppPersonById(patentDocId);
+		try{
+			WebUtils.writeJsonStrToResponse(response, patentDocAppPersons);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 }

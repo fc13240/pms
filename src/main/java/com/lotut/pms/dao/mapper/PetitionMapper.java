@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.PatentDocAppPerson;
 
 public interface PetitionMapper {
 	
@@ -20,5 +21,7 @@ public interface PetitionMapper {
 	
 	List<ContactAddress> findContactNameById(@Param("contactIds") List<Integer> contactIds,@Param("userId") int userId);
 	
-	void addPatentDocAppPerson(@Param("commonAppPersons") List<CommonAppPerson> commonAppPersons,@Param("userId") Long patentDocId);
+	void addPatentDocAppPerson(@Param("commonAppPersons") List<CommonAppPerson> commonAppPersons,@Param("patentDocId") Long patentDocId,@Param("userId") int userId);
+	
+	List<PatentDocAppPerson> findPatentDocAppPersonById(@Param("patentDocId") Long patentDocId);
 }

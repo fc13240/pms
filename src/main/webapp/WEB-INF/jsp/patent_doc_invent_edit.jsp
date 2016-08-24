@@ -441,7 +441,7 @@
 	<input type="hidden" id="tempId" name="name" value="">
 	<div class="right1" style="height: 647px; width: 25%;">
 	    <div class="data_title">
-	        <i class="icon"></i>撰写知识库
+	        <i class="icon"></i>撰写指南和模板
 	        
 	    </div>
 	    <input type="hidden" id="hidmodelbutton" value="100060010000">
@@ -1242,7 +1242,8 @@ function loadImgs(){
 	});
 	function batchAddAppPerson(){
 		var appPersonSelected = formutil.anyCheckboxItemSelected('tr td input.apperson-check-item');
-		var uniqueappPersonNos = []
+		var uniqueappPersonNos = [];
+		var patentDocId = ${patentDoc.patentDocId};
 		if (!appPersonSelected) {
 			formutil.alertMessage('请选择申请人');
 			
@@ -1259,7 +1260,7 @@ function loadImgs(){
 		$.ajax({
 			type : "POST",
 			//url : "<s:url value='/petition/findAppPersonNameById.html'/>?appPersonIds="+appPersonIds,
-			url : "<s:url value='/petition/addPatentDocAppPerson.html'/>?appPersonIds="+appPersonIds,
+			url : "<s:url value='/petition/addPatentDocAppPerson.html'/>?appPersonIds="+appPersonIds+"&patentDocId="+patentDocId,		
 			async :false,
 			success : function (data){
 				var obj= $.parseJSON(data);

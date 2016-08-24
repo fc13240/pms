@@ -6,7 +6,8 @@
   <mapper namespace="com.lotut.pms.dao.mapper.PetitionMapper">
 	<select id="findAppPersonNameById" resultType="CommonAppPerson">
   		select app_person_id as appPersonId,name as name,id_number as idNumber,
-  		postcode_address as postcodeAddress,other_information as otherInfo from common_app_person 
+  		postcode_address as postcodeAddress,other_information as otherInfo,transaction_identity_id as transactionIdentityId,
+  		fee_reduce_transaction_status as feeReduceTransactionStatus,transaction_year as transactionYear from common_app_person 
   		where user_id=#{userId} and app_person_id in
   		<foreach collection="appPersonIds" item="appPersonId" open="(" separator="," close=")">
 			#{appPersonId}
@@ -55,11 +56,17 @@
 	</select>
 	
 	<insert id="addPatentDocAppPerson" >
-		insert into patent_doc_app_person(patent_doc_id,name,id_number,postcode_address,other_information,user_id) values
+		insert into patent_doc_app_person(patent_doc_id,name,id_number,postcode_address,other_information,transaction_identity,fee_reduce_transaction_status,transaction_year,user_id) values
 		<foreach collection="commonAppPersons" item="commonAppPerson" separator=",">
-			(#{patentDocId},#{commonAppPerson.name},#{commonAppPerson.idNumber},#{commonAppPerson.postcodeAddress},#{commonAppPerson.otherInformation},#{commonAppPerson.userId})
+			(#{patentDocId},#{commonAppPerson.name},#{commonAppPerson.idNumber},#{commonAppPerson.postcodeAddress},#{commonAppPerson.otherInfo},#{commonAppPerson.transactionIdentityId},#{commonAppPerson.feeReduceTransactionStatus},#{commonAppPerson.transactionYear},#{userId})
 		</foreach>
 	</insert>
 
+	<select id="findPatentDocAppPersonById" resultType="PatentDocAppPerson">
+		select patent_doc_id as patentDocId,name,id_number as idNumber,postcode_address as postcodeAddress,other_information as otherInformation,transaction_identity as transactionIdentity,
+    		fee_reduce_transaction_status as feeReduceTransactionStatus,transaction_year as transactionYear,user_id as userId from patent_doc_app_person
+    		where patent_doc_id=#{patentDocId};
+		
+	</select>
   </mapper>
   
