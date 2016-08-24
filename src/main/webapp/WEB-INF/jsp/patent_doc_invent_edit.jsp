@@ -1334,7 +1334,7 @@ function loadImgs(){
 	
 
 	function preview_selfwrite(value){
-		function savePatentDoc(value);
+		savePatentDoc(value);
 		window.open("<s:url value='/editor/previewPatentDoc.html'/>?patentDocId="+value)
 		
 	}
