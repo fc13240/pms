@@ -7163,7 +7163,7 @@ KindEditor.plugin('image', function(K) {
 			imageHeight = K.undef(options.imageHeight, ''),
 			imageTitle = K.undef(options.imageTitle, ''),
 			imageAlign = K.undef(options.imageAlign, ''),
-			showRemote = K.undef(options.showRemote, true),
+			showRemote = false,
 			showLocal = K.undef(options.showLocal, true),
 			tabIndex = K.undef(options.tabIndex, 0),
 			clickFn = options.clickFn;

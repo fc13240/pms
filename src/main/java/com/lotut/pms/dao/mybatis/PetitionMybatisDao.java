@@ -9,6 +9,7 @@ import com.lotut.pms.dao.mapper.PetitionMapper;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.PatentDocAppPerson;
 
 public class PetitionMybatisDao extends SqlSessionDaoSupport implements PetitionDao{
 
@@ -45,6 +46,16 @@ public class PetitionMybatisDao extends SqlSessionDaoSupport implements Petition
 	@Override
 	public List<ContactAddress> findContactNameById(List<Integer> contactIds, int userId) {
 		return petitionMapper.findContactNameById(contactIds, userId);
+	}
+
+	@Override
+	public void addPatentDocAppPerson(List<CommonAppPerson> commonAppPersons,Long patentDocId,int userId) {
+		petitionMapper.addPatentDocAppPerson(commonAppPersons,patentDocId,userId);
+	}
+
+	@Override
+	public List<PatentDocAppPerson> findPatentDocAppPersonById(Long patentDocId) {
+		return petitionMapper.findPatentDocAppPersonById(patentDocId);
 	}
 	
 	

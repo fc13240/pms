@@ -34,12 +34,12 @@
 					itemWidth        :   "140px",                 // 文件项的宽度
 					itemHeight       :   "115px",                 // 文件项的高度
 					url              :   "<s:url value='/kindeditor/uploadPic.html'/>",  // 上传文件的路径
-					fileType         :   ["jpg","png","jpeg"],// 上传文件的类型
+					fileType         :   ["jpg","png"],// 上传文件的类型
 					fileSize         :   51200000,                // 上传文件的大小
 					multiple         :   false,                    // 是否可以多个文件上传
 					dragDrop         :   false,                   // 是否可以拖动上传文件
 					tailor           :   false,                   // 是否可以裁剪图片
-					del              :   true,                    // 是否可以删除文件
+					del              :   false,                    // 是否可以删除文件
 					finishDel        :   false,  				  // 是否在上传文件完成后删除预览
 					/* 外部获得的回调接口 */
 					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
@@ -102,7 +102,7 @@
 	        
 	    <input id="hiduserid" type="hidden" value="UC1706F442C97E4C58977D24E340EBF66">
 	    <div class="body">
-	        <div class="left" style="height: 700px;">
+	        <div class="left" style="height: 1000px;">
 				<!--申请文件九部分标签切换 -->
 				<div class="tab" id="tabWrap"> 
 					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">说明书</div>
@@ -122,19 +122,18 @@
 	
 	        </div>
 	        <div class="right">
-	            <div class="center" style="overflow: hidden; height: 642px; width: 75%;">
+	            <div class="center" style="overflow: hidden; height: 1000px; width: 75%;">
 	                <!--center-top start -->
 	                <div class="center_top">
 	                    <div class="backedit">
-	                        <a href="<s:url value='/editor/patentDocList.html'/>" >返回撰写列表</a></div>
-						<div>
-							<a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
-							<button class="button button-primary  button-rounded"  data-placement="bottom" >保存</button>
-							</a>
-						</div>
-	                    
+	                        <a href="<s:url value='/editor/patentDocList.html'/>" >返回撰写列表</a>
+	                         <a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
+								<button class="button button-primary  button-rounded"  data-placement="bottom" >保存</button>
+							 </a>
+	                        
+	                     </div>
 	                    <div class="top_right">
-	                        <div class="review" onclick="preview_selfwrite(${patentDoc.patentDocId});">
+	                        <div style="float:left" class="review" onclick="preview_selfwrite(${patentDoc.patentDocId});">
 	                            <i class="icon"></i>预览
 	                        </div>
 
@@ -224,7 +223,20 @@
 										<br/>
 										<h2>申请人:</h2>
 										<div id="appersonDiv">
-									
+											<table id="simple-table" class="table table-striped table-bordered table-hover">
+											  <thead>
+												<tr class="simple_bag">
+												  <th>序号</th>
+												  <th>联系人</th>
+												  <th>所在地区</th>
+												  <th>地址</th>
+												  <th>联系电话</th>
+												</tr>
+											  </thead>
+											  <tbody>
+											  
+											  </tbody>
+											</table>
 										</div>
 									</div>
 									
@@ -291,15 +303,8 @@
 									</div>
 								</div>
 							</div>
-							<div id="error_content7" style="margin-left: -50px; float: left; color: Red; text-align: right;" class="textarea"> 还可以输入300字
 							</div>
 						</div>
-	<script type="text/plain" id="myEditor7_tools" style="display: none; width: 800px;
-	    height: 240px;">
- 
-	</script>
-	
-	                    
 						<!-- 权利要求及要素表 -->
 						<div class="content" id="content2" style="display: none; overflow: hidden;">
 							<div name="claims" style="float: left; width: 98%">
@@ -427,9 +432,9 @@
 	            
 	
 	<input type="hidden" id="tempId" name="name" value="">
-	<div class="right1" style="height: 647px; width: 25%;">
+	<div class="right1" style="height: 1000px; width: 25%;">
 	    <div class="data_title">
-	        <i class="icon"></i>撰写知识库
+	        <i class="icon"></i>撰写指南和模板
 	        
 	    </div>
 	    <input type="hidden" id="hidmodelbutton" value="100060010000">
@@ -619,7 +624,6 @@
 					  </th>
 					  <th class="center" width="50">序号</th>
 					  <th width="90px">姓名或名称</th>
-					  <th width="150px">申请人类型</th>
 					  <th>证件号码 </th>
 					  <th>邮编及地址</th>
 					  <th width="120px">其它信息</th>
@@ -634,8 +638,7 @@
 						</td>
 						<td class="center" style="text-align:center"> ${status.count} </td>
 						<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
-						<td style="text-align:center"><c:out value="${appPerson.typeName}"/></td>
-						<td style="text-align:center"><c:out value="${appPerson.peopleNumber}"/></td>
+						<td style="text-align:center"><c:out value="${appPerson.idNumber}"/></td>
 						<td>${appPerson.postcodeAddress}</td>
 						<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
 					  </tr>
@@ -668,14 +671,6 @@
 	         <div class = "modal-body" id="modal-body">
 					 <h5>姓名或名称:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalAppPersonName" required/>
-					<br>	   
-					     	<h5>申请人类型:</h5>
-					<select class="form-control" style="width:136px;display:inline;" onchange="loadCities()" id="modalAppPersonType" required>
-					  <option value='-1'>请选择</option>
-					  <c:forEach items="${appPersonTypes}" var="appPersonType">
-						<option value="${appPersonType.typeId}">${appPersonType.typeDescription}</option>
-					  </c:forEach>
-					</select>
 					<br>
 					<h5>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="modalPhoneRece" type="text" required onblur="validatePhoneNumber(this.value)"/>
@@ -920,7 +915,6 @@
 		 var sectionId = $("#templateSectionId").html();
 		 ++p;
 		 var totoalPage=getTotalPageBySectionId(sectionId);
-		 
 		 if(p>=totoalPage){
 			p=totoalPage;
 			$("#topDownPage").css("color","#ccc");
@@ -947,11 +941,6 @@
 		 var patentType=${patentDoc.patentType };
 		 $("#templateSectionId").html(sectionId);
 		 var totoalPage=getTotalPageBySectionId(sectionId);
-		/*  if(p>=totoalPage){
-				p=totoalPage;
-				$("#topDownPage").css("color","#ccc");
-				$("#bottomDownPage").css("color","#ccc");
-		 }; */
 		 $.ajax({
 			 type : "POST",
 			 url : "<s:url value='/editor/getTemplateList.html'/>",
@@ -1246,7 +1235,8 @@ function loadImgs(){
 	});
 	function batchAddAppPerson(){
 		var appPersonSelected = formutil.anyCheckboxItemSelected('tr td input.apperson-check-item');
-		var uniqueappPersonNos = []
+		var uniqueappPersonNos = [];
+		var patentDocId = ${patentDoc.patentDocId};
 		if (!appPersonSelected) {
 			formutil.alertMessage('请选择申请人');
 			
@@ -1262,7 +1252,8 @@ function loadImgs(){
 		
 		$.ajax({
 			type : "POST",
-			url : "<s:url value='/petition/findAppPersonNameById.html'/>?appPersonIds="+appPersonIds,
+			//url : "<s:url value='/petition/findAppPersonNameById.html'/>?appPersonIds="+appPersonIds,
+			url : "<s:url value='/petition/addPatentDocAppPerson.html'/>?appPersonIds="+appPersonIds+"&patentDocId="+patentDocId,		
 			async :false,
 			success : function (data){
 				var obj= $.parseJSON(data);
@@ -1362,7 +1353,7 @@ function loadImgs(){
 		var phoneRece =$("#modalPhoneRece").val();
 		var postcodeAddress =$("#modalPostcodeAddress").val();
 		var otherInfo =$("#modalOtherInfo").val();
-		var formData ={"name":appPersonName,"type":appPersonType,"peopleNumber":phoneRece,"postcodeAddress":postcodeAddress,"otherInfo":otherInfo};
+		var formData ={"name":appPersonName,"type":appPersonType,"idNumber":phoneRece,"postcodeAddress":postcodeAddress,"otherInfo":otherInfo};
 		
 		$.ajax({
 			type : "POST",

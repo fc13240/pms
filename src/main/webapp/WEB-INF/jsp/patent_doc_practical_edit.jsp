@@ -40,7 +40,7 @@
 					multiple         :   false,                    // 是否可以多个文件上传
 					dragDrop         :   false,                   // 是否可以拖动上传文件
 					tailor           :   false,                   // 是否可以裁剪图片
-					del              :   true,                    // 是否可以删除文件
+					del              :   false,                    // 是否可以删除文件
 					finishDel        :   false,  				  // 是否在上传文件完成后删除预览
 					/* 外部获得的回调接口 */
 					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
@@ -127,13 +127,11 @@
 	                <!--center-top start -->
 	                <div class="center_top">
 	                    <div class="backedit">
-	                        <a href="<s:url value='/editor/patentDocList.html'/>" >返回撰写列表</a></div>
-						<div>
-							<a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
-							<button class="button button-primary  button-rounded"  data-placement="bottom" >保存</button>
-							</a>
-						</div>
-	                    
+	                        <a href="<s:url value='/editor/patentDocList.html'/>" >返回撰写列表</a>
+	                         <a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
+								<button class="button button-primary  button-rounded"  data-placement="bottom" >保存</button>
+							 </a>
+	                    </div>
 	                    <div class="top_right">
 	                        <div class="review" onclick="preview_selfwrite();">
 	                            <i class="icon"></i>预览
@@ -153,9 +151,9 @@
 						<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
 						<div class="content" id="content0">
 							<div class="title">
-								发明名称
+								专利名称
 								<div style="margin-left: 33px;">
-									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入发明名称"  value="${patentDoc.name}">
+									<input class="selectPointOfInterest form-control"  style="width:600px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入专利名称"  value="${patentDoc.name}">
 								</div>
 							</div>
 							<div class="cl">

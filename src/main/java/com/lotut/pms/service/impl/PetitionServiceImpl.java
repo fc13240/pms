@@ -6,6 +6,7 @@ import com.lotut.pms.dao.PetitionDao;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.PatentDocAppPerson;
 import com.lotut.pms.service.PetitionService;
 
 public class PetitionServiceImpl implements PetitionService {
@@ -17,13 +18,11 @@ public class PetitionServiceImpl implements PetitionService {
 
 	@Override
 	public List<CommonInventor> findInventorNameById(List<Long> inventorIds, int userId) {
-		// TODO Auto-generated method stub
 		return petitionDao.findInventorNameById(inventorIds, userId);
 	}
 
 	@Override
 	public List<CommonAppPerson> findAppPersonNameById(List<Integer> appPersonIds, int userId) {
-		// TODO Auto-generated method stub
 		return petitionDao.findAppPersonNameById(appPersonIds, userId);
 	}
 
@@ -40,5 +39,15 @@ public class PetitionServiceImpl implements PetitionService {
 	@Override
 	public List<ContactAddress> findContactNameById(List<Integer> contactIds, int userId) {
 		return petitionDao.findContactNameById(contactIds, userId);
+	}
+
+	@Override
+	public void addPatentDocAppPerson(List<CommonAppPerson> commonAppPersons,Long patentDocId,int userId) {
+		petitionDao.addPatentDocAppPerson(commonAppPersons,patentDocId,userId);
+	}
+
+	@Override
+	public List<PatentDocAppPerson> findPatentDocAppPersonById(Long patentDocId) {
+		return petitionDao.findPatentDocAppPersonById(patentDocId);
 	}
 }

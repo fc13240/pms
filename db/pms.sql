@@ -717,15 +717,17 @@ CREATE TABLE IF NOT EXISTS user_app_person (
 
 
 
-CREATE TABLE IF NOT EXISTS patent_doc_app_person(
+ CREATE TABLE IF NOT EXISTS patent_doc_app_person(
 	person_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	patent_doc_id BIGINT NOT NULL,
-	NAME VARCHAR(20) NOT  NULL,
-	TYPE INT NOT  NULL,
-	id_number VARCHAR(20) NOT  NULL,
-	postcode_address VARCHAR(300) NOT  NULL,
-	other_information VARCHAR(50),
-	user_id INT NOT NULL,
+	patent_doc_id BIGINT NOT NULL COMMENT '文档编号',
+	NAME VARCHAR(20) NOT  NULL COMMENT '申请人姓名',
+	id_number VARCHAR(20) NOT NULL COMMENT '申请人身份证编号',
+	postcode_address VARCHAR(300) NOT  NULL COMMENT'邮编地址',
+	other_information VARCHAR(50) COMMENT'其他信息',
+	transaction_identity  VARCHAR(50) DEFAULT NULL COMMENT '备案证件号',
+	fee_reduce_transaction_status  VARCHAR(20) DEFAULT '未备案' COMMENT '费减备案',
+  	transaction_year  VARCHAR(20) DEFAULT NULL COMMENT '备案年度',
+	user_id INT NOT NULL COMMENT'创建者编号',
 	CONSTRAINT fk_patent_doc_app_person_doc_id FOREIGN KEY idx_fk_patent_doc_app_person_doc_id(patent_doc_id) REFERENCES patent_documents(patent_doc_id) ON   DELETE   CASCADE
 
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
