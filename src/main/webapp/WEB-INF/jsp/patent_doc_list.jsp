@@ -55,11 +55,11 @@
 						<table id="simple-table" class="table table-striped table-bordered table-hover" style="margin-top: 10px;">
 						<thead>
 						<tr class="simple_bag">
-							  <th class="center"> <label class="pos-rel">
+							  <th class="center" width="30px"> <label class="pos-rel">
 								<input type="checkbox" class="check-item" id="checkall"  name="checkall" />
 								<span class="lbl"></span> </label>
 							  </th>
-							  <th class="center" width="50">序号</th>
+							  <th class="center" width="50px">序号</th>
 							  <th width="90px">专利类型</th>
 							  <th width="90px">标题</th>
 							  <th width="60px">创建时间</th>
