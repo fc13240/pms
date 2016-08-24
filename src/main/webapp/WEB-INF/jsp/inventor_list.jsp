@@ -68,7 +68,7 @@
 								</td>
 								<td style="text-align:center"><c:out value="${inventor.inventorComment}"/></td>
 								<td><a href="<s:url value='/inventor/findOneInventorInfo.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>"> 编辑 </a> 
-								<a onclick="return confirm('确认要删除？')" href="<s:url value='/inventor/deleteInventorrInfo.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>">删除 </a>
+								<a onclick="return confirm('确认要删除？')" href="<s:url value='/inventor/deleteInventorInfo.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>">删除 </a>
 								<a href="<s:url value='/inventor/showFriends.html'/>?inventors=<c:out value='${inventor.inventorId}'/>">分享</a>
 								</td>
 							  </tr>
@@ -122,7 +122,7 @@
 		var inventorSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
 		var uniqueinventorNos = []
 		if (!inventorSelected) {
-			formutil.alertMessage('请选择发明人人');
+			formutil.alertMessage('请选择发明人');
 			
 			return;
 		}

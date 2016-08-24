@@ -96,6 +96,9 @@ public class AppPersonController {
 		UserAppPerson userAppPerson=new UserAppPerson();
 		userAppPerson.setUserId(userId);
 		userAppPerson.setAppPersonId(appPersonId);
+		CommonAppPerson commonAppPerson=new CommonAppPerson();
+		commonAppPerson.setUserId(userId);
+		commonAppPerson.setAppPersonId(appPersonId);
 		appPersonService.deleteUserAppPersonbyId(userAppPerson);
 		return "redirect:/appPerson/list.html";
 	}
@@ -108,7 +111,7 @@ public class AppPersonController {
 		model.addAttribute("friends", friends);
 		return "app_person_select_friends";
 	}
-	
+	@ModelAttribute
 	@RequestMapping(path="searchFriends", method=RequestMethod.GET)
 	public String searchFriends(@RequestParam("keyword")String keyword, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();

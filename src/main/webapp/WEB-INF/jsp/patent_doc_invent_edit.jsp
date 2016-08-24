@@ -34,7 +34,7 @@
 					itemWidth        :   "140px",                 // 文件项的宽度
 					itemHeight       :   "115px",                 // 文件项的高度
 					url              :   "<s:url value='/kindeditor/uploadPic.html'/>",  // 上传文件的路径
-					fileType         :   ["jpg","png"],// 上传文件的类型
+					fileType         :   ["jpg","png","jpeg"],// 上传文件的类型
 					fileSize         :   51200000,                // 上传文件的大小
 					multiple         :   false,                    // 是否可以多个文件上传
 					dragDrop         :   false,                   // 是否可以拖动上传文件
@@ -1126,7 +1126,7 @@ function savePatentDoc(value){
 			alert("操作失败");
 		}
 	});
-};
+}
 
 function loadImgs(){
 	var patentDocId=$("#patentDocId").val();
@@ -1329,7 +1329,20 @@ function loadImgs(){
 	
 
 	function preview_selfwrite(value){
-		savePatentDoc(value);
+		var name=$("#patentName").val();
+		var manual=$("#editorContent").val();
+		var abstractDescription=$("#editorContent7").val();
+		var rightClaim=$("#editorContent8").val();
+		$.ajax({
+			type: "POST",
+			url: "<s:url value='/editor/savePatentDoc.html'/>",
+			data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
+			success: function(data){
+			},
+			error: function(){
+				alert("操作失败");
+			}
+		});
 		window.open("<s:url value='/editor/previewPatentDoc.html'/>?patentDocId="+value)
 		
 	}
