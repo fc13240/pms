@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管家-通知书</title>
+<title>龙图腾专利管家-撰写列表</title>
 <%@ include file="_css.jsp" %>
 
 </head>
@@ -55,16 +55,16 @@
 						<table id="simple-table" class="table table-striped table-bordered table-hover" style="margin-top: 10px;">
 						<thead>
 						<tr class="simple_bag">
-							  <th class="center"> <label class="pos-rel">
+							  <th class="center" width="30px"> <label class="pos-rel">
 								<input type="checkbox" class="check-item" id="checkall"  name="checkall" />
 								<span class="lbl"></span> </label>
 							  </th>
-							  <th class="center" width="50">序号</th>
+							  <th class="center" width="50px">序号</th>
 							  <th width="90px">专利类型</th>
 							  <th width="90px">标题</th>
 							  <th width="60px">创建时间</th>
 							  <th width="80px">更新时间</th>
-							  <th width="90px">文档状态</th>
+							  <!-- <th width="90px">文档状态</th> -->
 							  <th width="130px">操作</th>
 							</tr>
 						  </thead>
@@ -88,17 +88,18 @@
 								<td style="text-align:center"><c:out value="${patentDoc.name}"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.createTime}" pattern="yyyy-MM-dd"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td>
+								<%-- <td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> --%>
 								<td style="text-align:center">
 									<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 									编辑
 									</a><a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">预览</a>
 				                    <%-- <a onclick=" exportWord(${patentDoc.patentDocId});">导出</a> --%>
 				                    <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">删除</a>
-				                    <a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>
-				
-				                    <a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
-				                    <c:if test="${patentDoc.patentDocUrl != null}">
+				                    
+				                   <%--  <a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>
+				                    <a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a> --%>
+				                   
+				                   <c:if test="${patentDoc.patentDocUrl != null}">
 				                    <a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
 								</td>
@@ -285,6 +286,23 @@ function gotoPageForEnter(event) {
 		gotoPage();
 	}
 }
+</script>
+<script type="text/javascript">
+	$(function() {
+		formutil.setElementValue("#pageSizeSelect", ${page.pageSize});
+	});
+	
+	function setPageSize() {
+		var pageSize = $("#pageSizeSelect").val();
+		
+		$.ajax({
+			url: "<s:url value='/user/setPageSize.html'/>?pageSize=" + pageSize, 
+			type: 'get', 
+			success: function() {
+				location.reload();
+			}
+		});		
+	}	
 </script>
 </body>
 </html>
