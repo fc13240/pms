@@ -28,12 +28,9 @@
 <script type="text/javascript" src="${base }/temp/zyupload/jquery.easing.min.js"></script>
 <link type="text/css" rel="stylesheet" media="screen" href="${base }/temp/zyupload/style.css" />
 <script src="<s:url value='/temp/js/formutil.js'/>" type="text/javascript"></script>
-<%-- <script src="${base }/plugins/kindeditor/layer.min.js" type="text/javascript"></script> --%>
 <script type="text/javascript">
 			var editor;
 			KindEditor.ready(function(K) {
-	
-			       
 				   editor = K.create('#editorContent', {
 				   cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
 				   cssData: 'body {font-family: "宋体"; font-size: 14px}',
@@ -66,7 +63,6 @@
 				});
 				
 				prettyPrint();
-				/* editor.html("<strong>请填写发明名称！</strong>"); */
 			});
 		</script>
 		<script type="text/javascript">

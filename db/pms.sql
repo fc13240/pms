@@ -543,7 +543,7 @@ CREATE TABLE IF NOT EXISTS patent_remarks (
 	CONSTRAINT fk_patent_remarks_user_id FOREIGN KEY idx_fk_patent_remarks_user_id (user_id) REFERENCES users(user_id) 
 );
 
-CREATE TABLE  patent_documents (
+CREATE TABLE  IF NOT EXISTS patent_documents (
   patent_doc_id bigint(20) NOT NULL AUTO_INCREMENT,
   app_no varchar(30) DEFAULT NULL,
   user_id int(11) DEFAULT NULL,
@@ -552,13 +552,12 @@ CREATE TABLE  patent_documents (
   last_update_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '专利更新时间',
   patent_name varchar(1000) DEFAULT NULL COMMENT '专利名称',
   manual mediumtext COMMENT '说明书',
-  figure_and_explaintion longblob COMMENT '附图及说明',
   right_claim mediumtext COMMENT '权利要求',
   abstract_desc mediumtext COMMENT '摘要',
   abstract_img varchar(200) DEFAULT NULL COMMENT '摘要附图',
   patent_doc_attachment_file varchar(200) DEFAULT NULL COMMENT '上传附件保存地址',
   patent_doc_status int NOT NULL COMMENT '文档状态',
-  patent_doc_url VARCHAR(200) COMMENT '文档保存地址',
+  patent_doc_url VARCHAR(200) default null COMMENT '文档保存地址',
   PRIMARY KEY (patent_doc_id),
   KEY fk_patent_documents_patent_type (patent_type),
   KEY fk_patent_documents_doc_owner_id (user_id),
@@ -567,14 +566,14 @@ CREATE TABLE  patent_documents (
   constraint fk_patent_documents_status foreign key idx_fk_patent_doc_status (patent_doc_status) references patent_doc_status(patent_doc_status_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
-
-
-
 CREATE TABLE IF NOT EXISTS patent_doc_section_types(
 	patent_doc_section_id INT PRIMARY KEY,
 	patent_doc_section_desc VARCHAR(10) NOT NULL COMMENT '专利主题'
 	
 );
+INSERT INTO patent_doc_section_types VALUES(1,'说明书');
+INSERT INTO patent_doc_section_types VALUES(2,'权利要求');
+INSERT INTO patent_doc_section_types VALUES(3,'摘要');
 
 CREATE TABLE IF NOT EXISTS patent_document_templates(
 	template_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -592,7 +591,7 @@ CREATE TABLE IF NOT EXISTS patent_document_templates(
 );
 
 
-CREATE TABLE patent_attachment (
+CREATE TABLE IF NOT EXISTS patent_attachment (
   attachment_id BIGINT NOT NULL AUTO_INCREMENT,
   attachment_url VARCHAR(200) DEFAULT NULL,
   patent_doc_id BIGINT,
@@ -743,10 +742,6 @@ CREATE TABLE IF NOT EXISTS proxy_org (
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 INSERT INTO proxy_org(org_user_id) VALUES (2);
-
-
-
-
 
 
 CREATE TABLE IF NOT EXISTS notice_remarks (
