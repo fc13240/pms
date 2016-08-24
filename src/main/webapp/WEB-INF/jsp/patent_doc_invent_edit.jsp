@@ -34,7 +34,7 @@
 					itemWidth        :   "140px",                 // 文件项的宽度
 					itemHeight       :   "115px",                 // 文件项的高度
 					url              :   "<s:url value='/kindeditor/uploadPic.html'/>",  // 上传文件的路径
-					fileType         :   ["jpg","png","jpeg"],// 上传文件的类型
+					fileType         :   ["jpg","png"],// 上传文件的类型
 					fileSize         :   51200000,                // 上传文件的大小
 					multiple         :   false,                    // 是否可以多个文件上传
 					dragDrop         :   false,                   // 是否可以拖动上传文件
@@ -224,40 +224,7 @@
 										<br/>
 										<h2>申请人:</h2>
 										<div id="appersonDiv">
-											<%-- <a href="javascript:return void" onclick="batchAddAppPerson()" >
-											<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个申请人哦！">添加申请人</button>
-											</a> 
-											<table id="simple-table" class="table table-striped table-bordered table-hover">
-											  <thead>
-												<tr class="simple_bag">
-												  <th class="center"> <label class="pos-rel">
-													<input style="width:15px;" type="checkbox" class="apperson-check-item">
-													<span class="lbl"></span> </label>
-												  </th>
-												  <th class="center" width="50">序号</th>
-												  <th width="90px">姓名或名称</th>
-												  <th>证件号码 </th>
-												  <th>邮编及地址</th>
-												  <th width="120px">其它信息</th>
-												</tr>
-											  </thead>
-											  <tbody>
-												<c:forEach items="${appPersons}" var="appPerson" varStatus="status">
-												  <tr>
-													<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-													<input type="checkbox" class="apperson-check-item" appPerson="<c:out value='${appPerson.appPersonId}'/>"></span>
-													<span class="lbl"></span></label>
-													</td>
-													<td class="center" style="text-align:center"> ${status.count} </td>
-													<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
-													<td style="text-align:center"><c:out value="${appPerson.idNumber}"/></td>
-													<td>${appPerson.postcodeAddress}</td>
-													<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
-												  </tr>
-												</c:forEach>
-											  </tbody>
-											</table> --%>
-	      									</div>
+											
 										</div>
 									</div>
 									
