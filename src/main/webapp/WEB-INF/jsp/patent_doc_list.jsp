@@ -60,9 +60,11 @@
 								<span class="lbl"></span> </label>
 							  </th>
 							  <th class="center" width="50">序号</th>
+							  <th width="90px">专利类型</th>
 							  <th width="90px">标题</th>
 							  <th width="60px">创建时间</th>
 							  <th width="80px">更新时间</th>
+							  <th width="90px">文档状态</th>
 							  <th width="130px">操作</th>
 							</tr>
 						  </thead>
@@ -74,9 +76,19 @@
 								<span class="lbl"></span></label>
 								</td>
 								<td class="center" style="text-align:center"> ${status.count} </td>
+								<c:if test="${patentDoc.patentType==1}">
+									<td style="text-align:center"><c:out value="发明专利"/></td>
+								</c:if>
+								<c:if test="${patentDoc.patentType==2}">
+									<td style="text-align:center"><c:out value="实用新型"/></td>
+								</c:if>
+								<c:if test="${patentDoc.patentType==3}">
+									<td style="text-align:center"><c:out value="外观设计"/></td>
+								</c:if>
 								<td style="text-align:center"><c:out value="${patentDoc.name}"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.createTime}" pattern="yyyy-MM-dd"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td>
 								<td style="text-align:center">
 									<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 									编辑
