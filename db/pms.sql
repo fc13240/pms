@@ -686,6 +686,7 @@ CREATE TABLE IF NOT EXISTS common_inventor (
   inventor_mobile INT(20) DEFAULT NULL COMMENT '电话号码',
   inventor_email VARCHAR(20) DEFAULT NULL COMMENT '邮箱' ,
   inventor_other_information VARCHAR(50) DEFAULT NULL COMMENT '其他信息',
+   proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址',
   user_id INT(11)  NOT NULL ,
   PRIMARY KEY(inventor_id),
   KEY fk_common_inventor_owner_id (user_id),
@@ -745,7 +746,6 @@ CREATE TABLE IF NOT EXISTS proxy_org (
 INSERT INTO proxy_org(org_user_id) VALUES (2);
 
 
-ALTER TABLE common_inventor ADD COLUMN  proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址'
 
 ALTER TABLE  patent_documents ADD COLUMN patent_doc_status int NOT NULL COMMENT '文档状态',
 

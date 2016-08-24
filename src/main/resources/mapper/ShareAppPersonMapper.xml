@@ -3,10 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotut.pms.dao.mapper.ShareAppPersonMapper">
-	
-	
-	
-	
 	<insert id="insertUserAppPersons" parameterType="list">
 		replace into user_app_person(user, app_person) 
 		values
@@ -14,7 +10,6 @@
 			(#{userAppPersonRecord.user}, #{userAppPersonRecord.appPerson})
 		</foreach>
 	</insert>	
-	
 	
 	
 </mapper>
