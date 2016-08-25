@@ -63,7 +63,7 @@
 	</insert>
 
 	<select id="findPatentDocAppPersonById" resultType="PatentDocAppPerson">
-		select patent_doc_id as patentDocId,name,id_number as idNumber,postcode_address as postcodeAddress,other_information as otherInformation,transaction_identity as transactionIdentity,
+		select person_id as personId,patent_doc_id as patentDocId,name,id_number as idNumber,postcode_address as postcodeAddress,other_information as otherInformation,transaction_identity as transactionIdentity,
     		fee_reduce_transaction_status as feeReduceTransactionStatus,transaction_year as transactionYear,user_id as userId from patent_doc_app_person
     		where patent_doc_id=#{patentDocId};
 		
