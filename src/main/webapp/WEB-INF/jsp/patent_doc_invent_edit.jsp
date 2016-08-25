@@ -379,7 +379,7 @@
 								 <form id="patentUrlForm" name="patentUrlForm"  method="post" enctype="multipart/form-data" class="form-horizontal">
 								 	<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
 								 	<input id="patentDocAttachmentFile" type="hidden" name="patentDocAttachmentFile" value="${patentDoc.patentDocAttachmentFile}">
-									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
+									<div id=patentImgUrl style="display:block"><!-- 自动插入ImgUrl --></div>
 									
 								  </form>
 									<div id="zyupload" class="zyupload"></div>

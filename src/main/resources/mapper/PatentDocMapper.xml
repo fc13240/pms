@@ -157,7 +157,7 @@
 				</if>
 	</select>
 	
-	<select id="getAttatchmentPicCount" >
+	<select id="getAttatchmentPicCount" resultType="int">
 		select count(*) from patent_attachment where patent_doc_id=#{patentDocId}
 	</select>	
 </mapper>
