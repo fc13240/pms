@@ -106,6 +106,8 @@ public class PatentEditDocController {
 			return "patent_doc_invent_edit";
 		}else if(patentType==2){
 			return "patent_doc_practical_edit";
+		}else if(patentType==3){
+			return "patent_doc_interface_edit";
 		}
 		return "";	
 	}
