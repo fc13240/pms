@@ -155,5 +155,9 @@
 			 	<if test="keyword != null">
 					and ( p.patent_name like #{keyword_pattern})
 				</if>
+	</select>
+	
+	<select id="getAttatchmentPicCount" resultType="int">
+		select count(*) from patent_attachment where patent_doc_id=#{patentDocId}
 	</select>	
 </mapper>

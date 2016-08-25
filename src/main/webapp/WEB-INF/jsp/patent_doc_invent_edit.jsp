@@ -33,7 +33,7 @@
 					height           :   "400px",                 // 宽度
 					itemWidth        :   "140px",                 // 文件项的宽度
 					itemHeight       :   "115px",                 // 文件项的高度
-					url              :   "<s:url value='/kindeditor/uploadPic.html'/>",  // 上传文件的路径
+					url              :   "<s:url value='/kindeditor/uploadPic.html'/>?patentDocId=${patentDoc.patentDocId}",  // 上传文件的路径
 					fileType         :   ["jpg","png","jpeg"],// 上传文件的类型
 					fileSize         :   51200000,                // 上传文件的大小
 					multiple         :   false,                    // 是否可以多个文件上传
@@ -65,11 +65,10 @@
 					onSuccess: function(file, response){
 						// 文件上传成功的回调方法
 						var Jresponse=$.parseJSON(response);
-						$("#patentImgUrl").append("<input type='hidden' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
+						$("#patentImgUrl").append("<input type='text' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
+						$("#patentImgUrl").append("<input type='text' id='picName' name='picName' value='"+Jresponse["picName"]+"'/>");
 						savePatentImgUrl();
 						$("#patentImgUrl").empty();
-						$('#piciLlus2').val("请填写附图说明，例如”图1为本发明实施例XX的方法流程示意图”。").css('color', '#999');
-					    $('#picMarkiLlus2').val("请填写附图标记说明，例如“1杯子主体，2杯子把手”。").css('color', '#999');
 					},
 					onFailure: function(file, response){          // 文件上传失败的回调方法
 						console.info("此文件上传失败：");
@@ -380,13 +379,7 @@
 								 <form id="patentUrlForm" name="patentUrlForm"  method="post" enctype="multipart/form-data" class="form-horizontal">
 								 	<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
 								 	<input id="patentDocAttachmentFile" type="hidden" name="patentDocAttachmentFile" value="${patentDoc.patentDocAttachmentFile}">
-								 	<font size="3" font_family="Microsoft YaHei" color="black">附图说明:</font>
-									<input id="piciLlus2" name="caption" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
-									<p>
-									<font size="3" font_family="Microsoft YaHei" color="black">附图标记:</font>
-									</p>
-									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
-									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
+									<div id=patentImgUrl style="display:block"><!-- 自动插入ImgUrl --></div>
 									
 								  </form>
 									<div id="zyupload" class="zyupload"></div>
@@ -898,8 +891,8 @@
 	});
 	function savePatentImgUrl() {
 		if ($("#patentUrl").length > 0) {
-			var caption = $("#piciLlus2").val();
-			var label = $("#picMarkiLlus2").val();
+			var caption = $("#picName").val();
+			var label = "标签";
 			var attachmentUrl = $("#patentUrl").val();
 			var patentDocId=$("#patentDocId").val();
 			$.ajax({

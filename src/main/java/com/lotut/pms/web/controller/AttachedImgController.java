@@ -21,17 +21,16 @@ import com.lotut.pms.web.util.WebUtils;
 public class AttachedImgController {
 private static final Logger LOGGER = Logger.getLogger(AttachedImgController.class);  
     
-    @RequestMapping(path="/attachmentImg/{fileType}/{uploadDate}/{fileName}.{suffix}.html")  
+    @RequestMapping(path="/attachmentImg/{fileType}/{fileName}.{suffix}.html")  
     public void attached(HttpServletRequest request, HttpServletResponse response,   
-            @PathVariable String fileType,  
-            @PathVariable String uploadDate,  
+            @PathVariable String fileType,   
             @PathVariable String suffix,  
             @PathVariable String fileName) {  
           
         InputStream is = null;  
         OutputStream os = null;  
         try {  
-            File file = new File(Settings.PATENTDOC_ATTACHMENT_PATH + fileType + "/" + uploadDate + "/" + fileName + "." + suffix);  
+            File file = new File(Settings.PATENTDOC_ATTACHMENT_PATH + fileType  + "/" + fileName + "." + suffix);  
             
             WebUtils.writeStreamToResponse(response, new FileInputStream(file));
         } catch (Exception e) {  

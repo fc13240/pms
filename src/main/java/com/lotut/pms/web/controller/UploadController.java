@@ -36,6 +36,7 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,26 +51,37 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.lotut.pms.constants.Settings;
+import com.lotut.pms.service.AppPersonService;
+import com.lotut.pms.service.FriendService;
+import com.lotut.pms.service.InventorService;
+import com.lotut.pms.service.PatentDocService;
+import com.lotut.pms.service.PatentDocumentTemplateService;
+import com.lotut.pms.service.UserService;
 import com.lotut.pms.web.util.WebUtils;
 
 
 @Controller
 @RequestMapping(path="/kindeditor")
 public class UploadController {
-  
+	private PatentDocService patentDocService;
+	
+	@Autowired
+	public UploadController(PatentDocService patentDocService) {
+		this.patentDocService = patentDocService;
+	}
 	   
 	   @RequestMapping(path = "/uploadPic",method=RequestMethod.POST)
 		public void uploadPic(@RequestParam("patentDocId") int patentDocId,HttpServletRequest request1 ,HttpServletResponse response1)  {
 		   try{
 			   String savePath = Settings.PATENTDOC_ATTACHMENT_PATH;
-				
+			   int count=patentDocService.getAttatchmentPicCount(patentDocId)+1;
 				String basePath = request1.getContextPath();
 /*				String basePath = request1.getScheme() + "://" + request1.getLocalAddr() + ":" + request1.getServerPort()
 				+ path;*/
 				String saveUrl ="/attachmentImg/";
 				String dirName = request1.getParameter("dir");
 				if (dirName == null) {
-					dirName = "image";
+					dirName = patentDocId+"";
 				}
 				// 创建文件夹
 				savePath += dirName + "/";
@@ -90,17 +102,13 @@ public class UploadController {
 		                // 数据封装操作 MultipartFile reqeust  
 		                // 取得当前上传文件的文 件名称  
 		                String fileName = file.getOriginalFilename(); 
-		                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		        		String ymd = sdf.format(new Date());
-		        		savePath += ymd + "/";
-		        		saveUrl += ymd + "/";
 		        		File dirFile = new File(savePath);
 		        		if (!dirFile.exists()) {
 		        			dirFile.mkdirs();
 		        		}
 		        		String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
-		        		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-		        		String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
+		        		String picName="图" +count;
+		        		String newFileName = picName+ "." + fileExt;
 		        		InputStream is = file.getInputStream();
 		        		int BUFFER_SIZE = 8 * 1024;
 		        		byte[] buffer = new byte[BUFFER_SIZE];
@@ -114,6 +122,7 @@ public class UploadController {
 		        		String url=saveUrl+newFileName+".html";
 		       		 	Map<String, Object> succMap = new HashMap<String, Object>(); 
 		                succMap.put("url", saveUrl + newFileName+".html");  
+		                succMap.put("picName",picName );
 		                WebUtils.writeJsonStrToResponse(response1, succMap);
 			   }
 		   }
