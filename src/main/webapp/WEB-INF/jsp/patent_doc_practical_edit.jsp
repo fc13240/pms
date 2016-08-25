@@ -133,7 +133,7 @@
 							 </a>
 	                    </div>
 	                    <div class="top_right">
-	                        <div class="review" onclick="preview_selfwrite();">
+	                        <div class="review" onclick="preview_selfwrite(${patentDoc.patentDocId});">
 	                            <i class="icon"></i>预览
 	                        </div>
 	                        <input type="hidden" id="patentType" value="${patentDoc.patentType }"/>
