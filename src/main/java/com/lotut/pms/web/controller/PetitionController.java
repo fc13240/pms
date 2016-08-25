@@ -1,6 +1,7 @@
 package com.lotut.pms.web.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -56,13 +57,16 @@ public class PetitionController {
 	}
 	
 	@RequestMapping(path="/addCommonAppPerson")
-	public void addCommonAppPerson(@ModelAttribute("commonAppPerson") CommonAppPerson commonAppPerson,HttpServletResponse response){
+	public void addCommonAppPerson(@ModelAttribute("commonAppPerson") CommonAppPerson commonAppPerson,@RequestParam("patentDocId") Long patentDocId,HttpServletResponse response){
 		int userId = PrincipalUtils.getCurrentUserId();
 		commonAppPerson.setUserId(userId);
 		petitionService.addCommonAppPerson(commonAppPerson);
-		
+		List<CommonAppPerson> commonAppPersons = new ArrayList<>();
+		commonAppPersons.add(commonAppPerson);
+		petitionService.addPatentDocAppPerson(commonAppPersons, patentDocId,userId);
+		List<PatentDocAppPerson> patentDocAppPersons = petitionService.findPatentDocAppPersonById(patentDocId);
 		try{
-			WebUtils.writeJsonStrToResponse(response, commonAppPerson);
+			WebUtils.writeJsonStrToResponse(response, patentDocAppPersons);
 		}catch(IOException e){
 			e.printStackTrace();
 		}

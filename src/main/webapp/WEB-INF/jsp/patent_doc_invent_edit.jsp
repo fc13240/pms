@@ -234,6 +234,8 @@
 												  <th>费减备案状态</th>
 												  <th>备案证件号</th>
 												  <th>备案年度</th>
+												  <th>其他信息</th>
+												  <th>操作</th>
 												</tr>
 											  </thead>
 											  <tbody id="appersonTab">
@@ -685,8 +687,22 @@
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="modalPhoneRece" type="text" required onblur="validatePhoneNumber(this.value)"/>
 					<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
 					<br>		  
-					     	<h5>邮编及地址:</h5>
+					<h5>邮编及地址:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="modalPostcodeAddress" type="text" required/>
+					<br>
+					<h5>费减备案状态:</h5>
+					<select id="modalFeeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;"  required>	
+					  <option value="未备案">未备案</option>
+					  <option value="委托中">委托中</option>
+					  <option value="备案成功">备案成功</option>
+					  <option value="备案失败">备案失败</option>
+					</select>
+					<br>
+					<h5>备案证件号:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalTransactionIdentityId"/>
+					<br>
+					<h5>备案年度:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalTransactionYear"/>
 					<br>
 					<h5>其他信息:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalOtherInfo"/>
@@ -1281,6 +1297,8 @@ function loadImgs(){
 							"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
 							"<td style='text-align:center'>"+item.transactionIdentity+"</td>"+
 							"<td style='text-align:center'>"+item.transactionYear+"</td>"+
+							"<td style='text-align:center'>"+item.otherInformation+"</td>"+
+							"<td style='text-align:center'><a></a></td>"+
 							"</tr>"
 					)
 				})
@@ -1366,11 +1384,17 @@ function loadImgs(){
 
 	function submitAppPersonForm(){
 		var appPersonName =$("#modalAppPersonName").val();
-		var appPersonType =$("#modalAppPersonType").val();
+		//var appPersonType =$("#modalAppPersonType").val();
 		var phoneRece =$("#modalPhoneRece").val();
 		var postcodeAddress =$("#modalPostcodeAddress").val();
+		var feeReduceTransactionStatus =$("#modalFeeReduceTransactionStatus").val();
+		var transactionIdentityId =$("#modalTransactionIdentityId").val();
+		var transactionYear =$("#modalTransactionYear").val();
 		var otherInfo =$("#modalOtherInfo").val();
-		var formData ={"name":appPersonName,"type":appPersonType,"idNumber":phoneRece,"postcodeAddress":postcodeAddress,"otherInfo":otherInfo};
+		
+		var patentDocId =${patentDoc.patentDocId};
+		var formData ={"name":appPersonName,"idNumber":phoneRece,"postcodeAddress":postcodeAddress,"otherInfo":otherInfo,"feeReduceTransactionStatus":feeReduceTransactionStatus,
+				       "transactionIdentityId":transactionIdentityId,"transactionYear":transactionYear,"patentDocId":patentDocId};
 		
 		$.ajax({
 			type : "POST",
@@ -1379,31 +1403,45 @@ function loadImgs(){
 			async : false,
 			success : function(data){
 				var obj= $.parseJSON(data);
-				$("#appersonDiv").append(
-						"<span class='ss-item' id='appPerson"+obj["appPersonId"]+"' style='margin-left:20px'>"+obj["name"]+""+
-						"<a class='icon-btn-x' href='#' onclick='deleteTag(appPerson"+obj["appPersonId"]+")'"+
-							">"+								
-							"<img src='<s:url value='/temp/images/delete.ico'/>' style='width:30px;height:25px'/>"+
-						"</a>"+
-						"<input type='text' name='commonAppPerson["+obj["appPersonId"]+"].appPersonId' value='"+obj["appPersonId"]+"'/>"+
-					 "</span>"
-				)
+				$("#appersonTab").empty();
+				$.each(obj,function(i,item){
+					$("#appersonTab").append(
+							"<tr>"+
+							//"<td class='center' style='text-align:center'><label class='pos-rel'> <span class='batch-share-item'>"+
+							//"<input type='checkbox' class='check-item' appPerson=<c:out value='"+item.personId+"'/>'>"+
+							//"<span class='lbl'></span></label>"+
+							//"</td>"+
+							//"<td class='center' style='text-align:center'><input type='checkbox' class='check-item'/></td>"+
+							//"<td class='center' style='text-align:center'>"+i+"</td>"+
+							"<td style='text-align:center'>"+item.name+"</td>"+
+							"<td style='text-align:center'>"+item.idNumber+"</td>"+
+							"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
+							"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
+							"<td style='text-align:center'>"+item.transactionIdentity+"</td>"+
+							"<td style='text-align:center'>"+item.transactionYear+"</td>"+
+							"<td style='text-align:center'>"+item.otherInformation+"</td>"+
+							"</tr>"
+					)
+				})
 				
 			},error:function (){
 				
 			}
-		})
+		});
+		resetAppPersonForm();
 
 	}
 	
 	
 	function resetDefaultValue(){
-		$("#addAppPersonModalCloseBtn").trigger("click");
+		//$("#addAppPersonModalCloseBtn").trigger("click");
 		$("#modalAppPersonName").val("");
-		$("#modalAppPersonType").val("-1");
 		$("#modalPhoneRece").val("");
 		$("#modalPostcodeAddress").val("");
 		$("#modalOtherInfo").val("");
+		$("#modalFeeReduceTransactionStatus").val("未备案");
+		$("#modalTransactionIdentityId").val("");
+		$("#modalTransactionYear").val("");
 	}
 	function resetAppPersonForm(){
 		$("#addAppPersonModalCloseBtn").trigger("click");
