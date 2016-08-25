@@ -93,7 +93,7 @@
 		</script> 
 </head>
 
-<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1);searGuide(this)">
+<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingInterfaceTemplate(1);searGuide(this)">
 <style>
 .model1:hover .button{display:block}
 </style>	
@@ -694,7 +694,7 @@
 		$("#bottomDownPage").css("color","#0085d0");
 		 loading(sectionId,p);
 	 }
-	function loadingTemplate(sectionId){
+	function loadingInterfaceTemplate(sectionId){
 		 var patentType=${patentDoc.patentType };
 		 $("#templateSectionId").html(sectionId);
 		 var totoalPage=getTotalPageBySectionId(sectionId);
@@ -797,7 +797,7 @@
 	 
 	 
 	 
-	function getTotalPageBySectionId(sectionId){
+	/* function getTotalPageBySectionId(sectionId){
 		var totalPageForSectionId=0;
 		var patentType=${patentDoc.patentType};
 		 $.ajax({
@@ -811,7 +811,7 @@
 			 }
 		 });
 		 return totalPageForSectionId;
-	 }
+	 } */
 </script>
 <script type="text/javascript">
 function hoverImg(){

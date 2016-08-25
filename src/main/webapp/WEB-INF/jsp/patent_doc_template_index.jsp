@@ -24,20 +24,37 @@
 	    <div class="body">
 	        <div class="left" style="height: 612px;">
 				<!--申请文件九部分标签切换 -->
-				<div class="tab" id="tabWrap"> 
-					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">说明书</div>
-					<div style="display:none;" class="tab1h" value="1" name="tabs" onclick="tabChange(1);">
-						说明书附图</div>
-					<div class="tab1h" value="2" name="tabs" onclick="tabChange(2,true,false);">
-						权利要求</div>
-					<div class="tab1h" value="3" name="tabs" onclick="tabChange(3);">
-						摘要</div>
-					<div style="display:none;" class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
-						摘要附图</div>
-					<div style="display:none;" class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
-						上传附件</div>
-					<div style="display:none;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
-						请求书</div>
+				<div class="tab" id="tabWrap">
+					<c:if test="${patentType==3 }">
+						<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">
+							简要说明书
+						</div>
+					
+					</c:if> 
+					<c:if test="${patentType==1||patentType==2}">
+						<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">
+							说明书
+						</div>
+						<div style="display:none;" class="tab1h" value="1" name="tabs" onclick="tabChange(1);">
+							说明书附图
+						</div>
+						<div class="tab1h" value="2" name="tabs" onclick="tabChange(2,true,false);">
+							权利要求
+						</div>
+						<div class="tab1h" value="3" name="tabs" onclick="tabChange(3);">
+							摘要
+						</div>
+						<div style="display:none;" class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
+							摘要附图
+						</div>
+						<div style="display:none;" class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
+							上传附件
+						</div>
+						<div style="display:none;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
+							请求书
+						</div>
+					</c:if>
+					
 				</div>
 	
 	        </div>
@@ -54,7 +71,12 @@
 						<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
 						<div class="content" id="content0">
 							<div class="title">
-								说明书
+								<c:if test="${patentType==3 }">
+									简要说明书
+								</c:if> 
+								<c:if test="${patentType==1||patentType==2}">
+									说明书
+								</c:if>
 							</div>
 							<div class="cl">
 								<div id="editor0" thistempid="1">
@@ -66,11 +88,20 @@
 										        	<div class="title" style="margin-left: 0px;">
 														<span>模板简述</span> <br/>
 													</div>
-													<div>
-														<span >
-															<input type="text" id="inventIntroduce" style="width: 848px" class="form-control" placeholder="请填写说明书模板简述" required="required"/>
-														</span>
-													</div>
+										        	<c:if test="${patentType==3 }">
+										        		<div>
+															<span >
+																<input type="text" id="inventIntroduce" style="width: 848px" class="form-control" placeholder="请填写简要说明书模板简述" required="required"/>
+															</span>
+														</div>
+													</c:if> 
+													<c:if test="${patentType==1||patentType==2}">
+														<div>
+															<span >
+																<input type="text" id="inventIntroduce" style="width: 848px" class="form-control" placeholder="请填写说明书模板简述" required="required"/>
+															</span>
+														</div>
+													</c:if>
 													<div style="height:20px;"></div>
 										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
 										            	<tr>
