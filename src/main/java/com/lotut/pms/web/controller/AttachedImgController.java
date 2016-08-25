@@ -57,5 +57,42 @@ private static final Logger LOGGER = Logger.getLogger(AttachedImgController.clas
             }  
         }  
           
+    } 
+    
+    @RequestMapping(path="/InterFaceImg/{fileType}/{fileName}.{suffix}.html")  
+    public void attachedInterFacePic(HttpServletRequest request, HttpServletResponse response,   
+            @PathVariable String fileType,   
+            @PathVariable String suffix,  
+            @PathVariable String fileName) {  
+          
+        InputStream is = null;  
+        OutputStream os = null;  
+        try {  
+            File file = new File(Settings.PATENTDOC_INTERFACEPIC_PATH + fileType + "/" + fileName + "." + suffix);  
+            
+            WebUtils.writeStreamToResponse(response, new FileInputStream(file));
+        } catch (Exception e) {  
+            //判断suffix  
+            //图片请求可以在此显示一个默认图片  
+            //file显示文件已损坏等错误提示...  
+            LOGGER.error("读取文件失败", e);  
+        } finally {  
+            if (is != null) {  
+                try {  
+                    is.close();  
+                } catch (IOException e) {  
+                    LOGGER.error("读取文件失败", e);  
+                }  
+                  
+                if (os != null) {  
+                    try {  
+                        os.close();  
+                    } catch (IOException e) {  
+                        LOGGER.error("读取文件失败", e);  
+                    }  
+                }  
+            }  
+        }  
+          
     }  
 }
