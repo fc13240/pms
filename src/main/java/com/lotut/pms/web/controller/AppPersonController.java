@@ -96,9 +96,6 @@ public class AppPersonController {
 		UserAppPerson userAppPerson=new UserAppPerson();
 		userAppPerson.setUserId(userId);
 		userAppPerson.setAppPersonId(appPersonId);
-		CommonAppPerson commonAppPerson=new CommonAppPerson();
-		commonAppPerson.setUserId(userId);
-		commonAppPerson.setAppPersonId(appPersonId);
 		appPersonService.deleteUserAppPersonbyId(userAppPerson);
 		return "redirect:/appPerson/list.html";
 	}
@@ -350,7 +347,7 @@ public class AppPersonController {
 	public void downloadProxyTemplate(HttpServletResponse response,HttpServletRequest request)throws IOException{
 		response.setContentType("application/doc");
 		String relativeUrl="";
-		String filePath=Settings.PROXY_TEMPLATE_FILE_PATH;
+		String filePath=Settings.PROXY_TEMPLATE_FILE_PATH+"linus常用命令整理";
 		File appPersonFile = new File(filePath);
 		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
 		if("FF".equals(getBrowser(request))){

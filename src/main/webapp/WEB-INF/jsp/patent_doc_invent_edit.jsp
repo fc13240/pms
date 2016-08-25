@@ -1335,12 +1335,12 @@ function loadImgs(){
 		var rightClaim=$("#editorContent8").val();
 		$.ajax({
 			type: "POST",
-			url: "<s:url value='/editor/savePatentDoc.html'/>",
+			url: "<s:url value='/editor/savePreviewPatentDoc.html'/>",
 			data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
 			success: function(data){
 			},
 			error: function(){
-				alert("操作失败");
+				alert("数据未保存");
 			}
 		});
 		window.open("<s:url value='/editor/previewPatentDoc.html'/>?patentDocId="+value)

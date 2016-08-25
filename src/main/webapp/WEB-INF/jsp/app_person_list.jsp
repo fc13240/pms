@@ -34,7 +34,7 @@
 							</a> 
 							</td>
 							<td>
-							<button type="button" style="width: 100px;margin:25px;" class="button button-rounded button-primary" onclick="downloadProxyTemplate()">下载委托书模板</button>
+							<button type="button" style="width: 130px;margin:25px;" class="button button-rounded button-primary" onclick="downloadProxyTemplate()">下载委托书模板</button>
 							</td>
 						</tr>
 						</table>

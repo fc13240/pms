@@ -111,6 +111,15 @@ public class PatentEditDocController {
 	}
 
 	
+	@RequestMapping(path="/savePreviewPatentDoc",method=RequestMethod.POST)
+	public void  savePreviewPatentDoc(PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){
+		int userId=PrincipalUtils.getCurrentUserId();
+		patentDoc.setUserId(userId);
+	
+		patentDocService.updatePatentDoc(patentDoc);
+		writer.write(1);
+	}
+	
 	@RequestMapping(path="/savePatentDoc",method=RequestMethod.POST)
 	public void  savePatentDoc(PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){
 		int userId=PrincipalUtils.getCurrentUserId();
