@@ -787,3 +787,19 @@ INSERT INTO patent_doc_section_types VALUES(1,'说明书');
 INSERT INTO patent_doc_section_types VALUES(2,'权利要求');
 INSERT INTO patent_doc_section_types VALUES(3,'摘要');
 
+
+CREATE TABLE patent_doc_inventor(
+     iventor_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+     patent_doc_id BIGINT NOT NULL COMMENT '文档编号',
+     inventor_name VARCHAR(200) NOT NULL COMMENT '发明人姓名',
+     inventor_number VARCHAR(20) NOT NULL COMMENT '省份证编号',
+     inventor_nationnality VARCHAR(100) NOT NULL COMMENT '国籍',
+     inventor_mobile INT  NOT NULL COMMENT '联系电话',
+     inventor_email VARCHAR(100) NOT NULL COMMENT '邮箱',
+     inventor_other_information VARCHAR(50) COMMENT '其他信息',
+     user_id INT COMMENT '创建者',
+     CONSTRAINT fk_patent_doc_inventor_patent_doc_id FOREIGN KEY idx_patent_doc_inventor_patent_doc_id(patent_doc_id) REFERENCES patent_documents(patent_doc_id) ON DELETE CASCADE,
+     CONSTRAINT fk_patent_doc_inventor_user_id FOREIGN KEY idx_patent_doc_inventor_user_id(user_id) REFERENCES users(user_id) ON DELETE CASCADE
+     
+
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
