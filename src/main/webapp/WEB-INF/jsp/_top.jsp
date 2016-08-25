@@ -6,7 +6,23 @@
 <div class="top navbar-fixed-top" style="background:#ffffff;">
 	<div class="toolbar">
 	  <div class="container clear">
-	      <div class="mod-sitemap-wecome f-fl"> <span></span></div>
+	      <div class="mod-sitemap-wecome f-fl">
+	      
+	      <span></span>
+	      <a href="http://www.lotut.com" style="margin-left:10px;" target="_blank">龙图腾商标专利交易</a>
+	      <a href="http://g.lotut.com" style="margin-left:10px;" target="_blank">专利管家</a>
+	      <a href="http://hao.lotut.com" style="margin-left:10px;" target="_blank">网址导航</a>
+	      <a href="http://so.lotut.com" style="margin-left:10px;">专利检索</a>
+	      <a href="http://s.lotut.com" style="margin-left:10px;" target="_blank">工业设计</a>
+		<!-- <ul>
+			<li><a href="http://www.lotut.com" target="_blank">龙图腾商标专利交易</a></li>
+	        <li><a href="http://g.lotut.com" target="_blank">专利管家</a></li>
+	        <li><a href="http://hao.lotut.com" target="_blank">网址导航</a></li>
+	        <li class="cur"><a href="http://so.lotut.com">专利检索</a></li>
+	        <li><a href="http://s.lotut.com" target="_blank">工业设计</a></li>
+	    	</ul>  -->	
+	      
+	      </div>
 		  <div class="mod-sitemap clear">
 		    <div class="head-top-rk f-fr">
 		      <div class="item">
