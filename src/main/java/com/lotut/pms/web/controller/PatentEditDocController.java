@@ -151,6 +151,8 @@ public class PatentEditDocController {
 			return "patent_doc_invent_edit";
 		}else if(patentType==2){
 			return "patent_doc_practical_edit";
+		}else if(patentType==3){
+			return "patent_doc_interface_edit";
 		}
 		return "";		
 	}
@@ -600,8 +602,6 @@ public class PatentEditDocController {
 	@RequestMapping(path="/addShares", method=RequestMethod.GET)
 	public String sharePatents(@RequestParam("patentDocIds")List<Integer> patentDocIds, @RequestParam("friends")List<Integer> friendIds) {
 		List<Map<String, Integer>> userPatentDocRecords = new ArrayList<>();
-		int userId = PrincipalUtils.getCurrentUserId();
-		
 		for (int patentDocId: patentDocIds) {
 			for (int friendId: friendIds) {
 				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
