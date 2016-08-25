@@ -647,19 +647,6 @@ CREATE TABLE IF NOT EXISTS process_person (
 	CONSTRAINT fk_process_person_user_id FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS common_inventor (
-  inventor_id BIGINT NOT NULL AUTO_INCREMENT,
-  inventor_name VARCHAR(20) DEFAULT NULL COMMENT'发明姓名',
-  inventor_id_number  NVARCHAR(20) DEFAULT NULL COMMENT '证件号码',
-  inventor_nationality VARCHAR(20) DEFAULT NULL COMMENT '发明人国籍',
-  inventor_mobile INT(20) DEFAULT NULL COMMENT '电话号码',
-  inventor_email VARCHAR(20) DEFAULT NULL COMMENT '邮箱' ,
-  inventor_other_information VARCHAR(50) DEFAULT NULL COMMENT '其他信息',
-  user_id INT(11)  DEFAULT NULL ,
-  PRIMARY KEY(inventor_id),
-  KEY fk_common_inventor_owner_id (user_id),
-  CONSTRAINT fk_common_inventor_owner_id FOREIGN KEY(user_id) REFERENCES users (user_id) 
-);
 
 CREATE TABLE IF NOT EXISTS common_app_person (
   app_person_id BIGINT NOT NULL AUTO_INCREMENT,
@@ -686,7 +673,7 @@ CREATE TABLE IF NOT EXISTS common_inventor (
   inventor_mobile INT(20) DEFAULT NULL COMMENT '电话号码',
   inventor_email VARCHAR(20) DEFAULT NULL COMMENT '邮箱' ,
   inventor_other_information VARCHAR(50) DEFAULT NULL COMMENT '其他信息',
-  inventor_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址'
+  inventor_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址',
   user_id INT(11)  NOT NULL ,
   PRIMARY KEY(inventor_id),
   KEY fk_common_inventor_owner_id (user_id),
