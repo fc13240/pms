@@ -41,7 +41,7 @@
 							  <th>电话</th>
 							  <th>邮箱</th>
 							  <th>附件</th>
-							  <th width="120px">其它信息</th>
+							  <th width="120px">其他信息</th>
 							  <!-- 							<th>预览</th> 
 							  <th>下载</th>-->
 							  <th width="130">操作</th>
