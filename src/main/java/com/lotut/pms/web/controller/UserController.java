@@ -229,5 +229,11 @@ public class UserController {
 	public UserController() {
 	}
 	
-
+	@RequestMapping(path="/setPicName", method=RequestMethod.GET)
+	@ResponseBody
+	public void setPicName(@RequestParam("picName")String picName, HttpSession session, HttpServletResponse response) throws IOException {
+		session.setAttribute("picName", picName);
+		//WebUtils.writeJsonStrToResponse(response, "");
+		
+	}
 }

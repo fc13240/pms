@@ -54,4 +54,9 @@ public class WebUtils {
 		    }
 		    return false;
 	}
+	
+	public static String getPicName(HttpSession session) {
+		
+		return  (String)session.getAttribute("picName");
+	}
 }
