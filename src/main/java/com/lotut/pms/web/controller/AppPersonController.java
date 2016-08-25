@@ -49,7 +49,7 @@ public class AppPersonController {
 	@RequestMapping(path="/contactAppPersonAddForm")
 	public String contactAppPersonAddForm(Model model){
 		
-		return "appPerson_add";
+		return "app_person_add";
 		
 	}
 	
@@ -78,7 +78,7 @@ public class AppPersonController {
 	public String findOneAppPersonInfo(@RequestParam("appPersonId")int AppPersonId,Model model ){
 		CommonAppPerson appPerson=appPersonService.getOneAppPersonById(AppPersonId);
 		model.addAttribute("appPerson", appPerson);
-		return "appPerson_update";
+		return "app_person_update";
 		
 	}
 	@RequestMapping(path="/updateAppPersonInfo",method=RequestMethod.POST)
