@@ -96,9 +96,6 @@ public class AppPersonController {
 		UserAppPerson userAppPerson=new UserAppPerson();
 		userAppPerson.setUserId(userId);
 		userAppPerson.setAppPersonId(appPersonId);
-		CommonAppPerson commonAppPerson=new CommonAppPerson();
-		commonAppPerson.setUserId(userId);
-		commonAppPerson.setAppPersonId(appPersonId);
 		appPersonService.deleteUserAppPersonbyId(userAppPerson);
 		return "redirect:/appPerson/list.html";
 	}
@@ -349,15 +346,16 @@ public class AppPersonController {
 	@RequestMapping(path="/downloadProxyTemplate")
 	public void downloadProxyTemplate(HttpServletResponse response,HttpServletRequest request)throws IOException{
 		response.setContentType("application/doc");
-		String relativeUrl="";
-		String filePath=Settings.PROXY_TEMPLATE_FILE_PATH;
+		String relativeUrl="linus常用命令整理.docx";
+		String filePath=Settings.PROXY_TEMPLATE_FILE_PATH+relativeUrl;
+		System.out.println(filePath);
 		File appPersonFile = new File(filePath);
-		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
+		String downloadFileName = URLEncoder.encode(relativeUrl, "UTF8");
 		if("FF".equals(getBrowser(request))){
 		    //针对火狐浏览器处理
-			downloadFileName =new String(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
+			downloadFileName =new String(relativeUrl.getBytes("UTF-8"),"iso-8859-1");
 		}
-		response.setHeader("Content-Disposition", "proxy;filename=" + downloadFileName);
+		response.setHeader("Content-Disposition", "proxyTemplate;filename=" + downloadFileName);
 		response.setContentLength((int)appPersonFile.length());
 		WebUtils.writeStreamToResponse(response, new FileInputStream(appPersonFile));
 	}

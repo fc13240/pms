@@ -93,7 +93,7 @@
 
 		<div class="main">
 			<div class="tit_top">
-				<div class="pre_title">发明名称</div>
+				<div class="pre_title">专利名称</div>
 			</div>
 			<div class="pre_text" id="div_1">${patentDoc.name }</div>
 			
