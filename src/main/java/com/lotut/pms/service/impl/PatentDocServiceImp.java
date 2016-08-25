@@ -162,6 +162,12 @@ public class PatentDocServiceImp implements PatentDocService{
 		}
 
 
+		@Override
+		public int getAttatchmentPicCount(long patentDocId) {
+			return patentDocDao.getAttatchmentPicCount(patentDocId);
+		}
+
+
 
 
 }

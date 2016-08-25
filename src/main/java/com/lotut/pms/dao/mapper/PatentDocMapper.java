@@ -50,4 +50,6 @@ public interface PatentDocMapper {
 	List<PatentDoc> searchUserPatentDocsByPage(PatentDocSearchCondition searchCondition);
 	
 	int searchUserPatentDocsCount(PatentDocSearchCondition searchCondition);
+	
+	int getAttatchmentPicCount(@Param("patentDocId")long patentDocId );
 }
