@@ -895,7 +895,7 @@
 			var caption = $("#picName").val();
 			var attachmentUrl = $("#patentUrl").val();
 			var patentDocId=$("#patentDocId").val();
-			var seqNo=${"#seqNo"}.val;
+			var seqNo=$("#seqNo").val();
 			$.ajax({
 				type : "POST",
 				url : "<s:url value='/editor/savePatentImgUrl.html'/>",

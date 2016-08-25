@@ -89,8 +89,8 @@
 	</delete>
 	
 	<insert id="savePatentImgUrl" parameterType="Attachment">
-		insert into patent_attachment(patent_doc_id,caption,sql_no,attachment_url) values
-		(#{patentDocId},#{caption},#{label},#{attachmentUrl,javaType=string,jdbcType=VARCHAR})
+		insert into patent_attachment(patent_doc_id,caption,seq_no,attachment_url) values
+		(#{patentDocId},#{caption},#{seqNo},#{attachmentUrl,javaType=string,jdbcType=VARCHAR})
 	</insert>
 	
 	<delete id="deleteNullPatentDoc">
