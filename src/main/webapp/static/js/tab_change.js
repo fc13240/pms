@@ -129,6 +129,14 @@ function loadingTemplateBYTab(sectionId){
 	var patentType=$("#patentType").val();
 	$("#topUpPage").css("color","#ccc");
 	$("#bottonUpPage").css("color","#ccc");
+	var totalPage = getTabTotalPageBySectionId(sectionId);
+	if(totalPage==1){
+		$("#topDownPage").css("color","#ccc");
+		$("#bottomDownPage").css("color","#ccc");
+	}else{
+		$("#topDownPage").css("color","#0085d0");
+		$("#bottomDownPage").css("color","#0085d0");
+	}
 	 $.ajax({
 		 type : "POST",
 		 url : "../editor/getTemplateList.html",
@@ -155,6 +163,22 @@ function loadingTemplateBYTab(sectionId){
 			 
 		 }
 	 })
+	 
+ function getTabTotalPageBySectionId(sectionId){
+		var totalPageForSectionId=0;
+		var patentType=$("#patentType").val();
+		 $.ajax({
+			 type : "POST",
+			 url : "../editor/getTotalPage.html",
+			 data : {"sectionId":sectionId,"patentType":patentType},
+			 async: false,
+			 success : function (data){
+				 totalPageForSectionId=data;
+			 },error : function (){
+			 }
+		 });
+		 return totalPageForSectionId;
+	 }
 }
 
 	

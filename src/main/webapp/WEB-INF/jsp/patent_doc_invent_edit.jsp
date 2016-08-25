@@ -11,7 +11,7 @@
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-	<title>测试页面</title>
+	<title>龙图腾专利管家－撰写专利！</title>
 	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.min.css'/>">
 	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap-theme.min.css'/>">
 	<c:import url="common/kindEditor.jsp"></c:import>
@@ -226,15 +226,17 @@
 											<table id="simple-table" class="table table-striped table-bordered table-hover">
 											  <thead>
 												<tr class="simple_bag">
-												  <th>序号</th>
-												  <th>联系人</th>
-												  <th>所在地区</th>
-												  <th>地址</th>
-												  <th>联系电话</th>
+												  <!-- <th><input type="checkbox"/></th>
+												  <th>序号</th> -->
+												  <th>姓名或名称</th>
+												  <th>证件号码</th>
+												  <th>邮编地址</th>
+												  <th>费减备案状态</th>
+												  <th>备案证件号</th>
+												  <th>备案年度</th>
 												</tr>
 											  </thead>
-											  <tbody>
-											  
+											  <tbody id="appersonTab">
 											  </tbody>
 											</table>
 										</div>
@@ -1255,24 +1257,31 @@ function loadImgs(){
 			}
 		}		
 		var appPersonIds = uniqueappPersonNos.join(",");
-		
+		var patentDocId = ${patentDoc.patentDocId};
 		$.ajax({
 			type : "POST",
 			//url : "<s:url value='/petition/findAppPersonNameById.html'/>?appPersonIds="+appPersonIds,
-			url : "<s:url value='/petition/addPatentDocAppPerson.html'/>?appPersonIds="+appPersonIds,
+			url : "<s:url value='/petition/addPatentDocAppPerson.html'/>?appPersonIds="+appPersonIds+"&patentDocId="+patentDocId,
 			async :false,
 			success : function (data){
 				var obj= $.parseJSON(data);
+				$("#appersonTab").empty();
 				$.each(obj,function(i,item){
-					
-					$("#appersonDiv").append(
-							"<span class='ss-item' id='appPerson"+item.appPersonId+"' style='margin-left:20px'>"+item.name+""+
-							"<a class='icon-btn-x' href='#' onclick='deleteTag(appPerson"+item.appPersonId+")'"+
-								">"+								
-								"<img src='<s:url value='/temp/images/delete.ico'/>' style='width:30px;height:25px' />"+
-							"</a>"+
-							"<input type='text' name='commonAppPerson["+item.appPersonId+"].appPersonId' value='"+item.appPersonId+"'/>"+
-						 "</span>"
+					$("#appersonTab").append(
+							"<tr>"+
+							//"<td class='center' style='text-align:center'><label class='pos-rel'> <span class='batch-share-item'>"+
+							//"<input type='checkbox' class='check-item' appPerson=<c:out value='"+item.personId+"'/>'>"+
+							//"<span class='lbl'></span></label>"+
+							//"</td>"+
+							//"<td class='center' style='text-align:center'><input type='checkbox' class='check-item'/></td>"+
+							//"<td class='center' style='text-align:center'>"+i+"</td>"+
+							"<td style='text-align:center'>"+item.name+"</td>"+
+							"<td style='text-align:center'>"+item.idNumber+"</td>"+
+							"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
+							"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
+							"<td style='text-align:center'>"+item.transactionIdentity+"</td>"+
+							"<td style='text-align:center'>"+item.transactionYear+"</td>"+
+							"</tr>"
 					)
 				})
 			}
