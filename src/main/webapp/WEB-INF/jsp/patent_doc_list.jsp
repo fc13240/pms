@@ -65,7 +65,7 @@
 							  <th width="40px">创建时间</th>
 							  <th width="60px">更新时间</th>
 							  <!-- <th width="90px">文档状态</th> -->
-							  <th width="8px">操作</th>
+							  <th width="50px">操作</th>
 							</tr>
 						  </thead>
 						  <tbody>
