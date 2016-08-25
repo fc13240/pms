@@ -731,6 +731,20 @@ var ZYFILE = {
 				$(".upload_btn").bind("click", function(e){
 					// 判断当前是否有文件需要上传
 					if(ZYFILE.funReturnNeedFiles().length > 0){
+						var caption = $("#piciLlus2").val();
+						var label = $("#picMarkiLlus2").val(); 
+						if((caption==null || caption=="" || caption=="请填写附图说明，例如”图1为本发明实施例XX的方法流程示意图”。")){
+							alert("请输入图片说明！");
+							$("#piciLlus2").focus();
+							//ZYFILE.funDeleteFile(allFiles[0].index, true);
+							return ;
+						}
+						if((label==null || label=="" || label=="请填写附图标记说明，例如'1杯子主体，2杯子把手'。") ){
+							alert("请输入图片标记！");
+							$("#picMarkiLlus2").focus();
+							//ZYFILE.funDeleteFile(allFiles[0].index, true);
+							return ;
+						}
 						$("#fileSubmit").click();
 					}else{
 						alert("请先选中文件再点击上传");

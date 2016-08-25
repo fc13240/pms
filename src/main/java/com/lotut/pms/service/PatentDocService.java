@@ -51,5 +51,9 @@ public interface PatentDocService {
 	List<PatentDoc> searchUserPatentDocsByPage(PatentDocSearchCondition searchCondition);
 	
 	int searchUserPatentDocsCount(PatentDocSearchCondition searchCondition);
+	
+	int getAttatchmentPicCount(long patentDocId );
+	
+	int getMaxAttachmentPicNum(long patentDocId );
 
 }

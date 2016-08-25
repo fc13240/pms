@@ -21,17 +21,53 @@ import com.lotut.pms.web.util.WebUtils;
 public class AttachedImgController {
 private static final Logger LOGGER = Logger.getLogger(AttachedImgController.class);  
     
-    @RequestMapping(path="/attachmentImg/{fileType}/{uploadDate}/{fileName}.{suffix}.html")  
+    @RequestMapping(path="/attachmentImg/{fileType}/{fileName}.{suffix}.html")  
     public void attached(HttpServletRequest request, HttpServletResponse response,   
-            @PathVariable String fileType,  
-            @PathVariable String uploadDate,  
+            @PathVariable String fileType,   
             @PathVariable String suffix,  
             @PathVariable String fileName) {  
           
         InputStream is = null;  
         OutputStream os = null;  
         try {  
-            File file = new File(Settings.PATENTDOC_ATTACHMENT_PATH + fileType + "/" + uploadDate + "/" + fileName + "." + suffix);  
+            File file = new File(Settings.PATENTDOC_ATTACHMENT_PATH + fileType  + "/" + fileName + "." + suffix);  
+            
+            WebUtils.writeStreamToResponse(response, new FileInputStream(file));
+        } catch (Exception e) {  
+            //判断suffix  
+            //图片请求可以在此显示一个默认图片  
+            //file显示文件已损坏等错误提示...  
+            LOGGER.error("读取文件失败", e);  
+        } finally {  
+            if (is != null) {  
+                try {  
+                    is.close();  
+                } catch (IOException e) {  
+                    LOGGER.error("读取文件失败", e);  
+                }  
+                  
+                if (os != null) {  
+                    try {  
+                        os.close();  
+                    } catch (IOException e) {  
+                        LOGGER.error("读取文件失败", e);  
+                    }  
+                }  
+            }  
+        }  
+          
+    } 
+    
+    @RequestMapping(path="/InterFaceImg/{fileType}/{fileName}.{suffix}.html")  
+    public void attachedInterFacePic(HttpServletRequest request, HttpServletResponse response,   
+            @PathVariable String fileType,   
+            @PathVariable String suffix,  
+            @PathVariable String fileName) {  
+          
+        InputStream is = null;  
+        OutputStream os = null;  
+        try {  
+            File file = new File(Settings.PATENTDOC_INTERFACEPIC_PATH + fileType + "/" + fileName + "." + suffix);  
             
             WebUtils.writeStreamToResponse(response, new FileInputStream(file));
         } catch (Exception e) {  

@@ -14,7 +14,7 @@
 	<title>实用新型撰写</title>
 	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.min.css'/>">
 	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap-theme.min.css'/>">
-	<c:import url="common/kindEditor.jsp"></c:import>
+	<c:import url="common/kindEditor2.jsp"></c:import>
 	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
     <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
@@ -34,7 +34,7 @@
 					height           :   "400px",                 // 宽度
 					itemWidth        :   "140px",                 // 文件项的宽度
 					itemHeight       :   "115px",                 // 文件项的高度
-					url              :   "<s:url value='/kindeditor/uploadPic.html'/>",  // 上传文件的路径
+					url              :   "<s:url value='/kindeditor/uploadInterFacePic.html'/>?patentDocId=${patentDoc.patentDocId}", 
 					fileType         :   ["jpg","png","jpeg"],// 上传文件的类型
 					fileSize         :   51200000,                // 上传文件的大小
 					multiple         :   false,                    // 是否可以多个文件上传
@@ -344,12 +344,23 @@
 								 	<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
 								 	
 								 	<input id="patentDocAttachmentFile" type="hidden" name="patentDocAttachmentFile" value="${patentDoc.patentDocAttachmentFile}">
-									<font size="3" font_family="Microsoft YaHei" color="black">附图说明:</font>
-									<input id="piciLlus2" name="caption" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
-									<p>
-									<font size="3" font_family="Microsoft YaHei" color="black">附图标记:</font>
-									</p>
-									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
+									<input id="picMarkiLlus2" name="label" type="hidden" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="固定的图片的标记" autocomplete="off" required>
+									
+									
+									<font size="3" font_family="Microsoft YaHei" color="black">图片名称:</font>
+									<input type="text"  id="piciLlus2"   list="companys" name="caption"   onchange="picName()" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
+										<datalist id="companys">
+										<option value="仰视图">
+										<option value="立体图">
+										<option value="右视图">
+										<option value="主视图">
+										<option value="左视图">
+										<option value="后视图">
+										<option value="俯视图">
+										<option value="使用状态图">
+										</datalist>
+									
+									
 									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
 									
 								</form>
@@ -1002,6 +1013,18 @@ function loadImgs(){
 		$('.guide-list').show();
 		
 	}
+	
+	function picName() {
+		var picName = $("#piciLlus2").val();
+		
+		$.ajax({
+			url: "<s:url value='/user/setPicName.html'/>?picName=" + picName, 
+			type: 'get', 
+			success: function() {
+				
+			}
+		});		
+	}	
 	</script>
 </body>
 </html>

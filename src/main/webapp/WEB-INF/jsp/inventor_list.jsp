@@ -30,21 +30,21 @@
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						<thead>
 						<tr class="simple_bag">
-							  <th class="center"> <label class="pos-rel">
+							  <th class="center" width="30px"> <label class="pos-rel">
 								<input type="checkbox" class="check-item" id="checkall"  name="checkall" />
 								<span class="lbl"></span> </label>
 							  </th>
 							  <th class="center" width="50">序号</th>
-							  <th width="90px">姓名</th>
-							  <th width="150px">证件号码</th>
+							  <th width="100px">姓名</th>
+							  <th width="100px">证件号码</th>
 							  <th>国籍</th>
 							  <th>电话</th>
 							  <th>邮箱</th>
-							  <th>附件</th>
-							  <th width="120px">其它信息</th>
+							  <th width="70px">附件</th>
+							  <th width="100px">其他信息</th>
 							  <!-- 							<th>预览</th> 
 							  <th>下载</th>-->
-							  <th width="130">操作</th>
+							  <th width="100px">操作</th>
 							</tr>
 						  </thead>
 						  <tbody>

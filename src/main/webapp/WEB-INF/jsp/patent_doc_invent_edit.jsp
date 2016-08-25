@@ -33,7 +33,7 @@
 					height           :   "400px",                 // 宽度
 					itemWidth        :   "140px",                 // 文件项的宽度
 					itemHeight       :   "115px",                 // 文件项的高度
-					url              :   "<s:url value='/kindeditor/uploadPic.html'/>",  // 上传文件的路径
+					url              :   "<s:url value='/kindeditor/uploadPic.html'/>?patentDocId=${patentDoc.patentDocId}",  // 上传文件的路径
 					fileType         :   ["jpg","png","jpeg"],// 上传文件的类型
 					fileSize         :   51200000,                // 上传文件的大小
 					multiple         :   false,                    // 是否可以多个文件上传
@@ -65,11 +65,11 @@
 					onSuccess: function(file, response){
 						// 文件上传成功的回调方法
 						var Jresponse=$.parseJSON(response);
-						$("#patentImgUrl").append("<input type='hidden' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
+						$("#patentImgUrl").append("<input type='hidde' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
+						$("#patentImgUrl").append("<input type='hidde' id='picName' name='picName' value='"+Jresponse["picName"]+"'/>");
+						$("#patentImgUrl").append("<input type='hidde' id='seqNo' name='seqNo' value='"+Jresponse["count"]+"'/>");
 						savePatentImgUrl();
 						$("#patentImgUrl").empty();
-						$('#piciLlus2').val("请填写附图说明，例如”图1为本发明实施例XX的方法流程示意图”。").css('color', '#999');
-					    $('#picMarkiLlus2').val("请填写附图标记说明，例如“1杯子主体，2杯子把手”。").css('color', '#999');
 					},
 					onFailure: function(file, response){          // 文件上传失败的回调方法
 						console.info("此文件上传失败：");
@@ -380,12 +380,6 @@
 								 <form id="patentUrlForm" name="patentUrlForm"  method="post" enctype="multipart/form-data" class="form-horizontal">
 								 	<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
 								 	<input id="patentDocAttachmentFile" type="hidden" name="patentDocAttachmentFile" value="${patentDoc.patentDocAttachmentFile}">
-								 	<font size="3" font_family="Microsoft YaHei" color="black">附图说明:</font>
-									<input id="piciLlus2" name="caption" type="text" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
-									<p>
-									<font size="3" font_family="Microsoft YaHei" color="black">附图标记:</font>
-									</p>
-									<input id="picMarkiLlus2" name="label" type="text" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
 									
 								  </form>
@@ -898,17 +892,17 @@
 	});
 	function savePatentImgUrl() {
 		if ($("#patentUrl").length > 0) {
-			var caption = $("#piciLlus2").val();
-			var label = $("#picMarkiLlus2").val();
+			var caption = $("#picName").val();
 			var attachmentUrl = $("#patentUrl").val();
 			var patentDocId=$("#patentDocId").val();
+			var seqNo=${"#seqNo"}.val;
 			$.ajax({
 				type : "POST",
 				url : "<s:url value='/editor/savePatentImgUrl.html'/>",
 				data : {
 					"caption" : caption,
-					"label" : label,
 					"attachmentUrl" : attachmentUrl,
+					"seqNo":seqNo,
 					"patentDocId":patentDocId
 				},
 					success: function(data){
@@ -1170,16 +1164,13 @@ function loadImgs(){
 								 "<li id="+item.attachmentId+">"+
 									"<a href='javascript:delectImg("+item.attachmentId+")'>"+
 									"<img src='"+httpImgUrl+"' alt='' width='200' height='150'/>"+
-									"</a>"+
-									"<div class='text'>"+
-										"<b>"+item.caption+"</b>"+
-										"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
-									"</div>"
+									"</a>"+"<a>"+item.caption+"</a>"
+								
 								+"</li>"
 						);
 						 
 					 });
-					hoverImg2();
+					//hoverImg2();
 			},
 			error : function() {
 				alert("操作失败");
