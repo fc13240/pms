@@ -89,7 +89,7 @@
 	</delete>
 	
 	<insert id="savePatentImgUrl" parameterType="Attachment">
-		insert into patent_attachment(patent_doc_id,caption,label,attachment_url) values
+		insert into patent_attachment(patent_doc_id,caption,sql_no,attachment_url) values
 		(#{patentDocId},#{caption},#{label},#{attachmentUrl,javaType=string,jdbcType=VARCHAR})
 	</insert>
 	
@@ -97,7 +97,7 @@
 		delete from patent_documents where patent_name is null and  manual is null and  right_claim is null and abstract_desc is null  and abstract_img is null
 	</delete>
 	<select id="getAttachmentById"  resultMap="PatentImgMap">
-		select attachment_id,caption,label, attachment_url from patent_attachment where  patent_doc_id=#{patentDocId}
+		select attachment_id,caption,seq_no, attachment_url from patent_attachment where  patent_doc_id=#{patentDocId}
 	</select>
 	
 	<delete id="delectAttachmentById"  >
@@ -105,7 +105,7 @@
 	</delete>
 	
 	<select id="getLabelByUrl" resultMap="PatentImgMap" parameterType="String">
-		select attachment_id,caption,label,attachment_url from patent_attachment where attachment_url=#{abstractImg,javaType=string,jdbcType=VARCHAR}
+		select attachment_id,caption,sql_no,attachment_url from patent_attachment where attachment_url=#{abstractImg,javaType=string,jdbcType=VARCHAR}
 	</select>
 	
 	<update id="savePatentDocAttachmentFile" parameterType="PatentDoc">

@@ -123,6 +123,7 @@ public class UploadController {
 		       		 	Map<String, Object> succMap = new HashMap<String, Object>(); 
 		                succMap.put("url", saveUrl + newFileName+".html");  
 		                succMap.put("picName",picName );
+		                succMap.put("count",count );
 		                WebUtils.writeJsonStrToResponse(response1, succMap);
 			   }
 		   }

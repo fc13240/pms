@@ -65,8 +65,9 @@
 					onSuccess: function(file, response){
 						// 文件上传成功的回调方法
 						var Jresponse=$.parseJSON(response);
-						$("#patentImgUrl").append("<input type='text' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
-						$("#patentImgUrl").append("<input type='text' id='picName' name='picName' value='"+Jresponse["picName"]+"'/>");
+						$("#patentImgUrl").append("<input type='hidde' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
+						$("#patentImgUrl").append("<input type='hidde' id='picName' name='picName' value='"+Jresponse["picName"]+"'/>");
+						$("#patentImgUrl").append("<input type='hidde' id='seqNo' name='seqNo' value='"+Jresponse["count"]+"'/>");
 						savePatentImgUrl();
 						$("#patentImgUrl").empty();
 					},
@@ -892,16 +893,16 @@
 	function savePatentImgUrl() {
 		if ($("#patentUrl").length > 0) {
 			var caption = $("#picName").val();
-			var label = "标签";
 			var attachmentUrl = $("#patentUrl").val();
 			var patentDocId=$("#patentDocId").val();
+			var seqNo=${"#seqNo"}.val;
 			$.ajax({
 				type : "POST",
 				url : "<s:url value='/editor/savePatentImgUrl.html'/>",
 				data : {
 					"caption" : caption,
-					"label" : label,
 					"attachmentUrl" : attachmentUrl,
+					"seqNo":seqNo,
 					"patentDocId":patentDocId
 				},
 					success: function(data){
