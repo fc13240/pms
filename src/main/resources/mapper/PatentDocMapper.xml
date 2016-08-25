@@ -29,7 +29,7 @@
 		<resultMap type="Attachment" id="PatentImgMap">
 			<id property="attachmentId" column="attachment_id"/>
 			<result property="caption" column="caption"/>
-			<result property="label" column="label"/>
+			<result property="seqNo" column="seq_no"/>
 			<result property="patentDocId" column="patent_doc_id"/>
 			<result property="attachmentUrl" column="attachment_url"/>
 		</resultMap>
@@ -160,4 +160,8 @@
 	<select id="getAttatchmentPicCount" resultType="int">
 		select count(*) from patent_attachment where patent_doc_id=#{patentDocId}
 	</select>	
+	
+	<select id="getMaxAttachmentPicNum" resultType="int">
+		select  max(seq_no) from patent_attachment where patent_doc_id=#{patentDocId};
+	</select>
 </mapper>

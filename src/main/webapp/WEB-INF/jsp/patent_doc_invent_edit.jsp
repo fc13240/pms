@@ -1163,16 +1163,13 @@ function loadImgs(){
 								 "<li id="+item.attachmentId+">"+
 									"<a href='javascript:delectImg("+item.attachmentId+")'>"+
 									"<img src='"+httpImgUrl+"' alt='' width='200' height='150'/>"+
-									"</a>"+
-									"<div class='text'>"+
-										"<b>"+item.caption+"</b>"+
-										"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
-									"</div>"
+									"</a>"+"<a>"+item.caption+"</a>"
+								
 								+"</li>"
 						);
 						 
 					 });
-					hoverImg2();
+					//hoverImg2();
 			},
 			error : function() {
 				alert("操作失败");

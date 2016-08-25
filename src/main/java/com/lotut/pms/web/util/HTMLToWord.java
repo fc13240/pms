@@ -35,7 +35,7 @@ public class HTMLToWord {
 	public static String getAttachments(List<Attachment> AttachmentIntrodurces){
 		String attachmentIntroduces =null;
 		for (Attachment Introdurce:AttachmentIntrodurces) {
-			attachmentIntroduces+=Introdurce.getCaption()+"<br/>"+Introdurce.getLabel();
+			attachmentIntroduces+=Introdurce.getCaption()+"<br/>"+Introdurce.getCaption();
 		}
 		return attachmentIntroduces;
 	}
