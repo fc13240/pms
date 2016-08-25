@@ -162,6 +162,6 @@
 	</select>	
 	
 	<select id="getMaxAttachmentPicNum" resultType="int">
-		select  max(seq_no) from patent_attachment where patent_doc_id=#{patentDocId};
+		SELECT  IFNULL(MAX(seq_no),0) AS seq_no FROM patent_attachment WHERE patent_doc_id=#{patentDocId};
 	</select>
 </mapper>
