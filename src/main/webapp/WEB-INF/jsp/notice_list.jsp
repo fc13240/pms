@@ -33,7 +33,7 @@
 					<div id="menu">
 					  <div style="height:33px;">
 					    <ul id="nav">
-					      <p>快捷处理：</p>
+					     <p>快捷处理：</p>
 					      <li><a href="#" class="selected">专利类型</a></li>
 						  <li><a href="#" class="">通知状态</a></li>
 					      <li><a href="#" class="">通知类型</a></li>

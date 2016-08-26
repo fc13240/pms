@@ -41,7 +41,7 @@
 		replace into user_patents(user, patent) 
 		values
 		<foreach item="userPatentRecord" collection="list" separator=",">
-			(${userPatentRecord.userId}, #{userPatentRecord.patentDocId})
+			(#{userPatentRecord.userId}, #{userPatentRecord.patentDocId})
 		</foreach>
 	</insert>	
 	
