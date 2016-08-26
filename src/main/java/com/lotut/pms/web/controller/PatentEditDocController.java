@@ -667,4 +667,10 @@ public class PatentEditDocController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping(path="/updateAttachmentImgName", method=RequestMethod.POST)
+	public void updateAttachmentImgName(Attachment attachment ,PrintWriter writer){
+		patentDocService.updateAttachmentImgName(attachment);
+		writer.write(1);
+	}
 }
