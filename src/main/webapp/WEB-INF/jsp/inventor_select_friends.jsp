@@ -154,7 +154,7 @@
 			var friends = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'friend').join(",");
 			var inventors = $("input[name=inventors]").val();
 			$.ajax({
-				url: "<s:url value='/shareInventor/addShares.html'/>?friends=" + friends + "&inventors=" + inventors, 
+				url: "<s:url value='/inventor/addShares.html'/>?friends=" + friends + "&inventors=" + inventors, 
 				type: 'GET', 
 				success: function() {
 					$("<div>分享成功</div>").dialog({

@@ -413,14 +413,10 @@
 								<a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}"> 下载 </a> 
 								<a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
 								  分享
-								  </a>
+								  </a>&nbsp;
 								  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${notice.patent.patentId}'/>">
 								  交费
-								  </a> 
-								   <a target="_blank" href="<s:url value='/notice/showRemarks.html'/>?noticeId=<c:out value='${notice.noticeId}'/>">
-								  备注
-								  </a> 
-								 </td>
+								  </a> </td>
 							  </tr>
 							</c:forEach>
 						  </tbody>

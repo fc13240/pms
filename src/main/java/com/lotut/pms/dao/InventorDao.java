@@ -1,6 +1,7 @@
 package com.lotut.pms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.UserInventor;
@@ -31,5 +32,7 @@ public interface InventorDao {
 	Integer getIdByInventor(CommonInventor commonInventor);
 
 	void deleteUserInventorById(UserInventor userInventor);
+	
+	void insertUserInventors(List<Map<String, Integer>> userInventorRecords);
 
 }
