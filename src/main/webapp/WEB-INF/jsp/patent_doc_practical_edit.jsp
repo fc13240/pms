@@ -600,17 +600,17 @@
 	});
 	function savePatentImgUrl() {
 		if ($("#patentUrl").length > 0) {
-			var caption = $("#piciLlus2").val();
-			var label = $("#picMarkiLlus2").val();
+			var caption = $("#picName").val();
 			var attachmentUrl = $("#patentUrl").val();
 			var patentDocId=$("#patentDocId").val();
+			var seqNo=$("#seqNo").val();
 			$.ajax({
 				type : "POST",
 				url : "<s:url value='/editor/savePatentImgUrl.html'/>",
 				data : {
 					"caption" : caption,
-					"label" : label,
 					"attachmentUrl" : attachmentUrl,
+					"seqNo":seqNo,
 					"patentDocId":patentDocId
 				},
 					success: function(data){
