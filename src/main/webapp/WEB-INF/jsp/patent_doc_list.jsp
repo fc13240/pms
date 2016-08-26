@@ -26,28 +26,44 @@
 		  <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right" style="padding:10px 0 0 3px;" >
 				    <div class="cl top1" style="height:10px;">
-        				<form class="form-inline" action="<s:url value='/editor/searchPatentDoc.html'/>" method="get">
-						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-						 <div class="t-third" >
-						  <table class="search-table">
-							  <tr>
-							  <td>
-								<input style="width:450px;height:34px;" name="keyword" id="keywordId" value="" placeholder="文档名称" class="t-input form-control"/>							  
-							  </td>
-							  <td>
-							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">搜索文档</button>
-							  </td>
-							  </tr>							  
-						  </table>
-						 </div>
-					</form>
+				    
+					  <form class="form-inline" action="<s:url value='/editor/searchPatentDoc.html'/>" method="get">
+					  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
+					    <div class="form-group">
+					    <input style="width:450px;height:34px;" name="keyword" id="keywordId" value="" placeholder="文档名称" class="t-input form-control"/>	
+					      
+					     <button class="button button-caution button-rounded" type="submit" style="width:80px;">搜索文档</button>
+					    </div>
+					  </form>
+
     			</div>
 				<div style="height:10px;"></div>
 					<div class="lt-box" style="padding:30px 0 0 0;">
-								<a href="javascript:return void" onclick="batchShare()" >
+							<!-- 	<a href="javascript:return void" onclick="batchShare()" >
+								<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
+								</a>-->
+								
+								
+							<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> 
+							<span class="input-group-btn" >
+							  	<div class="ta-top" style="margin-left:8px;"> 
+							  
+							  	<table class="search-table">
+						  			<tr>
+						  				<td>
+<a href="javascript:return void" onclick="batchShare()" >
 								<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
 								</a>
-						<table id="simple-table" class="table table-striped table-bordered table-hover" style="margin-top: 10px;">
+						  				</td>	  										  									  				
+						  			</tr>
+						  		</table>		
+							  </div>
+						  </span> 
+						  </div>						
+								
+								
+								
+						<table id="simple-table" class="table table-striped table-bordered table-hover" >
 						<thead>
 						<tr class="simple_bag">
 							  <th class="center" width="20px"> <label class="pos-rel">

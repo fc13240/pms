@@ -307,7 +307,7 @@
 									</div>
 								</div>
 							</div>
-							<div id="error_content7" style="margin-left: -50px; float: left; color: Red; text-align: right;" class="textarea"> 还可以输入300字
+							<div id="error_content7" style="margin-left: -50px; float: left; color: Red; text-align: right;" class="textarea">
 							</div>
 						</div>
 <%-- 	<script type="text/plain" id="myEditor7_tools" style="display: none; width: 800px;

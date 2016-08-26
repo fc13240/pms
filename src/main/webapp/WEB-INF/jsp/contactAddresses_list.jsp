@@ -30,7 +30,20 @@
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
 				  <form>
-					<button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addAddress()">增加地址</button>
+						<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
+						  <div class="ta-top" style="margin-left:8px;"> 
+						  
+						  	<table class="search-table">
+					  			<tr>
+					  				<td>
+									  	<button type="button" style="width: 100px;" class="button button-rounded button-primary" onclick="javascript:addAddress()">增加地址</button>
+										</a>
+					  				</td>
+					  			</tr>
+					  		</table>		
+						  </div>
+						  </span> </div>
+					
 					<table id="simple-table" class="table table-striped table-bordered table-hover">
 					  <thead>
 						<tr class="simple_bag">
@@ -44,13 +57,13 @@
 					  </thead>
 					  <c:forEach items="${contactAddresses}" var="address" varStatus="status">
 						<tr>
-						  <td class="center">${status.count}</td>
-						  <td>${address.receiver}</td>
-						  <td>${address.provinceName} ${address.cityName} ${address.districtName}
+						  <td class="center" style="text-align:center">${status.count}</td>
+						  <td class="center" style="text-align:center">${address.receiver}</td>
+						  <td class="center" style="text-align:center">${address.provinceName} ${address.cityName} ${address.districtName}
 						  </td>
-						  <td>${address.detailAddress}</td>
-						  <td>${address.phone}</td>
-						  <td><a href="<s:url value='/user/updateUserContactAddressesFrom.html'/>?id=<c:out value='${address.id}'/>"> 编辑 </a> <a href="<s:url value='/user/deleteUserContactAddresses.html'/>?id=<c:out value='${address.id}'/>">
+						  <td class="center" style="text-align:center">${address.detailAddress}</td>
+						  <td class="center" style="text-align:center">${address.phone}</td>
+						  <td class="center" style="text-align:center"><a href="<s:url value='/user/updateUserContactAddressesFrom.html'/>?id=<c:out value='${address.id}'/>"> 编辑 </a> <a href="<s:url value='/user/deleteUserContactAddresses.html'/>?id=<c:out value='${address.id}'/>">
 							<!-- 		           						<button class="t-btn4">删除</button> -->
 							删除 </a>
 							<c:if test="${!address.defaultAddress}"> <a style="margin-left:30px;" href="<s:url value='/user/defaultUserContactAddresses.html'/>?id=<c:out value='${address.id}'/>"> 设为默认 </a> </c:if>

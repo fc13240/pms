@@ -31,23 +31,34 @@
 				<!-- search begin -->
 				<div class="lt-box">
 					<div class="search-box">
-						<form action="<s:url value='/patent/searchPatent.html'/>" method="get">
+			<!-- 		<form action="<s:url value='/patent/searchPatent.html'/>" method="get">
 						  <div class="t-third" style="clear:both;text-align:center;">
 						  <input type="text" style="width:400px;height:35px;display:inline;" placeholder="申请号／申请人／专利名称／代理机构" name="q"	 class="text" id="keywordId" />
 							<input type="submit" value="专利库搜索"  id="mc-embedded-subscribe" class="button" style="background: #D31119; color: #fff;width:150px;height:36px;"/>
 						  </div>
 						</form>
+						 -->	
+						
+					  <form action="<s:url value='/patent/searchPatent.html'/>"method="get">
+					    <div class="form-group">
+					      <input type="text" style="width:400px;height:35px;display:inline;" placeholder="申请号／申请人／专利名称／代理机构" name="q"	 class="text" id="keywordId" />
+							<input type="submit" value="专利库搜索"  id="mc-embedded-subscribe" class="button" style="background: #D31119; color: #fff;width:150px;height:36px;"/>
+					    </div>
+					  </form>
+						
+						
 					</div>
 				</div>
 				<!--search form end-->
 				<div class="lt-box">
-					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
+					 <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
 					  <div class="ta-top" style="margin:8px;"> 
 						<a href="javascript:return void" onclick="batchAddPatents()">
 						<button class="button button-caution button-rounded" style="width:150px;height:36px;">一键加入管理</button> 
 						</a>	          
 					  </div>
-					  </span> </div>
+					  </span> 
+					</div>
 					<table id="simple-table" class="table table-striped table-bordered table-hover">
 					  <thead>
 						<tr class="simple_bag">
