@@ -55,5 +55,7 @@ public interface PatentDocService {
 	int getAttatchmentPicCount(long patentDocId );
 	
 	int getMaxAttachmentPicNum(long patentDocId );
+	
+	void updateAttachmentImgName(Attachment attachment);
 
 }

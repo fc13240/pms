@@ -174,6 +174,13 @@ public class PatentDocServiceImp implements PatentDocService{
 		}
 
 
+		@Override
+		public void updateAttachmentImgName(Attachment attachment) {
+			patentDocDao.updateAttachmentImgName(attachment);
+			
+		}
+
+
 
 
 }
