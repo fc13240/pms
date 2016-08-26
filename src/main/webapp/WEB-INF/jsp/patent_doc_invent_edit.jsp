@@ -95,6 +95,15 @@
 <body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1);searGuide(this)">
 <style>
 .model1:hover .button{display:block}
+
+.picL9 li{
+overflow: hidden;
+position: relative;
+float: left;
+display: inline;
+width: 199px;
+height: 170px;
+margin: 1px 0 0 1px;}
 </style>	
 		
 		<div id="mincontent" style="min-height: 581px;">
@@ -356,8 +365,10 @@
 							<div class="box" id="content5-1">
 								<div class="upimg1" onclick="addPic();">
 									新增附图</div>
+									<div class="upimg1" onclick='javascript:window.open("<s:url value='/editor/downloadPic.html'/>?patentDocId=${ patentDoc.patentDocId}")' >
+									下载附图</div>
 								<div class="picBox">
-									<ul class="picL" id="picLsy2" >
+									<ul class="picL9" id="picLsy2" >
 										
 									</ul>
 								</div>
@@ -1162,18 +1173,18 @@ function loadImgs(){
 						var  httpImgUrl=base+item.attachmentUrl;
 						 $("#picLsy2").append(
  								 "<li id="+item.attachmentId+">"+
-									"<img src='"+httpImgUrl+"' alt='' width='200' height='150'/>"+
-									"<div class='text'>"+
-									"<b>"+item.caption+"</b>"+
-									"<p>"+"<a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a>"+
-									"</p>"+
+									"<img src='"+httpImgUrl+"' alt='' width='200' height='150'/><br/>"+
+									"<div style='margin-left:70px'>"+
+									"<b>"+item.caption+"</b>"+"|&nbsp"+
+									"<a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a>"+
+									
 								"</div>"
 								
 								+"</li>"
 						);
 						 
 					 });
-					 hoverImg2(); 
+					 //hoverImg2(); 
 			},
 			error : function() {
 				alert("操作失败");
@@ -1522,6 +1533,21 @@ function loadImgs(){
 		$('.model-list').hide();
 		$('.guide-list').show();
 		
+	}
+	
+	function downloadPic(){
+		var patentDocId=$("#patentDocId").val();
+		$.ajax({
+		
+			type :'GET',
+			url : "<s:url value='/editor/downloadPic.html'/>?patentDocId="+patentDocId,
+			success : function(){
+				
+			},
+			error: function(){
+				alert("下载失败");
+			}
+		})
 	}
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
