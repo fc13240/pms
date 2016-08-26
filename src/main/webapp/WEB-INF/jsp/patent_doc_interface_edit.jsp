@@ -14,7 +14,7 @@
 	<title>实用新型撰写</title>
 	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.min.css'/>">
 	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap-theme.min.css'/>">
-	<c:import url="common/kindEditor.jsp"></c:import>
+	<c:import url="common/kindEditor2.jsp"></c:import>
 	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
     <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
