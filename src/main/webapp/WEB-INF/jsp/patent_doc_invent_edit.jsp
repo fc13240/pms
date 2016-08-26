@@ -116,7 +116,7 @@
 						摘要附图</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件</div>
-					<div style="display:none;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
+					<div style="display: none;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
 						请求书</div>
 				</div>
 	
@@ -439,7 +439,7 @@
 	<input type="hidden" id="tempId" name="name" value="">
 	<div class="right1" style="height: 1000px; width: 25%;">
 	    <div class="data_title">
-	        <i class="icon"></i>撰写知识库
+	        <i class="icon"></i>撰写指南和模板
 	        
 	    </div>
 	    <input type="hidden" id="hidmodelbutton" value="100060010000">
@@ -895,7 +895,7 @@
 			var caption = $("#picName").val();
 			var attachmentUrl = $("#patentUrl").val();
 			var patentDocId=$("#patentDocId").val();
-			var seqNo=${"#seqNo"}.val;
+			var seqNo=$("#seqNo").val();
 			$.ajax({
 				type : "POST",
 				url : "<s:url value='/editor/savePatentImgUrl.html'/>",
