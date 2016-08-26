@@ -168,6 +168,12 @@ public class PatentDocServiceImp implements PatentDocService{
 		}
 
 
+		@Override
+		public int getMaxAttachmentPicNum(long patentDocId) {
+			return patentDocDao.getMaxAttachmentPicNum(patentDocId);
+		}
+
+
 
 
 }

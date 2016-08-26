@@ -52,4 +52,6 @@ public interface PatentDocMapper {
 	int searchUserPatentDocsCount(PatentDocSearchCondition searchCondition);
 	
 	int getAttatchmentPicCount(@Param("patentDocId")long patentDocId );
+	
+	int getMaxAttachmentPicNum(@Param("patentDocId")long patentDocId );
 }

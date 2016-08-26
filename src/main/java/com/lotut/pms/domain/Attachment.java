@@ -5,8 +5,17 @@ public class Attachment {
 	private long patentDocId;
 	private String attachmentUrl;
 	private String caption;
-	private String label;
 	
+	private int seqNo;
+	
+	
+	
+	public int getSeqNo() {
+		return seqNo;
+	}
+	public void setSeqNo(int seqNo) {
+		this.seqNo = seqNo;
+	}
 	public long getAttachmentId() {
 		return attachmentId;
 	}
@@ -26,12 +35,7 @@ public class Attachment {
 	public void setCaption(String caption) {
 		this.caption = caption;
 	}
-	public String getLabel() {
-		return label;
-	}
-	public void setLabel(String label) {
-		this.label = label;
-	}
+
 	public String getAttachmentUrl() {
 		return attachmentUrl;
 	}

@@ -52,4 +52,7 @@ public interface PatentDocDao {
 	int searchUserPatentDocsCount(PatentDocSearchCondition searchCondition);
 	
 	int getAttatchmentPicCount(long patentDocId );
+	
+	int getMaxAttachmentPicNum(long patentDocId );
+	
 }

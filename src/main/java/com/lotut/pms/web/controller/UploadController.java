@@ -74,7 +74,7 @@ public class UploadController {
 		public void uploadPic(@RequestParam("patentDocId") int patentDocId,HttpServletRequest request1 ,HttpServletResponse response1)  {
 		   try{
 			   String savePath = Settings.PATENTDOC_ATTACHMENT_PATH;
-			   int count=patentDocService.getAttatchmentPicCount(patentDocId)+1;
+			   int count=patentDocService.getMaxAttachmentPicNum(patentDocId)+1;
 				String basePath = request1.getContextPath();
 /*				String basePath = request1.getScheme() + "://" + request1.getLocalAddr() + ":" + request1.getServerPort()
 				+ path;*/
@@ -123,6 +123,7 @@ public class UploadController {
 		       		 	Map<String, Object> succMap = new HashMap<String, Object>(); 
 		                succMap.put("url", saveUrl + newFileName+".html");  
 		                succMap.put("picName",picName );
+		                succMap.put("count",count );
 		                WebUtils.writeJsonStrToResponse(response1, succMap);
 			   }
 		   }
