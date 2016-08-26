@@ -739,12 +739,6 @@ var ZYFILE = {
 							//ZYFILE.funDeleteFile(allFiles[0].index, true);
 							return ;
 						}
-						if((label==null || label=="" || label=="请填写附图标记说明，例如'1杯子主体，2杯子把手'。") ){
-							alert("请输入图片标记！");
-							$("#picMarkiLlus2").focus();
-							//ZYFILE.funDeleteFile(allFiles[0].index, true);
-							return ;
-						}
 						$("#fileSubmit").click();
 					}else{
 						alert("请先选中文件再点击上传");

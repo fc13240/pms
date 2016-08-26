@@ -14,7 +14,7 @@
 	<title>实用新型撰写</title>
 	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.min.css'/>">
 	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap-theme.min.css'/>">
-	<c:import url="common/kindEditor.jsp"></c:import>
+	<c:import url="common/kindEditor2.jsp"></c:import>
 	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
     <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
@@ -932,7 +932,7 @@ function loadImgs(){
  								 "<li id="+item.attachmentId+">"+
 									"<img src='"+httpImgUrl+"' alt='' width='200' height='150'/><br/>"+
 									"<div style='margin-left:70px'>"+
-									"<b>"+item.caption+"</b>"+"|&nbsp"+
+									"<a href='javascript:updateImgName("+"&apos;"+item.attachmentId+"&apos;"+")'>"+item.caption+"</a>"+"|&nbsp"+
 									"<a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a>"+
 									
 								"</div>"
@@ -1031,7 +1031,21 @@ function loadImgs(){
 				
 			}
 		});		
-	}	
+	}
+	
+	function updateImgName(value){
+		var caption = prompt("请输入新名称", "");
+		if (caption != null && caption != "") {
+			$.ajax({
+				url: "<s:url value='/editor/updateAttachmentImgName.html'/>", 
+				data:{"caption":caption,"attachmentId":value},
+				type: 'post', 
+				success: function(data) {
+					location.reload();
+				}
+			});
+		}
+	}
 	</script>
 </body>
 </html>
