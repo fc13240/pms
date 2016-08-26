@@ -51,7 +51,7 @@
 							  	<table class="search-table">
 						  			<tr>
 						  				<td>
-<a href="javascript:return void" onclick="batchShare()" >
+                                <a href="javascript:return void" onclick="batchShare()" >
 								<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
 								</a>
 						  				</td>	  										  									  				

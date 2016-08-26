@@ -198,23 +198,23 @@
 						</td>
 					  	<td>
 							<a href="javascript:return void" onclick="batchShare()" >
-							<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
+							<button style="margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
 							</a> 
 						</td>
 						<td>
 							<a href="javascript:return void" onclick="batchDelectPatents()" >
-							<button class="button button-primary  button-rounded" style="width:80px;" data-toggle="tooltip" data-placement="bottom" title="删除了还可以去回收站还原！">批量删除</button>
+							<button style="margin-left:10px;" class="button button-primary  button-rounded" style="width:80px;" data-toggle="tooltip" data-placement="bottom" title="删除了还可以去回收站还原！">批量删除</button>
 							</a> 
 						</td>
 						<td>
 							<a href="<s:url value='/patent/listByCreateTime.html'/>?currentPage=1" >
-						<button class="button button-primary  button-rounded" style="width:90px;" >添加日降序</button>
+						<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  >添加日降序</button>
 							</a> 
 						</td>
 						<se:authorize access="hasRole('ROLE_TRADER')">
 						 <td>
 							<a href="javascript:return void" onclick="batchAddGoods()" >
-							<button class="button button-primary  button-rounded" style="width:110px;" data-toggle="tooltip" data-placement="right" title="可以将您的专利发布到交易网买卖哦！您也可以去交易管理页面修改您的价格和类别哦！">批量发布交易</button>
+							<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-toggle="tooltip" data-placement="right" title="可以将您的专利发布到交易网买卖哦！您也可以去交易管理页面修改您的价格和类别哦！">批量发布交易</button>
 							</a> 
 						</td>	 
 						</se:authorize>								
