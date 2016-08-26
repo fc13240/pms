@@ -29,21 +29,25 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
-					<table class="table table-bordered">
-					  <tr>
+					<table id="simple-table" class="table table-striped table-bordered table-hover">
+					<thead>
+					  <tr class="simple_bag">
 						<th>序号</th>
 						<th>请求用户名</th>
 						<th>姓名</th>
 						<th>操作</th>
 					  </tr>
+					  </thead>
+					  <tbody>
 					  <c:forEach items="${friendRequests}" var="request" varStatus="status">
 						<tr>
-						  <td>${status.count}</td>
-						  <td><c:out value="${request.username}"/></td>
-						  <td><c:out value="${request.name}"/></td>
-						  <td><a  href='javascript:processFriendRequest("<c:out value='${request.userId}'/>", 2)'>通过验证</a> <a  href='javascript:processFriendRequest("<c:out value='${request.userId}'/>", 3)'>拒绝请求</a></td>
+						  <td style="text-align:center">${status.count}</td>
+						  <td style="text-align:center"><c:out value="${request.username}"/></td>
+						  <td style="text-align:center"><c:out value="${request.name}"/></td>
+						  <td style="text-align:center"><a  href='javascript:processFriendRequest("<c:out value='${request.userId}'/>", 2)'>通过验证</a> <a  href='javascript:processFriendRequest("<c:out value='${request.userId}'/>", 3)'>拒绝请求</a></td>
 						</tr>
 					  </c:forEach>
+					  </tbody>
 					</table>				
 				</div>
 			</div>

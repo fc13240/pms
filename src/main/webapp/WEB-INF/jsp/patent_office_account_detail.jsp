@@ -38,7 +38,7 @@
 						<input name="accountId"  type="hidden" value="${patentOfficeAccount.accountId}">
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" value="${patentOfficeAccount.username}" name="username" maxlength="25"/>
 					<br> 	
-			       	<h5>登陆密码:</h5>
+			       	<h5>登录密码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" value="${patentOfficeAccount.password}" name="password" required/>
 					
 					<br> 
