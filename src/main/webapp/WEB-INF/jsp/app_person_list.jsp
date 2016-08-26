@@ -22,22 +22,31 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 					<div class="lt-box" style="padding:20px;">
+							<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
+						  <div class="ta-top" style="margin-left:8px;"> 
 						  
-							<table class="search-table">
-						<tr>
-							<td>
-			  					<button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">新增申请人</button>
-			  				</td>
-			  				<td>
-							<a href="javascript:return void" onclick="batchShareAppPerson()" >
+						  	<table class="search-table">
+					  			<tr>
+					  				<td>
+									  	<button type="button" style="width: 100px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">新增申请人</button>
+										</a>
+					  				</td>
+					  				<td>
+										<a href="javascript:return void" onclick="batchShareAppPerson()" >
 								<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
-							</a> 
-							</td>
-							<td>
-							<button type="button" style="width: 130px;margin:25px;" class="button button-rounded button-primary" onclick="downloadProxyTemplate()">下载委托书模板</button>
-							</td>
-						</tr>
-						</table>
+										</a> 
+					  				</td>					  				
+					  				<td>
+									  	<button type="button" style="width: 130px;" class="button button-rounded button-primary" onclick="downloadProxyTemplate()">下载委托书模板</button>
+										</a> 
+									</td>	
+					  			</tr>
+					  		</table>		
+						  </div>
+						  </span> </div>
+						
+						
+						
 						
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>

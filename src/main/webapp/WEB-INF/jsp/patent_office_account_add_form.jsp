@@ -38,7 +38,7 @@
 			       	<h5>用户代码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" value="" name="username" maxlength="25"/>
 					<br> 	
-			       	<h5>登陆密码:</h5>
+			       	<h5>登录密码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" value="" name="password" required/>
 					<br> 
 					<button  type="submit" class="button button-primary  button-rounded">保存</button>					
