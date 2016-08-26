@@ -53,9 +53,10 @@
 </head>
 
 <body class="login-layout" >
-<div style="position:absolute;z-index: 99999; left:20px; top:30px; width:100px; height:100px;">
+<div style="position:absolute;z-index: 99999; left:20px; top:0px; width:100px; height:100px;">
 <img src="<s:url value='/temp/images/logo_long.png'/>" width="80px;">
-</div>  
+</div>
+<!--   
 <table width="100%">
 	<tr>
 	<td height="30">&nbsp;</td>
@@ -70,15 +71,41 @@
 		        </tr>
 	     	</table></td>
 	</tr>
-</table>
+</table>-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tbody>
+      <tr>
+        <td width="10%" align="left" bgcolor="#FF0000"></td>
+        <td width="60%" height="45" align="left" bgcolor="#FF0000">
+        	<div class="nav">
+        	<img src="<s:url value='/temp/images/login_top.jpg'/>">
 
+			</div>
+		</td>
+        <td width="200" align="right" bgcolor="#FF0000">
+        	<table width="250" border="0" cellspacing="0" cellpadding="0">
+          	<tbody>
+          	<tr>
+            	<td height="45" align="center" class="wel_user" valign="middle">
+欢迎您！请&nbsp;<a href="<s:url value='/user/loginForm.html'/>">登录</a>&nbsp;或&nbsp;<a href="<s:url value='/user/registerForm.html'/>">免费注册</a>              
+   
+            	</td>
+          	</tr>
+        	</tbody>
+        	</table>
+        </td>
+      </tr>
+    </tbody>
+</table>
 	<div class="main-container" style="min-width:1200px;">
 		<div class="main-content">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-container">
 						<div class="position-relative">
-							<div id="login-box" class="login-box visible widget-box no-border" style="background-color:#D32F30;margin-top:150px;">
+							<div style="margin-top:130px;margin-left:40px;"><img src="<s:url value='/static/images/logo.png'/>"></div>
+							<div id="login-box" class="login-box visible widget-box no-border" style="background-color:#D32F30;margin-top:10px;">
+								
 								<div class="widget-body">
 									<div class="widget-main">
 										<h4 class="header blue lighter bigger">
@@ -141,7 +168,7 @@
 					</div>
 					
 				</div><!-- /.col -->
-				<div class="lt-flash col-sm-5" style="margin-top:150px;">
+				<div class="lt-flash col-sm-5" style="margin-top:200px;">
 				
 					<!-- 代码 开始 -->
 					<div id="fsD1" class="focus" style="">  
