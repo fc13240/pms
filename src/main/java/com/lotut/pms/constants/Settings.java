@@ -3,7 +3,7 @@ package com.lotut.pms.constants;
 public interface Settings {
 	final String NOTICE_ROOT_PATH = "/opt/media/notice/";
 	final String PATENTDOC_IMAGE_PATH = "/opt/media/patent/editorPic/";
-	final String PATENTDOC_ATTACHMENT_PATH = "/opt/media/patent/patentAttachImg/";
+	final String PATENTDOC_ATTACHMENT_PATH = "/opt/media/patent/attachmentImg/";
 	final String PATENTDOC_INTERFACEPIC_PATH = "/opt/media/patent/InterFaceImg/";
 	final String TEMP_DIR = "/tmp/";
 	final String FEE_EXPORT_EXCEL_TEMPLATE = "/template/国内申请号支付模板.xls";
