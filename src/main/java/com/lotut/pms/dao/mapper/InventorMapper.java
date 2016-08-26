@@ -1,6 +1,7 @@
 package com.lotut.pms.dao.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -33,5 +34,7 @@ public interface InventorMapper {
 	Integer getIdByInventor(CommonInventor commonInventor);
 
 	void deleteUserInventorById(UserInventor userInventor);
+	
+	void insertUserInventors(List<Map<String, Integer>> userInventorRecords);
 
 }

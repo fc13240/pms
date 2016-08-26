@@ -139,5 +139,14 @@
   		update common_app_person set user_id = 0 where app_person_id=#{appPersonId} and user_id = #{userId}
   	
   	</update>
+  	
+  	<insert id="insertUserAppPersons" parameterType="list">
+		replace into user_app_person(user, app_person) 
+		values
+		<foreach item="userAppPersonRecord" collection="list" separator=",">
+			(#{userAppPersonRecord.user}, #{userAppPersonRecord.appPerson})
+		</foreach>
+	</insert>	
+	
   </mapper>
   

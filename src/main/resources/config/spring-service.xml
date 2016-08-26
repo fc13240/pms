@@ -77,13 +77,6 @@
 	<bean id="petitionService" class="com.lotut.pms.service.impl.PetitionServiceImpl">
 		<constructor-arg ref="petitionDao"/>
 	</bean>
-	<bean id="shareAppPersonService" class="com.lotut.pms.service.impl.ShareAppPersonServiceImpl">
-		<constructor-arg ref="shareAppPersonDao"/>
-	</bean>
-	
-	<bean id="shareInventorService" class="com.lotut.pms.service.impl.ShareInventorServiceImpl">
-		<constructor-arg ref="shareInventorDao"/>
 
-	</bean>
 	
 </beans>

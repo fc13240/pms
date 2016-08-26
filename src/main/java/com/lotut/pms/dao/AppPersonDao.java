@@ -1,6 +1,8 @@
 package com.lotut.pms.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.UserAppPerson;
 
@@ -36,4 +38,6 @@ public interface AppPersonDao {
 	void deleteUserAppPersonbyId(UserAppPerson userAppPerson);
 
 	void updateAppPersonUserIdNull(CommonAppPerson commonAppPerson);
+	
+	void insertUserAppPersons(List<Map<String, Integer>> userAppPersonRecords);
 }
