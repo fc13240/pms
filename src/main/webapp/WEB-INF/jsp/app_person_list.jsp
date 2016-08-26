@@ -21,10 +21,9 @@
 		<div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
 				<div style="height:10px;"></div>
-					<div class="lt-box" style="padding:20px;">
+					<div class="lt-box" style="padding:20px 5px 5px 5px;">
 							<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
 						  <div class="ta-top" style="margin-left:8px;"> 
-						  
 						  	<table class="search-table">
 					  			<tr>
 					  				<td>
@@ -33,21 +32,17 @@
 					  				</td>
 					  				<td>
 										<a href="javascript:return void" onclick="batchShareAppPerson()" >
-								<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
+								<button style="width:100px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
 										</a> 
 					  				</td>					  				
 					  				<td>
-									  	<button type="button" style="width: 130px;" class="button button-rounded button-primary" onclick="downloadProxyTemplate()">下载委托书模板</button>
+									  	<button type="button" style="width:130px;margin-left:10px;" class="button button-rounded button-primary" onclick="downloadProxyTemplate()">下载委托书模板</button>
 										</a> 
 									</td>	
 					  			</tr>
 					  		</table>		
 						  </div>
 						  </span> </div>
-						
-						
-						
-						
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">

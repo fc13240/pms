@@ -211,7 +211,7 @@
 				
 				
 				
-				<div class="lt-box" style="padding: 10px;">
+				<div class="lt-box" style="padding: 10px 0 0 0;">
 					<div class="search-box">
 						<form action="<s:url value='/notice/search.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>

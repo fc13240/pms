@@ -94,22 +94,22 @@
 					</div>
 				</div>
 				<!--search form end-->
-				<div class="lt-box">
-					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-					  <div class="ta-top" style="margin-left:8px;">
-
-					  	<table class="search-table">
-					  	<tr>
-					  	<td>
-							<a href="javascript:return void" onclick="batchChangePrice()" >
+					  <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> 
+							<span class="input-group-btn" >
+							  	<div class="ta-top" style="margin-left:8px;"> 
+							  	<table class="search-table">
+						  			<tr>
+						  				<td>
+                                <a href="javascript:return void" onclick="batchChangePrice()" >
 							<button class="button button-primary  button-rounded" style="width:110px;">批量修改价格</button>
-							</a> 
-						</td>						
-					  	</tr>
-					  	</table>
-
-					  </div>
-					  </span> </div>
+								</a>
+						  				</td>	  										  									  				
+						  			</tr>
+						  		</table>		
+							  </div>
+						  </span> 
+						  </div>	
+						  
 					<table id="simple-table" class="table table-striped table-bordered table-hover">
 					  <thead>
 						<tr class="simple_bag">
@@ -130,7 +130,7 @@
 						</tr>
 					  </thead>
 					  <tbody>
-					  <div class="lt-box" ">
+					 
 					  
 						<c:forEach items="${patents}" var="patent" varStatus="status">
 						  <tr >

@@ -46,8 +46,8 @@
 							</a>
 						</td>
 					  	<td>
-							<a href="javascript:return void" onclick="deleteForever()" style="margin-left:50px;">
-							<button class="button button-primary  button-rounded">永久删除</button>
+							<a href="javascript:return void" onclick="deleteForever()">
+							<button style="margin-left:10px;" class="button button-primary  button-rounded">永久删除</button>
 							</a> 
 						</td>			
 					  	</tr>

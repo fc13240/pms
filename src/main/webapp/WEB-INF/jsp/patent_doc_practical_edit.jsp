@@ -34,7 +34,7 @@
 					height           :   "400px",                 // 宽度
 					itemWidth        :   "140px",                 // 文件项的宽度
 					itemHeight       :   "115px",                 // 文件项的高度
-					url              :   "<s:url value='/kindeditor/uploadPic.html'/>",  // 上传文件的路径
+					url              :   "<s:url value='/kindeditor/uploadPic.html'/>?patentDocId=${patentDoc.patentDocId}",  // 上传文件的路径
 					fileType         :   ["jpg","png","jpeg"],// 上传文件的类型
 					fileSize         :   51200000,                // 上传文件的大小
 					multiple         :   false,                    // 是否可以多个文件上传
@@ -96,6 +96,15 @@
 <body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1);searGuide(this)">
 <style>
 .model1:hover .button{display:block}
+
+.picL9 li{
+overflow: hidden;
+position: relative;
+float: left;
+display: inline;
+width: 199px;
+height: 170px;
+margin: 1px 0 0 1px;}
 </style>	
 	
 		<div id="mincontent" style="min-height: 581px;">
@@ -600,17 +609,17 @@
 	});
 	function savePatentImgUrl() {
 		if ($("#patentUrl").length > 0) {
-			var caption = $("#piciLlus2").val();
-			var label = $("#picMarkiLlus2").val();
+			var caption = $("#picName").val();
 			var attachmentUrl = $("#patentUrl").val();
 			var patentDocId=$("#patentDocId").val();
+			var seqNo=$("#seqNo").val();
 			$.ajax({
 				type : "POST",
 				url : "<s:url value='/editor/savePatentImgUrl.html'/>",
 				data : {
 					"caption" : caption,
-					"label" : label,
 					"attachmentUrl" : attachmentUrl,
+					"seqNo":seqNo,
 					"patentDocId":patentDocId
 				},
 					success: function(data){
