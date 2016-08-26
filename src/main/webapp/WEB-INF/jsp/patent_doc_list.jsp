@@ -23,19 +23,16 @@
             撰写列表</div>
                
     </div>
-
-
-
 		  <div class="col-xs-offset-1 col-xs-11">
-			<div class="lt-right">
-				    <div class="cl top1" style="height:10px;margin-left: 460px;">
+			<div class="lt-right" style="padding:10px 0 0 3px;" >
+				    <div class="cl top1" style="height:10px;">
         				<form class="form-inline" action="<s:url value='/editor/searchPatentDoc.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 						 <div class="t-third" >
 						  <table class="search-table">
 							  <tr>
 							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="文档名称" class="t-input form-control"/>							  
+								<input style="width:450px;height:34px;" name="keyword" id="keywordId" value="" placeholder="文档名称" class="t-input form-control"/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">搜索文档</button>
@@ -45,10 +42,8 @@
 						 </div>
 					</form>
     			</div>
-			 
-			
 				<div style="height:10px;"></div>
-					<div class="lt-box" style="padding:20px;">
+					<div class="lt-box" style="padding:30px 0 0 0;">
 								<a href="javascript:return void" onclick="batchShare()" >
 								<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
 								</a>
