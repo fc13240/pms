@@ -89,4 +89,12 @@
 	<update id="saveAttachmentFile" parameterType="CommonInventor">
 		update common_inventor set inventor_attachment_file = #{inventorUrl} where inventor_id = #{inventorId}
 	</update>
+	
+	<insert id="insertUserInventors" parameterType="list">
+		replace into user_inventor(user, inventor) 
+		values
+		<foreach item="userInventorRecord" collection="list" separator=",">
+			(#{userInventorRecord.user}, #{userInventorRecord.inventor})
+		</foreach>
+	</insert>	
 </mapper>

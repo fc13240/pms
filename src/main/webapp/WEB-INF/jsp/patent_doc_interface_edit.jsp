@@ -66,11 +66,10 @@
 					onSuccess: function(file, response){
 						// 文件上传成功的回调方法
 						var Jresponse=$.parseJSON(response);
-						$("#patentImgUrl").append("<input type='hidden' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
+						$("#patentImgUrl").append("<input type='hidde' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
+						$("#patentImgUrl").append("<input type='hidde' id='seqNo' name='seqNo' value='"+Jresponse["count"]+"'/>");
 						savePatentImgUrl();
 						$("#patentImgUrl").empty();
-						$('#piciLlus2').val("请填写附图说明，例如”图1为本发明实施例XX的方法流程示意图”。").css('color', '#999');
-					    $('#picMarkiLlus2').val("请填写附图标记说明，例如“1杯子主体，2杯子把手”。").css('color', '#999');
 					},
 					onFailure: function(file, response){          // 文件上传失败的回调方法
 						console.info("此文件上传失败：");
@@ -96,6 +95,14 @@
 <body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingInterfaceTemplate(1);searGuide(this)">
 <style>
 .model1:hover .button{display:block}
+.picL9 li{
+overflow: hidden;
+position: relative;
+float: left;
+display: inline;
+width: 199px;
+height: 170px;
+margin: 1px 0 0 1px;}
 </style>	
 	
 		<div id="mincontent" style="min-height: 581px;">
@@ -320,8 +327,10 @@
 							<div class="box" id="content5-1">
 								<div class="upimg1" onclick="addPic();">
 									新增附图</div>
+									<div class="upimg1" onclick='javascript:window.open("<s:url value='/editor/downloadPic.html'/>?patentDocId=${ patentDoc.patentDocId}")' >
+									下载附图</div>
 								<div class="picBox">
-									<ul class="picL" id="picLsy2" >
+									<ul class="picL9" id="picLsy2" >
 										
 									</ul>
 								</div>
@@ -342,9 +351,7 @@
 								<div class="imgfr">
 								 <form id="patentUrlForm" name="patentUrlForm"  method="post" enctype="multipart/form-data" class="form-horizontal">
 								 	<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
-								 	
 								 	<input id="patentDocAttachmentFile" type="hidden" name="patentDocAttachmentFile" value="${patentDoc.patentDocAttachmentFile}">
-									<input id="picMarkiLlus2" name="label" type="hidden" onfocus="picMarkiLlusFc(this);" onblur="picMarkiLlusBl(this);" style="color: #999" value="固定的图片的标记" autocomplete="off" required>
 									
 									
 									<font size="3" font_family="Microsoft YaHei" color="black">图片名称:</font>
@@ -625,16 +632,16 @@
 	function savePatentImgUrl() {
 		if ($("#patentUrl").length > 0) {
 			var caption = $("#piciLlus2").val();
-			var label = $("#picMarkiLlus2").val();
 			var attachmentUrl = $("#patentUrl").val();
 			var patentDocId=$("#patentDocId").val();
+			var seqNo=$("#seqNo").val();
 			$.ajax({
 				type : "POST",
 				url : "<s:url value='/editor/savePatentImgUrl.html'/>",
 				data : {
 					"caption" : caption,
-					"label" : label,
 					"attachmentUrl" : attachmentUrl,
+					"seqNo":seqNo,
 					"patentDocId":patentDocId
 				},
 					success: function(data){
@@ -922,19 +929,19 @@ function loadImgs(){
 					$.each(obj,function(i,item){
 						var  httpImgUrl=base+item.attachmentUrl;
 						 $("#picLsy2").append(
-								 "<li id="+item.attachmentId+">"+
-									"<a href='javascript:delectImg("+item.attachmentId+")'>"+
-									"<img src='"+httpImgUrl+"' alt='' width='200' height='150'/>"+
-									"</a>"+
-									"<div class='text'>"+
-										"<b>"+item.caption+"</b>"+
-										"<p><a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a></p>"+
-									"</div>"
+ 								 "<li id="+item.attachmentId+">"+
+									"<img src='"+httpImgUrl+"' alt='' width='200' height='150'/><br/>"+
+									"<div style='margin-left:70px'>"+
+									"<b>"+item.caption+"</b>"+"|&nbsp"+
+									"<a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a>"+
+									
+								"</div>"
+								
 								+"</li>"
 						);
 						 
 					 });
-					hoverImg2();
+					 
 			},
 			error : function() {
 				alert("操作失败");

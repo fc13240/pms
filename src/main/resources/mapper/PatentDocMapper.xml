@@ -29,7 +29,7 @@
 		<resultMap type="Attachment" id="PatentImgMap">
 			<id property="attachmentId" column="attachment_id"/>
 			<result property="caption" column="caption"/>
-			<result property="label" column="label"/>
+			<result property="seqNo" column="seq_no"/>
 			<result property="patentDocId" column="patent_doc_id"/>
 			<result property="attachmentUrl" column="attachment_url"/>
 		</resultMap>
@@ -89,15 +89,15 @@
 	</delete>
 	
 	<insert id="savePatentImgUrl" parameterType="Attachment">
-		insert into patent_attachment(patent_doc_id,caption,label,attachment_url) values
-		(#{patentDocId},#{caption},#{label},#{attachmentUrl,javaType=string,jdbcType=VARCHAR})
+		insert into patent_attachment(patent_doc_id,caption,seq_no,attachment_url) values
+		(#{patentDocId},#{caption},#{seqNo},#{attachmentUrl,javaType=string,jdbcType=VARCHAR})
 	</insert>
 	
 	<delete id="deleteNullPatentDoc">
 		delete from patent_documents where patent_name is null and  manual is null and  right_claim is null and abstract_desc is null  and abstract_img is null
 	</delete>
 	<select id="getAttachmentById"  resultMap="PatentImgMap">
-		select attachment_id,caption,label, attachment_url from patent_attachment where  patent_doc_id=#{patentDocId}
+		select attachment_id,caption,seq_no, attachment_url from patent_attachment where  patent_doc_id=#{patentDocId}
 	</select>
 	
 	<delete id="delectAttachmentById"  >
@@ -105,7 +105,7 @@
 	</delete>
 	
 	<select id="getLabelByUrl" resultMap="PatentImgMap" parameterType="String">
-		select attachment_id,caption,label,attachment_url from patent_attachment where attachment_url=#{abstractImg,javaType=string,jdbcType=VARCHAR}
+		select attachment_id,caption,sql_no,attachment_url from patent_attachment where attachment_url=#{abstractImg,javaType=string,jdbcType=VARCHAR}
 	</select>
 	
 	<update id="savePatentDocAttachmentFile" parameterType="PatentDoc">
@@ -160,4 +160,8 @@
 	<select id="getAttatchmentPicCount" resultType="int">
 		select count(*) from patent_attachment where patent_doc_id=#{patentDocId}
 	</select>	
+	
+	<select id="getMaxAttachmentPicNum" resultType="int">
+		SELECT  IFNULL(MAX(seq_no),0) AS seq_no FROM patent_attachment WHERE patent_doc_id=#{patentDocId};
+	</select>
 </mapper>

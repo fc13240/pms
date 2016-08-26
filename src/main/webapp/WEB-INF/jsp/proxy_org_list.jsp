@@ -31,11 +31,20 @@
 				<div class="lt-box" style="padding:20px;">
 					<!-- list beg -->
 					<div class="t-third">
-					  <form  method="GET"  role="search">
-					    <div class="form-group">
-					      <button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addProxyOrg()">增加机构</button>
-					    </div>
-					  </form>
+					  <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
+						  <div class="ta-top" style="margin-left:8px;"> 
+						  	<table class="search-table">
+					  			<tr>
+					  				<td>
+									  	<button type="button"  class="button button-rounded button-primary" onclick="javascript:addProxyOrg()">增加机构</button>
+										</a>
+					  				</td>
+					  				</td>						  										  									  				
+					  			</tr>
+					  		</table>		
+						  </div>
+						  </span> 
+					 </div>
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
 					    <thead>
 					      <tr class="simple_bag">

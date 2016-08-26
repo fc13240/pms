@@ -38,21 +38,25 @@
 						<button  type="submit" class="button button-caution button-rounded">查询</button>
 					  </div>
 					</form>
-					<table class="table table-bordered table-striped">
-					  <tr>
+					<table id="simple-table" class="table table-striped table-bordered table-hover">
+					<thead>
+					  <tr class="simple_bag">
 						<th>序号</th>
 						<th>用户名</th>
 						<th>姓名</th>
 						<th>操作</th>
 					  </tr>
+					 </thead>
+					 <tbody>
 					  <c:forEach items="${friends}" var="friend" varStatus="status">
 						<tr>
-						  <td>${status.count + page.startIndex}</td>
-						  <td><c:out value="${friend.username}"/></td>
-						  <td><c:out value="${friend.name}"/></td>
-						  <td><a  href='javascript:sendFriendRequest("<c:out value='${friend.userId}'/>");'>请求加为好友</a></td>
+						  <td style="text-align:center;width:16%;">${status.count + page.startIndex}</td>
+						  <td style="text-align:center;width:28%;"><c:out value="${friend.username}"/></td>
+						  <td style="text-align:center;width:28%;"><c:out value="${friend.name}"/></td>
+						  <td style="text-align:center;width:28%;"><a  href='javascript:sendFriendRequest("<c:out value='${friend.userId}'/>");'>请求加为好友</a></td>
 						</tr>
 					  </c:forEach>
+					 </tbody>
 					</table>
 					</div>
 				<!-- list end -->				

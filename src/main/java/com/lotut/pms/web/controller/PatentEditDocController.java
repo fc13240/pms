@@ -614,4 +614,57 @@ public class PatentEditDocController {
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		return "patent_list";
 	}
+	
+	@RequestMapping(path="/downloadPic")
+	public void downloadPic(@RequestParam("patentDocId")long patentDocId,HttpServletRequest reqeust, HttpServletResponse response) throws IOException {
+		try{
+
+		 SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+		 String contentName = df.format(new Date()) + "_" + new Random().nextInt(1000);
+		 String patentExportWord = Settings.PATENTDOC_ATTACHMENT_PATH;
+		 String picPathdir=patentExportWord+patentDocId;
+		 File dirFile = new File(picPathdir);
+		 if (!dirFile.exists()) {
+				dirFile.mkdirs();
+		 }
+		 
+
+		String zipPath=picPathdir+"/"+contentName+".zip";
+		try {
+			
+			ZipFile zipFile = new ZipFile(zipPath);
+			String folderToAdd = picPathdir;
+		
+			ZipParameters parameters = new ZipParameters();
+			
+			parameters.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
+			parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
+			zipFile.addFolder(folderToAdd, parameters);
+			zipFile.getFile().getName();
+		} catch (ZipException e) {
+			e.printStackTrace();
+		}
+		
+			String fileName=contentName+".zip";
+			response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
+			File wordFile = new File(zipPath);
+			int BUFFER_SIZE = 8192;
+			byte[] buffer = new byte[BUFFER_SIZE];
+			try (OutputStream out = response.getOutputStream(); 
+					BufferedInputStream bis = new BufferedInputStream(new FileInputStream(wordFile))) {
+				int bytesRead = -1;
+				while ((bytesRead = bis.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesRead);
+				}
+				out.flush();
+				bis.close();
+				out.close();
+				
+			}
+			File picZip=new File(zipPath);
+			picZip.delete();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 }

@@ -19,6 +19,12 @@
 	.textarea {
 		height: 150px;
 		width: 800px;
+	}
+	
+	.tdstyle {
+		padding:5px;
+		
+	}
 }
 </style>
 </head>
@@ -43,17 +49,17 @@
 							<div class="lt-box" style="width: 800px;">
 								<table id="simple-table"
 									class="table table-striped table-bordered table-hover"
-									style="word-break: break-all" width="800px">
+									style="word-break: break-all;width:800px;" >
 									<c:forEach items="${remarks}" var="remark">
 										<tr class="simple_bag">
-											<td>用户：${remark.user.username}</td>
-											<td>备注时间：<fmt:formatDate value="${remark.createTime}"
+											<td class="tdstyle">用户：${remark.user.username}</td>
+											<td class="tdstyle">备注时间：<fmt:formatDate value="${remark.createTime}"
 													pattern="yyyy-MM-dd HH:mm:ss" /> <input id="patentId"
 												type="hidden" value="${remark.patentId}" />
 											</td>
 										</tr>
 										<tr>
-											<td colspan="2">内容：${remark.content}</td>
+											<td colspan="2" class="tdstyle">内容：${remark.content}</td>
 										</tr>
 									</c:forEach>
 								</table>

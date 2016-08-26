@@ -1,6 +1,7 @@
 package com.lotut.pms.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lotut.pms.dao.AppPersonDao;
 import com.lotut.pms.domain.CommonAppPerson;
@@ -136,4 +137,16 @@ public class AppPersonServiceImpl implements AppPersonService {
 		appPersonDao.updateAppPersonUserIdNull(commonAppPerson);
 		
 	}
+
+
+	@Override
+	public void insertUserAppPersons(List<Map<String, Integer>> userAppPersonRecords) {
+		appPersonDao.insertUserAppPersons(userAppPersonRecords);
+		
+	}
+
+
+
+
+
 }

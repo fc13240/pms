@@ -14,28 +14,36 @@
 	<c:import url="common/kindEditor.jsp"></c:import>
 	<link href="<s:url value="/static/css/bootstrap.css"/>" rel="stylesheet"/>
 	<%@ include file="_css.jsp" %>
+	<style type="text/css">
+		#tiodiv{
+			display: table-cell;
+		    vertical-align: middle;
+		    background-color: Gray;
+		
+		
+		}
 	
+	</style>
 </head>
-
 <body>
 <div>
 <%@ include file="_top.jsp" %>
 </div>
 <div style="height:150px;"></div>
 <div>
-
-	
-	<select id="" onchange="chooseSection(this.value)">
-		<c:forEach items="${patentDocSectionTypes }" var="patentDocSectionType">
-			<option value="${patentDocSectionType.patentDocSectionId }"
-				<c:if test="${patentDocSectionType.patentDocSectionId ==sectionValue}">selected="selected"</c:if>>
-				${patentDocSectionType.patentDocSectionDesc }
-			</option>
-		</c:forEach>
-	</select>
-	
-	   <div class="tab-pane fade in active" id="home">
-	      专利模板首页
+	   <div class="tab-pane fade in active" id="home" style="float:left">
+	   		<span style="font-size:16px;" >板块部分</span>
+	   </div>
+	  <div style="float:left;margin-left:10px;">
+		   	<select class="form-control" onchange="chooseSection(this.value)">
+				<c:forEach items="${patentDocSectionTypes }" var="patentDocSectionType">
+					<option value="${patentDocSectionType.patentDocSectionId }"
+						<c:if test="${patentDocSectionType.patentDocSectionId ==sectionValue}">selected="selected"</c:if>>
+						${patentDocSectionType.patentDocSectionDesc }
+					</option>
+				</c:forEach>
+			</select>
+	   
 	   </div>
 	   <div>
 	   	   <table id="simple-table" class="table table-striped table-bordered table-hover">
