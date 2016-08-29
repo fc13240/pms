@@ -8,7 +8,7 @@ public class CommonInventor {
 	private String inventorName;
 	private String inventorNumber;
 	private String inventorNationality;
-	private	int inventorMobile;
+	private	String inventorMobile;
 	private String  inventorEmail;
 	private String  inventorComment;
 	private int userId;
@@ -46,12 +46,7 @@ public class CommonInventor {
 	public void setInventorNationality(String inventorNationality) {
 		this.inventorNationality = inventorNationality;
 	}
-	public int getInventorMobile() {
-		return inventorMobile;
-	}
-	public void setInventorMobile(int inventorMobile) {
-		this.inventorMobile = inventorMobile;
-	}
+	
 	public String getInventorEmail() {
 		return inventorEmail;
 	}
@@ -83,7 +78,12 @@ public class CommonInventor {
 		
 		return "";
 	}
-	
+	public String getInventorMobile() {
+		return inventorMobile;
+	}
+	public void setInventorMobile(String inventorMobile) {
+		this.inventorMobile = inventorMobile;
+	}
 	
 	
 

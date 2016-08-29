@@ -102,30 +102,25 @@ function validateInfoNumber1(phoneNumber) {
 function validateInfoNumber2(phoneNumber) {
 	var reg = new RegExp("^[0-9]*$");
 	document.getElementById("numberError2").style.display = "none";
-	if (reg.test(phoneNumber)) {
+	
 		if (phoneNumber.length>20) {
 			document.getElementById("numberError2").style.display = "";
 			return false;
 		} else {
 			return true;
 		}
-	} else {
-		document.getElementById("numberError2").style.display = "";
-		return false;
-	}
 }
 
 function validateInfoNumber3(phoneNumber) {
 	var reg = new RegExp("^[0-9]*$");
 	document.getElementById("numberError3").style.display = "none";
-	if (reg.test(phoneNumber)) {
+	
 		if (phoneNumber.length>20) {
 			document.getElementById("numberError3").style.display = "";
 			return false;
 		} else {
 			return true;
 		}
-	}
 }
 
 function validateInfoNumber(phoneNumber) {
