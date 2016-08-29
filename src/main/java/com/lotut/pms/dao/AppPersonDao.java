@@ -33,7 +33,7 @@ public interface AppPersonDao {
 
 	void addUserAppPerson(UserAppPerson userAppPerson);
 
-	Integer getIdbyAppPerson(CommonAppPerson commonAppPerson);
+	List<Integer> getIdbyAppPerson(CommonAppPerson commonAppPerson);
 
 	void deleteUserAppPersonbyId(UserAppPerson userAppPerson);
 

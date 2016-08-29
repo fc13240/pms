@@ -33,7 +33,7 @@ public interface AppPersonService {
 
 	void addUserAppPerson(UserAppPerson userAppPerson);
 
-	Integer getIdbyAppPerson(CommonAppPerson commonAppPerson);
+	List<Integer> getIdbyAppPerson(CommonAppPerson commonAppPerson);
 
 	void deleteUserAppPersonbyId(UserAppPerson userAppPerson);
 
