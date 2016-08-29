@@ -148,7 +148,7 @@ margin: 1px 0 0 1px;}
 							 </a>
 	                    </div>
 	                    <div class="top_right">
-	                        <div class="review" onclick="preview_selfwrite(${patentDoc.patentDocId});">
+	                        <div class="review" onclick="preview_selfwrite('${patentDoc.patentDocId}','${patentDoc.patentType}');">
 	                            <i class="icon"></i>预览
 	                        </div>
 	                        <input type="hidden" id="patentType" value="${patentDoc.patentType }"/>
@@ -896,7 +896,9 @@ function savePatentDoc(value){
 };
 
 
-function preview_selfwrite(value){
+function preview_selfwrite(patentDocId,patentType){
+	var patentDocId=patentDocId;
+	var patentType=patentType;
 	var name=$("#patentName").val();
 	var manual=$("#editorContent").val();
 	var abstractDescription=$("#editorContent7").val();
@@ -904,14 +906,14 @@ function preview_selfwrite(value){
 	$.ajax({
 		type: "POST",
 		url: "<s:url value='/editor/savePreviewPatentDoc.html'/>",
-		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
+		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":patentDocId},
 		success: function(data){
 		},
 		error: function(){
 			alert("数据未保存");
 		}
 	});
-	window.open("<s:url value='/editor/previewInterfacePatentDoc.html'/>?patentDocId="+value)
+	window.open("<s:url value='/editor/previewPatentDoc.html'/>?patentDocId="+patentDocId+"&patentType="+patentType)
 	
 }
 
