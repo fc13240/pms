@@ -119,7 +119,7 @@
 									<img src="${base}${Attachment.attachmentUrl}" alt="" width="200" height="170"/><br/>
 									<div style="margin-left:70px">
 									<b>${Attachment.caption}</b>
-								</div>
+									</div>
 								</li>
 							</c:forEach>
 						</ul>
