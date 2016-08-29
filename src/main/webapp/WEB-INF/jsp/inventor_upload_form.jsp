@@ -67,7 +67,7 @@
 			beforeSubmit : function() {
 				var name=$("#filename").val();
 				var mime = name.toLowerCase().substr(name.lastIndexOf("."));
-				if(mime ==".doc" || mime ==".docx"){
+				if(mime ==".zip" || mime ==".rar"){
 					return true;
 				}else{
 					alert("请上传后缀名为.zip或.rar格式的压缩包！");
