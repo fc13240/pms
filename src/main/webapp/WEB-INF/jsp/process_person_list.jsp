@@ -37,9 +37,7 @@
 					  			<tr>
 					  				<td>
 									  	<button type="button" style="width: 100px;" class="button button-rounded button-primary" onclick="javascript:addProcessPerson()">增加流程员</button>
-										</a>
 					  				</td>
-					  				</td>						  										  									  				
 					  			</tr>
 					  		</table>		
 						  </div>
@@ -49,7 +47,7 @@
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
 					    <thead>
 					      <tr class="simple_bag">
-					        <th>序号</th>
+					        <th width="150px">序号</th>
 					        <th width="300px">用户名</th>
 					        <th width="300px">姓名</th>
 					        <th width="300px">备注名</th>

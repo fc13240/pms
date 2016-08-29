@@ -36,10 +36,8 @@
 						  	<table class="search-table">
 					  			<tr>
 					  				<td>
-									  	<button type="button"  class="button button-rounded button-primary" onclick="javascript:addProxyOrg()">增加机构</button>
-										</a>
+									  	<button type="button" style="width: 100px;" class="button button-rounded button-primary" onclick="javascript:addProxyOrg()">增加机构</button>
 					  				</td>
-					  				</td>						  										  									  				
 					  			</tr>
 					  		</table>		
 						  </div>
@@ -48,7 +46,7 @@
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
 					    <thead>
 					      <tr class="simple_bag">
-					        <th>序号</th>
+					        <th width="150px">序号</th>
 					        <th width="300px">机构用户名</th>
 					        <th width="300px">机构名称</th>
 					        <th width="300px">备注名</th>

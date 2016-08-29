@@ -339,7 +339,7 @@
 							  <th width="90px">申请号/专利号</th>
 							  <th width="150px">专利名称</th>
 							  <th>第一申请人 </th>
-							  <th>案件状态 </th>
+							  <th class="center">案件状态 </th>
 							  <th>共享人</th>
 							  <th width="100px">发文日</th>
 							  <th>通知书名称</th>
@@ -361,11 +361,7 @@
 								</td>
 								<td style="text-align:center"><c:out value="${notice.patent.name}"/></td>
 								<td style="text-align:center"><c:out value="${notice.patent.firstAppPerson}"/></td>
-								<td>
-								
-								${notice.patent.patentStatusText}
-								
-								</td>
+								<td style="text-align:center"><c:out value="${notice.patent.patentStatusText}"/></td>
 								<td style="text-align:center"><c:out value="${notice.patent.shareUsersAsString}"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
 								<td style="text-align:center"><a id="download" href="javascript: void(0);" onClick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}')">
