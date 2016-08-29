@@ -116,7 +116,7 @@
 						摘要附图</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件</div>
-					<div style="display: none;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
+					<div style="display: block;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
 						请求书</div>
 				</div>
 	
@@ -239,6 +239,22 @@
 												</tr>
 											  </thead>
 											  <tbody id="appersonTab">
+											  		<c:if test="${not empty patentDocAppPersons }">
+											  			<c:forEach items="${patentDocAppPersons }" var="patentDocAppPerson">
+															<tr>
+																<td style="text-align:center">${patentDocAppPerson.name }</td>
+																<td style="text-align:center">${patentDocAppPerson.idNumber }</td>
+																<td style="text-align:center">${patentDocAppPerson.postcodeAddress }</td>
+																<td style="text-align:center">${patentDocAppPerson.feeReduceTransactionStatus }</td>
+																<td style="text-align:center">${patentDocAppPerson.transactionIdentity }</td>
+																<td style="text-align:center">${patentDocAppPerson.transactionYear }</td>
+																<td style="text-align:center">${patentDocAppPerson.otherInformation }</td>
+																<td style="text-align:center"><a href="javascript:deletePatentDocApperson(${patentDocAppPerson.personId })">删除</a><a style='margin-left:20px;' href="javascript:updatePatentDocApperson(${patentDocAppPerson.personId })">修改</a></td>
+															</tr>
+											  			
+											  			</c:forEach>
+											  		</c:if>
+											  
 											  </tbody>
 											</table>
 										</div>
@@ -257,27 +273,48 @@
 										<br/>
 										<h2>发明人:</h2>
 										<div id="inventorDiv">
-										
+											<table id="simple-table" class="table table-striped table-bordered table-hover">
+											  <thead>
+												<tr class="simple_bag">
+												  <!-- <th><input type="checkbox"/></th>
+												  <th>序号</th> -->
+												  <th>姓名</th>
+												  <th>证件号码</th>
+												  <th>国籍</th>
+												  <th>电话</th>
+												  <th>邮箱</th>
+												  <th>其他信息</th>
+												  <th>操作</th>
+												</tr>
+											  </thead>
+											  <tbody id="inventorTab">
+											  	  <c:if test="${not empty patentDocInventors }">
+											  	  		<c:forEach items="${patentDocInventors }" var="patentDocInventor">
+												  	  		<tr>
+																<td style='text-align:center'>${patentDocInventor.inventorName}</td>
+																<td style='text-align:center'>${patentDocInventor.inventorNumber}</td>
+																<td style='text-align:center'>${patentDocInventor.inventorNationality}</td>
+																<td style='text-align:center'>${patentDocInventor.inventorMobile}</td>
+																<td style='text-align:center'>${patentDocInventor.inventorEmail}</td>
+																<td style='text-align:center'>${patentDocInventor.inventorOtherInformation}</td>
+																<td style='text-align:center'><a href='javascript:deletePatentDocInventor(${patentDocInventor.inventorId})'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocInventor(${patentDocInventor.inventorId})'>修改</a></td>
+															</tr>
+														</c:forEach>	
+											  	  </c:if>
+											  </tbody>
+											</table>
 										</div>
 									</div>
 									<div style="margin-top: 60px;">	
 										<hr>
-										<button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">选择常用联系人</button>
+										<!-- <button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">选择常用联系人</button> -->
 										<br/>
 										<br/>
 										<h2>联系人:</h2>
 										<div id="contactDiv">
-											<textarea rows="6" cols="50" id="contactTextarea" style="resize: none;" placeholder="选择或添加地址">
-												
-											</textarea>
+											<textarea rows="6" cols="50" id="contactPerson" class="t-input form-control" style="resize: none;width:750px;" placeholder="添加联系人地址"><c:if test="${not empty patentDoc.contactPerson }">
+													${patentDoc.contactPerson }</c:if></textarea>
 										</div>
-									</div>
-									<div>
-										<button type="button" class = "button button-caution button-rounded" >保存</button>
-										<button type="button" class = "button button-caution button-rounded" >取消</button>
-									</div>
-									<div style="margin-top: 20px;">
-									
 									</div>
 								</div>
 							</div>
@@ -709,6 +746,62 @@
    </div>
 </div>
 
+<!--updateAppPersonModal  -->
+<button id="hiddenUpdateAppPersonModal" style="display:none;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#updateAppPersonModal">
+</button>
+<div class = "modal fade" id = "updateAppPersonModal" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true" >
+   
+   <div class = "modal-dialog" >
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true" id="updateAppPersonModalCloseBtn">
+               ×
+            </button>
+            
+            <h4 class = "modal-title" id = "myModalLabel">
+            	修改申请人信息
+            </h4>
+         </div>
+	         <div class = "modal-body" id="modal-body">
+	         
+					<input type="hidden" id="updateModalPersonId"  required/>
+					 <h5>姓名或名称:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalAppPersonName" required/>
+					<br>
+					<h5>证件号码:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="updateModalPhoneRece" type="text" required onblur="validatePhoneNumber(this.value)"/>
+					<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
+					<br>		  
+					<h5>邮编及地址:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="updateModalPostcodeAddress" type="text" required/>
+					<br>
+					<h5>费减备案状态:</h5>
+					<select id="updateModalFeeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;"  required>	
+					  <option value="未备案">未备案</option>
+					  <option value="委托中">委托中</option>
+					  <option value="备案成功">备案成功</option>
+					  <option value="备案失败">备案失败</option>
+					</select>
+					<br>
+					<h5>备案证件号:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalTransactionIdentityId"/>
+					<br>
+					<h5>备案年度:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalTransactionYear"/>
+					<br>
+					<h5>其他信息:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalOtherInfo"/>
+					<br/>
+					<button type="button" style="width:90px;" class="button button-primary  button-rounded" onclick="submitUpdateAppPersonForm()">保存</button>
+					<button type="button" style="width:90px;margin-left:280px" class="button button-primary  button-rounded" onclick="reseAppPersontUpdateForm()">取消</button>
+	         </div>
+      </div>
+   </div>
+</div>
+
+
 
 <!--commonInventorModal  -->
 <div class = "modal fade" id = "commonInventorModal" tabindex = "-1" role = "dialog" 
@@ -827,62 +920,60 @@
 </div>
 
 
-<!--commonContactModal  -->
-<div class = "modal fade" id = "commonContactModal" tabindex = "-1" role = "dialog" 
+<!--updateInventorModal  -->
+<button id="hiddenUpdateInventorModal" style="display:none;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#updateInventorModal">
+</button>
+<div class = "modal fade" id = "updateInventorModal" tabindex = "-1" role = "dialog" 
    aria-labelledby = "myModalLabel" aria-hidden = "true" >
    
-   <div class = "modal-dialog" style="width:750px">
+   <div class = "modal-dialog" style="width:540px">
       <div class = "modal-content">
          
          <div class = "modal-header">
-            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true" id="addInventorModalCloseBtn">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true" id="updateInventorModalCloseBtn">
                ×
             </button>
             
             <h4 class = "modal-title" id = "myModalLabel">
-            	从常用联系人中选择
+            	修改发明人信息
             </h4>
          </div>
 	         <div class = "modal-body">
-				<div class="lt-box" style="padding:20px;">
-					<button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="batchAddAddress()" title="可以添加多个联系人哦!">添加联系人</button>
-					<table id="simple-table" class="table table-striped table-bordered table-hover">
-					  <thead>
-						<tr class="simple_bag">
-						  <th class="center"> <label class="pos-rel">
-							<input type="checkbox" class="contact-check-item" name="checkall" />
-							<span class="lbl"></span> </label>
-						  </th>
-						  <th>序号</th>
-						  <th>联系人</th>
-						  <th>所在地区</th>
-						  <th>地址</th>
-						  <th>联系电话</th>
-						</tr>
-					  </thead>
-					  <c:forEach items="${contactAddresses}" var="address" varStatus="status">
-						<tr>
-						  <td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-							<input type="checkbox" class="contact-check-item" contact="<c:out value='${address.id}'/>"/></span>
-							<span class="lbl"></span></label>
-						  </td>
-						  <td class="center">${status.count}</td>
-						  <td>${address.receiver}</td>
-						  <td>${address.provinceName} ${address.cityName} ${address.districtName}
-						  </td>
-						  <td>${address.detailAddress}</td>
-						  <td>${address.phone}</td>
-						</tr>
-					  </c:forEach>
-					</table>
+
+	           <div class="lt-box" style="padding:20px;">
+					<input type="hidden" id="updateModalInventorId" required onblur="validateInfoNumber(this.value)"/>
+			       	<h5>姓名:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorName" required onblur="validateInfoNumber(this.value)"/>
+					<span style="color: red; display: none;" id=numberError>该处应输入不大于20字段</span>
+					<br>	   
+					<h5>证件号码:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorNumber" required onblur="validatePhoneNumber(this.value)"/>
+					<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
+					<br>		  
+			       	<h5>国籍:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;"  type="text" id="updateModalInventorNationality" value="中国" required onblur="validateInfoNumber1(this.value)"/>
+					<span style="color: red; display: none;" id=numberError1>该处应输入不大于20字段</span>
+					<br>		  
+			       	<h5>电话:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorMobile" required onblur="validateInfoNumber2(this.value)"/>
+					<span style="color: red; display: none;" id=numberError2>请输入正确的电话号码</span>
+					<br>		  
+			       	<h5>邮箱:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorEmail" required onblur="validateInfoNumber3(this.value)"/>
+					<span style="color: red; display: none;" id=numberError3>请输入正确的邮箱</span>
+					<br>
+					<h5>其他信息:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorOtherInformation"  onblur="validateCommentNumber(this.value)"/>
+					<span style="color: red; display: none;" id=commentError>该处应输入不大于50字段</span>
+					<br>      
+					<div style="height:20px;"></div> 
+					<button type="button" style="width:90px;" class="button button-primary  button-rounded" onclick="submitUpdateInventorForm()">保存</button>		
+					<button type="button" style="width:90px;margin-left:275px;" class="button button-primary  button-rounded" onclick="resetUpdateInventorForm()">取消</button>		
 				</div>
-	           
 	      </div>
 	   </div>
 	</div>
 </div>
-
-
 <script type="text/javascript">
 
 	
@@ -1134,10 +1225,11 @@ function savePatentDoc(value){
 	var manual=$("#editorContent").val();
 	var abstractDescription=$("#editorContent7").val();
 	var rightClaim=$("#editorContent8").val();
+	var contactPerson = $("#contactPerson").val();
 	$.ajax({
 		type: "POST",
 		url: "<s:url value='/editor/savePatentDoc.html'/>",
-		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
+		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value,"contactPerson":contactPerson},
 		success: function(data){
 			alert("操作成功");
 		},
@@ -1289,7 +1381,7 @@ function loadImgs(){
 							"<td style='text-align:center'>"+item.transactionIdentity+"</td>"+
 							"<td style='text-align:center'>"+item.transactionYear+"</td>"+
 							"<td style='text-align:center'>"+item.otherInformation+"</td>"+
-							"<td style='text-align:center'><a></a></td>"+
+							"<td style='text-align:center'><a href='javascript:deletePatentDocApperson("+item.personId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocApperson("+item.personId+")'>修改</a></td>"+
 							"</tr>"
 					)
 				})
@@ -1298,6 +1390,7 @@ function loadImgs(){
 		});
 		
 		$("#appersonModalCloseBtn").trigger("click");
+		$('input:checkbox').removeAttr('checked');
 		
 	}
 	
@@ -1322,22 +1415,26 @@ function loadImgs(){
 			}
 		}		
 		var inventorIds = uniqueInventorNos.join(",");
-		
+		var patentDocId = ${patentDoc.patentDocId};
 		$.ajax({
 			type : "POST",
-			url : "<s:url value='/petition/findInventorNameById.html'/>?inventorIds="+inventorIds,
+			//url : "<s:url value='/petition/findInventorNameById.html'/>?inventorIds="+inventorIds,
+			url : "<s:url value='/petition/addPatentDocInventor.html'/>?inventorIds="+inventorIds+"&patentDocId="+patentDocId,
 			async :false,
 			success : function (data){
 				var obj= $.parseJSON(data);
+				$("#inventorTab").empty();
 				$.each(obj,function(i,item){
-					$("#inventorDiv").append(
-							"<span class='ss-item' id='inventor"+item.inventorId+"' style='margin-left:20px'>"+item.inventorName+""+
-							"<a class='icon-btn-x' href='#' onclick='deleteTag(inventor"+item.inventorId+")'"+
-								">"+								
-								"<img src='<s:url value='/temp/images/delete.ico'/>' style='width:30px;height:25px'/>"+
-							"</a>"+
-							"<input type='text' name='commonInventor["+item.inventorId+"].inventorId' value='"+item.inventorId+"'/>"+
-						 "</span>"
+					$("#inventorTab").append(
+							"<tr>"+
+							"<td style='text-align:center'>"+item.inventorName+"</td>"+
+							"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
+							"<td style='text-align:center'>"+item.inventorNationality+"</td>"+
+							"<td style='text-align:center'>"+item.inventorMobile+"</td>"+
+							"<td style='text-align:center'>"+item.inventorEmail+"</td>"+
+							"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
+							"<td style='text-align:center'><a href='javascript:deletePatentDocInventor("+item.inventorId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocInventor("+item.inventorId+")'>修改</a></td>"+
+							"</tr>"	
 					)
 				})
 			}
@@ -1345,6 +1442,7 @@ function loadImgs(){
 		});
 		
 		$("#inventorModalCloseBtn").trigger("click");
+		$('input:checkbox').removeAttr('checked');
 		
 	}
 	function deleteTag(tag){
@@ -1398,12 +1496,6 @@ function loadImgs(){
 				$.each(obj,function(i,item){
 					$("#appersonTab").append(
 							"<tr>"+
-							//"<td class='center' style='text-align:center'><label class='pos-rel'> <span class='batch-share-item'>"+
-							//"<input type='checkbox' class='check-item' appPerson=<c:out value='"+item.personId+"'/>'>"+
-							//"<span class='lbl'></span></label>"+
-							//"</td>"+
-							//"<td class='center' style='text-align:center'><input type='checkbox' class='check-item'/></td>"+
-							//"<td class='center' style='text-align:center'>"+i+"</td>"+
 							"<td style='text-align:center'>"+item.name+"</td>"+
 							"<td style='text-align:center'>"+item.idNumber+"</td>"+
 							"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
@@ -1411,6 +1503,7 @@ function loadImgs(){
 							"<td style='text-align:center'>"+item.transactionIdentity+"</td>"+
 							"<td style='text-align:center'>"+item.transactionYear+"</td>"+
 							"<td style='text-align:center'>"+item.otherInformation+"</td>"+
+							"<td style='text-align:center'><a href='javascript:deletePatentDocApperson("+item.personId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocApperson("+item.personId+")'>修改</a></td>"+
 							"</tr>"
 					)
 				})
@@ -1445,13 +1538,29 @@ function loadImgs(){
 		var  modalInventorMobile = $("#modalInventorMobile").val();
 		var  modalInventorEmail= $("#modalInventorEmail").val();
 		var  modalInventorComment= $("#modalInventorComment").val();
-		var formData={"inventorName":modalInventorName,"inventorNumber":modalInventorNumber,"inventorNationality":modalInventorNationality,"inventorMobile":modalInventorMobile,"inventorEmail":modalInventorEmail,"inventorComment":modalInventorComment};
+		var  patentDocId = ${patentDoc.patentDocId};
+		var formData={"inventorName":modalInventorName,"inventorNumber":modalInventorNumber,"inventorNationality":modalInventorNationality,"inventorMobile":modalInventorMobile,"inventorEmail":modalInventorEmail,"inventorComment":modalInventorComment,"patentDocId":patentDocId};
 		$.ajax({
 			type : "POST",
 			url : "<s:url value='/petition/addCommonInventor.html'/>",
 			data : formData,
 			success : function (data){
-				var obj = $.parseJSON(data);
+				var obj= $.parseJSON(data);
+				$("#inventorTab").empty();
+				$.each(obj,function(i,item){
+					$("#inventorTab").append(
+							"<tr>"+
+							"<td style='text-align:center'>"+item.inventorName+"</td>"+
+							"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
+							"<td style='text-align:center'>"+item.inventorNationality+"</td>"+
+							"<td style='text-align:center'>"+item.inventorMobile+"</td>"+
+							"<td style='text-align:center'>"+item.inventorEmail+"</td>"+
+							"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
+							"<td style='text-align:center'><a href='javascript:deletePatentDocInventor("+item.inventorId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocInventor("+item.inventorId+")'>修改</a></td>"+
+							"</tr>"	
+					)
+				})
+			/* 	var obj = $.parseJSON(data);
 				$("#inventorDiv").append(
 						"<span class='ss-item' id='inventor"+obj["inventorId"]+"' style='margin-left:20px'>"+obj["inventorName"]+
 						"<a class='icon-btn-x' href='#' onclick='deleteTag(inventor"+obj["inventorId"]+")'"+
@@ -1460,7 +1569,7 @@ function loadImgs(){
 						"</a>"+
 						"<input type='text' name='commonInventor["+obj["inventorId"]+"].inventorId' value='"+obj["inventorId"]+"'/>"+
 					 "</span>"
-				)
+				) */
 			}
 		});
 		resetAddInventorModal();
@@ -1519,6 +1628,215 @@ function loadImgs(){
 		$('.model-list').hide();
 		$('.guide-list').show();
 		
+	}
+	
+	function deletePatentDocApperson(personId){
+		var patentDocId=${patentDoc.patentDocId};
+		$.ajax({
+			type : "POST",
+			url : "<s:url value='/petition/deletePatentDocApperson.html'/>",
+			data:{"personId":personId,"patentDocId":patentDocId},
+			success : function (data){
+				var obj= $.parseJSON(data);
+				$("#appersonTab").empty();
+				$.each(obj,function(i,item){
+					$("#appersonTab").append(
+							"<tr>"+
+							//"<td class='center' style='text-align:center'><label class='pos-rel'> <span class='batch-share-item'>"+
+							//"<input type='checkbox' class='check-item' appPerson=<c:out value='"+item.personId+"'/>'>"+
+							//"<span class='lbl'></span></label>"+
+							//"</td>"+
+							//"<td class='center' style='text-align:center'><input type='checkbox' class='check-item'/></td>"+
+							//"<td class='center' style='text-align:center'>"+i+"</td>"+
+							"<td style='text-align:center'>"+item.name+"</td>"+
+							"<td style='text-align:center'>"+item.idNumber+"</td>"+
+							"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
+							"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
+							"<td style='text-align:center'>"+item.transactionIdentity+"</td>"+
+							"<td style='text-align:center'>"+item.transactionYear+"</td>"+
+							"<td style='text-align:center'>"+item.otherInformation+"</td>"+
+							"<td style='text-align:center'><a href='javascript:deletePatentDocApperson("+item.personId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocApperson("+item.personId+")'>修改</a></td>"+
+							"</tr>"
+					)
+				})
+			}
+		})
+	}
+	
+	function updatePatentDocApperson(personId){
+		$.ajax({
+			type : "POST",
+			url : "<s:url value='/petition/findAppPersonById.html'/>",
+			data : {"personId":personId},
+			success : function (data){
+				var obj = $.parseJSON(data);
+				$("#updateModalPersonId").val(obj["personId"]);
+				$("#updateModalAppPersonName").val(obj["name"]);
+				$("#updateModalPhoneRece").val(obj["idNumber"]);
+				$("#updateModalPostcodeAddress").val(obj["postcodeAddress"]);
+				$("#updateModalOtherInfo").val(obj["otherInformation"]);
+				$("#updateModalFeeReduceTransactionStatus").val(obj["feeReduceTransactionStatus"]);
+				$("#updateModalTransactionIdentityId").val(obj["transactionIdentity"]);
+				$("#updateModalTransactionYear").val(obj["transactionYear"]);
+				$("#hiddenUpdateAppPersonModal").trigger("click");
+			},error : function (){
+				
+			}
+		})
+	}
+	
+	function submitUpdateAppPersonForm(){
+		var personId = $("#updateModalPersonId").val();
+		var name = $("#updateModalAppPersonName").val();
+		var idNumber = $("#updateModalPhoneRece").val();
+		var postcodeAddress = $("#updateModalPostcodeAddress").val();
+		var otherInformation = $("#updateModalOtherInfo").val();
+		var feeReduceTransactionStatus = $("#updateModalFeeReduceTransactionStatus").val();
+		var transactionIdentity =  $("#updateModalTransactionIdentityId").val();
+		var transactionYear = $("#updateModalTransactionYear").val();
+		var patentDocId=${patentDoc.patentDocId};
+		var formData ={"personId":personId,"name":name,"idNumber":idNumber,"postcodeAddress":postcodeAddress,
+				       "otherInformation":otherInformation,"feeReduceTransactionStatus":feeReduceTransactionStatus,
+				       "transactionIdentity":transactionIdentity,"transactionYear":transactionYear,"patentDocId":patentDocId};
+		$.ajax({
+			type : "POST",
+			url : "<s:url value='/petition/updatePatentDocApperson.html'/>",
+			data : formData,
+			success : function (data){
+				var obj= $.parseJSON(data);
+				$("#appersonTab").empty();
+				$.each(obj,function(i,item){
+					$("#appersonTab").append(
+							"<tr>"+
+							"<td style='text-align:center'>"+item.name+"</td>"+
+							"<td style='text-align:center'>"+item.idNumber+"</td>"+
+							"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
+							"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
+							"<td style='text-align:center'>"+item.transactionIdentity+"</td>"+
+							"<td style='text-align:center'>"+item.transactionYear+"</td>"+
+							"<td style='text-align:center'>"+item.otherInformation+"</td>"+
+							"<td style='text-align:center'><a href='javascript:deletePatentDocApperson("+item.personId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocApperson("+item.personId+")'>修改</a></td>"+
+							"</tr>"
+					)
+				})
+				
+			},error : function (){
+				
+			}
+		});
+		reseAppPersontUpdateForm();
+	}
+	
+	function reseAppPersontUpdateForm(){
+		$("#updateAppPersonModalCloseBtn").trigger("click");
+		$("#updateModalAppPersonName").val();
+		$("#updateModalPhoneRece").val();
+		$("#updateModalPostcodeAddress").val();
+		$("#updateModalOtherInfo").val();
+		$("#updateModalFeeReduceTransactionStatus").val("未备案");
+		$("#updateModalTransactionIdentityId").val();
+		$("#updateModalTransactionYear").val();
+	}
+	
+	function deletePatentDocInventor(inventorId){
+		var patentDocId=${patentDoc.patentDocId};
+		$.ajax({
+			type : "POST",
+			url : "<s:url value='/petition/deletePatentDocInventor.html'/>",
+			data:{"inventorId":inventorId,"patentDocId":patentDocId},
+			success : function (data){
+				var obj= $.parseJSON(data);
+				$("#inventorTab").empty();
+				$.each(obj,function(i,item){
+					$("#inventorTab").append(
+							"<tr>"+
+							"<td style='text-align:center'>"+item.inventorName+"</td>"+
+							"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
+							"<td style='text-align:center'>"+item.inventorNationality+"</td>"+
+							"<td style='text-align:center'>"+item.inventorMobile+"</td>"+
+							"<td style='text-align:center'>"+item.inventorEmail+"</td>"+
+							"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
+							"<td style='text-align:center'><a href='javascript:deletePatentDocInventor("+item.inventorId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocInventor("+item.inventorId+")'>修改</a></td>"+
+							"</tr>"	
+					)
+				})
+			}
+		})
+	}
+	
+	function updatePatentDocInventor(inventorId){
+		$.ajax({
+			type : "POST",
+			url : "<s:url value='/petition/findInventorById.html'/>",
+			data : {"inventorId":inventorId},
+			success : function (data){
+				var obj = $.parseJSON(data);
+				var inventorId = $("#updateModalInventorId").val(obj["inventorId"]);
+				var  inventorName= $("#updateModalInventorName").val(obj["inventorName"]);
+				var  inventorNumber= $("#updateModalInventorNumber").val(obj["inventorNumber"]);
+				var  inventorNationality = $("#updateModalInventorNationality").val(obj["inventorNationality"]);
+				var  inventorMobile = $("#updateModalInventorMobile").val(obj["inventorMobile"]);
+				var  inventorEmail= $("#updateModalInventorEmail").val(obj["inventorEmail"]);
+				var  inventorOtherInformation= $("#updateModalInventorOtherInformation").val(obj["inventorOtherInformation"]);
+				var  patentDocId = ${patentDoc.patentDocId};
+				var formData={"inventorId":inventorId,"inventorName":inventorName,"inventorNumber":inventorNumber,
+						      "inventorNationality":inventorNationality,"inventorMobile":inventorMobile,
+						      "inventorEmail":inventorEmail,"inventorComment":inventorOtherInformation,"patentDocId":patentDocId};
+				$("#hiddenUpdateInventorModal").trigger("click");
+			},error : function (){
+				
+			}
+		})
+	}
+	
+	function submitUpdateInventorForm(){
+		var inventorId = $("#updateModalInventorId").val();
+		var  inventorName= $("#updateModalInventorName").val();
+		var  inventorNumber= $("#updateModalInventorNumber").val();
+		var  inventorNationality = $("#updateModalInventorNationality").val();
+		var  inventorMobile = $("#updateModalInventorMobile").val();
+		var  inventorEmail= $("#updateModalInventorEmail").val();
+		var  inventorOtherInformation= $("#updateModalInventorOtherInformation").val();
+		var  patentDocId = ${patentDoc.patentDocId};
+		var formData={"inventorId":inventorId,"inventorName":inventorName,"inventorNumber":inventorNumber,
+				      "inventorNationality":inventorNationality,"inventorMobile":inventorMobile,
+				      "inventorEmail":inventorEmail,"inventorOtherInformation":inventorOtherInformation,"patentDocId":patentDocId};
+		$.ajax({
+			type :"POST",
+			url : "<s:url value='/petition/updatePatentDocInventor.html'/>",
+			data : formData,
+			success :function (data){
+				var obj= $.parseJSON(data);
+				$("#inventorTab").empty();
+				$.each(obj,function(i,item){
+					$("#inventorTab").append(
+							"<tr>"+
+							"<td style='text-align:center'>"+item.inventorName+"</td>"+
+							"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
+							"<td style='text-align:center'>"+item.inventorNationality+"</td>"+
+							"<td style='text-align:center'>"+item.inventorMobile+"</td>"+
+							"<td style='text-align:center'>"+item.inventorEmail+"</td>"+
+							"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
+							"<td style='text-align:center'><a href='javascript:deletePatentDocInventor("+item.inventorId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocInventor("+item.inventorId+")'>修改</a></td>"+
+							"</tr>"	
+					)
+				})
+			},error : function (){
+				
+			}
+		});
+		resetUpdateInventorForm();
+	}
+	
+	function resetUpdateInventorForm(){
+		$("#updateInventorModalCloseBtn").trigger("click");
+		$("#updateModalInventorId").val("");
+		$("#updateModalInventorName").val("");
+		$("#updateModalInventorNumber").val("");
+		$("#updateModalInventorNationality").val("中国");
+		$("#updateModalInventorMobile").val("");
+		$("#updateModalInventorEmail").val("");
+		$("#updateModalInventorOtherInformation").val("");
 	}
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>

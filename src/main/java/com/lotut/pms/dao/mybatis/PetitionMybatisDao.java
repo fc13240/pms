@@ -10,6 +10,7 @@ import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.PatentDocAppPerson;
+import com.lotut.pms.domain.PatentDocInventor;
 
 public class PetitionMybatisDao extends SqlSessionDaoSupport implements PetitionDao{
 
@@ -56,6 +57,46 @@ public class PetitionMybatisDao extends SqlSessionDaoSupport implements Petition
 	@Override
 	public List<PatentDocAppPerson> findPatentDocAppPersonById(Long patentDocId) {
 		return petitionMapper.findPatentDocAppPersonById(patentDocId);
+	}
+
+	@Override
+	public void addPatentDocInventor(Long patentDocId, List<CommonInventor> commonInventors, int userId) {
+		petitionMapper.addPatentDocInventor(patentDocId, commonInventors, userId);
+	}
+
+	@Override
+	public List<PatentDocInventor> findPatentDocInventorById(Long patentDocId) {
+		return petitionMapper.findPatentDocInventorById(patentDocId);
+	}
+
+	@Override
+	public void deletePatentDocApperson(Long personId) {
+		petitionMapper.deletePatentDocApperson(personId);
+	}
+
+	@Override
+	public void updatePatentDocApperson(PatentDocAppPerson patentDocAppPerson) {
+		petitionMapper.updatePatentDocApperson(patentDocAppPerson);
+	}
+
+	@Override
+	public void deletePatentDocInventor(Long inventorId) {
+		petitionMapper.deletePatentDocInventor(inventorId);
+	}
+
+	@Override
+	public void updatePatentDocInventor(PatentDocInventor patentDocInventor) {
+		petitionMapper.updatePatentDocInventor(patentDocInventor);
+	}
+
+	@Override
+	public PatentDocAppPerson findAppPersonByAppId(Long personId) {
+		return petitionMapper.findAppPersonByAppId(personId);
+	}
+
+	@Override
+	public PatentDocInventor findInventorById(Long inventorId) {
+		return petitionMapper.findInventorById(inventorId);
 	}
 	
 	
