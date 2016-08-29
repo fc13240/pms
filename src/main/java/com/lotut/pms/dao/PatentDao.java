@@ -42,7 +42,7 @@ public interface PatentDao {
 	
 	void updateInternalCode(int patentId, String internalCode);
 	
-	void insertOrUpdatePatent(Patent patent);
+	long insertOrUpdatePatent(Patent patent);
 	void insertPatent(Patent patent);
 	
 	void updatePatent(Patent patent);
