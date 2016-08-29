@@ -109,7 +109,7 @@ public class PatentServiceImpl implements PatentService {
 			boolean isNewPatent = patent.getPatentId() != 0;
 			if (isNewPatent) {
 				HashMap<String, Integer> userPatentMap = new HashMap<>();
-				userPatentMap.put("user", patent.getOwnerId());
+				userPatentMap.put("user", userId);
 				userPatentMap.put("patent", (int) patent.getPatentId());
 				userPatentList.add(userPatentMap);
 			}
