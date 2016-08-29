@@ -46,7 +46,7 @@ public interface PatentMapper {
 	
 	void updateInternalCode(@Param("patentId") int patentId, @Param("internalCode") String internalCode);
 	
-	void insertOrUpdatePatent(Patent patent);
+	long insertOrUpdatePatent(Patent patent);
 	
 	void insertPatent(Patent patent);
 	

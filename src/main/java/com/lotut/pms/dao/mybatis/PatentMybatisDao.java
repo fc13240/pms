@@ -82,8 +82,8 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	}
 
 	@Override
-	public void insertOrUpdatePatent(Patent patent) {
-		patentMapper.insertOrUpdatePatent(patent);
+	public long insertOrUpdatePatent(Patent patent) {
+		return patentMapper.insertOrUpdatePatent(patent);
 	}
 
 	@Override
