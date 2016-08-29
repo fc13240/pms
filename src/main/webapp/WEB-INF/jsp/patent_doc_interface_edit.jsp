@@ -131,7 +131,7 @@ margin: 1px 0 0 1px;}
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件
 					</div>
-					<div style="display:block" style="display:none;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
+					<div style="display:none" style="display:none;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
 						请求书
 					</div>
 				</div>
