@@ -46,14 +46,14 @@
 									style="word-break: break-all" width="800px">
 									<c:forEach items="${remarks}" var="remark">
 										<tr class="simple_bag">
-											<td>用户：${remark.user.username}</td>
-											<td>备注时间：<fmt:formatDate value="${remark.createTime}"
+											<td style="padding:5px;">用户：${remark.user.username}</td>
+											<td style="padding:5px;">备注时间：<fmt:formatDate value="${remark.createTime}"
 													pattern="yyyy-MM-dd HH:mm:ss" /> <input id="noticeId"
 												type="hidden" value="${remark.noticeId}" />
 											</td>
 										</tr>
 										<tr>
-											<td colspan="2">内容：${remark.content}</td>
+											<td colspan="2" style="padding:5px;">内容：${remark.content}</td>
 										</tr>
 									</c:forEach>
 								</table>
