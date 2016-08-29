@@ -25,53 +25,48 @@
 			<%@ include file="_left_nav_editor.jsp" %>
 		  </div>
 		  <!--left end-->
-		  <!--right begin-->
+		   <!--right begin-->
 		  <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
-				<!-- list beg -->
-					<div class="t-third" style="margin-top10px;background:#fff;">
+					<!-- list beg -->
+					<div class="t-third">
 					<form action="<s:url value='/employee/searchTechPersonUsers.html'/>" method="GET"  role="search">
-					  <div class="form-group">
-                         <input class="selectPointOfInterest form-control" type="text" id="form-field-1" style="width:450px;display:inline;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" required/>
+					    <div class="form-group">
+					    <input class="selectPointOfInterest form-control" type="text" id="form-field-1" style="width:450px;display:inline;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" required/>
 						<button  type="submit" class="button button-caution button-rounded" >查询</button>
-						
 						<button  type="button" class="button button-caution button-rounded" onclick="javascript:searchTechPersonFriends()">好友列表</button>
-					  </div>
-					</form>
-					<table id="simple-table" class="table table-striped table-bordered table-hover">
-					<thead>
-					  <tr class="simple_bag">
-						<th width="200px"  style="text-align:center;">序号</th>
-						<th width="400px"  style="text-align:center;">用户名</th>
-						<th width="400px"  style="text-align:center;">姓名</th>
-						<th width="400px"  style="text-align:center;">操作</th>
-					  </tr>
+						</div>
+					  </form>
+					  <table id="simple-table" class="table table-striped table-bordered table-hover">
+					    <thead>
+					      <tr class="simple_bag">
+					        <th>序号</th>
+					        <th>用户名</th>
+					        <th>姓名</th>
+					        <th>操作</th>
+					      </tr>
+					    </thead>
+					    <tbody>
 					  <c:forEach items="${users}" var="user" varStatus="status">
-						<tr>
-						  <td>${status.count + page.startIndex}</td>
-						  <td><c:out value="${user.username}"/></td>
-						  <td><c:out value="${user.name}"/></td>
-						  <td><a  href='javascript:sendTechPersonRequest(${user.userId});'>添加为技术员</a></td>
-						</tr>
-					  </c:forEach>
-					</table>
-					</div>
-				<!-- list end -->				
+					        <tr>
+					          <td style="text-align:center">${status.count + page.startIndex}</td>
+					          <td style="text-align:center"><c:out value="${user.username}"/></td>
+					          <td style="text-align:center"><c:out value="${user.name}"/></td>
+					          <td style="text-align:center"><a  href='javascript:sendTechPersonRequest(${user.userId});'>添加为技术员</a></td>
+					        </tr>
+					      </c:forEach>
+					    </tbody>
+					  </table>
+					</div>				
 				</div>
 			</div>
-
 		  </div>		
 		  <!--right end-->	
-		  
 		</div>
-
 	</div>
-
 </div>
-</div>
-
 
 <script type="text/javascript">
 	function sendTechPersonRequest(userId) {

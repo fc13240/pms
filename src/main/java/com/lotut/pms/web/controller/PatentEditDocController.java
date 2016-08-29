@@ -217,12 +217,19 @@ public class PatentEditDocController {
 	
 	
 	@RequestMapping(path="/previewPatentDoc",method=RequestMethod.GET)
-	public String previewPatentDoc(@RequestParam("patentDocId")long patentDocId,Model model,PrintWriter writer){
+	public String previewPatentDoc(@RequestParam("patentDocId")long patentDocId,@RequestParam("patentType")int patentType,Model model){
 		PatentDoc patentDoc = patentDocService.getUserPatentDocById(patentDocId);
 		model.addAttribute("patentDoc", patentDoc);
 		List<Attachment> Attachments=patentDocService.getAttachmentById(patentDocId);
 		model.addAttribute("Attachments", Attachments);
-		return "patent_doc_preview";
+		if(patentType==1){
+			return "patent_doc_preview";
+		}else if(patentType==2){
+			return "patent_doc_preview";
+		}else if(patentType==3){
+			return "patent_doc_interface_preview";
+		}
+		return "";		
 	}
 	
 	@RequestMapping(path="/previewInterfacePatentDoc",method=RequestMethod.GET)
