@@ -102,8 +102,7 @@ public class PatentServiceImpl implements PatentService {
 	@Transactional
 	public boolean  addOrUpdatePatents(List<Patent> patents,int userId) {
 		for (Patent patent: patents) {
-			 long patentId= patentDao.insertOrUpdatePatent(patent);
-			 patent.setPatentId(patentId);
+			 patentDao.insertOrUpdatePatent(patent);
 		}
 		List<Map<String, Integer>> userPatentList = new ArrayList<>();
 		for (Patent patent: patents) {
