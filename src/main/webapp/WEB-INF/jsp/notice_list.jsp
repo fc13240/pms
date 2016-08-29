@@ -33,7 +33,7 @@
 					<div id="menu">
 					  <div style="height:33px;">
 					    <ul id="nav">
-					      <p>快捷处理：</p>
+					     <p>快捷处理：</p>
 					      <li><a href="#" class="selected">专利类型</a></li>
 						  <li><a href="#" class="">通知状态</a></li>
 					      <li><a href="#" class="">通知类型</a></li>
@@ -211,7 +211,7 @@
 				
 				
 				
-				<div class="lt-box" style="padding: 10px;">
+				<div class="lt-box" style="padding: 10px 0 0 0;">
 					<div class="search-box">
 						<form action="<s:url value='/notice/search.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
@@ -416,11 +416,12 @@
 								  </a>
 								  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${notice.patent.patentId}'/>">
 								  交费
-								  </a> 
-								   <a target="_blank" href="<s:url value='/notice/showRemarks.html'/>?noticeId=<c:out value='${notice.noticeId}'/>">
-								  备注
-								  </a> 
-								 </td>
+								  </a>
+								   <a target="_blank" href="<s:url value='/notice/showRemarks.html'/>?noticeId=${notice.noticeId}">
+							            备注
+							    </a>
+								  
+								   </td>
 							  </tr>
 							</c:forEach>
 						  </tbody>
@@ -893,6 +894,55 @@ function batchChangeNoticePaperType(paperApplyType) {
 	});			
 	
 }
+</script>
+<script>
+var tabs=function(){
+    function tag(name,elem){
+        return (elem||document).getElementsByTagName(name);
+    }
+    //获得相应ID的元素
+    function id(name){
+        return document.getElementById(name);
+    }
+    function first(elem){
+        elem=elem.firstChild;
+        return elem&&elem.nodeType==1? elem:next(elem);
+    }
+    function next(elem){
+        do{
+            elem=elem.nextSibling;  
+        }while(
+            elem&&elem.nodeType!=1  
+        )
+        return elem;
+    }
+    return {
+        set:function(elemId,tabId){
+            var elem=tag("li",id(elemId));
+            var tabs=tag("div",id(tabId));
+            var listNum=elem.length;
+            var tabNum=tabs.length;
+            for(var i=0;i<listNum;i++){
+                    elem[i].onclick=(function(i){
+                        return function(){
+                            for(var j=0;j<tabNum;j++){
+                                if(i==j){
+                                    tabs[j].style.display="block";
+                                    //alert(elem[j].firstChild);
+                                    elem[j].firstChild.className="selected";
+                                }
+                                else{
+                                    tabs[j].style.display="none";
+                                    elem[j].firstChild.className="";
+                                }
+                            }
+                        }
+                    })(i)
+            }
+        }
+    }
+}();
+tabs.set("nav","menu_con");//执行  
 </script>
     <%@ include file="_footer_js.jsp" %>
 </body>

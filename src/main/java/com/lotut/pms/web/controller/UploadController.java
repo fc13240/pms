@@ -137,7 +137,9 @@ public class UploadController {
 	   @RequestMapping(path = "/uploadInterFacePic",method=RequestMethod.POST)
 		public void uploadInterFacePic(@RequestParam("patentDocId") int patentDocId,HttpServletRequest request ,HttpServletResponse response,HttpSession session)  {
 		   try{
+			   request.setCharacterEncoding("utf-8");
 			   String savePath = Settings.PATENTDOC_INTERFACEPIC_PATH;
+			   int count=patentDocService.getMaxAttachmentPicNum(patentDocId)+1;
 				String picName=WebUtils.getPicName(session);
 				String basePath = request.getContextPath();
 /*				String basePath = request1.getScheme() + "://" + request1.getLocalAddr() + ":" + request1.getServerPort()
@@ -183,7 +185,8 @@ public class UploadController {
 		        			out.flush();
 		        		}
 		       		 	Map<String, Object> succMap = new HashMap<String, Object>(); 
-		                succMap.put("url", saveUrl + newFileName+".html");  
+		                succMap.put("url", saveUrl + newFileName+".html");
+		                succMap.put("count",count );
 		                WebUtils.writeJsonStrToResponse(response, succMap);
 		                session.removeAttribute("picName");
 			   }

@@ -10,7 +10,7 @@ var _IdeaUrl = "http://idea.izhiliao.com.cn/";
 
 function addPic() {
     //清除之前痕迹
-    $('#piciLlus2').val("请填写附图说明，例如”图1为本发明实施例XX的方法流程示意图”。").css('color', '#999');
+    $('#piciLlus2').val("请填写图片名称").css('color', '#999');
     $('#picMarkiLlus2').val("请填写附图标记说明，例如“1杯子主体，2杯子把手”。").css('color', '#999');
 
 var hidSrc=$('#rePicStc').val(); 

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,8 +56,8 @@ public class WebUtils {
 		    return false;
 	}
 	
-	public static String getPicName(HttpSession session) {
-		
-		return  (String)session.getAttribute("picName");
+	public static String getPicName(HttpSession session) throws UnsupportedEncodingException {
+		String getfromsession=new String(session.getAttribute("picName").toString().getBytes("gbk "), "iso-8859-1 ");
+		return  getfromsession;
 	}
 }

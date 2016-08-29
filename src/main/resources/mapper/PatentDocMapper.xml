@@ -165,4 +165,8 @@
 	<select id="getMaxAttachmentPicNum" resultType="int">
 		SELECT  IFNULL(MAX(seq_no),0) AS seq_no FROM patent_attachment WHERE patent_doc_id=#{patentDocId};
 	</select>
+	
+	<select id="updateAttachmentImgName" parameterType="Attachment">
+		update patent_attachment set caption=#{caption} where attachment_id=${attachmentId}
+	</select>
 </mapper>

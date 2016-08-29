@@ -16,7 +16,9 @@
 			<result property="inventorUrl" column="inventor_attachment_file"/>
 			<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 	</resultMap>
-
+	<resultMap type="int" id="InventIdList">
+		<result property="inventorId" column="inventor_id"/>
+	</resultMap>
 	<select id="getUserInventors" parameterType="int" resultMap="InventorWithShareUsers">
   	   SELECT un.* ,u.user_id  ,u.username FROM 	
   	(SELECT p.inventor_id ,p.inventor_name,p.inventor_id_number,p.inventor_nationality ,p.inventor_mobile ,p.inventor_email,p.inventor_attachment_file,
@@ -89,4 +91,12 @@
 	<update id="saveAttachmentFile" parameterType="CommonInventor">
 		update common_inventor set inventor_attachment_file = #{inventorUrl} where inventor_id = #{inventorId}
 	</update>
+	
+	<insert id="insertUserInventors" parameterType="list">
+		replace into user_inventor(user, inventor) 
+		values
+		<foreach item="userInventorRecord" collection="list" separator=",">
+			(#{userInventorRecord.user}, #{userInventorRecord.inventor})
+		</foreach>
+	</insert>	
 </mapper>

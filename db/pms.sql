@@ -670,8 +670,8 @@ CREATE TABLE IF NOT EXISTS common_inventor (
   inventor_name VARCHAR(20) DEFAULT NULL COMMENT'发明姓名',
   inventor_id_number  NVARCHAR(20) DEFAULT NULL COMMENT '证件号码',
   inventor_nationality VARCHAR(20) DEFAULT NULL COMMENT '发明人国籍',
-  inventor_mobile INT(20) DEFAULT NULL COMMENT '电话号码',
-  inventor_email VARCHAR(20) DEFAULT NULL COMMENT '邮箱' ,
+  inventor_mobile varchar(40) DEFAULT NULL COMMENT '电话号码',
+  inventor_email VARCHAR(40) DEFAULT NULL COMMENT '邮箱' ,
   inventor_other_information VARCHAR(50) DEFAULT NULL COMMENT '其他信息',
   inventor_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址',
   user_id INT(11)  NOT NULL ,
@@ -790,3 +790,6 @@ CREATE TABLE patent_doc_inventor(
      
 
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+ALTER TABLE common_inventor MODIFY  inventor_mobile VARCHAR(40) ;
+ALTER TABLE common_inventor MODIFY  inventor_email VARCHAR(40) ;

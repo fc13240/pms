@@ -184,4 +184,12 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	public int getMaxAttachmentPicNum(long patentDocId) {
 		return patentDocMapper.getMaxAttachmentPicNum(patentDocId);
 	}
+
+
+
+	@Override
+	public void updateAttachmentImgName(Attachment attachment) {
+		patentDocMapper.updateAttachmentImgName(attachment);
+		
+	}
 }

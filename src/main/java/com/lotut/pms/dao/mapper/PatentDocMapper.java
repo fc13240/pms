@@ -54,4 +54,6 @@ public interface PatentDocMapper {
 	int getAttatchmentPicCount(@Param("patentDocId")long patentDocId );
 	
 	int getMaxAttachmentPicNum(@Param("patentDocId")long patentDocId );
+	
+	void updateAttachmentImgName(Attachment attachment);
 }

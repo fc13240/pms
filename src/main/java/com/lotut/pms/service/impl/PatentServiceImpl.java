@@ -102,15 +102,15 @@ public class PatentServiceImpl implements PatentService {
 	@Transactional
 	public boolean  addOrUpdatePatents(List<Patent> patents,int userId) {
 		for (Patent patent: patents) {
-			patentDao.insertOrUpdatePatent(patent);
+			 patentDao.insertOrUpdatePatent(patent);
 		}
 		List<Map<String, Integer>> userPatentList = new ArrayList<>();
 		for (Patent patent: patents) {
 			boolean isNewPatent = patent.getPatentId() != 0;
 			if (isNewPatent) {
 				HashMap<String, Integer> userPatentMap = new HashMap<>();
-				userPatentMap.put("user", patent.getOwnerId());
-				userPatentMap.put("patent", (int) patent.getPatentId());
+				userPatentMap.put("user", userId);
+				userPatentMap.put("patent", (int)patent.getPatentId());
 				userPatentList.add(userPatentMap);
 			}
 		}

@@ -1,6 +1,7 @@
 package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -79,7 +80,7 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 		
 	}
 	@Override
-	public Integer getIdbyAppPerson(CommonAppPerson commonAppPerson) {
+	public List<Integer> getIdbyAppPerson(CommonAppPerson commonAppPerson) {
 		return appPersonMapper.getIdbyAppPerson(commonAppPerson);
 	}
 	@Override
@@ -92,7 +93,12 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 		appPersonMapper.updateAppPersonUserIdNull(commonAppPerson);
 		
 	}
-
+	@Override
+	public void insertUserAppPersons(List<Map<String, Integer>> userAppPersonRecords) {
+		appPersonMapper.insertUserAppPersons(userAppPersonRecords);
+		
+	}
 	
+
 	
 }

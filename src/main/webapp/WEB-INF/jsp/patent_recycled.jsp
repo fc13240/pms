@@ -46,8 +46,8 @@
 							</a>
 						</td>
 					  	<td>
-							<a href="javascript:return void" onclick="deleteForever()" style="margin-left:50px;">
-							<button class="button button-primary  button-rounded">永久删除</button>
+							<a href="javascript:return void" onclick="deleteForever()">
+							<button style="margin-left:10px;" class="button button-primary  button-rounded">永久删除</button>
 							</a> 
 						</td>			
 					  	</tr>
@@ -103,7 +103,7 @@
 							  <se:authorize access="hasRole('ROLE_TRADER')">
 								  <c:if test="${patent.transactionStatus==null}">
 	 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
-					                  	<button class="t-btn2">发布至交易网</button> 
+					                  	<button class="t-btn2">加入交易</button> 
 				 	                  </a>
 				 	                </c:if>
 				 	                 <c:if test="${patent.transactionStatus != null}">

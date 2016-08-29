@@ -53,7 +53,7 @@
 			              <th class="center" width="20">序号</th>
 			              <th width="110" align="center">用户名/名称</th>
 			              <th width="170" align="center">用户代码</th>
-			              <th width="90" align="center">登陆密码 </th>
+			              <th width="90" align="center">登录密码 </th>
 			              <th width="90" align="center">更新时间</th>
 			              <th width="60"align="center">操作</th>
 			            </tr>

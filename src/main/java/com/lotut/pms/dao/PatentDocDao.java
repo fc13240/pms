@@ -55,4 +55,6 @@ public interface PatentDocDao {
 	
 	int getMaxAttachmentPicNum(long patentDocId );
 	
+	void updateAttachmentImgName(Attachment attachment);
+	
 }

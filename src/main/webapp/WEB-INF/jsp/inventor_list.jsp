@@ -18,15 +18,26 @@
 <div class="col-xs-1 sidebar" style="min-width:100px;">
 			<%@ include file="_left_nav_editor.jsp" %>
 		  </div>
-		  <div class="col-xs-offset-1 col-xs-11">
+		 <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
 				<div style="height:10px;"></div>
-					<div class="lt-box" style="padding:20px;">
-				 
-		  				<button type="button" style="width: 100px;margin:20px;" class="button button-rounded button-primary" onclick="javascript:addInventor()">新增发明人</button>
-		  				<a href="javascript:return void" onclick="batchShareInventor()" >
-							<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把发明人批量分享给好友哦！">批量分享</button>
-						</a> 
+					<div class="lt-box" style="padding:20px 5px 5px 5px;">
+							<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
+						  <div class="ta-top" style="margin-left:8px;"> 
+						  	<table class="search-table">
+					  			<tr>
+					  				<td>
+									  	<button type="button" style="width: 100px;" class="button button-rounded button-primary" onclick="javascript:addInventor()">新增发明人</button>
+					  				</td>
+					  				<td>
+										<a href="javascript:return void" onclick="batchShareInventor()" >
+							             <button style="width:90px;margin-left:10px;"   class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把发明人批量分享给好友哦！">批量分享</button>
+						                </a>
+					  				</td>					  				
+					  			</tr>
+					  		</table>		
+						  </div>
+						  </span> </div>
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						<thead>
 						<tr class="simple_bag">
@@ -75,7 +86,8 @@
 							</c:forEach>
 						  </tbody>
 						</table>
-						</div></div></div>
+						</div></div></div> 
+						
 <script type="text/javascript">
 	function addInventor(){
 		var url = "<s:url value='/inventor/contactInventorAddForm.html'/>";

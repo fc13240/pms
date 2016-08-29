@@ -8,8 +8,12 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -68,7 +72,14 @@ public class AppPersonController {
 		appPersonService.addAppPerson( appPerson);
 		UserAppPerson userAppPerson=new UserAppPerson();
 		userAppPerson.setUserId(userId);
-		Integer appPersonId=appPersonService.getIdbyAppPerson(appPerson);
+		List<Integer> appPersonIds=appPersonService.getIdbyAppPerson(appPerson);
+		int lenth=appPersonIds.size();
+		Integer appPersonId=0;
+		if(lenth==0){
+			appPersonId=appPersonIds.get(0);
+		}else{
+			appPersonId=appPersonIds.get(lenth-1);
+		}
 		userAppPerson.setAppPersonId(appPersonId);
 		appPersonService.addUserAppPerson(userAppPerson);
 		return "redirect:/appPerson/list.html";
@@ -108,8 +119,8 @@ public class AppPersonController {
 		model.addAttribute("friends", friends);
 		return "app_person_select_friends";
 	}
-	@ModelAttribute
-	@RequestMapping(path="searchFriends", method=RequestMethod.GET)
+	
+	@RequestMapping(path="/searchFriends", method=RequestMethod.GET)
 	public String searchFriends(@RequestParam("keyword")String keyword, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<User> friends = friendService.searchUserFriends(userId, keyword);
@@ -348,7 +359,6 @@ public class AppPersonController {
 		response.setContentType("application/doc");
 		String relativeUrl="linus常用命令整理.docx";
 		String filePath=Settings.PROXY_TEMPLATE_FILE_PATH+relativeUrl;
-		System.out.println(filePath);
 		File appPersonFile = new File(filePath);
 		String downloadFileName = URLEncoder.encode(relativeUrl, "UTF8");
 		if("FF".equals(getBrowser(request))){
@@ -360,4 +370,20 @@ public class AppPersonController {
 		WebUtils.writeStreamToResponse(response, new FileInputStream(appPersonFile));
 	}
 	
+	@RequestMapping(path="/addShares", method=RequestMethod.GET)
+	public String shareAppPersons(@RequestParam("appPersons")List<Integer> appPersonIds, @RequestParam("friends")List<Integer> friendIds) {
+		List<Map<String, Integer>> userAppPersonRecords = new ArrayList<>();
+		
+		for (int appPersonId: appPersonIds) {
+			for (int friendId: friendIds) {
+				Map<String, Integer> userAppPersonRecord =  new HashMap<String, Integer>();
+				userAppPersonRecord.put("user", friendId);
+				userAppPersonRecord.put("appPerson", appPersonId);
+				userAppPersonRecords.add(userAppPersonRecord);
+			}
+		}
+		
+		appPersonService.insertUserAppPersons(userAppPersonRecords);
+		return "app_person_list";
+	}
 }

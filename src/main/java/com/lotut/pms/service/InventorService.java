@@ -1,6 +1,7 @@
 package com.lotut.pms.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.UserInventor;
@@ -28,8 +29,10 @@ public interface InventorService {
 
 	void addUserInventor(UserInventor userInventor);
 
-	Integer getIdByInventor(CommonInventor commonInventor);
+	List<Integer> getIdByInventor(CommonInventor commonInventor);
 
 	void deleteUserInventorById(UserInventor userInventor);
+	
+	void insertUserInventors(List<Map<String, Integer>> userInventorRecords);
 
 }

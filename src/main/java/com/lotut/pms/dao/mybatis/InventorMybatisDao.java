@@ -1,6 +1,7 @@
 package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -91,9 +92,15 @@ public class InventorMybatisDao extends SqlSessionDaoSupport implements Inventor
 	}
 
 	@Override
-	public Integer getIdByInventor(CommonInventor commonInventor) {
-		// TODO Auto-generated method stub
+	public List<Integer> getIdByInventor(CommonInventor commonInventor) {
+		
 		return inventorMapper.getIdByInventor(commonInventor);
+	}
+
+	@Override
+	public void insertUserInventors(List<Map<String, Integer>> userInventorRecords) {
+		
+		inventorMapper.insertUserInventors(userInventorRecords);
 	}
 
 }

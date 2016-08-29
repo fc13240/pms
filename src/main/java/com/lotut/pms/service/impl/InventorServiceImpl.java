@@ -1,6 +1,7 @@
 package com.lotut.pms.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lotut.pms.dao.InventorDao;
 import com.lotut.pms.domain.CommonInventor;
@@ -76,8 +77,13 @@ public class InventorServiceImpl implements InventorService{
 	}
 	
 	@Override
-	public Integer getIdByInventor(CommonInventor commonInventor) {
+	public List<Integer> getIdByInventor(CommonInventor commonInventor) {
 		return inventorDao.getIdByInventor(commonInventor);
+	}
+	@Override
+	public void insertUserInventors(List<Map<String, Integer>> userInventorRecords) {
+		inventorDao.insertUserInventors(userInventorRecords);
+		
 	}
 	
 }

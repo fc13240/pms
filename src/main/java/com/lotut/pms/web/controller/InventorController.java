@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -71,7 +72,16 @@ public class InventorController {
 		inventorService.addInventor(inventor);
 		UserInventor userInventor=new UserInventor();
 		userInventor.setUserId(userId);
-		Integer inventorId=inventorService.getIdByInventor(inventor);
+		List<Integer> inventorIds=inventorService.getIdByInventor(inventor);
+		int length=inventorIds.size();
+		Integer inventorId=0;
+		if(length==1){
+		 inventorId=inventorIds.get(0);
+		
+		}else{
+			inventorId=inventorIds.get(length-1);
+			
+		}
 		userInventor.setInventorId(inventorId);
 		inventorService.addUserInventor(userInventor);
 		return "redirect:/inventor/list.html";
@@ -253,6 +263,23 @@ public class InventorController {
 	        if (UserAgent.indexOf("firefox") >= 0) return "FF";
 	    }
 	    return null;
+	}
+	
+	@RequestMapping(path="/addShares", method=RequestMethod.GET)
+	public String shareInventors(@RequestParam("inventors")List<Integer> inventorIds, @RequestParam("friends")List<Integer> friendIds) {
+		
+		List<Map<String, Integer>> userInventorRecords = new ArrayList<>();
+		for (int inventorId: inventorIds) {
+			for (int friendId: friendIds) {
+				Map<String, Integer> userInventorRecord =  new HashMap<String, Integer>();
+				userInventorRecord.put("user", friendId);
+				userInventorRecord.put("inventor", inventorId);
+				userInventorRecords.add(userInventorRecord);
+			}
+		}
+		
+		inventorService.insertUserInventors(userInventorRecords);
+		return "app_person_list";
 	}
 	
 }

@@ -119,14 +119,14 @@ function validateInfoNumber2(phoneNumber) {
 function validateInfoNumber3(phoneNumber) {
 	var reg = new RegExp("^[0-9]*$");
 	document.getElementById("numberError3").style.display = "none";
-	if (reg.test(phoneNumber)) {
-		if (phoneNumber.length>20) {
+	
+		if (phoneNumber.length>30) {
 			document.getElementById("numberError3").style.display = "";
 			return false;
 		} else {
 			return true;
 		}
-	}
+	
 }
 
 function validateInfoNumber(phoneNumber) {

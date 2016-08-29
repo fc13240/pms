@@ -38,7 +38,7 @@
 						<input type="hidden" id="appPersonId" name="appPersonId" value="${appPersonId}">
 					</form> 
 					<div style="height:10px;">&nbsp;</div> 
-					<span style="color:#666;">友情提示：建议上传后缀名为.doc或.docx格式的文档!
+					<span style="color:#666;">友情提示：将所需的附件一次性打包成压缩文件格式上传(zip,rar等)，不建议上传其他格式的文件!
 					</span>
 				</div>
 			</div>
@@ -67,10 +67,10 @@
 			beforeSubmit : function() {
 				var name=$("#filename").val();
 				var mime = name.toLowerCase().substr(name.lastIndexOf("."));
-				if(mime ==".doc" || mime ==".docx"){
+				if(mime ==".zip" || mime ==".rar"){
 					return true;
 				}else{
-					alert("请上传后缀名为.doc或.docx格式的文档！");
+					alert("请上传后缀名为.zip或.rar格式的文档！");
 					return false;
 				}
 			}, 
