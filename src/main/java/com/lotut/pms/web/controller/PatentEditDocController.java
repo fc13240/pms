@@ -207,7 +207,7 @@ public class PatentEditDocController {
 		model.addAttribute("patentDoc", patentDoc);
 		List<Attachment> Attachments=patentDocService.getAttachmentById(patentDocId);
 		model.addAttribute("Attachments", Attachments);
-		return "patent_doc_interface_preview";
+		return "patent_doc_preview";
 	}
 	
 	/*合并代码*/
