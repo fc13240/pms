@@ -57,7 +57,7 @@ public class PatentDocAppPerson {
 	public String getIdNumber() {
 		return idNumber;
 	}
-	public void setId_number(String idNumber) {
+	public void setIdNumber(String idNumber) {
 		this.idNumber = idNumber;
 	}
 	public String getPostcodeAddress() {

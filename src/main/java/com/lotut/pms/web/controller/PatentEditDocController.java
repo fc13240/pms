@@ -37,9 +37,10 @@ import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
-import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentDoc;
+import com.lotut.pms.domain.PatentDocAppPerson;
+import com.lotut.pms.domain.PatentDocInventor;
 import com.lotut.pms.domain.PatentDocSearchCondition;
 import com.lotut.pms.domain.PatentDocSectionType;
 import com.lotut.pms.domain.PatentDocumentTemplate;
@@ -50,7 +51,7 @@ import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
-import com.lotut.pms.service.UserService;
+import com.lotut.pms.service.PetitionService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.CreateWord;
 import com.lotut.pms.web.util.DocUtil;
@@ -68,17 +69,19 @@ public class PatentEditDocController {
 	private PatentDocumentTemplateService patentDocumentTemplateService;
 	private InventorService inventorService ;
 	private AppPersonService appPersonService;
-	private UserService userService;
+	//private UserService userService;
 	private FriendService friendService;
+	private PetitionService petitionService;
+	
 	
 	@Autowired
-	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService,InventorService inventorService,AppPersonService appPersonService,UserService userService,FriendService friendService) {
+	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService,InventorService inventorService,AppPersonService appPersonService,FriendService friendService,PetitionService petitionService) {
 		this.patentDocService = patentDocService;
 		this.patentDocumentTemplateService = patentDocumentTemplateService;
 		this.inventorService = inventorService;
 		this.appPersonService = appPersonService;
-		this.userService = userService;
 		this.friendService = friendService;
+		this.petitionService = petitionService;
 	}
 
 	@RequestMapping(path="/newPatentType")
@@ -96,12 +99,12 @@ public class PatentEditDocController {
 		long patentDocId=patentDoc.getPatentDocId();
 		List<CommonInventor> inventors = inventorService.getAllInventorsByUser(userId);
 		List<CommonAppPerson> appPersons= appPersonService.getAllAppPersonByUser(userId);
-		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
+		//List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
 		model.addAttribute("patentDocId",patentDocId);
 		model.addAttribute("patentDoc",patentDoc);
 		model.addAttribute("inventors",inventors);
 		model.addAttribute("appPersons",appPersons);
-		model.addAttribute("contactAddresses", contactAddresses);
+		//model.addAttribute("contactAddresses", contactAddresses);
 		if(patentType==1){
 			return "patent_doc_invent_edit";
 		}else if(patentType==2){
@@ -147,6 +150,18 @@ public class PatentEditDocController {
 		model.addAttribute("patentDoc", patentDoc);
 		model.addAttribute("patentDocs", patentDocs);
 		model.addAttribute("patenType",patentType);
+		
+		List<PatentDocAppPerson> patentDocAppPersons = petitionService.findPatentDocAppPersonById(patentDocId);
+		List<PatentDocInventor> patentDocInventors = petitionService.findPatentDocInventorById(patentDocId);
+		
+		model.addAttribute("patentDocAppPersons",patentDocAppPersons);
+		model.addAttribute("patentDocInventors",patentDocInventors);
+		
+		List<CommonInventor> inventors = inventorService.getAllInventorsByUser(userId);
+		List<CommonAppPerson> appPersons= appPersonService.getAllAppPersonByUser(userId);
+		model.addAttribute("inventors",inventors);
+		model.addAttribute("appPersons",appPersons);
+		
 		if(patentType==1){
 			return "patent_doc_invent_edit";
 		}else if(patentType==2){

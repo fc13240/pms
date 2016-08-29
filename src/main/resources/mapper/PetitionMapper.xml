@@ -38,11 +38,6 @@
 	</insert>
 	
 	<select id="findContactNameById" resultType="ContactAddress">
-<!-- 		select id,receiver from contact_addresses where user=#{userId} and id in
-		<foreach collection="contactIds" item="contactId" open="(" separator="," close=")">
-			#{contactId}
-		</foreach>
-		 -->
 		select ca.id, ca.receiver, ca.province, p.name as provinceName, ca.city, c.name as cityName,
 				ca.district, d.name as districtName,
 					 ca.detail_address as detailAddress, ca.phone, ca.email, ca.is_default defaultAddress
@@ -68,5 +63,50 @@
     		where patent_doc_id=#{patentDocId};
 		
 	</select>
+	
+	<insert id="addPatentDocInventor">
+		insert into patent_doc_inventor(patent_doc_id,inventor_name,inventor_number,inventor_nationality,inventor_mobile,inventor_email,inventor_other_information,user_id) values
+		<foreach collection="commonInventors" item="commonInventor" separator=",">
+			(#{patentDocId},#{commonInventor.inventorName},#{commonInventor.inventorNumber},#{commonInventor.inventorNationality},#{commonInventor.inventorMobile},
+			#{commonInventor.inventorEmail},#{commonInventor.inventorComment},#{userId})
+		</foreach>	
+	</insert>
+	
+	<select id="findPatentDocInventorById" resultType="PatentDocInventor">
+		select inventor_id as inventorId,patent_doc_id as patentDocId,inventor_name as inventorName,inventor_number as inventorNumber,inventor_nationality as inventorNationality,
+		       inventor_mobile as inventorMobile,inventor_email as inventorEmail,inventor_other_information as inventorOtherInformation,user_id as userId from patent_doc_inventor
+		       where patent_doc_id=#{patentDocId}; 
+	</select>
+	
+	<delete id="deletePatentDocApperson">
+		delete from patent_doc_app_person where person_id=#{personId};
+	</delete>
+	
+	<select id="findAppPersonByAppId" resultType="PatentDocAppPerson">
+		select person_id as personId,patent_doc_id as patentDocId,name,id_number as idNumber,postcode_address as postcodeAddress,other_information as otherInformation,transaction_identity as transactionIdentity,
+    		fee_reduce_transaction_status as feeReduceTransactionStatus,transaction_year as transactionYear,user_id as userId from patent_doc_app_person
+    		where person_id=#{personId};
+	
+	</select>
+	
+	<update id="updatePatentDocApperson" parameterType="PatentDocAppPerson">
+		update patent_doc_app_person set name=#{name},id_number=#{idNumber},postcode_address=#{postcodeAddress},other_information=#{otherInformation},transaction_identity=#{transactionIdentity},
+		fee_reduce_transaction_status=#{feeReduceTransactionStatus},transaction_year=#{transactionYear} where person_id=#{personId}
+	</update>
+	
+	<delete id="deletePatentDocInventor">
+		delete from patent_doc_inventor where inventor_id=#{inventorId};
+	</delete>
+	
+	<select id="findInventorById" resultType="PatentDocInventor">
+		select inventor_id as inventorId,patent_doc_id as patentDocId,inventor_name as inventorName,inventor_number as inventorNumber,inventor_nationality as inventorNationality,
+		       inventor_mobile as inventorMobile,inventor_email as inventorEmail,inventor_other_information as inventorOtherInformation,user_id as userId from patent_doc_inventor
+		       where inventor_id=#{inventorId}; 
+	</select>
+	
+	<update id="updatePatentDocInventor" parameterType="PatentDocInventor">
+		update patent_doc_inventor set inventor_name=#{inventorName},inventor_number=#{inventorNumber},inventor_nationality=#{inventorNationality},inventor_mobile=#{inventorMobile},inventor_email=#{inventorEmail},
+		inventor_other_information=#{inventorOtherInformation}  where inventor_id=#{inventorId}
+	</update>
   </mapper>
   

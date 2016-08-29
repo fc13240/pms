@@ -16,9 +16,7 @@
 <%@ include file="_top.jsp" %>
 <div class="lt-con" style="min-width:1100px;">
 	<div class="container-fluid" >
-
 		<div class="row" style="margin-left:-30px;min-width:1100px;">
-		
 			<!--left begin-->
 		  <div class="col-xs-1 sidebar" style="min-width:100px;">
 			<%@ include file="_left_nav_editor.jsp" %>
@@ -36,10 +34,11 @@
 						  	<table class="search-table">
 					  			<tr>
 					  				<td>
+					  			     <a>
 									  	<button type="button" style="width: 100px;" class="button button-rounded button-primary" onclick="javascript:addTechPerson()">增加技术员</button>
-										</a>
+									 </a>
 					  				</td>
-					  				</td>						  										  									  				
+					  										  										  									  				
 					  			</tr>
 					  		</table>		
 						  </div>
@@ -48,7 +47,7 @@
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
 					    <thead>
 					      <tr class="simple_bag">
-					        <th>序号</th>
+					        <th width="150px">序号</th>
 					        <th width="300px">用户名</th>
 					        <th width="300px">姓名</th>
 					        <th width="300px">备注名</th>
