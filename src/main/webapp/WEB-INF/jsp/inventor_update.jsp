@@ -120,7 +120,7 @@ function validateInfoNumber3(phoneNumber) {
 	var reg = new RegExp("^[0-9]*$");
 	document.getElementById("numberError3").style.display = "none";
 	
-		if (phoneNumber.length>20) {
+		if (phoneNumber.length>30) {
 			document.getElementById("numberError3").style.display = "";
 			return false;
 		} else {
