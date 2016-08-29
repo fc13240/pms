@@ -109,20 +109,17 @@
 			<div class="pre_picture1">
 						<ul class="picL" id="picLsy" >
 							<c:forEach items="${Attachments}" var="Attachment">
-								<<%-- li>
+								<%--< li>
 									<a href="#"><img src="${base}${Attachment.attachmentUrl}" alt="" width="200" height="150"/></a>
 									<div class="text">
 										<b>${Attachment.caption}</b>
 									</div>
 								</li> --%>
-								 <li >
-									<img src="${base}${Attachment.attachmentUrl}" alt='' width='200' height='150'/><br/>
-									<div style='margin-left:70px'>
+								 <li>
+									<img src="${base}${Attachment.attachmentUrl}" alt="" width="200" height="170"/><br/>
+									<div style="margin-left:70px">
 									<b>${Attachment.caption}</b>
-				
-								
 								</div>
-								
 								</li>
 							</c:forEach>
 						</ul>

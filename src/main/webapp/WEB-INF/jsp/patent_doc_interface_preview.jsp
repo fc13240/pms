@@ -124,15 +124,12 @@ margin: 1px 0 0 1px;}
 										<b>${Attachment.caption}</b>
 									</div>
 								</li> --%>
-								 <li id="+item.attachmentId+">"
-									<img src='"+httpImgUrl+"' alt='' width='200' height='150'/><br/>"+
-									<div style='margin-left:70px'>+
-									<b>"+item.caption+"</b>"+"|&nbsp"+
-									<a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a>"+
-								
-								</div>
-								
-								+</li>
+								 <li>
+									<img src="${base}${Attachment.attachmentUrl}" alt="" width="200" height="170"/><br/>
+									<div style="margin-left:70px">
+									<b>${Attachment.caption}</b>
+									</div>
+								</li>
 							</c:forEach>
 						</ul>
 					
