@@ -84,13 +84,13 @@
 	}
 	
 	.picL9 li{
-overflow: hidden;
-position: relative;
-float: left;
-display: inline;
-width: 199px;
-height: 170px;
-margin: 1px 0 0 1px;}
+		overflow: hidden;
+		position: relative;
+		float: left;
+		display: inline;
+		width: 199px;
+		height: 200px;
+		margin: 1px 0 0 1px;}
 </style>
 </head>
 <body style="background-color: #FFF;" id="dlstCircleArticle">
@@ -116,7 +116,7 @@ margin: 1px 0 0 1px;}
 			</div>
 			<br/>
 			<div class="pre_picture1">
-						<ul class="picL" id="picLsy" >
+						<ul class="picL9" id="picLsy" >
 							<c:forEach items="${Attachments}" var="Attachment">
 								<%-- <li>
 									<a href="#"><img src="${base}${Attachment.attachmentUrl}" alt="" width="200" height="150"/></a>

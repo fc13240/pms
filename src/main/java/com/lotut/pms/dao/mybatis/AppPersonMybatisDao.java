@@ -80,7 +80,7 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 		
 	}
 	@Override
-	public Integer getIdbyAppPerson(CommonAppPerson commonAppPerson) {
+	public List<Integer> getIdbyAppPerson(CommonAppPerson commonAppPerson) {
 		return appPersonMapper.getIdbyAppPerson(commonAppPerson);
 	}
 	@Override

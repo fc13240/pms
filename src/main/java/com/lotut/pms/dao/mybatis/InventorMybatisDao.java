@@ -92,7 +92,7 @@ public class InventorMybatisDao extends SqlSessionDaoSupport implements Inventor
 	}
 
 	@Override
-	public Integer getIdByInventor(CommonInventor commonInventor) {
+	public List<Integer> getIdByInventor(CommonInventor commonInventor) {
 		
 		return inventorMapper.getIdByInventor(commonInventor);
 	}

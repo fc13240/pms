@@ -29,7 +29,7 @@ public interface InventorDao {
 
 	void addUserInventor(UserInventor userInventor);
 
-	Integer getIdByInventor(CommonInventor commonInventor);
+	List<Integer> getIdByInventor(CommonInventor commonInventor);
 
 	void deleteUserInventorById(UserInventor userInventor);
 	

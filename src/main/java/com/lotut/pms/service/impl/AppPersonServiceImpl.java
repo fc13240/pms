@@ -119,7 +119,7 @@ public class AppPersonServiceImpl implements AppPersonService {
 
 
 	@Override
-	public Integer getIdbyAppPerson(CommonAppPerson commonAppPerson) {
+	public List<Integer> getIdbyAppPerson(CommonAppPerson commonAppPerson) {
 	
 		return appPersonDao.getIdbyAppPerson(commonAppPerson);
 	}

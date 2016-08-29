@@ -72,7 +72,14 @@ public class AppPersonController {
 		appPersonService.addAppPerson( appPerson);
 		UserAppPerson userAppPerson=new UserAppPerson();
 		userAppPerson.setUserId(userId);
-		Integer appPersonId=appPersonService.getIdbyAppPerson(appPerson);
+		List<Integer> appPersonIds=appPersonService.getIdbyAppPerson(appPerson);
+		int lenth=appPersonIds.size();
+		Integer appPersonId=0;
+		if(lenth==0){
+			appPersonId=appPersonIds.get(0);
+		}else{
+			appPersonId=appPersonIds.get(lenth-1);
+		}
 		userAppPerson.setAppPersonId(appPersonId);
 		appPersonService.addUserAppPerson(userAppPerson);
 		return "redirect:/appPerson/list.html";

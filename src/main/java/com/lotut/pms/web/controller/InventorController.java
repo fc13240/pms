@@ -72,7 +72,16 @@ public class InventorController {
 		inventorService.addInventor(inventor);
 		UserInventor userInventor=new UserInventor();
 		userInventor.setUserId(userId);
-		Integer inventorId=inventorService.getIdByInventor(inventor);
+		List<Integer> inventorIds=inventorService.getIdByInventor(inventor);
+		int length=inventorIds.size();
+		Integer inventorId=0;
+		if(length==1){
+		 inventorId=inventorIds.get(0);
+		
+		}else{
+			inventorId=inventorIds.get(length-1);
+			
+		}
 		userInventor.setInventorId(inventorId);
 		inventorService.addUserInventor(userInventor);
 		return "redirect:/inventor/list.html";
