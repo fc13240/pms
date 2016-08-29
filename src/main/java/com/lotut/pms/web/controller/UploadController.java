@@ -137,6 +137,7 @@ public class UploadController {
 	   @RequestMapping(path = "/uploadInterFacePic",method=RequestMethod.POST)
 		public void uploadInterFacePic(@RequestParam("patentDocId") int patentDocId,HttpServletRequest request ,HttpServletResponse response,HttpSession session)  {
 		   try{
+			   request.setCharacterEncoding("utf-8");
 			   String savePath = Settings.PATENTDOC_INTERFACEPIC_PATH;
 			   int count=patentDocService.getMaxAttachmentPicNum(patentDocId)+1;
 				String picName=WebUtils.getPicName(session);

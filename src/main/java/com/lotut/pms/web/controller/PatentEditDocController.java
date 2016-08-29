@@ -669,8 +669,7 @@ public class PatentEditDocController {
 				out.close();
 				
 			}
-			File picZip=new File(zipPath);
-			picZip.delete();
+			wordFile.delete();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -728,8 +727,7 @@ public class PatentEditDocController {
 				out.close();
 				
 			}
-			File picZip=new File(zipPath);
-			picZip.delete();
+			wordFile.delete();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
