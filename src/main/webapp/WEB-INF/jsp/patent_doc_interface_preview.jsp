@@ -118,12 +118,21 @@ margin: 1px 0 0 1px;}
 			<div class="pre_picture1">
 						<ul class="picL" id="picLsy" >
 							<c:forEach items="${Attachments}" var="Attachment">
-								<li>
+								<%-- <li>
 									<a href="#"><img src="${base}${Attachment.attachmentUrl}" alt="" width="200" height="150"/></a>
 									<div class="text">
 										<b>${Attachment.caption}</b>
 									</div>
-								</li>
+								</li> --%>
+								 <li id="+item.attachmentId+">"
+									<img src='"+httpImgUrl+"' alt='' width='200' height='150'/><br/>"+
+									<div style='margin-left:70px'>+
+									<b>"+item.caption+"</b>"+"|&nbsp"+
+									<a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a>"+
+								
+								</div>
+								
+								+</li>
 							</c:forEach>
 						</ul>
 					
