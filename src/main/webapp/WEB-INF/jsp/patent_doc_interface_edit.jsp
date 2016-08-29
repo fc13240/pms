@@ -911,7 +911,7 @@ function preview_selfwrite(value){
 			alert("数据未保存");
 		}
 	});
-	window.open("<s:url value='/editor/previewPatentDoc.html'/>?patentDocId="+value)
+	window.open("<s:url value='/editor/previewInterfacePatentDoc.html'/>?patentDocId="+value)
 	
 }
 
