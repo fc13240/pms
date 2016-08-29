@@ -113,7 +113,6 @@
 									<a href="#"><img src="${base}${Attachment.attachmentUrl}" alt="" width="200" height="150"/></a>
 									<div class="text">
 										<b>${Attachment.caption}</b>
-										<p><a href="#">${Attachment.label}</a></p>
 									</div>
 								</li>
 							</c:forEach>

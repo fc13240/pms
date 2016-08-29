@@ -363,9 +363,9 @@ margin: 1px 0 0 1px;}
 						<div class="content" id="content1" style="display: none;">
 							
 							<div class="box" id="content5-1">
-								<div class="upimg1" onclick="addPic();">
+								<div style="margin:10px" class="upimg1" onclick="addPic();">
 									新增附图</div>
-									<div class="upimg1" onclick='javascript:window.open("<s:url value='/editor/downloadPic.html'/>?patentDocId=${ patentDoc.patentDocId}")' >
+									<div style="margin:10px" class="upimg1" onclick='javascript:window.open("<s:url value='/editor/downloadPic.html'/>?patentDocId=${ patentDoc.patentDocId}")' >
 									下载附图</div>
 								<div class="picBox">
 									<ul class="picL9" id="picLsy2" >
