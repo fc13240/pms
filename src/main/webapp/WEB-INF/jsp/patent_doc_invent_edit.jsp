@@ -641,9 +641,6 @@ margin: 1px 0 0 1px;}
 
 	
 	    </div>
-	    <div id="getPA">
-	    </div>
-	
 	    </div>
 	    
 <!-- commonAppersonModal -->
