@@ -102,7 +102,7 @@
 	</select>
 	
 	<select id="getAttachmentByAttachId"  resultMap="PatentImgMap">
-		select attachment_id,caption,seq_no, attachment_url from patent_attachment where  attachment_id=#{attachmentId}
+		select attachment_id,caption,seq_no, attachment_url,patent_doc_id from patent_attachment where  attachment_id=#{attachmentId}
 	</select>
 	
 	<delete id="delectAttachmentById"  >
