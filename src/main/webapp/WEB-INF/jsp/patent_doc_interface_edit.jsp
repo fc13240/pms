@@ -92,7 +92,7 @@
 		</script> 
 </head>
 
-<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingInterfaceTemplate(1);searGuide(this)">
+<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingInterfaceTemplate(1);searGuide(this)" onbeforeunload="return '真的要关闭此窗口吗?'">
 <style>
 .model1:hover .button{display:block}
 .picL9 li{
@@ -959,6 +959,7 @@ margin: 1px 0 0 1px;}
 	</div>
 </div>
 	<script type="text/javascript">
+	
 	var p=1;
 	$('input[id=patentFile]').change(function() {  
 		$('#filename').val($(this).val());  

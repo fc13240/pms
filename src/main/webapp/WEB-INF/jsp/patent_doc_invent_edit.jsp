@@ -92,7 +92,7 @@
 		</script> 
 </head>
 
-<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1);searGuide(this)">
+<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1);searGuide(this)" onbeforeunload="return '真的要关闭此窗口吗?'">
 <style>
 .model1:hover .button{display:block}
 
@@ -983,7 +983,11 @@ margin: 1px 0 0 1px;}
 	</div>
 </div>
 <script type="text/javascript">
-
+ window.onbeforeunload(){     
+    if(event.clientX>document.body.clientWidth && event.clientY<0||event.altKey){     
+           window.event.returnValue="确定要退出本页吗？";     
+          }     
+    }
 	
 	var p=1;
 	$('input[id=patentFile]').change(function() {  
@@ -1863,6 +1867,10 @@ function loadImgs(){
 			}
 		})
 	}
+	
+
+	
+	
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	
