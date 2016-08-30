@@ -44,7 +44,7 @@
 					<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
 					<br>		  
 			       	<h5>邮编及地址:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" value="${appPerson.postcodeAddress }" name="postcodeAddress" required onblur="validateInfoNumber1(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:600px;" id="numberRece1" type="text" value="${appPerson.postcodeAddress }" name="postcodeAddress" required onblur="validateInfoNumber1(this.value)"/>
 					<span style="color: red; display: none;" id=numberError1>请输入正确的邮编及地址</span>
 					<br>
 					<h5>费减备案状态:</h5>
@@ -100,7 +100,7 @@
 		var reg = new RegExp("^[0-9]*$");
 		document.getElementById("numberError1").style.display = "none";
 		if (reg.test(phoneNumber)) {
-			if (phoneNumber.length>20) {
+			if (phoneNumber.length>50) {
 				document.getElementById("numberError1").style.display = "";
 				return false;
 			} else {
