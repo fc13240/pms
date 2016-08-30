@@ -82,7 +82,7 @@
 		font-size: 14px;
 	}
 	
-	.picL9 li{
+	.picL9 {
 		overflow: hidden;
 		position: relative;
 		float: left;
@@ -115,7 +115,7 @@
 			</div>
 			<br/>
 			<div class="pre_picture1">
-						<ul class="picL9" id="picLsy" >
+				
 							<c:forEach items="${Attachments}" var="Attachment">
 								<%--< li>
 									<a href="#"><img src="${base}${Attachment.attachmentUrl}" alt="" width="200" height="150"/></a>
@@ -123,14 +123,16 @@
 										<b>${Attachment.caption}</b>
 									</div>
 								</li> --%>
-								 <li>
+								
+								<li class="picL9">
 									<img src="${base}${Attachment.attachmentUrl}" alt="" width="200" height="170"/><br/>
 									<div style="margin-left:70px">
 									<b>${Attachment.caption}</b>
 									</div>
 								</li>
+								
 							</c:forEach>
-						</ul>
+						
 					
     		 </div>
 			
@@ -182,36 +184,7 @@
 
 <script type="text/javascript">
 
-	$("#picLsy li").hover(function(){
-		$(this).find('.text:not(:animated)').animate({top:"0px"}, {easing:"easeInOutExpo"}, 50, function(){});
-	},function () {
-		$(this).find('.text').animate({top:"149px"}, {easing:"easeInOutExpo"}, 50, function(){});
-	});
-
 	
-
-	$(function (){
-		var abstractImg ="${patentDoc.abstractImg}";
-		$.ajax({
-			type:"post",
-			url:"<s:url value='/editor/getLabelByUrl.html'/>",
-			data:{"ImgUrl":abstractImg},
-			success: function(data){
-				var obj= $.parseJSON(data);
-					$("#div_6").append(
-							"<span>"+"附图说明： "+obj.caption+"</span>"+
-							"<br/>"+"<br/>"+
-							"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+
-					        "<span>"+"标记说明 : "+obj.label+"</span>"
-					);
-					 
-				}
-		});
-	})
-		
-
-		
-		
 	
 
 </script>

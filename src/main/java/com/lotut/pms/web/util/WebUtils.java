@@ -57,7 +57,7 @@ public class WebUtils {
 	}
 	
 	public static String getPicName(HttpSession session) throws UnsupportedEncodingException {
-		
-		return  new String(((String) session.getAttribute("picName")).getBytes("ISO8859-1"),"UTF-8");
+		String picName = (String) session.getAttribute("picName");
+		return picName;
 	}
 }

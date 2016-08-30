@@ -93,7 +93,7 @@
 		</script> 
 </head>
 
-<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1);searGuide(this)">
+<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1);searGuide(this)" onbeforeunload="return '真的要关闭此窗口吗?'">
 <style>
 .model1:hover .button{display:block}
 

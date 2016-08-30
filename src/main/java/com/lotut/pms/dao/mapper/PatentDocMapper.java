@@ -29,7 +29,7 @@ public interface PatentDocMapper {
 	
 	List<Attachment> getAttachmentById(@Param("patentDocId")long patentDocId);
 	
-	void delectAttachmentById(@Param("attachmentId")long attachmentId);
+	boolean delectAttachmentById(@Param("attachmentId")long attachmentId);
 	
 	void deleteNullPatentDoc();
 	
@@ -56,4 +56,6 @@ public interface PatentDocMapper {
 	int getMaxAttachmentPicNum(@Param("patentDocId")long patentDocId );
 	
 	void updateAttachmentImgName(Attachment attachment);
+	
+	Attachment getAttachmentByAttachId(@Param("attachmentId")long attachmentId);
 }

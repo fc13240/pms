@@ -337,6 +337,23 @@ public class PatentEditDocController {
 	
 	@RequestMapping(path="/delectAttachmentById",method=RequestMethod.POST)
 	public void delectAttachmentById(@RequestParam("attachmentId")long attachmentId,Model model,HttpServletResponse response,PrintWriter writer){
+			Attachment attachment=patentDocService.getAttachmentByAttachId(attachmentId);
+			String url=attachment.getAttachmentUrl();
+			
+			String picPath=url.substring(0, url.lastIndexOf("."));
+
+			long patentDocId=attachment.getPatentDocId();
+			PatentDoc patentDoc=patentDocService.getUserPatentDocById(patentDocId);
+			int patentType=patentDoc.getPatentType();
+			String imgPath;
+			if(patentType==1 || patentType==2){
+				 imgPath=Settings.PATENTDOC_DIR+picPath;
+			}else{
+				 imgPath=Settings.PATENTDOC_DIR+picPath;
+			}
+			System.out.println(imgPath);
+			File file =new File(imgPath);
+			file.delete();
 		patentDocService.delectAttachmentById(attachmentId);
 		writer.write(1);
 	}
@@ -659,7 +676,7 @@ public class PatentEditDocController {
 		 }
 		 
 
-		String zipPath=picPathdir+"/"+contentName+".zip";
+		String zipPath=Settings.TEMP_DIR+contentName+".zip";
 		try {
 			
 			ZipFile zipFile = new ZipFile(zipPath);
@@ -717,7 +734,7 @@ public class PatentEditDocController {
 		 }
 		 
 
-		String zipPath=picPathdir+"/"+contentName+".zip";
+		String zipPath=Settings.TEMP_DIR+contentName+".zip";
 		try {
 			
 			ZipFile zipFile = new ZipFile(zipPath);
