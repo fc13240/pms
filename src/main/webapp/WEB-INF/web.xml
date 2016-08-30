@@ -92,15 +92,6 @@
           
    	 </filter>
    	 
-   	 <filter-mapping>  
-		<filter-name>encodingFilter </filter-name>  
-		<url-pattern>*.jsp </url-pattern>  
-		</filter-mapping> 
-		<filter-mapping>  
-		<filter-name>encodingFilter </filter-name>  
-		<url-pattern>*.html </url-pattern>  
-	</filter-mapping> 
-   	 
 	<filter-mapping>  
 	    <filter-name>characterEncodingFilter</filter-name>  
 	    <url-pattern>/*</url-pattern>  
