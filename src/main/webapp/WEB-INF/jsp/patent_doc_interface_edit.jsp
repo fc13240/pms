@@ -1504,27 +1504,6 @@ function deleteTag(tag){
 }
 
 
-function preview_selfwrite(value){
-
-	var name=$("#patentName").val();
-	var manual=$("#editorContent").val();
-	var abstractDescription=$("#editorContent7").val();
-	var rightClaim=$("#editorContent8").val();
-	$.ajax({
-		type: "POST",
-		url: "<s:url value='/editor/savePreviewPatentDoc.html'/>",
-		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value},
-		success: function(data){
-		},
-		error: function(){
-			alert("数据未保存");
-		}
-	});
-
-	window.open("<s:url value='/editor/previewPatentDoc.html'/>?patentDocId="+value)
-	
-}
-
 function submitAppPersonForm(){
 	var appPersonName =$("#modalAppPersonName").val();
 	//var appPersonType =$("#modalAppPersonType").val();
