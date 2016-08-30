@@ -353,8 +353,9 @@ public class PatentEditDocController {
 			}
 			File file =new File(imgPath);
 			file.delete();
+			writer.write(1);
 		}
-		writer.write(1);
+		
 	}
 	
 	@RequestMapping(path="/getTemplateList")
