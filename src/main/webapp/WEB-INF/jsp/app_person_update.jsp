@@ -66,7 +66,7 @@
 					<br>
 					<h5>其他信息:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" value="${appPerson.otherInfo }" name="otherInfo"  onblur="validateCommentNumber(this.value)"/>
-					<span style="color: red; display: none;" id=numberError>该处应输入不大于50字段</span>
+					<span style="color: red; display: none;" id=commentError>该处应输入不大于50字段</span>
 					<br>      
 					<input type="hidden" class="form-control" name="appPersonId"  value="${appPerson.appPersonId}"/>
 					<div style="height:20px;"></div> 
@@ -100,7 +100,7 @@
 		var reg = new RegExp("^[0-9]*$");
 		document.getElementById("numberError1").style.display = "none";
 		if (reg.test(phoneNumber)) {
-			if (phoneNumber.length>20) {
+			if (phoneNumber.length>50) {
 				document.getElementById("numberError1").style.display = "";
 				return false;
 			} else {
