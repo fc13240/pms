@@ -558,6 +558,7 @@ CREATE TABLE  IF NOT EXISTS patent_documents (
   patent_doc_attachment_file varchar(200) DEFAULT NULL COMMENT '上传附件保存地址',
   patent_doc_status int NOT NULL COMMENT '文档状态',
   patent_doc_url VARCHAR(200) default null COMMENT '文档保存地址',
+  contact_person VARCHAR(500) default null COMMENT '联系人',
   PRIMARY KEY (patent_doc_id),
   KEY fk_patent_documents_patent_type (patent_type),
   KEY fk_patent_documents_doc_owner_id (user_id),
@@ -565,6 +566,7 @@ CREATE TABLE  IF NOT EXISTS patent_documents (
   CONSTRAINT fk_patent_documents_patent_type FOREIGN KEY (patent_type) REFERENCES patent_types (patent_type_id),
   constraint fk_patent_documents_status foreign key idx_fk_patent_doc_status (patent_doc_status) references patent_doc_status(patent_doc_status_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE IF NOT EXISTS patent_doc_section_types(
 	patent_doc_section_id INT PRIMARY KEY,
