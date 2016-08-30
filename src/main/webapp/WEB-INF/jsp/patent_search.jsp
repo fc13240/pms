@@ -30,22 +30,13 @@
 
 				<!-- search begin -->
 				<div class="lt-box">
-					<div class="search-box">
-			<!-- 		<form action="<s:url value='/patent/searchPatent.html'/>" method="get">
-						  <div class="t-third" style="clear:both;text-align:center;">
-						  <input type="text" style="width:400px;height:35px;display:inline;" placeholder="申请号／申请人／专利名称／代理机构" name="q"	 class="text" id="keywordId" />
-							<input type="submit" value="专利库搜索"  id="mc-embedded-subscribe" class="button" style="background: #D31119; color: #fff;width:150px;height:36px;"/>
-						  </div>
-						</form>
-						 -->	
-						
+					<div class="search-box">						
 					  <form action="<s:url value='/patent/searchPatent.html'/>"method="get">
 					    <div class="form-group">
-					      <input type="text" style="width:400px;height:35px;display:inline;" placeholder="申请号／申请人／专利名称／代理机构" name="q"	 class="text" id="keywordId" />
+					      <input type="text" style="width:400px;height:35px;display:inline;" placeholder="申请号／申请人／专利名称／代理机构" name="q"	 class="t-input form-control" id="keywordId" />
 							<input type="submit" value="专利库搜索"  id="mc-embedded-subscribe" class="button button-caution button-rounded" style="background: #ff7680; color: #fff;width:150px;height:36px;"/>
 					    </div>
-					  </form>
-						
+					  </form>					
 						
 					</div>
 				</div>
