@@ -79,8 +79,8 @@ public class PatentDocServiceImp implements PatentDocService{
 
 
 		@Override
-		public void delectAttachmentById(long attachmentId) {
-			patentDocDao.delectAttachmentById(attachmentId);
+		public boolean delectAttachmentById(long attachmentId) {
+			return patentDocDao.delectAttachmentById(attachmentId);
 			
 		}
 
@@ -178,6 +178,12 @@ public class PatentDocServiceImp implements PatentDocService{
 		public void updateAttachmentImgName(Attachment attachment) {
 			patentDocDao.updateAttachmentImgName(attachment);
 			
+		}
+
+
+		@Override
+		public Attachment getAttachmentByAttachId(long attachmentId) {
+			return patentDocDao.getAttachmentByAttachId(attachmentId);
 		}
 
 
