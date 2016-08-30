@@ -83,7 +83,7 @@
 	
 	}
 	
-	.picL9 li{
+	.picL9 {
 		overflow: hidden;
 		position: relative;
 		float: left;
@@ -116,7 +116,7 @@
 			</div>
 			<br/>
 			<div class="pre_picture1">
-						<ul class="picL9" id="picLsy" >
+						
 							<c:forEach items="${Attachments}" var="Attachment">
 								<%-- <li>
 									<a href="#"><img src="${base}${Attachment.attachmentUrl}" alt="" width="200" height="150"/></a>
@@ -124,14 +124,14 @@
 										<b>${Attachment.caption}</b>
 									</div>
 								</li> --%>
-								 <li>
+								 <li class="picL9">
 									<img src="${base}${Attachment.attachmentUrl}" alt="" width="200" height="170"/><br/>
 									<div style="margin-left:70px">
 									<b>${Attachment.caption}</b>
 									</div>
 								</li>
 							</c:forEach>
-						</ul>
+						
 					
     		 </div>
 				
