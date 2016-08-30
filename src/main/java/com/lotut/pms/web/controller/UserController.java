@@ -232,7 +232,6 @@ public class UserController {
 	@RequestMapping(path="/setPicName", method=RequestMethod.GET)
 	@ResponseBody
 	public void setPicName(@RequestParam("picName")String picName, HttpSession session, HttpServletResponse response) throws IOException {
-		response.setCharacterEncoding("utf-8");
 		session.setAttribute("picName", picName);
 		
 	}
