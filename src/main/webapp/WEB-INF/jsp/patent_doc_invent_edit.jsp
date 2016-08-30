@@ -983,11 +983,6 @@ margin: 1px 0 0 1px;}
 	</div>
 </div>
 <script type="text/javascript">
- window.onbeforeunload(){     
-    if(event.clientX>document.body.clientWidth && event.clientY<0||event.altKey){     
-           window.event.returnValue="确定要退出本页吗？";     
-          }     
-    }
 	
 	var p=1;
 	$('input[id=patentFile]').change(function() {  
