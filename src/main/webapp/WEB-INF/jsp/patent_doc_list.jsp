@@ -30,8 +30,8 @@
 					  <form class="form-inline" action="<s:url value='/editor/searchPatentDoc.html'/>" method="get">
 					  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 					    <div class="form-group">
-					    <input style="width:450px;height:34px;" name="keyword" id="keywordId" value="" placeholder="文档名称" class="t-input form-control"/>	
-					      
+					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="文档名称" class="t-input form-control"/>	
+					    
 					     <button class="button button-caution button-rounded" type="submit" style="width:80px;">搜索文档</button>
 					    </div>
 					  </form>
