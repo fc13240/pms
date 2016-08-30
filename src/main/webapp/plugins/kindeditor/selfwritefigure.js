@@ -42,7 +42,7 @@ function piclistShow() {
 
 function piciLlusFc(e) {
     var val = $.trim($(e).val());
-    if (val == "请填写附图说明，例如”图1为本发明实施例XX的方法流程示意图”。") {
+    if (val == "请填写图片名称") {
         $(e).val("");
         $(e).css('color','black');
     }
@@ -58,7 +58,7 @@ function picMarkiLlusFc(e) {
 function piciLlusBl(e) {
     var val = $.trim($(e).val());
     if (val == "") {
-        $(e).val("请填写附图说明，例如”图1为本发明实施例XX的方法流程示意图”。");
+        $(e).val("请填写图片名称");
         $(e).css('color', '#999');
     }
 }
