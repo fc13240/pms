@@ -90,6 +90,7 @@
 			return false;
 		} else {
 			return true;
+		}
 }
  
  function validateInfoNumber1(phoneNumber) {
