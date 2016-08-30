@@ -357,7 +357,8 @@ public class AppPersonController {
 	@RequestMapping(path="/downloadProxyTemplate")
 	public void downloadProxyTemplate(HttpServletResponse response,HttpServletRequest request)throws IOException{
 		response.setContentType("application/doc");
-		String relativeUrl="linus常用命令整理.docx";
+		
+		String relativeUrl=Settings.PROXY_TEMPLATE_NMAE;
 		String filePath=Settings.PROXY_TEMPLATE_FILE_PATH+relativeUrl;
 		File appPersonFile = new File(filePath);
 		String downloadFileName = URLEncoder.encode(relativeUrl, "UTF8");
