@@ -47,10 +47,10 @@
 						  <thead>
 							<tr class="simple_bag">
 							  <th class="center"> <label class="pos-rel">
-								<input style="width:10px;" type="checkbox" class="check-item">
+								<input style="width:30px;" type="checkbox" class="check-item">
 								<span class="lbl"></span> </label>
 							  </th>
-							  <th class="center" width="30px">序号</th>
+							  <th class="center" width="40px">序号</th>
 							  <th >姓名或名称</th>
 							  <th>证件号码 </th>
 							  <th>邮编及地址</th>
