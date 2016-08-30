@@ -659,7 +659,7 @@ public class PatentEditDocController {
 		 }
 		 
 
-		String zipPath=picPathdir+"/"+contentName+".zip";
+		String zipPath=Settings.TEMP_DIR+contentName+".zip";
 		try {
 			
 			ZipFile zipFile = new ZipFile(zipPath);
@@ -717,7 +717,7 @@ public class PatentEditDocController {
 		 }
 		 
 
-		String zipPath=picPathdir+"/"+contentName+".zip";
+		String zipPath=Settings.TEMP_DIR+contentName+".zip";
 		try {
 			
 			ZipFile zipFile = new ZipFile(zipPath);
