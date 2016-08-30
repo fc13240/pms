@@ -489,34 +489,247 @@ margin: 1px 0 0 1px;}
 	        
 	    </div>
 	    <input type="hidden" id="hidmodelbutton" value="100060010000">
-	    <div id="modelbutton" class="modelbutton" onclick="modelbuttonclick();" style="position: fixed; top: 230px; left: 1294.5px; display: none;">
-	        +设为模板</div>
+	    <div id="modelbutton" class="modelbutton" onclick="modelbuttonclick();" style="position:fixed;top:230px;left:1294.5px;display:none;">
+	        +设为模板
+	    </div>
 	    <div class="right_right_bot" tab_name="content0" style="height: 600px; overflow-x: hidden; overflow-y: auto;">
 	        <div class="data_menu">
 	            <div class="menud" id="modelS" onclick="searGuide(this)">
-	                撰写指南</div>	
+	              	撰写指南
+	            </div>	
 	            <div class="menud" id="modelS" onclick="searModel(this)">
-	                模板库</div>
+	               	模板库
+	            </div>
 	        </div>
-			<div>
-				<div class="model-list">
-			        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><span id="templateSectionId" style="display:none;">1</span><a style="color:#ccc" href="javascript:upPage();" id="topUpPage">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="topDownPage">下一页</a></div>
-			        <div class="model" style="overflow-x: hidden; overflow-y: auto;">
-			            <div id="modelWrap" style="display: block;"></div>
-		
-						<div id="hiddenmodel" style="display: none;"></div>
-			        </div>
-			        
-			        <div style="float: right; padding-right: 15px; padding-top: 5px; display: block;" id="kbpage2"><a style="color:#ccc" href="javascript:upPage();" id="bottomUpPage">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="bottomDownPage">下一页</a></div>
-			        
-			        <div id="scBs" class="shousou" onclick="bigSmall(this);">
-			        </div>
-			        <input type="hidden" name="name" value="small" id="hidBorS">
+			<!-- 指南 -->
+			<div class="guide-list"><!--load 指南 然后控制 display -->
+				<div class="guide_1" style="background:#ffffff;padding:5px;">
+				
+					<a href="javascript:;">
+						<div onclick="changeGuide('guide_1_1')" style="font-size:14px;font-weight:700;color:blue;">
+							1．专利名称
+						</div>
+					</a>	
+					<div class="guide_1_1" style="display:none;">
+						<p>
+						（1）专利名称应当清楚、简要，写在说明书首页正文部分的上方居中位置。<br>
+						（2）专利名称应当按照以下各项要求撰写：<br>
+						(2.1)专利名称一般不得超过25个字，特殊情况下，例如，化学领域的某些申请，可以允许最多到40个字；<br>
+						(2.2)采用所属技术领域通用的技术术语，最好采用国际专利分类表中的技术术语，不得采用非技术术语；<br>
+						(2.3)清楚、简要、全面地反映要求保护的主题和类型(产品或者方法)，以利于专利申请的分类，例如一件包含拉链产品和该拉链制造方法两项发明的申请，其名称应当写成“拉链及其制造方法”；<br>
+						(2.4)不得使用人名、地名、商标、型号或者商品名称等。<br>
+						(2.5)不得使用商业性宣传用语（专利申请的任何地方都不允许，其他地方不再强调）。
+						</p>
+
+					</div>
+					<a href="javascript:;">
+					<div  onclick="changeGuide('guide_1_2')" style="font-size:14px;font-weight:700;margin-top:8px;color:blue;">2．技术领域</div>
+					</a>
+					<div class="guide_1_2" style="display:none;">
+						<p>				
+						（1）技术领域应当是要求保护的技术方案所属或者直接应用的具体技术领域。<br>
+						（2）例如：一项关于挖掘机悬臂的发明，其改进之处是将背景技术中的长方形悬臂截面改为椭圆形截面。其所属技术领域可以写成“本发明涉及一种挖掘机（挖掘机悬臂的上位领域），特别是涉及一种挖掘机悬臂（具体的技术领域或者专利名称）”。
+						</p>
+					</div>
+					<a href="javascript:;">
+					<div  onclick="changeGuide('guide_1_3')" style="font-size:14px;font-weight:700;color:blue;margin-top:8px;">3．背景技术</div>
+					</a>
+					<div class="guide_1_3" style="display:none;">
+						<p>				
+							（1）背景技术要写明对发明或者实用新型的理解、检索、审查有用的背景技术，并且尽可能引证反映这些背景技术的文件。还要客观地指出背景技术中存在的问题和缺点，但是，仅限于涉及由技术方案所解决的问题和缺点。在可能的情况下，说明存在这种问题和缺点的原因以及解决这些问题时曾经遇到的困难。<br>
+							（2）引证的文件可以是专利文件，也可以是非专利文件，例如期刊、杂志、手册和书籍等。引证专利文件的，至少要写明专利文件的国别、公开号，最好包括公开日期；引证非专利文件的，要写明这些文件的标题和详细出处。<br>
+							（3）例如：发明专利 “一种便携式牙刷”，如果在背景技术描述到现有技术的牙刷存在多种缺陷，如刷毛过硬、刷毛排列形状不利于牙齿保健，易损伤牙齿等，则这些缺陷与本发明要解决的“便携问题”无关，因而不宜将这些问题写入背景技术，而应在背景技术着重描述现有技术的牙刷“携带不方的问题”，如牙刷和牙膏袋是分开的，且这正是本发明可以解决的问题。
+						</p>
+					</div>
+					
+					<div style="font-size:14px;font-weight:700;margin-top:8px;">4．发明内容</div>
+					<a href="javascript:;">
+					<div  onclick="changeGuide('guide_1_4_A')" style="font-size:14px;color:blue;font-weight:700;margin-top:8px;">A.发明目的</div>
+					</a>
+					<div class="guide_1_4_A" style="display:none;">
+						<p>				
+							（1）发明目的也即所要解决的技术问题，是指要解决的现有技术中存在的技术问题，且专利申请记载的技术方案应当能够解决这些技术问题。该部分的内容相对于前面的“背景技术”和后面的“技术方案”，起到一个承上启下的作用。<br>
+							（2）发明目的应针对现有技术中存在的缺陷或不足；用正面的、尽可能简洁的语言客观而有根据地反映要解决的技术问题，也可以进一步说明其技术效果。<br>
+							（3）例如：本发明要解决的技术问题是提供一种使用、携带更方便的便携式牙刷。该牙刷在使用时不必从盒体中来回取放牙膏软袋即可刷牙，使用更方便；在携带时牙刷与牙膏袋合成一体，携带更方便。
+						</p>
+					</div>
+					<a href="javascript:;">
+					<div  onclick="changeGuide('guide_1_4_B')" style="font-size:14px;color:blue;font-weight:700;margin-top:8px;">B.技术方案</div>
+					</a>
+					<div class="guide_1_4_B" style="display:none;">
+						<p>				
+							 技术方案是一件专利申请的核心；应当与权利要求所限定的相应技术方案的表述相一致。因此请先撰写权利要求书，然后直接将权利要求书全文复制粘贴到技术方案部分，并按照下述方法修改格式：<br>
+							（1）删除权利要求编号和“其特征是”，如果有附图标记，将附图标记和括号一并删除。<br>
+							（2）将“根据权利要求X所述的主题名称，其特征是”修改为“作为进一步的优选方案”。
+						
+						</p>
+					</div>
+					<a href="javascript:;">				
+					<div  onclick="changeGuide('guide_1_4_C')" style="font-size:14px;color:blue;font-weight:700;margin-top:8px;">C.有益效果</div>
+					</a>
+					<div class="guide_1_4_C" style="display:none;">
+						<p>				
+							（1）有益效果是指由技术特征直接带来的，或者是由所述的技术特征必然产生的技术效果。<br>
+							（2）无论用下述哪种方式说明有益效果，都应当与现有技术进行比较，指出发明或者实用新型与现有技术的区别。<br>
+							（2.1）通常，有益效果可以由产率、质量、精度和效率的提高，能耗、原材料、工序的节省，加工、操作、控制、使用的简便，环境污染的治理或者根治，以及有用性能的出现等方面反映出来。<br>
+							（2.2）有益效果也可以通过对发明或者实用新型结构特点的分析和理论说明相结合，或者通过列出实验数据的方式予以说明，不得只断言发明或者实用新型具有有益的效果。<br>
+							（2.3）机械、电气领域的有益效果，可以结合结构特征和作用方式进行说明。但是，化学领域中的发明，在大多数情况下，不适于用这种方式说明发明的有益效果，而是借助于实验数据来说明；在引用实验数据说明有益效果时，应当给出必要的实验条件和方法。<br>
+							（2.4）对于目前尚无可取的测量方法而不得不依赖于人的感官判断的，例如味道、气味等，可以采用统计方法表示的实验结果来说明有益效果。
+						</p>
+					</div>	
+					<a href="javascript:;">					
+					<div  onclick="changeGuide('guide_1_5')" style="font-size:14px;color:blue;font-weight:700;margin-top:8px;">5．附图说明</div>
+					</a>
+					<div class="guide_1_5" style="display:none;">
+						<p>				
+				
+							（1）对于部分发明专利，在没有附图已经能清楚表达发明技术特征的情况下，可以没有附图说明以及说明书附图和摘要附图。<br>
+							（2）附图不止一幅的，应当对所有附图作出图面说明。例如，一件发明名称为“燃煤锅炉节能装置” 的专利申请，其说明书包括四幅附图，这些附图的图面说明如下：<br>
+							图1是燃煤锅炉节能装置的主视图；<br>
+							图2是图1所示节能装置的侧视图；<br>
+							图3是图2中的Ａ向视图；<br>
+							图4是沿图1中Ｂ－Ｂ线的剖视图。<br>
+							图中：1-锅炉支架、2-水箱……。
+						</p>
+					</div>
+					<a href="javascript:;">
+					<div  onclick="changeGuide('guide_1_6')" style="font-size:14px;color:blue;font-weight:700;margin-top:8px;">6．具体实施方式</div>
+					</a>
+					<div class="guide_1_6" style="display:none;">
+						<p>				
+				
+（1）对于产品的发明或者实用新型，实施方式或者实施例应当描述产品的机械构成、电路构成或者化学成分，说明组成产品的各部分之间的相互关系（包含关系、并列关系、连接关系、位置关系、作用关系等）以及各部分的具体特征（如形状、材料、尺寸等）。对于可动作的产品，只描述其构成不能使所属技术领域的技术人员理解和实现发明或者实用新型时，还应当说明其动作过程或者操作步骤。<br>
+（2）对于方法的发明，应当写明其步骤，包括可以用不同的参数或者参数范围表示的工艺条件，以及方法机理、实验数据等。<br>
+（3）具体实施方式是说明书的重要组成部分，它对于充分公开、理解和实现发明或者实用新型，支持和解释权利要求都是极为重要的。有附图的，应当对照附图进行说明。<br>
+（4）对照附图描述发明或者实用新型的优选的具体实施方式时，使用的附图标记或者符号应当与附图中所示的一致，并放在相应的技术名称的后面，不加括号。例如，对涉及电路连接的说明，可以写成“电阻3通过三极管4的集电极与电容5相连接”，不得写成“3通过4与5连接”。
+
+						</p>
+					</div>																					
+					<a href="javascript:;">
+					<div  onclick="changeGuide('guide_1_7')" style="font-size:14px;color:blue;font-weight:700;margin-top:8px;">7．其他要求</div>
+					</a>
+					<div class="guide_1_7" style="display:none;">
+						<p>				
+（1）说明书应当用词规范，语句清楚。即说明书的内容应当明确，无含糊不清或者前后矛盾之处，使所属技术领域的技术人员容易理解。<br>
+（2）说明书应当使用发明或者实用新型所属技术领域的技术术语。对于自然科学名词， 国家有规定的， 应当采用统一的术语，国家没有规定的，可以采用所属技术领域约定俗成的术语，也可以采用鲜为人知或者最新出现的科技术语，或者直接使用外来语(中文音译或意译词)，但是其含义对所属技术领域的技术人员来说必须是清楚的，不会造成理解错误；必要时可以采用自定义词，在这种情况下，应当给出明确的定义或者说明。一般来说，不应当使用在所属技术领域中具有基本含义的词汇来表示其本意之外的其他含义，以免造成误解和语义混乱。说明书中使用的技术术语与符号应当前后一致。<br>
+（3）说明书应当使用中文，但是在不产生歧义的前提下，个别词语可以使用中文以外的其他文字。在说明书中第一次使用非中文技术名词时，应当用中文译文加以注释或者使用中文给予说明。<br>
+例如，在下述情况下可以使用非中文表述形式：<br>
+(a)本领域技术人员熟知的技术名词可以使用非中文形式表述，例如用“ＣＰＵ” 表示中央处理器；但在同一语句中连续使用非中文技术名词可能造成该语句难以理解的，则不允许。<br>
+(b)计量单位、数学符号、数学公式、各种编程语言、计算机程序、特定意义的表示符号(例如中国国家标准缩写ＧＢ)等可以使用非中文形式。<br>
+（4）所引用的外国专利文献、专利申请、非专利文献的出处和名称应当使用原文，必要时给出中文译文，并将译文放置在括号内。<br>
+（5）说明书中的计量单位应当使用国家法定计量单位，包括国际单位制计量单位和国家选定的其他计量单位。必要时可以在括号内同时标注本领域公知的其他计量单位。<br>
+（6）说明书中应当避免使用注册商标来确定物质或者产品，说明书中无法避免使用商品名称时，其后应当注明其型号、规格、性能及制造单位，如电子部件，微生物等。
+						</p>
+					</div>	
+				
+				</div>
+				<div class="guide_2" style="display:none;background:#ffffff;padding:5px;">
+				<div  style="font-size:14px;font-weight:700;">一、撰写说明：</div>
+
+							1.对发明专利申请，用文字足以清楚、完整地描述其技术方案的，可以没有附图。实用新型专利申请的说明书必须有附图。<br>
+							2.一件专利申请有多幅附图时，在用于表示同一实施方式的各幅图中，同一附图标记与同一组成部分一一对应，具体为：（1）表示同一组成部分(同一技术特征或者同一对象)的附图标记应当一致。（2）说明书中与附图中使用的相同的附图标记应当表示同一组成部分。（3）说明书文字部分中未提及的附图标记不得在附图中出现，附图中未出现的附图标记也不得在说明书文字部分中提及。<br>
+							3.附图中除了必需的词语外，不应当含有其他的注释；但对于流程图、结构框图、逻辑框图一类的附图，应当在其框内给出必要的文字或符号。<br>
+							4.附图不得使用工程蓝图、照片；附图应当使用包括计算机在内的制图工具和黑色墨水绘制，线条应当均匀清晰，并不得着色和涂改；附图的周围不得有与图无关的框线；附图应可清晰地分辨出图中的各个细节。<br>
+							5.同一幅附图中应当采用相同比例绘制，为清楚显示其中某一组成部分时可增加一幅局部放大图。
+				</div>
+				<div class="guide_3" style="display:none;background:#ffffff;padding:5px;">
+					<a href="javascript:;">
+					<div   onclick="changeGuide('guide_3_1')" style="font-size:14px;color:blue;font-weight:700;">一、撰写格式：</div>
+					</a>
+					<div class="guide_3_1" style="display:none;">
+						<p>
+							1.一种主题名称，与现有技术共有的必要技术特征，其特征是，区别于现有技术的必要技术特征。<br>
+							2.根据权利要求1所述的主题名称，其特征是，进一步限定或改进的非必要技术特征。<br>
+							3.根据权利要求1或2所述的主题名称，其特征是，进一步限定或改进的非必要技术特征。<br>
+							4.根据权利要求3所述的主题名称，其特征是，进一步限定或改进的非必要技术特征。
+						</p>
+
+					</div>
+					<a href="javascript:;">
+					<div onclick="changeGuide('guide_3_2')" style="font-size:14px;color:blue;font-weight:700;margin-top:8px;">二、格式说明：</div>
+					</a>
+					<div class="guide_3_2" style="display:none;">
+						<p>				
+							1.主题名称：应当能够清楚地表明该权利要求的类型是产品还是方法，例如：XXX装置；XXX方法。不允许采用模糊不清的主题名称，例如：XXX技术（此名称也不能作为专利名称），或者在一项权利要求的主题名称中既包含有产品又包含有方法，例如：XXX产品及其制造方法（但此名称可以作为专利名称）。其他要求与专利名称的要求相同。<br>
+							2.权利要求书必须有权利要求1（独立权利要求），可以没有权利要求2等（从属权利要求）。<br>
+							3.“其特征是”可以替换为“其特征在于”或者类似的用语，但不允许省略。<br>
+							4. “与现有技术共有的必要技术特征”与“区别于现有技术的必要技术特征”无法区分的，可以一起写到其特征是之后，如配方和工艺类专利申请。<br>
+							5.技术特征：对于产品，是指产品的机械构成、电路构成或者化学成分，即组成产品的各部分之间的相互关系（包含关系、并列关系、连接关系、位置关系、作用关系等）以及各部分的具体特征（如形状、材料、尺寸、含量等）。对于方法，是指用不同的参数或者参数范围表示的工艺步骤。<br>
+							6.必要技术特征：是指发明或者实用新型为解决其技术问题所不可缺少的技术特征，其总和足以构成发明或者实用新型的技术方案，使之区别于背景技术中所述的其他技术方案。<br>
+							7.非必要技术特征：是指发明或者实用新型为进一步限定或改进的技术特征，该技术特征不是解决其技术问题所不可缺少的技术特征，但采用该特征，可以给发明或者实用新型带来一定的技术效果或者进一步明确专利申请的保护范围。<br>
+							8.从属权利要求只能以择一方式引用在前的权利要求（例：3.根据权利要求1-2之一所述的……√；2.根据权利要求1和2所述的……×）；多项从属权利要求不得引用在前的多项权利要求（3.根据权利要求1-2之一所述的……。4.根据权利要求2-3之一所述的……。× ）
+													
+						</p>
+					</div>
+					<a href="javascript:;">
+					<div  onclick="changeGuide('guide_3_3')" style="font-size:14px;color:blue;font-weight:700;margin-top:8px;">三、撰写要求：</div>
+					</a>
+					<div class="guide_3_3" style="display:none;">
+						<p>				
+							1.权利要求书应当以说明书为依据，清楚、简要地限定要求专利保护的范围。<br>
+							2.不得使用含义不确定的用语，如：厚、薄、强、弱、高温、高压、很宽范围等程度副词，除非这种用词在特定领域中具有公认的确切含义，或者进一步限定具体程度数值为多少。<br>
+							3.不得在一项权利要求中出现可以限定出不同的保护范围的用语，如：最好、例如、特别是、必要时…。<br>
+							4.尽量避免使用通常会使权利要求的保护范围不清楚的用语，如：约、接近、等、或类似物…。<br>
+							5.除附图标记或者化学及数学式中使用的括号之外，权利要求中应尽量避免使用括号。<br>
+							6.如果并列选择的技术特征存在直接上下位关系，则导致一项权利要求限定出保护范围重叠的多重保护范围，由此导致权利要求的保护范围不清楚。<br>
+							7.采用正面肯定式的用语清楚表述要求保护的范围，不得采用否定式描述。<br>
+							8.权利要求的表述应当简要，除记载技术特征外，不得对原因或者理由作不必要的描述，也不得使用商业性宣传用语；不得用同一技术特征对权利要求进行重复限定。<br>
+							9.权利要求书有一项以上权利要求的，应当用阿拉伯数字顺序编号。<br>
+							10.权利要求中使用的科技术语应当与说明书中使用的科技术语一致。<br>
+							11.权利要求中可以有化学式或者数学式，但是不得有插图；权利要求中通常不允许使用表格，除非使用表格能够更清楚地说明发明或者实用新型要求保护的主题。<br>
+							12.除绝对必要外，权利要求中不得使用“如说明书……部分所述”或者“如图……所示”等类似用语。<br>
+							13.权利要求中的技术特征可以引用说明书附图中相应的标记，这些标记应当用括号括起来，放在相应的技术特征后面，附图标记不得解释为对权利要求保护范围的限制。<br>
+							14.一项（注：不是一件）发明或者实用新型应当只有一个独立权利要求，并写在同一发明或者实用新型的从属权利要求之前；一项权利要求应限定一项发明，两项以上不同类型的发明不能出现在同一项权利要求中。<br>
+							每一项权利要求只允许（有且仅能）在其结尾处使用句号；通常一项权利要求用一个自然段表述，也可以用分行或者分小段的方式描述，各段之间可以用分号分开。 						
+													
+						</p>
+					</div>					
+				
+				
+				</div>
+				<div class="guide_4" style="display:none;background:#ffffff;padding:5px;">
+				
+				
+					<div style="font-size:14px;font-weight:700;margin-top:8px;">一、撰写格式：</div>
+					
+					<span>本发明（实用新型）公开了一种专利名称，属于（涉及）XXX领域。权利要求1的核心技术特征。说明书中的核心有益效果。</span>
+					<div style="font-size:14px;font-weight:700;margin-top:8px;">二、格式说明：</div>
+					<p>
+					1.专利名称：必须与说明书的专利名称保持完全一致。<br>
+					2.XXX领域：可与说明书中的技术领域保持一致（该部分可省略）。<br>
+					3.核心技术特征：可与权利要求书中的权利要求1记载的技术特征保持一致。<br>
+					4.核心有益效果：可与说明书中的有效益效果保持一致。
+					</p>
+					<div style="font-size:14px;font-weight:700;margin-top:8px;">三、撰写要求</div>
+					<p>
+					1.摘要应当写明发明或者实用新型的名称和所属技术领域，并清楚地反映所要解决的技术问题、解决该问题的技术方案的要点以及主要用途，其中以技术方案为主；摘要可以包含最能说明发明的化学式。<br>
+					2.摘要文字部分(包括标点符号)不得超过300个字，并且不得使用商业性宣传用语。<br>
+					3.摘要文字部分出现的附图标记应当加括号。
+					</p>
+				</div>
+				<div class="guide_5" style="display:none;background:#ffffff;padding:5px;">
+				<p style="color:red;">从说明书附图中选一副最能反映专利核心技术的附图</p>
+				</div>
+				<div class="guide_6" style="display:none;background:#ffffff;padding:5px;">
+				上传附件
+				</div>
+
+			</div>
+	        
+			<div class="model-list" style="display:none;">
+		        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><span id="templateSectionId" style="display:none;">1</span><a style="color:#ccc" href="javascript:upPage();" id="topUpPage">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="topDownPage">下一页</a></div>
+		        <div class="model" style="overflow-x: hidden; overflow-y: auto;">
+		            <div id="modelWrap" style="display: block;"></div>
+	
+					<div id="hiddenmodel" style="display: none;"></div>
 		        </div>
-		        <div class="guide-list" style="display:none;"><!--load 指南 然后控制 display -->
-		        <span>撰写指南:</span>
+		        
+		        <div style="float: right; padding-right: 15px; padding-top: 5px; display: block;" id="kbpage2"><a style="color:#ccc" href="javascript:upPage();" id="bottomUpPage">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="bottomDownPage">下一页</a></div>
+		        
+		        <div id="scBs" class="shousou" onclick="bigSmall(this);">
 		        </div>
-			</div> 
+		        <input type="hidden" name="name" value="small" id="hidBorS">
+			</div>	        
 	    </div>
 	</div>
 	
