@@ -337,8 +337,6 @@ public class PatentEditDocController {
 	
 	@RequestMapping(path="/delectAttachmentById",method=RequestMethod.POST)
 	public void delectAttachmentById(@RequestParam("attachmentId")long attachmentId,Model model,HttpServletResponse response,PrintWriter writer){
-		boolean check=patentDocService.delectAttachmentById(attachmentId);
-		if(check){
 			Attachment attachment=patentDocService.getAttachmentByAttachId(attachmentId);
 			String url=attachment.getAttachmentUrl();
 			String [] str=url.split("\\.");
@@ -353,9 +351,8 @@ public class PatentEditDocController {
 			}
 			File file =new File(imgPath);
 			file.delete();
-			writer.write(1);
-		}
-		
+		patentDocService.delectAttachmentById(attachmentId);
+		writer.write(1);
 	}
 	
 	@RequestMapping(path="/getTemplateList")
