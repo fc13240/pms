@@ -44,7 +44,7 @@
 					<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
 					<br>		  
 			       	<h5>邮编及地址:</h5>
-					<input class="selectPointOfInterest form-control" style="width:600px;" id="numberRece1" type="text" value="${appPerson.postcodeAddress }" name="postcodeAddress" required onblur="validateInfoNumber1(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" value="${appPerson.postcodeAddress }" name="postcodeAddress" required onblur="validateInfoNumber1(this.value)"/>
 					<span style="color: red; display: none;" id=numberError1>请输入正确的邮编及地址</span>
 					<br>
 					<h5>费减备案状态:</h5>
@@ -66,7 +66,7 @@
 					<br>
 					<h5>其他信息:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" value="${appPerson.otherInfo }" name="otherInfo"  onblur="validateCommentNumber(this.value)"/>
-					<span style="color: red; display: none;" id=numberError>该处应输入不大于50字段</span>
+					<span style="color: red; display: none;" id=commentError>该处应输入不大于50字段</span>
 					<br>      
 					<input type="hidden" class="form-control" name="appPersonId"  value="${appPerson.appPersonId}"/>
 					<div style="height:20px;"></div> 
