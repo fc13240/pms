@@ -1362,7 +1362,7 @@ function loadImgs(){
 		var picName = $("#piciLlus2").val();
 		
 		$.ajax({
-			url: "<s:url value='/user/setPicName.html'/>?picName=" + picName, 
+			url: "<s:url value='/user/setPicName.html'/>?picName=" + encodeURI(picName), 
 			type: 'get', 
 			success: function() {
 				

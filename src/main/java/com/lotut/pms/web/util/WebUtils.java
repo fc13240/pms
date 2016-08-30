@@ -57,7 +57,7 @@ public class WebUtils {
 	}
 	
 	public static String getPicName(HttpSession session) throws UnsupportedEncodingException {
-		
-		return  (String) session.getAttribute("picName");
+		String picName = (String) session.getAttribute("picName");
+		return picName;
 	}
 }
