@@ -101,6 +101,10 @@
 		select attachment_id,caption,seq_no, attachment_url from patent_attachment where  patent_doc_id=#{patentDocId}
 	</select>
 	
+	<select id="getAttachmentByAttachId"  resultMap="Attachment">
+		select attachment_id,caption,seq_no, attachment_url from patent_attachment where  attachment_id=#{attachmentId}
+	</select>
+	
 	<delete id="delectAttachmentById"  >
 		delete from patent_attachment where  attachment_id=#{attachmentId}
 	</delete>

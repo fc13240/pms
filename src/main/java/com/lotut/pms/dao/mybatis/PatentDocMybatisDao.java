@@ -78,8 +78,8 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 
 
 	@Override
-	public void delectAttachmentById(long attachmentId) {
-		patentDocMapper.delectAttachmentById(attachmentId);
+	public boolean delectAttachmentById(long attachmentId) {
+		return patentDocMapper.delectAttachmentById(attachmentId);
 		
 	}
 
@@ -191,5 +191,12 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	public void updateAttachmentImgName(Attachment attachment) {
 		patentDocMapper.updateAttachmentImgName(attachment);
 		
+	}
+
+
+
+	@Override
+	public Attachment getAttachmentByAttachId(long attachmentId) {
+		return patentDocMapper.getAttachmentByAttachId(attachmentId);
 	}
 }

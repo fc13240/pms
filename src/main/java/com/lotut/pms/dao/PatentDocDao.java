@@ -29,7 +29,7 @@ public interface PatentDocDao {
 	
 	List<Attachment> getAttachmentById(long patentDocId);
 	
-	void delectAttachmentById(long attachmentId);
+	boolean delectAttachmentById(long attachmentId);
 	
 	void deleteNullPatentDoc();
 	
@@ -56,5 +56,7 @@ public interface PatentDocDao {
 	int getMaxAttachmentPicNum(long patentDocId );
 	
 	void updateAttachmentImgName(Attachment attachment);
+	
+	Attachment getAttachmentByAttachId(long attachmentId);
 	
 }

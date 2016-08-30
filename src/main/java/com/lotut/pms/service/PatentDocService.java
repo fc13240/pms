@@ -30,7 +30,7 @@ public interface PatentDocService {
 	
 	List<Attachment> getAttachmentById(long patentDocId);
 	
-	void delectAttachmentById(long attachmentId);
+	boolean delectAttachmentById(long attachmentId);
 	
 	void deleteNullPatentDoc();
 	
@@ -57,5 +57,7 @@ public interface PatentDocService {
 	int getMaxAttachmentPicNum(long patentDocId );
 	
 	void updateAttachmentImgName(Attachment attachment);
+	
+	Attachment getAttachmentByAttachId(long attachmentId);
 
 }
