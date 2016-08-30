@@ -70,6 +70,7 @@
 						$("#patentImgUrl").append("<input type='hidde' id='seqNo' name='seqNo' value='"+Jresponse["count"]+"'/>");
 						savePatentImgUrl();
 						$("#patentImgUrl").empty();
+						$("#piciLlus2").val("");
 					},
 					onFailure: function(file, response){          // 文件上传失败的回调方法
 						console.info("此文件上传失败：");
@@ -207,9 +208,7 @@ margin: 1px 0 0 1px;}
 									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
 									<c:if test="${not empty patentDoc.patentDocAttachmentFile }">
-										<a href="<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>" >
-										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" >下载附件</button>
-										</a>
+										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded"  onclick="downloadAttachmentFile(${patentDoc.patentDocId})">下载附件</button>
 				                    </c:if>
 									</form> 
 									<div style="height:10px;">&nbsp;</div> 
@@ -1872,6 +1871,12 @@ function resetUpdateInventorForm(){
 	$("#updateModalInventorEmail").val("");
 	$("#updateModalInventorOtherInformation").val("");
 }
+
+function downloadAttachmentFile(value){
+	var iframe = document.getElementById('fileFrame');
+	iframe.src = "<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+value;
+}
 </script>
+<iframe id="fileFrame" style="display:none"></iframe>
 </body>
 </html>

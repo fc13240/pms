@@ -197,9 +197,7 @@ margin: 1px 0 0 1px;}
 									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
 									<c:if test="${not empty patentDoc.patentDocAttachmentFile }">
-										<a href="<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>" >
-										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" >下载附件</button>
-										</a>
+										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="downloadAttachmentFile(${patentDoc.patentDocId})">下载附件</button>
 				                    </c:if>
 									</form> 
 
@@ -1865,11 +1863,14 @@ function loadImgs(){
 	
 
 	
-	
+	function downloadAttachmentFile(value){
+		var iframe = document.getElementById('fileFrame');
+		iframe.src = "<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+value;
+	}	
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	
 
-
+<iframe id="fileFrame" style="display:none"></iframe>
 </body>
 </html>
