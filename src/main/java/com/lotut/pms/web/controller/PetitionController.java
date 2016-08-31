@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -242,7 +241,7 @@ public class PetitionController {
 		File attachmentFile = new File(attachmentUrl);
 		try{
 		response.setContentType("multipart/form-data");
-		response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
+		response.setHeader("Content-Disposition", "attachment;filename=" + new String( fileName.getBytes("gb2312"), "ISO8859-1" ));
 		int BUFFER_SIZE = 8192;
 		byte[] buffer = new byte[BUFFER_SIZE];
 		try (OutputStream out = response.getOutputStream(); 

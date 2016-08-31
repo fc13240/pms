@@ -78,7 +78,7 @@
 	
 	<update id="updatePatentDoc" parameterType="PatentDoc">
 		update patent_documents set app_no=#{appNo,javaType=string,jdbcType=VARCHAR},user_id=#{userId},patent_name=#{name,javaType=string,jdbcType=BIGINT},manual=#{manual,javaType=string,jdbcType=CLOB},
-		last_update_time=now(),right_claim=#{rightClaim,javaType=string,jdbcType=CLOB},abstract_desc=#{abstractDescription,javaType=string,jdbcType=CLOB},contact_person=#{contactPerson}
+		last_update_time=now(),right_claim=#{rightClaim,javaType=string,jdbcType=CLOB},abstract_desc=#{abstractDescription,javaType=string,jdbcType=CLOB},contact_person=#{contactPerson},other_information=#{otherInformation}
 		where  patent_doc_id=#{patentDocId}
 	</update> 
 	

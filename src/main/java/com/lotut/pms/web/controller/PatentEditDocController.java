@@ -118,7 +118,6 @@ public class PatentEditDocController {
 	public void  savePreviewPatentDoc(PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
-	
 		patentDocService.updatePatentDoc(patentDoc);
 		writer.write(1);
 	}
@@ -127,7 +126,6 @@ public class PatentEditDocController {
 	public void  savePatentDoc(PatentDoc patentDoc,HttpServletRequest request,PrintWriter writer){
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
-	
 		patentDocService.updatePatentDoc(patentDoc);
 		writer.write(1);
 	}
