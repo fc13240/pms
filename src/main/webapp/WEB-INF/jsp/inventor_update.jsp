@@ -40,19 +40,19 @@
 					<span style="color: red; display: none;" id=numberError>该处应输入不大于20字段</span>
 					<br>	   
 					<h5>证件号码:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" value="${inventor.inventorNumber }" name="inventorNumber" required onblur="validatePhoneNumber(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" value="${inventor.inventorNumber }" name="inventorNumber"  onblur="validatePhoneNumber(this.value)"/>
 					<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
 					<br>		  
 			       	<h5>国籍:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" value="${inventor.inventorNationality }" name="inventorNationality" value="中国" required onblur="validateInfoNumber1(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" value="${inventor.inventorNationality }" name="inventorNationality" value="中国"  onblur="validateInfoNumber1(this.value)"/>
 					<span style="color: red; display: none;" id=numberError1>该处应输入不大于20字段</span>
 					<br>		  
 			       	<h5>电话:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" value="${inventor.inventorMobile }" name="inventorMobile" required onblur="validateInfoNumber2(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" value="${inventor.inventorMobile }" name="inventorMobile"  onblur="validateInfoNumber2(this.value)"/>
 					<span style="color: red; display: none;" id=numberError2>请输入正确的电话号码</span>
 					<br>		  
 			       	<h5>邮箱:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece3" type="text" value="${inventor.inventorEmail }" name="inventorEmail" required onblur="validateInfoNumber3(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece3" type="text" value="${inventor.inventorEmail }" name="inventorEmail" onblur="validateInfoNumber3(this.value)"/>
 					<span style="color: red; display: none;" id=numberError3>请输入正确的邮箱</span>
 					<br>
 					<h5>其他信息:</h5>

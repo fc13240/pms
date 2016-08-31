@@ -50,17 +50,17 @@
 					<h5>费减备案状态:</h5>
 					<select name="feeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;"  required>	
 					  <option value="未备案">未备案</option>
-					  <option value="委托中">委托中</option>
+					  <option value="备案中">备案中</option>
 					  <option value="备案成功">备案成功</option>
-					  <option value="备案失败">备案失败</option>
+					  <option value="不能备案">不能备案</option>
 					</select>
 					<br>
 					<h5>备案证件号:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" name="transactionIdentityId" required onblur="validateInfoNumber2(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" name="transactionIdentityId"  onblur="validateInfoNumber2(this.value)"/>
 					<span style="color: red; display: none;" id=numberError2>请输入合理的备案证件号</span>
 					<br>
 					<h5>备案年度:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece3" type="text" name="transactionYear" required onblur="validateInfoNumber3(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece3" type="text" name="transactionYear"  onblur="validateInfoNumber3(this.value)"/>
 					<span style="color: red; display: none;" id=numberError3>请输入合理的备案年度</span>
 					<br>
 					<h5>其他信息:</h5>

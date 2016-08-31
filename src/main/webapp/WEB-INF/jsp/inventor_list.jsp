@@ -53,6 +53,7 @@
 							  <th>邮箱</th>
 							  <th width="70px">附件</th>
 							  <th width="100px">其他信息</th>
+							   <th width="100px">共享人</th>
 							  <!-- 							<th>预览</th> 
 							  <th>下载</th>-->
 							  <th width="100px">操作</th>
@@ -78,6 +79,7 @@
                     				</c:if>
 								</td>
 								<td style="text-align:center"><c:out value="${inventor.inventorComment}"/></td>
+								<td style="text-align:center"><c:out value="${inventor.shareUsersAsString}"/></td>
 								<td><a href="<s:url value='/inventor/findOneInventorInfo.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>"> 编辑 </a> 
 								<a onclick="return confirm('确认要删除？')" href="<s:url value='/inventor/deleteInventorInfo.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>">删除 </a>
 								<a href="<s:url value='/inventor/showFriends.html'/>?inventors=<c:out value='${inventor.inventorId}'/>">分享</a>
