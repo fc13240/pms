@@ -435,13 +435,13 @@ margin: 1px 0 0 1px;}
 									<font size="3" font_family="Microsoft YaHei" color="black">图片名称:</font>
 									<input type="text"  id="piciLlus2"   list="companys" name="caption"   onchange="picName()" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 										<datalist id="companys">
+										<option value="主视图">
+										<option value="后视图">
+										<option value="左视图">
+										<option value="右视图">
+										<option value="俯视图">
 										<option value="仰视图">
 										<option value="立体图">
-										<option value="右视图">
-										<option value="主视图">
-										<option value="左视图">
-										<option value="后视图">
-										<option value="俯视图">
 										<option value="使用状态图">
 										</datalist>
 									
