@@ -326,8 +326,8 @@ var ZYFILE = {
 		            html += '			<div id="preview" class="upload_preview">';
 				    html += '				<div class="add_upload">';
 				    html += '					<a style="height:'+para.itemHeight+';width:'+para.itemWidth+';" title="点击添加文件" id="rapidAddImg" class="add_imgBox" href="javascript:void(0)">';
-				    html += '						<div class="uploadImg" style="height:300px;width:300px">';
-				    html += '							<img class="upload_image" src="/temp/zyupload/skins/images/add_img.png" style="width:300px;height:300px" />';
+				    html += '						<div class="uploadImg" style="height:300px;width:380px">';
+				    html += '							<img class="upload_image" src="/temp/zyupload/skins/images/add_img.png" style="width:380px;height:300px" />';
 				    html += '						</div>'; 
 				    html += '					</a>';
 				    html += '				</div>';
@@ -341,7 +341,7 @@ var ZYFILE = {
 					html += '</form>';
 				}
 				
-	            $(self).append(html).css({"width":para.width,"height":para.height});
+	            $(self).append(html).css({"width":"800px","height":"600px"});
 	            
 	            // 初始化html之后绑定按钮的点击事件
 	            this.addEvent();
@@ -459,8 +459,8 @@ var ZYFILE = {
 					html += '		</div>';
 					html += '	</div>';
 					html += '	<a style="height:'+para.itemHeight+';width:'+para.itemWidth+';" href="#" class="imgBox">';
-					html += '		<div class="uploadImg" style="height:300px;width:300px">';				
-					html += '			<img id="uploadImage_'+file.index+'" class="upload_image" src="' + e.target.result + '" style="width:300px;height:300px" />';                                                                 
+					html += '		<div class="uploadImg" style="height:300px;width:380px">';				
+					html += '			<img id="uploadImage_'+file.index+'" class="upload_image" src="' + e.target.result + '" style="width:380px;height:300px" />';                                                                 
 					html += '		</div>';
 					html += '	</a>';
 					html += '	<p id="uploadProgress_'+file.index+'" class="file_progress"></p>';
