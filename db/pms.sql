@@ -795,3 +795,6 @@ CREATE TABLE patent_doc_inventor(
 
 ALTER TABLE common_inventor MODIFY  inventor_mobile VARCHAR(40) ;
 ALTER TABLE common_inventor MODIFY  inventor_email VARCHAR(40) ;
+
+ALTER TABLE patent_documents ADD COLUMN attachment_url VARCHAR(100) COMMENT '请求书上传文件地址';
+ALTER TABLE patent_documents ADD COLUMN other_information VARCHAR(300) COMMENT '其他信息';

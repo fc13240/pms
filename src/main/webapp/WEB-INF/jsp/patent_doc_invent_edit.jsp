@@ -327,7 +327,7 @@ margin: 1px 0 0 1px;}
 									
 									<h2 style="margin-top:20px;">附件</h2>
 									<form action="<s:url value='/petition/uploadPatentDocFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
-										<input style="display:none" type="file" id="patentDocFile"/>
+										<input style="display:none" type="file" id="patentDocFile" name="file"/>
 										<input style="width:300px;display:inline;" type="text" id="patentDocFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocFile]').click();"/>
 										<button type="button" onclick="$('input[id=patentDocFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 										<button type="button" onclick="uploadPatentDocFile()" class="t-btn3 button button-primary  button-rounded">上传</button>

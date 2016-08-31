@@ -91,4 +91,9 @@ public class PetitionServiceImpl implements PetitionService {
 	public PatentDocInventor findInventorById(Long inventorId) {
 		return petitionDao.findInventorById(inventorId);
 	}
+
+	@Override
+	public void updatePatentDocAttachmentUrl(String attachmentUrl, Long patentDocId) {
+		petitionDao.updatePatentDocAttachmentUrl(attachmentUrl, patentDocId);
+	}
 }

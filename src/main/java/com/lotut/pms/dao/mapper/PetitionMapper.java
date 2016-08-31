@@ -41,4 +41,6 @@ public interface PetitionMapper {
 	PatentDocAppPerson findAppPersonByAppId(@Param("personId") Long personId);
 	
 	PatentDocInventor findInventorById(@Param("inventorId") Long inventorId);
+	
+	void updatePatentDocAttachmentUrl(@Param("attachmentUrl") String attachmentUrl,@Param("patentDocId") Long patentDocId);
 }
