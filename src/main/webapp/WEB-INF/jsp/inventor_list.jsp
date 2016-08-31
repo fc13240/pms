@@ -86,7 +86,7 @@
 								<input type="checkbox" class="check-item" inventor="<c:out value='${inventor.inventorId}'/>">
 								<span class="lbl"></span></label>
 								</td>
-								<td class="center" style="text-align:center"> ${status.count} </td>
+								<td class="center" style="text-align:center"> ${status.count+page.startIndex} </td>
 								<td style="text-align:center"><c:out value="${inventor.inventorName}"/></td>
 								<td style="text-align:center"><c:out value="${inventor.inventorNumber}"/></td>
 								<td style="text-align:center"><c:out value="${inventor.inventorNationality}"/></td>

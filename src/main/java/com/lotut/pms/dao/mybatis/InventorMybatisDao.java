@@ -113,15 +113,15 @@ public class InventorMybatisDao extends SqlSessionDaoSupport implements Inventor
 	}
 
 	@Override
-	public int searchInventorCount(InventorSearchCondition inventorSearchCondition) {
+	public int searchInventorCount(InventorSearchCondition searchCondition) {
 		
-		return inventorMapper.searchInventorCount(inventorSearchCondition);
+		return inventorMapper.searchInventorCount(searchCondition);
 	}
 
 	@Override
-	public List<CommonInventor> searchInventorByPage(InventorSearchCondition inventorSearchCondition) {
+	public List<CommonInventor> searchInventorByPage(InventorSearchCondition searchCondition) {
 		
-		return inventorMapper.searchInventorByPage(inventorSearchCondition);
+		return inventorMapper.searchInventorByPage(searchCondition);
 	}
 
 }

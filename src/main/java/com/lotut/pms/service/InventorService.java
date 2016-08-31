@@ -39,8 +39,8 @@ public interface InventorService {
 	
 	int getUserInventorCount(int userId);
 	
-	int searchInventorCount(InventorSearchCondition inventorSearchCondition);
+	int searchInventorCount(InventorSearchCondition searchCondition);
 	
-	List<CommonInventor> searchInventorByPage(InventorSearchCondition inventorSearchCondition);
+	List<CommonInventor> searchInventorByPage(InventorSearchCondition searchCondition);
 
 }
