@@ -1,9 +1,14 @@
 package com.lotut.pms.web.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +17,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
@@ -189,6 +197,37 @@ public class PetitionController {
 		try{
 			WebUtils.writeJsonStrToResponse(response, patentDocInventor);
 		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(path="/uploadPatentDocFile",method=RequestMethod.POST)
+	public void uploadPatentDocFile(@RequestParam("file")MultipartFile file,@RequestParam("patentDocId")Long patentDocId,HttpServletResponse response){
+		String saveDir = Settings.PATENT_DOC_FILE;
+		//String patentDocId=request.getParameter("patentDocId");
+		String patentDocIdName=patentDocId.toString();
+		//MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+		//MultipartFile uploadFile=multipartHttpServletRequest.getFile("file");
+		String filename=file.getOriginalFilename();
+		saveDir+=patentDocIdName+"/";
+		File fileDir = new File(saveDir);
+		try {
+			if(!fileDir.exists()){
+				fileDir.mkdir();
+			}
+			InputStream is = file.getInputStream();
+			int BUFFER_SIZE = 8*1024;
+			byte [] buffer = new byte[BUFFER_SIZE];
+			try(OutputStream outputStream = new FileOutputStream(saveDir + filename);){
+				int bytesRead = -1;
+				while ((bytesRead = is.read(buffer)) != -1) {
+					outputStream.write(buffer, 0, bytesRead);
+				}
+				outputStream.flush();
+				outputStream.close();
+			}
+			WebUtils.writeJsonStrToResponse(response,saveDir+filename);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
