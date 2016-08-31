@@ -59,4 +59,6 @@ public interface PatentDocDao {
 	
 	Attachment getAttachmentByAttachId(long attachmentId);
 	
+	void updateAttachmentImgUrl(Attachment attachment);
+	
 }

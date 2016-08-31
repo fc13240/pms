@@ -70,6 +70,7 @@
 						$("#patentImgUrl").append("<input type='hidde' id='seqNo' name='seqNo' value='"+Jresponse["count"]+"'/>");
 						savePatentImgUrl();
 						$("#patentImgUrl").empty();
+						$("#piciLlus2").val("");
 					},
 					onFailure: function(file, response){          // 文件上传失败的回调方法
 						console.info("此文件上传失败：");
@@ -126,7 +127,7 @@ margin: 1px 0 0 1px;}
 						摘要
 					</div>
 					<div style="display:none" class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
-						摘要附图
+						图片或照片
 					</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件
@@ -207,9 +208,7 @@ margin: 1px 0 0 1px;}
 									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
 									<c:if test="${not empty patentDoc.patentDocAttachmentFile }">
-										<a href="<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>" >
-										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" >下载附件</button>
-										</a>
+										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded"  onclick="downloadAttachmentFile(${patentDoc.patentDocId})">下载附件</button>
 				                    </c:if>
 									</form> 
 									<div style="height:10px;">&nbsp;</div> 
@@ -404,9 +403,9 @@ margin: 1px 0 0 1px;}
 						<input type="hidden" id="ft_hidFid" value="">
 						<div class="content" id="content1" style="display: none;">
 							<div class="box" id="content5-1">
-								<div class="upimg1" onclick="addPic();">
+								<div style="margin:10px" class="upimg1" onclick="addPic();">
 									新增附图</div>
-									<div class="upimg1" onclick='javascript:window.open("<s:url value='/editor/downloadInterFacePic.html'/>?patentDocId=${ patentDoc.patentDocId}")' >
+									<div style="margin:10px" class="upimg1" onclick='javascript:window.open("<s:url value='/editor/downloadInterFacePic.html'/>?patentDocId=${ patentDoc.patentDocId}")' >
 									下载附图</div>
 								<div class="picBox">
 									<ul class="picL9" id="picLsy2" >
@@ -1872,6 +1871,12 @@ function resetUpdateInventorForm(){
 	$("#updateModalInventorEmail").val("");
 	$("#updateModalInventorOtherInformation").val("");
 }
+
+function downloadAttachmentFile(value){
+	var iframe = document.getElementById('fileFrame');
+	iframe.src = "<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+value;
+}
 </script>
+<iframe id="fileFrame" style="display:none"></iframe>
 </body>
 </html>

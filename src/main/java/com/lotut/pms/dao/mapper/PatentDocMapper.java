@@ -58,4 +58,6 @@ public interface PatentDocMapper {
 	void updateAttachmentImgName(Attachment attachment);
 	
 	Attachment getAttachmentByAttachId(@Param("attachmentId")long attachmentId);
+	
+	void updateAttachmentImgUrl(Attachment attachment);
 }

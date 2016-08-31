@@ -119,9 +119,9 @@ margin: 1px 0 0 1px;}
 					<div class="tab1h" value="1" name="tabs" onclick="tabChange(1);">
 						说明书附图</div>
 					<div class="tab1h" value="2" name="tabs" onclick="tabChange(2,true,false);">
-						权利要求</div>
+						权利要求书</div>
 					<div class="tab1h" value="3" name="tabs" onclick="tabChange(3);">
-						摘要</div>
+						说明书摘要</div>
 					<div class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
 						摘要附图</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
@@ -201,9 +201,7 @@ margin: 1px 0 0 1px;}
 									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
 									<c:if test="${not empty patentDoc.patentDocAttachmentFile }">
-										<a href="<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>" >
-										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" >下载附件</button>
-										</a>
+										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="downloadAttachmentFile(${patentDoc.patentDocId})">下载附件</button>
 				                    </c:if>
 									</form> 
 									<div style="height:10px;">&nbsp;</div> 
@@ -398,9 +396,9 @@ margin: 1px 0 0 1px;}
 						<input type="hidden" id="ft_hidFid" value="">
 						<div class="content" id="content1" style="display: none;">
 							<div class="box" id="content5-1">
-								<div class="upimg1" onclick="addPic();">
+								<div style="margin:10px" class="upimg1" onclick="addPic();">
 									新增附图</div>
-									<div class="upimg1" onclick='javascript:window.open("<s:url value='/editor/downloadPic.html'/>?patentDocId=${ patentDoc.patentDocId}")' >
+									<div style="margin:10px" class="upimg1" onclick='javascript:window.open("<s:url value='/editor/downloadPic.html'/>?patentDocId=${ patentDoc.patentDocId}")' >
 									下载附图</div>
 								<div class="picBox">
 									<ul class="picL9" id="picLsy2" >
@@ -630,7 +628,12 @@ margin: 1px 0 0 1px;}
 							2.一件专利申请有多幅附图时，在用于表示同一实施方式的各幅图中，同一附图标记与同一组成部分一一对应，具体为：（1）表示同一组成部分(同一技术特征或者同一对象)的附图标记应当一致。（2）说明书中与附图中使用的相同的附图标记应当表示同一组成部分。（3）说明书文字部分中未提及的附图标记不得在附图中出现，附图中未出现的附图标记也不得在说明书文字部分中提及。<br>
 							3.附图中除了必需的词语外，不应当含有其他的注释；但对于流程图、结构框图、逻辑框图一类的附图，应当在其框内给出必要的文字或符号。<br>
 							4.附图不得使用工程蓝图、照片；附图应当使用包括计算机在内的制图工具和黑色墨水绘制，线条应当均匀清晰，并不得着色和涂改；附图的周围不得有与图无关的框线；附图应可清晰地分辨出图中的各个细节。<br>
-							5.同一幅附图中应当采用相同比例绘制，为清楚显示其中某一组成部分时可增加一幅局部放大图。
+							5.同一幅附图中应当采用相同比例绘制，为清楚显示其中某一组成部分时可增加一幅局部放大图。<br>
+							错误1：管道为非必要注释，注释只能为非部件，如水；<br>
+							错误2：附图应为黑色线条，白色背景；<br>
+							错误3：附图不能有阴影，也不能为实体效果图；<br>
+							错误4：附图线条应清晰可见；<br>
+							错误5：主图及其局部放大图为两幅图，应分开。
 				</div>
 				<div class="guide_3" style="display:none;background:#ffffff;padding:5px;">
 					<a href="javascript:;">
@@ -2086,6 +2089,12 @@ function resetUpdateInventorForm(){
 	$("#updateModalInventorEmail").val("");
 	$("#updateModalInventorOtherInformation").val("");
 }
+
+function downloadAttachmentFile(value){
+	var iframe = document.getElementById('fileFrame');
+	iframe.src = "<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+value;
+}	
 </script>
+<iframe id="fileFrame" style="display:none"></iframe>
 </body>
 </html>

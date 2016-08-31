@@ -170,7 +170,11 @@
 		SELECT  IFNULL(MAX(seq_no),0) AS seq_no FROM patent_attachment WHERE patent_doc_id=#{patentDocId};
 	</select>
 	
-	<select id="updateAttachmentImgName" parameterType="Attachment">
+	<update id="updateAttachmentImgName" parameterType="Attachment">
 		update patent_attachment set caption=#{caption} where attachment_id=${attachmentId}
-	</select>
+	</update>
+	
+	<update id="updateAttachmentImgUrl" parameterType="Attachment">
+		update patent_attachment set attachment_url=#{attachmentUrl} where attachment_id=${attachmentId}
+	</update>
 </mapper>
