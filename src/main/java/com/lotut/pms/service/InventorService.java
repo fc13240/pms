@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.lotut.pms.domain.CommonInventor;
+import com.lotut.pms.domain.InventorSearchCondition;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserInventor;
 
 public interface InventorService {
@@ -17,7 +19,7 @@ public interface InventorService {
 
 	void deleteById(int id);
 
-	List<CommonInventor> getUserInventors(int userId);
+	List<CommonInventor> getUserInventors(Page page);
 
 	List<CommonInventor> getInventor(String inventor);
 
@@ -34,5 +36,11 @@ public interface InventorService {
 	void deleteUserInventorById(UserInventor userInventor);
 	
 	void insertUserInventors(List<Map<String, Integer>> userInventorRecords);
+	
+	int getUserInventorCount(int userId);
+	
+	int searchInventorCount(InventorSearchCondition inventorSearchCondition);
+	
+	List<CommonInventor> searchInventorByPage(InventorSearchCondition inventorSearchCondition);
 
 }

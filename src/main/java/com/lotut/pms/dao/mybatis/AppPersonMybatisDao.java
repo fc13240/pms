@@ -7,7 +7,9 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.AppPersonDao;
 import com.lotut.pms.dao.mapper.AppPersonMapper;
+import com.lotut.pms.domain.AppPersonSearchCondition;
 import com.lotut.pms.domain.CommonAppPerson;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserAppPerson;
 
 
@@ -39,11 +41,7 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 		
 		appPersonMapper.deleteAppPersonById(id);
 	}
-	@Override
-	public List<CommonAppPerson> getUserAppPersons(int userId) {
-		
-		return appPersonMapper.getUserAppPersons(userId);
-	}
+	
 	@Override
 
 	public void saveAttachmentFile(CommonAppPerson AppPerson) {
@@ -97,6 +95,26 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 	public void insertUserAppPersons(List<Map<String, Integer>> userAppPersonRecords) {
 		appPersonMapper.insertUserAppPersons(userAppPersonRecords);
 		
+	}
+	@Override
+	public List<CommonAppPerson> searchAppPersonByPage(AppPersonSearchCondition appPersonSearchCondition) {
+		
+		return appPersonMapper.searchAppPersonByPage(appPersonSearchCondition);
+	}
+	@Override
+	public int searchAppPersonCount(AppPersonSearchCondition appPersonSearchCondition) {
+		
+		return appPersonMapper.searchAppPersonCount(appPersonSearchCondition);
+	}
+	@Override
+	public int getUserAppPersonCount(int userId) {
+		
+		return appPersonMapper.getUserAppPersonCount(userId);
+	}
+	@Override
+	public List<CommonAppPerson> getUserAppPersons(Page page) {
+		
+		return appPersonMapper.getUserAppPersons(page);
 	}
 	
 

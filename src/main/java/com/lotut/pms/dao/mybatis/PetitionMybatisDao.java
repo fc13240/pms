@@ -98,6 +98,11 @@ public class PetitionMybatisDao extends SqlSessionDaoSupport implements Petition
 	public PatentDocInventor findInventorById(Long inventorId) {
 		return petitionMapper.findInventorById(inventorId);
 	}
+
+	@Override
+	public void updatePatentDocAttachmentUrl(String attachmentUrl, Long patentDocId) {
+		petitionMapper.updatePatentDocAttachmentUrl(attachmentUrl, patentDocId);
+	}
 	
 	
 

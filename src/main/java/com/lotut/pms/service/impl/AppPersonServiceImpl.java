@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.lotut.pms.dao.AppPersonDao;
+import com.lotut.pms.domain.AppPersonSearchCondition;
 import com.lotut.pms.domain.CommonAppPerson;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserAppPerson;
 import com.lotut.pms.service.AppPersonService;
 
@@ -49,11 +51,6 @@ public class AppPersonServiceImpl implements AppPersonService {
 	public void deleteAppPersonById(int id) {
 		appPersonDao.deleteAppPersonById(id);
 		
-	}
-	@Override
-	public List<CommonAppPerson> getUserAppPersons(int userId) {
-		
-		return appPersonDao.getUserAppPersons(userId);
 	}
 
 
@@ -143,6 +140,34 @@ public class AppPersonServiceImpl implements AppPersonService {
 	public void insertUserAppPersons(List<Map<String, Integer>> userAppPersonRecords) {
 		appPersonDao.insertUserAppPersons(userAppPersonRecords);
 		
+	}
+
+
+	@Override
+	public List<CommonAppPerson> searchAppPersonByPage(AppPersonSearchCondition appPersonSearchCondition) {
+		
+		return appPersonDao.searchAppPersonByPage(appPersonSearchCondition);
+	}
+
+
+	@Override
+	public int searchAppPersonCount(AppPersonSearchCondition appPersonSearchCondition) {
+		
+		return appPersonDao.searchAppPersonCount(appPersonSearchCondition);
+	}
+
+
+	@Override
+	public int getUserAppPersonCount(int userId) {
+		
+		return appPersonDao.getUserAppPersonCount(userId);
+	}
+
+
+	@Override
+	public List<CommonAppPerson> getUserAppPersons(Page page) {
+		
+		return appPersonDao.getUserAppPersons(page);
 	}
 
 

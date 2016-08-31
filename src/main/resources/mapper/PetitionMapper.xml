@@ -108,5 +108,9 @@
 		update patent_doc_inventor set inventor_name=#{inventorName},inventor_number=#{inventorNumber},inventor_nationality=#{inventorNationality},inventor_mobile=#{inventorMobile},inventor_email=#{inventorEmail},
 		inventor_other_information=#{inventorOtherInformation}  where inventor_id=#{inventorId}
 	</update>
+	
+	<update id="updatePatentDocAttachmentUrl">
+		update patent_documents set attachment_url=#{attachmentUrl} where patent_doc_id=#{patentDocId}
+	</update>
   </mapper>
   

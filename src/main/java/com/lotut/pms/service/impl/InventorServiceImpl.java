@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.lotut.pms.dao.InventorDao;
 import com.lotut.pms.domain.CommonInventor;
+import com.lotut.pms.domain.InventorSearchCondition;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserInventor;
 import com.lotut.pms.service.InventorService;
 
@@ -44,11 +46,7 @@ public class InventorServiceImpl implements InventorService{
 	public List<CommonInventor> getInventor(String inventor,int userId) {
 		return inventorDao.getInventorByName(inventor,userId);
 	}
-	@Override
-	public List<CommonInventor> getUserInventors(int userId) {
-		
-		return inventorDao.getUserInventors(userId);
-	}
+	
 	@Override
 	public List<CommonInventor> getInventor(String inventor) {
 		
@@ -84,6 +82,26 @@ public class InventorServiceImpl implements InventorService{
 	public void insertUserInventors(List<Map<String, Integer>> userInventorRecords) {
 		inventorDao.insertUserInventors(userInventorRecords);
 		
+	}
+	@Override
+	public List<CommonInventor> getUserInventors(Page page) {
+		
+		return inventorDao.getUserInventors(page);
+	}
+	@Override
+	public int getUserInventorCount(int userId) {
+		
+		return inventorDao.getUserInventorCount(userId);
+	}
+	@Override
+	public int searchInventorCount(InventorSearchCondition inventorSearchCondition) {
+		
+		return inventorDao.searchInventorCount(inventorSearchCondition);
+	}
+	@Override
+	public List<CommonInventor> searchInventorByPage(InventorSearchCondition inventorSearchCondition) {
+		
+		return inventorDao.searchInventorByPage(inventorSearchCondition);
 	}
 	
 }
