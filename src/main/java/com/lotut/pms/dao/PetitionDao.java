@@ -2,8 +2,6 @@ package com.lotut.pms.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
@@ -43,4 +41,6 @@ public interface PetitionDao {
 	PatentDocInventor findInventorById(Long inventorId);
 	
 	void updatePatentDocAttachmentUrl(String attachmentUrl,Long patentDocId);
+	
+	String getPatentAttachmentFile(Long patentDocId);
 }

@@ -331,6 +331,9 @@ margin: 1px 0 0 1px;}
 										<input style="width:300px;display:inline;" type="text" id="patentDocFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocFile]').click();"/>
 										<button type="button" onclick="$('input[id=patentDocFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 										<button type="button" onclick="uploadPatentDocFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
+										<c:if test="${not empty patentDoc.attacmentUrl }">
+											<button type="button" onclick="downloadPatentDocFile(${patentDoc.patentDocId })" class="t-btn3 button button-primary  button-rounded">下载</button>
+										</c:if>
 									</form>
 								</div>
 							</div>
@@ -2134,6 +2137,11 @@ function loadImgs(){
 				}
 		}
 		uploadForm.ajaxSubmit(option);
+	}
+	
+	function downloadPatentDocFile(patentDocId){
+		var iframe = document.getElementById('fileFrame');
+		iframe.src="<s:url value='/petition/getPatentAttachmentFile.html'/>?patentDocId="+patentDocId;
 	}
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>

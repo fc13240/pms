@@ -96,4 +96,9 @@ public class PetitionServiceImpl implements PetitionService {
 	public void updatePatentDocAttachmentUrl(String attachmentUrl, Long patentDocId) {
 		petitionDao.updatePatentDocAttachmentUrl(attachmentUrl, patentDocId);
 	}
+
+	@Override
+	public String getPatentAttachmentFile(Long patentDocId) {
+		return petitionDao.getPatentAttachmentFile(patentDocId);
+	}
 }

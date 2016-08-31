@@ -1,13 +1,17 @@
 package com.lotut.pms.web.controller;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -208,6 +212,9 @@ public class PetitionController {
 		try {
 			if(!fileDir.exists()){
 				fileDir.mkdir();
+			}else{
+				deleteDir(fileDir);
+				fileDir.mkdir();
 			}
 			InputStream is = file.getInputStream();
 			int BUFFER_SIZE = 8*1024;
@@ -226,4 +233,43 @@ public class PetitionController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping(path="/getPatentAttachmentFile")
+	public void getPatentAttachmentFile(HttpServletRequest request,HttpServletResponse response,@RequestParam("patentDocId") Long patentDocId){
+		String attachmentUrl = petitionService.getPatentAttachmentFile(patentDocId);
+		String[] fileArray = attachmentUrl.split("/");
+		String fileName = fileArray[fileArray.length-1];
+		File attachmentFile = new File(attachmentUrl);
+		try{
+		response.setContentType("multipart/form-data");
+		response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
+		int BUFFER_SIZE = 8192;
+		byte[] buffer = new byte[BUFFER_SIZE];
+		try (OutputStream out = response.getOutputStream(); 
+				BufferedInputStream bis = new BufferedInputStream(new FileInputStream(attachmentFile))) {
+			int bytesRead = -1;
+			while ((bytesRead = bis.read(buffer)) != -1) {
+				out.write(buffer, 0, bytesRead);
+			}
+			out.flush();
+			bis.close();
+			out.close();
+		}
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	private static boolean deleteDir(File dir) {
+		if (dir.isDirectory()) {
+			String[] children = dir.list();
+			for (int i=0; i<children.length; i++) {
+				boolean success = deleteDir(new File(dir, children[i]));
+				if (!success) {
+					return false;
+				}
+			}
+		}
+		return dir.delete();
+	}
 }
+

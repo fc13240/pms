@@ -112,5 +112,9 @@
 	<update id="updatePatentDocAttachmentUrl">
 		update patent_documents set attachment_url=#{attachmentUrl} where patent_doc_id=#{patentDocId}
 	</update>
+	
+	<select id="getPatentAttachmentFile" resultType="string">
+		select attachment_url from patent_documents where patent_doc_id=#{patentDocId}
+	</select>
   </mapper>
   

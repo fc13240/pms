@@ -24,10 +24,21 @@ public class PatentDoc {
 	private String patentDocUrl;
 	private PatentDocStatus patentDocStatus;
 	private String contactPerson;
-	
-	
-	
+	private String otherInformation;
+	private String attachmentUrl;
 
+	public String getOtherInformation() {
+		return otherInformation;
+	}
+	public void setOtherInformation(String otherInformation) {
+		this.otherInformation = otherInformation;
+	}
+	public String getAttachmentUrl() {
+		return attachmentUrl;
+	}
+	public void setAttachmentUrl(String attachmentUrl) {
+		this.attachmentUrl = attachmentUrl;
+	}
 	public PatentDocStatus getPatentDocStatus() {
 		return patentDocStatus;
 	}

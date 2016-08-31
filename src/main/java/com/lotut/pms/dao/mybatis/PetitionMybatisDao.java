@@ -103,6 +103,11 @@ public class PetitionMybatisDao extends SqlSessionDaoSupport implements Petition
 	public void updatePatentDocAttachmentUrl(String attachmentUrl, Long patentDocId) {
 		petitionMapper.updatePatentDocAttachmentUrl(attachmentUrl, patentDocId);
 	}
+
+	@Override
+	public String getPatentAttachmentFile(Long patentDocId) {
+		return petitionMapper.getPatentAttachmentFile(patentDocId);
+	}
 	
 	
 

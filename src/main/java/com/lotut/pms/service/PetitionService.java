@@ -39,5 +39,7 @@ public interface PetitionService {
 	
 	PatentDocInventor findInventorById(Long inventorId);
 	
-	 void updatePatentDocAttachmentUrl(String attachmentUrl, Long patentDocId);
+	void updatePatentDocAttachmentUrl(String attachmentUrl, Long patentDocId);
+	 
+	String getPatentAttachmentFile(Long patentDocId);
 }

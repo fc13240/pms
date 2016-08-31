@@ -99,12 +99,10 @@ public class PatentEditDocController {
 		long patentDocId=patentDoc.getPatentDocId();
 		List<CommonInventor> inventors = inventorService.getAllInventorsByUser(userId);
 		List<CommonAppPerson> appPersons= appPersonService.getAllAppPersonByUser(userId);
-		//List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
 		model.addAttribute("patentDocId",patentDocId);
 		model.addAttribute("patentDoc",patentDoc);
 		model.addAttribute("inventors",inventors);
 		model.addAttribute("appPersons",appPersons);
-		//model.addAttribute("contactAddresses", contactAddresses);
 		if(patentType==1){
 			return "patent_doc_invent_edit";
 		}else if(patentType==2){
