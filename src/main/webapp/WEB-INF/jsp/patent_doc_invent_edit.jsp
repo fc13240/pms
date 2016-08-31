@@ -327,19 +327,10 @@ margin: 1px 0 0 1px;}
 									
 									<h2 style="margin-top:20px;">附件</h2>
 									<form action="<s:url value='/petition/uploadPatentDocFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
-									<input style="display:none" type="file" id="patentDocFile"/>
-									<input style="width:300px;display:inline;" type="text" id="patentDocFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocFile]').click();"/>
-									<button type="button" onclick="$('input[id=patentDocFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
-									<button type="button" onclick="uploadPatentDocFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
-									<%-- <form id="patentDocAttachment" action="<s:url value='/editor/uploadFile.html'/>"  method="post" enctype="multipart/form-data" class="form-horizontal">  
-									<input style="display:none;"  id="patentAttachmentFile" name="file" type="file" />
-									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
-									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
-									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
-									<c:if test="${not empty patentDoc.patentDocAttachmentFile }">
-										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="downloadAttachmentFile(${patentDoc.patentDocId})">下载附件</button>
-				                    </c:if>
-									</form>  --%>
+										<input style="display:none" type="file" id="patentDocFile"/>
+										<input style="width:300px;display:inline;" type="text" id="patentDocFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocFile]').click();"/>
+										<button type="button" onclick="$('input[id=patentDocFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+										<button type="button" onclick="uploadPatentDocFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
 									</form>
 								</div>
 							</div>
@@ -1313,7 +1304,7 @@ margin: 1px 0 0 1px;}
 						  "</div>"+
 					   "</div>");
 					 $("#modelWrap span").css("color","black");
-				 	 $("#hiddenmodel").append("<p id='templateContent"+i+"'>"+item.content+"</p>");
+				 	 $("#hiddenmodel").append("<div id='templateContent"+i+"'>"+item.content+"</div>");
 				 });
 			 },error : function (){
 				 
@@ -1343,7 +1334,7 @@ margin: 1px 0 0 1px;}
 						  "</div>"+
 					   "</div>");
 					 $("#modelWrap span").css("color","black");
-				 	 $("#hiddenmodel").append("<p id='templateContent"+i+"'>"+item.content+"</p>");
+				 	 $("#hiddenmodel").append("<div id='templateContent"+i+"'>"+item.content+"</div>");
 				 });
 			 },error : function (){
 				 
@@ -2123,17 +2114,19 @@ function loadImgs(){
 	});
 	function uploadPatentDocFile(){
 		var uploadForm=$("#uploadFileForm");
+		var patentDocId = ${patentDoc.patentDocId};
 		var option={
 				dataType : "json",
-				data : {"file":$("#patentDocFile").val()},
-				beforSubmit : function (){
+				//contentType : false,
+				data : {"file":$("#patentDocFile").val(),"patentDocId":patentDocId},
+				beforeSubmit : function (){
 					var filename = $("#patentDocFilename").val();
-					var suffix = filename.substr(filename.lastIndexOd("."));
-					if(suffix=="zip"||suffix=="rar"){
+					var suffix = filename.toLowerCase().substr(filename.lastIndexOf("."));
+					if(suffix ==".zip"||suffix==".rar"){
 						return true;
 					}else{
-						return false;
 						alert("请选择指定类型的文件后，再进行上传");
+						return false;
 					}
 				},
 				success : function (result){

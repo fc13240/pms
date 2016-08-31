@@ -1289,7 +1289,7 @@ margin: 1px 0 0 1px;}
 						  "</div>"+
 					   "</div>");
 					 $("#modelWrap span").css("color","black");
-				 	 $("#hiddenmodel").append("<p id='templateContent"+i+"'>"+item.content+"</p>");
+				 	 $("#hiddenmodel").append("<div id='templateContent"+i+"'>"+item.content+"</div>");
 				 });
 			 },error : function (){
 				 
@@ -1321,7 +1321,7 @@ margin: 1px 0 0 1px;}
 						  "</div>"+
 					   "</div>");
 					 $("#modelWrap span").css("color","black");
-				 	 $("#hiddenmodel").append("<p id='templateContent"+i+"'>"+item.content+"</p>");
+				 	 $("#hiddenmodel").append("<div id='templateContent"+i+"'>"+item.content+"</div>");
 				 });
 			 },error : function (){
 				 
