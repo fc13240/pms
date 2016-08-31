@@ -119,9 +119,9 @@ margin: 1px 0 0 1px;}
 					<div class="tab1h" value="1" name="tabs" onclick="tabChange(1);">
 						说明书附图</div>
 					<div class="tab1h" value="2" name="tabs" onclick="tabChange(2,true,false);">
-						权利要求</div>
+						权利要求书</div>
 					<div class="tab1h" value="3" name="tabs" onclick="tabChange(3);">
-						摘要</div>
+						说明书摘要</div>
 					<div class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
 						摘要附图</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
@@ -396,9 +396,9 @@ margin: 1px 0 0 1px;}
 						<input type="hidden" id="ft_hidFid" value="">
 						<div class="content" id="content1" style="display: none;">
 							<div class="box" id="content5-1">
-								<div class="upimg1" onclick="addPic();">
+								<div style="margin:10px" class="upimg1" onclick="addPic();">
 									新增附图</div>
-									<div class="upimg1" onclick='javascript:window.open("<s:url value='/editor/downloadPic.html'/>?patentDocId=${ patentDoc.patentDocId}")' >
+									<div style="margin:10px" class="upimg1" onclick='javascript:window.open("<s:url value='/editor/downloadPic.html'/>?patentDocId=${ patentDoc.patentDocId}")' >
 									下载附图</div>
 								<div class="picBox">
 									<ul class="picL9" id="picLsy2" >

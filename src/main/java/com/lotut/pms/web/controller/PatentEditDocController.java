@@ -724,15 +724,18 @@ public class PatentEditDocController {
 		String[] arr=url.split("\\.");
 		String str1=url.substring(0, url.lastIndexOf("/")+1);
 		String newName=str1+picName+"."+arr[1]+"."+arr[2];
-		String newImgUrl="/opt/media/patent"+newName;
+		String newImgUrl=newName;
 		/*更新旧的ImgUrl*/
 		Attachment newAttachment=new Attachment();
 		newAttachment.setAttachmentId(attachmentId);
 		newAttachment.setAttachmentUrl(newImgUrl);
 		patentDocService.updateAttachmentImgUrl(newAttachment);
 		/*查找图片路径并修改图片名*/
-		String picPath=url.substring(0, url.lastIndexOf("."));
-		
+		String picPath="/opt/media/patent"+url.substring(0, url.lastIndexOf("."));
+		File file=new File(picPath);
+		if(file.exists()){
+		file.renameTo(new File("/opt/media/patent"+str1+picName+"."+arr[1]));
+		}
 		patentDocService.updateAttachmentImgName(attachment);
 		writer.write(1);
 	}
@@ -796,6 +799,10 @@ public class PatentEditDocController {
 		String str1=url.substring(0, url.lastIndexOf("/")+1);
 		String newName=str1+picName+"."+arr[1]+"."+arr[2];
 		String newImgUrl="/opt/media/patent"+newName;
+		String picPath="/opt/media/patent"+url.substring(0, url.lastIndexOf("."));
+		String name="/opt/media/patent"+str1+picName+"."+arr[1];
 		System.out.println(newImgUrl);
+		System.out.println(picPath);
+		System.out.println(name);
 	}
 }

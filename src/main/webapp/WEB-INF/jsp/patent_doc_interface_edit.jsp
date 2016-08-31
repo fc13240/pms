@@ -127,7 +127,7 @@ margin: 1px 0 0 1px;}
 						摘要
 					</div>
 					<div style="display:none" class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
-						摘要附图
+						图片或照片
 					</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件
@@ -403,9 +403,9 @@ margin: 1px 0 0 1px;}
 						<input type="hidden" id="ft_hidFid" value="">
 						<div class="content" id="content1" style="display: none;">
 							<div class="box" id="content5-1">
-								<div class="upimg1" onclick="addPic();">
+								<div style="margin:10px" class="upimg1" onclick="addPic();">
 									新增附图</div>
-									<div class="upimg1" onclick='javascript:window.open("<s:url value='/editor/downloadInterFacePic.html'/>?patentDocId=${ patentDoc.patentDocId}")' >
+									<div style="margin:10px" class="upimg1" onclick='javascript:window.open("<s:url value='/editor/downloadInterFacePic.html'/>?patentDocId=${ patentDoc.patentDocId}")' >
 									下载附图</div>
 								<div class="picBox">
 									<ul class="picL9" id="picLsy2" >
@@ -435,13 +435,13 @@ margin: 1px 0 0 1px;}
 									<font size="3" font_family="Microsoft YaHei" color="black">图片名称:</font>
 									<input type="text"  id="piciLlus2"   list="companys" name="caption"   onchange="picName()" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 										<datalist id="companys">
+										<option value="主视图">
+										<option value="后视图">
+										<option value="左视图">
+										<option value="右视图">
+										<option value="俯视图">
 										<option value="仰视图">
 										<option value="立体图">
-										<option value="右视图">
-										<option value="主视图">
-										<option value="左视图">
-										<option value="后视图">
-										<option value="俯视图">
 										<option value="使用状态图">
 										</datalist>
 									

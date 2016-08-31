@@ -118,9 +118,9 @@ margin: 1px 0 0 1px;}
 					<div class="tab1h" value="1" name="tabs" onclick="tabChange(1);">
 						说明书附图</div>
 					<div class="tab1h" value="2" name="tabs" onclick="tabChange(2,true,false);">
-						权利要求</div>
+						权利要求书</div>
 					<div class="tab1h" value="3" name="tabs" onclick="tabChange(3);">
-						摘要</div>
+						说明书摘要</div>
 					<div class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
 						摘要附图</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
