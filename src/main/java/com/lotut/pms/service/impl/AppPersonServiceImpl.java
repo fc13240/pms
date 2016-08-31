@@ -144,16 +144,16 @@ public class AppPersonServiceImpl implements AppPersonService {
 
 
 	@Override
-	public List<CommonAppPerson> searchAppPersonByPage(AppPersonSearchCondition appPersonSearchCondition) {
+	public List<CommonAppPerson> searchAppPersonByPage(AppPersonSearchCondition searchCondition) {
 		
-		return appPersonDao.searchAppPersonByPage(appPersonSearchCondition);
+		return appPersonDao.searchAppPersonByPage(searchCondition);
 	}
 
 
 	@Override
-	public int searchAppPersonCount(AppPersonSearchCondition appPersonSearchCondition) {
+	public int searchAppPersonCount(AppPersonSearchCondition searchCondition) {
 		
-		return appPersonDao.searchAppPersonCount(appPersonSearchCondition);
+		return appPersonDao.searchAppPersonCount(searchCondition);
 	}
 
 

@@ -90,7 +90,7 @@
 								<input type="checkbox" class="check-item" appPerson="<c:out value='${appPerson.appPersonId}'/>">
 								<span class="lbl"></span></label>
 								</td>
-								<td class="center" style="text-align:center"> ${status.count} </td>
+								<td class="center" style="text-align:center"> ${status.count+ (page.currentPage-1)*page.pageSize} </td>
 								<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
 								<td style="text-align:center"><c:out value="${appPerson.idNumber}"/></td>
 								<td style="text-align:center" class="hidden-480" ><c:out value="${appPerson.postcodeAddress}"/></td>
