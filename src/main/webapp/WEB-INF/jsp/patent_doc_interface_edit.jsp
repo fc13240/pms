@@ -115,10 +115,10 @@ margin: 1px 0 0 1px;}
 				<!--申请文件九部分标签切换 -->
 				<div class="tab" id="tabWrap"> 
 					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">
-						简要说明书
+						简要说明
 					</div>
 					<div class="tab1h" value="1" name="tabs" onclick="tabChange(1);">
-						说明书附图
+						图片或照片
 					</div>
 					<div style="display:none" class="tab1h" value="2" name="tabs" onclick="tabChange(2,true,false);">
 						权利要求
