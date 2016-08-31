@@ -459,7 +459,7 @@ var ZYFILE = {
 					html += '		</div>';
 					html += '	</div>';
 					html += '	<a style="height:'+para.itemHeight+';width:'+para.itemWidth+';" href="#" class="imgBox">';
-					html += '		<div class="uploadImg" style="height:300px;height:300px;">';				
+					html += '		<div class="uploadImg" style="height:300px;width:300px">';				
 					html += '			<img id="uploadImage_'+file.index+'" class="upload_image" src="' + e.target.result + '" style="width:300px;height:300px" />';                                                                 
 					html += '		</div>';
 					html += '	</a>';
