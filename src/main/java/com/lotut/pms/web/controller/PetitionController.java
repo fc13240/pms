@@ -202,20 +202,20 @@ public class PetitionController {
 	}
 	
 	@RequestMapping(path="/uploadPatentDocFile",method=RequestMethod.POST)
-	public void uploadPatentDocFile(@RequestParam("file")MultipartFile file,@RequestParam("patentDocId")Long patentDocId,HttpServletResponse response){
+	public void uploadPatentDocFile(HttpServletRequest request,@RequestParam("patentDocId")Long patentDocId,HttpServletResponse response){
 		String saveDir = Settings.PATENT_DOC_FILE;
 		//String patentDocId=request.getParameter("patentDocId");
 		String patentDocIdName=patentDocId.toString();
-		//MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
-		//MultipartFile uploadFile=multipartHttpServletRequest.getFile("file");
-		String filename=file.getOriginalFilename();
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+		MultipartFile uploadFile=multipartHttpServletRequest.getFile("file");
+		String filename=uploadFile.getOriginalFilename();
 		saveDir+=patentDocIdName+"/";
 		File fileDir = new File(saveDir);
 		try {
 			if(!fileDir.exists()){
 				fileDir.mkdir();
 			}
-			InputStream is = file.getInputStream();
+			InputStream is = uploadFile.getInputStream();
 			int BUFFER_SIZE = 8*1024;
 			byte [] buffer = new byte[BUFFER_SIZE];
 			try(OutputStream outputStream = new FileOutputStream(saveDir + filename);){
@@ -226,7 +226,7 @@ public class PetitionController {
 				outputStream.flush();
 				outputStream.close();
 			}
-			WebUtils.writeJsonStrToResponse(response,saveDir+filename);
+			WebUtils.writeJsonStrToResponse(response,filename);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
