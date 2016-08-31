@@ -32,7 +32,7 @@
 					    <div class="form-group">
 					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="姓名/证件号码/邮编地址/费减备案状态/备案证件号/备案年度" class="t-input form-control"/>	
 					    
-					     <button class="button button-caution button-rounded" type="submit" style="width:80px;">搜索文档</button>
+					     <button class="button button-caution button-rounded" type="submit" style="width:80px;">搜索申请人</button>
 					    </div>
 					  </form>
 
