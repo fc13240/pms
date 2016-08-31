@@ -32,7 +32,7 @@
 					    <div class="form-group">
 					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="姓名/证件号" class="t-input form-control"/>	
 					    
-					     <button class="button button-caution button-rounded" type="submit" style="width:80px;">搜索发明人</button>
+					     <button class="button button-caution button-rounded" type="submit" style="width:100px;">搜索发明人</button>
 					    </div>
 					  </form>
 
