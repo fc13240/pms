@@ -323,7 +323,7 @@ margin: 1px 0 0 1px;}
 								</div>
 								<div>
 									<h2 style="margin-top:20px;">其他信息</h2>
-									<input type="text" style="width:700px;" class="t-input form-control" id="otherInformation" placeholder="请填写，若没有则可以不填写。"/>
+									<input type="text" style="width:700px;" class="t-input form-control" id="otherInformation" placeholder="请填写，若没有则可以不填写。" value="${patentDoc.otherInformation}"/>
 									
 									<h2 style="margin-top:20px;">附件</h2>
 									<form action="<s:url value='/petition/uploadPatentDocFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -331,7 +331,7 @@ margin: 1px 0 0 1px;}
 										<input style="width:300px;display:inline;" type="text" id="patentDocFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocFile]').click();"/>
 										<button type="button" onclick="$('input[id=patentDocFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 										<button type="button" onclick="uploadPatentDocFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
-										<c:if test="${not empty patentDoc.attacmentUrl }">
+										<c:if test="${not empty patentDoc.attachmentUrl }">
 											<button type="button" onclick="downloadPatentDocFile(${patentDoc.patentDocId })" class="t-btn3 button button-primary  button-rounded">下载</button>
 										</c:if>
 									</form>
@@ -1462,10 +1462,11 @@ function savePatentDoc(value){
 	var abstractDescription=$("#editorContent7").val();
 	var rightClaim=$("#editorContent8").val();
 	var contactPerson = $("#contactPerson").val();
+	var otherInformation = $("#otherInformation").val();
 	$.ajax({
 		type: "POST",
 		url: "<s:url value='/editor/savePatentDoc.html'/>",
-		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value,"contactPerson":contactPerson},
+		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value,"contactPerson":contactPerson,"otherInformation":otherInformation},
 		success: function(data){
 			alert("操作成功");
 		},
@@ -2098,20 +2099,6 @@ function loadImgs(){
 		var iframe = document.getElementById('fileFrame');
 		iframe.src = "<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+value;
 	}
-/* 	
-	jQuery(function($) {
-		$("#patent").validate({
-			rules: {
-				filename: 'required'
-			},
-			messages: {
-				filename: '<span style="color:red;">请选择要上传的专利表格</span>'
-			},
-			submitHandler: function(form){ 
-				form.submit();     
-			}
-		});
-	}); */
 	$('input[id=patentDocFile]').change(function() {  
 		$('#patentDocFilename').val($(this).val());  
 	});
