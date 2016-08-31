@@ -127,7 +127,7 @@ margin: 1px 0 0 1px;}
 						摘要
 					</div>
 					<div style="display:none" class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
-						摘要附图
+						图片或照片
 					</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件
