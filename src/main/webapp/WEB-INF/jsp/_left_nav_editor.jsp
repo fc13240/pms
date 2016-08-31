@@ -4,6 +4,11 @@
 	
 	<ul style="maring:0px;padding:0px;">
 	<li class="active"> 
+		<a href="<s:url value='/editor/patentDocList.html'/>">
+		<h5>撰写列表</h5>
+		</a>
+	</li> 
+	<li class="active"> 
 		<a href="<s:url value='/editor/newPatentType.html'/>">
 		<h5>在线撰写</h5>
 		</a>
