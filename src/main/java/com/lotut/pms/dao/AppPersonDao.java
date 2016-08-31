@@ -45,9 +45,9 @@ public interface AppPersonDao {
 	
 	void insertUserAppPersons(List<Map<String, Integer>> userAppPersonRecords);
 	
-	List<CommonAppPerson> searchAppPersonByPage(AppPersonSearchCondition appPersonSearchCondition);
+	List<CommonAppPerson> searchAppPersonByPage(AppPersonSearchCondition searchCondition);
 	
-	int searchAppPersonCount(AppPersonSearchCondition appPersonSearchCondition);
+	int searchAppPersonCount(AppPersonSearchCondition searchCondition);
 	
 	int getUserAppPersonCount(int userId);
 	
