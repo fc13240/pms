@@ -341,7 +341,7 @@ var ZYFILE = {
 					html += '</form>';
 				}
 				
-	            $(self).append(html).css({"width":"800px","height":"600px"});
+	            $(self).append(html).css({"width":"860px","height":"600px"});
 	            
 	            // 初始化html之后绑定按钮的点击事件
 	            this.addEvent();
