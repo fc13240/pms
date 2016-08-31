@@ -327,7 +327,7 @@ var ZYFILE = {
 				    html += '				<div class="add_upload">';
 				    html += '					<a style="height:'+para.itemHeight+';width:'+para.itemWidth+';" title="点击添加文件" id="rapidAddImg" class="add_imgBox" href="javascript:void(0)">';
 				    html += '						<div class="uploadImg" style="height:300px;width:380px">';
-				    html += '							<img class="upload_image" src="/temp/zyupload/skins/images/add_img.png" style="width:300px;height:380px" />';
+				    html += '							<img class="upload_image" src="/temp/zyupload/skins/images/add_img.png" style="width:380px;height:300px" />';
 				    html += '						</div>'; 
 				    html += '					</a>';
 				    html += '				</div>';
