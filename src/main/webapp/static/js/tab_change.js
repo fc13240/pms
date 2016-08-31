@@ -129,7 +129,7 @@ function loadingTemplateBYTab(sectionId){
 					  "</div>"+
 				   "</div>");
 				 $("#modelWrap span").css("color","black");
-			 	 $("#hiddenmodel").append("<p id='templateContent"+i+"'>"+item.content+"</p>");
+			 	 $("#hiddenmodel").append("<div id='templateContent"+i+"'>"+item.content+"</div>");
 			 });
 		 },error : function (){
 			 
