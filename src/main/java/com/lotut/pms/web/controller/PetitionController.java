@@ -5,8 +5,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -202,8 +205,8 @@ public class PetitionController {
 	}
 	
 	@RequestMapping(path="/uploadPatentDocFile",method=RequestMethod.POST)
-	public void uploadPatentDocFile(HttpServletRequest request,@RequestParam("patentDocId")Long patentDocId,HttpServletResponse response){
-		String saveDir = Settings.PATENT_DOC_FILE;
+	public void uploadPatentDocFile(HttpServletRequest request,HttpServletResponse response){
+		/*String saveDir = Settings.PATENT_DOC_FILE;
 		//String patentDocId=request.getParameter("patentDocId");
 		String patentDocIdName=patentDocId.toString();
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
@@ -229,6 +232,38 @@ public class PetitionController {
 			WebUtils.writeJsonStrToResponse(response,filename);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}*/
+		
+		try{
+			String savePath=Settings.PATENT_DOC_FILE;
+			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+			MultipartFile file1 = multipartRequest.getFile("file");
+			String fileName = file1.getOriginalFilename(); 
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String ymd = sdf.format(new Date());
+			savePath += ymd + "/";
+			File dirFile = new File(savePath);
+			if (!dirFile.exists()) {
+				dirFile.mkdirs();
+			}
+			String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+			String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
+			InputStream is = file1.getInputStream();
+			int BUFFER_SIZE = 8 * 1024;
+			byte[] buffer = new byte[BUFFER_SIZE];
+			try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
+				int bytesRead = -1;
+				while ((bytesRead = is.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesRead);
+				}
+				out.flush();
+				out.close();
+			}
+			WebUtils.writeJsonStrToResponse(response,savePath+newFileName);
+		}catch(Exception e){
+			e.printStackTrace();
 		}
+
 	}
 }
