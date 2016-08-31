@@ -125,7 +125,7 @@ margin: 1px 0 0 1px;}
 						摘要附图</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件</div>
-					<div style="display: none;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
+					<div style="display:block;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
 						请求书</div>
 				</div>
 	
@@ -216,9 +216,6 @@ margin: 1px 0 0 1px;}
 							</div>
 							<div class="cl">
 								<div>
-									<div>
-									
-									</div>
 									<div>
 										<button type="button" style="width:120px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
 											选择常用申请人
@@ -323,6 +320,27 @@ margin: 1px 0 0 1px;}
 													${patentDoc.contactPerson }</c:if></textarea>
 										</div>
 									</div>
+								</div>
+								<div>
+									<h2 style="margin-top:20px;">其他信息</h2>
+									<input type="text" style="width:700px;" class="t-input form-control" id="otherInformation" placeholder="请填写，若没有则可以不填写。"/>
+									
+									<h2 style="margin-top:20px;">附件</h2>
+									<form action="<s:url value='/petition/uploadPatentDocFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+									<input style="display:none" type="file" id="patentDocFile"/>
+									<input style="width:300px;display:inline;" type="text" id="patentDocFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocFile]').click();"/>
+									<button type="button" onclick="$('input[id=patentDocFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+									<button type="button" onclick="uploadPatentDocFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
+									<%-- <form id="patentDocAttachment" action="<s:url value='/editor/uploadFile.html'/>"  method="post" enctype="multipart/form-data" class="form-horizontal">  
+									<input style="display:none;"  id="patentAttachmentFile" name="file" type="file" />
+									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
+									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
+									<c:if test="${not empty patentDoc.patentDocAttachmentFile }">
+										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="downloadAttachmentFile(${patentDoc.patentDocId})">下载附件</button>
+				                    </c:if>
+									</form>  --%>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -2085,7 +2103,45 @@ function loadImgs(){
 	function downloadAttachmentFile(value){
 		var iframe = document.getElementById('fileFrame');
 		iframe.src = "<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+value;
-	}	
+	}
+/* 	
+	jQuery(function($) {
+		$("#patent").validate({
+			rules: {
+				filename: 'required'
+			},
+			messages: {
+				filename: '<span style="color:red;">请选择要上传的专利表格</span>'
+			},
+			submitHandler: function(form){ 
+				form.submit();     
+			}
+		});
+	}); */
+	$('input[id=patentDocFile]').change(function() {  
+		$('#patentDocFilename').val($(this).val());  
+	});
+	function uploadPatentDocFile(){
+		var uploadForm=$("#uploadFileForm");
+		var option={
+				dataType : "json",
+				data : {"file":$("#patentDocFile").val()},
+				beforSubmit : function (){
+					var filename = $("#patentDocFilename").val();
+					var suffix = filename.substr(filename.lastIndexOd("."));
+					if(suffix=="zip"||suffix=="rar"){
+						return true;
+					}else{
+						return false;
+						alert("请选择指定类型的文件后，再进行上传");
+					}
+				},
+				success : function (result){
+					alert(result);
+				}
+		}
+		uploadForm.ajaxSubmit(option);
+	}
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	

@@ -1,6 +1,7 @@
 package com.lotut.pms.web.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -191,5 +192,10 @@ public class PetitionController {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(path="/uploadPatentDocFile",method=RequestMethod.POST)
+	public void uploadPatentDocFile(PrintWriter out){
+		out.write("kkkk");
 	}
 }
