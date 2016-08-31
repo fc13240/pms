@@ -46,13 +46,13 @@
   		WHERE p.user_id=#{userId}) m JOIN user_app_person a ON m.app_person_id = a.app_person) n
   	</select>
   	 -->
- 	<select id="getUserAppPersons" parameterType="int" resultMap="AppPersonWithShareUsers">
+ 	<select id="getUserAppPersons" parameterType="Page" resultMap="AppPersonWithShareUsers">
     	SELECT un.* ,u.user_id  ,u.username FROM 	
   	(SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
   	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
   		p.postcode_address ,p.other_information FROM common_app_person p WHERE app_person_id IN		
- 		(SELECT app_person FROM user_app_person WHERE USER =#{userId})) AS un  JOIN user_app_person up ON un.app_person_id = up.app_person
-		  	JOIN users u ON up.user = u.user_id
+ 		(SELECT app_person FROM user_app_person WHERE USER =#{userId}) limit #{startIndex}, #{pageSize}) AS un  JOIN user_app_person up ON un.app_person_id = up.app_person
+		  	JOIN users u ON up.user = u.user_id 
   	</select> 
   	
   <!-- 	 	
@@ -148,5 +148,82 @@
 		</foreach>
 	</insert>	
 	
+	<select id="searchAppPersonByPage" parameterType="AppPersonSearchCondition" resultMap="AppPersonWithShareUsers">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+		SELECT un.* ,u.user_id  ,u.username FROM 	
+  		(SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
+  	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
+  		p.postcode_address ,p.other_information FROM common_app_person p WHERE app_person_id IN		
+ 		(SELECT app_person FROM user_app_person WHERE USER =#{userId})
+ 		<if test="name != null">
+					and ( p.name like #{name})
+		</if>
+		<if test="idNumber != null">
+					and ( p.id_number like #{idNumber})
+		</if>	
+		<if test="postcodeAddress != null">
+					and ( p.postcode_address like #{postcodeAddress})
+		</if>	
+		<if test="feeReduceTransactionStatus != null">
+					and ( p.fee_reduce_transaction_status like #{feeReduceTransactionStatus})
+		</if>	
+		<if test="transactionIdentityId != null">
+					and (p.transaction_identity_id like #{transactionIdentityId})
+		</if>	
+		<if test="transactionYear != null">
+					and ( p.transaction_year like #{transactionYear})
+		</if>			
+		
+		<if test="keyword != null">
+					and (p.name like #{keyword_pattern} or p.id_number like #{keyword_pattern} or p.postcode_address like #{keyword_pattern}  or p.fee_reduce_transaction_status like #{keyword_pattern} 
+					or p.transaction_identity_id like #{keyword_pattern} or p.transaction_year like #{keyword_pattern})
+		</if> 
+		
+		limit #{page.startIndex}, #{page.pageSize}		 	
+ 		) AS un  JOIN user_app_person up ON un.app_person_id = up.app_person
+		  	JOIN users u ON up.user = u.user_id
+	
+	</select>
+	
+	<select id="searchAppPersonCount" parameterType="AppPersonSearchCondition" resultType="int">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+		SELECT count(*) FROM 	
+  		(SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
+  	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
+  		p.postcode_address ,p.other_information FROM common_app_person p WHERE app_person_id IN		
+ 		(SELECT app_person FROM user_app_person WHERE USER =#{userId})
+ 		<if test="name != null">
+					and ( p.name like #{name})
+		</if>
+		<if test="idNumber != null">
+					and ( p.id_number like #{idNumber})
+		</if>	
+		<if test="postcodeAddress != null">
+					and ( p.postcode_address like #{postcodeAddress})
+		</if>	
+		<if test="feeReduceTransactionStatus != null">
+					and ( p.fee_reduce_transaction_status like #{feeReduceTransactionStatus})
+		</if>	
+		<if test="transactionIdentityId != null">
+					and (p.transaction_identity_id like #{transactionIdentityId})
+		</if>	
+		<if test="transactionYear != null">
+					and ( p.transaction_year like #{transactionYear})
+		</if>			
+		
+		<if test="keyword != null">
+					and (p.name like #{keyword_pattern} or p.id_number like #{keyword_pattern} or p.postcode_address like #{keyword_pattern}  or p.fee_reduce_transaction_status like #{keyword_pattern} 
+					or p.transaction_identity_id like #{keyword_pattern} or p.transaction_year like #{keyword_pattern})
+		</if> 
+		)	as un 	
+	</select>
+	
+	<select id="getUserAppPersonCount" resultType="int">
+		select count(*) from user_app_person where user = #{userId}
+	</select>
   </mapper>
   

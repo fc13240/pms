@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管家-通知书</title>
+<title>龙图腾专利管家-发明人列表</title>
 <%@ include file="_css.jsp" %>
 
 </head>
@@ -18,10 +18,30 @@
 <div class="col-xs-1 sidebar" style="min-width:100px;">
 			<%@ include file="_left_nav_editor.jsp" %>
 		  </div>
+		  <div class="tit_top">
+        <div class="title2">
+           发明人列表</div>
+               
+    </div>
+		<div class="col-xs-offset-1 col-xs-11">
+			<div class="lt-right" style="padding:10px 0 0 3px;" >
+				    <div class="cl top1" style="height:10px;">
+				    
+					  <form class="form-inline" action="<s:url value='/inventor/searchInventor.html'/>" method="get">
+					  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
+					    <div class="form-group">
+					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="姓名/证件号" class="t-input form-control"/>	
+					    
+					     <button class="button button-caution button-rounded" type="submit" style="width:80px;">搜索文档</button>
+					    </div>
+					  </form>
+
+    			</div>
 		 <div class="col-xs-offset-1 col-xs-11">
-			<div class="lt-right">
+			
+			</div>
 				<div style="height:10px;"></div>
-					<div class="lt-box" style="padding:20px 5px 5px 5px;">
+					<div class="lt-box" style="padding:30px 0 0 0;">
 							<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
 						  <div class="ta-top" style="margin-left:8px;"> 
 						  	<table class="search-table">
@@ -88,7 +108,66 @@
 							</c:forEach>
 						  </tbody>
 						</table>
-						</div></div></div> 
+						</div>
+						
+							<!-- 分页功能 start -->
+			        <div style="height:30px;background:#fff;">	
+			          <c:if test="${searchCondition == null}">
+			            <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1">首页</a>
+			              <c:choose>
+			                <c:when test="${page.currentPage - 1 > 0}"> <a href="?currentPage=${page.currentPage - 1}">上一页</a> </c:when>
+			                <c:when test="${page.currentPage - 1 <= 0}"> <a href="?currentPage=1">上一页</a> </c:when>
+			              </c:choose>
+			              <c:choose>
+			                <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">下一页</a> </c:when>
+			                <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?currentPage=${page.currentPage+1}">下一页</a> </c:when>
+			                <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?currentPage=${page.totalPages}">下一页</a> </c:when>
+			              </c:choose>
+			              <c:choose>
+			                <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">尾页</a> </c:when>
+			                <c:otherwise> <a href="?currentPage=${page.totalPages}">尾页</a> </c:otherwise>
+			              </c:choose>
+			              <!-- 分页功能 End -->
+			              <input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onKeyDown="gotoPageForEnter(event)"/>
+			              <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
+			              <select onChange="setPageSize()" style="height:25px;" id="pageSizeSelect">
+			                <option value="10">10</option>
+			                <option value="20">20</option>
+			                <option value="50">50</option>
+			                <option value="100">100</option>
+			              </select>
+			              条记录 </span> </div>
+			          </c:if>
+			       
+			        <c:if test="${searchCondition != null}">
+			          <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?page.currentPage=1&${searchCondition}">首页</a>
+			            <c:choose>
+			              <c:when test="${page.currentPage - 1 > 0}"> <a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a> </c:when>
+			              <c:when test="${page.currentPage - 1 <= 0}"> <a href="?page.currentPage=1&${searchCondition}">上一页</a> </c:when>
+			            </c:choose>
+			            <c:choose>
+			              <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a> </c:when>
+			              <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a> </c:when>
+			              <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a> </c:when>
+			            </c:choose>
+			            <c:choose>
+			              <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a> </c:when>
+			              <c:otherwise> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise>
+			            </c:choose>
+			            <!-- 分页功能 End -->
+			            <input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
+			            <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
+			            <select onChange="setPageSize()" style="height:25px;" id="pageSizeSelect">
+			              <option value="10">10</option>
+			              <option value="20">20</option>
+			              <option value="50">50</option>
+			              <option value="100">100</option>
+			            </select>
+			            条记录 </span> </div>
+			        </c:if>
+			        </div>	
+					</div>
+				</div>
 						
 <script type="text/javascript">
 	function addInventor(){
@@ -149,7 +228,64 @@
 		var inventors = uniqueinventorNos.join(",");		
 		var url = "<s:url value='/inventor/showFriends.html'/>?inventors=" + inventors;
 		location.href= url }
-</script>
+	
+	function gotoPage() {
+		var pageNo = document.getElementById("page.pageNo").value;
+		
+		if (isNaN(pageNo)) {
+			alert("请输入数值");
+			return;
+		}
+		
+		if(pageNo==""){
+			alert("请输入数值")
+			return;
+		}
+		
+		pageNo = parseInt(pageNo);
+		
+		if (pageNo < 1 || pageNo > parseInt("${page.totalPages}")) {
+			alert("只能输入1-${page.totalPages}之间的数值");
+			return;
+		}
+		
+		var url = "<s:url value='/inventor/list.html'/>?currentPage=" + pageNo;
+		
+		<c:if test="${searchCondition != null}">
+			url = "<s:url value='/inventor/searchInventor.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		</c:if>
+		
+		
+		location.href = url
+		
+	}
+
+	function gotoPageForEnter(event) {
+		var e = event ? event : window.event;
+				
+		if(event.keyCode == 13) {
+			gotoPage();
+		}
+	}
+	</script>
+
+	<script type="text/javascript">
+		$(function() {
+			formutil.setElementValue("#pageSizeSelect", ${page.pageSize});
+		});
+		
+		function setPageSize() {
+			var pageSize = $("#pageSizeSelect").val();
+			
+			$.ajax({
+				url: "<s:url value='/user/setPageSize.html'/>?pageSize=" + pageSize, 
+				type: 'get', 
+				success: function() {
+					location.reload();
+				}
+			});		
+		}	
+	</script>
 
 </body>
 </html>
