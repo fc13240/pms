@@ -115,10 +115,10 @@ margin: 1px 0 0 1px;}
 				<!--申请文件九部分标签切换 -->
 				<div class="tab" id="tabWrap"> 
 					<div class="tab1" value="0" name="tabs" onclick="tabChange(0);">
-						简要说明书
+						简要说明
 					</div>
 					<div class="tab1h" value="1" name="tabs" onclick="tabChange(1);">
-						说明书附图
+						图片或照片
 					</div>
 					<div style="display:none" class="tab1h" value="2" name="tabs" onclick="tabChange(2,true,false);">
 						权利要求
@@ -435,13 +435,13 @@ margin: 1px 0 0 1px;}
 									<font size="3" font_family="Microsoft YaHei" color="black">图片名称:</font>
 									<input type="text"  id="piciLlus2"   list="companys" name="caption"   onchange="picName()" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
 										<datalist id="companys">
+										<option value="主视图">
+										<option value="后视图">
+										<option value="左视图">
+										<option value="右视图">
+										<option value="俯视图">
 										<option value="仰视图">
 										<option value="立体图">
-										<option value="右视图">
-										<option value="主视图">
-										<option value="左视图">
-										<option value="后视图">
-										<option value="俯视图">
 										<option value="使用状态图">
 										</datalist>
 									

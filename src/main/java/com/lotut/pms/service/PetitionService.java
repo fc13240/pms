@@ -38,4 +38,6 @@ public interface PetitionService {
 	PatentDocAppPerson findAppPersonByAppId(Long personId);
 	
 	PatentDocInventor findInventorById(Long inventorId);
+	
+	 void updatePatentDocAttachmentUrl(String attachmentUrl, Long patentDocId);
 }

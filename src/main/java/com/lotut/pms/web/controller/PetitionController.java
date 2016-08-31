@@ -1,6 +1,10 @@
 package com.lotut.pms.web.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
@@ -189,6 +195,34 @@ public class PetitionController {
 		try{
 			WebUtils.writeJsonStrToResponse(response, patentDocInventor);
 		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(path="/uploadPatentDocFile",method=RequestMethod.POST)
+	public void uploadPatentDocFile(@RequestParam("file")MultipartFile file,@RequestParam("patentDocId") Long patentDocId,HttpServletResponse response){
+		String saveDir = Settings.PATENT_DOC_FILE;
+		String filename=file.getOriginalFilename();
+		saveDir+=patentDocId+"/";
+		File fileDir = new File(saveDir);
+		try {
+			if(!fileDir.exists()){
+				fileDir.mkdir();
+			}
+			InputStream is = file.getInputStream();
+			int BUFFER_SIZE = 8*1024;
+			byte [] buffer = new byte[BUFFER_SIZE];
+			try(OutputStream outputStream = new FileOutputStream(saveDir + filename);){
+				int bytesRead = -1;
+				while ((bytesRead = is.read(buffer)) != -1) {
+					outputStream.write(buffer, 0, bytesRead);
+				}
+				outputStream.flush();
+				outputStream.close();
+			}
+			petitionService.updatePatentDocAttachmentUrl(saveDir + filename, patentDocId);
+			WebUtils.writeJsonStrToResponse(response,"上传成功");
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
