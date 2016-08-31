@@ -3,7 +3,11 @@ package com.lotut.pms.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.lotut.pms.domain.AppPersonSearchCondition;
 import com.lotut.pms.domain.CommonAppPerson;
+import com.lotut.pms.domain.CommonInventor;
+import com.lotut.pms.domain.InventorSearchCondition;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserAppPerson;
 
 public interface AppPersonDao {
@@ -17,7 +21,7 @@ public interface AppPersonDao {
 
 	void deleteAppPersonById(int id);
 
-	List<CommonAppPerson> getUserAppPersons(int userId);
+	List<CommonAppPerson> getUserAppPersons(Page page);
 
 	void saveAttachmentFile(CommonAppPerson AppPerson);
 
@@ -40,4 +44,11 @@ public interface AppPersonDao {
 	void updateAppPersonUserIdNull(CommonAppPerson commonAppPerson);
 	
 	void insertUserAppPersons(List<Map<String, Integer>> userAppPersonRecords);
+	
+	List<CommonAppPerson> searchAppPersonByPage(AppPersonSearchCondition appPersonSearchCondition);
+	
+	int searchAppPersonCount(AppPersonSearchCondition appPersonSearchCondition);
+	
+	int getUserAppPersonCount(int userId);
+	
 }

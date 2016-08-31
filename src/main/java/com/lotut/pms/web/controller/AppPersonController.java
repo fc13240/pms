@@ -16,6 +16,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.lotut.pms.constants.Settings;
+import com.lotut.pms.domain.AppPersonSearchCondition;
 import com.lotut.pms.domain.CommonAppPerson;
+import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.PatentDoc;
+import com.lotut.pms.domain.PatentDocSearchCondition;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.UserAppPerson;
 import com.lotut.pms.service.AppPersonService;
@@ -58,10 +63,19 @@ public class AppPersonController {
 	}
 	
 	@RequestMapping(path="/list" ,method=RequestMethod.GET)
-	public String getList(Model model){
-		int userId=PrincipalUtils.getCurrentUserId();
-		List<CommonAppPerson> appPersons=appPersonService.getUserAppPersons(userId);
+	public String getList(Page page, HttpSession session,Model model){
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=appPersonService.getUserAppPersonCount(userId);
+		page.setTotalRecords(totalCount);
+		List<CommonAppPerson> appPersons=appPersonService.getUserAppPersons(page);
+
 		model.addAttribute("appPersons", appPersons);
+		model.addAttribute("page", page);
 		return "app_person_list";
 	}
 	
@@ -385,6 +399,22 @@ public class AppPersonController {
 		}
 		
 		appPersonService.insertUserAppPersons(userAppPersonRecords);
+		return "app_person_list";
+	}
+	
+	@RequestMapping(path="/searchAppPerson", method=RequestMethod.GET)
+	public String searchUserPatents(@ModelAttribute("searchCondition")AppPersonSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		List<CommonAppPerson> appPersons = appPersonService.searchAppPersonByPage(searchCondition);
+		int totalCount=(int)appPersonService.searchAppPersonCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		model.addAttribute("appPersons", appPersons);
+		model.addAttribute("page", page);
 		return "app_person_list";
 	}
 }

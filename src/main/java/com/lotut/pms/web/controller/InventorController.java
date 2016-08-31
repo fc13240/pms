@@ -18,6 +18,7 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.lotut.pms.constants.Settings;
+import com.lotut.pms.domain.InventorSearchCondition;
 import com.lotut.pms.domain.CommonInventor;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.UserInventor;
 import com.lotut.pms.service.FriendService;
@@ -57,11 +60,20 @@ public class InventorController {
 	}
 	
 	@RequestMapping(path="/list")
-	public String getList(Model model){
+	public String getList(Page page, HttpSession session,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
-		List<CommonInventor> inventors=inventorService.getUserInventors(userId);
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=inventorService.getUserInventorCount(userId);
+		List<CommonInventor> inventors=inventorService.getUserInventors(page);
+		page.setTotalRecords(totalCount);
 		model.addAttribute("inventors", inventors);
+		model.addAttribute("page", page);
 		return "inventor_list";
+		
 		
 	}
 	
@@ -280,6 +292,22 @@ public class InventorController {
 		
 		inventorService.insertUserInventors(userInventorRecords);
 		return "app_person_list";
+	}
+	
+	@RequestMapping(path="/searchInventor", method=RequestMethod.GET)
+	public String searchUserPatents(@ModelAttribute("searchCondition")InventorSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		List<CommonInventor> inventors = inventorService.searchInventorByPage(searchCondition);
+		int totalCount=(int)inventorService.searchInventorCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		model.addAttribute("inventors", inventors);
+		model.addAttribute("page", page);
+		return "inventor_list";
 	}
 	
 }

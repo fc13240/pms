@@ -6,6 +6,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.CommonInventor;
+import com.lotut.pms.domain.InventorSearchCondition;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserInventor;
 
 public interface InventorMapper {
@@ -21,7 +23,9 @@ public interface InventorMapper {
 
 	List<CommonInventor> getInventorByName(@Param("inventor") String inventor);
 
-	List<CommonInventor> getUserInventors(int userId);
+	List<CommonInventor> getUserInventors(Page page);
+	
+	int getUserInventorCount(int userId);
 
 	List<CommonInventor> getInventorByName(@Param("inventor") String inventor, @Param("userId") int userId);
 
@@ -36,5 +40,9 @@ public interface InventorMapper {
 	void deleteUserInventorById(UserInventor userInventor);
 	
 	void insertUserInventors(List<Map<String, Integer>> userInventorRecords);
+	
+	int searchInventorCount(InventorSearchCondition inventorSearchCondition);
+	
+	List<CommonInventor> searchInventorByPage(InventorSearchCondition inventorSearchCondition);
 
 }

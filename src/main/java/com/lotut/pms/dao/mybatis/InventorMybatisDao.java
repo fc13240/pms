@@ -8,6 +8,8 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.InventorDao;
 import com.lotut.pms.dao.mapper.InventorMapper;
 import com.lotut.pms.domain.CommonInventor;
+import com.lotut.pms.domain.InventorSearchCondition;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserInventor;
 
 public class InventorMybatisDao extends SqlSessionDaoSupport implements InventorDao {
@@ -54,11 +56,6 @@ public class InventorMybatisDao extends SqlSessionDaoSupport implements Inventor
 		return inventorMapper.getInventorByName(inventor,userId);
 	}
 
-	@Override
-	public List<CommonInventor> getUserInventors(int userId) {
-		
-		return inventorMapper.getUserInventors(userId);
-	}
 
 	@Override
 	public List<CommonInventor> getInventorByName(String inventor) {
@@ -101,6 +98,30 @@ public class InventorMybatisDao extends SqlSessionDaoSupport implements Inventor
 	public void insertUserInventors(List<Map<String, Integer>> userInventorRecords) {
 		
 		inventorMapper.insertUserInventors(userInventorRecords);
+	}
+
+	@Override
+	public List<CommonInventor> getUserInventors(Page page) {
+		
+		return inventorMapper.getUserInventors(page);
+	}
+
+	@Override
+	public int getUserInventorCount(int userId) {
+		
+		return inventorMapper.getUserInventorCount(userId);
+	}
+
+	@Override
+	public int searchInventorCount(InventorSearchCondition inventorSearchCondition) {
+		
+		return inventorMapper.searchInventorCount(inventorSearchCondition);
+	}
+
+	@Override
+	public List<CommonInventor> searchInventorByPage(InventorSearchCondition inventorSearchCondition) {
+		
+		return inventorMapper.searchInventorByPage(inventorSearchCondition);
 	}
 
 }

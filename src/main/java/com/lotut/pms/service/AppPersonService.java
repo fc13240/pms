@@ -3,7 +3,9 @@ package com.lotut.pms.service;
 import java.util.List;
 import java.util.Map;
 
+import com.lotut.pms.domain.AppPersonSearchCondition;
 import com.lotut.pms.domain.CommonAppPerson;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserAppPerson;
 
 public interface AppPersonService {
@@ -17,7 +19,7 @@ public interface AppPersonService {
 
 	void deleteAppPersonById(int id);
 
-	List<CommonAppPerson> getUserAppPersons(int userId);
+	List<CommonAppPerson> getUserAppPersons(Page page);
 
 	void saveAttachmentFile(CommonAppPerson AppPerson);
 
@@ -40,4 +42,10 @@ public interface AppPersonService {
 	void updateAppPersonUserIdNull(CommonAppPerson commonAppPerson);
 	
 	void insertUserAppPersons(List<Map<String, Integer>> userAppPersonRecords);
+	
+	List<CommonAppPerson> searchAppPersonByPage(AppPersonSearchCondition appPersonSearchCondition);
+	
+	int searchAppPersonCount(AppPersonSearchCondition appPersonSearchCondition);
+	
+	int getUserAppPersonCount(int userId);
 }

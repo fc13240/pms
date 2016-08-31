@@ -441,7 +441,7 @@ margin: 1px 0 0 1px;}
 									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
 									
 								  </form>
-									<div id="zyupload" class="zyupload"></div>
+									<div id="zyupload" class="zyupload" ></div>
 								 	
 								</div>
 							</div>
