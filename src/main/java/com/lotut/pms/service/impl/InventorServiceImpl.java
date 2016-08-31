@@ -94,14 +94,14 @@ public class InventorServiceImpl implements InventorService{
 		return inventorDao.getUserInventorCount(userId);
 	}
 	@Override
-	public int searchInventorCount(InventorSearchCondition inventorSearchCondition) {
+	public int searchInventorCount(InventorSearchCondition searchCondition) {
 		
-		return inventorDao.searchInventorCount(inventorSearchCondition);
+		return inventorDao.searchInventorCount(searchCondition);
 	}
 	@Override
-	public List<CommonInventor> searchInventorByPage(InventorSearchCondition inventorSearchCondition) {
+	public List<CommonInventor> searchInventorByPage(InventorSearchCondition searchCondition) {
 		
-		return inventorDao.searchInventorByPage(inventorSearchCondition);
+		return inventorDao.searchInventorByPage(searchCondition);
 	}
 	
 }

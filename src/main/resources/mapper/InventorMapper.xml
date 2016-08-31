@@ -112,13 +112,7 @@
   	(SELECT p.inventor_id ,p.inventor_name,p.inventor_id_number,p.inventor_nationality ,p.inventor_mobile ,p.inventor_email,p.inventor_attachment_file,
   		p.inventor_other_information  FROM common_inventor p WHERE inventor_id IN		
  		(SELECT inventor FROM user_inventor WHERE USER =#{userId}) 
- 		<if test="name != null">
-					and ( p.inventor_name like #{name})
-		</if>
-		<if test="idNumber != null">
-					and ( p.inventor_id_number like #{idNumber})
-		</if>	
-		
+ 		
  		<if test="keyword != null">
 					and ( p.inventor_name like #{keyword_pattern} or p.inventor_id_number like #{keyword_pattern})
 		</if>	
@@ -130,21 +124,14 @@
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
-			SELECT count(*) FROM 	
-  	(SELECT p.inventor_id ,p.inventor_name,p.inventor_id_number,p.inventor_nationality ,p.inventor_mobile ,p.inventor_email,p.inventor_attachment_file,
-  		p.inventor_other_information  FROM common_inventor p WHERE inventor_id IN		
- 		(SELECT inventor FROM user_inventor WHERE USER =#{userId}) 
- 		<if test="name != null">
-					and ( p.inventor_name like #{name})
-		</if>
-		<if test="idNumber != null">
-					and ( p.inventor_id_number like #{idNumber})
-		</if>	
+	SELECT count(*)   FROM common_inventor p WHERE inventor_id IN		
+ 		(SELECT inventor FROM user_inventor WHERE USER =#{userId} 
+ 		
 		
  		<if test="keyword != null">
 					and ( p.inventor_name like #{keyword_pattern} or p.inventor_id_number like #{keyword_pattern})
 		</if>	
- 		) as un
+ 		)
 	</select>
 	
 </mapper>

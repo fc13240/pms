@@ -41,8 +41,8 @@ public interface InventorMapper {
 	
 	void insertUserInventors(List<Map<String, Integer>> userInventorRecords);
 	
-	int searchInventorCount(InventorSearchCondition inventorSearchCondition);
+	int searchInventorCount(InventorSearchCondition searchCondition);
 	
-	List<CommonInventor> searchInventorByPage(InventorSearchCondition inventorSearchCondition);
+	List<CommonInventor> searchInventorByPage(InventorSearchCondition searchCondition);
 
 }
