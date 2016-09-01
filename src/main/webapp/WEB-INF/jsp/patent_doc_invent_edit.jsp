@@ -1426,7 +1426,7 @@ function delectImg(value){
 			data : {"attachmentId":value},
 				success: function(data){
 					alert("删除成功！");
-					$("#"+value).hide();
+					$("#"+value).hide(); 
 			},
 			error : function() {
 				alert("操作失败");
