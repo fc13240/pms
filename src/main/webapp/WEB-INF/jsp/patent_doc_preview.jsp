@@ -138,12 +138,12 @@
 			
 			
 			<div class="tit_top">
-				<div class="pre_title">权利要求</div>
+				<div class="pre_title">权利要求书</div>
 			</div>
 			<div class="pre_text" id="div_7">${patentDoc.rightClaim }</div>
 			
 			<div class="tit_top">
-				<div class="pre_title">摘要</div>
+				<div class="pre_title">说明书摘要</div>
 				<%-- <div class="pre_clo">
 					<a href="<s:url value='/editor/compilePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&tab=7">
 						<img src="<s:url value='/temp/images/easyicon_pen.png'/>" /> 编辑</a>

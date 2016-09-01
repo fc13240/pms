@@ -107,12 +107,12 @@
 			<div class="pre_text" id="div_1">${patentDoc.name }</div>
 			
 			<div class="tit_top">
-				<div class="pre_title">说明书</div>
+				<div class="pre_title">简要说明</div>
 			</div>
 			<div class="pre_text" id="div_3">${patentDoc.manual}</div>
 			
 			<div class="tit_top">
-				<div class="pre_title">说明书附图</div>
+				<div class="pre_title">图片或照片</div>
 			</div>
 			<br/>
 			<div class="pre_picture1">
