@@ -109,7 +109,7 @@ public class InventorController {
 		
 	}
 	
-	@RequestMapping(path="/updContactInfo",method=RequestMethod.POST)
+	@RequestMapping(path="/updInventorInfo",method=RequestMethod.POST)
 	public String updContactInfo(@Valid CommonInventor inventor,Model model){
 		inventorService.updateById(inventor);
 		return "redirect:/inventor/list.html";
