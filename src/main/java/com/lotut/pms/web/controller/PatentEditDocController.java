@@ -500,7 +500,7 @@ public class PatentEditDocController {
 	public void  getPatentDocAttachmentFile(@RequestParam("patentDocId")long patentDocId,HttpServletResponse response,Model model){
 		try{
 			String filePath=patentDocService.getPatentDocAttachmentFile(patentDocId);
-			String[] file=filePath.split("/.");
+			String[] file=filePath.split("/");
 			String fileName=file[file.length-1];
 			response.setContentType("multipart/form-data");
 			response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
@@ -803,4 +803,5 @@ public class PatentEditDocController {
 			}
 	}
 	
+
 }
