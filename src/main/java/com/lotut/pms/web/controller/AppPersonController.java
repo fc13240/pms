@@ -50,8 +50,8 @@ public class AppPersonController {
 	}
 	
 	@Autowired
-	public AppPersonController(AppPersonService AppPersonService, FriendService friendService) {
-		this.appPersonService = AppPersonService;
+	public AppPersonController(AppPersonService appPersonService, FriendService friendService) {
+		this.appPersonService = appPersonService;
 		this.friendService = friendService;
 	}
 	
@@ -192,16 +192,15 @@ public class AppPersonController {
 		}}else{
 			try{
 				String filePath = Settings.APP_PERSON_ATTACHMENT_FILE_PATH + relativeUrl;
-				File file2=new File(filePath);
-				file2.delete();
-//				String filePath2=filePath.substring(0, filePath.lastIndexOf("/"));
+				File targetFile=new File(filePath);
+				targetFile.delete();
 				String[] s=relativeUrl.split("/");
-				String filePath2=Settings.APP_PERSON_ATTACHMENT_FILE_PATH+s[0];
-				File file3=new File(filePath2);
-				if(file3.isDirectory()){
-					String[] files=file3.list();
+				String DateFilePath=Settings.APP_PERSON_ATTACHMENT_FILE_PATH+s[0];
+				File DateFile=new File(DateFilePath);
+				if(DateFile.isDirectory()){
+					String[] files=DateFile.list();
 					if(files.length==0){
-						file3.delete();
+						DateFile.delete();
 					}
 				}
 				String savePath=Settings.APP_PERSON_ATTACHMENT_FILE_PATH;
@@ -302,18 +301,17 @@ public class AppPersonController {
 		}}else{
 			try{
 				String filePath = Settings.PROXY_FILE_PATH + relativeUrl;
-				File file2=new File(filePath);
-				file2.delete();
-////				String filePath2=filePath.substring(0, filePath.lastIndexOf("/"));
-//				String[] s=relativeUrl.split("/");
-//				String filePath2=Settings.PROXY_FILE_PATH+s[0];
-//				File file3=new File(filePath2);
-//				if(file3.isDirectory()){
-//					String[] files=file3.list();
-//					if(files.length==0){
-//						file3.delete();
-//					}
-//				}
+				File targetFile=new File(filePath);
+				targetFile.delete();
+				String[] s=relativeUrl.split("/");
+				String DateFilePath=Settings.APP_PERSON_ATTACHMENT_FILE_PATH+s[0];
+				File DateFile=new File(DateFilePath);
+				if(DateFile.isDirectory()){
+					String[] files=DateFile.list();
+					if(files.length==0){
+						DateFile.delete();
+					}
+				}
 				String savePath=Settings.PROXY_FILE_PATH;
 				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 				MultipartFile file1 = multipartRequest.getFile("file");
@@ -370,7 +368,7 @@ public class AppPersonController {
 	
 	@RequestMapping(path="/downloadProxyTemplate")
 	public void downloadProxyTemplate(HttpServletResponse response,HttpServletRequest request)throws IOException{
-		response.setContentType("application/doc");
+		response.setContentType("application/zip");
 		
 		String relativeUrl=Settings.PROXY_TEMPLATE_NMAE;
 		String filePath=Settings.PROXY_TEMPLATE_FILE_PATH+relativeUrl;
