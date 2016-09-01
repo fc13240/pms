@@ -33,7 +33,7 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
-					<form action="<s:url value='/appPerson/addContactInfo.html'/>" method="post" onsubmit="return check()">
+					<form action="<s:url value='/appPerson/addAppPersonInfo.html'/>" method="post" onsubmit="return check()">
 					  <se:csrfInput/>
 			       	<h5>姓名或名称:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;"  id="numberRece" type="text" name="name" required onblur="validateInfoNumber(this.value)"/>

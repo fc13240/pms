@@ -31,8 +31,6 @@ import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.AppPersonSearchCondition;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.PatentDoc;
-import com.lotut.pms.domain.PatentDocSearchCondition;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.UserAppPerson;
 import com.lotut.pms.service.AppPersonService;
@@ -55,7 +53,7 @@ public class AppPersonController {
 		this.friendService = friendService;
 	}
 	
-	@RequestMapping(path="/contactAppPersonAddForm")
+	@RequestMapping(path="/appPersonAddForm")
 	public String contactAppPersonAddForm(Model model){
 		
 		return "app_person_add";
@@ -79,7 +77,7 @@ public class AppPersonController {
 		return "app_person_list";
 	}
 	
-	@RequestMapping(path="/addContactInfo",method=RequestMethod.POST)
+	@RequestMapping(path="/addAppPersonInfo",method=RequestMethod.POST)
 	public String addContactInfo(@ModelAttribute CommonAppPerson appPerson,Model model){
 		int userId=PrincipalUtils.getCurrentUserId();
 		appPerson.setUserId(userId);
