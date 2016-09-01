@@ -1520,7 +1520,7 @@ function loadImgs(){
  								 "<li id="+item.attachmentId+">"+
 									"<img src='"+httpImgUrl+"' alt='' width='200' height='150'/><br/>"+
 									"<div style='margin-left:60px'>"+
-									"<a href='javascript:void(0);'" + "id=link" + item.seqNo +"\"" + " onclick='updateImgName("+"&apos;"+item.attachmentId+"&apos;"+","+item.seqNo+")'>"+item.caption+"</a>"+"|&nbsp"+
+									"<a href='javascript:void(0);'" + "id=link" + item.seqNo  + " onclick='updateImgName("+"&apos;"+item.attachmentId+"&apos;"+","+item.seqNo+")'>"+item.caption+"</a>"+"|&nbsp"+
 									"<a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a>"+
 									
 								"</div>"
