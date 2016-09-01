@@ -788,17 +788,19 @@ public class PatentEditDocController {
 		}
 	}
 	
-	public static void main(String[] args) {
-		String picName="图片";
-		String url="/attachmentImg/1464/图1.jpg.html";
-		String[] arr=url.split("\\.");
-		String str1=url.substring(0, url.lastIndexOf("/")+1);
-		String newName=str1+picName+"."+arr[1]+"."+arr[2];
-		String newImgUrl="/opt/media/patent"+newName;
-		String picPath="/opt/media/patent"+url.substring(0, url.lastIndexOf("."));
-		String name="/opt/media/patent"+str1+picName+"."+arr[1];
-		System.out.println(newImgUrl);
-		System.out.println(picPath);
-		System.out.println(name);
+	@SuppressWarnings("unused")
+	@RequestMapping(path="/createOrder")
+	public void creatOrder(List<Long> patentDocIds,Model model){
+		 	Map<Integer,Integer> priceTab=new HashMap<Integer,Integer>();
+		 	priceTab.put(1, 100);
+		 	priceTab.put(2, 200);
+		 	priceTab.put(3, 300);
+			int amount=0;
+			List<PatentDoc> patentDocs=patentDocService.getPatentDocsByIds(patentDocIds);
+			for(PatentDoc patentDoc:patentDocs){
+				 int patentType=patentDoc.getPatentType();
+				 amount+=priceTab.get(patentType);
+			}
 	}
+	
 }

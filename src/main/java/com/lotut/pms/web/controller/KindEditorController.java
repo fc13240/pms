@@ -66,8 +66,12 @@ public class KindEditorController {
 		
 		// 文件保存目录URL
 		/*String saveUrl = request.getContextPath() + "/patentDocImage/";*/
+		StringBuffer url = request.getRequestURL();  
+		String tempContextUrl = url.delete(url.length() - request.getRequestURI().length(), url.length()).append("/").toString();
 		
-		String saveUrl = basePath + "/editorPic/";
+		
+		
+		String saveUrl = tempContextUrl + "editorPic/";
 		// 定义允许上传的文件扩展名
 		HashMap<String, String> extMap = new HashMap<String, String>();
 		extMap.put("image", "gif,jpg,jpeg,png,bmp");
@@ -136,5 +140,6 @@ public class KindEditorController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}  
-	   } 
+	   }
+	   
 }

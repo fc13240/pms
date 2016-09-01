@@ -60,4 +60,6 @@ public interface PatentDocMapper {
 	Attachment getAttachmentByAttachId(@Param("attachmentId")long attachmentId);
 	
 	void updateAttachmentImgUrl(Attachment attachment);
+	
+	List<PatentDoc> getPatentDocsByIds(List<Long> patentDocIds);
 }
