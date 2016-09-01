@@ -1513,7 +1513,7 @@ function loadImgs(){
  								 "<li id="+item.attachmentId+">"+
 									"<img src='"+httpImgUrl+"' alt='' width='200' height='150'/><br/>"+
 									"<div style='margin-left:60px'>"+
-									"<a href='javascript:updateImgName("+"&apos;"+item.attachmentId+"&apos;"+")'>"+item.caption+"</a>"+"|&nbsp"+
+									"<a href='javascript:void(0);'" + "id=link" + item.seqNo +"\"" + " onclick='updateImgName("+"&apos;"+item.attachmentId+"&apos;"+","+item.seqNo+")'>"+item.caption+"</a>"+"|&nbsp"+
 									"<a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a>"+
 									
 								"</div>"
@@ -1531,7 +1531,7 @@ function loadImgs(){
 }
 
 
-function updateImgName(value){
+function updateImgName(value,linkSeqNo){
 	var caption = prompt("请输入新名称", "");
 	if (caption != null && caption != "") {
 		$.ajax({
@@ -1539,7 +1539,7 @@ function updateImgName(value){
 			data:{"caption":caption,"attachmentId":value},
 			type: 'post', 
 			success: function(data) {
-				location.reload();
+					$("#link" + linkSeqNo).html(caption);
 			}
 		});
 	}
