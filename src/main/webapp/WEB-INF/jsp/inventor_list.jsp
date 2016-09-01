@@ -171,7 +171,7 @@
 						
 <script type="text/javascript">
 	function addInventor(){
-		var url = "<s:url value='/inventor/contactInventorAddForm.html'/>";
+		var url = "<s:url value='/inventor/inventorAddForm.html'/>";
 		location.href = url
 	}
 	

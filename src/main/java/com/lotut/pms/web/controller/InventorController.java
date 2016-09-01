@@ -53,7 +53,7 @@ public class InventorController {
 		this.friendService=friendService;
 	}
 	
-	@RequestMapping(path="/contactInventorAddForm")
+	@RequestMapping(path="/inventorAddForm")
 	public String contactInventorAddForm(){
 		return "inventor_create";
 		
@@ -77,7 +77,7 @@ public class InventorController {
 		
 	}
 	
-	@RequestMapping(path="/addContactInfo",method=RequestMethod.POST)
+	@RequestMapping(path="/addInventorInfo",method=RequestMethod.POST)
 	public String addContactInfo(@ModelAttribute CommonInventor inventor,Model model ){
 		int userId=PrincipalUtils.getCurrentUserId();
 		inventor.setUserId(userId);

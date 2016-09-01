@@ -184,7 +184,7 @@
 <script type="text/javascript">
 
 	function addAppPerson(){
-		var url = "<s:url value='/appPerson/contactAppPersonAddForm.html'/>";
+		var url = "<s:url value='/appPerson/appPersonAddForm.html'/>";
 		location.href = url
 	}
 	
