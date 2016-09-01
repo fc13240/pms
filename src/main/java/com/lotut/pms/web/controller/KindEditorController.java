@@ -43,6 +43,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.lotut.pms.constants.Settings;
+import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
 
 /**
@@ -57,6 +58,7 @@ public class KindEditorController {
 	@ResponseBody
 	public void fileUpload(HttpServletRequest request, @RequestParam("imgFile") Part imgFile,
 			HttpServletResponse response) throws ServletException, IOException, FileUploadException {
+		int userId=PrincipalUtils.getCurrentUserId();
 		ServletContext application = request.getSession().getServletContext();
 		String savePath = Settings.PATENTDOC_IMAGE_PATH;
 		
@@ -113,7 +115,7 @@ public class KindEditorController {
 		String fileName = imgFile.getSubmittedFileName();
 		String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-		String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
+		String newFileName = df.format(new Date()) + "_" +userId+"_"+ new Random().nextInt(1000) + "." + fileExt;
 		InputStream is = imgFile.getInputStream();
 		int BUFFER_SIZE = 8 * 1024;
 		byte[] buffer = new byte[BUFFER_SIZE];
