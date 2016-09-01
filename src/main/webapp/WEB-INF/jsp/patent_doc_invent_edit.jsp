@@ -92,7 +92,7 @@
 		</script> 
 </head>
 
-<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1);searGuide(this)" onbeforeunload="return '真的要关闭此窗口吗?'">
+<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingTemplate(1);searGuide(this)" >
 <style>
 .model1:hover .button{display:block}
 
@@ -135,7 +135,7 @@ margin: 1px 0 0 1px;}
 	                <!--center-top start -->
 	                <div class="center_top">
 	                    <div class="backedit">
-	                        <a href="<s:url value='/editor/patentDocList.html'/>" >返回撰写列表</a>
+	                        <a href="javascript:return void" onclick="returnSavePatentDoc(${patentDoc.patentDocId});">返回撰写列表</a>
 	                         <a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
 								<button class="button button-primary  button-rounded"  data-placement="bottom" >保存</button>
 							 </a>
@@ -1456,6 +1456,27 @@ function settingAbstractImg(value){
 }
 </script>
 <script type="text/javascript">
+function returnSavePatentDoc(value){
+	var name=$("#patentName").val();
+	var manual=$("#editorContent").val();
+	var abstractDescription=$("#editorContent7").val();
+	var rightClaim=$("#editorContent8").val();
+	var contactPerson = $("#contactPerson").val();
+	var otherInformation = $("#otherInformation").val();
+	$.ajax({
+		type: "POST",
+		url: "<s:url value='/editor/savePatentDoc.html'/>",
+		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value,"contactPerson":contactPerson,"otherInformation":otherInformation},
+		success: function(data){
+			location.href="<s:url value='/editor/patentDocList.html'/>";
+		},
+		error: function(){
+			location.href="<s:url value='/editor/patentDocList.html'/>";
+		}
+	});
+};
+
+
 function savePatentDoc(value){
 	var name=$("#patentName").val();
 	var manual=$("#editorContent").val();
