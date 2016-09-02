@@ -125,7 +125,7 @@ margin: 1px 0 0 1px;}
 						摘要附图</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件</div>
-					<div style="display:none;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
+					<div style="display:block;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
 						请求书</div>
 				</div>
 	
@@ -1850,15 +1850,16 @@ function submitInventorForm(){
 	var  modalInventorComment= $("#modalInventorComment").val();
 	var  patentDocId = ${patentDoc.patentDocId};
 	if(validateAppPersonFormWayTwo(modalInventorName,"inventorNameError")&
-	   validateAppPersonFormWayTwo(modalInventorName,"inventorNumberError")&
-	   validateAppPersonFormWayTwo(modalInventorName,"inventorNationalityError")&
-	   validateAppPersonFormWayTwo(modalInventorName,"inventorMobileError")
+	   validateAppPersonFormWayTwo(modalInventorNumber,"inventorNumberError")&
+	   validateAppPersonFormWayTwo(modalInventorNationality,"inventorNationalityError")&
+	   validateAppPersonFormWayTwo(modalInventorMobile,"inventorMobileError")
 	){
 		var formData={"inventorName":modalInventorName,"inventorNumber":modalInventorNumber,"inventorNationality":modalInventorNationality,"inventorMobile":modalInventorMobile,"inventorEmail":modalInventorEmail,"inventorComment":modalInventorComment,"patentDocId":patentDocId};
 		$.ajax({
 			type : "POST",
 			url : "<s:url value='/petition/addCommonInventor.html'/>",
 			data : formData,
+			async : false,
 			success : function (data){
 				var obj= $.parseJSON(data);
 				$("#inventorTab").empty();
@@ -1878,7 +1879,8 @@ function submitInventorForm(){
 			}
 		});
 		resetAddInventorModal();
-	};
+	}else{
+	}
 }
 
 function resetAddInventorModal(){
