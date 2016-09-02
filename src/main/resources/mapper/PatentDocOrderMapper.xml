@@ -15,22 +15,44 @@
 		</association>
 		<association property="owner" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 		
-		<association property="patentDocList" resultMap="com.lotut.pms.dao.mapper.PatentDocMapper.PatentDocMapper"/>
+		
 		
 	</resultMap>
 
 	<insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
-		insert into orders( amount, user, create_time) 
+		insert into patent_doc_orders( amount, user, create_time) 
 		values( #{amount}, #{owner.userId}, now())
 	</insert>
 	
-	<insert id="insertPatentOrderItems">
+	<insert id="insertOrderItems">
 		insert into patent_doc_order_items(order_id, patent_doc_id) values
 		<foreach item="orderItem" collection="orderItems" separator=",">
 			(#{orderItem.orderId}, #{orderItem.patentDocId})
 		</foreach>;
 	</insert>	
-
-
-
+	
+	<select id="getOrderById" parameterType="long" resultMap="PatentDocOrderMap">
+		SELECT o.order_id,o.create_time,o.pay_time,o.amount,o.order_status,pm.payment_method_id,pm.payment_method, 
+	u.user_id, u.username, u.name
+	FROM patent_doc_orders o 
+	LEFT JOIN payment_methods pm ON pm.payment_method_id = o.payment_method
+	JOIN users u ON o.user = u.user_id
+	WHERE o.order_id = #{orderId}		
+	</select>
+	
+		<update id="updateOrderStatus">
+		update patent_doc_orders set order_status = #{status}, payment_method=1
+			<if test="status == 1">
+			, pay_time = now()
+			</if> 
+		where order_id = #{orderId}
+	</update>
+	
+	<update id="updatePatentDocStatus">
+		update patent_documents set feeStatus = #{status}
+		where patent_doc_id in
+		<foreach item="patentDocId" collection="patentDocIdList" open="(" separator="," close=")">
+			#{patentDocId}
+		</foreach>			
+	</update>
 </mapper>

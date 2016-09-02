@@ -1,5 +1,18 @@
 package com.lotut.pms.service;
 
-public interface PatentDocWorkflowService {
+import java.util.List;
 
+import com.lotut.pms.domain.Fee;
+import com.lotut.pms.domain.Order;
+import com.lotut.pms.domain.PatentDoc;
+import com.lotut.pms.domain.PatentDocOrder;
+
+public interface PatentDocWorkflowService {
+	int createOrder(PatentDocOrder order, List<PatentDoc> PatentDocs);
+	
+	PatentDocOrder getOrderById(long orderId);
+	
+	int updateOrderStatus(long orderId, int status);
+	
+	void processOrderPaidSuccess(long orderId);
 }

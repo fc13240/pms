@@ -1,19 +1,26 @@
 package com.lotut.pms.web.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.Fee;
+import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.PatentDoc;
+import com.lotut.pms.domain.PatentDocOrder;
+import com.lotut.pms.domain.User;
 import com.lotut.pms.service.AppPersonService;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.InventorService;
@@ -49,10 +56,8 @@ public class PatentDocWorkflowController {
 	}
 	
 	
-	@SuppressWarnings("unused")
 	@RequestMapping(path="/createOrderForm")
 	public String creatOrder(@RequestParam("patentDocIds")List<Long> patentDocIds,Model model){
-			int userId = PrincipalUtils.getCurrentUserId();
 			List<PatentDoc> patentDocs = patentDocService.getPatentDocsByIds(patentDocIds);
 			List<PatentDoc> resultPatentDoc=new ArrayList<PatentDoc>();
 		 	Map<Integer,Integer> priceTab=new HashMap<Integer,Integer>();
@@ -71,4 +76,21 @@ public class PatentDocWorkflowController {
 			model.addAttribute("totalAmount", totalAmount);
 			return "patent_doc_order_create_form";
 }
+	
+	
+	
+	@RequestMapping(path="/createPatentDocOrder")
+	public String createOrder(@RequestParam("patentDocIds")Long[] patentDocIds, @ModelAttribute @Valid PatentDocOrder order, Model model) {
+		final int ALIPAY = 1;
+		User user = PrincipalUtils.getCurrentPrincipal();
+		order.setOwner(user);
+		List<PatentDoc> PatentDocs = patentDocService.getPatentDocsByIds(Arrays.asList(patentDocIds));
+		patentDocWorkflowService.createOrder(order, PatentDocs);
+		model.addAttribute("orderId", order.getId());
+		if (order.getPaymentMethod().getPaymentMethodId() == ALIPAY) {
+			return "redirect:/patentDocAlipay/pay.html";
+		}
+		
+		return "add_patent_success";
+	}
 }
