@@ -54,7 +54,7 @@
 					          <td style="text-align:center">${status.count + page.startIndex}</td>
 					          <td style="text-align:center"><c:out value="${user.username}"/></td>
 					          <td style="text-align:center"><c:out value="${user.name}"/></td>
-					          <td style="text-align:center"><a  href='javascript:sendTechPersonRequest(${user.userId});'>添加为技术员</a></td>
+					          <td style="text-align:center"><a  href='javascript:addOrUpdateTechPerson(${user.userId});'>添加为技术员</a></td>
 					        </tr>
 					      </c:forEach>
 					    </tbody>
@@ -69,9 +69,9 @@
 </div>
 
 <script type="text/javascript">
-	function sendTechPersonRequest(userId) {
+	function addOrUpdateTechPerson(userId) {
 		$.ajax({
-			url: "<s:url value='/employee/sendTechPersonRequest.html'/>?userId=" + userId,
+			url: "<s:url value='/employee/addOrUpdateTechPerson.html'/>?userId=" + userId,
 			success: function() {
 		   		$("<div>添加技术员成功</div>").dialog({
 		   			modal: true,

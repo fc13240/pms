@@ -54,7 +54,7 @@
 					          <td style="text-align:center">${status.count + page.startIndex}</td>
 					          <td style="text-align:center"><c:out value="${user.username}"/></td>
 					          <td style="text-align:center"><c:out value="${user.name}"/></td>
-					          <td style="text-align:center"><a  href='javascript:sendCustomerSupportRequest(${user.userId});'>添加为客服</a></td>
+					          <td style="text-align:center"><a  href='javascript:addOrUpdateCustomerSupport(${user.userId});'>添加为客服</a></td>
 					        </tr>
 					      </c:forEach>
 					    </tbody>
@@ -70,9 +70,9 @@
 
 
 <script type="text/javascript">
-	function sendCustomerSupportRequest(userId) {
+	function addOrUpdateCustomerSupport(userId) {
 		$.ajax({
-			url: "<s:url value='/employee/sendCustomerSupportRequest.html'/>?userId=" + userId,
+			url: "<s:url value='/employee/addOrUpdateCustomerSupport.html'/>?userId=" + userId,
 			success: function() {
 		   		$("<div>添加客服成功</div>").dialog({
 		   			modal: true,

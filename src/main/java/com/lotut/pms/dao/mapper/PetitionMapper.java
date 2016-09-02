@@ -45,4 +45,8 @@ public interface PetitionMapper {
 	void updatePatentDocAttachmentUrl(@Param("attachmentUrl") String attachmentUrl,@Param("patentDocId") Long patentDocId);
 	
 	String getPatentAttachmentFile(@Param("patentDocId") Long patentDocId);
+	
+	List<CommonAppPerson> getUserCommonAppPersons(int userId);
+	
+	List<CommonInventor> getUserCommonInventors(int userId);
 }

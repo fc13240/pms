@@ -53,7 +53,7 @@
 					          <td style="text-align:center">${status.count + page.startIndex}</td>
 					          <td style="text-align:center"><c:out value="${user.username}"/></td>
 					          <td style="text-align:center"><c:out value="${user.name}"/></td>
-					          <td style="text-align:center"><a  href='javascript:sendProxyOrgRequest(${user.userId});'>添加为合作机构</a></td>
+					          <td style="text-align:center"><a  href='javascript:addOrUpdateProxyOrg(${user.userId});'>添加为合作机构</a></td>
 					        </tr>
 					      </c:forEach>
 					    </tbody>
@@ -74,9 +74,9 @@
 
 
 <script type="text/javascript">
-	function sendProxyOrgRequest(orgUserId) {
+	function addOrUpdateProxyOrg(orgUserId) {
 		$.ajax({
-			url: "<s:url value='/employee/sendProxyOrgRequest.html'/>?orgUserId=" + orgUserId,
+			url: "<s:url value='/employee/addOrUpdateProxyOrg.html'/>?orgUserId=" + orgUserId,
 			success: function() {
 		   		$("<div>添加合作机构成功</div>").dialog({
 		   			modal: true,

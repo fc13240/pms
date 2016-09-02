@@ -136,4 +136,9 @@ public class UserServiceImpl implements UserService {
 	public List<ContactAddress> getContactAddressesByReceiver(int userId, String receiver) {
 		return userDao.getContactAddressesByReceiver(userId, receiver);
 	}
+
+	@Override
+	public List<User> searchUsers(String keyword,int userId) {
+		return userDao.searchUsers(keyword,userId);
+	}
 }

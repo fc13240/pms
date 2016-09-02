@@ -122,7 +122,7 @@ function loadingTemplateBYTab(sectionId){
 					 "<div class='title'>模板"+(i+1)+":"+item.templateTitle+"</div>"+
 					 	 "<div class='content'>"+
 			 				"<p class='small'>"+
-								"<span>"+item.patentDocSectionType.patentDocSectionDesc+"：</span><span>"+item.content+"</span>"+
+								"<span>"+item.content+"</span>"+
 							"</p>"+
 						"</p>"+
 					    "<div class='button' style='z-index:500000;width:100px;' onclick='templatebuttonclick("+i+","+item.patentDocSectionType.patentDocSectionId+")'>+使用模板</div>"+

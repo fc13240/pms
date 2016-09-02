@@ -108,6 +108,16 @@ public class PetitionMybatisDao extends SqlSessionDaoSupport implements Petition
 	public String getPatentAttachmentFile(Long patentDocId) {
 		return petitionMapper.getPatentAttachmentFile(patentDocId);
 	}
+
+	@Override
+	public List<CommonAppPerson> getUserCommonAppPersons(int userId) {
+		return petitionMapper.getUserCommonAppPersons(userId);
+	}
+
+	@Override
+	public List<CommonInventor> getUserCommonInventors(int userId) {
+		return petitionMapper.getUserCommonInventors(userId);
+	}
 	
 	
 
