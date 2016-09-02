@@ -26,7 +26,23 @@ public class PatentDoc {
 	private String contactPerson;
 	private String otherInformation;
 	private String attachmentUrl;
+	private long price;
+	private int feeStatus;
+	
 
+	
+	public long getPrice() {
+		return price;
+	}
+	public void setPrice(long price) {
+		this.price = price;
+	}
+	public int getFeeStatus() {
+		return feeStatus;
+	}
+	public void setFeeStatus(int feeStatus) {
+		this.feeStatus = feeStatus;
+	}
 	public String getOtherInformation() {
 		return otherInformation;
 	}

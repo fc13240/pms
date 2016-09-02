@@ -13,8 +13,16 @@ public class PatentDocOrder {
 	private Date createTime;
 	private Date payTime;
 	private PaymentMethod paymentMethod;
+	private List<PatentDoc> patentDocList;
 	
 	
+	
+	public List<PatentDoc> getPatentDocList() {
+		return patentDocList;
+	}
+	public void setPatentDocList(List<PatentDoc> patentDocList) {
+		this.patentDocList = patentDocList;
+	}
 	public int getOrderStatus() {
 		return orderStatus;
 	}

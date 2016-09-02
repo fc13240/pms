@@ -559,6 +559,8 @@ CREATE TABLE  IF NOT EXISTS patent_documents (
   patent_doc_status int NOT NULL COMMENT '文档状态',
   patent_doc_url VARCHAR(200) default null COMMENT '文档保存地址',
   contact_person VARCHAR(500) default null COMMENT '联系人',
+  price BIGINT DEFAULT NULL COMMENT '文档价格',
+  feeStatus int DEFAULT 0 COMMENT '缴费状态',
   PRIMARY KEY (patent_doc_id),
   KEY fk_patent_documents_patent_type (patent_type),
   KEY fk_patent_documents_doc_owner_id (user_id),
@@ -807,14 +809,27 @@ ALTER TABLE common_inventor MODIFY COLUMN inventor_name VARCHAR(20) NOT NULL;
 ALTER TABLE patent_documents ADD COLUMN attachment_url VARCHAR(100) COMMENT '请求书上传文件地址';
 ALTER TABLE patent_documents ADD COLUMN other_information VARCHAR(300) COMMENT '其他信息';
 
-create table if not exists patentDocOrders (
+create table if not exists patent_doc_orders (
 	order_id bigint primary key auto_increment,
 	order_status int not null default 0,
 	last_update_time timestamp default current_timestamp on update current_timestamp not null,
 	amount int not null,
 	user int not null,
 	create_time timestamp not null,
+	pay_time timestamp not null,
 	payment_method int,
 	constraint fk_patent_doc_orders_user foreign key(user) references users(user_id),
 	constraint fk_patent_doc_orders_payment_method foreign key(payment_method) references payment_methods(payment_method_id)
 ) auto_increment=123;
+
+CREATE TABLE IF NOT EXISTS patent_doc_order_items (
+	item_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	order_id BIGINT NOT NULL,
+	patent_doc_id BIGINT NOT NULL,
+	UNIQUE KEY uk_order_items_order_fee (order_id, patent_doc_id),
+	CONSTRAINT fk_patent_doc_order_items_order FOREIGN KEY(order_id) REFERENCES patent_doc_orders(order_id) ON DELETE CASCADE,
+	CONSTRAINT fk_patent_doc_order_items_patent_documents FOREIGN KEY(patent_doc_id) REFERENCES patent_documents(patent_doc_id)
+);
+
+ALTER TABLE patent_documents ADD COLUMN price BIGINT DEFAULT NULL;
+ALTER TABLE patent_documents ADD COLUMN feeStatus INT DEFAULT 0;

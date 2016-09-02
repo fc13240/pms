@@ -78,5 +78,9 @@
 		<constructor-arg ref="petitionDao"/>
 	</bean>
 
+	<bean id="patentDocWorkflowService" class="com.lotut.pms.service.impl.PatentDocWorkflowServiceImpl">
+		<constructor-arg ref="patentDocWorkflowDao"/>
+		<constructor-arg ref="patentDocDao"/>
+	</bean>
 	
 </beans>

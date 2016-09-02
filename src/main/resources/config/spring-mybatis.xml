@@ -104,7 +104,10 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
 
-
+	<bean id="patentDocWorkflowMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.PatentDocWorkflowMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
 	
 	
 	
@@ -185,5 +188,8 @@
 
 	</bean>	
 	
-	
+	<bean name="patentDocWorkflowDao" class="com.lotut.pms.dao.mybatis.PatentDocWorkflowMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="patentDocWorkflowMapper" ref="patentDocWorkflowMapper" />
+	</bean>	
 </beans>							
