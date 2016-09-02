@@ -97,8 +97,10 @@ public class PatentEditDocController {
 		patentDoc.setPatentType(patentType);
 		patentDocService.savePatentDoc(patentDoc);
 		long patentDocId=patentDoc.getPatentDocId();
-		List<CommonInventor> inventors = inventorService.getAllInventorsByUser(userId);
-		List<CommonAppPerson> appPersons= appPersonService.getAllAppPersonByUser(userId);
+		//List<CommonInventor> inventors = inventorService.getAllInventorsByUser(userId);
+		List<CommonInventor> inventors = petitionService.getUserCommonInventors(userId);
+		//List<CommonAppPerson> appPersons= appPersonService.getAllAppPersonByUser(userId);
+		List<CommonAppPerson> appPersons= petitionService.getUserCommonAppPersons(userId);
 		model.addAttribute("patentDocId",patentDocId);
 		model.addAttribute("patentDoc",patentDoc);
 		model.addAttribute("inventors",inventors);

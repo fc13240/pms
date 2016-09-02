@@ -43,4 +43,8 @@ public interface PetitionDao {
 	void updatePatentDocAttachmentUrl(String attachmentUrl,Long patentDocId);
 	
 	String getPatentAttachmentFile(Long patentDocId);
+	
+	List<CommonAppPerson> getUserCommonAppPersons(int userId);
+	
+	List<CommonInventor> getUserCommonInventors(int userId);
 }

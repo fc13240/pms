@@ -27,6 +27,10 @@ import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.PatentDocAppPerson;
 import com.lotut.pms.domain.PatentDocInventor;
+import com.lotut.pms.domain.UserAppPerson;
+import com.lotut.pms.domain.UserInventor;
+import com.lotut.pms.service.AppPersonService;
+import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PetitionService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
@@ -36,10 +40,14 @@ import com.lotut.pms.web.util.WebUtils;
 public class PetitionController {
 	
 	private PetitionService petitionService;
+	private AppPersonService appPersonService;
+	private InventorService inventorService;
 	
 	@Autowired
-	public PetitionController(PetitionService petitionService) {
+	public PetitionController(PetitionService petitionService,AppPersonService appPersonService,InventorService inventorService) {
 		this.petitionService = petitionService;
+		this.appPersonService = appPersonService;
+		this.inventorService = inventorService;
 	}
 	
 	@RequestMapping(path="/findAppPersonNameById")
@@ -71,6 +79,10 @@ public class PetitionController {
 		int userId = PrincipalUtils.getCurrentUserId();
 		commonAppPerson.setUserId(userId);
 		petitionService.addCommonAppPerson(commonAppPerson);
+		UserAppPerson userAppPerson=new UserAppPerson();
+		userAppPerson.setUserId(userId);
+		userAppPerson.setAppPersonId(commonAppPerson.getAppPersonId());
+		appPersonService.addUserAppPerson(userAppPerson);
 		List<CommonAppPerson> commonAppPersons = new ArrayList<>();
 		commonAppPersons.add(commonAppPerson);
 		petitionService.addPatentDocAppPerson(commonAppPersons, patentDocId,userId);
@@ -88,6 +100,10 @@ public class PetitionController {
 		int userId = PrincipalUtils.getCurrentUserId();
 		commonInventor.setUserId(userId);
 		petitionService.addCommonInventor(commonInventor);
+		UserInventor userInventor=new UserInventor();
+		userInventor.setUserId(userId);
+		userInventor.setInventorId(commonInventor.getInventorId());
+		inventorService.addUserInventor(userInventor);
 		List<CommonInventor> commonInventors =new ArrayList<>();
 		commonInventors.add(commonInventor);
 		petitionService.addPatentDocInventor(patentDocId, commonInventors, userId);

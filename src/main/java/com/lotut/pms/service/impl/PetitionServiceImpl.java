@@ -101,4 +101,14 @@ public class PetitionServiceImpl implements PetitionService {
 	public String getPatentAttachmentFile(Long patentDocId) {
 		return petitionDao.getPatentAttachmentFile(patentDocId);
 	}
+
+	@Override
+	public List<CommonAppPerson> getUserCommonAppPersons(int userId) {
+		return petitionDao.getUserCommonAppPersons(userId);
+	}
+
+	@Override
+	public List<CommonInventor> getUserCommonInventors(int userId) {
+		return petitionDao.getUserCommonInventors(userId);
+	}
 }

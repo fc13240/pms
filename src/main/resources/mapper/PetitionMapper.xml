@@ -3,7 +3,44 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.lotut.pms.dao.mapper.PetitionMapper">
+<mapper namespace="com.lotut.pms.dao.mapper.PetitionMapper">
+  <resultMap type="CommonAppPerson" id="AppPersonWithShareUsers">
+  	<id property="appPersonId" column="app_person_id"/>
+		<result property="name" column="name"/>
+		<result property="idNumber" column="id_number"/>
+		<result property="postcodeAddress" column="postcode_address"/>
+		<result property="otherInfo" column="other_information"/>
+		<result property="feeReduceTransactionStatus" column="fee_reduce_transaction_status"/>
+		<result property="transactionIdentityId" column="transaction_identity_id"/>
+		<result property="transactionYear" column="transaction_year"/>
+		<result property="appPersonUrl" column="app_person_attachment_file"/>
+		<result property="userId" column="user_id"/>
+		<result property="proxyUrl" column="proxy_file"/>
+		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
+  </resultMap>
+  
+  
+  <resultMap type="CommonInventor" id="InventorWithShareUsers">
+			<id property="inventorId" column="inventor_id"/>
+			<result property="inventorName" column="inventor_name"/>
+			<result property="inventorNumber" column="inventor_id_number"/>
+			<result property="inventorNationality" column="inventor_nationality"/>
+			<result property="inventorMobile" column="inventor_mobile"/>
+			<result property="inventorEmail" column="inventor_email"/>
+			<result property="inventorComment" column="inventor_other_information"/>
+			<result property="userId" column="user_id"/>
+			<result property="inventorUrl" column="inventor_attachment_file"/>
+			<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
+	</resultMap>
+  	<select id="getUserCommonAppPersons" parameterType="int" resultMap="AppPersonWithShareUsers">
+    	select un.* ,u.user_id  ,u.username from 	
+  	(select p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
+  	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
+  		p.postcode_address ,p.other_information FROM common_app_person p WHERE app_person_id in		
+ 		(select app_person from user_app_person where user =#{userId})) as un  join user_app_person up on un.app_person_id = up.app_person
+		  	join users u on up.user = u.user_id 
+  	</select> 
+  
 	<select id="findAppPersonNameById" resultType="CommonAppPerson">
   		select app_person_id as appPersonId,name as name,id_number as idNumber,
   		postcode_address as postcodeAddress,other_information as otherInfo,transaction_identity_id as transactionIdentityId,
@@ -13,6 +50,17 @@
 			#{appPersonId}
 		</foreach>
   	</select>
+  	
+  	
+  	<select id="getUserCommonInventors" parameterType="int" resultMap="InventorWithShareUsers">
+  	   select un.* ,u.user_id  ,u.username from 	
+  	(select p.inventor_id ,p.inventor_name,p.inventor_id_number,p.inventor_nationality ,p.inventor_mobile ,p.inventor_email,p.inventor_attachment_file,
+  		p.inventor_other_information  from common_inventor p where inventor_id in		
+ 		(select inventor from user_inventor where user =#{userId})) as un  join user_inventor up ON un.inventor_id = up.inventor
+		  	join users u on up.user = u.user_id
+  	</select>
+  	
+  	
   	
   	<select id="findInventorNameById" resultType="CommonInventor">
 		select inventor_id as inventorId ,inventor_name as inventorName,inventor_id_number as inventorNumber,
