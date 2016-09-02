@@ -46,4 +46,6 @@ public interface UserDao {
 	List<User> getAllUser();
 	
 	List<ContactAddress> getContactAddressesByReceiver(int userId,String receiver);
+
+	List<User> searchUsers(String keyword,int userId);
 }

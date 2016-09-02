@@ -51,7 +51,7 @@
 					          <td style="text-align:center">${status.count + page.startIndex}</td>
 					          <td style="text-align:center"><c:out value="${user.username}"/></td>
 					          <td style="text-align:center"><c:out value="${user.name}"/></td>
-					          <td style="text-align:center"><a  href='javascript:sendProcessPersonRequest(${user.userId});'>添加为流程员</a></td>
+					          <td style="text-align:center"><a  href='javascript:addOrUpdateProcessPerson(${user.userId});'>添加为流程员</a></td>
 					        </tr>
 					      </c:forEach>
 					    </tbody>
@@ -69,9 +69,9 @@
 
 
 <script type="text/javascript">
-	function sendProcessPersonRequest(userId) {
+	function addOrUpdateProcessPerson(userId) {
 		$.ajax({
-			url: "<s:url value='/employee/sendProcessPersonRequest.html'/>?userId=" + userId,
+			url: "<s:url value='/employee/addOrUpdateProcessPerson.html'/>?userId=" + userId,
 			success: function() {
 		   		$("<div>添加流程员成功</div>").dialog({
 		   			modal: true,
