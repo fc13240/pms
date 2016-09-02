@@ -818,3 +818,17 @@ create table if not exists patentDocOrders (
 	constraint fk_patent_doc_orders_user foreign key(user) references users(user_id),
 	constraint fk_patent_doc_orders_payment_method foreign key(payment_method) references payment_methods(payment_method_id)
 ) auto_increment=123;
+
+CREATE TABLE patent_doc_workflow_history(
+	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	patent_doc_id BIGINT NOT NULL COMMENT '文档编号',
+	user_id INT NOT NULL COMMENT '创建者',
+	user_name VARCHAR(50) NOT NULL,
+	ACTION VARCHAR(100) NOT NULL COMMENT'操作',
+	action_time TIMESTAMP NOT NULL COMMENT '操作创建时间',
+	CONSTRAINT fk_patent_doc_workflow_history_user_id FOREIGN KEY idx_patent_doc_workflow_history_user_id(user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+	CONSTRAINT fk_patent_doc_workflow_history_patent_doc_id FOREIGN KEY fk_patent_doc_workflow_history_patent_doc_id(patent_doc_id) REFERENCES
+	  patent_documents(patent_doc_id) ON DELETE CASCADE，
+	
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
