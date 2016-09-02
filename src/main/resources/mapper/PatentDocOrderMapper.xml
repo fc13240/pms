@@ -14,7 +14,7 @@
 			<result property="paymentMethod" column="payment_method"/>
 		</association>
 		<association property="owner" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
-		
+		<collection property="patentDocList" resultMap="com.lotut.pms.dao.mapper.PatentDocMapper.PatentDocMap"/>
 		
 		
 	</resultMap>
@@ -32,12 +32,13 @@
 	</insert>	
 	
 	<select id="getOrderById" parameterType="long" resultMap="PatentDocOrderMap">
-		SELECT o.order_id,o.create_time,o.pay_time,o.amount,o.order_status,pm.payment_method_id,pm.payment_method, 
-	u.user_id, u.username, u.name
-	FROM patent_doc_orders o 
-	LEFT JOIN payment_methods pm ON pm.payment_method_id = o.payment_method
-	JOIN users u ON o.user = u.user_id
-	WHERE o.order_id = #{orderId}		
+		SELECT *
+		FROM patent_doc_orders o 
+		LEFT JOIN payment_methods pm ON pm.payment_method_id = o.payment_method
+		LEFT JOIN patent_doc_order_items pit ON o.order_id=pit.order_id
+		LEFT JOIN patent_documents p ON p.patent_doc_id=pit.patent_doc_id
+		JOIN users u ON o.user = u.user_id
+		WHERE o.order_id = #{orderId}
 	</select>
 	
 		<update id="updateOrderStatus">
@@ -48,7 +49,7 @@
 		where order_id = #{orderId}
 	</update>
 	
-	<update id="updatePatentDocStatus">
+	<update id="updatePatentDocStatus" >
 		update patent_documents set feeStatus = #{status}
 		where patent_doc_id in
 		<foreach item="patentDocId" collection="patentDocIdList" open="(" separator="," close=")">

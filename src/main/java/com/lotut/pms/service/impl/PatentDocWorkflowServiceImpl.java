@@ -42,7 +42,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 			 int patentType=patentDoc.getPatentType();
 			totalAmount+=priceTab.get(patentType);
 		}
-		order.setAmount(totalAmount);
+		order.setAmount(1);
 		patentDocWorkflowDao.insertOrder(order);
 		List<PatentDocOrderItem> orderItems = new ArrayList<>(PatentDocs.size());
 		
@@ -84,7 +84,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 			patentDocIdList.add(patentDoc.getPatentDocId());
 		}
 		
-		int feeUpdateCount = patentDocWorkflowDao.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		//int feeUpdateCount = patentDocWorkflowDao.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 	}
 	
 }

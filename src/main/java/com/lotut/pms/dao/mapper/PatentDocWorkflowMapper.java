@@ -16,7 +16,7 @@ public interface PatentDocWorkflowMapper {
 	PatentDocOrder getOrderById(long orderId);
 	
 	
-	int updateOrderStatus(long orderId, int status);
+	int updateOrderStatus(@Param("orderId")long orderId, @Param("status")int status);
 	
 	int updatePatentDocStatus(@Param("patentDocIdList")List<Long> patentDocIds, @Param("status")int status);
 }
