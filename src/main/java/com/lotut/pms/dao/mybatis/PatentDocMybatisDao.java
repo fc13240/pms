@@ -206,4 +206,11 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	public void updateAttachmentImgUrl(Attachment attachment) {
 		patentDocMapper.updateAttachmentImgUrl(attachment);
 	}
+
+
+
+	@Override
+	public List<PatentDoc> getPatentDocsByIds(List<Long> patentDocIds) {
+		return patentDocMapper.getPatentDocsByIds(patentDocIds);
+	}
 }

@@ -194,6 +194,12 @@ public class PatentDocServiceImp implements PatentDocService{
 		}
 
 
+		@Override
+		public List<PatentDoc> getPatentDocsByIds(List<Long> patentDocIds) {
+			return patentDocDao.getPatentDocsByIds(patentDocIds);
+		}
+
+
 
 
 }

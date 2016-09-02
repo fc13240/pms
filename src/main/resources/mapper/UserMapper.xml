@@ -114,7 +114,22 @@
 				ca.district, d.name as districtName,
 					 ca.detail_address as detailAddress, ca.phone, ca.email, ca.is_default defaultAddress
 		 from contact_addresses ca join provinces p on ca.province = p.id
-			join cities c on ca.city = c.id join districts d on ca.district = d.id
+		 	join cities c on ca.city = c.id join districts d on ca.district = d.id
 		 where ca.user = #{userId} and ca.receiver like #{receiver}
+	</select>
+	
+	<select id="searchUsers" resultMap="UserResultMap">
+		<if test="keyword != null and keyword != ''">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+		select * from (	
+		select u.user_id, u.username, u.name
+		  from users u		
+		<where>
+			<if test="keyword != null and keyword != ''">
+				u.username like #{keyword_pattern} or u.name like #{keyword_pattern}
+			</if>
+		</where>
+		) rs where rs.user_id != #{userId}
 	</select>
 </mapper>

@@ -54,7 +54,12 @@
                                 <a href="javascript:return void" onclick="batchShare()" >
 								<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
 								</a>
-						  				</td>	  										  									  				
+						  				</td>
+<!-- 						  		<td>
+		                            <a href="javascript:return void" onclick="batchEntrust()" >
+									<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量委托</button>
+									</a>
+						  		</td> -->		  										  									  				
 						  			</tr>
 						  		</table>		
 							  </div>
@@ -83,7 +88,7 @@
 							<c:forEach items="${patentDocs}" var="patentDoc" varStatus="status">
 							  <tr>
 							  	<td class="center" style="text-align:center" width="10px"><label class="pos-rel"> <span class="batch-share-item">
-								<input type="checkbox" class="check-item" patentDocId="<c:out value='${patentDoc.patentDocId}'/>">
+								<input type="checkbox" class="check-item" patentDocId="<c:out value='${patentDoc.patentDocId}'/>" patentDocType="<c:out value='${patentDoc.patentType}'/>">
 								<span class="lbl"></span></label>
 								</td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
@@ -256,6 +261,26 @@ function batchShare() {
 	}		
 	var patentDocIds = uniquePatentNos.join(",");	
 	location.href = "<s:url value='/editor/showFriends.html'/>?patentDocIds=" + patentDocIds;
+}
+
+
+
+function batchEntrust() {
+	var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+	var uniquePatentNos = []
+	if (!patentSelected) {
+		formutil.alertMessage('请选择专利');
+		
+		return;
+	}
+	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
+	for (var i = 0; i < patents_checked.length; i++) {
+		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+			uniquePatentNos.push(patents_checked[i]);
+		}
+	}		
+	var patentDocIds = uniquePatentNos.join(",");	
+	location.href = "<s:url value='/editor/createOrder.html'/>?patentDocIds=" + patentDocIds;
 }
 
 

@@ -33,7 +33,7 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
-					<form action="<s:url value='/inventor/updContactInfo.html'/>" method="post" onsubmit="return check()">
+					<form action="<s:url value='/inventor/updInventorInfo.html'/>" method="post" onsubmit="return check()">
 					  <se:csrfInput/>
 			       	<h5>姓名:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece" type="text" value="${inventor.inventorName }" name="inventorName" required onblur="validateInfoNumber(this.value)"/>

@@ -117,28 +117,28 @@
 	</insert>
 	
 	
-	<delete id="deleteCustomerSupport" >
+	<delete id="deleteCustomerSupport"  parameterType="int">
 		delete from group_members where username=(select username from users where user_id = 
 			(select user_id from customer_supports where id=#{id}))	and group_id=
 			(SELECT group_id FROM group_authorities WHERE authority="ROLE_CUSTOMER_SUPPORT");	
 		delete from customer_supports  where id=#{id}
 	</delete>
 	
-	<delete id="deleteTechPerson" >
+	<delete id="deleteTechPerson" parameterType="int">
 		delete from group_members where username=(select username from users where user_id = 
 			(select user_id from tech_person where id=#{id}))	and group_id=
 			(SELECT group_id FROM group_authorities WHERE authority="ROLE_TECH");
 		delete from tech_person  where id=#{id} 	
 	</delete>
 	
-	<delete id="deleteProcessPerson" >
+	<delete id="deleteProcessPerson" parameterType="int">
 		delete from group_members where username=(select username from users where user_id = 
 			(select user_id from process_person where id=#{id}))	and group_id=
 			(SELECT group_id FROM group_authorities WHERE authority="ROLE_PROCESS");
 		delete from process_person  where id=#{id} 	
 	</delete>
 	
-	<delete id="deleteProxyOrg" >
+	<delete id="deleteProxyOrg"  parameterType="int">
 		delete from group_members where username=(select username from users where user_id = 
 			(select org_user_id from proxy_org where org_id=#{orgId}))	and group_id=
 			(SELECT group_id FROM group_authorities WHERE authority="ROLE_PROXY_ORG");

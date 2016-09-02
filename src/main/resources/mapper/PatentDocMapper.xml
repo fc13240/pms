@@ -179,4 +179,14 @@
 	<update id="updateAttachmentImgUrl" parameterType="Attachment">
 		update patent_attachment set attachment_url=#{attachmentUrl} where attachment_id=${attachmentId}
 	</update>
+	
+	
+	<select id="getPatentDocsByIds" parameterType="list" resultMap="PatentDocMap">
+		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
+		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,contact_person,attachment_url,other_information from patent_documents where  patent_doc_id in
+			<foreach item="patentDocId" collection="patentDocIds"
+			     open="(" separator="," close=")">
+			   #{patentDocId}
+			</foreach>		 
+	</select>
 </mapper>

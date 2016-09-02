@@ -93,7 +93,7 @@
 		</script> 
 </head>
 
-<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingInterfaceTemplate(1);searGuide(this)" onbeforeunload="return '真的要关闭此窗口吗?'">
+<body style="background-color: #FFF" id="dlstCircleArticle" onload="loadingInterfaceTemplate(1);searGuide(this)" >
 <style>
 .model1:hover .button{display:block}
 .picL9 li{
@@ -143,7 +143,7 @@ margin: 1px 0 0 1px;}
 	                <!--center-top start -->
 	                <div class="center_top">
 	                    <div class="backedit">
-	                        <a href="<s:url value='/editor/patentDocList.html'/>" >返回撰写列表</a>
+	                        <a href="javascript:return void" onclick="returnSavePatentDoc(${patentDoc.patentDocId});" >返回撰写列表</a>
 	                         <a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
 								<button class="button button-primary  button-rounded"  data-placement="bottom" >保存</button>
 							 </a>
@@ -1211,6 +1211,26 @@ function settingAbstractImg(value){
 }
 </script>
 <script type="text/javascript">
+function returnSavePatentDoc(value){
+	var name=$("#patentName").val();
+	var manual=$("#editorContent").val();
+	var abstractDescription=$("#editorContent7").val();
+	var rightClaim=$("#editorContent8").val();
+	var contactPerson = $("#contactPerson").val();
+	var otherInformation = $("#otherInformation").val();
+	$.ajax({
+		type: "POST",
+		url: "<s:url value='/editor/savePatentDoc.html'/>",
+		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":value,"contactPerson":contactPerson,"otherInformation":otherInformation},
+		success: function(data){
+			location.href="<s:url value='/editor/patentDocList.html'/>";
+		},
+		error: function(){
+			location.href="<s:url value='/editor/patentDocList.html'/>";
+		}
+	});
+};
+
 function savePatentDoc(value){
 	var name=$("#patentName").val();
 	var manual=$("#editorContent").val();
@@ -1269,7 +1289,7 @@ function loadImgs(){
  								 "<li id="+item.attachmentId+">"+
 									"<img src='"+httpImgUrl+"' alt='' width='200' height='150'/><br/>"+
 									"<div style='margin-left:60px'>"+
-									"<a href='javascript:updateImgName("+"&apos;"+item.attachmentId+"&apos;"+")'>"+item.caption+"</a>"+"|&nbsp"+
+									"<a href='javascript:void(0);'" + "id=link" + item.seqNo  + " onclick='updateImgName("+"&apos;"+item.attachmentId+"&apos;"+","+item.seqNo+")'>"+item.caption+"</a>"+"|&nbsp"+
 									"<a href='javascript:delectImg("+item.attachmentId+")'>删除图片</a>"+
 									
 								"</div>"
@@ -1370,7 +1390,7 @@ function loadImgs(){
 		});		
 	}
 	
-	function updateImgName(value){
+	function updateImgName(value,linkSeqNo){
 		var caption = prompt("请输入新名称", "");
 		if (caption != null && caption != "") {
 			$.ajax({
@@ -1378,7 +1398,7 @@ function loadImgs(){
 				data:{"caption":caption,"attachmentId":value},
 				type: 'post', 
 				success: function(data) {
-					location.reload();
+						$("#link" + linkSeqNo).html(caption);
 				}
 			});
 		}

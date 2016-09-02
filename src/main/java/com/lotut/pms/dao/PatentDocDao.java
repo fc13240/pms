@@ -61,4 +61,6 @@ public interface PatentDocDao {
 	
 	void updateAttachmentImgUrl(Attachment attachment);
 	
+	List<PatentDoc> getPatentDocsByIds(List<Long> patentDocIds);
+	
 }

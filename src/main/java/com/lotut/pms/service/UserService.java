@@ -50,4 +50,6 @@ public interface UserService {
 	List<User> getAllUser();
 	
 	List<ContactAddress> getContactAddressesByReceiver(int userId,String receiver);
+
+	List<User> searchUsers(String keyword,int userId);
 }

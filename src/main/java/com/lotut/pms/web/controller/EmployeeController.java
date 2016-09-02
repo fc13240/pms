@@ -5,11 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.lotut.pms.domain.CustomerSupport;
 import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.domain.User;
@@ -17,6 +14,7 @@ import com.lotut.pms.domain.ProcessPerson;
 import com.lotut.pms.domain.ProxyOrg;
 import com.lotut.pms.service.EmployeeService;
 import com.lotut.pms.service.FriendService;
+import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
 
 
@@ -25,11 +23,13 @@ import com.lotut.pms.util.PrincipalUtils;
 public class EmployeeController {
 	private EmployeeService employeeService;
 	private FriendService friendService;
+	private UserService userService;
 	
 	@Autowired
-	public EmployeeController(EmployeeService employeeService, FriendService friendService) {
+	public EmployeeController(EmployeeService employeeService, FriendService friendService,UserService userService) {
 		this.employeeService = employeeService;
 		this.friendService = friendService;
+		this.userService = userService;
 	}	
 	
 	
@@ -67,62 +67,60 @@ public class EmployeeController {
 	
 	
 	@RequestMapping(path="/searchCustomerSupport", method=RequestMethod.GET)
-	public String searchCustomerSupport(Model model) {
+	public String searchCustomerSupport() {
 		return "customer_support_add";
 	}
 	
 	@RequestMapping(path="/searchTechPerson", method=RequestMethod.GET)
-	public String searchTechPerson(Model model) {
+	public String searchTechPerson() {
 		return "tech_person_add";
 	}
 	
 	@RequestMapping(path="/searchProcessPerson", method=RequestMethod.GET)
-	public String searchProcessPerson(Model model) {
+	public String searchProcessPerson() {
 		return "process_person_add";
 	}
 	
 	@RequestMapping(path="/searchProxyOrg", method=RequestMethod.GET)
-	public String searchProxyOrg(Model model) {
+	public String searchProxyOrg() {
 		return "proxy_org_add";
 	}
 	
 	
 	@RequestMapping(path="/searchCustomerSupportUsers", method=RequestMethod.GET)
-	public String searchCustomerSupportUsers(@RequestParam(name="keyword") String keyword, Model model) {
-		List<User> resultUsers = friendService.searchFriends(keyword);
+	public String searchCustomerSupportUsers(String keyword, Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> resultUsers = userService.searchUsers(keyword,userId);
 		model.addAttribute("users", resultUsers);
 		return "customer_support_add";
 	}
 	
 	@RequestMapping(path="/searchTechPersonUsers", method=RequestMethod.GET)
-	public String searchTechPersonUsers(@RequestParam(name="keyword") String keyword, Model model) {
-		List<User> resultUsers = friendService.searchFriends(keyword);
+	public String searchTechPersonUsers(String keyword, Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> resultUsers = userService.searchUsers(keyword,userId);
 		model.addAttribute("users", resultUsers);
 		return "tech_person_add";
 	}
 	
 	@RequestMapping(path="/searchProcessPersonUsers", method=RequestMethod.GET)
-	public String searchProcessPersonUsers(@RequestParam(name="keyword") String keyword, Model model) {
-		List<User> resultUsers = friendService.searchFriends(keyword);
+	public String searchProcessPersonUsers(String keyword, Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> resultUsers = userService.searchUsers(keyword,userId);
 		model.addAttribute("users", resultUsers);
 		return "process_person_add";
 	}
 	
 	@RequestMapping(path="/searchProxyOrgUsers", method=RequestMethod.GET)
-	public String searchProxyOrgUsers(@RequestParam(name="keyword") String keyword, Model model) {
-		List<User> resultUsers = friendService.searchFriends(keyword);
-		for (User user:resultUsers) {
-			if(user.getUserId() == PrincipalUtils.getCurrentUserId()){
-				resultUsers.remove(user);
-				break;
-			}
-		}
+	public String searchProxyOrgUsers(String keyword, Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> resultUsers = userService.searchUsers(keyword,userId);
 		model.addAttribute("users", resultUsers);
 		return "proxy_org_add";
 	}
 	
 	@RequestMapping(path="/searchCustomerSupportFriends", method=RequestMethod.GET)
-	public String searchCustomerSupportFriends(@RequestParam("keyword") String keyword, Model model) {
+	public String searchCustomerSupportFriends(String keyword, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<User> resultUsers = friendService.findFriendsByUserId(userId,keyword);
 		model.addAttribute("users", resultUsers);
@@ -130,7 +128,7 @@ public class EmployeeController {
 	}	
 	
 	@RequestMapping(path="/searchTechPersonFriends", method=RequestMethod.GET)
-	public String searchTechPersonFriends(@RequestParam("keyword") String keyword, Model model) {
+	public String searchTechPersonFriends(String keyword, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<User> resultUsers = friendService.findFriendsByUserId(userId,keyword);
 		model.addAttribute("users", resultUsers);
@@ -138,7 +136,7 @@ public class EmployeeController {
 	}	
 	
 	@RequestMapping(path="/searchProcessPersonFriends", method=RequestMethod.GET)
-	public String searchProcessPersonFriends(@RequestParam("keyword") String keyword, Model model) {
+	public String searchProcessPersonFriends(String keyword, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<User> resultUsers = friendService.findFriendsByUserId(userId,keyword);
 		model.addAttribute("users", resultUsers);
@@ -146,46 +144,40 @@ public class EmployeeController {
 	}	
 	
 	@RequestMapping(path="/searchProxyOrgFriends", method=RequestMethod.GET)
-	public String searchProxyOrgFriends(@RequestParam("keyword") String keyword, Model model) {
+	public String searchProxyOrgFriends(String keyword, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<User> resultUsers = friendService.findFriendsByUserId(userId,keyword);
-		for (User user:resultUsers) {
-			if(user.getUserId() == PrincipalUtils.getCurrentUserId()){
-				resultUsers.remove(user);
-				break;
-			}
-		}
 		model.addAttribute("users", resultUsers);
 		return "proxy_org_add";
 	}
 	
 	
-	@RequestMapping(path="/sendCustomerSupportRequest", method=RequestMethod.GET)
-	public String addOrUpdateCustomerSupport(@ModelAttribute("customerSupport")CustomerSupport customerSupport,Model model) {
+	@RequestMapping(path="/addOrUpdateCustomerSupport", method=RequestMethod.GET)
+	public String addOrUpdateCustomerSupport(CustomerSupport customerSupport) {
 		int proxyOrgId = PrincipalUtils.getCurrentUserId();
 		customerSupport.setProxyOrgId(proxyOrgId);
 		employeeService.addOrUpdateCustomerSupport(customerSupport);
 		return "customer_support_add";
 	}
 	
-	@RequestMapping(path="/sendTechPersonRequest", method=RequestMethod.GET)
-	public String addOrUpdateTechPerson(@ModelAttribute("techPerson")TechPerson techPerson,Model model) {
+	@RequestMapping(path="/addOrUpdateTechPerson", method=RequestMethod.GET)
+	public String addOrUpdateTechPerson(TechPerson techPerson) {
 		int proxyOrgId = PrincipalUtils.getCurrentUserId();
 		techPerson.setProxyOrgId(proxyOrgId);
 		employeeService.addOrUpdateTechPerson(techPerson);
 		return "tech_person_add";
 	}
 	
-	@RequestMapping(path="/sendProcessPersonRequest", method=RequestMethod.GET)
-	public String addOrUpdateProcessPerson(@ModelAttribute("processPerson")ProcessPerson processPerson,Model model) {
+	@RequestMapping(path="/addOrUpdateProcessPerson", method=RequestMethod.GET)
+	public String addOrUpdateProcessPerson(ProcessPerson processPerson) {
 		int proxyOrgId = PrincipalUtils.getCurrentUserId();
 		processPerson.setProxyOrgId(proxyOrgId);
 		employeeService.addOrUpdateProcessPerson(processPerson);
 		return "process_person_add";
 	}
 	
-	@RequestMapping(path="/sendProxyOrgRequest", method=RequestMethod.GET)
-	public String addOrUpdateProxyOrg(@ModelAttribute("proxyOrg")ProxyOrg proxyOrg,Model model) {
+	@RequestMapping(path="/addOrUpdateProxyOrg", method=RequestMethod.GET)
+	public String addOrUpdateProxyOrg(ProxyOrg proxyOrg) {
 		int parentOrgId = employeeService.getParentOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		proxyOrg.setParentOrgId(parentOrgId);
 		employeeService.addOrUpdateProxyOrg(proxyOrg);
@@ -193,34 +185,26 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(path="/deleteCustomerSupport", method=RequestMethod.GET)
-	public String deleteCustomerSupport(@RequestParam("id")int id,Model model) {
-		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+	public String deleteCustomerSupport(int id) {
 		employeeService.deleteCustomerSupport(id);
-		model.addAttribute("proxyOrgId",proxyOrgId);
 		return "redirect:/employee/getCustomerSupportList.html";
 	}
 	
 	@RequestMapping(path="/deleteTechPerson", method=RequestMethod.GET)
-	public String deleteTechPerson(@RequestParam("id")int id,Model model) {
-		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+	public String deleteTechPerson(int id) {
 		employeeService.deleteTechPerson(id);
-		model.addAttribute("proxyOrgId",proxyOrgId);
 		return "redirect:/employee/getTechPersonList.html";
 	}
 	
 	@RequestMapping(path="/deleteProcessPerson", method=RequestMethod.GET)
-	public String deleteProcessPerson(@RequestParam("id")int id,Model model) {
-		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+	public String deleteProcessPerson(int id) {
 		employeeService.deleteProcessPerson(id);
-		model.addAttribute("proxyOrgId",proxyOrgId);
 		return "redirect:/employee/getProcessPersonList.html";
 	}
 	
 	@RequestMapping(path="/deleteProxyOrg", method=RequestMethod.GET)
-	public String deleteProxyOrg(@RequestParam("orgId")int orgId,Model model) {
-		int parentOrgId = employeeService.getParentOrgIdByUserId(PrincipalUtils.getCurrentUserId());
+	public String deleteProxyOrg(int orgId) {
 		employeeService.deleteProxyOrg(orgId);
-		model.addAttribute("parentOrgId",parentOrgId);
 		return "redirect:/employee/getProxyOrgList.html";
 	}
 	

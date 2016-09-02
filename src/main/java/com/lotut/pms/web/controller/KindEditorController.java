@@ -43,6 +43,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.lotut.pms.constants.Settings;
+import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
 
 /**
@@ -57,6 +58,7 @@ public class KindEditorController {
 	@ResponseBody
 	public void fileUpload(HttpServletRequest request, @RequestParam("imgFile") Part imgFile,
 			HttpServletResponse response) throws ServletException, IOException, FileUploadException {
+		int userId=PrincipalUtils.getCurrentUserId();
 		ServletContext application = request.getSession().getServletContext();
 		String savePath = Settings.PATENTDOC_IMAGE_PATH;
 		
@@ -66,8 +68,12 @@ public class KindEditorController {
 		
 		// 文件保存目录URL
 		/*String saveUrl = request.getContextPath() + "/patentDocImage/";*/
+		StringBuffer url = request.getRequestURL();  
+		String tempContextUrl = url.delete(url.length() - request.getRequestURI().length(), url.length()).append("/").toString();
 		
-		String saveUrl = basePath + "/editorPic/";
+		
+		
+		String saveUrl = tempContextUrl + "editorPic/";
 		// 定义允许上传的文件扩展名
 		HashMap<String, String> extMap = new HashMap<String, String>();
 		extMap.put("image", "gif,jpg,jpeg,png,bmp");
@@ -109,7 +115,7 @@ public class KindEditorController {
 		String fileName = imgFile.getSubmittedFileName();
 		String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-		String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
+		String newFileName = df.format(new Date()) + "_" +userId+"_"+ new Random().nextInt(1000) + "." + fileExt;
 		InputStream is = imgFile.getInputStream();
 		int BUFFER_SIZE = 8 * 1024;
 		byte[] buffer = new byte[BUFFER_SIZE];
@@ -136,5 +142,6 @@ public class KindEditorController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}  
-	   } 
+	   }
+	   
 }
