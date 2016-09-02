@@ -124,7 +124,7 @@ margin: 1px 0 0 1px;}
 						摘要附图</div>
 					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
 						上传附件</div>
-					<div style="display:none;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
+					<div style="display:block;" class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
 						请求书</div>
 				</div>
 	
@@ -1824,7 +1824,7 @@ function updateImgName(value,linkSeqNo){
 		if(validateAppPersonFormWayTwo(modalInventorName,"inventorNameError")&
 		   validateAppPersonFormWayTwo(modalInventorNumber,"inventorNumberError")&
 		   validateAppPersonFormWayTwo(modalInventorNationality,"inventorNationalityError")&
-		   validateAppPersonFormWayTwo(modalInventorName,"inventorMobileError")
+		   validateAppPersonFormWayTwo(modalInventorMobile,"inventorMobileError")
 		){
 			var formData={"inventorName":modalInventorName,"inventorNumber":modalInventorNumber,"inventorNationality":modalInventorNationality,"inventorMobile":modalInventorMobile,"inventorEmail":modalInventorEmail,"inventorComment":modalInventorComment,"patentDocId":patentDocId};
 			$.ajax({
@@ -1852,7 +1852,6 @@ function updateImgName(value,linkSeqNo){
 			});
 			resetAddInventorModal();
 		}else{
-			alert("uiyhuhiuh");
 		}
 	}
 	
