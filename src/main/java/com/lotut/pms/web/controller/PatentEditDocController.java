@@ -790,20 +790,7 @@ public class PatentEditDocController {
 		}
 	}
 	
-	@SuppressWarnings("unused")
-	@RequestMapping(path="/createOrder")
-	public void creatOrder(List<Long> patentDocIds,Model model){
-		 	Map<Integer,Integer> priceTab=new HashMap<Integer,Integer>();
-		 	priceTab.put(1, 100);
-		 	priceTab.put(2, 200);
-		 	priceTab.put(3, 300);
-			int amount=0;
-			List<PatentDoc> patentDocs=patentDocService.getPatentDocsByIds(patentDocIds);
-			for(PatentDoc patentDoc:patentDocs){
-				 int patentType=patentDoc.getPatentType();
-				 amount+=priceTab.get(patentType);
-			}
-	}
+
 	
 
 }

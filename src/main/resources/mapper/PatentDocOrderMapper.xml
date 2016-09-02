@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lotut.pms.dao.mapper.PatentDocWorkflowMapper">
+		<resultMap type="PatentDocOrder" id="PatentDocOrderMap">
+		<id property="id" column="order_id"/>
+		<result property="createTime" column="create_time"/>
+		<result property="payTime" column="pay_time"/>
+		<result property="amount" column="amount"/>
+		<result property="orderStatus" column="order_status"/>
+		<association property="paymentMethod" javaType="PaymentMethod">
+			<id property="paymentMethodId" column="paymethod_id"/>
+			<result property="paymentMethod" column="payment_method"/>
+		</association>
+		<association property="owner" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
+		
+		<association property="patentDocList" resultMap="com.lotut.pms.dao.mapper.PatentDocMapper.PatentDocMapper"/>
+		
+	</resultMap>
+
+	<insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
+		insert into orders( amount, user, create_time) 
+		values( #{amount}, #{owner.userId}, now())
+	</insert>
+	
+	<insert id="insertPatentOrderItems">
+		insert into patent_doc_order_items(order_id, patent_doc_id) values
+		<foreach item="orderItem" collection="orderItems" separator=",">
+			(#{orderItem.orderId}, #{orderItem.patentDocId})
+		</foreach>;
+	</insert>	
+
+
+
+</mapper>
