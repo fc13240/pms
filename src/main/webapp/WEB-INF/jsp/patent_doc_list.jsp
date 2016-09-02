@@ -55,11 +55,11 @@
 								<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
 								</a>
 						  				</td>
-						  		<td>
+<!-- 						  		<td>
 		                            <a href="javascript:return void" onclick="batchEntrust()" >
 									<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量委托</button>
 									</a>
-						  		</td>		  										  									  				
+						  		</td> -->		  										  									  				
 						  			</tr>
 						  		</table>		
 							  </div>
