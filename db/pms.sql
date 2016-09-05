@@ -832,18 +832,30 @@ CREATE TABLE IF NOT EXISTS patent_doc_order_items (
 
 ALTER TABLE patent_documents ADD COLUMN price BIGINT DEFAULT NULL;
 
-CREATE TABLE patent_doc_workflow_history(
-	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS patent_doc_workflow_history(
+	history_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	patent_doc_id BIGINT NOT NULL COMMENT '文档编号',
 	user_id INT NOT NULL COMMENT '创建者',
-	user_name VARCHAR(50) NOT NULL,
+	user_name VARCHAR(50),
 	ACTION VARCHAR(100) NOT NULL COMMENT'操作',
 	action_time TIMESTAMP NOT NULL COMMENT '操作创建时间',
 	CONSTRAINT fk_patent_doc_workflow_history_user_id FOREIGN KEY idx_patent_doc_workflow_history_user_id(user_id) REFERENCES users(user_id) ON DELETE CASCADE,
 	CONSTRAINT fk_patent_doc_workflow_history_patent_doc_id FOREIGN KEY fk_patent_doc_workflow_history_patent_doc_id(patent_doc_id) REFERENCES
-	  patent_documents(patent_doc_id) ON DELETE CASCADE，
+	patent_documents(patent_doc_id) ON DELETE CASCADE
+	
 	
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS patent_doc_workflow_target (
+	history BIGINT NOT NULL  COMMENT '历史记录',
+	target INT NOT NULL COMMENT '操作目标对象',
+	user_name VARCHAR(50) COMMENT '姓名',
+	patent_doc BIGINT NOT NULL COMMENT '文档',
+	PRIMARY KEY (history,target,patent_doc),
+	KEY fk_target_patent_doc_patent_doc(patent_doc),
+	CONSTRAINT `fk_patent_doc_workflow_target_patent_doc` FOREIGN KEY (`patent_doc`) REFERENCES `patent_documents` (`patent_doc_id`) ON DELETE CASCADE,
+	CONSTRAINT `fk_patent_doc_workflow_target_target` FOREIGN KEY (`target`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+	CONSTRAINT fk_patent_doc_workflow_target_history FOREIGN KEY (history) REFERENCES patent_doc_workflow_history(history_id) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8
 
 
