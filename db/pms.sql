@@ -845,3 +845,5 @@ CREATE TABLE patent_doc_workflow_history(
 	
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+
+

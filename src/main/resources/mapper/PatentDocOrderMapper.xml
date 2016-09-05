@@ -21,7 +21,7 @@
 
 	<insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
 		insert into patent_doc_orders( amount, user, create_time) 
-		values( #{amount}, #{owner.userId}, now())
+		values( #{amount,javaType=double,jdbcType=DOUBLE}, #{owner.userId}, now())
 	</insert>
 	
 	<insert id="insertOrderItems">
@@ -56,4 +56,7 @@
 			#{patentDocId}
 		</foreach>			
 	</update>
+	
+	
+
 </mapper>
