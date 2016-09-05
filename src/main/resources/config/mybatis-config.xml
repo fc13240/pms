@@ -71,5 +71,7 @@
 		<typeAlias type="com.lotut.pms.domain.InventorSearchCondition" alias="InventorSearchCondition"/>
 		<typeAlias alias="PatentDocOrder" type="com.lotut.pms.domain.PatentDocOrder"/>
 		<typeAlias alias="PatentDocOrderItem" type="com.lotut.pms.domain.OrderItem"/>
+		<typeAlias alias="PatentDocWorkflowHistory" type="com.lotut.pms.domain.PatentDocWorkflowHistory"/>
+		<typeAlias alias="PatentDocWorkflowTarget" type="com.lotut.pms.domain.PatentDocWorkflowTarget"/>
 	</typeAliases>  
 </configuration>
