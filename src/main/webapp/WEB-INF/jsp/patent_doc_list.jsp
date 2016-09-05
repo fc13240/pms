@@ -280,7 +280,7 @@ function batchEntrust() {
 		}
 	}		
 	var patentDocIds = uniquePatentNos.join(",");	
-	location.href = "<s:url value='/patentDocWorkflow/createOrderForm.html'/>?patentDocIds=" + patentDocIds;
+	windows.open = "<s:url value='/patentDocWorkflow/createOrderForm.html'/>?patentDocIds=" + patentDocIds;
 }
 
 
