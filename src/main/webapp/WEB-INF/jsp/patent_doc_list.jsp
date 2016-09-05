@@ -24,7 +24,7 @@
                
     </div>
 		  <div class="col-xs-offset-1 col-xs-11">
-			<div class="lt-right" style="padding:50px 0 0 3px;" >
+			<div class="lt-right" style="padding:30px 0 0 3px;" >
 				    <div class="cl top1" style="height:10px;">
 				    
 					  <form class="form-inline" action="<s:url value='/editor/searchPatentDoc.html'/>" method="get">
@@ -71,7 +71,7 @@
 
     			</div>
 				<div style="height:10px;"></div>
-					<div class="lt-box" style="padding:30px 0 0 0;">
+					<div class="lt-box" style="padding:50px 0 0 0;">
 							<!-- 	<a href="javascript:return void" onclick="batchShare()" >
 								<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
 								</a>-->
