@@ -28,7 +28,7 @@ import com.lotut.pms.service.PatentDocWorkflowService;
 @RequestMapping(path="/patentDocAlipay")
 public class AlipayByPatentDocController {
 	private PatentDocWorkflowService patentDocWorkflowService;
-	private static int NEED_PAY_STATUS = 1;
+	private static int NEED_PAY_STATUS = 0;
 	
 	@Autowired
 	public AlipayByPatentDocController(PatentDocWorkflowService patentDocWorkflowService) {
