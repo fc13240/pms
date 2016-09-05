@@ -91,7 +91,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 		
 		int patentDocUpdateCount = patentDocWorkflowDao.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		List<Map<String, Long>> userPatentDocRecords = new ArrayList<>();
-		List<User> proxyOrgUser=userDao.SearchProxyOrg();
+		List<User> proxyOrgUser=userDao.getPlatFromUser();
 		for (Long patentDocId: patentDocIdList) {
 			for(User user:proxyOrgUser){
 				Map<String, Long> userPatentRecord =  new HashMap<String, Long>();

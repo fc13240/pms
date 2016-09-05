@@ -135,9 +135,9 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 	}
 
 	@Override
-	public List<User> SearchProxyOrg() {
+	public List<User> getPlatFromUser() {
 		
-		return userMapper.SearchProxyOrg();
+		return userMapper.getPlatFromUser();
 	}
 
 	

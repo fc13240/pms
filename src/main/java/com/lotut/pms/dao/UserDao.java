@@ -49,5 +49,5 @@ public interface UserDao {
 
 	List<User> searchUsers(String keyword,int userId);
 	
-	List<User> SearchProxyOrg();
+	List<User> getPlatFromUser();
 }
