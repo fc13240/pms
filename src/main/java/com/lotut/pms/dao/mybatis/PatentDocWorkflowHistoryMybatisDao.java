@@ -28,9 +28,14 @@ public class PatentDocWorkflowHistoryMybatisDao extends SqlSessionDaoSupport imp
 	}
 
 	@Override
-	public int insertHistory(List<Map<String, Long>> patentDocWorkflowHistoryRecords) {
-		
-		return patentDocWorkflowHistoryMapper.insertHistory(patentDocWorkflowHistoryRecords);
+	public void insertHistory(List<Map<String, Long>> patentDocWorkflowHistoryRecords) {
+		patentDocWorkflowHistoryMapper.insertHistory(patentDocWorkflowHistoryRecords);
 	}
-	
+
+//	@Override
+//	public List<Long> insertHistory(List<Map<String, Long>> patentDocWorkflowHistoryRecords) {
+//		
+//		return patentDocWorkflowHistoryMapper.insertHistory(patentDocWorkflowHistoryRecords);
+//	}
+//	
 }

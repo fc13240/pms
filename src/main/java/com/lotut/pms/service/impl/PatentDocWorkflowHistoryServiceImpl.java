@@ -29,9 +29,14 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 	}
 
 	@Override
-	public int insertHistory(List<Map<String, Long>> patentDocWorkflowHistoryRecords) {
-		
-		return patentDocWorkFlowHistoryDao.insertHistory(patentDocWorkflowHistoryRecords);
+	public void insertHistory(List<Map<String, Long>> patentDocWorkflowHistoryRecords) {
+		patentDocWorkFlowHistoryDao.insertHistory(patentDocWorkflowHistoryRecords);
 	}
+
+//	@Override
+//	public List<Long> insertHistory(List<Map<String, Long>> patentDocWorkflowHistoryRecords) {
+//		
+//		return patentDocWorkFlowHistoryDao.insertHistory(patentDocWorkflowHistoryRecords);
+//	}
 	
 }

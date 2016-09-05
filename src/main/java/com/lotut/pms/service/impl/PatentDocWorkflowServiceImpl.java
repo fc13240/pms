@@ -33,10 +33,11 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 	private PatentDocWorkflowHistoryDao patentDocWorkflowHistoryDao;
 	
 
-	public PatentDocWorkflowServiceImpl(PatentDocWorkflowDao patentDocWorkflowDao,PatentDocDao patentDocDao,UserDao userDao) {
+	public PatentDocWorkflowServiceImpl(PatentDocWorkflowDao patentDocWorkflowDao,PatentDocDao patentDocDao,UserDao userDao,PatentDocWorkflowHistoryDao patentDocWorkflowHistoryDao) {
 		this.patentDocWorkflowDao = patentDocWorkflowDao;
 		this.patentDocDao=patentDocDao;
 		this.userDao=userDao;
+		this.patentDocWorkflowHistoryDao=patentDocWorkflowHistoryDao;
 	}
 
 
@@ -97,7 +98,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 		
 		int patentDocUpdateCount = patentDocWorkflowDao.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		List<Map<String, Long>> userPatentDocRecords = new ArrayList<>();
-		List<User> platform=userDao.getPlatFormUser();
+		List<User> platform=userDao.getPlatformUser();
 		for (Long patentDocId: patentDocIdList) {
 			for(User user:platform){
 				Map<String, Long> userPatentRecord =  new HashMap<String, Long>();
@@ -107,6 +108,9 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 			}
 		}
 		patentDocDao.insertProxyOrgPatentDoc(userPatentDocRecords);
+		
+		
+		
 		long userId=PrincipalUtils.getCurrentUserId();
 		List<Map<String, Long>> patentDocWorkflowHistoryRecords = new ArrayList<>();
 		for (Long patentDocId: patentDocIdList) {

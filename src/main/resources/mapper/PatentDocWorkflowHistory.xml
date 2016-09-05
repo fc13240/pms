@@ -21,11 +21,11 @@
   		insert into patent_doc_workflow_target(history,target,patent_doc)values(#{history},#{target},#{patentDoc})
   	</insert>
   
-	<insert id="insertHistory" parameterType="list" useGeneratedKeys="true" keyProperty="history_id">
+	<insert id="insertHistory" parameterType="list" >
 		replace into patent_doc_workflow_history(patent_doc_id,user_id,ACTION,action_time)
 		values
-		<foreach item="patentDocWorkflowHistoryRecord" collection="list" separator=",">
-			(${patentDocWorkflowHistoryRecord.userId}, #{userPatentDocRecord.patentDocId},#{patentDocWorkflowHistoryRecord.action},now())
+		<foreach item="patentDocWorkflowHistoryRecords" collection="list" separator=",">
+			(#{patentDocWorkflowHistoryRecords.userId}, #{patentDocWorkflowHistoryRecords.patentDocId},#{patentDocWorkflowHistoryRecords.action},now())
 		</foreach>
 	</insert>
 	

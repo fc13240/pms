@@ -12,5 +12,5 @@ public interface PatentDocWorkflowHistoryDao {
 	void addHistory(PatentDocWorkflowHistory patentDocWorkFlowHistory);
 	
 	void addWorkFlowTarget(PatentDocWorkflowTarget patentDocWorkflowTarget);
-	int insertHistory(List<Map<String, Long>> patentDocWorkflowHistoryRecords);
+    void insertHistory(List<Map<String, Long>> patentDocWorkflowHistoryRecords);
 }
