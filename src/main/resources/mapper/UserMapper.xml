@@ -135,6 +135,6 @@
 	
 	<!-- 查找代理机构用户 -->
 	<select id="getPlatFromUser"  resultMap="UserResultMap">
-		SELECT * FROM users WHERE username IN(SELECT gm.username FROM group_members gm JOIN groups g ON gm.group_id=g.id WHERE group_name='PLATFORM');
+		SELECT * FROM users WHERE username IN(SELECT gm.username FROM group_members gm JOIN groups g ON gm.group_id=g.id WHERE group_name='PLATFROM');
 	</select>
 </mapper>
