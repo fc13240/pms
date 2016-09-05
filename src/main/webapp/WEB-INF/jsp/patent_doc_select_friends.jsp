@@ -31,7 +31,7 @@
 				<div class="lt-box" style="padding:20px;height:400px;">
 					  <h4>请选择要分享的好友 </h4>
 					  <div>
-						<form action="<s:url value='/patent/searchFriends.html'/>" method="get"  id="shareAddForm">
+						<form action="<s:url value='/editor/searchFriends.html'/>" method="get"  id="shareAddForm">
 						  <c:forEach items="${paramValues.patentDocIds}" var="patentDocId">
 							<input type="hidden" class="form-control" name="patentDocIds" value="<c:out value='${patentDocId}'/>">
 						  </c:forEach>
@@ -51,7 +51,7 @@
 						</form>
 					  </div>
 					  <div style="margin-top:20px;width:500px;">
-						<form action="<s:url value='/patent/sharePatents.html'/>" method="get"  id="shareAddForm">
+						<form action="<s:url value='/editor/addShares.html'/>" method="get"  id="shareAddForm">
 						  <c:forEach items="${paramValues.patentDocIds}" var="patentDocId">
 							<input type="hidden" name="patentDocIds" value="<c:out value='${patentDocId}'/>">
 						  </c:forEach>
