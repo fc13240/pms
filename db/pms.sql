@@ -560,7 +560,6 @@ CREATE TABLE  IF NOT EXISTS patent_documents (
   patent_doc_url VARCHAR(200) default null COMMENT '文档保存地址',
   contact_person VARCHAR(500) default null COMMENT '联系人',
   price BIGINT DEFAULT NULL COMMENT '文档价格',
-  feeStatus int DEFAULT 0 COMMENT '缴费状态',
   PRIMARY KEY (patent_doc_id),
   KEY fk_patent_documents_patent_type (patent_type),
   KEY fk_patent_documents_doc_owner_id (user_id),
@@ -832,7 +831,6 @@ CREATE TABLE IF NOT EXISTS patent_doc_order_items (
 );
 
 ALTER TABLE patent_documents ADD COLUMN price BIGINT DEFAULT NULL;
-ALTER TABLE patent_documents ADD COLUMN feeStatus INT DEFAULT 0;
 
 CREATE TABLE patent_doc_workflow_history(
 	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
