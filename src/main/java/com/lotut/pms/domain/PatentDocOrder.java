@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class PatentDocOrder {
 	private long id;
 	private int orderStatus;
-	private int amount;
+	private double amount;
 	private User owner;
 	private Date createTime;
 	private Date payTime;
@@ -36,10 +36,11 @@ public class PatentDocOrder {
 		this.id = id;
 	}
 
-	public int getAmount() {
+
+	public double getAmount() {
 		return amount;
 	}
-	public void setAmount(int amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	public User getOwner() {

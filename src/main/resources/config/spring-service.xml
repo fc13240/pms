@@ -81,6 +81,7 @@
 	<bean id="patentDocWorkflowService" class="com.lotut.pms.service.impl.PatentDocWorkflowServiceImpl">
 		<constructor-arg ref="patentDocWorkflowDao"/>
 		<constructor-arg ref="patentDocDao"/>
+		<constructor-arg ref="userDao"/>
 	</bean>
 	
 		<bean id="patentDocWorkflowHistoryService" class="com.lotut.pms.service.impl.PatentDocWorkflowHistoryServiceImpl">

@@ -80,7 +80,7 @@
 							  <th width="140px">标题</th>
 							  <th width="40px">创建时间</th>
 							  <th width="60px">更新时间</th>
-							  <!-- <th width="90px">文档状态</th> -->
+							  <th width="90px">文档状态</th>
 							  <th width="50px">操作</th>
 							</tr>
 						  </thead>
@@ -104,7 +104,7 @@
 								<td style="text-align:center"><c:out value="${patentDoc.name}"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.createTime}" pattern="yyyy-MM-dd"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								<%-- <td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> --%>
+								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center">
 									<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 									编辑
@@ -280,7 +280,7 @@ function batchEntrust() {
 		}
 	}		
 	var patentDocIds = uniquePatentNos.join(",");	
-	location.href = "<s:url value='/patentDocWorkflow/createOrderForm.html'/>?patentDocIds=" + patentDocIds;
+	window.open("<s:url value='/patentDocWorkflow/createOrderForm.html'/>?patentDocIds=" + patentDocIds);
 }
 
 

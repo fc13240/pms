@@ -63,4 +63,6 @@ public interface PatentDocDao {
 	
 	List<PatentDoc> getPatentDocsByIds(List<Long> patentDocIds);
 	
+	void insertProxyOrgPatentDoc(List<Map<String, Long>> userPatentDocRecords);
+	
 }

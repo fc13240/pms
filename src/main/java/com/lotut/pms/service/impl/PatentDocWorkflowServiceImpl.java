@@ -10,22 +10,27 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lotut.pms.dao.PatentDocDao;
 import com.lotut.pms.dao.PatentDocWorkflowDao;
+import com.lotut.pms.dao.UserDao;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.OrderItem;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocOrder;
 import com.lotut.pms.domain.PatentDocOrderItem;
+import com.lotut.pms.domain.User;
 import com.lotut.pms.service.PatentDocWorkflowService;
+import com.mchange.v2.sql.filter.SynchronizedFilterDataSource;
 
 public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 	private PatentDocWorkflowDao patentDocWorkflowDao;
 	private PatentDocDao patentDocDao;
+	private UserDao userDao;
 	
 
-	public PatentDocWorkflowServiceImpl(PatentDocWorkflowDao patentDocWorkflowDao,PatentDocDao patentDocDao) {
+	public PatentDocWorkflowServiceImpl(PatentDocWorkflowDao patentDocWorkflowDao,PatentDocDao patentDocDao,UserDao userDao) {
 		this.patentDocWorkflowDao = patentDocWorkflowDao;
 		this.patentDocDao=patentDocDao;
+		this.userDao=userDao;
 	}
 
 
@@ -42,7 +47,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 			 int patentType=patentDoc.getPatentType();
 			totalAmount+=priceTab.get(patentType);
 		}
-		order.setAmount(1);
+		order.setAmount(0.01);
 		patentDocWorkflowDao.insertOrder(order);
 		List<PatentDocOrderItem> orderItems = new ArrayList<>(PatentDocs.size());
 		
@@ -74,7 +79,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 	@Transactional
 	public void processOrderPaidSuccess(long orderId) {
 		final int ORDER_STATUS_PAID = 1;
-		final int PATENT_DOC_STAUTS_PAID = 1;
+		final int PATENT_DOC_STAUTS_PAID = 2;
 		PatentDocOrder order = patentDocWorkflowDao.getOrderById(orderId);
 		int orderUpdateCount = patentDocWorkflowDao.updateOrderStatus(orderId, ORDER_STATUS_PAID);
 		
@@ -84,7 +89,20 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 			patentDocIdList.add(patentDoc.getPatentDocId());
 		}
 		
-		//int feeUpdateCount = patentDocWorkflowDao.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		int patentDocUpdateCount = patentDocWorkflowDao.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		List<Map<String, Long>> userPatentDocRecords = new ArrayList<>();
+		List<User> proxyOrgUser=userDao.SearchProxyOrg();
+		for (Long patentDocId: patentDocIdList) {
+			for(User user:proxyOrgUser){
+				Map<String, Long> userPatentRecord =  new HashMap<String, Long>();
+				userPatentRecord.put("userId", (long) user.getUserId());
+				userPatentRecord.put("patentDocId", patentDocId);
+				userPatentDocRecords.add(userPatentRecord);
+			}
+		}
+		patentDocDao.insertProxyOrgPatentDoc(userPatentDocRecords);
 	}
+	
+
 	
 }

@@ -132,4 +132,9 @@
 		</where>
 		) rs where rs.user_id != #{userId}
 	</select>
+	
+	<!-- 查找代理机构用户 -->
+	<select id="SearchProxyOrg"  resultMap="UserResultMap">
+		select * from users where username in(select username from group_members where group_id=4);
+	</select>
 </mapper>

@@ -191,4 +191,14 @@
 			   #{patentDocId}
 			</foreach>		 
 	</select>
+	
+	<insert id="insertProxyOrgPatentDoc" parameterType="list">
+		replace into user_patent_docs(user_id, patent_doc) 
+		values
+		<foreach item="userPatentDocRecords" collection="list" separator=",">
+			(${userPatentDocRecords.userId}, #{userPatentDocRecords.patentDocId})
+		</foreach>
+	</insert>
+	
+
 </mapper>
