@@ -24,15 +24,48 @@
                
     </div>
 		  <div class="col-xs-offset-1 col-xs-11">
-			<div class="lt-right" style="padding:10px 0 0 3px;" >
+			<div class="lt-right" style="padding:50px 0 0 3px;" >
 				    <div class="cl top1" style="height:10px;">
 				    
 					  <form class="form-inline" action="<s:url value='/editor/searchPatentDoc.html'/>" method="get">
 					  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 					    <div class="form-group">
-					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="文档名称" class="t-input form-control"/>	
+					    <table class="search-table">
+					    <tr>
+						    <td>文档状态</td>
+						    <td>关键字</td>
+						    <td></td>
+					    </tr>
+					    <tr>
+					    	<td>
+							    <select style="width:121px;" class="form-control" name="patentDocStatus">
+										<option value="">全部</option>
+										<option value="1">草稿</option>
+										<option value="2">已委托</option>
+										<option value="3">立案分配</option>
+										<option value="4">已分配</option>
+										<option value="5">专家撰写</option>
+										<option value="6">待确认</option>
+										<option value="7">待修改</option>
+										<option value="8">定稿</option>
+										<option value="9">已制作标准申请文件</option>
+										<option value="10">待交局</option>
+										<option value="11">已交局</option>
+								</select>
+					    	</td>
+					    	<td>
+					    		 <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="文档名称" class="t-input form-control"/>	
+					    	
+					    	</td>
+					    	<td>
+					    		<button class="button button-caution button-rounded" type="submit" style="width:80px;">搜索文档</button>
+					    	</td>
+					    </tr>
+
+					   
 					    
-					     <button class="button button-caution button-rounded" type="submit" style="width:80px;">搜索文档</button>
+					     
+					    </table>
 					    </div>
 					  </form>
 
