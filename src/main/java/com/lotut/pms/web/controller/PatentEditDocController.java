@@ -657,7 +657,7 @@ public class PatentEditDocController {
 		}
 		
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
-		return "patent_list";
+		return "patent_doc_list";
 	}
 	
 	@RequestMapping(path="/downloadPic")

@@ -860,5 +860,5 @@ CREATE TABLE IF NOT EXISTS patent_doc_workflow_target (
 
 
 insert into groups (id,group_name) values (8,PLATFORM);
-
+insert into group_authorities (id,authority) values (8,ROLE_PLATFORM);
 

@@ -30,15 +30,48 @@
 					  <form class="form-inline" action="<s:url value='/editor/searchPatentDoc.html'/>" method="get">
 					  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 					    <div class="form-group">
-					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="文档名称" class="t-input form-control"/>	
+					    <table class="search-table">
+					    <tr>
+						    <td>文档状态</td>
+						    <td>关键字</td>
+						    <td></td>
+					    </tr>
+					    <tr>
+						    	<td>
+								    <select style="width:121px;" class="form-control" name="patentDocStatus">
+											<option value="">全部</option>
+											<option value="1">草稿</option>
+											<option value="2">已委托</option>
+											<option value="3">立案分配</option>
+											<option value="4">已分配</option>
+											<option value="5">专家撰写</option>
+											<option value="6">待确认</option>
+											<option value="7">待修改</option>
+											<option value="8">定稿</option>
+											<option value="9">已制作标准申请文件</option>
+											<option value="10">待交局</option>
+											<option value="11">已交局</option>
+									</select>
+						    	</td>
+					    	<td>
+					    		 <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="文档名称" class="t-input form-control"/>	
+					    	
+					    	</td>
+					    	<td>
+					    		<button class="button button-caution button-rounded" type="submit" style="width:80px;">搜索文档</button>
+					    	</td>
+					    </tr>
+
+					   
 					    
-					     <button class="button button-caution button-rounded" type="submit" style="width:80px;">搜索文档</button>
+					     
+					    </table>
 					    </div>
 					  </form>
 
     			</div>
 				<div style="height:10px;"></div>
-					<div class="lt-box" style="padding:30px 0 0 0;">
+					<div class="lt-box" style="padding:50px 0 0 0;">
 							<!-- 	<a href="javascript:return void" onclick="batchShare()" >
 								<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
 								</a>-->

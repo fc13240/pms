@@ -3,6 +3,7 @@ package com.lotut.pms.domain;
 public class PatentDocSearchCondition {
 	private int userId;
 	private String keyword;
+	private Integer patentDocStatus;
 	private Page page;
 	public int getUserId() {
 		return userId;
@@ -26,9 +27,17 @@ public class PatentDocSearchCondition {
 		this.page = page;
 	}
 	
+	
+	public Integer getPatentDocStatus() {
+		return patentDocStatus;
+	}
+	public void setPatentDocStatus(Integer patentDocStatus) {
+		this.patentDocStatus = patentDocStatus;
+	}
 	@Override
 	public String toString() {
 		String keywordStr = keyword == null ? "" : keyword;
-		return "&keyword=" + keywordStr;
+		String patentDocStatusStr = patentDocStatus == null ? "" : patentDocStatus.toString();
+		return "keyword=" + keywordStr+ "&patentDocStatus=" + patentDocStatusStr;
 	}
 }
