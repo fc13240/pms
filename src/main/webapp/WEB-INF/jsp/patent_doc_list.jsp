@@ -24,7 +24,7 @@
                
     </div>
 		  <div class="col-xs-offset-1 col-xs-11">
-			<div class="lt-right" style="padding:30px 0 0 3px;" >
+			<div class="lt-right" style="padding:10px 0 0 3px;" >
 				    <div class="cl top1" style="height:10px;">
 				    
 					  <form class="form-inline" action="<s:url value='/editor/searchPatentDoc.html'/>" method="get">
