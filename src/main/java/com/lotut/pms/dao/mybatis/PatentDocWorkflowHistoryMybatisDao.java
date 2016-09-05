@@ -1,5 +1,8 @@
 package com.lotut.pms.dao.mybatis;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.PatentDocWorkflowHistoryDao;
@@ -22,6 +25,12 @@ public class PatentDocWorkflowHistoryMybatisDao extends SqlSessionDaoSupport imp
 	@Override
 	public void addWorkFlowTarget(PatentDocWorkflowTarget patentDocWorkflowTarget) {
 		patentDocWorkflowHistoryMapper.addWorkFlowTarget(patentDocWorkflowTarget);
+	}
+
+	@Override
+	public int insertHistory(List<Map<String, Long>> patentDocWorkflowHistoryRecords) {
+		
+		return patentDocWorkflowHistoryMapper.insertHistory(patentDocWorkflowHistoryRecords);
 	}
 	
 }

@@ -135,9 +135,9 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 	}
 
 	@Override
-	public List<User> getPlatFromUser() {
+	public List<User> getPlatFormUser() {
 		
-		return userMapper.getPlatFromUser();
+		return userMapper.getPlatFormUser();
 	}
 
 	

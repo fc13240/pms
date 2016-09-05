@@ -10,7 +10,7 @@ public class PatentDocWorkflowHistory {
 	private long patentDocId;
 	private int userId;
 	private String userName;
-	private String action;
+	private int action;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Timestamp actionTime;
 
@@ -32,13 +32,13 @@ public class PatentDocWorkflowHistory {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getAction() {
+	
+	public int getAction() {
 		return action;
 	}
-	public void setAction(String action) {
+	public void setAction(int action) {
 		this.action = action;
 	}
-
 	public Timestamp getActionTime() {
 		return actionTime;
 	}
