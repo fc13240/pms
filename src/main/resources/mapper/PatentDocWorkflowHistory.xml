@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.lotut.pms.dao.mapper.PatentDocWorkflowHistoryMapper">
-  		<resultMap type="PatentDocWorkFlowHistory" id="PatentDocWorkFlowHistoryMap">
+  		<resultMap type="PatentDocWorkflowHistory" id="PatentDocWorkflowHistoryMap">
   			<id property="historyId" column="history_id"/>
   			<result property="patentDocId"  column="patent_doc_id" />
   			<result property="userId"  column="user_id" />
@@ -12,14 +12,21 @@
   			<result property="action"  column="ACTION" />
   			<result property="actionTime"  column="action_time" />
   		</resultMap>
-  		
   
   	<insert id="addHistory" parameterType="PatentDocWorkFlowHistory" useGeneratedKeys="true" keyProperty="historyId">
-  		insert into patent_doc_workflow_history (patent_doc_id,user_id,ACTION,action_time)values(#{patentDocId},#{userId},#{action},now())
+  		replace into patent_doc_workflow_history (patent_doc_id,user_id,ACTION,action_time)values(#{patentDocId},#{userId},#{action},now())
   	</insert>
   	
   	<insert id="addWorkFlowTarget" parameterType="PatentDocWorkflowTarget">
   		insert into patent_doc_workflow_target(history,target,patent_doc)values(#{history},#{target},#{patentDoc})
   	</insert>
-  	
-  </mapper>
+  
+	<insert id="insertHistory" parameterType="list" >
+		replace into patent_doc_workflow_history(patent_doc_id,user_id,ACTION,action_time)
+		values
+		<foreach item="patentDocWorkflowHistoryRecords" collection="list" separator=",">
+			(#{patentDocWorkflowHistoryRecords.userId}, #{patentDocWorkflowHistoryRecords.patentDocId},#{patentDocWorkflowHistoryRecords.action},now())
+		</foreach>
+	</insert>
+	
+	 </mapper>

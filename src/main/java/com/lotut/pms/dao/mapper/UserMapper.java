@@ -52,5 +52,5 @@ public interface UserMapper {
 
 	List<User> searchUsers(@Param("keyword") String keyword,@Param("userId") int userId);
 	
-	List<User> getPlatFromUser();
+	List<User> getPlatformUser();
 }

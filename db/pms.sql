@@ -837,7 +837,7 @@ CREATE TABLE IF NOT EXISTS patent_doc_workflow_history(
 	patent_doc_id BIGINT NOT NULL COMMENT '文档编号',
 	user_id INT NOT NULL COMMENT '创建者',
 	user_name VARCHAR(50),
-	ACTION VARCHAR(100) NOT NULL COMMENT'操作',
+	ACTION INT  COMMENT'操作',
 	action_time TIMESTAMP NOT NULL COMMENT '操作创建时间',
 	CONSTRAINT fk_patent_doc_workflow_history_user_id FOREIGN KEY idx_patent_doc_workflow_history_user_id(user_id) REFERENCES users(user_id) ON DELETE CASCADE,
 	CONSTRAINT fk_patent_doc_workflow_history_patent_doc_id FOREIGN KEY fk_patent_doc_workflow_history_patent_doc_id(patent_doc_id) REFERENCES
@@ -859,6 +859,6 @@ CREATE TABLE IF NOT EXISTS patent_doc_workflow_target (
 ) ENGINE=INNODB DEFAULT CHARSET=utf8
 
 
-insert into groups (id,group_name) values (8,PLATFORM);
-insert into group_authorities (id,authority) values (8,ROLE_PLATFORM);
+insert into groups (id,group_name) values (8,'PLATFORM');
+insert into group_authorities (group_id,authority) values (8,'ROLE_PLATFORM');
 

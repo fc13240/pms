@@ -8,8 +8,10 @@ import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lotut.pms.constants.PatentDocWorkflowAction;
 import com.lotut.pms.dao.PatentDocDao;
 import com.lotut.pms.dao.PatentDocWorkflowDao;
+import com.lotut.pms.dao.PatentDocWorkflowHistoryDao;
 import com.lotut.pms.dao.UserDao;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Order;
@@ -17,20 +19,25 @@ import com.lotut.pms.domain.OrderItem;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocOrder;
 import com.lotut.pms.domain.PatentDocOrderItem;
+import com.lotut.pms.domain.PatentDocWorkflowHistory;
 import com.lotut.pms.domain.User;
+import com.lotut.pms.service.PatentDocWorkflowHistoryService;
 import com.lotut.pms.service.PatentDocWorkflowService;
+import com.lotut.pms.util.PrincipalUtils;
 import com.mchange.v2.sql.filter.SynchronizedFilterDataSource;
 
 public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 	private PatentDocWorkflowDao patentDocWorkflowDao;
 	private PatentDocDao patentDocDao;
 	private UserDao userDao;
+	private PatentDocWorkflowHistoryDao patentDocWorkflowHistoryDao;
 	
 
-	public PatentDocWorkflowServiceImpl(PatentDocWorkflowDao patentDocWorkflowDao,PatentDocDao patentDocDao,UserDao userDao) {
+	public PatentDocWorkflowServiceImpl(PatentDocWorkflowDao patentDocWorkflowDao,PatentDocDao patentDocDao,UserDao userDao,PatentDocWorkflowHistoryDao patentDocWorkflowHistoryDao) {
 		this.patentDocWorkflowDao = patentDocWorkflowDao;
 		this.patentDocDao=patentDocDao;
 		this.userDao=userDao;
+		this.patentDocWorkflowHistoryDao=patentDocWorkflowHistoryDao;
 	}
 
 
@@ -91,9 +98,9 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 		
 		int patentDocUpdateCount = patentDocWorkflowDao.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		List<Map<String, Long>> userPatentDocRecords = new ArrayList<>();
-		List<User> proxyOrgUser=userDao.getPlatFromUser();
+		List<User> platform=userDao.getPlatformUser();
 		for (Long patentDocId: patentDocIdList) {
-			for(User user:proxyOrgUser){
+			for(User user:platform){
 				Map<String, Long> userPatentRecord =  new HashMap<String, Long>();
 				userPatentRecord.put("userId", (long) user.getUserId());
 				userPatentRecord.put("patentDocId", patentDocId);
@@ -101,6 +108,23 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 			}
 		}
 		patentDocDao.insertProxyOrgPatentDoc(userPatentDocRecords);
+		
+		
+		
+		long userId=PrincipalUtils.getCurrentUserId();
+		List<Map<String, Long>> patentDocWorkflowHistoryRecords = new ArrayList<>();
+		for (Long patentDocId: patentDocIdList) {
+			Map<String, Long> patentDocWorkflowHistoryRecord =  new HashMap<String, Long>();
+			patentDocWorkflowHistoryRecord.put("userId",userId);
+			patentDocWorkflowHistoryRecord.put("patentDocId", patentDocId);
+			patentDocWorkflowHistoryRecord.put("action",(long)PatentDocWorkflowAction.ActionType.get("委托给平台账户"));
+			patentDocWorkflowHistoryRecords.add(patentDocWorkflowHistoryRecord);
+		
+		}
+		patentDocWorkflowHistoryDao.insertHistory(patentDocWorkflowHistoryRecords);
+		
+		
+		
 	}
 	
 

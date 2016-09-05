@@ -87,6 +87,7 @@ public class PatentDocWorkflowController {
 		List<PatentDoc> PatentDocs = patentDocService.getPatentDocsByIds(Arrays.asList(patentDocIds));
 		patentDocWorkflowService.createOrder(order, PatentDocs);
 		model.addAttribute("orderId", order.getId());
+		model.addAttribute("patentDocIds",patentDocIds);
 		if (order.getPaymentMethod().getPaymentMethodId() == ALIPAY) {
 			return "redirect:/patentDocAlipay/pay.html";
 		}
