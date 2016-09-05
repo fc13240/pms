@@ -2,6 +2,8 @@ package com.lotut.pms.service.impl;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.lotut.pms.dao.PetitionDao;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
@@ -28,11 +30,13 @@ public class PetitionServiceImpl implements PetitionService {
 	}
 
 	@Override
+	@Transactional
 	public void addCommonAppPerson(CommonAppPerson commonAppPerson) {
 		petitionDao.addCommonAppPerson(commonAppPerson);	
 	}
 
 	@Override
+	@Transactional
 	public void addCommonInventor(CommonInventor commonInventor) {
 		petitionDao.addCommonInventor(commonInventor);
 	}
@@ -43,6 +47,7 @@ public class PetitionServiceImpl implements PetitionService {
 	}
 
 	@Override
+	@Transactional
 	public void addPatentDocAppPerson(List<CommonAppPerson> commonAppPersons,Long patentDocId,int userId) {
 		petitionDao.addPatentDocAppPerson(commonAppPersons,patentDocId,userId);
 	}
@@ -53,6 +58,7 @@ public class PetitionServiceImpl implements PetitionService {
 	}
 
 	@Override
+	@Transactional
 	public void addPatentDocInventor(Long patentDocId, List<CommonInventor> commonInventors, int userId) {
 		petitionDao.addPatentDocInventor(patentDocId, commonInventors, userId);
 	}
@@ -63,21 +69,25 @@ public class PetitionServiceImpl implements PetitionService {
 	}
 
 	@Override
+	@Transactional
 	public void deletePatentDocApperson(Long personId) {
 		petitionDao.deletePatentDocApperson(personId);
 	}
 
 	@Override
+	@Transactional
 	public void updatePatentDocApperson(PatentDocAppPerson patentDocAppPerson) {
 		petitionDao.updatePatentDocApperson(patentDocAppPerson);
 	}
 
 	@Override
+	@Transactional
 	public void deletePatentDocInventor(Long inventorId) {
 		petitionDao.deletePatentDocInventor(inventorId);
 	}
 
 	@Override
+	@Transactional
 	public void updatePatentDocInventor(PatentDocInventor patentDocInventor) {
 		petitionDao.updatePatentDocInventor(patentDocInventor);
 	}
@@ -93,6 +103,7 @@ public class PetitionServiceImpl implements PetitionService {
 	}
 
 	@Override
+	@Transactional
 	public void updatePatentDocAttachmentUrl(String attachmentUrl, Long patentDocId) {
 		petitionDao.updatePatentDocAttachmentUrl(attachmentUrl, patentDocId);
 	}

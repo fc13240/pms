@@ -30,8 +30,8 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box">
-					<form action="<s:url value='/order/createOrder.html'/>" method="post">
-					  <c:forEach items="${patentDocs}" var="patentDoc" varStatus="status">
+					<form action="<s:url value='/patentDocWorkflow/createPatentDocOrder.html'/>" method="post">
+					  <c:forEach items="${PatentDocs}" var="patentDoc" varStatus="status">
 						<input type="hidden" name="patentDocIds" value="${patentDoc.patentDocId}">
 					  </c:forEach>
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">

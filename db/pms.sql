@@ -820,7 +820,7 @@ create table if not exists patent_doc_orders (
 	payment_method int,
 	constraint fk_patent_doc_orders_user foreign key(user) references users(user_id),
 	constraint fk_patent_doc_orders_payment_method foreign key(payment_method) references payment_methods(payment_method_id)
-) auto_increment=123;
+) auto_increment=123123;
 
 CREATE TABLE IF NOT EXISTS patent_doc_order_items (
 	item_id BIGINT PRIMARY KEY AUTO_INCREMENT,

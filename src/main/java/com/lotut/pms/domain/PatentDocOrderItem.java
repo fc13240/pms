@@ -3,7 +3,7 @@ package com.lotut.pms.domain;
 public class PatentDocOrderItem {
 	private int id;
 	private long orderId;
-	private long patenDocId;
+	private long patentDocId;
 	public int getId() {
 		return id;
 	}
@@ -16,11 +16,11 @@ public class PatentDocOrderItem {
 	public void setOrderId(long orderId) {
 		this.orderId = orderId;
 	}
-	public long getPatenDocId() {
-		return patenDocId;
+	public long getPatentDocId() {
+		return patentDocId;
 	}
-	public void setPatenDocId(long patenDocId) {
-		this.patenDocId = patenDocId;
+	public void setPatentDocId(long patentDocId) {
+		this.patentDocId = patentDocId;
 	}
 	
 	
