@@ -71,7 +71,7 @@
 		where p.proxy_org_id=#{proxyOrgId}
 	</select>
 	
-	<select id="getParentOrgIdByUserId"  parameterType="int" resultType="int">
+	<select id="getOrgIdByUserId"  parameterType="int" resultType="int">
 		select org_id from proxy_org where org_user_id = #{currentUserId}
 	</select>
 	

@@ -106,7 +106,7 @@ public class PatentDocWorkflowController {
 	
 	@RequestMapping(path="showProxyOrgs", method=RequestMethod.GET)
 	public String showFriends(Model model) {
-		int parentOrgId = employeeService.getParentOrgIdByUserId(PrincipalUtils.getCurrentUserId());
+		int parentOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		List<ProxyOrg> proxyOrgs = employeeService.getProxyOrgList(parentOrgId);
 		model.addAttribute("proxyOrgs", proxyOrgs);
 		return "patent_doc_select_proxy_org";
