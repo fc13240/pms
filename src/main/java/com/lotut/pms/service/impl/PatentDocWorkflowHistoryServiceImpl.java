@@ -19,10 +19,58 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 		this.patentDocWorkflowHistoryDao = patentDocWorkflowHistoryDao;
 	}
 
+	@Override
+	public List<PatentDocWorkflowHistory> getPatentDocWorkflowHistoryByUserAndAction(int userId, int action) {
+		return patentDocWorkflowHistoryDao.getPatentDocWorkflowHistoryByUserAndAction(userId, action);
+	}
 	
 	@Override
-	public long insertHistories(List<Integer> ids) {
+	public long insertProxyOrgsHistories(List<Integer> ids) {
 		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
+		return insertHistories(ids,action);
+	}
+
+	@Override
+	public void insertProxyOrgsWorkflowTargets(List<Integer> proxyOrgs) {
+		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
+		insertWorkflowTargets(proxyOrgs,action);
+	}
+	
+	@Override
+	public long insertCustomerSupportHistories(List<Integer> ids) {
+		int action=PatentDocWorkflowAction.ActionType.get("分配给客服人员");
+		return insertHistories( ids, action);
+	}
+
+	@Override
+	public void insertCustomerSupportWorkflowTargets(List<Integer> ids) {
+		int action=PatentDocWorkflowAction.ActionType.get("分配给客服人员");
+		insertWorkflowTargets(ids,action);
+	}
+	@Override
+	public long insertTechPersonHistories(List<Integer> ids) {
+		int action=PatentDocWorkflowAction.ActionType.get("审查");
+		return insertHistories( ids, action);
+	}
+
+	@Override
+	public void insertTechPersonWorkflowTargets(List<Integer> ids) {
+		int action=PatentDocWorkflowAction.ActionType.get("审查");
+		insertWorkflowTargets(ids,action);
+	}
+	
+	@Override
+	public long insertProcessPersonHistories(List<Integer> ids) {
+		int action=PatentDocWorkflowAction.ActionType.get("交局");
+		return insertHistories( ids, action);
+	}
+
+	@Override
+	public void insertProcessPersonWorkflowTargets(List<Integer> ids) {
+		int action=PatentDocWorkflowAction.ActionType.get("交局");
+		insertWorkflowTargets(ids,action);
+	}
+	private long insertHistories(List<Integer> ids,int action){
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<Map<String, Integer>> patentDocWorkflowHistoryRecords = new ArrayList<>();
 		for (int patentDocId: ids) {
@@ -33,21 +81,11 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 				patentDocWorkflowHistoryRecords.add(patentDocWorkflowHistoryRecord);
 		}
 		return patentDocWorkflowHistoryDao.insertHistories(patentDocWorkflowHistoryRecords);
+		
 	}
-
-
-
-
-	@Override
-	public List<PatentDocWorkflowHistory> getPatentDocWorkflowHistoryByUserAndAction(int userId, int action) {
-		return patentDocWorkflowHistoryDao.getPatentDocWorkflowHistoryByUserAndAction(userId, action);
-	}
-
-
-	@Override
-	public void insertWorkflowTargets(List<Integer> proxyOrgs) {
+	
+	private void insertWorkflowTargets(List<Integer> ids,int action){
 		int userId=PrincipalUtils.getCurrentUserId();
-		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
 		List<PatentDocWorkflowHistory> PatentDocWorkflowHistories=patentDocWorkflowHistoryDao.getPatentDocWorkflowHistoryByUserAndAction(userId, action);
 		List<Long> patentDocWorkflowHistoryIdList = new ArrayList<>(PatentDocWorkflowHistories.size());
 		List<Long> patentDocWorkflowHistoryPatentDocIdList = new ArrayList<>(PatentDocWorkflowHistories.size());
@@ -57,7 +95,7 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 		}
 		List<Map<String, Long>> patentDocWorkflowTargetRecords=new ArrayList<>();
 		for (Long patentDocWorkflowHistoryId:patentDocWorkflowHistoryIdList) {
-			for(int proxyOrg: proxyOrgs){
+			for(int proxyOrg: ids){
 				for(long patentDocWorkflowHistoryPatentDocId:patentDocWorkflowHistoryPatentDocIdList){
 					Map<String, Long> patentDocWorkflowTargetRecord =  new HashMap<String, Long>();
 					patentDocWorkflowTargetRecord.put("history", patentDocWorkflowHistoryId);
@@ -68,8 +106,9 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 			}
 		}
 		patentDocWorkflowHistoryDao.insertWorkflowTargets(patentDocWorkflowTargetRecords);
+		
+		
 	}
-
 
 
 	

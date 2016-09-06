@@ -127,9 +127,9 @@ public class PatentDocWorkflowController {
 		final int PATENT_DOC_STAUTS_PAID = 3;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		
-		patentDocWorkflowHistoryService.insertHistories(patentDocIds);
+		patentDocWorkflowHistoryService.insertProxyOrgsHistories(patentDocIds);
 		
-		patentDocWorkflowHistoryService.insertWorkflowTargets(proxyOrgs);
+		patentDocWorkflowHistoryService.insertProxyOrgsWorkflowTargets(proxyOrgs);
 		
 		
 		return "patent_doc_list";
@@ -159,6 +159,10 @@ public class PatentDocWorkflowController {
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		final int PATENT_DOC_STAUTS_PAID = 4;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		
+		patentDocWorkflowHistoryService.insertCustomerSupportHistories(patentDocIds);
+		
+		patentDocWorkflowHistoryService.insertCustomerSupportHistories(customerSuppors);
 		return "patent_doc_list";
 	}
 	
@@ -187,6 +191,10 @@ public class PatentDocWorkflowController {
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		final int PATENT_DOC_STAUTS_PAID = 5;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		
+		patentDocWorkflowHistoryService.insertTechPersonHistories(patentDocIds);
+		
+		patentDocWorkflowHistoryService.insertTechPersonWorkflowTargets(techPersons);
 		return "patent_doc_list";
 	}
 	
@@ -215,6 +223,10 @@ public class PatentDocWorkflowController {
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		final int PATENT_DOC_STAUTS_PAID = 10;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		
+		patentDocWorkflowHistoryService.insertProcessPersonHistories(patentDocIds);
+		
+		patentDocWorkflowHistoryService.insertProcessPersonWorkflowTargets(processPersons);
 		return "patent_doc_list";
 	}
 	

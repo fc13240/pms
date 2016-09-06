@@ -6,9 +6,23 @@ import com.lotut.pms.domain.PatentDocWorkflowHistory;
 
 public interface PatentDocWorkflowHistoryService {
 	
-	long insertHistories(List<Integer> ids);
+	
 
 	List<PatentDocWorkflowHistory> getPatentDocWorkflowHistoryByUserAndAction( int userId, int action);
 	
-	void insertWorkflowTargets(List<Integer> ids);
+	long insertProxyOrgsHistories(List<Integer> ids);
+	
+	void insertProxyOrgsWorkflowTargets(List<Integer> ids);
+	
+	long insertCustomerSupportHistories(List<Integer> ids);
+	
+	void insertCustomerSupportWorkflowTargets(List<Integer> ids);
+	
+	long insertTechPersonHistories(List<Integer> ids);
+	
+	void insertTechPersonWorkflowTargets(List<Integer> ids);
+	
+	long insertProcessPersonHistories(List<Integer> ids);
+	
+	void insertProcessPersonWorkflowTargets(List<Integer> ids);
 }
