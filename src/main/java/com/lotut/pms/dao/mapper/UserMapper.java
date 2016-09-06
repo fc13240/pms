@@ -51,4 +51,6 @@ public interface UserMapper {
 	List<ContactAddress> getContactAddressesByReceiver(@Param("userId") int userId,@Param("receiver") String receiver);
 
 	List<User> searchUsers(@Param("keyword") String keyword,@Param("userId") int userId);
+	
+	List<User> getPlatformUser();
 }

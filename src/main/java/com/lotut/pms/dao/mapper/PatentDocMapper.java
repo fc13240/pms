@@ -62,4 +62,6 @@ public interface PatentDocMapper {
 	void updateAttachmentImgUrl(Attachment attachment);
 	
 	List<PatentDoc> getPatentDocsByIds(@Param("patentDocIds")List<Long> patentDocIds);
+	
+	void insertProxyOrgPatentDoc(List<Map<String, Long>> userPatentDocRecords);
 }

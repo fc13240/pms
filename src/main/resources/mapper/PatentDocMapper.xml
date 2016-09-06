@@ -146,6 +146,9 @@
 				p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,ps.patent_doc_status_id,ps.patent_doc_status_desc
 				FROM patent_documents p  LEFT JOIN user_patent_docs up ON p.patent_doc_id = up.patent_doc LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
 				WHERE up.user_id = #{userId}
+				<if test="patentDocStatus != null">
+			 		and p.patent_doc_status = #{patentDocStatus}
+			 	</if>
 			 	<if test="keyword != null">
 					and ( p.patent_name like #{keyword_pattern})
 				</if>		 		 	
@@ -161,6 +164,9 @@
 				SELECT Count(*)
 				FROM patent_documents p  LEFT JOIN user_patent_docs up ON p.patent_doc_id = up.patent_doc
 				WHERE up.user_id = #{userId}
+				<if test="patentDocStatus != null">
+			 		and p.patent_doc_status = #{patentDocStatus}
+			 	</if>
 			 	<if test="keyword != null">
 					and ( p.patent_name like #{keyword_pattern})
 				</if>
@@ -191,4 +197,14 @@
 			   #{patentDocId}
 			</foreach>		 
 	</select>
+	
+	<insert id="insertProxyOrgPatentDoc" parameterType="list">
+		replace into user_patent_docs(user_id, patent_doc) 
+		values
+		<foreach item="userPatentDocRecords" collection="list" separator=",">
+			(#{userPatentDocRecords.userId}, #{userPatentDocRecords.patentDocId})
+		</foreach>
+	</insert>
+	
+
 </mapper>

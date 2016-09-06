@@ -27,35 +27,35 @@ public class PrincipalUtils {
 		return false;
 	}
 	
-	public static boolean isAdmin() {
+	public static boolean isAdmin() {//管理员
 		return PrincipalUtils.hasAuthority(Role.ROLE_ADMIN.getRoleName());
 	}
 	
-	public static boolean isOrderProcessor() {
+	public static boolean isOrderProcessor() {//订单管理者
 		return PrincipalUtils.hasAuthority(Role.ROLE_ORDER.getRoleName());
 	}
 	
-	public static boolean isNormalUser() {
+	public static boolean isNormalUser() {//默认用户
 		return PrincipalUtils.hasAuthority(Role.ROLE_USER.getRoleName());
 	}
 	
-	public static boolean isTraderUser() {
+	public static boolean isTraderUser() {//专利交易者
 		return PrincipalUtils.hasAuthority(Role.ROLE_TRADER.getRoleName());
 	}
 	
-	public static boolean isProxyOrg() {
+	public static boolean isProxyOrg() {//代理机构
 		return PrincipalUtils.hasAuthority(Role.ROLE_PROXY_ORG.getRoleName());
 	}
 	
-	public static boolean isCustomerSupport() {
+	public static boolean isCustomerSupport() {//客服
 		return PrincipalUtils.hasAuthority(Role.ROLE_CUSTOMER_SUPPORT.getRoleName());
 	}
 	
-	public static boolean isTech() {
+	public static boolean isTech() {//技术人员
 		return PrincipalUtils.hasAuthority(Role.ROLE_TECH.getRoleName());
 	}
 	
-	public static boolean isProcess() {
+	public static boolean isProcess() {//流程员
 		return PrincipalUtils.hasAuthority(Role.ROLE_PROCESS.getRoleName());
 	}
 }

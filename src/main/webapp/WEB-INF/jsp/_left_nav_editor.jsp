@@ -60,24 +60,6 @@
 		<h5>常用发明人</h5>
 		</a>
 	</li>
-	
-	<!-- 
-	<li class="active"> 
-		<a href="<s:url value='/editor/newPatentDoc.html'/>?patentType=1">
-		<h5>新建发明</h5>
-		</a>
-	</li>
-	<li  class=""> 
-		<a href="<s:url value='/editor/newPatentDoc.html'/>?patentType=2">
-		<h5>新建实用新型</h5>
-		</a>
-	</li>
-
-	<li  class=""> 
-		<a href="<s:url value='/editor/newPatentDoc.html'/>?patentType=3">
-		<h5>新建外观设计</h5>
-		</a>
-	</li>
- 	 -->		
+			
 	</ul>
 </div>

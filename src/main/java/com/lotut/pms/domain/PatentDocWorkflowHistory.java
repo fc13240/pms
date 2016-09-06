@@ -6,20 +6,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 public class PatentDocWorkflowHistory {
-	private long id;
+	private long historyId;
 	private long patentDocId;
 	private int userId;
 	private String userName;
-	private String action;
-	private long targetId;
+	private int action;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
-	private Timestamp action_time;
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
+	private Timestamp actionTime;
+
 	public long getPatentDocId() {
 		return patentDocId;
 	}
@@ -38,23 +32,24 @@ public class PatentDocWorkflowHistory {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getAction() {
+	
+	public int getAction() {
 		return action;
 	}
-	public void setAction(String action) {
+	public void setAction(int action) {
 		this.action = action;
 	}
-	public long getTargetId() {
-		return targetId;
+	public Timestamp getActionTime() {
+		return actionTime;
 	}
-	public void setTargetId(long targetId) {
-		this.targetId = targetId;
+	public void setActionTime(Timestamp actionTime) {
+		this.actionTime = actionTime;
 	}
-	public Timestamp getAction_time() {
-		return action_time;
+	public long getHistoryId() {
+		return historyId;
 	}
-	public void setAction_time(Timestamp action_time) {
-		this.action_time = action_time;
+	public void setHistoryId(long historyId) {
+		this.historyId = historyId;
 	}
 	
 	

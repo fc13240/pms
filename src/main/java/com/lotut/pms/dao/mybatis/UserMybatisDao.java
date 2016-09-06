@@ -134,5 +134,11 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 		return userMapper.searchUsers(keyword,userId);
 	}
 
+	@Override
+	public List<User> getPlatformUser() {
+		
+		return userMapper.getPlatformUser();
+	}
+
 	
 }

@@ -31,7 +31,7 @@
 				<div class="lt-box" style="padding:20px;height:400px;">
 					  <h4>请选择要分享的好友 </h4>
 					  <div>
-						<form action="<s:url value='/editor/searchFriends.html'/>" method="get"  id="shareAddForm">
+						<form action="<s:url value='/patentDocWorkflow/searchProxyOrg.html'/>" method="get"  id="shareAddForm">
 						  <c:forEach items="${paramValues.patentDocIds}" var="patentDocId">
 							<input type="hidden" class="form-control" name="patentDocIds" value="<c:out value='${patentDocId}'/>">
 						  </c:forEach>
@@ -51,7 +51,7 @@
 						</form>
 					  </div>
 					  <div style="margin-top:20px;width:500px;">
-						<form action="<s:url value='/editor/addShares.html'/>" method="get"  id="shareAddForm">
+						<form action="<s:url value='/patentDocWorkflow/addProxyOrgShares.html'/>" method="get"  id="shareAddForm">
 						  <c:forEach items="${paramValues.patentDocIds}" var="patentDocId">
 							<input type="hidden" name="patentDocIds" value="<c:out value='${patentDocId}'/>">
 						  </c:forEach>
@@ -60,19 +60,19 @@
 							  <tr class="simple_bag">
 								<th width="30px"><input style="width:15px;" type="checkbox" class="check-item"></th>
 								<th >序号</th>
-								<th >用户名</th>
-								<th >姓名</th>
-								<th  >备注名</th>
+								<th >机构用户名</th>
+								<th >机构名称</th>
+								<th >备注名</th>
 							  </tr>
 							</thead>
 							<tbody>
-							  <c:forEach items="${friends}" var="friend" varStatus="status">
+							  <c:forEach items="${techPersons}" var="techPerson" varStatus="status">
 								<tr>
-								  <td ><input name="friend" style="width:15px;" type="checkbox" class="check-item" friend="<c:out value='${friend.friendId}'/>"></td>
+								  <td ><input name="friend" style="width:15px;" type="checkbox" class="check-item" friend="<c:out value='${techPerson.userId}'/>"></td>
 								  <td>${status.count}</td>
-								  <td><c:out value="${friend.username}"/></td>
-								  <td><c:out value="${friend.realname}"/></td>
-								  <td><c:out value="${friend.remarkName}"/></td>
+								  <td><c:out value="${techPerson.user.username}"/></td>
+								  <td><c:out value="${techPerson.user.name}"/></td>
+								  <td><c:out value="${techPerson.remarkName}"/></td>
 								</tr>
 							  </c:forEach>
 							
@@ -141,7 +141,7 @@
 		}
 		
 		if (!friendSelected) {
-			$("<div>请选择好友</div>").dialog({
+			$("<div>请选择机构</div>").dialog({
 				modal: true,
 				buttons: {
 					Ok: function() {
@@ -151,10 +151,10 @@
 			});
 	   				
 		} else {
-			var friends = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'friend').join(",");
+			var techPersons = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'friend').join(",");
 			var patentDocIds = $("input[name=patentDocIds]").val();
 			$.ajax({
-				url: "<s:url value='/editor/addShares.html'/>?friends=" + friends + "&patentDocIds=" + patentDocIds, 
+				url: "<s:url value='/patentDocWorkflow/addTechPersonShares.html'/>?techPersons=" + techPersons + "&patentDocIds=" + patentDocIds, 
 				type: 'GET', 
 				success: function() {
 					$("<div>分享成功</div>").dialog({

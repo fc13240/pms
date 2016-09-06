@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,20 +19,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alipay.config.AlipayConfig;
 import com.alipay.util.AlipayNotify;
 import com.alipay.util.AlipaySubmit;
+import com.lotut.pms.constants.PatentDocWorkflowAction;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.PatentDocOrder;
+import com.lotut.pms.domain.PatentDocWorkflowHistory;
 import com.lotut.pms.service.FeeService;
 import com.lotut.pms.service.OrderService;
+import com.lotut.pms.service.PatentDocService;
+import com.lotut.pms.service.PatentDocWorkflowHistoryService;
 import com.lotut.pms.service.PatentDocWorkflowService;
+import com.lotut.pms.util.PrincipalUtils;
 
 @Controller
 @RequestMapping(path="/patentDocAlipay")
-public class AlipayByPatentDocController {
+public class PatentDocAlipayController {
 	private PatentDocWorkflowService patentDocWorkflowService;
-	private static int NEED_PAY_STATUS = 1;
+	private PatentDocWorkflowHistoryService patentDocWorkflowHistoryService;
+	private static int NEED_PAY_STATUS = 0;
 	
 	@Autowired
-	public AlipayByPatentDocController(PatentDocWorkflowService patentDocWorkflowService) {
+	public PatentDocAlipayController(PatentDocWorkflowService patentDocWorkflowService) {
 		this.patentDocWorkflowService = patentDocWorkflowService;
 	}
 	
@@ -117,7 +124,8 @@ public class AlipayByPatentDocController {
 	}
 		
 	@RequestMapping(path="/return")
-	public String returnPayResult(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String returnPayResult(@Param("patentDocIds")Long[] patentDocIds,HttpServletRequest request, HttpServletResponse response, Model model) {
+		
 		Map<String,String> params = new HashMap<String,String>();
 		Map requestParams = request.getParameterMap();
 		for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
@@ -136,13 +144,15 @@ public class AlipayByPatentDocController {
 		String trade_status = request.getParameter("trade_status");
 				
 		boolean verify_result = AlipayNotify.verify(params);
+	
 		
 		if (verify_result) {
 			boolean success = trade_status.equals("TRADE_FINISHED") || trade_status.equals("TRADE_SUCCESS");
 			if(success){
-				long orderId = Long.parseLong(orderIdStr);
+				long orderId =Long.parseLong(orderIdStr);
 				
 				patentDocWorkflowService.processOrderPaidSuccess(orderId);
+		
 				
 				return "pay_success";
 			}

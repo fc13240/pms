@@ -48,4 +48,6 @@ public interface UserDao {
 	List<ContactAddress> getContactAddressesByReceiver(int userId,String receiver);
 
 	List<User> searchUsers(String keyword,int userId);
+	
+	List<User> getPlatformUser();
 }

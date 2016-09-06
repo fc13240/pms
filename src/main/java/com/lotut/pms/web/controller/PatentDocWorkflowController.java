@@ -13,15 +13,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.CustomerSupport;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocOrder;
+import com.lotut.pms.domain.ProcessPerson;
+import com.lotut.pms.domain.ProxyOrg;
+import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.AppPersonService;
+import com.lotut.pms.service.EmployeeService;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PatentDocService;
@@ -30,6 +36,7 @@ import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.service.PetitionService;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.mysql.fabric.xmlrpc.base.Array;
 
 
 @Controller
@@ -42,10 +49,11 @@ public class PatentDocWorkflowController {
 	private UserService userService;
 	private FriendService friendService;
 	private PetitionService petitionService;
+	private EmployeeService employeeService;
 	
 	
 	@Autowired
-	public PatentDocWorkflowController(PatentDocService patentDocService,InventorService inventorService,AppPersonService appPersonService,FriendService friendService,PetitionService petitionService,UserService userService,PatentDocWorkflowService patentDocWorkflowService) {
+	public PatentDocWorkflowController(PatentDocService patentDocService,InventorService inventorService,AppPersonService appPersonService,FriendService friendService,PetitionService petitionService,UserService userService,PatentDocWorkflowService patentDocWorkflowService,EmployeeService employeeService) {
 		this.patentDocService = patentDocService;
 		this.inventorService = inventorService;
 		this.appPersonService = appPersonService;
@@ -53,6 +61,7 @@ public class PatentDocWorkflowController {
 		this.petitionService = petitionService;
 		this.userService= userService;
 		this.patentDocWorkflowService =patentDocWorkflowService;
+		this.employeeService=employeeService;
 	}
 	
 	
@@ -87,10 +96,130 @@ public class PatentDocWorkflowController {
 		List<PatentDoc> PatentDocs = patentDocService.getPatentDocsByIds(Arrays.asList(patentDocIds));
 		patentDocWorkflowService.createOrder(order, PatentDocs);
 		model.addAttribute("orderId", order.getId());
+		model.addAttribute("patentDocIds",patentDocIds);
 		if (order.getPaymentMethod().getPaymentMethodId() == ALIPAY) {
 			return "redirect:/patentDocAlipay/pay.html";
 		}
 		
 		return "add_patent_success";
+	}
+	
+	@RequestMapping(path="showProxyOrgs", method=RequestMethod.GET)
+	public String showFriends(Model model) {
+		int parentOrgId = employeeService.getParentOrgIdByUserId(PrincipalUtils.getCurrentUserId());
+		List<ProxyOrg> proxyOrgs = employeeService.getProxyOrgList(parentOrgId);
+		model.addAttribute("proxyOrgs", proxyOrgs);
+		return "patent_doc_select_proxy_org";
+	}
+	
+	@RequestMapping(path="/addProxyOrgShares", method=RequestMethod.GET)
+	public String addProxyOrgShares(@RequestParam("patentDocIds")List<Integer> patentDocIds, @RequestParam("proxyOrgs")List<Integer> proxyOrgs) {
+		List<Map<String, Integer>> userPatentDocRecords = new ArrayList<>();
+		List<Long> patentDocIdList=new ArrayList<>();
+		for (int patentDocId: patentDocIds) {
+			for (int proxyOrg: proxyOrgs) {
+				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
+				userPatentRecord.put("userId", proxyOrg);
+				userPatentRecord.put("patentDocId", patentDocId);
+				userPatentDocRecords.add(userPatentRecord);
+			}
+			patentDocIdList.add(Long.valueOf(patentDocId));
+		}
+		patentDocService.insertUserPatentDoc(userPatentDocRecords);
+		final int PATENT_DOC_STAUTS_PAID = 3;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		return "patent_doc_list";
+	}
+	
+	@RequestMapping(path="/showCustomerSupports", method=RequestMethod.GET)//客服
+	public String getCustomerSupportList(Model model) {
+		int proxyOrgId = PrincipalUtils.getCurrentUserId(); 
+		List<CustomerSupport> customerSupports = employeeService.getCustomerSupportList(proxyOrgId);
+		model.addAttribute("customerSupports", customerSupports);
+		return "patent_doc_select_customer_support";
+	}
+	
+	@RequestMapping(path="/addCustomerSupportShares", method=RequestMethod.GET)
+	public String addCustomerSupportShares(@RequestParam("patentDocIds")List<Integer> patentDocIds, @RequestParam("customerSuppors")List<Integer> customerSuppors) {
+		List<Map<String, Integer>> userPatentDocRecords = new ArrayList<>();
+		List<Long> patentDocIdList=new ArrayList<>();
+		for (int patentDocId: patentDocIds) {
+			for (int customerSuppor: customerSuppors) {
+				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
+				userPatentRecord.put("userId", customerSuppor);
+				userPatentRecord.put("patentDocId", patentDocId);
+				userPatentDocRecords.add(userPatentRecord);
+			}
+			patentDocIdList.add(Long.valueOf(patentDocId));
+		}
+		patentDocService.insertUserPatentDoc(userPatentDocRecords);
+		final int PATENT_DOC_STAUTS_PAID = 4;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		return "patent_doc_list";
+	}
+	
+	
+	@RequestMapping(path="/showTechPersons", method=RequestMethod.GET)//技术员
+	public String showTechPersons(Model model) {
+		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+		List<TechPerson> techPersons = employeeService.getTechPersonList(proxyOrgId);
+		model.addAttribute("techPersons", techPersons);
+		return "patent_doc_select_tech_person";
+	}
+	
+	@RequestMapping(path="/addTechPersonShares", method=RequestMethod.GET)
+	public String addTechPersonShares(@RequestParam("patentDocIds")List<Integer> patentDocIds, @RequestParam("techPersons")List<Integer> techPersons) {
+		List<Map<String, Integer>> userPatentDocRecords = new ArrayList<>();
+		List<Long> patentDocIdList=new ArrayList<>();
+		for (int patentDocId: patentDocIds) {
+			for (int techPerson: techPersons) {
+				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
+				userPatentRecord.put("userId", techPerson);
+				userPatentRecord.put("patentDocId", patentDocId);
+				userPatentDocRecords.add(userPatentRecord);
+			}
+			patentDocIdList.add(Long.valueOf(patentDocId));
+		}
+		patentDocService.insertUserPatentDoc(userPatentDocRecords);
+		final int PATENT_DOC_STAUTS_PAID = 5;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		return "patent_doc_list";
+	}
+	
+	
+	@RequestMapping(path="/showProcessPersons", method=RequestMethod.GET)//流程
+	public String showProcessPersons(Model model) {
+		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+		List<ProcessPerson> processPersons = employeeService.getProcessPersonList(proxyOrgId);
+		model.addAttribute("processPersons", processPersons);
+		return "patent_doc_select_process_person";
+	}
+	
+	@RequestMapping(path="/addProcessPersonShares", method=RequestMethod.GET)
+	public String addProcessPersonShares(@RequestParam("patentDocIds")List<Integer> patentDocIds, @RequestParam("processPersons")List<Integer> processPersons) {
+		List<Map<String, Integer>> userPatentDocRecords = new ArrayList<>();
+		List<Long> patentDocIdList=new ArrayList<>();
+		for (int patentDocId: patentDocIds) {
+			for (int processPerson: processPersons) {
+				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
+				userPatentRecord.put("userId", processPerson);
+				userPatentRecord.put("patentDocId", patentDocId);
+				userPatentDocRecords.add(userPatentRecord);
+			}
+			patentDocIdList.add(Long.valueOf(patentDocId));
+		}
+		patentDocService.insertUserPatentDoc(userPatentDocRecords);
+		final int PATENT_DOC_STAUTS_PAID = 10;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		return "patent_doc_list";
+	}
+	
+	
+	@RequestMapping(path="/updatePatentDocStatus", method=RequestMethod.GET)
+	public String updatePatentDocStatus(@RequestParam("patentDocId") Long patentdocId,@RequestParam("status")int status,Model model) {
+		List<Long> patentDocIdList=new ArrayList<>();
+		patentDocIdList.add(patentdocId);
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, status);
+		return "redirect:/editor/patentDocList.html";
 	}
 }

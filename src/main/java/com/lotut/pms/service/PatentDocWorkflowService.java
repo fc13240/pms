@@ -15,4 +15,7 @@ public interface PatentDocWorkflowService {
 	int updateOrderStatus(long orderId, int status);
 	
 	void processOrderPaidSuccess(long orderId);
+	
+	int updatePatentDocStatus(List<Long> patentDocIds, int status);
+	
 }

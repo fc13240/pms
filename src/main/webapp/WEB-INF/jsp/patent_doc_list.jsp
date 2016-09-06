@@ -30,20 +30,48 @@
 					  <form class="form-inline" action="<s:url value='/editor/searchPatentDoc.html'/>" method="get">
 					  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 					    <div class="form-group">
-					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="文档名称" class="t-input form-control"/>	
+					    <table class="search-table">
+					    <tr>
+						    <td>文档状态</td>
+						    <td>关键字</td>
+						    <td></td>
+					    </tr>
+					    <tr>
+						    	<td>
+								    <select style="width:121px;" class="form-control" name="patentDocStatus">
+											<option value="">全部</option>
+											<option value="1">草稿</option>
+											<option value="2">已委托</option>
+											<option value="3">立案分配</option>
+											<option value="4">已分配</option>
+											<option value="5">专家撰写</option>
+											<option value="6">待确认</option>
+											<option value="7">待修改</option>
+											<option value="8">定稿</option>
+											<option value="9">已制作标准申请文件</option>
+											<option value="10">待交局</option>
+											<option value="11">已交局</option>
+									</select>
+						    	</td>
+					    	<td>
+					    		 <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="文档名称" class="t-input form-control"/>	
+					    	
+					    	</td>
+					    	<td>
+					    		<button class="button button-caution button-rounded" type="submit" style="width:80px;">搜索文档</button>
+					    	</td>
+					    </tr>
+
+					   
 					    
-					     <button class="button button-caution button-rounded" type="submit" style="width:80px;">搜索文档</button>
+					     
+					    </table>
 					    </div>
 					  </form>
 
     			</div>
 				<div style="height:10px;"></div>
-					<div class="lt-box" style="padding:30px 0 0 0;">
-							<!-- 	<a href="javascript:return void" onclick="batchShare()" >
-								<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
-								</a>-->
-								
-								
+					<div class="lt-box" style="padding:50px 0 0 0;">
 							<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> 
 							<span class="input-group-btn" >
 							  	<div class="ta-top" style="margin-left:8px;"> 
@@ -51,15 +79,42 @@
 							  	<table class="search-table">
 						  			<tr>
 						  				<td>
-                                <a href="javascript:return void" onclick="batchShare()" >
-								<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
-								</a>
+			                                <a href="javascript:return void" onclick="batchShare()" >
+											<button  class="button button-primary  button-rounded"   >批量分享</button>
+											</a>
 						  				</td>
  						  		<td>
 		                            <a href="javascript:return void" onclick="batchEntrust()" >
-									<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量委托</button>
+									<button style="margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >批量委托</button>
 									</a>
-						  		</td> 		  										  									  				
+						  		</td>
+						  	<se:authorize access="hasRole('ROLE_PLATFORM')">
+							  		 <td>
+			                            <a href="javascript:return void" onclick="batchProxyOrg()" >
+										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >分配给代理机构</button>
+										</a>
+							  		</td>
+						  	 </se:authorize> 
+						  		 <se:authorize access="hasRole('ROLE_PROXY_ORG')"> 
+							  		<td>
+			                            <a href="javascript:return void" onclick="batchCustomerSupport()" >
+										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >分配给客服</button>
+										</a>
+							  		</td> 
+						  		 </se:authorize> 
+						  		 <se:authorize access="hasRole('ROLE_CUSTOMER_SUPPORT')"> 
+							  		<td>
+			                            <a href="javascript:return void" onclick="batchTechPerson()" >
+										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >分配给技术员</button>
+										</a>
+							  		</td>
+							  		
+							  		<td>
+			                            <a href="javascript:return void" onclick="batchProcessPerson()" >
+										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded" data-placement="bottom" >分配给流程员</button>
+										</a>
+							  		</td>
+						  		 </se:authorize>		   										  									  				
 						  			</tr>
 						  		</table>		
 							  </div>
@@ -80,7 +135,7 @@
 							  <th width="140px">标题</th>
 							  <th width="40px">创建时间</th>
 							  <th width="60px">更新时间</th>
-							  <!-- <th width="90px">文档状态</th> -->
+							  <th width="90px">文档状态</th>
 							  <th width="50px">操作</th>
 							</tr>
 						  </thead>
@@ -104,14 +159,46 @@
 								<td style="text-align:center">${patentDoc.name}</td>
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.createTime}" pattern="yyyy-MM-dd"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								<%-- <td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> --%>
+								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center">
+									 <se:authorize access="hasRole('ROLE_TECH')">
+									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=6>">
+									待确认
+									</a>
+									 </se:authorize> 
+									 <se:authorize access="hasRole('ROLE_USER')"> 
+									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=7">
+									待修改
+									</a>
+									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=8">
+									定稿
+									</a>
+									 </se:authorize> 
+									 <se:authorize access="hasRole('ROLE_TECH')"> 
+									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=9">
+									已制作标准申请文件
+									</a>
+									 </se:authorize> 
+									 <se:authorize access="hasRole('ROLE_PROCESS')"> 
+									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=11">
+									已交局
+									</a>
+									 </se:authorize> 
+									 <se:authorize access="hasAnyRole('ROLE_USER','ROLE_TECH')"> 
 									<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 									编辑
-									</a><a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">预览</a>
+									</a>
+									 </se:authorize> 
+									<a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
+									预览
+									</a>
+									
 				                    <%-- <a onclick=" exportWord(${patentDoc.patentDocId});">导出</a> --%>
-				                    <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">删除</a>
-				                    
+				                     <se:authorize access="hasAnyRole('ROLE_USER','ROLE_TECH')"> 
+				                    <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">
+				                                                  删除
+				                    </a>
+				                     </se:authorize> 
 				                   <%--  <a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>
 				                    <a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a> --%>
 				                   
@@ -280,7 +367,7 @@ function batchEntrust() {
 		}
 	}		
 	var patentDocIds = uniquePatentNos.join(",");	
-	location.href = "<s:url value='/patentDocWorkflow/createOrderForm.html'/>?patentDocIds=" + patentDocIds;
+	window.open("<s:url value='/patentDocWorkflow/createOrderForm.html'/>?patentDocIds=" + patentDocIds);
 }
 
 
@@ -321,6 +408,82 @@ function gotoPageForEnter(event) {
 	if(event.keyCode == 13) {
 		gotoPage();
 	}
+}
+
+function batchProxyOrg() {
+	var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+	var uniquePatentNos = []
+	if (!patentSelected) {
+		formutil.alertMessage('请选择专利');
+		
+		return;
+	}
+	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
+	for (var i = 0; i < patents_checked.length; i++) {
+		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+			uniquePatentNos.push(patents_checked[i]);
+		}
+	}		
+	var patentDocIds = uniquePatentNos.join(",");	
+	location.href = "<s:url value='/patentDocWorkflow/showProxyOrgs.html'/>?patentDocIds=" + patentDocIds;
+}
+
+function batchCustomerSupport() {
+	var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+	var uniquePatentNos = []
+	if (!patentSelected) {
+		formutil.alertMessage('请选择专利');
+		
+		return;
+	}
+	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
+	for (var i = 0; i < patents_checked.length; i++) {
+		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+			uniquePatentNos.push(patents_checked[i]);
+		}
+	}		
+	var patentDocIds = uniquePatentNos.join(",");	
+	location.href = "<s:url value='/patentDocWorkflow/showCustomerSupports.html'/>?patentDocIds=" + patentDocIds;
+}
+
+
+function batchTechPerson() {
+	var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+	var uniquePatentNos = []
+	if (!patentSelected) {
+		formutil.alertMessage('请选择专利');
+		
+		return;
+	}
+	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
+	for (var i = 0; i < patents_checked.length; i++) {
+		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+			uniquePatentNos.push(patents_checked[i]);
+		}
+	}		
+	var patentDocIds = uniquePatentNos.join(",");	
+	location.href = "<s:url value='/patentDocWorkflow/showTechPersons.html'/>?patentDocIds=" + patentDocIds;
+}
+
+
+
+
+function batchProcessPerson() {
+	var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+	var uniquePatentNos = []
+	if (!patentSelected) {
+		formutil.alertMessage('请选择专利');
+		
+		return;
+	}
+	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
+	for (var i = 0; i < patents_checked.length; i++) {
+		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+			uniquePatentNos.push(patents_checked[i]);
+		}
+	}		
+	var patentDocIds = uniquePatentNos.join(",");	
+	location.href = "<s:url value='/patentDocWorkflow/showProcessPersons.html'/>?patentDocIds=" + patentDocIds;
 }
 </script>
 <script type="text/javascript">
