@@ -258,7 +258,7 @@ margin: 1px 0 0 1px;}
 												新增申请人
 										</button>
 										<div style="margin-top:10px;" id="appersonDiv">
-											<table id="simple-table" class="table table-striped table-bordered table-hover">
+											<table id="simple-table" style="width:850px" class="table table-striped table-bordered table-hover">
 											  <thead>
 												<tr class="simple_bag">
 												  <!-- <th><input type="checkbox"/></th>
@@ -308,7 +308,7 @@ margin: 1px 0 0 1px;}
 											新增发明人
 										</button>
 										<div style="margin-top:10px;" id="inventorDiv">
-											<table id="simple-table" class="table table-striped table-bordered table-hover">
+											<table id="simple-table"  style="width:850px" class="table table-striped table-bordered table-hover">
 											  <thead>
 												<tr class="simple_bag">
 												  <!-- <th><input type="checkbox"/></th>
@@ -355,7 +355,7 @@ margin: 1px 0 0 1px;}
 										<br/>
 										<br/>
 										<div style="margin-top:10px;" id="contactDiv">
-											<table id="simple-table" class="table table-striped table-bordered table-hover">
+											<table id="simple-table" style="width:850px" class="table table-striped table-bordered table-hover">
 											  <thead>
 												<tr class="simple_bag">
 												 <th>联系人</th>
@@ -956,7 +956,7 @@ margin: 1px 0 0 1px;}
 				<a href="javascript:return void" onclick="batchAddAppPerson()" >
 				<button style="display: inline-block;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个申请人哦！">添加申请人</button>
 				</a>
-			    <input style="display: inline-block;width:400px;margin-left:200px;" type="text" class="t-input form-control" id="searchAppersonName" placeholder="请输入联系人姓名"/>
+			    <input style="display: inline-block;width:400px;margin-left:200px;" type="text" class="t-input form-control" id="searchAppersonName" placeholder="请输入申请人姓名" onkeydown="if(event.keyCode==13){searchAppPerson(this.value);}"/>
 			     <button style="display: inline-block;" class="button button-caution button-rounded" type="button" style="width:80px;" onclick="searchAppPerson($('input[id=searchAppersonName]').val())">搜索</button>
 				<table id="simple-table" class="table table-striped table-bordered table-hover">
 				  <thead>
@@ -1129,7 +1129,7 @@ margin: 1px 0 0 1px;}
 	           <a href="javascript:return void" onclick="batchAddInventor()" >
 				<button style="display: inline-block;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个发明人批量哦！">添加发明人</button>
 				</a>
-				<input style="display: inline-block;width:400px;margin-left:200px;" type="text" class="t-input form-control" id="searchInventorName" placeholder="请输入发明人姓名"/>
+				<input style="display: inline-block;width:400px;margin-left:200px;" type="text" class="t-input form-control" id="searchInventorName" placeholder="请输入发明人姓名" onkeydown="if(event.keyCode==13){searchInventor(this.value);}"/>
 			     <button style="display: inline-block;" class="button button-caution button-rounded" type="button" style="width:80px;" onclick="searchInventor($('input[id=searchInventorName]').val())">搜索</button> 
 				<table id="simple-table" class="table table-striped table-bordered table-hover">
 				<thead>
@@ -2642,7 +2642,6 @@ function updateImgName(value,linkSeqNo){
 		})
 		
 	}
-
 </script>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>	

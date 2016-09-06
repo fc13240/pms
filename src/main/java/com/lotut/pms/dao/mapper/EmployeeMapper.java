@@ -46,6 +46,8 @@ public interface EmployeeMapper {
 
 	void deleteProxyOrg(int orgId);
 
-	int getParentOrgIdByUserId(int currentUserId);
+	int getOrgIdByUserId(int currentUserId);
+	
+	int getOrgIdByCustomerSupportId(int currentUserId);
 
 }

@@ -35,7 +35,7 @@ public class EmployeeController {
 	
 	@RequestMapping(path="/getCustomerSupportList", method=RequestMethod.GET)//客服
 	public String getCustomerSupportList(Model model) {
-		int proxyOrgId = PrincipalUtils.getCurrentUserId(); 
+		int proxyOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		List<CustomerSupport> customerSupports = employeeService.getCustomerSupportList(proxyOrgId);
 		model.addAttribute("customerSupports", customerSupports);
 		return "customer_support_list";
@@ -43,7 +43,7 @@ public class EmployeeController {
 	
 	@RequestMapping(path="/getTechPersonList", method=RequestMethod.GET)//技术员
 	public String getTechPersonList(Model model) {
-		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+		int proxyOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		List<TechPerson> techPersons = employeeService.getTechPersonList(proxyOrgId);
 		model.addAttribute("techPersons", techPersons);
 		return "tech_person_list";
@@ -51,7 +51,7 @@ public class EmployeeController {
 	
 	@RequestMapping(path="/getProcessPersonList", method=RequestMethod.GET)//流程
 	public String getProcessPersonList(Model model) {
-		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+		int proxyOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		List<ProcessPerson> processPersons = employeeService.getProcessPersonList(proxyOrgId);
 		model.addAttribute("processPersons", processPersons);
 		return "process_person_list";
@@ -59,7 +59,7 @@ public class EmployeeController {
 	
 	@RequestMapping(path="/getProxyOrgList", method=RequestMethod.GET)//代理机构
 	public String getProxyOrgList(Model model) {
-		int parentOrgId = employeeService.getParentOrgIdByUserId(PrincipalUtils.getCurrentUserId());
+		int parentOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		List<ProxyOrg> proxyOrgs = employeeService.getProxyOrgList(parentOrgId);
 		model.addAttribute("proxyOrgs", proxyOrgs);
 		return "proxy_org_list";
@@ -154,7 +154,7 @@ public class EmployeeController {
 	
 	@RequestMapping(path="/addOrUpdateCustomerSupport", method=RequestMethod.GET)
 	public String addOrUpdateCustomerSupport(CustomerSupport customerSupport) {
-		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+		int proxyOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		customerSupport.setProxyOrgId(proxyOrgId);
 		employeeService.addOrUpdateCustomerSupport(customerSupport);
 		return "customer_support_add";
@@ -162,7 +162,7 @@ public class EmployeeController {
 	
 	@RequestMapping(path="/addOrUpdateTechPerson", method=RequestMethod.GET)
 	public String addOrUpdateTechPerson(TechPerson techPerson) {
-		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+		int proxyOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		techPerson.setProxyOrgId(proxyOrgId);
 		employeeService.addOrUpdateTechPerson(techPerson);
 		return "tech_person_add";
@@ -170,7 +170,7 @@ public class EmployeeController {
 	
 	@RequestMapping(path="/addOrUpdateProcessPerson", method=RequestMethod.GET)
 	public String addOrUpdateProcessPerson(ProcessPerson processPerson) {
-		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+		int proxyOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		processPerson.setProxyOrgId(proxyOrgId);
 		employeeService.addOrUpdateProcessPerson(processPerson);
 		return "process_person_add";
@@ -178,7 +178,7 @@ public class EmployeeController {
 	
 	@RequestMapping(path="/addOrUpdateProxyOrg", method=RequestMethod.GET)
 	public String addOrUpdateProxyOrg(ProxyOrg proxyOrg) {
-		int parentOrgId = employeeService.getParentOrgIdByUserId(PrincipalUtils.getCurrentUserId());
+		int parentOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		proxyOrg.setParentOrgId(parentOrgId);
 		employeeService.addOrUpdateProxyOrg(proxyOrg);
 		return "proxy_org_add";
