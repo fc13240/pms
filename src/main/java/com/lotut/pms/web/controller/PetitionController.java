@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,11 +26,8 @@ import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.PatentDocAppPerson;
 import com.lotut.pms.domain.PatentDocInventor;
-import com.lotut.pms.domain.UserAppPerson;
-import com.lotut.pms.domain.UserInventor;
-import com.lotut.pms.service.AppPersonService;
-import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PetitionService;
+import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
 
@@ -40,14 +36,12 @@ import com.lotut.pms.web.util.WebUtils;
 public class PetitionController {
 	
 	private PetitionService petitionService;
-	private AppPersonService appPersonService;
-	private InventorService inventorService;
+	private UserService userService;
 	
 	@Autowired
-	public PetitionController(PetitionService petitionService,AppPersonService appPersonService,InventorService inventorService) {
+	public PetitionController(PetitionService petitionService,UserService userService) {
 		this.petitionService = petitionService;
-		this.appPersonService = appPersonService;
-		this.inventorService = inventorService;
+		this.userService = userService;
 	}
 	
 	@RequestMapping(path="/findAppPersonNameById")
@@ -76,16 +70,8 @@ public class PetitionController {
 	
 	@RequestMapping(path="/addCommonAppPerson")
 	public void addCommonAppPerson(@ModelAttribute("commonAppPerson") CommonAppPerson commonAppPerson,@RequestParam("patentDocId") Long patentDocId,HttpServletResponse response){
-		int userId = PrincipalUtils.getCurrentUserId();
-		commonAppPerson.setUserId(userId);
-		petitionService.addCommonAppPerson(commonAppPerson);
-		UserAppPerson userAppPerson=new UserAppPerson();
-		userAppPerson.setUserId(userId);
-		userAppPerson.setAppPersonId(commonAppPerson.getAppPersonId());
-		appPersonService.addUserAppPerson(userAppPerson);
-		List<CommonAppPerson> commonAppPersons = new ArrayList<>();
-		commonAppPersons.add(commonAppPerson);
-		petitionService.addPatentDocAppPerson(commonAppPersons, patentDocId,userId);
+		
+		petitionService.addCommonAppPerson(commonAppPerson,patentDocId);
 		List<PatentDocAppPerson> patentDocAppPersons = petitionService.findPatentDocAppPersonById(patentDocId);
 		try{
 			WebUtils.writeJsonStrToResponse(response, patentDocAppPersons);
@@ -97,16 +83,8 @@ public class PetitionController {
 	
 	@RequestMapping(path="/addCommonInventor",method=RequestMethod.POST)
 	public void addCommonInventor(@ModelAttribute("commonInventor") CommonInventor commonInventor,@RequestParam("patentDocId") Long patentDocId, HttpServletResponse response){
-		int userId = PrincipalUtils.getCurrentUserId();
-		commonInventor.setUserId(userId);
-		petitionService.addCommonInventor(commonInventor);
-		UserInventor userInventor=new UserInventor();
-		userInventor.setUserId(userId);
-		userInventor.setInventorId(commonInventor.getInventorId());
-		inventorService.addUserInventor(userInventor);
-		List<CommonInventor> commonInventors =new ArrayList<>();
-		commonInventors.add(commonInventor);
-		petitionService.addPatentDocInventor(patentDocId, commonInventors, userId);
+	
+		petitionService.addCommonInventor(commonInventor,patentDocId);
 		List<PatentDocInventor> patentDocInventors = petitionService.findPatentDocInventorById(patentDocId);
 		try{
 			WebUtils.writeJsonStrToResponse(response, patentDocInventors);
@@ -270,6 +248,64 @@ public class PetitionController {
 			bis.close();
 			out.close();
 		}
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(path="/settingContact",method=RequestMethod.POST)
+	public void settingContact(Long patentDocId,int addressId,HttpServletResponse response){
+		petitionService.updatePatentDocContact(patentDocId,addressId);
+		
+		List<ContactAddress> contactAddresses = petitionService.findPatentDocContactById(patentDocId);
+		try{
+			WebUtils.writeJsonStrToResponse(response, contactAddresses);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(path="/findContactById",method=RequestMethod.POST)
+	public void findContactById(int id,HttpServletResponse response){
+		
+		ContactAddress contactAddress=userService.getContactAddressesById(id);
+		//List<Map<String, String>> provinces = userService.getAllProvinces();
+		
+		try{
+			WebUtils.writeJsonStrToResponse(response, contactAddress);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(path="/updateContact",method=RequestMethod.POST)
+	public void updateContact(ContactAddress contactAddress,Long patentDocId,HttpServletResponse response){
+		userService.updateUserContactAddresses(contactAddress);
+		List<ContactAddress> contactAddresses = petitionService.findPatentDocContactById(patentDocId);
+		try{
+			WebUtils.writeJsonStrToResponse(response, contactAddresses);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(path="/searchAppPerson")
+	public void searchAppPerson(String keyword,HttpServletResponse response){
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<CommonAppPerson> commonAppPersons=petitionService.searchAppPerson(keyword, userId);
+		try{
+			WebUtils.writeJsonStrToResponse(response, commonAppPersons);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(path="/searchInventor")
+	public void searchInventor(String keyword,HttpServletResponse response){
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<CommonInventor> commonInventors=petitionService.searchInventor(keyword, userId);
+		try{
+			WebUtils.writeJsonStrToResponse(response, commonInventors);
 		}catch(IOException e){
 			e.printStackTrace();
 		}

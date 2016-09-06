@@ -36,34 +36,15 @@
 	$('#'+new_name).show();
 	$('.'+old_tip_name).hide();
 	$('.'+new_tip_name).show();	
-//	$(.right_right_bot).attr("tab_name",new_name);
-	/*if(whichTab<=3){
-	    $("#templateSectionId").html(whichTab+1);
-	    loadingGuideBYTab(whichTab+1);
-		loadingTemplateBYTab(whichTab+1);
 
-		p=1;
-	}else if(whichTab==4){
-		$("#templateSectionId").html(whichTab);
-		p=1;
-		loadingTemplateBYTab(7);
-	}else if(whichTab==6){
-		$("#templateSectionId").html(whichTab);
-		p=1;
-		loadingTemplateBYTab(8);
-	}else if(whichTab==7){
-		$("#templateSectionId").html(whichTab);
-		loadingTemplateBYTab(9);
-		p=1;
-	}*/
 	loadingGuideBYTab(whichTab+1);
-	if(whichTab==0){
+	if(whichTab==1){
 	    $("#templateSectionId").html(1);
 		loadingTemplateBYTab(1);
-	}else if(whichTab==2){
+	}else if(whichTab==3){
 		$("#templateSectionId").html(2);
 		loadingTemplateBYTab(2);
-	}else if(whichTab==3){
+	}else if(whichTab==4){
 		$("#templateSectionId").html(3);
 		loadingTemplateBYTab(3);
 	}else{
