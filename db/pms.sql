@@ -871,7 +871,7 @@ CREATE TABLE IF NOT EXISTS patent_doc_workflow_action(
 
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(1,'委托给平台账户')
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(1,'委托给平台账户');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(2,'分配给代理机构');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(3,'分配给客服人员');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(4,'分配给技术员');

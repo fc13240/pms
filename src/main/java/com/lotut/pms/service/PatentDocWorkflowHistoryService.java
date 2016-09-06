@@ -10,7 +10,7 @@ public interface PatentDocWorkflowHistoryService {
 
 	void addWorkflowTarget(PatentDocWorkflowTarget patentDocWorkflowTarget);
 	
-	long insertHistories(List<Map<String,Long>> patentDocWorkflowHistoryRecords);
+	long insertHistories(List<Map<String,Integer>> patentDocWorkflowHistoryRecords);
 
 	List<PatentDocWorkflowHistory> getPatentDocWorkflowHistoryByUserAndAction( int userId, int action);
 }

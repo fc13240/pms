@@ -11,7 +11,7 @@ import com.lotut.pms.domain.PatentDocWorkflowTarget;
 public interface PatentDocWorkflowHistoryDao {
 	void addWorkflowTarget(PatentDocWorkflowTarget patentDocWorkflowTarget);
 	
-	long insertHistories(List<Map<String,Long>> patentDocWorkflowHistoryRecords);
+	long insertHistories(List<Map<String,Integer>> patentDocWorkflowHistoryRecords);
 	
 	List<PatentDocWorkflowHistory> getPatentDocWorkflowHistoryByUserAndAction( int userId, int action);
 	

@@ -13,9 +13,9 @@ public interface PatentDocWorkflowHistoryMapper {
 	
 	void addWorkflowTarget(PatentDocWorkflowTarget patentDocWorkflowTarget);
 	
-	long insertHistories(List<Map<String,Long>> patentDocWorkflowHistoryRecords);
+	long insertHistories(List<Map<String,Integer>> patentDocWorkflowHistoryRecords);
 	
-	List<PatentDocWorkflowHistory> getPatentDocWorkflowHistoryByUserAndAction(@Param("userId") int userId,@Param("ACTION") int action);
+	List<PatentDocWorkflowHistory> getPatentDocWorkflowHistoryByUserAndAction(@Param("userId") int userId,@Param("action") int action);
 	
 	void insertWorkflowTargets(List<Map<String,Long>> patentDocWorkflowTargetRecords);
 }

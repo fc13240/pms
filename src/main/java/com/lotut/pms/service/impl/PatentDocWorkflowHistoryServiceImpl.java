@@ -20,7 +20,7 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 
 	
 	@Override
-	public long insertHistories(List<Map<String, Long>> patentDocWorkflowHistoryRecords) {
+	public long insertHistories(List<Map<String, Integer>> patentDocWorkflowHistoryRecords) {
 		return patentDocWorkFlowHistoryDao.insertHistories(patentDocWorkflowHistoryRecords);
 	}
 
