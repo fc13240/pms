@@ -50,7 +50,8 @@ public class PatentDocWorkflowController {
 	
 	
 	@Autowired
-	public PatentDocWorkflowController(PatentDocService patentDocService,InventorService inventorService,AppPersonService appPersonService,FriendService friendService,PetitionService petitionService,UserService userService,PatentDocWorkflowService patentDocWorkflowService,EmployeeService employeeService) {
+	public PatentDocWorkflowController(PatentDocService patentDocService,InventorService inventorService,AppPersonService appPersonService,FriendService friendService,PetitionService petitionService,UserService userService,PatentDocWorkflowService patentDocWorkflowService,EmployeeService employeeService
+			,PatentDocWorkflowHistoryService patentDocWorkflowHistoryService) {
 		this.patentDocService = patentDocService;
 		this.inventorService = inventorService;
 		this.appPersonService = appPersonService;
