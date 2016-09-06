@@ -12,8 +12,6 @@ import com.lotut.pms.service.PatentDocWorkflowHistoryService;
 public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHistoryService{
 	private PatentDocWorkflowHistoryDao patentDocWorkFlowHistoryDao;
 	
-	
-	
 	public PatentDocWorkflowHistoryServiceImpl(PatentDocWorkflowHistoryDao patentDocWorkFlowHistoryDao) {
 		this.patentDocWorkFlowHistoryDao = patentDocWorkFlowHistoryDao;
 	}
