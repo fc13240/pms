@@ -149,8 +149,17 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 			}
 		}
 		patentDocWorkflowHistoryDao.insertWorkflowTargets(patentDocWorkflowTargetRecords);
-	
-	
+		
+		
 	}
+
+
+	@Override
+	public int updatePatentDocStatus(List<Long> patentDocIds, int status) {
+		return patentDocWorkflowDao.updatePatentDocStatus(patentDocIds, status);
+	}
+	
+	
+
 	
 }
