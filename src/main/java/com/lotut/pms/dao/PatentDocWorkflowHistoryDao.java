@@ -9,8 +9,11 @@ import com.lotut.pms.domain.PatentDocWorkflowHistory;
 import com.lotut.pms.domain.PatentDocWorkflowTarget;
 
 public interface PatentDocWorkflowHistoryDao {
-	void addHistory(PatentDocWorkflowHistory patentDocWorkFlowHistory);
+	void addWorkflowTarget(PatentDocWorkflowTarget patentDocWorkflowTarget);
 	
-	void addWorkFlowTarget(PatentDocWorkflowTarget patentDocWorkflowTarget);
-    void insertHistory(List<Map<String, Long>> patentDocWorkflowHistoryRecords);
+	long insertHistories(List<Map<String,Integer>> patentDocWorkflowHistoryRecords);
+	
+	List<PatentDocWorkflowHistory> getPatentDocWorkflowHistoryByUserAndAction( int userId, int action);
+	
+	void insertWorkflowTargets(List<Map<String,Long>> patentDocWorkflowTargetRecords);
 }

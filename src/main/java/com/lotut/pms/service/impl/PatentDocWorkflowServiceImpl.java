@@ -92,6 +92,8 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 		
 		List<PatentDoc> PatentDocs = order.getPatentDocList();
 		List<Long> patentDocIdList = new ArrayList<>(PatentDocs.size());
+		List<Integer> patentDocIdIntegerList = new ArrayList<>();
+		
 		for (PatentDoc patentDoc: PatentDocs) {
 			patentDocIdList.add(patentDoc.getPatentDocId());
 		}
@@ -106,24 +108,47 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 				userPatentRecord.put("patentDocId", patentDocId);
 				userPatentDocRecords.add(userPatentRecord);
 			}
+			patentDocIdIntegerList.add(patentDocId.intValue());
 		}
+		
+		
 		patentDocDao.insertProxyOrgPatentDoc(userPatentDocRecords);
 		
 		
 		
-		long userId=PrincipalUtils.getCurrentUserId();
-		List<Map<String, Long>> patentDocWorkflowHistoryRecords = new ArrayList<>();
-		for (Long patentDocId: patentDocIdList) {
-			Map<String, Long> patentDocWorkflowHistoryRecord =  new HashMap<String, Long>();
+		int userId=PrincipalUtils.getCurrentUserId();
+		List<Map<String, Integer>> patentDocWorkflowHistoryRecords = new ArrayList<>();
+		for (Integer patentDocId: patentDocIdIntegerList) {
+			Map<String, Integer> patentDocWorkflowHistoryRecord =  new HashMap<String, Integer>();
 			patentDocWorkflowHistoryRecord.put("userId",userId);
 			patentDocWorkflowHistoryRecord.put("patentDocId", patentDocId);
-			patentDocWorkflowHistoryRecord.put("action",(long)PatentDocWorkflowAction.ActionType.get("委托给平台账户"));
+			patentDocWorkflowHistoryRecord.put("action",PatentDocWorkflowAction.ActionType.get("委托给平台账户"));
 			patentDocWorkflowHistoryRecords.add(patentDocWorkflowHistoryRecord);
-			System.out.println(patentDocWorkflowHistoryRecord);
 		
 		}
-		patentDocWorkflowHistoryDao.insertHistory(patentDocWorkflowHistoryRecords);
+		patentDocWorkflowHistoryDao.insertHistories(patentDocWorkflowHistoryRecords);
 		
+		int action=PatentDocWorkflowAction.ActionType.get("委托给平台账户");
+		List<PatentDocWorkflowHistory> PatentDocWorkflowHistories=patentDocWorkflowHistoryDao.getPatentDocWorkflowHistoryByUserAndAction(userId, action);
+		List<Long> patentDocWorkflowHistoryIdList = new ArrayList<>(PatentDocWorkflowHistories.size());
+		List<Long> patentDocWorkflowHistoryPatentDocIdList = new ArrayList<>(PatentDocWorkflowHistories.size());
+		for(PatentDocWorkflowHistory patentDocWorkflowHistory:PatentDocWorkflowHistories){
+			patentDocWorkflowHistoryIdList.add(patentDocWorkflowHistory.getHistoryId());
+			patentDocWorkflowHistoryPatentDocIdList.add(patentDocWorkflowHistory.getPatentDocId());
+		}
+		List<Map<String, Long>> patentDocWorkflowTargetRecords = new ArrayList<>();
+		for (Long patentDocWorkflowHistoryId:patentDocWorkflowHistoryIdList) {
+			for(User user:platform){
+				for(long patentDocWorkflowHistoryPatentDocId:patentDocWorkflowHistoryPatentDocIdList){
+					Map<String, Long> patentDocWorkflowTargetRecord =  new HashMap<String, Long>();
+					patentDocWorkflowTargetRecord.put("history", patentDocWorkflowHistoryId);
+					patentDocWorkflowTargetRecord.put("target", (long) user.getUserId());
+					patentDocWorkflowTargetRecord.put("patentDoc", patentDocWorkflowHistoryPatentDocId);
+					patentDocWorkflowTargetRecords.add(patentDocWorkflowTargetRecord);
+				}
+			}
+		}
+		patentDocWorkflowHistoryDao.insertWorkflowTargets(patentDocWorkflowTargetRecords);
 		
 		
 	}
@@ -133,6 +158,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 	public int updatePatentDocStatus(List<Long> patentDocIds, int status) {
 		return patentDocWorkflowDao.updatePatentDocStatus(patentDocIds, status);
 	}
+	
 	
 
 	
