@@ -832,6 +832,14 @@ CREATE TABLE IF NOT EXISTS patent_doc_order_items (
 
 ALTER TABLE patent_documents ADD COLUMN price BIGINT DEFAULT NULL;
 
+
+CREATE TABLE IF NOT EXISTS patent_doc_workflow_action(
+	action_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	action_type_desc VARCHAR(30) DEFAULT NULL
+
+
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS patent_doc_workflow_history(
 	history_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	patent_doc_id BIGINT NOT NULL COMMENT '文档编号',
@@ -861,15 +869,10 @@ CREATE TABLE IF NOT EXISTS patent_doc_workflow_target (
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
+ALTER TABLE patent_documents CHANGE contact_person contac_id INT;
 insert into groups (id,group_name) values (8,'PLATFORM');
 insert into group_authorities (group_id,authority) values (8,'ROLE_PLATFORM');
 
-CREATE TABLE IF NOT EXISTS patent_doc_workflow_action(
-	action_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	action_type_desc VARCHAR(30) DEFAULT NULL
-
-
-)ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(1,'委托给平台账户');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(2,'分配给代理机构');
@@ -882,3 +885,4 @@ INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(8,'制�
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(9,'确认');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(10,'交局');
 
+ALTER TABLE patent_documents add column  other_information VARCHAR(1000) ;

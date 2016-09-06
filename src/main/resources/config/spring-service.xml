@@ -76,6 +76,8 @@
 	
 	<bean id="petitionService" class="com.lotut.pms.service.impl.PetitionServiceImpl">
 		<constructor-arg ref="petitionDao"/>
+		<constructor-arg ref="appPersonDao"/>
+		<constructor-arg ref="inventorDao"/>
 	</bean>
 
 	<bean id="patentDocWorkflowService" class="com.lotut.pms.service.impl.PatentDocWorkflowServiceImpl">

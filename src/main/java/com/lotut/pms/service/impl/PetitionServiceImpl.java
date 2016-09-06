@@ -1,22 +1,32 @@
 package com.lotut.pms.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lotut.pms.dao.AppPersonDao;
+import com.lotut.pms.dao.InventorDao;
 import com.lotut.pms.dao.PetitionDao;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.PatentDocAppPerson;
 import com.lotut.pms.domain.PatentDocInventor;
+import com.lotut.pms.domain.UserAppPerson;
+import com.lotut.pms.domain.UserInventor;
 import com.lotut.pms.service.PetitionService;
+import com.lotut.pms.util.PrincipalUtils;
 
 public class PetitionServiceImpl implements PetitionService {
 	private PetitionDao petitionDao;
+	private AppPersonDao appPersonDao;
+	private InventorDao inventorDao;
 	
-	public PetitionServiceImpl(PetitionDao petitionDao) {
+	public PetitionServiceImpl(PetitionDao petitionDao,AppPersonDao appPersonDao,InventorDao inventorDao) {
 		this.petitionDao = petitionDao;
+		this.appPersonDao = appPersonDao;
+		this.inventorDao = inventorDao;
 	}
 
 	@Override
@@ -31,14 +41,39 @@ public class PetitionServiceImpl implements PetitionService {
 
 	@Override
 	@Transactional
-	public void addCommonAppPerson(CommonAppPerson commonAppPerson) {
-		petitionDao.addCommonAppPerson(commonAppPerson);	
+	public void addCommonAppPerson(CommonAppPerson commonAppPerson,Long patentDocId) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		commonAppPerson.setUserId(userId);
+		petitionDao.addCommonAppPerson(commonAppPerson);
+		UserAppPerson userAppPerson=new UserAppPerson();
+		userAppPerson.setUserId(userId);
+		userAppPerson.setAppPersonId(commonAppPerson.getAppPersonId());
+		appPersonDao.addUserAppPerson(userAppPerson);
+		List<CommonAppPerson> commonAppPersons = new ArrayList<>();
+		commonAppPersons.add(commonAppPerson);
+		petitionDao.addPatentDocAppPerson(commonAppPersons, patentDocId,userId);
+		
+		
+		
+		//petitionDao.addCommonAppPerson(commonAppPerson);	
 	}
 
 	@Override
 	@Transactional
-	public void addCommonInventor(CommonInventor commonInventor) {
+	public void addCommonInventor(CommonInventor commonInventor,Long patentDocId) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		commonInventor.setUserId(userId);
 		petitionDao.addCommonInventor(commonInventor);
+		UserInventor userInventor=new UserInventor();
+		userInventor.setUserId(userId);
+		userInventor.setInventorId(commonInventor.getInventorId());
+		inventorDao.addUserInventor(userInventor);
+		List<CommonInventor> commonInventors =new ArrayList<>();
+		commonInventors.add(commonInventor);
+		petitionDao.addPatentDocInventor(patentDocId, commonInventors, userId);
+		
+		
+		//petitionDao.addCommonInventor(commonInventor);
 	}
 
 	@Override
@@ -121,5 +156,25 @@ public class PetitionServiceImpl implements PetitionService {
 	@Override
 	public List<CommonInventor> getUserCommonInventors(int userId) {
 		return petitionDao.getUserCommonInventors(userId);
+	}
+
+	@Override
+	public void updatePatentDocContact(Long patentDocId, int addressId) {
+		petitionDao.updatePatentDocContact(patentDocId, addressId);
+	}
+
+	@Override
+	public List<ContactAddress> findPatentDocContactById(Long patentDocId) {
+		return petitionDao.findPatentDocContactById(patentDocId);
+	}
+
+	@Override
+	public List<CommonAppPerson> searchAppPerson(String keyword, int userId) {
+		return petitionDao.searchAppPerson(keyword, userId);
+	}
+
+	@Override
+	public List<CommonInventor> searchInventor(String keyword, int userId) {
+		return petitionDao.searchInventor(keyword, userId);
 	}
 }

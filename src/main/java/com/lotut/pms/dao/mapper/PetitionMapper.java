@@ -24,29 +24,37 @@ public interface PetitionMapper {
 	
 	void addPatentDocAppPerson(@Param("commonAppPersons") List<CommonAppPerson> commonAppPersons,@Param("patentDocId") Long patentDocId,@Param("userId") int userId);
 	
-	List<PatentDocAppPerson> findPatentDocAppPersonById(@Param("patentDocId") Long patentDocId);
+	List<PatentDocAppPerson> findPatentDocAppPersonById(Long patentDocId);
 	
 	void addPatentDocInventor(@Param("patentDocId") Long patentDocId,@Param("commonInventors") List<CommonInventor> commonInventors,@Param("userId") int userId);
 	
-	List<PatentDocInventor> findPatentDocInventorById(@Param("patentDocId") Long patentDocId);
+	List<PatentDocInventor> findPatentDocInventorById(Long patentDocId);
 	
-	void deletePatentDocApperson(@Param("personId") Long personId);
+	void deletePatentDocApperson(Long personId);
 	
 	void updatePatentDocApperson(PatentDocAppPerson patentDocAppPerson);
 	
-	void deletePatentDocInventor(@Param("inventorId") Long inventorId);
+	void deletePatentDocInventor(Long inventorId);
 	
 	void updatePatentDocInventor(PatentDocInventor patentDocInventor);
 	
-	PatentDocAppPerson findAppPersonByAppId(@Param("personId") Long personId);
+	PatentDocAppPerson findAppPersonByAppId(Long personId);
 	
-	PatentDocInventor findInventorById(@Param("inventorId") Long inventorId);
+	PatentDocInventor findInventorById(Long inventorId);
 	
 	void updatePatentDocAttachmentUrl(@Param("attachmentUrl") String attachmentUrl,@Param("patentDocId") Long patentDocId);
 	
-	String getPatentAttachmentFile(@Param("patentDocId") Long patentDocId);
+	String getPatentAttachmentFile(Long patentDocId);
 	
 	List<CommonAppPerson> getUserCommonAppPersons(int userId);
 	
 	List<CommonInventor> getUserCommonInventors(int userId);
+	
+	void updatePatentDocContact(@Param("patentDocId") Long patentDocId, @Param("addressId") int addressId);
+	
+	List<ContactAddress> findPatentDocContactById(Long patentDocId);
+	
+	List<CommonAppPerson> searchAppPerson(@Param("keyword") String keyword,@Param("userId") int userId);
+	
+	List<CommonInventor> searchInventor(@Param("keyword") String keyword,@Param("userId") int userId);
 }

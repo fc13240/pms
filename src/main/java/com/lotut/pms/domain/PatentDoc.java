@@ -23,7 +23,7 @@ public class PatentDoc {
 	private String patentDocAttachmentFile;
 	private String patentDocUrl;
 	private PatentDocStatus patentDocStatus;
-	private String contactPerson;
+	private int contactId;
 	private String otherInformation;
 	private String attachmentUrl;
 	private long price;
@@ -143,11 +143,11 @@ public class PatentDoc {
 	public void setAbstractDescription(String abstractDescription) {
 		this.abstractDescription = abstractDescription;
 	}
-	public String getContactPerson() {
-		return contactPerson;
+	public int getContactId() {
+		return contactId;
 	}
-	public void setContactPerson(String contactPerson) {
-		this.contactPerson = contactPerson;
+	public void setContactId(int contactId) {
+		this.contactId = contactId;
 	}
 
 	

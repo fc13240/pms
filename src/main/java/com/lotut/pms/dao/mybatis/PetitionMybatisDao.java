@@ -118,6 +118,26 @@ public class PetitionMybatisDao extends SqlSessionDaoSupport implements Petition
 	public List<CommonInventor> getUserCommonInventors(int userId) {
 		return petitionMapper.getUserCommonInventors(userId);
 	}
+
+	@Override
+	public void updatePatentDocContact(Long patentDocId, int addressId) {
+		petitionMapper.updatePatentDocContact(patentDocId, addressId);
+	}
+
+	@Override
+	public List<ContactAddress> findPatentDocContactById(Long patentDocId) {
+		return petitionMapper.findPatentDocContactById(patentDocId);
+	}
+
+	@Override
+	public List<CommonAppPerson> searchAppPerson(String keyword, int userId) {
+		return petitionMapper.searchAppPerson(keyword, userId);
+	}
+
+	@Override
+	public List<CommonInventor> searchInventor(String keyword, int userId) {
+		return petitionMapper.searchInventor(keyword, userId);
+	}
 	
 	
 
