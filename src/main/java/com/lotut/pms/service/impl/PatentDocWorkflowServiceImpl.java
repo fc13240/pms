@@ -119,6 +119,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 			patentDocWorkflowHistoryRecord.put("patentDocId", patentDocId);
 			patentDocWorkflowHistoryRecord.put("action",(long)PatentDocWorkflowAction.ActionType.get("委托给平台账户"));
 			patentDocWorkflowHistoryRecords.add(patentDocWorkflowHistoryRecord);
+			System.out.println(patentDocWorkflowHistoryRecord);
 		
 		}
 		patentDocWorkflowHistoryDao.insertHistory(patentDocWorkflowHistoryRecords);
