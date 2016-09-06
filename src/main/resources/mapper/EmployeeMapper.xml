@@ -161,5 +161,9 @@
 		update proxy_org set remark_name=#{remarkName} where org_id=#{orgId}
 	</update>
 	
+	<select id="getOrgIdByCustomerSupportId"  parameterType="int" resultType="int">
+		select proxy_org_id from customer_supports where user_id = #{currentUserId}
+	</select>
+	
 	
 </mapper>

@@ -44,5 +44,7 @@ public interface EmployeeDao {
 	void deleteProxyOrg(int orgId);
 
 	int getOrgIdByUserId(int currentUserId);
+	
+	int getOrgIdByCustomerSupportId(int currentUserId);
 
 }

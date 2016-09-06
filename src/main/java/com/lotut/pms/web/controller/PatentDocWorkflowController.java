@@ -133,7 +133,7 @@ public class PatentDocWorkflowController {
 	
 	@RequestMapping(path="/showCustomerSupports", method=RequestMethod.GET)//客服
 	public String getCustomerSupportList(Model model) {
-		int proxyOrgId = PrincipalUtils.getCurrentUserId(); 
+		int proxyOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		List<CustomerSupport> customerSupports = employeeService.getCustomerSupportList(proxyOrgId);
 		model.addAttribute("customerSupports", customerSupports);
 		return "patent_doc_select_customer_support";
@@ -161,7 +161,7 @@ public class PatentDocWorkflowController {
 	
 	@RequestMapping(path="/showTechPersons", method=RequestMethod.GET)//技术员
 	public String showTechPersons(Model model) {
-		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+		int proxyOrgId = employeeService.getOrgIdByCustomerSupportId(PrincipalUtils.getCurrentUserId());
 		List<TechPerson> techPersons = employeeService.getTechPersonList(proxyOrgId);
 		model.addAttribute("techPersons", techPersons);
 		return "patent_doc_select_tech_person";
@@ -189,7 +189,7 @@ public class PatentDocWorkflowController {
 	
 	@RequestMapping(path="/showProcessPersons", method=RequestMethod.GET)//流程
 	public String showProcessPersons(Model model) {
-		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+		int proxyOrgId = employeeService.getOrgIdByCustomerSupportId(PrincipalUtils.getCurrentUserId());
 		List<ProcessPerson> processPersons = employeeService.getProcessPersonList(proxyOrgId);
 		model.addAttribute("processPersons", processPersons);
 		return "patent_doc_select_process_person";
