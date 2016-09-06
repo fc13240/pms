@@ -1,37 +1,73 @@
 package com.lotut.pms.service.impl;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.lotut.pms.constants.PatentDocWorkflowAction;
 import com.lotut.pms.dao.PatentDocWorkflowHistoryDao;
 import com.lotut.pms.domain.PatentDocWorkflowHistory;
-import com.lotut.pms.domain.PatentDocWorkflowTarget;
 import com.lotut.pms.service.PatentDocWorkflowHistoryService;
+import com.lotut.pms.util.PrincipalUtils;
 
 public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHistoryService{
-	private PatentDocWorkflowHistoryDao patentDocWorkFlowHistoryDao;
+	private PatentDocWorkflowHistoryDao patentDocWorkflowHistoryDao;
 	
-	public PatentDocWorkflowHistoryServiceImpl(PatentDocWorkflowHistoryDao patentDocWorkFlowHistoryDao) {
-		this.patentDocWorkFlowHistoryDao = patentDocWorkFlowHistoryDao;
+	public PatentDocWorkflowHistoryServiceImpl(PatentDocWorkflowHistoryDao patentDocWorkflowHistoryDao) {
+		this.patentDocWorkflowHistoryDao = patentDocWorkflowHistoryDao;
 	}
 
 	
 	@Override
-	public long insertHistories(List<Map<String, Integer>> patentDocWorkflowHistoryRecords) {
-		return patentDocWorkFlowHistoryDao.insertHistories(patentDocWorkflowHistoryRecords);
+	public long insertHistories(List<Integer> ids) {
+		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
+		int userId=PrincipalUtils.getCurrentUserId();
+		List<Map<String, Integer>> patentDocWorkflowHistoryRecords = new ArrayList<>();
+		for (int patentDocId: ids) {
+				Map<String, Integer> patentDocWorkflowHistoryRecord =  new HashMap<String, Integer>();
+				patentDocWorkflowHistoryRecord.put("userId", userId);
+				patentDocWorkflowHistoryRecord.put("patentDocId", patentDocId);
+				patentDocWorkflowHistoryRecord.put("action",action);
+				patentDocWorkflowHistoryRecords.add(patentDocWorkflowHistoryRecord);
+		}
+		return patentDocWorkflowHistoryDao.insertHistories(patentDocWorkflowHistoryRecords);
 	}
 
 
-	@Override
-	public void addWorkflowTarget(PatentDocWorkflowTarget patentDocWorkflowTarget) {
-		patentDocWorkFlowHistoryDao.addWorkflowTarget(patentDocWorkflowTarget);
-	}
 
 
 	@Override
 	public List<PatentDocWorkflowHistory> getPatentDocWorkflowHistoryByUserAndAction(int userId, int action) {
-		return patentDocWorkFlowHistoryDao.getPatentDocWorkflowHistoryByUserAndAction(userId, action);
+		return patentDocWorkflowHistoryDao.getPatentDocWorkflowHistoryByUserAndAction(userId, action);
+	}
+
+
+	@Override
+	public void insertWorkflowTargets(List<Integer> proxyOrgs) {
+		int userId=PrincipalUtils.getCurrentUserId();
+		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
+		List<PatentDocWorkflowHistory> PatentDocWorkflowHistories=patentDocWorkflowHistoryDao.getPatentDocWorkflowHistoryByUserAndAction(userId, action);
+		List<Long> patentDocWorkflowHistoryIdList = new ArrayList<>(PatentDocWorkflowHistories.size());
+		List<Long> patentDocWorkflowHistoryPatentDocIdList = new ArrayList<>(PatentDocWorkflowHistories.size());
+		for(PatentDocWorkflowHistory patentDocWorkflowHistory:PatentDocWorkflowHistories){
+			patentDocWorkflowHistoryIdList.add(patentDocWorkflowHistory.getHistoryId());
+			patentDocWorkflowHistoryPatentDocIdList.add(patentDocWorkflowHistory.getPatentDocId());
+		}
+		List<Map<String, Long>> patentDocWorkflowTargetRecords=new ArrayList<>();
+		for (Long patentDocWorkflowHistoryId:patentDocWorkflowHistoryIdList) {
+			for(int proxyOrg: proxyOrgs){
+				for(long patentDocWorkflowHistoryPatentDocId:patentDocWorkflowHistoryPatentDocIdList){
+					Map<String, Long> patentDocWorkflowTargetRecord =  new HashMap<String, Long>();
+					patentDocWorkflowTargetRecord.put("history", patentDocWorkflowHistoryId);
+					patentDocWorkflowTargetRecord.put("target", (long) proxyOrg);
+					patentDocWorkflowTargetRecord.put("patentDoc", patentDocWorkflowHistoryPatentDocId);
+					patentDocWorkflowTargetRecords.add(patentDocWorkflowTargetRecord);
+				}
+			}
+		}
+		patentDocWorkflowHistoryDao.insertWorkflowTargets(patentDocWorkflowTargetRecords);
 	}
 
 

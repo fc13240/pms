@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.CustomerSupport;
-import com.lotut.pms.domain.Fee;
-import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocOrder;
 import com.lotut.pms.domain.ProxyOrg;
@@ -29,12 +26,11 @@ import com.lotut.pms.service.EmployeeService;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PatentDocService;
+import com.lotut.pms.service.PatentDocWorkflowHistoryService;
 import com.lotut.pms.service.PatentDocWorkflowService;
-import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.service.PetitionService;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
-import com.mysql.fabric.xmlrpc.base.Array;
 
 
 @Controller
@@ -48,6 +44,7 @@ public class PatentDocWorkflowController {
 	private FriendService friendService;
 	private PetitionService petitionService;
 	private EmployeeService employeeService;
+	private PatentDocWorkflowHistoryService patentDocWorkflowHistoryService;
 	
 	
 	@Autowired
@@ -60,6 +57,7 @@ public class PatentDocWorkflowController {
 		this.userService= userService;
 		this.patentDocWorkflowService =patentDocWorkflowService;
 		this.employeeService=employeeService;
+		this.patentDocWorkflowHistoryService=patentDocWorkflowHistoryService;
 	}
 	
 	
@@ -126,6 +124,12 @@ public class PatentDocWorkflowController {
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		final int PATENT_DOC_STAUTS_PAID = 3;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		
+		patentDocWorkflowHistoryService.insertHistories(patentDocIds);
+		
+		patentDocWorkflowHistoryService.insertWorkflowTargets(proxyOrgs);
+		
+		
 		return "patent_doc_list";
 	}
 	
