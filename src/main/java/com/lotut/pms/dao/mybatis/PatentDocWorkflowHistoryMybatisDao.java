@@ -18,24 +18,31 @@ public class PatentDocWorkflowHistoryMybatisDao extends SqlSessionDaoSupport imp
 	}
 
 	@Override
-	public void addHistory(PatentDocWorkflowHistory patentDocWorkFlowHistory) {
-		patentDocWorkflowHistoryMapper.addHistory(patentDocWorkFlowHistory);
+	public void addWorkflowTarget(PatentDocWorkflowTarget patentDocWorkflowTarget) {
+		patentDocWorkflowHistoryMapper.addWorkflowTarget(patentDocWorkflowTarget);
 	}
 
 	@Override
-	public void addWorkFlowTarget(PatentDocWorkflowTarget patentDocWorkflowTarget) {
-		patentDocWorkflowHistoryMapper.addWorkFlowTarget(patentDocWorkflowTarget);
+	public long insertHistories(List<Map<String, Long>> patentDocWorkflowHistoryRecords) {
+		return patentDocWorkflowHistoryMapper.insertHistories(patentDocWorkflowHistoryRecords);
 	}
 
 	@Override
-	public void insertHistory(List<Map<String, Long>> patentDocWorkflowHistoryRecords) {
-		patentDocWorkflowHistoryMapper.insertHistory(patentDocWorkflowHistoryRecords);
+	public List<PatentDocWorkflowHistory> getPatentDocWorkflowHistoryByUserAndAction(int userId, int action) {
+		return patentDocWorkflowHistoryMapper.getPatentDocWorkflowHistoryByUserAndAction(userId, action);
 	}
 
-//	@Override
-//	public List<Long> insertHistory(List<Map<String, Long>> patentDocWorkflowHistoryRecords) {
-//		
-//		return patentDocWorkflowHistoryMapper.insertHistory(patentDocWorkflowHistoryRecords);
-//	}
-//	
+	@Override
+	public void insertWorkflowTargets(List<Map<String, Long>> patentDocWorkflowTargetRecords) {
+		patentDocWorkflowHistoryMapper.insertHistories(patentDocWorkflowTargetRecords);
+	}
+
+	
+
+	
+	
+
+
+	
+
 }

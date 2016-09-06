@@ -836,12 +836,14 @@ CREATE TABLE IF NOT EXISTS patent_doc_workflow_history(
 	history_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	patent_doc_id BIGINT NOT NULL COMMENT '文档编号',
 	user_id INT NOT NULL COMMENT '创建者',
-	user_name VARCHAR(50),
-	ACTION INT  COMMENT'操作',
+	user_name VARCHAR(50) ,
+	ACTION INT NOT NULL COMMENT'操作',
 	action_time TIMESTAMP NOT NULL COMMENT '操作创建时间',
 	CONSTRAINT fk_patent_doc_workflow_history_user_id FOREIGN KEY idx_patent_doc_workflow_history_user_id(user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-	CONSTRAINT fk_patent_doc_workflow_history_patent_doc_id FOREIGN KEY fk_patent_doc_workflow_history_patent_doc_id(patent_doc_id) REFERENCES
-	patent_documents(patent_doc_id) ON DELETE CASCADE
+	CONSTRAINT fk_patent_doc_workflow_history_patent_doc_id FOREIGN KEY idx_patent_doc_workflow_history_patent_doc_id(patent_doc_id) REFERENCES
+	patent_documents(patent_doc_id) ON DELETE CASCADE,
+	CONSTRAINT fk_patent_doc_workflow_history_action FOREIGN KEY idx_patent_doc_workflow_history_action(ACTION) REFERENCES
+	 patent_doc_workflow_action (action_id) ON DELETE CASCADE
 	
 	
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
@@ -856,9 +858,27 @@ CREATE TABLE IF NOT EXISTS patent_doc_workflow_target (
 	CONSTRAINT `fk_patent_doc_workflow_target_patent_doc` FOREIGN KEY (`patent_doc`) REFERENCES `patent_documents` (`patent_doc_id`) ON DELETE CASCADE,
 	CONSTRAINT `fk_patent_doc_workflow_target_target` FOREIGN KEY (`target`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
 	CONSTRAINT fk_patent_doc_workflow_target_history FOREIGN KEY (history) REFERENCES patent_doc_workflow_history(history_id) ON DELETE CASCADE
-) ENGINE=INNODB DEFAULT CHARSET=utf8
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
 insert into groups (id,group_name) values (8,'PLATFORM');
 insert into group_authorities (group_id,authority) values (8,'ROLE_PLATFORM');
+
+CREATE TABLE IF NOT EXISTS patent_doc_workflow_action(
+	action_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	action_type_desc VARCHAR(30) DEFAULT NULL
+
+
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(1,'委托给平台账户')
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(2,'分配给代理机构');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(3,'分配给客服人员');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(4,'分配给技术员');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(5,'审查');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(6,'修改');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(7,'定稿');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(8,'制作标准文件');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(9,'确认');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(10,'交局');
 

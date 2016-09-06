@@ -18,25 +18,25 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 		this.patentDocWorkFlowHistoryDao = patentDocWorkFlowHistoryDao;
 	}
 
+	
 	@Override
-	public void addHistory(PatentDocWorkflowHistory patentDocWorkFlowHistory) {
-		patentDocWorkFlowHistoryDao.addHistory(patentDocWorkFlowHistory);	
+	public long insertHistories(List<Map<String, Long>> patentDocWorkflowHistoryRecords) {
+		return patentDocWorkFlowHistoryDao.insertHistories(patentDocWorkflowHistoryRecords);
 	}
 
-	@Override
-	public void addWorkFlowTarget(PatentDocWorkflowTarget patentDocWorkflowTarget) {
-		patentDocWorkFlowHistoryDao.addWorkFlowTarget(patentDocWorkflowTarget);
-	}
 
 	@Override
-	public void insertHistory(List<Map<String, Long>> patentDocWorkflowHistoryRecords) {
-		patentDocWorkFlowHistoryDao.insertHistory(patentDocWorkflowHistoryRecords);
+	public void addWorkflowTarget(PatentDocWorkflowTarget patentDocWorkflowTarget) {
+		patentDocWorkFlowHistoryDao.addWorkflowTarget(patentDocWorkflowTarget);
 	}
 
-//	@Override
-//	public List<Long> insertHistory(List<Map<String, Long>> patentDocWorkflowHistoryRecords) {
-//		
-//		return patentDocWorkFlowHistoryDao.insertHistory(patentDocWorkflowHistoryRecords);
-//	}
+
+	@Override
+	public List<PatentDocWorkflowHistory> getPatentDocWorkflowHistoryByUserAndAction(int userId, int action) {
+		return patentDocWorkFlowHistoryDao.getPatentDocWorkflowHistoryByUserAndAction(userId, action);
+	}
+
+
+
 	
 }
