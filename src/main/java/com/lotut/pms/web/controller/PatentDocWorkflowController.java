@@ -224,6 +224,6 @@ public class PatentDocWorkflowController {
 		List<Long> patentDocIdList=new ArrayList<>();
 		patentDocIdList.add(patentdocId);
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, status);
-		return "patent_doc_list";
+		return "redirect:/editor/patentDocList.html";
 	}
 }
