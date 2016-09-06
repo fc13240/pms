@@ -75,7 +75,7 @@
 	
 	<select id="getUserPatentDocById"  resultMap="PatentDocMap">
 		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
-		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,attachment_url,other_information from patent_documents where  patent_doc_id=#{patentDocId}
+		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,contact_id,attachment_url,other_information from patent_documents where  patent_doc_id=#{patentDocId}
 	</select>
 	
 	<update id="updatePatentDoc" parameterType="PatentDoc">
