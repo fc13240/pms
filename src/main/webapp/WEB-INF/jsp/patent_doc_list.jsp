@@ -90,7 +90,12 @@
 						  				</td>
  						  		<td>
 		                            <a href="javascript:return void" onclick="batchEntrust()" >
-									<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量委托</button>
+									<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >批量委托</button>
+									</a>
+						  		</td> 
+						  		 <td>
+		                            <a href="javascript:return void" onclick="batchProxyOrg()" >
+									<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给代理机构</button>
 									</a>
 						  		</td> 		  										  									  				
 						  			</tr>
@@ -354,6 +359,24 @@ function gotoPageForEnter(event) {
 	if(event.keyCode == 13) {
 		gotoPage();
 	}
+}
+
+function batchProxyOrg() {
+	var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+	var uniquePatentNos = []
+	if (!patentSelected) {
+		formutil.alertMessage('请选择专利');
+		
+		return;
+	}
+	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
+	for (var i = 0; i < patents_checked.length; i++) {
+		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+			uniquePatentNos.push(patents_checked[i]);
+		}
+	}		
+	var patentDocIds = uniquePatentNos.join(",");	
+	location.href = "<s:url value='/patentDocWorkflow/showProxyOrgs.html'/>?patentDocIds=" + patentDocIds;
 }
 </script>
 <script type="text/javascript">

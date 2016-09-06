@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.ContactAddress;
@@ -20,8 +21,10 @@ import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocOrder;
+import com.lotut.pms.domain.ProxyOrg;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.AppPersonService;
+import com.lotut.pms.service.EmployeeService;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PatentDocService;
@@ -30,6 +33,7 @@ import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.service.PetitionService;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.mysql.fabric.xmlrpc.base.Array;
 
 
 @Controller
@@ -42,10 +46,11 @@ public class PatentDocWorkflowController {
 	private UserService userService;
 	private FriendService friendService;
 	private PetitionService petitionService;
+	private EmployeeService employeeService;
 	
 	
 	@Autowired
-	public PatentDocWorkflowController(PatentDocService patentDocService,InventorService inventorService,AppPersonService appPersonService,FriendService friendService,PetitionService petitionService,UserService userService,PatentDocWorkflowService patentDocWorkflowService) {
+	public PatentDocWorkflowController(PatentDocService patentDocService,InventorService inventorService,AppPersonService appPersonService,FriendService friendService,PetitionService petitionService,UserService userService,PatentDocWorkflowService patentDocWorkflowService,EmployeeService employeeService) {
 		this.patentDocService = patentDocService;
 		this.inventorService = inventorService;
 		this.appPersonService = appPersonService;
@@ -53,6 +58,7 @@ public class PatentDocWorkflowController {
 		this.petitionService = petitionService;
 		this.userService= userService;
 		this.patentDocWorkflowService =patentDocWorkflowService;
+		this.employeeService=employeeService;
 	}
 	
 	
@@ -94,4 +100,33 @@ public class PatentDocWorkflowController {
 		
 		return "add_patent_success";
 	}
+	
+	@RequestMapping(path="showProxyOrgs", method=RequestMethod.GET)
+	public String showFriends(Model model) {
+		int parentOrgId = employeeService.getParentOrgIdByUserId(PrincipalUtils.getCurrentUserId());
+		List<ProxyOrg> proxyOrgs = employeeService.getProxyOrgList(parentOrgId);
+		model.addAttribute("proxyOrgs", proxyOrgs);
+		return "patent_doc_select_proxy_org";
+	}
+	
+	@RequestMapping(path="/addProxyOrgShares", method=RequestMethod.GET)
+	public String sharePatents(@RequestParam("patentDocIds")List<Integer> patentDocIds, @RequestParam("proxyOrgs")List<Integer> proxyOrgs) {
+		List<Map<String, Integer>> userPatentDocRecords = new ArrayList<>();
+		List<Long> patentDocIdList=new ArrayList<>();
+		for (int patentDocId: patentDocIds) {
+			for (int proxyOrg: proxyOrgs) {
+				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
+				userPatentRecord.put("userId", proxyOrg);
+				userPatentRecord.put("patentDocId", patentDocId);
+				userPatentDocRecords.add(userPatentRecord);
+			}
+			patentDocIdList.add((long)patentDocId);
+		}
+		patentDocService.insertUserPatentDoc(userPatentDocRecords);
+		final int PATENT_DOC_STAUTS_PAID = 3;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		return "patent_doc_list";
+	}
+	
+	
 }

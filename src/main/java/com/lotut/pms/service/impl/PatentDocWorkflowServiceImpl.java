@@ -127,6 +127,12 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 		
 		
 	}
+
+
+	@Override
+	public int updatePatentDocStatus(List<Long> patentDocIds, int status) {
+		return patentDocWorkflowDao.updatePatentDocStatus(patentDocIds, status);
+	}
 	
 
 	

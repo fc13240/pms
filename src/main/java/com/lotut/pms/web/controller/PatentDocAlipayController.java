@@ -32,13 +32,13 @@ import com.lotut.pms.util.PrincipalUtils;
 
 @Controller
 @RequestMapping(path="/patentDocAlipay")
-public class AlipayByPatentDocController {
+public class PatentDocAlipayController {
 	private PatentDocWorkflowService patentDocWorkflowService;
 	private PatentDocWorkflowHistoryService patentDocWorkflowHistoryService;
 	private static int NEED_PAY_STATUS = 0;
 	
 	@Autowired
-	public AlipayByPatentDocController(PatentDocWorkflowService patentDocWorkflowService) {
+	public PatentDocAlipayController(PatentDocWorkflowService patentDocWorkflowService) {
 		this.patentDocWorkflowService = patentDocWorkflowService;
 	}
 	
