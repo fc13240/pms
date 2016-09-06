@@ -142,7 +142,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 				for(long patentDocWorkflowHistoryPatentDocId:patentDocWorkflowHistoryPatentDocIdList){
 					Map<String, Long> patentDocWorkflowTargetRecord =  new HashMap<String, Long>();
 					patentDocWorkflowTargetRecord.put("history", patentDocWorkflowHistoryId);
-					patentDocWorkflowTargetRecord.put("userId", (long) user.getUserId());
+					patentDocWorkflowTargetRecord.put("target", (long) user.getUserId());
 					patentDocWorkflowTargetRecord.put("patentDoc", patentDocWorkflowHistoryPatentDocId);
 					patentDocWorkflowTargetRecords.add(patentDocWorkflowTargetRecord);
 				}
