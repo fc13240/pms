@@ -66,13 +66,13 @@
 							  </tr>
 							</thead>
 							<tbody>
-							  <c:forEach items="${proxyOrgs}" var="proxyOrg" varStatus="status">
+							  <c:forEach items="${customerSupports}" var="customerSupport" varStatus="status">
 								<tr>
-								  <td ><input name="friend" style="width:15px;" type="checkbox" class="check-item" friend="<c:out value='${proxyOrg.orgUserId}'/>"></td>
+								  <td ><input name="friend" style="width:15px;" type="checkbox" class="check-item" friend="<c:out value='${customerSupport.userId}'/>"></td>
 								  <td>${status.count}</td>
-								  <td><c:out value="${proxyOrg.user.username}"/></td>
-								  <td><c:out value="${proxyOrg.user.name}"/></td>
-								  <td><c:out value="${proxyOrg.remarkName}"/></td>
+								  <td><c:out value="${customerSupport.user.username}"/></td>
+								  <td><c:out value="${customerSupport.user.name}"/></td>
+								  <td><c:out value="${customerSupport.remarkName}"/></td>
 								</tr>
 							  </c:forEach>
 							
@@ -151,10 +151,10 @@
 			});
 	   				
 		} else {
-			var proxyOrgs = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'friend').join(",");
+			var customerSuppors = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'friend').join(",");
 			var patentDocIds = $("input[name=patentDocIds]").val();
 			$.ajax({
-				url: "<s:url value='/patentDocWorkflow/addProxyOrgShares.html'/>?proxyOrgs=" + proxyOrgs + "&patentDocIds=" + patentDocIds, 
+				url: "<s:url value='/patentDocWorkflow/addCustomerSupportShares.html'/>?customerSuppors=" + customerSuppors + "&patentDocIds=" + patentDocIds, 
 				type: 'GET', 
 				success: function() {
 					$("<div>分享成功</div>").dialog({

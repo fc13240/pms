@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.CustomerSupport;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.PatentDoc;
@@ -110,7 +111,7 @@ public class PatentDocWorkflowController {
 	}
 	
 	@RequestMapping(path="/addProxyOrgShares", method=RequestMethod.GET)
-	public String sharePatents(@RequestParam("patentDocIds")List<Integer> patentDocIds, @RequestParam("proxyOrgs")List<Integer> proxyOrgs) {
+	public String addProxyOrgShares(@RequestParam("patentDocIds")List<Integer> patentDocIds, @RequestParam("proxyOrgs")List<Integer> proxyOrgs) {
 		List<Map<String, Integer>> userPatentDocRecords = new ArrayList<>();
 		List<Long> patentDocIdList=new ArrayList<>();
 		for (int patentDocId: patentDocIds) {
@@ -120,7 +121,7 @@ public class PatentDocWorkflowController {
 				userPatentRecord.put("patentDocId", patentDocId);
 				userPatentDocRecords.add(userPatentRecord);
 			}
-			patentDocIdList.add((long)patentDocId);
+			patentDocIdList.add(Long.valueOf(patentDocId));
 		}
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		final int PATENT_DOC_STAUTS_PAID = 3;
@@ -128,5 +129,30 @@ public class PatentDocWorkflowController {
 		return "patent_doc_list";
 	}
 	
+	@RequestMapping(path="/showCustomerSupports", method=RequestMethod.GET)//客服
+	public String getCustomerSupportList(Model model) {
+		int proxyOrgId = PrincipalUtils.getCurrentUserId(); 
+		List<CustomerSupport> customerSupports = employeeService.getCustomerSupportList(proxyOrgId);
+		model.addAttribute("customerSupports", customerSupports);
+		return "patent_doc_select_customer_support";
+	}
 	
+	@RequestMapping(path="/addCustomerSupportShares", method=RequestMethod.GET)
+	public String addCustomerSupportShares(@RequestParam("patentDocIds")List<Integer> patentDocIds, @RequestParam("customerSuppors")List<Integer> customerSuppors) {
+		List<Map<String, Integer>> userPatentDocRecords = new ArrayList<>();
+		List<Long> patentDocIdList=new ArrayList<>();
+		for (int patentDocId: patentDocIds) {
+			for (int customerSuppor: customerSuppors) {
+				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
+				userPatentRecord.put("userId", customerSuppor);
+				userPatentRecord.put("patentDocId", patentDocId);
+				userPatentDocRecords.add(userPatentRecord);
+			}
+			patentDocIdList.add(Long.valueOf(patentDocId));
+		}
+		patentDocService.insertUserPatentDoc(userPatentDocRecords);
+		final int PATENT_DOC_STAUTS_PAID = 4;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		return "patent_doc_list";
+	}
 }
