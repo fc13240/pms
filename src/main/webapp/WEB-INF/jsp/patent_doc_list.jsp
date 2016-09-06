@@ -102,7 +102,17 @@
 		                            <a href="javascript:return void" onclick="batchCustomerSupport()" >
 									<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给客服</button>
 									</a>
-						  		</td> 		  										  									  				
+						  		</td> 
+						  		<td>
+		                            <a href="javascript:return void" onclick="batchTechPerson()" >
+									<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给技术员</button>
+									</a>
+						  		</td>
+						  		<td>
+		                            <a href="javascript:return void" onclick="batchProcessPerson()" >
+									<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给流程员</button>
+									</a>
+						  		</td>		  										  									  				
 						  			</tr>
 						  		</table>		
 							  </div>
@@ -400,6 +410,46 @@ function batchCustomerSupport() {
 	}		
 	var patentDocIds = uniquePatentNos.join(",");	
 	location.href = "<s:url value='/patentDocWorkflow/showCustomerSupports.html'/>?patentDocIds=" + patentDocIds;
+}
+
+
+function batchTechPerson() {
+	var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+	var uniquePatentNos = []
+	if (!patentSelected) {
+		formutil.alertMessage('请选择专利');
+		
+		return;
+	}
+	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
+	for (var i = 0; i < patents_checked.length; i++) {
+		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+			uniquePatentNos.push(patents_checked[i]);
+		}
+	}		
+	var patentDocIds = uniquePatentNos.join(",");	
+	location.href = "<s:url value='/patentDocWorkflow/showTechPersons.html'/>?patentDocIds=" + patentDocIds;
+}
+
+
+
+
+function batchProcessPerson() {
+	var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+	var uniquePatentNos = []
+	if (!patentSelected) {
+		formutil.alertMessage('请选择专利');
+		
+		return;
+	}
+	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
+	for (var i = 0; i < patents_checked.length; i++) {
+		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+			uniquePatentNos.push(patents_checked[i]);
+		}
+	}		
+	var patentDocIds = uniquePatentNos.join(",");	
+	location.href = "<s:url value='/patentDocWorkflow/showProcessPersons.html'/>?patentDocIds=" + patentDocIds;
 }
 </script>
 <script type="text/javascript">
