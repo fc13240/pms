@@ -217,4 +217,13 @@ public class PatentDocWorkflowController {
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		return "patent_doc_list";
 	}
+	
+	
+	@RequestMapping(path="/updatePatentDocStatus", method=RequestMethod.GET)
+	public String updatePatentDocStatus(@RequestParam("patentDocId") Long patentdocId,@RequestParam("status")int status,Model model) {
+		List<Long> patentDocIdList=new ArrayList<>();
+		patentDocIdList.add(patentdocId);
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, status);
+		return "patent_doc_list";
+	}
 }

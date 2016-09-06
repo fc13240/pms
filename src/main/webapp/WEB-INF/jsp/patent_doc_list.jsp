@@ -85,32 +85,32 @@
 						  			<tr>
 						  				<td>
                                 <a href="javascript:return void" onclick="batchShare()" >
-								<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
+								<button style="margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
 								</a>
 						  				</td>
  						  		<td>
 		                            <a href="javascript:return void" onclick="batchEntrust()" >
-									<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >批量委托</button>
+									<button style="margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >批量委托</button>
 									</a>
 						  		</td> 
 						  		 <td>
 		                            <a href="javascript:return void" onclick="batchProxyOrg()" >
-									<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给代理机构</button>
+									<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给代理机构</button>
 									</a>
 						  		</td>
 						  		<td>
 		                            <a href="javascript:return void" onclick="batchCustomerSupport()" >
-									<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给客服</button>
+									<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给客服</button>
 									</a>
 						  		</td> 
 						  		<td>
 		                            <a href="javascript:return void" onclick="batchTechPerson()" >
-									<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给技术员</button>
+									<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给技术员</button>
 									</a>
 						  		</td>
 						  		<td>
 		                            <a href="javascript:return void" onclick="batchProcessPerson()" >
-									<button class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给流程员</button>
+									<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给流程员</button>
 									</a>
 						  		</td>		  										  									  				
 						  			</tr>
@@ -159,6 +159,21 @@
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center">
+									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=6/>">
+									待确认
+									</a>
+									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=7">
+									待修改
+									</a>
+									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=8">
+									定稿
+									</a>
+									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=9">
+									已制作标准申请文件
+									</a>
+									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=11">
+									已交局
+									</a>
 									<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 									编辑
 									</a><a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">预览</a>
