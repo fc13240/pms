@@ -92,27 +92,34 @@
 		                            <a href="javascript:return void" onclick="batchEntrust()" >
 									<button style="margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >批量委托</button>
 									</a>
-						  		</td> 
-						  		 <td>
-		                            <a href="javascript:return void" onclick="batchProxyOrg()" >
-									<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给代理机构</button>
-									</a>
 						  		</td>
-						  		<td>
-		                            <a href="javascript:return void" onclick="batchCustomerSupport()" >
-									<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给客服</button>
-									</a>
-						  		</td> 
-						  		<td>
-		                            <a href="javascript:return void" onclick="batchTechPerson()" >
-									<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给技术员</button>
-									</a>
-						  		</td>
-						  		<td>
-		                            <a href="javascript:return void" onclick="batchProcessPerson()" >
-									<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给流程员</button>
-									</a>
-						  		</td>		  										  									  				
+						  		 <se:authorize access="hasRole('ROLE_PLATFORM')">
+							  		 <td>
+			                            <a href="javascript:return void" onclick="batchProxyOrg()" >
+										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给代理机构</button>
+										</a>
+							  		</td>
+						  		</se:authorize>
+						  		<se:authorize access="hasRole('ROLE_PROXY_ORG')">
+							  		<td>
+			                            <a href="javascript:return void" onclick="batchCustomerSupport()" >
+										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给客服</button>
+										</a>
+							  		</td> 
+						  		</se:authorize>
+						  		<se:authorize access="hasRole('ROLE_CUSTOMER_SUPPORT')">
+							  		<td>
+			                            <a href="javascript:return void" onclick="batchTechPerson()" >
+										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给技术员</button>
+										</a>
+							  		</td>
+							  		
+							  		<td>
+			                            <a href="javascript:return void" onclick="batchProcessPerson()" >
+										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" >分配给流程员</button>
+										</a>
+							  		</td>
+						  		</se:authorize>		  										  									  				
 						  			</tr>
 						  		</table>		
 							  </div>
@@ -159,27 +166,44 @@
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center">
+									<se:authorize access="hasRole('ROLE_TECH')">
 									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=6>">
 									待确认
 									</a>
+									</se:authorize>
+									<se:authorize access="hasRole('ROLE_USER')">
 									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=7">
 									待修改
 									</a>
 									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=8">
 									定稿
 									</a>
+									</se:authorize>
+									<se:authorize access="hasRole('ROLE_TECH')">
 									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=9">
 									已制作标准申请文件
 									</a>
+									</se:authorize>
+									<se:authorize access="hasRole('ROLE_PROCESS')">
 									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=11">
 									已交局
 									</a>
+									</se:authorize>
+									<se:authorize access="hasRole('ROLE_USER','ROLE_TECH')">
 									<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 									编辑
-									</a><a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">预览</a>
+									</a>
+									</se:authorize>
+									<a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
+									预览
+									</a>
+									
 				                    <%-- <a onclick=" exportWord(${patentDoc.patentDocId});">导出</a> --%>
-				                    <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">删除</a>
-				                    
+				                    <se:authorize access="hasRole('ROLE_USER','ROLE_TECH')">
+				                    <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">
+				                                                  删除
+				                    </a>
+				                    </se:authorize>
 				                   <%--  <a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>
 				                    <a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a> --%>
 				                   
