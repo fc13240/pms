@@ -133,8 +133,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
 	@Override
-	public int getParentOrgIdByUserId(int currentUserId) {
-		return employeeDao.getParentOrgIdByUserId(currentUserId);
+	public int getOrgIdByUserId(int currentUserId) {
+		return employeeDao.getOrgIdByUserId(currentUserId);
 	}
 
 

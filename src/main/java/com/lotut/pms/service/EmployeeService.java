@@ -41,7 +41,7 @@ public interface EmployeeService {
 
 	void deleteProxyOrg(int orgId);
 
-	int getParentOrgIdByUserId(int currentUserId);
+	int getOrgIdByUserId(int currentUserId);
 	
 	
 
