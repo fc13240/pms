@@ -101,7 +101,7 @@
 								<c:if test="${patentDoc.patentType==3}">
 									<td style="text-align:center"><c:out value="外观设计"/></td>
 								</c:if>
-								<td style="text-align:center"><c:out value="${patentDoc.name}"/></td>
+								<td style="text-align:center">${patentDoc.name}</td>
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.createTime}" pattern="yyyy-MM-dd"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<%-- <td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> --%>

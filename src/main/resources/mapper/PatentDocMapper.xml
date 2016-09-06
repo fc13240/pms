@@ -23,7 +23,7 @@
 		<result property="abstractImg" column="abstract_img"/>
 		<result property="patentDocAttachmentFile" column="patent_doc_attachment_file"/>
 		<result property="patentDocUrl" column="patent_doc_url"/>
-		<result property="contactPerson" column="contact_person"/>
+		<result property="contactId" column="contact_id"/>
 		<result property="otherInformation" column="other_information"/>
 		<result property="attachmentUrl" column="attachment_url"/>
 		<result property="feeStatus" column="feeStatus"/>
@@ -75,12 +75,12 @@
 	
 	<select id="getUserPatentDocById"  resultMap="PatentDocMap">
 		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
-		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,contact_person,attachment_url,other_information from patent_documents where  patent_doc_id=#{patentDocId}
+		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,contact_id,attachment_url,other_information from patent_documents where  patent_doc_id=#{patentDocId}
 	</select>
 	
 	<update id="updatePatentDoc" parameterType="PatentDoc">
 		update patent_documents set app_no=#{appNo,javaType=string,jdbcType=VARCHAR},user_id=#{userId},patent_name=#{name,javaType=string,jdbcType=BIGINT},manual=#{manual,javaType=string,jdbcType=CLOB},
-		last_update_time=now(),right_claim=#{rightClaim,javaType=string,jdbcType=CLOB},abstract_desc=#{abstractDescription,javaType=string,jdbcType=CLOB},contact_person=#{contactPerson},other_information=#{otherInformation}
+		last_update_time=now(),right_claim=#{rightClaim,javaType=string,jdbcType=CLOB},abstract_desc=#{abstractDescription,javaType=string,jdbcType=CLOB},other_information=#{otherInformation}
 		where  patent_doc_id=#{patentDocId}
 	</update> 
 	
@@ -185,7 +185,7 @@
 	
 	<select id="getPatentDocsByIds" parameterType="list" resultMap="PatentDocMap">
 		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
-		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,contact_person,attachment_url,other_information,feeStatus,price from patent_documents where  patent_doc_id in
+		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,contact_id,attachment_url,other_information,feeStatus,price from patent_documents where  patent_doc_id in
 			<foreach item="patentDocId" collection="patentDocIds"
 			     open="(" separator="," close=")">
 			   #{patentDocId}

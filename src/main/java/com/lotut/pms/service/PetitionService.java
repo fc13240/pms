@@ -13,9 +13,9 @@ public interface PetitionService {
 	
 	List<CommonAppPerson> findAppPersonNameById(List<Integer> appPersonIds,int userId);
 	
-	void addCommonAppPerson(CommonAppPerson commonAppPerson);
+	void addCommonAppPerson(CommonAppPerson commonAppPerson,Long patentDocId);
 	
-	void addCommonInventor(CommonInventor commonInventor);
+	void addCommonInventor(CommonInventor commonInventor,Long patentDocId);
 	
 	List<ContactAddress> findContactNameById(List<Integer> contactIds,int userId);
 	
@@ -46,4 +46,12 @@ public interface PetitionService {
 	List<CommonAppPerson> getUserCommonAppPersons(int userId);
 	
 	List<CommonInventor> getUserCommonInventors(int userId);
+	
+	void updatePatentDocContact(Long patentDocId,int addressId);
+	
+	List<ContactAddress> findPatentDocContactById(Long patentDocId);
+	
+	List<CommonAppPerson> searchAppPerson(String keyword,int userId);
+	
+	List<CommonInventor> searchInventor(String keyword,int userId);
 }

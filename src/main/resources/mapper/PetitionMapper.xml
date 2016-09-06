@@ -105,7 +105,7 @@
 		</foreach>
 	</insert>
 
-	<select id="findPatentDocAppPersonById" resultType="PatentDocAppPerson">
+	<select id="findPatentDocAppPersonById" parameterType="long" resultType="PatentDocAppPerson">
 		select person_id as personId,patent_doc_id as patentDocId,name,id_number as idNumber,postcode_address as postcodeAddress,other_information as otherInformation,transaction_identity as transactionIdentity,
     		fee_reduce_transaction_status as feeReduceTransactionStatus,transaction_year as transactionYear,user_id as userId from patent_doc_app_person
     		where patent_doc_id=#{patentDocId};
@@ -120,17 +120,17 @@
 		</foreach>	
 	</insert>
 	
-	<select id="findPatentDocInventorById" resultType="PatentDocInventor">
+	<select id="findPatentDocInventorById" parameterType="long" resultType="PatentDocInventor">
 		select inventor_id as inventorId,patent_doc_id as patentDocId,inventor_name as inventorName,inventor_number as inventorNumber,inventor_nationality as inventorNationality,
 		       inventor_mobile as inventorMobile,inventor_email as inventorEmail,inventor_other_information as inventorOtherInformation,user_id as userId from patent_doc_inventor
 		       where patent_doc_id=#{patentDocId}; 
 	</select>
 	
-	<delete id="deletePatentDocApperson">
+	<delete id="deletePatentDocApperson" parameterType="long">
 		delete from patent_doc_app_person where person_id=#{personId};
 	</delete>
 	
-	<select id="findAppPersonByAppId" resultType="PatentDocAppPerson">
+	<select id="findAppPersonByAppId" parameterType="long" resultType="PatentDocAppPerson">
 		select person_id as personId,patent_doc_id as patentDocId,name,id_number as idNumber,postcode_address as postcodeAddress,other_information as otherInformation,transaction_identity as transactionIdentity,
     		fee_reduce_transaction_status as feeReduceTransactionStatus,transaction_year as transactionYear,user_id as userId from patent_doc_app_person
     		where person_id=#{personId};
@@ -142,11 +142,11 @@
 		fee_reduce_transaction_status=#{feeReduceTransactionStatus},transaction_year=#{transactionYear} where person_id=#{personId}
 	</update>
 	
-	<delete id="deletePatentDocInventor">
+	<delete id="deletePatentDocInventor" parameterType="long">
 		delete from patent_doc_inventor where inventor_id=#{inventorId};
 	</delete>
 	
-	<select id="findInventorById" resultType="PatentDocInventor">
+	<select id="findInventorById" parameterType="long" resultType="PatentDocInventor">
 		select inventor_id as inventorId,patent_doc_id as patentDocId,inventor_name as inventorName,inventor_number as inventorNumber,inventor_nationality as inventorNationality,
 		       inventor_mobile as inventorMobile,inventor_email as inventorEmail,inventor_other_information as inventorOtherInformation,user_id as userId from patent_doc_inventor
 		       where inventor_id=#{inventorId}; 
@@ -161,8 +161,58 @@
 		update patent_documents set attachment_url=#{attachmentUrl} where patent_doc_id=#{patentDocId}
 	</update>
 	
-	<select id="getPatentAttachmentFile" resultType="string">
+	<select id="getPatentAttachmentFile" parameterType="long" resultType="string">
 		select attachment_url from patent_documents where patent_doc_id=#{patentDocId}
 	</select>
+	
+	<update id="updatePatentDocContact">
+		update patent_documents set contact_id=#{addressId} where patent_doc_id=#{patentDocId}
+	</update>
+	
+	<select id="findPatentDocContactById" parameterType="long" resultType="ContactAddress">
+		select ca.id, ca.receiver, ca.province, p.name AS provinceName, ca.city, c.name as cityName,
+				ca.district, d.name as districtName,ca.detail_address as detailAddress, ca.phone, ca.email, ca.is_default defaultAddress
+		 		from contact_addresses ca left join provinces p on ca.province = p.id join cities c on ca.city = c.id left join districts d on ca.district = d.id 
+		 		     left join patent_documents pd on ca.id=pd.contact_id where pd.patent_doc_id=#{patentDocId}	
+	</select>
+	<select id="searchAppPerson" resultMap="AppPersonWithShareUsers">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+		SELECT un.* ,u.user_id  ,u.username FROM 	
+  		(SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
+  	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
+  		p.postcode_address ,p.other_information FROM common_app_person p WHERE app_person_id IN		
+ 		(SELECT app_person FROM user_app_person WHERE USER =#{userId})
+ 		
+		
+		<if test="keyword != null">
+					and (p.name like #{keyword_pattern})
+<!-- 					and (p.name like #{keyword_pattern} or p.id_number like #{keyword_pattern} or p.postcode_address like #{keyword_pattern}  or p.fee_reduce_transaction_status like #{keyword_pattern} 
+					or p.transaction_identity_id like #{keyword_pattern} or p.transaction_year like #{keyword_pattern}) -->
+		</if>  	
+ 		) AS un  JOIN user_app_person up ON un.app_person_id = up.app_person
+		  	JOIN users u ON up.user = u.user_id
+	
+	</select>
+	
+	
+	<select id="searchInventor" resultMap="InventorWithShareUsers">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+			SELECT un.* ,u.user_id  ,u.username FROM 	
+  	(SELECT p.inventor_id ,p.inventor_name,p.inventor_id_number,p.inventor_nationality ,p.inventor_mobile ,p.inventor_email,p.inventor_attachment_file,
+  		p.inventor_other_information  FROM common_inventor p WHERE inventor_id IN		
+ 		(SELECT inventor FROM user_inventor WHERE USER =#{userId}) 
+ 		
+ 		<if test="keyword != null">
+					and ( p.inventor_name like #{keyword_pattern})
+<!-- 					and ( p.inventor_name like #{keyword_pattern} or p.inventor_id_number like #{keyword_pattern}) -->
+		</if>	
+ 		) AS un  JOIN user_inventor up ON un.inventor_id = up.inventor
+		  	JOIN users u ON up.user = u.user_id
+	</select>
+	
   </mapper>
   

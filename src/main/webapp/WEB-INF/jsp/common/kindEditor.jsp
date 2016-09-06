@@ -140,3 +140,46 @@
 
 			});
 		</script>
+		<script type="text/javascript">
+			var editor1;
+			KindEditor.ready(function(K) {
+				   editor8 = K.create('#editorContent1', {
+				   cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
+ 				   uploadJson : "${base}/kindeditor/file_upload.html", 
+ 				  cssData: 'body {font-family: "宋体"; font-size: 14px}',
+				   fileManagerJson : '${base}/kindeditor/file_manager_json.html',
+				   resizeType : 2,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
+				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
+				   height  : '100px',
+				   width:'800px',
+				   readonlyMode : false, //只读模式 默认为false
+				   allowFileManager : false,  //显示浏览远程服务器按钮
+				   allowImageUpload : false,
+				   allowPreviewEmoticons : false,
+					items : [
+						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+						'insertunorderedlist'],
+				   afterBlur: function(){this.sync();},
+				   syncType:"auto",
+				   afterCreate : function() {
+						var self = this;
+						K.ctrl(document, 13, function() {
+							self.sync();
+							//document.forms['from1'].submit();
+						});
+						K.ctrl(self.edit.doc, 13, function() {
+							self.sync();
+							//document.forms['from1'].submit();
+						});
+					},
+				   
+				   afterChange : function() {
+					   this.sync();
+				   },
+				   
+				});
+				prettyPrint();
+
+			});
+		</script>

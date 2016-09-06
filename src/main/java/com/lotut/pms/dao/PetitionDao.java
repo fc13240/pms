@@ -47,4 +47,12 @@ public interface PetitionDao {
 	List<CommonAppPerson> getUserCommonAppPersons(int userId);
 	
 	List<CommonInventor> getUserCommonInventors(int userId);
+	
+	void updatePatentDocContact(Long patentDocId,int addressId);
+	
+	List<ContactAddress> findPatentDocContactById(Long patentDocId);
+	
+	List<CommonAppPerson> searchAppPerson(String keyword,int userId);
+	
+	List<CommonInventor> searchInventor(String keyword,int userId);
 }
