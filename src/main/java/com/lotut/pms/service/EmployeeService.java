@@ -43,7 +43,7 @@ public interface EmployeeService {
 
 	int getOrgIdByUserId(int currentUserId);
 	
-	
+	int getOrgIdByCustomerSupportId(int currentUserId);
 
 }
 
