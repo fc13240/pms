@@ -83,11 +83,13 @@
 											<button  class="button button-primary  button-rounded"   >批量分享</button>
 											</a>
 						  				</td>
+						  	<se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')"> 
  						  		<td>
 		                            <a href="javascript:return void" onclick="batchEntrust()" >
 									<button style="margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >批量委托</button>
 									</a>
 						  		</td>
+						  	</se:authorize>
 						  	<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG')">
 							  		 <td>
 			                            <a href="javascript:return void" onclick="batchProxyOrg()" >
@@ -166,7 +168,7 @@
 										待确认
 										</a>
 									 </se:authorize> 
-									 <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH')"> 
+									 <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')"> 
 									 	<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 || patentDoc.patentDocStatus.patentDocStatusId == 8 }"> 
 											<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=7">
 											待修改
