@@ -45,6 +45,10 @@ public interface EmployeeService {
 	
 	int getOrgIdByCustomerSupportId(int currentUserId);
 
+	void addOrUpdateTopProxyOrg(ProxyOrg proxyOrg);
+
+	List<ProxyOrg> getTopProxyOrgList();
+
 }
 
 

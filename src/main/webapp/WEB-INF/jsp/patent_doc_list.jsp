@@ -88,7 +88,7 @@
 									<button style="margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >批量委托</button>
 									</a>
 						  		</td>
-						  	<se:authorize access="hasRole('ROLE_PLATFORM')">
+						  	<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG')">
 							  		 <td>
 			                            <a href="javascript:return void" onclick="batchProxyOrg()" >
 										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >分配给代理机构</button>
@@ -361,6 +361,15 @@ function batchEntrust() {
 		return;
 	}
 	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
+	var patent_types=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocType');
+	
+	for (var i = 0; i < patent_types.length; i++) {
+		if (patent_types[i] == 2 || patent_types[i] == 3 || patent_types[i] == 4 || patent_types[i] == 5 || patent_types[i] == 6 || patent_types[i] == 7 || 
+		patent_types[i] == 8 || patent_types[i] == 9 || patent_types[i] == 10 || patent_types[i] == 11) {
+			formutil.alertMessage('选中的文档中包含已缴费的文档，请重新选择！');
+			return;
+		}
+	}
 	for (var i = 0; i < patents_checked.length; i++) {
 		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
 			uniquePatentNos.push(patents_checked[i]);

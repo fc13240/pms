@@ -223,9 +223,6 @@ margin: 1px 0 0 1px;}
 							
 							<div class="title">
 								专利名称:
-								<%-- <div style="margin-left: 33px;">
-									<input class="selectPointOfInterest form-control"  style="width:600px;display:inline;" type="text" id="patentName" name="patentName" placeholder="请输入专利名称"  value="${patentDoc.name}">
-								</div> --%>
 								<div id="editor1" thistempid="1">
  									<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
 									<input type="hidden" value="" id="divtitletips"> 
@@ -1429,12 +1426,14 @@ margin: 1px 0 0 1px;}
 	}
 	 function templatebuttonclick(i,patentDocSectionId){
 		 if(patentDocSectionId==1){
+			 alert("说明书");
 			 editor.appendHtml($("#templateContent"+i).html());
 		 }
 		 else if(patentDocSectionId==2){
-			 editor8.appendHtml($("#templateContent"+i).html());
+			editor8.appendHtml($("#templateContent"+i).html());
 		 }
 		 else if(patentDocSectionId==3){
+			 alert("摘要 ");
 			 editor7.appendHtml($("#templateContent"+i).html());
 		 }
 		 else{

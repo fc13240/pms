@@ -146,7 +146,7 @@
 <script type="text/javascript">
 	var editor1;
 	KindEditor.ready(function(K) {
-		   editor8 = K.create('#editorContent1', {
+		   editor1 = K.create('#editorContent1', {
 		   cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
 			   uploadJson : "${base}/kindeditor/file_upload.html", 
 			  cssData: 'body {font-family: "宋体"; font-size: 14px}',
