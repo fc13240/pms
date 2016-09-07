@@ -51,6 +51,6 @@ public interface EmployeeDao {
 
 	List<ProxyOrg> getTopProxyOrgList();
 
-	ProxyOrg getOrgIdByParentOrgId(int orgUserId);
+	ProxyOrg getOrgByParentOrgId(int orgUserId);
 
 }
