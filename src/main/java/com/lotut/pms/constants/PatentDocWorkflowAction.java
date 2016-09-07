@@ -18,5 +18,7 @@ public class PatentDocWorkflowAction {
 		ActionType.put("交局",10 );
 		ActionType.put("分配给流程人员", 11);
 		ActionType.put("删除", 12);
+		ActionType.put("置为待确认", 13);
+		ActionType.put("置为待交局", 14);
 	}
 }

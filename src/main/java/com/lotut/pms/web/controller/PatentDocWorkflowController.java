@@ -194,7 +194,7 @@ public class PatentDocWorkflowController {
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		final int PATENT_DOC_STAUTS_PAID = 5;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
-		int action=PatentDocWorkflowAction.ActionType.get("分配给流程人员");
+		int action=PatentDocWorkflowAction.ActionType.get("分配给技术员");
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, techPersons, action);
 		return "patent_doc_list";
 	}
@@ -224,8 +224,10 @@ public class PatentDocWorkflowController {
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		final int PATENT_DOC_STAUTS_PAID = 10;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
-		int action=PatentDocWorkflowAction.ActionType.get("分享给流程人员");
-		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, processPersons, action);
+		int insertAction =PatentDocWorkflowAction.ActionType.get("置为待交局");
+		patentDocWorkflowHistoryService.insertActionHistories(patentDocIds, insertAction);
+		int shareAction=PatentDocWorkflowAction.ActionType.get("分配给流程人员");
+		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, processPersons, shareAction);
 		return "patent_doc_list";
 	}
 	
