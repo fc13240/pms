@@ -85,7 +85,11 @@
 		select * from (	
 			select u.user_id as userId, u.username, u.name as name 
 			  from users u join friends f on u.user_id = f.friend	
-			 where f.user = #{userId}	
+			 where f.user = #{userId}
+			 AND u.user_id NOT IN(SELECT cs.user_id FROM customer_supports cs)	
+		  AND u.user_id NOT IN (SELECT pr.user_id FROM process_person pr)	   
+		  AND u.user_id NOT IN (SELECT t.user_id FROM tech_person t)
+		  AND u.user_id NOT IN (SELECT org_user_id FROM proxy_org)	
 			<if test="keyword != null and keyword != ''">
 				and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern} or f.remark_name like #{keyword_pattern})
 			</if>
