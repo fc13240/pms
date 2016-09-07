@@ -879,10 +879,11 @@ INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(2,'分�
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(3,'分配给客服人员');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(4,'分配给技术员');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(5,'审查');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(6,'修改');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(6,'保存或修改');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(7,'定稿');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(8,'制作标准文件');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(9,'确认');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(10,'交局');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(11,'分配给流程人员');
 
 ALTER TABLE patent_documents add column  other_information VARCHAR(1000) ;

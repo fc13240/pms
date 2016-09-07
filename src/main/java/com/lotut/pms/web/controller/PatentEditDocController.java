@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.lotut.pms.constants.PatentDocWorkflowAction;
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.CommonAppPerson;
@@ -51,6 +52,7 @@ import com.lotut.pms.service.AppPersonService;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PatentDocService;
+import com.lotut.pms.service.PatentDocWorkflowHistoryService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.service.PetitionService;
 import com.lotut.pms.service.UserService;
@@ -74,10 +76,14 @@ public class PatentEditDocController {
 	private UserService userService;
 	private FriendService friendService;
 	private PetitionService petitionService;
+	private PatentDocWorkflowHistoryService patentDocWorkflowHistoryService;
 	
 	
 	@Autowired
-	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService,InventorService inventorService,AppPersonService appPersonService,FriendService friendService,PetitionService petitionService,UserService userService) {
+	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService,
+			InventorService inventorService,AppPersonService appPersonService,FriendService friendService,
+			PetitionService petitionService,UserService userService,
+			PatentDocWorkflowHistoryService patentDocWorkflowHistoryService) {
 		this.patentDocService = patentDocService;
 		this.patentDocumentTemplateService = patentDocumentTemplateService;
 		this.inventorService = inventorService;
@@ -85,6 +91,7 @@ public class PatentEditDocController {
 		this.friendService = friendService;
 		this.petitionService = petitionService;
 		this.userService = userService;
+		this.patentDocWorkflowHistoryService=patentDocWorkflowHistoryService;
 	}
 
 	@RequestMapping(path="/newPatentType")
@@ -99,10 +106,11 @@ public class PatentEditDocController {
 		patentDoc.setUserId(userId);
 		patentDoc.setPatentType(patentType);
 		patentDocService.savePatentDoc(patentDoc);
+		int id=(int) patentDoc.getPatentDocId();
+		int action=PatentDocWorkflowAction.ActionType.get("保存或修改");
+		patentDocWorkflowHistoryService.insertHistory(id, action);
 		long patentDocId=patentDoc.getPatentDocId();
-		//List<CommonInventor> inventors = inventorService.getAllInventorsByUser(userId);
 		List<CommonInventor> inventors = petitionService.getUserCommonInventors(userId);
-		//List<CommonAppPerson> appPersons= appPersonService.getAllAppPersonByUser(userId);
 		List<CommonAppPerson> appPersons = petitionService.getUserCommonAppPersons(userId);
 		List<ContactAddress>  contactAddresses = userService.getUserContactAddresses(userId);
 		List<Map<String, String>> provinces = userService.getAllProvinces();
@@ -136,6 +144,9 @@ public class PatentEditDocController {
 		int userId=PrincipalUtils.getCurrentUserId();
 		patentDoc.setUserId(userId);
 		patentDocService.updatePatentDoc(patentDoc);
+		int id=(int) patentDoc.getPatentDocId();
+		int action=PatentDocWorkflowAction.ActionType.get("保存或修改");
+		patentDocWorkflowHistoryService.insertHistory(id, action);
 		writer.write(1);
 	}
 	
