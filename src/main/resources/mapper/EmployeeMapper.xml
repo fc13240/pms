@@ -124,7 +124,6 @@
 			org_user_id=#{orgUserId}
 	</insert>
 	
-	
 		
 	<insert id="insertGroupMember" >
 		INSERT INTO group_members(username, group_id) VALUES((select username from users where user_id =#{userId}), 
