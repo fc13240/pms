@@ -890,3 +890,15 @@ INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(13,'置
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(14,'置为待交局');
 
 ALTER TABLE patent_documents add column  other_information VARCHAR(1000) ;
+
+CREATE TABLE `share_patent_docs` (
+  `patent_doc` BIGINT(20) NOT NULL DEFAULT '0',
+  `share_by` INT(11) NOT NULL DEFAULT '0',
+  `share_to` INT(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`patent_doc`,`share_by`,`share_to`),
+  KEY `fk_share_patent_docs_share_by` (`share_by`),
+  KEY `fk_share_patent_docs_share_to` (`share_to`),
+  CONSTRAINT `fk_share_patent_docs_patent` FOREIGN KEY (`patent_doc`) REFERENCES `patent_documents` (`patent_doc_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_share_patent_docs_share_by` FOREIGN KEY (`share_by`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_share_patent_docs_share_to` FOREIGN KEY (`share_to`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;

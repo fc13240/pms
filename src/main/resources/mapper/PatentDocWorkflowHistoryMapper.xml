@@ -36,4 +36,24 @@
 	
 	</select>
 	
+	<!-- <select id="getHistoryBy">
+		 SELECT h.history_id,h.patent_doc_id , u.username, a.action_type_desc, h.action_time  FROM patent_doc_workflow_history h 
+		 JOIN users u ON h.user_id=u.user_id JOIN patent_doc_workflow_action a ON h.ACTION = a.action_id 
+      	join share_patent_docs s on h.user_id = s.share_by and h.patent_doc_id = s.patent_doc where patent_doc_id =(#{patentDocId});
+	</select> -->
+	
+<!-- 	<select id="getHistoryIdbyPatentDocId" parameterType="int">
+		select history_id from patent_doc_workflow_history  where patent_doc_id = (#{patentDocId});
+		
+	</select>
+	 -->
+	
+	<insert id="insertSharePatentDocs" parameterType="list">
+		replace into share_patent_docs(patent_doc, share_by, share_to) 
+		values
+		<foreach item="shareRecord" collection="list" separator=",">
+			(#{shareRecord.patentDoc}, #{shareRecord.shareBy}, #{shareRecord.shareTo})
+		</foreach>
+	</insert>
+	
 	 </mapper>

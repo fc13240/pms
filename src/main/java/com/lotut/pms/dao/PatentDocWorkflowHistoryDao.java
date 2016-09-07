@@ -13,4 +13,6 @@ public interface PatentDocWorkflowHistoryDao {
 	List<PatentDocWorkflowHistory> getPatentDocWorkflowHistoryByUserAndAction( int userId, int action);
 	
 	void insertWorkflowTargets(List<Map<String,Long>> patentDocWorkflowTargetRecords);
+	
+	void insertSharePatentDocs(List<Map<String, Integer>> sharePatentDocRecords);
 }
