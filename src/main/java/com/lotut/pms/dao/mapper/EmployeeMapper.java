@@ -55,5 +55,11 @@ public interface EmployeeMapper {
 	List<ProxyOrg> getTopProxyOrgList();
 
 	ProxyOrg getOrgByParentOrgId(int orgUserId);
+	
+	List<CustomerSupport> searchCustomersByProxyId(@Param("keyword") String keyword,@Param("currentUserId") int currentUserId);
+	
+	List<TechPerson> searchTechPersonByProxyId(@Param("keyword") String keyword,@Param("currentUserId") int currentUserId);
+	
+	List<ProcessPerson> searchProcessPersonByProxyId(@Param("keyword") String keyword,@Param("currentUserId") int currentUserId);
 
 }

@@ -178,6 +178,40 @@
 	<select id="getOrgIdByCustomerSupportId"  parameterType="int" resultType="int">
 		select proxy_org_id from customer_supports where user_id = #{currentUserId}
 	</select>
+
+	<select id="searchCustomersByProxyId" resultMap="customerSupportResultMap">
+		<if test="keyword!=null">
+			<bind name="search_keyword" value="'%' + keyword + '%'"/>
+		</if>
+		select cs.id,cs.user_id, cs.remark_name,cs.proxy_org_id,u.username,u.name from customer_supports cs join users u on u.user_id = cs.user_id where u.user_id in (select user_id from customer_supports where proxy_org_id=(select org_id from proxy_org where org_user_id=#{currentUserId}))
+		<if test="keyword!=null">
+			and u.username like #{search_keyword}
+		</if>
+		
+	</select>
 	
+	<select id="searchTechPersonByProxyId" resultMap="techPersonResultMap">
+		<if test="keyword!=null">
+			<bind name="search_keyword" value="'%' + keyword + '%'"/>
+		</if>
+		
+		select tp.id,tp.user_id, tp.remark_name,tp.proxy_org_id,u.username,u.name from tech_person tp join users u 
+				on u.user_id = tp.user_id where tp.proxy_org_id=(select proxy_org_id FROM customer_supports where user_id=#{currentUserId})
+		<if test="keyword!=null">
+			and u.username like #{search_keyword}
+		</if>
+		
+	</select>
 	
+	<select id="searchProcessPersonByProxyId" resultMap="processPersonResultMap">
+		<if test="keyword!=null">
+			<bind name="search_keyword" value="'%' + keyword + '%'"/>
+		</if>
+		select p.id,p.user_id,p.remark_name,p.proxy_org_id,u.username,u.name from process_person p join users u 
+				on u.user_id = p.user_id where p.proxy_org_id=(select proxy_org_id FROM customer_supports where user_id=#{currentUserId})
+		<if test="keyword!=null">
+			and u.username like #{search_keyword}
+		</if>
+	
+	</select>
 </mapper>
