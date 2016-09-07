@@ -105,9 +105,16 @@ public class PatentDocWorkflowController {
 	
 	@RequestMapping(path="showProxyOrgs", method=RequestMethod.GET)
 	public String showFriends(Model model) {
-		int parentOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
-		List<ProxyOrg> proxyOrgs = employeeService.getProxyOrgList(parentOrgId);
-		model.addAttribute("proxyOrgs", proxyOrgs);
+		if(PrincipalUtils.isPlatform()) {
+			List<ProxyOrg> proxyOrgs = employeeService.getTopProxyOrgList();
+			model.addAttribute("proxyOrgs", proxyOrgs);
+		}
+		if(PrincipalUtils.isProxyOrg()){
+			int parentOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
+			List<ProxyOrg> proxyOrgs = employeeService.getProxyOrgList(parentOrgId);
+			model.addAttribute("proxyOrgs", proxyOrgs);
+		}
+		
 		return "patent_doc_select_proxy_org";
 	}
 	
@@ -163,7 +170,7 @@ public class PatentDocWorkflowController {
 		
 		patentDocWorkflowHistoryService.insertCustomerSupportHistories(patentDocIds);
 		
-		patentDocWorkflowHistoryService.insertCustomerSupportHistories(customerSuppors);
+		patentDocWorkflowHistoryService.insertCustomerSupportWorkflowTargets(customerSuppors);
 		return "patent_doc_list";
 	}
 	

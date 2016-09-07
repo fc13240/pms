@@ -88,7 +88,7 @@
 									<button style="margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >批量委托</button>
 									</a>
 						  		</td>
-						  	<se:authorize access="hasRole('ROLE_PLATFORM')">
+						  	<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG')">
 							  		 <td>
 			                            <a href="javascript:return void" onclick="batchProxyOrg()" >
 										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >分配给代理机构</button>
