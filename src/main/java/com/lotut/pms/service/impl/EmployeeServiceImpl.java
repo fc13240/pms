@@ -3,13 +3,13 @@ package com.lotut.pms.service.impl;
 
 import java.util.List;
 
-
 import org.springframework.transaction.annotation.Transactional;
+
 import com.lotut.pms.dao.EmployeeDao;
 import com.lotut.pms.domain.CustomerSupport;
-import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.domain.ProcessPerson;
 import com.lotut.pms.domain.ProxyOrg;
+import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.service.EmployeeService;
 import com.lotut.pms.util.Role;
 
@@ -161,9 +161,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 
-	
+	@Override
+	public List<CustomerSupport> searchCustomersByProxyId(String keyword, int currentUserId) {
+		return employeeDao.searchCustomersByProxyId(keyword, currentUserId);
+	}
 
 
-	
+	@Override
+	public List<TechPerson> searchTechPersonByProxyId(String keyword, int currentUserId) {
+		return employeeDao.searchTechPersonByProxyId(keyword, currentUserId);
+	}
+
+
+	@Override
+	public List<ProcessPerson> searchProcessPersonByProxyId(String keyword, int currentUserId) {
+		return employeeDao.searchProcessPersonByProxyId(keyword, currentUserId);
+	}
+
 }
 

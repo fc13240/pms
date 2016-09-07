@@ -246,4 +246,30 @@ public class PatentDocWorkflowController {
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, status);
 		return "redirect:/editor/patentDocList.html";
 	}
+	
+	@RequestMapping(path="/searchCustomers", method=RequestMethod.GET)
+	public String searchCustomers(String keyword,Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<CustomerSupport> customerSupports=employeeService.searchCustomersByProxyId(keyword, userId);
+		model.addAttribute("customerSupports", customerSupports);
+		return "patent_doc_select_customer_support";
+	}
+	
+	@RequestMapping(path="/searchTechPerson", method=RequestMethod.GET)
+	public String searchTechPerson(String keyword,Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<TechPerson> techPersons=employeeService.searchTechPersonByProxyId(keyword, userId);
+		model.addAttribute("techPersons", techPersons);
+		return "patent_doc_select_tech_person";
+	}
+	
+	@RequestMapping(path="/searchProcessPerson", method=RequestMethod.GET)
+	public String searchProcessPerson(String keyword,Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<ProcessPerson> processPersons=employeeService.searchProcessPersonByProxyId(keyword, userId);
+		model.addAttribute("processPersons", processPersons);
+		return "patent_doc_select_process_person";
+	}
+	
+	
 }
