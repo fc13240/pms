@@ -143,7 +143,7 @@
 		<script type="text/javascript">
 			var editor1;
 			KindEditor.ready(function(K) {
-				   editor8 = K.create('#editorContent1', {
+				   editor1 = K.create('#editorContent1', {
 				   cssPath : '${base}/plugins/kindeditor/plugins/code/prettify.css',
  				   uploadJson : "${base}/kindeditor/file_upload.html", 
  				  cssData: 'body {font-family: "宋体"; font-size: 14px}',
@@ -166,11 +166,11 @@
 						var self = this;
 						K.ctrl(document, 13, function() {
 							self.sync();
-							//document.forms['from1'].submit();
+							document.forms['from1'].submit();
 						});
 						K.ctrl(self.edit.doc, 13, function() {
 							self.sync();
-							//document.forms['from1'].submit();
+							document.forms['from1'].submit();
 						});
 					},
 				   
