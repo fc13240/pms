@@ -1,19 +1,29 @@
 package com.lotut.pms.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import com.lotut.pms.constants.PatentDocWorkflowAction;
 
 public class PatentDocWorkflowHistory {
 	private long historyId;
 	private long patentDocId;
 	private int userId;
 	private String userName;
-	private int action;
+	private PatentDocWorkflowAction patentDocWorkflowAction;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Timestamp actionTime;
+	private List<User> shareUsers;
 
+	public List<User> getShareUsers() {
+		return shareUsers;
+	}
+	public void setShareUsers(List<User> shareUsers) {
+		this.shareUsers = shareUsers;
+	}
 	public long getPatentDocId() {
 		return patentDocId;
 	}
@@ -33,11 +43,12 @@ public class PatentDocWorkflowHistory {
 		this.userName = userName;
 	}
 	
-	public int getAction() {
-		return action;
+	
+	public PatentDocWorkflowAction getAction() {
+		return patentDocWorkflowAction;
 	}
-	public void setAction(int action) {
-		this.action = action;
+	public void setAction(PatentDocWorkflowAction patentDocWorkflowAction) {
+		this.patentDocWorkflowAction = patentDocWorkflowAction;
 	}
 	public Timestamp getActionTime() {
 		return actionTime;
@@ -51,6 +62,7 @@ public class PatentDocWorkflowHistory {
 	public void setHistoryId(long historyId) {
 		this.historyId = historyId;
 	}
+	
 	
 	
 }

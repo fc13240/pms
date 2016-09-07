@@ -9,10 +9,15 @@
   			<result property="patentDocId"  column="patent_doc_id" />
   			<result property="userId"  column="user_id" />
   			<result property="userName"  column="user_name" />
-  			<result property="action"  column="ACTION" />
   			<result property="actionTime"  column="action_time" />
+  			<association property="patentDocWorkflowAction" javaType="PatentDocWorkflowAction">
+				<id property="actionId" column="action_id"/>
+				<result property="actionTypeDesc" column="action_type_desc"/>
+			</association>
+  			<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
   		</resultMap>
   
+  	
   	
   	<insert id="insertWorkflowTargets" parameterType="list" >
   		replace into patent_doc_workflow_target(history,target,patent_doc)
@@ -36,11 +41,11 @@
 	
 	</select>
 	
-	<!-- <select id="getHistoryBy">
-		 SELECT h.history_id,h.patent_doc_id , u.username, a.action_type_desc, h.action_time  FROM patent_doc_workflow_history h 
+	<select id="getHistoryBy">
+		 SELECT h.history_id,h.patent_doc_id , u.username, a.action_type_desc, h.action_time,s.share_to FROM patent_doc_workflow_history h 
 		 JOIN users u ON h.user_id=u.user_id JOIN patent_doc_workflow_action a ON h.ACTION = a.action_id 
       	join share_patent_docs s on h.user_id = s.share_by and h.patent_doc_id = s.patent_doc where patent_doc_id =(#{patentDocId});
-	</select> -->
+	</select>
 	
 <!-- 	<select id="getHistoryIdbyPatentDocId" parameterType="int">
 		select history_id from patent_doc_workflow_history  where patent_doc_id = (#{patentDocId});
