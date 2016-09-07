@@ -11,4 +11,6 @@ public interface PatentDocWorkflowHistoryService {
 	void insertHistory(int id,int action);
 	
 	void insertHistoriesAndWorkflowTargets(List<Integer> ids,List<Integer> users,int action);
+	
+	void insertActionHistories(List<Integer> ids, int action);
 }

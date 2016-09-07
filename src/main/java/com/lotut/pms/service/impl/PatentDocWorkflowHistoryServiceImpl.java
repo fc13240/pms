@@ -25,6 +25,13 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 	}
 	
 	@Override
+	public void insertHistory(int id, int action) {
+		List<Integer> ids=new ArrayList<>();
+		ids.add(id);
+		insertHistories(ids,action);
+	}
+	
+	@Override
 	public void insertHistoriesAndWorkflowTargets(List<Integer> ids,List<Integer> users, int action) {
 		 insertHistories(ids,action);
 		 insertWorkflowTargets(users,action);
@@ -32,9 +39,7 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 	}
 
 	@Override
-	public void insertHistory(int id, int action) {
-		List<Integer> ids=new ArrayList<>();
-		ids.add(id);
+	public void insertActionHistories(List<Integer> ids, int action) {
 		insertHistories(ids,action);
 	}
 	
@@ -63,11 +68,11 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 		}
 		List<Map<String, Long>> patentDocWorkflowTargetRecords=new ArrayList<>();
 		for (Long patentDocWorkflowHistoryId:patentDocWorkflowHistoryIdList) {
-			for(int proxyOrg: ids){
+			for(int id: ids){
 				for(long patentDocWorkflowHistoryPatentDocId:patentDocWorkflowHistoryPatentDocIdList){
 					Map<String, Long> patentDocWorkflowTargetRecord =  new HashMap<String, Long>();
 					patentDocWorkflowTargetRecord.put("history", patentDocWorkflowHistoryId);
-					patentDocWorkflowTargetRecord.put("target", (long) proxyOrg);
+					patentDocWorkflowTargetRecord.put("target", (long) id);
 					patentDocWorkflowTargetRecord.put("patentDoc", patentDocWorkflowHistoryPatentDocId);
 					patentDocWorkflowTargetRecords.add(patentDocWorkflowTargetRecord);
 				}
@@ -78,10 +83,7 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 		
 	}
 
-
-
-
-
+	
 
 	
 }
