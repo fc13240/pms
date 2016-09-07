@@ -124,6 +124,22 @@ public class EmployeeMybatisDao extends SqlSessionDaoSupport implements Employee
 		return employeeMapper.getOrgIdByCustomerSupportId(currentUserId);
 	}
 
+	@Override
+	public void addOrUpdateTopProxyOrg(ProxyOrg proxyOrg) {
+		employeeMapper.addOrUpdateTopProxyOrg(proxyOrg);
+		
+	}
+
+	@Override
+	public List<ProxyOrg> getTopProxyOrgList() {
+		return employeeMapper.getTopProxyOrgList();
+	}
+
+	@Override
+	public ProxyOrg getOrgIdByParentOrgId(int orgUserId) {
+		return employeeMapper.getOrgIdByParentOrgId(orgUserId);
+	}
+
 
 
 	

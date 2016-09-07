@@ -47,4 +47,10 @@ public interface EmployeeDao {
 	
 	int getOrgIdByCustomerSupportId(int currentUserId);
 
+	void addOrUpdateTopProxyOrg(ProxyOrg proxyOrg);
+
+	List<ProxyOrg> getTopProxyOrgList();
+
+	ProxyOrg getOrgIdByParentOrgId(int orgUserId);
+
 }

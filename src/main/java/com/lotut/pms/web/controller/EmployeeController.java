@@ -57,10 +57,18 @@ public class EmployeeController {
 		return "process_person_list";
 	}
 	
+	
 	@RequestMapping(path="/getProxyOrgList", method=RequestMethod.GET)//代理机构
 	public String getProxyOrgList(Model model) {
 		int parentOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
 		List<ProxyOrg> proxyOrgs = employeeService.getProxyOrgList(parentOrgId);
+		model.addAttribute("proxyOrgs", proxyOrgs);
+		return "proxy_org_list";
+	}
+	
+	@RequestMapping(path="/getTopProxyOrgList", method=RequestMethod.GET)//代理机构
+	public String getTopProxyOrgList(Model model) {
+		List<ProxyOrg> proxyOrgs = employeeService.getTopProxyOrgList();
 		model.addAttribute("proxyOrgs", proxyOrgs);
 		return "proxy_org_list";
 	}
@@ -184,6 +192,12 @@ public class EmployeeController {
 		return "proxy_org_add";
 	}
 	
+	@RequestMapping(path="/addOrUpdateTopProxyOrg", method=RequestMethod.GET)
+	public String addOrUpdateTopProxyOrg(ProxyOrg proxyOrg) {
+		employeeService.addOrUpdateTopProxyOrg(proxyOrg);
+		return "proxy_org_add";
+	}
+	
 	@RequestMapping(path="/deleteCustomerSupport", method=RequestMethod.GET)
 	public String deleteCustomerSupport(int id) {
 		employeeService.deleteCustomerSupport(id);
@@ -205,6 +219,9 @@ public class EmployeeController {
 	@RequestMapping(path="/deleteProxyOrg", method=RequestMethod.GET)
 	public String deleteProxyOrg(int orgId) {
 		employeeService.deleteProxyOrg(orgId);
+		if(PrincipalUtils.isPlatform()) {
+			return "redirect:/employee/getTopProxyOrgList.html";
+		}
 		return "redirect:/employee/getProxyOrgList.html";
 	}
 	
