@@ -70,7 +70,7 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 		int action=PatentDocWorkflowAction.ActionType.get("交局");
 		insertWorkflowTargets(ids,action);
 	}
-	private long insertHistories(List<Integer> ids,int action){
+	public long insertHistories(List<Integer> ids,int action){
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<Map<String, Integer>> patentDocWorkflowHistoryRecords = new ArrayList<>();
 		for (int patentDocId: ids) {
@@ -84,7 +84,7 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 		
 	}
 	
-	private void insertWorkflowTargets(List<Integer> ids,int action){
+	public void insertWorkflowTargets(List<Integer> ids,int action){
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<PatentDocWorkflowHistory> PatentDocWorkflowHistories=patentDocWorkflowHistoryDao.getPatentDocWorkflowHistoryByUserAndAction(userId, action);
 		List<Long> patentDocWorkflowHistoryIdList = new ArrayList<>(PatentDocWorkflowHistories.size());
