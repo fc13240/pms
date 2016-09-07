@@ -236,14 +236,18 @@ public class PatentDocWorkflowController {
 		patentDocIdList.add(patentdocId);
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, status);
 		int action=0;
-		if(status==8){
-		 action=7;}
-		if(status==11){
-			 action=10;}
-		if(status==9){
-			 action=8;}
+		if(status==6){
+			 action=13;}
 		if(status==7){
 			 action=5;}
+		if(status==8){
+		 action=7;}
+		if(status==9){
+			 action=8;}
+		if(status==10){
+			 action=14;}
+		if(status==11){
+			 action=10;}
 		patentDocWorkflowHistoryService.insertHistory(patentdocId.intValue(), action);
 		return "redirect:/editor/patentDocList.html";
 	}

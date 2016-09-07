@@ -887,5 +887,6 @@ INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(10,'交
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(11,'分配给流程人员');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(12,'删除');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(13,'置为待确认');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(14,'置为待交局');
 
 ALTER TABLE patent_documents add column  other_information VARCHAR(1000) ;
