@@ -123,13 +123,16 @@
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
 		select * from (	
-		select u.user_id, u.username, u.name
-		  from users u		
-		<where>
+		SELECT u.user_id, u.username, u.name FROM users u
+		  WHERE u.user_id NOT IN(SELECT cs.user_id FROM customer_supports cs)	
+		  AND u.user_id NOT IN (SELECT pr.user_id FROM process_person pr)	   
+		  AND u.user_id NOT IN (SELECT t.user_id FROM tech_person t)
+		  AND u.user_id NOT IN (SELECT org_user_id FROM proxy_org)		
+		
 			<if test="keyword != null and keyword != ''">
-				u.username like #{keyword_pattern} or u.name like #{keyword_pattern}
+				and u.username like #{keyword_pattern} or u.name like #{keyword_pattern}
 			</if>
-		</where>
+		
 		) rs where rs.user_id != #{userId}
 	</select>
 	
