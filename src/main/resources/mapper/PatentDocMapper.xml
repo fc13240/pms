@@ -206,5 +206,26 @@
 		</foreach>
 	</insert>
 	
-
+	<select id="getUserPatentDocByRole" parameterType="Page" resultMap="PatentDocMap">
+		SELECT p.patent_doc_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
+		p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,
+		ps.patent_doc_status_id,ps.patent_doc_status_desc
+		FROM patent_documents p LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
+		WHERE p.patent_doc_id IN (SELECT patent_doc FROM user_patent_docs WHERE user_id = #{userId}) 
+		<if test="status!=null">
+			AND p.patent_doc_status=#{status}
+		</if>
+		ORDER BY create_time DESC ,last_update_time DESC limit #{startIndex}, #{pageSize}
+	</select>
+	
+	
+	<select id="getUserPatentDocCountByRole" parameterType="Page" resultType="int">
+		SELECT count(*)
+		FROM patent_documents p LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
+		WHERE p.patent_doc_id IN (SELECT patent_doc FROM user_patent_docs WHERE user_id = #{userId}) 
+		<if test="status!=null">
+			AND p.patent_doc_status=#{status}
+		</if>
+		ORDER BY create_time DESC ,last_update_time DESC limit #{startIndex}, #{pageSize}
+	</select>
 </mapper>

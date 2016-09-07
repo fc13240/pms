@@ -221,4 +221,18 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 		patentDocMapper.insertProxyOrgPatentDoc(userPatentDocRecords);
 		
 	}
+
+
+
+	@Override
+	public List<PatentDoc> getUserPatentDocByRole(Page page) {
+		return patentDocMapper.getUserPatentDocByRole(page);
+	}
+
+
+
+	@Override
+	public int getUserPatentDocCountByRole(Page page) {
+		return patentDocMapper.getUserPatentDocCountByRole(page);
+	}
 }

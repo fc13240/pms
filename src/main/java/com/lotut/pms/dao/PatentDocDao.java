@@ -65,4 +65,8 @@ public interface PatentDocDao {
 	
 	void insertProxyOrgPatentDoc(List<Map<String, Long>> userPatentDocRecords);
 	
+	List<PatentDoc> getUserPatentDocByRole(Page page);
+	
+	int getUserPatentDocCountByRole(Page page);
+	
 }

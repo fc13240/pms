@@ -2,12 +2,21 @@ package com.lotut.pms.domain;
 
 public class Page {
 	private int userId;
+	private int status;
 	private int totalRecords;//总条数
 	private int currentPage;//当前页
 	private int pageSize = 10;//页面条数
 	
 	
 	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	public int getTotalRecords() {
 		return totalRecords;
 	}

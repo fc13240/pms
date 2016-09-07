@@ -63,4 +63,8 @@ public interface PatentDocService {
 	void updateAttachmentImgUrl(Attachment attachment);
 	
 	List<PatentDoc> getPatentDocsByIds(List<Long> patentDocIds);
+	
+	List<PatentDoc> getUserPatentDocByRole(Page page);
+	
+	int getUserPatentDocCountByRole(Page page);
 }
