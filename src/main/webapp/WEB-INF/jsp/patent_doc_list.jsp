@@ -143,7 +143,7 @@
 							<c:forEach items="${patentDocs}" var="patentDoc" varStatus="status">
 							  <tr>
 							  	<td class="center" style="text-align:center" width="10px"><label class="pos-rel"> <span class="batch-share-item">
-								<input type="checkbox" class="check-item" patentDocId="<c:out value='${patentDoc.patentDocId}'/>" patentDocType="<c:out value='${patentDoc.patentType}'/>">
+								<input type="checkbox" class="check-item" patentDocId="<c:out value='${patentDoc.patentDocId}'/>" patentDocStatusId="<c:out value='${patentDoc.patentDocStatus.patentDocStatusId}'/>">
 								<span class="lbl"></span></label>
 								</td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
@@ -365,11 +365,11 @@ function batchEntrust() {
 		return;
 	}
 	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
-	var patent_types=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocType');
+	var patentDocStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocStatusId');
 	
-	for (var i = 0; i < patent_types.length; i++) {
-		if (patent_types[i] == 2 || patent_types[i] == 3 || patent_types[i] == 4 || patent_types[i] == 5 || patent_types[i] == 6 || patent_types[i] == 7 || 
-		patent_types[i] == 8 || patent_types[i] == 9 || patent_types[i] == 10 || patent_types[i] == 11) {
+	for (var i = 0; i < patentDocStatusIds.length; i++) {
+		if (patentDocStatusIds[i] == 2 || patentDocStatusIds[i] == 3 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || patentDocStatusIds[i] == 7 || 
+				patentDocStatusIds[i] == 8 || patentDocStatusIds[i] == 9 || patentDocStatusIds[i] == 10 || patentDocStatusIds[i] == 11) {
 			formutil.alertMessage('选中的文档中包含已缴费的文档，请重新选择！');
 			return;
 		}
