@@ -7,9 +7,9 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.EmployeeDao;
 import com.lotut.pms.dao.mapper.EmployeeMapper;
 import com.lotut.pms.domain.CustomerSupport;
-import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.domain.ProcessPerson;
 import com.lotut.pms.domain.ProxyOrg;
+import com.lotut.pms.domain.TechPerson;
 
 public class EmployeeMybatisDao extends SqlSessionDaoSupport implements EmployeeDao{
 	private EmployeeMapper employeeMapper;
@@ -138,6 +138,21 @@ public class EmployeeMybatisDao extends SqlSessionDaoSupport implements Employee
 	@Override
 	public ProxyOrg getOrgByParentOrgId(int orgUserId) {
 		return employeeMapper.getOrgByParentOrgId(orgUserId);
+	}
+
+	@Override
+	public List<CustomerSupport> searchCustomersByProxyId(String keyword, int currentUserId) {
+		return employeeMapper.searchCustomersByProxyId(keyword, currentUserId);
+	}
+
+	@Override
+	public List<TechPerson> searchTechPersonByProxyId(String keyword, int currentUserId) {
+		return employeeMapper.searchTechPersonByProxyId(keyword, currentUserId);
+	}
+
+	@Override
+	public List<ProcessPerson> searchProcessPersonByProxyId(String keyword, int currentUserId) {
+		return employeeMapper.searchProcessPersonByProxyId(keyword, currentUserId);
 	}
 
 

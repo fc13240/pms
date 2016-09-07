@@ -3,9 +3,9 @@ package com.lotut.pms.dao;
 import java.util.List;
 
 import com.lotut.pms.domain.CustomerSupport;
-import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.domain.ProcessPerson;
 import com.lotut.pms.domain.ProxyOrg;
+import com.lotut.pms.domain.TechPerson;
 
 public interface EmployeeDao {
 
@@ -52,5 +52,11 @@ public interface EmployeeDao {
 	List<ProxyOrg> getTopProxyOrgList();
 
 	ProxyOrg getOrgByParentOrgId(int orgUserId);
+	
+	List<CustomerSupport> searchCustomersByProxyId(String keyword,int currentUserId);
+	
+	List<TechPerson> searchTechPersonByProxyId(String keyword,int currentUserId);
+	
+	List<ProcessPerson> searchProcessPersonByProxyId(String keyword,int currentUserId);
 
 }

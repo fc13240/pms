@@ -31,7 +31,7 @@
 				<div class="lt-box" style="padding:20px;height:400px;">
 					  <h4>请选择要分享的好友 </h4>
 					  <div>
-						<form action="<s:url value='/patentDocWorkflow/searchProxyOrg.html'/>" method="get"  id="shareAddForm">
+						<form action="<s:url value='/patentDocWorkflow/searchTechPerson.html'/>" method="get"  id="shareAddForm">
 						  <c:forEach items="${paramValues.patentDocIds}" var="patentDocId">
 							<input type="hidden" class="form-control" name="patentDocIds" value="<c:out value='${patentDocId}'/>">
 						  </c:forEach>

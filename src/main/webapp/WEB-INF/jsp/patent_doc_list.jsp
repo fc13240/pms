@@ -83,11 +83,13 @@
 											<button  class="button button-primary  button-rounded"   >批量分享</button>
 											</a>
 						  				</td>
+						  	<se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')"> 
  						  		<td>
 		                            <a href="javascript:return void" onclick="batchEntrust()" >
 									<button style="margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >批量委托</button>
 									</a>
 						  		</td>
+						  	</se:authorize>
 						  	<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG')">
 							  		 <td>
 			                            <a href="javascript:return void" onclick="batchProxyOrg()" >
@@ -166,7 +168,7 @@
 										待确认
 										</a>
 									 </se:authorize> 
-									 <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH')"> 
+									 <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')"> 
 									 	<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 || patentDoc.patentDocStatus.patentDocStatusId == 8 }"> 
 											<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=7">
 											待修改
@@ -490,6 +492,15 @@ function batchProcessPerson() {
 		return;
 	}
 	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
+	var patentDocStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocStatusId');
+	
+	for (var i = 0; i < patentDocStatusIds.length; i++) {
+		if (patentDocStatusIds[i] == 1 || patentDocStatusIds[i] == 2 || patentDocStatusIds[i] == 3 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || 
+				patentDocStatusIds[i] == 7 || patentDocStatusIds[i] == 8) {
+			formutil.alertMessage('选中的文档需先分配给技术员操作，请重新选择！');
+			return;
+		}
+	}
 	for (var i = 0; i < patents_checked.length; i++) {
 		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
 			uniquePatentNos.push(patents_checked[i]);
