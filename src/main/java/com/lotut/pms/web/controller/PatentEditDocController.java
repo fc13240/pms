@@ -237,6 +237,8 @@ public class PatentEditDocController {
 	public String  deletePatentDoc(@RequestParam("patentDocId")long patentDocId,Model model){
 		int userId = PrincipalUtils.getCurrentUserId();
 		patentDocService.deletePatentDoc(patentDocId,userId);
+		int action=PatentDocWorkflowAction.ActionType.get("删除");
+		patentDocWorkflowHistoryService.insertHistory((int)patentDocId, action);
 	    return "redirect:/editor/patentDocList.html";
 	}
 	

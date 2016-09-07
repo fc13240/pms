@@ -63,11 +63,11 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 		}
 		List<Map<String, Long>> patentDocWorkflowTargetRecords=new ArrayList<>();
 		for (Long patentDocWorkflowHistoryId:patentDocWorkflowHistoryIdList) {
-			for(int proxyOrg: ids){
+			for(int id: ids){
 				for(long patentDocWorkflowHistoryPatentDocId:patentDocWorkflowHistoryPatentDocIdList){
 					Map<String, Long> patentDocWorkflowTargetRecord =  new HashMap<String, Long>();
 					patentDocWorkflowTargetRecord.put("history", patentDocWorkflowHistoryId);
-					patentDocWorkflowTargetRecord.put("target", (long) proxyOrg);
+					patentDocWorkflowTargetRecord.put("target", (long) id);
 					patentDocWorkflowTargetRecord.put("patentDoc", patentDocWorkflowHistoryPatentDocId);
 					patentDocWorkflowTargetRecords.add(patentDocWorkflowTargetRecord);
 				}
@@ -77,11 +77,6 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 		
 		
 	}
-
-
-
-
-
 
 	
 }
