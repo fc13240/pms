@@ -167,7 +167,7 @@
 										</a>
 									 </se:authorize> 
 									 <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH')"> 
-									 	<c:if test="${patentDoc.patentDocStatus.patentDocStatusId != 8 || patentDoc.patentDocStatus.patentDocStatusId != 9 || patentDoc.patentDocStatus.patentDocStatusId != 10 || patentDoc.patentDocStatus.patentDocStatusId != 11 }"> 
+									 	<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 || patentDoc.patentDocStatus.patentDocStatusId == 8 }"> 
 											<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=7">
 											待修改
 											</a>
@@ -186,12 +186,12 @@
 										已交局
 										</a>
 									 </se:authorize> 
-									<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 || patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 ||patentDoc.patentDocStatus.patentDocStatusId == 8 || 
-									 	patentDoc.patentDocStatus.patentDocStatusId == 9 }">
+									<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 || patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 ||patentDoc.patentDocStatus.patentDocStatusId == 8 || 
+									 	patentDoc.patentDocStatus.patentDocStatusId == 9 }"> --%>
 										<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 										编辑
 										</a>
-									 </c:if>
+									 <%-- </c:if> --%>
 									<a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 									预览
 									</a>
