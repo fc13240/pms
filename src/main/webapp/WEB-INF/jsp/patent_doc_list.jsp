@@ -162,32 +162,32 @@
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center">
 									 <se:authorize access="hasRole('ROLE_TECH')">
-										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=6>">
+										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=6">
 										待确认
 										</a>
 									 </se:authorize> 
 									 <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH')"> 
-									 	 <c:if test="${patentDoc.patentDocStatus != 8 || patentDoc.patentDocStatus != 9 ||patentDoc.patentDocStatus != 10 ||patentDoc.patentDocStatus != 11 }">
+									 	<c:if test="${patentDoc.patentDocStatus.patentDocStatusId != 8 || patentDoc.patentDocStatus.patentDocStatusId != 9 || patentDoc.patentDocStatus.patentDocStatusId != 10 || patentDoc.patentDocStatus.patentDocStatusId != 11 }"> 
 											<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=7">
 											待修改
 											</a>
 											<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=8">
 											定稿
 											</a>
-										</c:if>
+										</c:if> 
 									 </se:authorize> 
 									 <se:authorize access="hasRole('ROLE_TECH')"> 
-									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=9">
-									已制作标准申请文件
-									</a>
+										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=9">
+										已制作标准申请文件
+										</a>
 									 </se:authorize> 
 									 <se:authorize access="hasRole('ROLE_PROCESS')"> 
 										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=11">
 										已交局
 										</a>
 									 </se:authorize> 
-									 <c:if test="${patentDoc.patentDocStatus= 1 || patentDoc.patentDocStatus= 5 || patentDoc.patentDocStatus= 6 || patentDoc.patentDocStatus= 7 ||patentDoc.patentDocStatus= 8 || 
-									 	patentDoc.patentDocStatus= 9 }">
+									<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 || patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 ||patentDoc.patentDocStatus.patentDocStatusId == 8 || 
+									 	patentDoc.patentDocStatus.patentDocStatusId == 9 }">
 										<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 										编辑
 										</a>
@@ -197,17 +197,17 @@
 									</a>
 									
 				                    <%-- <a onclick=" exportWord(${patentDoc.patentDocId});">导出</a> --%>
-				                     <c:if test="${patentDoc.patentDocStatus= 1 }">
-				                    <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">
-				                                                  删除
-				               		</a>
+				                     <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 }">
+					                    <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">
+					                                                  删除
+					               		</a>
 				                     </c:if>
 				                   <%--  <a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a> --%>
 				                   <se:authorize access="hasRole('ROLE_TECH')"> 
-				                    <a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
+				                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
 				                   </se:authorize>
 				                   <c:if test="${patentDoc.patentDocUrl != null}">
-				                    <a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
+				                    	<a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
 								</td>
 	
