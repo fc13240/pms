@@ -20,7 +20,15 @@
    		</a>
 	   		
 	   </li>
-	 </se:authorize>	
+	 </se:authorize>
+	  
+	<se:authorize access="hasRole('ROLE_PLATFORM')">
+		<li class="active"> 
+			<a href="<s:url value='/employee/getTopProxyOrgList.html'/>">
+			<h5>顶级机构</h5>
+			</a>
+		</li>
+	</se:authorize>	
 	<se:authorize access="hasRole('ROLE_PROXY_ORG')">
 		<li class="active"> 
 			<a href="<s:url value='/employee/getProxyOrgList.html'/>">

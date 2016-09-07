@@ -1,16 +1,28 @@
 package com.lotut.pms.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.lotut.pms.domain.PatentDocWorkflowHistory;
-import com.lotut.pms.domain.PatentDocWorkflowTarget;
 
 public interface PatentDocWorkflowHistoryService {
-
-	void addWorkflowTarget(PatentDocWorkflowTarget patentDocWorkflowTarget);
 	
-	long insertHistories(List<Map<String,Integer>> patentDocWorkflowHistoryRecords);
+	
 
 	List<PatentDocWorkflowHistory> getPatentDocWorkflowHistoryByUserAndAction( int userId, int action);
+	
+	long insertProxyOrgsHistories(List<Integer> ids);
+	
+	void insertProxyOrgsWorkflowTargets(List<Integer> ids);
+	
+	long insertCustomerSupportHistories(List<Integer> ids);
+	
+	void insertCustomerSupportWorkflowTargets(List<Integer> ids);
+	
+	long insertTechPersonHistories(List<Integer> ids);
+	
+	void insertTechPersonWorkflowTargets(List<Integer> ids);
+	
+	long insertProcessPersonHistories(List<Integer> ids);
+	
+	void insertProcessPersonWorkflowTargets(List<Integer> ids);
 }

@@ -144,6 +144,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 
+	@Override
+	@Transactional
+	public void addOrUpdateTopProxyOrg(ProxyOrg proxyOrg) {
+		ProxyOrg org = employeeDao.getOrgIdByParentOrgId(proxyOrg.getOrgUserId());
+		if(org == null) {
+			employeeDao.addOrUpdateTopProxyOrg(proxyOrg);
+			boolean isNewProxyOrg = proxyOrg.getOrgId() != 0;
+			if (isNewProxyOrg) {
+				employeeDao.insertGroupMember(proxyOrg.getOrgUserId(),Role.ROLE_PROXY_ORG.getRoleName());
+			}
+		}
+		
+	}
+
+
+	@Override
+	public List<ProxyOrg> getTopProxyOrgList() {
+		return employeeDao.getTopProxyOrgList();
+	}
+
+
 	
 
 

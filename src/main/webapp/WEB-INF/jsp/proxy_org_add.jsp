@@ -53,7 +53,13 @@
 					          <td style="text-align:center">${status.count + page.startIndex}</td>
 					          <td style="text-align:center"><c:out value="${user.username}"/></td>
 					          <td style="text-align:center"><c:out value="${user.name}"/></td>
-					          <td style="text-align:center"><a  href='javascript:addOrUpdateProxyOrg(${user.userId});'>添加为合作机构</a></td>
+					           
+							  <se:authorize access="hasRole('ROLE_PROXY_ORG')">
+					         	<td style="text-align:center"><a  href='javascript:addOrUpdateProxyOrg(${user.userId});'>添加为合作机构</a></td>
+					          </se:authorize>
+					          <se:authorize access="hasRole('ROLE_PLATFORM')">
+					         	<td style="text-align:center"><a  href='javascript:addOrUpdateTopProxyOrg(${user.userId});'>添加为顶级机构</a></td>
+					          </se:authorize>	
 					        </tr>
 					      </c:forEach>
 					    </tbody>
@@ -79,6 +85,22 @@
 			url: "<s:url value='/employee/addOrUpdateProxyOrg.html'/>?orgUserId=" + orgUserId,
 			success: function() {
 		   		$("<div>添加合作机构成功</div>").dialog({
+		   			modal: true,
+		   			buttons: {
+		   				Ok: function() {
+		   					$(this).dialog("close");
+		   				}
+		   			}
+		   		});
+			}
+		});
+	}
+	
+	function addOrUpdateTopProxyOrg(orgUserId) {
+		$.ajax({
+			url: "<s:url value='/employee/addOrUpdateTopProxyOrg.html'/>?orgUserId=" + orgUserId,
+			success: function() {
+		   		$("<div>添加顶级机构成功</div>").dialog({
 		   			modal: true,
 		   			buttons: {
 		   				Ok: function() {

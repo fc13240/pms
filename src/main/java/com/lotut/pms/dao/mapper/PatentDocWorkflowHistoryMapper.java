@@ -7,11 +7,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.PatentDocWorkflowHistory;
-import com.lotut.pms.domain.PatentDocWorkflowTarget;
 
 public interface PatentDocWorkflowHistoryMapper {
-	
-	void addWorkflowTarget(PatentDocWorkflowTarget patentDocWorkflowTarget);
 	
 	long insertHistories(List<Map<String,Integer>> patentDocWorkflowHistoryRecords);
 	
