@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lotut.pms.constants.PatentDocWorkflowAction;
 import com.lotut.pms.domain.CustomerSupport;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocOrder;
@@ -134,12 +135,8 @@ public class PatentDocWorkflowController {
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		final int PATENT_DOC_STAUTS_PAID = 3;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
-		
-		patentDocWorkflowHistoryService.insertProxyOrgsHistories(patentDocIds);
-		
-		patentDocWorkflowHistoryService.insertProxyOrgsWorkflowTargets(proxyOrgs);
-		
-		
+		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
+		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, proxyOrgs, action);
 		return "patent_doc_list";
 	}
 	
@@ -167,10 +164,8 @@ public class PatentDocWorkflowController {
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		final int PATENT_DOC_STAUTS_PAID = 4;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
-		
-		patentDocWorkflowHistoryService.insertCustomerSupportHistories(patentDocIds);
-		
-		patentDocWorkflowHistoryService.insertCustomerSupportWorkflowTargets(customerSuppors);
+		int action=PatentDocWorkflowAction.ActionType.get("分配给客服人员");
+		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, customerSuppors, action);
 		return "patent_doc_list";
 	}
 	
@@ -199,10 +194,8 @@ public class PatentDocWorkflowController {
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		final int PATENT_DOC_STAUTS_PAID = 5;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
-		
-		patentDocWorkflowHistoryService.insertTechPersonHistories(patentDocIds);
-		
-		patentDocWorkflowHistoryService.insertTechPersonWorkflowTargets(techPersons);
+		int action=PatentDocWorkflowAction.ActionType.get("分配给技术员");
+		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, techPersons, action);
 		return "patent_doc_list";
 	}
 	
@@ -231,10 +224,10 @@ public class PatentDocWorkflowController {
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		final int PATENT_DOC_STAUTS_PAID = 10;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
-		
-		patentDocWorkflowHistoryService.insertProcessPersonHistories(patentDocIds);
-		
-		patentDocWorkflowHistoryService.insertProcessPersonWorkflowTargets(processPersons);
+		int insertAction =PatentDocWorkflowAction.ActionType.get("置为待交局");
+		patentDocWorkflowHistoryService.insertActionHistories(patentDocIds, insertAction);
+		int shareAction=PatentDocWorkflowAction.ActionType.get("分配给流程人员");
+		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, processPersons, shareAction);
 		return "patent_doc_list";
 	}
 	
@@ -244,6 +237,20 @@ public class PatentDocWorkflowController {
 		List<Long> patentDocIdList=new ArrayList<>();
 		patentDocIdList.add(patentdocId);
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, status);
+		int action=0;
+		if(status==6){
+			 action=13;}
+		if(status==7){
+			 action=5;}
+		if(status==8){
+		 action=7;}
+		if(status==9){
+			 action=8;}
+		if(status==10){
+			 action=14;}
+		if(status==11){
+			 action=10;}
+		patentDocWorkflowHistoryService.insertHistory(patentdocId.intValue(), action);
 		return "redirect:/editor/patentDocList.html";
 	}
 	

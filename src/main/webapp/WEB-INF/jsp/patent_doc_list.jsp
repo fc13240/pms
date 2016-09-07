@@ -143,7 +143,7 @@
 							<c:forEach items="${patentDocs}" var="patentDoc" varStatus="status">
 							  <tr>
 							  	<td class="center" style="text-align:center" width="10px"><label class="pos-rel"> <span class="batch-share-item">
-								<input type="checkbox" class="check-item" patentDocId="<c:out value='${patentDoc.patentDocId}'/>" patentDocType="<c:out value='${patentDoc.patentType}'/>">
+								<input type="checkbox" class="check-item" patentDocId="<c:out value='${patentDoc.patentDocId}'/>" patentDocStatusId="<c:out value='${patentDoc.patentDocStatus.patentDocStatusId}'/>">
 								<span class="lbl"></span></label>
 								</td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
@@ -162,48 +162,52 @@
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center">
 									 <se:authorize access="hasRole('ROLE_TECH')">
-									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=6>">
-									待确认
-									</a>
+										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=6">
+										待确认
+										</a>
 									 </se:authorize> 
-									 <se:authorize access="hasRole('ROLE_USER')"> 
-									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=7">
-									待修改
-									</a>
-									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=8">
-									定稿
-									</a>
+									 <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH')"> 
+									 	<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 || patentDoc.patentDocStatus.patentDocStatusId == 8 }"> 
+											<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=7">
+											待修改
+											</a>
+											<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=8">
+											定稿
+											</a>
+										</c:if> 
 									 </se:authorize> 
 									 <se:authorize access="hasRole('ROLE_TECH')"> 
-									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=9">
-									已制作标准申请文件
-									</a>
+										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=9">
+										已制作标准申请文件
+										</a>
 									 </se:authorize> 
 									 <se:authorize access="hasRole('ROLE_PROCESS')"> 
-									<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=11">
-									已交局
-									</a>
+										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=11">
+										已交局
+										</a>
 									 </se:authorize> 
-									 <se:authorize access="hasAnyRole('ROLE_USER','ROLE_TECH')"> 
-									<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
-									编辑
-									</a>
-									 </se:authorize> 
+									<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 || patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 ||patentDoc.patentDocStatus.patentDocStatusId == 8 || 
+									 	patentDoc.patentDocStatus.patentDocStatusId == 9 }"> --%>
+										<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
+										编辑
+										</a>
+									 <%-- </c:if> --%>
 									<a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 									预览
 									</a>
 									
 				                    <%-- <a onclick=" exportWord(${patentDoc.patentDocId});">导出</a> --%>
-				                     <se:authorize access="hasAnyRole('ROLE_USER','ROLE_TECH')"> 
-				                    <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">
-				                                                  删除
-				                    </a>
-				                     </se:authorize> 
-				                   <%--  <a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a>
-				                    <a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a> --%>
-				                   
+				                     <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 }">
+					                    <a onclick="return confirm('确认要删除？')" href="<s:url value='/editor/deletePatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">
+					                                                  删除
+					               		</a>
+				                     </c:if>
+				                   <%--  <a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a> --%>
+				                   <se:authorize access="hasRole('ROLE_TECH')"> 
+				                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
+				                   </se:authorize>
 				                   <c:if test="${patentDoc.patentDocUrl != null}">
-				                    <a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
+				                    	<a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
 								</td>
 	
@@ -361,11 +365,11 @@ function batchEntrust() {
 		return;
 	}
 	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
-	var patent_types=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocType');
+	var patentDocStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocStatusId');
 	
-	for (var i = 0; i < patent_types.length; i++) {
-		if (patent_types[i] == 2 || patent_types[i] == 3 || patent_types[i] == 4 || patent_types[i] == 5 || patent_types[i] == 6 || patent_types[i] == 7 || 
-		patent_types[i] == 8 || patent_types[i] == 9 || patent_types[i] == 10 || patent_types[i] == 11) {
+	for (var i = 0; i < patentDocStatusIds.length; i++) {
+		if (patentDocStatusIds[i] == 2 || patentDocStatusIds[i] == 3 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || patentDocStatusIds[i] == 7 || 
+				patentDocStatusIds[i] == 8 || patentDocStatusIds[i] == 9 || patentDocStatusIds[i] == 10 || patentDocStatusIds[i] == 11) {
 			formutil.alertMessage('选中的文档中包含已缴费的文档，请重新选择！');
 			return;
 		}
