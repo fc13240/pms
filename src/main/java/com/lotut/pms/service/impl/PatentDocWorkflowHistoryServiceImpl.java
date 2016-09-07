@@ -32,7 +32,9 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 	}
 
 	@Override
-	public void insertHistory(List<Integer> ids, int action) {
+	public void insertHistory(int id, int action) {
+		List<Integer> ids=new ArrayList<>();
+		ids.add(id);
 		insertHistories(ids,action);
 	}
 	

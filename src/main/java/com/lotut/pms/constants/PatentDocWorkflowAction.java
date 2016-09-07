@@ -11,7 +11,7 @@ public class PatentDocWorkflowAction {
 		ActionType.put("分配给客服人员",3);
 		ActionType.put("分配给技术员",4);
 		ActionType.put("审查",5 );
-		ActionType.put("修改",6 );
+		ActionType.put("保存或修改",6 );
 		ActionType.put("定稿",7 );
 		ActionType.put("制作标准文件",8 );
 		ActionType.put("确认",9 );
