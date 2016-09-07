@@ -1426,14 +1426,12 @@ margin: 1px 0 0 1px;}
 	}
 	 function templatebuttonclick(i,patentDocSectionId){
 		 if(patentDocSectionId==1){
-			 alert("说明书");
 			 editor.appendHtml($("#templateContent"+i).html());
 		 }
 		 else if(patentDocSectionId==2){
 			editor8.appendHtml($("#templateContent"+i).html());
 		 }
 		 else if(patentDocSectionId==3){
-			 alert("摘要 ");
 			 editor7.appendHtml($("#templateContent"+i).html());
 		 }
 		 else{
