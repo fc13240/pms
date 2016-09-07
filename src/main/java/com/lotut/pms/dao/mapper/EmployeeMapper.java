@@ -50,4 +50,10 @@ public interface EmployeeMapper {
 	
 	int getOrgIdByCustomerSupportId(int currentUserId);
 
+	void addOrUpdateTopProxyOrg(ProxyOrg proxyOrg);
+
+	List<ProxyOrg> getTopProxyOrgList();
+
+	ProxyOrg getOrgByParentOrgId(int orgUserId);
+
 }

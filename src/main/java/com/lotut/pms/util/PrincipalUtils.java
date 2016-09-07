@@ -43,6 +43,10 @@ public class PrincipalUtils {
 		return PrincipalUtils.hasAuthority(Role.ROLE_TRADER.getRoleName());
 	}
 	
+	public static boolean isPlatform() {//平台账户
+		return PrincipalUtils.hasAuthority(Role.ROLE_PLATFORM.getRoleName());
+	}
+	
 	public static boolean isProxyOrg() {//代理机构
 		return PrincipalUtils.hasAuthority(Role.ROLE_PROXY_ORG.getRoleName());
 	}
