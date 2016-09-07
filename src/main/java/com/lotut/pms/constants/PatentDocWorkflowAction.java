@@ -16,5 +16,6 @@ public class PatentDocWorkflowAction {
 		ActionType.put("制作标准文件",8 );
 		ActionType.put("确认",9 );
 		ActionType.put("交局",10 );
+		ActionType.put("分配给流程人员", 11);
 	}
 }
