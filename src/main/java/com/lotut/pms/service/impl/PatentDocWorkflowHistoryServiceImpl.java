@@ -94,6 +94,11 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 		patentDocWorkflowHistoryDao.insertSharePatentDocs(sharePatentDocRecords);
 
 	}
+
+	@Override
+	public List<PatentDocWorkflowHistory> getHistoryByPatentDocId(int id) {
+		return patentDocWorkflowHistoryDao.getHistoryByPatentDocId(id);
+	}
 	
 	
 }

@@ -36,6 +36,11 @@ public class PatentDocWorkflowHistoryMybatisDao extends SqlSessionDaoSupport imp
 		patentDocWorkflowHistoryMapper.insertSharePatentDocs(sharePatentDocRecords);
 	}
 
+	@Override
+	public List<PatentDocWorkflowHistory> getHistoryByPatentDocId(int id) {
+		return patentDocWorkflowHistoryMapper.getHistoryByPatentDocId(id);
+	}
+
 	
 
 	

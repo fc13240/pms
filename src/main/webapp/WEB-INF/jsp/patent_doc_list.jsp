@@ -163,6 +163,10 @@
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center">
+								
+										<a target="_blank" href="<s:url value='/patentDocWorkflowHistory/getHistory.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=6">
+										查看流程记录
+										</a>
 									 <se:authorize access="hasRole('ROLE_TECH')">
 										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=6">
 										待确认

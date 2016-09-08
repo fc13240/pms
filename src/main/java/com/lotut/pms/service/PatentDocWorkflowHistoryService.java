@@ -15,4 +15,5 @@ public interface PatentDocWorkflowHistoryService {
 	
 	void insertActionHistories(List<Integer> ids, int action);
 	
+	List<PatentDocWorkflowHistory> getHistoryByPatentDocId(int id);
 }
