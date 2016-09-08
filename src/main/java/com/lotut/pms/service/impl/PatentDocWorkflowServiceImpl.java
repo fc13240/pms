@@ -108,8 +108,6 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 		
 		patentDocDao.insertProxyOrgPatentDoc(userPatentDocRecords);
 		
-		
-		
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<Map<String, Integer>> patentDocWorkflowHistoryRecords = new ArrayList<>();
 		for (Integer patentDocId: patentDocIdIntegerList) {
