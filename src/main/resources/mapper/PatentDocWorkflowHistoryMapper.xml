@@ -47,7 +47,7 @@
 	
 	</select>
 	
-	<select id="getHistoryByPatentDocId" parameterMap="int" resultMap="PatentDocWorkflowHistoryMap">
+	<select id="getHistoryByPatentDocId" parameterType="int" resultMap="PatentDocWorkflowHistoryMap">
 		SELECT un.* ,u.user_id as share_user_id , u.username AS share_username FROM (
 		SELECT h.history_id,h.user_id,r.username,h.patent_doc_id , a.action_type_desc, h.action_time FROM patent_doc_workflow_history h 
 		 JOIN patent_doc_workflow_action a ON h.ACTION = a.action_id JOIN users r ON h.user_id = r.user_id 
