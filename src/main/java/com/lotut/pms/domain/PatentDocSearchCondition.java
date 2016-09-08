@@ -4,6 +4,7 @@ public class PatentDocSearchCondition {
 	private int userId;
 	private String keyword;
 	private Integer patentDocStatus;
+	private Integer patentType;
 	private Page page;
 	public int getUserId() {
 		return userId;
@@ -16,6 +17,12 @@ public class PatentDocSearchCondition {
 			return keyword.trim();
 		}
 		return keyword;
+	}
+	public Integer getPatentType() {
+		return patentType;
+	}
+	public void setPatentType(Integer patentType) {
+		this.patentType = patentType;
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
@@ -34,10 +41,13 @@ public class PatentDocSearchCondition {
 	public void setPatentDocStatus(Integer patentDocStatus) {
 		this.patentDocStatus = patentDocStatus;
 	}
+	
+	
 	@Override
 	public String toString() {
 		String keywordStr = keyword == null ? "" : keyword;
 		String patentDocStatusStr = patentDocStatus == null ? "" : patentDocStatus.toString();
-		return "keyword=" + keywordStr+ "&patentDocStatus=" + patentDocStatusStr;
+		String patentTypeStr = patentType == null ? "" : patentType.toString();
+		return "keyword=" + keywordStr+ "&patentDocStatus=" + patentDocStatusStr + "&patentType=" + patentTypeStr;
 	}
 }

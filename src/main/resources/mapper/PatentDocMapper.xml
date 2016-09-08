@@ -151,7 +151,10 @@
 			 	</if>
 			 	<if test="keyword != null">
 					and ( p.patent_name like #{keyword_pattern})
-				</if>		 		 	
+				</if>
+				<if test="patentType != null and patentType !=''">
+					and ( p.patent_type = #{patentType})
+				</if>			 		 	
 				 ORDER BY p.create_time DESC ,p.last_update_time DESC
 				 limit #{page.startIndex}, #{page.pageSize}) as sp 		
 		 order by sp.create_time DESC, sp.last_update_time DESC
@@ -169,6 +172,10 @@
 			 	</if>
 			 	<if test="keyword != null">
 					and ( p.patent_name like #{keyword_pattern})
+				</if>
+				
+				<if test="patentType != null and patentType !=''">
+					and ( p.patent_type = #{patentType})
 				</if>
 	</select>
 	
