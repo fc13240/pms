@@ -67,4 +67,8 @@ public interface PatentDocService {
 	List<PatentDoc> getUserPatentDocByRole(Page page);
 	
 	int getUserPatentDocCountByRole(Page page);
+	
+	List<PatentDoc> getPatentDocByTechAndCustomer(Page page,List<Integer> statusList);
+	
+	int getPatentDocCountByTechAndCustomer(Page page,List<Integer> statusList);
 }

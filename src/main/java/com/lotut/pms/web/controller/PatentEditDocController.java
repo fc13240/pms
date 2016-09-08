@@ -221,15 +221,41 @@ public class PatentEditDocController {
 			page.setTotalRecords(totalCount);
 			 patentDocs=patentDocService.getUserPatentDocByRole(page);
 		}else if(PrincipalUtils.isCustomerSupport()){
-			page.setStatus(4);
-			totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
+//			page.setStatus(4);
+//			totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
+//			page.setTotalRecords(totalCount);
+//			 patentDocs=patentDocService.getUserPatentDocByRole(page);
+			
+			List<Integer> excludeStatusList=new ArrayList<>();
+			excludeStatusList.add(1);
+			excludeStatusList.add(2);
+			excludeStatusList.add(3);
+			excludeStatusList.add(5);
+			excludeStatusList.add(6);
+			excludeStatusList.add(7);
+			excludeStatusList.add(8);
+			excludeStatusList.add(10);
+			excludeStatusList.add(11);
+			totalCount=patentDocService.getPatentDocCountByTechAndCustomer(page, excludeStatusList);
 			page.setTotalRecords(totalCount);
-			 patentDocs=patentDocService.getUserPatentDocByRole(page);
+			 patentDocs=patentDocService.getPatentDocByTechAndCustomer(page, excludeStatusList);
+			
+			
 		}else if(PrincipalUtils.isTech()){
-			page.setStatus(5);
-			totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
+			//page.setStatus(5);
+//			totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
+//			page.setTotalRecords(totalCount);
+//			 patentDocs=patentDocService.getUserPatentDocByRole(page);
+			
+			List<Integer> excludeStatusList=new ArrayList<>();
+			excludeStatusList.add(1);
+			excludeStatusList.add(2);
+			excludeStatusList.add(3);
+			excludeStatusList.add(4);
+			totalCount=patentDocService.getPatentDocCountByTechAndCustomer(page, excludeStatusList);
 			page.setTotalRecords(totalCount);
-			 patentDocs=patentDocService.getUserPatentDocByRole(page);
+			 patentDocs=patentDocService.getPatentDocByTechAndCustomer(page, excludeStatusList);
+			
 		}else if(PrincipalUtils.isProcess()){
 			page.setStatus(10);
 			totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
