@@ -247,7 +247,8 @@ margin: 1px 0 0 1px;}
 									<div>
 										<br/>
 										<br/>
-										<h2 style="float:left;padding-top:5px;padding-right:5px;">申请人:</h2>
+										<!-- <h2 style="float:left;padding-top:5px;padding-right:5px;">申请人:</h2> -->
+										 <div class="title" style="float:left;padding-top:5px;padding-right:5px;">申请人:</div>
 										<button type="button" style="width:120px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
 											选择常用申请人
 										</button>
