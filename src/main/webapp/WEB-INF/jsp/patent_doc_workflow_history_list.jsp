@@ -55,7 +55,7 @@
 								<input type="checkbox" class="check-item" patentDocId="<c:out value='${patentDoc.patentDocId}'/>">
 								<span class="lbl"></span></label>
 								</td>
-								<td class="center" style="text-align:center">status.count </td>
+								<td class="center" style="text-align:center">${status}</td>
 								<td style="text-align:center"><c:out value="${patentDocWorkflowHistory.owner.userId}"/></td>
 								<td style="text-align:center"><c:out value="${patentDocWorkflowHistory.owner.username}"/></td>
 								<td style="text-align:center"><c:out value="${patentDocWorkflowHistory.patentDocAction.actionTypeDesc}"/></td>
