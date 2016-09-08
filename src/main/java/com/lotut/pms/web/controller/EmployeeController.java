@@ -66,7 +66,7 @@ public class EmployeeController {
 		return "proxy_org_list";
 	}
 	
-	@RequestMapping(path="/getTopProxyOrgList", method=RequestMethod.GET)//代理机构
+	@RequestMapping(path="/getTopProxyOrgList", method=RequestMethod.GET)//顶级代理机构
 	public String getTopProxyOrgList(Model model) {
 		List<ProxyOrg> proxyOrgs = employeeService.getTopProxyOrgList();
 		model.addAttribute("proxyOrgs", proxyOrgs);

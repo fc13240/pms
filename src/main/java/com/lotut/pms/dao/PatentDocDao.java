@@ -5,10 +5,8 @@ import java.util.Map;
 
 import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSearchCondition;
-import com.lotut.pms.domain.PatentSearchCondition;
 
 public interface PatentDocDao {
 	void savePatentDoc(PatentDoc PatentDoc);
@@ -64,5 +62,13 @@ public interface PatentDocDao {
 	List<PatentDoc> getPatentDocsByIds(List<Long> patentDocIds);
 	
 	void insertProxyOrgPatentDoc(List<Map<String, Long>> userPatentDocRecords);
+	
+	List<PatentDoc> getUserPatentDocByRole(Page page);
+	
+	int getUserPatentDocCountByRole(Page page);
+	
+	List<PatentDoc> getPatentDocByTechAndCustomer(Page page,List<Integer> statusList);
+	
+	int getPatentDocCountByTechAndCustomer(Page page,List<Integer> statusList);
 	
 }

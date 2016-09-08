@@ -64,4 +64,12 @@ public interface PatentDocMapper {
 	List<PatentDoc> getPatentDocsByIds(@Param("patentDocIds")List<Long> patentDocIds);
 	
 	void insertProxyOrgPatentDoc(List<Map<String, Long>> userPatentDocRecords);
+	
+	List<PatentDoc> getUserPatentDocByRole(Page page);
+	
+	int getUserPatentDocCountByRole(Page page);
+	
+	List<PatentDoc> getPatentDocByTechAndCustomer(@Param("page") Page page,@Param("statusList") List<Integer> statusList);
+	
+	int getPatentDocCountByTechAndCustomer(@Param("page") Page page,@Param("statusList") List<Integer> statusList);
 }
