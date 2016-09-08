@@ -49,7 +49,8 @@
 	
 	<select id="getHistoryByPatentDocId" parameterType="int" resultMap="PatentDocWorkflowHistoryMap">
 		SELECT un.* ,u.user_id as share_user_id , u.username AS share_username FROM (
-		SELECT h.history_id,h.user_id,r.username,h.patent_doc_id , a.action_type_desc, h.action_time FROM patent_doc_workflow_history h 
+		SELECT h.history_id,h.user_id,r.username,h.patent_doc_id ,h.action as action_id ,a.action_type_desc as action_type_desc, 
+		h.action_time FROM patent_doc_workflow_history h 
 		 JOIN patent_doc_workflow_action a ON h.ACTION = a.action_id JOIN users r ON h.user_id = r.user_id 
       	left JOIN share_patent_docs s ON h.user_id = s.share_by AND h.patent_doc_id = s.patent_doc where patent_doc_id=(#{patentDocId}) 
       	ORDER BY h.action_time ASC )AS un
