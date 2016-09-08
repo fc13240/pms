@@ -24,15 +24,10 @@ import com.lotut.pms.domain.ProcessPerson;
 import com.lotut.pms.domain.ProxyOrg;
 import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.domain.User;
-import com.lotut.pms.service.AppPersonService;
 import com.lotut.pms.service.EmployeeService;
-import com.lotut.pms.service.FriendService;
-import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocWorkflowHistoryService;
 import com.lotut.pms.service.PatentDocWorkflowService;
-import com.lotut.pms.service.PetitionService;
-import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
 
 
