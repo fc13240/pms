@@ -37,7 +37,7 @@
   	    		
   SELECT n.app_person_id ,n.name ,n.id_number,n.fee_reduce_transaction_status,
 	   n.transaction_identity_id,n.transaction_year,n.app_person_attachment_file,n.proxy_file,
-		n.postcode_address ,n.other_information ,u.user_id,u.username FROM (
+		n.postcode_address ,n.other_information ,u.user_id,u.username FROM 
  (SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
   	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
   		p.postcode_address ,p.other_information ,u.user_id,u.username  FROM common_app_person p
@@ -56,13 +56,13 @@
   	</select> 
   	
   <!-- 	 	
-  	<select id="getUserAppPersons" parameterType="int" resultMap="AppPersonWithShareUsers">
-  	   SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
+  	SELECT m.* ,h.username FROM 
+ (SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
   	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
   		p.postcode_address ,p.other_information ,u.user_id,u.username  FROM common_app_person p
-  		   JOIN user_app_person up ON p.app_person_id = up.app_person and p.user_id=up.user
-  		 JOIN users u ON u.user_id = up.user
-  		WHERE p.user_id=#{userId}
+  		 JOIN users u ON u.user_id = p.user_id
+  		WHERE p.user_id=2 ) m JOIN user_app_person a ON m.app_person_id = a.app_person JOIN 
+  		users h ON h.user_id = a.user
   	</select> -->
  
   	
