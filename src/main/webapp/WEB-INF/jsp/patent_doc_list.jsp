@@ -32,11 +32,20 @@
 					    <div class="form-group">
 					    <table class="search-table">
 					    <tr>
+					    	<td>专利类型</td>
 						    <td>文档状态</td>
 						    <td>关键字</td>
 						    <td></td>
 					    </tr>
 					    <tr>
+					    		<td>
+								    <select style="width:121px;" class="form-control" name="patentType">
+											<option value="">全部</option>
+											<option value="1">发明</option>
+											<option value="2">实用新型</option>
+											<option value="3">外观</option>
+									</select>
+								</td>
 						    	<td>
 								    <select style="width:121px;" class="form-control" name="patentDocStatus">
 											<option value="">全部</option>
