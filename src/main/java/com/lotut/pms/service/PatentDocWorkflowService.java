@@ -2,8 +2,6 @@ package com.lotut.pms.service;
 
 import java.util.List;
 
-import com.lotut.pms.domain.Fee;
-import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocOrder;
 

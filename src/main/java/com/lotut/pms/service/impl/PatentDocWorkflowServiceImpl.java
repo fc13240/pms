@@ -1,7 +1,6 @@
 package com.lotut.pms.service.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,18 +12,13 @@ import com.lotut.pms.dao.PatentDocDao;
 import com.lotut.pms.dao.PatentDocWorkflowDao;
 import com.lotut.pms.dao.PatentDocWorkflowHistoryDao;
 import com.lotut.pms.dao.UserDao;
-import com.lotut.pms.domain.Fee;
-import com.lotut.pms.domain.Order;
-import com.lotut.pms.domain.OrderItem;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocOrder;
 import com.lotut.pms.domain.PatentDocOrderItem;
 import com.lotut.pms.domain.PatentDocWorkflowHistory;
 import com.lotut.pms.domain.User;
-import com.lotut.pms.service.PatentDocWorkflowHistoryService;
 import com.lotut.pms.service.PatentDocWorkflowService;
 import com.lotut.pms.util.PrincipalUtils;
-import com.mchange.v2.sql.filter.SynchronizedFilterDataSource;
 
 public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 	private PatentDocWorkflowDao patentDocWorkflowDao;

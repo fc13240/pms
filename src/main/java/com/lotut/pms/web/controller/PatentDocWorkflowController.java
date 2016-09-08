@@ -41,29 +41,20 @@ import com.lotut.pms.util.PrincipalUtils;
 public class PatentDocWorkflowController {
 	private PatentDocWorkflowService patentDocWorkflowService;
 	private PatentDocService patentDocService;
-	private InventorService inventorService ;
-	private AppPersonService appPersonService;
-	private UserService userService;
-	private FriendService friendService;
-	private PetitionService petitionService;
 	private EmployeeService employeeService;
 	private PatentDocWorkflowHistoryService patentDocWorkflowHistoryService;
 	
 	
 	@Autowired
-	public PatentDocWorkflowController(PatentDocService patentDocService,InventorService inventorService,AppPersonService appPersonService,FriendService friendService,PetitionService petitionService,UserService userService,PatentDocWorkflowService patentDocWorkflowService,EmployeeService employeeService
-			,PatentDocWorkflowHistoryService patentDocWorkflowHistoryService) {
+	public PatentDocWorkflowController(PatentDocWorkflowService patentDocWorkflowService,
+			PatentDocService patentDocService, EmployeeService employeeService,
+			PatentDocWorkflowHistoryService patentDocWorkflowHistoryService) {
+		this.patentDocWorkflowService = patentDocWorkflowService;
 		this.patentDocService = patentDocService;
-		this.inventorService = inventorService;
-		this.appPersonService = appPersonService;
-		this.friendService = friendService;
-		this.petitionService = petitionService;
-		this.userService= userService;
-		this.patentDocWorkflowService =patentDocWorkflowService;
-		this.employeeService=employeeService;
-		this.patentDocWorkflowHistoryService=patentDocWorkflowHistoryService;
+		this.employeeService = employeeService;
+		this.patentDocWorkflowHistoryService = patentDocWorkflowHistoryService;
 	}
-	
+
 	
 	@RequestMapping(path="/createOrderForm")
 	public String creatOrder(@RequestParam("patentDocIds")List<Long> patentDocIds,Model model){
@@ -85,7 +76,6 @@ public class PatentDocWorkflowController {
 			model.addAttribute("totalAmount", totalAmount);
 			return "patent_doc_order_create_form";
 }
-	
 	
 	
 	@RequestMapping(path="/createPatentDocOrder")
