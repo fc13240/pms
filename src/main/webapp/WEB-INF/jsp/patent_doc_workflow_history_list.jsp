@@ -34,10 +34,10 @@
 						<table id="simple-table" class="table table-striped table-bordered table-hover" style="margin-top: 10px;">
 						<thead>
 						<tr class="simple_bag">
-							  <th class="center" width="20px"> <label class="pos-rel">
+							 <%--  <th class="center" width="20px"> <label class="pos-rel">
 								<input type="checkbox" class="check-item" id="checkall"  name="checkall" />
 								<span class="lbl"></span> </label>
-							  </th>
+							  </th> --%>
 							  <th class="center" width="20px">序号</th>
 							  <th width="50px">操作账户ID</th>
 							  <th width="50px">操作账户</th>
@@ -51,10 +51,10 @@
 						  <tbody>
 							<c:forEach items="${patentDocWorkflowHistories}" var="patentDocWorkflowHistory" varStatus="status">
 							  <tr>
-							  	<td class="center" style="text-align:center" width="10px"><label class="pos-rel"> <span class="batch-share-item">
+							  	<%-- <td class="center" style="text-align:center" width="10px"><label class="pos-rel"> <span class="batch-share-item">
 								<input type="checkbox" class="check-item" patentDocId="<c:out value='${patentDoc.patentDocId}'/>">
 								<span class="lbl"></span></label>
-								</td>
+								</td> --%>
 								<td class="center" style="text-align:center">${status.count}</td>
 								<td style="text-align:center"><c:out value="${patentDocWorkflowHistory.owner.userId}"/></td>
 								<td style="text-align:center"><c:out value="${patentDocWorkflowHistory.owner.username}"/></td>
