@@ -539,7 +539,7 @@ function batchProcessPerson() {
 	
 	for (var i = 0; i < patentDocStatusIds.length; i++) {
 		if (patentDocStatusIds[i] == 1 || patentDocStatusIds[i] == 2 || patentDocStatusIds[i] == 3 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || 
-				patentDocStatusIds[i] == 7 || patentDocStatusIds[i] == 8 || patentDocStatusIds[i] == 10 || patentDocStatusIds[i] == 11) {
+				patentDocStatusIds[i] == 7 || patentDocStatusIds[i] == 8) {
 			formutil.alertMessage('选中的文档需先分配给技术员操作，请重新选择！');
 			return;
 		}
