@@ -52,18 +52,17 @@
 	<select id="getHistoryByPatentDocId" parameterType="int" resultMap="PatentDocWorkflowHistoryMap">
 		SELECT un.*,u.user_id as share_user_id , u.username AS share_username FROM 
 		(SELECT h.history_id,h.user_id,r.username,h.patent_doc_id ,h.ACTION as action_id ,a.action_type_desc as action_type_desc , 
-		h.action_time,t.target FROM patent_doc_workflow_history h join patent_doc_workflow_target t  
+		h.action_time,t.target FROM patent_doc_workflow_history h left join patent_doc_workflow_target t  
 		on h.history_id = t.history and h.patent_doc_id = t.patent_doc 
 		 JOIN patent_doc_workflow_action a ON h.ACTION = a.action_id JOIN users r ON h.user_id = r.user_id where 
-		 patent_doc_id=(#{patentDocId}) )as un join users u on un.target=u.user_id 
-	
+		 patent_doc_id=(#{patentDocId}) )as un left join users u on un.target=u.user_id 
 	</select>
 	<!-- SELECT un.*,u.user_id as share_user_id , u.username AS share_username FROM 
 		(SELECT h.history_id,h.user_id,r.username,h.patent_doc_id ,h.ACTION as action_id ,a.action_type_desc as action_type_desc , 
-		h.action_time,t.target FROM patent_doc_workflow_history h join patent_doc_workflow_target t  
+		h.action_time,t.target FROM patent_doc_workflow_history h left join patent_doc_workflow_target t  
 		on h.history_id = t.history and h.patent_doc_id = t.patent_doc 
 		 JOIN patent_doc_workflow_action a ON h.ACTION = a.action_id JOIN users r ON h.user_id = r.user_id where 
-		 patent_doc_id=1790 )as un join users u on un.target=u.user_id  -->
+		 patent_doc_id=1836 )as un left join users u on un.target=u.user_id  -->
 	
 	
 	<!-- <select id="getHistoryByPatentDocId" parameterType="int" resultMap="PatentDocWorkflowHistoryMap">
