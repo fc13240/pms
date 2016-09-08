@@ -4,14 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.lotut.pms.dao.mapper.PatentDocWorkflowHistoryMapper">
+  		<resultMap type="PatentDocAction" id="PatentDocActionMap">
+  			<id property="actionId" column="action_id"/>
+			<result property="actionTypeDesc" column="action_type_desc"/>
+  		</resultMap>
   		<resultMap type="PatentDocWorkflowHistory" id="PatentDocWorkflowHistoryMap">
   			<id property="historyId" column="history_id"/>
   			<result property="patentDocId"  column="patent_doc_id" />
   			<result property="actionTime"  column="action_time" />
   			<association property="owner" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
-  			<association property="patentDocWorkflowAction" javaType="PatentDocWorkflowAction">
-				<id property="actionId" column="action_id"/>
-				<result property="actionTypeDesc" column="action_type_desc"/>
+  			<association property="patentDocAction" resultMap="PatentDocActionMap">
 			</association>
   			<collection property="shareUsers" ofType="User">
 				<id property="userId" column="share_user_id"/>
@@ -48,8 +50,8 @@
 	</select>
 	
 	<select id="getHistoryByPatentDocId" parameterType="int" resultMap="PatentDocWorkflowHistoryMap">
-		SELECT un.* ,u.user_id as share_user_id , u.username AS share_username FROM (
-		SELECT h.history_id,h.user_id,r.username,h.patent_doc_id ,h.action as action_id ,a.action_type_desc as action_type_desc, 
+		SELECT un.*,u.user_id as share_user_id , u.username AS share_username FROM (
+		SELECT h.history_id,h.user_id,r.username,h.patent_doc_id ,h.ACTION as action_id ,a.action_type_desc as action_type_desc , 
 		h.action_time FROM patent_doc_workflow_history h 
 		 JOIN patent_doc_workflow_action a ON h.ACTION = a.action_id JOIN users r ON h.user_id = r.user_id 
       	left JOIN share_patent_docs s ON h.user_id = s.share_by AND h.patent_doc_id = s.patent_doc where patent_doc_id=(#{patentDocId}) 

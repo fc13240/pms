@@ -14,7 +14,7 @@ public class PatentDocWorkflowHistory {
 	private long patentDocId;
 	private String userName;
 	private User owner;
-	private PatentDocWorkflowAction patentDocWorkflowAction;
+	private PatentDocAction patentDocAction;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Timestamp actionTime;
 	private List<User> shareUsers;
@@ -38,12 +38,11 @@ public class PatentDocWorkflowHistory {
 		this.userName = userName;
 	}
 	
-	
-	public PatentDocWorkflowAction getAction() {
-		return patentDocWorkflowAction;
+	public PatentDocAction getPatentDocAction() {
+		return patentDocAction;
 	}
-	public void setAction(PatentDocWorkflowAction patentDocWorkflowAction) {
-		this.patentDocWorkflowAction = patentDocWorkflowAction;
+	public void setPatentDocAction(PatentDocAction patentDocAction) {
+		this.patentDocAction = patentDocAction;
 	}
 	public Timestamp getActionTime() {
 		return actionTime;

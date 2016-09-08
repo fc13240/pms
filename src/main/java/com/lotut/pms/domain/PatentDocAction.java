@@ -1,6 +1,6 @@
 package com.lotut.pms.domain;
 
-public class PatentDocWorkflowAction {
+public class PatentDocAction {
 	private int actionId;
 	private String actionTypeDesc;
 	public int getActionId() {

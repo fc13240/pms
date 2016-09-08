@@ -58,7 +58,7 @@
 								<td class="center" style="text-align:center">status.count </td>
 								<td style="text-align:center"><c:out value="${patentDocWorkflowHistory.owner.userId}"/></td>
 								<td style="text-align:center"><c:out value="${patentDocWorkflowHistory.owner.username}"/></td>
-								<td style="text-align:center"><fmt:formatDate value="${patentDocWorkflowHistory.patentDocWorkflowAction.actionTypeDesc}" pattern="yyyy-MM-dd"/></td>
+								<td style="text-align:center"><c:out value="${patentDocWorkflowHistory.patentDocAction.actionTypeDesc}"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${patentDocWorkflowHistory.actionTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td style="text-align:center"><c:out value="${patentDocWorkflowHistory.shareUsersAsString}"/></td>
 	

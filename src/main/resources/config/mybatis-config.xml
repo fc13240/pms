@@ -73,7 +73,7 @@
 		<typeAlias alias="PatentDocOrderItem" type="com.lotut.pms.domain.OrderItem"/>
 		<typeAlias alias="PatentDocWorkflowHistory" type="com.lotut.pms.domain.PatentDocWorkflowHistory"/>
 		<typeAlias alias="PatentDocWorkflowTarget" type="com.lotut.pms.domain.PatentDocWorkflowTarget"/>
-		<typeAlias alias="PatentDocWorkflowAction" type="com.lotut.pms.domain.PatentDocWorkflowAction"/>
+		<typeAlias alias="PatentDocAction" type="com.lotut.pms.domain.PatentDocAction"/>
 		<typeAlias alias="SharePatentDoc" type="com.lotut.pms.domain.SharePatentDoc"/>
 	</typeAliases>  
 </configuration>
