@@ -42,8 +42,8 @@
 							  <th width="50px">操作账户ID</th>
 							  <th width="50px">操作账户</th>
 							  <th width="140px">操作</th>
-							  <th width="40px">创建时间</th>
 							  <th width="60px">分配对象</th>
+							  <th width="40px">创建时间</th>
 							  <!-- <th width="90px">文档状态</th> -->
 		
 							</tr>
@@ -55,12 +55,12 @@
 								<input type="checkbox" class="check-item" patentDocId="<c:out value='${patentDoc.patentDocId}'/>">
 								<span class="lbl"></span></label>
 								</td>
-								<td class="center" style="text-align:center">${status}</td>
+								<td class="center" style="text-align:center">${status.count}</td>
 								<td style="text-align:center"><c:out value="${patentDocWorkflowHistory.owner.userId}"/></td>
 								<td style="text-align:center"><c:out value="${patentDocWorkflowHistory.owner.username}"/></td>
 								<td style="text-align:center"><c:out value="${patentDocWorkflowHistory.patentDocAction.actionTypeDesc}"/></td>
-								<td style="text-align:center"><fmt:formatDate value="${patentDocWorkflowHistory.actionTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td style="text-align:center"><c:out value="${patentDocWorkflowHistory.shareUsersAsString}"/></td>
+								<td style="text-align:center"><fmt:formatDate value="${patentDocWorkflowHistory.actionTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 	
 							  </tr>
 							</c:forEach>
