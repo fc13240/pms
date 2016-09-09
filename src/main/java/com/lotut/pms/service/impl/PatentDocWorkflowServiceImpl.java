@@ -92,7 +92,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 			patentDocIdList.add(patentDoc.getPatentDocId());
 		}
 		
-		int patentDocUpdateCount = patentDocWorkflowDao.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		int patentDocUpdateCount = patentDocWorkflowDao.updatePatentDocStatus(patentDocIdList, 1);
 		List<Map<String, Long>> userPatentDocRecords = new ArrayList<>();
 		List<User> platform=userDao.getPlatformUser();
 		for (Long patentDocId: patentDocIdList) {
