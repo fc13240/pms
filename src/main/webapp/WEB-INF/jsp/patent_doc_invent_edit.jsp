@@ -382,6 +382,7 @@ margin: 1px 0 0 1px;}
 								<div style="margin-top:60px;">
 									<!-- <h2 style="margin-top:20px;">其他信息</h2> -->
 									<span style="float:left;padding-top:5px;padding-right:5px;font-weight: bold;font-size:14px;margin-left:25px;margin-top:20px;">其他信息</span>
+									<br/>
 									<%-- <input type="text" style="width:700px;" class="t-input form-control" id="otherInformation" placeholder="请填写，若没有则可以不填写。" value="${patentDoc.otherInformation}"/> --%>
 									<%--  不要删除以防又要使用-->
 									<%-- <h2 style="margin-top:20px;">附件</h2>
