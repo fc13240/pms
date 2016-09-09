@@ -145,8 +145,8 @@
 							  <th width="50px">专利类型</th>
 							  <th width="140px">标题</th>
 							  <th width="40px">创建时间</th>
-							  <th width="60px">更新时间</th>
-							  <th width="90px">文档状态</th>
+							  <th width="60px">定稿文件</th>
+							  <th width="90px">交局文件</th>
 							  <th width="50px">操作</th>
 							</tr>
 						  </thead>
@@ -168,8 +168,24 @@
 									<td style="text-align:center"><c:out value="外观设计"/></td>
 								</c:if>
 								<td style="text-align:center">${patentDoc.name}</td>
-								<td style="text-align:center"><fmt:formatDate value="${patentDoc.createTime}" pattern="yyyy-MM-dd"/></td>
-								<td style="text-align:center"><fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<td style="text-align:center">
+									<se:authorize access="hasRole('ROLE_TECH')"> 
+				                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
+				                   </se:authorize>
+				                   <c:if test="${patentDoc.patentDocUrl != null}">
+				                    	<a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
+				                    </c:if>
+								
+								</td>
+								<td style="text-align:center">
+									<se:authorize access="hasRole('ROLE_PROCESS')"> 
+				                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
+				                   </se:authorize>
+				                   <c:if test="${patentDoc.patentDocUrl != null}">
+				                    	<a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
+				                    </c:if>
+								
+								</td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center">
 								
