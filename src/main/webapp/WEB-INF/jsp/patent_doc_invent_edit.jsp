@@ -222,7 +222,7 @@ margin: 1px 0 0 1px;}
 						<div class="content" id="content0" thisid="2514">
 							
 							<div class="title">
-								专利名称:
+								专利名称
 								<div id="editor1" thistempid="1">
  									<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
 									<input type="hidden" value="" id="divtitletips"> 
@@ -247,8 +247,7 @@ margin: 1px 0 0 1px;}
 									<div>
 										<br/>
 										<br/>
-										<!-- <h2 style="float:left;padding-top:5px;padding-right:5px;">申请人:</h2> -->
-										 <div class="title" style="float:left;padding-top:5px;padding-right:5px;">申请人:</div>
+										<span style="float:left;padding-top:5px;padding-right:5px;font-weight: bold;font-size:14px;margin-left:25px;">申请人</span>
 										<button type="button" style="width:120px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
 											选择常用申请人
 										</button>
@@ -298,7 +297,8 @@ margin: 1px 0 0 1px;}
 										<hr>
 										<br/>
 										<br/>
-										<h2 style="float:left;padding-top:5px;padding-right:5px;">发明人:</h2>
+										<!-- <h2 style="float:left;padding-top:5px;padding-right:5px;">发明人:</h2> -->
+										<span style="float:left;padding-top:5px;padding-right:5px;font-weight: bold;font-size:14px;margin-left:25px;">发明人</span>
 										<button style="width:120px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonInventorModal">
 											选择常用发明人
 										</button>
@@ -343,7 +343,8 @@ margin: 1px 0 0 1px;}
 										<!-- <button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">选择常用联系人</button> -->
 										<br/>
 										<br/>
-										<h2 style="float:left;padding-top:5px;padding-right:5px;">联系人:</h2>
+										<!-- <h2 style="float:left;padding-top:5px;padding-right:5px;">联系人:</h2> -->
+										<span style="float:left;padding-top:5px;padding-right:5px;font-weight: bold;font-size:14px;margin-left:25px;">联系人</span>
 											<button style="float:left;width:120px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">选择常用联系人</button>
 										
 										<%-- <div id="contactDiv">
@@ -379,7 +380,8 @@ margin: 1px 0 0 1px;}
 									</div>
 								</div>
 								<div style="margin-top:60px;">
-									<h2 style="margin-top:20px;">其他信息</h2>
+									<!-- <h2 style="margin-top:20px;">其他信息</h2> -->
+									<span style="float:left;padding-top:5px;padding-right:5px;font-weight: bold;font-size:14px;margin-left:25px;margin-top:20px;">其他信息</span>
 									<%-- <input type="text" style="width:700px;" class="t-input form-control" id="otherInformation" placeholder="请填写，若没有则可以不填写。" value="${patentDoc.otherInformation}"/> --%>
 									<%--  不要删除以防又要使用-->
 									<%-- <h2 style="margin-top:20px;">附件</h2>
