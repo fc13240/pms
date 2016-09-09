@@ -64,7 +64,7 @@ public class PatentDocWorkflowHistory {
 	}
 	public String getShareUsersAsString() {
 		if (this.shareUsers != null) {
-			return String.join(";", this.shareUsers.stream().map(User::getUsername).collect(Collectors.toList()));
+			return String.join(",", this.shareUsers.stream().map(User::getUsername).collect(Collectors.toList()));
 		}
 		
 		return "";

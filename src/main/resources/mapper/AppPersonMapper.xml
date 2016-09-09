@@ -181,8 +181,7 @@
 		<if test="keyword != null">
 					and (p.name like #{keyword_pattern} or p.id_number like #{keyword_pattern} or p.postcode_address like #{keyword_pattern}  or p.fee_reduce_transaction_status like #{keyword_pattern} 
 					or p.transaction_identity_id like #{keyword_pattern} or p.transaction_year like #{keyword_pattern})
-		</if> 
-		)	
+		</if> )	
 	</select>
 	
 	<select id="getUserAppPersonCount" resultType="int">

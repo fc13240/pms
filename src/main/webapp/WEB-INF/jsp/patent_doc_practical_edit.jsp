@@ -249,7 +249,8 @@ margin: 1px 0 0 1px;}
 									<div>
 										<br/>
 										<br/>
-										<h2 style="float:left;padding-top:5px;padding-right:5px;">申请人:</h2>
+										<!-- <h2 style="float:left;padding-top:5px;padding-right:5px;">申请人:</h2> -->
+										<span style="float:left;padding-top:5px;padding-right:5px;font-weight: bold;font-size:14px;margin-left:25px;">申请人</span>
 										<button style="width:120px" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
 											选择常用申请人
 										</button>
@@ -297,7 +298,8 @@ margin: 1px 0 0 1px;}
 										<hr>
 										<br/>
 										<br/>
-										<h2 style="float:left;paddding-top:5px;padding-right:5px;">发明人:</h2>
+										<!-- <h2 style="float:left;paddding-top:5px;padding-right:5px;">发明人:</h2> -->
+										<span style="float:left;padding-top:5px;padding-right:5px;font-weight: bold;font-size:14px;margin-left:25px;">发明人</span>
 										<button style="width:120px" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonInventorModal">
 											选择常用发明人
 										</button>
@@ -342,7 +344,8 @@ margin: 1px 0 0 1px;}
 										<!-- <button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">选择常用联系人</button> -->
 										<br/>
 										<br/>
-										<h2 style="float:left;padding-left:5px;padding-right:5px;">联系人:</h2>
+										<!-- <h2 style="float:left;padding-left:5px;padding-right:5px;">联系人:</h2> -->
+										<span style="float:left;padding-top:5px;padding-right:5px;font-weight: bold;font-size:14px;margin-left:25px;">联系人</span>
 											<button style="float:left;width:120px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">选择常用联系人</button>
 										
 										<%-- <div id="contactDiv">
@@ -379,7 +382,9 @@ margin: 1px 0 0 1px;}
 								</div>
 								
 								<div style="margin-top:60px;">
-									<h2 style="margin-top:20px;">其他信息</h2>
+									<!-- <h2 style="margin-top:20px;">其他信息</h2> -->
+									<span style="float:left;padding-top:5px;padding-right:5px;font-weight: bold;font-size:14px;margin-left:25px;margin-top:20px;">其他信息</span>
+									<br/>
 									<textarea id="otherInformation" style="width:700px;" class="t-input form-control" rows="10" cols="60" placeholder="请填写，若没有则可以不填写。">${patentDoc.otherInformation }</textarea>
 								</div>
 							</div>
