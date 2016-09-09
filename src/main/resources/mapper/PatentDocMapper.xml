@@ -34,7 +34,7 @@
 		<result property="feeStatus" column="feeStatus"/>
 		<result property="price" column="price"/>
 		<association property="patentDocStatus" resultMap="PatentDocStatusResultMap"/>
-		<association property="PatentDocProxyStatus" resultMap="PatentDocProxyStatusResultMap"/>
+		<association property="patentDocProxyStatus" resultMap="PatentDocProxyStatusResultMap"/>
 	</resultMap>
 
 		<resultMap type="Attachment" id="PatentImgMap">
