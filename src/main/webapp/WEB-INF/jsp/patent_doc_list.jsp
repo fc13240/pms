@@ -148,6 +148,7 @@
 							  <th width="60px">更新时间</th>
 							  <th width="90px">代理状态</th>
 							  <th width="90px">案件状态</th>
+							  <th width="90px">共享人</th>
 							  <th width="50px">操作</th>
 							</tr>
 						  </thead>
@@ -173,6 +174,7 @@
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td style="text-align:center"><c:out value=""/></td> 
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
+								<td style="text-align:center"><c:out value=""/></td>
 								<td style="text-align:center">
 								
 										<a target="_blank" href="<s:url value='/patentDocWorkflowHistory/getHistory.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentDocName=<c:out value='${patentDoc.name}'/>">
@@ -217,6 +219,9 @@
 									 <%-- </c:if> --%>
 									<a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 									预览
+									</a>
+									<a target="_blank" href="<s:url value='/editor/showFriends.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">
+									分享
 									</a>
 									
 				                    <%-- <a onclick=" exportWord(${patentDoc.patentDocId});">导出</a> --%>
