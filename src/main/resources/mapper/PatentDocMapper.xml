@@ -9,6 +9,11 @@
 		<result property="statusDescription" column="patent_doc_status_desc"/>
 	</resultMap>
 	
+	<resultMap type="PatentDocProxyStatus" id="PatentDocProxyStatusResultMap">
+		<id property="patentDocProxyStatusId" column="patent_doc_proxy_status_id"/>
+		<result property="statusDescription" column="patent_doc_proxy_status_desc"/>
+	</resultMap>
+	
 	<resultMap type="PatentDoc" id="PatentDocMap">
 		<id property="patentDocId" column="patent_doc_id"/>
 		<result property="appNo" column="app_no"/>
@@ -29,6 +34,7 @@
 		<result property="feeStatus" column="feeStatus"/>
 		<result property="price" column="price"/>
 		<association property="patentDocStatus" resultMap="PatentDocStatusResultMap"/>
+		<association property="PatentDocProxyStatus" resultMap="PatentDocProxyStatusResultMap"/>
 	</resultMap>
 
 		<resultMap type="Attachment" id="PatentImgMap">
@@ -42,8 +48,8 @@
 
 	
  	<insert id="savePatentDoc" parameterType="PatentDoc" useGeneratedKeys="true" keyProperty="patentDocId">
-		insert into patent_documents(user_id,patent_type,create_time,patent_doc_status) values
-		(#{userId},#{patentType},now(),1);
+		insert into patent_documents(user_id,patent_type,create_time,patent_doc_status,patent_doc_proxy_status) values
+		(#{userId},#{patentType},now(),1,1);
 	</insert>
 	
 	<insert id="insertUserPatentDoc" parameterType="list">
@@ -61,8 +67,8 @@
 	<select id="getUserPatentDoc" parameterType="Page" resultMap="PatentDocMap">
 		SELECT p.patent_doc_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
 		p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,
-		ps.patent_doc_status_id,ps.patent_doc_status_desc
-		FROM patent_documents p LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
+		ps.patent_doc_status_id,ps.patent_doc_status_desc,pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc
+		FROM patent_documents p LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id LEFT JOIN patent_doc_proxy_status pp ON p.patent_doc_proxy_status =pp.patent_doc_proxy_status_id
 		WHERE p.patent_doc_id IN (SELECT patent_doc FROM user_patent_docs WHERE user_id = #{userId}) 
 		ORDER BY create_time DESC ,last_update_time DESC limit #{startIndex}, #{pageSize}
 	</select> 
@@ -142,9 +148,11 @@
 		</if>	
 		select sp.patent_doc_id, sp.user_id,sp.app_no,sp.patent_type,sp.create_time,sp.last_update_time,sp.patent_name,
 				sp.manual,sp.right_claim,sp.abstract_desc,sp.abstract_img,sp.patent_doc_attachment_file,sp.patent_doc_url,sp.patent_doc_status_id,sp.patent_doc_status_desc
+				sp.patent_doc_proxy_status_id,sp.patent_doc_proxy_status_desc
 		from (SELECT p.patent_doc_id, p.user_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
 				p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,ps.patent_doc_status_id,ps.patent_doc_status_desc
 				FROM patent_documents p  LEFT JOIN user_patent_docs up ON p.patent_doc_id = up.patent_doc LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
+				LEFT JOIN patent_doc_proxy_status pp ON p.patent_doc_proxy_status =pp.patent_doc_proxy_status_id
 				WHERE up.user_id = #{userId}
 				<if test="patentDocStatus != null">
 			 		and p.patent_doc_status = #{patentDocStatus}
@@ -216,8 +224,9 @@
 	<select id="getUserPatentDocByRole" parameterType="Page" resultMap="PatentDocMap">
 		SELECT p.patent_doc_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
 		p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,
-		ps.patent_doc_status_id,ps.patent_doc_status_desc
+		ps.patent_doc_status_id,ps.patent_doc_status_desc,pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc
 		FROM patent_documents p LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
+		LEFT JOIN patent_doc_proxy_status pp ON p.patent_doc_proxy_status =pp.patent_doc_proxy_status_id
 		WHERE p.patent_doc_id IN (SELECT patent_doc FROM user_patent_docs WHERE user_id = #{userId}) 
 		<if test="status!=null">
 			AND p.patent_doc_status=#{status}
@@ -228,6 +237,7 @@
 	<select id="getUserPatentDocCountByRole" parameterType="Page" resultType="int">
 		SELECT count(*)
 		FROM patent_documents p LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
+		LEFT JOIN patent_doc_proxy_status pp ON p.patent_doc_proxy_status =pp.patent_doc_proxy_status_id
 		WHERE p.patent_doc_id IN (SELECT patent_doc FROM user_patent_docs WHERE user_id = #{userId}) 
 		<if test="status!=null">
 			AND p.patent_doc_status=#{status}
@@ -239,8 +249,9 @@
 	<select id="getPatentDocByTechAndCustomer" resultMap="PatentDocMap">
 		SELECT p.patent_doc_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
 		p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,
-		ps.patent_doc_status_id,ps.patent_doc_status_desc
+		ps.patent_doc_status_id,ps.patent_doc_status_desc,pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc
 		FROM patent_documents p LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
+		LEFT JOIN patent_doc_proxy_status pp ON p.patent_doc_proxy_status =pp.patent_doc_proxy_status_id
 		WHERE p.patent_doc_id IN (SELECT patent_doc FROM user_patent_docs WHERE user_id = #{page.userId}) 
 		
 		AND p.patent_doc_status not in
@@ -255,6 +266,7 @@
 	<select id="getPatentDocCountByTechAndCustomer" resultType="int">
 		SELECT count(*)
 		FROM patent_documents p LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
+		LEFT JOIN patent_doc_proxy_status pp ON p.patent_doc_proxy_status =pp.patent_doc_proxy_status_id
 		WHERE p.patent_doc_id IN (SELECT patent_doc FROM user_patent_docs WHERE user_id = #{page.userId}) 
 		
 		AND p.patent_doc_status not in
