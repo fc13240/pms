@@ -75,5 +75,6 @@
 		<typeAlias alias="PatentDocWorkflowTarget" type="com.lotut.pms.domain.PatentDocWorkflowTarget"/>
 		<typeAlias alias="PatentDocAction" type="com.lotut.pms.domain.PatentDocAction"/>
 		<typeAlias alias="SharePatentDoc" type="com.lotut.pms.domain.SharePatentDoc"/>
+		<typeAlias alias="PatentDocProxyStatus" type="com.lotut.pms.domain.PatentDocProxyStatus"/>
 	</typeAliases>  
 </configuration>

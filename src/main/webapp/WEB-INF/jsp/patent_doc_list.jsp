@@ -170,6 +170,7 @@
 									<td style="text-align:center"><c:out value="外观设计"/></td>
 								</c:if>
 								<td style="text-align:center">${patentDoc.name}</td>
+								
 								<td style="text-align:center">
 									<se:authorize access="hasRole('ROLE_TECH')"> 
 				                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
@@ -188,8 +189,9 @@
 				                    </c:if>
 								
 								</td>
+								<td style="text-align:center"><c:out value="${patentDoc.patentDocProxyStatus.statusDescription}"/></td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
-								<td style="text-align:center"><c:out value=""/></td>
+								<td style="text-align:center"></td>
 								<td style="text-align:center">
 								
 										<a target="_blank" href="<s:url value='/patentDocWorkflowHistory/getHistory.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentDocName=<c:out value='${patentDoc.name}'/>">

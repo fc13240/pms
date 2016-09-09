@@ -56,4 +56,13 @@
 			#{patentDocId}
 		</foreach>			
 	</update>
+	
+	
+	<update id="updatePatentDocProxyStatus" >
+		update patent_documents set patent_doc_proxy_status = #{status}
+		where patent_doc_id in
+		<foreach item="patentDocId" collection="patentDocIdList" open="(" separator="," close=")">
+			#{patentDocId}
+		</foreach>			
+	</update>
 </mapper>

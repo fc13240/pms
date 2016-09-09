@@ -23,6 +23,7 @@ public class PatentDoc {
 	private String patentDocAttachmentFile;
 	private String patentDocUrl;
 	private PatentDocStatus patentDocStatus;
+	private PatentDocProxyStatus patentDocProxyStatus;
 	private int contactId;
 	private String otherInformation;
 	private String attachmentUrl;
@@ -31,6 +32,13 @@ public class PatentDoc {
 	
 
 	
+	
+	public PatentDocProxyStatus getPatentDocProxyStatus() {
+		return patentDocProxyStatus;
+	}
+	public void setPatentDocProxyStatus(PatentDocProxyStatus patentDocProxyStatus) {
+		this.patentDocProxyStatus = patentDocProxyStatus;
+	}
 	public long getPrice() {
 		return price;
 	}
