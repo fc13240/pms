@@ -29,7 +29,7 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;height:400px;">
-					  <h4>请选择要分享的好友 </h4>
+					  <h4>请选择要分享的技术员 </h4>
 					  <div>
 						<form action="<s:url value='/patentDocWorkflow/searchTechPerson.html'/>" method="get"  id="shareAddForm">
 						  <c:forEach items="${paramValues.patentDocIds}" var="patentDocId">
@@ -62,16 +62,18 @@
 								<th >序号</th>
 								<th >机构用户名</th>
 								<th >机构名称</th>
+								<th >操作</th>
 								<th >备注名</th>
 							  </tr>
 							</thead>
 							<tbody>
 							  <c:forEach items="${techPersons}" var="techPerson" varStatus="status">
 								<tr>
-								  <td ><input name="friend" style="width:15px;" type="checkbox" class="check-item" friend="<c:out value='${techPerson.userId}'/>"></td>
+								  <%-- <td ><input name="friend" style="width:15px;" type="checkbox" class="check-item" friend="<c:out value='${techPerson.userId}'/>"></td> --%>
 								  <td>${status.count}</td>
 								  <td><c:out value="${techPerson.user.username}"/></td>
 								  <td><c:out value="${techPerson.user.name}"/></td>
+								  <td></td>
 								  <td><c:out value="${techPerson.remarkName}"/></td>
 								</tr>
 							  </c:forEach>

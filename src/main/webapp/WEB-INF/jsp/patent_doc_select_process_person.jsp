@@ -29,7 +29,7 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;height:400px;">
-					  <h4>请选择要分享的好友 </h4>
+					  <h4>请选择要分享的流程人员</h4>
 					  <div>
 						<form action="<s:url value='/patentDocWorkflow/searchProcessPerson.html'/>" method="get"  id="shareAddForm">
 						  <c:forEach items="${paramValues.patentDocIds}" var="patentDocId">
@@ -62,6 +62,7 @@
 								<th >序号</th>
 								<th >机构用户名</th>
 								<th >机构名称</th>
+								<th >操作</th>
 								<th >备注名</th>
 							  </tr>
 							</thead>
@@ -72,6 +73,7 @@
 								  <td>${status.count}</td>
 								  <td><c:out value="${processPerson.user.username}"/></td>
 								  <td><c:out value="${processPerson.user.name}"/></td>
+								  <td></td>
 								  <td><c:out value="${processPerson.remarkName}"/></td>
 								</tr>
 							  </c:forEach>
