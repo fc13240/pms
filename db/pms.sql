@@ -754,16 +754,15 @@ CREATE TABLE IF NOT EXISTS patent_doc_status (
 INSERT INTO patent_doc_status (patent_doc_status_id, patent_doc_status_desc)
 VALUES
 	(1, '草稿'),
-	(2, '已委托'),
-	(3, '立案分配'),
-	(4, '已分配'),
-	(5, '专家撰写'),
-	(6, '待确认'),
-	(7, '待修改'),
-	(8, '定稿'),
-	(9, '已制作标准申请文件'),
-	(10, '待交局'),
-	(11, '已交局');
+	(2, '立案分配'),
+	(3, '已分配'),
+	(4, '专家撰写'),
+	(5, '待确认'),
+	(6, '待修改'),
+	(7, '定稿'),
+	(8, '撰写完成'),
+	(9, '待交局'),
+	(10, '已交局');
 
 CREATE TABLE IF NOT EXISTS user_patent_docs (
 	user_id INT,
