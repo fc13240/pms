@@ -560,12 +560,14 @@ CREATE TABLE  IF NOT EXISTS patent_documents (
   patent_doc_url VARCHAR(200) default null COMMENT '文档保存地址',
   contact_person VARCHAR(500) default null COMMENT '联系人',
   price BIGINT DEFAULT NULL COMMENT '文档价格',
+  patent_doc_proxy_status int NOT NULL COMMENT '代理状态',
   PRIMARY KEY (patent_doc_id),
   KEY fk_patent_documents_patent_type (patent_type),
   KEY fk_patent_documents_doc_owner_id (user_id),
   CONSTRAINT fk_patent_documents_doc_owner_id FOREIGN KEY (user_id) REFERENCES users (user_id),
   CONSTRAINT fk_patent_documents_patent_type FOREIGN KEY (patent_type) REFERENCES patent_types (patent_type_id),
-  constraint fk_patent_documents_status foreign key idx_fk_patent_doc_status (patent_doc_status) references patent_doc_status(patent_doc_status_id)
+  constraint fk_patent_documents_status foreign key idx_fk_patent_doc_status (patent_doc_status) references patent_doc_status(patent_doc_status_id),
+   constraint fk_patent_documents_proxy_status foreign key idx_fk_patent_doc_proxy_status (patent_doc_proxy_status) references patent_doc_proxy_status(patent_doc_proxy_status_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 
@@ -829,7 +831,6 @@ CREATE TABLE IF NOT EXISTS patent_doc_order_items (
 	CONSTRAINT fk_patent_doc_order_items_patent_documents FOREIGN KEY(patent_doc_id) REFERENCES patent_documents(patent_doc_id)
 );
 
-ALTER TABLE patent_documents ADD COLUMN price BIGINT DEFAULT NULL;
 
 
 CREATE TABLE IF NOT EXISTS patent_doc_workflow_action(
@@ -901,3 +902,16 @@ CREATE TABLE `share_patent_docs` (
   CONSTRAINT `fk_share_patent_docs_share_by` FOREIGN KEY (`share_by`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_share_patent_docs_share_to` FOREIGN KEY (`share_to`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS patent_doc_proxy_status (
+	patent_doc_proxy_status_id INT AUTO_INCREMENT PRIMARY KEY,
+	patent_doc_proxy_status_desc VARCHAR(10) NOT NULL UNIQUE
+);
+
+INSERT INTO patent_doc_proxy_status (patent_doc_proxy_status_id, patent_doc_proxy_status_desc)
+VALUES
+	(1, '未委托'),
+	(2, '已支付'),
+	(3, '已委托'),
+	(4, '已取消');
