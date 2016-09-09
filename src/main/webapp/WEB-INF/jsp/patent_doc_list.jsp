@@ -189,8 +189,9 @@
 				                    </c:if>
 								
 								</td>
-								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocProxyStatus.statusDescription}"/></td>
+								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
+								
 								<td style="text-align:center">
 								
 										<a target="_blank" href="<s:url value='/patentDocWorkflowHistory/getHistory.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentDocName=<c:out value='${patentDoc.name}'/>">
