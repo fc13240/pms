@@ -143,10 +143,11 @@
 							  </th>
 							  <th class="center" width="20px">序号</th>
 							  <th width="50px">专利类型</th>
-							  <th width="140px">标题</th>
+							  <th width="140px">专利名称</th>
 							  <th width="40px">创建时间</th>
 							  <th width="60px">更新时间</th>
-							  <th width="90px">文档状态</th>
+							  <th width="90px">案件状态</th>
+							  <th width="90px">案件状态</th>
 							  <th width="50px">操作</th>
 							</tr>
 						  </thead>
@@ -170,11 +171,12 @@
 								<td style="text-align:center">${patentDoc.name}</td>
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.createTime}" pattern="yyyy-MM-dd"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<td style="text-align:center"><c:out value=""/></td> 
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center">
 								
-										<a target="_blank" href="<s:url value='/patentDocWorkflowHistory/getHistory.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">
-										查看流程记录
+										<a target="_blank" href="<s:url value='/patentDocWorkflowHistory/getHistory.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentDocName=<c:out value='${patentDoc.name}'/>">
+										历史
 										</a>
 									 <se:authorize access="hasRole('ROLE_TECH')">
 									 	<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 }"> 

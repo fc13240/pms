@@ -21,9 +21,10 @@ public class PatentDocWorkflowHistoryController {
 	}
 	
 	@RequestMapping(path="/getHistory")
-	public String getHistory(long patentDocId,Model model){
+	public String getHistory(long patentDocId,String patentDocName,Model model){
 		List<PatentDocWorkflowHistory> patentDocWorkflowHistories=patentDocWorkflowHistoryService.getHistoryByPatentDocId((int)patentDocId);
 		model.addAttribute("patentDocWorkflowHistories",patentDocWorkflowHistories);
+		model.addAttribute("patentDocName",patentDocName);
 		return "patent_doc_workflow_history_list";
 		
 	}
