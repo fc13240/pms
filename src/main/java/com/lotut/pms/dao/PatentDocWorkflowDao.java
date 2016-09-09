@@ -18,4 +18,8 @@ public interface PatentDocWorkflowDao {
 	int updateOrderStatus(long orderId, int status);
 	
 	int updatePatentDocStatus(List<Long> patentDocIds, int status);
+	
+	
+	int updatePatentDocProxyStatus(List<Long> patentDocIds, int status);
+	
 }
