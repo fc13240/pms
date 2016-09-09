@@ -545,6 +545,10 @@ function batchProcessPerson() {
 			formutil.alertMessage('选中的文档需先分配给技术员操作，请重新选择！');
 			return;
 		}
+		if ( patentDocStatusIds[i] == 10 || patentDocStatusIds[i] == 11) {
+			formutil.alertMessage('选中的文档已包含进入流程的文档，请重新选择！');
+			return;
+		}
 	}
 	for (var i = 0; i < patents_checked.length; i++) {
 		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {

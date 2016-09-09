@@ -24,15 +24,10 @@ import com.lotut.pms.domain.ProcessPerson;
 import com.lotut.pms.domain.ProxyOrg;
 import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.domain.User;
-import com.lotut.pms.service.AppPersonService;
 import com.lotut.pms.service.EmployeeService;
-import com.lotut.pms.service.FriendService;
-import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocWorkflowHistoryService;
 import com.lotut.pms.service.PatentDocWorkflowService;
-import com.lotut.pms.service.PetitionService;
-import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
 
 
@@ -242,6 +237,21 @@ public class PatentDocWorkflowController {
 			 action=10;}
 		patentDocWorkflowHistoryService.insertHistory(patentdocId.intValue(), action);
 		return "redirect:/editor/patentDocList.html";
+	}
+	
+	@RequestMapping(path="/searchProxyOrg", method=RequestMethod.GET)
+	public String searchProxyOrg(String keyword,Model model) {
+//		String loginRole="";
+//		if(PrincipalUtils.isPlatform()){
+//			loginRole="platForm";
+//		}else if(PrincipalUtils.isProxyOrg()){
+//			loginRole="proxyOrg";
+//		}
+//		List<ProxyOrg> customerSupports=employeeService
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<CustomerSupport> customerSupports=employeeService.searchCustomersByProxyId(keyword, userId);
+		model.addAttribute("customerSupports", customerSupports);
+		return "patent_doc_select_customer_support";
 	}
 	
 	@RequestMapping(path="/searchCustomers", method=RequestMethod.GET)

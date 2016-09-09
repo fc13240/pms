@@ -151,7 +151,12 @@
 			});
 	   				
 		} else {
-			var proxyOrgs = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'friend').join(",");
+			var proxyOrgsArray = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'friend');
+			if(proxyOrgsArray.length>1){
+				formutil.alertMessage('只能分配给一个代理机构，请重新选择！');
+				return;
+			}
+			var proxyOrgs=proxyOrgsArray.join(",");
 			var patentDocIds = $("input[name=patentDocIds]").val();
 			$.ajax({
 				url: "<s:url value='/patentDocWorkflow/addProxyOrgShares.html'/>?proxyOrgs=" + proxyOrgs + "&patentDocIds=" + patentDocIds, 
