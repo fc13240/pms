@@ -146,7 +146,7 @@
 							  <th width="140px">专利名称</th>
 							  <th width="40px">创建时间</th>
 							  <th width="60px">更新时间</th>
-							  <th width="90px">案件状态</th>
+							  <th width="90px">代理状态</th>
 							  <th width="90px">案件状态</th>
 							  <th width="50px">操作</th>
 							</tr>
