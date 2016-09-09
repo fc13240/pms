@@ -235,7 +235,7 @@
 									<a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 									预览
 									</a>
-									<a target="_blank" href="<s:url value='/editor/showFriends.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">
+									<a target="_blank" href="<s:url value='/editor/showFriends.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>">
 									分享
 									</a>
 									
