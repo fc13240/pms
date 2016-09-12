@@ -195,16 +195,16 @@
 								<td style="text-align:center">
 								
 										
-										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeProxyOrgs.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>'/>">
+										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeProxyOrgs.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>">
 										重新分配
 										</a>
-										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeCustomerSupports.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>'/>">
+										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeCustomerSupports.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>">
 										重新分配
 										</a>
-										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeTechPersons.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>'/>">
+										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeTechPersons.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>">
 										重新分配
 										</a>
-										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeProcessPersons.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>'/>">
+										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeProcessPersons.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>">
 										重新分配
 										</a>
 										
