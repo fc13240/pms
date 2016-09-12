@@ -231,6 +231,10 @@
 		<if test="status!=null">
 			AND p.patent_doc_status=#{status}
 		</if>
+		<if test="proxyStatus!=null">
+			AND p.patent_doc_proxy_status=#{proxyStatus}
+		</if>
+		proxyStatus
 		ORDER BY create_time DESC ,last_update_time DESC limit #{startIndex}, #{pageSize}
 	</select>
 	
@@ -241,6 +245,9 @@
 		WHERE p.patent_doc_id IN (SELECT patent_doc FROM user_patent_docs WHERE user_id = #{userId}) 
 		<if test="status!=null">
 			AND p.patent_doc_status=#{status}
+		</if>
+		<if test="proxyStatus!=null">
+			AND p.patent_doc_proxy_status=#{proxyStatus}
 		</if>
 		ORDER BY create_time DESC ,last_update_time DESC limit #{startIndex}, #{pageSize}
 	</select>
@@ -260,6 +267,9 @@
 			#{status}
 		</foreach>
 		)
+		<if test="page.proxyStatus!=null">
+			AND p.patent_doc_proxy_status=#{page.proxyStatus}
+		</if>
 		ORDER BY create_time DESC ,last_update_time DESC limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
@@ -275,6 +285,9 @@
 			#{status}
 		</foreach>
 		)
+		<if test="page.proxyStatus!=null">
+			AND p.patent_doc_proxy_status=#{page.proxyStatus}
+		</if>
 		ORDER BY create_time DESC ,last_update_time DESC limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	

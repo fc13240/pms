@@ -118,7 +118,7 @@ public class PatentDocWorkflowController {
 			patentDocIdList.add(Long.valueOf(patentDocId));
 		}
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
-		final int PATENT_DOC_STAUTS_PAID = 3;
+		final int PATENT_DOC_STAUTS_PAID = 2;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, proxyOrgs, action);
@@ -147,7 +147,7 @@ public class PatentDocWorkflowController {
 			patentDocIdList.add(Long.valueOf(patentDocId));
 		}
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
-		final int PATENT_DOC_STAUTS_PAID = 4;
+		final int PATENT_DOC_STAUTS_PAID = 3;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		int action=PatentDocWorkflowAction.ActionType.get("分配给客服人员");
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, customerSuppors, action);
@@ -177,7 +177,7 @@ public class PatentDocWorkflowController {
 			patentDocIdList.add(Long.valueOf(patentDocId));
 		}
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
-		final int PATENT_DOC_STAUTS_PAID = 5;
+		final int PATENT_DOC_STAUTS_PAID = 4;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		int action=PatentDocWorkflowAction.ActionType.get("分配给技术员");
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, techPersons, action);
@@ -207,7 +207,7 @@ public class PatentDocWorkflowController {
 			patentDocIdList.add(Long.valueOf(patentDocId));
 		}
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
-		final int PATENT_DOC_STAUTS_PAID = 10;
+		final int PATENT_DOC_STAUTS_PAID = 9;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		int insertAction =PatentDocWorkflowAction.ActionType.get("置为待交局");
 		patentDocWorkflowHistoryService.insertActionHistories(patentDocIds, insertAction);
