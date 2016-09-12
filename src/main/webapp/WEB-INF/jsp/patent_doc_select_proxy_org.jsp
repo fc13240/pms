@@ -61,7 +61,6 @@
 								<th width="30px"><input style="width:15px;" type="checkbox" class="check-item"></th>
 								<th >序号</th>
 								<th >机构用户名</th>
-								<th >机构名称</th>
 								<th >操作</th>
 								<th >备注名</th>
 							  </tr>
@@ -184,7 +183,7 @@
 	 */
 
 	function sharePatentDocs(userId){
-		var proxyOrgs = useId;
+		var proxyOrgs = userId;
 		var patentDocIds = $("input[name=patentDocIds]").val();
 		$.ajax({
 			url: "<s:url value='/patentDocWorkflow/addProxyOrgShares.html'/>?proxyOrgs=" + proxyOrgs + "&patentDocIds=" + patentDocIds, 
