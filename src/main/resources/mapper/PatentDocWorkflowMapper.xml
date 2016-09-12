@@ -65,4 +65,32 @@
 			#{patentDocId}
 		</foreach>			
 	</update>
+	
+<!-- 	<delete id="redistributePatentDoc">
+		delete from user_patent_docs where user_id in 
+		<foreach item="userId" collection="userIds"
+			     open="(" separator="," close=")">
+			   #{userId}
+		</foreach>		
+	</delete>
+	
+	<select id="getUserIdFromUserPatentDocs" parameterType="int" resultType="int">
+		select user_id from user_patent_docs where patent_doc =(#{patentDocId})
+	</select> -->
+	
+	<select id="getLastHistoryIdByWorkflowHistory"  resultType="int">
+		select history_id from patent_doc_workflow_history where patent_doc_id=(#{patentDocId}) and 
+		user_id=(#{userId}) and ACTION=(#{action}) 
+		order by action_time desc limit 1;
+	</select>
+	
+	
+	<select id="getTargetByHistoryId" resultType="int" parameterType="int">
+		select target from patent_doc_workflow_target where history = (#{history})
+	</select>
+	
+	<update id="redistributePatentDoc" >
+		update user_patent_docs set user_id =(#{userId}) where patent_doc = (#{patentDoc}) and user_id =(#{target})
+	
+	</update>
 </mapper>

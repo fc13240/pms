@@ -92,13 +92,13 @@
 											<button  class="button button-primary  button-rounded"   >批量分享</button>
 											</a>
 						  				</td>
-						  	<%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">  --%>
+						  	 <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">  
  						  		<td>
 		                            <a href="javascript:return void" onclick="batchEntrust()" >
 									<button style="margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >批量委托</button>
 									</a>
 						  		</td>
-						  	<%-- </se:authorize> --%>
+						  	 </se:authorize>
 						  	<%-- <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG')"> --%>
 							  		 <td>
 			                            <a href="javascript:return void" onclick="batchProxyOrg()" >
@@ -197,6 +197,22 @@
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center"><c:out value="${patentDoc.shareUsersAsString}"/></td>
 								<td style="text-align:center">
+								
+										
+										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeProxyOrgs.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>">
+										重新分配
+										</a>
+										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeCustomerSupports.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>">
+										重新分配
+										</a>
+										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeTechPersons.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>">
+										重新分配
+										</a>
+										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeProcessPersons.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>">
+										重新分配
+										</a>
+										
+										
 									<%-- <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')"> --%>
 										<a target="_blank" href="<s:url value='/patentDocWorkflowHistory/getHistory.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentDocName=<c:out value='${patentDoc.name}'/>">
 										历史

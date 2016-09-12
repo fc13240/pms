@@ -61,6 +61,28 @@ public class PatentDocWorkflowMybatisDao extends SqlSessionDaoSupport implements
 	public int updatePatentDocProxyStatus(List<Long> patentDocIds, int status) {
 		return patentDocWorkflowMapper.updatePatentDocProxyStatus(patentDocIds, status);
 	}
+
+
+
+	@Override
+	public int getLastHistoryIdByWorkflowHistory(long patentDocId, int userId, int ACTION) {
+		return patentDocWorkflowMapper.getLastHistoryIdByWorkflowHistory(patentDocId, userId, ACTION);
+	}
+
+
+
+	@Override
+	public int getTargetByHistoryId(int id) {
+		return patentDocWorkflowMapper.getTargetByHistoryId(id);
+	}
+
+
+
+	@Override
+	public void redistributePatentDoc(int userId, long patentDoc, int target) {
+		patentDocWorkflowMapper.redistributePatentDoc(userId, patentDoc, target);
+		
+	}
 	
 	
 	

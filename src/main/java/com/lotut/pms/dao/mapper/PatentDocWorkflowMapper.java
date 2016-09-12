@@ -14,10 +14,15 @@ public interface PatentDocWorkflowMapper {
 	
 	PatentDocOrder getOrderById(long orderId);
 	
-	
 	int updateOrderStatus(@Param("orderId")long orderId, @Param("status")int status);
 	
 	int updatePatentDocStatus(@Param("patentDocIdList")List<Long> patentDocIds, @Param("status")int status);
 	
 	int updatePatentDocProxyStatus(@Param("patentDocIdList")List<Long> patentDocIds, @Param("status")int status);
+	
+	int getLastHistoryIdByWorkflowHistory(@Param("patentDocId")long patentDocId,@Param("userId")int userId,@Param("ACTION") int action);
+	
+	int getTargetByHistoryId(int id);
+	
+	void redistributePatentDoc(@Param("userId")int userId,@Param("patentDoc")long patentDoc,@Param("target") int target);
 }

@@ -279,6 +279,55 @@ public class PatentDocWorkflowController {
 		return "patent_doc_select_process_person";
 	}
 	
+	@RequestMapping(path="/redistributeProxyOrgShares")
+	public String redistributePatentDoc(@RequestParam("patentDocIds")List<Integer> patentDocIds, @RequestParam("proxyOrgs")List<Integer> proxyOrgs){
+		List<Long> patentDocIdList=new ArrayList<>();
+			patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
+		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
+		patentDocWorkflowService.redistributePatentDoc(patentDocIds.get(0), action, proxyOrgs.get(0));
+		final int PATENT_DOC_STAUTS_PAID = 2;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, proxyOrgs, action);
+		return "patent_doc_list";
+	}
+	
+	@RequestMapping(path="/redistributeCustomerSupportShares")
+	public String redistributeCustomerSupportShares(@RequestParam("patentDocIds")List<Integer> patentDocIds, @RequestParam("customerSuppors")List<Integer> customerSuppors){
+		List<Long> patentDocIdList=new ArrayList<>();
+			patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
+		int action=PatentDocWorkflowAction.ActionType.get("分配给客服人员");
+		patentDocWorkflowService.redistributePatentDoc(patentDocIds.get(0), action, customerSuppors.get(0));
+		final int PATENT_DOC_STAUTS_PAID = 3;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, customerSuppors, action);
+		return "patent_doc_list";
+	}
+	
+	@RequestMapping(path="/redistributeTechPersonShares")
+	public String redistributeTechPersonShares(@RequestParam("patentDocIds")List<Integer> patentDocIds, @RequestParam("techPersons")List<Integer> techPersons){
+		List<Long> patentDocIdList=new ArrayList<>();
+			patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
+		int action=PatentDocWorkflowAction.ActionType.get("分配给技术员");
+		patentDocWorkflowService.redistributePatentDoc(patentDocIds.get(0), action, techPersons.get(0));
+		final int PATENT_DOC_STAUTS_PAID = 4;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, techPersons, action);
+		return "patent_doc_list";
+	}
+	
+	@RequestMapping(path="/redistributeProcessPersonShares")
+	public String redistributeProcessPersonShares(@RequestParam("patentDocIds")List<Integer> patentDocIds, @RequestParam("processPersons")List<Integer> processPersons){
+		List<Long> patentDocIdList=new ArrayList<>();
+			patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
+			int shareAction=PatentDocWorkflowAction.ActionType.get("分配给流程人员");
+			int insertAction =PatentDocWorkflowAction.ActionType.get("置为待交局");
+			patentDocWorkflowHistoryService.insertActionHistories(patentDocIds, insertAction);
+		patentDocWorkflowService.redistributePatentDoc(patentDocIds.get(0), shareAction, processPersons.get(0));
+		final int PATENT_DOC_STAUTS_PAID = 9;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, processPersons, shareAction);
+		return "patent_doc_list";
+	}
 	
 	@RequestMapping(path="/updatePatentDocProxyStatus", method=RequestMethod.GET)
 	public String updatePatentDocProxyStatus(@RequestParam("patentDocId") Long patentdocId,@RequestParam("status")int status) {
@@ -286,6 +335,45 @@ public class PatentDocWorkflowController {
 		patentDocIdList.add(patentdocId);
 		patentDocWorkflowService.updatePatentDocProxyStatus(patentDocIdList, status);
 		return "redirect:/editor/patentDocList.html";
+	}
+	
+	@RequestMapping(path="showRedistributeProxyOrgs", method=RequestMethod.GET)
+	public String showredistributeProxyOrgs(Model model) {
+		if(PrincipalUtils.isPlatform()) {
+			List<ProxyOrg> proxyOrgs = employeeService.getTopProxyOrgList();
+			model.addAttribute("proxyOrgs", proxyOrgs);
+		}
+		if(PrincipalUtils.isProxyOrg()){
+			int parentOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
+			List<ProxyOrg> proxyOrgs = employeeService.getProxyOrgList(parentOrgId);
+			model.addAttribute("proxyOrgs", proxyOrgs);
+		}
+		
+		return "patent_doc_redistribute_select_proxy_org";
+	}
+	
+	@RequestMapping(path="/showRedistributeCustomerSupports", method=RequestMethod.GET)//客服
+	public String showRedistributeCustomerSupports(Model model) {
+		int proxyOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
+		List<CustomerSupport> customerSupports = employeeService.getCustomerSupportList(proxyOrgId);
+		model.addAttribute("customerSupports", customerSupports);
+		return "patent_doc_redistribute_select_customer_support";
+	}
+
+	@RequestMapping(path="/showRedistributeTechPersons", method=RequestMethod.GET)//技术员
+	public String showRedistributeTechPersons(Model model) {
+		int proxyOrgId = employeeService.getOrgIdByCustomerSupportId(PrincipalUtils.getCurrentUserId());
+		List<TechPerson> techPersons = employeeService.getTechPersonList(proxyOrgId);
+		model.addAttribute("techPersons", techPersons);
+		return "patent_doc_redistribute_select_tech_person";
+	}
+	
+	@RequestMapping(path="/showRedistributeProcessPersons", method=RequestMethod.GET)//流程
+	public String showRedistributeProcessPersons(Model model) {
+		int proxyOrgId = employeeService.getOrgIdByCustomerSupportId(PrincipalUtils.getCurrentUserId());
+		List<ProcessPerson> processPersons = employeeService.getProcessPersonList(proxyOrgId);
+		model.addAttribute("processPersons", processPersons);
+		return "patent_doc_redistribute_select_process_person";
 	}
 	
 }

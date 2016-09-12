@@ -17,4 +17,6 @@ public interface PatentDocWorkflowService {
 	int updatePatentDocStatus(List<Long> patentDocIds, int status);
 	
 	int updatePatentDocProxyStatus(List<Long> patentDocIds, int status);
+	
+	void redistributePatentDoc(long patentDocId,int action,int userId);
 }
