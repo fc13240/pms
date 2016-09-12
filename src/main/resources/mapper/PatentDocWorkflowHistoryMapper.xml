@@ -45,7 +45,7 @@
 	
 	<select id="getPatentDocWorkflowHistoryByUserAndAction" resultMap="PatentDocWorkflowHistoryMap">
 		select history_id,patent_doc_id,user_id,ACTION,action_time from patent_doc_workflow_history  where 
-		user_id =(#{userId}) and ACTION= (#{action})
+		user_id =(#{userId}) and ACTION= (#{action}) and action_time =now()
 	
 	</select>
 	
