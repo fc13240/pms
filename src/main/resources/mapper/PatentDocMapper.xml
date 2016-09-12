@@ -67,7 +67,7 @@
 	<select id="getUserPatentDoc" parameterType="Page" resultMap="PatentDocMap">
 		SELECT p.patent_doc_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
 		p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,
-		ps.patent_doc_status_id,ps.patent_doc_status_desc,pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc
+		ps.patent_doc_status_id,ps.patent_doc_status_desc,pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc,p.user_id,p.username
 		FROM (SELECT pd.patent_doc_id,pd.app_no,pd.patent_type,pd.create_time,pd.last_update_time,pd.patent_name,
 				pd.manual,pd.right_claim,pd.abstract_desc,pd.abstract_img,pd.patent_doc_attachment_file,pd.patent_doc_url,pd.patent_doc_status,	pd.patent_doc_proxy_status,	
 				u.user_id,u.username 
@@ -144,6 +144,11 @@
 		where  patent_doc_id=#{patentDocId}
 	</update>
 	
+	<update id="savePatentStandardFile" parameterType="PatentDoc">
+		update patent_documents set attachment_url=#{attachmentUrl,javaType=string,jdbcType=VARCHAR}
+		where  patent_doc_id=#{patentDocId}
+	</update>
+	
 	<select id="getPatentDocUrlById"  resultType="string">
 		select patent_doc_url from patent_documents where  patent_doc_id=#{patentDocId}
 	</select>
@@ -153,13 +158,20 @@
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
-		select sp.patent_doc_id, sp.user_id,sp.app_no,sp.patent_type,sp.create_time,sp.last_update_time,sp.patent_name,
+		select sp.patent_doc_id,sp.app_no,sp.patent_type,sp.create_time,sp.last_update_time,sp.patent_name,
 				sp.manual,sp.right_claim,sp.abstract_desc,sp.abstract_img,sp.patent_doc_attachment_file,sp.patent_doc_url,sp.patent_doc_status_id,sp.patent_doc_status_desc,
-				sp.patent_doc_proxy_status_id,sp.patent_doc_proxy_status_desc
-		from (SELECT p.patent_doc_id, p.user_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
+				sp.patent_doc_proxy_status_id,sp.patent_doc_proxy_status_desc,sp.user_id,sp.username
+		from (SELECT p.patent_doc_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
 				p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,ps.patent_doc_status_id,ps.patent_doc_status_desc,
-				pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc
-				FROM patent_documents p  LEFT JOIN user_patent_docs up ON p.patent_doc_id = up.patent_doc LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
+				pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc,p.user_id,p.username
+				FROM (SELECT pd.patent_doc_id,pd.app_no,pd.patent_type,pd.create_time,pd.last_update_time,pd.patent_name,
+							pd.manual,pd.right_claim,pd.abstract_desc,pd.abstract_img,pd.patent_doc_attachment_file,pd.patent_doc_url,pd.patent_doc_status,	pd.patent_doc_proxy_status,	
+							u.user_id,u.username 
+						FROM patent_documents pd 
+						LEFT JOIN user_patent_docs up ON up.patent_doc = pd.patent_doc_id
+						LEFT JOIN users u ON u.user_id = up.user_id) p  
+				
+				LEFT JOIN user_patent_docs up ON p.patent_doc_id = up.patent_doc LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
 				LEFT JOIN patent_doc_proxy_status pp ON p.patent_doc_proxy_status =pp.patent_doc_proxy_status_id
 				WHERE up.user_id = #{userId}
 				<if test="patentDocStatus != null">
@@ -232,7 +244,7 @@
 	<select id="getUserPatentDocByRole" parameterType="Page" resultMap="PatentDocMap">
 		SELECT p.patent_doc_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
 		p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,
-		ps.patent_doc_status_id,ps.patent_doc_status_desc,pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc
+		ps.patent_doc_status_id,ps.patent_doc_status_desc,pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc,p.user_id,p.username
 		FROM (SELECT pd.patent_doc_id,pd.app_no,pd.patent_type,pd.create_time,pd.last_update_time,pd.patent_name,
 				pd.manual,pd.right_claim,pd.abstract_desc,pd.abstract_img,pd.patent_doc_attachment_file,pd.patent_doc_url,pd.patent_doc_status,	pd.patent_doc_proxy_status,	
 				u.user_id,u.username 
@@ -270,7 +282,7 @@
 	<select id="getPatentDocByTechAndCustomer" resultMap="PatentDocMap">
 		SELECT p.patent_doc_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
 		p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,
-		ps.patent_doc_status_id,ps.patent_doc_status_desc,pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc
+		ps.patent_doc_status_id,ps.patent_doc_status_desc,pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc,p.user_id,p.username
 		FROM (SELECT pd.patent_doc_id,pd.app_no,pd.patent_type,pd.create_time,pd.last_update_time,pd.patent_name,
 				pd.manual,pd.right_claim,pd.abstract_desc,pd.abstract_img,pd.patent_doc_attachment_file,pd.patent_doc_url,pd.patent_doc_status,	pd.patent_doc_proxy_status,	
 				u.user_id,u.username 

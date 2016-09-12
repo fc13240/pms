@@ -7,7 +7,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.PatentDocDao;
 import com.lotut.pms.dao.mapper.PatentDocMapper;
-import com.lotut.pms.dao.mapper.PatentMapper;
 import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentDoc;
@@ -15,7 +14,6 @@ import com.lotut.pms.domain.PatentDocSearchCondition;
 
 public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentDocDao{
 	private PatentDocMapper patentDocMapper;
-	private PatentDoc patentDoc;
 
 	public void setPatentDocMapper(PatentDocMapper patentDocMapper) {
 		this.patentDocMapper = patentDocMapper;
@@ -248,5 +246,12 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	@Override
 	public int getPatentDocCountByTechAndCustomer(Page page, List<Integer> statusList) {
 		return patentDocMapper.getPatentDocCountByTechAndCustomer(page, statusList);
+	}
+
+
+
+	@Override
+	public void savePatentStandardFile(PatentDoc patentDoc) {
+		patentDocMapper.savePatentStandardFile(patentDoc);
 	}
 }

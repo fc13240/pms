@@ -119,7 +119,9 @@ public class PatentDocWorkflowController {
 		}
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		final int PATENT_DOC_STAUTS_PAID = 2;
+		final int PATENT_DOC_PROXY_STAUTS_PAID = 3;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		patentDocWorkflowService.updatePatentDocProxyStatus(patentDocIdList,PATENT_DOC_PROXY_STAUTS_PAID);
 		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, proxyOrgs, action);
 		return "patent_doc_list";
@@ -241,17 +243,16 @@ public class PatentDocWorkflowController {
 	
 	@RequestMapping(path="/searchProxyOrg", method=RequestMethod.GET)
 	public String searchProxyOrg(String keyword,Model model) {
+		int proxyOrgId = PrincipalUtils.getCurrentUserId();
 //		String loginRole="";
 //		if(PrincipalUtils.isPlatform()){
 //			loginRole="platForm";
 //		}else if(PrincipalUtils.isProxyOrg()){
 //			loginRole="proxyOrg";
 //		}
-//		List<ProxyOrg> customerSupports=employeeService
-		int userId = PrincipalUtils.getCurrentUserId();
-		List<CustomerSupport> customerSupports=employeeService.searchCustomersByProxyId(keyword, userId);
-		model.addAttribute("customerSupports", customerSupports);
-		return "patent_doc_select_customer_support";
+		List<ProxyOrg> proxyOrgs=employeeService.searchProxyOrgId(keyword,proxyOrgId);
+		model.addAttribute("proxyOrgs", proxyOrgs);
+		return "patent_doc_select_proxy_org";
 	}
 	
 	@RequestMapping(path="/searchCustomers", method=RequestMethod.GET)
@@ -326,6 +327,14 @@ public class PatentDocWorkflowController {
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, processPersons, shareAction);
 		return "patent_doc_list";
+	}
+	
+	@RequestMapping(path="/updatePatentDocProxyStatus", method=RequestMethod.GET)
+	public String updatePatentDocProxyStatus(@RequestParam("patentDocId") Long patentdocId,@RequestParam("status")int status) {
+		List<Long> patentDocIdList=new ArrayList<>();
+		patentDocIdList.add(patentdocId);
+		patentDocWorkflowService.updatePatentDocProxyStatus(patentDocIdList, status);
+		return "redirect:/editor/patentDocList.html";
 	}
 	
 }

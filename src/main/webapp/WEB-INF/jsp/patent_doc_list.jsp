@@ -182,7 +182,7 @@
 								</td>
 								<td style="text-align:center">
 									<%-- <se:authorize access="hasRole('ROLE_PROCESS')">  --%>
-				                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
+				                    	<a  href="<s:url value='/editor/showUploadPatentFileForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
 				                   <%-- </se:authorize> --%>
 				                   <c:if test="${patentDoc.patentDocUrl != null}">
 				                    	<a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
@@ -201,37 +201,27 @@
 										历史
 										</a>
 									<%-- </se:authorize> --%>
+									<a href="javascript:return void" onclick="denialofService(${patentDoc.patentDocId})" >
+										拒绝委托
+									</a>
 									 <%-- <se:authorize access="hasRole('ROLE_TECH')"> --%>
 									 	<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 }">  --%>
-										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=6">
+										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=5">
 										置为待确认
 										</a>
 										<%-- </c:if> --%>
 									 <%-- </se:authorize>  --%>
+									 	
 									 <%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">  --%>
 									 	<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 6 }"> --%> 
-											<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=7">
+											<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=6">
 											置为待修改
 											</a>
-											<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=8">
+											<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=7">
 											置为定稿
 											</a>
 										<%-- </c:if>  --%>
 									 <%-- </se:authorize> --%> 
-									 <%-- <se:authorize access="hasRole('ROLE_TECH')"> --%>
-									 	<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 8}">   --%>
-										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=9">
-										确认已制作标准申请文件
-										</a>
-										<%-- </c:if> --%>
-									<%--  </se:authorize>  --%>
-									 <%-- <se:authorize access="hasRole('ROLE_PROCESS')"> --%> 
-									 	<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 10 }">  --%>
-										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=11">
-										置为已交局
-										</a>
-										<%-- </c:if> --%>
-									 <%-- </se:authorize>  --%>
 									 <%-- <se:authorize access="hasAnyRole('ROLE_TECH','ROLE_USER')"> --%>
 									<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 || patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 ||patentDoc.patentDocStatus.patentDocStatusId == 8 || 
 									 	patentDoc.patentDocStatus.patentDocStatusId == 9 }"> --%>
@@ -485,7 +475,7 @@ function batchProxyOrg() {
 	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
 	var patentDocStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocStatusId');
 	for (var i = 0; i < patentDocStatusIds.length; i++) {
-		if (patentDocStatusIds[i] == 2 || patentDocStatusIds[i] == 3 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || 
+		if ( patentDocStatusIds[i] == 3 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || 
 				patentDocStatusIds[i] == 7 || patentDocStatusIds[i] == 8 || patentDocStatusIds[i] == 9|| patentDocStatusIds[i] == 10) {
 			formutil.alertMessage('选中的文档中包含已分配过的文档，请重新选择！');
 			return;
@@ -585,6 +575,17 @@ function batchProcessPerson() {
 	}		
 	var patentDocIds = uniquePatentNos.join(",");	
 	location.href = "<s:url value='/patentDocWorkflow/showProcessPersons.html'/>?patentDocIds=" + patentDocIds;
+}
+
+function denialofService(value){
+	var patentDocStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocStatusId');
+	for (var i = 0; i < patentDocStatusIds.length; i++) {
+		if (patentDocStatusIds[i] != 1 ) {
+			formutil.alertMessage('选中的文档已进入操作流程，无法拒绝！');
+			return;
+		}	
+	}
+	location.href="<s:url value='/patentDocWorkflow/updatePatentDocProxyStatus.html'/>?patentDocId="+value+"&status=4";
 }
 </script>
 <script type="text/javascript">

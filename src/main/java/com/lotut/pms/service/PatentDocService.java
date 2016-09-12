@@ -3,13 +3,10 @@ package com.lotut.pms.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSearchCondition;
-import com.lotut.pms.domain.PatentSearchCondition;
 
 public interface PatentDocService {
 	void savePatentDoc(PatentDoc patentDoc);
@@ -71,4 +68,6 @@ public interface PatentDocService {
 	List<PatentDoc> getPatentDocByTechAndCustomer(Page page,List<Integer> statusList);
 	
 	int getPatentDocCountByTechAndCustomer(Page page,List<Integer> statusList);
+	
+	void savePatentStandardFile(PatentDoc patentDoc);
 }
