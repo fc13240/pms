@@ -595,6 +595,7 @@ function denialofService(value){
 			return;
 		}
 		location.href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId="+value;
+	}
 }
 </script>
 <script type="text/javascript">
