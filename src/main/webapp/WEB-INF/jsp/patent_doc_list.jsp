@@ -176,10 +176,11 @@
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center"><c:out value=""/></td>
 								<td style="text-align:center">
-								
+									<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 										<a target="_blank" href="<s:url value='/patentDocWorkflowHistory/getHistory.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentDocName=<c:out value='${patentDoc.name}'/>">
 										历史
 										</a>
+									</se:authorize>
 									 <se:authorize access="hasRole('ROLE_TECH')">
 									 	<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 }"> 
 										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=6">
