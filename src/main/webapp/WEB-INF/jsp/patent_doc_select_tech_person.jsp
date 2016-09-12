@@ -58,7 +58,6 @@
 						  <table id="simple-table" style="width:500px;" class="table table-striped table-bordered table-hover">
 							<thead>
 							  <tr class="simple_bag">
-								<th width="30px"><input style="width:15px;" type="checkbox" class="check-item"></th>
 								<th >序号</th>
 								<th >机构用户名</th>
 								<th >机构名称</th>
@@ -80,7 +79,6 @@
 							
 							</tbody>
 						  </table>
-						  <input type="button" class="button button-caution button-rounded" id="addShareBtn" value="确定"/>
 						</form>
 					  </div>
 				</div>
