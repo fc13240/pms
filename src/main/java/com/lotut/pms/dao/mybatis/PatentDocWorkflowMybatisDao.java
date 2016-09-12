@@ -65,8 +65,8 @@ public class PatentDocWorkflowMybatisDao extends SqlSessionDaoSupport implements
 
 
 	@Override
-	public int getLastHistoryIdByWorkflowHistory(long patentDocId, int userId, int action) {
-		return patentDocWorkflowMapper.getLastHistoryIdByWorkflowHistory(patentDocId, userId, action);
+	public int getLastHistoryIdByWorkflowHistory(long patentDocId, int userId, int ACTION) {
+		return patentDocWorkflowMapper.getLastHistoryIdByWorkflowHistory(patentDocId, userId, ACTION);
 	}
 
 
