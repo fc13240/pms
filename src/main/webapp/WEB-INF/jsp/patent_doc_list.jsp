@@ -193,6 +193,9 @@
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center"><c:out value="${patentDoc.shareUsersAsString}"/></td>
 								<td style="text-align:center">
+										<a target="_blank" href="<s:url value='/patentDocWorkflow/showProxyOrgs.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>'/>">
+										重新分配
+										</a>
 									<%-- <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')"> --%>
 										<a target="_blank" href="<s:url value='/patentDocWorkflowHistory/getHistory.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentDocName=<c:out value='${patentDoc.name}'/>">
 										历史

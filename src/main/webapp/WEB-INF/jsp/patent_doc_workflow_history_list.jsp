@@ -57,7 +57,7 @@
 								</td> --%>
 								<td class="center" style="text-align:center">${status.count}</td>
 								<td style="text-align:center">
-									标题为&nbsp;${patentDocName}&nbsp;的文档由
+									标题为<${patentDocName}>的文档由
 									${patentDocWorkflowHistory.owner.username}在
 									<fmt:formatDate value="${patentDocWorkflowHistory.actionTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
 									${patentDocWorkflowHistory.patentDocAction.actionTypeDesc}

@@ -158,6 +158,15 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 	public int updatePatentDocProxyStatus(List<Long> patentDocIds, int status) {
 		return patentDocWorkflowDao.updatePatentDocProxyStatus(patentDocIds, status);
 	}
+
+
+	@Override
+	public void redistributePatentDoc(long patentDocId,int action,int userId) {
+		int ownerId=PrincipalUtils.getCurrentUserId();
+		int historyId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, ownerId, action);
+		int target=patentDocWorkflowDao.getTargetByHistoryId(historyId);
+		patentDocWorkflowDao.redistributePatentDoc(userId, patentDocId, target);
+	}
 	
 	
 

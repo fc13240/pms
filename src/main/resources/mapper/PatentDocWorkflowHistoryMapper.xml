@@ -58,12 +58,6 @@
 		 patent_doc_id=(#{patentDocId}) )as un left join users u on un.target=u.user_id 
 	</select>
 	
-<!-- 	<select id="getHistoryIdbyPatentDocId" parameterType="int">
-		select history_id from patent_doc_workflow_history  where patent_doc_id = (#{patentDocId});
-		
-	</select>
-	 -->
-	
 	<insert id="insertSharePatentDocs" parameterType="list">
 		replace into share_patent_docs(patent_doc, share_by, share_to) 
 		values

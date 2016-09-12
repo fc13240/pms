@@ -278,5 +278,54 @@ public class PatentDocWorkflowController {
 		return "patent_doc_select_process_person";
 	}
 	
+	@RequestMapping(path="/redistributeProxyOrgShares")
+	public String redistributePatentDoc(@RequestParam("patentDocId")List<Integer> patentDocIds, @RequestParam("proxyOrgs")List<Integer> proxyOrgs){
+		List<Long> patentDocIdList=new ArrayList<>();
+			patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
+		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
+		patentDocWorkflowService.redistributePatentDoc(patentDocIds.get(0), action, proxyOrgs.get(0));
+		final int PATENT_DOC_STAUTS_PAID = 2;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, proxyOrgs, action);
+		return "patent_doc_list";
+	}
+	
+	@RequestMapping(path="/redistributeCustomerSupportShares")
+	public String redistributeCustomerSupportShares(@RequestParam("patentDocId")List<Integer> patentDocIds, @RequestParam("customerSuppors")List<Integer> customerSuppors){
+		List<Long> patentDocIdList=new ArrayList<>();
+			patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
+		int action=PatentDocWorkflowAction.ActionType.get("分配给客服人员");
+		patentDocWorkflowService.redistributePatentDoc(patentDocIds.get(0), action, customerSuppors.get(0));
+		final int PATENT_DOC_STAUTS_PAID = 2;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, customerSuppors, action);
+		return "patent_doc_list";
+	}
+	
+	@RequestMapping(path="/redistributeTechPersonShares")
+	public String redistributeTechPersonShares(@RequestParam("patentDocId")List<Integer> patentDocIds, @RequestParam("techPersons")List<Integer> techPersons){
+		List<Long> patentDocIdList=new ArrayList<>();
+			patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
+		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
+		patentDocWorkflowService.redistributePatentDoc(patentDocIds.get(0), action, techPersons.get(0));
+		final int PATENT_DOC_STAUTS_PAID = 2;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, techPersons, action);
+		return "patent_doc_list";
+	}
+	
+	@RequestMapping(path="/redistributeProcessPersonShares")
+	public String redistributeProcessPersonShares(@RequestParam("patentDocId")List<Integer> patentDocIds, @RequestParam("processPersons")List<Integer> processPersons){
+		List<Long> patentDocIdList=new ArrayList<>();
+			patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
+			int shareAction=PatentDocWorkflowAction.ActionType.get("分配给流程人员");
+			int insertAction =PatentDocWorkflowAction.ActionType.get("置为待交局");
+			patentDocWorkflowHistoryService.insertActionHistories(patentDocIds, insertAction);
+		patentDocWorkflowService.redistributePatentDoc(patentDocIds.get(0), shareAction, processPersons.get(0));
+		final int PATENT_DOC_STAUTS_PAID = 2;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, processPersons, shareAction);
+		return "patent_doc_list";
+	}
 	
 }
