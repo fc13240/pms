@@ -178,7 +178,7 @@
 	}); */
 	
 	function sharePatentDocs(userId){
-		var techPersons = useId;
+		var techPersons = userId;
 		var patentDocIds = $("input[name=patentDocIds]").val();
 		$.ajax({
 			url: "<s:url value='/patentDocWorkflow/addTechPersonShares.html'/>?techPersons=" + techPersons + "&patentDocIds=" + patentDocIds, 
