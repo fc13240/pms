@@ -589,6 +589,7 @@ function batchProcessPerson() {
 }
 
 function denialofService(value){
+	var patentDocStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocStatusId');
 	for (var i = 0; i < patentDocStatusIds.length; i++) {
 		if (patentDocStatusIds[i] != 1 ) {
 			formutil.alertMessage('选中的文档已进入操作流程，无法拒绝！');
