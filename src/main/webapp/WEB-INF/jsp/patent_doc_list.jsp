@@ -144,8 +144,8 @@
 							  <th class="center" width="20px">序号</th>
 							  <th width="50px">专利类型</th>
 							  <th width="140px">专利名称</th>
-							  <th width="40px">创建时间</th>
-							  <th width="60px">更新时间</th>
+							  <th width="60px">定稿文件</th>
+							  <th width="90px">交局文件</th>
 							  <th width="90px">代理状态</th>
 							  <th width="90px">案件状态</th>
 							  <th width="90px">共享人</th>
@@ -170,11 +170,28 @@
 									<td style="text-align:center"><c:out value="外观设计"/></td>
 								</c:if>
 								<td style="text-align:center">${patentDoc.name}</td>
-								<td style="text-align:center"><fmt:formatDate value="${patentDoc.createTime}" pattern="yyyy-MM-dd"/></td>
-								<td style="text-align:center"><fmt:formatDate value="${patentDoc.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								<td style="text-align:center"><c:out value=""/></td> 
+								
+								<td style="text-align:center">
+									<se:authorize access="hasRole('ROLE_TECH')"> 
+				                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
+				                   </se:authorize>
+				                   <c:if test="${patentDoc.patentDocUrl != null}">
+				                    	<a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
+				                    </c:if>
+								
+								</td>
+								<td style="text-align:center">
+									<se:authorize access="hasRole('ROLE_PROCESS')"> 
+				                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
+				                   </se:authorize>
+				                   <c:if test="${patentDoc.patentDocUrl != null}">
+				                    	<a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
+				                    </c:if>
+								
+								</td>
+								<td style="text-align:center"><c:out value="${patentDoc.patentDocProxyStatus.statusDescription}"/></td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
-								<td style="text-align:center"><c:out value=""/></td>
+								<td style="text-align:center"></td>
 								<td style="text-align:center">
 									<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 										<a target="_blank" href="<s:url value='/patentDocWorkflowHistory/getHistory.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentDocName=<c:out value='${patentDoc.name}'/>">
@@ -221,7 +238,7 @@
 									<a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 									预览
 									</a>
-									<a target="_blank" href="<s:url value='/editor/showFriends.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">
+									<a target="_blank" href="<s:url value='/editor/showFriends.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>">
 									分享
 									</a>
 									

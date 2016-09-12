@@ -558,14 +558,18 @@ CREATE TABLE  IF NOT EXISTS patent_documents (
   patent_doc_attachment_file varchar(200) DEFAULT NULL COMMENT '上传附件保存地址',
   patent_doc_status int NOT NULL COMMENT '文档状态',
   patent_doc_url VARCHAR(200) default null COMMENT '文档保存地址',
-  contact_person VARCHAR(500) default null COMMENT '联系人',
+  contact_id int COMMENT '联系人',
   price BIGINT DEFAULT NULL COMMENT '文档价格',
+  attachment_url VARCHAR(100) COMMENT '请求书上传文件地址';
+  other_information VARCHAR(1000) COMMENT '其他信息';
+  patent_doc_proxy_status int NOT NULL COMMENT '代理状态',
   PRIMARY KEY (patent_doc_id),
   KEY fk_patent_documents_patent_type (patent_type),
   KEY fk_patent_documents_doc_owner_id (user_id),
   CONSTRAINT fk_patent_documents_doc_owner_id FOREIGN KEY (user_id) REFERENCES users (user_id),
   CONSTRAINT fk_patent_documents_patent_type FOREIGN KEY (patent_type) REFERENCES patent_types (patent_type_id),
-  constraint fk_patent_documents_status foreign key idx_fk_patent_doc_status (patent_doc_status) references patent_doc_status(patent_doc_status_id)
+  constraint fk_patent_documents_status foreign key idx_fk_patent_doc_status (patent_doc_status) references patent_doc_status(patent_doc_status_id),
+   constraint fk_patent_documents_proxy_status foreign key idx_fk_patent_doc_proxy_status (patent_doc_proxy_status) references patent_doc_proxy_status(patent_doc_proxy_status_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 
@@ -574,6 +578,7 @@ CREATE TABLE IF NOT EXISTS patent_doc_section_types(
 	patent_doc_section_desc VARCHAR(10) NOT NULL COMMENT '专利主题'
 	
 );
+
 INSERT INTO patent_doc_section_types VALUES(1,'说明书');
 INSERT INTO patent_doc_section_types VALUES(2,'权利要求');
 INSERT INTO patent_doc_section_types VALUES(3,'摘要');
@@ -754,16 +759,15 @@ CREATE TABLE IF NOT EXISTS patent_doc_status (
 INSERT INTO patent_doc_status (patent_doc_status_id, patent_doc_status_desc)
 VALUES
 	(1, '草稿'),
-	(2, '已委托'),
-	(3, '立案分配'),
-	(4, '已分配'),
-	(5, '专家撰写'),
-	(6, '待确认'),
-	(7, '待修改'),
-	(8, '定稿'),
-	(9, '已制作标准申请文件'),
-	(10, '待交局'),
-	(11, '已交局');
+	(2, '立案分配'),
+	(3, '已分配'),
+	(4, '专家撰写'),
+	(5, '待确认'),
+	(6, '待修改'),
+	(7, '定稿'),
+	(8, '撰写完成'),
+	(9, '待交局'),
+	(10, '已交局');
 
 CREATE TABLE IF NOT EXISTS user_patent_docs (
 	user_id INT,
@@ -772,12 +776,6 @@ CREATE TABLE IF NOT EXISTS user_patent_docs (
 	CONSTRAINT fk_user_patent_doc_user FOREIGN KEY idx_fk_user_patent_doc_user (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
 	CONSTRAINT fk_user_patent_docs_patent_docs FOREIGN KEY idx_fk_user_patent_docs_patent_docs (patent_doc) REFERENCES patent_documents(patent_doc_id) ON DELETE CASCADE
 );
-
-INSERT INTO patent_doc_section_types VALUES(1,'说明书');
-INSERT INTO patent_doc_section_types VALUES(2,'权利要求');
-INSERT INTO patent_doc_section_types VALUES(3,'摘要');
-
-
 CREATE TABLE patent_doc_inventor(
      inventor_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
      patent_doc_id BIGINT NOT NULL COMMENT '文档编号',
@@ -804,10 +802,6 @@ ALTER TABLE common_app_person MODIFY COLUMN fee_reduce_transaction_status VARCHA
 
 ALTER TABLE common_inventor MODIFY COLUMN inventor_name VARCHAR(20) NOT NULL;
 
-
-ALTER TABLE patent_documents ADD COLUMN attachment_url VARCHAR(100) COMMENT '请求书上传文件地址';
-ALTER TABLE patent_documents ADD COLUMN other_information VARCHAR(300) COMMENT '其他信息';
-
 create table if not exists patent_doc_orders (
 	order_id bigint primary key auto_increment,
 	order_status int not null default 0,
@@ -829,9 +823,6 @@ CREATE TABLE IF NOT EXISTS patent_doc_order_items (
 	CONSTRAINT fk_patent_doc_order_items_order FOREIGN KEY(order_id) REFERENCES patent_doc_orders(order_id) ON DELETE CASCADE,
 	CONSTRAINT fk_patent_doc_order_items_patent_documents FOREIGN KEY(patent_doc_id) REFERENCES patent_documents(patent_doc_id)
 );
-
-ALTER TABLE patent_documents ADD COLUMN price BIGINT DEFAULT NULL;
-
 
 CREATE TABLE IF NOT EXISTS patent_doc_workflow_action(
 	action_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -868,8 +859,6 @@ CREATE TABLE IF NOT EXISTS patent_doc_workflow_target (
 	CONSTRAINT fk_patent_doc_workflow_target_history FOREIGN KEY (history) REFERENCES patent_doc_workflow_history(history_id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-
-ALTER TABLE patent_documents CHANGE contact_person contact_id INT;
 insert into groups (id,group_name) values (8,'PLATFORM');
 insert into group_authorities (group_id,authority) values (8,'ROLE_PLATFORM');
 
@@ -889,7 +878,6 @@ INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(12,'删
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(13,'置为待确认');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(14,'置为待交局');
 
-ALTER TABLE patent_documents add column  other_information VARCHAR(1000) ;
 
 CREATE TABLE `share_patent_docs` (
   `patent_doc` BIGINT(20) NOT NULL DEFAULT '0',
@@ -902,3 +890,16 @@ CREATE TABLE `share_patent_docs` (
   CONSTRAINT `fk_share_patent_docs_share_by` FOREIGN KEY (`share_by`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_share_patent_docs_share_to` FOREIGN KEY (`share_to`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS patent_doc_proxy_status (
+	patent_doc_proxy_status_id INT AUTO_INCREMENT PRIMARY KEY,
+	patent_doc_proxy_status_desc VARCHAR(10) NOT NULL UNIQUE
+);
+
+INSERT INTO patent_doc_proxy_status (patent_doc_proxy_status_id, patent_doc_proxy_status_desc)
+VALUES
+	(1, '未委托'),
+	(2, '已支付'),
+	(3, '已委托'),
+	(4, '已取消');
