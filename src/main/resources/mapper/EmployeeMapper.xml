@@ -220,10 +220,10 @@
 		select p.org_id,p.org_user_id, p.remark_name,p.parent_org_id,u.username,u.name from proxy_org  p
 		join users u on u.user_id = p.org_user_id
 		where 
-		<if test="loginRole==platForm">
+		<if test='loginRole=="platForm"'>
 			p.parent_org_id is null
 		</if>
-		<if test="loginRole==proxyOrg">
+		<if test='loginRole=="proxyOrg"'>
 			p.parent_org_id=#{parentOrgId}
 		</if>
 		<if test="keyword!=null">
