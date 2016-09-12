@@ -220,8 +220,11 @@
 		select p.org_id,p.org_user_id, p.remark_name,p.parent_org_id,u.username,u.name from proxy_org  p
 		join users u on u.user_id = p.org_user_id
 		where p.parent_org_id=#{parentOrgId}
-		<if test="keyword!=null">
+		<if test="keyword!=null or keyword!=''">
 		 and u.username like #{search_keyword} or u.name like #{search_keyword}
+		</if>
+		<if test="keyword==''">
+		and p.parent_org_id is null
 		</if>
 	</select>
 </mapper>
