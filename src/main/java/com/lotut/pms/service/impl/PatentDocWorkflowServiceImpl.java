@@ -48,7 +48,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 			 int patentType=patentDoc.getPatentType();
 			totalAmount+=priceTab.get(patentType);
 		}
-		order.setAmount(0.01);
+		order.setAmount(0.02);
 		patentDocWorkflowDao.insertOrder(order);
 		List<PatentDocOrderItem> orderItems = new ArrayList<>(PatentDocs.size());
 		
