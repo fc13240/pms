@@ -122,11 +122,12 @@ public class PatentDocWorkflowController {
 				userPatentRecord.put("patentDocId", patentDocId);
 				userPatentDocRecords.add(userPatentRecord);
 			}
-			
+			patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		}
 			patentDocIdList.add(Long.valueOf(patentDocId));
+			
 		}
-		patentDocService.insertUserPatentDoc(userPatentDocRecords);
+		
 		final int PATENT_DOC_STAUTS_PAID = 2;
 		final int PATENT_DOC_PROXY_STAUTS_PAID = 3;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
