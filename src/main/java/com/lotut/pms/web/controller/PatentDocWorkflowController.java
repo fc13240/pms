@@ -119,7 +119,9 @@ public class PatentDocWorkflowController {
 		}
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		final int PATENT_DOC_STAUTS_PAID = 2;
+		final int PATENT_DOC_PROXY_STAUTS_PAID = 3;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		patentDocWorkflowService.updatePatentDocProxyStatus(patentDocIdList,PATENT_DOC_PROXY_STAUTS_PAID);
 		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, proxyOrgs, action);
 		return "patent_doc_list";
