@@ -224,6 +224,9 @@ public class PatentDocServiceImp implements PatentDocService{
 		}
 
 
-
+		@Override
+		public void savePatentStandardFile(PatentDoc patentDoc) {
+			patentDocDao.savePatentStandardFile(patentDoc);
+		}
 
 }

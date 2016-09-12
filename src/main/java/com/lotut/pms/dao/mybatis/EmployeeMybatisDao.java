@@ -155,6 +155,11 @@ public class EmployeeMybatisDao extends SqlSessionDaoSupport implements Employee
 		return employeeMapper.searchProcessPersonByProxyId(keyword, currentUserId);
 	}
 
+	@Override
+	public List<ProxyOrg> searchProxyOrgId(String keyword, int parentOrgId) {
+		return employeeMapper.searchProxyOrgId(keyword, parentOrgId);
+	}
+
 
 
 	
