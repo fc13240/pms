@@ -61,5 +61,7 @@ public interface EmployeeMapper {
 	List<TechPerson> searchTechPersonByProxyId(@Param("keyword") String keyword,@Param("currentUserId") int currentUserId);
 	
 	List<ProcessPerson> searchProcessPersonByProxyId(@Param("keyword") String keyword,@Param("currentUserId") int currentUserId);
+	
+	List<ProxyOrg> searchProxyOrgId(@Param("keyword") String keyword,@Param("keyword") int parentOrgId);
 
 }

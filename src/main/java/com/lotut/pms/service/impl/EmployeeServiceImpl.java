@@ -178,5 +178,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDao.searchProcessPersonByProxyId(keyword, currentUserId);
 	}
 
+
+	@Override
+	public List<ProxyOrg> searchProxyOrgId(String keyword, int parentOrgId) {
+		return employeeDao.searchProxyOrgId(keyword, parentOrgId);
+	}
+
 }
 

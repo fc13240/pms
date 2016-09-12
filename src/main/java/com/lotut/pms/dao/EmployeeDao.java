@@ -58,5 +58,7 @@ public interface EmployeeDao {
 	List<TechPerson> searchTechPersonByProxyId(String keyword,int currentUserId);
 	
 	List<ProcessPerson> searchProcessPersonByProxyId(String keyword,int currentUserId);
+	
+	List<ProxyOrg> searchProxyOrgId(String keyword,int parentOrgId);
 
 }

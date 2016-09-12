@@ -558,11 +558,13 @@ CREATE TABLE  IF NOT EXISTS patent_documents (
   patent_doc_attachment_file varchar(200) DEFAULT NULL COMMENT '上传附件保存地址',
   patent_doc_status int NOT NULL COMMENT '文档状态',
   patent_doc_url VARCHAR(200) default null COMMENT '文档保存地址',
-  contact_id int COMMENT '联系人',
+  contact_id int COMMENT '联系人编号',
   price BIGINT DEFAULT NULL COMMENT '文档价格',
   attachment_url VARCHAR(100) COMMENT '请求书上传文件地址';
   other_information VARCHAR(1000) COMMENT '其他信息';
   patent_doc_proxy_status int NOT NULL COMMENT '代理状态',
+  attachment_url VARCHAR(100) COMMENT '请求书上传文件地址';
+  other_information VARCHAR(1000) COMMENT '其他信息';
   PRIMARY KEY (patent_doc_id),
   KEY fk_patent_documents_patent_type (patent_type),
   KEY fk_patent_documents_doc_owner_id (user_id),
