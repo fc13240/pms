@@ -280,10 +280,9 @@ public class PatentDocWorkflowController {
 	
 	
 	@RequestMapping(path="/updatePatentDocProxyStatus", method=RequestMethod.GET)
-	public String updatePatentDocProxyStatus(@RequestParam("patentDocId") Long patentdocId) {
+	public String updatePatentDocProxyStatus(@RequestParam("patentDocId") Long patentdocId,@RequestParam("status")int status) {
 		List<Long> patentDocIdList=new ArrayList<>();
 		patentDocIdList.add(patentdocId);
-		final int status = 4;
 		patentDocWorkflowService.updatePatentDocProxyStatus(patentDocIdList, status);
 		return "redirect:/editor/patentDocList.html";
 	}
