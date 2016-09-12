@@ -85,8 +85,8 @@
 	</select>
 	
 	
-	<select id="getTargetByHistoryId" resultType="int" parameterType="int">
-		select target from patent_doc_workflow_target where history = (#{history})
+	<select id="getTargetByHistoryId" resultType="int" >
+		select target from patent_doc_workflow_target where history = (#{history}) and patent_doc =(#{patentDocId})
 	</select>
 	
 	<update id="redistributePatentDoc" >

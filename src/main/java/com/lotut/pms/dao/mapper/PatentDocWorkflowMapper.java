@@ -22,7 +22,7 @@ public interface PatentDocWorkflowMapper {
 	
 	int getLastHistoryIdByWorkflowHistory(@Param("patentDocId")long patentDocId,@Param("userId")int userId,@Param("action") int action);
 	
-	int getTargetByHistoryId(int id);
+	int getTargetByHistoryId(@Param("patentDocId")long patentDocId,@Param("history")int history);
 	
 	void redistributePatentDoc(@Param("userId")int userId,@Param("patentDoc")long patentDoc,@Param("target") int target);
 	

@@ -23,7 +23,7 @@ public interface PatentDocWorkflowDao {
 	
 	int getLastHistoryIdByWorkflowHistory(long patentDocId,int userId, int action);
 	
-	int getTargetByHistoryId(int id);
+	int getTargetByHistoryId(long patentDocId,int history);
 	
 	void redistributePatentDoc(int userId,long patentDoc, int target);
 	

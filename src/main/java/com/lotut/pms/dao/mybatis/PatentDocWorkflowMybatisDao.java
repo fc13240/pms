@@ -70,14 +70,6 @@ public class PatentDocWorkflowMybatisDao extends SqlSessionDaoSupport implements
 	}
 
 
-
-	@Override
-	public int getTargetByHistoryId(int id) {
-		return patentDocWorkflowMapper.getTargetByHistoryId(id);
-	}
-
-
-
 	@Override
 	public void redistributePatentDoc(int userId, long patentDoc, int target) {
 		patentDocWorkflowMapper.redistributePatentDoc(userId, patentDoc, target);
@@ -89,6 +81,13 @@ public class PatentDocWorkflowMybatisDao extends SqlSessionDaoSupport implements
 	@Override
 	public int getCountByWorkflowHistory(long patentDocId, int userId, int action) {
 		return patentDocWorkflowMapper.getCountByWorkflowHistory(patentDocId, userId, action);
+	}
+
+
+
+	@Override
+	public int getTargetByHistoryId(long patentDocId, int history) {
+		return patentDocWorkflowMapper.getTargetByHistoryId(patentDocId, history);
 	}
 	
 	
