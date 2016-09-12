@@ -61,7 +61,6 @@
 								<th width="30px"><input style="width:15px;" type="checkbox" class="check-item"></th>
 								<th >序号</th>
 								<th >机构用户名</th>
-								<th >机构名称</th>
 								<th >操作</th>
 								<th >备注名</th>
 							  </tr>
@@ -73,7 +72,7 @@
 								  <td>${status.count}</td>
 								  <td><c:out value="${proxyOrg.user.username}"/></td>
 								  <td><c:out value="${proxyOrg.user.name}"/></td>
-								  <td></td>
+								  <td><a onclick="sharePatentDocs('${proxyOrg.orgUserId}')">分享</a></td>
 								  <td><c:out value="${proxyOrg.remarkName}"/></td>
 								</tr>
 							  </c:forEach>
@@ -131,7 +130,7 @@
 		}
 	});
 	
-	function sharePatents() {
+	/* function sharePatents() {
 		var friendSelected = false;
 
 		var friendCheckboxes = $('tr td input.check-item');
@@ -181,6 +180,28 @@
 	$(function() {
 		$('#addShareBtn').click(sharePatents)
 	});
+	 */
+
+	function sharePatentDocs(userId){
+		var proxyOrgs = userId;
+		var patentDocIds = $("input[name=patentDocIds]").val();
+		$.ajax({
+			url: "<s:url value='/patentDocWorkflow/addProxyOrgShares.html'/>?proxyOrgs=" + proxyOrgs + "&patentDocIds=" + patentDocIds, 
+			type: 'GET', 
+			success: function() {
+				$("<div>分享成功</div>").dialog({
+					modal: true,
+					buttons: {
+						Ok: function() {
+							$(this).dialog("close");
+							history.go(-1);
+						}
+					}	
+				});
+			}
+		});			
+		
+	}
 </script>
 </body>
 </html>

@@ -2,6 +2,8 @@ package com.lotut.pms.domain;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -29,6 +31,7 @@ public class PatentDoc {
 	private String attachmentUrl;
 	private long price;
 	private int feeStatus;
+	private List<User> shareUsers;
 	
 
 	
@@ -158,6 +161,21 @@ public class PatentDoc {
 		this.contactId = contactId;
 	}
 
+	public String getShareUsersAsString() {
+		if (this.shareUsers != null) {
+			return String.join(";", this.shareUsers.stream().map(User::getUsername).collect(Collectors.toList()));
+		}
+		
+		return "";
+	}
+
+	public List<User> getShareUsers() {
+		return shareUsers;
+	}
+
+	public void setShareUsers(List<User> shareUsers) {
+		this.shareUsers = shareUsers;
+	}
 	
 	
 }

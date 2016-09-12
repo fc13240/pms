@@ -45,6 +45,7 @@ import com.lotut.pms.domain.PatentDocAppPerson;
 import com.lotut.pms.domain.PatentDocInventor;
 import com.lotut.pms.domain.PatentDocSearchCondition;
 import com.lotut.pms.domain.PatentDocSectionType;
+import com.lotut.pms.domain.PatentDocStatus;
 import com.lotut.pms.domain.PatentDocumentTemplate;
 import com.lotut.pms.domain.TemplatePage;
 import com.lotut.pms.domain.User;
@@ -53,6 +54,7 @@ import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocWorkflowHistoryService;
+import com.lotut.pms.service.PatentDocWorkflowService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.service.PetitionService;
 import com.lotut.pms.service.UserService;
@@ -76,6 +78,7 @@ public class PatentEditDocController {
 	private UserService userService;
 	private FriendService friendService;
 	private PetitionService petitionService;
+	private PatentDocWorkflowService patentDocWorkflowService;
 	private PatentDocWorkflowHistoryService patentDocWorkflowHistoryService;
 	
 	
@@ -83,7 +86,7 @@ public class PatentEditDocController {
 	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService,
 			InventorService inventorService,AppPersonService appPersonService,FriendService friendService,
 			PetitionService petitionService,UserService userService,
-			PatentDocWorkflowHistoryService patentDocWorkflowHistoryService) {
+			PatentDocWorkflowHistoryService patentDocWorkflowHistoryService,PatentDocWorkflowService patentDocWorkflowService) {
 		this.patentDocService = patentDocService;
 		this.patentDocumentTemplateService = patentDocumentTemplateService;
 		this.inventorService = inventorService;
@@ -92,6 +95,7 @@ public class PatentEditDocController {
 		this.petitionService = petitionService;
 		this.userService = userService;
 		this.patentDocWorkflowHistoryService=patentDocWorkflowHistoryService;
+		this.patentDocWorkflowService=patentDocWorkflowService;
 	}
 
 	@RequestMapping(path="/newPatentType")
@@ -211,12 +215,14 @@ public class PatentEditDocController {
 		List<PatentDoc> patentDocs;
 		int totalCount;
 		if (PrincipalUtils.isPlatform()) {
-			page.setStatus(2);
+			page.setStatus(1);
+			page.setProxyStatus(2);
 			totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
 			page.setTotalRecords(totalCount);
 			 patentDocs=patentDocService.getUserPatentDocByRole(page);
 		}else if(PrincipalUtils.isProxyOrg()){
-			page.setStatus(3);
+			page.setStatus(2);
+			page.setProxyStatus(3);
 			totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
 			page.setTotalRecords(totalCount);
 			 patentDocs=patentDocService.getUserPatentDocByRole(page);
@@ -225,17 +231,16 @@ public class PatentEditDocController {
 //			totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
 //			page.setTotalRecords(totalCount);
 //			 patentDocs=patentDocService.getUserPatentDocByRole(page);
-			
+			page.setProxyStatus(3);
 			List<Integer> excludeStatusList=new ArrayList<>();
 			excludeStatusList.add(1);
 			excludeStatusList.add(2);
-			excludeStatusList.add(3);
+			excludeStatusList.add(4);
 			excludeStatusList.add(5);
 			excludeStatusList.add(6);
 			excludeStatusList.add(7);
-			excludeStatusList.add(8);
+			excludeStatusList.add(9);
 			excludeStatusList.add(10);
-			excludeStatusList.add(11);
 			totalCount=patentDocService.getPatentDocCountByTechAndCustomer(page, excludeStatusList);
 			page.setTotalRecords(totalCount);
 			 patentDocs=patentDocService.getPatentDocByTechAndCustomer(page, excludeStatusList);
@@ -246,18 +251,20 @@ public class PatentEditDocController {
 //			totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
 //			page.setTotalRecords(totalCount);
 //			 patentDocs=patentDocService.getUserPatentDocByRole(page);
-			
+			page.setProxyStatus(3);
 			List<Integer> excludeStatusList=new ArrayList<>();
 			excludeStatusList.add(1);
 			excludeStatusList.add(2);
 			excludeStatusList.add(3);
-			excludeStatusList.add(4);
+			excludeStatusList.add(9);
+			excludeStatusList.add(10);
 			totalCount=patentDocService.getPatentDocCountByTechAndCustomer(page, excludeStatusList);
 			page.setTotalRecords(totalCount);
 			 patentDocs=patentDocService.getPatentDocByTechAndCustomer(page, excludeStatusList);
 			
 		}else if(PrincipalUtils.isProcess()){
-			page.setStatus(10);
+			page.setStatus(9);
+			page.setProxyStatus(3);
 			totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
 			page.setTotalRecords(totalCount);
 			 patentDocs=patentDocService.getUserPatentDocByRole(page);
@@ -689,12 +696,18 @@ public class PatentEditDocController {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		
 	}	
 	
 	
 	@RequestMapping(path="/savePatentDocFile",method=RequestMethod.POST)
 	public void savePatentDocFile(PatentDoc patentDoc,PrintWriter writer){
 		patentDocService.savePatentDocFile(patentDoc);
+		patentDoc.getPatentDocId();
+		List<Long> patentDocIds =new ArrayList<>();
+		patentDocIds.add(patentDoc.getPatentDocId());
+		final int PATENT_DOC_STAUTS_PAID = 8;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIds,PATENT_DOC_STAUTS_PAID);
 		writer.write(1);
 	}
 	

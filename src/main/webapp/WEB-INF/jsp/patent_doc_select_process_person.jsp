@@ -73,7 +73,7 @@
 								  <td>${status.count}</td>
 								  <td><c:out value="${processPerson.user.username}"/></td>
 								  <td><c:out value="${processPerson.user.name}"/></td>
-								  <td></td>
+								  <td><a onclick="sharePatentDocs('${processPerson.userId}')">分享</a></td>
 								  <td><c:out value="${processPerson.remarkName}"/></td>
 								</tr>
 							  </c:forEach>
@@ -131,7 +131,7 @@
 		}
 	});
 	
-	function sharePatents() {
+/* 	function sharePatents() {
 		var friendSelected = false;
 
 		var friendCheckboxes = $('tr td input.check-item');
@@ -175,7 +175,28 @@
 	
 	$(function() {
 		$('#addShareBtn').click(sharePatents)
-	});
+	}); */
+	
+	function sharePatentDocs(userId){
+		var processPersons = userId;
+		var patentDocIds = $("input[name=patentDocIds]").val();
+		$.ajax({
+			url: "<s:url value='/patentDocWorkflow/addProcessPersonShares.html'/>?processPersons=" + processPersons + "&patentDocIds=" + patentDocIds, 
+			type: 'GET', 
+			success: function() {
+				$("<div>分享成功</div>").dialog({
+					modal: true,
+					buttons: {
+						Ok: function() {
+							$(this).dialog("close");
+							history.go(-1);
+						}
+					}	
+				});
+			}
+		});			
+		
+	}
 </script>
 </body>
 </html>
