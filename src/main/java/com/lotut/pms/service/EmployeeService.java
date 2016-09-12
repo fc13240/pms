@@ -55,7 +55,7 @@ public interface EmployeeService {
 	
 	List<ProcessPerson> searchProcessPersonByProxyId(String keyword,int currentUserId);
 	
-	List<ProxyOrg> searchProxyOrgId(String keyword,int parentOrgId);
+	List<ProxyOrg> searchProxyOrgId(String keyword,int parentOrgId,String loginRole);
 
 }
 
