@@ -827,11 +827,6 @@ CREATE TABLE IF NOT EXISTS patent_doc_order_items (
 	CONSTRAINT fk_patent_doc_order_items_patent_documents FOREIGN KEY(patent_doc_id) REFERENCES patent_documents(patent_doc_id)
 );
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f0c09a281e80e3834aed08f55f1f5c372833526b
-
 CREATE TABLE IF NOT EXISTS patent_doc_workflow_action(
 	action_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	action_type_desc VARCHAR(30) DEFAULT NULL
