@@ -482,8 +482,8 @@ function batchProxyOrg() {
 	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
 	var patentDocStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocStatusId');
 	for (var i = 0; i < patentDocStatusIds.length; i++) {
-		if (patentDocStatusIds[i] == 1 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || patentDocStatusIds[i] == 7 || 
-				patentDocStatusIds[i] == 8 || patentDocStatusIds[i] == 9 || patentDocStatusIds[i] == 10 || patentDocStatusIds[i] == 11) {
+		if (patentDocStatusIds[i] == 2 || patentDocStatusIds[i] == 3 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || 
+				patentDocStatusIds[i] == 7 || patentDocStatusIds[i] == 8 || patentDocStatusIds[i] == 9|| patentDocStatusIds[i] == 10) {
 			formutil.alertMessage('选中的文档中包含已分配过的文档，请重新选择！');
 			return;
 		}
@@ -508,8 +508,8 @@ function batchCustomerSupport() {
 	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
 	var patentDocStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocStatusId');
 	for (var i = 0; i < patentDocStatusIds.length; i++) {
-		if (patentDocStatusIds[i] == 1 || patentDocStatusIds[i] == 2 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || patentDocStatusIds[i] == 7 || 
-				patentDocStatusIds[i] == 8 || patentDocStatusIds[i] == 9 || patentDocStatusIds[i] == 10 || patentDocStatusIds[i] == 11) {
+		if (patentDocStatusIds[i] == 1 || patentDocStatusIds[i] == 3 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || patentDocStatusIds[i] == 7 || 
+				patentDocStatusIds[i] == 8 || patentDocStatusIds[i] == 9 || patentDocStatusIds[i] == 10 ) {
 			formutil.alertMessage('选中的文档中包含已分配过的文档，请重新选择！');
 			return;
 		}
@@ -535,8 +535,8 @@ function batchTechPerson() {
 	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
 	var patentDocStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocStatusId');
 	for (var i = 0; i < patentDocStatusIds.length; i++) {
-		if (patentDocStatusIds[i] == 1 || patentDocStatusIds[i] == 2 || patentDocStatusIds[i] == 3 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || patentDocStatusIds[i] == 7 || 
-				patentDocStatusIds[i] == 8 || patentDocStatusIds[i] == 9 || patentDocStatusIds[i] == 10 || patentDocStatusIds[i] == 11) {
+		if (patentDocStatusIds[i] == 1 || patentDocStatusIds[i] == 2 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || patentDocStatusIds[i] == 7 || 
+				patentDocStatusIds[i] == 8 || patentDocStatusIds[i] == 9 || patentDocStatusIds[i] == 10 ) {
 			formutil.alertMessage('选中的文档中包含已分配过的文档，请重新选择！');
 			return;
 		}
@@ -566,11 +566,11 @@ function batchProcessPerson() {
 	
 	for (var i = 0; i < patentDocStatusIds.length; i++) {
 		if (patentDocStatusIds[i] == 1 || patentDocStatusIds[i] == 2 || patentDocStatusIds[i] == 3 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || 
-				patentDocStatusIds[i] == 7 || patentDocStatusIds[i] == 8) {
+				patentDocStatusIds[i] == 7 ) {
 			formutil.alertMessage('选中的文档需先分配给技术员操作，请重新选择！');
 			return;
 		}
-		if ( patentDocStatusIds[i] == 10 || patentDocStatusIds[i] == 11) {
+		if ( patentDocStatusIds[i] == 9 || patentDocStatusIds[i] == 10) {
 			formutil.alertMessage('选中的文档已包含进入流程的文档，请重新选择！');
 			return;
 		}
