@@ -92,13 +92,13 @@
 											<button  class="button button-primary  button-rounded"   >批量分享</button>
 											</a>
 						  				</td>
-						  	<%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">  --%>
+						  	 <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">  
  						  		<td>
 		                            <a href="javascript:return void" onclick="batchEntrust()" >
 									<button style="margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >批量委托</button>
 									</a>
 						  		</td>
-						  	<%-- </se:authorize> --%>
+						  	 </se:authorize>
 						  	<%-- <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG')"> --%>
 							  		 <td>
 			                            <a href="javascript:return void" onclick="batchProxyOrg()" >
