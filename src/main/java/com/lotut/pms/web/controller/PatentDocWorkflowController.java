@@ -108,13 +108,22 @@ public class PatentDocWorkflowController {
 	public String addProxyOrgShares(@RequestParam("patentDocIds")List<Integer> patentDocIds, @RequestParam("proxyOrgs")List<Integer> proxyOrgs) {
 		List<Map<String, Integer>> userPatentDocRecords = new ArrayList<>();
 		List<Long> patentDocIdList=new ArrayList<>();
+		int userId=PrincipalUtils.getCurrentUserId();
+		patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
+		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
 		for (int patentDocId: patentDocIds) {
+			int count=patentDocWorkflowService.getCountByWorkflowHistory(patentDocId, userId, action);
+			if(count>0){
+			patentDocWorkflowService.redistributePatentDoc(patentDocId, action, proxyOrgs.get(0));
+		}else{
 			for (int proxyOrg: proxyOrgs) {
 				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
 				userPatentRecord.put("userId", proxyOrg);
 				userPatentRecord.put("patentDocId", patentDocId);
 				userPatentDocRecords.add(userPatentRecord);
 			}
+			
+		}
 			patentDocIdList.add(Long.valueOf(patentDocId));
 		}
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
@@ -122,7 +131,6 @@ public class PatentDocWorkflowController {
 		final int PATENT_DOC_PROXY_STAUTS_PAID = 3;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		patentDocWorkflowService.updatePatentDocProxyStatus(patentDocIdList,PATENT_DOC_PROXY_STAUTS_PAID);
-		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, proxyOrgs, action);
 		return "patent_doc_list";
 	}
