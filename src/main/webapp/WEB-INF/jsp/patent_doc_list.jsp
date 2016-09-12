@@ -198,6 +198,9 @@
 										历史
 										</a>
 									<%-- </se:authorize> --%>
+									<a href="javascript:return void" onclick="denialofService(${patentDoc.patentDocId})" >
+										拒绝委托
+									</a>
 									 <%-- <se:authorize access="hasRole('ROLE_TECH')"> --%>
 									 	<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 }">  --%>
 										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=6">
@@ -205,6 +208,7 @@
 										</a>
 										<%-- </c:if> --%>
 									 <%-- </se:authorize>  --%>
+									 	
 									 <%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">  --%>
 									 	<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 6 }"> --%> 
 											<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=7">
@@ -582,6 +586,17 @@ function batchProcessPerson() {
 	}		
 	var patentDocIds = uniquePatentNos.join(",");	
 	location.href = "<s:url value='/patentDocWorkflow/showProcessPersons.html'/>?patentDocIds=" + patentDocIds;
+}
+
+function denialofService(value){
+	var patentDocStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocStatusId');
+	for (var i = 0; i < patentDocStatusIds.length; i++) {
+		if (patentDocStatusIds[i] != 1 ) {
+			formutil.alertMessage('选中的文档已进入操作流程，无法拒绝！');
+			return;
+		}	
+	}
+	location.href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId="+value+"&status=4";
 }
 </script>
 <script type="text/javascript">
