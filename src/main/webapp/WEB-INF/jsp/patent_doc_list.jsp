@@ -594,9 +594,9 @@ function denialofService(value){
 		if (patentDocStatusIds[i] != 1 ) {
 			formutil.alertMessage('选中的文档已进入操作流程，无法拒绝！');
 			return;
-		}
-		location.href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId="+value;
+		}	
 	}
+	location.href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId="+value;
 }
 </script>
 <script type="text/javascript">
