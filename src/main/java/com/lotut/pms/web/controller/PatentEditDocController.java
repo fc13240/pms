@@ -45,6 +45,7 @@ import com.lotut.pms.domain.PatentDocAppPerson;
 import com.lotut.pms.domain.PatentDocInventor;
 import com.lotut.pms.domain.PatentDocSearchCondition;
 import com.lotut.pms.domain.PatentDocSectionType;
+import com.lotut.pms.domain.PatentDocStatus;
 import com.lotut.pms.domain.PatentDocumentTemplate;
 import com.lotut.pms.domain.TemplatePage;
 import com.lotut.pms.domain.User;
@@ -53,6 +54,7 @@ import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.InventorService;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocWorkflowHistoryService;
+import com.lotut.pms.service.PatentDocWorkflowService;
 import com.lotut.pms.service.PatentDocumentTemplateService;
 import com.lotut.pms.service.PetitionService;
 import com.lotut.pms.service.UserService;
@@ -76,6 +78,7 @@ public class PatentEditDocController {
 	private UserService userService;
 	private FriendService friendService;
 	private PetitionService petitionService;
+	private PatentDocWorkflowService patentDocWorkflowService;
 	private PatentDocWorkflowHistoryService patentDocWorkflowHistoryService;
 	
 	
@@ -83,7 +86,7 @@ public class PatentEditDocController {
 	public PatentEditDocController(PatentDocService patentDocService,PatentDocumentTemplateService patentDocumentTemplateService,
 			InventorService inventorService,AppPersonService appPersonService,FriendService friendService,
 			PetitionService petitionService,UserService userService,
-			PatentDocWorkflowHistoryService patentDocWorkflowHistoryService) {
+			PatentDocWorkflowHistoryService patentDocWorkflowHistoryService,PatentDocWorkflowService patentDocWorkflowService) {
 		this.patentDocService = patentDocService;
 		this.patentDocumentTemplateService = patentDocumentTemplateService;
 		this.inventorService = inventorService;
@@ -92,6 +95,7 @@ public class PatentEditDocController {
 		this.petitionService = petitionService;
 		this.userService = userService;
 		this.patentDocWorkflowHistoryService=patentDocWorkflowHistoryService;
+		this.patentDocWorkflowService=patentDocWorkflowService;
 	}
 
 	@RequestMapping(path="/newPatentType")
@@ -692,12 +696,18 @@ public class PatentEditDocController {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		
 	}	
 	
 	
 	@RequestMapping(path="/savePatentDocFile",method=RequestMethod.POST)
 	public void savePatentDocFile(PatentDoc patentDoc,PrintWriter writer){
 		patentDocService.savePatentDocFile(patentDoc);
+		patentDoc.getPatentDocId();
+		List<Long> patentDocIds =new ArrayList<>();
+		patentDocIds.add(patentDoc.getPatentDocId());
+		final int PATENT_DOC_STAUTS_PAID = 8;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIds,PATENT_DOC_STAUTS_PAID);
 		writer.write(1);
 	}
 	
