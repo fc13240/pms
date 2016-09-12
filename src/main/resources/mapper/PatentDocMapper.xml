@@ -31,7 +31,6 @@
 		<result property="contactId" column="contact_id"/>
 		<result property="otherInformation" column="other_information"/>
 		<result property="attachmentUrl" column="attachment_url"/>
-		<result property="feeStatus" column="feeStatus"/>
 		<result property="price" column="price"/>
 		<association property="patentDocStatus" resultMap="PatentDocStatusResultMap"/>
 		<association property="patentDocProxyStatus" resultMap="PatentDocProxyStatusResultMap"/>
@@ -206,7 +205,7 @@
 	
 	<select id="getPatentDocsByIds" parameterType="list" resultMap="PatentDocMap">
 		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
-		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,contact_id,attachment_url,other_information,feeStatus,price from patent_documents where  patent_doc_id in
+		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,contact_id,attachment_url,other_information,price from patent_documents where  patent_doc_id in
 			<foreach item="patentDocId" collection="patentDocIds"
 			     open="(" separator="," close=")">
 			   #{patentDocId}
