@@ -172,18 +172,22 @@
 								<td style="text-align:center">${patentDoc.name}</td>
 								
 								<td style="text-align:center">
-									<%-- <se:authorize access="hasRole('ROLE_TECH')"> --%> 
-				                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
-				                   <%-- </se:authorize> --%>
+									<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId=7}">
+										<se:authorize access="hasRole('ROLE_TECH')"> --%>
+					                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
+					       <%--              </se:authorize>
+				                    </c:if> --%>
 				                   <c:if test="${patentDoc.patentDocUrl != null}">
 				                    	<a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
 								
 								</td>
 								<td style="text-align:center">
-									<%-- <se:authorize access="hasRole('ROLE_PROCESS')">  --%>
+									<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId=9}">
+									<se:authorize access="hasRole('ROLE_PROCESS')"> --%>
 				                    	<a  href="<s:url value='/editor/showUploadPatentFileForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
-				                   <%-- </se:authorize> --%>
+				                   <%--  </se:authorize>
+				                    </c:if> --%>
 				                   <c:if test="${patentDoc.patentDocUrl != null}">
 				                    	<a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
