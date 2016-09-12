@@ -73,7 +73,7 @@
 								  <td>${status.count}</td>
 								  <td><c:out value="${customerSupport.user.username}"/></td>
 								  <td><c:out value="${customerSupport.user.name}"/></td>
-								  <td></td>
+								  <td><a onclick="sharePatentDocs('${customerSupport.userId}')">分享</a></td>
 								  <td><c:out value="${customerSupport.remarkName}"/></td>
 								</tr>
 							  </c:forEach>
@@ -130,7 +130,7 @@
 			$('tr th input.check-item').prop("checked", false);
 		}
 	});
-	
+	/* 
 	function sharePatents() {
 		var friendSelected = false;
 
@@ -175,7 +175,28 @@
 	
 	$(function() {
 		$('#addShareBtn').click(sharePatents)
-	});
+	}); */
+	function sharePatentDocs(userId){
+		var customerSuppors = userId;
+		var patentDocIds = $("input[name=patentDocIds]").val();
+		$.ajax({
+			url: "<s:url value='/patentDocWorkflow/addCustomerSupportShares.html'/>?customerSuppors=" + customerSuppors + "&patentDocIds=" + patentDocIds, 
+			type: 'GET', 
+			success: function() {
+				$("<div>分享成功</div>").dialog({
+					modal: true,
+					buttons: {
+						Ok: function() {
+							$(this).dialog("close");
+							history.go(-1);
+						}
+					}	
+				});
+			}
+		});			
+		
+	}
+	
 </script>
 </body>
 </html>
