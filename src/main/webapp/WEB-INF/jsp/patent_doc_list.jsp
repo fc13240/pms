@@ -92,28 +92,28 @@
 											<button  class="button button-primary  button-rounded"   >批量分享</button>
 											</a>
 						  				</td>
-						  	<se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')"> 
+						  	<%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">  --%>
  						  		<td>
 		                            <a href="javascript:return void" onclick="batchEntrust()" >
 									<button style="margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >批量委托</button>
 									</a>
 						  		</td>
-						  	</se:authorize>
-						  	<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG')">
+						  	<%-- </se:authorize> --%>
+						  	<%-- <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG')"> --%>
 							  		 <td>
 			                            <a href="javascript:return void" onclick="batchProxyOrg()" >
 										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >分配给代理机构</button>
 										</a>
 							  		</td>
-						  	 </se:authorize> 
-						  		 <se:authorize access="hasRole('ROLE_PROXY_ORG')"> 
+						  	 <%-- </se:authorize>  --%>
+						  		 <%-- <se:authorize access="hasRole('ROLE_PROXY_ORG')">  --%>
 							  		<td>
 			                            <a href="javascript:return void" onclick="batchCustomerSupport()" >
 										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >分配给客服</button>
 										</a>
 							  		</td> 
-						  		 </se:authorize> 
-						  		 <se:authorize access="hasRole('ROLE_CUSTOMER_SUPPORT')"> 
+						  		 <%-- </se:authorize>  --%>
+						  		<%--  <se:authorize access="hasRole('ROLE_CUSTOMER_SUPPORT')">  --%>
 							  		<td>
 			                            <a href="javascript:return void" onclick="batchTechPerson()" >
 										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >分配给技术员</button>
@@ -125,7 +125,7 @@
 										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded" data-placement="bottom" >分配给流程员</button>
 										</a>
 							  		</td>
-						  		 </se:authorize>		   										  									  				
+						  		<%--  </se:authorize> --%>		   										  									  				
 						  			</tr>
 						  		</table>		
 							  </div>
@@ -172,18 +172,18 @@
 								<td style="text-align:center">${patentDoc.name}</td>
 								
 								<td style="text-align:center">
-									<se:authorize access="hasRole('ROLE_TECH')"> 
+									<%-- <se:authorize access="hasRole('ROLE_TECH')"> --%> 
 				                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
-				                   </se:authorize>
+				                   <%-- </se:authorize> --%>
 				                   <c:if test="${patentDoc.patentDocUrl != null}">
 				                    	<a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
 								
 								</td>
 								<td style="text-align:center">
-									<se:authorize access="hasRole('ROLE_PROCESS')"> 
+									<%-- <se:authorize access="hasRole('ROLE_PROCESS')">  --%>
 				                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
-				                   </se:authorize>
+				                   <%-- </se:authorize> --%>
 				                   <c:if test="${patentDoc.patentDocUrl != null}">
 				                    	<a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
@@ -193,49 +193,49 @@
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center"></td>
 								<td style="text-align:center">
-									<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
+									<%-- <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')"> --%>
 										<a target="_blank" href="<s:url value='/patentDocWorkflowHistory/getHistory.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentDocName=<c:out value='${patentDoc.name}'/>">
 										历史
 										</a>
-									</se:authorize>
-									 <se:authorize access="hasRole('ROLE_TECH')">
-									 	<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 }"> 
+									<%-- </se:authorize> --%>
+									 <%-- <se:authorize access="hasRole('ROLE_TECH')"> --%>
+									 	<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 }">  --%>
 										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=6">
 										置为待确认
 										</a>
-										</c:if>
-									 </se:authorize> 
-									 <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')"> 
-									 	<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 6 }"> 
+										<%-- </c:if> --%>
+									 <%-- </se:authorize>  --%>
+									 <%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">  --%>
+									 	<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 6 }"> --%> 
 											<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=7">
 											置为待修改
 											</a>
 											<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=8">
 											置为定稿
 											</a>
-										</c:if> 
-									 </se:authorize> 
-									 <se:authorize access="hasRole('ROLE_TECH')">
-									 	<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 8}">  
+										<%-- </c:if>  --%>
+									 <%-- </se:authorize> --%> 
+									 <%-- <se:authorize access="hasRole('ROLE_TECH')"> --%>
+									 	<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 8}">   --%>
 										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=9">
 										确认已制作标准申请文件
 										</a>
-										</c:if>
-									 </se:authorize> 
-									 <se:authorize access="hasRole('ROLE_PROCESS')"> 
-									 	<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 10 }"> 
+										<%-- </c:if> --%>
+									<%--  </se:authorize>  --%>
+									 <%-- <se:authorize access="hasRole('ROLE_PROCESS')"> --%> 
+									 	<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 10 }">  --%>
 										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=11">
 										置为已交局
 										</a>
-										</c:if>
-									 </se:authorize> 
-									 <se:authorize access="hasAnyRole('ROLE_TECH','ROLE_USER')">
+										<%-- </c:if> --%>
+									 <%-- </se:authorize>  --%>
+									 <%-- <se:authorize access="hasAnyRole('ROLE_TECH','ROLE_USER')"> --%>
 									<%-- <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 || patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 || patentDoc.patentDocStatus.patentDocStatusId == 7 ||patentDoc.patentDocStatus.patentDocStatusId == 8 || 
 									 	patentDoc.patentDocStatus.patentDocStatusId == 9 }"> --%>
 										<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 										编辑
 										</a>
-									 </se:authorize> 
+									 <%-- </se:authorize>  --%>
 									 <%-- </c:if> --%>
 									<a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 									预览

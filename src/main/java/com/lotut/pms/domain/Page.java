@@ -6,9 +6,19 @@ public class Page {
 	private int totalRecords;//总条数
 	private int currentPage;//当前页
 	private int pageSize = 10;//页面条数
+	private int proxyStatus;
 	
 	
 	
+	
+	public int getProxyStatus() {
+		return proxyStatus;
+	}
+
+	public void setProxyStatus(int proxyStatus) {
+		this.proxyStatus = proxyStatus;
+	}
+
 	public int getStatus() {
 		return status;
 	}
