@@ -61,6 +61,7 @@ import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.CreateWord;
 import com.lotut.pms.web.util.DocUtil;
+import com.lotut.pms.web.util.FileOption;
 import com.lotut.pms.web.util.WebUtils;
 
 import net.lingala.zip4j.core.ZipFile;
@@ -664,41 +665,63 @@ public class PatentEditDocController {
 		return "patent_doc_upload_form";
 	}
 	
+	@RequestMapping(path="/showUploadPatentFileForm",method=RequestMethod.GET)
+	public String showUploadPatentFileForm(@RequestParam("patentDocId")long patentDocId,Model model){
+		model.addAttribute("patentDocId", patentDocId);
+		return "patent_doc_upload_patent_file_form";
+	}
+	
 	
 	@RequestMapping(path="/uploadPatentDocFile",method=RequestMethod.POST)
 	public void uploadPatentDocFile(HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
 		int userId = PrincipalUtils.getCurrentUserId();
-		try{
-			String savePath=Settings.PATENTDOC_FILE_PATH;
-			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-			MultipartFile file1 = multipartRequest.getFile("file");
-			String fileName = file1.getOriginalFilename();
-	        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			String ymd = sdf.format(new Date());
-			savePath += ymd + "/";
-			File dirFile = new File(savePath);
-			if (!dirFile.exists()) {
-				dirFile.mkdirs();
-			}
-			String newFileName = userId + "_" + new Random().nextInt(10000) + "_" + fileName;
-			InputStream is = file1.getInputStream();
-			int BUFFER_SIZE = 8 * 1024;
-			byte[] buffer = new byte[BUFFER_SIZE];
-			try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
-				int bytesRead = -1;
-				while ((bytesRead = is.read(buffer)) != -1) {
-					out.write(buffer, 0, bytesRead);
-				}
-				out.flush();
-				out.close();
-			}
-			WebUtils.writeJsonStrToResponse(response,ymd + "/"+newFileName);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		String savePath=Settings.PATENTDOC_FILE_PATH;
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		MultipartFile multipartFile = multipartRequest.getFile("file");
+		String fileName = multipartFile.getOriginalFilename();
+		FileOption.fileUpload(userId, multipartFile, savePath, fileName, response);
+		
+		
+//		try{
+//			String savePath=Settings.PATENTDOC_FILE_PATH;
+//			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+//			MultipartFile file1 = multipartRequest.getFile("file");
+//			String fileName = file1.getOriginalFilename();
+//	        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+//			String ymd = sdf.format(new Date());
+//			savePath += ymd + "/";
+//			File dirFile = new File(savePath);
+//			if (!dirFile.exists()) {
+//				dirFile.mkdirs();
+//			}
+//			String newFileName = userId + "_" + new Random().nextInt(10000) + "_" + fileName;
+//			InputStream is = file1.getInputStream();
+//			int BUFFER_SIZE = 8 * 1024;
+//			byte[] buffer = new byte[BUFFER_SIZE];
+//			try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
+//				int bytesRead = -1;
+//				while ((bytesRead = is.read(buffer)) != -1) {
+//					out.write(buffer, 0, bytesRead);
+//				}
+//				out.flush();
+//				out.close();
+//			}
+//			WebUtils.writeJsonStrToResponse(response,ymd + "/"+newFileName);
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
 		
 	}	
 	
+	@RequestMapping(path="/uploadPatentStandardFile",method=RequestMethod.POST)
+	public void uploadPatentFile(HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
+		int userId = PrincipalUtils.getCurrentUserId();
+		String savePath=Settings.PATENT_DOC_SATNDARD_FILE;
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		MultipartFile multipartFile = multipartRequest.getFile("file");
+		String fileName = multipartFile.getOriginalFilename();
+		FileOption.fileUpload(userId, multipartFile, savePath, fileName, response);
+	}
 	
 	@RequestMapping(path="/savePatentDocFile",method=RequestMethod.POST)
 	public void savePatentDocFile(PatentDoc patentDoc,PrintWriter writer){
@@ -710,6 +733,18 @@ public class PatentEditDocController {
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIds,PATENT_DOC_STAUTS_PAID);
 		writer.write(1);
 	}
+	
+	@RequestMapping(path="/savePatentStandardFile",method=RequestMethod.POST)
+	public void savePatentFile(PatentDoc patentDoc,PrintWriter writer){
+		patentDocService.savePatentStandardFile(patentDoc);
+		patentDoc.getPatentDocId();
+		List<Long> patentDocIds =new ArrayList<>();
+		patentDocIds.add(patentDoc.getPatentDocId());
+		final int PATENT_DOC_STAUTS_PAID = 10;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIds,PATENT_DOC_STAUTS_PAID);
+		writer.write(1);
+	}
+	
 	
 	@RequestMapping(path="/downloadPatentFile", method=RequestMethod.GET)
 	public void downloadPatentFile(@RequestParam("patentDocId")long patentDocId, HttpServletResponse response,HttpServletRequest request) throws IOException {
