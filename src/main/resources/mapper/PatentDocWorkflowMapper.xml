@@ -91,6 +91,10 @@
 	
 	<update id="redistributePatentDoc" >
 		update user_patent_docs set user_id =(#{userId}) where patent_doc = (#{patentDoc}) and user_id =(#{target})
-	
 	</update>
+	
+	<select id="getCountByWorkflowHistory"  resultType="int">
+		select count(history_id) from patent_doc_workflow_history where patent_doc_id=(#{patentDocId}) and 
+		user_id=(#{userId}) and ACTION=(#{action}) 
+	</select>
 </mapper>

@@ -167,6 +167,12 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 		int target=patentDocWorkflowDao.getTargetByHistoryId(historyId);
 		patentDocWorkflowDao.redistributePatentDoc(userId, patentDocId, target);
 	}
+
+
+	@Override
+	public int getCountByWorkflowHistory(long patentDocId, int userId, int action) {
+		return patentDocWorkflowDao.getCountByWorkflowHistory(patentDocId, userId, action);
+	}
 	
 	
 

@@ -83,6 +83,13 @@ public class PatentDocWorkflowMybatisDao extends SqlSessionDaoSupport implements
 		patentDocWorkflowMapper.redistributePatentDoc(userId, patentDoc, target);
 		
 	}
+
+
+
+	@Override
+	public int getCountByWorkflowHistory(long patentDocId, int userId, int action) {
+		return patentDocWorkflowMapper.getCountByWorkflowHistory(patentDocId, userId, action);
+	}
 	
 	
 	

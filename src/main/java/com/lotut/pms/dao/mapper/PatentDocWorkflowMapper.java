@@ -20,9 +20,11 @@ public interface PatentDocWorkflowMapper {
 	
 	int updatePatentDocProxyStatus(@Param("patentDocIdList")List<Long> patentDocIds, @Param("status")int status);
 	
-	int getLastHistoryIdByWorkflowHistory(@Param("patentDocId")long patentDocId,@Param("userId")int userId,@Param("ACTION") int action);
+	int getLastHistoryIdByWorkflowHistory(@Param("patentDocId")long patentDocId,@Param("userId")int userId,@Param("action") int action);
 	
 	int getTargetByHistoryId(int id);
 	
 	void redistributePatentDoc(@Param("userId")int userId,@Param("patentDoc")long patentDoc,@Param("target") int target);
+	
+	int getCountByWorkflowHistory(@Param("patentDocId")long patentDocId,@Param("userId")int userId,@Param("action") int action);
 }
