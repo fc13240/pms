@@ -73,7 +73,7 @@
 								  <td>${status.count}</td>
 								  <td><c:out value="${techPerson.user.username}"/></td>
 								  <td><c:out value="${techPerson.user.name}"/></td>
-								  <td><a onclick="sharePatentDocs('${techPerson.userId}')">分享</a></td>
+								  <td><a href="javascript:return void" onclick="sharePatentDocs('${techPerson.userId}')">分享</a></td>
 								  <td><c:out value="${techPerson.remarkName}"/></td>
 								</tr>
 							  </c:forEach>

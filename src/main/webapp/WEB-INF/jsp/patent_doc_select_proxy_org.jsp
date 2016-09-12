@@ -72,7 +72,7 @@
 								  <td>${status.count}</td>
 								  <td><c:out value="${proxyOrg.user.username}"/></td>
 								  <td><c:out value="${proxyOrg.user.name}"/></td>
-								  <td><a onclick="sharePatentDocs('${proxyOrg.orgUserId}')">分享</a></td>
+								  <td><a href="javascript:return void" onclick="sharePatentDocs('${proxyOrg.orgUserId}')">分享</a></td>
 								  <td><c:out value="${proxyOrg.remarkName}"/></td>
 								</tr>
 							  </c:forEach>
