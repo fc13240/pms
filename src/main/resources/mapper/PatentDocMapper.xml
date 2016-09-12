@@ -234,7 +234,6 @@
 		<if test="proxyStatus!=null">
 			AND p.patent_doc_proxy_status=#{proxyStatus}
 		</if>
-		proxyStatus
 		ORDER BY create_time DESC ,last_update_time DESC limit #{startIndex}, #{pageSize}
 	</select>
 	
