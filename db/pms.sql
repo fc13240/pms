@@ -881,6 +881,12 @@ INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(13,'置
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(14,'置为待交局');
 
 
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(15,'拒绝委托');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(16,'上传交局文件');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(18,'上传定稿文件');
+REPLACE INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(17,'分享给好友');
+
+
 CREATE TABLE `share_patent_docs` (
   `patent_doc` BIGINT(20) NOT NULL DEFAULT '0',
   `share_by` INT(11) NOT NULL DEFAULT '0',
