@@ -324,7 +324,7 @@ margin-top: 14px;
 width: 156px;
 line-height: 40px;
 text-align: center;
-background: rgb(27, 184, 182);
+background: #ff000027184182;
 border: none;
 margin-bottom: 21px;
 -webkit-border-radius: 3px;
@@ -348,7 +348,7 @@ transition: all .3s ease-in;
   -webkit-transition: background .3s ease-in;
   -moz-transition: background .3s ease-in;
   transition: background .3s ease-in;
-  background: rgb(255, 131, 131);
+  background: red;
 }
 
 .apply-four li:nth-child(1):hover i {
