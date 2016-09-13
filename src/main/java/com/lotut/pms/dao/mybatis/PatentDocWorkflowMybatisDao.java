@@ -89,6 +89,13 @@ public class PatentDocWorkflowMybatisDao extends SqlSessionDaoSupport implements
 	public int getTargetByHistoryId(long patentDocId, int history) {
 		return patentDocWorkflowMapper.getTargetByHistoryId(patentDocId, history);
 	}
+
+
+
+	@Override
+	public void deleteByWorkflowHistory(long patentDoc, int target) {
+		patentDocWorkflowMapper.deleteByWorkflowHistory(patentDoc, target);
+	}
 	
 	
 	
