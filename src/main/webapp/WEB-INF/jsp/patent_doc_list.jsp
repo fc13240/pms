@@ -187,10 +187,11 @@
 								<se:authorize access="hasRole('ROLE_PROCESS')">
 									<c:if test="${patentDoc.patentDocStatus.patentDocStatusId==9}">
 				                    	<a  href="<s:url value='/editor/showUploadPatentFileForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
-				                     </c:if> 
+				                     </c:if>
 				                  </se:authorize>
 				                    
-				                   <c:if test="${patentDoc.attachmentUrl!= null}">
+				                   
+				                   <c:if test="${patentDoc.attachmentUrl!=null}">
 				                    	<a  href="<s:url value='/editor/downloadPatentStandardFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
 								
