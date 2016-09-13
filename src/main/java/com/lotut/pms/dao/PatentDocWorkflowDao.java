@@ -29,4 +29,6 @@ public interface PatentDocWorkflowDao {
 	
 	int getCountByWorkflowHistory(long patentDocId,int userId,int action);
 	
+	void deleteByWorkflowHistory(long patentDoc, int target);
+	
 }

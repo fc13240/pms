@@ -161,17 +161,100 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 
 
 	@Override
-	public void redistributePatentDoc(long patentDocId,int action,int userId) {
-		int ownerId=PrincipalUtils.getCurrentUserId();
+	public void redistributeProxyOrgPatentDoc(int ownerId,long patentDocId,int action) {
 		int historyId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, ownerId, action);
 		int target=patentDocWorkflowDao.getTargetByHistoryId(patentDocId,historyId);
-		patentDocWorkflowDao.redistributePatentDoc(userId, patentDocId, target);
+		patentDocWorkflowDao.deleteByWorkflowHistory(patentDocId, target);
+		int count=patentDocWorkflowDao.getCountByWorkflowHistory(patentDocId, target, action);
+		int proxyOrgAction=PatentDocWorkflowAction.ActionType.get("分配给客服人员");
+		int proxyOrgSupporsHistoryId=0;
+		int proxyOrgTarget=0;
+			if(count>0){
+				 proxyOrgSupporsHistoryId =patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, target, proxyOrgAction);
+				 proxyOrgTarget=patentDocWorkflowDao.getTargetByHistoryId(patentDocId,proxyOrgSupporsHistoryId);
+				 patentDocWorkflowDao.deleteByWorkflowHistory(patentDocId, proxyOrgTarget);
+			}else{
+				return;
+			}
+		int customerSupporAction=PatentDocWorkflowAction.ActionType.get("分配给技术员");
+		int customerSupporCount=patentDocWorkflowDao.getCountByWorkflowHistory(patentDocId, proxyOrgTarget, customerSupporAction);
+		int customerSupporHistoryId=0;
+		int customerSupporTarget=0;
+		if(customerSupporCount>0){
+			customerSupporHistoryId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, proxyOrgTarget, customerSupporAction);
+			customerSupporTarget=patentDocWorkflowDao.getTargetByHistoryId(patentDocId, customerSupporHistoryId);
+			patentDocWorkflowDao.deleteByWorkflowHistory(patentDocId, customerSupporTarget);
+		}else{
+			return;
+		}
+		int techPersonAction=PatentDocWorkflowAction.ActionType.get("分配给流程人员");
+		int techPersonCount=patentDocWorkflowDao.getCountByWorkflowHistory(patentDocId, customerSupporTarget, techPersonAction);
+		int techPersonHistoryId=0;
+		int techPersonTarget=0;
+		if(techPersonCount>0){
+			techPersonHistoryId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, customerSupporTarget, techPersonAction);
+			techPersonTarget=patentDocWorkflowDao.getTargetByHistoryId(patentDocId, techPersonHistoryId);
+			patentDocWorkflowDao.deleteByWorkflowHistory(patentDocId, techPersonTarget);
+		}
 	}
 
 
 	@Override
 	public int getCountByWorkflowHistory(long patentDocId, int userId, int action) {
 		return patentDocWorkflowDao.getCountByWorkflowHistory(patentDocId, userId, action);
+	}
+
+
+	@Override
+	public void redistributeCustomerSupportPatentDoc(int ownerId, long patentDocId, int action) {
+		int historyId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, ownerId, action);
+		int target=patentDocWorkflowDao.getTargetByHistoryId(patentDocId,historyId);
+		patentDocWorkflowDao.deleteByWorkflowHistory(patentDocId, target);
+		int customerSupporAction=PatentDocWorkflowAction.ActionType.get("分配给技术员");
+		int customerSupporCount=patentDocWorkflowDao.getCountByWorkflowHistory(patentDocId, target, customerSupporAction);
+		int customerSupporHistoryId=0;
+		int customerSupporTarget=0;
+		if(customerSupporCount>0){
+			customerSupporHistoryId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, target, customerSupporAction);
+			customerSupporTarget=patentDocWorkflowDao.getTargetByHistoryId(patentDocId, customerSupporHistoryId);
+			patentDocWorkflowDao.deleteByWorkflowHistory(patentDocId, customerSupporTarget);
+		}else{
+			return;
+		}
+		int techPersonAction=PatentDocWorkflowAction.ActionType.get("分配给流程人员");
+		int techPersonCount=patentDocWorkflowDao.getCountByWorkflowHistory(patentDocId, customerSupporTarget, techPersonAction);
+		int techPersonHistoryId=0;
+		int techPersonTarget=0;
+		if(techPersonCount>0){
+			techPersonHistoryId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, customerSupporTarget, techPersonAction);
+			techPersonTarget=patentDocWorkflowDao.getTargetByHistoryId(patentDocId, techPersonHistoryId);
+			patentDocWorkflowDao.deleteByWorkflowHistory(patentDocId, techPersonTarget);
+		}
+	}
+
+
+	@Override
+	public void redistributeTechPersonPatentDoc(int ownerId, long patentDocId, int action) {
+		int historyId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, ownerId, action);
+		int target=patentDocWorkflowDao.getTargetByHistoryId(patentDocId,historyId);
+		patentDocWorkflowDao.deleteByWorkflowHistory(patentDocId, target);
+		int techPersonAction=PatentDocWorkflowAction.ActionType.get("分配给流程人员");
+		int techPersonCount=patentDocWorkflowDao.getCountByWorkflowHistory(patentDocId, target, techPersonAction);
+		int techPersonHistoryId=0;
+		int techPersonTarget=0;
+		if(techPersonCount>0){
+			techPersonHistoryId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, target, techPersonAction);
+			techPersonTarget=patentDocWorkflowDao.getTargetByHistoryId(patentDocId, techPersonHistoryId);
+			patentDocWorkflowDao.deleteByWorkflowHistory(patentDocId, techPersonTarget);
+		}
+	}
+
+
+	@Override
+	public void redistributeProcessPersonPatentDoc(int ownerId, long patentDocId, int action) {
+		int historyId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, ownerId, action);
+		int target=patentDocWorkflowDao.getTargetByHistoryId(patentDocId,historyId);
+		patentDocWorkflowDao.deleteByWorkflowHistory(patentDocId, target);
 	}
 	
 	

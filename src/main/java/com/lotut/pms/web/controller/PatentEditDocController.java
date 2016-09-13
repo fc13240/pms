@@ -730,9 +730,9 @@ public class PatentEditDocController {
 	}
 	
 	@RequestMapping(path="/downloadPatentStandardFile", method=RequestMethod.GET)
-	public void downloadPatentStandardFile(@RequestParam("patentDocId")long patentDocId, HttpServletResponse response,HttpServletRequest request) throws IOException {
+	public void downloadPatentStandardFile(@RequestParam("patentDocId")Long patentDocId, HttpServletResponse response,HttpServletRequest request) throws IOException {
 		response.setContentType("application/ostet-stream");
-		String relativeUrl = patentDocService.getPatentDocAttachmentFile(patentDocId);
+		String relativeUrl = patentDocService.getPatentDocAttachmentUrlById(patentDocId);
 		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
 		String filePath = Settings.PATENT_DOC_STANDARD_FILE + relativeUrl;
 		File patentDocFile = new File(filePath);
@@ -743,7 +743,6 @@ public class PatentEditDocController {
 		response.setContentLength((int)patentDocFile.length());
 		WebUtils.writeStreamToResponse(response, new FileInputStream(patentDocFile));
 	}
-		
 	@RequestMapping(path="showFriends", method=RequestMethod.GET)
 	public String showFriends(Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();

@@ -267,7 +267,7 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 
 	@Override
 	public String getPatentDocAttachmentUrlById(Long patentDocId) {
-		return patentDocMapper.getPatentDocAttachmentFile(patentDocId);
+		return patentDocMapper.getPatentDocAttachmentUrlById(patentDocId);
 	}
 
 

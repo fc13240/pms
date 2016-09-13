@@ -97,4 +97,8 @@
 		select count(history_id) from patent_doc_workflow_history where patent_doc_id=(#{patentDocId}) and 
 		user_id=(#{userId}) and ACTION=(#{action}) 
 	</select>
+	
+	<delete id="deleteByWorkflowHistory">
+		delete from user_patent_docs where patent_doc = (#{patentDoc}) and user_id =(#{target})
+	</delete>
 </mapper>

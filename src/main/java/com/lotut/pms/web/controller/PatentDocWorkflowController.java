@@ -114,7 +114,14 @@ public class PatentDocWorkflowController {
 		for (int patentDocId: patentDocIds) {
 			int count=patentDocWorkflowService.getCountByWorkflowHistory(patentDocId, userId, action);
 			if(count>0){
-			patentDocWorkflowService.redistributePatentDoc(patentDocId, action, proxyOrgs.get(0));
+			patentDocWorkflowService.redistributeProxyOrgPatentDoc(userId,patentDocId, action);
+			for (int proxyOrg: proxyOrgs) {
+				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
+				userPatentRecord.put("userId", proxyOrg);
+				userPatentRecord.put("patentDocId", patentDocId);
+				userPatentDocRecords.add(userPatentRecord);
+			}
+			patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		}else{
 			for (int proxyOrg: proxyOrgs) {
 				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
@@ -154,7 +161,14 @@ public class PatentDocWorkflowController {
 		for (int patentDocId: patentDocIds) {
 			int count=patentDocWorkflowService.getCountByWorkflowHistory(patentDocId, userId, action);
 			if(count>0){
-			patentDocWorkflowService.redistributePatentDoc(patentDocId, action, customerSuppors.get(0));
+			patentDocWorkflowService.redistributeCustomerSupportPatentDoc(userId, patentDocId, action);
+			for (int customerSuppor: customerSuppors) {
+				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
+				userPatentRecord.put("userId", customerSuppor);
+				userPatentRecord.put("patentDocId", patentDocId);
+				userPatentDocRecords.add(userPatentRecord);
+			}
+			patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		}else{
 			for (int customerSuppor: customerSuppors) {
 				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
@@ -169,7 +183,6 @@ public class PatentDocWorkflowController {
 		}
 		final int PATENT_DOC_STAUTS_PAID = 3;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
-		
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, customerSuppors, action);
 		return "patent_doc_list";
 	}
@@ -193,7 +206,14 @@ public class PatentDocWorkflowController {
 		for (int patentDocId: patentDocIds) {
 			int count=patentDocWorkflowService.getCountByWorkflowHistory(patentDocId, userId, action);
 			if(count>0){
-			patentDocWorkflowService.redistributePatentDoc(patentDocId, action, techPersons.get(0));
+			patentDocWorkflowService.redistributeTechPersonPatentDoc(userId, patentDocId, action);
+			for (int techPerson: techPersons) {
+				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
+				userPatentRecord.put("userId", techPerson);
+				userPatentRecord.put("patentDocId", patentDocId);
+				userPatentDocRecords.add(userPatentRecord);
+			}
+			patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		}else{
 			for (int techPerson: techPersons) {
 				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
@@ -233,7 +253,14 @@ public class PatentDocWorkflowController {
 		for (int patentDocId: patentDocIds) {
 			int count=patentDocWorkflowService.getCountByWorkflowHistory(patentDocId, userId, shareAction);
 			if(count>0){
-			patentDocWorkflowService.redistributePatentDoc(patentDocId, shareAction, processPersons.get(0));
+			patentDocWorkflowService.redistributeProcessPersonPatentDoc(userId, patentDocId, shareAction);
+			for (int processPerson: processPersons) {
+				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
+				userPatentRecord.put("userId", processPerson);
+				userPatentRecord.put("patentDocId", patentDocId);
+				userPatentDocRecords.add(userPatentRecord);
+			}
+			patentDocService.insertUserPatentDoc(userPatentDocRecords);
 		}else{
 			for (int processPerson: processPersons) {
 				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
@@ -331,7 +358,7 @@ public class PatentDocWorkflowController {
 		List<Long> patentDocIdList=new ArrayList<>();
 			patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
 		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
-		patentDocWorkflowService.redistributePatentDoc(patentDocIds.get(0), action, proxyOrgs.get(0));
+		patentDocWorkflowService.redistributeProxyOrgPatentDoc(patentDocIds.get(0), action, proxyOrgs.get(0));
 		final int PATENT_DOC_STAUTS_PAID = 2;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, proxyOrgs, action);
@@ -343,7 +370,7 @@ public class PatentDocWorkflowController {
 		List<Long> patentDocIdList=new ArrayList<>();
 			patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
 		int action=PatentDocWorkflowAction.ActionType.get("分配给客服人员");
-		patentDocWorkflowService.redistributePatentDoc(patentDocIds.get(0), action, customerSuppors.get(0));
+		patentDocWorkflowService.redistributeProxyOrgPatentDoc(patentDocIds.get(0), action, customerSuppors.get(0));
 		final int PATENT_DOC_STAUTS_PAID = 3;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, customerSuppors, action);
@@ -355,7 +382,7 @@ public class PatentDocWorkflowController {
 		List<Long> patentDocIdList=new ArrayList<>();
 			patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
 		int action=PatentDocWorkflowAction.ActionType.get("分配给技术员");
-		patentDocWorkflowService.redistributePatentDoc(patentDocIds.get(0), action, techPersons.get(0));
+		patentDocWorkflowService.redistributeProxyOrgPatentDoc(patentDocIds.get(0), action, techPersons.get(0));
 		final int PATENT_DOC_STAUTS_PAID = 4;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, techPersons, action);
@@ -369,7 +396,7 @@ public class PatentDocWorkflowController {
 			int shareAction=PatentDocWorkflowAction.ActionType.get("分配给流程人员");
 			int insertAction =PatentDocWorkflowAction.ActionType.get("置为待交局");
 			patentDocWorkflowHistoryService.insertActionHistories(patentDocIds, insertAction);
-		patentDocWorkflowService.redistributePatentDoc(patentDocIds.get(0), shareAction, processPersons.get(0));
+		patentDocWorkflowService.redistributeProxyOrgPatentDoc(patentDocIds.get(0), shareAction, processPersons.get(0));
 		final int PATENT_DOC_STAUTS_PAID = 9;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, processPersons, shareAction);

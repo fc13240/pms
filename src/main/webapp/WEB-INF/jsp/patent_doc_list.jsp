@@ -187,10 +187,11 @@
 								<se:authorize access="hasRole('ROLE_PROCESS')">
 									<c:if test="${patentDoc.patentDocStatus.patentDocStatusId==9}">
 				                    	<a  href="<s:url value='/editor/showUploadPatentFileForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
-				                     </c:if> 
+				                     </c:if>
 				                  </se:authorize>
 				                    
-				                   <c:if test="${patentDoc.attachmentUrl!= null}">
+				                   
+				                   <c:if test="${patentDoc.attachmentUrl!=null}">
 				                    	<a  href="<s:url value='/editor/downloadPatentStandardFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
 								
@@ -480,13 +481,13 @@ function batchProxyOrg() {
 	}
 	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
 	var patentDocStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocStatusId');
-	for (var i = 0; i < patentDocStatusIds.length; i++) {
-		if ( patentDocStatusIds[i] == 3 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || 
+ 	for (var i = 0; i < patentDocStatusIds.length; i++) {
+		if (  patentDocStatusIds[i] == 3 ||patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || 
 				patentDocStatusIds[i] == 7 || patentDocStatusIds[i] == 8 || patentDocStatusIds[i] == 9|| patentDocStatusIds[i] == 10) {
 			formutil.alertMessage('选中的文档中包含已分配过的文档，请重新选择！');
 			return;
 		}
-	}
+	} 
 	for (var i = 0; i < patents_checked.length; i++) {
 		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
 			uniquePatentNos.push(patents_checked[i]);
@@ -507,7 +508,7 @@ function batchCustomerSupport() {
 	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
 	var patentDocStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocStatusId');
 	for (var i = 0; i < patentDocStatusIds.length; i++) {
-		if (patentDocStatusIds[i] == 1 || patentDocStatusIds[i] == 3 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || patentDocStatusIds[i] == 7 || 
+		if (patentDocStatusIds[i] == 1 ||  patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || patentDocStatusIds[i] == 7 || 
 				patentDocStatusIds[i] == 8 || patentDocStatusIds[i] == 9 || patentDocStatusIds[i] == 10 ) {
 			formutil.alertMessage('选中的文档中包含已分配过的文档，请重新选择！');
 			return;
@@ -534,7 +535,7 @@ function batchTechPerson() {
 	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
 	var patentDocStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocStatusId');
 	for (var i = 0; i < patentDocStatusIds.length; i++) {
-		if (patentDocStatusIds[i] == 1 || patentDocStatusIds[i] == 2 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || patentDocStatusIds[i] == 7 || 
+		if (patentDocStatusIds[i] == 1 || patentDocStatusIds[i] == 2  || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || patentDocStatusIds[i] == 7 || 
 				patentDocStatusIds[i] == 8 || patentDocStatusIds[i] == 9 || patentDocStatusIds[i] == 10 ) {
 			formutil.alertMessage('选中的文档中包含已分配过的文档，请重新选择！');
 			return;
@@ -569,7 +570,7 @@ function batchProcessPerson() {
 			formutil.alertMessage('选中的文档需先分配给技术员操作，请重新选择！');
 			return;
 		}
-		if ( patentDocStatusIds[i] == 9 || patentDocStatusIds[i] == 10) {
+		if (  patentDocStatusIds[i] == 10) {
 			formutil.alertMessage('选中的文档已包含进入流程的文档，请重新选择！');
 			return;
 		}

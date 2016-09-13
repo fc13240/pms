@@ -27,4 +27,6 @@ public interface PatentDocWorkflowMapper {
 	void redistributePatentDoc(@Param("userId")int userId,@Param("patentDoc")long patentDoc,@Param("target") int target);
 	
 	int getCountByWorkflowHistory(@Param("patentDocId")long patentDocId,@Param("userId")int userId,@Param("action") int action);
+	
+	void deleteByWorkflowHistory(@Param("patentDoc")long patentDoc,@Param("target") int target);
 }
