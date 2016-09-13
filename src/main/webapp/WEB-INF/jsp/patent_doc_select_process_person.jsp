@@ -58,7 +58,6 @@
 						  <table id="simple-table" style="width:500px;" class="table table-striped table-bordered table-hover">
 							<thead>
 							  <tr class="simple_bag">
-								<th width="30px"><input style="width:15px;" type="checkbox" class="check-item"></th>
 								<th >序号</th>
 								<th >机构用户名</th>
 								<th >机构名称</th>
@@ -73,14 +72,13 @@
 								  <td>${status.count}</td>
 								  <td><c:out value="${processPerson.user.username}"/></td>
 								  <td><c:out value="${processPerson.user.name}"/></td>
-								  <td><a onclick="sharePatentDocs('${processPerson.userId}')">分享</a></td>
+								  <td><a href="javascript:return void" onclick="sharePatentDocs('${processPerson.userId}')">分享</a></td>
 								  <td><c:out value="${processPerson.remarkName}"/></td>
 								</tr>
 							  </c:forEach>
 							
 							</tbody>
 						  </table>
-						  <input type="button" class="button button-caution button-rounded" id="addShareBtn" value="确定"/>
 						</form>
 					  </div>
 				</div>

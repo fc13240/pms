@@ -21,10 +21,12 @@ public interface PatentDocWorkflowDao {
 	
 	int updatePatentDocProxyStatus(List<Long> patentDocIds, int status);
 	
-	int getLastHistoryIdByWorkflowHistory(@Param("patentDocId")long patentDocId,@Param("userId")int userId,@Param("ACTION") int action);
+	int getLastHistoryIdByWorkflowHistory(long patentDocId,int userId, int action);
 	
-	int getTargetByHistoryId(int id);
+	int getTargetByHistoryId(long patentDocId,int history);
 	
-	void redistributePatentDoc(@Param("userId")int userId,@Param("patentDoc")long patentDoc,@Param("target") int target);
+	void redistributePatentDoc(int userId,long patentDoc, int target);
+	
+	int getCountByWorkflowHistory(long patentDocId,int userId,int action);
 	
 }

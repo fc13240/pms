@@ -701,6 +701,8 @@ public class PatentEditDocController {
 		patentDocIds.add(patentDoc.getPatentDocId());
 		final int PATENT_DOC_STAUTS_PAID = 8;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIds,PATENT_DOC_STAUTS_PAID);
+		int action=18;
+		patentDocWorkflowHistoryService.insertHistory((int) (patentDoc.getPatentDocId()), action);
 		writer.write(1);
 	}
 	
@@ -713,6 +715,9 @@ public class PatentEditDocController {
 		final int PATENT_DOC_STAUTS_PAID = 10;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIds,PATENT_DOC_STAUTS_PAID);
 		writer.write(1);
+		int action=10;
+		patentDocWorkflowHistoryService.insertHistory((int) (patentDoc.getPatentDocId()), action);
+		
 	}
 	
 	
@@ -760,8 +765,9 @@ public class PatentEditDocController {
 				userPatentDocRecords.add(userPatentRecord);
 			}
 		}
-		
+		int action =17;
 		patentDocService.insertUserPatentDoc(userPatentDocRecords);
+		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, friendIds, action);
 		return "patent_doc_list";
 	}
 	
