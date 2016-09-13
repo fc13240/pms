@@ -152,11 +152,11 @@
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
 		select sp.patent_doc_id, sp.user_id,sp.app_no,sp.patent_type,sp.create_time,sp.last_update_time,sp.patent_name,
-				sp.manual,sp.right_claim,sp.abstract_desc,sp.abstract_img,sp.patent_doc_attachment_file,sp.patent_doc_url,sp.patent_doc_status_id,sp.patent_doc_status_desc,
+				sp.manual,sp.right_claim,sp.abstract_desc,sp.abstract_img,sp.patent_doc_attachment_file,sp.patent_doc_url,sp.attachment_url,sp.patent_doc_status_id,sp.patent_doc_status_desc,
 				sp.patent_doc_proxy_status_id,sp.patent_doc_proxy_status_desc
 		from (SELECT p.patent_doc_id, p.user_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
 				p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,ps.patent_doc_status_id,ps.patent_doc_status_desc,
-				pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc
+				pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc,p.attachment_url
 				FROM patent_documents p  LEFT JOIN user_patent_docs up ON p.patent_doc_id = up.patent_doc LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
 				LEFT JOIN patent_doc_proxy_status pp ON p.patent_doc_proxy_status =pp.patent_doc_proxy_status_id
 				WHERE up.user_id = #{userId}
@@ -229,7 +229,7 @@
 	
 	<select id="getUserPatentDocByRole" parameterType="Page" resultMap="PatentDocMap">
 				SELECT p.patent_doc_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
-		p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,
+		p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,p.attachment_url,
 		ps.patent_doc_status_id,ps.patent_doc_status_desc,pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc
 		FROM patent_documents p LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
 		LEFT JOIN patent_doc_proxy_status pp ON p.patent_doc_proxy_status =pp.patent_doc_proxy_status_id
@@ -260,7 +260,7 @@
 	
 	<select id="getPatentDocByTechAndCustomer" resultMap="PatentDocMap">
 		SELECT p.patent_doc_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
-		p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,p.attachment_url
+		p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,p.attachment_url,
 		ps.patent_doc_status_id,ps.patent_doc_status_desc,pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc
 		FROM patent_documents p LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
 		LEFT JOIN patent_doc_proxy_status pp ON p.patent_doc_proxy_status =pp.patent_doc_proxy_status_id
