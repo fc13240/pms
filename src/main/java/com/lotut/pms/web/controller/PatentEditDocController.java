@@ -229,10 +229,6 @@ public class PatentEditDocController {
 			page.setTotalRecords(totalCount);
 			 patentDocs=patentDocService.getUserPatentDocByRole(page);
 		}else if(PrincipalUtils.isCustomerSupport()){
-//			page.setStatus(4);
-//			totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
-//			page.setTotalRecords(totalCount);
-//			 patentDocs=patentDocService.getUserPatentDocByRole(page);
 			page.setProxyStatus(3);
 			List<Integer> excludeStatusList=new ArrayList<>();
 			excludeStatusList.add(1);
@@ -249,10 +245,6 @@ public class PatentEditDocController {
 			
 			
 		}else if(PrincipalUtils.isTech()){
-			//page.setStatus(5);
-//			totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
-//			page.setTotalRecords(totalCount);
-//			 patentDocs=patentDocService.getUserPatentDocByRole(page);
 			page.setProxyStatus(3);
 			List<Integer> excludeStatusList=new ArrayList<>();
 			excludeStatusList.add(1);
