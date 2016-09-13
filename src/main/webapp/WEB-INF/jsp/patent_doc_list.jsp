@@ -143,12 +143,8 @@
 							  <th class="center" width="20px">序号</th>
 							  <th width="50px">专利类型</th>
 							  <th width="140px">专利名称</th>
-							  <c:if test="${patentDoc.patentDocUrl != null}">
 							  <th width="60px">定稿文件</th>
-							  </c:if>
-							  <c:if test="${patentDoc.attachmentUrl!=null}">
 							  <th width="90px">交局文件</th>
-							  </c:if>
 							  <th width="90px">代理状态</th>
 							  <th width="90px">案件状态</th>
 							  <th width="90px">共享人</th>
