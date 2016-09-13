@@ -7,6 +7,7 @@ import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSearchCondition;
+import com.lotut.pms.domain.User;
 
 public interface PatentDocDao {
 	void savePatentDoc(PatentDoc PatentDoc);
@@ -76,4 +77,6 @@ public interface PatentDocDao {
 	void saveInternalCode(PatentDoc patentDoc);
 	
 	String getPatentDocAttachmentUrlById(Long patentDocId);
+
+	List<User> searchShareUsers(long patentDocId);
 }

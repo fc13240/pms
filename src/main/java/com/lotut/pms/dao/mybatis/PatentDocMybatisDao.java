@@ -11,6 +11,7 @@ import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSearchCondition;
+import com.lotut.pms.domain.User;
 
 public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentDocDao{
 	private PatentDocMapper patentDocMapper;
@@ -267,5 +268,12 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	@Override
 	public String getPatentDocAttachmentUrlById(Long patentDocId) {
 		return patentDocMapper.getPatentDocAttachmentFile(patentDocId);
+	}
+
+
+
+	@Override
+	public List<User> searchShareUsers(long patentDocId) {
+		return patentDocMapper.searchShareUsers(patentDocId);
 	}
 }

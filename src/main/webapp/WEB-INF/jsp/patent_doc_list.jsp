@@ -197,7 +197,7 @@
 								</td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocProxyStatus.statusDescription}"/></td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
-								<td style="text-align:center"></td>
+								<td style="text-align:center"><a href="#" onclick="javascript:showShareUsers(${patentDoc.patentDocId})">查看</a></td>
 								<td style="text-align:center">
 								
 									 <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')"> 
@@ -609,7 +609,19 @@ function denialofService(value){
 				location.reload();
 			}
 		});		
-	}	
+	}
+	
+	function showShareUsers(patentDocId) {
+		
+		
+		$.ajax({
+			url: "<s:url value='/editor/showShareUsers.html'/>?patentDocId=" + patentDocId, 
+			type: 'get', 
+			success: function() {
+				
+			}
+		});		
+	}
 </script>
 </body>
 </html>
