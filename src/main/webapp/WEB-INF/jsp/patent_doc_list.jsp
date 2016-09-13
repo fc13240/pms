@@ -206,10 +206,12 @@
 										历史
 										</a>
 									 </se:authorize>
-									 <se:authorize access="hasRole('ROLE_PLATFORM')">  
+									 <se:authorize access="hasRole('ROLE_PLATFORM')"> 
+									  <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 && patentDoc.patentDocProxyStatus.patentDocProxyStatusId== 2 }  ">
 										<a href="javascript:return void" onclick="denialofService(${patentDoc.patentDocId})" >
 											拒绝委托
 										</a>
+										</c:if>
 									</se:authorize>
 									 <se:authorize access="hasRole('ROLE_TECH')">
 									 	<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 4 || patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 }">  
