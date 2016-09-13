@@ -70,4 +70,6 @@ public interface PatentDocService {
 	int getPatentDocCountByTechAndCustomer(Page page,List<Integer> statusList);
 	
 	void savePatentStandardFile(PatentDoc patentDoc);
+	
+	String getPatentDocAttachmentUrlById(Long patentDocId);
 }

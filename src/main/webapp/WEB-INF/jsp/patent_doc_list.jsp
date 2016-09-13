@@ -191,8 +191,8 @@
 				                     </c:if> 
 				                     </se:authorize>
 				                    
-				                   <c:if test="${patentDoc.patentDocUrl != null}">
-				                    	<a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
+				                   <c:if test="${patentDoc.attachment!= null}">
+				                    	<a  href="<s:url value='/editor/downloadPatentStandardFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
 								
 								</td>

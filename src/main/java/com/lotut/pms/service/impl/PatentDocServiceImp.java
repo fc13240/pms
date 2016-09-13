@@ -235,4 +235,10 @@ public class PatentDocServiceImp implements PatentDocService{
 		public void savePatentStandardFile(PatentDoc patentDoc) {
 			patentDocDao.savePatentStandardFile(patentDoc);
 		}
+
+
+		@Override
+		public String getPatentDocAttachmentUrlById(Long patentDocId) {
+			return patentDocDao.getPatentDocAttachmentUrlById(patentDocId);
+		}
 }
