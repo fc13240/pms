@@ -50,16 +50,15 @@
 								    <select style="width:121px;" class="form-control" name="patentDocStatus">
 											<option value="">全部</option>
 											<option value="1">草稿</option>
-											<option value="2">已委托</option>
-											<option value="3">立案分配</option>
-											<option value="4">已分配</option>
-											<option value="5">专家撰写</option>
-											<option value="6">待确认</option>
-											<option value="7">待修改</option>
-											<option value="8">定稿</option>
-											<option value="9">已制作标准申请文件</option>
-											<option value="10">待交局</option>
-											<option value="11">已交局</option>
+											<option value="2">立案分配</option>
+											<option value="3">已分配</option>
+											<option value="4">专家撰写</option>
+											<option value="5">待确认</option>
+											<option value="6">待修改</option>
+											<option value="7">定稿</option>
+											<option value="8">撰写完成</option>
+											<option value="9">待交局</option>
+											<option value="10">已交局</option>
 									</select>
 						    	</td>
 					    	<td>
