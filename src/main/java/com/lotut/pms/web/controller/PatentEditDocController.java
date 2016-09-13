@@ -686,7 +686,7 @@ public class PatentEditDocController {
 	@RequestMapping(path="/uploadPatentStandardFile",method=RequestMethod.POST)
 	public void uploadPatentFile(HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
 		int userId = PrincipalUtils.getCurrentUserId();
-		String savePath=Settings.PATENT_DOC_SATNDARD_FILE;
+		String savePath=Settings.PATENT_DOC_STANDARD_FILE;
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		MultipartFile multipartFile = multipartRequest.getFile("file");
 		String fileName = multipartFile.getOriginalFilename();
@@ -727,6 +727,21 @@ public class PatentEditDocController {
 		String relativeUrl = patentDocService.getPatentDocUrlById(patentDocId);
 		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
 		String filePath = Settings.PATENTDOC_FILE_PATH + relativeUrl;
+		File patentDocFile = new File(filePath);
+		if(WebUtils.isFireFox(request)){
+			downloadFileName =new String(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
+		}
+		response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
+		response.setContentLength((int)patentDocFile.length());
+		WebUtils.writeStreamToResponse(response, new FileInputStream(patentDocFile));
+	}
+	
+	@RequestMapping(path="/downloadPatentStandardFile", method=RequestMethod.GET)
+	public void downloadPatentStandardFile(@RequestParam("patentDocId")long patentDocId, HttpServletResponse response,HttpServletRequest request) throws IOException {
+		response.setContentType("application/ostet-stream");
+		String relativeUrl = patentDocService.getPatentDocAttachmentFile(patentDocId);
+		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
+		String filePath = Settings.PATENT_DOC_STANDARD_FILE + relativeUrl;
 		File patentDocFile = new File(filePath);
 		if(WebUtils.isFireFox(request)){
 			downloadFileName =new String(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");

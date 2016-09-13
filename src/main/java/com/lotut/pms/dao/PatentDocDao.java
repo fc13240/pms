@@ -74,4 +74,6 @@ public interface PatentDocDao {
 	void savePatentStandardFile(PatentDoc patentDoc);
 	
 	void saveInternalCode(PatentDoc patentDoc);
+	
+	String getPatentDocAttachmentUrlById(Long patentDocId);
 }

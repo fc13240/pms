@@ -76,4 +76,6 @@ public interface PatentDocMapper {
 	void savePatentStandardFile(PatentDoc patentDoc);
 	
 	void saveInternalCode(PatentDoc patentDoc);
+	
+	String getPatentDocAttachmentUrlById(Long patentDocId);
 }

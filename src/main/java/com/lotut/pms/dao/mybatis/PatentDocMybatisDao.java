@@ -261,4 +261,11 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	public void saveInternalCode(PatentDoc patentDoc) {
 		patentDocMapper.saveInternalCode(patentDoc);
 	}
+
+
+
+	@Override
+	public String getPatentDocAttachmentUrlById(Long patentDocId) {
+		return patentDocMapper.getPatentDocAttachmentFile(patentDocId);
+	}
 }

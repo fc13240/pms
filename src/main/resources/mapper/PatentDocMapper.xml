@@ -299,9 +299,7 @@
 	<update id="saveInternalCode" parameterType="PatentDoc">
 		update patent_documents set internal_code=#{internalCode} where patent_doc_id=#{patentDocId}
 	</update>
-	<!-- <delete id="delUserPaTENT">
-	
-	
-	
-	</delete> -->
+	<select id="getPatentDocAttachmentUrlById" parameterType="long" resultType="string">
+		select attachment_url from patent_documents where patent_doc_id=#{patentDocId}
+	</select>
 </mapper>
