@@ -56,15 +56,15 @@
 								<span class="lbl"></span></label>
 								</td> --%>
 								<td class="center" style="text-align:center">${status.count}</td>
-								<td style="text-align:center">
-									标题为<${patentDocName}>的文档由
-									${patentDocWorkflowHistory.owner.username}在
+								<td >
 									<fmt:formatDate value="${patentDocWorkflowHistory.actionTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<span style="color:red">${patentDocWorkflowHistory.owner.username}</span>
 									${patentDocWorkflowHistory.patentDocAction.actionTypeDesc}
 									<c:if test="${empty patentDocWorkflowHistory.shareUsersAsString}">
 									</c:if>
 									<c:if test="${not empty patentDocWorkflowHistory.shareUsersAsString}">
-										:${patentDocWorkflowHistory.shareUsersAsString}
+										:<span style="color:red">${patentDocWorkflowHistory.shareUsersAsString}</span>
 									</c:if>
 								</td>
 								<%-- <td style="text-align:center"><c:out value="${patentDocWorkflowHistory.owner.username}"/></td>
