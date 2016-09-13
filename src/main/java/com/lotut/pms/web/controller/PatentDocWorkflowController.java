@@ -368,7 +368,9 @@ public class PatentDocWorkflowController {
 	public String updatePatentDocProxyStatus(@RequestParam("patentDocId") Long patentdocId,@RequestParam("status")int status) {
 		List<Long> patentDocIdList=new ArrayList<>();
 		patentDocIdList.add(patentdocId);
+		int action=15;
 		patentDocWorkflowService.updatePatentDocProxyStatus(patentDocIdList, status);
+		patentDocWorkflowHistoryService.insertHistory(patentdocId.intValue(), action);
 		return "redirect:/editor/patentDocList.html";
 	}
 	

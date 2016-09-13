@@ -712,6 +712,9 @@ public class PatentEditDocController {
 		final int PATENT_DOC_STAUTS_PAID = 10;
 		patentDocWorkflowService.updatePatentDocStatus(patentDocIds,PATENT_DOC_STAUTS_PAID);
 		writer.write(1);
+		int action=10;
+		patentDocWorkflowHistoryService.insertHistory((int) (patentDoc.getPatentDocId()), action);
+		
 	}
 	
 	
