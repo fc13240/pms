@@ -143,8 +143,12 @@
 							  <th class="center" width="20px">序号</th>
 							  <th width="50px">专利类型</th>
 							  <th width="140px">专利名称</th>
+							  <c:if test="${patentDoc.patentDocUrl != null}">
 							  <th width="60px">定稿文件</th>
+							  </c:if>
+							  <c:if test="${patentDoc.attachmentUrl!=null}">
 							  <th width="90px">交局文件</th>
+							  </c:if>
 							  <th width="90px">代理状态</th>
 							  <th width="90px">案件状态</th>
 							  <th width="90px">共享人</th>
@@ -198,7 +202,7 @@
 								</td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocProxyStatus.statusDescription}"/></td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
-								<td style="text-align:center"></td>
+								<td style="text-align:center"><a href="#" onclick="javascript:showShareUsers(${patentDoc.patentDocId})">查看</a></td>
 								<td style="text-align:center">
 								
 									 <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')"> 
@@ -253,12 +257,6 @@
 					                                                  删除
 					               		</a>
 				                     </c:if>
- 				                   <se:authorize access="hasRole('ROLE_TECH')">
-				                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
-				                    </se:authorize> 
-				                   <c:if test="${patentDoc.patentDocUrl != null}">
-				                    	<a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
-				                    </c:if>
 								</td>
 	
 							  </tr>
@@ -612,7 +610,19 @@ function denialofService(value){
 				location.reload();
 			}
 		});		
-	}	
+	}
+	
+	function showShareUsers(patentDocId) {
+		
+		
+		$.ajax({
+			url: "<s:url value='/editor/showShareUsers.html'/>?patentDocId=" + patentDocId, 
+			type: 'get', 
+			success: function() {
+				
+			}
+		});		
+	}
 </script>
 </body>
 </html>

@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -907,6 +908,17 @@ public class PatentEditDocController {
 		}
 	}
 	
+	@RequestMapping(path="/showShareUsers")
+	public String showShareUsers(long patentDocId,Model model){
+		List<User> shareUsers = patentDocService.searchShareUsers(patentDocId);
+		
+		String users = null;
+		if (shareUsers != null) {
+			users =  String.join(";", shareUsers.stream().map(User::getUsername).collect(Collectors.toList()));
+		}
+		model.addAttribute("users",users);
+		return "patent_doc_list";
+	}
 
 	
 
