@@ -171,11 +171,11 @@
 								<td style="text-align:center">${patentDoc.name}</td>
 								
 								<td style="text-align:center">
-										<se:authorize access="hasRole('ROLE_TECH')"> 
-										<c:if test="${patentDoc.patentDocStatus.patentDocStatusId=7}">
-					                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
-					       				</c:if>
-					                     </se:authorize>
+									<se:authorize access="hasRole('ROLE_TECH')">
+											<c:if test="${patentDoc.patentDocStatus.patentDocStatusId=7}">
+						                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
+						       				</c:if>
+					                   </se:authorize>
 					       
 				                   <c:if test="${patentDoc.patentDocUrl != null}">
 				                    	<a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
@@ -197,7 +197,7 @@
 								</td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocProxyStatus.statusDescription}"/></td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
-								<td style="text-align:center"><%-- <c:out value="${patentDoc.shareUsersAsString}"/> --%></td>
+								<td style="text-align:center"></td>
 								<td style="text-align:center">
 								
 									 <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')"> 
@@ -205,12 +205,12 @@
 										历史
 										</a>
 									 </se:authorize>
-									 <se:authorize access="hasAnyRole('ROLE_PLATFORM')">  
-									<a href="javascript:return void" onclick="denialofService(${patentDoc.patentDocId})" >
-										拒绝委托
-									</a>
+									 <se:authorize access="hasRole('ROLE_PLATFORM')">  
+										<a href="javascript:return void" onclick="denialofService(${patentDoc.patentDocId})" >
+											拒绝委托
+										</a>
 									</se:authorize>
-									  <se:authorize access="hasRole('ROLE_TECH')"> 
+									 <se:authorize access="hasRole('ROLE_TECH')">
 									 	<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 4 || patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 }">  
 										<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=5">
 										置为待确认
@@ -218,7 +218,7 @@
 										</c:if> 
 									  </se:authorize>
 									 	
-									  <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">  
+ 									  <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">  
 									 	 <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 }"> 
 											<a target="_blank" href="<s:url value='/patentDocWorkflow/updatePatentDocStatus.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&status=6">
 											置为待修改
@@ -250,10 +250,9 @@
 					                                                  删除
 					               		</a>
 				                     </c:if>
-				                   <%--  <a href="http://www.cponline.gov.cn/" target="_blank">提交申请</a> --%>
-				                   <se:authorize access="hasRole('ROLE_TECH')"> 
+				                   <se:authorize access="hasRole('ROLE_TECH')">
 				                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
-				                   </se:authorize>
+				                    </se:authorize> 
 				                   <c:if test="${patentDoc.patentDocUrl != null}">
 				                    	<a  href="<s:url value='/editor/downloadPatentFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
