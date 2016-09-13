@@ -55,7 +55,7 @@
 								<td class="center" style="text-align:center">${status.count}</td>
 								<td >
 									&nbsp;&nbsp;<fmt:formatDate value="${patentDocWorkflowHistory.actionTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
-									&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;
 									<span style="color:red">${patentDocWorkflowHistory.owner.username}</span>
 									${patentDocWorkflowHistory.patentDocAction.actionTypeDesc}
 									<c:if test="${empty patentDocWorkflowHistory.shareUsersAsString}">
