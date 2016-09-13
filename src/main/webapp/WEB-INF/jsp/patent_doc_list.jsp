@@ -172,7 +172,7 @@
 								
 								<td style="text-align:center">
 									<se:authorize access="hasRole('ROLE_TECH')">
-											<c:if test="${patentDoc.patentDocStatus.patentDocStatusId=7}">
+											<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 7 || patentDoc.patentDocStatus.patentDocStatusId == 8}">
 						                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
 						       				</c:if>
 					                   </se:authorize>
@@ -184,11 +184,11 @@
 								</td>
 								<td style="text-align:center">
 									 
-									<se:authorize access="hasRole('ROLE_PROCESS')"> 
-									<c:if test="${patentDoc.patentDocStatus.patentDocStatusId=9}">
+								<se:authorize access="hasRole('ROLE_PROCESS')">
+									<c:if test="${patentDoc.patentDocStatus.patentDocStatusId==9}">
 				                    	<a  href="<s:url value='/editor/showUploadPatentFileForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
 				                     </c:if> 
-				                     </se:authorize>
+				                  </se:authorize>
 				                    
 				                   <c:if test="${patentDoc.attachmentUrl!= null}">
 				                    	<a  href="<s:url value='/editor/downloadPatentStandardFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
@@ -228,14 +228,14 @@
 											</a>
 										 </c:if>  
 									  </se:authorize> 
-									<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_USER')">
+								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_USER')">
 									 <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 || patentDoc.patentDocStatus.patentDocStatusId == 2 || patentDoc.patentDocStatus.patentDocStatusId == 3 || patentDoc.patentDocStatus.patentDocStatusId == 4 ||patentDoc.patentDocStatus.patentDocStatusId == 5 || 
 									 	patentDoc.patentDocStatus.patentDocStatusId == 6 }"> 
 										<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 										编辑
 										</a>
 										</c:if>
-									  </se:authorize>  
+									  </se:authorize> 
 									   
 									<a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 									预览
@@ -250,7 +250,7 @@
 					                                                  删除
 					               		</a>
 				                     </c:if>
-				                   <se:authorize access="hasRole('ROLE_TECH')">
+ 				                   <se:authorize access="hasRole('ROLE_TECH')">
 				                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
 				                    </se:authorize> 
 				                   <c:if test="${patentDoc.patentDocUrl != null}">

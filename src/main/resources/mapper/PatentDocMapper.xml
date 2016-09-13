@@ -35,7 +35,6 @@
 		<result property="internalCode" column="internal_code"/>
 		<association property="patentDocStatus" resultMap="PatentDocStatusResultMap"/>
 		<association property="patentDocProxyStatus" resultMap="PatentDocProxyStatusResultMap"/>
-		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 	</resultMap>
 
 		<resultMap type="Attachment" id="PatentImgMap">
