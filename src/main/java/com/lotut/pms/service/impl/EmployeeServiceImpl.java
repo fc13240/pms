@@ -180,8 +180,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
 	@Override
-	public List<ProxyOrg> searchProxyOrgId(String keyword, int parentOrgId,String loginRole) {
-		return employeeDao.searchProxyOrgId(keyword, parentOrgId,loginRole);
+	public List<ProxyOrg> searchProxyOrgId(String keyword, Integer parentOrgId) {
+		return employeeDao.searchProxyOrgId(keyword, parentOrgId);
 	}
 
 }

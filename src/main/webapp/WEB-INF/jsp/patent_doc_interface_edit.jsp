@@ -126,7 +126,7 @@ margin: 1px 0 0 1px;}
 		               </div>
 		           </div>
 				<!--申请文件九部分标签切换 -->
-				<div class="tab" id="tabWrap"> 
+				<div class="tab" id="tabWrap">
 					<div style="display:block" class="tab1" value="0" name="tabs" onclick="tabChange(0);">
 						请求书
 					</div>
@@ -227,7 +227,15 @@ margin: 1px 0 0 1px;}
 						
 						<!--请求协议书div  -->
 						<div class="content" id="content0" thisid="2514">
-							
+							<div style="font-weight: bold;font-size:14px;margin-left:24px;margin-top:10px;">
+								内部编码 <span style="padding-left:30px;">${patentDoc.internalCode }</span>
+							</div>
+							<div style="font-weight: bold;font-size:14px;margin-left:24px;margin-top:10px;">
+								创建时间 <span style="padding-left:30px;"><fmt:formatDate value="${patentDoc.createTime }" pattern="yyyy年M月dd日"/></span>
+							</div>
+							<div style="font-weight: bold;font-size:14px;margin-left:24px;margin-top:10px;">
+								更新时间  <span style="padding-left:30px;"><fmt:formatDate value="${patentDoc.lastUpdateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+							</div> 
 							<div class="title">
 								专利名称:
 								<%-- <div style="margin-left: 33px;">

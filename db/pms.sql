@@ -911,3 +911,5 @@ VALUES
 	(2, '已支付'),
 	(3, '已委托'),
 	(4, '已取消');
+	
+ALTER TABLE patent_documents ADD COLUMN internal_code VARCHAR(100) COMMENT '内部编码';

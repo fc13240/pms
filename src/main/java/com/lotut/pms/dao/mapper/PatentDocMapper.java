@@ -74,4 +74,8 @@ public interface PatentDocMapper {
 	int getPatentDocCountByTechAndCustomer(@Param("page") Page page,@Param("statusList") List<Integer> statusList);
 	
 	void savePatentStandardFile(PatentDoc patentDoc);
+	
+	void saveInternalCode(PatentDoc patentDoc);
+	
+	String getPatentDocAttachmentUrlById(Long patentDocId);
 }

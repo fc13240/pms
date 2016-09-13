@@ -32,10 +32,7 @@ public class PatentDoc {
 	private long price;
 	private int feeStatus;
 	private List<User> shareUsers;
-	
-
-	
-	
+	private String internalCode;
 	public PatentDocProxyStatus getPatentDocProxyStatus() {
 		return patentDocProxyStatus;
 	}
@@ -169,6 +166,12 @@ public class PatentDoc {
 		return "";
 	}
 
+	public String getInternalCode() {
+		return internalCode;
+	}
+	public void setInternalCode(String internalCode) {
+		this.internalCode = internalCode;
+	}
 	public List<User> getShareUsers() {
 		return shareUsers;
 	}
