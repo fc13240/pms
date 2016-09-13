@@ -115,6 +115,7 @@ public class PatentDocWorkflowController {
 			int count=patentDocWorkflowService.getCountByWorkflowHistory(patentDocId, userId, action);
 			if(count>0){
 			patentDocWorkflowService.redistributePatentDoc(patentDocId, action, proxyOrgs.get(0));
+			patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, proxyOrgs, action);
 		}else{
 			for (int proxyOrg: proxyOrgs) {
 				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();

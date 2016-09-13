@@ -164,7 +164,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 	public void redistributePatentDoc(long patentDocId,int action,int userId) {
 		int ownerId=PrincipalUtils.getCurrentUserId();
 		int historyId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, ownerId, action);
-		int target=patentDocWorkflowDao.getTargetByHistoryId(historyId);
+		int target=patentDocWorkflowDao.getTargetByHistoryId(patentDocId,historyId);
 		patentDocWorkflowDao.redistributePatentDoc(userId, patentDocId, target);
 	}
 
