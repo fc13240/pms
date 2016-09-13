@@ -156,8 +156,8 @@ public class EmployeeMybatisDao extends SqlSessionDaoSupport implements Employee
 	}
 
 	@Override
-	public List<ProxyOrg> searchProxyOrgId(String keyword, int parentOrgId,String loginRole) {
-		return employeeMapper.searchProxyOrgId(keyword, parentOrgId,loginRole);
+	public List<ProxyOrg> searchProxyOrgId(String keyword, Integer parentOrgId) {
+		return employeeMapper.searchProxyOrgId(keyword, parentOrgId);
 	}
 
 

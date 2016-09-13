@@ -72,4 +72,6 @@ public interface PatentDocDao {
 	int getPatentDocCountByTechAndCustomer(Page page,List<Integer> statusList);
 	
 	void savePatentStandardFile(PatentDoc patentDoc);
+	
+	void saveInternalCode(PatentDoc patentDoc);
 }

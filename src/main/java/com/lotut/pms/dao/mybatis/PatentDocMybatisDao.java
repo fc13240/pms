@@ -254,4 +254,11 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	public void savePatentStandardFile(PatentDoc patentDoc) {
 		patentDocMapper.savePatentStandardFile(patentDoc);
 	}
+
+
+
+	@Override
+	public void saveInternalCode(PatentDoc patentDoc) {
+		patentDocMapper.saveInternalCode(patentDoc);
+	}
 }

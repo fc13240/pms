@@ -243,15 +243,27 @@ public class PatentDocWorkflowController {
 	
 	@RequestMapping(path="/searchProxyOrg", method=RequestMethod.GET)
 	public String searchProxyOrg(String keyword,Model model) {
-		int proxyOrgId = PrincipalUtils.getCurrentUserId();
-		String loginRole="";
-		if(PrincipalUtils.isPlatform()){
-			loginRole="platForm";
-		}else if(PrincipalUtils.isProxyOrg()){
-			loginRole="proxyOrg";
+		Integer parentOrgId=null;
+		if(PrincipalUtils.isPlatform()) {
+			parentOrgId=null;
 		}
-		List<ProxyOrg> proxyOrgs=employeeService.searchProxyOrgId(keyword,proxyOrgId,loginRole);
+		if(PrincipalUtils.isProxyOrg()){
+			parentOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
+		}
+		
+		List<ProxyOrg> proxyOrgs=employeeService.searchProxyOrgId(keyword, parentOrgId);
 		model.addAttribute("proxyOrgs", proxyOrgs);
+		
+		
+//		int proxyOrgId = PrincipalUtils.getCurrentUserId();
+//		String loginRole="";
+//		if(PrincipalUtils.isPlatform()){
+//			loginRole="platForm";
+//		}else if(PrincipalUtils.isProxyOrg()){
+//			loginRole="proxyOrg";
+//		}
+//		List<ProxyOrg> proxyOrgs=employeeService.searchProxyOrgId(keyword,proxyOrgId,loginRole);
+//		model.addAttribute("proxyOrgs", proxyOrgs);
 		return "patent_doc_select_proxy_org";
 	}
 	

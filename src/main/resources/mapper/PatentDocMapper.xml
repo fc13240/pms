@@ -32,6 +32,7 @@
 		<result property="otherInformation" column="other_information"/>
 		<result property="attachmentUrl" column="attachment_url"/>
 		<result property="price" column="price"/>
+		<result property="internalCode" column="internal_code"/>
 		<association property="patentDocStatus" resultMap="PatentDocStatusResultMap"/>
 		<association property="patentDocProxyStatus" resultMap="PatentDocProxyStatusResultMap"/>
 		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
@@ -81,7 +82,7 @@
 	
 	<select id="getUserPatentDocById"  resultMap="PatentDocMap">
 		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
-		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,contact_id,attachment_url,other_information from patent_documents where  patent_doc_id=#{patentDocId}
+		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,contact_id,attachment_url,other_information,create_time,last_update_time,internal_code from patent_documents where  patent_doc_id=#{patentDocId}
 	</select>
 	
 	<update id="updatePatentDoc" parameterType="PatentDoc">
@@ -309,7 +310,9 @@
 		</if>
 		ORDER BY create_time DESC ,last_update_time DESC limit #{page.startIndex}, #{page.pageSize}
 	</select>
-	
+	<update id="saveInternalCode" parameterType="PatentDoc">
+		update patent_documents set internal_code=#{internalCode} where patent_doc_id=#{patentDocId}
+	</update>
 	<!-- <delete id="delUserPaTENT">
 	
 	

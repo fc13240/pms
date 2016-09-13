@@ -15,6 +15,7 @@ import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSearchCondition;
 import com.lotut.pms.service.PatentDocService;
+import com.lotut.pms.web.util.InternalCoder;
 
 public class PatentDocServiceImp implements PatentDocService{
 		private PatentDocDao patentDocDao;
@@ -27,8 +28,14 @@ public class PatentDocServiceImp implements PatentDocService{
 		@Override
 		@Transactional
 		public void savePatentDoc(PatentDoc patentDoc) {
+			
 			patentDocDao.savePatentDoc(patentDoc);
+			
 			long patentDocId=patentDoc.getPatentDocId();
+			String internalCode=new InternalCoder().generateInternalCode(patentDocId);
+			patentDoc.setInternalCode(internalCode);
+			patentDocDao.saveInternalCode(patentDoc);
+			
 			List<Map<String, Integer>> userPatentList = new ArrayList<>();
 			HashMap<String, Integer> userPatentMap = new HashMap<>();
 			userPatentMap.put("userId", patentDoc.getUserId());
@@ -228,5 +235,4 @@ public class PatentDocServiceImp implements PatentDocService{
 		public void savePatentStandardFile(PatentDoc patentDoc) {
 			patentDocDao.savePatentStandardFile(patentDoc);
 		}
-
 }

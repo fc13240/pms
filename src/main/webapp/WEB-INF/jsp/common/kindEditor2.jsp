@@ -160,9 +160,12 @@
 		   allowImageUpload : false,
 		   allowPreviewEmoticons : false,
 			items : [
-				'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-				'insertunorderedlist'],
+					'undo', 'redo', '|' ,'justifyleft', 'justifycenter', 'justifyright',
+					'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+					'superscript', 'selectall', '|', 'fullscreen',
+					'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+					'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat'
+					],
 		   afterBlur: function(){this.sync();},
 		   syncType:"auto",
 		   afterCreate : function() {

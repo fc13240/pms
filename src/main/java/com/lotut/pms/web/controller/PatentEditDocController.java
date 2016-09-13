@@ -115,6 +115,7 @@ public class PatentEditDocController {
 		int action=PatentDocWorkflowAction.ActionType.get("保存或修改");
 		patentDocWorkflowHistoryService.insertHistory(id, action);
 		long patentDocId=patentDoc.getPatentDocId();
+		patentDoc=patentDocService.getUserPatentDocById(patentDocId);
 		List<CommonInventor> inventors = petitionService.getUserCommonInventors(userId);
 		List<CommonAppPerson> appPersons = petitionService.getUserCommonAppPersons(userId);
 		List<ContactAddress>  contactAddresses = userService.getUserContactAddresses(userId);
