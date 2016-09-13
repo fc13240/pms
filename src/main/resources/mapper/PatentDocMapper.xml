@@ -301,4 +301,9 @@
 	<select id="getPatentDocAttachmentUrlById" parameterType="long" resultType="string">
 		select attachment_url from patent_documents where patent_doc_id=#{patentDocId}
 	</select>
+	
+	<select id="searchShareUsers" parameterType="long" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap">
+		SELECT user_id,username FROM users WHERE user_id IN (SELECT user_id FROM user_patent_docs WHERE patent_doc = #{patentDocId})
+	</select>
+	
 </mapper>

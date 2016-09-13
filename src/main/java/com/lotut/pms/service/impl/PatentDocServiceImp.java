@@ -14,6 +14,7 @@ import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSearchCondition;
+import com.lotut.pms.domain.User;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.web.util.InternalCoder;
 
@@ -240,5 +241,11 @@ public class PatentDocServiceImp implements PatentDocService{
 		@Override
 		public String getPatentDocAttachmentUrlById(Long patentDocId) {
 			return patentDocDao.getPatentDocAttachmentUrlById(patentDocId);
+		}
+
+
+		@Override
+		public List<User> searchShareUsers(long patentDocId) {
+			return patentDocDao.searchShareUsers(patentDocId);
 		}
 }

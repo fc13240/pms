@@ -18,7 +18,13 @@ public interface PatentDocWorkflowService {
 	
 	int updatePatentDocProxyStatus(List<Long> patentDocIds, int status);
 	
-	void redistributePatentDoc(long patentDocId,int action,int userId);
-	
 	int getCountByWorkflowHistory(long patentDocId,int userId,int action);
+	
+	void redistributeProxyOrgPatentDoc(int ownerId,long patentDocId,int action);
+	
+	void redistributeCustomerSupportPatentDoc(int ownerId,long patentDocId,int action);
+	
+	void redistributeTechPersonPatentDoc(int ownerId,long patentDocId,int action);
+	
+	void redistributeProcessPersonPatentDoc(int ownerId,long patentDocId,int action);
 }
