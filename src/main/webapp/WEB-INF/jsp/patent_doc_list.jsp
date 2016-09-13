@@ -197,24 +197,9 @@
 								</td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocProxyStatus.statusDescription}"/></td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
-								<td style="text-align:center"><c:out value="${patentDoc.shareUsersAsString}"/></td>
+								<td style="text-align:center"><%-- <c:out value="${patentDoc.shareUsersAsString}"/> --%></td>
 								<td style="text-align:center">
 								
-										
-<%-- 										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeProxyOrgs.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>">
-										重新分配
-										</a>
-										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeCustomerSupports.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>">
-										重新分配
-										</a>
-										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeTechPersons.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>">
-										重新分配
-										</a>
-										<a target="_blank" href="<s:url value='/patentDocWorkflow/showRedistributeProcessPersons.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>">
-										重新分配
-										</a> --%>
-										
-										
 									 <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')"> 
 										<a target="_blank" href="<s:url value='/patentDocWorkflowHistory/getHistory.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentDocName=<c:out value='${patentDoc.name}'/>">
 										历史
