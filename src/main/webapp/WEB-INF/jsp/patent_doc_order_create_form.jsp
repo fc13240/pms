@@ -63,7 +63,7 @@
 							  <tbody>
 								<c:forEach items="${PatentDocs}" var="patentDoc" varStatus="status">
 								  <tr>
-									<td class="center">${status.count}</td>
+									<td class="center" style="text-align:center">${status.count}</td>
 									<c:if test="${patentDoc.patentType==1}">
 										<td style="text-align:center"><c:out value="发明专利"/></td>
 									</c:if>
@@ -73,9 +73,9 @@
 									<c:if test="${patentDoc.patentType==3}">
 										<td style="text-align:center"><c:out value="外观设计"/></td>
 									</c:if>
-									<td>${patentDoc.name}</td>
-									<td>委托代写费</td>
-									<td>${patentDoc.price} </td>
+									<td style="text-align:center">${patentDoc.name}</td>
+									<td style="text-align:center">委托代写费</td>
+									<td style="text-align:center">${patentDoc.price} </td>
 									<c:if test="${patentDoc.feeStatus==0}">
 										<td style="text-align:center"><c:out value="未缴费"/></td>
 									</c:if>
