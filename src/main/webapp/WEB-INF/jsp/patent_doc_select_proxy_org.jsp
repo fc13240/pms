@@ -60,6 +60,7 @@
 							  <tr class="simple_bag">
 								<th >序号</th>
 								<th >机构用户名</th>
+								<th >机构名称</th>
 								<th >操作</th>
 								<th >备注名</th>
 							  </tr>
