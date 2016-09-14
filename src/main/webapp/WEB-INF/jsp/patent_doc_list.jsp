@@ -201,7 +201,9 @@
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocProxyStatus.statusDescription}"/></td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center" id="tdUsers${patentDoc.patentDocId}" >
-									<a href="javascript:void(0);" onmouseover="loadPatentSharePerson(${patentDoc.patentDocId})" onmouseout="hiddenPatentSharePerson(${patentDoc.patentDocId})">查看</a>
+									<a href="javascript:void(0);" class="loadUsers" onclick="loadPatentSharePerson(${patentDoc.patentDocId})">查看</a>
+									<a href="javascript:void(0);" class="hideUsers" style="display:none;" onclick="hiddenPatentSharePerson(${patentDoc.patentDocId})">收起</a>
+									
 									<span class="spanUsers" style="display:none;"></span>
 								</td>
 								<td style="text-align:center">
@@ -617,6 +619,9 @@ function denialofService(value){
 			success: function(data) {
 				$("#tdUsers" + patentDocId + " .spanUsers").css("display","block");
 				$("#tdUsers" + patentDocId + " .spanUsers").html(data);
+				$("#tdUsers" + patentDocId + " .loadUsers").css("display","none");
+				$("#tdUsers" + patentDocId + " .hideUsers").css("display","block");
+				
 			}
 		});
 	}
@@ -624,6 +629,9 @@ function denialofService(value){
 	function hiddenPatentSharePerson(patentDocId){
 		$("#tdUsers" + patentDocId + " .spanUsers").empty();
 		$("#tdUsers" + patentDocId + " .spanUsers").css("display","none");
+		$("#tdUsers" + patentDocId + " .hideUsers").css("display","none");
+		$("#tdUsers" + patentDocId + " .loadUsers").css("display","block");
+		
 	}
 </script>
 </body>
