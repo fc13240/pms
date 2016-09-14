@@ -198,7 +198,10 @@
 								</td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocProxyStatus.statusDescription}"/></td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
-								<td style="text-align:center"><a href="#" onclick="javascript:showShareUsers(${patentDoc.patentDocId})">查看</a></td>
+								<td style="text-align:center" id="tdUsers${patentDoc.patentDocId}" >
+									<a href="javascript:void(0);" onmouseover="loadPatentSharePerson(${patentDoc.patentDocId})" onmouseout="hiddenPatentSharePerson(${patentDoc.patentDocId})">查看</a>
+									<span class="spanUsers" style="display:none;"></span>
+								</td>
 								<td style="text-align:center">
 								
 									 <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')"> 
@@ -608,16 +611,21 @@ function denialofService(value){
 		});		
 	}
 	
-	function showShareUsers(patentDocId) {
-		
-		
+	function loadPatentSharePerson(patentDocId){
 		$.ajax({
-			url: "<s:url value='/editor/showShareUsers.html'/>?patentDocId=" + patentDocId, 
-			type: 'get', 
-			success: function() {
-				
+			url: "<s:url value='/editor/searchShareUsers.html'/>?patentDocId="+patentDocId, 
+			type: 'get',
+			dataType: 'json',
+			success: function(data) {
+				$("#tdUsers" + patentDocId + " .spanUsers").css("display","block");
+				$("#tdUsers" + patentDocId + " .spanUsers").html(data);
 			}
-		});		
+		});
+	}
+	
+	function hiddenPatentSharePerson(patentDocId){
+		$("#tdUsers" + patentDocId + " .spanUsers").empty();
+		$("#tdUsers" + patentDocId + " .spanUsers").css("display","none");
 	}
 </script>
 </body>
