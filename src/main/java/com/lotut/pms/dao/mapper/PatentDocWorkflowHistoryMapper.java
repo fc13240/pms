@@ -10,7 +10,7 @@ import com.lotut.pms.domain.PatentDocWorkflowHistory;
 
 public interface PatentDocWorkflowHistoryMapper {
 	
-	long insertHistories(List<Map<String,Integer>> patentDocWorkflowHistoryRecords);
+	void insertHistories(List<Map<String,Integer>> patentDocWorkflowHistoryRecords);
 	
 	List<PatentDocWorkflowHistory> getPatentDocWorkflowHistoryByUserAndAction(@Param("userId") int userId,@Param("action") int action);
 	
