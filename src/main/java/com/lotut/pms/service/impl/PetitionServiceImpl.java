@@ -2,6 +2,7 @@ package com.lotut.pms.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -176,5 +177,17 @@ public class PetitionServiceImpl implements PetitionService {
 	@Override
 	public List<CommonInventor> searchInventor(String keyword, int userId) {
 		return petitionDao.searchInventor(keyword, userId);
+	}
+
+	@Override
+	public Map<Integer, Integer> getPatentDocAppPersonCountById(Long patentDocId) {
+		Map<Integer, Integer> map=petitionDao.getPatentDocAppPersonCountById(patentDocId);
+		
+		return null;
+	}
+
+	@Override
+	public int getCountByFeeReduceStatus(Long patentDocId, String feeReduceStatus) {
+		return 0;
 	}
 }
