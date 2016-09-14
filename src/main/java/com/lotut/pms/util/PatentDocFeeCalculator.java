@@ -129,4 +129,5 @@ class PatentDocFeeCalculatorFactory {
 		
 		return new InterfacePatentDocFeeCalcultor(doc);
 	}
+
 }
