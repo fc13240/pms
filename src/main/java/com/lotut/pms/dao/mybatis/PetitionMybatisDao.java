@@ -1,6 +1,7 @@
 package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -137,6 +138,16 @@ public class PetitionMybatisDao extends SqlSessionDaoSupport implements Petition
 	@Override
 	public List<CommonInventor> searchInventor(String keyword, int userId) {
 		return petitionMapper.searchInventor(keyword, userId);
+	}
+
+	@Override
+	public Map<Integer, Integer> getPatentDocAppPersonCountById(Long patentDocId) {
+		return petitionMapper.getPatentDocAppPersonCountById(patentDocId);
+	}
+
+	@Override
+	public int getCountByFeeReduceStatus(Long patentDocId, String feeReduceStatus) {
+		return petitionMapper.getCountByFeeReduceStatus(patentDocId, feeReduceStatus);
 	}
 	
 	

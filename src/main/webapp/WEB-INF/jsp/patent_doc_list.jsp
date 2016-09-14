@@ -168,8 +168,10 @@
 								<c:if test="${patentDoc.patentType==3}">
 									<td style="text-align:center"><c:out value="外观设计"/></td>
 								</c:if>
-								<td style="text-align:center">${patentDoc.name}</td>
-								
+								<td style="text-align:center"><a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
+								${patentDoc.name}
+								</a>
+								</td>
 								<td style="text-align:center">
 									<se:authorize access="hasRole('ROLE_TECH')">
 											<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 7 || patentDoc.patentDocStatus.patentDocStatusId == 8}">
@@ -198,7 +200,12 @@
 								</td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocProxyStatus.statusDescription}"/></td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
-								<td style="text-align:center"><a href="#" onclick="javascript:showShareUsers(${patentDoc.patentDocId})">查看</a></td>
+								<td style="text-align:center" id="tdUsers${patentDoc.patentDocId}" >
+									<a href="javascript:void(0);" class="loadUsers" onclick="loadPatentSharePerson(${patentDoc.patentDocId})">查看</a>
+									<a href="javascript:void(0);" class="hideUsers" style="display:none;" onclick="hiddenPatentSharePerson(${patentDoc.patentDocId})">收起</a>
+									
+									<span class="spanUsers" style="display:none;"></span>
+								</td>
 								<td style="text-align:center">
 								
 									 <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')"> 
@@ -231,18 +238,14 @@
 											</a>
 										 </c:if>  
 									  </se:authorize> 
-								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_USER')">
-									 <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 || patentDoc.patentDocStatus.patentDocStatusId == 2 || patentDoc.patentDocStatus.patentDocStatusId == 3 || patentDoc.patentDocStatus.patentDocStatusId == 4 ||patentDoc.patentDocStatus.patentDocStatusId == 5 || 
+									<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_USER')">
+									<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 || patentDoc.patentDocStatus.patentDocStatusId == 2 || patentDoc.patentDocStatus.patentDocStatusId == 3 || patentDoc.patentDocStatus.patentDocStatusId == 4 ||patentDoc.patentDocStatus.patentDocStatusId == 5 || 
 									 	patentDoc.patentDocStatus.patentDocStatusId == 6 }"> 
 										<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
 										编辑
 										</a>
-										</c:if>
-									  </se:authorize> 
-									   
-									<a target="_blank" href="<s:url value='/editor/previewPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
-									预览
-									</a>
+									</c:if>
+									</se:authorize> 
 									<a target="_blank" href="<s:url value='/editor/showFriends.html'/>?patentDocIds=<c:out value='${patentDoc.patentDocId}'/>">
 									分享
 									</a>
@@ -608,16 +611,27 @@ function denialofService(value){
 		});		
 	}
 	
-	function showShareUsers(patentDocId) {
-		
-		
+	function loadPatentSharePerson(patentDocId){
 		$.ajax({
-			url: "<s:url value='/editor/showShareUsers.html'/>?patentDocId=" + patentDocId, 
-			type: 'get', 
-			success: function() {
+			url: "<s:url value='/editor/searchShareUsers.html'/>?patentDocId="+patentDocId, 
+			type: 'get',
+			dataType: 'json',
+			success: function(data) {
+				$("#tdUsers" + patentDocId + " .spanUsers").css("display","block");
+				$("#tdUsers" + patentDocId + " .spanUsers").html(data);
+				$("#tdUsers" + patentDocId + " .loadUsers").css("display","none");
+				$("#tdUsers" + patentDocId + " .hideUsers").css("display","block");
 				
 			}
-		});		
+		});
+	}
+	
+	function hiddenPatentSharePerson(patentDocId){
+		$("#tdUsers" + patentDocId + " .spanUsers").empty();
+		$("#tdUsers" + patentDocId + " .spanUsers").css("display","none");
+		$("#tdUsers" + patentDocId + " .hideUsers").css("display","none");
+		$("#tdUsers" + patentDocId + " .loadUsers").css("display","block");
+		
 	}
 </script>
 </body>

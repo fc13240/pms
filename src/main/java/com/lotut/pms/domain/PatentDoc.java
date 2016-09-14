@@ -33,6 +33,7 @@ public class PatentDoc {
 	private int feeStatus;
 	private List<User> shareUsers;
 	private String internalCode;
+	private int appersonCount;
 	public PatentDocProxyStatus getPatentDocProxyStatus() {
 		return patentDocProxyStatus;
 	}
@@ -178,6 +179,12 @@ public class PatentDoc {
 
 	public void setShareUsers(List<User> shareUsers) {
 		this.shareUsers = shareUsers;
+	}
+	public int getappersonCount() {
+		return appersonCount;
+	}
+	public void setAppersonCount(int appersonCount) {
+		this.appersonCount = appersonCount;
 	}
 	
 	

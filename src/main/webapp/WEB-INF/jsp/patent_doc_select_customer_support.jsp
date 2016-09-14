@@ -68,7 +68,6 @@
 							<tbody>
 							  <c:forEach items="${customerSupports}" var="customerSupport" varStatus="status">
 								<tr>
-								  <td ><input name="friend" style="width:15px;" type="checkbox" class="check-item" friend="<c:out value='${customerSupport.userId}'/>"></td>
 								  <td>${status.count}</td>
 								  <td><c:out value="${customerSupport.user.username}"/></td>
 								  <td><c:out value="${customerSupport.user.name}"/></td>

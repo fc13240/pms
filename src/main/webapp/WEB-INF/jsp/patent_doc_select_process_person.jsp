@@ -68,7 +68,6 @@
 							<tbody>
 							  <c:forEach items="${processPersons}" var="processPerson" varStatus="status">
 								<tr>
-								  <td ><input name="friend" style="width:15px;" type="checkbox" class="check-item" friend="<c:out value='${processPerson.userId}'/>"></td>
 								  <td>${status.count}</td>
 								  <td><c:out value="${processPerson.user.username}"/></td>
 								  <td><c:out value="${processPerson.user.name}"/></td>
