@@ -29,7 +29,7 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;height:400px;">
-					  <h4>请选择要分享的代理机构 </h4>
+					  <h4>请选择要分配的代理机构 </h4>
 					  <div>
 						<form action="<s:url value='/patentDocWorkflow/searchProxyOrg.html'/>" method="get"  id="shareAddForm">
 						  <c:forEach items="${paramValues.patentDocIds}" var="patentDocId">
@@ -72,7 +72,7 @@
 								  <td>${status.count}</td>
 								  <td><c:out value="${proxyOrg.user.username}"/></td>
 								  <td><c:out value="${proxyOrg.user.name}"/></td>
-								  <td><a href="javascript:return void" onclick="sharePatentDocs('${proxyOrg.orgUserId}')">分享</a></td>
+								  <td><a href="javascript:return void" onclick="sharePatentDocs('${proxyOrg.orgUserId}')">分配</a></td>
 								  <td><c:out value="${proxyOrg.remarkName}"/></td>
 								</tr>
 							  </c:forEach>
