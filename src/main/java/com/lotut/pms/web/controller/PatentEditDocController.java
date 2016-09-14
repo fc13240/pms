@@ -908,16 +908,20 @@ public class PatentEditDocController {
 		}
 	}
 	
-	@RequestMapping(path="/showShareUsers")
-	public String showShareUsers(long patentDocId,Model model){
+	@RequestMapping(path="/searchShareUsers")
+	public void searchShareUsers(long patentDocId,Model model,HttpServletResponse response){
 		List<User> shareUsers = patentDocService.searchShareUsers(patentDocId);
-		
 		String users = null;
 		if (shareUsers != null) {
 			users =  String.join(";", shareUsers.stream().map(User::getUsername).collect(Collectors.toList()));
+		}else {
+			users = "";
 		}
-		model.addAttribute("users",users);
-		return "patent_doc_list";
+		try {
+			WebUtils.writeJsonStrToResponse(response, users);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	
