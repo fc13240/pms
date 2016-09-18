@@ -10,6 +10,7 @@ import com.lotut.pms.dao.mapper.PetitionMapper;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocAppPerson;
 import com.lotut.pms.domain.PatentDocInventor;
 
@@ -141,15 +142,9 @@ public class PetitionMybatisDao extends SqlSessionDaoSupport implements Petition
 	}
 
 	@Override
-	public Map<Integer, Integer> getPatentDocAppPersonCountById(Long patentDocId) {
-		return petitionMapper.getPatentDocAppPersonCountById(patentDocId);
+	public List<PatentDoc> getPatentDocWithAppPersonById(List<Long> patentDocIds) {
+		return petitionMapper.getPatentDocWithAppPersonById(patentDocIds);
 	}
 
-	@Override
-	public int getCountByFeeReduceStatus(Long patentDocId, String feeReduceStatus) {
-		return petitionMapper.getCountByFeeReduceStatus(patentDocId, feeReduceStatus);
-	}
 	
-	
-
 }

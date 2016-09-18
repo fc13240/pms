@@ -427,7 +427,7 @@ function batchEntrust() {
 		}
 	}		
 	var patentDocIds = uniquePatentNos.join(",");	
-	window.open("<s:url value='/patentDocWorkflow/createOrderForm.html'/>?patentDocIds=" + patentDocIds);
+	window.open("<s:url value='/patentDocWorkflow/showOrderCreateForm.html'/>?patentDocIds=" + patentDocIds);
 }
 
 

@@ -661,7 +661,7 @@ CREATE TABLE IF NOT EXISTS process_person (
 CREATE TABLE IF NOT EXISTS common_app_person (
   app_person_id BIGINT NOT NULL AUTO_INCREMENT,
   NAME VARCHAR(20) NOT NULL  COMMENT'申请人姓名',
-  id_number  NVARCHAR(20) NOT NULL  COMMENT '证件号码',
+  id_number  VARCHAR(20) NOT NULL  COMMENT '证件号码',
   postcode_address VARCHAR(50) NOT NULL  COMMENT '邮编及地址',
   other_information VARCHAR(50) DEFAULT NULL COMMENT '其他信息',
   user_id INT(11)  NOT NULL,
@@ -678,7 +678,7 @@ CREATE TABLE IF NOT EXISTS common_app_person (
 CREATE TABLE IF NOT EXISTS common_inventor (
   inventor_id BIGINT NOT NULL AUTO_INCREMENT,
   inventor_name VARCHAR(20) NOT NULL COMMENT'发明姓名',
-  inventor_id_number  NVARCHAR(20) DEFAULT NULL COMMENT '证件号码',
+  inventor_id_number  VARCHAR(20) DEFAULT NULL COMMENT '证件号码',
   inventor_nationality VARCHAR(20) DEFAULT NULL COMMENT '发明人国籍',
   inventor_mobile varchar(40) DEFAULT NULL COMMENT '电话号码',
   inventor_email VARCHAR(40) DEFAULT NULL COMMENT '邮箱' ,
@@ -913,3 +913,8 @@ VALUES
 	(4, '已取消');
 	
 ALTER TABLE patent_documents ADD COLUMN internal_code VARCHAR(100) COMMENT '内部编码';
+
+ALTER TABLE patent_doc_order_items ADD COLUMN apply_fee INT NOT NULL DEFAULT 0 COMMENT '申请费';
+ALTER TABLE patent_doc_order_items ADD COLUMN print_fee INT NOT NULL DEFAULT 0 COMMENT '打印费';
+ALTER TABLE patent_doc_order_items ADD COLUMN check_fee INT NOT NULL DEFAULT 0 COMMENT '审查费';
+ALTER TABLE patent_doc_order_items ADD COLUMN service_fee INT NOT NULL DEFAULT 0 COMMENT '服务费';

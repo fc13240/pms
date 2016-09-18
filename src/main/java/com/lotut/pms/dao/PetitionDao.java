@@ -1,11 +1,11 @@
 package com.lotut.pms.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocAppPerson;
 import com.lotut.pms.domain.PatentDocInventor;
 
@@ -57,7 +57,5 @@ public interface PetitionDao {
 	
 	List<CommonInventor> searchInventor(String keyword,int userId);
 	
-	Map<Integer,Integer > getPatentDocAppPersonCountById(Long patentDocId);
-	
-	int getCountByFeeReduceStatus(Long patentDocId,String feeReduceStatus);
+	List<PatentDoc> getPatentDocWithAppPersonById(List<Long> patentDocIds);
 }

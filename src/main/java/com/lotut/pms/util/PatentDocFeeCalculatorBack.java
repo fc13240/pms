@@ -1,8 +1,10 @@
 package com.lotut.pms.util;
 
+import javax.print.attribute.standard.MediaName;
+
 import com.lotut.pms.domain.PatentDoc;
 
-public abstract class PatentDocFeeCalculator {
+public abstract class PatentDocFeeCalculatorBack {
 	protected static double MULTIPLE_APP_PERSON_DISCOUNT_RATE = 0.3;
 	protected static double SINGLE_APP_PERSON_DISCOUNT_RATE = 0.15;
 	protected static double NO_DISCOUNT_RATE = 1.0;
@@ -48,7 +50,7 @@ public abstract class PatentDocFeeCalculator {
 	}
 }
 
-class InventPatentDocFeeCalcultor extends PatentDocFeeCalculator {
+class InventPatentDocFeeCalcultor extends PatentDocFeeCalculatorBack {
 	private static int APPLY_FEE = 900;
 	private static int SERVICE_FEE = 1500;
 	private static int PRINT_FEE = 50;
@@ -79,7 +81,7 @@ class InventPatentDocFeeCalcultor extends PatentDocFeeCalculator {
 	}
 }
 
-class PracticalPatentDocFeeCalcultor extends PatentDocFeeCalculator {
+class PracticalPatentDocFeeCalcultor extends PatentDocFeeCalculatorBack {
 	private static int APPLY_FEE = 500;
 	private static int SERVICE_FEE = 700;
 	
@@ -99,7 +101,7 @@ class PracticalPatentDocFeeCalcultor extends PatentDocFeeCalculator {
 	
 }
 
-class InterfacePatentDocFeeCalcultor extends PatentDocFeeCalculator {
+class InterfacePatentDocFeeCalcultor extends PatentDocFeeCalculatorBack {
 	private static int APPLY_FEE = 500;
 	private static int SERVICE_FEE = 300;
 	
@@ -120,7 +122,7 @@ class InterfacePatentDocFeeCalcultor extends PatentDocFeeCalculator {
 }
 
 class PatentDocFeeCalculatorFactory {
-	public PatentDocFeeCalculator getPatentDocFeeCalculator(PatentDoc doc) {
+	public PatentDocFeeCalculatorBack getPatentDocFeeCalculator(PatentDoc doc) {
 		if (doc.getPatentType() == 1) {
 			return new InventPatentDocFeeCalcultor(doc);
 		} else if (doc.getPatentType() == 2) {

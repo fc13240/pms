@@ -33,6 +33,35 @@
 			<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 	</resultMap>
 	
+	<resultMap type="PatentDoc" id="PatentDocMap">
+		<id property="patentDocId" column="patent_doc_id"/>
+		<result property="appNo" column="app_no"/>
+		<result property="userId" column="user_id"/>
+		<result property="patentType" column="patent_type"/>
+		<result property="createTime" column="create_time"/>
+		<result property="lastUpdateTime" column="last_update_time"/>
+		<result property="name" column="patent_name"/>
+		<result property="manual" column="manual"/>
+		<result property="rightClaim" column="right_claim"/>
+		<result property="abstractDescription" column="abstract_desc"/>
+		<result property="abstractImg" column="abstract_img"/>
+		<result property="patentDocAttachmentFile" column="patent_doc_attachment_file"/>
+		<result property="patentDocUrl" column="patent_doc_url"/>
+		<result property="otherInformation" column="other_information"/>
+		<result property="attachmentUrl" column="attachment_url"/>
+		<result property="internalCode" column="internal_code"/>
+		<collection property="commonAppPersons" resultMap="appPersonMap"/>
+		
+	</resultMap>
+	<resultMap type="CommonAppPerson" id="appPersonMap">
+  	<id property="appPersonId" column="app_person_id"/>
+		<result property="name" column="name"/>
+		<result property="idNumber" column="id_number"/>
+		<result property="postcodeAddress" column="postcode_address"/>
+		<result property="otherInfo" column="other_information"/>
+		<result property="feeReduceTransactionStatus" column="fee_reduce_transaction_status"/>
+		<result property="transactionYear" column="transaction_year"/>
+  </resultMap>
   	<select id="getUserCommonAppPersons" parameterType="int" resultMap="AppPersonWithShareUsers">
     	select un.* ,u.user_id  ,u.username from 	
   	(select p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
@@ -215,20 +244,22 @@
 		  	JOIN users u ON up.user = u.user_id
 	</select>
 		
-	<select id="getPatentDocAppPersonCountById" parameterType="long" resultType="PatentDoc">
-		select pp.patent_doc_id as patentDocId,pd.patent_type as patentType, as appersonCount from patent_doc_app_person pp join patent_documents pd 
+	<select id="getPatentDocWithAppPersonById" parameterType="list" resultMap="PatentDocMap">
+		select pp.patent_doc_id,pd.app_no,pd.patent_type,pd.patent_name,
+				pd.patent_type,name,pp.id_number,pp.postcode_address,pp.other_information,pp.fee_reduce_transaction_status,
+				pp.transaction_year from patent_doc_app_person pp right join patent_documents pd 
 				on pp.patent_doc_id = pd.patent_doc_id where pp.patent_doc_id in
-		<foreach collection="" item="" separator="">
-		
-		</foreach>
-		=#{patentDocId} 
-		group by pp.patent_doc_id
+				(
+				<foreach collection="list" item="patentDocId" separator=",">
+					#{patentDocId} 
+				</foreach>
+				)
 	</select>
-	
+<!-- 	
 	<select id="getCountByFeeReduceStatus"  parameterType="string" resultType="int">
 		select patent_doc_id as patentDocId ,count(*) as appersonCount from patent_doc_app_person where patent_doc_id=#{patentDocId}
 		and fee_reduce_transaction_status=#{feeReduceStatus} group by patent_doc_id;
-	</select>
+	</select> -->
 	
   </mapper>
   

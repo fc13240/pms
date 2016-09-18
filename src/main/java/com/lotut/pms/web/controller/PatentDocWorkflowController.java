@@ -28,6 +28,7 @@ import com.lotut.pms.service.EmployeeService;
 import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocWorkflowHistoryService;
 import com.lotut.pms.service.PatentDocWorkflowService;
+import com.lotut.pms.service.PetitionService;
 import com.lotut.pms.util.PrincipalUtils;
 
 
@@ -38,36 +39,32 @@ public class PatentDocWorkflowController {
 	private PatentDocService patentDocService;
 	private EmployeeService employeeService;
 	private PatentDocWorkflowHistoryService patentDocWorkflowHistoryService;
+	private PetitionService petitionService;
 	
 	
 	@Autowired
 	public PatentDocWorkflowController(PatentDocWorkflowService patentDocWorkflowService,
 			PatentDocService patentDocService, EmployeeService employeeService,
-			PatentDocWorkflowHistoryService patentDocWorkflowHistoryService) {
+			PatentDocWorkflowHistoryService patentDocWorkflowHistoryService,
+			PetitionService petitionService) {
 		this.patentDocWorkflowService = patentDocWorkflowService;
 		this.patentDocService = patentDocService;
 		this.employeeService = employeeService;
 		this.patentDocWorkflowHistoryService = patentDocWorkflowHistoryService;
+		this.petitionService = petitionService;
 	}
 
 	
-	@RequestMapping(path="/createOrderForm")
-	public String creatOrder(@RequestParam("patentDocIds")List<Long> patentDocIds,Model model){
-			List<PatentDoc> patentDocs = patentDocService.getPatentDocsByIds(patentDocIds);
-			List<PatentDoc> resultPatentDoc=new ArrayList<PatentDoc>();
-		 	Map<Integer,Integer> priceTab=new HashMap<Integer,Integer>();
-		 	priceTab.put(1, 100);
-		 	priceTab.put(2, 200);
-		 	priceTab.put(3, 300);
-			int totalAmount=0;
-			for(PatentDoc patentDoc:patentDocs){
-				 int patentType=patentDoc.getPatentType();
-				patentDoc.setPrice(priceTab.get(patentType));
-				totalAmount+=priceTab.get(patentType);
-				 resultPatentDoc.add(patentDoc);
+	@RequestMapping(path="/showOrderCreateForm")
+	public String showOrderCreateForm(@RequestParam("patentDocIds")List<Long> patentDocIds,Model model){
+			//List<PatentDoc> patentDocs = patentDocService.getPatentDocsByIds(patentDocIds);
+			List<PatentDoc> patentDocs = petitionService.getPatentDocWithAppPersonById(patentDocIds);
+			int totalAmount = 0;
+			for(PatentDoc doc:patentDocs){
+				totalAmount += doc.getTotalFee();
 			}
 	
-			model.addAttribute("PatentDocs", resultPatentDoc);
+			model.addAttribute("PatentDocs", patentDocs);
 			model.addAttribute("totalAmount", totalAmount);
 			return "patent_doc_order_create_form";
 }
@@ -78,8 +75,9 @@ public class PatentDocWorkflowController {
 		final int ALIPAY = 1;
 		User user = PrincipalUtils.getCurrentPrincipal();
 		order.setOwner(user);
-		List<PatentDoc> PatentDocs = patentDocService.getPatentDocsByIds(Arrays.asList(patentDocIds));
-		patentDocWorkflowService.createOrder(order, PatentDocs);
+		List<PatentDoc> patentDocs = petitionService.getPatentDocWithAppPersonById(Arrays.asList(patentDocIds));
+		//List<PatentDoc> PatentDocs = patentDocService.getPatentDocsByIds(Arrays.asList(patentDocIds));
+		patentDocWorkflowService.createOrder(order, patentDocs);
 		model.addAttribute("orderId", order.getId());
 		model.addAttribute("patentDocIds",patentDocIds);
 		if (order.getPaymentMethod().getPaymentMethodId() == ALIPAY) {
