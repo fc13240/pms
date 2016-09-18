@@ -162,3 +162,62 @@ border-color: inherit;
 }
 #simple-table tr td{text-align: left; }
 #simple-table tr th{text-align: center;font-size:12px; }
+
+
+
+.model1, .model2 {
+clear: both;
+width: 94%;
+margin: 10px auto 0;
+padding: 10px;
+background: #fff;
+border-radius: 5px;
+cursor: pointer;
+border: #e6e6e6 1px solid;
+overflow: auto;
+}
+.model1 .title {
+clear: both;
+font-size: 14px;
+color: #000;
+line-height: 26px;
+}
+.model1 .content {
+color: #868585;
+line-height: 24px;
+position: relative;
+padding-top: 8px;
+}
+.center_content {
+overflow-x: hidden;
+overflow-y: auto;
+clear: both;
+width: 100%;
+
+}
+.model1 .button {
+clear: both;
+position: absolute;
+left: 35%;
+top: 5%;
+width: 100px;
+background: #2594e9;
+color: #fff;
+text-align: center;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+line-height: 30px;
+letter-spacing: 2px;
+z-index: 999999;
+display: none;
+}
+.model1:hover
+{
+    border: #cce2f7 1px solid;
+    background: rgb(218,231,242);
+}
+.model1:hover .button
+{
+    display: block;
+}

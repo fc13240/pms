@@ -394,7 +394,7 @@
 			<input id="whichTip" type="hidden" name="name" value="2">
 			
 				<!--请求协议书div  -->
-			<div class="content" id="content0">
+			<div class="center_content" id="content0">
 				<div>
 					<span style="font-weight: bold;font-size:14px;">
 							内部编码 <span>${patentDoc.internalCode }</span>
@@ -549,7 +549,7 @@
 			</div>			
 				
 			<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
-			<div class="content" id="content1" style="display:none">
+			<div class="center_content" id="content1" style="display:none">
 				<div class="title">
 			
 				</div>
@@ -576,7 +576,7 @@
 				
 				
 				<!--上传附件div  -->
-				<div class="content" id="content6" thisid="2514" style="display: none;">
+				<div class="center_content" id="content6" thisid="2514" style="display: none;">
 					<div class="title">
 						上传附件
 					</div>
@@ -607,7 +607,7 @@
 				<input id="hidtooltip" type="hidden">
 									
 				<!-- 摘要 -->
-				<div class="content" id="content4" thisid="" style="display: none;">
+				<div class="center_content" id="content4" thisid="" style="display: none;">
 					
 					<div class="title">
 						摘要
@@ -634,7 +634,7 @@
 	
 	                    
 						<!-- 权利要求及要素表 -->
-						<div class="content" id="content3" style="display: none; overflow: hidden;">
+						<div class="center_content" id="content3" style="display: none; overflow: hidden;">
 							<div name="claims" style="float: left; width: 98%">
 								<div class="title">
 									权利要求书
@@ -668,7 +668,7 @@
 						<!-- content start-->
 						<input type="hidden" id="ft_hidSrc" value="">
 						<input type="hidden" id="ft_hidFid" value="">
-						<div class="content" id="content2" style="display: none;">
+						<div class="center_content" id="content2" style="display: none;">
 							
 							<div class="box" id="content5-1">
 								<div style="margin:10px" class="upimg1" onclick="addPic();">
@@ -682,7 +682,7 @@
 								</div>
 							</div>
 						<!-- content start-->
-						<div class="content" id="content5_build" style="display: none;">
+						<div class="center_content" id="content5_build" style="display: none;">
 							
 							<div style="height: 20px">
 							</div>

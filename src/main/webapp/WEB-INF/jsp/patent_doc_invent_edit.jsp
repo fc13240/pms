@@ -343,7 +343,7 @@
 					<a style="color:#ccc" href="javascript:upPage();" id="topUpPage">上一页</a>
 					&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="topDownPage">下一页</a>
 				</div>
-			<div class="model" style="overflow-x: hidden; overflow-y: auto;">
+			<div class="model" style="">
 				<div id="modelWrap" style="display: block;"></div>
 				<div id="hiddenmodel" style="display: none;"></div>
 			</div>
@@ -383,7 +383,7 @@
 			<input id="whichTip" type="hidden" name="name" value="2">
 			
 				<!--请求协议书div  -->
-			<div class="content" id="content0">
+			<div class="center_content" id="content0">
 				<div>
 					<span style="font-weight: bold;font-size:14px;">
 							内部编码 <span>${patentDoc.internalCode }</span>
@@ -544,7 +544,7 @@
 			</div>			
 				
 			<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
-			<div class="content" id="content1" style="display:none">
+			<div class="center_content" id="content1" style="display:none">
 				<div class="title">
 			
 				</div>
@@ -571,7 +571,7 @@
 				
 				
 				<!--上传附件div  -->
-				<div class="content" id="content6" thisid="2514" style="display: none;">
+				<div class="center_content" id="content6" thisid="2514" style="display: none;">
 					<div class="title">
 						上传附件
 					</div>
@@ -663,7 +663,7 @@
 						<!-- content start-->
 						<input type="hidden" id="ft_hidSrc" value="">
 						<input type="hidden" id="ft_hidFid" value="">
-						<div class="content" id="content2" style="display: none;">
+						<div class="center_content" id="content2" style="display: none;">
 							
 							<div class="box" id="content5-1">
 								<div style="margin:10px" class="upimg1" onclick="addPic();">
@@ -677,7 +677,7 @@
 								</div>
 							</div>
 						<!-- content start-->
-						<div class="content" id="content5_build" style="display: none;">
+						<div class="center_content" id="content5_build" style="display: none;">
 							
 							<div style="height: 20px">
 							</div>
@@ -720,7 +720,7 @@
 							}
 						</style>
 						<!-- content start-->
-						<div class="content" id="content5" style="display: none;">
+						<div class="center_content" id="content5" style="display: none;">
 							<div style="height: 80px">
 							</div>
 								<div class="upimg1" onclick="findAttachmentImg();" id="choseAbs" style="
