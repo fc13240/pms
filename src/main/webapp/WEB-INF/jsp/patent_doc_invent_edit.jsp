@@ -1916,7 +1916,7 @@ function updateImgName(value,linkSeqNo){
 	function preview_selfwrite(patentDocId,patentType){
 		var patentDocId=patentDocId;
 		var patentType=patentType;
-		var name=$("#patentName").val();
+		var name=$("#editorContent1").val();
 		var manual=$("#editorContent").val();
 		var abstractDescription=$("#editorContent7").val();
 		var rightClaim=$("#editorContent8").val();
