@@ -165,8 +165,8 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 		int historyId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, ownerId, action);
 		int target=patentDocWorkflowDao.getTargetByHistoryId(patentDocId,historyId);
 		patentDocWorkflowDao.deleteByWorkflowHistory(patentDocId, target);
-		int count=patentDocWorkflowDao.getCountByWorkflowHistory(patentDocId, target, action);
 		int proxyOrgAction=PatentDocWorkflowAction.ActionType.get("分配给客服人员");
+		int count=patentDocWorkflowDao.getCountByWorkflowHistory(patentDocId, target, proxyOrgAction);
 		int proxyOrgSupporsHistoryId=0;
 		int proxyOrgTarget=0;
 			if(count>0){
