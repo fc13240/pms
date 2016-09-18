@@ -369,7 +369,7 @@
 				</a>
 			</div>
 			<div class="top_right">
-				<div style="float:left" class="review" onclick="preview_selfwrite(${patentDoc.patentDocId},${patentDoc.patentType});">
+				<div style="float:left" class="review"  href="javascript:return void" onclick="preview_selfwrite(${patentDoc.patentDocId},${patentDoc.patentType});">
 				<i class="icon"></i>预览
 				</div>
 				<input type="hidden" id="patentType" value="1">
