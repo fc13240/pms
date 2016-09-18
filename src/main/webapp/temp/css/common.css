@@ -289,10 +289,10 @@ transform: translateX(-50%);
 background: url(../images/icon_index.png) 0px -25px no-repeat;
 }
 .apply-four li:nth-child(2) i {
-  background: url(../images/icon_index.png) 0px -25px no-repeat;
+  background: url(../images/icon_index.png) -235px -25px no-repeat;
 }
 .apply-four li:nth-child(3) i {
-  background: url(../images/icon_index.png) 0px -25px no-repeat;
+  background: url(../images/icon_index.png) -455px -25px no-repeat;
 }
 .apply-four li:nth-child(4) i {
   background: url(../images/icon_index.png) 0px -25px no-repeat;

@@ -7,23 +7,10 @@
 <!DOCTYPE html >
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
-	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<title>实用新型撰写</title>
-	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.min.css'/>">
-	<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap-theme.min.css'/>">
-	<c:import url="common/kindEditor.jsp"></c:import>
-	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
-	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
-    <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
-	
-	
-	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="<s:url value='/temp/css/common.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
-	<link rel="stylesheet" media="screen" href="<s:url value='/temp/css/jquery-ui.min.css'/>" />
-	<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
+	<link rel="stylesheet" href="<s:url value='/temp/css/editor.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
+<c:import url="common/kindEditor3.jsp"></c:import>
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -91,477 +78,55 @@
 			
 		</script> 
 </head>
-
-<body style="background-color: #FFF" id="dlstCircleArticle" onload="searGuide(this)" >
-<style>
-.model1:hover .button{display:block}
-
-.picL9 li{
-overflow: hidden;
-position: relative;
-float: left;
-display: inline;
-width: 199px;
-height: 170px;
-margin: 1px 0 0 1px;}
-</style>	
-	
-		<div id="mincontent" style="min-height: 581px;overflow: auto;">
-	        
-	        
-	    <input id="hiduserid" type="hidden" value="UC1706F442C97E4C58977D24E340EBF66">
-	    <div class="body">
-	        <div class="left" style="height: 700px;">
-	        	<div class="left_top">
-		               <div class="cl" id="div_ipctype">
-		               <c:if test="${patentDoc.patentType==1 }">
-		                   	<div class="bt" style="margin-left:65px;">发明</div>
-		               </c:if>
-		               		<c:if test="${patentDoc.patentType==2 }">
-		               <div class="bt"  style="margin-left:65px;">实用新型</div>
-		               </c:if>
-		               <c:if test="${patentDoc.patentType==3 }">
-		               		<div class="bt" style="margin-left:65px;">外观</div>
-		               </c:if>
-		               </div>
-		           </div>
-				<!--申请文件九部分标签切换 -->
-				<div class="tab" id="tabWrap"> 
-
-					<div style="display:block;" class="tab1" value="0" name="tabs" onclick="tabChange(0);">
-						请求书</div>
-					<div class="tab1h" value="1" name="tabs" onclick="tabChange(1);">说明书</div>
-					<div class="tab1h" value="2" name="tabs" onclick="tabChange(2);">
-						说明书附图</div>
-					<div class="tab1h" value="3" name="tabs" onclick="tabChange(3,true,false);">
-						权利要求书</div>
-					<div class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
-						说明书摘要</div>
-					<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
-						摘要附图</div>
-					<div class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
-						上传附件</div>
-				</div>
-	
+<body>
+<div style="width:100%;min-width:1200px; margin:0 auto;"> 
+	<div class="editor-left">
+		<div class="left_top">
+	        <div class="cl" id="div_ipctype">
+	        <c:if test="${patentDoc.patentType==1 }">
+	            	<div class="bt" style="margin-left:65px;">发明</div>
+	        </c:if>
+	        		<c:if test="${patentDoc.patentType==2 }">
+	        <div class="bt"  style="margin-left:65px;">实用新型</div>
+	        </c:if>
+	        <c:if test="${patentDoc.patentType==3 }">
+	        		<div class="bt" style="margin-left:65px;">外观</div>
+	        </c:if>
 	        </div>
-	        <div class="right">
-	            <div class="center" style="overflow: hidden; height: 642px; width: 75%;">
-	                <!--center-top start -->
-	                <div class="center_top">
-	                    <div class="backedit">
-	                        <a href="javascript:return void" onclick="returnSavePatentDoc(${patentDoc.patentDocId});" >返回撰写列表</a>
-	                         <a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
-								<button class="button button-primary  button-rounded"  data-placement="bottom" >保存</button>
-							 </a>
-	                    </div>
-	                    <div class="top_right">
-	                        <div class="review" onclick="preview_selfwrite('${patentDoc.patentDocId}','${patentDoc.patentType}');">
-	                            <i class="icon"></i>预览
-	                        </div>
-	                        <input type="hidden" id="patentType" value="${patentDoc.patentType }"/>
-	                    </div>
-	                </div>
-	                <div id="overflowcenter" style="overflow-y: auto; overflow-x: hidden;height:610px; width: 1060px;">
-	                    <!-- center-top end-->
-	                    <!-- 撰写小贴士start-->
-	                    
-						<!--撰写小贴士 -->
-						<input id="whichTip" type="hidden" name="name" value="2">
-						<input id="tipIdHid" type="hidden" name="name" value="1223">
-						
-	                    
-						<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
-						<div class="content" id="content1" style="display: none;">
-							<div class="cl">
-								<div id="editor0" thistempid="1">
-									<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
-									<input type="hidden" value="" id="divtitletips">
-									<div class="textarea" name="tooltip">
-										    <div class="wraper">
-										        <form id="form" name="form" class="registerform" action="" onsubmit="return false;" method="post">
-										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.manual }</textarea>
-										                    </td>
-										            	</tr>
-										            </table>
-										        </form>
-										   </div>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<!--上传附件div  -->
-						<div class="content" id="content6" thisid="2514" style="display: none;">
-							<div class="title">
-								上传附件
-							</div>
-							
-							<div class="cl">
-								<div class="lt-box" style="height:300px;padding:20px;">
-
-									<form id="patentDocAttachment" action="<s:url value='/editor/uploadFile.html'/>"  method="post" enctype="multipart/form-data" class="form-horizontal">  
-									<input style="display:none;"  id="patentAttachmentFile" name="file" type="file" />
-									<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
-									<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
-									<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
-									<c:if test="${not empty patentDoc.patentDocAttachmentFile }">
-										<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="downloadAttachmentFile(${patentDoc.patentDocId})">下载附件</button>
-				                    </c:if>
-									</form> 
-									<div style="height:10px;">&nbsp;</div> 
-									<span style="color:#666;">友情提示：将所需的附件一次性打包成压缩文件格式上传(zip,rar等)，不建议上传其他格式的文件!
-									</span>
-								</div>
-							</div>
-						</div>
-						
-						<!--请求协议书div  -->
-						<div class="content" id="content0" thisid="2514" style="overflow-y: hidden;">
-							<div style="float:left;font-weight: bold;font-size:14px;margin-left:24px;margin-top:10px;">
-								内部编码 <span style="padding-left:10px;">${patentDoc.internalCode }</span>
-							</div>
-							<div style="float:left;font-weight: bold;font-size:14px;margin-left:24px;margin-top:10px;">
-								创建时间 <span style="padding-left:10px;"><fmt:formatDate value="${patentDoc.createTime }" pattern="yyyy年M月dd日"/></span>
-							</div>
-							<div style="float:left;font-weight: bold;font-size:14px;margin-left:24px;margin-top:10px;">
-								更新时间  <span style="padding-left:10px;"><fmt:formatDate value="${patentDoc.lastUpdateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></span>
-							</div>
-							<div class="title">
-								专利名称:
-								
-								<div id="editor1" thistempid="1">
- 									<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
-									<input type="hidden" value="" id="divtitletips"> 
-									<div class="textarea" name="tooltip">
-										    <div class="wraper">
-									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-									            	<tr>
-									                    <td>
-									                    	<textarea rows="3" cols="10" id="editorContent1" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
-									                    	${patentDoc.name }
-									                    	</textarea>
-									                    </td>
-									            	</tr>
-									            </table>
-										   </div>
-									</div>
-								</div>
-							</div>
-							<div class="cl">
-								<div>
-									<div>
-									
-									</div>
-									<div>
-										<br/>
-										<br/>
-										<!-- <h2 style="float:left;padding-top:5px;padding-right:5px;">申请人:</h2> -->
-										<span style="float:left;padding-top:5px;padding-right:5px;font-weight: bold;font-size:14px;margin-left:25px;">申请人</span>
-										<button style="width:120px" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
-											选择常用申请人
-										</button>
-										<button style="width:90px;margin-left:20px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addAppPersonModal">
-												新增申请人
-										</button>
-										<div style="margin-top:10px;" id="appersonDiv">
-											<table id="simple-table" style="width:850px;" class="table table-striped table-bordered table-hover">
-											  <thead>
-												<tr class="simple_bag">
-												  <!-- <th><input type="checkbox"/></th>
-												  <th>序号</th> -->
-												  <th>姓名或名称</th>
-												  <th>证件号码</th>
-												  <th>邮编地址</th>
-												  <th>费减备案状态</th>
-												  <th>操作</th>
-												</tr>
-											  </thead>
-											  <tbody id="appersonTab">
-											  		<c:if test="${not empty patentDocAppPersons }">
-											  			<c:forEach items="${patentDocAppPersons }" var="patentDocAppPerson">
-															<tr>
-																<td style="text-align:center">${patentDocAppPerson.name }</td>
-																<td style="text-align:center">${patentDocAppPerson.idNumber }</td>
-																<td style="text-align:center">${patentDocAppPerson.postcodeAddress }</td>
-																<td style="text-align:center">${patentDocAppPerson.feeReduceTransactionStatus }</td>
-																<%-- <td style="text-align:center">${patentDocAppPerson.transactionIdentity }</td>
-																<td style="text-align:center">${patentDocAppPerson.transactionYear }</td>
-																<td style="text-align:center">${patentDocAppPerson.otherInformation }</td> --%>
-																<td style="text-align:center"><a href="javascript:deletePatentDocApperson(${patentDocAppPerson.personId })">删除</a><a style='margin-left:20px;' href="javascript:updatePatentDocApperson(${patentDocAppPerson.personId })">修改</a></td>
-															</tr>
-											  			
-											  			</c:forEach>
-											  		</c:if>
-											  
-											  </tbody>
-											</table>
-										</div>
-									</div>
-									<div style="margin-top: 60px;">
-										<hr>
-										<br/>
-										<br/>
-										<!-- <h2 style="float:left;paddding-top:5px;padding-right:5px;">发明人:</h2> -->
-										<span style="float:left;padding-top:5px;padding-right:5px;font-weight: bold;font-size:14px;margin-left:25px;">发明人</span>
-										<button style="width:120px" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonInventorModal">
-											选择常用发明人
-										</button>
-										<button style="width:90px;margin-left:20px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addInventorModal">
-											新增发明人
-										</button>
-										<div style="margin-top:10px;" id="inventorDiv">
-											<table id="simple-table" style="width:850px;" class="table table-striped table-bordered table-hover">
-											  <thead>
-												<tr class="simple_bag">
-												  <!-- <th><input type="checkbox"/></th>
-												  <th>序号</th> -->
-												  <th>姓名</th>
-												  <th>证件号码</th>
-												  <th>国籍</th>
-												  <th>操作</th>
-												</tr>
-											  </thead>
-											  <tbody id="inventorTab">
-											  	  <c:if test="${not empty patentDocInventors }">
-											  	  		<c:forEach items="${patentDocInventors }" var="patentDocInventor">
-												  	  		<tr>
-																<td style='text-align:center'>${patentDocInventor.inventorName}</td>
-																<td style='text-align:center'>${patentDocInventor.inventorNumber}</td>
-																<td style='text-align:center'>${patentDocInventor.inventorNationality}</td>
-																<%-- <td style='text-align:center'>${patentDocInventor.inventorMobile}</td>
-																<td style='text-align:center'>${patentDocInventor.inventorEmail}</td>
-																<td style='text-align:center'>${patentDocInventor.inventorOtherInformation}</td> --%>
-																<td style='text-align:center'><a href='javascript:deletePatentDocInventor(${patentDocInventor.inventorId})'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocInventor(${patentDocInventor.inventorId})'>修改</a></td>
-															</tr>
-														</c:forEach>	
-											  	  </c:if>
-											  </tbody>
-											</table>
-										</div>
-									</div>
-									<div style="margin-top: 60px;">	
-										<hr>
-										<!-- <button type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">选择常用联系人</button> -->
-										<br/>
-										<br/>
-										<!-- <h2 style="float:left;padding-left:5px;padding-right:5px;">联系人:</h2> -->
-										<span style="float:left;padding-top:5px;padding-right:5px;font-weight: bold;font-size:14px;margin-left:25px;">联系人</span>
-											<button style="float:left;width:120px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">选择常用联系人</button>
-										
-										<%-- <div id="contactDiv">
-											<textarea rows="6" cols="50" id="contactPerson" class="t-input form-control" style="resize: none;width:750px;" placeholder="添加联系人地址"><c:if test="${not empty patentDoc.contactPerson }">
-													${patentDoc.contactPerson }</c:if></textarea>
-										</div> --%>
-										<br/>
-										<br/>
-										<div style="margin-top:10px;" id="contactDiv">
-											<table id="simple-table" style="width:850px;" class="table table-striped table-bordered table-hover">
-											  <thead>
-												<tr class="simple_bag">
-												 <th>联系人</th>
-												 <th>所在地区</th>
-												 <th>地址</th>
-												 <th>联系电话</th>
-												 <th>操作</th>
-												</tr>
-											  </thead>
-											  <tbody id="contactTab">
-										  		<c:if test="${not empty contactAddress }">
-											  	  		<tr>
-															<td style="text-align:center">${contactAddress.receiver}</td>
-														  	<td style="text-align:center">${contactAddress.provinceName} ${contactAddress.cityName} ${contactAddress.districtName}</td>
-														    <td style="text-align:center">${contactAddress.detailAddress}</td>
-														    <td style="text-align:center">${contactAddress.phone}</td>
-							 								<td style="text-align:center"><a href='javascript:updateContact(${contactAddress.id})'>修改</a></td>
-														</tr>
-										  	 	 </c:if>
-											  </tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-								
-								<div style="margin-top:60px;">
-									<!-- <h2 style="margin-top:20px;">其他信息</h2> -->
-									<span style="float:left;padding-top:5px;padding-right:5px;font-weight: bold;font-size:14px;margin-left:25px;margin-top:20px;">其他信息</span>
-									<br/>
-									<textarea id="otherInformation" style="width:700px;" class="t-input form-control" rows="10" cols="60" placeholder="请填写，若没有则可以不填写。">${patentDoc.otherInformation }</textarea>
-								</div>
-							</div>
-						</div>
-						<input id="hideditor3id" type="hidden" autocomplete="off">
-						<input id="hidtempid" type="hidden">
-						<input id="hidtooltip" type="hidden">
-											
-						<!-- 摘要 -->
-						<div class="content" id="content4" thisid="" style="display: none;overflow: hidden;">
-							
-							<div class="title">
-								摘要
-							</div>
-							<div class="cl">
-								<div id="editor7" thisid="" thistempid="" photo_fid="">
-									<div class="textarea" name="tooltip"> 
-										<div class="wraper">
-										        <form id="form7" name="form7" class="registerform" action="" onsubmit="return false;" method="post">
-										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent7" name="abstractDescription" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.abstractDescription }</textarea>
-										                    </td>
-										            	</tr>
-										            </table>
-										        </form>
-										   </div>
-									</div>
-								</div>
-							</div>
-							
-						</div>
-
-	
-	                    
-						<!-- 权利要求及要素表 -->
-						<div class="content" id="content3" style="display: none; overflow: hidden;">
-							<div name="claims" style="float: left; width: 98%">
-								<div class="title">
-									权利要求书
-								</div>
-								<div class="cl">
-									<div id="editor6" thistempid="" thisid="">
-										<div id="divclaim" style="clear:both;display:block;float:left;width:80%;"></div>
-										<input type="hidden" value="" id="divclaimtips">
-										<div class="textarea" name="tooltip">
-											<div class="wraper">
-										        <form id="form8" name="form8" class="registerform" action="" onsubmit="return false;" method="post">
-										            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
-										            	<tr>
-										                    <td style="width:520px;">
-										                    	<textarea rows="3" cols="10" id="editorContent8" name="rightClaim" class="editorContent"style="width:520px;height:200px;visibility:hidden;" >${patentDoc.rightClaim }</textarea>
-										                    </td>
-										            	</tr>
-										            </table>
-										        </form>
-										   </div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div name="claims_ele" class="power_right" style="float: right; margin-top: 10px; width: 98%; display: none;">
-							</div>
-						</div>
-	              
-						<!-- 附图及说明 -->
-	
-						<!-- content start-->
-						<input type="hidden" id="ft_hidSrc" value="">
-						<input type="hidden" id="ft_hidFid" value="">
-						<div class="content" id="content2" style="display: none;">
-							<div class="box" id="content5-1">
-								<div style="margin:10px" class="upimg1" onclick="addPic();">
-									新增附图</div>
-									<div style="margin:10px" class="upimg1" onclick='javascript:window.open("<s:url value='/editor/downloadPic.html'/>?patentDocId=${ patentDoc.patentDocId}")' >
-									下载附图</div>
-								<div class="picBox">
-									<ul class="picL9" id="picLsy2" >
-										
-									</ul>
-								</div>
-							</div>
-						<div class="content" id="content5_build" style="display: none;">
-							
-							<div style="height: 20px">
-							</div>
-							<div id="piclist" class="title1" onclick="piclistShow();loadImgs()" style="padding-left: 40px; color:#444; font-size:14px; font-weight:bold;
-								display: none; cursor: pointer">
-								返回附图列表
-							</div>
-							 
-							
-							<div class="img_edit" id="origin">
-								<div class="imgfl" id="picBianHao">
-								</div>
-								<div class="imgfr">
-								 <form id="patentUrlForm" name="patentUrlForm"  method="post" enctype="multipart/form-data" class="form-horizontal">
-								 	<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
-								 	<input id="patentDocAttachmentFile" type="hidden" name="patentDocAttachmentFile" value="${patentDoc.patentDocAttachmentFile}">
-									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
-									
-								</form>
-									<div id="zyupload" class="zyupload"></div>
-								 	
-								</div>
-							</div>
-						</div>
-	
-	                    
-						<!-- 摘要附图 -->							
-						</div>
-						<!-- content end-->
-						<!-- content start-->
-
-						<style type="text/css">
-							.borderRed
-							{
-								border: #d7e4ea 1px solid;
-								padding: 9px;
-								float: left;
-								width: 100px;
-								cursor: pointer;
-								margin: 4px 18px 0;
-							}
-						</style>
-						<!-- content start-->
-						<div class="content" id="content5" style="display: none;">
-							<div style="height: 80px">
-							</div>
-								<div class="upimg1" onclick="findAttachmentImg();" id="choseAbs" style="
-									left: 280px; margin-top: 0;float:left;">
-									从附图中选择</div>
-							<div class="picBox">
-								<ul class="picL" id="picLsy" >
-									
-								</ul>
-							</div>
-							<div>
-							<h3 style="margin-left: 30px;font-family:微软雅黑;margin-top: 50px;">摘要附图：</h3>
-							</div>
-							<div class="picBox" id="picLsy3">
-								<c:if test="${patentDoc.abstractImg != null}">
-										<img src='${base}${patentDoc.abstractImg}' alt='' width='400' height='300'/>
-								</c:if>
-							</div>
-						</div>
-						<!-- content end-->
-	
-						<div id="div_float_show" style="position: absolute; display: none; width: 1000px">
-					</div>
-	
-	                </div>
-	                <!-- content end-->
-	            </div>
-	            
-	
-	<input type="hidden" id="tempId" name="name" value="">
-	<div class="right1" style="height: 647px; width: 25%;">
-	    <div class="data_title">
-	        <i class="icon"></i>撰写指南和模板
-	        
-	    </div>
-	    <input type="hidden" id="hidmodelbutton" value="100060010000">
-	    <div id="modelbutton" class="modelbutton" onclick="modelbuttonclick();" style="position:fixed;top:230px;left:1294.5px;display:none;">
-	        +设为模板
-	    </div>
-	    <div class="right_right_bot" tab_name="content0" style="height: 600px; overflow-x: hidden; overflow-y: auto;">
+		</div>
+		<!--申请文件九部分标签切换 -->
+		<div class="tab" id="tabWrap"> 
+			<div style="display:block;" class="tab1" value="0" name="tabs" onclick="tabChange(0);">
+				请求书</div>
+			<div class="tab1h" value="1" name="tabs" onclick="tabChange(1);">说明书</div>
+			<div class="tab1h" value="2" name="tabs" onclick="tabChange(2);">
+				说明书附图</div>
+			<div class="tab1h" value="3" name="tabs" onclick="tabChange(3,true,false);">
+				权利要求书</div>
+			<div class="tab1h" value="4" name="tabs" onclick="tabChange(4);">
+				说明书摘要</div>
+			<div class="tab1h" value="5" name="tabs" onclick="tabChange(5);">
+				摘要附图</div>
+			<div class="tab1h" value="6" name="tabs" onclick="tabChange(6);">
+				上传附件</div>
+		</div>	
+	</div>
+<!-- right beg -->
+	<div class="editor-right">
+		
+		<div class="data_title">
+			<span>撰写指南和模板</span>
+			
+		</div>
+	    <div id="modelbutton" class="modelbutton" onclick="modelbuttonclick();" style="position: fixed; top: 230px; left: 1294.5px; display: none;">
+	        +设为模板</div>
+	    <div class="right_right_bot" tab_name="content0" style="overflow-x: hidden; overflow-y: auto;">
 	        <div class="data_menu">
 	            <div class="menud" id="modelS" onclick="searGuide(this)">
-	              	撰写指南
+	            	 撰写指南
 	            </div>	
 	            <div class="menud" id="modelS" onclick="searModel(this)">
-	               	模板库
+	               	 模板库
 	            </div>
 	        </div>
 			<!-- 指南 -->
@@ -783,8 +348,8 @@ margin: 1px 0 0 1px;}
 				</div>
 
 			</div>
-	        
-			<div class="model-list" style="display:none;">
+        <!-- 模板 -->
+			<div class="model-list" style="display: none;">
 		        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><span id="templateSectionId" style="display:none;">1</span><a style="color:#ccc" href="javascript:upPage();" id="topUpPage">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="topDownPage">下一页</a></div>
 		        <div class="model" style="overflow-x: hidden; overflow-y: hidden;">
 		            <div id="modelWrap" style="display: block;"></div>
@@ -797,87 +362,398 @@ margin: 1px 0 0 1px;}
 		        <div id="scBs" class="shousou" onclick="bigSmall(this);">
 		        </div>
 		        <input type="hidden" name="name" value="small" id="hidBorS">
-			</div>	        
+			</div>
 	    </div>
 	</div>
-	
-	        </div>
-	
-	    </div>
-	    <div id="hiddivselfhint"></div>
-	    <input id="hidselfhint" type="hidden" value="0">
-	    <input id="hidselfexample" type="hidden" value="0">
-	    <input id="hidfocusid" type="hidden" value="">
-	    <input id="hidtooptipbtn2tabvalue" value="" type="hidden">
-	    <div class="selfuc1">
-	        
-	<!-- 撰写帮助：帮助，引导操作，新手上路 -->
-	  
-	 <style>
-	*{margin:0px;padding:0px;list-style-type:none;}
-	.v_out{width:748px;margin:20px auto;overflow:hidden;}
-	.v_show{width:640px;overflow:hidden;position:relative;height:600px;float:left}
-	.v_cont{ width:6650px;position:absolute;left:0px;top:0px;}
-	.v_cont ul{float:left;text-align:center;line-height:50px;}
-	/*.v_cont ul li{width:665px;height:250px;float:left;margin-top:3px;}*/
-	
-	/*---圆圈---*/
-	.v_out_p{position:relative;overflow:visible}
-	.circle{position:absolute;left: 40px;top: 290px;}
-	.circle li{width:120px;height:60px;float:left;margin-right:10px;background:#ccc}
-	.circle .circle-cur{background:#f00}
-	
-	/*---切换---*/
-	 
-	.prev,.next{float:left;padding:85px 9px 0}
-	.prev a{ background:url(usercontrol/sprite.png);}
-	 
-	
-	.next a{background:url(usercontrol/sprite.png); background-position: right top; right: 0;}
-	 
-	.prev,.prev a,.next,.next a{width:36px;height:98px; display:block}
-	   ul, li {
-	    clear: none;
-	    }li {
-	    float: left;
-	    width: 638px;
-	} 
-	    .step5_lb {  
-	    left: 692px; 
-	    top: -15px; 
-	}
-	</style>
+<!-- right end -->
+<!-- center beg -->
+	<div class="editor-center" style="min-width:700px;">
+	   
+		<div class="center_top">
+			<div class="backedit">
+				<a href="javascript:return void" onclick="returnSavePatentDoc(${patentDoc.patentDocId});">返回撰写列表</a>
+				<a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
+				<button class="button button-primary  button-rounded" data-placement="bottom">保存</button>
+				</a>
+			</div>
+			<div class="top_right">
+				<div style="float:left" class="review" onclick="preview_selfwrite(${patentDoc.patentDocId},${patentDoc.patentType});">
+				<i class="icon"></i>预览
+				</div>
+				<input type="hidden" id="patentType" value="${patentDoc.patentType }">
+			</div>
+		</div>	
+
+
+			
+<!--con beg-->
+		<div class="editor-center-con" style="padding:10px;max-height:1000px;OVERFLOW:auto;">
+			<input id="whichTip" type="hidden" name="name" value="2">
+			
+				<!--请求协议书div  -->
+			<div class="content" id="content0">
+				<div>
+					<span style="font-weight: bold;font-size:14px;">
+							内部编码 <span>${patentDoc.internalCode }</span>
+					</span>
+					<span style="font-weight: bold;font-size:14px;margin-left:24px;">
+							创建时间 <span><fmt:formatDate value="${patentDoc.createTime }" pattern="yyyy年M月dd日"/></span>
+					</span>
+					<span style="font-weight: bold;font-size:14px;margin-left:24px;">
+							更新时间  <span><fmt:formatDate value="${patentDoc.lastUpdateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+					</span>
+				</div>
+
+				<div class="title" style="margin-top:10px;">
+					<span style="font-weight: bold;font-size:14px;">专利名称</span>
+					<div style="height:10px;">&nbsp;</div>
+					<div id="editor1" thistempid="1">
+						<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
+						<input type="hidden" value="" id="divtitletips"> 
+						<div class="textarea" name="tooltip">
+								<div class="wraper">
+									<table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
+										<tr>
+											<td>
+												<textarea rows="3" cols="10" id="editorContent1" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
+												${patentDoc.name }
+												</textarea>
+											</td>
+										</tr>
+									</table>
+							   </div>
+						</div>
+					</div>
+				</div>
+				<div class="patent_person" style="margin-top:10px;">
+					<div class="patent_person_title">
+						<button type="button" style="width:120px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
+							选择常用申请人
+						</button>
+						<button type="button"  style="width:90px;margin-left:20px;" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addAppPersonModal">
+								新增申请人
+						</button>
+					</div>
+					<div class="patent_person_table" id="appersonDiv" style="margin-top:10px;">
+						<table id="simple-table"  class="table table-striped table-bordered table-hover">
+						 	<thead>
+							<tr class="simple_bag">
+							  <!-- <th><input type="checkbox"/></th>
+							  <th>序号</th> -->
+							  <th>姓名或名称</th>
+							  <th>证件号码</th>
+							  <th>邮编地址</th>
+							  <th>费减备案状态</th>
+							  <th>操作</th>
+							</tr>
+						 	</thead>
+						  <tbody id="appersonTab">
+								<c:if test="${not empty patentDocAppPersons }">
+									<c:forEach items="${patentDocAppPersons }" var="patentDocAppPerson">
+										<tr>
+											<td style="text-align:center">${patentDocAppPerson.name }</td>
+											<td style="text-align:center">${patentDocAppPerson.idNumber }</td>
+											<td style="text-align:center">${patentDocAppPerson.postcodeAddress }</td>
+											<td style="text-align:center">${patentDocAppPerson.feeReduceTransactionStatus }</td>
+											<td style="text-align:center"><a href="javascript:deletePatentDocApperson(${patentDocAppPerson.personId })">删除</a><a style='margin-left:20px;' href="javascript:updatePatentDocApperson(${patentDocAppPerson.personId })">修改</a></td>
+										</tr>
+									
+									</c:forEach>
+								</c:if>
+						  
+						  </tbody>
+						</table>
+
+					</div>
+				
+				</div>
+				
+				<div class="patent_inventor" style="margin-top:10px;">
+					<div class="patent_inventor_title">
+								<button style="width:120px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonInventorModal">
+									选择常用发明人
+								</button>
+								<button style="margin-left:20px;width:90px" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addInventorModal">
+									新增发明人
+								</button>
+					</div>
+					<div class="patent_inventor_table" id="inventorDiv" style="margin-top:10px;">
+						<table id="simple-table"   class="table table-striped table-bordered table-hover">
+						  <thead>
+							<tr class="simple_bag">
+							  <th>姓名</th>
+							  <th>证件号码</th>
+							  <th>国籍</th>
+							  <th>操作</th>
+							</tr>
+						  </thead>
+						  <tbody id="inventorTab">
+							  <c:if test="${not empty patentDocInventors }">
+									<c:forEach items="${patentDocInventors }" var="patentDocInventor">
+										<tr>
+											<td style='text-align:center'>${patentDocInventor.inventorName}</td>
+											<td style='text-align:center'>${patentDocInventor.inventorNumber}</td>
+											<td style='text-align:center'>${patentDocInventor.inventorNationality}</td>
+											<td style='text-align:center'><a href='javascript:deletePatentDocInventor(${patentDocInventor.inventorId})'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocInventor(${patentDocInventor.inventorId})'>修改</a></td>
+										</tr>
+									</c:forEach>	
+							  </c:if>
+						  </tbody>
+						</table>
+
+					</div>
+				
+				
+				
+				</div>
+				<div class="patent_contact" style="margin-top:10px;">
+					<div class="patent_contact_title">
+						<button style="width:120px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">选择常用联系人</button>
+					</div>
+					<div class="patent_contact_table" style="margin-top:10px;" id="contactDiv">
+						<table id="simple-table" class="table table-striped table-bordered table-hover">
+						  <thead>
+							<tr class="simple_bag">
+							 <th>联系人</th>
+							 <th>所在地区</th>
+							 <th>地址</th>
+							 <th>联系电话</th>
+							 <th>操作</th>
+							</tr>
+						  </thead>
+						  <tbody id="contactTab">
+							<c:if test="${not empty contactAddress }">
+									<tr>
+										<td style="text-align:center">${contactAddress.receiver}</td>
+										<td style="text-align:center">${contactAddress.provinceName} ${contactAddress.cityName} ${contactAddress.districtName}</td>
+										<td style="text-align:center">${contactAddress.detailAddress}</td>
+										<td style="text-align:center">${contactAddress.phone}</td>
+										<td style="text-align:center"><a href='javascript:updateContact(${contactAddress.id})'>修改</a></td>
+									</tr>
+							 </c:if>
+						  </tbody>
+						</table>
+					</div>
+				</div>
+				<div class="patent_other">
+					<span style="font-weight: bold;font-size:14px;">其他信息</span>
+					<div style="height:10px;">&nbsp;</div>
+					<textarea id="otherInformation" style="width:700px;" class="t-input form-control" rows="10" cols="60" placeholder="请填写，若没有则可以不填写。">${patentDoc.otherInformation }</textarea>
+				
+				
+				</div>
+
+			</div>			
+				
+			<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
+			<div class="content" id="content1" style="display:none">
+				<div class="title">
+			
+				</div>
+				<div class="cl">
+					<div id="editor0" thistempid="1">
+						<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
+						<input type="hidden" value="" id="divtitletips"> 
+						<div class="textarea" name="tooltip">
+								<div class="wraper">
+									<table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
+										<tr>
+											<td>
+												<textarea rows="3" cols="10" id="editorContent" name="name" class="editorContent" style="width:520px;height:200px;visibility:hidden;">
+												${patentDoc.manual }
+												</textarea>
+											</td>
+										</tr>
+									</table>
+							   </div>
+						</div>
+					</div>
+				</div>
+			</div>
+				
+				
+				<!--上传附件div  -->
+				<div class="content" id="content6" thisid="2514" style="display: none;">
+					<div class="title">
+						上传附件
+					</div>
+					
+					<div class="cl">
+						<div class="lt-box" style="height:300px;padding:20px;">
+
+							<form id="patentDocAttachment" action="<s:url value='/editor/uploadFile.html'/>"  method="post" enctype="multipart/form-data" class="form-horizontal">  
+							<input style="display:none;"  id="patentAttachmentFile" name="file" type="file" />
+							<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
+							<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+							<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
+							<c:if test="${not empty patentDoc.patentDocAttachmentFile }">
+								<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="downloadAttachmentFile(${patentDoc.patentDocId})">下载附件</button>
+							</c:if>
+							</form> 
+
+							<div style="height:10px;">&nbsp;</div> 
+							<span style="color:#666;">友情提示：将所需的附件一次性打包成压缩文件格式上传(zip,rar等)，不建议上传其他格式的文件!
+							</span>
+						</div>
+					</div>
+				</div>
+				
+
+				<input id="hideditor3id" type="hidden" autocomplete="off">
+				<input id="hidtempid" type="hidden">
+				<input id="hidtooltip" type="hidden">
+									
+				<!-- 摘要 -->
+				<div class="content" id="content4" thisid="" style="display: none;">
+					
+					<div class="title">
+						摘要
+					</div>
+					<div class="cl">
+						<div id="editor7" thisid="" thistempid="" photo_fid="">
+							<div class="textarea" name="tooltip"> 
+								<div class="wraper">
+									<table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
+										<tr>
+											<td style="width:520px;">
+												<textarea rows="3" cols="10" id="editorContent7" name="abstractDescription" class="editorContent" style="width:520px;height:200px;visibility:hidden;" >${patentDoc.abstractDescription }</textarea>
+											</td>
+										</tr>
+									</table>
+								   </div>
+							</div>
+						</div>
+					</div>
+					<div id="error_content7" style="margin-left: -50px; float: left; color: Red; text-align: right;" class="textarea">
+					</div>
+				</div>
 
 	
+	                    
+						<!-- 权利要求及要素表 -->
+						<div class="content" id="content3" style="display: none; overflow: hidden;">
+							<div name="claims" style="float: left; width: 98%">
+								<div class="title">
+									权利要求书
+								</div>
+								<div class="cl">
+									<div id="editor6" thistempid="" thisid="">
+										<div id="divclaim" style="clear:both;display:block;float:left;width:80%;"></div>
+										<input type="hidden" value="" id="divclaimtips">
+										<div class="textarea" name="tooltip">
+											<div class="wraper">
+									            <table width="100%" style="table-layout:fixed;padding-left: 10px;" border="0">
+									            	<tr>
+									                    <td style="width:520px;">
+									                    	<textarea rows="3" cols="10" id="editorContent8" name="rightClaim" class="editorContent"style="width:520px;height:200px;visibility:hidden;" >${patentDoc.rightClaim }</textarea>
+									                    </td>
+									            	</tr>
+									            </table>
+										   </div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div name="claims_ele" class="power_right" style="float: right; margin-top: 10px; width: 98%; display: none;">
+							</div>
 
+						</div>
+
+	              
+						<!-- 附图及说明 -->
+						
+						<!-- content start-->
+						<input type="hidden" id="ft_hidSrc" value="">
+						<input type="hidden" id="ft_hidFid" value="">
+						<div class="content" id="content2" style="display: none;">
+							
+							<div class="box" id="content5-1">
+								<div style="margin:10px" class="upimg1" onclick="addPic();">
+									新增附图</div>
+									<div style="margin:10px" class="upimg1" onclick='javascript:window.open("<s:url value='/editor/downloadPic.html'/>?patentDocId=${ patentDoc.patentDocId}")' >
+									下载附图</div>
+								<div class="picBox">
+									<ul class="picL9" id="picLsy2" >
+										
+									</ul>
+								</div>
+							</div>
+						<!-- content start-->
+						<div class="content" id="content5_build" style="display: none;">
+							
+							<div style="height: 20px">
+							</div>
+							<div id="piclist" class="title1" onclick="piclistShow();loadImgs()" style="padding-left: 40px; color:#444; font-size:14px; font-weight:bold;
+								display: none; cursor: pointer">
+								返回附图列表
+							</div>
+							 
+							
+							<div class="img_edit" id="origin">
+								<div class="imgfl" id="picBianHao">
+								</div>
+								<div class="imgfr">
+								 <form id="patentUrlForm" name="patentUrlForm"  method="post" enctype="multipart/form-data" class="form-horizontal">
+								 	<input id="patentDocId" type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
+								 	<input id="patentDocAttachmentFile" type="hidden" name="patentDocAttachmentFile" value="${patentDoc.patentDocAttachmentFile}">
+									<div id=patentImgUrl style="display:none"><!-- 自动插入ImgUrl --></div>
+									
+								  </form>
+									<div id="zyupload" class="zyupload" ></div>
+								 	
+								</div>
+							</div>
+						</div>
 	
-	<div id="choosePicDiv" style="display: none; position:absolute; width: 1000px">
-	    <div class="daochu_bg">
-	    </div>
-	    <div class="pic_select" style="width: 70%; left: 15%">
-	        <div class="daochu_top">
-	            <div class="daochu_tit">
-	                从附图中选择</div>
-	            <div class="close" onclick="abstactShow();">
-	            </div>
-	        </div>
-	        <div class="pic_cl" id="ab_picList">
-	            
-	        </div>
-	        <div class="daochu_cancel">
-	            <div class="daochu_cancel1" onclick="beAbstract();return false;">
-	                确定
-	            </div>
-	            <div class="daochu_cancel1h" id="cancleAbs" onclick="abstactShow();">
-	                取消
-	            </div>
-	        </div>
-	    </div>
-	</div>
-	        
-	<!--导出申请文件 -->
-	</div>
-	</div>
+	                    
+						<!-- 摘要附图 -->							
+						</div>
+						<!-- content end-->
+
+						<style type="text/css">
+							.borderRed
+							{
+								border: #d7e4ea 1px solid;
+								padding: 9px;
+								float: left;
+								width: 100px;
+								cursor: pointer;
+								margin: 4px 18px 0;
+							}
+						</style>
+						<!-- content start-->
+						<div class="content" id="content5" style="display: none;">
+							<div style="height: 80px">
+							</div>
+								<div class="upimg1" onclick="findAttachmentImg();" id="choseAbs" style="
+									left: 280px; margin-top: 0;float:left;">
+									从附图中选择</div>
+							<div class="picBox">
+								<ul class="picL" id="picLsy" >
+									
+								</ul>
+							</div>
+							<div>
+							<h3 style="margin-left: 30px;font-family:微软雅黑;margin-top: 50px;">摘要附图：</h3>
+							</div>
+							<div class="picBox" id="picLsy3">
+								<c:if test="${patentDoc.abstractImg != null}">
+										<img src='${base}${patentDoc.abstractImg}' alt='' width='400' height='300'/>
+								</c:if>
+							</div>
+						</div>
+						<!-- content end-->
+	
+						<div id="div_float_show" style="position: absolute; display: none; width: 1000px">
+					</div>
+	
+	                </div>
+<!-- center end -->
+</div>
+
+
+
+
 <!-- commonAppersonModal -->
 <div class = "modal fade" id = "commonAppersonModal" tabindex = "-1" role = "dialog" 
    aria-labelledby = "myModalLabel" aria-hidden = "true" >
@@ -1340,7 +1216,6 @@ margin: 1px 0 0 1px;}
 
 
 
-  
 <script type="text/javascript">
 	function submitForm(){
 		$.ajax({

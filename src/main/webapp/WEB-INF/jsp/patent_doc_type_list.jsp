@@ -43,14 +43,14 @@
 			            <a class="index-btn" target="_blank" href="<s:url value='/editor/newPatentDoc.html'/>?patentType=1">立即撰写</a>
 			          </li>
 			          <li class="list-app">
-			            <i style="width: 76px;height: 110px;"></i>
+			            <i style="width: 150px;height: 110px;"></i>
 			            <h5>实用新型</h5>
 			           
 			            <p class="apply-des">保护产品型状、构造等微创新<br>3-6个月授权，10年保护期</p>
 			            <a class="index-btn" target="_blank" href="<s:url value='/editor/newPatentDoc.html'/>?patentType=2">立即撰写</a>
 			          </li>
 			          <li class="list-app">
-			            <i style="width: 56px;height: 110px;"></i>
+			            <i style="width: 150px;height: 110px;"></i>
 			            <h5>外观专利</h5>
 			            
 			            <p class="apply-des">保护产品外形、包装等<br>3-6个月授权，10年保护期</p>
