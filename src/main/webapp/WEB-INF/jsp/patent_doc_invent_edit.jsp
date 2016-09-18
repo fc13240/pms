@@ -81,7 +81,7 @@
 		</script> 
 </head>
 <body>
-<div style="width:100%;min-width:1200px; margin:0 auto;"> 
+<div style="width:100%;min-width:1220px; margin:0 auto;"> 
 	<div class="editor-left">
 		<div class="left_top">
 			<div class="cl" id="div_ipctype">
