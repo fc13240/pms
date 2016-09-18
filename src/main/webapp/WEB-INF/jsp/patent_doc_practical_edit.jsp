@@ -11,6 +11,9 @@
 	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 	<link rel="stylesheet" href="<s:url value='/temp/css/editor.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 <c:import url="common/kindEditor3.jsp"></c:import>
+	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
+	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
+    <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -427,10 +430,10 @@
 				</div>
 				<div class="patent_person" style="margin-top:10px;">
 					<div class="patent_person_title">
-						<button type="button" style="width:120px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
+						<button type="button" style="width:130px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
 							选择常用申请人
 						</button>
-						<button type="button"  style="width:90px;margin-left:20px;" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addAppPersonModal">
+						<button type="button"  style="width:100px;margin-left:20px;" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addAppPersonModal">
 								新增申请人
 						</button>
 					</div>
@@ -470,10 +473,10 @@
 				
 				<div class="patent_inventor" style="margin-top:10px;">
 					<div class="patent_inventor_title">
-								<button style="width:120px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonInventorModal">
+								<button style="width:130px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonInventorModal">
 									选择常用发明人
 								</button>
-								<button style="margin-left:20px;width:90px" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addInventorModal">
+								<button style="margin-left:20px;width:100px" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addInventorModal">
 									新增发明人
 								</button>
 					</div>
@@ -508,7 +511,7 @@
 				</div>
 				<div class="patent_contact" style="margin-top:10px;">
 					<div class="patent_contact_title">
-						<button style="width:120px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">选择常用联系人</button>
+						<button style="width:130px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">选择常用联系人</button>
 					</div>
 					<div class="patent_contact_table" style="margin-top:10px;" id="contactDiv">
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
