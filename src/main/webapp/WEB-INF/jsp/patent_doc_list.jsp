@@ -238,7 +238,7 @@
 											</a>
 										 </c:if>  
 									  </se:authorize> 
-									<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_USER')">
+									<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_USER') and not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">
 									<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 || patentDoc.patentDocStatus.patentDocStatusId == 2 || patentDoc.patentDocStatus.patentDocStatusId == 3 || patentDoc.patentDocStatus.patentDocStatusId == 4 ||patentDoc.patentDocStatus.patentDocStatusId == 5 || 
 									 	patentDoc.patentDocStatus.patentDocStatusId == 6 }"> 
 										<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
@@ -507,7 +507,7 @@ function batchCustomerSupport() {
 	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
 	var patentDocStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocStatusId');
 	for (var i = 0; i < patentDocStatusIds.length; i++) {
-		if (patentDocStatusIds[i] == 1 ||  patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || patentDocStatusIds[i] == 7 || 
+		if (patentDocStatusIds[i] == 1 || patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || patentDocStatusIds[i] == 7 || 
 				patentDocStatusIds[i] == 8 || patentDocStatusIds[i] == 9 || patentDocStatusIds[i] == 10 ) {
 			formutil.alertMessage('选中的文档中包含已分配过的文档，请重新选择！');
 			return;
