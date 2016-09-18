@@ -295,13 +295,13 @@
 	   
 		<div class="center_top">
 			<div class="backedit">
-				<a href="javascript:return void" onclick="returnSavePatentDoc(100);">返回撰写列表</a>
-				<a href="javascript:return void" onclick="savePatentDoc(100);">
+				<a href="javascript:return void" onclick="returnSavePatentDoc(${patentDoc.patentDocId});">返回撰写列表</a>
+				<a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
 				<button class="button button-primary  button-rounded" data-placement="bottom">保存</button>
 				</a>
 			</div>
 			<div class="top_right">
-				<div style="float:left" class="review" onclick="preview_selfwrite('100','1');">
+				<div style="float:left" class="review" onclick="preview_selfwrite(${patentDoc.patentDocId},${patentDoc.patentType});">
 				<i class="icon"></i>预览
 				</div>
 				<input type="hidden" id="patentType" value="1">

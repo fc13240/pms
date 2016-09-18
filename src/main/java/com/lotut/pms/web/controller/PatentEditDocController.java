@@ -153,6 +153,7 @@ public class PatentEditDocController {
 		patentDocService.updatePatentDoc(patentDoc);
 		int id=(int) patentDoc.getPatentDocId();
 		int action=PatentDocWorkflowAction.ActionType.get("保存或修改");
+		System.out.println(id+"------"+action);
 		patentDocWorkflowHistoryService.insertHistory(id, action);
 		writer.write(1);
 	}
