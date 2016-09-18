@@ -286,16 +286,16 @@ left: 50%;
 transform: translateX(-50%);
 }
 .apply-four li:nth-child(1) i {
-background: url(../images/icon_index.png) -14px 0 no-repeat;
+background: url(../images/icon_index.png) 0px -25px no-repeat;
 }
 .apply-four li:nth-child(2) i {
-  background: url(../images/icon_index.png) -186px 0 no-repeat;
+  background: url(../images/icon_index.png) 0px -25px no-repeat;
 }
 .apply-four li:nth-child(3) i {
-  background: url(../images/icon_index.png) -348px 0 no-repeat;
+  background: url(../images/icon_index.png) 0px -25px no-repeat;
 }
 .apply-four li:nth-child(4) i {
-  background: url(../images/icon_index.png) -470px 0 no-repeat;
+  background: url(../images/icon_index.png) 0px -25px no-repeat;
 }
 .list-app h5 {
 text-align: center;
@@ -349,17 +349,4 @@ transition: all .3s ease-in;
   -moz-transition: background .3s ease-in;
   transition: background .3s ease-in;
   background: red;
-}
-
-.apply-four li:nth-child(1):hover i {
-  background:  url(../images/icon_index.png) -100px 0 no-repeat;
-}
-.apply-four li:nth-child(2):hover i {
-  background:  url(../images/icon_index.png) -267px 0 no-repeat;
-}
-.apply-four li:nth-child(3):hover i {
-  background:  url(../images/icon_index.png) -409px 0 no-repeat;
-}
-.apply-four li:nth-child(4):hover i {
-  background:  url(../images/icon_index.png) -549px 0 no-repeat;
 }

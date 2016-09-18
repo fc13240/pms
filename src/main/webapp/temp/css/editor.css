@@ -1,3 +1,4 @@
+#tabWrap{font-family: "microsoft yahei",Î¢ÈíÑÅºÚ;}
 .editor-left{
 	width:180px; 
 	float:left;
@@ -138,6 +139,22 @@ background-image: linear-gradient(to bottom, #f8f8f8 0%, #ececec 100%);
 background-repeat: repeat-x;
 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff8f8f8', endColorstr='#ffececec', GradientType=0);
 }
+
+.upimg1 {
+background: #39a4e1;
+width: 120px;
+text-align: center;
+height: 32px;
+border-radius: 3px;
+line-height: 32px;
+cursor: pointer;
+float: left;
+color: #fff;
+font-size: 14px;
+margin-left: 20px;
+margin-top: 40px;
+}
+
 tr {
 display: table-row;
 vertical-align: inherit;

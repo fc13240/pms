@@ -10,7 +10,72 @@
 	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 	<link rel="stylesheet" href="<s:url value='/temp/css/editor.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 <c:import url="common/kindEditor3.jsp"></c:import>
+	<script type="text/javascript">
+	var i= 1;
+			$(function(){
+				// 初始化插件
+				$("#zyupload").zyUpload({
+					width            :   "650px",                 // 宽度
+					height           :   "400px",                 // 宽度
+					itemWidth        :   "140px",                 // 文件项的宽度
+					itemHeight       :   "115px",                 // 文件项的高度
+					url              :   "<s:url value='/kindeditor/uploadPic.html'/>?patentDocId=${patentDoc.patentDocId}",  // 上传文件的路径
+					fileType         :   ["jpg","png","jpeg"],// 上传文件的类型
+					fileSize         :   51200000,                // 上传文件的大小
+					multiple         :   false,                    // 是否可以多个文件上传
+					dragDrop         :   false,                   // 是否可以拖动上传文件
+					tailor           :   false,                   // 是否可以裁剪图片
+					del              :   false,                    // 是否可以删除文件
+					finishDel        :   false,  				  // 是否在上传文件完成后删除预览
+					/* 外部获得的回调接口 */
+					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+						console.info("当前选择了以下文件：");
+						console.info(selectFiles);
+						if (allFiles.length > 1) {
+							
+							alert("每次只能上传一张，请先上传之前的图片再选择！");
+							for (var i = 1; i < allFiles.length; i++) {
+								console.log(allFiles[i]);
+								ZYFILE.funDeleteFile(allFiles[i].index, true);
+								return false;
+							}
+						}
+						
 
+						return true;
+					},
+					onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+						console.info("当前删除了此文件：");
+						console.info(file.name);
+					},
+					onSuccess: function(file, response){
+						// 文件上传成功的回调方法
+						var Jresponse=$.parseJSON(response);
+						$("#patentImgUrl").append("<input type='hidde' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
+						$("#patentImgUrl").append("<input type='hidde' id='picName' name='picName' value='"+Jresponse["picName"]+"'/>");
+						$("#patentImgUrl").append("<input type='hidde' id='seqNo' name='seqNo' value='"+Jresponse["count"]+"'/>");
+						savePatentImgUrl();
+						$("#patentImgUrl").empty();
+					},
+					onFailure: function(file, response){          // 文件上传失败的回调方法
+						console.info("此文件上传失败：");
+						console.info(file.name);
+					},
+					onComplete: function(response){
+						console.info("文件上传完成");
+						console.info(response);
+					}
+				});
+				
+				
+
+				loadImgs();
+				
+				
+				
+			});
+			
+		</script> 
 </head>
 <body>
 <div style="width:100%;min-width:1200px; margin:0 auto;"> 
