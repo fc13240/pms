@@ -245,10 +245,10 @@
 	</select>
 		
 	<select id="getPatentDocWithAppPersonById" parameterType="list" resultMap="PatentDocMap">
-		select pp.patent_doc_id,pd.app_no,pd.patent_type,pd.patent_name,
-				pd.patent_type,name,pp.id_number,pp.postcode_address,pp.other_information,pp.fee_reduce_transaction_status,
+		select pd.patent_doc_id,pd.app_no,pd.patent_type,pd.patent_name,
+				pd.patent_type,pp.name,pp.id_number,pp.postcode_address,pp.other_information,pp.fee_reduce_transaction_status,
 				pp.transaction_year from patent_doc_app_person pp right join patent_documents pd 
-				on pp.patent_doc_id = pd.patent_doc_id where pp.patent_doc_id in
+				on pp.patent_doc_id = pd.patent_doc_id where pd.patent_doc_id in
 				(
 				<foreach collection="list" item="patentDocId" separator=",">
 					#{patentDocId} 
