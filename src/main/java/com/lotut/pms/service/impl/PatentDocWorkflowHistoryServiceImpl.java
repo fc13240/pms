@@ -43,7 +43,7 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 		insertHistories(ids,action);
 	}
 	
-	private long insertHistories(List<Integer> ids,int action){
+	private void insertHistories(List<Integer> ids,int action){
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<Map<String, Integer>> patentDocWorkflowHistoryRecords = new ArrayList<>();
 		for (int patentDocId: ids) {
@@ -53,7 +53,7 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 				patentDocWorkflowHistoryRecord.put("action",action);
 				patentDocWorkflowHistoryRecords.add(patentDocWorkflowHistoryRecord);
 		}
-		return patentDocWorkflowHistoryDao.insertHistories(patentDocWorkflowHistoryRecords);
+		 patentDocWorkflowHistoryDao.insertHistories(patentDocWorkflowHistoryRecords);
 		
 	}
 	
