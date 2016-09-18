@@ -486,7 +486,7 @@ function batchProxyOrg() {
 			formutil.alertMessage('选中的文档中包含已分配过的文档，请重新选择！');
 			return;
 		}
-	}  
+	}   
 	for (var i = 0; i < patents_checked.length; i++) {
 		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
 			uniquePatentNos.push(patents_checked[i]);
