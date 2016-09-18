@@ -1,14 +1,13 @@
 package com.lotut.pms.dao.mapper;
 
 import java.util.List;
-import java.util.Map;
 
-import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocAppPerson;
 import com.lotut.pms.domain.PatentDocInventor;
 
@@ -60,8 +59,6 @@ public interface PetitionMapper {
 	
 	List<CommonInventor> searchInventor(@Param("keyword") String keyword,@Param("userId") int userId);
 	
-	@MapKey("patentType")
-	Map<Integer,Integer > getPatentDocAppPersonCountById(Long patentDocId);
+	List<PatentDoc> getPatentDocWithAppPersonById(List<Long> patentDocIds);
 	
-	int getCountByFeeReduceStatus(@Param("patentDocId") Long patentDocId,@Param("feeReduceStatus") String feeReduceStatus);
 }

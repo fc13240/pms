@@ -37,26 +37,34 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 
 	@Override
 	@Transactional
-	public int createOrder(PatentDocOrder order, List<PatentDoc> PatentDocs) {
-
-	 	Map<Integer,Integer> priceTab=new HashMap<Integer,Integer>();
-	 	priceTab.put(1, 100);
-	 	priceTab.put(2, 200);
-	 	priceTab.put(3, 300);
-		int totalAmount=0;
-		for(PatentDoc patentDoc:PatentDocs){
-			 int patentType=patentDoc.getPatentType();
-			totalAmount+=priceTab.get(patentType);
+	public int createOrder(PatentDocOrder order, List<PatentDoc> patentDocs) {
+		int totalAmount = 0;
+		for(PatentDoc doc:patentDocs){
+			totalAmount += doc.getTotalFee();
 		}
-		order.setAmount(0.01);
+//	 	Map<Integer,Integer> priceTab=new HashMap<Integer,Integer>();
+//	 	priceTab.put(1, 100);
+//	 	priceTab.put(2, 200);
+//	 	priceTab.put(3, 300);
+//		int totalAmount=0;
+//		for(PatentDoc patentDoc:PatentDocs){
+//			 int patentType=patentDoc.getPatentType();
+//			totalAmount+=priceTab.get(patentType);
+//		}
+		order.setAmount(totalAmount);
 		patentDocWorkflowDao.insertOrder(order);
-		List<PatentDocOrderItem> orderItems = new ArrayList<>(PatentDocs.size());
+		List<PatentDocOrderItem> orderItems = new ArrayList<>(patentDocs.size());
 		
-		for (int i = 0; i < PatentDocs.size(); i++) {
+		for (int i = 0; i < patentDocs.size(); i++) {
+			PatentDoc doc = patentDocs.get(i);
 			PatentDocOrderItem orderItem = new PatentDocOrderItem();
 			
 			orderItem.setOrderId(order.getId());
-			orderItem.setPatentDocId(PatentDocs.get(i).getPatentDocId());
+			orderItem.setPatentDocId(doc.getPatentDocId());
+			orderItem.setApplyFee(doc.getApplyFee());
+			orderItem.setPrintFee(doc.getPrintFee());
+			orderItem.setCheckFee(doc.getCheckFee());
+			orderItem.setServiceFee(doc.getServiceFee());
 			orderItems.add(orderItem);
 		}
 		patentDocWorkflowDao.insertOrderItems(orderItems);

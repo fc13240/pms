@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.lotut.pms.service.utils.doc.fee.PatentDocFeeCalculator;
+import com.lotut.pms.service.utils.doc.fee.PatentDocFeeCalculatorFactory;
+
 public class PatentDoc {
 	private long patentDocId;
 	private String appNo;
@@ -29,22 +32,45 @@ public class PatentDoc {
 	private int contactId;
 	private String otherInformation;
 	private String attachmentUrl;
-	private long price;
 	private int feeStatus;
 	private List<User> shareUsers;
 	private String internalCode;
-	private int appersonCount;
+	private List<CommonAppPerson> commonAppPersons;
+	private PatentDocFeeCalculator calculator;
+	
+	private PatentDocFeeCalculator getFeeCalculator() {
+		if (calculator == null) {
+			calculator =  PatentDocFeeCalculatorFactory.getPatentDocFeeCalculator(this);
+		}
+		
+		return calculator;
+	}
+	
+	public int getApplyFee() {
+		return getFeeCalculator().calcApplyFee();
+	}
+	
+	public int getPrintFee() {
+		return getFeeCalculator().calcPrintFee();
+	}
+	
+	public int getCheckFee() {
+		return getFeeCalculator().calcCheckFee();
+	}
+	
+	public int getServiceFee() {
+		return getFeeCalculator().calcServiceFee();
+	}
+	
+	public int getTotalFee() {
+		return getFeeCalculator().clac();
+	}
+	
 	public PatentDocProxyStatus getPatentDocProxyStatus() {
 		return patentDocProxyStatus;
 	}
 	public void setPatentDocProxyStatus(PatentDocProxyStatus patentDocProxyStatus) {
 		this.patentDocProxyStatus = patentDocProxyStatus;
-	}
-	public long getPrice() {
-		return price;
-	}
-	public void setPrice(long price) {
-		this.price = price;
 	}
 	public int getFeeStatus() {
 		return feeStatus;
@@ -180,12 +206,11 @@ public class PatentDoc {
 	public void setShareUsers(List<User> shareUsers) {
 		this.shareUsers = shareUsers;
 	}
-	public int getappersonCount() {
-		return appersonCount;
+	public List<CommonAppPerson> getCommonAppPersons() {
+		return commonAppPersons;
 	}
-	public void setAppersonCount(int appersonCount) {
-		this.appersonCount = appersonCount;
+	public void setCommonAppPersons(List<CommonAppPerson> commonAppPersons) {
+		this.commonAppPersons = commonAppPersons;
 	}
-	
 	
 }

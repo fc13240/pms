@@ -55,8 +55,11 @@
 								  <th>序号</th>
 								  <th>文档类型</th>
 								  <th>专利名称</th>
-								  <th>缴费种类</th>
-								  <th>缴费金额</th>
+								  <th>申请费</th>
+								  <th>印刷费</th>
+								  <th>申请审查费</th>
+								  <th>服务费</th>
+								  <th>总计</th>
 								  <th>费用状态</th>
 								</tr>
 							  </thead>
@@ -74,8 +77,11 @@
 										<td style="text-align:center"><c:out value="外观设计"/></td>
 									</c:if>
 									<td style="text-align:center">${patentDoc.name}</td>
-									<td style="text-align:center">委托代写费</td>
-									<td style="text-align:center">${patentDoc.price} </td>
+									<td style="text-align:center">${patentDoc.applyFee} </td>
+									<td style="text-align:center">${patentDoc.printFee} </td>
+									<td style="text-align:center">${patentDoc.checkFee} </td>
+									<td style="text-align:center">${patentDoc.serviceFee} </td>
+									<td style="text-align:center">${patentDoc.totalFee} </td>
 									<c:if test="${patentDoc.feeStatus==0}">
 										<td style="text-align:center"><c:out value="未缴费"/></td>
 									</c:if>

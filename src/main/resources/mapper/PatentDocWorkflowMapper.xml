@@ -25,10 +25,10 @@
 	</insert>
 	
 	<insert id="insertOrderItems">
-		insert into patent_doc_order_items(order_id, patent_doc_id) values
+		insert into patent_doc_order_items(order_id, patent_doc_id,apply_fee,print_fee,check_fee,service_fee) values
 		<foreach item="orderItem" collection="orderItems" separator=",">
-			(#{orderItem.orderId}, #{orderItem.patentDocId})
-		</foreach>;
+			(#{orderItem.orderId}, #{orderItem.patentDocId},#{orderItem.applyFee},#{orderItem.printFee},#{orderItem.checkFee},#{orderItem.serviceFee})
+		</foreach>
 	</insert>	
 	
 	<select id="getOrderById" parameterType="long" resultMap="PatentDocOrderMap">

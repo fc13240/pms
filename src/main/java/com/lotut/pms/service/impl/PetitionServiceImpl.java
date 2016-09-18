@@ -2,7 +2,6 @@ package com.lotut.pms.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +11,7 @@ import com.lotut.pms.dao.PetitionDao;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CommonInventor;
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocAppPerson;
 import com.lotut.pms.domain.PatentDocInventor;
 import com.lotut.pms.domain.UserAppPerson;
@@ -180,14 +180,7 @@ public class PetitionServiceImpl implements PetitionService {
 	}
 
 	@Override
-	public Map<Integer, Integer> getPatentDocAppPersonCountById(Long patentDocId) {
-		Map<Integer, Integer> map=petitionDao.getPatentDocAppPersonCountById(patentDocId);
-		
-		return null;
-	}
-
-	@Override
-	public int getCountByFeeReduceStatus(Long patentDocId, String feeReduceStatus) {
-		return 0;
+	public List<PatentDoc> getPatentDocWithAppPersonById(List<Long> patentDocIds) {
+		return petitionDao.getPatentDocWithAppPersonById(patentDocIds);
 	}
 }

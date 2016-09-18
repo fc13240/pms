@@ -913,3 +913,8 @@ VALUES
 	(4, '已取消');
 	
 ALTER TABLE patent_documents ADD COLUMN internal_code VARCHAR(100) COMMENT '内部编码';
+
+ALTER TABLE patent_doc_order_items ADD COLUMN apply_fee INT NOT NULL DEFAULT 0 COMMENT '申请费';
+ALTER TABLE patent_doc_order_items ADD COLUMN print_fee INT NOT NULL DEFAULT 0 COMMENT '打印费';
+ALTER TABLE patent_doc_order_items ADD COLUMN check_fee INT NOT NULL DEFAULT 0 COMMENT '审查费';
+ALTER TABLE patent_doc_order_items ADD COLUMN service_fee INT NOT NULL DEFAULT 0 COMMENT '服务费';
