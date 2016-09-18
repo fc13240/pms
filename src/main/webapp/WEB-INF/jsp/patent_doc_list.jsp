@@ -480,13 +480,13 @@ function batchProxyOrg() {
 	}
 	var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocId');
 	var patentDocStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocStatusId');
-	for (var i = 0; i < patentDocStatusIds.length; i++) {
+	/* for (var i = 0; i < patentDocStatusIds.length; i++) {
 		if (  patentDocStatusIds[i] == 3 ||patentDocStatusIds[i] == 4 || patentDocStatusIds[i] == 5 || patentDocStatusIds[i] == 6 || 
 				patentDocStatusIds[i] == 7 || patentDocStatusIds[i] == 8 || patentDocStatusIds[i] == 9|| patentDocStatusIds[i] == 10) {
 			formutil.alertMessage('选中的文档中包含已分配过的文档，请重新选择！');
 			return;
 		}
-	}   
+	}    */
 	for (var i = 0; i < patents_checked.length; i++) {
 		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
 			uniquePatentNos.push(patents_checked[i]);
