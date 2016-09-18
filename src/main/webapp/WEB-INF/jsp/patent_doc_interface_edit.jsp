@@ -162,7 +162,7 @@ margin: 1px 0 0 1px;}
 							 </a>
 	                    </div>
 	                    <div class="top_right">
-	                        <div class="review" onclick="preview_selfwrite('${patentDoc.patentDocId}','${patentDoc.patentType}');">
+	                        <div class="review"  href="javascript:return void" onclick="preview_selfwrite('${patentDoc.patentDocId}','${patentDoc.patentType}');">
 	                            <i class="icon"></i>预览
 	                        </div>
 	                        <input type="hidden" id="patentType" value="${patentDoc.patentType }"/>
