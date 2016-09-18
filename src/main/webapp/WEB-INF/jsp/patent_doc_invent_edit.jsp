@@ -82,7 +82,7 @@
 	<div class="editor-left">
 		<div class="left_top">
 			<div class="cl" id="div_ipctype">
-			<div class="bt" style="margin-left:65px;">发明</div>
+			<div class="bt" style="margin-left:65px;">发明专利</div>
 			</div>
 		</div>
 		<!--申请文件九部分标签切换 -->
