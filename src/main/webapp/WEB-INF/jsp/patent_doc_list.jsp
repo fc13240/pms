@@ -238,7 +238,7 @@
 											</a>
 										 </c:if>  
 									  </se:authorize> 
-									<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_USER')">
+									<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_USER') and not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">
 									<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 || patentDoc.patentDocStatus.patentDocStatusId == 2 || patentDoc.patentDocStatus.patentDocStatusId == 3 || patentDoc.patentDocStatus.patentDocStatusId == 4 ||patentDoc.patentDocStatus.patentDocStatusId == 5 || 
 									 	patentDoc.patentDocStatus.patentDocStatusId == 6 }"> 
 										<a target="_blank" href="<s:url value='/editor/editPatentDoc.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>&patentType=<c:out value='${patentDoc.patentType}'/>">
