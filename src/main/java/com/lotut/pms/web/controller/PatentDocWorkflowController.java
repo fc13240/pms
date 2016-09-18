@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.constants.PatentDocWorkflowAction;
+import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.CustomerSupport;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocOrder;
@@ -59,6 +60,13 @@ public class PatentDocWorkflowController {
 	public String showOrderCreateForm(@RequestParam("patentDocIds")List<Long> patentDocIds,Model model){
 			//List<PatentDoc> patentDocs = patentDocService.getPatentDocsByIds(patentDocIds);
 			List<PatentDoc> patentDocs = petitionService.getPatentDocWithAppPersonById(patentDocIds);
+			
+			String noAppPersonErrorMessage =  getNoAppPersonErrorMessage(patentDocs);
+			if (noAppPersonErrorMessage != null) {
+				model.addAttribute("message", noAppPersonErrorMessage);
+				return "common_message";
+			}
+			
 			int totalAmount = 0;
 			for(PatentDoc doc:patentDocs){
 				totalAmount += doc.getTotalFee();
@@ -69,6 +77,27 @@ public class PatentDocWorkflowController {
 			return "patent_doc_order_create_form";
 }
 	
+	private String getNoAppPersonErrorMessage(List<PatentDoc> patentDocs) {
+		boolean foundEmptyAppPerson = false;
+		StringBuilder errorMessage = new StringBuilder();
+		errorMessage.append("<p>以下专利没有申请人，请先添加申请人后再委托: </p>");
+		errorMessage.append("<p style='color:red;'>");
+		for(PatentDoc patentDoc:patentDocs){
+			List<CommonAppPerson> commonAppPersons = patentDoc.getCommonAppPersons();
+			if (commonAppPersons==null||commonAppPersons.size()<1) {
+				errorMessage.append(patentDoc.getName());
+				errorMessage.append("<br/>");
+				foundEmptyAppPerson = true;
+			}
+		}
+		errorMessage.append("</p>");
+		
+		if (foundEmptyAppPerson) {
+			return errorMessage.toString();
+		}
+		
+		return null;
+	}
 	
 	@RequestMapping(path="/createPatentDocOrder")
 	public String createOrder(@RequestParam("patentDocIds")Long[] patentDocIds, @ModelAttribute @Valid PatentDocOrder order, Model model) {

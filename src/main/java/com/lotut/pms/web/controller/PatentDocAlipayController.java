@@ -54,9 +54,9 @@ public class PatentDocAlipayController {
 	public void pay(@RequestParam("orderId")long orderId, Model model, HttpServletResponse response) throws IOException {
 		PatentDocOrder order = patentDocWorkflowService.getOrderById(orderId);
 		String out_trade_no = String.valueOf(order.getId());
-		String subject = "专利文档撰写费";
+		String subject = "专利全程代理服务";
 		String total_fee = String.valueOf(order.getAmount());
-		String body = "专利文档委托撰写费用";
+		String body = "专利代理及其官费代交";
 		
 		Map<String, String> paramMap = new HashMap<>();
 		paramMap.put("service", AlipayConfig.service);
