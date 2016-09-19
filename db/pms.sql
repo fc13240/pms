@@ -811,7 +811,7 @@ create table if not exists patent_doc_orders (
 	amount int not null,
 	user int not null,
 	create_time timestamp not null,
-	pay_time timestamp not null,
+	pay_time timestamp ,
 	payment_method int,
 	constraint fk_patent_doc_orders_user foreign key(user) references users(user_id),
 	constraint fk_patent_doc_orders_payment_method foreign key(payment_method) references payment_methods(payment_method_id)
