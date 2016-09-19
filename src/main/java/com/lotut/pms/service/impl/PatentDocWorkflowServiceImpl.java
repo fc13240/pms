@@ -83,7 +83,6 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 	@Transactional
 	public void processOrderPaidSuccess(long orderId) {
 		final int ORDER_STATUS_PAID = 1;
-		final int PATENT_DOC_STAUTS_PAID = 2;
 		final int PATENT_DOC_PROXY_STAUTS_PAID = 2;
 		PatentDocOrder order = patentDocWorkflowDao.getOrderById(orderId);
 		int orderUpdateCount = patentDocWorkflowDao.updateOrderStatus(orderId, ORDER_STATUS_PAID);
@@ -96,7 +95,6 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 			patentDocIdList.add(patentDoc.getPatentDocId());
 		}
 		
-		//int patentDocUpdateCount = patentDocWorkflowDao.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
 		patentDocWorkflowDao.updatePatentDocProxyStatus(patentDocIdList, PATENT_DOC_PROXY_STAUTS_PAID);
 		List<Map<String, Long>> userPatentDocRecords = new ArrayList<>();
 		List<User> platform=userDao.getPlatformUser();
