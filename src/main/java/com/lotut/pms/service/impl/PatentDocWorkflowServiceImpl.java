@@ -164,6 +164,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 
 
 	@Override
+	@Transactional
 	public void redistributeProxyOrgPatentDoc(int ownerId,long patentDocId,int action) {
 		int historyId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, ownerId, action);
 		int target=patentDocWorkflowDao.getTargetByHistoryId(patentDocId,historyId);
@@ -191,11 +192,11 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 			return;
 		}
 		int techPersonAction=PatentDocWorkflowAction.ActionType.get("分配给流程人员");
-		int techPersonCount=patentDocWorkflowDao.getCountByWorkflowHistory(patentDocId, customerSupporTarget, techPersonAction);
+		int techPersonCount=patentDocWorkflowDao.getCountByWorkflowHistory(patentDocId, proxyOrgTarget, techPersonAction);
 		int techPersonHistoryId=0;
 		int techPersonTarget=0;
 		if(techPersonCount>0){
-			techPersonHistoryId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, customerSupporTarget, techPersonAction);
+			techPersonHistoryId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, proxyOrgTarget, techPersonAction);
 			techPersonTarget=patentDocWorkflowDao.getTargetByHistoryId(patentDocId, techPersonHistoryId);
 			patentDocWorkflowDao.deleteByWorkflowHistory(patentDocId, techPersonTarget);
 		}
@@ -209,6 +210,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 
 
 	@Override
+	@Transactional
 	public void redistributeCustomerSupportPatentDoc(int ownerId, long patentDocId, int action) {
 		int historyId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, ownerId, action);
 		int target=patentDocWorkflowDao.getTargetByHistoryId(patentDocId,historyId);
@@ -237,6 +239,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 
 
 	@Override
+	@Transactional
 	public void redistributeTechPersonPatentDoc(int ownerId, long patentDocId, int action) {
 		int historyId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, ownerId, action);
 		int target=patentDocWorkflowDao.getTargetByHistoryId(patentDocId,historyId);
