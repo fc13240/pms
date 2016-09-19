@@ -2202,7 +2202,7 @@ function updateImgName(value,linkSeqNo){
 	
 	function downloadPatentDocFile(patentDocId){
 		var iframe = document.getElementById('fileFrame');
-		iframe.src="<s:url value='/petition/getPatentAttachmentFile.html'/>?patentDocId="+patentDocId;
+		window.open("<s:url value='/petition/getPatentAttachmentFile.html'/>?patentDocId="+patentDocId);
 	}
 	
 	function validateAppPersonFormWayOne(value,id) {
