@@ -64,7 +64,7 @@ public class PatentDocWorkflowController {
 			String noAppPersonErrorMessage =  getNoAppPersonErrorMessage(patentDocs);
 			if (noAppPersonErrorMessage != null) {
 				model.addAttribute("message", noAppPersonErrorMessage);
-				return "common_message";
+				return "patent_doc_app_person_message";
 			}
 			
 			int totalAmount = 0;
@@ -102,6 +102,7 @@ public class PatentDocWorkflowController {
 	@RequestMapping(path="/createPatentDocOrder")
 	public String createOrder(@RequestParam("patentDocIds")Long[] patentDocIds, @ModelAttribute @Valid PatentDocOrder order, Model model) {
 		final int ALIPAY = 1;
+		final int PAID_BY_UPLOAD_INVOICE = 3;
 		User user = PrincipalUtils.getCurrentPrincipal();
 		order.setOwner(user);
 		List<PatentDoc> patentDocs = petitionService.getPatentDocWithAppPersonById(Arrays.asList(patentDocIds));
@@ -111,6 +112,10 @@ public class PatentDocWorkflowController {
 		model.addAttribute("patentDocIds",patentDocIds);
 		if (order.getPaymentMethod().getPaymentMethodId() == ALIPAY) {
 			return "redirect:/patentDocAlipay/pay.html";
+		}else if(order.getPaymentMethod().getPaymentMethodId() == PAID_BY_UPLOAD_INVOICE){
+			
+			
+			
 		}
 		
 		return "add_patent_success";
@@ -136,7 +141,6 @@ public class PatentDocWorkflowController {
 		List<Map<String, Integer>> userPatentDocRecords = new ArrayList<>();
 		List<Long> patentDocIdList=new ArrayList<>();
 		int userId=PrincipalUtils.getCurrentUserId();
-		patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
 		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
 		for (int patentDocId: patentDocIds) {
 			int count=patentDocWorkflowService.getCountByWorkflowHistory(patentDocId, userId, action);

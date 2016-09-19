@@ -86,6 +86,18 @@
 		</script> 
 </head>
 <body>
+<style>
+.model1:hover .button{display:block}
+
+.picL9 li{
+overflow: hidden;
+position: relative;
+float: left;
+display: inline;
+width: 199px;
+height: 170px;
+margin: 1px 0 0 1px;}
+</style>
 <div style="width:100%;min-width:1220px; margin:0 auto;"> 
 	<div class="editor-left">
 		<div class="left_top">
@@ -771,7 +783,7 @@
 	         <div class = "modal-body" >
 		  				
 				<a href="javascript:return void" onclick="batchAddAppPerson()" >
-				<button style="display: inline-block;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个申请人哦！">添加申请人</button>
+				<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个申请人哦！">添加申请人</button>
 				</a>
 			    <input style="display: inline-block;width:400px;margin-left:200px;" type="text" class="t-input form-control" id="searchAppersonName" placeholder="请输入申请人姓名" onkeydown="if(event.keyCode==13){searchAppPerson(this.value);}"/>
 			     <button style="display: inline-block;" class="button button-caution button-rounded" type="button" style="width:80px;" onclick="searchAppPerson($('input[id=searchAppersonName]').val())">搜索</button>
@@ -946,7 +958,7 @@
 	           
 	           
 	           <a href="javascript:return void" onclick="batchAddInventor()" >
-				<button style="display: inline-block;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个发明人批量哦！">添加发明人</button>
+				<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个发明人批量哦！">添加发明人</button>
 				</a>
 				<input style="display: inline-block;width:400px;margin-left:200px;" type="text" class="t-input form-control" id="searchInventorName" placeholder="请输入发明人姓名" onkeydown="if(event.keyCode==13){searchInventor(this.value);}"/>
 			     <button style="display: inline-block;" class="button button-caution button-rounded" type="button" style="width:80px;" onclick="searchInventor($('input[id=searchInventorName]').val())">搜索</button> 
@@ -1735,10 +1747,11 @@ function updateImgName(value,linkSeqNo){
 		var manual=$("#editorContent").val();
 		var abstractDescription=$("#editorContent7").val();
 		var rightClaim=$("#editorContent8").val();
+		var otherInformation=$("#otherInformation").val();
 		$.ajax({
 			type: "POST",
 			url: "<s:url value='/editor/savePreviewPatentDoc.html'/>",
-			data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":patentDocId},
+			data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":patentDocId,"otherInformation":otherInformation},
 			success: function(data){
 			},
 			error: function(){
