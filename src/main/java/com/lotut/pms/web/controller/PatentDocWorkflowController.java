@@ -64,7 +64,7 @@ public class PatentDocWorkflowController {
 			String noAppPersonErrorMessage =  getNoAppPersonErrorMessage(patentDocs);
 			if (noAppPersonErrorMessage != null) {
 				model.addAttribute("message", noAppPersonErrorMessage);
-				return "common_message";
+				return "patent_doc_app_person_message";
 			}
 			
 			int totalAmount = 0;
