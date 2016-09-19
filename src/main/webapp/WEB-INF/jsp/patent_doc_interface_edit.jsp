@@ -152,7 +152,7 @@
 		        </div>			
 				<div class="model-list">
 			        <div style="float: right; padding-right: 15px; display: block;" id="kbpage"><span id="templateSectionId" style="display:none;">1</span><a style="color:#ccc" href="javascript:upPage();" id="topUpPage">上一页</a>&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="topDownPage">下一页</a></div>
-			        <div class="model" style="overflow-x: hidden; overflow-y: auto;">
+			        <div class="model">
 			            <div id="modelWrap" style="display: block;"></div>
 		
 						<div id="hiddenmodel" style="display: none;"></div>
