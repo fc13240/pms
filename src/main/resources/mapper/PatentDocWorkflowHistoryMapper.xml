@@ -31,7 +31,7 @@
   		insert into patent_doc_workflow_target(history,target,patent_doc)
   		values
   		<foreach item="patentDocWorkflowTargetRecord" collection="list" separator=",">
-			(#{patentDocWorkflowTargetRecord.history},#{patentDocWorkflowTargetRecord.target}, #{patentDocWorkflowTargetRecord.patentDoc})
+			(${patentDocWorkflowTargetRecord.history},${patentDocWorkflowTargetRecord.target}, ${patentDocWorkflowTargetRecord.patentDoc})
 		</foreach>
   	</insert>
   
@@ -39,7 +39,7 @@
 		insert into patent_doc_workflow_history(patent_doc_id,user_id,ACTION,action_time)
 		values
 		<foreach item="patentDocWorkflowHistoryRecord" collection="list" separator=",">
-			(#{patentDocWorkflowHistoryRecord.patentDocId},#{patentDocWorkflowHistoryRecord.userId}, #{patentDocWorkflowHistoryRecord.action},now())
+			(${patentDocWorkflowHistoryRecord.patentDocId},${patentDocWorkflowHistoryRecord.userId}, ${patentDocWorkflowHistoryRecord.action},now())
 		</foreach>
 	</insert>
 	
