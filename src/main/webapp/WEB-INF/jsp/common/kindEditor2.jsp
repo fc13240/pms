@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="<s:url value='/temp/css/editor.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 <link rel="stylesheet" href="${base }/temp/css/bootstrap.min.css" />
 <script src="${base }/plugins/kindeditor/bootstrap.min.js"></script>
+<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 
 <script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
  <script src="${base }/plugins/kindeditor/js-selfwrite.js" type="text/javascript"></script>
