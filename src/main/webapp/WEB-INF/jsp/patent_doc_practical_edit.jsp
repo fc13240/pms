@@ -581,10 +581,7 @@
 				
 				<!--上传附件div  -->
 				<div class="center_content" id="content6" thisid="2514" style="display: none;">
-					<div class="title">
-						上传附件
-					</div>
-					
+			
 					<div class="cl">
 						<div class="lt-box" style="height:300px;padding:20px;">
 
