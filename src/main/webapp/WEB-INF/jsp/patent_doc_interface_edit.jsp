@@ -539,7 +539,7 @@
 					  <option value="未备案">未备案</option>
 					  <option value="备案中">备案中</option>
 					  <option value="备案成功">备案成功</option>
-					  <option value="备案失败">备案失败</option>
+					  <option value="不能备案">不能备案</option>
 					</select>
 					<br>
 					<h5>备案证件号:</h5>
@@ -596,7 +596,7 @@
 					  <option value="未备案">未备案</option>
 					  <option value="备案中">备案中</option>
 					  <option value="备案成功">备案成功</option>
-					  <option value="备案失败">备案失败</option>
+					  <option value="不能备案">不能备案</option>
 					</select>
 					<br>
 					<h5>备案证件号:</h5>
