@@ -398,8 +398,8 @@ margin: 1px 0 0 1px;}
 						 	<input id="patentDocAttachmentFile" type="hidden" name="patentDocAttachmentFile" value="${patentDoc.patentDocAttachmentFile}">
 							
 							
-							<font size="3" font_family="Microsoft YaHei" color="black" style="float:left">图片名称:</font>
-							<input type="text"  class="selectPointOfInterest form-control" id="piciLlus2"   list="companys" name="caption"   onchange="picName()" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999; width: 200px; height: 30px; margin-left: 94px" value="" autocomplete="off" required>
+							<font size="3" font_family="Microsoft YaHei" color="black" style="float:left;margin-left: 94px">图片名称:</font>
+							<input type="text"  class="selectPointOfInterest form-control" id="piciLlus2"   list="companys" name="caption"   onchange="picName()" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999; width: 200px; height: 30px" value="" autocomplete="off" required>
 								<datalist id="companys">
 								<option value="主视图">
 								<option value="后视图">
