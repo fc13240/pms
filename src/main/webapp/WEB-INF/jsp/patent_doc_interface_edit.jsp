@@ -423,9 +423,7 @@ margin: 1px 0 0 1px;}
 			<!-- 摘要附图 -->							
 			</div>
 			<div class="center_content" id="content6" style="display: none;">
-				<div class="title">
-					上传附件
-				</div>
+		
 				
 				<div class="cl">
 					<div class="lt-box" style="height:300px;padding:20px;">
@@ -469,7 +467,6 @@ margin: 1px 0 0 1px;}
          </div>
 
 	         <div class = "modal-body" >
-		  				
 				<a href="javascript:return void" onclick="batchAddAppPerson()" >
 				<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个申请人哦！">添加申请人</button>
 				</a>
