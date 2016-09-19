@@ -22,73 +22,83 @@
 	<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 	<script type="text/javascript">
 	var i= 1;
-			$(function(){
-				// 初始化插件
-				$("#zyupload").zyUpload({
-					width            :   "650px",                 // 宽度
-					height           :   "400px",                 // 宽度
-					itemWidth        :   "140px",                 // 文件项的宽度
-					itemHeight       :   "115px",                 // 文件项的高度
-					url              :   "<s:url value='/kindeditor/uploadInterFacePic.html'/>?patentDocId=${patentDoc.patentDocId}", 
-					fileType         :   ["jpg","png","jpeg"],// 上传文件的类型
-					fileSize         :   51200000,                // 上传文件的大小
-					multiple         :   false,                    // 是否可以多个文件上传
-					dragDrop         :   false,                   // 是否可以拖动上传文件
-					tailor           :   false,                   // 是否可以裁剪图片
-					del              :   false,                    // 是否可以删除文件
-					finishDel        :   false,  				  // 是否在上传文件完成后删除预览
-					/* 外部获得的回调接口 */
-					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
-						console.info("当前选择了以下文件：");
-						console.info(selectFiles);
-						if (allFiles.length > 1) {
-							
-							alert("每次只能上传一张，请先上传之前的图片再选择！");
-							for (var i = 1; i < allFiles.length; i++) {
-								console.log(allFiles[i]);
-								ZYFILE.funDeleteFile(allFiles[i].index, true);
-								return false;
-							}
-						}
-						
-
-						return true;
-					},
-					onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
-						console.info("当前删除了此文件：");
-						console.info(file.name);
-					},
-					onSuccess: function(file, response){
-						// 文件上传成功的回调方法
-						var Jresponse=$.parseJSON(response);
-						$("#patentImgUrl").append("<input type='hidde' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
-						$("#patentImgUrl").append("<input type='hidde' id='picName' name='picName' value='"+Jresponse["picName"]+"'/>");
-						$("#patentImgUrl").append("<input type='hidde' id='seqNo' name='seqNo' value='"+Jresponse["count"]+"'/>");
-						savePatentImgUrl();
-						$("#patentImgUrl").empty();
-					},
-					onFailure: function(file, response){          // 文件上传失败的回调方法
-						console.info("此文件上传失败：");
-						console.info(file.name);
-					},
-					onComplete: function(response){           	  // 上传完成的回调方法
-						console.info("文件上传完成");
-						console.info(response);
+	$(function(){
+		// 初始化插件
+		$("#zyupload").zyUpload({
+			width            :   "650px",                 // 宽度
+			height           :   "400px",                 // 宽度
+			itemWidth        :   "140px",                 // 文件项的宽度
+			itemHeight       :   "115px",                 // 文件项的高度
+			url              :   "<s:url value='/kindeditor/uploadInterFacePic.html'/>?patentDocId=${patentDoc.patentDocId}", 
+			fileType         :   ["jpg","png","jpeg"],// 上传文件的类型
+			fileSize         :   51200000,                // 上传文件的大小
+			multiple         :   false,                    // 是否可以多个文件上传
+			dragDrop         :   false,                   // 是否可以拖动上传文件
+			tailor           :   false,                   // 是否可以裁剪图片
+			del              :   false,                    // 是否可以删除文件
+			finishDel        :   false,  				  // 是否在上传文件完成后删除预览
+			/* 外部获得的回调接口 */
+			onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+				console.info("当前选择了以下文件：");
+				console.info(selectFiles);
+				if (allFiles.length > 1) {
+					
+					alert("每次只能上传一张，请先上传之前的图片再选择！");
+					for (var i = 1; i < allFiles.length; i++) {
+						console.log(allFiles[i]);
+						ZYFILE.funDeleteFile(allFiles[i].index, true);
+						return false;
 					}
-				});
-				
+				}
 				
 
-				loadImgs();
-				
-				
-				
-			});
-			
+				return true;
+			},
+			onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+				console.info("当前删除了此文件：");
+				console.info(file.name);
+			},
+			onSuccess: function(file, response){
+				// 文件上传成功的回调方法
+				var Jresponse=$.parseJSON(response);
+				$("#patentImgUrl").append("<input type='hidde' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
+				$("#patentImgUrl").append("<input type='hidde' id='seqNo' name='seqNo' value='"+Jresponse["count"]+"'/>");
+				savePatentImgUrl();
+				$("#patentImgUrl").empty();
+			},
+			onFailure: function(file, response){          // 文件上传失败的回调方法
+				console.info("此文件上传失败：");
+				console.info(file.name);
+			},
+			onComplete: function(response){           	  // 上传完成的回调方法
+				console.info("文件上传完成");
+				console.info(response);
+			}
+		});
+		
+		
+
+		loadImgs();
+		
+		
+		
+	});
+	
 		</script> 
 </head>
 
 <body>
+<style>
+.model1:hover .button{display:block}
+.picL9 li{
+overflow: hidden;
+position: relative;
+float: left;
+display: inline;
+width: 199px;
+height: 170px;
+margin: 1px 0 0 1px;}
+</style>
 <div style="width:100%;min-width:1220px; margin:0 auto;"> 
 	<div class="editor-left">
        	<div class="left_top">
@@ -175,7 +185,7 @@
 				<a style="float:left" class="review"  href="javascript:return void" onclick="preview_selfwrite(${patentDoc.patentDocId},${patentDoc.patentType});">
 				<i class="icon"></i>预览
 				</a>
-				<input type="hidden" id="patentType" value="1">
+				<input type="hidden" id="patentType" value="${patentDoc.patentType }">
 			</div>
 		</div>	
 		<div class="editor-center-con" style="padding:10px;">
@@ -377,7 +387,7 @@
 						display: none; cursor: pointer">
 						返回附图列表
 					</div>
-					 
+					 <br/>
 					
 					<div class="img_edit" id="origin">
 						<div class="imgfl" id="picBianHao">
@@ -388,8 +398,8 @@
 						 	<input id="patentDocAttachmentFile" type="hidden" name="patentDocAttachmentFile" value="${patentDoc.patentDocAttachmentFile}">
 							
 							
-							<font size="3" font_family="Microsoft YaHei" color="black">图片名称:</font>
-							<input type="text"  id="piciLlus2"   list="companys" name="caption"   onchange="picName()" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999" value="" autocomplete="off" required>
+							<font size="3" font_family="Microsoft YaHei" color="black" style="float:left;margin-left: 94px">图片名称:</font>
+							<input type="text"  class="selectPointOfInterest form-control" id="piciLlus2"   list="companys" name="caption"   onchange="picName()" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999; width: 200px; height: 30px" value="" autocomplete="off" required>
 								<datalist id="companys">
 								<option value="主视图">
 								<option value="后视图">
@@ -904,7 +914,7 @@
 	});
 	function savePatentImgUrl() {
 		if ($("#patentUrl").length > 0) {
-			var caption = $("#picName").val();
+			var caption = $("#piciLlus2").val();
 			var attachmentUrl = $("#patentUrl").val();
 			var patentDocId=$("#patentDocId").val();
 			var seqNo=$("#seqNo").val();
@@ -1111,7 +1121,7 @@ function delectImg(value){
 			data : {"attachmentId":value},
 				success: function(data){
 					alert("删除成功！");
-					$("#"+value).hide(); 
+					$("#"+value).hide();
 			},
 			error : function() {
 				alert("操作失败");
@@ -1208,7 +1218,7 @@ function loadImgs(){
 						);
 						 
 					 });
-					 //hoverImg2(); 
+					 
 			},
 			error : function() {
 				alert("操作失败");
@@ -1216,7 +1226,17 @@ function loadImgs(){
 	});
 }
 
-
+function picName() {
+	var picName = $("#piciLlus2").val();
+	
+	$.ajax({
+		url: "<s:url value='/user/setPicName.html'/>?picName=" + encodeURI(picName), 
+		type: 'get', 
+		success: function() {
+			
+		}
+	});		
+}
 function updateImgName(value,linkSeqNo){
 	var caption = prompt("请输入新名称", "");
 	if (caption != null && caption != "") {
@@ -1418,10 +1438,11 @@ function updateImgName(value,linkSeqNo){
 		var manual=$("#editorContent").val();
 		var abstractDescription=$("#editorContent7").val();
 		var rightClaim=$("#editorContent8").val();
+		var otherInformation=$("#otherInformation").val();
 		$.ajax({
 			type: "POST",
 			url: "<s:url value='/editor/savePreviewPatentDoc.html'/>",
-			data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":patentDocId},
+			data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":patentDocId,"otherInformation":otherInformation},
 			success: function(data){
 			},
 			error: function(){
