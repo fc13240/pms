@@ -193,7 +193,7 @@
 				                  </se:authorize>
 				                    
 				                   
-				                   <c:if test="${patentDoc.attachmentUrl!=null}">
+				                   <c:if test="${patentDoc.attachmentUrl !=null }">
 				                    	<a  href="<s:url value='/editor/downloadPatentStandardFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
 								

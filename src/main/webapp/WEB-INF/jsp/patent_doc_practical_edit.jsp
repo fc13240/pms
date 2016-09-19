@@ -2215,7 +2215,7 @@ function resetUpdateInventorForm(){
 
 function downloadAttachmentFile(value){
 	var iframe = document.getElementById('fileFrame');
-	iframe.src = "<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+value;
+	window.open("<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+value);
 }
 
 $('input[id=patentDocFile]').change(function() {  
