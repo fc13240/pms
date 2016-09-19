@@ -1556,14 +1556,15 @@ function savePatentDoc(value){
 function preview_selfwrite(patentDocId,patentType){
 	var patentDocId=patentDocId;
 	var patentType=patentType;
-	var name=$("#patentName").val();
+	var name=$("#editorContent1").val();
 	var manual=$("#editorContent").val();
 	var abstractDescription=$("#editorContent7").val();
 	var rightClaim=$("#editorContent8").val();
+	var otherInformation=$("#otherInformation").val();
 	$.ajax({
 		type: "POST",
 		url: "<s:url value='/editor/savePreviewPatentDoc.html'/>",
-		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":patentDocId},
+		data: {"name":name,"manual":manual,"abstractDescription":abstractDescription,"rightClaim":rightClaim,"patentDocId":patentDocId,"otherInformation":otherInformation},
 		success: function(data){
 		},
 		error: function(){
