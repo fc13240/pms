@@ -214,7 +214,7 @@
 										</a>
 									 </se:authorize>
 									 <se:authorize access="hasRole('ROLE_PLATFORM')"> 
-									  <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1}">
+									  <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 && patentDoc.patentDocProxyStatus.patentDocProxyStatusId== 2}">
 										<a href="javascript:return void" onclick="denialofService(${patentDoc.patentDocId})" >
 											拒绝委托
 										</a>
