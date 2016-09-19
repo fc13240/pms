@@ -81,7 +81,6 @@
 										${patentDoc.applyFee}
 									</td>
 									<td style="text-align:center">
-									<%-- ${patentDoc.printFee} --%>
 										<c:if test="${patentDoc.printFee<=0}">/</c:if>
 										<c:if test="${patentDoc.printFee>0}">${patentDoc.printFee}</c:if>
 									</td>
