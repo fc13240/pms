@@ -155,7 +155,7 @@
 							<c:forEach items="${patentDocs}" var="patentDoc" varStatus="status">
 							  <tr>
 							  	<td class="center" style="text-align:center" width="10px"><label class="pos-rel"> <span class="batch-share-item">
-								<input type="checkbox" class="check-item" patentDocId="<c:out value='${patentDoc.patentDocId}'/>" patentDocStatusId="<c:out value='${patentDoc.patentDocStatus.patentDocStatusId}'/>">
+								<input type="checkbox" class="check-item" patentDocId="<c:out value='${patentDoc.patentDocId}'/>" patentDocStatusId="<c:out value='${patentDoc.patentDocStatus.patentDocStatusId}'/>"  patentDocProxyStatus="<c:out value='${patentDoc.patentDocProxyStatus.patentDocProxyStatusId}'/>">
 								<span class="lbl"></span></label>
 								</td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
@@ -486,7 +486,15 @@ function batchProxyOrg() {
 			formutil.alertMessage('选中的文档中包含已分配过的文档，请重新选择！');
 			return;
 		}
-	}   
+	}
+	var patentDocProxyStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocProxyStatus');
+	for (var i = 0; i < patentDocProxyStatusIds.length; i++) {
+		if (  patentDocProxyStatusIds[i] == 1 ) {
+			formutil.alertMessage('选中的文档中包含已取消过的文档，请重新选择！');
+			return;
+		}
+	}
+	
 	for (var i = 0; i < patents_checked.length; i++) {
 		if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
 			uniquePatentNos.push(patents_checked[i]);
