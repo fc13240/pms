@@ -829,8 +829,6 @@ CREATE TABLE IF NOT EXISTS patent_doc_order_items (
 CREATE TABLE IF NOT EXISTS patent_doc_workflow_action(
 	action_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	action_type_desc VARCHAR(30) DEFAULT NULL
-
-
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS patent_doc_workflow_history(
@@ -845,8 +843,6 @@ CREATE TABLE IF NOT EXISTS patent_doc_workflow_history(
 	patent_documents(patent_doc_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT fk_patent_doc_workflow_history_action FOREIGN KEY idx_patent_doc_workflow_history_action(ACTION) REFERENCES
 	 patent_doc_workflow_action (action_id) ON DELETE CASCADE
-	
-	
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS patent_doc_workflow_target (
@@ -879,8 +875,6 @@ INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(11,'分
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(12,'删除');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(13,'置为待确认');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(14,'置为待交局');
-
-
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(15,'拒绝委托');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(16,'上传交局文件');
 INSERT INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(18,'上传定稿文件');
