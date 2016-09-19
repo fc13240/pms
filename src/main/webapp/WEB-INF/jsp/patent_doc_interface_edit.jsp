@@ -17,8 +17,7 @@
 	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
     <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
-	<link rel="stylesheet" href="<s:url value='/temp/css/common.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
-	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
+	
 	<link rel="stylesheet" media="screen" href="<s:url value='/temp/css/jquery-ui.min.css'/>" />
 	<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 	<script type="text/javascript">
@@ -134,7 +133,7 @@
 	    <div class="data_title">
 	        <i class="icon"></i>撰写指南和模板
 	    </div>
-	    <div id="modelbutton" class="modelbutton" onclick="modelbuttonclick();" style="position: fixed; top: 230px; left: 1294.5px; display: none;">
+	    <div id="modelbutton" class="modelbutton" onclick="modelbuttonclick();" style="position: fixed; background: #2594e9;top: 230px; left: 1294.5px; display: none;">
 	        +设为模板</div>
 	    <div class="right_right_bot" tab_name="content0" style="overflow-x: hidden; overflow-y: auto;">
 	        <div class="data_menu">
@@ -462,7 +461,7 @@
 	         <div class = "modal-body" >
 		  				
 				<a href="javascript:return void" onclick="batchAddAppPerson()" >
-				<button style="display: inline-block;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个申请人哦！">添加申请人</button>
+				<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个申请人哦！">添加申请人</button>
 				</a>
 			    <input style="display: inline-block;width:400px;margin-left:200px;" type="text" class="t-input form-control" id="searchAppersonName" placeholder="请输入申请人姓名" onkeydown="if(event.keyCode==13){searchAppPerson(this.value);}"/>
 			     <button style="display: inline-block;" class="button button-caution button-rounded" type="button" style="width:80px;" onclick="searchAppPerson($('input[id=searchAppersonName]').val())">搜索</button>
@@ -637,7 +636,7 @@
 	           
 	           
 	           <a href="javascript:return void" onclick="batchAddInventor()" >
-				<button style="display: inline-block;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个发明人批量哦！">添加发明人</button>
+				<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个发明人批量哦！">添加发明人</button>
 				</a>
 				<input style="display: inline-block;width:400px;margin-left:200px;" type="text" class="t-input form-control" id="searchInventorName" placeholder="请输入发明人姓名" onkeydown="if(event.keyCode==13){searchInventor(this.value);}"/>
 			     <button style="display: inline-block;" class="button button-caution button-rounded" type="button" style="width:80px;" onclick="searchInventor($('input[id=searchInventorName]').val())">搜索</button> 
