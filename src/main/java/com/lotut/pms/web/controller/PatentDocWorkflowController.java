@@ -117,7 +117,7 @@ public class PatentDocWorkflowController {
 	}
 	
 	@RequestMapping(path="showProxyOrgs", method=RequestMethod.GET)
-	public String showFriends(Model model) {
+	public String showProxyOrgs(Model model) {
 		if(PrincipalUtils.isPlatform()) {
 			List<ProxyOrg> proxyOrgs = employeeService.getTopProxyOrgList();
 			model.addAttribute("proxyOrgs", proxyOrgs);
