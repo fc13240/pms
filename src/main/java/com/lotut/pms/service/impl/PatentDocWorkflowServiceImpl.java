@@ -43,7 +43,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 		for(PatentDoc doc:patentDocs){
 			totalAmount += doc.getTotalFee();
 		}
-		order.setAmount(0.01);
+		order.setAmount(totalAmount);
 		PaymentMethod paymentMethod = new PaymentMethod();
 		paymentMethod.setPaymentMethodId(1);
 		order.setPaymentMethod(paymentMethod);
