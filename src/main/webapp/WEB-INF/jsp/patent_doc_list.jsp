@@ -33,7 +33,7 @@
 					    <table class="search-table">
 					    <tr>
 					    	<td>专利类型</td>
-						    <td>文档状态</td>
+						    <td>案件状态</td>
 						    <td>关键字</td>
 						    <td></td>
 					    </tr>
@@ -62,7 +62,7 @@
 									</select>
 						    	</td>
 					    	<td>
-					    		 <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="文档名称" class="t-input form-control"/>	
+					    		 <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="专利名称" class="t-input form-control"/>	
 					    	
 					    	</td>
 					    	<td>
