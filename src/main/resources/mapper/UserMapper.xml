@@ -130,7 +130,7 @@
 		  AND u.user_id NOT IN (SELECT org_user_id FROM proxy_org)		
 		
 			<if test="keyword != null and keyword != ''">
-				and u.username like #{keyword_pattern} or u.name like #{keyword_pattern}
+				and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern})
 			</if>
 		
 		) rs where rs.user_id != #{userId}
