@@ -28,7 +28,7 @@
   		</resultMap>
   	
   	<insert id="insertWorkflowTargets" parameterType="list" >
-  		replace into patent_doc_workflow_target(history,target,patent_doc)
+  		insert into patent_doc_workflow_target(history,target,patent_doc)
   		values
   		<foreach item="patentDocWorkflowTargetRecord" collection="list" separator=",">
 			(#{patentDocWorkflowTargetRecord.history},#{patentDocWorkflowTargetRecord.target}, #{patentDocWorkflowTargetRecord.patentDoc})
