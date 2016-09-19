@@ -185,7 +185,7 @@
 		</if>
 		select cs.id,cs.user_id, cs.remark_name,cs.proxy_org_id,u.username,u.name from customer_supports cs join users u on u.user_id = cs.user_id where u.user_id in (select user_id from customer_supports where proxy_org_id=(select org_id from proxy_org where org_user_id=#{currentUserId}))
 		<if test="keyword!=null">
-			and u.username like #{search_keyword}
+			and u.username like #{search_keyword} or u.name like #{search_keyword}
 		</if>
 		
 	</select>
@@ -198,7 +198,7 @@
 		select tp.id,tp.user_id, tp.remark_name,tp.proxy_org_id,u.username,u.name from tech_person tp join users u 
 				on u.user_id = tp.user_id where tp.proxy_org_id=(select proxy_org_id FROM customer_supports where user_id=#{currentUserId})
 		<if test="keyword!=null">
-			and u.username like #{search_keyword}
+			and u.username like #{search_keyword} or u.name like #{search_keyword}
 		</if>
 		
 	</select>
@@ -210,7 +210,7 @@
 		select p.id,p.user_id,p.remark_name,p.proxy_org_id,u.username,u.name from process_person p join users u 
 				on u.user_id = p.user_id where p.proxy_org_id=(select proxy_org_id FROM customer_supports where user_id=#{currentUserId})
 		<if test="keyword!=null">
-			and u.username like #{search_keyword}
+			and u.username like #{search_keyword} or u.name like #{search_keyword}
 		</if>
 	</select>
 	<select id="searchProxyOrgId" resultMap="proxyOrgResultMap">
@@ -227,7 +227,7 @@
 			p.parent_org_id=#{parentOrgId}
 		</if>
 		<if test="keyword!=null and keyword!=''">
-		 and u.username like #{search_keyword}
+		 and u.username like #{search_keyword} or u.name like #{search_keyword}
 		</if>
 	</select>
 </mapper>
