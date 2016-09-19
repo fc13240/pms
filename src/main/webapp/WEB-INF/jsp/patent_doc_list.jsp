@@ -596,6 +596,7 @@ function denialofService(value){
 </script>
 <script type="text/javascript">
 	$(function() {
+		$.ajaxSetup({ cache: false });
 		formutil.setElementValue("#pageSizeSelect", ${page.pageSize});
 	});
 	

@@ -10,14 +10,82 @@
 	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 	<link rel="stylesheet" href="<s:url value='/temp/css/editor.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 <c:import url="common/kindEditor3.jsp"></c:import>
+	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
+	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
+    <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
+	<script type="text/javascript">
+	var i= 1;
+			$(function(){
+				// 初始化插件
+				$("#zyupload").zyUpload({
+					width            :   "650px",                 // 宽度
+					height           :   "400px",                 // 宽度
+					itemWidth        :   "140px",                 // 文件项的宽度
+					itemHeight       :   "115px",                 // 文件项的高度
+					url              :   "<s:url value='/kindeditor/uploadPic.html'/>?patentDocId=${patentDoc.patentDocId}",  // 上传文件的路径
+					fileType         :   ["jpg","png","jpeg"],// 上传文件的类型
+					fileSize         :   51200000,                // 上传文件的大小
+					multiple         :   false,                    // 是否可以多个文件上传
+					dragDrop         :   false,                   // 是否可以拖动上传文件
+					tailor           :   false,                   // 是否可以裁剪图片
+					del              :   false,                    // 是否可以删除文件
+					finishDel        :   false,  				  // 是否在上传文件完成后删除预览
+					/* 外部获得的回调接口 */
+					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+						console.info("当前选择了以下文件：");
+						console.info(selectFiles);
+						if (allFiles.length > 1) {
+							
+							alert("每次只能上传一张，请先上传之前的图片再选择！");
+							for (var i = 1; i < allFiles.length; i++) {
+								console.log(allFiles[i]);
+								ZYFILE.funDeleteFile(allFiles[i].index, true);
+								return false;
+							}
+						}
+						
 
+						return true;
+					},
+					onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+						console.info("当前删除了此文件：");
+						console.info(file.name);
+					},
+					onSuccess: function(file, response){
+						// 文件上传成功的回调方法
+						var Jresponse=$.parseJSON(response);
+						$("#patentImgUrl").append("<input type='hidde' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
+						$("#patentImgUrl").append("<input type='hidde' id='picName' name='picName' value='"+Jresponse["picName"]+"'/>");
+						$("#patentImgUrl").append("<input type='hidde' id='seqNo' name='seqNo' value='"+Jresponse["count"]+"'/>");
+						savePatentImgUrl();
+						$("#patentImgUrl").empty();
+					},
+					onFailure: function(file, response){          // 文件上传失败的回调方法
+						console.info("此文件上传失败：");
+						console.info(file.name);
+					},
+					onComplete: function(response){
+						console.info("文件上传完成");
+						console.info(response);
+					}
+				});
+				
+				
+
+				loadImgs();
+				
+				
+				
+			});
+			
+		</script> 
 </head>
 <body>
-<div style="width:100%;min-width:1200px; margin:0 auto;"> 
+<div style="width:100%;min-width:1220px; margin:0 auto;"> 
 	<div class="editor-left">
 		<div class="left_top">
 			<div class="cl" id="div_ipctype">
-			<div class="bt" style="margin-left:65px;">发明</div>
+			<div class="bt" style="margin-left:65px;">发明专利</div>
 			</div>
 		</div>
 		<!--申请文件九部分标签切换 -->
@@ -275,7 +343,7 @@
 					<a style="color:#ccc" href="javascript:upPage();" id="topUpPage">上一页</a>
 					&nbsp;&nbsp;<a style="color:#0085d0" href="javascript:downPage();" id="topDownPage">下一页</a>
 				</div>
-			<div class="model" style="overflow-x: hidden; overflow-y: auto;">
+			<div class="model" style="">
 				<div id="modelWrap" style="display: block;"></div>
 				<div id="hiddenmodel" style="display: none;"></div>
 			</div>
@@ -291,7 +359,7 @@
 	</div>
 <!-- right end -->
 <!-- center beg -->
-	<div class="editor-center" style="min-width:700px;">
+	<div class="editor-center" style="min-width:700px;max-height:1000px;OVERFLOW:auto;">
 	   
 		<div class="center_top">
 			<div class="backedit">
@@ -301,9 +369,9 @@
 				</a>
 			</div>
 			<div class="top_right">
-				<div style="float:left" class="review" onclick="preview_selfwrite(${patentDoc.patentDocId},${patentDoc.patentType});">
+				<a style="float:left" class="review"  href="javascript:return void" onclick="preview_selfwrite(${patentDoc.patentDocId},${patentDoc.patentType});">
 				<i class="icon"></i>预览
-				</div>
+				</a>
 				<input type="hidden" id="patentType" value="1">
 			</div>
 		</div>	
@@ -315,7 +383,7 @@
 			<input id="whichTip" type="hidden" name="name" value="2">
 			
 				<!--请求协议书div  -->
-			<div class="content" id="content0">
+			<div class="center_content" id="content0">
 				<div>
 					<span style="font-weight: bold;font-size:14px;">
 							内部编码 <span>${patentDoc.internalCode }</span>
@@ -351,10 +419,10 @@
 				</div>
 				<div class="patent_person" style="margin-top:10px;">
 					<div class="patent_person_title">
-						<button type="button" style="width:120px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
+						<button type="button" style="width:130px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
 							选择常用申请人
 						</button>
-						<button type="button"  style="width:90px;margin-left:20px;" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addAppPersonModal">
+						<button type="button"  style="width:100px;margin-left:20px;" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addAppPersonModal">
 								新增申请人
 						</button>
 					</div>
@@ -397,10 +465,10 @@
 				
 				<div class="patent_inventor" style="margin-top:10px;">
 					<div class="patent_inventor_title">
-								<button style="width:120px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonInventorModal">
+								<button style="width:130px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonInventorModal">
 									选择常用发明人
 								</button>
-								<button style="margin-left:20px;width:90px" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addInventorModal">
+								<button style="margin-left:20px;width:100px" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addInventorModal">
 									新增发明人
 								</button>
 					</div>
@@ -438,7 +506,7 @@
 				</div>
 				<div class="patent_contact" style="margin-top:10px;">
 					<div class="patent_contact_title">
-						<button style="width:120px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">选择常用联系人</button>
+						<button style="width:130px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">选择常用联系人</button>
 					</div>
 					<div class="patent_contact_table" style="margin-top:10px;" id="contactDiv">
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
@@ -476,7 +544,7 @@
 			</div>			
 				
 			<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->
-			<div class="content" id="content1" style="display:none">
+			<div class="center_content" id="content1" style="display:none">
 				<div class="title">
 			
 				</div>
@@ -503,7 +571,7 @@
 				
 				
 				<!--上传附件div  -->
-				<div class="content" id="content6" thisid="2514" style="display: none;">
+				<div class="center_content" id="content6" thisid="2514" style="display: none;">
 					<div class="title">
 						上传附件
 					</div>
@@ -595,7 +663,7 @@
 						<!-- content start-->
 						<input type="hidden" id="ft_hidSrc" value="">
 						<input type="hidden" id="ft_hidFid" value="">
-						<div class="content" id="content2" style="display: none;">
+						<div class="center_content" id="content2" style="display: none;">
 							
 							<div class="box" id="content5-1">
 								<div style="margin:10px" class="upimg1" onclick="addPic();">
@@ -609,7 +677,7 @@
 								</div>
 							</div>
 						<!-- content start-->
-						<div class="content" id="content5_build" style="display: none;">
+						<div class="center_content" id="content5_build" style="display: none;">
 							
 							<div style="height: 20px">
 							</div>
@@ -652,7 +720,7 @@
 							}
 						</style>
 						<!-- content start-->
-						<div class="content" id="content5" style="display: none;">
+						<div class="center_content" id="content5" style="display: none;">
 							<div style="height: 80px">
 							</div>
 								<div class="upimg1" onclick="findAttachmentImg();" id="choseAbs" style="
@@ -1142,6 +1210,7 @@
 	   </div>
 	</div>
 </div>
+
 
 
 

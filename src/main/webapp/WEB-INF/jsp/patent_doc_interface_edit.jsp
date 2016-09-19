@@ -115,7 +115,7 @@ margin: 1px 0 0 1px;}
 	        	<div class="left_top">
 		               <div class="cl" id="div_ipctype">
 		               <c:if test="${patentDoc.patentType==1 }">
-		                   	<div class="bt" style="margin-left:65px;">发明</div>
+		                   	<div class="bt" style="margin-left:65px;">发明专利</div>
 		               </c:if>
 		               		<c:if test="${patentDoc.patentType==2 }">
 		               <div class="bt"  style="margin-left:65px;">实用新型</div>
@@ -162,9 +162,9 @@ margin: 1px 0 0 1px;}
 							 </a>
 	                    </div>
 	                    <div class="top_right">
-	                        <div class="review" onclick="preview_selfwrite('${patentDoc.patentDocId}','${patentDoc.patentType}');">
+	                        <a class="review"  href="javascript:return void" onclick="preview_selfwrite('${patentDoc.patentDocId}','${patentDoc.patentType}');">
 	                            <i class="icon"></i>预览
-	                        </div>
+	                        </a>
 	                        <input type="hidden" id="patentType" value="${patentDoc.patentType }"/>
 	                    </div>
 	                </div>
