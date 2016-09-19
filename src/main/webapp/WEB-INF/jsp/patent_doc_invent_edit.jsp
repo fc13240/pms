@@ -799,8 +799,8 @@
 						<td class="center" style="text-align:center"> ${status.count} </td>
 						<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
 						<td style="text-align:center"><c:out value="${appPerson.idNumber}"/></td>
-						<td>${appPerson.postcodeAddress}</td>
-						<td>${appPerson.feeReduceTransactionStatus}</td>
+						<td style="text-align:center">${appPerson.postcodeAddress}</td>
+						<td style="text-align:center">${appPerson.feeReduceTransactionStatus}</td>
 						 
 						<%--<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td> --%>
 					  </tr>
