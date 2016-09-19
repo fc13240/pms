@@ -162,9 +162,9 @@ public class PatentDocWorkflowController {
 			
 		}
 		
-		final int PATENT_DOC_STAUTS_PAID = 2;
+		final int PATENT_DOC_STAUTS = 2;
 		final int PATENT_DOC_PROXY_STAUTS_PAID = 3;
-		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS);
 		patentDocWorkflowService.updatePatentDocProxyStatus(patentDocIdList,PATENT_DOC_PROXY_STAUTS_PAID);
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, proxyOrgs, action);
 		return "patent_doc_list";
@@ -208,8 +208,8 @@ public class PatentDocWorkflowController {
 			patentDocIdList.add(Long.valueOf(patentDocId));
 			
 		}
-		final int PATENT_DOC_STAUTS_PAID = 3;
-		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		final int PATENT_DOC_STAUTS = 3;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS);
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, customerSuppors, action);
 		return "patent_doc_list";
 	}
@@ -253,8 +253,8 @@ public class PatentDocWorkflowController {
 			patentDocIdList.add(Long.valueOf(patentDocId));
 			
 		}
-		final int PATENT_DOC_STAUTS_PAID = 4;
-		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		final int PATENT_DOC_STAUTS = 4;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS);
 		
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, techPersons, action);
 		return "patent_doc_list";
@@ -300,8 +300,8 @@ public class PatentDocWorkflowController {
 			patentDocIdList.add(Long.valueOf(patentDocId));
 			
 		}
-		final int PATENT_DOC_STAUTS_PAID = 9;
-		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		final int PATENT_DOC_STAUTS = 9;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS);
 		patentDocWorkflowHistoryService.insertActionHistories(patentDocIds, insertAction);
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, processPersons, shareAction);
 		return "patent_doc_list";
@@ -386,8 +386,8 @@ public class PatentDocWorkflowController {
 			patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
 		int action=PatentDocWorkflowAction.ActionType.get("分配给代理机构");
 		patentDocWorkflowService.redistributeProxyOrgPatentDoc(patentDocIds.get(0), action, proxyOrgs.get(0));
-		final int PATENT_DOC_STAUTS_PAID = 2;
-		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		final int PATENT_DOC_STAUTS = 2;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS);
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, proxyOrgs, action);
 		return "patent_doc_list";
 	}
@@ -398,8 +398,8 @@ public class PatentDocWorkflowController {
 			patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
 		int action=PatentDocWorkflowAction.ActionType.get("分配给客服人员");
 		patentDocWorkflowService.redistributeProxyOrgPatentDoc(patentDocIds.get(0), action, customerSuppors.get(0));
-		final int PATENT_DOC_STAUTS_PAID = 3;
-		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		final int PATENT_DOC_STAUTS = 3;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS);
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, customerSuppors, action);
 		return "patent_doc_list";
 	}
@@ -410,8 +410,8 @@ public class PatentDocWorkflowController {
 			patentDocIdList.add(Long.valueOf(patentDocIds.get(0)));
 		int action=PatentDocWorkflowAction.ActionType.get("分配给技术员");
 		patentDocWorkflowService.redistributeProxyOrgPatentDoc(patentDocIds.get(0), action, techPersons.get(0));
-		final int PATENT_DOC_STAUTS_PAID = 4;
-		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		final int PATENT_DOC_STAUTS = 4;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS);
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, techPersons, action);
 		return "patent_doc_list";
 	}
@@ -424,8 +424,8 @@ public class PatentDocWorkflowController {
 			int insertAction =PatentDocWorkflowAction.ActionType.get("置为待交局");
 			patentDocWorkflowHistoryService.insertActionHistories(patentDocIds, insertAction);
 		patentDocWorkflowService.redistributeProxyOrgPatentDoc(patentDocIds.get(0), shareAction, processPersons.get(0));
-		final int PATENT_DOC_STAUTS_PAID = 9;
-		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS_PAID);
+		final int PATENT_DOC_STAUTS = 9;
+		patentDocWorkflowService.updatePatentDocStatus(patentDocIdList, PATENT_DOC_STAUTS);
 		patentDocWorkflowHistoryService.insertHistoriesAndWorkflowTargets(patentDocIds, processPersons, shareAction);
 		return "patent_doc_list";
 	}
