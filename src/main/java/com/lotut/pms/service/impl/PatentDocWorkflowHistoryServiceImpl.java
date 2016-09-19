@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.lotut.pms.constants.PatentDocWorkflowAction;
 import com.lotut.pms.dao.PatentDocWorkflowHistoryDao;
 import com.lotut.pms.domain.PatentDocWorkflowHistory;
@@ -32,6 +34,7 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 	}
 	
 	@Override
+	@Transactional
 	public void insertHistoriesAndWorkflowTargets(List<Integer> ids,List<Integer> users, int action) {
 		 insertHistories(ids,action);
 		 insertWorkflowTargets(users,action);
@@ -59,11 +62,12 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 	
 	private void insertWorkflowTargets(List<Integer> ids,int action){
 		int userId=PrincipalUtils.getCurrentUserId();
-		List<PatentDocWorkflowHistory> PatentDocWorkflowHistories=patentDocWorkflowHistoryDao.getPatentDocWorkflowHistoryByUserAndAction(userId, action);
-		List<Long> patentDocWorkflowHistoryIdList = new ArrayList<>(PatentDocWorkflowHistories.size());
-		List<Long> patentDocWorkflowHistoryPatentDocIdList = new ArrayList<>(PatentDocWorkflowHistories.size());
-		for(PatentDocWorkflowHistory patentDocWorkflowHistory:PatentDocWorkflowHistories){
+		List<PatentDocWorkflowHistory> patentDocWorkflowHistories=patentDocWorkflowHistoryDao.getPatentDocWorkflowHistoryByUserAndAction(userId, action);
+		List<Long> patentDocWorkflowHistoryIdList = new ArrayList<>(patentDocWorkflowHistories.size());
+		List<Long> patentDocWorkflowHistoryPatentDocIdList = new ArrayList<>(patentDocWorkflowHistories.size());
+		for(PatentDocWorkflowHistory patentDocWorkflowHistory:patentDocWorkflowHistories){
 			patentDocWorkflowHistoryIdList.add(patentDocWorkflowHistory.getHistoryId());
+//			System.out.println(patentDocWorkflowHistory.getHistoryId());
 			patentDocWorkflowHistoryPatentDocIdList.add(patentDocWorkflowHistory.getPatentDocId());
 		}
 		List<Map<String, Long>> patentDocWorkflowTargetRecords=new ArrayList<>();
@@ -80,18 +84,18 @@ public class PatentDocWorkflowHistoryServiceImpl implements PatentDocWorkflowHis
 		}
 		patentDocWorkflowHistoryDao.insertWorkflowTargets(patentDocWorkflowTargetRecords);
 		
-		List<Map<String, Integer>> sharePatentDocRecords = new ArrayList<>();
-		for(int id: ids){
-			for(long patentDocWorkflowHistoryPatentDocId:patentDocWorkflowHistoryPatentDocIdList){
-				Map<String, Integer> sharePatentDocRecord =  new HashMap<String, Integer>();
-				sharePatentDocRecord.put("patentDoc", (int) patentDocWorkflowHistoryPatentDocId);
-				sharePatentDocRecord.put("shareBy", userId);
-				sharePatentDocRecord.put("shareTo", id);
-				sharePatentDocRecords.add(sharePatentDocRecord);
-			}
-		}
+//		List<Map<String, Integer>> sharePatentDocRecords = new ArrayList<>();
+//		for(int id: ids){
+//			for(long patentDocWorkflowHistoryPatentDocId:patentDocWorkflowHistoryPatentDocIdList){
+//				Map<String, Integer> sharePatentDocRecord =  new HashMap<String, Integer>();
+//				sharePatentDocRecord.put("patentDoc", (int) patentDocWorkflowHistoryPatentDocId);
+//				sharePatentDocRecord.put("shareBy", userId);
+//				sharePatentDocRecord.put("shareTo", id);
+//				sharePatentDocRecords.add(sharePatentDocRecord);
+//			}
+//		}
 	
-		patentDocWorkflowHistoryDao.insertSharePatentDocs(sharePatentDocRecords);
+//		patentDocWorkflowHistoryDao.insertSharePatentDocs(sharePatentDocRecords);
 
 	}
 

@@ -225,11 +225,11 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 			return;
 		}
 		int techPersonAction=PatentDocWorkflowAction.ActionType.get("分配给流程人员");
-		int techPersonCount=patentDocWorkflowDao.getCountByWorkflowHistory(patentDocId, customerSupporTarget, techPersonAction);
+		int techPersonCount=patentDocWorkflowDao.getCountByWorkflowHistory(patentDocId, target, techPersonAction);
 		int techPersonHistoryId=0;
 		int techPersonTarget=0;
 		if(techPersonCount>0){
-			techPersonHistoryId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, customerSupporTarget, techPersonAction);
+			techPersonHistoryId=patentDocWorkflowDao.getLastHistoryIdByWorkflowHistory(patentDocId, target, techPersonAction);
 			techPersonTarget=patentDocWorkflowDao.getTargetByHistoryId(patentDocId, techPersonHistoryId);
 			patentDocWorkflowDao.deleteByWorkflowHistory(patentDocId, techPersonTarget);
 		}
