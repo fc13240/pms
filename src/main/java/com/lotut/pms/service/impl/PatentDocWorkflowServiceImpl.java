@@ -16,6 +16,7 @@ import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocOrder;
 import com.lotut.pms.domain.PatentDocOrderItem;
 import com.lotut.pms.domain.PatentDocWorkflowHistory;
+import com.lotut.pms.domain.PaymentMethod;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.PatentDocWorkflowService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -42,7 +43,10 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 		for(PatentDoc doc:patentDocs){
 			totalAmount += doc.getTotalFee();
 		}
-		order.setAmount(totalAmount);
+		order.setAmount(0.01);
+		PaymentMethod paymentMethod = new PaymentMethod();
+		paymentMethod.setPaymentMethodId(1);
+		order.setPaymentMethod(paymentMethod);
 		patentDocWorkflowDao.insertOrder(order);
 		List<PatentDocOrderItem> orderItems = new ArrayList<>(patentDocs.size());
 		

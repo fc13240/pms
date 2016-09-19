@@ -68,7 +68,7 @@
   	
   	<select id="getAllAppPersonByUser" parameterType="int" resultType="CommonAppPerson">
   		select p.app_person_id as appPersonId,p.name as name,p.id_number as idNumber,
-  		p.postcode_address as postcodeAddress,p.other_information as otherInfo from common_app_person p 
+  		p.postcode_address as postcodeAddress,p.other_information as otherInfo,p.fee_reduce_transaction_status as feeReduceTransactionStatus from common_app_person p
   		 where user_id=#{userId}
   		
   	</select>

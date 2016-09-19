@@ -18,7 +18,12 @@
 <link rel="stylesheet" href="${base }/plugins/kindeditor/themes/default/default.css" />
 <link rel="stylesheet" href="${base }/plugins/kindeditor/themes/simple/simple.css" />
 <link rel="stylesheet" href="${base }/plugins/kindeditor/plugins/code/prettify.css" />
-<link href="${base }/static/css/edit_instruct.css?v=2.3.20150415" type="text/css" rel="stylesheet" />
+
+
+<link rel="stylesheet" href="<s:url value='/temp/css/editor.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
+<link rel="stylesheet" href="${base }/temp/css/bootstrap.min.css" />
+<script src="${base }/plugins/kindeditor/bootstrap.min.js"></script>
+
 <script src="${base }/static/js/tab_change.js" type="text/javascript"></script>   <!--tabChange-->
  <script src="${base }/plugins/kindeditor/js-selfwrite.js" type="text/javascript"></script>
 <script src="${base }/plugins/kindeditor/selfwritefigure.js" type="text/javascript"></script>   <!--uploadImg-->

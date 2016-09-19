@@ -8,12 +8,16 @@
 <html>
 <head>
 	<title>实用新型撰写</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 	<link rel="stylesheet" href="<s:url value='/temp/css/editor.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 <c:import url="common/kindEditor3.jsp"></c:import>
 	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
     <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
+    <script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -851,7 +855,7 @@
 					<h5>费减备案状态:</h5>
 					<select id="modalFeeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;"  required>	
 					  <option value="未备案">未备案</option>
-					  <option value="委托中">委托中</option>
+					  <option value="备案中">备案中</option>
 					  <option value="备案成功">备案成功</option>
 					  <option value="备案失败">备案失败</option>
 					</select>
@@ -908,7 +912,7 @@
 					<h5>费减备案状态:</h5>
 					<select id="updateModalFeeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;"  required>	
 					  <option value="未备案">未备案</option>
-					  <option value="委托中">委托中</option>
+					  <option value="备案中">备案中</option>
 					  <option value="备案成功">备案成功</option>
 					  <option value="备案失败">备案失败</option>
 					</select>
@@ -2006,9 +2010,6 @@ function deletePatentDocApperson(personId){
 						"<td style='text-align:center'>"+item.idNumber+"</td>"+
 						"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
 						"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
-						"<td style='text-align:center'>"+item.transactionIdentity+"</td>"+
-						"<td style='text-align:center'>"+item.transactionYear+"</td>"+
-						"<td style='text-align:center'>"+item.otherInformation+"</td>"+
 						"<td style='text-align:center'><a href='javascript:deletePatentDocApperson("+item.personId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocApperson("+item.personId+")'>修改</a></td>"+
 						"</tr>"
 				)
@@ -2112,9 +2113,6 @@ function deletePatentDocInventor(inventorId){
 						"<td style='text-align:center'>"+item.inventorName+"</td>"+
 						"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
 						"<td style='text-align:center'>"+item.inventorNationality+"</td>"+
-						/* "<td style='text-align:center'>"+item.inventorMobile+"</td>"+
-						"<td style='text-align:center'>"+item.inventorEmail+"</td>"+
-						"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+ */
 						"<td style='text-align:center'><a href='javascript:deletePatentDocInventor("+item.inventorId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocInventor("+item.inventorId+")'>修改</a></td>"+
 						"</tr>"	
 				)
