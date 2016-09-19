@@ -790,7 +790,7 @@ margin: 1px 0 0 1px;}
 					<h5>费减备案状态:</h5>
 					<select id="modalFeeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;"  required>	
 					  <option value="未备案">未备案</option>
-					  <option value="委托中">委托中</option>
+					  <option value="备案中">备案中</option>
 					  <option value="备案成功">备案成功</option>
 					  <option value="备案失败">备案失败</option>
 					</select>
@@ -847,7 +847,7 @@ margin: 1px 0 0 1px;}
 					<h5>费减备案状态:</h5>
 					<select id="updateModalFeeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;"  required>	
 					  <option value="未备案">未备案</option>
-					  <option value="委托中">委托中</option>
+					  <option value="备案中">备案中</option>
 					  <option value="备案成功">备案成功</option>
 					  <option value="备案失败">备案失败</option>
 					</select>
@@ -1881,7 +1881,7 @@ function searGuide(){
 	
 }
 
-function deletePatentDocApperson(personId){
+function 备案中(personId){
 	var patentDocId=${patentDoc.patentDocId};
 	$.ajax({
 		type : "POST",
