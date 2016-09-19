@@ -489,7 +489,7 @@ function batchProxyOrg() {
 	}
 	var patentDocProxyStatusIds=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patentDocProxyStatus');
 	for (var i = 0; i < patentDocProxyStatusIds.length; i++) {
-		if (  patentDocProxyStatusIds[i] == 1 ) {
+		if (  patentDocProxyStatusIds[i] == 4 ) {
 			formutil.alertMessage('选中的文档中包含已取消过的文档，请重新选择！');
 			return;
 		}
