@@ -3,8 +3,6 @@ package com.lotut.pms.domain;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
 public class PatentDocOrder {
 	private long id;
 	private int orderStatus;

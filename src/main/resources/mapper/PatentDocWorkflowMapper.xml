@@ -20,8 +20,8 @@
 	</resultMap>
 
 	<insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
-		insert into patent_doc_orders( amount, user, create_time) 
-		values( #{amount,javaType=double,jdbcType=DOUBLE}, #{owner.userId}, now())
+		insert into patent_doc_orders( amount, user, create_time,payment_method) 
+		values( #{amount,javaType=double,jdbcType=DOUBLE}, #{owner.userId}, now(),#{paymentMethod.paymentMethodId})
 	</insert>
 	
 	<insert id="insertOrderItems">

@@ -77,11 +77,24 @@
 										<td style="text-align:center"><c:out value="外观设计"/></td>
 									</c:if>
 									<td style="text-align:center">${patentDoc.name}</td>
-									<td style="text-align:center">${patentDoc.applyFee} </td>
-									<td style="text-align:center">${patentDoc.printFee} </td>
-									<td style="text-align:center">${patentDoc.checkFee} </td>
-									<td style="text-align:center">${patentDoc.serviceFee} </td>
-									<td style="text-align:center">${patentDoc.totalFee} </td>
+									<td style="text-align:center">
+										${patentDoc.applyFee}
+									</td>
+									<td style="text-align:center">
+									<%-- ${patentDoc.printFee} --%>
+										<c:if test="${patentDoc.printFee<=0}">/</c:if>
+										<c:if test="${patentDoc.printFee>0}">${patentDoc.printFee}</c:if>
+									</td>
+									<td style="text-align:center">
+										<c:if test="${patentDoc.checkFee<=0}">/</c:if>
+										<c:if test="${patentDoc.checkFee>0}">${patentDoc.checkFee}</c:if>
+									</td>
+									<td style="text-align:center">
+										${patentDoc.serviceFee}
+									</td>
+									<td style="text-align:center">
+										${patentDoc.totalFee}
+									</td>
 									<c:if test="${patentDoc.feeStatus==0}">
 										<td style="text-align:center"><c:out value="未缴费"/></td>
 									</c:if>
