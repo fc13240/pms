@@ -7,12 +7,16 @@
 <!DOCTYPE html >
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 	<link rel="stylesheet" href="<s:url value='/temp/css/editor.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 <c:import url="common/kindEditor3.jsp"></c:import>
 	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
     <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
+    <script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 	<script type="text/javascript">
 	var i= 1;
 			$(function(){
@@ -572,10 +576,7 @@
 				
 				<!--上传附件div  -->
 				<div class="center_content" id="content6" thisid="2514" style="display: none;">
-					<div class="title">
-						上传附件
-					</div>
-					
+				
 					<div class="cl">
 						<div class="lt-box" style="height:300px;padding:20px;">
 
@@ -604,9 +605,6 @@
 				<!-- 摘要 -->
 				<div class="content" id="content4" thisid="" style="display: none;">
 					
-					<div class="title">
-						摘要
-					</div>
 					<div class="cl">
 						<div id="editor7" thisid="" thistempid="" photo_fid="">
 							<div class="textarea" name="tooltip"> 
@@ -632,7 +630,7 @@
 						<div class="content" id="content3" style="display: none; overflow: hidden;">
 							<div name="claims" style="float: left; width: 98%">
 								<div class="title">
-									权利要求书
+									
 								</div>
 								<div class="cl">
 									<div id="editor6" thistempid="" thisid="">
