@@ -61,7 +61,7 @@
 					          <td style="text-align:center"><c:out value="${proxyOrg.user.name}"/></td>
 					          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${proxyOrg.remarkName}' onChange="changeProxyOrgRemarkName('<c:out value='${proxyOrg.orgId}'/>', this.value)"/></td>
 					          <td style="text-align:center">
-					          <a href="<s:url value='/employee/deleteProxyOrg.html'/>?orgId=<c:out value='${proxyOrg.orgId}'/>">
+					          <a href="javascript:void(0)" onclick="javascript:deleteProxyOrg(${proxyOrg.orgId})">
 					          	删除机构
 					          </a>
 					          </td>
@@ -95,6 +95,19 @@
 	function addProxyOrg(){
 		var url = "<s:url value='/employee/searchProxyOrg.html'/>";
 		location.href = url;
+	}
+	
+	function deleteProxyOrg(orgId) {
+		$.ajax({
+			url: "<s:url value='/employee/deleteProxyOrg.html'/>?orgId=" + orgId, 
+			type: 'get',
+			success:function(){
+				window.location.reload();
+			},
+			error: function() {
+				formutil.alertMessage('此合作机构包含有子机构，不能删除!');
+			}
+		});	
 	}
 </script>
 </body>

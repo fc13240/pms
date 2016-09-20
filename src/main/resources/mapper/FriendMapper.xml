@@ -82,17 +82,17 @@
 		<if test="keyword != null and keyword != ''">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
-		select * from (	
-			select u.user_id as userId, u.username, u.name as name 
-			  from users u join friends f on u.user_id = f.friend	
-			 where f.user = #{userId}
-			 AND u.user_id NOT IN(SELECT cs.user_id FROM customer_supports cs)	
-		  AND u.user_id NOT IN (SELECT pr.user_id FROM process_person pr)	   
-		  AND u.user_id NOT IN (SELECT t.user_id FROM tech_person t)
-		  AND u.user_id NOT IN (SELECT org_user_id FROM proxy_org)	
-			<if test="keyword != null and keyword != ''">
-				and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern} or f.remark_name like #{keyword_pattern})
-			</if>
-		) rs where rs.userId != #{userId}
+		SELECT u.user_id AS userId, u.username, u.name 
+			 FROM users u 
+			 JOIN friends f ON u.user_id = f.friend	
+			 WHERE f.user = #{userId} AND u.user_id != #{userId}
+		AND NOT EXISTS(SELECT cs.user_id FROM customer_supports cs WHERE cs.user_id = u.user_id)	
+		AND NOT EXISTS (SELECT pr.user_id FROM process_person pr WHERE pr.user_id = u.user_id)	   
+		AND NOT EXISTS (SELECT t.user_id FROM tech_person t WHERE t.user_id = u.user_id)
+		AND NOT EXISTS (SELECT org_user_id FROM proxy_org WHERE org_user_id = u.user_id)	
+		<if test="keyword != null and keyword != ''">
+			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern} or f.remark_name like #{keyword_pattern})
+		</if>
+		
 	</select>
 </mapper>
