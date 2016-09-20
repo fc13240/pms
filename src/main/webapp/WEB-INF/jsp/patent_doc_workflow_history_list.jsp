@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管家-撰写列表</title>
+<title>龙图腾专利管家-历史</title>
 <%@ include file="_css.jsp" %>
 
 </head>
@@ -20,7 +20,7 @@
 		  </div>
     <div class="tit_top">
         <div class="title2">
-            撰写列表</div>
+            历史</div>
                
     </div>
 		  <div class="col-xs-offset-1 col-xs-11">
