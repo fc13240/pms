@@ -122,18 +122,16 @@
 		<if test="keyword != null and keyword != ''">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
-		select * from (	
 		SELECT u.user_id, u.username, u.name FROM users u
-		  WHERE u.user_id NOT IN(SELECT cs.user_id FROM customer_supports cs)	
-		  AND u.user_id NOT IN (SELECT pr.user_id FROM process_person pr)	   
-		  AND u.user_id NOT IN (SELECT t.user_id FROM tech_person t)
-		  AND u.user_id NOT IN (SELECT org_user_id FROM proxy_org)		
+		WHERE u.user_id != #{userId}
+		  AND NOT EXISTS(SELECT cs.user_id FROM customer_supports cs WHERE cs.user_id = u.user_id)	
+		  AND  NOT EXISTS (SELECT pr.user_id FROM process_person pr WHERE pr.user_id = u.user_id)	   
+		  AND  NOT EXISTS (SELECT t.user_id FROM tech_person t WHERE t.user_id = u.user_id)
+		  AND  NOT EXISTS (SELECT org_user_id FROM proxy_org WHERE org_user_id = u.user_id)
+		<if test="keyword != null and keyword != ''">
+			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern})
+		</if>
 		
-			<if test="keyword != null and keyword != ''">
-				and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern})
-			</if>
-		
-		) rs where rs.user_id != #{userId}
 	</select>
 	
 	<!-- 查找平台机构用户 -->
