@@ -18,7 +18,6 @@ public class CommonAppPerson {
 	private String transactionYear ;
 	private String proxyUrl;
 	
-	
 	public String getTransactionIdentityId() {
 		return transactionIdentityId;
 	}

@@ -29,6 +29,7 @@ import com.lotut.pms.domain.PatentDocInventor;
 import com.lotut.pms.service.PetitionService;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.FileOption;
 import com.lotut.pms.web.util.WebUtils;
 
 @Controller
@@ -196,7 +197,8 @@ public class PetitionController {
 		}
 	}
 	
-	@RequestMapping(path="/uploadPatentDocFile",method=RequestMethod.POST)
+	/*原有请求书中附件功能*/
+	/*@RequestMapping(path="/uploadPatentDocFile",method=RequestMethod.POST)
 	public void uploadPatentDocFile(@RequestParam("file")MultipartFile file,@RequestParam("patentDocId") Long patentDocId,HttpServletResponse response){
 		String saveDir = Settings.PATENT_DOC_FILE;
 		String filename=file.getOriginalFilename();
@@ -225,7 +227,7 @@ public class PetitionController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	@RequestMapping(path="/getPatentAttachmentFile")
 	public void getPatentAttachmentFile(HttpServletRequest request,HttpServletResponse response,@RequestParam("patentDocId") Long patentDocId){
@@ -321,6 +323,14 @@ public class PetitionController {
 			}
 		}
 		return dir.delete();
+	}
+	
+	
+	@RequestMapping(path="uploadPatentDocFile")
+	public void uploadPatentDocFile(@RequestParam("file")MultipartFile file,HttpServletResponse response){
+		int userId = PrincipalUtils.getCurrentUserId();
+		FileOption.patentDocFileOption(userId, file, response);
+		
 	}
 }
 
