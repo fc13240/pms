@@ -240,10 +240,10 @@ public class AppPersonController {
 	
 	@RequestMapping(path="/downloadAttachmentFile", method=RequestMethod.GET)
 	public void downloadPatentFile(@RequestParam("appPersonId")int appPersonId, HttpServletResponse response,HttpServletRequest request) throws IOException {
-		response.setContentType("application/doc");
+		response.setContentType("application/octet-stream ");
 		String relativeUrl = appPersonService.getAppPersonUrlById(appPersonId);
 		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
-		String filePath = Settings.APP_PERSON_ATTACHMENT_FILE_PATH + relativeUrl;
+		String filePath = relativeUrl;
 		File appPersonFile = new File(filePath);
 		if("FF".equals(getBrowser(request))){
 		    //针对火狐浏览器处理

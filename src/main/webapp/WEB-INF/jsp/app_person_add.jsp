@@ -68,18 +68,30 @@
 					<h5>其他信息:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" name="otherInfo"  onblur="validateCommentNumber(this.value)"/>
 					<span style="color: red; display: none;" id=commentError>该处应输入不大于50字段</span>
+					<h5>委托书:</h5>
+					<input type="hidden" id="patentDocEntrustFileHidden" name="proxyUrl" />
+					<input style="width:300px;display:inline;" type="text" id="patentDocEntrustFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocEntrustFile]').click();" required="required"/>
+					<button type="button" onclick="uploadEntrustClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
+					<div style="height:20px;"></div> 
+					<button type="submit" style="width:90px;" class="button button-primary  button-rounded">保存</button>
+					
 					<h5>附件:</h5>
-					<input type="text" id="patentDocApplyFile" name="appPersonUrl" required="required"/>
-					<input style="width:300px;display:inline;" type="text" id="patentDocFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocFile]').click();"/>
+					<input type="hidden" id="patentDocApplyFile" name="appPersonUrl" />
+					<input style="width:300px;display:inline;" type="text" id="patentDocFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocFile]').click();" required="required"/>
 					<button type="button" onclick="uploadClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 					<div style="height:20px;"></div> 
 					<button type="submit" style="width:90px;" class="button button-primary  button-rounded">保存</button>
 					</form>
-					<form action="<s:url value='/petition/uploadPatentDocFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+					<form action="<s:url value='/petition/uploadPatentDocEntrustFile.html'/>" id="uploadEntrustFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+						<input style="display:none" type="file" id="patentDocEntrustFile" name="file"/>
+						<button type="button" style="display: none;" onclick="$('input[id=patentDocEntrustFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+						<button type="button" id="uploadEntrustBtn" style="display:none;" onclick="uploadPatentDocEntrustFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
+					</form>								
+					<form action="<s:url value='/petition/uploadPatentDocEntrustFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
 						<input style="display:none" type="file" id="patentDocFile" name="file"/>
 						<button type="button" style="display: none;" onclick="$('input[id=patentDocFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 						<button type="button" id="uploadBtn" style="display:none;" onclick="uploadPatentDocFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
-					</form>				
+					</form>
 				</div>
 			</div>
 
@@ -190,13 +202,47 @@
 					if(suffix ==".zip"||suffix==".rar"){
 						return true;
 					}else{
-						alert("请选择指定类型的文件后，再进行上传");
+						alert("请选择rar或者zip的文件类型后，再进行上传");
 						return false;
 					}
 				},
 				success : function (result){
 					$("#patentDocApplyFile").val(result);
 					$("#patentDocFilename").val("");
+					alert("上传成功");
+				}
+		}
+		uploadForm.ajaxSubmit(option);
+	}
+	
+	function uploadClick(){
+		$("#uploadBtn").trigger("click");
+	}
+	
+	
+	
+	$('input[id=patentDocEntrustFile]').change(function() {  
+		$('#patentDocEntrustFilename').val($(this).val());  
+	})
+	
+	function uploadPatentDocFile(){
+		var uploadForm=$("#uploadEntrustFileForm");
+		var option={
+				dataType : "json",
+				data : {"file":$("#patentDocEntrustFile").val()},
+				beforeSubmit : function (){
+					var filename = $("#patentDocEntrustFilename").val();
+					var suffix = filename.toLowerCase().substr(filename.lastIndexOf("."));
+					if(suffix ==".zip"||suffix==".rar"){
+						return true;
+					}else{
+						alert("请选择rar或zip文件类型后，再进行上传");
+						return false;
+					}
+				},
+				success : function (result){
+					$("#patentDocEntrustFileHidden").val(result);
+					$("#patentDocEntrustFilename").val("");
 					alert("上传成功");
 				}
 		}

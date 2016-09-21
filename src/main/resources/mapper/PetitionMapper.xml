@@ -103,8 +103,8 @@
 	</select>
 	
 	<insert id="addCommonAppPerson" parameterType="CommonAppPerson"  useGeneratedKeys="true" keyProperty="appPersonId">
-	  	insert into common_app_person(name,id_number,postcode_address,other_information,user_id,transaction_identity_id,fee_reduce_transaction_status,transaction_year,app_person_attachment_file) 
-	  	values(#{name},#{idNumber},#{postcodeAddress},#{otherInfo},#{userId},#{transactionIdentityId},#{feeReduceTransactionStatus},#{transactionYear},#{appPersonUrl})
+	  	insert into common_app_person(name,id_number,postcode_address,other_information,user_id,transaction_identity_id,fee_reduce_transaction_status,transaction_year,app_person_attachment_file,proxy_file) 
+	  	values(#{name},#{idNumber},#{postcodeAddress},#{otherInfo},#{userId},#{transactionIdentityId},#{feeReduceTransactionStatus},#{transactionYear},#{appPersonUrl},#{proxyUrl})
 
   	</insert>
   	

@@ -885,9 +885,19 @@ margin: 1px 0 0 1px;}
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalOtherInfo"/>
 					<input type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
 					<br/>
+					<h5>委托书:</h5>
+					<input type="hidden" id="patentDocEntrustFileHidden"/>
+					<form action="<s:url value='/petition/uploadPatentDocEntrustFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+						
+						<input style="display:none" type="file" id="patentDocEntrustFile" name="file"/>
+						<input style="width:300px;display:inline;" type="text" id="patentDocEntrustFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocEntrustFile]').click();"/>
+						<button type="button" style="display: none;" onclick="$('input[id=patentDocEntrustFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+						<button type="button" onclick="uploadPatentDocEntrustFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
+					</form>
+					<br/>
 					<h5>附件:</h5>
-					<input type="hidden" id="patentDocApplyFile"/>
-					<form action="<s:url value='/petition/uploadPatentDocFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+					<input type="hidden" id="patentDocAppPersonFileHidden"/>
+					<form action="<s:url value='/petition/uploadPatentDocAppPersonFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
 						
 						<input style="display:none" type="file" id="patentDocFile" name="file"/>
 						<input style="width:300px;display:inline;" type="text" id="patentDocFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocFile]').click();"/>
@@ -1068,7 +1078,17 @@ margin: 1px 0 0 1px;}
 					<h5>其他信息:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorComment" value="公布发明人"/>
 					<span style="color: red; display: none;" id="commentError">该处应输入不大于50字段</span>
-					<br>      
+					<br>  
+					<h5>附件:</h5>
+					<input type="hidden" id="patentDocInventorFileHidden"/>
+					<form action="<s:url value='/petition/uploadPatentDocInventorFile.html'/>" id="uploadInventorFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+						
+						<input style="display:none" type="file" id="patentDocInventorFile" name="file"/>
+						<input style="width:300px;display:inline;" type="text" id="patentDocInventorFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocInventorFile]').click();"/>
+						<button type="button" style="display: none;" onclick="$('input[id=patentDocInventorFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+						<button type="button" onclick="uploadPatentDocInventorFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
+	
+					</form>    
 					<div style="height:20px;"></div> 
 					<button type="button" style="width:90px;" class="button button-primary  button-rounded" onclick="submitInventorForm()">保存</button>		
 					<button type="button" style="width:90px;margin-left:275px;" class="button button-primary  button-rounded" onclick="resetAddInventorModal()">取消</button>		
@@ -1797,16 +1817,18 @@ function updateImgName(value,linkSeqNo){
 		var transactionIdentityId =$("#modalTransactionIdentityId").val();
 		var transactionYear =$("#modalTransactionYear").val();
 		var otherInfo =$("#modalOtherInfo").val();
-		var appPersonUrl = $("#patentDocApplyFile").val();
+		var appPersonUrl = $("#patentDocAppPersonFileHidden").val();
+		var proxyUrl = $("#patentDocEntrustFileHidden").val();
 		
 		   //validateAppPersonFormWayTwo(postcodeAddress,"appPersonPostcodeAddress")
 		var patentDocId =${patentDoc.patentDocId};
 		if(validateAppPersonFormWayOne(phoneRece,"appPersonPhoneError")&
 		   validateAppPersonFormWayTwo(appPersonName,"appPersonNameError")&
-		   validateAppPersonFormWayTwo(postcodeAddress,"appPersonPostcodeAddress")
+		   validateAppPersonFormWayTwo(postcodeAddress,"appPersonPostcodeAddress")&
+		   validateFileForm(entrustUrl,"patentDocEntrustFileHidden")&validateFileForm(appPersonUrl,"appPersonUrl")
 		   ){
 			var formData ={"name":appPersonName,"idNumber":phoneRece,"postcodeAddress":postcodeAddress,"otherInfo":otherInfo,"feeReduceTransactionStatus":feeReduceTransactionStatus,
-					       "transactionIdentityId":transactionIdentityId,"transactionYear":transactionYear,"patentDocId":patentDocId,"appPersonUrl":appPersonUrl};
+					       "transactionIdentityId":transactionIdentityId,"transactionYear":transactionYear,"patentDocId":patentDocId,"appPersonUrl":appPersonUrl,"proxyUrl":proxyUrl};
 			
 			$.ajax({
 				type : "POST",
@@ -2202,9 +2224,11 @@ function updateImgName(value,linkSeqNo){
 		var iframe = document.getElementById('fileFrame');
 		window.open("<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+value);
 	}
+	
 	$('input[id=patentDocFile]').change(function() {  
 		$('#patentDocFilename').val($(this).val());  
-	});
+	})
+	
 	function uploadPatentDocFile(){
 		var uploadForm=$("#uploadFileForm");
 		var patentDocId = ${patentDoc.patentDocId};
@@ -2218,18 +2242,78 @@ function updateImgName(value,linkSeqNo){
 					if(suffix ==".zip"||suffix==".rar"){
 						return true;
 					}else{
-						alert("请选择指定类型的文件后，再进行上传");
+						alert("请选择rar或zip文件类型后，再进行上传");
 						return false;
 					}
 				},
 				success : function (result){
-					$("#patentDocApplyFile").val(result);
+					$("#patentDocAppPersonFileHidden").val(result);
 					$("#patentDocFilename").val("");
 					alert("上传成功");
 				}
 		}
 		uploadForm.ajaxSubmit(option);
 	}
+	
+	$('input[id=patentDocInventorFile]').change(function() {  
+		$('#patentDocInventorFilename').val($(this).val());  
+	})
+	
+	function uploadPatentDocInventorFile(){
+		var uploadForm=$("#uploadInventorFileForm");
+		var option={
+				dataType : "json",
+				//contentType : false,
+				data : {"file":$("#patentDocInventorFile").val()},
+				beforeSubmit : function (){
+					var filename = $("#patentDocInventorFilename").val();
+					var suffix = filename.toLowerCase().substr(filename.lastIndexOf("."));
+					if(suffix ==".zip"||suffix==".rar"){
+						return true;
+					}else{
+						alert("请选择rar或zip文件类型后，再进行上传");
+						return false;
+					}
+				},
+				success : function (result){
+					$("#patentDocInventorFileHidden").val(result);
+					$("#patentDocInventorFilename").val("");
+					alert("上传成功");
+				}
+		}
+		uploadForm.ajaxSubmit(option);
+	}
+	
+	
+	$('input[id=patentDocEntrustFile]').change(function() {  
+		$('#patentDocEntrustFilename').val($(this).val());  
+	})
+	
+	function uploadPatentDocEntrustFile(){
+		var uploadForm=$("#uploadEntrustFileForm");
+		var option={
+				dataType : "json",
+				//contentType : false,
+				data : {"file":$("#patentDocEntrustFile").val()},
+				beforeSubmit : function (){
+					var filename = $("#patentDocEntrustFilename").val();
+					var suffix = filename.toLowerCase().substr(filename.lastIndexOf("."));
+					if(suffix ==".zip"||suffix==".rar"){
+						return true;
+					}else{
+						alert("请选择rar或zip文件类型的文件后，再进行上传");
+						return false;
+					}
+				},
+				success : function (result){
+					$("#patentDocEntrustFileHidden").val(result);
+					$("#patentDocEntrustFilename").val("");
+					alert("上传成功");
+				}
+		}
+		uploadForm.ajaxSubmit(option);
+	}
+
 	
 	function downloadPatentDocFile(patentDocId){
 		var iframe = document.getElementById('fileFrame');
@@ -2265,8 +2349,15 @@ function updateImgName(value,linkSeqNo){
 			}
 	}
 	
-	
-	
+	function validateFileForm(value,id) {
+		if (value.length<=0) {
+			$("#"+id).css("display","block");
+			return false;
+		} else {
+			$("#"+id).css("display","none");
+			return true;
+		}
+	}
 	
 	function settingContact(addressId){
 		var patentDocId = ${patentDoc.patentDocId};

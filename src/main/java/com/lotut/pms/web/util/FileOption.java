@@ -43,8 +43,7 @@ public class FileOption {
 		}
 	}
 	
-	public static void patentDocFileOption(int userId,MultipartFile multipartFile,HttpServletResponse response){
-		String saveDir = Settings.PATENT_DOC_APPLICATION_FILE;
+	public static void patentDocFileOption(int userId,MultipartFile multipartFile,String saveDir,HttpServletResponse response){
 		saveDir+=userId+"/";
 		String filename=multipartFile.getOriginalFilename();
 		String savePath=saveDir + filename;
