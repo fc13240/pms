@@ -1,8 +1,8 @@
 #tabWrap{font-family: "microsoft yahei",Î¢ÈíÑÅºÚ;}
 .editor-left{
-	width:180px; 
+	width:140px; 
 	float:left;
-	border-right: #0085d0 1px solid;
+	border-right: #ff0000 1px solid;
 	background: #f8f8f8;
 	height:1000px;
 }
@@ -27,17 +27,17 @@ text-align: center;
 .tab {
 clear: both;
 float: left;
-padding-left: 78px;
+padding-left: 39px;
 padding-top: 20px;
 width: 100px;
 }
 .tab1 {
-background: #77c0e9;
+background: #FD3D3D;
 width: 100px;
 text-align: center;
 color: #fff;
 float: left;
-border: #77c0e9 1px solid;
+border: #FD3D3D 1px solid;
 border-top-left-radius: 5px;
 border-bottom-left-radius: 5px;
 font-size: 14px;
@@ -98,7 +98,7 @@ cursor: pointer;font-size: 12px;
 text-decoration: none;
 }
 /*center*/
-.editor-center{margin-left:180px;margin-right:330px;}
+.editor-center{margin-left:140px;margin-right:330px;}
 
 .center_top {
 background: #f8f8f8;
