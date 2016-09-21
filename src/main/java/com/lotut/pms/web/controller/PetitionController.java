@@ -312,7 +312,7 @@ public class PetitionController {
 			e.printStackTrace();
 		}
 	}
-	private static boolean deleteDir(File dir) {
+/*	private static boolean deleteDir(File dir) {
 		if (dir.isDirectory()) {
 			String[] children = dir.list();
 			for (int i=0; i<children.length; i++) {
@@ -324,7 +324,7 @@ public class PetitionController {
 		}
 		return dir.delete();
 	}
-	
+	*/
 	
 	@RequestMapping(path="uploadPatentDocFile")
 	public void uploadPatentDocFile(@RequestParam("file")MultipartFile file,HttpServletResponse response){

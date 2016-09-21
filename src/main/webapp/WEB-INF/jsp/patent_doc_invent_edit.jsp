@@ -2225,7 +2225,7 @@ function updateImgName(value,linkSeqNo){
 				success : function (result){
 					$("#patentDocApplyFile").val(result);
 					$("#patentDocFilename").val("");
-					//alert(result);
+					alert("上传成功");
 				}
 		}
 		uploadForm.ajaxSubmit(option);

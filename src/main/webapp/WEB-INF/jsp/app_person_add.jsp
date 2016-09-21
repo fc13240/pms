@@ -17,6 +17,8 @@
 
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>
+<script src="<s:url value='/temp/js/jquery_from.js'/>"></script>
+
 
 <div class="lt-con" style="min-width:1100px;">
 	<div class="container-fluid" >
@@ -66,9 +68,17 @@
 					<h5>其他信息:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" name="otherInfo"  onblur="validateCommentNumber(this.value)"/>
 					<span style="color: red; display: none;" id=commentError>该处应输入不大于50字段</span>
-					<br>      
+					<h5>附件:</h5>
+					<input type="text" id="patentDocApplyFile" name="appPersonUrl" required="required"/>
+					<input style="width:300px;display:inline;" type="text" id="patentDocFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocFile]').click();"/>
+					<button type="button" onclick="uploadClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 					<div style="height:20px;"></div> 
 					<button type="submit" style="width:90px;" class="button button-primary  button-rounded">保存</button>
+					</form>
+					<form action="<s:url value='/petition/uploadPatentDocFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+						<input style="display:none" type="file" id="patentDocFile" name="file"/>
+						<button type="button" style="display: none;" onclick="$('input[id=patentDocFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+						<button type="button" id="uploadBtn" style="display:none;" onclick="uploadPatentDocFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
 					</form>				
 				</div>
 			</div>
@@ -147,7 +157,6 @@
 			}
 		
 	}
-
 	function check() {
 		 var phone = document.getElementById("phoneRece").value;  
 		 var number=document.getElementById("numberRece").value;
@@ -166,7 +175,37 @@
 		}
 		
 	}
-
+	$('input[id=patentDocFile]').change(function() {  
+		$('#patentDocFilename').val($(this).val());  
+	})
+	
+	function uploadPatentDocFile(){
+		var uploadForm=$("#uploadFileForm");
+		var option={
+				dataType : "json",
+				data : {"file":$("#patentDocFile").val()},
+				beforeSubmit : function (){
+					var filename = $("#patentDocFilename").val();
+					var suffix = filename.toLowerCase().substr(filename.lastIndexOf("."));
+					if(suffix ==".zip"||suffix==".rar"){
+						return true;
+					}else{
+						alert("请选择指定类型的文件后，再进行上传");
+						return false;
+					}
+				},
+				success : function (result){
+					$("#patentDocApplyFile").val(result);
+					$("#patentDocFilename").val("");
+					alert("上传成功");
+				}
+		}
+		uploadForm.ajaxSubmit(option);
+	}
+	
+	function uploadClick(){
+		$("#uploadBtn").trigger("click");
+	}
 </script>
 
 </body>
