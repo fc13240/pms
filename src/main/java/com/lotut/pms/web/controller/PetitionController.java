@@ -3,9 +3,7 @@ package com.lotut.pms.web.controller;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
@@ -29,6 +27,7 @@ import com.lotut.pms.domain.PatentDocInventor;
 import com.lotut.pms.service.PetitionService;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.FileOption;
 import com.lotut.pms.web.util.WebUtils;
 
 @Controller
@@ -196,7 +195,8 @@ public class PetitionController {
 		}
 	}
 	
-	@RequestMapping(path="/uploadPatentDocFile",method=RequestMethod.POST)
+	/*原有请求书中附件功能*/
+	/*@RequestMapping(path="/uploadPatentDocFile",method=RequestMethod.POST)
 	public void uploadPatentDocFile(@RequestParam("file")MultipartFile file,@RequestParam("patentDocId") Long patentDocId,HttpServletResponse response){
 		String saveDir = Settings.PATENT_DOC_FILE;
 		String filename=file.getOriginalFilename();
@@ -225,7 +225,7 @@ public class PetitionController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	@RequestMapping(path="/getPatentAttachmentFile")
 	public void getPatentAttachmentFile(HttpServletRequest request,HttpServletResponse response,@RequestParam("patentDocId") Long patentDocId){
@@ -310,17 +310,27 @@ public class PetitionController {
 			e.printStackTrace();
 		}
 	}
-	private static boolean deleteDir(File dir) {
-		if (dir.isDirectory()) {
-			String[] children = dir.list();
-			for (int i=0; i<children.length; i++) {
-				boolean success = deleteDir(new File(dir, children[i]));
-				if (!success) {
-					return false;
-				}
-			}
-		}
-		return dir.delete();
+	@RequestMapping(path="uploadPatentDocAppPersonFile")
+	public void uploadPatentDocAppPersonFile(@RequestParam("file")MultipartFile file,HttpServletResponse response){
+		int userId = PrincipalUtils.getCurrentUserId();
+		String saveDir = Settings.APP_PERSON_ATTACHMENT_FILE_PATH;
+		FileOption.patentDocFileOption(userId, file,saveDir, response);
+		
+	}
+	
+	@RequestMapping(path="uploadPatentDocInventorFile")
+	public void uploadPatentDocFile(@RequestParam("file")MultipartFile file,HttpServletResponse response){
+		int userId = PrincipalUtils.getCurrentUserId();
+		String saveDir = Settings.INVENTOR_ATTACHMENT_FILE_PATH;
+		FileOption.patentDocFileOption(userId, file, saveDir,response);
+		
+	}
+	
+	@RequestMapping(path="uploadPatentDocEntrustFile")
+	public void uploadPatentDocEntrustFile(@RequestParam("file")MultipartFile file,HttpServletResponse response){
+		int userId = PrincipalUtils.getCurrentUserId();
+		String saveDir = Settings.PROXY_FILE_PATH;
+		FileOption.patentDocFileOption(userId, file, saveDir,response);
 	}
 }
 

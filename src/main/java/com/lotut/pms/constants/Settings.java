@@ -25,4 +25,5 @@ public interface Settings {
 	final String PATENT_DOC_FILE="/opt/media/patent/patentDocFile/";
 	final String PATENT_DOC_STANDARD_FILE="/opt/media/patent/patentDocStandardFile/";
 	final String PATENTDOC_INVOICE_PIC_PATH = "/opt/media/patent/invoicePic/";
+	final String PATENT_DOC_APPLICATION_FILE="/opt/media/patent/patentDocApplyFile/";
 }

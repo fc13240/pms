@@ -101,19 +101,6 @@ margin: 1px 0 0 1px;}
 </style>
 <div style="width:100%;min-width:1220px; margin:0 auto;"> 
 	<div class="editor-left">
-		<div class="left_top">
-	        <div class="cl" id="div_ipctype">
-	        <c:if test="${patentDoc.patentType==1 }">
-	            	<div class="bt" style="margin-left:65px;">发明</div>
-	        </c:if>
-	        		<c:if test="${patentDoc.patentType==2 }">
-	        <div class="bt"  style="margin-left:65px;">实用新型</div>
-	        </c:if>
-	        <c:if test="${patentDoc.patentType==3 }">
-	        		<div class="bt" style="margin-left:65px;">外观</div>
-	        </c:if>
-	        </div>
-		</div>
 		<!--申请文件九部分标签切换 -->
 		<div class="tab" id="tabWrap"> 
 			<div style="display:block;" class="tab1" value="0" name="tabs" onclick="tabChange(0);">
@@ -387,20 +374,23 @@ margin: 1px 0 0 1px;}
 	</div>
 <!-- right end -->
 <!-- center beg -->
-	<div class="editor-center" style="min-width:700px;">
+	<div class="editor-center" style="min-width:1000px;">
 	   
 		<div class="center_top">
 			<div class="backedit">
 				<a href="javascript:return void" onclick="returnSavePatentDoc(${patentDoc.patentDocId});">返回撰写列表</a>
-				<a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
-				<button class="button button-primary  button-rounded" data-placement="bottom">保存</button>
-				</a>
 			</div>
+			<div style="width:100px;float:right;margin-right:110px;">
+				<a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
+				<button style="" class="button button-primary  button-rounded" data-placement="bottom">保存</button>
+				</a>				
+			</div>			
 			<div class="top_right">
-				<a style="float:left" class="review" onclick="preview_selfwrite(${patentDoc.patentDocId},${patentDoc.patentType});">
+				<a style="float:left" class="review"  href="javascript:return void" onclick="preview_selfwrite(${patentDoc.patentDocId},${patentDoc.patentType});">
 				<i class="icon"></i>预览
 				</a>
-				<input type="hidden" id="patentType" value="${patentDoc.patentType }">
+			
+				<input type="hidden" id="patentType" value="1">
 			</div>
 		</div>	
 
@@ -412,20 +402,12 @@ margin: 1px 0 0 1px;}
 			
 				<!--请求协议书div  -->
 			<div class="center_content" id="content0">
-				<div>
-					<span style="font-weight: bold;font-size:14px;">
-							内部编码 <span>${patentDoc.internalCode }</span>
-					</span>
-					<span style="font-weight: bold;font-size:14px;margin-left:24px;">
-							创建时间 <span><fmt:formatDate value="${patentDoc.createTime }" pattern="yyyy年M月dd日"/></span>
-					</span>
-					<span style="font-weight: bold;font-size:14px;margin-left:24px;">
-							更新时间  <span><fmt:formatDate value="${patentDoc.lastUpdateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></span>
-					</span>
-				</div>
 
 				<div class="title" style="margin-top:10px;">
-					<span style="font-weight: bold;font-size:14px;">专利名称</span>
+					<div style="font-weight: bold;font-size:14px;">
+					<img alt="" style="margin-bottom: 4px;" src="<s:url value='/temp/images/icon-title.png'/>">
+					专利名称（ <span style="font-weight:400;">内部编码${patentDoc.internalCode }</span>）
+					</div>
 					<div style="height:10px;">&nbsp;</div>
 					<div id="editor1" thistempid="1">
 						<div id="divtitle" style="clear:both;display:block;float:left;width:80%;"></div>
@@ -446,23 +428,18 @@ margin: 1px 0 0 1px;}
 					</div>
 				</div>
 				<div class="patent_person" style="margin-top:10px;">
-					<div class="patent_person_title">
-						<button type="button" style="width:130px" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonAppersonModal">
-							选择常用申请人
-						</button>
-						<button type="button"  style="width:100px;margin-left:20px;" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addAppPersonModal">
-								新增申请人
-						</button>
+					<div class="patent_person_title" style="font-weight: bold;font-size:14px;">
+					
+						<img alt="" style="margin-bottom: 4px;" src="<s:url value='/temp/images/icon-title.png'/>">
+						申请人
+
 					</div>
 					<div class="patent_person_table" id="appersonDiv" style="margin-top:10px;">
 						<table id="simple-table"  class="table table-striped table-bordered table-hover">
 						 	<thead>
 							<tr class="simple_bag">
-							  <!-- <th><input type="checkbox"/></th>
-							  <th>序号</th> -->
 							  <th>姓名或名称</th>
 							  <th>证件号码</th>
-							  <th>邮编地址</th>
 							  <th>费减备案状态</th>
 							  <th>操作</th>
 							</tr>
@@ -473,7 +450,6 @@ margin: 1px 0 0 1px;}
 										<tr>
 											<td style="text-align:center">${patentDocAppPerson.name }</td>
 											<td style="text-align:center">${patentDocAppPerson.idNumber }</td>
-											<td style="text-align:center">${patentDocAppPerson.postcodeAddress }</td>
 											<td style="text-align:center">${patentDocAppPerson.feeReduceTransactionStatus }</td>
 											<td style="text-align:center"><a href="javascript:deletePatentDocApperson(${patentDocAppPerson.personId })">删除</a><a style='margin-left:20px;' href="javascript:updatePatentDocApperson(${patentDocAppPerson.personId })">修改</a></td>
 										</tr>
@@ -483,19 +459,26 @@ margin: 1px 0 0 1px;}
 						  
 						  </tbody>
 						</table>
+						<div>
+							<div style="width:100px;margin-left:810px;">
+								<a href="javascript:;" style="color:#00F;font-size:14px;" data-toggle = "modal" data-target = "#commonAppersonModal">+选择</a>&nbsp;
+								<a href="javascript:;" style="color:#00F;font-size:14px;" data-toggle = "modal" data-target = "#addAppPersonModal">+新增</a>
+																
+							</div>
+							
+							<hr></hr>
+						</div>						
 
 					</div>
 				
 				</div>
 				
 				<div class="patent_inventor" style="margin-top:10px;">
-					<div class="patent_inventor_title">
-								<button style="width:130px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonInventorModal">
-									选择常用发明人
-								</button>
-								<button style="margin-left:20px;width:100px" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#addInventorModal">
-									新增发明人
-								</button>
+					<div class="patent_inventor_title" style="font-weight: bold;font-size:14px;">
+					
+						<img alt="" style="margin-bottom: 4px;" src="<s:url value='/temp/images/icon-title.png'/>">
+						发明人					
+
 					</div>
 					<div class="patent_inventor_table" id="inventorDiv" style="margin-top:10px;">
 						<table id="simple-table"   class="table table-striped table-bordered table-hover">
@@ -503,7 +486,7 @@ margin: 1px 0 0 1px;}
 							<tr class="simple_bag">
 							  <th>姓名</th>
 							  <th>证件号码</th>
-							  <th>国籍</th>
+							  <th>其他</th>
 							  <th>操作</th>
 							</tr>
 						  </thead>
@@ -513,22 +496,31 @@ margin: 1px 0 0 1px;}
 										<tr>
 											<td style='text-align:center'>${patentDocInventor.inventorName}</td>
 											<td style='text-align:center'>${patentDocInventor.inventorNumber}</td>
-											<td style='text-align:center'>${patentDocInventor.inventorNationality}</td>
+											<td style='text-align:center'>${patentDocInventor.inventorOtherInformation}</td>
 											<td style='text-align:center'><a href='javascript:deletePatentDocInventor(${patentDocInventor.inventorId})'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocInventor(${patentDocInventor.inventorId})'>修改</a></td>
 										</tr>
 									</c:forEach>	
 							  </c:if>
 						  </tbody>
 						</table>
-
+						<div>
+							<div style="width:100px;margin-left:810px;">
+								<a href="javascript:;" style="color:#00F;font-size:14px;" data-toggle = "modal" data-target = "#commonInventorModal">+选择</a>&nbsp;
+								<a href="javascript:;" style="color:#00F;font-size:14px;" data-toggle = "modal" data-target = "#addInventorModal">+新增</a>
+							</div>
+					
+							<hr></hr>
+						</div>
 					</div>
 				
 				
 				
 				</div>
 				<div class="patent_contact" style="margin-top:10px;">
-					<div class="patent_contact_title">
-						<button style="width:130px;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#commonContactModal">选择常用联系人</button>
+					<div class="patent_contact_title" style="font-weight: bold;font-size:14px;">
+						<img alt="" style="margin-bottom: 4px;" src="<s:url value='/temp/images/icon-title.png'/>">
+						联系人					
+
 					</div>
 					<div class="patent_contact_table" style="margin-top:10px;" id="contactDiv">
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
@@ -553,16 +545,37 @@ margin: 1px 0 0 1px;}
 							 </c:if>
 						  </tbody>
 						</table>
+						<div>
+							<div style="width:100px;margin-left:810px;">
+								<a href="javascript:;" style="color:#00F;font-size:14px;" data-toggle = "modal" data-target = "#commonContactModal">+选择</a>&nbsp;
+							</div>
+					
+							<hr></hr>
+						</div>						
 					</div>
 				</div>
 				<div class="patent_other">
-					<span style="font-weight: bold;font-size:14px;">其他信息</span>
+					<div style="font-weight: bold;font-size:14px;">
+							<img alt="" style="margin-bottom: 4px;" src="<s:url value='/temp/images/icon-title.png'/>">
+							其他信息
+					</div>
 					<div style="height:10px;">&nbsp;</div>
-					<textarea id="otherInformation" style="width:700px;" class="t-input form-control" rows="10" cols="60" placeholder="请填写，若没有则可以不填写。">${patentDoc.otherInformation }</textarea>
+					<textarea id="otherInformation" style="width:900px;" class="t-input form-control" rows="10" cols="60" placeholder="请填写，若没有则可以不填写。">${patentDoc.otherInformation }</textarea>
 				
 				
 				</div>
+				<div style="width:900px;margin-top:30px;">
+					<div style="width:460px;float:left;">&nbsp;</div>
+					<div style="width:430px;float:left;">
+						<span style="font-weight: 400;font-size:14px;margin-left:24px;">
+								创建时间 <span><fmt:formatDate value="${patentDoc.createTime }" pattern="yyyy年M月dd日"/></span>
+						</span>
+						<span style="font-weight: 400;font-size:14px;margin-left:24px;">
+								更新时间  <span><fmt:formatDate value="${patentDoc.lastUpdateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+						</span>					
+					</div>	
 
+				</div>
 			</div>			
 				
 			<!-- 编辑区 ：发明名称/技术领域/背景技术/发明内容/具体实施方式-->

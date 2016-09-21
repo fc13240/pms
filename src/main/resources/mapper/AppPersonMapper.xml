@@ -21,9 +21,9 @@
 
   <insert id="addAppPerson" parameterType="CommonAppPerson" >
   	insert into common_app_person(name,id_number,postcode_address,other_information,user_id,
-  	fee_reduce_transaction_status,transaction_identity_id,transaction_year) 
+  	fee_reduce_transaction_status,transaction_identity_id,transaction_year,app_person_attachment_file,proxy_file) 
   	values(#{name},#{idNumber},#{postcodeAddress},#{otherInfo},#{userId},
-  	#{feeReduceTransactionStatus},#{transactionIdentityId},#{transactionYear})
+  	#{feeReduceTransactionStatus},#{transactionIdentityId},#{transactionYear},#{appPersonUrl},#{proxyUrl})
   	
   </insert>
   
