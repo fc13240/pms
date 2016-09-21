@@ -248,4 +248,16 @@ public class PatentDocServiceImp implements PatentDocService{
 		public List<User> searchShareUsers(long patentDocId) {
 			return patentDocDao.searchShareUsers(patentDocId);
 		}
+
+
+		@Override
+		public String getPatentDocInvoicePic(Long patentDocId) {
+			return patentDocDao.getPatentDocInvoicePic(patentDocId);
+		}
+
+
+		
+
+
+		
 }

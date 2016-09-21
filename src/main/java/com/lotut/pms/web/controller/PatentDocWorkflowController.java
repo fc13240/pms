@@ -100,22 +100,22 @@ public class PatentDocWorkflowController {
 	}
 	
 	@RequestMapping(path="/createPatentDocOrder")
-	public String createOrder(@RequestParam("patentDocIds")Long[] patentDocIds, @ModelAttribute @Valid PatentDocOrder order, Model model) {
+	public String createOrder(@RequestParam("patentDocIds")Long[] patentDocIds, @ModelAttribute @Valid PatentDocOrder order,@RequestParam("invoicePic")String invoicePic, Model model) {
 		final int ALIPAY = 1;
 		final int PAID_BY_UPLOAD_INVOICE = 3;
 		User user = PrincipalUtils.getCurrentPrincipal();
 		order.setOwner(user);
 		List<PatentDoc> patentDocs = petitionService.getPatentDocWithAppPersonById(Arrays.asList(patentDocIds));
 		//List<PatentDoc> PatentDocs = patentDocService.getPatentDocsByIds(Arrays.asList(patentDocIds));
-		patentDocWorkflowService.createOrder(order, patentDocs);
+		long orderId=patentDocWorkflowService.createOrder(order, patentDocs);
 		model.addAttribute("orderId", order.getId());
 		model.addAttribute("patentDocIds",patentDocIds);
 		if (order.getPaymentMethod().getPaymentMethodId() == ALIPAY) {
 			return "redirect:/patentDocAlipay/pay.html";
 		}else if(order.getPaymentMethod().getPaymentMethodId() == PAID_BY_UPLOAD_INVOICE){
-			
-			
-			
+			patentDocWorkflowService.saveInvoicePath(invoicePic, patentDocIds);
+			patentDocWorkflowService.processOrderPaidSuccess(orderId);
+			return "upload_InvoicePic_success";
 		}
 		
 		return "add_patent_success";

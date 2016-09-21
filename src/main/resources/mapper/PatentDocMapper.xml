@@ -33,6 +33,7 @@
 		<result property="attachmentUrl" column="attachment_url"/>
 		<result property="price" column="price"/>
 		<result property="internalCode" column="internal_code"/>
+		<result property="invoicePic" column="invoice_pic"/>
 		<association property="patentDocStatus" resultMap="PatentDocStatusResultMap"/>
 		<association property="patentDocProxyStatus" resultMap="PatentDocProxyStatusResultMap"/>
 	</resultMap>
@@ -66,7 +67,7 @@
 	
 	<select id="getUserPatentDoc" parameterType="Page" resultMap="PatentDocMap">
 		SELECT p.patent_doc_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
-		p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,p.attachment_url,
+		p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,p.attachment_url,p.invoice_pic,
 		ps.patent_doc_status_id,ps.patent_doc_status_desc,pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc
 		FROM patent_documents p LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id LEFT JOIN patent_doc_proxy_status pp ON p.patent_doc_proxy_status =pp.patent_doc_proxy_status_id
 		WHERE p.patent_doc_id IN (SELECT patent_doc FROM user_patent_docs WHERE user_id = #{userId}) 
@@ -74,13 +75,13 @@
 	</select> 
 	
 	<select id="getUserPatentDocEditor"  resultMap="PatentDocMap">
-		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
+		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,invoice_pic,
 		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,patent_doc_url from patent_documents where user_Id=#{userId} order by create_time desc ,last_update_time desc
 	</select> 
 	
 	
 	<select id="getUserPatentDocById"  resultMap="PatentDocMap">
-		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,
+		select patent_doc_id,app_no,patent_type,create_time,last_update_time,patent_name,invoice_pic,
 		manual,right_claim,abstract_desc,abstract_img,patent_doc_attachment_file,contact_id,attachment_url,other_information,create_time,last_update_time,internal_code from patent_documents where  patent_doc_id=#{patentDocId}
 	</select>
 	
@@ -153,10 +154,10 @@
 		</if>	
 		select sp.patent_doc_id, sp.user_id,sp.app_no,sp.patent_type,sp.create_time,sp.last_update_time,sp.patent_name,
 				sp.manual,sp.right_claim,sp.abstract_desc,sp.abstract_img,sp.patent_doc_attachment_file,sp.patent_doc_url,sp.attachment_url,sp.patent_doc_status_id,sp.patent_doc_status_desc,
-				sp.patent_doc_proxy_status_id,sp.patent_doc_proxy_status_desc
+				sp.patent_doc_proxy_status_id,sp.patent_doc_proxy_status_desc,sp.invoice_pic
 		from (SELECT p.patent_doc_id, p.user_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
 				p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,ps.patent_doc_status_id,ps.patent_doc_status_desc,
-				pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc,p.attachment_url
+				pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc,p.attachment_url,p.invoice_pic
 				FROM patent_documents p  LEFT JOIN user_patent_docs up ON p.patent_doc_id = up.patent_doc LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
 				LEFT JOIN patent_doc_proxy_status pp ON p.patent_doc_proxy_status =pp.patent_doc_proxy_status_id
 				WHERE up.user_id = #{userId}
@@ -229,7 +230,7 @@
 	
 	<select id="getUserPatentDocByRole" parameterType="Page" resultMap="PatentDocMap">
 				SELECT p.patent_doc_id,p.app_no,p.patent_type,p.create_time,p.last_update_time,p.patent_name,
-		p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,p.attachment_url,
+		p.manual,p.right_claim,p.abstract_desc,p.abstract_img,p.patent_doc_attachment_file,p.patent_doc_url,p.attachment_url,p.invoice_pic,
 		ps.patent_doc_status_id,ps.patent_doc_status_desc,pp.patent_doc_proxy_status_id,pp.patent_doc_proxy_status_desc
 		FROM patent_documents p LEFT JOIN patent_doc_status ps ON p.patent_doc_status =ps.patent_doc_status_id
 		LEFT JOIN patent_doc_proxy_status pp ON p.patent_doc_proxy_status =pp.patent_doc_proxy_status_id
@@ -304,6 +305,16 @@
 	
 	<select id="searchShareUsers" parameterType="long" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap">
 		SELECT user_id,username FROM users WHERE user_id IN (SELECT user_id FROM user_patent_docs WHERE patent_doc = #{patentDocId})
+	</select>
+	
+	
+	<update id="saveInvoicePath" >
+		update patent_documents set invoice_pic=#{invoicePic,javaType=string,jdbcType=VARCHAR}
+		where  patent_doc_id=#{patentDocId}
+	</update>
+	
+	<select id="getPatentDocInvoicePic"  resultType="string">
+		select invoice_pic from patent_documents where  patent_doc_id=#{patentDocId}
 	</select>
 	
 </mapper>
