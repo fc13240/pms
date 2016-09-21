@@ -809,7 +809,7 @@ margin: 1px 0 0 1px;}
 					  <th class="center" width="50">序号</th>
 					  <th width="90px">姓名或名称</th>
 					  <th>证件号码 </th>
-					  <th>邮编及地址</th>
+					<!--   <th>邮编及地址</th> -->
 					  <th width="120px">费减备案状态</th>
 					</tr>
 				  </thead>
@@ -823,7 +823,7 @@ margin: 1px 0 0 1px;}
 						<td class="center" style="text-align:center"> ${status.count} </td>
 						<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
 						<td style="text-align:center"><c:out value="${appPerson.idNumber}"/></td>
-						<td style="text-align:center">${appPerson.postcodeAddress}</td>
+						<%-- <td style="text-align:center">${appPerson.postcodeAddress}</td> --%>
 						<td style="text-align:center">${appPerson.feeReduceTransactionStatus}</td>
 						 
 						<%--<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td> --%>
@@ -1678,7 +1678,7 @@ function updateImgName(value,linkSeqNo){
 							//"<td class='center' style='text-align:center'>"+i+"</td>"+
 							"<td style='text-align:center'>"+item.name+"</td>"+
 							"<td style='text-align:center'>"+item.idNumber+"</td>"+
-							"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
+							//"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
 							"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
 /* 							"<td style='text-align:center'>"+item.transactionIdentity+"</td>"+
 							"<td style='text-align:center'>"+item.transactionYear+"</td>"+
@@ -1806,7 +1806,7 @@ function updateImgName(value,linkSeqNo){
 								"<tr>"+
 								"<td style='text-align:center'>"+item.name+"</td>"+
 								"<td style='text-align:center'>"+item.idNumber+"</td>"+
-								"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
+								//"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
 								"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
 							/* 	"<td style='text-align:center'>"+item.transactionIdentity+"</td>"+
 								"<td style='text-align:center'>"+item.transactionYear+"</td>"+
@@ -1949,7 +1949,7 @@ function updateImgName(value,linkSeqNo){
 							"<tr>"+
 							"<td style='text-align:center'>"+item.name+"</td>"+
 							"<td style='text-align:center'>"+item.idNumber+"</td>"+
-							"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
+							//"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
 							"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
 							"<td style='text-align:center'><a href='javascript:deletePatentDocApperson("+item.personId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocApperson("+item.personId+")'>修改</a></td>"+
 							"</tr>"
@@ -2009,7 +2009,7 @@ function updateImgName(value,linkSeqNo){
 								"<tr>"+
 								"<td style='text-align:center'>"+item.name+"</td>"+
 								"<td style='text-align:center'>"+item.idNumber+"</td>"+
-								"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
+								//"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
 								"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
 								/* "<td style='text-align:center'>"+item.transactionIdentity+"</td>"+
 								"<td style='text-align:center'>"+item.transactionYear+"</td>"+
