@@ -193,7 +193,7 @@
 				                  </se:authorize>
 				                    
 				                   
-				                   <c:if test="${patentDoc.attachmentUrl!=null}">
+				                   <c:if test="${patentDoc.attachmentUrl !=null }">
 				                    	<a  href="<s:url value='/editor/downloadPatentStandardFile.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
 								
@@ -214,11 +214,11 @@
 										</a>
 									 </se:authorize>
 									 <se:authorize access="hasRole('ROLE_PLATFORM')"> 
-									  <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1}">
+									  <c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 1 && patentDoc.patentDocProxyStatus.patentDocProxyStatusId== 2}">
 										<a href="javascript:return void" onclick="denialofService(${patentDoc.patentDocId})" >
 											拒绝委托
 										</a>
-										</c:if>
+									  </c:if>
 									</se:authorize>
 									 <se:authorize access="hasRole('ROLE_TECH')">
 									 	<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 4 || patentDoc.patentDocStatus.patentDocStatusId == 5 || patentDoc.patentDocStatus.patentDocStatusId == 6 }">  

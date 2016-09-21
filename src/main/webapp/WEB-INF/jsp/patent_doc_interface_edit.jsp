@@ -1861,7 +1861,7 @@ function updateImgName(value,linkSeqNo){
 	
 	function downloadAttachmentFile(value){
 		var iframe = document.getElementById('fileFrame');
-		iframe.src = "<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+value;
+		window.open("<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+value);
 	}
 	$('input[id=patentDocFile]').change(function() {  
 		$('#patentDocFilename').val($(this).val());  
@@ -1892,7 +1892,7 @@ function updateImgName(value,linkSeqNo){
 	
 	function downloadPatentDocFile(patentDocId){
 		var iframe = document.getElementById('fileFrame');
-		iframe.src="<s:url value='/petition/getPatentAttachmentFile.html'/>?patentDocId="+patentDocId;
+		window.open("<s:url value='/petition/getPatentAttachmentFile.html'/>?patentDocId="+patentDocId);
 	}
 	
 	function validateAppPersonFormWayOne(value,id) {

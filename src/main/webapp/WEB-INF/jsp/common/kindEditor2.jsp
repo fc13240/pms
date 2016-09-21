@@ -43,7 +43,7 @@
  				   uploadJson : "${base}/kindeditor/file_upload.html", 
 				   fileManagerJson : '${base}/kindeditor/file_manager_json.html',
 				   resizeType : 2,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
-				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
+				   themeType : 'simple',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
 				   height  : '510px',
 				   width:'800px',
 				   readonlyMode : false, //只读模式 默认为false
@@ -80,7 +80,7 @@
  				   uploadJson : "${base}/kindeditor/file_upload.html", 
 				   fileManagerJson : '${base}/kindeditor/file_manager_json.html',
 				   resizeType : 2,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
-				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
+				   themeType : 'simple',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
 				   height  : '500px',
 				   width:'800px',
 				   readonlyMode : false, //只读模式 默认为false
@@ -117,7 +117,7 @@
  				  cssData: 'body {font-family: "宋体"; font-size: 14px}',
 				   fileManagerJson : '${base}/kindeditor/file_manager_json.html',
 				   resizeType : 2,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
-				   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
+				   themeType : 'simple',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
 				   height  : '530px',
 				   width:'800px',
 				   readonlyMode : false, //只读模式 默认为false
@@ -158,7 +158,7 @@
 			  cssData: 'body {font-family: "宋体"; font-size: 14px}',
 		   fileManagerJson : '${base}/kindeditor/file_manager_json.html',
 		   resizeType : 2,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
-		   themeType : 'default',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
+		   themeType : 'simple',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
 		   height  : '100px',
 		   width:'650px',
 		   readonlyMode : false, //只读模式 默认为false
@@ -166,11 +166,7 @@
 		   allowImageUpload : false,
 		   allowPreviewEmoticons : false,
 			items : [
-					'undo', 'redo', '|' ,'justifyleft', 'justifycenter', 'justifyright',
-					'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
-					'superscript', 'selectall', '|', 'fullscreen',
-					'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-					'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat'
+					  'subscript','superscript'
 					],
 		   afterBlur: function(){this.sync();},
 		   syncType:"auto",

@@ -269,4 +269,13 @@ public class FeeCrawler {
 //		
 //		
 //	}
+	
+	public static void main(String[] args) {
+		List<Patent> patents = new ArrayList<>();
+		Patent p = new Patent();
+		p.setAppNo("2016102507645");
+		patents.add(p);
+		FeeCrawler fc = new FeeCrawler(patents);
+		fc.grabFees();
+	}
 }

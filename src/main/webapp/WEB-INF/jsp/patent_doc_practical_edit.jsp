@@ -11,6 +11,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 	<link rel="stylesheet" href="<s:url value='/temp/css/editor.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 <c:import url="common/kindEditor3.jsp"></c:import>
@@ -2214,7 +2215,7 @@ function resetUpdateInventorForm(){
 
 function downloadAttachmentFile(value){
 	var iframe = document.getElementById('fileFrame');
-	iframe.src = "<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+value;
+	window.open("<s:url value='/editor/getPatentDocAttachmentFile.html'/>?patentDocId="+value);
 }
 
 $('input[id=patentDocFile]').change(function() {  
@@ -2246,7 +2247,7 @@ function uploadPatentDocFile(){
 
 function downloadPatentDocFile(patentDocId){
 	var iframe = document.getElementById('fileFrame');
-	iframe.src="<s:url value='/petition/getPatentAttachmentFile.html'/>?patentDocId="+patentDocId;
+	window.open("<s:url value='/petition/getPatentAttachmentFile.html'/>?patentDocId="+patentDocId);
 }
 
 
