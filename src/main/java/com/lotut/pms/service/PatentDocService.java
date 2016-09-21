@@ -76,6 +76,6 @@ public interface PatentDocService {
 
 	List<User> searchShareUsers(long patentDocId);
 	
-	
+	String getPatentDocInvoicePic(Long patentDocId);
 	
 }

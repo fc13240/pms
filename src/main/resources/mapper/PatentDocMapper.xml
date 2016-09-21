@@ -313,4 +313,8 @@
 		where  patent_doc_id=#{patentDocId}
 	</update>
 	
+	<select id="getPatentDocInvoicePic"  resultType="string">
+		select invoice_pic from patent_documents where  patent_doc_id=#{patentDocId}
+	</select>
+	
 </mapper>

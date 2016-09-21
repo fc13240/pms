@@ -250,6 +250,12 @@ public class PatentDocServiceImp implements PatentDocService{
 		}
 
 
+		@Override
+		public String getPatentDocInvoicePic(Long patentDocId) {
+			return patentDocDao.getPatentDocInvoicePic(patentDocId);
+		}
+
+
 		
 
 

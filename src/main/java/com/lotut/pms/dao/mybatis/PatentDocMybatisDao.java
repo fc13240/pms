@@ -283,4 +283,11 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	public void saveInvoicePath(String invoicePic, long patentDocId) {
 		patentDocMapper.saveInvoicePath(invoicePic, patentDocId);
 	}
+
+
+
+	@Override
+	public String getPatentDocInvoicePic(Long patentDocId) {
+		return patentDocMapper.getPatentDocInvoicePic(patentDocId);
+	}
 }

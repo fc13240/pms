@@ -958,5 +958,34 @@ public class PatentEditDocController {
 		}
 
 	}
+	
+	
+	@RequestMapping(path="/downloadInvoicePic",method=RequestMethod.GET)
+	public void  downloadInvoicePic(@RequestParam("patentDocId")long patentDocId,HttpServletResponse response,Model model){
+		try{
+			String filePath=patentDocService.getPatentDocInvoicePic(patentDocId);
+			String[] file=filePath.split("/");
+			String fileName=file[file.length-1];
+			response.setContentType("multipart/form-data");
+			response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName,"UTF-8"));
+			File wordFile = new File(filePath);
+			int BUFFER_SIZE = 8192;
+			byte[] buffer = new byte[BUFFER_SIZE];
+			try (OutputStream out = response.getOutputStream(); 
+					BufferedInputStream bis = new BufferedInputStream(new FileInputStream(wordFile))) {
+				int bytesRead = -1;
+				while ((bytesRead = bis.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesRead);
+				}
+				out.flush();
+				bis.close();
+				out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 
 }
