@@ -125,7 +125,7 @@ text-decoration: none;
 .backedit{padding:6px;}
 .top_right {
 float: right;
-width: 200px;
+width: 100px;
 padding-top: 5px;
 padding-bottom: 2px;
 }
@@ -141,7 +141,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff8f8f8', en
 }
 
 .upimg1 {
-background: #39a4e1;
+background: #FD3D3D;
 width: 120px;
 text-align: center;
 height: 32px;

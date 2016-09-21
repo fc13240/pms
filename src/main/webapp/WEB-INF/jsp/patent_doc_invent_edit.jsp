@@ -373,21 +373,26 @@ margin: 1px 0 0 1px;}
 	</div>
 <!-- right end -->
 <!-- center beg -->
-	<div class="editor-center" style="min-width:700px;max-height:1000px;OVERFLOW:auto;">
+	<div class="editor-center" style="min-width:900px;max-height:1000px;OVERFLOW:auto;">
 	   
 		<div class="center_top">
 			<div class="backedit">
 				<a href="javascript:return void" onclick="returnSavePatentDoc(${patentDoc.patentDocId});">返回撰写列表</a>
+
+			</div>
+			<div style="width:100px;float:right;margin-right:110px;">
 				<a href="javascript:return void" onclick="savePatentDoc(${patentDoc.patentDocId});">
 				<button style="" class="button button-primary  button-rounded" data-placement="bottom">保存</button>
-				</a>
-			</div>
+				</a>				
+			</div>			
 			<div class="top_right">
 				<a style="float:left" class="review"  href="javascript:return void" onclick="preview_selfwrite(${patentDoc.patentDocId},${patentDoc.patentType});">
 				<i class="icon"></i>预览
 				</a>
+			
 				<input type="hidden" id="patentType" value="1">
 			</div>
+
 		</div>	
 
 <!--con beg-->
