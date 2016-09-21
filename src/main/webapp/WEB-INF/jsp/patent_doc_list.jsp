@@ -201,7 +201,7 @@
 								</td>
 								<td style="text-align:center">
 								
-									 <c:if test="${patentDoc.invoicepic !=null }">
+									 <c:if test="${patentDoc.invoicePic !=null }">
 				                    	<a  href="<s:url value='/editor/downloadInvoicePic.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
 								</td>
