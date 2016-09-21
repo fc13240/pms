@@ -14,7 +14,7 @@
 	<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 	<link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 	<link rel="stylesheet" href="<s:url value='/temp/css/editor.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
-<c:import url="common/kindEditor3.jsp"></c:import>
+	<c:import url="common/kindEditor3.jsp"></c:import>
 	<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 	 <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
     <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>

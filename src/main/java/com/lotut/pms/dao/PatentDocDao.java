@@ -79,4 +79,6 @@ public interface PatentDocDao {
 	String getPatentDocAttachmentUrlById(Long patentDocId);
 
 	List<User> searchShareUsers(long patentDocId);
+	
+	void saveInvoicePath(String invoicePic , long patentDocId);
 }

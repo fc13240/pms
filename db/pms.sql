@@ -912,3 +912,6 @@ ALTER TABLE patent_doc_order_items ADD COLUMN apply_fee INT NOT NULL DEFAULT 0 C
 ALTER TABLE patent_doc_order_items ADD COLUMN print_fee INT NOT NULL DEFAULT 0 COMMENT '打印费';
 ALTER TABLE patent_doc_order_items ADD COLUMN check_fee INT NOT NULL DEFAULT 0 COMMENT '审查费';
 ALTER TABLE patent_doc_order_items ADD COLUMN service_fee INT NOT NULL DEFAULT 0 COMMENT '服务费';
+
+ALTER TABLE patent_documents ADD COLUMN invoice_pic VARCHAR(200) DEFAULT NULL COMMENT '缴费发票凭证';
+INSERT INTO payment_methods VALUES(3, '缴费凭证支付');

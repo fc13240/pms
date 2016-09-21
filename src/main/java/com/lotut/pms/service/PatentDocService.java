@@ -75,4 +75,7 @@ public interface PatentDocService {
 	String getPatentDocAttachmentUrlById(Long patentDocId);
 
 	List<User> searchShareUsers(long patentDocId);
+	
+	
+	
 }

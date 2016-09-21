@@ -38,14 +38,14 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 
 	@Override
 	@Transactional
-	public int createOrder(PatentDocOrder order, List<PatentDoc> patentDocs) {
+	public long createOrder(PatentDocOrder order, List<PatentDoc> patentDocs) {
 		int totalAmount = 0;
 		for(PatentDoc doc:patentDocs){
 			totalAmount += doc.getTotalFee();
 		}
 		order.setAmount(totalAmount);
 		PaymentMethod paymentMethod = new PaymentMethod();
-		paymentMethod.setPaymentMethodId(1);
+		paymentMethod.setPaymentMethodId(order.getPaymentMethod().getPaymentMethodId());
 		order.setPaymentMethod(paymentMethod);
 		patentDocWorkflowDao.insertOrder(order);
 		List<PatentDocOrderItem> orderItems = new ArrayList<>(patentDocs.size());
@@ -64,7 +64,7 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 		}
 		patentDocWorkflowDao.insertOrderItems(orderItems);
 		
-		return 0;
+		return order.getId();
 	}
 
 
@@ -262,6 +262,11 @@ public class PatentDocWorkflowServiceImpl implements PatentDocWorkflowService{
 	}
 	
 	
-
+	@Override
+	public void saveInvoicePath(String invoicePic, Long[] patentDocIds) {
+		for(long patentDocId : patentDocIds){
+			patentDocDao.saveInvoicePath(invoicePic, patentDocId);
+		}
+	}
 	
 }

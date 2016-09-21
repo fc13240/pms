@@ -924,6 +924,39 @@ public class PatentEditDocController {
 		}
 	}
 
-	
+	@RequestMapping(path="/uploadInvoicePic",method=RequestMethod.POST)
+	public void uploadInvoicePic(HttpServletRequest request,HttpServletResponse response,PrintWriter printOut){
+		try{
+			String savePath=Settings.PATENTDOC_INVOICE_PIC_PATH;
+			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+			MultipartFile file1 = multipartRequest.getFile("file");
+			String fileName = file1.getOriginalFilename(); 
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String ymd = sdf.format(new Date());
+			savePath += ymd + "/";
+			File dirFile = new File(savePath);
+			if (!dirFile.exists()) {
+				dirFile.mkdirs();
+			}
+			String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+			String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
+			InputStream is = file1.getInputStream();
+			int BUFFER_SIZE = 8 * 1024;
+			byte[] buffer = new byte[BUFFER_SIZE];
+			try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
+				int bytesRead = -1;
+				while ((bytesRead = is.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesRead);
+				}
+				out.flush();
+				out.close();
+			}
+			WebUtils.writeJsonStrToResponse(response,savePath+newFileName);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+	}
 
 }

@@ -81,4 +81,6 @@ public interface PatentDocMapper {
 	String getPatentDocAttachmentUrlById(Long patentDocId);
 
 	List<User> searchShareUsers(long patentDocId);
+	
+	void saveInvoicePath(@Param("invoicePic")String invoicePic , @Param("patentDocId")long patentDocId);
 }

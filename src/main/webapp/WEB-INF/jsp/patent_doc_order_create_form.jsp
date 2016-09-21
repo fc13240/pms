@@ -11,7 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
 <title>龙图腾专利管家——订单</title>
 <%@ include file="_css.jsp" %>
-
+<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 </head>
 <body>
 <%@ include file="_top.jsp" %>
@@ -34,15 +34,19 @@
 					  <c:forEach items="${PatentDocs}" var="patentDoc" varStatus="status">
 						<input type="hidden" name="patentDocIds" value="${patentDoc.patentDocId}">
 					  </c:forEach>
+					  		<input id='invoicePicPath' name='invoicePic' type='hidden' value=''/>
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
 						<tr>
 						  <td>支付方式:</td>
 						</tr>
 						<tr>
-						  <td><input type="radio" name="paymentMethod.paymentMethodId" value="1" checked="checked" required="required">
+						  <td><input type="radio" name="paymentMethod.paymentMethodId" value="1" checked="checked" required="required" >
 							支付宝支付
-							<input type="hidden" name="paymentMethod.paymentMethodId" value="2" required="required">
-							 
+							<input type="radio" name="paymentMethod.paymentMethodId" value="3" required="required"   data-toggle = "modal" data-target = "#commonInventorModal">
+							发票支付
+								 <div id="InvoicePic" style="display:none">
+									
+								</div>
 						 </td>
 						</tr>
 						<tr>
@@ -125,91 +129,79 @@
 
 </div>	
 
+<div class = "modal fade" id = "commonInventorModal" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true" >
+   
+   <div class = "modal-dialog" style="width:1000px;">
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true" id="inventorModalCloseBtn">
+               ×
+            </button>
+            
+            <h4 class = "modal-title" id = "myModalLabel">
+            	请上传缴费发票凭证
+            </h4>
+         </div>
+	         <div class = "modal-body" style="margin-left: 80px;">
+	           
+				<div class="lt-box" style="height:80px;padding:20px;">
+					<form id="patentDocAttachment" action="<s:url value='/editor/uploadInvoicePic.html'/>"  method="post" enctype="multipart/form-data" class="form-horizontal">  
+					<input style="display:none;"  id="patentAttachmentFile" name="file" type="file" />
+					<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
+					<button type="button" onclick="$('input[id=patentAttachmentFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+					<button style="margin-left:5px;" type="button" class="t-btn2 button button-caution button-rounded" onclick="uploadAttachmentFile()">上传</button>
+					</form> 
 
+					<div style="height:10px;">&nbsp;</div> 
+					<span style="color:#666;">友情提示：请提供缴费发票凭证用于管理员审核(jpg、png格式)，不建议上传其他格式的文件!
+					</span>
+				</div>
+	           
+	         </div>
+      </div>
+   </div>
+</div>
 <script type="text/javascript">
-
-	function hint(){
-		var postAddress=$("input:radio[name='postAddress.id']:checked").val();
-		var express=$("input:radio[name='express']:checked").val();
-		var nationalInvoice=$("input:radio[name='nationalInvoice']:checked").val();
-		var companyInvoice=$("input:radio[name='companyInvoice']:checked").val();
-		var patentAmount = parseInt($("#patentFee").text());
-		var serviceFeeAmount = parseInt($("#serviceFee").text());
-		var baseFee = patentAmount + serviceFeeAmount;
-		var expressFee = $("#expressFee");
-		var expressFeeAmount = 20;
-		var normalExpressFee = 10;
-		var invoiceFee = $("#invoiceFee");
-		var totalAmount = $("#totalAmount");
-		var needPost = postAddress!=0;
-		var isEmsExpress = express==1;
-		var needCompanyInvoice = companyInvoice==1;
-		
-		if (needPost) {
-			if (isEmsExpress && needCompanyInvoice) {
-				expressFee.text(expressFeeAmount);
-				invoiceFee.text(parseInt(patentAmount * 0.1));
-				totalAmount.text(baseFee + expressFeeAmount + parseInt(patentAmount * 0.1));	
-			} else if (isEmsExpress) {
-				expressFee.text(expressFeeAmount);
-				invoiceFee.text(0);
-				totalAmount.text(baseFee + expressFeeAmount);
-			} else if (needCompanyInvoice) {
-				expressFee.text(10);
-				invoiceFee.text(parseInt(patentAmount * 0.1));
-				totalAmount.text(baseFee + normalExpressFee + parseInt(patentAmount * 0.1));				
-			} else {
-				expressFee.text(10);
-				invoiceFee.text(0);
-				totalAmount.text(baseFee + normalExpressFee);	
-			}
-		} else {
-			expressFee.text(0);
-			invoiceFee.text(0);
-			totalAmount.text(baseFee);			
-		}
-		
-
-	}
+ 	
+ 	function hideUploadInvoice(){
+ 		$("#InvoicePic").hide();
+ 		$("#invoicePicPath").val("")
+ 	}
+ 	
+ 	
+	$('input[id="patentAttachmentFile"]').change(function() {
+		$('#filename').val($(this).val());  
+	});
 	
-	
-			
-		function hide(){
-			var trs = $("tr[class='lotut']");  
-			for(i = 0; i < trs.length; i++){   
-			    trs[i].style.display = "none"; //这里获取的trs[i]是DOM对象而不是jQuery对象，因此不能直接使用hide()方法  
+	function uploadAttachmentFile(){
+		
+		var hideForm = $('#patentDocAttachment'); 
+		var options = {
+			dataType : "json", 
+			data: {'file': $("#patentAttachmentFile").val()},
+			beforeSubmit : function() {
+				var name=$("#filename").val();
+				var mime = name.toLowerCase().substr(name.lastIndexOf("."));
+				if(mime ==".jpg" || mime ==".png"){
+					return true;
+				}else{
+					alert("请上传图片！");
+					return false;
+				}
+			}, 
+			success : function(result) {
+				$("#invoicePicPath").val(result);
+				alert("上传成功!");
+			}, 
+			error : function() {
+				alert("上传失败"); 
 			} 
-			
-		var express=$("input:radio[name='express']:checked").val();
-		var nationalInvoice=$("input:radio[name='nationalInvoice']:checked").val();
-		var invoice=$("input:radio[name='invoice']:checked").val();
-		var patentAmount = parseInt($("#patentFee").text());
-		var serviceFeeAmount = parseInt($("#serviceFee").text());
-		var baseFee = patentAmount + serviceFeeAmount;
-		var expressFee = $("#expressFee");
-		var expressFeeAmount = 20;
-		var invoiceFee = $("#invoiceFee");
-		var totalAmount = $("#totalAmount");
-		expressFee.text(0);
-		invoiceFee.text(0);
-		totalAmount.text(baseFee);
-		$("#invoice").val("");
+		}; 
+		hideForm.ajaxSubmit(options); 
 	}
 
-	
-	function show(){
-		var trs = $("tr[class='lotut']");  
-		for(i = 0; i < trs.length; i++){   
-		    trs[i].style.display = "block"; 
-		} 
-		};
-	function showed(){
- 		$("#invoice").show();
- 	}
- 	function hidde(){
- 		$("#invoice").hide();
- 		$("#invoice").val("");
- 	}
 </script>
 </body>
 </html>

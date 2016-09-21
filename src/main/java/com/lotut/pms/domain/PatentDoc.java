@@ -37,7 +37,19 @@ public class PatentDoc {
 	private String internalCode;
 	private List<CommonAppPerson> commonAppPersons;
 	private PatentDocFeeCalculator calculator;
+	private String invoicePic;
 	
+	
+
+
+	public String getInvoicePic() {
+		return invoicePic;
+	}
+
+	public void setInvoicePic(String invoicePic) {
+		this.invoicePic = invoicePic;
+	}
+
 	private PatentDocFeeCalculator getFeeCalculator() {
 		if (calculator == null) {
 			calculator =  PatentDocFeeCalculatorFactory.getPatentDocFeeCalculator(this);

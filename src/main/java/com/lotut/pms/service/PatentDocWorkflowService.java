@@ -6,7 +6,7 @@ import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocOrder;
 
 public interface PatentDocWorkflowService {
-	int createOrder(PatentDocOrder order, List<PatentDoc> PatentDocs);
+	long createOrder(PatentDocOrder order, List<PatentDoc> PatentDocs);
 	
 	PatentDocOrder getOrderById(long orderId);
 	
@@ -27,4 +27,6 @@ public interface PatentDocWorkflowService {
 	void redistributeTechPersonPatentDoc(int ownerId,long patentDocId,int action);
 	
 	void redistributeProcessPersonPatentDoc(int ownerId,long patentDocId,int action);
+	
+	void saveInvoicePath(String invoicePic , Long[] patentDocIds);
 }

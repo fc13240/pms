@@ -276,4 +276,11 @@ public class PatentDocMybatisDao extends SqlSessionDaoSupport implements PatentD
 	public List<User> searchShareUsers(long patentDocId) {
 		return patentDocMapper.searchShareUsers(patentDocId);
 	}
+
+
+
+	@Override
+	public void saveInvoicePath(String invoicePic, long patentDocId) {
+		patentDocMapper.saveInvoicePath(invoicePic, patentDocId);
+	}
 }
