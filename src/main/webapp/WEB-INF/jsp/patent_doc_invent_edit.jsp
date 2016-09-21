@@ -892,7 +892,7 @@ margin: 1px 0 0 1px;}
 					<br/>
 					<h5>委托书:</h5>
 					<input type="hidden" id="patentDocEntrustFileHidden"/>
-					<form action="<s:url value='/petition/uploadPatentDocEntrustFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+					<form action="<s:url value='/petition/uploadPatentDocEntrustFile.html'/>" id="uploadEntrustFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
 						
 						<input style="display:none" type="file" id="patentDocEntrustFile" name="file"/>
 						<input style="width:300px;display:inline;" type="text" id="patentDocEntrustFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocEntrustFile]').click();"/>
