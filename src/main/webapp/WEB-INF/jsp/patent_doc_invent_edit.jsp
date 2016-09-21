@@ -373,7 +373,7 @@ margin: 1px 0 0 1px;}
 	</div>
 <!-- right end -->
 <!-- center beg -->
-	<div class="editor-center" style="min-width:700px;max-height:1000px;OVERFLOW:auto;">
+	<div class="editor-center" style="min-width:900px;max-height:1000px;OVERFLOW:auto;">
 	   
 		<div class="center_top">
 			<div class="backedit">
