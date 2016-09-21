@@ -157,25 +157,15 @@
 				   fileManagerJson : '${base}/kindeditor/file_manager_json.html',
 				   resizeType : 0,  // 2时可以拖动改变宽度和高度，1时只能改变高度，0时不能拖动。
 				   themeType : 'simple',  //指定主题风格，可设置”default”、”simple”  指定simple时需要引入simple.css
-<<<<<<< HEAD
 				   height  : '50px',
 				   width:'900px',
-=======
-				   height  : '100px',
-				   width:'650px',
->>>>>>> 52f44eaa9852b5312c7ba77f2ec957f1b751e217
 				   readonlyMode : false, //只读模式 默认为false
 				   allowFileManager : false,  //显示浏览远程服务器按钮
 				   allowImageUpload : false,
 				   allowPreviewEmoticons : false,
 					items : [
-<<<<<<< HEAD
 						'undo', 'redo',  'subscript',
 				        'superscript'
-	
-=======
-							  'subscript','superscript'
->>>>>>> 52f44eaa9852b5312c7ba77f2ec957f1b751e217
 						],
 				   afterBlur: function(){this.sync();},
 				   syncType:"auto",
