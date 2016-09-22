@@ -1888,6 +1888,7 @@ function updateImgName(value,linkSeqNo){
 			});
 			resetAppPersonForm();
 			$("#patentDocFilename").val("");
+			$("#patentDocEntrustFilename").val("");
 		};
 	}
 	
