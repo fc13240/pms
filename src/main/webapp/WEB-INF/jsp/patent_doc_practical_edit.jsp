@@ -913,7 +913,7 @@ margin: 1px 0 0 1px;}
 					<form action="<s:url value='/petition/uploadPatentDocEntrustFile.html'/>" id="uploadEntrustFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
 						
 						<input style="display:none" type="file" id="patentDocEntrustFile" name="file"/>
-						<input style="width:300px;display:inline;" type="text" id="patentDocEntrustFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocEntrustFile]').click();"/>
+						<input style="width:378px;display:inline;" type="text" id="patentDocEntrustFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocEntrustFile]').click();"/>
 						<button type="button" style="display: none;" onclick="$('input[id=patentDocEntrustFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 						<button type="button" onclick="uploadPatentDocEntrustFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
 					</form>
@@ -923,7 +923,7 @@ margin: 1px 0 0 1px;}
 					<form action="<s:url value='/petition/uploadPatentDocAppPersonFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
 						
 						<input style="display:none" type="file" id="patentDocFile" name="file"/>
-						<input style="width:300px;display:inline;" type="text" id="patentDocFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocFile]').click();"/>
+						<input style="width:378px;display:inline;" type="text" id="patentDocFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocFile]').click();"/>
 						<button type="button" style="display: none;" onclick="$('input[id=patentDocFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 						<button type="button" onclick="uploadPatentDocFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
 						<%-- <c:if test="${not empty patentDoc.attachmentUrl }">
@@ -2352,7 +2352,7 @@ function uploadPatentDocFile(){
 			},
 			success : function (result){
 				$("#patentDocAppPersonFileHidden").val(result);
-				$("#patentDocFilename").val("");
+				//$("#patentDocFilename").val("");
 				alert("上传成功");
 			}
 	}
@@ -2381,7 +2381,7 @@ function uploadPatentDocInventorFile(){
 			},
 			success : function (result){
 				$("#patentDocInventorFileHidden").val(result);
-				$("#patentDocInventorFilename").val("");
+				//$("#patentDocInventorFilename").val("");
 				alert("上传成功");
 			}
 	}
@@ -2411,7 +2411,7 @@ function uploadPatentDocEntrustFile(){
 			},
 			success : function (result){
 				$("#patentDocEntrustFileHidden").val(result);
-				$("#patentDocEntrustFilename").val("");
+				//$("#patentDocEntrustFilename").val("");
 				alert("上传成功");
 			}
 	}
