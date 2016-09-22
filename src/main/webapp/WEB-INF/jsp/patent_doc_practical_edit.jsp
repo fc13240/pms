@@ -99,7 +99,7 @@ width: 199px;
 height: 170px;
 margin: 1px 0 0 1px;}
 </style>
-<div style="width:100%;min-width:1220px; margin:0 auto;"> 
+<div style="width:100%;min-width:1400px; margin:0 auto;"> 
 	<div class="editor-left">
 		<!--申请文件九部分标签切换 -->
 		<div class="tab" id="tabWrap"> 
@@ -374,7 +374,7 @@ margin: 1px 0 0 1px;}
 	</div>
 <!-- right end -->
 <!-- center beg -->
-	<div class="editor-center" style="min-width:1000px;">
+	<div class="editor-center">
 	   
 		<div class="center_top">
 			<div class="backedit">
@@ -397,7 +397,7 @@ margin: 1px 0 0 1px;}
 
 			
 <!--con beg-->
-		<div class="editor-center-con" style="padding:10px;max-height:1000px;OVERFLOW:auto;">
+		<div class="editor-center-con" style="padding:10px;width:930px;max-height:1000px;OVERFLOW:auto;">
 			<input id="whichTip" type="hidden" name="name" value="2">
 			
 				<!--请求协议书div  -->
