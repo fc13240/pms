@@ -30,7 +30,7 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="height:300px;padding:20px;">
-					<form id="proxyFileForm" action="<s:url value='/appPerson/uploadProxyFile.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+					<form id="proxyFileForm" action="<s:url value='/petition/uploadPatentDocEntrustFile.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
 						<input style="display:none;"  id="proxyFile" name="file" type="file" />
 						<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
 						<button type="button" onclick="$('input[id=proxyFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>

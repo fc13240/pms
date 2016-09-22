@@ -30,7 +30,7 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="height:300px;padding:20px;">
-					<form id="inventorFileForm" action="<s:url value='/inventor/uploadAttachmentFile.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+					<form id="inventorFileForm" action="<s:url value='/petition/uploadPatentDocInventorFile.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
 						<input style="display:none;"  id="inventorFile" name="file" type="file" />
 						<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
 						<button type="button" onclick="$('input[id=inventorFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
