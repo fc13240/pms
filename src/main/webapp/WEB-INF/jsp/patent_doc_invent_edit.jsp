@@ -1887,6 +1887,7 @@ function updateImgName(value,linkSeqNo){
 				}
 			});
 			resetAppPersonForm();
+			$("#patentDocFilename").val("");
 		};
 	}
 	
@@ -1951,6 +1952,7 @@ function updateImgName(value,linkSeqNo){
 				}
 			});
 			resetAddInventorModal();
+			$("#patentDocInventorFilename").val("");
 		}else{
 		}
 	}

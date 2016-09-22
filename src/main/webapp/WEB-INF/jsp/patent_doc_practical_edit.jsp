@@ -1960,6 +1960,7 @@ function submitAppPersonForm(){
 			}
 		});
 		resetAppPersonForm();
+		$("#patentDocFilename").val("");
 	};
 }
 
@@ -2024,6 +2025,7 @@ function submitInventorForm(){
 			}
 		});
 		resetAddInventorModal();
+		$("#patentDocInventorFilename").val("");
 	}else{
 	}
 }
