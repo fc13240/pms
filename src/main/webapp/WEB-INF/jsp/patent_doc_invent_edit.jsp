@@ -1186,13 +1186,15 @@ margin: 1px 0 0 1px;}
          </div>
 	         <div class = "modal-body">
 				<div class="lt-box" style="padding:20px;">
+					<a href="javascript:return void" onclick="addContact()" >
+					<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个发明人批量哦！">添加联系人</button>
+					</a>
 					<table id="simple-table" class="table table-striped table-bordered table-hover">
 					  <thead>
 						<tr class="simple_bag">
-						  <%-- <th class="center"> <label class="pos-rel">
-							<input type="checkbox" class="contact-check-item" name="checkall" />
-							<span class="lbl"></span> </label>
-						  </th> --%>
+						  <th class="center">
+							选择
+						  </th>
 						  <th>序号</th>
 						  <th>联系人</th>
 						  <th>所在地区</th>
@@ -1203,10 +1205,10 @@ margin: 1px 0 0 1px;}
 					  </thead>
 					  <c:forEach items="${contactAddresses}" var="address" varStatus="status">
 						<tr>
-						  <%-- <td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-							<input type="checkbox" class="contact-check-item" contact="<c:out value='${address.id}'/>"/></span>
+						  <td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
+							<input type="radio" name="contact-check-item" value="${address.id}"/></span>
 							<span class="lbl"></span></label>
-						  </td> --%>
+						  </td>
 						  <td class="center" style="text-align:center;">${status.count}</td>
 						  <td style="text-align:center;">${address.receiver}</td>
 						  <td style="text-align:center;">${address.provinceName} ${address.cityName} ${address.districtName}
@@ -2632,6 +2634,15 @@ function updateImgName(value,linkSeqNo){
 	function resetUpdateContactForm(){
 		 $("#updateContactModalCloseBtn").trigger("click");
 	 }
+	
+	function addContact(){
+		var contactId= $('input:radio[name="contact-check-item"]:checked').val();
+        if(contactId==null){
+            alert("请选择联系人!");
+        }else{
+        	settingContact(contactId);
+        }
+	}
 </script>
 <iframe id="fileFrame" style="display:none"></iframe>
 </body>
