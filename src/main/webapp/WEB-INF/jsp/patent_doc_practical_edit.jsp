@@ -435,7 +435,7 @@ margin: 1px 0 0 1px;}
 
 					</div>
 					<div class="patent_person_table" id="appersonDiv" style="margin-top:10px;">
-						<table id="simple-table"  class="table table-striped table-bordered table-hover">
+						<table id="simple-table" style="width:900px;" class="table table-striped table-bordered table-hover">
 						 	<thead>
 							<tr class="simple_bag">
 							  <th>姓名或名称</th>
@@ -493,7 +493,7 @@ margin: 1px 0 0 1px;}
 
 					</div>
 					<div class="patent_inventor_table" id="inventorDiv" style="margin-top:10px;">
-						<table id="simple-table"   class="table table-striped table-bordered table-hover">
+						<table id="simple-table" style="width:900px;"  class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
 							  <th>姓名</th>
@@ -541,7 +541,7 @@ margin: 1px 0 0 1px;}
 
 					</div>
 					<div class="patent_contact_table" style="margin-top:10px;" id="contactDiv">
-						<table id="simple-table" class="table table-striped table-bordered table-hover">
+						<table id="simple-table" style="width:900px;" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
 							 <th>联系人</th>
