@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -331,6 +332,21 @@ public class PetitionController {
 		int userId = PrincipalUtils.getCurrentUserId();
 		String saveDir = Settings.PROXY_FILE_PATH;
 		FileOption.patentDocFileOption(userId, file, saveDir,response);
+	}
+	
+	@RequestMapping(path="/downloadPatentDocFile", method=RequestMethod.GET)
+	public void downloadPatentDocAppPersonFile(String fileUrl, HttpServletResponse response,HttpServletRequest request) throws IOException {
+		response.setContentType("application/ostet-stream");
+		String relativeUrl = fileUrl;
+		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
+		String filePath =relativeUrl;
+		File patentDocFile = new File(filePath);
+		if(WebUtils.isFireFox(request)){
+			downloadFileName =new String(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
+		}
+		response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
+		response.setContentLength((int)patentDocFile.length());
+		WebUtils.writeStreamToResponse(response, new FileInputStream(patentDocFile));
 	}
 }
 

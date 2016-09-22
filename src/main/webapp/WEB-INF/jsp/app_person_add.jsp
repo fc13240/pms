@@ -86,7 +86,7 @@
 						<button type="button" style="display: none;" onclick="$('input[id=patentDocEntrustFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 						<button type="button" id="uploadEntrustBtn" style="display:none;" onclick="uploadPatentDocEntrustFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
 					</form>								
-					<form action="<s:url value='/petition/uploadPatentDocEntrustFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+					<form action="<s:url value='/petition/uploadPatentDocAppPersonFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
 						<input style="display:none" type="file" id="patentDocFile" name="file"/>
 						<button type="button" style="display: none;" onclick="$('input[id=patentDocFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 						<button type="button" id="uploadBtn" style="display:none;" onclick="uploadPatentDocFile()" class="t-btn3 button button-primary  button-rounded">上传</button>

@@ -43,8 +43,8 @@
 	
 	<insert id="addInventor" parameterType="CommonInventor">
 		insert into common_inventor (inventor_name,inventor_id_number,inventor_nationality,inventor_mobile,inventor_email,inventor_other_information
-		,user_id)
-		values(#{inventorName},#{inventorNumber},#{inventorNationality},#{inventorMobile},#{inventorEmail},#{inventorComment},#{userId})
+		,user_id,inventor_attachment_file)
+		values(#{inventorName},#{inventorNumber},#{inventorNationality},#{inventorMobile},#{inventorEmail},#{inventorComment},#{userId},#{inventorUrl})
 	
 	</insert>
 	
