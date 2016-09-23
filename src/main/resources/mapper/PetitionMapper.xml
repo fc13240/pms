@@ -74,7 +74,7 @@
 	<select id="findAppPersonNameById" resultType="CommonAppPerson">
   		select app_person_id as appPersonId,name as name,id_number as idNumber,
   		postcode_address as postcodeAddress,other_information as otherInfo,transaction_identity_id as transactionIdentityId,
-  		fee_reduce_transaction_status as feeReduceTransactionStatus,transaction_year as transactionYear from common_app_person 
+  		fee_reduce_transaction_status as feeReduceTransactionStatus,transaction_year as transactionYear,app_person_attachment_file as appPersonUrl,proxy_file as proxyUrl from common_app_person
   		where user_id=#{userId} and app_person_id in
   		<foreach collection="appPersonIds" item="appPersonId" open="(" separator="," close=")">
 			#{appPersonId}
@@ -95,7 +95,7 @@
   	<select id="findInventorNameById" resultType="CommonInventor">
 		select inventor_id as inventorId ,inventor_name as inventorName,inventor_id_number as inventorNumber,
 		inventor_nationality as inventorNationality,inventor_mobile as inventorMobile,inventor_email as inventorEmail,
-		inventor_other_information as inventorComment,user_id  as userId
+		inventor_other_information as inventorComment,user_id  as userId,inventor_attachment_file as inventorUrl
 		from common_inventor where user_id=#{userId} and inventor_id in 
 		<foreach collection="inventorIds" item="inventorId" open="(" separator="," close=")">
 			#{inventorId}
@@ -110,8 +110,8 @@
   	
   	<insert id="addCommonInventor" parameterType="CommonInventor" useGeneratedKeys="true" keyProperty="inventorId">
 		insert into common_inventor (inventor_name,inventor_id_number,inventor_nationality,inventor_mobile,inventor_email,inventor_other_information
-		,user_id)
-		values(#{inventorName},#{inventorNumber},#{inventorNationality},#{inventorMobile},#{inventorEmail},#{inventorComment},#{userId})
+		,user_id,inventor_attachment_file)
+		values(#{inventorName},#{inventorNumber},#{inventorNationality},#{inventorMobile},#{inventorEmail},#{inventorComment},#{userId},#{inventorUrl})
 	
 	</insert>
 	
@@ -129,31 +129,33 @@
 	</select>
 	
 	<insert id="addPatentDocAppPerson" >
-		insert into patent_doc_app_person(patent_doc_id,name,id_number,postcode_address,other_information,transaction_identity,fee_reduce_transaction_status,transaction_year,user_id) values
+		insert into patent_doc_app_person(patent_doc_id,name,id_number,postcode_address,other_information,transaction_identity,fee_reduce_transaction_status,transaction_year,user_id,app_person_attachment_file,proxy_file) values
 		<foreach collection="commonAppPersons" item="commonAppPerson" separator=",">
-			(#{patentDocId},#{commonAppPerson.name},#{commonAppPerson.idNumber},#{commonAppPerson.postcodeAddress},#{commonAppPerson.otherInfo},#{commonAppPerson.transactionIdentityId},#{commonAppPerson.feeReduceTransactionStatus},#{commonAppPerson.transactionYear},#{userId})
+			(#{patentDocId},#{commonAppPerson.name},#{commonAppPerson.idNumber},#{commonAppPerson.postcodeAddress},#{commonAppPerson.otherInfo},#{commonAppPerson.transactionIdentityId},#{commonAppPerson.feeReduceTransactionStatus},
+				#{commonAppPerson.transactionYear},#{userId},#{commonAppPerson.appPersonUrl},#{commonAppPerson.proxyUrl}
+			)
 		</foreach>
 	</insert>
 
 	<select id="findPatentDocAppPersonById" parameterType="long" resultType="PatentDocAppPerson">
 		select person_id as personId,patent_doc_id as patentDocId,name,id_number as idNumber,postcode_address as postcodeAddress,other_information as otherInformation,transaction_identity as transactionIdentity,
-    		fee_reduce_transaction_status as feeReduceTransactionStatus,transaction_year as transactionYear,user_id as userId from patent_doc_app_person
+    		fee_reduce_transaction_status as feeReduceTransactionStatus,transaction_year as transactionYear,user_id as userId,app_person_attachment_file as appPersonUrl,proxy_file as proxyUrl from patent_doc_app_person
     		where patent_doc_id=#{patentDocId};
 		
 	</select>
 	
 	<insert id="addPatentDocInventor">
-		insert into patent_doc_inventor(patent_doc_id,inventor_name,inventor_number,inventor_nationality,inventor_mobile,inventor_email,inventor_other_information,user_id) values
+		insert into patent_doc_inventor(patent_doc_id,inventor_name,inventor_number,inventor_nationality,inventor_mobile,inventor_email,inventor_other_information,user_id,inventor_attachment_file) values
 		<foreach collection="commonInventors" item="commonInventor" separator=",">
 			(#{patentDocId},#{commonInventor.inventorName},#{commonInventor.inventorNumber},#{commonInventor.inventorNationality},#{commonInventor.inventorMobile},
-			#{commonInventor.inventorEmail},#{commonInventor.inventorComment},#{userId})
+			#{commonInventor.inventorEmail},#{commonInventor.inventorComment},#{userId},#{commonInventor.inventorUrl})
 		</foreach>	
 	</insert>
 	
 	<select id="findPatentDocInventorById" parameterType="long" resultType="PatentDocInventor">
 		select inventor_id as inventorId,patent_doc_id as patentDocId,inventor_name as inventorName,inventor_number as inventorNumber,inventor_nationality as inventorNationality,
-		       inventor_mobile as inventorMobile,inventor_email as inventorEmail,inventor_other_information as inventorOtherInformation,user_id as userId from patent_doc_inventor
-		       where patent_doc_id=#{patentDocId}; 
+		       inventor_mobile as inventorMobile,inventor_email as inventorEmail,inventor_other_information as inventorOtherInformation,user_id as userId,inventor_attachment_file as inventorUrl
+		from patent_doc_inventor where patent_doc_id=#{patentDocId}; 
 	</select>
 	
 	<delete id="deletePatentDocApperson" parameterType="long">
@@ -162,8 +164,8 @@
 	
 	<select id="findAppPersonByAppId" parameterType="long" resultType="PatentDocAppPerson">
 		select person_id as personId,patent_doc_id as patentDocId,name,id_number as idNumber,postcode_address as postcodeAddress,other_information as otherInformation,transaction_identity as transactionIdentity,
-    		fee_reduce_transaction_status as feeReduceTransactionStatus,transaction_year as transactionYear,user_id as userId from patent_doc_app_person
-    		where person_id=#{personId};
+    		fee_reduce_transaction_status as feeReduceTransactionStatus,transaction_year as transactionYear,user_id as userId,app_person_attachment_file as appPersonUrl,proxy_file as proxyUrl
+    	from patent_doc_app_person where person_id=#{personId};
 	
 	</select>
 	

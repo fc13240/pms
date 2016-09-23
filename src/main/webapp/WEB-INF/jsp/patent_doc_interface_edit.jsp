@@ -99,7 +99,7 @@ width: 199px;
 height: 170px;
 margin: 1px 0 0 1px;}
 </style>
-<div style="width:100%;min-width:1220px; margin:0 auto;"> 
+<div style="width:100%;min-width:1400px; margin:0 auto;"> 
 	<div class="editor-left">
 
 		<!--申请文件九部分标签切换 -->
@@ -161,7 +161,7 @@ margin: 1px 0 0 1px;}
 			</div> 
 	    </div>
 	</div>
-	<div class="editor-center" style="min-width:900px;max-height:1000px;OVERFLOW:auto;">
+	<div class="editor-center">
 		<div class="center_top">
 			<div class="backedit">
 				<a href="javascript:return void" onclick="returnSavePatentDoc(${patentDoc.patentDocId});">返回撰写列表</a>
@@ -179,7 +179,7 @@ margin: 1px 0 0 1px;}
 				<input type="hidden" id="patentType" value="${patentDoc.patentType }">
 			</div>
 		</div>	
-		<div class="editor-center-con" style="padding:10px;">
+		<div class="editor-center-con" style="width:930px;padding:10px;max-height:1000px;OVERFLOW:auto;">
 
 			<div class="center_content" id="content0">
 		
@@ -221,6 +221,8 @@ margin: 1px 0 0 1px;}
 							  <th>姓名或名称</th>
 							  <th>证件号码</th>
 							  <th>费减备案状态</th>
+							  <th>委托书</th>
+							  <th>附件</th>
 							  <th>操作</th>
 							</tr>
 						 	</thead>
@@ -231,6 +233,16 @@ margin: 1px 0 0 1px;}
 											<td style="text-align:center">${patentDocAppPerson.name }</td>
 											<td style="text-align:center">${patentDocAppPerson.idNumber }</td>
 											<td style="text-align:center">${patentDocAppPerson.feeReduceTransactionStatus }</td>
+											<td style="text-align:center">
+												<c:if test="${not empty patentDocAppPerson.proxyUrl }">
+													<a href="<s:url value='/petition/downloadPatentDocFile.html'/>?fileUrl=${patentDocAppPerson.proxyUrl }">下载委托书</a>
+												</c:if>
+											</td>
+											<td style="text-align:center">
+												<c:if test="${not empty patentDocAppPerson.appPersonUrl }">
+													<a href="<s:url value='/petition/downloadPatentDocFile.html'/>?fileUrl=${patentDocAppPerson.appPersonUrl }">下载附件</a>
+												</c:if>
+											</td>
 											<td style="text-align:center"><a href="javascript:deletePatentDocApperson(${patentDocAppPerson.personId })">删除</a><a style='margin-left:20px;' href="javascript:updatePatentDocApperson(${patentDocAppPerson.personId })">修改</a></td>
 										</tr>
 									
@@ -264,6 +276,7 @@ margin: 1px 0 0 1px;}
 							  <th>姓名</th>
 							  <th>证件号码</th>
 							  <th>其他</th>
+							  <th>附件</th>
 							  <th>操作</th>
 							</tr>
 						  </thead>
@@ -274,6 +287,11 @@ margin: 1px 0 0 1px;}
 											<td style='text-align:center'>${patentDocInventor.inventorName}</td>
 											<td style='text-align:center'>${patentDocInventor.inventorNumber}</td>
 											<td style='text-align:center'>${patentDocInventor.inventorOtherInformation}</td>
+											<td style="text-align:center">
+												<c:if test="${not empty patentDocInventor.inventorUrl }">
+													<a  href="<s:url value='/petition/downloadPatentDocFile.html'/>?fileUrl=${patentDocInventor.inventorUrl }">下载</a>
+												</c:if>
+											</td>
 											<td style='text-align:center'><a href='javascript:deletePatentDocInventor(${patentDocInventor.inventorId})'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocInventor(${patentDocInventor.inventorId})'>修改</a></td>
 										</tr>
 									</c:forEach>	
@@ -563,6 +581,29 @@ margin: 1px 0 0 1px;}
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalOtherInfo"/>
 					<input type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
 					<br/>
+					<h5>委托书:</h5>
+					<input type="hidden" id="patentDocEntrustFileHidden"/>
+					<form action="<s:url value='/petition/uploadPatentDocEntrustFile.html'/>" id="uploadEntrustFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+						
+						<input style="display:none" type="file" id="patentDocEntrustFile" name="file"/>
+						<input style="width:378px;display:inline;" type="text" id="patentDocEntrustFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocEntrustFile]').click();"/>
+						<button type="button" style="display: none;" onclick="$('input[id=patentDocEntrustFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+						<button type="button" onclick="uploadPatentDocEntrustFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
+					</form>
+					<br/>
+					<h5>附件:</h5>
+					<input type="hidden" id="patentDocAppPersonFileHidden"/>
+					<form action="<s:url value='/petition/uploadPatentDocAppPersonFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+						
+						<input style="display:none" type="file" id="patentDocFile" name="file"/>
+						<input style="width:378px;display:inline;" type="text" id="patentDocFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocFile]').click();"/>
+						<button type="button" style="display: none;" onclick="$('input[id=patentDocFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+						<button type="button" onclick="uploadPatentDocFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
+						<%-- <c:if test="${not empty patentDoc.attachmentUrl }">
+							<button type="button" onclick="downloadPatentDocFile(${patentDoc.patentDocId })" class="t-btn3 button button-primary  button-rounded">下载</button>
+						</c:if> --%>
+					</form>
+					<br/>
 					<button type="button" style="width:90px;" class="button button-primary  button-rounded" onclick="submitAppPersonForm()">保存</button>
 					<button type="button" style="width:90px;margin-left:280px" class="button button-primary  button-rounded" onclick="resetAppPersonForm()">取消</button>
 	         </div>
@@ -662,7 +703,7 @@ margin: 1px 0 0 1px;}
 					  <th class="center">序号</th>
 					  <th>姓名</th>
 					  <th>证件号码</th>
-					  <th>国籍</th>
+					  <th>其他</th>
 					</tr>
 				  </thead>
 				  <tbody id="commonInventorTab">
@@ -675,11 +716,7 @@ margin: 1px 0 0 1px;}
 						<td class="center" style="text-align:center"> ${status.count} </td>
 						<td style="text-align:center"><c:out value="${inventor.inventorName}"/></td>
 						<td style="text-align:center"><c:out value="${inventor.inventorNumber}"/></td>
-						<td style="text-align:center"><c:out value="${inventor.inventorNationality}"/></td>
-						<%-- <td>${inventor.inventorMobile}</td> --%>
-						<%-- <td style="text-align:center"><c:out value="${inventor.inventorEmail}"/></td>
-						<td style="text-align:center"><c:out value="${inventor.inventorComment}"/></td> --%>
-						
+						<td style="text-align:center"><c:out value="${inventor.inventorComment}"/></td>
 					  </tr>
 					</c:forEach>
 				  </tbody>
@@ -734,6 +771,16 @@ margin: 1px 0 0 1px;}
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorComment"/>
 					<span style="color: red; display: none;" id="commentError">该处应输入不大于50字段</span>
 					<br>      
+					<h5>附件:</h5>
+					<input type="hidden" id="patentDocInventorFileHidden"/>
+					<form action="<s:url value='/petition/uploadPatentDocInventorFile.html'/>" id="uploadInventorFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+						
+						<input style="display:none" type="file" id="patentDocInventorFile" name="file"/>
+						<input style="width:378px;display:inline;" type="text" id="patentDocInventorFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocInventorFile]').click();"/>
+						<button type="button" style="display: none;" onclick="$('input[id=patentDocInventorFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+						<button type="button" onclick="uploadPatentDocInventorFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
+	
+					</form>    
 					<div style="height:20px;"></div> 
 					<button type="button" style="width:90px;" class="button button-primary  button-rounded" onclick="submitInventorForm()">保存</button>		
 					<button type="button" style="width:90px;margin-left:275px;" class="button button-primary  button-rounded" onclick="resetAddInventorModal()">取消</button>		
@@ -816,13 +863,15 @@ margin: 1px 0 0 1px;}
          </div>
 	         <div class = "modal-body">
 				<div class="lt-box" style="padding:20px;">
+					<a href="javascript:return void" onclick="addContact()" >
+					<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个发明人批量哦！">添加联系人</button>
+					</a>
 					<table id="simple-table" class="table table-striped table-bordered table-hover">
 					  <thead>
 						<tr class="simple_bag">
-						  <%-- <th class="center"> <label class="pos-rel">
-							<input type="checkbox" class="contact-check-item" name="checkall" />
-							<span class="lbl"></span> </label>
-						  </th> --%>
+						  <th class="center">
+							选择
+						  </th>
 						  <th>序号</th>
 						  <th>联系人</th>
 						  <th>所在地区</th>
@@ -833,10 +882,10 @@ margin: 1px 0 0 1px;}
 					  </thead>
 					  <c:forEach items="${contactAddresses}" var="address" varStatus="status">
 						<tr>
-						  <%-- <td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-							<input type="checkbox" class="contact-check-item" contact="<c:out value='${address.id}'/>"/></span>
+						  <td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
+							<input type="radio" name="contact-check-item" value="${address.id}"/></span>
 							<span class="lbl"></span></label>
-						  </td> --%>
+						  </td>
 						  <td class="center" style="text-align:center;">${status.count}</td>
 						  <td style="text-align:center;">${address.receiver}</td>
 						  <td style="text-align:center;">${address.provinceName} ${address.cityName} ${address.districtName}
@@ -1351,24 +1400,28 @@ function updateImgName(value,linkSeqNo){
 			success : function (data){
 				var obj= $.parseJSON(data);
 				$("#appersonTab").empty();
+				var proxyUrlElement="";
+				var appPersonElement="";
 				$.each(obj,function(i,item){
+					if(item.proxyUrl==""||item.proxyUrl==null){
+						proxyUrlElement="";
+					}else if(item.proxyUrl!=""){
+						proxyUrlElement="<a class href='<s:url value='/petition/downloadPatentDocFile.html'/>?fileUrl="+item.proxyUrl+"'>下载委托书</a>"
+					}
+					if(item.appPersonUrl==null||item.appPersonUrl==""){
+						appPersonElement="";
+					}else if(item.appPersonUrl!=""){
+						appPersonElement="<a  href='<s:url value='/petition/downloadPatentDocFile.html'/>?fileUrl="+item.appPersonUrl+"'>下载附件</a>"
+					};
 					$("#appersonTab").append(
-							"<tr>"+
-							//"<td class='center' style='text-align:center'><label class='pos-rel'> <span class='batch-share-item'>"+
-							//"<input type='checkbox' class='check-item' appPerson=<c:out value='"+item.personId+"'/>'>"+
-							//"<span class='lbl'></span></label>"+
-							//"</td>"+
-							//"<td class='center' style='text-align:center'><input type='checkbox' class='check-item'/></td>"+
-							//"<td class='center' style='text-align:center'>"+i+"</td>"+
+						"<tr>"+
 							"<td style='text-align:center'>"+item.name+"</td>"+
 							"<td style='text-align:center'>"+item.idNumber+"</td>"+
-							"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
 							"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
-/* 							"<td style='text-align:center'>"+item.transactionIdentity+"</td>"+
-							"<td style='text-align:center'>"+item.transactionYear+"</td>"+
-							"<td style='text-align:center'>"+item.otherInformation+"</td>"+ */
+							"<td style='text-align:center'>"+proxyUrlElement+"</td>"+
+							"<td style='text-align:center'>"+appPersonElement+"</td>"+
 							"<td style='text-align:center'><a href='javascript:deletePatentDocApperson("+item.personId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocApperson("+item.personId+")'>修改</a></td>"+
-							"</tr>"
+						"</tr>"
 					)
 				})
 			}
@@ -1410,16 +1463,20 @@ function updateImgName(value,linkSeqNo){
 			success : function (data){
 				var obj= $.parseJSON(data);
 				$("#inventorTab").empty();
+				var inventorUrlElement="";
 				$.each(obj,function(i,item){
+					if(item.inventorUrl==""||item.inventorUrl==null){
+						inventorUrlElement="";
+					}else if(item.inventorUrl!=""){
+						inventorUrlElement="<a class href='<s:url value='/petition/downloadPatentDocFile.html'/>?fileUrl="+item.inventorUrl+"'>下载附件</a>"
+					};
 					$("#inventorTab").append(
 							"<tr>"+
-							"<td style='text-align:center'>"+item.inventorName+"</td>"+
-							"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
-							"<td style='text-align:center'>"+item.inventorNationality+"</td>"+
-							/* "<td style='text-align:center'>"+item.inventorMobile+"</td>"+
-							"<td style='text-align:center'>"+item.inventorEmail+"</td>"+
-							"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+ */
-							"<td style='text-align:center'><a href='javascript:deletePatentDocInventor("+item.inventorId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocInventor("+item.inventorId+")'>修改</a></td>"+
+								"<td style='text-align:center'>"+item.inventorName+"</td>"+
+								"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
+								"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
+								"<td style='text-align:center'>"+inventorUrlElement+"</td>"+
+								"<td style='text-align:center'><a href='javascript:deletePatentDocInventor("+item.inventorId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocInventor("+item.inventorId+")'>修改</a></td>"+
 							"</tr>"	
 					)
 				})
@@ -1467,15 +1524,15 @@ function updateImgName(value,linkSeqNo){
 		var transactionIdentityId =$("#modalTransactionIdentityId").val();
 		var transactionYear =$("#modalTransactionYear").val();
 		var otherInfo =$("#modalOtherInfo").val();
-		
-		   //validateAppPersonFormWayTwo(postcodeAddress,"appPersonPostcodeAddress")
+		var appPersonUrl = $("#patentDocAppPersonFileHidden").val();
+		var proxyUrl = $("#patentDocEntrustFileHidden").val();
 		var patentDocId =${patentDoc.patentDocId};
 		if(validateAppPersonFormWayOne(phoneRece,"appPersonPhoneError")&
 		   validateAppPersonFormWayTwo(appPersonName,"appPersonNameError")&
 		   validateAppPersonFormWayTwo(postcodeAddress,"appPersonPostcodeAddress")
 		   ){
 			var formData ={"name":appPersonName,"idNumber":phoneRece,"postcodeAddress":postcodeAddress,"otherInfo":otherInfo,"feeReduceTransactionStatus":feeReduceTransactionStatus,
-					       "transactionIdentityId":transactionIdentityId,"transactionYear":transactionYear,"patentDocId":patentDocId};
+					       "transactionIdentityId":transactionIdentityId,"transactionYear":transactionYear,"patentDocId":patentDocId,"appPersonUrl":appPersonUrl,"proxyUrl":proxyUrl};
 			
 			$.ajax({
 				type : "POST",
@@ -1485,18 +1542,28 @@ function updateImgName(value,linkSeqNo){
 				success : function(data){
 					var obj= $.parseJSON(data);
 					$("#appersonTab").empty();
+					var proxyUrlElement="";
+					var appPersonElement="";
 					$.each(obj,function(i,item){
+						if(item.proxyUrl==""||item.proxyUrl==null){
+							proxyUrlElement="";
+						}else if(item.proxyUrl!=""){
+							proxyUrlElement="<a class href='<s:url value='/petition/downloadPatentDocFile.html'/>?fileUrl="+item.proxyUrl+"'>下载委托书</a>"
+						}
+						if(item.appPersonUrl==null||item.appPersonUrl==""){
+							appPersonElement="";
+						}else if(item.appPersonUrl!=""){
+							appPersonElement="<a  href='<s:url value='/petition/downloadPatentDocFile.html'/>?fileUrl="+item.appPersonUrl+"'>下载附件</a>"
+						};
 						$("#appersonTab").append(
-								"<tr>"+
+							"<tr>"+
 								"<td style='text-align:center'>"+item.name+"</td>"+
 								"<td style='text-align:center'>"+item.idNumber+"</td>"+
-								"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
 								"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
-							/* 	"<td style='text-align:center'>"+item.transactionIdentity+"</td>"+
-								"<td style='text-align:center'>"+item.transactionYear+"</td>"+
-								"<td style='text-align:center'>"+item.otherInformation+"</td>"+ */
+								"<td style='text-align:center'>"+proxyUrlElement+"</td>"+
+								"<td style='text-align:center'>"+appPersonElement+"</td>"+
 								"<td style='text-align:center'><a href='javascript:deletePatentDocApperson("+item.personId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocApperson("+item.personId+")'>修改</a></td>"+
-								"</tr>"
+							"</tr>"
 						)
 					})
 					
@@ -1505,6 +1572,8 @@ function updateImgName(value,linkSeqNo){
 				}
 			});
 			resetAppPersonForm();
+			$("#patentDocFilename").val("");
+			$("#patentDocEntrustFilename").val("");
 		};
 	}
 	
@@ -1530,13 +1599,17 @@ function updateImgName(value,linkSeqNo){
 		var  modalInventorMobile = $("#modalInventorMobile").val();
 		var  modalInventorEmail= $("#modalInventorEmail").val();
 		var  modalInventorComment= $("#modalInventorComment").val();
+		var  inventorUrl= $("#patentDocInventorFileHidden").val();
 		var  patentDocId = ${patentDoc.patentDocId};
 		if(validateAppPersonFormWayTwo(modalInventorName,"inventorNameError")&
 		   validateAppPersonFormWayThree(modalInventorNumber,"inventorNumberError")&
 		   validateAppPersonFormWayThree(modalInventorNationality,"inventorNationalityError")&
 		   validateAppPersonFormWayThree(modalInventorMobile,"inventorMobileError")
 		){
-			var formData={"inventorName":modalInventorName,"inventorNumber":modalInventorNumber,"inventorNationality":modalInventorNationality,"inventorMobile":modalInventorMobile,"inventorEmail":modalInventorEmail,"inventorComment":modalInventorComment,"patentDocId":patentDocId};
+			var formData={"inventorName":modalInventorName,"inventorNumber":modalInventorNumber,
+						  "inventorNationality":modalInventorNationality,"inventorMobile":modalInventorMobile,
+						  "inventorEmail":modalInventorEmail,"inventorComment":modalInventorComment,
+						  "patentDocId":patentDocId,"inventorUrl":inventorUrl};
 			$.ajax({
 				type : "POST",
 				url : "<s:url value='/petition/addCommonInventor.html'/>",
@@ -1545,22 +1618,27 @@ function updateImgName(value,linkSeqNo){
 				success : function (data){
 					var obj= $.parseJSON(data);
 					$("#inventorTab").empty();
+					var inventorUrlElement="";
 					$.each(obj,function(i,item){
+						if(item.inventorUrl==""||item.inventorUrl==null){
+							inventorUrlElement="";
+						}else if(item.inventorUrl!=""){
+							inventorUrlElement="<a class href='<s:url value='/petition/downloadPatentDocFile.html'/>?fileUrl="+item.inventorUrl+"'>下载附件</a>"
+						};
 						$("#inventorTab").append(
-								"<tr>"+
+							"<tr>"+
 								"<td style='text-align:center'>"+item.inventorName+"</td>"+
 								"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
-								"<td style='text-align:center'>"+item.inventorNationality+"</td>"+
-								/* "<td style='text-align:center'>"+item.inventorMobile+"</td>"+
-								"<td style='text-align:center'>"+item.inventorEmail+"</td>"+
-								"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+ */
+								"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
+								"<td style='text-align:center'>"+inventorUrlElement+"</td>"+
 								"<td style='text-align:center'><a href='javascript:deletePatentDocInventor("+item.inventorId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocInventor("+item.inventorId+")'>修改</a></td>"+
-								"</tr>"	
+							"</tr>"	
 						)
 					})
 				}
 			});
 			resetAddInventorModal();
+			$("#patentDocInventorFilename").val("");
 		}else{
 		}
 	}
@@ -1628,15 +1706,28 @@ function updateImgName(value,linkSeqNo){
 			success : function (data){
 				var obj= $.parseJSON(data);
 				$("#appersonTab").empty();
+				var proxyUrlElement="";
+				var appPersonElement="";
 				$.each(obj,function(i,item){
+					if(item.proxyUrl==""||item.proxyUrl==null){
+						proxyUrlElement="";
+					}else if(item.proxyUrl!=""){
+						proxyUrlElement="<a class href='<s:url value='/petition/downloadPatentDocFile.html'/>?fileUrl="+item.proxyUrl+"'>下载委托书</a>"
+					}
+					if(item.appPersonUrl==null||item.appPersonUrl==""){
+						appPersonElement="";
+					}else if(item.appPersonUrl!=""){
+						appPersonElement="<a  href='<s:url value='/petition/downloadPatentDocFile.html'/>?fileUrl="+item.appPersonUrl+"'>下载附件</a>"
+					};
 					$("#appersonTab").append(
-							"<tr>"+
+						"<tr>"+
 							"<td style='text-align:center'>"+item.name+"</td>"+
 							"<td style='text-align:center'>"+item.idNumber+"</td>"+
-							"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
 							"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
+							"<td style='text-align:center'>"+proxyUrlElement+"</td>"+
+							"<td style='text-align:center'>"+appPersonElement+"</td>"+
 							"<td style='text-align:center'><a href='javascript:deletePatentDocApperson("+item.personId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocApperson("+item.personId+")'>修改</a></td>"+
-							"</tr>"
+						"</tr>"
 					)
 				})
 			}
@@ -1688,17 +1779,27 @@ function updateImgName(value,linkSeqNo){
 				success : function (data){
 					var obj= $.parseJSON(data);
 					$("#appersonTab").empty();
+					var proxyUrlElement="";
+					var appPersonElement="";
 					$.each(obj,function(i,item){
+						if(item.proxyUrl==""||item.proxyUrl==null){
+							proxyUrlElement="";
+						}else if(item.proxyUrl!=""){
+							proxyUrlElement="<a class href='<s:url value='/petition/downloadPatentDocFile.html'/>?fileUrl="+item.proxyUrl+"'>下载委托书</a>"
+						}
+						if(item.appPersonUrl==null||item.appPersonUrl==""){
+							appPersonElement="";
+						}else if(item.appPersonUrl!=""){
+							appPersonElement="<a  href='<s:url value='/petition/downloadPatentDocFile.html'/>?fileUrl="+item.appPersonUrl+"'>下载附件</a>"
+						};
 						$("#appersonTab").append(
 								"<tr>"+
-								"<td style='text-align:center'>"+item.name+"</td>"+
-								"<td style='text-align:center'>"+item.idNumber+"</td>"+
-								"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
-								"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
-								/* "<td style='text-align:center'>"+item.transactionIdentity+"</td>"+
-								"<td style='text-align:center'>"+item.transactionYear+"</td>"+
-								"<td style='text-align:center'>"+item.otherInformation+"</td>"+ */
-								"<td style='text-align:center'><a href='javascript:deletePatentDocApperson("+item.personId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocApperson("+item.personId+")'>修改</a></td>"+
+									"<td style='text-align:center'>"+item.name+"</td>"+
+									"<td style='text-align:center'>"+item.idNumber+"</td>"+
+									"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
+									"<td style='text-align:center'>"+proxyUrlElement+"</td>"+
+									"<td style='text-align:center'>"+appPersonElement+"</td>"+
+									"<td style='text-align:center'><a href='javascript:deletePatentDocApperson("+item.personId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocApperson("+item.personId+")'>修改</a></td>"+
 								"</tr>"
 						)
 					})
@@ -1732,42 +1833,27 @@ function updateImgName(value,linkSeqNo){
 			success : function (data){
 				var obj= $.parseJSON(data);
 				$("#inventorTab").empty();
+				var inventorUrlElement="";
 				$.each(obj,function(i,item){
+					if(item.inventorUrl==""||item.inventorUrl==null){
+						inventorUrlElement="";
+					}else if(item.inventorUrl!=""){
+						inventorUrlElement="<a class href='<s:url value='/petition/downloadPatentDocFile.html'/>?fileUrl="+item.inventorUrl+"'>下载附件</a>"
+					};
 					$("#inventorTab").append(
-							"<tr>"+
+						"<tr>"+
 							"<td style='text-align:center'>"+item.inventorName+"</td>"+
 							"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
-							"<td style='text-align:center'>"+item.inventorNationality+"</td>"+
+							"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
+							"<td style='text-align:center'>"+inventorUrlElement+"</td>"+
 							"<td style='text-align:center'><a href='javascript:deletePatentDocInventor("+item.inventorId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocInventor("+item.inventorId+")'>修改</a></td>"+
-							"</tr>"	
+						"</tr>"	
 					)
 				})
 			}
 		})
 	}
-	
-	/* function updatePatentDocInventor(inventorId){
-		$.ajax({
-			type : "POST",
-			url : "<s:url value='/petition/findInventorById.html'/>",
-			data:{"inventorId":inventorId},
-			success : function (data){
-				var obj = $.parseJSON(data);
-				$("#updateModalInventorId").val(obj["inventorId"]);
-				$("#updateModalInventorName").val(obj["inventorName"]);
-				$("#updateModalInventorNumber").val(obj["inventorNumber"]);
-				$("#updateModalInventorNationality").val(obj["inventorNationality"]);
-				$("#updateModalInventorMobile").val(obj["inventorMobile"]);
-				$("#updateModalInventorEmail").val(obj["inventorEmail"]);
-				$("#updateModalInventorOtherInformation").val(obj["inventorOtherInformation"]);
-				$("#hiddenUpdateInventorModal").trigger("click");
-			},error : function (){
-				
-			}
-		})
-	} */
-	
-	
+
 	function updatePatentDocInventor(inventorId){
 		$.ajax({
 			type : "POST",
@@ -1815,17 +1901,21 @@ function updateImgName(value,linkSeqNo){
 				success :function (data){
 					var obj= $.parseJSON(data);
 					$("#inventorTab").empty();
+					var inventorUrlElement="";
 					$.each(obj,function(i,item){
+						if(item.inventorUrl==""||item.inventorUrl==null){
+							inventorUrlElement="";
+						}else if(item.inventorUrl!=""){
+							inventorUrlElement="<a class href='<s:url value='/petition/downloadPatentDocFile.html'/>?fileUrl="+item.inventorUrl+"'>下载附件</a>"
+						};
 						$("#inventorTab").append(
-								"<tr>"+
+							"<tr>"+
 								"<td style='text-align:center'>"+item.inventorName+"</td>"+
 								"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
-								"<td style='text-align:center'>"+item.inventorNationality+"</td>"+
-								/* "<td style='text-align:center'>"+item.inventorMobile+"</td>"+
-								"<td style='text-align:center'>"+item.inventorEmail+"</td>"+
-								"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+ */
+								"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
+								"<td style='text-align:center'>"+inventorUrlElement+"</td>"+
 								"<td style='text-align:center'><a href='javascript:deletePatentDocInventor("+item.inventorId+")'>删除</a><a style='margin-left:20px;' href='javascript:updatePatentDocInventor("+item.inventorId+")'>修改</a></td>"+
-								"</tr>"	
+							"</tr>"	
 						)
 					})
 				},error : function (){
@@ -1870,7 +1960,9 @@ function updateImgName(value,linkSeqNo){
 	}
 	$('input[id=patentDocFile]').change(function() {  
 		$('#patentDocFilename').val($(this).val());  
-	});
+	})
+	
+	
 	function uploadPatentDocFile(){
 		var uploadForm=$("#uploadFileForm");
 		var patentDocId = ${patentDoc.patentDocId};
@@ -1884,12 +1976,73 @@ function updateImgName(value,linkSeqNo){
 					if(suffix ==".zip"||suffix==".rar"){
 						return true;
 					}else{
-						alert("请选择指定类型的文件后，再进行上传");
+						alert("请选择rar或zip文件类型后，再进行上传");
 						return false;
 					}
 				},
 				success : function (result){
-					alert(result);
+					$("#patentDocAppPersonFileHidden").val(result);
+					//$("#patentDocFilename").val("");
+					alert("上传成功");
+				}
+		}
+		uploadForm.ajaxSubmit(option);
+	}
+	
+	$('input[id=patentDocInventorFile]').change(function() {  
+		$('#patentDocInventorFilename').val($(this).val());  
+	})
+	
+	function uploadPatentDocInventorFile(){
+		var uploadForm=$("#uploadInventorFileForm");
+		var option={
+				dataType : "json",
+				//contentType : false,
+				data : {"file":$("#patentDocInventorFile").val()},
+				beforeSubmit : function (){
+					var filename = $("#patentDocInventorFilename").val();
+					var suffix = filename.toLowerCase().substr(filename.lastIndexOf("."));
+					if(suffix ==".zip"||suffix==".rar"){
+						return true;
+					}else{
+						alert("请选择rar或zip文件类型后，再进行上传");
+						return false;
+					}
+				},
+				success : function (result){
+					$("#patentDocInventorFileHidden").val(result);
+					//$("#patentDocInventorFilename").val("");
+					alert("上传成功");
+				}
+		}
+		uploadForm.ajaxSubmit(option);
+	}
+	
+	
+	$('input[id=patentDocEntrustFile]').change(function() {  
+		$('#patentDocEntrustFilename').val($(this).val());  
+	})
+	
+	function uploadPatentDocEntrustFile(){
+		var uploadForm=$("#uploadEntrustFileForm");
+		var option={
+				dataType : "json",
+				//contentType : false,
+				data : {"file":$("#patentDocEntrustFile").val()},
+				beforeSubmit : function (){
+					var filename = $("#patentDocEntrustFilename").val();
+					var suffix = filename.toLowerCase().substr(filename.lastIndexOf("."));
+					if(suffix ==".zip"||suffix==".rar"){
+						return true;
+					}else{
+						alert("请选择rar或zip文件类型的文件后，再进行上传");
+						return false;
+					}
+				},
+				success : function (result){
+					$("#patentDocEntrustFileHidden").val(result);
+					//$("#patentDocEntrustFilename").val("");
+					alert("上传成功");
 				}
 		}
 		uploadForm.ajaxSubmit(option);
@@ -1984,21 +2137,7 @@ function updateImgName(value,linkSeqNo){
 		});
 		$("#hiddenUpdateContactModal").trigger("click");
 	}
-	
-	/* function updateContact(contactId){
-		$.ajax({
-			type : "POST",
-			url : "<s:url value='/petition/updateContact.html'/>",
-			data :
-		})
-	} */
-	
-	
-	
-	
-	
-	
-	
+
 	
 	function loadCities() {
 		var province = $("#province").val();
@@ -2135,7 +2274,6 @@ function updateImgName(value,linkSeqNo){
 							"<td class='center' style='text-align:center'>"+i+" ${status.count} </td>"+
 							"<td style='text-align:center'>"+item.name+"</td>"+
 							"<td style='text-align:center'>"+item.idNumber+"</td>"+
-							"<td style='text-align:center'>"+item.postcodeAddress+"</td>"+
 							"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
 						  "</tr>"	
 					)
@@ -2162,10 +2300,7 @@ function updateImgName(value,linkSeqNo){
 								"<td class='center' style='text-align:center'> "+i+" </td>"+
 								"<td style='text-align:center'>"+item.inventorName+"</td>"+
 								"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
-								"<td style='text-align:center'>"+item.inventorNationality+"</td>"+
-								/* "<td>"+item.inventorMobile+"</td>"+
-								"<td style='text-align:center'>"+item.inventorEmail+"</td>"+
-								"<td style='text-align:center'>"+item.inventorComment+"</td>"+ */
+								"<td style='text-align:center'>"+item.inventorComment+"</td>"+
 						"</tr>"
 					)
 				})
@@ -2176,6 +2311,14 @@ function updateImgName(value,linkSeqNo){
 	function resetUpdateContactForm(){
 		 $("#updateContactModalCloseBtn").trigger("click");
 	 }
+	function addContact(){
+		var contactId= $('input:radio[name="contact-check-item"]:checked').val();
+        if(contactId==null){
+            alert("请选择联系人!");
+        }else{
+        	settingContact(contactId);
+        }
+	}
 </script>
 <iframe id="fileFrame" style="display:none"></iframe>
 </body>

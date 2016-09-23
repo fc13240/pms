@@ -11,6 +11,8 @@ public class PatentDocAppPerson {
 	private String feeReduceTransactionStatus;
 	private String transactionYear;
 	private int userId;
+	private String appPersonUrl;
+	private String proxyUrl;
 	
 	public String getOtherInformation() {
 		return otherInformation;
@@ -73,4 +75,23 @@ public class PatentDocAppPerson {
 	public void setUser_id(int userId) {
 		this.userId = userId;
 	}
+	public String getAppPersonUrl() {
+		return appPersonUrl;
+	}
+	public void setAppPersonUrl(String appPersonUrl) {
+		this.appPersonUrl = appPersonUrl;
+	}
+	public String getProxyUrl() {
+		return proxyUrl;
+	}
+	public void setProxyUrl(String proxyUrl) {
+		this.proxyUrl = proxyUrl;
+	}
+	public void setPatentDocId(long patentDocId) {
+		this.patentDocId = patentDocId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	
 }

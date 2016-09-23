@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,8 +31,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.lotut.pms.constants.Settings;
-import com.lotut.pms.domain.InventorSearchCondition;
 import com.lotut.pms.domain.CommonInventor;
+import com.lotut.pms.domain.InventorSearchCondition;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.UserInventor;
@@ -257,7 +256,7 @@ public class InventorController {
 		response.setContentType("application/doc");
 		String relativeUrl = inventorService.getInventorUrlById(InventorId);
 		String downloadFileName = URLEncoder.encode(relativeUrl.substring(relativeUrl.lastIndexOf("/")+1), "UTF8");
-		String filePath = Settings.INVENTOR_ATTACHMENT_FILE_PATH + relativeUrl;
+		String filePath =relativeUrl;
 		File InventorFile = new File(filePath);
 		if("FF".equals(getBrowser(request))){
 		    //针对火狐浏览器处理

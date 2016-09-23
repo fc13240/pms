@@ -10,6 +10,7 @@ public class PatentDocInventor {
 	private String inventorEmail;
 	private String inventorOtherInformation;
 	private int userId;
+	private String inventorUrl;
 	
 	public long getInventorId() {
 		return inventorId;
@@ -64,6 +65,12 @@ public class PatentDocInventor {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public String getInventorUrl() {
+		return inventorUrl;
+	}
+	public void setInventorUrl(String inventorUrl) {
+		this.inventorUrl = inventorUrl;
 	}
 	
 	

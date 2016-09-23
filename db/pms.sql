@@ -915,3 +915,7 @@ ALTER TABLE patent_doc_order_items ADD COLUMN service_fee INT NOT NULL DEFAULT 0
 
 ALTER TABLE patent_documents ADD COLUMN invoice_pic VARCHAR(200) DEFAULT NULL COMMENT '缴费发票凭证';
 INSERT INTO payment_methods VALUES(3, '缴费凭证支付');
+
+ALTER TABLE patent_doc_app_person ADD COLUMN proxy_file VARCHAR(200) COMMENT '委托书文件地址';
+ALTER TABLE patent_doc_app_person ADD COLUMN app_person_attachment_file VARCHAR(200) COMMENT '附件存放地址';
+ALTER TABLE patent_doc_inventor ADD COLUMN inventor_attachment_file VARCHAR(200) COMMENT '附件存放地址';

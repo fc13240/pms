@@ -73,7 +73,6 @@
 					<input style="width:300px;display:inline;" type="text" id="patentDocEntrustFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocEntrustFile]').click();" required="required"/>
 					<button type="button" onclick="uploadEntrustClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 					<div style="height:20px;"></div> 
-					<button type="submit" style="width:90px;" class="button button-primary  button-rounded">保存</button>
 					
 					<h5>附件:</h5>
 					<input type="hidden" id="patentDocApplyFile" name="appPersonUrl" />
@@ -87,7 +86,7 @@
 						<button type="button" style="display: none;" onclick="$('input[id=patentDocEntrustFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 						<button type="button" id="uploadEntrustBtn" style="display:none;" onclick="uploadPatentDocEntrustFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
 					</form>								
-					<form action="<s:url value='/petition/uploadPatentDocEntrustFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+					<form action="<s:url value='/petition/uploadPatentDocAppPersonFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
 						<input style="display:none" type="file" id="patentDocFile" name="file"/>
 						<button type="button" style="display: none;" onclick="$('input[id=patentDocFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 						<button type="button" id="uploadBtn" style="display:none;" onclick="uploadPatentDocFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
@@ -225,7 +224,7 @@
 		$('#patentDocEntrustFilename').val($(this).val());  
 	})
 	
-	function uploadPatentDocFile(){
+	function uploadPatentDocEntrustFile(){
 		var uploadForm=$("#uploadEntrustFileForm");
 		var option={
 				dataType : "json",
@@ -249,8 +248,8 @@
 		uploadForm.ajaxSubmit(option);
 	}
 	
-	function uploadClick(){
-		$("#uploadBtn").trigger("click");
+	function uploadEntrustClick(){
+		$("#uploadEntrustBtn").trigger("click");
 	}
 </script>
 

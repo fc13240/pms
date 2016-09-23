@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.lotut.pms.constants.Settings;
-
 public class FileOption {
 	public static void fileUpload(int userId,MultipartFile multipartFile,String savePath,String fileName,HttpServletResponse response){
 		try{
@@ -44,7 +42,9 @@ public class FileOption {
 	}
 	
 	public static void patentDocFileOption(int userId,MultipartFile multipartFile,String saveDir,HttpServletResponse response){
-		saveDir+=userId+"/";
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String ymd = sdf.format(new Date());
+		saveDir+=userId+"_"+ymd+"/";
 		String filename=multipartFile.getOriginalFilename();
 		String savePath=saveDir + filename;
 		File fileDir = new File(saveDir);
@@ -84,5 +84,10 @@ public class FileOption {
 			}
 		}
 		return dir.delete();
+	}
+	public static void main(String[] args) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String ymd = sdf.format(new Date());
+		System.out.println(ymd);
 	}
 }
