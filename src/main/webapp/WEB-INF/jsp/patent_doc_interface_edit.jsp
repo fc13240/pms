@@ -877,7 +877,7 @@ margin: 1px 0 0 1px;}
 						  <th>所在地区</th>
 						  <th>地址</th>
 						  <th>联系电话</th>
-						  <th>操作</th>
+						  <!-- <th>操作</th> -->
 						</tr>
 					  </thead>
 					  <c:forEach items="${contactAddresses}" var="address" varStatus="status">
@@ -892,7 +892,7 @@ margin: 1px 0 0 1px;}
 						  </td>
 						  <td style="text-align:center;">${address.detailAddress}</td>
 						  <td style="text-align:center;">${address.phone}</td>
-						  <td style="text-align:center;width:110px;"><a href="javascript:void(0);" onclick="settingContact(${address.id})">设为联系人</a></td>
+						  <%-- <td style="text-align:center;width:110px;"><a href="javascript:void(0);" onclick="settingContact(${address.id})">设为联系人</a></td> --%>
 						</tr>
 					  </c:forEach>
 					</table>

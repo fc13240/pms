@@ -23,7 +23,7 @@
   	insert into common_app_person(name,id_number,postcode_address,other_information,user_id,
   	fee_reduce_transaction_status,transaction_identity_id,transaction_year,app_person_attachment_file,proxy_file) 
   	values(#{name},#{idNumber},#{postcodeAddress},#{otherInfo},#{userId},
-  	#{feeReduceTransactionStatus},#{transactionIdentityId},#{transactionYear},#{appPersonUrl},#{proxyUrl})
+  	#{feeReduceTransactionStatus},#{transactionIdentityId},#{transactionYear},#{appPersonUrl,javaType=string,jdbcType=VARCHAR},#{proxyUrl,javaType=string,jdbcType=VARCHAR})
   	
   </insert>
   

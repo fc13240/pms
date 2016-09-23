@@ -104,14 +104,14 @@
 	
 	<insert id="addCommonAppPerson" parameterType="CommonAppPerson"  useGeneratedKeys="true" keyProperty="appPersonId">
 	  	insert into common_app_person(name,id_number,postcode_address,other_information,user_id,transaction_identity_id,fee_reduce_transaction_status,transaction_year,app_person_attachment_file,proxy_file) 
-	  	values(#{name},#{idNumber},#{postcodeAddress},#{otherInfo},#{userId},#{transactionIdentityId},#{feeReduceTransactionStatus},#{transactionYear},#{appPersonUrl},#{proxyUrl})
+	  	values(#{name},#{idNumber},#{postcodeAddress},#{otherInfo},#{userId},#{transactionIdentityId},#{feeReduceTransactionStatus},#{transactionYear},#{appPersonUrl,javaType=string,jdbcType=VARCHAR},#{proxyUrl,javaType=string,jdbcType=VARCHAR})
 
   	</insert>
   	
   	<insert id="addCommonInventor" parameterType="CommonInventor" useGeneratedKeys="true" keyProperty="inventorId">
 		insert into common_inventor (inventor_name,inventor_id_number,inventor_nationality,inventor_mobile,inventor_email,inventor_other_information
 		,user_id,inventor_attachment_file)
-		values(#{inventorName},#{inventorNumber},#{inventorNationality},#{inventorMobile},#{inventorEmail},#{inventorComment},#{userId},#{inventorUrl})
+		values(#{inventorName},#{inventorNumber},#{inventorNationality},#{inventorMobile},#{inventorEmail},#{inventorComment},#{userId},#{inventorUrl,javaType=string,jdbcType=VARCHAR})
 	
 	</insert>
 	
@@ -132,7 +132,7 @@
 		insert into patent_doc_app_person(patent_doc_id,name,id_number,postcode_address,other_information,transaction_identity,fee_reduce_transaction_status,transaction_year,user_id,app_person_attachment_file,proxy_file) values
 		<foreach collection="commonAppPersons" item="commonAppPerson" separator=",">
 			(#{patentDocId},#{commonAppPerson.name},#{commonAppPerson.idNumber},#{commonAppPerson.postcodeAddress},#{commonAppPerson.otherInfo},#{commonAppPerson.transactionIdentityId},#{commonAppPerson.feeReduceTransactionStatus},
-				#{commonAppPerson.transactionYear},#{userId},#{commonAppPerson.appPersonUrl},#{commonAppPerson.proxyUrl}
+				#{commonAppPerson.transactionYear},#{userId},#{commonAppPerson.appPersonUrl,javaType=string,jdbcType=VARCHAR},#{commonAppPerson.proxyUrl,javaType=string,jdbcType=VARCHAR}
 			)
 		</foreach>
 	</insert>
@@ -148,7 +148,7 @@
 		insert into patent_doc_inventor(patent_doc_id,inventor_name,inventor_number,inventor_nationality,inventor_mobile,inventor_email,inventor_other_information,user_id,inventor_attachment_file) values
 		<foreach collection="commonInventors" item="commonInventor" separator=",">
 			(#{patentDocId},#{commonInventor.inventorName},#{commonInventor.inventorNumber},#{commonInventor.inventorNationality},#{commonInventor.inventorMobile},
-			#{commonInventor.inventorEmail},#{commonInventor.inventorComment},#{userId},#{commonInventor.inventorUrl})
+			#{commonInventor.inventorEmail},#{commonInventor.inventorComment},#{userId},#{commonInventor.inventorUrl,javaType=string,jdbcType=VARCHAR})
 		</foreach>	
 	</insert>
 	
