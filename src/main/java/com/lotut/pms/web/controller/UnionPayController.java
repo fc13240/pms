@@ -100,7 +100,7 @@ public class UnionPayController {
 	}
 	
 	@RequestMapping(path="/frontRcvResponse")
-	public String frontRcvResponse(HttpServletRequest req, HttpServletResponse resp) 
+	public void frontRcvResponse(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException{
 		LogUtil.writeLog("FrontRcvResponse前台接收报文返回开始");
 
@@ -148,7 +148,7 @@ public class UnionPayController {
 		req.getRequestDispatcher(pageResult).forward(req, resp);
 		LogUtil.writeLog("FrontRcvResponse前台接收报文返回结束");
 		
-		return "redirect:/editor/patentDocList.html";
+		//return "redirect:/editor/patentDocList.html";
 	}
 	
 	@RequestMapping(path="/backRcvResponse")
