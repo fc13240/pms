@@ -35,7 +35,7 @@ public class PatentFeeExcelGenerator {
 		workbook.close();
 	}	
 	
-	private static void writelRowName( HSSFRow row) {
+	private static void writelRowName(HSSFRow row) {
 		HSSFCell seqNoCellRowName = row.createCell(0);
 		seqNoCellRowName.setCellValue("序号");
 		
@@ -68,6 +68,8 @@ public class PatentFeeExcelGenerator {
 		feePaymentStatus.setCellValue("交费状态");
 		
 	}
+	
+	
 	
 	private static void writeFeeRecordToRow(Fee fee, HSSFRow row, int rowIndex) {
 		HSSFCell seqNoCell = row.createCell(0);
@@ -102,4 +104,63 @@ public class PatentFeeExcelGenerator {
 		HSSFCell feePaymentStatus = row.createCell(9);
 		feePaymentStatus.setCellValue(fee.getPaymentStatus().getPayementStatusDescription());
 	}
+	
+	public static void writePatentRecordsToExcel(List<Fee> feeRecords, String resultExcelPath) throws IOException {
+		final String SHEET_NAME = "专利清单表";
+		FileOutputStream resultExcelOutputStream = new FileOutputStream(resultExcelPath);
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		
+		HSSFSheet sheet = workbook.createSheet(SHEET_NAME);
+
+		HSSFRow creatRowName = sheet.createRow(0);
+		
+		writelRowName(creatRowName);
+
+		for (int i = 0; i < feeRecords.size(); i++) {
+			Fee feeRecord = feeRecords.get(i);
+			HSSFRow row = sheet.createRow(i + 1);
+			writeFeeRecordToRow(feeRecord, row, i+1);
+		}
+
+		workbook.write(resultExcelOutputStream);
+		workbook.close();
+	}	
+	
+	private static void writePatentRowName( HSSFRow row) {
+		HSSFCell seqNoCellRowName = row.createCell(0);
+		seqNoCellRowName.setCellValue("序号");
+		
+		HSSFCell patentTypeCellRowName = row.createCell(1);
+		patentTypeCellRowName.setCellValue("专利类型");
+		
+		HSSFCell appNoCellRowName = row.createCell(2);
+		appNoCellRowName.setCellValue("申请号");
+		
+		HSSFCell patentNameCellRowName = row.createCell(3);
+		patentNameCellRowName.setCellValue("专利名称");
+		
+		HSSFCell userNameCellRowName = row.createCell(4);
+		userNameCellRowName.setCellValue("第一申请人");
+		
+		HSSFCell appDateRowName = row.createCell(5);
+		appDateRowName.setCellValue("申请日");
+		
+		HSSFCell deadlineRowName = row.createCell(6);
+		deadlineRowName.setCellValue("缴费年日");
+		
+		HSSFCell addDateRowName = row.createCell(7);
+		addDateRowName.setCellValue("添加日");
+		
+		HSSFCell  patentStatusTextRowName= row.createCell(8);
+		patentStatusTextRowName.setCellValue("案件状态");
+		
+		HSSFCell internalCodeRowName = row.createCell(9);
+		internalCodeRowName.setCellValue("内部编码");
+		
+		HSSFCell shareUsersCellName = row.createCell(10);
+		shareUsersCellName.setCellValue("共享人");
+		
+		
+	}
+	
 }
