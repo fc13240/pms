@@ -42,6 +42,8 @@
 						<tr>
 						  <td><input type="radio" name="paymentMethod.paymentMethodId" value="1" checked="checked" required="required" >
 							支付宝支付
+							<input type="radio" name="paymentMethod.paymentMethodId" value="2"  required="required" >
+							银联支付
 							<input type="radio" name="paymentMethod.paymentMethodId" value="3" required="required"   data-toggle = "modal" data-target = "#commonInventorModal">
 							发票支付
 								 <div id="InvoicePic" style="display:none">

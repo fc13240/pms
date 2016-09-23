@@ -58,7 +58,16 @@
 		</listener-class>
 	</listener>	
 	
-	
+<!-- 	<servlet>
+	    <servlet-name>autoLoadServlet</servlet-name>
+	    <servlet-class>web.AutoLoadServlet</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+	    <servlet-name>autoLoadServlet</servlet-name>
+	    <url-pattern>/autoLoadServlet</url-pattern>
+  </servlet-mapping> -->
+  
 	<servlet>  
         <servlet-name>appServlet</servlet-name>  
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>  
