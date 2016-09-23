@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.dao.PatentDao;
 import com.lotut.pms.dao.SharePatentDao;
+import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.GoodsDetail;
 import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
@@ -25,6 +26,7 @@ import com.lotut.pms.domain.TransactionPatentSearchCondition;
 import com.lotut.pms.service.PatentService;
 import com.lotut.pms.service.utils.PatentExcelGenerator;
 import com.lotut.pms.service.utils.PatentExcelParser;
+import com.lotut.pms.service.utils.PatentFeeExcelGenerator;
 
 public class PatentServiceImpl implements PatentService {
 	private PatentDao patentDao;
@@ -122,19 +124,19 @@ public class PatentServiceImpl implements PatentService {
 
 	@Override
 	public List<GoodsFirstColumn> getFirstColumn() {
-		// TODO Auto-generated method stub
+		
 		return  patentDao.getFirstColumn();
 	}
 
 	@Override
 	public List<GoodsSecondColumn> getSecondColumn(int firstColumnId) {
-		// TODO Auto-generated method stub
+		
 		return  patentDao.getSecondColumn(firstColumnId);
 	}
 
 	@Override
 	public void saveGoods(GoodsDetail goodsDetail) {
-		// TODO Auto-generated method stub
+		
 		patentDao.saveGoods(goodsDetail);
 	}
 
@@ -308,27 +310,35 @@ public class PatentServiceImpl implements PatentService {
 
 	@Override
 	public void addPatentRemark(long patentId, String content,int userId) {
-		// TODO Auto-generated method stub
+		
 		 patentDao.addPatentRemark(patentId,content,userId);
 	}
 
 	@Override
 	public Patent showPatentDetail(long patentId) {
-		// TODO Auto-generated method stub
+		
 		return  patentDao.showPatentDetail(patentId);
 	}
 
 	@Override
 	public boolean savePatentDetail(Patent patent) {
-		// TODO Auto-generated method stub
+		
 		return patentDao.savePatentDetail(patent);
 	}
 
 	@Override
 	@Transactional
 	public void deleteShareUser(long patentId, int ownerId, int shareUserId) {
-		// TODO Auto-generated method stub
+		
 		 patentDao.deleteShareUser(patentId,ownerId,shareUserId);
+	}
+
+	@Override
+	public String patentExportExcel(List<Long> patentIds, String exportExcelName) throws IOException {
+		List<Patent> patents = patentDao.getPatentsByIds(patentIds);
+		String exportExcelPath=Settings.TEMP_DIR+exportExcelName;
+		PatentExcelGenerator.writePatentRecordsToExcel(patents, exportExcelPath);
+		return exportExcelPath;
 	}
 
 }

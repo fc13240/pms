@@ -11,6 +11,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.lotut.pms.domain.Fee;
+import com.lotut.pms.domain.Patent;
 
 public class PatentFeeExcelGenerator {
 	
@@ -105,7 +106,7 @@ public class PatentFeeExcelGenerator {
 		feePaymentStatus.setCellValue(fee.getPaymentStatus().getPayementStatusDescription());
 	}
 	
-	public static void writePatentRecordsToExcel(List<Fee> feeRecords, String resultExcelPath) throws IOException {
+	public static void writePatentRecordsToExcel(List<Patent> patentRecords, String resultExcelPath) throws IOException {
 		final String SHEET_NAME = "专利清单表";
 		FileOutputStream resultExcelOutputStream = new FileOutputStream(resultExcelPath);
 		HSSFWorkbook workbook = new HSSFWorkbook();
@@ -114,12 +115,12 @@ public class PatentFeeExcelGenerator {
 
 		HSSFRow creatRowName = sheet.createRow(0);
 		
-		writelRowName(creatRowName);
+		writePatentRowName(creatRowName);
 
-		for (int i = 0; i < feeRecords.size(); i++) {
-			Fee feeRecord = feeRecords.get(i);
+		for (int i = 0; i < patentRecords.size(); i++) {
+			Patent patentRecord = patentRecords.get(i);
 			HSSFRow row = sheet.createRow(i + 1);
-			writeFeeRecordToRow(feeRecord, row, i+1);
+			writePatentRecordToRow(patentRecord, row, i+1);
 		}
 
 		workbook.write(resultExcelOutputStream);
@@ -160,7 +161,43 @@ public class PatentFeeExcelGenerator {
 		HSSFCell shareUsersCellName = row.createCell(10);
 		shareUsersCellName.setCellValue("共享人");
 		
-		
 	}
 	
+	private static void writePatentRecordToRow(Patent patent, HSSFRow row, int rowIndex) {
+		HSSFCell seqNoCell = row.createCell(0);
+		seqNoCell.setCellValue(rowIndex);
+		
+		HSSFCell patentTypeCell = row.createCell(1);
+		patentTypeCell.setCellValue(patent.getPatentType().getTypeDescription());
+		
+		HSSFCell appNoCell = row.createCell(2);
+		appNoCell.setCellValue(patent.getAppNo());
+		
+		HSSFCell patentNameCell = row.createCell(3);
+		patentNameCell.setCellValue(patent.getName());
+		
+		HSSFCell  appPersonCell= row.createCell(4);
+		appPersonCell.setCellValue(patent.getAppPerson());
+		
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		HSSFCell appDateCell = row.createCell(5);
+		appDateCell.setCellValue(sdf.format(patent.getAppDate()));
+		
+		SimpleDateFormat sd=new SimpleDateFormat("M月dd日");
+		HSSFCell feeDateCell = row.createCell(6);
+		feeDateCell.setCellValue(sd.format(patent.getAppDate()));
+		
+		SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		HSSFCell amountCell = row.createCell(7);
+		amountCell.setCellValue(s.format(patent.getCreateTime()));
+		
+		HSSFCell patentStatusTextCell = row.createCell(8);
+		patentStatusTextCell.setCellValue(patent.getPatentStatusText());
+		
+		HSSFCell internalCodeCell = row.createCell(9);
+		internalCodeCell.setCellValue(patent.getInternalCode());
+		
+		HSSFCell shareUsersCell = row.createCell(10);
+		shareUsersCell.setCellValue(patent.getShareUsersAsString());
+	}
 }

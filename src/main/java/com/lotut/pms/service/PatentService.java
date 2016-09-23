@@ -119,5 +119,7 @@ public interface PatentService {
 	
 	void deleteShareUser(long patentId,int ownerId,int shareUserId);
 	
+	String patentExportExcel(List<Long> patentIds,String exportExcelName) throws IOException;
+	
 }
 
