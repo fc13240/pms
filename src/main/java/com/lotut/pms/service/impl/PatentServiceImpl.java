@@ -187,13 +187,13 @@ public class PatentServiceImpl implements PatentService {
 		addOrUpdatePatents(patents, userId);
 	}
 
-	@Override
-	public String generatePatentExportExcel(List<Long> patentIds,String excelName) throws IOException {
-		List<Patent> patents=patentDao.getPatentsByIds(patentIds);
-		String exportExcelPath=Settings.TEMP_DIR+excelName;
-		PatentExcelGenerator.writerPatentRecodesToExcel(patents, exportExcelPath);
-		return exportExcelPath;
-	}
+//	@Override
+//	public String generatePatentExportExcel(List<Long> patentIds,String excelName) throws IOException {
+//		List<Patent> patents=patentDao.getPatentsByIds(patentIds);
+//		String exportExcelPath=Settings.TEMP_DIR+excelName;
+//		PatentExcelGenerator.writerPatentRecodesToExcel(patents, exportExcelPath);
+//		return exportExcelPath;
+//	}
 
 	@Override
 	public List<GoodsDetail> getUserTransactionPatents(Page page) {

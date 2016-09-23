@@ -370,6 +370,8 @@
 	</div>	
 </div>
 <iframe id="patentExcelFileFrame" style="display:none"></iframe>	
+
+<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 <script type="text/javascript">
 $(function () {
 	  $('[data-toggle="tooltip"]').tooltip()

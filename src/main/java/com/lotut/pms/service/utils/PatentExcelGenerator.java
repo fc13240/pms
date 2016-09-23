@@ -6,14 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import com.lotut.pms.domain.Patent;
 
 public class PatentExcelGenerator {
-	public static void writerPatentRecodesToExcel(List<Patent> patents,String resultExcelPath) throws IOException{
+	/*public static void writerPatentRecodesToExcel(List<Patent> patents,String resultExcelPath) throws IOException{
 		final String CTREATE_SHEET = "专利清单详情";
 		FileOutputStream resultExcelOutputStream=new FileOutputStream(resultExcelPath);
 		HSSFWorkbook workbook = new HSSFWorkbook();
@@ -99,7 +98,7 @@ public class PatentExcelGenerator {
 		HSSFCell invoiceCodeCell = row.createCell(7);
 		invoiceCodeCell.setCellValue(patent.getInternalCode());
 		invoiceCodeCell.setCellStyle(style);
-	}
+	}*/
 	
 	public static void writePatentRecordsToExcel(List<Patent> patentRecords, String resultExcelPath) throws IOException {
 		final String SHEET_NAME = "专利清单表";
@@ -178,9 +177,9 @@ public class PatentExcelGenerator {
 		HSSFCell appDateCell = row.createCell(5);
 		appDateCell.setCellValue(sdf.format(patent.getAppDate()));
 		
-		SimpleDateFormat sd=new SimpleDateFormat("M月dd日");
-		HSSFCell feeDateCell = row.createCell(6);
-		feeDateCell.setCellValue(sd.format(patent.getAppDate()));
+		SimpleDateFormat sd=new SimpleDateFormat("MM月dd日");
+		HSSFCell deadlineCell = row.createCell(6);
+		deadlineCell.setCellValue(sd.format(patent.getAppDate()));
 		
 		SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		HSSFCell amountCell = row.createCell(7);
@@ -189,10 +188,10 @@ public class PatentExcelGenerator {
 		HSSFCell patentStatusTextCell = row.createCell(8);
 		patentStatusTextCell.setCellValue(patent.getPatentStatusText());
 		
-		HSSFCell internalCodeCell = row.createCell(9);
-		internalCodeCell.setCellValue(patent.getInternalCode());
+//		HSSFCell internalCodeCell = row.createCell(9);
+//		internalCodeCell.setCellValue(patent.getInternalCode());
 		
-		HSSFCell shareUsersCell = row.createCell(10);
-		shareUsersCell.setCellValue(patent.getShareUsersAsString());
+//		HSSFCell shareUsersCell = row.createCell(10);
+//		shareUsersCell.setCellValue(patent.getShareUsersAsString());
 	}
 }
