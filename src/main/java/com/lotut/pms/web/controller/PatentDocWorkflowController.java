@@ -102,6 +102,7 @@ public class PatentDocWorkflowController {
 	@RequestMapping(path="/createPatentDocOrder")
 	public String createOrder(@RequestParam("patentDocIds")Long[] patentDocIds, @ModelAttribute @Valid PatentDocOrder order,@RequestParam("invoicePic")String invoicePic, Model model) {
 		final int ALIPAY = 1;
+		final int UNIONPAY = 2;
 		final int PAID_BY_UPLOAD_INVOICE = 3;
 		User user = PrincipalUtils.getCurrentPrincipal();
 		order.setOwner(user);
@@ -116,6 +117,8 @@ public class PatentDocWorkflowController {
 			patentDocWorkflowService.saveInvoicePath(invoicePic, patentDocIds);
 			patentDocWorkflowService.processOrderPaidSuccess(orderId);
 			return "upload_InvoicePic_success";
+		}else if(order.getPaymentMethod().getPaymentMethodId() == UNIONPAY){
+			return "redirect:/unionPay/pay.html";
 		}
 		
 		return "add_patent_success";
