@@ -919,3 +919,5 @@ INSERT INTO payment_methods VALUES(3, '缴费凭证支付');
 ALTER TABLE patent_doc_app_person ADD COLUMN proxy_file VARCHAR(200) COMMENT '委托书文件地址';
 ALTER TABLE patent_doc_app_person ADD COLUMN app_person_attachment_file VARCHAR(200) COMMENT '附件存放地址';
 ALTER TABLE patent_doc_inventor ADD COLUMN inventor_attachment_file VARCHAR(200) COMMENT '附件存放地址';
+
+UPDATE fee_payment_status SET fee_payment_status_desc='订单完成' WHERE fee_payment_status_id=5;

@@ -91,7 +91,7 @@
 					        
 					        <li> 
 						        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=5'/>">
-						        	交费成功 (<c:out value='${feePaymentStatusCount[(5).intValue()]["feeCount"]}' default="0"/>)
+						        	订单完成 (<c:out value='${feePaymentStatusCount[(5).intValue()]["feeCount"]}' default="0"/>)
 						        </a>
 					        </li> 
 					      </ul>
@@ -192,7 +192,7 @@
 											<option value="2">已支付</option>
 											<option value="3">已交费</option>
 											<option value="4">待支付</option>
-											<option value="5">交费成功</option>
+											<option value="5">订单完成</option>
 										  </select>
 									  </td>
 									  
