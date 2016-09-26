@@ -16,6 +16,7 @@ import com.lotut.pms.domain.OrderItem;
 import com.lotut.pms.domain.OrderSearchCondition;
 import com.lotut.pms.domain.OrderStatus;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.PaymentMethod;
 import com.lotut.pms.service.OrderService;
 
 public class OrderServiceImpl implements OrderService {
@@ -69,6 +70,9 @@ public class OrderServiceImpl implements OrderService {
 		} 
 		
 		order.setAmount(totalAmount);
+		PaymentMethod paymentMethod = new PaymentMethod();
+		paymentMethod.setPaymentMethodId(order.getPaymentMethod().getPaymentMethodId());
+		order.setPaymentMethod(paymentMethod);
 		orderDao.insertOrder(order);
 		
 		List<OrderItem> orderItems = new ArrayList<>(fees.size());
