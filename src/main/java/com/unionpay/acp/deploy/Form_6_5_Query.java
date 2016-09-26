@@ -1,4 +1,4 @@
-package com.unionpay.acp.demo;
+package com.unionpay.acp.deploy;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -57,8 +57,8 @@ public class Form_6_5_Query extends HttpServlet {
 		Map<String, String> data = new HashMap<String, String>();
 		
 		/***银联全渠道系统，产品参数，除了encoding自行选择外其他不需修改***/
-		data.put("version", DemoBase.version);                 //版本号
-		data.put("encoding", DemoBase.encoding_UTF8);               //字符集编码 可以使用UTF-8,GBK两种方式
+		data.put("version", UnionConfig.version);                 //版本号
+		data.put("encoding", UnionConfig.encoding_UTF8);               //字符集编码 可以使用UTF-8,GBK两种方式
 		data.put("signMethod", "01");                          //签名方法 目前只支持01-RSA方式证书加密
 		data.put("txnType", "00");                             //交易类型 00-默认
 		data.put("txnSubType", "00");                          //交易子类型  默认00
@@ -74,16 +74,16 @@ public class Form_6_5_Query extends HttpServlet {
 
 		/**请求参数设置完毕，以下对请求参数进行签名并发送http post请求，接收同步应答报文------------->**/
 		
-		Map<String, String> reqData = AcpService.sign(data,DemoBase.encoding_UTF8);//报文中certId,signature的值是在signData方法中获取并自动赋值的，只要证书配置正确即可。
+		Map<String, String> reqData = AcpService.sign(data,UnionConfig.encoding_UTF8);//报文中certId,signature的值是在signData方法中获取并自动赋值的，只要证书配置正确即可。
 		
 		String url = SDKConfig.getConfig().getSingleQueryUrl();// 交易请求url从配置文件读取对应属性文件acp_sdk.properties中的 acpsdk.singleQueryUrl
 		//这里调用signData之后，调用submitUrl之前不能对submitFromData中的键值对做任何修改，如果修改会导致验签不通过
-		Map<String, String> rspData = AcpService.post(reqData,url,DemoBase.encoding_UTF8);
+		Map<String, String> rspData = AcpService.post(reqData,url,UnionConfig.encoding_UTF8);
 		
 		/**对应答码的处理，请根据您的业务逻辑来编写程序,以下应答码处理逻辑仅供参考------------->**/
 		//应答码规范参考open.unionpay.com帮助中心 下载  产品接口规范  《平台接入接口规范-第5部分-附录》
 		if(!rspData.isEmpty()){
-			if(AcpService.validate(rspData, DemoBase.encoding_UTF8)){
+			if(AcpService.validate(rspData, UnionConfig.encoding_UTF8)){
 				LogUtil.writeLog("验证签名成功");
 				if("00".equals(rspData.get("respCode"))){//如果查询交易成功
 					//处理被查询交易的应答码逻辑
@@ -111,8 +111,8 @@ public class Form_6_5_Query extends HttpServlet {
 			//未返回正确的http状态
 			LogUtil.writeErrorLog("未获取到返回报文或返回http状态码非200");
 		}
-		String reqMessage = DemoBase.genHtmlResult(reqData);
-		String rspMessage = DemoBase.genHtmlResult(rspData);
+		String reqMessage = UnionConfig.genHtmlResult(reqData);
+		String rspMessage = UnionConfig.genHtmlResult(rspData);
 		resp.getWriter().write("</br>请求报文:<br/>"+reqMessage+"<br/>" + "应答报文:</br>"+rspMessage+"");
 	}
 	

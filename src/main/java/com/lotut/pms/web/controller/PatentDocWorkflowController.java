@@ -118,7 +118,7 @@ public class PatentDocWorkflowController {
 			patentDocWorkflowService.processOrderPaidSuccess(orderId);
 			return "upload_InvoicePic_success";
 		}else if(order.getPaymentMethod().getPaymentMethodId() == UNIONPAY){
-			return "redirect:/unionPay/pay.html";
+			return "redirect:/patentDocUnionPay/pay.html";
 		}
 		
 		return "add_patent_success";
