@@ -56,13 +56,13 @@ public class NoticeExcelGenerator {
 		HSSFCell dispatchDateRowName = row.createCell(6);
 		dispatchDateRowName.setCellValue("发文日");
 		
-		HSSFCell noticeNameRowName = row.createCell(6);
+		HSSFCell noticeNameRowName = row.createCell(7);
 		noticeNameRowName.setCellValue("通知书名称");
 		
-		HSSFCell paperAppRowName = row.createCell(6);
+		HSSFCell paperAppRowName = row.createCell(8);
 		paperAppRowName.setCellValue("纸件申请");
 		
-		HSSFCell deadlineRowName = row.createCell(7);
+		HSSFCell deadlineRowName = row.createCell(9);
 		deadlineRowName.setCellValue("期限和通知状态");
 		
 		
@@ -80,23 +80,26 @@ public class NoticeExcelGenerator {
 		HSSFCell patentNameCell = row.createCell(2);
 		patentNameCell.setCellValue(notice.getPatent().getName());
 		
-		HSSFCell  patentStatusTextCell= row.createCell(3);
+		HSSFCell userNameCell = row.createCell(3);
+		userNameCell.setCellValue(notice.getPatent().getFirstAppPerson());
+		
+		HSSFCell  patentStatusTextCell= row.createCell(4);
 		patentStatusTextCell.setCellValue(notice.getPatent().getPatentStatusText());
 		
-		HSSFCell userNameCell = row.createCell(4);
-		userNameCell.setCellValue(notice.getPatent().getShareUsersAsString());
+		HSSFCell shareUsersCell = row.createCell(5);
+		shareUsersCell.setCellValue(notice.getPatent().getShareUsersAsString());
 		
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-		HSSFCell dispatchCell = row.createCell(5);
+		HSSFCell dispatchCell = row.createCell(6);
 		dispatchCell.setCellValue(sdf.format(notice.getDispatchDate()));
 	
-		HSSFCell noticeNameCell = row.createCell(8);
+		HSSFCell noticeNameCell = row.createCell(7);
 		noticeNameCell.setCellValue(notice.getName());
 		
-		HSSFCell paperApplyRowNameCell = row.createCell(9);
+		HSSFCell paperApplyRowNameCell = row.createCell(8);
 		paperApplyRowNameCell.setCellValue(notice.getPaperApplyType().getPaperTypeDescription());
 		
-		HSSFCell deadlineCell = row.createCell(10);
+		HSSFCell deadlineCell = row.createCell(9);
 		deadlineCell.setCellValue(notice.getProcessStatus().getProcessStatusDescription());
 	}
 }
