@@ -100,6 +100,6 @@ public class NoticeExcelGenerator {
 		paperApplyRowNameCell.setCellValue(notice.getPaperApplyType().getPaperTypeDescription());
 		
 		HSSFCell deadlineCell = row.createCell(9);
-		deadlineCell.setCellValue(notice.getProcessStatus().getProcessStatusDescription());
+		deadlineCell.setCellValue(notice.getRemainDays());
 	}
 }
