@@ -400,7 +400,7 @@
 								</td>
 								</se:authorize>
 								
-								<se:authorize access="hasRole('ROLE_USER')">
+								<se:authorize access="hasRole('ROLE_USER') and  not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center">
 								  <select id="roleUser" class="form-control" onClick=selectClick() onChange="javascript:changeRoleUserPaperApplyType('${notice.noticeId}', this)">
 										<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
@@ -437,8 +437,9 @@
 									</c:forEach>
 								  </select>
 								</td>
+								
 								</se:authorize>
-								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS','ROLE_USER')">
+								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS','ROLE_USER') and not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center" class="date_status">
 								<span class="qixian">
 									<c:choose>
