@@ -3,8 +3,6 @@ package com.lotut.pms.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.lotut.pms.domain.Notice;
 import com.lotut.pms.domain.NoticePaperApplyType;
 import com.lotut.pms.domain.NoticeProcessStatus;
@@ -55,6 +53,8 @@ public interface NoticeDao {
 	List<NoticeRemark> getNoticeRemarks(String noticeId);
 	
 	void addNoticeRemark(String noticeId, String content, int userId);
+	
+	void updatePatentDocByInternalCode(Notice notice);
 	
 	List<Notice> getUserNoticesByIds(List<Long> noticeIds);
 }

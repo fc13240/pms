@@ -98,7 +98,7 @@ public class PatentExcelParser {
 			return 2;
 		} else if (patentStatusDescription.contains("等年登印费")) {
 			return 3;
-		} else if (patentStatusDescription.contains("待恢复")) {
+		} else if (patentStatusDescription.contains("恢复")) {
 			return 4;
 		} else if (patentStatusDescription.contains("失效")) {
 			return 5;

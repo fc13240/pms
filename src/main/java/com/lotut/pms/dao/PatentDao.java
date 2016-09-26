@@ -3,8 +3,6 @@ package com.lotut.pms.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.lotut.pms.domain.GoodsDetail;
 import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
@@ -110,6 +108,12 @@ public interface PatentDao {
 	boolean savePatentDetail(Patent patent);
 	
 	void deleteShareUser(long patentId, int ownerId, int shareUserId);
+	
+	List<Integer> getPatentDocShareUesrs(String internalCode);
+	
+	long getPatentIdByInternalCode(String internalCode);
+	
+	void savePatentShareUser(List<Integer> userIds,long patentId);
 	
 	List<Patent> getUserPatentsByIds(List<Long> patentIds);
 	

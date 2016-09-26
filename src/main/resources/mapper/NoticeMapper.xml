@@ -401,6 +401,10 @@
 		values(now(),#{content},#{noticeId},#{userId})				
 	</insert>
 	
+	<update id="updatePatentDocByInternalCode" parameterType="Notice">
+		update patent_documents set app_no=#{patent.internalCode},app_data=#{patent.appData} where internal_code=#{patent.internalCode}
+	</update>
+	
 	<select id="getUserNoticesByIds" resultMap="NoticeResultMap">
 		select un.*, u.user_id as share_user_id,  u.username as share_username
 		from (select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id,p.patent_status_text, ps.patent_status_desc as patent_status_description,
