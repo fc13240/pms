@@ -921,5 +921,5 @@ ALTER TABLE patent_doc_app_person ADD COLUMN app_person_attachment_file VARCHAR(
 ALTER TABLE patent_doc_inventor ADD COLUMN inventor_attachment_file VARCHAR(200) COMMENT '附件存放地址';
 
 alter table patent_documents add column app_data date comment '申请日';
-
 UPDATE fee_payment_status SET fee_payment_status_desc='订单完成' WHERE fee_payment_status_id=5;
+UPDATE order_status SET status_description='订单完成' WHERE order_status_id=3;

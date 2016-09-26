@@ -126,13 +126,14 @@
 			              	  </td>
 							  <td>
 								  <c:if test="${order.orderStatus.statusId == 2}">
-									<div> <a href="<s:url value='/order/setUserOrderToPaid.html'/>?orderId=<c:out value='${order.id}'/>">									 
+									<div> <a href="javascript:return void"  onclick="setUserOrderToPaid(${order.id})">									 
+									  
 									  <button type="button" class="button button-rounded button-highlight" style="width:108px;">置为已交局</button>
 
 									  </a> </div>
 								  </c:if> 
 								  <c:if test="${order.orderStatus.statusId == 4}">
-									<div> <a href="<s:url value='/order/setUserOrderToPaidSuccess.html'/>?orderId=<c:out value='${order.id}'/>">
+									<div> <a href="javascript:return void" onclick="setUserOrderToPaidSuccess(${order.id})">
 									  <button type="button" class="button button-rounded button-highlight">订单完成</button>
 									  </a> </div>
 								  </c:if> 								  							  
@@ -303,6 +304,26 @@ function gotoPageForEnter(event) {
 	if(event.keyCode == 13) {
 		gotoPage();
 	}
+}
+
+function setUserOrderToPaid(orderId){
+	$.ajax({
+		url: "<s:url value='/order/setUserOrderToPaid.html'/>?orderId=" + orderId, 
+		type: 'get', 
+		success: function() {
+			location.reload();
+		}
+	});
+}
+
+function setUserOrderToPaidSuccess(orderId){
+	$.ajax({
+		url: "<s:url value='/order/setUserOrderToPaidSuccess.html'/>?orderId=" + orderId, 
+		type: 'get', 
+		success: function() {
+			location.reload();
+		}
+	});
 }
 </script>
 </body>

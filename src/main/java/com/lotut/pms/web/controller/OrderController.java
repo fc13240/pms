@@ -64,7 +64,6 @@ public class OrderController {
 			@RequestParam("express") Integer express,@RequestParam("nationalInvoice") Integer nationalInvoice,
 			@RequestParam("companyInvoice") Integer companyInvoice) {
 		final int ALIPAY = 1;
-		final int UNIONPAY = 2;
 		User user = PrincipalUtils.getCurrentPrincipal();
 		order.setOwner(user);
 		
@@ -76,8 +75,6 @@ public class OrderController {
 		
 		if (order.getPaymentMethod().getPaymentMethodId() == ALIPAY) {
 			return "redirect:/alipay/pay.html";
-		}else if(order.getPaymentMethod().getPaymentMethodId() == UNIONPAY){
-			return "redirect:/unionPay/pay.html";
 		}
 		
 		return "add_patent_success";
