@@ -370,24 +370,53 @@
 								<td style="text-align:center"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
 								<td style="text-align:center"><a id="download" href="javascript: void(0);" onClick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}')">
 								  <c:out value="${notice.name}"/>
-								  </a> </td>
+								  </a> 
+								</td>
+								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center">
 								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this)">
-									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> <option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
-											  
-										  
-									  <c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
-									  >
-									  <c:out value="${paperApplyType.paperTypeDescription}"/>
-									  </option>
+									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
+										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
+									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
+									  	>
+									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
+									  	</option>
 									</c:forEach>
 								  </select>
-								
 								</td>
-
+								</se:authorize>
+								
+								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
+								<td style="text-align:center">
+								  <select class="form-control" disabled="disabled">
+									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
+										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
+									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
+									  	>
+									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
+									  	</option>
+									</c:forEach>
+								  </select>
+								</td>
+								</se:authorize>
+								
+								<se:authorize access="hasRole('ROLE_USER')">
+								<td style="text-align:center">
+								  <select id="roleUser" class="form-control" onClick=selectClick() onChange="javascript:changeRoleUserPaperApplyType('${notice.noticeId}', this)">
+										<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
+										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
+									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
+									  	>
+									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
+									  	</option>
+									</c:forEach>
+								  </select>
+								</td>
+								</se:authorize>
+								
+								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center" class="date_status">
 								<span class="qixian">
-								
 									<c:choose>
 										<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
 										<c:otherwise>期限：
@@ -407,8 +436,29 @@
 									  </option>
 									</c:forEach>
 								  </select>
-								  
 								</td>
+								</se:authorize>
+								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS','ROLE_USER')">
+								<td style="text-align:center" class="date_status">
+								<span class="qixian">
+									<c:choose>
+										<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
+										<c:otherwise>期限：
+									  	<c:out value="${notice.remainDays}"/>天
+										</c:otherwise>
+								  	</c:choose>
+								<br>
+								</span>  	
+								  <select  class="treatment_status selectPointOfInterest form-control" disabled="disabled">
+									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
+									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
+									  >
+									  <c:out value="${processStatus.processStatusDescription}"/>
+									  </option>
+									</c:forEach>
+								  </select>
+								</td>
+								</se:authorize>
 								<td style="text-align:center">
 								<a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}"> 下载 </a> 
 								<a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
@@ -585,6 +635,50 @@ function changePaperApplyType(notice, selectElement) {
 }
 </script>
 
+<script type="text/javascript">
+function selectClick(){
+	$("#roleUser option[value='1']").hide();
+	$("#roleUser option[value='3']").hide();
+	$("#roleUser option[value='4']").hide();
+	$("#roleUser option[value='5']").hide();
+}
+function changeRoleUserPaperApplyType(notice,selectElement) {
+	paperApplyType = 1;
+	for (var i = 0; i < selectElement.length; i++) {
+		if (selectElement.options[i].selected == true) {
+			paperApplyType = selectElement.options[i].value;
+		}
+	}		
+	$.ajax({
+		url: "<s:url value='/notice/changePaperType.html'/>?notice=" + notice + "&paperApplyType=" + paperApplyType,
+		type: 'get', 
+		success: function(data) {
+			if (data == "no-permission") {
+				$("<div>共享人只能把[纸质申请]修改为[申请纸件]</div>").dialog({
+					modal: true,
+					buttons: {
+						Ok: function() {
+							$(this).dialog("close");
+						}
+					}	
+				});		
+
+				return;
+			}
+			
+			$("<div>操作成功</div>").dialog({
+				modal: true,
+				buttons: {
+					Ok: function() {
+						$(this).dialog("close");
+					}
+				}	
+			});
+			
+		}
+	});			
+}
+</script>
 <script type="text/javascript">
 
 // 通知书处理状态
