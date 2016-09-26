@@ -65,7 +65,7 @@ public class NoticeExcelGenerator {
 		HSSFCell deadlineRowName = row.createCell(9);
 		deadlineRowName.setCellValue("期限");
 		
-		HSSFCell processStatusDescriptionRowName = row.createCell(9);
+		HSSFCell processStatusDescriptionRowName = row.createCell(10);
 		processStatusDescriptionRowName.setCellValue("通知状态");
 		
 		
