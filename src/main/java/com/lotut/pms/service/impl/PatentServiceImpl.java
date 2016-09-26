@@ -335,7 +335,7 @@ public class PatentServiceImpl implements PatentService {
 
 	@Override
 	public String patentExportExcel(List<Long> patentIds, String exportExcelName) throws IOException {
-		List<Patent> patents = patentDao.getPatentsByIds(patentIds);
+		List<Patent> patents = patentDao.getUserPatentsByIds(patentIds);
 		String exportExcelPath=Settings.TEMP_DIR+exportExcelName;
 		PatentExcelGenerator.writePatentRecordsToExcel(patents, exportExcelPath);
 		return exportExcelPath;

@@ -122,5 +122,7 @@ public interface PatentMapper {
 	boolean savePatentDetail(Patent patent);
 
 	void deleteShareUser(@Param("patentId") long patentId, @Param("ownerId") int ownerId, @Param("shareUserId") int shareUserId);
+	
+	List<Patent> getUserPatentsByIds(@Param("patentIds")List<Long> patentIds);
 
 }
