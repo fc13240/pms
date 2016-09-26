@@ -273,20 +273,32 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 
 	@Override
 	public Patent showPatentDetail(long patentId) {
-		// TODO Auto-generated method stub
 		return patentMapper.showPatentDetail(patentId);
 	}
 
 	@Override
 	public boolean savePatentDetail(Patent patent) {
-		// TODO Auto-generated method stub
 		return patentMapper.savePatentDetail(patent);
 	}
 
 	@Override
 	public void deleteShareUser(long patentId, int ownerId, int shareUserId) {
-		// TODO Auto-generated method stub
 		patentMapper.deleteShareUser(patentId,ownerId,shareUserId);
+	}
+
+	@Override
+	public List<Integer> getPatentDocShareUesrs(String internalCode) {
+		return patentMapper.getPatentDocShareUesrs(internalCode);
+	}
+	
+	@Override
+	public long getPatentIdByInternalCode(String internalCode) {
+		return patentMapper.getPatentIdByInternalCode(internalCode);
+	}
+
+	@Override
+	public void savePatentShareUser(List<Integer> userIds, long patentId) {
+		patentMapper.savePatentShareUser(userIds, patentId);
 	}
 
 

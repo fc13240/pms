@@ -153,6 +153,10 @@ public class NoticeServiceImpl implements NoticeService {
 		List<Notice> notices = NoticeXmlParser.parseNoticeXmlFiles(noticePath);
 		
 		saveOrUpdateNotices(notices);
+		
+		updatePatentDocuments(notices);
+		
+		savepatentShareUser(notices);
 	}
 	
 	@Transactional
@@ -226,6 +230,21 @@ public class NoticeServiceImpl implements NoticeService {
 	    noticeDao.addNoticeRemark(noticeId,content,userId);
 		
 	}
+
+	public void updatePatentDocuments(List<Notice> notices){
+		for(Notice notice:notices){
+			noticeDao.updatePatentDocByInternalCode(notice);
+		}
+	}
 	
+	public void savepatentShareUser(List<Notice> notices){
+		String internalCode = null;
+		for(Notice notice:notices){
+			internalCode = notice.getPatent().getInternalCode();
+			List<Integer> shareUserIds = patentDao.getPatentDocShareUesrs(internalCode);
+			long patentId = patentDao.getPatentIdByInternalCode(internalCode);
+			patentDao.savePatentShareUser(shareUserIds, patentId);
+		}
+	}
 	
 }
