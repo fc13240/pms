@@ -127,7 +127,9 @@ public interface PatentMapper {
 	
 	long getPatentIdByInternalCode(String internalCode);
 	
-	void savePatentShareUser(@Param("userId") List<Integer> userIds,@Param("patentId") long patentId);
+	//void savePatentShareUser(@Param("userIds") List<Integer> userIds,@Param("patentId") long patentId);
+	
+	void savePatentShareUser(@Param("userId") int userIds,@Param("patentId") long patentId);
 
 	List<Patent> getUserPatentsByIds(@Param("patentIds")List<Long> patentIds);
 
