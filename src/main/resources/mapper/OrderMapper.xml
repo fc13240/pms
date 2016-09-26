@@ -177,7 +177,7 @@
 	</select>
 	
 	<update id="updateOrderStatus">
-		update orders set order_status = #{status}, payment_method=1
+		update orders set order_status = #{status}
 			<if test="status == 2">
 			, pay_time = now()
 			</if> 
