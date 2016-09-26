@@ -127,7 +127,7 @@
 							  <td>
 								  <c:if test="${order.orderStatus.statusId == 2}">
 									<div> <a href="<s:url value='/order/setUserOrderToPaid.html'/>?orderId=<c:out value='${order.id}'/>">
-									  <button type="button" class="button button-rounded button-highlight">置为已交局</button>
+									  <button type="button" class="button button-rounded button-highlight" style="width:108px;">置为已交局</button>
 									  </a> </div>
 								  </c:if> 
 								  <c:if test="${order.orderStatus.statusId == 4}">

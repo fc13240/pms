@@ -1,4 +1,4 @@
-package com.unionpay.acp.demo;
+package com.unionpay.acp.deploy;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,7 +26,7 @@ import com.unionpay.acp.sdk.SDKConstants;
  * 版权： 中国银联<br>
  * 说明：以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己需要，按照技术文档编写。该代码仅供参考。<br>
  */
-public class DemoBase {
+public class UnionConfig {
 
 	//默认配置的是UTF-8
 	public static String encoding_UTF8 = "UTF-8";
@@ -36,11 +36,11 @@ public class DemoBase {
 	public static String version = "5.0.0";
 	
 	//后台服务对应的写法参照 FrontRcvResponse.java
+	public static String patent_doc_frontUrl = "http://192.168.1.103:8080/pms/patentDocUnionPay/frontRcvResponse.html";
 	public static String frontUrl = "http://192.168.1.103:8080/pms/unionPay/frontRcvResponse.html";
-
 	//后台服务对应的写法参照 BackRcvResponse.java
-	public static String backUrl = "http://192.168.1.103:8080/pms/unionPay/backRcvResponse.html";//受理方和发卡方自选填写的域[O]--后台通知地址
-
+	public static String patent_doc_backUrl = "http://192.168.1.103:8080/pms/patentDocUnionPay/backRcvResponse.html";//受理方和发卡方自选填写的域[O]--后台通知地址
+	public static String backUrl = "http://192.168.1.103:8080/pms/unionPay/frontRcvResponse.html";
 	// 商户发送交易时间 格式:YYYYMMDDhhmmss
 	public static String getCurrentTime() {
 		return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
