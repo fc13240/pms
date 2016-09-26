@@ -188,10 +188,10 @@ public class PatentExcelGenerator {
 		HSSFCell patentStatusTextCell = row.createCell(8);
 		patentStatusTextCell.setCellValue(patent.getPatentStatusText());
 		
-//		HSSFCell internalCodeCell = row.createCell(9);
-//		internalCodeCell.setCellValue(patent.getInternalCode());
+		HSSFCell internalCodeCell = row.createCell(9);
+		internalCodeCell.setCellValue(patent.getInternalCode());
 		
-//		HSSFCell shareUsersCell = row.createCell(10);
-//		shareUsersCell.setCellValue(patent.getShareUsersAsString());
+		HSSFCell shareUsersCell = row.createCell(10);
+		shareUsersCell.setCellValue(patent.getShareUsersAsString());
 	}
 }
