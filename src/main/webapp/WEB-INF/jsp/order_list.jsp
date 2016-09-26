@@ -52,7 +52,7 @@
 							<li>已交局 (<c:out value='${orderCountsByOrderStatus[(4).intValue()]["orderCount"]}' default="0"/>)</li>
 							</a>  
 							<a href="<s:url value='/order/search.html?page.currentPage=1&orderStatus=3'/>">
-							<li>交费成功 (<c:out value='${orderCountsByOrderStatus[(3).intValue()]["orderCount"]}' default="0"/>)</li>
+							<li>订单完成 (<c:out value='${orderCountsByOrderStatus[(3).intValue()]["orderCount"]}' default="0"/>)</li>
 							</a>
 					     </ul>		    
 					    </div>
@@ -94,7 +94,7 @@
 							<input style="width:110px;" class="form-control" type="text" onclick="WdatePicker({el:'endAppDateId'})" id="endAppDateId" name="endAppDate" placeholder="结束时间" value="" readonly="readonly" >
 							</td>
 							<td>
-							<input name="keyword" style="width:300px; display:inline;" id="keywordId" value="" placeholder="订单号" class="t-input form-control"/>
+							<input name="keyword" style="width:300px; display:inline;" id="keywordId" value="" placeholder="订单号/专利号" class="t-input form-control"/>
 							</td>
 							<td><button class="button button-caution button-rounded" type="submit">查询</button></td>
 						</tr>

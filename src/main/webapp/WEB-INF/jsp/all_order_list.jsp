@@ -48,7 +48,7 @@
 						       <li>已交局 (<c:out value='${orderCountsByOrderStatus[(4).intValue()]["orderCount"]}' default="0"/>)</li>
 						       </a>  
 						       <a href="<s:url value='/order/adminSearch.html?page.currentPage=1&orderStatus=3'/>">
-						       <li>缴费成功 (<c:out value='${orderCountsByOrderStatus[(3).intValue()]["orderCount"]}' default="0"/>)</li>
+						       <li>订单完成 (<c:out value='${orderCountsByOrderStatus[(3).intValue()]["orderCount"]}' default="0"/>)</li>
 						        </a>
 						
 						      </ul>		    
@@ -126,13 +126,14 @@
 			              	  </td>
 							  <td>
 								  <c:if test="${order.orderStatus.statusId == 2}">
-									<div> <a href="<s:url value='/order/setUserOrderToPaid.html'/>?orderId=<c:out value='${order.id}'/>">
+									<div> <a href="<s:url value='/order/setUserOrderToPaid.html'/>?orderId=<c:out value='${order.id}'/>">									 
 									  <button type="button" class="button button-rounded button-highlight" style="width:108px;">置为已交局</button>
+
 									  </a> </div>
 								  </c:if> 
 								  <c:if test="${order.orderStatus.statusId == 4}">
 									<div> <a href="<s:url value='/order/setUserOrderToPaidSuccess.html'/>?orderId=<c:out value='${order.id}'/>">
-									  <button type="button" class="button button-rounded button-highlight">缴费成功</button>
+									  <button type="button" class="button button-rounded button-highlight">订单完成</button>
 									  </a> </div>
 								  </c:if> 								  							  
 							  </td>

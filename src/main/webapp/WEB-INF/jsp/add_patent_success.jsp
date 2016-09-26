@@ -21,7 +21,7 @@
 		
 			<!--left begin-->
 		  <div class="col-xs-1 sidebar" style="min-width:100px;">
-			<%@ include file="_left_nav2.jsp" %>
+			<%@ include file="_left_nav_fee.jsp" %>
 		  </div>
 		  <!--left end-->
 		  <!--right begin-->
@@ -33,7 +33,7 @@
 					  <label class="block clearfix"> <span class="block input-icon input-icon-right" style="font-size:20px;"> 操作成功！ </span> </label>
 					</div>
 					<!-- /.widget-box -->
-					<div class="toolbar center"> <a href="<s:url value='/patent/list.html?currentPage=1'/>"  > <i class="ace-icon fa fa-arrow-left"></i> 返回 </a> </div>
+					<div class="toolbar center"> <a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>"  > <i class="ace-icon fa fa-arrow-left"></i> 返回 </a> </div>
 					</div>
 				</div>
 			</div>
