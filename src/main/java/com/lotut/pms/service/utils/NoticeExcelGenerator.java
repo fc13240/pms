@@ -63,7 +63,10 @@ public class NoticeExcelGenerator {
 		paperAppRowName.setCellValue("纸件申请");
 		
 		HSSFCell deadlineRowName = row.createCell(9);
-		deadlineRowName.setCellValue("期限和通知状态");
+		deadlineRowName.setCellValue("期限");
+		
+		HSSFCell processStatusDescriptionRowName = row.createCell(9);
+		processStatusDescriptionRowName.setCellValue("通知状态");
 		
 		
 		
@@ -100,6 +103,9 @@ public class NoticeExcelGenerator {
 		paperApplyRowNameCell.setCellValue(notice.getPaperApplyType().getPaperTypeDescription());
 		
 		HSSFCell deadlineCell = row.createCell(9);
-		deadlineCell.setCellValue(notice.getRemainDays());
+		deadlineCell.setCellValue(notice.getRemainDaysDescription());
+		
+		HSSFCell processStatusDescriptionCell= row.createCell(10);
+		processStatusDescriptionCell.setCellValue(notice.getProcessStatus().getProcessStatusDescription());
 	}
 }
