@@ -75,7 +75,7 @@
   		select app_person_id as appPersonId,name as name,id_number as idNumber,
   		postcode_address as postcodeAddress,other_information as otherInfo,transaction_identity_id as transactionIdentityId,
   		fee_reduce_transaction_status as feeReduceTransactionStatus,transaction_year as transactionYear,app_person_attachment_file as appPersonUrl,proxy_file as proxyUrl from common_app_person
-  		where user_id=#{userId} and app_person_id in
+  		where app_person_id in
   		<foreach collection="appPersonIds" item="appPersonId" open="(" separator="," close=")">
 			#{appPersonId}
 		</foreach>
@@ -96,7 +96,7 @@
 		select inventor_id as inventorId ,inventor_name as inventorName,inventor_id_number as inventorNumber,
 		inventor_nationality as inventorNationality,inventor_mobile as inventorMobile,inventor_email as inventorEmail,
 		inventor_other_information as inventorComment,user_id  as userId,inventor_attachment_file as inventorUrl
-		from common_inventor where user_id=#{userId} and inventor_id in 
+		from common_inventor where inventor_id in 
 		<foreach collection="inventorIds" item="inventorId" open="(" separator="," close=")">
 			#{inventorId}
 		</foreach>
