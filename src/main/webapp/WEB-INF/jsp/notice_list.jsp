@@ -414,6 +414,7 @@
 								</td>
 								</se:authorize>
 								
+								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center" class="date_status">
 								<span class="qixian">
 									<c:choose>
@@ -435,8 +436,29 @@
 									  </option>
 									</c:forEach>
 								  </select>
-								  
 								</td>
+								</se:authorize>
+								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS','ROLE_USER')">
+								<td style="text-align:center" class="date_status">
+								<span class="qixian">
+									<c:choose>
+										<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
+										<c:otherwise>期限：
+									  	<c:out value="${notice.remainDays}"/>天
+										</c:otherwise>
+								  	</c:choose>
+								<br>
+								</span>  	
+								  <select  class="treatment_status selectPointOfInterest form-control" disabled="disabled">
+									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
+									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
+									  >
+									  <c:out value="${processStatus.processStatusDescription}"/>
+									  </option>
+									</c:forEach>
+								  </select>
+								</td>
+								</se:authorize>
 								<td style="text-align:center">
 								<a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}"> 下载 </a> 
 								<a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
