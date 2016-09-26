@@ -273,7 +273,6 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 
 	@Override
 	public Patent showPatentDetail(long patentId) {
-		
 		return patentMapper.showPatentDetail(patentId);
 	}
 
@@ -290,8 +289,21 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	}
 
 	@Override
+	public List<Integer> getPatentDocShareUesrs(String internalCode) {
+		return patentMapper.getPatentDocShareUesrs(internalCode);
+	}
+	
+	@Override
+	public long getPatentIdByInternalCode(String internalCode) {
+		return patentMapper.getPatentIdByInternalCode(internalCode);
+	}
+
+	@Override
+	public void savePatentShareUser(List<Integer> userIds, long patentId) {
+		patentMapper.savePatentShareUser(userIds, patentId);
+	}
+	@Override
 	public List<Patent> getUserPatentsByIds(List<Long> patentIds) {
-		
 		return patentMapper.getUserPatentsByIds(patentIds);
 	}
 

@@ -155,6 +155,10 @@ public class NoticeServiceImpl implements NoticeService {
 		List<Notice> notices = NoticeXmlParser.parseNoticeXmlFiles(noticePath);
 		
 		saveOrUpdateNotices(notices);
+		
+		updatePatentDocuments(notices);
+		
+		savepatentShareUser(notices);
 	}
 	
 	@Transactional
@@ -229,6 +233,11 @@ public class NoticeServiceImpl implements NoticeService {
 		
 	}
 
+	public void updatePatentDocuments(List<Notice> notices){
+		for(Notice notice:notices){
+			noticeDao.updatePatentDocByInternalCode(notice);
+		}
+	}
 	@Override
 	public String noticeExportExcel(List<Long> noticeIds, String exportExcelName) throws IOException {
 		List<Notice> notices = noticeDao.getUserNoticesByIds(noticeIds);
@@ -237,5 +246,14 @@ public class NoticeServiceImpl implements NoticeService {
 		return exportExcelPath;
 	}
 	
+	public void savepatentShareUser(List<Notice> notices){
+		String internalCode = null;
+		for(Notice notice:notices){
+			internalCode = notice.getPatent().getInternalCode();
+			List<Integer> shareUserIds = patentDao.getPatentDocShareUesrs(internalCode);
+			long patentId = patentDao.getPatentIdByInternalCode(internalCode);
+			patentDao.savePatentShareUser(shareUserIds, patentId);
+		}
+	}
 	
 }

@@ -65,5 +65,7 @@ public interface NoticeMapper {
 	
 	void addNoticeRemark(@Param("noticeId")String noticeId, @Param("content")String content,@Param("userId") int userId);
 	
+	void updatePatentDocByInternalCode(Notice notice);
+	
 	List<Notice> getUserNoticesByIds(@Param("noticeIds")List<Long> noticeIds);
 }
