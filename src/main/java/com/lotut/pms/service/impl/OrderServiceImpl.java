@@ -34,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	@Transactional
-	public int createOrder(Order order, List<Fee> fees,Integer express,Integer nationalInvoice,
+	public long createOrder(Order order, List<Fee> fees,Integer express,Integer nationalInvoice,
 			Integer companyInvoice) {
 		
 		int totalAmount = 0;
@@ -84,7 +84,7 @@ public class OrderServiceImpl implements OrderService {
 		orderDao.insertOrderItems(orderItems);
 		orderDao.updateOrderFeesStatus(orderItems);
 		
-		return 0;
+		return order.getId();
 	}
 
 	@Override

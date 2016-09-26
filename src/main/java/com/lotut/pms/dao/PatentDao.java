@@ -115,4 +115,6 @@ public interface PatentDao {
 	
 	void savePatentShareUser(List<Integer> userIds,long patentId);
 	
+	List<Patent> getUserPatentsByIds(List<Long> patentIds);
+	
 }

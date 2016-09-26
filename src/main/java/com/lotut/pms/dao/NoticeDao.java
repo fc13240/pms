@@ -55,4 +55,6 @@ public interface NoticeDao {
 	void addNoticeRemark(String noticeId, String content, int userId);
 	
 	void updatePatentDocByInternalCode(Notice notice);
+	
+	List<Notice> getUserNoticesByIds(List<Long> noticeIds);
 }

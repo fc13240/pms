@@ -144,5 +144,11 @@ public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao 
 		noticeMapper.updatePatentDocByInternalCode(notice);
 	}
 	
+	@Override
+	public List<Notice> getUserNoticesByIds(List<Long> noticeIds) {
+		return noticeMapper.getUserNoticesByIds(noticeIds);
+
+	}
+	
 	
 }

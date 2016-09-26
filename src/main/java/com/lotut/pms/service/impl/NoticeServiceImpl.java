@@ -23,7 +23,9 @@ import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.service.NoticeService;
+import com.lotut.pms.service.utils.NoticeExcelGenerator;
 import com.lotut.pms.service.utils.NoticeXmlParser;
+import com.lotut.pms.service.utils.PatentExcelGenerator;
 import com.lotut.pms.service.utils.ZipUtils;
 
 import net.lingala.zip4j.core.ZipFile;
@@ -235,6 +237,13 @@ public class NoticeServiceImpl implements NoticeService {
 		for(Notice notice:notices){
 			noticeDao.updatePatentDocByInternalCode(notice);
 		}
+	}
+	@Override
+	public String noticeExportExcel(List<Long> noticeIds, String exportExcelName) throws IOException {
+		List<Notice> notices = noticeDao.getUserNoticesByIds(noticeIds);
+		String exportExcelPath=Settings.TEMP_DIR+exportExcelName;
+		NoticeExcelGenerator.writeNoticeRecordsToExcel(notices, exportExcelPath);
+		return exportExcelPath;
 	}
 	
 	public void savepatentShareUser(List<Notice> notices){

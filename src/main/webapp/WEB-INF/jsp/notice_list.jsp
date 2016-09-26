@@ -323,7 +323,11 @@
 										<a href="javascript:return void" onclick="batchChangeNoticePaperType(2)">
 										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">批量申请纸件</button>
 										</a>
-					  				</td>						  										  									  				
+					  				</td>		
+					  				<td>
+										<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportNotices()">表格导出</button>
+									</td>		
+					  								  										  									  				
 					  			</tr>
 					  		</table>		
 						  </div>
@@ -497,8 +501,7 @@
 
 </div>	
 
-
-
+<iframe id="noticeExcelFileFrame" style="display:none"></iframe>
 
        
 
@@ -821,7 +824,19 @@ function batchProcessNotice(processStatus) {
 			gotoPage();
 		}
 	}
-
+	
+	function exportNotices(){
+		var noticeSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+		
+		if (!noticeSelected) {
+			formutil.alertMessage('请选择要导出的通知书');
+			return;
+		}
+		var notices = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'notice');
+		var iframe = document.getElementById('noticeExcelFileFrame');
+		iframe.src = "<s:url value='/notice/exportNotices.html'/>?noticeIds=" + notices;
+		
+	}
 	
 </script>
 

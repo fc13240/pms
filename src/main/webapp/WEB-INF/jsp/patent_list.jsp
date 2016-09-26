@@ -217,7 +217,10 @@
 							<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-toggle="tooltip" data-placement="right" title="可以将您的专利发布到交易网买卖哦！您也可以去交易管理页面修改您的价格和类别哦！">批量发布交易</button>
 							</a> 
 						</td>	 
-						</se:authorize>								
+						</se:authorize>	
+						<td>
+							<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportPatents()">表格导出</button>
+						</td>					
 					  	</tr>
 					  	</table>
 					  </div>
@@ -366,7 +369,9 @@
 		</div>
 	</div>	
 </div>
+<iframe id="patentExcelFileFrame" style="display:none"></iframe>	
 
+<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 <script type="text/javascript">
 $(function () {
 	  $('[data-toggle="tooltip"]').tooltip()
@@ -569,7 +574,7 @@ $(function () {
 		}
 	}
 	
-	function exportFees(){
+	function exportPatents(){
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 		
 		if (!patentSelected) {
@@ -581,6 +586,8 @@ $(function () {
 		iframe.src = "<s:url value='/patent/exportPatents.html'/>?patentIds=" + patents;
 		
 	}
+	
+
 </script>
 <script type="text/javascript">
 	$(function() {

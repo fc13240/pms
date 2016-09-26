@@ -19,9 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.PatentDocOrder;
-import com.lotut.pms.service.OrderService;
 import com.lotut.pms.service.PatentDocWorkflowHistoryService;
 import com.lotut.pms.service.PatentDocWorkflowService;
 import com.unionpay.acp.deploy.UnionConfig;
@@ -30,14 +28,14 @@ import com.unionpay.acp.sdk.LogUtil;
 import com.unionpay.acp.sdk.SDKConfig;
 import com.unionpay.acp.sdk.SDKConstants;
 @Controller
-@RequestMapping(path="/unionPay")
-public class UnionPayController {
-	private OrderService orderService;
+@RequestMapping(path="/patentDocUnionPay")
+public class PatentDocUnionPayController {
+	private PatentDocWorkflowService patentDocWorkflowService;
 	
 	
 	@Autowired
-	public UnionPayController(OrderService orderService) {
-		this.orderService = orderService;
+	public PatentDocUnionPayController(PatentDocWorkflowService patentDocWorkflowService) {
+		this.patentDocWorkflowService = patentDocWorkflowService;
 		SDKConfig.getConfig().loadPropertiesFromSrc();
 	}
 	
@@ -46,7 +44,7 @@ public class UnionPayController {
 	@RequestMapping(path="/pay")
 	public void unionPay(@RequestParam("orderId")long orderId,HttpServletResponse resp) throws IOException{
 				final String merId = "777290058110048";
-				Order order = orderService.getOrderById(orderId);
+				PatentDocOrder order = patentDocWorkflowService.getOrderById(orderId);
 				String txnAmt = String.valueOf((int)order.getAmount()*100);
 				
 				Map<String, String> requestData = new HashMap<String, String>();
@@ -72,14 +70,14 @@ public class UnionPayController {
 				//前台通知地址 （需设置为外网能访问 http https均可），支付成功后的页面 点击“返回商户”按钮的时候将异步通知报文post到该地址
 				//如果想要实现过几秒中自动跳转回商户页面权限，需联系银联业务申请开通自动返回商户权限
 				//异步通知参数详见open.unionpay.com帮助中心 下载  产品接口规范  网关支付产品接口规范 消费交易 商户通知
-				requestData.put("frontUrl", UnionConfig.frontUrl);
+				requestData.put("frontUrl", UnionConfig.patent_doc_frontUrl);
 				
 				//后台通知地址（需设置为【外网】能访问 http https均可），支付成功后银联会自动将异步通知报文post到商户上送的该地址，失败的交易银联不会发送后台通知
 				//后台通知参数详见open.unionpay.com帮助中心 下载  产品接口规范  网关支付产品接口规范 消费交易 商户通知
 				//注意:1.需设置为外网能访问，否则收不到通知    2.http https均可  3.收单后台通知后需要10秒内返回http200或302状态码 
 				//    4.如果银联通知服务器发送通知后10秒内未收到返回状态码或者应答码非http200，那么银联会间隔一段时间再次发送。总共发送5次，每次的间隔时间为0,1,2,4分钟。
 				//    5.后台通知地址如果上送了带有？的参数，例如：http://abc/web?a=b&c=d 在后台通知处理程序验证签名之前需要编写逻辑将这些字段去掉再验签，否则将会验签失败
-				requestData.put("backUrl", UnionConfig.backUrl);
+				requestData.put("backUrl", UnionConfig.patent_doc_backUrl);
 				
 				//////////////////////////////////////////////////
 				//
@@ -142,14 +140,14 @@ public class UnionPayController {
 			LogUtil.writeLog("验证签名结果[成功].");
 			System.out.println(valideData.get("orderId")); //其他字段也可用类似方式获取
 			long orderId=Long.valueOf(valideData.get("orderId"));
-			orderService.processOrderPaidSuccess(orderId);
+			patentDocWorkflowService.processOrderPaidSuccess(orderId);
 			
 		}
 		req.setAttribute("result", page.toString());
 		req.getRequestDispatcher(pageResult).forward(req, resp);
 		LogUtil.writeLog("FrontRcvResponse前台接收报文返回结束");
 		
-		return "redirect:/order/list.html";
+		return "redirect:/editor/patentDocList.html";
 	}
 	
 	@RequestMapping(path="/backRcvResponse")
@@ -190,7 +188,7 @@ public class UnionPayController {
 			String respCode =valideData.get("respCode"); //获取应答码，收到后台通知了respCode的值一般是00，可以不需要根据这个应答码判断。
 			
 			long ordersId=Long.valueOf(orderId);
-			orderService.processOrderPaidSuccess(ordersId);
+			patentDocWorkflowService.processOrderPaidSuccess(ordersId);
 		}
 		LogUtil.writeLog("BackRcvResponse接收后台通知结束");
 		//返回给银联服务器http 200  状态码

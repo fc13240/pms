@@ -65,4 +65,6 @@ public interface NoticeService {
 	
 	public void addNoticeRemark(String noticeId, String content, int userId);
 	
+	String noticeExportExcel(List<Long> noticeIds,String exportExcelName) throws IOException;
+	
 }

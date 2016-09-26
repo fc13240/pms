@@ -600,5 +600,21 @@
 		(#{userId},#{patentId})
 		</foreach>
 	</insert>
+
+	<select id="getUserPatentsByIds" resultMap="PatentWithShareUsers">
+		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, sp.patent_status_text,sp.transaction_status,sp.create_time,pt.patent_type_id, 
+							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username
+		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date,  p.internal_code, p.patent_type,p.transaction_status,p.create_time,
+				ps.patent_status_id, ps.patent_status_desc, p.patent_status_text
+			from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
+		 where p.patent_id in 
+		 		<foreach item="patentId" collection="patentIds"
+			     open="(" separator="," close=")">
+			   #{patentId}
+			</foreach>
+		 ) as sp left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
+		    join users u on u.user_id = up.user	
+	</select>	
+	
 	
 </mapper>

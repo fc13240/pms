@@ -158,6 +158,16 @@ public class Notice {
 	public void setTimeLimt(Integer timeLimt) {
 		this.timeLimt = timeLimt;
 	}
-
+	
+	public String getRemainDaysDescription(){
+		String remainDaysDescription="";
+		if(this.getRemainDays()== -1){
+			remainDaysDescription="已超期";
+		}else{
+			remainDaysDescription="期限"+":"+this.getRemainDays()+"天";
+		}
+		return remainDaysDescription;
+		
+	}
 
 }
