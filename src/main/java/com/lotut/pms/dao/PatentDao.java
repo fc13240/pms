@@ -111,4 +111,6 @@ public interface PatentDao {
 	
 	void deleteShareUser(long patentId, int ownerId, int shareUserId);
 	
+	List<Patent> getUserPatentsByIds(List<Long> patentIds);
+	
 }

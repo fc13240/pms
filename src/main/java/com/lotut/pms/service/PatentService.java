@@ -64,7 +64,7 @@ public interface PatentService {
 	 
 	 void autoUpdatePatents(InputStream is,int userId) throws IOException;
 	 
-	 String generatePatentExportExcel(List<Long> patentIds,String excelName) throws IOException;
+//	 String generatePatentExportExcel(List<Long> patentIds,String excelName) throws IOException;
 	 
 	 public boolean  addOrUpdatePatents(List<Patent> patents,int userId);
 	 
@@ -118,6 +118,8 @@ public interface PatentService {
 	boolean savePatentDetail(Patent patent);
 	
 	void deleteShareUser(long patentId,int ownerId,int shareUserId);
+	
+	String patentExportExcel(List<Long> patentIds,String exportExcelName) throws IOException;
 	
 }
 

@@ -113,7 +113,7 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 
 	@Override
 	public List<GoodsFirstColumn> getFirstColumn() {
-		// TODO Auto-generated method stub
+		
 		return patentMapper.getFirstColumn();
 	}
 
@@ -273,20 +273,26 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 
 	@Override
 	public Patent showPatentDetail(long patentId) {
-		// TODO Auto-generated method stub
+		
 		return patentMapper.showPatentDetail(patentId);
 	}
 
 	@Override
 	public boolean savePatentDetail(Patent patent) {
-		// TODO Auto-generated method stub
+		
 		return patentMapper.savePatentDetail(patent);
 	}
 
 	@Override
 	public void deleteShareUser(long patentId, int ownerId, int shareUserId) {
-		// TODO Auto-generated method stub
+		
 		patentMapper.deleteShareUser(patentId,ownerId,shareUserId);
+	}
+
+	@Override
+	public List<Patent> getUserPatentsByIds(List<Long> patentIds) {
+		
+		return patentMapper.getUserPatentsByIds(patentIds);
 	}
 
 

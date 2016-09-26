@@ -13,6 +13,7 @@ import com.lotut.pms.domain.NoticeRemark;
 import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.Patent;
 
 public interface NoticeMapper {
 	//分页
@@ -63,4 +64,6 @@ public interface NoticeMapper {
 	List<NoticeRemark> getNoticeRemarks(String noticeId);
 	
 	void addNoticeRemark(@Param("noticeId")String noticeId, @Param("content")String content,@Param("userId") int userId);
+	
+	List<Notice> getUserNoticesByIds(@Param("noticeIds")List<Long> noticeIds);
 }
