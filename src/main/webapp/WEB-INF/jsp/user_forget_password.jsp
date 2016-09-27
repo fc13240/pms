@@ -23,24 +23,11 @@
 	<!-- ace styles -->
 	<link rel="stylesheet" href="<s:url value='/static/css/ace.css'/>" />
 
-	<!--[if lte IE 9]>
-		<link rel="stylesheet" href="<s:url value='/static/css/ace-part2.css'/>" />
-	<![endif]-->
 	<link rel="stylesheet" href="<s:url value='/static/css/ace-rtl.css'/>" />
 
-	<!--[if lte IE 9]>
-	  <link rel="stylesheet" href="<s:url value='/static/css/ace-ie.css'/>" />
-	<![endif]-->
 
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-
-	<!--[if lt IE 9]>
-	<script src="<s:url value='/static/js/html5shiv.js'/>"></script>
-	<script src="<s:url value='/static/js/respond.js'/>"></script>
-	<![endif]-->
 
 	<script src="<s:url value='/temp/js/jquery.min.js'/>"></script>
-	<script src="<s:url value='/temp/js/formutil.js'/>"></script>
 	
 	<style type="text/css">
 			#loginError{
@@ -51,29 +38,13 @@
 	
 	<link href="<s:url value='/static/css/lrtk.css'/>" rel="stylesheet" type="text/css" />
 
-	<script type="text/javascript" src="<s:url value='/static/js/koala.min.1.5.js'/>"></script>	
 </head>
 
 <body class="login-layout" >
 <div style="position:absolute;z-index: 99999; left:20px; top:0px; width:100px; height:100px;">
 <img src="<s:url value='/temp/images/logo_long.png'/>" width="80px;">
 </div>
-<!--   
-<table width="100%">
-	<tr>
-	<td height="30">&nbsp;</td>
-	</tr>
-	<tr>             									
-	    <td height="94" align="center" valign="top" background="<s:url value='/static/images/top-di.png'/>">
-	    	<table width="100%"  border="0" cellspacing="0" cellpadding="0">
-		        <tr>
-		         <td width="100"></td>
-		          <td width="560" height="93" background="<s:url value='/static/images/logo-login.png'/>">&nbsp;</td>
-		          <td align="right" valign="middle"><div style="float:right; margin-right:20px; color:#54a932;">&nbsp;&nbsp;</div></td>
-		        </tr>
-	     	</table></td>
-	</tr>
-</table>-->
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tbody>
       <tr>
@@ -103,10 +74,9 @@
 <div class="maincenter" style="width:400px;margin:30px auto;padding: 30px 0;font:'Microsoft YaHei';">
    	<div class="maincenter-box-tip" style="margin-bottom:40px;">
        	<p style="color: #6c6c6c;font-weight:700;font-size:18px;font:'Microsoft YaHei';">
-           输入用户名找回密码
+           输入用户名找回密码,登录邮箱查看密码
         </p>
     </div>
-    <%-- <form action="<s:url value='/user/user_find_password_form.html'/>" method="post" id="login-form" class="form-horizontal"> --%>
        
 		<div class="ui-form-item     ">
         	<label >用户名:</label>
@@ -116,61 +86,10 @@
 		<div style="width:340px;margin-top:50px;">
 		    <input type="button" onclick="forgetName()" value="确定" class="width-35  btn btn-sm btn-primary" style="background-color:#C43330 !important;border-color: #C43330;">
 		</div>
-	<!-- </form> -->
+
 </div>
 				
-	<!-- basic scripts -->
-
-	<!--[if !IE]> -->
-
-	<script type="text/javascript">
-		if('ontouchstart' in document.documentElement) document.write("<script src='<s:url value='/static/js/jquery.mobile.custom.js'/>'>"+"<"+"/script>");
-	</script>
-
-	<!-- inline scripts related to this page -->
-	<script type="text/javascript">
-		jQuery(function($) {
-		 $(document).on('click', '.toolbar a[data-target]', function(e) {
-			e.preventDefault();
-			var target = $(this).data('target');
-			$('.widget-box.visible').removeClass('visible');//hide others
-			$(target).addClass('visible');//show target
-		 });
-		});
-		
-		
-		
-		//you don't need this, just used for changing background
-		jQuery(function($) {
-		 $('#btn-login-dark').on('click', function(e) {
-			$('body').attr('class', 'login-layout');
-			$('#id-text2').attr('class', 'white');
-			$('#id-company-text').attr('class', 'blue');
-			
-			e.preventDefault();
-		 });
-		 $('#btn-login-light').on('click', function(e) {
-			$('body').attr('class', 'login-layout light-login');
-			$('#id-text2').attr('class', 'grey');
-			$('#id-company-text').attr('class', 'blue');
-			
-			e.preventDefault();
-		 });
-		 $('#btn-login-blur').on('click', function(e) {
-			$('body').attr('class', 'login-layout blur-login');
-			$('#id-text2').attr('class', 'white');
-			$('#id-company-text').attr('class', 'light-blue');
-			
-			e.preventDefault();
-		 });
-		 
-		});
-	</script>
-	<script type="text/javascript">
-			
-	</script>
-	<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
-	<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>
+	
 	<!-- 页脚 -->
 	<br><br><br><br><br><br><br>
 	<div id="footer">
@@ -199,9 +118,14 @@ function forgetName() {
 		url: "<s:url value='/user/user_find_password_form.html'/>", 
 		type: 'post',
 		data:{"username" : username},
-		success: function(success) {
-			alert(success);
-			alert("发送成功");
+		success: function(isSuccess) {
+			if(isSuccess==1){
+				alert('邮件发送成功，请查收！')
+			}else if(isSuccess==2){
+				alert('用户名不存在！');
+			}else{
+				alert('发送邮件失败！');
+			}
 		},
 		error: function() {
 			alert('发送邮件失败1');

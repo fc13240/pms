@@ -18,7 +18,7 @@
 		<intercept-url pattern="/favicon.ico" access="isAnonymous()"/>
 		<intercept-url pattern="/user/registerForm.html" access="isAnonymous()"/>
 		<intercept-url pattern="/user/user_forget_password.html" access="isAnonymous()"/>
-		<intercept-url pattern="/user/user_forget_password_form.html" access="isAnonymous()"/>
+		<intercept-url pattern="/user/user_find_password_form.html" access="isAnonymous()"/>
 		<intercept-url pattern="/user/register.html" access="isAnonymous()"/>
 		<intercept-url pattern="/**" access="isAuthenticated()"/>
 		<form-login login-page="/loginForm.html" default-target-url="/patent/list.html" />

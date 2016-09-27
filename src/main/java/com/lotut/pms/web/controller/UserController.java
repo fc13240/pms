@@ -183,8 +183,8 @@ public class UserController {
 	
     @RequestMapping(path = "/user_find_password_form",method = RequestMethod.POST)  
     public void userFindPasswordForm(HttpServletResponse response,PrintWriter out,@RequestParam String username) throws IOException{  
-    	
-    	WebUtils.writeJsonStrToResponse(response, username);
+    	int isSuccess=1;
+    	WebUtils.writeJsonStrToResponse(response, isSuccess);
     }  		
 	
 	
