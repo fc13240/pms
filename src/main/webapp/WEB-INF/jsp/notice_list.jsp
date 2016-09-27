@@ -713,7 +713,7 @@ function batchProcessNotice(processStatus) {
 					buttons: {
 						Ok: function() {
 							$(this).dialog("close");
-							/* location.reload(); */
+							location.reload(); 
 						}
 					}	
 				});
