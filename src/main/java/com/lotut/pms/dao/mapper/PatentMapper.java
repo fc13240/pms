@@ -132,5 +132,9 @@ public interface PatentMapper {
 	void savePatentShareUser(@Param("userId") int userIds,@Param("patentId") long patentId);
 
 	List<Patent> getUserPatentsByIds(@Param("patentIds")List<Long> patentIds);
+	
+	void updateDocumentStatusText(@Param("patentStatusText") String patentStatusText,@Param("internalCode") String internalCode);
+	
+	void updateDocumentStatus(@Param("patentStatus") int patentStatus,@Param("internalCode") String internalCode);
 
 }
