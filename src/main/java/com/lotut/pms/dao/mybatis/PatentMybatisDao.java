@@ -294,8 +294,8 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	}
 	
 	@Override
-	public long getPatentIdByInternalCode(String internalCode) {
-		return patentMapper.getPatentIdByInternalCode(internalCode);
+	public long getPatentIdByInternalCode(String internalCode,int currentUserId) {
+		return patentMapper.getPatentIdByInternalCode(internalCode,currentUserId);
 	}
 
 //	@Override
