@@ -402,7 +402,7 @@
 	</insert>
 	
 	<update id="updatePatentDocByInternalCode" parameterType="Notice">
-		update patent_documents set app_no=#{patent.internalCode},app_data=#{patent.appData} where internal_code=#{patent.internalCode}
+		update patent_documents set app_no=#{patent.internalCode},app_date=#{patent.appDate} where internal_code=#{patent.internalCode}
 	</update>
 	
 	<select id="getUserNoticesByIds" resultMap="NoticeResultMap">

@@ -595,10 +595,11 @@
 	
 	<insert id="savePatentShareUser">
 		insert into user_patents(user,patent) 
-		values
-		<foreach collection="userIds" item="userId" separator=",">
+		values(#{userId},#{patentId})
+		on duplicate key update user=#{userId},patent=#{patentId}
+		<!-- <foreach collection="userIds" item="userId" separator=",">
 		(#{userId},#{patentId})
-		</foreach>
+		</foreach> -->
 	</insert>
 
 	<select id="getUserPatentsByIds" resultMap="PatentWithShareUsers">

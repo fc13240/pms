@@ -96,8 +96,10 @@ public class NoticeXmlParser {
 			patent.setAppDate(appDateNode == null ? null : new SimpleDateFormat("yyyyMMdd").parse(appDateNode.getStringValue()));
 			patent.setInternalCode(internalCodeNode ==  null ? null : internalCodeNode.getStringValue());
 			patent.setOwnerId(PrincipalUtils.getCurrentUserId());
+			System.out.println("PatentTypeNode: " + patentTypeNode.getStringValue());
 			Integer patentType = getPatentType(patentTypeNode.getStringValue());
 			PatentType patentTypeObj = null;
+			System.out.println(patentType);
 			if (patentType !=  null) {
 				patentTypeObj =  new PatentType();
 				patentTypeObj.setPatentTypeId(patentType);
@@ -117,15 +119,15 @@ public class NoticeXmlParser {
 			return null;
 		}
 		
-		if (patentTypeStr == "0" || patentTypeStr == "3") {
+		if (patentTypeStr.equals("0") || patentTypeStr.equals("3")) {
 			return 1;
 		}
 		
-		if (patentTypeStr == "1" || patentTypeStr == "4") {
+		if (patentTypeStr.equals("1") || patentTypeStr.equals("4")) {
 			return 2;
 		}
 		
-		if (patentTypeStr == "2") {
+		if (patentTypeStr.equals("2")) {
 			return 3;
 		}
 		
