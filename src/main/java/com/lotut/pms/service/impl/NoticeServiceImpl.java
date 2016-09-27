@@ -247,13 +247,27 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	public void savepatentShareUser(List<Notice> notices){
 		String internalCode = null;
+		//List<Map<String, Integer>> userPatentRecords =new ArrayList<>();
+		
 		for(Notice notice:notices){
 			internalCode = notice.getPatent().getInternalCode();
 			List<Integer> shareUserIds = patentDao.getPatentDocShareUesrs(internalCode);
 			long patentId = patentDao.getPatentIdByInternalCode(internalCode);
+//			for(String shareUserId :shareUserIds){
+//				System.out.println(shareUserId);
+//			}
+//			Long patentId = patentDao.getPatentIdByInternalCode(internalCode);
+//			Map<String, Integer> map =new HashMap<>();
+//			int patentIdOfInt= Integer.valueOf(patentId.toString());
+//			for(String shareUserId:shareUserIds){
+//				map.put(shareUserId, patentIdOfInt);
+//				
+//			}
+//			userPatentRecords.add(map);
+//			sharePatentDao.insertUserPatents(userPatentRecords);
 			for(Integer shareUserId:shareUserIds){
-				patentDao.savePatentShareUser(shareUserId, patentId);
-				
+			patentDao.savePatentShareUser(shareUserId, patentId);
+			
 			}
 		}
 	}
