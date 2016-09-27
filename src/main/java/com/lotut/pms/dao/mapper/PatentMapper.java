@@ -36,8 +36,8 @@ public interface PatentMapper {
 	
 	List<Patent> searchUserPatents(@Param("searchCondtion")PatentSearchCondition searchCondtion);
 	
-	
 	int searchUserPatentsCount(PatentSearchCondition searchCondition);
+	
 	List<Patent> searchUserPatentsByPage(PatentSearchCondition searchCondtion);
 	
 	List<PatentType> getAllPatentTypes();
@@ -104,7 +104,6 @@ public interface PatentMapper {
 	
 	void updateGoodPatents(@Param("price")int price,@Param("SecondColumn")int SecondColumn,@Param("patentId")int patentId);
 	
-
 	void changePrice(@Param("price")int price,@Param("patentId")int patentId);
 	
 	void changSecondColume(@Param("SecondColumn")int SecondColumn,@Param("patentId")int patentId);

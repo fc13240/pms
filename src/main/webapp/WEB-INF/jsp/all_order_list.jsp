@@ -68,7 +68,7 @@
 					  <td>订单日期开始</td>
 					  <td></td>
 					  <td>订单日期截止</td>
-					  <td>订单号</td>
+					  <td>关键字</td>
 					  <td></td>
 
 					  </tr>
@@ -91,7 +91,7 @@
 						<input style="width:108px;height:34px;" class="selectPointOfInterest form-control"  type="text" onclick="WdatePicker({el:'endAppDateId'})" style="height:18px;" id="endAppDateId" name="endAppDate" placeholder="结束时间" value="" readonly="readonly" >					  
 					  </td>
 					  <td>
-					  <input style="width:300px;height:34px;" class="t-input form-control" name="keyword" id="keywordId" value="" placeholder="订单号" class="t-input"/>
+					  <input style="width:300px;height:34px;" class="t-input form-control" name="keyword" id="keywordId" value="" placeholder="订单号/专利号" class="t-input"/>
 					  </td>
 					  <td><button class="button button-caution button-rounded" style="width:80px;" type="submit">查询</button></td>
 
