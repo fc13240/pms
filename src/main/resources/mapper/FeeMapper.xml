@@ -398,7 +398,7 @@
 	</select>
 	
 	<insert id="saveFee" parameterType="Fee">
-		insert into fees(deadline, fee_type, amount, patent, fee_monitor_status, invoice_title,fee_owner)
+		replace into fees(deadline, fee_type, amount, patent, fee_monitor_status, invoice_title,fee_owner)
 		values(#{deadline}, #{feeType},#{amount}, #{patent.patentId}, 2, #{invoiceTitle,javaType=string,jdbcType=VARCHAR},#{owner.userId})				
 	</insert>
 	
