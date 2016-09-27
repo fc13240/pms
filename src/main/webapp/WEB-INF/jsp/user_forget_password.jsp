@@ -39,7 +39,9 @@
 	<script src="<s:url value='/static/js/respond.js'/>"></script>
 	<![endif]-->
 
-	<script src="<s:url value='/static/js/jquery.js'/>"></script>
+	<script src="<s:url value='/temp/js/jquery.min.js'/>"></script>
+	<script src="<s:url value='/temp/js/formutil.js'/>"></script>
+	
 	<style type="text/css">
 			#loginError{
 				    color:#F00;
@@ -97,150 +99,30 @@
       </tr>
     </tbody>
 </table>
-	<div class="main-container" style="min-width:1200px;">
-		<div class="main-content">
-			<div class="row">
-				<div class="col-sm-4 col-sm-offset-1">
-					<div class="login-container">
-						<div class="position-relative">
-							<div style="margin-top:130px;margin-left:40px;"><img src="<s:url value='/static/images/logo.png'/>"></div>
-							<div id="login-box" class="login-box visible widget-box no-border" style="background-color:#D32F30;margin-top:10px;">
-								
-								<div class="widget-body">
-									<div class="widget-main">
-										<h4 class="header blue lighter bigger">
-											<i class="ace-icon fa fa-coffee green"></i>
-											LOTUT专利管家
-										</h4>
 
-										<div class="space-6"></div>
+<div class="maincenter" style="width:400px;margin:30px auto;padding: 30px 0;font:'Microsoft YaHei';">
+   	<div class="maincenter-box-tip" style="margin-bottom:40px;">
+       	<p style="color: #6c6c6c;font-weight:700;font-size:18px;font:'Microsoft YaHei';">
+           输入用户名找回密码
+        </p>
+    </div>
+    <%-- <form action="<s:url value='/user/user_find_password_form.html'/>" method="post" id="login-form" class="form-horizontal"> --%>
+       
+		<div class="ui-form-item     ">
+        	<label >用户名:</label>
+        	<input name="username" id="username" style="width:300px;" type="text" placeholder="请输入会员名" value="">
+        </div>
 
-										<form action="<s:url value='/login'/>" method="post" id="login-form" class="form-horizontal">
-										<se:csrfInput/>
-											<fieldset>
-												<label class="block clearfix">
-													<span class="block input-icon input-icon-right">
-														<input type="text" class="form-control" name="username" id="count" placeholder="用户名" autofocus="autofocus" required/>
-														<!-- 加一个提示区 --> 
-<%-- 														<span id="count_span">请输入用户名</span> --%>
-														<i class="ace-icon fa fa-user"></i>
-													</span>
-												</label>
-
-												<label class="block clearfix">
-													<span class="block input-icon input-icon-right">
-														<input type="password" class="form-control" name="password" id="password" placeholder="密码" required/>
-														<!-- 加一个提示区 -->
-														<c:if test="${param.error!= null}">
-															<span id="loginError">登录失败！请检查用户名或密码！</span>
-														</c:if>
-														
-														<i class="ace-icon fa fa-lock"></i>
-													</span>
-												</label>
-
-												<div class="space"></div>
-
-												<div class="clearfix">
-													<input type="submit" class="width-35 pull-right btn btn-sm btn-primary" style="font-size:16px;"  value="登录">
-												</div>
-
-												<div class="space-4"></div>
-											</fieldset>
-										</form>
-
-									</div><!-- /.widget-main -->
-
-									<div class="toolbar clearfix">
-										<div>
-											<a href="<s:url value='/user/registerForm.html'/>"  class="user-signup-link" >
-												我要注册
-												<i class="ace-icon fa fa-arrow-right"></i>
-											</a>
-											<a href="<s:url value='/user/user_forget_password.html'/>"  class="user-signup-link" >
-												忘记密码
-												<i class="ace-icon fa fa-arrow-right"></i>
-											</a>											
-										</div>
-									</div>
-								</div><!-- /.widget-body -->
-							</div><!-- /.login-box -->
-
-							
-						</div><!-- /.position-relative -->
-						
-					</div>
-					
-				</div><!-- /.col -->
-				<div class="lt-flash col-sm-5" style="margin-top:200px;">
+		<div style="width:340px;margin-top:50px;">
+		    <input type="button" onclick="forgetName()" value="确定" class="width-35  btn btn-sm btn-primary" style="background-color:#C43330 !important;border-color: #C43330;">
+		</div>
+	<!-- </form> -->
+</div>
 				
-					<!-- 代码 开始 -->
-					<div id="fsD1" class="focus" style="">  
-					    <div id="D1pic1" class="fPic">  
-					        <div class="fcon" style="display: none;">    
-					            <a target="_blank" href="http://g.lotut.com"><img src="<s:url value='/static/images/01.jpg'/>" style="opacity: 1; "></a>
-					            <span class="shadow"><a target="_blank" href="http://g.lotut.com">专利管理</a></span>
-					        </div>
-					        
-					        <div class="fcon" style="display: none;">
-					            <a target="_blank" href="http://g.lotut.com"><img src="<s:url value='/static/images/02.jpg'/>" style="opacity: 1; "></a>
-					            <span class="shadow"><a target="_blank" href="http://g.lotut.com">专利管理</a></span>
-					        </div>
-					        <div class="fcon" style="display: none;">
-					            <a target="_blank" href="http://so.lotut.com"><img src="<s:url value='/static/images/03.jpg'/>" style="opacity: 1; "></a>
-					            <span class="shadow"><a target="_blank" href="http://so.lotut.com">专利搜索</a></span>
-					        </div>					  
-					    </div>
-					    <div class="fbg">  
-					    <div class="D1fBt" id="D1fBt">  
-					        <a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>1</i></a>  
-					        <a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>2</i></a>  
-					        <a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>3</i></a> 
-					          </div>  
-					    </div>  
-					    <span class="prev"></span>   
-					    <span class="next"></span>    
-					</div>  
-					<script type="text/javascript">
-						Qfast.add('widgets', { path: "<s:url value='/static/js/terminator2.2.min.js'/>", type: "js", requires: ['fx'] });  
-						Qfast(false, 'widgets', function () {
-							K.tabs({
-								id: 'fsD1',   //焦点图包裹id  
-								conId: "D1pic1",  //** 大图域包裹id  
-								tabId:"D1fBt",  
-								tabTn:"a",
-								conCn: '.fcon', //** 大图域配置class       
-								auto: 1,   //自动播放 1或0
-								effect: 'fade',   //效果配置
-								eType: 'click', //** 鼠标事件
-								pageBt:true,//是否有按钮切换页码
-								bns: ['.prev', '.next'],//** 前后按钮配置class                          
-								interval: 3000  //** 停顿时间  
-							}) 
-						})  
-					</script>
-					<!-- 代码 结束 -->				
-				
-				</div>
-				
-			</div><!-- /.row -->
-		</div><!-- /.main-content -->
-	</div><!-- /.main-container -->
-
 	<!-- basic scripts -->
 
 	<!--[if !IE]> -->
-	<script type="text/javascript">
-		window.jQuery || document.write("<script src='<s:url value='/static/js/jquery.js'/>'>"+"<"+"/script>");
-	</script>
 
-	<!-- <![endif]-->
-
-	<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='<s:url value='/static/js/jquery1x.js'/>'>"+"<"+"/script>");
-</script>
-<![endif]-->
 	<script type="text/javascript">
 		if('ontouchstart' in document.documentElement) document.write("<script src='<s:url value='/static/js/jquery.mobile.custom.js'/>'>"+"<"+"/script>");
 	</script>
@@ -310,6 +192,26 @@
 	    </div>
 	  </div>
 	</div>
+<script type="text/javascript">
+function forgetName() {
+	var username=$("#username").val();
+	$.ajax({
+		url: "<s:url value='/user/user_find_password_form.html'/>", 
+		type: 'post',
+		data:{"username" : username},
+		success: function(success) {
+			alert(success);
+			alert("发送成功");
+		},
+		error: function() {
+			alert('发送邮件失败1');
+		}
+	});	
+}
+
+
+</script>
+
 		
 </body>
 
