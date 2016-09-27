@@ -422,7 +422,7 @@
 				 <foreach item="noticeId" collection="noticeIds"
 				     open="(" separator="," close=")">
 				   #{noticeId}
-				</foreach>) and nps.notice_process_status_id=1
+				</foreach>) 
 			  ) as un
 			join user_patents up on un.patent_id = up.patent
 		  	join users u on up.user = u.user_id	
