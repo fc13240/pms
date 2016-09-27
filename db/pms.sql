@@ -918,8 +918,19 @@ INSERT INTO payment_methods VALUES(3, '缴费凭证支付');
 
 ALTER TABLE patent_doc_app_person ADD COLUMN proxy_file VARCHAR(200) COMMENT '委托书文件地址';
 ALTER TABLE patent_doc_app_person ADD COLUMN app_person_attachment_file VARCHAR(200) COMMENT '附件存放地址';
-ALTER TABLE patent_doc_inventor ADD COLUMN inventor_attachment_file VARCHAR(200) COMMENT '附件存放地址';
+ALTER TABLE patent_doc_inventor ADD COLUMN inventor_attachment_file VARCHAR(200) COMMENT '附件存放地址';s
 
 alter table patent_documents add column app_data date comment '申请日';
 UPDATE fee_payment_status SET fee_payment_status_desc='订单完成' WHERE fee_payment_status_id=5;
 UPDATE order_status SET status_description='订单完成' WHERE order_status_id=3;
+
+ALTER TABLE patent_documents ADD COLUMN patent_doc_status_text VARCHAR(150) COMMENT '案件状态描述';
+
+INSERT INTO patent_doc_status(patent_doc_status_id,patent_doc_status_desc)
+VALUES(20,'等待申请费'),
+(21,'待答复'),
+(22,'等年登印费'),
+(23,'待恢复'),
+(24,'失效'),
+(25,'专利权维持'),
+(26,'其他');

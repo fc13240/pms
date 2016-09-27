@@ -190,6 +190,7 @@ public class NoticeController {
 			noticeService.uploadNotices(zipFilePath);
 			return "upload_success";
 		} catch (Exception e) {
+			e.printStackTrace();
 			model.addAttribute("message", "上传失败，请检查压缩包格式稍后再试!");
 			return "common_message";
 		}

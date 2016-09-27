@@ -25,7 +25,6 @@ import com.lotut.pms.domain.Patent;
 import com.lotut.pms.service.NoticeService;
 import com.lotut.pms.service.utils.NoticeExcelGenerator;
 import com.lotut.pms.service.utils.NoticeXmlParser;
-import com.lotut.pms.service.utils.PatentExcelGenerator;
 import com.lotut.pms.service.utils.ZipUtils;
 
 import net.lingala.zip4j.core.ZipFile;
@@ -173,8 +172,20 @@ public class NoticeServiceImpl implements NoticeService {
 				
 				addUserPatentRecord(patent);
 			} else {
+				
 				patentDao.updatePatent(patent);
 				notice.getPatent().setPatentId(patentInDb.getPatentId());
+				String patentStatusText = patentInDb.getPatentStatusText();
+				String internalCode = patent.getInternalCode();
+				
+				final int INCREASE_SIZE = 19;
+				if(patentInDb.getPatentStatus()!=null){
+					int patentStatus = patentInDb.getPatentStatus().getPatentStatusId()+INCREASE_SIZE;
+					patentDao.updateDocumentStatus(patentStatus,internalCode);
+				}else{
+					
+				}
+				patentDao.updateDocumentStatusText(patentStatusText,internalCode);
 			}
 			
 			noticeDao.insertOrUpdateNotice(notice);
@@ -248,12 +259,14 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	public void savepatentShareUser(List<Notice> notices){
 		String internalCode = null;
+		
 		for(Notice notice:notices){
 			internalCode = notice.getPatent().getInternalCode();
 			List<Integer> shareUserIds = patentDao.getPatentDocShareUesrs(internalCode);
 			long patentId = patentDao.getPatentIdByInternalCode(internalCode);
-			patentDao.savePatentShareUser(shareUserIds, patentId);
+			for(Integer shareUserId:shareUserIds){
+				patentDao.savePatentShareUser(shareUserId, patentId);
+			}
 		}
 	}
-	
 }

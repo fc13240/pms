@@ -402,7 +402,7 @@
 	</insert>
 	
 	<update id="updatePatentDocByInternalCode" parameterType="Notice">
-		update patent_documents set app_no=#{patent.internalCode},app_data=#{patent.appData} where internal_code=#{patent.internalCode}
+		update patent_documents set app_no=#{patent.internalCode},app_date=#{patent.appDate} where internal_code=#{patent.internalCode}
 	</update>
 	
 	<select id="getUserNoticesByIds" resultMap="NoticeResultMap">
@@ -422,7 +422,7 @@
 				 <foreach item="noticeId" collection="noticeIds"
 				     open="(" separator="," close=")">
 				   #{noticeId}
-				</foreach>) and nps.notice_process_status_id=1
+				</foreach>) 
 			  ) as un
 			join user_patents up on un.patent_id = up.patent
 		  	join users u on up.user = u.user_id	
