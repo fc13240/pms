@@ -8,6 +8,7 @@ import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 
 
+
 public interface UserService {
 	
 	List<User> getAllUsers(Page page);
@@ -52,4 +53,6 @@ public interface UserService {
 	List<ContactAddress> getContactAddressesByReceiver(int userId,String receiver);
 
 	List<User> searchUsers(String keyword,int userId);
+
+	//User findUserByName(String userName);
 }

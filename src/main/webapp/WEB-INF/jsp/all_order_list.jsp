@@ -172,7 +172,7 @@
 										  <td><a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a></td>
 										  <td>${fee.patent.name}</td>
 										  <td>${fee.patent.firstAppPerson}</td>
-										  <td>${fee.patent.patentStatus.statusDescription}</td>
+										  <td>${fee.patent.patentStatusText}</td>
 										  <td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
 										  <td>${fee.feeType}</td>
 										  <td>${fee.amount} </td>

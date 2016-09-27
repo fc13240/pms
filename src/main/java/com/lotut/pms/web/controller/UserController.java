@@ -1,6 +1,7 @@
 package com.lotut.pms.web.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -180,6 +181,15 @@ public class UserController {
 		WebUtils.writeJsonStrToResponse(response, cities);
 	}
 	
+    @RequestMapping(path = "/user_find_password_form",method = RequestMethod.POST)  
+    public void userFindPasswordForm(HttpServletResponse response,PrintWriter out,@RequestParam String username) throws IOException{  
+    	
+    	WebUtils.writeJsonStrToResponse(response, username);
+    }  		
+	
+	
+	
+	
 	@RequestMapping(path="/getDistrictsByCity", method=RequestMethod.GET)
 	public void getDistrictsByCity(@RequestParam("city")long cityId, 
 			Model model, HttpServletResponse response) throws IOException {
@@ -235,4 +245,12 @@ public class UserController {
 		session.setAttribute("picName", picName);
 		
 	}
+	
+    @RequestMapping(path = "/user_forget_password", method=RequestMethod.GET)  
+    public String userForgetPassword(HttpSession httpSession){  
+        return "user_forget_password";
+    }  	
+
+    
+    
 }
