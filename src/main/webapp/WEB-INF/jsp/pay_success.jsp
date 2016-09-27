@@ -17,7 +17,7 @@
         padding:0;
         margin:0;
         font-family:"微软雅黑";
-        background-color:#242736
+       /*  background-color:#242736 */
     }
     .header {
         width:100%;
@@ -210,7 +210,7 @@
     .footer {
         width:100%;
         height:120px;
-        background-color:#242735
+        /* background-color:#242735 */
     }
     .footer-sub a,span {
         color:#808080;

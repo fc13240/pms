@@ -216,8 +216,6 @@
 						<form action="<s:url value='/notice/search.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 						  <div class="t-third" style="clear:both;">
-						  
-						  
 							<table class="search-table">
 							  <tr>
 							  <td>专利类型</td>
@@ -296,7 +294,6 @@
 						<!-- PAGE CONTENT BEGINS -->
 						<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
 						  <div class="ta-top" style="margin-left:8px;"> 
-						  
 						  	<table class="search-table">
 					  			<tr>
 					  				<td>
@@ -327,7 +324,6 @@
 					  				<td>
 										<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportNotices()">表格导出</button>
 									</td>		
-					  								  										  									  				
 					  			</tr>
 					  		</table>		
 						  </div>
@@ -361,8 +357,7 @@
 								  <input style="text-align:center" type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>">
 								  <span class="lbl"></span></label></td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
-								<td style="text-align:center"><c:out value="${notice.patent.appNo}"/>
-								</td>
+								<td style="text-align:center"><c:out value="${notice.patent.appNo}"/></td>
 								<td style="text-align:center"><c:out value="${notice.patent.name}"/></td>
 								<td style="text-align:center"><c:out value="${notice.patent.firstAppPerson}"/></td>
 								<td style="text-align:center"><c:out value="${notice.patent.patentStatusText}"/></td>
@@ -428,8 +423,6 @@
 								
 								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
-											  
-										  
 									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
 									  >
 									  <c:out value="${processStatus.processStatusDescription}"/>
@@ -437,8 +430,8 @@
 									</c:forEach>
 								  </select>
 								</td>
-								
 								</se:authorize>
+								
 								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS','ROLE_USER') and not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center" class="date_status">
 								<span class="qixian">
@@ -714,13 +707,13 @@ function batchProcessNotice(processStatus) {
 		$.ajax({
 			url: "<s:url value='/notice/processNotices.html'/>?notices=" + notices + "&processStatus=" + processStatus, 
 			type: 'get', 
-			success: function() {
+			success: function(data) {
 				$("<div>操作成功</div>").dialog({
 					modal: true,
 					buttons: {
 						Ok: function() {
 							$(this).dialog("close");
-							location.reload();
+							/* location.reload(); */
 						}
 					}	
 				});

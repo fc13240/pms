@@ -172,8 +172,20 @@ public class NoticeServiceImpl implements NoticeService {
 				
 				addUserPatentRecord(patent);
 			} else {
+				
 				patentDao.updatePatent(patent);
 				notice.getPatent().setPatentId(patentInDb.getPatentId());
+				String patentStatusText = patentInDb.getPatentStatusText();
+				String internalCode = patent.getInternalCode();
+				
+				final int INCREASE_SIZE = 19;
+				if(patentInDb.getPatentStatus()!=null){
+					int patentStatus = patentInDb.getPatentStatus().getPatentStatusId()+INCREASE_SIZE;
+					patentDao.updateDocumentStatus(patentStatus,internalCode);
+				}else{
+					
+				}
+				patentDao.updateDocumentStatusText(patentStatusText,internalCode);
 			}
 			
 			noticeDao.insertOrUpdateNotice(notice);
@@ -247,29 +259,14 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	public void savepatentShareUser(List<Notice> notices){
 		String internalCode = null;
-		//List<Map<String, Integer>> userPatentRecords =new ArrayList<>();
 		
 		for(Notice notice:notices){
 			internalCode = notice.getPatent().getInternalCode();
 			List<Integer> shareUserIds = patentDao.getPatentDocShareUesrs(internalCode);
 			long patentId = patentDao.getPatentIdByInternalCode(internalCode);
-//			for(String shareUserId :shareUserIds){
-//				System.out.println(shareUserId);
-//			}
-//			Long patentId = patentDao.getPatentIdByInternalCode(internalCode);
-//			Map<String, Integer> map =new HashMap<>();
-//			int patentIdOfInt= Integer.valueOf(patentId.toString());
-//			for(String shareUserId:shareUserIds){
-//				map.put(shareUserId, patentIdOfInt);
-//				
-//			}
-//			userPatentRecords.add(map);
-//			sharePatentDao.insertUserPatents(userPatentRecords);
 			for(Integer shareUserId:shareUserIds){
-			patentDao.savePatentShareUser(shareUserId, patentId);
-			
+				patentDao.savePatentShareUser(shareUserId, patentId);
 			}
 		}
 	}
-	
 }

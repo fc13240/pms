@@ -107,10 +107,12 @@
 	<resultMap type="Patent" id="PatentByAppNoAndOwnerResultMap">
 		<id property="patentId" column="patent_id"/>
 		<result property="appNo" column="app_no"/>
+		<result property="patentStatusText" column="patent_status_text"/>
+		<association property="patentStatus" resultMap="PatentStatusResultMap"/>
 	</resultMap>
 	
 	<select id="getPatentByAppNoAndOwner" resultMap="PatentByAppNoAndOwnerResultMap">
-		select patent_id, app_no
+		select patent_id, app_no,patent_status,patent_status_text
 		  from patents
 		 where app_no = #{appNo} and patent_owner = #{ownerId}
 	</select>
@@ -616,6 +618,15 @@
 		 ) as sp left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
 		    join users u on u.user_id = up.user	
 	</select>	
+	
+	
+	<update id="updateDocumentStatusText">
+		update patent_documents set patent_doc_status_text=#{patentStatusText} where internal_code=#{internalCode}
+	</update>
+	
+	<update id="updateDocumentStatus">
+		update patent_documents set patent_doc_status=#{patentStatus} where internal_code=#{internalCode}
+	</update>
 	
 	
 </mapper>

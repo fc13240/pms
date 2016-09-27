@@ -72,7 +72,7 @@
 							<td>订单日期开始</td>
 							<td></td>
 							<td>订单日期截止</td>
-							<td>订单号</td>
+							<td>关键字</td>
 							<td></td>
 						</tr>
 						<tr>
@@ -169,7 +169,7 @@
 							</td>
 							<td>${fee.patent.name}</td>
 							<td>${fee.patent.firstAppPerson}</td>
-							<td>${fee.patent.patentStatus.statusDescription}</td>
+							<td>${fee.patent.patentStatusText}</td>
 							<td><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
 							<td>${fee.feeType}</td>
 							<td>${fee.amount} </td>

@@ -77,7 +77,7 @@
 	<select id="selectUserOrders" parameterType="Page" resultMap="OrderMap">
 		SELECT od.create_time, od.totalAmount, od.order_id, od.address_id, od.receiver, 
 				od.order_status_id, od.status_description, p.patent_id, p.app_no, p.patent_name, 
-				p.app_person, ps.patent_status_id, ps.patent_status_desc, f.fee_id, f.deadline,
+				p.app_person,p.patent_status_text, ps.patent_status_id, ps.patent_status_desc, f.fee_id, f.deadline,
 				f.amount, f.fee_type, f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc,
 				od.user_id, od.username, od.name
   		FROM 
@@ -102,7 +102,7 @@
 		</if>	
 		 SELECT od.create_time, od.totalAmount, od.order_id, od.address_id, od.receiver, 
 				od.order_status_id, od.status_description, p.patent_id, p.app_no, p.patent_name, 
-				p.app_person, ps.patent_status_id, ps.patent_status_desc, f.fee_id, f.deadline,
+				p.app_person,p.patent_status_text, ps.patent_status_id, ps.patent_status_desc, f.fee_id, f.deadline,
 				f.amount, f.fee_type, f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc
   		FROM 
 				(SELECT o.create_time, o.amount totalAmount, o.order_id, ca.id AS address_id, ca.receiver, os.order_status_id, os.status_description
@@ -119,8 +119,14 @@
 			 		<![CDATA[ and DATE_FORMAT(o.create_time, '%Y-%m-%d') <= #{endAppDate} ]]>
 			 	</if>	
 			 	<if test="keyword != null">
-					and (o.order_id like #{keyword_pattern})
-				</if>
+			   and (o.order_id LIKE #{keyword_pattern} OR o.order_id IN (
+				SELECT oi.order_id FROM order_items oi 
+					left JOIN fees f ON f.fee_id = oi.fee_id
+					left JOIN patents p ON f.patent = p.patent_id
+					WHERE p.app_no LIKE #{keyword_pattern} 
+			 
+			 ))
+			 </if>
 				 ORDER BY o.create_time desc
 				limit #{page.startIndex}, #{page.pageSize}) od
 			  JOIN order_items oi ON od.order_id = oi.order_id
@@ -128,6 +134,7 @@
 			  JOIN patents p ON f.patent = p.patent_id
 			  left JOIN patent_status ps ON p.patent_status = ps.patent_status_id
 			  JOIN fee_payment_status fs ON f.fee_payment_status = fs.fee_payment_status_id
+			  
 	</select>
 	
 	
@@ -148,7 +155,13 @@
 	 		<![CDATA[ and o.create_time <= #{endAppDate} ]]>
 	 	</if>	
 	 	<if test="keyword != null">
-			and o.order_id like #{keyword_pattern}
+			AND (o.order_id LIKE #{keyword_pattern} OR o.order_id IN (
+				SELECT oi.order_id FROM order_items oi 
+					left JOIN fees f ON f.fee_id = oi.fee_id
+					left JOIN patents p ON f.patent = p.patent_id
+					WHERE p.app_no LIKE #{keyword_pattern}
+			 
+			 ))
 		</if>
 	
 	</select>
@@ -194,7 +207,7 @@
 	<select id="getAllNeedProcessOrders" parameterType="Page" resultMap="OrderMap">
 		SELECT od.create_time, od.totalAmount, od.order_id, od.address_id, od.receiver, 
 				od.order_status_id, od.status_description, p.patent_id, p.app_no, p.patent_name, 
-				p.app_person, ps.patent_status_id, ps.patent_status_desc, f.fee_id, f.deadline,
+				p.app_person, p.patent_status_text, ps.patent_status_id, ps.patent_status_desc, f.fee_id, f.deadline,
 				f.amount, f.fee_type, f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc,
 				od.user_id, od.username, od.name
   		FROM 
@@ -216,7 +229,7 @@
 	
 	<select id="getUserOrdersByStatus" resultMap="OrderMap">
 		select  o.create_time, o.amount totalAmount, o.order_id, ca.id as address_id, ca.receiver, os.order_status_id, os.status_description,
-			p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc,
+			p.patent_id, p.app_no, p.patent_name, p.app_person, p.patent_status_text,ps.patent_status_id, ps.patent_status_desc,
 			f.fee_id, f.deadline, f.amount, f.fee_type, f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc
 		from orders o join order_status os on o.order_status = os.order_status_id
 			join contact_addresses ca on o.post_address = ca.id
@@ -260,7 +273,7 @@
 		</if>	
 		SELECT od.create_time, od.totalAmount, od.order_id, od.address_id, od.receiver, 
 				od.order_status_id, od.status_description, p.patent_id, p.app_no, p.patent_name, 
-				p.app_person, ps.patent_status_id, ps.patent_status_desc, f.fee_id, f.deadline,
+				p.app_person,p.patent_status_text, ps.patent_status_id, ps.patent_status_desc, f.fee_id, f.deadline,
 				f.amount, f.fee_type, f.invoice_title, fs.fee_payment_status_id, fs.fee_payment_status_desc,
 				od.user_id, od.username, od.name
   		FROM 
@@ -279,9 +292,15 @@
 			 	<if test="endAppDate != null">
 			 		<![CDATA[ and DATE_FORMAT(o.create_time, '%Y-%m-%d') <= #{endAppDate} ]]>
 			 	</if>	
-			 	<if test="keyword != null">
-					and (o.order_id like #{keyword_pattern})
-				</if>
+			 	 <if test="keyword != null">
+			  and (o.order_id LIKE #{keyword_pattern} OR o.order_id IN (
+				SELECT oi.order_id FROM order_items oi 
+					left JOIN fees f ON f.fee_id = oi.fee_id
+					left JOIN patents p ON f.patent = p.patent_id
+					WHERE p.app_no LIKE #{keyword_pattern}
+			 
+			 ))
+			 </if>
 				 ORDER BY o.create_time desc
 				limit #{page.startIndex}, #{page.pageSize}) od
 			  JOIN order_items oi ON od.order_id = oi.order_id
@@ -289,6 +308,7 @@
 			  JOIN patents p ON f.patent = p.patent_id
 			  left JOIN patent_status ps ON p.patent_status = ps.patent_status_id
 			  JOIN fee_payment_status fs ON f.fee_payment_status = fs.fee_payment_status_id	
+			 
 	</select>
 	
 	<select id="getAllNeedProcessOrdersBySearchCount"  resultType="int">
@@ -312,15 +332,22 @@
 			 	<if test="endAppDate != null">
 			 		<![CDATA[ and DATE_FORMAT(o.create_time, '%Y-%m-%d') <= #{endAppDate} ]]>
 			 	</if>	
-			 	<if test="keyword != null">
-					and (o.order_id like #{keyword_order})
-				</if>
+			 	 <if test="keyword != null">
+			  and (o.order_id LIKE #{keyword_order} OR o.order_id IN (
+				SELECT oi.order_id FROM order_items oi 
+					left JOIN fees f ON f.fee_id = oi.fee_id
+					left JOIN patents p ON f.patent = p.patent_id
+					WHERE p.app_no LIKE #{keyword_order}
+			 
+			 ))
+			 </if>
 				 ORDER BY o.create_time desc) od
 			  JOIN order_items oi ON od.order_id = oi.order_id
 			  JOIN fees f ON f.fee_id = oi.fee_id
 			  JOIN patents p ON f.patent = p.patent_id
 			  left JOIN patent_status ps ON p.patent_status = ps.patent_status_id
 			  JOIN fee_payment_status fs ON f.fee_payment_status = fs.fee_payment_status_id	
+			 
 	</select>
 	
 	<update id="updateOrderFeesStatus">

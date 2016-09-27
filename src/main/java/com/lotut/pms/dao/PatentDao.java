@@ -118,4 +118,8 @@ public interface PatentDao {
 	
 	List<Patent> getUserPatentsByIds(List<Long> patentIds);
 	
+	void updateDocumentStatusText(String patentStatusText,String internalCode);
+	
+	void updateDocumentStatus(int patentStatus,String internalCode);
+	
 }

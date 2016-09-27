@@ -312,5 +312,15 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		return patentMapper.getUserPatentsByIds(patentIds);
 	}
 
+	@Override
+	public void updateDocumentStatusText(String patentStatusText, String internalCode) {
+		patentMapper.updateDocumentStatusText(patentStatusText, internalCode);
+	}
+
+	@Override
+	public void updateDocumentStatus(int patentStatus, String internalCode) {
+		patentMapper.updateDocumentStatus(patentStatus, internalCode);
+	}
+
 
 }
