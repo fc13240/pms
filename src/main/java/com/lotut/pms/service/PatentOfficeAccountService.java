@@ -26,4 +26,8 @@ public interface PatentOfficeAccountService {
 	List<PatentOfficeAccount> getAllAccountByPage(Page page);
 	
 	int getUserAccountsCount(int userId);
+	
+	int getAllAccountCount();
+	
+	
 }

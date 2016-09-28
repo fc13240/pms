@@ -27,5 +27,7 @@ public interface PatentOfficeAccountMapper {
 	List<PatentOfficeAccount> getAllAccount();
 	
 	List<PatentOfficeAccount> getAllAccountBypage(Page page);
+	
+	int getAllAccountCount();
 
 }

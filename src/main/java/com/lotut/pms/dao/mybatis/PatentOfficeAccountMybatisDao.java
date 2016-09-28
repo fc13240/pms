@@ -66,4 +66,9 @@ public class PatentOfficeAccountMybatisDao extends SqlSessionDaoSupport implemen
 	public List<PatentOfficeAccount> getAllAccountBypage(Page page) {
 		return patentOfficeAccountMapper.getAllAccountBypage(page);
 	}
+
+	@Override
+	public int getAllAccountCount() {
+		return patentOfficeAccountMapper.getAllAccountCount();
+	}
 }

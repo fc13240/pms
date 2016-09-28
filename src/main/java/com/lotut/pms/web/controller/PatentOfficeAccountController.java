@@ -49,10 +49,11 @@ public class PatentOfficeAccountController {
 		if (PrincipalUtils.isOrderProcessor()) {
 			accountType=1;
 			List<PatentOfficeAccount> accounts = patentOfficeAccountService.getAllAccountByPage(page);
+			int totalRecords = patentOfficeAccountService.getAllAccountCount();
+			page.setTotalRecords(totalRecords);
 			model.addAttribute("accounts", accounts);
 			model.addAttribute("accountType", accountType);
 			model.addAttribute("page", page);
-			return "patent_office_account_list";
 		}else{
 			
 			int userId = PrincipalUtils.getCurrentUserId();
@@ -63,15 +64,15 @@ public class PatentOfficeAccountController {
 			model.addAttribute("accounts", accounts);
 			model.addAttribute("accountType", accountType);
 			model.addAttribute("page", page);
-			return "patent_office_account_list";
 		}
+		
+		return "patent_office_account_list";
 		
 	}
 	
 	@RequestMapping(path="/delete", method=RequestMethod.GET)
-	public String deleteOfficeAccount(@RequestParam("accountId")long accountId,Model model){
+	public void deleteOfficeAccount(@RequestParam("accountId")long accountId,Model model){
 		patentOfficeAccountService.deleteOfficeAccount(accountId);
-		return "patent_office_account_list";
 	}
 	
 

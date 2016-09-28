@@ -24,4 +24,6 @@ public interface PatentOfficeAccountDao {
 	List<PatentOfficeAccount> getAllAccount();
 	
 	List<PatentOfficeAccount> getAllAccountBypage(Page page);
+	
+	int getAllAccountCount();
 }

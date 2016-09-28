@@ -47,10 +47,13 @@
 		select name,username,password,account_id,user,patent_update_time from patent_office_accounts order by 
 		patent_update_time ASC
 	</select>
+	<select id="getAllAccountCount" resultType="int">
+		select count(*)from patent_office_accounts
+	</select>
 	
 	<select id="getAllAccountBypage" parameterType="Page" resultMap="patentOfficeAccountResultMap">
 		select name,username,password,account_id,user,patent_update_time from patent_office_accounts order by 
-		patent_update_time ASC limit #{startIndex},#{#pageSize}
+		patent_update_time ASC limit #{startIndex},#{pageSize}
 	</select>
 	
 	<insert id="addOfficeAccount" parameterType="PatentOfficeAccount" >

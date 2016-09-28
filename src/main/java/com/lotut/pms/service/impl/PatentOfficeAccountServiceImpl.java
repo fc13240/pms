@@ -58,4 +58,9 @@ public class PatentOfficeAccountServiceImpl implements PatentOfficeAccountServic
 	public List<PatentOfficeAccount> getAllAccountByPage(Page page) {
 		return patentOfficeAccountDao.getAllAccountBypage(page);
 	}
+
+	@Override
+	public int getAllAccountCount() {
+		return patentOfficeAccountDao.getAllAccountCount();
+	}
 }
