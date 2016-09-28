@@ -93,28 +93,28 @@
 						  				</td>
 						  	 <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">  
  						  		<td>
-		                            <a href="javascript:return void" onclick="batchEntrust()" >
+		                            <a href="javascript:return void" onclick="batchEntrust()">
 									<button style="margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >批量委托</button>
 									</a>
 						  		</td>
 						  	 </se:authorize>
-						  	 <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG')"> 
+						  	 <se:authorize access="hasAnyRole('ROLE_PLATFORM')"> 
 							  		 <td>
-			                            <a href="javascript:return void" onclick="batchProxyOrg()" >
+			                            <a href="javascript:return void" onclick="batchProxyOrg()">
 										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >分配给代理机构</button>
 										</a>
 							  		</td>
 						  	  </se:authorize>
 						  		  <se:authorize access="hasRole('ROLE_PROXY_ORG')">  
 							  		<td>
-			                            <a href="javascript:return void" onclick="batchCustomerSupport()" >
+			                            <a href="javascript:return void" onclick="batchCustomerSupport()">
 										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >分配给客服</button>
 										</a>
 							  		</td> 
 						  		  </se:authorize>  
 						  		  <se:authorize access="hasRole('ROLE_CUSTOMER_SUPPORT')">  
 							  		<td>
-			                            <a href="javascript:return void" onclick="batchTechPerson()" >
+			                            <a href="javascript:return void" onclick="batchTechPerson()">
 										<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-placement="bottom" >分配给技术员</button>
 										</a>
 							  		</td>
@@ -175,9 +175,7 @@
 								</td>
 								<td style="text-align:center">
 									<se:authorize access="hasRole('ROLE_TECH')">
-											<c:if test="${patentDoc.patentDocStatus.patentDocStatusId == 7 || patentDoc.patentDocStatus.patentDocStatusId == 8}">
 						                    	<a  href="<s:url value='/editor/showUploadForm.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">上传</a>
-						       				</c:if>
 					                   </se:authorize>
 					       
 				                   <c:if test="${patentDoc.patentDocUrl != null}">
