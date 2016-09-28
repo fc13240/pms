@@ -26,6 +26,7 @@ import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.UserService;
+import com.lotut.pms.util.EmailUtils;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
 
@@ -183,24 +184,15 @@ public class UserController {
 	
     @RequestMapping(path = "/user_find_password_form",method = RequestMethod.POST)  
     public void userFindPasswordForm(HttpServletResponse response,PrintWriter out,@RequestParam String username) throws IOException{  
-    	User user = userService.getUserDetailByUsername(username);
+    	User user = userService.findByName(username);
     	
     	String processStatus="";
     	if (user == null) {
     		processStatus="2";
     	}else{
-        	//String email=user.getEmail();
-    		processStatus="1";
-    		
+    		processStatus=userService.findPassword(user);	
     	}
-
-    	//1、通过用户名找邮箱 ，没有返回，提示用户没有绑定邮箱
-    	//2、找到邮箱就开始修改密码，改密码失败，返回 重置密码失败，请重新操作
-    	//3、修改密码成功后就开始发送邮件，发送邮件失败，返回 提示邮件发送失败
-    	//4、邮件发送成功
-    	
-    	
-    	WebUtils.writeJsonStrToResponse(response, processStatus);
+    	out.write(processStatus);
     }  		
 	
 	
