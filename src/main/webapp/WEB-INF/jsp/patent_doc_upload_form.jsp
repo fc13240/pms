@@ -38,7 +38,7 @@
 						<input type="hidden" id="patentDocId" name="patentDocId" value="${patentDocId}">
 					</form> 
 					<div style="height:10px;">&nbsp;</div> 
-					<span style="color:#666;">友情提示：建议上传后缀名为.doc或.docx格式的专利文档!
+					<span style="color:#666;">友情提示：建议上传后缀名为.rar或.zip格式压缩的专利文档!
 					</span>
 				</div>
 			</div>
@@ -67,10 +67,10 @@
 			beforeSubmit : function() {
 				var name=$("#filename").val();
 				var mime = name.toLowerCase().substr(name.lastIndexOf("."));
-				if(mime ==".doc" || mime ==".docx"){
+				if(mime ==".rar" || mime ==".zip"){
 					return true;
 				}else{
-					alert("请上传后缀名为.doc或.docx格式的专利文档！");
+					alert("请上传后缀名为.rar或.zip格式的专利文档！");
 					return false;
 				}
 			}, 
