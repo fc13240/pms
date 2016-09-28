@@ -23,7 +23,7 @@
   	   SELECT un.* ,u.user_id  ,u.username FROM 	
   	(SELECT p.inventor_id ,p.inventor_name,p.inventor_id_number,p.inventor_nationality ,p.inventor_mobile ,p.inventor_email,p.inventor_attachment_file,
   		p.inventor_other_information  FROM common_inventor p WHERE inventor_id IN		
- 		(SELECT inventor FROM user_inventor WHERE USER =#{userId}) limit #{startIndex}, #{pageSize}) AS un  JOIN user_inventor up ON un.inventor_id = up.inventor
+ 		(SELECT inventor FROM user_inventor WHERE USER =#{userId}) ORDER BY create_time DESC limit #{startIndex}, #{pageSize}  ) AS un  JOIN user_inventor up ON un.inventor_id = up.inventor
 		  	JOIN users u ON up.user = u.user_id
   	</select>
 	
