@@ -40,6 +40,12 @@
 		 where user_id = #{userId}
 	</select>
 	
+	<select id="getByUsername" resultMap="UserResultMap">
+		select user_id, name, email, phone
+		  from users
+		 where  username= #{username}
+	</select>	
+	
 	<update id="updateUserDetail" parameterType="User">
 		update users set name=#{name},email=#{email},phone=#{phone} where user_id=#{userId}
 	</update>

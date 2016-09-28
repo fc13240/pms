@@ -49,7 +49,12 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 	public User getById(int userId) {
 		return userMapper.getById(userId);
 	}
-
+	
+	@Override
+	public User getByUsername(String username) {
+		return userMapper.getByUsername(username);
+	}
+	
 	@Override
 	public List<Map<String, String>> getAllProvinces() {
 		return userMapper.getAllProvinces();
@@ -139,6 +144,8 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 		
 		return userMapper.getPlatformUser();
 	}
+
+
 
 	
 }

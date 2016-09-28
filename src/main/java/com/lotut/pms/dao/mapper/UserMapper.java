@@ -23,6 +23,8 @@ public interface UserMapper {
 	
 	User getById(int userId);
 	
+	User getByUsername(String username);
+	
 	List<Map<String, String>> getAllProvinces();
 	
 	List<Map<String, String>> getCitiesByProvinceId(int provinceId);
@@ -53,4 +55,7 @@ public interface UserMapper {
 	List<User> searchUsers(@Param("keyword") String keyword,@Param("userId") int userId);
 	
 	List<User> getPlatformUser();
+
+
+
 }

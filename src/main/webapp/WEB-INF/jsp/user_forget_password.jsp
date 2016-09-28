@@ -128,12 +128,10 @@ function forgetName() {
 			}
 		},
 		error: function() {
-			alert('发送邮件失败1');
+			alert('发送邮件失败！');
 		}
 	});	
 }
-
-
 </script>
 
 		

@@ -61,7 +61,10 @@ public class UserServiceImpl implements UserService {
 	public User getUserDetail(int userId) {
 		return userDao.getById(userId);
 	}
-
+	@Override
+	public User getUserDetailByUsername(String username) {
+		return userDao.getByUsername(username);
+	}
 	@Override
 	public List<Map<String, String>> getAllProvinces() {
 		return userDao.getAllProvinces();
@@ -141,4 +144,6 @@ public class UserServiceImpl implements UserService {
 	public List<User> searchUsers(String keyword,int userId) {
 		return userDao.searchUsers(keyword,userId);
 	}
+
+
 }

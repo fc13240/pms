@@ -25,6 +25,7 @@ public interface UserService {
 	boolean changePassword(String lastPassword,String newPassword);
 	
 	User getUserDetail(int userId);
+	User getUserDetailByUsername(String username);
 	
 	List<Map<String, String>> getAllProvinces();
 	
@@ -53,6 +54,8 @@ public interface UserService {
 	List<ContactAddress> getContactAddressesByReceiver(int userId,String receiver);
 
 	List<User> searchUsers(String keyword,int userId);
+
+
 
 	//User findUserByName(String userName);
 }

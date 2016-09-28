@@ -20,7 +20,7 @@ public interface UserDao {
 	void updatePassword(User user);
 	
 	User getById(int userId);
-	
+	User getByUsername(String username);
 	List<Map<String, String>> getAllProvinces();
 	
 	List<Map<String, String>> getCitiesByProvinceId(int provinceId);
@@ -50,4 +50,7 @@ public interface UserDao {
 	List<User> searchUsers(String keyword,int userId);
 	
 	List<User> getPlatformUser();
+
+
+
 }
