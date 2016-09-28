@@ -114,14 +114,17 @@
 <script type="text/javascript">
 function forgetName() {
 	var username=$("#username").val();
+	var status;
 	$.ajax({
 		url: "<s:url value='/user/user_find_password_form.html'/>", 
 		type: 'post',
 		data:{"username" : username},
 		success: function(processStatus) {
-			if(processStatus==1){
+			alert(processStatus);
+			status=processStatus;
+			if(status=="1"){
 				alert('邮件发送成功，请查收！')
-			}else if(processStatus==2){
+			}else if(status=="2"){
 				alert('用户名不存在！');
 			}else{
 				alert('发送邮件失败！');

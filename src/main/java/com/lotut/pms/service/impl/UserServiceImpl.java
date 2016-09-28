@@ -11,6 +11,7 @@ import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.UserService;
+import com.lotut.pms.util.EmailUtils;
 import com.lotut.pms.util.PrincipalUtils;
 
 public class UserServiceImpl implements UserService {
@@ -60,10 +61,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserDetail(int userId) {
 		return userDao.getById(userId);
-	}
-	@Override
-	public User getUserDetailByUsername(String username) {
-		return userDao.getByUsername(username);
 	}
 	@Override
 	public List<Map<String, String>> getAllProvinces() {
@@ -145,5 +142,49 @@ public class UserServiceImpl implements UserService {
 		return userDao.searchUsers(keyword,userId);
 	}
 
+	@Override
+	public User findByName(String username) {
+		return userDao.findByName(username);
+	}
+
+	@Override
+	public String findPassword(User user) {
+    	String toEmail=user.getEmail();
+    	String statusType="";
+    	if(toEmail.length() != 0){
+    		String newPassword=EmailUtils.roundPassword(5);//得到随机密码
+    		boolean success = resetPassword(user, newPassword);
+    		
+    		if(success){
+    			EmailUtils.sendResetPasswordEmail(toEmail,newPassword);
+    			statusType="1";//重置密码成功
+    		}else{
+    			
+    			statusType="3";//修改密码失败
+    		}
+    		
+    		
+    	}else{
+    		statusType="6";//邮箱不存在
+    		
+    	}
+    	//2、设置随机密码，找到邮箱就开始修改密码，改密码失败，返回 重置密码失败，请重新操作
+    	//3、修改密码成功后就开始发送邮件，发送邮件失败，返回 提示邮件发送失败
+    	//4、邮件发送成功		
+		
+		
+		
+		return statusType;
+	}
+
+	//随机密码
+	@Transactional
+	public boolean resetPassword(User user ,String newPassword){
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			user.setVisiblePassword(newPassword);
+			user.setPassword(encoder.encode(newPassword));
+			userDao.updatePassword(user);
+			return true;
+	}
 
 }
