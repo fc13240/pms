@@ -118,10 +118,10 @@ function forgetName() {
 		url: "<s:url value='/user/user_find_password_form.html'/>", 
 		type: 'post',
 		data:{"username" : username},
-		success: function(isSuccess) {
-			if(isSuccess==1){
+		success: function(processStatus) {
+			if(processStatus==1){
 				alert('邮件发送成功，请查收！')
-			}else if(isSuccess==2){
+			}else if(processStatus==2){
 				alert('用户名不存在！');
 			}else{
 				alert('发送邮件失败！');
