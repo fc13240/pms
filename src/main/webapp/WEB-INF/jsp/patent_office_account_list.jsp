@@ -95,11 +95,9 @@
 			              </tr>
 			            </c:forEach>
 			          </tbody>
-			        </table>				
+			        </table>
 				</div>
-			</div>
-			 <div style="height:30px;background:#fff;">	
-				 <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1">首页</a>
+				<div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1">首页</a>
 			              <c:choose>
 			                <c:when test="${page.currentPage - 1 > 0}"> <a href="?currentPage=${page.currentPage - 1}">上一页</a> </c:when>
 			                <c:when test="${page.currentPage - 1 <= 0}"> <a href="?currentPage=1">上一页</a> </c:when>
@@ -126,10 +124,7 @@
 				              	条记录 
 			              </span> 
 			       </div>
-				</div>
-
-
-		  </div>		
+			</div>
 		  <!--right end-->	
 		  
 		</div>
