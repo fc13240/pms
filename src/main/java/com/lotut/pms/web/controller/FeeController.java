@@ -252,6 +252,6 @@ public class FeeController {
 			fee.setOwner(user);
 			fee.setPatent(new Patent(patentId));
 			feeService.saveFee(fee);
-			return "add_patent_success";
+			return "add_fee_success";
 		}
 }
