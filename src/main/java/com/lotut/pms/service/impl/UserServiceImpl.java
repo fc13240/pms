@@ -163,17 +163,11 @@ public class UserServiceImpl implements UserService {
     			statusType="3";//修改密码失败
     		}
     		
-    		
     	}else{
     		statusType="6";//邮箱不存在
     		
     	}
-    	//2、设置随机密码，找到邮箱就开始修改密码，改密码失败，返回 重置密码失败，请重新操作
-    	//3、修改密码成功后就开始发送邮件，发送邮件失败，返回 提示邮件发送失败
-    	//4、邮件发送成功		
-		
-		
-		
+
 		return statusType;
 	}
 

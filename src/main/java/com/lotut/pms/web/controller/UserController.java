@@ -190,16 +190,8 @@ public class UserController {
     	if (user == null) {
     		processStatus="2";
     	}else{
-        	//String toEmail=user.getEmail();
-    		processStatus=userService.findPassword(user);
-        	
-        //	String newPassword=userService.roundPassword();
-        //	EmailUtils.sendResetPasswordEmail(toEmail,newPassword);
-    	//	processStatus="1";
-    		
+    		processStatus=userService.findPassword(user);	
     	}
-
-
     	out.write(processStatus);
     }  		
 	
