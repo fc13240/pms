@@ -13,8 +13,16 @@
 	</resultMap>
 	
 
-	<select id="getUserAccounts" parameterType="int" resultMap="patentOfficeAccountResultMap">
+	<select id="getUserAccounts" parameterType="Page" resultMap="patentOfficeAccountResultMap">
 		select account_id, user,name,username,password,patent_update_time
+		  from patent_office_accounts
+		 <if test="_parameter != null">
+		 where user = #{userId} order by patent_update_time asc limit #{startIndex},#{pageSize}
+		 </if>
+	</select>
+	
+	<select id="getUserAccountsCount" parameterType="int" resultType="int">
+		select count(*)
 		  from patent_office_accounts
 		 <if test="_parameter != null">
 		 where user = #{userId}
@@ -38,6 +46,11 @@
 	<select id="getAllAccount" resultMap="patentOfficeAccountResultMap">
 		select name,username,password,account_id,user,patent_update_time from patent_office_accounts order by 
 		patent_update_time ASC
+	</select>
+	
+	<select id="getAllAccountBypage" parameterType="Page" resultMap="patentOfficeAccountResultMap">
+		select name,username,password,account_id,user,patent_update_time from patent_office_accounts order by 
+		patent_update_time ASC limit #{startIndex},#{#pageSize}
 	</select>
 	
 	<insert id="addOfficeAccount" parameterType="PatentOfficeAccount" >

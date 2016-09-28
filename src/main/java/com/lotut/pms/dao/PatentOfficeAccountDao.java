@@ -1,17 +1,15 @@
 package com.lotut.pms.dao;
 
 import java.util.List;
-import java.util.Map;
 
-import com.lotut.pms.domain.ContactAddress;
-import com.lotut.pms.domain.PatentOfficeAccount;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.User;
+import com.lotut.pms.domain.PatentOfficeAccount;
 
 public interface PatentOfficeAccountDao {
 
 	
-	List<PatentOfficeAccount> getUserAccounts(Integer userId);
+	List<PatentOfficeAccount> getUserAccounts(Page page);
+	int getUserAccountsCount(int userId);
 	
 	void deleteOfficeAccount(long accountId);
 	
@@ -24,4 +22,6 @@ public interface PatentOfficeAccountDao {
 	void updatePatentsTime(long accountId);
 	
 	List<PatentOfficeAccount> getAllAccount();
+	
+	List<PatentOfficeAccount> getAllAccountBypage(Page page);
 }

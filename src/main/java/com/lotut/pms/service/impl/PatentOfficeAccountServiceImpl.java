@@ -1,20 +1,11 @@
 package com.lotut.pms.service.impl;
 
 import java.util.List;
-import java.util.Map;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.lotut.pms.dao.PatentOfficeAccountDao;
-import com.lotut.pms.dao.UserDao;
-import com.lotut.pms.domain.ContactAddress;
-import com.lotut.pms.domain.PatentOfficeAccount;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.User;
+import com.lotut.pms.domain.PatentOfficeAccount;
 import com.lotut.pms.service.PatentOfficeAccountService;
-import com.lotut.pms.service.UserService;
-import com.lotut.pms.util.PrincipalUtils;
 
 public class PatentOfficeAccountServiceImpl implements PatentOfficeAccountService {
 	private PatentOfficeAccountDao patentOfficeAccountDao;
@@ -24,8 +15,8 @@ public class PatentOfficeAccountServiceImpl implements PatentOfficeAccountServic
 	}
 	
 	@Override
-	public List<PatentOfficeAccount> getUserAccounts(Integer userId) {
-		return patentOfficeAccountDao.getUserAccounts(userId);
+	public List<PatentOfficeAccount> getUserAccounts(Page page) {
+		return patentOfficeAccountDao.getUserAccounts(page);
 	}
 
 	public void deleteOfficeAccount(long accountId){
@@ -52,8 +43,19 @@ public class PatentOfficeAccountServiceImpl implements PatentOfficeAccountServic
 		patentOfficeAccountDao.updatePatentsTime(accountId);
 	}
 
+
+	@Override
+	public int getUserAccountsCount(int userId) {
+		return patentOfficeAccountDao.getUserAccountsCount(userId);
+	}
+	
 	@Override
 	public List<PatentOfficeAccount> getAllAccount() {
 		return patentOfficeAccountDao.getAllAccount();
+	}
+	
+	@Override
+	public List<PatentOfficeAccount> getAllAccountByPage(Page page) {
+		return patentOfficeAccountDao.getAllAccountBypage(page);
 	}
 }

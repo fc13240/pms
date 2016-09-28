@@ -2,13 +2,14 @@ package com.lotut.pms.service;
 
 import java.util.List;
 
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentOfficeAccount;
 
 
 public interface PatentOfficeAccountService {
 	
 	
-	List<PatentOfficeAccount> getUserAccounts(Integer userId);
+	List<PatentOfficeAccount> getUserAccounts(Page page);
 	
 	void deleteOfficeAccount(long accountId);
 	
@@ -21,4 +22,8 @@ public interface PatentOfficeAccountService {
 	void updatePatentsTime(long accountId);
 	
 	List<PatentOfficeAccount> getAllAccount();
+	
+	List<PatentOfficeAccount> getAllAccountByPage(Page page);
+	
+	int getUserAccountsCount(int userId);
 }

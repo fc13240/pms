@@ -34,15 +34,17 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box">
-					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-			          <div class="ta-top" style="margin:8px;">
-			          <c:if test="${accountType==0}"> 
-			          <a href="<s:url value='/patentOfficeAccount/add_form.html'/>">
-			            <button style="width:220px;" class="button button-primary  button-rounded">添加中国专利电子申请的账户</button>  
-			            </a>
-			            </c:if> 
+					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> 
+						<span class="input-group-btn" >
+					          <div class="ta-top" style="margin:8px;">
+						          <c:if test="${accountType==0}"> 
+							          <a href="<s:url value='/patentOfficeAccount/add_form.html'/>">
+							            <button style="width:220px;" class="button button-primary  button-rounded">添加中国专利电子申请的账户</button>  
+							           </a>
+						            </c:if> 
+					          </div>
+			          	</span> 
 			          </div>
-			          </span> </div>
 			        <table id="simple-table" class="table table-striped table-bordered table-hover" >
 			          <thead>
 			            <tr class="simple_bag">
@@ -96,6 +98,36 @@
 			        </table>				
 				</div>
 			</div>
+			 <div style="height:30px;background:#fff;">	
+				 <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1">首页</a>
+			              <c:choose>
+			                <c:when test="${page.currentPage - 1 > 0}"> <a href="?currentPage=${page.currentPage - 1}">上一页</a> </c:when>
+			                <c:when test="${page.currentPage - 1 <= 0}"> <a href="?currentPage=1">上一页</a> </c:when>
+			              </c:choose>
+			              <c:choose>
+			                <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">下一页</a> </c:when>
+			                <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?currentPage=${page.currentPage+1}">下一页</a> </c:when>
+			                <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?currentPage=${page.totalPages}">下一页</a> </c:when>
+			              </c:choose>
+			              <c:choose>
+			                <c:when test="${page.totalPages==0}"> <a href="?currentPage=${page.currentPage}">尾页</a> </c:when>
+			                <c:otherwise> <a href="?currentPage=${page.totalPages}">尾页</a> </c:otherwise>
+			              </c:choose>
+			              <!-- 分页功能 End -->
+			              <input type="text" id="page.pageNo" style="width:50px;height:25px" name="currentPage" onKeyDown="gotoPageForEnter(event)"/>
+			              <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> 
+			              <span> 每页
+				              <select onChange="setPageSize()" style="height:25px;" id="pageSizeSelect">
+				                <option value="10">10</option>
+				                <option value="20">20</option>
+				                <option value="50">50</option>
+				                <option value="100">100</option>
+				              </select>
+				              	条记录 
+			              </span> 
+			       </div>
+				</div>
+
 
 		  </div>		
 		  <!--right end-->	
@@ -217,7 +249,46 @@
 				location.reload();
 			}
 		});		
-	}	
+	}
+	
+	function gotoPageForEnter(event) {
+		var e = event ? event : window.event;
+				
+		if(event.keyCode == 13) {
+			gotoPage();
+		}
+	}
+	
+	function gotoPage() {
+		var pageNo = document.getElementById("page.pageNo").value;
+		
+		if (isNaN(pageNo)) {
+			alert("请输入数值");
+			return;
+		}
+		
+		if(pageNo==""){
+			alert("请输入数值")
+			return;
+		}
+		
+		pageNo = parseInt(pageNo);
+		
+		if (pageNo < 1 || pageNo > parseInt("${page.totalPages}")) {
+			alert("只能输入1-${page.totalPages}之间的数值");
+			return;
+		}
+		
+		var url = "<s:url value='/patentOfficeAccount/list.html'/>?currentPage=" + pageNo;
+		
+		
+		location.href = url
+		
+	}
+	
+	$(function() {
+		formutil.setElementValue("#pageSizeSelect", ${page.pageSize});
+	})
 </script>
 
 </body>
