@@ -26,6 +26,7 @@ import com.lotut.pms.service.NoticeService;
 import com.lotut.pms.service.utils.NoticeExcelGenerator;
 import com.lotut.pms.service.utils.NoticeXmlParser;
 import com.lotut.pms.service.utils.ZipUtils;
+import com.lotut.pms.util.PrincipalUtils;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
@@ -260,10 +261,11 @@ public class NoticeServiceImpl implements NoticeService {
 	public void savepatentShareUser(List<Notice> notices){
 		String internalCode = null;
 		
+		int userId = PrincipalUtils.getCurrentUserId();
 		for(Notice notice:notices){
 			internalCode = notice.getPatent().getInternalCode();
 			List<Integer> shareUserIds = patentDao.getPatentDocShareUesrs(internalCode);
-			long patentId = patentDao.getPatentIdByInternalCode(internalCode);
+			long patentId = patentDao.getPatentIdByInternalCode(internalCode,userId);
 			for(Integer shareUserId:shareUserIds){
 				patentDao.savePatentShareUser(shareUserId, patentId);
 			}

@@ -591,8 +591,8 @@
 		select user_id from user_patent_docs where patent_doc =( select patent_doc_id from patent_documents where internal_code=#{internalCode})
 	
 	</select>
-	<select id="getPatentIdByInternalCode" parameterType="String" resultType="long">
-		select patent_id from patents where internal_code=#{internalCode}
+	<select id="getPatentIdByInternalCode"  resultType="long">
+		select patent_id from patents where internal_code=#{internalCode} and patent_owner=#{currentUserId}
 	</select>
 	
 	<insert id="savePatentShareUser">
