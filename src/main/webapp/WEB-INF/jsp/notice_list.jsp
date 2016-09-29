@@ -316,11 +316,13 @@
 										<button style="margin-left:10px;" class="button button-rounded button-primary">专利分享</button>
 										</a>
 					  				</td>
+					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_USER')">
 					  				<td>
 										<a href="javascript:return void" onclick="batchChangeNoticePaperType(2)">
 										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">批量申请纸件</button>
 										</a>
-					  				</td>		
+					  				</td>
+					  				</se:authorize>		
 					  				<td>
 										<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportNotices()">表格导出</button>
 									</td>		
