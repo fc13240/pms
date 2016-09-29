@@ -60,7 +60,7 @@ public interface PatentService {
 	 
 	 Patent getPatentsByAppNo(Integer userId,String appNo);
 	 
-	 long getPatentIdByAppNo(Integer userId,String appNo);
+	 Long getPatentIdByAppNo(Integer userId,String appNo);
 	 
 	 void autoUpdatePatents(InputStream is,int userId) throws IOException;
 	 

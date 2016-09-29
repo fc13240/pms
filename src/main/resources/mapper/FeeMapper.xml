@@ -383,6 +383,10 @@
 		SELECT DISTINCT(f.type_text) FROM fee_types f LEFT JOIN patents p ON f.patent_type = p.patent_type WHERE p.app_no = #{appNo};
 	</select>
 	
+	<select id="getFeeTypesByPatentType" resultType="string">
+		SELECT DISTINCT(type_text) FROM fee_types WHERE patent_type = #{patentTypeId};
+	</select>
+	
 	<!--当前用户已缴纳的金额  -->
 	<select id="getFeeAllCountByUser" parameterType="int" resultType="long">
 		select case when sum is null then 0 else sum end as c

@@ -255,4 +255,9 @@ public class FeeServiceImpl implements FeeService {
 			return feeDao.getCountByDeadlinePayment(userId);
 		}
 
+		@Override
+		public List<String> getFeeTypesByPatentType(int patentTypeId) {
+			return feeDao.getFeeTypesByPatentType(patentTypeId);
+		}
+
 }

@@ -11,7 +11,7 @@
 	</li>
 
 	<li  class=""> 
-		<a href="<s:url value='/fee/addFeeFrom.html'/>"><h5>添加交费信息</h5> </a>
+		<a href="<s:url value='/fee/addFeeFrom.html'/>"><h5>以申请号交费</h5> </a>
 	</li>
  			
 	</ul>
