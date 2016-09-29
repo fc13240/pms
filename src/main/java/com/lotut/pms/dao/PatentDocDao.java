@@ -66,7 +66,7 @@ public interface PatentDocDao {
 	
 	List<PatentDoc> getUserPatentDocByRole(Page page);
 	
-	int getUserPatentDocCountByRole(Page page);
+	Integer getUserPatentDocCountByRole(Page page);
 	
 	List<PatentDoc> getPatentDocByTechAndCustomer(Page page,List<Integer> statusList);
 	
