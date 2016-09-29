@@ -345,8 +345,8 @@
 							  <th>共享人</th>
 							  <th width="100px">发文日</th>
 							  <th>通知书名称</th>
-							  <th width="120px">纸件申请</th>
-							  <th width="190px">期限和通知状态</th>
+							  <th width="100px">纸件申请</th>
+							  <th width="160px">期限和通知状态</th>
 							  <!-- 							<th>预览</th> 
 							  <th>下载</th>-->
 							  <th width="130">操作</th>
