@@ -115,7 +115,7 @@
 														<i class="ace-icon fa fa-retweet"></i>
 													</span>
 												</label>
-												
+												<!--  
 												<label class="block clearfix">
 													<span class="input-remark">真实姓名：</span>
 													<span class="input-icon input-icon-right" style="width:290px;">
@@ -123,12 +123,12 @@
 														<i class="ace-icon fa fa-user"></i>
 													</span>
 												</label>												
-												
+												-->
 												<label class="block clearfix">
 													<span class="input-remark">邮箱：</span>
 													<span class="input-icon input-icon-right" style="width:290px;">
 														<input type="email" id="email" class="form-control" placeholder="邮箱" name="email"  minlength="3" maxlength="100" required />
-														<i class="ace-icon fa fa-envelope"></i>
+														<i class="ace-icon fa fa-envelope">(请认真填写，用于找回密码！)</i>
 													</span>
 												</label>												
 
