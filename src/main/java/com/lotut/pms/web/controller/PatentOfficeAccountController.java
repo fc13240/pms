@@ -71,8 +71,9 @@ public class PatentOfficeAccountController {
 	}
 	
 	@RequestMapping(path="/delete", method=RequestMethod.GET)
-	public void deleteOfficeAccount(@RequestParam("accountId")long accountId,Model model){
+	public String deleteOfficeAccount(@RequestParam("accountId")long accountId,Model model){
 		patentOfficeAccountService.deleteOfficeAccount(accountId);
+		return "patent_office_account_list";
 	}
 	
 

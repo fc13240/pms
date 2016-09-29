@@ -935,5 +935,5 @@ VALUES(20,'等待申请费'),
 (25,'专利权维持'),
 (26,'其他');
 
-ALTER TABLE common_inventor add COLUMN create_time  TIMESTAMP NOT NULL;
-ALTER TABLE common_app_person add COLUMN create_time TIMESTAMP NOT NULL;
+ALTER TABLE common_inventor add COLUMN create_time  TIMESTAMP;
+ALTER TABLE common_app_person add COLUMN create_time TIMESTAMP;
