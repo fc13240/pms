@@ -87,7 +87,7 @@
           	<tbody>
           	<tr>
             	<td height="45" align="center" class="wel_user" valign="middle">
-欢迎您！请&nbsp;<a href="<s:url value='/user/loginForm.html'/>">登录</a>&nbsp;或&nbsp;<a href="<s:url value='/user/registerForm.html'/>">免费注册</a>              
+欢迎您！请&nbsp;<a href="<s:url value='/loginForm.html'/>">登录</a>&nbsp;或&nbsp;<a href="<s:url value='/registerForm.html'/>">免费注册</a>              
    
             	</td>
           	</tr>

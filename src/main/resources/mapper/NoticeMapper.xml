@@ -168,8 +168,15 @@
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1)	
 		 	<if test="patentType != null">
-		 		and p.patent_type = #{patentType}
-		 	</if>	
+		 		<choose>
+		 			<when test="patentType == 0">
+		 				and p.patent_type is null
+		 			</when>
+		 			<otherwise>
+		 				and p.patent_type = #{patentType}
+		 			</otherwise>
+		 		</choose>
+			 </if>	
 		 	<if test="noticeProcessStatus != null">
 		 		and n.process_status = #{noticeProcessStatus}
 		 	</if>	
@@ -234,7 +241,14 @@
 						join notice_process_status nps on nps.notice_process_status_id = n.process_status
 			 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1)
 			 	<if test="patentType != null">
-			 		and p.patent_type = #{patentType}
+			 		<choose>
+			 			<when test="patentType == 0">
+			 				and p.patent_type is null
+			 			</when>
+			 			<otherwise>
+			 				and p.patent_type = #{patentType}
+			 			</otherwise>
+			 		</choose>
 			 	</if>	
 			 	<if test="noticeProcessStatus != null">
 			 		and n.process_status = #{noticeProcessStatus}
@@ -345,11 +359,12 @@
 	</update>
 	
 	<select id="getUserNoticeCountByType" resultType="map">
-		select p.patent_type patentType,count(*) noticeCount
+		select IFNULL(p.patent_type, 0) patentType,count(*) noticeCount
 		  from notices n join patents p on n.patent = p.patent_id
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1) and n.process_status=1
 		 GROUP BY p.patent_type
+		 
 	</select>
 	
 	<select id="getUserNoticeCountByNoticeType" resultType="map">
@@ -402,7 +417,7 @@
 	</insert>
 	
 	<update id="updatePatentDocByInternalCode" parameterType="Notice">
-		update patent_documents set app_no=#{patent.internalCode},app_date=#{patent.appDate} where internal_code=#{patent.internalCode}
+		update patent_documents set app_no=#{patent.appNo},app_date=#{patent.appDate} where internal_code=#{patent.internalCode}
 	</update>
 	
 	<select id="getUserNoticesByIds" resultMap="NoticeResultMap">

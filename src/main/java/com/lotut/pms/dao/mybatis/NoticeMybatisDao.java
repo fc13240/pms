@@ -103,7 +103,7 @@ public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao 
 	}
 
 	@Override
-	public Map<String, Map<String, String>> getUserNoticeCountByType(int userId) {
+	public Map<Integer, Map<String, Long>> getUserNoticeCountByType(int userId) {
 		return noticeMapper.getUserNoticeCountByType(userId);
 	}
 

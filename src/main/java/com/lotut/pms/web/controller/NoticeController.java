@@ -60,7 +60,7 @@ public class NoticeController {
 		page.setPageSize(WebUtils.getPageSize(session));
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
-		Map<String,Map<String,String>> patentTypeCount=noticeService.getUserNoticeCountByType(userId);
+		Map<Integer,Map<String,Long>> patentTypeCount=noticeService.getUserNoticeCountByType(userId);
 		Map<String,Map<String,String>> noticeTypeCount=noticeService.getUserNoticeCountByNoticeType(userId);
 		Map<String,Map<String,String>> processStatusCount=noticeService.getUserNoticeCountByProcessStatus(userId);
 		Map<String, Map<String, String>> paperApplyTypeCount=noticeService.getUserNoticeCountByPaperApplyType(userId);
@@ -87,7 +87,7 @@ public class NoticeController {
 		page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
 		List<Notice> resultNotices = noticeService.searchUserNoticesWithPage(searchCondition);
-		Map<String,Map<String,String>> patentTypeCount=noticeService.getUserNoticeCountByType(searchCondition.getUserId());
+		Map<Integer,Map<String,Long>> patentTypeCount=noticeService.getUserNoticeCountByType(searchCondition.getUserId());
 		Map<String,Map<String,String>> noticeTypeCount=noticeService.getUserNoticeCountByNoticeType(searchCondition.getUserId());
 		Map<String,Map<String,String>> processStatusCount=noticeService.getUserNoticeCountByProcessStatus(searchCondition.getUserId());
 		Map<String,Map<String,String>> paperApplyTypeCount=noticeService.getUserNoticeCountByPaperApplyType(searchCondition.getUserId());
