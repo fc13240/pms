@@ -51,7 +51,7 @@ public interface NoticeService {
 	
 	void batchUpdateNoticesNoticePaperType(List<Integer> noticeIdList, int noticePaperApplyType);
 	
-	Map<String, Map<String, String>> getUserNoticeCountByType(int userId);
+	Map<Integer, Map<String, Long>> getUserNoticeCountByType(int userId);
 
 	Map<String, Map<String, String>> getUserNoticeCountByNoticeType(int userId);
 	
