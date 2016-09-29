@@ -25,6 +25,7 @@ import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.FeeSearchCondition;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FeeService;
 import com.lotut.pms.service.PatentService;
@@ -228,7 +229,9 @@ public class FeeController {
 		public String addFeeFrom(Model model){
 			int userId = PrincipalUtils.getCurrentUserId();
 			List<Patent> patents=patentService.getUserPatentsWithFee(userId);
+			List<PatentType> allPatentTypes = patentService.getAllPatentTypes();
 			model.addAttribute("patents",patents);
+			model.addAttribute("allPatentTypes",allPatentTypes);
 			return "addFeeFrom";
 		}
 		
@@ -246,12 +249,28 @@ public class FeeController {
 		}
 		
 		@RequestMapping(path="/addFee", method=RequestMethod.POST)
-		public String addFee(@RequestParam("appNo")String appNo, @ModelAttribute("fee")Fee fee,Model model){
-			User user = PrincipalUtils.getCurrentPrincipal();
-			long patentId=patentService.getPatentIdByAppNo(user.getUserId(),appNo);
+		public String addFee(String appNo,int patentType,String name,String appPerson,@ModelAttribute("fee")Fee fee,Model model){
+			User user = PrincipalUtils.getCurrentPrincipal();			
+			Long patentId=patentService.getPatentIdByAppNo(user.getUserId(),appNo);
+			if(patentId == null){
+				Patent patent = new Patent(appNo,name,appPerson,patentType);
+				patent.setOwnerId(user.getUserId());
+				patentService.addPatent(patent);
+				patentId = patent.getPatentId();
+			}
 			fee.setOwner(user);
 			fee.setPatent(new Patent(patentId));
-			feeService.saveFee(fee);
+			feeService.saveFee(fee);						
 			return "add_fee_success";
 		}
-}
+		
+		
+		@RequestMapping(path="/getFeeTypesByPatentType", method=RequestMethod.GET)
+		public void getFeeTypesByPatentType(int patentTypeId, 
+				Model model, HttpServletResponse response) throws IOException {
+			response.setContentType("application/json;charset=UTF-8");
+			List<String> feeTypes=feeService.getFeeTypesByPatentType(patentTypeId); 
+			Map<String, Object> map = new HashMap<>();
+			map.put("feeTypes", feeTypes);
+			WebUtils.writeJsonStrToResponse(response, map);
+		}}

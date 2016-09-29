@@ -70,7 +70,7 @@ public interface PatentMapper {
 	
 	Patent getPatentsByAppNo(@Param("userId") Integer user_id, @Param("appNo")String appNo);
 	
-	long getPatentIdByAppNo(@Param("userId") Integer user_id,@Param("appNo")String appNo);
+	Long getPatentIdByAppNo(@Param("userId") Integer user_id,@Param("appNo")String appNo);
 	
 	List<GoodsDetail> getUserTransactionPatents(Page page);
 	

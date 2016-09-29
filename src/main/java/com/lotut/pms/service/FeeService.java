@@ -65,4 +65,6 @@ public interface FeeService {
 	Map<String,Long> getCountByDeadlinePayment(int userId);
 	
 	String FeeExportExcel(List<Long> feeIdList, String excelName)  throws IOException;
+
+	List<String> getFeeTypesByPatentType(int patentTypeId);
 }

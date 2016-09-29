@@ -15,7 +15,6 @@
 		select user_id, username, name from users limit #{startIndex}, #{pageSize};
 	</select>
 	
-	
 	<select id="getAllUsersCount" resultType="int">
 		select count(*) from users;
 	</select>
@@ -137,7 +136,6 @@
 		<if test="keyword != null and keyword != ''">
 			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern})
 		</if>
-		
 	</select>
 	
 	<!-- 查找平台机构用户 -->

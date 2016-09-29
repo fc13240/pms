@@ -70,4 +70,6 @@ public interface FeeMapper {
 	Map<String,Long> getCountByDeadlinePayment(int userId);
 	
 	void deleteUnmonitoredFeesByPatentIds(@Param("patentIds")List<Long> patentIds, @Param("userId")int userId);
+
+	List<String> getFeeTypesByPatentType(int patentTypeId);
 }

@@ -310,13 +310,16 @@
 	</select>
 	
 	<select id="getPatentsByAppNo" resultMap="PatentByIdsResultMap">
-		 select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, p.patent_type,
-	                ps.patent_status_id, ps.patent_status_desc, p.patent_status_text,p.internal_code from patents p left join patent_status ps on 
-	                p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
+		 select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, pt.patent_type_id,pt.patent_type_desc,
+	                ps.patent_status_id, ps.patent_status_desc, p.patent_status_text,p.internal_code 
+	                from patents p 
+	                left join patent_status ps on p.patent_status = ps.patent_status_id	                
+	                LEFT JOIN patent_types pt ON p.patent_type = pt.patent_type_id 
+	                join user_patents up on p.patent_id = up.patent
 				where up.user = #{userId} and p.app_no= #{appNo};
 	</select>
 	
-	<select id="getPatentIdByAppNo"  resultType="long">
+	<select id="getPatentIdByAppNo"  resultType="Long">
 		SELECT p.patent_id
 		FROM patents p LEFT JOIN patent_status ps ON p.patent_status = ps.patent_status_id JOIN user_patents up ON p.patent_id = up.patent
 		WHERE up.user = #{userId} AND p.app_no=#{appNo};

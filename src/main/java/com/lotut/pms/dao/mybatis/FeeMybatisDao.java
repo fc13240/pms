@@ -145,18 +145,21 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 
 		@Override
 		public List<Fee> getFeesForPatentId(long patentId) {
-			// TODO Auto-generated method stub
 			return feeMapper.getFeesForPatentId(patentId);
 		}
 
 		@Override
 		public Map<String, Long> getCountByDeadlinePayment(int userId) {
-			// TODO Auto-generated method stub
 			return feeMapper.getCountByDeadlinePayment(userId);
 		}
 
 		@Override
 		public void deleteUnmonitoredFeesByPatentIds(List<Long> patentIds, int userId) {
 			feeMapper.deleteUnmonitoredFeesByPatentIds(patentIds, userId);
+		}
+
+		@Override
+		public List<String> getFeeTypesByPatentType(int patentTypeId) {
+			return feeMapper.getFeeTypesByPatentType(patentTypeId);
 		}
 }

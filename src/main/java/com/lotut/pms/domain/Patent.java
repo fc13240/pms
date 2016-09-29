@@ -84,6 +84,13 @@ public class Patent {
 		
 	}
 	
+	public Patent(String appNo, String name, String appPerson, int patentType) {
+		this.appNo = appNo;
+		this.name =  name;
+		this.appPerson = appPerson;		
+		this.patentType = new PatentType(patentType);	   
+	}
+	
 	public Patent(String appNo, String name, String appPerson, Date appDate, int patentType, int patentStatus,String patentStatusText) {
 		this.appNo = appNo;
 		this.name =  name;
