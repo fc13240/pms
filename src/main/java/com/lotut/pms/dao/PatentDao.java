@@ -111,7 +111,7 @@ public interface PatentDao {
 	
 	List<Integer> getPatentDocShareUesrs(String internalCode);
 	
-	long getPatentIdByInternalCode(String internalCode,int currentUserId);
+	Long getPatentIdByInternalCode(String internalCode,int currentUserId);
 	
 	//void savePatentShareUser(List<Integer> userIds,long patentId);
 	void savePatentShareUser(int userId,long patentId);
