@@ -32,7 +32,7 @@
 				  <form action="<s:url value='/user/changePassword.html'/>" id="reset-form" name="pwd_change_form" method="post">
 					<se:csrfInput/>
 					<h5>请输入原密码：</h5>
-					<input  style="width:320px;" class="selectPointOfInterest form-control" type="text" class="form-control" name="lastPassword" id="lastPassword" placeholder="原始密码" onkeydown="clearPasswordErrorSpan()" />
+					<input  style="width:320px;" class="selectPointOfInterest form-control" type="password" class="form-control" name="lastPassword" id="lastPassword" placeholder="原始密码" onkeydown="clearPasswordErrorSpan()" />
 					<c:if test="${success != null && !success}">
 					  <div> <span id="passwordError" class="passwordError" style="color:red">原密码输入错误!!</span> </div>
 					</c:if>

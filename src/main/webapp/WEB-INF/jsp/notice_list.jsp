@@ -46,21 +46,26 @@
 					      <ul class="qxjk-ul">
 					      	<li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=1&noticeProcessStatus=1'/>">
-						        	发明专利 (<c:out value='${patentTypeCount[(1).intValue()]["noticeCount"]}' default="0"/>)
+						        	发明专利 (<c:out value='${patentTypeCount[(1).longValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 					        <li>
 					         <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=2&noticeProcessStatus=1'/>">
-					        	实用新型(<c:out value='${patentTypeCount[(2).intValue()]["noticeCount"]}' default="0"/>)
+					        	实用新型(<c:out value='${patentTypeCount[(2).longValue()]["noticeCount"]}' default="0"/>)
 					        </a>
 					        </li>
 					        
 					        <li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=3&noticeProcessStatus=1'/>">
-						        	外观设计(<c:out value='${patentTypeCount[(3).intValue()]["noticeCount"]}' default="0"/>)
+						        	外观设计(<c:out value='${patentTypeCount[(3).longValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li> 
+					        <li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=0&noticeProcessStatus=1'/>">
+						        	无类型(<c:out value='${patentTypeCount[(0).longValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li>  
 					      </ul>	
 					     </div>
 						<div class="tag" style="display:none"> 
@@ -301,26 +306,32 @@
 										<button class="button button-caution button-rounded">在线交费</button>
 										</a>
 					  				</td>
+					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 					  				<td>
 										<a href="javascript:return void" onclick="batchProcessNotice(2)">
 										<button style="width:120px;margin-left:10px;" class="button button-rounded button-highlight">置为初步处理</button>
 										</a> 
-					  				</td>					  				
+					  				</td>
+					  				</se:authorize>			
+					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">		  				
 					  				<td>
 									  	<a href="javascript:return void" onclick="batchProcessNotice(4)">
 										<button style="width:120px;margin-left:10px;" class="button button-action button-rounded">置为完成处理</button>
 										</a> 
 									</td>	
+									</se:authorize>
 					  				<td>
 										<a href="javascript:return void" onclick="batchShare()">
 										<button style="margin-left:10px;" class="button button-rounded button-primary">专利分享</button>
 										</a>
 					  				</td>
+					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
 					  				<td>
 										<a href="javascript:return void" onclick="batchChangeNoticePaperType(2)">
 										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">批量申请纸件</button>
 										</a>
-					  				</td>		
+					  				</td>
+					  				</se:authorize>		
 					  				<td>
 										<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportNotices()">表格导出</button>
 									</td>		
@@ -343,8 +354,8 @@
 							  <th>共享人</th>
 							  <th width="100px">发文日</th>
 							  <th>通知书名称</th>
-							  <th width="120px">纸件申请</th>
-							  <th width="190px">期限和通知状态</th>
+							  <th width="100px">纸件申请</th>
+							  <th width="160px">期限和通知状态</th>
 							  <!-- 							<th>预览</th> 
 							  <th>下载</th>-->
 							  <th width="130">操作</th>

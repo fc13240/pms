@@ -45,7 +45,7 @@ public interface NoticeMapper {
 	void batchUpdateNoticesNoticePaperType(@Param("noticeIdList")List<Integer> noticeIdList, @Param("noticePaperApplyType")int noticePaperApplyType);
 	
 	@MapKey("patentType")
-	Map<String , Map<String,String>> getUserNoticeCountByType(int userId);
+	Map<Integer , Map<String,Long>> getUserNoticeCountByType(int userId);
 	
 	@MapKey("noticeType")
 	Map<String , Map<String,String>> getUserNoticeCountByNoticeType(int userId);
