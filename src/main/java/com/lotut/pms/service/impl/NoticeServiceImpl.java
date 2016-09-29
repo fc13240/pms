@@ -158,7 +158,7 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		updatePatentDocuments(notices);
 		
-		savepatentShareUser(notices);
+		savePatentShareUser(notices);
 	}
 	
 	@Transactional
@@ -210,7 +210,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public Map<String, Map<String, String>> getUserNoticeCountByType(int userId) {
+	public Map<Integer, Map<String, Long>> getUserNoticeCountByType(int userId) {
 		return noticeDao.getUserNoticeCountByType(userId);
 	}
 
@@ -247,7 +247,9 @@ public class NoticeServiceImpl implements NoticeService {
 
 	public void updatePatentDocuments(List<Notice> notices){
 		for(Notice notice:notices){
-			noticeDao.updatePatentDocByInternalCode(notice);
+			if (notice.getPatent().getInternalCode() != null && !notice.getPatent().getInternalCode().isEmpty()) {
+				noticeDao.updatePatentDocByInternalCode(notice);
+			}
 		}
 	}
 	@Override
@@ -258,17 +260,23 @@ public class NoticeServiceImpl implements NoticeService {
 		return exportExcelPath;
 	}
 	
-	public void savepatentShareUser(List<Notice> notices){
+	public void savePatentShareUser(List<Notice> notices){
 		String internalCode = null;
 		
 		int userId = PrincipalUtils.getCurrentUserId();
+		List<Map<String, Integer>> userPatentRecords = new ArrayList<>(32);
+		Map<String, Integer> userPatentMap = new HashMap<>();
 		for(Notice notice:notices){
 			internalCode = notice.getPatent().getInternalCode();
 			List<Integer> shareUserIds = patentDao.getPatentDocShareUesrs(internalCode);
 			long patentId = patentDao.getPatentIdByInternalCode(internalCode,userId);
 			for(Integer shareUserId:shareUserIds){
-				patentDao.savePatentShareUser(shareUserId, patentId);
+				userPatentMap.put("user", shareUserId);
+				userPatentMap.put("patent", (int)patentId);
+				userPatentRecords.add(userPatentMap);
 			}
 		}
+		
+		sharePatentDao.insertUserPatents(userPatentRecords);
 	}
 }
