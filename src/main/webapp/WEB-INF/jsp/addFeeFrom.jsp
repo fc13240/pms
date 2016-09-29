@@ -32,12 +32,14 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
-					<form action="<s:url value='/fee/addFee.html'/>" method="post" id="addFeeForm">
+					<form action="<s:url value='/fee/addFee.html'/>" method="post" id="addFeeForm" >
 					  <div class="lt-third" style="background:#fff;margin-top:10px;">
 					  
 						<h5>申请号：</h5>
 						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" name="appNo" id="appNo"  type="text" onblur="loadPatent()" required maxLength="30"/>
-						<span>(注：不要输入字母和小数点)</span>
+						<span id="appNoTip">(注：不要输入字母和小数点)</span>
+						<span
+							style="color: black; display: none;font-weight:700;" id=appNoError>请输入正确的专利号</span>
 						<br>
 						
 						<h5>专利类型:</h5>
@@ -112,9 +114,11 @@ $(function() {
 	
 	$("#addFeeForm").validate({
 		submitHandler: function(form){ 
-			form.submit();     
+			if (loadPatent()) {
+				form.submit();
+			} 			     
 		}
-	});	
+	});
 });
 
 function addDefaultOption(selectElem) {
@@ -150,7 +154,20 @@ function loadPatent() {
 				addOptions(feeType, result.feeTypes);
 			}
 		});
-	} 
+		var checkAppNo = /^[0-9]+$/;
+		var reg = new RegExp(checkAppNo);	
+		document.getElementById("appNoTip").style.display = "";
+		document.getElementById("appNoError").style.display = "none";
+		if (!reg.test(appNo)) {
+			document.getElementById("appNoTip").style.display = "none";
+			document.getElementById("appNoError").style.display = "";
+			return false;
+		} else {
+			return true;
+		}
+	}
+	return false;
+		
 }
 
 function loadFeeTypes() {
@@ -169,11 +186,11 @@ function loadFeeTypes() {
 	} 
 }
 
-
 function loadInvoiceTitle() {
 	var invoiceTitle = $("#appPerson").val();
 	$("#invoiceTitle").val(invoiceTitle); 
 }
+
 </script>
 
 </body>
