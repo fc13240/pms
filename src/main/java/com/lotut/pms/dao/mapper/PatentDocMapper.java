@@ -68,7 +68,7 @@ public interface PatentDocMapper {
 	
 	List<PatentDoc> getUserPatentDocByRole(Page page);
 	
-	int getUserPatentDocCountByRole(Page page);
+	Integer getUserPatentDocCountByRole(Page page);
 	
 	List<PatentDoc> getPatentDocByTechAndCustomer(@Param("page") Page page,@Param("statusList") List<Integer> statusList);
 	

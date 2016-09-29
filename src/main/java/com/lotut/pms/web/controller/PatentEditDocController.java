@@ -220,13 +220,22 @@ public class PatentEditDocController {
 		if (PrincipalUtils.isPlatform()) {
 			page.setStatus(1);
 			page.setProxyStatus(2);
-			totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
+			
+			if(patentDocService.getUserPatentDocCountByRole(page)== null){
+				totalCount=0;
+			}else{
+				totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
+			}
 			page.setTotalRecords(totalCount);
 			 patentDocs=patentDocService.getUserPatentDocByRole(page);
 		}else if(PrincipalUtils.isProxyOrg()){
 			page.setStatus(2);
 			page.setProxyStatus(3);
-			totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
+			if(patentDocService.getUserPatentDocCountByRole(page)== null){
+				totalCount=0;
+			}else{
+				totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
+			}
 			page.setTotalRecords(totalCount);
 			 patentDocs=patentDocService.getUserPatentDocByRole(page);
 		}else if(PrincipalUtils.isCustomerSupport()){
@@ -260,7 +269,11 @@ public class PatentEditDocController {
 		}else if(PrincipalUtils.isProcess()){
 			page.setStatus(9);
 			page.setProxyStatus(3);
-			totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
+			if(patentDocService.getUserPatentDocCountByRole(page)== null){
+				totalCount=0;
+			}else{
+				totalCount=(int)patentDocService.getUserPatentDocCountByRole(page);
+			}
 			page.setTotalRecords(totalCount);
 			 patentDocs=patentDocService.getUserPatentDocByRole(page);
 		}else{

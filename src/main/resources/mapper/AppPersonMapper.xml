@@ -21,9 +21,9 @@
 
   <insert id="addAppPerson" parameterType="CommonAppPerson" >
   	insert into common_app_person(name,id_number,postcode_address,other_information,user_id,
-  	fee_reduce_transaction_status,transaction_identity_id,transaction_year,app_person_attachment_file,proxy_file) 
+  	fee_reduce_transaction_status,transaction_identity_id,transaction_year,app_person_attachment_file,proxy_file,create_time) 
   	values(#{name},#{idNumber},#{postcodeAddress},#{otherInfo},#{userId},
-  	#{feeReduceTransactionStatus},#{transactionIdentityId},#{transactionYear},#{appPersonUrl,javaType=string,jdbcType=VARCHAR},#{proxyUrl,javaType=string,jdbcType=VARCHAR})
+  	#{feeReduceTransactionStatus},#{transactionIdentityId},#{transactionYear},#{appPersonUrl,javaType=string,jdbcType=VARCHAR},#{proxyUrl,javaType=string,jdbcType=VARCHAR},now())
   	
   </insert>
   
@@ -64,7 +64,7 @@
   		update common_app_person  set name=#{name},id_number=#{idNumber},
   		fee_reduce_transaction_status=#{feeReduceTransactionStatus},transaction_identity_id=#{transactionIdentityId},
   		transaction_year=#{transactionYear},
-  		postcode_address=#{postcodeAddress},other_information=#{otherInfo}
+  		postcode_address=#{postcodeAddress},other_information=#{otherInfo},create_time=now()
   		where app_person_id=#{appPersonId}
   		
   	</update>

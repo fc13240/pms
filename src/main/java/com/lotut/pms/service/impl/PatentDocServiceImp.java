@@ -215,7 +215,7 @@ public class PatentDocServiceImp implements PatentDocService{
 
 
 		@Override
-		public int getUserPatentDocCountByRole(Page page) {
+		public Integer getUserPatentDocCountByRole(Page page) {
 			return patentDocDao.getUserPatentDocCountByRole(page);
 		}
 
