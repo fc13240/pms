@@ -301,16 +301,20 @@
 										<button class="button button-caution button-rounded">在线交费</button>
 										</a>
 					  				</td>
+					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 					  				<td>
 										<a href="javascript:return void" onclick="batchProcessNotice(2)">
 										<button style="width:120px;margin-left:10px;" class="button button-rounded button-highlight">置为初步处理</button>
 										</a> 
-					  				</td>					  				
+					  				</td>
+					  				</se:authorize>			
+					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">		  				
 					  				<td>
 									  	<a href="javascript:return void" onclick="batchProcessNotice(4)">
 										<button style="width:120px;margin-left:10px;" class="button button-action button-rounded">置为完成处理</button>
 										</a> 
 									</td>	
+									</se:authorize>
 					  				<td>
 										<a href="javascript:return void" onclick="batchShare()">
 										<button style="margin-left:10px;" class="button button-rounded button-primary">专利分享</button>
