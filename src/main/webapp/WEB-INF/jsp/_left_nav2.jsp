@@ -19,7 +19,7 @@
 	<h5>单个添加</h5>
 	</a> 
 	</li>
-	<li  class=""> <a href="<s:url value='/patentOfficeAccount/list.html'/>">
+	<li  class=""> <a href="<s:url value='/patentOfficeAccount/list.html?currentPage=1'/>">
 	<h5>数字证书</h5>
 	</a> 
 	</li>

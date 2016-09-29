@@ -21,7 +21,7 @@
 	
 	<!-- 查找用户 -->
 	<select id="findByName" parameterType="string" resultType="User">
-		select * from users where username=#{username}
+		select user_id userId,username,name,email,password,phone from users where username=#{username}
 	</select>
 	<!-- 注册方法 -->
 	<insert id="save" parameterType="User">

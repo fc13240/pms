@@ -120,7 +120,6 @@ function forgetName() {
 		type: 'post',
 		data:{"username" : username},
 		success: function(processStatus) {
-			alert(processStatus);
 			status=processStatus;
 			if(status=="1"){
 				alert('邮件发送成功，请查收！')

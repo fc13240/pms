@@ -1,18 +1,13 @@
 package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.PatentOfficeAccountDao;
-import com.lotut.pms.dao.UserDao;
 import com.lotut.pms.dao.mapper.PatentOfficeAccountMapper;
-import com.lotut.pms.dao.mapper.UserMapper;
-import com.lotut.pms.domain.ContactAddress;
-import com.lotut.pms.domain.PatentOfficeAccount;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.User;
+import com.lotut.pms.domain.PatentOfficeAccount;
 
 public class PatentOfficeAccountMybatisDao extends SqlSessionDaoSupport implements PatentOfficeAccountDao {
 	private PatentOfficeAccountMapper patentOfficeAccountMapper;
@@ -26,8 +21,8 @@ public class PatentOfficeAccountMybatisDao extends SqlSessionDaoSupport implemen
 	}
 
 	@Override
-	public List<PatentOfficeAccount> getUserAccounts(Integer userId) {
-		return patentOfficeAccountMapper.getUserAccounts(userId);
+	public List<PatentOfficeAccount> getUserAccounts(Page page) {
+		return patentOfficeAccountMapper.getUserAccounts(page);
 	}
 	
 	@Override
@@ -56,8 +51,24 @@ public class PatentOfficeAccountMybatisDao extends SqlSessionDaoSupport implemen
 		patentOfficeAccountMapper.updatePatentsTime(accountId);
 	}
 
+	
+	@Override
+	public int getUserAccountsCount(int userId) {
+		return patentOfficeAccountMapper.getUserAccountsCount(userId);
+	}
+	
 	@Override
 	public List<PatentOfficeAccount> getAllAccount() {
 		return patentOfficeAccountMapper.getAllAccount();
+	}
+	
+	@Override
+	public List<PatentOfficeAccount> getAllAccountBypage(Page page) {
+		return patentOfficeAccountMapper.getAllAccountBypage(page);
+	}
+
+	@Override
+	public int getAllAccountCount() {
+		return patentOfficeAccountMapper.getAllAccountCount();
 	}
 }

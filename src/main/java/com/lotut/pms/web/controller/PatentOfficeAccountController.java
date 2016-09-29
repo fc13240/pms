@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentOfficeAccount;
 import com.lotut.pms.service.PatentOfficeAccountService;
 import com.lotut.pms.service.PatentService;
@@ -38,31 +40,39 @@ public class PatentOfficeAccountController {
 	}	
 	
 	@RequestMapping(path="/list", method=RequestMethod.GET)
-	public String getUserOffice(Model model) {
-			int accountType=0;
+	public String getUserOffice(Model model,Page page,HttpSession session) {
+		page.setPageSize(WebUtils.getPageSize(session));
+		int accountType=0;
+		if(page.getCurrentPage()<=0){
+			page.setCurrentPage(1);
+		}
 		if (PrincipalUtils.isOrderProcessor()) {
 			accountType=1;
-			List<PatentOfficeAccount> accounts = patentOfficeAccountService.getAllAccount();
+			List<PatentOfficeAccount> accounts = patentOfficeAccountService.getAllAccountByPage(page);
+			int totalRecords = patentOfficeAccountService.getAllAccountCount();
+			page.setTotalRecords(totalRecords);
 			model.addAttribute("accounts", accounts);
 			model.addAttribute("accountType", accountType);
-			return "patent_office_account_list";
+			model.addAttribute("page", page);
 		}else{
 			
 			int userId = PrincipalUtils.getCurrentUserId();
-			
-			List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
-			
+			page.setUserId(userId);
+			List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(page);
+			int totalRecords = patentOfficeAccountService.getUserAccountsCount(userId);
+			page.setTotalRecords(totalRecords);
 			model.addAttribute("accounts", accounts);
 			model.addAttribute("accountType", accountType);
-			return "patent_office_account_list";
+			model.addAttribute("page", page);
 		}
+		
+		return "patent_office_account_list";
 		
 	}
 	
 	@RequestMapping(path="/delete", method=RequestMethod.GET)
-	public String deleteOfficeAccount(@RequestParam("accountId")long accountId,Model model){
+	public void deleteOfficeAccount(@RequestParam("accountId")long accountId,Model model){
 		patentOfficeAccountService.deleteOfficeAccount(accountId);
-		return "patent_office_account_list";
 	}
 	
 
@@ -74,12 +84,8 @@ public class PatentOfficeAccountController {
 	}
 	
 	@RequestMapping(path="/update", method=RequestMethod.POST)
-	public String updateOfficeAccount(@ModelAttribute PatentOfficeAccount patentOfficeAccount,Model model) {
-		int userId = PrincipalUtils.getCurrentUserId();
+	public String updateOfficeAccount(@ModelAttribute PatentOfficeAccount patentOfficeAccount) {
 		patentOfficeAccountService.updateOfficeAccount(patentOfficeAccount);
-		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(userId);
-		model.addAttribute("accounts", accounts);	
-		
 		return "redirect:/patentOfficeAccount/list.html";
 	}
 
