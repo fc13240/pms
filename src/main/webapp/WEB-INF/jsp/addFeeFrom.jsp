@@ -36,7 +36,7 @@
 					  <div class="lt-third" style="background:#fff;margin-top:10px;">
 					  
 						<h5>申请号：</h5>
-						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" name="appNo" id="appNo"  type="text" onblur="loadPatent()" required />
+						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" name="appNo" id="appNo"  type="text" onblur="loadPatent()" required maxLength="30"/>
 						<span>(注：不要输入字母和小数点)</span>
 						<br>
 						
@@ -52,10 +52,10 @@
 				        <br>	
 				        	
 				       	<h5>专利名称:</h5>
-				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="name" id="name" value="" />
+				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="name" id="name" value="" maxLength="100"/>
 						<br>
 				 		<h5>第一申请人:</h5>
-					    <input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="appPerson" id="appPerson" value="" onblur="loadInvoiceTitle()" required/>
+					    <input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="appPerson" id="appPerson" value="" onblur="loadInvoiceTitle()" required maxLength="100"/>
 					    <br>
 					    
 						<h5>交费截止日:</h5>
@@ -72,7 +72,7 @@
 						</select>
 						<br>	
 				 		<h5>缴费金额:</h5>
-					    <input style="width:400px;"  type="text" name="amount" class="selectPointOfInterest form-control" required min="1" digits="true"/>
+					    <input style="width:400px;"  type="text" name="amount" class="selectPointOfInterest form-control" required min="1" maxLength="10" digits="true"/>
 				 		<br>
 				 		<input type="hidden" name="invoiceTitle" id="invoiceTitle" />
 					    <div style="height:20px;"></div>
@@ -149,7 +149,7 @@ function loadPatent() {
 				resetSelect(feeType);
 				addOptions(feeType, result.feeTypes);
 			}
-		})
+		});
 	} 
 }
 
@@ -165,7 +165,7 @@ function loadFeeTypes() {
 				resetSelect(feeType);
 				addOptions(feeType, result.feeTypes);
 			}
-		})
+		});
 	} 
 }
 
