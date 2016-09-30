@@ -117,7 +117,7 @@
  function validateInfoNumber1(phoneNumber) {
 		var reg = new RegExp("^[0-9]*$");
 		document.getElementById("numberError1").style.display = "none";
-			if (phoneNumber.length>50) {
+			if (phoneNumber.length>100) {
 				document.getElementById("numberError1").style.display = "";
 				return false;
 			} else {
