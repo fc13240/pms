@@ -219,6 +219,7 @@ margin: 1px 0 0 1px;}
 						<table id="simple-table"  class="table table-striped table-bordered table-hover">
 						 	<thead>
 							<tr class="simple_bag">
+							  <th>序号</th>
 							  <th>姓名或名称</th>
 							  <th>证件号码</th>
 							  <th>费减备案状态</th>
@@ -229,8 +230,9 @@ margin: 1px 0 0 1px;}
 						 	</thead>
 						  <tbody id="appersonTab">
 								<c:if test="${not empty patentDocAppPersons }">
-									<c:forEach items="${patentDocAppPersons }" var="patentDocAppPerson">
+									<c:forEach items="${patentDocAppPersons }" var="patentDocAppPerson" varStatus="status">
 										<tr>
+											<td style="text-align:center">${status.count }</td>
 											<td style="text-align:center">${patentDocAppPerson.name }</td>
 											<td style="text-align:center">${patentDocAppPerson.idNumber }</td>
 											<td style="text-align:center">${patentDocAppPerson.feeReduceTransactionStatus }</td>
@@ -283,8 +285,9 @@ margin: 1px 0 0 1px;}
 						  </thead>
 						  <tbody id="inventorTab">
 							  <c:if test="${not empty patentDocInventors }">
-									<c:forEach items="${patentDocInventors }" var="patentDocInventor">
+									<c:forEach items="${patentDocInventors }" var="patentDocInventor" varStatus="status">
 										<tr>
+											<td style='text-align:center'>${status.count}</td>
 											<td style='text-align:center'>${patentDocInventor.inventorName}</td>
 											<td style='text-align:center'>${patentDocInventor.inventorNumber}</td>
 											<td style='text-align:center'>${patentDocInventor.inventorOtherInformation}</td>
@@ -710,7 +713,7 @@ margin: 1px 0 0 1px;}
 				  <tbody id="commonInventorTab">
 					<c:forEach items="${inventors}" var="inventor" varStatus="status">
 					  <tr>
-					  	<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
+					  	<td class="center" style="text-align:center;width:50px;"><label class="pos-rel"> <span class="batch-share-item">
 						<input type="checkbox" class="inventor-check-item" inventor="<c:out value='${inventor.inventorId}'/>"/></span>
 						<span class="lbl"></span></label>
 						</td>
@@ -1416,6 +1419,7 @@ function updateImgName(value,linkSeqNo){
 					};
 					$("#appersonTab").append(
 						"<tr>"+
+							"<td style='text-align:center'>"+(i+1)+"</td>"+
 							"<td style='text-align:center'>"+item.name+"</td>"+
 							"<td style='text-align:center'>"+item.idNumber+"</td>"+
 							"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
@@ -1473,6 +1477,7 @@ function updateImgName(value,linkSeqNo){
 					};
 					$("#inventorTab").append(
 							"<tr>"+
+								"<td style='text-align:center'>"+(i+1)+"</td>"+
 								"<td style='text-align:center'>"+item.inventorName+"</td>"+
 								"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
 								"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
@@ -1558,6 +1563,7 @@ function updateImgName(value,linkSeqNo){
 						};
 						$("#appersonTab").append(
 							"<tr>"+
+								"<td style='text-align:center'>"+(i+1)+"</td>"+
 								"<td style='text-align:center'>"+item.name+"</td>"+
 								"<td style='text-align:center'>"+item.idNumber+"</td>"+
 								"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
@@ -1575,6 +1581,9 @@ function updateImgName(value,linkSeqNo){
 			resetAppPersonForm();
 			$("#patentDocFilename").val("");
 			$("#patentDocEntrustFilename").val("");
+			
+			$("commonAppPersonTab").empty();
+			searchAppPerson("");
 		};
 	}
 	
@@ -1628,6 +1637,7 @@ function updateImgName(value,linkSeqNo){
 						};
 						$("#inventorTab").append(
 							"<tr>"+
+								"<td style='text-align:center'>"+(i+1)+"</td>"+
 								"<td style='text-align:center'>"+item.inventorName+"</td>"+
 								"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
 								"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
@@ -1640,6 +1650,8 @@ function updateImgName(value,linkSeqNo){
 			});
 			resetAddInventorModal();
 			$("#patentDocInventorFilename").val("");
+			$("commonInventorTab").empty();
+			searchInventor("");
 		}else{
 		}
 	}
@@ -1722,6 +1734,7 @@ function updateImgName(value,linkSeqNo){
 					};
 					$("#appersonTab").append(
 						"<tr>"+
+							"<td style='text-align:center'>"+(i+1)+"</td>"+
 							"<td style='text-align:center'>"+item.name+"</td>"+
 							"<td style='text-align:center'>"+item.idNumber+"</td>"+
 							"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
@@ -1795,6 +1808,7 @@ function updateImgName(value,linkSeqNo){
 						};
 						$("#appersonTab").append(
 								"<tr>"+
+									"<td style='text-align:center'>"+(i+1)+"</td>"+
 									"<td style='text-align:center'>"+item.name+"</td>"+
 									"<td style='text-align:center'>"+item.idNumber+"</td>"+
 									"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
@@ -1843,6 +1857,7 @@ function updateImgName(value,linkSeqNo){
 					};
 					$("#inventorTab").append(
 						"<tr>"+
+							"<td style='text-align:center'>"+(i+1)+"</td>"+
 							"<td style='text-align:center'>"+item.inventorName+"</td>"+
 							"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
 							"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
@@ -1911,6 +1926,7 @@ function updateImgName(value,linkSeqNo){
 						};
 						$("#inventorTab").append(
 							"<tr>"+
+								"<td style='text-align:center'>"+(i+1)+"</td>"+
 								"<td style='text-align:center'>"+item.inventorName+"</td>"+
 								"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
 								"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
@@ -2294,11 +2310,11 @@ function updateImgName(value,linkSeqNo){
 				$.each(obj,function(i,item){
 					$("#commonInventorTab").append(
 							"<tr>"+
-								"<td class='center' style='text-align:center'><label class='pos-rel'> <span class='batch-share-item'>"+
+								"<td class='center' style='text-align:center;width:50px'><label class='pos-rel'> <span class='batch-share-item'>"+
 								"<input type='checkbox' class='inventor-check-item' inventor="+item.inventorId+"></span>"+
 								"<span class='lbl'></span></label>"+
 								"</td>"+
-								"<td class='center' style='text-align:center'> "+i+" </td>"+
+								"<td class='center' style='text-align:center'>"+(i+1)+" </td>"+
 								"<td style='text-align:center'>"+item.inventorName+"</td>"+
 								"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
 								"<td style='text-align:center'>"+item.inventorComment+"</td>"+

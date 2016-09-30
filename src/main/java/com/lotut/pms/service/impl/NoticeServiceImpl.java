@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lotut.pms.constants.Settings;
@@ -268,14 +269,17 @@ public class NoticeServiceImpl implements NoticeService {
 		Map<String, Integer> userPatentMap = new HashMap<>();
 		for(Notice notice:notices){
 			internalCode = notice.getPatent().getInternalCode();
-			List<Integer> shareUserIds = patentDao.getPatentDocShareUesrs(internalCode);
-			Long patentId = patentDao.getPatentIdByInternalCode(internalCode,userId);
-			if(patentId!=null){
-				for(Integer shareUserId:shareUserIds){
-					userPatentMap.put("user", shareUserId);
-					userPatentMap.put("patent", Integer.valueOf(patentId.toString()));
-					userPatentRecords.add(userPatentMap);
+			if(StringUtils.isNotEmpty(internalCode)){
+				List<Integer> shareUserIds = patentDao.getPatentDocShareUesrs(internalCode);
+				Long patentId = patentDao.getPatentIdByInternalCode(internalCode,userId);
+				if(patentId!=null){
+					for(Integer shareUserId:shareUserIds){
+						userPatentMap.put("user", shareUserId);
+						userPatentMap.put("patent", Integer.valueOf(patentId.toString()));
+						userPatentRecords.add(userPatentMap);
+					}
 				}
+				
 			}
 		}
 		
