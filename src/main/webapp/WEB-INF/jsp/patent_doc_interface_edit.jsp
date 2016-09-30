@@ -65,6 +65,7 @@
 				$("#patentImgUrl").append("<input type='hidde' id='seqNo' name='seqNo' value='"+Jresponse["count"]+"'/>");
 				savePatentImgUrl();
 				$("#patentImgUrl").empty();
+				 $('#piciLlus2').val("请填写图片名称");
 			},
 			onFailure: function(file, response){          // 文件上传失败的回调方法
 				console.info("此文件上传失败：");
@@ -425,7 +426,7 @@ margin: 1px 0 0 1px;}
 							
 							
 							<font size="3" font_family="Microsoft YaHei" color="black" style="float:left;margin-left: 94px">图片名称:</font>
-							<input type="text"  class="selectPointOfInterest form-control" id="piciLlus2"   list="companys" name="caption"   onchange="picName()" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999; width: 200px; height: 30px" value="" autocomplete="off" required>
+							<input type="text"  class="selectPointOfInterest form-control" id="piciLlus2"   list="companys" name="caption"   onchange="picName()" onfocus="piciLlusFc(this);" onblur="piciLlusBl(this);" style="color: #999; width: 200px; height: 30px"  autocomplete="off" required>
 								<datalist id="companys">
 								<option value="主视图">
 								<option value="后视图">

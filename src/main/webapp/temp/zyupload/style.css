@@ -22,7 +22,7 @@ p{word-wrap:break-word}
 h1,h2,h3,dt{font-family:'Î¢ÈíÑÅºÚ','ºÚÌå';font-weight:100;font-size:16px;}
 
 /* ÊÓÒ° */
-.picBox{overflow:hidden;zoom:1;margin:40px auto 0 auto;width:1000px;}
+.picBox{overflow:hidden;zoom:1;margin:40px auto 0 auto;width:900px;}
 .picL{overflow:hidden;zoom:1;margin-left:-1px;}
 .picL li{overflow:hidden;position:relative;float:left; display:inline; width:199px;height:149px;margin:1px 0 0 1px; zoom:1  }
 .picL li .text{background:#ff5a58;position:absolute;width:199px;height:149px;top:149px;left:0;font-family:'Î¢ÈíÑÅºÚ','ºÚÌå';}
