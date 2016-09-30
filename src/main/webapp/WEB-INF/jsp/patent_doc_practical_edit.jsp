@@ -1146,23 +1146,23 @@ margin: 1px 0 0 1px;}
 					<input type="hidden" id="updateModalInventorId" required onblur="validateInfoNumber(this.value)"/>
 			       	<h5>姓名:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorName" required onblur="validateInfoNumber(this.value)"/>
-					<span style="color: red; display: none;" id=updateInventorName>该处应输入不大于20字段</span>
+					<span style="color: red; display: none;" id="updateInventorName">该处应输入不大于20字段</span>
 					<br>	   
 					<h5>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorNumber" required onblur="validatePhoneNumber(this.value)"/>
-					<span style="color: red; display: none;" id=updateInventorNumber>请输入正确的证件号码</span>
+					<span style="color: red; display: none;" id="updateInventorNumber">请输入正确的证件号码</span>
 					<br>		  
 			       	<h5>国籍:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;"  type="text" id="updateModalInventorNationality" value="中国" required onblur="validateInfoNumber1(this.value)"/>
-					<span style="color: red; display: none;" id=updateInventorNationality>该处应输入不大于20字段</span>
+					<span style="color: red; display: none;" id="updateInventorNationality">该处应输入不大于20字段</span>
 					<br>		  
 			       	<h5>电话:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorMobile" required onblur="validateInfoNumber2(this.value)"/>
-					<span style="color: red; display: none;" id=updateInventorMobile>请输入正确的电话号码</span>
+					<span style="color: red; display: none;" id="updateInventorMobile">请输入正确的电话号码</span>
 					<br>		  
 			       	<h5>邮箱:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorEmail" required onblur="validateInfoNumber3(this.value)"/>
-					<span style="color: red; display: none;" id=numberError3>请输入正确的邮箱</span>
+					<span style="color: red; display: none;" id="updateInventorEmail">请输入正确的邮箱</span>
 					<br>
 					<h5>其他信息:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorOtherInformation"  onblur="validateCommentNumber(this.value)"/>

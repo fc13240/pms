@@ -888,7 +888,7 @@ margin: 1px 0 0 1px;}
 					<br>		  
 					<h5>邮编及地址:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="modalPostcodeAddress" type="text"/>
-					<span style="color: red; display: none;" id="appPersonPostcodeAddress">请输入正确的邮编及地址</span>
+					<span style="color: red; display: none;" id="appPersonPostcodeAddressError">请输入正确的邮编及地址</span>
 					<br>
 					<h5>费减备案状态:</h5>
 					<select id="modalFeeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;">	
@@ -961,14 +961,15 @@ margin: 1px 0 0 1px;}
 					<input type="hidden" id="updateModalPersonId"  required/>
 					 <h5>姓名或名称:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalAppPersonName" required/>
-					<span style="color: red; display: none;" id=updateAppPersonName>请输入长度不超过20字符</span>
+					<span style="color: red; display: none;" id="updateAppPersonNameError">请输入长度不超过20字符</span>
 					<br>
 					<h5>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="updateModalPhoneRece" type="text" required onblur="validatePhoneNumber(this.value)"/>
-					<span style="color: red; display: none;" id=updatePhoneReceError>请输入正确的证件号码</span>
+					<span style="color: red; display: none;" id="updatePhoneReceError">请输入正确的证件号码</span>
 					<br>		  
 					<h5>邮编及地址:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="updateModalPostcodeAddress" type="text" required/>
+					<span style="color: red; display: none;" id="updatePostcodeAddressError">邮编及地址</span>
 					<br>
 					<h5>费减备案状态:</h5>
 					<select id="updateModalFeeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;"  required>	
@@ -1853,7 +1854,7 @@ function updateImgName(value,linkSeqNo){
 		if(validateAppPersonFormWayOne(phoneRece,"appPersonPhoneError")&
 		   validateAppPersonFormWayTwo(appPersonName,"appPersonNameError")&
 		  // validateAppPersonFormWayTwo(postcodeAddress,"appPersonPostcodeAddress")
-		   validateAppPersonFormWayFour(postcodeAddress,"appPersonPostcodeAddress")
+		   validateAppPersonFormWayFour(postcodeAddress,"appPersonPostcodeAddressError")
 		   ){
 			var formData ={"name":appPersonName,"idNumber":phoneRece,"postcodeAddress":postcodeAddress,"otherInfo":otherInfo,"feeReduceTransactionStatus":feeReduceTransactionStatus,
 					       "transactionIdentityId":transactionIdentityId,"transactionYear":transactionYear,"patentDocId":patentDocId,"appPersonUrl":appPersonUrl,"proxyUrl":proxyUrl};
@@ -2096,9 +2097,9 @@ function updateImgName(value,linkSeqNo){
 		var transactionYear = $("#updateModalTransactionYear").val();
 		var patentDocId=${patentDoc.patentDocId};
 		
-		if(validateAppPersonFormWayTwo(name,"updateAppPersonName")&
-		   validateAppPersonFormWayTwo(idNumber,"updatePhoneRece")&
-		   validateAppPersonFormWayFour(postcodeAddress,"updateModalPostcodeAddress")){
+		if(validateAppPersonFormWayTwo(name,"updateAppPersonNameError")&
+		   validateAppPersonFormWayTwo(idNumber,"updatePhoneReceError")&
+		   validateAppPersonFormWayFour(postcodeAddress,"updateModalPostcodeAddressError")){
 			var formData ={"personId":personId,"name":name,"idNumber":idNumber,"postcodeAddress":postcodeAddress,
 					       "otherInformation":otherInformation,"feeReduceTransactionStatus":feeReduceTransactionStatus,
 					       "transactionIdentity":transactionIdentity,"transactionYear":transactionYear,"patentDocId":patentDocId};
