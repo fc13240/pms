@@ -276,6 +276,7 @@ margin: 1px 0 0 1px;}
 						<table id="simple-table"   class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
+							  <th>序号</th>
 							  <th>姓名</th>
 							  <th>证件号码</th>
 							  <th>其他</th>
@@ -1535,7 +1536,7 @@ function updateImgName(value,linkSeqNo){
 		var patentDocId =${patentDoc.patentDocId};
 		if(validateAppPersonFormWayOne(phoneRece,"appPersonPhoneError")&
 		   validateAppPersonFormWayTwo(appPersonName,"appPersonNameError")&
-		   validateAppPersonFormWayTwo(postcodeAddress,"appPersonPostcodeAddress")
+		   validateAppPersonFormWayFour(postcodeAddress,"appPersonPostcodeAddress")
 		   ){
 			var formData ={"name":appPersonName,"idNumber":phoneRece,"postcodeAddress":postcodeAddress,"otherInfo":otherInfo,"feeReduceTransactionStatus":feeReduceTransactionStatus,
 					       "transactionIdentityId":transactionIdentityId,"transactionYear":transactionYear,"patentDocId":patentDocId,"appPersonUrl":appPersonUrl,"proxyUrl":proxyUrl};
@@ -1612,9 +1613,7 @@ function updateImgName(value,linkSeqNo){
 		var  inventorUrl= $("#patentDocInventorFileHidden").val();
 		var  patentDocId = ${patentDoc.patentDocId};
 		if(validateAppPersonFormWayTwo(modalInventorName,"inventorNameError")&
-		   validateAppPersonFormWayThree(modalInventorNumber,"inventorNumberError")&
-		   validateAppPersonFormWayThree(modalInventorNationality,"inventorNationalityError")&
-		   validateAppPersonFormWayThree(modalInventorMobile,"inventorMobileError")
+			validateAppPersonFormWayThree(modalInventorNumber,"inventorNumberError")
 		){
 			var formData={"inventorName":modalInventorName,"inventorNumber":modalInventorNumber,
 						  "inventorNationality":modalInventorNationality,"inventorMobile":modalInventorMobile,
@@ -1782,7 +1781,8 @@ function updateImgName(value,linkSeqNo){
 		var patentDocId=${patentDoc.patentDocId};
 		
 		if(validateAppPersonFormWayTwo(name,"updateAppPersonName")&
-		   validateAppPersonFormWayTwo(idNumber,"updatePhoneRece")){
+		   validateAppPersonFormWayTwo(idNumber,"updatePhoneRece")&
+		   validateAppPersonFormWayFour(postcodeAddress,"updateModalPostcodeAddress")){
 			var formData ={"personId":personId,"name":name,"idNumber":idNumber,"postcodeAddress":postcodeAddress,
 					       "otherInformation":otherInformation,"feeReduceTransactionStatus":feeReduceTransactionStatus,
 					       "transactionIdentity":transactionIdentity,"transactionYear":transactionYear,"patentDocId":patentDocId};
@@ -1901,10 +1901,10 @@ function updateImgName(value,linkSeqNo){
 		var  inventorOtherInformation= $("#updateModalInventorOtherInformation").val();
 		var  patentDocId = ${patentDoc.patentDocId};
 		if(validateAppPersonFormWayTwo(inventorName,"updateInventorName")&
-		   validateAppPersonFormWayThree(inventorNumber,"updateInventorNumber")&
-		   validateAppPersonFormWayThree(inventorNationality,"updateInventorNationality")&
-		   validateAppPersonFormWayThree(inventorMobile,"updateInventorMobile")&
-		   validateAppPersonFormWayThree(inventorOtherInformation,"updateInventorOtherInformation")
+				validateAppPersonFormWayThree(inventorNumber,"updateInventorNumber")&
+				validateAppPersonFormWayFive(inventorNationality,"updateInventorNationality")&
+				validateAppPersonFormWayFive(inventorMobile,"updateInventorMobile")&
+				validateAppPersonFormWaySix(inventorOtherInformation,"updateInventorOtherInformation")
 		   ){
 		   
 			var formData={"inventorId":inventorId,"inventorName":inventorName,"inventorNumber":inventorNumber,
@@ -2090,7 +2090,35 @@ function updateImgName(value,linkSeqNo){
 			}
 	}
 	function validateAppPersonFormWayThree(value,id) {
-			if (value.length>20) {
+		if (value.length>20||value.length<=0) {
+			$("#"+id).css("display","block");
+			return false;
+		} else {
+			$("#"+id).css("display","none");
+			return true;
+		}
+}
+	function validateAppPersonFormWaySix(value,id) {
+		if (value.length>50) {
+			$("#"+id).css("display","block");
+			return false;
+		} else {
+			$("#"+id).css("display","none");
+			return true;
+		}
+}
+	function validateAppPersonFormWayFive(value,id) {
+		if (value.length>20) {
+			$("#"+id).css("display","block");
+			return false;
+		} else {
+			$("#"+id).css("display","none");
+			return true;
+		}
+}
+	
+	function validateAppPersonFormWayFour(value,id) {
+			if (value.length>200) {
 				$("#"+id).css("display","block");
 				return false;
 			} else {
@@ -2336,6 +2364,8 @@ function updateImgName(value,linkSeqNo){
         	settingContact(contactId);
         }
 	}
+	
+
 </script>
 <iframe id="fileFrame" style="display:none"></iframe>
 </body>
