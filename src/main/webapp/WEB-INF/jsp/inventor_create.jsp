@@ -37,15 +37,15 @@
 					<form action="<s:url value='/inventor/addInventorInfo.html'/>" method="post" onsubmit="return check()">
 					  <se:csrfInput/>
 			       	<h5>姓名:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece" type="text" name="inventorName" required onblur="validateInfoNumber(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece" type="text" placeholder="*必填" name="inventorName" required onblur="validateInfoNumber(this.value)"/>
 					<span style="color: red; display: none;" id=numberError>该处应输入不大于20字段</span>
 					<br>	   
 					<h5>证件号码:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" name="inventorNumber"  onblur="validatePhoneNumber(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" placeholder="*必填" name="inventorNumber"  onblur="validatePhoneNumber(this.value)"/>
 					<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
 					<br>		  
 			       	<h5>国籍:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" name="inventorNationality" value="中国"  onblur="validateInfoNumber1(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text"  name="inventorNationality" value="中国"  onblur="validateInfoNumber1(this.value)"/>
 					<span style="color: red; display: none;" id=numberError1>该处应输入不大于20字段</span>
 					<br>		  
 			       	<h5>电话:</h5>
