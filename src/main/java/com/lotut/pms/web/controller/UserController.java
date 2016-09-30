@@ -183,14 +183,18 @@ public class UserController {
 	}
 	
     @RequestMapping(path = "/user_find_password_form",method = RequestMethod.POST)  
-    public void userFindPasswordForm(HttpServletResponse response,PrintWriter out,@RequestParam String username) throws IOException{  
+    public void userFindPasswordForm(HttpServletResponse response,PrintWriter out,@RequestParam String username,@RequestParam String email) throws IOException{  
     	User user = userService.findByName(username);
-    	
     	String processStatus="";
     	if (user == null) {
     		processStatus="2";
     	}else{
-    		processStatus=userService.findPassword(user);	
+    		if(email.equals(user.getEmail())){
+    			processStatus=userService.findPassword(user);
+        	}else{
+        		processStatus="4";
+        	}
+    			
     	}
     	out.write(processStatus);
     }  		
