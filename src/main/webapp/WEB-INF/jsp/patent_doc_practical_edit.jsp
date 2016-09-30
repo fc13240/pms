@@ -448,8 +448,9 @@ margin: 1px 0 0 1px;}
 						 	</thead>
 						  <tbody id="appersonTab">
 								<c:if test="${not empty patentDocAppPersons }">
-									<c:forEach items="${patentDocAppPersons }" var="patentDocAppPerson">
+									<c:forEach items="${patentDocAppPersons }" var="patentDocAppPerson" varStatus="status">
 										<tr>
+											<td style="text-align:center">${status.count }</td>
 											<td style="text-align:center">${patentDocAppPerson.name }</td>
 											<td style="text-align:center">${patentDocAppPerson.idNumber }</td>
 											<td style="text-align:center">${patentDocAppPerson.feeReduceTransactionStatus }</td>
@@ -496,6 +497,7 @@ margin: 1px 0 0 1px;}
 						<table id="simple-table" style="width:900px;"  class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
+							  <th>序号</th>
 							  <th>姓名</th>
 							  <th>证件号码</th>
 							  <th>其他</th>
@@ -505,8 +507,9 @@ margin: 1px 0 0 1px;}
 						  </thead>
 						  <tbody id="inventorTab">
 							  <c:if test="${not empty patentDocInventors }">
-									<c:forEach items="${patentDocInventors }" var="patentDocInventor">
+									<c:forEach items="${patentDocInventors }" var="patentDocInventor" varStatus="status">
 										<tr>
+											<td style='text-align:center'>${status.count}</td>
 											<td style='text-align:center'>${patentDocInventor.inventorName}</td>
 											<td style='text-align:center'>${patentDocInventor.inventorNumber}</td>
 											<td style='text-align:center'>${patentDocInventor.inventorOtherInformation}</td>
@@ -1827,6 +1830,7 @@ function batchAddAppPerson(){
 				}
 				$("#appersonTab").append(
 						"<tr>"+
+						"<td style='text-align:center'>"+(i+1)+"</td>"+
 						"<td style='text-align:center'>"+item.name+"</td>"+
 						"<td style='text-align:center'>"+item.idNumber+"</td>"+
 						"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
@@ -1884,6 +1888,7 @@ function batchAddInventor(){
 				};
 				$("#inventorTab").append(
 						"<tr>"+
+						"<td style='text-align:center'>"+(i+1)+"</td>"+
 						"<td style='text-align:center'>"+item.inventorName+"</td>"+
 						"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
 						"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
@@ -1947,6 +1952,7 @@ function submitAppPersonForm(){
 					};
 					$("#appersonTab").append(
 							"<tr>"+
+							"<td style='text-align:center'>"+(i+1)+"</td>"+
 							"<td style='text-align:center'>"+item.name+"</td>"+
 							"<td style='text-align:center'>"+item.idNumber+"</td>"+
 							"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
@@ -1964,6 +1970,8 @@ function submitAppPersonForm(){
 		resetAppPersonForm();
 		$("#patentDocFilename").val("");
 		$("#patentDocEntrustFilename").val("");
+		$("commonAppPersonTab").empty();
+		searchAppPerson("");
 	};
 }
 
@@ -2017,6 +2025,7 @@ function submitInventorForm(){
 					};
 					$("#inventorTab").append(
 							"<tr>"+
+							"<td style='text-align:center'>"+(i+1)+"</td>"+
 							"<td style='text-align:center'>"+item.inventorName+"</td>"+
 							"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
 							"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
@@ -2029,6 +2038,8 @@ function submitInventorForm(){
 		});
 		resetAddInventorModal();
 		$("#patentDocInventorFilename").val("");
+		$("commonInventorTab").empty();
+		searchInventor("");
 	}else{
 	}
 }
@@ -2111,6 +2122,7 @@ function deletePatentDocApperson(personId){
 				};
 				$("#appersonTab").append(
 						"<tr>"+
+						"<td style='text-align:center'>"+(i+1)+"</td>"+
 						"<td style='text-align:center'>"+item.name+"</td>"+
 						"<td style='text-align:center'>"+item.idNumber+"</td>"+
 						"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
@@ -2184,6 +2196,7 @@ function submitUpdateAppPersonForm(){
 					};
 					$("#appersonTab").append(
 							"<tr>"+
+							"<td style='text-align:center'>"+(i+1)+"</td>"+
 							"<td style='text-align:center'>"+item.name+"</td>"+
 							"<td style='text-align:center'>"+item.idNumber+"</td>"+
 							"<td style='text-align:center'>"+item.feeReduceTransactionStatus+"</td>"+
@@ -2232,6 +2245,7 @@ function deletePatentDocInventor(inventorId){
 				};
 				$("#inventorTab").append(
 						"<tr>"+
+						"<td style='text-align:center'>"+(i+1)+"</td>"+
 						"<td style='text-align:center'>"+item.inventorName+"</td>"+
 						"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
 						"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
@@ -2301,6 +2315,7 @@ function submitUpdateInventorForm(){
 					};
 					$("#inventorTab").append(
 							"<tr>"+
+							"<td style='text-align:center'>"+(i+1)+"</td>"+
 							"<td style='text-align:center'>"+item.inventorName+"</td>"+
 							"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
 							"<td style='text-align:center'>"+item.inventorOtherInformation+"</td>"+
@@ -2668,11 +2683,11 @@ function searchInventor(keyword){
 			$.each(obj,function(i,item){
 				$("#commonInventorTab").append(
 						"<tr>"+
-							"<td class='center' style='text-align:center'><label class='pos-rel'> <span class='batch-share-item'>"+
+							"<td class='center' style='text-align:center;width:50px;'><label class='pos-rel'> <span class='batch-share-item'>"+
 							"<input type='checkbox' class='inventor-check-item' inventor="+item.inventorId+"></span>"+
 							"<span class='lbl'></span></label>"+
 							"</td>"+
-							"<td class='center' style='text-align:center'> "+i+" </td>"+
+							"<td class='center' style='text-align:center'> "+(i+1)+" </td>"+
 							"<td style='text-align:center'>"+item.inventorName+"</td>"+
 							"<td style='text-align:center'>"+item.inventorNumber+"</td>"+
 							"<td style='text-align:center'>"+item.inventorComment+"</td>"+
