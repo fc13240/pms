@@ -595,7 +595,7 @@
 	
 	</select>
 	<select id="getPatentIdByInternalCode"  resultType="java.lang.Long">
-		select patent_id from patents where internal_code=#{internalCode} and patent_owner=#{currentUserId}
+		select patent_id from patents where internal_code=#{internalCode} and patent_owner=#{currentUserId} limit 0,1
 	</select>
 	
 	<insert id="savePatentShareUser">
