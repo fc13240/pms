@@ -127,8 +127,8 @@
 												<label class="block clearfix">
 													<span class="input-remark">邮箱：</span>
 													<span class="input-icon input-icon-right" style="width:290px;">
-														<input type="email" id="email" class="form-control" placeholder="邮箱" name="email"  minlength="3" maxlength="100" required />
-														<i class="ace-icon fa fa-envelope">(请认真填写，用于找回密码！)</i>
+														<input type="email" id="email" class="form-control" placeholder="请输入真实邮箱，用于密码找回" name="email"  minlength="3" maxlength="100" required />
+														<i class="ace-icon fa fa-envelope"></i>
 													</span>
 												</label>												
 

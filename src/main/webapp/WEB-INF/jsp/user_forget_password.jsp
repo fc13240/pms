@@ -74,15 +74,18 @@
 <div class="maincenter" style="width:400px;margin:30px auto;padding: 30px 0;font:'Microsoft YaHei';">
    	<div class="maincenter-box-tip" style="margin-bottom:40px;">
        	<p style="color: #6c6c6c;font-weight:700;font-size:18px;font:'Microsoft YaHei';">
-           输入用户名找回密码,登录邮箱查看密码
+           输入用户名及注册邮箱找回密码,登录邮箱查看密码
         </p>
     </div>
        
 		<div class="ui-form-item     ">
-        	<label >用户名:</label>
-        	<input name="username" id="username" style="width:300px;" type="text" placeholder="请输入会员名" value="">
+        	<label class="input-remark">用户名:</label>
+        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="username" id="username" style="width:300px;" type="text" placeholder="请输入会员名" value="">
         </div>
-
+		<div class="ui-form-item     ">
+        	<label class="input-remark">邮箱地址:</label>
+        	&nbsp;<input name="email" id="email" style="width:300px;" type="text" placeholder="请输入邮箱" value="">
+        </div>
 		<div style="width:340px;margin-top:50px;">
 		    <input type="button" onclick="forgetName()" value="确定" class="width-35  btn btn-sm btn-primary" style="background-color:#C43330 !important;border-color: #C43330;">
 		</div>
@@ -114,17 +117,20 @@
 <script type="text/javascript">
 function forgetName() {
 	var username=$("#username").val();
+	var email=$("#email").val();
 	var status;
 	$.ajax({
 		url: "<s:url value='/user/user_find_password_form.html'/>", 
 		type: 'post',
-		data:{"username" : username},
+		data:{"username" : username,"email":email},
 		success: function(processStatus) {
 			status=processStatus;
 			if(status=="1"){
 				alert('邮件发送成功，请查收！')
 			}else if(status=="2"){
 				alert('用户名不存在！');
+			}else if(status=="4"){
+				alert('邮箱地址输入错误！');
 			}else{
 				alert('发送邮件失败！');
 			}
