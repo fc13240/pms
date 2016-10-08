@@ -114,9 +114,9 @@ $(function() {
 	
 	$("#addFeeForm").validate({
 		submitHandler: function(form){ 
-			if (loadPatent()) {
-				form.submit();
-			} 			     
+			
+			form.submit();
+			 			     
 		}
 	});
 });
@@ -154,7 +154,7 @@ function loadPatent() {
 				addOptions(feeType, result.feeTypes);
 			}
 		});
-		var checkAppNo = /^[0-9]+$/;
+		/* var checkAppNo = /^[0-9]+$/;
 		var reg = new RegExp(checkAppNo);	
 		document.getElementById("appNoTip").style.display = "";
 		document.getElementById("appNoError").style.display = "none";
@@ -164,9 +164,9 @@ function loadPatent() {
 			return false;
 		} else {
 			return true;
-		}
+		} */
 	}
-	return false;
+	/* return false; */
 		
 }
 
