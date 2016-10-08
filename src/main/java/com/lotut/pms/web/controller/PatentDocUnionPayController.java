@@ -43,7 +43,7 @@ public class PatentDocUnionPayController {
 	
 	@RequestMapping(path="/pay")
 	public void unionPay(@RequestParam("orderId")long orderId,HttpServletResponse resp) throws IOException{
-				final String merId = "777290058110048";
+				final String merId = "898340148160514";
 				PatentDocOrder order = patentDocWorkflowService.getOrderById(orderId);
 				String txnAmt = String.valueOf((int)order.getAmount()*100);
 				
@@ -99,7 +99,7 @@ public class PatentDocUnionPayController {
 	}
 	
 	@RequestMapping(path="/frontRcvResponse")
-	public String frontRcvResponse(HttpServletRequest req, HttpServletResponse resp) 
+	public void frontRcvResponse(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException{
 		LogUtil.writeLog("FrontRcvResponse前台接收报文返回开始");
 
@@ -147,7 +147,7 @@ public class PatentDocUnionPayController {
 		req.getRequestDispatcher(pageResult).forward(req, resp);
 		LogUtil.writeLog("FrontRcvResponse前台接收报文返回结束");
 		
-		return "redirect:/editor/patentDocList.html";
+		//return "redirect:/editor/patentDocList.html";
 	}
 	
 	@RequestMapping(path="/backRcvResponse")

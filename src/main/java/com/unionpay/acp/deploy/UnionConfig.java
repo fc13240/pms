@@ -36,11 +36,11 @@ public class UnionConfig {
 	public static String version = "5.0.0";
 	
 	//后台服务对应的写法参照 FrontRcvResponse.java
-	public static String patent_doc_frontUrl = "http://192.168.1.103:8080/pms/patentDocUnionPay/frontRcvResponse.html";
-	public static String frontUrl = "http://192.168.1.103:8080/pms/unionPay/frontRcvResponse.html";
+	public static String patent_doc_frontUrl = "http://g.lotut.com/patentDocUnionPay/frontRcvResponse.html";
+	public static String frontUrl = "http://g.lotut.com/unionPay/frontRcvResponse.html";
 	//后台服务对应的写法参照 BackRcvResponse.java
-	public static String patent_doc_backUrl = "http://192.168.1.103:8080/pms/patentDocUnionPay/backRcvResponse.html";//受理方和发卡方自选填写的域[O]--后台通知地址
-	public static String backUrl = "http://192.168.1.103:8080/pms/unionPay/frontRcvResponse.html";
+	public static String patent_doc_backUrl = "http://g.lotut.com/patentDocUnionPay/backRcvResponse.html";//受理方和发卡方自选填写的域[O]--后台通知地址
+	public static String backUrl = "http://g.lotut.com/unionPay/frontRcvResponse.html";
 	// 商户发送交易时间 格式:YYYYMMDDhhmmss
 	public static String getCurrentTime() {
 		return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());

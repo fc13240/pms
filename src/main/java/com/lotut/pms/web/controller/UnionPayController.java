@@ -45,7 +45,7 @@ public class UnionPayController {
 	
 	@RequestMapping(path="/pay")
 	public void unionPay(@RequestParam("orderId")long orderId,HttpServletResponse resp) throws IOException{
-				final String merId = "777290058110048";
+				final String merId = "898340148160514";
 				Order order = orderService.getOrderById(orderId);
 				String txnAmt = String.valueOf((int)order.getAmount()*100);
 				
