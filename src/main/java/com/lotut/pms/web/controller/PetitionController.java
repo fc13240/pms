@@ -348,5 +348,17 @@ public class PetitionController {
 		response.setContentLength((int)patentDocFile.length());
 		WebUtils.writeStreamToResponse(response, new FileInputStream(patentDocFile));
 	}
+	
+	@RequestMapping(path="/choiceContact",method=RequestMethod.POST)
+	public void choiceContact(HttpServletResponse response){
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<ContactAddress>  contactAddresses = userService.getUserContactAddresses(userId);
+		
+		try {
+			WebUtils.writeJsonStrToResponse(response, contactAddresses);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
 

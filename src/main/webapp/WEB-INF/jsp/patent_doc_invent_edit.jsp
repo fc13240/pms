@@ -568,7 +568,7 @@ margin: 1px 0 0 1px;}
 						</table>
 						<div>
 							<div style="width:100px;margin-left:810px;">
-								<a href="javascript:;" style="color:#00F;font-size:14px;" data-toggle = "modal" data-target = "#commonContactModal">+选择</a>&nbsp;
+								<a href="javascript:choiceContact();" style="color:#00F;font-size:14px;">+选择</a>&nbsp;
 							</div>
 					
 							<hr></hr>
@@ -595,7 +595,6 @@ margin: 1px 0 0 1px;}
 								更新时间  <span><fmt:formatDate value="${patentDoc.lastUpdateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 						</span>					
 					</div>	
-
 				</div>
 			</div>			
 				
@@ -1174,6 +1173,8 @@ margin: 1px 0 0 1px;}
 </div>
 
 <!--commonContactModal  -->
+
+<button style="display:none;" data-toggle = "modal" data-target = "#commonContactModal" id="commonContactModalBtn"></button>
 <div class = "modal fade" id = "commonContactModal" tabindex = "-1" role = "dialog" 
    aria-labelledby = "myModalLabel" aria-hidden = "true" >
    
@@ -1208,7 +1209,10 @@ margin: 1px 0 0 1px;}
 						  <!-- <th>操作</th> -->
 						</tr>
 					  </thead>
-					  <c:forEach items="${contactAddresses}" var="address" varStatus="status">
+					  <tbody id="contactTabModal">
+					  
+					  </tbody>
+					  <%-- <c:forEach items="${contactAddresses}" var="address" varStatus="status">
 						<tr>
 						  <td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
 							<input type="radio" name="contact-check-item" value="${address.id}"/></span>
@@ -1220,9 +1224,8 @@ margin: 1px 0 0 1px;}
 						  </td>
 						  <td style="text-align:center;">${address.detailAddress}</td>
 						  <td style="text-align:center;">${address.phone}</td>
-						<%--   <td style="text-align:center;width:110px;"><a href="javascript:void(0);" onclick="settingContact(${address.id})">设为联系人</a></td> --%>
 						</tr>
-					  </c:forEach>
+					  </c:forEach> --%>
 					</table>
 				</div>
 	           
@@ -2688,6 +2691,37 @@ function updateImgName(value,linkSeqNo){
         	settingContact(contactId);
         }
 	}
+	
+	function choiceContact(){
+		$.ajax({
+			type : "POST",
+			url : "<s:url value='/petition/choiceContact.html'/>",
+			async : false,
+			success : function (result){
+				var contacts = $.parseJSON(result);
+				$("#contactTabModal").empty();
+				$.each(contacts,function(i,item){
+					//alert(item.receiver);
+					$("#contactTabModal").append(
+						"+<tr>"+
+							  "<td class='center' style='text-align:center'><label class='pos-rel'> <span class='batch-share-item'>"+
+							  "<input type='radio' name='contact-check-item' value='"+item.id+"'/></span>"+
+							  "<span class='lbl'></span></label>"+
+							  "</td>"+
+							  "<td class='center' style='text-align:center;'>"+(i+1)+"</td>"+
+							  "<td style='text-align:center;'>"+item.receiver+"</td>"+
+							  "<td style='text-align:center;'>"+item.provinceName+item.cityName+item.districtName+
+							  "</td>"+
+							  "<td style='text-align:center;'>"+item.detailAddress+"</td>"+
+							  "<td style='text-align:center;'>"+item.phone+"</td>"+
+						  "+</tr>"
+					)
+				})
+			}
+		});
+		$("#commonContactModalBtn").trigger("click");
+	}
+
 </script>
 <iframe id="fileFrame" style="display:none"></iframe>
 </body>
