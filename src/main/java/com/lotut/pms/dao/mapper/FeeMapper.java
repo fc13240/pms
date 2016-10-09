@@ -72,4 +72,6 @@ public interface FeeMapper {
 	void deleteUnmonitoredFeesByPatentIds(@Param("patentIds")List<Long> patentIds, @Param("userId")int userId);
 
 	List<String> getFeeTypesByPatentType(int patentTypeId);
+	
+	void insertUserFees(List<Map<String, Integer>> userFeeRecords);
 }

@@ -70,4 +70,6 @@ public interface FeeDao {
 	void deleteUnmonitoredFeesByPatentIds(List<Long> patentIds, int userId);
 
 	List<String> getFeeTypesByPatentType(int patentTypeId);
+	
+	void insertUserFees(List<Map<String, Integer>> userFeeRecords);
 }

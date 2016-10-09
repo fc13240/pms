@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FeeService;
+import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.PatentService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
@@ -37,11 +39,13 @@ import com.lotut.pms.web.util.WebUtils;
 public class FeeController {
 	private FeeService feeService;
 	private PatentService patentService;
+	private FriendService friendService;
 	
 	@Autowired
-	public FeeController(FeeService feeService,PatentService patentService) {
+	public FeeController(FeeService feeService,PatentService patentService,FriendService friendService) {
 		this.feeService = feeService;
 		this.patentService=patentService;
+		this.friendService=friendService;
 	}
 
 	/*
@@ -273,4 +277,38 @@ public class FeeController {
 			Map<String, Object> map = new HashMap<>();
 			map.put("feeTypes", feeTypes);
 			WebUtils.writeJsonStrToResponse(response, map);
-		}}
+		}
+		
+		@RequestMapping(path="showFriends", method=RequestMethod.GET)
+		public String showFriends(Model model) {
+			int userId = PrincipalUtils.getCurrentUserId();
+			List<User> friends = friendService.getUserFriends(userId);
+			model.addAttribute("friends", friends);
+			return "fee_select_friends";
+		}
+		
+		@RequestMapping(path="searchFriends", method=RequestMethod.GET)
+		public String searchFriends(@RequestParam("keyword")String keyword, Model model) {
+			int userId = PrincipalUtils.getCurrentUserId();
+			List<User> friends = friendService.searchUserFriends(userId, keyword);
+			model.addAttribute("friends", friends);
+			return "fee_select_friends";
+		}	
+		
+		@RequestMapping(path="/addShares", method=RequestMethod.GET)
+		public String sharePatents(@RequestParam("fees")List<Integer> fees, @RequestParam("friends")List<Integer> friendIds) {
+			List<Map<String, Integer>> userFeeRecords = new ArrayList<>();
+			for (int fee: fees) {
+				for (int friendId: friendIds) {
+					Map<String, Integer> userFeeRecord =  new HashMap<String, Integer>();
+					userFeeRecord.put("user", friendId);
+					userFeeRecord.put("fee", fee);
+					userFeeRecords.add(userFeeRecord);
+				}
+			}
+			
+			feeService.insertUserFees(userFeeRecords);
+			return "fee_list";
+		}
+
+}

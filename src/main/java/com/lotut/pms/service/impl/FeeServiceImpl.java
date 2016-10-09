@@ -260,4 +260,9 @@ public class FeeServiceImpl implements FeeService {
 			return feeDao.getFeeTypesByPatentType(patentTypeId);
 		}
 
+		@Override
+		public void insertUserFees(List<Map<String, Integer>> userFeeRecords) {
+			feeDao.insertUserFees(userFeeRecords);
+		}
+
 }

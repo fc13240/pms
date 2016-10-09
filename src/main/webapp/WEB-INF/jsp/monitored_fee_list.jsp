@@ -251,6 +251,11 @@
 								<button style="margin-left:10px;" class="button button-rounded button-royal">删除费用</button>
 								</a>
 							  </td>	
+							   <td>
+								<a href="javascript:return void" onclick="shareFees()">
+								<button style="margin-left:10px;" class="button button-rounded button-royal">费用分享</button>
+								</a>
+							  </td>	
 							  <td>
 								<span class="span3" style="font-size:14px;margin-left:50px;">成功交费总额：￥${totalFeeCount }</span>
 							  </td>	
@@ -614,6 +619,7 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 		}
 		return false;
 	}
+	
 </script>	
 
 <script type="text/javascript">
@@ -655,6 +661,26 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 				}
 			}
 			location.href = "<s:url value='/fee/deleteFees.html'/>?fees=" + fees;
+		}
+		
+		function shareFees(){
+			var feeSelected = formutil.anyCheckboxItemSelected('tr td input.fee-check-item');
+			var uniqueFeeNos = []
+			if (!feeSelected) {
+				formutil.alertMessage('请选择费用信息');
+				
+				return;
+			}
+			var fees_checked=formutil.getAllCheckedCheckboxValues('tr td input.fee-check-item', 'fee');
+			for (var i = 0; i < fees_checked.length; i++) {
+				if ($.inArray(fees_checked[i], uniqueFeeNos) == -1) {
+					uniqueFeeNos.push(fees_checked[i]);
+				}
+			}		
+			var fees = uniqueFeeNos.join(",");	
+			alert(fees);
+			location.href = "<s:url value='/fee/showFriends.html'/>?fees=" + fees;
+		
 		}
 </script>
 <script>

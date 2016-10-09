@@ -442,4 +442,12 @@
 		</foreach>			
 	</delete>
 	
+	<insert id="insertUserFees" parameterType="list">
+		replace into user_fees(user, fee) 
+		values
+		<foreach item="userFeeRecord" collection="list" separator=",">
+			(#{userFeeRecord.user}, #{userFeeRecord.fee})
+		</foreach>
+	</insert>	
+	
 </mapper>

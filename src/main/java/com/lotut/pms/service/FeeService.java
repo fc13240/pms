@@ -67,4 +67,6 @@ public interface FeeService {
 	String FeeExportExcel(List<Long> feeIdList, String excelName)  throws IOException;
 
 	List<String> getFeeTypesByPatentType(int patentTypeId);
+	
+	void insertUserFees(List<Map<String, Integer>> userFeeRecords);
 }
