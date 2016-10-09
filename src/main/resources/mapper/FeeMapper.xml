@@ -417,11 +417,19 @@
 		       and f.fee_monitor_status = 2 and f.fee_payment_status =1) as a
 	</select>
 	
-	<insert id="saveFee" parameterType="Fee">
-		replace into fees(deadline, fee_type, amount, patent, fee_monitor_status, invoice_title,fee_owner)
-		values(#{deadline}, #{feeType},#{amount}, #{patent.patentId}, 2, #{invoiceTitle,javaType=string,jdbcType=VARCHAR},#{owner.userId})				
+	<insert id="saveFee" parameterType="Fee" useGeneratedKeys="true" keyProperty="feeId">
+		insert into fees(deadline, fee_type, amount, patent, fee_monitor_status, invoice_title,fee_owner) 
+		values(#{deadline}, #{feeType},#{amount}, #{patent.patentId}, 2, #{invoiceTitle,javaType=string,jdbcType=VARCHAR},#{owner.userId})
+		on duplicate key update
+			patent=#{patent.patentId},fee_type=#{feeType},deadline=#{deadline},fee_owner=#{owner.userId}
+		
 	</insert>
 	
+	<insert id="saveUserFee">
+		replace into user_fees(user, fee) 
+		values (#{userId},#{feeId})
+	</insert>
+		
 	<select id="getCountByDeadlinePayment" parameterType="int" resultType="map">
 		select a.overDue,b.withinTwoWeek,c.withinTwoMonth,d.withinThreeYear,e.outThreeYear 
 		       from (select count(*) overDue from fees 

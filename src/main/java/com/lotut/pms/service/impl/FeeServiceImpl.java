@@ -271,10 +271,15 @@ public class FeeServiceImpl implements FeeService {
 		}
 		
 		@Override
+		@Transactional
 		public void saveFee(Fee fee) {
 			feeDao.saveFee(fee);
+			boolean isNewFee = fee.getFeeId() != 0;
+			if(isNewFee) {
+				feeDao.saveUserFee(fee.getOwner().getUserId(),fee.getFeeId());
+			}
 		}
-
+		
 		@Override
 		public List<Fee> getFeesForPatentId(long patentId) {
 			return feeDao.getFeesForPatentId(patentId);
