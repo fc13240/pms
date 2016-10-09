@@ -73,5 +73,5 @@ public interface FeeMapper {
 
 	List<String> getFeeTypesByPatentType(int patentTypeId);
 	
-	void insertUserFees(List<Map<String, Integer>> userFeeRecords);
+	void insertUserFees(List<Map<String, Long>> userFeeRecords);
 }

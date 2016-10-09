@@ -82,12 +82,26 @@ public class FeeServiceImpl implements FeeService {
 		grabResultMap.put("emptyFeePatents", emptyFeePatents);
 		
 		List<Fee> fees = getShouldPayRecords(shouldPayRecordsMap);
-		
+		int userId=PrincipalUtils.getCurrentUserId();
 		if (!fees.isEmpty()) {
 			feeDao.insertFees(fees);
+			List<Long> feeIds=new ArrayList<>();
+			for(Fee fee:fees){
+				feeIds.add(fee.getFeeId());
+				
+			}
+			List<Map<String, Long>> userFeeRecords = new ArrayList<>();
+			for (Long fee: feeIds) {
+					Map<String, Long> userFeeRecord =  new HashMap<String, Long>();
+					userFeeRecord.put("user", (long) userId);
+					userFeeRecord.put("fee", fee);
+					userFeeRecords.add(userFeeRecord);
+				
+			}
+			feeDao.insertUserFees(userFeeRecords);
 		}
 		
-		List<Fee> resultFees = feeDao.getFeesByPatentIds(patentIds, PrincipalUtils.getCurrentUserId());
+		List<Fee> resultFees = feeDao.getFeesByPatentIds(patentIds, userId);
 		
 		grabResultMap.put("fees", resultFees);
 		
@@ -110,8 +124,23 @@ public class FeeServiceImpl implements FeeService {
 		List<Fee> fees = getShouldPayRecords(shouldPayRecordsMap);
 		if (!fees.isEmpty()) {
 			feeDao.insertFees(fees);
-		}
 		
+		List<Long> feeIds=new ArrayList<>();
+		for(Fee fee:fees){
+			feeIds.add(fee.getFeeId());
+			
+		}
+		int userId=PrincipalUtils.getCurrentUserId();
+		List<Map<String, Long>> userFeeRecords = new ArrayList<>();
+		for (Long fee: feeIds) {
+				Map<String, Long> userFeeRecord =  new HashMap<String, Long>();
+				userFeeRecord.put("user", (long) userId);
+				userFeeRecord.put("fee", fee);
+				userFeeRecords.add(userFeeRecord);
+			
+		}
+		feeDao.insertUserFees(userFeeRecords);
+		}
 		List<Fee> resultFees = feeDao.getFeesByPatentIds(patentIds, PrincipalUtils.getCurrentUserId());
 		grabResultMap.put("patent", patents.get(0));
 		grabResultMap.put("fees", resultFees);
@@ -146,6 +175,7 @@ public class FeeServiceImpl implements FeeService {
 			throw new RuntimeException(e);
 		}
 		
+	
 		return fees;
 	}
 	
@@ -261,7 +291,16 @@ public class FeeServiceImpl implements FeeService {
 		}
 
 		@Override
-		public void insertUserFees(List<Map<String, Integer>> userFeeRecords) {
+		public void insertUserFees(List<Long> fees,List<Long> friendIds) {
+			List<Map<String, Long>> userFeeRecords = new ArrayList<>();
+			for (Long fee: fees) {
+				for (Long friendId: friendIds) {
+					Map<String, Long> userFeeRecord =  new HashMap<String, Long>();
+					userFeeRecord.put("user", friendId);
+					userFeeRecord.put("fee", fee);
+					userFeeRecords.add(userFeeRecord);
+				}
+			}
 			feeDao.insertUserFees(userFeeRecords);
 		}
 

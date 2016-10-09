@@ -164,7 +164,7 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 		}
 
 		@Override
-		public void insertUserFees(List<Map<String, Integer>> userFeeRecords) {
+		public void insertUserFees(List<Map<String, Long>> userFeeRecords) {
 			feeMapper.insertUserFees(userFeeRecords);
 		}
 }

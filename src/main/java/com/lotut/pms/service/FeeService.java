@@ -68,5 +68,5 @@ public interface FeeService {
 
 	List<String> getFeeTypesByPatentType(int patentTypeId);
 	
-	void insertUserFees(List<Map<String, Integer>> userFeeRecords);
+	void insertUserFees(List<Long> fees,List<Long> friendIds);
 }

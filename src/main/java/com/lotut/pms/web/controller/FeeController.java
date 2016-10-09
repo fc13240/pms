@@ -296,18 +296,8 @@ public class FeeController {
 		}	
 		
 		@RequestMapping(path="/addShares", method=RequestMethod.GET)
-		public String sharePatents(@RequestParam("fees")List<Integer> fees, @RequestParam("friends")List<Integer> friendIds) {
-			List<Map<String, Integer>> userFeeRecords = new ArrayList<>();
-			for (int fee: fees) {
-				for (int friendId: friendIds) {
-					Map<String, Integer> userFeeRecord =  new HashMap<String, Integer>();
-					userFeeRecord.put("user", friendId);
-					userFeeRecord.put("fee", fee);
-					userFeeRecords.add(userFeeRecord);
-				}
-			}
-			
-			feeService.insertUserFees(userFeeRecords);
+		public String sharePatents(@RequestParam("fees")List<Long> fees, @RequestParam("friends")List<Long> friendIds) {
+			feeService.insertUserFees(fees,friendIds);
 			return "fee_list";
 		}
 
