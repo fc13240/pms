@@ -279,6 +279,7 @@
 						  <th>专利名称</th>
 						  <th>第一申请人</th>
 						  <th>案件状态</th>
+						  <th>共享人</th>
 						  <th>交费截止日</th>
 						  <th>交费种类</th>
 						  <th>交费金额</th>
@@ -298,6 +299,7 @@
 							<td style="text-align:center">${fee.patent.name}</td>
 							<td style="text-align:center">${fee.patent.firstAppPerson}</td>
 							<td style="text-align:center">${fee.patent.patentStatusText}</td>
+							<td style="text-align:center">共享人</td>
 							<td style="text-align:center"><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
 							<td style="text-align:center">${fee.feeType}</td>
 							<td style="text-align:center">${fee.amount}</td>

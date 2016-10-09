@@ -178,7 +178,8 @@
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
 				left join patent_status ps on p.patent_status = ps.patent_status_id
 				left join order_items oi on f.fee_id = oi.fee_id
-		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
+		 WHERE f.fee_id IN (SELECT fee FROM user_fees WHERE USER=#{userId}) 
+		 and f.fee_monitor_status = 2
 		 	<if test="patentType != null">
 		 		and p.patent_type = #{patentType}
 		 	</if>	
@@ -239,7 +240,8 @@
 		</if>	
 		select count(*)
 		  from fees f join patents p on f.patent = p.patent_id 
-		 where f.fee_owner = #{userId} and f.fee_monitor_status = 2
+		 WHERE f.fee_id IN (SELECT fee FROM user_fees WHERE USER=#{userId}) 
+		 and f.fee_monitor_status = 2
 		 	<if test="patentType != null">
 		 		and p.patent_type = #{patentType}
 		 	</if>	

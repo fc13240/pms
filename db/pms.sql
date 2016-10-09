@@ -945,4 +945,6 @@ CREATE TABLE if not exists `user_fees` (
   KEY `fk_user_fee_fee` (`fee`),
   CONSTRAINT `fk_user_fee_fee` FOREIGN KEY (`fee`) REFERENCES `fees` (`fee_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_user_fee_user` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
-) ENGINE=INNODB DEFAULT CHARSET=utf8
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+INSERT INTO user_fees(USER,fee) SELECT fee_owner,fee_id FROM fees;
