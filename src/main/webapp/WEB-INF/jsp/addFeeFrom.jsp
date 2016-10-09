@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管家——添加专利</title>
+<title>龙图腾专利管家——添加交费</title>
 <%@ include file="_css.jsp" %>
 	<script src="<s:url value='/temp/js/jquery.js'/>" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
@@ -37,14 +37,13 @@
 					  
 						<h5>申请号：</h5>
 						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" name="appNo" id="appNo"  type="text" onblur="loadPatent()" required maxLength="30"/>
-						<span id="appNoTip">(注：不要输入字母和小数点)</span>
-						<span
-							style="color: black; display: none;font-weight:700;" id=appNoError>请输入正确的专利号</span>
+						<span id="appNoTip">[ 注：不要输入字母(X除外)和小数点 ]</span>
+						<span id=appNoError style="color: black; display: none;font-weight:700;" >请输入正确的专利号</span>
 						<br>
 						
 						<h5>专利类型:</h5>
 				        <select style="width:400px;" class="selectPointOfInterest form-control" name="patentType" id="patentType" onblur="loadFeeTypes()" required >
-				           <option value="">请选择</option>
+				          <option value="">请选择</option>
 				          <c:forEach items="${allPatentTypes}" var="patentType">
 				            <option value="<c:out value='${patentType.patentTypeId}'/>">
 				            <c:out value="${patentType.typeDescription}"/>
@@ -80,10 +79,7 @@
 					    <div style="height:20px;"></div>
 						<button class="button button-primary  button-rounded" type="submit" style="width:130px;">加入交费购物车</button>		
 					</form>				
-				</div>
-
-				
-				
+				</div>				
 			</div>
 
 		  </div>		
@@ -114,9 +110,9 @@ $(function() {
 	
 	$("#addFeeForm").validate({
 		submitHandler: function(form){ 
-			
-			form.submit();
-			 			     
+			if(checkAppNo()) {
+				form.submit();
+			}			 			     
 		}
 	});
 });
@@ -154,20 +150,23 @@ function loadPatent() {
 				addOptions(feeType, result.feeTypes);
 			}
 		});
-		/* var checkAppNo = /^[0-9]+$/;
-		var reg = new RegExp(checkAppNo);	
-		document.getElementById("appNoTip").style.display = "";
-		document.getElementById("appNoError").style.display = "none";
-		if (!reg.test(appNo)) {
-			document.getElementById("appNoTip").style.display = "none";
-			document.getElementById("appNoError").style.display = "";
-			return false;
-		} else {
-			return true;
-		} */
+		checkAppNo();
+	}		
+}
+
+function checkAppNo(){
+	var appNo = $("#appNo").val();
+	var checkAppNo = /^[0-9]+((.[0-9]{1})?|(X)?)$/;
+	var reg = new RegExp(checkAppNo);	
+	document.getElementById("appNoTip").style.display = "";
+	document.getElementById("appNoError").style.display = "none";
+	if (!reg.test(appNo)) {
+		document.getElementById("appNoTip").style.display = "none";
+		document.getElementById("appNoError").style.display = "";
+		return false;
+	} else {
+		return true;
 	}
-	/* return false; */
-		
 }
 
 function loadFeeTypes() {
