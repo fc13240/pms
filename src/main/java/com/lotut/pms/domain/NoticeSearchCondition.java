@@ -25,6 +25,18 @@ public class NoticeSearchCondition {
 	private String keyword;
 	private Page page;
 	private Integer timeLimitType;
+	private Integer  noticeViewStatus;
+	
+	
+	
+	public Integer getNoticeViewStatus() {
+		return noticeViewStatus;
+	}
+
+	public void setNoticeViewStatus(Integer noticeViewStatus) {
+		this.noticeViewStatus = noticeViewStatus;
+	}
+
 	public Integer getTimeLimitType() {
 		return timeLimitType;
 	}
@@ -147,9 +159,10 @@ public class NoticeSearchCondition {
 		String keywordTypeStr = keyword == null ? "" : keywordType;
 		String keywordStr = keyword == null ? "" : keyword;
 		String timeLimitTypeStr = timeLimitType == null ? "" : timeLimitType.toString();
+		String noticeViewStatusStr = noticeViewStatus == null ? "" : noticeViewStatus.toString();
 		return 	"&paperApplyType="+paperApplyTypeStr+"&patentType="+patentTypeStr+"&noticeProcessStatus="+noticeProcessStatusStr+
 				"&noticeType="+noticeTypeStr+"&startDispatchDate="+startDispatchDateStr+"&endDispatchDate="
-				+endDispatchDateStr+"&keyword="+keywordStr+"&timeLimitType="+timeLimitTypeStr;
+				+endDispatchDateStr+"&keyword="+keywordStr+"&timeLimitType="+timeLimitTypeStr+"&noticeViewStatus="+noticeViewStatusStr;
 	}
 
 }

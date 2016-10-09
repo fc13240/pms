@@ -20,8 +20,17 @@ public class Notice {
 	private User processUser;
 	private NoticeType noticeType;
 	private NoticePaperApplyType paperApplyType;
+	private Long noticeViewStatus;
+	
 	
 
+	public Long getNoticeViewStatus() {
+		return noticeViewStatus;
+	}
+
+	public void setNoticeViewStatus(Long noticeViewStatus) {
+		this.noticeViewStatus = noticeViewStatus;
+	}
 
 	public String getNoticeId() {
 		return noticeId;

@@ -3,6 +3,7 @@ package com.lotut.pms.dao.mybatis;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.NoticeDao;
@@ -149,6 +150,23 @@ public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao 
 		return noticeMapper.getUserNoticesByIds(noticeIds);
 
 	}
+
+	@Override
+	public void batchChangeNoticeViewStatus(List<Map<String, Long>> noticeIdList) {
+		noticeMapper.batchChangeNoticeViewStatus(noticeIdList);
+	}
+
+	@Override
+	public int unreadNoticeCount(int userId) {
+		return noticeMapper.unreadNoticeCount(userId);
+	}
+
+	@Override
+	public List<Notice> unreadNoticeList(Page page) {
+		return noticeMapper.unreadNoticeList(page);
+	}	
+
+	
 	
 	
 }

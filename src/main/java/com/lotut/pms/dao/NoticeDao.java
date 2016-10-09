@@ -57,4 +57,12 @@ public interface NoticeDao {
 	void updatePatentDocByInternalCode(Notice notice);
 	
 	List<Notice> getUserNoticesByIds(List<Long> noticeIds);
+	
+	void batchChangeNoticeViewStatus(List<Map<String, Long>> noticeIdList);
+	
+	int unreadNoticeCount(int userId);
+	
+	List<Notice> unreadNoticeList(Page page);
+	
+	
 }

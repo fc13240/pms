@@ -31,6 +31,7 @@
 		<result property="dmhFlag" column="dmh_flag"/>
 		<result property="archiveNo" column="archive_no"/>
 		<result property="zipfileName" column="zipfile_name"/>
+		<result property="noticeViewStatus" column="notice_view_status"/>
 		<association property="processStatus" resultMap="NoticeProcessStatusResultMap"/>
 		<association property="paperApplyType"  javaType="NoticePaperApplyType">
 			<id property="paperTypeId" column="paper_type_id"/>
@@ -81,14 +82,16 @@
 				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
-				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username
+				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username,
+				nvl.notice_id AS notice_view_status
 				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
 						join notices n on n.patent = p.patent_id
+						LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id
 						left join users pu on pu.user_id = n.process_user
 						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
 						join notice_process_status nps on nps.notice_process_status_id = n.process_status
 			 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1) and nps.notice_process_status_id=1
-			  order by nps.notice_process_status_id, n.dispatch_date desc, p.app_person, p.patent_id
+			  order by nvl.notice_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_person, p.patent_id
 				limit #{startIndex}, #{pageSize}) as un
 			join user_patents up on un.patent_id = up.patent
 		  	join users u on up.user = u.user_id	
@@ -165,6 +168,7 @@
 		</if>	
 		select count(*) 
 		  from notices n join patents p on n.patent = p.patent_id
+		  LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1)	
 		 	<if test="patentType != null">
@@ -220,7 +224,18 @@
 			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) > 30
 			 		</otherwise>	 				 				 				 		
 			 	   </choose>
-		</if> 				 			 		 
+		</if> 
+		<if test="noticeViewStatus != null">
+					<choose>
+						<when test="noticeViewStatus == 1">
+							and nvl.notice_id is not null
+						</when>
+						<when test="noticeViewStatus == 2">
+							and nvl.notice_id is  null
+						</when>
+					</choose>
+					
+				</if> 						 			 		 
 	</select>	
 	
 	<select id="searchUserNoticesByPage" parameterType="NoticeSearchCondition" resultMap="NoticeResultMap">
@@ -233,9 +248,11 @@
 				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
-				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username
+				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username,
+				nvl.notice_id AS notice_view_status
 				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
 						join notices n on n.patent = p.patent_id
+						LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id
 						left join users pu on pu.user_id = n.process_user
 						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
 						join notice_process_status nps on nps.notice_process_status_id = n.process_status
@@ -293,7 +310,18 @@
 			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) > 30
 			 		</otherwise>	 				 				 				 		
 			 	   </choose>
-			 	 </if> 				 
+			 	 </if>
+			 	 <if test="noticeViewStatus != null">
+					<choose>
+						<when test="noticeViewStatus == 1">
+							and nvl.notice_id is not null
+						</when>
+						<when test="noticeViewStatus == 2">
+							and nvl.notice_id is  null
+						</when>
+					</choose>
+					
+				</if> 				 
 			  order by n.dispatch_date desc, p.app_person, p.patent_id
 				limit #{page.startIndex}, #{page.pageSize}) as un
 			join user_patents up on un.patent_id = up.patent
@@ -442,4 +470,49 @@
 			join user_patents up on un.patent_id = up.patent
 		  	join users u on up.user = u.user_id	
 	</select>
+	
+	
+	<insert id="batchChangeNoticeViewStatus" parameterType="list">
+		replace into notice_read(notice_id, user_id) 
+		values
+		<foreach item="noticeIdList" collection="list" separator=",">
+			(#{noticeIdList.noticeId}, #{noticeIdList.userId})
+		</foreach>
+	</insert>
+	
+	<select id="unreadNoticeList" parameterType="Page" resultMap="NoticeResultMap">
+		select un.*, u.user_id as share_user_id,  u.username as share_username
+		from (select p.patent_id, p.app_no, p.patent_name,p.patent_status_text, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description,
+				n.notice_id,n.notice_name, n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
+				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
+				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
+				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username,
+				nvl.notice_id AS notice_view_status
+				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
+						join notices n on n.patent = p.patent_id
+						LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id
+						left join users pu on pu.user_id = n.process_user
+						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
+						join notice_process_status nps on nps.notice_process_status_id = n.process_status
+			 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1)
+				and nvl.notice_id is  null		 
+			  order by n.dispatch_date desc, p.app_person, p.patent_id
+				limit #{startIndex}, #{pageSize}) as un
+			join user_patents up on un.patent_id = up.patent
+		  	join users u on up.user = u.user_id		
+	</select>
+	
+	
+	
+	
+	
+	<select id="unreadNoticeCount" resultType="int">
+		select count(*) 
+		  from notices n join patents p on n.patent = p.patent_id
+		  LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id
+		  	left join patent_status ps on p.patent_status = ps.patent_status_id
+		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1)	
+		and nvl.notice_id is  null					 			 		 
+	</select>	
 </mapper>

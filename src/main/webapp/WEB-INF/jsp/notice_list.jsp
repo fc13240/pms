@@ -227,6 +227,7 @@
 							  <td>通知状态</td>
 							  <td>通知类型</td>
 							  <td>纸件申请</td>
+							  <td>查看状态</td>
 							  <td>发文日起始</td>
 							  <td></td>
 							  <td>发文日结束</td>
@@ -272,6 +273,13 @@
 						            <c:out value="${paperApplyType.paperTypeDescription}"/>
 						            </option>
 						          </c:forEach>
+						        </select>							  
+							  </td>
+							  <td>
+						        <select style="width:100px;" class="selectPointOfInterest form-control" name="noticeViewStatus">
+						          <option value="0">全部</option>
+						          <option value="1">已查看</option>
+						          <option value="2">未查看</option>
 						        </select>							  
 							  </td>
 							  <td>
@@ -334,7 +342,20 @@
 					  				</se:authorize>		
 					  				<td>
 										<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportNotices()">表格导出</button>
-									</td>		
+									</td>
+									<td>
+										<a href="javascript:return void" onclick="batchChangeNoticeViewStatus()">
+										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">批量修改已查看</button>
+										</a>
+
+									</td>
+									<td>
+										<span class="span3" style="font-size:14px;margin-left:50px;">
+										<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" >未查看${unreadNoticeCount}件
+										</a>
+										</span>
+							  		</td>	
+											
 					  			</tr>
 					  		</table>		
 						  </div>
@@ -354,7 +375,7 @@
 							  <th>共享人</th>
 							  <th width="100px">发文日</th>
 							  <th>通知书名称</th>
-							  <th width="100px">纸件申请</th>
+							  <th width="100px">查看状态/纸件申请</th>
 							  <th width="160px">期限和通知状态</th>
 							  <!-- 							<th>预览</th> 
 							  <th>下载</th>-->
@@ -380,6 +401,15 @@
 								</td>
 								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center">
+									 <span class="qixian">
+										<c:choose>
+											<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
+											<c:otherwise>未查看
+											</c:otherwise>
+									  	</c:choose>
+									<br>
+									</span>  
+								
 								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this)">
 									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
 										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
@@ -394,6 +424,15 @@
 								
 								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
 								<td style="text-align:center">
+									
+									<span class="qixian">
+										<c:choose>
+											<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
+											<c:otherwise>未查看
+											</c:otherwise>
+									  	</c:choose>
+									<br>
+									</span> 
 								  <select class="form-control" disabled="disabled">
 									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
 										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
@@ -408,6 +447,14 @@
 								
 								<se:authorize access="hasRole('ROLE_USER') and  not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center">
+								 <span class="qixian">
+										<c:choose>
+											<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
+											<c:otherwise>未查看
+											</c:otherwise>
+									  	</c:choose>
+									<br>
+									</span> 
 								  <select id="roleUser" class="form-control" onClick=selectClick() onChange="javascript:changeRoleUserPaperApplyType('${notice.noticeId}', this)">
 										<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
 										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
@@ -989,6 +1036,53 @@ function batchChangeNoticePaperType(paperApplyType) {
 	}	
 	$.ajax({
 		url: "<s:url value='/notice/batchChangePaperType.html'/>?notices=" + notices + "&paperApplyType=" + paperApplyType, 
+		type: 'get', 
+		success: function() {
+			$("<div>操作成功</div>").dialog({
+				modal: true,
+				buttons: {
+					Ok: function() {
+						$(this).dialog("close");
+						location.reload();
+					}
+				}	
+			});
+		}
+	});			
+	
+}
+
+
+function batchChangeNoticeViewStatus() {
+	var noticeSelected = false;
+	var notices = []
+
+	var noticeCheckboxes = $('tr td input.check-item');
+	for (var i = 0; i < noticeCheckboxes.length; i++) {
+		if (noticeCheckboxes[i].checked) {
+			noticeSelected = true;
+			break;
+		}
+	}
+	if (!noticeSelected) {
+		$("<div>请选择通知书</div>").dialog({
+			modal: true,
+			buttons: {
+				Ok: function() {
+					$(this).dialog("close");
+				}
+			}	
+		});	
+		return;
+	}
+		
+	for (var i = 0; i < noticeCheckboxes.length; i++) {
+		if (noticeCheckboxes[i].checked) {
+			notices.push(noticeCheckboxes[i].getAttribute("notice"));
+		}
+	}	
+	$.ajax({
+		url: "<s:url value='/notice/batchChangeNoticeViewStatus.html'/>?notices=" + notices, 
 		type: 'get', 
 		success: function() {
 			$("<div>操作成功</div>").dialog({

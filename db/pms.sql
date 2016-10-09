@@ -938,3 +938,8 @@ VALUES(20,'等待申请费'),
 ALTER TABLE common_inventor add COLUMN create_time  TIMESTAMP;
 ALTER TABLE common_app_person add COLUMN create_time TIMESTAMP;
 
+CREATE TABLE IF NOT EXISTS notice_read (
+	notice_id BIGINT NOT NULL,
+	user_id INT NOT NULL,
+	PRIMARY KEY (notice_id,user_id)
+);
