@@ -153,7 +153,6 @@
 		} else {
 			var friends = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'friend').join(",");
 			var fees = $("input[name=fees]").val();
-			alert(fees);
 			$.ajax({
 				url: "<s:url value='/fee/addShares.html'/>?friends=" + friends + "&fees=" + fees, 
 				type: 'GET', 

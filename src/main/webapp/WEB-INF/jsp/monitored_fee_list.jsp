@@ -678,7 +678,6 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 				}
 			}		
 			var fees = uniqueFeeNos.join(",");	
-			alert(fees);
 			location.href = "<s:url value='/fee/showFriends.html'/>?fees=" + fees;
 		
 		}
