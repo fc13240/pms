@@ -32,12 +32,13 @@
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
 
-					<form action="<s:url value='/patent/addPatent.html'/>" method="post">
+					<form action="<s:url value='/patent/addPatent.html'/>" method="post"  onsubmit="return checkAppNo()">
 					  <div class="lt-third" style="background:#fff;margin-top:10px;">
 					  
 						<h5>专利号：</h5>
-						<input class="selectPointOfInterest form-control" style="width:332px;display:inline;"  type="text" name="appNo" id="appNo"  required/>
-						<span>(注：不要输入ZL和小数点)</span>
+						<input class="selectPointOfInterest form-control" style="width:332px;display:inline;"  type="text" name="appNo" id="appNo" onblur="checkAppNo()" required/>
+						<span id="appNoTip">[ 注：不要输入字母(X除外)和小数点 ]</span>
+						<span id=appNoError style="color: black; display: none;font-weight:700;" >请输入正确的专利号</span>
 						<br>	  
 				        <h5>专利名称:</h5>
 				        <input class="selectPointOfInterest form-control" style="width:332px;" type="text" name="name" id="name"  required/>	  
@@ -91,6 +92,21 @@
 
  
 <script type="text/javascript">
+function checkAppNo(){
+	var appNo = $("#appNo").val();
+	var checkAppNo = /^[0-9]+((.[0-9]{1})?|(X)?)$/;
+	var reg = new RegExp(checkAppNo);	
+	document.getElementById("appNoTip").style.display = "";
+	document.getElementById("appNoError").style.display = "none";
+	if (!reg.test(appNo)) {
+		document.getElementById("appNoTip").style.display = "none";
+		document.getElementById("appNoError").style.display = "";
+		return false;
+	} else {
+		return true;
+	}
+}
+
 function addDefaultOption(selectElem) {
 	selectElem.append("<option value=''>请选择</option>");
 }

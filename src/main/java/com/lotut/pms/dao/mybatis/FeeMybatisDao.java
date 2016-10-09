@@ -162,4 +162,9 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 		public List<String> getFeeTypesByPatentType(int patentTypeId) {
 			return feeMapper.getFeeTypesByPatentType(patentTypeId);
 		}
+
+		@Override
+		public void insertUserFees(List<Map<String, Long>> userFeeRecords) {
+			feeMapper.insertUserFees(userFeeRecords);
+		}
 }
