@@ -1,6 +1,8 @@
 package com.lotut.pms.domain;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -19,6 +21,7 @@ public class Fee {
 	private String invoiceTitle;
 	private Patent patent;
 	private long orderId;
+	private List<User> shareUsers;
 
 
 	public long getFeeId() {
@@ -120,5 +123,21 @@ public class Fee {
 
 	public void setOrderId(long orderId) {
 		this.orderId = orderId;
+	}
+	
+	public String getShareUsersAsString() {
+		if (this.shareUsers != null) {
+			return String.join(";", this.shareUsers.stream().map(User::getUsername).collect(Collectors.toList()));
+		}
+		
+		return "";
+	}
+
+	public List<User> getShareUsers() {
+		return shareUsers;
+	}
+
+	public void setShareUsers(List<User> shareUsers) {
+		this.shareUsers = shareUsers;
 	}
 }
