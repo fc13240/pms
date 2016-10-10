@@ -307,50 +307,50 @@
 						<!-- PAGE CONTENT BEGINS -->
 						<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
 						  <div class="ta-top" style="margin-left:8px;"> 
-						  	<table class="search-table">
+						  	<table class="search-table" width="100%">
 					  			<tr>
-					  				<td>
+					  				<td width="6%">
 									  	<a href="javascript:return void" onclick="batchGrabFees()">
 										<button class="button button-caution button-rounded">在线交费</button>
 										</a>
 					  				</td>
 					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
-					  				<td>
+					  				<td width="6%">
 										<a href="javascript:return void" onclick="batchProcessNotice(2)">
 										<button style="width:120px;margin-left:10px;" class="button button-rounded button-highlight">置为初步处理</button>
 										</a> 
 					  				</td>
 					  				</se:authorize>			
 					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">		  				
-					  				<td>
+					  				<td width="6%">
 									  	<a href="javascript:return void" onclick="batchProcessNotice(4)">
 										<button style="width:120px;margin-left:10px;" class="button button-action button-rounded">置为完成处理</button>
 										</a> 
 									</td>	
 									</se:authorize>
-					  				<td>
+					  				<td width="6%">
 										<a href="javascript:return void" onclick="batchShare()">
 										<button style="margin-left:10px;" class="button button-rounded button-primary">专利分享</button>
 										</a>
 					  				</td>
 					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
-					  				<td>
+					  				<td width="6%">
 										<a href="javascript:return void" onclick="batchChangeNoticePaperType(2)">
 										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">批量申请纸件</button>
 										</a>
 					  				</td>
 					  				</se:authorize>		
-					  				<td>
+					  				<td width="6%">
 										<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportNotices()">表格导出</button>
 									</td>
-									<td>
+									<td width="6%">
 										<a href="javascript:return void" onclick="batchChangeNoticeViewStatus()">
-										<button style="width:140px;margin-left:10px;" class="button button-rounded button-royal">批量修改为已查看</button>
+										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">置为已查看</button>
 										</a>
 
 									</td>
-									<td>
-										<span class="span3" style="font-size:14px;margin-left:50px;">
+									<td align="right">
+										<span class="span3" style="font-size:14px;">
 										<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" >未查看${unreadNoticeCount}件
 										</a>
 										</span>
