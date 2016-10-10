@@ -288,7 +288,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public void batchChangeNoticeViewStatus(List<Long> noticeIdList,int userId) {
+	@Transactional
+	public int batchChangeNoticeViewStatus(List<Long> noticeIdList,int userId) {
 		List<Map<String, Long>> list =new ArrayList<>();
 		for(Long noticeId:noticeIdList){
 			Map<String,Long> map=new HashMap<String,Long>();
@@ -297,6 +298,7 @@ public class NoticeServiceImpl implements NoticeService {
 			list.add(map);
 		}
 		noticeDao.batchChangeNoticeViewStatus(list);
+		return 1;
 	}
 
 	@Override

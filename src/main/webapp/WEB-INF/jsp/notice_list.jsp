@@ -401,7 +401,7 @@
 								</td>
 								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center">
-									 <span class="qixian">
+									 <span class="qixian" id="i${notice.noticeId}">
 										<c:choose>
 											<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
 											<c:otherwise>未查看
@@ -425,7 +425,7 @@
 								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
 								<td style="text-align:center">
 									
-									<span class="qixian">
+									<span class="qixian" id="j${notice.noticeId}">
 										<c:choose>
 											<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
 											<c:otherwise>未查看
@@ -447,7 +447,7 @@
 								
 								<se:authorize access="hasRole('ROLE_USER') and  not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center">
-								 <span class="qixian">
+								 <span class="qixian" id="k${notice.noticeId}">
 										<c:choose>
 											<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
 											<c:otherwise>未查看
@@ -512,7 +512,7 @@
 								</td>
 								</se:authorize>
 								<td style="text-align:center">
-								<a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}"> 下载 </a> 
+								<a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}" onclick="changeNoticeReadStatus(${notice.noticeId})"> 下载 </a> 
 								<a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
 								  分享
 								  </a>
@@ -1108,6 +1108,18 @@ function batchChangeNoticeViewStatus() {
 		}
 	});			
 	
+}
+
+function changeNoticeReadStatus(result){
+	$.ajax({
+		url: "<s:url value='/notice/changeNoticeReadStatus.html'/>?notices=" + result, 
+		type: 'get', 
+		success: function() {
+			$("#i"+result).html("已查看");
+			$("#j"+result).html("已查看");
+			$("#k"+result).html("已查看");
+		}
+	});	
 }
 </script>
 <script>
