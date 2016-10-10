@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -68,6 +69,8 @@ public class NoticeController {
 		List<Notice> userNotices = noticeService.getUserNoticesByPage(page);
 		int totalCount=(int)noticeService.getUserNoticesCount(userId);
 		page.setTotalRecords(totalCount);
+		int unreadNoticeCount=noticeService.unreadNoticeCount(userId);
+		
 		model.addAttribute("notices", userNotices);
 		model.addAttribute("patentTypeCount",patentTypeCount);
 		model.addAttribute("noticeTypeCount",noticeTypeCount);
@@ -75,6 +78,8 @@ public class NoticeController {
 		model.addAttribute("paperApplyTypeCount",paperApplyTypeCount);
 		model.addAttribute("remainDayCount",remainDayCount);
 		model.addAttribute("page", page);
+		model.addAttribute("unreadNoticeCount", unreadNoticeCount);
+		model.addAttribute("wayOfPaging","normal");
 		addSearchTypesDataToModel(model);
 		return "notice_list";
 	}
@@ -93,6 +98,7 @@ public class NoticeController {
 		Map<String,Map<String,String>> paperApplyTypeCount=noticeService.getUserNoticeCountByPaperApplyType(searchCondition.getUserId());
 		Map<String,Map<String,String>> remainDayCount=noticeService.getUserNoticeCountByRemainDay(searchCondition.getUserId());
 		int totalCount=(int)noticeService.searchUserNoticesCount(searchCondition);
+		int unreadNoticeCount=noticeService.unreadNoticeCount(searchCondition.getUserId());
 		page.setTotalRecords(totalCount);
 		model.addAttribute("notices", resultNotices);
 		model.addAttribute("patentTypeCount",patentTypeCount);
@@ -101,6 +107,8 @@ public class NoticeController {
 		model.addAttribute("paperApplyTypeCount",paperApplyTypeCount);
 		model.addAttribute("remainDayCount",remainDayCount);
 		model.addAttribute("page", page);
+		model.addAttribute("unreadNoticeCount", unreadNoticeCount);
+		model.addAttribute("wayOfPaging","normal");
 		addSearchTypesDataToModel(model);
 		return "notice_list";
 	}	
@@ -108,6 +116,10 @@ public class NoticeController {
 	
 	@RequestMapping(path="/preview", method=RequestMethod.GET)
 	public void previewNotice(@RequestParam("notice")int noticeId, HttpServletResponse response) throws IOException {
+		List<Long> noticeIdList=new ArrayList<Long>();
+		noticeIdList.add(new Long(noticeId));
+		int userId=PrincipalUtils.getCurrentUserId();
+		noticeService.batchChangeNoticeViewStatus(noticeIdList,userId);
 		try {
 			response.setContentType("application/pdf");
 			Path pdfPath = noticeService.createPdfIfNeeded(noticeId);
@@ -128,11 +140,16 @@ public class NoticeController {
 			out.write("<html><head><title>通知书预览</title></head><body><h1>没有可预览的通知书</h1></body></html>");
 			out.flush();
 		}
-
+		
 	}
 	
 	@RequestMapping(path="/download", method=RequestMethod.GET)
 	public void downloadNotice(@RequestParam("notice")int noticeId, HttpServletResponse response,HttpServletRequest request) throws IOException {
+		List<Long> noticeIdList=new ArrayList<Long>();
+		noticeIdList.add(new Long(noticeId));
+		int userId=PrincipalUtils.getCurrentUserId();
+		noticeService.batchChangeNoticeViewStatus(noticeIdList,userId);
+		
 		response.setContentType("application/zip");
 		
 		Notice notice = noticeService.getNoticeById(noticeId);
@@ -262,4 +279,42 @@ public class NoticeController {
 		}
 	}
 	
+	
+	@RequestMapping(path="/batchChangeNoticeViewStatus", method=RequestMethod.GET)
+	public String batchChangeNoticeViewStatus(@RequestParam("notices")List<Long> noticeIdList) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		noticeService.batchChangeNoticeViewStatus(noticeIdList,userId);
+		return "notice_list";
+	}
+	
+	
+	@RequestMapping(path="/unreadNotice", method=RequestMethod.GET)
+	public String unreadNotice(Model model,Page page,HttpSession session) {
+		if (page.getCurrentPage() < 1) {
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		Map<Integer,Map<String,Long>> patentTypeCount=noticeService.getUserNoticeCountByType(userId);
+		Map<String,Map<String,String>> noticeTypeCount=noticeService.getUserNoticeCountByNoticeType(userId);
+		Map<String,Map<String,String>> processStatusCount=noticeService.getUserNoticeCountByProcessStatus(userId);
+		Map<String, Map<String, String>> paperApplyTypeCount=noticeService.getUserNoticeCountByPaperApplyType(userId);
+		Map<String,Map<String,String>> remainDayCount=noticeService.getUserNoticeCountByRemainDay(userId);
+		List<Notice> userNotices = noticeService.unreadNoticeList(page);
+		int totalCount=(int)noticeService.unreadNoticeCount(userId);
+		page.setTotalRecords(totalCount);
+		int unreadNoticeCount=noticeService.unreadNoticeCount(userId);
+		model.addAttribute("notices", userNotices);
+		model.addAttribute("patentTypeCount",patentTypeCount);
+		model.addAttribute("noticeTypeCount",noticeTypeCount);
+		model.addAttribute("processStatusCount",processStatusCount);
+		model.addAttribute("paperApplyTypeCount",paperApplyTypeCount);
+		model.addAttribute("remainDayCount",remainDayCount);
+		model.addAttribute("page", page);
+		model.addAttribute("unreadNoticeCount", unreadNoticeCount);
+		model.addAttribute("wayOfPaging","unreadNotice");
+		addSearchTypesDataToModel(model);
+		return "notice_list";
+	}
 }

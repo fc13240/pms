@@ -299,7 +299,7 @@
 							<td style="text-align:center">${fee.patent.name}</td>
 							<td style="text-align:center">${fee.patent.firstAppPerson}</td>
 							<td style="text-align:center">${fee.patent.patentStatusText}</td>
-							<td style="text-align:center">共享人</td>
+							<td style="text-align:center">${fee.shareUsersAsString}</td>
 							<td style="text-align:center"><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
 							<td style="text-align:center">${fee.feeType}</td>
 							<td style="text-align:center">${fee.amount}</td>

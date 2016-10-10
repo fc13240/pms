@@ -938,6 +938,13 @@ VALUES(20,'等待申请费'),
 ALTER TABLE common_inventor add COLUMN create_time  TIMESTAMP;
 ALTER TABLE common_app_person add COLUMN create_time TIMESTAMP;
 
+
+CREATE TABLE IF NOT EXISTS notice_read (
+	notice_id BIGINT NOT NULL,
+	user_id INT NOT NULL,
+	PRIMARY KEY (notice_id,user_id)
+);
+
 CREATE TABLE if not exists `user_fees` (
   `user` INT(11) NOT NULL DEFAULT '0',
   `fee` BIGINT(20) NOT NULL DEFAULT '0',
@@ -947,4 +954,5 @@ CREATE TABLE if not exists `user_fees` (
   CONSTRAINT `fk_user_fee_user` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-replace INTO user_fees(USER,fee) SELECT fee_owner,fee_id FROM fees;
+INSERT INTO user_fees(USER,fee) SELECT fee_owner,fee_id FROM fees;
+

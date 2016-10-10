@@ -6,6 +6,7 @@ import java.util.Map;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.FeeSearchCondition;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.User;
 
 public interface FeeDao {
 	
@@ -76,4 +77,6 @@ public interface FeeDao {
 	int getLastFeeId();
 	
 	void insertFee(Fee fee);
+
+	void saveUserFee(int userId, long feeId);
 }

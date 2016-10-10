@@ -207,7 +207,6 @@ public class NoticeServiceImpl implements NoticeService {
 	@Transactional
 	public void batchUpdateNoticesNoticePaperType(List<Integer> noticeIdList, int noticePaperApplyType) {
 		noticeDao.batchUpdateNoticesNoticePaperType(noticeIdList, noticePaperApplyType);
-		
 	}
 
 	@Override
@@ -286,5 +285,27 @@ public class NoticeServiceImpl implements NoticeService {
 		if (userPatentRecords.size() > 0) {
 			sharePatentDao.insertUserPatents(userPatentRecords);
 		}
+	}
+
+	@Override
+	public void batchChangeNoticeViewStatus(List<Long> noticeIdList,int userId) {
+		List<Map<String, Long>> list =new ArrayList<>();
+		for(Long noticeId:noticeIdList){
+			Map<String,Long> map=new HashMap<String,Long>();
+			map.put("noticeId", noticeId);
+			map.put("userId", new Long(userId));
+			list.add(map);
+		}
+		noticeDao.batchChangeNoticeViewStatus(list);
+	}
+
+	@Override
+	public int unreadNoticeCount(int userId) {
+		return noticeDao.unreadNoticeCount(userId);
+	}
+
+	@Override
+	public List<Notice> unreadNoticeList(Page page) {
+		return noticeDao.unreadNoticeList(page);
 	}
 }

@@ -68,4 +68,11 @@ public interface NoticeMapper {
 	void updatePatentDocByInternalCode(Notice notice);
 	
 	List<Notice> getUserNoticesByIds(@Param("noticeIds")List<Long> noticeIds);
+	
+	void batchChangeNoticeViewStatus(List<Map<String, Long>> noticeIdList);
+	
+	int unreadNoticeCount(int userId);
+	
+	List<Notice> unreadNoticeList(Page page);
+	
 }
