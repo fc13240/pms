@@ -345,7 +345,7 @@
 									</td>
 									<td>
 										<a href="javascript:return void" onclick="batchChangeNoticeViewStatus()">
-										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">批量修改为已查看</button>
+										<button style="width:130px;margin-left:10px;" class="button button-rounded button-royal">批量修改为已查看</button>
 										</a>
 
 									</td>
