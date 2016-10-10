@@ -322,7 +322,7 @@
 					</choose>
 					
 				</if> 				 
-			  order by n.dispatch_date desc, p.app_person, p.patent_id
+			  order by nvl.notice_id,n.dispatch_date desc, p.app_person, p.patent_id
 				limit #{page.startIndex}, #{page.pageSize}) as un
 			join user_patents up on un.patent_id = up.patent
 		  	join users u on up.user = u.user_id		
