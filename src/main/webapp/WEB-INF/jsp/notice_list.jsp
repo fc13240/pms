@@ -345,7 +345,7 @@
 									</td>
 									<td width="6%">
 										<a href="javascript:return void" onclick="batchChangeNoticeViewStatus()">
-										<button style="width:140px;margin-left:10px;" class="button button-rounded button-royal">置为已查看</button>
+										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">置为已查看</button>
 										</a>
 
 									</td>
