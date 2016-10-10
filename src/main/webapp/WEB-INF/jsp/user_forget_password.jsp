@@ -130,7 +130,7 @@ function forgetName() {
 			}else if(status=="2"){
 				alert('用户名不存在！');
 			}else if(status=="4"){
-				alert('邮箱地址输入错误！');
+				alert('温馨提示:您输入的邮箱地址和注册邮箱不一致，请核对后再进行提交！');
 			}else{
 				alert('发送邮件失败！');
 			}

@@ -87,12 +87,12 @@
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
 				left join patent_status ps on p.patent_status = ps.patent_status_id
 				left join order_items oi on f.fee_id = oi.fee_id
-		 where f.fee_id in ( select fee from user_fees where user= #{userId}) and f.fee_monitor_status = 2 and f.fee_payment_status =1 and <![CDATA[f.deadline <=(CURDATE()+INTERVAL 3 YEAR)]]>
+		 where f.fee_id in (select fee from user_fees where user= #{userId}) and f.fee_monitor_status = 2 and f.fee_payment_status =1 and <![CDATA[f.deadline <=(CURDATE()+INTERVAL 3 YEAR)]]>
 		 order by p.patent_id, f.deadline
-		 limit #{startIndex}, #{pageSize} ) as rs
+		  limit #{startIndex}, #{pageSize}) as rs
 		 JOIN user_fees uf ON uf.fee = rs.fee_id
 		 JOIN users u ON u.user_id = uf.user
-		 ORDER BY rs.patent_id, rs.deadline
+		 ORDER BY rs.patent_id, rs.deadline 
 	</select>
 
 	<select id="getUserMonitoredFeesCount"  resultType="int">
@@ -107,8 +107,6 @@
 				left join order_items oi on f.fee_id = oi.fee_id
 		 where f.fee_id in ( select fee from user_fees where user= #{userId}) and f.fee_monitor_status = 2 and f.fee_payment_status =1 and <![CDATA[f.deadline <=(CURDATE()+INTERVAL 3 YEAR)]]>
 		  ) as rs
-		 JOIN user_fees uf ON uf.fee = rs.fee_id
-		 JOIN users u ON u.user_id = uf.user
 	</select>
 	
 	<select id="searchUserMonitoredFees" parameterType="FeeSearchCondition" resultMap="FeeResultMap">
@@ -439,7 +437,13 @@
 		insert into fees(deadline, fee_type, amount, patent, fee_monitor_status, invoice_title,fee_owner) 
 		values(#{deadline}, #{feeType},#{amount}, #{patent.patentId}, 2, #{invoiceTitle,javaType=string,jdbcType=VARCHAR},#{owner.userId})
 		on duplicate key update
-			patent=#{patent.patentId},fee_type=#{feeType},deadline=#{deadline},fee_owner=#{owner.userId}
+			deadline=#{deadline},
+			fee_type=#{feeType},
+			amount=#{amount},
+			patent=#{patent.patentId},
+			fee_monitor_status=2,
+			invoice_title=#{invoiceTitle,javaType=string,jdbcType=VARCHAR},
+			fee_owner=#{owner.userId}
 	</insert>
 	
 	<insert id="saveUserFee">

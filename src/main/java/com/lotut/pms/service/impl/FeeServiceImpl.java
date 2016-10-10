@@ -79,7 +79,7 @@ public class FeeServiceImpl implements FeeService {
 		List<Patent> emptyFeePatents = crawler.getEmptyFeePatents();
 		grabResultMap.put("failedPatents", failedPatents);
 		grabResultMap.put("emptyFeePatents", emptyFeePatents);
-		List<Fee> fees = getShouldPayRecords(shouldPayRecordsMap);
+		getShouldPayRecords(shouldPayRecordsMap);
 		int userId=PrincipalUtils.getCurrentUserId();
 		List<Fee> resultFees = feeDao.getFeesByPatentIds(patentIds, userId);
 		grabResultMap.put("fees", resultFees);
@@ -99,7 +99,7 @@ public class FeeServiceImpl implements FeeService {
 		crawler.grabFees();
 		Map<Patent, List<List<String>>> shouldPayRecordsMap = crawler.getShouldPayRecordsMap();
 		Map<Patent, List<List<String>>> paidRecordsMap = crawler.getPaidRecordsMap();
-		List<Fee> fees = getShouldPayRecords(shouldPayRecordsMap);
+		getShouldPayRecords(shouldPayRecordsMap);
 		List<Fee> resultFees = feeDao.getFeesByPatentIds(patentIds, PrincipalUtils.getCurrentUserId());
 		grabResultMap.put("patent", patents.get(0));
 		grabResultMap.put("fees", resultFees);
@@ -109,8 +109,8 @@ public class FeeServiceImpl implements FeeService {
 	}
 	
 	
-	
-	private List<Fee> getShouldPayRecords(Map<Patent, List<List<String>>> shouldPayRecordsMap) {
+	@Transactional
+	private void getShouldPayRecords(Map<Patent, List<List<String>>> shouldPayRecordsMap) {
 		List<Fee> fees = new ArrayList<>();
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		User user = PrincipalUtils.getCurrentPrincipal();
@@ -152,7 +152,7 @@ public class FeeServiceImpl implements FeeService {
 		
 		feeDao.insertUserFees(userFeeRecords);
 		}
-		return fees;
+	
 	}
 	
 	/*
