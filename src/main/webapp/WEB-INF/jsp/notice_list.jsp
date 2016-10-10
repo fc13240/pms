@@ -1111,15 +1111,18 @@ function batchChangeNoticeViewStatus() {
 }
 
 function changeNoticeReadStatus(result){
-	$.ajax({
-		url: "<s:url value='/notice/changeNoticeReadStatus.html'/>?notices=" + result, 
-		type: 'get', 
-		success: function() {
-			$("#i"+result).html("已查看");
-			$("#j"+result).html("已查看");
-			$("#k"+result).html("已查看");
-		}
-	});	
+	setTimeout(function(){
+		$.ajax({
+			url: "<s:url value='/notice/changeNoticeReadStatus.html'/>?notices=" + result, 
+			type: 'get', 
+			success: function() {
+				$("#i"+result).html("已查看");
+				$("#j"+result).html("已查看");
+				$("#k"+result).html("已查看");
+			}
+		});		
+	}, 100);	
+	
 }
 </script>
 <script>
