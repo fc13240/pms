@@ -65,7 +65,7 @@ public interface FeeMapper {
 
 	List<String> getFeeTypes(@Param("appNo")String appNo);
 	
-	void saveFee (Fee fee);
+	long saveFee (Fee fee);
 	
 	Map<String,Long> getCountByDeadlinePayment(int userId);
 	
@@ -74,4 +74,9 @@ public interface FeeMapper {
 	List<String> getFeeTypesByPatentType(int patentTypeId);
 	
 	void insertUserFees(List<Map<String, Long>> userFeeRecords);
+	
+	int getLastFeeId();
+	
+	void insertFee(Fee fee);
+	
 }

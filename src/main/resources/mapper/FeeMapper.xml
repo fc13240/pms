@@ -311,6 +311,14 @@
 		   fee_owner = #{feeRecord.owner.userId}
 	</insert>
 	
+	<insert id="insertFee" parameterType="Fee" useGeneratedKeys="true" keyProperty="feeId">
+		insert into fees(deadline, fee_type, amount, patent, fee_owner) 
+		values
+			(#{deadline}, #{feeType}, #{amount}, #{patent.patentId}, #{owner.userId})
+		on duplicate key update
+		   fee_owner = #{owner.userId}
+	</insert>
+	
 	<select id="getFeesByIds" resultMap="FeeResultMap">
 		select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id, ps.patent_status_desc, p.patent_status_text,
 			 pt.patent_type_id, pt.patent_type_desc,			
@@ -403,7 +411,7 @@
 		       where f.fee_owner =#{userId} and f.fee_monitor_status = 2 and f.fee_payment_status =1) as a
 	</select>
 	
-	<insert id="saveFee" parameterType="Fee">
+	<insert id="saveFee" parameterType="Fee" useGeneratedKeys="true" keyProperty="feeId">
 		replace into fees(deadline, fee_type, amount, patent, fee_monitor_status, invoice_title,fee_owner)
 		values(#{deadline}, #{feeType},#{amount}, #{patent.patentId}, 2, #{invoiceTitle,javaType=string,jdbcType=VARCHAR},#{owner.userId})				
 	</insert>
@@ -452,4 +460,7 @@
 		</foreach>
 	</insert>	
 	
+	<select id="getLastFeeId" resultType= "int" >
+		SELECT fee_id FROM fees ORDER BY fee_id DESC LIMIT 1
+	</select>
 </mapper>
