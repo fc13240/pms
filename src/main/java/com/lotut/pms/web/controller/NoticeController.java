@@ -79,6 +79,7 @@ public class NoticeController {
 		model.addAttribute("remainDayCount",remainDayCount);
 		model.addAttribute("page", page);
 		model.addAttribute("unreadNoticeCount", unreadNoticeCount);
+		model.addAttribute("wayOfPaging","normal");
 		addSearchTypesDataToModel(model);
 		return "notice_list";
 	}
@@ -107,6 +108,7 @@ public class NoticeController {
 		model.addAttribute("remainDayCount",remainDayCount);
 		model.addAttribute("page", page);
 		model.addAttribute("unreadNoticeCount", unreadNoticeCount);
+		model.addAttribute("wayOfPaging","normal");
 		addSearchTypesDataToModel(model);
 		return "notice_list";
 	}	
@@ -303,7 +305,6 @@ public class NoticeController {
 		int totalCount=(int)noticeService.unreadNoticeCount(userId);
 		page.setTotalRecords(totalCount);
 		int unreadNoticeCount=noticeService.unreadNoticeCount(userId);
-		
 		model.addAttribute("notices", userNotices);
 		model.addAttribute("patentTypeCount",patentTypeCount);
 		model.addAttribute("noticeTypeCount",noticeTypeCount);
@@ -312,6 +313,7 @@ public class NoticeController {
 		model.addAttribute("remainDayCount",remainDayCount);
 		model.addAttribute("page", page);
 		model.addAttribute("unreadNoticeCount", unreadNoticeCount);
+		model.addAttribute("wayOfPaging","unreadNotice");
 		addSearchTypesDataToModel(model);
 		return "notice_list";
 	}

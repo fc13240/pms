@@ -530,6 +530,7 @@
 						</table>
 						<!-- 分页功能 start -->
 						<div style="height:30px;background:#fff;">
+							<input type="hidden" value="${wayOfPaging }" id="wayOfPaging"/>
 							<c:if test="${searchCondition == null}">
 							<div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1">首页</a>
 							  <c:choose>
@@ -954,13 +955,24 @@ function batchProcessNotice(processStatus) {
 			alert("只能输入1-${page.totalPages}之间的数值");
 			return;
 		}
-		var url = "<s:url value='/notice/list.html'/>?currentPage=" + pageNo;
+		var wayOfPaging="${wayOfPaging}";
+		alert(wayOfPaging);
+		var url = null;
+		if(wayOfPaging=="normal"){
+			url = "<s:url value='/notice/list.html'/>?currentPage=" + pageNo;
+		}else if(wayOfPaging=="unreadNotice"){
+			url = "<s:url value='/notice/unreadNotice.html'/>?currentPage=" + pageNo;
+			
+		}else{
+			url = "<s:url value='/notice/list.html'/>?currentPage=" + pageNo;
+			
+		}
 		
 		<c:if test="${searchCondition != null}">
 				url = "<s:url value='/notice/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 		</c:if>
 		
-		location.href = url
+		location.href = url;
 	}
 	
 	function gotoPageForEnter(event) {
