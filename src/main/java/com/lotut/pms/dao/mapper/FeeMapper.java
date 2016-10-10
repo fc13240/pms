@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.FeeSearchCondition;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.User;
 
 public interface FeeMapper {
 	
@@ -74,4 +75,6 @@ public interface FeeMapper {
 	List<String> getFeeTypesByPatentType(int patentTypeId);
 	
 	void insertUserFees(List<Map<String, Long>> userFeeRecords);
+
+	void saveUserFee(@Param("userId") int userId, @Param("feeId") long feeId);
 }
