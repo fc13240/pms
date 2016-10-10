@@ -64,7 +64,7 @@ public interface FeeDao {
 
 	List<String> getFeeTypes(String appNo);
 	
-	void saveFee (Fee fee);
+	long saveFee (Fee fee);
 	
 	Map<String,Long> getCountByDeadlinePayment(int userId);
 	
@@ -73,6 +73,10 @@ public interface FeeDao {
 	List<String> getFeeTypesByPatentType(int patentTypeId);
 	
 	void insertUserFees(List<Map<String, Long>> userFeeRecords);
+	
+	int getLastFeeId();
+	
+	void insertFee(Fee fee);
 
 	void saveUserFee(int userId, long feeId);
 }

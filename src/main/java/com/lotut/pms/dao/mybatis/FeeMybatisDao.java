@@ -130,8 +130,8 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 		}
 
 		@Override
-		public void saveFee(Fee fee) {
-			feeMapper.saveFee(fee);
+		public long saveFee(Fee fee) {
+			return feeMapper.saveFee(fee);
 		}
 
 		@Override
@@ -167,6 +167,16 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 		@Override
 		public void insertUserFees(List<Map<String, Long>> userFeeRecords) {
 			feeMapper.insertUserFees(userFeeRecords);
+		}
+
+		@Override
+		public int getLastFeeId() {
+			return feeMapper.getLastFeeId();
+		}
+
+		@Override
+		public void insertFee(Fee fee) {
+			 feeMapper.insertFee(fee);
 		}
 		
 		@Override

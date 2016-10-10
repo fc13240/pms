@@ -77,32 +77,11 @@ public class FeeServiceImpl implements FeeService {
 		Map<Patent, List<List<String>>> shouldPayRecordsMap = crawler.getShouldPayRecordsMap();
 		List<Patent> failedPatents = crawler.getFailedPatents();
 		List<Patent> emptyFeePatents = crawler.getEmptyFeePatents();
-		
 		grabResultMap.put("failedPatents", failedPatents);
 		grabResultMap.put("emptyFeePatents", emptyFeePatents);
-		
 		List<Fee> fees = getShouldPayRecords(shouldPayRecordsMap);
 		int userId=PrincipalUtils.getCurrentUserId();
-		if (!fees.isEmpty()) {
-			feeDao.insertFees(fees);
-			List<Long> feeIds=new ArrayList<>();
-			for(Fee fee:fees){
-				feeIds.add(fee.getFeeId());
-				
-			}
-			List<Map<String, Long>> userFeeRecords = new ArrayList<>();
-			for (Long fee: feeIds) {
-					Map<String, Long> userFeeRecord =  new HashMap<String, Long>();
-					userFeeRecord.put("user", (long) userId);
-					userFeeRecord.put("fee", fee);
-					userFeeRecords.add(userFeeRecord);
-				
-			}
-			feeDao.insertUserFees(userFeeRecords);
-		}
-		
 		List<Fee> resultFees = feeDao.getFeesByPatentIds(patentIds, userId);
-		
 		grabResultMap.put("fees", resultFees);
 		
 		return grabResultMap;
@@ -120,27 +99,7 @@ public class FeeServiceImpl implements FeeService {
 		crawler.grabFees();
 		Map<Patent, List<List<String>>> shouldPayRecordsMap = crawler.getShouldPayRecordsMap();
 		Map<Patent, List<List<String>>> paidRecordsMap = crawler.getPaidRecordsMap();
-		
 		List<Fee> fees = getShouldPayRecords(shouldPayRecordsMap);
-		if (!fees.isEmpty()) {
-			feeDao.insertFees(fees);
-		
-		List<Long> feeIds=new ArrayList<>();
-		for(Fee fee:fees){
-			feeIds.add(fee.getFeeId());
-			
-		}
-		int userId=PrincipalUtils.getCurrentUserId();
-		List<Map<String, Long>> userFeeRecords = new ArrayList<>();
-		for (Long fee: feeIds) {
-				Map<String, Long> userFeeRecord =  new HashMap<String, Long>();
-				userFeeRecord.put("user", (long) userId);
-				userFeeRecord.put("fee", fee);
-				userFeeRecords.add(userFeeRecord);
-			
-		}
-		feeDao.insertUserFees(userFeeRecords);
-		}
 		List<Fee> resultFees = feeDao.getFeesByPatentIds(patentIds, PrincipalUtils.getCurrentUserId());
 		grabResultMap.put("patent", patents.get(0));
 		grabResultMap.put("fees", resultFees);
@@ -155,7 +114,8 @@ public class FeeServiceImpl implements FeeService {
 		List<Fee> fees = new ArrayList<>();
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		User user = PrincipalUtils.getCurrentPrincipal();
-		
+		int userId=user.getUserId();
+		List<Long> feeIds=new ArrayList<>();
 		try {
 			for (Map.Entry<Patent, List<List<String>>> shouldPayRecords : shouldPayRecordsMap.entrySet()) {
 				Patent patent = shouldPayRecords.getKey();
@@ -169,13 +129,29 @@ public class FeeServiceImpl implements FeeService {
 					fee.setDeadline(formatter.parse(feeRecord.get(2)));
 					fee.setOwner(user);
 					fees.add(fee);
+					if(!fees.isEmpty()){
+					feeDao.insertFee(fee);
+					}
+					if(fee.getFeeId()!=0){
+					feeIds.add(fee.getFeeId());
+					}
 				}
 			}
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}
+		if(!feeIds.isEmpty()){
+		List<Map<String, Long>> userFeeRecords = new ArrayList<>();
+		for (Long fee: feeIds) {
+				Map<String, Long> userFeeRecord =  new HashMap<String, Long>();
+				userFeeRecord.put("user", (long) userId);
+				userFeeRecord.put("fee", fee);
+				userFeeRecords.add(userFeeRecord);
+			
+		}
 		
-	
+		feeDao.insertUserFees(userFeeRecords);
+		}
 		return fees;
 	}
 	
