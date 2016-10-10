@@ -437,7 +437,13 @@
 		insert into fees(deadline, fee_type, amount, patent, fee_monitor_status, invoice_title,fee_owner) 
 		values(#{deadline}, #{feeType},#{amount}, #{patent.patentId}, 2, #{invoiceTitle,javaType=string,jdbcType=VARCHAR},#{owner.userId})
 		on duplicate key update
-			patent=#{patent.patentId},fee_type=#{feeType},deadline=#{deadline},fee_owner=#{owner.userId}
+			deadline=#{deadline},
+			fee_type=#{feeType},
+			amount=#{amount},
+			patent=#{patent.patentId},
+			fee_monitor_status=2,
+			invoice_title=#{invoiceTitle,javaType=string,jdbcType=VARCHAR},
+			fee_owner=#{owner.userId}
 	</insert>
 	
 	<insert id="saveUserFee">
