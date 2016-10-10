@@ -947,4 +947,4 @@ CREATE TABLE if not exists `user_fees` (
   CONSTRAINT `fk_user_fee_user` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-INSERT INTO user_fees(USER,fee) SELECT fee_owner,fee_id FROM fees;
+replace INTO user_fees(USER,fee) SELECT fee_owner,fee_id FROM fees;
