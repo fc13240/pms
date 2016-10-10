@@ -956,7 +956,6 @@ function batchProcessNotice(processStatus) {
 			return;
 		}
 		var wayOfPaging="${wayOfPaging}";
-		alert(wayOfPaging);
 		var url = null;
 		if(wayOfPaging=="normal"){
 			url = "<s:url value='/notice/list.html'/>?currentPage=" + pageNo;
