@@ -570,6 +570,7 @@ margin: 1px 0 0 1px;}
 						<div>
 							<div style="width:100px;margin-left:810px;">
 								<a href="javascript:choiceContact();" style="color:#00F;font-size:14px;">+选择</a>&nbsp;
+								<a href="<s:url value='/user/contactAddressAddForm.html'/>" style="color:#00F;font-size:14px;" target="_blank">+新增</a>
 							</div>
 					
 							<hr></hr>
@@ -878,19 +879,19 @@ margin: 1px 0 0 1px;}
             </button>
             
             <h4 class = "modal-title" id = "myModalLabel">
-            	添加新的申请人
+            	添加新的申请人(带<span style="color:red;font-size:18px;">*</span>为必填项)
             </h4>
          </div>
 	         <div class = "modal-body" id="modal-body">
-					 <h5>姓名或名称:</h5>
+					 <h5 ><span style="color:red;font-size:18px;">* </span>姓名或名称:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalAppPersonName" required/>
 					<span style="color: red; display: none;" id=appPersonNameError>该处应输入不大于20字段</span>
 					<br>
-					<h5>证件号码:</h5>
+					<h5><span style="color:red;font-size:18px;">* </span>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="modalPhoneRece" type="text" required onblur="validatePhoneNumber(this.value)"/>
 					<span style="color: red; display: none;" id=appPersonPhoneError>请输入正确的证件号码</span>
 					<br>		  
-					<h5>邮编及地址:</h5>
+					<h5><span style="color:red;font-size:18px;">* </span>邮编及地址:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="modalPostcodeAddress" type="text" required/>
 					<span style="color: red; display: none;" id="appPersonPostcodeAddress">请输入正确的邮编及地址</span>
 					<br>
@@ -910,6 +911,7 @@ margin: 1px 0 0 1px;}
 					<br>
 					<h5>其他信息:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalOtherInfo"/>
+					<span style="color: red; display: none;" id="appPersonOtherInfoError">输入的内容过长，不能超过1000字符</span>
 					<input type="hidden" name="patentDocId" value="${patentDoc.patentDocId}">
 					<br/>
 					<h5>委托书:</h5>
@@ -957,22 +959,23 @@ margin: 1px 0 0 1px;}
             </button>
             
             <h4 class = "modal-title" id = "myModalLabel">
-            	修改申请人信息
+            	修改申请人信息(带<span style="color:red;font-size:18px;">*</span>为必填项)
             </h4>
          </div>
 	         <div class = "modal-body" id="modal-body">
 	         
 					<input type="hidden" id="updateModalPersonId"  required/>
-					 <h5>姓名或名称:</h5>
+					 <h5><span style="color:red;font-size:18px;">* </span>姓名或名称:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalAppPersonName" required/>
-					<span style="color: red; display: none;" id=updateAppPersonName>请输入长度不超过20且不为空的姓名</span>
+					<span style="color: red; display: none;" id="updateAppPersonNameError">请输入长度不超过20且不为空的姓名</span>
 					<br>
-					<h5>证件号码:</h5>
+					<h5> <span style="color:red;font-size:18px;">* </span>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="updateModalPhoneRece" type="text" required onblur="validatePhoneNumber(this.value)"/>
-					<span style="color: red; display: none;" id=updatePhoneReceError>请输入正确的证件号码</span>
+					<span style="color: red; display: none;" id="updatePhoneReceError">请输入正确的证件号码</span>
 					<br>		  
-					<h5>邮编及地址:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="updateModalPostcodeAddress" type="text" required/>
+					<h5> <span style="color:red;font-size:18px;">* </span>邮编及地址:</h5>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="updateModalPostcodeAddress" type="text"/>
+					<span style="color: red; display: none;" id="updatePostcodeAddressError">请输入正确的邮编及地址</span>
 					<br>
 					<h5>费减备案状态:</h5>
 					<select id="updateModalFeeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;"  required>	
@@ -990,6 +993,7 @@ margin: 1px 0 0 1px;}
 					<br>
 					<h5>其他信息:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalOtherInfo"/>
+					<span style="color: red; display: none;" id="updateModalOtherInfoError">输入的内容过长，不能超过1000字符</span>
 					<br/>
 					<button type="button" style="width:90px;" class="button button-primary  button-rounded" onclick="submitUpdateAppPersonForm()">保存</button>
 					<button type="button" style="width:90px;margin-left:280px" class="button button-primary  button-rounded" onclick="reseAppPersontUpdateForm()">取消</button>
@@ -1072,17 +1076,17 @@ margin: 1px 0 0 1px;}
             </button>
             
             <h4 class = "modal-title" id = "myModalLabel">
-            	添加新的发明人
+            	添加新的发明人(带<span style="color:red;font-size:18px;">*</span>为必填项)
             </h4>
          </div>
 	         <div class = "modal-body">
 
 	           <div class="lt-box" style="padding:20px;">
-			       	<h5>姓名:</h5>
+			       	<h5><span style="color:red;font-size:18px;">* </span>姓名:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorName" required onblur="validateInfoNumber(this.value)"/>
 					<span style="color: red; display: none;" id=inventorNameError>该处应输入不大于20字段</span>
 					<br>	   
-					<h5>证件号码:</h5>
+					<h5><span style="color:red;font-size:18px;">* </span>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorNumber" required onblur="validatePhoneNumber(this.value)"/>
 					<span style="color: red; display: none;" id=inventorNumberError>请输入正确的证件号码</span>
 					<br>		  
@@ -1137,18 +1141,18 @@ margin: 1px 0 0 1px;}
             </button>
             
             <h4 class = "modal-title" id = "myModalLabel">
-            	修改发明人信息
+            	修改发明人信息(带<span style="color:red;font-size:18px;">*</span>为必填项)
             </h4>
          </div>
 	         <div class = "modal-body">
 
 	           <div class="lt-box" style="padding:20px;">
 					<input type="hidden" id="updateModalInventorId" required onblur="validateInfoNumber(this.value)"/>
-			       	<h5>姓名:</h5>
+			       	<h5><span style="color:red;font-size:18px;">* </span>姓名:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorName" required onblur="validateInfoNumber(this.value)"/>
 					<span style="color: red; display: none;" id="updateInventorName">该处应输入不大于20字段</span>
 					<br>	   
-					<h5>证件号码:</h5>
+					<h5><span style="color:red;font-size:18px;">* </span>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorNumber" required onblur="validatePhoneNumber(this.value)"/>
 					<span style="color: red; display: none;" id="updateInventorNumber">请输入正确的证件号码</span>
 					<br>		  
@@ -1595,6 +1599,10 @@ function returnSavePatentDoc(value){
 	var rightClaim=$("#editorContent8").val();
 	//var contactPerson = $("#contactPerson").val();
 	var otherInformation = $("#otherInformation").val();
+	if(name==null||name==""){
+		alert("请填写专利名称，待填写后再返回列表！");
+		return;
+	}
 	$.ajax({
 		type: "POST",
 		url: "<s:url value='/editor/savePatentDoc.html'/>",
@@ -1616,6 +1624,10 @@ function savePatentDoc(value){
 	var rightClaim=$("#editorContent8").val();
 	var contactPerson = $("#contactPerson").val();
 	var otherInformation = $("#otherInformation").val();
+	if(name==null||name==""){
+		alert("请填写专利名称，待请填写后再进行保存！");
+		return;
+	}
 	$.ajax({
 		type: "POST",
 		url: "<s:url value='/editor/savePatentDoc.html'/>",
@@ -1929,7 +1941,9 @@ function submitAppPersonForm(){
 	var patentDocId =${patentDoc.patentDocId};
 	if(validateAppPersonFormWayOne(phoneRece,"appPersonPhoneError")&
 	   validateAppPersonFormWayTwo(appPersonName,"appPersonNameError")&
-	   validateAppPersonFormWayFour(postcodeAddress,"appPersonPostcodeAddress")
+	   validateAppPersonFormWayFour(postcodeAddress,"appPersonPostcodeAddress")&
+	   validateFormOtherInfo(otherInfo,"appPersonOtherInfoError")
+	   
 	   ){
 		var formData ={"name":appPersonName,"idNumber":phoneRece,"postcodeAddress":postcodeAddress,"otherInfo":otherInfo,"feeReduceTransactionStatus":feeReduceTransactionStatus,
 				       "transactionIdentityId":transactionIdentityId,"transactionYear":transactionYear,"patentDocId":patentDocId,"appPersonUrl":appPersonUrl,"proxyUrl":proxyUrl};
@@ -2172,9 +2186,11 @@ function submitUpdateAppPersonForm(){
 	var transactionYear = $("#updateModalTransactionYear").val();
 	var patentDocId=${patentDoc.patentDocId};
 	
-	if(validateAppPersonFormWayTwo(name,"updateAppPersonName")&
-	   validateAppPersonFormWayTwo(idNumber,"updatePhoneRece")&
-	   validateAppPersonFormWayFour(postcodeAddress,"updateModalPostcodeAddress")){
+	if(validateAppPersonFormWayTwo(name,"updateAppPersonNameError")&
+	   validateAppPersonFormWayTwo(idNumber,"updatePhoneReceError")&
+	   validateAppPersonFormWayFour(postcodeAddress,"updatePostcodeAddressError")&
+	   validateFormOtherInfo(otherInformation,"updateModalOtherInfoError")
+	   ){
 		var formData ={"personId":personId,"name":name,"idNumber":idNumber,"postcodeAddress":postcodeAddress,
 				       "otherInformation":otherInformation,"feeReduceTransactionStatus":feeReduceTransactionStatus,
 				       "transactionIdentity":transactionIdentity,"transactionYear":transactionYear,"patentDocId":patentDocId};
@@ -2497,13 +2513,23 @@ function validateAppPersonFormWayFive(value,id) {
 }
 
 function validateAppPersonFormWayFour(value,id) {
-		if (value.length>200) {
+		if (value.length>200||value.length<=0) {
 			$("#"+id).css("display","block");
 			return false;
 		} else {
 			$("#"+id).css("display","none");
 			return true;
 		}
+}
+
+function validateFormOtherInfo(value,id) {
+	if (value.length>=1000) {
+		$("#"+id).css("display","block");
+		return false;
+	} else {
+		$("#"+id).css("display","none");
+		return true;
+	}
 }
 
 
