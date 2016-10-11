@@ -61,6 +61,10 @@ public interface UserService {
 
 	String findPassword(User user);
 
+	User searchShareUserById(int shareUserId);
+
+	ContactAddress getUserDefaultContactAddress(int shareUserId);
+
 	//String 	roundPassword();
 
 	//User findUserByName(String userName);

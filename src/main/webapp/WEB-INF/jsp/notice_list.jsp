@@ -395,7 +395,16 @@
 								<td style="text-align:center"><c:out value="${notice.patent.name}"/></td>
 								<td style="text-align:center"><c:out value="${notice.patent.appPerson}"/></td> 
 								<td style="text-align:center"><c:out value="${notice.patent.patentStatusText}"/></td>
-								<td style="text-align:center"><c:out value="${notice.patent.shareUsersAsString}"/></td>
+								
+								<td style="text-align:center">
+								<c:forEach items="${notice.patent.shareUsers}" var="shareUser">								
+									<a href="javascript:return void" onclick="searchShareUserDetail(${shareUser.userId})" >
+					        			<c:out value="${shareUser.username}"/>;
+					        		</a>					        	
+					       	 	</c:forEach>
+								</td>
+					
+								
 								<td style="text-align:center"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
 								<td style="text-align:center"><a id="download" href="javascript: void(0);" onClick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}');changeNoticeReadStatus(${notice.noticeId})">
 								  <c:out value="${notice.name}"/>
@@ -1183,6 +1192,11 @@ function changeNoticeReadStatus(noticeId){
 		});		
 	}, 100);	
 	
+}
+
+function searchShareUserDetail(shareUserId){
+	var url = "<s:url value='/user/searchShareUserDetail.html'/>?shareUserId=" + shareUserId;
+	window.open(url);
 }
 </script>
 <script>

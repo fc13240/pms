@@ -145,6 +145,15 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 		return userMapper.getPlatformUser();
 	}
 
+	@Override
+	public User searchShareUserById(int shareUserId) {
+		return userMapper.searchShareUserById(shareUserId);
+	}
+	
+	@Override
+	public ContactAddress getUserDefaultContactAddress(int shareUserId) {
+		return userMapper.getUserDefaultContactAddress(shareUserId);
+	}
 
 
 	

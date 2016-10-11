@@ -264,5 +264,13 @@ public class UserController {
     }  	
 
     
+    @RequestMapping(path="/searchShareUserDetail",method=RequestMethod.GET)  
+    public String searchShareUserDetail(int shareUserId,Model model){  
+    	User user = userService.searchShareUserById(shareUserId);
+    	ContactAddress contactAddress = userService.getUserDefaultContactAddress(shareUserId);
+    	model.addAttribute("user", user);
+    	model.addAttribute("contactAddress", contactAddress);
+        return "share_user_detail";
+    } 
     
 }

@@ -299,7 +299,19 @@
 							<td style="text-align:center">${fee.patent.name}</td>
 							<td style="text-align:center">${fee.patent.firstAppPerson}</td>
 							<td style="text-align:center">${fee.patent.patentStatusText}</td>
-							<td style="text-align:center">${fee.shareUsersAsString}</td>
+							
+							
+							<td style="text-align:center">
+							<c:forEach items="${fee.shareUsers}" var="shareUser">								
+								<a href="javascript:return void" onclick="searchShareUserDetail(${shareUser.userId})" >
+					        		<c:out value="${shareUser.username}"/>;
+					        	</a>					        	
+					        </c:forEach>
+							</td>
+
+							
+							
+							
 							<td style="text-align:center"><fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/></td>
 							<td style="text-align:center">${fee.feeType}</td>
 							<td style="text-align:center">${fee.amount}</td>
@@ -621,6 +633,12 @@ function changeInvoiceTitle(fee, invoiceTitle) {
 		}
 		return false;
 	}
+	
+	function searchShareUserDetail(shareUserId){
+		var url = "<s:url value='/user/searchShareUserDetail.html'/>?shareUserId=" + shareUserId;
+		window.open(url);
+	}
+
 	
 </script>	
 
