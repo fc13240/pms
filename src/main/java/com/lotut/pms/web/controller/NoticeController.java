@@ -321,11 +321,12 @@ public class NoticeController {
 	
 	
 	@RequestMapping(path="/changeNoticeReadStatus", method=RequestMethod.GET)
-	public void changeNoticeReadStatus(@RequestParam("notices")int noticeId,HttpServletResponse response) throws IOException{
+	public void changeNoticeReadStatus(@RequestParam("notices")int noticeId,PrintWriter out) throws IOException{
 		List<Long> noticeIdList=new ArrayList<Long>();
 		noticeIdList.add(new Long(noticeId));
 		int userId=PrincipalUtils.getCurrentUserId();
 		noticeService.batchChangeNoticeViewStatus(noticeIdList,userId);
-		WebUtils.writeJsonStrToResponse(response, "1");
+		int totalCount=(int)noticeService.unreadNoticeCount(userId);
+		out.write(totalCount+"");
 	}		
 }
