@@ -46,6 +46,8 @@
 					        <th>邮箱</th>
 					        <th>电话</th>
 					        <th width="260px">备注名</th>
+					        <th>用户类型</th>
+					        <th>所属机构</th>
 					        <th>操作</th>
 					      </tr>
 					    </thead>
@@ -53,6 +55,7 @@
 					      <c:forEach items="${friends}" var="friend" varStatus="status">
 					        <tr>
 					          <td style="text-align:center">${status.count}</td>
+
 					          <td style="text-align:center">
 								<a href="javascript:return void" onclick="searchFriendDetail(${friend.friendId})" >
 					        		<c:out value="${friend.username}"/>
@@ -63,6 +66,8 @@
 					          <td style="text-align:center"><c:out value="${friend.email}"/></td>
 					          <td style="text-align:center"><c:out value="${friend.phone}"/></td>
 					          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${friend.remarkName}' onChange="changeRemarkName('<c:out value='${friend.friendId}'/>', this.value)"/></td>
+					          <td style="text-align:center"><c:out value="${friend.getShareUserTypeAsString()}"/></td>
+					          <td style="text-align:center"><c:out value="${friend.organization.username}"/></td>
 					          <td style="text-align:center"><a  href="<s:url value='/friend/delete/'/><c:out value='${friend.friendId}.html'/>">删除好友</a></td>
 					        </tr>
 					      </c:forEach>

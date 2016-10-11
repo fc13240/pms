@@ -37,7 +37,7 @@
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
 						<tr style="text-align:left;">
 						  <td>
-						  	收货人信息:
+						  	<span style="font-size:15px;font-weight:bold">收货人信息</span>
 						  	&nbsp;&nbsp;&nbsp;
 						  	<a href="<s:url value='/user/contactAddressAddForm.html'/>" target="_blank" ><font color=red>添加地址</font></a>
 						  </td>
@@ -58,18 +58,18 @@
 							</span> </td>
 						</tr>
 						<tr>
-						  <td>支付方式:</td>
+						  <td><span style="font-size:15px;font-weight:bold">支付方式</span></td>
 						</tr>
 						<tr>
 						  <td><input type="radio" name="paymentMethod.paymentMethodId" value="1" checked="checked" required="required">
-							支付宝支付
+							<img src="<s:url value='/temp/images/aliPay.png'/>" alt="支付宝" width="120px;" height="50px" >
 							<input type="radio" name="paymentMethod.paymentMethodId" value="2" required="required">
-							银联支付
+							<img src="<s:url value='/temp/images/unionPay.png'/>" alt="银联" width="120px;" height="50px">
 						 </td>
 						</tr>
 						
 						<tr style="display: none" class="lotut">
-						  <td>快递方式:</td>
+						  <td><span style="font-size:15px;font-weight:bold">快递方式</span></td>
 						</tr>
 						<tr style="display: none" class="lotut">
 						  <td>
@@ -103,7 +103,7 @@
 						</tr>
 							
 						<tr>
-						  <td>费用详情</td>
+						  <td><span style="font-size:15px;font-weight:bold">费用详情</span></td>
 						</tr>
 						<tr>
 						  <td><table id="simple-table" class="table table-striped table-bordered table-hover">

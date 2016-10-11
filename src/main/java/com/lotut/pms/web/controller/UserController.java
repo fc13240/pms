@@ -263,6 +263,7 @@ public class UserController {
         return "user_forget_password";
     }  	
 
+
     
     @RequestMapping(path="/searchShareUserDetail",method=RequestMethod.GET)  
     public String searchShareUserDetail(int shareUserId,Model model){  
@@ -272,5 +273,9 @@ public class UserController {
     	model.addAttribute("contactAddress", contactAddress);
         return "share_user_detail";
     } 
+
+  /*  @RequestMapping(path="/uploadUserPhoto")
+    public void*/
+
     
 }

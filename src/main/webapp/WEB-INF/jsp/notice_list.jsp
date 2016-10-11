@@ -443,15 +443,6 @@
 								<se:authorize access="hasRole('ROLE_USER') and  not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">
 								<c:if test="${notice.patent.ownerId==user.userId}">
 								<td style="text-align:center">
-									 <span class="qixian" id="i${notice.noticeId}">
-										<c:choose>
-											<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
-											<c:otherwise>未查看
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span>  
-								
 								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this)">
 									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
 										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
@@ -466,7 +457,6 @@
 								
 								<c:if test="${notice.patent.ownerId!=user.userId}">
 								<td style="text-align:center">
-
 								  <select id="roleUser" class="form-control" onClick=selectClick() onChange="javascript:changeRoleUserPaperApplyType('${notice.noticeId}', this)">
 										<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
 										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
@@ -516,15 +506,6 @@
 								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS','ROLE_USER') and not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<c:if test="${notice.patent.ownerId!=user.userId}">
 								<td style="text-align:center" class="date_status">
-								<%-- <span class="qixian">
-									<c:choose>
-										<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-										<c:otherwise>期限：
-									  	<c:out value="${notice.remainDays}"/>天
-										</c:otherwise>
-								  	</c:choose>
-								<br>
-								</span>  	 --%>
 								<span class="readStatus" id="readStatusSpan${notice.noticeId}">
 									<c:choose>
 										<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
@@ -546,16 +527,14 @@
 								
 								<c:if test="${notice.patent.ownerId==user.userId}">
 								<td style="text-align:center" class="date_status">
-								<span class="qixian">
+								<span class="readStatus" id="readStatusSpan${notice.noticeId}">
 									<c:choose>
-										<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-										<c:otherwise>期限：
-									  	<c:out value="${notice.remainDays}"/>天
+										<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
+										<c:otherwise>未查看
 										</c:otherwise>
 								  	</c:choose>
 								<br>
-								</span>  	
-								
+								</span> 
 								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
