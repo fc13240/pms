@@ -2,14 +2,12 @@ package com.lotut.pms.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,10 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.Order;
-import com.lotut.pms.domain.PatentDocOrder;
 import com.lotut.pms.service.OrderService;
-import com.lotut.pms.service.PatentDocWorkflowHistoryService;
-import com.lotut.pms.service.PatentDocWorkflowService;
 import com.unionpay.acp.deploy.UnionConfig;
 import com.unionpay.acp.sdk.AcpService;
 import com.unionpay.acp.sdk.LogUtil;

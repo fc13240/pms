@@ -37,13 +37,13 @@
 					  		<input id='invoicePicPath' name='invoicePic' type='hidden' value=''/>
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
 						<tr>
-						  <td>支付方式:</td>
+						  <td><span style="font-size:15px;font-weight:bold">支付方式</span></td>
 						</tr>
 						<tr>
 						  <td><input type="radio" name="paymentMethod.paymentMethodId" value="1" checked="checked" required="required" >
-							支付宝支付
-							<!-- <input type="radio" name="paymentMethod.paymentMethodId" value="2"  required="required" >
-							银联支付 -->
+							  <img src="<s:url value='/temp/images/aliPay.png'/>" alt="支付宝" width="120px;" height="50px" >
+							 <input type="radio" name="paymentMethod.paymentMethodId" value="2"  required="required" >
+							<img src="<s:url value='/temp/images/unionPay.png'/>" alt="银联" width="120px;" height="50px">
 							<!-- <input type="radio" name="paymentMethod.paymentMethodId" value="3" required="required"   data-toggle = "modal" data-target = "#commonInventorModal">
 							发票支付
 								 <div id="InvoicePic" style="display:none">
@@ -52,7 +52,7 @@
 						 </td>
 						</tr>
 						<tr>
-						  <td>专利文档详情</td>
+						  <td><span style="font-size:15px;font-weight:bold">专利文档详情</span></td>
 						</tr>
 						<tr>
 						  <td><table id="simple-table" class="table table-striped table-bordered table-hover">
