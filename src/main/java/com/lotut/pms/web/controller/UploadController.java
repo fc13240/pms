@@ -1,62 +1,31 @@
 package com.lotut.pms.web.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSON;
 import com.lotut.pms.constants.Settings;
-import com.lotut.pms.service.AppPersonService;
-import com.lotut.pms.service.FriendService;
-import com.lotut.pms.service.InventorService;
+import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.service.PatentDocService;
-import com.lotut.pms.service.PatentDocumentTemplateService;
-import com.lotut.pms.service.UserService;
 import com.lotut.pms.web.util.WebUtils;
 
 
@@ -71,7 +40,8 @@ public class UploadController {
 	}
 	   
 	   @RequestMapping(path = "/uploadPic",method=RequestMethod.POST)
-		public void uploadPic(@RequestParam("patentDocId") int patentDocId,HttpServletRequest request1 ,HttpServletResponse response1)  {
+	   @Transactional
+		public synchronized void uploadPic(@RequestParam("patentDocId") int patentDocId,HttpServletRequest request1 ,HttpServletResponse response1)  {
 		   try{
 			   String savePath = Settings.PATENTDOC_ATTACHMENT_PATH;
 			   int count=patentDocService.getMaxAttachmentPicNum(patentDocId)+1;
@@ -120,6 +90,14 @@ public class UploadController {
 		        			out.flush();
 		        		}
 		        		String url=saveUrl+newFileName+".html";
+		        		
+		        		Attachment attachment=new Attachment();
+		        		attachment.setAttachmentUrl(url);
+		        		attachment.setCaption(picName);
+		        		attachment.setSeqNo(count);
+		        		attachment.setPatentDocId(patentDocId);
+		        		patentDocService.savePatentImgUrl(attachment);
+		        		
 		       		 	Map<String, Object> succMap = new HashMap<String, Object>(); 
 		                succMap.put("url", saveUrl + newFileName+".html");  
 		                succMap.put("picName",picName );

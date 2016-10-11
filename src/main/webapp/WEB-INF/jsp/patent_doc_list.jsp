@@ -145,7 +145,7 @@
 							  <th width="140px">专利名称</th>
 							  <th width="60px">定稿文件</th>
 							  <th width="90px">交局文件</th>
-							  <th width="50px">缴费凭证</th>
+							  <!-- <th width="50px">缴费凭证</th> -->
 							  <th width="90px">代理状态</th>
 							  <th width="90px">案件状态</th>
 							  <th width="90px">共享人</th>
@@ -197,12 +197,12 @@
 				                    </c:if>
 								
 								</td>
-								<td style="text-align:center">
+<%-- 								<td style="text-align:center">
 								
 									 <c:if test="${patentDoc.invoicePic !=null }">
 				                    	<a  href="<s:url value='/editor/downloadInvoicePic.html'/>?patentDocId=<c:out value='${patentDoc.patentDocId}'/>">下载</a>
 				                    </c:if>
-								</td>
+								</td> --%>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocProxyStatus.statusDescription}"/></td>
 								<td style="text-align:center"><c:out value="${patentDoc.patentDocStatus.statusDescription}"/></td> 
 								<td style="text-align:center" id="tdUsers${patentDoc.patentDocId}" >
