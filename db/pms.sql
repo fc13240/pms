@@ -954,7 +954,6 @@ CREATE TABLE if not exists `user_fees` (
   CONSTRAINT `fk_user_fee_user` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-replace INTO user_fees(USER,fee) SELECT fee_owner,fee_id FROM fees;
 
 ALTER TABLE common_app_person MODIFY COLUMN other_information VARCHAR(1000);
 ALTER TABLE patent_doc_app_person MODIFY COLUMN other_information VARCHAR(1000);
