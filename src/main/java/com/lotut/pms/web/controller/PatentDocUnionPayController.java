@@ -64,7 +64,7 @@ public class PatentDocUnionPayController {
 				requestData.put("orderId",String.valueOf(order.getId()));             //商户订单号，8-40位数字字母，不能含“-”或“_”，可以自行定制规则		
 				requestData.put("txnTime", UnionConfig.getCurrentTime());        //订单发送时间，取系统时间，格式为YYYYMMDDhhmmss，必须取当前时间，否则会报txnTime无效
 				requestData.put("currencyCode", "156");         			  //交易币种（境内商户一般是156 人民币）		
-				requestData.put("txnAmt", "1");             			      //交易金额，单位分，不要带小数点
+				requestData.put("txnAmt", txnAmt);             			      //交易金额，单位分，不要带小数点
 				//requestData.put("reqReserved", "透传字段");        		      //请求方保留域，如需使用请启用即可；透传字段（可以实现商户自定义参数的追踪）本交易的后台通知,对本交易的交易状态查询交易、对账文件中均会原样返回，商户可以按需上传，长度为1-1024个字节		
 				
 				//前台通知地址 （需设置为外网能访问 http https均可），支付成功后的页面 点击“返回商户”按钮的时候将异步通知报文post到该地址
@@ -99,7 +99,7 @@ public class PatentDocUnionPayController {
 	}
 	
 	@RequestMapping(path="/frontRcvResponse")
-	public void frontRcvResponse(HttpServletRequest req, HttpServletResponse resp) 
+	public String frontRcvResponse(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException{
 		LogUtil.writeLog("FrontRcvResponse前台接收报文返回开始");
 
@@ -147,7 +147,7 @@ public class PatentDocUnionPayController {
 		req.getRequestDispatcher(pageResult).forward(req, resp);
 		LogUtil.writeLog("FrontRcvResponse前台接收报文返回结束");
 		
-		//return "redirect:/editor/patentDocList.html";
+		return "redirect:/editor/patentDocList.html";
 	}
 	
 	@RequestMapping(path="/backRcvResponse")

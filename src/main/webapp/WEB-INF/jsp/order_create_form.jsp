@@ -63,8 +63,8 @@
 						<tr>
 						  <td><input type="radio" name="paymentMethod.paymentMethodId" value="1" checked="checked" required="required">
 							支付宝支付
-							<!-- <input type="radio" name="paymentMethod.paymentMethodId" value="2" required="required">
-							银联支付 -->
+							<input type="radio" name="paymentMethod.paymentMethodId" value="2" required="required">
+							银联支付
 						 </td>
 						</tr>
 						
