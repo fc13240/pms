@@ -3,10 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotut.pms.dao.mapper.FriendMapper">
-	<select id="getUserFriends" parameterType="int" resultType="Friend">
-		select u.user_id as friendId, u.username, u.name as realname,u.email,u.phone, f.remark_name as remarkName
-		  from friends f join users u on f.friend = u.user_id
-		 where user = #{userId};	
+	<resultMap type="Friend" id="FriendResultMap">
+		<result property="friendId" column="friend"/>
+		<result property="remarkName" column="remark_name"/>
+		<association property="user" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
+		<association property="organization" resultMap="UserOrganization"/>
+		<collection property="userTypes" ofType="GroupMembers">
+				<id property="id" column="id"/>
+				<result property="groupId" column="group_id"/>
+				<result property="username" column="username"/>
+		</collection>			
+	</resultMap>
+	
+	<resultMap type="User" id="UserOrganization">
+		<id property="userId" column="organization_id"/>
+		<result property="username" column="organization_name"/>
+	</resultMap>
+	<select id="getUserFriends" parameterType="int" resultMap="FriendResultMap">
+		select f.friend, u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id as group_id,g.username as username,
+		c.proxy_org_id as organization_id,cu.username as organization_name 
+		  from friends f join users u on f.friend = u.user_id join group_members g on u.username = g.username 
+		  left join customer_supports c on c.user_id = f.friend LEFT JOIN users cu ON cu.user_id = c.proxy_org_id 
+		  left join process_person p on p.user_id =  f.friend LEFT JOIN users pu ON pu.user_id = p.proxy_org_id
+		  left join tech_person t on t.user_id =f.friend LEFT JOIN users tu ON tu.user_id = t.proxy_org_id
+		 where user = #{userId} ;	
 	</select>
 	
 	<delete id="deleteFriend">

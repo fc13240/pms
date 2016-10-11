@@ -1,50 +1,73 @@
 package com.lotut.pms.domain;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Friend {
 	private int friendId;
-	private String username;
-	private String realname;
-	private String email;
-	private String phone;
+//	private String username;
+//	private String realname;
+//	private String email;
+//	private String phone;
 	private String remarkName;
-	
+	private User user;
+	private List<GroupMembers> userTypes;
+	private User organization;
 	public int getFriendId() {
 		return friendId;
 	}
 	public void setFriendId(int friendId) {
 		this.friendId = friendId;
 	}
-	public String getUsername() {
-		return username;
+	public User getUser() {
+		return user;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public String getRealname() {
-		return realname;
+	public List<GroupMembers> getUserTypes() {
+		return userTypes;
 	}
-	public void setRealname(String realname) {
-		this.realname = realname;
+	public void setUserTypes(List<GroupMembers> userType) {
+		this.userTypes = userType;
 	}
-	public String getEmail() {
-		return email;
+	public User getOrganization() {
+		return organization;
 	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setOrganization(User organization) {
+		this.organization = organization;
 	}
 	public String getRemarkName() {
-		if (remarkName == null) {
-			return realname;
-		}
 		return remarkName;
 	}
 	public void setRemarkName(String remarkName) {
 		this.remarkName = remarkName;
 	}
+	
+	public String getShareUserTypeAsString() {
+		if(this.userTypes != null){
+			if(this.userTypes.size()==1){
+				return "普通用户";
+			}else{
+			for (int i = 0; i < this.userTypes.size(); i++) {
+				if(this.userTypes.get(i).getGroupId()==4){
+					return "代理机构";
+				}
+				if(this.userTypes.get(i).getGroupId()==5)
+				{
+					return "客服";
+				}
+				if(this.userTypes.get(i).getGroupId()==6){
+					return "技术员";
+				}
+				if(this.userTypes.get(i).getGroupId()==7){
+					return "流程员";
+						}
+					}
+				}
+			
+		}
+		return "";
+	}
+	
 }
