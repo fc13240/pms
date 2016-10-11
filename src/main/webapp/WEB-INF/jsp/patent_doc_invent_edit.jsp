@@ -31,7 +31,7 @@
 					url              :   "<s:url value='/kindeditor/uploadPic.html'/>?patentDocId=${patentDoc.patentDocId}",  // 上传文件的路径
 					fileType         :   ["jpg","png","jpeg"],// 上传文件的类型
 					fileSize         :   51200000,                // 上传文件的大小
-					multiple         :   false,                    // 是否可以多个文件上传
+					multiple         :   true,                    // 是否可以多个文件上传
 					dragDrop         :   false,                   // 是否可以拖动上传文件
 					tailor           :   false,                   // 是否可以裁剪图片
 					del              :   false,                    // 是否可以删除文件
@@ -40,7 +40,7 @@
 					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
 						console.info("当前选择了以下文件：");
 						console.info(selectFiles);
-						if (allFiles.length > 1) {
+						/*  if (allFiles.length > 1) {
 							
 							alert("每次只能上传一张，请先上传之前的图片再选择！");
 							for (var i = 1; i < allFiles.length; i++) {
@@ -48,7 +48,7 @@
 								ZYFILE.funDeleteFile(allFiles[i].index, true);
 								return false;
 							}
-						}
+						}  */
 						
 
 						return true;
@@ -59,12 +59,12 @@
 					},
 					onSuccess: function(file, response){
 						// 文件上传成功的回调方法
-						var Jresponse=$.parseJSON(response);
-						$("#patentImgUrl").append("<input type='hidde' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
-						$("#patentImgUrl").append("<input type='hidde' id='picName' name='picName' value='"+Jresponse["picName"]+"'/>");
-						$("#patentImgUrl").append("<input type='hidde' id='seqNo' name='seqNo' value='"+Jresponse["count"]+"'/>");
-						savePatentImgUrl();
-						$("#patentImgUrl").empty();
+						//var Jresponse=$.parseJSON(response);
+						//$("#patentImgUrl").append("<input type='hidden' id='patentUrl' name='attachmentUrl' value='"+Jresponse["url"]+"'/>");
+						//$("#patentImgUrl").append("<input type='hidden' id='picName' name='picName' value='"+Jresponse["picName"]+"'/>");
+						//$("#patentImgUrl").append("<input type='hidden' id='seqNo' name='seqNo' value='"+Jresponse["count"]+"'/>");
+						//savePatentImgUrl();
+						//$("#patentImgUrl").empty();
 					},
 					onFailure: function(file, response){          // 文件上传失败的回调方法
 						console.info("此文件上传失败：");
