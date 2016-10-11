@@ -956,3 +956,6 @@ CREATE TABLE if not exists `user_fees` (
 
 replace INTO user_fees(USER,fee) SELECT fee_owner,fee_id FROM fees;
 
+ALTER TABLE common_app_person MODIFY COLUMN other_information VARCHAR(1000);
+ALTER TABLE patent_doc_app_person MODIFY COLUMN other_information VARCHAR(1000);
+
