@@ -37,7 +37,7 @@
 					  		<input id='invoicePicPath' name='invoicePic' type='hidden' value=''/>
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
 						<tr>
-						  <td><span style="font-size:15px;font-weight:bold">支付方式:</span></td>
+						  <td><span style="font-size:15px;font-weight:bold">支付方式</span></td>
 						</tr>
 						<tr>
 						  <td><input type="radio" name="paymentMethod.paymentMethodId" value="1" checked="checked" required="required" >

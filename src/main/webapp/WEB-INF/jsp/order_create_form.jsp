@@ -37,7 +37,7 @@
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">
 						<tr style="text-align:left;">
 						  <td>
-						  	<span style="font-size:15px;font-weight:bold">收货人信息:</span>
+						  	<span style="font-size:15px;font-weight:bold">收货人信息</span>
 						  	&nbsp;&nbsp;&nbsp;
 						  	<a href="<s:url value='/user/contactAddressAddForm.html'/>" target="_blank" ><font color=red>添加地址</font></a>
 						  </td>
@@ -58,7 +58,7 @@
 							</span> </td>
 						</tr>
 						<tr>
-						  <td><span style="font-size:15px;font-weight:bold">支付方式:</span></td>
+						  <td><span style="font-size:15px;font-weight:bold">支付方式</span></td>
 						</tr>
 						<tr>
 						  <td><input type="radio" name="paymentMethod.paymentMethodId" value="1" checked="checked" required="required">
@@ -69,7 +69,7 @@
 						</tr>
 						
 						<tr style="display: none" class="lotut">
-						  <td><span style="font-size:15px;font-weight:bold">快递方式:</span></td>
+						  <td><span style="font-size:15px;font-weight:bold">快递方式</span></td>
 						</tr>
 						<tr style="display: none" class="lotut">
 						  <td>
@@ -103,7 +103,7 @@
 						</tr>
 							
 						<tr>
-						  <td>费用详情</td>
+						  <td><span style="font-size:15px;font-weight:bold">费用详情</span></td>
 						</tr>
 						<tr>
 						  <td><table id="simple-table" class="table table-striped table-bordered table-hover">
