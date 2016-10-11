@@ -38,6 +38,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,6 +52,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.lotut.pms.constants.Settings;
+import com.lotut.pms.domain.Attachment;
 import com.lotut.pms.service.AppPersonService;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.InventorService;
@@ -71,7 +73,8 @@ public class UploadController {
 	}
 	   
 	   @RequestMapping(path = "/uploadPic",method=RequestMethod.POST)
-		public void uploadPic(@RequestParam("patentDocId") int patentDocId,HttpServletRequest request1 ,HttpServletResponse response1)  {
+	   @Transactional
+		public synchronized void uploadPic(@RequestParam("patentDocId") int patentDocId,HttpServletRequest request1 ,HttpServletResponse response1)  {
 		   try{
 			   String savePath = Settings.PATENTDOC_ATTACHMENT_PATH;
 			   int count=patentDocService.getMaxAttachmentPicNum(patentDocId)+1;
@@ -120,6 +123,14 @@ public class UploadController {
 		        			out.flush();
 		        		}
 		        		String url=saveUrl+newFileName+".html";
+		        		
+		        		Attachment attachment=new Attachment();
+		        		attachment.setAttachmentUrl(url);
+		        		attachment.setCaption(picName);
+		        		attachment.setSeqNo(count);
+		        		attachment.setPatentDocId(patentDocId);
+		        		patentDocService.savePatentImgUrl(attachment);
+		        		
 		       		 	Map<String, Object> succMap = new HashMap<String, Object>(); 
 		                succMap.put("url", saveUrl + newFileName+".html");  
 		                succMap.put("picName",picName );
