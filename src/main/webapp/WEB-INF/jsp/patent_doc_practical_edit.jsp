@@ -49,8 +49,6 @@
 								return false;
 							}
 						} */
-						
-
 						return true;
 					},
 					onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
