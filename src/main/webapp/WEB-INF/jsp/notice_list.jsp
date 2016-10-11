@@ -419,6 +419,14 @@
 								
 								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
 								<td style="text-align:center">
+								 <span class="readStatus" id="${notice.noticeId}">
+									<c:choose>
+										<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
+										<c:otherwise>未查看
+										</c:otherwise>
+								  	</c:choose>
+								<br>
+								</span> 
 								  <select class="form-control" disabled="disabled">
 									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
 										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
@@ -434,7 +442,7 @@
 								<se:authorize access="hasRole('ROLE_USER') and  not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">
 								<c:if test="${notice.patent.ownerId==user.userId}">
 								<td style="text-align:center">
-									 <span class="qixian" id="i${notice.noticeId}">
+									 <span class="readStatus" id="${notice.noticeId}">
 										<c:choose>
 											<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
 											<c:otherwise>未查看

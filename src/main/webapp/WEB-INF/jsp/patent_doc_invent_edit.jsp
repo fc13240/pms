@@ -880,7 +880,6 @@ margin: 1px 0 0 1px;}
 	         <div class = "modal-body" id="modal-body">
 					<h5><span style="color:red;font-size:18px;">* </span>姓名或名称:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalAppPersonName"/>
-					<br/>
 					<span style="color: red; display: none;" id=appPersonNameError>该处应输入不大于20字段</span>
 					<br>
 					<h5><span style="color:red;font-size:18px;">* </span>证件号码:</h5>

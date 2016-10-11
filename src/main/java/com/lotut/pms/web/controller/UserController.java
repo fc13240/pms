@@ -263,6 +263,7 @@ public class UserController {
         return "user_forget_password";
     }  	
 
-    
+  /*  @RequestMapping(path="/uploadUserPhoto")
+    public void*/
     
 }

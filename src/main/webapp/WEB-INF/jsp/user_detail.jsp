@@ -49,11 +49,30 @@
 							onblur="validatePhoneNumber(this.value)"> <span
 							style="color: red; display: none;" id=phoneError>请输入正确的手机或者电话号</span>
 						<br>
+						<%-- <h5>QQ号码：</h5>
+						<input style="width:300px;" class="phone form-control" name="QQNumber" id="QQNumber" type="text"
+							value=""
+							onblur="validateQQNumber(this.value)"> 
+							<span style="color: red; display: none;" id="QQNumberError">请输入正确的QQ号码</span>
+						<br>
+						<h5>微信号：</h5>
+						<input style="width:300px;" class="phone form-control" name="WeChatNumber" id="WeChatNumber" type="text"
+							value=""> 
+							<span style="color: red; display: none;" id="WeChatNumberError">请输入正确的微信号</span>
+						<br>
+						<h5>个人头像：</h5>
+						<input type="hidden" id="patentDocInventorFileHidden" name="inventorUrl" />
+						<input style="width:300px;display:inline;" type="text" id="patentDocInventorFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocInventorFile]').click();" required/>
+						<button type="button" onclick="uploadInventorClick()" class="t-btn3 button button-primary  button-rounded">上传</button>    --%>
 						<div style="height: 20px;"></div>
 		
 						<button type="submit" style="width: 90px;" class="button button-primary  button-rounded">保存</button>
-		
-					</form>				
+					</form>
+					<%-- <form action="<s:url value='/petition/uploadPatentDocInventorFile.html'/>" id="uploadInventorFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+						<input style="display:none" type="file" id="patentDocInventorFile" name="file"/>
+						<button type="button" style="display: none;" onclick="$('input[id=patentDocInventorFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+						<button type="button" id="uploadInventorBtn" style="display:none;" onclick="uploadPatentDocInventorFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
+					</form>				 --%>				
 				</div>
 			</div>
 
@@ -92,6 +111,17 @@
 				}
 			} else {
 				document.getElementById("phoneError").style.display = "";
+				return false;
+			}
+		}
+		
+		function validateQQNumber(QQNumber) {
+			var reg = new RegExp("^[0-9]*$");
+			document.getElementById("QQNumberError").style.display = "none";
+			if (reg.test(QQNumber)) {
+					return true;
+			} else {
+				document.getElementById("QQNumberError").style.display = "";
 				return false;
 			}
 		}
