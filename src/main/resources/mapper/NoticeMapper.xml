@@ -45,6 +45,7 @@
 			<id property="patentId" column="patent_id"/>
 			<result property="appNo" column="app_no"/>
 			<result property="name" column="patent_name"/>
+			<result  property="ownerId"  column="patent_owner"/>
 			<result property="patentStatusText" column="patent_status_text"/>
 			<result property="appPerson" column="app_person"/>
 			<association property="patentStatus" javaType="PatentStatus">
@@ -77,7 +78,7 @@
 	
 	<select id="getUserNoticesByPage" parameterType="Page" resultMap="NoticeResultMap">
 		select un.*, u.user_id as share_user_id,  u.username as share_username
-		from (select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id,p.patent_status_text, ps.patent_status_desc as patent_status_description,
+		from (select p.patent_id, p.app_no, p.patent_name, p.patent_owner,p.app_person, ps.patent_status_id,p.patent_status_text, ps.patent_status_desc as patent_status_description,
 				n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
 				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
@@ -124,7 +125,7 @@
 	</select>
 	
 	<select id="getUserNoticesByPatentType" resultMap="NoticeResultMap">
-		select p.patent_id, p.app_no, p.patent_name,p.patent_status_text, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description, 
+		select p.patent_id, p.app_no, p.patent_name,p.patent_owner,p.patent_status_text, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description, 
 			u.user_id as share_user_id,  u.username as share_username, 
 			n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
 			if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,

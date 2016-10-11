@@ -334,11 +334,13 @@
 										</a>
 					  				</td>
 					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
+					  				
 					  				<td width="6%">
 										<a href="javascript:return void" onclick="batchChangeNoticePaperType(2)">
 										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">批量申请纸件</button>
 										</a>
 					  				</td>
+					  				
 					  				</se:authorize>		
 					  				<td width="6%">
 										<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportNotices()">表格导出</button>
@@ -391,7 +393,7 @@
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
 								<td style="text-align:center"><c:out value="${notice.patent.appNo}"/></td>
 								<td style="text-align:center"><c:out value="${notice.patent.name}"/></td>
-								<td style="text-align:center"><c:out value="${notice.patent.firstAppPerson}"/></td>
+								<td style="text-align:center"><c:out value="${notice.patent.appPerson}"/></td> 
 								<td style="text-align:center"><c:out value="${notice.patent.patentStatusText}"/></td>
 								<td style="text-align:center"><c:out value="${notice.patent.shareUsersAsString}"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
@@ -399,6 +401,7 @@
 								  <c:out value="${notice.name}"/>
 								  </a> 
 								</td>
+								
 								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center">
 									 <span class="qixian" id="i${notice.noticeId}">
@@ -421,6 +424,7 @@
 								  </select>
 								</td>
 								</se:authorize>
+								
 								
 								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
 								<td style="text-align:center">
@@ -446,6 +450,30 @@
 								</se:authorize>
 								
 								<se:authorize access="hasRole('ROLE_USER') and  not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">
+								<c:if test="${notice.patent.ownerId==user.userId}">
+								<td style="text-align:center">
+									 <span class="qixian" id="i${notice.noticeId}">
+										<c:choose>
+											<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
+											<c:otherwise>未查看
+											</c:otherwise>
+									  	</c:choose>
+									<br>
+									</span>  
+								
+								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this)">
+									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
+										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
+									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
+									  	>
+									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
+									  	</option>
+									</c:forEach>
+								  </select>
+								</td>
+								</c:if>
+								
+								<c:if test="${notice.patent.ownerId!=user.userId}">
 								<td style="text-align:center">
 								 <span class="qixian" id="k${notice.noticeId}">
 										<c:choose>
@@ -465,6 +493,7 @@
 									</c:forEach>
 								  </select>
 								</td>
+								</c:if>
 								</se:authorize>
 								
 								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
@@ -490,7 +519,9 @@
 								</td>
 								</se:authorize>
 								
+								
 								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS','ROLE_USER') and not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
+								<c:if test="${notice.patent.ownerId!=user.userId}">
 								<td style="text-align:center" class="date_status">
 								<span class="qixian">
 									<c:choose>
@@ -510,7 +541,32 @@
 									</c:forEach>
 								  </select>
 								</td>
+								</c:if>
+								
+								<c:if test="${notice.patent.ownerId==user.userId}">
+								<td style="text-align:center" class="date_status">
+								<span class="qixian">
+									<c:choose>
+										<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
+										<c:otherwise>期限：
+									  	<c:out value="${notice.remainDays}"/>天
+										</c:otherwise>
+								  	</c:choose>
+								<br>
+								</span>  	
+								
+								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
+									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
+									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
+									  >
+									  <c:out value="${processStatus.processStatusDescription}"/>
+									  </option>
+									</c:forEach>
+								  </select>
+								</td>
+								</c:if>
 								</se:authorize>
+								
 								<td style="text-align:center">
 								<a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}" onclick="changeNoticeReadStatus(${notice.noticeId})"> 下载 </a> 
 								<a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">

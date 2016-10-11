@@ -70,7 +70,7 @@ public class NoticeController {
 		int totalCount=(int)noticeService.getUserNoticesCount(userId);
 		page.setTotalRecords(totalCount);
 		int unreadNoticeCount=noticeService.unreadNoticeCount(userId);
-		
+		User user=PrincipalUtils.getCurrentPrincipal();
 		model.addAttribute("notices", userNotices);
 		model.addAttribute("patentTypeCount",patentTypeCount);
 		model.addAttribute("noticeTypeCount",noticeTypeCount);
@@ -80,6 +80,7 @@ public class NoticeController {
 		model.addAttribute("page", page);
 		model.addAttribute("unreadNoticeCount", unreadNoticeCount);
 		model.addAttribute("wayOfPaging","normal");
+		model.addAttribute("user",user);
 		addSearchTypesDataToModel(model);
 		return "notice_list";
 	}
