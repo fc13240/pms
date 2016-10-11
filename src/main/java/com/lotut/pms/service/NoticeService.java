@@ -67,7 +67,7 @@ public interface NoticeService {
 	
 	String noticeExportExcel(List<Long> noticeIds,String exportExcelName) throws IOException;
 	
-	void batchChangeNoticeViewStatus(List<Long> noticeIdList,int userId);
+	int batchChangeNoticeViewStatus(List<Long> noticeIdList,int userId);
 	
 	int unreadNoticeCount(int userId);
 	

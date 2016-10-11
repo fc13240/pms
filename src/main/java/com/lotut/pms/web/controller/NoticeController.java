@@ -317,4 +317,14 @@ public class NoticeController {
 		addSearchTypesDataToModel(model);
 		return "notice_list";
 	}
+	
+	
+	@RequestMapping(path="/changeNoticeReadStatus", method=RequestMethod.GET)
+	public void changeNoticeReadStatus(@RequestParam("notices")int noticeId,HttpServletResponse response) throws IOException{
+		List<Long> noticeIdList=new ArrayList<Long>();
+		noticeIdList.add(new Long(noticeId));
+		int userId=PrincipalUtils.getCurrentUserId();
+		noticeService.batchChangeNoticeViewStatus(noticeIdList,userId);
+		WebUtils.writeJsonStrToResponse(response, "1");
+	}		
 }

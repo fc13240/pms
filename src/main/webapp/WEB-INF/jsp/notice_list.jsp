@@ -428,6 +428,7 @@
 								
 								<se:authorize access="hasRole('ROLE_USER') and  not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center">
+
 								  <select id="roleUser" class="form-control" onClick=selectClick() onChange="javascript:changeRoleUserPaperApplyType('${notice.noticeId}', this)">
 										<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
 										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
@@ -451,14 +452,14 @@
 								  	</c:choose>
 								<br>
 								</span>  	 --%>
-								<span class="redStatus">
-										<c:choose>
-											<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
-											<c:otherwise>未查看
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span> 
+								<span class="readStatus" id="readStatusSpan${notice.noticeId}">
+									<c:choose>
+										<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
+										<c:otherwise>未查看
+										</c:otherwise>
+								  	</c:choose>
+								<br>
+								</span>  
 								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
@@ -492,7 +493,7 @@
 								  	</c:choose>
 								<br>
 								</span>  	 --%>
-								<span class="redStatus">
+								<span class="readStatus" id="readStatusSpan${notice.noticeId}">
 									<c:choose>
 										<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
 										<c:otherwise>未查看
@@ -523,7 +524,7 @@
 								
 								</se:authorize>
 								<td style="text-align:center">
-								<a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}"> 下载 </a> 
+								<a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}" onclick="changeNoticeReadStatus(${notice.noticeId})"> 下载 </a> 
 								<a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
 								  分享
 								  </a>
@@ -1118,6 +1119,19 @@ function batchChangeNoticeViewStatus() {
 			});
 		}
 	});			
+	
+}
+
+function changeNoticeReadStatus(noticeId){
+	setTimeout(function(){
+		$.ajax({
+			url: "<s:url value='/notice/changeNoticeReadStatus.html'/>?notices=" + noticeId, 
+			type: 'get', 
+			success: function() {
+				$("#readStatusSpan"+noticeId).html("已查看");
+			}
+		});		
+	}, 100);	
 	
 }
 </script>
