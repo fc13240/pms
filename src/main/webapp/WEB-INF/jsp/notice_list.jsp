@@ -376,9 +376,9 @@
 							  <th width="100px">发文日</th>
 							  <th>通知书名称</th>
 							  <th width="100px">查看状态/纸件申请</th>
-							  <th width="160px">期限和通知状态</th>
-							  <!-- 							<th>预览</th> 
-							  <th>下载</th>-->
+							  <th width="160px">通知状态</th>
+							  <th>期限</th> 
+							  <!--<th>下载</th>-->
 							  <th width="130">操作</th>
 							</tr>
 						  </thead>
@@ -400,16 +400,6 @@
 								  </a> 
 								</td>
 								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
-								<td style="text-align:center">
-									 <span class="qixian">
-										<c:choose>
-											<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
-											<c:otherwise>未查看
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span>  
-								
 								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this)">
 									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
 										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
@@ -424,15 +414,6 @@
 								
 								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
 								<td style="text-align:center">
-									
-									<span class="qixian">
-										<c:choose>
-											<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
-											<c:otherwise>未查看
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span> 
 								  <select class="form-control" disabled="disabled">
 									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
 										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
@@ -447,14 +428,6 @@
 								
 								<se:authorize access="hasRole('ROLE_USER') and  not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center">
-								 <span class="qixian">
-										<c:choose>
-											<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
-											<c:otherwise>未查看
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span> 
 								  <select id="roleUser" class="form-control" onClick=selectClick() onChange="javascript:changeRoleUserPaperApplyType('${notice.noticeId}', this)">
 										<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
 										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
@@ -469,7 +442,7 @@
 								
 								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center" class="date_status">
-								<span class="qixian">
+								<%-- <span class="qixian">
 									<c:choose>
 										<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
 										<c:otherwise>期限：
@@ -477,8 +450,15 @@
 										</c:otherwise>
 								  	</c:choose>
 								<br>
-								</span>  	
-								
+								</span>  	 --%>
+								<span class="redStatus">
+										<c:choose>
+											<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
+											<c:otherwise>未查看
+											</c:otherwise>
+									  	</c:choose>
+									<br>
+									</span> 
 								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
@@ -487,12 +467,23 @@
 									  </option>
 									</c:forEach>
 								  </select>
+								</td >
+								<td style="text-align:center">
+									<span class="qixian">
+										<c:choose>
+											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
+											<c:otherwise>
+										  	<c:out value="${notice.remainDays}"/>天
+											</c:otherwise>
+									  	</c:choose>
+									<br>
+									</span>  	
 								</td>
 								</se:authorize>
 								
 								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS','ROLE_USER') and not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center" class="date_status">
-								<span class="qixian">
+								<%-- <span class="qixian">
 									<c:choose>
 										<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
 										<c:otherwise>期限：
@@ -500,7 +491,15 @@
 										</c:otherwise>
 								  	</c:choose>
 								<br>
-								</span>  	
+								</span>  	 --%>
+								<span class="redStatus">
+									<c:choose>
+										<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
+										<c:otherwise>未查看
+										</c:otherwise>
+								  	</c:choose>
+								<br>
+								</span> 
 								  <select  class="treatment_status selectPointOfInterest form-control" disabled="disabled">
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
@@ -510,6 +509,18 @@
 									</c:forEach>
 								  </select>
 								</td>
+								<td style="text-align:center">
+									<span class="qixian">
+										<c:choose>
+											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
+											<c:otherwise>
+										  	<c:out value="${notice.remainDays}"/>天
+											</c:otherwise>
+									  	</c:choose>
+									<br>
+									</span>  	
+								</td>
+								
 								</se:authorize>
 								<td style="text-align:center">
 								<a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}"> 下载 </a> 
