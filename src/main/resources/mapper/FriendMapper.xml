@@ -52,7 +52,7 @@
 		</where>
 	</select>
 	
-	<select id="searchUserFriends" resultType="Friend">
+	<select id="searchUserFriends" resultMap="FriendResultMap">
 		<if test="keyword != null and keyword != ''">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>		
@@ -63,7 +63,7 @@
 		  left join customer_supports c on c.user_id = f.friend LEFT JOIN users cu ON cu.user_id = c.proxy_org_id 
 		  left join process_person p on p.user_id =  f.friend LEFT JOIN users pu ON pu.user_id = p.proxy_org_id
 		  left join tech_person t on t.user_id =f.friend LEFT JOIN users tu ON tu.user_id = t.proxy_org_id
-		 where user = #{userId} ;		
+		 where user = #{userId} 		
 		<if test="keyword != null and keyword != ''">
 			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern} or f.remark_name like #{keyword_pattern})
 		</if>
@@ -88,7 +88,7 @@
 		</if>	
 	</update>
 	
-	<select id="searchUserFriendsByUser" resultType="Friend">
+	<select id="searchUserFriendsByUser" resultMap="FriendResultMap">
 		<if test="keyword != null and keyword != ''">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>		
@@ -99,7 +99,7 @@
 		  left join customer_supports c on c.user_id = f.friend LEFT JOIN users cu ON cu.user_id = c.proxy_org_id 
 		  left join process_person p on p.user_id =  f.friend LEFT JOIN users pu ON pu.user_id = p.proxy_org_id
 		  left join tech_person t on t.user_id =f.friend LEFT JOIN users tu ON tu.user_id = t.proxy_org_id
-		 where user = #{userId} ;	
+		 where user = #{userId} 	
 		<if test="keyword != null and keyword != ''">
 			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern} or f.remark_name like #{keyword_pattern})
 		</if>
