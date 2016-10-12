@@ -70,8 +70,8 @@
 								<tr>
 								  <td ><input name="friend" style="width:15px;" type="checkbox" class="check-item" friend="<c:out value='${friend.friendId}'/>"></td>
 								  <td>${status.count}</td>
-								  <td><c:out value="${friend.username}"/></td>
-								  <td><c:out value="${friend.realname}"/></td>
+								  <td><c:out value="${friend.user.username}"/></td>
+								  <td><c:out value="${friend.user.name}"/></td>
 								  <td><c:out value="${friend.remarkName}"/></td>
 								</tr>
 							  </c:forEach>

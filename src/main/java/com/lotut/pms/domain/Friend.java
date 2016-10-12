@@ -44,7 +44,7 @@ public class Friend {
 		this.remarkName = remarkName;
 	}
 	
-	public String getShareUserTypeAsString() {
+	public String getUserTypeAsString() {
 		if(this.userTypes != null){
 			if(this.userTypes.size()==1){
 				return "普通用户";
