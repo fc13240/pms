@@ -34,7 +34,7 @@
 					<div class="t-third" style="margin-top10px;background:#fff;">
 					<form action="<s:url value='/friend/search.html'/>" method="GET"  role="search">
 					  <div class="form-group">
-						<input class="selectPointOfInterest form-control" type="text" id="form-field-1" style="width:450px;display:inline;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" required/>
+						<input class="selectPointOfInterest form-control" type="text" id="form-field-1" style="width:450px;display:inline;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="" required/>
 						<button  type="submit" class="button button-caution button-rounded">查询</button>
 					  </div>
 					</form>

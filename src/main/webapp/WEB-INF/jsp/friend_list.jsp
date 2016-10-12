@@ -33,8 +33,8 @@
 					<div class="t-third">
 					  <form action="<s:url value='/friend/searchUserFriends.html'/>" method="GET"  role="search">
 					    <div class="form-group">
-					      <input class="form-control" type="text" id="form-field-1" style="width:450px;height:34px;display:inline;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="<c:out value='${param.keyword}'/>" />
-					      <button  type="submit" style="height:34px;" class="button button-caution button-rounded">查询</button>
+					      <input class="form-control" type="text" id="form-field-1" style="width:450px;height:34px;display:inline;" name="keyword" id="keywordId" placeholder="用户名/姓名" value="" />
+					      <button  id="" type="submit" style="height:34px;" class="button button-caution button-rounded">查询</button>
 					    </div>
 					  </form>
 					  <table id="simple-table" class="table table-striped table-bordered table-hover">

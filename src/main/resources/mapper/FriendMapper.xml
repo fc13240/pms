@@ -20,7 +20,7 @@
 		<result property="username" column="organization_name"/>
 	</resultMap>
 	<select id="getUserFriends" parameterType="int" resultMap="FriendResultMap">
-		select f.friend, u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id as group_id,g.username as username,
+		select f.friend, u.user_id,u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id as group_id,g.username as username,
 		c.proxy_org_id as organization_id,cu.username as organization_name ,p.proxy_org_id as organization_id,pu.username as organization_name,
 		t.proxy_org_id as organization_id,tu.username as organization_name
 		  from friends f join users u on f.friend = u.user_id join group_members g on u.username = g.username 
@@ -56,7 +56,7 @@
 		<if test="keyword != null and keyword != ''">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>		
-		select f.friend, u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id as group_id,g.username as username,
+		select f.friend, u.user_id,u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id as group_id,g.username as username,
 		c.proxy_org_id as organization_id,cu.username as organization_name ,p.proxy_org_id as organization_id,pu.username as organization_name,
 		t.proxy_org_id as organization_id,tu.username as organization_name
 		  from friends f join users u on f.friend = u.user_id join group_members g on u.username = g.username 
@@ -92,7 +92,7 @@
 		<if test="keyword != null and keyword != ''">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>		
-		select f.friend, u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id as group_id,g.username as username,
+		select f.friend, u.user_id,u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id as group_id,g.username as username,
 		c.proxy_org_id as organization_id,cu.username as organization_name ,p.proxy_org_id as organization_id,pu.username as organization_name,
 		t.proxy_org_id as organization_id,tu.username as organization_name
 		  from friends f join users u on f.friend = u.user_id join group_members g on u.username = g.username 
