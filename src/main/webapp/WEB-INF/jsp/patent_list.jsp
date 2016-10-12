@@ -264,7 +264,12 @@
 							<td style="text-align:center"><c:out value="${patent.patentStatusText}"/></td>
 							<td style="text-align:center"><input style="width:180px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="90" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
 							</td>
-							<td style="text-align:center"><c:out value="${patent.shareUsersAsString}"/>
+							<td style="text-align:center">
+							<c:forEach items="${patent.shareUsers}" var="shareUser">								
+								<a href="javascript:return void" onclick="searchShareUserDetail(${shareUser.userId})" >
+					        		<c:out value="${shareUser.username}"/>;
+					        	</a>					        	
+					        </c:forEach>
 							</td>
 							<td style="text-align:center"><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
 							  分享
@@ -585,6 +590,11 @@ $(function () {
 		var iframe = document.getElementById('patentExcelFileFrame');
 		iframe.src = "<s:url value='/patent/exportPatents.html'/>?patentIds=" + patents;
 		
+	}
+	
+	function searchShareUserDetail(shareUserId){
+		var url = "<s:url value='/user/searchShareUserDetail.html'/>?shareUserId=" + shareUserId;
+		window.open(url);
 	}
 	
 

@@ -180,5 +180,15 @@ public class UserServiceImpl implements UserService {
 			userDao.updatePassword(user);
 			return true;
 	}
+	
+	@Override
+	public User searchShareUserById(int shareUserId) {
+		return userDao.searchShareUserById(shareUserId);
+	}
+	
+	@Override
+	public ContactAddress getUserDefaultContactAddress(int shareUserId) {
+		return userDao.getUserDefaultContactAddress(shareUserId);
+	}
 
 }

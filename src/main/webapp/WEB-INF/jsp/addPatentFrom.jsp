@@ -43,7 +43,7 @@
 				        <h5>专利名称:</h5>
 				        <input class="selectPointOfInterest form-control" style="width:332px;" type="text" name="name" id="name"  required/>	  
 					  	<br>
-				        <h5>专利类型</h5>
+				        <h5>专利类型:</h5>
 				        <select style="width:332px;" class="selectPointOfInterest form-control" name="patentType.patentTypeId" id="patentTypeId" required>
 				          <option value="">全部</option>
 				          <c:forEach items="${allPatentTypes}" var="patentType">
@@ -53,7 +53,7 @@
 				          </c:forEach>
 				        </select>
 				        <br>
-				        <h5>专利状态</h5>
+				        <h5>专利状态:</h5>
 				        
 				        <select style="width:332px;" class="selectPointOfInterest form-control" name="patentStatus.patentStatusId" id="patentStatusId" required>
 				          <option value="">全部</option>
@@ -65,10 +65,10 @@
 				        </select>
 			
 				        <br>
-						<h5>申请人</h5>
+						<h5>申请人:</h5>
 						<input class="selectPointOfInterest form-control" style="width:332px;"  type="text" name="appPerson" id="appPerson" />
 						<br>
-				  		<h5>申请日</h5>
+				  		<h5>申请日:</h5>
 					    <input class="selectPointOfInterest form-control" style="width:332px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})"  id="startAppDateId" name="appDate" placeholder="申请时间" value="" readonly="readonly" >
 					    </li>
 					    <br>

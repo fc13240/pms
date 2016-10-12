@@ -55,7 +55,13 @@
 					      <c:forEach items="${friends}" var="friend" varStatus="status">
 					        <tr>
 					          <td style="text-align:center">${status.count}</td>
-					          <td style="text-align:center"><c:out value="${friend.user.username}"/></td>
+
+					          <td style="text-align:center">
+								<a href="javascript:return void" onclick="searchFriendDetail(${friend.user.userId})" >
+					        		<c:out value="${friend.user.username}"/>
+					        	</a>					        	
+							</td>
+					          
 					          <td style="text-align:center"><c:out value="${friend.user.name}"/></td>
 					          <td style="text-align:center"><c:out value="${friend.user.email}"/></td>
 					          <td style="text-align:center"><c:out value="${friend.user.phone}"/></td>
@@ -88,6 +94,11 @@ function changeRemarkName(friendId, remarkName) {
 			formutil.alertMessage('修改失败，请稍后重试!');
 		}
 	});	
+}
+
+function searchFriendDetail(shareUserId){
+	var url = "<s:url value='/user/searchShareUserDetail.html'/>?shareUserId=" + shareUserId;
+	window.open(url);
 }
 </script>
 </body>
