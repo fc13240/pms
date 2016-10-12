@@ -924,13 +924,13 @@ public class PatentEditDocController {
 	public void searchShareUsers(long patentDocId,Model model,HttpServletResponse response){
 		List<User> shareUsers = patentDocService.searchShareUsers(patentDocId);
 		String users = null;
-		if (shareUsers != null) {
+		/*if (shareUsers != null) {
 			users =  String.join(";", shareUsers.stream().map(User::getUsername).collect(Collectors.toList()));
 		}else {
 			users = "";
-		}
+		}*/
 		try {
-			WebUtils.writeJsonStrToResponse(response, users);
+			WebUtils.writeJsonStrToResponse(response, shareUsers);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

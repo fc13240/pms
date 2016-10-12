@@ -39,7 +39,7 @@ public interface UserDao {
 	
 	void defaultUserContactAddresses(int id);
 	
-	void defaulStatus();
+	void defaulStatus(int userId);
 	
 	ContactAddress getContactAddressesById(int id);
 	
@@ -52,5 +52,10 @@ public interface UserDao {
 	List<User> getPlatformUser();
 
 	int updateUserAvatarUrl(User user);
+
+	User searchShareUserById(int shareUserId);
+
+	ContactAddress getUserDefaultContactAddress(int shareUserId);
+
 
 }

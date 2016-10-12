@@ -209,7 +209,9 @@
 									<a href="javascript:void(0);" class="loadUsers" onclick="loadPatentSharePerson(${patentDoc.patentDocId})">查看</a>
 									<a href="javascript:void(0);" class="hideUsers" style="display:none;" onclick="hiddenPatentSharePerson(${patentDoc.patentDocId})">收起</a>
 									
-									<span class="spanUsers" style="display:none;"></span>
+									<span class="spanUsers" style="display:none;" id="spanForShareUsers">
+										
+									</span>
 								</td>
 								<td style="text-align:center">
 								
@@ -630,9 +632,26 @@ function denialofService(value){
 			url: "<s:url value='/editor/searchShareUsers.html'/>?patentDocId="+patentDocId, 
 			type: 'get',
 			dataType: 'json',
-			success: function(data) {
+			success: function(data){
 				$("#tdUsers" + patentDocId + " .spanUsers").css("display","block");
-				$("#tdUsers" + patentDocId + " .spanUsers").html(data);
+				var len = data.length;
+				$.each(data,function(i,item){					
+					if (i == len -1) {
+						$("#tdUsers" + patentDocId + " .spanUsers").append(
+								"<a href='javascript:return void' onclick='searchShareUserDetail("+item.userId+")' >"+
+								item.username+						
+								"</a>"
+						)
+					} else {
+						$("#tdUsers" + patentDocId + " .spanUsers").append(
+								"<a href='javascript:return void' onclick='searchShareUserDetail("+item.userId+")' >"+
+								item.username+						
+								";"+
+								"</a>"
+							)
+					}
+					
+				})
 				$("#tdUsers" + patentDocId + " .loadUsers").css("display","none");
 				$("#tdUsers" + patentDocId + " .hideUsers").css("display","block");
 				
@@ -646,6 +665,11 @@ function denialofService(value){
 		$("#tdUsers" + patentDocId + " .hideUsers").css("display","none");
 		$("#tdUsers" + patentDocId + " .loadUsers").css("display","block");
 		
+	}
+	
+	function searchShareUserDetail(shareUserId){
+		var url = "<s:url value='/user/searchShareUserDetail.html'/>?shareUserId=" + shareUserId;
+		window.open(url);
 	}
 </script>
 </body>

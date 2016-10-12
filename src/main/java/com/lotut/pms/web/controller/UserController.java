@@ -165,7 +165,7 @@ public class UserController {
 	
 	@RequestMapping(path="/defaultUserContactAddresses", method=RequestMethod.GET)
 	public String defaultUserContactAddresses(@RequestParam("id")int id,Model model) {
-		userService.defaulStatus();
+		userService.defaulStatus(PrincipalUtils.getCurrentUserId());
 		userService.defaultUserContactAddresses(id);
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
@@ -281,10 +281,19 @@ public class UserController {
     }
     
     @RequestMapping(path="/getUserAvatarUrl")
-    public void uploadUserPhoto(PrintWriter out){
+    public void getUserAvatarUrl(PrintWriter out){
     	int userId=PrincipalUtils.getCurrentUserId();
     	User userDetail =userService.getUserDetail(userId);
     	out.write(userDetail.getAvatarUrl());
     }
+    
+    @RequestMapping(path="/searchShareUserDetail",method=RequestMethod.GET)  
+    public String searchShareUserDetail(int shareUserId,Model model){  
+    	User user = userService.searchShareUserById(shareUserId);
+    	ContactAddress contactAddress = userService.getUserDefaultContactAddress(shareUserId);
+    	model.addAttribute("user", user);
+    	model.addAttribute("contactAddress", contactAddress);
+        return "share_user_detail";
+    } 
     
 }

@@ -118,8 +118,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void defaulStatus() {
-		userDao.defaulStatus();
+	public void defaulStatus(int userId) {
+		userDao.defaulStatus(userId);
 	}
 
 	@Override
@@ -179,6 +179,16 @@ public class UserServiceImpl implements UserService {
 			user.setPassword(encoder.encode(newPassword));
 			userDao.updatePassword(user);
 			return true;
+	}
+	
+	@Override
+	public User searchShareUserById(int shareUserId) {
+		return userDao.searchShareUserById(shareUserId);
+	}
+	
+	@Override
+	public ContactAddress getUserDefaultContactAddress(int shareUserId) {
+		return userDao.getUserDefaultContactAddress(shareUserId);
 	}
 
 	@Override

@@ -115,8 +115,8 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 	}
 
 	@Override
-	public void defaulStatus() {
-		userMapper.defaulStatus();
+	public void defaulStatus(int userId) {
+		userMapper.defaulStatus(userId);
 	}
 
 	@Override
@@ -150,6 +150,15 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 		return userMapper.updateUserAvatarUrl(user);
 	}
 
+	@Override
+	public User searchShareUserById(int shareUserId) {
+		return userMapper.searchShareUserById(shareUserId);
+	}
+	
+	@Override
+	public ContactAddress getUserDefaultContactAddress(int shareUserId) {
+		return userMapper.getUserDefaultContactAddress(shareUserId);
+	}
 
 
 	

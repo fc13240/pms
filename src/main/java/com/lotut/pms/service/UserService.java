@@ -49,7 +49,7 @@ public interface UserService {
 	
 	void defaultUserContactAddresses(int id);
 	
-	void defaulStatus();
+	void defaulStatus(int userId);
 	
 	ContactAddress getContactAddressesById(int id);
 	
@@ -62,6 +62,10 @@ public interface UserService {
 	String findPassword(User user);
 
 	int updateUserAvatarUrl(User user);
+
+	User searchShareUserById(int shareUserId);
+
+	ContactAddress getUserDefaultContactAddress(int shareUserId);
 
 	//String 	roundPassword();
 

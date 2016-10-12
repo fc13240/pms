@@ -105,8 +105,8 @@
 		update contact_addresses set is_default=1 where id=#{id}
 	</update>
 	
-	<update id="defaulStatus">
-		update contact_addresses set is_default=0 where is_default=1
+	<update id="defaulStatus" parameterType="int">
+		update contact_addresses set is_default=0 where is_default=1 and user=#{userId}
 	</update>
 	
 	<select id="getContactAddressesById" parameterType="int" resultType="ContactAddress">
@@ -148,8 +148,19 @@
 	</select>
 	
 	<!-- 查找平台机构用户 -->
-	<select id="getPlatformUser"  resultMap="UserResultMap">
-		SELECT * FROM users WHERE username IN(SELECT gm.username FROM group_members gm JOIN groups g ON gm.group_id=g.id WHERE g.group_name='PLATFORM');
+	<select id="searchShareUserById" parameterType="int" resultMap="UserResultMap">
+		SELECT * FROM users WHERE user_id = #{shareUserId}
+	</select>
+	
+	<select id="getUserDefaultContactAddress" parameterType="int" resultType="ContactAddress">
+		SELECT ca.id, ca.receiver, ca.province, p.name AS provinceName, ca.city, c.name AS cityName,
+				ca.district, d.name AS districtName,ca.detail_address AS detailAddress, ca.phone, ca.email
+		 FROM contact_addresses ca 
+		 JOIN provinces p ON ca.province = p.id
+		JOIN cities c ON ca.city = c.id 
+		JOIN districts d ON ca.district = d.id
+		JOIN users u ON ca.user = u.user_id
+		 WHERE ca.is_default=1 AND ca.user = #{shareUserId}
 	</select>
 	
 	<update id="updateUserAvatarUrl" parameterType="User">
