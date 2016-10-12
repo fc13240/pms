@@ -191,4 +191,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUserDefaultContactAddress(shareUserId);
 	}
 
+	@Override
+	public int updateUserAvatarUrl(User user) {
+		return userDao.updateUserAvatarUrl(user);
+	}
+
 }

@@ -51,10 +51,11 @@ public interface UserDao {
 	
 	List<User> getPlatformUser();
 
+	int updateUserAvatarUrl(User user);
+
 	User searchShareUserById(int shareUserId);
 
 	ContactAddress getUserDefaultContactAddress(int shareUserId);
-
 
 
 }

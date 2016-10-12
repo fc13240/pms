@@ -61,6 +61,8 @@ public interface UserService {
 
 	String findPassword(User user);
 
+	int updateUserAvatarUrl(User user);
+
 	User searchShareUserById(int shareUserId);
 
 	ContactAddress getUserDefaultContactAddress(int shareUserId);

@@ -146,6 +146,11 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 	}
 
 	@Override
+	public int updateUserAvatarUrl(User user) {
+		return userMapper.updateUserAvatarUrl(user);
+	}
+
+	@Override
 	public User searchShareUserById(int shareUserId) {
 		return userMapper.searchShareUserById(shareUserId);
 	}
