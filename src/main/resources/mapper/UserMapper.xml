@@ -96,8 +96,8 @@
 		update contact_addresses set is_default=1 where id=#{id}
 	</update>
 	
-	<update id="defaulStatus">
-		update contact_addresses set is_default=0 where is_default=1
+	<update id="defaulStatus" parameterType="int">
+		update contact_addresses set is_default=0 where is_default=1 and user=#{userId}
 	</update>
 	
 	<select id="getContactAddressesById" parameterType="int" resultType="ContactAddress">

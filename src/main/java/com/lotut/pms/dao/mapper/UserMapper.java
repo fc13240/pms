@@ -44,7 +44,7 @@ public interface UserMapper {
 	
 	void defaultUserContactAddresses(int id);
 	
-	void defaulStatus();
+	void defaulStatus(int userId);
 	
 	ContactAddress getContactAddressesById(int id);
 	

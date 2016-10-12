@@ -634,15 +634,23 @@ function denialofService(value){
 			dataType: 'json',
 			success: function(data){
 				$("#tdUsers" + patentDocId + " .spanUsers").css("display","block");
-				
-				//var shareUsers=$.parseJSON(data);
-				//alert(shareUsers);
-				$.each(data,function(i,item){
-					$("#tdUsers" + patentDocId + " .spanUsers").append(
-						"<a href='javascript:return void' onclick='searchShareUserDetail("+item.userId+")' >"+
-						item.username+";"+
-						"</a>"
-					)
+				var len = data.length;
+				$.each(data,function(i,item){					
+					if (i == len -1) {
+						$("#tdUsers" + patentDocId + " .spanUsers").append(
+								"<a href='javascript:return void' onclick='searchShareUserDetail("+item.userId+")' >"+
+								item.username+						
+								"</a>"
+						)
+					} else {
+						$("#tdUsers" + patentDocId + " .spanUsers").append(
+								"<a href='javascript:return void' onclick='searchShareUserDetail("+item.userId+")' >"+
+								item.username+						
+								";"+
+								"</a>"
+							)
+					}
+					
 				})
 				$("#tdUsers" + patentDocId + " .loadUsers").css("display","none");
 				$("#tdUsers" + patentDocId + " .hideUsers").css("display","block");

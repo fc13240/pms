@@ -115,8 +115,8 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 	}
 
 	@Override
-	public void defaulStatus() {
-		userMapper.defaulStatus();
+	public void defaulStatus(int userId) {
+		userMapper.defaulStatus(userId);
 	}
 
 	@Override

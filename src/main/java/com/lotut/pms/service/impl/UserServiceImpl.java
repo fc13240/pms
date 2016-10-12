@@ -118,8 +118,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void defaulStatus() {
-		userDao.defaulStatus();
+	public void defaulStatus(int userId) {
+		userDao.defaulStatus(userId);
 	}
 
 	@Override

@@ -397,9 +397,10 @@
 								<td style="text-align:center"><c:out value="${notice.patent.patentStatusText}"/></td>
 								
 								<td style="text-align:center">
-								<c:forEach items="${notice.patent.shareUsers}" var="shareUser">								
+								<c:forEach items="${notice.patent.shareUsers}" var="shareUser" varStatus="s">								
 									<a href="javascript:return void" onclick="searchShareUserDetail(${shareUser.userId})" >
-					        			<c:out value="${shareUser.username}"/>;
+					        			<c:out value="${shareUser.username}"/>
+					        			<c:if test="${!s.last}">;</c:if>
 					        		</a>					        	
 					       	 	</c:forEach>
 								</td>

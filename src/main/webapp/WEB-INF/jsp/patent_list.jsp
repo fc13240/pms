@@ -265,9 +265,10 @@
 							<td style="text-align:center"><input style="width:180px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="90" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
 							</td>
 							<td style="text-align:center">
-							<c:forEach items="${patent.shareUsers}" var="shareUser">								
+							<c:forEach items="${patent.shareUsers}" var="shareUser" varStatus="s">								
 								<a href="javascript:return void" onclick="searchShareUserDetail(${shareUser.userId})" >
-					        		<c:out value="${shareUser.username}"/>;
+					        		<c:out value="${shareUser.username}"/>
+					        		<c:if test="${!s.last}">;</c:if>
 					        	</a>					        	
 					        </c:forEach>
 							</td>

@@ -164,7 +164,7 @@ public class UserController {
 	
 	@RequestMapping(path="/defaultUserContactAddresses", method=RequestMethod.GET)
 	public String defaultUserContactAddresses(@RequestParam("id")int id,Model model) {
-		userService.defaulStatus();
+		userService.defaulStatus(PrincipalUtils.getCurrentUserId());
 		userService.defaultUserContactAddresses(id);
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);

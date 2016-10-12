@@ -30,7 +30,7 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
-				<h4>共享人${user.username}详细信息</h4>
+				<h4>用户${user.username}详细信息</h4>
 				<br>
 					<form action=""	method="POST" >
 						<h5>真实姓名/名称：</h5>
