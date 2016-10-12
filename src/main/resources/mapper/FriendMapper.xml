@@ -56,9 +56,14 @@
 		<if test="keyword != null and keyword != ''">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>		
-		select u.user_id as friendId, u.username, u.name as realname, f.remark_name as remarkName
-		  from users u join friends f on u.user_id = f.friend	
-		 where f.user = #{userId}	
+		select f.friend, u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id as group_id,g.username as username,
+		c.proxy_org_id as organization_id,cu.username as organization_name ,p.proxy_org_id as organization_id,pu.username as organization_name,
+		t.proxy_org_id as organization_id,tu.username as organization_name
+		  from friends f join users u on f.friend = u.user_id join group_members g on u.username = g.username 
+		  left join customer_supports c on c.user_id = f.friend LEFT JOIN users cu ON cu.user_id = c.proxy_org_id 
+		  left join process_person p on p.user_id =  f.friend LEFT JOIN users pu ON pu.user_id = p.proxy_org_id
+		  left join tech_person t on t.user_id =f.friend LEFT JOIN users tu ON tu.user_id = t.proxy_org_id
+		 where user = #{userId} ;		
 		<if test="keyword != null and keyword != ''">
 			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern} or f.remark_name like #{keyword_pattern})
 		</if>
@@ -87,9 +92,14 @@
 		<if test="keyword != null and keyword != ''">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>		
-		select u.user_id as friendId, u.username, u.name as realname,u.email,u.phone, f.remark_name as remarkName
-		  from users u join friends f on u.user_id = f.friend	
-		 where f.user = #{userId}	
+		select f.friend, u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id as group_id,g.username as username,
+		c.proxy_org_id as organization_id,cu.username as organization_name ,p.proxy_org_id as organization_id,pu.username as organization_name,
+		t.proxy_org_id as organization_id,tu.username as organization_name
+		  from friends f join users u on f.friend = u.user_id join group_members g on u.username = g.username 
+		  left join customer_supports c on c.user_id = f.friend LEFT JOIN users cu ON cu.user_id = c.proxy_org_id 
+		  left join process_person p on p.user_id =  f.friend LEFT JOIN users pu ON pu.user_id = p.proxy_org_id
+		  left join tech_person t on t.user_id =f.friend LEFT JOIN users tu ON tu.user_id = t.proxy_org_id
+		 where user = #{userId} ;	
 		<if test="keyword != null and keyword != ''">
 			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern} or f.remark_name like #{keyword_pattern})
 		</if>
