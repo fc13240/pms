@@ -1078,11 +1078,11 @@ margin: 1px 0 0 1px;}
 
 	           <div class="lt-box" style="padding:20px;">
 			       	<h5><span style="color:red;font-size:18px;">* </span>姓名:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorName" placeholder="必填项" />
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorName"/>
 					<span style="color: red; display: none;" id=inventorNameError>该处应输入不大于20字段</span>
 					<br>	   
 					<h5><span style="color:red;font-size:18px;">* </span>证件号码:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorNumber" placeholder="必填项"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorNumber"/>
 					<span style="color: red; display: none;" id=inventorNumberError>请输入正确的证件号码</span>
 					<br>		  
 			       	<h5>国籍:</h5>

@@ -51,6 +51,6 @@ public interface UserDao {
 	
 	List<User> getPlatformUser();
 
-
+	int updateUserAvatarUrl(User user);
 
 }

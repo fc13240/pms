@@ -181,4 +181,9 @@ public class UserServiceImpl implements UserService {
 			return true;
 	}
 
+	@Override
+	public int updateUserAvatarUrl(User user) {
+		return userDao.updateUserAvatarUrl(user);
+	}
+
 }

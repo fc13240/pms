@@ -5,6 +5,12 @@
 <%@ taglib uri="c" prefix="c"%>
 <%@ taglib uri="fmt" prefix="fmt"%>
 <%@ taglib uri="spring-form" prefix="form"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path;
+%>
+<c:set var="base" value="<%=basePath%>" scope="application"></c:set>
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -14,6 +20,7 @@
 <%@ include file="_css.jsp"%>
 </head>
 <body>
+<script src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 <%@ include file="_top.jsp"%>
 <div class="lt-con" style="min-width:1100px;">
 	<div class="container-fluid" >
@@ -29,7 +36,7 @@
 		  <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
 				<div style="height:10px;"></div>
-				<div class="lt-box" style="padding:20px;">
+				<div class="lt-box" style="padding:20px;float: left">
 					<form action="<s:url value='/user/updateUserDetail.html'/>"
 						method="POST" onsubmit="return check()">
 						<h5>真实姓名/名称：</h5>
@@ -49,30 +56,41 @@
 							onblur="validatePhoneNumber(this.value)"> <span
 							style="color: red; display: none;" id=phoneError>请输入正确的手机或者电话号</span>
 						<br>
-						<%-- <h5>QQ号码：</h5>
-						<input style="width:300px;" class="phone form-control" name="QQNumber" id="QQNumber" type="text"
-							value=""
+						<h5>QQ号码：</h5>
+						<input style="width:300px;" class="phone form-control" name="qq" id="QQNumber" type="text"
+							value="${user.qq}"
 							onblur="validateQQNumber(this.value)"> 
 							<span style="color: red; display: none;" id="QQNumberError">请输入正确的QQ号码</span>
 						<br>
 						<h5>微信号：</h5>
-						<input style="width:300px;" class="phone form-control" name="WeChatNumber" id="WeChatNumber" type="text"
-							value=""> 
+						<input style="width:300px;" class="phone form-control" name="weChat" id="WeChatNumber" type="text"
+							value="${user.weChat}"> 
 							<span style="color: red; display: none;" id="WeChatNumberError">请输入正确的微信号</span>
 						<br>
-						<h5>个人头像：</h5>
-						<input type="hidden" id="patentDocInventorFileHidden" name="inventorUrl" />
-						<input style="width:300px;display:inline;" type="text" id="patentDocInventorFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocInventorFile]').click();" required/>
-						<button type="button" onclick="uploadInventorClick()" class="t-btn3 button button-primary  button-rounded">上传</button>    --%>
+						<h5>个人头像(<span style="color:red">图片大小不能超过300KB)</span>：</h5>
+						<input type="hidden" id="userPhotoFileHidden" name="avatarUrl" value="${user.avatarUrl}" />
+						<input style="display:inline;width:217px;" type="text" id="userPhotoFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=userPhotoFile]').click();"/>
+						<button type="button" onclick="uploadUserPhotoFile();" class="t-btn3 button button-primary  button-rounded">上传</button>
 						<div style="height: 20px;"></div>
 		
 						<button type="submit" style="width: 90px;" class="button button-primary  button-rounded">保存</button>
 					</form>
-					<%-- <form action="<s:url value='/petition/uploadPatentDocInventorFile.html'/>" id="uploadInventorFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
-						<input style="display:none" type="file" id="patentDocInventorFile" name="file"/>
-						<button type="button" style="display: none;" onclick="$('input[id=patentDocInventorFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
-						<button type="button" id="uploadInventorBtn" style="display:none;" onclick="uploadPatentDocInventorFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
-					</form>				 --%>				
+					<form action="<s:url value='/user/uploadUserPhoto.html'/>" id="uploadUserPhotoForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+						<input style="display:none" type="file" id="userPhotoFile" name="file"/>
+						<button type="button" style="display: none;" onclick="$('input[id=userPhotoFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+					</form>		
+				</div>
+				<div style="float: left;margin-top:20px;margin-left:50px;">
+					<div id="userAvatarTitle">
+						<c:if test="${not empty user.avatarUrl }">
+						<h4>头像预览</h4>
+						</c:if>
+					</div>
+					<div id="userAvatarDiv">
+					<c:if test="${not empty user.avatarUrl }">
+						<img alt="" src="${base}${user.avatarUrl}" width="160px" height="200px">
+					</c:if>
+					</div>
 				</div>
 			</div>
 
@@ -141,12 +159,68 @@
 		function check() {
 			var email = document.getElementById("email").value;
 			var phone = document.getElementById("phone").value;
-			if (validatePhoneNumber(phone) && validateEmail(email)) {
+			var QQNumber = document.getElementById("QQNumber").value;
+			if (validatePhoneNumber(phone) && validateEmail(email)&&validateQQNumber(QQNumber)) {
 				return true;
 			} else {
 				return false;
 			}
 		}
+		
+	$('input[id=userPhotoFile]').change(function(){
+		$("#userPhotoFilename").val($(this).val());
+	})
+
+	
+	var isIE = /msie/i.test(navigator.userAgent) && !window.opera;	
+	
+	function uploadUserPhotoFile(){
+		var uploadPhotoForm=$("#uploadUserPhotoForm");
+		var option={
+				dataType:"json",
+				data:{"file":$("#userPhotoFile").val()},
+				beforeSubmit:function(){
+					var fileName=$("#userPhotoFilename").val();
+					var suffix=fileName.toLowerCase().substr(fileName.lastIndexOf(".")+1);
+					//fileChange($())
+					if(suffix=="jpg"||suffix=="png"||suffix=="jpeg"){
+						return true;
+					}else{
+						alert("请选择常用的图片格式，如jpg、png、jpeg格式，再进行上传！");
+						return false;
+					}
+				},
+				success : function (result){
+					if(result=="overLimit"){
+						alert("上传的图片超过300KB,请选择较小的图片进行上传");
+					}else{
+						$("#userPhotoFileHidden").val(result);
+						var base = "${base}";
+						$("#userAvatarDiv").empty();
+						$("#userAvatarTitle").html("<h4>头像预览</h4>");
+						$("#userAvatarDiv").html("<img alt='' src="+base+result+" width='160px' height='200px'>");
+					}
+				}
+				
+		};
+		uploadPhotoForm.ajaxSubmit(option);
+	}
+	
+   /*  function fileChange(target){
+	        var fileSize = 0;
+	        if (isIE && !target.files) {
+	        	var filePath = target.value; 
+	        	var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
+	        	var file = fileSystem.GetFile(filePath);
+	            fileSize = file.Size;    // 文件大小，单位：b
+	        } else {    // 非IE浏览器
+	            fileSize = target.files[0].size;
+	        }
+	        var size = fileSize / 1024 / 1024;
+	        if (size > 1) {
+	            alert("附件不能大于1M");
+	        }
+	    } */
 	</script>
 </body>
 </html>

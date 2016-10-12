@@ -9,6 +9,9 @@
 		<result property="name" column="name"/>
 		<result property="email" column="email"/>
 		<result property="phone" column="phone"/>
+		<result property="qq" column="qq"/>
+		<result property="weChat" column="weChat"/>
+		<result property="avatarUrl" column="avatar_url"/>
 	</resultMap>
 	
 	<select id="getAllUsers"  parameterType="Page" resultMap="UserResultMap">
@@ -34,7 +37,7 @@
 	</update>
 	
 	<select id="getById" resultMap="UserResultMap">
-		select username, name, email, phone
+		select username, name, email, phone,qq,weChat,avatar_url
 		  from users
 		 where user_id = #{userId}
 	</select>
@@ -46,7 +49,13 @@
 	</select>	
 	
 	<update id="updateUserDetail" parameterType="User">
-		update users set name=#{name},email=#{email},phone=#{phone} where user_id=#{userId}
+		update users set name=#{name},email=#{email},phone=#{phone},qq=#{qq},weChat=#{weChat}
+		<if test="avatarUrl!='' and avatarUrl!=null">
+			,avatar_url=#{avatarUrl}
+		</if>
+		where user_id=#{userId}
+		
+		
 	</update>
 	
 	<select id="getAllProvinces" resultType="map">
@@ -142,4 +151,8 @@
 	<select id="getPlatformUser"  resultMap="UserResultMap">
 		SELECT * FROM users WHERE username IN(SELECT gm.username FROM group_members gm JOIN groups g ON gm.group_id=g.id WHERE g.group_name='PLATFORM');
 	</select>
+	
+	<update id="updateUserAvatarUrl" parameterType="User">
+		update users set avatar_url=#{avatarUrl} where user_id=#{userId}
+	</update>
 </mapper>

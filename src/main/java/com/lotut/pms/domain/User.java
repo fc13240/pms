@@ -26,6 +26,9 @@ public class User implements Serializable, UserDetails {
 	private String phone;
 	private String email;
 	private Date joinDate;
+	private int qq;
+	private String weChat;
+	private String avatarUrl;
 	private Set<GrantedAuthority> authorities = new HashSet<>();
 	
 	public User() {
@@ -181,6 +184,30 @@ public class User implements Serializable, UserDetails {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public int getQq() {
+		return qq;
+	}
+
+	public void setQq(int qq) {
+		this.qq = qq;
+	}
+
+	public String getWeChat() {
+		return weChat;
+	}
+
+	public void setWeChat(String weChat) {
+		this.weChat = weChat;
+	}
+
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
 	}
 
 	private static class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {
