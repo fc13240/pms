@@ -81,11 +81,11 @@
 					</form>		
 				</div>
 				<div style="float: left;margin-top:20px;margin-left:50px;">
-					<div id="userAvatarTitle">
+					<%-- <div id="userAvatarTitle">
 						<c:if test="${not empty user.avatarUrl }">
 						<h4>头像预览</h4>
 						</c:if>
-					</div>
+					</div> --%>
 					<div id="userAvatarDiv">
 					<c:if test="${not empty user.avatarUrl }">
 						<img alt="" src="${base}${user.avatarUrl}" width="160px" height="200px">
@@ -197,7 +197,7 @@
 						$("#userPhotoFileHidden").val(result);
 						var base = "${base}";
 						$("#userAvatarDiv").empty();
-						$("#userAvatarTitle").html("<h4>头像预览</h4>");
+						//$("#userAvatarTitle").html("<h4>头像预览</h4>");
 						$("#userAvatarDiv").html("<img alt='' src="+base+result+" width='160px' height='200px'>");
 					}
 				}
