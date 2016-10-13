@@ -1,5 +1,18 @@
 package com.lotut.pms.dao.mapper;
 
-public interface ExpressMapper {
+import java.util.List;
 
+import com.lotut.pms.domain.Express;
+import com.lotut.pms.domain.Page;
+
+public interface ExpressMapper {
+	List<Express> getUserSenderExpressListByPage (Page page);
+	
+	int getUserSenderExpressCount(int userId);
+	
+	List<Express> getUserReceiverExpressListByPage (Page page);
+	
+	int getUserReceiverExpressCount(int userId);
+	
+	void changeExpressStatus(long expressId,int status);
 }

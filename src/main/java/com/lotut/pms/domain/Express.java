@@ -7,18 +7,13 @@ public class Express {
 	private User sender;
 	private User receiver;
 	private String expressRemark;
-	private int province;
-	private long city;
-	private long district;
-	private String detailAddress;
+	private ContactAddress contactAddress;
 	private String expressCompany;
 	private String expressNo;
 	private Date createTime;
 	private Date sendTime;
 	private Date signTime;
 	private ExpressStatus expressStatus;
-	
-	
 	public long getExpressId() {
 		return expressId;
 	}
@@ -43,29 +38,11 @@ public class Express {
 	public void setExpressRemark(String expressRemark) {
 		this.expressRemark = expressRemark;
 	}
-	public int getProvince() {
-		return province;
+	public ContactAddress getContactAddress() {
+		return contactAddress;
 	}
-	public void setProvince(int province) {
-		this.province = province;
-	}
-	public long getCity() {
-		return city;
-	}
-	public void setCity(long city) {
-		this.city = city;
-	}
-	public long getDistrict() {
-		return district;
-	}
-	public void setDistrict(long district) {
-		this.district = district;
-	}
-	public String getDetailAddress() {
-		return detailAddress;
-	}
-	public void setDetailAddress(String detailAddress) {
-		this.detailAddress = detailAddress;
+	public void setContactAddress(ContactAddress contactAddress) {
+		this.contactAddress = contactAddress;
 	}
 	public String getExpressCompany() {
 		return expressCompany;
@@ -103,6 +80,7 @@ public class Express {
 	public void setExpressStatus(ExpressStatus expressStatus) {
 		this.expressStatus = expressStatus;
 	}
+	
 	
 	
 	
