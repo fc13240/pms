@@ -957,7 +957,7 @@ CREATE TABLE if not exists `user_fees` (
 
 ALTER TABLE common_app_person MODIFY COLUMN other_information VARCHAR(1000);
 ALTER TABLE patent_doc_app_person COLUMN other_information VARCHAR(1000);
-ALTER TABLE users ADD COLUMN qq INT;
+ALTER TABLE users ADD COLUMN qq varchar(20);
 ALTER TABLE users ADD COLUMN weChat VARCHAR(150);
 ALTER TABLE users ADD COLUMN avatar_url VARCHAR(500);
 
