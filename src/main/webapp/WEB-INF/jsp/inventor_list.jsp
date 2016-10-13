@@ -99,7 +99,16 @@
                     				</c:if>
 								</td>
 								<td style="text-align:center"><c:out value="${inventor.inventorComment}"/></td>
-								<td style="text-align:center"><c:out value="${inventor.shareUsersAsString}"/></td>
+								
+								<td style="text-align:center">
+								<c:forEach items="${inventor.shareUsers}" var="shareUser" varStatus="s">								
+									<a href="javascript:return void" onclick="searchShareUserDetail(${shareUser.userId})" >
+					        			<c:out value="${shareUser.username}"/>
+					        			<c:if test="${!s.last}">;</c:if>
+					        		</a>					        	
+					       	 	</c:forEach>
+								</td>
+								
 								<td><a href="<s:url value='/inventor/findOneInventorInfo.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>"> 编辑 </a> 
 								<a onclick="return confirm('确认要删除？')" href="<s:url value='/inventor/deleteInventorInfo.html'/>?inventorId=<c:out value='${inventor.inventorId}'/>">删除 </a>
 								<a href="<s:url value='/inventor/showFriends.html'/>?inventors=<c:out value='${inventor.inventorId}'/>">分享</a>
@@ -173,6 +182,11 @@
 	function addInventor(){
 		var url = "<s:url value='/inventor/inventorAddForm.html'/>";
 		location.href = url
+	}
+	
+	function searchShareUserDetail(shareUserId){
+		var url = "<s:url value='/user/searchShareUserDetail.html'/>?shareUserId=" + shareUserId;
+		window.open(url);
 	}
 	
 	$('tr th input.check-item').click(function() {

@@ -118,7 +118,7 @@
 			location.href = url
 		}
 		function validatePhoneNumber(phoneNumber) {
-			var reg = new RegExp("^[0-9]*$");
+			var reg = new RegExp("^[0-9]{3,4}(-)?[0-9]+$");
 			document.getElementById("phoneError").style.display = "none";
 			if (reg.test(phoneNumber)) {
 				if (phoneNumber.length<7 || phoneNumber.length>13) {
