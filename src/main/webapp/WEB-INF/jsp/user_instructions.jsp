@@ -27,7 +27,6 @@
 			<p class=MsoBodyText align=center style='text-align:center'><b><span
 			style='font-size:14.0pt;font-family:宋体'>龙图腾专利管家</span></b><b><span
 			style='font-size:14.0pt;font-family:宋体'>操作指南</span></b></p>
-			
 			<p class=MsoBodyText><a name="_Toc266447621"><b><span style='font-family:宋体'>一：登陆龙图腾专利管家</span></b></a><b><span
 			style='font-family:宋体'></span></b></p>
 			
@@ -86,7 +85,12 @@
 			lang=EN-US style='color:red'><a href="http://cpquery.sipo.gov.cn/"><span
 			style='color:red'>http://cpquery.sipo.gov.cn/</span></a></span><span
 			style='font-family:宋体'>内的专利数据（专利号、专利名称、第一申请人、申请日、案件状态、专利类型）自动添加或更新到龙图腾专利管家；<b><span
-			style='color:red'>每天更新一次；</span></b></span></p>
+			style='color:red'>每天更新一次；</span></b></span>
+			（1）<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</span></span><span style='font-family:宋体'>在专利列表下可进行以下操作：</span><br/><span
+			style='font-family:宋体'><b><span
+			style='color:red'></span></b></span>
+			</p>
 			
 			<p class=MsoBodyText align=left style='text-align:left'><img border=0
 			 id="图片 1" src="<s:url value='/temp/images/instructions_img/image004.jpg'/>"></p>
