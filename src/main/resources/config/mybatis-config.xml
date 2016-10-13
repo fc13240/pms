@@ -77,5 +77,7 @@
 		<typeAlias alias="SharePatentDoc" type="com.lotut.pms.domain.SharePatentDoc"/>
 		<typeAlias alias="PatentDocProxyStatus" type="com.lotut.pms.domain.PatentDocProxyStatus"/>
 		<typeAlias alias="GroupMembers" type="com.lotut.pms.domain.GroupMembers"/>
+		<typeAlias alias="Express" type="com.lotut.pms.domain.Express"/>
+		<typeAlias alias="ExpressStatus" type="com.lotut.pms.domain.ExpressStatus"/>
 	</typeAliases>  
 </configuration>

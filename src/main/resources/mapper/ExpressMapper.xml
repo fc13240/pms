@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lotut.pms.dao.mapper.ExpressMapper">
+		<resultMap type="Express" id="ExpressResultMap">
+			<id property="expressId" column="express_id"/>
+			<result property="expressRemark" column="express_remark"/>
+			<result property="expressCompany" column="express_company"/>
+			<result property="expressNo" column="express_no"/>
+			<result property="createTime" column="create_time"/>
+			<result property="sendTime" column="send_time"/>
+			<result property="signTime" column="sign_time"/>
+			<association property="contactAddress" javaType="ContactAddress">
+				<id property="province" column="province_id"/>
+				<result property="provinceName" column="province_name"/>
+				<result property="city" column="city_id"/>
+				<result property="cityName" column="city_name"/>
+				<result property="district" column="district_id"/>
+				<result property="districtName" column="district_name"/>
+				<result property="detailAddress" column="detail_address"/>
+			</association>
+			<association property="expressStatus" javaType="ExpressStatus">
+				<id property="expressStatusId" column="express_status_id"/>
+				<result property="expressStatusDesc" column="expressStatusDesc"/>
+			</association>
+			<association property="sender" javaType="User">
+				<id property="userId" column="sender_id"/>
+				<result property="username" column="sender_name"/>
+			</association>
+			<association property="receiver" javaType="User">
+				<id property="userId" column="receiver_id"/>
+				<result property="username" column="receiver_name"/>
+			</association>
+	</resultMap>
+	
+	
+	<select id="getUserSenderExpressListByPage" parameterType="Page" resultMap="ExpressResultMap">
+		SELECT e.express_id,u.user_id AS  sender_id ,u.username AS sender_name,us.user_id AS receiver_id,us.username AS receiver_name,
+		p.id AS province_id,p.name AS province_name,c.id AS city_id,
+		c.name AS city_name, d.id AS district_id ,d.name AS district_name,e.detail_address ,
+		e.express_company,e.express_no,e.send_time,e.express_remark,es.express_status_id,es.express_status_desc
+		FROM express  e JOIN users u ON e.sender = u.user_id JOIN users us ON e.receiver=us.user_id 
+		JOIN provinces p ON  e.province=p.id JOIN cities c ON e.city=c.id JOIN districts d ON e.district=d.id 
+		JOIN express_status es ON e.express_status =es.express_status_id
+		WHERE e.sender=#{userId} limit #{startIndex}, #{pageSize}
+	</select>
+	
+	<select id="getUserSenderExpressCount" parameterType="int" resultType="int">
+		SELECT count(*)
+		FROM express  e JOIN users u ON e.sender = u.user_id JOIN users us ON e.receiver=us.user_id 
+		JOIN provinces p ON  e.province=p.id JOIN cities c ON e.city=c.id JOIN districts d ON e.district=d.id 
+		JOIN express_status es ON e.express_status =es.express_status_id
+		WHERE e.sender=#{userId}
+	</select>
+	
+	<select id="getUserReceiverExpressListByPage" parameterType="Page" resultMap="ExpressResultMap">
+		SELECT e.express_id,u.user_id AS  sender_id ,u.username AS sender_name,us.user_id AS receiver_id,us.username AS receiver_name,
+		p.id AS province_id,p.name AS province_name,c.id AS city_id,
+		c.name AS city_name, d.id AS district_id ,d.name AS district_name,e.detail_address ,
+		e.express_company,e.express_no,e.send_time,e.express_remark,es.express_status_id,es.express_status_desc
+		FROM express  e JOIN users u ON e.sender = u.user_id JOIN users us ON e.receiver=us.user_id 
+		JOIN provinces p ON  e.province=p.id JOIN cities c ON e.city=c.id JOIN districts d ON e.district=d.id 
+		JOIN express_status es ON e.express_status =es.express_status_id
+		WHERE e.receiver=#{userId} limit #{startIndex}, #{pageSize}
+	</select>
+	
+	<select id="getUserReceiverExpressCount" parameterType="int" resultType="int">
+		SELECT count(*)
+		FROM express  e JOIN users u ON e.sender = u.user_id JOIN users us ON e.receiver=us.user_id 
+		JOIN provinces p ON  e.province=p.id JOIN cities c ON e.city=c.id JOIN districts d ON e.district=d.id 
+		JOIN express_status es ON e.express_status =es.express_status_id
+		WHERE e.receiver=#{userId}
+	</select>
+	
+	<update id="changeExpressStatus">
+		update express (express_id,express_status) values (#{expressId},#{status});
+	</update>
+</mapper>

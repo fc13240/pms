@@ -20,14 +20,15 @@
 		<result property="username" column="organization_name"/>
 	</resultMap>
 	<select id="getUserFriends" parameterType="int" resultMap="FriendResultMap">
-		select f.friend, u.user_id,u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id as group_id,g.username as username,
-		c.proxy_org_id as organization_id,cu.username as organization_name ,p.proxy_org_id as organization_id,pu.username as organization_name,
-		t.proxy_org_id as organization_id,tu.username as organization_name
-		  from friends f join users u on f.friend = u.user_id join group_members g on u.username = g.username 
-		  left join customer_supports c on c.user_id = f.friend LEFT JOIN users cu ON cu.user_id = c.proxy_org_id 
-		  left join process_person p on p.user_id =  f.friend LEFT JOIN users pu ON pu.user_id = p.proxy_org_id
-		  left join tech_person t on t.user_id =f.friend LEFT JOIN users tu ON tu.user_id = t.proxy_org_id
-		 where user = #{userId} ;	
+	SELECT DISTINCT f.friend, u.user_id,u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id AS group_id,g.username AS username,
+		IFNULL( pr.org_user_id,pro.org_user_id) AS organization_id  ,IFNULL(cu.username,pu.username) AS organization_name,
+		IFNULL( pr.org_user_id,prox.org_user_id) AS organization_id ,IFNULL(cu.username,tu.username) AS organization_name,
+		IFNULL( pro.org_user_id,prox.org_user_id) AS organization_id  ,IFNULL(tu.username,pu.username) AS organization_name
+		 FROM friends f JOIN users u ON f.friend = u.user_id JOIN group_members g ON u.username = g.username 
+			  LEFT JOIN customer_supports c ON c.user_id = f.friend  LEFT JOIN proxy_org pr ON pr.org_id=c.proxy_org_id LEFT JOIN users cu ON cu.user_id = pr.org_user_id
+			  LEFT JOIN process_person p ON p.user_id =  f.friend LEFT JOIN proxy_org pro ON pro.org_id=p.proxy_org_id  LEFT JOIN users pu ON pu.user_id = pro.org_user_id
+			  LEFT JOIN tech_person t ON t.user_id =f.friend LEFT JOIN proxy_org prox ON prox.org_id=t.proxy_org_id LEFT JOIN users tu ON tu.user_id = prox.org_user_id 
+			 where user = #{userId} ;	
 	</select>
 	
 	<delete id="deleteFriend">
@@ -56,14 +57,15 @@
 		<if test="keyword != null and keyword != ''">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>		
-		select f.friend, u.user_id,u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id as group_id,g.username as username,
-		c.proxy_org_id as organization_id,cu.username as organization_name ,p.proxy_org_id as organization_id,pu.username as organization_name,
-		t.proxy_org_id as organization_id,tu.username as organization_name
-		  from friends f join users u on f.friend = u.user_id join group_members g on u.username = g.username 
-		  left join customer_supports c on c.user_id = f.friend LEFT JOIN users cu ON cu.user_id = c.proxy_org_id 
-		  left join process_person p on p.user_id =  f.friend LEFT JOIN users pu ON pu.user_id = p.proxy_org_id
-		  left join tech_person t on t.user_id =f.friend LEFT JOIN users tu ON tu.user_id = t.proxy_org_id
-		 where user = #{userId} 		
+		SELECT DISTINCT f.friend, u.user_id,u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id AS group_id,g.username AS username,
+		IFNULL( pr.org_user_id,pro.org_user_id) AS organization_id  ,IFNULL(cu.username,pu.username) AS organization_name,
+		IFNULL( pr.org_user_id,prox.org_user_id) AS organization_id ,IFNULL(cu.username,tu.username) AS organization_name,
+		IFNULL( pro.org_user_id,prox.org_user_id) AS organization_id  ,IFNULL(tu.username,pu.username) AS organization_name
+		 FROM friends f JOIN users u ON f.friend = u.user_id JOIN group_members g ON u.username = g.username 
+			  LEFT JOIN customer_supports c ON c.user_id = f.friend  LEFT JOIN proxy_org pr ON pr.org_id=c.proxy_org_id LEFT JOIN users cu ON cu.user_id = pr.org_user_id
+			  LEFT JOIN process_person p ON p.user_id =  f.friend LEFT JOIN proxy_org pro ON pro.org_id=p.proxy_org_id  LEFT JOIN users pu ON pu.user_id = pro.org_user_id
+			  LEFT JOIN tech_person t ON t.user_id =f.friend LEFT JOIN proxy_org prox ON prox.org_id=t.proxy_org_id LEFT JOIN users tu ON tu.user_id = prox.org_user_id 
+			 where user = #{userId} 
 		<if test="keyword != null and keyword != ''">
 			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern} or f.remark_name like #{keyword_pattern})
 		</if>
@@ -92,14 +94,15 @@
 		<if test="keyword != null and keyword != ''">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>		
-		select f.friend, u.user_id,u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id as group_id,g.username as username,
-		c.proxy_org_id as organization_id,cu.username as organization_name ,p.proxy_org_id as organization_id,pu.username as organization_name,
-		t.proxy_org_id as organization_id,tu.username as organization_name
-		  from friends f join users u on f.friend = u.user_id join group_members g on u.username = g.username 
-		  left join customer_supports c on c.user_id = f.friend LEFT JOIN users cu ON cu.user_id = c.proxy_org_id 
-		  left join process_person p on p.user_id =  f.friend LEFT JOIN users pu ON pu.user_id = p.proxy_org_id
-		  left join tech_person t on t.user_id =f.friend LEFT JOIN users tu ON tu.user_id = t.proxy_org_id
-		 where user = #{userId} 	
+		SELECT DISTINCT f.friend, u.user_id,u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id AS group_id,g.username AS username,
+		IFNULL( pr.org_user_id,pro.org_user_id) AS organization_id  ,IFNULL(cu.username,pu.username) AS organization_name,
+		IFNULL( pr.org_user_id,prox.org_user_id) AS organization_id ,IFNULL(cu.username,tu.username) AS organization_name,
+		IFNULL( pro.org_user_id,prox.org_user_id) AS organization_id  ,IFNULL(tu.username,pu.username) AS organization_name
+		 FROM friends f JOIN users u ON f.friend = u.user_id JOIN group_members g ON u.username = g.username 
+			  LEFT JOIN customer_supports c ON c.user_id = f.friend  LEFT JOIN proxy_org pr ON pr.org_id=c.proxy_org_id LEFT JOIN users cu ON cu.user_id = pr.org_user_id
+			  LEFT JOIN process_person p ON p.user_id =  f.friend LEFT JOIN proxy_org pro ON pro.org_id=p.proxy_org_id  LEFT JOIN users pu ON pu.user_id = pro.org_user_id
+			  LEFT JOIN tech_person t ON t.user_id =f.friend LEFT JOIN proxy_org prox ON prox.org_id=t.proxy_org_id LEFT JOIN users tu ON tu.user_id = prox.org_user_id 
+			 where user = #{userId} 
 		<if test="keyword != null and keyword != ''">
 			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern} or f.remark_name like #{keyword_pattern})
 		</if>

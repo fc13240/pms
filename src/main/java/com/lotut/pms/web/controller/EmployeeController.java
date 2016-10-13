@@ -2,12 +2,15 @@ package com.lotut.pms.web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.lotut.pms.domain.CustomerSupport;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.ProcessPerson;
@@ -16,6 +19,7 @@ import com.lotut.pms.service.EmployeeService;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.WebUtils;
 
 
 @Controller
@@ -34,34 +38,62 @@ public class EmployeeController {
 	
 	
 	@RequestMapping(path="/getCustomerSupportList", method=RequestMethod.GET)//客服
-	public String getCustomerSupportList(Model model) {
+	public String getCustomerSupportList(Model model,HttpSession session,Page page) {
 		int proxyOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
-		List<CustomerSupport> customerSupports = employeeService.getCustomerSupportList(proxyOrgId);
+		page.setProxyOrgId(proxyOrgId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=employeeService.getCustomerSupportCount(proxyOrgId);
+		page.setTotalRecords(totalCount);
+		List<CustomerSupport> customerSupports = employeeService.getCustomerSupportListByPage(page);
 		model.addAttribute("customerSupports", customerSupports);
 		return "customer_support_list";
 	}
 	
 	@RequestMapping(path="/getTechPersonList", method=RequestMethod.GET)//技术员
-	public String getTechPersonList(Model model) {
+	public String getTechPersonList(Model model,HttpSession session,Page page) {
 		int proxyOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
-		List<TechPerson> techPersons = employeeService.getTechPersonList(proxyOrgId);
+		page.setProxyOrgId(proxyOrgId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=employeeService.getTechPersonCount(proxyOrgId);
+		page.setTotalRecords(totalCount);
+		List<TechPerson> techPersons = employeeService.getTechPersonListByPage(page);
 		model.addAttribute("techPersons", techPersons);
 		return "tech_person_list";
 	}
 	
 	@RequestMapping(path="/getProcessPersonList", method=RequestMethod.GET)//流程
-	public String getProcessPersonList(Model model) {
+	public String getProcessPersonList(Model model,HttpSession session,Page page) {
 		int proxyOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
-		List<ProcessPerson> processPersons = employeeService.getProcessPersonList(proxyOrgId);
+		page.setProxyOrgId(proxyOrgId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=employeeService.getProcessPersonCount(proxyOrgId);
+		page.setTotalRecords(totalCount);
+		List<ProcessPerson> processPersons = employeeService.getProcessPersonListByPage(page);
 		model.addAttribute("processPersons", processPersons);
 		return "process_person_list";
 	}
 	
 	
 	@RequestMapping(path="/getProxyOrgList", method=RequestMethod.GET)//代理机构
-	public String getProxyOrgList(Model model) {
+	public String getProxyOrgList(Model model,Page page, HttpSession session) {
 		int parentOrgId = employeeService.getOrgIdByUserId(PrincipalUtils.getCurrentUserId());
-		List<ProxyOrg> proxyOrgs = employeeService.getProxyOrgList(parentOrgId);
+		page.setParentOrgId(parentOrgId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=(int)employeeService.getProxyOrgCount(parentOrgId);
+		page.setTotalRecords(totalCount);
+		List<ProxyOrg> proxyOrgs = employeeService.getProxyOrgListByPage(page);
 		model.addAttribute("proxyOrgs", proxyOrgs);
 		return "proxy_org_list";
 	}

@@ -37,7 +37,7 @@
 					  <se:csrfInput/>
 			       	<h5>姓名:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece" type="text" value="${inventor.inventorName }" name="inventorName" required onblur="validateInfoNumber(this.value)"/>
-					<span style="color: red; display: none;" id=numberError>该处应输入不大于20字段</span>
+					<span style="color: red; display: none;" id=numberError>该处应输入不大于200字段</span>
 					<br>	   
 					<h5>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" value="${inventor.inventorNumber }" name="inventorNumber"  onblur="validatePhoneNumber(this.value)"/>
@@ -133,7 +133,7 @@ function validateInfoNumber(phoneNumber) {
 	var reg = new RegExp("^[0-9]*$");
 	document.getElementById("numberError").style.display = "none";
 
-		if (phoneNumber.length>20) {
+		if (phoneNumber.length>200) {
 			document.getElementById("numberError").style.display = "";
 			return false;
 		} else {
