@@ -3,6 +3,7 @@ package com.lotut.pms.service;
 import java.util.List;
 
 import com.lotut.pms.domain.CustomerSupport;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.ProcessPerson;
 import com.lotut.pms.domain.ProxyOrg;
 import com.lotut.pms.domain.TechPerson;
@@ -57,6 +58,21 @@ public interface EmployeeService {
 	
 	List<ProxyOrg> searchProxyOrgId(String keyword,Integer parentOrgId);
 
+	List<ProxyOrg> getProxyOrgListByPage(Page page);
+	
+	int getProxyOrgCount(int proxyOrgId);
+	
+	List<CustomerSupport> getCustomerSupportListByPage(Page page);
+	
+	int getCustomerSupportCount (int proxyOrgId);
+	
+	List<TechPerson> getTechPersonListByPage(Page page);
+	
+	int getTechPersonCount (int proxyOrgId);
+	
+	List<ProcessPerson> getProcessPersonListByPage(Page page);
+	
+	int getProcessPersonCount (int proxyOrgId);
 }
 
 

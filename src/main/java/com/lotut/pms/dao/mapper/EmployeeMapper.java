@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.CustomerSupport;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.ProcessPerson;
 import com.lotut.pms.domain.ProxyOrg;
 import com.lotut.pms.domain.TechPerson;
@@ -63,5 +64,20 @@ public interface EmployeeMapper {
 	List<ProcessPerson> searchProcessPersonByProxyId(@Param("keyword") String keyword,@Param("currentUserId") int currentUserId);
 	
 	List<ProxyOrg> searchProxyOrgId(@Param("keyword") String keyword,@Param("parentOrgId")Integer parentOrgId);
-
+	
+	List<ProxyOrg> getProxyOrgListByPage(Page page);
+	
+	int getProxyOrgCount(int parentOrgId);
+	
+	List<CustomerSupport> getCustomerSupportListByPage(Page page);
+	
+	int getCustomerSupportCount (int proxyOrgId);
+	
+	List<TechPerson> getTechPersonListByPage(Page page);
+	
+	int getTechPersonCount (int proxyOrgId);
+	
+	List<ProcessPerson> getProcessPersonListByPage(Page page);
+	
+	int getProcessPersonCount (int proxyOrgId);
 }

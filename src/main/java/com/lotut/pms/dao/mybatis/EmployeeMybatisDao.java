@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.EmployeeDao;
 import com.lotut.pms.dao.mapper.EmployeeMapper;
 import com.lotut.pms.domain.CustomerSupport;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.ProcessPerson;
 import com.lotut.pms.domain.ProxyOrg;
 import com.lotut.pms.domain.TechPerson;
@@ -103,10 +104,7 @@ public class EmployeeMybatisDao extends SqlSessionDaoSupport implements Employee
 		employeeMapper.insertGroupMember(userId,roleName);
 	}
 
-	@Override
-	public List<ProxyOrg> getProxyOrgList(int parentOrgId) {
-		return employeeMapper.getProxyOrgList(parentOrgId);
-	}
+
 
 	@Override
 	public void addOrUpdateProxyOrg(ProxyOrg proxyOrg) {
@@ -159,6 +157,53 @@ public class EmployeeMybatisDao extends SqlSessionDaoSupport implements Employee
 	public List<ProxyOrg> searchProxyOrgId(String keyword, Integer parentOrgId) {
 		return employeeMapper.searchProxyOrgId(keyword, parentOrgId);
 	}
+
+	@Override
+	public List<ProxyOrg> getProxyOrgList(int parentOrgId) {
+		return employeeMapper.getProxyOrgList(parentOrgId);
+	}
+
+	@Override
+	public List<ProxyOrg> getProxyOrgListByPage(Page page) {
+		return employeeMapper.getProxyOrgListByPage(page);
+	}
+
+	@Override
+	public int getProxyOrgCount(int proxyOrgId) {
+		return employeeMapper.getProxyOrgCount(proxyOrgId);
+	}
+
+	@Override
+	public List<CustomerSupport> getCustomerSupportListByPage(Page page) {
+		return employeeMapper.getCustomerSupportListByPage(page);
+	}
+
+	@Override
+	public int getCustomerSupportCount(int proxyOrgId) {
+		return employeeMapper.getCustomerSupportCount(proxyOrgId);
+	}
+
+	@Override
+	public List<TechPerson> getTechPersonListByPage(Page page) {
+		return employeeMapper.getTechPersonListByPage(page);
+	}
+
+	@Override
+	public int getTechPersonCount(int proxyOrgId) {
+		return employeeMapper.getTechPersonCount(proxyOrgId);
+	}
+
+	@Override
+	public List<ProcessPerson> getProcessPersonListByPage(Page page) {
+		return employeeMapper.getProcessPersonListByPage(page);
+	}
+
+	@Override
+	public int getProcessPersonCount(int proxyOrgId) {
+		return employeeMapper.getProcessPersonCount(proxyOrgId);
+	}
+
+
 
 
 
