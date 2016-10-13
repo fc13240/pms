@@ -114,6 +114,11 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
 	
+	<bean id="expressMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.ExpressMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	
 	
 	
 
@@ -201,5 +206,10 @@
 	<bean name="patentDocWorkflowHistoryDao" class="com.lotut.pms.dao.mybatis.PatentDocWorkflowHistoryMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 		<property name="patentDocWorkflowHistoryMapper" ref="patentDocWorkflowHistoryMapper" />
+	</bean>
+
+	<bean name="expressDao" class="com.lotut.pms.dao.mybatis.ExpressMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="expressMapper" ref="expressMapper" />
 	</bean>	
 </beans>							

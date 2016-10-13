@@ -91,4 +91,8 @@
 		<constructor-arg ref="patentDocWorkflowHistoryDao"/>
 	</bean>
 	
+	<bean id="expressService" class="com.lotut.pms.service.impl.ExpressServiceImpl">
+		<constructor-arg ref="expressDao"/>
+	</bean>
+	
 </beans>
