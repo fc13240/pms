@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lotut.pms.dao.EmployeeDao;
 import com.lotut.pms.domain.CustomerSupport;
+import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.ProcessPerson;
 import com.lotut.pms.domain.ProxyOrg;
 import com.lotut.pms.domain.TechPerson;
@@ -182,6 +183,54 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public List<ProxyOrg> searchProxyOrgId(String keyword, Integer parentOrgId) {
 		return employeeDao.searchProxyOrgId(keyword, parentOrgId);
+	}
+
+
+	@Override
+	public List<ProxyOrg> getProxyOrgListByPage(Page page) {
+		return employeeDao.getProxyOrgListByPage(page);
+	}
+
+
+	@Override
+	public int getProxyOrgCount(int proxyOrgId) {
+		return employeeDao.getProxyOrgCount(proxyOrgId);
+	}
+
+
+	@Override
+	public List<CustomerSupport> getCustomerSupportListByPage(Page page) {
+		return employeeDao.getCustomerSupportListByPage(page);
+	}
+
+
+	@Override
+	public int getCustomerSupportCount(int proxyOrgId) {
+		return employeeDao.getCustomerSupportCount(proxyOrgId);
+	}
+
+
+	@Override
+	public List<TechPerson> getTechPersonListByPage(Page page) {
+		return employeeDao.getTechPersonListByPage(page);
+	}
+
+
+	@Override
+	public int getTechPersonCount(int proxyOrgId) {
+		return employeeDao.getTechPersonCount(proxyOrgId);
+	}
+
+
+	@Override
+	public List<ProcessPerson> getProcessPersonListByPage(Page page) {
+		return employeeDao.getProcessPersonListByPage(page);
+	}
+
+
+	@Override
+	public int getProcessPersonCount(int proxyOrgId) {
+		return employeeDao.getProcessPersonCount(proxyOrgId);
 	}
 
 }

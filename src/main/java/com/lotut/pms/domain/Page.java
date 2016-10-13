@@ -8,14 +8,24 @@ public class Page {
 	private int pageSize = 10;//页面条数
 	private int proxyStatus;
 	private int parentOrgId;
+	private int proxyOrgId;
 	
 	
+
 	public int getParentOrgId() {
 		return parentOrgId;
 	}
 
 	public void setParentOrgId(int parentOrgId) {
 		this.parentOrgId = parentOrgId;
+	}
+
+	public int getProxyOrgId() {
+		return proxyOrgId;
+	}
+
+	public void setProxyOrgId(int proxyOrgId) {
+		this.proxyOrgId = proxyOrgId;
 	}
 
 	public int getProxyStatus() {

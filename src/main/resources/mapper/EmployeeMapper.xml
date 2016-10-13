@@ -230,4 +230,54 @@
 		 and u.username like #{search_keyword} or u.name like #{search_keyword}
 		</if>
 	</select>
+	
+	
+	<select id="getProxyOrgListByPage"  parameterType="Page" resultMap="proxyOrgResultMap">
+		select p.org_id,p.org_user_id, p.remark_name,p.parent_org_id,u.username,u.name from proxy_org  p
+		join users u on u.user_id = p.org_user_id
+		where p.parent_org_id=#{parentOrgId} limit #{startIndex}, #{pageSize}
+	</select>
+	
+	
+	<select id="getProxyOrgCount"  parameterType="int" resultType="int">
+		select count(*) from proxy_org  p
+		join users u on u.user_id = p.org_user_id
+		where p.parent_org_id=#{parentOrgId}
+	</select>
+	
+	<select id="getCustomerSupportListByPage"  parameterType="Page" resultMap="customerSupportResultMap">
+		select cs.id,cs.user_id, cs.remark_name,cs.proxy_org_id,u.username,u.name from customer_supports cs
+		join users u on u.user_id = cs.user_id
+		where cs.proxy_org_id=#{proxyOrgId} limit #{startIndex}, #{pageSize}
+	</select>
+	
+	<select id="getCustomerSupportCount"  parameterType="int" resultType="int">
+		select count(*) from customer_supports cs
+		join users u on u.user_id = cs.user_id
+		where cs.proxy_org_id=#{proxyOrgId}
+	</select>
+	
+	<select id="getTechPersonListByPage"  parameterType="Page" resultMap="techPersonResultMap">
+		select t.id,t.user_id, t.remark_name,t.proxy_org_id,u.username,u.name from tech_person t
+		join users u on u.user_id = t.user_id
+		where t.proxy_org_id=#{proxyOrgId} limit #{startIndex}, #{pageSize}
+	</select>
+	
+	<select id="getTechPersonCount"  parameterType="int" resultType="int">
+		select count(*) from tech_person t
+		join users u on u.user_id = t.user_id
+		where t.proxy_org_id=#{proxyOrgId}
+	</select>
+	
+	<select id="getProcessPersonListByPage"  parameterType="Page" resultMap="processPersonResultMap">
+		select p.id,p.user_id, p.remark_name,p.proxy_org_id,u.username,u.name from process_person p
+		join users u on u.user_id = p.user_id
+		where p.proxy_org_id=#{proxyOrgId} limit #{startIndex}, #{pageSize}
+	</select>
+	
+	<select id="getProcessPersonCount"  parameterType="int" resultType="int">
+		select count(*) from process_person p
+		join users u on u.user_id = p.user_id
+		where p.proxy_org_id=#{proxyOrgId}
+	</select>
 </mapper>
