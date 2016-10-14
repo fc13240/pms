@@ -150,4 +150,20 @@ public class ExpressController {
 		return "express_receiver_list";
 	}
 	
+	@RequestMapping(path="/updatExpressFrom", method=RequestMethod.GET)
+	public String updatExpressFrom(Model model,@RequestParam("expressId")long expressId ) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<Map<String, String>> provinces = userService.getAllProvinces();
+		List<User> userFriends = friendService.getUserFriends(userId);
+		
+		Express express=expressService.getExpressById(expressId);
+		User user=userService.getUserDetail(express.getReceiver().getUserId());
+		
+		model.addAttribute("provinces", provinces);
+		model.addAttribute("userFriends", userFriends);
+		model.addAttribute("express", express);
+		model.addAttribute("user", user);
+		return "express_add";
+	}
+	
 }

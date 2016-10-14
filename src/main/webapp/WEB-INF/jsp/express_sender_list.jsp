@@ -33,7 +33,7 @@
 					  <form class="form-inline" action="<s:url value='/express/searchSenderExpress.html'/>" method="get">
 					  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 					    <div class="form-group">
-					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="快递状态/快递单号 /快递内容" class="t-input form-control"/>	
+					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="<c:out value='${param.keyword}'/>" placeholder="快递状态/快递单号 /快递内容" class="t-input form-control"/>	
 					    
 					     <button class="button button-caution button-rounded" type="submit" style="width:100px;">搜索快递</button>
 					    </div>
@@ -88,7 +88,7 @@
 						  <td class="center" style="text-align:center">${express.expressStatus.expressStatusDesc}</td>
 						  <td class="center" style="text-align:center">
 							  <c:if test="${express.expressStatus.expressStatusId == 1}">
-							  		<a href="<s:url value='/user/updateUserContactAddressesFrom.html'/>?id=<c:out value=''/>"> 编辑 </a>
+							  		<a href="<s:url value='/express/updatExpressFrom.html'/>?expressId=<c:out value='${express.expressId}'/>"  target="_blank"> 编辑 </a>
 							  		<a href="javascript:return void" onclick="changeExpressStatus(${express.expressId},2)"> 置为已寄出 </a>
 							  </c:if>
 						  </td>	

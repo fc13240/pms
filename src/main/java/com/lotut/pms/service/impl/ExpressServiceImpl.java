@@ -79,4 +79,14 @@ public class ExpressServiceImpl implements ExpressService{
 	public 	ContactAddress getUserContactAddressById(int receiverId){
 		return expressDao.getUserContactAddressById(receiverId);
 	}
+
+	@Override
+	public void updateExpress(Express express) {
+		expressDao.updateExpress(express);
+	}
+
+	@Override
+	public Express getExpressById(long expressId) {
+		return expressDao.getExpressById(expressId);
+	}
 }

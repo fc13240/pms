@@ -30,4 +30,8 @@ public interface ExpressMapper {
 	List<Express> searchUserReceiverExpressByPage(ExpressSearchCondition searchCondition);
 	
 	int searchUserReceiverExpressCount(ExpressSearchCondition searchCondition);
+	
+	void updateExpress(Express express);
+	
+	Express getExpressById(@Param("expressId")long expressId);
 }
