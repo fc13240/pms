@@ -72,7 +72,15 @@
 						  <td class="center" style="text-align:center">${express.expressStatus.expressStatusDesc}</td>
 						  <td class="center" style="text-align:center">
 						  	<c:if test="${express.expressStatus.expressStatusId == 1}">
-						  		<a href="<s:url value='/user/updateUserContactAddressesFrom.html'/>?id=<c:out value=''/>"> 修改 </a>
+						  		<a href="<s:url value='/user/updateUserContactAddressesFrom.html'/>?id=<c:out value=''/>"> 编辑 </a>
+						  	</c:if>
+						  	
+						  	<c:if test="${express.expressStatus.expressStatusId == 1}">
+						  		<a href="<s:url value='/user/updateUserContactAddressesFrom.html'/>?id=<c:out value=''/>"> 置为已寄出 </a>
+						  	</c:if>
+						  	
+						  	<c:if test="${express.expressStatus.expressStatusId == 2}">
+						  		<a href="<s:url value='/user/updateUserContactAddressesFrom.html'/>?id=<c:out value=''/>"> 置为已收件 </a>
 						  	</c:if>
 						  </td>
 						</tr>
