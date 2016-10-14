@@ -23,7 +23,7 @@
 			</association>
 			<association property="expressStatus" javaType="ExpressStatus">
 				<id property="expressStatusId" column="express_status_id"/>
-				<result property="expressStatusDesc" column="expressStatusDesc"/>
+				<result property="expressStatusDesc" column="express_status_desc"/>
 			</association>
 			<association property="sender" javaType="User">
 				<id property="userId" column="sender_id"/>
