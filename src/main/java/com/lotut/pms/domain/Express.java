@@ -11,12 +11,21 @@ public class Express {
 	private String expressCompany;
 	private String expressNo;
 	private String phone;
+	private String contactPerson;
 	private Date createTime;
 	private Date sendTime;
 	private Date signTime;
 	private ExpressStatus expressStatus;
 	
 	
+	
+	
+	public String getContactPerson() {
+		return contactPerson;
+	}
+	public void setContactPerson(String contactPerson) {
+		this.contactPerson = contactPerson;
+	}
 	public String getPhone() {
 		return phone;
 	}

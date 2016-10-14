@@ -18,6 +18,6 @@ public interface ExpressService {
 	
 	int getUserReceiverExpressCount(int userId);
 	
-	void changeExpressStatus(long expressId,int status);
+	void changeExpressStatus(long expressId,int expressStatus);
 
 }

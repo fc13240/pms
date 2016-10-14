@@ -1,5 +1,6 @@
 package com.lotut.pms.web.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.CustomerSupport;
 import com.lotut.pms.domain.Express;
@@ -83,6 +85,12 @@ public class ExpressController {
 		List<Express> expressResult = expressService.getUserReceiverExpressListByPage(page);
 		model.addAttribute("express", expressResult);
 		return "express_receiver_list";
+	}
+	
+	@RequestMapping(path="/changeExpressStatus", method=RequestMethod.POST)
+	public void changeExpressStatus(@RequestParam("expressId")long expressId,@RequestParam("expressStatus")int expressStatus,PrintWriter out) {
+		expressService.changeExpressStatus(expressId, expressStatus);
+		out.write(1);
 	}
 	
 }

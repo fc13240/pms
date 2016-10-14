@@ -983,6 +983,7 @@ CREATE TABLE `express` (
   `detail_address` varchar(100) NOT NULL,
   `express_company` varchar(100) NOT NULL,
   `express_no` varchar(50) NOT NULL,
+  contact_person varchar(200) NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `send_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `sign_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -1005,3 +1006,6 @@ CREATE TABLE `express` (
 INSERT INTO express_status(express_status_id,express_status_desc) VALUES (1,'草稿');
 INSERT INTO express_status(express_status_id,express_status_desc) VALUES (2,'待签收');
 INSERT INTO express_status(express_status_id,express_status_desc) VALUES (3,'已签收');
+
+
+
