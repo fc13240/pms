@@ -33,7 +33,7 @@
 					<table id="simple-table" class="table table-striped table-bordered table-hover">
 					  <thead>
 						<tr class="simple_bag">
-						  <th class="center" width="60">
+						  <th class="center" width="45">
 						  	<label class="pos-rel">
 								<input type="checkbox" class="patent-check-item" id="checkall"  name="checkall" />
 								<span class="lbl"></span> 
