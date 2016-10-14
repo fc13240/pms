@@ -45,6 +45,14 @@
 						<input style="width:300px;" class="phone form-control" name="phone" id="phone" type="text"
 							value="${user.phone}" readonly="readonly"> 
 						<br>
+						<h5>QQ号：</h5>
+						<input style="width:300px;" class="phone form-control" name="qq" id="qq" type="text"
+							value="${user.qq}" readonly="readonly"> 
+						<br>
+						<h5>微信号：</h5>
+						<input style="width:300px;" class="phone form-control" name="weChat" id="weChat" type="text"
+							value="${user.weChat}" readonly="readonly"> 
+						<br>
 						<div style="height:20px;"></div>
 						<h5 style="font-weight:700;">默认联系地址</h5>
 						<table id="simple-table" class="table table-striped table-bordered table-hover" style="width:70%;">
