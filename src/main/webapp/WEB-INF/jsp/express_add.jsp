@@ -32,9 +32,9 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
-					<form action="<s:url value='/express/addExpress.html'/>" method="post" id="addExpressForm" onsubmit="return check()" >
+					<form action="<s:url value='/express/addExpress.html'/>" method="post" id="addExpressForm" >
 					  <div class="lt-third" style="background:#fff;margin-top:10px;">
-					  	<h5>从好友中选择：<select name="receiver" class="form-control" style="width:120px;" id="receiver" required onchange="loadContactAddress(this.value)">
+					  	<h5>从好友中选择：<select name="receiver.userId" class="form-control" style="width:120px;" id="receiver" required onchange="loadContactAddress(this.value)">
 					  		<option value=''>请选择</option>
 					  		<c:forEach items="${userFriends}" var="userFriend">
 								<option value="${userFriend.user.userId}">${userFriend.user.username}</option>
@@ -69,7 +69,8 @@
 						<span id="detailAddressError" style="color: red; display: none;">请输入的详细地址不要超过100字</span>
 				        <br>	
 				       	<h5>手机号码或电话号码：</h5>
-				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="phone" id="phone" value="" maxLength="20" required onblur="validatePhoneNumber(this.value)">
+				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="phone" id="phone" value="" maxLength="20" required >
+				       <!-- 	onblur="validatePhoneNumber(this.value)" -->
 				       	<span id="phoneError" style="color: red; display: none;">请输入正确的手机或者电话号</span>
 				       	<br/>
 				       
@@ -86,8 +87,8 @@
 				        <br>
 					    
 						<h5>快递内容:</h5>
-						<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="name" id="name" value="" maxLength="100"/>
-						<input type="hidden" name="expressStatus" id="expressStatus" />
+						<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="100"/>
+						<input type="hidden" name="expressStatus.expressStatusId" id="expressStatus" />
 						<br>
 					    <div style="height:20px;"></div>
 						<button class="button button-primary  button-rounded" type="button" style="width:80px;" onclick="saveExpress(1)">保存草稿</button>		
@@ -182,18 +183,14 @@
 	}
 	}
 	
-	function check() {
+	/* function check() {
 	var phone = document.getElementById("phoneRece").value;  
 	if(validatePhoneNumber(phone)){
 	return true;
 	}else {
 	return false;
 	}
-}
-	function savaExpressAsDraft(status){
-		
-		
-	}
+} */
 
 function saveExpress(expressStatus){
 	$("#expressStatus").val(expressStatus);

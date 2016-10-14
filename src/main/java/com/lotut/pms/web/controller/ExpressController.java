@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,13 +50,20 @@ public class ExpressController {
 		return "express_add";
 	}
 	
-	@RequestMapping(path="/addExpress", method=RequestMethod.GET)
-	public void addExpress(Express express,Model model) {
+	@RequestMapping(path="/addExpress", method=RequestMethod.POST)
+	public String addExpress(@ModelAttribute Express express,Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		User sender = new User();
 		sender.setUserId(userId);
 		express.setSender(sender);
 		expressService.addExpress(express);
+		
+		List<Map<String, String>> provinces = userService.getAllProvinces();
+		List<User> userFriends = friendService.getUserFriends(userId);
+		model.addAttribute("provinces", provinces);
+		model.addAttribute("userFriends", userFriends);
+		return "express_add";
+		
 	}
 	
 	@RequestMapping(path="/confirmSendOff", method=RequestMethod.GET)
