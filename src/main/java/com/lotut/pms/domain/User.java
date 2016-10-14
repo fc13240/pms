@@ -209,7 +209,7 @@ public class User implements Serializable, UserDetails {
 	public void setAvatarUrl(String avatarUrl) {
 		this.avatarUrl = avatarUrl;
 	}
-
+	
 	private static class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {
 		private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 

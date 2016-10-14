@@ -67,7 +67,7 @@
 					          <td style="text-align:center"><c:out value="${friend.user.phone}"/></td>
 					          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${friend.remarkName}' onChange="changeRemarkName('<c:out value='${friend.friendId}'/>', this.value)"/></td>
 					          <td style="text-align:center"><c:out value="${friend.getUserTypeAsString()}"/></td>
-					          <td style="text-align:center"><c:out value="${friend.organization.username}"/></td>
+					          <td style="text-align:center"><c:out value="${friend.getOrganization()}"/></td>
 					          <td style="text-align:center"><a  href="<s:url value='/friend/delete/'/><c:out value='${friend.friendId}.html'/>">删除好友</a></td>
 					        </tr>
 					      </c:forEach>
