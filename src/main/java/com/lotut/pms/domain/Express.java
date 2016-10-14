@@ -2,6 +2,9 @@ package com.lotut.pms.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 public class Express {
 	private long expressId;
 	private User sender;
@@ -12,8 +15,11 @@ public class Express {
 	private String expressNo;
 	private String phone;
 	private String contactPerson;
+	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date createTime;
+	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date sendTime;
+	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date signTime;
 	private ExpressStatus expressStatus;
 	

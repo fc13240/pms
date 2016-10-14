@@ -120,10 +120,13 @@
 			JOIN cities c ON ca.city = c.id JOIN districts d ON ca.district = d.id
 		 WHERE ca.id=#{receiverId}
 	</select>
-	<!-- <insert id="addExpress" parameterType="Express">
-		insert into express(sender,receiver,express_remark,province,city,district,detail_address,express_company,express_no,create_time,express_status,phone,contact_person)
-		values(#{sender.userId},#{contactAddress.receiver},#{expressRemark},#{contactAddress.province},#{contactAddress.city},#{contactAddress.district},#{contactAddress.detailAddress},#{expressCompany},#{expressNo},now(),#{expressStatus},#{phone},#{contactPerson})
-	</insert> -->
+	<insert id="addExpress" parameterType="Express">
+		insert into express(sender,receiver,express_remark,province,city,district,detail_address,express_company,express_no,send_time,express_status,phone,contact_person)
+		values(#{sender.userId,javaType=int,jdbcType=INTEGER},#{receiver.userId,javaType=int,jdbcType=INTEGER},#{expressRemark},
+		       #{contactAddress.province,javaType=int,jdbcType=INTEGER},#{contactAddress.city,javaType=long,jdbcType=BIGINT},
+		       #{contactAddress.district,javaType=long,jdbcType=BIGINT},#{contactAddress.detailAddress,javaType=string,jdbcType=VARCHAR},
+		       #{expressCompany},#{expressNo},#{sendTime},#{expressStatus.expressStatusId,javaType=int,jdbcType=INTEGER},#{phone},#{contactPerson})
+	</insert>
 	
 	<select id="searchUserReceiverExpressByPage" parameterType="ExpressSearchCondition" resultMap="ExpressResultMap">
 		<if test="keyword != null">
