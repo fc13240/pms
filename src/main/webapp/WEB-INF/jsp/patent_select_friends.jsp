@@ -21,7 +21,7 @@
 		
 			<!--left begin-->
 		  <div class="col-xs-1 sidebar" style="min-width:100px;">
-			<%@ include file="_left_nav_notice.jsp" %>
+			<%@ include file="_left_nav2.jsp" %>
 		  </div>
 		  <!--left end-->
 		  <!--right begin-->
