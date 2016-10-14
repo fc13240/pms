@@ -960,3 +960,37 @@ ALTER TABLE patent_doc_app_person MODIFY COLUMN other_information VARCHAR(1000);
 
 ALTER TABLE common_app_person MODIFY NAME VARCHAR(200);
 ALTER TABLE common_inventor MODIFY inventor_name VARCHAR(200);
+
+create table if not exists express_status(
+	express_status_id int primary key auto_increment,
+	express_status_desc varchar(30)
+)
+
+create table if not exists express (
+	express_id bigint primary key auto_increment,
+	sender int not null,
+	receiver int not null,
+	express_remark varchar(300),
+	province int not null,
+	city bigint not null,
+	district bigint not null,
+	detail_address varchar(100) not null,
+	express_company varchar(100) not null,
+	express_no varchar(50)  not null,
+	create_time timestamp not null DEFAULT CURRENT_TIMESTAMP,
+	send_time timestamp,
+	sign_time timestamp,
+	express_status int not null default 1,
+
+	constraint fk_express_sender 		foreign key(sender) references users(user_id),
+	constraint fk_express_receiver 		foreign key(receiver) references users(user_id),
+	constraint fk_express_province 		foreign key(province) references provinces(id),
+	constraint fk_express_city 		foreign key(city) references cities(id),
+	constraint fk_express_district 		foreign key(district) references districts(id),
+	constraint fk_express_express_status 	foreign key(express_status) references express_status(express_status_id)
+
+)
+
+INSERT INTO express_status(express_status_id,express_status_desc) VALUES (1,'草稿');
+INSERT INTO express_status(express_status_id,express_status_desc) VALUES (2,'待签收');
+INSERT INTO express_status(express_status_id,express_status_desc) VALUES (3,'已签收');

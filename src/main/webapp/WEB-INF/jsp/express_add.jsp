@@ -32,7 +32,7 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
-					<form action="<s:url value='/express/addExpress.html'/>" method="post" id="addExpressForm" >
+					<form action="<s:url value='/express/addExpress.html'/>" method="post" id="addExpressForm" onsubmit="return check()" >
 					  <div class="lt-third" style="background:#fff;margin-top:10px;">
 					  
 						<h5>收件人：</h5>
@@ -72,8 +72,8 @@
 				       
 				 		<input type="hidden" name="createTime" id="createTime"/>
 					    <div style="height:20px;"></div>
-						<button class="button button-primary  button-rounded" type="submit" style="width:80px;">保存草稿</button>		
-						<button class="button button-primary  button-rounded" type="button" style="width:80px;" onclick="confirmSendOff()">确认寄出</button>		
+						<button class="button button-primary  button-rounded" type="button" style="width:80px;" onclick="savaExpressAsDraft(1)">保存草稿</button>		
+						<button class="button button-primary  button-rounded" type="button" style="width:80px;" onclick="waitToReceive(2)">确认寄出</button>		
 					
 					</form>				
 				</div>				
@@ -94,97 +94,141 @@
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script> 
 
 <script type="text/javascript">
-$(function() {
-	var appNos = [];
-	<c:forEach items="${patents}" var="patent">
-		appNos.push("${patent.appNo}");
-	</c:forEach>
-	
-     $().ready(function() {
-     	$("#appNo").autocomplete(appNos);	
-     });
-	
-	
-	$("#addFeeForm").validate({
-		submitHandler: function(form){ 
-			if(checkAppNo()) {
-				form.submit();
-			}			 			     
-		}
+jQuery(function($) {
+	//initiate dataTables plugin
+	//And for the first simple table, which doesn't have TableTools or dataTables
+	//select/deselect all rows according to table header checkbox
+	var active_class = 'active';
+	$('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
+		var th_checked = this.checked;//checkbox inside "TH" table header
+		
+		$(this).closest('table').find('tbody > tr').each(function(){
+			var row = this;
+			if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
+			else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
+		});
 	});
-});
+	
+	//select/deselect a row when the checkbox is checked/unchecked
+	$('#simple-table').on('click', 'td input[type=checkbox]' , function(){
+		var $row = $(this).closest('tr');
+		if(this.checked) $row.addClass(active_class);
+		else $row.removeClass(active_class);
+	});
 
-function addDefaultOption(selectElem) {
-	selectElem.append("<option value=''>请选择</option>");
-}
+	
 
-function resetSelect() {
-	for (var i = 0; i < arguments.length; i++) {
-		var selectObj = arguments[i];
-		selectObj.empty();
-		addDefaultOption(selectObj);
+	/********************************/
+	//add tooltip for small view action buttons in dropdown menu
+	$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+	
+	//tooltip placement on right or left
+	function tooltip_placement(context, source) {
+		var $source = $(source);
+		var $parent = $source.closest('table')
+		var off1 = $parent.offset();
+		var w1 = $parent.width();
+
+		var off2 = $source.offset();
+		//var w2 = $source.width();
+
+		if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+		return 'left';
 	}
-}
+	
 
-function addOptions(selectObj, options) {
-	$.each(options, function(index, val,val2){
-		selectObj.append("<option value='" + val + "'>" + val + "</option>");
+})
+</script> 
+
+<script type="text/javascript">
+	function addDefaultOption(selectElem) {
+	selectElem.append("<option value=''>请选择</option>");
+	}
+
+	function resetSelect() {
+	for (var i = 0; i < arguments.length; i++) {
+	var selectObj = arguments[i];
+	selectObj.empty();
+	addDefaultOption(selectObj);
+	}
+	}
+	
+	function addOptions(selectObj, options) {
+	$.each(options, function(index, val){
+	selectObj.append("<option value='" + val.id + "'>" + val.name + "</option>");
 	});	
-}
-
-function loadCities() {
+	}
+	
+	function loadCities() {
 	var province = $("#province").val();
 	
 	resetSelect($("#city"), $("#district"), $("#street"));
 	
 	if (province != "") {
-		$.ajax({
-			url: "<s:url value='/user/getCitiesByProvince.html'/>?province=" + province,
-			type: 'get',
-			dataType: 'json',
-			success: function(cities) {
-				var city = $("#city");
-				
-				resetSelect(city);
-				addOptions(city, cities);
-			}
-		})
+	$.ajax({
+	url: "<s:url value='/user/getCitiesByProvince.html'/>?province=" + province,
+	type: 'get',
+	dataType: 'json',
+	success: function(cities) {
+		var city = $("#city");
+		
+		resetSelect(city);
+		addOptions(city, cities);
+	}
+	})
 	} 
-}
-
-function loadDistricts() {
+	}
+	
+	function loadDistricts() {
 	var city = $("#city").val();
-	resetSelect($("#district"), $("#street"));	
+	
+	resetSelect($("#district"), $("#street"));
+	
 	if (city != "") {
-		$.ajax({
-			url: "<s:url value='/user/getDistrictsByCity.html'/>?city=" + city,
-			type: 'get',
-			dataType: 'json',
-			success: function(districts) {
-				var district = $("#district");				
-				resetSelect(district);
-				addOptions(district, districts);
-			}
-		})
+	$.ajax({
+	url: "<s:url value='/user/getDistrictsByCity.html'/>?city=" + city,
+	type: 'get',
+	dataType: 'json',
+	success: function(districts) {
+		var district = $("#district");
+		
+		resetSelect(district);
+		addOptions(district, districts);
+	}
+	})
+	}
+	}
+	
+	function validatePhoneNumber(phoneNumber) {
+	var reg = new RegExp("^[0-9]*$");
+	document.getElementById("phoneError").style.display = "none";
+	if (reg.test(phoneNumber)) {
+	if (phoneNumber.length<7 || phoneNumber.length>13) {
+	document.getElementById("phoneError").style.display = "";
+	return false;
+	} else {
+	return true;
+	}
+	} else {
+	document.getElementById("phoneError").style.display = "";
+	return false;
+	}
+	}
+	
+	function check() {
+	var phone = document.getElementById("phoneRece").value;  
+	if(validatePhoneNumber(phone)){
+	return true;
+	}else {
+	return false;
 	}
 }
-
-function confirmSendOff(){
-	$.ajax({
-		url: "<s:url value='/express/confirmSendOff.html'/>",
-		type: 'get',
-		dataType: 'json',
-		success: function(districts) {
-			var district = $("#district");				
-			resetSelect(district);
-			addOptions(district, districts);
-		}
-	})
-}
-
+	function savaExpressAsDraft(status){
+		
+		
+	}
 
 
 </script>
-
 </body>
 </html>
