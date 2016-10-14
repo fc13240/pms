@@ -77,6 +77,17 @@
 	<update id="changeExpressStatus">
 		update express (express_id,express_status) values (#{expressId},#{status});
 	</update>
-	
+	<select id="getUserContactAddressById" parameterType="int" resultType="ContactAddress">
+		SELECT ca.id, ca.receiver, ca.province, p.name AS provinceName, ca.city, c.name AS cityName,
+				ca.district, d.name AS districtName,
+					 ca.detail_address AS detailAddress, ca.phone, ca.email, ca.is_default isDefault
+		 FROM contact_addresses ca JOIN provinces p ON ca.province = p.id
+			JOIN cities c ON ca.city = c.id JOIN districts d ON ca.district = d.id
+		 WHERE ca.id=#{receiverId}
+	</select>
+	<!-- <insert id="addExpress" parameterType="Express">
+		insert into express(sender,receiver,express_remark,province,city,district,detail_address,express_company,express_no,create_time,express_status,phone,contact_person)
+		values(#{sender.userId},#{contactAddress.receiver},#{expressRemark},#{contactAddress.province},#{contactAddress.city},#{contactAddress.district},#{contactAddress.detailAddress},#{expressCompany},#{expressNo},now(),#{expressStatus},#{phone},#{contactPerson})
+	</insert> -->
 	
 </mapper>

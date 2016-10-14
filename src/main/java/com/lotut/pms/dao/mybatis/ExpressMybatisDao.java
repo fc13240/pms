@@ -6,6 +6,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.ExpressDao;
 import com.lotut.pms.dao.mapper.ExpressMapper;
+import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.Express;
 import com.lotut.pms.domain.Page;
 
@@ -45,5 +46,12 @@ public class ExpressMybatisDao extends SqlSessionDaoSupport implements ExpressDa
 		expressMapper.changeExpressStatus(expressId, status);
 	}
 
-	
+	@Override
+	public void addExpress(Express express){
+		expressMapper.addExpress(express);
+	}
+	@Override
+	public 	ContactAddress getUserContactAddressById(int receiverId){
+		return expressMapper.getUserContactAddressById(receiverId);
+	}
 }
