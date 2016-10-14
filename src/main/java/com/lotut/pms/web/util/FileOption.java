@@ -83,7 +83,7 @@ public class FileOption {
 			if(!fileDir.exists()){
 				fileDir.mkdir();
 			}else{
-				deleteDir(fileDir);
+				//deleteDir(fileDir);
 				fileDir.mkdir();
 			}
 			InputStream is = multipartFile.getInputStream();
