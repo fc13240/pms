@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.ExpressDao;
 import com.lotut.pms.dao.mapper.ExpressMapper;
 import com.lotut.pms.domain.Express;
+import com.lotut.pms.domain.ExpressSearchCondition;
 import com.lotut.pms.domain.Page;
 
 public class ExpressMybatisDao extends SqlSessionDaoSupport implements ExpressDao{
@@ -44,6 +45,28 @@ public class ExpressMybatisDao extends SqlSessionDaoSupport implements ExpressDa
 	public void changeExpressStatus(long expressId, int expressStatus) {
 		expressMapper.changeExpressStatus(expressId, expressStatus);
 	}
+
+	@Override
+	public List<Express> searchUserSenderExpressByPage(ExpressSearchCondition searchCondition) {
+		return expressMapper.searchUserSenderExpressByPage(searchCondition);
+	}
+
+	@Override
+	public int searchUserSenderExpressCount(ExpressSearchCondition searchCondition) {
+		return expressMapper.searchUserSenderExpressCount(searchCondition);
+	}
+
+	@Override
+	public List<Express> searchUserReceiverExpressByPage(ExpressSearchCondition searchCondition) {
+		return expressMapper.searchUserReceiverExpressByPage(searchCondition);
+	}
+
+	@Override
+	public int searchUserReceiverExpressCount(ExpressSearchCondition searchCondition) {
+		return expressMapper.searchUserReceiverExpressCount(searchCondition);
+	}
+
+	
 
 
 

@@ -2,7 +2,6 @@ package com.lotut.pms.domain;
 
 public class AppPersonSearchCondition {
 	private int userId;
-
 	private String keyword;
 	private Page page;
 	

@@ -80,5 +80,68 @@
 		update express set express_id=#{expressId},express_status=#{expressStatus}
 	</update>
 	
+	<select id="searchUserSenderExpressByPage" parameterType="ExpressSearchCondition" resultMap="ExpressResultMap">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+			SELECT e.express_id,u.user_id AS  sender_id ,u.username AS sender_name,us.user_id AS receiver_id,us.username AS receiver_name,
+		p.id AS province_id,p.name AS province_name,c.id AS city_id,
+		c.name AS city_name, d.id AS district_id ,d.name AS district_name,e.detail_address ,
+		e.express_company,e.express_no,e.phone,e.contact_person,e.send_time,e.express_remark,es.express_status_id,es.express_status_desc
+		FROM express  e LEFT JOIN users u ON e.sender = u.user_id LEFT JOIN users us ON e.receiver=us.user_id 
+		LEFT JOIN provinces p ON  e.province=p.id LEFT JOIN cities c ON e.city=c.id LEFT JOIN districts d ON e.district=d.id 
+		LEFT JOIN express_status es ON e.express_status =es.express_status_id
+		WHERE e.sender=#{userId} 
+ 		<if test="keyword != null">
+					and ( es.express_status_desc like #{keyword_pattern} or e.express_no like #{keyword_pattern} or e.express_remark like #{keyword_pattern})
+		</if>	
+ 		ORDER BY  e.express_status,e.send_time limit #{startIndex}, #{pageSize}
+	</select>
 	
+	<select id="searchUserSenderExpressCount" parameterType="ExpressSearchCondition" resultType="int">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+			
+  		SELECT count(*)
+  	 FROM express  e LEFT JOIN users u ON e.sender = u.user_id LEFT JOIN users us ON e.receiver=us.user_id 
+		LEFT JOIN provinces p ON  e.province=p.id LEFT JOIN cities c ON e.city=c.id LEFT JOIN districts d ON e.district=d.id 
+		LEFT JOIN express_status es ON e.express_status =es.express_status_id
+		WHERE e.sender=#{userId} 
+		<if test="keyword != null">
+					and ( es.express_status_desc like #{keyword_pattern} or e.express_no like #{keyword_pattern} or e.express_remark like #{keyword_pattern})
+		</if> 
+	</select>
+	
+	<select id="searchUserReceiverExpressByPage" parameterType="ExpressSearchCondition" resultMap="ExpressResultMap">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+			SELECT e.express_id,u.user_id AS  sender_id ,u.username AS sender_name,us.user_id AS receiver_id,us.username AS receiver_name,
+		p.id AS province_id,p.name AS province_name,c.id AS city_id,
+		c.name AS city_name, d.id AS district_id ,d.name AS district_name,e.detail_address ,
+		e.express_company,e.phone,e.express_no,e.contact_person,e.send_time,e.express_remark,es.express_status_id,es.express_status_desc
+		FROM express  e LEFT JOIN users u ON e.sender = u.user_id LEFT JOIN users us ON e.receiver=us.user_id 
+		LEFT JOIN provinces p ON  e.province=p.id LEFT JOIN cities c ON e.city=c.id LEFT JOIN districts d ON e.district=d.id 
+		LEFT JOIN express_status es ON e.express_status =es.express_status_id
+		WHERE e.receiver=#{userId}
+ 		<if test="keyword != null">
+					and ( es.express_status_desc like #{keyword_pattern} or e.express_no like #{keyword_pattern} or e.express_remark like #{keyword_pattern})
+		</if>	
+ 		ORDER BY  e.express_status,e.send_time limit #{startIndex}, #{pageSize}
+	</select>
+	
+	<select id="searchUserReceiverExpressCount" parameterType="ExpressSearchCondition" resultType="int">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+  		SELECT count(*)
+  	 FROM express  e LEFT JOIN users u ON e.sender = u.user_id LEFT JOIN users us ON e.receiver=us.user_id 
+		LEFT JOIN provinces p ON  e.province=p.id LEFT JOIN cities c ON e.city=c.id LEFT JOIN districts d ON e.district=d.id 
+		LEFT JOIN express_status es ON e.express_status =es.express_status_id
+		WHERE e.receiver=#{userId} 
+		<if test="keyword != null">
+					and ( es.express_status_desc like #{keyword_pattern} or e.express_no like #{keyword_pattern} or e.express_remark like #{keyword_pattern})
+		</if> 
+	</select>
 </mapper>
