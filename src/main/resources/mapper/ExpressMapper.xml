@@ -95,7 +95,7 @@
  		<if test="keyword != null">
 					and ( es.express_status_desc like #{keyword_pattern} or e.express_no like #{keyword_pattern} or e.express_remark like #{keyword_pattern})
 		</if>	
- 		ORDER BY  e.express_status,e.send_time limit #{startIndex}, #{pageSize}
+ 		ORDER BY  e.express_status,e.send_time limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
 	<select id="searchUserSenderExpressCount" parameterType="ExpressSearchCondition" resultType="int">
@@ -140,7 +140,7 @@
  		<if test="keyword != null">
 					and ( es.express_status_desc like #{keyword_pattern} or e.express_no like #{keyword_pattern} or e.express_remark like #{keyword_pattern})
 		</if>	
- 		ORDER BY  e.express_status,e.send_time limit #{startIndex}, #{pageSize}
+ 		ORDER BY  e.express_status,e.send_time limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
 	<select id="searchUserReceiverExpressCount" parameterType="ExpressSearchCondition" resultType="int">
