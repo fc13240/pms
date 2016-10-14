@@ -48,7 +48,7 @@
 					  <thead>
 						<tr class="simple_bag">
 						  <th>序号</th>
-						  <th>联系人</th>
+						  <th>寄件人</th>
 						  <th>所在地区</th>
 						  <th>地址</th>
 						  <th>联系电话</th>

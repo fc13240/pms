@@ -66,7 +66,7 @@ public class ExpressController {
 		page.setTotalRecords(totalCount);
 		List<Express> expressResult = expressService.getUserSenderExpressListByPage(page);
 		model.addAttribute("express", expressResult);
-		return "expresss_sender_list";
+		return "express_sender_list";
 	}
 	
 	@RequestMapping(path="/getUserReceiverExpressList", method=RequestMethod.GET)
