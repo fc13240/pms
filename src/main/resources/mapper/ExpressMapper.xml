@@ -8,6 +8,7 @@
 			<result property="expressRemark" column="express_remark"/>
 			<result property="expressCompany" column="express_company"/>
 			<result property="expressNo" column="express_no"/>
+			<result property="phone" column="phone"/>
 			<result property="createTime" column="create_time"/>
 			<result property="sendTime" column="send_time"/>
 			<result property="signTime" column="sign_time"/>
@@ -22,7 +23,7 @@
 			</association>
 			<association property="expressStatus" javaType="ExpressStatus">
 				<id property="expressStatusId" column="express_status_id"/>
-				<result property="expressStatusDesc" column="expressStatusDesc"/>
+				<result property="expressStatusDesc" column="express_status_desc"/>
 			</association>
 			<association property="sender" javaType="User">
 				<id property="userId" column="sender_id"/>
@@ -39,7 +40,7 @@
 		SELECT e.express_id,u.user_id AS  sender_id ,u.username AS sender_name,us.user_id AS receiver_id,us.username AS receiver_name,
 		p.id AS province_id,p.name AS province_name,c.id AS city_id,
 		c.name AS city_name, d.id AS district_id ,d.name AS district_name,e.detail_address ,
-		e.express_company,e.express_no,e.send_time,e.express_remark,es.express_status_id,es.express_status_desc
+		e.express_company,e.express_no,e.phone,e.send_time,e.express_remark,es.express_status_id,es.express_status_desc
 		FROM express  e JOIN users u ON e.sender = u.user_id JOIN users us ON e.receiver=us.user_id 
 		JOIN provinces p ON  e.province=p.id JOIN cities c ON e.city=c.id JOIN districts d ON e.district=d.id 
 		JOIN express_status es ON e.express_status =es.express_status_id
@@ -58,7 +59,7 @@
 		SELECT e.express_id,u.user_id AS  sender_id ,u.username AS sender_name,us.user_id AS receiver_id,us.username AS receiver_name,
 		p.id AS province_id,p.name AS province_name,c.id AS city_id,
 		c.name AS city_name, d.id AS district_id ,d.name AS district_name,e.detail_address ,
-		e.express_company,e.express_no,e.send_time,e.express_remark,es.express_status_id,es.express_status_desc
+		e.express_company,e.phone,e.express_no,e.send_time,e.express_remark,es.express_status_id,es.express_status_desc
 		FROM express  e JOIN users u ON e.sender = u.user_id JOIN users us ON e.receiver=us.user_id 
 		JOIN provinces p ON  e.province=p.id JOIN cities c ON e.city=c.id JOIN districts d ON e.district=d.id 
 		JOIN express_status es ON e.express_status =es.express_status_id

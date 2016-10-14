@@ -10,10 +10,19 @@ public class Express {
 	private ContactAddress contactAddress;
 	private String expressCompany;
 	private String expressNo;
+	private String phone;
 	private Date createTime;
 	private Date sendTime;
 	private Date signTime;
 	private ExpressStatus expressStatus;
+	
+	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public long getExpressId() {
 		return expressId;
 	}
