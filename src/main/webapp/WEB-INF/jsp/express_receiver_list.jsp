@@ -70,12 +70,13 @@
 						  <td class="center" style="text-align:center">${express.phone}</td>
 						  <td class="center" style="text-align:center">${express.expressRemark}</td>
 						  <td class="center" style="text-align:center">${express.expressStatus.expressStatusDesc}</td>
+					 
 						  <td class="center" style="text-align:center">
-						  		
-						  	<c:if test="${express.expressStatus.expressStatusId == 2}">
-						  		<a href="javascript:return void" onclick="changeExpressStatus(${express.expressId},3)"> 置为已收件 </a>
-						  	</c:if>
+						   		 <c:if test="${express.expressStatus.expressStatusId == 2}">
+						  			<a href="javascript:return void" onclick="changeExpressStatus(${express.expressId},3)"> 置为已收件 </a>
+						  		</c:if>
 						  </td>
+							  
 						</tr>
 					  </c:forEach>
 					</table>
@@ -184,8 +185,8 @@ function changeExpressStatus(id,status){
 		url: "<s:url value='/express/changeExpressStatus.html'/>",
 		data:{"expressId" : id ,"expressStatus": status},
 		type: 'post', 
-		error: function() {
-			//location.reload();
+		success: function() {
+			location.reload();
 		}
 	});	
 }
