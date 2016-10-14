@@ -11,9 +11,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
 <title>龙图腾专利管家——新增快递</title>
 <%@ include file="_css.jsp" %>
-	<script src="<s:url value='/temp/js/jquery.js'/>" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="<s:url value='/static/js/jquery.autocomplete.css'/>"/>
     <script type="text/javascript" src="<s:url value='/static/js/jquery.autocomplete.js'/>"></script>
+    <script type="text/javascript" src="<s:url value='/temp/js/jquery.min.js'/>"></script>
 </head>
 <body>
 <%@ include file="_top.jsp" %>
@@ -34,31 +34,50 @@
 				<div class="lt-box" style="padding:20px;">
 					<form action="<s:url value='/express/addExpress.html'/>" method="post" id="addExpressForm" onsubmit="return check()" >
 					  <div class="lt-third" style="background:#fff;margin-top:10px;">
-					  
+					  	<h5>从好友中选择：<select name="receiver" class="form-control" style="width:120px;" id="receiver" required onchange="loadContactAddress(this.value)">
+					  		<option value=''>请选择</option>
+					  		<c:forEach items="${userFriends}" var="userFriend">
+								<option value="${userFriend.user.userId}">${userFriend.user.username}</option>
+					  		</c:forEach>
+					  		
+						</select></h5>
+						<span>好友地址</span>
+						<select  class="form-control" style="width:120px;" id="friendContactAddress" required onchange="loadContact(this.value)">
+					  		<option value=''>请选择</option>
+					  		<optgroup id="selectGroup">
+					  		</optgroup>
+						</select>
 						<h5>收件人：</h5>
-						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" name="receiver" id="receiver"  type="text" onblur="loadPatent()" required maxLength="30"/>
+						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" name="contactPerson" id="contactPerson"  type="text" required maxLength="30"/>
+						<span id="receiverError" style="color: red; display: none;">请输入的收件人姓名不要超过30字</span>
 						<br>
 						
 						<h5>快递地址:</h5>
-				        <select name="province" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities()" required>
-					  		<option value=''>请选择</option>
+				        <select name="contactAddress.province" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities()" required>
+					  		<option value='' id="provinceOption">请选择</option>
 					  		<c:forEach items="${provinces}" var="province">
 								<option value="${province.id}">${province.name}</option>
 					  		</c:forEach>
 						</select>
-						<select name="city" id="city" style="width:226px;display:inline;" class="form-control" onchange="loadDistricts()" required>
-					 	 	<option value=''>请选择</option>
+						<select name="contactAddress.city" id="city" style="width:226px;display:inline;" class="form-control" onchange="loadDistricts()" required>
+					 	 	<option value='' id="cityOption">请选择</option>
 						</select>
-						<select name="district" style="width:226px;display:inline;" class="form-control" id="district" required>
-					 		<option value=''>请选择</option>
+						<select name="contactAddress.district" style="width:226px;display:inline;" class="form-control" id="district" required>
+					 		<option value='' id="districtOption">请选择</option>
 						</select>
-						<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="detailAddress" required/>
-					
+						<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="contactAddress.detailAddress" id="detailAddress" required placeholder="详细地址"  maxLength="100"/>
+						<span id="detailAddressError" style="color: red; display: none;">请输入的详细地址不要超过100字</span>
 				        <br>	
-				        	
+				       	<h5>手机号码或电话号码：</h5>
+				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="phone" id="phone" value="" maxLength="20" required onblur="validatePhoneNumber(this.value)">
+				       	<span id="phoneError" style="color: red; display: none;">请输入正确的手机或者电话号</span>
+				       	<br/>
+				       
 				       	<h5>快递方式:</h5>
-				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="expressCompany" id="expressCompany" value="" maxLength="100"/>
-				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="expressNo" id="expressNo" value="" maxLength="100"/>
+				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="expressCompany" id="expressCompany" value="" maxLength="100" required/>
+				       	<span id="expressCompanyError" style="color: red; display: none;">请输入的快递方式不要超过100字</span>
+				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="expressNo" id="expressNo" value="" maxLength="100" required/>
+				       	<span id="expressNoError" style="color: red; display: none;">请输入正确的手机或者电话号</span>
 						<br>
 				 		<h5>寄出时间:</h5>
 					    <input style="width:400px;pisplay:inline;"  class="selectPointOfInterest form-control" type="text" class="form-control" id="startAppDateId" 
@@ -68,13 +87,12 @@
 					    
 						<h5>快递内容:</h5>
 						<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="name" id="name" value="" maxLength="100"/>
+						<input type="hidden" name="expressStatus" id="expressStatus" />
 						<br>
-				       
-				 		<input type="hidden" name="createTime" id="createTime"/>
 					    <div style="height:20px;"></div>
-						<button class="button button-primary  button-rounded" type="button" style="width:80px;" onclick="savaExpressAsDraft(1)">保存草稿</button>		
-						<button class="button button-primary  button-rounded" type="button" style="width:80px;" onclick="waitToReceive(2)">确认寄出</button>		
-					
+						<button class="button button-primary  button-rounded" type="button" style="width:80px;" onclick="saveExpress(1)">保存草稿</button>		
+						<button class="button button-primary  button-rounded" type="button" style="width:80px;" onclick="saveExpress(2)">确认寄出</button>		
+					</div>
 					</form>				
 				</div>				
 			</div>
@@ -87,59 +105,8 @@
 	</div>
 
 </div>
-
-
-</div>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script> 
-
-<script type="text/javascript">
-jQuery(function($) {
-	//initiate dataTables plugin
-	//And for the first simple table, which doesn't have TableTools or dataTables
-	//select/deselect all rows according to table header checkbox
-	var active_class = 'active';
-	$('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
-		var th_checked = this.checked;//checkbox inside "TH" table header
-		
-		$(this).closest('table').find('tbody > tr').each(function(){
-			var row = this;
-			if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
-			else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
-		});
-	});
-	
-	//select/deselect a row when the checkbox is checked/unchecked
-	$('#simple-table').on('click', 'td input[type=checkbox]' , function(){
-		var $row = $(this).closest('tr');
-		if(this.checked) $row.addClass(active_class);
-		else $row.removeClass(active_class);
-	});
-
-	
-
-	/********************************/
-	//add tooltip for small view action buttons in dropdown menu
-	$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-	
-	//tooltip placement on right or left
-	function tooltip_placement(context, source) {
-		var $source = $(source);
-		var $parent = $source.closest('table')
-		var off1 = $parent.offset();
-		var w1 = $parent.width();
-
-		var off2 = $source.offset();
-		//var w2 = $source.width();
-
-		if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-		return 'left';
-	}
-	
-
-})
-</script> 
-
 <script type="text/javascript">
 	function addDefaultOption(selectElem) {
 	selectElem.append("<option value=''>请选择</option>");
@@ -228,7 +195,51 @@ jQuery(function($) {
 		
 	}
 
+function saveExpress(expressStatus){
+	$("#expressStatus").val(expressStatus);
+	$("#addExpressForm").submit();
+}
 
+function addContactAddressOptions(selectObj, options) {
+	$.each(options, function(index, val){
+	selectObj.append("<option value='" + val.id + "'>" + val.receiver + "</option>");
+	});	
+	}
+function loadContactAddress(userId){
+	var receiver = $("#receiver").val();
+	if (receiver != "") {
+		$.ajax({
+			url: "<s:url value='/express/getContactAddress.html'/>?userId=" + receiver,
+			type: 'get',
+			dataType: 'json',
+			success: function(result) {
+				$.each(result,function(i,item){
+					$("#selectGroup").append("<option value='"+item.id+"'>"+item.receiver+"</option>");
+				})
+				
+				}
+		})
+	}
+}
+
+function loadContact(receiverId){
+	$.ajax({
+		url : "<s:url value='/express/loadContact.html'/>",
+		data:{"receiverId":receiverId},
+		dataType:"json",
+		success:function (result){
+			$("#contactPerson").val(result.receiver);
+			$("#provinceOption").val(result.province);
+			$("#provinceOption").text(result.provinceName);
+			$("#cityOption").val(result.city);
+			$("#cityOption").text(result.cityName);
+			$("#districtOption").val(result.district);
+			$("#districtOption").text(result.districtName);
+			$("#detailAddress").val(result.detailAddress);
+			$("#phone").val(result.phone);
+		}
+	})
+}
 </script>
 </body>
 </html>

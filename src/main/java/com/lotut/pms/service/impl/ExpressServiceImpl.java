@@ -3,6 +3,7 @@ package com.lotut.pms.service.impl;
 import java.util.List;
 
 import com.lotut.pms.dao.ExpressDao;
+import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.Express;
 import com.lotut.pms.domain.ExpressSearchCondition;
 import com.lotut.pms.domain.Page;
@@ -17,7 +18,7 @@ public class ExpressServiceImpl implements ExpressService{
 
 	@Override
 	public void addExpress(Express express) {
-		
+		expressDao.addExpress(express);
 	}
 
 	@Override
@@ -74,4 +75,8 @@ public class ExpressServiceImpl implements ExpressService{
 
 
 	
+	@Override
+	public 	ContactAddress getUserContactAddressById(int receiverId){
+		return expressDao.getUserContactAddressById(receiverId);
+	}
 }

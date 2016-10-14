@@ -1,7 +1,7 @@
 package com.lotut.pms.dao.mapper;
 
 import java.util.List;
-
+import com.lotut.pms.domain.ContactAddress;
 import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.Express;
@@ -16,7 +16,11 @@ public interface ExpressMapper {
 	List<Express> getUserReceiverExpressListByPage (Page page);
 	
 	int getUserReceiverExpressCount(int userId);
+
+	void addExpress(Express express);
 	
+	ContactAddress getUserContactAddressById(int receiverId);
+
 	void changeExpressStatus(@Param("expressId")long expressId,@Param("expressStatus")int expressStatus);
 	
 	List<Express> searchUserSenderExpressByPage(ExpressSearchCondition searchCondition);

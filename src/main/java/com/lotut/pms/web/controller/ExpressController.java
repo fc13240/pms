@@ -1,11 +1,11 @@
 package com.lotut.pms.web.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
-
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.lotut.pms.domain.AppPersonSearchCondition;
-import com.lotut.pms.domain.CommonAppPerson;
-import com.lotut.pms.domain.CustomerSupport;
+import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.Express;
 import com.lotut.pms.domain.ExpressSearchCondition;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.User;
 import com.lotut.pms.service.ExpressService;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.UserService;
@@ -42,13 +40,20 @@ public class ExpressController {
 	
 	@RequestMapping(path="/addExpressForm", method=RequestMethod.GET)
 	public String addExpressForm(Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
 		List<Map<String, String>> provinces = userService.getAllProvinces();
+		List<User> userFriends = friendService.getUserFriends(userId);
 		model.addAttribute("provinces", provinces);
+		model.addAttribute("userFriends", userFriends);
 		return "express_add";
 	}
 	
 	@RequestMapping(path="/addExpress", method=RequestMethod.GET)
 	public void addExpress(Express express,Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		User sender = new User();
+		sender.setUserId(userId);
+		express.setSender(sender);
 		expressService.addExpress(express);
 	}
 	
@@ -88,6 +93,16 @@ public class ExpressController {
 		List<Express> expressResult = expressService.getUserReceiverExpressListByPage(page);
 		model.addAttribute("express", expressResult);
 		return "express_receiver_list";
+	}
+	@RequestMapping(path="/getContactAddress")
+	public void getContactAddress(Model model,int userId,HttpServletResponse response) throws IOException{
+		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
+		WebUtils.writeJsonStrToResponse(response, contactAddresses);
+	}
+	@RequestMapping(path="/loadContact")
+	public void loadContact(Model model,int receiverId,HttpServletResponse response) throws IOException{
+		ContactAddress contactAddresses = expressService.getUserContactAddressById(receiverId);
+		WebUtils.writeJsonStrToResponse(response, contactAddresses);
 	}
 	
 	@RequestMapping(path="/changeExpressStatus", method=RequestMethod.POST)

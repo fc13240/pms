@@ -2,6 +2,7 @@ package com.lotut.pms.dao;
 
 import java.util.List;
 
+import com.lotut.pms.domain.ContactAddress;
 import com.lotut.pms.domain.Express;
 import com.lotut.pms.domain.ExpressSearchCondition;
 import com.lotut.pms.domain.Page;
@@ -15,6 +16,10 @@ public interface ExpressDao {
 	
 	int getUserReceiverExpressCount(int userId);
 	
+	void addExpress(Express express);
+	
+	ContactAddress getUserContactAddressById(int receiverId);
+
 	void changeExpressStatus(long expressId,int expressStatus);
 	
 	List<Express> searchUserSenderExpressByPage(ExpressSearchCondition searchCondition);
