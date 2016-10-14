@@ -115,8 +115,7 @@
  		
  		<if test="keyword != null">
 					and ( p.inventor_name like #{keyword_pattern} or p.inventor_id_number like #{keyword_pattern})
-		</if>	
- 		limit #{page.startIndex}, #{page.pageSize}) AS un  JOIN user_inventor up ON un.inventor_id = up.inventor
+		</if>	ORDER BY create_time limit #{page.startIndex}, #{page.pageSize}) AS un  JOIN user_inventor up ON un.inventor_id = up.inventor
 		  	JOIN users u ON up.user = u.user_id
 	</select>
 	
