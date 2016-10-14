@@ -34,25 +34,40 @@
 				<div class="lt-box" style="padding:20px;">
 					<form action="<s:url value='/express/addExpress.html'/>" method="post" id="addExpressForm" >
 					  <div class="lt-third" style="background:#fff;margin-top:10px;">
-					  	<h5>从好友中选择：<select name="receiver.userId" class="form-control" style="width:120px;" id="receiver" required onchange="loadContactAddress(this.value)">
+					  	<%-- <h5>从好友中选择：<select name="receiver.userId" class="form-control" style="width:120px;display:inline;" id="receiver" required onchange="loadContactAddress(this.value)">
 					  		<option value=''>请选择</option>
 					  		<c:forEach items="${userFriends}" var="userFriend">
 								<option value="${userFriend.user.userId}">${userFriend.user.username}</option>
 					  		</c:forEach>
 					  		
-						</select></h5>
-						<span>好友地址</span>
-						<select  class="form-control" style="width:120px;" id="friendContactAddress" required onchange="loadContact(this.value)">
+						</select>
+						<span style="display:inline;">好友地址：</span>
+						<select  class="form-control" style="width:120px;display:inline;" id="friendContactAddress" required onchange="loadContact(this.value)">
 					  		<option value=''>请选择</option>
 					  		<optgroup id="selectGroup">
 					  		</optgroup>
 						</select>
-						<h5>收件人：</h5>
-						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" name="contactPerson" id="contactPerson"  type="text" required maxLength="30"/>
+						</h5> --%>
+						<h5>收件人：从好友中选择
+							<select name="receiver.userId" class="form-control" style="width:120px;display:inline;" id="receiver" required onchange="loadContactAddress(this.value);loadReceiver(this.value)">
+					  		<option value=''>请选择</option>
+					  		<c:forEach items="${userFriends}" var="userFriend">
+								<option value="${userFriend.user.userId}">${userFriend.user.username}</option>
+					  		</c:forEach>
+						</select>
+						</h5>
+						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" id="receiverName"  type="text" required maxLength="30"/>
 						<span id="receiverError" style="color: red; display: none;">请输入的收件人姓名不要超过30字</span>
 						<br>
 						
-						<h5>快递地址:</h5>
+						<h5>快递地址 :
+							<select  class="form-control" style="width:120px;display:inline;" id="friendContactAddress" required onchange="loadContact(this.value)">
+						  		<option value=''>请选择</option>
+						  		<optgroup id="selectGroup">
+						  		</optgroup>
+							</select>
+						
+						</h5>
 				        <select name="contactAddress.province" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities()" required>
 					  		<option value='' id="provinceOption">请选择</option>
 					  		<c:forEach items="${provinces}" var="province">
@@ -74,9 +89,10 @@
 				       	<span id="phoneError" style="color: red; display: none;">请输入正确的手机或者电话号</span>
 				       	<br/>
 				       
-				       	<h5>快递方式:</h5>
+				       	<h5>快递公司:</h5>
 				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="expressCompany" id="expressCompany" value="" maxLength="100" required/>
 				       	<span id="expressCompanyError" style="color: red; display: none;">请输入的快递方式不要超过100字</span>
+				       	<h5>快递单号:</h5>
 				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="expressNo" id="expressNo" value="" maxLength="100" required/>
 				       	<span id="expressNoError" style="color: red; display: none;">请输入正确的手机或者电话号</span>
 						<br>
@@ -236,6 +252,12 @@ function loadContact(receiverId){
 			$("#phone").val(result.phone);
 		}
 	})
+}
+
+
+function loadReceiver(receiverId){
+	 var receiverName=$("#receiver").find("option:selected").text();
+	 $("#receiverName").val(receiverName);
 }
 </script>
 </body>
