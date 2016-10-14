@@ -972,6 +972,7 @@ create table if not exists express_status(
 	express_status_desc varchar(30)
 )
 
+<<<<<<< HEAD
 CREATE TABLE express (
   express_id bigint(20) NOT NULL AUTO_INCREMENT,
   sender int(11) NOT NULL,
@@ -1001,8 +1002,42 @@ CREATE TABLE express (
   CONSTRAINT fk_express_province FOREIGN KEY (province) REFERENCES provinces (id),
   CONSTRAINT fk_express_receiver FOREIGN KEY (receiver) REFERENCES users (user_id),
   CONSTRAINT fk_express_sender FOREIGN KEY (sender) REFERENCES users (user_id)
+=======
+CREATE TABLE `express` (
+  `express_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `sender` int(11) NOT NULL,
+  `receiver` int(11) NOT NULL,
+  `express_remark` varchar(500) DEFAULT NULL,
+  `province` int(11) NOT NULL,
+  `city` bigint(20) NOT NULL,
+  `district` bigint(20) NOT NULL,
+  `detail_address` varchar(100) NOT NULL,
+  `express_company` varchar(100) NOT NULL,
+  `express_no` varchar(50) NOT NULL,
+  contact_person varchar(200) NOT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `send_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `sign_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `express_status` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`express_id`),
+  KEY `fk_express_sender` (`sender`),
+  KEY `fk_express_receiver` (`receiver`),
+  KEY `fk_express_province` (`province`),
+  KEY `fk_express_city` (`city`),
+  KEY `fk_express_district` (`district`),
+  KEY `fk_express_express_status` (`express_status`),
+  CONSTRAINT `fk_express_city` FOREIGN KEY (`city`) REFERENCES `cities` (`id`),
+  CONSTRAINT `fk_express_district` FOREIGN KEY (`district`) REFERENCES `districts` (`id`),
+  CONSTRAINT `fk_express_express_status` FOREIGN KEY (`express_status`) REFERENCES `express_status` (`express_status_id`),
+  CONSTRAINT `fk_express_province` FOREIGN KEY (`province`) REFERENCES `provinces` (`id`),
+  CONSTRAINT `fk_express_receiver` FOREIGN KEY (`receiver`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `fk_express_sender` FOREIGN KEY (`sender`) REFERENCES `users` (`user_id`)
+>>>>>>> 26b3fee32643214fa466f9de28d6311828098e52
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO express_status(express_status_id,express_status_desc) VALUES (1,'草稿');
 INSERT INTO express_status(express_status_id,express_status_desc) VALUES (2,'待签收');
 INSERT INTO express_status(express_status_id,express_status_desc) VALUES (3,'已签收');
+
+
+

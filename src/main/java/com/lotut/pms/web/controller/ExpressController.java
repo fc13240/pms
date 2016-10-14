@@ -1,6 +1,7 @@
 package com.lotut.pms.web.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -10,12 +11,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.ContactAddress;
-import com.lotut.pms.domain.CustomerSupport;
 import com.lotut.pms.domain.Express;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
@@ -104,6 +104,12 @@ public class ExpressController {
 	public void loadContact(Model model,int receiverId,HttpServletResponse response) throws IOException{
 		ContactAddress contactAddresses = expressService.getUserContactAddressById(receiverId);
 		WebUtils.writeJsonStrToResponse(response, contactAddresses);
+	}
+	
+	@RequestMapping(path="/changeExpressStatus", method=RequestMethod.POST)
+	public void changeExpressStatus(@RequestParam("expressId")long expressId,@RequestParam("expressStatus")int expressStatus,PrintWriter out) {
+		expressService.changeExpressStatus(expressId, expressStatus);
+		out.write(1);
 	}
 	
 }

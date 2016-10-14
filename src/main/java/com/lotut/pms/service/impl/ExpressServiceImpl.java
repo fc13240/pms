@@ -46,8 +46,8 @@ public class ExpressServiceImpl implements ExpressService{
 	}
 
 	@Override
-	public void changeExpressStatus(long expressId, int status) {
-		expressDao.changeExpressStatus(expressId, status);
+	public void changeExpressStatus(long expressId, int expressStatus) {
+		expressDao.changeExpressStatus(expressId, expressStatus);
 	}
 	
 	@Override

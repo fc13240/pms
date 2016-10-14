@@ -18,9 +18,9 @@ public interface ExpressService {
 	List<Express> getUserReceiverExpressListByPage (Page page);
 	
 	int getUserReceiverExpressCount(int userId);
-	
-	void changeExpressStatus(long expressId,int status);
-	
+
 	ContactAddress getUserContactAddressById(int receiverId);
+
+	void changeExpressStatus(long expressId,int expressStatus);
 
 }

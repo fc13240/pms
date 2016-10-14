@@ -42,8 +42,8 @@ public class ExpressMybatisDao extends SqlSessionDaoSupport implements ExpressDa
 	}
 
 	@Override
-	public void changeExpressStatus(long expressId, int status) {
-		expressMapper.changeExpressStatus(expressId, status);
+	public void changeExpressStatus(long expressId, int expressStatus) {
+		expressMapper.changeExpressStatus(expressId, expressStatus);
 	}
 
 	@Override

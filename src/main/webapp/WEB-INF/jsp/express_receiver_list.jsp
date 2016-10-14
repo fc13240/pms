@@ -33,7 +33,7 @@
 					<table id="simple-table" class="table table-striped table-bordered table-hover">
 					  <thead>
 						<tr class="simple_bag">
-						  <th class="center" width="60">
+						  <th class="center" width="45">
 						  	<label class="pos-rel">
 								<input type="checkbox" class="patent-check-item" id="checkall"  name="checkall" />
 								<span class="lbl"></span> 
@@ -58,7 +58,7 @@
 								  <input type="checkbox" class="patent-check-item" express="<c:out value='${express.expressId}'/>">
 								  <span class="lbl"></span>
 							  </label>
-						  ${status.count}
+						  ${status.count + (page.currentPage-1)*page.pageSize}
 						  </td>
 						  <td class="center" style="text-align:center">${express.sender.username}</td>
 						  <td class="center" style="text-align:center">${express.receiver.username}</td>
@@ -66,15 +66,17 @@
 						  ${express.contactAddress.detailAddress}
 						  </td>
 						  <td class="center" style="text-align:center">${express.expressCompany}${express.expressNo}</td>
-						  <td class="center" style="text-align:center">"<fmt:formatDate value="${express.sendTime}" pattern="yyyy-MM-dd"/>"</td>
-						  <td class="center" style="text-align:center"></td>
+						  <td class="center" style="text-align:center"><fmt:formatDate value="${express.sendTime}" pattern="yyyy-MM-dd"/></td>
+						  <td class="center" style="text-align:center">${express.phone}</td>
 						  <td class="center" style="text-align:center">${express.expressRemark}</td>
 						  <td class="center" style="text-align:center">${express.expressStatus.expressStatusDesc}</td>
+					 
 						  <td class="center" style="text-align:center">
-						  	<c:if test="${express.expressStatus.expressStatusId == 2}">
-						  		<a href="<s:url value='/user/updateUserContactAddressesFrom.html'/>?id=<c:out value=''/>"> 置为已收件 </a>
-						  	</c:if>
+						   		 <c:if test="${express.expressStatus.expressStatusId == 2}">
+						  			<a href="javascript:return void" onclick="changeExpressStatus(${express.expressId},3)"> 置为已收件 </a>
+						  		</c:if>
 						  </td>
+							  
 						</tr>
 					  </c:forEach>
 					</table>
@@ -176,7 +178,18 @@ function setPageSize() {
 			location.reload();
 		}
 	});		
-}	
+}
+
+function changeExpressStatus(id,status){
+	$.ajax({
+		url: "<s:url value='/express/changeExpressStatus.html'/>",
+		data:{"expressId" : id ,"expressStatus": status},
+		type: 'post', 
+		success: function() {
+			location.reload();
+		}
+	});	
+}
 </script>
 
 </body>

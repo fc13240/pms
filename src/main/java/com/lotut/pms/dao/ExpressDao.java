@@ -15,9 +15,10 @@ public interface ExpressDao {
 	
 	int getUserReceiverExpressCount(int userId);
 	
-	void changeExpressStatus(long expressId,int status);
-	
 	void addExpress(Express express);
 	
 	ContactAddress getUserContactAddressById(int receiverId);
+
+	void changeExpressStatus(long expressId,int expressStatus);
+	
 }	
