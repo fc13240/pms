@@ -970,8 +970,7 @@ ALTER TABLE common_inventor MODIFY inventor_name VARCHAR(200);
 create table if not exists express_status(
 	express_status_id int primary key auto_increment,
 	express_status_desc varchar(30)
-)
-
+);
 
 CREATE TABLE express (
   express_id bigint(20) NOT NULL AUTO_INCREMENT,

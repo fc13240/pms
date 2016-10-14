@@ -1,10 +1,9 @@
 package com.lotut.pms.domain;
 
-public class AppPersonSearchCondition {
+public class ExpressSearchCondition {
 	private int userId;
 	private String keyword;
 	private Page page;
-	
 	
 	public int getUserId() {
 		return userId;
@@ -34,7 +33,5 @@ public class AppPersonSearchCondition {
 		
 		return "&keyword="+keywordStr;
 		
-		
 	}
-	
 }
