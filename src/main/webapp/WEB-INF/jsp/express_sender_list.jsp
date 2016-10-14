@@ -71,7 +71,9 @@
 						  <td class="center" style="text-align:center">${express.expressRemark}</td>
 						  <td class="center" style="text-align:center">${express.expressStatus.expressStatusDesc}</td>
 						  <td class="center" style="text-align:center">
-						  	<a href="<s:url value='/user/updateUserContactAddressesFrom.html'/>?id=<c:out value=''/>"> 修改 </a>
+						  	<c:if test="${express.expressStatus.expressStatusId == 1}">
+						  		<a href="<s:url value='/user/updateUserContactAddressesFrom.html'/>?id=<c:out value=''/>"> 修改 </a>
+						  	</c:if>
 						  </td>
 						</tr>
 					  </c:forEach>
