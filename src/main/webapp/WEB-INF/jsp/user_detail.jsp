@@ -136,10 +136,16 @@
 		function validateQQNumber(QQNumber) {
 			var reg = new RegExp("^[0-9]*$");
 			document.getElementById("QQNumberError").style.display = "none";
-			if (reg.test(QQNumber)) {
-					return true;
-			} else {
-				document.getElementById("QQNumberError").style.display = "";
+			if(QQNumber.length<20){
+				if (reg.test(QQNumber)) {
+						return true;
+				} else {
+					document.getElementById("QQNumberError").style.display = "";
+					return false;
+				}
+				
+			}else{
+				$("#QQNumberError").css("display","block");
 				return false;
 			}
 		}
