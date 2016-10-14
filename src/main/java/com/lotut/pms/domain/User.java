@@ -26,7 +26,7 @@ public class User implements Serializable, UserDetails {
 	private String phone;
 	private String email;
 	private Date joinDate;
-	private int qq;
+	private String qq;
 	private String weChat;
 	private String avatarUrl;
 	private Set<GrantedAuthority> authorities = new HashSet<>();
@@ -186,11 +186,11 @@ public class User implements Serializable, UserDetails {
 		this.phone = phone;
 	}
 
-	public int getQq() {
+	public String getQq() {
 		return qq;
 	}
 
-	public void setQq(int qq) {
+	public void setQq(String qq) {
 		this.qq = qq;
 	}
 

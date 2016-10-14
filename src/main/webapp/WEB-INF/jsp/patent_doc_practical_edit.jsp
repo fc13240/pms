@@ -883,7 +883,7 @@ margin: 1px 0 0 1px;}
 	         <div class = "modal-body" id="modal-body">
 					 <h5 ><span style="color:red;font-size:18px;">* </span>姓名或名称:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalAppPersonName" required/>
-					<span style="color: red; display: none;" id=appPersonNameError>该处应输入不大于20字段</span>
+					<span style="color: red; display: none;" id=appPersonNameError>该处应输入不大于200字段</span>
 					<br>
 					<h5><span style="color:red;font-size:18px;">* </span>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="modalPhoneRece" type="text" required onblur="validatePhoneNumber(this.value)"/>
@@ -965,7 +965,7 @@ margin: 1px 0 0 1px;}
 					<input type="hidden" id="updateModalPersonId"  required/>
 					 <h5><span style="color:red;font-size:18px;">* </span>姓名或名称:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalAppPersonName" required/>
-					<span style="color: red; display: none;" id="updateAppPersonNameError">请输入长度不超过20且不为空的姓名</span>
+					<span style="color: red; display: none;" id="updateAppPersonNameError">请输入长度不超过200且不为空的姓名</span>
 					<br>
 					<h5> <span style="color:red;font-size:18px;">* </span>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="updateModalPhoneRece" type="text" required onblur="validatePhoneNumber(this.value)"/>
@@ -1082,7 +1082,7 @@ margin: 1px 0 0 1px;}
 	           <div class="lt-box" style="padding:20px;">
 			       	<h5><span style="color:red;font-size:18px;">* </span>姓名:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorName" required onblur="validateInfoNumber(this.value)"/>
-					<span style="color: red; display: none;" id=inventorNameError>该处应输入不大于20字段</span>
+					<span style="color: red; display: none;" id=inventorNameError>该处应输入不大于200字段</span>
 					<br>	   
 					<h5><span style="color:red;font-size:18px;">* </span>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorNumber" required onblur="validatePhoneNumber(this.value)"/>
@@ -1148,7 +1148,7 @@ margin: 1px 0 0 1px;}
 					<input type="hidden" id="updateModalInventorId" required onblur="validateInfoNumber(this.value)"/>
 			       	<h5><span style="color:red;font-size:18px;">* </span>姓名:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorName" required onblur="validateInfoNumber(this.value)"/>
-					<span style="color: red; display: none;" id="updateInventorName">该处应输入不大于20字段</span>
+					<span style="color: red; display: none;" id="updateInventorName">该处应输入不大于200字段</span>
 					<br>	   
 					<h5><span style="color:red;font-size:18px;">* </span>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorNumber" required onblur="validatePhoneNumber(this.value)"/>
@@ -1938,7 +1938,7 @@ function submitAppPersonForm(){
 	var proxyUrl = $("#patentDocEntrustFileHidden").val();
 	var patentDocId =${patentDoc.patentDocId};
 	if(validateAppPersonFormWayOne(phoneRece,"appPersonPhoneError")&
-	   validateAppPersonFormWayTwo(appPersonName,"appPersonNameError")&
+	   validateFormWaySeven(appPersonName,"appPersonNameError")&
 	   validateAppPersonFormWayFour(postcodeAddress,"appPersonPostcodeAddress")&
 	   validateFormOtherInfo(otherInfo,"appPersonOtherInfoError")
 	   
@@ -2016,7 +2016,7 @@ function submitInventorForm(){
 	var  modalInventorComment= $("#modalInventorComment").val();
 	var  inventorUrl= $("#patentDocInventorFileHidden").val();
 	var  patentDocId = ${patentDoc.patentDocId};
-	if(validateAppPersonFormWayTwo(modalInventorName,"inventorNameError")&
+	if(validateFormWaySeven(modalInventorName,"inventorNameError")&
 	   validateAppPersonFormWayThree(modalInventorNumber,"inventorNumberError")
 	){
 		var formData={"inventorName":modalInventorName,"inventorNumber":modalInventorNumber,
@@ -2184,7 +2184,7 @@ function submitUpdateAppPersonForm(){
 	var transactionYear = $("#updateModalTransactionYear").val();
 	var patentDocId=${patentDoc.patentDocId};
 	
-	if(validateAppPersonFormWayTwo(name,"updateAppPersonNameError")&
+	if(validateFormWaySeven(name,"updateAppPersonNameError")&
 	   validateAppPersonFormWayTwo(idNumber,"updatePhoneReceError")&
 	   validateAppPersonFormWayFour(postcodeAddress,"updatePostcodeAddressError")&
 	   validateFormOtherInfo(otherInformation,"updateModalOtherInfoError")
@@ -2307,11 +2307,11 @@ function submitUpdateInventorForm(){
 	var  inventorEmail= $("#updateModalInventorEmail").val();
 	var  inventorOtherInformation= $("#updateModalInventorOtherInformation").val();
 	var  patentDocId = ${patentDoc.patentDocId};
-	if(validateAppPersonFormWayTwo(inventorName,"updateInventorName")&
-			validateAppPersonFormWayThree(inventorNumber,"updateInventorNumber")&
-			validateAppPersonFormWayFive(inventorNationality,"updateInventorNationality")&
-			validateAppPersonFormWayFive(inventorMobile,"updateInventorMobile")&
-			validateAppPersonFormWaySix(inventorOtherInformation,"updateInventorOtherInformation")
+	if(validateFormWaySeven(inventorName,"updateInventorName")&
+		validateAppPersonFormWayThree(inventorNumber,"updateInventorNumber")&
+		validateAppPersonFormWayFive(inventorNationality,"updateInventorNationality")&
+		validateAppPersonFormWayFive(inventorMobile,"updateInventorMobile")&
+		validateAppPersonFormWaySix(inventorOtherInformation,"updateInventorOtherInformation")
 	   ){
 	   
 		var formData={"inventorId":inventorId,"inventorName":inventorName,"inventorNumber":inventorNumber,
@@ -2518,6 +2518,16 @@ function validateAppPersonFormWayFour(value,id) {
 			$("#"+id).css("display","none");
 			return true;
 		}
+}
+
+function validateFormWaySeven(value,id) {
+	if (value.length>200||value.length==0) {
+		$("#"+id).css("display","block");
+		return false;
+	} else {
+		$("#"+id).css("display","none");
+		return true;
+	}
 }
 
 function validateFormOtherInfo(value,id) {

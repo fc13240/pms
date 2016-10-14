@@ -880,7 +880,7 @@ margin: 1px 0 0 1px;}
 	         <div class = "modal-body" id="modal-body">
 					<h5><span style="color:red;font-size:18px;">* </span>姓名或名称:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalAppPersonName"/>
-					<span style="color: red; display: none;" id=appPersonNameError>该处应输入不大于20字段</span>
+					<span style="color: red; display: none;" id=appPersonNameError>该处应输入不大于200字段</span>
 					<br>
 					<h5><span style="color:red;font-size:18px;">* </span>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="modalPhoneRece" type="text"/>
@@ -962,7 +962,7 @@ margin: 1px 0 0 1px;}
 					<input type="hidden" id="updateModalPersonId"  required/>
 					 <h5><span style="color:red;font-size:18px;">* </span>姓名或名称:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalAppPersonName"/>
-					<span style="color: red; display: none;" id="updateAppPersonNameError">请输入长度不超过20字符</span>
+					<span style="color: red; display: none;" id="updateAppPersonNameError">请输入长度不超过200字符</span>
 					<br>
 					<h5><span style="color:red;font-size:18px;">* </span>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="updateModalPhoneRece" type="text" required onblur="validatePhoneNumber(this.value)"/>
@@ -1079,7 +1079,7 @@ margin: 1px 0 0 1px;}
 	           <div class="lt-box" style="padding:20px;">
 			       	<h5><span style="color:red;font-size:18px;">* </span>姓名:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorName"/>
-					<span style="color: red; display: none;" id=inventorNameError>该处应输入不大于20字段</span>
+					<span style="color: red; display: none;" id=inventorNameError>该处应输入不大于200字段</span>
 					<br>	   
 					<h5><span style="color:red;font-size:18px;">* </span>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalInventorNumber"/>
@@ -1145,7 +1145,7 @@ margin: 1px 0 0 1px;}
 					<input type="hidden" id="updateModalInventorId"/>
 			       	<h5><span style="color:red;font-size:18px;">* </span>姓名:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorName"/>
-					<span style="color: red; display: none;" id="updateInventorName">该处应输入不大于20字段</span>
+					<span style="color: red; display: none;" id="updateInventorName">该处应输入不大于200字段</span>
 					<br>	   
 					<h5><span style="color:red;font-size:18px;">* </span>证件号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalInventorNumber"/>
@@ -1866,7 +1866,7 @@ function updateImgName(value,linkSeqNo){
 		var proxyUrl = $("#patentDocEntrustFileHidden").val();
 		var patentDocId =${patentDoc.patentDocId};
 		if(validateAppPersonFormWayOne(phoneRece,"appPersonPhoneError")&
-		   validateAppPersonFormWayTwo(appPersonName,"appPersonNameError")&
+		   validateFormWaySeven(appPersonName,"appPersonNameError")&
 		  // validateAppPersonFormWayTwo(postcodeAddress,"appPersonPostcodeAddress")
 		   validateAppPersonFormWayFour(postcodeAddress,"appPersonPostcodeAddressError")&
 		   validateFormOtherInfo(otherInfo,"appPersonOtherInfoError")
@@ -1944,7 +1944,7 @@ function updateImgName(value,linkSeqNo){
 		var  modalInventorComment= $("#modalInventorComment").val();
 		var  inventorUrl= $("#patentDocInventorFileHidden").val();
 		var  patentDocId = ${patentDoc.patentDocId};
-		if(validateAppPersonFormWayTwo(modalInventorName,"inventorNameError")&
+		if(validateFormWaySeven(modalInventorName,"inventorNameError")&
 		   validateAppPersonFormWayThree(modalInventorNumber,"inventorNumberError")
 		){
 			var formData={"inventorName":modalInventorName,"inventorNumber":modalInventorNumber,
@@ -2112,7 +2112,7 @@ function updateImgName(value,linkSeqNo){
 		var transactionYear = $("#updateModalTransactionYear").val();
 		var patentDocId=${patentDoc.patentDocId};
 		
-		if(validateAppPersonFormWayTwo(name,"updateAppPersonNameError")&
+		if(validateFormWaySeven(name,"updateAppPersonNameError")&
 		   validateAppPersonFormWayTwo(idNumber,"updatePhoneReceError")&
 		   validateAppPersonFormWayFour(postcodeAddress,"updatePostcodeAddressError")&
 		   validateFormOtherInfo(otherInformation,"updateModalOtherInfoError")
@@ -2234,7 +2234,7 @@ function updateImgName(value,linkSeqNo){
 		var  inventorEmail= $("#updateModalInventorEmail").val();
 		var  inventorOtherInformation= $("#updateModalInventorOtherInformation").val();
 		var  patentDocId = ${patentDoc.patentDocId};
-		if(validateAppPersonFormWayTwo(inventorName,"updateInventorName")&
+		if(validateFormWaySeven(inventorName,"updateInventorName")&
 			validateAppPersonFormWayThree(inventorNumber,"updateInventorNumber")&
 			validateAppPersonFormWayFive(inventorNationality,"updateInventorNationality")&
 			validateAppPersonFormWayFive(inventorMobile,"updateInventorMobile")&
@@ -2424,6 +2424,7 @@ function updateImgName(value,linkSeqNo){
 				return true;
 			}
 	}
+	
 	function validateAppPersonFormWayThree(value,id) {
 			if (value.length>20||value.length<=0) {
 				$("#"+id).css("display","block");
@@ -2461,7 +2462,15 @@ function updateImgName(value,linkSeqNo){
 				return true;
 			}
 	}
-	
+	function validateFormWaySeven(value,id) {
+		if (value.length>200||value.length==0) {
+			$("#"+id).css("display","block");
+			return false;
+		} else {
+			$("#"+id).css("display","none");
+			return true;
+		}
+	}
 	function validateFileForm(value,id) {
 		if (value.length<=0) {
 			$("#"+id).css("display","block");

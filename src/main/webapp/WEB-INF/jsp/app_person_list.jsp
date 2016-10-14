@@ -110,7 +110,16 @@
                     				</c:if>
 								</td>
 								<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
-								<td style="text-align:center"><c:out value="${appPerson.shareUsersAsString}"/></td>
+								
+								<td style="text-align:center">
+								<c:forEach items="${appPerson.shareUsers}" var="shareUser" varStatus="s">								
+									<a href="javascript:return void" onclick="searchShareUserDetail(${shareUser.userId})" >
+					        			<c:out value="${shareUser.username}"/>
+					        			<c:if test="${!s.last}">;</c:if>
+					        		</a>					        	
+					       	 	</c:forEach>
+								</td>
+								
 								<td><a href="<s:url value='/appPerson/findOneAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a> 
 								<a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">删除 </a>
 								<a href="<s:url value='/appPerson/showFriends.html'/>?appPersons=<c:out value='${appPerson.appPersonId}'/>">分享</a>
@@ -186,6 +195,11 @@
 	function addAppPerson(){
 		var url = "<s:url value='/appPerson/appPersonAddForm.html'/>";
 		location.href = url
+	}
+	
+	function searchShareUserDetail(shareUserId){
+		var url = "<s:url value='/user/searchShareUserDetail.html'/>?shareUserId=" + shareUserId;
+		window.open(url);
 	}
 	
 	$('tr th input.check-item').click(function() {
