@@ -66,7 +66,7 @@ public class ExpressController {
 		page.setTotalRecords(totalCount);
 		List<Express> expressResult = expressService.getUserSenderExpressListByPage(page);
 		model.addAttribute("express", expressResult);
-		return "";
+		return "expresss_sender_list";
 	}
 	
 	@RequestMapping(path="/getUserReceiverExpressList", method=RequestMethod.GET)
@@ -82,7 +82,7 @@ public class ExpressController {
 		page.setTotalRecords(totalCount);
 		List<Express> expressResult = expressService.getUserReceiverExpressListByPage(page);
 		model.addAttribute("express", expressResult);
-		return "";
+		return "express_receiver_list";
 	}
 	
 }
