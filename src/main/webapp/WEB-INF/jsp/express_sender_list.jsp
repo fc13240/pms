@@ -27,6 +27,20 @@
 		  <!--right begin-->
 		  <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
+				
+				 <div class="cl top1" style="height:10px;">
+				    
+					  <form class="form-inline" action="<s:url value='/inventor/searchInventor.html'/>" method="get">
+					  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
+					    <div class="form-group">
+					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="快递状态/快递单号 /快递内容" class="t-input form-control"/>	
+					    
+					     <button class="button button-caution button-rounded" type="submit" style="width:100px;">搜索已发送快递</button>
+					    </div>
+					  </form>
+
+    			</div>
+    			
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
 					

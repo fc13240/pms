@@ -1032,7 +1032,6 @@ CREATE TABLE `express` (
   CONSTRAINT `fk_express_province` FOREIGN KEY (`province`) REFERENCES `provinces` (`id`),
   CONSTRAINT `fk_express_receiver` FOREIGN KEY (`receiver`) REFERENCES `users` (`user_id`),
   CONSTRAINT `fk_express_sender` FOREIGN KEY (`sender`) REFERENCES `users` (`user_id`)
->>>>>>> 26b3fee32643214fa466f9de28d6311828098e52
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO express_status(express_status_id,express_status_desc) VALUES (1,'草稿');

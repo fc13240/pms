@@ -79,5 +79,6 @@
 		<typeAlias alias="GroupMembers" type="com.lotut.pms.domain.GroupMembers"/>
 		<typeAlias alias="Express" type="com.lotut.pms.domain.Express"/>
 		<typeAlias alias="ExpressStatus" type="com.lotut.pms.domain.ExpressStatus"/>
+		<typeAlias alias="ExpressSearchCondition" type="com.lotut.pms.domain.ExpressSearchCondition"/>
 	</typeAliases>  
 </configuration>
