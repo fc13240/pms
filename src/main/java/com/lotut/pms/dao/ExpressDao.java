@@ -29,4 +29,8 @@ public interface ExpressDao {
 	List<Express> searchUserReceiverExpressByPage(ExpressSearchCondition searchCondition);
 	
 	int searchUserReceiverExpressCount(ExpressSearchCondition searchCondition);
+	
+	void updateExpress(Express express);
+	
+	Express getExpressById(long expressId);
 }	

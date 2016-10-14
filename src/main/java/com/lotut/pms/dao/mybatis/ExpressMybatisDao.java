@@ -79,4 +79,14 @@ public class ExpressMybatisDao extends SqlSessionDaoSupport implements ExpressDa
 	public 	ContactAddress getUserContactAddressById(int receiverId){
 		return expressMapper.getUserContactAddressById(receiverId);
 	}
+
+	@Override
+	public void updateExpress(Express express) {
+		expressMapper.updateExpress(express);
+	}
+
+	@Override
+	public Express getExpressById(long expressId) {
+		return expressMapper.getExpressById(expressId);
+	}
 }
