@@ -10,6 +10,7 @@
 		<association property="customerOrganization" resultMap="CustomerOrganization"/>
 		<association property="processOrganization" resultMap="ProcessOrganization"/>
 		<association property="techOrganization" resultMap="TechOrganization"/>
+		<association property="proxyOrganization" resultMap="ProxyOrganization"/>
 		<collection property="userTypes" ofType="GroupMembers">
 				<id property="id" column="id"/>
 				<result property="groupId" column="group_id"/>
@@ -30,14 +31,20 @@
 		<id property="userId" column="tech_organization_id"/>
 		<result property="username" column="tech_organization_name"/>
 	</resultMap>
+	<resultMap type="User" id="ProxyOrganization">
+		<id property="userId" column="proxy_organization_id"/>
+		<result property="username" column="proxy_organization_name"/>
+	</resultMap>
 	<select id="getUserFriends" parameterType="int" resultMap="FriendResultMap">
 	SELECT DISTINCT f.friend, u.user_id,u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id AS group_id,g.username AS username,
 		pr.org_user_id AS customer_organization_id,cu.username AS customer_organization_name ,pro.org_user_id AS process_organization_id,pu.username AS process_organization_name,
-		prox.org_user_id  AS tech_organization_id,tu.username AS tech_organization_name
+		prox.org_user_id  AS tech_organization_id,tu.username AS tech_organization_name,pru.user_id AS proxy_organization_id,pru.username as proxy_organization_name
 		  FROM friends f JOIN users u ON f.friend = u.user_id JOIN group_members g ON u.username = g.username 
 		  LEFT JOIN customer_supports c ON c.user_id = f.friend  LEFT JOIN proxy_org pr ON pr.org_id=c.proxy_org_id LEFT JOIN users cu ON cu.user_id = pr.org_user_id
 		  LEFT JOIN process_person p ON p.user_id =  f.friend LEFT JOIN proxy_org pro ON pro.org_id=p.proxy_org_id  LEFT JOIN users pu ON pu.user_id = pro.org_user_id
 		  LEFT JOIN tech_person t ON t.user_id =f.friend LEFT JOIN proxy_org prox ON prox.org_id=t.proxy_org_id LEFT JOIN users tu ON tu.user_id = prox.org_user_id 
+		  LEFT JOIN proxy_org proxy ON f.friend = proxy.org_user_id LEFT JOIN proxy_org parent ON parent.org_id = proxy.parent_org_id LEFT JOIN  users pru ON pru.user_id 
+		  = parent.org_user_id 
 		 WHERE USER = #{userId};
 	</select>
 	<delete id="deleteFriend">
@@ -68,11 +75,13 @@
 		</if>		
 		SELECT DISTINCT f.friend, u.user_id,u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id AS group_id,g.username AS username,
 		pr.org_user_id AS customer_organization_id,cu.username AS customer_organization_name ,pro.org_user_id AS process_organization_id,pu.username AS process_organization_name,
-		prox.org_user_id  AS tech_organization_id,tu.username AS tech_organization_name
+		prox.org_user_id  AS tech_organization_id,tu.username AS tech_organization_name,pru.user_id AS proxy_organization_id,pru.username as proxy_organization_name
 		  FROM friends f JOIN users u ON f.friend = u.user_id JOIN group_members g ON u.username = g.username 
 		  LEFT JOIN customer_supports c ON c.user_id = f.friend  LEFT JOIN proxy_org pr ON pr.org_id=c.proxy_org_id LEFT JOIN users cu ON cu.user_id = pr.org_user_id
 		  LEFT JOIN process_person p ON p.user_id =  f.friend LEFT JOIN proxy_org pro ON pro.org_id=p.proxy_org_id  LEFT JOIN users pu ON pu.user_id = pro.org_user_id
 		  LEFT JOIN tech_person t ON t.user_id =f.friend LEFT JOIN proxy_org prox ON prox.org_id=t.proxy_org_id LEFT JOIN users tu ON tu.user_id = prox.org_user_id 
+		  LEFT JOIN proxy_org proxy ON f.friend = proxy.org_user_id LEFT JOIN proxy_org parent ON parent.org_id = proxy.parent_org_id LEFT JOIN  users pru ON pru.user_id 
+		  = parent.org_user_id 
 		 WHERE USER = #{userId}
 		<if test="keyword != null and keyword != ''">
 			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern} or f.remark_name like #{keyword_pattern})
@@ -104,11 +113,13 @@
 		</if>		
 		SELECT DISTINCT f.friend, u.user_id,u.username, u.name ,u.email,u.phone, f.remark_name ,g.group_id AS group_id,g.username AS username,
 		pr.org_user_id AS customer_organization_id,cu.username AS customer_organization_name ,pro.org_user_id AS process_organization_id,pu.username AS process_organization_name,
-		prox.org_user_id  AS tech_organization_id,tu.username AS tech_organization_name
+		prox.org_user_id  AS tech_organization_id,tu.username AS tech_organization_name,pru.user_id AS proxy_organization_id,pru.username as proxy_organization_name
 		  FROM friends f JOIN users u ON f.friend = u.user_id JOIN group_members g ON u.username = g.username 
 		  LEFT JOIN customer_supports c ON c.user_id = f.friend  LEFT JOIN proxy_org pr ON pr.org_id=c.proxy_org_id LEFT JOIN users cu ON cu.user_id = pr.org_user_id
 		  LEFT JOIN process_person p ON p.user_id =  f.friend LEFT JOIN proxy_org pro ON pro.org_id=p.proxy_org_id  LEFT JOIN users pu ON pu.user_id = pro.org_user_id
 		  LEFT JOIN tech_person t ON t.user_id =f.friend LEFT JOIN proxy_org prox ON prox.org_id=t.proxy_org_id LEFT JOIN users tu ON tu.user_id = prox.org_user_id 
+		  LEFT JOIN proxy_org proxy ON f.friend = proxy.org_user_id LEFT JOIN proxy_org parent ON parent.org_id = proxy.parent_org_id LEFT JOIN  users pru ON pru.user_id 
+		  = parent.org_user_id 
 		 WHERE USER = #{userId}
 		<if test="keyword != null and keyword != ''">
 			and (u.username like #{keyword_pattern} or u.name like #{keyword_pattern} or f.remark_name like #{keyword_pattern})
