@@ -87,12 +87,12 @@
 				nvl.notice_id AS notice_view_status
 				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
 						join notices n on n.patent = p.patent_id
-						LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id
+						LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id and nvl.user_id = #{userId} 
 						left join users pu on pu.user_id = n.process_user
 						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
 						join notice_process_status nps on nps.notice_process_status_id = n.process_status
 			 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1) and nps.notice_process_status_id=1
-			  order by nvl.notice_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_person, p.patent_id
+			  order by nvl.notice_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
 				limit #{startIndex}, #{pageSize}) as un
 			join user_patents up on un.patent_id = up.patent
 		  	join users u on up.user = u.user_id	
@@ -169,7 +169,7 @@
 		</if>	
 		select count(*) 
 		  from notices n join patents p on n.patent = p.patent_id
-		  LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id
+		  LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id and nvl.user_id = #{userId}
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1)	
 		 	<if test="patentType != null">
@@ -253,7 +253,7 @@
 				nvl.notice_id AS notice_view_status
 				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
 						join notices n on n.patent = p.patent_id
-						LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id
+						LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id and nvl.user_id = #{userId}
 						left join users pu on pu.user_id = n.process_user
 						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
 						join notice_process_status nps on nps.notice_process_status_id = n.process_status
@@ -323,7 +323,7 @@
 					</choose>
 					
 				</if> 
-			  order by nvl.notice_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_person, p.patent_id
+			  order by nvl.notice_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
 				limit #{page.startIndex}, #{page.pageSize}) as un
 			join user_patents up on un.patent_id = up.patent
 		  	join users u on up.user = u.user_id		
@@ -492,13 +492,13 @@
 				nvl.notice_id AS notice_view_status
 				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
 						join notices n on n.patent = p.patent_id
-						LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id
+						LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id and nvl.user_id = #{userId}
 						left join users pu on pu.user_id = n.process_user
 						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
 						join notice_process_status nps on nps.notice_process_status_id = n.process_status
 			 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1)
 				and nvl.notice_id is  null		 
-			  order by n.dispatch_date desc, p.app_person, p.patent_id
+			  order by nvl.notice_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
 				limit #{startIndex}, #{pageSize}) as un
 			join user_patents up on un.patent_id = up.patent
 		  	join users u on up.user = u.user_id		
@@ -511,7 +511,7 @@
 	<select id="unreadNoticeCount" resultType="int">
 		select count(*) 
 		  from notices n join patents p on n.patent = p.patent_id
-		  LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id
+		  LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id and nvl.user_id = #{userId}
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1)	
 		and nvl.notice_id is  null					 			 		 
