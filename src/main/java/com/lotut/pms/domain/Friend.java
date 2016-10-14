@@ -1,18 +1,15 @@
 package com.lotut.pms.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Friend {
 	private int friendId;
-//	private String username;
-//	private String realname;
-//	private String email;
-//	private String phone;
 	private String remarkName;
 	private User user;
 	private List<GroupMembers> userTypes;
-	private User organization;
+	private User customerOrganization;
+	private User processOrganization;
+	private User techOrganization;
 	public int getFriendId() {
 		return friendId;
 	}
@@ -31,12 +28,8 @@ public class Friend {
 	public void setUserTypes(List<GroupMembers> userType) {
 		this.userTypes = userType;
 	}
-	public User getOrganization() {
-		return organization;
-	}
-	public void setOrganization(User organization) {
-		this.organization = organization;
-	}
+	
+	
 	public String getRemarkName() {
 		return remarkName;
 	}
@@ -68,6 +61,38 @@ public class Friend {
 			
 		}
 		return "";
+	}
+	public User getCustomerOrganization() {
+		return customerOrganization;
+	}
+	public void setCustomerOrganization(User customerOrganization) {
+		this.customerOrganization = customerOrganization;
+	}
+	public User getProcessOrganization() {
+		return processOrganization;
+	}
+	public void setProcessOrganization(User processOrganization) {
+		this.processOrganization = processOrganization;
+	}
+	public User getTechOrganization() {
+		return techOrganization;
+	}
+	public void setTechOrganization(User techOrganization) {
+		this.techOrganization = techOrganization;
+	}
+	
+	public String getOrganization(){
+		if(this.customerOrganization!=null){
+			return customerOrganization.getUsername();
+		}
+		if(this.processOrganization!=null){
+			return processOrganization.getUsername();
+		}
+		if(this.techOrganization!=null){
+			return techOrganization.getUsername();
+		}
+		return "";
+		
 	}
 	
 }
