@@ -10,6 +10,7 @@ public class Friend {
 	private User customerOrganization;
 	private User processOrganization;
 	private User techOrganization;
+	private User proxyOrganization;
 	public int getFriendId() {
 		return friendId;
 	}
@@ -81,6 +82,12 @@ public class Friend {
 		this.techOrganization = techOrganization;
 	}
 	
+	public User getProxyOrganization() {
+		return proxyOrganization;
+	}
+	public void setProxyOrganization(User proxyOrganization) {
+		this.proxyOrganization = proxyOrganization;
+	}
 	public String getOrganization(){
 		if(this.customerOrganization!=null){
 			return customerOrganization.getUsername();
@@ -90,6 +97,9 @@ public class Friend {
 		}
 		if(this.techOrganization!=null){
 			return techOrganization.getUsername();
+		}
+		if(this.proxyOrganization!=null){
+			return proxyOrganization.getUsername();
 		}
 		return "";
 		
