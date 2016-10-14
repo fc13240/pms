@@ -61,7 +61,7 @@
 						  ${status.count}
 						  </td>
 						  <td class="center" style="text-align:center">${express.sender.username}</td>
-						  <td class="center" style="text-align:center">${express.sender.receiver}</td>
+						  <td class="center" style="text-align:center">${express.receiver.username}</td>
 						  <td class="center" style="text-align:center">${express.contactAddress.provinceName} ${express.contactAddress.cityName} ${express.contactAddress.districtName}
 						  ${express.contactAddress.detailAddress}
 						  </td>
