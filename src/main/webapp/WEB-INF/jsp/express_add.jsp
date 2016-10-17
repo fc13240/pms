@@ -59,11 +59,6 @@
 						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" id="receiverName"  type="text" required maxLength="30"/>
 						<span id="receiverError" style="color: red; display: none;">请输入的收件人姓名不要超过30字</span>
 						<br>
-						<h5>联系人:</h5>
-						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" id="contactPerson" name="contactPerson" type="text" required maxLength="200"/>
-						<span id="contactPersonError" style="color: red; display: none;">请输入的联系人在200个字以内</span>
-						<br>
-						
 						<h5>快递地址 :<a href="javascript:void(0)" onclick="loadFriendAddress()">选择好友地址</a>
 							<%-- <select  class="form-control" style="width:120px;display:inline;" id="friendContactAddress" required onchange="loadContact(this.value)">
 						  		<option value=''>请选择</option>
@@ -86,7 +81,11 @@
 						</select>
 						<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="contactAddress.detailAddress" id="detailAddress" required placeholder="详细地址"  maxLength="100"/>
 						<span id="detailAddressError" style="color: red; display: none;">请输入的详细地址不要超过100字</span>
-				        <br>	
+				        <br>
+				        <h5>联系人:</h5>
+						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" id="contactPerson" name="contactPerson" type="text" required maxLength="200"/>
+						<span id="contactPersonError" style="color: red; display: none;">请输入的联系人在200个字以内</span>
+						<br>	
 				       	<h5>手机号码或电话号码：</h5>
 				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="phone" id="phone" value="" maxLength="20" required >
 				       <!-- 	onblur="validatePhoneNumber(this.value)" -->

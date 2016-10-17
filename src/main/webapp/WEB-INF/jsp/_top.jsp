@@ -59,7 +59,7 @@
 	        <li><a href="<s:url value='/user/detail.html'/>">用户中心</a></li>
 	        <li><a href="<s:url value='/appPerson/getUserFeeReduceAppPersonList.html'/>">费减备案</a></li>
 	        <li><a href="<s:url value='/user/instructions.html'/>">操作指南</a></li>
-	        <li><a href="<s:url value='/express/addExpressForm.html'/>">快递管理</a></li>
+	        <%-- <li><a href="<s:url value='/express/addExpressForm.html'/>">快递管理</a></li> --%>
 	      </ul>
 	      <!-- 主菜单-列表 menu end / --> 
 	    </div>
