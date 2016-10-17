@@ -45,7 +45,7 @@
 						  	<table class="search-table">
 					  			<tr>
 					  				<td>
-									  	<button type="button" style="width: 80px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">新增</button>
+									  	<button type="button" style="width: 100px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">申请备案</button>
 										</a>
 					  				</td>
 					  				<td>
@@ -53,10 +53,7 @@
 								<button style="width:100px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
 										</a> 
 					  				</td>					  				
-					  				<td>
-									  	<button type="button" style="width:130px;margin-left:10px;" class="button button-rounded button-primary" data-toggle = "modal" data-target = "#downloadFeeReduceTransactTemplateModal" >下载委托书模板</button>
-										
-									</td>	
+					  					
 					  			</tr>
 					  		</table>		
 						  </div>
@@ -75,7 +72,7 @@
 							  <th>费减备案状态</th>
 							  <th>备案证件号</th>
 							  <th>备案年度</th>
-							  <th>委托书</th>
+							  <!-- <th>委托书</th> -->
 							  <th>手机号</th>
 							  <th width="100px">纳税额</th>
 							  <th width="100px">共享人</th>
@@ -98,12 +95,12 @@
 								<td style="text-align:center"><c:out value="${appPerson.feeReduceTransactionStatus}"/></td>
 								<td	style="text-align:center"><c:out value="${appPerson.transactionIdentityId}"/></td>
 								<td style="text-align:center"><c:out value="${appPerson.transactionYear}"/></td>
-								<td style="text-align:center">
+								<%-- <td style="text-align:center">
 									<a  href="<s:url value='/appPerson/showProxyUploadForm.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">上传</a>
 									<c:if test="${not empty appPerson.proxyUrl}">
                     				<a href="<s:url value='/appPerson/downloadProxyFile.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">下载</a> 
                     				</c:if>
-								</td>
+								</td> --%>
 								<td style="text-align:center">
 									<c:out value="${appPerson.phone}"/>
 								</td>
@@ -118,7 +115,7 @@
 					       	 	</c:forEach>
 								</td>
 								
-								<td><a href="<s:url value='/appPerson/findOneAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a> 
+								<td><a href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a> 
 								<a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">删除 </a>
 								<a href="<s:url value='/appPerson/showFriends.html'/>?appPersons=<c:out value='${appPerson.appPersonId}'/>">分享</a>
 								</td>
@@ -188,34 +185,6 @@
 					</div>
 				</div>
 				
-
-<div class = "modal fade" id = "downloadFeeReduceTransactTemplateModal" tabindex = "-1" role = "dialog" 
-   aria-labelledby = "myModalLabel" aria-hidden = "true" >
-   
-   <div class = "modal-dialog" >
-      <div class = "modal-content">
-         
-         <div class = "modal-header">
-            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true" id="downloadFeeReduceTransactTemplateModalCloseBtn">
-               ×
-            </button>
-            
-            <h4 class = "modal-title" id = "myModalLabel">
-            	选择需要的模板
-            </h4>
-         </div>
-	         <div class = "modal-body" id="modal-body">
-					
-					<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=1" style="color:#00F;font-size:20px;" >单位模板下载</a>
-					<br/>
-					<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=2" style="color:#00F;font-size:20px;" >个人模板下载</a>
-					<br/>
-					<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=3" style="color:#00F;font-size:20px;" >企业模板下载</a>
-			</div>
-      </div>
-   </div>
-</div>
-
 
 <script type="text/javascript">
 

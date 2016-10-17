@@ -81,11 +81,14 @@
 					<span style="color:red;font-size:15px;font-weight:bold">友情提示</span><br/>
 					符合以任何一种下情况均可办理费减:
 						<br/>
-						1、个人年收入低于4.2万；
+						1、个人年收入低于4.2万；<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=person" style="color:#00F;font-size:15px;" >下载模板</a>
+					
 						<br/>
-						2、事业单位 ；
+						2、事业单位 ；<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=employer" style="color:#00F;font-size:15px;" >下载模板</a>
+					
 						<br/>
-						3、新注册企业或上年度企业应纳所得税额低于30万；
+						3、新注册企业或上年度企业应纳所得税额低于30万；<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=company" style="color:#00F;font-size:15px;" >下载模板</a>
+					
 						<br/><br/>
 						注：
 						<br/>
