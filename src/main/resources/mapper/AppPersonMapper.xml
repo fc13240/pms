@@ -265,7 +265,7 @@
  			find_in_set(fee_reduce_transaction_status,'备案成功') DESC ,
  			find_in_set(fee_reduce_transaction_status,'不能备案') DESC ,create_time DESC 
  			limit #{page.startIndex}, #{page.pageSize}		 	
- 		) AS un  JOIN user_app_person up ON un.app_person_id = up.app_person
+ 		) AS un  LEFT JOIN user_app_person up ON un.app_person_id = up.app_person
 		  	JOIN users u ON up.user = u.user_id
 	
 	</select>
