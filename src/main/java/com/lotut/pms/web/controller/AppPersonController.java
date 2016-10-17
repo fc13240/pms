@@ -453,6 +453,6 @@ public class AppPersonController {
 			model.addAttribute("appPersons", appPersons);
 			model.addAttribute("page", page);
 		}
-		return "";
+		return "fee_reduce_transact_list";
 	}
 }
