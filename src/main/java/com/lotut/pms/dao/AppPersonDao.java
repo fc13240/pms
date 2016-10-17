@@ -49,12 +49,23 @@ public interface AppPersonDao {
 	
 	int getUserAppPersonCount(int userId);
 	
-	void addFeeRedurceAppPerson(CommonAppPerson commonAppPerson);
+	void addFeeReduceAppPerson(CommonAppPerson commonAppPerson);
 	
 	void addSharePlatFormAppPerson(int appPersonId);
+
+	List<CommonAppPerson> getUserFeeReduceAppPersonList(Page page);
 	
-	List<CommonAppPerson> searchFeeRedurceAppPersonByPage(AppPersonSearchCondition searchCondition);
+	List<CommonAppPerson> getAllFeeReduceAppPersonList(Page page);
+
+	int searchFeeReduceAppPersonCount(AppPersonSearchCondition searchCondition);
+
+	List<CommonAppPerson> searchFeeReduceAppPersonForPlat(AppPersonSearchCondition searchCondition);
+
+	int searchFeeReduceAppPersonForPlatCount(AppPersonSearchCondition searchCondition);
+
+	List<CommonAppPerson> searchFeeReduceAppPersonByPage(AppPersonSearchCondition searchCondition);
 	
-	int searchFeeRedurceAppPersonCount(AppPersonSearchCondition searchCondition);
+	int getAllFeeReduceAppPersonCount();
 	
+	int getUserFeeReduceAppPersonCount(int userId);
 }

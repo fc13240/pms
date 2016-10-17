@@ -1009,6 +1009,11 @@ INSERT INTO express_status(express_status_id,express_status_desc) VALUES (2,'待
 INSERT INTO express_status(express_status_id,express_status_desc) VALUES (3,'已签收');
 
 ALTER TABLE common_app_person ADD COLUMN phone VARCHAR(30) COMMENT '联系人手机号码';
+<<<<<<< HEAD
 ALTER TABLE common_app_person ADD COLUMN is_fee_reduce int DEFAULT '1' COMMENT '是否为费减备案状态';
 UPDATE common_app_person SET is_fee_redurce=2;
+=======
+ALTER TABLE common_app_person ADD COLUMN is_fee_redurce int DEFAULT '1' COMMENT '是否为费减备案状态';
+UPDATE common_app_person SET is_fee_reduce=2;
+>>>>>>> 7fb148666b61dfc946d908c7fc6d4c2cd259f9fd
 

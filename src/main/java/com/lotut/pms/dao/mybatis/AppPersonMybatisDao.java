@@ -117,20 +117,42 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 		return appPersonMapper.getUserAppPersons(page);
 	}
 	@Override
-	public void addFeeRedurceAppPerson(CommonAppPerson commonAppPerson) {
-		appPersonMapper.addFeeRedurceAppPerson(commonAppPerson);
+	public void addFeeReduceAppPerson(CommonAppPerson commonAppPerson) {
+		appPersonMapper.addFeeReduceAppPerson(commonAppPerson);
 	}
 	@Override
 	public void addSharePlatFormAppPerson(int appPersonId) {
 		appPersonMapper.addSharePlatFormAppPerson(appPersonId);
 	}
 	@Override
-	public List<CommonAppPerson> searchFeeRedurceAppPersonByPage(AppPersonSearchCondition searchCondition) {
-		return appPersonMapper.searchFeeRedurceAppPersonByPage(searchCondition);
+	public List<CommonAppPerson> getUserFeeReduceAppPersonList(Page page) {
+		return appPersonMapper.getUserFeeReduceAppPersonList(page);}
+	public List<CommonAppPerson> searchFeeReduceAppPersonByPage(AppPersonSearchCondition searchCondition) {
+		return appPersonMapper.searchFeeReduceAppPersonByPage(searchCondition);
 	}
 	@Override
-	public int searchFeeRedurceAppPersonCount(AppPersonSearchCondition searchCondition) {
-		return appPersonMapper.searchFeeRedurceAppPersonCount(searchCondition);
+	public int searchFeeReduceAppPersonCount(AppPersonSearchCondition searchCondition) {
+		return appPersonMapper.searchFeeReduceAppPersonCount(searchCondition);
+	}
+	@Override
+	public List<CommonAppPerson> searchFeeReduceAppPersonForPlat(AppPersonSearchCondition searchCondition) {
+		return appPersonMapper.searchFeeReduceAppPersonForPlat(searchCondition);
+	}
+	@Override
+	public int searchFeeReduceAppPersonForPlatCount(AppPersonSearchCondition searchCondition) {
+		return appPersonMapper.searchFeeReduceAppPersonForPlatCount(searchCondition);
+	}
+	@Override
+	public List<CommonAppPerson> getAllFeeReduceAppPersonList(Page page) {
+		return appPersonMapper.getAllFeeReduceAppPersonList(page);
+	}
+	@Override
+	public int getAllFeeReduceAppPersonCount() {
+		return appPersonMapper.getAllFeeReduceAppPersonCount();
+	}
+	@Override
+	public int getUserFeeReduceAppPersonCount(int userId) {
+		return appPersonMapper.getUserAppPersonCount(userId);
 	}
 	
 

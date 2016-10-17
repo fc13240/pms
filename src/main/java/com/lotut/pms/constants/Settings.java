@@ -22,6 +22,9 @@ public interface Settings {
 	final String PROXY_FILE_PATH="/opt/media/patent/proxyFile/";
 	final String PROXY_TEMPLATE_FILE_PATH ="/opt/media/patent/proxyTemplate/";
 	final String PROXY_TEMPLATE_NMAE="委托书.zip";
+	final String PERSON_TEMPLATE_NMAE="个人模板.zip";
+	final String COMPANY_TEMPLATE_NMAE="企业模板.zip";
+	final String EMPLOYER_TEMPLATE_NMAE="单位模板.zip";
 	final String PATENT_DOC_FILE="/opt/media/patent/patentDocFile/";
 	final String PATENT_DOC_STANDARD_FILE="/opt/media/patent/patentDocStandardFile/";
 	final String PATENTDOC_INVOICE_PIC_PATH = "/opt/media/patent/invoicePic/";

@@ -51,12 +51,23 @@ public interface AppPersonMapper {
 	
 	int getUserAppPersonCount(int userId);
 	
-	void addFeeRedurceAppPerson(CommonAppPerson commonAppPerson);
+	void addFeeReduceAppPerson(CommonAppPerson commonAppPerson);
 	
 	void addSharePlatFormAppPerson(int appPersonId);
 	
-	List<CommonAppPerson> searchFeeRedurceAppPersonByPage(AppPersonSearchCondition searchCondition);
+	List<CommonAppPerson> getUserFeeReduceAppPersonList(Page page);
 	
-	int searchFeeRedurceAppPersonCount(AppPersonSearchCondition searchCondition);
+	List<CommonAppPerson> getAllFeeReduceAppPersonList(Page page);
 	
+	List<CommonAppPerson> searchFeeReduceAppPersonByPage(AppPersonSearchCondition searchCondition);
+	
+	int searchFeeReduceAppPersonCount(AppPersonSearchCondition searchCondition);
+	
+	List<CommonAppPerson> searchFeeReduceAppPersonForPlat(AppPersonSearchCondition searchCondition);
+	
+	int searchFeeReduceAppPersonForPlatCount(AppPersonSearchCondition searchCondition);
+	
+	int getAllFeeReduceAppPersonCount();
+	
+	int getUserFeeReduceAppPersonCount(int userId);
 }

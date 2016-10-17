@@ -425,15 +425,15 @@ public class AppPersonController {
 		return "fee_reduce_transact_app_person_add";
 		
 	}
-	@RequestMapping(path="/addfeeRedurceAppPerson")
-	public String addfeeRedurceInventor(@ModelAttribute CommonAppPerson appPerson){
-		appPersonService.addFeeRedurceAppPerson(appPerson);
+	@RequestMapping(path="/addfeeReduceAppPerson")
+	public String addfeeReduceInventor(@ModelAttribute CommonAppPerson appPerson){
+		appPersonService.addFeeReduceAppPerson(appPerson);
 		return "fee_reduce_transact_app_person_add";
 		
 	}
 	
-	@RequestMapping(path="/searchFeeRedurceAppPerson ", method=RequestMethod.GET)
-	public String searchFeeRedurceAppPerson(@ModelAttribute("searchCondition")AppPersonSearchCondition searchCondition, Model model,HttpSession session) {
+	@RequestMapping(path="/searchFeeReduceAppPerson", method=RequestMethod.GET)
+	public String searchFeeReduceAppPerson(@ModelAttribute("searchCondition")AppPersonSearchCondition searchCondition, Model model,HttpSession session) {
 		Page page=searchCondition.getPage();
 		if (page.getCurrentPage() <= 0) {
 			page.setCurrentPage(1);
@@ -441,17 +441,66 @@ public class AppPersonController {
 		page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
 		if (PrincipalUtils.isPlatform()) {
-			
-			
+			List<CommonAppPerson> appPersons = appPersonService.searchFeeReduceAppPersonForPlat(searchCondition);
+			int totalCount=(int)appPersonService.searchFeeReduceAppPersonForPlatCount(searchCondition);
+			page.setTotalRecords(totalCount);
+			model.addAttribute("appPersons", appPersons);
+			model.addAttribute("page", page);
 		}else{
-			List<CommonAppPerson> appPersons = appPersonService.searchFeeRedurceAppPersonByPage(searchCondition);
-			int totalCount=(int)appPersonService.searchFeeRedurceAppPersonCount(searchCondition);
+			List<CommonAppPerson> appPersons = appPersonService.searchFeeReduceAppPersonByPage(searchCondition);
+			int totalCount=(int)appPersonService.searchFeeReduceAppPersonCount(searchCondition);
 			page.setTotalRecords(totalCount);
 			model.addAttribute("appPersons", appPersons);
 			model.addAttribute("page", page);
 		}
+		return "fee_reduce_transact_list";
+	}
+	
+	@RequestMapping(path="/getUserFeeReduceAppPersonList")
+	public String getFeeReduceAppPersonList(Page page,HttpSession session,Model model){
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
 		
+		if (PrincipalUtils.isPlatform()) {
+			int totalCount=appPersonService.getAllFeeReduceAppPersonCount();
+			page.setTotalRecords(totalCount);
+			List<CommonAppPerson> appPersons=appPersonService.getAllFeeReduceAppPersonList(page);
+			model.addAttribute("appPersons", appPersons);
+			model.addAttribute("page", page);
+		}else{
+			int totalCount=appPersonService.getUserFeeReduceAppPersonCount(userId);
+			page.setTotalRecords(totalCount);
+			List<CommonAppPerson> appPersons=appPersonService.getUserFeeReduceAppPersonList(page);
+			model.addAttribute("appPersons", appPersons);
+			model.addAttribute("page", page);
+		}
+		return "fee_reduce_transact_list";
 		
-		return "";
+	}
+	
+	@RequestMapping(path="/downloadFeeReduceTransactTemplate")
+	public void downloadFeeReduceTransactTemplate(int type, HttpServletResponse response, HttpServletRequest request)throws IOException{
+		response.setContentType("application/zip");
+		String relativeUrl;
+		if(type == 1) {//单位模板
+			relativeUrl=Settings.EMPLOYER_TEMPLATE_NMAE;
+		} else if(type == 2) {//个人模板
+			relativeUrl=Settings.PERSON_TEMPLATE_NMAE;
+		} else {//企业模板
+			relativeUrl=Settings.COMPANY_TEMPLATE_NMAE;
+		}
+		String filePath=Settings.PROXY_TEMPLATE_FILE_PATH+relativeUrl;
+		File appPersonFile = new File(filePath);
+		String downloadFileName = URLEncoder.encode(relativeUrl, "UTF8");
+		if(WebUtils.isFireFox(request)){
+			downloadFileName =new String(relativeUrl.getBytes("UTF-8"),"iso-8859-1");
+		}
+		response.setHeader("Content-Disposition", "proxyTemplate;filename=" + downloadFileName);
+		response.setContentLength((int)appPersonFile.length());
+		WebUtils.writeStreamToResponse(response, new FileInputStream(appPersonFile));
 	}
 }
