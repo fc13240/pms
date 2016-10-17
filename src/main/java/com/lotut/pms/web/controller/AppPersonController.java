@@ -432,7 +432,7 @@ public class AppPersonController {
 		
 	}
 	
-	@RequestMapping(path="/searchFeeRedurceAppPerson ", method=RequestMethod.GET)
+	@RequestMapping(path="/searchFeeReduceAppPerson", method=RequestMethod.GET)
 	public String searchFeeRedurceAppPerson(@ModelAttribute("searchCondition")AppPersonSearchCondition searchCondition, Model model,HttpSession session) {
 		Page page=searchCondition.getPage();
 		if (page.getCurrentPage() <= 0) {
