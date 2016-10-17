@@ -122,8 +122,6 @@
  function validateIdentityNumber(identityNumber) {
 	var reg = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;
 	document.getElementById("idNumberError").style.display = "none";
-	var result=reg.test(identityNumber);
-	alert(result);
 		if (!reg.test(identityNumber)) {
 			document.getElementById("idNumberError").style.display = "";
 			return false;
@@ -177,11 +175,6 @@
 	function validateCommentNumber(number) {
 		var regInt = new RegExp("^[0-9]*$");
 		var regFolat = new RegExp("^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$");
-		
-		var result1=regInt.test(number);
-		var result2=regFolat.test(number);
-		alert(result1);
-		alert(result2);
 		document.getElementById("commentError").style.display = "none";
 			if (!regInt.test(number)&&(!regFolat.test(number))) {
 				document.getElementById("commentError").style.display = "";
