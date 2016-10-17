@@ -175,12 +175,12 @@ public class AppPersonServiceImpl implements AppPersonService {
 
 	@Override
 	@Transactional
-	public void addFeeRedurceAppPerson(CommonAppPerson appPerson) {
+	public void addFeeReduceAppPerson(CommonAppPerson appPerson) {
 		int userId=PrincipalUtils.getCurrentUserId();
 		appPerson.setUserId(userId);
-		final int IS_FEE_REDURCE_STATUS=2;
-		appPerson.setIsFeeRedurce(IS_FEE_REDURCE_STATUS);
-		appPersonDao.addFeeRedurceAppPerson(appPerson);
+		final int IS_FEE_Reduce_STATUS=2;
+		appPerson.setIsFeeReduce(IS_FEE_Reduce_STATUS);
+		appPersonDao.addFeeReduceAppPerson(appPerson);
 		int appPersonId=appPerson.getAppPersonId();
 		UserAppPerson userAppPerson=new UserAppPerson();
 		userAppPerson.setUserId(userId);
@@ -192,47 +192,47 @@ public class AppPersonServiceImpl implements AppPersonService {
 
 
 	@Override
-	public List<CommonAppPerson> getUserFeeRedurceAppPersonList(Page page) {
-		return appPersonDao.getUserFeeRedurceAppPersonList(page);
+	public List<CommonAppPerson> getUserFeeReduceAppPersonList(Page page) {
+		return appPersonDao.getUserFeeReduceAppPersonList(page);
 	}
 	
-	public List<CommonAppPerson> searchFeeRedurceAppPersonByPage(AppPersonSearchCondition searchCondition) {
-		return appPersonDao.searchFeeRedurceAppPersonByPage(searchCondition);
+	public List<CommonAppPerson> searchFeeReduceAppPersonByPage(AppPersonSearchCondition searchCondition) {
+		return appPersonDao.searchFeeReduceAppPersonByPage(searchCondition);
 	}
 
 
 	@Override
-	public int searchFeeRedurceAppPersonCount(AppPersonSearchCondition searchCondition) {
-		return appPersonDao.searchFeeRedurceAppPersonCount(searchCondition);
+	public int searchFeeReduceAppPersonCount(AppPersonSearchCondition searchCondition) {
+		return appPersonDao.searchFeeReduceAppPersonCount(searchCondition);
 	}
 
 
 	@Override
-	public List<CommonAppPerson> searchFeeRedurceAppPersonForPlat(AppPersonSearchCondition searchCondition) {
-		return appPersonDao.searchFeeRedurceAppPersonForPlat(searchCondition);
+	public List<CommonAppPerson> searchFeeReduceAppPersonForPlat(AppPersonSearchCondition searchCondition) {
+		return appPersonDao.searchFeeReduceAppPersonForPlat(searchCondition);
 	}
 
 
 	@Override
-	public int searchFeeRedurceAppPersonForPlatCount(AppPersonSearchCondition searchCondition) {
-		return appPersonDao.searchFeeRedurceAppPersonCount(searchCondition);
+	public int searchFeeReduceAppPersonForPlatCount(AppPersonSearchCondition searchCondition) {
+		return appPersonDao.searchFeeReduceAppPersonCount(searchCondition);
 	}
 
 
 	@Override
-	public List<CommonAppPerson> getAllFeeRedurceAppPersonList(Page page) {
-		return appPersonDao.getAllFeeRedurceAppPersonList(page);
+	public List<CommonAppPerson> getAllFeeReduceAppPersonList(Page page) {
+		return appPersonDao.getAllFeeReduceAppPersonList(page);
 	}
 
 
 	@Override
-	public int getAllFeeRedurceAppPersonCount() {
-		return appPersonDao.getAllFeeRedurceAppPersonCount();
+	public int getAllFeeReduceAppPersonCount() {
+		return appPersonDao.getAllFeeReduceAppPersonCount();
 	}
 
 
 	@Override
-	public int getUserFeeRedurceAppPersonCount(int userId) {
+	public int getUserFeeReduceAppPersonCount(int userId) {
 		return appPersonDao.getUserAppPersonCount(userId);
 	}
 

@@ -425,15 +425,15 @@ public class AppPersonController {
 		return "fee_reduce_transact_list";
 		
 	}
-	@RequestMapping(path="/addfeeRedurceAppPerson")
-	public String addfeeRedurceInventor(@ModelAttribute CommonAppPerson appPerson){
-		appPersonService.addFeeRedurceAppPerson(appPerson);
+	@RequestMapping(path="/addfeeReduceAppPerson")
+	public String addfeeReduceInventor(@ModelAttribute CommonAppPerson appPerson){
+		appPersonService.addFeeReduceAppPerson(appPerson);
 		return "fee_reduce_transact_app_person_add";
 		
 	}
 	
 	@RequestMapping(path="/searchFeeReduceAppPerson", method=RequestMethod.GET)
-	public String searchFeeRedurceAppPerson(@ModelAttribute("searchCondition")AppPersonSearchCondition searchCondition, Model model,HttpSession session) {
+	public String searchFeeReduceAppPerson(@ModelAttribute("searchCondition")AppPersonSearchCondition searchCondition, Model model,HttpSession session) {
 		Page page=searchCondition.getPage();
 		if (page.getCurrentPage() <= 0) {
 			page.setCurrentPage(1);
@@ -441,14 +441,14 @@ public class AppPersonController {
 		page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
 		if (PrincipalUtils.isPlatform()) {
-			List<CommonAppPerson> appPersons = appPersonService.searchFeeRedurceAppPersonForPlat(searchCondition);
-			int totalCount=(int)appPersonService.searchFeeRedurceAppPersonForPlatCount(searchCondition);
+			List<CommonAppPerson> appPersons = appPersonService.searchFeeReduceAppPersonForPlat(searchCondition);
+			int totalCount=(int)appPersonService.searchFeeReduceAppPersonForPlatCount(searchCondition);
 			page.setTotalRecords(totalCount);
 			model.addAttribute("appPersons", appPersons);
 			model.addAttribute("page", page);
 		}else{
-			List<CommonAppPerson> appPersons = appPersonService.searchFeeRedurceAppPersonByPage(searchCondition);
-			int totalCount=(int)appPersonService.searchFeeRedurceAppPersonCount(searchCondition);
+			List<CommonAppPerson> appPersons = appPersonService.searchFeeReduceAppPersonByPage(searchCondition);
+			int totalCount=(int)appPersonService.searchFeeReduceAppPersonCount(searchCondition);
 			page.setTotalRecords(totalCount);
 			model.addAttribute("appPersons", appPersons);
 			model.addAttribute("page", page);
@@ -456,8 +456,8 @@ public class AppPersonController {
 		return "fee_reduce_transact_list";
 	}
 	
-	@RequestMapping(path="/getUserFeeRedurceAppPersonList")
-	public String getFeeRedurceAppPersonList(Page page,HttpSession session,Model model){
+	@RequestMapping(path="/getUserFeeReduceAppPersonList")
+	public String getFeeReduceAppPersonList(Page page,HttpSession session,Model model){
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
 		page.setPageSize(WebUtils.getPageSize(session));
@@ -466,15 +466,15 @@ public class AppPersonController {
 		}
 		
 		if (PrincipalUtils.isPlatform()) {
-			int totalCount=appPersonService.getAllFeeRedurceAppPersonCount();
+			int totalCount=appPersonService.getAllFeeReduceAppPersonCount();
 			page.setTotalRecords(totalCount);
-			List<CommonAppPerson> appPersons=appPersonService.getAllFeeRedurceAppPersonList(page);
+			List<CommonAppPerson> appPersons=appPersonService.getAllFeeReduceAppPersonList(page);
 			model.addAttribute("appPersons", appPersons);
 			model.addAttribute("page", page);
 		}else{
-			int totalCount=appPersonService.getUserFeeRedurceAppPersonCount(userId);
+			int totalCount=appPersonService.getUserFeeReduceAppPersonCount(userId);
 			page.setTotalRecords(totalCount);
-			List<CommonAppPerson> appPersons=appPersonService.getUserFeeRedurceAppPersonList(page);
+			List<CommonAppPerson> appPersons=appPersonService.getUserFeeReduceAppPersonList(page);
 			model.addAttribute("appPersons", appPersons);
 			model.addAttribute("page", page);
 		}

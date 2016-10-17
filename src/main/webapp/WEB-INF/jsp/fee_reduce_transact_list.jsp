@@ -287,7 +287,7 @@ function gotoPage() {
 	var url = "<s:url value='/appPerson/list.html'/>?currentPage=" + pageNo;
 	
 	<c:if test="${searchCondition != null}">
-		url = "<s:url value='/appPerson/searchFeeRedurceAppPerson.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		url = "<s:url value='/appPerson/searchFeeReduceAppPerson.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 	</c:if>
 	
 	

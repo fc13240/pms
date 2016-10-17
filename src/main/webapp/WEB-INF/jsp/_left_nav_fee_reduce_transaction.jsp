@@ -9,7 +9,7 @@
 		</a>
 	</li> 
 	<li class="active"> 
-		<a href="<s:url value='/appPerson/getUserFeeRedurceAppPersonList.html'/>">
+		<a href="<s:url value='/appPerson/getUserFeeReduceAppPersonList.html'/>">
 		<h5>费减备案列表</h5>
 		</a>
 	</li> 		

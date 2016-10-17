@@ -49,21 +49,21 @@ public interface AppPersonService {
 	
 	int getUserAppPersonCount(int userId);
 	
-	void addFeeRedurceAppPerson(CommonAppPerson commonAppPerson);
+	void addFeeReduceAppPerson(CommonAppPerson commonAppPerson);
 	
-	List<CommonAppPerson> getUserFeeRedurceAppPersonList(Page page);
+	List<CommonAppPerson> getUserFeeReduceAppPersonList(Page page);
 	
-	List<CommonAppPerson> getAllFeeRedurceAppPersonList(Page page);
+	List<CommonAppPerson> getAllFeeReduceAppPersonList(Page page);
 	
-	List<CommonAppPerson> searchFeeRedurceAppPersonByPage(AppPersonSearchCondition searchCondition);
+	List<CommonAppPerson> searchFeeReduceAppPersonByPage(AppPersonSearchCondition searchCondition);
 	
-	int searchFeeRedurceAppPersonCount(AppPersonSearchCondition searchCondition);
+	int searchFeeReduceAppPersonCount(AppPersonSearchCondition searchCondition);
 	
-	List<CommonAppPerson> searchFeeRedurceAppPersonForPlat(AppPersonSearchCondition searchCondition);
+	List<CommonAppPerson> searchFeeReduceAppPersonForPlat(AppPersonSearchCondition searchCondition);
 	
-	int searchFeeRedurceAppPersonForPlatCount(AppPersonSearchCondition searchCondition);
+	int searchFeeReduceAppPersonForPlatCount(AppPersonSearchCondition searchCondition);
 	
-	int getAllFeeRedurceAppPersonCount();
+	int getAllFeeReduceAppPersonCount();
 	
-	int getUserFeeRedurceAppPersonCount(int userId);
+	int getUserFeeReduceAppPersonCount(int userId);
 }
