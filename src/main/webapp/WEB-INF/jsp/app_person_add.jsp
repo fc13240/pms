@@ -42,8 +42,7 @@
 					<span style="color: red; display: none;" id=numberError>该处应输入不大于200字段</span>
 					<br>	   
 					<h5>证件号码:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" placeholder="*必填" name="idNumber" required onblur="validatePhoneNumber(this.value)"/>
-					<span style="color: red; display: none;" id=phoneError>请输入正确的证件号码</span>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" placeholder="*必填" name="idNumber" required maxlength="50"/>
 					<br>		  
 			       	<h5>邮编及地址:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" placeholder="*必填" name="postcodeAddress" required onblur="validateInfoNumber1(this.value)"/>
@@ -58,8 +57,7 @@
 					</select>
 					<br>
 					<h5>备案证件号:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" name="transactionIdentityId"  onblur="validateInfoNumber2(this.value)"/>
-					<span style="color: red; display: none;" id=numberError2>请输入合理的备案证件号</span>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" name="transactionIdentityId"  maxlength="50"/>
 					<br>
 					<h5>备案年度:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece3" type="text" name="transactionYear"  onblur="validateInfoNumber3(this.value)"/>
@@ -169,17 +167,14 @@
 		
 	}
 	function check() {
-		 var phone = document.getElementById("phoneRece").value;  
 		 var number=document.getElementById("numberRece").value;
 		 var number1=document.getElementById("numberRece1").value;
-		 var number2=document.getElementById("numberRece2").value;
 		 var number3=document.getElementById("numberRece3").value;
 		 var comment=document.getElementById("commentRece").value;
-		if(validatePhoneNumber(phone)&validateInfoNumber(number)
-				&validateInfoNumber1(number1)
-				&validateInfoNumber2(number2)
-				&validateInfoNumber3(number3)
-				&validateCommentNumber(comment)){
+		if(validateInfoNumber(number)
+			&validateInfoNumber1(number1)
+			&validateInfoNumber3(number3)
+			&validateCommentNumber(comment)){
 			return true;
 		}else {
 			return false;

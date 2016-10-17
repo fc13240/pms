@@ -42,7 +42,7 @@
 					<span style="color: red; display: none;" id=numberError>该处应输入不大于200字段</span>
 					<br>	   
 					<h5>证件号码:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text"  value="${appPerson.idNumber }" placeholder="必填项" name="idNumber" required maxlength="20"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text"  value="${appPerson.idNumber }" placeholder="必填项" name="idNumber" required maxlength="50"/>
 					<br>		  
 			       	<h5>邮编及地址:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" value="${appPerson.postcodeAddress }" placeholder="必填项" name="postcodeAddress" required onblur="validateInfoNumber1(this.value)"/>
@@ -65,7 +65,7 @@
 					<br>
 					
 					<h5>备案证件号:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" value="${appPerson.transactionIdentityId}" name="transactionIdentityId" placeholder="必填项" required onblur="validateInfoNumber2(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" value="${appPerson.transactionIdentityId}" name="transactionIdentityId" placeholder="必填项" required onblur="validateInfoNumber2(this.value)" maxlength="50"/>
 					<span style="color: red; display: none;" id=numberError2>请输入不为空且备案证件号不超过20位的证件号</span>
 					<br>
 					<h5>备案年度:</h5>

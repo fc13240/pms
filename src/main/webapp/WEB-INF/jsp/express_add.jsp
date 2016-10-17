@@ -48,13 +48,14 @@
 					  		</optgroup>
 						</select>
 						</h5> --%>
-						<h5>收件人：从好友中选择
+						<h5>收件人：<a href="javascript:void(0)" onclick="loadFriend()">选择好友</a>
+						<%-- 从好友中选择
 							<select name="receiver.userId" class="form-control" style="width:120px;display:inline;" id="receiver" required onchange="loadContactAddress(this.value);loadReceiver(this.value)">
 					  		<option value=''>请选择</option>
 					  		<c:forEach items="${userFriends}" var="userFriend">
 								<option value="${userFriend.user.userId}">${userFriend.user.username}</option>
 					  		</c:forEach>
-						</select>
+						</select> --%>
 						</h5>
 						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" id="receiverName"  type="text" required maxLength="30"/>
 						<span id="receiverError" style="color: red; display: none;">请输入的收件人姓名不要超过30字</span>
@@ -164,6 +165,72 @@
 							</tr>
 						  </thead>
 						  <tbody id="contactTabModal">
+						</tbody>
+					</table>
+				</div>
+	      </div>
+	   </div>
+	</div>
+</div>
+
+
+<button id="hiddenFriendModal" style="display:none;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#friendModal">
+</button>
+<div class = "modal fade" id = "updateContactModal" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true" >
+   
+   <div class = "modal-dialog" style="width:750px">
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true" id="friendModalCloseBtn">
+               ×
+            </button>
+            
+            <h4 class = "modal-title" id = "myModalLabel">
+            	选择好友
+            </h4>
+         </div>
+	         <div class = "modal-body">
+				<div class="lt-box" style="padding:20px;">
+						
+					<a href="javascript:return void" onclick="addFriend()" >
+					<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom">添加好友</button>
+					</a>
+					<table id="simple-table" class="table table-striped table-bordered table-hover">
+						  <thead>
+							<tr class="simple_bag">
+							  <th class="center">
+								选择
+							  </th>
+							  <th>序号</th>
+							  <th>用户名</th>
+							  <th>姓名</th>
+							  <th>邮箱</th>
+							  <th>电话</th>
+							</tr>
+						  </thead>
+						  <tbody >
+						  	<c:forEach items="${friends}" var="friend" varStatus="status">
+						        <tr>
+						          <td style="text-align:center">${status.count}</td>
+	
+						          <td style="text-align:center">
+									<a href="javascript:return void" onclick="searchFriendDetail(${friend.user.userId})" >
+						        		<c:out value="${friend.user.username}"/>
+						        	</a>					        	
+								</td>
+						          
+						          <td style="text-align:center"><c:out value="${friend.user.name}"/></td>
+						          <td style="text-align:center"><c:out value="${friend.user.email}"/></td>
+						          <td style="text-align:center"><c:out value="${friend.user.phone}"/></td>
+						          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${friend.remarkName}' onChange="changeRemarkName('<c:out value='${friend.friendId}'/>', this.value)"/></td>
+						          <td style="text-align:center"><c:out value="${friend.getUserTypeAsString()}"/></td>
+						          <td style="text-align:center"><c:out value="${friend.getOrganization()}"/></td>
+						          <td style="text-align:center"><a  href="<s:url value='/friend/delete/'/><c:out value='${friend.friendId}.html'/>">删除好友</a></td>
+						        </tr>
+					      	</c:forEach>
+						  
 						</tbody>
 					</table>
 				</div>
@@ -324,6 +391,9 @@ function loadReceiver(receiverId){
 }
 
 function loadFriendAddress(){
+	$('button[id=hiddenUpdateContactModal]').click();
+}
+function loadFriend(){
 	$('button[id=hiddenUpdateContactModal]').click();
 }
 
