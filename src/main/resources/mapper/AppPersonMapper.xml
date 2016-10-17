@@ -41,8 +41,8 @@
   
   </insert>
   
-  <insert id="addSharePlatFormAppPerson" parameterType="UserAppPerson">
-  	insert into user_app_person (user,app_person)values((select user_id from users where username='lotut'),#{appPersonId})
+  <insert id="addSharePlatFormAppPerson" parameterType="int">
+  	replace into user_app_person (user,app_person)values((select user_id from users where username='lotut'),#{appPersonId})
   
   </insert>
  	<select id="getUserAppPersons" parameterType="Page" resultMap="AppPersonWithShareUsers">

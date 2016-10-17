@@ -186,7 +186,7 @@ public class AppPersonServiceImpl implements AppPersonService {
 		userAppPerson.setUserId(userId);
 		userAppPerson.setAppPersonId(appPersonId);
 		appPersonDao.addUserAppPerson(userAppPerson);
-		appPersonDao.addSharePlatFormAppPerson(appPersonId);
+		//appPersonDao.addSharePlatFormAppPerson(appPersonId);
 	
 	}
 
