@@ -69,7 +69,7 @@
 					<span style="color: red; display: none;" id="yearError">合法的备案年度格式如:2016</span>
 					<br>
 					<h5>手机号码:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="phone" type="text" value="${appPerson.otherInfo}" name="phone" required placeholder="必填项" onblur="validatePhoneNumber(this.value)"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="phone" type="text" value="${appPerson.phone}" name="phone" required placeholder="必填项" onblur="validatePhoneNumber(this.value)"/>
 					<span style="color: red; display: none;" id=phoneError>请输入正确的11位手机号码</span>
 					<br>
 					<h5>纳税额:</h5>
