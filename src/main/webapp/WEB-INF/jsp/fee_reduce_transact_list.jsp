@@ -20,7 +20,7 @@
 		  </div>
 	<div class="tit_top">
         <div class="title2">
-           申请人列表</div>
+           费减方案列表</div>
                
     </div>
 		<div class="col-xs-offset-1 col-xs-11">
@@ -32,7 +32,7 @@
 					    <div class="form-group">
 					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="姓名/证件号码/邮编地址/费减备案状态/备案证件号/备案年度" class="t-input form-control"/>	
 					    
-					     <button class="button button-caution button-rounded" type="submit" style="width:100px;">搜索费减备案</button>
+					     <button class="button button-caution button-rounded" type="submit" style="width:120px;">搜索费减备案</button>
 					    </div>
 					  </form>
 
