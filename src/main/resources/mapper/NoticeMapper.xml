@@ -92,8 +92,8 @@
 						left join users pu on pu.user_id = n.process_user
 						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
 						join notice_process_status nps on nps.notice_process_status_id = n.process_status
-			 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1) and nps.notice_process_status_id=1
-			  order by nvl.notice_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
+			 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1) 
+			  order by nvl.user_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
 				limit #{startIndex}, #{pageSize}) as un
 			join user_patents up on un.patent_id = up.patent
 		  	join users u on up.user = u.user_id	
@@ -324,7 +324,7 @@
 					</choose>
 					
 				</if> 
-			  order by nvl.notice_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
+			  order by nvl.user_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
 				limit #{page.startIndex}, #{page.pageSize}) as un
 			join user_patents up on un.patent_id = up.patent
 		  	join users u on up.user = u.user_id		
@@ -499,7 +499,7 @@
 						join notice_process_status nps on nps.notice_process_status_id = n.process_status
 			 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1)
 				and nvl.notice_id is  null		 
-			  order by nvl.notice_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
+			  order by nvl.user_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
 				limit #{startIndex}, #{pageSize}) as un
 			join user_patents up on un.patent_id = up.patent
 		  	join users u on up.user = u.user_id		
