@@ -422,7 +422,7 @@ public class AppPersonController {
 	
 	@RequestMapping(path="/feeReduceTransactAppPersonForm")
 	public String feeReduceTransactAppPersonForm(Model model){
-		model.addAttribute("status", 1);
+		model.addAttribute("status", 2);
 		return "fee_reduce_transact_app_person_add";
 		
 	}
