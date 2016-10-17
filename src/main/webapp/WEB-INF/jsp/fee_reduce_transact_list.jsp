@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
+<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 <title>龙图腾专利管家-申请人列表</title>
 <%@ include file="_css.jsp" %>
 
@@ -53,8 +54,8 @@
 										</a> 
 					  				</td>					  				
 					  				<td>
-									  	<button type="button" style="width:130px;margin-left:10px;" class="button button-rounded button-primary" onclick="downloadProxyTemplate()">下载委托书模板</button>
-										</a> 
+									  	<button type="button" style="width:130px;margin-left:10px;" class="button button-rounded button-primary" data-toggle = "modal" data-target = "#downloadFeeReduceTransactTemplateModal" >下载费减备案模板</button>
+										
 									</td>	
 					  			</tr>
 					  		</table>		
@@ -186,6 +187,35 @@
 			        </div>	
 					</div>
 				</div>
+				
+
+<div class = "modal fade" id = "downloadFeeReduceTransactTemplateModal" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true" >
+   
+   <div class = "modal-dialog" >
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true" id="downloadFeeReduceTransactTemplateModalCloseBtn">
+               ×
+            </button>
+            
+            <h4 class = "modal-title" id = "myModalLabel">
+            	选择需要的模板
+            </h4>
+         </div>
+	         <div class = "modal-body" id="modal-body">
+					
+					<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=1" style="color:#00F;font-size:20px;" >单位模板下载</a>
+					<br/>
+					<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=2" style="color:#00F;font-size:20px;" >个人模板下载</a>
+					<br/>
+					<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=3" style="color:#00F;font-size:20px;" >企业模板下载</a>
+			</div>
+      </div>
+   </div>
+</div>
+
 
 <script type="text/javascript">
 
