@@ -309,4 +309,38 @@ public class InventorController {
 		return "inventor_list";
 	}
 	
+	
+	/* ---------费减备案---------start-------------费减备案---------*/
+	
+	
+	@RequestMapping(path="/feeReduceTransactInventorForm")
+	public String feeReduceTransactInventorForm(){
+		return "fee_reduce_transact_inventor_add";
+		
+	}
+	@RequestMapping(path="/addfeeRedurceInventor")
+	public String addfeeRedurceInventor(@ModelAttribute CommonInventor inventor){
+//		int userId=PrincipalUtils.getCurrentUserId();
+//		inventor.setUserId(userId);
+//		inventorService.addInventor(inventor);
+//		UserInventor userInventor=new UserInventor();
+//		userInventor.setUserId(userId);
+//		List<Integer> inventorIds=inventorService.getIdByInventor(inventor);
+//		int length=inventorIds.size();
+//		Integer inventorId=0;
+//		if(length==1){
+//		 inventorId=inventorIds.get(0);
+//		
+//		}else{
+//			inventorId=inventorIds.get(length-1);
+//			
+//		}
+//		userInventor.setInventorId(inventorId);
+//		inventorService.addUserInventor(userInventor);
+//		
+		
+		return "fee_reduce_transact_inventor_add";
+		
+	}
+	
 }

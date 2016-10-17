@@ -57,6 +57,7 @@
 	        </se:authorize>
 	        <li><a href="<s:url value='/friend/list.html'/>">我的好友</a></li>
 	        <li><a href="<s:url value='/user/detail.html'/>">用户中心</a></li>
+	        <li><a href="<s:url value='/appPerson/feeReduceTransactAppPersonForm.html'/>">费减备案</a></li>
 	        <li><a href="<s:url value='/user/instructions.html'/>">操作指南</a></li>
 	        <%-- <li><a href="<s:url value='/express/addExpressForm.html'/>">快递管理</a></li> --%>
 	      </ul>

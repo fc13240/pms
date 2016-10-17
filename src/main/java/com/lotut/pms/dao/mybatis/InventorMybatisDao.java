@@ -123,5 +123,4 @@ public class InventorMybatisDao extends SqlSessionDaoSupport implements Inventor
 		
 		return inventorMapper.searchInventorByPage(searchCondition);
 	}
-
 }

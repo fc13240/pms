@@ -17,6 +17,8 @@ public class CommonAppPerson {
 	private String transactionIdentityId;
 	private String transactionYear ;
 	private String proxyUrl;
+	private String phone;
+	private int isFeeRedurce;
 	
 	public String getTransactionIdentityId() {
 		return transactionIdentityId;
@@ -105,6 +107,18 @@ public class CommonAppPerson {
 	}
 	public void setIdNumber(String idNumber) {
 		this.idNumber = idNumber;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public int getIsFeeRedurce() {
+		return isFeeRedurce;
+	}
+	public void setIsFeeRedurce(int isFeeRedurce) {
+		this.isFeeRedurce = isFeeRedurce;
 	}
 	
 	

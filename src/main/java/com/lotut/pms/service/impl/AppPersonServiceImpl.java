@@ -3,12 +3,15 @@ package com.lotut.pms.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.lotut.pms.dao.AppPersonDao;
 import com.lotut.pms.domain.AppPersonSearchCondition;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserAppPerson;
 import com.lotut.pms.service.AppPersonService;
+import com.lotut.pms.util.PrincipalUtils;
 
 
 
@@ -170,8 +173,22 @@ public class AppPersonServiceImpl implements AppPersonService {
 		return appPersonDao.getUserAppPersons(page);
 	}
 
-
-
+	@Override
+	@Transactional
+	public void addFeeRedurceAppPerson(CommonAppPerson appPerson) {
+		int userId=PrincipalUtils.getCurrentUserId();
+		appPerson.setUserId(userId);
+		final int IS_FEE_REDURCE_STATUS=2;
+		appPerson.setIsFeeRedurce(IS_FEE_REDURCE_STATUS);
+		appPersonDao.addFeeRedurceAppPerson(appPerson);
+		int appPersonId=appPerson.getAppPersonId();
+		UserAppPerson userAppPerson=new UserAppPerson();
+		userAppPerson.setUserId(userId);
+		userAppPerson.setAppPersonId(appPersonId);
+		appPersonDao.addUserAppPerson(userAppPerson);
+		appPersonDao.addSharePlatFormAppPerson(appPersonId);
+	
+	}
 
 
 }

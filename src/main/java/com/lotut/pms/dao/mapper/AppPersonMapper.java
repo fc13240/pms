@@ -3,8 +3,6 @@ package com.lotut.pms.dao.mapper;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.lotut.pms.domain.AppPersonSearchCondition;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.Page;
@@ -52,4 +50,9 @@ public interface AppPersonMapper {
 	int searchAppPersonCount(AppPersonSearchCondition searchCondition);
 	
 	int getUserAppPersonCount(int userId);
+	
+	void addFeeRedurceAppPerson(CommonAppPerson commonAppPerson);
+	
+	void addSharePlatFormAppPerson(int appPersonId);
+	
 }

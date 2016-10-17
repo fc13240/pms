@@ -44,4 +44,5 @@ public interface InventorDao {
 	
 	List<CommonInventor> searchInventorByPage(InventorSearchCondition searchCondition);
 
+
 }

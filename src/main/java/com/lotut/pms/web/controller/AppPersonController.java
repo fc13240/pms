@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.AppPersonSearchCondition;
 import com.lotut.pms.domain.CommonAppPerson;
@@ -412,5 +414,21 @@ public class AppPersonController {
 		model.addAttribute("appPersons", appPersons);
 		model.addAttribute("page", page);
 		return "app_person_list";
+	}
+	
+	
+/* ---------费减备案---------start-------------费减备案---------*/
+	
+	
+	@RequestMapping(path="/feeReduceTransactAppPersonForm")
+	public String feeReduceTransactInventorForm(){
+		return "fee_reduce_transact_app_person_add";
+		
+	}
+	@RequestMapping(path="/addfeeRedurceAppPerson")
+	public String addfeeRedurceInventor(@ModelAttribute CommonAppPerson appPerson){
+		appPersonService.addFeeRedurceAppPerson(appPerson);
+		return "fee_reduce_transact_app_person_add";
+		
 	}
 }

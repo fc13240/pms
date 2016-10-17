@@ -26,12 +26,25 @@
   	#{feeReduceTransactionStatus},#{transactionIdentityId},#{transactionYear},#{appPersonUrl,javaType=string,jdbcType=VARCHAR},#{proxyUrl,javaType=string,jdbcType=VARCHAR},now())
   	
   </insert>
+  <insert id="addFeeRedurceAppPerson" parameterType="CommonAppPerson"  useGeneratedKeys="true" keyProperty="appPersonId">
+  	insert into common_app_person(name,id_number,postcode_address,other_information,user_id,
+  	fee_reduce_transaction_status,transaction_identity_id,transaction_year,app_person_attachment_file,proxy_file,create_time,phone,is_fee_redurce) 
+  	values(#{name},#{idNumber},#{postcodeAddress},#{otherInfo},#{userId},
+  	#{feeReduceTransactionStatus},#{transactionIdentityId},#{transactionYear},
+  	#{appPersonUrl,javaType=string,jdbcType=VARCHAR},#{proxyUrl,javaType=string,jdbcType=VARCHAR},now(),
+  	#{phone},#{isFeeRedurce})
+  	
+  </insert>
   
   <insert id="addUserAppPerson" parameterType="UserAppPerson">
   	insert into user_app_person (user,app_person)values(#{userId},#{appPersonId})
   
   </insert>
   
+  <insert id="addSharePlatFormAppPerson" parameterType="UserAppPerson">
+  	insert into user_app_person (user,app_person)values((select user_id from users where username='lotut'),#{appPersonId})
+  
+  </insert>
  	<select id="getUserAppPersons" parameterType="Page" resultMap="AppPersonWithShareUsers">
     	SELECT un.* ,u.user_id  ,u.username FROM 	
   	(SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,

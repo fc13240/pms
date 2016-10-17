@@ -5,8 +5,6 @@ import java.util.Map;
 
 import com.lotut.pms.domain.AppPersonSearchCondition;
 import com.lotut.pms.domain.CommonAppPerson;
-import com.lotut.pms.domain.CommonInventor;
-import com.lotut.pms.domain.InventorSearchCondition;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserAppPerson;
 
@@ -50,5 +48,9 @@ public interface AppPersonDao {
 	int searchAppPersonCount(AppPersonSearchCondition searchCondition);
 	
 	int getUserAppPersonCount(int userId);
+	
+	void addFeeRedurceAppPerson(CommonAppPerson commonAppPerson);
+	
+	void addSharePlatFormAppPerson(int appPersonId);
 	
 }

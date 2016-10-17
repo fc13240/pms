@@ -48,4 +48,6 @@ public interface AppPersonService {
 	int searchAppPersonCount(AppPersonSearchCondition searchCondition);
 	
 	int getUserAppPersonCount(int userId);
+	
+	void addFeeRedurceAppPerson(CommonAppPerson commonAppPerson);
 }

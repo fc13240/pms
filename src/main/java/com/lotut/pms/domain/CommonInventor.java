@@ -16,6 +16,7 @@ public class CommonInventor {
 	private String inventorUrl;
 	
 	
+	
 	public String getInventorUrl() {
 		return inventorUrl;
 	}
@@ -84,7 +85,4 @@ public class CommonInventor {
 	public void setInventorMobile(String inventorMobile) {
 		this.inventorMobile = inventorMobile;
 	}
-	
-	
-
 }
