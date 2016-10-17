@@ -65,4 +65,5 @@ public interface AppPersonDao {
 
 	List<CommonAppPerson> searchFeeRedurceAppPersonByPage(AppPersonSearchCondition searchCondition);
 	
+	int getAllFeeRedurceAppPersonCount();
 }

@@ -466,13 +466,14 @@ public class AppPersonController {
 		}
 		
 		if (PrincipalUtils.isPlatform()) {
-			int totalCount=appPersonService.getUserAppPersonCount(userId);
+			int totalCount=appPersonService.getAllFeeRedurceAppPersonCount();
 			page.setTotalRecords(totalCount);
 			List<CommonAppPerson> appPersons=appPersonService.getAllFeeRedurceAppPersonList(page);
 			model.addAttribute("appPersons", appPersons);
 			model.addAttribute("page", page);
 		}else{
-			
+			int totalCount=appPersonService.getUserAppPersonCount(userId);
+			page.setTotalRecords(totalCount);
 			List<CommonAppPerson> appPersons=appPersonService.getUserFeeRedurceAppPersonList(page);
 			model.addAttribute("appPersons", appPersons);
 			model.addAttribute("page", page);
