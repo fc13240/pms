@@ -27,13 +27,13 @@
   	#{feeReduceTransactionStatus},#{transactionIdentityId},#{transactionYear},#{appPersonUrl,javaType=string,jdbcType=VARCHAR},#{proxyUrl,javaType=string,jdbcType=VARCHAR},now())
   	
   </insert>
-  <insert id="addFeeRedurceAppPerson" parameterType="CommonAppPerson"  useGeneratedKeys="true" keyProperty="appPersonId">
+  <insert id="addFeeReduceAppPerson" parameterType="CommonAppPerson"  useGeneratedKeys="true" keyProperty="appPersonId">
   	insert into common_app_person(name,id_number,postcode_address,other_information,user_id,
   	fee_reduce_transaction_status,transaction_identity_id,transaction_year,app_person_attachment_file,proxy_file,create_time,phone,is_fee_reduce) 
   	values(#{name},#{idNumber},#{postcodeAddress},#{otherInfo},#{userId},
   	#{feeReduceTransactionStatus},#{transactionIdentityId},#{transactionYear},
   	#{appPersonUrl,javaType=string,jdbcType=VARCHAR},#{proxyUrl,javaType=string,jdbcType=VARCHAR},now(),
-  	#{phone},#{isFeeRedurce})
+  	#{phone},#{isFeeReduce})
   	
   </insert>
   
@@ -185,7 +185,7 @@
  		) 
 	</select>
 	
-	<select id="getUserFeeRedurceAppPersonList" parameterType="Page" resultMap="AppPersonWithShareUsers">
+	<select id="getUserFeeReduceAppPersonList" parameterType="Page" resultMap="AppPersonWithShareUsers">
 		SELECT un.* ,u.user_id  ,u.username FROM 	
   	(SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
   	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
@@ -198,7 +198,7 @@
 		  	JOIN users u ON up.user = u.user_id 
 	</select>
 	
-	<select id="getAllFeeRedurceAppPersonList" parameterType="Page" resultMap="AppPersonWithShareUsers">
+	<select id="getAllFeeReduceAppPersonList" parameterType="Page" resultMap="AppPersonWithShareUsers">
 		SELECT un.* ,u.user_id  ,u.username FROM 	
   	(SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
   	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
@@ -211,7 +211,7 @@
 		  	JOIN users u ON up.user = u.user_id 
 	</select>
 	
-	<select id="searchFeeRedurceAppPersonByPage" parameterType="AppPersonSearchCondition" resultMap="AppPersonWithShareUsers">
+	<select id="searchFeeReduceAppPersonByPage" parameterType="AppPersonSearchCondition" resultMap="AppPersonWithShareUsers">
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
@@ -235,7 +235,7 @@
 	
 	</select>
 	
-	<select id="searchFeeRedurceAppPersonCount" parameterType="AppPersonSearchCondition" resultType="int">
+	<select id="searchFeeReduceAppPersonCount" parameterType="AppPersonSearchCondition" resultType="int">
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
@@ -252,7 +252,7 @@
 	
 	
 	
-	<select id="searchFeeRedurceAppPersonForPlat" parameterType="AppPersonSearchCondition" resultMap="AppPersonWithShareUsers">
+	<select id="searchFeeReduceAppPersonForPlat" parameterType="AppPersonSearchCondition" resultMap="AppPersonWithShareUsers">
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
@@ -276,7 +276,7 @@
 	
 	</select>
 	
-	<select id="searchFeeRedurceAppPersonForPlatCount" parameterType="AppPersonSearchCondition" resultType="int">
+	<select id="searchFeeReduceAppPersonForPlatCount" parameterType="AppPersonSearchCondition" resultType="int">
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
@@ -291,12 +291,12 @@
 		) and p.is_fee_reduce=2	
 	</select>
 	
-	<select id="getUserFeeRedurceAppPersonCount" resultType="int">
+	<select id="getUserFeeReduceAppPersonCount" resultType="int">
 		select count(*) from common_app_person p WHERE app_person_id IN		
  		(SELECT app_person FROM user_app_person WHERE USER =#{userId}) and is_fee_reduce = 2
 	</select>
 	
-	<select id="getAllFeeRedurceAppPersonCount" >
+	<select id="getAllFeeReduceAppPersonCount" >
 		select count(*) from common_app_person p WHERE  app_person_id IN		
  		(SELECT app_person FROM user_app_person) and  is_fee_reduce = 2
 	</select>
