@@ -126,7 +126,21 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 	}
 	@Override
 	public List<CommonAppPerson> getFeeRedurceAppPersonList(Page page) {
-		return appPersonMapper.getFeeRedurceAppPersonList(page);
+		return appPersonMapper.getFeeRedurceAppPersonList(page);}
+	public List<CommonAppPerson> searchFeeRedurceAppPersonByPage(AppPersonSearchCondition searchCondition) {
+		return appPersonMapper.searchFeeRedurceAppPersonByPage(searchCondition);
+	}
+	@Override
+	public int searchFeeRedurceAppPersonCount(AppPersonSearchCondition searchCondition) {
+		return appPersonMapper.searchFeeRedurceAppPersonCount(searchCondition);
+	}
+	@Override
+	public List<CommonAppPerson> searchFeeRedurceAppPersonForPlat(AppPersonSearchCondition searchCondition) {
+		return appPersonMapper.searchFeeRedurceAppPersonForPlat(searchCondition);
+	}
+	@Override
+	public int searchFeeRedurceAppPersonForPlatCount(AppPersonSearchCondition searchCondition) {
+		return appPersonMapper.searchFeeRedurceAppPersonForPlatCount(searchCondition);
 	}
 	
 

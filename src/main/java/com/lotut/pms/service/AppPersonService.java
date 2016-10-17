@@ -52,4 +52,11 @@ public interface AppPersonService {
 	void addFeeRedurceAppPerson(CommonAppPerson commonAppPerson);
 	
 	List<CommonAppPerson> getFeeRedurceAppPersonList(Page page);
+	List<CommonAppPerson> searchFeeRedurceAppPersonByPage(AppPersonSearchCondition searchCondition);
+	
+	int searchFeeRedurceAppPersonCount(AppPersonSearchCondition searchCondition);
+	
+	List<CommonAppPerson> searchFeeRedurceAppPersonForPlat(AppPersonSearchCondition searchCondition);
+	
+	int searchFeeRedurceAppPersonForPlatCount(AppPersonSearchCondition searchCondition);
 }
