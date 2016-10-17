@@ -197,15 +197,12 @@
 	</select>
 	
 	<select id="getAllFeeReduceAppPersonList" parameterType="Page" resultMap="AppPersonWithShareUsers">
-		SELECT un.* ,u.user_id  ,u.username FROM 	
-  	(SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
+		SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
   	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
   		p.postcode_address ,p.other_information,p.phone FROM common_app_person p WHERE  is_fee_reduce = 2
  			ORDER BY  find_in_set(fee_reduce_transaction_status,'未备案') DESC ,find_in_set(fee_reduce_transaction_status,'备案中') DESC ,
  			find_in_set(fee_reduce_transaction_status,'备案成功') DESC ,
  			find_in_set(fee_reduce_transaction_status,'不能备案') DESC ,create_time DESC  limit #{startIndex}, #{pageSize}
- 		) AS un  JOIN user_app_person up ON un.app_person_id = up.app_person
-		  	JOIN users u ON up.user = u.user_id 
 	</select>
 	
 	<select id="searchFeeReduceAppPersonByPage" parameterType="AppPersonSearchCondition" resultMap="AppPersonWithShareUsers">
@@ -252,7 +249,7 @@
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
-		SELECT un.* ,u.user_id  ,u.username FROM 	
+		SELECT un.* FROM 	
   		(SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
   	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
   		p.postcode_address ,p.other_information,p.phone FROM common_app_person p WHERE 
@@ -264,8 +261,8 @@
 		ORDER BY  find_in_set(fee_reduce_transaction_status,'未备案') DESC ,find_in_set(fee_reduce_transaction_status,'备案中') DESC ,
  			find_in_set(fee_reduce_transaction_status,'备案成功') DESC ,
  			find_in_set(fee_reduce_transaction_status,'不能备案') DESC ,create_time DESC 
- 		) AS un  JOIN user_app_person up ON un.app_person_id = up.app_person
-		  	JOIN users u ON up.user = u.user_id limit #{page.startIndex}, #{page.pageSize}
+ 		) AS un  
+		limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
 	<select id="searchFeeReduceAppPersonForPlatCount" parameterType="AppPersonSearchCondition" resultType="int">

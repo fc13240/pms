@@ -215,7 +215,7 @@ public class AppPersonServiceImpl implements AppPersonService {
 
 	@Override
 	public int searchFeeReduceAppPersonForPlatCount(AppPersonSearchCondition searchCondition) {
-		return appPersonDao.searchFeeReduceAppPersonCount(searchCondition);
+		return appPersonDao.searchFeeReduceAppPersonForPlatCount(searchCondition);
 	}
 
 
