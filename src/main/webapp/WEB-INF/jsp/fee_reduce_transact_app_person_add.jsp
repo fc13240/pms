@@ -42,8 +42,7 @@
 					<span style="color: red; display: none;" id=numberError>该处应输入不大于200字段</span>
 					<br>	   
 					<h5>证件号码:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text"  value="${appPerson.idNumber }" placeholder="必填项" name="idNumber" required onblur="validateIdentityNumber(this.value)"/>
-					<span style="color: red; display: none;" id="idNumberError">请输入正确的证件号码</span>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text"  value="${appPerson.idNumber }" placeholder="必填项" name="idNumber" required maxlength="20"/>
 					<br>		  
 			       	<h5>邮编及地址:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" value="${appPerson.postcodeAddress }" placeholder="必填项" name="postcodeAddress" required onblur="validateInfoNumber1(this.value)"/>
@@ -77,18 +76,20 @@
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="phone" type="text" value="${appPerson.phone}" name="phone" required placeholder="必填项" onblur="validatePhoneNumber(this.value)"/>
 					<span style="color: red; display: none;" id=phoneError>请输入正确的11位手机号码</span>
 					<br>
-					<h5>纳税额:</h5>
+					<h5>纳税额(无纳税额请填0):</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" value="${appPerson.otherInfo}" name="otherInfo" required placeholder="必填项" onblur="validateCommentNumber(this.value)"/>
 					<span style="color: red; display: none;" id=commentError>请输入数字</span>
 					<br>
-					<input type="hidden" class="form-control" name="appPersonId"  value="${appPerson.appPersonId}"/>
+					<c:if test="${not empty appPerson.appPersonId}">
+						<input type="hidden" class="form-control" name="appPersonId"  value="${appPerson.appPersonId}"/>
+					</c:if>
 					<input type="hidden" class="form-control" name="status"  value="${status}"/>
 					<div style="height:20px;"></div> 
 					<button type="submit" style="width:90px;" class="button button-primary  button-rounded">保存</button>
 					</form>
 				</div>
 				<div style="float: left;margin-left:150px;margin-top:30px;border: 1px dashed blue;padding:20px;padding-top: 5px">
-					<span style="color:red;font-size:15px;font-weight:bold">友情提示</span><br/>
+					<span style="color:red;font-size:15px;font-weight:bold">注意事项</span><br/><br/>
 					符合以任何一种下情况均可办理费减:
 						<br/>
 						1、个人年收入低于4.2万；<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=person" style="color:#00F;font-size:15px;" >下载模板</a>
@@ -209,7 +210,6 @@
 				&validateInfoNumber1(number1)
 				&validateInfoNumber2(number2)
 				&validateCommentNumber(comment)
-				&validateIdentityNumber(phoneRece)
 				&validateYearNumber(year)
 				&validatePhoneNumber(phone)){
 			return true;
@@ -220,7 +220,7 @@
 	}
 	
 	function validateYearNumber(value){
-		var reg = new RegExp("^[0-9]*$");
+		var reg = new RegExp("^(19|20)[0-9]{2}$");
 		document.getElementById("yearError").style.display = "none";
 			if (!reg.test(value)||value.length>20) {
 				document.getElementById("yearError").style.display = "";
