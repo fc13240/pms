@@ -53,7 +53,9 @@ public interface AppPersonDao {
 	
 	void addSharePlatFormAppPerson(int appPersonId);
 
-	List<CommonAppPerson> getFeeRedurceAppPersonList(Page page);
+	List<CommonAppPerson> getUserFeeRedurceAppPersonList(Page page);
+	
+	List<CommonAppPerson> getAllFeeRedurceAppPersonList(Page page);
 
 	int searchFeeRedurceAppPersonCount(AppPersonSearchCondition searchCondition);
 

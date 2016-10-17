@@ -192,9 +192,10 @@ public class AppPersonServiceImpl implements AppPersonService {
 
 
 	@Override
-	public List<CommonAppPerson> getFeeRedurceAppPersonList(Page page) {
-		return appPersonDao.getFeeRedurceAppPersonList(page);
-		}
+	public List<CommonAppPerson> getUserFeeRedurceAppPersonList(Page page) {
+		return appPersonDao.getUserFeeRedurceAppPersonList(page);
+	}
+	
 	public List<CommonAppPerson> searchFeeRedurceAppPersonByPage(AppPersonSearchCondition searchCondition) {
 		return appPersonDao.searchFeeRedurceAppPersonByPage(searchCondition);
 	}
@@ -215,6 +216,12 @@ public class AppPersonServiceImpl implements AppPersonService {
 	@Override
 	public int searchFeeRedurceAppPersonForPlatCount(AppPersonSearchCondition searchCondition) {
 		return appPersonDao.searchFeeRedurceAppPersonCount(searchCondition);
+	}
+
+
+	@Override
+	public List<CommonAppPerson> getAllFeeRedurceAppPersonList(Page page) {
+		return appPersonDao.getAllFeeRedurceAppPersonList(page);
 	}
 
 

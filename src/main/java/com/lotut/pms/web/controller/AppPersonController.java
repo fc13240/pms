@@ -455,4 +455,27 @@ public class AppPersonController {
 		}
 		return "fee_reduce_transact_list";
 	}
+	
+	@RequestMapping(path="/getUserFeeRedurceAppPersonList")
+	public String getFeeRedurceAppPersonList(Page page,HttpSession session,Model model){
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=appPersonService.getUserAppPersonCount(userId);
+		page.setTotalRecords(totalCount);
+		if (PrincipalUtils.isPlatform()) {
+			List<CommonAppPerson> appPersons=appPersonService.getAllFeeRedurceAppPersonList(page);
+			model.addAttribute("appPersons", appPersons);
+			model.addAttribute("page", page);
+		}else{
+			List<CommonAppPerson> appPersons=appPersonService.getUserFeeRedurceAppPersonList(page);
+			model.addAttribute("appPersons", appPersons);
+			model.addAttribute("page", page);
+		}
+		return "fee_reduce_transact_list";
+		
+	}
 }
