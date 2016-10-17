@@ -483,12 +483,12 @@ public class AppPersonController {
 	}
 	
 	@RequestMapping(path="/downloadFeeReduceTransactTemplate")
-	public void downloadFeeReduceTransactTemplate(int type, HttpServletResponse response, HttpServletRequest request)throws IOException{
+	public void downloadFeeReduceTransactTemplate(String type, HttpServletResponse response, HttpServletRequest request)throws IOException{
 		response.setContentType("application/zip");
 		String relativeUrl;
-		if(type == 1) {//单位模板
+		if(type.equals("employer")) {//单位模板
 			relativeUrl=Settings.EMPLOYER_TEMPLATE_NMAE;
-		} else if(type == 2) {//个人模板
+		} else if(type.equals("person")) {//个人模板
 			relativeUrl=Settings.PERSON_TEMPLATE_NMAE;
 		} else {//企业模板
 			relativeUrl=Settings.COMPANY_TEMPLATE_NMAE;
