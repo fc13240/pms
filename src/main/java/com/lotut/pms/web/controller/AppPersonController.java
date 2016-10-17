@@ -438,7 +438,7 @@ public class AppPersonController {
 		if(status==1){
 			int userId=PrincipalUtils.getCurrentUserId();
 			appPerson.setUserId(userId);
-			appPersonService.updateAppPerson(appPerson);
+			appPersonService.updateFeeReduceAppPerson(appPerson);
 			return "redirect:/appPerson/getUserFeeReduceAppPersonList.html";
 		}else{
 			appPersonService.addFeeReduceAppPerson(appPerson);
