@@ -421,14 +421,23 @@ public class AppPersonController {
 	
 	
 	@RequestMapping(path="/feeReduceTransactAppPersonForm")
-	public String feeReduceTransactInventorForm(){
+	public String feeReduceTransactAppPersonForm(Model model){
+		model.addAttribute("status", 1);
 		return "fee_reduce_transact_app_person_add";
 		
 	}
 	@RequestMapping(path="/addfeeReduceAppPerson")
-	public String addfeeReduceInventor(@ModelAttribute CommonAppPerson appPerson){
-		appPersonService.addFeeReduceAppPerson(appPerson);
-		return "fee_reduce_transact_app_person_add";
+	public String addfeeReduceInventor(@ModelAttribute CommonAppPerson appPerson,int status){
+		if(status==1){
+			int userId=PrincipalUtils.getCurrentUserId();
+			appPerson.setUserId(userId);
+			appPersonService.updateAppPerson(appPerson);
+			return "redirect:/appPerson/getUserFeeReduceAppPersonList.html";
+		}else{
+			appPersonService.addFeeReduceAppPerson(appPerson);
+			return "fee_reduce_transact_app_person_add";
+		}
+		
 		
 	}
 	
@@ -486,6 +495,7 @@ public class AppPersonController {
 	public String updateFeeReduceAppPerson(@RequestParam("appPersonId")int AppPersonId,Model model ){
 		CommonAppPerson appPerson=appPersonService.getOneAppPersonById(AppPersonId);
 		model.addAttribute("appPerson", appPerson);
+		model.addAttribute("status", 1);
 		return "fee_reduce_transact_app_person_add";
 		
 	}

@@ -66,4 +66,6 @@ public interface AppPersonService {
 	int getAllFeeReduceAppPersonCount();
 	
 	int getUserFeeReduceAppPersonCount(int userId);
+	
+	void updateFeeReduceAppPerson(CommonAppPerson AppPerson);
 }

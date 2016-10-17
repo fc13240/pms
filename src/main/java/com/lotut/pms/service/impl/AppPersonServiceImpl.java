@@ -237,4 +237,10 @@ public class AppPersonServiceImpl implements AppPersonService {
 	}
 
 
+	@Override
+	public void updateFeeReduceAppPerson(CommonAppPerson AppPerson) {
+		appPersonDao.updateFeeReduceAppPerson(AppPerson);
+	}
+
+
 }

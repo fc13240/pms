@@ -49,17 +49,19 @@
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" value="${appPerson.postcodeAddress }" placeholder="必填项" name="postcodeAddress" required onblur="validateInfoNumber1(this.value)"/>
 					<span style="color: red; display: none;" id=numberError1>请输入正确的邮编及地址</span>
 					<br>
-					<se:authorize access="hasRole('ROLE_PLATFORM')">
+					
 					<h5>费减备案状态:</h5>
 					<select name="feeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;"  required >	
 					  <option value="${appPerson.feeReduceTransactionStatus}">${appPerson.feeReduceTransactionStatus}</option>
+					  <se:authorize access="hasRole('ROLE_PLATFORM')">
 					  <option value="未备案">未备案</option>
 					  <option value="备案中">备案中</option>
 					  <option value="备案成功">备案成功</option>
 					  <option value="不能备案">不能备案</option>
+					  </se:authorize>
 					</select>
 					<br>
-					</se:authorize>
+					
 					<h5>备案证件号:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" value="${appPerson.transactionIdentityId}" name="transactionIdentityId" placeholder="必填项" required onblur="validateInfoNumber2(this.value)"/>
 					<span style="color: red; display: none;" id=numberError2>请输入不为空且备案证件号不超过20位的证件号</span>
@@ -76,6 +78,8 @@
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" value="${appPerson.otherInfo}" name="otherInfo" required placeholder="必填项" onblur="validateCommentNumber(this.value)"/>
 					<span style="color: red; display: none;" id=commentError>请输入数字</span>
 					<br>
+					<input type="hidden" class="form-control" name="appPersonId"  value="${appPerson.appPersonId}"/>
+					<input type="hidden" class="form-control" name="status"  value="${status}"/>
 					<div style="height:20px;"></div> 
 					<button type="submit" style="width:90px;" class="button button-primary  button-rounded">保存</button>
 					</form>

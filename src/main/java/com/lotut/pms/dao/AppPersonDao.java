@@ -68,4 +68,7 @@ public interface AppPersonDao {
 	int getAllFeeReduceAppPersonCount();
 	
 	int getUserFeeReduceAppPersonCount(int userId);
+	
+	
+	void updateFeeReduceAppPerson(CommonAppPerson AppPerson);
 }

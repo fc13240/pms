@@ -34,7 +34,6 @@
   	#{transactionIdentityId},#{transactionYear},
   	#{appPersonUrl,javaType=string,jdbcType=VARCHAR},#{proxyUrl,javaType=string,jdbcType=VARCHAR},now(),
   	#{phone},#{isFeeReduce})
-  	
   </insert>
   
   <insert id="addUserAppPerson" parameterType="UserAppPerson">
@@ -80,7 +79,6 @@
   		transaction_year=#{transactionYear},
   		postcode_address=#{postcodeAddress},other_information=#{otherInfo},create_time=now()
   		where app_person_id=#{appPersonId}
-  		
   	</update>
   	
   	<delete id="deleteAppPersonById" parameterType="int">
@@ -300,6 +298,14 @@
 		select count(*) from common_app_person p WHERE  app_person_id IN		
  		(SELECT app_person FROM user_app_person) and  is_fee_reduce = 2
 	</select>
+	
+	<update id="updateFeeReduceAppPerson" parameterType="CommonAppPerson">
+  		update common_app_person  set name=#{name},id_number=#{idNumber},
+  		fee_reduce_transaction_status=#{feeReduceTransactionStatus},transaction_identity_id=#{transactionIdentityId},
+  		transaction_year=#{transactionYear},
+  		postcode_address=#{postcodeAddress},other_information=#{otherInfo},create_time=now(),phone=#{phone}
+  		where app_person_id=#{appPersonId}
+  	</update>
 	
   </mapper>
   
