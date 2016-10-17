@@ -200,8 +200,7 @@
 		SELECT un.* ,u.user_id  ,u.username FROM 	
   	(SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
   	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
-  		p.postcode_address ,p.other_information,p.phone FROM common_app_person p WHERE 	app_person_id IN		
- 		(SELECT app_person FROM user_app_person) and is_fee_reduce = 2
+  		p.postcode_address ,p.other_information,p.phone FROM common_app_person p WHERE  is_fee_reduce = 2
  			ORDER BY  find_in_set(fee_reduce_transaction_status,'未备案') DESC ,find_in_set(fee_reduce_transaction_status,'备案中') DESC ,
  			find_in_set(fee_reduce_transaction_status,'备案成功') DESC ,
  			find_in_set(fee_reduce_transaction_status,'不能备案') DESC ,create_time DESC  limit #{startIndex}, #{pageSize}
@@ -256,10 +255,8 @@
 		SELECT un.* ,u.user_id  ,u.username FROM 	
   		(SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
   	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
-  		p.postcode_address ,p.other_information,p.phone FROM common_app_person p WHERE app_person_id IN		
- 		(SELECT app_person FROM user_app_person)
- 		
-		and p.is_fee_reduce=2
+  		p.postcode_address ,p.other_information,p.phone FROM common_app_person p WHERE 
+		 p.is_fee_reduce=2
 		<if test="keyword != null">
 					and (p.name like #{keyword_pattern} or p.id_number like #{keyword_pattern} or p.postcode_address like #{keyword_pattern}  or p.fee_reduce_transaction_status like #{keyword_pattern} 
 					or p.transaction_identity_id like #{keyword_pattern} or p.transaction_year like #{keyword_pattern} or p.phone like #{keyword_pattern})
@@ -267,10 +264,8 @@
 		ORDER BY  find_in_set(fee_reduce_transaction_status,'未备案') DESC ,find_in_set(fee_reduce_transaction_status,'备案中') DESC ,
  			find_in_set(fee_reduce_transaction_status,'备案成功') DESC ,
  			find_in_set(fee_reduce_transaction_status,'不能备案') DESC ,create_time DESC 
- 			limit #{page.startIndex}, #{page.pageSize}		 	
- 		) AS un  JOIN user_app_person up ON un.app_person_id = up.app_person
-		  	JOIN users u ON up.user = u.user_id
-	
+ 		) AS un  LEFT JOIN user_app_person up ON un.app_person_id = up.app_person
+		  	JOIN users u ON up.user = u.user_id limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
 	<select id="searchFeeReduceAppPersonForPlatCount" parameterType="AppPersonSearchCondition" resultType="int">
@@ -279,13 +274,11 @@
 		</if>	
 			
   		SELECT count(*)
-  	 FROM common_app_person p WHERE app_person_id IN		
- 		(SELECT app_person FROM user_app_person
+  	 FROM common_app_person p WHERE  p.is_fee_reduce=2
 		<if test="keyword != null">
 					and (p.name like #{keyword_pattern} or p.id_number like #{keyword_pattern} or p.postcode_address like #{keyword_pattern}  or p.fee_reduce_transaction_status like #{keyword_pattern} 
 					or p.transaction_identity_id like #{keyword_pattern} or p.transaction_year like #{keyword_pattern} or p.phone like #{keyword_pattern})
-		</if> 
-		) and p.is_fee_reduce=2	
+		</if> 	
 	</select>
 	
 	<select id="getUserFeeReduceAppPersonCount" resultType="int">
@@ -294,8 +287,7 @@
 	</select>
 	
 	<select id="getAllFeeReduceAppPersonCount" resultType="int">
-		select count(*) from common_app_person p WHERE  app_person_id IN		
- 		(SELECT app_person FROM user_app_person) and  is_fee_reduce = 2
+		select count(*) from common_app_person p WHERE is_fee_reduce = 2
 	</select>
 	
 	<update id="updateFeeReduceAppPerson" parameterType="CommonAppPerson">
