@@ -233,7 +233,7 @@ public class AppPersonServiceImpl implements AppPersonService {
 
 	@Override
 	public int getUserFeeReduceAppPersonCount(int userId) {
-		return appPersonDao.getUserAppPersonCount(userId);
+		return appPersonDao.getUserFeeReduceAppPersonCount(userId);
 	}
 
 
