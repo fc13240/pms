@@ -191,4 +191,10 @@ public class AppPersonServiceImpl implements AppPersonService {
 	}
 
 
+	@Override
+	public List<CommonAppPerson> getFeeRedurceAppPersonList(Page page) {
+		return appPersonDao.getFeeRedurceAppPersonList(page);
+	}
+
+
 }

@@ -55,4 +55,6 @@ public interface AppPersonMapper {
 	
 	void addSharePlatFormAppPerson(int appPersonId);
 	
+	List<CommonAppPerson> getFeeRedurceAppPersonList(Page page);
+	
 }
