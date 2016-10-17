@@ -16,6 +16,7 @@
 		<result property="appPersonUrl" column="app_person_attachment_file"/>
 		<result property="userId" column="user_id"/>
 		<result property="proxyUrl" column="proxy_file"/>
+		<result property="phone" column="phone"/>
 		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
   </resultMap>
 
@@ -181,5 +182,45 @@
 	<select id="getUserAppPersonCount" resultType="int">
 		select count(*) from user_app_person where user = #{userId}
 	</select>
+	
+	<select id="searchFeeRedurceAppPersonByPage" parameterType="AppPersonSearchCondition" resultMap="AppPersonWithShareUsers">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+		SELECT un.* ,u.user_id  ,u.username FROM 	
+  		(SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
+  	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
+  		p.postcode_address ,p.other_information FROM common_app_person p WHERE app_person_id IN		
+ 		(SELECT app_person FROM user_app_person WHERE USER =#{userId})
+ 		
+		and p.is_fee_redurce=2
+		<if test="keyword != null">
+					and (p.name like #{keyword_pattern} or p.id_number like #{keyword_pattern} or p.postcode_address like #{keyword_pattern}  or p.fee_reduce_transaction_status like #{keyword_pattern} 
+					or p.transaction_identity_id like #{keyword_pattern} or p.transaction_year like #{keyword_pattern} or p.phone like #{keyword_pattern})
+		</if> 
+		ORDER BY  find_in_set(fee_reduce_transaction_status,'未备案') DESC ,find_in_set(fee_reduce_transaction_status,'备案中') DESC ,
+ 			find_in_set(fee_reduce_transaction_status,'备案成功') DESC ,
+ 			find_in_set(fee_reduce_transaction_status,'不能备案') DESC ,create_time DESC 
+ 			limit #{page.startIndex}, #{page.pageSize}		 	
+ 		) AS un  JOIN user_app_person up ON un.app_person_id = up.app_person
+		  	JOIN users u ON up.user = u.user_id
+	
+	</select>
+	
+	<select id="searchFeeRedurceAppPersonCount" parameterType="AppPersonSearchCondition" resultType="int">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+			
+  		SELECT count(*)
+  	 FROM common_app_person p WHERE app_person_id IN		
+ 		(SELECT app_person FROM user_app_person WHERE USER =#{userId}
+		<if test="keyword != null">
+					and (p.name like #{keyword_pattern} or p.id_number like #{keyword_pattern} or p.postcode_address like #{keyword_pattern}  or p.fee_reduce_transaction_status like #{keyword_pattern} 
+					or p.transaction_identity_id like #{keyword_pattern} or p.transaction_year like #{keyword_pattern} or p.phone like #{keyword_pattern})
+		</if> 
+		) and p.is_fee_redurce=2	
+	</select>
+	
   </mapper>
   

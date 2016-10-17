@@ -431,4 +431,27 @@ public class AppPersonController {
 		return "fee_reduce_transact_app_person_add";
 		
 	}
+	
+	@RequestMapping(path="/searchFeeRedurceAppPerson ", method=RequestMethod.GET)
+	public String searchFeeRedurceAppPerson(@ModelAttribute("searchCondition")AppPersonSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		if (PrincipalUtils.isPlatform()) {
+			
+			
+		}else{
+			List<CommonAppPerson> appPersons = appPersonService.searchFeeRedurceAppPersonByPage(searchCondition);
+			int totalCount=(int)appPersonService.searchFeeRedurceAppPersonCount(searchCondition);
+			page.setTotalRecords(totalCount);
+			model.addAttribute("appPersons", appPersons);
+			model.addAttribute("page", page);
+		}
+		
+		
+		return "";
+	}
 }

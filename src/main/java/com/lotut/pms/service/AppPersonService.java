@@ -50,4 +50,8 @@ public interface AppPersonService {
 	int getUserAppPersonCount(int userId);
 	
 	void addFeeRedurceAppPerson(CommonAppPerson commonAppPerson);
+	
+	List<CommonAppPerson> searchFeeRedurceAppPersonByPage(AppPersonSearchCondition searchCondition);
+	
+	int searchFeeRedurceAppPersonCount(AppPersonSearchCondition searchCondition);
 }

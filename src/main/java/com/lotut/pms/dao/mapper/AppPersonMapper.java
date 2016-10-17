@@ -55,4 +55,8 @@ public interface AppPersonMapper {
 	
 	void addSharePlatFormAppPerson(int appPersonId);
 	
+	List<CommonAppPerson> searchFeeRedurceAppPersonByPage(AppPersonSearchCondition searchCondition);
+	
+	int searchFeeRedurceAppPersonCount(AppPersonSearchCondition searchCondition);
+	
 }
