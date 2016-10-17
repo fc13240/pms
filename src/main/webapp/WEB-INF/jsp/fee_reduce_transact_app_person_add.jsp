@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管家——添加地址</title>
+<title>龙图腾专利管家——费减备案</title>
 <%@ include file="_css.jsp" %>
 </head>
 <body>
@@ -65,36 +65,20 @@
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece3" type="text" name="transactionYear"  onblur="validateInfoNumber3(this.value)"/>
 					<span style="color: red; display: none;" id=numberError3>请输入合理的备案年度</span>
 					<br>
-					<h5>电话号码/手机号码:</h5>
+					<h5>手机号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="phone" type="text" name="phone"  onblur=""/>
 					<span style="color: red; display: none;" id=phoneError>该处应输入不大于50字段</span>
 					<br>
 					<h5>纳税额:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" name="otherInfo"  onblur="validateCommentNumber(this.value)"/>
 					<span style="color: red; display: none;" id=commentError>该处应输入不大于50字段</span>
-					<h5>委托书:</h5>
-					<input type="hidden" id="patentDocEntrustFileHidden" name="proxyUrl" />
-					<input style="width:300px;display:inline;" type="text" id="patentDocEntrustFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocEntrustFile]').click();" required="required"/>
-					<button type="button" onclick="uploadEntrustClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
-					<div style="height:20px;"></div> 
-					
-					<h5>附件:</h5>
-					<input type="hidden" id="patentDocApplyFile" name="appPersonUrl" />
-					<input style="width:300px;display:inline;" type="text" id="patentDocFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=patentDocFile]').click();" required="required"/>
-					<button type="button" onclick="uploadClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
+					<br>
 					<div style="height:20px;"></div> 
 					<button type="submit" style="width:90px;" class="button button-primary  button-rounded">保存</button>
 					</form>
-					<form action="<s:url value='/petition/uploadPatentDocEntrustFile.html'/>" id="uploadEntrustFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
-						<input style="display:none" type="file" id="patentDocEntrustFile" name="file"/>
-						<button type="button" style="display: none;" onclick="$('input[id=patentDocEntrustFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
-						<button type="button" id="uploadEntrustBtn" style="display:none;" onclick="uploadPatentDocEntrustFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
-					</form>								
-					<form action="<s:url value='/petition/uploadPatentDocAppPersonFile.html'/>" id="uploadFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
-						<input style="display:none" type="file" id="patentDocFile" name="file"/>
-						<button type="button" style="display: none;" onclick="$('input[id=patentDocFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
-						<button type="button" id="uploadBtn" style="display:none;" onclick="uploadPatentDocFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
-					</form>
+				</div>
+				<div>
+					
 				</div>
 			</div>
 
