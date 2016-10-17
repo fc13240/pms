@@ -104,10 +104,7 @@
                     				</c:if>
 								</td>
 								<td style="text-align:center">
-									<a  href="<s:url value='/appPerson/showAttachmentUploadForm.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">上传</a>
-									<c:if test="${not empty appPerson.appPersonUrl }">
-                    				<a   href="<s:url value='/appPerson/downloadAttachmentFile.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">下载</a>
-                    				</c:if>
+									<c:out value="${appPerson.phone}"/>
 								</td>
 								<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
 								
@@ -290,7 +287,7 @@ function gotoPage() {
 	var url = "<s:url value='/appPerson/list.html'/>?currentPage=" + pageNo;
 	
 	<c:if test="${searchCondition != null}">
-		url = "<s:url value='/appPerson/searchAppPerson.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		url = "<s:url value='/appPerson/searchFeeRedurceAppPerson.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 	</c:if>
 	
 	

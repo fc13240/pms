@@ -374,7 +374,7 @@
 							  <th width="150px">专利名称</th>
 							  <th>第一申请人 </th>
 							  <th class="center">案件状态 </th>
-							  <th>共享人</th>
+							  <th>内部编码/共享人</th>
 							  <th width="100px">发文日</th>
 							  <th>通知书名称</th>
 							  <th width="100px">纸件申请</th>
@@ -397,12 +397,13 @@
 								<td style="text-align:center"><c:out value="${notice.patent.patentStatusText}"/></td>
 								
 								<td style="text-align:center">
-								<c:forEach items="${notice.patent.shareUsers}" var="shareUser" varStatus="s">								
-									<a href="javascript:return void" onclick="searchShareUserDetail(${shareUser.userId})" >
-					        			<c:out value="${shareUser.username}"/>
-					        			<c:if test="${!s.last}">;</c:if>
-					        		</a>					        	
-					       	 	</c:forEach>
+									<c:out value="${notice.patent.internalCode}"/><br/>
+									<c:forEach items="${notice.patent.shareUsers}" var="shareUser" varStatus="s">								
+										<a href="javascript:return void" onclick="searchShareUserDetail(${shareUser.userId})" >
+						        			<c:out value="${shareUser.username}"/>
+						        			<c:if test="${!s.last}">;</c:if>
+						        		</a>					        	
+						       	 	</c:forEach>
 								</td>
 					
 								
