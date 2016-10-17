@@ -32,7 +32,7 @@
 					    <div class="form-group">
 					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="姓名/证件号" class="t-input form-control"/>	
 					    
-					     <button class="button button-caution button-rounded" type="submit" style="width:100px;">搜索发明人</button>
+					     <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
 					    </div>
 					  </form>
 
@@ -47,7 +47,7 @@
 						  	<table class="search-table">
 					  			<tr>
 					  				<td>
-									  	<button type="button" style="width: 100px;" class="button button-rounded button-primary" onclick="javascript:addInventor()">新增发明人</button>
+									  	<button type="button" style="width: 80px;" class="button button-rounded button-primary" onclick="javascript:addInventor()">新增</button>
 					  				</td>
 					  				<td>
 										<a href="javascript:return void" onclick="batchShareInventor()" >

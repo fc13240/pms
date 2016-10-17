@@ -33,7 +33,7 @@
 					    <div class="form-group">
 					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="姓名/证件号码/邮编地址/费减备案状态/备案证件号/备案年度" class="t-input form-control"/>	
 					    
-					     <button class="button button-caution button-rounded" type="submit" style="width:120px;">搜索费减备案</button>
+					     <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
 					    </div>
 					  </form>
 
@@ -45,7 +45,7 @@
 						  	<table class="search-table">
 					  			<tr>
 					  				<td>
-									  	<button type="button" style="width: 100px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">新增申请人</button>
+									  	<button type="button" style="width: 80px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">新增</button>
 										</a>
 					  				</td>
 					  				<td>
@@ -54,7 +54,7 @@
 										</a> 
 					  				</td>					  				
 					  				<td>
-									  	<button type="button" style="width:130px;margin-left:10px;" class="button button-rounded button-primary" data-toggle = "modal" data-target = "#downloadFeeReduceTransactTemplateModal" >下载费减备案模板</button>
+									  	<button type="button" style="width:130px;margin-left:10px;" class="button button-rounded button-primary" data-toggle = "modal" data-target = "#downloadFeeReduceTransactTemplateModal" >下载委托书模板</button>
 										
 									</td>	
 					  			</tr>
@@ -75,7 +75,7 @@
 							  <th>费减备案状态</th>
 							  <th>备案证件号</th>
 							  <th>备案年度</th>
-							  <th >委托书</th>
+							  <th>委托书</th>
 							  <th>手机号</th>
 							  <th width="100px">纳税额</th>
 							  <th width="100px">共享人</th>

@@ -32,7 +32,7 @@
 					    <div class="form-group">
 					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="姓名/证件号码/邮编地址/费减备案状态/备案证件号/备案年度" class="t-input form-control"/>	
 					    
-					     <button class="button button-caution button-rounded" type="submit" style="width:100px;">搜索申请人</button>
+					     <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
 					    </div>
 					  </form>
 
@@ -44,7 +44,7 @@
 						  	<table class="search-table">
 					  			<tr>
 					  				<td>
-									  	<button type="button" style="width: 100px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">新增申请人</button>
+									  	<button type="button" style="width: 80px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">新增</button>
 										</a>
 					  				</td>
 					  				<td>
