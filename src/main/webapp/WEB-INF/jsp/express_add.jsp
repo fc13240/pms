@@ -59,14 +59,18 @@
 						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" id="receiverName"  type="text" required maxLength="30"/>
 						<span id="receiverError" style="color: red; display: none;">请输入的收件人姓名不要超过30字</span>
 						<br>
+						<h5>联系人:</h5>
+						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" id="contactPerson" name="contactPerson" type="text" required maxLength="200"/>
+						<span id="contactPersonError" style="color: red; display: none;">请输入的联系人在200个字以内</span>
+						<br>
 						
-						<h5>快递地址 :
-							<select  class="form-control" style="width:120px;display:inline;" id="friendContactAddress" required onchange="loadContact(this.value)">
+						<h5>快递地址 :<a href="javascript:void(0)" onclick="loadFriendAddress()">选择好友地址</a>
+							<%-- <select  class="form-control" style="width:120px;display:inline;" id="friendContactAddress" required onchange="loadContact(this.value)">
 						  		<option value=''>请选择</option>
 						  		<optgroup id="selectGroup">
 						  		</optgroup>
 							</select>
-						
+						 --%>
 						</h5>
 				        <select name="contactAddress.province" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities()" required>
 					  		<option value='' id="provinceOption">请选择</option>
@@ -121,6 +125,52 @@
 
 	</div>
 
+</div>
+
+<button id="hiddenUpdateContactModal" style="display:none;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#updateContactModal">
+</button>
+<div class = "modal fade" id = "updateContactModal" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true" >
+   
+   <div class = "modal-dialog" style="width:750px">
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true" id="updateContactModalCloseBtn">
+               ×
+            </button>
+            
+            <h4 class = "modal-title" id = "myModalLabel">
+            	从好友中选择地址
+            </h4>
+         </div>
+	         <div class = "modal-body">
+				<div class="lt-box" style="padding:20px;">
+						
+					<a href="javascript:return void" onclick="addContact()" >
+					<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个发明人批量哦！">添加联系人</button>
+					</a>
+					<table id="simple-table" class="table table-striped table-bordered table-hover">
+						  <thead>
+							<tr class="simple_bag">
+							  <th class="center">
+								选择
+							  </th>
+							  <th>序号</th>
+							  <th>联系人</th>
+							  <th>所在地区</th>
+							  <th>地址</th>
+							  <th>联系电话</th>
+							  <!-- <th>操作</th> -->
+							</tr>
+						  </thead>
+						  <tbody id="contactTabModal">
+						</tbody>
+					</table>
+				</div>
+	      </div>
+	   </div>
+	</div>
 </div>
 <script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
 <script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script> 
@@ -226,12 +276,26 @@ function loadContactAddress(userId){
 			type: 'get',
 			dataType: 'json',
 			success: function(result) {
+				$("#contactTabModal").empty();
 				$.each(result,function(i,item){
-					$("#selectGroup").append("<option value='"+item.id+"'>"+item.receiver+"</option>");
+					$("#contactTabModal").append(
+						"+<tr>"+
+							  "<td class='center' style='text-align:center'><label class='pos-rel'> <span class='batch-share-item'>"+
+							  "<input type='radio' name='contact-check-item' value='"+item.id+"'/></span>"+
+							  "<span class='lbl'></span></label>"+
+							  "</td>"+
+							  "<td class='center' style='text-align:center;'>"+(i+1)+"</td>"+
+							  "<td style='text-align:center;'>"+item.receiver+"</td>"+
+							  "<td style='text-align:center;'>"+item.provinceName+item.cityName+item.districtName+
+							  "</td>"+
+							  "<td style='text-align:center;'>"+item.detailAddress+"</td>"+
+							  "<td style='text-align:center;'>"+item.phone+"</td>"+
+						  "+</tr>"
+					)
 				})
 				
-				}
-		})
+			}
+		});
 	}
 }
 
@@ -259,6 +323,22 @@ function loadReceiver(receiverId){
 	 var receiverName=$("#receiver").find("option:selected").text();
 	 $("#receiverName").val(receiverName);
 }
+
+function loadFriendAddress(){
+	$('button[id=hiddenUpdateContactModal]').click();
+}
+
+
+function addContact(){
+	var contactId= $('input:radio[name="contact-check-item"]:checked').val();
+    if(contactId==null){
+        alert("请选择联系人!");
+    }else{
+    	loadContact(contactId);
+    	$("#updateContactModalCloseBtn").trigger("click");
+    }
+}
+
 </script>
 </body>
 </html>
