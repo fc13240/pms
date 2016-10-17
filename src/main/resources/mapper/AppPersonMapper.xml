@@ -216,7 +216,7 @@
 		SELECT un.* ,u.user_id  ,u.username FROM 	
   		(SELECT p.app_person_id ,p.name ,p.id_number,p.fee_reduce_transaction_status,
   	   p.transaction_identity_id,p.transaction_year,p.app_person_attachment_file,p.proxy_file,
-  		p.postcode_address ,p.other_information,p.phoneFROM common_app_person p WHERE app_person_id IN		
+  		p.postcode_address ,p.other_information,p.phone FROM common_app_person p WHERE app_person_id IN		
  		(SELECT app_person FROM user_app_person WHERE USER =#{userId})
 		and p.is_fee_reduce=2
 		<if test="keyword != null">
@@ -280,12 +280,12 @@
 			
   		SELECT count(*)
   	 FROM common_app_person p WHERE app_person_id IN		
- 		(SELECT app_person FROM user_app_person
+ 		(SELECT app_person FROM user_app_person)
 		<if test="keyword != null">
 					and (p.name like #{keyword_pattern} or p.id_number like #{keyword_pattern} or p.postcode_address like #{keyword_pattern}  or p.fee_reduce_transaction_status like #{keyword_pattern} 
 					or p.transaction_identity_id like #{keyword_pattern} or p.transaction_year like #{keyword_pattern} or p.phone like #{keyword_pattern})
 		</if> 
-		) and p.is_fee_reduce=2	
+		 and p.is_fee_reduce=2	
 	</select>
 	
 	<select id="getUserFeeReduceAppPersonCount" resultType="int">
