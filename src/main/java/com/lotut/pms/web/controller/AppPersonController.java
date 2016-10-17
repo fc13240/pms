@@ -481,4 +481,12 @@ public class AppPersonController {
 		return "fee_reduce_transact_list";
 		
 	}
+	
+	@RequestMapping(path="/updateFeeReduceAppPerson")
+	public String updateFeeReduceAppPerson(@RequestParam("appPersonId")int AppPersonId,Model model ){
+		CommonAppPerson appPerson=appPersonService.getOneAppPersonById(AppPersonId);
+		model.addAttribute("appPerson", appPerson);
+		return "fee_reduce_transact_app_person_add";
+		
+	}
 }

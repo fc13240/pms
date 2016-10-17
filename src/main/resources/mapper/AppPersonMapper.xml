@@ -70,7 +70,7 @@
   		select p.app_person_id as appPersonId,  p.name as name,p.id_number as idNumber,
   		p.fee_reduce_transaction_status as feeReduceTransactionStatus, p.transaction_identity_id as transactionIdentityId,
   		p.transaction_year as transactionYear,
-  		p.postcode_address as postcodeAddress,p.other_information otherInfo from common_app_person p 
+  		p.postcode_address as postcodeAddress,p.other_information otherInfo,p.phone phone from common_app_person p 
   		 where p.app_person_id=#{appPersonId}
   	</select>
   	
