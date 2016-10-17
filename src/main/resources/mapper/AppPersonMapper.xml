@@ -126,6 +126,8 @@
   		delete from  user_app_person where user=#{userId} and app_person = #{appPersonId}
   	</delete>
   	
+  	
+  	
   	<update id="updateAppPersonUserIdNull" parameterType="CommonAppPerson">
   		update common_app_person set user_id = 0 where app_person_id=#{appPersonId} and user_id = #{userId}
   	

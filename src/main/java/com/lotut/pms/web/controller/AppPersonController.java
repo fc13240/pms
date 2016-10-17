@@ -116,13 +116,20 @@ public class AppPersonController {
 	}
 	
 	@RequestMapping(path="/deleteAppPersonInfo")
-	public String deleteAppPersonInfo(@RequestParam("appPersonId")int appPersonId){
-		int userId=PrincipalUtils.getCurrentUserId();
-		UserAppPerson userAppPerson=new UserAppPerson();
-		userAppPerson.setUserId(userId);
-		userAppPerson.setAppPersonId(appPersonId);
-		appPersonService.deleteUserAppPersonbyId(userAppPerson);
-		return "redirect:/appPerson/list.html";
+	public String deleteAppPersonInfo(@RequestParam("appPersonId")int appPersonId,int status){
+		
+		if(status==1){
+			appPersonService.deleteAppPersonById(appPersonId);
+			return "redirect:/appPerson/getUserFeeReduceAppPersonList.html";
+		}else{
+			int userId=PrincipalUtils.getCurrentUserId();
+			UserAppPerson userAppPerson=new UserAppPerson();
+			userAppPerson.setUserId(userId);
+			userAppPerson.setAppPersonId(appPersonId);
+			appPersonService.deleteUserAppPersonbyId(userAppPerson);
+			return "redirect:/appPerson/list.html";
+		}
+		
 	}
 	
 

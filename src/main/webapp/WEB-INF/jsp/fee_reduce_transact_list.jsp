@@ -54,20 +54,20 @@
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
-							  <th class="center"> <label class="pos-rel">
+							  <th class="center" width="20px"> <label class="pos-rel">
 								<input style="width:30px;" type="checkbox" class="check-item">
 								<span class="lbl"></span> </label>
 							  </th>
 							  <th class="center" width="40px">序号</th>
-							  <th >姓名或名称</th>
-							  <th>证件号码 </th>
-							  <th>邮编及地址</th>
-							  <th>费减备案状态</th>
-							  <th>备案证件号</th>
-							  <th>备案年度</th>
+							  <th width="100px">姓名或名称</th>
+							  <th width="100px">证件号码 </th>
+							  <th width="180px">邮编及地址</th>
+							  <th width="60px">费减备案状态</th>
+							  <th width="100px">备案证件号</th>
+							  <th width="50px">备案年度</th>
 							  <!-- <th>委托书</th> -->
-							  <th>手机号</th>
-							  <th width="100px">纳税额</th>
+							  <th width="100px">手机号</th>
+							  <th width="60px">纳税额</th>
 							  <!-- 							<th>预览</th> 
 							  <th>下载</th>-->
 							  <th width="110px">操作</th>
@@ -98,7 +98,7 @@
 								</td>
 								<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
 								<td style="text-align:center"><a href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a> 
-								<a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">删除 </a>
+								<a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>&status=1">删除 </a>
 								</td>
 							  </tr>
 							</c:forEach>
