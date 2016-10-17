@@ -422,7 +422,7 @@ public class AppPersonController {
 	
 	@RequestMapping(path="/feeReduceTransactAppPersonForm")
 	public String feeReduceTransactInventorForm(){
-		return "fee_reduce_transact_app_person_add";
+		return "fee_reduce_transact_list";
 		
 	}
 	@RequestMapping(path="/addfeeRedurceAppPerson")
