@@ -49,6 +49,7 @@
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" value="${appPerson.postcodeAddress }" placeholder="必填项" name="postcodeAddress" required onblur="validateInfoNumber1(this.value)"/>
 					<span style="color: red; display: none;" id=numberError1>请输入正确的邮编及地址</span>
 					<br>
+					<c:if test="${status==1}">
 					
 					<h5>费减备案状态:</h5>
 					<select name="feeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;"  required >	
@@ -60,6 +61,8 @@
 					  <option value="不能备案">不能备案</option>
 					  </se:authorize>
 					</select>
+					
+					</c:if>
 					<br>
 					
 					<h5>备案证件号:</h5>

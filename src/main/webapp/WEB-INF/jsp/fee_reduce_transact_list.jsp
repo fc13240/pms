@@ -40,24 +40,17 @@
     			</div>
 				<div style="height:10px;"></div>
 					<div class="lt-box" style="padding:30px 0 0 0;">
-							<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
+							<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> 
 						  <div class="ta-top" style="margin-left:8px;"> 
 						  	<table class="search-table">
 					  			<tr>
 					  				<td>
 									  	<button type="button" style="width: 100px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">申请备案</button>
-										</a>
-					  				</td>
-					  				<td>
-										<a href="javascript:return void" onclick="batchShareAppPerson()" >
-								<button style="width:100px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
-										</a> 
 					  				</td>					  				
-					  					
 					  			</tr>
 					  		</table>		
 						  </div>
-						  </span> </div>
+						 </div>
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
@@ -115,9 +108,8 @@
 					       	 	</c:forEach>
 								</td>
 								
-								<td><a href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a> 
+								<td style="text-align:center"><a href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a> 
 								<a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">删除 </a>
-								<a href="<s:url value='/appPerson/showFriends.html'/>?appPersons=<c:out value='${appPerson.appPersonId}'/>">分享</a>
 								</td>
 							  </tr>
 							</c:forEach>
