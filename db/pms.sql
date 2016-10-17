@@ -1010,5 +1010,5 @@ INSERT INTO express_status(express_status_id,express_status_desc) VALUES (3,'已
 
 ALTER TABLE common_app_person ADD COLUMN phone VARCHAR(30) COMMENT '联系人手机号码';
 ALTER TABLE common_app_person ADD COLUMN is_fee_redurce int DEFAULT '1' COMMENT '是否为费减备案状态';
-UPDATE common_app_person SET is_fee_redurce=2;
+UPDATE common_app_person SET is_fee_reduce=2;
 

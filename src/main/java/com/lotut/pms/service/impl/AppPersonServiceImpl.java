@@ -231,4 +231,10 @@ public class AppPersonServiceImpl implements AppPersonService {
 	}
 
 
+	@Override
+	public int getUserFeeRedurceAppPersonCount(int userId) {
+		return appPersonDao.getUserAppPersonCount(userId);
+	}
+
+
 }

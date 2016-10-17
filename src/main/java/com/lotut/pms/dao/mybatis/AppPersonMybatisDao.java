@@ -150,6 +150,10 @@ public class AppPersonMybatisDao extends SqlSessionDaoSupport implements AppPers
 	public int getAllFeeRedurceAppPersonCount() {
 		return appPersonMapper.getAllFeeRedurceAppPersonCount();
 	}
+	@Override
+	public int getUserFeeRedurceAppPersonCount(int userId) {
+		return appPersonMapper.getUserAppPersonCount(userId);
+	}
 	
 
 	

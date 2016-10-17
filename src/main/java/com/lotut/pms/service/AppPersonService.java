@@ -64,4 +64,6 @@ public interface AppPersonService {
 	int searchFeeRedurceAppPersonForPlatCount(AppPersonSearchCondition searchCondition);
 	
 	int getAllFeeRedurceAppPersonCount();
+	
+	int getUserFeeRedurceAppPersonCount(int userId);
 }

@@ -68,4 +68,6 @@ public interface AppPersonMapper {
 	int searchFeeRedurceAppPersonForPlatCount(AppPersonSearchCondition searchCondition);
 	
 	int getAllFeeRedurceAppPersonCount();
+	
+	int getUserFeeRedurceAppPersonCount(int userId);
 }

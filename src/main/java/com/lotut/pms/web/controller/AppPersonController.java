@@ -472,7 +472,7 @@ public class AppPersonController {
 			model.addAttribute("appPersons", appPersons);
 			model.addAttribute("page", page);
 		}else{
-			int totalCount=appPersonService.getUserAppPersonCount(userId);
+			int totalCount=appPersonService.getUserFeeRedurceAppPersonCount(userId);
 			page.setTotalRecords(totalCount);
 			List<CommonAppPerson> appPersons=appPersonService.getUserFeeRedurceAppPersonList(page);
 			model.addAttribute("appPersons", appPersons);
