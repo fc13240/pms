@@ -49,21 +49,21 @@
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece1" type="text" placeholder="必填项" name="postcodeAddress" required onblur="validateInfoNumber1(this.value)"/>
 					<span style="color: red; display: none;" id=numberError1>请输入正确的邮编及地址</span>
 					<br>
-					<h5>费减备案状态:</h5>
+					<%-- <h5>费减备案状态:</h5>
 					<select name="feeReduceTransactionStatus" class="form-control" style="width:136px;display:inline;"  required >	
 					  <option value="未备案">未备案</option>
 					  <option value="备案中">备案中</option>
 					  <option value="备案成功">备案成功</option>
 					  <option value="不能备案">不能备案</option>
 					</select>
-					<br>
+					<br> --%>
 					<h5>备案证件号:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" name="transactionIdentityId" placeholder="必填项" required onblur="validateInfoNumber2(this.value)"/>
 					<span style="color: red; display: none;" id=numberError2>请输入不为空且备案证件号不超过20位的证件号</span>
 					<br>
 					<h5>备案年度:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece3" type="text" name="transactionYear" placeholder="必填项" required onblur="validateInfoNumber3(this.value)"/>
-					<span style="color: red; display: none;" id=numberError3>合法的备案年度格式如:2016</span>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="year" type="text" name="transactionYear" placeholder="必填项" required onblur="validateYearNumber(this.value)"/>
+					<span style="color: red; display: none;" id="yearError">合法的备案年度格式如:2016</span>
 					<br>
 					<h5>手机号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="phone" type="text" name="phone" required placeholder="必填项" onblur="validatePhoneNumber(this.value)"/>
@@ -188,16 +188,16 @@
 		 var number=document.getElementById("numberRece").value;
 		 var number1=document.getElementById("numberRece1").value;
 		 var number2=document.getElementById("numberRece2").value;
-		 var number3=document.getElementById("numberRece3").value;
 		 var comment=document.getElementById("commentRece").value;
 		 var phoneRece=document.getElementById("phoneRece").value;
 		 var phone=document.getElementById("phone").value;
+		 var year=document.getElementById("year").value;
 		if(validateInfoNumber(number)
 				&validateInfoNumber1(number1)
 				&validateInfoNumber2(number2)
-				&validateInfoNumber3(number3)
 				&validateCommentNumber(comment)
 				&validateIdentityNumber(phoneRece)
+				&validateYearNumber(year)
 				&validatePhoneNumber(phone)){
 			return true;
 		}else {
@@ -206,6 +206,16 @@
 		
 	}
 	
+	function validateYearNumber(value){
+		var reg = new RegExp("^[0-9]*$");
+		document.getElementById("yearError").style.display = "none";
+			if (!reg.test(value)) {
+				document.getElementById("yearError").style.display = "";
+				return false;
+			} else {
+				return true;
+			}
+	}
 	/* $('input[id=patentDocFile]').change(function() {  
 		$('#patentDocFilename').val($(this).val());  
 	})

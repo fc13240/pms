@@ -29,9 +29,9 @@
   </insert>
   <insert id="addFeeReduceAppPerson" parameterType="CommonAppPerson"  useGeneratedKeys="true" keyProperty="appPersonId">
   	insert into common_app_person(name,id_number,postcode_address,other_information,user_id,
-  	fee_reduce_transaction_status,transaction_identity_id,transaction_year,app_person_attachment_file,proxy_file,create_time,phone,is_fee_reduce) 
+  	transaction_identity_id,transaction_year,app_person_attachment_file,proxy_file,create_time,phone,is_fee_reduce) 
   	values(#{name},#{idNumber},#{postcodeAddress},#{otherInfo},#{userId},
-  	#{feeReduceTransactionStatus},#{transactionIdentityId},#{transactionYear},
+  	#{transactionIdentityId},#{transactionYear},
   	#{appPersonUrl,javaType=string,jdbcType=VARCHAR},#{proxyUrl,javaType=string,jdbcType=VARCHAR},now(),
   	#{phone},#{isFeeReduce})
   	
