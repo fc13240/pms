@@ -209,7 +209,7 @@
 	function validateYearNumber(value){
 		var reg = new RegExp("^[0-9]*$");
 		document.getElementById("yearError").style.display = "none";
-			if (!reg.test(value)) {
+			if (!reg.test(value)||value.length>20) {
 				document.getElementById("yearError").style.display = "";
 				return false;
 			} else {
