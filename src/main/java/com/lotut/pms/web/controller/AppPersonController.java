@@ -441,8 +441,11 @@ public class AppPersonController {
 		page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
 		if (PrincipalUtils.isPlatform()) {
-			
-			
+			List<CommonAppPerson> appPersons = appPersonService.searchFeeRedurceAppPersonForPlat(searchCondition);
+			int totalCount=(int)appPersonService.searchFeeRedurceAppPersonForPlatCount(searchCondition);
+			page.setTotalRecords(totalCount);
+			model.addAttribute("appPersons", appPersons);
+			model.addAttribute("page", page);
 		}else{
 			List<CommonAppPerson> appPersons = appPersonService.searchFeeRedurceAppPersonByPage(searchCondition);
 			int totalCount=(int)appPersonService.searchFeeRedurceAppPersonCount(searchCondition);
@@ -450,8 +453,6 @@ public class AppPersonController {
 			model.addAttribute("appPersons", appPersons);
 			model.addAttribute("page", page);
 		}
-		
-		
 		return "";
 	}
 }

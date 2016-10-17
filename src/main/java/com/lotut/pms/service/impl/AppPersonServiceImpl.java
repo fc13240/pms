@@ -203,4 +203,16 @@ public class AppPersonServiceImpl implements AppPersonService {
 	}
 
 
+	@Override
+	public List<CommonAppPerson> searchFeeRedurceAppPersonForPlat(AppPersonSearchCondition searchCondition) {
+		return appPersonDao.searchFeeRedurceAppPersonForPlat(searchCondition);
+	}
+
+
+	@Override
+	public int searchFeeRedurceAppPersonForPlatCount(AppPersonSearchCondition searchCondition) {
+		return appPersonDao.searchFeeRedurceAppPersonCount(searchCondition);
+	}
+
+
 }
