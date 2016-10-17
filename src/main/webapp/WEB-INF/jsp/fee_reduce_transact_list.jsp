@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
+<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 <title>龙图腾专利管家-申请人列表</title>
 <%@ include file="_css.jsp" %>
 
@@ -32,7 +33,7 @@
 					    <div class="form-group">
 					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="姓名/证件号码/邮编地址/费减备案状态/备案证件号/备案年度" class="t-input form-control"/>	
 					    
-					     <button class="button button-caution button-rounded" type="submit" style="width:120px;">搜索费减备案</button>
+					     <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
 					    </div>
 					  </form>
 
@@ -44,7 +45,7 @@
 						  	<table class="search-table">
 					  			<tr>
 					  				<td>
-									  	<button type="button" style="width: 100px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">新增申请人</button>
+									  	<button type="button" style="width: 100px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">申请备案</button>
 										</a>
 					  				</td>
 					  				<td>
@@ -52,10 +53,7 @@
 								<button style="width:100px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把申请人批量分享给好友哦！">批量分享</button>
 										</a> 
 					  				</td>					  				
-					  				<td>
-									  	<button type="button" style="width:130px;margin-left:10px;" class="button button-rounded button-primary" onclick="downloadProxyTemplate()">下载委托书模板</button>
-										</a> 
-									</td>	
+					  					
 					  			</tr>
 					  		</table>		
 						  </div>
@@ -74,7 +72,7 @@
 							  <th>费减备案状态</th>
 							  <th>备案证件号</th>
 							  <th>备案年度</th>
-							  <th >委托书</th>
+							  <!-- <th>委托书</th> -->
 							  <th>手机号</th>
 							  <th width="100px">纳税额</th>
 							  <th width="100px">共享人</th>
@@ -97,12 +95,12 @@
 								<td style="text-align:center"><c:out value="${appPerson.feeReduceTransactionStatus}"/></td>
 								<td	style="text-align:center"><c:out value="${appPerson.transactionIdentityId}"/></td>
 								<td style="text-align:center"><c:out value="${appPerson.transactionYear}"/></td>
-								<td style="text-align:center">
+								<%-- <td style="text-align:center">
 									<a  href="<s:url value='/appPerson/showProxyUploadForm.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">上传</a>
 									<c:if test="${not empty appPerson.proxyUrl}">
                     				<a href="<s:url value='/appPerson/downloadProxyFile.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">下载</a> 
                     				</c:if>
-								</td>
+								</td> --%>
 								<td style="text-align:center">
 									<c:out value="${appPerson.phone}"/>
 								</td>
@@ -186,6 +184,7 @@
 			        </div>	
 					</div>
 				</div>
+				
 
 <script type="text/javascript">
 
