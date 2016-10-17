@@ -296,7 +296,7 @@
  		(SELECT app_person FROM user_app_person WHERE USER =#{userId}) and is_fee_reduce = 2
 	</select>
 	
-	<select id="getAllFeeReduceAppPersonCount" >
+	<select id="getAllFeeReduceAppPersonCount" resultType="int">
 		select count(*) from common_app_person p WHERE  app_person_id IN		
  		(SELECT app_person FROM user_app_person) and  is_fee_reduce = 2
 	</select>
