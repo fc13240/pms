@@ -435,7 +435,7 @@ public class AppPersonController {
 			return "redirect:/appPerson/getUserFeeReduceAppPersonList.html";
 		}else{
 			appPersonService.addFeeReduceAppPerson(appPerson);
-			return "fee_reduce_transact_app_person_add";
+			return "redirect:/appPerson/getUserFeeReduceAppPersonList.html";
 		}
 		
 		

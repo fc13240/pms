@@ -68,7 +68,6 @@
 							  <!-- <th>委托书</th> -->
 							  <th>手机号</th>
 							  <th width="100px">纳税额</th>
-							  <th width="100px">共享人</th>
 							  <!-- 							<th>预览</th> 
 							  <th>下载</th>-->
 							  <th width="110px">操作</th>
@@ -98,16 +97,6 @@
 									<c:out value="${appPerson.phone}"/>
 								</td>
 								<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
-								
-								<td style="text-align:center">
-								<c:forEach items="${appPerson.shareUsers}" var="shareUser" varStatus="s">								
-									<a href="javascript:return void" onclick="searchShareUserDetail(${shareUser.userId})" >
-					        			<c:out value="${shareUser.username}"/>
-					        			<c:if test="${!s.last}">;</c:if>
-					        		</a>					        	
-					       	 	</c:forEach>
-								</td>
-								
 								<td style="text-align:center"><a href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a> 
 								<a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">删除 </a>
 								</td>
@@ -181,7 +170,7 @@
 <script type="text/javascript">
 
 	function addAppPerson(){
-		var url = "<s:url value='/appPerson/appPersonAddForm.html'/>";
+		var url = "<s:url value='/appPerson/feeReduceTransactAppPersonForm.html'/>";
 		location.href = url
 	}
 	

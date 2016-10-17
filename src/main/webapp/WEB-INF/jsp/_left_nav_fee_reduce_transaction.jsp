@@ -11,7 +11,7 @@
 	</li> 		
 	<li class="active"> 
 		<a href="<s:url value='/appPerson/feeReduceTransactAppPersonForm.html'/>">
-		<h5>新增</h5>
+		<h5>申请备案</h5>
 		</a>
 	</li> 
 	</ul>
