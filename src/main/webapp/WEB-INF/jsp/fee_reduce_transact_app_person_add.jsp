@@ -63,15 +63,15 @@
 					
 					</c:if>
 					<br>
-					
+					<c:if test="${status==1 }">
 					<h5>备案证件号:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" value="${appPerson.transactionIdentityId}" name="transactionIdentityId" placeholder="必填项" required onblur="validateInfoNumber2(this.value)" maxlength="50"/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" value="${appPerson.transactionIdentityId}" name="transactionIdentityId" placeholder="必填项" onblur="validateInfoNumber2(this.value)" maxlength="50"/>
 					<span style="color: red; display: none;" id=numberError2>请输入不为空且备案证件号不超过20位的证件号</span>
 					<br>
 					<h5>备案年度:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="year" type="text" name="transactionYear" value="${appPerson.transactionYear}" placeholder="必填项" required onblur="validateYearNumber(this.value)"/>
-					<span style="color: red; display: none;" id="yearError">合法的备案年度格式如:2016</span>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="year" type="text" name="transactionYear" value="${appPerson.transactionYear}" placeholder="必填项"   maxlength="20"/>
 					<br>
+					</c:if>
 					<h5>手机号码:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="phone" type="text" value="${appPerson.phone}" name="phone" required placeholder="必填项" onblur="validatePhoneNumber(this.value)"/>
 					<span style="color: red; display: none;" id=phoneError>请输入正确的11位手机号码</span>
@@ -84,6 +84,9 @@
 						<input type="hidden" class="form-control" name="appPersonId"  value="${appPerson.appPersonId}"/>
 					</c:if>
 					<input type="hidden" class="form-control" name="status"  value="${status}"/>
+					<c:if test="${status==1 }">
+					<input type="hidden" class="form-control" name="fatherPath"  value="${fatherPath }"/>
+					</c:if>
 					<div style="height:20px;"></div> 
 					<button type="submit" style="width:90px;" class="button button-primary  button-rounded">保存</button>
 					</form>
@@ -92,22 +95,23 @@
 					<span style="color:red;font-size:15px;font-weight:bold">注意事项</span><br/><br/>
 					符合以任何一种下情况均可办理费减:
 						<br/>
-						1、个人年收入低于4.2万；<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=person" style="color:#00F;font-size:15px;" >下载模板</a>
+						1、个人年收入低于4.2万；
 					
 						<br/>
-						2、事业单位 ；<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=employer" style="color:#00F;font-size:15px;" >下载模板</a>
+						2、事业单位 ；
 					
 						<br/>
-						3、新注册企业或上年度企业应纳所得税额低于30万；<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=company" style="color:#00F;font-size:15px;" >下载模板</a>
+						3、新注册企业或上年度企业应纳所得税额低于30万；
 					
 						<br/><br/>
 						注：
 						<br/>
-						（1）龙图腾免费为所有用户提交电子申请；
+						（1）龙图腾免费为所有用户提交费减网上备案；
 						<br/>
-						（2）请在龙图腾提交申请后及时资料原件邮寄给所在省份专利代办处；
+						（2）请及时将备案证明原件邮寄给所在省份专利局代办处(<a href="http://www.sipo.gov.cn/zldbc/gdbctxdz/201310/t20131023_823923.html" target="_blank">各代办处通讯地址</a>)；
 						<br/>
-						（3）邮寄资料模板：个人模板，单位模板，企业模板。
+						（3）需邮寄的备案证明模板：<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=person" style="color:#00F;font-size:15px;" >个人模板</a>，<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=employer" style="color:#00F;font-size:15px;" >事业单位模板</a>，
+											<a href="<s:url value='/appPerson/downloadFeeReduceTransactTemplate.html'/>?type=company" style="color:#00F;font-size:15px;" >企业模板</a>。
 						<br/>
 						如有疑问请致电：0551-65771310
 				</div>
@@ -205,12 +209,10 @@
 		 var comment=document.getElementById("commentRece").value;
 		 var phoneRece=document.getElementById("phoneRece").value;
 		 var phone=document.getElementById("phone").value;
-		 var year=document.getElementById("year").value;
 		if(validateInfoNumber(number)
 				&validateInfoNumber1(number1)
 				&validateInfoNumber2(number2)
 				&validateCommentNumber(comment)
-				&validateYearNumber(year)
 				&validatePhoneNumber(phone)){
 			return true;
 		}else {

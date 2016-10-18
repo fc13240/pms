@@ -38,7 +38,7 @@
 						  <li><a href="#" class="">通知状态</a></li>
 					      <li><a href="#" class="">通知类型</a></li>
 					      <li><a href="#" class="">纸件申请</a></li>
-					      <li><a href="#" class="">期限监控</a></li>
+					      <li><a href="#" class="">剩余天数</a></li>
 					    </ul>
 					  </div>
 					  <div id="menu_con" style="min-width:1100px;">
@@ -224,10 +224,10 @@
 							<table class="search-table">
 							  <tr>
 							  <td>专利类型</td>
+							  <td>查看状态</td>
 							  <td>通知状态</td>
 							  <td>通知类型</td>
 							  <td>纸件申请</td>
-							  <td>查看状态</td>
 							  <td>发文日起始</td>
 							  <td></td>
 							  <td>发文日结束</td>
@@ -243,6 +243,13 @@
 						            <c:out value="${patentType.typeDescription}"/>
 						            </option>
 						          </c:forEach>
+						        </select>							  
+							  </td>
+							  <td>
+						        <select style="width:100px;" class="selectPointOfInterest form-control" name="noticeViewStatus">
+						          <option value="0">全部</option>
+						          <option value="1">已查看</option>
+						          <option value="2">未查看</option>
 						        </select>							  
 							  </td>
 							  <td>
@@ -275,13 +282,7 @@
 						          </c:forEach>
 						        </select>							  
 							  </td>
-							  <td>
-						        <select style="width:100px;" class="selectPointOfInterest form-control" name="noticeViewStatus">
-						          <option value="0">全部</option>
-						          <option value="1">已查看</option>
-						          <option value="2">未查看</option>
-						        </select>							  
-							  </td>
+							  
 							  <td>
 								<input style="width:108px;" class="selectPointOfInterest form-control"  type="text"  onclick="WdatePicker({el:'startAppDateId'})"  class="form-control" id="startAppDateId"  name="startDispatchDate" placeholder="发文日开始" value="" readonly="readonly" >							  
 							  </td>
@@ -314,6 +315,17 @@
 										<button class="button button-caution button-rounded">在线交费</button>
 										</a>
 					  				</td>
+					  				<td width="6%">
+										<a href="javascript:return void" onclick="batchShare()">
+										<button style="margin-left:10px;width:110px;" class="button button-rounded button-primary">分享给好友</button>
+										</a>
+					  				</td>
+					  				<td width="6%">
+										<a href="javascript:return void" onclick="batchChangeNoticeViewStatus()">
+										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">置为已查看</button>
+										</a>
+
+									</td>
 					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 					  				<td width="6%">
 										<a href="javascript:return void" onclick="batchProcessNotice(2)">
@@ -328,16 +340,12 @@
 										</a> 
 									</td>	
 									</se:authorize>
-					  				<td width="6%">
-										<a href="javascript:return void" onclick="batchShare()">
-										<button style="margin-left:10px;" class="button button-rounded button-primary">专利分享</button>
-										</a>
-					  				</td>
+					  				
 					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
 					  				
 					  				<td width="6%">
 										<a href="javascript:return void" onclick="batchChangeNoticePaperType(2)">
-										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">批量申请纸件</button>
+										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">申请纸件</button>
 										</a>
 					  				</td>
 					  				
@@ -345,14 +353,8 @@
 					  				<td width="6%">
 										<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportNotices()">表格导出</button>
 									</td>
-									<td width="6%">
-										<a href="javascript:return void" onclick="batchChangeNoticeViewStatus()">
-										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">置为已查看</button>
-										</a>
-
-									</td>
 									<td align="right">
-										<span class="span3" style="font-size:14px;">
+										<span class="span3" style="font-size:18px;font-weight:bold;">
 										<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" id="unreadNoticeCountForA">未查看${unreadNoticeCount}件
 										</a>
 										</span>
@@ -373,15 +375,15 @@
 							  <th width="90px">申请号/专利号</th>
 							  <th width="150px">专利名称</th>
 							  <th>第一申请人 </th>
-							  <th class="center">案件状态 </th>
+							  <!-- <th class="center">案件状态 </th> -->
 							  <th>内部编码/共享人</th>
 							  <th width="100px">发文日</th>
-							  <th>通知书名称</th>
+							  <th>案件状态/通知书</th>
+							  <th width="160px">通知查看/天数/处理</th>
+							 <!--  <th>剩余天数</th>  -->
 							  <th width="100px">纸件申请</th>
-							  <th width="160px">通知/查看 状态</th>
-							  <th>剩余天数</th> 
 							  <!--<th>下载</th>-->
-							  <th width="130">操作</th>
+							  <th width="80px">操作</th>
 							</tr>
 						  </thead>
 						  <tbody>
@@ -394,7 +396,7 @@
 								<td style="text-align:center"><c:out value="${notice.patent.appNo}"/></td>
 								<td style="text-align:center"><c:out value="${notice.patent.name}"/></td>
 								<td style="text-align:center"><c:out value="${notice.patent.appPerson}"/></td> 
-								<td style="text-align:center"><c:out value="${notice.patent.patentStatusText}"/></td>
+								<%-- <td style="text-align:center"><c:out value="${notice.patent.patentStatusText}"/></td> --%>
 								
 								<td style="text-align:center">
 									<c:out value="${notice.patent.internalCode}"/><br/>
@@ -408,11 +410,185 @@
 					
 								
 								<td style="text-align:center"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
-								<td style="text-align:center"><a id="download" href="javascript: void(0);" onClick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}');changeNoticeReadStatus(${notice.noticeId})">
+								<td style="text-align:center"><span>${notice.patent.patentStatusText}</span><br/><a id="download" href="javascript: void(0);" onClick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}');changeNoticeReadStatus(${notice.noticeId})">
 								  <c:out value="${notice.name}"/>
 								  </a> 
 								</td>
 								
+								<%-- <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
+								<td>
+								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this);">
+									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
+										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
+									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
+									  	>
+									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
+									  	</option>
+									</c:forEach>
+								  </select>
+								</td>
+								</se:authorize>
+								
+								
+								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
+								<td style="text-align:center">
+								  <select class="form-control" disabled="disabled">
+									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
+										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
+									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
+									  	>
+									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
+									  	</option>
+									</c:forEach>
+								  </select>
+								</td>
+								</se:authorize>
+								
+								<se:authorize access="hasRole('ROLE_USER') and  not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">
+								<c:if test="${notice.patent.ownerId==user.userId}">
+								<td style="text-align:center">
+								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this)">
+									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
+										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
+									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
+									  	>
+									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
+									  	</option>
+									</c:forEach>
+								  </select>
+								</td>
+								</c:if>
+								
+								<c:if test="${notice.patent.ownerId!=user.userId}">
+								<td style="text-align:center">
+								  <select id="roleUser" class="form-control" onClick=selectClick() onChange="javascript:changeRoleUserPaperApplyType('${notice.noticeId}', this)">
+										<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
+										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
+									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
+									  	>
+									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
+									  	</option>
+									</c:forEach>
+								  </select>
+								</td>
+								</c:if>
+								</se:authorize> --%>
+								
+								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
+								<td style="text-align:center" class="date_status">
+								<span class="readStatus" id="readStatusSpan${notice.noticeId}">
+									<c:choose>
+										<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
+										<c:otherwise>未查看
+										</c:otherwise>
+								  	</c:choose>
+								<br>
+								</span>
+								<span class="qixian">
+										<c:choose>
+											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
+											<c:otherwise>剩余
+										  	<c:out value="${notice.remainDays}"/>天
+											</c:otherwise>
+									  	</c:choose>
+									<br>
+								</span> 
+								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this);changeNoticeReadStatus(${notice.noticeId})">
+									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
+									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
+									  >
+									  <c:out value="${processStatus.processStatusDescription}"/>
+									  </option>
+									</c:forEach>
+								  </select>
+								</td >
+								<%-- <td style="text-align:center">
+									<span class="qixian">
+										<c:choose>
+											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
+											<c:otherwise>剩余
+										  	<c:out value="${notice.remainDays}"/>天
+											</c:otherwise>
+									  	</c:choose>
+									<br>
+									</span>  	
+								</td> --%>
+								</se:authorize>
+								
+								
+								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS','ROLE_USER') and not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
+								<c:if test="${notice.patent.ownerId!=user.userId}">
+								<td style="text-align:center" class="date_status">
+								<span class="readStatus" id="readStatusSpan${notice.noticeId}" style="float:left;padding-left:30px">
+									<c:choose>
+										<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
+										<c:otherwise>未查看
+										</c:otherwise>
+								  	</c:choose>
+								<br>
+								</span>
+								<span class="qixian" style="padding-left:0px;">
+										<c:choose>
+											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
+											<c:otherwise>剩余
+										  	<c:out value="${notice.remainDays}"/>天
+											</c:otherwise>
+									  	</c:choose>
+									<br>
+									</span>   
+								  <select  class="treatment_status selectPointOfInterest form-control" disabled="disabled">
+									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
+									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
+									  >
+									  <c:out value="${processStatus.processStatusDescription}"/>
+									  </option>
+									</c:forEach>
+								  </select>
+								</td>
+								</c:if>
+								
+								<c:if test="${notice.patent.ownerId==user.userId}">
+								<td style="text-align:center" class="date_status">
+								<span class="readStatus" id="readStatusSpan${notice.noticeId}" style="float:left;padding-left:30px">
+									<c:choose>
+										<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
+										<c:otherwise>未查看
+										</c:otherwise>
+								  	</c:choose>
+								<br>
+								</span>
+								<span class="qixian" style="padding-left:0px;">
+										<c:choose>
+											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
+											<c:otherwise>剩余
+										  	<c:out value="${notice.remainDays}"/>天
+											</c:otherwise>
+									  	</c:choose>
+									<br>
+									</span>   
+								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
+									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
+									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
+									  >
+									  <c:out value="${processStatus.processStatusDescription}"/>
+									  </option>
+									</c:forEach>
+								  </select>
+								</td>
+								</c:if>
+								<%-- <td style="text-align:center">
+									<span class="qixian">
+										<c:choose>
+											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
+											<c:otherwise>剩余
+										  	<c:out value="${notice.remainDays}"/>天
+											</c:otherwise>
+									  	</c:choose>
+									<br>
+									</span>  	
+								</td> --%>
+								
+								</se:authorize>
 								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td>
 								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this);">
@@ -471,101 +647,11 @@
 								</td>
 								</c:if>
 								</se:authorize>
-								
-								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
-								<td style="text-align:center" class="date_status">
-								<span class="readStatus" id="readStatusSpan${notice.noticeId}">
-									<c:choose>
-										<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
-										<c:otherwise>未查看
-										</c:otherwise>
-								  	</c:choose>
-								<br>
-								</span>  
-								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this);changeNoticeReadStatus(${notice.noticeId})">
-									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
-									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
-									  >
-									  <c:out value="${processStatus.processStatusDescription}"/>
-									  </option>
-									</c:forEach>
-								  </select>
-								</td >
-								<td style="text-align:center">
-									<span class="qixian">
-										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-											<c:otherwise>剩余
-										  	<c:out value="${notice.remainDays}"/>天
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span>  	
-								</td>
-								</se:authorize>
-								
-								
-								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS','ROLE_USER') and not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
-								<c:if test="${notice.patent.ownerId!=user.userId}">
-								<td style="text-align:center" class="date_status">
-								<span class="readStatus" id="readStatusSpan${notice.noticeId}">
-									<c:choose>
-										<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
-										<c:otherwise>未查看
-										</c:otherwise>
-								  	</c:choose>
-								<br>
-								</span> 
-								  <select  class="treatment_status selectPointOfInterest form-control" disabled="disabled">
-									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
-									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
-									  >
-									  <c:out value="${processStatus.processStatusDescription}"/>
-									  </option>
-									</c:forEach>
-								  </select>
-								</td>
-								</c:if>
-								
-								<c:if test="${notice.patent.ownerId==user.userId}">
-								<td style="text-align:center" class="date_status">
-								<span class="readStatus" id="readStatusSpan${notice.noticeId}">
-									<c:choose>
-										<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
-										<c:otherwise>未查看
-										</c:otherwise>
-								  	</c:choose>
-								<br>
-								</span> 
-								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
-									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
-									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
-									  >
-									  <c:out value="${processStatus.processStatusDescription}"/>
-									  </option>
-									</c:forEach>
-								  </select>
-								</td>
-								</c:if>
-								<td style="text-align:center">
-									<span class="qixian">
-										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-											<c:otherwise>剩余
-										  	<c:out value="${notice.remainDays}"/>天
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span>  	
-								</td>
-								
-								</se:authorize>
-								
 								<td style="text-align:center">
 								<a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}" onclick="changeNoticeReadStatus(${notice.noticeId})"> 下载 </a> 
 								<a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
 								  分享
-								  </a>
+								  </a><br/>
 								  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${notice.patent.patentId}'/>">
 								  交费
 								  </a>

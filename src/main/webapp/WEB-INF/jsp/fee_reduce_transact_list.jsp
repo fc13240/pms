@@ -97,8 +97,10 @@
 									<c:out value="${appPerson.phone}"/>
 								</td>
 								<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
-								<td style="text-align:center"><a href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a> 
-								<a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>&status=1">删除 </a>
+								<td style="text-align:center"><a href="javascript:editorAppPerson(${appPerson.appPersonId})"> 编辑 </a> 
+<%-- 								<td style="text-align:center"><a href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a>  --%>
+								<%-- <a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteFeeReduceAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>&status=1&currentPage=${page.currentPage}">删除 </a> --%>
+								<a href="javascript:deleteFeeReduceAppPersonInfo(${appPerson.appPersonId},1)">删除 </a>
 								</td>
 							  </tr>
 							</c:forEach>
@@ -108,7 +110,10 @@
 						
 						
 						<!-- 分页功能 start -->
-			        <div style="height:30px;background:#fff;">	
+			        <div style="height:30px;background:#fff;">
+			        	<div id="holdCurrentPage" style="display:none;">
+			        		<input id="hold" value="${page.currentPage}"/>
+			        	</div>
 			          <c:if test="${searchCondition == null}">
 			            <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1">首页</a>
 			              <c:choose>
@@ -299,7 +304,26 @@ function gotoPageForEnter(event) {
 				location.reload();
 			}
 		});		
-	}	
+	}
+	
+	function deleteFeeReduceAppPersonInfo(appPersonId,status){
+		$.ajax({
+			url:"<s:url value='/appPerson/deleteFeeReduceAppPersonInfo.html'/>",
+			data:{"appPersonId":appPersonId,"status":status},
+			async:false,
+			success:function (){
+				
+			}
+		});
+		
+		location.reload();
+	}
+	
+	function editorAppPerson(appPersonId){
+		var fatherPath=window.location.href;
+		fatherPath=fatherPath.substring(fatherPath.indexOf("appPerson")-1);
+		window.location.href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId="+appPersonId+"&fatherPath="+fatherPath; 
+	}
 </script>
 </body>
 </html>

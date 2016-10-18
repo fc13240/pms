@@ -32,8 +32,9 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
-					<form action="<s:url value='/express/addExpress.html'/>" method="post" id="addExpressForm" >
+					<form action="<s:url value='/express/addExpress.html'/>" method="post" id="addExpressForm">
 					  <div class="lt-third" style="background:#fff;margin-top:10px;">
+					  <input type="hidden" name="receiver.userId" id="userId"/>
 					  	<%-- <h5>从好友中选择：<select name="receiver.userId" class="form-control" style="width:120px;display:inline;" id="receiver" required onchange="loadContactAddress(this.value)">
 					  		<option value=''>请选择</option>
 					  		<c:forEach items="${userFriends}" var="userFriend">
@@ -57,10 +58,10 @@
 					  		</c:forEach>
 						</select> --%>
 						</h5>
-						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" id="receiverName"  type="text" required maxLength="30"/>
-						<span id="receiverError" style="color: red; display: none;">请输入的收件人姓名不要超过30字</span>
+						<input style="width:600px;display:inline;" class="selectPointOfInterest form-control" id="receiverName" onchange="validateInputInfo(this.value, 'receiverError', 50)" type="text" required="required" maxLength="30" readonly="readonly" />
+						<span id="receiverError" style="color: red; display: none;">请选择好友</span>
 						<br>
-						<h5>快递地址 :<a href="javascript:void(0)" onclick="loadFriendAddress()">选择好友地址</a>
+						<h5>快递地址 :<a  href="javascript:void(0)" onclick="loadFriendAddress()">选择好友地址</a>
 							<%-- <select  class="form-control" style="width:120px;display:inline;" id="friendContactAddress" required onchange="loadContact(this.value)">
 						  		<option value=''>请选择</option>
 						  		<optgroup id="selectGroup">
@@ -68,46 +69,49 @@
 							</select>
 						 --%>
 						</h5>
-				        <select name="contactAddress.province" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities()" required>
+				        <select name="contactAddress.province" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities();validateInputInfo(this.value, 'provinceError', 50)" required>
 					  		<option value='' id="provinceOption">请选择</option>
 					  		<c:forEach items="${provinces}" var="province">
 								<option value="${province.id}">${province.name}</option>
 					  		</c:forEach>
 						</select>
-						<select name="contactAddress.city" id="city" style="width:226px;display:inline;" class="form-control" onchange="loadDistricts()" required>
+						<select name="contactAddress.city" id="city" style="width:226px;display:inline;" class="form-control" onchange="loadDistricts();validateInputInfo(this.value, 'provinceError', 50)" required>
 					 	 	<option value='' id="cityOption">请选择</option>
 						</select>
-						<select name="contactAddress.district" style="width:226px;display:inline;" class="form-control" id="district" required>
+						<select name="contactAddress.district" style="width:226px;display:inline;" class="form-control" id="district" required onchange="validateInputInfo(this.value, 'provinceError', 50)"">
 					 		<option value='' id="districtOption">请选择</option>
 						</select>
-						<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="contactAddress.detailAddress" id="detailAddress" required placeholder="详细地址"  maxLength="100"/>
+						<input class="selectPointOfInterest form-control" style="width:600px;margin-top:5px" type="text" name="contactAddress.detailAddress" id="detailAddress" onblur="validateInputInfo(this.value, 'detailAddressError', 100)" required placeholder="详细地址"  maxLength="100"/>
+						<span id="provinceError" style="color: red; display: none;">请请选择所在的省市地区</span>
 						<span id="detailAddressError" style="color: red; display: none;">请输入的详细地址不要超过100字</span>
-				        <br>
 				        <h5>联系人:</h5>
-						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" id="contactPerson" name="contactPerson" type="text" required maxLength="200"/>
+						<input style="width:600px;display:inline;" class="selectPointOfInterest form-control" id="contactPerson" name="contactPerson" type="text" onblur="validateInputInfo(this.value, 'contactPersonError', 200)" required maxLength="200"/>
 						<span id="contactPersonError" style="color: red; display: none;">请输入的联系人在200个字以内</span>
 						<br>	
-				       	<h5>手机号码或电话号码：</h5>
-				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="phone" id="phone" value="" maxLength="20" required >
+				       	<h5>联系电话：</h5>
+				       	<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="phone" id="phone" value="" maxLength="20" required onblur="validatePhoneNumber(this.value)">
 				       <!-- 	onblur="validatePhoneNumber(this.value)" -->
 				       	<span id="phoneError" style="color: red; display: none;">请输入正确的手机或者电话号</span>
 				       	<br/>
 				       
 				       	<h5>快递公司:</h5>
-				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="expressCompany" id="expressCompany" value="" maxLength="100" required/>
+				       	<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressCompany" id="expressCompany" value="" onblur="validateInputInfo(this.value, 'expressCompanyError', 100)" maxLength="100" required/>
 				       	<span id="expressCompanyError" style="color: red; display: none;">请输入的快递方式不要超过100字</span>
 				       	<h5>快递单号:</h5>
-				       	<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="expressNo" id="expressNo" value="" maxLength="100" required/>
-				       	<span id="expressNoError" style="color: red; display: none;">请输入正确的手机或者电话号</span>
+				       	<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressNo" id="expressNo" value="" onblur="validateInputInfo(this.value, 'expressNoError', 50)" maxLength="50" required/>
+				       	<span id="expressNoError" style="color: red; display: none;">请输入快递单号</span>
 						<br>
 				 		<h5>寄出时间:</h5>
 					    <input style="width:400px;pisplay:inline;"  class="selectPointOfInterest form-control" type="text" class="form-control" id="startAppDateId" 
-							name="sendTime" placeholder="寄出时间选择" readonly="readonly" onclick="javascript:$('#start_date_img').click()" required> 
+							name="sendTime" placeholder="寄出时间选择" readonly="readonly" onclick="javascript:$('#start_date_img').click()" required onblur="validateInputInfo(this.value, 'startAppDateIdError', 200)"> 
 						<img style="display:none;" onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" align="absmiddle" id="start_date_img">
+						<span id="startAppDateIdError" style="color: red; display: none;">寄出时间不能为空</span>
 				        <br>
 					    
 						<h5>快递内容:</h5>
-						<input style="width:400px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="100"/>
+						<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 200)"/>
+						<span id="expressRemarkError" style="color: red; display: none;">请输入的快递内容在500字以内</span>
+						<br/>
 						<input type="hidden" name="expressStatus.expressStatusId" id="expressStatus" />
 						<br>
 					    <div style="height:20px;"></div>
@@ -141,7 +145,7 @@
             </button>
             
             <h4 class = "modal-title" id = "myModalLabel">
-            	从好友中选择地址
+            	选择快递地址
             </h4>
          </div>
 	         <div class = "modal-body">
@@ -176,7 +180,7 @@
 
 <button id="hiddenFriendModal" style="display:none;" type="button" class = "button button-caution button-rounded" data-toggle = "modal" data-target = "#friendModal">
 </button>
-<div class = "modal fade" id = "updateContactModal" tabindex = "-1" role = "dialog" 
+<div class = "modal fade" id = "friendModal" tabindex = "-1" role = "dialog" 
    aria-labelledby = "myModalLabel" aria-hidden = "true" >
    
    <div class = "modal-dialog" style="width:750px">
@@ -195,7 +199,7 @@
 				<div class="lt-box" style="padding:20px;">
 						
 					<a href="javascript:return void" onclick="addFriend()" >
-					<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom">添加好友</button>
+					<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom">确认选择</button>
 					</a>
 					<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
@@ -211,23 +215,18 @@
 							</tr>
 						  </thead>
 						  <tbody >
-						  	<c:forEach items="${friends}" var="friend" varStatus="status">
+						  
+						  	<c:forEach items="${userFriends}" var="friend" varStatus="status">
 						        <tr>
+						          <td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
+									  <input type="radio" name="friend-check-item" value="${friend.user.userId }" friendName="${friend.user.username}"/></span>
+									  <span class="lbl"></span></label>
+								  </td>
 						          <td style="text-align:center">${status.count}</td>
-	
-						          <td style="text-align:center">
-									<a href="javascript:return void" onclick="searchFriendDetail(${friend.user.userId})" >
-						        		<c:out value="${friend.user.username}"/>
-						        	</a>					        	
-								</td>
-						          
+						          <td style="text-align:center"><c:out value="${friend.user.username}"/></td>
 						          <td style="text-align:center"><c:out value="${friend.user.name}"/></td>
 						          <td style="text-align:center"><c:out value="${friend.user.email}"/></td>
 						          <td style="text-align:center"><c:out value="${friend.user.phone}"/></td>
-						          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${friend.remarkName}' onChange="changeRemarkName('<c:out value='${friend.friendId}'/>', this.value)"/></td>
-						          <td style="text-align:center"><c:out value="${friend.getUserTypeAsString()}"/></td>
-						          <td style="text-align:center"><c:out value="${friend.getOrganization()}"/></td>
-						          <td style="text-align:center"><a  href="<s:url value='/friend/delete/'/><c:out value='${friend.friendId}.html'/>">删除好友</a></td>
 						        </tr>
 					      	</c:forEach>
 						  
@@ -326,7 +325,45 @@
 
 function saveExpress(expressStatus){
 	$("#expressStatus").val(expressStatus);
-	$("#addExpressForm").submit();
+	var phone=$("#phone").val();
+	var receiverName=$("#receiverName").val();
+	var province=$("#province").val();
+	var city=$("#city").val();
+	var district=$("#district").val();
+	var detailAddress=$("#detailAddress").val();
+	var contactPerson=$("#contactPerson").val();
+	var expressCompany=$("#expressCompany").val();
+	var expressNo=$("#expressNo").val();
+	var startAppDateId=$("#startAppDateId").val();
+	var expressRemark=$("#expressRemark").val();
+	//validateInputInfo(receiverName, "receiverError", 30);
+	if (validatePhoneNumber(phone)
+		&validateInputInfo(receiverName, "receiverError", 30)
+		&validateInputInfo(province, "provinceError", 50)
+		&validateInputInfo(city, "provinceError", 50)
+		&validateInputInfo(district, "provinceError", 50)
+		&validateInputInfo(detailAddress, "detailAddressError", 100)
+		&validateInputInfo(contactPerson, "contactPersonError", 200)
+		&validateInputInfo(expressCompany, "expressCompanyError", 100)
+		&validateInputInfo(expressNo, "expressNoError", 50)
+		&validateInputInfo(startAppDateId, "startAppDateIdError", 200)
+		&validateInputInfo(expressRemark, "expressRemarkError", 200)
+	) {
+		$("#addExpressForm").submit();
+	}else{
+		
+	}
+}
+
+
+function validateInputInfo(value,errorId,maxStringLength){
+	$("#"+errorId).css("display","none");
+	if (value==""||value.length>maxStringLength||value==null) {
+		$("#"+errorId).css("display","block");
+		return false;
+	} else {
+		return true;
+	}
 }
 
 function addContactAddressOptions(selectObj, options) {
@@ -334,11 +371,11 @@ function addContactAddressOptions(selectObj, options) {
 	selectObj.append("<option value='" + val.id + "'>" + val.receiver + "</option>");
 	});	
 	}
-function loadContactAddress(userId){
-	var receiver = $("#receiver").val();
-	if (receiver != "") {
+function loadContactAddress(){
+	var userId = $("#userId").val();
+	if (userId != "") {
 		$.ajax({
-			url: "<s:url value='/express/getContactAddress.html'/>?userId=" + receiver,
+			url: "<s:url value='/express/getContactAddress.html'/>?userId=" + userId,
 			type: 'get',
 			dataType: 'json',
 			success: function(result) {
@@ -391,10 +428,11 @@ function loadReceiver(receiverId){
 }
 
 function loadFriendAddress(){
+	loadContactAddress();
 	$('button[id=hiddenUpdateContactModal]').click();
 }
 function loadFriend(){
-	$('button[id=hiddenUpdateContactModal]').click();
+	$('button[id=hiddenFriendModal]').click();
 }
 
 
@@ -407,7 +445,50 @@ function addContact(){
     	$("#updateContactModalCloseBtn").trigger("click");
     }
 }
+function addFriend(){
+	var friendId= $('input:radio[name="friend-check-item"]:checked').val();
+	var friendName= $('input:radio[name="friend-check-item"]:checked').attr("friendName");
+     if(friendId==null){
+        alert("请选择好友!");
+    }else{
+    	$("#userId").val(friendId);
+    	$("#receiverName").val(friendName);
+    	$("#friendModalCloseBtn").trigger("click");
+    	if($("#userId").val()==null||$("#userId").val()==""){
+    		$("#choiceFriendAddress").css("display","none");
+    	}else{
+    		$("#choiceFriendAddress").css("display","block");
+    	}
+    	
+    }
 
+}
+function validatePhoneNumber(phoneNumber) {
+	var reg = new RegExp("^[0-9]{3,4}(-)?[0-9]+$");
+	document.getElementById("phoneError").style.display = "none";
+	if (reg.test(phoneNumber)) {
+		if (phoneNumber.length<7 || phoneNumber.length>13) {
+			document.getElementById("phoneError").style.display = "";
+			return false;
+		} else {
+			return true;
+		}
+	} else {
+		document.getElementById("phoneError").style.display = "";
+		return false;
+	}
+}
+
+/* function check() {
+	alert("");
+	var phone=$("#phone").val();
+	if (validatePhoneNumber(phone)) {
+		alert("------kk------")
+		return true;
+	} else {
+		return false;
+	}
+} */
 </script>
 </body>
 </html>
