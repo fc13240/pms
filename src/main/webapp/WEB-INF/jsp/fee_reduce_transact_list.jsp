@@ -269,7 +269,7 @@ function gotoPage() {
 		return;
 	}
 	
-	var url = "<s:url value='/appPerson/list.html'/>?currentPage=" + pageNo;
+	var url = "<s:url value='/appPerson/getUserFeeReduceAppPersonList.html'/>?currentPage=" + pageNo;
 	
 	<c:if test="${searchCondition != null}">
 		url = "<s:url value='/appPerson/searchFeeReduceAppPerson.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
