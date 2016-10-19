@@ -129,7 +129,7 @@
 				<div class="lt-box" style="padding:20px;">
 						
 					<a href="javascript:return void" onclick="addContact()" >
-					<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以添加多个发明人批量哦！">添加联系人</button>
+					<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom">添加地址</button>
 					</a>
 					<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
