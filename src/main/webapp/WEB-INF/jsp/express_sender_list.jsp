@@ -33,9 +33,9 @@
 					  <form class="form-inline" action="<s:url value='/express/searchSenderExpress.html'/>" method="get">
 					  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 					    <div class="form-group">
-					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="<c:out value='${param.keyword}'/>" placeholder="快递状态/快递方式  /快递内容" class="t-input form-control"/>	
+					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="<c:out value='${param.keyword}'/>" placeholder="快递状态/快递方式 /快递内容" class="t-input form-control"/>	
 					    
-					     <button class="button button-caution button-rounded" type="submit" style="width:100px;">搜索快递</button>
+					     <button class="button button-caution button-rounded" type="submit" style="width:100px;">查询</button>
 					    </div>
 					  </form>
 
@@ -46,21 +46,21 @@
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:30px 0 0 0;">
 					
-					<table id="simple-table" class="table table-striped table-bordered table-hover">
+					<table id="simple-table" class="table table-striped table-bordered table-hover" width="100%">
 					  <thead>
 						<tr class="simple_bag">
-						  <th class="center" width="45">
+						  <th class="center" width="45px">
 						  	<%-- <label class="pos-rel">
 								<input type="checkbox" class="patent-check-item" id="checkall"  name="checkall" />
 								<span class="lbl"></span> 
 							  </label> --%>
 						  	序号
 						  </th>
-						  <th>寄件人</th>
-						  <th>收件人</th>
+						  <th width="80px">寄件人</th>
+						  <th width="80px">收件人</th>
 						  <th>快递地址</th>
 						  <th>快递方式</th>
-						  <th>快递时间</th>
+						  <th width="100px">快递时间</th>
 						  <th>联系方式</th>
 						  <th>快递内容</th>
 						  <th>快递状态</th>
