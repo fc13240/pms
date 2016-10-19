@@ -61,8 +61,8 @@
 					  </se:authorize>
 					</select>
 					
-					</c:if>
 					<br>
+					</c:if>
 					<c:if test="${status==1 }">
 					<h5>备案证件号:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="numberRece2" type="text" value="${appPerson.transactionIdentityId}" name="transactionIdentityId" placeholder="必填项" onblur="validateInfoNumber2(this.value)" maxlength="50"/>
