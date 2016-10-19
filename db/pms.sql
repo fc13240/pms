@@ -1013,5 +1013,6 @@ ALTER TABLE common_app_person ADD COLUMN is_fee_reduce int DEFAULT '1' COMMENT '
 UPDATE common_app_person SET is_fee_reduce=2;
 
 alter table express modify express_no varchar(50);
+alter table express modify express_remark varchar(1000);
 
 
