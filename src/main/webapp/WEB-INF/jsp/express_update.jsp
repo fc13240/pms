@@ -129,7 +129,7 @@
 				<div class="lt-box" style="padding:20px;">
 						
 					<a href="javascript:return void" onclick="addContact()" >
-					<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom">添加地址</button>
+					<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom">确认选择</button>
 					</a>
 					<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
