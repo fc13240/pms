@@ -50,7 +50,7 @@
 						<option value='${contactAddresses.district}'>${contactAddresses.districtName}</option>
 					  </select>
 					  <h5>详细地址:</h5>
-					  <input type="text" class="form-control" style="width:300px;" name="detailAddress" id="detailAddress"  value="${contactAddresses.detailAddress}" required/>
+					  <input type="text" class="form-control" style="width:300px;" name="detailAddress" id="detailAddress"  value="${contactAddresses.detailAddress}" required maxlength="100"/>
 					  <h5>手机或固话</h5>
 					  <input type="text" class="form-control" style="width:300px;" name="phone" id="phone" value="${contactAddresses.phone}" 
 					  		minlength="6" maxlength="15" onblur="validatePhoneNumber(this.value)" required/>
