@@ -73,7 +73,7 @@
 		FROM express  e LEFT JOIN users u ON e.sender = u.user_id LEFT JOIN users us ON e.receiver=us.user_id 
 		LEFT JOIN provinces p ON  e.province=p.id LEFT JOIN cities c ON e.city=c.id LEFT JOIN districts d ON e.district=d.id 
 		LEFT JOIN express_status es ON e.express_status =es.express_status_id
-		WHERE e.receiver=#{userId}
+		WHERE e.receiver=#{userId} and e.express_status in (2,3)
 	</select>
 	
 	<update id="changeExpressStatus">
