@@ -1012,7 +1012,8 @@ ALTER TABLE common_app_person ADD COLUMN phone VARCHAR(30) COMMENT '联系人手
 ALTER TABLE common_app_person ADD COLUMN is_fee_reduce int DEFAULT '1' COMMENT '是否为费减备案状态';
 UPDATE common_app_person SET is_fee_reduce=2;
 
-alter table express modify express_no varchar(50);
-alter table express modify express_remark varchar(1000);
+alter table express modify column express_no varchar(50);
+alter table express modify column express_remark varchar(1000);
+alter table patent_doc_app_person modify column id_number varchar(50);
 
 
