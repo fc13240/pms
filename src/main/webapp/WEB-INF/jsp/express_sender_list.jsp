@@ -33,7 +33,7 @@
 					  <form class="form-inline" action="<s:url value='/express/searchSenderExpress.html'/>" method="get">
 					  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 					    <div class="form-group">
-					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="<c:out value='${param.keyword}'/>" placeholder="快递状态 /快递内容" class="t-input form-control"/>	
+					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="<c:out value='${param.keyword}'/>" placeholder="快递状态/快递方式 /快递内容" class="t-input form-control"/>	
 					    
 					     <button class="button button-caution button-rounded" type="submit" style="width:100px;">搜索快递</button>
 					    </div>
@@ -83,7 +83,7 @@
 						  </td>
 						  <td class="center" style="text-align:center">${express.expressCompany}</td>
 						  <td class="center" style="text-align:center"><fmt:formatDate value="${express.sendTime}" pattern="yyyy-MM-dd"/></td>
-						  <td class="center" style="text-align:center">姓名:${express.contactPerson}&nbsp;电话:${express.phone}</td>
+						  <td class="center" style="text-align:center">${express.contactPerson}&nbsp;${express.phone}</td>
 						  <td class="center" style="text-align:center">${express.expressRemark}</td>
 						  <td class="center" style="text-align:center">${express.expressStatus.expressStatusDesc}</td>
 						  <td class="center" style="text-align:center">
