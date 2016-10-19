@@ -192,7 +192,7 @@ function gotoPage() {
 		return;
 	}
 	
-	var url = "<s:url value='/express/express_sender_list.html'/>?currentPage=" + pageNo;
+	var url = "<s:url value='/express/getUserReceiverExpressList.html'/>?currentPage=" + pageNo;
 	
 	
 	location.href = url
