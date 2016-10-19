@@ -35,7 +35,7 @@
 					    <div class="form-group">
 					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="<c:out value='${param.keyword}'/>" placeholder="快递状态/快递方式 /快递内容" class="t-input form-control"/>	
 					    
-					     <button class="button button-caution button-rounded" type="submit" style="width:100px;">搜索快递</button>
+					     <button class="button button-caution button-rounded" type="submit" style="width:100px;">查询</button>
 					    </div>
 					  </form>
 
