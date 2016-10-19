@@ -1,7 +1,9 @@
 package com.lotut.pms.service.utils;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -32,15 +34,15 @@ public class PatentDownload {
 	
 	public static void main(String[] args) throws Exception {
 		
-/*		try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("d:/test.xls"));
-				InputStream in = downloadPatentExcelFile();) 
+	try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("d:/test.html"));
+				InputStream in = downloadPatentExcelFile("341222198912126576", "1234566");) 
 		{
 			byte[] bytes = new byte[4096];
 			int bytesRead = 0;
 			while ((bytesRead = in.read(bytes)) > 0) {
 				out.write(bytes, 0, bytesRead);
 			}
-		}*/
+		}
 	}
 	
 	public static InputStream downloadPatentExcelFile(String username,String password) throws Exception {
@@ -106,7 +108,7 @@ public class PatentDownload {
 	        	if (entity.getContentLength() == 0) {
 	        		throw new IOException("Empty content");
 	        	}
-	        	ByteArrayOutputStream out = new ByteArrayOutputStream((int)entity.getContentLength());
+	        	ByteArrayOutputStream out = new ByteArrayOutputStream();
 	        	entity.writeTo(out);
 	        	return new ByteArrayInputStream(out.toByteArray());
 	        } else {

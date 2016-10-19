@@ -74,7 +74,7 @@
 	
 	<!-- 分页 -->
 	<select id="getUserNoticesCount" resultType="int">
-		select count(*) from notices n where patent in (select patent from user_patents where user = #{userId}) 
+		select count(*) from notices n where patent in (select patent from user_patents where user = #{userId} and trash_status=1) 
 	</select>
 	
 	<select id="getUserNoticesByPage" parameterType="Page" resultMap="NoticeResultMap">
