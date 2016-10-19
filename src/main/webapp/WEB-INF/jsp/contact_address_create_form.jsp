@@ -57,7 +57,7 @@
 					</select>	
 					<br> 		  
 			       	<h5>详细地址:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="detailAddress" required/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="detailAddress" required maxlength="100"/>
 					<br>   
 					<div style="height:20px;"></div> 
 					<button type="submit" style="width:90px;" class="button button-primary  button-rounded">保存</button>
