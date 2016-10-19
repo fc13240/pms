@@ -54,10 +54,6 @@
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
-							  <th class="center" width="20px"> <label class="pos-rel">
-								<input style="width:30px;" type="checkbox" class="check-item">
-								<span class="lbl"></span> </label>
-							  </th>
 							  <th class="center" width="40px">序号</th>
 							  <th width="100px">姓名或名称</th>
 							  <th width="100px">证件号码 </th>
@@ -76,10 +72,6 @@
 						  <tbody>
 							<c:forEach items="${appPersons}" var="appPerson" varStatus="status">
 							  <tr>
-								<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-								<input type="checkbox" class="check-item" appPerson="<c:out value='${appPerson.appPersonId}'/>">
-								<span class="lbl"></span></label>
-								</td>
 								<td class="center" style="text-align:center"> ${status.count+ (page.currentPage-1)*page.pageSize} </td>
 								<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
 								<td style="text-align:center"><c:out value="${appPerson.idNumber}"/></td>

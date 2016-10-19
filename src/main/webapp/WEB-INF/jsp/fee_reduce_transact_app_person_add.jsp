@@ -78,7 +78,7 @@
 					<br>
 					<h5>纳税额(无纳税额请填0):</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="commentRece" type="text" value="${appPerson.otherInfo}" name="otherInfo" required placeholder="必填项" onblur="validateCommentNumber(this.value)"/>
-					<span style="color: red; display: none;" id=commentError>请输入数字</span>
+					<span style="color: red; display: none;" id=commentError>请输入纳税额</span>
 					<br>
 					<c:if test="${not empty appPerson.appPersonId}">
 						<input type="hidden" class="form-control" name="appPersonId"  value="${appPerson.appPersonId}"/>
@@ -191,10 +191,10 @@
 			}
 	}
 	function validateCommentNumber(number) {
-		var regInt = new RegExp("^[0-9]*$");
-		var regFolat = new RegExp("^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$");
+		//var regInt = new RegExp("^[0-9]*$");
+		//var regFolat = new RegExp("^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$");
 		document.getElementById("commentError").style.display = "none";
-			if (!regInt.test(number)&&(!regFolat.test(number))) {
+			if (number==null||number.length<=0) {
 				document.getElementById("commentError").style.display = "";
 				return false;
 			} else {

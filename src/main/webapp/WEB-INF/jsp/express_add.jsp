@@ -94,22 +94,29 @@
 				       	<span id="phoneError" style="color: red; display: none;">请输入正确的手机或者电话号</span>
 				       	<br/>
 				       
-				       	<h5>快递公司:</h5>
-				       	<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressCompany" id="expressCompany" value="" onblur="validateInputInfo(this.value, 'expressCompanyError', 100)" maxLength="100" required/>
+				       	<h5>快递方式:</h5>
+				      <!--  	<div> -->
+				       	<input  style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressCompany" id="expressCompany" value="" onblur="validateInputInfo(this.value, 'expressCompanyError', 100)" maxLength="100" required placeholder="请输入快递公司和快递单号"/>
 				       	<span id="expressCompanyError" style="color: red; display: none;">请输入的快递方式不要超过100字</span>
-				       	<h5>快递单号:</h5>
-				       	<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressNo" id="expressNo" value="" onblur="validateInputInfo(this.value, 'expressNoError', 50)" maxLength="50" required/>
+				       	<!-- </div> -->
+				       	<%-- <div style="float:left;">
+				       	 <input  style="width:300px;" class="selectPointOfInterest form-control" type="text" name="expressNo" id="expressNo" value="" onblur="validateInputInfo(this.value, 'expressNoError', 50)" maxLength="50" required/>
 				       	<span id="expressNoError" style="color: red; display: none;">请输入快递单号</span>
+				       	</div> --%>
+				       <!-- 	<h5>快递单号:</h5> -->
+				       <!-- 	<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressNo" id="expressNo" value="" onblur="validateInputInfo(this.value, 'expressNoError', 50)" maxLength="50" required/> -->
+				       	<%-- <span id="expressNoError" style="color: red; display: none;">请输入快递单号</span> --%>
 						<br>
 				 		<h5>寄出时间:</h5>
 					    <input style="width:400px;pisplay:inline;"  class="selectPointOfInterest form-control" type="text" class="form-control" id="startAppDateId" 
-							name="sendTime" placeholder="寄出时间选择" readonly="readonly" onclick="javascript:$('#start_date_img').click()" required onblur="validateInputInfo(this.value, 'startAppDateIdError', 200)"> 
+							name="sendTime" placeholder="寄出时间选择" readonly="readonly" onclick="javascript:$('#start_date_img').click()" required> 
 						<img style="display:none;" onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" align="absmiddle" id="start_date_img">
 						<span id="startAppDateIdError" style="color: red; display: none;">寄出时间不能为空</span>
 				        <br>
 					    
 						<h5>快递内容:</h5>
-						<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 200)"/>
+						<textarea rows="8" cols="8" style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 200)"></textarea>
+						<!-- <input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 200)"/> -->
 						<span id="expressRemarkError" style="color: red; display: none;">请输入的快递内容在500字以内</span>
 						<br/>
 						<input type="hidden" name="expressStatus.expressStatusId" id="expressStatus" />
@@ -333,8 +340,8 @@ function saveExpress(expressStatus){
 	var detailAddress=$("#detailAddress").val();
 	var contactPerson=$("#contactPerson").val();
 	var expressCompany=$("#expressCompany").val();
-	var expressNo=$("#expressNo").val();
-	var startAppDateId=$("#startAppDateId").val();
+	//var expressNo=$("#expressNo").val();
+	//var startAppDateId=$("#startAppDateId").val();
 	var expressRemark=$("#expressRemark").val();
 	//validateInputInfo(receiverName, "receiverError", 30);
 	if (validatePhoneNumber(phone)
@@ -345,8 +352,8 @@ function saveExpress(expressStatus){
 		&validateInputInfo(detailAddress, "detailAddressError", 100)
 		&validateInputInfo(contactPerson, "contactPersonError", 200)
 		&validateInputInfo(expressCompany, "expressCompanyError", 100)
-		&validateInputInfo(expressNo, "expressNoError", 50)
-		&validateInputInfo(startAppDateId, "startAppDateIdError", 200)
+		//&validateInputInfo(expressNo, "expressNoError", 50)
+		//&validateInputInfo(startAppDateId, "startAppDateIdError", 200)
 		&validateInputInfo(expressRemark, "expressRemarkError", 200)
 	) {
 		$("#addExpressForm").submit();

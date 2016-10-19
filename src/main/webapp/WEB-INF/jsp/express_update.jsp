@@ -74,9 +74,9 @@
 				       	<h5>快递公司:</h5>
 				       	<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressCompany" id="expressCompany" value="${express.expressCompany }" onblur="validateInputInfo(this.value, 'expressCompanyError', 100)" maxLength="100" required/>
 				       	<span id="expressCompanyError" style="color: red; display: none;">请输入的快递方式不要超过100字</span>
-				       	<h5>快递单号:</h5>
+				       	<%-- <h5>快递单号:</h5>
 				       	<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressNo" id="expressNo" value="${express.expressNo }" onblur="validateInputInfo(this.value, 'expressNoError', 50)" maxLength="50" required/>
-				       	<span id="expressNoError" style="color: red; display: none;">请输入快递单号</span>
+				       	<span id="expressNoError" style="color: red; display: none;">请输入快递单号</span> --%>
 						<br>
 				 		<h5>寄出时间:</h5>
 					    <input style="width:400px;pisplay:inline;"  class="selectPointOfInterest form-control" type="text" class="form-control" id="startAppDateId" value="<fmt:formatDate value="${express.sendTime }" pattern="yyyy-MM-dd"/>"
@@ -86,7 +86,7 @@
 				        <br>
 					    
 						<h5>快递内容:</h5>
-						<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="${express.expressRemark }" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 200)"/>
+						<textarea rows="8" cols="8" style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 200)">${express.expressRemark }</textarea>
 						<span id="expressRemarkError" style="color: red; display: none;">请输入的快递内容在500字以内</span>
 						<br/>
 						<input type="hidden" name="expressStatus.expressStatusId" id="expressStatus" />
@@ -310,7 +310,7 @@ function saveExpress(expressStatus){
 	var detailAddress=$("#detailAddress").val();
 	var contactPerson=$("#contactPerson").val();
 	var expressCompany=$("#expressCompany").val();
-	var expressNo=$("#expressNo").val();
+	//var expressNo=$("#expressNo").val();
 	var startAppDateId=$("#startAppDateId").val();
 	var expressRemark=$("#expressRemark").val();
 	//validateInputInfo(receiverName, "receiverError", 30);
@@ -322,7 +322,7 @@ function saveExpress(expressStatus){
 		&validateInputInfo(detailAddress, "detailAddressError", 100)
 		&validateInputInfo(contactPerson, "contactPersonError", 200)
 		&validateInputInfo(expressCompany, "expressCompanyError", 100)
-		&validateInputInfo(expressNo, "expressNoError", 50)
+		//&validateInputInfo(expressNo, "expressNoError", 50)
 		&validateInputInfo(startAppDateId, "startAppDateIdError", 200)
 		&validateInputInfo(expressRemark, "expressRemarkError", 200)
 	) {

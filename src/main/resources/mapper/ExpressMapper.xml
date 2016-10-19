@@ -65,7 +65,7 @@
 		FROM express  e LEFT JOIN users u ON e.sender = u.user_id LEFT JOIN users us ON e.receiver=us.user_id 
 		LEFT JOIN provinces p ON  e.province=p.id LEFT JOIN cities c ON e.city=c.id LEFT JOIN districts d ON e.district=d.id 
 		LEFT JOIN express_status es ON e.express_status =es.express_status_id
-		WHERE e.receiver=#{userId} ORDER BY  e.express_status,e.send_time limit #{startIndex}, #{pageSize}
+		WHERE e.receiver=#{userId} ORDER BY  e.express_status asc,e.send_time desc limit #{startIndex}, #{pageSize}
 	</select>
 	
 	<select id="getUserReceiverExpressCount" parameterType="int" resultType="int">
@@ -95,7 +95,7 @@
  		<if test="keyword != null">
 					and ( es.express_status_desc like #{keyword_pattern} or e.express_no like #{keyword_pattern} or e.express_remark like #{keyword_pattern})
 		</if>	
- 		ORDER BY  e.express_status,e.send_time limit #{page.startIndex}, #{page.pageSize}
+ 		ORDER BY  e.express_status asc,e.send_time desc limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
 	<select id="searchUserSenderExpressCount" parameterType="ExpressSearchCondition" resultType="int">
@@ -125,7 +125,16 @@
 		values(#{sender.userId,javaType=int,jdbcType=INTEGER},#{receiver.userId,javaType=int,jdbcType=INTEGER},#{expressRemark},
 		       #{contactAddress.province,javaType=int,jdbcType=INTEGER},#{contactAddress.city,javaType=long,jdbcType=BIGINT},
 		       #{contactAddress.district,javaType=long,jdbcType=BIGINT},#{contactAddress.detailAddress,javaType=string,jdbcType=VARCHAR},
-		       #{expressCompany},#{expressNo},#{sendTime},#{expressStatus.expressStatusId,javaType=int,jdbcType=INTEGER},#{phone},#{contactPerson})
+		       #{expressCompany},#{expressNo},
+		       <choose>
+	       		  <when test="sendTime!=null">
+	       			#{sendTime}
+	       		  </when>
+	       		  <otherwise>
+	       		    CURDATE()
+	       		  </otherwise>
+		       </choose>
+		       ,#{expressStatus.expressStatusId,javaType=int,jdbcType=INTEGER},#{phone},#{contactPerson})
 	</insert>
 	
 	<select id="searchUserReceiverExpressByPage" parameterType="ExpressSearchCondition" resultMap="ExpressResultMap">
@@ -143,7 +152,7 @@
  		<if test="keyword != null">
 					and ( es.express_status_desc like #{keyword_pattern} or e.express_no like #{keyword_pattern} or e.express_remark like #{keyword_pattern})
 		</if>	
- 		ORDER BY  e.express_status,e.send_time limit #{page.startIndex}, #{page.pageSize}
+ 		ORDER BY  e.express_status asc,e.send_time desc limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
 	<select id="searchUserReceiverExpressCount" parameterType="ExpressSearchCondition" resultType="int">

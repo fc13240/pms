@@ -900,6 +900,7 @@ margin: 1px 0 0 1px;}
 					<br>
 					<h5>备案证件号:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalTransactionIdentityId"/>
+					<span style="color: red; display: none;" id="appPersonTransactionIdentityIdError">请输入备案证件号在50字以内</span>
 					<br>
 					<h5>备案年度:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="modalTransactionYear"/>
@@ -982,6 +983,7 @@ margin: 1px 0 0 1px;}
 					<br>
 					<h5>备案证件号:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalTransactionIdentityId"/>
+					<span style="color: red; display: none;" id="updateModalTransactionIdentityIdError">请输入备案证件号在50字以内</span>
 					<br>
 					<h5>备案年度:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" id="updateModalTransactionYear"/>
@@ -1866,6 +1868,7 @@ function updateImgName(value,linkSeqNo){
 		var proxyUrl = $("#patentDocEntrustFileHidden").val();
 		var patentDocId =${patentDoc.patentDocId};
 		if(validateAppPersonFormWayOne(phoneRece,"appPersonPhoneError")&
+		   validateAppPersonFormWay(transactionIdentityId,"appPersonTransactionIdentityIdError")&
 		   validateFormWaySeven(appPersonName,"appPersonNameError")&
 		  // validateAppPersonFormWayTwo(postcodeAddress,"appPersonPostcodeAddress")
 		   validateAppPersonFormWayFour(postcodeAddress,"appPersonPostcodeAddressError")&
@@ -2114,6 +2117,7 @@ function updateImgName(value,linkSeqNo){
 		
 		if(validateFormWaySeven(name,"updateAppPersonNameError")&
 		   validateAppPersonFormWayTwo(idNumber,"updatePhoneReceError")&
+		   validateAppPersonFormWay(transactionIdentity,"updateModalTransactionIdentityIdError")&
 		   validateAppPersonFormWayFour(postcodeAddress,"updatePostcodeAddressError")&
 		   validateFormOtherInfo(otherInformation,"updateModalOtherInfoError")
 		   ){
@@ -2407,6 +2411,16 @@ function updateImgName(value,linkSeqNo){
 	
 	function validateAppPersonFormWayOne(value,id) {
 			if (value.length>50||value.length==0) {
+				$("#"+id).css("display","block");
+				return false;
+			} else {
+				$("#"+id).css("display","none");
+				return true;
+			}
+	}
+	
+	function validateAppPersonFormWay(value,id) {
+			if (value.length>50) {
 				$("#"+id).css("display","block");
 				return false;
 			} else {
