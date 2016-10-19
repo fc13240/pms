@@ -484,7 +484,7 @@
 								  	</c:choose>
 								<br>
 								</span>
-								<span class="qixian">
+								<span class="qixian" style="padding-left:0px;">
 										<c:choose>
 											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
 											<c:otherwise>剩余
