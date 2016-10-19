@@ -77,7 +77,7 @@
 	</select>
 	
 	<update id="changeExpressStatus">
-		update express set express_id=#{expressId},express_status=#{expressStatus}
+		update express set express_status=#{expressStatus} where express_id=#{expressId}
 	</update>
 	
 	<select id="searchUserSenderExpressByPage" parameterType="ExpressSearchCondition" resultMap="ExpressResultMap">
