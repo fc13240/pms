@@ -54,10 +54,6 @@
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
-							  <th class="center" width="20px"> <label class="pos-rel">
-								<input style="width:30px;" type="checkbox" class="check-item">
-								<span class="lbl"></span> </label>
-							  </th>
 							  <th class="center" width="40px">序号</th>
 							  <th width="100px">姓名或名称</th>
 							  <th width="100px">证件号码 </th>
@@ -76,10 +72,6 @@
 						  <tbody>
 							<c:forEach items="${appPersons}" var="appPerson" varStatus="status">
 							  <tr>
-								<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-								<input type="checkbox" class="check-item" appPerson="<c:out value='${appPerson.appPersonId}'/>">
-								<span class="lbl"></span></label>
-								</td>
 								<td class="center" style="text-align:center"> ${status.count+ (page.currentPage-1)*page.pageSize} </td>
 								<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
 								<td style="text-align:center"><c:out value="${appPerson.idNumber}"/></td>
@@ -97,8 +89,10 @@
 									<c:out value="${appPerson.phone}"/>
 								</td>
 								<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
-								<td style="text-align:center"><a href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a> 
-								<a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>&status=1">删除 </a>
+								<td style="text-align:center"><a href="javascript:editorAppPerson(${appPerson.appPersonId})"> 编辑 </a> 
+<%-- 								<td style="text-align:center"><a href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a>  --%>
+								<%-- <a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteFeeReduceAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>&status=1&currentPage=${page.currentPage}">删除 </a> --%>
+								<a href="javascript:deleteFeeReduceAppPersonInfo(${appPerson.appPersonId},1)">删除 </a>
 								</td>
 							  </tr>
 							</c:forEach>
@@ -108,7 +102,10 @@
 						
 						
 						<!-- 分页功能 start -->
-			        <div style="height:30px;background:#fff;">	
+			        <div style="height:30px;background:#fff;">
+			        	<div id="holdCurrentPage" style="display:none;">
+			        		<input id="hold" value="${page.currentPage}"/>
+			        	</div>
 			          <c:if test="${searchCondition == null}">
 			            <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?currentPage=1">首页</a>
 			              <c:choose>
@@ -264,7 +261,7 @@ function gotoPage() {
 		return;
 	}
 	
-	var url = "<s:url value='/appPerson/list.html'/>?currentPage=" + pageNo;
+	var url = "<s:url value='/appPerson/getUserFeeReduceAppPersonList.html'/>?currentPage=" + pageNo;
 	
 	<c:if test="${searchCondition != null}">
 		url = "<s:url value='/appPerson/searchFeeReduceAppPerson.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
@@ -299,7 +296,26 @@ function gotoPageForEnter(event) {
 				location.reload();
 			}
 		});		
-	}	
+	}
+	
+	function deleteFeeReduceAppPersonInfo(appPersonId,status){
+		$.ajax({
+			url:"<s:url value='/appPerson/deleteFeeReduceAppPersonInfo.html'/>",
+			data:{"appPersonId":appPersonId,"status":status},
+			async:false,
+			success:function (){
+				
+			}
+		});
+		
+		location.reload();
+	}
+	
+	function editorAppPerson(appPersonId){
+		var fatherPath=window.location.href;
+		fatherPath=fatherPath.substring(fatherPath.indexOf("appPerson")-1);
+		window.location.href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId="+appPersonId+"&fatherPath="+fatherPath; 
+	}
 </script>
 </body>
 </html>

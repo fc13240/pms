@@ -4,7 +4,7 @@
 	
 	<ul style="maring:0px;padding:0px;">
 	<li class="active"> 
-		<a href="<s:url value='/express/addExpress.html'/>"><h5>新增快递</h5></a>
+		<a href="<s:url value='/express/addExpressForm.html'/>"><h5>新增快递</h5></a>
 	</li>
 	<li  class=""> 
 		<a href="<s:url value='/express/getUserSenderExpressList.html'/>"><h5>我寄出的</h5> </a>

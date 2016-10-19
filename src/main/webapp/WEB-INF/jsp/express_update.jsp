@@ -32,91 +32,61 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
-					<form action="<s:url value='/express/addExpress.html'/>" method="post" id="addExpressForm">
+					<form action="<s:url value='/express/updateExpress.html'/>" method="post" id="updateExpressForm">
 					  <div class="lt-third" style="background:#fff;margin-top:10px;">
-					  <input type="hidden" name="receiver.userId" id="userId"/>
-					  	<%-- <h5>从好友中选择：<select name="receiver.userId" class="form-control" style="width:120px;display:inline;" id="receiver" required onchange="loadContactAddress(this.value)">
-					  		<option value=''>请选择</option>
-					  		<c:forEach items="${userFriends}" var="userFriend">
-								<option value="${userFriend.user.userId}">${userFriend.user.username}</option>
-					  		</c:forEach>
-					  		
-						</select>
-						<span style="display:inline;">好友地址：</span>
-						<select  class="form-control" style="width:120px;display:inline;" id="friendContactAddress" required onchange="loadContact(this.value)">
-					  		<option value=''>请选择</option>
-					  		<optgroup id="selectGroup">
-					  		</optgroup>
-						</select>
-						</h5> --%>
+					  <input type="hidden" name="receiver.userId" id="userId" value="${express.receiver.userId}"/>
+					  <input type="hidden" name="expressId" id="userId" value="${express.expressId}"/>
+					  	
 						<h5>收件人：<a href="javascript:void(0)" onclick="loadFriend()">选择好友</a>
-						<%-- 从好友中选择
-							<select name="receiver.userId" class="form-control" style="width:120px;display:inline;" id="receiver" required onchange="loadContactAddress(this.value);loadReceiver(this.value)">
-					  		<option value=''>请选择</option>
-					  		<c:forEach items="${userFriends}" var="userFriend">
-								<option value="${userFriend.user.userId}">${userFriend.user.username}</option>
-					  		</c:forEach>
-						</select> --%>
+			
 						</h5>
-						<input style="width:600px;display:inline;" class="selectPointOfInterest form-control" id="receiverName" onchange="validateInputInfo(this.value, 'receiverError', 50)" type="text" required="required" maxLength="30" readonly="readonly" />
+						<input style="width:600px;display:inline;" class="selectPointOfInterest form-control" id="receiverName" onchange="validateInputInfo(this.value, 'receiverError', 50)" type="text" required="required" maxLength="30" readonly="readonly" value="${express.receiver.username}"/>
 						<span id="receiverError" style="color: red; display: none;">请选择好友</span>
 						<br>
 						<h5>快递地址 :<a  href="javascript:void(0)" onclick="loadFriendAddress()">选择好友地址</a>
-							<%-- <select  class="form-control" style="width:120px;display:inline;" id="friendContactAddress" required onchange="loadContact(this.value)">
-						  		<option value=''>请选择</option>
-						  		<optgroup id="selectGroup">
-						  		</optgroup>
-							</select>
-						 --%>
+							
 						</h5>
 				        <select name="contactAddress.province" class="form-control" style="width:136px;display:inline;" id="province" onchange="loadCities();validateInputInfo(this.value, 'provinceError', 50)" required>
-					  		<option value='' id="provinceOption">请选择</option>
+					  		<option value='${express.contactAddress.province }' id="provinceOption">${express.contactAddress.provinceName }</option>
 					  		<c:forEach items="${provinces}" var="province">
 								<option value="${province.id}">${province.name}</option>
 					  		</c:forEach>
 						</select>
 						<select name="contactAddress.city" id="city" style="width:226px;display:inline;" class="form-control" onchange="loadDistricts();validateInputInfo(this.value, 'provinceError', 50)" required>
-					 	 	<option value='' id="cityOption">请选择</option>
+					 	 	<option value='${express.contactAddress.city }' id="cityOption">${express.contactAddress.cityName }</option>
 						</select>
-						<select name="contactAddress.district" style="width:226px;display:inline;" class="form-control" id="district" required onchange="validateInputInfo(this.value, 'provinceError', 50)"">
-					 		<option value='' id="districtOption">请选择</option>
+						<select name="contactAddress.district" style="width:226px;display:inline;" class="form-control" id="district" required onchange="validateInputInfo(this.value, 'provinceError', 50)">
+					 		<option value='${express.contactAddress.district }' id="districtOption">${express.contactAddress.districtName }</option>
 						</select>
-						<input class="selectPointOfInterest form-control" style="width:600px;margin-top:5px" type="text" name="contactAddress.detailAddress" id="detailAddress" onblur="validateInputInfo(this.value, 'detailAddressError', 100)" required placeholder="详细地址"  maxLength="100"/>
+						<input class="selectPointOfInterest form-control" style="width:600px;" type="text" value="${express.contactAddress.detailAddress }" name="contactAddress.detailAddress" id="detailAddress" onblur="validateInputInfo(this.value, 'detailAddressError', 100)" required placeholder="详细地址"  maxLength="100"/>
 						<span id="provinceError" style="color: red; display: none;">请请选择所在的省市地区</span>
 						<span id="detailAddressError" style="color: red; display: none;">请输入的详细地址不要超过100字</span>
 				        <h5>联系人:</h5>
-						<input style="width:600px;display:inline;" class="selectPointOfInterest form-control" id="contactPerson" name="contactPerson" type="text" onblur="validateInputInfo(this.value, 'contactPersonError', 200)" required maxLength="200"/>
+						<input style="width:600px;display:inline;" class="selectPointOfInterest form-control" id="contactPerson" value="${express.contactPerson }" name="contactPerson" type="text" onblur="validateInputInfo(this.value, 'contactPersonError', 200)" required maxLength="200"/>
 						<span id="contactPersonError" style="color: red; display: none;">请输入的联系人在200个字以内</span>
 						<br>	
 				       	<h5>联系电话：</h5>
-				       	<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="phone" id="phone" value="" maxLength="20" required onblur="validatePhoneNumber(this.value)">
+				       	<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="phone" id="phone" value="${express.phone }" maxLength="20" required onblur="validatePhoneNumber(this.value)">
 				       <!-- 	onblur="validatePhoneNumber(this.value)" -->
 				       	<span id="phoneError" style="color: red; display: none;">请输入正确的联系电话</span>
 				       	<br/>
 				       
-				       	<h5>快递方式:</h5>
-				      <!--  	<div> -->
-				       	<input  style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressCompany" id="expressCompany" value="" onblur="validateInputInfo(this.value, 'expressCompanyError', 100)" maxLength="100" required placeholder="请输入快递公司和快递单号"/>
+				       	<h5>快递公司:</h5>
+				       	<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressCompany" id="expressCompany" value="${express.expressCompany }" onblur="validateInputInfo(this.value, 'expressCompanyError', 100)" maxLength="100" required/>
 				       	<span id="expressCompanyError" style="color: red; display: none;">请输入的快递方式不要超过100字</span>
-				       	<!-- </div> -->
-				       	<%-- <div style="float:left;">
-				       	 <input  style="width:300px;" class="selectPointOfInterest form-control" type="text" name="expressNo" id="expressNo" value="" onblur="validateInputInfo(this.value, 'expressNoError', 50)" maxLength="50" required/>
-				       	<span id="expressNoError" style="color: red; display: none;">请输入快递单号</span>
-				       	</div> --%>
-				       <!-- 	<h5>快递单号:</h5> -->
-				       <!-- 	<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressNo" id="expressNo" value="" onblur="validateInputInfo(this.value, 'expressNoError', 50)" maxLength="50" required/> -->
-				       	<%-- <span id="expressNoError" style="color: red; display: none;">请输入快递单号</span> --%>
+				       	<%-- <h5>快递单号:</h5>
+				       	<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressNo" id="expressNo" value="${express.expressNo }" onblur="validateInputInfo(this.value, 'expressNoError', 50)" maxLength="50" required/>
+				       	<span id="expressNoError" style="color: red; display: none;">请输入快递单号</span> --%>
 						<br>
 				 		<h5>寄出时间:</h5>
-					    <input style="width:400px;pisplay:inline;"  class="selectPointOfInterest form-control" type="text" class="form-control" id="startAppDateId" 
-							name="sendTime" placeholder="寄出时间选择" readonly="readonly" onclick="javascript:$('#start_date_img').click()" required> 
+					    <input style="width:400px;pisplay:inline;"  class="selectPointOfInterest form-control" type="text" class="form-control" id="startAppDateId" value="<fmt:formatDate value="${express.sendTime }" pattern="yyyy-MM-dd"/>"
+							name="sendTime" placeholder="寄出时间选择" readonly="readonly" onclick="javascript:$('#start_date_img').click()" required onblur="validateInputInfo(this.value, 'startAppDateIdError', 200)"> 
 						<img style="display:none;" onclick="WdatePicker({el:'startAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" align="absmiddle" id="start_date_img">
 						<span id="startAppDateIdError" style="color: red; display: none;">寄出时间不能为空</span>
 				        <br>
 					    
 						<h5>快递内容:</h5>
-						<textarea rows="8" cols="8" style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 1000)"></textarea>
-						<!-- <input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 200)"/> -->
+						<textarea rows="8" cols="8" style="width:600px;" class="selectPointOfInterest form-control" name="expressRemark" id="expressRemark" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 200)">${express.expressRemark }</textarea>
 						<span id="expressRemarkError" style="color: red; display: none;">请输入的快递内容在1000字以内</span>
 						<br/>
 						<input type="hidden" name="expressStatus.expressStatusId" id="expressStatus" />
@@ -152,7 +122,7 @@
             </button>
             
             <h4 class = "modal-title" id = "myModalLabel">
-            	选择快递地址
+            	从好友中选择地址
             </h4>
          </div>
 	         <div class = "modal-body">
@@ -320,7 +290,7 @@
 	return false;
 	}
 	}
-	
+
 function saveExpress(expressStatus){
 	$("#expressStatus").val(expressStatus);
 	var phone=$("#phone").val();
@@ -332,7 +302,7 @@ function saveExpress(expressStatus){
 	var contactPerson=$("#contactPerson").val();
 	var expressCompany=$("#expressCompany").val();
 	//var expressNo=$("#expressNo").val();
-	//var startAppDateId=$("#startAppDateId").val();
+	var startAppDateId=$("#startAppDateId").val();
 	var expressRemark=$("#expressRemark").val();
 	//validateInputInfo(receiverName, "receiverError", 30);
 	if (validatePhoneNumber(phone)
@@ -344,10 +314,10 @@ function saveExpress(expressStatus){
 		&validateInputInfo(contactPerson, "contactPersonError", 200)
 		&validateInputInfo(expressCompany, "expressCompanyError", 100)
 		//&validateInputInfo(expressNo, "expressNoError", 50)
-		//&validateInputInfo(startAppDateId, "startAppDateIdError", 200)
+		&validateInputInfo(startAppDateId, "startAppDateIdError", 200)
 		&validateInputInfo(expressRemark, "expressRemarkError", 1000)
 	) {
-		$("#addExpressForm").submit();
+		$("#updateExpressForm").submit();
 	}else{
 		
 	}
@@ -476,6 +446,7 @@ function validatePhoneNumber(phoneNumber) {
 		return false;
 	}
 }
+
 </script>
 </body>
 </html>

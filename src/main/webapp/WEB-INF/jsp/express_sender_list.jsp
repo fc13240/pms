@@ -50,10 +50,10 @@
 					  <thead>
 						<tr class="simple_bag">
 						  <th class="center" width="45">
-						  	<label class="pos-rel">
+						  	<%-- <label class="pos-rel">
 								<input type="checkbox" class="patent-check-item" id="checkall"  name="checkall" />
 								<span class="lbl"></span> 
-							  </label>
+							  </label> --%>
 						  	序号
 						  </th>
 						  <th>寄件人</th>
@@ -70,10 +70,10 @@
 					  <c:forEach items="${express}" var="express" varStatus="status">
 						<tr>
 						  <td class="center" style="text-align:center">
-							  <label class="pos-rel"> <span class="batch-share-item">
+							  <%-- <label class="pos-rel"> <span class="batch-share-item">
 								  <input type="checkbox" class="patent-check-item" express="<c:out value='${express.expressId}'/>">
 								  <span class="lbl"></span>
-							  </label>
+							  </label> --%>
 						  ${status.count + (page.currentPage-1)*page.pageSize}
 						  </td>
 						  <td class="center" style="text-align:center">${express.sender.username}</td>
@@ -81,9 +81,9 @@
 						  <td class="center" style="text-align:center">${express.contactAddress.provinceName} ${express.contactAddress.cityName} ${express.contactAddress.districtName}
 						  ${express.contactAddress.detailAddress}
 						  </td>
-						  <td class="center" style="text-align:center">${express.expressCompany}${express.expressNo}</td>
+						  <td class="center" style="text-align:center">${express.expressCompany}</td>
 						  <td class="center" style="text-align:center"><fmt:formatDate value="${express.sendTime}" pattern="yyyy-MM-dd"/></td>
-						  <td class="center" style="text-align:center">${express.phone}</td>
+						  <td class="center" style="text-align:center">${express.contactPerson}&nbsp;${express.phone}</td>
 						  <td class="center" style="text-align:center">${express.expressRemark}</td>
 						  <td class="center" style="text-align:center">${express.expressStatus.expressStatusDesc}</td>
 						  <td class="center" style="text-align:center">

@@ -13,9 +13,9 @@
 			<result property="createTime" column="create_time"/>
 			<result property="sendTime" column="send_time"/>
 			<result property="signTime" column="sign_time"/>
+			<result property="contactPerson" column="contact_person"/>
 			<association property="contactAddress" javaType="ContactAddress">
 				<id property="province" column="province_id"/>
-				<result property="provinceName" column="province_name"/>
 				<result property="provinceName" column="province_name"/>
 				<result property="city" column="city_id"/>
 				<result property="cityName" column="city_name"/>
@@ -65,7 +65,7 @@
 		FROM express  e LEFT JOIN users u ON e.sender = u.user_id LEFT JOIN users us ON e.receiver=us.user_id 
 		LEFT JOIN provinces p ON  e.province=p.id LEFT JOIN cities c ON e.city=c.id LEFT JOIN districts d ON e.district=d.id 
 		LEFT JOIN express_status es ON e.express_status =es.express_status_id
-		WHERE e.receiver=#{userId} ORDER BY  e.express_status,e.send_time limit #{startIndex}, #{pageSize}
+		WHERE e.receiver=#{userId} ORDER BY  e.express_status asc,e.send_time desc limit #{startIndex}, #{pageSize}
 	</select>
 	
 	<select id="getUserReceiverExpressCount" parameterType="int" resultType="int">
@@ -77,7 +77,7 @@
 	</select>
 	
 	<update id="changeExpressStatus">
-		update express set express_id=#{expressId},express_status=#{expressStatus}
+		update express set express_status=#{expressStatus} where express_id=#{expressId}
 	</update>
 	
 	<select id="searchUserSenderExpressByPage" parameterType="ExpressSearchCondition" resultMap="ExpressResultMap">
@@ -95,7 +95,7 @@
  		<if test="keyword != null">
 					and ( es.express_status_desc like #{keyword_pattern} or e.express_no like #{keyword_pattern} or e.express_remark like #{keyword_pattern})
 		</if>	
- 		ORDER BY  e.express_status,e.send_time limit #{page.startIndex}, #{page.pageSize}
+ 		ORDER BY  e.express_status asc,e.send_time desc limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
 	<select id="searchUserSenderExpressCount" parameterType="ExpressSearchCondition" resultType="int">
@@ -125,7 +125,16 @@
 		values(#{sender.userId,javaType=int,jdbcType=INTEGER},#{receiver.userId,javaType=int,jdbcType=INTEGER},#{expressRemark},
 		       #{contactAddress.province,javaType=int,jdbcType=INTEGER},#{contactAddress.city,javaType=long,jdbcType=BIGINT},
 		       #{contactAddress.district,javaType=long,jdbcType=BIGINT},#{contactAddress.detailAddress,javaType=string,jdbcType=VARCHAR},
-		       #{expressCompany},#{expressNo},#{sendTime},#{expressStatus.expressStatusId,javaType=int,jdbcType=INTEGER},#{phone},#{contactPerson})
+		       #{expressCompany},#{expressNo},
+		       <choose>
+	       		  <when test="sendTime!=null">
+	       			#{sendTime}
+	       		  </when>
+	       		  <otherwise>
+	       		    CURDATE()
+	       		  </otherwise>
+		       </choose>
+		       ,#{expressStatus.expressStatusId,javaType=int,jdbcType=INTEGER},#{phone},#{contactPerson})
 	</insert>
 	
 	<select id="searchUserReceiverExpressByPage" parameterType="ExpressSearchCondition" resultMap="ExpressResultMap">
@@ -143,7 +152,7 @@
  		<if test="keyword != null">
 					and ( es.express_status_desc like #{keyword_pattern} or e.express_no like #{keyword_pattern} or e.express_remark like #{keyword_pattern})
 		</if>	
- 		ORDER BY  e.express_status,e.send_time limit #{page.startIndex}, #{page.pageSize}
+ 		ORDER BY  e.express_status asc,e.send_time desc limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
 	<select id="searchUserReceiverExpressCount" parameterType="ExpressSearchCondition" resultType="int">
@@ -166,11 +175,10 @@
 		express_remark=#{expressRemark},province= #{contactAddress.province,javaType=int,jdbcType=INTEGER},city=#{contactAddress.city,javaType=long,jdbcType=BIGINT},
 		district=#{contactAddress.district,javaType=long,jdbcType=BIGINT},detail_address=#{contactAddress.detailAddress,javaType=string,jdbcType=VARCHAR},
 		express_company=#{expressCompany},express_no=#{expressNo},send_time=#{sendTime},express_status=#{expressStatus.expressStatusId,javaType=int,jdbcType=INTEGER},
-		phone=#{phone},contact_person=#{contactPerson}
+		phone=#{phone},contact_person=#{contactPerson} where express_id=#{expressId}
 	</insert>
-	
-	
-	<select id="getExpressById" parameterType="int" resultMap="ExpressResultMap">
+
+	<select id="getExpressById" resultMap="ExpressResultMap">
 		SELECT e.express_id,u.user_id AS  sender_id ,u.username AS sender_name,us.user_id AS receiver_id,us.username AS receiver_name,
 		p.id AS province_id,p.name AS province_name,c.id AS city_id,
 		c.name AS city_name, d.id AS district_id ,d.name AS district_name,e.detail_address ,

@@ -74,7 +74,7 @@
 	
 	<!-- 分页 -->
 	<select id="getUserNoticesCount" resultType="int">
-		select count(*) from notices n where patent in (select patent from user_patents where user = #{userId}) and n.process_status=1
+		select count(*) from notices n where patent in (select patent from user_patents where user = #{userId}) 
 	</select>
 	
 	<select id="getUserNoticesByPage" parameterType="Page" resultMap="NoticeResultMap">
@@ -205,7 +205,7 @@
 		 		<![CDATA[ and n.dispatch_date <= #{endDispatchDate} ]]>
 		 	</if>		 	
 		 	<if test="keyword != null">
-				and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern}  or p.patent_status_text like #{keyword_pattern}
+				and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern}  or p.patent_status_text like #{keyword_pattern} or p.internal_code like #{keyword_pattern}
 				or n.notice_name like #{keyword_pattern} or ps.patent_status_desc like #{keyword_pattern})
 			</if>
 			<if test="timeLimitType != null">
@@ -452,7 +452,7 @@
 	
 	<select id="getUserNoticesByIds" resultMap="NoticeResultMap">
 		select un.*, u.user_id as share_user_id,  u.username as share_username
-		from (select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id,p.patent_status_text, ps.patent_status_desc as patent_status_description,
+		from (select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id,p.patent_status_text,p.internal_code, ps.patent_status_desc as patent_status_description,
 				n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
 				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
@@ -484,7 +484,7 @@
 	
 	<select id="unreadNoticeList" parameterType="Page" resultMap="NoticeResultMap">
 		select un.*, u.user_id as share_user_id,  u.username as share_username
-		from (select p.patent_id, p.app_no, p.patent_name,p.patent_status_text, p.app_person, ps.patent_status_id, ps.patent_status_desc as patent_status_description,
+		from (select p.patent_id, p.app_no, p.patent_name,p.patent_status_text, p.app_person,p.internal_code,ps.patent_status_id, ps.patent_status_desc as patent_status_description,
 				n.notice_id,n.notice_name, n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
 				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,

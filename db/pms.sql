@@ -661,7 +661,7 @@ CREATE TABLE IF NOT EXISTS process_person (
 CREATE TABLE IF NOT EXISTS common_app_person (
   app_person_id BIGINT NOT NULL AUTO_INCREMENT,
   NAME VARCHAR(20) NOT NULL  COMMENT'申请人姓名',
-  id_number  VARCHAR(20) NOT NULL  COMMENT '证件号码',
+  id_number  VARCHAR(50) NOT NULL  COMMENT '证件号码',
   postcode_address VARCHAR(200) NOT NULL  COMMENT '邮编及地址',
   other_information VARCHAR(50) DEFAULT NULL COMMENT '其他信息',
   user_id INT(11)  NOT NULL,
@@ -1011,4 +1011,9 @@ INSERT INTO express_status(express_status_id,express_status_desc) VALUES (3,'已
 ALTER TABLE common_app_person ADD COLUMN phone VARCHAR(30) COMMENT '联系人手机号码';
 ALTER TABLE common_app_person ADD COLUMN is_fee_reduce int DEFAULT '1' COMMENT '是否为费减备案状态';
 UPDATE common_app_person SET is_fee_reduce=2;
+
+alter table express modify column express_no varchar(50);
+alter table express modify column express_remark varchar(1000);
+alter table patent_doc_app_person modify column id_number varchar(50);
+
 

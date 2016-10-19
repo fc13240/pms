@@ -434,12 +434,12 @@ public class AppPersonController {
 		
 	}
 	@RequestMapping(path="/addfeeReduceAppPerson")
-	public String addfeeReduceInventor(@ModelAttribute CommonAppPerson appPerson,int status){
+	public String addfeeReduceInventor(@ModelAttribute CommonAppPerson appPerson,int status,@RequestParam(name="fatherPath",required=false) String fatherPath){
 		if(status==1){
 			int userId=PrincipalUtils.getCurrentUserId();
 			appPerson.setUserId(userId);
 			appPersonService.updateFeeReduceAppPerson(appPerson);
-			return "redirect:/appPerson/getUserFeeReduceAppPersonList.html";
+			return "redirect:"+fatherPath;
 		}else{
 			appPersonService.addFeeReduceAppPerson(appPerson);
 			return "redirect:/appPerson/getUserFeeReduceAppPersonList.html";
@@ -499,10 +499,12 @@ public class AppPersonController {
 	}
 	
 	@RequestMapping(path="/updateFeeReduceAppPerson")
-	public String updateFeeReduceAppPerson(@RequestParam("appPersonId")int AppPersonId,Model model ){
+	public String updateFeeReduceAppPerson(@RequestParam("appPersonId")int AppPersonId,Model model,String fatherPath ){
+		
 		CommonAppPerson appPerson=appPersonService.getOneAppPersonById(AppPersonId);
 		model.addAttribute("appPerson", appPerson);
 		model.addAttribute("status", 1);
+		model.addAttribute("fatherPath", fatherPath);
 		return "fee_reduce_transact_app_person_add";
 		
 	}
@@ -526,5 +528,26 @@ public class AppPersonController {
 		response.setHeader("Content-Disposition", "proxyTemplate;filename=" + downloadFileName);
 		response.setContentLength((int)appPersonFile.length());
 		WebUtils.writeStreamToResponse(response, new FileInputStream(appPersonFile));
+	}
+	
+	
+	@RequestMapping(path="/deleteFeeReduceAppPersonInfo")
+	public void deleteFeeReduceAppPersonInfo(int appPersonId,int status){
+		if(status==1){
+			appPersonService.deleteAppPersonById(appPersonId);
+		}else{
+			int userId=PrincipalUtils.getCurrentUserId();
+			UserAppPerson userAppPerson=new UserAppPerson();
+			userAppPerson.setUserId(userId);
+			userAppPerson.setAppPersonId(appPersonId);
+			appPersonService.deleteUserAppPersonbyId(userAppPerson);
+		}
+	}
+	
+	public static void main(String[] args) {
+		String fatherPath="http://localhost:8080/pms/appPerson/searchFeeReduceAppPerson.html?page.currentPage=1&keyword=";
+		fatherPath=fatherPath.substring(fatherPath.indexOf("appPerson")-1);
+		System.out.println(fatherPath);	
+				
 	}
 }
