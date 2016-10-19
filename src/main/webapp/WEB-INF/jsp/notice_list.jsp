@@ -898,7 +898,17 @@ function batchProcessNotice(processStatus) {
 			if (noticeCheckboxes[i].checked) {
 				notices.push(noticeCheckboxes[i].getAttribute("notice"));
 			}
-		}	
+		}
+		
+		$.ajax({
+			url: "<s:url value='/notice/batchChangeNoticeViewStatus.html'/>?notices=" + notices, 
+			type: 'get', 
+			success: function() {
+				
+			}
+		});
+		
+		
 		$.ajax({
 			url: "<s:url value='/notice/processNotices.html'/>?notices=" + notices + "&processStatus=" + processStatus, 
 			type: 'get', 
