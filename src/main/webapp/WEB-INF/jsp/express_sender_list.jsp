@@ -83,7 +83,7 @@
 						  </td>
 						  <td class="center" style="text-align:center">${express.expressCompany}</td>
 						  <td class="center" style="text-align:center"><fmt:formatDate value="${express.sendTime}" pattern="yyyy-MM-dd"/></td>
-						  <td class="center" style="text-align:center">姓名:${express.contactPerson}&nbsp;电话:${express.phone}</td>
+						  <td class="center" style="text-align:center">${express.contactPerson}&nbsp;${express.phone}</td>
 						  <td class="center" style="text-align:center">${express.expressRemark}</td>
 						  <td class="center" style="text-align:center">${express.expressStatus.expressStatusDesc}</td>
 						  <td class="center" style="text-align:center">
