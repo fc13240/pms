@@ -91,7 +91,7 @@
 				       	<h5>联系电话：</h5>
 				       	<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="phone" id="phone" value="" maxLength="20" required onblur="validatePhoneNumber(this.value)">
 				       <!-- 	onblur="validatePhoneNumber(this.value)" -->
-				       	<span id="phoneError" style="color: red; display: none;">请输入正确的手机或者电话号</span>
+				       	<span id="phoneError" style="color: red; display: none;">请输入正确的联系电话</span>
 				       	<br/>
 				       
 				       	<h5>快递方式:</h5>
@@ -115,9 +115,9 @@
 				        <br>
 					    
 						<h5>快递内容:</h5>
-						<textarea rows="8" cols="8" style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 200)"></textarea>
+						<textarea rows="8" cols="8" style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 1000)"></textarea>
 						<!-- <input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 200)"/> -->
-						<span id="expressRemarkError" style="color: red; display: none;">请输入的快递内容在500字以内</span>
+						<span id="expressRemarkError" style="color: red; display: none;">请输入的快递内容在1000字以内</span>
 						<br/>
 						<input type="hidden" name="expressStatus.expressStatusId" id="expressStatus" />
 						<br>
@@ -321,15 +321,6 @@
 	}
 	}
 	
-	/* function check() {
-	var phone = document.getElementById("phoneRece").value;  
-	if(validatePhoneNumber(phone)){
-	return true;
-	}else {
-	return false;
-	}
-} */
-
 function saveExpress(expressStatus){
 	$("#expressStatus").val(expressStatus);
 	var phone=$("#phone").val();
@@ -354,7 +345,7 @@ function saveExpress(expressStatus){
 		&validateInputInfo(expressCompany, "expressCompanyError", 100)
 		//&validateInputInfo(expressNo, "expressNoError", 50)
 		//&validateInputInfo(startAppDateId, "startAppDateIdError", 200)
-		&validateInputInfo(expressRemark, "expressRemarkError", 200)
+		&validateInputInfo(expressRemark, "expressRemarkError", 1000)
 	) {
 		$("#addExpressForm").submit();
 	}else{
@@ -485,17 +476,6 @@ function validatePhoneNumber(phoneNumber) {
 		return false;
 	}
 }
-
-/* function check() {
-	alert("");
-	var phone=$("#phone").val();
-	if (validatePhoneNumber(phone)) {
-		alert("------kk------")
-		return true;
-	} else {
-		return false;
-	}
-} */
 </script>
 </body>
 </html>

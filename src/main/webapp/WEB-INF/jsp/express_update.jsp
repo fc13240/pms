@@ -65,10 +65,10 @@
 						<input style="width:600px;display:inline;" class="selectPointOfInterest form-control" id="contactPerson" value="${express.contactPerson }" name="contactPerson" type="text" onblur="validateInputInfo(this.value, 'contactPersonError', 200)" required maxLength="200"/>
 						<span id="contactPersonError" style="color: red; display: none;">请输入的联系人在200个字以内</span>
 						<br>	
-				       	<h5>手机号码或电话号码：</h5>
+				       	<h5>联系电话：</h5>
 				       	<input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="phone" id="phone" value="${express.phone }" maxLength="20" required onblur="validatePhoneNumber(this.value)">
 				       <!-- 	onblur="validatePhoneNumber(this.value)" -->
-				       	<span id="phoneError" style="color: red; display: none;">请输入正确的手机或者电话号</span>
+				       	<span id="phoneError" style="color: red; display: none;">请输入正确的联系电话</span>
 				       	<br/>
 				       
 				       	<h5>快递公司:</h5>
@@ -86,8 +86,8 @@
 				        <br>
 					    
 						<h5>快递内容:</h5>
-						<textarea rows="8" cols="8" style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 200)">${express.expressRemark }</textarea>
-						<span id="expressRemarkError" style="color: red; display: none;">请输入的快递内容在500字以内</span>
+						<textarea rows="8" cols="8" style="width:600px;" class="selectPointOfInterest form-control" name="expressRemark" id="expressRemark" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 200)">${express.expressRemark }</textarea>
+						<span id="expressRemarkError" style="color: red; display: none;">请输入的快递内容在1000字以内</span>
 						<br/>
 						<input type="hidden" name="expressStatus.expressStatusId" id="expressStatus" />
 						<br>
@@ -290,15 +290,6 @@
 	return false;
 	}
 	}
-	
-	/* function check() {
-	var phone = document.getElementById("phoneRece").value;  
-	if(validatePhoneNumber(phone)){
-	return true;
-	}else {
-	return false;
-	}
-} */
 
 function saveExpress(expressStatus){
 	$("#expressStatus").val(expressStatus);
@@ -324,7 +315,7 @@ function saveExpress(expressStatus){
 		&validateInputInfo(expressCompany, "expressCompanyError", 100)
 		//&validateInputInfo(expressNo, "expressNoError", 50)
 		&validateInputInfo(startAppDateId, "startAppDateIdError", 200)
-		&validateInputInfo(expressRemark, "expressRemarkError", 200)
+		&validateInputInfo(expressRemark, "expressRemarkError", 1000)
 	) {
 		$("#updateExpressForm").submit();
 	}else{
@@ -456,16 +447,6 @@ function validatePhoneNumber(phoneNumber) {
 	}
 }
 
-/* function check() {
-	alert("");
-	var phone=$("#phone").val();
-	if (validatePhoneNumber(phone)) {
-		alert("------kk------")
-		return true;
-	} else {
-		return false;
-	}
-} */
 </script>
 </body>
 </html>
