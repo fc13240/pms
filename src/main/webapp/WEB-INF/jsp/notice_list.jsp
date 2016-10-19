@@ -476,7 +476,7 @@
 								
 								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center" class="date_status">
-								<span class="readStatus" id="readStatusSpan${notice.noticeId}">
+								<span class="readStatus" id="readStatusSpan${notice.noticeId}" style="float:left;padding-left:30px">
 									<c:choose>
 										<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
 										<c:otherwise>未查看

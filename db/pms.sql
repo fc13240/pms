@@ -976,13 +976,13 @@ CREATE TABLE express (
   express_id bigint(20) NOT NULL AUTO_INCREMENT,
   sender int(11) NOT NULL,
   receiver int(11) NOT NULL,
-  express_remark varchar(500) DEFAULT NULL,
+  express_remark varchar(1000),
   province int(11) NOT NULL,
   city bigint(20) NOT NULL,
   district bigint(20) NOT NULL,
   detail_address varchar(100) NOT NULL,
   express_company varchar(100) NOT NULL,
-  express_no varchar(50) NOT NULL,
+  express_no varchar(50),
   create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   send_time date,
   sign_time datetime,
@@ -1010,10 +1010,6 @@ INSERT INTO express_status(express_status_id,express_status_desc) VALUES (3,'已
 
 ALTER TABLE common_app_person ADD COLUMN phone VARCHAR(30) COMMENT '联系人手机号码';
 ALTER TABLE common_app_person ADD COLUMN is_fee_reduce int DEFAULT '1' COMMENT '是否为费减备案状态';
-UPDATE common_app_person SET is_fee_reduce=2;
-
-alter table express modify column express_no varchar(50);
-alter table express modify column express_remark varchar(1000);
 alter table patent_doc_app_person modify column id_number varchar(50);
 
 
