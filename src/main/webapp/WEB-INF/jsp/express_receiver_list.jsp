@@ -61,7 +61,7 @@
 						  <th>快递地址</th>
 						  <th>快递方式</th>
 						  <th>快递时间</th>
-						  <th>联系电话</th>
+						  <th>联系方式 </th>
 						  <th>快递内容</th>
 						  <th>快递状态</th>
 						  <th>操作</th>
@@ -83,7 +83,7 @@
 						  </td>
 						  <td class="center" style="text-align:center">${express.expressCompany}</td>
 						  <td class="center" style="text-align:center"><fmt:formatDate value="${express.sendTime}" pattern="yyyy-MM-dd"/></td>
-						  <td class="center" style="text-align:center">${express.contactPerson}&nbsp;${express.phone}</td>
+						  <td class="center" style="text-align:center">姓名:${express.contactPerson}&nbsp;电话:${express.phone}</td>
 						  <td class="center" style="text-align:center">${express.expressRemark}</td>
 						  <td class="center" style="text-align:center">${express.expressStatus.expressStatusDesc}</td>
 					 
