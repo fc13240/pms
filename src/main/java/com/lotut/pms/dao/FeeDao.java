@@ -79,4 +79,6 @@ public interface FeeDao {
 	void insertFee(Fee fee);
 
 	void saveUserFee(int userId, long feeId);
+	
+	long getFeeIdByUniqueKey(Fee fee);
 }

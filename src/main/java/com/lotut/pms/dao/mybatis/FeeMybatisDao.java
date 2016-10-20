@@ -183,5 +183,9 @@ public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 		public void saveUserFee(int userId, long feeId){
 			feeMapper.saveUserFee(userId,feeId);
 		}
-		
+
+		@Override
+		public long getFeeIdByUniqueKey(Fee fee) {
+			return feeMapper.getFeeIdByUniqueKey(fee);
+		}
 }

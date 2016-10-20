@@ -351,6 +351,10 @@
 		 </foreach>		
 	</select>
 	
+	<select id="getFeeIdByUniqueKey" resultType="long" parameterType="Fee">
+		select fee_id from fees where patent = #{patent.patentId} and fee_type = #{feeType} and deadline = #{deadline} and fee_owner = #{user.userId} limit 1		
+	</select>
+	
 	<update id="updateFeesInvoiceTitle">
 		update fees set invoice_title = #{invoiceTitle}
 		where fee_id in

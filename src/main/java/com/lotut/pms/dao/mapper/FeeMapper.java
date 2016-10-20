@@ -82,4 +82,6 @@ public interface FeeMapper {
 	
 
 	void saveUserFee(@Param("userId") int userId, @Param("feeId") long feeId);
+	
+	long getFeeIdByUniqueKey(Fee fee);
 }

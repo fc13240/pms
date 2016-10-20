@@ -133,7 +133,12 @@ public class FeeServiceImpl implements FeeService {
 					feeDao.insertFee(fee);
 					}
 					if(fee.getFeeId()!=0){
-					feeIds.add(fee.getFeeId());
+						feeIds.add(fee.getFeeId());
+					} else {
+						long existFeeId = feeDao.getFeeIdByUniqueKey(fee);
+						if (existFeeId != 0) {
+							feeIds.add(existFeeId);
+						}
 					}
 				}
 			}
