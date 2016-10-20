@@ -544,10 +544,5 @@ public class AppPersonController {
 		}
 	}
 	
-	public static void main(String[] args) {
-		String fatherPath="http://localhost:8080/pms/appPerson/searchFeeReduceAppPerson.html?page.currentPage=1&keyword=";
-		fatherPath=fatherPath.substring(fatherPath.indexOf("appPerson")-1);
-		System.out.println(fatherPath);	
-				
-	}
+
 }
