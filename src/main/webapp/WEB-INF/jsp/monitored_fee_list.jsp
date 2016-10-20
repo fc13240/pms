@@ -295,7 +295,7 @@
 							  	paymentStatus="${fee.paymentStatus.paymentStatusId}" deadline="<fmt:formatDate value="${fee.deadline}" pattern="yyyy-MM-dd"/>">
 							  </span> </td>
 							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
-							<td style="text-align:center"><a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a></td>
+							<td style="text-align:center"><a href="http://cpquery.sipo.gov.cn/txnQueryFeeData.do?select-key:shenqingh=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a></td>
 							<td style="text-align:center">${fee.patent.name}</td>
 							<td style="text-align:center">${fee.patent.firstAppPerson}</td>
 							<td style="text-align:center">${fee.patent.patentStatusText}</td>
