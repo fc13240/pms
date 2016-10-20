@@ -164,6 +164,7 @@ public class ExpressController {
 		model.addAttribute("userFriends", userFriends);
 		model.addAttribute("express", express);
 		return "express_update";
+		
 	}
 
 	@RequestMapping(path="/updateExpress", method=RequestMethod.POST)
@@ -179,5 +180,18 @@ public class ExpressController {
 		model.addAttribute("userFriends", userFriends);
 		return "redirect:/express/getUserSenderExpressList.html";
 		
+	}
+	@RequestMapping(path="/loadMyFriend", method=RequestMethod.POST)
+	public void loadMyFriend(HttpServletResponse response) throws IOException {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> userFriends = friendService.getUserFriends(userId);
+		WebUtils.writeJsonStrToResponse(response, userFriends);
+	}
+	
+	@RequestMapping(path="/searchMyFriend", method=RequestMethod.POST)
+	public void searchMyFriend(HttpServletResponse response,String keyword) throws IOException {
+		int userId=PrincipalUtils.getCurrentUserId();
+		List<User> userFriends = friendService.searchUserFriendsByUser(userId, keyword);
+		WebUtils.writeJsonStrToResponse(response, userFriends);
 	}
 }

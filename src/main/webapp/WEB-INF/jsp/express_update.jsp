@@ -175,9 +175,17 @@
 	         <div class = "modal-body">
 				<div class="lt-box" style="padding:20px;">
 						
+					<div style="float:left;margin-bottom: 10px;">
 					<a href="javascript:return void" onclick="addFriend()" >
 					<button style="display: inline-block;width:100px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom">确认选择</button>
 					</a>
+					</div>	
+					<div style="float:left;margin-left:50px;">
+					<input type="text" class="selectPointOfInterest form-control" style="width:370px;" placeholder="用户名/姓名" id="keyword" onkeydown="if(event.keyCode==13){$('button[id=searchBtn]').click()}"/>
+					</div>
+					<div style="float:left;margin-left:10px;">
+					<button style="display: inline-block;width:60px;" class="button button-primary  button-rounded" onclick="searchFriend($('input[id=keyword]').val())" id="searchBtn">搜索</button>
+					</div>
 					<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
@@ -191,9 +199,9 @@
 							  <th>电话</th>
 							</tr>
 						  </thead>
-						  <tbody >
+						  <tbody id="friendModalTab">
 						  
-						  	<c:forEach items="${userFriends}" var="friend" varStatus="status">
+						  	<%-- <c:forEach items="${userFriends}" var="friend" varStatus="status">
 						        <tr>
 						          <td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
 									  <input type="radio" name="friend-check-item" value="${friend.user.userId }" friendName="${friend.user.username}"/></span>
@@ -205,7 +213,7 @@
 						          <td style="text-align:center"><c:out value="${friend.user.email}"/></td>
 						          <td style="text-align:center"><c:out value="${friend.user.phone}"/></td>
 						        </tr>
-					      	</c:forEach>
+					      	</c:forEach> --%>
 						  
 						</tbody>
 					</table>
@@ -399,7 +407,35 @@ function loadFriendAddress(){
 	loadContactAddress();
 	$('button[id=hiddenUpdateContactModal]').click();
 }
+/* function loadFriend(){
+	$('button[id=hiddenFriendModal]').click();
+} */
+
 function loadFriend(){
+	$.ajax({
+		type:"POST",
+		url :"<s:url value='/express/loadMyFriend.html'/>",
+		dataType:"json",
+		async:false,
+		success :function(myFriend){
+			$("#friendModalTab").empty();
+			$.each(myFriend,function(i,item){
+				$("#friendModalTab").append(
+					"<tr>"+
+			          "<td class='center' style='text-align:center'><label class='pos-rel'> <span class='batch-share-item'>"+
+						  "<input type='radio' name='friend-check-item' value='"+item.user.userId+"' friendName='"+item.user.username+"'/></span>"+
+						  "<span class='lbl'></span></label>"+
+					  "</td>"+
+			          "<td style='text-align:center'>"+(i+1)+"</td>"+
+			          "<td style='text-align:center'>"+item.user.username+"</td>"+
+			          "<td style='text-align:center'>"+item.user.name+"</td>"+
+			          "<td style='text-align:center'>"+item.user.email+"</td>"+
+			          "<td style='text-align:center'>"+item.user.phone+"</td>"+
+			        "</tr>"
+				)
+			})
+		}
+	});
 	$('button[id=hiddenFriendModal]').click();
 }
 
@@ -446,7 +482,33 @@ function validatePhoneNumber(phoneNumber) {
 		return false;
 	}
 }
-
+function searchFriend(keyword){
+	$.ajax({
+		type:"POST",
+		url :"<s:url value='/express/searchMyFriend.html'/>",
+		data:{"keyword":keyword},
+		dataType:"json",
+		async:false,
+		success :function(myFriend){
+			$("#friendModalTab").empty();
+			$.each(myFriend,function(i,item){
+				$("#friendModalTab").append(
+					"<tr>"+
+			          "<td class='center' style='text-align:center'><label class='pos-rel'> <span class='batch-share-item'>"+
+						  "<input type='radio' name='friend-check-item' value='"+item.user.userId+"' friendName='"+item.user.username+"'/></span>"+
+						  "<span class='lbl'></span></label>"+
+					  "</td>"+
+			          "<td style='text-align:center'>"+(i+1)+"</td>"+
+			          "<td style='text-align:center'>"+item.user.username+"</td>"+
+			          "<td style='text-align:center'>"+item.user.name+"</td>"+
+			          "<td style='text-align:center'>"+item.user.email+"</td>"+
+			          "<td style='text-align:center'>"+item.user.phone+"</td>"+
+			        "</tr>"
+				)
+			})
+		}
+	});
+}
 </script>
 </body>
 </html>
