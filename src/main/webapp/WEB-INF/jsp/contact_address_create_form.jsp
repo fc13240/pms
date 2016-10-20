@@ -36,7 +36,7 @@
 					<form action="<s:url value='/user/addContactAddress.html'/>" method="post" onsubmit="return check()">
 					  <se:csrfInput/>
 			       	<h5>联系人名称:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="receiver" required/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" type="text" name="receiver" required maxlength="50"/>
 					<br>	  
 			       	<h5>手机或固话:</h5>
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" name="phone" required onblur="validatePhoneNumber(this.value)"/>

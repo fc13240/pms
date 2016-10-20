@@ -33,7 +33,7 @@
 					  <se:csrfInput/>
 						<h5>联系人名称:</h5>
 	  
-					  	<input type="text" class="form-control" style="height: 40px; width: 300px;" name="receiver" id="receiver" value="${contactAddresses.receiver}" required/>
+					  	<input type="text" class="form-control" style="height: 40px; width: 300px;" name="receiver" id="receiver" value="${contactAddresses.receiver}" required maxlength="50"/>
 					  
 						<h5>通讯地址:</h5>
 	  
