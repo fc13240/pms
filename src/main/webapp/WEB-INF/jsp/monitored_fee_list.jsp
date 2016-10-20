@@ -347,7 +347,7 @@
 						  <c:forEach items="${fees}" var="fee">
 							<c:set var="totalAmount" value="${totalAmount+fee.amount}"></c:set>
 						  </c:forEach>
-						  <td colspan="11">总计: ￥<span id="totalAmountSpan">${totalAmount}</span></td>
+						  <td colspan="12">总计: ￥<span id="totalAmountSpan">${totalAmount}</span></td>
 						</tr>
 					  </tbody>
 					</table>
