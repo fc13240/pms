@@ -39,7 +39,7 @@
 					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" value="${patentOfficeAccount.username}" name="username" maxlength="25"/>
 					<br> 	
 			       	<h5>登录密码:</h5>
-					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" value="${patentOfficeAccount.password}" name="password" required/>
+					<input class="selectPointOfInterest form-control" style="width:460px;" id="phoneRece" type="text" value="${patentOfficeAccount.password}" name="password" required maxlength="100"/>
 					
 					<br> 
 					<button  type="submit" class="button button-primary  button-rounded">保存</button>					
