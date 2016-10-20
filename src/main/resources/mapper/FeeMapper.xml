@@ -352,7 +352,7 @@
 	</select>
 	
 	<select id="getFeeIdByUniqueKey" resultType="long" parameterType="Fee">
-		select fee_id from fees where patent = #{patent.patentId} and fee_type = #{feeType} and deadline = #{deadline} and fee_owner = #{user.userId} limit 1		
+		select fee_id from fees where patent = #{patent.patentId} and fee_type = #{feeType} and deadline = #{deadline} and fee_owner = #{owner.userId} limit 1		
 	</select>
 	
 	<update id="updateFeesInvoiceTitle">
