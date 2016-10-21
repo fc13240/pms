@@ -1013,3 +1013,59 @@ ALTER TABLE common_app_person ADD COLUMN is_fee_reduce int DEFAULT '1' COMMENT '
 alter table patent_doc_app_person modify column id_number varchar(50);
 
 
+CREATE  TABLE if not exists news_type (
+id  int NOT NULL AUTO_INCREMENT COMMENT 'id' ,
+name  varchar(50) NOT NULL COMMENT '栏目名' ,
+PRIMARY KEY (id)
+)
+;
+
+CREATE TABLE if not exists article_type (
+id  int NOT NULL AUTO_INCREMENT COMMENT 'id' ,
+name  varchar(50) NOT NULL COMMENT '栏目名' ,
+PRIMARY KEY (id)
+)
+;
+CREATE TABLE if not exists news (
+id  int NOT NULL AUTO_INCREMENT ,
+news_type  int NOT NULL COMMENT '栏目id' ,
+user_id  int NOT NULL COMMENT '发文人' ,
+keywords  varchar(120) NULL COMMENT '关键字' ,
+author  varchar(30) NULL COMMENT '作者' ,
+title  varchar(50) NOT NULL COMMENT '标题' ,
+create_time  timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ,
+publish_time  datetime ON UPDATE CURRENT_TIMESTAMP COMMENT '发文时间' ,
+update_time  timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间' ,
+source  varchar(100) NULL COMMENT '来源' ,
+content  text NOT NULL COMMENT '内容' ,
+abstract varchar(100) NULL COMMENT '摘要' ,
+PRIMARY KEY (id),
+FOREIGN KEY (news_type) REFERENCES news_type (id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (user_id) REFERENCES   users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+)
+;
+CREATE TABLE if not exists article (
+id  int NOT NULL AUTO_INCREMENT ,
+article_type  int NOT NULL COMMENT '栏目id' ,
+user_id  int NOT NULL COMMENT '发文人' ,
+keywords  varchar(120) NULL COMMENT '关键字' ,
+author  varchar(30) NULL COMMENT '作者' ,
+title  varchar(50) NOT NULL COMMENT '标题' ,
+
+create_time  timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ,
+publish_time  datetime COMMENT '发布时间' ,
+update_time  timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间' ,
+source  varchar(100) NULL COMMENT '来源' ,
+abstract  varchar(100) NULL COMMENT '摘要' ,
+content  text NOT NULL COMMENT '内容' ,
+check_status  tinyint NULL DEFAULT 0 COMMENT '0 未审核  1  审核  2审核不通过' ,
+up_vote  int NOT NULL DEFAULT 0 ,
+down_vote  int NOT NULL DEFAULT 0 ,
+PRIMARY KEY (id),
+FOREIGN KEY (news_type) REFERENCES news_type (id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (user_id) REFERENCES   users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
+)
+;
+
+
+
