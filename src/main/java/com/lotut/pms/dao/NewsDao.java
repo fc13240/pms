@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.lotut.pms.domain.News;
 import com.lotut.pms.domain.NewsSearchCondition;
+import com.lotut.pms.domain.NewsType;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.PatentType;
 
 public interface NewsDao {
 	List<News> getUserNewsByPage (Page page);
@@ -16,4 +18,6 @@ public interface NewsDao {
 	List<News> searchUserNewsByPage (NewsSearchCondition searchCondition);
 	
 	int searchUserNewsCount(NewsSearchCondition searchCondition);
+	
+	List<NewsType> getAllNewsTypes();
 }

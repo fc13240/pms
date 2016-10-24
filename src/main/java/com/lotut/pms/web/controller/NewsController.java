@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lotut.pms.domain.News;
 import com.lotut.pms.domain.NewsSearchCondition;
+import com.lotut.pms.domain.NewsType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentDoc;
 import com.lotut.pms.domain.PatentDocSearchCondition;
@@ -60,8 +61,10 @@ public class NewsController {
 		List<News> news=newsService.searchUserNewsByPage(searchCondition);
 		int totalCount=newsService.searchUserNewsCount(searchCondition);
 		page.setTotalRecords(totalCount);
+		List<NewsType> allNewsType=newsService.getAllNewsTypes();
 		model.addAttribute("news", news);
 		model.addAttribute("page", page);
+		model.addAttribute("allNewsType", allNewsType);
 		return "news_list";
 	}
 	

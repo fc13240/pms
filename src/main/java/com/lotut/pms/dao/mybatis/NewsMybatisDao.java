@@ -9,6 +9,7 @@ import com.lotut.pms.dao.NewsDao;
 import com.lotut.pms.dao.mapper.NewsMapper;
 import com.lotut.pms.domain.News;
 import com.lotut.pms.domain.NewsSearchCondition;
+import com.lotut.pms.domain.NewsType;
 import com.lotut.pms.domain.Page;
 
 public class NewsMybatisDao extends SqlSessionDaoSupport implements NewsDao{
@@ -41,6 +42,11 @@ public class NewsMybatisDao extends SqlSessionDaoSupport implements NewsDao{
 	@Override
 	public int searchUserNewsCount(NewsSearchCondition searchCondition) {
 		return newsMapper.searchUserNewsCount(searchCondition);
+	}
+
+	@Override
+	public List<NewsType> getAllNewsTypes() {
+		return newsMapper.getAllNewsTypes();
 	}
 	
 }

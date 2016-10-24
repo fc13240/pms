@@ -5,6 +5,7 @@ import java.util.List;
 import com.lotut.pms.dao.NewsDao;
 import com.lotut.pms.domain.News;
 import com.lotut.pms.domain.NewsSearchCondition;
+import com.lotut.pms.domain.NewsType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.NewsService;
 
@@ -38,6 +39,11 @@ public class NewsServiceImpl implements NewsService {
 	@Override
 	public int searchUserNewsCount(NewsSearchCondition searchCondition) {
 		return newsDao.searchUserNewsCount(searchCondition);
+	}
+
+	@Override
+	public List<NewsType> getAllNewsTypes() {
+		return newsDao.getAllNewsTypes();
 	}
 	
 }
