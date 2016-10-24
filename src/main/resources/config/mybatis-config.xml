@@ -80,5 +80,7 @@
 		<typeAlias alias="Express" type="com.lotut.pms.domain.Express"/>
 		<typeAlias alias="ExpressStatus" type="com.lotut.pms.domain.ExpressStatus"/>
 		<typeAlias alias="ExpressSearchCondition" type="com.lotut.pms.domain.ExpressSearchCondition"/>
+		<typeAlias alias="News" type="com.lotut.pms.domain.News"/>
+		<typeAlias alias="Article" type="com.lotut.pms.domain.Article"/>
 	</typeAliases>  
 </configuration>
