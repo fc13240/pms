@@ -1014,8 +1014,8 @@ alter table patent_doc_app_person modify column id_number varchar(50);
 
 
 CREATE  TABLE if not exists news_type (
-id  int NOT NULL AUTO_INCREMENT COMMENT 'id' ,
-name  varchar(50) NOT NULL COMMENT '栏目名' ,
+type_id  int NOT NULL AUTO_INCREMENT COMMENT 'id' ,
+type_name  varchar(50) NOT NULL COMMENT '栏目名' ,
 PRIMARY KEY (id)
 )
 ;
@@ -1040,7 +1040,7 @@ source  varchar(100) NULL COMMENT '来源' ,
 content  text NOT NULL COMMENT '内容' ,
 abstract varchar(100) NULL COMMENT '摘要' ,
 PRIMARY KEY (id),
-FOREIGN KEY (news_type) REFERENCES news_type (id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (news_type) REFERENCES news_type (type_id) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (user_id) REFERENCES   users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ;

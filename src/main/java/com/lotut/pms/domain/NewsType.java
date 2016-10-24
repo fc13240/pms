@@ -1,20 +1,21 @@
 package com.lotut.pms.domain;
 
 public class NewsType {
-	private int id;
-	private String name;
-	public int getId() {
-		return id;
+	private int typeId;
+	private String typeName;
+	public int getTypeId() {
+		return typeId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setTypeId(int typeId) {
+		this.typeId = typeId;
 	}
-	public String getName() {
-		return name;
+	public String getTypeName() {
+		return typeName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
 	}
+	
 	
 	
 }
