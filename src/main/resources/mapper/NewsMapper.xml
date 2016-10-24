@@ -4,4 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotut.pms.dao.mapper.NewsMapper">
 	
+	<resultMap type="News" id="NewsResultMap">
+		<id property="id" column="id"/>
+		<result property="keywords" column="keywords"/>
+		<result property="author" column="author"/>
+		<result property="title" column="title"/>
+		<result property="source" column="source"/>
+		<result property="content" column="content"/>
+		<result property="newsAbstract" column="abstract"/>
+		<result property="createTime" column="create_time"/>
+		<result property="publishTime" column="publish_time"/>
+		<result property="updateTime" column="update_time"/>
+		<association property="newsType"  javaType="NewsType">
+			<id property="id" column="id"/>
+			<result property="name" column="name"/>
+		</association>
+		<association property="user" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
+	</resultMap>
+	
 </mapper>

@@ -13,14 +13,37 @@ public class News {
 	private String keywords;
 	private String author;
 	private String title;
-	private Timestamp create_time;
+	private Timestamp createTime;
 	@DateTimeFormat(iso=ISO.DATE_TIME,pattern="yyyy-MM-dd HH:mm:ss")
-	private Date publish_time;
+	private Date publishTime;
 	@DateTimeFormat(iso=ISO.DATE_TIME,pattern="yyyy-MM-dd HH:mm:ss")
-	private Date update_time;
+	private Date updateTime;
 	private String source;
 	private String content;
 	private String newsAbstract;
+	
+	
+	
+	
+	
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
+	public Date getPublishTime() {
+		return publishTime;
+	}
+	public void setPublishTime(Date publishTime) {
+		this.publishTime = publishTime;
+	}
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 	public int getId() {
 		return id;
 	}
@@ -57,24 +80,8 @@ public class News {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Timestamp getCreate_time() {
-		return create_time;
-	}
-	public void setCreate_time(Timestamp create_time) {
-		this.create_time = create_time;
-	}
-	public Date getPublish_time() {
-		return publish_time;
-	}
-	public void setPublish_time(Date publish_time) {
-		this.publish_time = publish_time;
-	}
-	public Date getUpdate_time() {
-		return update_time;
-	}
-	public void setUpdate_time(Date update_time) {
-		this.update_time = update_time;
-	}
+
+	
 	public String getSource() {
 		return source;
 	}
