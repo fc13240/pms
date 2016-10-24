@@ -1,6 +1,6 @@
 package com.lotut.pms.domain;
 
-public class NewImg {
+public class NewsImg {
 	private int imgId;
 	private String imgUrl;
 	private int newsId;
