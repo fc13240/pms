@@ -1,8 +1,6 @@
 package com.lotut.pms.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,7 +8,6 @@ import com.lotut.pms.dao.ArticleDao;
 import com.lotut.pms.domain.Article;
 import com.lotut.pms.domain.ArticleSearchCondition;
 import com.lotut.pms.domain.ArticleType;
-import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserArticle;
 import com.lotut.pms.service.ArticleService;
@@ -54,10 +51,7 @@ public class ArticleServiceImpl implements ArticleService {
 		int totalCount=articleDao.searchUserArticleCount(articleSearchCondition);
 		page.setTotalRecords(totalCount);
 		List<Article> articles=articleDao.searchUserArticleByPage(articleSearchCondition);
-<<<<<<< HEAD
-		
-		return null;
-=======
+
 		List<ArticleType> articleTypes=articleDao.getAllArticleTypes();
 		UserArticle userArticle=new UserArticle();
 		userArticle.setPage(page);
@@ -69,7 +63,6 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<ArticleType> getAllArticleTypes() {
 		return articleDao.getAllArticleTypes();
->>>>>>> 4d041463d1be9988b11be8999e738d7889aa205c
 	}
 
 	
