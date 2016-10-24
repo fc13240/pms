@@ -15,10 +15,10 @@ public class Article {
 	private String author;
 	private String title;
 	@DateTimeFormat(iso=ISO.DATE_TIME,pattern="yyyy-MM-dd HH:mm:ss")
-	private Date create_time;
+	private Date createTime;
 	@DateTimeFormat(iso=ISO.DATE_TIME,pattern="yyyy-MM-dd HH:mm:ss")
-	private Date publish_time;
-	private Timestamp update_time;
+	private Date publishTime;
+	private Timestamp updateTime;
 	private String source;
 	private String content;
 	private String articleAbstract;
@@ -61,23 +61,24 @@ public class Article {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Date getCreate_time() {
-		return create_time;
+	
+	public Date getCreateTime() {
+		return createTime;
 	}
-	public void setCreate_time(Date create_time) {
-		this.create_time = create_time;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
-	public Date getPublish_time() {
-		return publish_time;
+	public Date getPublishTime() {
+		return publishTime;
 	}
-	public void setPublish_time(Date publish_time) {
-		this.publish_time = publish_time;
+	public void setPublishTime(Date publishTime) {
+		this.publishTime = publishTime;
 	}
-	public Timestamp getUpdate_time() {
-		return update_time;
+	public Timestamp getUpdateTime() {
+		return updateTime;
 	}
-	public void setUpdate_time(Timestamp update_time) {
-		this.update_time = update_time;
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
 	}
 	public String getSource() {
 		return source;
