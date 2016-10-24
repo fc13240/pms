@@ -27,12 +27,12 @@ public class ArticleController {
 		this.articleService=articleService;
 	}
 	
-	@RequestMapping(path="/getUserArticles")
+	@RequestMapping(path="/list")
 	public String getUserArticles(Page page, HttpSession session,Model model){
 		UserArticle userArticle=articleService.getUserArticleByPage(page, session);
 		model.addAttribute("articles", userArticle.getArticles());
 		model.addAttribute("page", userArticle.getPage());
-		return "news_list";
+		return "article_list";
 		
 	}
 	

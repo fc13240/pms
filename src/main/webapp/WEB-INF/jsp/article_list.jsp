@@ -65,6 +65,17 @@
 								<td	style="text-align:center"><c:out value="${article.updateTime}"/></td>
 								<td style="text-align:center"><c:out value="${article.publishTime}"/></td>
 								<td style="text-align:center">
+								<c:if test="${article.checkStatus==0}">
+								未审核
+								</c:if>
+								<c:if test="${article.checkStatus==1}">
+								已审核
+								</c:if>
+								<c:if test="${article.checkStatus==2}">
+								审核未通过
+								</c:if>
+								</td>
+								<td style="text-align:center">
 								<a href="javascript:editorAppPerson(${appPerson.appPersonId})"> 编辑 </a>
 								<a href="javascript:deleteFeeReduceAppPersonInfo(${appPerson.appPersonId},1)">查看 </a>
 								<a href="javascript:deleteFeeReduceAppPersonInfo(${appPerson.appPersonId},1)">删除 </a>
