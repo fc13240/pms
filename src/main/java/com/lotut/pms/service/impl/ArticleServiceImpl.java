@@ -50,6 +50,7 @@ public class ArticleServiceImpl implements ArticleService {
 		if (page.getCurrentPage() <= 0) {
 			page.setCurrentPage(1);
 		}
+		articleSearchCondition.setUserId(PrincipalUtils.getCurrentUserId());
 		int totalCount=articleDao.searchUserArticleCount(articleSearchCondition);
 		page.setTotalRecords(totalCount);
 		List<Article> articles=articleDao.searchUserArticleByPage(articleSearchCondition);
@@ -59,6 +60,11 @@ public class ArticleServiceImpl implements ArticleService {
 		userArticle.setArticles(articles);
 		userArticle.setArticleTypes(articleTypes);
 		return userArticle;
+	}
+
+	@Override
+	public List<ArticleType> getAllArticleTypes() {
+		return articleDao.getAllArticleTypes();
 	}
 
 	
