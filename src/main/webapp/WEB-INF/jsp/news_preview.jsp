@@ -84,17 +84,23 @@
 			</div>
 			
 			<div>
-				<div style="float:left;margin-left: 40px;" >作者：${news.author}</div>
-				<div style="float:left;margin-left: 600px;" >创建时间：${news.createTime}</div>
+				<div style="float:left;margin-left: 60px;" >作者：${news.author}</div>
+				<div style="float:left;margin-left: 550px;" >创建时间：${news.createTime}</div>
 			</div>
 			<br/>
 			<div>
 				<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="90%" color=#987cb9 SIZE=3>
 			</div>
 			
-			<div class="tit_top"></div>
-			<div class="pre_text" id="div_1">${news.content}</div>
-				
+			<div>
+				<div style="margin-left: 80px;">${news.content}</div>
+			</div>
+			<div>
+				<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="90%" color=#987cb9 SIZE=3>
+			</div>
+			<div>
+				<div style="float:left;margin-left: 60px;" >来源：${news.source}</div>
+			</div>	
 					
 			
 		</div>
