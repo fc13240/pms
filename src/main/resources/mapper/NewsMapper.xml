@@ -21,5 +21,16 @@
 		</association>
 		<association property="user" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 	</resultMap>
+	<resultMap type="NewImg" id="NewImgMap">
+			<id property="imgId" column="img_id"/>
+			<result property="imgUrl" column="img_url"/>
+			<result property="newsId" column="news_id"/>
+			<result property="caption" column="caption"/>
+		</resultMap>
+	
+	
+	<select id="getUserNewsByPage" resultMap="NewsResultMap">
+		select id
+	</select>
 	
 </mapper>

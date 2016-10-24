@@ -1067,4 +1067,11 @@ FOREIGN KEY (user_id) REFERENCES   users (user_id) ON DELETE CASCADE ON UPDATE C
 ;
 
 
-
+CREATE TABLE IF NOT EXISTS news_Imgs (
+img_id BIGINT NOT NULL AUTO_INCREMENT,
+img_url VARCHAR(200) DEFAULT NULL,
+news_id INT,
+caption VARCHAR(200) NOT NULL COMMENT '图片说明',
+PRIMARY KEY (img_id),
+CONSTRAINT fk_news_id FOREIGN KEY idx_fk_news_id(news_id) REFERENCES news(id) ON DELETE CASCADE
+);

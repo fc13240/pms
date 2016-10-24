@@ -84,5 +84,6 @@
 		<typeAlias alias="NewsType" type="com.lotut.pms.domain.NewsType"/>
 		<typeAlias alias="Article" type="com.lotut.pms.domain.Article"/>
 		<typeAlias alias="ArticleType" type="com.lotut.pms.domain.ArticleType"/>
+		<typeAlias alias="NewImg" type="com.lotut.pms.domain.NewImg"/>
 	</typeAliases>  
 </configuration>
