@@ -20,4 +20,6 @@ public interface NewsDao {
 	int searchUserNewsCount(NewsSearchCondition searchCondition);
 	
 	List<NewsType> getAllNewsTypes();
+	
+	void deleteNewsById(int newsId);
 }

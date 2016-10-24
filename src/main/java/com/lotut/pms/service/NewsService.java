@@ -19,4 +19,6 @@ public interface NewsService {
 	int searchUserNewsCount(NewsSearchCondition searchCondition);
 	
 	List<NewsType> getAllNewsTypes();
+	
+	void deleteNewsById(int newsId);
 }

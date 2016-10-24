@@ -87,7 +87,7 @@
 								<td style="text-align:center">
 								<a href="javascript:editorAppPerson()"> 编辑 </a>
 								<a href="<s:url value='/news/getUserNewsById.html'/>?newsId=<c:out value='${news.id}'/>" target="_blank">查看 </a>
-								<a href="javascript:deleteFeeReduceAppPersonInfo(1)">删除 </a>
+								<a href="javascript:deleteNews(${news.id})">删除 </a>
 								
 								</td>
 							  </tr>
@@ -294,17 +294,17 @@ function gotoPageForEnter(event) {
 		});		
 	}
 	
-	function deleteFeeReduceAppPersonInfo(appPersonId,status){
+	function deleteNews(id){
 		$.ajax({
-			url:"<s:url value='/appPerson/deleteFeeReduceAppPersonInfo.html'/>",
-			data:{"appPersonId":appPersonId,"status":status},
+			url:"<s:url value='/news/deleteNews.html'/>",
+			data:{"newsId":id},
 			async:false,
 			success:function (){
 				
 			}
 		});
-		
 		location.reload();
+		
 	}
 	
 	function editorAppPerson(appPersonId){
