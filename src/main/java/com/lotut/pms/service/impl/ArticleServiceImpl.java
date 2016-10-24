@@ -50,7 +50,7 @@ public class ArticleServiceImpl implements ArticleService {
 		if (page.getCurrentPage() <= 0) {
 			page.setCurrentPage(1);
 		}
-		int totalCount=articleDao.searchUserArticleCount(userId);
+		int totalCount=articleDao.searchUserArticleCount(articleSearchCondition);
 		page.setTotalRecords(totalCount);
 		List<Article> articles=articleDao.searchUserArticleByPage(articleSearchCondition);
 		List<ArticleType> articleTypes=articleDao.getAllArticleTypes();
