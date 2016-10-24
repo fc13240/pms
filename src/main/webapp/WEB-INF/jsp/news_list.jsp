@@ -86,7 +86,7 @@
 								<td style="text-align:center"><c:out value="${news.publishTime}"/></td>
 								<td style="text-align:center">
 								<a href="javascript:editorAppPerson()"> 编辑 </a>
-								<a href="javascript:deleteFeeReduceAppPersonInfo(1)">查看 </a>
+								<a href="<s:url value='/news/getUserNewsById.html'/>?newsId=<c:out value='${news.id}'/>" target="_blank">查看 </a>
 								<a href="javascript:deleteFeeReduceAppPersonInfo(1)">删除 </a>
 								
 								</td>
