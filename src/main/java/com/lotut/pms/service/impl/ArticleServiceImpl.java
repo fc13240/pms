@@ -61,5 +61,10 @@ public class ArticleServiceImpl implements ArticleService {
 		return userArticle;
 	}
 
+	@Override
+	public List<ArticleType> getAllArticleTypes() {
+		return articleDao.getAllArticleTypes();
+	}
+
 	
 }
