@@ -55,44 +55,30 @@
 						  <thead>
 							<tr class="simple_bag">
 							  <th class="center" width="40px">序号</th>
-							  <th width="100px">姓名或名称</th>
-							  <th width="100px">证件号码 </th>
-							  <th width="180px">邮编及地址</th>
-							  <th width="60px">费减备案状态</th>
-							  <th width="100px">备案证件号</th>
-							  <th width="50px">备案年度</th>
-							  <!-- <th>委托书</th> -->
-							  <th width="100px">手机号</th>
-							  <th width="60px">纳税额</th>
-							  <!-- 							<th>预览</th> 
-							  <th>下载</th>-->
+							  <th width="100px">新闻标题</th>
+							  <th width="100px">作者 </th>
+							  <th width="180px">来源</th>
+							  <th width="60px">创建时间</th>
+							  <th width="100px">修改时间</th>
+							  <th width="50px">发布时间</th>
 							  <th width="110px">操作</th>
 							</tr>
 						  </thead>
 						  <tbody>
-							<c:forEach items="${appPersons}" var="appPerson" varStatus="status">
+							<c:forEach items="${news}" var="news" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"> ${status.count+ (page.currentPage-1)*page.pageSize} </td>
-								<td style="text-align:center"><c:out value="${appPerson.name}"/></td>
-								<td style="text-align:center"><c:out value="${appPerson.idNumber}"/></td>
-								<td style="text-align:center" class="hidden-480" ><c:out value="${appPerson.postcodeAddress}"/></td>
-								<td style="text-align:center"><c:out value="${appPerson.feeReduceTransactionStatus}"/></td>
-								<td	style="text-align:center"><c:out value="${appPerson.transactionIdentityId}"/></td>
-								<td style="text-align:center"><c:out value="${appPerson.transactionYear}"/></td>
-								<%-- <td style="text-align:center">
-									<a  href="<s:url value='/appPerson/showProxyUploadForm.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">上传</a>
-									<c:if test="${not empty appPerson.proxyUrl}">
-                    				<a href="<s:url value='/appPerson/downloadProxyFile.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>">下载</a> 
-                    				</c:if>
-								</td> --%>
+								<td style="text-align:center"><c:out value="${news.title}"/></td>
+								<td style="text-align:center"><c:out value="${news.author}"/></td>
+								<td style="text-align:center"><c:out value="${news.source}"/></td>
+								<td style="text-align:center"><c:out value="${news.createTime}"/></td>
+								<td	style="text-align:center"><c:out value="${news.updateTime}"/></td>
+								<td style="text-align:center"><c:out value="${news.publishTime}"/></td>
 								<td style="text-align:center">
-									<c:out value="${appPerson.phone}"/>
-								</td>
-								<td style="text-align:center"><c:out value="${appPerson.otherInfo}"/></td>
-								<td style="text-align:center"><a href="javascript:editorAppPerson(${appPerson.appPersonId})"> 编辑 </a> 
-<%-- 								<td style="text-align:center"><a href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>"> 编辑 </a>  --%>
-								<%-- <a onclick="return confirm('确认要删除？')" href="<s:url value='/appPerson/deleteFeeReduceAppPersonInfo.html'/>?appPersonId=<c:out value='${appPerson.appPersonId}'/>&status=1&currentPage=${page.currentPage}">删除 </a> --%>
+								<a href="javascript:editorAppPerson(${appPerson.appPersonId})"> 编辑 </a>
+								<a href="javascript:deleteFeeReduceAppPersonInfo(${appPerson.appPersonId},1)">查看 </a>
 								<a href="javascript:deleteFeeReduceAppPersonInfo(${appPerson.appPersonId},1)">删除 </a>
+								
 								</td>
 							  </tr>
 							</c:forEach>
