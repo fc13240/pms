@@ -42,4 +42,11 @@
 		WHERE n.user_id=#{userId}
 	</select>
 	
+	<select id="getUserNewsById"  resultMap="NewsResultMap">
+		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,
+		nt.type_id ,nt.type_name,u.user_id,u.username
+		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
+		WHERE n.id=#{newsId}
+	</select>
+	
 </mapper>

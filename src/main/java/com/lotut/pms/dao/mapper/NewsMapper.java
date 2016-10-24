@@ -10,5 +10,7 @@ public interface NewsMapper {
 	List<News> getUserNewsByPage (Page page);
 	
 	int getUserNewsCount (int userId);
+	
+	News getUserNewsById (int newsId);
 
 }

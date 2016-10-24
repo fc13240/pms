@@ -40,17 +40,6 @@
     			</div>
 				<div style="height:10px;"></div>
 					<div class="lt-box" style="padding:30px 0 0 0;">
-							<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> 
-						  <div class="ta-top" style="margin-left:8px;"> 
-						  	<table class="search-table">
-					  			<tr>
-					  				<td>
-									  	<button type="button" style="width: 100px;" class="button button-rounded button-primary" onclick="javascript:addAppPerson()">申请备案</button>
-					  				</td>					  				
-					  			</tr>
-					  		</table>		
-						  </div>
-						 </div>
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">

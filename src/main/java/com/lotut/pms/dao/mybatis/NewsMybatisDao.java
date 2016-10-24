@@ -26,5 +26,10 @@ public class NewsMybatisDao extends SqlSessionDaoSupport implements NewsDao{
 	public int getUserNewsCount(int userId) {
 		return newsMapper.getUserNewsCount(userId);
 	}
+
+	@Override
+	public News getUserNewsById(int newsId) {
+		return newsMapper.getUserNewsById(newsId);
+	}
 	
 }
