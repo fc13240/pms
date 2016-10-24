@@ -3,6 +3,7 @@ package com.lotut.pms.dao.mapper;
 import java.util.List;
 
 import com.lotut.pms.domain.News;
+import com.lotut.pms.domain.NewsSearchCondition;
 import com.lotut.pms.domain.Page;
 
 public interface NewsMapper {
@@ -12,5 +13,9 @@ public interface NewsMapper {
 	int getUserNewsCount (int userId);
 	
 	News getUserNewsById (int newsId);
+	
+	List<News> searchUserNewsByPage (NewsSearchCondition searchCondition);
+	
+	int searchUserNewsCount(NewsSearchCondition searchCondition);
 
 }

@@ -26,16 +26,38 @@
     </div>
 		<div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right" style="padding:10px 0 0 3px;" >
-				    <div class="cl top1" style="height:10px;">
+				 <div class="cl top1" style="height:10px;">
 				    
-					  <form class="form-inline" action="<s:url value='/appPerson/searchFeeReduceAppPerson.html'/>" method="get">
-					  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-					    <div class="form-group">
-					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="姓名/证件号码/邮编地址/费减备案状态/备案证件号/备案年度" class="t-input form-control"/>	
-					    
-					     <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
-					    </div>
-					  </form>
+					  <form class="form-inline" action="<s:url value='/news/searchNews.html'/>" method="get">
+						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
+						  <div class="t-third">
+
+						  <table class="search-table">
+							  <tr>
+							  <td>新闻类型</td>
+							  <td>关键字</td>
+							  </tr>
+							  <tr>
+							  <td>
+								<select  style="width:100px;" class="selectPointOfInterest form-control" name="newsType">
+								  <option value="">全部</option>
+								  <c:forEach items="${allNewsType}" var="newsType">
+									<option value="<c:out value='${newsType.typeId}'/>">
+									<c:out value="${newsType.typeName}"/>
+									</option>
+								  </c:forEach>
+								</select>
+							  </td>
+							  <td>
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="乱七八糟" class="t-input form-control"/>							  
+							  </td>
+							  <td>
+							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
+							  </td>
+							  </tr>							  
+						  </table>
+						  </div>
+						</form>
 
     			</div>
 				<div style="height:10px;"></div>

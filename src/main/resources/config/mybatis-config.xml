@@ -86,5 +86,6 @@
 		<typeAlias alias="ArticleType" type="com.lotut.pms.domain.ArticleType"/>
 		<typeAlias alias="NewsImg" type="com.lotut.pms.domain.NewsImg"/>
 		<typeAlias alias="ArticleImg" type="com.lotut.pms.domain.ArticleImg"/>
+		<typeAlias alias="NewsSearchCondition" type="com.lotut.pms.domain.NewsSearchCondition"/>
 	</typeAliases>  
 </configuration>

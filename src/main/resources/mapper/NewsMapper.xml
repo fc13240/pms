@@ -21,13 +21,19 @@
 		</association>
 		<association property="user" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 	</resultMap>
+	
 	<resultMap type="NewsImg" id="NewImgMap">
 			<id property="imgId" column="img_id"/>
 			<result property="imgUrl" column="img_url"/>
 			<result property="newsId" column="news_id"/>
 			<result property="caption" column="caption"/>
-		</resultMap>
+	</resultMap>
 	
+	
+	<resultMap type="newsType" id="newsTypeResultMap">
+		<id property="typeId" column="type_id"/>
+		<result property="typeName" column="type_name"/>
+	</resultMap>
 	
 	<select id="getUserNewsByPage" parameterType="Page" resultMap="NewsResultMap">
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,
@@ -47,6 +53,41 @@
 		nt.type_id ,nt.type_name,u.user_id,u.username
 		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.id=#{newsId}
+	</select>
+	
+	
+	<select id="searchUserNewsByPage" parameterType="NewsSearchCondition" resultMap="NewsResultMap" >
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>
+		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,
+		nt.type_id ,nt.type_name,u.user_id,u.username
+		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
+		WHERE n.id=#{newsId}
+		<if test="keyword != null">
+					and ( n.keywords like #{keyword_pattern} or n.author like #{keyword_pattern} or n.title like #{keyword_pattern}
+					or n.source like #{keyword_pattern} or n.abstract like #{keyword_pattern})
+		</if>
+		<if test="newsType != null and newsType !=''">
+					and ( n.news_type = #{newsType})
+		</if>
+		limit #{page.startIndex}, #{page.pageSize}
+	</select>
+	
+	<select id="searchUserNewsCount" parameterType="NewsSearchCondition" resultType="int" >
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>
+		SELECT count(*)
+		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
+		WHERE n.id=#{newsId}
+		<if test="keyword != null">
+					and ( n.keywords like #{keyword_pattern} or n.author like #{keyword_pattern} or n.title like #{keyword_pattern}
+					or n.source like #{keyword_pattern} or n.abstract like #{keyword_pattern})
+		</if>
+		<if test="newsType != null and newsType !=''">
+					and ( n.news_type = #{newsType})
+		</if>
 	</select>
 	
 </mapper>
