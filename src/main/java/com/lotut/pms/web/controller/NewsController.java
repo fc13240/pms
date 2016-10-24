@@ -76,4 +76,9 @@ public class NewsController {
 		return "news_preview";
 	}
 	
+	@RequestMapping(path="/addNewsForm")
+	public String addNewsForm() {
+		return "news_add";
+	}
+	
 }

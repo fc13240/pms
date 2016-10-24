@@ -52,6 +52,7 @@ public class ArticleServiceImpl implements ArticleService {
 		int totalCount=articleDao.searchUserArticleCount(userId);
 		page.setTotalRecords(totalCount);
 		List<Article> articles=articleDao.searchUserArticleByPage(articleSearchCondition);
+		
 		return null;
 	}
 
