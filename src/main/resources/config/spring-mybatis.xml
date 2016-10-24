@@ -119,6 +119,17 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
 	
+	<bean id="newsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.NewsMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	
+	<bean id="articleMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.ArticleMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	
+	
 	
 	
 
@@ -211,5 +222,16 @@
 	<bean name="expressDao" class="com.lotut.pms.dao.mybatis.ExpressMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 		<property name="expressMapper" ref="expressMapper" />
+	</bean>
+	
+	
+	<bean name="newsDao" class="com.lotut.pms.dao.mybatis.NewsMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="newsMapper" ref="newsMapper" />
+	</bean>
+	
+	<bean name="articleDao" class="com.lotut.pms.dao.mybatis.ArticleMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="articleMapper" ref="articleMapper" />
 	</bean>	
 </beans>							
