@@ -29,11 +29,17 @@
 		</resultMap>
 	
 	
-	<select id="getUserNewsByPage" resultMap="NewsResultMap">
+	<select id="getUserNewsByPage" parameterType="Page" resultMap="NewsResultMap">
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,
 		nt.type_id ,nt.type_name,u.user_id,u.username
 		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
-		WHERE n.user_id=#{userId}
+		WHERE n.user_id=#{userId} limit #{startIndex}, #{pageSize}
+	</select>
+	
+	<select id="getUserNewsCount" parameterType="int" resultType="int">
+		SELECT count(*)
+		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
+		WHERE n.user_id=#{userId} limit #{startIndex}, #{pageSize}
 	</select>
 	
 </mapper>

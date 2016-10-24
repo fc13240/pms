@@ -1016,7 +1016,7 @@ alter table patent_doc_app_person modify column id_number varchar(50);
 CREATE  TABLE if not exists news_type (
 type_id  int NOT NULL AUTO_INCREMENT COMMENT 'id' ,
 type_name  varchar(50) NOT NULL COMMENT '栏目名' ,
-PRIMARY KEY (id)
+PRIMARY KEY (type_id)
 )
 ;
 

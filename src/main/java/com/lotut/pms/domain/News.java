@@ -21,18 +21,9 @@ public class News {
 	private String source;
 	private String content;
 	private String newsAbstract;
-	private NewImg newImg;
 	
 	
-	
-	
-	
-	public NewImg getNewImg() {
-		return newImg;
-	}
-	public void setNewImg(NewImg newImg) {
-		this.newImg = newImg;
-	}
+
 	public Timestamp getCreateTime() {
 		return createTime;
 	}
