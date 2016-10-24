@@ -1051,7 +1051,6 @@ user_id  int NOT NULL COMMENT '发文人' ,
 keywords  varchar(120) NULL COMMENT '关键字' ,
 author  varchar(30) NULL COMMENT '作者' ,
 title  varchar(50) NOT NULL COMMENT '标题' ,
-
 create_time  timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ,
 publish_time  datetime COMMENT '发布时间' ,
 update_time  timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间' ,
@@ -1062,7 +1061,7 @@ check_status  tinyint NULL DEFAULT 0 COMMENT '0 未审核  1  审核  2审核不
 up_vote  int NOT NULL DEFAULT 0 ,
 down_vote  int NOT NULL DEFAULT 0 ,
 PRIMARY KEY (id),
-FOREIGN KEY (news_type) REFERENCES news_type (id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (article_type) REFERENCES article_type (id) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (user_id) REFERENCES   users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ;
