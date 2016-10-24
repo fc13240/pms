@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import com.lotut.pms.dao.ArticleDao;
 import com.lotut.pms.domain.Article;
 import com.lotut.pms.domain.ArticleSearchCondition;
+import com.lotut.pms.domain.ArticleType;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserArticle;
@@ -52,7 +53,12 @@ public class ArticleServiceImpl implements ArticleService {
 		int totalCount=articleDao.searchUserArticleCount(userId);
 		page.setTotalRecords(totalCount);
 		List<Article> articles=articleDao.searchUserArticleByPage(articleSearchCondition);
-		return null;
+		List<ArticleType> articleTypes=articleDao.getAllArticleTypes();
+		UserArticle userArticle=new UserArticle();
+		userArticle.setPage(page);
+		userArticle.setArticles(articles);
+		userArticle.setArticleTypes(articleTypes);
+		return userArticle;
 	}
 
 	
