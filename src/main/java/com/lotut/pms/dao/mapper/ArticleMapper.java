@@ -13,9 +13,9 @@ public interface ArticleMapper {
 	
 	int getUserArticleCount(int userId);
 	
-	List<Article> searchUserArticleByPage(ArticleSearchCondition articleSearchCondition);
+	List<Article> searchUserArticleByPage(ArticleSearchCondition searchCondition);
 	
-	int searchUserArticleCount(ArticleSearchCondition articleSearchCondition);
+	int searchUserArticleCount(ArticleSearchCondition searchCondition);
 	
 	List<ArticleType>getAllArticleTypes();
 }

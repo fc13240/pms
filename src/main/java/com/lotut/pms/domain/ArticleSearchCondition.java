@@ -31,5 +31,11 @@ public class ArticleSearchCondition {
 		this.articleType = articleType;
 	}
 	
+	@Override
+	public String toString() {
+		String keywordStr = keyword == null ? "" : keyword;
+		String articleTypeStr = articleType == null ? "" : articleType.toString();
+		return "keyword=" + keywordStr+ "&articleType=" + articleTypeStr;
+	}
 	
 }
