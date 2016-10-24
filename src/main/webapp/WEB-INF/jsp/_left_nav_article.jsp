@@ -15,7 +15,7 @@
 		</a>
 	</li> 
 	<li class="active"> 
-		<a href="<s:url value='/article/addArticleTypeList.html'/>">
+		<a href="<s:url value='/article/getArticleTypeList.html'/>">
 		<h5>分类管理</h5>
 		</a>
 	</li> 

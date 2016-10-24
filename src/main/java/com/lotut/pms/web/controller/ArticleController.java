@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lotut.pms.domain.Article;
 import com.lotut.pms.domain.ArticleSearchCondition;
+import com.lotut.pms.domain.ArticleType;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.News;
 import com.lotut.pms.domain.NewsSearchCondition;
@@ -49,5 +50,12 @@ public class ArticleController {
 		model.addAttribute("page", userArticle.getPage());
 		model.addAttribute("articleTypes", userArticle.getArticleTypes());
 		return "article_list";
+	}
+	
+	@RequestMapping(path="/getArticleTypeList", method=RequestMethod.GET)
+	public String getArticleTypeList(Model model) {
+		List<ArticleType> allArticleTypes=articleService.getAllArticleTypes();
+		model.addAttribute("allArticleTypes", allArticleTypes);
+		return "article_type_list";
 	}
 }
