@@ -30,9 +30,9 @@ public class ArticleController {
 	@RequestMapping(path="/getUserArticles")
 	public String getUserArticles(Page page, HttpSession session,Model model){
 		UserArticle userArticle=articleService.getUserArticleByPage(page, session);
-		model.addAttribute("appPersons", userArticle.getArticles());
+		model.addAttribute("articles", userArticle.getArticles());
 		model.addAttribute("page", userArticle.getPage());
-		return "app_person_list";
+		return "news_list";
 		
 	}
 	
