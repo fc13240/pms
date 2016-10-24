@@ -39,7 +39,7 @@
 	<select id="getUserNewsCount" parameterType="int" resultType="int">
 		SELECT count(*)
 		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
-		WHERE n.user_id=#{userId} limit #{startIndex}, #{pageSize}
+		WHERE n.user_id=#{userId}
 	</select>
 	
 </mapper>
