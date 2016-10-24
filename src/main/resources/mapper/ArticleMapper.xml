@@ -31,8 +31,13 @@
 		<result property="caption" column="caption"/>
 	</resultMap>
 	
+	<resultMap type="ArticleType" id="ArticleTypeResultMap">
+		<id property="typeId" column="type_id"/>
+		<result property="typeName" column="type_name"/>
+	</resultMap>
+	
 	<select id="getUserArticleByPage" parameterType="Page"  resultMap="ArticleResultMap">
-		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,
+		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,n.check_status,
 		nt.type_id ,nt.type_name,u.user_id,u.username
 		FROM article n LEFT JOIN article_type nt ON  n.article_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.user_id=#{userId} limit #{startIndex}, #{pageSize}
@@ -45,10 +50,50 @@
 	</select>	
 	
 	<select id="getUserArticleById"  resultMap="ArticleResultMap">
-		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,
+		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,n.check_status,
 		nt.type_id ,nt.type_name,u.user_id,u.username
 		FROM article n LEFT JOIN article_type nt ON  n.article_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.id=#{articleId}
+	</select>
+	
+	<select id="searchUserArticleByPage" parameterType="ArticleSearchCondition" resultMap="ArticleResultMap" >
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>
+		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,n.check_status,
+		nt.type_id ,nt.type_name,u.user_id,u.username
+		FROM article n LEFT JOIN article_type nt ON  n.article_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
+		WHERE n.user_id=#{userId}
+		<if test="keyword != null">
+					and ( n.keywords like #{keyword_pattern} or n.author like #{keyword_pattern} or n.title like #{keyword_pattern}
+					or n.source like #{keyword_pattern} or n.abstract like #{keyword_pattern})
+		</if>
+		<if test="articleType != null and articleType !=''">
+					and ( n.article_type = #{articleType})
+		</if>
+		limit #{page.startIndex}, #{page.pageSize}
+	</select>
+	
+	<select id="searchUserArticleCount" parameterType="ArticleSearchCondition" resultType="int" >
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>
+		SELECT count(*)
+		FROM article n LEFT JOIN article_type nt ON  n.article_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
+		WHERE n.user_id=#{userId}
+		<if test="keyword != null">
+					and ( n.keywords like #{keyword_pattern} or n.author like #{keyword_pattern} or n.title like #{keyword_pattern}
+					or n.source like #{keyword_pattern} or n.abstract like #{keyword_pattern})
+		</if>
+		<if test="articleType != null and articleType !=''">
+					and ( n.article_type = #{articleType})
+		</if>
+	</select>
+	
+	<select id="getAllArticleTypes" resultMap="ArticleTypeResultMap">
+		select type_id, type_name
+		  from article_type
+		 order by type_id asc;	
 	</select>
   </mapper>
   
