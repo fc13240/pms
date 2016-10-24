@@ -1051,7 +1051,6 @@ user_id  int NOT NULL COMMENT '发文人' ,
 keywords  varchar(120) NULL COMMENT '关键字' ,
 author  varchar(30) NULL COMMENT '作者' ,
 title  varchar(50) NOT NULL COMMENT '标题' ,
-
 create_time  timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ,
 publish_time  datetime COMMENT '发布时间' ,
 update_time  timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间' ,
