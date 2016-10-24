@@ -27,7 +27,6 @@
 		<div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right" style="padding:10px 0 0 3px;" >
 				 <div class="cl top1" style="height:10px;">
-				    
 					  <form class="form-inline" action="<s:url value='/news/searchNews.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 						  <div class="t-third">
@@ -36,6 +35,7 @@
 							  <tr>
 							  <td>新闻类型</td>
 							  <td>关键字</td>
+							  <td></td>
 							  </tr>
 							  <tr>
 							  <td>
@@ -58,10 +58,9 @@
 						  </table>
 						  </div>
 						</form>
-
     			</div>
 				<div style="height:10px;"></div>
-					<div class="lt-box" style="padding:30px 0 0 0;">
+					<div class="lt-box" style="padding:50px 0 0 0;">
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
@@ -86,9 +85,9 @@
 								<td	style="text-align:center"><c:out value="${news.updateTime}"/></td>
 								<td style="text-align:center"><c:out value="${news.publishTime}"/></td>
 								<td style="text-align:center">
-								<a href="javascript:editorAppPerson(${appPerson.appPersonId})"> 编辑 </a>
-								<a href="javascript:deleteFeeReduceAppPersonInfo(${appPerson.appPersonId},1)">查看 </a>
-								<a href="javascript:deleteFeeReduceAppPersonInfo(${appPerson.appPersonId},1)">删除 </a>
+								<a href="javascript:editorAppPerson()"> 编辑 </a>
+								<a href="javascript:deleteFeeReduceAppPersonInfo(1)">查看 </a>
+								<a href="javascript:deleteFeeReduceAppPersonInfo(1)">删除 </a>
 								
 								</td>
 							  </tr>
@@ -258,10 +257,10 @@ function gotoPage() {
 		return;
 	}
 	
-	var url = "<s:url value='/appPerson/getUserFeeReduceAppPersonList.html'/>?currentPage=" + pageNo;
+	var url = "<s:url value='/news/list.html'/>?currentPage=" + pageNo;
 	
 	<c:if test="${searchCondition != null}">
-		url = "<s:url value='/appPerson/searchFeeReduceAppPerson.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		url = "<s:url value='/news/searchNews.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 	</c:if>
 	
 	
