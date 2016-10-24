@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.News;
 import com.lotut.pms.domain.NewsSearchCondition;
@@ -68,6 +69,11 @@ public class NewsController {
 		return "news_list";
 	}
 	
-	
+	@RequestMapping(path="/getUserNewsById", method=RequestMethod.GET)
+	public String getUserNewsById(@RequestParam("newsId") int newsId,Model model) {
+		News news=newsService.getUserNewsById(newsId);
+		model.addAttribute("news", news);
+		return "news_preview";
+	}
 	
 }
