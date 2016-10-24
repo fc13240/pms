@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.lotut.pms.dao.mapper.ArticleMapper">
-  <resultMap type="Article" id="ArticleResultMap">
-  	<id property="id" column="id"/>
+  	<mapper namespace="com.lotut.pms.dao.mapper.ArticleMapper">
+  	<resultMap type="Article" id="ArticleResultMap">
+  		<id property="id" column="id"/>
 		<result property="keywords" column="keywords"/>
 		<result property="author" column="author"/>
 		<result property="title" column="title"/>
@@ -18,10 +18,25 @@
 		<result property="upVote" column="up_vote"/>
 		<result property="downVote" column="down_vote"/>
 		<association property="articleType" javaType="ArticleType">
-			<id property="id" column="id"/>
-			<result property="name" column="name"/>
+			<id property="typeId" column="type_id"/>
+			<result property="typeName" column="type_name"/>
 		</association>
 		<association property="user" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
-  </resultMap>
+	  </resultMap>
+		  
+	<resultMap type="ArticleImg" id="ArticleImgMap">
+		<id property="imgId" column="img_id"/>
+		<result property="imgUrl" column="img_url"/>
+		<result property="articleId" column="article_id"/>
+		<result property="caption" column="caption"/>
+	</resultMap>
+	
+	<select id="getUserarticleByPage" parameterType="Page"  resultMap="ArticleResultMap">
+		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,
+		nt.type_id ,nt.type_name,u.user_id,u.username
+		FROM article n LEFT JOIN article_type nt ON  n.article_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
+		WHERE n.user_id=#{userId} 
+	</select>
+		
   </mapper>
   

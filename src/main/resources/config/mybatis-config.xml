@@ -85,5 +85,6 @@
 		<typeAlias alias="Article" type="com.lotut.pms.domain.Article"/>
 		<typeAlias alias="ArticleType" type="com.lotut.pms.domain.ArticleType"/>
 		<typeAlias alias="NewImg" type="com.lotut.pms.domain.NewImg"/>
+		<typeAlias alias="NewImg" type="com.lotut.pms.domain.ArticleImg"/>
 	</typeAliases>  
 </configuration>
