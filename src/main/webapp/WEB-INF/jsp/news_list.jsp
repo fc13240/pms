@@ -307,11 +307,6 @@ function gotoPageForEnter(event) {
 		
 	}
 	
-	function editorAppPerson(appPersonId){
-		var fatherPath=window.location.href;
-		fatherPath=fatherPath.substring(fatherPath.indexOf("appPerson")-1);
-		window.location.href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId="+appPersonId+"&fatherPath="+fatherPath; 
-	}
 </script>
 </body>
 </html>
