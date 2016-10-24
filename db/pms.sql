@@ -1023,7 +1023,7 @@ PRIMARY KEY (type_id)
 CREATE TABLE IF NOT EXISTS article_type (
 type_id  INT NOT NULL AUTO_INCREMENT ,
 type_name  VARCHAR(50) NOT NULL COMMENT '栏目名' ,
-PRIMARY KEY (article_id)
+PRIMARY KEY (type_id)
 )
 ;
 CREATE TABLE if not exists news (
@@ -1044,22 +1044,22 @@ FOREIGN KEY (news_type) REFERENCES news_type (type_id) ON DELETE CASCADE ON UPDA
 FOREIGN KEY (user_id) REFERENCES   users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ;
-CREATE TABLE if not exists article (
-id  int NOT NULL AUTO_INCREMENT ,
-article_type  int NOT NULL COMMENT '栏目id' ,
-user_id  int NOT NULL COMMENT '发文人' ,
-keywords  varchar(120) NULL COMMENT '关键字' ,
-author  varchar(30) NULL COMMENT '作者' ,
-title  varchar(50) NOT NULL COMMENT '标题' ,
-create_time  timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ,
-publish_time  datetime COMMENT '发布时间' ,
-update_time  timestamp NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间' ,
-source  varchar(100) NULL COMMENT '来源' ,
-abstract  varchar(100) NULL COMMENT '摘要' ,
-content  text NOT NULL COMMENT '内容' ,
-check_status  tinyint NULL DEFAULT 0 COMMENT '0 未审核  1  审核  2审核不通过' ,
-up_vote  int NOT NULL DEFAULT 0 ,
-down_vote  int NOT NULL DEFAULT 0 ,
+CREATE TABLE IF NOT EXISTS article (
+id  INT NOT NULL AUTO_INCREMENT ,
+article_type  INT NOT NULL COMMENT '栏目id' ,
+user_id  INT NOT NULL COMMENT '发文人' ,
+keywords  VARCHAR(120) NULL COMMENT '关键字' ,
+author  VARCHAR(30) NULL COMMENT '作者' ,
+title  VARCHAR(50) NOT NULL COMMENT '标题' ,
+create_time  DATETIME  COMMENT '创建时间' ,
+publish_time  DATETIME COMMENT '发布时间' ,
+update_time  TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间' ,
+source  VARCHAR(100) NULL COMMENT '来源' ,
+abstract  VARCHAR(100) NULL COMMENT '摘要' ,
+content  TEXT NOT NULL COMMENT '内容' ,
+check_status  TINYINT NULL DEFAULT 0 COMMENT '0 未审核  1  审核  2审核不通过' ,
+up_vote  INT NOT NULL DEFAULT 0 ,
+down_vote  INT NOT NULL DEFAULT 0 ,
 PRIMARY KEY (id),
 FOREIGN KEY (article_type) REFERENCES article_type (type_id) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (user_id) REFERENCES   users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
