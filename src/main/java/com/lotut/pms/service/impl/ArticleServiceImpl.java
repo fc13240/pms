@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import com.lotut.pms.dao.ArticleDao;
 import com.lotut.pms.domain.Article;
+import com.lotut.pms.domain.ArticleSearchCondition;
 import com.lotut.pms.domain.CommonAppPerson;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserArticle;
@@ -37,6 +38,21 @@ public class ArticleServiceImpl implements ArticleService {
 		userArticle.setPage(page);
 		userArticle.setArticles(articles);
 		return userArticle;
+	}
+
+	@Override
+	public UserArticle searchUserArticleByPage(ArticleSearchCondition articleSearchCondition, HttpSession session) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		Page page=articleSearchCondition.getPage();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=articleDao.searchUserArticleCount(userId);
+		page.setTotalRecords(totalCount);
+		List<Article> articles=articleDao.searchUserArticleByPage(articleSearchCondition);
+		return null;
 	}
 
 	

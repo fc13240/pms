@@ -4,6 +4,7 @@ public class ArticleSearchCondition {
 	private int userId;
 	private Page page;
 	private String keywords;
+	private Integer articleType;
 	public int getUserId() {
 		return userId;
 	}
@@ -21,6 +22,12 @@ public class ArticleSearchCondition {
 	}
 	public void setKeywords(String keywords) {
 		this.keywords = keywords;
+	}
+	public Integer getArticleType() {
+		return articleType;
+	}
+	public void setArticleType(Integer articleType) {
+		this.articleType = articleType;
 	}
 	
 	
