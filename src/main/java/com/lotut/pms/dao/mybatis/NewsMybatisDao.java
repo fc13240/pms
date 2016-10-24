@@ -8,6 +8,8 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.NewsDao;
 import com.lotut.pms.dao.mapper.NewsMapper;
 import com.lotut.pms.domain.News;
+import com.lotut.pms.domain.NewsSearchCondition;
+import com.lotut.pms.domain.NewsType;
 import com.lotut.pms.domain.Page;
 
 public class NewsMybatisDao extends SqlSessionDaoSupport implements NewsDao{
@@ -30,6 +32,21 @@ public class NewsMybatisDao extends SqlSessionDaoSupport implements NewsDao{
 	@Override
 	public News getUserNewsById(int newsId) {
 		return newsMapper.getUserNewsById(newsId);
+	}
+
+	@Override
+	public List<News> searchUserNewsByPage(NewsSearchCondition searchCondition) {
+		return newsMapper.searchUserNewsByPage(searchCondition);
+	}
+
+	@Override
+	public int searchUserNewsCount(NewsSearchCondition searchCondition) {
+		return newsMapper.searchUserNewsCount(searchCondition);
+	}
+
+	@Override
+	public List<NewsType> getAllNewsTypes() {
+		return newsMapper.getAllNewsTypes();
 	}
 	
 }

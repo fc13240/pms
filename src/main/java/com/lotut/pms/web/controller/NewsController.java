@@ -8,11 +8,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lotut.pms.domain.News;
+import com.lotut.pms.domain.NewsSearchCondition;
+import com.lotut.pms.domain.NewsType;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.PatentDoc;
+import com.lotut.pms.domain.PatentDocSearchCondition;
 import com.lotut.pms.service.NewsService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
@@ -40,7 +45,29 @@ public class NewsController {
 		int totalCount=(int)newsService.getUserNewsCount(userId);
 		page.setTotalRecords(totalCount);
 		model.addAttribute("news", news);
+		model.addAttribute("page", page);
 		return "news_list";
 	}
+	
+	
+	@RequestMapping(path="/searchNews", method=RequestMethod.GET)
+	public String searchUserNews(@ModelAttribute("searchCondition") NewsSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		List<News> news=newsService.searchUserNewsByPage(searchCondition);
+		int totalCount=newsService.searchUserNewsCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		List<NewsType> allNewsType=newsService.getAllNewsTypes();
+		model.addAttribute("news", news);
+		model.addAttribute("page", page);
+		model.addAttribute("allNewsType", allNewsType);
+		return "news_list";
+	}
+	
+	
 	
 }
