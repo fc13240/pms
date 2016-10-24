@@ -30,19 +30,20 @@ public class ArticleMybatisDao extends SqlSessionDaoSupport implements ArticleDa
 	}
 
 
-	@Override
-	public int searchUserArticleCount(int userId) {
-		return articleMapper.searchUserArticleCount(userId);
-	}
 
 	@Override
-	public List<Article> searchUserArticleByPage(ArticleSearchCondition articleSearchCondition) {
-		return articleMapper.searchUserArticleByPage(articleSearchCondition);
+	public List<Article> searchUserArticleByPage(ArticleSearchCondition searchCondition) {
+		return articleMapper.searchUserArticleByPage(searchCondition);
 	}
 
 	@Override
 	public List<ArticleType> getAllArticleTypes() {
 		return articleMapper.getAllArticleTypes();
+	}
+
+	@Override
+	public int searchUserArticleCount(ArticleSearchCondition articleSearchCondition) {
+		return articleMapper.searchUserArticleCount(articleSearchCondition);
 	}
 	
 }

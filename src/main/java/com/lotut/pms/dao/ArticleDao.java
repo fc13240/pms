@@ -14,7 +14,7 @@ public interface ArticleDao {
 	
 	List<Article> searchUserArticleByPage(ArticleSearchCondition articleSearchCondition);
 	
-	int searchUserArticleCount(int userId);
+	int searchUserArticleCount(ArticleSearchCondition articleSearchCondition);
 	
 	List<ArticleType> getAllArticleTypes();
 }
