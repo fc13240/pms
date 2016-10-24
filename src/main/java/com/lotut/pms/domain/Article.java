@@ -25,6 +25,14 @@ public class Article {
 	private int checkStatus;
 	private int upVote;
 	private int downVote;
+	
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public int getId() {
 		return id;
 	}
@@ -36,12 +44,6 @@ public class Article {
 	}
 	public void setArticleType(ArticleType articleType) {
 		this.articleType = articleType;
-	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
 	}
 	public String getKeywords() {
 		return keywords;

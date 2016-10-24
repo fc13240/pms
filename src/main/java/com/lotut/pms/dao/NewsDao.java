@@ -10,4 +10,5 @@ public interface NewsDao {
 	
 	int getUserNewsCount (int userId);
 	
+	News getUserNewsById (int newsId);
 }

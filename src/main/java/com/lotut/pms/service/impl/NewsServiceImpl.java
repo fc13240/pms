@@ -23,5 +23,10 @@ public class NewsServiceImpl implements NewsService {
 	public int getUserNewsCount(int userId) {
 		return newsDao.getUserNewsCount(userId);
 	}
+
+	@Override
+	public News getUserNewsById(int newsId) {
+		return newsDao.getUserNewsById(newsId);
+	}
 	
 }

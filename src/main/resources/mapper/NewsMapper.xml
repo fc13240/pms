@@ -21,7 +21,7 @@
 		</association>
 		<association property="user" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 	</resultMap>
-	<resultMap type="NewImg" id="NewImgMap">
+	<resultMap type="NewsImg" id="NewImgMap">
 			<id property="imgId" column="img_id"/>
 			<result property="imgUrl" column="img_url"/>
 			<result property="newsId" column="news_id"/>
@@ -40,6 +40,13 @@
 		SELECT count(*)
 		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.user_id=#{userId}
+	</select>
+	
+	<select id="getUserNewsById"  resultMap="NewsResultMap">
+		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,
+		nt.type_id ,nt.type_name,u.user_id,u.username
+		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
+		WHERE n.id=#{newsId}
 	</select>
 	
 </mapper>

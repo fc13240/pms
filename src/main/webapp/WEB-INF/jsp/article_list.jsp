@@ -17,18 +17,18 @@
 <body>
 <%@ include file="_top.jsp" %>
 <div class="col-xs-1 sidebar" style="min-width:100px;">
-			<%@ include file="_left_nav_news.jsp" %>
+			<%@ include file="_left_nav_article.jsp" %>
 		  </div>
 	<div class="tit_top">
         <div class="title2">
-           新闻列表</div>
+           文章列表</div>
                
     </div>
 		<div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right" style="padding:10px 0 0 3px;" >
 				    <div class="cl top1" style="height:10px;">
 				    
-					  <form class="form-inline" action="<s:url value='/appPerson/searchFeeReduceAppPerson.html'/>" method="get">
+					  <form class="form-inline" action="<s:url value='/article/searchFeeReduceAppPerson.html'/>" method="get">
 					  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 					    <div class="form-group">
 					    <input style="width:450px;height:34px;float:left;margin:0 5px 0 0 ;" name="keyword" id="keywordId" value="" placeholder="姓名/证件号码/邮编地址/费减备案状态/备案证件号/备案年度" class="t-input form-control"/>	
@@ -44,29 +44,31 @@
 						  <thead>
 							<tr class="simple_bag">
 							  <th class="center" width="40px">序号</th>
-							  <th width="100px">新闻标题</th>
+							  <th width="100px">文章标题</th>
 							  <th width="100px">作者 </th>
 							  <th width="180px">来源</th>
 							  <th width="60px">创建时间</th>
 							  <th width="100px">修改时间</th>
 							  <th width="50px">发布时间</th>
+							  <th width="50px">审核状态</th>
 							  <th width="110px">操作</th>
 							</tr>
 						  </thead>
 						  <tbody>
-							<c:forEach items="${news}" var="news" varStatus="status">
+							<c:forEach items="${articles}" var="article" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"> ${status.count+ (page.currentPage-1)*page.pageSize} </td>
-								<td style="text-align:center"><c:out value="${news.title}"/></td>
-								<td style="text-align:center"><c:out value="${news.author}"/></td>
-								<td style="text-align:center"><c:out value="${news.source}"/></td>
-								<td style="text-align:center"><c:out value="${news.createTime}"/></td>
-								<td	style="text-align:center"><c:out value="${news.updateTime}"/></td>
-								<td style="text-align:center"><c:out value="${news.publishTime}"/></td>
+								<td style="text-align:center"><c:out value="${article.title}"/></td>
+								<td style="text-align:center"><c:out value="${article.author}"/></td>
+								<td style="text-align:center"><c:out value="${article.source}"/></td>
+								<td style="text-align:center"><c:out value="${article.createTime}"/></td>
+								<td	style="text-align:center"><c:out value="${article.updateTime}"/></td>
+								<td style="text-align:center"><c:out value="${article.publishTime}"/></td>
 								<td style="text-align:center">
 								<a href="javascript:editorAppPerson(${appPerson.appPersonId})"> 编辑 </a>
 								<a href="javascript:deleteFeeReduceAppPersonInfo(${appPerson.appPersonId},1)">查看 </a>
 								<a href="javascript:deleteFeeReduceAppPersonInfo(${appPerson.appPersonId},1)">删除 </a>
+								<a href="javascript:deleteFeeReduceAppPersonInfo(${appPerson.appPersonId},1)">审核 </a>
 								
 								</td>
 							  </tr>
