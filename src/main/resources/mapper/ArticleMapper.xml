@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.lotut.pms.dao.mapper.AppPersonMapper">
+  <resultMap type="CommonAppPerson" id="AppPersonWithShareUsers">
+  	<id property="id" column="id"/>
+		<result property="articleType" column="article_type"/>
+		<result property="keywords" column="keywords"/>
+		<result property="author" column="author"/>
+		<result property="title" column="title"/>
+		<result property="create_time" column="create_time"/>
+		<result property="publish_time" column="publish_time"/>
+		<result property="update_time" column="update_time"/>
+		<result property="source" column="source"/>
+		<result property="articleAbstract" column="abstract"/>
+		<result property="checkStatus" column="check_status"/>
+		<result property="upVote" column="up_vote"/>
+		<result property="downVote" column="down_vote"/>
+		<association property="user" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
+		<association property="user" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
+  </resultMap>
+  </mapper>
+  
