@@ -64,7 +64,7 @@
 		line-height: 28px;
 		text-indent: 2em;
 		text-align: left;
-		overflow: auto;
+		overflow: auto; 
 		color: #666;
 		font-size: 14px;
 	}
@@ -83,7 +83,17 @@
 				<div class="pre_title" style="text-align:center">${news.title}</div>
 			</div>
 			
-				
+			<div>
+				<div style="float:left;margin-left: 40px;" >作者：${news.author}</div>
+				<div style="float:left;margin-left: 600px;" >创建时间：${news.createTime}</div>
+			</div>
+			<br/>
+			<div>
+				<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="90%" color=#987cb9 SIZE=3>
+			</div>
+			
+			<div class="tit_top"></div>
+			<div class="pre_text" id="div_1">${news.content}</div>
 				
 					
 			
