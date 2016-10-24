@@ -38,8 +38,8 @@ public class ArticleController {
 	
 
 	@RequestMapping(path="/searchArticles", method=RequestMethod.GET)
-	public String searchUserNews(@ModelAttribute("searchCondition") ArticleSearchCondition articleSearchCondition, Model model,HttpSession session) {
-		UserArticle userArticle=articleService.searchUserArticleByPage(articleSearchCondition, session);
+	public String searchUserNews(@ModelAttribute("searchCondition") ArticleSearchCondition searchCondition, Model model,HttpSession session) {
+		UserArticle userArticle=articleService.searchUserArticleByPage(searchCondition, session);
 		model.addAttribute("articles", userArticle.getArticles());
 		model.addAttribute("page", userArticle.getPage());
 		model.addAttribute("articleTypes", userArticle.getArticleTypes());
