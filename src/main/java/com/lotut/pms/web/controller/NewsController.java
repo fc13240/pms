@@ -76,4 +76,9 @@ public class NewsController {
 		return "news_preview";
 	}
 	
+	@RequestMapping(path="/deleteNews")
+	public void deleteNews(int newsId) {
+		newsService.deleteNewsById(newsId);
+	}
+	
 }

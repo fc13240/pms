@@ -48,5 +48,10 @@ public class NewsMybatisDao extends SqlSessionDaoSupport implements NewsDao{
 	public List<NewsType> getAllNewsTypes() {
 		return newsMapper.getAllNewsTypes();
 	}
+
+	@Override
+	public void deleteNewsById(int newsId) {
+		newsMapper.deleteNewsById(newsId);
+	}
 	
 }

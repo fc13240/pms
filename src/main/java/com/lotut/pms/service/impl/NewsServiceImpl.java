@@ -45,5 +45,10 @@ public class NewsServiceImpl implements NewsService {
 	public List<NewsType> getAllNewsTypes() {
 		return newsDao.getAllNewsTypes();
 	}
+
+	@Override
+	public void deleteNewsById(int newsId) {
+		newsDao.deleteNewsById(newsId);
+	}
 	
 }
