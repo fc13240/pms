@@ -95,5 +95,13 @@
 		  from article_type
 		 order by type_id asc;	
 	</select>
+	
+	<update id="auditPass" >
+		update article set check_status =#{checkStatus} where id=#{id}
+	</update>
+	
+<!-- 	<update id="auditNoPass" parameterType="int">
+		update article set check_status =2 where id=#{id}
+	</update> -->
   </mapper>
   

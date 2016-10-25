@@ -16,4 +16,6 @@ public interface ArticleService {
 	UserArticle searchUserArticleByPage(ArticleSearchCondition articleSearchCondition,HttpSession session);
 
 	List<ArticleType> getAllArticleTypes();
+	
+	void auditArticle(Article article);
 }

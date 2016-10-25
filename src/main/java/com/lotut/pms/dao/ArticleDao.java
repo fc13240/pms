@@ -17,4 +17,6 @@ public interface ArticleDao {
 	int searchUserArticleCount(ArticleSearchCondition searchCondition);
 	
 	List<ArticleType> getAllArticleTypes();
+	
+	void auditPass(Article article);
 }

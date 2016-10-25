@@ -58,4 +58,11 @@ public class ArticleController {
 		model.addAttribute("allArticleTypes", allArticleTypes);
 		return "article_type_list";
 	}
+	
+	@RequestMapping(path="/audit", method=RequestMethod.GET)
+	public String audit(Article article){
+		articleService.auditArticle(article);
+		return "redirect:/article/list.html";
+		
+	}
 }

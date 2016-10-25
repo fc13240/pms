@@ -67,5 +67,10 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleDao.getAllArticleTypes();
 	}
 
+	@Override
+	public void auditArticle(Article article) {
+		articleDao.auditPass(article);
+	}
+
 	
 }

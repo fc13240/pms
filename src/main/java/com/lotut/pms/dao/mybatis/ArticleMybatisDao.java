@@ -45,5 +45,13 @@ public class ArticleMybatisDao extends SqlSessionDaoSupport implements ArticleDa
 	public int searchUserArticleCount(ArticleSearchCondition searchCondition) {
 		return articleMapper.searchUserArticleCount(searchCondition);
 	}
+
+	@Override
+	public void auditPass(Article article) {
+		articleMapper.auditPass(article);
+	}
+
+
+
 	
 }
