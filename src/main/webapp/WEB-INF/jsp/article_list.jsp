@@ -99,7 +99,7 @@
 								审核未通过
 								</c:if>
 								</td>
-								<td style="text-align:center"><a href="<s:url value='/article/preview.html?id=${article.id}'/>">查看</a></td>
+								<td style="text-align:center"><a href="javacript:return void" onclick="preview(${article.id})" >查看</a></td>
 								<td style="text-align:center">
 									<div class="btn-group">
 										   <button style="font-size:15px" type="button" class="btn btn-default dropdown-toggle" 
@@ -341,6 +341,10 @@ function gotoPageForEnter(event) {
 		var fatherPath=window.location.href;
 		fatherPath=fatherPath.substring(fatherPath.indexOf("appPerson")-1);
 		window.location.href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId="+appPersonId+"&fatherPath="+fatherPath; 
+	}
+	
+	function preview(id){
+		window.open("<s:url value='/article/preview.html'/>?id="+id)
 	}
 </script>
 </body>
