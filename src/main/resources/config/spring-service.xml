@@ -95,4 +95,12 @@
 		<constructor-arg ref="expressDao"/>
 	</bean>
 	
+	<bean id="newsService" class="com.lotut.pms.service.impl.NewsServiceImpl">
+		<constructor-arg ref="newsDao"/>
+	</bean>
+	
+	<bean id="articleService" class="com.lotut.pms.service.impl.ArticleServiceImpl">
+		<constructor-arg ref="articleDao"/>
+	</bean>
+	
 </beans>

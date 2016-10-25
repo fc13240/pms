@@ -80,5 +80,14 @@
 		<typeAlias alias="Express" type="com.lotut.pms.domain.Express"/>
 		<typeAlias alias="ExpressStatus" type="com.lotut.pms.domain.ExpressStatus"/>
 		<typeAlias alias="ExpressSearchCondition" type="com.lotut.pms.domain.ExpressSearchCondition"/>
+		<typeAlias alias="News" type="com.lotut.pms.domain.News"/>
+		<typeAlias alias="NewsType" type="com.lotut.pms.domain.NewsType"/>
+		<typeAlias alias="Article" type="com.lotut.pms.domain.Article"/>
+		<typeAlias alias="ArticleType" type="com.lotut.pms.domain.ArticleType"/>
+		<typeAlias alias="NewsImg" type="com.lotut.pms.domain.NewsImg"/>
+		<typeAlias alias="ArticleImg" type="com.lotut.pms.domain.ArticleImg"/>
+		<typeAlias alias="ArticleSearchCondition" type="com.lotut.pms.domain.ArticleSearchCondition"/>
+		<typeAlias alias="NewsSearchCondition" type="com.lotut.pms.domain.NewsSearchCondition"/>
+		<typeAlias alias="ArticleType" type="com.lotut.pms.domain.ArticleType"/>
 	</typeAliases>  
 </configuration>
