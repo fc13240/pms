@@ -67,4 +67,30 @@ public class ArticleController {
 		return "article_preview";
 		
 	}
+	
+	@RequestMapping(path="/addArticleType", method=RequestMethod.GET)
+	public String addArticleType(String keyword,Model model) {
+		if(keyword != null && !"".equals(keyword.trim())) {
+			articleService.addArticleType(keyword.trim());
+		}
+		return "redirect:/article/getArticleTypeList.html";
+	}
+	
+	@RequestMapping(path="/deleteArticleType", method=RequestMethod.GET)
+	public void deleteArticleType(int typeId) {
+		articleService.deleteArticleType(typeId);
+	}
+	
+	@RequestMapping(path="/updateArticleType", method=RequestMethod.GET)
+	public String updateArticleType(int typeId,String typeName) {
+		articleService.updateArticleType(typeId,typeName);
+		return "article_type_list";
+	}
+	
+	@RequestMapping(path="/deleteArticle")
+	public String deleteArticle(int articleId){
+		articleService.deleteArticle(articleId);		
+		return "redirect:/article/list.html";
+		
+	}
 }

@@ -113,7 +113,7 @@
 										   </ul>
 									</div>
 									<div class="btn-group btn-group-lg">
-										  <button type="button" style="width: 66px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="deleteAd('${advertismentInfo.patentId}')">删除</button>
+										  <button type="button" style="width: 66px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="deleteArticle(${article.id})">删除</button>
 									</div>
 									<div class="btn-group btn-group-lg">
 										  <button type="button" style="width: 66px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="deleteAd('${advertismentInfo.patentId}')">修改</button>
@@ -324,10 +324,10 @@ function gotoPageForEnter(event) {
 		});		
 	}
 	
-	function deleteFeeReduceAppPersonInfo(appPersonId,status){
+	function deleteArticle(articleId){
 		$.ajax({
-			url:"<s:url value='/appPerson/deleteFeeReduceAppPersonInfo.html'/>",
-			data:{"appPersonId":appPersonId,"status":status},
+			url:"<s:url value='/article/deleteArticle.html'/>",
+			data:{"articleId":articleId},
 			async:false,
 			success:function (){
 				
