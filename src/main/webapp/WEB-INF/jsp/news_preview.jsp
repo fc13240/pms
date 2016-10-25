@@ -69,6 +69,7 @@
 		font-size: 14px;
 	}
 	
+    p{text-indent:2em} 
 </style>
 </head>
 <body style="background-color: #FFF;" id="dlstCircleArticle">
@@ -93,7 +94,7 @@
 			</div>
 			
 			<div>
-				<div style="margin-left: 80px;"><p>${news.content}<p></div>
+				<div style="margin-left: 80px;margin-right: 80px;"><p>${news.content}<p></div>
 			</div>
 			<div>
 				<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="90%" color=#987cb9 SIZE=3>
