@@ -36,7 +36,6 @@ public class ArticleController {
 		
 	}
 
-
 	@RequestMapping(path="/searchArticles", method=RequestMethod.GET)
 	public String searchUserNews(@ModelAttribute("searchCondition") ArticleSearchCondition searchCondition, Model model,HttpSession session) {
 		UserArticle userArticle=articleService.searchUserArticleByPage(searchCondition, session);
