@@ -81,12 +81,12 @@
 
 		<div class="main">
 			<div >
-				<div class="pre_title" style="text-align:center">${news.title}</div>
+				<div class="pre_title" style="text-align:center"><h3>${news.title}</h3></div>
 			</div>
 			
 			<div>
 				<div style="float:left;margin-left: 60px;" >作者：${news.author}</div>
-				<div style="float:left;margin-left: 550px;" >创建时间：${news.createTime}</div>
+				<div style="float:left;margin-left: 800px;" >创建时间：${news.createTime}</div>
 			</div>
 			<br/>
 			<div>
