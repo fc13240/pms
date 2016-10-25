@@ -16,8 +16,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
+<c:import url="common/news_kindEditor.jsp"></c:import>
 <title>添加新闻-龙图腾专利管家</title>
-<%@ include file="_css.jsp"%>
 </head>
 <body>
 <script src="<s:url value='/temp/js/jquery_from.js'/>"></script>
@@ -112,76 +112,79 @@ height:37px;
 							</ul>
 						</div>
 						<div class="lou-content" style="padding:10px;">
-							<form method="post" action="/admin.php/news/zr_add.html">
-							<table class="table_con">
-								<tbody><tr>
-									<th width="80">新闻分类</th>
-									<td>
-										<select name="classid" id="classid" onchange="bindSortChild()" required="required">
-											<option value="">--请选择--</option>						
-											<option value="1">行业新闻</option>
-											<option value="2">热点聚焦</option> 						
-										</select> 
-									</td>
-								</tr>
-								<tr>
-									<th>标题</th>
-									<td>
-										<input type="hidden" name="news_type" value="2">
-										<input name="news_name" id="txtTitle" style="width:400px;" type="text" size="40" required="required" placeholder="请输入标题">
-										<span class="form-required">*</span>
-									</td>
-								</tr>
-								<tr>
-									<th>作者</th>
-									<td>
-									<input name="zr_price" type="text" onkeyup="DigitalKeyup1(this)" id="zfree" size="40">
-									</td>
-								</tr>								
-								<tr>
-									<th>来源</th>
-									<td>
-									<input name="zr_price" type="text" onkeyup="DigitalKeyup1(this)" id="zfree" size="40">
-									</td>
-								</tr>								
-								<tr>
-									<th>关键字</th>
-									<td>
-											<select name="status" id="select4" required="required">
-											<option value="0">--请选择--</option>
-											<option value="1">营业中</option>
-											<option value="2">未营业</option>
-											</select>
-									</td>
-								</tr>
-								<tr>
-									<th>缩略图</th>
-									<td>
-										<select name="qid" id="district" onchange="load_streets()" required="required">
-											<option value="0">--请选择--</option>						
-											<option value="1">玄武</option><option value="2">鼓楼</option><option value="3">白下</option><option value="4">秦淮</option><option value="5">下关</option><option value="6">雨花台</option><option value="7">浦口</option><option value="8">栖霞</option><option value="9">江宁</option><option value="10">六合</option><option value="11">高淳</option><option value="12">溧水</option><option value="13">建邺</option><option value="14">大厂</option><option value="15">南京周边</option> 						
-										</select>
-										&nbsp;&nbsp;&nbsp;&nbsp;片区：
-										<select name="pid" id="street" required="required">
-										<option value="0">--请选择--</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<th>摘要</th>
-									<td><input name="address" style="width:400px;" type="text" id="address" size="40"></td>
-								</tr>
-								<tr>
-									<th>内容</th>
-									<td><input name="mianji" type="text" id="size" size="10" required="required">㎡</td>
-								</tr>
-
-								</tbody>
-							</table>	
+							<form method="post" action="<s:url value='/news/saveNews.html'/>">
+								<table class="table_con">
+									<tbody>
+									
+									<tr>
+										<th width="80">新闻分类</th>
+										<td>
+											<input name="id" value="${newsId }" type="text"/>
+											<select name="newsType.typeId" class="form-control" style="width:120px;" id="" onchange="bindSortChild()" required>
+												<option value="">--请选择--</option>
+												<c:forEach items="${newsTypes }" var="newsType">
+													<option value="${newsType.typeId }">${newsType.typeName }</option>
+												</c:forEach>						
+											</select> 
+										</td>
+									</tr>
+									<tr>
+										<th>标题</th>
+										<td>
+											<input class="form-control" style="width:600px;" placeholder="请输入标题" name="title" required maxlength="100"/>
+										</td>
+									</tr>
+									<tr>
+										<th>作者</th>
+										<td>
+										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author" required maxlength="100"/>
+										</td>
+									</tr>						
+									<tr>
+										<th>来源</th>
+										<td>
+											<input class="form-control" style="width:600px;" placeholder="" name="source" maxlength="100"/>
+										</td>
+									</tr>								
+									<tr>
+										<th>关键字</th>
+										<td>
+											<input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="100"/>
+										</td>
+									</tr>
+									<tr>
+										<th>缩略图</th>
+										<td>
+											<input style="width:300px;display:inline;" type="text" id="newsThumbnailname"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=newsThumbnail]').click();" />
+											<button type="button" onclick="uploadImg()" class="t-btn3 button button-primary  button-rounded">上传</button>
+										</td>
+									</tr>
+									<tr>
+										<th>摘要</th>
+										<td>
+											<input class="form-control" style="width:600px;" placeholder="请输入摘要" name="NewsAbstract" maxlength="100"/>
+										</td>
+									</tr>
+									<tr>
+										<th>内容</th>
+										<td>
+											<textarea rows="3" cols="10" id="newsContent" name="content" class="newsContent" style="width:520px;height:200px;visibility:hidden;">
+											</textarea>
+										</td>
+									</tr>
+	
+									</tbody>
+								</table>	
 							<div class="form-actions">
-								<button class="btn btn-primary js-ajax-submit" type="submit">提交</button>
-								<a class="btn" href="/index.php?g=&amp;m=AdminPost&amp;a=index">返回</a>
+								<button type="submit" style="display:inline;margin-right:540px;" class="t-btn3 button button-primary  button-rounded">提交</button>
+								<button type="button" class="t-btn3 button button-primary  button-rounded">返回</button>
 							</div>		
+							</form>
+							
+							<form action="<s:url value='/news/uploadNewsThumbnail.html'/>" id="uploadNewsThumbnailForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+								<input style="display:none" type="file" id="newsThumbnail" name="file"/>
+								<button type="button" style="display: none;" onclick="$('input[id=newsThumbnail]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
+								<button type="button" id="uploadThumbnailBtn" style="display:none;" onclick="uploadNewsThumbnail()" class="t-btn3 button button-primary  button-rounded">上传</button>
 							</form>
 						</div>
 						
@@ -202,7 +205,37 @@ height:37px;
 
 
 <script type="text/javascript">
+	$("#newsThumbnail").change(function(){
+		$("#newsThumbnailname").val($(this).val());
+	})
 	
+	function uploadNewsThumbnail(){
+		var form=$("#uploadNewsThumbnailForm");
+		var newsId=${newsId};
+		var ajaxBody={
+				type:"POST",
+				data:{"file":$("#newsThumbnail").val(),"newsId":newsId},
+				beforeSubmit:function (){
+					var fileName=$("#newsThumbnail").val();
+					var suffix=fileName.substr(fileName.lastIndexOf(".")+1);
+					if(suffix=="jpg"||suffix=="jpeg"||suffix=="png"){
+						return true;
+					}else{
+						alert("请上传图片格式为jpg、jpeg、png");
+						return false;
+					}
+				},
+				success:function(result){
+					alert("上传成功!");
+				}
+		};
+		form.ajaxSubmit(ajaxBody);
+		
+	}
+	
+	function uploadImg(){
+		$("#uploadThumbnailBtn").trigger("click");
+	}
 </script>
 </body>
 </html>

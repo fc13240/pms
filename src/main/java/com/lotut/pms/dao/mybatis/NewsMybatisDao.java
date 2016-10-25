@@ -8,6 +8,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.NewsDao;
 import com.lotut.pms.dao.mapper.NewsMapper;
 import com.lotut.pms.domain.News;
+import com.lotut.pms.domain.NewsImg;
 import com.lotut.pms.domain.NewsSearchCondition;
 import com.lotut.pms.domain.NewsType;
 import com.lotut.pms.domain.Page;
@@ -52,6 +53,21 @@ public class NewsMybatisDao extends SqlSessionDaoSupport implements NewsDao{
 	@Override
 	public void deleteNewsById(int newsId) {
 		newsMapper.deleteNewsById(newsId);
+	}
+	
+	@Override
+	public void insertNews(News news) {
+		newsMapper.insertNews(news);
+	}
+	
+	@Override
+	public void updateNews(News news) {
+		newsMapper.updateNews(news);
+	}
+	
+	@Override
+	public 	void addNewsImage(NewsImg newsImg) {
+		newsMapper.addNewsImage(newsImg);
 	}
 	
 }

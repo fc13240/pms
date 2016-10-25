@@ -86,8 +86,8 @@
 				        <br>
 					    
 						<h5>快递内容:</h5>
-						<textarea rows="8" cols="8" style="width:600px;" class="selectPointOfInterest form-control" name="expressRemark" id="expressRemark" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 200)">${express.expressRemark }</textarea>
-						<span id="expressRemarkError" style="color: red; display: none;">请输入的快递内容在1000字以内</span>
+						<textarea rows="8" cols="8" style="width:600px;" class="selectPointOfInterest form-control" name="expressRemark" id="expressRemark" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 500)">${express.expressRemark }</textarea>
+						<span id="expressRemarkError" style="color: red; display: none;">请输入的快递内容在500字以内</span>
 						<br/>
 						<input type="hidden" name="expressStatus.expressStatusId" id="expressStatus" />
 						<br>
@@ -323,7 +323,7 @@ function saveExpress(expressStatus){
 		&validateInputInfo(expressCompany, "expressCompanyError", 100)
 		//&validateInputInfo(expressNo, "expressNoError", 50)
 		&validateInputInfo(startAppDateId, "startAppDateIdError", 200)
-		&validateInputInfo(expressRemark, "expressRemarkError", 1000)
+		&validateInputInfo(expressRemark, "expressRemarkError", 500)
 	) {
 		$("#updateExpressForm").submit();
 	}else{

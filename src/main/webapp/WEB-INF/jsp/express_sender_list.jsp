@@ -87,7 +87,7 @@
 						  <td class="center" style="text-align:center">${express.expressRemark}</td>
 						  <td class="center" style="text-align:center">${express.expressStatus.expressStatusDesc}</td>
 						  <td class="center" style="text-align:center">
-							  <c:if test="${express.expressStatus.expressStatusId == 1}">
+							  <c:if test="${express.expressStatus.expressStatusId == 1||express.expressStatus.expressStatusId == 2}">
 							  		<a href="<s:url value='/express/updatExpressFrom.html'/>?expressId=<c:out value='${express.expressId}'/>"  target="_blank"> 编辑 </a>
 							  		<a href="javascript:return void" onclick="changeExpressStatus(${express.expressId},2)"> 置为已寄出 </a>
 							  </c:if>

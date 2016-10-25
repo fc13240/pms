@@ -1,5 +1,6 @@
 package com.lotut.pms.web.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,11 +12,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.lotut.pms.domain.News;
+import com.lotut.pms.domain.NewsImg;
 import com.lotut.pms.domain.NewsSearchCondition;
 import com.lotut.pms.domain.NewsType;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.User;
 import com.lotut.pms.service.NewsService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
@@ -77,12 +81,35 @@ public class NewsController {
 	
 
 	@RequestMapping(path="/addNewsForm")
-	public String addNewsForm() {
+	public String addNewsForm(Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		News news = new News();
+		User user =new User();
+		user.setUserId(userId);
+		news.setUser(user);
+		newsService.insertNews(news);
+		List<NewsType> newsTypes = newsService.getAllNewsTypes();
+		model.addAttribute("newsId", news.getId());
+		model.addAttribute("newsTypes", newsTypes);
 		return "news_add";
 	}
 	@RequestMapping(path="/deleteNews")
 	public void deleteNews(int newsId) {
 		newsService.deleteNewsById(newsId);
+	}
+	
+	@RequestMapping(path="/saveNews")
+	public String saveNews(News news) {
+		newsService.updateNews(news);
+		return "redirect:/news/list.html";
+	}
+	
+	@RequestMapping(path="/uploadNewsThumbnail")
+	public void uploadNewsThumbnail(MultipartFile file,int newsId,PrintWriter out) {
+		NewsImg newsImg = new NewsImg();
+		newsImg.setNewsId(newsId);
+		newsService.insertNewsImage(newsImg, file);
+		out.write("success");
 	}
 	
 }

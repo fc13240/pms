@@ -27,7 +27,7 @@
 	</resultMap>
 	
 	
-	<resultMap type="newsType" id="NewsTypeResultMap">
+	<resultMap type="NewsType" id="NewsTypeResultMap">
 		<id property="typeId" column="type_id"/>
 		<result property="typeName" column="type_name"/>
 	</resultMap>
@@ -36,7 +36,7 @@
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.content,n.create_time,n.publish_time,n.update_time,
 		nt.type_id ,nt.type_name,u.user_id,u.username
 		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
-	<!-- 	WHERE n.user_id=#{userId} limit #{startIndex}, #{pageSize} -->
+		WHERE n.user_id=#{userId} limit #{startIndex}, #{pageSize}
 	</select>
 	
 	<select id="getUserNewsCount" parameterType="int" resultType="int">
@@ -45,7 +45,7 @@
 		WHERE n.user_id=#{userId}
 	</select>
 	
-	<select id="getUserNewsById"  resultMap="NewsResultMap">
+	<select id="getUserNewsById"  parameterType="int" resultMap="NewsResultMap">
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.content,n.abstract,n.create_time,n.publish_time,n.update_time,
 		nt.type_id ,nt.type_name,u.user_id,u.username
 		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
@@ -97,4 +97,21 @@
 	<delete id="deleteNewsById" parameterType="int">
 		delete from news where id=#{newsId}
 	</delete>
+	
+	<insert id="insertNews" parameterType="News" useGeneratedKeys="true" keyProperty="id" >
+		insert into news(user_id) values(#{user.userId})
+	</insert>
+	
+	<update id="updateNews" parameterType="News">
+		update news set news_type=#{newsType.typeId},keywords=#{keywords},author=#{author},title=#{title},source=#{source},content=#{content,javaType=string,jdbcType=CLOB},abstract=#{newsAbstract}  where id=#{id}
+	</update>
+
+
+	<!-- <insert id="addNewsImage" parameterType="NewsImg">
+		insert into news_imgs(img_url,news_id) values(#{imgUrl},#{newsId})
+	</insert> -->
+	
+	<update id="addNewsImage" parameterType="NewsImg">
+		update news set small_img_url=#{imgUrl} where id=#{newsId}
+	</update>
 </mapper>
