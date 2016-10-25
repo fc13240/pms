@@ -31,4 +31,10 @@ public interface Settings {
 	final String PATENT_DOC_APPLICATION_FILE="/opt/media/patent/patentDocApplyFile/";
 	final String PATENT_USR_AVATAR_FILE="/opt/media/avatar/";
 	final String PATENT_USR_AVATAR_URL="/avatar/";
+	
+	final String NEWS_SMALL_IMAGE_PATH="/opt/media/patent/newsImg/smallImg/";
+	final String NEWS_SMALL_IMAGE_URL="/patent/newsImg/smallImg/";
+	
+	final String NEWS_IMAGE_PATH="/opt/media/patent/newsImg/";
+	final String NEWS_IMAGE_URL="/patent/newsImg/";
 }

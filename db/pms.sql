@@ -1046,20 +1046,20 @@ FOREIGN KEY (user_id) REFERENCES   users (user_id) ON DELETE CASCADE ON UPDATE C
 ;
 CREATE TABLE IF NOT EXISTS article (
 id  INT NOT NULL AUTO_INCREMENT ,
-article_type  INT NOT NULL COMMENT '栏目id' ,
+article_type  INT COMMENT '栏目id' ,
 user_id  INT NOT NULL COMMENT '发文人' ,
-keywords  VARCHAR(120) NULL COMMENT '关键字' ,
-author  VARCHAR(30) NULL COMMENT '作者' ,
-title  VARCHAR(50) NOT NULL COMMENT '标题' ,
+keywords  VARCHAR(120) COMMENT '关键字' ,
+author  VARCHAR(30) COMMENT '作者' ,
+title  VARCHAR(50) COMMENT '标题' ,
 create_time  DATETIME  COMMENT '创建时间' ,
 publish_time  DATETIME COMMENT '发布时间' ,
-update_time  TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间' ,
-source  VARCHAR(100) NULL COMMENT '来源' ,
-abstract  VARCHAR(100) NULL COMMENT '摘要' ,
-content  TEXT NOT NULL COMMENT '内容' ,
-check_status  TINYINT NULL DEFAULT 0 COMMENT '0 未审核  1  审核  2审核不通过' ,
-up_vote  INT NOT NULL DEFAULT 0 ,
-down_vote  INT NOT NULL DEFAULT 0 ,
+update_time  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间' ,
+source  VARCHAR(100) COMMENT '来源' ,
+abstract  VARCHAR(100) COMMENT '摘要' ,
+content  TEXT COMMENT '内容' ,
+check_status  TINYINT DEFAULT 0 COMMENT '0 未审核  1  审核  2审核不通过' ,
+up_vote  INT DEFAULT 0 ,
+down_vote  INT DEFAULT 0 ,
 PRIMARY KEY (id),
 FOREIGN KEY (article_type) REFERENCES article_type (type_id) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (user_id) REFERENCES   users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -1078,9 +1078,11 @@ CONSTRAINT fk_news_id FOREIGN KEY idx_fk_news_id(news_id) REFERENCES news(id) ON
 
 CREATE TABLE IF NOT EXISTS article_imgs (
 img_id BIGINT NOT NULL AUTO_INCREMENT,
-img_url VARCHAR(200) DEFAULT NULL,
+img_url VARCHAR(200),
 article_id INT,
-caption VARCHAR(200) NOT NULL COMMENT '图片说明',
+caption VARCHAR(200) COMMENT '图片说明',
 PRIMARY KEY (img_id),
 CONSTRAINT fk_article_id FOREIGN KEY idx_fk_article_id(article_id) REFERENCES article(id) ON DELETE CASCADE
 );
+
+alter table news add column small_img_url varchar(200);

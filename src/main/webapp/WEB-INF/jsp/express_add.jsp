@@ -115,9 +115,9 @@
 				        <br>
 					    
 						<h5>快递内容:</h5>
-						<textarea rows="8" cols="8" style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 1000)"></textarea>
+						<textarea rows="8" cols="8" style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 500)"></textarea>
 						<!-- <input style="width:600px;" class="selectPointOfInterest form-control" type="text" name="expressRemark" id="expressRemark" value="" maxLength="500" onblur="validateInputInfo(this.value, 'expressRemarkError', 200)"/> -->
-						<span id="expressRemarkError" style="color: red; display: none;">请输入的快递内容在1000字以内</span>
+						<span id="expressRemarkError" style="color: red; display: none;">请输入的快递内容在500字以内</span>
 						<br/>
 						<input type="hidden" name="expressStatus.expressStatusId" id="expressStatus" />
 						<br>
@@ -352,7 +352,7 @@ function saveExpress(expressStatus){
 		&validateInputInfo(expressCompany, "expressCompanyError", 100)
 		//&validateInputInfo(expressNo, "expressNoError", 50)
 		//&validateInputInfo(startAppDateId, "startAppDateIdError", 200)
-		&validateInputInfo(expressRemark, "expressRemarkError", 1000)
+		&validateInputInfo(expressRemark, "expressRemarkError", 500)
 	) {
 		$("#addExpressForm").submit();
 	}else{
