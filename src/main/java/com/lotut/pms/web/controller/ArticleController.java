@@ -70,7 +70,7 @@ public class ArticleController {
 	
 	@RequestMapping(path="/addArticleType", method=RequestMethod.GET)
 	public String addArticleType(String keyword,Model model) {
-		if(keyword != null && !"".equals(keyword)) {
+		if(keyword != null && !"".equals(keyword.trim())) {
 			articleService.addArticleType(keyword.trim());
 		}
 		return "redirect:/article/getArticleTypeList.html";

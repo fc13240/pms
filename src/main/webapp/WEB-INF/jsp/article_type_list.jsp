@@ -48,7 +48,7 @@
 
     			</div>
 				<div style="height:10px;"></div>
-					<div class="lt-box" style="padding:50px 0 0 0;">
+					<div class="lt-box" style="padding:30px 0 0 0;">
 						<table id="simple-table" class="table table-striped table-bordered table-hover" style="width:1100px;">
 						  <thead>
 							<tr class="simple_bag">
@@ -66,7 +66,7 @@
 								</td>
 								
 								<td style="text-align:center">
-								<a href="javascript:deleteArticleType(${articleType.typeId})">删除分类</a>
+								<a onclick="return confirm('此操作会删除该分类和该分类下的所有文章，确定删除吗？')" href="javascript:deleteArticleType(${articleType.typeId})">删除分类</a>
 								
 								</td>
 							  </tr>
