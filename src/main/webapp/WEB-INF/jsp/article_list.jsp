@@ -74,6 +74,7 @@
 							  <th width="100px">修改时间</th>
 							  <th width="50px">发布时间</th>
 							  <th width="50px">审核状态</th>
+							  <th width="50px">内容</th>
 							  <th width="110px">操作</th>
 							</tr>
 						  </thead>
@@ -98,11 +99,25 @@
 								审核未通过
 								</c:if>
 								</td>
+								<td style="text-align:center"><a href="javacript:return void" onclick="preview(${article.id})" >查看</a></td>
 								<td style="text-align:center">
-								<a href="javascript:editorAppPerson(${appPerson.appPersonId})"> 编辑 </a>
-								<a href="javascript:deleteFeeReduceAppPersonInfo(${appPerson.appPersonId},1)">查看 </a>
-								<a href="javascript:deleteFeeReduceAppPersonInfo(${appPerson.appPersonId},1)">删除 </a>
-								<a href="javascript:deleteFeeReduceAppPersonInfo(${appPerson.appPersonId},1)">审核 </a>
+									<div class="btn-group">
+										   <button style="font-size:15px" type="button" class="btn btn-default dropdown-toggle" 
+										      data-toggle="dropdown">
+										      审核 <span class="caret"></span>
+										   </button>
+										   <ul class="dropdown-menu" role="menu">
+										      <li><a href="<s:url value='/article/audit.html?id=${article.id}&checkStatus=1'/>">审核通过</a></li>
+										      <li class="divider"></li>
+										      <li><a href="<s:url value='/article/audit.html?id=${article.id}&checkStatus=2'/>">审核未通过 </a></li>
+										   </ul>
+									</div>
+									<div class="btn-group btn-group-lg">
+										  <button type="button" style="width: 66px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="deleteArticle(${article.id})">删除</button>
+									</div>
+									<div class="btn-group btn-group-lg">
+										  <button type="button" style="width: 66px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="deleteAd('${advertismentInfo.patentId}')">修改</button>
+									</div>
 								
 								</td>
 							  </tr>
@@ -309,10 +324,10 @@ function gotoPageForEnter(event) {
 		});		
 	}
 	
-	function deleteFeeReduceAppPersonInfo(appPersonId,status){
+	function deleteArticle(articleId){
 		$.ajax({
-			url:"<s:url value='/appPerson/deleteFeeReduceAppPersonInfo.html'/>",
-			data:{"appPersonId":appPersonId,"status":status},
+			url:"<s:url value='/article/deleteArticle.html'/>",
+			data:{"articleId":articleId},
 			async:false,
 			success:function (){
 				
@@ -326,6 +341,10 @@ function gotoPageForEnter(event) {
 		var fatherPath=window.location.href;
 		fatherPath=fatherPath.substring(fatherPath.indexOf("appPerson")-1);
 		window.location.href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId="+appPersonId+"&fatherPath="+fatherPath; 
+	}
+	
+	function preview(id){
+		window.open("<s:url value='/article/preview.html'/>?id="+id)
 	}
 </script>
 </body>

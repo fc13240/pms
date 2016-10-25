@@ -65,5 +65,40 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleDao.getAllArticleTypes();
 	}
 
+	@Override
+	public void auditArticle(Article article) {
+		articleDao.auditPass(article);
+	}
+
+	@Override
+	public Article getUserArticleById(int id) {
+		Article article=articleDao.getUserArticleById(id);
+		return article;
+	}
+	
+	@Override
+	public void addArticleType(String keyword) {
+		articleDao.addArticleType(keyword);
+		
+	}
+
+	@Override
+	public void deleteArticleType(int typeId) {
+		articleDao.deleteArticleType(typeId);
+		
+	}
+
+	@Override
+	public void updateArticleType(int typeId, String typeName) {
+		articleDao.updateArticleType(typeId,typeName);
+		
+	}
+
+	@Override
+	public void deleteArticle(int articleId) {
+		articleDao.deleteArticle(articleId);
+		
+	}
+
 	
 }

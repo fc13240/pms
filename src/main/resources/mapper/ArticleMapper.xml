@@ -15,6 +15,7 @@
 		<result property="source" column="source"/>
 		<result property="articleAbstract" column="abstract"/>
 		<result property="checkStatus" column="check_status"/>
+		<result property="content" column="content"/>
 		<result property="upVote" column="up_vote"/>
 		<result property="downVote" column="down_vote"/>
 		<association property="articleType" javaType="ArticleType">
@@ -38,7 +39,7 @@
 	
 	<select id="getUserArticleByPage" parameterType="Page"  resultMap="ArticleResultMap">
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,n.check_status,
-		nt.type_id ,nt.type_name,u.user_id,u.username
+		n.content,nt.type_id ,nt.type_name,u.user_id,u.username
 		FROM article n LEFT JOIN article_type nt ON  n.article_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.user_id=#{userId} limit #{startIndex}, #{pageSize}
 	</select>
@@ -51,7 +52,7 @@
 	
 	<select id="getUserArticleById"  resultMap="ArticleResultMap">
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,n.check_status,
-		nt.type_id ,nt.type_name,u.user_id,u.username
+		n.content,nt.type_id ,nt.type_name,u.user_id,u.username
 		FROM article n LEFT JOIN article_type nt ON  n.article_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.id=#{articleId}
 	</select>
@@ -61,7 +62,7 @@
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,n.check_status,
-		nt.type_id ,nt.type_name,u.user_id,u.username
+		n.content,nt.type_id ,nt.type_name,u.user_id,u.username
 		FROM article n LEFT JOIN article_type nt ON  n.article_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.user_id=#{userId}
 		<if test="keyword != null">
@@ -95,5 +96,30 @@
 		  from article_type
 		 order by type_id asc;	
 	</select>
+	
+	<update id="auditPass" >
+		update article set check_status =#{checkStatus} where id=#{id}
+	</update>
+	
+<!-- 	<update id="auditNoPass" parameterType="int">
+		update article set check_status =2 where id=#{id}
+	</update> -->
+	
+	<insert id="addArticleType" parameterType="String">
+		insert into article_type(type_name) values(#{keyword})
+		
+	</insert>
+	
+	<delete id="deleteArticleType" parameterType="int">
+		delete from article_type where type_id = #{typeId}
+	</delete>
+	
+	<update id="updateArticleType" >
+		update article_type set type_name = #{typeName} where type_id = #{typeId}
+	</update>
+	
+	<delete id="deleteArticle" parameterType="int">
+		delete from article where id = #{articleId}
+	</delete>
   </mapper>
   

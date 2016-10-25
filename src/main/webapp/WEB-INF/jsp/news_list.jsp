@@ -81,9 +81,9 @@
 								<td style="text-align:center"><c:out value="${news.title}"/></td>
 								<td style="text-align:center"><c:out value="${news.author}"/></td>
 								<td style="text-align:center"><c:out value="${news.source}"/></td>
-								<td style="text-align:center"><c:out value="${news.createTime}"/></td>
-								<td	style="text-align:center"><c:out value="${news.updateTime}"/></td>
-								<td style="text-align:center"><c:out value="${news.publishTime}"/></td>
+								<td style="text-align:center"><fmt:formatDate value="${news.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<td	style="text-align:center"><fmt:formatDate value="${news.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<td style="text-align:center"><fmt:formatDate value="${news.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td style="text-align:center">
 								<a href="javascript:editorAppPerson()"> 编辑 </a>
 								<a href="<s:url value='/news/getUserNewsById.html'/>?newsId=<c:out value='${news.id}'/>" target="_blank">查看 </a>

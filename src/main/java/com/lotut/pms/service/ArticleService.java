@@ -16,4 +16,16 @@ public interface ArticleService {
 	UserArticle searchUserArticleByPage(ArticleSearchCondition articleSearchCondition,HttpSession session);
 
 	List<ArticleType> getAllArticleTypes();
+	
+	void auditArticle(Article article);
+	
+	Article getUserArticleById(int id);
+	
+	void addArticleType(String keyword);
+
+	void deleteArticleType(int typeId);
+
+	void updateArticleType(int typeId, String typeName);
+
+	void deleteArticle(int articleId);
 }

@@ -34,7 +34,7 @@ public class PatentDownload {
 	
 	public static void main(String[] args) throws Exception {
 		
-	try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("d:/test.html"));
+	try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("d:/test.xls"));
 				InputStream in = downloadPatentExcelFile("341222198912126576", "1234566");) 
 		{
 			byte[] bytes = new byte[4096];
@@ -46,7 +46,7 @@ public class PatentDownload {
 	}
 	
 	public static InputStream downloadPatentExcelFile(String username,String password) throws Exception {
-		RequestConfig globalConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.DEFAULT).build();
+		RequestConfig globalConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build();
 		try (CloseableHttpClient httpClient = HttpClients.custom().setDefaultRequestConfig(globalConfig).build();) {
 			boolean loginSuccess = login(httpClient,username,password);
 			System.out.println(loginSuccess);
@@ -56,6 +56,7 @@ public class PatentDownload {
 			}
 
 			HttpGet patentDownloadRequest = new HttpGet(PATENT_DOWNLOAD_PATH);
+			
 			ResponseHandler<InputStream> patentDownloadHandler = new ExcelResponseHandler();
 			InputStream excelInputStream = httpClient.execute(patentDownloadRequest, patentDownloadHandler);
 			return excelInputStream;
