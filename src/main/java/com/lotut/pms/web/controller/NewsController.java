@@ -1,7 +1,6 @@
 package com.lotut.pms.web.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,8 +16,6 @@ import com.lotut.pms.domain.News;
 import com.lotut.pms.domain.NewsSearchCondition;
 import com.lotut.pms.domain.NewsType;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.PatentDoc;
-import com.lotut.pms.domain.PatentDocSearchCondition;
 import com.lotut.pms.service.NewsService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
@@ -74,6 +71,16 @@ public class NewsController {
 		News news=newsService.getUserNewsById(newsId);
 		model.addAttribute("news", news);
 		return "news_preview";
+	}
+	
+
+	@RequestMapping(path="/addNewsForm")
+	public String addNewsForm() {
+		return "news_add";
+	}
+	@RequestMapping(path="/deleteNews")
+	public void deleteNews(int newsId) {
+		newsService.deleteNewsById(newsId);
 	}
 	
 }

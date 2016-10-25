@@ -10,7 +10,7 @@
 		</a>
 	</li> 		
 	<li class="active"> 
-		<a href="<s:url value='/appPerson/feeReduceTransactAppPersonForm.html'/>">
+		<a href="<s:url value='/news/addNews.html'/>">
 		<h5>新闻添加</h5>
 		</a>
 	</li> 
