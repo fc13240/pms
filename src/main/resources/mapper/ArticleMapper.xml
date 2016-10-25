@@ -15,6 +15,7 @@
 		<result property="source" column="source"/>
 		<result property="articleAbstract" column="abstract"/>
 		<result property="checkStatus" column="check_status"/>
+		<result property="content" column="content"/>
 		<result property="upVote" column="up_vote"/>
 		<result property="downVote" column="down_vote"/>
 		<association property="articleType" javaType="ArticleType">
