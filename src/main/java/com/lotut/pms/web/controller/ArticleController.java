@@ -41,21 +41,21 @@ public class ArticleController {
 		
 	}
 	
-	@RequestMapping(path="/searchArticles", method=RequestMethod.GET)
-	public String searchUserNews(@ModelAttribute("searchCondition") NewsSearchCondition searchCondition, Model model,HttpSession session) {
-		Page page=searchCondition.getPage();
-		if (page.getCurrentPage() <= 0) {
-			page.setCurrentPage(1);
-		}
-		page.setPageSize(WebUtils.getPageSize(session));
-		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
-		List<News> news=newsService.searchUserNewsByPage(searchCondition);
-		int totalCount=newsService.searchUserNewsCount(searchCondition);
-		page.setTotalRecords(totalCount);
-		List<NewsType> allNewsType=newsService.getAllNewsTypes();
-		model.addAttribute("news", news);
-		model.addAttribute("page", page);
-		model.addAttribute("allNewsType", allNewsType);
-		return "news_list";
-	}
+//	@RequestMapping(path="/searchArticles", method=RequestMethod.GET)
+//	public String searchUserNews(@ModelAttribute("searchCondition") NewsSearchCondition searchCondition, Model model,HttpSession session) {
+//		Page page=searchCondition.getPage();
+//		if (page.getCurrentPage() <= 0) {
+//			page.setCurrentPage(1);
+//		}
+//		page.setPageSize(WebUtils.getPageSize(session));
+//		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+//		List<News> news=newsService.searchUserNewsByPage(searchCondition);
+//		int totalCount=newsService.searchUserNewsCount(searchCondition);
+//		page.setTotalRecords(totalCount);
+//		List<NewsType> allNewsType=newsService.getAllNewsTypes();
+//		model.addAttribute("news", news);
+//		model.addAttribute("page", page);
+//		model.addAttribute("allNewsType", allNewsType);
+//		return "news_list";
+//	}
 }
