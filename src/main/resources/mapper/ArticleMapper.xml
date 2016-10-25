@@ -104,5 +104,22 @@
 <!-- 	<update id="auditNoPass" parameterType="int">
 		update article set check_status =2 where id=#{id}
 	</update> -->
+	
+	<insert id="addArticleType" parameterType="String">
+		insert into article_type(type_name) values(#{keyword})
+		
+	</insert>
+	
+	<delete id="deleteArticleType" parameterType="int">
+		delete from article_type where type_id = #{typeId}
+	</delete>
+	
+	<update id="updateArticleType" >
+		update article_type set type_name = #{typeName} where type_id = #{typeId}
+	</update>
+	
+	<delete id="deleteArticle" parameterType="int">
+		delete from article where id = #{articleId}
+	</delete>
   </mapper>
   

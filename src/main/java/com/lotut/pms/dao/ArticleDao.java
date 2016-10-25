@@ -21,4 +21,12 @@ public interface ArticleDao {
 	void auditPass(Article article);
 	
 	Article getUserArticleById(int id);
+	
+	void addArticleType(String keyword);
+
+	void deleteArticleType(int typeId);
+
+	void updateArticleType(int typeId, String typeName);
+
+	void deleteArticle(int articleId);
 }
