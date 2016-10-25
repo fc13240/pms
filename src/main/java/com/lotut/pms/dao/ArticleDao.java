@@ -19,4 +19,6 @@ public interface ArticleDao {
 	List<ArticleType> getAllArticleTypes();
 	
 	void auditPass(Article article);
+	
+	Article getUserArticleById(int id);
 }

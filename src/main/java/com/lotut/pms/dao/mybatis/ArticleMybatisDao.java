@@ -51,6 +51,13 @@ public class ArticleMybatisDao extends SqlSessionDaoSupport implements ArticleDa
 		articleMapper.auditPass(article);
 	}
 
+	@Override
+	public Article getUserArticleById(int id) {
+		return articleMapper.getUserArticleById(id);
+	}
+
+	
+
 
 
 	

@@ -59,4 +59,12 @@ public class ArticleController {
 		return "redirect:/article/list.html";
 		
 	}
+	
+	@RequestMapping(path="/preview", method=RequestMethod.GET)
+	public String preview(int id,Model model){
+		Article article=articleService.getUserArticleById(id);
+		model.addAttribute("article",article);
+		return "article_preview";
+		
+	}
 }

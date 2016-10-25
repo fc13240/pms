@@ -18,4 +18,6 @@ public interface ArticleService {
 	List<ArticleType> getAllArticleTypes();
 	
 	void auditArticle(Article article);
+	
+	Article getUserArticleById(int id);
 }

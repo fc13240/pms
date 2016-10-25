@@ -38,7 +38,7 @@
 	
 	<select id="getUserArticleByPage" parameterType="Page"  resultMap="ArticleResultMap">
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,n.check_status,
-		nt.type_id ,nt.type_name,u.user_id,u.username
+		n.content,nt.type_id ,nt.type_name,u.user_id,u.username
 		FROM article n LEFT JOIN article_type nt ON  n.article_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.user_id=#{userId} limit #{startIndex}, #{pageSize}
 	</select>
@@ -51,7 +51,7 @@
 	
 	<select id="getUserArticleById"  resultMap="ArticleResultMap">
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,n.check_status,
-		nt.type_id ,nt.type_name,u.user_id,u.username
+		n.content,nt.type_id ,nt.type_name,u.user_id,u.username
 		FROM article n LEFT JOIN article_type nt ON  n.article_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.id=#{articleId}
 	</select>
@@ -61,7 +61,7 @@
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,n.check_status,
-		nt.type_id ,nt.type_name,u.user_id,u.username
+		n.content,nt.type_id ,nt.type_name,u.user_id,u.username
 		FROM article n LEFT JOIN article_type nt ON  n.article_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.user_id=#{userId}
 		<if test="keyword != null">

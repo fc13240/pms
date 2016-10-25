@@ -21,4 +21,6 @@ public interface ArticleMapper {
 	
 	void auditPass(Article article);
 	
+	Article getUserArticleById(int id);
+	
 }

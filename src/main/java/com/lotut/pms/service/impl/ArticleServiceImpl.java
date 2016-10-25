@@ -70,5 +70,11 @@ public class ArticleServiceImpl implements ArticleService {
 		articleDao.auditPass(article);
 	}
 
+	@Override
+	public Article getUserArticleById(int id) {
+		Article article=articleDao.getUserArticleById(id);
+		return article;
+	}
+
 	
 }
