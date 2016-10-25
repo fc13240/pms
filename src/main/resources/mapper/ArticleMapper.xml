@@ -69,7 +69,7 @@
 					or n.source like #{keyword_pattern} or n.abstract like #{keyword_pattern})
 		</if>
 		<if test="articleType != null and articleType !=''">
-					and ( n.article_type = #{articleType})
+					and  (n.article_type = #{articleType})
 		</if>
 		limit #{page.startIndex}, #{page.pageSize}
 	</select>
@@ -86,7 +86,7 @@
 					or n.source like #{keyword_pattern} or n.abstract like #{keyword_pattern})
 		</if>
 		<if test="articleType != null and articleType !=''">
-					and ( n.article_type = #{articleType})
+					and  (n.article_type = #{articleType})
 		</if>
 	</select>
 	

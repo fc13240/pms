@@ -1,15 +1,13 @@
 package com.lotut.pms.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import com.lotut.pms.dao.ArticleDao;
 import com.lotut.pms.domain.Article;
 import com.lotut.pms.domain.ArticleSearchCondition;
-import com.lotut.pms.domain.CommonAppPerson;
+import com.lotut.pms.domain.ArticleType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserArticle;
 import com.lotut.pms.service.ArticleService;
@@ -49,10 +47,22 @@ public class ArticleServiceImpl implements ArticleService {
 		if (page.getCurrentPage() <= 0) {
 			page.setCurrentPage(1);
 		}
-		int totalCount=articleDao.searchUserArticleCount(userId);
+		articleSearchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		int totalCount=articleDao.searchUserArticleCount(articleSearchCondition);
 		page.setTotalRecords(totalCount);
 		List<Article> articles=articleDao.searchUserArticleByPage(articleSearchCondition);
-		return null;
+
+		List<ArticleType> articleTypes=articleDao.getAllArticleTypes();
+		UserArticle userArticle=new UserArticle();
+		userArticle.setPage(page);
+		userArticle.setArticles(articles);
+		userArticle.setArticleTypes(articleTypes);
+		return userArticle;
+	}
+
+	@Override
+	public List<ArticleType> getAllArticleTypes() {
+		return articleDao.getAllArticleTypes();
 	}
 
 	

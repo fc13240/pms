@@ -3,7 +3,7 @@ package com.lotut.pms.domain;
 public class ArticleSearchCondition {
 	private int userId;
 	private Page page;
-	private String keywords;
+	private String keyword;
 	private Integer articleType;
 	public int getUserId() {
 		return userId;
@@ -17,11 +17,12 @@ public class ArticleSearchCondition {
 	public void setPage(Page page) {
 		this.page = page;
 	}
-	public String getKeywords() {
-		return keywords;
+	
+	public String getKeyword() {
+		return keyword;
 	}
-	public void setKeywords(String keywords) {
-		this.keywords = keywords;
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	public Integer getArticleType() {
 		return articleType;
@@ -30,5 +31,11 @@ public class ArticleSearchCondition {
 		this.articleType = articleType;
 	}
 	
+	@Override
+	public String toString() {
+		String keywordStr = keyword == null ? "" : keyword;
+		String articleTypeStr = articleType == null ? "" : articleType.toString();
+		return "keyword=" + keywordStr+ "&articleType=" + articleTypeStr;
+	}
 	
 }

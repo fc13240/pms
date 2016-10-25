@@ -5,6 +5,7 @@ import java.util.List;
 import com.lotut.pms.domain.Article;
 import com.lotut.pms.domain.ArticleSearchCondition;
 import com.lotut.pms.domain.ArticleType;
+import com.lotut.pms.domain.NewsSearchCondition;
 import com.lotut.pms.domain.Page;
 
 public interface ArticleMapper {
@@ -12,9 +13,9 @@ public interface ArticleMapper {
 	
 	int getUserArticleCount(int userId);
 	
-	List<Article> searchUserArticleByPage(ArticleSearchCondition articleSearchCondition);
+	List<Article> searchUserArticleByPage(ArticleSearchCondition searchCondition);
 	
-	int searchUserArticleCount(int userId);
+	int searchUserArticleCount(ArticleSearchCondition searchCondition);
 	
 	List<ArticleType>getAllArticleTypes();
 }

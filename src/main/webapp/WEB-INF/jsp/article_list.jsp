@@ -28,7 +28,7 @@
 			<div class="lt-right" style="padding:10px 0 0 3px;" >
 				    <div class="cl top1" style="height:10px;">
 				    
-					  <form class="form-inline" action="<s:url value='/news/searchNews.html'/>" method="get">
+					  <form class="form-inline" action="<s:url value='/article/searchArticles.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 						  <div class="t-third">
 
@@ -50,7 +50,7 @@
 								</select>
 							  </td>
 							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="乱七八糟" class="t-input form-control"/>							  
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="标题/关键字/作者/来源/摘要" class="t-input form-control"/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
@@ -62,7 +62,7 @@
 
     			</div>
 				<div style="height:10px;"></div>
-					<div class="lt-box" style="padding:30px 0 0 0;">
+					<div class="lt-box" style="padding:50px 0 0 0;">
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
