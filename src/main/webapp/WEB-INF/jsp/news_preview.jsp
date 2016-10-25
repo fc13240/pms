@@ -93,7 +93,7 @@
 			</div>
 			
 			<div>
-				<div style="margin-left: 80px;">${news.content}</div>
+				<div style="margin-left: 80px;"><p>${news.content}<p></div>
 			</div>
 			<div>
 				<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="90%" color=#987cb9 SIZE=3>
