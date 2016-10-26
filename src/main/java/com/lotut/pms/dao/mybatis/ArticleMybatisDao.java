@@ -8,6 +8,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.ArticleDao;
 import com.lotut.pms.dao.mapper.ArticleMapper;
 import com.lotut.pms.domain.Article;
+import com.lotut.pms.domain.ArticleImg;
 import com.lotut.pms.domain.ArticleSearchCondition;
 import com.lotut.pms.domain.ArticleType;
 import com.lotut.pms.domain.Page;
@@ -78,6 +79,23 @@ public class ArticleMybatisDao extends SqlSessionDaoSupport implements ArticleDa
 	@Override
 	public Article getUserArticleById(int id) {
 		return articleMapper.getUserArticleById(id);
+	}
+
+	@Override
+	public void insertArticle(Article article) {
+		articleMapper.insertArticle(article);
+	}
+
+	@Override
+	public void updateArticle(Article article) {
+		articleMapper.updateArticle(article);
+		
+	}
+
+	@Override
+	public void addArticleImage(ArticleImg articleImg) {
+		articleMapper.addArticleImage(articleImg);
+		
 	}
 
 	

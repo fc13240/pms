@@ -121,5 +121,13 @@
 	<delete id="deleteArticle" parameterType="int">
 		delete from article where id = #{articleId}
 	</delete>
+	
+	<insert id="insertArticle" parameterType="Article" useGeneratedKeys="true" keyProperty="id" >
+		insert into article(user_id) values(#{user.userId})
+	</insert>
+	
+	<update id="updateArticle" parameterType="Article">
+		update article set article_type=#{articleType.typeId},keywords=#{keywords},author=#{author},title=#{title},source=#{source},content=#{content,javaType=string,jdbcType=CLOB},abstract=#{articleAbstract}  where id=#{id}
+	</update>
   </mapper>
   
