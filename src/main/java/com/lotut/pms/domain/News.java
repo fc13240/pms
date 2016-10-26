@@ -21,9 +21,16 @@ public class News {
 	private String source;
 	private String content;
 	private String newsAbstract;
+	private String smallImgUrl;
 	
 	
 
+	public String getSmallImgUrl() {
+		return smallImgUrl;
+	}
+	public void setSmallImgUrl(String smallImgUrl) {
+		this.smallImgUrl = smallImgUrl;
+	}
 	public Timestamp getCreateTime() {
 		return createTime;
 	}

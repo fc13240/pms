@@ -119,7 +119,7 @@ height:37px;
 									<tr>
 										<th width="80">新闻分类</th>
 										<td>
-											<input name="id" value="${newsId }" type="text"/>
+											<input name="id" value="${newsId }" type="hidden"/>
 											<select name="newsType.typeId" class="form-control" style="width:120px;" id="" onchange="bindSortChild()" required>
 												<option value="">--请选择--</option>
 												<c:forEach items="${newsTypes }" var="newsType">

@@ -132,6 +132,77 @@ public class KindEditorController {
          WebUtils.writeJsonStrToResponse(response, succMap);
 	}
 	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(path = "/newsFileUpload")
+	@ResponseBody
+	public void newsFileUpload(HttpServletRequest request, @RequestParam("imgFile") Part imgFile,
+			HttpServletResponse response) throws ServletException, IOException, FileUploadException {
+		int userId=PrincipalUtils.getCurrentUserId();
+		//ServletContext application = request.getSession().getServletContext();
+		String savePath = Settings.NEWS_IMAGE_PATH;
+
+		String saveUrl = Settings.NEWS_IMAGE_URL;
+		// 定义允许上传的文件扩展名
+		HashMap<String, String> extMap = new HashMap<String, String>();
+		extMap.put("image", "gif,jpg,jpeg,png,bmp");
+		extMap.put("flash", "swf,flv");
+		extMap.put("media", "swf,flv,mp3,wav,wma,wmv,mid,avi,mpg,asf,rm,rmvb");
+		extMap.put("file", "doc,docx,xls,xlsx,ppt,htm,html,xml,sql,txt,zip,rar,gz,bz2,pdf");
+
+		response.setContentType("text/html; charset=UTF-8");
+		response.setHeader("X-Frame-OPTIONS", "SAMEORIGIN");
+		
+		if (!ServletFileUpload.isMultipartContent(request)) {
+			 getError(response,"请选择文件！");
+			 return;
+		}
+
+		String dirName = request.getParameter("dir");
+		if (dirName == null) {
+			dirName = "image";
+		}
+		if (!extMap.containsKey(dirName)) {
+			getError(response,"目录名不正确。");
+			return;
+		}
+		// 创建文件夹
+		savePath += dirName + "/";
+		saveUrl += dirName + "/";
+		File saveDirFile = new File(savePath);
+		if (!saveDirFile.exists()) {
+			saveDirFile.mkdirs();
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String ymd = sdf.format(new Date());
+		savePath += ymd + "/";
+		saveUrl += ymd + "/";
+		File dirFile = new File(savePath);
+		if (!dirFile.exists()) {
+			dirFile.mkdirs();
+		}
+		String fileName = imgFile.getSubmittedFileName();
+		String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+		String newFileName = df.format(new Date()) + "_" +userId+"_"+ new Random().nextInt(1000) + "." + fileExt;
+		InputStream is = imgFile.getInputStream();
+		int BUFFER_SIZE = 8 * 1024;
+		byte[] buffer = new byte[BUFFER_SIZE];
+		try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
+			int bytesRead = -1;
+			while ((bytesRead = is.read(buffer)) != -1) {
+				out.write(buffer, 0, bytesRead);
+			}
+			out.flush();
+		}
+		 Map<String, Object> succMap = new HashMap<String, Object>();  
+         succMap.put("error", 0);  
+         succMap.put("url", saveUrl + newFileName + ".html");  
+         WebUtils.writeJsonStrToResponse(response, succMap);
+	}
+	
+	
+	
+	
 	
 	   private void getError(HttpServletResponse response,String errorMsg) {  
 	       try {
