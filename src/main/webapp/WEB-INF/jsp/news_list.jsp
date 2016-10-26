@@ -67,10 +67,10 @@
 							  <th class="center" width="40px">序号</th>
 							  <th width="100px">新闻标题</th>
 							  <th width="100px">作者 </th>
-							  <th width="180px">来源</th>
+							  <th width="180px">关键字</th>
 							  <th width="60px">创建时间</th>
 							  <th width="100px">修改时间</th>
-							  <th width="50px">发布时间</th>
+							  <th width="50px">来源</th>
 							  <th width="110px">操作</th>
 							</tr>
 						  </thead>
@@ -80,10 +80,10 @@
 								<td class="center" style="text-align:center"> ${status.count+ (page.currentPage-1)*page.pageSize} </td>
 								<td style="text-align:center"><c:out value="${news.title}"/></td>
 								<td style="text-align:center"><c:out value="${news.author}"/></td>
-								<td style="text-align:center"><c:out value="${news.source}"/></td>
+								<td style="text-align:center"><c:out value="${news.keywords}"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${news.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td	style="text-align:center"><fmt:formatDate value="${news.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								<td style="text-align:center"><fmt:formatDate value="${news.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<td style="text-align:center">${news.source}</td>
 								<td style="text-align:center">
 								<a href="javascript:editorAppPerson()"> 编辑 </a>
 								<a href="<s:url value='/news/getUserNewsById.html'/>?newsId=<c:out value='${news.id}'/>" target="_blank">查看 </a>

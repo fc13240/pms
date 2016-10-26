@@ -124,7 +124,7 @@ public class PatentOfficeAccountController {
 		WebUtils.writeJsonStrToResponse(response, success);
 	}
 	
-	//@Scheduled(cron = "0 0 0 * * ?")
+	@Scheduled(cron = "0 0 0 * * ?")
 	/*cron = "0 50 13 * * ?"*/ //下午1点50
 	/*cron = "0 0 0 * * ?"*/ //晚上12点
 	/*cron = "0 0 0/1 * * ?"*/ //每隔1小时更新
