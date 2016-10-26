@@ -73,7 +73,7 @@ public class KindEditorController {
 		
 		
 		
-		String saveUrl = tempContextUrl + "editorPic/";
+		String saveUrl = tempContextUrl + "pms/"+"editorPic/";
 		// 定义允许上传的文件扩展名
 		HashMap<String, String> extMap = new HashMap<String, String>();
 		extMap.put("image", "gif,jpg,jpeg,png,bmp");
@@ -138,11 +138,11 @@ public class KindEditorController {
 	public void newsFileUpload(HttpServletRequest request, @RequestParam("imgFile") Part imgFile,
 			HttpServletResponse response) throws ServletException, IOException, FileUploadException {
 		int userId=PrincipalUtils.getCurrentUserId();
-		//ServletContext application = request.getSession().getServletContext();
 		String savePath = Settings.NEWS_IMAGE_PATH;
+		StringBuffer url = request.getRequestURL();  
+		String tempContextUrl = url.delete(url.length() - request.getRequestURI().length(), url.length()).toString();
+		String saveUrl = tempContextUrl + "/pms/contentImg/";
 
-		String saveUrl = Settings.NEWS_IMAGE_URL;
-		// 定义允许上传的文件扩展名
 		HashMap<String, String> extMap = new HashMap<String, String>();
 		extMap.put("image", "gif,jpg,jpeg,png,bmp");
 		extMap.put("flash", "swf,flv");
@@ -156,7 +156,6 @@ public class KindEditorController {
 			 getError(response,"请选择文件！");
 			 return;
 		}
-
 		String dirName = request.getParameter("dir");
 		if (dirName == null) {
 			dirName = "image";
@@ -165,29 +164,22 @@ public class KindEditorController {
 			getError(response,"目录名不正确。");
 			return;
 		}
-		// 创建文件夹
-		savePath += dirName + "/";
-		saveUrl += dirName + "/";
+		savePath +=userId + "/";
+		saveUrl +=userId + "/";
 		File saveDirFile = new File(savePath);
 		if (!saveDirFile.exists()) {
 			saveDirFile.mkdirs();
 		}
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String ymd = sdf.format(new Date());
-		savePath += ymd + "/";
-		saveUrl += ymd + "/";
-		File dirFile = new File(savePath);
-		if (!dirFile.exists()) {
-			dirFile.mkdirs();
-		}
 		String fileName = imgFile.getSubmittedFileName();
-		String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-		String newFileName = df.format(new Date()) + "_" +userId+"_"+ new Random().nextInt(1000) + "." + fileExt;
+		fileName=ymd+fileName.substring(fileName.lastIndexOf("."));
+		savePath = savePath+fileName;
+		saveUrl = saveUrl+fileName+".html";
 		InputStream is = imgFile.getInputStream();
 		int BUFFER_SIZE = 8 * 1024;
 		byte[] buffer = new byte[BUFFER_SIZE];
-		try (OutputStream out = new FileOutputStream(savePath + newFileName);) {
+		try (OutputStream out = new FileOutputStream(savePath);) {
 			int bytesRead = -1;
 			while ((bytesRead = is.read(buffer)) != -1) {
 				out.write(buffer, 0, bytesRead);
@@ -196,14 +188,9 @@ public class KindEditorController {
 		}
 		 Map<String, Object> succMap = new HashMap<String, Object>();  
          succMap.put("error", 0);  
-         succMap.put("url", saveUrl + newFileName + ".html");  
+         succMap.put("url", saveUrl);  
          WebUtils.writeJsonStrToResponse(response, succMap);
 	}
-	
-	
-	
-	
-	
 	   private void getError(HttpServletResponse response,String errorMsg) {  
 	       try {
 	    	   Map<String, Object> errorMap = new HashMap<String, Object>();  

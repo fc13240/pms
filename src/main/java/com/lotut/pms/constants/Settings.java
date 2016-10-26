@@ -33,8 +33,8 @@ public interface Settings {
 	final String PATENT_USR_AVATAR_URL="/avatar/";
 	
 	final String NEWS_SMALL_IMAGE_PATH="/opt/media/patent/newsImg/smallImg/";
-	final String NEWS_SMALL_IMAGE_URL="/patent/newsImg/smallImg/";
+	final String NEWS_SMALL_IMAGE_URL="/smallImg/";
 	
 	final String NEWS_IMAGE_PATH="/opt/media/patent/newsImg/contentImg/";
-	final String NEWS_IMAGE_URL="/patent/newsImg/contentImg/";
+	final String NEWS_IMAGE_URL="/contentImg/";
 }

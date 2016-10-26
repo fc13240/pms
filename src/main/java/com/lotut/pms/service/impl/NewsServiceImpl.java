@@ -71,8 +71,8 @@ public class NewsServiceImpl implements NewsService {
 	@Override
 	@Transactional
 	public void insertNewsImage(NewsImg newsImg,MultipartFile multipartFile) {
-		String defaultSaveDir = Settings.NEWS_IMAGE_PATH;
-		String defaultSaveUrl = Settings.NEWS_IMAGE_URL;
+		String defaultSaveDir = Settings.NEWS_SMALL_IMAGE_PATH;
+		String defaultSaveUrl = Settings.NEWS_SMALL_IMAGE_URL;
 		int userId = PrincipalUtils.getCurrentUserId();
 		String saveImageUrl = FileOption.uploaffile(userId, multipartFile, defaultSaveDir, defaultSaveUrl);
 		newsImg.setImgUrl(saveImageUrl);
