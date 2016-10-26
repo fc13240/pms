@@ -15,6 +15,7 @@
 		<result property="createTime" column="create_time"/>
 		<result property="publishTime" column="publish_time"/>
 		<result property="updateTime" column="update_time"/>
+		<result property="smallImgUrl" column="small_img_url"/>
 		<association property="newsType" resultMap="NewsTypeResultMap"/>
 		<association property="user" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 	</resultMap>
