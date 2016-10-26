@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.Param;
 import com.lotut.pms.domain.Article;
 import com.lotut.pms.domain.ArticleSearchCondition;
 import com.lotut.pms.domain.ArticleType;
-import com.lotut.pms.domain.NewsSearchCondition;
+import com.lotut.pms.domain.Article;
+import com.lotut.pms.domain.ArticleImg;
+import com.lotut.pms.domain.ArticleSearchCondition;
 import com.lotut.pms.domain.Page;
 
 public interface ArticleMapper {
@@ -31,5 +33,11 @@ public interface ArticleMapper {
 	void updateArticleType(@Param("typeId")int typeId, @Param("typeName") String typeName);
 
 	void deleteArticle(int articleId);
+	
+	void insertArticle(Article article);
+	
+	void updateArticle(Article article);
+	
+	void addArticleImage(ArticleImg articleImg);
 	
 }

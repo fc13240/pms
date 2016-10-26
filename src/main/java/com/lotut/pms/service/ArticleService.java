@@ -4,9 +4,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.lotut.pms.domain.Article;
+import com.lotut.pms.domain.ArticleImg;
 import com.lotut.pms.domain.ArticleSearchCondition;
 import com.lotut.pms.domain.ArticleType;
+import com.lotut.pms.domain.NewsImg;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserArticle;
 
@@ -28,4 +32,10 @@ public interface ArticleService {
 	void updateArticleType(int typeId, String typeName);
 
 	void deleteArticle(int articleId);
+	
+	void insertArticle(Article article);
+	
+	void updateArticle(Article article);
+	
+	void insertArticleImage(ArticleImg articleImg,MultipartFile multipartFile);
 }

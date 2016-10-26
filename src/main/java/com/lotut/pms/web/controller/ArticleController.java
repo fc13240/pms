@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.lotut.pms.domain.Article;
 import com.lotut.pms.domain.ArticleSearchCondition;
 import com.lotut.pms.domain.ArticleType;
+import com.lotut.pms.domain.News;
+import com.lotut.pms.domain.NewsType;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.UserArticle;
 import com.lotut.pms.service.ArticleService;
+import com.lotut.pms.util.PrincipalUtils;
 
 @Controller
 @RequestMapping(path="/article")
@@ -93,4 +97,19 @@ public class ArticleController {
 		return "redirect:/article/list.html";
 		
 	}
+	@RequestMapping(path="/addArticleForm")
+	public String addNewsForm(Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		Article article = new Article();
+		User user =new User();
+		user.setUserId(userId);
+		article.setUser(user);
+		articleService.insertArticle(article);
+		List<ArticleType> articleTypes=articleService.getAllArticleTypes();
+		model.addAttribute("articleId", article.getId());
+		model.addAttribute("articleTypes", articleTypes);
+		return "article_add";
+	}	
+	
+	
 }

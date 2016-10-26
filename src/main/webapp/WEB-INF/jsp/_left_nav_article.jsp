@@ -9,8 +9,8 @@
 		<h5>文章列表</h5>
 		</a>
 	</li> 		
-	<li class="active"> 
-		<a href="<s:url value='/appPerson/feeReduceTransactAppPersonForm.html'/>">
+	<li class="active">
+		<a href="<s:url value='/article/addArticleForm.html'/>">
 		<h5>文章添加</h5>
 		</a>
 	</li> 
