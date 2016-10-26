@@ -31,4 +31,6 @@ public interface NewsMapper {
 	void updateNews(News news);
 	
 	void addNewsImage(NewsImg newsImg);
+	
+	void updateNewsInfo(News news);
 }

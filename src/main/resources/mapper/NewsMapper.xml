@@ -48,7 +48,7 @@
 	
 	<select id="getUserNewsById"  parameterType="int" resultMap="NewsResultMap">
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.content,n.abstract,n.create_time,n.publish_time,n.update_time,
-		nt.type_id ,nt.type_name,u.user_id,u.username
+		nt.type_id ,nt.type_name,u.user_id,u.username,n.small_img_url
 		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.id=#{newsId}
 	</select>
@@ -114,5 +114,11 @@
 	
 	<update id="addNewsImage" parameterType="NewsImg">
 		update news set small_img_url=#{imgUrl} where id=#{newsId}
+	</update>
+	
+	<update id="updateNewsInfo" parameterType="News">
+		update news set news_type=#{newsType.typeId},keywords=#{keywords},author=#{author},title=#{title},source=#{source},
+						content=#{content,javaType=string,jdbcType=CLOB},abstract=#{newsAbstract}
+					where id=#{id}
 	</update>
 </mapper>

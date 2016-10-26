@@ -28,4 +28,6 @@ public interface NewsDao {
 	void updateNews(News news);
 	
 	void addNewsImage(NewsImg newsImg);
+	
+	void updateNewsInfo(News news);
 }

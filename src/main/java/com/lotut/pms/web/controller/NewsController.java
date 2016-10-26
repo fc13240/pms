@@ -112,4 +112,19 @@ public class NewsController {
 		out.write("success");
 	}
 	
+	@RequestMapping(path="/updateNewsForm")
+	public String updateNewsForm(int newsId,Model model) {
+		News news= newsService.getUserNewsById(newsId);
+		List<NewsType> newsTypes = newsService.getAllNewsTypes();
+		model.addAttribute("newsTypes", newsTypes);
+		model.addAttribute("news",news);
+		return "news_update";
+	}
+	
+	@RequestMapping(path="/updateNews")
+	public String updateNews(News news) {
+		newsService.updateNewsInfo(news);
+		return "redirect:/news/list.html";
+	}
+	
 }

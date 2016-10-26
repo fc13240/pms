@@ -68,6 +68,7 @@ public class NewsServiceImpl implements NewsService {
 		newsDao.updateNews(news);
 	}
 	
+
 	@Override
 	@Transactional
 	public void insertNewsImage(NewsImg newsImg,MultipartFile multipartFile) {
@@ -79,4 +80,8 @@ public class NewsServiceImpl implements NewsService {
 		newsDao.addNewsImage(newsImg);
 	}
 	
+	@Override
+	public void updateNewsInfo(News news) {
+		newsDao.updateNewsInfo(news);
+	}
 }

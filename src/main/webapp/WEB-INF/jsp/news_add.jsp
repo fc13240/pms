@@ -162,7 +162,7 @@ height:37px;
 									<tr>
 										<th>摘要</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入摘要" name="NewsAbstract" maxlength="100"/>
+											<input class="form-control" style="width:600px;" placeholder="请输入摘要" name="newsAbstract" maxlength="100"/>
 										</td>
 									</tr>
 									<tr>

@@ -70,4 +70,9 @@ public class NewsMybatisDao extends SqlSessionDaoSupport implements NewsDao{
 		newsMapper.addNewsImage(newsImg);
 	}
 	
+	@Override
+	public 	void updateNewsInfo(News news) {
+		newsMapper.updateNewsInfo(news);
+	}
+	
 }
