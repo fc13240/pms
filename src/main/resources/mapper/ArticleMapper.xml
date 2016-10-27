@@ -98,7 +98,7 @@
 	</select>
 	
 	<update id="auditPass" >
-		update article set check_status =#{checkStatus} where id=#{id}
+		update article set check_status =#{checkStatus},publish_time = now() where id=#{id}
 	</update>
 	
 <!-- 	<update id="auditNoPass" parameterType="int">
