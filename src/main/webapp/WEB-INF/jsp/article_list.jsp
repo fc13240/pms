@@ -84,9 +84,9 @@
 								<td style="text-align:center"><c:out value="${article.title}"/></td>
 								<td style="text-align:center"><c:out value="${article.author}"/></td>
 								<td style="text-align:center"><c:out value="${article.source}"/></td>
-								<td style="text-align:center"><c:out value="${article.createTime}"/></td>
-								<td	style="text-align:center"><c:out value="${article.updateTime}"/></td>
-								<td style="text-align:center"><c:out value="${article.publishTime}"/></td>
+								<td style="text-align:center"><fmt:formatDate value="${article.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<td	style="text-align:center"><fmt:formatDate value="${article.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<td style="text-align:center"><fmt:formatDate value="${article.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td style="text-align:center"><a href="javacript:return void" onclick="preview(${article.id})" >查看</a></td>
 								<td style="text-align:center">
 									<a  href="javacript:return void" href="">修改</a>
