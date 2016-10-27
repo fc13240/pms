@@ -107,49 +107,49 @@ height:37px;
 					<div class="hy_zx_r02">
 						<div class="wrap">
 							<ul class="nav1 nav-tabs1">
-								<li class="active"><a>新闻发布</a></li> 
-								<li><a href="/admin.php/article/zr_list.html">返回列表</a></li>
+								<li class="active">文章发布</li> 
+								<li><a href="/admin.php/news/zr_list.html">返回列表</a></li>
 							</ul>
 						</div>
 						<div class="lou-content" style="padding:10px;">
-							<form method="post" action="<s:url value='/article/saveArticle.html'/>">
+							<form method="post" action="<s:url value='/article/updateArticle.html'/>">
 								<table class="table_con">
 									<tbody>
 									
 									<tr>
-										<th width="80">新闻分类</th>
+										<th width="80">文章分类</th>
 										<td>
-											<input name="id" value="${articleId }" type="text"/>
+											<input name="id" value="${article.id }" type="hidden" id="articleId"/>
 											<select name="articleType.typeId" class="form-control" style="width:120px;" required>
-												<option value="">--请选择--</option>
+												<option value="${article.articleType.typeId }">${article.articleType.typeName }</option>
 												<c:forEach items="${articleTypes }" var="articleType">
 													<option value="${articleType.typeId }">${articleType.typeName }</option>
 												</c:forEach>						
-											</select> 
+											</select>
 										</td>
 									</tr>
 									<tr>
 										<th>标题</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入标题" name="title" required maxlength="100"/>
+											<input class="form-control" style="width:600px;" placeholder="请输入标题" name="title" required maxlength="100" value="${article.title }"/>
 										</td>
 									</tr>
 									<tr>
 										<th>作者</th>
 										<td>
-										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author" required maxlength="100"/>
+										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author"  maxlength="100" value="${article.author }"/> 
 										</td>
 									</tr>						
 									<tr>
 										<th>来源</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="" name="source" maxlength="100"/>
+											<input class="form-control" style="width:600px;" placeholder="" name="source" maxlength="100" value="${article.source }"/> 
 										</td>
 									</tr>								
 									<tr>
 										<th>关键字</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="100" required/>
+											 <input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="100" value="${article.keywords }" required/> 
 										</td>
 									</tr>
 									<tr>
@@ -162,29 +162,30 @@ height:37px;
 									<tr>
 										<th>摘要</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入摘要" name="articleAbstract" maxlength="100"/>
+											 <input class="form-control" style="width:600px;" placeholder="请输入摘要" name="articleAbstract" maxlength="100" value="${article.articleAbstract }"/> 
 										</td>
 									</tr>
 									<tr>
 										<th>内容</th>
 										<td>
-											<textarea rows="3" cols="10" id="articleContent" name="content" class="articleContent" style="width:520px;height:200px;visibility:hidden;" required></textarea>
+											<textarea rows="3" cols="10" id="articleContent" name="content" class="articleContent" style="width:520px;height:200px;visibility:hidden;" required="required">${article.content }</textarea>
 										</td>
 									</tr>
-	
+							
 									</tbody>
 								</table>	
-							<div class="form-actions">
-								<button type="submit" style="display:inline;margin-right:540px;" class="t-btn3 button button-primary  button-rounded">提交</button>
-								<button type="button" class="t-btn3 button button-primary  button-rounded">返回</button>
-							</div>		
+								<div class="form-actions">
+									<button type="submit" style="display:inline;margin-right:540px;" class="t-btn3 button button-primary  button-rounded">提交</button>
+									<button type="button" class="t-btn3 button button-primary  button-rounded">返回</button>
+								</div>		
 							</form>
-							
-							<form action="<s:url value='/article/uploadArticleThumbnail.html'/>" id="uploadarticleThumbnailForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+							<form action="<s:url value='/news/uploadAticleThumbnail.html'/>" id="uploadArticleThumbnailForm" method="post" enctype="multipart/form-data" class="form-horizontal">
 								<input style="display:none" type="file" id="articleThumbnail" name="file"/>
 								<button type="button" style="display: none;" onclick="$('input[id=articleThumbnail]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
-								<button type="button" id="uploadThumbnailBtn" style="display:none;" onclick="uploadarticleThumbnail()" class="t-btn3 button button-primary  button-rounded">上传</button>
+								<button type="button" id="uploadThumbnailBtn" style="display:none;" onclick="uploadAticleThumbnail()" class="t-btn3 button button-primary  button-rounded">上传</button>
 							</form>
+							
+							
 						</div>
 						
 					</div>					
@@ -204,37 +205,37 @@ height:37px;
 
 
 <script type="text/javascript">
-	$("#articleThumbnail").change(function(){
-		$("#articleThumbnailname").val($(this).val());
-	})
-	
-	function uploadarticleThumbnail(){
-		var form=$("#uploadarticleThumbnailForm");
-		var articleId=${articleId};
-		var ajaxBody={
-				type:"POST",
-				data:{"file":$("#articleThumbnail").val(),"articleId":articleId},
-				beforeSubmit:function (){
-					var fileName=$("#articleThumbnail").val();
-					var suffix=fileName.substr(fileName.lastIndexOf(".")+1);
-					if(suffix=="jpg"||suffix=="jpeg"||suffix=="png"){
-						return true;
-					}else{
-						alert("请上传图片格式为jpg、jpeg、png");
-						return false;
-					}
-				},
-				success:function(result){
-					alert("上传成功!");
+$("#articleThumbnail").change(function(){
+	$("#articleThumbnailname").val($(this).val());
+})
+
+function uploadarticleThumbnail(){
+	var form=$("#uploadarticleThumbnailForm");
+	var articleId=$("#articleId").val();
+	var ajaxBody={
+			type:"POST",
+			data:{"file":$("#articleThumbnail").val(),"articleId":articleId},
+			beforeSubmit:function (){
+				var fileName=$("#articleThumbnail").val();
+				var suffix=fileName.substr(fileName.lastIndexOf(".")+1);
+				if(suffix=="jpg"||suffix=="jpeg"||suffix=="png"){
+					return true;
+				}else{
+					alert("请上传图片格式为jpg、jpeg、png");
+					return false;
 				}
-		};
-		form.ajaxSubmit(ajaxBody);
-		
-	}
+			},
+			success:function(result){
+				alert("上传成功!");
+			}
+	};
+	form.ajaxSubmit(ajaxBody);
 	
-	function uploadImg(){
-		$("#uploadThumbnailBtn").trigger("click");
-	}
+}
+
+function uploadImg(){
+	$("#uploadThumbnailBtn").trigger("click");
+}
 </script>
 </body>
 </html>

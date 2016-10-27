@@ -138,8 +138,8 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	@Transactional
 	public void insertArticleImage(ArticleImg articleImg,MultipartFile multipartFile) {
-		String defaultSaveDir = Settings.NEWS_SMALL_IMAGE_PATH;
-		String defaultSaveUrl = Settings.NEWS_SMALL_IMAGE_URL;
+		String defaultSaveDir = Settings.ARTICLE_SMALL_IMAGE_PATH;
+		String defaultSaveUrl = Settings.ARTICLE_SMALL_IMAGE_URL;
 		int userId = PrincipalUtils.getCurrentUserId();
 		String saveImageUrl = FileOption.uploaffile(userId, multipartFile, defaultSaveDir, defaultSaveUrl);
 		articleImg.setImgUrl(saveImageUrl);

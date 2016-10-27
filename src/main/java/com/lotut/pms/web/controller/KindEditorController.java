@@ -202,4 +202,64 @@ public class KindEditorController {
 		}  
 	   }
 	   
+	   
+	   @SuppressWarnings("rawtypes")
+		@RequestMapping(path = "/articleFileUpload")
+		@ResponseBody
+		public void articleFileUpload(HttpServletRequest request, @RequestParam("imgFile") Part imgFile,
+				HttpServletResponse response) throws ServletException, IOException, FileUploadException {
+			int userId=PrincipalUtils.getCurrentUserId();
+			String savePath = Settings.ARTICLE_IMAGE_PATH;
+			StringBuffer url = request.getRequestURL();  
+			String tempContextUrl = url.delete(url.length() - request.getRequestURI().length(), url.length()).toString();
+			String saveUrl = tempContextUrl + "/pms/articleContentImg/";
+
+			HashMap<String, String> extMap = new HashMap<String, String>();
+			extMap.put("image", "gif,jpg,jpeg,png,bmp");
+			extMap.put("flash", "swf,flv");
+			extMap.put("media", "swf,flv,mp3,wav,wma,wmv,mid,avi,mpg,asf,rm,rmvb");
+			extMap.put("file", "doc,docx,xls,xlsx,ppt,htm,html,xml,sql,txt,zip,rar,gz,bz2,pdf");
+
+			response.setContentType("text/html; charset=UTF-8");
+			response.setHeader("X-Frame-OPTIONS", "SAMEORIGIN");
+			
+			if (!ServletFileUpload.isMultipartContent(request)) {
+				 getError(response,"请选择文件！");
+				 return;
+			}
+			String dirName = request.getParameter("dir");
+			if (dirName == null) {
+				dirName = "image";
+			}
+			if (!extMap.containsKey(dirName)) {
+				getError(response,"目录名不正确。");
+				return;
+			}
+			savePath +=userId + "/";
+			saveUrl +=userId + "/";
+			File saveDirFile = new File(savePath);
+			if (!saveDirFile.exists()) {
+				saveDirFile.mkdirs();
+			}
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String ymd = sdf.format(new Date());
+			String fileName = imgFile.getSubmittedFileName();
+			fileName=ymd+fileName.substring(fileName.lastIndexOf("."));
+			savePath = savePath+fileName;
+			saveUrl = saveUrl+fileName+".html";
+			InputStream is = imgFile.getInputStream();
+			int BUFFER_SIZE = 8 * 1024;
+			byte[] buffer = new byte[BUFFER_SIZE];
+			try (OutputStream out = new FileOutputStream(savePath);) {
+				int bytesRead = -1;
+				while ((bytesRead = is.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesRead);
+				}
+				out.flush();
+			}
+			 Map<String, Object> succMap = new HashMap<String, Object>();  
+	         succMap.put("error", 0);  
+	         succMap.put("url", saveUrl);  
+	         WebUtils.writeJsonStrToResponse(response, succMap);
+		}
 }

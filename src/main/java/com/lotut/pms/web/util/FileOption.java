@@ -125,8 +125,6 @@ public class FileOption {
 		filename=ymd+filename.substring(filename.lastIndexOf("."));
 		String savePath=saveDir + filename;
 		String saveDatabaseUrl=saveUrl+filename+".html";
-		
-		//String saveDatabaseUrl=saveUrl+filename+".html";
 		File fileDir = new File(saveDir);
 		try {
 			if(!fileDir.exists()){
