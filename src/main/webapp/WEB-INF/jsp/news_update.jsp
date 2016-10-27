@@ -112,44 +112,44 @@ height:37px;
 							</ul>
 						</div>
 						<div class="lou-content" style="padding:10px;">
-							<form method="post" action="<s:url value='/news/saveNews.html'/>">
+							<form method="post" action="<s:url value='/news/updateNews.html'/>">
 								<table class="table_con">
 									<tbody>
 									
 									<tr>
 										<th width="80">新闻分类</th>
 										<td>
-											<input name="id" value="${newsId }" type="text"/>
-											<select name="newsType.typeId" class="form-control" style="width:120px;" id="" onchange="bindSortChild()" required>
-												<option value="">--请选择--</option>
+											<input name="id" value="${news.id }" type="hidden" id="newsId"/>
+											<select name="newsType.typeId" class="form-control" style="width:120px;" required>
+												<option value="${news.newsType.typeId }">${news.newsType.typeName }</option>
 												<c:forEach items="${newsTypes }" var="newsType">
 													<option value="${newsType.typeId }">${newsType.typeName }</option>
 												</c:forEach>						
-											</select> 
+											</select>
 										</td>
 									</tr>
 									<tr>
 										<th>标题</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入标题" name="title" required maxlength="100"/>
+											<input class="form-control" style="width:600px;" placeholder="请输入标题" name="title" required maxlength="100" value="${news.title }"/>
 										</td>
 									</tr>
 									<tr>
 										<th>作者</th>
 										<td>
-										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author" required maxlength="100"/>
+										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author" required maxlength="100" value="${news.author }"/> 
 										</td>
 									</tr>						
 									<tr>
 										<th>来源</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="" name="source" maxlength="100"/>
+											<input class="form-control" style="width:600px;" placeholder="" name="source" maxlength="100" value="${news.source }"/> 
 										</td>
 									</tr>								
 									<tr>
 										<th>关键字</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="100"/>
+											 <input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="100" value="${news.keywords }"/> 
 										</td>
 									</tr>
 									<tr>
@@ -162,30 +162,31 @@ height:37px;
 									<tr>
 										<th>摘要</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入摘要" name="newsAbstract" maxlength="100"/>
+											 <input class="form-control" style="width:600px;" placeholder="请输入摘要" name="newsAbstract" maxlength="100" value="${news.newsAbstract }"/> 
 										</td>
 									</tr>
 									<tr>
 										<th>内容</th>
 										<td>
-											<textarea rows="3" cols="10" id="newsContent" name="content" class="newsContent" style="width:520px;height:200px;visibility:hidden;">
+											<textarea rows="3" cols="10" id="newsContent" name="content" class="newsContent" style="width:520px;height:200px;visibility:hidden;"> ${news.content } 
 											</textarea>
 										</td>
 									</tr>
-	
+							
 									</tbody>
 								</table>	
-							<div class="form-actions">
-								<button type="submit" style="display:inline;margin-right:540px;" class="t-btn3 button button-primary  button-rounded">提交</button>
-								<button type="button" class="t-btn3 button button-primary  button-rounded">返回</button>
-							</div>		
+								<div class="form-actions">
+									<button type="submit" style="display:inline;margin-right:540px;" class="t-btn3 button button-primary  button-rounded">提交</button>
+									<button type="button" class="t-btn3 button button-primary  button-rounded">返回</button>
+								</div>		
 							</form>
-							
 							<form action="<s:url value='/news/uploadNewsThumbnail.html'/>" id="uploadNewsThumbnailForm" method="post" enctype="multipart/form-data" class="form-horizontal">
 								<input style="display:none" type="file" id="newsThumbnail" name="file"/>
 								<button type="button" style="display: none;" onclick="$('input[id=newsThumbnail]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 								<button type="button" id="uploadThumbnailBtn" style="display:none;" onclick="uploadNewsThumbnail()" class="t-btn3 button button-primary  button-rounded">上传</button>
 							</form>
+							
+							
 						</div>
 						
 					</div>					
@@ -205,13 +206,13 @@ height:37px;
 
 
 <script type="text/javascript">
-	$("#newsThumbnail").change(function(){
+	 $("#newsThumbnail").change(function(){
 		$("#newsThumbnailname").val($(this).val());
 	})
 	
 	function uploadNewsThumbnail(){
 		var form=$("#uploadNewsThumbnailForm");
-		var newsId=${newsId};
+		var newsId=$("#newsId").val();
 		var ajaxBody={
 				type:"POST",
 				data:{"file":$("#newsThumbnail").val(),"newsId":newsId},
@@ -235,7 +236,7 @@ height:37px;
 	
 	function uploadImg(){
 		$("#uploadThumbnailBtn").trigger("click");
-	}
+	} 
 </script>
 </body>
 </html>

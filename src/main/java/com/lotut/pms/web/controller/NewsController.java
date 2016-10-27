@@ -127,4 +127,33 @@ public class NewsController {
 		return "redirect:/news/list.html";
 	}
 	
+	@RequestMapping(path="/getNewsTypeList")
+	public String getNewsTypeList(News news,Model model) {
+		List<NewsType> newsTypes = newsService.getAllNewsTypes();
+		model.addAttribute("newsTypes", newsTypes);
+		return "news_type_list";
+	}
+	
+	@RequestMapping(path="/updateNewsType")
+	public void updateNewsType(NewsType newsType) {
+		newsService.updateNewsType(newsType);
+	}
+	
+	@RequestMapping(path="/deleteNewsType")
+	public void deleteNewsType(NewsType newsType,PrintWriter out) {
+		int count = newsService.getNewsTypeCount(newsType);
+		if(count<=0){
+			newsService.deleteNewsType(newsType);
+			out.write("删除成功！");
+		}else{
+			out.write("该分类已被使用，不能删除！");
+		}
+	}
+	
+	@RequestMapping(path="/addNewsType")
+	public String addNewsType(NewsType newsType) {
+		newsService.addNewsType(newsType);
+		return "redirect:/news/getNewsTypeList.html";
+	}
+	
 }

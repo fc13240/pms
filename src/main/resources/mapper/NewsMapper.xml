@@ -104,7 +104,7 @@
 	</insert>
 	
 	<update id="updateNews" parameterType="News">
-		update news set news_type=#{newsType.typeId},keywords=#{keywords},author=#{author},title=#{title},source=#{source},content=#{content,javaType=string,jdbcType=CLOB},abstract=#{newsAbstract}  where id=#{id}
+		update news set news_type=#{newsType.typeId},keywords=#{keywords},author=#{author},title=#{title},source=#{source},content=#{content,javaType=string,jdbcType=CLOB},abstract=#{newsAbstract}  where id=#{id};
 	</update>
 
 
@@ -121,4 +121,22 @@
 						content=#{content,javaType=string,jdbcType=CLOB},abstract=#{newsAbstract}
 					where id=#{id}
 	</update>
+	
+	
+	<update id="updateNewsType" parameterType="NewsType">
+		update news_type set type_name=#{typeName} where type_id=#{typeId}
+	</update>
+	
+	
+	<select id="getNewsTypeCount" parameterType="NewsType" resultType="int">
+		select count(*) from news where news_type=#{typeId}
+	</select>
+	
+	<delete id="deleteNewsType" parameterType="NewsType">
+		delete from news_type where type_id=#{typeId}
+	</delete>
+	
+	<insert id="addNewsType" parameterType="NewsType">
+		insert into news_type(type_name) values(#{typeName})
+	</insert>
 </mapper>

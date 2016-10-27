@@ -84,4 +84,24 @@ public class NewsServiceImpl implements NewsService {
 	public void updateNewsInfo(News news) {
 		newsDao.updateNewsInfo(news);
 	}
+	
+	@Override
+	public void updateNewsType(NewsType newsType) {
+		newsDao.updateNewsType(newsType);
+	}
+	
+	@Override
+	public int getNewsTypeCount(NewsType newsType) {
+		return newsDao.getNewsTypeCount(newsType);
+	}
+	
+	@Override
+	public void deleteNewsType(NewsType newsType) {
+		newsDao.deleteNewsType(newsType);
+	}
+
+	@Override
+	public void addNewsType(NewsType newsType) {
+		newsDao.addNewsType(newsType);
+	}
 }
