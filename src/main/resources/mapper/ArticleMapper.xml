@@ -105,6 +105,10 @@
 		update article set check_status =2 where id=#{id}
 	</update> -->
 	
+	<update id="addArticleImage" parameterType="ArticleImg">
+		update article set small_img_url=#{imgUrl} where id=#{articleId}
+	</update>
+	
 	<insert id="addArticleType" parameterType="String">
 		insert into article_type(type_name) values(#{keyword})
 		

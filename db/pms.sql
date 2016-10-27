@@ -1085,4 +1085,5 @@ PRIMARY KEY (img_id),
 CONSTRAINT fk_article_id FOREIGN KEY idx_fk_article_id(article_id) REFERENCES article(id) ON DELETE CASCADE
 );
 
-alter table news add column small_img_url varchar(200);
+alter table news add column small_img_url varchar(200) comment '缩略图地址';
+alter table article add column small_img_url varchar(200) comment '缩略图地址';

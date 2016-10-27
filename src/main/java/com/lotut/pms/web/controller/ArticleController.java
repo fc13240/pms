@@ -1,5 +1,6 @@
 package com.lotut.pms.web.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,12 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.lotut.pms.domain.Article;
 import com.lotut.pms.domain.ArticleSearchCondition;
 import com.lotut.pms.domain.ArticleType;
 import com.lotut.pms.domain.News;
 import com.lotut.pms.domain.NewsType;
+import com.lotut.pms.domain.Article;
+import com.lotut.pms.domain.ArticleImg;
+import com.lotut.pms.domain.ArticleType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.UserArticle;
@@ -42,7 +47,7 @@ public class ArticleController {
 	}
 
 	@RequestMapping(path="/searchArticles", method=RequestMethod.GET)
-	public String searchUserNews(@ModelAttribute("searchCondition") ArticleSearchCondition searchCondition, Model model,HttpSession session) {
+	public String searchUserArticle(@ModelAttribute("searchCondition") ArticleSearchCondition searchCondition, Model model,HttpSession session) {
 		UserArticle userArticle=articleService.searchUserArticleByPage(searchCondition, session);
 		model.addAttribute("articles", userArticle.getArticles());
 		model.addAttribute("page", userArticle.getPage());
@@ -98,7 +103,7 @@ public class ArticleController {
 		
 	}
 	@RequestMapping(path="/addArticleForm")
-	public String addNewsForm(Model model) {
+	public String addArticleForm(Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		Article article = new Article();
 		User user =new User();
@@ -110,6 +115,38 @@ public class ArticleController {
 		model.addAttribute("articleTypes", articleTypes);
 		return "article_add";
 	}	
+	
+	@RequestMapping(path="/saveArticle")
+	public String saveArticle(Article article) {
+		articleService.updateArticle(article);
+		return "redirect:/article/list.html";
+	}
+	
+	@RequestMapping(path="/uploadArticleThumbnail")
+	public void uploadArticleThumbnail(MultipartFile file,int articleId,PrintWriter out) {
+		ArticleImg articleImg = new ArticleImg();
+		articleImg.setArticleId(articleId);
+		articleService.insertArticleImage(articleImg, file);
+		out.write("success");
+	}
+	
+	
+	@RequestMapping(path="/updateArticleForm")
+	public String updateArticleForm(int articleId,Model model) {
+		Article article= articleService.getUserArticleById(articleId);
+		List<ArticleType> articleTypes=articleService.getAllArticleTypes();
+		model.addAttribute("articleTypes", articleTypes);
+		model.addAttribute("article",article);
+		return "article_update";
+	}
+	
+	@RequestMapping(path="/updateArticle")
+	public String updateArticle(Article article) {
+		articleService.updateArticle(article);
+		return "redirect:/article/list.html";
+	}
+	
+	
 	
 	
 }
