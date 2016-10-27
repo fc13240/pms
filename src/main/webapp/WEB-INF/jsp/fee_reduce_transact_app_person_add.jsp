@@ -93,7 +93,7 @@
 				</div>
 				<div style="float: left;margin-left:150px;margin-top:30px;border: 1px dashed blue;padding:20px;padding-top: 5px">
 					<span style="color:red;font-size:15px;font-weight:bold">注意事项</span><br/><br/>
-					符合以任何一种下情况均可办理费减:
+					符合以下任何一种情况均可办理费减:
 						<br/>
 						1、个人年收入低于4.2万；
 					
