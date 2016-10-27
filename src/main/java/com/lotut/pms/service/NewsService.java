@@ -29,5 +29,15 @@ public interface NewsService {
 	
 	void updateNews(News news);
 	
+	void updateNewsInfo(News news);
+	
 	void insertNewsImage(NewsImg newsImg,MultipartFile multipartFile);
+	
+	void updateNewsType(NewsType newsType);
+	
+	int getNewsTypeCount(NewsType newsType);
+	
+	void deleteNewsType(NewsType newsType);
+	
+	void addNewsType(NewsType newsType);
 }

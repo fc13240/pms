@@ -85,7 +85,7 @@
 								<td	style="text-align:center"><fmt:formatDate value="${news.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td style="text-align:center">${news.source}</td>
 								<td style="text-align:center">
-								<a href="javascript:editorAppPerson()"> 编辑 </a>
+								<a href="<s:url value='/news/updateNewsForm.html?newsId=${news.id}'/>"> 编辑 </a>
 								<a href="<s:url value='/news/getUserNewsById.html'/>?newsId=<c:out value='${news.id}'/>" target="_blank">查看 </a>
 								<a href="javascript:deleteNews(${news.id})">删除 </a>
 								

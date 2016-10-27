@@ -28,4 +28,14 @@ public interface NewsDao {
 	void updateNews(News news);
 	
 	void addNewsImage(NewsImg newsImg);
+	
+	void updateNewsInfo(News news);
+	
+	void updateNewsType(NewsType newsType);
+	
+	int getNewsTypeCount(NewsType newsType);
+	
+	void deleteNewsType(NewsType newsType);
+	
+	void addNewsType(NewsType newsType);
 }

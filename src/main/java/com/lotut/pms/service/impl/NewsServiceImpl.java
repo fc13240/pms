@@ -68,6 +68,7 @@ public class NewsServiceImpl implements NewsService {
 		newsDao.updateNews(news);
 	}
 	
+
 	@Override
 	@Transactional
 	public void insertNewsImage(NewsImg newsImg,MultipartFile multipartFile) {
@@ -79,4 +80,28 @@ public class NewsServiceImpl implements NewsService {
 		newsDao.addNewsImage(newsImg);
 	}
 	
+	@Override
+	public void updateNewsInfo(News news) {
+		newsDao.updateNewsInfo(news);
+	}
+	
+	@Override
+	public void updateNewsType(NewsType newsType) {
+		newsDao.updateNewsType(newsType);
+	}
+	
+	@Override
+	public int getNewsTypeCount(NewsType newsType) {
+		return newsDao.getNewsTypeCount(newsType);
+	}
+	
+	@Override
+	public void deleteNewsType(NewsType newsType) {
+		newsDao.deleteNewsType(newsType);
+	}
+
+	@Override
+	public void addNewsType(NewsType newsType) {
+		newsDao.addNewsType(newsType);
+	}
 }
