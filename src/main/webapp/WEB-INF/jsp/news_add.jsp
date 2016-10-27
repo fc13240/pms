@@ -119,7 +119,7 @@ height:37px;
 									<tr>
 										<th width="80">新闻分类</th>
 										<td>
-											<input name="id" value="${newsId }" type="text"/>
+											<input name="id" value="${newsId }" type="hidden"/>
 											<select name="newsType.typeId" class="form-control" style="width:120px;" id="" onchange="bindSortChild()" required>
 												<option value="">--请选择--</option>
 												<c:forEach items="${newsTypes }" var="newsType">
@@ -131,13 +131,13 @@ height:37px;
 									<tr>
 										<th>标题</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入标题" name="title" required maxlength="100"/>
+											<input class="form-control" style="width:600px;" placeholder="请输入标题" name="title" required maxlength="100" required/>
 										</td>
 									</tr>
 									<tr>
 										<th>作者</th>
 										<td>
-										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author" required maxlength="100"/>
+										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author"  maxlength="100"/>
 										</td>
 									</tr>						
 									<tr>
@@ -149,7 +149,7 @@ height:37px;
 									<tr>
 										<th>关键字</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="100"/>
+											<input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" required name="keywords" maxlength="100"/>
 										</td>
 									</tr>
 									<tr>
@@ -168,8 +168,7 @@ height:37px;
 									<tr>
 										<th>内容</th>
 										<td>
-											<textarea rows="3" cols="10" id="newsContent" name="content" class="newsContent" style="width:520px;height:200px;visibility:hidden;">
-											</textarea>
+											<textarea rows="3" cols="10" id="newsContent" name="content" class="newsContent" style="width:520px;height:200px;visibility:hidden;" required="required"></textarea>
 										</td>
 									</tr>
 	

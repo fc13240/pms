@@ -104,7 +104,19 @@
 	</insert>
 	
 	<update id="updateNews" parameterType="News">
-		update news set news_type=#{newsType.typeId},keywords=#{keywords},author=#{author},title=#{title},source=#{source},content=#{content,javaType=string,jdbcType=CLOB},abstract=#{newsAbstract}  where id=#{id};
+		update news set news_type=#{newsType.typeId},keywords=#{keywords},
+		<if test="author !=='' or author !==null">
+		author=#{author},
+		</if>
+		title=#{title},
+		<if test="source !=='' or source !==null">
+		source=#{source},
+		</if>
+		content=#{content,javaType=string,jdbcType=CLOB}
+		<if test="newsAbstract !=='' or newsAbstract !==null">
+		,abstract=#{newsAbstract} 
+		</if>
+		 where id=#{id};
 	</update>
 
 

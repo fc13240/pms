@@ -137,7 +137,7 @@ height:37px;
 									<tr>
 										<th>作者</th>
 										<td>
-										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author" required maxlength="100" value="${news.author }"/> 
+										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author"  maxlength="100" value="${news.author }"/> 
 										</td>
 									</tr>						
 									<tr>
@@ -149,7 +149,7 @@ height:37px;
 									<tr>
 										<th>关键字</th>
 										<td>
-											 <input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="100" value="${news.keywords }"/> 
+											 <input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="100" value="${news.keywords }" required/> 
 										</td>
 									</tr>
 									<tr>
@@ -168,7 +168,7 @@ height:37px;
 									<tr>
 										<th>内容</th>
 										<td>
-											<textarea rows="3" cols="10" id="newsContent" name="content" class="newsContent" style="width:520px;height:200px;visibility:hidden;"> ${news.content } 
+											<textarea rows="3" cols="10" id="newsContent" name="content" class="newsContent" style="width:520px;height:200px;visibility:hidden;" required="required"> ${news.content } 
 											</textarea>
 										</td>
 									</tr>
