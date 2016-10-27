@@ -27,7 +27,7 @@
 	</p>
 </div>
 <div class="praise">
-	<span id="praise${article.id}" onclick="prasie(${article.id})"><img src="<s:url value='/temp/images/zan.png'/>" id="praise-img" class="animation" width="20px;" height="20px;"></span>
+	<span id="praise" onclick="praise()"><img src="<s:url value='/temp/images/zan.png'/>" id="praise-img" class="animation" width="20px;" height="20px;"></span>
 	<span id="praise-txt">1455</span>
 	<span id="add-num"><em>+1</em></span>
 </div>
@@ -38,65 +38,36 @@
 	 * 动态点赞
 	 * 此效果包含css3，部分浏览器不兼容（如：IE10以下的版本）
 	*/
-	$(function(){
-		$("#praise${article.id}").click(function(){
+ /* $(function(){
+		$("#praise").click(function(){
 			var praise_img = $("#praise-img");
 			var text_box = $("#add-num");
 			var praise_txt = $("#praise-txt");
 			var num=parseInt(praise_txt.text());
-			$.ajax({
-				type:"get",
-				url: "<s:url value='/article/praise.html'/>?upVote=", 
-			    success: function (data) {
-			    	$(this).html("<img src='<s:url value='/temp/images/zan.png'/>' width='20px;' height='20px;' id='praise-img' class='animation' />");
-					praise_txt.addClass("hover");
-					text_box.show().html("<em class='add-animation'>+1</em>");
-					$(".add-animation").addClass("hover");
-					num +=1;
-					praise_txt.text(num)
-			    }
-				
-			})
-		});
-		
-		$("#slander"+articleId).click(function(){
-			$.ajax({
-				type:"post",
-				url: "<s:url value='/article/praise.html'/>", 
-			    data: obj, 
-			    success: function (data) {
-			    	$(this).html("<img src='<s:url value='/temp/images/zan.png'/>' width='20px;' height='20px;' id='praise-img' class='animation' />");
-					praise_txt.removeClass("hover");
-					text_box.show().html("<em class='add-animation'>-1</em>");
-					$(".add-animation").removeClass("hover");
-					num -=1;
-					praise_txt.text(num)
-			    }
-				
-			})
-			
-		});
-	})
 	
-	function onclick(id,number){
-		var praise_img = $("#praise-img");
-		var text_box = $("#add-num");
-		var praise_txt = $("#praise-txt");
-		var num=parseInt(praise_txt.text());
-		$.ajax({
-			type:"get",
-			url: "<s:url value='/article/praise.html'/>?upVote="+number, 
-		    success: function (data) {
-		    	$("#praise"+id).html("<img src='<s:url value='/temp/images/zan.png'/>' width='20px;' height='20px;' id='praise-img' class='animation' />");
+				$(this).html("<img src='<s:url value='/temp/images/zan.png'/>' width='20px;' height='20px;' id='praise-img' class='animation' />");
 				praise_txt.addClass("hover");
 				text_box.show().html("<em class='add-animation'>+1</em>");
 				$(".add-animation").addClass("hover");
 				num +=1;
 				praise_txt.text(num)
-		    }
-			
-		})
-	}
+				$(this).attr("onclick", "null");
+		}); 
+	})  */
+	
+	 function praise(){
+		var praise_img = $("#praise-img");
+		var text_box = $("#add-num");
+		var praise_txt = $("#praise-txt");
+		var num=parseInt(praise_txt.text());
+			$(this).html("<img src='<s:url value='/temp/images/zan.png'/>' width='20px;' height='20px;' id='praise-img' class='animation' />");
+			praise_txt.addClass("hover");
+			text_box.show().html("<em class='add-animation'>+1</em>");
+			$(".add-animation").addClass("hover");
+			num +=1;
+			praise_txt.text(num)
+			$("#praise").attr("onclick", "null");
+	} 
 </script>
 </body>
 </html>
