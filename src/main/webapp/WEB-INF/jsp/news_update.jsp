@@ -168,8 +168,7 @@ height:37px;
 									<tr>
 										<th>内容</th>
 										<td>
-											<textarea rows="3" cols="10" id="newsContent" name="content" class="newsContent" style="width:520px;height:200px;visibility:hidden;" required="required"> ${news.content } 
-											</textarea>
+											<textarea rows="3" cols="10" id="newsContent" name="content" class="newsContent" style="width:520px;height:200px;visibility:hidden;" required="required">${news.content }</textarea>
 										</td>
 									</tr>
 							

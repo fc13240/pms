@@ -105,15 +105,15 @@
 	
 	<update id="updateNews" parameterType="News">
 		update news set news_type=#{newsType.typeId},keywords=#{keywords},
-		<if test="author !=='' or author !==null">
+		<if test="author !='' or author !=null">
 		author=#{author},
 		</if>
 		title=#{title},
-		<if test="source !=='' or source !==null">
+		<if test="source !='' or source !=null">
 		source=#{source},
 		</if>
 		content=#{content,javaType=string,jdbcType=CLOB}
-		<if test="newsAbstract !=='' or newsAbstract !==null">
+		<if test="newsAbstract !='' or newsAbstract !=null">
 		,abstract=#{newsAbstract} 
 		</if>
 		 where id=#{id};
