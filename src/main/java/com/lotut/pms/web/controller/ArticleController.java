@@ -34,10 +34,19 @@ public class ArticleController {
 	
 	@RequestMapping(path="/list")
 	public String getUserArticles(Page page, HttpSession session,Model model){
-		UserArticle userArticle=articleService.getUserArticleByPage(page, session);
-		model.addAttribute("articles", userArticle.getArticles());
-		model.addAttribute("page", userArticle.getPage());
-		return "article_list";
+		UserArticle userArticle=new UserArticle();
+		if(PrincipalUtils.isAdmin()||PrincipalUtils.isOrderProcessor()){
+			 userArticle=articleService.getCheckedArticleList(page, session);
+			 model.addAttribute("articles", userArticle.getArticles());
+			 model.addAttribute("page", userArticle.getPage());
+			 return "article_check_list";
+		}else{
+			 userArticle=articleService.getUserArticleByPage(page, session);
+			 model.addAttribute("articles", userArticle.getArticles());
+			 model.addAttribute("page", userArticle.getPage());
+			 return "article_list";
+		}
+		
 		
 	}
 

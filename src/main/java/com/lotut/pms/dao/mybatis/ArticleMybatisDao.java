@@ -98,6 +98,16 @@ public class ArticleMybatisDao extends SqlSessionDaoSupport implements ArticleDa
 		
 	}
 
+	@Override
+	public List<Article> getCheckedArticleList(Page page) {
+		return articleMapper.getCheckedArticleList(page);
+	}
+
+	@Override
+	public int getCheckedArticleCount(int userId) {
+		return articleMapper.getCheckedArticleCount(userId);
+	}
+
 	
 
 

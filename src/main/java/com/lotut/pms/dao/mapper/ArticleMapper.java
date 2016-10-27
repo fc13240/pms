@@ -40,4 +40,8 @@ public interface ArticleMapper {
 	
 	void addArticleImage(ArticleImg articleImg);
 	
+	List<Article> getCheckedArticleList(Page page);
+	
+	int getCheckedArticleCount(int userId);
+	
 }
