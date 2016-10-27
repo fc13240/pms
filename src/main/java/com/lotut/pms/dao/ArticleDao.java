@@ -36,4 +36,8 @@ public interface ArticleDao {
 	void updateArticle(Article article);
 	
 	void addArticleImage(ArticleImg articleImg);
+	
+	List<Article> getCheckedArticleList(Page page);
+	
+	int getCheckedArticleCount(int userId);
 }

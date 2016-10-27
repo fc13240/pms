@@ -38,4 +38,6 @@ public interface ArticleService {
 	void updateArticle(Article article);
 	
 	void insertArticleImage(ArticleImg articleImg,MultipartFile multipartFile);
+	
+	UserArticle getCheckedArticleList(Page page,HttpSession session);
 }
