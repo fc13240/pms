@@ -14,12 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lotut.pms.domain.Article;
-import com.lotut.pms.domain.ArticleSearchCondition;
-import com.lotut.pms.domain.ArticleType;
-import com.lotut.pms.domain.News;
-import com.lotut.pms.domain.NewsType;
-import com.lotut.pms.domain.Article;
 import com.lotut.pms.domain.ArticleImg;
+import com.lotut.pms.domain.ArticleSearchCondition;
 import com.lotut.pms.domain.ArticleType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
@@ -55,13 +51,22 @@ public class ArticleController {
 		
 	}
 
-	@RequestMapping(path="/searchArticles", method=RequestMethod.GET)
+	@RequestMapping(path="/searchUserArticles", method=RequestMethod.GET)
 	public String searchUserArticle(@ModelAttribute("searchCondition") ArticleSearchCondition searchCondition, Model model,HttpSession session) {
 		UserArticle userArticle=articleService.searchUserArticleByPage(searchCondition, session);
 		model.addAttribute("articles", userArticle.getArticles());
 		model.addAttribute("page", userArticle.getPage());
 		model.addAttribute("articleTypes", userArticle.getArticleTypes());
 		return "article_list";
+	}
+	
+	@RequestMapping(path="/searchAllArticles", method=RequestMethod.GET)
+	public String searchAllArticle(@ModelAttribute("searchCondition") ArticleSearchCondition searchCondition, Model model,HttpSession session) {
+		UserArticle userArticle=articleService.searchAllArticleByPage(searchCondition, session);
+		model.addAttribute("articles", userArticle.getArticles());
+		model.addAttribute("page", userArticle.getPage());
+		model.addAttribute("articleTypes", userArticle.getArticleTypes());
+		return "article_check_list";
 	}
 	
 	@RequestMapping(path="/getArticleTypeList", method=RequestMethod.GET)

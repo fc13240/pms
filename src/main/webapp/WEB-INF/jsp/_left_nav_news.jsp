@@ -14,10 +14,12 @@
 		<h5>新闻添加</h5>
 		</a>
 	</li> 
+	<se:authorize access="hasAnyRole('ROLE_TRADER','ADMIN')">
 	<li class="active"> 
 		<a href="<s:url value='/news/getNewsTypeList.html'/>">
 		<h5>分类管理</h5>
 		</a>
-	</li> 
+	</li>
+	</se:authorize> 
 	</ul>
 </div>

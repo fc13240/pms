@@ -44,6 +44,8 @@
     height:25px;
     line-height:25px;
     display: block;
+    margin-left:-125px;
+    
 }
 .praise img{
     width:40px;
@@ -56,6 +58,15 @@
     -moz-animation: myfirst 0.5s;	/* Firefox */
     -webkit-animation: myfirst 0.5s;	/* Safari ºÍ Chrome */
     -o-animation: myfirst 0.5s;	/* Opera */
+    margin-left:-60px;
+}
+
+.slander img.animation{
+    animation: myfirst 0.5s;
+    -moz-animation: myfirst 0.5s;	/* Firefox */
+    -webkit-animation: myfirst 0.5s;	/* Safari ºÍ Chrome */
+    -o-animation: myfirst 0.5s;	/* Opera */
+    margin-left:85px;
 }
 #add-num{
     display:none;

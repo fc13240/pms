@@ -10,6 +10,7 @@ public enum Role {
 	ROLE_TECH("ROLE_TECH"),
 	ROLE_PROCESS("ROLE_PROCESS"),
 	ROLE_PLATFORM("ROLE_PLATFORM");
+	//ROLE_NEWS("ROLE_NEWS");
 	
 	private String roleName;
 	

@@ -36,6 +36,7 @@ import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.User;
+import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.NoticeService;
 import com.lotut.pms.service.PatentService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -49,11 +50,13 @@ import net.lingala.zip4j.exception.ZipException;
 public class NoticeController {
 	private NoticeService noticeService;
 	private PatentService patentService;
+	private FriendService friendService;
 	
 	@Autowired
-	public NoticeController(NoticeService noticeService, PatentService patentService) {
+	public NoticeController(NoticeService noticeService, PatentService patentService,FriendService friendService) {
 		this.noticeService = noticeService;
 		this.patentService = patentService;
+		this.friendService = friendService;
 	}
 
 	@RequestMapping(path="/list", method=RequestMethod.GET)
@@ -328,5 +331,14 @@ public class NoticeController {
 		noticeService.batchChangeNoticeViewStatus(noticeIdList,userId);
 		int totalCount=(int)noticeService.unreadNoticeCount(userId);
 		out.write(totalCount+"");
-	}		
+	}
+	
+	
+	@RequestMapping(path="showFriends", method=RequestMethod.GET)
+	public String showFriends(Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> friends = friendService.getUserFriends(userId);
+		model.addAttribute("friends", friends);
+		return "notice_select_friends";
+	}
 }

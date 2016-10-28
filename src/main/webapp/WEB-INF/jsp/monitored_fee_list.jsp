@@ -79,7 +79,7 @@
 					        
 					        <li>
 						        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=3'/>">
-						        	已交局 (<c:out value='${feePaymentStatusCount[(3).intValue()]["feeCount"]}' default="0"/>)
+						        	已交费 (<c:out value='${feePaymentStatusCount[(3).intValue()]["feeCount"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
