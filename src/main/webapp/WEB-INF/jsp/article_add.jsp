@@ -107,8 +107,7 @@ height:37px;
 					<div class="hy_zx_r02">
 						<div class="wrap">
 							<ul class="nav1 nav-tabs1">
-								<li class="active"><a>新闻发布</a></li> 
-								<li><a href="/admin.php/article/zr_list.html">返回列表</a></li>
+								<li class="active"><a>文章发布</a></li> 
 							</ul>
 						</div>
 						<div class="lou-content" style="padding:10px;">
@@ -117,7 +116,7 @@ height:37px;
 									<tbody>
 									
 									<tr>
-										<th width="80">新闻分类</th>
+										<th width="80">文章分类</th>
 										<td>
 											<input name="id" value="${articleId }" type="text"/>
 											<select name="articleType.typeId" class="form-control" style="width:120px;" required>
