@@ -62,7 +62,7 @@
 							  <tr>
 								<td class="center" style="text-align:center"> ${status.count}</td>
 								<td style="text-align:center;vertical-align:middle;">
-								  <input type="text" value="${articleType.typeName}" onChange="updateArticleType('${articleType.typeId}', this.value)" size="50" required maxLength="50">
+								  <input type="text" class="form-control" value="${articleType.typeName}" onChange="updateArticleType('${articleType.typeId}', this.value)" style="width:300px;" required maxLength="50">
 								</td>
 								
 								<td style="text-align:center">
