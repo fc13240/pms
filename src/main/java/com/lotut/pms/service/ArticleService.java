@@ -18,6 +18,8 @@ public interface ArticleService {
 	UserArticle getUserArticleByPage(Page page,HttpSession session);
 	
 	UserArticle searchUserArticleByPage(ArticleSearchCondition articleSearchCondition,HttpSession session);
+	
+	UserArticle searchAllArticleByPage(ArticleSearchCondition articleSearchCondition,HttpSession session);
 
 	List<ArticleType> getAllArticleTypes();
 	
