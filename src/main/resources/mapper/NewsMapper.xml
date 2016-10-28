@@ -78,7 +78,7 @@
 		SELECT count(*)
 		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.user_id=#{userId}
-		<if test="keyword != null">
+		<if test="keyword != null and keyword !=''">
 					and ( n.keywords like #{keyword_pattern} or n.author like #{keyword_pattern} or n.title like #{keyword_pattern}
 					or n.source like #{keyword_pattern} or n.abstract like #{keyword_pattern})
 		</if>
