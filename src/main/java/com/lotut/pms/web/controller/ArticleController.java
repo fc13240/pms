@@ -55,13 +55,22 @@ public class ArticleController {
 		
 	}
 
-	@RequestMapping(path="/searchArticles", method=RequestMethod.GET)
+	@RequestMapping(path="/searchUserArticles", method=RequestMethod.GET)
 	public String searchUserArticle(@ModelAttribute("searchCondition") ArticleSearchCondition searchCondition, Model model,HttpSession session) {
 		UserArticle userArticle=articleService.searchUserArticleByPage(searchCondition, session);
 		model.addAttribute("articles", userArticle.getArticles());
 		model.addAttribute("page", userArticle.getPage());
 		model.addAttribute("articleTypes", userArticle.getArticleTypes());
 		return "article_list";
+	}
+	
+	@RequestMapping(path="/searchAllArticles", method=RequestMethod.GET)
+	public String searchAllArticle(@ModelAttribute("searchCondition") ArticleSearchCondition searchCondition, Model model,HttpSession session) {
+		UserArticle userArticle=articleService.searchAllArticleByPage(searchCondition, session);
+		model.addAttribute("articles", userArticle.getArticles());
+		model.addAttribute("page", userArticle.getPage());
+		model.addAttribute("articleTypes", userArticle.getArticleTypes());
+		return "article_check_list";
 	}
 	
 	@RequestMapping(path="/getArticleTypeList", method=RequestMethod.GET)

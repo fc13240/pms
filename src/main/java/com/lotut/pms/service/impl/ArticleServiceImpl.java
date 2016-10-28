@@ -63,6 +63,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 	
 	@Override
+	@Transactional
 	public UserArticle searchUserArticleByPage(ArticleSearchCondition articleSearchCondition, HttpSession session) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		Page page=articleSearchCondition.getPage();
@@ -144,6 +145,29 @@ public class ArticleServiceImpl implements ArticleService {
 		String saveImageUrl = FileOption.uploaffile(userId, multipartFile, defaultSaveDir, defaultSaveUrl);
 		articleImg.setImgUrl(saveImageUrl);
 		articleDao.addArticleImage(articleImg);
+	}
+
+	@Override
+	@Transactional
+	public UserArticle searchAllArticleByPage(ArticleSearchCondition articleSearchCondition, HttpSession session) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		Page page=articleSearchCondition.getPage();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		articleSearchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		int totalCount=articleDao.searchAllArticleCount(articleSearchCondition);
+		page.setTotalRecords(totalCount);
+		List<Article> articles=articleDao.searchAllArticleByPage(articleSearchCondition);
+
+		List<ArticleType> articleTypes=articleDao.getAllArticleTypes();
+		UserArticle userArticle=new UserArticle();
+		userArticle.setPage(page);
+		userArticle.setArticles(articles);
+		userArticle.setArticleTypes(articleTypes);
+		return userArticle;
 	}
 
 	

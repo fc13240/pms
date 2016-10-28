@@ -40,4 +40,8 @@ public interface ArticleDao {
 	List<Article> getCheckedArticleList(Page page);
 	
 	int getCheckedArticleCount(int userId);
+	
+	List<Article> searchAllArticleByPage(ArticleSearchCondition searchCondition);
+	
+	int searchAllArticleCount(ArticleSearchCondition searchCondition);
 }

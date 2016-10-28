@@ -44,4 +44,8 @@ public interface ArticleMapper {
 	
 	int getCheckedArticleCount(int userId);
 	
+	List<Article> searchAllArticleByPage(ArticleSearchCondition searchCondition);
+	
+	int searchAllArticleCount(ArticleSearchCondition searchCondition);
+	
 }
