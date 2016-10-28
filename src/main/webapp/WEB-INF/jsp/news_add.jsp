@@ -108,7 +108,6 @@ height:37px;
 						<div class="wrap">
 							<ul class="nav1 nav-tabs1">
 								<li class="active"><a>新闻发布</a></li> 
-								<li><a href="/admin.php/news/zr_list.html">返回列表</a></li>
 							</ul>
 						</div>
 						<div class="lou-content" style="padding:10px;">
@@ -120,7 +119,7 @@ height:37px;
 										<th width="80">新闻分类</th>
 										<td>
 											<input name="id" value="${newsId }" type="hidden"/>
-											<select name="newsType.typeId" class="form-control" style="width:120px;" id="" onchange="bindSortChild()" required>
+											<select name="newsType.typeId" class="form-control" style="width:120px;" required>
 												<option value="">--请选择--</option>
 												<c:forEach items="${newsTypes }" var="newsType">
 													<option value="${newsType.typeId }">${newsType.typeName }</option>
@@ -175,8 +174,8 @@ height:37px;
 									</tbody>
 								</table>	
 							<div class="form-actions">
-								<button type="submit" style="display:inline;margin-right:540px;" class="t-btn3 button button-primary  button-rounded">提交</button>
-								<button type="button" class="t-btn3 button button-primary  button-rounded">返回</button>
+								<button type="submit" style="display:inline;margin-left:450px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews()">保存</button>
+								<button type="submit" style="display:inline;margin-left:450px;" class="t-btn3 button button-primary  button-rounded" onclick="publishNews()">发布</button>
 							</div>		
 							</form>
 							

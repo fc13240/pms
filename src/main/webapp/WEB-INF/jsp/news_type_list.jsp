@@ -20,7 +20,7 @@
 <body>
 <%@ include file="_top.jsp" %>
 <div class="col-xs-1 sidebar" style="min-width:100px;">
-			<%@ include file="_left_nav_article.jsp" %>
+			<%@ include file="_left_nav_news.jsp" %>
 		  </div>
 	<div class="tit_top">
         <div class="title2">
