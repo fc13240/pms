@@ -116,7 +116,7 @@
 										  <button type="button" style="width: 66px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="deleteArticle(${article.id})">删除</button>
 									</div>
 									<div class="btn-group btn-group-lg">
-										  <button type="button" style="width: 66px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="deleteAd('${advertismentInfo.patentId}')">修改</button>
+										  <button type="button" style="width: 66px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="updateArticle(${article.id})">修改</button>
 									</div>
 								
 								</td>
@@ -345,6 +345,10 @@ function gotoPageForEnter(event) {
 	
 	function preview(id){
 		window.open("<s:url value='/article/preview.html'/>?id="+id)
+	}
+	
+	function updateArticle(id){
+		window.open("<s:url value='/article/updateArticleForm.html'/>?articleId="+id)
 	}
 </script>
 </body>

@@ -118,7 +118,7 @@ height:37px;
 									<tr>
 										<th width="80">文章分类</th>
 										<td>
-											<input name="id" value="${articleId }" type="text"/>
+											<input name="id" value="${articleId }" type="hidden"/>
 											<select name="articleType.typeId" class="form-control" style="width:120px;" required>
 												<option value="">--请选择--</option>
 												<c:forEach items="${articleTypes }" var="articleType">
@@ -151,13 +151,14 @@ height:37px;
 											<input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="100" required/>
 										</td>
 									</tr>
-									<tr>
+							<!-- 	<tr>
 										<th>缩略图</th>
 										<td>
 											<input style="width:300px;display:inline;" type="text" id="articleThumbnailname"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=articleThumbnail]').click();" />
 											<button type="button" onclick="uploadImg()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
 									</tr>
+							 -->		
 									<tr>
 										<th>摘要</th>
 										<td>

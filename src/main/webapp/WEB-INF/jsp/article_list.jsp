@@ -89,7 +89,7 @@
 								<td style="text-align:center"><fmt:formatDate value="${article.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td style="text-align:center"><a href="javacript:return void" onclick="preview(${article.id})" >查看</a></td>
 								<td style="text-align:center">
-									<a  href="javacript:return void" href="">修改</a>
+									<a  href="javacript:return void" href="javascript:updateArticle(${article.id})">修改</a>
 									<a  href="javacript:return void" onclick="deleteArticle(${article.id})">删除</a>
 								</td>
 							  </tr>
@@ -317,6 +317,10 @@ function gotoPageForEnter(event) {
 	
 	function preview(id){
 		window.open("<s:url value='/article/preview.html'/>?id="+id)
+	}
+	
+	function updateArticle(id){
+		window.open("<s:url value='/article/updateArticleForm.html'/>?articleId="+id)
 	}
 </script>
 </body>
