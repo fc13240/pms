@@ -17,7 +17,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
 <c:import url="common/article_kindEditor.jsp"></c:import>
-<title>添加新闻-龙图腾专利管家</title>
+<title>添加文章-龙图腾专利管家</title>
 </head>
 <body>
 <script src="<s:url value='/temp/js/jquery_from.js'/>"></script>
@@ -108,7 +108,6 @@ height:37px;
 						<div class="wrap">
 							<ul class="nav1 nav-tabs1">
 								<li class="active">文章发布</li> 
-								<li><a href="/admin.php/news/zr_list.html">返回列表</a></li>
 							</ul>
 						</div>
 						<div class="lou-content" style="padding:10px;">
@@ -152,13 +151,13 @@ height:37px;
 											 <input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="100" value="${article.keywords }" required/> 
 										</td>
 									</tr>
-									<tr>
+									<!-- <tr>
 										<th>缩略图</th>
 										<td>
 											<input style="width:300px;display:inline;" type="text" id="articleThumbnailname"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=articleThumbnail]').click();" />
 											<button type="button" onclick="uploadImg()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
-									</tr>
+									</tr> -->
 									<tr>
 										<th>摘要</th>
 										<td>
