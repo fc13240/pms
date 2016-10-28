@@ -3,9 +3,6 @@ package com.lotut.pms.domain;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-
 public class News {
 	private int id;
 	private NewsType newsType;
@@ -20,9 +17,16 @@ public class News {
 	private String content;
 	private String newsAbstract;
 	private String smallImgUrl;
+	private int checkStatus;
 	
 	
 
+	public int getCheckStatus() {
+		return checkStatus;
+	}
+	public void setCheckStatus(int checkStatus) {
+		this.checkStatus = checkStatus;
+	}
 	public String getSmallImgUrl() {
 		return smallImgUrl;
 	}

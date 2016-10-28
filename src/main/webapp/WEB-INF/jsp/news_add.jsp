@@ -168,14 +168,18 @@ height:37px;
 										<th>内容</th>
 										<td>
 											<textarea rows="3" cols="10" id="newsContent" name="content" class="newsContent" style="width:520px;height:200px;visibility:hidden;" required="required"></textarea>
+											<input type="hidden" id="checkStatus" name="checkStatus"/>
 										</td>
+										
+
 									</tr>
 	
 									</tbody>
 								</table>	
 							<div class="form-actions">
-								<button type="submit" style="display:inline;margin-left:450px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews()">保存</button>
-								<button type="submit" style="display:inline;margin-left:450px;" class="t-btn3 button button-primary  button-rounded" onclick="publishNews()">发布</button>
+								<button type="submit" style="display:none;" id="submitBtn">提交</button>
+								<button type="button" style="display:inline;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(0)">保存</button>
+								<button type="button" style="margin-left:450px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(1)">发布</button>
 							</div>		
 							</form>
 							
@@ -203,6 +207,7 @@ height:37px;
 
 
 <script type="text/javascript">
+
 	$("#newsThumbnail").change(function(){
 		$("#newsThumbnailname").val($(this).val());
 	})
@@ -233,6 +238,13 @@ height:37px;
 	
 	function uploadImg(){
 		$("#uploadThumbnailBtn").trigger("click");
+	}
+	
+	function saveNews(checkStatus){
+		$("#checkStatus").val(checkStatus);
+		alert("赋值完成");
+		$("#submitBtn").trigger("click");
+		
 	}
 </script>
 </body>
