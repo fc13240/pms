@@ -163,82 +163,6 @@
 				
 
 <script type="text/javascript">
-
-	function addAppPerson(){
-		var url = "<s:url value='/appPerson/feeReduceTransactAppPersonForm.html'/>";
-		location.href = url
-	}
-	
-	function searchShareUserDetail(shareUserId){
-		var url = "<s:url value='/user/searchShareUserDetail.html'/>?shareUserId=" + shareUserId;
-		window.open(url);
-	}
-	
-	$('tr th input.check-item').click(function() {
-		var checked = $(this).prop("checked");
-		
-		if (checked) {
-			$('tr td input.check-item').each(function() {
-				$(this).prop("checked", true);
-			});
-		} else {
-			$('tr td input.check-item').each(function() {
-				$(this).prop("checked", false);
-			});
-		}
-	});
-	
-	$('tr td input.check-item').click(function() {
-		var allChecked = true;
-		var friendCheckboxes = $('tr td input.check-item');
-		
-		if ($(this).checked) {
-			for (var i = 0; i < friendCheckboxes.length; i++) {
-				if (!friendCheckboxes[i].checked) {
-					allChecked = false;
-					break;
-				}
-			}			
-		} else {
-			allChecked = false;
-		}
-		
-		if (allChecked) {
-			$('tr th input.check-item').prop("checked", true);
-		} else {
-			$('tr th input.check-item').prop("checked", false);
-		}
-	});
-	
-	function batchShareAppPerson() {
-		var appPersonSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		var uniqueAppPersonNos = []
-		if (!appPersonSelected) {
-			formutil.alertMessage('请选择申请人');
-			
-			return;
-		}
-		var appPersons_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'appPerson');
-		for (var i = 0; i < appPersons_checked.length; i++) {
-			if ($.inArray(appPersons_checked[i], uniqueAppPersonNos) == -1) {
-				uniqueAppPersonNos.push(appPersons_checked[i]);
-			}
-		}		
-		var appPersons = uniqueAppPersonNos.join(",");		
-		var url = "<s:url value='/appPerson/showFriends.html'/>?appPersons=" + appPersons;
-		location.href= url
-	}
-		
-		function downloadProxyTemplate(){
-			location.href="<s:url value='/appPerson/downloadProxyTemplate.html'/>";
-		}
-		
-		$(function(){
-			
-			
-		})
-		
-		
 function gotoPage() {
 	var pageNo = document.getElementById("page.pageNo").value;
 	
@@ -259,10 +183,10 @@ function gotoPage() {
 		return;
 	}
 	
-	var url = "<s:url value='/appPerson/getUserFeeReduceAppPersonList.html'/>?currentPage=" + pageNo;
+	var url = "<s:url value='/article/list.html'/>?currentPage=" + pageNo;
 	
 	<c:if test="${searchCondition != null}">
-		url = "<s:url value='/appPerson/searchFeeReduceAppPerson.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		url = "<s:url value='/article/searchUserArticles.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 	</c:if>
 	
 	
@@ -309,12 +233,7 @@ function gotoPageForEnter(event) {
 		location.reload();
 	}
 	
-	function editorAppPerson(appPersonId){
-		var fatherPath=window.location.href;
-		fatherPath=fatherPath.substring(fatherPath.indexOf("appPerson")-1);
-		window.location.href="<s:url value='/appPerson/updateFeeReduceAppPerson.html'/>?appPersonId="+appPersonId+"&fatherPath="+fatherPath; 
-	}
-	
+
 	function preview(id){
 		window.open("<s:url value='/article/preview.html'/>?id="+id)
 	}
