@@ -50,7 +50,7 @@
 								</select>
 							  </td>
 							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="标题/关键字/作者" class="t-input form-control"/>							  
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId"  placeholder="标题/关键字/作者" class="t-input form-control"/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>

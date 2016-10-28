@@ -169,14 +169,16 @@ height:37px;
 										<th>内容</th>
 										<td>
 											<textarea rows="3" cols="10" id="newsContent" name="content" class="newsContent" style="width:520px;height:200px;visibility:hidden;" required="required">${news.content }</textarea>
+											<input type="hidden" id="checkStatus" name="checkStatus"/>
 										</td>
 									</tr>
 							
 									</tbody>
 								</table>	
 								<div class="form-actions">
-									<button type="submit" style="display:inline;margin-right:540px;" class="t-btn3 button button-primary  button-rounded">提交</button>
-									<button type="button" class="t-btn3 button button-primary  button-rounded">返回</button>
+									<button type="submit" style="display:none;" id="submitBtn">提交</button>
+								<button type="button" style="display:inline;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(0)">保存</button>
+								<button type="button" style="margin-left:450px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(1)">发布</button>
 								</div>		
 							</form>
 							<form action="<s:url value='/news/uploadNewsThumbnail.html'/>" id="uploadNewsThumbnailForm" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -235,7 +237,12 @@ height:37px;
 	
 	function uploadImg(){
 		$("#uploadThumbnailBtn").trigger("click");
-	} 
+	}
+	
+	function saveNews(checkStatus){
+		$("#checkStatus").val(checkStatus);
+		$("#submitBtn").trigger("click");
+	}
 </script>
 </body>
 </html>

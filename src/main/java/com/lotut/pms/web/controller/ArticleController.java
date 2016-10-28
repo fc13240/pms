@@ -14,12 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lotut.pms.domain.Article;
-import com.lotut.pms.domain.ArticleSearchCondition;
-import com.lotut.pms.domain.ArticleType;
-import com.lotut.pms.domain.News;
-import com.lotut.pms.domain.NewsType;
-import com.lotut.pms.domain.Article;
 import com.lotut.pms.domain.ArticleImg;
+import com.lotut.pms.domain.ArticleSearchCondition;
 import com.lotut.pms.domain.ArticleType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;

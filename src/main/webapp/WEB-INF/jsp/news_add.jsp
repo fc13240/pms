@@ -242,7 +242,6 @@ height:37px;
 	
 	function saveNews(checkStatus){
 		$("#checkStatus").val(checkStatus);
-		alert("赋值完成");
 		$("#submitBtn").trigger("click");
 		
 	}

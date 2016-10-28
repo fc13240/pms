@@ -1,8 +1,6 @@
 package com.lotut.pms.domain;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-
+import java.util.Date;
 public class News {
 	private int id;
 	private NewsType newsType;
@@ -10,7 +8,7 @@ public class News {
 	private String keywords;
 	private String author;
 	private String title;
-	private Timestamp createTime;
+	private Date createTime;
 	private Date publishTime;
 	private Date updateTime;
 	private String source;
@@ -19,8 +17,6 @@ public class News {
 	private String smallImgUrl;
 	private int checkStatus;
 	
-	
-
 	public int getCheckStatus() {
 		return checkStatus;
 	}
@@ -33,10 +29,10 @@ public class News {
 	public void setSmallImgUrl(String smallImgUrl) {
 		this.smallImgUrl = smallImgUrl;
 	}
-	public Timestamp getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 	public Date getPublishTime() {

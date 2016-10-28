@@ -62,4 +62,8 @@ public class PrincipalUtils {
 	public static boolean isProcess() {//流程员
 		return PrincipalUtils.hasAuthority(Role.ROLE_PROCESS.getRoleName());
 	}
+	
+	public static boolean isNews() {//新闻
+		return PrincipalUtils.hasAuthority(Role.ROLE_PROCESS.getRoleName());
+	}
 }
