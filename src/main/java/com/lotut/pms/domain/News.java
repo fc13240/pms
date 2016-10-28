@@ -14,9 +14,7 @@ public class News {
 	private String author;
 	private String title;
 	private Timestamp createTime;
-	@DateTimeFormat(iso=ISO.DATE_TIME,pattern="yyyy-MM-dd HH:mm:ss")
 	private Date publishTime;
-	@DateTimeFormat(iso=ISO.DATE_TIME,pattern="yyyy-MM-dd HH:mm:ss")
 	private Date updateTime;
 	private String source;
 	private String content;
