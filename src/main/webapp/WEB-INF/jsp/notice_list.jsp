@@ -649,7 +649,7 @@
 								</se:authorize>
 								<td style="text-align:center">
 								<a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}" onclick="changeNoticeReadStatus(${notice.noticeId})"> 下载 </a> 
-								<a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
+								<a href="<s:url value='/notice/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
 								  分享
 								  </a><br/>
 								  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${notice.patent.patentId}'/>">

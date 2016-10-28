@@ -151,4 +151,8 @@
 	<insert id="addNewsType" parameterType="NewsType">
 		insert into news_type(type_name) values(#{typeName})
 	</insert>
+	
+	<delete id="deleteNullData">
+		delete from news where title is null and content is null and keywords is null
+	</delete>
 </mapper>
