@@ -135,6 +135,9 @@
 					where id=#{id}
 	</update>
 	
+	<update id="updateNewsCheckStatus" parameterType="int">
+		update news set check_status=1 where id=#{id}
+	</update>
 	
 	<update id="updateNewsType" parameterType="NewsType">
 		update news_type set type_name=#{typeName} where type_id=#{typeId}

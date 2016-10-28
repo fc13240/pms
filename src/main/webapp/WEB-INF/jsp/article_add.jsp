@@ -105,11 +105,6 @@ height:37px;
 </style>					
 					
 					<div class="hy_zx_r02">
-						<div class="wrap">
-							<ul class="nav1 nav-tabs1">
-								<li class="active"><a>文章发布</a></li> 
-							</ul>
-						</div>
 						<div class="lou-content" style="padding:10px;">
 							<form method="post" action="<s:url value='/article/saveArticle.html'/>">
 								<table class="table_con">

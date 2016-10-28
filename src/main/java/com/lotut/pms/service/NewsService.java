@@ -40,4 +40,6 @@ public interface NewsService {
 	void deleteNewsType(NewsType newsType);
 	
 	void addNewsType(NewsType newsType);
+	
+	void updateNewsCheckStatus(int newsId);
 }

@@ -43,4 +43,6 @@ public interface NewsMapper {
 	void addNewsType(NewsType newsType);
 	
 	void deleteNullData();
+	
+	void updateNewsCheckStatus(int newsId);
 }

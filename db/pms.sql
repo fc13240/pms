@@ -1088,3 +1088,6 @@ CONSTRAINT fk_article_id FOREIGN KEY idx_fk_article_id(article_id) REFERENCES ar
 alter table news add column small_img_url varchar(200) comment '缩略图地址';
 alter table article add column small_img_url varchar(200) comment '缩略图地址';
 ALTER TABLE news ADD COLUMN check_status INT COMMENT '发布状态';
+
+INSERT INTO groups(group_name) VALUES('NEWS');
+INSERT INTO group_authorities(group_id,group_name) VALUES(9,'ROLE_NEWS');

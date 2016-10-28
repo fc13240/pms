@@ -14,7 +14,7 @@
 		<h5>新闻添加</h5>
 		</a>
 	</li> 
-	<se:authorize access="hasAnyRole('ROLE_TRADER','ADMIN')">
+	<se:authorize access="hasAnyRole('ROLE_NEWS')">
 	<li class="active"> 
 		<a href="<s:url value='/news/getNewsTypeList.html'/>">
 		<h5>分类管理</h5>

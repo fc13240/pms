@@ -96,4 +96,9 @@ public class NewsMybatisDao extends SqlSessionDaoSupport implements NewsDao{
 		newsMapper.addNewsType(newsType);
 	}
 	
+	@Override
+	public void updateNewsCheckStatus(int newsId) {
+		newsMapper.updateNewsCheckStatus(newsId);
+	}
+	
 }

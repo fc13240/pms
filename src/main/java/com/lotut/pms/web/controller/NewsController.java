@@ -156,4 +156,10 @@ public class NewsController {
 		return "redirect:/news/getNewsTypeList.html";
 	}
 	
+	@RequestMapping(path="/publishNews")
+	public String publishNews(int newsId) {
+		newsService.updateNewsCheckStatus(newsId);
+		return "redirect:/news/list.html";
+	}
+	
 }

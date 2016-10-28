@@ -105,16 +105,10 @@ height:37px;
 </style>					
 					
 					<div class="hy_zx_r02">
-						<div class="wrap">
-							<ul class="nav1 nav-tabs1">
-								<li class="active"><a>新闻发布</a></li> 
-							</ul>
-						</div>
 						<div class="lou-content" style="padding:10px;">
 							<form method="post" action="<s:url value='/news/saveNews.html'/>">
 								<table class="table_con">
 									<tbody>
-									
 									<tr>
 										<th width="80">新闻分类</th>
 										<td>
