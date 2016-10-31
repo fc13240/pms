@@ -1090,3 +1090,13 @@ CONSTRAINT fk_article_id FOREIGN KEY idx_fk_article_id(article_id) REFERENCES ar
 
 INSERT INTO groups(group_name) VALUES('NEWS');
 INSERT INTO group_authorities(group_id,authority) VALUES(9,'ROLE_NEWS');
+
+CREATE TABLE IF NOT EXISTS article_comments (
+	comment_id INT AUTO_INCREMENT PRIMARY KEY  ,
+	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+	content  VARCHAR(1000),
+	article_id INT NOT NULL,
+	user_id INT NOT NULL,
+	CONSTRAINT fk_article_comments_article_id FOREIGN KEY (article_id) REFERENCES article(id) , 
+	CONSTRAINT fk_article_comments_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) 
+);
