@@ -41,6 +41,7 @@ public class NewsController {
 		if(page.getCurrentPage()<1){
 			page.setCurrentPage(1);
 		}
+		newsService.deleteNullData();
 		int userId=PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
 		List<News> news=newsService.getUserNewsByPage(page);
@@ -154,6 +155,12 @@ public class NewsController {
 	public String addNewsType(NewsType newsType) {
 		newsService.addNewsType(newsType);
 		return "redirect:/news/getNewsTypeList.html";
+	}
+	
+	@RequestMapping(path="/publishNews")
+	public String publishNews(int newsId) {
+		newsService.updateNewsCheckStatus(newsId);
+		return "redirect:/news/list.html";
 	}
 	
 }

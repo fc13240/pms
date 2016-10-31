@@ -68,6 +68,7 @@
 							  <th width="100px">新闻标题</th>
 							  <th width="100px">作者 </th>
 							  <th width="180px">关键字</th>
+							  <th width="90px">发布状态</th>
 							  <th width="60px">创建时间</th>
 							  <th width="100px">修改时间</th>
 							  <th width="50px">来源</th>
@@ -81,12 +82,24 @@
 								<td style="text-align:center"><c:out value="${news.title}"/></td>
 								<td style="text-align:center"><c:out value="${news.author}"/></td>
 								<td style="text-align:center"><c:out value="${news.keywords}"/></td>
+								<td style="text-align:center">
+									<c:if test="${news.checkStatus==0}">
+										未发布
+									</c:if>
+									<c:if test="${news.checkStatus==1}">
+										已发布
+									</c:if>
+								
+								</td>
 								<td style="text-align:center"><fmt:formatDate value="${news.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td	style="text-align:center"><fmt:formatDate value="${news.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td style="text-align:center">${news.source}</td>
 								<td style="text-align:center">
 								<a href="<s:url value='/news/updateNewsForm.html?newsId=${news.id}'/>"> 编辑 </a>
 								<a href="<s:url value='/news/getUserNewsById.html'/>?newsId=<c:out value='${news.id}'/>" target="_blank">查看 </a>
+								<c:if test="${news.checkStatus==0}">
+								<a href="<s:url value='/news/publishNews.html?newsId=${news.id}'/>"> 发布 </a>
+								</c:if>
 								<a href="javascript:deleteNews(${news.id})">删除 </a>
 								
 								</td>

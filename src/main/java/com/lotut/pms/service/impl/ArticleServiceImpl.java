@@ -39,9 +39,11 @@ public class ArticleServiceImpl implements ArticleService {
 		int totalCount=articleDao.getUserArticleCount(userId);
 		page.setTotalRecords(totalCount);
 		List<Article> articles=articleDao.getUserArticleByPage(page);
+		List<ArticleType> articleTypes=articleDao.getAllArticleTypes();
 		UserArticle userArticle=new UserArticle();
 		userArticle.setPage(page);
 		userArticle.setArticles(articles);
+		userArticle.setArticleTypes(articleTypes);
 		return userArticle;
 	}
 	
@@ -56,9 +58,11 @@ public class ArticleServiceImpl implements ArticleService {
 		int totalCount=articleDao.getCheckedArticleCount(userId);
 		page.setTotalRecords(totalCount);
 		List<Article> articles=articleDao.getCheckedArticleList(page);
+		List<ArticleType> articleTypes=articleDao.getAllArticleTypes();
 		UserArticle userArticle=new UserArticle();
 		userArticle.setPage(page);
 		userArticle.setArticles(articles);
+		userArticle.setArticleTypes(articleTypes);
 		return userArticle;
 	}
 	

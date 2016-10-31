@@ -104,4 +104,15 @@ public class NewsServiceImpl implements NewsService {
 	public void addNewsType(NewsType newsType) {
 		newsDao.addNewsType(newsType);
 	}
+	
+	@Override
+	public void updateNewsCheckStatus(int newsId) {
+		newsDao.updateNewsCheckStatus(newsId);
+	}
+
+	@Override
+	public void deleteNullData() {
+		newsDao.deleteNullData();
+		
+	}
 }

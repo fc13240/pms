@@ -1,7 +1,6 @@
 package com.lotut.pms.domain;
 
 import java.util.Date;
-
 public class News {
 	private int id;
 	private NewsType newsType;
@@ -16,9 +15,14 @@ public class News {
 	private String content;
 	private String newsAbstract;
 	private String smallImgUrl;
+	private int checkStatus;
 	
-	
-
+	public int getCheckStatus() {
+		return checkStatus;
+	}
+	public void setCheckStatus(int checkStatus) {
+		this.checkStatus = checkStatus;
+	}
 	public String getSmallImgUrl() {
 		return smallImgUrl;
 	}

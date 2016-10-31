@@ -16,6 +16,7 @@
 		<result property="publishTime" column="publish_time"/>
 		<result property="updateTime" column="update_time"/>
 		<result property="smallImgUrl" column="small_img_url"/>
+		<result property="checkStatus" column="check_status"/>
 		<association property="newsType" resultMap="NewsTypeResultMap"/>
 		<association property="user" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 	</resultMap>
@@ -35,7 +36,7 @@
 	
 	<select id="getUserNewsByPage" parameterType="Page" resultMap="NewsResultMap">
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.content,n.create_time,n.publish_time,n.update_time,
-		nt.type_id ,nt.type_name,u.user_id,u.username
+		nt.type_id ,nt.type_name,u.user_id,u.username,n.check_status
 		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.user_id=#{userId} limit #{startIndex}, #{pageSize}
 	</select>
@@ -59,7 +60,7 @@
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.content,n.create_time,n.publish_time,n.update_time,
-		nt.type_id ,nt.type_name,u.user_id,u.username
+		nt.type_id ,nt.type_name,u.user_id,u.username,n.check_status
 		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.user_id=#{userId}
 		<if test="keyword != null and keyword !=''">
@@ -115,6 +116,7 @@
 		<if test="newsAbstract !='' or newsAbstract !=null">
 		,abstract=#{newsAbstract} 
 		</if>
+		,update_time=now(),check_status=#{checkStatus}
 		 where id=#{id};
 	</update>
 
@@ -129,10 +131,13 @@
 	
 	<update id="updateNewsInfo" parameterType="News">
 		update news set news_type=#{newsType.typeId},keywords=#{keywords},author=#{author},title=#{title},source=#{source},
-						content=#{content,javaType=string,jdbcType=CLOB},abstract=#{newsAbstract}
+						content=#{content,javaType=string,jdbcType=CLOB},abstract=#{newsAbstract},update_time=now(),check_status=#{checkStatus}
 					where id=#{id}
 	</update>
 	
+	<update id="updateNewsCheckStatus" parameterType="int">
+		update news set check_status=1 where id=#{id}
+	</update>
 	
 	<update id="updateNewsType" parameterType="NewsType">
 		update news_type set type_name=#{typeName} where type_id=#{typeId}
