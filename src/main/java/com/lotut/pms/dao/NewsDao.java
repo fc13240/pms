@@ -40,4 +40,6 @@ public interface NewsDao {
 	void addNewsType(NewsType newsType);
 	
 	void updateNewsCheckStatus(int newsId);
+	
+	void deleteNullData();
 }
