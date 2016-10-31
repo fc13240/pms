@@ -40,7 +40,7 @@ public class UnionConfig {
 	public static String frontUrl = "http://g.lotut.com/unionPay/frontRcvResponse.html";
 	//后台服务对应的写法参照 BackRcvResponse.java
 	public static String patent_doc_backUrl = "http://g.lotut.com/patentDocUnionPay/backRcvResponse.html";//受理方和发卡方自选填写的域[O]--后台通知地址
-	public static String backUrl = "http://g.lotut.com/unionPay/frontRcvResponse.html";
+	public static String backUrl = "http://g.lotut.com/unionPay/backRcvResponse.html";
 	// 商户发送交易时间 格式:YYYYMMDDhhmmss
 	public static String getCurrentTime() {
 		return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
