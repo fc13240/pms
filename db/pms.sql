@@ -1039,6 +1039,8 @@ update_time  datetime COMMENT '更新时间' ,
 source  varchar(100) NULL COMMENT '来源' ,
 content  text NOT NULL COMMENT '内容' ,
 abstract varchar(100) NULL COMMENT '摘要' ,
+small_img_url varchar(200) comment '缩略图地址',
+check_status INT COMMENT '发布状态',
 PRIMARY KEY (id),
 FOREIGN KEY (news_type) REFERENCES news_type (type_id) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (user_id) REFERENCES   users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -1060,6 +1062,7 @@ content  TEXT COMMENT '内容' ,
 check_status  TINYINT DEFAULT 0 COMMENT '0 未审核  1  审核  2审核不通过' ,
 up_vote  INT DEFAULT 0 ,
 down_vote  INT DEFAULT 0 ,
+small_img_url varchar(200) comment '缩略图地址',
 PRIMARY KEY (id),
 FOREIGN KEY (article_type) REFERENCES article_type (type_id) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (user_id) REFERENCES   users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -1085,9 +1088,5 @@ PRIMARY KEY (img_id),
 CONSTRAINT fk_article_id FOREIGN KEY idx_fk_article_id(article_id) REFERENCES article(id) ON DELETE CASCADE
 );
 
-alter table news add column small_img_url varchar(200) comment '缩略图地址';
-alter table article add column small_img_url varchar(200) comment '缩略图地址';
-ALTER TABLE news ADD COLUMN check_status INT COMMENT '发布状态';
-
 INSERT INTO groups(group_name) VALUES('NEWS');
-INSERT INTO group_authorities(group_id,group_name) VALUES(9,'ROLE_NEWS');
+INSERT INTO group_authorities(group_id,authority) VALUES(9,'ROLE_NEWS');
