@@ -100,5 +100,11 @@ public class NewsMybatisDao extends SqlSessionDaoSupport implements NewsDao{
 	public void updateNewsCheckStatus(int newsId) {
 		newsMapper.updateNewsCheckStatus(newsId);
 	}
+
+	@Override
+	public void deleteNullData() {
+		newsMapper.deleteNullData();
+		
+	}
 	
 }

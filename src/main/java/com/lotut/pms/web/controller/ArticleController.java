@@ -40,11 +40,13 @@ public class ArticleController {
 			 userArticle=articleService.getCheckedArticleList(page, session);
 			 model.addAttribute("articles", userArticle.getArticles());
 			 model.addAttribute("page", userArticle.getPage());
+			 model.addAttribute("articleTypes", userArticle.getArticleTypes());
 			 return "article_check_list";
 		}else{
 			 userArticle=articleService.getUserArticleByPage(page, session);
 			 model.addAttribute("articles", userArticle.getArticles());
 			 model.addAttribute("page", userArticle.getPage());
+			 model.addAttribute("articleTypes", userArticle.getArticleTypes());
 			 return "article_list";
 		}
 		

@@ -36,6 +36,8 @@ public interface NewsService {
 	void updateNewsType(NewsType newsType);
 	
 	int getNewsTypeCount(NewsType newsType);
+
+	void deleteNullData();
 	
 	void deleteNewsType(NewsType newsType);
 	
