@@ -1,14 +1,13 @@
 package com.lotut.pms.dao.mapper;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.Article;
-import com.lotut.pms.domain.ArticleSearchCondition;
-import com.lotut.pms.domain.ArticleType;
-import com.lotut.pms.domain.Article;
 import com.lotut.pms.domain.ArticleImg;
 import com.lotut.pms.domain.ArticleSearchCondition;
+import com.lotut.pms.domain.ArticleType;
 import com.lotut.pms.domain.Page;
 
 public interface ArticleMapper {
@@ -47,5 +46,7 @@ public interface ArticleMapper {
 	List<Article> searchAllArticleByPage(ArticleSearchCondition searchCondition);
 	
 	int searchAllArticleCount(ArticleSearchCondition searchCondition);
+	
+	void deleteNullData();
 	
 }

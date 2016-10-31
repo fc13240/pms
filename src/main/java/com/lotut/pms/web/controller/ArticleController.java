@@ -36,6 +36,7 @@ public class ArticleController {
 	@RequestMapping(path="/list")
 	public String getUserArticles(Page page, HttpSession session,Model model){
 		UserArticle userArticle=new UserArticle();
+		articleService.deleteNullData();
 		if(PrincipalUtils.isAdmin()||PrincipalUtils.isOrderProcessor()){
 			 userArticle=articleService.getCheckedArticleList(page, session);
 			 model.addAttribute("articles", userArticle.getArticles());

@@ -119,7 +119,12 @@ public class ArticleMybatisDao extends SqlSessionDaoSupport implements ArticleDa
 	}
 
 	
-
+	@Override
+	public void deleteNullData() {
+		articleMapper.deleteNullData();
+	}
+	
+	
 
 
 	
