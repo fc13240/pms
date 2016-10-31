@@ -95,7 +95,7 @@
 <body style="background-color: #FFF;" id="dlstCircleArticle">
 	<div style="height:180px;"></div>
 	<div class="col-xs-1 sidebar" style="min-width:100px;">
-		<%@ include file="_left_nav_editor.jsp" %>
+		<%@ include file="_left_nav_article.jsp" %>
 	</div>
 	<div id="mincontent" style="min-height: 577px;margin:-35px;">
 
