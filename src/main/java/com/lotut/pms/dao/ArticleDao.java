@@ -44,4 +44,6 @@ public interface ArticleDao {
 	List<Article> searchAllArticleByPage(ArticleSearchCondition searchCondition);
 	
 	int searchAllArticleCount(ArticleSearchCondition searchCondition);
+	
+	void deleteNullData();
 }

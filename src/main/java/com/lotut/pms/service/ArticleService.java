@@ -42,4 +42,6 @@ public interface ArticleService {
 	void insertArticleImage(ArticleImg articleImg,MultipartFile multipartFile);
 	
 	UserArticle getCheckedArticleList(Page page,HttpSession session);
+	
+	void deleteNullData();
 }

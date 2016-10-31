@@ -178,8 +178,11 @@
 	<select id="getCheckedArticleCount" parameterType="int" resultType="int">
 		SELECT count(*)
 		FROM article n LEFT JOIN article_type nt ON  n.article_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
-		 
-	</select>	
+	</select>
+	
+	<delete id="deleteNullData">
+		delete from article where title is null and content is null and keywords is null
+	</delete>	
 	
   </mapper>
   

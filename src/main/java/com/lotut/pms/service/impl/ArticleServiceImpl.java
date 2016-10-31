@@ -13,7 +13,6 @@ import com.lotut.pms.domain.Article;
 import com.lotut.pms.domain.ArticleImg;
 import com.lotut.pms.domain.ArticleSearchCondition;
 import com.lotut.pms.domain.ArticleType;
-import com.lotut.pms.domain.ArticleImg;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserArticle;
 import com.lotut.pms.service.ArticleService;
@@ -174,7 +173,9 @@ public class ArticleServiceImpl implements ArticleService {
 		return userArticle;
 	}
 
-	
+	@Override
+	public void deleteNullData() {
+		articleDao.deleteNullData();
+	}
 
-	
 }
