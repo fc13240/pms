@@ -69,9 +69,6 @@
 							  <th class="center" width="40px">序号</th>
 							  <th width="100px">文章标题</th>
 							  <th width="100px">作者 </th>
-							  <th width="180px">来源</th>
-							  <th width="60px">创建时间</th>
-							  <th width="100px">修改时间</th>
 							  <th width="50px">发布时间</th>
 							  <th width="50px">审核状态</th>
 							  <th width="50px">内容</th>
@@ -84,9 +81,6 @@
 								<td class="center" style="text-align:center"> ${status.count+ (page.currentPage-1)*page.pageSize} </td>
 								<td style="text-align:center"><c:out value="${article.title}"/></td>
 								<td style="text-align:center"><c:out value="${article.author}"/></td>
-								<td style="text-align:center"><c:out value="${article.source}"/></td>
-								<td style="text-align:center"><fmt:formatDate value="${article.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								<td	style="text-align:center"><fmt:formatDate value="${article.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<c:if test="${article.checkStatus==1}">
 								<td style="text-align:center"><fmt:formatDate value="${article.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								</c:if>
@@ -104,7 +98,7 @@
 								审核未通过
 								</c:if>
 								</td>
-								<td style="text-align:center"><a href="javacript:return void" onclick="preview(${article.id})" >查看</a></td>
+								<td style="text-align:center"><a target="_blank" href="<s:url value='/article/preview.html?id=${article.id}'/>" >查看</a></td>
 								<td style="text-align:center">
 									<div class="btn-group">
 										   <button style="font-size:15px" type="button" class="btn btn-default dropdown-toggle" 
@@ -306,9 +300,10 @@ function gotoPageForEnter(event) {
 	}
 	
 	
-	function preview(id){
-		window.open("<s:url value='/article/preview.html'/>?id="+id)
-	}
+	/* function preview(id){
+		/* location.href="<s:url value='/article/preview.html'/>?id="+id */
+		 window.open("<s:url value='/article/preview.html'/>?id="+id) 
+	} */
 	
 	function updateArticle(id){
 		window.open("<s:url value='/article/updateArticleForm.html'/>?articleId="+id)
