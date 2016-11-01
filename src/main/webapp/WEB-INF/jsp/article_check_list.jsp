@@ -72,7 +72,7 @@
 							  <th width="50px">发布时间</th>
 							  <th width="40px">审核状态</th>
 							  <th width="30px">内容</th>
-							  <th width="90px">操作</th>
+							  <th width="120px">操作</th>
 							</tr>
 						  </thead>
 						  <tbody>
