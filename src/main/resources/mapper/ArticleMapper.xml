@@ -165,7 +165,6 @@
 	</insert>
 	
 	<update id="updateArticle" parameterType="Article">
-<<<<<<< HEAD
 		update article set article_type=#{articleType.typeId},keywords=#{keywords},
 			author=#{author},title=#{title},create_time=now(),source=#{source},
 			content=#{content,javaType=string,jdbcType=CLOB},abstract=#{articleAbstract},
