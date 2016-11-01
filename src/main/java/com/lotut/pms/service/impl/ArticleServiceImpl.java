@@ -49,7 +49,6 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	@Transactional
 	public UserArticle getCheckedArticleList(Page page, HttpSession session) {
-		articleDao.deleteNullData();
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
 		page.setPageSize(WebUtils.getPageSize(session));
