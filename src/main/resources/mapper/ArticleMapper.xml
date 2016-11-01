@@ -170,7 +170,7 @@
 	
 	<update id="updateArticle" parameterType="Article">
 		update article set article_type=#{articleType.typeId},keywords=#{keywords},
-			author=#{author},title=#{title},source=#{source},
+			author=#{author},title=#{title},source=#{source},update_time=now(),
 			content=#{content,javaType=string,jdbcType=CLOB},abstract=#{articleAbstract},
 			check_status=0
 		 where id=#{id}
