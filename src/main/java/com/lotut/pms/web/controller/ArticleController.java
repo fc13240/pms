@@ -37,7 +37,7 @@ public class ArticleController {
 	public String getUserArticles(Page page, HttpSession session,Model model){
 		UserArticle userArticle=new UserArticle();
 		articleService.deleteNullData();
-		if(PrincipalUtils.isAdmin()||PrincipalUtils.isOrderProcessor()){
+		if(PrincipalUtils.isNews()){
 			 userArticle=articleService.getCheckedArticleList(page, session);
 			 model.addAttribute("articles", userArticle.getArticles());
 			 model.addAttribute("page", userArticle.getPage());
