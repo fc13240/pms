@@ -87,7 +87,12 @@
 								<td style="text-align:center"><c:out value="${article.source}"/></td>
 								<td style="text-align:center"><fmt:formatDate value="${article.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td	style="text-align:center"><fmt:formatDate value="${article.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<c:if test="${article.checkStatus==1}">
 								<td style="text-align:center"><fmt:formatDate value="${article.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								</c:if>
+								<c:if test="${article.checkStatus!=1}">
+								 	<td style="text-align:center"></td>
+								</c:if>
 								<td style="text-align:center">
 								<c:if test="${article.checkStatus==0}">
 								未审核
