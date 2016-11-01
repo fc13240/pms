@@ -172,8 +172,8 @@ height:37px;
 								</table>	
 							<div class="form-actions">
 								<button type="submit" style="display:none;" id="submitBtn">提交</button>
-								<button type="button" style="display:inline;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(0)">保存</button>
-								<button type="button" style="margin-left:450px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(1)">发布</button>
+								<button type="button" style="display:inline;margin-left:500px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(0)">保存</button>
+								<button type="button" style="margin-left:20px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(1)">发布</button>
 							</div>		
 							</form>
 							
