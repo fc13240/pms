@@ -67,10 +67,11 @@
 						  <thead>
 							<tr class="simple_bag">
 							  <th class="center" width="40px">序号</th>
-							  <th width="100px">文章标题</th>
-							  <th width="100px">作者 </th>
+							 <th width="150px">文章标题</th>
+							  <th width="80px">作者 </th>
 							  <th width="50px">发布时间</th>
-							  <th width="50px">内容</th>
+							  <th width="40px">审核状态</th>
+							  <th width="30px">内容</th>
 							  <th width="110px">操作</th>
 							</tr>
 						  </thead>
@@ -86,6 +87,17 @@
 								<c:if test="${article.checkStatus!=1}">
 								 	<td style="text-align:center"></td>
 								</c:if>
+								<td style="text-align:center">
+								<c:if test="${article.checkStatus==0}">
+								未审核
+								</c:if>
+								<c:if test="${article.checkStatus==1}">
+								已审核
+								</c:if>
+								<c:if test="${article.checkStatus==2}">
+								审核未通过
+								</c:if>
+								</td>
 								<td style="text-align:center"><a target="_blank" href="<s:url value='/article/preview.html?id=${article.id}'/>" >查看</a></td>
 								<td style="text-align:center">
 									<a  href="javacript:return void" onclick="updateArticle(${article.id})">修改</a>

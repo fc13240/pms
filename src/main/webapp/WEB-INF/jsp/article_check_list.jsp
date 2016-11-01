@@ -67,12 +67,12 @@
 						  <thead>
 							<tr class="simple_bag">
 							  <th class="center" width="40px">序号</th>
-							  <th width="100px">文章标题</th>
-							  <th width="100px">作者 </th>
+							  <th width="150px">文章标题</th>
+							  <th width="80px">作者 </th>
 							  <th width="50px">发布时间</th>
-							  <th width="50px">审核状态</th>
-							  <th width="50px">内容</th>
-							  <th width="110px">操作</th>
+							  <th width="40px">审核状态</th>
+							  <th width="30px">内容</th>
+							  <th width="90px">操作</th>
 							</tr>
 						  </thead>
 						  <tbody>
@@ -298,12 +298,6 @@ function gotoPageForEnter(event) {
 		
 		location.reload();
 	}
-	
-	
-	/* function preview(id){
-		/* location.href="<s:url value='/article/preview.html'/>?id="+id */
-		 window.open("<s:url value='/article/preview.html'/>?id="+id) 
-	} */
 	
 	function updateArticle(id){
 		window.open("<s:url value='/article/updateArticleForm.html'/>?articleId="+id)
