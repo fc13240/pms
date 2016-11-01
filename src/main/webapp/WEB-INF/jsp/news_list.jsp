@@ -70,7 +70,7 @@
 							  <th width="90px">发布状态</th>
 							  <th width="60px">创建时间</th>
 							  <th width="100px">发布时间</th>
-							  <th width="50px">来源</th>
+							 <!--  <th width="50px">来源</th> -->
 							  <th width="110px">操作</th>
 							</tr>
 						  </thead>
@@ -91,7 +91,7 @@
 								</td>
 								<td style="text-align:center"><fmt:formatDate value="${news.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td	style="text-align:center"><fmt:formatDate value="${news.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								<td style="text-align:center">${news.source}</td>
+								<%-- <td style="text-align:center">${news.source}</td> --%>
 								<td style="text-align:center">
 								<a href="<s:url value='/news/updateNewsForm.html?newsId=${news.id}'/>"> 编辑 </a>
 								<a href="<s:url value='/news/getUserNewsById.html'/>?newsId=<c:out value='${news.id}'/>" target="_blank">查看 </a>
