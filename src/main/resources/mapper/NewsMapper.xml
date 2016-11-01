@@ -117,6 +117,12 @@
 		<if test="newsAbstract !='' or newsAbstract !=null">
 		,abstract=#{newsAbstract} 
 		</if>
+		<if test="checkStatus==0">
+			,publish_time=null
+		</if>
+		<if test="checkStatus==1">
+			,publish_time=now()
+		</if>
 		,update_time=now(),check_status=#{checkStatus}
 		 where id=#{id};
 	</update>
