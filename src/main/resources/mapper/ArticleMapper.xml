@@ -161,12 +161,12 @@
 	</delete>
 	
 	<insert id="insertArticle" parameterType="Article" useGeneratedKeys="true" keyProperty="id" >
-		insert into article(user_id) values(#{user.userId})
+		insert into article(user_id,create_time) values(#{user.userId},now())
 	</insert>
 	
 	<update id="updateArticle" parameterType="Article">
 		update article set article_type=#{articleType.typeId},keywords=#{keywords},
-			author=#{author},title=#{title},create_time=now(),source=#{source},
+			author=#{author},title=#{title},source=#{source},
 			content=#{content,javaType=string,jdbcType=CLOB},abstract=#{articleAbstract},
 			check_status=0
 		 where id=#{id}
