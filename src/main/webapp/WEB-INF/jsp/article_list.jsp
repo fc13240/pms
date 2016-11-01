@@ -66,7 +66,7 @@
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
-							  <th class="center" width="40px">序号</th>
+							  <th class="center" width="20px">序号</th>
 							 <th width="150px">文章标题</th>
 							  <th width="80px">作者 </th>
 							  <th width="50px">发布时间</th>
