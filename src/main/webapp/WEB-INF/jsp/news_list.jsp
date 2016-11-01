@@ -94,7 +94,7 @@
 								<td style="text-align:center">${news.source}</td>
 								<td style="text-align:center">
 								<a href="<s:url value='/news/updateNewsForm.html?newsId=${news.id}'/>"> 编辑 </a>
-								<a href="<s:url value='/news/getUserNewsById.html'/>?newsId=<c:out value='${news.id}'/>" target="_blank">查看 </a>
+								<a href="<s:url value='/news/getUserNewsById.html'/>?newsId=<c:out value='${news.id}'/>" target="_blank">预览 </a>
 								<c:if test="${news.checkStatus==0}">
 								<a href="<s:url value='/news/publishNews.html?newsId=${news.id}'/>"> 发布 </a>
 								</c:if>
