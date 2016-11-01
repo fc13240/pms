@@ -136,7 +136,6 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public void updateArticle(Article article) {
 		articleDao.updateArticle(article);
-		
 	}
 
 	@Override
