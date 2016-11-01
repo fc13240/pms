@@ -36,7 +36,7 @@
 						  <table class="search-table">
 							  <tr>
 							  <td>
-								<input style="width:450px;height:34px;" name="typeName" placeholder="输入新的分类名称" class="t-input form-control"/>							  
+								<input style="width:450px;height:34px;" name="typeName" placeholder="输入新的分类名称" class="t-input form-control" required/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">添加</button>

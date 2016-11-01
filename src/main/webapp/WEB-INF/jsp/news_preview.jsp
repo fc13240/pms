@@ -86,7 +86,7 @@
 			
 			<div>
 				<div style="float:left;margin-left: 60px;" >作者：${news.author}</div>
-				<div style="float:left;margin-left: 800px;" >创建时间：${news.createTime}</div>
+				<div style="float:left;margin-left: 800px;" ><fmt:formatDate value="${news.publishTime}" pattern="yyyy年MM月dd日 HH:mm"/></div>
 			</div>
 			<br/>
 			<div>

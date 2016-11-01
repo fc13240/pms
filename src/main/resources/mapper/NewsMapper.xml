@@ -131,12 +131,16 @@
 	
 	<update id="updateNewsInfo" parameterType="News">
 		update news set news_type=#{newsType.typeId},keywords=#{keywords},author=#{author},title=#{title},source=#{source},
-						content=#{content,javaType=string,jdbcType=CLOB},abstract=#{newsAbstract},update_time=now(),check_status=#{checkStatus}
+						content=#{content,javaType=string,jdbcType=CLOB},abstract=#{newsAbstract},update_time=now()
+						,check_status=#{checkStatus}
+						<if test="checkStatus==1">
+							,publish_time=now()
+						</if>
 					where id=#{id}
 	</update>
 	
 	<update id="updateNewsCheckStatus" parameterType="int">
-		update news set check_status=1 where id=#{id}
+		update news set check_status=1,publish_time=now() where id=#{id}
 	</update>
 	
 	<update id="updateNewsType" parameterType="NewsType">
