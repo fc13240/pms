@@ -165,7 +165,11 @@
 	</insert>
 	
 	<update id="updateArticle" parameterType="Article">
-		update article set article_type=#{articleType.typeId},keywords=#{keywords},author=#{author},title=#{title},create_time=now(),source=#{source},content=#{content,javaType=string,jdbcType=CLOB},abstract=#{articleAbstract}  where id=#{id}
+		update article set article_type=#{articleType.typeId},keywords=#{keywords},
+			author=#{author},title=#{title},create_time=now(),source=#{source},
+			content=#{content,javaType=string,jdbcType=CLOB},abstract=#{articleAbstract},
+			check_status=0
+		 where id=#{id}
 	</update>
 	
 	<select id="getCheckedArticleList" parameterType="Page"  resultMap="ArticleResultMap">
