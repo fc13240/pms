@@ -170,8 +170,8 @@ height:37px;
 									</tbody>
 								</table>	
 							<div class="form-actions">
-								<button type="submit" style="display:inline;margin-right:540px;" class="t-btn3 button button-primary  button-rounded">提交</button>
-								<button type="button" class="t-btn3 button button-primary  button-rounded">返回</button>
+								<button type="submit" style="display:inline;margin-left:500px;" class="t-btn3 button button-primary  button-rounded">提交</button>
+								
 							</div>		
 							</form>
 							
