@@ -1097,6 +1097,6 @@ CREATE TABLE IF NOT EXISTS article_comments (
 	content  VARCHAR(1000),
 	article_id INT NOT NULL,
 	user_id INT NOT NULL,
-	CONSTRAINT fk_article_comments_article_id FOREIGN KEY (article_id) REFERENCES article(id) , 
-	CONSTRAINT fk_article_comments_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) 
+	CONSTRAINT fk_article_comments_article_id FOREIGN KEY (article_id) REFERENCES article(id)  ON DELETE CASCADE, 
+	CONSTRAINT fk_article_comments_user_id FOREIGN KEY (user_id)  REFERENCES users(user_id) ON DELETE CASCADE 
 );
