@@ -46,4 +46,6 @@ public interface ArticleDao {
 	int searchAllArticleCount(ArticleSearchCondition searchCondition);
 	
 	void deleteNullData();
+
+	int getArticleCountByType(int typeId);
 }

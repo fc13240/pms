@@ -103,8 +103,14 @@ public class ArticleController {
 	}
 	
 	@RequestMapping(path="/deleteArticleType", method=RequestMethod.GET)
-	public void deleteArticleType(int typeId) {
-		articleService.deleteArticleType(typeId);
+	public void deleteArticleType(int typeId,PrintWriter out) {
+		int count = articleService.getArticleCountByType(typeId);
+		if(count<=0){
+			articleService.deleteArticleType(typeId);
+			out.write("删除成功！");
+		}else{
+			out.write("该分类已被使用，不能删除！");
+		}
 	}
 	
 	@RequestMapping(path="/updateArticleType", method=RequestMethod.GET)
