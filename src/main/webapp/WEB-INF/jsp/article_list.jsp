@@ -29,7 +29,7 @@
 				    <div class="cl top1" style="height:10px;">
 				    
 					  <form class="form-inline" action="<s:url value='/article/searchUserArticles.html'/>" method="get">
-						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
+						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1" required/>
 						  <div class="t-third">
 
 						  <table class="search-table">
