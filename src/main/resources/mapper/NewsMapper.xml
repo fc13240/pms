@@ -134,6 +134,9 @@
 		update news set news_type=#{newsType.typeId},keywords=#{keywords},author=#{author},title=#{title},source=#{source},
 						content=#{content,javaType=string,jdbcType=CLOB},abstract=#{newsAbstract},update_time=now()
 						,check_status=#{checkStatus}
+						<if test="checkStatus==0">
+							,publish_time=null
+						</if>
 						<if test="checkStatus==1">
 							,publish_time=now()
 						</if>
