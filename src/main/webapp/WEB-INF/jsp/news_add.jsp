@@ -142,7 +142,7 @@ height:37px;
 									<tr>
 										<th>关键字</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" required name="keywords" maxlength="120"/>
+											<input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔"  name="keywords" maxlength="120"/>
 										</td>
 									</tr>
 									<tr>

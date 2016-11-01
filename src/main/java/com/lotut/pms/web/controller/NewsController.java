@@ -41,7 +41,7 @@ public class NewsController {
 		if(page.getCurrentPage()<1){
 			page.setCurrentPage(1);
 		}
-		newsService.deleteNullData();
+		//newsService.deleteNullData();
 		int userId=PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
 		List<News> news=newsService.getUserNewsByPage(page);

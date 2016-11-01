@@ -131,7 +131,7 @@ height:37px;
 									<tr>
 										<th>作者</th>
 										<td>
-										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author" required maxlength="30"/>
+										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author" maxlength="30"/>
 										</td>
 									</tr>						
 									<tr>
@@ -143,7 +143,7 @@ height:37px;
 									<tr>
 										<th>关键字</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="120" required/>
+											<input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="120"/>
 										</td>
 									</tr>
 							<!-- 	<tr>
