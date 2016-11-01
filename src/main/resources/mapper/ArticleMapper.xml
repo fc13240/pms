@@ -148,6 +148,10 @@
 		
 	</insert>
 	
+	<select id="getArticleCountByType" parameterType="int" resultType="int">
+		select count(*) from article where article_type=#{typeId}
+	</select>
+	
 	<delete id="deleteArticleType" parameterType="int">
 		delete from article_type where type_id = #{typeId}
 	</delete>

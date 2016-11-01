@@ -177,4 +177,9 @@ public class ArticleServiceImpl implements ArticleService {
 		articleDao.deleteNullData();
 	}
 
+	@Override
+	public int getArticleCountByType(int typeId) {
+		return articleDao.getArticleCountByType(typeId);
+	}
+
 }

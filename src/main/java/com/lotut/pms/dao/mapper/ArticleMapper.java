@@ -48,5 +48,7 @@ public interface ArticleMapper {
 	int searchAllArticleCount(ArticleSearchCondition searchCondition);
 	
 	void deleteNullData();
+
+	int getArticleCountByType(int typeId);
 	
 }
