@@ -148,6 +148,10 @@
 		
 	</insert>
 	
+	<select id="getArticleCountByType" parameterType="int" resultType="int">
+		select count(*) from article where article_type=#{typeId}
+	</select>
+	
 	<delete id="deleteArticleType" parameterType="int">
 		delete from article_type where type_id = #{typeId}
 	</delete>
@@ -161,11 +165,15 @@
 	</delete>
 	
 	<insert id="insertArticle" parameterType="Article" useGeneratedKeys="true" keyProperty="id" >
-		insert into article(user_id) values(#{user.userId})
+		insert into article(user_id,create_time) values(#{user.userId},now())
 	</insert>
 	
 	<update id="updateArticle" parameterType="Article">
-		update article set article_type=#{articleType.typeId},keywords=#{keywords},author=#{author},title=#{title},create_time=now(),source=#{source},content=#{content,javaType=string,jdbcType=CLOB},abstract=#{articleAbstract}  where id=#{id}
+		update article set article_type=#{articleType.typeId},keywords=#{keywords},
+			author=#{author},title=#{title},source=#{source},update_time=now(),
+			content=#{content,javaType=string,jdbcType=CLOB},abstract=#{articleAbstract},
+			check_status=0
+		 where id=#{id}
 	</update>
 	
 	<select id="getCheckedArticleList" parameterType="Page"  resultMap="ArticleResultMap">

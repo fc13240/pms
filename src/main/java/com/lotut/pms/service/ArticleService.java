@@ -44,4 +44,6 @@ public interface ArticleService {
 	UserArticle getCheckedArticleList(Page page,HttpSession session);
 	
 	void deleteNullData();
+
+	int getArticleCountByType(int typeId);
 }

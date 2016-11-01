@@ -136,7 +136,6 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public void updateArticle(Article article) {
 		articleDao.updateArticle(article);
-		
 	}
 
 	@Override
@@ -176,6 +175,11 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public void deleteNullData() {
 		articleDao.deleteNullData();
+	}
+
+	@Override
+	public int getArticleCountByType(int typeId) {
+		return articleDao.getArticleCountByType(typeId);
 	}
 
 }

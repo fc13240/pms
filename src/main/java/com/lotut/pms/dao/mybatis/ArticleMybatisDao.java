@@ -123,6 +123,11 @@ public class ArticleMybatisDao extends SqlSessionDaoSupport implements ArticleDa
 	public void deleteNullData() {
 		articleMapper.deleteNullData();
 	}
+
+	@Override
+	public int getArticleCountByType(int typeId) {
+		return articleMapper.getArticleCountByType(typeId);
+	}
 	
 	
 
