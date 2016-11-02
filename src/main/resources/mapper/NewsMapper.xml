@@ -121,7 +121,7 @@
 		update news set news_type=#{newsType.typeId},keywords=#{keywords},author=#{author},title=#{title},source=#{source},
 						content=#{content,javaType=string,jdbcType=CLOB},abstract=#{newsAbstract},update_time=now()
 						,check_status=#{checkStatus},user_id=#{user.userId}
-						<if test="smallImgUrl!='' and smallImgUrl!=null">
+						<if test="smallImgUrl!=''">
 							,small_img_url=#{smallImgUrl}
 						</if>
 						<if test="checkStatus==0">

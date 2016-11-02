@@ -121,6 +121,7 @@ public class NewsController {
 		User user =new User();
 		user.setUserId(userId);
 		news.setUser(user);
+		System.out.println(news.getSmallImgUrl().length());
 		System.out.println(news.getSmallImgUrl());
 		newsService.updateNewsInfo(news);
 		return "redirect:/news/list.html";
