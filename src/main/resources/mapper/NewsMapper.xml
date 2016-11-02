@@ -100,10 +100,6 @@
 		delete from news where id=#{newsId}
 	</delete>
 	
-	<insert id="insertNews" parameterType="News" useGeneratedKeys="true" keyProperty="id" >
-		insert into news(user_id) values(#{user.userId})
-	</insert>
-	
 	<insert id="saveNews" parameterType="News">
 		insert into news(news_type,keywords,author,title,source,content,abstract,update_time,small_img_url,check_status,user_id,publish_time)
 		values(#{newsType.typeId},#{keywords,javaType=string,jdbcType=VARCHAR},#{author,javaType=string,jdbcType=VARCHAR},#{title},

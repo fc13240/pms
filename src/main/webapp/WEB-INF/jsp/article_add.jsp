@@ -113,7 +113,7 @@ height:37px;
 									<tr>
 										<th width="80">文章分类</th>
 										<td>
-											<input name="id" value="${articleId }" type="hidden"/>
+											<%-- <input name="id" value="${articleId }" type="hidden"/> --%>
 											<select name="articleType.typeId" class="form-control" style="width:120px;" required>
 												<option value="">--请选择--</option>
 												<c:forEach items="${articleTypes }" var="articleType">

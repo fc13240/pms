@@ -165,9 +165,13 @@
 	</delete>
 	
 	<insert id="insertArticle" parameterType="Article" useGeneratedKeys="true" keyProperty="id" >
-		insert into article(user_id,create_time) values(#{user.userId},now())
+		insert into article(article_type,keywords,author,title,source,content,abstract,update_time,check_status,user_id)
+		values(#{articleType.typeId},#{keywords,javaType=string,jdbcType=VARCHAR},#{author,javaType=string,jdbcType=VARCHAR},#{title},
+		#{source,javaType=string,jdbcType=VARCHAR},#{content,javaType=string,jdbcType=CLOB},#{articleAbstract,javaType=string,jdbcType=VARCHAR}
+		,now(),0,#{user.userId}
+		)
 	</insert>
-	
+
 	<update id="updateArticle" parameterType="Article">
 		update article set article_type=#{articleType.typeId},keywords=#{keywords},
 			author=#{author},title=#{title},source=#{source},update_time=now(),
@@ -186,11 +190,6 @@
 	<select id="getCheckedArticleCount" parameterType="int" resultType="int">
 		SELECT count(*)
 		FROM article n LEFT JOIN article_type nt ON  n.article_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
-	</select>
-	
-	<delete id="deleteNullData">
-		delete from article where title is null and content is null and keywords is null
-	</delete>	
-	
+	</select>	
   </mapper>
   

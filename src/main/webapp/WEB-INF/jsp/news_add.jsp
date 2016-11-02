@@ -148,7 +148,7 @@ height:37px;
 									<tr>
 										<th>缩略图</th>
 										<td>
-											<input  type="text" id="smallImgUrl"  name="smallImgUrl" />
+											<input  type="hidden" id="smallImgUrl"  name="smallImgUrl" />
 											<input style="width:300px;display:inline;" type="text" id="newsThumbnailname"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=newsThumbnail]').click();" />
 											<button type="button" onclick="uploadImg()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>

@@ -126,21 +126,27 @@ public class ArticleController {
 	}
 	@RequestMapping(path="/addArticleForm")
 	public String addArticleForm(Model model) {
-		int userId = PrincipalUtils.getCurrentUserId();
-		Article article = new Article();
-		User user =new User();
-		user.setUserId(userId);
-		article.setUser(user);
-		articleService.insertArticle(article);
+//		int userId = PrincipalUtils.getCurrentUserId();
+//		Article article = new Article();
+//		User user =new User();
+//		user.setUserId(userId);
+//		article.setUser(user);
+//		articleService.insertArticle(article);
 		List<ArticleType> articleTypes=articleService.getAllArticleTypes();
-		model.addAttribute("articleId", article.getId());
+//		model.addAttribute("articleId", article.getId());
 		model.addAttribute("articleTypes", articleTypes);
 		return "article_add";
 	}	
 	
 	@RequestMapping(path="/saveArticle")
 	public String saveArticle(Article article) {
-		articleService.updateArticle(article);
+		//articleService.updateArticle(article);
+		
+		int userId = PrincipalUtils.getCurrentUserId();
+		User user =new User();
+		user.setUserId(userId);
+		article.setUser(user);
+		articleService.insertArticle(article);
 		return "redirect:/article/list.html";
 	}
 	
