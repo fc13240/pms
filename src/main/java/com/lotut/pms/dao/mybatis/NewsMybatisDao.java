@@ -61,8 +61,8 @@ public class NewsMybatisDao extends SqlSessionDaoSupport implements NewsDao{
 	}
 	
 	@Override
-	public void updateNews(News news) {
-		newsMapper.updateNews(news);
+	public void saveNews(News news) {
+		newsMapper.saveNews(news);
 	}
 	
 	@Override
@@ -99,12 +99,6 @@ public class NewsMybatisDao extends SqlSessionDaoSupport implements NewsDao{
 	@Override
 	public void updateNewsCheckStatus(int newsId) {
 		newsMapper.updateNewsCheckStatus(newsId);
-	}
-
-	@Override
-	public void deleteNullData() {
-		newsMapper.deleteNullData();
-		
 	}
 	
 }

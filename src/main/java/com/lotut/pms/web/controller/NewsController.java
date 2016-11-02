@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lotut.pms.domain.News;
-import com.lotut.pms.domain.NewsImg;
 import com.lotut.pms.domain.NewsSearchCondition;
 import com.lotut.pms.domain.NewsType;
 import com.lotut.pms.domain.Page;
@@ -82,14 +81,7 @@ public class NewsController {
 
 	@RequestMapping(path="/addNewsForm")
 	public String addNewsForm(Model model) {
-		int userId = PrincipalUtils.getCurrentUserId();
-		News news = new News();
-		User user =new User();
-		user.setUserId(userId);
-		news.setUser(user);
-		newsService.insertNews(news);
 		List<NewsType> newsTypes = newsService.getAllNewsTypes();
-		model.addAttribute("newsId", news.getId());
 		model.addAttribute("newsTypes", newsTypes);
 		return "news_add";
 	}
@@ -100,16 +92,18 @@ public class NewsController {
 	
 	@RequestMapping(path="/saveNews")
 	public String saveNews(News news) {
-		newsService.updateNews(news);
+		int userId = PrincipalUtils.getCurrentUserId();
+		User user =new User();
+		user.setUserId(userId);
+		news.setUser(user);
+		newsService.saveNews(news);
 		return "redirect:/news/list.html";
 	}
 	
 	@RequestMapping(path="/uploadNewsThumbnail")
-	public void uploadNewsThumbnail(MultipartFile file,int newsId,PrintWriter out) {
-		NewsImg newsImg = new NewsImg();
-		newsImg.setNewsId(newsId);
-		newsService.insertNewsImage(newsImg, file);
-		out.write("success");
+	public void uploadNewsThumbnail(MultipartFile file,PrintWriter out) {
+		String  smallImgUrl = newsService.insertNewsImage(file);
+		out.write(smallImgUrl);
 	}
 	
 	@RequestMapping(path="/updateNewsForm")
@@ -123,6 +117,11 @@ public class NewsController {
 	
 	@RequestMapping(path="/updateNews")
 	public String updateNews(News news) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		User user =new User();
+		user.setUserId(userId);
+		news.setUser(user);
+		System.out.println(news.getSmallImgUrl());
 		newsService.updateNewsInfo(news);
 		return "redirect:/news/list.html";
 	}

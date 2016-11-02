@@ -104,34 +104,19 @@
 		insert into news(user_id) values(#{user.userId})
 	</insert>
 	
-	<update id="updateNews" parameterType="News">
-		update news set news_type=#{newsType.typeId},keywords=#{keywords},
-		<if test="author !='' or author !=null">
-		author=#{author},
-		</if>
-		title=#{title},
-		<if test="source !='' or source !=null">
-		source=#{source},
-		</if>
-		content=#{content,javaType=string,jdbcType=CLOB}
-		<if test="newsAbstract !='' or newsAbstract !=null">
-		,abstract=#{newsAbstract} 
-		</if>
+	<insert id="saveNews" parameterType="News">
+		insert into news(news_type,keywords,author,title,source,content,abstract,update_time,small_img_url,check_status,user_id,publish_time)
+		values(#{newsType.typeId},#{keywords,javaType=string,jdbcType=VARCHAR},#{author,javaType=string,jdbcType=VARCHAR},#{title},
+		#{source,javaType=string,jdbcType=VARCHAR},#{content,javaType=string,jdbcType=CLOB},#{newsAbstract,javaType=string,jdbcType=VARCHAR}
+		,now(),#{smallImgUrl,javaType=string,jdbcType=VARCHAR},#{checkStatus},#{user.userId},
 		<if test="checkStatus==0">
-			,publish_time=null
+			publish_time=null
 		</if>
 		<if test="checkStatus==1">
-			,publish_time=now()
+			publish_time=now()
 		</if>
-		,update_time=now(),check_status=#{checkStatus}
-		 where id=#{id};
-	</update>
-
-
-	<!-- <insert id="addNewsImage" parameterType="NewsImg">
-		insert into news_imgs(img_url,news_id) values(#{imgUrl},#{newsId})
-	</insert> -->
-	
+		)
+	</insert>
 	<update id="addNewsImage" parameterType="NewsImg">
 		update news set small_img_url=#{imgUrl} where id=#{newsId}
 	</update>
@@ -139,7 +124,10 @@
 	<update id="updateNewsInfo" parameterType="News">
 		update news set news_type=#{newsType.typeId},keywords=#{keywords},author=#{author},title=#{title},source=#{source},
 						content=#{content,javaType=string,jdbcType=CLOB},abstract=#{newsAbstract},update_time=now()
-						,check_status=#{checkStatus}
+						,check_status=#{checkStatus},user_id=#{user.userId}
+						<if test="smallImgUrl!='' and smallImgUrl!=null">
+							,small_img_url=#{smallImgUrl}
+						</if>
 						<if test="checkStatus==0">
 							,publish_time=null
 						</if>
@@ -169,8 +157,4 @@
 	<insert id="addNewsType" parameterType="NewsType">
 		insert into news_type(type_name) values(#{typeName})
 	</insert>
-	
-	<delete id="deleteNullData">
-		delete from news where title is null and content is null and keywords is null
-	</delete>
 </mapper>

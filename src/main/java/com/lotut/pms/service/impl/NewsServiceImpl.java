@@ -8,7 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.dao.NewsDao;
 import com.lotut.pms.domain.News;
-import com.lotut.pms.domain.NewsImg;
 import com.lotut.pms.domain.NewsSearchCondition;
 import com.lotut.pms.domain.NewsType;
 import com.lotut.pms.domain.Page;
@@ -64,20 +63,19 @@ public class NewsServiceImpl implements NewsService {
 	}
 	
 	@Override
-	public void updateNews(News news) {
-		newsDao.updateNews(news);
+	public void saveNews(News news) {
+		newsDao.saveNews(news);
 	}
 	
 
 	@Override
 	@Transactional
-	public void insertNewsImage(NewsImg newsImg,MultipartFile multipartFile) {
+	public String insertNewsImage(MultipartFile multipartFile) {
 		String defaultSaveDir = Settings.NEWS_SMALL_IMAGE_PATH;
 		String defaultSaveUrl = Settings.NEWS_SMALL_IMAGE_URL;
 		int userId = PrincipalUtils.getCurrentUserId();
 		String saveImageUrl = FileOption.uploaffile(userId, multipartFile, defaultSaveDir, defaultSaveUrl);
-		newsImg.setImgUrl(saveImageUrl);
-		newsDao.addNewsImage(newsImg);
+		return saveImageUrl;
 	}
 	
 	@Override
@@ -108,11 +106,5 @@ public class NewsServiceImpl implements NewsService {
 	@Override
 	public void updateNewsCheckStatus(int newsId) {
 		newsDao.updateNewsCheckStatus(newsId);
-	}
-
-	@Override
-	public void deleteNullData() {
-		newsDao.deleteNullData();
-		
 	}
 }

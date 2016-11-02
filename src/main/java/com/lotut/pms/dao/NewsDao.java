@@ -25,7 +25,7 @@ public interface NewsDao {
 	
 	void insertNews(News news);
 	
-	void updateNews(News news);
+	void saveNews(News news);
 	
 	void addNewsImage(NewsImg newsImg);
 	
@@ -40,6 +40,4 @@ public interface NewsDao {
 	void addNewsType(NewsType newsType);
 	
 	void updateNewsCheckStatus(int newsId);
-	
-	void deleteNullData();
 }

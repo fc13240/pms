@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lotut.pms.domain.News;
-import com.lotut.pms.domain.NewsImg;
 import com.lotut.pms.domain.NewsSearchCondition;
 import com.lotut.pms.domain.NewsType;
 import com.lotut.pms.domain.Page;
@@ -27,17 +26,15 @@ public interface NewsService {
 	
 	void insertNews(News news);
 	
-	void updateNews(News news);
+	void saveNews(News news);
 	
 	void updateNewsInfo(News news);
 	
-	void insertNewsImage(NewsImg newsImg,MultipartFile multipartFile);
+	String insertNewsImage(MultipartFile multipartFile);
 	
 	void updateNewsType(NewsType newsType);
 	
 	int getNewsTypeCount(NewsType newsType);
-
-	void deleteNullData();
 	
 	void deleteNewsType(NewsType newsType);
 	
