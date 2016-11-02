@@ -110,10 +110,10 @@
 		#{source,javaType=string,jdbcType=VARCHAR},#{content,javaType=string,jdbcType=CLOB},#{newsAbstract,javaType=string,jdbcType=VARCHAR}
 		,now(),#{smallImgUrl,javaType=string,jdbcType=VARCHAR},#{checkStatus},#{user.userId},
 		<if test="checkStatus==0">
-			publish_time=null
+			null
 		</if>
 		<if test="checkStatus==1">
-			publish_time=now()
+			now()
 		</if>
 		)
 	</insert>
