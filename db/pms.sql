@@ -1100,3 +1100,6 @@ CREATE TABLE IF NOT EXISTS article_comments (
 	CONSTRAINT fk_article_comments_article_id FOREIGN KEY (article_id) REFERENCES article(id)  ON DELETE CASCADE, 
 	CONSTRAINT fk_article_comments_user_id FOREIGN KEY (user_id)  REFERENCES users(user_id) ON DELETE CASCADE 
 );
+
+alter table news add column up_vote  INT DEFAULT 0 comment '赞';
+alter table news add column down_vote  INT DEFAULT 0 comment '踩';
