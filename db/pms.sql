@@ -1103,3 +1103,13 @@ CREATE TABLE IF NOT EXISTS article_comments (
 
 alter table news add column up_vote  INT DEFAULT 0 comment '赞';
 alter table news add column down_vote  INT DEFAULT 0 comment '踩';
+
+CREATE TABLE IF NOT EXISTS news_comments (
+	comment_id INT AUTO_INCREMENT PRIMARY KEY  ,
+	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+	content  VARCHAR(1000),
+	news_id INT NOT NULL,
+	user_id INT NOT NULL,
+	CONSTRAINT fk_news_comments_news_id FOREIGN KEY (news_id) REFERENCES news(id)  ON DELETE CASCADE, 
+	CONSTRAINT fk_news_comments_user_id FOREIGN KEY (user_id)  REFERENCES users(user_id) ON DELETE CASCADE 
+);
