@@ -165,10 +165,10 @@
 	</delete>
 	
 	<insert id="insertArticle" parameterType="Article" useGeneratedKeys="true" keyProperty="id" >
-		insert into article(article_type,keywords,author,title,source,content,abstract,update_time,check_status,user_id)
+		insert into article(article_type,keywords,author,title,source,content,abstract,update_time,check_status,user_id,create_time)
 		values(#{articleType.typeId},#{keywords,javaType=string,jdbcType=VARCHAR},#{author,javaType=string,jdbcType=VARCHAR},#{title},
 		#{source,javaType=string,jdbcType=VARCHAR},#{content,javaType=string,jdbcType=CLOB},#{articleAbstract,javaType=string,jdbcType=VARCHAR}
-		,now(),0,#{user.userId}
+		,now(),0,#{user.userId},now()
 		)
 	</insert>
 

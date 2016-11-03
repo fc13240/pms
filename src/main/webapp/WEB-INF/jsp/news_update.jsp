@@ -173,7 +173,7 @@ height:37px;
 								<div class="form-actions">
 									<button type="submit" style="display:none;" id="submitBtn">提交</button>
 								<button type="button" style="display:inline;margin-left:500px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(0)">保存</button>
-								<button type="button" style="margin-left:20px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(1)">发布</button>
+								<!-- <button type="button" style="margin-left:20px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(1)">发布</button> -->
 								</div>		
 							</form>
 							<form action="<s:url value='/news/uploadNewsThumbnail.html'/>" id="uploadNewsThumbnailForm" method="post" enctype="multipart/form-data" class="form-horizontal">

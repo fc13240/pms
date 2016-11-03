@@ -147,7 +147,7 @@
 	</delete>
 	
 	<insert id="saveNews" parameterType="News">
-		insert into news(news_type,keywords,author,title,source,content,abstract,update_time,small_img_url,check_status,user_id,publish_time)
+		insert into news(news_type,keywords,author,title,source,content,abstract,update_time,small_img_url,check_status,user_id,publish_time,create_time)
 		values(#{newsType.typeId},#{keywords,javaType=string,jdbcType=VARCHAR},#{author,javaType=string,jdbcType=VARCHAR},#{title},
 		#{source,javaType=string,jdbcType=VARCHAR},#{content,javaType=string,jdbcType=CLOB},#{newsAbstract,javaType=string,jdbcType=VARCHAR}
 		,now(),#{smallImgUrl,javaType=string,jdbcType=VARCHAR},#{checkStatus},#{user.userId},
@@ -156,7 +156,7 @@
 		</if>
 		<if test="checkStatus==1">
 			now()
-		</if>
+		</if>,now()
 		)
 	</insert>
 	<update id="addNewsImage" parameterType="NewsImg">
