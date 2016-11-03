@@ -44,15 +44,6 @@ public class NewsController {
 		int userId=PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
 		if(PrincipalUtils.isNews()){
-		List<News> news=newsService.getUserNewsByPage(page);
-		int totalCount=(int)newsService.getUserNewsCount(userId);
-		page.setTotalRecords(totalCount);
-		List<NewsType> allNewsType=newsService.getAllNewsTypes();
-		model.addAttribute("news", news);
-		model.addAttribute("page", page);
-		model.addAttribute("allNewsType", allNewsType);
-		return "news_list";
-		}else{
 			List<News> news=newsService.getAllNewsByPage(page);
 			int totalCount=(int)newsService.getAllNewsCount(userId);
 			page.setTotalRecords(totalCount);
@@ -61,6 +52,15 @@ public class NewsController {
 			model.addAttribute("page", page);
 			model.addAttribute("allNewsType", allNewsType);
 			return "news_check_list";
+		}else{
+			List<News> news=newsService.getUserNewsByPage(page);
+			int totalCount=(int)newsService.getUserNewsCount(userId);
+			page.setTotalRecords(totalCount);
+			List<NewsType> allNewsType=newsService.getAllNewsTypes();
+			model.addAttribute("news", news);
+			model.addAttribute("page", page);
+			model.addAttribute("allNewsType", allNewsType);
+			return "news_list";
 		}
 	}
 	
