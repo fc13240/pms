@@ -107,4 +107,33 @@ public class NewsServiceImpl implements NewsService {
 	public void updateNewsCheckStatus(int newsId) {
 		newsDao.updateNewsCheckStatus(newsId);
 	}
+
+	@Override
+	public void auditPass(News news) {
+		newsDao.auditPass(news);
+	}
+
+	@Override
+	public List<News> getAllNewsByPage(Page page) {
+		
+		return newsDao.getAllNewsByPage(page);
+	}
+
+	@Override
+	public List<News> searchAllNewsByPage(NewsSearchCondition searchCondition) {
+		
+		return newsDao.searchAllNewsByPage(searchCondition);
+	}
+
+	@Override
+	public int getAllNewsCount(int userId) {
+		
+		return newsDao.getAllNewsCount(userId);
+	}
+
+	@Override
+	public int searchAllNewsCount(NewsSearchCondition searchCondition) {
+		
+		return newsDao.searchAllNewsCount(searchCondition);
+	}
 }

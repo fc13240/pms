@@ -100,5 +100,34 @@ public class NewsMybatisDao extends SqlSessionDaoSupport implements NewsDao{
 	public void updateNewsCheckStatus(int newsId) {
 		newsMapper.updateNewsCheckStatus(newsId);
 	}
+
+	@Override
+	public void auditPass(News news) {
+		newsMapper.auditPass(news);
+	}
+
+	@Override
+	public List<News> getAllNewsByPage(Page page) {
+		
+		return newsMapper.getAllNewsByPage(page);
+	}
+
+	@Override
+	public List<News> searchAllNewsByPage(NewsSearchCondition searchCondition) {
+		
+		return newsMapper.searchAllNewsByPage(searchCondition);
+	}
+
+	@Override
+	public int getAllNewsCount(int userId) {
+		
+		return newsMapper.getAllNewsCount(userId);
+	}
+
+	@Override
+	public int searchAllNewsCount(NewsSearchCondition searchCondition) {
+		
+		return newsMapper.searchAllNewsCount(searchCondition);
+	}
 	
 }

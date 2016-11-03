@@ -41,4 +41,14 @@ public interface NewsService {
 	void addNewsType(NewsType newsType);
 	
 	void updateNewsCheckStatus(int newsId);
+	
+	void auditPass(News news);
+	
+	List<News> getAllNewsByPage	(Page page);
+	
+	List<News> searchAllNewsByPage(NewsSearchCondition searchCondition);
+	
+	int getAllNewsCount(int userId);
+	
+	int searchAllNewsCount(NewsSearchCondition searchCondition);
 }

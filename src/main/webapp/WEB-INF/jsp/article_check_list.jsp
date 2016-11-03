@@ -79,7 +79,10 @@
 							<c:forEach items="${articles}" var="article" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"> ${status.count+ (page.currentPage-1)*page.pageSize} </td>
-								<td style="text-align:center"><c:out value="${article.title}"/></td>
+								<td style="text-align:center"><a target="_blank" href="<s:url value='/article/preview.html?id=${article.id}'/>" >
+								<c:out value="${article.title}"/>
+								</a>
+								</td>
 								<td style="text-align:center"><c:out value="${article.author}"/></td>
 								<c:if test="${article.checkStatus==1}">
 								<td style="text-align:center"><fmt:formatDate value="${article.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
@@ -98,7 +101,6 @@
 								审核未通过
 								</c:if>
 								</td>
-								<td style="text-align:center"><a target="_blank" href="<s:url value='/article/preview.html?id=${article.id}'/>" >查看</a></td>
 								<td style="text-align:center">
 									<div class="btn-group">
 										   <button style="font-size:15px" type="button" class="btn btn-default dropdown-toggle" 

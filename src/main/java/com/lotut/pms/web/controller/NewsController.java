@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lotut.pms.domain.Article;
 import com.lotut.pms.domain.News;
 import com.lotut.pms.domain.NewsSearchCondition;
 import com.lotut.pms.domain.NewsType;
@@ -42,6 +43,7 @@ public class NewsController {
 		}
 		int userId=PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
+		if(PrincipalUtils.isNews()){
 		List<News> news=newsService.getUserNewsByPage(page);
 		int totalCount=(int)newsService.getUserNewsCount(userId);
 		page.setTotalRecords(totalCount);
@@ -50,6 +52,16 @@ public class NewsController {
 		model.addAttribute("page", page);
 		model.addAttribute("allNewsType", allNewsType);
 		return "news_list";
+		}else{
+			List<News> news=newsService.getAllNewsByPage(page);
+			int totalCount=(int)newsService.getAllNewsCount(userId);
+			page.setTotalRecords(totalCount);
+			List<NewsType> allNewsType=newsService.getAllNewsTypes();
+			model.addAttribute("news", news);
+			model.addAttribute("page", page);
+			model.addAttribute("allNewsType", allNewsType);
+			return "news_check_list";
+		}
 	}
 	
 	
@@ -69,6 +81,24 @@ public class NewsController {
 		model.addAttribute("page", page);
 		model.addAttribute("allNewsType", allNewsType);
 		return "news_list";
+	}
+	
+	@RequestMapping(path="/searchAllNews", method=RequestMethod.GET)
+	public String searchAllNews(@ModelAttribute("searchCondition") NewsSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		List<News> news=newsService.searchAllNewsByPage(searchCondition);
+		int totalCount=newsService.searchAllNewsCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		List<NewsType> allNewsType=newsService.getAllNewsTypes();
+		model.addAttribute("news", news);
+		model.addAttribute("page", page);
+		model.addAttribute("allNewsType", allNewsType);
+		return "news_check_list";
 	}
 	
 	@RequestMapping(path="/getUserNewsById", method=RequestMethod.GET)
@@ -160,6 +190,13 @@ public class NewsController {
 	public String publishNews(int newsId) {
 		newsService.updateNewsCheckStatus(newsId);
 		return "redirect:/news/list.html";
+	}
+	
+	@RequestMapping(path="/audit", method=RequestMethod.GET)
+	public String audit(News news){
+		newsService.auditPass(news);
+		return "redirect:/news/list.html";
+		
 	}
 	
 }

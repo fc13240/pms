@@ -64,13 +64,11 @@
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
-							  <th class="center" width="40px">序号</th>
-							  <th width="100px">新闻标题</th>
-							  <th width="100px">作者 </th>
-							  <th width="90px">发布状态</th>
-							  <th width="60px">创建时间</th>
-							  <th width="100px">发布时间</th>
-							 <!--  <th width="50px">来源</th> -->
+							  <th class="center" width="20px">序号</th>
+							  <th width="150px">文章标题</th>
+							  <th width="80px">作者 </th>
+							  <th width="50px">发布时间</th>
+							  <th width="40px">审核状态</th>
 							  <th width="110px">操作</th>
 							</tr>
 						  </thead>
@@ -78,9 +76,34 @@
 							<c:forEach items="${news}" var="news" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"> ${status.count+ (page.currentPage-1)*page.pageSize} </td>
-								<td style="text-align:center"><c:out value="${news.title}"/></td>
-								<td style="text-align:center"><c:out value="${news.author}"/></td>
 								<td style="text-align:center">
+								<a target="_blank" href="<s:url value='/news/getUserNewsById.html'/>?newsId=<c:out value='${news.id}'/>" >
+								<c:out value="${news.title}"/>
+								</a>
+								</td>
+								<td style="text-align:center"><c:out value="${news.author}"/></td>
+								<c:if test="${news.checkStatus==1}">
+								<td style="text-align:center"><fmt:formatDate value="${news.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								</c:if>
+								<c:if test="${news.checkStatus!=1}">
+								 	<td style="text-align:center"></td>
+								</c:if>
+								<td style="text-align:center">
+								<c:if test="${news.checkStatus==0}">
+								未审核
+								</c:if>
+								<c:if test="${news.checkStatus==1}">
+								已审核
+								</c:if>
+								<c:if test="${news.checkStatus==2}">
+								审核未通过
+								</c:if>
+								</td>
+								<td style="text-align:center">
+									<a  href="javacript:return void" onclick="updateNews(${news.id})">修改</a>
+									<a  href="javacript:return void" onclick="deleteNews(${news.id})">删除</a>
+								</td>
+								<%-- <td style="text-align:center">
 									<c:if test="${news.checkStatus==0}">
 										未发布
 									</c:if>
@@ -89,9 +112,8 @@
 									</c:if>
 								
 								</td>
-								<td style="text-align:center"><fmt:formatDate value="${news.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td	style="text-align:center"><fmt:formatDate value="${news.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								<%-- <td style="text-align:center">${news.source}</td> --%>
+								<td style="text-align:center">${news.source}</td>
 								<td style="text-align:center">
 								<a href="<s:url value='/news/updateNewsForm.html?newsId=${news.id}'/>"> 编辑 </a>
 								<a href="<s:url value='/news/getUserNewsById.html'/>?newsId=<c:out value='${news.id}'/>" target="_blank">预览 </a>
@@ -100,7 +122,7 @@
 								</c:if>
 								<a href="javascript:deleteNews(${news.id})">删除 </a>
 								
-								</td>
+								</td> --%>
 							  </tr>
 							</c:forEach>
 						  </tbody>
@@ -316,6 +338,10 @@ function gotoPageForEnter(event) {
 		});
 		location.reload();
 		
+	}
+	
+	function updateNews(id){
+		window.open("<s:url value='/news/updateNewsForm.html'/>?newsId="+id)
 	}
 	
 </script>
