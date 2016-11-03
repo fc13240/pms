@@ -121,5 +121,9 @@ public interface PatentService {
 	
 	String patentExportExcel(List<Long> patentIds,String exportExcelName) throws IOException;
 	
+	public void cancelRecommendPatent(long patentId);
+	
+	public void recommendPatent(long patentId);	
+	
 }
 

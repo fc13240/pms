@@ -322,5 +322,17 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		patentMapper.updateDocumentStatus(patentStatus, internalCode);
 	}
 
+	@Override
+	public void cancelRecommendPatent(long patentId) {
+		patentMapper.cancelRecommendPatent(patentId);
+		
+	}
+
+	@Override
+	public void recommendPatent(long patentId) {
+		patentMapper.recommendPatent(patentId);
+		
+	}
+
 
 }

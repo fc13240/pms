@@ -122,4 +122,8 @@ public interface PatentDao {
 	
 	void updateDocumentStatus(int patentStatus,String internalCode);
 	
+	void cancelRecommendPatent(long patentId);
+	
+	void recommendPatent(long patentId);
+	
 }
