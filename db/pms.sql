@@ -1113,3 +1113,5 @@ CREATE TABLE IF NOT EXISTS news_comments (
 	CONSTRAINT fk_news_comments_news_id FOREIGN KEY (news_id) REFERENCES news(id)  ON DELETE CASCADE, 
 	CONSTRAINT fk_news_comments_user_id FOREIGN KEY (user_id)  REFERENCES users(user_id) ON DELETE CASCADE 
 );
+
+ALTER TABLE patents ADD COLUMN recommend_status TINYINT DEFAULT 0 COMMENT '0未推荐  1已推荐';

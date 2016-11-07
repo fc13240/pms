@@ -136,4 +136,7 @@ public interface PatentMapper {
 	
 	void updateDocumentStatus(@Param("patentStatus") int patentStatus,@Param("internalCode") String internalCode);
 
+	void cancelRecommendPatent(long patentId);
+	
+	void recommendPatent(long patentId);
 }

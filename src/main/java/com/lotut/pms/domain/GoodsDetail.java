@@ -22,11 +22,16 @@ public class GoodsDetail {
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date addDate;
 	private Date transactionDate;
+	private int recommendStatus;
 
 	
 	
-	
-	
+	public int getRecommendStatus() {
+		return recommendStatus;
+	}
+	public void setRecommendStatus(int recommendStatus) {
+		this.recommendStatus = recommendStatus;
+	}
 	public int getOwner() {
 		return owner;
 	}

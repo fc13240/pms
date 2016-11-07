@@ -341,4 +341,16 @@ public class PatentServiceImpl implements PatentService {
 		return exportExcelPath;
 	}
 
+	@Override
+	public void cancelRecommendPatent(long patentId) {
+		patentDao.cancelRecommendPatent(patentId);
+		
+	}
+
+	@Override
+	public void recommendPatent(long patentId) {
+		patentDao.recommendPatent(patentId);
+		
+	}
+
 }
