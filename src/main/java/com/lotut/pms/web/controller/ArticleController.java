@@ -86,7 +86,6 @@ public class ArticleController {
 		}else{
 			out.write("other");
 		}
-//		return "redirect:/article/list.html";
 		
 	}
 	

@@ -72,7 +72,6 @@
 		<if test="articleType != null and articleType !=''">
 					and  (n.article_type = #{articleType})
 		</if>
-		
 		order by n.check_status desc,n.update_time desc,n.create_time desc,n.publish_time desc limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
@@ -91,7 +90,6 @@
 		<if test="articleType != null and articleType !=''">
 					and  (n.article_type = #{articleType})
 		</if>
-		
 		order by n.check_status desc,n.update_time desc,n.create_time desc,n.publish_time desc limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
@@ -109,6 +107,8 @@
 		<if test="articleType != null and articleType !=''">
 					and  n.article_type = #{articleType}
 		</if>
+		
+		
 	</select>
 	
 	<select id="searchUserArticleCount" parameterType="ArticleSearchCondition" resultType="int" >
@@ -184,7 +184,7 @@
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.create_time,n.publish_time,n.update_time,n.check_status,
 		n.content,nt.type_id ,nt.type_name,u.user_id,u.username
 		FROM article n LEFT JOIN article_type nt ON  n.article_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
-		  limit #{startIndex}, #{pageSize} 
+		  order by n.check_status desc,n.update_time desc,n.create_time desc,n.publish_time desc limit #{startIndex}, #{pageSize} 
 	</select>
 	
 	<select id="getCheckedArticleCount" parameterType="int" resultType="int">
