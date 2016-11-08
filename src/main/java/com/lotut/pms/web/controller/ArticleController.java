@@ -79,9 +79,14 @@ public class ArticleController {
 	}
 	
 	@RequestMapping(path="/audit", method=RequestMethod.GET)
-	public String audit(Article article){
+	public void audit(Article article,PrintWriter out){
 		articleService.auditArticle(article);
-		return "redirect:/article/list.html";
+		if(article.getCheckStatus()==1){
+		out.write(1);
+		}else{
+			out.write("other");
+		}
+//		return "redirect:/article/list.html";
 		
 	}
 	
