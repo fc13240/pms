@@ -353,7 +353,7 @@
 	
 	<select id="getUserTransactionPatents" parameterType="page" resultMap="TransactionPatent">
 		
-		SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,sg.transaction_date,p.patent_name,p.app_no,p.recommend_status,ss.patent_first_column_id,sg.patent_second_column
+		SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,sg.transaction_date,p.patent_name,p.app_no,sg.recommend_status,ss.patent_first_column_id,sg.patent_second_column
 		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id left JOIN sell_second_column  ss ON ss.patent_second_column_id=sg.patent_second_column
 		WHERE  owner=#{userId}  limit #{startIndex}, #{pageSize};
 	
@@ -644,10 +644,10 @@
 	</update>
 	
 	<update id="cancelRecommendPatent">
-		update patents set recommend_status = 0 where patent_id=#{patentId}
+		update sell_patent_goods set recommend_status = 0 where patent_id=#{patentId}
 	</update>
 	
 	<update id="recommendPatent">
-		update patents set recommend_status = 1 where patent_id=#{patentId}
+		update sell_patent_goods set recommend_status = 1 where patent_id=#{patentId}
 	</update>
 </mapper>
