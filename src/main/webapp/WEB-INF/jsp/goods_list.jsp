@@ -199,16 +199,18 @@
 							  </a>
 							  <br/>
 							  &nbsp;
-							  <c:if test="${patent.recommendStatus==0}">
-							  <a href="javascript:return void;"  onclick="recommendPatent(${patent.patentId})">	 
-							  推荐
-							  </a>
-							</c:if>
-							  <c:if test="${patent.recommendStatus==1}">
-							  <a href="javascript:return void;"  onclick="cancelRecommendPatent(${patent.patentId})">
-							  取消推荐
-							  </a> 
-			             	  </c:if>       	  
+							  <c:if test="${patent.status==1}">
+								  <c:if test="${patent.recommendStatus==0}">
+								  <a href="javascript:return void;"  onclick="recommendPatent(${patent.patentId})">	 
+								        推荐
+								  </a>
+								  </c:if>
+								  <c:if test="${patent.recommendStatus==1}">
+								  <a href="javascript:return void;"  onclick="cancelRecommendPatent(${patent.patentId})">
+								       取消推荐
+								  </a> 
+				             	  </c:if>  
+			             	   </c:if>     	  
 							  </td>
 						  </tr>
 						</c:forEach>
