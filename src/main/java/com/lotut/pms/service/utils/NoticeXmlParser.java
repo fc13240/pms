@@ -135,7 +135,7 @@ public class NoticeXmlParser {
 	}
 	
 	private static int getNoticeTypeByName(String noticeName) {
-	    if (noticeName.contains("受理") || noticeName.contains("申请费") || noticeName.contains("费用减缓")) {
+	    if (noticeName.contains("受理") || noticeName.contains("申请费") || noticeName.contains("费用减")) {
 	        return 1;
 	    }
 	    
