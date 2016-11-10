@@ -421,7 +421,7 @@
 	</select>		
 
 	<update id="downTransactionPatent">
-		update sell_patent_goods set status =2,transaction_date=now()
+		update sell_patent_goods set status =2,transaction_date=now(),recommend_status=0
 		 where patent_id = #{patentId};
 		 
 		 update  patents set transaction_status='已出售' where patent_id=#{patentId}	
