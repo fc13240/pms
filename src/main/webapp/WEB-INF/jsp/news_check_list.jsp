@@ -104,7 +104,7 @@
 									<a  href="javacript:return void" onclick="deleteNews(${news.id})">删除</a>
 								</td> --%>
 								<td style="text-align:center">
-									<div class="btn-group">
+									<%-- <div class="btn-group">
 										   <button style="font-size:15px" type="button" class="btn btn-default dropdown-toggle" 
 										      data-toggle="dropdown">
 										      审核 <span class="caret"></span>
@@ -114,7 +114,17 @@
 										      <li class="divider"></li>
 										      <li><a href="<s:url value='/news/audit.html?id=${news.id}&checkStatus=2'/>">审核未通过 </a></li>
 										   </ul>
+									</div> --%>
+									<c:if test="${news.checkStatus!=1}">
+									<div class="btn-group btn-group-lg">
+										  <button id="approved" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="checkNews('${news.id}','1')">审核通过</button>
 									</div>
+									</c:if>
+									<c:if test="${news.checkStatus==1}">
+									<div class="btn-group btn-group-lg">
+										  <button id="unapprove" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="checkNews(${news.id},'2')">审核未通过</button>
+									</div>
+									</c:if>
 									<div class="btn-group btn-group-lg">
 										  <button type="button" style="width: 66px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="deleteNews(${news.id})">删除</button>
 									</div>
@@ -344,6 +354,16 @@ function gotoPageForEnter(event) {
 		window.open("<s:url value='/news/updateNewsForm.html'/>?newsId="+id)
 	}
 	
+	function checkNews(id,checkStatus){
+		 $.ajax({
+			type:"get",
+			url:"<s:url value='/news/audit.html'/>?id="+id+"&checkStatus="+checkStatus,
+			success:function (data){
+				location.reload();
+			}
+		}); 
+		
+	} 
 </script>
 </body>
 </html>

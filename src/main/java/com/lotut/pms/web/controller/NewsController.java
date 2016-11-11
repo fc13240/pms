@@ -193,9 +193,14 @@ public class NewsController {
 	}
 	
 	@RequestMapping(path="/audit", method=RequestMethod.GET)
-	public String audit(News news){
+	public void audit(News news,PrintWriter out){
 		newsService.auditPass(news);
-		return "redirect:/news/list.html";
+		if(news.getCheckStatus()==1){
+			out.write(1);
+		}else{
+			out.write("other");
+		}
+//		return "redirect:/news/list.html";
 		
 	}
 	
