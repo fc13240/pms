@@ -1115,4 +1115,4 @@ CREATE TABLE IF NOT EXISTS news_comments (
 );
 
 ALTER TABLE sell_patent_goods ADD COLUMN recommend_status TINYINT DEFAULT 0 COMMENT '0未推荐  1已推荐';
-		
+ALTER TABLE users MODIFY username VARCHAR(60);		
