@@ -194,7 +194,7 @@ public class KindEditorController {
 			String savePath = Settings.ARTICLE_IMAGE_PATH;
 			StringBuffer url = request.getRequestURL();  
 			String tempContextUrl = url.delete(url.length() - request.getRequestURI().length(), url.length()).toString();
-			String saveUrl = tempContextUrl + "/pms/articleContentImg/";
+			String saveUrl = tempContextUrl + "/articleContentImg/";
 
 			HashMap<String, String> extMap = new HashMap<String, String>();
 			extMap.put("image", "gif,jpg,jpeg,png,bmp");
