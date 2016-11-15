@@ -38,14 +38,14 @@
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.content,n.create_time,n.publish_time,n.update_time,
 		nt.type_id ,nt.type_name,u.user_id,u.username,n.check_status
 		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
-		WHERE n.user_id=#{userId} order by n.check_status desc,n.update_time desc,n.create_time desc,n.publish_time desc limit #{startIndex}, #{pageSize}
+		WHERE n.user_id=#{userId} order by n.check_status asc,n.update_time desc,n.create_time desc,n.publish_time desc limit #{startIndex}, #{pageSize}
 	</select>
 	
 	<select id="getAllNewsByPage" parameterType="Page" resultMap="NewsResultMap">
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.content,n.create_time,n.publish_time,n.update_time,
 		nt.type_id ,nt.type_name,u.user_id,u.username,n.check_status
 		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
-		 order by n.check_status desc,n.update_time desc,n.create_time desc,n.publish_time desc limit #{startIndex}, #{pageSize}
+		 order by n.check_status asc,n.update_time desc,n.create_time desc,n.publish_time desc limit #{startIndex}, #{pageSize}
 	</select>
 	
 	<select id="getUserNewsCount" parameterType="int" resultType="int">
@@ -81,7 +81,7 @@
 		<if test="newsType != null and newsType !=''">
 					and ( n.news_type = #{newsType})
 		</if>
-		order by n.check_status desc,n.update_time desc,n.create_time desc,n.publish_time desc
+		order by n.check_status asc,n.update_time desc,n.create_time desc,n.publish_time desc
 		limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
@@ -99,7 +99,7 @@
 		<if test="newsType != null and newsType !=''">
 					and ( n.news_type = #{newsType})
 		</if>
-		order by n.check_status desc,n.update_time desc,n.create_time desc,n.publish_time desc
+		order by n.check_status asc,n.update_time desc,n.create_time desc,n.publish_time desc
 		limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
