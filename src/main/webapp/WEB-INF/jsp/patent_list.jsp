@@ -211,13 +211,11 @@
 						<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  >添加日降序</button>
 							</a> 
 						</td>
-						<se:authorize access="hasRole('ROLE_TRADER')">
 						 <td>
 							<a href="javascript:return void" onclick="batchAddGoods()" >
-							<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-toggle="tooltip" data-placement="right" title="可以将您的专利发布到交易网买卖哦！您也可以去交易管理页面修改您的价格和类别哦！">批量发布交易</button>
+							<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-toggle="tooltip" data-placement="right" title="可以将您的专利发布到 r.lotut.com交易网买卖哦！您也可以去交易管理页面修改您的价格和类别哦！">批量发布交易</button>
 							</a> 
 						</td>	 
-						</se:authorize>	
 						<td>
 							<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportPatents()">表格导出</button>
 						</td>					
@@ -289,10 +287,9 @@
 							  修改
 							  </a> 
 							  <br> 
-							  <se:authorize access="hasRole('ROLE_TRADER')">
 								  <c:if test="${patent.transactionStatus==null}">
 	 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
-					                  	<button class="t-btn2" value="1">加入交易</button> 
+					                  	<button class="t-btn2" value="1" data-toggle="tooltip" data-placement="bottom" title="加入r.lotut.com商城">加入交易</button> 
 				 	                  </a>
 				 	                </c:if>
 				 	                 <c:if test="${patent.transactionStatus != null}">
@@ -300,7 +297,6 @@
 					                  	<font color="red">${patent.transactionStatus}</font>
 				 	                  </a>
 				 	                  </c:if>
-			 	               </se:authorize> 
 							  </td>
 						  </tr>
 						</c:forEach>
