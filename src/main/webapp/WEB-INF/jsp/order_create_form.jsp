@@ -11,7 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
 <title>龙图腾专利管家——订单</title>
 <%@ include file="_css.jsp" %>
-
+<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 </head>
 <body>
 <%@ include file="_top.jsp" %>
@@ -30,7 +30,7 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box">
-					<form action="<s:url value='/order/createOrder.html'/>" method="post">
+					<form action="<s:url value='/order/createOrder.html'/>" method="post" id="orderForm">
 					  <c:forEach items="${fees}" var="fee" varStatus="status">
 						<input type="hidden" name="feeIds" value="${fee.feeId}">
 					  </c:forEach>
@@ -168,7 +168,7 @@
 						</tr>
 					  </table>
 					  <span style="margin-left:10px;margin-bottom:10px;">
-					  <input type="submit" class="button button-caution button-rounded" value="提交订单">
+					  <button type="button" class="button button-caution button-rounded" id="ajaxOrderBtn">提交订单</button>
 					  </span>
 					</form>				
 				</div>
@@ -268,6 +268,26 @@
  		$("#invoice").hide();
  		$("#invoice").val("");
  	}
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+	    var options = {
+	        success: function (data) {
+	        	window.opener.location.href=window.opener.location.href;   
+	        	var result=$.parseJSON(data);
+	        	payRedirect(result.orderId,result.payWay);
+	        }
+	    };
+	    $("#ajaxOrderBtn").click(function () {
+            $("#orderForm").ajaxSubmit(options);
+        });
+	 });
+	
+	
+	function payRedirect(orderId,payWay){
+		window.location.href="<s:url value='/order/payRedirect.html'/>?orderId="+orderId+"&payWay="+payWay;
+	}
 </script>
 </body>
 </html>

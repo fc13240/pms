@@ -1,5 +1,6 @@
 package com.lotut.pms.web.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -31,6 +33,7 @@ import com.lotut.pms.service.FeeService;
 import com.lotut.pms.service.OrderService;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.WebUtils;
 
 @Controller
 @RequestMapping(path="/order")
@@ -60,28 +63,42 @@ public class OrderController {
 	}
 	
 	@RequestMapping(path="/createOrder")
-	public String createOrder(@RequestParam("feeIds")Long[] feeIds, @ModelAttribute @Valid Order order, Model model,
+	public void createOrder(@RequestParam("feeIds")Long[] feeIds, @ModelAttribute @Valid Order order, Model model,
 			@RequestParam("express") Integer express,@RequestParam("nationalInvoice") Integer nationalInvoice,
-			@RequestParam("companyInvoice") Integer companyInvoice) {
+			@RequestParam("companyInvoice") Integer companyInvoice,HttpServletResponse response) throws IOException {
 		final int ALIPAY = 1;
 		final int UNIONPAY = 2;
 		User user = PrincipalUtils.getCurrentPrincipal();
 		order.setOwner(user);
-		
 		List<Fee> fees = feeService.getFeesByIds(Arrays.asList(feeIds));
-		
 		orderService.createOrder(order, fees,express,nationalInvoice,companyInvoice);
-		
-		model.addAttribute("orderId", order.getId());
+		Map<String, Long> resultMap =new HashMap<>();
+		resultMap.put("orderId", order.getId());
 		
 		if (order.getPaymentMethod().getPaymentMethodId() == ALIPAY) {
-			return "redirect:/alipay/pay.html";
+			resultMap.put("payWay", (long)ALIPAY);
 		}else if(order.getPaymentMethod().getPaymentMethodId() == UNIONPAY){
-			return "redirect:/unionPay/pay.html";
+			resultMap.put("payWay", (long)UNIONPAY);
 		}
 		
-		return "add_patent_success";
+		WebUtils.writeJsonStrToResponse(response, resultMap);
 	}
+	@RequestMapping(path="/payRedirect")
+	public String payRedirect(long orderId,int payWay,Model model ) {
+		final int ALIPAY = 1;
+		final int UNIONPAY = 2;
+		model.addAttribute("orderId", orderId);
+		if(ALIPAY==payWay){
+			return "redirect:/alipay/pay.html";
+		}else if(UNIONPAY==payWay){
+			return "redirect:/unionPay/pay.html";
+		}else{
+			return null;
+		}
+	}
+	
+	
+	
 	
 	@RequestMapping(path="/list")
 	public String getUserOrders(Model model,Page page) {
