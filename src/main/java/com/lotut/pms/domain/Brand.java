@@ -8,6 +8,7 @@ public class Brand {
 	private int checkStatus;
 	private int sellStatus;
 	private int isRecommend;
+	private BrandCategory brandCategory;
 	private String brandNo;
 	private String name;
 	private String combinationType;
@@ -20,6 +21,6 @@ public class Brand {
 	private Date publish_date;
 	private Date start_date;
 	private Date end_date;
-	private String originality  ;
+	private String originality;
 }
 
