@@ -3,6 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotut.pms.dao.mapper.BrandMapper">
-  	
+  	<select id="" parameterType="Page">
+  		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
+  			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,
+  			   b.originality,b.case_status,bc.category_name,u.username from brands b left join brand_category bc on  b.category_id=bc.category_id 
+  			   left join users u on b.user=u.user_id where b.user=#{userId} limit #{startIndex},#{pageSize}
+  	</select>
 </mapper>
   
