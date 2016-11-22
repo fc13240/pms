@@ -59,6 +59,7 @@
 	        <li><a href="<s:url value='/express/addExpressForm.html'/>">快递管理</a></li>
   	        <li><a href="<s:url value='/news/list.html'/>">新闻管理</a></li>
 	        <li><a href="<s:url value='/article/list.html'/>">文章管理</a></li>
+	        <li><a href="<s:url value='/brand/list.html'/>">商标管理</a></li>
 	        <li><a href="<s:url value='/user/instructions.html'/>">操作指南</a></li>
 	        
 	      </ul>

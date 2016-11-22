@@ -20,4 +20,9 @@ public class brandController {
 		return null;
 		
 	}
+	
+	@RequestMapping(path="list")
+	public String BrandList(){
+		return "brand_list";
+	}
 }
