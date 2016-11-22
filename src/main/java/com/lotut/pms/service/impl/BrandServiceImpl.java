@@ -1,0 +1,22 @@
+package com.lotut.pms.service.impl;
+
+import java.util.List;
+
+import com.lotut.pms.dao.BrandDao;
+import com.lotut.pms.domain.Brand;
+import com.lotut.pms.domain.Page;
+import com.lotut.pms.service.BrandService;
+
+public class BrandServiceImpl implements BrandService{
+	private BrandDao brandDao;
+
+	public BrandServiceImpl(BrandDao brandDao) {
+		this.brandDao = brandDao;
+	}
+
+	@Override
+	public List<Brand> getUserBrandsByPage(Page page) {
+		return brandDao.getUserBrandsByPage(page);
+	}
+
+}

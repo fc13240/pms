@@ -1151,9 +1151,9 @@ CREATE TABLE brands (
 );
 CREATE TABLE wechat_orders (
 	id  INT  NOT NULL AUTO_INCREMENT ,
-	order_id VARCHAR(100) NULL,
-	wechat_name  VARCHAR(100) NULL,
-	brand_name   VARCHAR(100) NULL,
+	wechat_order_id VARCHAR(100) NULL ,
+	wechat_name  VARCHAR(100) NULL ,
+	brand_id   VARCHAR(100) NULL ,
 	total_fee   INT,
 	pay_time  DATETIME NULL ,
 	PRIMARY KEY (id)

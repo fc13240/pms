@@ -103,4 +103,7 @@
 		<constructor-arg ref="articleDao"/>
 	</bean>
 	
+	<bean id="brandService" class="com.lotut.pms.service.impl.BrandServiceImpl">
+		<constructor-arg ref="brandDao"/>
+	</bean>
 </beans>
