@@ -20,12 +20,12 @@ import com.lotut.pms.web.util.WebUtils;
 
 @Controller
 @RequestMapping(path="/brand")
-public class brandController {
+public class BrandController {
 	
 	private BrandService brandService;
 
 	@Autowired
-	public brandController(BrandService brandService) {
+	public BrandController(BrandService brandService) {
 		this.brandService = brandService;
 	}
 
@@ -49,5 +49,16 @@ public class brandController {
 		model.addAttribute("brands",brands);
 		model.addAttribute("page",page);
 		return "brand_list";
+	}
+	
+	@RequestMapping(path="/updateCheckStatus", method=RequestMethod.POST)
+	public void updateCheckStatus(@RequestParam("status")int status,@RequestParam("id")int id){
+		brandService.updateCheckStatus(status, id);
+		
+	}
+	
+	@RequestMapping(path="/updateRecommend", method=RequestMethod.POST)
+	public void updateRecommend(@RequestParam("status")int status,@RequestParam("id")int id){
+		brandService.updateRecommend(status, id);
 	}
 }

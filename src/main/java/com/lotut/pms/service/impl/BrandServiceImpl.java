@@ -19,4 +19,14 @@ public class BrandServiceImpl implements BrandService{
 		return brandDao.getUserBrandsByPage(page);
 	}
 
+	@Override
+	public void updateCheckStatus(int status, int id) {
+		brandDao.updateCheckStatus(status, id);
+	}
+
+	@Override
+	public void updateRecommend(int status, int id) {
+		brandDao.updateRecommend(status, id);
+	}
+
 }
