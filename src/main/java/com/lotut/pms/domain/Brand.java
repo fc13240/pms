@@ -5,6 +5,7 @@ import java.util.Date;
 public class Brand {
 	private User user;
 	private String address;
+	private String caseStatus;
 	private BrandCategory brandCategory;
 	private int checkStatus;
 	private int sellStatus;
@@ -17,16 +18,23 @@ public class Brand {
 	private int transactionMode;
 	private int price;
 	private String appPerson;
-	private Date app_date;
-	private Date publish_date;
-	private Date start_date;
-	private Date end_date;
-	private String originality  ;
+	private Date appDate;
+	private Date publishDate;
+	private Date startDate;
+	private Date endDate;
+	private String originality;
+
 	public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public String getCaseStatus() {
+		return caseStatus;
+	}
+	public void setCaseStatus(String caseStatus) {
+		this.caseStatus = caseStatus;
 	}
 	public String getAddress() {
 		return address;
@@ -106,29 +114,29 @@ public class Brand {
 	public void setAppPerson(String appPerson) {
 		this.appPerson = appPerson;
 	}
-	public Date getApp_date() {
-		return app_date;
+	public Date getAppDate() {
+		return appDate;
 	}
-	public void setApp_date(Date app_date) {
-		this.app_date = app_date;
+	public void setAppDate(Date appDate) {
+		this.appDate = appDate;
 	}
-	public Date getPublish_date() {
-		return publish_date;
+	public Date getPublishDate() {
+		return publishDate;
 	}
-	public void setPublish_date(Date publish_date) {
-		this.publish_date = publish_date;
+	public void setPublishDate(Date publishDate) {
+		this.publishDate = publishDate;
 	}
-	public Date getStart_date() {
-		return start_date;
+	public Date getStartDate() {
+		return startDate;
 	}
-	public void setStart_date(Date start_date) {
-		this.start_date = start_date;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
-	public Date getEnd_date() {
-		return end_date;
+	public Date getEndDate() {
+		return endDate;
 	}
-	public void setEnd_date(Date end_date) {
-		this.end_date = end_date;
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 	public String getOriginality() {
 		return originality;
@@ -136,7 +144,6 @@ public class Brand {
 	public void setOriginality(String originality) {
 		this.originality = originality;
 	}
-	
 	
 }
 
