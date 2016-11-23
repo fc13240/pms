@@ -19,5 +19,15 @@ public class BrandMybatisDao extends SqlSessionDaoSupport implements BrandDao{
 	public List<Brand> getUserBrandsByPage(Page page) {
 		return brandMapper.getUserBrandsByPage(page);
 	}
+
+	@Override
+	public void updateCheckStatus(int status, int id) {
+		brandMapper.updateCheckStatus(status, id);
+	}
+
+	@Override
+	public void updateRecommend(int status, int id) {
+		brandMapper.updateRecommend(status, id);
+	}
 	
 }
