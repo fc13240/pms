@@ -47,6 +47,7 @@ public class brandController {
 		
 		List<Brand> brands = brandService.getUserBrandsByPage(page);
 		model.addAttribute("brands",brands);
+		model.addAttribute("page",page);
 		return "brand_list";
 	}
 }

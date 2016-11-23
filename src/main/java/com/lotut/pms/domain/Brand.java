@@ -32,13 +32,13 @@ public class Brand {
 		return user;
 	}
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
-	private Date app_date;
+	private Date appDate;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
-	private Date publish_date;
+	private Date publishDate;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
-	private Date start_date;
+	private Date startDate;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
-	private Date end_date;
+	private Date endDate;
 	public int getId() {
 		return id;
 >>>>>>> 6051012f834d2902e007c1f1eb49346b88466b59
