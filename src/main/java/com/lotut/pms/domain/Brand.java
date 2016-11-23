@@ -22,6 +22,7 @@ public class Brand {
 	private int transactionMode;
 	private int price;
 	private String appPerson;
+	private String originality;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date appDate;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
@@ -149,6 +150,12 @@ public class Brand {
 	}
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+	public String getOriginality() {
+		return originality;
+	}
+	public void setOriginality(String originality) {
+		this.originality = originality;
 	}
 	
 }

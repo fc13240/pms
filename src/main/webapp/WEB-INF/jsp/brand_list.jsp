@@ -83,7 +83,8 @@
 									<td style="text-align:center">${brand.brandNo }</td>
 									<td style="text-align:center">${brand.combinationType }</td>
 									<td style="text-align:center">${brand.brandCategory.categoryName }</td>
-									<td style="text-align:center">${brand.brandCategory.scope }</td>
+									<td style="text-align:center">${brand.scope }</td>
+									<td style="text-align:center">${brand.similarNo }</td>
 									<td style="text-align:center"><fmt:formatDate value="${brand.startDate }" pattern="yyyy年MM月dd日"/>至<fmt:formatDate value="${brand.endDate }" pattern="yyyy年MM月dd日"/></td>
 									<td style="text-align:center">${brand.price }</td>
 									<td style="text-align:center"><c:if test="${brand.sellStatus==1 }">
@@ -95,14 +96,20 @@
 									</td>
 									<td style="text-align:center">
 										<c:if test="${brand.checkStatus==1 }">
-											<font color="red">审核通过</font>
+											<font color="black">审核通过</font>
 										</c:if> 
 										<c:if test="${brand.checkStatus==2 }">
-											<font color="black">审核未通过</font>
+											<font color="red">审核未通过</font>
 										</c:if>  
 										<c:if test="${brand.checkStatus==3 }">
-											<font color="black">未审核</font>
+											<font color="red">未审核</font>
 										</c:if>  
+									</td>
+									<td style="text-align:center">
+									<a href="">修改</a>
+									<a href="">删除</a>
+									<a href="">审核</a>
+									
 									</td>
 								</tr>
 							</c:forEach>
