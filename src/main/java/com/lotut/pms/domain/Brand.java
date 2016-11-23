@@ -22,15 +22,6 @@ public class Brand {
 	private int transactionMode;
 	private int price;
 	private String appPerson;
-	private Date appDate;
-	private Date publishDate;
-	private Date startDate;
-	private Date endDate;
-	private String originality;
-
-	public User getUser() {
-		return user;
-	}
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date appDate;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
@@ -41,7 +32,6 @@ public class Brand {
 	private Date endDate;
 	public int getId() {
 		return id;
->>>>>>> 6051012f834d2902e007c1f1eb49346b88466b59
 	}
 	public void setId(int id) {
 		this.id = id;
