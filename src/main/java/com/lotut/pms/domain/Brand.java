@@ -22,13 +22,13 @@ public class Brand {
 	private int price;
 	private String appPerson;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
-	private Date app_date;
+	private Date appDate;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
-	private Date publish_date;
+	private Date publishDate;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
-	private Date start_date;
+	private Date startDate;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
-	private Date end_date;
+	private Date endDate;
 	public int getId() {
 		return id;
 	}
@@ -119,29 +119,29 @@ public class Brand {
 	public void setAppPerson(String appPerson) {
 		this.appPerson = appPerson;
 	}
-	public Date getApp_date() {
-		return app_date;
+	public Date getAppDate() {
+		return appDate;
 	}
-	public void setApp_date(Date app_date) {
-		this.app_date = app_date;
+	public void setAppDate(Date appDate) {
+		this.appDate = appDate;
 	}
-	public Date getPublish_date() {
-		return publish_date;
+	public Date getPublishDate() {
+		return publishDate;
 	}
-	public void setPublish_date(Date publish_date) {
-		this.publish_date = publish_date;
+	public void setPublishDate(Date publishDate) {
+		this.publishDate = publishDate;
 	}
-	public Date getStart_date() {
-		return start_date;
+	public Date getStartDate() {
+		return startDate;
 	}
-	public void setStart_date(Date start_date) {
-		this.start_date = start_date;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
-	public Date getEnd_date() {
-		return end_date;
+	public Date getEndDate() {
+		return endDate;
 	}
-	public void setEnd_date(Date end_date) {
-		this.end_date = end_date;
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 	
 	

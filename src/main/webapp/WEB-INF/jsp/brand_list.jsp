@@ -63,17 +63,49 @@
 							<tr class="simple_bag">
 							  <th class="center" width="20px">序号</th>
 							  <th width="">商标名称</th>
+							  <th width="">注册号</th>
 							  <th width="">组合类型 </th>
 							  <th width="">类别</th>
 							  <th width="">商品列表</th>
 							  <th width="">类似群组</th>
 							  <th width="">有效期限</th>
 							  <th width="">价格</th>
+							  <th width="">上下架状态</th>
+							  <th width="">审核状态</th>
 							  <th width="">操作</th>
 							</tr>
 						  </thead>
 						  <tbody>
-							
+						  	<c:forEach items="${brands}" var="brand" varStatus="status">
+								<tr>
+									<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+									<td style="text-align:center">${brand.name }</td>
+									<td style="text-align:center">${brand.brandNo }</td>
+									<td style="text-align:center">${brand.combinationType }</td>
+									<td style="text-align:center">${brand.brandCategory.categoryName }</td>
+									<td style="text-align:center">${brand.brandCategory.scope }</td>
+									<td style="text-align:center"><fmt:formatDate value="${brand.startDate }" pattern="yyyy年MM月dd日"/>至<fmt:formatDate value="${brand.endDate }" pattern="yyyy年MM月dd日"/></td>
+									<td style="text-align:center">${brand.price }</td>
+									<td style="text-align:center"><c:if test="${brand.sellStatus==1 }">
+											<font color="red">出售中</font>
+										</c:if> 
+										<c:if test="${brand.sellStatus==2 }">
+											<font color="black">下架</font>
+										</c:if>  
+									</td>
+									<td style="text-align:center">
+										<c:if test="${brand.checkStatus==1 }">
+											<font color="red">审核通过</font>
+										</c:if> 
+										<c:if test="${brand.checkStatus==2 }">
+											<font color="black">审核未通过</font>
+										</c:if>  
+										<c:if test="${brand.checkStatus==3 }">
+											<font color="black">未审核</font>
+										</c:if>  
+									</td>
+								</tr>
+							</c:forEach>
 						  </tbody>
 						</table>
 						</div>
