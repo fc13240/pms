@@ -34,7 +34,7 @@ public class BrandExcelParser {
 		for (Brand p: brandRecords) {
 			System.out.println(p.getBrandCategory().getCategoryId());
 		}
-//		System.out.println(brandRecords.size());
+		System.out.println(brandRecords.size());
 	}
 	
 	public static List<Brand> parseBrandFile(InputStream fileInputStream,int userId) throws IOException, EncryptedDocumentException, InvalidFormatException {
@@ -63,6 +63,7 @@ public class BrandExcelParser {
 				break;
 			}
 			if(isTrueRow(row)){
+//			System.out.println(row.getCell(0).getStringCellValue());
 			Brand brand = parseRow(row,userId);
 			brandRecords.add(brand);
 			}
@@ -79,7 +80,7 @@ public class BrandExcelParser {
 	}
 	
 	private static boolean isTrueRow(Row row){
-		if(row.getCell(0).getStringCellValue().trim() == "注册/登记地" || row.getCell(0).getStringCellValue().trim()=="默认"){
+		if(row.getCell(0).getStringCellValue().trim().equals("注册/登记地") || row.getCell(0).getStringCellValue().equals("默认")){
 			return false;
 		}
 		return true;
@@ -120,6 +121,7 @@ public class BrandExcelParser {
 		String address = row.getCell(0).getStringCellValue().trim();
 		String caseStatus = row.getCell(1).getStringCellValue().trim();
 		String categoryName = row.getCell(2).getStringCellValue().trim();
+		System.out.println(categoryName);
 		String brandNo = row.getCell(3).getStringCellValue().trim();
 		String name = row.getCell(4).getStringCellValue().trim();
 		String similarNo=row.getCell(6).getStringCellValue();
@@ -189,5 +191,8 @@ public class BrandExcelParser {
 		return targetNumber;
 		
 	}
-	
+//	public static void main(String[] args) {
+//		String categoryName="第13类-日化用品";
+//		System.out.println(getCategoryId(categoryName));
+//	}
 }
