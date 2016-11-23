@@ -2,11 +2,15 @@ package com.lotut.pms.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 public class Brand {
-	private User user;
+	private int id;
 	private String address;
 	private String caseStatus;
 	private BrandCategory brandCategory;
+	private User user;
 	private int checkStatus;
 	private int sellStatus;
 	private int isRecommend;
@@ -27,8 +31,20 @@ public class Brand {
 	public User getUser() {
 		return user;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
+	private Date app_date;
+	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
+	private Date publish_date;
+	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
+	private Date start_date;
+	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
+	private Date end_date;
+	public int getId() {
+		return id;
+>>>>>>> 6051012f834d2902e007c1f1eb49346b88466b59
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getCaseStatus() {
 		return caseStatus;
@@ -42,11 +58,11 @@ public class Brand {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public BrandCategory getBrandCategory() {
-		return brandCategory;
+	public User getUser() {
+		return user;
 	}
-	public void setBrandCategory(BrandCategory brandCategory) {
-		this.brandCategory = brandCategory;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public int getCheckStatus() {
 		return checkStatus;
@@ -65,6 +81,12 @@ public class Brand {
 	}
 	public void setIsRecommend(int isRecommend) {
 		this.isRecommend = isRecommend;
+	}
+	public BrandCategory getBrandCategory() {
+		return brandCategory;
+	}
+	public void setBrandCategory(BrandCategory brandCategory) {
+		this.brandCategory = brandCategory;
 	}
 	public String getBrandNo() {
 		return brandNo;
@@ -137,12 +159,6 @@ public class Brand {
 	}
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
-	}
-	public String getOriginality() {
-		return originality;
-	}
-	public void setOriginality(String originality) {
-		this.originality = originality;
 	}
 	
 }

@@ -89,5 +89,7 @@
 		<typeAlias alias="ArticleSearchCondition" type="com.lotut.pms.domain.ArticleSearchCondition"/>
 		<typeAlias alias="NewsSearchCondition" type="com.lotut.pms.domain.NewsSearchCondition"/>
 		<typeAlias alias="ArticleType" type="com.lotut.pms.domain.ArticleType"/>
+		<typeAlias alias="BrandCategory" type="com.lotut.pms.domain.BrandCategory"/>
+		<typeAlias alias="Brand" type="com.lotut.pms.domain.Brand"/>
 	</typeAliases>  
 </configuration>

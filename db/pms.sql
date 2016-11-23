@@ -1115,4 +1115,46 @@ CREATE TABLE IF NOT EXISTS news_comments (
 );
 
 ALTER TABLE sell_patent_goods ADD COLUMN recommend_status TINYINT DEFAULT 0 COMMENT '0未推荐  1已推荐';
-ALTER TABLE users MODIFY username VARCHAR(60);		
+ALTER TABLE users MODIFY username VARCHAR(60);
+
+CREATE TABLE brand_category (
+	category_id  int NOT NULL AUTO_INCREMENT ,
+	category_name  varchar(100) NOT NULL ,
+	PRIMARY KEY (category_id)
+)
+;
+CREATE TABLE brands (
+	id  int NULL AUTO_INCREMENT,
+	user  int NOT NULL,
+	address  varchar(100) NULL,
+	check_status  tinyint NOT NULL DEFAULT 1 COMMENT '1审核通过  2审核未通过  3未审核',
+	sell_status  tinyint NOT NULL DEFAULT 1 COMMENT '1出售中 2 下架',
+	is_recommend  tinyint DEFAULT 1 COMMENT '1不推荐 2 推荐',
+	category_id  int NOT  NULL ,
+	brand_no  varchar(100) NOT NULL,
+	name  varchar(100) NOT NULL,
+	combination_type  varchar(500) NULL,
+	similar_no  varchar(300) NULL,
+	scope  varchar(500) NULL,
+	transaction_mode  tinyint NULL DEFAULT 1 COMMENT '1 出售  2转让',
+	price  int NOT NULL,
+	app_person  varchar(100) NULL,
+	app_date  datetime NULL,
+	publish_date  datetime NULL,
+	start_date  datetime NULL,
+	end_date  datetime NULL,
+	originality  varchar(500) NULL,
+	case_status VARCHAR(10),
+	PRIMARY KEY (id),
+	constraint fk_brands_users foreign key(user) references users(user_id),
+	constraint fk_brands_category foreign key(category_id) references brand_category(category_id) 
+);
+CREATE TABLE wechat_orders (
+	id  INT  NOT NULL AUTO_INCREMENT ,
+	wechat_order_id VARCHAR(100) NULL ,
+	wechat_name  VARCHAR(100) NULL ,
+	brand_id   VARCHAR(100) NULL ,
+	total_fee   INT,
+	pay_time  DATETIME NULL ,
+	PRIMARY KEY (id)
+);
