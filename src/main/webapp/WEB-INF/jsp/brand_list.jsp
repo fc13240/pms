@@ -108,11 +108,24 @@
 										</c:if>  
 									</td>
 									<td style="text-align:center">
-									<a href="">修改</a>
-									<a href="">删除</a>
-									<a href="">审核</a>
-									
+										<se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_ORDER','ROLE_TRADER','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_TECH','ROLE_PROCESS','ROLE_NEWS')">
+											<a href="">修改</a>
+											<a href="">删除</a>
+										</se:authorize>
+										<se:authorize access="hasRole('ROLE_ORDER')">
+											<c:if test="${brand.checkStatus!=1}">
+												<div class="btn-group btn-group-lg">
+													  <button id="approved" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="updateCheckStatus('${brand.id}','1')">审核通过</button>
+												</div>
+											</c:if>
+											<c:if test="${brand.checkStatus==1}">
+												<div class="btn-group btn-group-lg">
+													  <button id="unapprove" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="updateCheckStatus(${brand.id},'2')">审核未通过</button>
+												</div>
+											</c:if>
+										</se:authorize>
 									</td>
+									
 								</tr>
 							</c:forEach>
 						  </tbody>
@@ -241,6 +254,18 @@ function gotoPageForEnter(event) {
 		});		
 	}
 	
+</script>
+<script type="text/javascript">
+function updateCheckStatus(id,checkStatus){
+	 $.ajax({
+		type:"get",
+		url:"<s:url value='/brand/updateCheckStatus.html'/>?id="+id+"&status="+checkStatus,
+		success:function (data){
+			location.reload();
+		}
+	});
+	
+} 
 </script>
 </body>
 </html>

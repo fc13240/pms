@@ -1,5 +1,6 @@
 package com.lotut.pms.web.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -58,14 +59,15 @@ public class BrandController {
 	}
 	
 	@RequestMapping(path="/updateCheckStatus", method=RequestMethod.POST)
-	public void updateCheckStatus(@RequestParam("status")int status,@RequestParam("id")int id){
+	public void updateCheckStatus(@RequestParam("status")int status,@RequestParam("id")int id,PrintWriter pw){
 		brandService.updateCheckStatus(status, id);
-		
+		pw.write(1);
 	}
 	
 	@RequestMapping(path="/updateRecommend", method=RequestMethod.POST)
-	public void updateRecommend(@RequestParam("status")int status,@RequestParam("id")int id){
+	public void updateRecommend(@RequestParam("status")int status,@RequestParam("id")int id,PrintWriter pw){
 		brandService.updateRecommend(status, id);
+		pw.write(1);
 	}
 	
 	@RequestMapping(path="/searchUserBrands")

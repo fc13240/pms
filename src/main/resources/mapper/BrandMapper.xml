@@ -42,11 +42,11 @@
   	</select>
   	
   	
-  	<update id="updateCheckStatus" parameterType="int">
+  	<update id="updateCheckStatus">
   		update brands set check_status=#{status} where id=#{id}
   	</update>
 
-  	<update id="updateRecommend" parameterType="int">
+  	<update id="updateRecommend">
   		update brands set  is_recommend=#{status} where id=#{id}
   	</update>
   	
