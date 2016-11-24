@@ -69,7 +69,7 @@ public class BrandServiceImpl implements BrandService{
 		} catch (EncryptedDocumentException | InvalidFormatException e) {
 			e.printStackTrace();
 		}
-		return addOrUpdateBrands(brands, userId);
+		return addOrUpdateBrands(brands,userId);
 	}
 	
 	@Override
