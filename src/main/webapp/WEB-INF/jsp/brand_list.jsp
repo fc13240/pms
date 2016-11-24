@@ -204,10 +204,10 @@ function gotoPage() {
 		return;
 	}
 	
-	var url = "<s:url value='/article/list.html'/>?currentPage=" + pageNo;
+	var url = "<s:url value='/brand/list.html'/>?currentPage=" + pageNo;
 	
 	<c:if test="${searchCondition != null}">
-		url = "<s:url value='/article/searchUserArticles.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		url = "<s:url value='/brand/searchUserBrands.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 	</c:if>
 	
 	
