@@ -22,4 +22,6 @@ public interface BrandService {
 	int getsearchUserBrandsCount(BrandSearchCondition brandSearchCondition);
 	
 	int getUserBrandsCount(int userId);
+	
+	void deleteBrand(int brandId);
 }

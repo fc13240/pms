@@ -108,10 +108,10 @@
 										</c:if>  
 									</td>
 									<td style="text-align:center">
-										<se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_ORDER','ROLE_TRADER','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_TECH','ROLE_PROCESS','ROLE_NEWS')">
+										<%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_ORDER','ROLE_TRADER','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_TECH','ROLE_PROCESS','ROLE_NEWS')"> --%>
 											<a href="">修改</a>
-											<a href="">删除</a>
-										</se:authorize>
+												<a href="javascript:deleteBrands(${brand.id })" >删除</a>
+										<%-- </se:authorize> --%>
 										<se:authorize access="hasRole('ROLE_ORDER')">
 											<c:if test="${brand.checkStatus!=1}">
 												<div class="btn-group btn-group-lg">
@@ -266,6 +266,16 @@ function updateCheckStatus(id,checkStatus){
 	});
 	
 } 
+
+function deleteBrands(brandId){
+	$.ajax({
+		url:"<s:url value='/brand/deleteBrand.html'/>",
+		data:{"brandId":brandId},
+		success:function(){
+			location.reload();
+		}
+	})
+}
 </script>
 </body>
 </html>
