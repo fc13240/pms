@@ -109,6 +109,8 @@
 										</c:if>  
 									</td>
 									<td style="text-align:center">
+										<%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_ORDER','ROLE_TRADER','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_TECH','ROLE_PROCESS','ROLE_NEWS')"> --%>
+
 										<c:if test="${brand.isRecommend==1 }">
 											<font color="black">未推荐</font>
 										</c:if> 
@@ -117,10 +119,10 @@
 										</c:if>  
 									</td>
 									<td style="text-align:center">
-										<se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_ORDER','ROLE_TRADER','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_TECH','ROLE_PROCESS','ROLE_NEWS')">
+										<%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_ORDER','ROLE_TRADER','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_TECH','ROLE_PROCESS','ROLE_NEWS')"> --%>
 											<a href="">修改</a>
-											<a href="">删除</a>
-										</se:authorize>
+												<a href="javascript:void(0)" onclick="deleteBrands(${brand.id })" >删除</a>
+										<%-- </se:authorize> --%>
 										<se:authorize access="hasRole('ROLE_ORDER')">
 											<c:if test="${brand.checkStatus!=1}">
 												<div class="btn-group btn-group-lg">
@@ -285,6 +287,16 @@ function updateCheckStatus(id,checkStatus){
 	});
 	
 } 
+
+function deleteBrands(brandId){
+	$.ajax({
+		url:"<s:url value='/brand/deleteBrand.html'/>",
+		data:{"brandId":brandId},
+		success:function(){
+			location.reload();
+		}
+	})
+}
 function updateRecommendStatus(id,checkStatus){
 	 $.ajax({
 		type:"get",

@@ -23,5 +23,7 @@ public interface BrandDao {
 	
 	int getUserBrandsCount(int userId);
 	
+	void deleteBrand(int brandId);
+
 	int insertOrUpdateBrand(Brand brand);
 }

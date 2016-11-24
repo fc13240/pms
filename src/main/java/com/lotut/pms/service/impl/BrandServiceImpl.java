@@ -60,6 +60,11 @@ public class BrandServiceImpl implements BrandService{
 	public int getUserBrandsCount(int userId) {
 		return brandDao.getUserBrandsCount(userId);
 	} 
+	
+	@Override
+	public void deleteBrand(int brandId) {
+		brandDao.deleteBrand(brandId);
+	} 
 
 	@Override
 	public boolean uploadBrands(InputStream is, int userId) throws IOException {

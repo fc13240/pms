@@ -107,4 +107,10 @@ public class BrandController {
 		model.addAttribute("categorys",categorys);
 		return "brand_list";
 	}
+	
+	@RequestMapping(path="/deleteBrand")
+	public void deleteBrand(int brandId,PrintWriter pw){
+		brandService.deleteBrand(brandId);
+		pw.write(1);
+	}
 }
