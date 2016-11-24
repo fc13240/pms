@@ -67,7 +67,8 @@ public class BrandController {
 		if(page.getCurrentPage()<1){
 			page.setCurrentPage(1);
 		}
-		
+		int totalCount = brandService.getUserBrandsCount(userId);
+		page.setTotalRecords(totalCount);
 		List<Brand> brands = brandService.getUserBrandsByPage(page);
 		List<BrandCategory> categorys = brandService.getAllCategorys();
 		model.addAttribute("brands",brands);
@@ -89,20 +90,20 @@ public class BrandController {
 	}
 	
 	@RequestMapping(path="/searchUserBrands")
-	public String searchUserBrands(HttpSession session,Page page,Model model,BrandSearchCondition searchCondition){
+	public String searchUserBrands(HttpSession session,Model model,BrandSearchCondition searchCondition){
+		Page page =searchCondition.getPage();
 		int userId = PrincipalUtils.getCurrentUserId();
-		page.setUserId(userId);
-		page.setPageSize(WebUtils.getPageSize(session));
 		if(page.getCurrentPage()<1){
 			page.setCurrentPage(1);
 		}
 		searchCondition.setUserId(userId);
 		int totalCount = brandService.getsearchUserBrandsCount(searchCondition);
-		searchCondition.getPage().setTotalRecords(totalCount);
-		searchCondition.getPage().setPageSize(WebUtils.getPageSize(session));
+		page.setTotalRecords(totalCount);
+		page.setPageSize(WebUtils.getPageSize(session));
 		List<Brand> brands = brandService.searchUserBrandsByPage(searchCondition);
 		List<BrandCategory> categorys = brandService.getAllCategorys();
 		model.addAttribute("brands",brands);
+		model.addAttribute("searchCondition",searchCondition);
 		model.addAttribute("page",page);
 		model.addAttribute("categorys",categorys);
 		return "brand_list";
