@@ -115,12 +115,12 @@
 										<se:authorize access="hasRole('ROLE_ORDER')">
 											<c:if test="${brand.checkStatus!=1}">
 												<div class="btn-group btn-group-lg">
-													  <button id="approved" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="updateCheckStatus('${brand.id}','1')">审核通过</button>
+													  <button id="approved" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="updateCheckStatus('${brand.id}','1')">置为已通过</button>
 												</div>
 											</c:if>
 											<c:if test="${brand.checkStatus==1}">
 												<div class="btn-group btn-group-lg">
-													  <button id="unapprove" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="updateCheckStatus(${brand.id},'2')">审核未通过</button>
+													  <button id="unapprove" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="updateCheckStatus(${brand.id},'2')">置为未通过</button>
 												</div>
 											</c:if>
 										</se:authorize>
