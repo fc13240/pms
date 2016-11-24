@@ -39,15 +39,15 @@
 							  </tr>
 							  <tr>
 							  <td>
-								<select  style="width:100px;" class="selectPointOfInterest form-control" name="categoryId">
+								<select  style="width:110px;" class="selectPointOfInterest form-control" name="categoryId">
 								  <option value="">全部</option>
 								  <c:forEach items="${categorys }" var="category">
-								  	<option value="${category.categoryId }">${category.categoryName }</option>
+								  	<option value="${category.categoryId }" <c:if test="${category.categoryId==searchCondition.categoryId }">selected="selected"</c:if>>${category.categoryName }</option>
 								  </c:forEach>
 								</select>
 							  </td>
 							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId"  placeholder="商标名称/注册号" class="t-input form-control"/>							  
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId"  placeholder="商标名称/注册号" class="t-input form-control" value="${searchCondition.keyword }"/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
@@ -66,11 +66,11 @@
 							  <th class="center" width="20px">序号</th>
 							  <th width="">商标名称</th>
 							  <th width="">注册号</th>
-							  <th width="">组合类型 </th>
+							 <!--  <th width="">组合类型 </th> -->
 							  <th width="">类别</th>
-							  <th width="">商品列表</th>
+							  <!-- <th width="">商品列表</th>
 							  <th width="">类似群组</th>
-							  <th width="">有效期限</th>
+							  <th width="">有效期限</th> -->
 							  <th width="">价格</th>
 							  <th width="">上下架状态</th>
 							  <th width="">审核状态</th>
@@ -83,11 +83,11 @@
 									<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
 									<td style="text-align:center">${brand.name }</td>
 									<td style="text-align:center">${brand.brandNo }</td>
-									<td style="text-align:center">${brand.combinationType }</td>
+									<%-- <td style="text-align:center">${brand.combinationType }</td> --%>
 									<td style="text-align:center">${brand.brandCategory.categoryName }</td>
-									<td style="text-align:center">${brand.scope }</td>
+									<%-- <td style="text-align:center">${brand.scope }</td>
 									<td style="text-align:center">${brand.similarNo }</td>
-									<td style="text-align:center"><fmt:formatDate value="${brand.startDate }" pattern="yyyy年MM月dd日"/>至<fmt:formatDate value="${brand.endDate }" pattern="yyyy年MM月dd日"/></td>
+									<td style="text-align:center"><fmt:formatDate value="${brand.startDate }" pattern="yyyy年MM月dd日"/>至<fmt:formatDate value="${brand.endDate }" pattern="yyyy年MM月dd日"/></td> --%>
 									<td style="text-align:center">${brand.price }</td>
 									<td style="text-align:center"><c:if test="${brand.sellStatus==1 }">
 											<font color="red">出售中</font>
@@ -217,10 +217,10 @@ function gotoPage() {
 		return;
 	}
 	
-	var url = "<s:url value='/article/list.html'/>?currentPage=" + pageNo;
+	var url = "<s:url value='/brand/list.html'/>?currentPage=" + pageNo;
 	
 	<c:if test="${searchCondition != null}">
-		url = "<s:url value='/article/searchUserArticles.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		url = "<s:url value='/brand/searchUserBrands.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 	</c:if>
 	
 	

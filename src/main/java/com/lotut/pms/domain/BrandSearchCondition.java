@@ -29,5 +29,10 @@ public class BrandSearchCondition {
 	public void setPage(Page page) {
 		this.page = page;
 	}
-	 
+	@Override
+	public String toString(){
+		String categoryIdStr = categoryId == null ? "":categoryId.toString();
+		String keywordStr = keyword == null ? "":keyword.toString();
+		return "categoryId=" + categoryIdStr+"&keyword="+keywordStr;
+	}
 }
