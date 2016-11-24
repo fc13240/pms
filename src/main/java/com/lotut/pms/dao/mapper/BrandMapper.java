@@ -21,4 +21,9 @@ public interface BrandMapper {
 	
 	List<BrandCategory> getAllCategorys();
 	
+	int getUserBrandsCount(int userId);
+
+	int getsearchUserBrandsCount(BrandSearchCondition brandSearchCondition);
+	
+	int insertOrUpdateBrand(Brand brand);
 }

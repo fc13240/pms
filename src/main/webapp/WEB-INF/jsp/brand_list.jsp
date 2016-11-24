@@ -9,7 +9,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
-<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 <title>龙图腾专利管家-商标列表</title>
 <%@ include file="_css.jsp" %>
 

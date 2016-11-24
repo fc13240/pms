@@ -50,6 +50,16 @@ public class BrandServiceImpl implements BrandService{
 	public List<BrandCategory> getAllCategorys() {
 		return brandDao.getAllCategorys();
 	}
+	
+	@Override
+	public int getsearchUserBrandsCount(BrandSearchCondition brandSearchCondition) {
+		return brandDao.getsearchUserBrandsCount(brandSearchCondition);
+	} 
+	
+	@Override
+	public int getUserBrandsCount(int userId) {
+		return brandDao.getUserBrandsCount(userId);
+	} 
 
 	@Override
 	public boolean uploadBrands(InputStream is, int userId) throws IOException {
@@ -66,7 +76,7 @@ public class BrandServiceImpl implements BrandService{
 	@Transactional
 	public boolean  addOrUpdateBrands(List<Brand> brands,int userId) {
 		for (Brand brand: brands) {
-//			 brandDao.insertOrUpdatebrand(brand);
+			 brandDao.insertOrUpdateBrand(brand);
 		}
 	
 		return true;

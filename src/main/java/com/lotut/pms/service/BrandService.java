@@ -24,4 +24,8 @@ public interface BrandService {
 	boolean uploadBrands(InputStream is,int userId) throws IOException;
 	
 	boolean addOrUpdateBrands(List<Brand> brands, int userId);
+	
+	int getsearchUserBrandsCount(BrandSearchCondition brandSearchCondition);
+	
+	int getUserBrandsCount(int userId);
 }
