@@ -58,13 +58,13 @@ public class BrandController {
 		return "brand_list";
 	}
 	
-	@RequestMapping(path="/updateCheckStatus", method=RequestMethod.POST)
+	@RequestMapping(path="/updateCheckStatus", method=RequestMethod.GET)
 	public void updateCheckStatus(@RequestParam("status")int status,@RequestParam("id")int id,PrintWriter pw){
 		brandService.updateCheckStatus(status, id);
 		pw.write(1);
 	}
 	
-	@RequestMapping(path="/updateRecommend", method=RequestMethod.POST)
+	@RequestMapping(path="/updateRecommend", method=RequestMethod.GET)
 	public void updateRecommend(@RequestParam("status")int status,@RequestParam("id")int id,PrintWriter pw){
 		brandService.updateRecommend(status, id);
 		pw.write(1);
