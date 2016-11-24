@@ -18,4 +18,8 @@ public interface BrandDao {
 	List<Brand> searchUserBrandsByPage(BrandSearchCondition brandSearchCondition);
 	
 	List<BrandCategory> getAllCategorys();
+	
+	int getsearchUserBrandsCount(BrandSearchCondition brandSearchCondition);
+	
+	int getUserBrandsCount(int userId);
 }

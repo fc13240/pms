@@ -2,8 +2,8 @@ package com.lotut.pms.domain;
 
 public class BrandSearchCondition {
 	private int userId;
-	private int categoryId;
-	private String kewyword;
+	private Integer categoryId;
+	private String keyword;
 	private Page page;
 	public int getUserId() {
 		return userId;
@@ -11,11 +11,17 @@ public class BrandSearchCondition {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public String getKewyword() {
-		return kewyword;
+	public Integer getCategoryId() {
+		return categoryId;
 	}
-	public void setKewyword(String kewyword) {
-		this.kewyword = kewyword;
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	public Page getPage() {
 		return page;
@@ -23,12 +29,5 @@ public class BrandSearchCondition {
 	public void setPage(Page page) {
 		this.page = page;
 	}
-	public int getCategoryId() {
-		return categoryId;
-	}
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-	
-	
+	 
 }

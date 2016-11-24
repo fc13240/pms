@@ -40,5 +40,15 @@ public class BrandServiceImpl implements BrandService{
 	public List<BrandCategory> getAllCategorys() {
 		return brandDao.getAllCategorys();
 	}
+	
+	@Override
+	public int getsearchUserBrandsCount(BrandSearchCondition brandSearchCondition) {
+		return brandDao.getsearchUserBrandsCount(brandSearchCondition);
+	} 
+	
+	@Override
+	public int getUserBrandsCount(int userId) {
+		return brandDao.getUserBrandsCount(userId);
+	} 
 
 }
