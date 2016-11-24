@@ -39,4 +39,5 @@ public interface Settings {
 	final String ARTICLE_SMALL_IMAGE_URL="/articleSmallImg/";
 	final String ARTICLE_IMAGE_PATH="/opt/media/patent/articleImg/articleContentImg/";
 	final String ARTICLE_IMAGE_URL="/articleContentImg/";
+	final String Brand_ROOT_PATH = "/opt/media/brand/";
 }

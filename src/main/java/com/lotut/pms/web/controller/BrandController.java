@@ -30,12 +30,15 @@ public class BrandController {
 	public BrandController(BrandService brandService) {
 		this.brandService = brandService;
 	}
-
+	
+	@RequestMapping(path="/showUploadForm", method=RequestMethod.GET)
+	public String showUploadForm() {
+		return "brand_upload_form";
+	}	
+	
 	@RequestMapping(path="/upload", method=RequestMethod.POST)
 	public String uploadBrands(@RequestParam("brandFile")Part brandFile, Model model){
-		
 		return null;
-		
 	}
 	
 	@RequestMapping(path="list")

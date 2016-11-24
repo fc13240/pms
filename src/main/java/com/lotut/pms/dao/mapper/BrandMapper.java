@@ -20,4 +20,5 @@ public interface BrandMapper {
 	List<Brand> searchUserBrandsByPage(BrandSearchCondition brandSearchCondition);
 	
 	List<BrandCategory> getAllCategorys();
+	
 }

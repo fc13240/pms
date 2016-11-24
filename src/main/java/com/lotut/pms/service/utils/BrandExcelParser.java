@@ -28,14 +28,14 @@ import com.lotut.pms.service.exception.DateFormatException;
 
 public class BrandExcelParser {
 	
-//	public static void main(String[] args) throws Exception {
-//		InputStream in = new FileInputStream("C:\\Users\\xw\\Desktop\\智慧殿初审合格商标.xlsx");
-//		List<Brand> brandRecords = parseBrandFile(in,2);
-//		for (Brand p: brandRecords) {
-//			System.out.println(p.getPrice());
-//		}
-//		System.out.println(brandRecords.size());
-//	}
+	public static void main(String[] args) throws Exception {
+		InputStream in = new FileInputStream("C:\\Users\\xw\\Desktop\\智慧殿初审合格商标.xlsx");
+		List<Brand> brandRecords = parseBrandFile(in,2);
+		for (Brand p: brandRecords) {
+			System.out.println(p.getSimilarNo());
+		}
+		System.out.println(brandRecords.size());
+	}
 	
 	public static List<Brand> parseBrandFile(InputStream fileInputStream,int userId) throws IOException, EncryptedDocumentException, InvalidFormatException {
 //		try (Workbook wb = new XSSFWorkbook(fileInputStream); ) {
@@ -124,7 +124,7 @@ public class BrandExcelParser {
 //		System.out.println(categoryName);
 		String brandNo = row.getCell(3).getStringCellValue().trim();
 		String name = row.getCell(4).getStringCellValue().trim();
-		String similarNo=row.getCell(6).getStringCellValue();
+		String similarNo=row.getCell(6).getStringCellValue().replace("、", ".");
 		String scope=row.getCell(7).getStringCellValue();
 		int transactionMode=getTransactionMode(row.getCell(8).getStringCellValue());
 		String appPerson=row.getCell(10).getStringCellValue();

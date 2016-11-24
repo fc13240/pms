@@ -8,7 +8,12 @@
 		<a href="<s:url value='/brand/list.html'/>">
 		<h5>商标列表</h5>
 		</a>
-	</li> 		
+	</li> 	
+	<li class="active">
+		<a href="<s:url value='/brand/showUploadForm.html'/>">
+		<h5>上传商标表格</h5>
+		</a>
+	</li> 	
 	<li class="active">
 		<a href="<s:url value='/brand/addBrandForm.html'/>">
 		<h5>商标添加</h5>
