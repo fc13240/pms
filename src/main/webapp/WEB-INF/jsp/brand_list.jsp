@@ -28,7 +28,7 @@
 			<div class="lt-right" style="padding:10px 0 0 3px;" >
 				    <div class="cl top1" style="height:10px;">
 				    
-					  <form class="form-inline" action="<s:url value='/article/searchUserArticles.html'/>" method="get">
+					  <form class="form-inline" action="<s:url value='/brand/searchUserBrands.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1" required/>
 						  <div class="t-third">
 
@@ -40,8 +40,11 @@
 							  </tr>
 							  <tr>
 							  <td>
-								<select  style="width:100px;" class="selectPointOfInterest form-control" name="articleType">
+								<select  style="width:100px;" class="selectPointOfInterest form-control" name="categoryId">
 								  <option value="">全部</option>
+								  <c:forEach items="${categorys }" var="category">
+								  	<option value="${category.categoryId }">${category.categoryName }</option>
+								  </c:forEach>
 								</select>
 							  </td>
 							  <td>

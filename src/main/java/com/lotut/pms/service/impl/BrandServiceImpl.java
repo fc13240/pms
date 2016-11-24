@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.lotut.pms.dao.BrandDao;
 import com.lotut.pms.domain.Brand;
+import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.BrandService;
 
@@ -27,6 +29,16 @@ public class BrandServiceImpl implements BrandService{
 	@Override
 	public void updateRecommend(int status, int id) {
 		brandDao.updateRecommend(status, id);
+	}
+	
+	@Override
+	public List<Brand> searchUserBrandsByPage(BrandSearchCondition brandSearchCondition) {
+		return brandDao.searchUserBrandsByPage(brandSearchCondition);
+	}
+	
+	@Override
+	public List<BrandCategory> getAllCategorys() {
+		return brandDao.getAllCategorys();
 	}
 
 }

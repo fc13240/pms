@@ -7,6 +7,8 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.BrandDao;
 import com.lotut.pms.dao.mapper.BrandMapper;
 import com.lotut.pms.domain.Brand;
+import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
 
 public class BrandMybatisDao extends SqlSessionDaoSupport implements BrandDao{
@@ -28,6 +30,16 @@ public class BrandMybatisDao extends SqlSessionDaoSupport implements BrandDao{
 	@Override
 	public void updateRecommend(int status, int id) {
 		brandMapper.updateRecommend(status, id);
+	}
+	
+	@Override
+	public List<Brand> searchUserBrandsByPage(BrandSearchCondition brandSearchCondition) {
+		return brandMapper.searchUserBrandsByPage(brandSearchCondition);
+	}
+	
+	@Override
+	public List<BrandCategory> getAllCategorys() {
+		return brandMapper.getAllCategorys();
 	}
 	
 }

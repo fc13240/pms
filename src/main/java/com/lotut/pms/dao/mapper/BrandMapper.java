@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.Brand;
+import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
 
 public interface BrandMapper {
@@ -14,4 +16,8 @@ public interface BrandMapper {
 	void updateCheckStatus(@Param("status")int status,@Param("id")int id);
 	
 	void updateRecommend(@Param("status")int status,@Param("id")int id);
+	
+	List<Brand> searchUserBrandsByPage(BrandSearchCondition brandSearchCondition);
+	
+	List<BrandCategory> getAllCategorys();
 }
