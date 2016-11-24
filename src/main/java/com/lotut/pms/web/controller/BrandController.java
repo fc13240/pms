@@ -42,6 +42,7 @@ public class BrandController {
 	
 	@RequestMapping(path="/upload", method=RequestMethod.POST)
 	public String uploadBrands(@RequestParam("brandFile")Part brandFile, Model model){
+//			String fileName=brandFile.getSubmittedFileName();
 		try {
 			if (!brandFile.getSubmittedFileName().endsWith(".xls") && !brandFile.getSubmittedFileName().endsWith(".xlsx")) {
 				throw new RuntimeException("上传的文件不是excel表格");
@@ -49,10 +50,11 @@ public class BrandController {
 			InputStream is = brandFile.getInputStream();
 			int userId = PrincipalUtils.getCurrentUserId();
 			brandService.uploadBrands(is, userId);
-			return "upload_success";
+			return "brand_upload_success";
 		} catch (Exception e) {
+			e.printStackTrace();
 			model.addAttribute("message", "上传失败，请检查文件格式稍后再试！");
-			return "common_message";
+			return "brand_common_message";
 		}
 	}
 	
