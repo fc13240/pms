@@ -11,7 +11,7 @@
 	</li> 	
 	<li class="active">
 		<a href="<s:url value='/brand/showUploadForm.html'/>">
-		<h5>上传商标表格</h5>
+		<h5>批量上传</h5>
 		</a>
 	</li> 	
 	<li class="active">

@@ -32,7 +32,7 @@ public class BrandExcelParser {
 		InputStream in = new FileInputStream("C:\\Users\\xw\\Desktop\\智慧殿初审合格商标.xlsx");
 		List<Brand> brandRecords = parseBrandFile(in,2);
 		for (Brand p: brandRecords) {
-			System.out.println(p.getSimilarNo());
+			System.out.println(p.getCaseStatus());
 		}
 		System.out.println(brandRecords.size());
 	}
