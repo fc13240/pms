@@ -1,6 +1,7 @@
 package com.lotut.pms.web.controller;
 
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -75,27 +76,31 @@ public class BrandController {
 		return "brand_list";
 	}
 	
-	@RequestMapping(path="/updateCheckStatus", method=RequestMethod.POST)
-	public void updateCheckStatus(@RequestParam("status")int status,@RequestParam("id")int id){
+	@RequestMapping(path="/updateCheckStatus", method=RequestMethod.GET)
+	public void updateCheckStatus(@RequestParam("status")int status,@RequestParam("id")int id,PrintWriter pw){
 		brandService.updateCheckStatus(status, id);
-		
+		pw.write(1);
 	}
 	
-	@RequestMapping(path="/updateRecommend", method=RequestMethod.POST)
-	public void updateRecommend(@RequestParam("status")int status,@RequestParam("id")int id){
+	@RequestMapping(path="/updateRecommend", method=RequestMethod.GET)
+	public void updateRecommend(@RequestParam("status")int status,@RequestParam("id")int id,PrintWriter pw){
 		brandService.updateRecommend(status, id);
+		pw.write(1);
 	}
 	
 	@RequestMapping(path="/searchUserBrands")
-	public String searchUserBrands(HttpSession session,Page page,Model model,BrandSearchCondition brandSearchCondition){
+	public String searchUserBrands(HttpSession session,Page page,Model model,BrandSearchCondition searchCondition){
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
 		page.setPageSize(WebUtils.getPageSize(session));
 		if(page.getCurrentPage()<1){
 			page.setCurrentPage(1);
 		}
-		
-		List<Brand> brands = brandService.searchUserBrandsByPage(brandSearchCondition);
+		searchCondition.setUserId(userId);
+		int totalCount = brandService.getsearchUserBrandsCount(searchCondition);
+		searchCondition.getPage().setTotalRecords(totalCount);
+		searchCondition.getPage().setPageSize(WebUtils.getPageSize(session));
+		List<Brand> brands = brandService.searchUserBrandsByPage(searchCondition);
 		List<BrandCategory> categorys = brandService.getAllCategorys();
 		model.addAttribute("brands",brands);
 		model.addAttribute("page",page);
