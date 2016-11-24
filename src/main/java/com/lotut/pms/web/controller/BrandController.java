@@ -69,11 +69,12 @@ public class BrandController {
 	}
 	
 	@RequestMapping(path="/searchUserBrands")
-	public String searchUserBrands(BrandSearchCondition searchCondition,Model model){
+	public String searchUserBrands(HttpSession session,BrandSearchCondition searchCondition,Model model){
 		int userId = PrincipalUtils.getCurrentUserId();
 		searchCondition.setUserId(userId);
 		int totalCount = brandService.getsearchUserBrandsCount(searchCondition);
 		searchCondition.getPage().setTotalRecords(totalCount);
+		searchCondition.getPage().setPageSize(WebUtils.getPageSize(session));
 		List<Brand> brands = brandService.searchUserBrandsByPage(searchCondition);
 		List<BrandCategory> categorys = brandService.getAllCategorys();
 		model.addAttribute("searchCondition",searchCondition);
