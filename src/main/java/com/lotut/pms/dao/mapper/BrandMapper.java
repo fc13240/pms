@@ -26,4 +26,6 @@ public interface BrandMapper {
 	int getsearchUserBrandsCount(BrandSearchCondition brandSearchCondition);
 	
 	void deleteBrand(int brandId);
+
+	int insertOrUpdateBrand(Brand brand);
 }

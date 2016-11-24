@@ -74,6 +74,7 @@
 							  <th width="">价格</th>
 							  <th width="">上下架状态</th>
 							  <th width="">审核状态</th>
+							  <th width="">推荐状态</th>
 							  <th width="">操作</th>
 							</tr>
 						  </thead>
@@ -109,18 +110,38 @@
 									</td>
 									<td style="text-align:center">
 										<%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_ORDER','ROLE_TRADER','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_TECH','ROLE_PROCESS','ROLE_NEWS')"> --%>
+
+										<c:if test="${brand.isRecommend==1 }">
+											<font color="black">未推荐</font>
+										</c:if> 
+										<c:if test="${brand.isRecommend==2 }">
+											<font color="red">推荐商标</font>
+										</c:if>  
+									</td>
+									<td style="text-align:center">
+										<%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_ORDER','ROLE_TRADER','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_TECH','ROLE_PROCESS','ROLE_NEWS')"> --%>
 											<a href="">修改</a>
-												<a href="javascript:deleteBrands(${brand.id })" >删除</a>
+												<a href="javascript:void(0)" onclick="deleteBrands(${brand.id })" >删除</a>
 										<%-- </se:authorize> --%>
 										<se:authorize access="hasRole('ROLE_ORDER')">
 											<c:if test="${brand.checkStatus!=1}">
 												<div class="btn-group btn-group-lg">
-													  <button id="approved" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="updateCheckStatus('${brand.id}','1')">审核通过</button>
+													  <button id="approved" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="updateCheckStatus('${brand.id}','1')">置为已通过</button>
 												</div>
 											</c:if>
 											<c:if test="${brand.checkStatus==1}">
 												<div class="btn-group btn-group-lg">
-													  <button id="unapprove" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="updateCheckStatus(${brand.id},'2')">审核未通过</button>
+													  <button id="unapprove" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="updateCheckStatus(${brand.id},'2')">置为未通过</button>
+												</div>
+											</c:if>
+											<c:if test="${brand.isRecommend==2}">
+												<div class="btn-group btn-group-lg">
+													  <button id="approved" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="updateRecommendStatus('${brand.id}','1')">置为不推荐</button>
+												</div>
+											</c:if>
+											<c:if test="${brand.isRecommend==1}">
+												<div class="btn-group btn-group-lg">
+													  <button id="unapprove" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="updateRecommendStatus(${brand.id},'2')">置为推荐</button>
 												</div>
 											</c:if>
 										</se:authorize>
@@ -275,6 +296,16 @@ function deleteBrands(brandId){
 			location.reload();
 		}
 	})
+}
+function updateRecommendStatus(id,checkStatus){
+	 $.ajax({
+		type:"get",
+		url:"<s:url value='/brand/updateRecommend.html'/>?id="+id+"&status="+checkStatus,
+		success:function (data){
+			location.reload();
+		}
+	});
+	
 }
 </script>
 </body>

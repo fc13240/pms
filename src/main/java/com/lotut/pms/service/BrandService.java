@@ -1,5 +1,7 @@
 package com.lotut.pms.service;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import com.lotut.pms.domain.Brand;
@@ -18,6 +20,10 @@ public interface BrandService {
 	List<Brand> searchUserBrandsByPage(BrandSearchCondition brandSearchCondition);
 	
 	List<BrandCategory> getAllCategorys();
+	
+	boolean uploadBrands(InputStream is,int userId) throws IOException;
+	
+	boolean addOrUpdateBrands(List<Brand> brands, int userId);
 	
 	int getsearchUserBrandsCount(BrandSearchCondition brandSearchCondition);
 	
