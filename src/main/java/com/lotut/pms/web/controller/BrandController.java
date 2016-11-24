@@ -1,5 +1,6 @@
 package com.lotut.pms.web.controller;
 
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandSearchCondition;
@@ -19,6 +21,8 @@ import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.BrandService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
+
+import net.lingala.zip4j.exception.ZipException;
 
 @Controller
 @RequestMapping(path="/brand")
@@ -38,7 +42,18 @@ public class BrandController {
 	
 	@RequestMapping(path="/upload", method=RequestMethod.POST)
 	public String uploadBrands(@RequestParam("brandFile")Part brandFile, Model model){
-		return null;
+		try {
+			if (!brandFile.getSubmittedFileName().endsWith(".xls") && !brandFile.getSubmittedFileName().endsWith(".xlsx")) {
+				throw new RuntimeException("上传的文件不是excel表格");
+			}
+			InputStream is = brandFile.getInputStream();
+			int userId = PrincipalUtils.getCurrentUserId();
+			brandService.uploadBrands(is, userId);
+			return "upload_success";
+		} catch (Exception e) {
+			model.addAttribute("message", "上传失败，请检查文件格式稍后再试！");
+			return "common_message";
+		}
 	}
 	
 	@RequestMapping(path="list")
@@ -49,11 +64,9 @@ public class BrandController {
 		if(page.getCurrentPage()<1){
 			page.setCurrentPage(1);
 		}
-		int totalCount = brandService.getUserBrandsCount(userId);
-		page.setTotalRecords(totalCount);
+		
 		List<Brand> brands = brandService.getUserBrandsByPage(page);
 		List<BrandCategory> categorys = brandService.getAllCategorys();
-		model.addAttribute("totalCount",totalCount);
 		model.addAttribute("brands",brands);
 		model.addAttribute("page",page);
 		model.addAttribute("categorys",categorys);
@@ -72,16 +85,18 @@ public class BrandController {
 	}
 	
 	@RequestMapping(path="/searchUserBrands")
-	public String searchUserBrands(BrandSearchCondition searchCondition,Model model){
+	public String searchUserBrands(HttpSession session,Page page,Model model,BrandSearchCondition brandSearchCondition){
 		int userId = PrincipalUtils.getCurrentUserId();
-		searchCondition.setUserId(userId);
-		int totalCount = brandService.getsearchUserBrandsCount(searchCondition);
-		searchCondition.getPage().setTotalRecords(totalCount);
-		List<Brand> brands = brandService.searchUserBrandsByPage(searchCondition);
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if(page.getCurrentPage()<1){
+			page.setCurrentPage(1);
+		}
+		
+		List<Brand> brands = brandService.searchUserBrandsByPage(brandSearchCondition);
 		List<BrandCategory> categorys = brandService.getAllCategorys();
-		model.addAttribute("searchCondition",searchCondition);
 		model.addAttribute("brands",brands);
-		model.addAttribute("page",searchCondition.getPage());
+		model.addAttribute("page",page);
 		model.addAttribute("categorys",categorys);
 		return "brand_list";
 	}
