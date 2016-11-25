@@ -8,6 +8,7 @@ import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.WeChatOrder;
 
 public interface BrandMapper {
 	
@@ -28,4 +29,8 @@ public interface BrandMapper {
 	void deleteBrand(int brandId);
 
 	int insertOrUpdateBrand(Brand brand);
+	
+	List<WeChatOrder> getWeChatUserOrderRecords(Page page);
+	
+	int getWeChatOrderCount();
 }

@@ -14,16 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.WeChatOrder;
 import com.lotut.pms.service.BrandService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
-
-import net.lingala.zip4j.exception.ZipException;
 
 @Controller
 @RequestMapping(path="/brand")
@@ -113,5 +111,20 @@ public class BrandController {
 	public void deleteBrand(int brandId,PrintWriter pw){
 		brandService.deleteBrand(brandId);
 		pw.write(1);
+	}
+	
+	
+	@RequestMapping(path="/getWechatOrderList")
+	public String getWechatOrderList(HttpSession session,Page page,Model model){
+		if(page.getCurrentPage()<1){
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		List<WeChatOrder> weChatOrders=brandService.getWeChatUserOrderRecords(page);
+		int totalRecords = brandService.getWeChatOrderCount();
+		page.setTotalRecords(totalRecords);
+		model.addAttribute("weChatOrders",weChatOrders);
+		model.addAttribute("page",page);
+		return "wechat_order_list";
 	}
 }

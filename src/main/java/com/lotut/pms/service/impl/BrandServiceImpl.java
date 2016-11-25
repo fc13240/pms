@@ -3,9 +3,7 @@ package com.lotut.pms.service.impl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -16,6 +14,7 @@ import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.WeChatOrder;
 import com.lotut.pms.service.BrandService;
 import com.lotut.pms.service.utils.BrandExcelParser;
 
@@ -85,5 +84,15 @@ public class BrandServiceImpl implements BrandService{
 		}
 	
 		return true;
+	}
+
+	@Override
+	public List<WeChatOrder> getWeChatUserOrderRecords(Page page) {
+		return brandDao.getWeChatUserOrderRecords(page);
+	}
+	
+	@Override
+	public int getWeChatOrderCount() {
+		return brandDao.getWeChatOrderCount();
 	}
 }

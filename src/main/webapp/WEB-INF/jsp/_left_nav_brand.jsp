@@ -20,7 +20,7 @@
 		</a>
 	</li> 
 	<li class="active">
-		<a href="<s:url value='/brand/buyRecords.html'/>">
+		<a href="<s:url value='/brand/getWechatOrderList.html'/>">
 		<h5>购买记录</h5>
 		</a>
 	</li> 
