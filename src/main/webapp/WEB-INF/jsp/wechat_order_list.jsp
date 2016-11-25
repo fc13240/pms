@@ -69,7 +69,7 @@
 							  <th width="">商标注册号</th>
 							  <th width="">商标名称</th>
 							  <th width="">总金额</th>
-							  <th width="">支付时间</th>
+							  <th width="170px">支付时间</th>
 							</tr>
 						  </thead>
 						  <tbody>
