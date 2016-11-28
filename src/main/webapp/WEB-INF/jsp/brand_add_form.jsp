@@ -19,7 +19,7 @@
 	<div class="container-fluid" >
 		<div class="row" style="margin-left:-30px;min-width:1100px;">
 			  <div class="col-xs-1 sidebar" style="min-width:100px;">
-				<%@ include file="_left_nav_article.jsp" %>
+				<%@ include file="_left_nav_brand.jsp" %>
 			  </div>
 			  <!--left end-->
 			  <!--right begin-->
