@@ -19,7 +19,7 @@
 	<div class="container-fluid" >
 		<div class="row" style="margin-left:-30px;min-width:1100px;">
 			  <div class="col-xs-1 sidebar" style="min-width:100px;">
-				<%@ include file="_left_nav_article.jsp" %>
+				<%@ include file="_left_nav_brand.jsp" %>
 			  </div>
 			  <!--left end-->
 			  <!--right begin-->
@@ -99,12 +99,12 @@ height:37px;
 					
 					<div class="hy_zx_r02">
 						<div class="lou-content" style="padding:10px;">
-							<form method="post" action="<s:url value='/brand/brandAdd.html'/>">
+							<form method="post" action="<s:url value='/brand/brandUpdate.html'/>">
 								<table class="table_con">
 									<tbody>
 									
 									<tr>
-										<th width="80">商标分类</th>
+										<th width="110">商标分类</th>
 										<td>
 											<%-- <input name="id" value="${articleId }" type="hidden"/> --%>
 											<select name="brandCategory.categoryId" class="form-control" style="width:120px;" required>
@@ -136,7 +136,7 @@ height:37px;
 									<tr>
 										<th>价格</th>
 										<td>
-											<input class="form-control" type="number" value="${brand.price}" style="width:600px;" placeholder="" name="price" maxlength="120"/>
+											<input class="form-control" type="number" value="${brand.price}" style="width:600px;" placeholder="" name="price" maxlength="120" required/>
 										</td>
 									</tr>
 									<tr>
@@ -164,7 +164,7 @@ height:37px;
 									<tr>
 										<th>申请日</th>
 										<td>
-											<input style="width:200px;" type="text" class="form-control"  value="${brand.appDate}"
+											<input style="width:200px;" type="text" class="form-control"  value="<fmt:formatDate value="${brand.appDate}" pattern='yyyy-MM-dd'/>"
 												name="appDate"  readonly="readonly" onclick="javascript:$('#app_date_img').click()" id="appDateId" required> 
 											<img style="display:none;" onclick="WdatePicker({el:'appDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" id="app_date_img">
 											
@@ -173,7 +173,7 @@ height:37px;
 									<tr>
 										<th>公告日</th>
 										<td>
-											<input style="width:200px;" type="text" class="form-control" value="${brand.publishDate}"
+											<input style="width:200px;" type="text" class="form-control" value='<fmt:formatDate value="${brand.publishDate}" pattern='yyyy-MM-dd'/>'
 												name="publishDate"  readonly="readonly" onclick="javascript:$('#publish_date_img').click()" id="publishAppDateId" required> 
 											<img style="display:none;" onclick="WdatePicker({el:'publishAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" id="publish_date_img">
 											
@@ -183,7 +183,7 @@ height:37px;
 									<tr>
 										<th>专用权截止日</th>
 										<td>
-											<input style="width:200px;" type="text" class="form-control" value="${brand.endDate}"
+											<input style="width:200px;" type="text" class="form-control" value='<fmt:formatDate value="${brand.endDate}" pattern='yyyy-MM-dd'/>'
 												name="endDate"  readonly="readonly" onclick="javascript:$('#end_date_img').click()" id="endAppDateId" required> 
 											<img style="display:none;" onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" id="end_date_img">
 											

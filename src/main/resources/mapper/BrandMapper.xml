@@ -67,7 +67,7 @@
   	</update>
 
   	<update id="updateRecommend">
-  		update brands set  is_recommend=#{status} where id=#{id}
+  		update brands set  is_recommend=#{status} ,check_status=1 where id=#{id}
   	</update>
   	
   	<select id="searchUserBrandsByPage" parameterType="BrandSearchCondition" resultMap="brandResultMap">
