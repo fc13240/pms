@@ -113,7 +113,7 @@
 		values(#{address},#{brandCategory.categoryId},#{brandNo},
 		 #{name},#{combinationType},#{similarNo},#{transactionMode},#{price},#{scope},#{appPerson},
 		 #{appDate,javaType=date,jdbcType=DATE},#{publishDate,javaType=date,jdbcType=DATE},#{startDate,javaType=date,jdbcType=DATE},
-		 #{endDate,javaType=date,jdbcType=DATE},#{originality},#{caseStatus},#{user.userId},1)
+		 #{endDate,javaType=date,jdbcType=DATE},#{originality},#{caseStatus},#{user.userId},3)
 		on duplicate key update 
 			address=#{address},category_id=#{brandCategory.categoryId},
 			name=#{name},combination_type=#{combinationType},
@@ -122,7 +122,7 @@
 			publish_date=#{publishDate,javaType=date,jdbcType=DATE},
 			start_date=#{startDate,javaType=date,jdbcType=DATE},
 		 	end_date=#{endDate,javaType=date,jdbcType=DATE},originality=#{originality},case_status=#{caseStatus},
-		 	user=#{user.userId},check_status=1
+		 	user=#{user.userId},check_status=3
 	</insert> 
  
   	<insert id="insertOrUpdateBrand" parameterType="Brand" useGeneratedKeys="true" keyProperty="id">
