@@ -66,28 +66,29 @@
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
-							  <th class="center" width="40px">序号</th>
-							  <th width="100px">文章标题</th>
-							  <th width="100px">作者 </th>
-							  <th width="180px">来源</th>
-							  <th width="60px">创建时间</th>
-							  <th width="100px">修改时间</th>
+							  <th class="center" width="20px">序号</th>
+							  <th width="150px">文章标题</th>
+							  <th width="80px">作者 </th>
 							  <th width="50px">发布时间</th>
-							  <th width="50px">审核状态</th>
-							  <th width="50px">内容</th>
-							  <th width="110px">操作</th>
+							  <th width="40px">审核状态</th>
+							  <th width="120px">操作</th>
 							</tr>
 						  </thead>
 						  <tbody>
 							<c:forEach items="${articles}" var="article" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"> ${status.count+ (page.currentPage-1)*page.pageSize} </td>
-								<td style="text-align:center"><c:out value="${article.title}"/></td>
+								<td style="text-align:center"><a target="_blank" href="<s:url value='/article/preview.html?id=${article.id}'/>" >
+								<c:out value="${article.title}"/>
+								</a>
+								</td>
 								<td style="text-align:center"><c:out value="${article.author}"/></td>
-								<td style="text-align:center"><c:out value="${article.source}"/></td>
-								<td style="text-align:center"><fmt:formatDate value="${article.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								<td	style="text-align:center"><fmt:formatDate value="${article.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<c:if test="${article.checkStatus==1}">
 								<td style="text-align:center"><fmt:formatDate value="${article.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								</c:if>
+								<c:if test="${article.checkStatus!=1}">
+								 	<td style="text-align:center"></td>
+								</c:if>
 								<td style="text-align:center">
 								<c:if test="${article.checkStatus==0}">
 								未审核
@@ -99,9 +100,8 @@
 								审核未通过
 								</c:if>
 								</td>
-								<td style="text-align:center"><a href="javacript:return void" onclick="preview(${article.id})" >查看</a></td>
 								<td style="text-align:center">
-									<div class="btn-group">
+									<%-- <div class="btn-group">
 										   <button style="font-size:15px" type="button" class="btn btn-default dropdown-toggle" 
 										      data-toggle="dropdown">
 										      审核 <span class="caret"></span>
@@ -111,7 +111,17 @@
 										      <li class="divider"></li>
 										      <li><a href="<s:url value='/article/audit.html?id=${article.id}&checkStatus=2'/>">审核未通过 </a></li>
 										   </ul>
+									</div> --%>
+									<c:if test="${article.checkStatus!=1}">
+									<div class="btn-group btn-group-lg">
+										  <button id="approved" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="checkArticle('${article.id}','1')">审核通过</button>
 									</div>
+									</c:if>
+									<c:if test="${article.checkStatus==1}">
+									<div class="btn-group btn-group-lg">
+										  <button id="unapprove" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="checkArticle(${article.id},'2')">审核未通过</button>
+									</div>
+									</c:if>
 									<div class="btn-group btn-group-lg">
 										  <button type="button" style="width: 66px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="deleteArticle(${article.id})">删除</button>
 									</div>
@@ -300,14 +310,21 @@ function gotoPageForEnter(event) {
 		location.reload();
 	}
 	
-	
-	function preview(id){
-		window.open("<s:url value='/article/preview.html'/>?id="+id)
-	}
-	
 	function updateArticle(id){
 		window.open("<s:url value='/article/updateArticleForm.html'/>?articleId="+id)
 	}
+	
+	 function checkArticle(id,checkStatus){
+		 $.ajax({
+			type:"get",
+			url:"<s:url value='/article/audit.html'/>?id="+id+"&checkStatus="+checkStatus,
+			success:function (data){
+				location.reload();
+			}
+		}); 
+		
+	} 
+	
 </script>
 </body>
 </html>

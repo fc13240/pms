@@ -28,7 +28,7 @@ public interface NewsMapper {
 	
 	void insertNews(News news);
 	
-	void updateNews(News news);
+	void saveNews(News news);
 	
 	void addNewsImage(NewsImg newsImg);
 	
@@ -42,7 +42,15 @@ public interface NewsMapper {
 	
 	void addNewsType(NewsType newsType);
 	
-	void deleteNullData();
-	
 	void updateNewsCheckStatus(int newsId);
+	
+	void auditPass(News news);
+	
+	List<News> getAllNewsByPage	(Page page);
+	
+	List<News> searchAllNewsByPage(NewsSearchCondition searchCondition);
+	
+	int getAllNewsCount(int userId);
+	
+	int searchAllNewsCount(NewsSearchCondition searchCondition);
 }

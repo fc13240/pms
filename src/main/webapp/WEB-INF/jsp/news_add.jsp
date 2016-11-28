@@ -112,11 +112,11 @@ height:37px;
 									<tr>
 										<th width="80">新闻分类</th>
 										<td>
-											<input name="id" value="${newsId }" type="hidden"/>
+											<%-- <input name="id" value="${newsId}" type="hidden"/> --%>
 											<select name="newsType.typeId" class="form-control" style="width:120px;" required>
 												<option value="">--请选择--</option>
-												<c:forEach items="${newsTypes }" var="newsType">
-													<option value="${newsType.typeId }">${newsType.typeName }</option>
+												<c:forEach items="${newsTypes}" var="newsType">
+													<option value="${newsType.typeId}">${newsType.typeName}</option>
 												</c:forEach>						
 											</select> 
 										</td>
@@ -124,13 +124,13 @@ height:37px;
 									<tr>
 										<th>标题</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入标题" name="title" required maxlength="100" required/>
+											<input class="form-control" style="width:600px;" placeholder="请输入标题" name="title" required maxlength="50" required/>
 										</td>
 									</tr>
 									<tr>
 										<th>作者</th>
 										<td>
-										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author"  maxlength="100"/>
+										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author"  maxlength="30"/>
 										</td>
 									</tr>						
 									<tr>
@@ -142,12 +142,13 @@ height:37px;
 									<tr>
 										<th>关键字</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" required name="keywords" maxlength="100"/>
+											<input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔"  name="keywords" maxlength="120"/>
 										</td>
 									</tr>
 									<tr>
 										<th>缩略图</th>
 										<td>
+											<input  type="hidden" id="smallImgUrl"  name="smallImgUrl" />
 											<input style="width:300px;display:inline;" type="text" id="newsThumbnailname"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=newsThumbnail]').click();" />
 											<button type="button" onclick="uploadImg()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
@@ -173,7 +174,7 @@ height:37px;
 							<div class="form-actions">
 								<button type="submit" style="display:none;" id="submitBtn">提交</button>
 								<button type="button" style="display:inline;margin-left:500px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(0)">保存</button>
-								<button type="button" style="margin-left:20px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(1)">发布</button>
+								<!-- <button type="button" style="margin-left:20px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(1)">发布</button> -->
 							</div>		
 							</form>
 							
@@ -208,13 +209,13 @@ height:37px;
 	
 	function uploadNewsThumbnail(){
 		var form=$("#uploadNewsThumbnailForm");
-		var newsId=${newsId};
 		var ajaxBody={
 				type:"POST",
-				data:{"file":$("#newsThumbnail").val(),"newsId":newsId},
+				data:{"file":$("#newsThumbnail").val()},
 				beforeSubmit:function (){
 					var fileName=$("#newsThumbnail").val();
 					var suffix=fileName.substr(fileName.lastIndexOf(".")+1);
+					suffix =suffix.toLowerCase();
 					if(suffix=="jpg"||suffix=="jpeg"||suffix=="png"){
 						return true;
 					}else{
@@ -223,6 +224,7 @@ height:37px;
 					}
 				},
 				success:function(result){
+					$("#smallImgUrl").val(result);
 					alert("上传成功!");
 				}
 		};

@@ -9,48 +9,45 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
-<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
-<title>龙图腾专利管家-文章列表</title>
+<title>龙图腾专利管家-商标列表</title>
 <%@ include file="_css.jsp" %>
 
 </head>
 <body>
 <%@ include file="_top.jsp" %>
 <div class="col-xs-1 sidebar" style="min-width:100px;">
-			<%@ include file="_left_nav_article.jsp" %>
+			<%@ include file="_left_nav_brand.jsp" %>
 		  </div>
 	<div class="tit_top">
         <div class="title2">
-           文章列表</div>
+           商标列表</div>
                
     </div>
 		<div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right" style="padding:10px 0 0 3px;" >
 				    <div class="cl top1" style="height:10px;">
 				    
-					  <form class="form-inline" action="<s:url value='/article/searchUserArticles.html'/>" method="get">
+					  <form class="form-inline" action="<s:url value='/brand/searchUserBrands.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1" required/>
 						  <div class="t-third">
 
 						  <table class="search-table">
 							  <tr>
-							  <td>文章类型</td>
+							  <td>商标类别</td>
 							  <td>关键字</td>
 							  <td></td>
 							  </tr>
 							  <tr>
 							  <td>
-								<select  style="width:100px;" class="selectPointOfInterest form-control" name="articleType">
+								<select  style="width:110px;" class="selectPointOfInterest form-control" name="categoryId">
 								  <option value="">全部</option>
-								  <c:forEach items="${articleTypes}" var="articleType">
-									<option value="<c:out value='${articleType.typeId}'/>">
-									<c:out value="${articleType.typeName}"/>
-									</option>
+								  <c:forEach items="${categorys }" var="category">
+								  	<option value="${category.categoryId }" <c:if test="${category.categoryId==searchCondition.categoryId }">selected="selected"</c:if>>${category.categoryName }</option>
 								  </c:forEach>
 								</select>
 							  </td>
 							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId"  placeholder="标题/关键字/作者" class="t-input form-control"/>							  
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId"  placeholder="商标名称/注册号" class="t-input form-control" value="${searchCondition.keyword }"/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
@@ -67,44 +64,90 @@
 						  <thead>
 							<tr class="simple_bag">
 							  <th class="center" width="20px">序号</th>
-							  <th width="150px">文章标题</th>
-							  <th width="80px">作者 </th>
-							  <th width="50px">发布时间</th>
-							  <th width="40px">审核状态</th>
-							  <th width="110px">操作</th>
+							  <th width="">商标名称</th>
+							  <th width="">注册号</th>
+							 <!--  <th width="">组合类型 </th> -->
+							  <th width="">类别</th>
+							  <!-- <th width="">商品列表</th>
+							  <th width="">类似群组</th>
+							  <th width="">有效期限</th> -->
+							  <th width="">价格</th>
+							  <th width="">上下架状态</th>
+							  <th width="">审核状态</th>
+							  <th width="">推荐状态</th>
+							  <th width="350px">操作</th>
 							</tr>
 						  </thead>
 						  <tbody>
-							<c:forEach items="${articles}" var="article" varStatus="status">
-							  <tr>
-								<td class="center" style="text-align:center"> ${status.count+ (page.currentPage-1)*page.pageSize} </td>
-								<td style="text-align:center"><a target="_blank" href="<s:url value='/article/preview.html?id=${article.id}'/>" >
-								<c:out value="${article.title}"/>
-								</a>
-								</td>
-								<td style="text-align:center"><c:out value="${article.author}"/></td>
-								<c:if test="${article.checkStatus==1}">
-								<td style="text-align:center"><fmt:formatDate value="${article.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								</c:if>
-								<c:if test="${article.checkStatus!=1}">
-								 	<td style="text-align:center"></td>
-								</c:if>
-								<td style="text-align:center">
-								<c:if test="${article.checkStatus==0}">
-								未审核
-								</c:if>
-								<c:if test="${article.checkStatus==1}">
-								已审核
-								</c:if>
-								<c:if test="${article.checkStatus==2}">
-								审核未通过
-								</c:if>
-								</td>
-								<td style="text-align:center">
-									<a  href="javacript:return void" onclick="updateArticle(${article.id})">修改</a>
-									<a  href="javacript:return void" onclick="deleteArticle(${article.id})">删除</a>
-								</td>
-							  </tr>
+						  	<c:forEach items="${brands}" var="brand" varStatus="status">
+								<tr>
+									<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+									<td style="text-align:center">${brand.name }</td>
+									<td style="text-align:center">${brand.brandNo }</td>
+									<%-- <td style="text-align:center">${brand.combinationType }</td> --%>
+									<td style="text-align:center">${brand.brandCategory.categoryName }</td>
+									<%-- <td style="text-align:center">${brand.scope }</td>
+									<td style="text-align:center">${brand.similarNo }</td>
+									<td style="text-align:center"><fmt:formatDate value="${brand.startDate }" pattern="yyyy年MM月dd日"/>至<fmt:formatDate value="${brand.endDate }" pattern="yyyy年MM月dd日"/></td> --%>
+									<td style="text-align:center">${brand.price }</td>
+									<td style="text-align:center"><c:if test="${brand.sellStatus==1 }">
+											<font color="red">出售中</font>
+										</c:if> 
+										<c:if test="${brand.sellStatus==2 }">
+											<font color="black">下架</font>
+										</c:if>  
+									</td>
+									<td style="text-align:center">
+										<c:if test="${brand.checkStatus==1 }">
+											<font color="black">审核通过</font>
+										</c:if> 
+										<c:if test="${brand.checkStatus==2 }">
+											<font color="red">审核未通过</font>
+										</c:if>  
+										<c:if test="${brand.checkStatus==3 }">
+											<font color="red">未审核</font>
+										</c:if>  
+									</td>
+									<td style="text-align:center">
+										<%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_ORDER','ROLE_TRADER','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_TECH','ROLE_PROCESS','ROLE_NEWS')"> --%>
+
+										<c:if test="${brand.isRecommend==1 }">
+											<font color="black">未推荐</font>
+										</c:if> 
+										<c:if test="${brand.isRecommend==2 }">
+											<font color="red">推荐商标</font>
+										</c:if>  
+									</td>
+									<td style="text-align:center">
+										<%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_ORDER','ROLE_TRADER','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_TECH','ROLE_PROCESS','ROLE_NEWS')"> --%>
+											<button class="btn btn-info">修改</button>
+											<button  class="btn btn-warning" onclick="deleteBrands(${brand.id })">删除</button>
+										<%-- </se:authorize> --%>
+										<se:authorize access="hasRole('ROLE_ORDER')">
+											<c:if test="${brand.checkStatus!=1}">
+												<div class="btn-group btn-group-lg">
+													  <button id="approved" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default" onclick="updateCheckStatus('${brand.id}','1')">置为已通过</button>
+												</div>
+											</c:if>
+											<c:if test="${brand.checkStatus==1}">
+												<div class="btn-group btn-group-lg">
+													  <button id="unapprove" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default" onclick="updateCheckStatus(${brand.id},'2')">置为未通过</button>
+												</div>
+											</c:if>
+											<c:if test="${brand.isRecommend==2}">
+												<div class="btn-group btn-group-lg">
+													  <button id="approved" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default" onclick="updateRecommendStatus('${brand.id}','1')">置为不推荐</button>
+												</div>
+											</c:if>
+											<c:if test="${brand.isRecommend==1}">
+												<div class="btn-group btn-group-lg">
+													  <button id="unapprove" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default" onclick="updateRecommendStatus(${brand.id},'2')">置为推荐</button>
+												</div>
+											</c:if>
+										</se:authorize>
+									</td>
+									
+								</tr>
 							</c:forEach>
 						  </tbody>
 						</table>
@@ -195,10 +238,10 @@ function gotoPage() {
 		return;
 	}
 	
-	var url = "<s:url value='/article/list.html'/>?currentPage=" + pageNo;
+	var url = "<s:url value='/brand/list.html'/>?currentPage=" + pageNo;
 	
 	<c:if test="${searchCondition != null}">
-		url = "<s:url value='/article/searchUserArticles.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		url = "<s:url value='/brand/searchUserBrands.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 	</c:if>
 	
 	
@@ -232,27 +275,38 @@ function gotoPageForEnter(event) {
 		});		
 	}
 	
-	function deleteArticle(articleId){
-		$.ajax({
-			url:"<s:url value='/article/deleteArticle.html'/>",
-			data:{"articleId":articleId},
-			async:false,
-			success:function (){
-				
-			}
-		});
-		
-		location.reload();
-	}
+</script>
+<script type="text/javascript">
+function updateCheckStatus(id,checkStatus){
+	 $.ajax({
+		type:"get",
+		url:"<s:url value='/brand/updateCheckStatus.html'/>?id="+id+"&status="+checkStatus,
+		success:function (data){
+			location.reload();
+		}
+	});
 	
+} 
 
-	function preview(id){
-		window.open("<s:url value='/article/preview.html'/>?id="+id)
-	}
+function deleteBrands(brandId){
+	$.ajax({
+		url:"<s:url value='/brand/deleteBrand.html'/>",
+		data:{"brandId":brandId},
+		success:function(){
+			location.reload();
+		}
+	})
+}
+function updateRecommendStatus(id,checkStatus){
+	 $.ajax({
+		type:"get",
+		url:"<s:url value='/brand/updateRecommend.html'/>?id="+id+"&status="+checkStatus,
+		success:function (data){
+			location.reload();
+		}
+	});
 	
-	function updateArticle(id){
-		window.open("<s:url value='/article/updateArticleForm.html'/>?articleId="+id)
-	}
+}
 </script>
 </body>
 </html>

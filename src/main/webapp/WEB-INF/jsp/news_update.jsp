@@ -125,13 +125,13 @@ height:37px;
 									<tr>
 										<th>标题</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入标题" name="title" required maxlength="100" value="${news.title }"/>
+											<input class="form-control" style="width:600px;" placeholder="请输入标题" name="title" required maxlength="50" value="${news.title }"/>
 										</td>
 									</tr>
 									<tr>
 										<th>作者</th>
 										<td>
-										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author"  maxlength="100" value="${news.author }"/> 
+										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author"  maxlength="30" value="${news.author }"/> 
 										</td>
 									</tr>						
 									<tr>
@@ -143,12 +143,13 @@ height:37px;
 									<tr>
 										<th>关键字</th>
 										<td>
-											 <input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="100" value="${news.keywords }" required/> 
+											 <input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="120" value="${news.keywords }"/> 
 										</td>
 									</tr>
 									<tr>
 										<th>缩略图</th>
 										<td>
+											<input  type="hidden" id="smallImgUrl"  name="smallImgUrl" />
 											<input style="width:300px;display:inline;" type="text" id="newsThumbnailname"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=newsThumbnail]').click();" />
 											<button type="button" onclick="uploadImg()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
@@ -172,7 +173,7 @@ height:37px;
 								<div class="form-actions">
 									<button type="submit" style="display:none;" id="submitBtn">提交</button>
 								<button type="button" style="display:inline;margin-left:500px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(0)">保存</button>
-								<button type="button" style="margin-left:20px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(1)">发布</button>
+								<!-- <button type="button" style="margin-left:20px;" class="t-btn3 button button-primary  button-rounded" onclick="saveNews(1)">发布</button> -->
 								</div>		
 							</form>
 							<form action="<s:url value='/news/uploadNewsThumbnail.html'/>" id="uploadNewsThumbnailForm" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -207,13 +208,13 @@ height:37px;
 	
 	function uploadNewsThumbnail(){
 		var form=$("#uploadNewsThumbnailForm");
-		var newsId=$("#newsId").val();
 		var ajaxBody={
 				type:"POST",
-				data:{"file":$("#newsThumbnail").val(),"newsId":newsId},
+				data:{"file":$("#newsThumbnail").val()},
 				beforeSubmit:function (){
 					var fileName=$("#newsThumbnail").val();
 					var suffix=fileName.substr(fileName.lastIndexOf(".")+1);
+					suffix =suffix.toLowerCase();
 					if(suffix=="jpg"||suffix=="jpeg"||suffix=="png"){
 						return true;
 					}else{
@@ -222,6 +223,7 @@ height:37px;
 					}
 				},
 				success:function(result){
+					$("#smallImgUrl").val(result);
 					alert("上传成功!");
 				}
 		};

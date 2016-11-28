@@ -7,10 +7,10 @@
 <!DOCTYPE html >
 <html>
 <head>
-<c:import url="common/kindEditor.jsp"></c:import>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <script src="<s:url value='/static/js/sweetalert.min.js'/>"></script>
 <link rel="stylesheet" type="text/css"
 	href="<s:url value='/static/css/sweetalert.css'/>">
@@ -43,7 +43,7 @@
 		color: #333;
 		font-size: 18px;
 		padding: 30px 20px 15px 4px;
-		float: left;
+		/* float: left; */
 	}
 	
 	.pre_clo {
@@ -64,32 +64,12 @@
 		line-height: 28px;
 		text-indent: 2em;
 		text-align: left;
-		overflow: auto;
+		overflow: auto; 
 		color: #666;
 		font-size: 14px;
 	}
 	
-	.pre_picture1{
-		clear: both;
-		margin: 15px 40px;
-		width: 810px;
-		line-height: 28px;
-		text-indent: 0em;
-		text-align: left;
-		overflow: auto;
-		color: #666;
-		font-size: 14px;
-	
-	}
-	
-	.picL9 {
-		overflow: hidden;
-		position: relative;
-		float: left;
-		display: inline;
-		width: 199px;
-		height: 200px;
-		margin: 1px 0 0 1px;}
+    p{text-indent:2em} 
 </style>
 </head>
 <body style="background-color: #FFF;" id="dlstCircleArticle">
@@ -100,23 +80,28 @@
 	<div id="mincontent" style="min-height: 577px;margin:-35px;">
 
 		<div class="main">
-			<div class="tit_top">
-				<div class="pre_title">文章内容</div>
+			<div >
+				<div class="pre_title" style="text-align:center"><h3>${article.title}</h3></div>
 			</div>
-			<div class="pre_text" id="div_1">${article.content}</div>
 			
-			<%-- <div class="tit_top">
-				<div class="pre_title">简要说明</div>
+			<div>
+				<div style="float:left;margin-left: 60px;" >作者：${article.author}</div>
+				<div style="float:left;margin-left: 800px;" ><fmt:formatDate value="${article.publishTime}" pattern="yyyy年MM月dd日 HH:mm"/></div>
 			</div>
-			<div class="pre_text" id="div_3">${patentDoc.manual}</div>
+			<br/>
+			<div>
+				<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="90%" color=#987cb9 SIZE=3>
+			</div>
 			
-			<div class="tit_top">
-				<div class="pre_title">图片或照片</div>
-			</div> --%>
-	
-		
-				
-				
+			<div>
+				<div style="margin-left: 80px;margin-right: 80px;"><p>${article.content}<p></div>
+			</div>
+			<div>
+				<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="90%" color=#987cb9 SIZE=3>
+			</div>
+			<div>
+				<div style="float:left;margin-left: 60px;" >来源：${article.source}</div>
+			</div>	
 					
 			
 		</div>

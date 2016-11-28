@@ -14,6 +14,8 @@
 	<http use-expressions="true">
 		<intercept-url pattern="/loginForm.html" access="permitAll"/>
 		<intercept-url pattern="/alipay/notify.html" access="isAnonymous()"/>
+		<intercept-url pattern="/unionPay/backRcvResponse.html" access="isAnonymous()"/>
+		<intercept-url pattern="/patentDocUnionPay/backRcvResponse.html" access="isAnonymous()"/>
 		<intercept-url pattern="/patentDocAlipay/notify.html" access="isAnonymous()"/>
 		<intercept-url pattern="/favicon.ico" access="isAnonymous()"/>
 		<intercept-url pattern="/user/registerForm.html" access="isAnonymous()"/>

@@ -61,8 +61,8 @@ public class NewsMybatisDao extends SqlSessionDaoSupport implements NewsDao{
 	}
 	
 	@Override
-	public void updateNews(News news) {
-		newsMapper.updateNews(news);
+	public void saveNews(News news) {
+		newsMapper.saveNews(news);
 	}
 	
 	@Override
@@ -102,9 +102,32 @@ public class NewsMybatisDao extends SqlSessionDaoSupport implements NewsDao{
 	}
 
 	@Override
-	public void deleteNullData() {
-		newsMapper.deleteNullData();
+	public void auditPass(News news) {
+		newsMapper.auditPass(news);
+	}
+
+	@Override
+	public List<News> getAllNewsByPage(Page page) {
 		
+		return newsMapper.getAllNewsByPage(page);
+	}
+
+	@Override
+	public List<News> searchAllNewsByPage(NewsSearchCondition searchCondition) {
+		
+		return newsMapper.searchAllNewsByPage(searchCondition);
+	}
+
+	@Override
+	public int getAllNewsCount(int userId) {
+		
+		return newsMapper.getAllNewsCount(userId);
+	}
+
+	@Override
+	public int searchAllNewsCount(NewsSearchCondition searchCondition) {
+		
+		return newsMapper.searchAllNewsCount(searchCondition);
 	}
 	
 }

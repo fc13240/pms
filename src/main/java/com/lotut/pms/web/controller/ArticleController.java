@@ -36,8 +36,7 @@ public class ArticleController {
 	@RequestMapping(path="/list")
 	public String getUserArticles(Page page, HttpSession session,Model model){
 		UserArticle userArticle=new UserArticle();
-		articleService.deleteNullData();
-		if(PrincipalUtils.isAdmin()||PrincipalUtils.isOrderProcessor()){
+		if(PrincipalUtils.isNews()){
 			 userArticle=articleService.getCheckedArticleList(page, session);
 			 model.addAttribute("articles", userArticle.getArticles());
 			 model.addAttribute("page", userArticle.getPage());
@@ -80,9 +79,13 @@ public class ArticleController {
 	}
 	
 	@RequestMapping(path="/audit", method=RequestMethod.GET)
-	public String audit(Article article){
+	public void audit(Article article,PrintWriter out){
 		articleService.auditArticle(article);
-		return "redirect:/article/list.html";
+		if(article.getCheckStatus()==1){
+		out.write(1);
+		}else{
+			out.write("other");
+		}
 		
 	}
 	
@@ -103,8 +106,14 @@ public class ArticleController {
 	}
 	
 	@RequestMapping(path="/deleteArticleType", method=RequestMethod.GET)
-	public void deleteArticleType(int typeId) {
-		articleService.deleteArticleType(typeId);
+	public void deleteArticleType(int typeId,PrintWriter out) {
+		int count = articleService.getArticleCountByType(typeId);
+		if(count<=0){
+			articleService.deleteArticleType(typeId);
+			out.write("删除成功！");
+		}else{
+			out.write("该分类已被使用，不能删除！");
+		}
 	}
 	
 	@RequestMapping(path="/updateArticleType", method=RequestMethod.GET)
@@ -121,21 +130,27 @@ public class ArticleController {
 	}
 	@RequestMapping(path="/addArticleForm")
 	public String addArticleForm(Model model) {
-		int userId = PrincipalUtils.getCurrentUserId();
-		Article article = new Article();
-		User user =new User();
-		user.setUserId(userId);
-		article.setUser(user);
-		articleService.insertArticle(article);
+//		int userId = PrincipalUtils.getCurrentUserId();
+//		Article article = new Article();
+//		User user =new User();
+//		user.setUserId(userId);
+//		article.setUser(user);
+//		articleService.insertArticle(article);
 		List<ArticleType> articleTypes=articleService.getAllArticleTypes();
-		model.addAttribute("articleId", article.getId());
+//		model.addAttribute("articleId", article.getId());
 		model.addAttribute("articleTypes", articleTypes);
 		return "article_add";
 	}	
 	
 	@RequestMapping(path="/saveArticle")
 	public String saveArticle(Article article) {
-		articleService.updateArticle(article);
+		//articleService.updateArticle(article);
+		
+		int userId = PrincipalUtils.getCurrentUserId();
+		User user =new User();
+		user.setUserId(userId);
+		article.setUser(user);
+		articleService.insertArticle(article);
 		return "redirect:/article/list.html";
 	}
 	

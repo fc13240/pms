@@ -10,47 +10,46 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
 <script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
-<title>龙图腾专利管家-文章列表</title>
+<title>龙图腾专利管家-新闻列表</title>
 <%@ include file="_css.jsp" %>
 
 </head>
 <body>
 <%@ include file="_top.jsp" %>
 <div class="col-xs-1 sidebar" style="min-width:100px;">
-			<%@ include file="_left_nav_article.jsp" %>
+			<%@ include file="_left_nav_news.jsp" %>
 		  </div>
 	<div class="tit_top">
         <div class="title2">
-           文章列表</div>
+           新闻列表</div>
                
     </div>
 		<div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right" style="padding:10px 0 0 3px;" >
-				    <div class="cl top1" style="height:10px;">
-				    
-					  <form class="form-inline" action="<s:url value='/article/searchUserArticles.html'/>" method="get">
-						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1" required/>
+				 <div class="cl top1" style="height:10px;">
+					  <form class="form-inline" action="<s:url value='/news/searchAllNews.html'/>" method="get">
+						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 						  <div class="t-third">
 
 						  <table class="search-table">
 							  <tr>
-							  <td>文章类型</td>
+							  <td>新闻类型</td>
 							  <td>关键字</td>
 							  <td></td>
 							  </tr>
 							  <tr>
 							  <td>
-								<select  style="width:100px;" class="selectPointOfInterest form-control" name="articleType">
+								<select  style="width:100px;" class="selectPointOfInterest form-control" name="newsType">
 								  <option value="">全部</option>
-								  <c:forEach items="${articleTypes}" var="articleType">
-									<option value="<c:out value='${articleType.typeId}'/>">
-									<c:out value="${articleType.typeName}"/>
+								  <c:forEach items="${allNewsType}" var="newsType">
+									<option value="<c:out value='${newsType.typeId}'/>">
+									<c:out value="${newsType.typeName}"/>
 									</option>
 								  </c:forEach>
 								</select>
 							  </td>
 							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId"  placeholder="标题/关键字/作者" class="t-input form-control"/>							  
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId" placeholder="标题/作者/关键字" class="t-input form-control"/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
@@ -59,7 +58,6 @@
 						  </table>
 						  </div>
 						</form>
-
     			</div>
 				<div style="height:10px;"></div>
 					<div class="lt-box" style="padding:50px 0 0 0;">
@@ -67,7 +65,7 @@
 						  <thead>
 							<tr class="simple_bag">
 							  <th class="center" width="20px">序号</th>
-							  <th width="150px">文章标题</th>
+							  <th width="150px">新闻标题</th>
 							  <th width="80px">作者 </th>
 							  <th width="50px">发布时间</th>
 							  <th width="40px">审核状态</th>
@@ -75,34 +73,65 @@
 							</tr>
 						  </thead>
 						  <tbody>
-							<c:forEach items="${articles}" var="article" varStatus="status">
+							<c:forEach items="${news}" var="news" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"> ${status.count+ (page.currentPage-1)*page.pageSize} </td>
-								<td style="text-align:center"><a target="_blank" href="<s:url value='/article/preview.html?id=${article.id}'/>" >
-								<c:out value="${article.title}"/>
+								<td style="text-align:center">
+								<a target="_blank" href="<s:url value='/news/getUserNewsById.html'/>?newsId=<c:out value='${news.id}'/>" >
+								<c:out value="${news.title}"/>
 								</a>
 								</td>
-								<td style="text-align:center"><c:out value="${article.author}"/></td>
-								<c:if test="${article.checkStatus==1}">
-								<td style="text-align:center"><fmt:formatDate value="${article.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<td style="text-align:center"><c:out value="${news.author}"/></td>
+								<c:if test="${news.checkStatus==1}">
+								<td style="text-align:center"><fmt:formatDate value="${news.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								</c:if>
-								<c:if test="${article.checkStatus!=1}">
+								<c:if test="${news.checkStatus!=1}">
 								 	<td style="text-align:center"></td>
 								</c:if>
 								<td style="text-align:center">
-								<c:if test="${article.checkStatus==0}">
+								<c:if test="${news.checkStatus==0}">
 								未审核
 								</c:if>
-								<c:if test="${article.checkStatus==1}">
+								<c:if test="${news.checkStatus==1}">
 								已审核
 								</c:if>
-								<c:if test="${article.checkStatus==2}">
+								<c:if test="${news.checkStatus==2}">
 								审核未通过
 								</c:if>
 								</td>
+								<%-- <td style="text-align:center">
+									<a  href="javacript:return void" onclick="updateNews(${news.id})">修改</a>
+									<a  href="javacript:return void" onclick="deleteNews(${news.id})">删除</a>
+								</td> --%>
 								<td style="text-align:center">
-									<a  href="javacript:return void" onclick="updateArticle(${article.id})">修改</a>
-									<a  href="javacript:return void" onclick="deleteArticle(${article.id})">删除</a>
+									<%-- <div class="btn-group">
+										   <button style="font-size:15px" type="button" class="btn btn-default dropdown-toggle" 
+										      data-toggle="dropdown">
+										      审核 <span class="caret"></span>
+										   </button>
+										   <ul class="dropdown-menu" role="menu">
+										      <li><a href="<s:url value='/news/audit.html?id=${news.id}&checkStatus=1'/>">审核通过</a></li>
+										      <li class="divider"></li>
+										      <li><a href="<s:url value='/news/audit.html?id=${news.id}&checkStatus=2'/>">审核未通过 </a></li>
+										   </ul>
+									</div> --%>
+									<c:if test="${news.checkStatus!=1}">
+									<div class="btn-group btn-group-lg">
+										  <button id="approved" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="checkNews('${news.id}','1')">审核通过</button>
+									</div>
+									</c:if>
+									<c:if test="${news.checkStatus==1}">
+									<div class="btn-group btn-group-lg">
+										  <button id="unapprove" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="checkNews(${news.id},'2')">审核未通过</button>
+									</div>
+									</c:if>
+									<div class="btn-group btn-group-lg">
+										  <button type="button" style="width: 66px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="deleteNews(${news.id})">删除</button>
+									</div>
+									<div class="btn-group btn-group-lg">
+										  <button type="button" style="width: 66px;height: 36px;font-size:14px" class="btn btn-default dropdown-toggle" onclick="updateNews(${news.id})">修改</button>
+									</div>
+								
 								</td>
 							  </tr>
 							</c:forEach>
@@ -175,6 +204,82 @@
 				
 
 <script type="text/javascript">
+
+	function addAppPerson(){
+		var url = "<s:url value='/appPerson/feeReduceTransactAppPersonForm.html'/>";
+		location.href = url
+	}
+	
+	function searchShareUserDetail(shareUserId){
+		var url = "<s:url value='/user/searchShareUserDetail.html'/>?shareUserId=" + shareUserId;
+		window.open(url);
+	}
+	
+	$('tr th input.check-item').click(function() {
+		var checked = $(this).prop("checked");
+		
+		if (checked) {
+			$('tr td input.check-item').each(function() {
+				$(this).prop("checked", true);
+			});
+		} else {
+			$('tr td input.check-item').each(function() {
+				$(this).prop("checked", false);
+			});
+		}
+	});
+	
+	$('tr td input.check-item').click(function() {
+		var allChecked = true;
+		var friendCheckboxes = $('tr td input.check-item');
+		
+		if ($(this).checked) {
+			for (var i = 0; i < friendCheckboxes.length; i++) {
+				if (!friendCheckboxes[i].checked) {
+					allChecked = false;
+					break;
+				}
+			}			
+		} else {
+			allChecked = false;
+		}
+		
+		if (allChecked) {
+			$('tr th input.check-item').prop("checked", true);
+		} else {
+			$('tr th input.check-item').prop("checked", false);
+		}
+	});
+	
+	function batchShareAppPerson() {
+		var appPersonSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+		var uniqueAppPersonNos = []
+		if (!appPersonSelected) {
+			formutil.alertMessage('请选择申请人');
+			
+			return;
+		}
+		var appPersons_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'appPerson');
+		for (var i = 0; i < appPersons_checked.length; i++) {
+			if ($.inArray(appPersons_checked[i], uniqueAppPersonNos) == -1) {
+				uniqueAppPersonNos.push(appPersons_checked[i]);
+			}
+		}		
+		var appPersons = uniqueAppPersonNos.join(",");		
+		var url = "<s:url value='/appPerson/showFriends.html'/>?appPersons=" + appPersons;
+		location.href= url
+	}
+		
+		function downloadProxyTemplate(){
+			location.href="<s:url value='/appPerson/downloadProxyTemplate.html'/>";
+		}
+		
+		$(function(){
+			
+			
+		})
+		
+		
 function gotoPage() {
 	var pageNo = document.getElementById("page.pageNo").value;
 	
@@ -195,10 +300,10 @@ function gotoPage() {
 		return;
 	}
 	
-	var url = "<s:url value='/article/list.html'/>?currentPage=" + pageNo;
+	var url = "<s:url value='/news/list.html'/>?currentPage=" + pageNo;
 	
 	<c:if test="${searchCondition != null}">
-		url = "<s:url value='/article/searchUserArticles.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		url = "<s:url value='/news/searchNews.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 	</c:if>
 	
 	
@@ -232,27 +337,33 @@ function gotoPageForEnter(event) {
 		});		
 	}
 	
-	function deleteArticle(articleId){
+	function deleteNews(id){
 		$.ajax({
-			url:"<s:url value='/article/deleteArticle.html'/>",
-			data:{"articleId":articleId},
+			url:"<s:url value='/news/deleteNews.html'/>",
+			data:{"newsId":id},
 			async:false,
 			success:function (){
 				
 			}
 		});
-		
 		location.reload();
+		
 	}
 	
-
-	function preview(id){
-		window.open("<s:url value='/article/preview.html'/>?id="+id)
+	function updateNews(id){
+		window.open("<s:url value='/news/updateNewsForm.html'/>?newsId="+id)
 	}
 	
-	function updateArticle(id){
-		window.open("<s:url value='/article/updateArticleForm.html'/>?articleId="+id)
-	}
+	function checkNews(id,checkStatus){
+		 $.ajax({
+			type:"get",
+			url:"<s:url value='/news/audit.html'/>?id="+id+"&checkStatus="+checkStatus,
+			success:function (data){
+				location.reload();
+			}
+		}); 
+		
+	} 
 </script>
 </body>
 </html>

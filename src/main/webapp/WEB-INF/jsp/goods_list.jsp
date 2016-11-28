@@ -182,6 +182,7 @@
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.addDate}" pattern="yyyy-MM-dd"/></td>
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.transactionDate}" pattern="yyyy-MM-dd"/></td>
 							<td >
+							&nbsp;
 							<c:if test="${patent.status==2}">
 							  <a href="javascript:return void;"  onclick="upTransactionPatent(${patent.patentId})">	 
 							  上架
@@ -195,7 +196,21 @@
 			             	  &nbsp;&nbsp;&nbsp;
 							  <a href="javascript:return void;"  onclick="deleteTransactionPatent(${patent.patentId})">
 							  删除
-							  </a>       	  
+							  </a>
+							  <br/>
+							  &nbsp;
+							  <c:if test="${patent.status==1}">
+								  <c:if test="${patent.recommendStatus==0}">
+								  <a href="javascript:return void;"  onclick="recommendPatent(${patent.patentId})">	 
+								        推荐
+								  </a>
+								  </c:if>
+								  <c:if test="${patent.recommendStatus==1}">
+								  <a href="javascript:return void;"  onclick="cancelRecommendPatent(${patent.patentId})">
+								       取消推荐
+								  </a> 
+				             	  </c:if>  
+			             	   </c:if>     	  
 							  </td>
 						  </tr>
 						</c:forEach>
@@ -277,6 +292,28 @@
 		formutil.clickAllCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
 		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
 	});
+	
+	function recommendPatent(patentId) {
+		$.ajax({
+			url: "<s:url value='/patent/recommendPatent.html'/>?patentId=" + patentId,
+			type: 'get', 
+			success: function(data) {
+				formutil.alertMessage('推荐成功',true);
+				location.reload();
+			}
+		});	
+	}
+	
+	function cancelRecommendPatent(patentId) {
+		$.ajax({
+			url: "<s:url value='/patent/cancelRecommendPatent.html'/>?patentId=" + patentId,
+			type: 'get', 
+			success: function(data) {
+				formutil.alertMessage('已取消推荐',true);
+				location.reload();
+			}
+		});	
+	}
 	
 	function downTransactionPatent(patentId) {
 		$.ajax({

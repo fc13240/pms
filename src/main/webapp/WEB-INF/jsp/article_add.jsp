@@ -113,7 +113,7 @@ height:37px;
 									<tr>
 										<th width="80">文章分类</th>
 										<td>
-											<input name="id" value="${articleId }" type="hidden"/>
+											<%-- <input name="id" value="${articleId }" type="hidden"/> --%>
 											<select name="articleType.typeId" class="form-control" style="width:120px;" required>
 												<option value="">--请选择--</option>
 												<c:forEach items="${articleTypes }" var="articleType">
@@ -125,13 +125,13 @@ height:37px;
 									<tr>
 										<th>标题</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入标题" name="title" required maxlength="100"/>
+											<input class="form-control" style="width:600px;" placeholder="请输入标题" name="title" required maxlength="50"/>
 										</td>
 									</tr>
 									<tr>
 										<th>作者</th>
 										<td>
-										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author" required maxlength="100"/>
+										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author" maxlength="30"/>
 										</td>
 									</tr>						
 									<tr>
@@ -143,7 +143,7 @@ height:37px;
 									<tr>
 										<th>关键字</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="100" required/>
+											<input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="120"/>
 										</td>
 									</tr>
 							<!-- 	<tr>

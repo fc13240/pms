@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lotut.pms.domain.Article;
 import com.lotut.pms.domain.News;
-import com.lotut.pms.domain.NewsImg;
 import com.lotut.pms.domain.NewsSearchCondition;
 import com.lotut.pms.domain.NewsType;
 import com.lotut.pms.domain.Page;
@@ -41,17 +41,27 @@ public class NewsController {
 		if(page.getCurrentPage()<1){
 			page.setCurrentPage(1);
 		}
-		newsService.deleteNullData();
 		int userId=PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
-		List<News> news=newsService.getUserNewsByPage(page);
-		int totalCount=(int)newsService.getUserNewsCount(userId);
-		page.setTotalRecords(totalCount);
-		List<NewsType> allNewsType=newsService.getAllNewsTypes();
-		model.addAttribute("news", news);
-		model.addAttribute("page", page);
-		model.addAttribute("allNewsType", allNewsType);
-		return "news_list";
+		if(PrincipalUtils.isNews()){
+			List<News> news=newsService.getAllNewsByPage(page);
+			int totalCount=(int)newsService.getAllNewsCount(userId);
+			page.setTotalRecords(totalCount);
+			List<NewsType> allNewsType=newsService.getAllNewsTypes();
+			model.addAttribute("news", news);
+			model.addAttribute("page", page);
+			model.addAttribute("allNewsType", allNewsType);
+			return "news_check_list";
+		}else{
+			List<News> news=newsService.getUserNewsByPage(page);
+			int totalCount=(int)newsService.getUserNewsCount(userId);
+			page.setTotalRecords(totalCount);
+			List<NewsType> allNewsType=newsService.getAllNewsTypes();
+			model.addAttribute("news", news);
+			model.addAttribute("page", page);
+			model.addAttribute("allNewsType", allNewsType);
+			return "news_list";
+		}
 	}
 	
 	
@@ -73,6 +83,24 @@ public class NewsController {
 		return "news_list";
 	}
 	
+	@RequestMapping(path="/searchAllNews", method=RequestMethod.GET)
+	public String searchAllNews(@ModelAttribute("searchCondition") NewsSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		List<News> news=newsService.searchAllNewsByPage(searchCondition);
+		int totalCount=newsService.searchAllNewsCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		List<NewsType> allNewsType=newsService.getAllNewsTypes();
+		model.addAttribute("news", news);
+		model.addAttribute("page", page);
+		model.addAttribute("allNewsType", allNewsType);
+		return "news_check_list";
+	}
+	
 	@RequestMapping(path="/getUserNewsById", method=RequestMethod.GET)
 	public String getUserNewsById(@RequestParam("newsId") int newsId,Model model) {
 		News news=newsService.getUserNewsById(newsId);
@@ -83,14 +111,7 @@ public class NewsController {
 
 	@RequestMapping(path="/addNewsForm")
 	public String addNewsForm(Model model) {
-		int userId = PrincipalUtils.getCurrentUserId();
-		News news = new News();
-		User user =new User();
-		user.setUserId(userId);
-		news.setUser(user);
-		newsService.insertNews(news);
 		List<NewsType> newsTypes = newsService.getAllNewsTypes();
-		model.addAttribute("newsId", news.getId());
 		model.addAttribute("newsTypes", newsTypes);
 		return "news_add";
 	}
@@ -101,16 +122,18 @@ public class NewsController {
 	
 	@RequestMapping(path="/saveNews")
 	public String saveNews(News news) {
-		newsService.updateNews(news);
+		int userId = PrincipalUtils.getCurrentUserId();
+		User user =new User();
+		user.setUserId(userId);
+		news.setUser(user);
+		newsService.saveNews(news);
 		return "redirect:/news/list.html";
 	}
 	
 	@RequestMapping(path="/uploadNewsThumbnail")
-	public void uploadNewsThumbnail(MultipartFile file,int newsId,PrintWriter out) {
-		NewsImg newsImg = new NewsImg();
-		newsImg.setNewsId(newsId);
-		newsService.insertNewsImage(newsImg, file);
-		out.write("success");
+	public void uploadNewsThumbnail(MultipartFile file,PrintWriter out) {
+		String  smallImgUrl = newsService.insertNewsImage(file);
+		out.write(smallImgUrl);
 	}
 	
 	@RequestMapping(path="/updateNewsForm")
@@ -124,6 +147,12 @@ public class NewsController {
 	
 	@RequestMapping(path="/updateNews")
 	public String updateNews(News news) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		User user =new User();
+		user.setUserId(userId);
+		news.setUser(user);
+		System.out.println(news.getSmallImgUrl().length());
+		System.out.println(news.getSmallImgUrl());
 		newsService.updateNewsInfo(news);
 		return "redirect:/news/list.html";
 	}
@@ -161,6 +190,18 @@ public class NewsController {
 	public String publishNews(int newsId) {
 		newsService.updateNewsCheckStatus(newsId);
 		return "redirect:/news/list.html";
+	}
+	
+	@RequestMapping(path="/audit", method=RequestMethod.GET)
+	public void audit(News news,PrintWriter out){
+		newsService.auditPass(news);
+		if(news.getCheckStatus()==1){
+			out.write(1);
+		}else{
+			out.write("other");
+		}
+//		return "redirect:/news/list.html";
+		
 	}
 	
 }

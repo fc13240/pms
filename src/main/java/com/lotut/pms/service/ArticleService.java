@@ -10,7 +10,6 @@ import com.lotut.pms.domain.Article;
 import com.lotut.pms.domain.ArticleImg;
 import com.lotut.pms.domain.ArticleSearchCondition;
 import com.lotut.pms.domain.ArticleType;
-import com.lotut.pms.domain.NewsImg;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.UserArticle;
 
@@ -42,6 +41,6 @@ public interface ArticleService {
 	void insertArticleImage(ArticleImg articleImg,MultipartFile multipartFile);
 	
 	UserArticle getCheckedArticleList(Page page,HttpSession session);
-	
-	void deleteNullData();
+
+	int getArticleCountByType(int typeId);
 }

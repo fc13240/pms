@@ -50,8 +50,8 @@
 					  <tbody>
 						<tr>
 						  <td style="text-align:center">${order.id}</td>
-						  <td style="text-align:center"><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
-						  <td style="text-align:center"><fmt:formatDate value="${order.payTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+						  <td style="text-align:center"><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+						  <td style="text-align:center"><fmt:formatDate value="${order.payTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						  <td style="text-align:center">${order.paymentMethod.paymentMethod}</td>
 		
 						</tr>

@@ -455,5 +455,18 @@ public class PatentController {
 			out.flush();
 		}
 	}
+	
+	
+	@RequestMapping(path="/cancelRecommendPatent", method=RequestMethod.GET)
+	public void cancelRecommendPatent(long patentId,PrintWriter writer){
+		patentService.cancelRecommendPatent(patentId);
+		writer.write(1);
+	}
+	
+	@RequestMapping(path="/recommendPatent", method=RequestMethod.GET)
+	public void recommendPatent(long patentId,PrintWriter writer){
+		patentService.recommendPatent(patentId);
+		writer.write(1);
+	}
 
 }

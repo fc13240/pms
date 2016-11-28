@@ -36,7 +36,7 @@
 						  <table class="search-table">
 							  <tr>
 							  <td>
-								<input style="width:450px;height:34px;" name="keyword" id="keywordId" value="" placeholder="输入新的分类名称" class="t-input form-control"/>							  
+								<input style="width:450px;height:34px;" name="keyword" id="keywordId" value="" placeholder="输入新的分类名称" class="t-input form-control" required/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">添加</button>
@@ -66,7 +66,7 @@
 								</td>
 								
 								<td style="text-align:center">
-								<a onclick="return confirm('此操作会删除该分类和该分类下的所有文章，确定删除吗？')" href="javascript:deleteArticleType(${articleType.typeId})">删除分类</a>
+								<a onclick="return confirm('确定删除吗？')" href="javascript:deleteArticleType(${articleType.typeId})">删除分类</a>
 								
 								</td>
 							  </tr>
@@ -125,8 +125,8 @@
 			url:"<s:url value='/article/deleteArticleType.html'/>",
 			data:{"typeId":typeId},
 			async:false,
-			success:function (){
-				
+			success:function (result){
+				alert(result);
 			}
 		});
 		

@@ -125,13 +125,13 @@ height:37px;
 									<tr>
 										<th>标题</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入标题" name="title" required maxlength="100" value="${article.title }"/>
+											<input class="form-control" style="width:600px;" placeholder="请输入标题" name="title" required maxlength="50" value="${article.title }"/>
 										</td>
 									</tr>
 									<tr>
 										<th>作者</th>
 										<td>
-										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author"  maxlength="100" value="${article.author }"/> 
+										<input class="form-control" style="width:600px;" placeholder="请输入作者" name="author"  maxlength="30" value="${article.author }"/> 
 										</td>
 									</tr>						
 									<tr>
@@ -143,7 +143,7 @@ height:37px;
 									<tr>
 										<th>关键字</th>
 										<td>
-											 <input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="100" value="${article.keywords }" required/> 
+											 <input class="form-control" style="width:600px;" placeholder="请输入关键字，多个关键字以“，”分隔" name="keywords" maxlength="120" value="${article.keywords }"/> 
 										</td>
 									</tr>
 									<!-- <tr>

@@ -1028,16 +1028,16 @@ PRIMARY KEY (type_id)
 ;
 CREATE TABLE if not exists news (
 id  int NOT NULL AUTO_INCREMENT ,
-news_type  int NOT NULL COMMENT '栏目id' ,
+news_type  int COMMENT '栏目id' ,
 user_id  int NOT NULL COMMENT '发文人' ,
 keywords  varchar(120) NULL COMMENT '关键字' ,
 author  varchar(30) NULL COMMENT '作者' ,
-title  varchar(50) NOT NULL COMMENT '标题' ,
+title  varchar(50) COMMENT '标题' ,
 create_time  timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ,
 publish_time  datetime COMMENT '发文时间' ,
 update_time  datetime COMMENT '更新时间' ,
 source  varchar(100) NULL COMMENT '来源' ,
-content  text NOT NULL COMMENT '内容' ,
+content  text COMMENT '内容' ,
 abstract varchar(100) NULL COMMENT '摘要' ,
 small_img_url varchar(200) comment '缩略图地址',
 check_status INT COMMENT '发布状态',
@@ -1097,6 +1097,64 @@ CREATE TABLE IF NOT EXISTS article_comments (
 	content  VARCHAR(1000),
 	article_id INT NOT NULL,
 	user_id INT NOT NULL,
-	CONSTRAINT fk_article_comments_article_id FOREIGN KEY (article_id) REFERENCES article(id) , 
-	CONSTRAINT fk_article_comments_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) 
+	CONSTRAINT fk_article_comments_article_id FOREIGN KEY (article_id) REFERENCES article(id)  ON DELETE CASCADE, 
+	CONSTRAINT fk_article_comments_user_id FOREIGN KEY (user_id)  REFERENCES users(user_id) ON DELETE CASCADE 
+);
+
+alter table news add column up_vote  INT DEFAULT 0 comment '赞';
+alter table news add column down_vote  INT DEFAULT 0 comment '踩';
+
+CREATE TABLE IF NOT EXISTS news_comments (
+	comment_id INT AUTO_INCREMENT PRIMARY KEY  ,
+	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+	content  VARCHAR(1000),
+	news_id INT NOT NULL,
+	user_id INT NOT NULL,
+	CONSTRAINT fk_news_comments_news_id FOREIGN KEY (news_id) REFERENCES news(id)  ON DELETE CASCADE, 
+	CONSTRAINT fk_news_comments_user_id FOREIGN KEY (user_id)  REFERENCES users(user_id) ON DELETE CASCADE 
+);
+
+ALTER TABLE sell_patent_goods ADD COLUMN recommend_status TINYINT DEFAULT 0 COMMENT '0未推荐  1已推荐';
+ALTER TABLE users MODIFY username VARCHAR(60);
+
+CREATE TABLE brand_category (
+	category_id  int NOT NULL AUTO_INCREMENT ,
+	category_name  varchar(100) NOT NULL ,
+	PRIMARY KEY (category_id)
+)
+;
+CREATE TABLE brands (
+	id  int NULL AUTO_INCREMENT,
+	user  int NOT NULL,
+	address  varchar(100) NULL,
+	check_status  tinyint NOT NULL DEFAULT 1 COMMENT '1审核通过  2审核未通过  3未审核',
+	sell_status  tinyint NOT NULL DEFAULT 1 COMMENT '1出售中 2 下架',
+	is_recommend  tinyint DEFAULT 1 COMMENT '1不推荐 2 推荐',
+	category_id  int NOT  NULL ,
+	brand_no  varchar(100) NOT NULL,
+	name  varchar(100) NOT NULL,
+	combination_type  varchar(500) NULL,
+	similar_no  varchar(300) NULL,
+	scope  varchar(500) NULL,
+	transaction_mode  tinyint NULL DEFAULT 1 COMMENT '1 出售  2转让',
+	price  int NOT NULL,
+	app_person  varchar(100) NULL,
+	app_date  datetime NULL,
+	publish_date  datetime NULL,
+	start_date  datetime NULL,
+	end_date  datetime NULL,
+	originality  varchar(500) NULL,
+	case_status VARCHAR(10),
+	PRIMARY KEY (id),
+	constraint fk_brands_users foreign key(user) references users(user_id),
+	constraint fk_brands_category foreign key(category_id) references brand_category(category_id) 
+);
+CREATE TABLE wechat_orders (
+	id  INT  NOT NULL AUTO_INCREMENT ,
+	wechat_order_id VARCHAR(100) NULL ,
+	wechat_name  VARCHAR(100) NULL ,
+	brand_id   VARCHAR(100) NULL ,
+	total_fee   INT,
+	pay_time  DATETIME NULL ,
+	PRIMARY KEY (id)
 );

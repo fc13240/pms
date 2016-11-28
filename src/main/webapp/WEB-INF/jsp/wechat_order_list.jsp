@@ -9,48 +9,45 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
-<script type="text/javascript" src="<s:url value='/temp/js/jquery_from.js'/>"></script>
-<title>龙图腾专利管家-文章列表</title>
+<title>龙图腾专利管家-购买记录</title>
 <%@ include file="_css.jsp" %>
 
 </head>
 <body>
 <%@ include file="_top.jsp" %>
 <div class="col-xs-1 sidebar" style="min-width:100px;">
-			<%@ include file="_left_nav_article.jsp" %>
+			<%@ include file="_left_nav_brand.jsp" %>
 		  </div>
 	<div class="tit_top">
         <div class="title2">
-           文章列表</div>
+           购买记录</div>
                
     </div>
 		<div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right" style="padding:10px 0 0 3px;" >
 				    <div class="cl top1" style="height:10px;">
 				    
-					  <form class="form-inline" action="<s:url value='/article/searchUserArticles.html'/>" method="get">
+					  <%-- <form class="form-inline" action="<s:url value='/brand/searchUserBrands.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1" required/>
 						  <div class="t-third">
 
 						  <table class="search-table">
 							  <tr>
-							  <td>文章类型</td>
+							  <td>商标类别</td>
 							  <td>关键字</td>
 							  <td></td>
 							  </tr>
 							  <tr>
 							  <td>
-								<select  style="width:100px;" class="selectPointOfInterest form-control" name="articleType">
+								<select  style="width:110px;" class="selectPointOfInterest form-control" name="categoryId">
 								  <option value="">全部</option>
-								  <c:forEach items="${articleTypes}" var="articleType">
-									<option value="<c:out value='${articleType.typeId}'/>">
-									<c:out value="${articleType.typeName}"/>
-									</option>
+								  <c:forEach items="${categorys }" var="category">
+								  	<option value="${category.categoryId }" <c:if test="${category.categoryId==searchCondition.categoryId }">selected="selected"</c:if>>${category.categoryName }</option>
 								  </c:forEach>
 								</select>
 							  </td>
 							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId"  placeholder="标题/关键字/作者" class="t-input form-control"/>							  
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId"  placeholder="商标名称/注册号" class="t-input form-control" value="${searchCondition.keyword }"/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
@@ -58,7 +55,7 @@
 							  </tr>							  
 						  </table>
 						  </div>
-						</form>
+						</form> --%>
 
     			</div>
 				<div style="height:10px;"></div>
@@ -67,44 +64,25 @@
 						  <thead>
 							<tr class="simple_bag">
 							  <th class="center" width="20px">序号</th>
-							  <th width="150px">文章标题</th>
-							  <th width="80px">作者 </th>
-							  <th width="50px">发布时间</th>
-							  <th width="40px">审核状态</th>
-							  <th width="110px">操作</th>
+							  <th width="">微信昵称</th>
+							  <th width="">订单号</th>
+							  <th width="">商标注册号</th>
+							  <th width="">商标名称</th>
+							  <th width="">总金额</th>
+							  <th width="170px">支付时间</th>
 							</tr>
 						  </thead>
 						  <tbody>
-							<c:forEach items="${articles}" var="article" varStatus="status">
-							  <tr>
-								<td class="center" style="text-align:center"> ${status.count+ (page.currentPage-1)*page.pageSize} </td>
-								<td style="text-align:center"><a target="_blank" href="<s:url value='/article/preview.html?id=${article.id}'/>" >
-								<c:out value="${article.title}"/>
-								</a>
-								</td>
-								<td style="text-align:center"><c:out value="${article.author}"/></td>
-								<c:if test="${article.checkStatus==1}">
-								<td style="text-align:center"><fmt:formatDate value="${article.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-								</c:if>
-								<c:if test="${article.checkStatus!=1}">
-								 	<td style="text-align:center"></td>
-								</c:if>
-								<td style="text-align:center">
-								<c:if test="${article.checkStatus==0}">
-								未审核
-								</c:if>
-								<c:if test="${article.checkStatus==1}">
-								已审核
-								</c:if>
-								<c:if test="${article.checkStatus==2}">
-								审核未通过
-								</c:if>
-								</td>
-								<td style="text-align:center">
-									<a  href="javacript:return void" onclick="updateArticle(${article.id})">修改</a>
-									<a  href="javacript:return void" onclick="deleteArticle(${article.id})">删除</a>
-								</td>
-							  </tr>
+						  	<c:forEach items="${weChatOrders}" var="weChatOrder" varStatus="status">
+								<tr>
+									<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+									<td style="text-align: center">${weChatOrder.wechatName }</td>
+									<td style="text-align: center">${weChatOrder.wechatOrderId }</td>
+									<td style="text-align: center">${weChatOrder.brand.brandNo }</td>
+									<td style="text-align: center">${weChatOrder.brand.name }</td>
+									<td style="text-align: center">${weChatOrder.totalFee }</td>
+									<td style="text-align: center"><fmt:formatDate value="${weChatOrder.payTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								</tr>
 							</c:forEach>
 						  </tbody>
 						</table>
@@ -195,10 +173,10 @@ function gotoPage() {
 		return;
 	}
 	
-	var url = "<s:url value='/article/list.html'/>?currentPage=" + pageNo;
+	var url = "<s:url value='/brand/getWechatOrderList.html'/>?currentPage=" + pageNo;
 	
 	<c:if test="${searchCondition != null}">
-		url = "<s:url value='/article/searchUserArticles.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+		url = "<s:url value='/brand/searchUserBrands.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 	</c:if>
 	
 	
@@ -232,27 +210,6 @@ function gotoPageForEnter(event) {
 		});		
 	}
 	
-	function deleteArticle(articleId){
-		$.ajax({
-			url:"<s:url value='/article/deleteArticle.html'/>",
-			data:{"articleId":articleId},
-			async:false,
-			success:function (){
-				
-			}
-		});
-		
-		location.reload();
-	}
-	
-
-	function preview(id){
-		window.open("<s:url value='/article/preview.html'/>?id="+id)
-	}
-	
-	function updateArticle(id){
-		window.open("<s:url value='/article/updateArticleForm.html'/>?articleId="+id)
-	}
 </script>
 </body>
 </html>

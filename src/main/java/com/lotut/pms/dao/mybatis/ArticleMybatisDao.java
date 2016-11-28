@@ -118,10 +118,9 @@ public class ArticleMybatisDao extends SqlSessionDaoSupport implements ArticleDa
 		return articleMapper.searchAllArticleCount(searchCondition);
 	}
 
-	
 	@Override
-	public void deleteNullData() {
-		articleMapper.deleteNullData();
+	public int getArticleCountByType(int typeId) {
+		return articleMapper.getArticleCountByType(typeId);
 	}
 	
 	

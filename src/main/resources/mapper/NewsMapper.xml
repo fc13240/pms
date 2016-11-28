@@ -38,13 +38,25 @@
 		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.content,n.create_time,n.publish_time,n.update_time,
 		nt.type_id ,nt.type_name,u.user_id,u.username,n.check_status
 		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
-		WHERE n.user_id=#{userId} limit #{startIndex}, #{pageSize}
+		WHERE n.user_id=#{userId} order by n.check_status asc,n.update_time desc,n.create_time desc,n.publish_time desc limit #{startIndex}, #{pageSize}
+	</select>
+	
+	<select id="getAllNewsByPage" parameterType="Page" resultMap="NewsResultMap">
+		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.content,n.create_time,n.publish_time,n.update_time,
+		nt.type_id ,nt.type_name,u.user_id,u.username,n.check_status
+		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
+		 order by n.check_status asc,n.update_time desc,n.create_time desc,n.publish_time desc limit #{startIndex}, #{pageSize}
 	</select>
 	
 	<select id="getUserNewsCount" parameterType="int" resultType="int">
 		SELECT count(*)
 		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.user_id=#{userId}
+	</select>
+	
+	<select id="getAllNewsCount" parameterType="int" resultType="int">
+		SELECT count(*)
+		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 	</select>
 	
 	<select id="getUserNewsById"  parameterType="int" resultMap="NewsResultMap">
@@ -69,6 +81,25 @@
 		<if test="newsType != null and newsType !=''">
 					and ( n.news_type = #{newsType})
 		</if>
+		order by n.check_status asc,n.update_time desc,n.create_time desc,n.publish_time desc
+		limit #{page.startIndex}, #{page.pageSize}
+	</select>
+	
+	<select id="searchAllNewsByPage" parameterType="NewsSearchCondition" resultMap="NewsResultMap" >
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>
+		SELECT n.id,n.keywords,n.author,n.title,n.source,n.abstract,n.content,n.create_time,n.publish_time,n.update_time,
+		nt.type_id ,nt.type_name,u.user_id,u.username,n.check_status
+		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
+		WHERE 1=1
+		<if test="keyword != null and keyword !=''">
+					and ( n.keywords like #{keyword_pattern} or n.author like #{keyword_pattern} or n.title like #{keyword_pattern})
+		</if>
+		<if test="newsType != null and newsType !=''">
+					and ( n.news_type = #{newsType})
+		</if>
+		order by n.check_status asc,n.update_time desc,n.create_time desc,n.publish_time desc
 		limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
@@ -79,6 +110,22 @@
 		SELECT count(*)
 		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
 		WHERE n.user_id=#{userId}
+		<if test="keyword != null and keyword !=''">
+					and ( n.keywords like #{keyword_pattern} or n.author like #{keyword_pattern} or n.title like #{keyword_pattern}
+					or n.source like #{keyword_pattern} or n.abstract like #{keyword_pattern})
+		</if>
+		<if test="newsType != null and newsType !=''">
+					and ( n.news_type = #{newsType})
+		</if>
+	</select>
+	
+	<select id="searchAllNewsCount" parameterType="NewsSearchCondition" resultType="int" >
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>
+		SELECT count(*)
+		FROM news n LEFT JOIN news_type nt ON  n.news_type=nt.type_id LEFT JOIN users u ON n.user_id=u.user_id 
+		WHERE 1=1
 		<if test="keyword != null and keyword !=''">
 					and ( n.keywords like #{keyword_pattern} or n.author like #{keyword_pattern} or n.title like #{keyword_pattern}
 					or n.source like #{keyword_pattern} or n.abstract like #{keyword_pattern})
@@ -99,44 +146,41 @@
 		delete from news where id=#{newsId}
 	</delete>
 	
-	<insert id="insertNews" parameterType="News" useGeneratedKeys="true" keyProperty="id" >
-		insert into news(user_id) values(#{user.userId})
+	<insert id="saveNews" parameterType="News">
+		insert into news(news_type,keywords,author,title,source,content,abstract,update_time,small_img_url,check_status,user_id,publish_time,create_time)
+		values(#{newsType.typeId},#{keywords,javaType=string,jdbcType=VARCHAR},#{author,javaType=string,jdbcType=VARCHAR},#{title},
+		#{source,javaType=string,jdbcType=VARCHAR},#{content,javaType=string,jdbcType=CLOB},#{newsAbstract,javaType=string,jdbcType=VARCHAR}
+		,now(),#{smallImgUrl,javaType=string,jdbcType=VARCHAR},#{checkStatus},#{user.userId},
+		<if test="checkStatus==0">
+			null
+		</if>
+		<if test="checkStatus==1">
+			now()
+		</if>,now()
+		)
 	</insert>
-	
-	<update id="updateNews" parameterType="News">
-		update news set news_type=#{newsType.typeId},keywords=#{keywords},
-		<if test="author !='' or author !=null">
-		author=#{author},
-		</if>
-		title=#{title},
-		<if test="source !='' or source !=null">
-		source=#{source},
-		</if>
-		content=#{content,javaType=string,jdbcType=CLOB}
-		<if test="newsAbstract !='' or newsAbstract !=null">
-		,abstract=#{newsAbstract} 
-		</if>
-		,update_time=now(),check_status=#{checkStatus}
-		 where id=#{id};
-	</update>
-
-
-	<!-- <insert id="addNewsImage" parameterType="NewsImg">
-		insert into news_imgs(img_url,news_id) values(#{imgUrl},#{newsId})
-	</insert> -->
-	
 	<update id="addNewsImage" parameterType="NewsImg">
 		update news set small_img_url=#{imgUrl} where id=#{newsId}
 	</update>
 	
 	<update id="updateNewsInfo" parameterType="News">
 		update news set news_type=#{newsType.typeId},keywords=#{keywords},author=#{author},title=#{title},source=#{source},
-						content=#{content,javaType=string,jdbcType=CLOB},abstract=#{newsAbstract},update_time=now(),check_status=#{checkStatus}
+						content=#{content,javaType=string,jdbcType=CLOB},abstract=#{newsAbstract},update_time=now()
+						,check_status=#{checkStatus},user_id=#{user.userId}
+						<if test="smallImgUrl!=''">
+							,small_img_url=#{smallImgUrl}
+						</if>
+						<if test="checkStatus==0">
+							,publish_time=null
+						</if>
+						<if test="checkStatus==1">
+							,publish_time=now()
+						</if>
 					where id=#{id}
 	</update>
 	
 	<update id="updateNewsCheckStatus" parameterType="int">
-		update news set check_status=1 where id=#{id}
+		update news set check_status=1,publish_time=now() where id=#{id}
 	</update>
 	
 	<update id="updateNewsType" parameterType="NewsType">
@@ -156,7 +200,7 @@
 		insert into news_type(type_name) values(#{typeName})
 	</insert>
 	
-	<delete id="deleteNullData">
-		delete from news where title is null and content is null and keywords is null
-	</delete>
+	<update id="auditPass" >
+		update news set check_status =#{checkStatus},publish_time = now() where id=#{id}
+	</update>
 </mapper>

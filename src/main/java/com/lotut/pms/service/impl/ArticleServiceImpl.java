@@ -47,6 +47,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 	
 	@Override
+	@Transactional
 	public UserArticle getCheckedArticleList(Page page, HttpSession session) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
@@ -173,8 +174,8 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public void deleteNullData() {
-		articleDao.deleteNullData();
+	public int getArticleCountByType(int typeId) {
+		return articleDao.getArticleCountByType(typeId);
 	}
 
 }

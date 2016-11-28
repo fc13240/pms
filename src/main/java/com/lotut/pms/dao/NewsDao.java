@@ -25,7 +25,7 @@ public interface NewsDao {
 	
 	void insertNews(News news);
 	
-	void updateNews(News news);
+	void saveNews(News news);
 	
 	void addNewsImage(NewsImg newsImg);
 	
@@ -41,5 +41,13 @@ public interface NewsDao {
 	
 	void updateNewsCheckStatus(int newsId);
 	
-	void deleteNullData();
+	void auditPass(News news);
+	
+	List<News> getAllNewsByPage	(Page page);
+	
+	List<News> searchAllNewsByPage(NewsSearchCondition searchCondition);
+	
+	int getAllNewsCount(int userId);
+	
+	int searchAllNewsCount(NewsSearchCondition searchCondition);
 }
