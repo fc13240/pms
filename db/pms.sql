@@ -143,15 +143,15 @@ create table if not exists fee_monitor_status (
 
 create table if not exists fees (
 	fee_id bigint auto_increment primary key,
-	deadline date not null comment '缴费截止日', 
-	fee_type varchar(80) not null comment '费用种类',
+	deadline date not null comment '缂磋垂鎴鏃�', 
+	fee_type varchar(80) not null comment '璐圭敤绉嶇被',
 	amount int not null, 
-	fee_payment_status int default 1 comment '缴费状态', 
+	fee_payment_status int default 1 comment '缂磋垂鐘舵��', 
 	patent bigint not null,
-	process_user int comment '处理用户', 
-	fee_monitor_status int default 1 comment '监控状态', 
-	fee_owner int comment '拥有人', 
-	invoice_title varchar(200) comment '发票抬头',
+	process_user int comment '澶勭悊鐢ㄦ埛', 
+	fee_monitor_status int default 1 comment '鐩戞帶鐘舵��', 
+	fee_owner int comment '鎷ユ湁浜�', 
+	invoice_title varchar(200) comment '鍙戠エ鎶ご',
 	UNIQUE KEY uk_fees_patent_fee (patent, fee_type, deadline, fee_owner),
 	constraint fk_fee_owner foreign key idx_fk_fee_owner (fee_owner) references users(user_id) on delete cascade,
 	constraint fk_fee_payment_status foreign key idx_fk_fee_payment_status (fee_payment_status) references fee_payment_status(fee_payment_status_id),
@@ -177,7 +177,7 @@ create table if not exists friend_requests (
 	from_user int, 
 	to_user int, 
 	message varchar(100),
-	request_process_status int default 1 not null comment '处理状态',
+	request_process_status int default 1 not null comment '澶勭悊鐘舵��',
 	constraint pk_friend_requests primary key (from_user, to_user, request_process_status),
 	constraint fk_friend_request_from_user foreign key idx_fk_friend_request_from_user (from_user) references users(user_id) on delete cascade,
 	constraint fk_friend_request_to_user foreign key idx_fk_friend_request_to_user (to_user) references users(user_id) on delete cascade,
@@ -323,77 +323,77 @@ create table fee_types (
 	
 INSERT INTO friend_request_process_status (friend_request_process_status_id, friend_request_process_status_desc)
 VALUES
-	(1, '未处理'),
-	(2, '通过验证'),
-	(3, '拒绝请求');
+	(1, '鏈鐞�'),
+	(2, '閫氳繃楠岃瘉'),
+	(3, '鎷掔粷璇锋眰');
 
 INSERT INTO fee_monitor_status (fee_monitor_status_id, fee_monitor_status_desc)
 VALUES
-	(1, '未加入'),
-	(2, '已加入');
+	(1, '鏈姞鍏�'),
+	(2, '宸插姞鍏�');
 
 INSERT INTO fee_payment_status (fee_payment_status_id, fee_payment_status_desc)
 VALUES
-	(1, '应缴费'),
-	(2, '已支付'),
-	(3, '已交局'),
-	(4, '待支付'),
-	(5, '缴费成功');
+	(1, '搴旂即璐�'),
+	(2, '宸叉敮浠�'),
+	(3, '宸蹭氦灞�'),
+	(4, '寰呮敮浠�'),
+	(5, '缂磋垂鎴愬姛');
 	
 INSERT INTO notice_paper_apply_types (notice_paper_apply_type_id, notice_paper_apply_type_desc)
 VALUES
-	(1, '未申请'),
-	(2, '申请纸件'),
-	(3, '处理中'),
-	(4, '已发送'),
-	(5, '无纸件');
+	(1, '鏈敵璇�'),
+	(2, '鐢宠绾镐欢'),
+	(3, '澶勭悊涓�'),
+	(4, '宸插彂閫�'),
+	(5, '鏃犵焊浠�');
 	
 INSERT INTO notice_process_status (notice_process_status_id, notice_process_status_desc)
 VALUES
-	(1, '未处理'),
-	(2, '已处理'),
-	(3, '已放弃'),
-	(4, '处理中');
+	(1, '鏈鐞�'),
+	(2, '宸插鐞�'),
+	(3, '宸叉斁寮�'),
+	(4, '澶勭悊涓�');
 
 INSERT INTO notice_types (notice_type_id, notice_type_desc)
 VALUES
-	(1, '新案受理'),
-	(2, '缴费通知'),
-	(3, '补正审查'),
-	(4, '专利授权'),
-	(5, '权利丧失'),
-	(6, '手续合格'),
-	(7, '其他'),
-	(8, '驳回决定');
+	(1, '鏂版鍙楃悊'),
+	(2, '缂磋垂閫氱煡'),
+	(3, '琛ユ瀹℃煡'),
+	(4, '涓撳埄鎺堟潈'),
+	(5, '鏉冨埄涓уけ'),
+	(6, '鎵嬬画鍚堟牸'),
+	(7, '鍏朵粬'),
+	(8, '椹冲洖鍐冲畾');
 
 INSERT INTO patent_status (patent_status_id, patent_status_desc)
 VALUES
-	(1, '等待申请费'),
-	(2, '待答复'),
-	(3, '等年登印费'),
-	(4, '待恢复'),
-	(5, '失效'),
-	(6, '专利权维持'),
-	(7, '其他');
+	(1, '绛夊緟鐢宠璐�'),
+	(2, '寰呯瓟澶�'),
+	(3, '绛夊勾鐧诲嵃璐�'),
+	(4, '寰呮仮澶�'),
+	(5, '澶辨晥'),
+	(6, '涓撳埄鏉冪淮鎸�'),
+	(7, '鍏朵粬');
 
 INSERT INTO patent_types (patent_type_id, patent_type_desc)
 VALUES
-	(1, '发明'),
-	(2, '实用新型'),
-	(3, '外观设计');	
+	(1, '鍙戞槑'),
+	(2, '瀹炵敤鏂板瀷'),
+	(3, '澶栬璁捐');	
 	
 
 INSERT INTO order_status
 VALUES
-	(1, '待支付'),
-	(2, '已支付'),
-	(3, '已取消'),
-	(4, '已缴费');
+	(1, '寰呮敮浠�'),
+	(2, '宸叉敮浠�'),
+	(3, '宸插彇娑�'),
+	(4, '宸茬即璐�');
 	
 INSERT INTO payment_methods
 VALUES
-	(1, '支付宝'),
-	(2, '银联卡');
+	(1, '鏀粯瀹�'),
+	(2, '閾惰仈鍗�');
 	
 INSERT INTO groups
 VALUES
@@ -405,91 +405,91 @@ VALUES
 	(1, 'ROLE_USER'),
 	(2, 'ROLE_ORDER');
 	
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405356', '发明专利第17年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083325332', '权利要求附加费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083205320', '发明专利登记印刷费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405358', '发明专利第19年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405354', '发明专利第15年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405352', '发明专利第13年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405341', '发明专利第2年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083335333', '说明书附加费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405346', '发明专利第7年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405348', '发明专利第9年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872082105210', '发明专利申请费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405344', '发明专利第5年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872082405240', '发明专利复审费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405349', '发明专利第10年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405342', '发明专利第3年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872082505250', '变更费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405355', '发明专利第16年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405357', '发明专利第18年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872082305230', '发明专利申请审查费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405359', '发明专利第20年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '20761581515151', '印花税');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405353', '发明专利第14年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405340', '发明专利第1年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405351', '发明专利第12年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083315331', '延长费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872082115211', '发明专利文印费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083400001', '年费费减');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872082705270', '恢复权利请求费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405347', '发明专利第8年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872082605260', '优先权要求费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083525381', '发明专利年费滞纳金');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405345', '发明专利第6年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405343', '发明专利第4年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405350', '发明专利第11年年费');
-insert into fee_types(patent_type, type_code, type_text) values(1, '40872082905290', '发明专利权无效宣告请求费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415365', '实用新型专利第6年年费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083325332', '权利要求附加费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415363', '实用新型专利第4年年费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415367', '实用新型专利第8年年费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872082325232', '实用新型专利权评价报告请求费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872082415241', '实用新型专利复审费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415361', '实用新型专利第2年年费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083335333', '说明书附加费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415369', '实用新型专利第10年年费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872082315231', '实用新型检索费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872082505250', '变更费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083535382', '实用新型专利年费滞纳金');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415364', '实用新型专利第5年年费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415362', '实用新型专利第3年年费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415368', '实用新型专利第9年年费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '20761581515151', '印花税');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415366', '实用新型专利第7年年费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083315331', '延长费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083400001', '年费费减');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872082135213', '实用新型专利申请费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415360', '实用新型专利第1年年费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872082705270', '恢复权利请求费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872082605260', '优先权要求费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872083225322', '实用新型专利登记印刷费');
-insert into fee_types(patent_type, type_code, type_text) values(2, '40872082915291', '实用新型专利权无效宣告请求费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083325332', '权利要求附加费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425378', '外观设计专利第9年年费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '20761581515151', '印花税');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872082925292', '外观设计专利权无效宣告请求费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425379', '外观设计专利第10年年费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083315331', '延长费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425374', '外观设计专利第5年年费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083400001', '年费费减');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425375', '外观设计专利第6年年费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425377', '外观设计专利第8年年费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425371', '外观设计专利第2年年费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425376', '外观设计专利第7年年费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425370', '外观设计专利第1年年费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872082145214', '外观设计专利申请费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425372', '外观设计专利第3年年费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425373', '外观设计专利第4年年费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872082425242', '外观设计专利复审费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872082705270', '恢复权利请求费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083335333', '说明书附加费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872082605260', '优先权要求费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872082325233', '外观设计专利权评价报告请求费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872082505250', '变更费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083235323', '外观设计专利登记印刷费');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083545383', '外观设计专利年费滞纳金');
-insert into fee_types(patent_type, type_code, type_text) values(3, '40872083545383', '外观设计专利年费滞纳金');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405356', '鍙戞槑涓撳埄绗�17骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083325332', '鏉冨埄瑕佹眰闄勫姞璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083205320', '鍙戞槑涓撳埄鐧昏鍗板埛璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405358', '鍙戞槑涓撳埄绗�19骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405354', '鍙戞槑涓撳埄绗�15骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405352', '鍙戞槑涓撳埄绗�13骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405341', '鍙戞槑涓撳埄绗�2骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083335333', '璇存槑涔﹂檮鍔犺垂');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405346', '鍙戞槑涓撳埄绗�7骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405348', '鍙戞槑涓撳埄绗�9骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082105210', '鍙戞槑涓撳埄鐢宠璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405344', '鍙戞槑涓撳埄绗�5骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082405240', '鍙戞槑涓撳埄澶嶅璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405349', '鍙戞槑涓撳埄绗�10骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405342', '鍙戞槑涓撳埄绗�3骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082505250', '鍙樻洿璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405355', '鍙戞槑涓撳埄绗�16骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405357', '鍙戞槑涓撳埄绗�18骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082305230', '鍙戞槑涓撳埄鐢宠瀹℃煡璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405359', '鍙戞槑涓撳埄绗�20骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '20761581515151', '鍗拌姳绋�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405353', '鍙戞槑涓撳埄绗�14骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405340', '鍙戞槑涓撳埄绗�1骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405351', '鍙戞槑涓撳埄绗�12骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083315331', '寤堕暱璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082115211', '鍙戞槑涓撳埄鏂囧嵃璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083400001', '骞磋垂璐瑰噺');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082705270', '鎭㈠鏉冨埄璇锋眰璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405347', '鍙戞槑涓撳埄绗�8骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082605260', '浼樺厛鏉冭姹傝垂');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083525381', '鍙戞槑涓撳埄骞磋垂婊炵撼閲�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405345', '鍙戞槑涓撳埄绗�6骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405343', '鍙戞槑涓撳埄绗�4骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872083405350', '鍙戞槑涓撳埄绗�11骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(1, '40872082905290', '鍙戞槑涓撳埄鏉冩棤鏁堝鍛婅姹傝垂');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415365', '瀹炵敤鏂板瀷涓撳埄绗�6骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083325332', '鏉冨埄瑕佹眰闄勫姞璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415363', '瀹炵敤鏂板瀷涓撳埄绗�4骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415367', '瀹炵敤鏂板瀷涓撳埄绗�8骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082325232', '瀹炵敤鏂板瀷涓撳埄鏉冭瘎浠锋姤鍛婅姹傝垂');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082415241', '瀹炵敤鏂板瀷涓撳埄澶嶅璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415361', '瀹炵敤鏂板瀷涓撳埄绗�2骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083335333', '璇存槑涔﹂檮鍔犺垂');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415369', '瀹炵敤鏂板瀷涓撳埄绗�10骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082315231', '瀹炵敤鏂板瀷妫�绱㈣垂');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082505250', '鍙樻洿璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083535382', '瀹炵敤鏂板瀷涓撳埄骞磋垂婊炵撼閲�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415364', '瀹炵敤鏂板瀷涓撳埄绗�5骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415362', '瀹炵敤鏂板瀷涓撳埄绗�3骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415368', '瀹炵敤鏂板瀷涓撳埄绗�9骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '20761581515151', '鍗拌姳绋�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415366', '瀹炵敤鏂板瀷涓撳埄绗�7骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083315331', '寤堕暱璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083400001', '骞磋垂璐瑰噺');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082135213', '瀹炵敤鏂板瀷涓撳埄鐢宠璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083415360', '瀹炵敤鏂板瀷涓撳埄绗�1骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082705270', '鎭㈠鏉冨埄璇锋眰璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082605260', '浼樺厛鏉冭姹傝垂');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872083225322', '瀹炵敤鏂板瀷涓撳埄鐧昏鍗板埛璐�');
+insert into fee_types(patent_type, type_code, type_text) values(2, '40872082915291', '瀹炵敤鏂板瀷涓撳埄鏉冩棤鏁堝鍛婅姹傝垂');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083325332', '鏉冨埄瑕佹眰闄勫姞璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425378', '澶栬璁捐涓撳埄绗�9骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '20761581515151', '鍗拌姳绋�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872082925292', '澶栬璁捐涓撳埄鏉冩棤鏁堝鍛婅姹傝垂');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425379', '澶栬璁捐涓撳埄绗�10骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083315331', '寤堕暱璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425374', '澶栬璁捐涓撳埄绗�5骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083400001', '骞磋垂璐瑰噺');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425375', '澶栬璁捐涓撳埄绗�6骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425377', '澶栬璁捐涓撳埄绗�8骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425371', '澶栬璁捐涓撳埄绗�2骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425376', '澶栬璁捐涓撳埄绗�7骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425370', '澶栬璁捐涓撳埄绗�1骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872082145214', '澶栬璁捐涓撳埄鐢宠璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425372', '澶栬璁捐涓撳埄绗�3骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083425373', '澶栬璁捐涓撳埄绗�4骞村勾璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872082425242', '澶栬璁捐涓撳埄澶嶅璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872082705270', '鎭㈠鏉冨埄璇锋眰璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083335333', '璇存槑涔﹂檮鍔犺垂');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872082605260', '浼樺厛鏉冭姹傝垂');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872082325233', '澶栬璁捐涓撳埄鏉冭瘎浠锋姤鍛婅姹傝垂');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872082505250', '鍙樻洿璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083235323', '澶栬璁捐涓撳埄鐧昏鍗板埛璐�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083545383', '澶栬璁捐涓撳埄骞磋垂婊炵撼閲�');
+insert into fee_types(patent_type, type_code, type_text) values(3, '40872083545383', '澶栬璁捐涓撳埄骞磋垂婊炵撼閲�');
 
 ALTER TABLE orders ADD invoice VARCHAR(100) NULL;
 ALTER TABLE orders ADD express_fee INT ;
@@ -502,11 +502,11 @@ ALTER TABLE orders DROP COLUMN courier_phone;
 
 CREATE TABLE if not exists patent_office_accounts (
   account_id int(11) NOT NULL AUTO_INCREMENT,
-  user int(11) NOT NULL COMMENT '用户id',
-  name varchar(200) DEFAULT NULL COMMENT '电子用户名',
-  username varchar(100) NOT NULL COMMENT '电子代码',
-  password varchar(100) NOT NULL COMMENT '电子登录密码',
-  patent_update_time datetime DEFAULT NULL COMMENT '专利更新时间',
+  user int(11) NOT NULL COMMENT '鐢ㄦ埛id',
+  name varchar(200) DEFAULT NULL COMMENT '鐢靛瓙鐢ㄦ埛鍚�',
+  username varchar(100) NOT NULL COMMENT '鐢靛瓙浠ｇ爜',
+  password varchar(100) NOT NULL COMMENT '鐢靛瓙鐧诲綍瀵嗙爜',
+  patent_update_time datetime DEFAULT NULL COMMENT '涓撳埄鏇存柊鏃堕棿',
   PRIMARY KEY (`account_id`),
   CONSTRAINT `fk_patent_office_account_users` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -526,7 +526,7 @@ ALTER TABLE patents ADD COLUMN transaction_status VARCHAR(10);
 
 alter table friends add column remark_name varchar(50);
 
-ALTER TABLE patents ADD COLUMN  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间';
+ALTER TABLE patents ADD COLUMN  create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '鍒涘缓鏃堕棿';
 
 ALTER TABLE contact_addresses DROP FOREIGN KEY  fk_contact_addresses_street; 
 
@@ -547,24 +547,24 @@ CREATE TABLE  IF NOT EXISTS patent_documents (
   patent_doc_id bigint(20) NOT NULL AUTO_INCREMENT,
   app_no varchar(30) DEFAULT NULL,
   user_id int(11) DEFAULT NULL,
-  patent_type int(11) NOT NULL COMMENT '专利类型',
-  create_time date DEFAULT NULL COMMENT '专利创建时间',
-  last_update_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '专利更新时间',
-  patent_name varchar(1000) DEFAULT NULL COMMENT '专利名称',
-  manual mediumtext COMMENT '说明书',
-  right_claim mediumtext COMMENT '权利要求',
-  abstract_desc mediumtext COMMENT '摘要',
-  abstract_img varchar(200) DEFAULT NULL COMMENT '摘要附图',
-  patent_doc_attachment_file varchar(200) DEFAULT NULL COMMENT '上传附件保存地址',
-  patent_doc_status int NOT NULL COMMENT '文档状态',
-  patent_doc_url VARCHAR(200) default null COMMENT '文档保存地址',
-  contact_id int COMMENT '联系人编号',
-  price BIGINT DEFAULT NULL COMMENT '文档价格',
-  attachment_url VARCHAR(100) COMMENT '请求书上传文件地址';
-  other_information VARCHAR(1000) COMMENT '其他信息';
-  patent_doc_proxy_status int NOT NULL COMMENT '代理状态',
-  attachment_url VARCHAR(100) COMMENT '请求书上传文件地址';
-  other_information VARCHAR(1000) COMMENT '其他信息';
+  patent_type int(11) NOT NULL COMMENT '涓撳埄绫诲瀷',
+  create_time date DEFAULT NULL COMMENT '涓撳埄鍒涘缓鏃堕棿',
+  last_update_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '涓撳埄鏇存柊鏃堕棿',
+  patent_name varchar(1000) DEFAULT NULL COMMENT '涓撳埄鍚嶇О',
+  manual mediumtext COMMENT '璇存槑涔�',
+  right_claim mediumtext COMMENT '鏉冨埄瑕佹眰',
+  abstract_desc mediumtext COMMENT '鎽樿',
+  abstract_img varchar(200) DEFAULT NULL COMMENT '鎽樿闄勫浘',
+  patent_doc_attachment_file varchar(200) DEFAULT NULL COMMENT '涓婁紶闄勪欢淇濆瓨鍦板潃',
+  patent_doc_status int NOT NULL COMMENT '鏂囨。鐘舵��',
+  patent_doc_url VARCHAR(200) default null COMMENT '鏂囨。淇濆瓨鍦板潃',
+  contact_id int COMMENT '鑱旂郴浜虹紪鍙�',
+  price BIGINT DEFAULT NULL COMMENT '鏂囨。浠锋牸',
+  attachment_url VARCHAR(100) COMMENT '璇锋眰涔︿笂浼犳枃浠跺湴鍧�';
+  other_information VARCHAR(1000) COMMENT '鍏朵粬淇℃伅';
+  patent_doc_proxy_status int NOT NULL COMMENT '浠ｇ悊鐘舵��',
+  attachment_url VARCHAR(100) COMMENT '璇锋眰涔︿笂浼犳枃浠跺湴鍧�';
+  other_information VARCHAR(1000) COMMENT '鍏朵粬淇℃伅';
   PRIMARY KEY (patent_doc_id),
   KEY fk_patent_documents_patent_type (patent_type),
   KEY fk_patent_documents_doc_owner_id (user_id),
@@ -577,23 +577,23 @@ CREATE TABLE  IF NOT EXISTS patent_documents (
 
 CREATE TABLE IF NOT EXISTS patent_doc_section_types(
 	patent_doc_section_id INT PRIMARY KEY,
-	patent_doc_section_desc VARCHAR(10) NOT NULL COMMENT '专利主题'
+	patent_doc_section_desc VARCHAR(10) NOT NULL COMMENT '涓撳埄涓婚'
 	
 );
 
-INSERT INTO patent_doc_section_types VALUES(1,'说明书');
-INSERT INTO patent_doc_section_types VALUES(2,'权利要求');
-INSERT INTO patent_doc_section_types VALUES(3,'摘要');
+INSERT INTO patent_doc_section_types VALUES(1,'璇存槑涔�');
+INSERT INTO patent_doc_section_types VALUES(2,'鏉冨埄瑕佹眰');
+INSERT INTO patent_doc_section_types VALUES(3,'鎽樿');
 
 CREATE TABLE IF NOT EXISTS patent_document_templates(
 	template_id INT AUTO_INCREMENT PRIMARY KEY,
-	content mediumtext NULL COMMENT '专利模块部分',
-	template_title VARCHAR(400) NOT NULL COMMENT '模板说明',
-	patent_type INT NOT NULL COMMENT '专利类型',
-	patent_doc_section INT NOT NULL COMMENT '专利主题',
-	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-	last_update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT'最近修改时间',
-	creator_id INT NOT NULL COMMENT '创建者',
+	content mediumtext NULL COMMENT '涓撳埄妯″潡閮ㄥ垎',
+	template_title VARCHAR(400) NOT NULL COMMENT '妯℃澘璇存槑',
+	patent_type INT NOT NULL COMMENT '涓撳埄绫诲瀷',
+	patent_doc_section INT NOT NULL COMMENT '涓撳埄涓婚',
+	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '鍒涘缓鏃堕棿',
+	last_update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT'鏈�杩戜慨鏀规椂闂�',
+	creator_id INT NOT NULL COMMENT '鍒涘缓鑰�',
 	CONSTRAINT fk_patent_document_template_patent_type FOREIGN KEY ids_fk_patent_name_template_patent_type(patent_type) REFERENCES patent_types(patent_type_id),
 	CONSTRAINT fk_patent_document_template_creator_id FOREIGN KEY ids_fk_patent_name_template_creator_id(creator_id) REFERENCES users(user_id),
 	CONSTRAINT fk_patent_document_template_patent_doc_section FOREIGN KEY ids_fk_patent_document_template_doc_section(patent_doc_section) REFERENCES patent_doc_section_types(patent_doc_section_id)
@@ -605,8 +605,8 @@ CREATE TABLE IF NOT EXISTS patent_attachment (
   attachment_id BIGINT NOT NULL AUTO_INCREMENT,
   attachment_url VARCHAR(200) DEFAULT NULL,
   patent_doc_id BIGINT,
-  caption VARCHAR(200) NOT NULL COMMENT '说明',
-  seq_no int NOT NULL COMMENT '图片序列号',
+  caption VARCHAR(200) NOT NULL COMMENT '璇存槑',
+  seq_no int NOT NULL COMMENT '鍥剧墖搴忓垪鍙�',
   PRIMARY KEY (attachment_id),
   CONSTRAINT fk_patent_documents_doc_id FOREIGN KEY idx_fk_patent_documents_doc_id(patent_doc_id) REFERENCES patent_documents(patent_doc_id) on delete cascade
 );
@@ -660,16 +660,16 @@ CREATE TABLE IF NOT EXISTS process_person (
 
 CREATE TABLE IF NOT EXISTS common_app_person (
   app_person_id BIGINT NOT NULL AUTO_INCREMENT,
-  NAME VARCHAR(20) NOT NULL  COMMENT'申请人姓名',
-  id_number  VARCHAR(50) NOT NULL  COMMENT '证件号码',
-  postcode_address VARCHAR(200) NOT NULL  COMMENT '邮编及地址',
-  other_information VARCHAR(50) DEFAULT NULL COMMENT '其他信息',
+  NAME VARCHAR(20) NOT NULL  COMMENT'鐢宠浜哄鍚�',
+  id_number  VARCHAR(50) NOT NULL  COMMENT '璇佷欢鍙风爜',
+  postcode_address VARCHAR(200) NOT NULL  COMMENT '閭紪鍙婂湴鍧�',
+  other_information VARCHAR(50) DEFAULT NULL COMMENT '鍏朵粬淇℃伅',
   user_id INT(11)  NOT NULL,
-  proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址',
-  transaction_identity_id  VARCHAR(50) DEFAULT NULL COMMENT '备案证件号',
-  fee_reduce_transaction_status  VARCHAR(20) DEFAULT '未备案' NOT NULL  COMMENT '费减备案',
-  transaction_year  VARCHAR(20) DEFAULT NULL COMMENT '备案年度',
-  app_person_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址',
+  proxy_file  VARCHAR(200) DEFAULT NULL COMMENT '涓婁紶濮旀墭涔︿繚瀛樺湴鍧�',
+  transaction_identity_id  VARCHAR(50) DEFAULT NULL COMMENT '澶囨璇佷欢鍙�',
+  fee_reduce_transaction_status  VARCHAR(20) DEFAULT '鏈妗�' NOT NULL  COMMENT '璐瑰噺澶囨',
+  transaction_year  VARCHAR(20) DEFAULT NULL COMMENT '澶囨骞村害',
+  app_person_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '涓婁紶闄勪欢淇濆瓨鍦板潃',
   PRIMARY KEY(app_person_id),
   KEY fk_common_app_person_owner_id (user_id),
   CONSTRAINT fk_common_app_person_owner_id FOREIGN KEY(user_id) REFERENCES users (user_id) ON   DELETE   CASCADE   ON   UPDATE   CASCADE 
@@ -677,13 +677,13 @@ CREATE TABLE IF NOT EXISTS common_app_person (
 
 CREATE TABLE IF NOT EXISTS common_inventor (
   inventor_id BIGINT NOT NULL AUTO_INCREMENT,
-  inventor_name VARCHAR(20) NOT NULL COMMENT'发明姓名',
-  inventor_id_number  VARCHAR(20) DEFAULT NULL COMMENT '证件号码',
-  inventor_nationality VARCHAR(20) DEFAULT NULL COMMENT '发明人国籍',
-  inventor_mobile varchar(40) DEFAULT NULL COMMENT '电话号码',
-  inventor_email VARCHAR(40) DEFAULT NULL COMMENT '邮箱' ,
-  inventor_other_information VARCHAR(50) DEFAULT NULL COMMENT '其他信息',
-  inventor_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '上传附件保存地址',
+  inventor_name VARCHAR(20) NOT NULL COMMENT'鍙戞槑濮撳悕',
+  inventor_id_number  VARCHAR(20) DEFAULT NULL COMMENT '璇佷欢鍙风爜',
+  inventor_nationality VARCHAR(20) DEFAULT NULL COMMENT '鍙戞槑浜哄浗绫�',
+  inventor_mobile varchar(40) DEFAULT NULL COMMENT '鐢佃瘽鍙风爜',
+  inventor_email VARCHAR(40) DEFAULT NULL COMMENT '閭' ,
+  inventor_other_information VARCHAR(50) DEFAULT NULL COMMENT '鍏朵粬淇℃伅',
+  inventor_attachment_file  VARCHAR(200) DEFAULT NULL COMMENT '涓婁紶闄勪欢淇濆瓨鍦板潃',
   user_id INT(11)  NOT NULL ,
   PRIMARY KEY(inventor_id),
   KEY fk_common_inventor_owner_id (user_id),
@@ -716,15 +716,15 @@ CREATE TABLE IF NOT EXISTS user_app_person (
 
  CREATE TABLE IF NOT EXISTS patent_doc_app_person(
 	person_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	patent_doc_id BIGINT NOT NULL COMMENT '文档编号',
-	NAME VARCHAR(20) NOT  NULL COMMENT '申请人姓名',
-	id_number VARCHAR(20) NOT NULL COMMENT '申请人身份证编号',
-	postcode_address VARCHAR(300) NOT  NULL COMMENT'邮编地址',
-	other_information VARCHAR(50) COMMENT'其他信息',
-	transaction_identity  VARCHAR(50) DEFAULT NULL COMMENT '备案证件号',
-	fee_reduce_transaction_status  VARCHAR(20) DEFAULT '未备案' COMMENT '费减备案',
-  	transaction_year  VARCHAR(20) DEFAULT NULL COMMENT '备案年度',
-	user_id INT NOT NULL COMMENT'创建者编号',
+	patent_doc_id BIGINT NOT NULL COMMENT '鏂囨。缂栧彿',
+	NAME VARCHAR(20) NOT  NULL COMMENT '鐢宠浜哄鍚�',
+	id_number VARCHAR(20) NOT NULL COMMENT '鐢宠浜鸿韩浠借瘉缂栧彿',
+	postcode_address VARCHAR(300) NOT  NULL COMMENT'閭紪鍦板潃',
+	other_information VARCHAR(50) COMMENT'鍏朵粬淇℃伅',
+	transaction_identity  VARCHAR(50) DEFAULT NULL COMMENT '澶囨璇佷欢鍙�',
+	fee_reduce_transaction_status  VARCHAR(20) DEFAULT '鏈妗�' COMMENT '璐瑰噺澶囨',
+  	transaction_year  VARCHAR(20) DEFAULT NULL COMMENT '澶囨骞村害',
+	user_id INT NOT NULL COMMENT'鍒涘缓鑰呯紪鍙�',
 	CONSTRAINT fk_patent_doc_app_person_doc_id FOREIGN KEY idx_fk_patent_doc_app_person_doc_id(patent_doc_id) REFERENCES patent_documents(patent_doc_id) ON   DELETE   CASCADE
 
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
@@ -760,16 +760,16 @@ CREATE TABLE IF NOT EXISTS patent_doc_status (
 
 INSERT INTO patent_doc_status (patent_doc_status_id, patent_doc_status_desc)
 VALUES
-	(1, '草稿'),
-	(2, '立案分配'),
-	(3, '已分配'),
-	(4, '专家撰写'),
-	(5, '待确认'),
-	(6, '待修改'),
-	(7, '定稿'),
-	(8, '撰写完成'),
-	(9, '待交局'),
-	(10, '已交局');
+	(1, '鑽夌'),
+	(2, '绔嬫鍒嗛厤'),
+	(3, '宸插垎閰�'),
+	(4, '涓撳鎾板啓'),
+	(5, '寰呯‘璁�'),
+	(6, '寰呬慨鏀�'),
+	(7, '瀹氱'),
+	(8, '鎾板啓瀹屾垚'),
+	(9, '寰呬氦灞�'),
+	(10, '宸蹭氦灞�');
 
 CREATE TABLE IF NOT EXISTS user_patent_docs (
 	user_id INT,
@@ -780,14 +780,14 @@ CREATE TABLE IF NOT EXISTS user_patent_docs (
 );
 CREATE TABLE patent_doc_inventor(
      inventor_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-     patent_doc_id BIGINT NOT NULL COMMENT '文档编号',
-     inventor_name VARCHAR(200) NOT NULL COMMENT '发明人姓名',
-     inventor_number VARCHAR(20) NOT NULL COMMENT '省份证编号',
-     inventor_nationality VARCHAR(100) NOT NULL COMMENT '国籍',
-     inventor_mobile INT  NOT NULL COMMENT '联系电话',
-     inventor_email VARCHAR(100) NOT NULL COMMENT '邮箱',
-     inventor_other_information VARCHAR(50) COMMENT '其他信息',
-     user_id INT COMMENT '创建者',
+     patent_doc_id BIGINT NOT NULL COMMENT '鏂囨。缂栧彿',
+     inventor_name VARCHAR(200) NOT NULL COMMENT '鍙戞槑浜哄鍚�',
+     inventor_number VARCHAR(20) NOT NULL COMMENT '鐪佷唤璇佺紪鍙�',
+     inventor_nationality VARCHAR(100) NOT NULL COMMENT '鍥界睄',
+     inventor_mobile INT  NOT NULL COMMENT '鑱旂郴鐢佃瘽',
+     inventor_email VARCHAR(100) NOT NULL COMMENT '閭',
+     inventor_other_information VARCHAR(50) COMMENT '鍏朵粬淇℃伅',
+     user_id INT COMMENT '鍒涘缓鑰�',
      CONSTRAINT fk_patent_doc_inventor_patent_doc_id FOREIGN KEY idx_patent_doc_inventor_patent_doc_id(patent_doc_id) REFERENCES patent_documents(patent_doc_id) ON DELETE CASCADE,
      CONSTRAINT fk_patent_doc_inventor_user_id FOREIGN KEY idx_patent_doc_inventor_user_id(user_id) REFERENCES users(user_id) ON DELETE CASCADE
      
@@ -800,7 +800,7 @@ ALTER TABLE common_inventor MODIFY  inventor_email VARCHAR(40) ;
 ALTER TABLE common_app_person MODIFY COLUMN id_number VARCHAR(20) NOT NULL ;
 ALTER TABLE common_app_person MODIFY COLUMN NAME VARCHAR(20) NOT NULL;
 ALTER TABLE common_app_person MODIFY COLUMN postcode_address VARCHAR(50) NOT NULL;
-ALTER TABLE common_app_person MODIFY COLUMN fee_reduce_transaction_status VARCHAR(20) DEFAULT '未备案' NOT NULL;
+ALTER TABLE common_app_person MODIFY COLUMN fee_reduce_transaction_status VARCHAR(20) DEFAULT '鏈妗�' NOT NULL;
 
 ALTER TABLE common_inventor MODIFY COLUMN inventor_name VARCHAR(20) NOT NULL;
 
@@ -833,11 +833,11 @@ CREATE TABLE IF NOT EXISTS patent_doc_workflow_action(
 
 CREATE TABLE IF NOT EXISTS patent_doc_workflow_history(
 	history_id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	patent_doc_id BIGINT NOT NULL COMMENT '文档编号',
-	user_id INT NOT NULL COMMENT '创建者',
+	patent_doc_id BIGINT NOT NULL COMMENT '鏂囨。缂栧彿',
+	user_id INT NOT NULL COMMENT '鍒涘缓鑰�',
 	user_name VARCHAR(50) ,
-	ACTION INT NOT NULL COMMENT'操作',
-	action_time TIMESTAMP NOT NULL COMMENT '操作创建时间',
+	ACTION INT NOT NULL COMMENT'鎿嶄綔',
+	action_time TIMESTAMP NOT NULL COMMENT '鎿嶄綔鍒涘缓鏃堕棿',
 	CONSTRAINT fk_patent_doc_workflow_history_user_id FOREIGN KEY idx_patent_doc_workflow_history_user_id(user_id) REFERENCES users(user_id) ON DELETE CASCADE,
 	CONSTRAINT fk_patent_doc_workflow_history_patent_doc_id FOREIGN KEY idx_patent_doc_workflow_history_patent_doc_id(patent_doc_id) REFERENCES
 	patent_documents(patent_doc_id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -846,10 +846,10 @@ CREATE TABLE IF NOT EXISTS patent_doc_workflow_history(
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS patent_doc_workflow_target (
-	history BIGINT NOT NULL  COMMENT '历史记录',
-	target INT NOT NULL COMMENT '操作目标对象',
-	user_name VARCHAR(50) COMMENT '姓名',
-	patent_doc BIGINT NOT NULL COMMENT '文档',
+	history BIGINT NOT NULL  COMMENT '鍘嗗彶璁板綍',
+	target INT NOT NULL COMMENT '鎿嶄綔鐩爣瀵硅薄',
+	user_name VARCHAR(50) COMMENT '濮撳悕',
+	patent_doc BIGINT NOT NULL COMMENT '鏂囨。',
 	PRIMARY KEY (history,target,patent_doc),
 	KEY fk_target_patent_doc_patent_doc(patent_doc),
 	CONSTRAINT `fk_patent_doc_workflow_target_patent_doc` FOREIGN KEY (`patent_doc`) REFERENCES `patent_documents` (`patent_doc_id`) ON DELETE CASCADE,
@@ -861,24 +861,24 @@ insert into groups (id,group_name) values (8,'PLATFORM');
 insert into group_authorities (group_id,authority) values (8,'ROLE_PLATFORM');
 
 
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(1,'委托给平台账户');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(2,'分配给代理机构');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(3,'分配给客服人员');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(4,'分配给技术员');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(5,'置为待修改');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(6,'保存或修改');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(7,'定稿');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(8,'制作标准文件');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(9,'确认');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(10,'交局');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(11,'分配给流程人员');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(12,'删除');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(13,'置为待确认');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(14,'置为待交局');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(15,'拒绝委托');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(16,'上传交局文件');
-INSERT INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(18,'上传定稿文件');
-REPLACE INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(17,'分享给好友');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(1,'濮旀墭缁欏钩鍙拌处鎴�');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(2,'鍒嗛厤缁欎唬鐞嗘満鏋�');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(3,'鍒嗛厤缁欏鏈嶄汉鍛�');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(4,'鍒嗛厤缁欐妧鏈憳');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(5,'缃负寰呬慨鏀�');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(6,'淇濆瓨鎴栦慨鏀�');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(7,'瀹氱');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(8,'鍒朵綔鏍囧噯鏂囦欢');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(9,'纭');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(10,'浜ゅ眬');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(11,'鍒嗛厤缁欐祦绋嬩汉鍛�');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(12,'鍒犻櫎');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(13,'缃负寰呯‘璁�');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc)VALUES(14,'缃负寰呬氦灞�');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(15,'鎷掔粷濮旀墭');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(16,'涓婁紶浜ゅ眬鏂囦欢');
+INSERT INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(18,'涓婁紶瀹氱鏂囦欢');
+REPLACE INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(17,'鍒嗕韩缁欏ソ鍙�');
 
 
 CREATE TABLE `share_patent_docs` (
@@ -901,39 +901,39 @@ CREATE TABLE IF NOT EXISTS patent_doc_proxy_status (
 
 INSERT INTO patent_doc_proxy_status (patent_doc_proxy_status_id, patent_doc_proxy_status_desc)
 VALUES
-	(1, '未委托'),
-	(2, '已支付'),
-	(3, '已委托'),
-	(4, '已取消');
+	(1, '鏈鎵�'),
+	(2, '宸叉敮浠�'),
+	(3, '宸插鎵�'),
+	(4, '宸插彇娑�');
 	
-ALTER TABLE patent_documents ADD COLUMN internal_code VARCHAR(100) COMMENT '内部编码';
+ALTER TABLE patent_documents ADD COLUMN internal_code VARCHAR(100) COMMENT '鍐呴儴缂栫爜';
 
-ALTER TABLE patent_doc_order_items ADD COLUMN apply_fee INT NOT NULL DEFAULT 0 COMMENT '申请费';
-ALTER TABLE patent_doc_order_items ADD COLUMN print_fee INT NOT NULL DEFAULT 0 COMMENT '打印费';
-ALTER TABLE patent_doc_order_items ADD COLUMN check_fee INT NOT NULL DEFAULT 0 COMMENT '审查费';
-ALTER TABLE patent_doc_order_items ADD COLUMN service_fee INT NOT NULL DEFAULT 0 COMMENT '服务费';
+ALTER TABLE patent_doc_order_items ADD COLUMN apply_fee INT NOT NULL DEFAULT 0 COMMENT '鐢宠璐�';
+ALTER TABLE patent_doc_order_items ADD COLUMN print_fee INT NOT NULL DEFAULT 0 COMMENT '鎵撳嵃璐�';
+ALTER TABLE patent_doc_order_items ADD COLUMN check_fee INT NOT NULL DEFAULT 0 COMMENT '瀹℃煡璐�';
+ALTER TABLE patent_doc_order_items ADD COLUMN service_fee INT NOT NULL DEFAULT 0 COMMENT '鏈嶅姟璐�';
 
-ALTER TABLE patent_documents ADD COLUMN invoice_pic VARCHAR(200) DEFAULT NULL COMMENT '缴费发票凭证';
-INSERT INTO payment_methods VALUES(3, '缴费凭证支付');
+ALTER TABLE patent_documents ADD COLUMN invoice_pic VARCHAR(200) DEFAULT NULL COMMENT '缂磋垂鍙戠エ鍑瘉';
+INSERT INTO payment_methods VALUES(3, '缂磋垂鍑瘉鏀粯');
 
-ALTER TABLE patent_doc_app_person ADD COLUMN proxy_file VARCHAR(200) COMMENT '委托书文件地址';
-ALTER TABLE patent_doc_app_person ADD COLUMN app_person_attachment_file VARCHAR(200) COMMENT '附件存放地址';
-ALTER TABLE patent_doc_inventor ADD COLUMN inventor_attachment_file VARCHAR(200) COMMENT '附件存放地址';s
+ALTER TABLE patent_doc_app_person ADD COLUMN proxy_file VARCHAR(200) COMMENT '濮旀墭涔︽枃浠跺湴鍧�';
+ALTER TABLE patent_doc_app_person ADD COLUMN app_person_attachment_file VARCHAR(200) COMMENT '闄勪欢瀛樻斁鍦板潃';
+ALTER TABLE patent_doc_inventor ADD COLUMN inventor_attachment_file VARCHAR(200) COMMENT '闄勪欢瀛樻斁鍦板潃';s
 
-alter table patent_documents add column app_date date comment '申请日';
-UPDATE fee_payment_status SET fee_payment_status_desc='订单完成' WHERE fee_payment_status_id=5;
-UPDATE order_status SET status_description='订单完成' WHERE order_status_id=3;
+alter table patent_documents add column app_date date comment '鐢宠鏃�';
+UPDATE fee_payment_status SET fee_payment_status_desc='璁㈠崟瀹屾垚' WHERE fee_payment_status_id=5;
+UPDATE order_status SET status_description='璁㈠崟瀹屾垚' WHERE order_status_id=3;
 
-ALTER TABLE patent_documents ADD COLUMN patent_doc_status_text VARCHAR(150) COMMENT '案件状态描述';
+ALTER TABLE patent_documents ADD COLUMN patent_doc_status_text VARCHAR(150) COMMENT '妗堜欢鐘舵�佹弿杩�';
 
 INSERT INTO patent_doc_status(patent_doc_status_id,patent_doc_status_desc)
-VALUES(20,'等待申请费'),
-(21,'待答复'),
-(22,'等年登印费'),
-(23,'待恢复'),
-(24,'失效'),
-(25,'专利权维持'),
-(26,'其他');
+VALUES(20,'绛夊緟鐢宠璐�'),
+(21,'寰呯瓟澶�'),
+(22,'绛夊勾鐧诲嵃璐�'),
+(23,'寰呮仮澶�'),
+(24,'澶辨晥'),
+(25,'涓撳埄鏉冪淮鎸�'),
+(26,'鍏朵粬');
 
 ALTER TABLE common_inventor add COLUMN create_time  TIMESTAMP;
 ALTER TABLE common_app_person add COLUMN create_time TIMESTAMP;
@@ -987,7 +987,7 @@ CREATE TABLE express (
   send_time date,
   sign_time datetime,
   express_status int(11) NOT NULL DEFAULT '1',
-  phone varchar(20) DEFAULT NULL COMMENT '联系电话或手机号码',
+  phone varchar(20) DEFAULT NULL COMMENT '鑱旂郴鐢佃瘽鎴栨墜鏈哄彿鐮�',
   contact_person varchar(200) NOT NULL,
   PRIMARY KEY (express_id),
   KEY fk_express_sender (sender),
@@ -1004,43 +1004,43 @@ CREATE TABLE express (
   CONSTRAINT fk_express_sender FOREIGN KEY (sender) REFERENCES users (user_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO express_status(express_status_id,express_status_desc) VALUES (1,'草稿');
-INSERT INTO express_status(express_status_id,express_status_desc) VALUES (2,'待签收');
-INSERT INTO express_status(express_status_id,express_status_desc) VALUES (3,'已签收');
+INSERT INTO express_status(express_status_id,express_status_desc) VALUES (1,'鑽夌');
+INSERT INTO express_status(express_status_id,express_status_desc) VALUES (2,'寰呯鏀�');
+INSERT INTO express_status(express_status_id,express_status_desc) VALUES (3,'宸茬鏀�');
 
-ALTER TABLE common_app_person ADD COLUMN phone VARCHAR(30) COMMENT '联系人手机号码';
-ALTER TABLE common_app_person ADD COLUMN is_fee_reduce int DEFAULT '1' COMMENT '是否为费减备案状态';
+ALTER TABLE common_app_person ADD COLUMN phone VARCHAR(30) COMMENT '鑱旂郴浜烘墜鏈哄彿鐮�';
+ALTER TABLE common_app_person ADD COLUMN is_fee_reduce int DEFAULT '1' COMMENT '鏄惁涓鸿垂鍑忓妗堢姸鎬�';
 alter table patent_doc_app_person modify column id_number varchar(50);
 
 
 CREATE  TABLE if not exists news_type (
 type_id  int NOT NULL AUTO_INCREMENT COMMENT 'id' ,
-type_name  varchar(50) NOT NULL COMMENT '栏目名' ,
+type_name  varchar(50) NOT NULL COMMENT '鏍忕洰鍚�' ,
 PRIMARY KEY (type_id)
 )
 ;
 
 CREATE TABLE IF NOT EXISTS article_type (
 type_id  INT NOT NULL AUTO_INCREMENT ,
-type_name  VARCHAR(50) NOT NULL COMMENT '栏目名' ,
+type_name  VARCHAR(50) NOT NULL COMMENT '鏍忕洰鍚�' ,
 PRIMARY KEY (type_id)
 )
 ;
 CREATE TABLE if not exists news (
 id  int NOT NULL AUTO_INCREMENT ,
-news_type  int COMMENT '栏目id' ,
-user_id  int NOT NULL COMMENT '发文人' ,
-keywords  varchar(120) NULL COMMENT '关键字' ,
-author  varchar(30) NULL COMMENT '作者' ,
-title  varchar(50) COMMENT '标题' ,
-create_time  timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ,
-publish_time  datetime COMMENT '发文时间' ,
-update_time  datetime COMMENT '更新时间' ,
-source  varchar(100) NULL COMMENT '来源' ,
-content  text COMMENT '内容' ,
-abstract varchar(100) NULL COMMENT '摘要' ,
-small_img_url varchar(200) comment '缩略图地址',
-check_status INT COMMENT '发布状态',
+news_type  int COMMENT '鏍忕洰id' ,
+user_id  int NOT NULL COMMENT '鍙戞枃浜�' ,
+keywords  varchar(120) NULL COMMENT '鍏抽敭瀛�' ,
+author  varchar(30) NULL COMMENT '浣滆��' ,
+title  varchar(50) COMMENT '鏍囬' ,
+create_time  timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '鍒涘缓鏃堕棿' ,
+publish_time  datetime COMMENT '鍙戞枃鏃堕棿' ,
+update_time  datetime COMMENT '鏇存柊鏃堕棿' ,
+source  varchar(100) NULL COMMENT '鏉ユ簮' ,
+content  text COMMENT '鍐呭' ,
+abstract varchar(100) NULL COMMENT '鎽樿' ,
+small_img_url varchar(200) comment '缂╃暐鍥惧湴鍧�',
+check_status INT COMMENT '鍙戝竷鐘舵��',
 PRIMARY KEY (id),
 FOREIGN KEY (news_type) REFERENCES news_type (type_id) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (user_id) REFERENCES   users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -1048,21 +1048,21 @@ FOREIGN KEY (user_id) REFERENCES   users (user_id) ON DELETE CASCADE ON UPDATE C
 ;
 CREATE TABLE IF NOT EXISTS article (
 id  INT NOT NULL AUTO_INCREMENT ,
-article_type  INT COMMENT '栏目id' ,
-user_id  INT NOT NULL COMMENT '发文人' ,
-keywords  VARCHAR(120) COMMENT '关键字' ,
-author  VARCHAR(30) COMMENT '作者' ,
-title  VARCHAR(50) COMMENT '标题' ,
-create_time  DATETIME  COMMENT '创建时间' ,
-publish_time  DATETIME COMMENT '发布时间' ,
-update_time  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间' ,
-source  VARCHAR(100) COMMENT '来源' ,
-abstract  VARCHAR(100) COMMENT '摘要' ,
-content  TEXT COMMENT '内容' ,
-check_status  TINYINT DEFAULT 0 COMMENT '0 未审核  1  审核  2审核不通过' ,
+article_type  INT COMMENT '鏍忕洰id' ,
+user_id  INT NOT NULL COMMENT '鍙戞枃浜�' ,
+keywords  VARCHAR(120) COMMENT '鍏抽敭瀛�' ,
+author  VARCHAR(30) COMMENT '浣滆��' ,
+title  VARCHAR(50) COMMENT '鏍囬' ,
+create_time  DATETIME  COMMENT '鍒涘缓鏃堕棿' ,
+publish_time  DATETIME COMMENT '鍙戝竷鏃堕棿' ,
+update_time  TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '鏇存柊鏃堕棿' ,
+source  VARCHAR(100) COMMENT '鏉ユ簮' ,
+abstract  VARCHAR(100) COMMENT '鎽樿' ,
+content  TEXT COMMENT '鍐呭' ,
+check_status  TINYINT DEFAULT 0 COMMENT '0 鏈鏍�  1  瀹℃牳  2瀹℃牳涓嶉�氳繃' ,
 up_vote  INT DEFAULT 0 ,
 down_vote  INT DEFAULT 0 ,
-small_img_url varchar(200) comment '缩略图地址',
+small_img_url varchar(200) comment '缂╃暐鍥惧湴鍧�',
 PRIMARY KEY (id),
 FOREIGN KEY (article_type) REFERENCES article_type (type_id) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (user_id) REFERENCES   users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -1074,7 +1074,7 @@ CREATE TABLE IF NOT EXISTS news_imgs (
 img_id BIGINT NOT NULL AUTO_INCREMENT,
 img_url VARCHAR(200) DEFAULT NULL,
 news_id INT,
-caption VARCHAR(200) NOT NULL COMMENT '图片说明',
+caption VARCHAR(200) NOT NULL COMMENT '鍥剧墖璇存槑',
 PRIMARY KEY (img_id),
 CONSTRAINT fk_news_id FOREIGN KEY idx_fk_news_id(news_id) REFERENCES news(id) ON DELETE CASCADE
 );
@@ -1083,7 +1083,7 @@ CREATE TABLE IF NOT EXISTS article_imgs (
 img_id BIGINT NOT NULL AUTO_INCREMENT,
 img_url VARCHAR(200),
 article_id INT,
-caption VARCHAR(200) COMMENT '图片说明',
+caption VARCHAR(200) COMMENT '鍥剧墖璇存槑',
 PRIMARY KEY (img_id),
 CONSTRAINT fk_article_id FOREIGN KEY idx_fk_article_id(article_id) REFERENCES article(id) ON DELETE CASCADE
 );
@@ -1101,8 +1101,8 @@ CREATE TABLE IF NOT EXISTS article_comments (
 	CONSTRAINT fk_article_comments_user_id FOREIGN KEY (user_id)  REFERENCES users(user_id) ON DELETE CASCADE 
 );
 
-alter table news add column up_vote  INT DEFAULT 0 comment '赞';
-alter table news add column down_vote  INT DEFAULT 0 comment '踩';
+alter table news add column up_vote  INT DEFAULT 0 comment '璧�';
+alter table news add column down_vote  INT DEFAULT 0 comment '韪�';
 
 CREATE TABLE IF NOT EXISTS news_comments (
 	comment_id INT AUTO_INCREMENT PRIMARY KEY  ,
@@ -1114,7 +1114,7 @@ CREATE TABLE IF NOT EXISTS news_comments (
 	CONSTRAINT fk_news_comments_user_id FOREIGN KEY (user_id)  REFERENCES users(user_id) ON DELETE CASCADE 
 );
 
-ALTER TABLE sell_patent_goods ADD COLUMN recommend_status TINYINT DEFAULT 0 COMMENT '0未推荐  1已推荐';
+ALTER TABLE sell_patent_goods ADD COLUMN recommend_status TINYINT DEFAULT 0 COMMENT '0鏈帹鑽�  1宸叉帹鑽�';
 ALTER TABLE users MODIFY username VARCHAR(60);
 
 CREATE TABLE brand_category (
@@ -1127,16 +1127,16 @@ CREATE TABLE brands (
 	id  int NULL AUTO_INCREMENT,
 	user  int NOT NULL,
 	address  varchar(100) NULL,
-	check_status  tinyint NOT NULL DEFAULT 1 COMMENT '1审核通过  2审核未通过  3未审核',
-	sell_status  tinyint NOT NULL DEFAULT 1 COMMENT '1出售中 2 下架',
-	is_recommend  tinyint DEFAULT 1 COMMENT '1不推荐 2 推荐',
+	check_status  tinyint NOT NULL DEFAULT 1 COMMENT '1瀹℃牳閫氳繃  2瀹℃牳鏈�氳繃  3鏈鏍�',
+	sell_status  tinyint NOT NULL DEFAULT 1 COMMENT '1鍑哄敭涓� 2 涓嬫灦',
+	is_recommend  tinyint DEFAULT 1 COMMENT '1涓嶆帹鑽� 2 鎺ㄨ崘',
 	category_id  int NOT  NULL ,
 	brand_no  varchar(100) NOT NULL,
 	name  varchar(100) NOT NULL,
 	combination_type  varchar(500) NULL,
 	similar_no  varchar(300) NULL,
 	scope  varchar(500) NULL,
-	transaction_mode  tinyint NULL DEFAULT 1 COMMENT '1 出售  2转让',
+	transaction_mode  tinyint NULL DEFAULT 1 COMMENT '1 鍑哄敭  2杞',
 	price  int NOT NULL,
 	app_person  varchar(100) NULL,
 	app_date  datetime NULL,
@@ -1146,6 +1146,7 @@ CREATE TABLE brands (
 	originality  varchar(500) NULL,
 	case_status VARCHAR(10),
 	PRIMARY KEY (id),
+	UNIQUE KEY idx_unique_brand_no (brand_no),
 	constraint fk_brands_users foreign key(user) references users(user_id),
 	constraint fk_brands_category foreign key(category_id) references brand_category(category_id) 
 );
@@ -1158,3 +1159,5 @@ CREATE TABLE wechat_orders (
 	pay_time  DATETIME NULL ,
 	PRIMARY KEY (id)
 );
+
+insert into brand_category(category_id,category_name)values(3,'日化用品'),(10,'医疗器械'),(12,'运输工具'),(20,'家具用品');

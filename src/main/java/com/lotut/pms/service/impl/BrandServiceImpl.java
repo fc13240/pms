@@ -95,4 +95,14 @@ public class BrandServiceImpl implements BrandService{
 	public int getWeChatOrderCount() {
 		return brandDao.getWeChatOrderCount();
 	}
+
+	@Override
+	public void addOrEditBrand(Brand brand) {
+		brandDao.addOrEditBrand(brand);
+	}
+
+	@Override
+	public Brand getUserBrandsById(int brandId) {
+		return brandDao.getUserBrandsById(brandId);
+	}
 }

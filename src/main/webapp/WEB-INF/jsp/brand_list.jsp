@@ -120,8 +120,12 @@
 									</td>
 									<td style="text-align:center">
 										<%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_ORDER','ROLE_TRADER','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_TECH','ROLE_PROCESS','ROLE_NEWS')"> --%>
-											<button class="btn btn-default">修改</button>
-											<button  class="btn btn-default" onclick="deleteBrands(${brand.id })">删除</button>
+
+
+											<button class="btn btn-info" onclick="updateBrand(${brand.id })">修改</button>
+											<button  class="btn btn-warning" onclick="deleteBrands(${brand.id })">删除</button>
+
+
 										<%-- </se:authorize> --%>
 										<se:authorize access="hasRole('ROLE_ORDER')">
 											<c:if test="${brand.checkStatus!=1}">
@@ -297,6 +301,20 @@ function deleteBrands(brandId){
 		}
 	})
 }
+
+function deleteBrands(brandId){
+	$.ajax({
+		url:"<s:url value='/brand/deleteBrand.html'/>",
+		data:{"brandId":brandId},
+		success:function(){
+			location.reload();
+		}
+	})
+}
+function updateBrand(id){
+	window.open("<s:url value='/brand/brandUpdateForm.html'/>?brandId="+id)
+}
+
 function updateRecommendStatus(id,checkStatus){
 	 $.ajax({
 		type:"get",
