@@ -173,7 +173,7 @@ height:37px;
 									<tr>
 										<th>公告日</th>
 										<td>
-											<input style="width:200px;" type="text" class="form-control" value="${brand.publishDate}"
+											<input style="width:200px;" type="text" class="form-control" value='<fmt:formatDate value="${brand.publishDate}" pattern='yyyy-MM-dd'/>'
 												name="publishDate"  readonly="readonly" onclick="javascript:$('#publish_date_img').click()" id="publishAppDateId" required> 
 											<img style="display:none;" onclick="WdatePicker({el:'publishAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" id="publish_date_img">
 											
