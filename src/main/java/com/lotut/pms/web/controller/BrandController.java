@@ -91,7 +91,8 @@ public class BrandController {
 			}
 			InputStream is = brandFile.getInputStream();
 			int userId = PrincipalUtils.getCurrentUserId();
-			brandService.uploadBrands(is, userId);
+			List<Brand> brands=brandService.uploadBrands(is, userId);
+			model.addAttribute("message", brands.size());
 			return "brand_upload_success";
 		} catch (Exception e) {
 			e.printStackTrace();

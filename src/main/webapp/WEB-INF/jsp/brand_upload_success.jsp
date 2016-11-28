@@ -30,7 +30,7 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
-				  <div>上传成功</div>
+				  <div>上传成功${message}</div>
 				  <a href="javascript:history.go(-1)">返回上一步</a>
 				  <div class="footer">
 					<div class="footer-inner">

@@ -29,10 +29,11 @@ import com.lotut.pms.service.exception.DateFormatException;
 public class BrandExcelParser {
 	
 	public static void main(String[] args) throws Exception {
-		InputStream in = new FileInputStream("C:\\Users\\xw\\Desktop\\智慧殿初审合格商标.xlsx");
+		InputStream in = new FileInputStream("C:\\Users\\xw\\Desktop\\智慧殿商标11.28日.xls");
+//		InputStream in = new FileInputStream("C:\\Users\\xw\\Desktop\\智慧殿初审合格商标.xlsx");
 		List<Brand> brandRecords = parseBrandFile(in,2);
 		for (Brand p: brandRecords) {
-			System.out.println(p.getCaseStatus());
+//			System.out.println(p.getCaseStatus());
 		}
 		System.out.println(brandRecords.size());
 	}
@@ -87,14 +88,19 @@ public class BrandExcelParser {
 		
 	}
 	private static Brand parseRow(Row row,int userId) {
-		
+		List<String> dateString= new ArrayList<>();
 		int cellNumber=row.getPhysicalNumberOfCells();
+		String targetDate="";
 		for (int i = 0; i <cellNumber; i++) {
 			if(row.getCell(i)!=null){
-			row.getCell(i).setCellType(Cell.CELL_TYPE_STRING);
+				row.getCell(i).setCellType(Cell.CELL_TYPE_STRING);
+				
 			}
+			
 		}
+		
 		String publishDate="";
+		if(row.getCell(12)!=null){
 		if (0 == row.getCell(12).getCellType()) {
 
 			//判断是否为日期类型
@@ -117,6 +123,33 @@ public class BrandExcelParser {
 			 publishDate = df.format(row.getCell(12).getNumericCellValue());
 
 			}
+		}
+		}
+		String startDate="";
+		if(row.getCell(13)!=null){
+		if (0 == row.getCell(13).getCellType()) {
+
+			//判断是否为日期类型
+
+			if(HSSFDateUtil.isCellDateFormatted(row.getCell(13))){
+			//用于转化为日期格式
+
+			Date d = row.getCell(13).getDateCellValue();
+
+			DateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+
+			startDate = formater.format(d);
+
+			}else{
+
+			// 用于格式化数字，只保留数字的整数部分
+
+			DecimalFormat df = new DecimalFormat("########");
+
+			startDate = df.format(row.getCell(13).getNumericCellValue());
+
+			}
+		}
 		}
 		String address = row.getCell(0).getStringCellValue().trim();
 		String caseStatus = row.getCell(1).getStringCellValue().trim();
@@ -143,10 +176,12 @@ public class BrandExcelParser {
 		brand.setName(name);
 		brand.setScope(scope);
 		brand.setTransactionMode(transactionMode);
-		brand.setPrice(Integer.valueOf(price));
+//		System.out.println(price);
+		brand.setPrice(price == ""? 0:Integer.valueOf(price));
 		brand.setSimilarNo(similarNo);
 		brand.setAppPerson(appPerson);
-		brand.setPublishDate(parseDate(publishDate));
+		brand.setPublishDate(publishDate == null? null:parseDate(publishDate));
+		brand.setStartDate(startDate == null ? null:parseDate(startDate));
 		return brand;
 	}
 
@@ -191,6 +226,33 @@ public class BrandExcelParser {
 		return targetNumber;
 		
 	}
+	
+//	private static String getStringDate(Row row){
+//		if(0 == row.getCell(i).getCellType()){
+//			//判断是否为日期类型
+//
+//			if(HSSFDateUtil.isCellDateFormatted(row.getCell(i))){
+//			//用于转化为日期格式
+//
+//			Date d = row.getCell(i).getDateCellValue();
+//
+//			DateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+//
+//			String targetDate = formater.format(d);
+//
+//			}else{
+//
+//			// 用于格式化数字，只保留数字的整数部分
+//
+//			DecimalFormat df = new DecimalFormat("########");
+//
+//			String targetDate = df.format(row.getCell(i).getNumericCellValue());
+//
+//			}
+//		}
+//		return null;
+//		
+//	}
 //	public static void main(String[] args) {
 //		String categoryName="第13类-日化用品";
 //		System.out.println(getCategoryId(categoryName));

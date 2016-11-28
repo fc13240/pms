@@ -22,7 +22,7 @@ public interface BrandService {
 	
 	List<BrandCategory> getAllCategorys();
 	
-	boolean uploadBrands(InputStream is,int userId) throws IOException;
+	List<Brand> uploadBrands(InputStream is,int userId) throws IOException;
 	
 	boolean addOrUpdateBrands(List<Brand> brands, int userId);
 	

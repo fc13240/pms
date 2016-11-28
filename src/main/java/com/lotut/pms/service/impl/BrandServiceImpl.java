@@ -66,14 +66,15 @@ public class BrandServiceImpl implements BrandService{
 	} 
 
 	@Override
-	public boolean uploadBrands(InputStream is, int userId) throws IOException {
+	public List<Brand> uploadBrands(InputStream is, int userId) throws IOException {
 		List<Brand> brands=new ArrayList<>();
 		try {
 			brands=BrandExcelParser.parseBrandFile(is, userId);
 		} catch (EncryptedDocumentException | InvalidFormatException e) {
 			e.printStackTrace();
 		}
-		return addOrUpdateBrands(brands,userId);
+		addOrUpdateBrands(brands, userId);
+		return brands;
 	}
 	
 	@Override
