@@ -19,18 +19,13 @@
 		<h5>商标添加</h5>
 		</a>
 	</li> 
+	<se:authorize access="hasAnyRole('ROLE_TRADER','ROLE_PLATFORM')">
 	<li class="active">
-		<a href="<s:url value='/brand/buyRecords.html'/>">
+		<a href="<s:url value='/brand/getWechatOrderList.html'/>">
 		<h5>购买记录</h5>
 		</a>
 	</li> 
-	<!-- <se:authorize access="hasAnyRole('ROLE_NEWS')">
-	</se:authorize>  -->
-	<%-- <li class="active"> 
-		<a href="<s:url value='/article/getArticleTypeList.html'/>">
-		<h5>分类管理</h5>
-		</a>
-	</li> --%> 
+	</se:authorize>
 
 	</ul>
 </div>

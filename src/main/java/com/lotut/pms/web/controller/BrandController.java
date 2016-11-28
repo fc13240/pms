@@ -14,16 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.WeChatOrder;
 import com.lotut.pms.service.BrandService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
-
-import net.lingala.zip4j.exception.ZipException;
 
 @Controller
 @RequestMapping(path="/brand")
@@ -67,7 +65,8 @@ public class BrandController {
 		if(page.getCurrentPage()<1){
 			page.setCurrentPage(1);
 		}
-		
+		int totalCount = brandService.getUserBrandsCount(userId);
+		page.setTotalRecords(totalCount);
 		List<Brand> brands = brandService.getUserBrandsByPage(page);
 		List<BrandCategory> categorys = brandService.getAllCategorys();
 		model.addAttribute("brands",brands);
@@ -89,20 +88,20 @@ public class BrandController {
 	}
 	
 	@RequestMapping(path="/searchUserBrands")
-	public String searchUserBrands(HttpSession session,Page page,Model model,BrandSearchCondition searchCondition){
+	public String searchUserBrands(HttpSession session,Model model,BrandSearchCondition searchCondition){
+		Page page =searchCondition.getPage();
 		int userId = PrincipalUtils.getCurrentUserId();
-		page.setUserId(userId);
-		page.setPageSize(WebUtils.getPageSize(session));
 		if(page.getCurrentPage()<1){
 			page.setCurrentPage(1);
 		}
 		searchCondition.setUserId(userId);
 		int totalCount = brandService.getsearchUserBrandsCount(searchCondition);
-		searchCondition.getPage().setTotalRecords(totalCount);
-		searchCondition.getPage().setPageSize(WebUtils.getPageSize(session));
+		page.setTotalRecords(totalCount);
+		page.setPageSize(WebUtils.getPageSize(session));
 		List<Brand> brands = brandService.searchUserBrandsByPage(searchCondition);
 		List<BrandCategory> categorys = brandService.getAllCategorys();
 		model.addAttribute("brands",brands);
+		model.addAttribute("searchCondition",searchCondition);
 		model.addAttribute("page",page);
 		model.addAttribute("categorys",categorys);
 		return "brand_list";
@@ -112,5 +111,20 @@ public class BrandController {
 	public void deleteBrand(int brandId,PrintWriter pw){
 		brandService.deleteBrand(brandId);
 		pw.write(1);
+	}
+	
+	
+	@RequestMapping(path="/getWechatOrderList")
+	public String getWechatOrderList(HttpSession session,Page page,Model model){
+		if(page.getCurrentPage()<1){
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		List<WeChatOrder> weChatOrders=brandService.getWeChatUserOrderRecords(page);
+		int totalRecords = brandService.getWeChatOrderCount();
+		page.setTotalRecords(totalRecords);
+		model.addAttribute("weChatOrders",weChatOrders);
+		model.addAttribute("page",page);
+		return "wechat_order_list";
 	}
 }

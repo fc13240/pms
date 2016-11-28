@@ -10,6 +10,7 @@ import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.WeChatOrder;
 
 public class BrandMybatisDao extends SqlSessionDaoSupport implements BrandDao{
 	private BrandMapper brandMapper;
@@ -60,5 +61,15 @@ public class BrandMybatisDao extends SqlSessionDaoSupport implements BrandDao{
 	@Override
 	public int insertOrUpdateBrand(Brand brand) {
 		return brandMapper.insertOrUpdateBrand(brand);
+	}
+	
+	@Override
+	public List<WeChatOrder> getWeChatUserOrderRecords(Page page) {
+		return brandMapper.getWeChatUserOrderRecords(page);
+	}
+	
+	@Override
+	public int getWeChatOrderCount() {
+		return brandMapper.getWeChatOrderCount();
 	}
 }

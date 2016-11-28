@@ -33,6 +33,19 @@
 		</association>
 	
 	</resultMap>
+	
+	<resultMap type="WeChatOrder" id="wechatOrderResultMap">
+		<id property="id" column="id"/>
+		<result property="wechatOrderId" column="wechat_order_id"/>
+		<result property="wechatName" column="wechat_name"/>
+		<result property="totalFee" column="total_fee"/>
+		<result property="payTime" column="pay_time"/>
+		<association property="brand" javaType="Brand">
+			<id property="id" column="id"/>
+			<result property="name" column="name"/>
+			<result property="brandNo" column="brand_no"/>
+		</association>
+	</resultMap>
 
   	<select id="getUserBrandsByPage" parameterType="Page" resultMap="brandResultMap">
   		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
@@ -104,5 +117,13 @@
 		 	end_date=#{endDate,javaType=date,jdbcType=DATE},originality=#{originality},case_status=#{caseStatus},
 		 	user=#{user.userId},check_status=3
 	</insert>
+	<select id="getWeChatUserOrderRecords" parameterType="Page" resultMap="wechatOrderResultMap">
+		select wo.id,wo.wechat_order_id,wo.wechat_name,wo.brand_id,wo.total_fee,wo.pay_time,b.name,b.brand_no from wechat_orders wo 
+			   left join brands b on wo.brand_id=b.id order by wo.pay_time desc limit #{startIndex},#{pageSize}
+	</select>
+	
+	<select id="getWeChatOrderCount" resultType="int">
+		select count(*) from wechat_orders
+	</select>
 </mapper>
   

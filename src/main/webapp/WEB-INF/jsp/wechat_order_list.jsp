@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
-<title>龙图腾专利管家-商标列表</title>
+<title>龙图腾专利管家-购买记录</title>
 <%@ include file="_css.jsp" %>
 
 </head>
@@ -20,14 +20,14 @@
 		  </div>
 	<div class="tit_top">
         <div class="title2">
-           商标列表</div>
+           购买记录</div>
                
     </div>
 		<div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right" style="padding:10px 0 0 3px;" >
 				    <div class="cl top1" style="height:10px;">
 				    
-					  <form class="form-inline" action="<s:url value='/brand/searchUserBrands.html'/>" method="get">
+					  <%-- <form class="form-inline" action="<s:url value='/brand/searchUserBrands.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1" required/>
 						  <div class="t-third">
 
@@ -55,7 +55,7 @@
 							  </tr>							  
 						  </table>
 						  </div>
-						</form>
+						</form> --%>
 
     			</div>
 				<div style="height:10px;"></div>
@@ -64,89 +64,24 @@
 						  <thead>
 							<tr class="simple_bag">
 							  <th class="center" width="20px">序号</th>
+							  <th width="">微信昵称</th>
+							  <th width="">订单号</th>
+							  <th width="">商标注册号</th>
 							  <th width="">商标名称</th>
-							  <th width="">注册号</th>
-							 <!--  <th width="">组合类型 </th> -->
-							  <th width="">类别</th>
-							  <!-- <th width="">商品列表</th>
-							  <th width="">类似群组</th>
-							  <th width="">有效期限</th> -->
-							  <th width="">价格</th>
-							  <th width="">上下架状态</th>
-							  <th width="">审核状态</th>
-							  <th width="">推荐状态</th>
-							  <th width="350px">操作</th>
+							  <th width="">总金额</th>
+							  <th width="170px">支付时间</th>
 							</tr>
 						  </thead>
 						  <tbody>
-						  	<c:forEach items="${brands}" var="brand" varStatus="status">
+						  	<c:forEach items="${weChatOrders}" var="weChatOrder" varStatus="status">
 								<tr>
 									<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
-									<td style="text-align:center">${brand.name }</td>
-									<td style="text-align:center">${brand.brandNo }</td>
-									<%-- <td style="text-align:center">${brand.combinationType }</td> --%>
-									<td style="text-align:center">${brand.brandCategory.categoryName }</td>
-									<%-- <td style="text-align:center">${brand.scope }</td>
-									<td style="text-align:center">${brand.similarNo }</td>
-									<td style="text-align:center"><fmt:formatDate value="${brand.startDate }" pattern="yyyy年MM月dd日"/>至<fmt:formatDate value="${brand.endDate }" pattern="yyyy年MM月dd日"/></td> --%>
-									<td style="text-align:center">${brand.price }</td>
-									<td style="text-align:center"><c:if test="${brand.sellStatus==1 }">
-											<font color="red">出售中</font>
-										</c:if> 
-										<c:if test="${brand.sellStatus==2 }">
-											<font color="black">下架</font>
-										</c:if>  
-									</td>
-									<td style="text-align:center">
-										<c:if test="${brand.checkStatus==1 }">
-											<font color="black">审核通过</font>
-										</c:if> 
-										<c:if test="${brand.checkStatus==2 }">
-											<font color="red">审核未通过</font>
-										</c:if>  
-										<c:if test="${brand.checkStatus==3 }">
-											<font color="red">未审核</font>
-										</c:if>  
-									</td>
-									<td style="text-align:center">
-										<%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_ORDER','ROLE_TRADER','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_TECH','ROLE_PROCESS','ROLE_NEWS')"> --%>
-
-										<c:if test="${brand.isRecommend==1 }">
-											<font color="black">未推荐</font>
-										</c:if> 
-										<c:if test="${brand.isRecommend==2 }">
-											<font color="red">推荐商标</font>
-										</c:if>  
-									</td>
-									<td style="text-align:center">
-										<%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_ORDER','ROLE_TRADER','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_TECH','ROLE_PROCESS','ROLE_NEWS')"> --%>
-											<button class="btn btn-info">修改</button>
-											<button  class="btn btn-warning" onclick="deleteBrands(${brand.id })">删除</button>
-										<%-- </se:authorize> --%>
-										<se:authorize access="hasRole('ROLE_ORDER')">
-											<c:if test="${brand.checkStatus!=1}">
-												<div class="btn-group btn-group-lg">
-													  <button id="approved" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default" onclick="updateCheckStatus('${brand.id}','1')">置为已通过</button>
-												</div>
-											</c:if>
-											<c:if test="${brand.checkStatus==1}">
-												<div class="btn-group btn-group-lg">
-													  <button id="unapprove" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default" onclick="updateCheckStatus(${brand.id},'2')">置为未通过</button>
-												</div>
-											</c:if>
-											<c:if test="${brand.isRecommend==2}">
-												<div class="btn-group btn-group-lg">
-													  <button id="approved" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default" onclick="updateRecommendStatus('${brand.id}','1')">置为不推荐</button>
-												</div>
-											</c:if>
-											<c:if test="${brand.isRecommend==1}">
-												<div class="btn-group btn-group-lg">
-													  <button id="unapprove" type="button" style="width: 102px;height: 36px;font-size:14px" class="btn btn-default" onclick="updateRecommendStatus(${brand.id},'2')">置为推荐</button>
-												</div>
-											</c:if>
-										</se:authorize>
-									</td>
-									
+									<td style="text-align: center">${weChatOrder.wechatName }</td>
+									<td style="text-align: center">${weChatOrder.wechatOrderId }</td>
+									<td style="text-align: center">${weChatOrder.brand.brandNo }</td>
+									<td style="text-align: center">${weChatOrder.brand.name }</td>
+									<td style="text-align: center">${weChatOrder.totalFee }</td>
+									<td style="text-align: center"><fmt:formatDate value="${weChatOrder.payTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								</tr>
 							</c:forEach>
 						  </tbody>
@@ -238,7 +173,7 @@ function gotoPage() {
 		return;
 	}
 	
-	var url = "<s:url value='/brand/list.html'/>?currentPage=" + pageNo;
+	var url = "<s:url value='/brand/getWechatOrderList.html'/>?currentPage=" + pageNo;
 	
 	<c:if test="${searchCondition != null}">
 		url = "<s:url value='/brand/searchUserBrands.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
@@ -275,38 +210,6 @@ function gotoPageForEnter(event) {
 		});		
 	}
 	
-</script>
-<script type="text/javascript">
-function updateCheckStatus(id,checkStatus){
-	 $.ajax({
-		type:"get",
-		url:"<s:url value='/brand/updateCheckStatus.html'/>?id="+id+"&status="+checkStatus,
-		success:function (data){
-			location.reload();
-		}
-	});
-	
-} 
-
-function deleteBrands(brandId){
-	$.ajax({
-		url:"<s:url value='/brand/deleteBrand.html'/>",
-		data:{"brandId":brandId},
-		success:function(){
-			location.reload();
-		}
-	})
-}
-function updateRecommendStatus(id,checkStatus){
-	 $.ajax({
-		type:"get",
-		url:"<s:url value='/brand/updateRecommend.html'/>?id="+id+"&status="+checkStatus,
-		success:function (data){
-			location.reload();
-		}
-	});
-	
-}
 </script>
 </body>
 </html>
