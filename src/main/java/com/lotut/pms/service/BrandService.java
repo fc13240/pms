@@ -35,4 +35,8 @@ public interface BrandService {
 	List<WeChatOrder> getWeChatUserOrderRecords(Page page);
 	
 	int getWeChatOrderCount();
+
+	void addOrEditBrand(Brand brand);
+
+	Brand getUserBrandsById(int brandId);
 }

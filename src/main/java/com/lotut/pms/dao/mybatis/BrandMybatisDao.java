@@ -72,4 +72,14 @@ public class BrandMybatisDao extends SqlSessionDaoSupport implements BrandDao{
 	public int getWeChatOrderCount() {
 		return brandMapper.getWeChatOrderCount();
 	}
+
+	@Override
+	public void addOrEditBrand(Brand brand) {
+		brandMapper.addOrEditBrand(brand);
+	}
+
+	@Override
+	public Brand getUserBrandsById(int brandId) {
+		return brandMapper.getUserBrandsById(brandId);
+	}
 }

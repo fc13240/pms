@@ -31,4 +31,8 @@ public interface BrandDao {
 	List<WeChatOrder> getWeChatUserOrderRecords(Page page);
 	
 	int getWeChatOrderCount();
+
+	void addOrEditBrand(Brand brand);
+
+	Brand getUserBrandsById(int brandId);
 }

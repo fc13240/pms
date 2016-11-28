@@ -15,7 +15,7 @@
 		</a>
 	</li> 	
 	<li class="active">
-		<a href="<s:url value='/brand/addBrandForm.html'/>">
+		<a href="<s:url value='/brand/brandAddForm.html'/>">
 		<h5>商标添加</h5>
 		</a>
 	</li> 
