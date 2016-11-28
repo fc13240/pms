@@ -120,8 +120,8 @@
 									</td>
 									<td style="text-align:center">
 										<%-- <se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_ORDER','ROLE_TRADER','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_TECH','ROLE_PROCESS','ROLE_NEWS')"> --%>
-											<button class="btn btn-info">修改</button>
-											<button  class="btn btn-warning" onclick="deleteBrands(${brand.id })">删除</button>
+											<button class="btn btn-default">修改</button>
+											<button  class="btn btn-default" onclick="deleteBrands(${brand.id })">删除</button>
 										<%-- </se:authorize> --%>
 										<se:authorize access="hasRole('ROLE_ORDER')">
 											<c:if test="${brand.checkStatus!=1}">
