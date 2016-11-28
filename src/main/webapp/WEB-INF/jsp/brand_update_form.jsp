@@ -164,7 +164,7 @@ height:37px;
 									<tr>
 										<th>申请日</th>
 										<td>
-											<input style="width:200px;" type="text" class="form-control"  value="${brand.appDate}"
+											<input style="width:200px;" type="text" class="form-control"  value="<fmt:formatDate value="${brand.appDate}" pattern='yyyy-MM-dd'/>"
 												name="appDate"  readonly="readonly" onclick="javascript:$('#app_date_img').click()" id="appDateId" required> 
 											<img style="display:none;" onclick="WdatePicker({el:'appDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" id="app_date_img">
 											
@@ -183,7 +183,7 @@ height:37px;
 									<tr>
 										<th>专用权截止日</th>
 										<td>
-											<input style="width:200px;" type="text" class="form-control" value="${brand.endDate}"
+											<input style="width:200px;" type="text" class="form-control" value='<fmt:formatDate value="${brand.endDate}" pattern='yyyy-MM-dd'/>'
 												name="endDate"  readonly="readonly" onclick="javascript:$('#end_date_img').click()" id="endAppDateId" required> 
 											<img style="display:none;" onclick="WdatePicker({el:'endAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" id="end_date_img">
 											
