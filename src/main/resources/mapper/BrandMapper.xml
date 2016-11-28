@@ -89,11 +89,11 @@
   	<insert id="insertOrUpdateBrand" parameterType="Brand" useGeneratedKeys="true" keyProperty="id">
 		insert into brands(address,category_id,brand_no,name,
 		combination_type,similar_no,transaction_mode,price,scope,
-		app_person,app_date,publish_date,start_date,end_date,originality,case_status,user)
+		app_person,app_date,publish_date,start_date,end_date,originality,case_status,user,check_status)
 		values(#{address},#{brandCategory.categoryId},#{brandNo},
 		 #{name},#{combinationType},#{similarNo},#{transactionMode},#{price},#{scope},#{appPerson},
 		 #{appDate,javaType=date,jdbcType=DATE},#{publishDate,javaType=date,jdbcType=DATE},#{startDate,javaType=date,jdbcType=DATE},
-		 #{endDate,javaType=date,jdbcType=DATE},#{originality},#{caseStatus},#{user.userId})
+		 #{endDate,javaType=date,jdbcType=DATE},#{originality},#{caseStatus},#{user.userId},3)
 		on duplicate key update 
 			address=#{address},category_id=#{brandCategory.categoryId},brand_no=#{brandNo},
 			name=#{name},combination_type=#{combinationType},
@@ -101,7 +101,8 @@
 			app_person=#{appPerson},app_date=#{appDate,javaType=date,jdbcType=DATE},
 			publish_date=#{publishDate,javaType=date,jdbcType=DATE},
 			start_date=#{startDate,javaType=date,jdbcType=DATE},
-		 	end_date=#{endDate,javaType=date,jdbcType=DATE},originality=#{originality},case_status=#{caseStatus},user=#{user.userId}
+		 	end_date=#{endDate,javaType=date,jdbcType=DATE},originality=#{originality},case_status=#{caseStatus},
+		 	user=#{user.userId},check_status=3
 	</insert>
 </mapper>
   
