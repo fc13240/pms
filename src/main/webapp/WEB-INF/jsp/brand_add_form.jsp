@@ -104,7 +104,7 @@ height:37px;
 									<tbody>
 									
 									<tr>
-										<th width="80">商标分类</th>
+										<th width="110">商标分类</th>
 										<td>
 											<%-- <input name="id" value="${articleId }" type="hidden"/> --%>
 											<select name="brandCategory.categoryId" class="form-control" style="width:120px;" required>
@@ -136,7 +136,7 @@ height:37px;
 									<tr>
 										<th>价格</th>
 										<td>
-											<input class="form-control" type="number" style="width:600px;" placeholder="" name="price" maxlength="120"/>
+											<input class="form-control" type="number" style="width:600px;" placeholder="" name="price" maxlength="120" required/>
 										</td>
 									</tr>
 									<tr>
