@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandSearchCondition;
+import com.lotut.pms.domain.News;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.WeChatOrder;
 import com.lotut.pms.service.BrandService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -38,6 +40,47 @@ public class BrandController {
 	public String showUploadForm() {
 		return "brand_upload_form";
 	}	
+
+	@RequestMapping(path="/brandAddForm")
+	public String brandAddForm(Model model) {
+		List<BrandCategory> categorys = brandService.getAllCategorys();
+		model.addAttribute("categorys",categorys);
+		return "brand_add_form";
+		
+	}		
+
+	@RequestMapping(path="/brandAdd")
+	public String brandAdd(Brand brand) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		User user = new User();
+		user.setUserId(userId);
+		brand.setUser(user);
+		brandService.addOrEditBrand(brand);
+		return "redirect:/brand/list.html";
+	}	
+
+	@RequestMapping(path="/brandUpdateForm")
+	public String brandUpdateForm(int brandId,Model model) {
+		List<BrandCategory> categorys = brandService.getAllCategorys();
+		
+		
+		Brand brand= brandService.getUserBrandsById(brandId);
+		
+		model.addAttribute("categorys",categorys);
+		model.addAttribute("brand",brand);
+		return "brand_update_form";
+		
+	}		
+
+	@RequestMapping(path="/brandUpdate")
+	public String brandUpdate(Brand brand) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		User user = new User();
+		user.setUserId(userId);
+		brand.setUser(user);
+		brandService.addOrEditBrand(brand);
+		return "redirect:/brand/list.html";
+	}		
 	
 	@RequestMapping(path="/upload", method=RequestMethod.POST)
 	public String uploadBrands(@RequestParam("brandFile")Part brandFile, Model model){

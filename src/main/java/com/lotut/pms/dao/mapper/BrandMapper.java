@@ -30,7 +30,11 @@ public interface BrandMapper {
 
 	int insertOrUpdateBrand(Brand brand);
 	
+	int addOrEditBrand(Brand brand);
+	
 	List<WeChatOrder> getWeChatUserOrderRecords(Page page);
 	
 	int getWeChatOrderCount();
+
+	Brand getUserBrandsById(int brandId);
 }
