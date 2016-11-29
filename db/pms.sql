@@ -1161,3 +1161,13 @@ CREATE TABLE wechat_orders (
 );
 
 insert into brand_category(category_id,category_name)values(3,'日化用品'),(10,'医疗器械'),(12,'运输工具'),(20,'家具用品');
+
+CREATE TABLE user_brands(
+	  user INT(11) NOT NULL DEFAULT '0',
+	  brand INT(20) NOT NULL DEFAULT '0',
+	  trash_status INT(11) DEFAULT '1',
+	  PRIMARY KEY (user,brand),
+	  KEY fk_user_brand_brand (brand),
+	  CONSTRAINT fk_user_brand_brand FOREIGN KEY (brand) REFERENCES brands (id) ON DELETE CASCADE,
+	  CONSTRAINT fk_user_brand_user FOREIGN KEY (user) REFERENCES users (user_id) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;

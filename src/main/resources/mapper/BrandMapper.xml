@@ -51,7 +51,7 @@
   		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
   			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,
   			   b.originality,b.case_status,bc.category_name,u.username from brands b left join brand_category bc on  b.category_id=bc.category_id 
-  			   left join users u on b.user=u.user_id where b.user=#{userId} and b.sell_status=1 limit #{startIndex},#{pageSize}
+  			   left join users u on b.user=u.user_id where  b.sell_status=1 and b.id in (select brand from user_brands where user =#{userId}) limit #{startIndex},#{pageSize}
   	</select>
   	
   	<select id="getUserBrandsById" parameterType="int" resultMap="brandResultMap">
@@ -134,7 +134,7 @@
 		 #{appDate,javaType=date,jdbcType=DATE},#{publishDate,javaType=date,jdbcType=DATE},#{startDate,javaType=date,jdbcType=DATE},
 		 #{endDate,javaType=date,jdbcType=DATE},#{originality},#{caseStatus},#{user.userId},1,1)
 		on duplicate key update 
-			address=#{address},category_id=#{brandCategory.categoryId},brand_no=#{brandNo},
+			address=#{address},category_id=#{brandCategory.categoryId},
 			name=#{name},combination_type=#{combinationType},
 			similar_no=#{similarNo},transaction_mode=#{transactionMode},price=#{price},scope=#{scope},
 			app_person=#{appPerson},app_date=#{appDate,javaType=date,jdbcType=DATE},
@@ -143,6 +143,16 @@
 		 	end_date=#{endDate,javaType=date,jdbcType=DATE},originality=#{originality},case_status=#{caseStatus},
 		 	user=#{user.userId},check_status=1,sell_status=1
 	</insert>
+	
+	<insert id="insertUserBrands" parameterType="list">
+		replace into user_brands(user,brand) 
+		values
+		<foreach item="userBrandRecord" collection="list" separator=",">
+
+			(#{userBrandRecord.user}, #{userBrandRecord.brand})
+
+		</foreach>
+	</insert>	
 	
 	<select id="getWeChatUserOrderRecords" parameterType="Page" resultMap="wechatOrderResultMap">
 		select wo.id,wo.wechat_order_id,wo.wechat_name,wo.brand_id,wo.total_fee,wo.pay_time,b.name,b.brand_no from wechat_orders wo 

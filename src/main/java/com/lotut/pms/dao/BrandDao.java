@@ -1,6 +1,7 @@
 package com.lotut.pms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
@@ -35,4 +36,6 @@ public interface BrandDao {
 	void addOrEditBrand(Brand brand);
 
 	Brand getUserBrandsById(int brandId);
+	
+	void insertUserBrands(List<Map<String, Integer>> userBrandRecords);
 }

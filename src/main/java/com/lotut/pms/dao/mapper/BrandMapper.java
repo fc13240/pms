@@ -1,6 +1,7 @@
 package com.lotut.pms.dao.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -37,4 +38,6 @@ public interface BrandMapper {
 	int getWeChatOrderCount();
 
 	Brand getUserBrandsById(int brandId);
+	
+	void insertUserBrands(List<Map<String, Integer>> userBrandRecords);
 }

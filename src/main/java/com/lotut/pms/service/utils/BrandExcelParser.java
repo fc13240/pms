@@ -95,10 +95,11 @@ public class BrandExcelParser {
 			if(row.getCell(i)!=null){
 				row.getCell(i).setCellType(Cell.CELL_TYPE_STRING);
 				
+				
 			}
 			
 		}
-		
+//		System.out.println(row.getCell(13).getCellType());
 		String publishDate="";
 		if(row.getCell(12)!=null){
 		if (0 == row.getCell(12).getCellType()) {

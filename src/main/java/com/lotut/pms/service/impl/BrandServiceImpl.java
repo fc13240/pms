@@ -3,7 +3,9 @@ package com.lotut.pms.service.impl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -83,7 +85,19 @@ public class BrandServiceImpl implements BrandService{
 		for (Brand brand: brands) {
 			 brandDao.insertOrUpdateBrand(brand);
 		}
-	
+		List<Map<String, Integer>> userBrandList = new ArrayList<>();
+		for (Brand brand: brands) {
+			boolean isNewbrand = brand.getId() != 0;
+			if (isNewbrand) {
+				HashMap<String, Integer> userBrandMap = new HashMap<>();
+				userBrandMap.put("user", userId);
+				userBrandMap.put("brand", (int)brand.getId());
+				userBrandList.add(userBrandMap);
+			}
+		}
+		if (userBrandList.size() > 0) {
+			brandDao.insertUserBrands(userBrandList);
+		}
 		return true;
 	}
 
