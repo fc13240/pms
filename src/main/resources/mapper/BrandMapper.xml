@@ -85,7 +85,7 @@
   			   limit #{page.startIndex},#{page.pageSize}
   	</select>
   	<select id="getUserBrandsCount" parameterType="int" resultType="int">
-  		select count(*) from brands where user=#{userId} and sell_status=1
+  		select count(*) from user_brands where user=#{userId} 
   	</select>
   	
   	<select id="getsearchUserBrandsCount" parameterType="BrandSearchCondition" resultType="int">
