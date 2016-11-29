@@ -177,7 +177,7 @@ public class BrandExcelParser {
 		brand.setScope(scope);
 		brand.setTransactionMode(transactionMode);
 //		System.out.println(price);
-		brand.setPrice(price == ""? 0:Integer.valueOf(price));
+		brand.setPrice(Integer.valueOf(price));
 		brand.setSimilarNo(similarNo);
 		brand.setAppPerson(appPerson);
 		brand.setPublishDate(publishDate == null? null:parseDate(publishDate));
