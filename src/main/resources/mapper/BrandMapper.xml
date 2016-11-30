@@ -64,7 +64,7 @@
   	
   	<select id="getBrandsCounts" resultType="int">
   		select count(*) from brands b left join brand_category bc on  b.category_id=bc.category_id 
-  			   left join users u on b.user=u.user_id where  b.sell_status=1 and b.id in (select brand from user_brands) limit #{startIndex},#{pageSize}
+  			   left join users u on b.user=u.user_id where  b.sell_status=1 and b.id in (select brand from user_brands)
   	</select>
   	
   	
