@@ -103,4 +103,9 @@ public class BrandMybatisDao extends SqlSessionDaoSupport implements BrandDao{
 	public void insertUserBrand(int userId, int brandId) {
 		 brandMapper.insertUserBrand(userId,brandId);
 	}
+
+	@Override
+	public void addBrandCategory(List<BrandCategory> userBrandCategoryRecords) {
+		brandMapper.addBrandCategory(userBrandCategoryRecords);
+	}
 }

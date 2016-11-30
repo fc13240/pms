@@ -46,4 +46,6 @@ public interface BrandMapper {
 	void insertUserBrands(List<Map<String, Integer>> userBrandRecords);
 	
 	void insertUserBrand(@Param("userId")int userId,@Param("brandId")int brandId);
+	
+	void addBrandCategory(List<BrandCategory> userBrandCategoryRecords);
 }

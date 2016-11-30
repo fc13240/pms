@@ -44,4 +44,6 @@ public interface BrandDao {
 	void insertUserBrands(List<Map<String, Integer>> userBrandRecords);
 	
 	void insertUserBrand(int userId,int brandId);
+	
+	void addBrandCategory(List<BrandCategory> userBrandCategoryRecords);
 }

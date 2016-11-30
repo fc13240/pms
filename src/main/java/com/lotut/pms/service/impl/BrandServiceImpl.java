@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lotut.pms.dao.BrandDao;
 import com.lotut.pms.domain.Brand;
+import com.lotut.pms.domain.BrandAndBrandCategory;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
@@ -69,19 +70,24 @@ public class BrandServiceImpl implements BrandService{
 
 	@Override
 	public List<Brand> uploadBrands(InputStream is, int userId) throws IOException {
+		BrandAndBrandCategory bac=new BrandAndBrandCategory();
 		List<Brand> brands=new ArrayList<>();
+		List<BrandCategory> brandCategorys=new ArrayList<>();
 		try {
-			brands=BrandExcelParser.parseBrandFile(is, userId);
+			bac=BrandExcelParser.parseBrandFile(is, userId);
+			brands=bac.getBrandRecords();
+			brandCategorys=bac.getBrandCategoryRecords();
 		} catch (EncryptedDocumentException | InvalidFormatException e) {
 			e.printStackTrace();
 		}
-		addOrUpdateBrands(brands, userId);
+		addOrUpdateBrands(brands,brandCategorys, userId);
 		return brands;
 	}
 	
 	@Override
 	@Transactional
-	public boolean  addOrUpdateBrands(List<Brand> brands,int userId) {
+	public boolean  addOrUpdateBrands(List<Brand> brands,List<BrandCategory> brandCategorys,int userId) {
+		brandDao.addBrandCategory(brandCategorys);
 		for (Brand brand: brands) {
 			 brandDao.insertOrUpdateBrand(brand);
 		}

@@ -22,6 +22,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import com.lotut.pms.domain.Brand;
+import com.lotut.pms.domain.BrandAndBrandCategory;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.exception.DateFormatException;
@@ -31,14 +32,14 @@ public class BrandExcelParser {
 	public static void main(String[] args) throws Exception {
 		InputStream in = new FileInputStream("C:\\Users\\xw\\Desktop\\智慧殿商标11.28日.xls");
 //		InputStream in = new FileInputStream("C:\\Users\\xw\\Desktop\\智慧殿初审合格商标.xlsx");
-		List<Brand> brandRecords = parseBrandFile(in,2);
-		for (Brand p: brandRecords) {
+		BrandAndBrandCategory brandRecords = parseBrandFile(in,2);
+		for (BrandCategory p: brandRecords.getBrandCategoryRecords()) {
 //			System.out.println(p.getCaseStatus());
 		}
-		System.out.println(brandRecords.size());
+		System.out.println(brandRecords.getBrandCategoryRecords().size());
 	}
 	
-	public static List<Brand> parseBrandFile(InputStream fileInputStream,int userId) throws IOException, EncryptedDocumentException, InvalidFormatException {
+	public static BrandAndBrandCategory parseBrandFile(InputStream fileInputStream,int userId) throws IOException, EncryptedDocumentException, InvalidFormatException {
 //		try (Workbook wb = new XSSFWorkbook(fileInputStream); ) {
 //			Sheet brandSheet = wb.getSheetAt(0);
 //			List<Brand> brandRecords = parseSheet(brandSheet,userId);
@@ -47,14 +48,17 @@ public class BrandExcelParser {
 		
 		try (Workbook wb =WorkbookFactory.create(fileInputStream); ) {
 			Sheet brandSheet = wb.getSheetAt(0);
-			List<Brand> brandRecords = parseSheet(brandSheet,userId);
-			return brandRecords;
+//			List<Brand> brandRecords = parseSheet(brandSheet,userId);
+			BrandAndBrandCategory bac=parseSheet(brandSheet,userId);
+			return bac;
 		}
 	}
 	
 	
-	private static List<Brand> parseSheet(Sheet sheet,int userId) {
+	private static BrandAndBrandCategory parseSheet(Sheet sheet,int userId) {
+		BrandAndBrandCategory bac = new BrandAndBrandCategory();
 		List<Brand> brandRecords = new ArrayList<>();
+		List<BrandCategory> categoryRecords=new ArrayList<>();
 		Iterator<Row> rowIter = sheet.rowIterator();
 		if (rowIter.hasNext()) rowIter.next();
 		while (rowIter.hasNext()) {
@@ -64,12 +68,16 @@ public class BrandExcelParser {
 				break;
 			}
 			if(isTrueRow(row)){
-//			System.out.println(row.getCell(0).getStringCellValue());
 			Brand brand = parseRow(row,userId);
+			BrandCategory bc=getBrandCategory(row);
+//			System.out.println(bc.getCategoryId()+"=============="+bc.getCategoryName());
 			brandRecords.add(brand);
+			categoryRecords.add(bc);
 			}
 		}
-		return brandRecords;
+		bac.setBrandCategoryRecords(categoryRecords);
+		bac.setBrandRecords(brandRecords);
+		return bac;
 	}
 	
 	private static boolean isEmptyRow(Row row) {
@@ -228,34 +236,23 @@ public class BrandExcelParser {
 		
 	}
 	
-//	private static String getStringDate(Row row){
-//		if(0 == row.getCell(i).getCellType()){
-//			//判断是否为日期类型
-//
-//			if(HSSFDateUtil.isCellDateFormatted(row.getCell(i))){
-//			//用于转化为日期格式
-//
-//			Date d = row.getCell(i).getDateCellValue();
-//
-//			DateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-//
-//			String targetDate = formater.format(d);
-//
-//			}else{
-//
-//			// 用于格式化数字，只保留数字的整数部分
-//
-//			DecimalFormat df = new DecimalFormat("########");
-//
-//			String targetDate = df.format(row.getCell(i).getNumericCellValue());
-//
-//			}
-//		}
-//		return null;
-//		
-//	}
+	private static String getCategoryName(String categoryName){
+		String targetName=categoryName.substring(categoryName.lastIndexOf("-")+1);
+		return targetName;
+	}
+	
+	private static BrandCategory getBrandCategory(Row row){
+		String categoryNode = row.getCell(2).getStringCellValue().trim();
+		int categoryId=getCategoryId(categoryNode);
+		String categoryName=getCategoryName(categoryNode);
+		BrandCategory brandCategory=new BrandCategory();
+		brandCategory.setCategoryId(categoryId);
+		brandCategory.setCategoryName(categoryName);
+		return brandCategory;
+	}
+	
 //	public static void main(String[] args) {
 //		String categoryName="第13类-日化用品";
-//		System.out.println(getCategoryId(categoryName));
+//		System.out.println(getCategoryName(categoryName));
 //	}
 }

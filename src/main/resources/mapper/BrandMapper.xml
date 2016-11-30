@@ -181,5 +181,15 @@
 	<insert id="insertUserBrand" >
 		replace into user_brands(user,brand) values (#{userId},#{brandId})
 	</insert>
+	
+	<insert id="addBrandCategory">
+		insert ignore into brand_category (category_id,category_name) 
+		values
+		<foreach item="userBrandCategoryRecord" collection="list" separator=",">
+
+			(#{userBrandCategoryRecord.categoryId}, #{userBrandCategoryRecord.categoryName})
+
+		</foreach>
+	</insert>
 </mapper>
   
