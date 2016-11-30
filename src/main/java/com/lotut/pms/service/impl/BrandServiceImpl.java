@@ -120,4 +120,14 @@ public class BrandServiceImpl implements BrandService{
 	public Brand getUserBrandsById(int brandId) {
 		return brandDao.getUserBrandsById(brandId);
 	}
+
+	@Override
+	public List<Brand> getBrandsByPage(Page page) {
+		return brandDao.getBrandsByPage(page);
+	}
+
+	@Override
+	public int getBrandsCounts() {
+		return brandDao.getBrandsCounts();
+	}
 }

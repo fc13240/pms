@@ -14,6 +14,10 @@ public interface BrandService {
 	
 	List<Brand> getUserBrandsByPage(Page page);
 	
+	List<Brand> getBrandsByPage(Page page);
+	
+	int getBrandsCounts();
+	
 	void updateCheckStatus(int status,int id);
 	
 	void updateRecommend(int status,int id);

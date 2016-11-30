@@ -2,6 +2,7 @@ package com.lotut.pms.web.controller;
 
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -109,9 +110,17 @@ public class BrandController {
 		if(page.getCurrentPage()<1){
 			page.setCurrentPage(1);
 		}
-		int totalCount = brandService.getUserBrandsCount(userId);
-		page.setTotalRecords(totalCount);
-		List<Brand> brands = brandService.getUserBrandsByPage(page);
+		int totalCount;
+		List<Brand> brands=new ArrayList<Brand>();
+		if(PrincipalUtils.isOrderProcessor()){
+			brands = brandService.getBrandsByPage(page);
+			totalCount = brandService.getBrandsCounts();
+			page.setTotalRecords(totalCount);
+		}else{
+			brands = brandService.getUserBrandsByPage(page);
+			totalCount = brandService.getUserBrandsCount(userId);
+			page.setTotalRecords(totalCount);
+		}
 		List<BrandCategory> categorys = brandService.getAllCategorys();
 		model.addAttribute("brands",brands);
 		model.addAttribute("page",page);

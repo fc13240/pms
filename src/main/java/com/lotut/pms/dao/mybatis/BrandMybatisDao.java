@@ -88,4 +88,14 @@ public class BrandMybatisDao extends SqlSessionDaoSupport implements BrandDao{
 	public void insertUserBrands(List<Map<String, Integer>> userBrandRecords) {
 		brandMapper.insertUserBrands(userBrandRecords);
 	}
+
+	@Override
+	public List<Brand> getBrandsByPage(Page page) {
+		return brandMapper.getBrandsByPage(page);
+	}
+
+	@Override
+	public int getBrandsCounts() {
+		return brandMapper.getBrandsCounts();
+	}
 }

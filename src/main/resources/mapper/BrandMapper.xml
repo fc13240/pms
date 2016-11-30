@@ -54,7 +54,21 @@
   			   left join users u on b.user=u.user_id where  b.sell_status=1 and b.id in (select brand from user_brands where user =#{userId}) limit #{startIndex},#{pageSize}
   	</select>
   	
-  	<select id="getUserBrandsById" parameterType="int" resultMap="brandResultMap">
+  	<select id="getBrandsByPage" parameterType="Page" resultMap="brandResultMap">
+  		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
+  			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,
+  			   b.originality,b.case_status,bc.category_name,u.username from brands b left join brand_category bc on  b.category_id=bc.category_id 
+  			   left join users u on b.user=u.user_id where  b.sell_status=1 and b.id in (select brand from user_brands) limit #{startIndex},#{pageSize}
+  	</select>
+  	
+  	
+  	<select id="getBrandsCounts" parameterType="Page" resultMap="brandResultMap">
+  		select count(*) from brands b left join brand_category bc on  b.category_id=bc.category_id 
+  			   left join users u on b.user=u.user_id where  b.sell_status=1 and b.id in (select brand from user_brands) limit #{startIndex},#{pageSize}
+  	</select>
+  	
+  	
+  	<select id="getUserBrandsById"  resultMap="int">
   		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
   			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,
   			   b.originality,b.case_status,bc.category_name from brands b left join brand_category bc on  b.category_id=bc.category_id 
