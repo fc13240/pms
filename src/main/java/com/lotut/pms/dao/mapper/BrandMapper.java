@@ -15,6 +15,10 @@ public interface BrandMapper {
 	
 	List<Brand> getUserBrandsByPage(Page page);
 	
+	List<Brand> getBrandsByPage(Page page);
+	
+	int getBrandsCounts();
+	
 	void updateCheckStatus(@Param("status")int status,@Param("id")int id);
 	
 	void updateRecommend(@Param("status")int status,@Param("id")int id);
