@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管家——上传专利</title>
+<title>龙图腾专利管家——上传商标</title>
 <%@ include file="_css.jsp" %>
 </head>
 <body>
@@ -38,7 +38,7 @@
 						<button style="margin-left:5px;" type="submit" class="t-btn2 button button-caution button-rounded">上传</button>
 						</form> 
 						<div style="height:10px;">&nbsp;</div> 
-						<span style="color:#666;">(文件格式：从专利局网站http://cpquery.sipo.gov.cn/下载的表格或者与其格式相同的自制表格。)
+						<span style="color:#666;">(请上传规范的自制表格。)
 						</span>
 				</div>
 			</div>
