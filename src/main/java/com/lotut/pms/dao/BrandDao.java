@@ -37,9 +37,11 @@ public interface BrandDao {
 	
 	int getWeChatOrderCount();
 
-	void addOrEditBrand(Brand brand);
+	int addOrEditBrand(Brand brand);
 
 	Brand getUserBrandsById(int brandId);
 	
 	void insertUserBrands(List<Map<String, Integer>> userBrandRecords);
+	
+	void insertUserBrand(int userId,int brandId);
 }

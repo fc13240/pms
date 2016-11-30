@@ -10,6 +10,7 @@ import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,7 +57,8 @@ public class BrandController {
 		User user = new User();
 		user.setUserId(userId);
 		brand.setUser(user);
-		brandService.addOrEditBrand(brand);
+		int brandId=brandService.addOrEditBrand(brand);
+		brandService.insertUserBrand(userId, brand.getId());
 		return "redirect:/brand/list.html";
 	}	
 

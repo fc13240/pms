@@ -40,7 +40,9 @@ public interface BrandService {
 	
 	int getWeChatOrderCount();
 
-	void addOrEditBrand(Brand brand);
+	int addOrEditBrand(Brand brand);
 
 	Brand getUserBrandsById(int brandId);
+	
+	void insertUserBrand(int userId,int brandId);
 }

@@ -75,8 +75,8 @@ public class BrandMybatisDao extends SqlSessionDaoSupport implements BrandDao{
 	}
 
 	@Override
-	public void addOrEditBrand(Brand brand) {
-		brandMapper.addOrEditBrand(brand);
+	public int addOrEditBrand(Brand brand) {
+		return brandMapper.addOrEditBrand(brand);
 	}
 
 	@Override
@@ -97,5 +97,10 @@ public class BrandMybatisDao extends SqlSessionDaoSupport implements BrandDao{
 	@Override
 	public int getBrandsCounts() {
 		return brandMapper.getBrandsCounts();
+	}
+
+	@Override
+	public void insertUserBrand(int userId, int brandId) {
+		 brandMapper.insertUserBrand(userId,brandId);
 	}
 }

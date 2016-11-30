@@ -176,5 +176,10 @@
 	<select id="getWeChatOrderCount" resultType="int">
 		select count(*) from wechat_orders
 	</select>
+	
+	
+	<insert id="insertUserBrand" >
+		replace into user_brands(user,brand) values (#{userId},#{brandId})
+	</insert>
 </mapper>
   

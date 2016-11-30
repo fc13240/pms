@@ -112,8 +112,8 @@ public class BrandServiceImpl implements BrandService{
 	}
 
 	@Override
-	public void addOrEditBrand(Brand brand) {
-		brandDao.addOrEditBrand(brand);
+	public int addOrEditBrand(Brand brand) {
+		return brandDao.addOrEditBrand(brand);
 	}
 
 	@Override
@@ -129,5 +129,10 @@ public class BrandServiceImpl implements BrandService{
 	@Override
 	public int getBrandsCounts() {
 		return brandDao.getBrandsCounts();
+	}
+
+	@Override
+	public void insertUserBrand(int userId, int brandId) {
+		brandDao.insertUserBrand(userId,brandId);
 	}
 }
