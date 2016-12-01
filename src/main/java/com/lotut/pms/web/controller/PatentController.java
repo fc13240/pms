@@ -468,5 +468,12 @@ public class PatentController {
 		patentService.recommendPatent(patentId);
 		writer.write(1);
 	}
+	
+	
+	@RequestMapping(path="/batchChangeTransferor", method=RequestMethod.GET)
+	public void batchChangeTransferor(@RequestParam("transferor")String transferor,@RequestParam("patentIds") List<Long> patentIds,PrintWriter writer){
+		patentService.batchChangeTransferor(transferor, patentIds);
+		writer.write(1);
+	}
 
 }

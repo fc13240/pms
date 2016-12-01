@@ -103,7 +103,7 @@
 			                                <a href="javascript:return void" onclick="batchChangePrice()" >
 												<button class="button button-primary  button-rounded" style="width:110px;">批量修改价格</button>
 											</a>
-											<a href="javascript:return void" onclick="batchChangePrice()" >
+											<a href="javascript:return void" onclick="batchChangeTransferor()" >
 												<button class="button button-primary  button-rounded" style="width:110px;">批量修改转让方</button>
 											</a>
 						  				</td>	  										  									  				
@@ -609,6 +609,47 @@ function changSecondColume(patentId, SecondColumn) {
 					formutil.alertMessage('批量修改失败',true);
 				}
 		}); */
+	}
+	
+	
+	
+	function batchChangeTransferor() {
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		var uniquePatentNos = []
+		if (!patentSelected) {
+			formutil.alertMessage('请选择专利');
+			
+			return;
+		}
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+		for (var i = 0; i < patents_checked.length; i++) {
+			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+				uniquePatentNos.push(patents_checked[i]);
+				
+			}
+			
+		};
+		var transferor ="";
+		var patentIds = uniquePatentNos.join(",");
+		swal({   
+			title: "批量修改转让方",   
+			type: "input",   
+			showCancelButton: true,   
+			closeOnConfirm: false,   
+			animation: "slide-from-top",   
+			inputPlaceholder: "请输入转让方:"
+		}, function(inputValue) {
+			price = inputValue;
+			$.ajax({
+				url: "<s:url value='/patent/batchChangeTransferor.html'/>?transferor=" +transferor+"&patentIds="+ patentIds,
+				type: "get"
+			}).done(function(data) {
+				swal("操作成功!", "已成功修改转让方！", "success");
+				location.reload();
+			}).error(function(data) {
+				swal("操作失败!", "修改转让方失败！", "error"); 
+			});
+		});
 	}
 
 </script>

@@ -126,4 +126,6 @@ public interface PatentDao {
 	
 	void recommendPatent(long patentId);
 	
+	void batchChangeTransferor(String transferor,List<Long> patentIds);
+	
 }

@@ -652,4 +652,13 @@
 	<update id="recommendPatent">
 		update sell_patent_goods set recommend_status = 1 where patent_id=#{patentId}
 	</update>
+	
+	<update id="batchChangeTransferor">
+		update sell_patent_goods  set transferor=#{transferor} where patent_id in
+		<foreach item="patentId" collection="patentIds"
+			     open="(" separator="," close=")">
+			   #{patentId}
+		</foreach>
+	</update>
+	
 </mapper>
