@@ -100,9 +100,12 @@
 							  	<table class="search-table">
 						  			<tr>
 						  				<td>
-                                <a href="javascript:return void" onclick="batchChangePrice()" >
-							<button class="button button-primary  button-rounded" style="width:110px;">批量修改价格</button>
-								</a>
+			                                <a href="javascript:return void" onclick="batchChangePrice()" >
+												<button class="button button-primary  button-rounded" style="width:110px;">批量修改价格</button>
+											</a>
+											<a href="javascript:return void" onclick="batchChangePrice()" >
+												<button class="button button-primary  button-rounded" style="width:110px;">批量修改转让方</button>
+											</a>
 						  				</td>	  										  									  				
 						  			</tr>
 						  		</table>		
@@ -120,10 +123,11 @@
 						  <th class="center" width="35">序号</th>
 						  <th width="110">申请号/专利号</th>
 						  <th width="170">专利名称</th>
-						  <th width="90">价格 </th><!-- 价格可以做成直接编辑的，可以少加一个编辑页面 -->
-						  <th width="90">所属领域</th>  
+						  <th width="60">价格 </th><!-- 价格可以做成直接编辑的，可以少加一个编辑页面 -->
+						  <th width="90">所属领域</th>
+						  <th width="90">转让方</th>  
 						  <th width="90">交易状态</th>  
-						  <th width="90">交易类型</th>  
+						  <th width="90">交易类型</th>
 						  <th width="90">添加日</th>
 						  <th width="90">交易日</th>
 						  <th width="90">操作</th>
@@ -161,6 +165,9 @@
 									</select>
 						  		</div>
 							</td>
+							<td>
+								<!-- 显示转让方 -->
+							</td>
 							<td style="text-align:center">
 								<c:if test="${patent.status==1}">
 								出售中
@@ -178,7 +185,7 @@
 								许可
 								</c:if>
 							</td>
-						
+							
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.addDate}" pattern="yyyy-MM-dd"/></td>
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.transactionDate}" pattern="yyyy-MM-dd"/></td>
 							<td >
