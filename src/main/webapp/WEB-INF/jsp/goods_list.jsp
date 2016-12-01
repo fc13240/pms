@@ -165,9 +165,8 @@
 									</select>
 						  		</div>
 							</td>
-							<td>
-								<!-- 显示转让方 -->
-								${patent.transferor}
+							<td style="text-align:center">
+								<c:out value="${patent.transferor}"/>
 							</td>
 							<td style="text-align:center">
 								<c:if test="${patent.status==1}">
