@@ -629,7 +629,7 @@ function changSecondColume(patentId, SecondColumn) {
 			}
 			
 		};
-		var transferor ="";
+		var transferor;
 		var patentIds = uniquePatentNos.join(",");
 		swal({   
 			title: "批量修改转让方",   
