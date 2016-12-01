@@ -104,7 +104,7 @@
 												<button class="button button-primary  button-rounded" style="width:110px;">批量修改价格</button>
 											</a>
 											<a href="javascript:return void" onclick="batchChangeTransferor()" >
-												<button class="button button-primary  button-rounded" style="width:110px;">批量修改转让方</button>
+												<button class="button button-primary  button-rounded" style="width:150px;margin-left:10px;">批量修改转让方</button>
 											</a>
 						  				</td>	  										  									  				
 						  			</tr>
@@ -167,13 +167,14 @@
 							</td>
 							<td>
 								<!-- 显示转让方 -->
+								${patent.transferor}
 							</td>
 							<td style="text-align:center">
 								<c:if test="${patent.status==1}">
 								出售中
 								</c:if>
 								<c:if test="${patent.status==2}">
-								已出售
+								<font color="red">已出售</font>
 								</c:if>							
 							</td>
 							
@@ -639,7 +640,7 @@ function changSecondColume(patentId, SecondColumn) {
 			animation: "slide-from-top",   
 			inputPlaceholder: "请输入转让方:"
 		}, function(inputValue) {
-			price = inputValue;
+			transferor = inputValue;
 			$.ajax({
 				url: "<s:url value='/patent/batchChangeTransferor.html'/>?transferor=" +transferor+"&patentIds="+ patentIds,
 				type: "get"
