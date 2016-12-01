@@ -37,6 +37,7 @@ import com.lotut.pms.domain.TransactionPatentSearchCondition;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.PatentService;
+import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
 
@@ -45,11 +46,13 @@ import com.lotut.pms.web.util.WebUtils;
 public class PatentController {
 	private PatentService patentService;
 	private FriendService friendService;
+	private UserService userService;
 	
 	@Autowired
-	public PatentController(PatentService patentService, FriendService friendService) {
+	public PatentController(PatentService patentService, FriendService friendService,UserService userService) {
 		this.patentService = patentService;
 		this.friendService = friendService;
+		this.userService = userService;
 	}
 
 	@RequestMapping(path="/list", method=RequestMethod.GET)
@@ -175,8 +178,9 @@ public class PatentController {
 		List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
 		
 		Patent patent = patentService.getPatentDetail(patent_id);
+		User patentOwner = userService.getUserDetail(patent.getOwnerId());
 		model.addAttribute("patent", patent);		
-		
+		model.addAttribute("ownerName", patentOwner.getUsername());
 		model.addAttribute("patentId", patent_id);
 		model.addAttribute("FirstColumns", FirstColumns);
 		return "goods_form";

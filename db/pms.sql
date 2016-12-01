@@ -1173,3 +1173,5 @@ CREATE TABLE user_brands(
 	  CONSTRAINT fk_user_brand_brand FOREIGN KEY (brand) REFERENCES brands (id) ON DELETE CASCADE,
 	  CONSTRAINT fk_user_brand_user FOREIGN KEY (user) REFERENCES users (user_id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+ALTER TABLE sell_patent_goods ADD COLUMN transferor VARCHAR(60) NOT NULL;

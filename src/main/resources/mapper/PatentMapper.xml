@@ -284,8 +284,8 @@
 	</update>
 	
 	<insert id="saveGoods" parameterType="GoodsDetail" >
-		insert into sell_patent_goods(patent_id, transaction_date, add_date, status, transaction_type, price, patent_second_column,owner)
-		values(#{id}, null,curdate(), '1', #{transactionType}, #{price}, #{SecondColumn},#{userId});
+		insert into sell_patent_goods(patent_id, transaction_date, add_date, status, transaction_type, price, patent_second_column,owner,transferor)
+		values(#{id}, null,curdate(), '1', #{transactionType}, #{price}, #{SecondColumn},#{userId},#{transferor});
 		
 		update  patents set transaction_status='出售中' where patent_id=#{id}			
 	</insert>
@@ -348,7 +348,8 @@
 		<result property="owner" column="owner"/>
 		<result property="FirstColumn" column="patent_first_column_id"/>
 		<result property="SecondColumn" column="patent_second_column"/>	
-		<result property="recommendStatus" column="recommend_status"/>	
+		<result property="recommendStatus" column="recommend_status"/>
+		<result property="transferor" column="transferor"/>	
 	</resultMap>
 	
 	<select id="getUserTransactionPatents" parameterType="page" resultMap="TransactionPatent">
