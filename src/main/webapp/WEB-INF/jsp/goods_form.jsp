@@ -41,14 +41,12 @@
 					  <input type="hidden"  name="id" value="${patentId}" id="patentId"/>
 					  <div style="margin-top:15px;"> 商品类型：
 						<select name="FirstColumn" id="first_column" style="width:400px;" class="form-control" onchange="loadSecoundColumns()" required>
-						  <option value=''>请选择</option>
 						  <c:forEach items="${FirstColumns}" var="FirstColumn">
 							<option value="${FirstColumn.id}">${FirstColumn.name}</option>
 						  </c:forEach>
 						</select>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<select name="SecondColumn" id="second_column"  style="width:400px;" class="form-control" required>
-						  <option value=''>请选择</option>
 						</select>
 					  </div>
 					  <div style="margin-top:15px;"> 交易类型:
@@ -107,8 +105,6 @@ function loadSecoundColumns() {
 			dataType: 'json',
 			success: function(SecondColumns) {
 				var second_column = $("#second_column");
-				
-				resetSelect(second_column);
 				addOptions(second_column, SecondColumns);
 			}
 		})

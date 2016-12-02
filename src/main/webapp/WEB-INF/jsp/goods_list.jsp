@@ -494,7 +494,6 @@ $(function(){
 					type: 'get',
 					dataType: 'json',
 					success: function(SecondColumns){
-						resetSelect(second_column);
 						addOptions(second_column, SecondColumns);
 					}
 				})
