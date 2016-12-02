@@ -1176,3 +1176,7 @@ CREATE TABLE user_brands(
 
 
 ALTER TABLE sell_patent_goods ADD COLUMN transferor VARCHAR(60) NOT NULL;
+
+ALTER TABLE sell_patent_goods ADD COLUMN patent_image_url VARCHAR(300) ;
+
+
