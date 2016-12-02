@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.GoodsDetail;
 import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
@@ -39,6 +41,7 @@ import com.lotut.pms.service.FriendService;
 import com.lotut.pms.service.PatentService;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.FileOption;
 import com.lotut.pms.web.util.WebUtils;
 
 @Controller
@@ -483,4 +486,11 @@ public class PatentController {
 		}
 	}
 
+	@RequestMapping(path="/uploadPatentImage")
+	public void uploadPatentImage(@RequestParam("file") MultipartFile file,int patentId,PrintWriter pw){
+		String saveDir= Settings.PATENT_IMAGE_PATH;
+		String saveUrl= Settings.PATENT_IMAGE_URL;
+		String imageUrl = FileOption.uploaffile(patentId, file, saveDir, saveUrl);
+		pw.write(imageUrl);
+	}
 }
