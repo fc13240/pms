@@ -125,5 +125,6 @@ public interface PatentService {
 	
 	public void recommendPatent(long patentId);	
 	
+	void batchChangeTransferor(String transferor,List<Long> patentIds);
 }
 

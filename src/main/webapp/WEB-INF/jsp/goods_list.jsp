@@ -100,9 +100,12 @@
 							  	<table class="search-table">
 						  			<tr>
 						  				<td>
-                                <a href="javascript:return void" onclick="batchChangePrice()" >
-							<button class="button button-primary  button-rounded" style="width:110px;">批量修改价格</button>
-								</a>
+			                                <a href="javascript:return void" onclick="batchChangePrice()" >
+												<button class="button button-primary  button-rounded" style="width:110px;">批量修改价格</button>
+											</a>
+											<a href="javascript:return void" onclick="batchChangeTransferor()" >
+												<button class="button button-primary  button-rounded" style="width:150px;margin-left:10px;">批量修改转让方</button>
+											</a>
 						  				</td>	  										  									  				
 						  			</tr>
 						  		</table>		
@@ -120,10 +123,11 @@
 						  <th class="center" width="35">序号</th>
 						  <th width="110">申请号/专利号</th>
 						  <th width="170">专利名称</th>
-						  <th width="90">价格 </th><!-- 价格可以做成直接编辑的，可以少加一个编辑页面 -->
-						  <th width="90">所属领域</th>  
+						  <th width="60">价格 </th><!-- 价格可以做成直接编辑的，可以少加一个编辑页面 -->
+						  <th width="90">所属领域</th>
+						  <th width="90">转让方</th>  
 						  <th width="90">交易状态</th>  
-						  <th width="90">交易类型</th>  
+						  <th width="90">交易类型</th>
 						  <th width="90">添加日</th>
 						  <th width="90">交易日</th>
 						  <th width="90">操作</th>
@@ -162,11 +166,14 @@
 						  		</div>
 							</td>
 							<td style="text-align:center">
+								<c:out value="${patent.transferor}"/>
+							</td>
+							<td style="text-align:center">
 								<c:if test="${patent.status==1}">
 								出售中
 								</c:if>
 								<c:if test="${patent.status==2}">
-								已出售
+								<font color="red">已出售</font>
 								</c:if>							
 							</td>
 							
@@ -178,7 +185,7 @@
 								许可
 								</c:if>
 							</td>
-						
+							
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.addDate}" pattern="yyyy-MM-dd"/></td>
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.transactionDate}" pattern="yyyy-MM-dd"/></td>
 							<td >
@@ -602,6 +609,47 @@ function changSecondColume(patentId, SecondColumn) {
 					formutil.alertMessage('批量修改失败',true);
 				}
 		}); */
+	}
+	
+	
+	
+	function batchChangeTransferor() {
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		var uniquePatentNos = []
+		if (!patentSelected) {
+			formutil.alertMessage('请选择专利');
+			
+			return;
+		}
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+		for (var i = 0; i < patents_checked.length; i++) {
+			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+				uniquePatentNos.push(patents_checked[i]);
+				
+			}
+			
+		};
+		var transferor;
+		var patentIds = uniquePatentNos.join(",");
+		swal({   
+			title: "批量修改转让方",   
+			type: "input",   
+			showCancelButton: true,   
+			closeOnConfirm: false,   
+			animation: "slide-from-top",   
+			inputPlaceholder: "请输入转让方:"
+		}, function(inputValue) {
+			transferor = inputValue;
+			$.ajax({
+				url: "<s:url value='/patent/batchChangeTransferor.html'/>?transferor=" +transferor+"&patentIds="+ patentIds,
+				type: "get"
+			}).done(function(data) {
+				swal("操作成功!", "已成功修改转让方！", "success");
+				location.reload();
+			}).error(function(data) {
+				swal("操作失败!", "修改转让方失败！", "error"); 
+			});
+		});
 	}
 
 </script>

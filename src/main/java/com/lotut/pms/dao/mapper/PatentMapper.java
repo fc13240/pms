@@ -139,4 +139,6 @@ public interface PatentMapper {
 	void cancelRecommendPatent(long patentId);
 	
 	void recommendPatent(long patentId);
+	
+	void batchChangeTransferor(@Param("transferor")String transferor,@Param("patentIds")List<Long> patentIds);
 }

@@ -1175,3 +1175,5 @@ CREATE TABLE user_brands(
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 alter table brands add column image_url varchar(200) default null;
+
+ALTER TABLE sell_patent_goods ADD COLUMN transferor VARCHAR(60) NOT NULL;

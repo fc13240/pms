@@ -353,4 +353,9 @@ public class PatentServiceImpl implements PatentService {
 		
 	}
 
+	@Override
+	public void batchChangeTransferor(String transferor, List<Long> patentIds) {
+		patentDao.batchChangeTransferor(transferor, patentIds);
+	}
+
 }

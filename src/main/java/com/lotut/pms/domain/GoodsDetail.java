@@ -23,9 +23,15 @@ public class GoodsDetail {
 	private Date addDate;
 	private Date transactionDate;
 	private int recommendStatus;
+	private String transferor;
 
 	
-	
+	public String getTransferor() {
+		return transferor;
+	}
+	public void setTransferor(String transferor) {
+		this.transferor = transferor;
+	}
 	public int getRecommendStatus() {
 		return recommendStatus;
 	}
