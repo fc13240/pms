@@ -1177,3 +1177,7 @@ CREATE TABLE user_brands(
 alter table brands add column image_url varchar(200) default null;
 
 ALTER TABLE sell_patent_goods ADD COLUMN transferor VARCHAR(60) NOT NULL;
+
+ALTER TABLE sell_patent_goods ADD COLUMN patent_image_url VARCHAR(300) ;
+
+

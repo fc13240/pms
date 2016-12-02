@@ -197,6 +197,14 @@ height:37px;
 											<input class="form-control" style="width:600px;" placeholder="" value="${brand.originality}" name="originality" maxlength="100"/>
 										</td>
 									</tr>	
+									<tr>
+										<th>上传图片</th>
+										<td>
+											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandEntrustFileHidden" name="imageUrl" />
+											<input style="width:200px;display:inline;" type="text" id="brandEntrustFilename"  class="selectPointOfInterest form-control" placeholder="请选择图片" readonly="readonly" onclick="$('input[id=brandEntrustFile]').click();" required="required"/>
+											<button type="button" onclick="uploadEntrustClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
+										</td>
+									</tr>		
 									</tbody>
 								</table>	
 							<div class="form-actions">
@@ -204,6 +212,10 @@ height:37px;
 								
 							</div>		
 							</form>
+							<form action="<s:url value='/brand/uploadbrandEntrustFile.html'/>" id="uploadEntrustFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+								<input style="display:none" type="file" id="brandEntrustFile" name="file"/>
+								<button type="button" id="uploadEntrustBtn" style="display:none;" onclick="uploadBrandEntrustFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
+							</form>			
 						</div>
 						
 					</div>					
@@ -218,6 +230,42 @@ height:37px;
 	    </div>
 	</div>
 </div>
+<script type="text/javascript">
+function uploadBrandEntrustFile(){
+	var uploadForm=$("#uploadEntrustFileForm");
+	var option={
+			dataType : "json",
+			data : {"file":$("#brandEntrustFile").val()},
+			beforeSubmit : function (){
+				var filename = $("#brandEntrustFilename").val();
+				var suffix = filename.toLowerCase().substr(filename.lastIndexOf(".")+1);
+				if(suffix=="jpg"||suffix=="png"||suffix=="jpeg"){
+					return true;
+				}else{
+					alert("请选择常用的图片格式，如jpg、png、jpeg格式，再进行上传！");
+					return false;
+				}
+			},
+			success : function (result){
+				if(result=="overLimit"){
+					alert("上传的图片超过300KB,请选择较小的图片进行上传");
+				}else{
+				$("#brandEntrustFileHidden").val(result);
+				$("#brandEntrustFilename").val("");
+				alert("上传成功");
+				}
+			}
+	}
+	uploadForm.ajaxSubmit(option);
+}
 
+$('input[id=brandEntrustFile]').change(function(){
+	$("#brandEntrustFilename").val($(this).val());
+})
+
+function uploadEntrustClick(){
+	$("#uploadEntrustBtn").trigger("click");
+}
+</script>
 </body>
 </html>

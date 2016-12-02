@@ -1,7 +1,5 @@
 package com.lotut.pms.domain;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,6 +22,7 @@ public class GoodsDetail {
 	private Date transactionDate;
 	private int recommendStatus;
 	private String transferor;
+	private String patentImageUrl;
 
 	
 	public String getTransferor() {
@@ -115,6 +114,13 @@ public class GoodsDetail {
 	}
 	public void setTransactionDate(Date transactionDate) {
 		this.transactionDate = transactionDate;
+	}
+	
+	public String getPatentImageUrl() {
+		return patentImageUrl;
+	}
+	public void setPatentImageUrl(String patentImageUrl) {
+		this.patentImageUrl = patentImageUrl;
 	}
 	
 }

@@ -202,7 +202,7 @@ height:37px;
 									<tr>
 										<th>上传图片</th>
 										<td>
-											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandEntrustFileHidden" name=imageUrl />
+											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandEntrustFileHidden" name="imageUrl" />
 											<input style="width:200px;display:inline;" type="text" id="brandEntrustFilename"  class="selectPointOfInterest form-control" placeholder="请选择图片" readonly="readonly" onclick="$('input[id=brandEntrustFile]').click();" required="required"/>
 											<button type="button" onclick="uploadEntrustClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
