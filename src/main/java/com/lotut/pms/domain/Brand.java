@@ -31,6 +31,8 @@ public class Brand {
 	private Date startDate;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date endDate;
+	private String imageUrl;
+
 	public int getId() {
 		return id;
 	}
@@ -157,6 +159,13 @@ public class Brand {
 	public void setOriginality(String originality) {
 		this.originality = originality;
 	}
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	
 	
 }
 
