@@ -125,7 +125,7 @@ height:37px;
 									<tr>
 										<th>申请号</th>
 										<td>
-										<input class="form-control" style="width:600px;" placeholder="请输入申请号" name="brandNo" maxlength="30"/>
+										<input class="form-control" style="width:600px;" placeholder="请输入申请号" name="brandNo" required maxlength="30"/>
 										</td>
 									</tr>						
 									<tr>
