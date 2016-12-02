@@ -14,6 +14,7 @@
 
 </head>
 <body>
+<script src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 <%@ include file="_top.jsp" %>
 <div class="lt-con" style="min-width:1100px;">
 	<div class="container-fluid" >
@@ -232,38 +233,6 @@ height:37px;
 	</div>
 </div>
 <script type="text/javascript">
-function uploadUserPhotoFile(){
-	var uploadPhotoForm=$("#uploadUserPhotoForm");
-	var option={
-			dataType:"json",
-			data:{"file":$("#userPhotoFile").val()},
-			beforeSubmit:function(){
-				var fileName=$("#userPhotoFilename").val();
-				var suffix=fileName.toLowerCase().substr(fileName.lastIndexOf(".")+1);
-				//fileChange($())
-				if(suffix=="jpg"||suffix=="png"||suffix=="jpeg"){
-					return true;
-				}else{
-					alert("请选择常用的图片格式，如jpg、png、jpeg格式，再进行上传！");
-					return false;
-				}
-			},
-			success : function (result){
-				if(result=="overLimit"){
-					alert("上传的图片超过300KB,请选择较小的图片进行上传");
-				}else{
-					$("#userPhotoFileHidden").val(result);
-					var base = "${base}";
-					$("#userAvatarDiv").empty();
-					//$("#userAvatarTitle").html("<h4>头像预览</h4>");
-					$("#userAvatarDiv").html("<img alt='' src="+base+result+" width='160px' height='200px'>");
-				}
-			}
-			
-	};
-	uploadPhotoForm.ajaxSubmit(option);
-}
-
 function uploadBrandEntrustFile(){
 	var uploadForm=$("#uploadEntrustFileForm");
 	var option={
@@ -291,6 +260,10 @@ function uploadBrandEntrustFile(){
 	}
 	uploadForm.ajaxSubmit(option);
 }
+
+$('input[id=brandEntrustFile]').change(function(){
+	$("#brandEntrustFilename").val($(this).val());
+})
 
 function uploadEntrustClick(){
 	$("#uploadEntrustBtn").trigger("click");
