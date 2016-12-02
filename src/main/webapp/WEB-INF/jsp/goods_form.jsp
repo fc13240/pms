@@ -158,7 +158,6 @@ function addOptions(selectObj, options) {
 					}
 				},
 				success:function(imageUrl){
-					alert(imageUrl);
 					$('#patentImageUrlHidden').val(imageUrl);
 					alert("上传成功");
 				},
