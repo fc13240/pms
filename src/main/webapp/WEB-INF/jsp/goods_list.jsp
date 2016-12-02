@@ -154,14 +154,12 @@
 							<td style="text-align:center">
 								<div class="form-column" style="width:320px;margin: auto" >
 									<select style="display:inline;width:150px" name="FirstColumn" id="firstColumn${status.index}"  class="form-control first_column" required>
-								  	<option value=''>请选择</option>
 								  	<c:forEach items="${FirstColumns}" var="FirstColumn">
 									<option value="${FirstColumn.id}" 
 										<c:if test="${FirstColumn.id==patent.firstColumn}">selected="selected"</c:if>>${FirstColumn.name}</option>
 								  	</c:forEach>
 									</select>
 									<select style="display:inline;width:150px" name="SecondColumn"  subColumn="${patent.secondColumn}"  id="secondColumn${status.index}" class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', this.value)" required>
-								  		<option value=''>请选择</option>
 									</select>
 						  		</div>
 							</td>
@@ -521,7 +519,7 @@ function resetSelect() {
 	for (var i = 0; i < arguments.length; i++) {
 		var selectObj = arguments[i];
 		selectObj.empty();
-		addDefaultOption(selectObj);
+		/* addDefaultOption(selectObj); */
 	}
 }
 
