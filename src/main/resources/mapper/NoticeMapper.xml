@@ -348,7 +348,6 @@
 			<if test="archiveNo != null">archive_no = #{archiveNo},</if>
 			<if test="zipfileName != null">zipfile_name = #{zipfileName},</if>
 			<if test="noticeType != null">notice_type = #{noticeType.noticeTypeId},</if>
-			<if test="zipfileName != null">zipfile_name = #{zipfileName},</if>
 			patent = #{patent.patentId}
 	</insert>
 	
