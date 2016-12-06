@@ -10,6 +10,7 @@ import java.net.URLEncoder;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -200,12 +201,17 @@ public class NoticeController {
 	}	
 	
 	@RequestMapping(path="/upload", method=RequestMethod.POST)
-	public String uploadNotices(@RequestParam("noticeFile")Part noticeFile, Model model) {
+	public String uploadNotices(@RequestParam("noticeFile")Part noticeFile, Model model) throws ZipException {
+		int userId = PrincipalUtils.getCurrentUserId();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String nowDate = sdf.format(new Date());
+		String submmitedName = noticeFile.getSubmittedFileName();
+		if (!submmitedName.endsWith(".zip")) {
+			throw new ZipException("上传的不是zip压缩包");
+		}
+		
+		String zipFileName = nowDate + userId + ".zip";
 		try {
-			String zipFileName = noticeFile.getSubmittedFileName();
-			if (!zipFileName.endsWith(".zip")) {
-				throw new ZipException("上传的不是zip压缩包");
-			}
 			noticeFile.write(zipFileName);
 			String zipFilePath = Settings.TEMP_DIR + zipFileName;
 			noticeService.uploadNotices(zipFilePath);
