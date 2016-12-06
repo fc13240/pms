@@ -149,9 +149,7 @@ public class BrandController {
 	
 	@RequestMapping(path="/searchUserBrands")
 	public String searchUserBrands(HttpSession session,Model model,BrandSearchCondition searchCondition){
-		
-		
-		
+
 		Page page =searchCondition.getPage();
 		int userId = PrincipalUtils.getCurrentUserId();
 		if(page.getCurrentPage()<1){
@@ -163,16 +161,15 @@ public class BrandController {
 		List<BrandCategory> categorys=brandService.getAllCategorys();
 		
 		if(PrincipalUtils.isOrderProcessor()||PrincipalUtils.isAdmin()||PrincipalUtils.isPlatform()){
-			totalCount = brandService.getsearchUserBrandsCount(searchCondition);
-			page.setTotalRecords(totalCount);
-			page.setPageSize(WebUtils.getPageSize(session));
-			brands = brandService.searchUserBrandsByPage(searchCondition);
-
-		}else{
 			totalCount = brandService.getsearchBrandsCount(searchCondition);
 			page.setTotalRecords(totalCount);
 			page.setPageSize(WebUtils.getPageSize(session));
 			brands = brandService.searchBrandsByPage(searchCondition);
+		}else{
+			totalCount = brandService.getsearchUserBrandsCount(searchCondition);
+			page.setTotalRecords(totalCount);
+			page.setPageSize(WebUtils.getPageSize(session));
+			brands = brandService.searchUserBrandsByPage(searchCondition);
 		}
 		
 		model.addAttribute("brands",brands);
