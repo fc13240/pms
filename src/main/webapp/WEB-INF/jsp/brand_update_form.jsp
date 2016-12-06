@@ -14,6 +14,7 @@
 
 </head>
 <body>
+<script src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 <%@ include file="_top.jsp" %>
 <div class="lt-con" style="min-width:1100px;">
 	<div class="container-fluid" >
