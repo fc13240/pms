@@ -141,4 +141,14 @@ public class BrandServiceImpl implements BrandService{
 	public void insertUserBrand(int userId, int brandId) {
 		brandDao.insertUserBrand(userId,brandId);
 	}
+
+	@Override
+	public List<Brand> searchBrandsByPage(BrandSearchCondition brandSearchCondition) {
+		return brandDao.searchBrandsByPage(brandSearchCondition);
+	}
+
+	@Override
+	public int getsearchBrandsCount(BrandSearchCondition brandSearchCondition) {
+		return brandDao.getsearchBrandsCount(brandSearchCondition);
+	}
 }

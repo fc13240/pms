@@ -113,6 +113,49 @@
   			     and (b.name like #{keyword_pattern} or b.brand_no like #{keyword_pattern})
   			   </if>
   	</select>
+  	
+  	
+  	<select id="searchBrandsByPage" parameterType="BrandSearchCondition" resultMap="brandResultMap">
+  		<bind name="keyword_pattern" value="'%' +keyword + '%'"/>
+  		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
+  			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,b.image_url,
+  			   b.originality,b.case_status,bc.category_name,u.username from brands b left join brand_category bc on  b.category_id=bc.category_id 
+  			   left join users u on b.user=u.user_id where b.sell_status=1
+  			   <if test="categoryId!=null">
+					and b.category_id=#{categoryId}
+  			   </if>
+  			   <if test="keyword_pattern!=null">
+  			     and (b.name like #{keyword_pattern} or b.brand_no like #{keyword_pattern})
+  			   </if>
+  			   limit #{page.startIndex},#{page.pageSize}
+  	</select>
+  	
+  	<select id="getsearchBrandsCount" parameterType="BrandSearchCondition" resultType="int">
+  		<bind name="keyword_pattern" value="'%' +keyword + '%'"/>
+  		select count(*) from brands b where b.sell_status=1
+  			   <if test="categoryId!=null">
+					and b.category_id=#{categoryId}
+  			   </if>
+  			   <if test="keyword_pattern!=null">
+  			     and (b.name like #{keyword_pattern} or b.brand_no like #{keyword_pattern})
+  			   </if>
+  	</select>
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
   	<select id="getAllCategorys" resultType="BrandCategory">
   		select category_id as categoryId,category_name as categoryName from brand_category
   	</select>

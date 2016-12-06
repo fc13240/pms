@@ -108,4 +108,14 @@ public class BrandMybatisDao extends SqlSessionDaoSupport implements BrandDao{
 	public void addBrandCategory(List<BrandCategory> userBrandCategoryRecords) {
 		brandMapper.addBrandCategory(userBrandCategoryRecords);
 	}
+
+	@Override
+	public List<Brand> searchBrandsByPage(BrandSearchCondition brandSearchCondition) {
+		return brandMapper.searchBrandsByPage(brandSearchCondition);
+	}
+
+	@Override
+	public int getsearchBrandsCount(BrandSearchCondition brandSearchCondition) {
+		return brandMapper.getsearchBrandsCount(brandSearchCondition);
+	}
 }

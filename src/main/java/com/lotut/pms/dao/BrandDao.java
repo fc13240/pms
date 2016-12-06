@@ -46,4 +46,8 @@ public interface BrandDao {
 	void insertUserBrand(int userId,int brandId);
 	
 	void addBrandCategory(List<BrandCategory> userBrandCategoryRecords);
+	
+	List<Brand> searchBrandsByPage(BrandSearchCondition brandSearchCondition);
+	
+	int getsearchBrandsCount(BrandSearchCondition brandSearchCondition);
 }
