@@ -1183,7 +1183,7 @@ ALTER TABLE sell_patent_goods ADD COLUMN patent_image_url VARCHAR(300) ;
 INSERT INTO sell_first_column(patent_first_column_id,patent_first_column_name)VALUES
 (1,'日常生活领域'),(2,'农林渔牧/食品'),(3,'医疗/保健/美容'),(4,'机电/能源/环保'),(5,'化工/冶金/纺织'),(6,'建筑/交通/通讯');
 
-INSERT INTO sell_second_column(patent_first_column_id,patent_second_column_name,patent_second_column_id)VALUES
+INSERT INTO sell_second_column(patent_first_column_id,patent_second_column_name)VALUES
 (1,'日常生活领域'),(1,'服装/鞋帽'),(1,'家具/家装'),(1,'家电/照明'),(1,'艺术/乐器'),(1,'教学/学习'),(1,'市政/环卫'),(1,'体育/健身'),(1,'行政/办公'),(1,'娱乐/玩具'),
 (2,'农林渔牧/食品'),(2,'农业'),(2,'林业'),(2,'渔业'),(2,'畜牧业'),(2,'肥料'),(2,'饲料'),(2,'农药'),(2,'兽药'),(2,'食品/酒饮'),
 (3,'医疗/保健/美容'),(3,'医药/中西药'),(3,'医药加工'),(3,'医疗器械'),(3,'医疗用品'),(3,'消毒洁净'),(3,'保健品'),(3,'保健器械'),(3,'美容护肤'),(3,'日化领域'),

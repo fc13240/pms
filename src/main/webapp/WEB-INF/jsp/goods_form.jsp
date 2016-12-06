@@ -111,6 +111,24 @@ function loadSecoundColumns() {
 	}
 }
 
+$(function(){
+	var first_column = $("#first_column").val();
+
+	resetSelect($("#second_column"));
+	
+	if (first_column != "") {
+		$.ajax({
+			url: "<s:url value='/patent/getGoodsSecoundColumn.html'/>?first_column=" + first_column,
+			type: 'get',
+			dataType: 'json',
+			success: function(SecondColumns) {
+				var second_column = $("#second_column");
+				addOptions(second_column, SecondColumns);
+			}
+		})
+	}
+})
+
 function addDefaultOption(selectElem) {
 	selectElem.append("<option value=''>请选择</option>");
 }
@@ -119,7 +137,7 @@ function resetSelect() {
 	for (var i = 0; i < arguments.length; i++) {
 		var selectObj = arguments[i];
 		selectObj.empty();
-		addDefaultOption(selectObj);
+		/* addDefaultOption(selectObj); */
 	}
 }
 
