@@ -45,4 +45,8 @@ public interface BrandService {
 	Brand getUserBrandsById(int brandId);
 	
 	void insertUserBrand(int userId,int brandId);
+	
+	List<Brand> searchBrandsByPage(BrandSearchCondition brandSearchCondition);
+	
+	int getsearchBrandsCount(BrandSearchCondition brandSearchCondition);
 }

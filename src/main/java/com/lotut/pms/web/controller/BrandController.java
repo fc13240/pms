@@ -149,17 +149,32 @@ public class BrandController {
 	
 	@RequestMapping(path="/searchUserBrands")
 	public String searchUserBrands(HttpSession session,Model model,BrandSearchCondition searchCondition){
+		
+		
+		
 		Page page =searchCondition.getPage();
 		int userId = PrincipalUtils.getCurrentUserId();
 		if(page.getCurrentPage()<1){
 			page.setCurrentPage(1);
 		}
 		searchCondition.setUserId(userId);
-		int totalCount = brandService.getsearchUserBrandsCount(searchCondition);
-		page.setTotalRecords(totalCount);
-		page.setPageSize(WebUtils.getPageSize(session));
-		List<Brand> brands = brandService.searchUserBrandsByPage(searchCondition);
-		List<BrandCategory> categorys = brandService.getAllCategorys();
+		int totalCount=0;
+		List<Brand> brands =null;
+		List<BrandCategory> categorys=brandService.getAllCategorys();
+		
+		if(PrincipalUtils.isOrderProcessor()||PrincipalUtils.isAdmin()||PrincipalUtils.isPlatform()){
+			totalCount = brandService.getsearchUserBrandsCount(searchCondition);
+			page.setTotalRecords(totalCount);
+			page.setPageSize(WebUtils.getPageSize(session));
+			brands = brandService.searchUserBrandsByPage(searchCondition);
+
+		}else{
+			totalCount = brandService.getsearchUserBrandsCount(searchCondition);
+			page.setTotalRecords(totalCount);
+			page.setPageSize(WebUtils.getPageSize(session));
+			brands = brandService.searchUserBrandsByPage(searchCondition);
+		}
+		
 		model.addAttribute("brands",brands);
 		model.addAttribute("searchCondition",searchCondition);
 		model.addAttribute("page",page);

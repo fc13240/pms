@@ -48,4 +48,8 @@ public interface BrandMapper {
 	void insertUserBrand(@Param("userId")int userId,@Param("brandId")int brandId);
 	
 	void addBrandCategory(List<BrandCategory> userBrandCategoryRecords);
+	
+	List<Brand> searchBrandsByPage(BrandSearchCondition brandSearchCondition);
+	
+	int getsearchBrandsCount(BrandSearchCondition brandSearchCondition);
 }
