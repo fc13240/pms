@@ -47,6 +47,7 @@
 		select patent_first_column_id id,patent_first_column_name  name
 		  from sell_first_column
 	</select>	
+	
 	<select id="getSecondColumn" parameterType="int" resultType="GoodsSecondColumn">
 		select patent_second_column_id id,patent_second_column_name  name
 		  from sell_second_column where patent_first_column_id=#{firstColumnId}
