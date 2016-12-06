@@ -172,10 +172,12 @@ public class NoticeServiceImpl implements NoticeService {
 			if (isNewPatent) {
 				patentDao.insertPatent(patent);
 				
-				addUserPatentRecord(patent);
+				addUserPatentRecord(patent.getOwnerId(),patent.getPatentId());
 			} else {
 				
 				patentDao.updatePatent(patent);
+				addUserPatentRecord(patent.getOwnerId(),patentInDb.getPatentId());
+				
 				notice.getPatent().setPatentId(patentInDb.getPatentId());
 				String patentStatusText = patentInDb.getPatentStatusText();
 				String internalCode = patent.getInternalCode();
@@ -184,21 +186,21 @@ public class NoticeServiceImpl implements NoticeService {
 				if(patentInDb.getPatentStatus()!=null){
 					int patentStatus = patentInDb.getPatentStatus().getPatentStatusId()+INCREASE_SIZE;
 					patentDao.updateDocumentStatus(patentStatus,internalCode);
-				}else{
-					
 				}
 				patentDao.updateDocumentStatusText(patentStatusText,internalCode);
+				
 			}
 			
 			noticeDao.insertOrUpdateNotice(notice);
 		}
 	}
 	
-	private void addUserPatentRecord(Patent patent) {
+	private void addUserPatentRecord(int userId, long patentId) {
 		List<Map<String, Integer>> userPatents = new ArrayList<>();
 		Map<String, Integer> userPatentMap = new HashMap<>();
-		userPatentMap.put("user", patent.getOwnerId());
-		userPatentMap.put("patent", (int) patent.getPatentId());
+		
+		userPatentMap.put("user", userId);
+		userPatentMap.put("patent", (int)patentId);
 		userPatents.add(userPatentMap);
 		sharePatentDao.insertUserPatents(userPatents);
 	}
