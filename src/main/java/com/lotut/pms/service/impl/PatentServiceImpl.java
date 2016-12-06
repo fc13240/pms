@@ -114,6 +114,12 @@ public class PatentServiceImpl implements PatentService {
 				userPatentMap.put("user", userId);
 				userPatentMap.put("patent", (int)patent.getPatentId());
 				userPatentList.add(userPatentMap);
+			}else{
+				Patent oldPatent=patentDao.getPatentByAppNoAndOwner(patent.getAppNo(),patent.getOwnerId());
+				HashMap<String, Integer> userPatentMap = new HashMap<>();
+				userPatentMap.put("user", userId);
+				userPatentMap.put("patent", (int)oldPatent.getPatentId());
+				userPatentList.add(userPatentMap);
 			}
 		}
 		if (userPatentList.size() > 0) {
