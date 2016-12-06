@@ -169,10 +169,10 @@ public class BrandController {
 			brands = brandService.searchUserBrandsByPage(searchCondition);
 
 		}else{
-			totalCount = brandService.getsearchUserBrandsCount(searchCondition);
+			totalCount = brandService.getsearchBrandsCount(searchCondition);
 			page.setTotalRecords(totalCount);
 			page.setPageSize(WebUtils.getPageSize(session));
-			brands = brandService.searchUserBrandsByPage(searchCondition);
+			brands = brandService.searchBrandsByPage(searchCondition);
 		}
 		
 		model.addAttribute("brands",brands);
