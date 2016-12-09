@@ -1178,7 +1178,7 @@ alter table brands add column image_url varchar(200) default null;
 
 ALTER TABLE sell_patent_goods ADD COLUMN transferor VARCHAR(60) NOT NULL;
 
-ALTER TABLE sell_patent_goods ADD COLUMN patent_image_url VARCHAR(300) ;
+ALTER TABLE sell_patent_goods ADD COLUMN patent_image_url VARCHAR(300);
 
 INSERT INTO sell_first_column(patent_first_column_id,patent_first_column_name)VALUES
 (1,'日常生活领域'),(2,'农林渔牧/食品'),(3,'医疗/保健/美容'),(4,'机电/能源/环保'),(5,'化工/冶金/纺织'),(6,'建筑/交通/通讯');
