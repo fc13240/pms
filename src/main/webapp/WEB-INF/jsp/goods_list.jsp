@@ -171,7 +171,10 @@
 								出售中
 								</c:if>
 								<c:if test="${patent.status==2}">
-								<font color="red">已出售</font>
+								<font color="red">已预订</font>
+								</c:if>
+								<c:if test="${patent.status==3}">
+								<font color="red">交易成功</font>
 								</c:if>							
 							</td>
 							

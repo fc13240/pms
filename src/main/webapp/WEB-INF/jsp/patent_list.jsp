@@ -296,14 +296,14 @@
 							  修改
 							  </a> 
 							  <br> 
-								  <c:if test="${patent.transactionStatus==null}">
+								  <c:if test="${patent.transactionStatus==1}">
 	 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
 					                  	<button class="t-btn2" value="1" data-toggle="tooltip" data-placement="bottom" title="加入r.lotut.com商城">加入交易</button> 
 				 	                  </a>
 				 	                </c:if>
-				 	                 <c:if test="${patent.transactionStatus != null}">
+				 	                 <c:if test="${patent.transactionStatus != 1}">
 	 			                  	   <a >
-					                  	<font color="red">${patent.transactionStatus}</font>
+					                  	<font color="red">已加入交易</font>
 				 	                  </a>
 				 	                  </c:if>
 							  </td>
