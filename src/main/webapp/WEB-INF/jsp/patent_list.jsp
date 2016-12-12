@@ -139,6 +139,7 @@
 							  <tr>
 							  <td>专利类型</td>
 							  <td>专利状态</td>
+							  <td>交易状态</td>
 							  <td>申请日开始</td>
 							  <td></td>
 							  <td>申请日结束</td>
@@ -164,6 +165,14 @@
 									<c:out value="${patentStatus.statusDescription}"/>
 									</option>
 								  </c:forEach>
+								</select>
+							  </td>
+							  <td>
+								<select  style="width:100px;" class="selectPointOfInterest form-control" name="transactionStatus">
+								  <option value="">全部</option>
+								  <option value="1">待交易</option>
+								  <option value="2">已预订</option>
+								  <option value="3">交易成功</option>
 								</select>
 							  </td>
 							  <td>
