@@ -145,6 +145,9 @@
 		 		</if>	
 			 	<if test="patentStatus != null">
 			 		and p.patent_status = #{patentStatus}
+			 	</if>
+			 	<if test="transactionStatus != null">
+			 		and p.transaction_status = #{transactionStatus}
 			 	</if>	
 			 	<if test="startAppDate != null">
 			 		and p.app_date >= #{startAppDate}
@@ -176,6 +179,9 @@
 		 		</if>	
 			 	<if test="patentStatus != null">
 			 		and p.patent_status = #{patentStatus}
+			 	</if>
+			 	<if test="transactionStatus != null">
+			 		and p.transaction_status = #{transactionStatus}
 			 	</if>
 			 	<if test="startAppDate != null">
 			 		and p.app_date >= #{startAppDate}
