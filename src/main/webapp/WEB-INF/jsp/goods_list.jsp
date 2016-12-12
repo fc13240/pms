@@ -121,21 +121,18 @@
 							<span class="lbl"></span> </label>
 						  </th>
 						  <th class="center" width="35">序号</th>
+						  <th width="90">专利类型 </th>
 						  <th width="110">申请号/专利号</th>
 						  <th width="170">专利名称</th>
-						  <th width="60">价格 </th><!-- 价格可以做成直接编辑的，可以少加一个编辑页面 -->
-						  <th width="90">所属领域</th>
-						  <th width="90">转让方</th>  
-						  <th width="90">交易状态</th>  
-						  <th width="90">交易类型</th>
+						  <th width="90">第一申请人/转让方</th>
+						  <th width="90">案件状态/所属领域</th>
+						  <th width="90">交易类型/价格/状态</th>
 						  <th width="90">添加日</th>
 						  <th width="90">交易日</th>
 						  <th width="90">操作</th>
 						</tr>
 					  </thead>
 					  <tbody>
-					 
-					  
 						<c:forEach items="${patents}" var="patent" varStatus="status">
 						  <tr >
 						  <td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
@@ -143,15 +140,19 @@
 							  <span class="lbl"></span></label></td>
 							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
 							<td style="text-align:center">
+								<c:out value="专利类型"/>
+							</td>
+							<td style="text-align:center">
 								<c:out value="${patent.appNo}"/>
 							</td>
 							<td class="hidden-480" style="text-align:center">
 								<c:out value="${patent.patentName}"/>
 							</td>
 							<td style="text-align:center">
-								<input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)">
+								<c:out value="${patent.transferor}"/>
 							</td>
 							<td style="text-align:center">
+								<c:out value="案件状态"/><br/>
 								<div class="form-column" style="width:320px;margin: auto" >
 									<select style="display:inline;width:150px" name="FirstColumn" id="firstColumn${status.index}"  class="form-control first_column" required>
 								  	<c:forEach items="${FirstColumns}" var="FirstColumn">
@@ -163,21 +164,6 @@
 									</select>
 						  		</div>
 							</td>
-							<td style="text-align:center">
-								<c:out value="${patent.transferor}"/>
-							</td>
-							<td style="text-align:center">
-								<c:if test="${patent.status==1}">
-								出售中
-								</c:if>
-								<c:if test="${patent.status==2}">
-								<font color="red">已预订</font>
-								</c:if>
-								<c:if test="${patent.status==3}">
-								<font color="red">交易成功</font>
-								</c:if>							
-							</td>
-							
 							<td style="text-align:center" >
 								<c:if test="${patent.transactionType==1}">
 								转让
@@ -185,6 +171,16 @@
 								<c:if test="${patent.transactionType==2}">
 								许可
 								</c:if>
+								<input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)">
+								<c:if test="${patent.status==1}">
+								待交易
+								</c:if>
+								<c:if test="${patent.status==2}">
+								<font color="red">已预订</font>
+								</c:if>
+								<c:if test="${patent.status==3}">
+								<font color="red">交易成功</font>
+								</c:if>	
 							</td>
 							
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.addDate}" pattern="yyyy-MM-dd"/></td>
