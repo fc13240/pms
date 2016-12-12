@@ -1182,3 +1182,9 @@ ALTER TABLE sell_patent_goods ADD COLUMN patent_image_url VARCHAR(300);
 
 INSERT INTO sell_first_column(patent_first_column_id,patent_first_column_name)VALUES
 (1,'日常生活领域'),(2,'农林渔牧/食品'),(3,'医疗/保健/美容'),(4,'机电/能源/环保'),(5,'化工/冶金/纺织'),(6,'建筑/交通/通讯');
+
+
+UPDATE patents SET transaction_status=1 WHERE transaction_status IS NULL;
+UPDATE patents SET transaction_status=2 WHERE transaction_status='出售中';
+UPDATE patents SET transaction_status=3 WHERE transaction_status='已出售';
+ALTER TABLE patents MODIFY COLUMN transaction_status INT DEFAULT 1 COMMENT '1 待交易，2 已预订, 3 交易成功';
