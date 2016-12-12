@@ -93,5 +93,6 @@
 		<typeAlias alias="Brand" type="com.lotut.pms.domain.Brand"/>
 		<typeAlias alias="BrandSearchCondition" type="com.lotut.pms.domain.BrandSearchCondition"/>
 		<typeAlias alias="WeChatOrder" type="com.lotut.pms.domain.WeChatOrder"/>
+		<typeAlias alias="SalePatentGood" type="com.lotut.pms.domain.SalePatentGood"/>
 	</typeAliases>  
 </configuration>

@@ -28,8 +28,17 @@
 		<result property="createTime" column="create_time"/>
 		<association property="patentStatus" resultMap="PatentStatusResultMap"/>
 		<association property="patentType" resultMap="PatentTypeResultMap"/>
+		<association property="salePatentGood" resultMap="salePatentGoodResultMap"/>
 		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 	</resultMap>
+	
+	<resultMap type="SalePatentGood" id="salePatentGoodResultMap">
+		<id property="patentId" column="sell_patent_id"/>
+		<result property="price" column="price"/>
+		<result property="transactionType" column="transaction_type"/>
+	</resultMap>
+	
+	
 	
 	<select id="getUserPatentCount" resultType="int">
 		select count(*) from user_patents where user = #{userId} and trash_status=1
@@ -62,7 +71,7 @@
 	</sql>
 	
 	<select id="getUserPatents" parameterType="Page" resultMap="PatentWithShareUsers">
-		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, sp.patent_status_text,sp.transaction_status,sp.create_time,pt.patent_type_id, 
+		<!-- select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, sp.patent_status_text,sp.transaction_status,sp.create_time,pt.patent_type_id, 
 							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username
 		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date,  p.internal_code, p.patent_type,p.transaction_status,p.create_time,
 				ps.patent_status_id, ps.patent_status_desc, p.patent_status_text
@@ -71,7 +80,18 @@
 		 order by p.app_date desc, p.app_person, p.patent_name
 		 limit #{startIndex}, #{pageSize}) as sp left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
 		    join users u on u.user_id = up.user	
-		 order by sp.app_date desc, sp.app_person, sp.patent_name
+		 order by sp.app_date desc, sp.app_person, sp.patent_name -->
+		 
+		 select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, sp.patent_status_text,sp.transaction_status,sp.create_time,pt.patent_type_id, 
+		                      pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username,spg.patent_id as sell_patent_id ,spg.price,spg.transaction_type 
+		        from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date,  p.internal_code, p.patent_type,p.transaction_status,p.create_time, ps.patent_status_id, 
+		        						  ps.patent_status_desc, p.patent_status_text 
+		                     from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent where up.user = #{userId} and up.trash_status=1 
+		                                  order by p.app_date desc, p.app_person, p.patent_name limit #{startIndex}, #{pageSize}
+		             ) as sp left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id 
+		        join users u on u.user_id = up.user 
+		        left join sell_patent_goods spg on sp.patent_id=spg.patent_id 
+		        order by sp.app_date desc, sp.app_person, sp.patent_name
 	</select>	
 	
 	<select id="getPatentById" parameterType="long" resultMap="PatentWithShareUsers">

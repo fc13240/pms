@@ -31,9 +31,17 @@ public class Patent {
 	private String transactionStatus;
 	private List<User> shareUsers;
 	private Timestamp createTime;
+	private SalePatentGood salePatentGood;
 	
 	
-	
+	public SalePatentGood getSalePatentGood() {
+		return salePatentGood;
+	}
+
+	public void setSalePatentGood(SalePatentGood salePatentGood) {
+		this.salePatentGood = salePatentGood;
+	}
+
 	public Timestamp getCreateTime() {
 		return createTime;
 	}
