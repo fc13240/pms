@@ -12,6 +12,7 @@ public class PatentSearchCondition {
 	private int userId;
 	private Integer patentType;
 	private Integer patentStatus;
+	private Integer transactionStatus;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date startAppDate;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
@@ -89,15 +90,25 @@ public class PatentSearchCondition {
 		this.page = page;
 	}
 
+	
+	public Integer getTransactionStatus() {
+		return transactionStatus;
+	}
+
+	public void setTransactionStatus(Integer transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+
 	@Override
 	public String toString() {
 		String startAppDateStr = startAppDate == null ? "" : formatter.format(startAppDate);
 		String endAppDateStr = endAppDate == null ? "" : formatter.format(endAppDate);
 		String patentTypeStr = patentType == null ? "" : patentType.toString();
 		String patentStatusStr = patentStatus == null ? "" : patentStatus.toString();
+		String transactionStatusStr = transactionStatus == null ? "" : transactionStatus.toString();
 		String keywordStr = keyword == null ? "" : keyword;
 		
-		return "patentType=" + patentTypeStr + "&patentStatus=" + patentStatusStr + "&startAppDate="
+		return "patentType=" + patentTypeStr + "&patentStatus=" + patentStatusStr +"&transactionStatus=" + transactionStatusStr + "&startAppDate="
 				+ startAppDateStr + "&endAppDate=" + endAppDateStr + "&keyword=" + keywordStr;
 	}
 }

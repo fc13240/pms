@@ -165,6 +165,9 @@
 		 		</if>	
 			 	<if test="patentStatus != null">
 			 		and p.patent_status = #{patentStatus}
+			 	</if>
+			 	<if test="transactionStatus != null">
+			 		and p.transaction_status = #{transactionStatus}
 			 	</if>	
 			 	<if test="startAppDate != null">
 			 		and p.app_date >= #{startAppDate}
@@ -196,6 +199,9 @@
 		 		</if>	
 			 	<if test="patentStatus != null">
 			 		and p.patent_status = #{patentStatus}
+			 	</if>
+			 	<if test="transactionStatus != null">
+			 		and p.transaction_status = #{transactionStatus}
 			 	</if>
 			 	<if test="startAppDate != null">
 			 		and p.app_date >= #{startAppDate}
@@ -308,7 +314,7 @@
 		insert into sell_patent_goods(patent_id, transaction_date, add_date, status, transaction_type, price, patent_second_column,owner,transferor,patent_image_url)
 		values(#{id}, null,curdate(), '1', #{transactionType}, #{price}, #{SecondColumn},#{userId},#{transferor},#{patentImageUrl});
 		
-		update  patents set transaction_status='出售中' where patent_id=#{id}			
+		update  patents set transaction_status=2 where patent_id=#{id}			
 	</insert>
 	
 	
@@ -376,7 +382,7 @@
 	<select id="getUserTransactionPatents" parameterType="page" resultMap="TransactionPatent">
 		SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,sg.transaction_date,sg.transferor,p.patent_name,p.app_no,sg.recommend_status,ss.patent_first_column_id,sg.patent_second_column
 		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id left JOIN sell_second_column  ss ON ss.patent_second_column_id=sg.patent_second_column
-		WHERE  owner=#{userId}  limit #{startIndex}, #{pageSize};
+		WHERE  owner=#{userId} order by limit #{startIndex}, #{pageSize};
 	
 	</select>
 	
@@ -447,13 +453,13 @@
 		update sell_patent_goods set status =2,transaction_date=now(),recommend_status=0
 		 where patent_id = #{patentId};
 		 
-		 update  patents set transaction_status='已出售' where patent_id=#{patentId}	
+		 update  patents set transaction_status=2 where patent_id=#{patentId}	
 	</update>
 	<update id="upTransactionPatent">
 		update sell_patent_goods set status =1
 		 where patent_id = #{patentId};
 		 
-		 update  patents set transaction_status='出售中' where patent_id=#{patentId}	
+		 update  patents set transaction_status=1 where patent_id=#{patentId}	
 	</update>	
 	<delete id="deleteTransactionPatent">
 		delete from sell_patent_goods where patent_id = #{patentId};
@@ -529,7 +535,7 @@
 	</insert>
 	 
 	<update id="updatePatentsGoodsStatus"  >
-		update  patents set transaction_status='出售中' where patent_id in
+		update  patents set transaction_status=2 where patent_id in
 			<foreach item="patentId" collection="patentIds"
 			     open="(" separator="," close=")">
 			   #{patentId}
