@@ -23,8 +23,15 @@ public class GoodsDetail {
 	private int recommendStatus;
 	private String transferor;
 	private String patentImageUrl;
+	private Patent patent;
 
 	
+	public Patent getPatent() {
+		return patent;
+	}
+	public void setPatent(Patent patent) {
+		this.patent = patent;
+	}
 	public String getTransferor() {
 		return transferor;
 	}

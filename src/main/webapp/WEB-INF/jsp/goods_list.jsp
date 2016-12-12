@@ -140,7 +140,7 @@
 							  <span class="lbl"></span></label></td>
 							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
 							<td style="text-align:center">
-								<c:out value="专利类型"/>
+								<c:out value="${patent.patent.patentType.typeDescription}"/>
 							</td>
 							<td style="text-align:center">
 								<c:out value="${patent.appNo}"/>
@@ -149,10 +149,11 @@
 								<c:out value="${patent.patentName}"/>
 							</td>
 							<td style="text-align:center">
+								<c:out value="${patent.patent.appPerson}"/><br/>
 								<c:out value="${patent.transferor}"/>
 							</td>
 							<td style="text-align:center">
-								<c:out value="案件状态"/><br/>
+								<c:out value="${patent.patent.patentStatusText}"/><br/>
 								<div class="form-column" style="width:320px;margin: auto" >
 									<select style="display:inline;width:150px" name="FirstColumn" id="firstColumn${status.index}"  class="form-control first_column" required>
 								  	<c:forEach items="${FirstColumns}" var="FirstColumn">
