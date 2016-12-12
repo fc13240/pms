@@ -28,7 +28,7 @@ public class Patent {
 	private String internalCode;
 	private int ownerId;
 	private String proxyOrg;
-	private String transactionStatus;
+	private int transactionStatus;
 	private List<User> shareUsers;
 	private Timestamp createTime;
 	private SalePatentGood salePatentGood;
@@ -50,11 +50,11 @@ public class Patent {
 		this.createTime = createTime;
 	}
 
-	public String getTransactionStatus() {
+	public int getTransactionStatus() {
 		return transactionStatus;
 	}
 
-	public void setTransactionStatus(String transactionStatus) {
+	public void setTransactionStatus(int transactionStatus) {
 		this.transactionStatus = transactionStatus;
 	}
 

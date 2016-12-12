@@ -244,12 +244,10 @@
 						  <th width="100">申请号/专利号</th>
 						  <th width="130">专利名称</th>
 						  <th width="90">第一申请人 </th>
-						  <th width="90" class="hidden-480"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申请日</th>
-						  <th width="60">缴年费日</th>
-						  <th width="60">添加日</th>
-						  <th width="70">案件状态</th>
-						  <th width="180">内部编码</th>
-						  <th width="90">共享人</th>
+						  <th width="90" class="hidden-480"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申请日/年费日</th>
+						  <th width="60">更新时间/案件状态</th>
+						  <th width="180">内部编码/共享人</th>
+						  <th width="180">交易类型/价格/状态</th>
 						  <th width="80">操作</th>
 						</tr>
 					  </thead>
@@ -257,7 +255,7 @@
 						<c:forEach items="${patents}" var="patent" varStatus="status">
 						  <tr >
 							<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-							  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.patentId}'/>">
+							  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.patentId}'/>"></span>
 							  <span class="lbl"></span></label></td>
 							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
 							<td style="text-align:center"><c:out value="${patent.patentType.typeDescription}"/></td>
@@ -265,19 +263,45 @@
 							</td>
 							<td class="hidden-480" style="text-align:center"><c:out value="${patent.name}"/></td>
 							<td style="text-align:center"><c:out value="${patent.appPerson}"/></td>
-							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
-							<td class="hidden-480 fee_date" fee_date="${patent.appDate}" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="M月dd日"/></td>
-							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-							<td style="text-align:center"><c:out value="${patent.patentStatusText}"/></td>
-							<td style="text-align:center"><input style="width:180px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="90" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
+							<td class="hidden-480" style="text-align:center">
+								<fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/>
+								<br/>
+								<fmt:formatDate value="${patent.appDate}" pattern="M月dd日"/>
+							
+							</td>
+							<td class="hidden-480" style="text-align:center">
+								<fmt:formatDate value="${patent.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/><br/>
+								<c:out value="${patent.patentStatusText}"/>
 							</td>
 							<td style="text-align:center">
-							<c:forEach items="${patent.shareUsers}" var="shareUser" varStatus="s">								
-								<a href="javascript:return void" onclick="searchShareUserDetail(${shareUser.userId})" >
-					        		<c:out value="${shareUser.username}"/>
-					        		<c:if test="${!s.last}">;</c:if>
-					        	</a>					        	
-					        </c:forEach>
+								<input style="width:180px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="90" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)"/>
+								<br/>
+								<c:forEach items="${patent.shareUsers}" var="shareUser" varStatus="s">								
+									<a href="javascript:return void" onclick="searchShareUserDetail(${shareUser.userId})" >
+						        		<c:out value="${shareUser.username}"/>
+						        		<c:if test="${!s.last}">;</c:if>
+						        	</a>					        	
+						        </c:forEach>
+							</td>
+							<td style="text-align:center" width="120px">
+								<c:if test="${not empty patent.salePatentGood }">
+									<c:if test="${patent.salePatentGood.transactionType==1 }">转让</c:if>
+									<c:if test="${patent.salePatentGood.transactionType==2 }">许可</c:if>
+									&nbsp;&nbsp;${patent.salePatentGood.price }<br/>
+									<c:if test="${patent.transactionStatus==1}">
+										待交易
+				 	                </c:if>
+				 	                 <c:if test="${patent.transactionStatus==2}">
+	 			                  	   <a >
+					                  	<font color="red">已预订</font>
+				 	                  </a>
+				 	                  </c:if>
+				 	                 <c:if test="${patent.transactionStatus==3}">
+	 			                  	   <a >
+					                  	<font color="red">交易成功</font>
+				 	                  </a>
+				 	                  </c:if>
+								</c:if>
 							</td>
 							<td style="text-align:center"><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
 							  分享
@@ -296,21 +320,21 @@
 							  修改
 							  </a> 
 							  <br> 
-								  <%-- <c:if test="${patent.transactionStatus=1}">
+								  <c:if test="${patent.transactionStatus==1}">
 	 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
 					                  	<button class="t-btn2" value="1" data-toggle="tooltip" data-placement="bottom" title="加入r.lotut.com商城">加入交易</button> 
 				 	                  </a>
 				 	                </c:if>
-				 	                 <c:if test="${patent.transactionStatus=2}">
+				 	                 <c:if test="${patent.transactionStatus==2}">
 	 			                  	   <a >
 					                  	<font color="red">已预订</font>
 				 	                  </a>
 				 	                  </c:if>
-				 	                 <c:if test="${patent.transactionStatus=3}">
+				 	                 <c:if test="${patent.transactionStatus==3}">
 	 			                  	   <a >
 					                  	<font color="red">交易成功</font>
 				 	                  </a>
-				 	                  </c:if> --%>
+				 	                  </c:if>
 							  </td>
 						  </tr>
 						</c:forEach>
