@@ -143,4 +143,10 @@ public interface PatentMapper {
 	void batchChangeTransferor(@Param("transferor")String transferor,@Param("patentIds")List<Long> patentIds);
 	
 	void saveSellPatentDescription(@Param("description") String description,@Param("patentId") int patentId);
+
+	@MapKey("patentType")
+	Map<String, Map<String, String>> getUserTransactionCountByPatentType(int userId);
+
+	@MapKey("transactionStatus")
+	Map<String, Map<String, String>> searchUserTransactionByTransactionStatus(int userId);
 }
