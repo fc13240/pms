@@ -273,7 +273,6 @@
 							  <a href="javascript:return void;"  onclick="deleteTransactionPatent(${patent.patentId})">
 							  删除
 							  </a>
-							  <br/>
 							  &nbsp;
 							  <c:if test="${patent.status==1}">
 								  <c:if test="${patent.recommendStatus==0}">
