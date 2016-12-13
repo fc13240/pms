@@ -128,5 +128,9 @@ public interface PatentService {
 	void batchChangeTransferor(String transferor,List<Long> patentIds);
 	
 	void saveSellPatentDescription(@Param("description") String description,@Param("patentId") int patentId);
+
+	public Map<String, Map<String, String>> getUserTransactionCountByPatentType(int userId);
+
+	public Map<String, Map<String, String>> searchUserTransactionByTransactionStatus(int userId);
 }
 

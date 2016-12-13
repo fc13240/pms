@@ -369,4 +369,13 @@ public class PatentServiceImpl implements PatentService {
 		patentDao.saveSellPatentDescription(description, patentId);
 	}
 
+	@Override
+	public Map<String, Map<String, String>> getUserTransactionCountByPatentType(int userId) {
+		return patentDao.getUserTransactionCountByPatentType(userId);
+	}
+
+	@Override
+	public Map<String, Map<String, String>> searchUserTransactionByTransactionStatus(int userId) {
+		return patentDao.searchUserTransactionByTransactionStatus(userId);
+	}
 }

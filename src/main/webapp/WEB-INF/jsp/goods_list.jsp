@@ -36,7 +36,72 @@
 			
 			
 				<div style="height:10px;"></div>
-		
+				
+				<!-- menu begin -->
+				<div class="lt-box">
+
+					<div id="menu">
+					  <div style="height:33px;">
+						<ul id="nav">
+						  <p>快捷处理：</p>
+						  <li><a href="#" class="selected">专利类型</a></li>
+						  <li><a href="#" class="">交易状态</a></li>
+						</ul>
+					  </div>
+						
+					  <div id="menu_con">
+					  						
+						<div class="tag" style="display:block; margin-left:-20px;"> 
+
+						  <ul class="qxjk-ul"><li>
+							<a href="<s:url value='/patent/searchTransactionPatents.html?page.currentPage=1&patentType=1'/>">
+							发明专利 (<c:out value='${patentTypeCount[(1).intValue()]["patentCount"]}' default="0"/>)</a>
+							</li>
+							<li>
+							 <a href="<s:url value='/patent/searchTransactionPatents.html?page.currentPage=1&patentType=2'/>">
+							实用新型 (<c:out value='${patentTypeCount[(2).intValue()]["patentCount"]}' default="0"/>)
+							</a> 
+							</li>
+							
+							<li>
+							<a href="<s:url value='/patent/searchTransactionPatents.html?page.currentPage=1&patentType=3'/>">
+							外观设计(<c:out value='${patentTypeCount[(3).intValue()]["patentCount"]}' default="0"/>)
+							</a> 							
+							</li>
+
+						  </ul>	    
+						 
+						
+						</div>
+						<div class="tag"  style="display:none">
+						  <ul class="qxjk-ul">
+						  	<li>	      
+								<a href="<s:url value='/patent/searchTransactionPatents.html?page.currentPage=1&status=1'/>">
+								待交易 (<c:out value='${transactionStatusCount[(1).intValue()]["patentCount"]}' default="0"/>)
+								</a>
+							</li> 
+							
+							<li>
+							   	<a href="<s:url value='/patent/searchTransactionPatents.html?page.currentPage=1&status=2'/>">
+								已预订 (<c:out value='${transactionStatusCount[(2).intValue()]["patentCount"]}' default="0"/>)
+								</a> 
+							</li>
+							
+							<li>
+								<a href="<s:url value='/patent/searchTransactionPatents.html?page.currentPage=1&status=3'/>">
+								交易成功 (<c:out value='${transactionStatusCount[(3).intValue()]["patentCount"]}' default="0"/>)
+								</a>
+							</li>
+							
+						  </ul>
+						</div>
+					  </div>
+					</div>				
+				
+				
+				</div>
+				<!-- menu end -->
+				
 				<div class="lt-box">
 					<div class="search-box">
 					

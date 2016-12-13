@@ -344,5 +344,14 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		patentMapper.saveSellPatentDescription(description, patentId);
 	}
 
+	@Override
+	public Map<String, Map<String, String>> getUserTransactionCountByPatentType(int userId) {
+		return patentMapper.getUserTransactionCountByPatentType(userId);
+	}
+
+	@Override
+	public Map<String, Map<String, String>> searchUserTransactionByTransactionStatus(int userId) {
+		return patentMapper.searchUserTransactionByTransactionStatus(userId);
+	}
 
 }

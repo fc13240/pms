@@ -18,6 +18,8 @@ public class TransactionPatentSearchCondition {
 	private String keyword;
 	private Page page;
 	private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	private Integer patentType;
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -59,6 +61,13 @@ public class TransactionPatentSearchCondition {
 	}
 	public void setPage(Page page) {
 		this.page = page;
+	}
+	
+	public Integer getPatentType() {
+		return patentType;
+	}
+	public void setPatentType(Integer patentType) {
+		this.patentType = patentType;
 	}
 	
 	@Override
