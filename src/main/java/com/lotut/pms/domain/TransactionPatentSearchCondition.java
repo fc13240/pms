@@ -77,8 +77,9 @@ public class TransactionPatentSearchCondition {
 		String statusStr = status == null ? "" : status.toString();
 		String transactionTypeStr = transactionType == null ? "" : transactionType.toString();
 		String keywordStr = keyword == null ? "" : keyword;
+		String patentTypeStr = patentType == null ? "" : patentType.toString();
 		
 		return "status=" + statusStr + "&transactionType=" + transactionTypeStr + "&startAddDate="
-				+ startAddDateStr + "&endAddDate=" + endAddDateStr + "&keyword=" + keywordStr;
+				+ startAddDateStr + "&endAddDate=" + endAddDateStr + "&keyword=" + keywordStr+"&patentType="+patentTypeStr;
 	}
 }
