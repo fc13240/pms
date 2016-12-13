@@ -87,11 +87,11 @@
 		        from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date,  p.internal_code, p.patent_type,p.transaction_status,p.create_time, ps.patent_status_id, 
 		        						  ps.patent_status_desc, p.patent_status_text 
 		                     from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent where up.user = #{userId} and up.trash_status=1 
-		                                  order by p.app_date desc, p.app_person, p.patent_name limit #{startIndex}, #{pageSize}
+		                                  order by p.transaction_status desc,p.app_date desc, p.app_person, p.patent_name limit #{startIndex}, #{pageSize}
 		             ) as sp left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id 
 		        join users u on u.user_id = up.user 
 		        left join sell_patent_goods spg on sp.patent_id=spg.patent_id 
-		        order by sp.app_date desc, sp.app_person, sp.patent_name
+		        order by sp.transaction_status desc,sp.app_date desc, sp.app_person, sp.patent_name
 	</select>	
 	
 	<select id="getPatentById" parameterType="long" resultMap="PatentWithShareUsers">
@@ -155,7 +155,7 @@
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
 		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date,sp.patent_status_text,sp.transaction_status,sp.create_time, pt.patent_type_id, 
-							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username
+							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username,spg.patent_id as sell_patent_id ,spg.price,spg.transaction_type 
 		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, p.patent_type,p.transaction_status,p.create_time,
 				ps.patent_status_id, ps.patent_status_desc, p.patent_status_text
 				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
@@ -180,11 +180,11 @@
 						 or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} 
 						 or ps.patent_status_desc like #{keyword_pattern} or p.patent_status_text like #{keyword_pattern})
 				</if>		 		 	
-				 order by p.app_date desc, p.app_person, p.patent_name
+				 order by p.transaction_status desc,p.app_date desc, p.app_person, p.patent_name
 				 limit #{page.startIndex}, #{page.pageSize}) as sp 
 			left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
-		    join users u on u.user_id = up.user		
-		 order by sp.app_date desc, sp.app_person, sp.patent_name
+		    join users u on u.user_id = up.user left join sell_patent_goods spg on sp.patent_id=spg.patent_id 	
+		 order by sp.transaction_status desc,sp.app_date desc, sp.app_person, sp.patent_name
 	</select>	
 	<!-- 查询分页 -->
 	<select id="searchUserPatentsCount" resultType="int">
