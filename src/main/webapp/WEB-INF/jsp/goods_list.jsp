@@ -263,12 +263,13 @@
 							  上架
 							  </a>
 							</c:if>
-							  <c:if test="${patent.status==1}">
+							  <%-- <c:if test="${patent.status==1}">
 							  <a href="javascript:return void;"  onclick="downTransactionPatent(${patent.patentId})">
 							  下架
 							  </a> 
-			             	  </c:if>
-			             	  &nbsp;&nbsp;&nbsp;
+							  &nbsp;&nbsp;&nbsp;
+			             	  </c:if> --%>
+			             	  
 							  <a href="javascript:return void;"  onclick="deleteTransactionPatent(${patent.patentId})">
 							  删除
 							  </a>
