@@ -339,5 +339,10 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		patentMapper.batchChangeTransferor(transferor, patentIds);
 	}
 
+	@Override
+	public void saveSellPatentDescription(String description, int patentId) {
+		patentMapper.saveSellPatentDescription(description, patentId);
+	}
+
 
 }

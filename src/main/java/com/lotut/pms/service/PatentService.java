@@ -126,5 +126,7 @@ public interface PatentService {
 	public void recommendPatent(long patentId);	
 	
 	void batchChangeTransferor(String transferor,List<Long> patentIds);
+	
+	void saveSellPatentDescription(@Param("description") String description,@Param("patentId") int patentId);
 }
 

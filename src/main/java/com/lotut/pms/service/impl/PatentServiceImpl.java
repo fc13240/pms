@@ -364,4 +364,9 @@ public class PatentServiceImpl implements PatentService {
 		patentDao.batchChangeTransferor(transferor, patentIds);
 	}
 
+	@Override
+	public void saveSellPatentDescription(String description, int patentId) {
+		patentDao.saveSellPatentDescription(description, patentId);
+	}
+
 }

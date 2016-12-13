@@ -493,4 +493,11 @@ public class PatentController {
 		String imageUrl = FileOption.uploaffile(patentId, file, saveDir, saveUrl);
 		pw.write(imageUrl);
 	}
+	
+	@RequestMapping(path="/saveSellPatentDescription")
+	public void saveSellPatentDescription(int patentId,String description,PrintWriter out){
+		patentService.saveSellPatentDescription(description, patentId);
+		out.write("success");
+	}
+	
 }

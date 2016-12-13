@@ -292,16 +292,16 @@
 										待交易
 				 	                </c:if>
 				 	                 <c:if test="${patent.transactionStatus==2}">
-	 			                  	   <a >
 					                  	<font color="red">已预订</font>
-				 	                  </a>
 				 	                  </c:if>
 				 	                 <c:if test="${patent.transactionStatus==3}">
-	 			                  	   <a >
 					                  	<font color="red">交易成功</font>
-				 	                  </a>
 				 	                  </c:if>
 								</c:if>
+								<c:if test="${empty patent.salePatentGood }">
+									未交易
+								</c:if>
+								
 							</td>
 							<td style="text-align:center"><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
 							  分享
@@ -325,15 +325,8 @@
 					                  	<button class="t-btn2" value="1" data-toggle="tooltip" data-placement="bottom" title="加入r.lotut.com商城">加入交易</button> 
 				 	                  </a>
 				 	                </c:if>
-				 	                 <c:if test="${patent.transactionStatus==2}">
-	 			                  	   <a >
-					                  	<font color="red">已预订</font>
-				 	                  </a>
-				 	                  </c:if>
-				 	                 <c:if test="${patent.transactionStatus==3}">
-	 			                  	   <a >
-					                  	<font color="red">交易成功</font>
-				 	                  </a>
+				 	                 <c:if test="${patent.transactionStatus != 1}">
+					                  	<font color="red">已加入交易</font>
 				 	                  </c:if>
 							  </td>
 						  </tr>
