@@ -287,7 +287,7 @@
 								<c:if test="${not empty patent.salePatentGood }">
 									<c:if test="${patent.salePatentGood.transactionType==1 }">转让</c:if>
 									<c:if test="${patent.salePatentGood.transactionType==2 }">许可</c:if>
-									&nbsp;&nbsp;${patent.salePatentGood.price }<br/>
+									&nbsp;&nbsp;${patent.salePatentGood.price }元<br/>
 									<c:if test="${patent.transactionStatus==1}">
 										待交易
 				 	                </c:if>
