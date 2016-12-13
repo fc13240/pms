@@ -376,20 +376,22 @@
 		<result property="FirstColumn" column="patent_first_column_id"/>
 		<result property="SecondColumn" column="patent_second_column"/>	
 		<result property="recommendStatus" column="recommend_status"/>
-		<result property="transferor" column="transferor"/>	
-		<result property="description" column="description"/>	
+		<result property="transferor" column="transferor"/>
+		<result property="description" column="description"/>
+		<association property="patent" resultMap="PatentWithShareUsers"/>
 	</resultMap>
-	
+
 	<select id="getUserTransactionPatents" parameterType="page" resultMap="TransactionPatent">
-		SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,sg.transaction_date,sg.transferor,p.patent_name,p.app_no,sg.recommend_status,ss.patent_first_column_id,
-				sg.patent_second_column,sg.description
-		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id left JOIN sell_second_column  ss ON ss.patent_second_column_id=sg.patent_second_column
-		WHERE  owner=#{userId} order by sg.status asc,sg.add_date desc limit #{startIndex}, #{pageSize};
+		SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,
+		sg.transaction_date,sg.transferor,p.patent_name,p.app_no,sg.recommend_status,ss.patent_first_column_id,
+		sg.patent_second_column,pt.patent_type_id,pt.patent_type_desc,p.app_person,p.patent_status_text,sg.description
+		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id
+		LEFT JOIN patent_status ps ON p.patent_status = ps.patent_status_id 
+		LEFT JOIN patent_types pt ON p.patent_type = pt.patent_type_id 
+		LEFT JOIN sell_second_column  ss ON ss.patent_second_column_id=sg.patent_second_column
+		WHERE  OWNER=#{userId} ORDER BY sg.status ASC,sg.add_date DESC limit #{startIndex}, #{pageSize}
 	</select>
-	
-	
-	
-	
+
 	<select id="getUserTransactionPatentsCount" resultType="int">
 		SELECT COUNT(*) FROM sell_patent_goods WHERE OWNER = #{userId};
 	</select>
@@ -673,7 +675,6 @@
 	<update id="updateDocumentStatus">
 		update patent_documents set patent_doc_status=#{patentStatus} where internal_code=#{internalCode}
 	</update>
-	
 	<update id="cancelRecommendPatent">
 		update sell_patent_goods set recommend_status = 0 where patent_id=#{patentId}
 	</update>
