@@ -60,8 +60,9 @@
 								<select  style="width:100px;" class="selectPointOfInterest form-control" name="status">
 								  <option value="" >全部</option>
 								 
-								<option value="1" >出售中</option>
-								<option value="2" >已出售</option>
+								<option value="1" >待交易</option>
+								<option value="2" >已预订</option>
+								<option value="3" >交易成功</option>
 								</select>
 							  </td>
 							  <td>
