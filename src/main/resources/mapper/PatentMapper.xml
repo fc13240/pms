@@ -94,7 +94,7 @@
 		             ) as sp left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id 
 		        join users u on u.user_id = up.user 
 		        left join sell_patent_goods spg on sp.patent_id=spg.patent_id 
-		        order by sp.transaction_status desc,sp.app_date desc, sp.app_person, sp.patent_name
+		        order by sp.transaction_status asc,sp.app_date desc, sp.app_person, sp.patent_name
 	</select>	
 	
 	<select id="getPatentById" parameterType="long" resultMap="PatentWithShareUsers">
