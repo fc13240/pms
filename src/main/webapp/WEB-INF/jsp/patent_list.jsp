@@ -299,7 +299,9 @@
 				 	                  </c:if>
 								</c:if>
 								<c:if test="${empty patent.salePatentGood }">
-									未交易
+	 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
+					                  	<button class="t-btn2" value="1" data-toggle="tooltip" data-placement="bottom" title="加入r.lotut.com商城">加入交易</button> 
+				 	                  </a>
 								</c:if>
 								
 							</td>
@@ -319,15 +321,7 @@
 							 <a target="_blank" href="<s:url value='/patent/showPatentDetail.html'/>?patentId=${patent.patentId}&ownerId=${patent.ownerId}">
 							  修改
 							  </a> 
-							  <br> 
-								  <c:if test="${patent.transactionStatus==1}">
-	 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
-					                  	<button class="t-btn2" value="1" data-toggle="tooltip" data-placement="bottom" title="加入r.lotut.com商城">加入交易</button> 
-				 	                  </a>
-				 	                </c:if>
-				 	                 <c:if test="${patent.transactionStatus != 1}">
-					                  	<font color="red">已加入交易</font>
-				 	                  </c:if>
+							  <br>
 							  </td>
 						  </tr>
 						</c:forEach>

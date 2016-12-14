@@ -355,6 +355,11 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	}
 
 	@Override
+	public List<Patent> exportTransactionPatents(List<Long> patentIds) {
+
+		return patentMapper.exportTransactionPatents(patentIds);
+	}
+	
 	public void changeStatus(int status, int patentId) {
 		patentMapper.changeStatus(status, patentId);
 	}

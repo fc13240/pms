@@ -349,7 +349,7 @@ public class PatentServiceImpl implements PatentService {
 	
 	@Override
 	public String patentTransactionExportExcel(List<Long> patentIds, String exportExcelName) throws IOException {
-		List<Patent> patents = patentDao.getUserPatentsByIds(patentIds);
+		List<Patent> patents = patentDao.exportTransactionPatents(patentIds);
 		String exportExcelPath=Settings.TEMP_DIR+exportExcelName;
 		PatentExcelGenerator.writeTransactionPatentRecordsToExcel(patents, exportExcelPath);
 		return exportExcelPath;
@@ -387,6 +387,11 @@ public class PatentServiceImpl implements PatentService {
 		return patentDao.searchUserTransactionByTransactionStatus(userId);
 	}
 
+	@Override
+	public List<Patent> exportTransactionPatents(List<Long> patentIds) {
+		return patentDao.exportTransactionPatents(patentIds);
+	}
+	
 	@Override
 	public void changeStatus(int status, int patentId) {
 		patentDao.changeStatus(status, patentId);
