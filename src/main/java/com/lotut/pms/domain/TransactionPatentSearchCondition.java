@@ -19,7 +19,23 @@ public class TransactionPatentSearchCondition {
 	private Page page;
 	private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	private Integer patentType;
+	private Integer firstColumnId;
+	private Integer secondColumnId;
 	
+	
+	
+	public Integer getFirstColumnId() {
+		return firstColumnId;
+	}
+	public void setFirstColumnId(Integer firstColumnId) {
+		this.firstColumnId = firstColumnId;
+	}
+	public Integer getSecondColumnId() {
+		return secondColumnId;
+	}
+	public void setSecondColumnId(Integer secondColumnId) {
+		this.secondColumnId = secondColumnId;
+	}
 	public int getUserId() {
 		return userId;
 	}
@@ -78,8 +94,11 @@ public class TransactionPatentSearchCondition {
 		String transactionTypeStr = transactionType == null ? "" : transactionType.toString();
 		String keywordStr = keyword == null ? "" : keyword;
 		String patentTypeStr = patentType == null ? "" : patentType.toString();
+		String firstColumnIdStr = firstColumnId == null ? "" : firstColumnId.toString();
+		String secondColumnIdStr = secondColumnId == null ? "" : secondColumnId.toString();
 		
 		return "status=" + statusStr + "&transactionType=" + transactionTypeStr + "&startAddDate="
-				+ startAddDateStr + "&endAddDate=" + endAddDateStr + "&keyword=" + keywordStr+"&patentType="+patentTypeStr;
+				+ startAddDateStr + "&endAddDate=" + endAddDateStr + "&keyword=" + keywordStr+"&patentType="+patentTypeStr
+				+"&firstColumnId="+firstColumnIdStr+"&secondColumnId="+secondColumnIdStr;
 	}
 }
