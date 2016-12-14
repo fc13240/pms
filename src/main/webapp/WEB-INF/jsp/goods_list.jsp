@@ -113,6 +113,7 @@
 
 						  <table class="search-table">
 							  <tr>
+							  <td>专利类型</td>
 							  <td>交易状态</td>
 							  <td>交易方式</td>
 							  <td>添加日开始</td>
@@ -121,10 +122,18 @@
 							  <td>关键字</td>
 							  </tr>
 							  <tr>
+							   <td>
+								<select  style="width:100px;" class="selectPointOfInterest form-control" name="patentType">
+								  <option value="">全部</option>
+								  <option value="1">发明</option>
+								  <option value="2">实用新型</option>
+								  <option value="3">外观设计</option>
+								</select>
+							  </td>
+							  
 							  <td>
 								<select  style="width:100px;" class="selectPointOfInterest form-control" name="status">
 								  <option value="" >全部</option>
-								 
 								<option value="1" >待交易</option>
 								<option value="2" >已预订</option>
 								<option value="3" >交易成功</option>
