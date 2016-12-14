@@ -157,7 +157,7 @@
 
 							  </td>
 							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称" class="t-input form-control"/>							  
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/说明" class="t-input form-control"/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
@@ -205,8 +205,7 @@
 						  <th width="90">第一申请人/转让方</th>
 						  <th width="90">案件状态/所属领域</th>
 						  <th width="90">交易类型/价格/状态</th>
-						  <th width="90">添加日</th>
-						  <th width="90">交易日</th>
+						  <th width="90">添加日/交易日</th>
 						  <th width="90">说明</th>
 						  <th width="90">操作</th>
 						</tr>
@@ -251,7 +250,11 @@
 								<c:if test="${patent.transactionType==2}">
 								许可
 								</c:if>
-								<input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)">
+								<br/>
+								<span style="text-align:center">金额: ￥${patent.price}</span>
+								
+								<%-- <input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)"> --%>
+								
 								<select style="display:inline;width:130px" onChange="changeStatus('<c:out value='${patent.patentId}'/>', this.value)" class="form-control first_column">
 								<c:if test="${patent.status==1}">
 								<option value="${patent.status}" selected="selected">
@@ -288,8 +291,10 @@
 								</c:if>	 --%>
 							</td>
 							
-							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.addDate}" pattern="yyyy-MM-dd"/></td>
-							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.transactionDate}" pattern="yyyy-MM-dd"/></td>
+							<td class="hidden-480" style="text-align:center">
+								<fmt:formatDate value="${patent.addDate}" pattern="yyyy-MM-dd"/><br/>
+								<fmt:formatDate value="${patent.transactionDate}" pattern="yyyy-MM-dd"/>
+							</td>
 							<td width="90">
 								<input style="width:180px;" type="text" value="<c:out value='${patent.description}'/>" size="90" onChange="changedescription('<c:out value='${patent.patentId}'/>', this.value)"/>
 							</td>
