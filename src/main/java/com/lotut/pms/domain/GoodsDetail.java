@@ -25,6 +25,7 @@ public class GoodsDetail {
 	private String patentImageUrl;
 	private String description;
 	private Patent patent;
+	private PatentType patentType;
 	
 	
 	public Patent getPatent() {
@@ -136,5 +137,13 @@ public class GoodsDetail {
 	public void setPatentImageUrl(String patentImageUrl) {
 		this.patentImageUrl = patentImageUrl;
 	}
+	public PatentType getPatentType() {
+		return patentType;
+	}
+	public void setPatentType(PatentType patentType) {
+		this.patentType = patentType;
+	}
+	
+	
 	
 }
