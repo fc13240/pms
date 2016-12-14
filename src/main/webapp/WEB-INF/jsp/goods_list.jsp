@@ -116,7 +116,7 @@
 							  <td>专利类型</td>
 							  <td>交易状态</td>
 							  <td>交易方式</td>
-							  <td>所属分类</td>
+							  <td style="text-align: center;">所属分类</td>
 							  <td>添加日开始</td>
 							  <td></td>
 							  <td>添加日结束</td>
