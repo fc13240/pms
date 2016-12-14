@@ -134,5 +134,7 @@ public interface PatentService {
 	public Map<String, Map<String, String>> getUserTransactionCountByPatentType(int userId);
 
 	public Map<String, Map<String, String>> searchUserTransactionByTransactionStatus(int userId);
+
+	List<Patent> exportTransactionPatents(List<Long> patentIds);
 }
 

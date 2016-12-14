@@ -149,4 +149,7 @@ public interface PatentMapper {
 
 	@MapKey("transactionStatus")
 	Map<String, Map<String, String>> searchUserTransactionByTransactionStatus(int userId);
+	
+	List<Patent> exportTransactionPatents(@Param("patentIds") List<Long> patentIds);	
+	
 }

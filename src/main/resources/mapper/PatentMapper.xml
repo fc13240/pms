@@ -62,6 +62,9 @@
 		  from sell_second_column where patent_first_column_id=#{firstColumnId}
 	</select>	
 	
+	
+	
+	
 	<sql id="userPatents">
 		select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, pt.patent_type_id, 
 					 pt.patent_type_desc, ps.patent_status_id, ps.patent_status_desc, p.internal_code, u.user_id, u.username
@@ -714,4 +717,52 @@
  		FROM sell_patent_goods sg  
 		WHERE OWNER=#{userId} GROUP BY sg.status;
 	</select>
+
+<resultMap type="Patent" id="TransactionGoodMap">
+	<id property="patentId" column="patent_id"/>
+	<result property="name" column="patent_name"/>
+	<result property="appPerson" column="app_person"/>
+	<result property="transactionStatus" column="transaction_status"/>
+	<association property="patentType" resultMap="PatentTypeResultMap"/>
+	<association property="salePatentGood" javaType="SalePatentGood">
+		<id property="patentId" column="patent_id"/>
+		<result property="transferor" column="transferor"/>
+		<result property="transactionType" column="transaction_type"/>
+		<result property="price" column="price"/>
+		<result property="status" column="status"/>
+		<result property="addDate" column="add_date"/>
+		<result property="description" column="description"/>
+		<result property="transactionDate" column="transaction_date"/>
+		<association property="firstColumn" javaType="GoodsFirstColumn">
+			<id property="id" column="patent_first_column_id"/>
+			<result property="name" column="patent_first_column_name"/>
+		</association>
+		<association property="secondColumn" javaType="GoodsSecondColumn">
+			<id property="id" column="patent_second_column_id"/>
+			<result property="name" column="patent_second_column_name"/>
+		</association>
+	</association>
+</resultMap>
+
+<select id="exportTransactionPatents"  resultMap="TransactionGoodMap">
+
+select p.patent_id,pt.patent_type_id,pt.patent_type_desc,p.patent_name,p.app_person,spg.transferor,p.transaction_status,
+	   sfc.patent_first_column_id,sfc.patent_first_column_name,ssc.patent_second_column_id,ssc.patent_second_column_name,
+	   spg.transaction_type,spg.price,spg.status,spg.add_date,spg.transaction_date,spg.description 
+	from sell_patent_goods spg 
+	left join patents p on spg.patent_id = p.patent_id 
+	left join patent_types pt on p.patent_type = pt.patent_type_id 
+	left join sell_second_column ssc on spg.patent_second_column=ssc.patent_second_column_id 
+	left join sell_first_column sfc on ssc.patent_first_column_id=sfc.patent_first_column_id
+where spg.patent_id in
+		 		<foreach item="patentId" collection="patentIds"
+			     open="(" separator="," close=")">
+			   #{patentId}
+			</foreach>
+
+</select>	
+
+
+
+	
 </mapper>

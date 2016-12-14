@@ -354,4 +354,10 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		return patentMapper.searchUserTransactionByTransactionStatus(userId);
 	}
 
+	@Override
+	public List<Patent> exportTransactionPatents(List<Long> patentIds) {
+
+		return patentMapper.exportTransactionPatents(patentIds);
+	}
+
 }

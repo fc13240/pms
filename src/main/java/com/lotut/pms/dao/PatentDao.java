@@ -135,4 +135,6 @@ public interface PatentDao {
 	Map<String, Map<String, String>> getUserTransactionCountByPatentType(int userId);
 	
 	Map<String, Map<String, String>> searchUserTransactionByTransactionStatus(int userId);
+
+	List<Patent> exportTransactionPatents(List<Long> patentId);	
 }

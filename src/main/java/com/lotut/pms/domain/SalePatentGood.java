@@ -13,6 +13,30 @@ public class SalePatentGood {
 	private int recommendStatus;
 	private String transferor;
 	private String patentImageUrl;
+	private GoodsFirstColumn firstColumn;
+	private GoodsSecondColumn secondColumn;
+	private String description;
+	
+	
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public GoodsFirstColumn getFirstColumn() {
+		return firstColumn;
+	}
+	public void setFirstColumn(GoodsFirstColumn firstColumn) {
+		this.firstColumn = firstColumn;
+	}
+	public GoodsSecondColumn getSecondColumn() {
+		return secondColumn;
+	}
+	public void setSecondColumn(GoodsSecondColumn secondColumn) {
+		this.secondColumn = secondColumn;
+	}
 	public int getPatentId() {
 		return patentId;
 	}
@@ -74,6 +98,21 @@ public class SalePatentGood {
 		this.patentImageUrl = patentImageUrl;
 	}
 	
+	public String getTransactionStatus(int transactionType) {
+		if(transactionType==1){
+			return "转让";
+		}
+		return "许可";
+	}
 	
-
+	public String getStatusText(int status) {
+		if(status==1){
+			return "待交易";
+		}else if(status==2){
+			return "已预订";
+		}else{
+			return "交易成功";
+		}
+		
+	}
 }
