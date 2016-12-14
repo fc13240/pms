@@ -561,6 +561,10 @@
 		update sell_patent_goods  set price=#{price} where patent_id=#{patentId}
 	</update>
 	
+	<update id="changeStatus">
+		update sell_patent_goods  set status=#{status} where patent_id=#{patentId}
+	</update>
+	
 	<update id="changSecondColume">
 		update sell_patent_goods  set patent_second_column =#{SecondColumn} where patent_id=#{patentId}
 	</update>
@@ -714,4 +718,5 @@
  		FROM sell_patent_goods sg  
 		WHERE OWNER=#{userId} GROUP BY sg.status;
 	</select>
+	
 </mapper>

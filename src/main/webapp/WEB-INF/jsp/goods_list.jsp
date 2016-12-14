@@ -240,15 +240,40 @@
 								许可
 								</c:if>
 								<input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)">
+								<select style="display:inline;width:130px" onChange="changeStatus('<c:out value='${patent.patentId}'/>', this.value)" class="form-control first_column">
 								<c:if test="${patent.status==1}">
-								待交易
-								</c:if>
+								<option value="${patent.status}" selected="selected">
+									待交易
+								</option>
+								<option value="2"><font color="red">已预订</font> </option>
+								<option value="3"><font color="red">交易成功</font></option>
+								</c:if>	
+								
 								<c:if test="${patent.status==2}">
+								<option value="${patent.status}" selected="selected">
+									已预订
+								</option>
+								<option value="1">待交易</option>
+								<option value="3">交易成功</option>
+								</c:if>
+								
+								<c:if test="${patent.status==3}">
+								<option value="${patent.status}" selected="selected">
+									交易成功
+								</option>
+								<option value="1">待交易</option>
+								<option value="2">已预订</option>
+								</c:if>
+								</select>
+								
+								
+								
+								<%-- <c:if test="${patent.status==2}">
 								<font color="red">已预订</font>
 								</c:if>
 								<c:if test="${patent.status==3}">
 								<font color="red">交易成功</font>
-								</c:if>	
+								</c:if>	 --%>
 							</td>
 							
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.addDate}" pattern="yyyy-MM-dd"/></td>
@@ -611,6 +636,24 @@ function changePrice(patentId, price) {
 		}
 	});	
 }
+
+function changeStatus(patentId,status){
+	$.ajax({
+		url: "<s:url value='/patent/changeStatus.html'/>?status=" + status + "&patentId=" + patentId, 
+		type: 'get', 
+		success: function(data) {
+			//formutil.alertMessage('修改成功');	
+		},
+		error: function() {
+			formutil.alertMessage('修改失败');
+		}
+	});
+	
+	
+}
+
+
+
 
 function changSecondColume(patentId, SecondColumn) {
 	$.ajax({

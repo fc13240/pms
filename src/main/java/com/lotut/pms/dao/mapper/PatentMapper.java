@@ -106,6 +106,8 @@ public interface PatentMapper {
 	
 	void changePrice(@Param("price")int price,@Param("patentId")int patentId);
 	
+	void changeStatus(@Param("status")int status,@Param("patentId")int patentId);
+	
 	void changSecondColume(@Param("SecondColumn")int SecondColumn,@Param("patentId")int patentId);
 	
 	void batchChangePrice(@Param("price")int price,@Param("patentIds")List<Long> patentIds);

@@ -378,4 +378,9 @@ public class PatentServiceImpl implements PatentService {
 	public Map<String, Map<String, String>> searchUserTransactionByTransactionStatus(int userId) {
 		return patentDao.searchUserTransactionByTransactionStatus(userId);
 	}
+
+	@Override
+	public void changeStatus(int status, int patentId) {
+		patentDao.changeStatus(status, patentId);
+	}
 }

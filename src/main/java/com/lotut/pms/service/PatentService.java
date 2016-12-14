@@ -132,5 +132,7 @@ public interface PatentService {
 	public Map<String, Map<String, String>> getUserTransactionCountByPatentType(int userId);
 
 	public Map<String, Map<String, String>> searchUserTransactionByTransactionStatus(int userId);
+	
+	void changeStatus(int status,int patentId);
 }
 
