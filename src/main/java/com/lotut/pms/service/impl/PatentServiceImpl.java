@@ -27,6 +27,7 @@ import com.lotut.pms.service.PatentService;
 import com.lotut.pms.service.utils.PatentExcelGenerator;
 import com.lotut.pms.service.utils.PatentExcelParser;
 import com.lotut.pms.service.utils.PatentFeeExcelGenerator;
+import com.lotut.pms.service.utils.PatentTransactionExcelGenerator;
 
 public class PatentServiceImpl implements PatentService {
 	private PatentDao patentDao;
@@ -351,7 +352,7 @@ public class PatentServiceImpl implements PatentService {
 	public String patentTransactionExportExcel(List<Long> patentIds, String exportExcelName) throws IOException {
 		List<Patent> patents = patentDao.exportTransactionPatents(patentIds);
 		String exportExcelPath=Settings.TEMP_DIR+exportExcelName;
-		PatentExcelGenerator.writeTransactionPatentRecordsToExcel(patents, exportExcelPath);
+		PatentTransactionExcelGenerator.writePatentRecordsToExcel(patents, exportExcelPath);
 		return exportExcelPath;
 	}	
 

@@ -126,13 +126,13 @@ public class PatentTransactionExcelGenerator {
 		addDateCell.setCellValue(sdf.format(good.getAddDate()));										
 
 		HSSFCell transactionDateCell = row.createCell(12);
-		transactionDateCell.setCellValue(sdf.format(good.getTransactionDate()));										
+		transactionDateCell.setCellValue(good.getTransactionDate()==null?" ":sdf.format(good.getTransactionDate()));										
 
 		HSSFCell  descriptionTypeCell= row.createCell(13);
-		descriptionTypeCell.setCellValue(good.getDescription());
+		descriptionTypeCell.setCellValue(good.getDescription()==null? " ":good.getDescription());
 		
 		HSSFCell  transferorCell= row.createCell(14);
-		transferorCell.setCellValue(good.getTransferor());
+		transferorCell.setCellValue(good.getTransferor()==null? " " : good.getTransferor());
 				
 		
 	}
