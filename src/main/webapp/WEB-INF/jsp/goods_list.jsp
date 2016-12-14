@@ -258,11 +258,11 @@
 							</td>
 							<td >
 							&nbsp;
-							<c:if test="${patent.status==2}">
+							<%-- <c:if test="${patent.status==2}">
 							  <a href="javascript:return void;"  onclick="upTransactionPatent(${patent.patentId})">	 
 							  上架
 							  </a>
-							</c:if>
+							</c:if> --%>
 							  <%-- <c:if test="${patent.status==1}">
 							  <a href="javascript:return void;"  onclick="downTransactionPatent(${patent.patentId})">
 							  下架
