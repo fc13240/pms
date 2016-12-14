@@ -312,9 +312,9 @@
 	
 	<insert id="saveGoods" parameterType="GoodsDetail" >
 		insert into sell_patent_goods(patent_id, transaction_date, add_date, status, transaction_type, price, patent_second_column,owner,transferor,patent_image_url)
-		values(#{id}, null,curdate(), '1', #{transactionType}, #{price}, #{SecondColumn},#{userId},#{transferor},#{patentImageUrl});
-		
-		update  patents set transaction_status=2 where patent_id=#{id}			
+		values(#{id}, null,curdate(),1, #{transactionType}, #{price}, #{SecondColumn},#{userId},#{transferor},#{patentImageUrl});
+
+		update  patents set transaction_status=1 where patent_id=#{id}			
 	</insert>
 	
 	
@@ -475,7 +475,7 @@
 	<delete id="deleteTransactionPatent">
 		delete from sell_patent_goods where patent_id = #{patentId};
 		
-		update  patents set transaction_status=null where patent_id=#{patentId}
+		update  patents set transaction_status=1 where patent_id=#{patentId}
 	</delete>	
 	
 	
@@ -563,7 +563,8 @@
 	</update>
 	
 	<update id="changeStatus">
-		update sell_patent_goods  set status=#{status} where patent_id=#{patentId}
+		update sell_patent_goods  set status=#{status} where patent_id=#{patentId};
+		update patents  set transaction_status=#{status} where patent_id=#{patentId}
 	</update>
 	
 	<update id="changSecondColume">
