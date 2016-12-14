@@ -470,7 +470,7 @@
 			 		<![CDATA[ and up.add_date <= #{endAddDate} ]]>
 			 	</if>	
 			 	<if test="keyword != null">
-					and (up.app_no like #{keyword_pattern} or up.patent_name like #{keyword_pattern} )
+					and (up.app_no like #{keyword_pattern} or up.patent_name like #{keyword_pattern} or up.description like #{keyword_pattern})
 				</if>
 				<if test="firstColumnId != null">
 					<choose>
