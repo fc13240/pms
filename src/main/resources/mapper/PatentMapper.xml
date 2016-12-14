@@ -728,6 +728,7 @@
 	<id property="patentId" column="patent_id"/>
 	<result property="name" column="patent_name"/>
 	<result property="appPerson" column="app_person"/>
+	<result property="appNo" column="app_no"/>
 	<result property="transactionStatus" column="transaction_status"/>
 	<association property="patentType" resultMap="PatentTypeResultMap"/>
 	<association property="salePatentGood" javaType="SalePatentGood">
@@ -752,7 +753,7 @@
 
 <select id="exportTransactionPatents"  resultMap="TransactionGoodMap">
 
-select p.patent_id,pt.patent_type_id,pt.patent_type_desc,p.patent_name,p.app_person,spg.transferor,p.transaction_status,
+select p.patent_id,pt.patent_type_id,p.app_no,pt.patent_type_desc,p.patent_name,p.app_person,spg.transferor,p.transaction_status,
 	   sfc.patent_first_column_id,sfc.patent_first_column_name,ssc.patent_second_column_id,ssc.patent_second_column_name,
 	   spg.transaction_type,spg.price,spg.status,spg.add_date,spg.transaction_date,spg.description 
 	from sell_patent_goods spg 
