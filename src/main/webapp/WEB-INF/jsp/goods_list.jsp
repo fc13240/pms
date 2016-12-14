@@ -106,7 +106,10 @@
 											<a href="javascript:return void" onclick="batchChangeTransferor()" >
 												<button class="button button-primary  button-rounded" style="width:150px;margin-left:10px;">批量修改转让方</button>
 											</a>
-						  				</td>	  										  									  				
+						  				</td>	
+										<td>
+											<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportPatents()">表格导出</button>
+										</td>					  				  										  									  				
 						  			</tr>
 						  		</table>		
 							  </div>
@@ -295,6 +298,8 @@
 		</div>
 	</div>	
 </div>
+
+<iframe id="patentExcelFileFrame" style="display:none"></iframe>	
 
 <script type="text/javascript">
 	$(function(){
@@ -652,7 +657,18 @@ function changSecondColume(patentId, SecondColumn) {
 			});
 		});
 	}
-
+	function exportPatents(){
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		
+		if (!patentSelected) {
+			formutil.alertMessage('请选择要导出的专利');
+			return;
+		}
+		var patents = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+		var iframe = document.getElementById('patentExcelFileFrame');
+		iframe.src = "<s:url value='/patent/exportTransactionPatents.html'/>?patentIds=" + patents;
+		
+	}
 </script>
 
 <script type="text/javascript">
@@ -669,5 +685,6 @@ function changSecondColume(patentId, SecondColumn) {
 			}
 		})
 	}
+	
 </script>
 </body>

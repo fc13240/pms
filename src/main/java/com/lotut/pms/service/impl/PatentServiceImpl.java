@@ -346,6 +346,14 @@ public class PatentServiceImpl implements PatentService {
 		PatentExcelGenerator.writePatentRecordsToExcel(patents, exportExcelPath);
 		return exportExcelPath;
 	}
+	
+	@Override
+	public String patentTransactionExportExcel(List<Long> patentIds, String exportExcelName) throws IOException {
+		List<Patent> patents = patentDao.getUserPatentsByIds(patentIds);
+		String exportExcelPath=Settings.TEMP_DIR+exportExcelName;
+		PatentExcelGenerator.writeTransactionPatentRecordsToExcel(patents, exportExcelPath);
+		return exportExcelPath;
+	}	
 
 	@Override
 	public void cancelRecommendPatent(long patentId) {

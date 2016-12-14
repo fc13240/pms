@@ -32,6 +32,27 @@ public class PatentExcelGenerator {
 		workbook.write(resultExcelOutputStream);
 		workbook.close();
 	}	
+
+	public static void writeTransactionPatentRecordsToExcel(List<Patent> patentRecords, String resultExcelPath) throws IOException {
+		final String SHEET_NAME = "专利清单表";
+		FileOutputStream resultExcelOutputStream = new FileOutputStream(resultExcelPath);
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		
+		HSSFSheet sheet = workbook.createSheet(SHEET_NAME);
+
+		HSSFRow creatRowName = sheet.createRow(0);
+		
+		writePatentRowName(creatRowName);
+
+		for (int i = 0; i < patentRecords.size(); i++) {
+			Patent patentRecord = patentRecords.get(i);
+			HSSFRow row = sheet.createRow(i + 1);
+			writePatentRecordToRow(patentRecord, row, i+1);
+		}
+
+		workbook.write(resultExcelOutputStream);
+		workbook.close();
+	}
 	
 	private static void writePatentRowName( HSSFRow row) {
 		HSSFCell seqNoCellRowName = row.createCell(0);
