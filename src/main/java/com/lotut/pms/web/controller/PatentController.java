@@ -248,6 +248,30 @@ public class PatentController {
 			out.flush();
 		}
 	}
+
+	@RequestMapping(path="/exportTransactionPatents",method=RequestMethod.GET)
+	public void exportTransactionPatents(@RequestParam("patentIds") List<Long> patentIds,HttpServletResponse response) throws IOException{
+		response.setContentType("application/vnd.ms-excel");
+		response.setHeader("X-FRAME-OPTIONS", "SAMEORIGIN");
+
+		User user = PrincipalUtils.getCurrentPrincipal();
+		String exportExcelName = user.getUsername() + System.currentTimeMillis() + ".xls";
+		String exportExcelPath = patentService.patentTransactionExportExcel(patentIds, exportExcelName);
+		File excelFile = new File(exportExcelPath);
+		response.setContentLength((int)excelFile.length());
+		response.setHeader("Content-Disposition", "attachment;filename=" + exportExcelName);
+		
+		int BUFFER_SIZE = 8192;
+		byte[] buffer = new byte[BUFFER_SIZE];
+		try (OutputStream out = response.getOutputStream(); 
+				BufferedInputStream bis = new BufferedInputStream(new FileInputStream(excelFile))) {
+			int bytesRead = -1;
+			while ((bytesRead = bis.read(buffer)) != -1) {
+				out.write(buffer, 0, bytesRead);
+			}
+			out.flush();
+		}
+	}	
 	
 	@RequestMapping(path="/getUserTransactionPatents", method=RequestMethod.GET)
 	public String getUserTransactionPatents(Model model, Page page, HttpSession session) {
