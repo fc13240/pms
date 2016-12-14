@@ -116,6 +116,7 @@
 							  <td>专利类型</td>
 							  <td>交易状态</td>
 							  <td>交易方式</td>
+							  <td style="text-align: center;">所属分类</td>
 							  <td>添加日开始</td>
 							  <td></td>
 							  <td>添加日结束</td>
@@ -146,7 +147,18 @@
 								  <option value="2">许可</option>
 								</select>
 							  </td>
-					
+							  <td>
+								  <select style="width:100px;" class="selectPointOfInterest form-control" name="firstColumnId" onchange="getSecondColumn(this.value)">
+								  	<option value="">全部</option>
+								  	<c:forEach items="${FirstColumns }" var="firstColumn">
+								  		<option value="${firstColumn.id }">${firstColumn.name }</option>
+								  	</c:forEach>
+								  </select>
+								  <select style="width:100px;" class="selectPointOfInterest form-control" name="secondColumnId" id="secondColumnSelect">
+								  	<option value="">全部</option>
+								  </select>
+							  </td>
+							  
 							  <td>
 								
 								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAddDateId'})" id="startAddDateId" name="startAddDate" placeholder="添加日开始" value="" readonly="readonly" >							  
@@ -811,5 +823,26 @@ function changSecondColume(patentId, SecondColumn) {
 		})
 	}
 	
+	function getSecondColumn(secondColumnId){
+		var secondSelect = $("#secondColumnSelect");
+		if(secondColumnId==""||secondColumnId==null){
+			resetSelect(secondSelect);
+			secondSelect.append("<option value=''>全部</option>");
+		}else{
+			$.ajax({
+				type:"get",
+				url :"<s:url value='/patent/getGoodsSecoundColumn.html'/>?first_column="+secondColumnId,
+				dataType:"json",
+				success:function(data){
+					
+					resetSelect(secondSelect);
+					addOptions(secondSelect, data);
+				},
+				error:function(){
+					alert("发生未知错误，请稍后重试！");
+				}
+			})
+		}
+	}
 </script>
 </body>

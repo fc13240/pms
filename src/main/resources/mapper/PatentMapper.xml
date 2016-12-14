@@ -430,6 +430,17 @@
 			 	<if test="keyword != null">
 					and (up.app_no like #{keyword_pattern} or up.patent_name like #{keyword_pattern} or up.description like #{keyword_pattern})
 				</if>
+				
+			 	<if test="firstColumnId != null">
+					<choose>
+						<when test="secondColumnId != null">
+							and up.patent_first_column_id=#{firstColumnId} and up.patent_second_column=#{secondColumnId}
+						</when>
+						<otherwise>
+						and up.patent_first_column_id=#{firstColumnId}
+						</otherwise>
+					</choose>
+				</if>
 		order by status asc,add_date desc 
 		limit #{page.startIndex}, #{page.pageSize}
 	</select>
@@ -440,8 +451,8 @@
 		</if>	
 		SELECT count(*)
 		FROM
-		(SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,sg.owner,p.patent_name,p.app_no,pt.patent_type_id,pt.patent_type_desc
-		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id LEFT JOIN patent_types pt ON p.patent_type = pt.patent_type_id) up
+		(SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,sg.owner,sg.transaction_date,sg.transferor,p.patent_name,p.app_no,ss.patent_first_column_id,sg.patent_second_column,sg.description,pt.patent_type_id,pt.patent_type_desc
+		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id left JOIN sell_second_column  ss ON ss.patent_second_column_id=sg.patent_second_column LEFT JOIN patent_types pt ON p.patent_type = pt.patent_type_id) up
 		WHERE up.owner=#{userId}
 				<if test="patentType != null">
 		 			and up.patent_type_id = #{patentType}
@@ -460,6 +471,16 @@
 			 	</if>	
 			 	<if test="keyword != null">
 					and (up.app_no like #{keyword_pattern} or up.patent_name like #{keyword_pattern} )
+				</if>
+				<if test="firstColumnId != null">
+					<choose>
+						<when test="secondColumnId != null">
+							and up.patent_first_column_id=#{firstColumnId} and up.patent_second_column=#{secondColumnId}
+						</when>
+						<otherwise>
+						and up.patent_first_column_id=#{firstColumnId}
+						</otherwise>
+					</choose>
 				</if>
 	</select>		
 
@@ -728,6 +749,7 @@
 	<id property="patentId" column="patent_id"/>
 	<result property="name" column="patent_name"/>
 	<result property="appPerson" column="app_person"/>
+	<result property="appNo" column="app_no"/>
 	<result property="transactionStatus" column="transaction_status"/>
 	<association property="patentType" resultMap="PatentTypeResultMap"/>
 	<association property="salePatentGood" javaType="SalePatentGood">
@@ -752,7 +774,7 @@
 
 <select id="exportTransactionPatents"  resultMap="TransactionGoodMap">
 
-select p.patent_id,pt.patent_type_id,pt.patent_type_desc,p.patent_name,p.app_person,spg.transferor,p.transaction_status,
+select p.patent_id,pt.patent_type_id,p.app_no,pt.patent_type_desc,p.patent_name,p.app_person,spg.transferor,p.transaction_status,
 	   sfc.patent_first_column_id,sfc.patent_first_column_name,ssc.patent_second_column_id,ssc.patent_second_column_name,
 	   spg.transaction_type,spg.price,spg.status,spg.add_date,spg.transaction_date,spg.description 
 	from sell_patent_goods spg 
