@@ -148,7 +148,7 @@
 
 							  </td>
 							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称" class="t-input form-control"/>							  
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/说明" class="t-input form-control"/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
