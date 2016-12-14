@@ -407,10 +407,10 @@
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>	
 		SELECT up.patent_id,up.price,up.status,up.transaction_type,up.add_date,up.transaction_date,up.transferor,up.owner,up.patent_name,up.app_no,up.patent_first_column_id,
-			   up.patent_second_column,up.description,up.patent_type_id,up.patent_type_desc
+			   up.patent_second_column,up.description,up.patent_type_id,up.patent_type_desc,up.app_person
 		FROM
-		(SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,sg.owner,sg.transaction_date,sg.transferor,p.patent_name,p.app_no,ss.patent_first_column_id,sg.patent_second_column,sg.description,pt.patent_type_id,pt.patent_type_desc
-		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id left JOIN sell_second_column  ss ON ss.patent_second_column_id=sg.patent_second_column LEFT JOIN patent_types pt ON p.patent_type = pt.patent_type_id) up
+		(SELECT  sg.patent_id,sg.price,sg.status,p.app_person,sg.transaction_type,sg.add_date,sg.owner,sg.transaction_date,sg.transferor,p.patent_name,p.app_no,ss.patent_first_column_id,sg.patent_second_column,sg.description,pt.patent_type_id,pt.patent_type_desc
+		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id left JOIN sell_second_column  ss ON ss.patent_second_column_id=sg.patent_second_column LEFT JOIN patent_types pt ON p.patent_type = pt.patent_type_id ORDER BY sg.status ASC,sg.add_date DESC ) up
 		WHERE up.owner=#{userId}
 				<if test="patentType != null">
 		 			and up.patent_type_id = #{patentType}
@@ -441,7 +441,6 @@
 						</otherwise>
 					</choose>
 				</if>
-		order by up.status asc,up.add_date desc 
 		limit #{page.startIndex}, #{page.pageSize}
 	</select>
 	
