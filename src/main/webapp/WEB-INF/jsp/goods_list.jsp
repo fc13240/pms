@@ -601,7 +601,7 @@ $(function(){
 		  var first_column=$(this).val();
 		 // alert(first_column);
 		  var second_column=$(this).parent(".form-column").children(".second_column");
-		  resetSelect(second_column);
+		 	resetSelect(second_column);
 			if (first_column != "") {
 				$.ajax({
 					url: "<s:url value='/patent/getGoodsSecoundColumn.html'/>?first_column=" + first_column,
