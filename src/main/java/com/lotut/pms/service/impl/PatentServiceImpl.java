@@ -391,4 +391,9 @@ public class PatentServiceImpl implements PatentService {
 	public List<Patent> exportTransactionPatents(List<Long> patentIds) {
 		return patentDao.exportTransactionPatents(patentIds);
 	}
+	
+	@Override
+	public void changeStatus(int status, int patentId) {
+		patentDao.changeStatus(status, patentId);
+	}
 }

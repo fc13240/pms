@@ -412,6 +412,12 @@ public class PatentController {
 		writer.write(1);
 	}
 	
+	@RequestMapping(path="/changeStatus", method=RequestMethod.GET)
+	public void changeStatus(int status,int patentId,PrintWriter writer) throws IOException {
+		patentService.changeStatus(status, patentId);
+		writer.write(1);
+	}
+	
 	@RequestMapping(path="/changSecondColume", method=RequestMethod.GET)
 	public void changSecondColume(int SecondColumn,int patentId,PrintWriter writer) throws IOException {
 		patentService.changSecondColume(SecondColumn, patentId);

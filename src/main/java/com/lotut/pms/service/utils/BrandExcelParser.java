@@ -9,8 +9,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -29,15 +31,15 @@ import com.lotut.pms.service.exception.DateFormatException;
 
 public class BrandExcelParser {
 	
-	public static void main(String[] args) throws Exception {
-		InputStream in = new FileInputStream("C:\\Users\\xw\\Desktop\\智慧殿商标11.28日.xls");
-//		InputStream in = new FileInputStream("C:\\Users\\xw\\Desktop\\智慧殿初审合格商标.xlsx");
-		BrandAndBrandCategory brandRecords = parseBrandFile(in,2);
-		for (BrandCategory p: brandRecords.getBrandCategoryRecords()) {
-//			System.out.println(p.getCaseStatus());
-		}
-		System.out.println(brandRecords.getBrandCategoryRecords().size());
-	}
+//	public static void main(String[] args) throws Exception {
+//		InputStream in = new FileInputStream("C:\\Users\\xw\\Desktop\\智慧殿商标11.28日.xls");
+////		InputStream in = new FileInputStream("C:\\Users\\xw\\Desktop\\智慧殿初审合格商标.xlsx");
+//		BrandAndBrandCategory brandRecords = parseBrandFile(in,2);
+//		for (BrandCategory p: brandRecords.getBrandCategoryRecords()) {
+////			System.out.println(p.getCaseStatus());
+//		}
+//		System.out.println(brandRecords.getBrandCategoryRecords().size());
+//	}
 	
 	public static BrandAndBrandCategory parseBrandFile(InputStream fileInputStream,int userId) throws IOException, EncryptedDocumentException, InvalidFormatException {
 //		try (Workbook wb = new XSSFWorkbook(fileInputStream); ) {
@@ -251,8 +253,10 @@ public class BrandExcelParser {
 		return brandCategory;
 	}
 	
-//	public static void main(String[] args) {
-//		String categoryName="第13类-日化用品";
-//		System.out.println(getCategoryName(categoryName));
-//	}
+	public static void main(String[] args) {
+		Map<Integer,Integer> map=new HashMap<>();
+		map.put(1, 5);
+		map.put(2, 3);
+		System.out.println(map.get(2));
+	}
 }

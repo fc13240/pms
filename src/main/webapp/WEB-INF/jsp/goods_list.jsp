@@ -113,6 +113,7 @@
 
 						  <table class="search-table">
 							  <tr>
+							  <td>专利类型</td>
 							  <td>交易状态</td>
 							  <td>交易方式</td>
 							  <td>添加日开始</td>
@@ -121,10 +122,18 @@
 							  <td>关键字</td>
 							  </tr>
 							  <tr>
+							   <td>
+								<select  style="width:100px;" class="selectPointOfInterest form-control" name="patentType">
+								  <option value="">全部</option>
+								  <option value="1">发明</option>
+								  <option value="2">实用新型</option>
+								  <option value="3">外观设计</option>
+								</select>
+							  </td>
+							  
 							  <td>
 								<select  style="width:100px;" class="selectPointOfInterest form-control" name="status">
 								  <option value="" >全部</option>
-								 
 								<option value="1" >待交易</option>
 								<option value="2" >已预订</option>
 								<option value="3" >交易成功</option>
@@ -148,7 +157,7 @@
 
 							  </td>
 							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称" class="t-input form-control"/>							  
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/说明" class="t-input form-control"/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
@@ -196,8 +205,7 @@
 						  <th width="90">第一申请人/转让方</th>
 						  <th width="90">案件状态/所属领域</th>
 						  <th width="90">交易类型/价格/状态</th>
-						  <th width="90">添加日</th>
-						  <th width="90">交易日</th>
+						  <th width="90">添加日/交易日</th>
 						  <th width="90">说明</th>
 						  <th width="90">操作</th>
 						</tr>
@@ -242,20 +250,51 @@
 								<c:if test="${patent.transactionType==2}">
 								许可
 								</c:if>
-								<input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)">
+								<br/>
+								<span style="text-align:center">金额: ￥${patent.price}</span>
+								
+								<%-- <input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)"> --%>
+								
+								<select style="display:inline;width:130px" onChange="changeStatus('<c:out value='${patent.patentId}'/>', this.value)" class="form-control first_column">
 								<c:if test="${patent.status==1}">
-								待交易
-								</c:if>
+								<option value="${patent.status}" selected="selected">
+									待交易
+								</option>
+								<option value="2"><font color="red">已预订</font> </option>
+								<option value="3"><font color="red">交易成功</font></option>
+								</c:if>	
+								
 								<c:if test="${patent.status==2}">
+								<option value="${patent.status}" selected="selected">
+									已预订
+								</option>
+								<option value="1">待交易</option>
+								<option value="3">交易成功</option>
+								</c:if>
+								
+								<c:if test="${patent.status==3}">
+								<option value="${patent.status}" selected="selected">
+									交易成功
+								</option>
+								<option value="1">待交易</option>
+								<option value="2">已预订</option>
+								</c:if>
+								</select>
+								
+								
+								
+								<%-- <c:if test="${patent.status==2}">
 								<font color="red">已预订</font>
 								</c:if>
 								<c:if test="${patent.status==3}">
 								<font color="red">交易成功</font>
-								</c:if>	
+								</c:if>	 --%>
 							</td>
 							
-							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.addDate}" pattern="yyyy-MM-dd"/></td>
-							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.transactionDate}" pattern="yyyy-MM-dd"/></td>
+							<td class="hidden-480" style="text-align:center">
+								<fmt:formatDate value="${patent.addDate}" pattern="yyyy-MM-dd"/><br/>
+								<fmt:formatDate value="${patent.transactionDate}" pattern="yyyy-MM-dd"/>
+							</td>
 							<td width="90">
 								<input style="width:180px;" type="text" value="<c:out value='${patent.description}'/>" size="90" onChange="changedescription('<c:out value='${patent.patentId}'/>', this.value)"/>
 							</td>
@@ -277,6 +316,7 @@
 							  删除
 							  </a>
 							  &nbsp;
+							  <se:authorize access="hasAnyRole('ROLE_TRADER')">
 							  <c:if test="${patent.status==1}">
 								  <c:if test="${patent.recommendStatus==0}">
 								  <a href="javascript:return void;"  onclick="recommendPatent(${patent.patentId})">	 
@@ -288,7 +328,8 @@
 								       取消推荐
 								  </a> 
 				             	  </c:if>  
-			             	   </c:if>     	  
+			             	   </c:if>
+			             	    </se:authorize>    	  
 							  </td>
 						  </tr>
 						</c:forEach>
@@ -616,6 +657,24 @@ function changePrice(patentId, price) {
 		}
 	});	
 }
+
+function changeStatus(patentId,status){
+	$.ajax({
+		url: "<s:url value='/patent/changeStatus.html'/>?status=" + status + "&patentId=" + patentId, 
+		type: 'get', 
+		success: function(data) {
+			//formutil.alertMessage('修改成功');	
+		},
+		error: function() {
+			formutil.alertMessage('修改失败');
+		}
+	});
+	
+	
+}
+
+
+
 
 function changSecondColume(patentId, SecondColumn) {
 	$.ajax({

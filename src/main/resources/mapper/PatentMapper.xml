@@ -382,6 +382,7 @@
 		<result property="transferor" column="transferor"/>
 		<result property="description" column="description"/>
 		<association property="patent" resultMap="PatentWithShareUsers"/>
+		<association property="patentType" resultMap="PatentTypeResultMap"/>
 	</resultMap>
 
 	<select id="getUserTransactionPatents" parameterType="page" resultMap="TransactionPatent">
@@ -427,7 +428,7 @@
 			 		<![CDATA[ and up.add_date <= #{endAddDate} ]]>
 			 	</if>	
 			 	<if test="keyword != null">
-					and (up.app_no like #{keyword_pattern} or up.patent_name like #{keyword_pattern})
+					and (up.app_no like #{keyword_pattern} or up.patent_name like #{keyword_pattern} or up.description like #{keyword_pattern})
 				</if>
 		order by status asc,add_date desc 
 		limit #{page.startIndex}, #{page.pageSize}
@@ -562,6 +563,10 @@
 
 	<update id="changePrice">
 		update sell_patent_goods  set price=#{price} where patent_id=#{patentId}
+	</update>
+	
+	<update id="changeStatus">
+		update sell_patent_goods  set status=#{status} where patent_id=#{patentId}
 	</update>
 	
 	<update id="changSecondColume">
@@ -761,8 +766,5 @@ where spg.patent_id in
 			</foreach>
 
 </select>	
-
-
-
 	
 </mapper>

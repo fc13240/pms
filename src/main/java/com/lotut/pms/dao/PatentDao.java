@@ -95,6 +95,8 @@ public interface PatentDao {
 
 	void changePrice(int price,int patentId);
 	
+	void changeStatus(int status,int patentId);
+	
 	void changSecondColume(int SecondColumn,int patentId);
 	
 	void batchChangePrice(int price,List<Long> patentIds);

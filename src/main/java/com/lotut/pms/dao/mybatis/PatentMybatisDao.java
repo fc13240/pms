@@ -359,5 +359,9 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 
 		return patentMapper.exportTransactionPatents(patentIds);
 	}
+	
+	public void changeStatus(int status, int patentId) {
+		patentMapper.changeStatus(status, patentId);
+	}
 
 }
