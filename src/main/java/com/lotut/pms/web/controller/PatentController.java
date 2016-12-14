@@ -285,6 +285,10 @@ public class PatentController {
 		page.setTotalRecords(totalCount);
 		List<GoodsDetail> patents = patentService.getUserTransactionPatents(page);
 		List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
+		Map<String, Map<String, String>> patentTypeCount=patentService.getUserTransactionCountByPatentType(userId);
+		Map<String, Map<String, String>> transactionStatusCount=patentService.searchUserTransactionByTransactionStatus(userId);
+		model.addAttribute("patentTypeCount", patentTypeCount);
+		model.addAttribute("transactionStatusCount", transactionStatusCount);
 		model.addAttribute("FirstColumns", FirstColumns);
 		model.addAttribute("patents", patents);
 		model.addAttribute("page", page);
@@ -300,6 +304,10 @@ public class PatentController {
 		int totalCount=(int)patentService.searchTransactionPatentsCount(searchCondition);
 		page.setTotalRecords(totalCount);
 		List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
+		Map<String, Map<String, String>> patentTypeCount=patentService.getUserTransactionCountByPatentType(PrincipalUtils.getCurrentUserId());
+		Map<String, Map<String, String>> transactionStatusCount=patentService.searchUserTransactionByTransactionStatus(PrincipalUtils.getCurrentUserId());
+		model.addAttribute("patentTypeCount", patentTypeCount);
+		model.addAttribute("transactionStatusCount", transactionStatusCount);
 		model.addAttribute("FirstColumns", FirstColumns);
 		model.addAttribute("patents", resultPatents);
 		model.addAttribute("page", page);

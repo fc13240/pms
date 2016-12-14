@@ -196,9 +196,9 @@ public class BrandExcelParser {
 
 	
 	private static int getTransactionMode(String transactionMode){
-		if(transactionMode.contains("转让")){
+		if(transactionMode.contains("授权")){
 			return 2;
-		}else if(transactionMode.contains("授权")){
+		}else if(transactionMode.contains("转让")){
 			return 1;
 		}
 		return 0; 

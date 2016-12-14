@@ -18,6 +18,8 @@ public class TransactionPatentSearchCondition {
 	private String keyword;
 	private Page page;
 	private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	private Integer patentType;
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -61,6 +63,13 @@ public class TransactionPatentSearchCondition {
 		this.page = page;
 	}
 	
+	public Integer getPatentType() {
+		return patentType;
+	}
+	public void setPatentType(Integer patentType) {
+		this.patentType = patentType;
+	}
+	
 	@Override
 	public String toString() {
 		String startAddDateStr = startAddDate == null ? "" : formatter.format(startAddDate);
@@ -68,8 +77,9 @@ public class TransactionPatentSearchCondition {
 		String statusStr = status == null ? "" : status.toString();
 		String transactionTypeStr = transactionType == null ? "" : transactionType.toString();
 		String keywordStr = keyword == null ? "" : keyword;
+		String patentTypeStr = patentType == null ? "" : patentType.toString();
 		
 		return "status=" + statusStr + "&transactionType=" + transactionTypeStr + "&startAddDate="
-				+ startAddDateStr + "&endAddDate=" + endAddDateStr + "&keyword=" + keywordStr;
+				+ startAddDateStr + "&endAddDate=" + endAddDateStr + "&keyword=" + keywordStr+"&patentType="+patentTypeStr;
 	}
 }
