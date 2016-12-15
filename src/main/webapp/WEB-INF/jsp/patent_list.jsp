@@ -300,7 +300,7 @@
 								</c:if>
 								<c:if test="${empty patent.salePatentGood }">
 	 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
-					                  	<button class="t-btn2" value="1" data-toggle="tooltip" data-placement="bottom" title="加入r.lotut.com商城">加入交易</button> 
+					                  	<button class="t-btn2" value="1" data-toggle="tooltip" data-placement="bottom" title="加入r.lotut.com商城">发布交易</button> 
 				 	                  </a>
 								</c:if>
 								
