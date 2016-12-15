@@ -245,7 +245,7 @@
 						  <th width="130">专利名称</th>
 						  <th width="90">第一申请人 </th>
 						  <th width="90" class="hidden-480"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申请日/年费日</th>
-						  <th width="90">更新时间/案件状态</th>
+						  <th width="110">更新时间/案件状态</th>
 						  <th width="180">内部编码/共享人</th>
 						  <th width="130">交易类型/价格/状态</th>
 						  <th width="80">操作</th>
