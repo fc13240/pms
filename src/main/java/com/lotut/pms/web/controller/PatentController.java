@@ -538,4 +538,13 @@ public class PatentController {
 		out.write("success");
 	}
 	
+	@RequestMapping(path="/batchChangeDescription", method=RequestMethod.POST)
+	public void batchChangeDescription(@RequestParam("description")String description,@RequestParam("patentIds") List<Long> patentIds,PrintWriter writer){
+		if(description.equals("") || description==null){
+			
+		}else{
+			patentService.batchChangeDescription(description, patentIds);
+		}
+	}
+
 }

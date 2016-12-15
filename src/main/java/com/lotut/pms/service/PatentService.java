@@ -138,5 +138,7 @@ public interface PatentService {
 	List<Patent> exportTransactionPatents(List<Long> patentIds);
 	
 	void changeStatus(int status,int patentId);
+	
+	void batchChangeDescription(@Param("description")String description,@Param("patentIds")List<Long> patentIds);
 }
 

@@ -397,4 +397,9 @@ public class PatentServiceImpl implements PatentService {
 	public void changeStatus(int status, int patentId) {
 		patentDao.changeStatus(status, patentId);
 	}
+
+	@Override
+	public void batchChangeDescription(String description, List<Long> patentIds) {
+		patentDao.batchChangeDescription(description, patentIds);
+	}
 }

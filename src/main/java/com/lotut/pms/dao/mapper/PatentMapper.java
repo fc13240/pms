@@ -154,4 +154,6 @@ public interface PatentMapper {
 	
 	List<Patent> exportTransactionPatents(@Param("patentIds") List<Long> patentIds);	
 	
+	void batchChangeDescription(@Param("description")String description,@Param("patentIds")List<Long> patentIds);
+	
 }

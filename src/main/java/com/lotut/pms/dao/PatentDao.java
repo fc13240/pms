@@ -139,4 +139,6 @@ public interface PatentDao {
 	Map<String, Map<String, String>> searchUserTransactionByTransactionStatus(int userId);
 
 	List<Patent> exportTransactionPatents(List<Long> patentId);	
+	
+	void batchChangeDescription(@Param("description")String description,@Param("patentIds")List<Long> patentIds);
 }

@@ -193,6 +193,12 @@
 											<a href="javascript:return void" onclick="batchChangeTransferor()" >
 												<button class="button button-primary  button-rounded" style="width:150px;margin-left:10px;">批量修改转让方</button>
 											</a>
+											<a href="javascript:return void" onclick="batchChangeDescription()" >
+												<button class="button button-primary  button-rounded" style="width:150px;margin-left:10px;">批量修改说明</button>
+											</a>
+											<a href="javascript:return void" onclick="batchChangeField()" >
+												<button class="button button-primary  button-rounded" style="width:150px;margin-left:10px;">批量修改领域</button>
+											</a>
 						  				</td>	
 										<td>
 											<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportPatents()">表格导出</button>
@@ -806,6 +812,50 @@ function changSecondColume(patentId, SecondColumn) {
 		iframe.src = "<s:url value='/patent/exportTransactionPatents.html'/>?patentIds=" + patents;
 		
 	}
+	
+	
+	function batchChangeDescription() {
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		var uniquePatentNos = []
+		if (!patentSelected) {
+			formutil.alertMessage('请选择专利');
+			
+			return;
+		}
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+		for (var i = 0; i < patents_checked.length; i++) {
+			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+				uniquePatentNos.push(patents_checked[i]);
+				
+			}
+			
+		};
+		var description;
+		var patentIds = uniquePatentNos.join(",");
+		swal({   
+			title: "批量修改说明",   
+			type: "input",   
+			showCancelButton: true,   
+			closeOnConfirm: false,   
+			animation: "slide-from-top",   
+			inputPlaceholder: "请输入说明:"
+		}, function(inputValue) {
+			description = inputValue;
+			$.ajax({
+				url: "<s:url value='/patent/batchChangeDescription.html'/>",
+				type: "post",
+				data:{"description":description,"patentIds": patentIds}
+			}).done(function(data) {
+				swal("操作成功!", "已成功修改说明！", "success");
+				location.reload();
+			}).error(function(data) {
+				swal("操作失败!", "修改说明失败！", "error"); 
+			});
+		});
+	}
+	
+	
+	
 </script>
 
 <script type="text/javascript">
