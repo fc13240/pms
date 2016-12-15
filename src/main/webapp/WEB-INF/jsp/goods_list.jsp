@@ -251,13 +251,13 @@
 							<td style="text-align:center">
 								<c:out value="${patent.patent.patentStatusText}"/><br/>
 								<div class="form-column" style="width:320px;margin: auto" >
-									<select style="display:inline;width:150px" name="FirstColumn" id="firstColumn${status.index}"  class="form-control first_column" required>
+									<select style="display:inline;width:150px" name="FirstColumn" id="firstColumn${status.index}"  onchange="changSecondColume('<c:out value='${patent.patentId}'/>', ${status.index})" class="form-control first_column" required>
 								  	<c:forEach items="${FirstColumns}" var="FirstColumn">
 									<option value="${FirstColumn.id}" 
 										<c:if test="${FirstColumn.id==patent.firstColumn}">selected="selected"</c:if>>${FirstColumn.name}</option>
 								  	</c:forEach>
 									</select>
-									<select style="display:inline;width:150px" name="SecondColumn"  subColumn="${patent.secondColumn}"  id="secondColumn${status.index}" class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', this.value)" required>
+									<select style="display:inline;width:150px" name="SecondColumn"  subColumn="${patent.secondColumn}"  id="secondColumn${status.index}" class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', ${status.index})" required>
 									</select>
 						  		</div>
 							</td>
@@ -695,8 +695,9 @@ function changeStatus(patentId,status){
 
 
 function changSecondColume(patentId, SecondColumn) {
+	var num =$("#SecondColumn"+SecondColumn).val();
 	$.ajax({
-		url: "<s:url value='/patent/changSecondColume.html'/>?SecondColumn=" + SecondColumn + "&patentId=" + patentId, 
+		url: "<s:url value='/patent/changSecondColume.html'/>?SecondColumn=" + num + "&patentId=" + patentId, 
 		type: 'get', 
 		success: function(data) {
 			//formutil.alertMessage('修改成功');	
