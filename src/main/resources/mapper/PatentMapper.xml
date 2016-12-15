@@ -430,17 +430,6 @@
 			 	<if test="keyword != null">
 					and (up.app_no like #{keyword_pattern} or up.patent_name like #{keyword_pattern} or up.description like #{keyword_pattern})
 				</if>
-				
-			 	<if test="firstColumnId != null">
-					<choose>
-						<when test="secondColumnId != null">
-							and up.patent_first_column_id=#{firstColumnId} and up.patent_second_column=#{secondColumnId}
-						</when>
-						<otherwise>
-						and up.patent_first_column_id=#{firstColumnId}
-						</otherwise>
-					</choose>
-				</if>
 		order by status asc,add_date desc 
 		limit #{page.startIndex}, #{page.pageSize}
 	</select>
