@@ -89,7 +89,17 @@
 							
 							<li>
 								<a href="<s:url value='/patent/searchTransactionPatents.html?page.currentPage=1&status=3'/>">
-								交易成功 (<c:out value='${transactionStatusCount[(3).intValue()]["patentCount"]}' default="0"/>)
+								已付款待变更 (<c:out value='${transactionStatusCount[(3).intValue()]["patentCount"]}' default="0"/>)
+								</a>
+							</li>
+							<li>
+								<a href="<s:url value='/patent/searchTransactionPatents.html?page.currentPage=1&status=3'/>">
+								已变更待合格 (<c:out value='${transactionStatusCount[(4).intValue()]["patentCount"]}' default="0"/>)
+								</a>
+							</li>
+							<li>
+								<a href="<s:url value='/patent/searchTransactionPatents.html?page.currentPage=1&status=3'/>">
+								交易成功 (<c:out value='${transactionStatusCount[(5).intValue()]["patentCount"]}' default="0"/>)
 								</a>
 							</li>
 							
@@ -143,12 +153,13 @@
 								</select>
 							  </td>
 							  <td>
-								<select  style="width:100px;" class="selectPointOfInterest form-control" name="status">
+								<select  style="width:120px;" class="selectPointOfInterest form-control" name="status">
 								  <option value="" >全部</option>
-								  <option value="0">待发布</option>
 								<option value="1" >待交易</option>
 								<option value="2" >已预订</option>
-								<option value="3" >交易成功</option>
+								<option value="3" >已付款待变更</option>
+								<option value="4" >已变更待合格</option>
+								<option value="5" >交易成功</option>
 								</select>
 							  </td>
 							  <td>
@@ -274,12 +285,11 @@
 							</td>
 							<td style="text-align:center" >
 								<c:if test="${patent.transactionType==1}">
-								转让
+								转让价
 								</c:if>
 								<c:if test="${patent.transactionType==2}">
-								许可
+								许可价
 								</c:if>
-								&nbsp;&nbsp;
 								<span style="text-align:center">${patent.price}元</span>
 								
 								<%-- <input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)"> --%>

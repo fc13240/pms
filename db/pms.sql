@@ -1187,10 +1187,10 @@ INSERT INTO sell_first_column(patent_first_column_id,patent_first_column_name)VA
 UPDATE patents SET transaction_status=1 WHERE transaction_status IS NULL;
 UPDATE patents SET transaction_status=2 WHERE transaction_status='出售中';
 UPDATE patents SET transaction_status=3 WHERE transaction_status='已出售';
-ALTER TABLE patents MODIFY COLUMN transaction_status INT DEFAULT 0 COMMENT '0 待发布,1 待交易，2 已预订, 3 交易成功';
+ALTER TABLE patents MODIFY COLUMN transaction_status INT DEFAULT 0 COMMENT '0 待发布,1 待交易，2 已预订, 3 已付款待变更,4 已变更待合格、5 交易成功';
 
 ALTER TABLE sell_patent_goods ADD COLUMN description VARCHAR(300) COMMENT '说明描述';
-ALTER TABLE sell_patent_goods MODIFY COLUMN STATUS INT DEFAULT 0 COMMENT '0 待发布,1 待交易，2 已预订, 3 交易成功';
+ALTER TABLE sell_patent_goods MODIFY COLUMN STATUS INT DEFAULT 0 COMMENT '0 待发布,1 待交易，2 已预订, 3 已付款待变更,4 已变更待合格、5 交易成功';
 
 UPDATE patents SET transaction_status=0 WHERE transaction_status=1;
 UPDATE sell_patent_goods SET STATUS=0 WHERE STATUS=1;

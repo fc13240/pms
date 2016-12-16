@@ -388,11 +388,13 @@
 	<select id="getUserTransactionPatents" parameterType="page" resultMap="TransactionPatent">
 		SELECT  sg.patent_id,sg.price,sg.status,sg.transaction_type,sg.add_date,
 		sg.transaction_date,sg.transferor,p.patent_name,p.app_no,sg.recommend_status,ss.patent_first_column_id,
-		sg.patent_second_column,pt.patent_type_id,pt.patent_type_desc,p.app_person,p.patent_status_text,sg.description
+		sg.patent_second_column,pt.patent_type_id,pt.patent_type_desc,p.app_person,p.patent_status_text,sg.description, u.user_id, u.username,
 		FROM  sell_patent_goods sg LEFT JOIN patents p ON sg.patent_id = p.patent_id
 		LEFT JOIN patent_status ps ON p.patent_status = ps.patent_status_id 
 		LEFT JOIN patent_types pt ON p.patent_type = pt.patent_type_id 
 		LEFT JOIN sell_second_column  ss ON ss.patent_second_column_id=sg.patent_second_column
+		LEFT join user_patents up on up.patent = p.patent_id
+		LEFT join users u on u.user_id = up.user 
 		WHERE  OWNER=#{userId} ORDER BY sg.status ASC,sg.add_date DESC limit #{startIndex}, #{pageSize}
 	</select>
 
@@ -592,7 +594,11 @@
 	
 	<update id="changeStatus">
 		update sell_patent_goods  set status=#{status} where patent_id=#{patentId};
-		update patents  set transaction_status=#{status} where patent_id=#{patentId}
+		update patents  set transaction_status=#{status} where patent_id=#{patentId};
+		<if test="status == 3">
+			update sell_patent_goods set transaction_date=now(),recommend_status=0
+		 	where patent_id = #{patentId};
+		</if>
 	</update>
 	
 	<update id="changSecondColume">

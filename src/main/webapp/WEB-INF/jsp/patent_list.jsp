@@ -169,11 +169,13 @@
 							  </td>
 							  <td>
 								<select  style="width:100px;" class="selectPointOfInterest form-control" name="transactionStatus">
-								  <option value="">全部</option>
-								  <option value="0">待发布</option>
-								  <option value="1">待交易</option>
-								  <option value="2">已预订</option>
-								  <option value="3">交易成功</option>
+								    <option value="" >全部</option>
+								    <option value="0">待发布</option>
+									<option value="1" >待交易</option>
+									<option value="2" >已预订</option>
+									<option value="3" >已付款待变更</option>
+									<option value="4" >已变更待合格</option>
+									<option value="5" >交易成功</option>
 								</select>
 							  </td>
 							  <td>
@@ -286,9 +288,9 @@
 							</td>
 							<td style="text-align:center" width="120px">
 								<c:if test="${not empty patent.salePatentGood }">
-									<c:if test="${patent.salePatentGood.transactionType==1 }">转让</c:if>
-									<c:if test="${patent.salePatentGood.transactionType==2 }">许可</c:if>
-									&nbsp;&nbsp;${patent.salePatentGood.price }元<br/>
+									<c:if test="${patent.salePatentGood.transactionType==1 }">转让价</c:if>
+									<c:if test="${patent.salePatentGood.transactionType==2 }">许可价</c:if>
+									${patent.salePatentGood.price }元<br/>
 									<c:if test="${patent.transactionStatus==1}">
 										待交易
 				 	                </c:if>
