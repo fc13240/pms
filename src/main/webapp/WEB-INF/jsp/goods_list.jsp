@@ -279,8 +279,8 @@
 								<c:if test="${patent.transactionType==2}">
 								许可
 								</c:if>
-								<br/>
-								<span style="text-align:center">金额: ￥${patent.price}</span>
+								&nbsp;&nbsp;
+								<span style="text-align:center">${patent.price}元</span>
 								
 								<%-- <input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)"> --%>
 								
