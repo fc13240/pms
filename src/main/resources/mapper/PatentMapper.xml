@@ -416,7 +416,7 @@
 		 			and up.patent_type_id = #{patentType}
 		 		</if>
 		 		<if test="patentStatus != null">
-			 		and up.patent_status = #{patentStatus}
+			 		and up.patent_status_id = #{patentStatus}
 			 	</if>
 		 		<if test="status != null">
 		 			and up.status = #{status}
@@ -459,7 +459,7 @@
 		 			and up.patent_type_id = #{patentType}
 		 		</if>
 		 		<if test="patentStatus != null">
-			 		and up.patent_status = #{patentStatus}
+			 		and up.patent_status_id = #{patentStatus}
 			 	</if>	
 		 		<if test="status != null">
 		 			and up.status = #{status}
