@@ -392,7 +392,6 @@
 							  </a>
 							  &nbsp;
 							  <se:authorize access="hasAnyRole('ROLE_TRADER')">
-							  <c:if test="${patent.status==1}">
 								  <c:if test="${patent.recommendStatus==0}">
 								  <a href="javascript:return void;"  onclick="recommendPatent(${patent.patentId})">	 
 								        推荐
@@ -403,7 +402,6 @@
 								       取消推荐
 								  </a> 
 				             	  </c:if>  
-			             	   </c:if>
 			             	    </se:authorize>    	  
 							  </td>
 						  </tr>
