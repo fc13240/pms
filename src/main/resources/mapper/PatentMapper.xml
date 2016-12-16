@@ -420,22 +420,22 @@
 			LEFT JOIN sell_second_column  ss ON ss.patent_second_column_id=sg.patent_second_column 
 			WHERE  OWNER=#{userId}
 				<if test="patentType != null">
-		 			and up.patent_type_id = #{patentType}
+		 			and pt.patent_type_id = #{patentType}
 		 		</if>
 		 		<if test="patentStatus != null">
-			 		and up.patent_status_id = #{patentStatus}
+			 		and ps.patent_status_id = #{patentStatus}
 			 	</if>
 		 		<if test="status != null">
-		 			and up.status = #{status}
+		 			and sg.status = #{status}
 		 		</if>	
 			 	<if test="transactionType != null">
-			 		and up.transaction_type = #{transactionType}
+			 		and sg.transaction_type = #{transactionType}
 			 	</if>	
 			 	<if test="startAddDate != null">
-			 		and up.add_date >= #{startAddDate}
+			 		and sg.add_date >= #{startAddDate}
 			 	</if>	
 			 	<if test="endAddDate != null">
-			 		<![CDATA[ and up.add_date <= #{endAddDate} ]]>
+			 		<![CDATA[ and sg.add_date <= #{endAddDate} ]]>
 			 	</if>	
 			 	<if test="keyword != null">
 					and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or sg.description like #{keyword_pattern})
@@ -443,10 +443,10 @@
 			 	<if test="firstColumnId != null">
 					<choose>
 						<when test="secondColumnId != null">
-							and up.patent_first_column_id=#{firstColumnId} and up.patent_second_column=#{secondColumnId}
+							and ss.patent_first_column_id=#{firstColumnId} and sg.patent_second_column=#{secondColumnId}
 						</when>
 						<otherwise>
-						and up.patent_first_column_id=#{firstColumnId}
+						and ss.patent_first_column_id=#{firstColumnId}
 						</otherwise>
 					</choose>
 				</if>
