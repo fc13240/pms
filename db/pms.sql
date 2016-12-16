@@ -1160,7 +1160,7 @@ CREATE TABLE wechat_orders (
 	PRIMARY KEY (id)
 );
 
-insert ignore into brand_category (category_id,category_name)values
+insert into brand_category (category_id,category_name)values
 (15,'音乐器材'),(22,'绳网袋篷'),(23,'纺织纱线'),
 (26,'花边配饰'),(36,'金融物管'),(34,'烟草烟具'),(37,'建筑修理'),(45,'社会服务');
 
@@ -1187,7 +1187,10 @@ INSERT INTO sell_first_column(patent_first_column_id,patent_first_column_name)VA
 UPDATE patents SET transaction_status=1 WHERE transaction_status IS NULL;
 UPDATE patents SET transaction_status=2 WHERE transaction_status='出售中';
 UPDATE patents SET transaction_status=3 WHERE transaction_status='已出售';
-ALTER TABLE patents MODIFY COLUMN transaction_status INT DEFAULT 1 COMMENT '1 待交易，2 已预订, 3 交易成功';
+ALTER TABLE patents MODIFY COLUMN transaction_status INT DEFAULT 0 COMMENT '0 待发布,1 待交易，2 已预订, 3 交易成功';
 
 ALTER TABLE sell_patent_goods ADD COLUMN description VARCHAR(300) COMMENT '说明描述';
-ALTER TABLE sell_patent_goods MODIFY COLUMN STATUS INT DEFAULT 1 COMMENT '1 待交易，2 已预订, 3 交易成功';
+ALTER TABLE sell_patent_goods MODIFY COLUMN STATUS INT DEFAULT 0 COMMENT '0 待发布,1 待交易，2 已预订, 3 交易成功';
+
+UPDATE patents SET transaction_status=0 WHERE transaction_status=1;
+UPDATE sell_patent_goods SET STATUS=0 WHERE STATUS=1;

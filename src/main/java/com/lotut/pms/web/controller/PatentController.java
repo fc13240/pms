@@ -292,6 +292,7 @@ public class PatentController {
 		model.addAttribute("FirstColumns", FirstColumns);
 		model.addAttribute("patents", patents);
 		model.addAttribute("page", page);
+		addPatentTypeAndStatusDataToModel(model);
 		return "goods_list";
 	}
 	
@@ -311,6 +312,7 @@ public class PatentController {
 		model.addAttribute("FirstColumns", FirstColumns);
 		model.addAttribute("patents", resultPatents);
 		model.addAttribute("page", page);
+		addPatentTypeAndStatusDataToModel(model);
 		return "goods_list";
 	}
 

@@ -19,11 +19,18 @@ public class TransactionPatentSearchCondition {
 	private Page page;
 	private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	private Integer patentType;
+	private Integer patentStatus;
 	private Integer firstColumnId;
 	private Integer secondColumnId;
 	
 	
 	
+	public Integer getPatentStatus() {
+		return patentStatus;
+	}
+	public void setPatentStatus(Integer patentStatus) {
+		this.patentStatus = patentStatus;
+	}
 	public Integer getFirstColumnId() {
 		return firstColumnId;
 	}
@@ -94,11 +101,12 @@ public class TransactionPatentSearchCondition {
 		String transactionTypeStr = transactionType == null ? "" : transactionType.toString();
 		String keywordStr = keyword == null ? "" : keyword;
 		String patentTypeStr = patentType == null ? "" : patentType.toString();
+		String patentStatusStr = patentStatus == null ? "" : patentStatus.toString();
 		String firstColumnIdStr = firstColumnId == null ? "" : firstColumnId.toString();
 		String secondColumnIdStr = secondColumnId == null ? "" : secondColumnId.toString();
 		
 		return "status=" + statusStr + "&transactionType=" + transactionTypeStr + "&startAddDate="
-				+ startAddDateStr + "&endAddDate=" + endAddDateStr + "&keyword=" + keywordStr+"&patentType="+patentTypeStr
+				+ startAddDateStr + "&endAddDate=" + endAddDateStr + "&keyword=" + keywordStr+"&patentType="+patentTypeStr+"&patentStatus=" + patentStatusStr
 				+"&firstColumnId="+firstColumnIdStr+"&secondColumnId="+secondColumnIdStr;
 	}
 }

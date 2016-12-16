@@ -114,6 +114,7 @@
 						  <table class="search-table">
 							  <tr>
 							  <td>专利类型</td>
+							  <td>专利状态</td>
 							  <td>交易状态</td>
 							  <td>交易方式</td>
 							  <td style="text-align: center;">所属分类</td>
@@ -131,10 +132,20 @@
 								  <option value="3">外观设计</option>
 								</select>
 							  </td>
-							  
+							  <td>
+								<select style="width:121px;" class="form-control" name="patentStatus">
+								  <option value="">全部</option>
+								  <c:forEach items="${allPatentStatus}" var="patentStatus">
+									<option value="<c:out value='${patentStatus.patentStatusId}'/>">
+									<c:out value="${patentStatus.statusDescription}"/>
+									</option>
+								  </c:forEach>
+								</select>
+							  </td>
 							  <td>
 								<select  style="width:100px;" class="selectPointOfInterest form-control" name="status">
 								  <option value="" >全部</option>
+								  <option value="0">待发布</option>
 								<option value="1" >待交易</option>
 								<option value="2" >已预订</option>
 								<option value="3" >交易成功</option>
@@ -251,13 +262,13 @@
 							<td style="text-align:center">
 								<c:out value="${patent.patent.patentStatusText}"/><br/>
 								<div class="form-column" style="width:320px;margin: auto" >
-									<select style="display:inline;width:150px" name="FirstColumn" id="firstColumn${status.index}"  class="form-control first_column" required>
+									<select style="display:inline;width:150px" name="FirstColumn" id="firstColumn${status.count}"    onBlur="changSecondColume('<c:out value='${patent.patentId}'/>', '${status.count}')" class="form-control first_column" required>
 								  	<c:forEach items="${FirstColumns}" var="FirstColumn">
 									<option value="${FirstColumn.id}" 
 										<c:if test="${FirstColumn.id==patent.firstColumn}">selected="selected"</c:if>>${FirstColumn.name}</option>
 								  	</c:forEach>
 									</select>
-									<select style="display:inline;width:150px" name="SecondColumn"  subColumn="${patent.secondColumn}"  id="secondColumn${status.index}" class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', this.value)" required>
+									<select style="display:inline;width:150px" name="SecondColumn"  indexColumn="${status.count}"  patentColumn="${patent.patentId}" subColumn="${patent.secondColumn}"  id="secondColumn${status.count}" class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', '${status.count}')" required>
 									</select>
 						  		</div>
 							</td>
@@ -268,8 +279,8 @@
 								<c:if test="${patent.transactionType==2}">
 								许可
 								</c:if>
-								<br/>
-								<span style="text-align:center">金额: ￥${patent.price}</span>
+								&nbsp;&nbsp;
+								<span style="text-align:center">${patent.price}元</span>
 								
 								<%-- <input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)"> --%>
 								
@@ -676,7 +687,22 @@ tabs.set("nav","menu_con");//执行
 
 </script>
 <script type="text/javascript">
-$(function(){
+
+function changSecondColume(patentId, SecondColumn) {
+	var SecondColumn=$("#secondColumn"+SecondColumn).val();
+	$.ajax({
+		url: "<s:url value='/patent/changSecondColume.html'/>?SecondColumn=" + SecondColumn + "&patentId=" + patentId, 
+		type: 'get', 
+		success: function(data) {
+			//formutil.alertMessage('修改成功');	
+		},
+		error: function() {
+			formutil.alertMessage('修改失败');
+		}
+	});	
+}
+
+ $(function(){
 	   $(".first_column").change(function () {
 		  var first_column=$(this).val();
 		 // alert(first_column);
@@ -689,6 +715,7 @@ $(function(){
 					dataType: 'json',
 					success: function(SecondColumns){
 						addOptions(second_column, SecondColumns);
+						
 					}
 				})
 			}
@@ -698,11 +725,23 @@ $(function(){
 	   setTimeout(function(){
 		   $(".second_column").each(function(){
 			   $(this).val($(this).attr("subColumn"));
+			   
 		   })
 		}, 200);
-});
-	
-	
+}); 
+
+/* function changSecondColume(patentId, SecondColumn) {
+	$.ajax({
+		url: "<s:url value='/patent/changSecondColume.html'/>?SecondColumn=" + SecondColumn + "&patentId=" + patentId, 
+		type: 'get', 
+		success: function(data) {
+			//formutil.alertMessage('修改成功');	
+		},
+		error: function() {
+			formutil.alertMessage('修改失败');
+		}
+	});	
+} */
 
 function addDefaultOption(selectElem) {
 	selectElem.append("<option value=''>请选择</option>");
@@ -749,22 +788,6 @@ function changeStatus(patentId,status){
 	});
 	
 	
-}
-
-
-
-
-function changSecondColume(patentId, SecondColumn) {
-	$.ajax({
-		url: "<s:url value='/patent/changSecondColume.html'/>?SecondColumn=" + SecondColumn + "&patentId=" + patentId, 
-		type: 'get', 
-		success: function(data) {
-			//formutil.alertMessage('修改成功');	
-		},
-		error: function() {
-			formutil.alertMessage('修改失败');
-		}
-	});	
 }
 
 	function batchChangePrice() {
