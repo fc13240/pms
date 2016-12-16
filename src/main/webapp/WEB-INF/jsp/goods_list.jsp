@@ -393,7 +393,7 @@
 							  <a href="<s:url value='/patent/showGoodFriends.html'/>?patents=${patent.patentId}">
 							  	分享
 							  </a>
-							  &nbsp;
+							  <br/>
 							  <se:authorize access="hasAnyRole('ROLE_TRADER')">
 								  <c:if test="${patent.recommendStatus==0}">
 								  <a href="javascript:return void;"  onclick="recommendPatent(${patent.patentId})">	 
