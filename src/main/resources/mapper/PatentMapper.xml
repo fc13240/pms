@@ -497,7 +497,7 @@
 	<delete id="deleteTransactionPatent">
 		delete from sell_patent_goods where patent_id = #{patentId};
 		
-		update  patents set transaction_status=1 where patent_id=#{patentId}
+		update  patents set transaction_status=0 where patent_id=#{patentId}
 	</delete>	
 	
 	
