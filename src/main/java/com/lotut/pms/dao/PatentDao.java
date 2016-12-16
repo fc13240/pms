@@ -132,7 +132,7 @@ public interface PatentDao {
 	
 	void batchChangeTransferor(String transferor,List<Long> patentIds);
 	
-	void saveSellPatentDescription(@Param("description") String description,@Param("patentId") int patentId);
+	void saveSellPatentDescription(String description,int patentId);
 
 	Map<String, Map<String, String>> getUserTransactionCountByPatentType(int userId);
 	
@@ -140,5 +140,7 @@ public interface PatentDao {
 
 	List<Patent> exportTransactionPatents(List<Long> patentId);	
 	
-	void batchChangeDescription(@Param("description")String description,@Param("patentIds")List<Long> patentIds);
+	void batchChangeDescription(String description,List<Long> patentIds);
+	
+	void batchUpdatePatentField(int description,List<Long> patentIds);
 }

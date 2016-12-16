@@ -402,4 +402,9 @@ public class PatentServiceImpl implements PatentService {
 	public void batchChangeDescription(String description, List<Long> patentIds) {
 		patentDao.batchChangeDescription(description, patentIds);
 	}
+	
+	@Override
+	public void batchUpdatePatentField(int field, List<Long> patentIds) {
+		patentDao.batchUpdatePatentField(field, patentIds);
+	}
 }

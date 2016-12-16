@@ -273,13 +273,13 @@
 							<td style="text-align:center">
 								<c:out value="${patent.patent.patentStatusText}"/><br/>
 								<div class="form-column" style="width:320px;margin: auto" >
-									<select style="display:inline;width:150px" name="FirstColumn" id="firstColumn${status.index}"  class="form-control first_column" required>
+									<select style="display:inline;width:150px" name="FirstColumn" id="firstColumn${status.count}"    onBlur="changSecondColume('<c:out value='${patent.patentId}'/>', '${status.count}')" class="form-control first_column" required>
 								  	<c:forEach items="${FirstColumns}" var="FirstColumn">
 									<option value="${FirstColumn.id}" 
 										<c:if test="${FirstColumn.id==patent.firstColumn}">selected="selected"</c:if>>${FirstColumn.name}</option>
 								  	</c:forEach>
 									</select>
-									<select style="display:inline;width:150px" name="SecondColumn"  subColumn="${patent.secondColumn}"  id="secondColumn${status.index}" class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', this.value)" required>
+									<select style="display:inline;width:150px" name="SecondColumn"  indexColumn="${status.count}"  patentColumn="${patent.patentId}" subColumn="${patent.secondColumn}"  id="secondColumn${status.count}" class="form-control second_column" onchange="changSecondColume('<c:out value='${patent.patentId}'/>', '${status.count}')" required>
 									</select>
 						  		</div>
 							</td>
@@ -445,9 +445,69 @@
 	</div>	
 </div>
 
+
+<button type="button" style="display: none;" data-toggle = "modal" data-target = "#myModal" id="hiddenBtn">打开</button>
+<div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true" >
+   
+   <div class = "modal-dialog" style="width:500px;">
+      <div class = "modal-content">
+         
+         <div class = "modal-header" style="display: none;">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true" id="modalColseBtn">
+               ×
+            </button>
+         </div>
+	         <div class = "modal-body" >
+		         <div id="modalBody">
+		         	<table class="search-table" width="100%">
+					  <tr>
+						  <td style="text-align: center;" >第一分类</td>
+						  <td style="text-align: center;" >第二分类</td>
+					  </tr>
+					  <tr>
+						  <td  align="center">
+							  <select style="width:160px;" class="selectPointOfInterest form-control" name="firstColumnId" onchange="getModalSecondColumn(this.value)" id="modalFirstColumnSelect">
+							  	<option value="">全部</option>
+							  	<%-- <c:forEach items="${FirstColumns }" var="firstColumn">
+							  		<option value="${firstColumn.id }">${firstColumn.name }</option>
+							  	</c:forEach> --%>
+							  </select>
+							</td>
+							<td  align="center">
+							 <select style="width:160px;" class="selectPointOfInterest form-control" name="secondColumnId" id="modalSecondColumnSelect">
+							  	<option value="">全部</option>
+							  </select>
+						  </td>
+					  </tr>							  
+				  </table>
+				 </div>
+				 <div style="margin-top: 60px;">
+				  <table class="search-table" width="100%">
+					  <tr>
+						  <td style="text-align: right;padding-right: 40px;" >
+						  	<button type = "button" class = "btn btn-default" data-dismiss = "modal" style="width:60px;height:40px;">
+						  	  	取消
+			            	</button>
+						  </td>
+						  <td style="text-align: left;padding-left: 40px;">
+						  	<button type = "button" class = "btn btn-info" style="width:60px;height:40px;" onclick="submitChangeField()">
+				               	确认
+				            </button>
+						  </td>
+					  </tr>
+			       </table>
+		         </div>
+	         
+	         </div>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+   
+</div>
 <iframe id="patentExcelFileFrame" style="display:none"></iframe>	
 
 <script type="text/javascript">
+var patentIdsOfChangeField = null;
 	$(function(){
 		formutil.clickAllCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
 		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
@@ -637,7 +697,22 @@ tabs.set("nav","menu_con");//执行
 
 </script>
 <script type="text/javascript">
-$(function(){
+
+function changSecondColume(patentId, SecondColumn) {
+	var SecondColumn=$("#secondColumn"+SecondColumn).val();
+	$.ajax({
+		url: "<s:url value='/patent/changSecondColume.html'/>?SecondColumn=" + SecondColumn + "&patentId=" + patentId, 
+		type: 'get', 
+		success: function(data) {
+			//formutil.alertMessage('修改成功');	
+		},
+		error: function() {
+			formutil.alertMessage('修改失败');
+		}
+	});	
+}
+
+ $(function(){
 	   $(".first_column").change(function () {
 		  var first_column=$(this).val();
 		 // alert(first_column);
@@ -650,6 +725,7 @@ $(function(){
 					dataType: 'json',
 					success: function(SecondColumns){
 						addOptions(second_column, SecondColumns);
+						
 					}
 				})
 			}
@@ -659,11 +735,23 @@ $(function(){
 	   setTimeout(function(){
 		   $(".second_column").each(function(){
 			   $(this).val($(this).attr("subColumn"));
+			   
 		   })
 		}, 200);
-});
-	
-	
+}); 
+
+/* function changSecondColume(patentId, SecondColumn) {
+	$.ajax({
+		url: "<s:url value='/patent/changSecondColume.html'/>?SecondColumn=" + SecondColumn + "&patentId=" + patentId, 
+		type: 'get', 
+		success: function(data) {
+			//formutil.alertMessage('修改成功');	
+		},
+		error: function() {
+			formutil.alertMessage('修改失败');
+		}
+	});	
+} */
 
 function addDefaultOption(selectElem) {
 	selectElem.append("<option value=''>请选择</option>");
@@ -710,22 +798,6 @@ function changeStatus(patentId,status){
 	});
 	
 	
-}
-
-
-
-
-function changSecondColume(patentId, SecondColumn) {
-	$.ajax({
-		url: "<s:url value='/patent/changSecondColume.html'/>?SecondColumn=" + SecondColumn + "&patentId=" + patentId, 
-		type: 'get', 
-		success: function(data) {
-			//formutil.alertMessage('修改成功');	
-		},
-		error: function() {
-			formutil.alertMessage('修改失败');
-		}
-	});	
 }
 
 	function batchChangePrice() {
@@ -876,6 +948,42 @@ function changSecondColume(patentId, SecondColumn) {
 	}
 	
 	
+	function batchChangeField() {
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		var uniquePatentNos = []
+		if (!patentSelected) {
+			formutil.alertMessage('请选择专利');
+			
+			return;
+		}
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+		for (var i = 0; i < patents_checked.length; i++) {
+			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+				uniquePatentNos.push(patents_checked[i]);
+				
+			}
+			
+		};
+		patentIdsOfChangeField = uniquePatentNos.join(",");
+		
+		 $.ajax({
+			 type:"post",
+			 url:"<s:url value='/patent/getFirstColumns.html'/>",
+			 async:false,
+			 dataType:"json",
+			 success: function (data){
+				var firstSelect = $("#modalFirstColumnSelect");
+				resetSelect(firstSelect);
+				firstSelect.append("<option value=''>全部</option>");
+				addOptions(firstSelect, data);
+			 }
+			 
+		 })
+		$("#hiddenBtn").trigger("click");
+
+	}
+	
+	
 	
 </script>
 
@@ -911,6 +1019,53 @@ function changSecondColume(patentId, SecondColumn) {
 				},
 				error:function(){
 					alert("发生未知错误，请稍后重试！");
+				}
+			})
+		}
+	}
+	
+	function getModalSecondColumn(secondColumnId){
+		var secondSelect = $("#modalSecondColumnSelect");
+		if(secondColumnId==""||secondColumnId==null){
+			resetSelect(secondSelect);
+			secondSelect.append("<option value=''>全部</option>");
+		}else{
+			$.ajax({
+				type:"get",
+				url :"<s:url value='/patent/getGoodsSecoundColumn.html'/>?first_column="+secondColumnId,
+				dataType:"json",
+				success:function(data){
+					
+					resetSelect(secondSelect);
+					addOptions(secondSelect, data);
+				},
+				error:function(){
+					alert("发生未知错误，请稍后重试！");
+				}
+			})
+		}
+	}
+	
+	
+	function submitChangeField(){
+		var selectedValue = $("#modalSecondColumnSelect option:selected").val();
+		if(patentIdsOfChangeField==""||patentIdsOfChangeField==null){
+			alert("请返回重新选择!");
+		}else{
+			
+			if(selectedValue==""||selectedValue==null){
+				alert("请选择所需修改的领域!");
+				return;
+			}
+			$.ajax({
+				type:"post",
+				url:"<s:url value='/patent/batchUpdateField.html'/>",
+				data:{"patentIds":patentIdsOfChangeField,"fieldId":selectedValue},
+				async:false,
+				success:function (data){
+					 $("#modalColseBtn").trigger("click");
+					swal("修改成功啦!", "我的大刀早已饥渴难耐!谁能受我三刀", "success");
+					window.location.reload();
 				}
 			})
 		}

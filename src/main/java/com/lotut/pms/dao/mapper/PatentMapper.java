@@ -156,4 +156,6 @@ public interface PatentMapper {
 	
 	void batchChangeDescription(@Param("description")String description,@Param("patentIds")List<Long> patentIds);
 	
+	void batchUpdatePatentField(@Param("field")int field,@Param("patentIds")List<Long> patentIds);
+	
 }
