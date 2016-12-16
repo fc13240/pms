@@ -390,6 +390,9 @@
 							  <a href="javascript:return void;"  onclick="deleteTransactionPatent(${patent.patentId})">
 							  删除
 							  </a>
+							  <a href="<s:url value='/patent/showGoodFriends.html'/>?patents=${patent.patentId}">
+							  	分享
+							  </a>
 							  &nbsp;
 							  <se:authorize access="hasAnyRole('ROLE_TRADER')">
 								  <c:if test="${patent.recommendStatus==0}">
@@ -1127,5 +1130,6 @@ function changeStatus(patentId,status){
 		var url = "<s:url value='/user/searchShareUserDetail.html'/>?shareUserId=" + shareUserId;
 		window.open(url);
 	}
+	
 </script>
 </body>
