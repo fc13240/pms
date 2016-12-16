@@ -1160,7 +1160,7 @@ CREATE TABLE wechat_orders (
 	PRIMARY KEY (id)
 );
 
-insert ignore into brand_category (category_id,category_name)values
+insert into brand_category (category_id,category_name)values
 (15,'音乐器材'),(22,'绳网袋篷'),(23,'纺织纱线'),
 (26,'花边配饰'),(36,'金融物管'),(34,'烟草烟具'),(37,'建筑修理'),(45,'社会服务');
 
