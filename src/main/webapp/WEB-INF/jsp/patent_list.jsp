@@ -168,7 +168,7 @@
 								</select>
 							  </td>
 							  <td>
-								<select  style="width:100px;" class="selectPointOfInterest form-control" name="transactionStatus">
+								<select  style="width:120px;" class="selectPointOfInterest form-control" name="transactionStatus">
 								    <option value="" >全部</option>
 								    <option value="0">待发布</option>
 									<option value="1" >待交易</option>
