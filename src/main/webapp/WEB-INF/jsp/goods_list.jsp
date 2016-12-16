@@ -305,7 +305,9 @@
 									待交易
 								</option>
 								<option value="2"><font color="red">已预订</font> </option>
-								<option value="3"><font color="red">交易成功</font></option>
+								<option value="3"><font color="red">已付款待变更</font></option>
+								<option value="4"><font color="red">已变更待合格</font> </option>
+								<option value="5"><font color="red">交易成功</font></option>
 								</c:if>	
 								
 								<c:if test="${patent.status==2}">
@@ -313,15 +315,37 @@
 									已预订
 								</option>
 								<option value="1">待交易</option>
-								<option value="3">交易成功</option>
+								<option value="3"><font color="red">已付款待变更</font></option>
+								<option value="4"><font color="red">已变更待合格</font> </option>
+								<option value="5"><font color="red">交易成功</font></option>
 								</c:if>
 								
 								<c:if test="${patent.status==3}">
+								<option value="${patent.status}" selected="selected">
+									已付款待变更
+								</option>
+								<option value="1">待交易</option>
+								<option value="2">已预订</option>
+								<option value="4"><font color="red">已变更待合格</font> </option>
+								<option value="5"><font color="red">交易成功</font></option>
+								</c:if>
+								<c:if test="${patent.status==4}">
+								<option value="${patent.status}" selected="selected">
+									已变更待合格
+								</option>
+								<option value="1">待交易</option>
+								<option value="2">已预订</option>
+								<option value="3"><font color="red">已付款待变更</font> </option>
+								<option value="5"><font color="red">交易成功</font></option>
+								</c:if>
+								<c:if test="${patent.status==5}">
 								<option value="${patent.status}" selected="selected">
 									交易成功
 								</option>
 								<option value="1">待交易</option>
 								<option value="2">已预订</option>
+								<option value="3"><font color="red">已付款待变更</font> </option>
+								<option value="4"><font color="red">已变更待合格</font></option>
 								</c:if>
 								</select>
 								
