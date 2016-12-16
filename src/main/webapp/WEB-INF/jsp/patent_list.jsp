@@ -170,6 +170,7 @@
 							  <td>
 								<select  style="width:100px;" class="selectPointOfInterest form-control" name="transactionStatus">
 								  <option value="">全部</option>
+								  <option value="0">待发布</option>
 								  <option value="1">待交易</option>
 								  <option value="2">已预订</option>
 								  <option value="3">交易成功</option>

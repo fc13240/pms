@@ -114,6 +114,7 @@
 						  <table class="search-table">
 							  <tr>
 							  <td>专利类型</td>
+							  <td>专利状态</td>
 							  <td>交易状态</td>
 							  <td>交易方式</td>
 							  <td style="text-align: center;">所属分类</td>
@@ -131,10 +132,20 @@
 								  <option value="3">外观设计</option>
 								</select>
 							  </td>
-							  
+							  <td>
+								<select style="width:121px;" class="form-control" name="patentStatus">
+								  <option value="">全部</option>
+								  <c:forEach items="${allPatentStatus}" var="patentStatus">
+									<option value="<c:out value='${patentStatus.patentStatusId}'/>">
+									<c:out value="${patentStatus.statusDescription}"/>
+									</option>
+								  </c:forEach>
+								</select>
+							  </td>
 							  <td>
 								<select  style="width:100px;" class="selectPointOfInterest form-control" name="status">
 								  <option value="" >全部</option>
+								  <option value="0">待发布</option>
 								<option value="1" >待交易</option>
 								<option value="2" >已预订</option>
 								<option value="3" >交易成功</option>
@@ -268,8 +279,8 @@
 								<c:if test="${patent.transactionType==2}">
 								许可
 								</c:if>
-								<br/>
-								<span style="text-align:center">金额: ￥${patent.price}</span>
+								&nbsp;&nbsp;
+								<span style="text-align:center">${patent.price}元</span>
 								
 								<%-- <input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)"> --%>
 								
