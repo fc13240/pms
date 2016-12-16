@@ -1191,3 +1191,6 @@ ALTER TABLE patents MODIFY COLUMN transaction_status INT DEFAULT 0 COMMENT '0 �
 
 ALTER TABLE sell_patent_goods ADD COLUMN description VARCHAR(300) COMMENT '说明描述';
 ALTER TABLE sell_patent_goods MODIFY COLUMN STATUS INT DEFAULT 0 COMMENT '0 待发布,1 待交易，2 已预订, 3 交易成功';
+
+UPDATE patents SET transaction_status=0 WHERE transaction_status=1;
+UPDATE sell_patent_goods SET STATUS=0 WHERE STATUS=1;
