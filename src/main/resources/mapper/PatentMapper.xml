@@ -794,6 +794,14 @@ where spg.patent_id in
 	<foreach collection="patentIds" item="patentId" open="(" close=")" separator=",">
 		#{patentId}
 	</foreach>
+</update>
+	
+<update id="batchUpdatePatentField">
+	update sell_patent_goods set patent_second_column=#{field} where patent_id in
+	<foreach collection="patentIds" item="patentId" open="(" close=")" separator=",">
+		#{patentId}
+	</foreach>
 </update>	
+
 
 </mapper>

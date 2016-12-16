@@ -129,7 +129,7 @@ public interface PatentService {
 	
 	void batchChangeTransferor(String transferor,List<Long> patentIds);
 	
-	void saveSellPatentDescription(@Param("description") String description,@Param("patentId") int patentId);
+	void saveSellPatentDescription(String description,int patentId);
 
 	public Map<String, Map<String, String>> getUserTransactionCountByPatentType(int userId);
 
@@ -139,6 +139,8 @@ public interface PatentService {
 	
 	void changeStatus(int status,int patentId);
 	
-	void batchChangeDescription(@Param("description")String description,@Param("patentIds")List<Long> patentIds);
+	void batchChangeDescription(String description,List<Long> patentIds);
+	
+	void batchUpdatePatentField(int field,List<Long> patentIds);
 }
 

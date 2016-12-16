@@ -368,5 +368,10 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	public void batchChangeDescription(String description, List<Long> patentIds) {
 		patentMapper.batchChangeDescription(description, patentIds);
 	}
+	
+	@Override
+	public void batchUpdatePatentField(int field, List<Long> patentIds) {
+		patentMapper.batchUpdatePatentField(field, patentIds);
+	}
 
 }

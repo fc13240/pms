@@ -540,11 +540,26 @@ public class PatentController {
 	
 	@RequestMapping(path="/batchChangeDescription", method=RequestMethod.POST)
 	public void batchChangeDescription(@RequestParam("description")String description,@RequestParam("patentIds") List<Long> patentIds,PrintWriter writer){
-		if(description.equals("") || description==null){
+		if(description.equals("") || description==null|| description.equals("false")){
 			
 		}else{
 			patentService.batchChangeDescription(description, patentIds);
 		}
+	}
+	
+	@RequestMapping(path="/getFirstColumns", method=RequestMethod.POST)
+	public void batchChangeDescription(HttpServletResponse response){
+		List<GoodsFirstColumn>  firstColumns=patentService.getFirstColumn();
+		try {
+			WebUtils.writeJsonStrToResponse(response, firstColumns);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	@RequestMapping(path="/batchUpdateField", method=RequestMethod.POST)
+	public void batchChangeDescription(@RequestParam("patentIds") List<Long> patentIds,int fieldId,PrintWriter pw){
+		patentService.batchUpdatePatentField(fieldId,patentIds);
+		pw.write("success");
 	}
 
 }
