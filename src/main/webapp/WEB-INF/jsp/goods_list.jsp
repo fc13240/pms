@@ -224,6 +224,11 @@
 						  				</td>	
 										<td>
 											<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportPatents()">表格导出</button>
+										</td>
+										<td>
+											<a href="javascript:return void" onclick="batchShare()" >
+											<button style="margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
+											</a> 
 										</td>					  				  										  									  				
 						  			</tr>
 						  		</table>		
@@ -1094,5 +1099,24 @@ function changeStatus(patentId,status){
 			})
 		}
 	}
+	
+	function batchShare() {
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		var uniquePatentNos = []
+		if (!patentSelected) {
+			formutil.alertMessage('请选择专利');
+			
+			return;
+		}
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
+		for (var i = 0; i < patents_checked.length; i++) {
+			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+				uniquePatentNos.push(patents_checked[i]);
+			}
+		}		
+		var patents = uniquePatentNos.join(",");		
+		location.href = "<s:url value='/patent/showGoodFriends.html'/>?patents=" + patents;
+	}
+	
 </script>
 </body>

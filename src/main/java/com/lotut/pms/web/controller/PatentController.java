@@ -113,6 +113,14 @@ public class PatentController {
 	}
 	
 	
+	@RequestMapping(path="showGoodFriends", method=RequestMethod.GET)
+	public String showGoodFriends(Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> friends = friendService.getUserFriends(userId);
+		model.addAttribute("friends", friends);
+		return "goods_select_friends";
+	}
+	
 	
 	@RequestMapping(path="searchFriends", method=RequestMethod.GET)
 	public String searchFriends(@RequestParam("keyword")String keyword, Model model) {
