@@ -519,6 +519,7 @@ $(function () {
 		var patents = uniquePatentNos.join(",");		
 		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
 	}
+	
 	function batchGrabFees(){
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 		if (!patentSelected) {
