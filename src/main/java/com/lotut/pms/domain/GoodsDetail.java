@@ -1,6 +1,8 @@
 package com.lotut.pms.domain;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -26,6 +28,7 @@ public class GoodsDetail {
 	private String description;
 	private Patent patent;
 	private PatentType patentType;
+	private List<User> shareUsers;
 	
 	
 	public Patent getPatent() {
@@ -143,7 +146,18 @@ public class GoodsDetail {
 	public void setPatentType(PatentType patentType) {
 		this.patentType = patentType;
 	}
+	public List<User> getShareUsers() {
+		return shareUsers;
+	}
+	public void setShareUsers(List<User> shareUsers) {
+		this.shareUsers = shareUsers;
+	}
 	
-	
-	
+	public String getShareUsersAsString() {
+		if (this.shareUsers != null) {
+			return String.join(";", this.shareUsers.stream().map(User::getUsername).collect(Collectors.toList()));
+		}
+		
+		return "";
+	}
 }

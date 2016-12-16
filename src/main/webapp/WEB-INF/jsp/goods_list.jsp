@@ -365,6 +365,13 @@
 							</td>
 							<td width="90">
 								<input style="width:180px;" type="text" value="<c:out value='${patent.description}'/>" size="90" onChange="changedescription('<c:out value='${patent.patentId}'/>', this.value)"/>
+								<br/>
+								<c:forEach items="${patent.shareUsers}" var="shareUser" varStatus="s">								
+									<a href="javascript:return void" onclick="searchShareUserDetail(${shareUser.userId})" >
+						        		<c:out value="${shareUser.username}"/>
+						        		<c:if test="${!s.last}">;</c:if>
+						        	</a>					        	
+						        </c:forEach>
 							</td>
 							<td >
 							&nbsp;
@@ -1118,5 +1125,9 @@ function changeStatus(patentId,status){
 		location.href = "<s:url value='/patent/showGoodFriends.html'/>?patents=" + patents;
 	}
 	
+	function searchShareUserDetail(shareUserId){
+		var url = "<s:url value='/user/searchShareUserDetail.html'/>?shareUserId=" + shareUserId;
+		window.open(url);
+	}
 </script>
 </body>
