@@ -298,6 +298,12 @@
 					                  	<font color="red">已预订</font>
 				 	                  </c:if>
 				 	                 <c:if test="${patent.transactionStatus==3}">
+					                  	<font color="red">已付款待变更</font>
+				 	                  </c:if>
+				 	                  <c:if test="${patent.transactionStatus==4}">
+					                  	<font color="red">已变更待合格</font>
+				 	                  </c:if>
+				 	                 <c:if test="${patent.transactionStatus==5}">
 					                  	<font color="red">交易成功</font>
 				 	                  </c:if>
 								</c:if>
