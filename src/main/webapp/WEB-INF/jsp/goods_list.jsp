@@ -114,6 +114,7 @@
 						  <table class="search-table">
 							  <tr>
 							  <td>专利类型</td>
+							  <td>专利状态</td>
 							  <td>交易状态</td>
 							  <td>交易方式</td>
 							  <td style="text-align: center;">所属分类</td>
@@ -131,7 +132,16 @@
 								  <option value="3">外观设计</option>
 								</select>
 							  </td>
-							  
+							  <td>
+								<select style="width:121px;" class="form-control" name="patentStatus">
+								  <option value="">全部</option>
+								  <c:forEach items="${allPatentStatus}" var="patentStatus">
+									<option value="<c:out value='${patentStatus.patentStatusId}'/>">
+									<c:out value="${patentStatus.statusDescription}"/>
+									</option>
+								  </c:forEach>
+								</select>
+							  </td>
 							  <td>
 								<select  style="width:100px;" class="selectPointOfInterest form-control" name="status">
 								  <option value="" >全部</option>
