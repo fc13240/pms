@@ -143,4 +143,9 @@ public interface PatentDao {
 	void batchChangeDescription(String description,List<Long> patentIds);
 	
 	void batchUpdatePatentField(int description,List<Long> patentIds);
+	
+	List<GoodsDetail> getAllUserTransactionPatents(Page page);
+	
+	int getAllUserTransactionPatentsCount();
+	
 }
