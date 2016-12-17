@@ -162,4 +162,10 @@ public interface PatentMapper {
 	
 	int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
 	
+	@MapKey("patentType")
+	Map<String, Map<String, String>> getTraderUserTransactionCountByPatentType(TransactionPatentSearchCondition searchCondition);
+
+	@MapKey("transactionStatus")
+	Map<String, Map<String, String>> searchTraderUserTransactionByTransactionStatus(TransactionPatentSearchCondition searchCondition);
+	
 }

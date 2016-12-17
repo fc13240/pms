@@ -309,12 +309,23 @@ public class PatentController {
 		Page page=searchCondition.getPage();
 		page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
-		List<GoodsDetail> resultPatents = patentService.searchTransactionPatentsByPage(searchCondition);
+		List<GoodsDetail> resultPatents=null;
+		List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
+		Map<String, Map<String, String>> patentTypeCount=null;
+		Map<String, Map<String, String>> transactionStatusCount=null;
+		if(!PrincipalUtils.isTraderUser()){
+		 resultPatents = patentService.searchTransactionPatentsByPage(searchCondition);
 		int totalCount=(int)patentService.searchTransactionPatentsCount(searchCondition);
 		page.setTotalRecords(totalCount);
-		List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
-		Map<String, Map<String, String>> patentTypeCount=patentService.getUserTransactionCountByPatentType(PrincipalUtils.getCurrentUserId());
-		Map<String, Map<String, String>> transactionStatusCount=patentService.searchUserTransactionByTransactionStatus(PrincipalUtils.getCurrentUserId());
+		 patentTypeCount=patentService.getUserTransactionCountByPatentType(PrincipalUtils.getCurrentUserId());
+		 transactionStatusCount=patentService.searchUserTransactionByTransactionStatus(PrincipalUtils.getCurrentUserId());
+		}else{
+			resultPatents=patentService.searchAllTransactionPatentsByPage(searchCondition);
+			int totalCount=(int)patentService.searchAllTransactionPatentsCount(searchCondition);
+			page.setTotalRecords(totalCount);
+			patentTypeCount=patentService.getTraderUserTransactionCountByPatentType(searchCondition);
+			transactionStatusCount=patentService.searchTraderUserTransactionByTransactionStatus(searchCondition);
+		}
 		model.addAttribute("patentTypeCount", patentTypeCount);
 		model.addAttribute("transactionStatusCount", transactionStatusCount);
 		model.addAttribute("FirstColumns", FirstColumns);
