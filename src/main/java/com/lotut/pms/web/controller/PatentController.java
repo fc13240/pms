@@ -339,8 +339,8 @@ public class PatentController {
 			resultPatents=patentService.searchAllTransactionPatentsByPage(searchCondition);
 			int totalCount=(int)patentService.searchAllTransactionPatentsCount(searchCondition);
 			page.setTotalRecords(totalCount);
-			patentTypeCount=patentService.getTraderUserTransactionCountByPatentType(searchCondition);
-			transactionStatusCount=patentService.searchTraderUserTransactionByTransactionStatus(searchCondition);
+			patentTypeCount=patentService.getTransactionCountByPatentType();
+			transactionStatusCount=patentService.getTransactionByTransactionStatus();
 		}
 		model.addAttribute("patentTypeCount", patentTypeCount);
 		model.addAttribute("transactionStatusCount", transactionStatusCount);
