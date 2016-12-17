@@ -145,6 +145,10 @@ public interface PatentDao {
 	
 	void batchUpdatePatentField(int description,List<Long> patentIds);
 	
+	List<GoodsDetail> getAllUserTransactionPatents(Page page);
+	
+	int getAllUserTransactionPatentsCount();
+	
 	List<GoodsDetail>searchAllTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition);
 	
 	int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
@@ -152,4 +156,8 @@ public interface PatentDao {
 	Map<String, Map<String, String>> getTraderUserTransactionCountByPatentType(TransactionPatentSearchCondition searchCondition);
 
 	Map<String, Map<String, String>> searchTraderUserTransactionByTransactionStatus(TransactionPatentSearchCondition searchCondition);
+	
+	Map<String, Map<String, String>> getTransactionCountByPatentType();
+	
+	Map<String, Map<String, String>> getTransactionByTransactionStatus();
 }

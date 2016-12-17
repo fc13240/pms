@@ -289,19 +289,35 @@ public class PatentController {
 		if (page.getCurrentPage() <= 0) {
 			page.setCurrentPage(1);
 		}
-		int totalCount=(int)patentService.getUserTransactionPatentsCount(userId);
-		page.setTotalRecords(totalCount);
-		List<GoodsDetail> patents = patentService.getUserTransactionPatents(page);
-		List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
-		Map<String, Map<String, String>> patentTypeCount=patentService.getUserTransactionCountByPatentType(userId);
-		Map<String, Map<String, String>> transactionStatusCount=patentService.searchUserTransactionByTransactionStatus(userId);
-		model.addAttribute("patentTypeCount", patentTypeCount);
-		model.addAttribute("transactionStatusCount", transactionStatusCount);
-		model.addAttribute("FirstColumns", FirstColumns);
-		model.addAttribute("patents", patents);
-		model.addAttribute("page", page);
-		addPatentTypeAndStatusDataToModel(model);
-		return "goods_list";
+		if (PrincipalUtils.isTraderUser()) {
+			int totalCount=(int)patentService.getAllUserTransactionPatentsCount();
+			page.setTotalRecords(totalCount);
+			List<GoodsDetail> patents = patentService.getAllUserTransactionPatents(page);
+			List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
+			Map<String, Map<String, String>> patentTypeCount=patentService.getTransactionCountByPatentType();
+			Map<String, Map<String, String>> transactionStatusCount=patentService.getTransactionByTransactionStatus();
+			model.addAttribute("patentTypeCount", patentTypeCount);
+			model.addAttribute("transactionStatusCount", transactionStatusCount);
+			model.addAttribute("FirstColumns", FirstColumns);
+			model.addAttribute("patents", patents);
+			model.addAttribute("page", page);
+			addPatentTypeAndStatusDataToModel(model);
+			return "goods_list";
+		}else{
+			int totalCount=(int)patentService.getUserTransactionPatentsCount(userId);
+			page.setTotalRecords(totalCount);
+			List<GoodsDetail> patents = patentService.getUserTransactionPatents(page);
+			List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
+			Map<String, Map<String, String>> patentTypeCount=patentService.getUserTransactionCountByPatentType(userId);
+			Map<String, Map<String, String>> transactionStatusCount=patentService.searchUserTransactionByTransactionStatus(userId);
+			model.addAttribute("patentTypeCount", patentTypeCount);
+			model.addAttribute("transactionStatusCount", transactionStatusCount);
+			model.addAttribute("FirstColumns", FirstColumns);
+			model.addAttribute("patents", patents);
+			model.addAttribute("page", page);
+			addPatentTypeAndStatusDataToModel(model);
+			return "goods_list";
+		}
 	}
 	
 	@RequestMapping(path="/searchTransactionPatents", method=RequestMethod.GET)
