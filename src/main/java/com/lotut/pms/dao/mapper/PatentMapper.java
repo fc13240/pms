@@ -158,4 +158,8 @@ public interface PatentMapper {
 	
 	void batchUpdatePatentField(@Param("field")int field,@Param("patentIds")List<Long> patentIds);
 	
+	List<GoodsDetail>searchAllTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition);
+	
+	int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
+	
 }

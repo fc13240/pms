@@ -148,4 +148,7 @@ public interface PatentDao {
 	
 	int getAllUserTransactionPatentsCount();
 	
+	List<GoodsDetail>searchAllTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition);
+	
+	int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
 }

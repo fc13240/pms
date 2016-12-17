@@ -374,4 +374,14 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		patentMapper.batchUpdatePatentField(field, patentIds);
 	}
 
+	@Override
+	public List<GoodsDetail> searchAllTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition) {
+		return patentMapper.searchAllTransactionPatentsByPage(searchCondition);
+	}
+
+	@Override
+	public int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition) {
+		return patentMapper.searchAllTransactionPatentsCount(searchCondition);
+	}
+
 }
