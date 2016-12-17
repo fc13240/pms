@@ -417,4 +417,14 @@ public class PatentServiceImpl implements PatentService {
 	public int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition) {
 		return patentDao.searchAllTransactionPatentsCount(searchCondition);
 	}
+
+	@Override
+	public List<GoodsDetail> getAllUserTransactionPatents(Page page) {
+		return patentDao.getAllUserTransactionPatents(page);
+	}
+
+	@Override
+	public int getAllUserTransactionPatentsCount() {
+		return patentDao.getAllUserTransactionPatentsCount();
+	}
 }

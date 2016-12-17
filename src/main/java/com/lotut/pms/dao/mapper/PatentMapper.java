@@ -162,4 +162,8 @@ public interface PatentMapper {
 	
 	int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
 	
+	List<GoodsDetail> getAllUserTransactionPatents(Page page);
+	
+	int getAllUserTransactionPatentsCount();
+	
 }

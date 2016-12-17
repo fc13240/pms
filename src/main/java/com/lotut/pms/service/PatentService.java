@@ -146,5 +146,9 @@ public interface PatentService {
 	List<GoodsDetail>searchAllTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition);
 	
 	int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
+	
+	List<GoodsDetail> getAllUserTransactionPatents(Page page);
+	
+	int getAllUserTransactionPatentsCount();
 }
 
