@@ -867,7 +867,7 @@
  		LEFT JOIN patent_status ps ON p.patent_status = ps.patent_status_id  
 		LEFT JOIN patent_types pt ON p.patent_type = pt.patent_type_id  
 		LEFT JOIN sell_second_column  ss ON ss.patent_second_column_id=sg.patent_second_column 
-		WHERE 1=1 and 
+		WHERE 1=1 
 		<if test="patentType != null">
 		 			and pt.patent_type_id = #{patentType}
 		 		</if>
@@ -912,7 +912,7 @@
 		LEFT JOIN patent_status ps ON p.patent_status = ps.patent_status_id  
 		LEFT JOIN patent_types pt ON p.patent_type = pt.patent_type_id  
 		LEFT JOIN sell_second_column  ss ON ss.patent_second_column_id=sg.patent_second_column 
-		WHERE 1=1 and
+		WHERE 1=1 
 		<if test="patentType != null">
 		 			and pt.patent_type_id = #{patentType}
 		 		</if>
