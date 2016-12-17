@@ -427,4 +427,14 @@ public class PatentServiceImpl implements PatentService {
 	public int getAllUserTransactionPatentsCount() {
 		return patentDao.getAllUserTransactionPatentsCount();
 	}
+
+	@Override
+	public Map<String, Map<String, String>> getTransactionCountByPatentType() {
+		return patentDao.getTransactionCountByPatentType();
+	}
+
+	@Override
+	public Map<String, Map<String, String>> getTransactionByTransactionStatus() {
+		return patentDao.getTransactionByTransactionStatus();
+	}
 }

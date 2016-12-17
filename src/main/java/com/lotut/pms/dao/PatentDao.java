@@ -151,4 +151,8 @@ public interface PatentDao {
 	List<GoodsDetail>searchAllTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition);
 	
 	int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
+	
+	Map<String, Map<String, String>> getTransactionCountByPatentType();
+	
+	Map<String, Map<String, String>> getTransactionByTransactionStatus();
 }

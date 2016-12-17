@@ -394,4 +394,14 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		return patentMapper.getAllUserTransactionPatentsCount();
 	}
 
+	@Override
+	public Map<String, Map<String, String>> getTransactionCountByPatentType() {
+		return patentMapper.getTransactionCountByPatentType();
+	}
+
+	@Override
+	public Map<String, Map<String, String>> getTransactionByTransactionStatus() {
+		return patentMapper.getTransactionByTransactionStatus();
+	}
+
 }

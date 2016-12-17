@@ -150,5 +150,9 @@ public interface PatentService {
 	List<GoodsDetail> getAllUserTransactionPatents(Page page);
 	
 	int getAllUserTransactionPatentsCount();
+	
+	Map<String, Map<String, String>> getTransactionCountByPatentType();
+	
+	Map<String, Map<String, String>> getTransactionByTransactionStatus();
 }
 
