@@ -407,4 +407,14 @@ public class PatentServiceImpl implements PatentService {
 	public void batchUpdatePatentField(int field, List<Long> patentIds) {
 		patentDao.batchUpdatePatentField(field, patentIds);
 	}
+
+	@Override
+	public List<GoodsDetail> searchAllTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition) {
+		return patentDao.searchAllTransactionPatentsByPage(searchCondition);
+	}
+
+	@Override
+	public int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition) {
+		return patentDao.searchAllTransactionPatentsCount(searchCondition);
+	}
 }

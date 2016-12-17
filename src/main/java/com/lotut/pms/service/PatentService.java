@@ -142,5 +142,9 @@ public interface PatentService {
 	void batchChangeDescription(String description,List<Long> patentIds);
 	
 	void batchUpdatePatentField(int field,List<Long> patentIds);
+	
+	List<GoodsDetail>searchAllTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition);
+	
+	int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
 }
 
