@@ -172,8 +172,10 @@ public interface PatentMapper {
 	
 	int getAllUserTransactionPatentsCount();
 	
+	@MapKey("patentType")
 	Map<String, Map<String, String>> getTransactionCountByPatentType();
 	
+	@MapKey("transactionStatus")
 	Map<String, Map<String, String>> getTransactionByTransactionStatus();
 	
 }
