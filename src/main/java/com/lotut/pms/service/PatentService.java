@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
-
 import com.lotut.pms.domain.GoodsDetail;
 import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
@@ -142,10 +141,28 @@ public interface PatentService {
 	
 	void batchUpdatePatentField(int field,List<Long> patentIds);
 	
-	Patent getOverviewPatentByAppNo(String appNo);
+	Patent getOverviewPatentByAppNo(String appNo,int userId);
 	
 	List<PatentRemark> getRemarkByUserIdAndAppNo(String appNo,int userId);
 	
 	SalePatentGood getTransactionOverview(String appNo,int userId);
+
+	List<GoodsDetail>searchAllTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition);
+	
+	int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
+	
+	Map<String, Map<String, String>> getTraderUserTransactionCountByPatentType(TransactionPatentSearchCondition searchCondition);
+
+	Map<String, Map<String, String>> searchTraderUserTransactionByTransactionStatus(TransactionPatentSearchCondition searchCondition);
+	
+	List<GoodsDetail> getAllUserTransactionPatents(Page page);
+	
+	int getAllUserTransactionPatentsCount();
+	
+	Map<String, Map<String, String>> getTransactionCountByPatentType();
+	
+	Map<String, Map<String, String>> getTransactionByTransactionStatus();
+	
+	String getLotutPatentExportExcel(int userId,String exportExcelName) throws IOException;
 }
 

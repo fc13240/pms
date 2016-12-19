@@ -3,7 +3,6 @@ package com.lotut.pms.dao.mybatis;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.PatentDao;
@@ -377,8 +376,8 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	}
 
 	@Override
-	public Patent getOverviewPatentByAppNo(String appNo) {
-		return patentMapper.getOverviewPatentByAppNo(appNo);
+	public Patent getOverviewPatentByAppNo(String appNo,int userId) {
+		return patentMapper.getOverviewPatentByAppNo(appNo,userId);
 	}
 
 	@Override
@@ -389,6 +388,51 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	@Override
 	public	SalePatentGood getTransactionOverview(String appNo,int userId) {
 		return patentMapper.getTransactionOverview(appNo, userId);
+	}
+
+	public List<GoodsDetail> searchAllTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition) {
+		return patentMapper.searchAllTransactionPatentsByPage(searchCondition);
+	}
+
+	@Override
+	public int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition) {
+		return patentMapper.searchAllTransactionPatentsCount(searchCondition);
+	}
+
+	@Override
+	public Map<String, Map<String, String>> getTraderUserTransactionCountByPatentType(
+			TransactionPatentSearchCondition searchCondition) {
+		return patentMapper.getTraderUserTransactionCountByPatentType(searchCondition);
+	}
+
+	@Override
+	public Map<String, Map<String, String>> searchTraderUserTransactionByTransactionStatus(
+			TransactionPatentSearchCondition searchCondition) {
+		return patentMapper.searchTraderUserTransactionByTransactionStatus(searchCondition);
+	}
+	@Override
+	public List<GoodsDetail> getAllUserTransactionPatents(Page page) {
+		return patentMapper.getAllUserTransactionPatents(page);
+	}
+
+	@Override
+	public int getAllUserTransactionPatentsCount() {
+		return patentMapper.getAllUserTransactionPatentsCount();
+	}
+
+	@Override
+	public Map<String, Map<String, String>> getTransactionCountByPatentType() {
+		return patentMapper.getTransactionCountByPatentType();
+	}
+
+	@Override
+	public Map<String, Map<String, String>> getTransactionByTransactionStatus() {
+		return patentMapper.getTransactionByTransactionStatus();
+	}
+
+	@Override
+	public List<Patent> getLOTUTPatentsByIds(int userId) {
+		return patentMapper.getLOTUTPatentsByIds(userId);
 	}
 
 }

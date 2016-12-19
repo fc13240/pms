@@ -408,8 +408,8 @@ public class PatentServiceImpl implements PatentService {
 	}
 
 	@Override
-	public Patent getOverviewPatentByAppNo(String appNo) {
-		return patentDao.getOverviewPatentByAppNo(appNo);
+	public Patent getOverviewPatentByAppNo(String appNo,int userId){
+		return patentDao.getOverviewPatentByAppNo(appNo,userId);
 	}
 
 	@Override
@@ -420,5 +420,57 @@ public class PatentServiceImpl implements PatentService {
 	@Override
 	public SalePatentGood getTransactionOverview(String appNo, int userId) {
 		return patentDao.getTransactionOverview(appNo, userId);
+	}
+	
+	@Override
+	public List<GoodsDetail> searchAllTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition) {
+		return patentDao.searchAllTransactionPatentsByPage(searchCondition);
+	}
+
+	@Override
+	public int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition) {
+		return patentDao.searchAllTransactionPatentsCount(searchCondition);
+	}
+
+	@Override
+	public Map<String, Map<String, String>> getTraderUserTransactionCountByPatentType(
+			TransactionPatentSearchCondition searchCondition) {
+		return patentDao.getTraderUserTransactionCountByPatentType(searchCondition);
+	}
+
+	@Override
+	public Map<String, Map<String, String>> searchTraderUserTransactionByTransactionStatus(
+			TransactionPatentSearchCondition searchCondition) {
+		return patentDao.searchTraderUserTransactionByTransactionStatus(searchCondition);
+	}
+	public List<GoodsDetail> getAllUserTransactionPatents(Page page) {
+		return patentDao.getAllUserTransactionPatents(page);
+	}
+
+	@Override
+	public int getAllUserTransactionPatentsCount() {
+		return patentDao.getAllUserTransactionPatentsCount();
+	}
+
+	@Override
+	public Map<String, Map<String, String>> getTransactionCountByPatentType() {
+		return patentDao.getTransactionCountByPatentType();
+	}
+
+	@Override
+	public Map<String, Map<String, String>> getTransactionByTransactionStatus() {
+		return patentDao.getTransactionByTransactionStatus();
+	}
+
+	@Override
+	public String getLotutPatentExportExcel(int userId, String exportExcelName) throws IOException {
+		System.out.println("用户id-----"+userId);
+		List<Patent> patents = patentDao.getLOTUTPatentsByIds(userId);
+		String exportExcelPath=Settings.TEMP_DIR+exportExcelName;
+		System.out.println("专利总数-----"+patents.size());
+		//String exportExcelPath="D:\\"+exportExcelName;
+		//PatentExcelGenerator.writePatentRecordsToExcel(patents, exportExcelPath);
+		PatentExcelGenerator.writePatentRecordsToExcel(patents, exportExcelPath);
+		return exportExcelPath;
 	}
 }

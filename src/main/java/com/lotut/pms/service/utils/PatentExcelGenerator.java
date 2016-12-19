@@ -108,15 +108,15 @@ public class PatentExcelGenerator {
 		
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		HSSFCell appDateCell = row.createCell(5);
-		appDateCell.setCellValue(sdf.format(patent.getAppDate()));
+		appDateCell.setCellValue(patent.getAppDate() == null ? "" : sdf.format(patent.getAppDate()));
 		
 		SimpleDateFormat sd=new SimpleDateFormat("MM月dd日");
 		HSSFCell deadlineCell = row.createCell(6);
-		deadlineCell.setCellValue(sd.format(patent.getAppDate()));
+		deadlineCell.setCellValue(patent.getAppDate() == null ? "" : sd.format(patent.getAppDate()));
 		
 		SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		HSSFCell amountCell = row.createCell(7);
-		amountCell.setCellValue(s.format(patent.getCreateTime()));
+		amountCell.setCellValue(patent.getCreateTime() == null ? "" : s.format(patent.getCreateTime()));
 		
 		HSSFCell patentStatusTextCell = row.createCell(8);
 		patentStatusTextCell.setCellValue(patent.getPatentStatusText());

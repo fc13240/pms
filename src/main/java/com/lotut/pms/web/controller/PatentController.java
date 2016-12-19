@@ -297,19 +297,35 @@ public class PatentController {
 		if (page.getCurrentPage() <= 0) {
 			page.setCurrentPage(1);
 		}
-		int totalCount=(int)patentService.getUserTransactionPatentsCount(userId);
-		page.setTotalRecords(totalCount);
-		List<GoodsDetail> patents = patentService.getUserTransactionPatents(page);
-		List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
-		Map<String, Map<String, String>> patentTypeCount=patentService.getUserTransactionCountByPatentType(userId);
-		Map<String, Map<String, String>> transactionStatusCount=patentService.searchUserTransactionByTransactionStatus(userId);
-		model.addAttribute("patentTypeCount", patentTypeCount);
-		model.addAttribute("transactionStatusCount", transactionStatusCount);
-		model.addAttribute("FirstColumns", FirstColumns);
-		model.addAttribute("patents", patents);
-		model.addAttribute("page", page);
-		addPatentTypeAndStatusDataToModel(model);
-		return "goods_list";
+		if (PrincipalUtils.isTraderUser()) {
+			int totalCount=(int)patentService.getAllUserTransactionPatentsCount();
+			page.setTotalRecords(totalCount);
+			List<GoodsDetail> patents = patentService.getAllUserTransactionPatents(page);
+			List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
+			Map<String, Map<String, String>> patentTypeCount=patentService.getTransactionCountByPatentType();
+			Map<String, Map<String, String>> transactionStatusCount=patentService.getTransactionByTransactionStatus();
+			model.addAttribute("patentTypeCount", patentTypeCount);
+			model.addAttribute("transactionStatusCount", transactionStatusCount);
+			model.addAttribute("FirstColumns", FirstColumns);
+			model.addAttribute("patents", patents);
+			model.addAttribute("page", page);
+			addPatentTypeAndStatusDataToModel(model);
+			return "goods_list";
+		}else{
+			int totalCount=(int)patentService.getUserTransactionPatentsCount(userId);
+			page.setTotalRecords(totalCount);
+			List<GoodsDetail> patents = patentService.getUserTransactionPatents(page);
+			List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
+			Map<String, Map<String, String>> patentTypeCount=patentService.getUserTransactionCountByPatentType(userId);
+			Map<String, Map<String, String>> transactionStatusCount=patentService.searchUserTransactionByTransactionStatus(userId);
+			model.addAttribute("patentTypeCount", patentTypeCount);
+			model.addAttribute("transactionStatusCount", transactionStatusCount);
+			model.addAttribute("FirstColumns", FirstColumns);
+			model.addAttribute("patents", patents);
+			model.addAttribute("page", page);
+			addPatentTypeAndStatusDataToModel(model);
+			return "goods_list";
+		}
 	}
 	
 	@RequestMapping(path="/searchTransactionPatents", method=RequestMethod.GET)
@@ -317,12 +333,23 @@ public class PatentController {
 		Page page=searchCondition.getPage();
 		page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
-		List<GoodsDetail> resultPatents = patentService.searchTransactionPatentsByPage(searchCondition);
+		List<GoodsDetail> resultPatents=null;
+		List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
+		Map<String, Map<String, String>> patentTypeCount=null;
+		Map<String, Map<String, String>> transactionStatusCount=null;
+		if(!PrincipalUtils.isTraderUser()){
+		 resultPatents = patentService.searchTransactionPatentsByPage(searchCondition);
 		int totalCount=(int)patentService.searchTransactionPatentsCount(searchCondition);
 		page.setTotalRecords(totalCount);
-		List<GoodsFirstColumn>  FirstColumns=patentService.getFirstColumn();
-		Map<String, Map<String, String>> patentTypeCount=patentService.getUserTransactionCountByPatentType(PrincipalUtils.getCurrentUserId());
-		Map<String, Map<String, String>> transactionStatusCount=patentService.searchUserTransactionByTransactionStatus(PrincipalUtils.getCurrentUserId());
+		 patentTypeCount=patentService.getUserTransactionCountByPatentType(PrincipalUtils.getCurrentUserId());
+		 transactionStatusCount=patentService.searchUserTransactionByTransactionStatus(PrincipalUtils.getCurrentUserId());
+		}else{
+			resultPatents=patentService.searchAllTransactionPatentsByPage(searchCondition);
+			int totalCount=(int)patentService.searchAllTransactionPatentsCount(searchCondition);
+			page.setTotalRecords(totalCount);
+			patentTypeCount=patentService.getTransactionCountByPatentType();
+			transactionStatusCount=patentService.getTransactionByTransactionStatus();
+		}
 		model.addAttribute("patentTypeCount", patentTypeCount);
 		model.addAttribute("transactionStatusCount", transactionStatusCount);
 		model.addAttribute("FirstColumns", FirstColumns);
@@ -584,7 +611,7 @@ public class PatentController {
 	@RequestMapping(path="/getOverviewPatent")
 	public String getOverviewPatent(String appNo,Model model){
 		int userId = PrincipalUtils.getCurrentUserId();
-		Patent patent = patentService.getOverviewPatentByAppNo(appNo);
+		Patent patent = patentService.getOverviewPatentByAppNo(appNo,userId);
 		List<PatentRemark> patentRemarks = patentService.getRemarkByUserIdAndAppNo(appNo, userId);
 		List<Notice> notices=noticeService.getNoticeOverview(appNo, userId);
 
@@ -603,5 +630,30 @@ public class PatentController {
 		model.addAttribute("paperApplyTypes", paperApplyTypes);
 		model.addAttribute("good", good);
 		return "patent_overview";
+	}
+	
+	
+	@RequestMapping(path="/exportLOTUTExcel")
+	public void exportLotutExcel(HttpServletResponse response) throws IOException{
+		response.setContentType("application/vnd.ms-excel");
+		response.setHeader("X-FRAME-OPTIONS", "SAMEORIGIN");
+
+		User user = PrincipalUtils.getCurrentPrincipal();
+		String exportExcelName = user.getUsername() + System.currentTimeMillis() + ".xls";
+		String exportExcelPath = patentService.getLotutPatentExportExcel(user.getUserId(), exportExcelName);
+		File excelFile = new File(exportExcelPath);
+		response.setContentLength((int)excelFile.length());
+		response.setHeader("Content-Disposition", "attachment;filename=" + exportExcelName);
+		
+		int BUFFER_SIZE = 8192;
+		byte[] buffer = new byte[BUFFER_SIZE];
+		try (OutputStream out = response.getOutputStream(); 
+				BufferedInputStream bis = new BufferedInputStream(new FileInputStream(excelFile))) {
+			int bytesRead = -1;
+			while ((bytesRead = bis.read(buffer)) != -1) {
+				out.write(buffer, 0, bytesRead);
+			}
+			out.flush();
+		}
 	}
 }

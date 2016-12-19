@@ -158,11 +158,33 @@ public interface PatentMapper {
 	void batchChangeDescription(@Param("description")String description,@Param("patentIds")List<Long> patentIds);
 	
 	void batchUpdatePatentField(@Param("field")int field,@Param("patentIds")List<Long> patentIds);
-	
-	Patent getOverviewPatentByAppNo(String appNo);
+
+	Patent getOverviewPatentByAppNo(@Param("appNo")String appNo,@Param("userId") int userId);
 	
 	List<PatentRemark> getRemarkByUserIdAndAppNo(@Param("appNo") String appNo,@Param("userId") int userId);
 	
 	SalePatentGood getTransactionOverview(@Param("appNo") String appNo,@Param("userId") int userId);
+
+	List<GoodsDetail>searchAllTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition);
+	
+	int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
+	
+	@MapKey("patentType")
+	Map<String, Map<String, String>> getTraderUserTransactionCountByPatentType(TransactionPatentSearchCondition searchCondition);
+
+	@MapKey("transactionStatus")
+	Map<String, Map<String, String>> searchTraderUserTransactionByTransactionStatus(TransactionPatentSearchCondition searchCondition);
+	
+	List<GoodsDetail> getAllUserTransactionPatents(Page page);
+	
+	int getAllUserTransactionPatentsCount();
+	
+	@MapKey("patentType")
+	Map<String, Map<String, String>> getTransactionCountByPatentType();
+	
+	@MapKey("transactionStatus")
+	Map<String, Map<String, String>> getTransactionByTransactionStatus();
+	
+	List<Patent> getLOTUTPatentsByIds(int userId);
 	
 }

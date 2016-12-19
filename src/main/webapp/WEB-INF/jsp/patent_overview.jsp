@@ -89,7 +89,7 @@
 		  <td style="text-align: center"><fmt:formatDate value="${notice.dispatchDate }" pattern="yyyy-MM-dd"/></td>
 		  <td style="text-align: center">${notice.name }</td>
 		  <td style="text-align: center">${notice.dispatchSequence }</td>
-		  <td style="text-align: center">
+		  <td style="text-align: center"><span id="notice_read_span${notice.noticeId }">
 		  	<c:choose>
 		  		<c:when test="${not empty notice.noticeViewStatus }">
 		  			已查看
@@ -98,6 +98,8 @@
 		  			未查看
 		  		</c:otherwise>
 		  	</c:choose>
+		  	
+		  	</span>
 		  </td>
 		  <td style="text-align: center">${notice.remainDays }</td>
 		  <td style="text-align: center">
@@ -178,8 +180,7 @@ function changeNoticeReadStatus(noticeId){
 			type: 'get', 
 			dataType:"text",
 			success: function(totalCount) {
-				$("#unreadNoticeCountForA").text("未查看"+totalCount+"件");
-				$("#readStatusSpan"+noticeId).html("已查看");
+				$("#notice_read_span"+noticeId).html("已查看");
 			}
 		});		
 	}, 100);	

@@ -230,6 +230,9 @@
 						</td>	 
 						<td>
 							<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportPatents()">表格导出</button>
+							<se:authorize access="hasRole('ROLE_PROXY_ORG')">
+							<button style="margin-left:10px;width:200px;" class="button button-rounded button-highlight" onclick="exportLOTUTExcel()">导出龙图腾账户所有专利</button>
+							</se:authorize>
 						</td>					
 					  	</tr>
 					  	</table>
@@ -632,7 +635,11 @@ $(function () {
 		window.open(url);
 	}
 	
-
+	function exportLOTUTExcel(){
+		var iframe = document.getElementById('patentExcelFileFrame');
+		iframe.src = "<s:url value='/patent/exportLOTUTExcel.html'/>";
+		
+	}
 </script>
 <script type="text/javascript">
 	$(function() {

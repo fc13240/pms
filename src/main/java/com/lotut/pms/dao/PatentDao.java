@@ -143,9 +143,27 @@ public interface PatentDao {
 	
 	void batchUpdatePatentField(int description,List<Long> patentIds);
 
-	Patent getOverviewPatentByAppNo(String appNo);
+	Patent getOverviewPatentByAppNo(String appNo,int userId);
 	
 	List<PatentRemark> getRemarkByUserIdAndAppNo(String appNo,int userId);
 	
 	SalePatentGood getTransactionOverview(String appNo,int userId);
+	
+	List<GoodsDetail> getAllUserTransactionPatents(Page page);
+	
+	int getAllUserTransactionPatentsCount();
+	
+	List<GoodsDetail>searchAllTransactionPatentsByPage(TransactionPatentSearchCondition searchCondition);
+	
+	int searchAllTransactionPatentsCount(TransactionPatentSearchCondition searchCondition);
+	
+	Map<String, Map<String, String>> getTraderUserTransactionCountByPatentType(TransactionPatentSearchCondition searchCondition);
+
+	Map<String, Map<String, String>> searchTraderUserTransactionByTransactionStatus(TransactionPatentSearchCondition searchCondition);
+	
+	Map<String, Map<String, String>> getTransactionCountByPatentType();
+	
+	Map<String, Map<String, String>> getTransactionByTransactionStatus();
+	
+	List<Patent> getLOTUTPatentsByIds(int userId);
 }
