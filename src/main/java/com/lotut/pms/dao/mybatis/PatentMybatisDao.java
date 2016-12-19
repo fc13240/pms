@@ -3,6 +3,7 @@ package com.lotut.pms.dao.mybatis;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.PatentDao;
@@ -16,6 +17,7 @@ import com.lotut.pms.domain.PatentRemark;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.SalePatentGood;
 import com.lotut.pms.domain.TransactionPatentSearchCondition;
 import com.lotut.pms.util.PrincipalUtils;
 
@@ -372,6 +374,21 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	@Override
 	public void batchUpdatePatentField(int field, List<Long> patentIds) {
 		patentMapper.batchUpdatePatentField(field, patentIds);
+	}
+
+	@Override
+	public Patent getOverviewPatentByAppNo(String appNo) {
+		return patentMapper.getOverviewPatentByAppNo(appNo);
+	}
+
+	@Override
+	public List<PatentRemark> getRemarkByUserIdAndAppNo(String appNo, int userId) {
+		return patentMapper.getRemarkByUserIdAndAppNo(appNo, userId);
+	}
+	
+	@Override
+	public	SalePatentGood getTransactionOverview(String appNo,int userId) {
+		return patentMapper.getTransactionOverview(appNo, userId);
 	}
 
 }

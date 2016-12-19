@@ -515,5 +515,24 @@
 		  	left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where patent in (select patent from user_patents where user = #{userId} and trash_status=1)	
 		and nvl.notice_id is  null					 			 		 
-	</select>	
+	</select>
+	
+	<select id="getNoticeOverview" resultMap="NoticeResultMap">
+		select n.notice_id,n.dispatch_date,n.notice_name,n.dispatch_sequence,nr.notice_id as notice_view_status,
+		if(datediff(current_date,n.dispatch_date)>0,datediff(current_date,n.dispatch_date),-1) as remain_days,nps.*,
+		n.paper_apply_type,npat.notice_paper_apply_type_desc
+		from notices n left join patents p on n.patent=p.patent_id 
+		left join (select notice_id  from notice_read where user_id=#{userId} and notice_id in 
+		(
+			select notice_id from notices left join patents on patent=patent_id
+			where app_no=#{appNo}
+		)) nr on nr.notice_id=n.notice_id
+		
+		left join notice_process_status nps on n.process_status=nps.notice_process_status_id
+		left join notice_paper_apply_types npat on n.paper_apply_type=npat.notice_paper_apply_type_id
+		left join patents pa on n.patent=pa.patent_id
+		left join user_patents up on pa.patent_id=up.patent
+		where pa.app_no=#{appNo} and up.user=#{userId}
+	</select>
+	
 </mapper>

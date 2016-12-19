@@ -35,7 +35,19 @@
 	<resultMap type="SalePatentGood" id="salePatentGoodResultMap">
 		<id property="patentId" column="sell_patent_id"/>
 		<result property="price" column="price"/>
+		<result property="addDate" column="add_date"/>
+		<result property="transactionDate" column="transaction_date"/>
+		<result property="transferor" column="transferor"/>
 		<result property="transactionType" column="transaction_type"/>
+		<result property="description" column="description"/>
+		<association property="firstColumn" javaType="GoodsFirstColumn">
+			<id property="id" column="patent_first_column_id"/>
+			<result property="name" column="patent_first_column_name"/>
+		</association>
+		<association property="secondColumn" javaType="GoodsSecondColumn">
+			<id property="id" column="patent_second_column_id"/>
+			<result property="name" column="patent_second_column_name"/>
+		</association>
 	</resultMap>
 	
 	
@@ -94,7 +106,7 @@
 		             ) as sp left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id 
 		        join users u on u.user_id = up.user 
 		        left join sell_patent_goods spg on sp.patent_id=spg.patent_id 
-		        order by sp.transaction_status asc,sp.app_date desc, sp.app_person, sp.patent_name
+		        order by sp.app_date desc, sp.app_person, sp.patent_name
 	</select>	
 	
 	<select id="getPatentById" parameterType="long" resultMap="PatentWithShareUsers">
@@ -827,4 +839,41 @@ where spg.patent_id in
 	</foreach>
 </update>
 
+
+<select id="getOverviewPatentByAppNo"  resultMap="PatentWithShareUsers">
+ select p.patent_id,p.app_no,pt.patent_type_id,pt.patent_type_desc,p.patent_name,p.internal_code,p.app_person,u.user_id,u.username,
+         p.app_date,p.patent_status_text,p.create_time
+      from patents p left join patent_types pt on p.patent_type=pt.patent_type_id 
+         left join user_patents up on p.patent_id=up.patent 
+         left join users u on up.user=u.user_id
+      where p.app_no=#{appNo}
+  <!-- select usp.patent_id,usp.patent_owner,usp.app_no,usp.patent_name,usp.internal_code,usp.app_person,usp.app_date,usp.patent_status_text,usp.create_time,pt.*,u.user_id,u.username,pr.remark_id,pr.content 
+	from (select p.patent_id,p.patent_owner,p.app_no,p.patent_name,p.internal_code,p.patent_type,p.app_person,
+				p.app_date,p.patent_status_text,p.create_time,up.user
+			from patents p 
+	left join patent_types pt on p.patent_type=pt.patent_type_id 
+	left join user_patents up on p.patent_id=up.patent 
+	where up.user=#{userId} and p.app_no=#{appNo}) usp 
+	left join patent_types pt on usp.patent_type=pt.patent_type_id
+	left join user_patents up on usp.patent_id=up.patent  
+	left join patent_remarks pr on  usp.patent_id =pr.patent_id
+	left join users u on up.user=u.user_id
+	where pr.user_id=#{userId} -->
+</select>
+
+<select id="getRemarkByUserIdAndAppNo" resultMap="patentRemarkResultMap">
+	select pr.remark_id,pr.content from patent_remarks pr left join patents p on pr.patent_id=p.patent_id 
+	where pr.user_id=#{userId} and p.app_no=#{appNo}
+</select>
+
+<select id="getTransactionOverview" resultMap="salePatentGoodResultMap">
+select spg.patent_id,spg.add_date,spg.transferor,spg.status,spg.transaction_type,spg.price,spg.transaction_date,spg.description,ssc.patent_second_column_id,
+	ssc.patent_second_column_name,sfc.* 
+from sell_patent_goods spg 
+	left join patents p on spg.patent_id=p.patent_id
+	left join sell_second_column ssc on spg.patent_second_column=ssc.patent_second_column_id
+	left join sell_first_column sfc on ssc.patent_first_column_id=sfc.patent_first_column_id
+
+where p.app_no=#{appNo} and spg.owner=#{userId}
+</select>
 </mapper>

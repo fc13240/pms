@@ -312,4 +312,9 @@ public class NoticeServiceImpl implements NoticeService {
 	public List<Notice> unreadNoticeList(Page page) {
 		return noticeDao.unreadNoticeList(page);
 	}
+
+	@Override
+	public List<Notice> getNoticeOverview(String appNo, int userId) {
+		return noticeDao.getNoticeOverview(appNo, userId);
+	}
 }

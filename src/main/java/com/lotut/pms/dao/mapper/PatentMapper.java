@@ -15,6 +15,7 @@ import com.lotut.pms.domain.PatentRemark;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.SalePatentGood;
 import com.lotut.pms.domain.TransactionPatentSearchCondition;
 
 public interface PatentMapper {
@@ -157,5 +158,11 @@ public interface PatentMapper {
 	void batchChangeDescription(@Param("description")String description,@Param("patentIds")List<Long> patentIds);
 	
 	void batchUpdatePatentField(@Param("field")int field,@Param("patentIds")List<Long> patentIds);
+	
+	Patent getOverviewPatentByAppNo(String appNo);
+	
+	List<PatentRemark> getRemarkByUserIdAndAppNo(@Param("appNo") String appNo,@Param("userId") int userId);
+	
+	SalePatentGood getTransactionOverview(@Param("appNo") String appNo,@Param("userId") int userId);
 	
 }

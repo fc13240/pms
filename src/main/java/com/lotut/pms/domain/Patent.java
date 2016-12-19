@@ -32,7 +32,7 @@ public class Patent {
 	private List<User> shareUsers;
 	private Timestamp createTime;
 	private SalePatentGood salePatentGood;
-	
+
 	
 	public SalePatentGood getSalePatentGood() {
 		return salePatentGood;

@@ -3,8 +3,6 @@ package com.lotut.pms.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.lotut.pms.domain.GoodsDetail;
 import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
@@ -14,6 +12,7 @@ import com.lotut.pms.domain.PatentRemark;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.SalePatentGood;
 import com.lotut.pms.domain.TransactionPatentSearchCondition;
 
 public interface PatentDao {
@@ -143,4 +142,10 @@ public interface PatentDao {
 	void batchChangeDescription(String description,List<Long> patentIds);
 	
 	void batchUpdatePatentField(int description,List<Long> patentIds);
+
+	Patent getOverviewPatentByAppNo(String appNo);
+	
+	List<PatentRemark> getRemarkByUserIdAndAppNo(String appNo,int userId);
+	
+	SalePatentGood getTransactionOverview(String appNo,int userId);
 }

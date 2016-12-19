@@ -72,4 +72,6 @@ public interface NoticeService {
 	int unreadNoticeCount(int userId);
 	
 	List<Notice> unreadNoticeList(Page page);
+	
+	List<Notice> getNoticeOverview(String appNo,int userId);
 }

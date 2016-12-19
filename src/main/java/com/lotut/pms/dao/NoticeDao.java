@@ -64,5 +64,5 @@ public interface NoticeDao {
 	
 	List<Notice> unreadNoticeList(Page page);
 	
-	
+	List<Notice> getNoticeOverview(String appNo,int userId);
 }

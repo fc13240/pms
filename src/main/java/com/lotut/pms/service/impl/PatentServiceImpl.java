@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.dao.PatentDao;
 import com.lotut.pms.dao.SharePatentDao;
-import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.GoodsDetail;
 import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
@@ -22,11 +21,11 @@ import com.lotut.pms.domain.PatentRemark;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.SalePatentGood;
 import com.lotut.pms.domain.TransactionPatentSearchCondition;
 import com.lotut.pms.service.PatentService;
 import com.lotut.pms.service.utils.PatentExcelGenerator;
 import com.lotut.pms.service.utils.PatentExcelParser;
-import com.lotut.pms.service.utils.PatentFeeExcelGenerator;
 import com.lotut.pms.service.utils.PatentTransactionExcelGenerator;
 
 public class PatentServiceImpl implements PatentService {
@@ -406,5 +405,20 @@ public class PatentServiceImpl implements PatentService {
 	@Override
 	public void batchUpdatePatentField(int field, List<Long> patentIds) {
 		patentDao.batchUpdatePatentField(field, patentIds);
+	}
+
+	@Override
+	public Patent getOverviewPatentByAppNo(String appNo) {
+		return patentDao.getOverviewPatentByAppNo(appNo);
+	}
+
+	@Override
+	public List<PatentRemark> getRemarkByUserIdAndAppNo(String appNo, int userId) {
+		return patentDao.getRemarkByUserIdAndAppNo(appNo, userId);
+	}
+
+	@Override
+	public SalePatentGood getTransactionOverview(String appNo, int userId) {
+		return patentDao.getTransactionOverview(appNo, userId);
 	}
 }

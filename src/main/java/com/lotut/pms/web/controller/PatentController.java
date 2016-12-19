@@ -29,15 +29,21 @@ import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.GoodsDetail;
 import com.lotut.pms.domain.GoodsFirstColumn;
 import com.lotut.pms.domain.GoodsSecondColumn;
+import com.lotut.pms.domain.Notice;
+import com.lotut.pms.domain.NoticePaperApplyType;
+import com.lotut.pms.domain.NoticeProcessStatus;
+import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.domain.PatentRemark;
 import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.PatentStatus;
 import com.lotut.pms.domain.PatentType;
+import com.lotut.pms.domain.SalePatentGood;
 import com.lotut.pms.domain.TransactionPatentSearchCondition;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.FriendService;
+import com.lotut.pms.service.NoticeService;
 import com.lotut.pms.service.PatentService;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
@@ -50,12 +56,14 @@ public class PatentController {
 	private PatentService patentService;
 	private FriendService friendService;
 	private UserService userService;
+	private NoticeService noticeService;
 	
 	@Autowired
-	public PatentController(PatentService patentService, FriendService friendService,UserService userService) {
+	public PatentController(PatentService patentService, FriendService friendService,UserService userService,NoticeService noticeService) {
 		this.patentService = patentService;
 		this.friendService = friendService;
 		this.userService = userService;
+		this.noticeService = noticeService;
 	}
 
 	@RequestMapping(path="/list", method=RequestMethod.GET)
@@ -566,10 +574,34 @@ public class PatentController {
 			e.printStackTrace();
 		}
 	}
+	
 	@RequestMapping(path="/batchUpdateField", method=RequestMethod.POST)
 	public void batchChangeDescription(@RequestParam("patentIds") List<Long> patentIds,int fieldId,PrintWriter pw){
 		patentService.batchUpdatePatentField(fieldId,patentIds);
 		pw.write("success");
 	}
 
+	@RequestMapping(path="/getOverviewPatent")
+	public String getOverviewPatent(String appNo,Model model){
+		int userId = PrincipalUtils.getCurrentUserId();
+		Patent patent = patentService.getOverviewPatentByAppNo(appNo);
+		List<PatentRemark> patentRemarks = patentService.getRemarkByUserIdAndAppNo(appNo, userId);
+		List<Notice> notices=noticeService.getNoticeOverview(appNo, userId);
+
+		List<PatentType> patentTypes = patentService.getAllPatentTypes();
+		List<NoticeProcessStatus> noticeProcessStatuses = noticeService.getAllNoticeProcessStatus();
+		List<NoticeType> noticeTypes = noticeService.getAllNoticeType();
+		List<NoticePaperApplyType> paperApplyTypes = noticeService.getAllNoticePaperApplyType();
+		SalePatentGood good = patentService.getTransactionOverview(appNo, userId);
+		
+		model.addAttribute("patent",patent);
+		model.addAttribute("patentRemarks",patentRemarks);
+		model.addAttribute("notices",notices);
+		model.addAttribute("patentTypes", patentTypes);
+		model.addAttribute("noticeProcessStatuses", noticeProcessStatuses);
+		model.addAttribute("noticeTypes", noticeTypes);
+		model.addAttribute("paperApplyTypes", paperApplyTypes);
+		model.addAttribute("good", good);
+		return "patent_overview";
+	}
 }
