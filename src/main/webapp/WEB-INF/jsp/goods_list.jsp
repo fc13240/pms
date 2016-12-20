@@ -128,9 +128,9 @@
 							  <td>交易状态</td>
 							  <td>交易方式</td>
 							  <td style="text-align: center;">所属分类</td>
-							  <td>添加日开始</td>
+							  <td>发布日开始</td>
 							  <td></td>
-							  <td>添加日结束</td>
+							  <td>发布日结束</td>
 							  <td>关键字</td>
 							  </tr>
 							  <tr>
@@ -183,11 +183,11 @@
 							  
 							  <td>
 								
-								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAddDateId'})" id="startAddDateId" name="startAddDate" placeholder="添加日开始" value="" readonly="readonly" >							  
+								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAddDateId'})" id="startAddDateId" name="startAddDate" placeholder="发布日开始" value="" readonly="readonly" >							  
 							  </td>
 							  <td>-</td>
 							  <td>
-								<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAddDateId'})"  id="endAddDateId" name="endAddDate" placeholder="添加日结束" value="" readonly="readonly" >
+								<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAddDateId'})"  id="endAddDateId" name="endAddDate" placeholder="发布日结束" value="" readonly="readonly" >
 
 							  </td>
 							  <td>
@@ -250,7 +250,7 @@
 						  <th width="90">第一申请人/转让方</th>
 						  <th width="90">案件状态/所属领域</th>
 						  <th width="90">交易类型/价格/状态</th>
-						  <th width="90">添加日/交易日</th>
+						  <th width="90">发布日/交易日</th>
 						  <th width="90">说明</th>
 						  <th width="90">操作</th>
 						</tr>
@@ -1103,7 +1103,7 @@ function changeStatus(patentId,status){
 				async:false,
 				success:function (data){
 					 $("#modalColseBtn").trigger("click");
-					swal("修改成功啦!", "我的大刀早已饥渴难耐!谁能受我三刀", "success");
+					swal("修改成功啦!", "", "success");
 					window.location.reload();
 				}
 			})
