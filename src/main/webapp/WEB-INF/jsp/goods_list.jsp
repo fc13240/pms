@@ -93,12 +93,12 @@
 								</a>
 							</li>
 							<li>
-								<a href="<s:url value='/patent/searchTransactionPatents.html?page.currentPage=1&status=3'/>">
+								<a href="<s:url value='/patent/searchTransactionPatents.html?page.currentPage=1&status=4'/>">
 								已变更待合格 (<c:out value='${transactionStatusCount[(4).intValue()]["patentCount"]}' default="0"/>)
 								</a>
 							</li>
 							<li>
-								<a href="<s:url value='/patent/searchTransactionPatents.html?page.currentPage=1&status=3'/>">
+								<a href="<s:url value='/patent/searchTransactionPatents.html?page.currentPage=1&status=5'/>">
 								交易成功 (<c:out value='${transactionStatusCount[(5).intValue()]["patentCount"]}' default="0"/>)
 								</a>
 							</li>
