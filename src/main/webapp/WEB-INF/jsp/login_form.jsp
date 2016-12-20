@@ -181,15 +181,15 @@
 					            <a target="_blank" href="http://g.lotut.com"><img src="<s:url value='/static/images/01.jpg'/>" style="opacity: 1; "></a>
 					            <span class="shadow"><a target="_blank" href="http://g.lotut.com">免费代办费减</a></span>
 					        </div>
-					        <!-- 
+					        
 					        <div class="fcon" style="display: none;">
-					            <a target="_blank" href="http://g.lotut.com"><img src="<s:url value='/static/images/02.jpg'/>" style="opacity: 1; "></a>
-					            <span class="shadow"><a target="_blank" href="http://g.lotut.com">专利管理</a></span>
+					            <a target="_blank" href="http://www.lotut.com"><img src="<s:url value='/static/images/02.jpg'/>" style="opacity: 1; "></a>
+					            <span class="shadow"><a target="_blank" href="http://g.lotut.com">专利商城</a></span>
 					        </div>
 					        <div class="fcon" style="display: none;">
 					            <a target="_blank" href="http://so.lotut.com"><img src="<s:url value='/static/images/03.jpg'/>" style="opacity: 1; "></a>
 					            <span class="shadow"><a target="_blank" href="http://so.lotut.com">专利搜索</a></span>
-					        </div>-->					  
+					        </div>					  
 					    </div>
 					    <div class="fbg">  
 					    <div class="D1fBt" id="D1fBt">  
