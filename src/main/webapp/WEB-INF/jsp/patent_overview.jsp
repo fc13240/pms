@@ -100,7 +100,11 @@
 		<tr class="simple_bag">
 		  <td style="text-align: center">${status.count }</td>
 		  <td style="text-align: center"><fmt:formatDate value="${notice.dispatchDate }" pattern="yyyy-MM-dd"/></td>
-		  <td style="text-align: center">${notice.name }</td>
+		  <td style="text-align: center">
+		  	<a href="<s:url value='/notice/preview.html?notice=${notice.noticeId }'/>" target="_blank">
+		  		${notice.name }
+		  	</a>
+		  </td>
 		  <td style="text-align: center">${notice.dispatchSequence }</td>
 		  <td style="text-align: center"><span id="notice_read_span${notice.noticeId }">
 		  	<c:choose>
