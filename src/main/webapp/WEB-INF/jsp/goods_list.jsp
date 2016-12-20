@@ -266,9 +266,9 @@
 								<c:out value="${patent.patent.patentType.typeDescription}"/>
 							</td>
 							<td style="text-align:center">
-								<a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${patent.appNo}" target="_blank">
+								<%-- <a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${patent.appNo}" target="_blank"> --%>
 									<c:out value="${patent.appNo}"/>
-								</a>
+								<!-- </a> -->
 							</td>
 							<td class="hidden-480" style="text-align:center">
 								<c:out value="${patent.patentName}"/>
