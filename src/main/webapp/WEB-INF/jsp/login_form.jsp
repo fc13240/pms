@@ -184,7 +184,7 @@
 					        
 					        <div class="fcon" style="display: none;">
 					            <a target="_blank" href="http://www.lotut.com"><img src="<s:url value='/static/images/02.jpg'/>" style="opacity: 1; "></a>
-					            <span class="shadow"><a target="_blank" href="http://g.lotut.com">专利商城</a></span>
+					            <span class="shadow"><a target="_blank" href="http://g.lotut.com">专利管家</a></span>
 					        </div>
 					        <div class="fcon" style="display: none;">
 					            <a target="_blank" href="http://so.lotut.com"><img src="<s:url value='/static/images/03.jpg'/>" style="opacity: 1; "></a>
