@@ -776,7 +776,7 @@ function changSecondColume(patentId, SecondColumn) {
 			   $(this).val($(this).attr("subColumn"));
 			   
 		   })
-		}, 200);
+		}, 300);
 }); 
 
 /* function changSecondColume(patentId, SecondColumn) {
@@ -920,6 +920,10 @@ function changeStatus(patentId,status){
 			animation: "slide-from-top",   
 			inputPlaceholder: "请输入转让方:"
 		}, function(inputValue) {
+			if (inputValue === false) return false;
+			  if (inputValue === "") {
+			    return false
+			  }
 			transferor = inputValue;
 			$.ajax({
 				url: "<s:url value='/patent/batchChangeTransferor.html'/>?transferor=" +transferor+"&patentIds="+ patentIds,
@@ -972,6 +976,10 @@ function changeStatus(patentId,status){
 			animation: "slide-from-top",   
 			inputPlaceholder: "请输入说明:"
 		}, function(inputValue) {
+			if (inputValue === false) return false;
+			  if (inputValue === "") {
+			    return false
+			  }
 			description = inputValue;
 			$.ajax({
 				url: "<s:url value='/patent/batchChangeDescription.html'/>",
