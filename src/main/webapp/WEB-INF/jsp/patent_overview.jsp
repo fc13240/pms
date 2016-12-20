@@ -31,7 +31,7 @@
 </div>
 <%-- <p>${patent.patentType.typeDescription }专利：${patent.name }(${patent.appNo })&nbsp;${patent.patentStatusText }</p> --%>
 <div style="margin-top:20px;"></div>
-
+<div style="border: 0px solid black">
 	<table id="baseInfo" class="table table-striped table-bordered table-hover" style="width: 1100px;">
 		 <tr class="simple_bag">
 			  <td class="center" width="170px"  style="text-align: center">申请号/专利号：</td>
@@ -120,7 +120,11 @@
 		  </td>
 		  <td style="text-align: center">${notice.remainDays }</td>
 		  <td style="text-align: center">
-		  	<select class="selectPointOfInterest form-control" onChange="processNotice('${notice.noticeId}', this);changeNoticeReadStatus(${notice.noticeId})">
+		  	<select class="selectPointOfInterest form-control" onChange="processNotice('${notice.noticeId}', this);changeNoticeReadStatus(${notice.noticeId})"
+		  		<se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
+		  			disabled="disabled"
+		  		</se:authorize>
+		  	>
 		  		<c:forEach items="${noticeProcessStatuses }" var="noticeProcessStatus">
 		  			<option value="${noticeProcessStatus.processStatusId }"
 		  				<c:if test="${notice.processStatus.processStatusId==noticeProcessStatus.processStatusId }">selected="selected"</c:if>
@@ -131,7 +135,12 @@
 		  	</select>
 		  </td>
 		  <td style="text-align: center">
-		  	<select class="selectPointOfInterest form-control" onchange="changePaperApplyType('${notice.noticeId}', this)">
+		  	<select class="selectPointOfInterest form-control" onchange="changePaperApplyType('${notice.noticeId}', this)"
+		  		<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS') and not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_USER')">
+		  			disabled="disabled"
+		  		</se:authorize>
+		  	
+		  	>
 		  		<c:forEach items="${paperApplyTypes }" var="applyType">
 		  			<option value="${applyType.paperTypeId }"
 		  				<c:if test="${notice.paperApplyType.paperTypeId==applyType.paperTypeId }">selected="selected"</c:if>
@@ -185,6 +194,7 @@
 		  <td style="text-algin:center">${good.description }</td>
 		 </tr>
 	</table>
+	</div>
 </div>
 </body>
 

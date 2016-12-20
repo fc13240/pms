@@ -1063,13 +1063,13 @@ where spg.patent_id in
 						left join user_patents up on p.patent_id=up.patent 
 					where p.app_no=#{appNo} and up.user=#{userId}) ) upid on p.patent_id=upid.patent 
 			left join users u on upid.user=u.user_id 
-			left join ( 
+			<!-- left join ( 
 				select share_to from share_patents 
 					where patent=( 
 						select patent_id from patents left join user_patents on patent_id=patent 
 						where user=2 and app_no=#{appNo}) and share_by=2 
 					) su on u.user_id=su.share_to 
-				
+				 -->
 		
 	</select>
 	

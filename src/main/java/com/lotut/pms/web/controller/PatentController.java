@@ -225,6 +225,12 @@ public class PatentController {
 		List<PatentStatus> allPatentStatus = patentService.getAllPatentStatus();
 		model.addAttribute("allPatentTypes", allPatentTypes);
 		model.addAttribute("allPatentStatus", allPatentStatus);
+		String username=PrincipalUtils.getCurrentPrincipal().getUsername();
+		String accountStatus=null;
+		if(username.equals("LOTUTZL")){
+			accountStatus="success access";
+		}
+		model.addAttribute("accountStatus", accountStatus);
 	}
 	
 	@RequestMapping(path="/addPatentFrom", method=RequestMethod.GET)
