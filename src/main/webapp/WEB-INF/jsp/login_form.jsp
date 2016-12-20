@@ -161,7 +161,7 @@
 												忘记密码
 												<i class="ace-icon fa fa-arrow-right"></i>
 											</a>
-											<a href="http://sm.lotut.com/user_instructions.html"  class="user-signup-link" style="margin-left: 80px;">
+											<a target="_blank" href="http://sm.lotut.com/user_instructions.html"  class="user-signup-link" style="margin-left: 80px;">
 												操作指南
 												<i class="ace-icon fa fa-arrow-right"></i>
 											</a>											
