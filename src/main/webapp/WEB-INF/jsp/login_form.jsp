@@ -160,6 +160,10 @@
 											<a href="<s:url value='/user/user_forget_password.html'/>"  class="user-signup-link" >
 												忘记密码
 												<i class="ace-icon fa fa-arrow-right"></i>
+											</a>
+											<a target="_blank" href="http://sm.lotut.com/user_instructions.html"  class="user-signup-link" style="margin-left: 80px;">
+												操作指南
+												<i class="ace-icon fa fa-arrow-right"></i>
 											</a>											
 										</div>
 									</div>
@@ -181,15 +185,15 @@
 					            <a target="_blank" href="http://g.lotut.com"><img src="<s:url value='/static/images/01.jpg'/>" style="opacity: 1; "></a>
 					            <span class="shadow"><a target="_blank" href="http://g.lotut.com">免费代办费减</a></span>
 					        </div>
-					        <!-- 
+					        
 					        <div class="fcon" style="display: none;">
-					            <a target="_blank" href="http://g.lotut.com"><img src="<s:url value='/static/images/02.jpg'/>" style="opacity: 1; "></a>
-					            <span class="shadow"><a target="_blank" href="http://g.lotut.com">专利管理</a></span>
+					            <a target="_blank" href="http://www.lotut.com"><img src="<s:url value='/static/images/02.jpg'/>" style="opacity: 1; "></a>
+					            <span class="shadow"><a target="_blank" href="http://g.lotut.com">专利管家</a></span>
 					        </div>
 					        <div class="fcon" style="display: none;">
 					            <a target="_blank" href="http://so.lotut.com"><img src="<s:url value='/static/images/03.jpg'/>" style="opacity: 1; "></a>
 					            <span class="shadow"><a target="_blank" href="http://so.lotut.com">专利搜索</a></span>
-					        </div>-->					  
+					        </div>					  
 					    </div>
 					    <div class="fbg">  
 					    <div class="D1fBt" id="D1fBt">  
@@ -297,9 +301,9 @@
 	  <div class="container clear">
 	    <div class="footer_r">
 	      <div class="footer-Copy ml50" style="margin: 0px auto;text-align:center">
-	        <p class="about-us"><a href="http://cn.lotut.com/" target="_blank" rel="nofollow">关于我们</a><span>|</span>
+	        <p class="about-us"><a href="http://www.lotut.com/" target="_blank" rel="nofollow">关于我们</a><span>|</span>
 	          <a href="http://so.lotut.com/" target="_blank" rel="nofollow">专利检索</a><span>|</span>
-	          <a href="http://www.lotut.com/index.php/blog/095lzql4ke.html" target="_blank" rel="nofollow">联系我们</a><span>|</span>
+	          <a href="http://www.lotut.com/" target="_blank" rel="nofollow">联系我们</a><span>|</span>
 	          <a href="http://www.lotut.com/" target="_blank">商标市场</a></p>
 	        <p class="Copyright"><font color="#000">Copyright @ 2016龙图腾版权，技术支持龙图腾信息技术有限公司</font> </p>
 			<span style="display:inline-block;position:relative;width:auto;">

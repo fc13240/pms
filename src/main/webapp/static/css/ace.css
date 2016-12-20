@@ -12568,7 +12568,7 @@ td .lbl:only-child {
   border-top: 2px solid #D43230;
 }
 .login-box .toolbar > div {
-  width: 50%;
+/*   width: 50%; */
   display: inline-block;
   padding: 9px 0 11px;
 }
