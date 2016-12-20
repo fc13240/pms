@@ -520,7 +520,7 @@
 	<select id="getNoticeOverview" resultMap="NoticeResultMap">
 		select n.notice_id,n.dispatch_date,n.notice_name,n.dispatch_sequence,nr.notice_id as notice_view_status,
 		if(datediff(current_date,n.dispatch_date)>0,datediff(current_date,n.dispatch_date),-1) as remain_days,nps.*,
-		n.paper_apply_type,npat.notice_paper_apply_type_desc
+		n.paper_apply_type as paper_type_id,npat.notice_paper_apply_type_desc as paper_type_description
 		from notices n left join patents p on n.patent=p.patent_id 
 		left join (select notice_id  from notice_read where user_id=#{userId} and notice_id in 
 		(

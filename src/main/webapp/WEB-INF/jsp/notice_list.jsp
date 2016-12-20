@@ -393,7 +393,11 @@
 								  <input style="text-align:center" type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>"></span>
 								  <span class="lbl"></span></label></td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
-								<td style="text-align:center"><c:out value="${notice.patent.appNo}"/></td>
+								<td style="text-align:center">
+									<a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${notice.patent.appNo}" target="_blank">
+										<c:out value="${notice.patent.appNo}"/>
+									</a>
+								</td>
 								<td style="text-align:center"><c:out value="${notice.patent.name}"/></td>
 								<td style="text-align:center"><c:out value="${notice.patent.appPerson}"/></td> 
 								<%-- <td style="text-align:center"><c:out value="${notice.patent.patentStatusText}"/></td> --%>
