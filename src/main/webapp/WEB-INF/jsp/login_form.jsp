@@ -160,6 +160,10 @@
 											<a href="<s:url value='/user/user_forget_password.html'/>"  class="user-signup-link" >
 												忘记密码
 												<i class="ace-icon fa fa-arrow-right"></i>
+											</a>
+											<a href="http://sm.lotut.com/user_instructions.html"  class="user-signup-link" style="margin-left: 80px;">
+												操作指南
+												<i class="ace-icon fa fa-arrow-right"></i>
 											</a>											
 										</div>
 									</div>
