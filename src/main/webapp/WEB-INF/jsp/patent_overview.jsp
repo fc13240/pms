@@ -119,10 +119,10 @@
 		  	</span>
 		  </td>
 		  <td style="text-align: center">
-		  	<c:if test="${notice.remainDays<=-1 }">
+		  	<c:if test="${notice.remainDays==-1 }">
 		  		已超期
 		  	</c:if>
-		  	<c:if test="${notice.remainDays>-1 }">
+		  	<c:if test="${notice.remainDays!=-1 }">
 		  		 ${notice.remainDays }
 		  	</c:if>
 		 </td>
