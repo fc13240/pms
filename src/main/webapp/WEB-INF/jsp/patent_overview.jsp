@@ -91,7 +91,7 @@
 			<th style="text-align: center">通知书名称</th>
 			<th style="text-align: center">发文序号</th>
 			<th style="text-align: center">是否查看</th>
-			<th style="text-align: center">剩余天数</th>
+			<th style="text-align: center">已过天数</th>
 			<th style="text-align: center" width="175px">是否处理</th>
 			<th style="text-align: center" width="105px">纸件申请</th>
 			<th style="text-align: center">操作</th>
@@ -119,11 +119,11 @@
 		  	</span>
 		  </td>
 		  <td style="text-align: center">
-		  	<c:if test="${notice.remainDays==-1 }">
-		  		已超期
+		  	<c:if test="${notice.remainDays==0 }">
+		  		今天
 		  	</c:if>
-		  	<c:if test="${notice.remainDays!=-1 }">
-		  		 ${notice.remainDays }
+		  	<c:if test="${notice.remainDays!=0 }">
+		  		 ${notice.remainDays }天
 		  	</c:if>
 		 </td>
 		  <td style="text-align: center">
