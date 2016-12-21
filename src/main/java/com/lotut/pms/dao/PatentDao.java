@@ -85,7 +85,7 @@ public interface PatentDao {
 	
 	List<Patent> getUserPatentsByCreateTime(Page page);
 	
-	void batchSaveGoods(List<Long> patentIds,int userId);
+	void batchSaveGoods(List<Long> patentIds,int userId,String transferor);
 	
 	void updatePatentsGoodsStatus(List<Long> patentIds);
 	

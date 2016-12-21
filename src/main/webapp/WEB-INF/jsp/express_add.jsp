@@ -190,7 +190,7 @@
 <div class = "modal fade" id = "friendModal" tabindex = "-1" role = "dialog" 
    aria-labelledby = "myModalLabel" aria-hidden = "true" >
    
-   <div class = "modal-dialog" style="width:750px">
+   <div class = "modal-dialog" style="height:600px;width:750px">
       <div class = "modal-content">
          
          <div class = "modal-header">

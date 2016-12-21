@@ -298,9 +298,6 @@
 								许可价
 								</c:if>
 								<span style="text-align:center">${patent.price}元</span>
-								
-								<%-- <input type="text" name="price" class="form-control" value="${patent.price}" onChange="changePrice('<c:out value='${patent.patentId}'/>', this.value)"> --%>
-								
 								<select style="display:inline;width:130px" onChange="changeStatus('<c:out value='${patent.patentId}'/>', this.value)" class="form-control first_column">
 								<c:if test="${patent.status==1}">
 								<option value="${patent.status}" selected="selected">
@@ -350,15 +347,6 @@
 								<option value="4"><font color="red">已变更待合格</font></option>
 								</c:if>
 								</select>
-								
-								
-								
-								<%-- <c:if test="${patent.status==2}">
-								<font color="red">已预订</font>
-								</c:if>
-								<c:if test="${patent.status==3}">
-								<font color="red">交易成功</font>
-								</c:if>	 --%>
 							</td>
 							
 							<td class="hidden-480" style="text-align:center">
@@ -377,18 +365,6 @@
 							</td>
 							<td >
 							&nbsp;
-							<%-- <c:if test="${patent.status==2}">
-							  <a href="javascript:return void;"  onclick="upTransactionPatent(${patent.patentId})">	 
-							  上架
-							  </a>
-							</c:if> --%>
-							  <%-- <c:if test="${patent.status==1}">
-							  <a href="javascript:return void;"  onclick="downTransactionPatent(${patent.patentId})">
-							  下架
-							  </a> 
-							  &nbsp;&nbsp;&nbsp;
-			             	  </c:if> --%>
-			             	  
 							  <a href="javascript:return void;"  onclick="deleteTransactionPatent(${patent.patentId})">
 							  删除
 							  </a>
@@ -508,9 +484,6 @@
 						  <td  align="center">
 							  <select style="width:160px;" class="selectPointOfInterest form-control" name="firstColumnId" onchange="getModalSecondColumn(this.value)" id="modalFirstColumnSelect">
 							  	<option value="">全部</option>
-							  	<%-- <c:forEach items="${FirstColumns }" var="firstColumn">
-							  		<option value="${firstColumn.id }">${firstColumn.name }</option>
-							  	</c:forEach> --%>
 							  </select>
 							</td>
 							<td  align="center">
@@ -685,7 +658,7 @@ var patentIdsOfChangeField = null;
 		});		
 	}	
 </script>
-<script>
+<script type="text/javascript">
 var tabs=function(){
     function tag(name,elem){
         return (elem||document).getElementsByTagName(name);
@@ -736,7 +709,6 @@ tabs.set("nav","menu_con");//执行
 
 </script>
 <script type="text/javascript">
-
 function changSecondColume(patentId, SecondColumn) {
 	var SecondColumn=$("#secondColumn"+SecondColumn).val();
 	$.ajax({
@@ -754,7 +726,6 @@ function changSecondColume(patentId, SecondColumn) {
  $(function(){
 	   $(".first_column").change(function () {
 		  var first_column=$(this).val();
-		 // alert(first_column);
 		  var second_column=$(this).parent(".form-column").children(".second_column");
 		 	resetSelect(second_column);
 			if (first_column != "") {
@@ -779,19 +750,6 @@ function changSecondColume(patentId, SecondColumn) {
 		}, 200);
 }); 
 
-/* function changSecondColume(patentId, SecondColumn) {
-	$.ajax({
-		url: "<s:url value='/patent/changSecondColume.html'/>?SecondColumn=" + SecondColumn + "&patentId=" + patentId, 
-		type: 'get', 
-		success: function(data) {
-			//formutil.alertMessage('修改成功');	
-		},
-		error: function() {
-			formutil.alertMessage('修改失败');
-		}
-	});	
-} */
-
 function addDefaultOption(selectElem) {
 	selectElem.append("<option value=''>请选择</option>");
 }
@@ -800,7 +758,6 @@ function resetSelect() {
 	for (var i = 0; i < arguments.length; i++) {
 		var selectObj = arguments[i];
 		selectObj.empty();
-		/* addDefaultOption(selectObj); */
 	}
 }
 
@@ -816,7 +773,6 @@ function changePrice(patentId, price) {
 		url: "<s:url value='/patent/changePrice.html'/>?price=" + price + "&patentId=" + patentId, 
 		type: 'get', 
 		success: function(data) {
-			//formutil.alertMessage('修改成功');	
 		},
 		error: function() {
 			formutil.alertMessage('修改失败');
@@ -829,7 +785,6 @@ function changeStatus(patentId,status){
 		url: "<s:url value='/patent/changeStatus.html'/>?status=" + status + "&patentId=" + patentId, 
 		type: 'get', 
 		success: function(data) {
-			//formutil.alertMessage('修改成功');	
 		},
 		error: function() {
 			formutil.alertMessage('修改失败');
@@ -857,10 +812,8 @@ function changeStatus(patentId,status){
 		};
 		var price = 0;
 		var patentIds = uniquePatentNos.join(",");
-		//var price = prompt("请输入价格", "");
 		swal({   
 			title: "批量修改价格",   
-			//text: "这里可以输入并确认:",   
 			type: "input",   
 			showCancelButton: true,   
 			closeOnConfirm: false,   
@@ -878,18 +831,6 @@ function changeStatus(patentId,status){
 				swal("操作失败!", "修改价格失败！", "error"); 
 			});
 		});
-
-		//var price = prompt("请输入价格", "");
-		/* $.ajax({
-			url:"<s:url value='/patent/batchChangePrice.html'/>?price=" +price+"&patentIds="+ patentIds,
-			type:"get",
-				success: function(data) {
-					//formutil.alertMessage('批量修改成功',true);	
-				},
-				error: function() {
-					formutil.alertMessage('批量修改失败',true);
-				}
-		}); */
 	}
 	
 	
@@ -920,6 +861,7 @@ function changeStatus(patentId,status){
 			animation: "slide-from-top",   
 			inputPlaceholder: "请输入转让方:"
 		}, function(inputValue) {
+			if (inputValue === false) return false;
 			transferor = inputValue;
 			$.ajax({
 				url: "<s:url value='/patent/batchChangeTransferor.html'/>?transferor=" +transferor+"&patentIds="+ patentIds,
@@ -972,6 +914,7 @@ function changeStatus(patentId,status){
 			animation: "slide-from-top",   
 			inputPlaceholder: "请输入说明:"
 		}, function(inputValue) {
+			if (inputValue === false) return false;
 			description = inputValue;
 			$.ajax({
 				url: "<s:url value='/patent/batchChangeDescription.html'/>",

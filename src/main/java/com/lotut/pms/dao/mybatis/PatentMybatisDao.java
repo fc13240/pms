@@ -225,8 +225,8 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	}
 
 	@Override
-	public void batchSaveGoods(List<Long> patentIds, int userId) {
-		patentMapper.batchSaveGoods(patentIds, userId);
+	public void batchSaveGoods(List<Long> patentIds, int userId,String transferor) {
+		patentMapper.batchSaveGoods(patentIds, userId,transferor);
 		
 	}
 

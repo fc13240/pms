@@ -681,11 +681,11 @@
 	
 	
  	<insert id="batchSaveGoods"  >
-		insert into sell_patent_goods(patent_id, transaction_date, add_date, status, transaction_type, price, patent_second_column,owner)
+		insert into sell_patent_goods(patent_id, transaction_date, add_date, status, transaction_type, price, patent_second_column,owner,transferor)
 		values 
 		<foreach item="patentId" collection="patentIds"
 			      separator="," >
-		(#{patentId}, null,curdate(), 1, 1, null, 1,#{userId})
+		(#{patentId}, null,curdate(), 1, 1, null, 1,#{userId},#{transferor})
 		</foreach>
 	</insert>
 	 
