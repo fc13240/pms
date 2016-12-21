@@ -118,7 +118,14 @@
 		  	
 		  	</span>
 		  </td>
-		  <td style="text-align: center">${notice.remainDays }</td>
+		  <td style="text-align: center">
+		  	<c:if test="${notice.remainDays<=-1 }">
+		  		已超期
+		  	</c:if>
+		  	<c:if test="${notice.remainDays>-1 }">
+		  		 ${notice.remainDays }
+		  	</c:if>
+		 </td>
 		  <td style="text-align: center">
 		  	<select class="selectPointOfInterest form-control" onChange="processNotice('${notice.noticeId}', this);changeNoticeReadStatus(${notice.noticeId})"
 		  		<se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
