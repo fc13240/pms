@@ -448,7 +448,9 @@ public class PatentController {
 		int userId=PrincipalUtils.getCurrentUserId();
 		  System.out.println(patentService.bacthsaveGoodsCheckOut(patentIds));
 		if(!notExistGoods){
-			patentService.batchSaveGoods(patentIds, userId);
+			User patentOwner = userService.getUserDetail(userId);
+			String transferor=patentOwner.getUsername();
+			patentService.batchSaveGoods(patentIds, userId,transferor);
 			patentService.updatePatentsGoodsStatus(patentIds);
 			out.write("批量发布成功");
 		}else {

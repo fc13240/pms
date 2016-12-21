@@ -267,8 +267,8 @@ public class PatentServiceImpl implements PatentService {
 	}
 
 	@Override
-	public void batchSaveGoods(List<Long> patentIds, int userId) {
-		patentDao.batchSaveGoods(patentIds, userId);
+	public void batchSaveGoods(List<Long> patentIds, int userId,String transferor) {
+		patentDao.batchSaveGoods(patentIds, userId,transferor);
 		
 	}
 
