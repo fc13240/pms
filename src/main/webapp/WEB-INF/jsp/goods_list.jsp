@@ -747,7 +747,7 @@ function changSecondColume(patentId, SecondColumn) {
 			   $(this).val($(this).attr("subColumn"));
 			   
 		   })
-		}, 300);
+		}, 200);
 }); 
 
 function addDefaultOption(selectElem) {
