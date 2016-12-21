@@ -921,9 +921,6 @@ function changeStatus(patentId,status){
 			inputPlaceholder: "请输入转让方:"
 		}, function(inputValue) {
 			if (inputValue === false) return false;
-			  if (inputValue === "") {
-			    return false
-			  }
 			transferor = inputValue;
 			$.ajax({
 				url: "<s:url value='/patent/batchChangeTransferor.html'/>?transferor=" +transferor+"&patentIds="+ patentIds,
@@ -977,9 +974,6 @@ function changeStatus(patentId,status){
 			inputPlaceholder: "请输入说明:"
 		}, function(inputValue) {
 			if (inputValue === false) return false;
-			  if (inputValue === "") {
-			    return false
-			  }
 			description = inputValue;
 			$.ajax({
 				url: "<s:url value='/patent/batchChangeDescription.html'/>",
