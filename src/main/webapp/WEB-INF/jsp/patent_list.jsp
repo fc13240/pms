@@ -283,7 +283,8 @@
 								<c:out value="${patent.patentStatusText}"/>
 							</td>
 							<td style="text-align:center">
-								<input style="width:180px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="90" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)"/>
+								<%-- <input style="width:180px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="90" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)"/> --%>
+								<c:out value='${patent.internalCode}'/>
 								<br/>
 								<c:forEach items="${patent.shareUsers}" var="shareUser" varStatus="s">								
 									<a href="javascript:return void" onclick="searchShareUserDetail(${shareUser.userId})" >
