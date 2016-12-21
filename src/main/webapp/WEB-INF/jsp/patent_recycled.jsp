@@ -71,7 +71,6 @@
 						  <th width="70">案件状态</th>
 						  <th width="50">内部编码</th>
 						  <th width="90">共享人</th>
-						  <th width="80">操作</th>
 						</tr>
 					  </thead>
 					  <tbody>
@@ -93,26 +92,6 @@
 							</td>
 							<td style="text-align:center"><c:out value="${patent.shareUsersAsString}"/>
 							</td>
-							<td style="text-align:center"><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
-							  分享
-							  </a>&nbsp;
-							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
-							  交费
-							  </a>
-							  <br> 
-							  <se:authorize access="hasRole('ROLE_TRADER')">
-								  <c:if test="${patent.transactionStatus==null}">
-	 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
-					                  	<button class="t-btn2">加入交易</button> 
-				 	                  </a>
-				 	                </c:if>
-				 	                 <c:if test="${patent.transactionStatus != null}">
-	 			                  	   <a >
-					                  	<font color="red">${patent.transactionStatus}</font>
-				 	                  </a>
-				 	                  </c:if>
-			 	               </se:authorize> 
-							  </td>
 						  </tr>
 						</c:forEach>
 					  </tbody>
