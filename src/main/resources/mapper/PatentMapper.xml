@@ -1124,33 +1124,31 @@ where spg.patent_id in
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>
-		SELECT sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date,sp.patent_status_text,sp.transaction_status,sp.create_time, pt.patent_type_id, 
-				pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username,spg.patent_id AS sell_patent_id ,spg.price,spg.transaction_type 
-		FROM (SELECT p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, p.patent_type,p.transaction_status,p.create_time,
+		select sp.patent_id, sp.app_no, sp.patent_owner, sp.patent_name, sp.app_person, sp.app_date, sp.patent_status_text,sp.transaction_status,pt.patent_type_id, 
+							 pt.patent_type_desc, sp.patent_status_id, sp.patent_status_desc, sp.internal_code, u.user_id, u.username
+		from (select p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date,  p.internal_code, p.patent_type,p.transaction_status,
 				ps.patent_status_id, ps.patent_status_desc, p.patent_status_text
-		FROM patents p LEFT JOIN patent_status ps ON p.patent_status = ps.patent_status_id JOIN user_patents up ON p.patent_id = up.patent
-		WHERE up.user = #{userId} AND up.trash_status=2
-		<if test="keyword != null">
+			from patents p left join patent_status ps on p.patent_status = ps.patent_status_id join user_patents up on p.patent_id = up.patent
+		 where up.user = #{userId} and up.trash_status=2
+		 <if test="keyword != null and keyword !=''">
 		and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
 			 or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} 
 			 or ps.patent_status_desc like #{keyword_pattern} or p.patent_status_text like #{keyword_pattern})
-		</if>		 	
-		ORDER BY p.app_date DESC, p.app_person, p.patent_name
-		limit #{page.startIndex}, #{page.pageSize}) AS sp 
-		LEFT JOIN patent_types pt ON sp.patent_type = pt.patent_type_id JOIN user_patents up ON up.patent = sp.patent_id
-		JOIN users u ON u.user_id = up.user LEFT JOIN sell_patent_goods spg ON sp.patent_id=spg.patent_id 	
-		ORDER BY sp.app_date DESC, sp.app_person, sp.patent_name	
+		</if>
+		 order by p.app_date desc, p.app_person, p.patent_name
+		 limit #{page.startIndex}, #{page.pageSize}) as sp left join patent_types pt on sp.patent_type = pt.patent_type_id join user_patents up on up.patent = sp.patent_id
+		    join users u on u.user_id = up.user	
+		 order by sp.app_date desc, sp.app_person, sp.patent_name
 	</select>
 	
 	<select id="SearchPatentsRecycledCount" parameterType="PatentSearchCondition" resultType="int">
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>
-		SELECT p.patent_id, p.app_no, p.patent_owner, p.patent_name, p.app_person, p.app_date, p.internal_code, p.patent_type,p.transaction_status,p.create_time,
-				ps.patent_status_id, ps.patent_status_desc, p.patent_status_text
+		SELECT count(*)
 		FROM patents p LEFT JOIN patent_status ps ON p.patent_status = ps.patent_status_id JOIN user_patents up ON p.patent_id = up.patent
 		WHERE up.user = #{userId} AND up.trash_status=2
-		<if test="keyword != null">
+		<if test="keyword != null and keyword !=''">
 		and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
 			 or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} 
 			 or ps.patent_status_desc like #{keyword_pattern} or p.patent_status_text like #{keyword_pattern})
