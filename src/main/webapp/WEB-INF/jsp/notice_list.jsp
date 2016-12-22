@@ -608,7 +608,7 @@
 								</se:authorize>
 								
 								
-								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
+								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS') and  not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT') ">
 								<td style="text-align:center">
 								  <select class="form-control" disabled="disabled">
 									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
