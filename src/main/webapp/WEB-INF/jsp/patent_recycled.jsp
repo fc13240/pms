@@ -43,7 +43,7 @@
 
 						  <table class="search-table">
 							  <tr>
-							  <td>关键字</td>
+							  <td></td>
 							  </tr>
 							  <tr>
 							  <td>
