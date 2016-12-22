@@ -166,4 +166,18 @@ public interface PatentDao {
 	Map<String, Map<String, String>> getTransactionByTransactionStatus();
 	
 	List<Patent> getLOTUTPatentsByIds(int userId);
+	
+	List<Patent> getUserAnnualFeeMonitorPatents(Page page);
+	
+	int  getUserAnnualFeeMonitorPatentsCount(int userId);
+	
+	int isFeeMonitorPatents(int userId,List<Long> patentIds);
+	
+	void batchAddFeeMonitorPatents(int userId,List<Long> patentIds);
+	
+	void batchCancelFeeMonitorPatents(int userId,List<Long> patentIds);
+	
+	List<Patent> searchUserAnnualFeeMonitorPatents(PatentSearchCondition searchCondition);
+	
+	int searchUserAnnualFeeMonitorPatentsCount(PatentSearchCondition searchCondition);
 }

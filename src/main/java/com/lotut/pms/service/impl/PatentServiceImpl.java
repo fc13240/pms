@@ -473,4 +473,44 @@ public class PatentServiceImpl implements PatentService {
 		PatentExcelGenerator.writePatentRecordsToExcel(patents, exportExcelPath);
 		return exportExcelPath;
 	}
+
+	@Override
+	public List<Patent> getUserAnnualFeeMonitorPatents(Page page) {
+		return patentDao.getUserAnnualFeeMonitorPatents(page);
+	}
+	
+	@Override
+	public	int  getUserAnnualFeeMonitorPatentsCount(int userId) {
+		return patentDao.getUserAnnualFeeMonitorPatentsCount(userId);
+	}
+
+	@Override
+	public boolean isFeeMonitorPatents(int userId, List<Long> patentIds) {
+		int size = patentDao.isFeeMonitorPatents(userId, patentIds);
+		if(size>0){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	@Override
+	public void batchAddFeeMonitorPatents(int userId, List<Long> patentIds) {
+		patentDao.batchAddFeeMonitorPatents(userId, patentIds);
+	}
+	
+	@Override
+	public void batchCancelFeeMonitorPatents(int userId, List<Long> patentIds) {
+		patentDao.batchCancelFeeMonitorPatents(userId, patentIds);
+	}
+
+	@Override
+	public List<Patent> searchUserAnnualFeeMonitorPatents(PatentSearchCondition searchCondition) {
+		return patentDao.searchUserAnnualFeeMonitorPatents(searchCondition);
+	}
+
+	@Override
+	public int searchUserAnnualFeeMonitorPatentsCount(PatentSearchCondition searchCondition) {
+		return patentDao.searchUserAnnualFeeMonitorPatentsCount(searchCondition);
+	}
 }

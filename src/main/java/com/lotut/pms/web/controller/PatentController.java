@@ -664,4 +664,60 @@ public class PatentController {
 			out.flush();
 		}
 	}
+	
+	@RequestMapping(path="getUserAnnualFeeMonitorPatents")
+	public String getUserAnnualFeeMonitorPatents(Page page,HttpSession session,Model model){
+		int userId = PrincipalUtils.getCurrentUserId();
+		if(page.getCurrentPage()<=1){
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		page.setUserId(userId);
+		int totalRecrods = patentService.getUserAnnualFeeMonitorPatentsCount(userId);
+		page.setTotalRecords(totalRecrods);
+		List<Patent> patents=patentService.getUserAnnualFeeMonitorPatents(page);
+		model.addAttribute("patents", patents);
+		model.addAttribute("page", page);
+		return "patent_annual_fee_monitor";
+	}
+	
+	@RequestMapping(path="batchAddAnnualFeeMonitor")
+	public void batchAddAnnualFeeMonitor(@RequestParam("patentIds") List<Long> patentIds,PrintWriter pw){
+		int userId = PrincipalUtils.getCurrentUserId();
+		String message = null;
+		boolean isAnnualFeeMonitor = patentService.isFeeMonitorPatents(userId,patentIds);
+		if(isAnnualFeeMonitor){
+			patentService.batchAddFeeMonitorPatents(userId,patentIds);
+			message="批量年费监控成功";
+		}else{
+			message="年费监控中已存在，请核对后再进行加入监控！";
+		}
+		pw.write(message);
+	}
+	
+	@RequestMapping(path="batchCancelAnnualFeeMonitor")
+	public void batchCancelAnnualFeeMonitor(@RequestParam("patentIds") List<Long> patentIds,PrintWriter pw){
+		int userId = PrincipalUtils.getCurrentUserId();
+		patentService.batchCancelFeeMonitorPatents(userId,patentIds);
+		pw.write("批量取消年费监控成功");
+	}
+	
+	@RequestMapping(path="searchUserAnnualFeeMonitorPatents")
+	public String searchUserAnnualFeeMonitorPatents(PatentSearchCondition searchCondition,HttpSession session,Model model){
+		Page page = searchCondition.getPage();
+		int userId = PrincipalUtils.getCurrentUserId();
+		if(page.getCurrentPage()<=1){
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(userId);
+		searchCondition.setPage(page);
+		int totalRecords = patentService.searchUserAnnualFeeMonitorPatentsCount(searchCondition);
+		page.setTotalRecords(totalRecords);
+		List<Patent> patents = patentService.searchUserAnnualFeeMonitorPatents(searchCondition);
+		model.addAttribute("patents", patents);
+		model.addAttribute("page", page);
+		model.addAttribute("searchCondition", searchCondition);
+		return "patent_annual_fee_monitor";
+	}
 }

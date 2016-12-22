@@ -164,5 +164,20 @@ public interface PatentService {
 	Map<String, Map<String, String>> getTransactionByTransactionStatus();
 	
 	String getLotutPatentExportExcel(int userId,String exportExcelName) throws IOException;
+	
+	List<Patent> getUserAnnualFeeMonitorPatents(Page page);
+	
+	int  getUserAnnualFeeMonitorPatentsCount(int userId);
+	
+	boolean isFeeMonitorPatents(int userId,List<Long> patentIds);
+	
+	void batchAddFeeMonitorPatents(int userId,List<Long> patentIds);
+	
+	void batchCancelFeeMonitorPatents(int userId,List<Long> patentIds);
+	
+	List<Patent> searchUserAnnualFeeMonitorPatents(PatentSearchCondition searchCondition);
+	
+	int searchUserAnnualFeeMonitorPatentsCount(PatentSearchCondition searchCondition);
+	
 }
 

@@ -435,4 +435,39 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		return patentMapper.getLOTUTPatentsByIds(userId);
 	}
 
+	@Override
+	public List<Patent> getUserAnnualFeeMonitorPatents(Page page) {
+		return patentMapper.getUserAnnualFeeMonitorPatents(page);
+	}
+	
+	@Override
+	public	int  getUserAnnualFeeMonitorPatentsCount(int userId){
+		return patentMapper.getUserAnnualFeeMonitorPatentsCount(userId);
+	}
+
+	@Override
+	public int isFeeMonitorPatents(int userId, List<Long> patentIds) {
+		return patentMapper.isFeeMonitorPatents(userId, patentIds);
+	}
+	
+	@Override
+	public void batchAddFeeMonitorPatents(int userId, List<Long> patentIds) {
+		patentMapper.batchAddFeeMonitorPatents(userId, patentIds);
+	}
+	
+	@Override
+	public void batchCancelFeeMonitorPatents(int userId, List<Long> patentIds) {
+		patentMapper.batchCancelFeeMonitorPatents(userId, patentIds);
+	}
+
+	@Override
+	public List<Patent> searchUserAnnualFeeMonitorPatents(PatentSearchCondition searchCondition) {
+		return patentMapper.searchUserAnnualFeeMonitorPatents(searchCondition);
+	}
+
+	@Override
+	public int searchUserAnnualFeeMonitorPatentsCount(PatentSearchCondition searchCondition) {
+		return patentMapper.searchUserAnnualFeeMonitorPatentsCount(searchCondition);
+	}
+
 }

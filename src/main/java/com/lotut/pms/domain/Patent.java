@@ -32,6 +32,7 @@ public class Patent {
 	private List<User> shareUsers;
 	private Timestamp createTime;
 	private SalePatentGood salePatentGood;
+	private int isWithinMonth;
 
 	
 	public SalePatentGood getSalePatentGood() {
@@ -40,6 +41,15 @@ public class Patent {
 
 	public void setSalePatentGood(SalePatentGood salePatentGood) {
 		this.salePatentGood = salePatentGood;
+	}
+
+	
+	public int getIsWithinMonth() {
+		return isWithinMonth;
+	}
+
+	public void setIsWithinMonth(int isWithinMonth) {
+		this.isWithinMonth = isWithinMonth;
 	}
 
 	public Timestamp getCreateTime() {

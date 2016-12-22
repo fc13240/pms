@@ -27,5 +27,9 @@
 	<h5>回收站</h5>
 	</a> 
 	</li>	
+	<li  class=""> <a href="<s:url value='/patent/getUserAnnualFeeMonitorPatents.html?currentPage=1'/>">
+	<h5>年费监控</h5>
+	</a> 
+	</li>	
 	</ul>
 </div>

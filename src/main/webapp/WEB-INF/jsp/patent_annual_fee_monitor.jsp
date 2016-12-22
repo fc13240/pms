@@ -36,90 +36,6 @@
 				<div style="height:10px;"></div>
 				<!-- menu begin -->
 				<div class="lt-box">
-
-					<div id="menu">
-					  <div style="height:33px;">
-						<ul id="nav">
-						  <p>快捷处理：</p>
-						  <li><a href="#" class="selected">专利类型</a></li>
-						  <li><a href="#" class="">案件状态</a></li>
-						  <li><a style="color:#FF0000;" href="<s:url value='/notice/list.html?selectType=5&currentPage=1'/>" class="">通知书监控中</a></li>
-						  <li><a style="color:#FF0000;" href="<s:url value='/fee/monitoredFeeList.html?selectType=4&currentPage=1'/>" class="">交费监控中</a></li>
-						</ul>
-					  </div>
-						
-					  <div id="menu_con">
-					  						
-						<div class="tag" style="display:block; margin-left:-20px;"> 
-
-						  <ul class="qxjk-ul"><li>
-							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=1'/>">
-							发明专利 (<c:out value='${patentTypeCount[(1).intValue()]["patentCount"]}' default="0"/>)</a>
-							</li>
-							<li>
-							 <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=2'/>">
-							实用新型 (<c:out value='${patentTypeCount[(2).intValue()]["patentCount"]}' default="0"/>)
-							</a> 
-							</li>
-							
-							<li>
-							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=3'/>">外观设计(<c:out value='${patentTypeCount[(3).intValue()]["patentCount"]}' default="0"/>)
-							</a> 							
-							</li>
-
-						  </ul>	    
-						
-						
-						</div>
-						<div class="tag"  style="display:none">
-						  <ul class="qxjk-ul">
-						  	<li>	      
-								<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=1'/>">
-								等待申请费 (<c:out value='${patentStatusCount[(1).intValue()]["patentCount"]}' default="0"/>)
-								</a>
-							</li> 
-							
-							<li>
-							   	<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=2'/>">
-								待答复 (<c:out value='${patentStatusCount[(2).intValue()]["patentCount"]}' default="0"/>)
-								</a> 
-							</li>
-							
-							<li>
-								<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=3'/>">
-								等年登印费 (<c:out value='${patentStatusCount[(3).intValue()]["patentCount"]}' default="0"/>)
-								</a>
-							</li>
-							
-							<li>
-								<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=4'/>">
-								待恢复 (<c:out value='${patentStatusCount[(4).intValue()]["patentCount"]}' default="0"/>)
-								</a> 
-							</li>
-							
-							<li>
-							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=5'/>">
-							失效(<c:out value='${patentStatusCount[(5).intValue()]["patentCount"]}' default="0"/>)
-							</a> 
-							</li>
-							
-							<li>
-								<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=6'/>">
-								专利权维持 (<c:out value='${patentStatusCount[(6).intValue()]["patentCount"]}' default="0"/>)
-								</a>
-							</li>
-							
-							<li>
-								<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=7'/>">
-								其他 (<c:out value='${patentStatusCount[(7).intValue()]["patentCount"]}' default="0"/>)
-								</a>
-							</li>
-						  </ul>
-						</div>
-					  </div>
-					</div>				
-				
-				
 				</div>
 				<!-- menu end -->
 				<!-- search begin -->
@@ -128,121 +44,40 @@
 				
 				<div class="lt-box">
 					<div class="search-box">
-					
-					
-					
-						<form class="form-inline" action="<s:url value='/patent/search.html'/>" method="get">
-						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-						  <div class="t-third">
-
-						  <table class="search-table">
-							  <tr>
-							  <td>专利类型</td>
-							  <td>专利状态</td>
-							  <td>交易状态</td>
-							  <td>申请日开始</td>
-							  <td></td>
-							  <td>申请日结束</td>
-							  <td>关键字</td>
-							  <td></td>	
-							  </tr>
-							  <tr>
-							  <td>
-								<select  style="width:100px;" class="selectPointOfInterest form-control" name="patentType">
-								  <option value="">全部</option>
-								  <c:forEach items="${allPatentTypes}" var="patentType">
-									<option value="<c:out value='${patentType.patentTypeId}'/>">
-									<c:out value="${patentType.typeDescription}"/>
-									</option>
-								  </c:forEach>
-								</select>
-							  </td>
-							  <td>
-								<select style="width:121px;" class="form-control" name="patentStatus">
-								  <option value="">全部</option>
-								  <c:forEach items="${allPatentStatus}" var="patentStatus">
-									<option value="<c:out value='${patentStatus.patentStatusId}'/>">
-									<c:out value="${patentStatus.statusDescription}"/>
-									</option>
-								  </c:forEach>
-								</select>
-							  </td>
-							  <td>
-								<select  style="width:120px;" class="selectPointOfInterest form-control" name="transactionStatus">
-								    <option value="" >全部</option>
-								    <option value="0">待发布</option>
-									<option value="1" >待交易</option>
-									<option value="2" >已预订</option>
-									<option value="3" >已付款待变更</option>
-									<option value="4" >已变更待合格</option>
-									<option value="5" >交易成功</option>
-								</select>
-							  </td>
-							  <td>
-								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >							  
-							  </td>
-							  <td>-</td>
-							  <td>
-								<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >
-							  </td>
-							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>							  
-							  </td>
-							  <td>
-							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
-							  </td>
-							  </tr>							  
-						  </table>
-						  </div>
-						</form>
+						<table class="search-table" width="100%">
+							<tr>
+								<td>
+									<a href="javascript:return void" onclick="batchCancelAnnualFeeMonitor()" >
+										<button style="width:140px;" class="button button-primary  button-rounded"  data-toggle="tooltip" data-placement="right">批量取消年费监控</button>
+									</a>
+								</td>
+								<td>
+									<form class="form-inline" action="<s:url value='/patent/searchUserAnnualFeeMonitorPatents.html'/>" method="get">
+									  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
+									  <div class="t-third">
+			
+									  <table class="search-table">
+										  <tr>
+											  <td>
+												<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>							  
+											  </td>
+											  <td>
+											  	<button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
+											  </td>
+										  </tr>							  
+									  </table>
+									  </div>
+									</form>
+								
+								</td>
+							</tr>
+						</table>
 					</div>
 				</div>
 				<!--search form end-->
 				<div class="lt-box">
-					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-					  <div class="ta-top" style="margin-left:8px;">
-					  	<table class="search-table">
-					  	<tr>
-					  	<td>
-						  	<a href="javascript:return void"  onclick="batchGrabFees()">
-							<button class="button button-caution button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以在线缴纳专利费哦！">在线交费</button> 
-							</a>
-						</td>
-					  	<td>
-							<a href="javascript:return void" onclick="batchShare()" >
-							<button style="margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>
-							</a> 
-						</td>
-						<td>
-							<a href="javascript:return void" onclick="batchDelectPatents()" >
-							<button style="margin-left:10px;" class="button button-primary  button-rounded" style="width:80px;" data-toggle="tooltip" data-placement="bottom" title="删除了还可以去回收站还原！">批量删除</button>
-							</a> 
-						</td>
-						<td>
-							<a href="<s:url value='/patent/listByCreateTime.html'/>?currentPage=1" >
-						<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  >添加日降序</button>
-							</a> 
-						</td>
-						 <td>
-							<a href="javascript:return void" onclick="batchAddGoods()" >
-							<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-toggle="tooltip" data-placement="right" title="可以将您的专利发布到 r.lotut.com交易网买卖哦！您也可以去交易管理页面修改您的价格和类别哦！">批量发布交易</button>
-							</a> 
-						</td>	 
-						<td>
-							<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportPatents()">表格导出</button>
-							<c:if test="${not empty accountStatus }">
-								<button style="margin-left:10px;width:200px;" class="button button-rounded button-highlight" onclick="exportLOTUTExcel()">导出龙图腾账户所有专利</button>
-							</c:if>
-						</td>					
-						<td>
-							<a href="javascript:return void" onclick="batchAddAnnualFeeMonitor()" >
-								<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-toggle="tooltip" data-placement="right" title="可以加入年费监控，更快的管理专利哦！">批量加入年费监控</button>
-							</a> 
-						</td>					
-					  	</tr>
-					  	</table>
-					  </div>
-					  </span> </div>
+<%-- 					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
+					  </span> </div> --%>
 					<table id="simple-table" class="table table-striped table-bordered table-hover">
 					  <thead>
 						<tr class="simple_bag">
@@ -280,7 +115,15 @@
 							<td class="hidden-480" style="text-align:center">
 								<fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/>
 								<br/>
-								<fmt:formatDate value="${patent.appDate}" pattern="M月dd日"/>
+								<c:choose>
+									<c:when test="${patent.isWithinMonth==1 }">
+										<font color="red"><fmt:formatDate value="${patent.appDate}" pattern="M月dd日"/></font>
+									</c:when>
+									<c:otherwise>
+										<fmt:formatDate value="${patent.appDate}" pattern="M月dd日"/>
+									</c:otherwise>
+								</c:choose>
+								
 							
 							</td>
 							<td class="hidden-480" style="text-align:center">
@@ -403,7 +246,7 @@
 			            </select>
 			            条记录 </span> </div>
 			        </c:if>
-			        </div>					
+			        </div>
 				
 				
 				</div>
@@ -592,10 +435,10 @@ $(function () {
 			return;
 		}
 		
-		var url = "<s:url value='/patent/list.html'/>?currentPage=" + pageNo;
+		var url = "<s:url value='/patent/getUserAnnualFeeMonitorPatents.html'/>?currentPage=" + pageNo;
 		
 		<c:if test="${searchCondition != null}">
-			url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+			url = "<s:url value='/patent/searchUserAnnualFeeMonitorPatents.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 		</c:if>
 		
 		
@@ -726,7 +569,7 @@ function  delectPatent(patentIds){
 	});
 }
 
-function batchAddAnnualFeeMonitor() {
+function batchCancelAnnualFeeMonitor() {
 	var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 	var uniquePatentNos = []
 	if (!patentSelected) {
@@ -742,16 +585,17 @@ function batchAddAnnualFeeMonitor() {
 		}
 		
 	}
-	
 	var patentIds = uniquePatentNos.join(",");
 	$.ajax({
-		url:"<s:url value='/patent/batchAddAnnualFeeMonitor.html'/>?patentIds=" + patentIds,
+		url:"<s:url value='/patent/batchCancelAnnualFeeMonitor.html'/>?patentIds=" + patentIds,
 		type:"post",
+		async:false,
 		success: function(data) {
-			formutil.alertMessage(data,true);	
+			formutil.alertMessage(data,true);
+			window.location.reload();
 		},
 		error: function() {
-			formutil.alertMessage('批量监控失败');
+			formutil.alertMessage('批量取消监控失败');
 		}
 	});
 }

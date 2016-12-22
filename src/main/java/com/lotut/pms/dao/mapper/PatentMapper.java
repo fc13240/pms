@@ -187,4 +187,17 @@ public interface PatentMapper {
 	
 	List<Patent> getLOTUTPatentsByIds(int userId);
 	
+	List<Patent> getUserAnnualFeeMonitorPatents(Page page);
+	
+	int  getUserAnnualFeeMonitorPatentsCount(int userId);
+	
+	int isFeeMonitorPatents(@Param("userId") int userId,@Param("patentIds")List<Long> patentIds);
+	
+	void batchAddFeeMonitorPatents(@Param("userId") int userId,@Param("patentIds")List<Long> patentIds);
+	
+	void batchCancelFeeMonitorPatents(@Param("userId") int userId,@Param("patentIds")List<Long> patentIds);
+	
+	List<Patent> searchUserAnnualFeeMonitorPatents(PatentSearchCondition searchCondition);
+	
+	int searchUserAnnualFeeMonitorPatentsCount(PatentSearchCondition searchCondition);
 }
