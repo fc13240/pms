@@ -513,4 +513,14 @@ public class PatentServiceImpl implements PatentService {
 	public int searchUserAnnualFeeMonitorPatentsCount(PatentSearchCondition searchCondition) {
 		return patentDao.searchUserAnnualFeeMonitorPatentsCount(searchCondition);
 	}
+	
+	@Override	
+	public List<Patent> SearchPatentsRecycled(PatentSearchCondition searchCondition) {
+		return patentDao.SearchPatentsRecycled(searchCondition);
+	}
+
+	@Override
+	public int SearchPatentsRecycledCount(PatentSearchCondition searchCondition) {
+		return patentDao.SearchPatentsRecycledCount(searchCondition);
+	}
 }

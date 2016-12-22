@@ -34,7 +34,31 @@
 			
 			
 				<div style="height:10px;"></div>
-				
+				<!-- search begin -->
+				<div class="lt-box">
+					<div class="search-box">
+						<form class="form-inline" action="<s:url value='/patent/searchPatentRecycled.html'/>" method="get">
+						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
+						  <div class="t-third">
+
+						  <table class="search-table">
+							  <tr>
+							  <td></td>
+							  </tr>
+							  <tr>
+							  <td>
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>							  
+							  </td>
+							  <td>
+							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
+							  </td>
+							  </tr>							  
+						  </table>
+						  </div>
+						</form>
+					</div>
+				</div>
+				<!--search form end-->
 				<div class="lt-box">
 					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
 					  <div class="ta-top" style="margin-left:8px;">
@@ -88,7 +112,7 @@
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="yyyy-MM-dd"/></td>
 							<td class="hidden-480" style="text-align:center"><fmt:formatDate value="${patent.appDate}" pattern="M月dd日"/></td>
 							<td style="text-align:center"><c:out value="${patent.patentStatusText}"/></td>
-							<td style="text-align:center"><input style="width:60px;" type="text" value="<c:out value='${patent.internalCode}'/>" size="30" onChange="changeInternalCode('<c:out value='${patent.patentId}'/>', this.value)">
+							<td style="text-align:center"><c:out value='${patent.internalCode}'/>
 							</td>
 							<td style="text-align:center"><c:out value="${patent.shareUsersAsString}"/>
 							</td>
@@ -124,6 +148,33 @@
 			              </select>
 			              条记录 </span> </div>
 			          </c:if>
+			          <c:if test="${searchCondition != null}">
+			          <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?page.currentPage=1&${searchCondition}">首页</a>
+			            <c:choose>
+			              <c:when test="${page.currentPage - 1 > 0}"> <a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a> </c:when>
+			              <c:when test="${page.currentPage - 1 <= 0}"> <a href="?page.currentPage=1&${searchCondition}">上一页</a> </c:when>
+			            </c:choose>
+			            <c:choose>
+			              <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">下一页</a> </c:when>
+			              <c:when test="${page.currentPage + 1 < page.totalPages}"> <a href="?page.currentPage=${page.currentPage+1}&${searchCondition}">下一页</a> </c:when>
+			              <c:when test="${page.currentPage + 1 >= page.totalPages}"> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">下一页</a> </c:when>
+			            </c:choose>
+			            <c:choose>
+			              <c:when test="${page.totalPages==0}"> <a href="?page.currentPage=${page.currentPage}&${searchCondition}">尾页</a> </c:when>
+			              <c:otherwise> <a href="?page.currentPage=${page.totalPages}&${searchCondition}">尾页</a> </c:otherwise>
+			            </c:choose>
+			            <!-- 分页功能 End -->
+			            <input type="text" id="page.pageNo" style="width:50px;height:25px" name="page.currentPage" onKeyDown="gotoPageForEnter(event)"/>
+			            <a href="javascript:void;" onClick="javascript:gotoPage()">跳转</a> <span> 每页
+			            <select onChange="setPageSize()" style="height:25px;" id="pageSizeSelect">
+			              <option value="10">10</option>
+			              <option value="20">20</option>
+			              <option value="50">50</option>
+			              <option value="100">100</option>
+			            </select>
+			            条记录 </span> </div>
+			        </c:if>
+			          
 			        </div>					
 				
 				
@@ -274,7 +325,7 @@
 		var url = "<s:url value='/patent/patentRecycled.html'/>?currentPage=" + pageNo;
 		
 		<c:if test="${searchCondition != null}">
-			url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+			url = "<s:url value='/patent/searchPatentRecycled.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 		</c:if>
 		
 		
@@ -297,7 +348,7 @@
                         : event.charCode;
 		var isEnterKey = keyCode == 13;
 		if (isEnterKey) {
-			location.href = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageInput.value +"&"+"${searchCondition}";
+			location.href = "<s:url value='/patent/searchPatentRecycled.html'/>?page.currentPage=" + pageInput.value +"&"+"${searchCondition}";
 			$(pageInput).unbind('keydown');
 		}
 	}

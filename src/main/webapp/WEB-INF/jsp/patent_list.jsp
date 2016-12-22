@@ -236,7 +236,7 @@
 						</td>					
 						<td>
 							<a href="javascript:return void" onclick="batchAddAnnualFeeMonitor()" >
-								<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-toggle="tooltip" data-placement="right" title="可以加入年费监控，更快的管理专利哦！">批量加入年费监控</button>
+								<button style="width:140px;margin-left:10px;" class="button button-primary  button-rounded"  data-toggle="tooltip" data-placement="right" title="可以加入年费监控，更快的管理专利哦！">批量加入年费监控</button>
 							</a> 
 						</td>					
 					  	</tr>

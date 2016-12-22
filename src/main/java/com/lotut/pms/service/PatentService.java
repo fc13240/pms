@@ -179,5 +179,8 @@ public interface PatentService {
 	
 	int searchUserAnnualFeeMonitorPatentsCount(PatentSearchCondition searchCondition);
 	
+	List<Patent> SearchPatentsRecycled(PatentSearchCondition searchCondition);
+	
+	int SearchPatentsRecycledCount(PatentSearchCondition searchCondition);
 }
 

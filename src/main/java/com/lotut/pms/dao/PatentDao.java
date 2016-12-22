@@ -180,4 +180,8 @@ public interface PatentDao {
 	List<Patent> searchUserAnnualFeeMonitorPatents(PatentSearchCondition searchCondition);
 	
 	int searchUserAnnualFeeMonitorPatentsCount(PatentSearchCondition searchCondition);
+
+	List<Patent> SearchPatentsRecycled(PatentSearchCondition searchCondition);
+	
+	int SearchPatentsRecycledCount(PatentSearchCondition searchCondition);
 }

@@ -469,5 +469,14 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	public int searchUserAnnualFeeMonitorPatentsCount(PatentSearchCondition searchCondition) {
 		return patentMapper.searchUserAnnualFeeMonitorPatentsCount(searchCondition);
 	}
+	@Override
+	public List<Patent> SearchPatentsRecycled(PatentSearchCondition searchCondition) {
+		return patentMapper.SearchPatentsRecycled(searchCondition);
+	}
+
+	@Override
+	public int SearchPatentsRecycledCount(PatentSearchCondition searchCondition) {
+		return patentMapper.SearchPatentsRecycledCount(searchCondition);
+	}
 
 }

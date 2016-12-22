@@ -403,6 +403,26 @@ public class PatentController {
 		model.addAttribute("page", page);
 		return "patent_recycled";
 	}
+	
+	
+	
+	@RequestMapping(path="/searchPatentRecycled", method=RequestMethod.GET)
+	public String searchPatentRecycled(@ModelAttribute("searchCondition")PatentSearchCondition searchCondition, Model model,HttpSession session){
+		Page page=searchCondition.getPage();
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=patentService.SearchPatentsRecycledCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		List<Patent> patents=patentService.SearchPatentsRecycled(searchCondition);
+		model.addAttribute("patents", patents);
+		model.addAttribute("page", page);
+		return "patent_recycled";
+	}
+	
+	
 	@RequestMapping(path="/recoverPatents", method=RequestMethod.GET)
 	public void recoverPatent(@RequestParam("patentIds") List<Long> patentIds,PrintWriter writer){
 		int userId = PrincipalUtils.getCurrentUserId();
