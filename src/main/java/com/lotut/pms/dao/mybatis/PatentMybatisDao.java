@@ -435,4 +435,14 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		return patentMapper.getLOTUTPatentsByIds(userId);
 	}
 
+	@Override
+	public List<Patent> SearchPatentsRecycled(PatentSearchCondition searchCondition) {
+		return patentMapper.SearchPatentsRecycled(searchCondition);
+	}
+
+	@Override
+	public int SearchPatentsRecycledCount(PatentSearchCondition searchCondition) {
+		return patentMapper.SearchPatentsRecycledCount(searchCondition);
+	}
+
 }

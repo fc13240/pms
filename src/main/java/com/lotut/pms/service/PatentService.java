@@ -164,5 +164,9 @@ public interface PatentService {
 	Map<String, Map<String, String>> getTransactionByTransactionStatus();
 	
 	String getLotutPatentExportExcel(int userId,String exportExcelName) throws IOException;
+	
+	List<Patent> SearchPatentsRecycled(PatentSearchCondition searchCondition);
+	
+	int SearchPatentsRecycledCount(PatentSearchCondition searchCondition);
 }
 

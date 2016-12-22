@@ -166,4 +166,8 @@ public interface PatentDao {
 	Map<String, Map<String, String>> getTransactionByTransactionStatus();
 	
 	List<Patent> getLOTUTPatentsByIds(int userId);
+	
+	List<Patent> SearchPatentsRecycled(PatentSearchCondition searchCondition);
+	
+	int SearchPatentsRecycledCount(PatentSearchCondition searchCondition);
 }

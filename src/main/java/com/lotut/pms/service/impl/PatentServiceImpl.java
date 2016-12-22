@@ -473,4 +473,14 @@ public class PatentServiceImpl implements PatentService {
 		PatentExcelGenerator.writePatentRecordsToExcel(patents, exportExcelPath);
 		return exportExcelPath;
 	}
+
+	@Override
+	public List<Patent> SearchPatentsRecycled(PatentSearchCondition searchCondition) {
+		return patentDao.SearchPatentsRecycled(searchCondition);
+	}
+
+	@Override
+	public int SearchPatentsRecycledCount(PatentSearchCondition searchCondition) {
+		return patentDao.SearchPatentsRecycledCount(searchCondition);
+	}
 }

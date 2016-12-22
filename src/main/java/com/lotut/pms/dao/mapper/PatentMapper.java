@@ -187,4 +187,8 @@ public interface PatentMapper {
 	
 	List<Patent> getLOTUTPatentsByIds(int userId);
 	
+	List<Patent> SearchPatentsRecycled(@Param("searchCondtion")PatentSearchCondition searchCondition);
+	
+	int SearchPatentsRecycledCount(PatentSearchCondition searchCondition);
+	
 }
