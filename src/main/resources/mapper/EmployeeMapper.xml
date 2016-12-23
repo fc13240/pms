@@ -81,9 +81,23 @@
 		where p.parent_org_id=#{parentOrgId}
 	</select>
 	
-	<select id="getTopProxyOrgList" resultMap="proxyOrgResultMap">
+	<select id="getTopProxyOrgListByPage" parameterType="Page" resultMap="proxyOrgResultMap">
 		select p.org_id,p.org_user_id, p.remark_name,p.parent_org_id,u.username,u.name from proxy_org  p
-		join users u on u.user_id = p.org_user_id
+		left join users u on u.user_id = p.org_user_id
+		where p.parent_org_id is null
+		limit #{startIndex}, #{pageSize}
+	</select>
+	
+	<select id="getTopProxyOrgList"  resultMap="proxyOrgResultMap">
+		select p.org_id,p.org_user_id, p.remark_name,p.parent_org_id,u.username,u.name from proxy_org  p
+		left join users u on u.user_id = p.org_user_id
+		where p.parent_org_id is null
+
+	</select>
+	
+	<select id="getTopProxyOrgListCount" resultType="int">
+		select count(*) from proxy_org  p
+		left join users u on u.user_id = p.org_user_id
 		where p.parent_org_id is null
 	</select>
 	

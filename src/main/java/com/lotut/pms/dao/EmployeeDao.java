@@ -50,6 +50,8 @@ public interface EmployeeDao {
 
 	void addOrUpdateTopProxyOrg(ProxyOrg proxyOrg);
 
+	List<ProxyOrg> getTopProxyOrgListByPage(Page page);
+	
 	List<ProxyOrg> getTopProxyOrgList();
 
 	ProxyOrg getOrgByParentOrgId(int orgUserId);
@@ -77,4 +79,6 @@ public interface EmployeeDao {
 	List<ProcessPerson> getProcessPersonListByPage(Page page);
 	
 	int getProcessPersonCount (int proxyOrgId);
+
+	int getTopProxyOrgListCount();
 }

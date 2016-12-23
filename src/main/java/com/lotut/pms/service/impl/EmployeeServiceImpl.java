@@ -14,6 +14,7 @@ import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.service.EmployeeService;
 import com.lotut.pms.util.Role;
 
+
 public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeDao employeeDao;
 
@@ -90,7 +91,29 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	@Transactional
 	public void deleteProxyOrg(int orgId) {
+		List<CustomerSupport> customerSupports = employeeDao.getCustomerSupportList(orgId);
+		if(customerSupports != null) {
+			for(CustomerSupport cs : customerSupports) {
+				deleteCustomerSupport(cs.getId());
+			}
+		}
+		
+		List<TechPerson> techPerson = employeeDao.getTechPersonList(orgId);
+		if(techPerson != null) {
+			for(TechPerson tp : techPerson) {
+				deleteTechPerson(tp.getId());
+			}
+		}
+		
+		List<ProcessPerson> processPerson = employeeDao.getProcessPersonList(orgId);
+		if(processPerson != null) {
+			for(ProcessPerson pp : processPerson) {
+				deleteProcessPerson(pp.getId());
+			}
+		}
+		
 		employeeDao.deleteProxyOrg(orgId);
+		
 	}
 	
 	@Override
@@ -156,6 +179,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 
+	@Override
+	public List<ProxyOrg> getTopProxyOrgListByPage(Page page) {
+		return employeeDao.getTopProxyOrgListByPage(page);
+	}
+	
 	@Override
 	public List<ProxyOrg> getTopProxyOrgList() {
 		return employeeDao.getTopProxyOrgList();
@@ -231,6 +259,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public int getProcessPersonCount(int proxyOrgId) {
 		return employeeDao.getProcessPersonCount(proxyOrgId);
+	}
+
+	@Override
+	public int getTopProxyOrgListCount() {
+		return employeeDao.getTopProxyOrgListCount();
 	}
 
 }

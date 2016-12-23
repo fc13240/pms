@@ -48,6 +48,8 @@ public interface EmployeeService {
 
 	void addOrUpdateTopProxyOrg(ProxyOrg proxyOrg);
 
+	List<ProxyOrg> getTopProxyOrgListByPage(Page page);
+	
 	List<ProxyOrg> getTopProxyOrgList();
 	
 	List<CustomerSupport> searchCustomersByProxyId(String keyword,int currentUserId);
@@ -73,6 +75,8 @@ public interface EmployeeService {
 	List<ProcessPerson> getProcessPersonListByPage(Page page);
 	
 	int getProcessPersonCount (int proxyOrgId);
+
+	int getTopProxyOrgListCount();
 }
 
 

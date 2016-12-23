@@ -53,6 +53,8 @@ public interface EmployeeMapper {
 
 	void addOrUpdateTopProxyOrg(ProxyOrg proxyOrg);
 
+	List<ProxyOrg> getTopProxyOrgListByPage(Page page);
+	
 	List<ProxyOrg> getTopProxyOrgList();
 
 	ProxyOrg getOrgByParentOrgId(int orgUserId);
@@ -80,4 +82,6 @@ public interface EmployeeMapper {
 	List<ProcessPerson> getProcessPersonListByPage(Page page);
 	
 	int getProcessPersonCount (int proxyOrgId);
+
+	int getTopProxyOrgListCount();
 }

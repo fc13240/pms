@@ -341,14 +341,12 @@
 									</td>	
 									</se:authorize>
 					  				
-					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
-					  				
+					  				<se:authorize access="hasAnyRole('ROLE_BATCH_PAPER')">
 					  				<td width="6%">
 										<a href="javascript:return void" onclick="batchChangeNoticePaperType(2)">
 										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">申请纸件</button>
 										</a>
 					  				</td>
-					  				
 					  				</se:authorize>		
 					  				<td width="6%">
 										<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportNotices()">表格导出</button>

@@ -129,6 +129,11 @@ public class EmployeeMybatisDao extends SqlSessionDaoSupport implements Employee
 	}
 
 	@Override
+	public List<ProxyOrg> getTopProxyOrgListByPage(Page page) {
+		return employeeMapper.getTopProxyOrgListByPage(page);
+	}
+	
+	@Override
 	public List<ProxyOrg> getTopProxyOrgList() {
 		return employeeMapper.getTopProxyOrgList();
 	}
@@ -201,6 +206,11 @@ public class EmployeeMybatisDao extends SqlSessionDaoSupport implements Employee
 	@Override
 	public int getProcessPersonCount(int proxyOrgId) {
 		return employeeMapper.getProcessPersonCount(proxyOrgId);
+	}
+
+	@Override
+	public int getTopProxyOrgListCount() {
+		return employeeMapper.getTopProxyOrgListCount();
 	}
 
 

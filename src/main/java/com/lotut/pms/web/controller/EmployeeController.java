@@ -95,13 +95,21 @@ public class EmployeeController {
 		page.setTotalRecords(totalCount);
 		List<ProxyOrg> proxyOrgs = employeeService.getProxyOrgListByPage(page);
 		model.addAttribute("proxyOrgs", proxyOrgs);
+		model.addAttribute("isTopProxyOrg",0);
 		return "proxy_org_list";
 	}
 	
 	@RequestMapping(path="/getTopProxyOrgList", method=RequestMethod.GET)//顶级代理机构
-	public String getTopProxyOrgList(Model model) {
-		List<ProxyOrg> proxyOrgs = employeeService.getTopProxyOrgList();
+	public String getTopProxyOrgList(Model model,Page page, HttpSession session) {
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=(int)employeeService.getTopProxyOrgListCount();
+		page.setTotalRecords(totalCount);
+		List<ProxyOrg> proxyOrgs = employeeService.getTopProxyOrgListByPage(page);
 		model.addAttribute("proxyOrgs", proxyOrgs);
+		model.addAttribute("isTopProxyOrg",1);
 		return "proxy_org_list";
 	}
 	
