@@ -708,9 +708,9 @@ public class PatentController {
 		boolean isAnnualFeeMonitor = patentService.isFeeMonitorPatents(userId,patentIds);
 		if(isAnnualFeeMonitor){
 			patentService.batchAddFeeMonitorPatents(userId,patentIds);
-			message="批量年费监控成功";
+			message="操作成功";
 		}else{
-			message="年费监控中已存在，请核对后再进行加入监控！";
+			message="选中的已加入，请核对后再进行添加！！";
 		}
 		pw.write(message);
 	}
@@ -719,7 +719,7 @@ public class PatentController {
 	public void batchCancelAnnualFeeMonitor(@RequestParam("patentIds") List<Long> patentIds,PrintWriter pw){
 		int userId = PrincipalUtils.getCurrentUserId();
 		patentService.batchCancelFeeMonitorPatents(userId,patentIds);
-		pw.write("批量取消年费监控成功");
+		pw.write("取消成功！");
 	}
 	
 	@RequestMapping(path="searchUserAnnualFeeMonitorPatents")

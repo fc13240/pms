@@ -168,6 +168,31 @@ public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao 
 	@Override
 	public List<Notice> getNoticeOverview(String appNo, int userId) {
 		return noticeMapper.getNoticeOverview(appNo, userId);
+	}
+
+	@Override
+	public List<Notice> getUserStarTargetNoticesByPage(Page page) {
+		return noticeMapper.getUserStarTargetNoticesByPage(page);
+	}
+
+	@Override
+	public int getUserStarTargetNoticesCount(int userId) {
+		return noticeMapper.getUserStarTargetNoticesCount(userId);
+	}
+
+	@Override
+	public List<Notice> searchUserStarTargetNoticesByPage(NoticeSearchCondition searchCondition) {
+		return noticeMapper.searchUserStarTargetNoticesByPage(searchCondition);
+	}
+
+	@Override
+	public Map<String, Map<String, String>> getUserStarTargetNoticeCountByRemainDay(int userId) {
+		return noticeMapper.getUserStarTargetNoticeCountByRemainDay(userId);
+	}
+
+	@Override
+	public int searchUserStarTargetNoticesCount(NoticeSearchCondition searchCondition) {
+		return noticeMapper.searchUserStarTargetNoticesCount(searchCondition);
 	}	
 
 	

@@ -353,6 +353,9 @@
 					  				<td width="6%">
 										<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportNotices()">表格导出</button>
 									</td>
+					  				<td width="6%">
+										<button style="margin-left:10px;width:140px;" class="button button-rounded button-highlight" onclick="batchAddStarTargetNotices()">批量加入星标通知</button>
+									</td>
 									<td align="right">
 										<span class="span3" style="font-size:18px;font-weight:bold;">
 										<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" id="unreadNoticeCountForA">未查看${unreadNoticeCount}件
@@ -392,7 +395,12 @@
 								<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
 								  <input style="text-align:center" type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>"></span>
 								  <span class="lbl"></span></label></td>
-								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize}
+								<c:if test="${notice.patent.annualMonitorStatus==1 }">
+							  		<div style="width:25px;heigth:25px;background: red;float:right"><font color="white">标</font></div>
+							  	</c:if>
+								
+								 </td>
 								<td style="text-align:center">
 									<a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${notice.patent.appNo}" target="_blank">
 										<c:out value="${notice.patent.appNo}"/>
@@ -418,66 +426,6 @@
 								  <c:out value="${notice.name}"/>
 								  </a> 
 								</td>
-								
-								<%-- <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
-								<td>
-								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this);">
-									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
-										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
-									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
-									  	>
-									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
-									  	</option>
-									</c:forEach>
-								  </select>
-								</td>
-								</se:authorize>
-								
-								
-								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
-								<td style="text-align:center">
-								  <select class="form-control" disabled="disabled">
-									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
-										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
-									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
-									  	>
-									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
-									  	</option>
-									</c:forEach>
-								  </select>
-								</td>
-								</se:authorize>
-								
-								<se:authorize access="hasRole('ROLE_USER') and  not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">
-								<c:if test="${notice.patent.ownerId==user.userId}">
-								<td style="text-align:center">
-								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this)">
-									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
-										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
-									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
-									  	>
-									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
-									  	</option>
-									</c:forEach>
-								  </select>
-								</td>
-								</c:if>
-								
-								<c:if test="${notice.patent.ownerId!=user.userId}">
-								<td style="text-align:center">
-								  <select id="roleUser" class="form-control" onClick=selectClick() onChange="javascript:changeRoleUserPaperApplyType('${notice.noticeId}', this)">
-										<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
-										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
-									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
-									  	>
-									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
-									  	</option>
-									</c:forEach>
-								  </select>
-								</td>
-								</c:if>
-								</se:authorize> --%>
-								
 								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center" class="date_status">
 								<span class="readStatus" id="readStatusSpan${notice.noticeId}" style="float:left;padding-left:30px">
@@ -506,17 +454,6 @@
 									</c:forEach>
 								  </select>
 								</td >
-								<%-- <td style="text-align:center">
-									<span class="qixian">
-										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-											<c:otherwise>剩余
-										  	<c:out value="${notice.remainDays}"/>天
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span>  	
-								</td> --%>
 								</se:authorize>
 								
 								
@@ -580,18 +517,6 @@
 								  </select>
 								</td>
 								</c:if>
-								<%-- <td style="text-align:center">
-									<span class="qixian">
-										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-											<c:otherwise>剩余
-										  	<c:out value="${notice.remainDays}"/>天
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span>  	
-								</td> --%>
-								
 								</se:authorize>
 								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td>
@@ -1329,6 +1254,37 @@ var tabs=function(){
 }();
 tabs.set("nav","menu_con");//执行  
 </script>
-    <%@ include file="_footer_js.jsp" %>
+<%@ include file="_footer_js.jsp" %>
+
+<script type="text/javascript">
+	function batchAddStarTargetNotices() {
+		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+		var uniquePatentNos = [];
+		if (!patentSelected) {
+			formutil.alertMessage('请选择通知书');
+			return;
+		}
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
+		for (var i = 0; i < patents_checked.length; i++) {
+			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
+				uniquePatentNos.push(patents_checked[i]);
+				
+			}
+			
+		}
+		
+		var patentIds = uniquePatentNos.join(",");
+		$.ajax({
+			url:"<s:url value='/patent/batchAddAnnualFeeMonitor.html'/>?patentIds=" + patentIds,
+			type:"post",
+			success: function(data) {
+				formutil.alertMessage(data,true);	
+			},
+			error: function() {
+				formutil.alertMessage('批量监控失败');
+			}
+		});
+	}
+</script>
 </body>
 </html>

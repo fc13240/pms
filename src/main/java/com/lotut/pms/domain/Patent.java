@@ -33,8 +33,17 @@ public class Patent {
 	private Timestamp createTime;
 	private SalePatentGood salePatentGood;
 	private int isWithinMonth;
+	private int annualMonitorStatus;
 
 	
+	public int getAnnualMonitorStatus() {
+		return annualMonitorStatus;
+	}
+
+	public void setAnnualMonitorStatus(int annualMonitorStatus) {
+		this.annualMonitorStatus = annualMonitorStatus;
+	}
+
 	public SalePatentGood getSalePatentGood() {
 		return salePatentGood;
 	}

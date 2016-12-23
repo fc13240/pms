@@ -317,4 +317,29 @@ public class NoticeServiceImpl implements NoticeService {
 	public List<Notice> getNoticeOverview(String appNo, int userId) {
 		return noticeDao.getNoticeOverview(appNo, userId);
 	}
+
+	@Override
+	public List<Notice> getUserStarTargetNoticesByPage(Page page) {
+		return noticeDao.getUserStarTargetNoticesByPage(page);
+	}
+
+	@Override
+	public int getUserStarTargetNoticesCount(int userId) {
+		return noticeDao.getUserStarTargetNoticesCount(userId);
+	}
+
+	@Override
+	public List<Notice> searchUserStarTargetNoticesByPage(NoticeSearchCondition searchCondition) {
+		return noticeDao.searchUserStarTargetNoticesByPage(searchCondition);
+	}
+
+	@Override
+	public Map<String, Map<String, String>> getUserStarTargetNoticeCountByRemainDay(int userId) {
+		return noticeDao.getUserStarTargetNoticeCountByRemainDay(userId);
+	}
+
+	@Override
+	public int searchUserStarTargetNoticesCount(NoticeSearchCondition searchCondition) {
+		return noticeDao.searchUserStarTargetNoticesCount(searchCondition);
+	}
 }

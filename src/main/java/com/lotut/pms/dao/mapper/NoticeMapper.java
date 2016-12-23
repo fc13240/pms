@@ -76,4 +76,19 @@ public interface NoticeMapper {
 	
 	List<Notice> getNoticeOverview(@Param("appNo") String appNo,@Param("userId") int userId);
 	
+	
+	
+	
+	List<Notice> getUserStarTargetNoticesByPage(Page page);
+	
+	int getUserStarTargetNoticesCount(@Param("userId")int userId);
+
+	List<Notice> searchUserStarTargetNoticesByPage(NoticeSearchCondition searchCondition);
+	
+	@MapKey("remain_day_type")
+	Map<String , Map<String,String>> getUserStarTargetNoticeCountByRemainDay(int userId);
+	
+	int searchUserStarTargetNoticesCount(NoticeSearchCondition searchCondition);
+	
+	
 }
