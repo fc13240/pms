@@ -341,14 +341,12 @@
 									</td>	
 									</se:authorize>
 					  				
-					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_USER') and not hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
-					  				
+					  				<se:authorize access="hasAnyRole('ROLE_BATCH_PAPER')">
 					  				<td width="6%">
 										<a href="javascript:return void" onclick="batchChangeNoticePaperType(2)">
 										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">申请纸件</button>
 										</a>
 					  				</td>
-					  				
 					  				</se:authorize>		
 					  				<td width="6%">
 										<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportNotices()">表格导出</button>
@@ -419,65 +417,6 @@
 								  </a> 
 								</td>
 								
-								<%-- <se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
-								<td>
-								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this);">
-									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
-										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
-									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
-									  	>
-									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
-									  	</option>
-									</c:forEach>
-								  </select>
-								</td>
-								</se:authorize>
-								
-								
-								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS')">
-								<td style="text-align:center">
-								  <select class="form-control" disabled="disabled">
-									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
-										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
-									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
-									  	>
-									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
-									  	</option>
-									</c:forEach>
-								  </select>
-								</td>
-								</se:authorize>
-								
-								<se:authorize access="hasRole('ROLE_USER') and  not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">
-								<c:if test="${notice.patent.ownerId==user.userId}">
-								<td style="text-align:center">
-								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this)">
-									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
-										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
-									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
-									  	>
-									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
-									  	</option>
-									</c:forEach>
-								  </select>
-								</td>
-								</c:if>
-								
-								<c:if test="${notice.patent.ownerId!=user.userId}">
-								<td style="text-align:center">
-								  <select id="roleUser" class="form-control" onClick=selectClick() onChange="javascript:changeRoleUserPaperApplyType('${notice.noticeId}', this)">
-										<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
-										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
-									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
-									  	>
-									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
-									  	</option>
-									</c:forEach>
-								  </select>
-								</td>
-								</c:if>
-								</se:authorize> --%>
-								
 								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center" class="date_status">
 								<span class="readStatus" id="readStatusSpan${notice.noticeId}" style="float:left;padding-left:30px">
@@ -506,17 +445,6 @@
 									</c:forEach>
 								  </select>
 								</td >
-								<%-- <td style="text-align:center">
-									<span class="qixian">
-										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-											<c:otherwise>剩余
-										  	<c:out value="${notice.remainDays}"/>天
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span>  	
-								</td> --%>
 								</se:authorize>
 								
 								
@@ -580,18 +508,6 @@
 								  </select>
 								</td>
 								</c:if>
-								<%-- <td style="text-align:center">
-									<span class="qixian">
-										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-											<c:otherwise>剩余
-										  	<c:out value="${notice.remainDays}"/>天
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span>  	
-								</td> --%>
-								
 								</se:authorize>
 								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td>

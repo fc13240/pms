@@ -66,4 +66,8 @@ public class PrincipalUtils {
 	public static boolean isNews() {//新闻
 		return PrincipalUtils.hasAuthority(Role.ROLE_NEWS.getRoleName());
 	}
+	
+	public static boolean isBatchPaper() {//新闻
+		return PrincipalUtils.hasAuthority(Role.ROLE_BATCH_PAPER.getRoleName());
+	}
 }

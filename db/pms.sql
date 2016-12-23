@@ -1196,3 +1196,7 @@ UPDATE patents SET transaction_status=0 WHERE transaction_status=1;
 UPDATE sell_patent_goods SET STATUS=0 WHERE STATUS=1;
 
 ALTER TABLE user_patents ADD COLUMN annual_fee_monitor_status INT DEFAULT 0 COMMENT '0 表示不监控 1 表示处于监控状态';
+
+insert into groups (group_name) values ("BATCH_PAPER");
+insert into group_authorities(group_id,authority) values (10,"ROLE_BATCH_PAPER");
+
