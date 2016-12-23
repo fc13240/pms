@@ -33,13 +33,15 @@
 					<div class="t-third">
 					  <div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
 						  <div class="ta-top" style="margin-left:8px;"> 
+						  <form action="<s:url value='/employee/searchProxyOrg.html'/>" method="GET">
 						  	<table class="search-table">
 					  			<tr>
 					  				<td>
-									  	<button type="button" style="width: 100px;" class="button button-rounded button-primary" onclick="javascript:addProxyOrg()">增加机构</button>
+									  	<button type="submit" style="width: 100px;" class="button button-rounded button-primary" >增加机构</button>
 					  				</td>
 					  			</tr>
-					  		</table>		
+					  		</table>
+					  		</form>		
 						  </div>
 						  </span> 
 					 </div>
@@ -61,7 +63,7 @@
 					          <td style="text-align:center"><c:out value="${proxyOrg.user.name}"/></td>
 					          <td style="text-align:center"><input type="text" maxlength="40" size="30" value='${proxyOrg.remarkName}' onChange="changeProxyOrgRemarkName('<c:out value='${proxyOrg.orgId}'/>', this.value)"/></td>
 					          <td style="text-align:center">
-					          <a href="javascript:void(0)" onclick="javascript:deleteProxyOrg(${proxyOrg.orgId})">
+					          <a href="javascript:void(0)" onclick="deleteProxyOrg(${proxyOrg.orgId})">
 					          	删除机构
 					          </a>
 					          </td>
@@ -159,8 +161,12 @@
 			alert("只能输入1-${page.totalPages}之间的数值");
 			return;
 		}
-		
-		var url = "<s:url value='/employee/getProxyOrgList.html'/>?currentPage=" + pageNo;
+		var url;
+		if(${isTopProxyOrg} == 1) {
+			url = "<s:url value='/employee/getTopProxyOrgList.html'/>?currentPage=" + pageNo;
+		} else {
+			url = "<s:url value='/employee/getProxyOrgList.html'/>?currentPage=" + pageNo;
+		}
 		
 		
 		location.href = url

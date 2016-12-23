@@ -14,6 +14,7 @@ import com.lotut.pms.domain.TechPerson;
 import com.lotut.pms.service.EmployeeService;
 import com.lotut.pms.util.Role;
 
+
 public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeDao employeeDao;
 
@@ -157,6 +158,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
 	@Override
+	public List<ProxyOrg> getTopProxyOrgListByPage(Page page) {
+		return employeeDao.getTopProxyOrgListByPage(page);
+	}
+	
+	@Override
 	public List<ProxyOrg> getTopProxyOrgList() {
 		return employeeDao.getTopProxyOrgList();
 	}
@@ -231,6 +237,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public int getProcessPersonCount(int proxyOrgId) {
 		return employeeDao.getProcessPersonCount(proxyOrgId);
+	}
+
+	@Override
+	public int getTopProxyOrgListCount() {
+		return employeeDao.getTopProxyOrgListCount();
 	}
 
 }
