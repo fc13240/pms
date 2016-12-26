@@ -751,6 +751,6 @@ public class PatentController {
 		int userId=PrincipalUtils.getCurrentUserId();
 		Map<String, Map<String, String>> appPersonCount=patentService.getAppPersonCountByAppPerson(userId);
 		model.addAttribute("appPersonCount", appPersonCount);
-		return "patent_app_person_list";
+		return "patent_appPerson_list";
 	}
 }
