@@ -740,4 +740,13 @@ public class PatentController {
 		model.addAttribute("searchCondition", searchCondition);
 		return "patent_annual_fee_monitor";
 	}
+	
+	
+	@RequestMapping(path="/search", method=RequestMethod.GET)
+	public String searchUserPatents(Model model) {
+		int userId=PrincipalUtils.getCurrentUserId();
+		Map<String, Map<String, String>> appPersonCount=patentService.getAppPersonCountByAppPerson(userId);
+		model.addAttribute("appPersonCount", appPersonCount);
+		return "patent_appPerson_list";
+	}
 }
