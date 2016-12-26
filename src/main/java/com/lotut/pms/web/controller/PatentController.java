@@ -230,6 +230,9 @@ public class PatentController {
 		if(username.equals("LOTUTZL")){
 			accountStatus="success access";
 		}
+		boolean isTraderUser = PrincipalUtils.isTraderUser();
+		model.addAttribute("isTraderUser", isTraderUser);
+		
 		model.addAttribute("accountStatus", accountStatus);
 	}
 	
@@ -332,6 +335,7 @@ public class PatentController {
 			addPatentTypeAndStatusDataToModel(model);
 			return "goods_list";
 		}
+		
 	}
 	
 	@RequestMapping(path="/searchTransactionPatents", method=RequestMethod.GET)

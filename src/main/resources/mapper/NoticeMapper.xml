@@ -49,6 +49,8 @@
 			<result property="patentStatusText" column="patent_status_text"/>
 			<result property="appPerson" column="app_person"/>
 			<result property="internalCode" column="internal_code"/>
+			<result property="internalCode" column="internal_code"/>
+			<result property="annualMonitorStatus" column="annual_fee_monitor_status"/>
 			<association property="patentStatus" javaType="PatentStatus">
 				<id property="patentStatusId" column="patent_status_id"/>
 				<result property="statusDescription" column="patent_status_description"/>
@@ -78,25 +80,28 @@
 	</select>
 	
 	<select id="getUserNoticesByPage" parameterType="Page" resultMap="NoticeResultMap">
-		select un.*, u.user_id as share_user_id,  u.username as share_username
-		from (select p.patent_id, p.app_no, p.patent_name, p.patent_owner,p.app_person, ps.patent_status_id,p.patent_status_text,p.internal_code, ps.patent_status_desc as patent_status_description,
-				n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
-				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
-				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
-				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
-				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username,
-				nvl.notice_id AS notice_view_status
-				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
-						join notices n on n.patent = p.patent_id
-						LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id and nvl.user_id = #{userId} 
-						left join users pu on pu.user_id = n.process_user
-						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
-						join notice_process_status nps on nps.notice_process_status_id = n.process_status
-			 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1) 
-			  order by nvl.user_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
-				limit #{startIndex}, #{pageSize}) as un
-			join user_patents up on un.patent_id = up.patent
-		  	join users u on up.user = u.user_id	
+		select sp.notice_id,sp.patent_id,sp.app_no,sp.patent_name,sp.patent_owner,sp.app_person,sp.patent_status_text,sp.internal_code,sp.notice_name,sp.notice_sequence,
+			sp.dispatch_sequence,sp.dispatch_sequence,sp.dispatch_date,sp.remain_days,sp.notice_code,sp.zip_bid,sp.dmh_flag,sp.archive_no,sp.zipfile_name,sp.process_user_id,
+			sp.process_username,pt.*,npat.notice_paper_apply_type_id as paper_type_id, npat.notice_paper_apply_type_desc as paper_type_description,u.user_id as share_user_id,
+			u.username as share_username,sp.notice_process_status_id,sp.notice_process_status_desc,sp.notice_view_status,sp.annual_fee_monitor_status,ps.patent_status_desc as patent_status_description
+			from (select p.patent_id, p.app_no, p.patent_name, p.patent_owner,p.app_person,p.patent_status_text,p.patent_type,p.patent_status,
+			p.internal_code,n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,n.paper_apply_type,
+			if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+			n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,n.process_user as process_user_id, pu.username as process_username,
+			nps.*,nvl.notice_id as notice_view_status,up.annual_fee_monitor_status
+			from patents p
+			join notices n on n.patent = p.patent_id
+			left join notice_read nvl on n.notice_id=nvl.notice_id and nvl.user_id = #{userId}
+			left join user_patents up on p.patent_id=up.patent
+			left join notice_process_status nps on n.process_status=nps.notice_process_status_id
+			left join users pu on n.process_user=pu.user_id
+			where up.user=#{userId} and up.trash_status=1
+			order by nvl.user_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
+			limit #{startIndex},#{pageSize}) sp left join user_patents up on sp.patent_id = up.patent
+			left join patent_types pt on sp.patent_type=pt.patent_type_id
+			left join notice_paper_apply_types npat on sp.paper_apply_type=npat.notice_paper_apply_type_id
+			left join users u on up.user=u.user_id
+			left join patent_status ps on sp.patent_status=ps.patent_status_id
 	</select>
 	<!-- 通知书处理状态 -->
 	<update id="updateProcessStatus">
@@ -244,22 +249,26 @@
 		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>
-		select un.*, u.user_id as share_user_id,  u.username as share_username
-		from (select p.patent_id, p.app_no, p.patent_name,p.patent_status_text, p.app_person,p.internal_code, ps.patent_status_id, ps.patent_status_desc as patent_status_description,
-				n.notice_id,n.notice_name, n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
-				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
-				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
-				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
-				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username,
-				nvl.notice_id AS notice_view_status
-				from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
-						join notices n on n.patent = p.patent_id
-						LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id and nvl.user_id = #{userId}
-						left join users pu on pu.user_id = n.process_user
-						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
-						join notice_process_status nps on nps.notice_process_status_id = n.process_status
-			 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1)
-			 	<if test="patentType != null">
+		select sp.notice_id,sp.patent_id,sp.app_no,sp.patent_name,sp.patent_owner,sp.app_person,sp.patent_status_text,sp.internal_code,sp.notice_name,sp.notice_sequence,
+			sp.dispatch_sequence,sp.dispatch_sequence,sp.dispatch_date,sp.remain_days,sp.notice_code,sp.zip_bid,sp.dmh_flag,sp.archive_no,sp.zipfile_name,sp.process_user_id,
+			sp.process_username,pt.*,npat.notice_paper_apply_type_id as paper_type_id, npat.notice_paper_apply_type_desc as paper_type_description,u.user_id as share_user_id,
+			u.username as share_username,sp.notice_process_status_id,sp.notice_process_status_desc,sp.notice_view_status,sp.annual_fee_monitor_status,sp.patent_status_description
+			from (select p.patent_id, p.app_no, p.patent_name, p.patent_owner,p.app_person,p.patent_status_text,p.patent_type,ps.patent_status_desc as patent_status_description,
+			p.internal_code,n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,n.paper_apply_type,
+			if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+			n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,n.process_user as process_user_id, pu.username as process_username,
+			nps.*,nvl.notice_id as notice_view_status,up.annual_fee_monitor_status
+			from patents p
+			join notices n on n.patent = p.patent_id
+			left join notice_read nvl on n.notice_id=nvl.notice_id and nvl.user_id = #{userId}
+			left join user_patents up on p.patent_id=up.patent
+			left join notice_process_status nps on n.process_status=nps.notice_process_status_id
+			left join users pu on n.process_user=pu.user_id
+			left join patent_status ps on p.patent_status=ps.patent_status_id
+			where up.user=#{userId} and up.trash_status=1
+			
+			
+			<if test="patentType != null">
 			 		<choose>
 			 			<when test="patentType == 0">
 			 				and p.patent_type is null
@@ -275,9 +284,6 @@
 			 	<if test="noticeType != null">
 			 		and n.notice_type = #{noticeType}
 			 	</if>	
-			 	<if test="paperApplyType != null">
-			 		and n.paper_apply_type = #{paperApplyType}
-			 	</if>		 			 	
 			 	<if test="startAppDate != null">
 			 		and p.app_date >= #{startAppDate}
 			 	</if>	
@@ -324,10 +330,15 @@
 					</choose>
 					
 				</if> 
-			  order by nvl.user_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
-				limit #{page.startIndex}, #{page.pageSize}) as un
-			join user_patents up on un.patent_id = up.patent
-		  	join users u on up.user = u.user_id		
+			order by nvl.user_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
+			limit #{page.startIndex},#{page.pageSize}) sp left join user_patents up on sp.patent_id = up.patent
+			left join patent_types pt on sp.patent_type=pt.patent_type_id
+			join users u on u.user_id = up.user
+			left join notice_paper_apply_types npat on sp.paper_apply_type=npat.notice_paper_apply_type_id
+			
+			<if test="paperApplyType != null">
+			 	where sp.paper_apply_type = #{paperApplyType}
+			</if>	
 	</select>
 	
 	<insert id="insertOrUpdateNotice" parameterType="Notice" useGeneratedKeys="true" keyProperty="noticeId">

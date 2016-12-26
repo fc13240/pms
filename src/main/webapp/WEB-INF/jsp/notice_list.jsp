@@ -395,7 +395,7 @@
 								  <span class="lbl"></span></label></td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize}
 								<c:if test="${notice.patent.annualMonitorStatus==1 }">
-							  		<div style="width:25px;heigth:25px;background: red;float:right"><font color="white">标</font></div>
+							  		<div style="width:25px;heigth:25px;background: red;float:right"><font color="white">星</font></div>
 							  	</c:if>
 								
 								 </td>

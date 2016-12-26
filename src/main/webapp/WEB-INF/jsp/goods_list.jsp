@@ -266,9 +266,16 @@
 								<c:out value="${patent.patent.patentType.typeDescription}"/>
 							</td>
 							<td style="text-align:center">
-								<%-- <a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${patent.appNo}" target="_blank"> --%>
-									<c:out value="${patent.appNo}"/>
-								<!-- </a> -->
+								<c:choose>
+									<c:when test="${isTraderUser==false }">
+										<a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${patent.appNo}" target="_blank">
+											<c:out value="${patent.appNo}"/>
+										 </a>
+									</c:when>
+									<c:otherwise>
+									${patent.appNo}
+									</c:otherwise>
+								</c:choose>
 							</td>
 							<td class="hidden-480" style="text-align:center">
 								<c:out value="${patent.patentName}"/>
