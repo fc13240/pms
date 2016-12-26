@@ -523,4 +523,9 @@ public class PatentServiceImpl implements PatentService {
 	public int SearchPatentsRecycledCount(PatentSearchCondition searchCondition) {
 		return patentDao.SearchPatentsRecycledCount(searchCondition);
 	}
+
+	@Override
+	public Map<String, Map<String, String>> getAppPersonCountByAppPerson(int userId) {
+		return patentDao.getAppPersonCountByAppPerson(userId);
+	}
 }
