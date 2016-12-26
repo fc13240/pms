@@ -746,8 +746,8 @@ public class PatentController {
 	}
 	
 	
-	@RequestMapping(path="/search", method=RequestMethod.GET)
-	public String searchUserPatents(Model model) {
+	@RequestMapping(path="/getAppPersonCountByAppPerson", method=RequestMethod.GET)
+	public String getAppPersonCountByAppPerson(Model model) {
 		int userId=PrincipalUtils.getCurrentUserId();
 		Map<String, Map<String, String>> appPersonCount=patentService.getAppPersonCountByAppPerson(userId);
 		model.addAttribute("appPersonCount", appPersonCount);
