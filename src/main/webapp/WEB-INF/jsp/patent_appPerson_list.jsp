@@ -46,10 +46,13 @@
 					  						
 						<div class="tag" style="display:block; margin-left:-20px;"> 
 
-						  <ul class="qxjk-ul"><li>
+						  <ul class="qxjk-ul">
+						  <c:forEach items="${appPersonCount}" var="appPersonCount" varStatus="status">
+						  	<li>
 							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=1'/>">
-							发明专利 (<c:out value='${patentTypeCount[(1).intValue()]["patentCount"]}' default="0"/>)</a>
+							发明专利 (<c:out value='${appPersonCount[(1).intValue()]["patentCount"]}' default="0"/>)</a>
 							</li>
+						  </c:forEach>
 						  </ul>	    
 						</div>
 					  </div>
