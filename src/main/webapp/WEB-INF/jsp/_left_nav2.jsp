@@ -11,7 +11,7 @@
 	<h5>年费监控</h5>
 	</a> 
 	</li>
-	<li  class=""> <a href="<s:url value='/patent/getAppPersonCountByAppPerson.html'/>">
+	<li  class=""> <a target="_blank" href="<s:url value='/patent/getAppPersonCountByAppPerson.html'/>">
 	<h5>申请人分类</h5>
 	</a> 
 	</li>
