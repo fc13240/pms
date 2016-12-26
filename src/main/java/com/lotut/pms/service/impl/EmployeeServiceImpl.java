@@ -91,7 +91,29 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	@Transactional
 	public void deleteProxyOrg(int orgId) {
+		List<CustomerSupport> customerSupports = employeeDao.getCustomerSupportList(orgId);
+		if(customerSupports != null) {
+			for(CustomerSupport cs : customerSupports) {
+				deleteCustomerSupport(cs.getId());
+			}
+		}
+		
+		List<TechPerson> techPerson = employeeDao.getTechPersonList(orgId);
+		if(techPerson != null) {
+			for(TechPerson tp : techPerson) {
+				deleteTechPerson(tp.getId());
+			}
+		}
+		
+		List<ProcessPerson> processPerson = employeeDao.getProcessPersonList(orgId);
+		if(processPerson != null) {
+			for(ProcessPerson pp : processPerson) {
+				deleteProcessPerson(pp.getId());
+			}
+		}
+		
 		employeeDao.deleteProxyOrg(orgId);
+		
 	}
 	
 	@Override

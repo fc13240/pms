@@ -250,7 +250,7 @@
 							<input type="checkbox" class="patent-check-item" id="checkall"  name="checkall" />
 							<span class="lbl"></span> </label>
 						  </th>
-						  <th class="center" width="35">序号</th>
+						  <th class="center" width="40">序号</th>
 						  <th width="65">专利类型</th>
 						  <th width="100">申请号/专利号</th>
 						  <th width="130">专利名称</th>
@@ -268,7 +268,12 @@
 							<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
 							  <input type="checkbox" class="patent-check-item" patent="<c:out value='${patent.patentId}'/>"></span>
 							  <span class="lbl"></span></label></td>
-							<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+							<td class="center" style="text-align:center"> 
+							${status.count + (page.currentPage-1)*page.pageSize}
+							<c:if test="${patent.annualMonitorStatus==1 }">
+							  		<div style="width:25px;heigth:25px;background: red;float:right"><font color="white">年</font></div>
+							  	</c:if>
+							</td>
 							<td style="text-align:center"><c:out value="${patent.patentType.typeDescription}"/></td>
 							<td style="text-align:center">
 								<a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${patent.appNo}" target="_blank">

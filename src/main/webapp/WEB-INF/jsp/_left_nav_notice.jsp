@@ -57,6 +57,11 @@
 	驳回决定 
 	 </a>
 	</li>					        
+	 <li>
+	 <a href="<s:url value='/notice/noticeStarTargetList.html?currentPage=1&noticeType=8&noticeProcessStatus=1'/>">
+	星标通知
+	 </a>
+	</li>					        
 			 			
   			
 	</ul>

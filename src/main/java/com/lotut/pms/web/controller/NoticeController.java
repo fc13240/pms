@@ -347,4 +347,46 @@ public class NoticeController {
 		model.addAttribute("friends", friends);
 		return "notice_select_friends";
 	}
+	
+	
+	@RequestMapping(path="/noticeStarTargetList", method=RequestMethod.GET)
+	public String noticeStarTargetList(Model model,Page page,HttpSession session) {
+		page.setPageSize(WebUtils.getPageSize(session));
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		Map<String,Map<String,String>> remainDayCount=noticeService.getUserStarTargetNoticeCountByRemainDay(userId);
+		List<Notice> userNotices = noticeService.getUserStarTargetNoticesByPage(page);
+		int totalCount=(int)noticeService.getUserStarTargetNoticesCount(userId);
+		page.setTotalRecords(totalCount);
+		int unreadNoticeCount=noticeService.unreadNoticeCount(userId);
+		User user=PrincipalUtils.getCurrentPrincipal();
+		model.addAttribute("notices", userNotices);
+		model.addAttribute("remainDayCount",remainDayCount);
+		model.addAttribute("page", page);
+		model.addAttribute("unreadNoticeCount", unreadNoticeCount);
+		model.addAttribute("wayOfPaging","normal");
+		model.addAttribute("user",user);
+		addSearchTypesDataToModel(model);
+		return "notice_star_target";
+	}
+	
+	
+	@RequestMapping(path="/searchStarTarget", method=RequestMethod.GET)
+	public String searchStarTarget(@ModelAttribute("searchCondition")NoticeSearchCondition searchCondition, Model model,HttpSession session) {
+		Page page=searchCondition.getPage();
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		List<Notice> resultNotices = noticeService.searchUserStarTargetNoticesByPage(searchCondition);
+		Map<String,Map<String,String>> remainDayCount=noticeService.getUserStarTargetNoticeCountByRemainDay(searchCondition.getUserId());
+		int totalCount=(int)noticeService.searchUserStarTargetNoticesCount(searchCondition);
+		int unreadNoticeCount=noticeService.unreadNoticeCount(searchCondition.getUserId());
+		page.setTotalRecords(totalCount);
+		model.addAttribute("notices", resultNotices);
+		model.addAttribute("remainDayCount",remainDayCount);
+		model.addAttribute("page", page);
+		model.addAttribute("unreadNoticeCount", unreadNoticeCount);
+		model.addAttribute("wayOfPaging","normal");
+		addSearchTypesDataToModel(model);
+		return "notice_star_target";
+	}	
 }

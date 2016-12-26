@@ -65,4 +65,14 @@ public interface NoticeDao {
 	List<Notice> unreadNoticeList(Page page);
 	
 	List<Notice> getNoticeOverview(String appNo,int userId);
+	
+	List<Notice> getUserStarTargetNoticesByPage(Page page);
+	
+	int getUserStarTargetNoticesCount(int userId);
+
+	List<Notice> searchUserStarTargetNoticesByPage(NoticeSearchCondition searchCondition);
+	
+	Map<String , Map<String,String>> getUserStarTargetNoticeCountByRemainDay(int userId);
+	
+	int searchUserStarTargetNoticesCount(NoticeSearchCondition searchCondition);
 }
