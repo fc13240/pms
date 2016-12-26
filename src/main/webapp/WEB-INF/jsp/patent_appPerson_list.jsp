@@ -38,7 +38,7 @@
 					  <div style="height:33px;">
 						<ul id="nav">
 						  <p>快捷处理：</p>
-						  <li><a href="#" class="selected">专利类型</a></li>
+						  <li><a href="#" class="selected">申请人分类</a></li>
 						</ul>
 					  </div>
 						
@@ -49,8 +49,9 @@
 						  <ul class="qxjk-ul">
 						  <c:forEach items="${appPersonCount}" var="appPersonCount" varStatus="status">
 						  	<li>
-							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=1'/>">
-							发明专利 (<c:out value='${appPersonCount[(1).intValue()]["patentCount"]}' default="0"/>)</a>
+						  		 <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=2'/>">
+									${appPersonCount.key}(<c:out value='${appPersonCount.value.patentCount}' default="0"/>)
+								</a>
 							</li>
 						  </c:forEach>
 						  </ul>	    
