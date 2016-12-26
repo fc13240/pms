@@ -479,4 +479,9 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		return patentMapper.SearchPatentsRecycledCount(searchCondition);
 	}
 
+	@Override
+	public Map<String, Map<String, String>> getAppPersonCountByAppPerson(int userId) {
+		return patentMapper.getAppPersonCountByAppPerson(userId);
+	}
+
 }
