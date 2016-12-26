@@ -49,7 +49,7 @@
 						  <ul class="qxjk-ul">
 						  <c:forEach items="${appPersonCount}" var="appPersonCount" varStatus="status">
 						  	<li>
-						  		 <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=2'/>">
+						  		 <a href="<s:url value='/patent/search.html?page.currentPage=1&keyword=${appPersonCount.key}'/>">
 									${appPersonCount.key}(<c:out value='${appPersonCount.value.patentCount}' default="0"/>)
 								</a>
 							</li>
