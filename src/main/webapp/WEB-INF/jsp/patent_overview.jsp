@@ -251,7 +251,9 @@
 		  <td style="text-algin:center">
 		  	<fmt:formatDate value="${good.transactionDate }" pattern="yyyy-MM-dd"/>
 		  </td>
-		  <td style="text-algin:center">${good.description }</td>
+		  <td style="text-algin:center">
+		  	<input style="width:180px;" type="text" value="${good.description}" size="90" onChange="changedescription(${good.patentId}, this.value)"/>
+		  </td>
 		 </tr>
 	</table>
 	</div>
@@ -385,6 +387,20 @@ function changeNoticeReadStatus(noticeId){
 		});
 		
 		
+	}
+	
+	function changedescription(patentId,description){
+		$.ajax({
+			type:"POST",
+			url :"<s:url value='/patent/saveSellPatentDescription.html'/>",
+			data:{"patentId":patentId,"description":description},
+			success:function(data){
+				
+			},
+			error:function(){
+				alert("发生未知错误，请稍后重试！");
+			}
+		})
 	}
 </script>
 </html>

@@ -42,6 +42,7 @@
 		<result property="transferor" column="transferor"/>
 		<result property="transactionType" column="transaction_type"/>
 		<result property="description" column="description"/>
+		<result property="status" column="status"/>
 		<association property="firstColumn" javaType="GoodsFirstColumn">
 			<id property="id" column="patent_first_column_id"/>
 			<result property="name" column="patent_first_column_name"/>
@@ -1070,7 +1071,7 @@ where spg.patent_id in
 	</select>
 
 	<select id="getTransactionOverview" resultMap="salePatentGoodResultMap">
-	select spg.patent_id,spg.add_date,spg.transferor,spg.status,spg.transaction_type,spg.price,spg.transaction_date,spg.description,ssc.patent_second_column_id,
+	select spg.patent_id as sell_patent_id,spg.add_date,spg.transferor,spg.status,spg.transaction_type,spg.price,spg.transaction_date,spg.description,ssc.patent_second_column_id,
 		ssc.patent_second_column_name,sfc.* 
 	from sell_patent_goods spg 
 		left join patents p on spg.patent_id=p.patent_id
