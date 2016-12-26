@@ -1227,7 +1227,7 @@ where spg.patent_id in
 	<select id="getAppPersonCountByAppPerson" resultType="map">
 		SELECT  p.app_person appPerson,COUNT(*) patentCount
 		FROM patents p LEFT JOIN patent_status ps ON p.patent_status = ps.patent_status_id LEFT JOIN user_patents up ON p.patent_id = up.patent
-		WHERE up.user = #{userId} AND up.trash_status=1 GROUP BY p.app_person order by p.app_person asc ;
+		WHERE up.user = #{userId} AND up.trash_status=1 GROUP BY p.app_person order by p.app_person desc ;
 	</select>
 	
 </mapper>
