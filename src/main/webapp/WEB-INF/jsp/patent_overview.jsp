@@ -188,14 +188,17 @@
 		  	
 		  <td style="text-algin:center">${good.price }</td>
 		  <td style="text-algin:center">
-		  	<c:if test="${good.status==0 }">待发布</c:if>
-		  	<c:if test="${good.status==1 }">待交易</c:if>
-		  	<c:if test="${good.status==2 }">已预订</c:if>
-		  	<c:if test="${good.status==3 }"> 已付款待变更</c:if>
-		  	<c:if test="${good.status==4 }"> 已变更待合格</c:if>
-		  	<c:if test="${good.status==5 }"> 交易成功</c:if>
-		  	
-		  	<%-- <select style="display:inline;width:130px" onChange="changeStatus('<c:out value='${patent.patentId}'/>', this.value)" class="form-control first_column">
+		  	<select style="display:inline;width:130px" onChange="changeStatus('<c:out value='${good.patentId}'/>', this.value)" class="form-control first_column">
+				<c:if test="${good.status==0}">
+				<option value="${good.status}" selected="selected">
+					待发布
+				</option>
+				<option value="2"><font color="red">待交易</font> </option>
+				<option value="2"><font color="red">已预订</font> </option>
+				<option value="3"><font color="red">已付款待变更</font></option>
+				<option value="4"><font color="red">已变更待合格</font> </option>
+				<option value="5"><font color="red">交易成功</font></option>
+				</c:if>	
 				<c:if test="${good.status==1}">
 				<option value="${good.status}" selected="selected">
 					待交易
@@ -243,7 +246,7 @@
 				<option value="3"><font color="red">已付款待变更</font> </option>
 				<option value="4"><font color="red">已变更待合格</font></option>
 				</c:if>
-			</select> --%>
+			</select>
 		  </td>
 		  <td style="text-algin:center">
 		  	<fmt:formatDate value="${good.transactionDate }" pattern="yyyy-MM-dd"/>
