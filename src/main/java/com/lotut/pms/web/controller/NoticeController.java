@@ -228,6 +228,7 @@ public class NoticeController {
 		List<NoticeProcessStatus> noticeProcessStatus = noticeService.getAllNoticeProcessStatus();
 		List<NoticeType> noticeTypes = noticeService.getAllNoticeType();
 		List<NoticePaperApplyType> paperApplyTypes = noticeService.getAllNoticePaperApplyType();
+		
 		model.addAttribute("patentTypes", patentTypes);
 		model.addAttribute("noticeProcessStatus", noticeProcessStatus);
 		model.addAttribute("noticeTypes", noticeTypes);
