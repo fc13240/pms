@@ -11,6 +11,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
 <title>龙图腾专利管家－我的专利！</title>
 <%@ include file="_css.jsp" %>
+<style type="text/css">
+.qxjk-ul li {
+    width:300px;
+    height: 40px;
+    border-bottom: 1px dashed #ccc;
+	margin:10px 0 0 0;
+	padding: 0 5px;
+}
+
+</style>
 <body>
 <%@ include file="_top.jsp" %>
 
@@ -34,7 +44,7 @@
 				<!-- menu begin -->
 				<div class="lt-box">
 
-					<div id="menu">
+					<div id="menu" >
 					  <div style="height:33px;">
 						<ul id="nav">
 						  <p>快捷处理：</p>
@@ -42,9 +52,9 @@
 						</ul>
 					  </div>
 						
-					  <div id="menu_con">
+					  <div id="menu_con" style="height:0;border-bottom:0 ;border-top:1px solid #03752F;">
 					  						
-						<div class="tag" style="display:block; margin-left:-20px;"> 
+						<div class="tag" style="display:block; margin-left:70px;"> 
 
 						  <ul class="qxjk-ul">
 						  <c:forEach items="${appPersonCount}" var="appPersonCount" varStatus="status">
@@ -80,6 +90,7 @@ $(function () {
 		formutil.clickAllCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
 		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
 	});
+
 </script>
 <script>
 var tabs=function(){
