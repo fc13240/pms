@@ -478,7 +478,7 @@ public class PatentController {
 			patentService.updatePatentsGoodsStatus(patentIds);
 			out.write("批量发布成功");
 		}else {
-			out.write("所选择的专利中包含了已发布的专利，请和核对后再进行发布！");
+			out.write("所选择的专利中包含了已发布的专利，请核对后再进行发布！");
 		}
 		
 	}
