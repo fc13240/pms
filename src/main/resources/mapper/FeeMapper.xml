@@ -45,7 +45,7 @@
 				left join users u on f.process_user = u.user_id join patents p on f.patent = p.patent_id
 				left join patent_status ps on p.patent_status = ps.patent_status_id
 		 where f.fee_owner = #{userId} 
-		 	and f.fee_payment_status = 1 and f.patent in
+		 	and f.fee_payment_status in (1,4) and f.patent in
 		 <foreach item="patentId" collection="patentIds" open="(" separator="," close=")">
 			 #{patentId}
 		 </foreach>		
