@@ -67,7 +67,7 @@ public class PrincipalUtils {
 		return PrincipalUtils.hasAuthority(Role.ROLE_NEWS.getRoleName());
 	}
 	
-	public static boolean isBatchPaper() {//新闻
+	public static boolean isBatchPaper() {//批量申请纸件权限
 		return PrincipalUtils.hasAuthority(Role.ROLE_BATCH_PAPER.getRoleName());
 	}
 }
