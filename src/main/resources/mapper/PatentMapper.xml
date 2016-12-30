@@ -181,10 +181,7 @@
 			 	</if>	
 			 	<if test="endAppDate != null">
 			 		<![CDATA[ and p.app_date <= #{endAppDate} ]]>
-			 	</if>
-			 	<if test="appPerson != null and appPerson != ''">
-			 		and p.app_person = #{appPerson}
-			 	</if>			
+			 	</if>		
 			 	<if test="keyword != null">
 					and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
 						 or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} 
@@ -220,9 +217,6 @@
 			 	<if test="endAppDate != null">
 			 		<![CDATA[ and p.app_date <= #{endAppDate} ]]>
 			 	</if>
-			 	<if test="appPerson != null and appPerson != ''">
-			 		and p.app_person = #{appPerson}
-			 	</if>	
 			 	<if test="keyword != null">
 					and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} 
 						 or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} 

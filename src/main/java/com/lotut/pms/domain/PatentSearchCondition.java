@@ -116,9 +116,8 @@ public class PatentSearchCondition {
 		String patentStatusStr = patentStatus == null ? "" : patentStatus.toString();
 		String transactionStatusStr = transactionStatus == null ? "" : transactionStatus.toString();
 		String keywordStr = keyword == null ? "" : keyword;
-		String appPersonStr = appPerson == null ? "" : appPerson;
 		
 		return "patentType=" + patentTypeStr + "&patentStatus=" + patentStatusStr +"&transactionStatus=" + transactionStatusStr + "&startAppDate="
-				+ startAppDateStr + "&endAppDate=" + endAppDateStr + "&keyword=" + keywordStr + "&appPerson=" + appPersonStr;
+				+ startAppDateStr + "&endAppDate=" + endAppDateStr + "&keyword=" + keywordStr + "&appPerson=" + appPerson;
 	}
 }
