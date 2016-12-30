@@ -342,4 +342,14 @@ public class NoticeServiceImpl implements NoticeService {
 	public int searchUserStarTargetNoticesCount(NoticeSearchCondition searchCondition) {
 		return noticeDao.searchUserStarTargetNoticesCount(searchCondition);
 	}
+
+	@Override
+	public void batchUpdateStarTargetStatus(List<Long> noticeIds) {
+		noticeDao.batchUpdateStarTargetStatus(noticeIds);
+	}
+	
+	@Override
+	public void batchCancelStarTargetStatus(List<Long> noticeIds) {
+		noticeDao.batchCancelStarTargetStatus(noticeIds);
+	}
 }

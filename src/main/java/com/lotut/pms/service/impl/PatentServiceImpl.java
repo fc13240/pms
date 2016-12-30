@@ -528,4 +528,9 @@ public class PatentServiceImpl implements PatentService {
 	public Map<String, Map<String, String>> getAppPersonCountByAppPerson(int userId) {
 		return patentDao.getAppPersonCountByAppPerson(userId);
 	}
+
+	@Override
+	public void changeUserPatentRemark(int userId, long patentId, String patentRemark) {
+		patentDao.changeUserPatentRemark(userId, patentId, patentRemark);
+	}
 }

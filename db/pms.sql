@@ -1200,3 +1200,7 @@ ALTER TABLE user_patents ADD COLUMN annual_fee_monitor_status INT DEFAULT 0 COMM
 insert into groups (group_name) values ("BATCH_PAPER");
 insert into group_authorities(group_id,authority) values (10,"ROLE_BATCH_PAPER");
 
+ALTER TABLE notices ADD COLUMN star_target_monitor_status INT DEFAULT 0 COMMENT '0 表示不监控 1 表示处于监控状态';
+
+ALTER TABLE user_patents ADD COLUMN patent_remark varchar(300) COMMENT '通知书备注';
+

@@ -28,6 +28,7 @@
 		<result property="createTime" column="create_time"/>
 		<result property="isWithinMonth" column="is_within_month"/>
 		<result property="annualMonitorStatus" column="annual_fee_monitor_status"/>
+		<result property="patentRemark" column="patent_remark"/>
 		<association property="patentStatus" resultMap="PatentStatusResultMap"/>
 		<association property="patentType" resultMap="PatentTypeResultMap"/>
 		<association property="salePatentGood" resultMap="salePatentGoodResultMap"/>
@@ -1125,9 +1126,9 @@ where spg.patent_id in
 	
 
 	<select id="getUserAnnualFeeMonitorPatents" parameterType="Page" resultMap="PatentWithShareUsers">
-	 select sp.patent_id,sp.app_no,sp.patent_name,sp.app_date,sp.app_person,sp.invent_person,sp.patent_status,sp.internal_code,sp.patent_owner,ps.*,
+	 select sp.patent_id,sp.app_no,sp.patent_name,sp.app_date,sp.app_person,sp.invent_person,sp.patent_status,sp.internal_code,sp.patent_owner,ps.*,sp.patent_remark,
 			 sp.patent_status_text,sp.publish_date,sp.transaction_status,sp.create_time,u.user_id,u.username,up.annual_fee_monitor_status,pt.*,spg.patent_id as sell_patent_id,
-			 spg.transaction_type,spg.price,spg.status,sp.is_within_month from (select p.*,if(datediff(<![CDATA[current_date,p.app_date)<=30]]>,1,0) as is_within_month 
+			 spg.transaction_type,spg.price,spg.status,sp.is_within_month from (select p.*,if(datediff(<![CDATA[current_date,p.app_date)<=30]]>,1,0) as is_within_month,up.patent_remark
 			 from patents p left join user_patents up on p.patent_id=up.patent where up.user=#{userId} and up.trash_status=1 and up.annual_fee_monitor_status=1 and up.trash_status=1 order by month(p.app_date) desc,day(p.app_date) desc limit #{startIndex},#{pageSize}) sp
 			 join user_patents up on sp.patent_id =up.patent left join users u on up.user=u.user_id left join patent_types pt on sp.patent_type=pt.patent_type_id
 			 left join patent_status ps on sp.patent_status=ps.patent_status_id left join sell_patent_goods spg on sp.patent_id=spg.patent_id
@@ -1167,12 +1168,14 @@ where spg.patent_id in
 	
 	<select id="searchUserAnnualFeeMonitorPatents" parameterType="PatentSearchCondition" resultMap="PatentWithShareUsers">
 		<bind name="keyword_pattern" value="'%'+ keyword +'%'"/>
-	 select sp.patent_id,sp.app_no,sp.patent_name,sp.app_date,sp.app_person,sp.invent_person,sp.patent_status,sp.internal_code,sp.patent_owner,ps.*,
+	 select sp.patent_id,sp.app_no,sp.patent_name,sp.app_date,sp.app_person,sp.invent_person,sp.patent_status,sp.internal_code,sp.patent_owner,ps.*,sp.patent_remark,
 			 sp.patent_status_text,sp.publish_date,sp.transaction_status,sp.create_time,u.user_id,u.username,up.annual_fee_monitor_status,pt.*,spg.patent_id as sell_patent_id,
-			 spg.transaction_type,spg.price,spg.status,sp.is_within_month from (select p.*,if(datediff(<![CDATA[current_date,p.app_date)<=30]]>,1,0) as is_within_month 
+			 spg.transaction_type,spg.price,spg.status,sp.is_within_month from (select p.*,if(datediff(<![CDATA[current_date,p.app_date)<=30]]>,1,0) as is_within_month,up.patent_remark
 			 from patents p left join user_patents up on p.patent_id=up.patent where up.user=#{userId} and up.annual_fee_monitor_status=1 and up.trash_status=1
 			 <if test="keyword_pattern !=null">
-			 	and(p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} or p.patent_status_text like #{keyword_pattern} )
+			 	and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} or p.patent_status_text like #{keyword_pattern}
+					 or up.patent_remark like #{keyword_pattern}
+			 	    )
 			 </if>
 			 order by month(p.app_date) desc,day(p.app_date) desc limit #{page.startIndex},#{page.pageSize}) sp
 			 join user_patents up on sp.patent_id =up.patent left join users u on up.user=u.user_id left join patent_types pt on sp.patent_type=pt.patent_type_id
@@ -1185,8 +1188,10 @@ where spg.patent_id in
 		<bind name="keyword_pattern" value="'%'+ keyword +'%'"/>
 		select count(*) from patents p left join user_patents up on p.patent_id=up.patent where up.user=#{userId} and up.annual_fee_monitor_status=1 and up.trash_status=1
 		 <if test="keyword_pattern !=null">
-			 	and(p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} or p.patent_status_text like #{keyword_pattern} )
-			 </if>
+		 	and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} or p.patent_status_text like #{keyword_pattern}
+		 		or up.patent_remark like #{keyword_pattern}
+			 	)
+		 </if>
 	</select>
 
 	<select id="SearchPatentsRecycled" parameterType="PatentSearchCondition" resultMap="PatentWithShareUsers">
@@ -1230,4 +1235,7 @@ where spg.patent_id in
 		WHERE up.user = #{userId} AND up.trash_status=1 GROUP BY p.app_person order by p.app_person desc ;
 	</select>
 	
+	<update id="changeUserPatentRemark">
+		update user_patents set patent_remark=#{patentRemark} where patent=#{patentId} and user=#{userId}
+	</update>
 </mapper>

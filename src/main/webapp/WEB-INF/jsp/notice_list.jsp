@@ -394,7 +394,7 @@
 								  <input style="text-align:center" type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>"></span>
 								  <span class="lbl"></span></label></td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize}
-								<c:if test="${notice.patent.annualMonitorStatus==1 }">
+								<c:if test="${notice.starTargetMonitorStatus==1 }">
 							  		<div style="width:25px;heigth:25px;background: red;float:right"><font color="white">星</font></div>
 							  	</c:if>
 								
@@ -1256,24 +1256,24 @@ tabs.set("nav","menu_con");//执行
 
 <script type="text/javascript">
 	function batchAddStarTargetNotices() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		var uniquePatentNos = [];
-		if (!patentSelected) {
+		var noticeSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+		var uniqueNoticeNos = [];
+		if (!noticeSelected) {
 			formutil.alertMessage('请选择通知书');
 			return;
 		}
-		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
-		for (var i = 0; i < patents_checked.length; i++) {
-			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
-				uniquePatentNos.push(patents_checked[i]);
+		var notices_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'notice');
+		for (var i = 0; i < notices_checked.length; i++) {
+			if ($.inArray(notices_checked[i], uniqueNoticeNos) == -1) {
+				uniqueNoticeNos.push(notices_checked[i]);
 				
 			}
 			
 		}
 		
-		var patentIds = uniquePatentNos.join(",");
+		var noticeIds = uniqueNoticeNos.join(",");
 		$.ajax({
-			url:"<s:url value='/patent/batchAddAnnualFeeMonitor.html'/>?patentIds=" + patentIds,
+			url:"<s:url value='/notice/batchAddStarTargetMonitor.html'/>?noticeIds=" + noticeIds,
 			type:"post",
 			success: function(data) {
 				formutil.alertMessage(data,true);	

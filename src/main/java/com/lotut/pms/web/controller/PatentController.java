@@ -708,14 +708,15 @@ public class PatentController {
 	@RequestMapping(path="batchAddAnnualFeeMonitor")
 	public void batchAddAnnualFeeMonitor(@RequestParam("patentIds") List<Long> patentIds,PrintWriter pw){
 		int userId = PrincipalUtils.getCurrentUserId();
-		String message = null;
-		boolean isAnnualFeeMonitor = patentService.isFeeMonitorPatents(userId,patentIds);
+		patentService.batchAddFeeMonitorPatents(userId,patentIds);
+		String message = "操作成功";
+		/*boolean isAnnualFeeMonitor = patentService.isFeeMonitorPatents(userId,patentIds);
 		if(isAnnualFeeMonitor){
 			patentService.batchAddFeeMonitorPatents(userId,patentIds);
 			message="操作成功";
 		}else{
 			message="选中的已加入，请核对后再进行添加！！";
-		}
+		}*/
 		pw.write(message);
 	}
 	
@@ -752,5 +753,12 @@ public class PatentController {
 		Map<String, Map<String, String>> appPersonCount=patentService.getAppPersonCountByAppPerson(userId);
 		model.addAttribute("appPersonCount", appPersonCount);
 		return "patent_appPerson_list";
+	}
+	
+	@RequestMapping(path="/changeUserPatentRemark", method=RequestMethod.POST)
+	public void changeUserPatentRemark(long patentId,String patentRemark,PrintWriter pw) {
+		int userId=PrincipalUtils.getCurrentUserId();
+		patentService.changeUserPatentRemark(userId,patentId,patentRemark);
+		pw.write("操作成功！");
 	}
 }

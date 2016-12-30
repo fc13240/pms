@@ -34,8 +34,17 @@ public class Patent {
 	private SalePatentGood salePatentGood;
 	private int isWithinMonth;
 	private int annualMonitorStatus;
+	private String patentRemark;
 
 	
+	public String getPatentRemark() {
+		return patentRemark;
+	}
+
+	public void setPatentRemark(String patentRemark) {
+		this.patentRemark = patentRemark;
+	}
+
 	public int getAnnualMonitorStatus() {
 		return annualMonitorStatus;
 	}

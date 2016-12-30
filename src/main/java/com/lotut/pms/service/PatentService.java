@@ -184,5 +184,7 @@ public interface PatentService {
 	int SearchPatentsRecycledCount(PatentSearchCondition searchCondition);
 	
 	Map<String ,Map<String,String>> getAppPersonCountByAppPerson(int userId);
+	
+	void changeUserPatentRemark(int userId,long patentId,String patentRemark);
 }
 

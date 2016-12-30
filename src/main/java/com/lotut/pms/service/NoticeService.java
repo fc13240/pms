@@ -86,4 +86,7 @@ public interface NoticeService {
 	
 	int searchUserStarTargetNoticesCount(NoticeSearchCondition searchCondition);
 	
+	void batchUpdateStarTargetStatus(List<Long> noticeIds);
+	
+	void batchCancelStarTargetStatus(List<Long> noticeIds);
 }

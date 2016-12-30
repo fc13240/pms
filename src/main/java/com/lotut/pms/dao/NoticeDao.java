@@ -75,4 +75,8 @@ public interface NoticeDao {
 	Map<String , Map<String,String>> getUserStarTargetNoticeCountByRemainDay(int userId);
 	
 	int searchUserStarTargetNoticesCount(NoticeSearchCondition searchCondition);
+	
+	void batchUpdateStarTargetStatus(List<Long> noticeIds);
+	
+	void batchCancelStarTargetStatus(List<Long> noticeIds);
 }

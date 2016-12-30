@@ -21,8 +21,17 @@ public class Notice {
 	private NoticeType noticeType;
 	private NoticePaperApplyType paperApplyType;
 	private Long noticeViewStatus;
+	private int starTargetMonitorStatus;
 	
 	
+
+	public int getStarTargetMonitorStatus() {
+		return starTargetMonitorStatus;
+	}
+
+	public void setStarTargetMonitorStatus(int starTargetMonitorStatus) {
+		this.starTargetMonitorStatus = starTargetMonitorStatus;
+	}
 
 	public Long getNoticeViewStatus() {
 		return noticeViewStatus;

@@ -193,6 +193,16 @@ public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao 
 	@Override
 	public int searchUserStarTargetNoticesCount(NoticeSearchCondition searchCondition) {
 		return noticeMapper.searchUserStarTargetNoticesCount(searchCondition);
+	}
+
+	@Override
+	public void batchUpdateStarTargetStatus(List<Long> noticeIds) {
+		noticeMapper.batchUpdateStarTargetStatus(noticeIds);
+	}	
+	
+	@Override
+	public void batchCancelStarTargetStatus(List<Long> noticeIds) {
+		noticeMapper.batchCancelStarTargetStatus(noticeIds);
 	}	
 
 	

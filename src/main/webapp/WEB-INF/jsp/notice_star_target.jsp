@@ -723,7 +723,7 @@ function batchProcessNotice(processStatus) {
 		});		
 	}
 	function batchCancelStarTargetNotice() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+		/* var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
 		var uniquePatentNos = [];
 		if (!patentSelected) {
 			formutil.alertMessage('请选择通知书');
@@ -748,6 +748,33 @@ function batchProcessNotice(processStatus) {
 			},
 			error: function() {
 				formutil.alertMessage('批量取消监控失败');
+			}
+		}); */
+		
+		var noticeSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+		var uniqueNoticeNos = [];
+		if (!noticeSelected) {
+			formutil.alertMessage('请选择通知书');
+			return;
+		}
+		var notices_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'notice');
+		for (var i = 0; i < notices_checked.length; i++) {
+			if ($.inArray(notices_checked[i], uniqueNoticeNos) == -1) {
+				uniqueNoticeNos.push(notices_checked[i]);
+				
+			}
+			
+		}
+		
+		var noticeIds = uniqueNoticeNos.join(",");
+		$.ajax({
+			url:"<s:url value='/notice/batchCancelStarTargetMonitor.html'/>?noticeIds=" + noticeIds,
+			type:"post",
+			success: function(data) {
+				formutil.alertMessage(data,true);	
+			},
+			error: function() {
+				formutil.alertMessage('批量监控失败');
 			}
 		});
 	}

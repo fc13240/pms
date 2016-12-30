@@ -90,5 +90,9 @@ public interface NoticeMapper {
 	
 	int searchUserStarTargetNoticesCount(NoticeSearchCondition searchCondition);
 	
+	void batchUpdateStarTargetStatus(@Param("noticeIds")List<Long> noticeIds);
+	
+	void batchCancelStarTargetStatus(@Param("noticeIds")List<Long> noticeIds);
+	
 	
 }

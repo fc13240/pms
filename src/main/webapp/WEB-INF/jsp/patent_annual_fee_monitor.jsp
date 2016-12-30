@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
-<title>龙图腾专利管家－我的专利！</title>
+<title>龙图腾专利管家－年费监控！</title>
 <%@ include file="_css.jsp" %>
 <body>
 <%@ include file="_top.jsp" %>
@@ -44,15 +44,21 @@
 				
 				<div class="lt-box">
 					<div class="search-box">
-						<table class="search-table" width="100%">
+						<table class="search-table" width="960px">
+							<form class="form-inline" action="<s:url value='/patent/searchUserAnnualFeeMonitorPatents.html'/>" method="get">
 							<tr>
-								<td>
-									<a href="javascript:return void" onclick="batchCancelAnnualFeeMonitor()" >
-										<button style="width:140px;" class="button button-primary  button-rounded"  data-toggle="tooltip" data-placement="right">批量取消年费监控</button>
-									</a>
+								<td >起始日期</td>
+								<td>结束日期</td>
+								<td>关键字</td>
+							</tr>
+							<tr>
+								<td width="130px">
+									<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId',dateFmt:'MM-dd'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >							  
 								</td>
-								<td>
-									<form class="form-inline" action="<s:url value='/patent/searchUserAnnualFeeMonitorPatents.html'/>" method="get">
+								<td width="130px">
+									<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDateId',dateFmt:'MM-dd'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >						  
+								</td>
+								<td >
 									  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 									  <div class="t-third">
 			
@@ -67,9 +73,19 @@
 										  </tr>							  
 									  </table>
 									  </div>
-									</form>
+									
 								
 								</td>
+								
+							</tr>
+							</form>
+							<tr>
+								<td>
+									<a href="javascript:return void" onclick="batchCancelAnnualFeeMonitor()" >
+										<button style="width:140px;" class="button button-primary  button-rounded"  data-toggle="tooltip" data-placement="right">批量取消年费监控</button>
+									</a>
+								</td>
+							
 							</tr>
 						</table>
 					</div>
@@ -93,7 +109,7 @@
 						  <th width="110" class="hidden-480"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申请日/年费日</th>
 						  <th width="110">更新时间/案件状态</th>
 						  <th width="180">内部编码/共享人</th>
-						  <th width="130">交易类型/价格/状态</th>
+						  <th width="130">备注</th>
 						  <th width="80">操作</th>
 						</tr>
 					  </thead>
@@ -143,32 +159,7 @@
 						        </c:forEach>
 							</td>
 							<td style="text-align:center" width="120px">
-								<c:if test="${not empty patent.salePatentGood }">
-									<c:if test="${patent.salePatentGood.transactionType==1 }">转让价</c:if>
-									<c:if test="${patent.salePatentGood.transactionType==2 }">许可价</c:if>
-									${patent.salePatentGood.price }元<br/>
-									<c:if test="${patent.transactionStatus==1}">
-										待交易
-				 	                </c:if>
-				 	                 <c:if test="${patent.transactionStatus==2}">
-					                  	<font color="red">已预订</font>
-				 	                  </c:if>
-				 	                 <c:if test="${patent.transactionStatus==3}">
-					                  	<font color="red">已付款待变更</font>
-				 	                  </c:if>
-				 	                  <c:if test="${patent.transactionStatus==4}">
-					                  	<font color="red">已变更待合格</font>
-				 	                  </c:if>
-				 	                 <c:if test="${patent.transactionStatus==5}">
-					                  	<font color="red">交易成功</font>
-				 	                  </c:if>
-								</c:if>
-								<c:if test="${empty patent.salePatentGood }">
-	 			                  	   <a target="_blank" href="<s:url value='/patent/goods.html'/>?patent=<c:out value='${patent.patentId}'/>">
-					                  	<button class="t-btn2" value="1" data-toggle="tooltip" data-placement="bottom" title="加入r.lotut.com商城">发布交易</button> 
-				 	                  </a>
-								</c:if>
-								
+								<input style="width:180px;" type="text" value="<c:out value='${patent.patentRemark}'/>" size="90" onChange="changePatentRemark('<c:out value='${patent.patentId}'/>', this.value)"/>
 							</td>
 							<td style="text-align:center"><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
 							  分享
@@ -599,6 +590,20 @@ function batchCancelAnnualFeeMonitor() {
 			formutil.alertMessage('批量取消监控失败');
 		}
 	});
+}
+
+function changePatentRemark(patentId,patentRemark){
+	$.ajax({
+		type : "POST",
+		url : "<s:url value='/patent/changeUserPatentRemark.html'/>",
+		data : {"patentId":patentId,"patentRemark":patentRemark},
+		success : function (data){
+			
+		},
+		error : function (){
+			formutil.alertMessage("出现未知错误，请稍后再试！",true);
+		}
+	})
 }
 </script>
 

@@ -389,5 +389,20 @@ public class NoticeController {
 		model.addAttribute("wayOfPaging","normal");
 		addSearchTypesDataToModel(model);
 		return "notice_star_target";
-	}	
+	}
+	
+	
+	@RequestMapping(path="batchAddStarTargetMonitor")
+	public void batchAddAnnualFeeMonitor(@RequestParam("noticeIds") List<Long> noticeIds,PrintWriter pw){
+		noticeService.batchUpdateStarTargetStatus(noticeIds);
+		String message = "操作成功";
+		pw.write(message);
+	}
+	
+	@RequestMapping(path="batchCancelStarTargetMonitor")
+	public void batchCancelStarTargetMonitor(@RequestParam("noticeIds") List<Long> noticeIds,PrintWriter pw){
+		noticeService.batchCancelStarTargetStatus(noticeIds);
+		String message = "操作成功";
+		pw.write(message);
+	}
 }

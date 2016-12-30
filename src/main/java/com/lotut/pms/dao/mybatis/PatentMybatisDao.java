@@ -484,4 +484,9 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 		return patentMapper.getAppPersonCountByAppPerson(userId);
 	}
 
+	@Override
+	public void changeUserPatentRemark(int userId, long patentId, String patentRemark) {
+		patentMapper.changeUserPatentRemark(userId, patentId, patentRemark);
+	}
+
 }
