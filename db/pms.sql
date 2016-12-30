@@ -1200,3 +1200,4 @@ ALTER TABLE user_patents ADD COLUMN annual_fee_monitor_status INT DEFAULT 0 COMM
 insert into groups (group_name) values ("BATCH_PAPER");
 insert into group_authorities(group_id,authority) values (10,"ROLE_BATCH_PAPER");
 
+
