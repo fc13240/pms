@@ -525,7 +525,7 @@ public class PatentServiceImpl implements PatentService {
 	}
 
 	@Override
-	public Map<String, Map<String, String>> getAppPersonCountByAppPerson(int userId) {
+	public List<Map<String, String>> getAppPersonCountByAppPerson(int userId) {
 		return patentDao.getAppPersonCountByAppPerson(userId);
 	}
 

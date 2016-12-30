@@ -480,7 +480,7 @@ public class PatentMybatisDao extends SqlSessionDaoSupport implements PatentDao 
 	}
 
 	@Override
-	public Map<String, Map<String, String>> getAppPersonCountByAppPerson(int userId) {
+	public List<Map<String, String>> getAppPersonCountByAppPerson(int userId) {
 		return patentMapper.getAppPersonCountByAppPerson(userId);
 	}
 

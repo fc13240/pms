@@ -19,10 +19,19 @@ public class PatentSearchCondition {
 	private Date endAppDate;
 	private String keywordType;
 	private String keyword;
+	private String appPerson;
 	private Page page;
 	private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	
 	
+	public String getAppPerson() {
+		return appPerson;
+	}
+
+	public void setAppPerson(String appPerson) {
+		this.appPerson = appPerson;
+	}
+
 	public int getUserId() {
 		return userId;
 	}
@@ -109,6 +118,6 @@ public class PatentSearchCondition {
 		String keywordStr = keyword == null ? "" : keyword;
 		
 		return "patentType=" + patentTypeStr + "&patentStatus=" + patentStatusStr +"&transactionStatus=" + transactionStatusStr + "&startAppDate="
-				+ startAppDateStr + "&endAppDate=" + endAppDateStr + "&keyword=" + keywordStr;
+				+ startAppDateStr + "&endAppDate=" + endAppDateStr + "&keyword=" + keywordStr + "&appPerson=" + appPerson;
 	}
 }

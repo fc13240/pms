@@ -185,7 +185,7 @@ public interface PatentDao {
 	
 	int SearchPatentsRecycledCount(PatentSearchCondition searchCondition);
 	
-	Map<String ,Map<String,String>> getAppPersonCountByAppPerson(int userId);
-	
 	void changeUserPatentRemark(int userId,long patentId,String patentRemark);
+
+	List<Map<String,String>> getAppPersonCountByAppPerson(int userId);
 }

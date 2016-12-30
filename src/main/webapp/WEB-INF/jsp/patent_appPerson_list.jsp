@@ -18,9 +18,14 @@
     border-bottom: 1px dashed #ccc;
 	margin:10px 0 0 0;
 	padding: 0 5px;
-}
+};
 
+	a:link{color:black;} 
+	a:visited{color:blue;}
+	a:hover{color:red;}
+	a:active{color:green;} 
 </style>
+</head>
 <body>
 <%@ include file="_top.jsp" %>
 
@@ -59,8 +64,9 @@
 						  <ul class="qxjk-ul">
 						  <c:forEach items="${appPersonCount}" var="appPersonCount" varStatus="status">
 						  	<li>
-						  		 <a href="<s:url value='/patent/search.html?page.currentPage=1&keyword=${appPersonCount.key}'/>">
-									${appPersonCount.key}(<c:out value='${appPersonCount.value.patentCount}' default="0"/>)
+						  		${status.count}.&nbsp;&nbsp;
+						  		 <a  href="<s:url value='/patent/search.html?page.currentPage=1&keyword=${appPersonCount["appPerson"]}'/>">
+									${appPersonCount["appPerson"]}(<c:out value='${appPersonCount["patentCount"]}' default="0"/>)
 								</a>
 							</li>
 						  </c:forEach>

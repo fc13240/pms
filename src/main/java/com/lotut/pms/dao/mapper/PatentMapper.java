@@ -205,8 +205,7 @@ public interface PatentMapper {
 	
 	int SearchPatentsRecycledCount(PatentSearchCondition searchCondition);
 	
-	@MapKey("appPerson")
-	Map<String ,Map<String,String>> getAppPersonCountByAppPerson(int userId);
+	List<Map<String,String>> getAppPersonCountByAppPerson(int userId);
 	
 	void changeUserPatentRemark(@Param("userId") int userId,@Param("patentId") long patentId, @Param("patentRemark") String patentRemark);
 	
