@@ -65,7 +65,7 @@
 						  <c:forEach items="${appPersonCount}" var="appPersonCount" varStatus="status">
 						  	<li>
 						  		${status.count}.&nbsp;&nbsp;
-						  		 <a  href="<s:url value='/patent/search.html?page.currentPage=1&keyword=${appPersonCount.key}'/>">
+						  		 <a  href="<s:url value='/patent/search.html?page.currentPage=1&appPerson=${appPersonCount["appPerson"]}'/>">
 									${appPersonCount["appPerson"]}(<c:out value='${appPersonCount["patentCount"]}' default="0"/>)
 								</a>
 							</li>
