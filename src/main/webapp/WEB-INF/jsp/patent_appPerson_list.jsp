@@ -17,7 +17,8 @@
     height: 40px;
     border-bottom: 1px dashed #ccc;
 	margin:10px 0 0 0;
-	padding: 0 5px;
+	padding: 0 8px;
+	overflow: hidden;
 };
 
 	a:link{color:black;} 
