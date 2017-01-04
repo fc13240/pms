@@ -163,20 +163,20 @@
 								</select>
 							  </td>
 							  <td>
-								<select style="width:121px;" class="form-control" name="transactionType">
+								<select style="width:100px;" class="form-control" name="transactionType">
 								  <option value="">全部</option>
 								  <option value="1">转让</option>
 								  <option value="2">许可</option>
 								</select>
 							  </td>
 							  <td>
-								  <select style="width:100px;" class="selectPointOfInterest form-control" name="firstColumnId" onchange="getSecondColumn(this.value)">
+								  <select style="width:140px;" class="selectPointOfInterest form-control" name="firstColumnId" onchange="getSecondColumn(this.value)">
 								  	<option value="">全部</option>
 								  	<c:forEach items="${FirstColumns }" var="firstColumn">
 								  		<option value="${firstColumn.id }">${firstColumn.name }</option>
 								  	</c:forEach>
 								  </select>
-								  <select style="width:100px;" class="selectPointOfInterest form-control" name="secondColumnId" id="secondColumnSelect">
+								  <select style="width:140px;" class="selectPointOfInterest form-control" name="secondColumnId" id="secondColumnSelect">
 								  	<option value="">全部</option>
 								  </select>
 							  </td>
