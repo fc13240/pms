@@ -1179,6 +1179,12 @@ where spg.patent_id in
 					 or up.patent_remark like #{keyword_pattern}
 			 	    )
 			 </if>
+			 <if test="startAppDate !=null">
+			 	and date_format(p.app_date,'%m-%d') >= date_format(#{startAppDate},'%m-%d')
+			 </if>
+			 <if test="endAppDate !=null">
+			   and <![CDATA[ date_format(p.app_date,'%m-%d') <= date_format(#{endAppDate},'%m-%d')]]>
+			 </if>
 			 order by month(p.app_date) desc,day(p.app_date) desc limit #{page.startIndex},#{page.pageSize}) sp
 			 join user_patents up on sp.patent_id =up.patent left join users u on up.user=u.user_id left join patent_types pt on sp.patent_type=pt.patent_type_id
 			 left join patent_status ps on sp.patent_status=ps.patent_status_id left join sell_patent_goods spg on sp.patent_id=spg.patent_id
@@ -1193,6 +1199,13 @@ where spg.patent_id in
 		 	and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern} or p.internal_code like #{keyword_pattern} or p.patent_status_text like #{keyword_pattern}
 		 		or up.patent_remark like #{keyword_pattern}
 			 	)
+		 </if>
+		 
+		 <if test="startAppDate !=null">
+		 	and date_format(p.app_date,'%m-%d') >= date_format(#{startAppDate},'%m-%d')
+		 </if>
+		 <if test="endAppDate !=null">
+		 	and <![CDATA[ date_format(p.app_date,'%m-%d') <= date_format(#{endAppDate},'%m-%d')]]>
 		 </if>
 	</select>
 

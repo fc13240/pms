@@ -31,7 +31,59 @@
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding: 10px 0 0 0;">
 					<div class="search-box">
+						<table class="search-table" width="960px">
+							<form class="form-inline" action="<s:url value='/notice/searchStarTarget.html'/>" method="get">
+							<tr>
+								<td >发文起始日期</td>
+								<td>发文结束日期</td>
+								<td>关键字</td>
+							</tr>
+							<tr>
+								<td width="130px">
+									<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startDispatchDateId',dateFmt:'yyyy-MM-dd'})" id="startDispatchDateId" name="startDispatchDate" placeholder="发文日开始" value="" readonly="readonly" >							  
+								</td>
+								<td width="130px">
+									<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endDispatchDateId',dateFmt:'yyyy-MM-dd'})"  id="endDispatchDateId" name="endDispatchDate" placeholder="发文日结束" value="" readonly="readonly" >						  
+								</td>
+								<td >
+									  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
+									  <div class="t-third">
+			
+									  <table class="search-table">
+										  <tr>
+											  <td>
+												<input name="keyword" style="display:inline;width:300px;" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>							  
+											  </td>
+											  <td>
+											  	<button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
+											  </td>
+										  </tr>							  
+									  </table>
+									  </div>
+									
+								
+								</td>
+								
+							</tr>
+							</form>
+							<tr>
+								<td>
+							  		<a href="javascript:return void" onclick="batchCancelStarTargetNotice()">
+										<button style="width:140px;" class="button button-caution button-rounded">批量取消星标通知</button>
+									</a>
+						  		</td>
+							
+							</tr>
+						</table>
+					</div>
+				
+				
+					<%-- <div class="search-box">
 						  <div class="t-third" style="clear:both;">
+			
+						  
+						  
+						  
 						  <table class="search-table" width="100%">
 						  	<tr>
 						  		<td>
@@ -57,7 +109,7 @@
 							
 						  </div>
 						
-					</div>
+					</div> --%>
 				</div>
 				<!--search form end-->
 				<div class="lt-box">

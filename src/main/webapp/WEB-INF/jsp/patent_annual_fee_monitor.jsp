@@ -47,16 +47,16 @@
 						<table class="search-table" width="960px">
 							<form class="form-inline" action="<s:url value='/patent/searchUserAnnualFeeMonitorPatents.html'/>" method="get">
 							<tr>
-								<td >起始日期</td>
-								<td>结束日期</td>
+								<td >年费日起始日期</td>
+								<td>年费日结束日期</td>
 								<td>关键字</td>
 							</tr>
 							<tr>
 								<td width="130px">
-									<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId',dateFmt:'MM-dd'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >							  
+									<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId',dateFmt:'MM-dd'})" id="startAppDateId" name="startMonthDay" placeholder="申请日开始" value="" readonly="readonly" >							  
 								</td>
 								<td width="130px">
-									<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDateId',dateFmt:'MM-dd'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >						  
+									<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDateId',dateFmt:'MM-dd'})"  id="endAppDateId" name="endMonthDay" placeholder="申请日结束" value="" readonly="readonly" >						  
 								</td>
 								<td >
 									  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
@@ -65,7 +65,7 @@
 									  <table class="search-table">
 										  <tr>
 											  <td>
-												<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态/备注" class="t-input form-control"/>							  
+												<input style="width:350px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态/备注" class="t-input form-control"/>							  
 											  </td>
 											  <td>
 											  	<button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>

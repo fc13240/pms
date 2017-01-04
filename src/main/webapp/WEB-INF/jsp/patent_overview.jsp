@@ -24,7 +24,7 @@
 <a href="#baseInfo" style="font-size:medium;margin-right: 100px;">基本信息</a>
 <a href="#noticeInfo" style="font-size:medium;margin-right: 100px;">通知信息</a>
 <a href="#transactionInfo" style="font-size:medium;margin-right: 100px;">交易信息</a>
-<a href="http://cpquery.sipo.gov.cn/txnQueryFeeData.do?select-key:shenqingh=${patent.appNo }" target="_blank" style="font-size:medium;margin-right: 100px;">缴费信息</a>
+<a href="<s:url value='/fee/grabFees.html?patent=${patent.patentId }'/>" target="_blank" style="font-size:medium;margin-right: 100px;">缴&nbsp;&nbsp;费</a>
 <a href="http://cpquery.sipo.gov.cn/txnQueryDeliveryData.do?select-key:shenqingh=${patent.appNo }&select-key:zhuanlilx=&select-key:gonggaobj=&select-key:backPage=&inner-flag:open-type=window&inner-flag:flowno=" style="font-size:medium;margin-right: 100px;" target="_blank">发文信息</a>
 <a href="javascript:void(0);" onclick="searchAppNo('${patent.appNo}')"style="font-size:medium">授权公告</a>
 
@@ -65,14 +65,14 @@
 		 </tr>
 		 <tr class="simple_bag" style="text-align: center">
 			  <td class="center" width="170px" style="text-align: center">案件状态：</td>
-			  <td style="text-align: center">${patent.patentStatusText }</td>
+			  <td class="center" style="text-align: center">${patent.patentStatusText }</td>
 			  <td class="center" width="170px" style="text-align: center">更新时间：</td>
 			  <td style="text-align: center"><fmt:formatDate value="${patent.createTime }" pattern="yyyy年MM月dd日 HH:mm:ss"/></td>
 		 </tr>
 		 <c:if test="${not empty patentRemarks }">
 		 	<tr class="simple_bag" style="text-align: center">
 			  <td class="center" width="170px" style="text-align: center">备注信息：</td>
-			  <td colspan="3" style="text-align: center">
+			  <td class="center" colspan="3" style="text-align: center">
 			  	<c:forEach items="${patentRemarks }" var="patentRemark" varStatus="status">
 			  	${patentRemark.content }&nbsp;
 			  	<c:if test="${status.index%4==0&&status.index!=0 }"><br/></c:if>
@@ -85,28 +85,28 @@
 	<br/>
 	通知信息
 	<table id="noticeInfo" class="table table-striped table-bordered table-hover" style="width: 1100px;">
-		<tr>
-			<th style="text-align: center">序号</th>
-			<th style="text-align: center">发文日</th>
-			<th style="text-align: center">通知书名称</th>
-			<th style="text-align: center">发文序号</th>
-			<th style="text-align: center">是否查看</th>
-			<th style="text-align: center">已过天数</th>
-			<th style="text-align: center" width="175px">是否处理</th>
-			<th style="text-align: center" width="105px">纸件申请</th>
-			<th style="text-align: center">操作</th>
+		<tr >
+			<th class="center" style="text-align: center">序号</th>
+			<th class="center" style="text-align: center">发文日</th>
+			<th class="center" style="text-align: center">通知书名称</th>
+			<th class="center" style="text-align: center">发文序号</th>
+			<th class="center" style="text-align: center">是否查看</th>
+			<th class="center" style="text-align: center">已过天数</th>
+			<th class="center" style="text-align: center" width="175px">是否处理</th>
+			<th class="center" style="text-align: center" width="105px">纸件申请</th>
+			<th class="center" style="text-align: center">操作</th>
 		</tr>
 	<c:forEach items="${notices }" var="notice" varStatus="status">
-		<tr class="simple_bag">
-		  <td style="text-align: center">${status.count }</td>
-		  <td style="text-align: center"><fmt:formatDate value="${notice.dispatchDate }" pattern="yyyy-MM-dd"/></td>
-		  <td style="text-align: center">
+		<tr class="simple_bag" style="text-align: center">
+		  <td class="center" style="text-align: center">${status.count }</td>
+		  <td class="center" style="text-align: center"><fmt:formatDate value="${notice.dispatchDate }" pattern="yyyy-MM-dd"/></td>
+		  <td class="center" style="text-align: center">
 		  	<a href="<s:url value='/notice/preview.html?notice=${notice.noticeId }'/>" target="_blank">
 		  		${notice.name }
 		  	</a>
 		  </td>
-		  <td style="text-align: center">${notice.dispatchSequence }</td>
-		  <td style="text-align: center"><span id="notice_read_span${notice.noticeId }">
+		  <td class="center" style="text-align: center">${notice.dispatchSequence }</td>
+		  <td class="center" style="text-align: center"><span id="notice_read_span${notice.noticeId }">
 		  	<c:choose>
 		  		<c:when test="${not empty notice.noticeViewStatus }">
 		  			已查看
@@ -118,7 +118,7 @@
 		  	
 		  	</span>
 		  </td>
-		  <td style="text-align: center">
+		  <td class="center" style="text-align: center">
 		  	<c:if test="${notice.remainDays==0 }">
 		  		今天
 		  	</c:if>
@@ -126,7 +126,7 @@
 		  		 ${notice.remainDays }天
 		  	</c:if>
 		 </td>
-		  <td style="text-align: center">
+		  <td class="center" style="text-align: center">
 		  	<select class="selectPointOfInterest form-control" onChange="processNotice('${notice.noticeId}', this);changeNoticeReadStatus(${notice.noticeId})"
 		  		<se:authorize access="hasRole('ROLE_USER') and not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 		  			disabled="disabled"
@@ -141,7 +141,7 @@
 		  		</c:forEach>
 		  	</select>
 		  </td>
-		  <td style="text-align: center">
+		  <td class="center" style="text-align: center">
 		  	<select class="selectPointOfInterest form-control" onchange="changePaperApplyType('${notice.noticeId}', this)"
 		  		<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS') and not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT','ROLE_USER')">
 		  			disabled="disabled"
@@ -157,7 +157,7 @@
 		  		</c:forEach>
 		  	</select>
 		  </td>
-		  <td style="text-align: center">
+		  <td class="center" style="text-align: center">
 			<a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}" onclick="changeNoticeReadStatus(${notice.noticeId})"> 下载 </a> 
 		  </td>
 		 </tr>
@@ -167,29 +167,29 @@
 	<br/>
 	交易信息
 	<table id="transactionInfo" class="table table-striped table-bordered table-hover" style="width: 1100px;">
-		<tr>
-			<th style="text-algin:center" width="110px">发布日</th>
-			<th style="text-algin:center" width="80px">转让方</th>
-			<th style="text-algin:center" width="70px">交易类型</th>
-			<th style="text-algin:center" width="70px">交易价格</th>
-			<th style="text-algin:center" width="80px">交易状态</th>
-			<th style="text-algin:center" width="110px">交易日</th>
-			<th style="text-algin:center">说明</th>
+		<tr >
+			<th class="center" style="text-algin:center" width="110px">发布日</th>
+			<th class="center" style="text-algin:center" width="80px">转让方</th>
+			<th class="center" style="text-algin:center" width="70px">交易类型</th>
+			<th class="center" style="text-algin:center" width="70px">交易价格</th>
+			<th class="center" style="text-algin:center" width="80px">交易状态</th>
+			<th class="center" style="text-algin:center" width="110px">交易日</th>
+			<th class="center" style="text-algin:center">说明</th>
 		</tr>
 		<tr class="simple_bag">
 			<c:choose>
 				<c:when test="${not empty good }">
-					<td style="text-algin:center">
+					<td class="center" style="text-algin:center">
 					  	<fmt:formatDate value="${good.addDate }" pattern="yyyy-MM-dd"/>
 					  </td>
-					  <td style="text-algin:center">${good.transferor }</td>
-					  <td style="text-algin:center">
+					  <td class="center" style="text-algin:center">${good.transferor }</td>
+					  <td class="center" style="text-algin:center">
 					  	<c:if test="${good.transactionType==1 }">转让</c:if>
 					  	<c:if test="${good.transactionType==2 }">许可</c:if>
 					  </td>
 					  	
-					  <td style="text-algin:center">${good.price }</td>
-					  <td style="text-algin:center">
+					  <td class="center" style="text-algin:center">${good.price }</td>
+					  <td class="center" style="text-algin:center">
 					  	<select style="display:inline;width:130px" onChange="changeStatus('<c:out value='${good.patentId}'/>', this.value)" class="form-control first_column">
 							<c:if test="${good.status==0}">
 							<option value="${good.status}" selected="selected">
@@ -250,15 +250,15 @@
 							</c:if>
 						</select>
 					  </td>
-					  <td style="text-algin:center">
+					  <td class="center" style="text-algin:center">
 					  	<fmt:formatDate value="${good.transactionDate }" pattern="yyyy-MM-dd"/>
 					  </td>
-					  <td style="text-algin:center">
-					  	<input style="width:180px;" type="text" value="${good.description}" size="90" onChange="changedescription(${good.patentId}, this.value)"/>
+					  <td class="center" style="text-algin:center">
+					  	<input style="width:500px;" type="text" value="${good.description}" size="90" onChange="changedescription(${good.patentId}, this.value)"/>
 					  </td>
 				</c:when>
 				<c:otherwise>
-					<td style="text-algin:center" colspan="7">
+					<td class="center" style="text-algin:center" colspan="7">
 						无交易信息
 					</td>
 				</c:otherwise>

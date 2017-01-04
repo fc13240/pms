@@ -373,7 +373,7 @@ public class NoticeController {
 	
 	
 	@RequestMapping(path="/searchStarTarget", method=RequestMethod.GET)
-	public String searchStarTarget(@ModelAttribute("searchCondition")NoticeSearchCondition searchCondition, Model model,HttpSession session) {
+	public String searchStarTarget(@ModelAttribute("searchCondition")NoticeSearchCondition searchCondition, Model model,HttpSession session) throws Exception {
 		Page page=searchCondition.getPage();
 		page.setPageSize(WebUtils.getPageSize(session));
 		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());

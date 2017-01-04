@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -728,7 +731,18 @@ public class PatentController {
 	}
 	
 	@RequestMapping(path="searchUserAnnualFeeMonitorPatents")
-	public String searchUserAnnualFeeMonitorPatents(PatentSearchCondition searchCondition,HttpSession session,Model model){
+	public String searchUserAnnualFeeMonitorPatents(String startMonthDay,String endMonthDay,PatentSearchCondition searchCondition,HttpSession session,Model model) throws Exception{
+		Calendar nowCalendar = Calendar.getInstance();
+		int currentYear = nowCalendar.get(Calendar.YEAR);
+		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		if(startMonthDay.length()>=3){
+			String startAppDate = currentYear+"-"+startMonthDay;
+			searchCondition.setStartAppDate(sdf.parse(startAppDate));
+		}
+		if(endMonthDay.length()>=3){
+			String endAppDate = currentYear+"-"+endMonthDay;
+			searchCondition.setEndAppDate(sdf.parse(endAppDate));
+		}
 		Page page = searchCondition.getPage();
 		int userId = PrincipalUtils.getCurrentUserId();
 		if(page.getCurrentPage()<=1){
