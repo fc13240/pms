@@ -1203,3 +1203,19 @@ insert into group_authorities(group_id,authority) values (10,"ROLE_BATCH_PAPER")
 ALTER TABLE notices ADD COLUMN star_target_monitor_status INT DEFAULT 0 COMMENT '0 表示不监控 1 表示处于监控状态';
 ALTER TABLE user_patents ADD COLUMN patent_remark varchar(300) COMMENT '通知书备注';
 
+INSERT INTO news_type (type_id, type_name)
+VALUES
+	(1, '今日热点'),
+	(2, '科技前沿'),
+	(3, '漫画西游'),
+	(4, '爆笑西游'),
+	(5, '创意生活'),
+	(6, '创意产品'),
+	(7, '创意设计'),
+	(8, '创业者说'),
+	(9, '创业新闻'),
+	(10, '创业政策'),
+	(11, '专利新闻'),
+	(12, '专利学习'),
+	(13, '商标资讯'),
+	(14, '商标学习');
