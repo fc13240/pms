@@ -731,16 +731,16 @@ public class PatentController {
 	}
 	
 	@RequestMapping(path="searchUserAnnualFeeMonitorPatents")
-	public String searchUserAnnualFeeMonitorPatents(String startMonthDay,String endMonthDay,PatentSearchCondition searchCondition,HttpSession session,Model model) throws Exception{
+	public String searchUserAnnualFeeMonitorPatents(PatentSearchCondition searchCondition,HttpSession session,Model model) throws Exception{
 		Calendar nowCalendar = Calendar.getInstance();
 		int currentYear = nowCalendar.get(Calendar.YEAR);
 		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		if(startMonthDay.length()>=3){
-			String startAppDate = currentYear+"-"+startMonthDay;
+		if(searchCondition.getStartMonthDay()!=null&&searchCondition.getStartMonthDay().length()>=3){
+			String startAppDate = currentYear+"-"+searchCondition.getStartMonthDay();
 			searchCondition.setStartAppDate(sdf.parse(startAppDate));
 		}
-		if(endMonthDay.length()>=3){
-			String endAppDate = currentYear+"-"+endMonthDay;
+		if(searchCondition.getEndMonthDay()!=null&&searchCondition.getEndMonthDay().length()>=3){
+			String endAppDate = currentYear+"-"+searchCondition.getEndMonthDay();
 			searchCondition.setEndAppDate(sdf.parse(endAppDate));
 		}
 		Page page = searchCondition.getPage();

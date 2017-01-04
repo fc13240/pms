@@ -21,9 +21,29 @@ public class PatentSearchCondition {
 	private String keyword;
 	private String appPerson;
 	private Page page;
+	private String startMonthDay;
+	private String endMonthDay;
 	private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	
 	
+	
+	
+	public String getStartMonthDay() {
+		return startMonthDay;
+	}
+
+	public void setStartMonthDay(String startMonthDay) {
+		this.startMonthDay = startMonthDay;
+	}
+
+	public String getEndMonthDay() {
+		return endMonthDay;
+	}
+
+	public void setEndMonthDay(String endMonthDay) {
+		this.endMonthDay = endMonthDay;
+	}
+
 	public String getAppPerson() {
 		return appPerson;
 	}
