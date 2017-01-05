@@ -1264,7 +1264,7 @@ CREATE TABLE brand_management (
   CONSTRAINT fk_brand_management_category FOREIGN KEY (category_id) REFERENCES brand_category (category_id),
   CONSTRAINT fk_brand_management_legal_status FOREIGN KEY (legal_status) REFERENCES brand_legal_status (legal_status_id),
   CONSTRAINT fk_brand_management_users FOREIGN KEY (user) REFERENCES users (user_id)
-) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 CREATE TABLE user_brand_management (
   user INT(11) NOT NULL DEFAULT '0',
