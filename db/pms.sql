@@ -1229,4 +1229,4 @@ CREATE TABLE brand_legal_status (
 
 INSERT INTO brand_legal_status (legal_status_id,legal_status_name)VALUES
 (1,'新注册'),(2,'审核中'),(3,'初审公告'),
-(4,'核准注册'),(5,'商标驳回'),(6,'驳回复审'),(7,'异议撤三中'),(8,'已无效');
+(4,'核准注册'),(5,'商标驳回'),(6,'驳回复审'),(7,'异议撤销'),(8,'已无效');
