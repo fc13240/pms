@@ -1219,3 +1219,14 @@ VALUES
 	(12, '专利学习'),
 	(13, '商标资讯'),
 	(14, '商标学习');
+	
+	
+CREATE TABLE brand_legal_status (
+	legal_status_id  INT NOT NULL AUTO_INCREMENT ,
+	legal_status_name  VARCHAR(100) NOT NULL ,
+	PRIMARY KEY (legal_status_id)
+);
+
+INSERT INTO brand_legal_status (legal_status_id,legal_status_name)VALUES
+(1,'新注册'),(2,'审核中'),(3,'初审公告'),
+(4,'核准注册'),(5,'商标驳回'),(6,'驳回复审'),(7,'异议撤三中'),(8,'已无效');
