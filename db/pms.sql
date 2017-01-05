@@ -1265,3 +1265,13 @@ CREATE TABLE brand_management (
   CONSTRAINT fk_brand_management_legal_status FOREIGN KEY (legal_status) REFERENCES brand_legal_status (legal_status_id),
   CONSTRAINT fk_brand_management_users FOREIGN KEY (user) REFERENCES users (user_id)
 ) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+
+CREATE TABLE user_brand_management (
+  user INT(11) NOT NULL DEFAULT '0',
+  brand INT(20) NOT NULL DEFAULT '0',
+  trash_status INT(11) DEFAULT '1',
+  PRIMARY KEY (user,brand),
+  KEY fk_user_brand_management (brand),
+  CONSTRAINT fk_user_brand_management_brand FOREIGN KEY (brand) REFERENCES brands (id) ON DELETE CASCADE,
+  CONSTRAINT fk_user_brand_management_user FOREIGN KEY (user) REFERENCES users (user_id) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8
