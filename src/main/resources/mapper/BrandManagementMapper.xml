@@ -3,13 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotut.pms.dao.mapper.BrandManagementMapper">
-	<resultMap type="Brand" id="brandResultMap">
+	<resultMap type="BrandManagement" id="brandManagementResultMap">
 		<id property="id" column="id"/>
 		<result property="appNo" column="app_no"/>
 		<result property="brandNo" column="brand_no"/>
 		<result property="name" column="name"/>
 		<result property="similarNo" column="similar_no"/>
 		<result property="transactionMode" column="transaction_mode"/>
+		<result property="transactionStatus" column="transaction_status"/>
 		<result property="price" column="price"/>
 		<result property="scope" column="scope"/>
 		<result property="appPerson" column="app_person"/>
@@ -25,7 +26,7 @@
 		<result property="identityCard" column="identity_card"/>
 		<result property="application" column="application"/>
 		<association property="user" javaType="User">
-			<id property="userId" column="user"/>
+			<id property="userId" column="user_id"/>
 			<result property="username" column="username"/>
 		</association>
 		<association property="brandCategory" javaType="BrandCategory">
@@ -36,6 +37,7 @@
 			<id property="legalStatusId" column="legal_status_id"/>
 			<result property="legalStatusName" column="legal_status_name"/>
 		</association>
+		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 	</resultMap>
 
   	<insert id="addOrEditBrand" parameterType="Brand" useGeneratedKeys="true" keyProperty="id">
@@ -75,6 +77,30 @@
 		 	end_date=#{endDate,javaType=date,jdbcType=DATE},originality=#{originality},case_status=#{caseStatus},
 		 	user=#{user.userId},image_url=#{imageUrl},check_status=1,sell_status=1
 	</insert>
+	
+	<select id="getUserBrandManagementByPage" parameterType="Page" resultMap="brandManagementResultMap">
+  		SELECT rs.*,u.user_id,u.username FROM (
+		SELECT b.id,b.user,b.app_no,b.brand_no,
+			b.name,b.transaction_status,b.transaction_mode,b.price,b.app_person,
+			b.app_date,b.publish_date,b.image_url,b.proxy_file,b.business_license,
+			b.entity_license,b.individual_license,b.identity_card,b.application,
+			bc.category_id,bc.category_name,bls.legal_status_id,bls.legal_status_name
+		
+		FROM brand_management b
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN users u ON b.user=u.user_id
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1) 
+		LIMIT #{startIndex},#{pageSize}
+		) rs
+		LEFT JOIN user_brand_management ubm ON ubm.brand=rs.id
+		LEFT JOIN users u ON u.user_id=ubm.user
+  	</select>
+  	
+	<select id="getUserBrandManagementCount" parameterType="int" resultType="int">
+  		select count(*) from brand_management b 
+  		where b.id in (select brand from user_brand_management where user =#{userId} and trash_status=1) 
+  	</select>
 	
 </mapper>
   

@@ -1,6 +1,8 @@
 package com.lotut.pms.domain;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -16,6 +18,7 @@ public class BrandManagement {
 	private String similarNo;
 	private String scope;
 	private int transactionMode;
+	private int transactionStatus;
 	private int price;
 	private String appPerson;
 	private String originality;
@@ -31,7 +34,15 @@ public class BrandManagement {
 	private String entityLicense;
 	private String identityCard;
 	private String application;
+	private List<User> shareUsers;
 	
+	
+	public int getTransactionStatus() {
+		return transactionStatus;
+	}
+	public void setTransactionStatus(int transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
 	public int getId() {
 		return id;
 	}
@@ -170,6 +181,21 @@ public class BrandManagement {
 	}
 	public void setApplication(String application) {
 		this.application = application;
+	}
+	public String getShareUsersAsString() {
+		if (this.shareUsers != null) {
+			return String.join(";", this.shareUsers.stream().map(User::getUsername).collect(Collectors.toList()));
+		}
+		
+		return "";
+	}
+
+	public List<User> getShareUsers() {
+		return shareUsers;
+	}
+
+	public void setShareUsers(List<User> shareUsers) {
+		this.shareUsers = shareUsers;
 	}
 }
 

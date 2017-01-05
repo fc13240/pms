@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,7 +14,6 @@ import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,14 +22,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Brand;
+import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandSearchCondition;
-import com.lotut.pms.domain.News;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.WeChatOrder;
 import com.lotut.pms.service.BrandManagementService;
 import com.lotut.pms.service.BrandService;
+import com.lotut.pms.service.FriendService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.FileOption;
 import com.lotut.pms.web.util.WebUtils;
@@ -39,11 +41,13 @@ public class BrandController {
 	
 	private BrandService brandService;
 	private BrandManagementService brandManagementService;
+	private FriendService friendService;
 
 	@Autowired
-	public BrandController(BrandService brandService,BrandManagementService brandManagementService) {
+	public BrandController(BrandService brandService,BrandManagementService brandManagementService,FriendService friendService) {
 		this.brandService = brandService;
-		this.brandManagementService=brandManagementService;
+		this.brandManagementService = brandManagementService;
+		this.friendService = friendService;
 	}
 	
 	@RequestMapping(path="/showUploadForm", method=RequestMethod.GET)
@@ -218,4 +222,63 @@ public class BrandController {
 	    	}
 
 	    }
+	 
+	 @RequestMapping(path="getBrandManagementlist")
+	 public String getBrandManagementlist(HttpSession session,Page page,Model model){
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if(page.getCurrentPage()<1){
+			page.setCurrentPage(1);
+		}
+		int totalCount = brandManagementService.getUserBrandManagementCount(userId);
+		List<BrandManagement> brands = brandManagementService.getUserBrandManagementByPage(page);
+		page.setTotalRecords(totalCount);
+		List<BrandCategory> categorys = brandService.getAllCategorys();
+		model.addAttribute("brands",brands);
+		model.addAttribute("page",page);
+		model.addAttribute("categorys",categorys);
+		return "brand_management_list";
+	}
+	 
+	@RequestMapping(path="showFriends", method=RequestMethod.GET)
+	public String showFriends(Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> friends = friendService.getUserFriends(userId);
+		model.addAttribute("friends", friends);
+		return "brand_select_friends";
+	}
+	
+	@RequestMapping(path="searchFriends", method=RequestMethod.GET)
+	public String searchFriends(@RequestParam("keyword")String keyword, Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		List<User> friends = friendService.searchUserFriends(userId, keyword);
+		model.addAttribute("friends", friends);
+		return "brand_select_friends";
+	}
+	
+	@RequestMapping(path="/addBrandManagementShares", method=RequestMethod.GET)
+	public String addBrandManagementShares(@RequestParam("brands")List<Integer> brandIds, @RequestParam("friends")List<Integer> friendIds) {
+		List<Map<String, Integer>> shareBrandRecords = new ArrayList<>();
+		List<Map<String, Integer>> userBrandRecords = new ArrayList<>();
+		int userId = PrincipalUtils.getCurrentUserId();
+		
+		/*for (int patentId: brandIds) {
+			for (int friendId: friendIds) {
+				Map<String, Integer> shareBrandRecord =  new HashMap<String, Integer>();
+				shareBrandRecord.put("patent", patentId);
+				shareBrandRecord.put("shareBy", userId);
+				shareBrandRecord.put("shareTo", friendId);
+				shareBrandRecords.add(sharePatentRecord);
+				
+				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
+				userPatentRecord.put("user", friendId);
+				userPatentRecord.put("patent", patentId);
+				userPatentRecords.add(userPatentRecord);
+			}
+		}
+		
+		sharePatentService.sharePatents(sharePatentRecords, userPatentRecords);*/
+		return "brand_management_list";
+	}
 }
