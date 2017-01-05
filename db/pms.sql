@@ -507,8 +507,8 @@ CREATE TABLE if not exists patent_office_accounts (
   username varchar(100) NOT NULL COMMENT '鐢靛瓙浠ｇ爜',
   password varchar(100) NOT NULL COMMENT '鐢靛瓙鐧诲綍瀵嗙爜',
   patent_update_time datetime DEFAULT NULL COMMENT '涓撳埄鏇存柊鏃堕棿',
-  PRIMARY KEY (`account_id`),
-  CONSTRAINT `fk_patent_office_account_users` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`)
+  PRIMARY KEY (account_id),
+  CONSTRAINT fk_patent_office_account_users FOREIGN KEY (user) REFERENCES users (user_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE patents ADD COLUMN publish_date DATE;
@@ -694,10 +694,10 @@ CREATE TABLE IF NOT EXISTS common_inventor (
 CREATE TABLE IF NOT EXISTS user_inventor(
   USER INT(11) NOT NULL DEFAULT '0',
   inventor BIGINT(20) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`user`,`inventor`),
-  KEY `fk_user_inventor` (`inventor`),
-  CONSTRAINT `fk_share_inventor` FOREIGN KEY (inventor) REFERENCES `common_inventor` (inventor_id) ON DELETE CASCADE,
-  CONSTRAINT `fk_user_inventor_user` FOREIGN KEY (USER) REFERENCES `users` (user_id) ON DELETE CASCADE
+  PRIMARY KEY (user,inventor),
+  KEY fk_user_inventor (inventor),
+  CONSTRAINT fk_share_inventor FOREIGN KEY (inventor) REFERENCES common_inventor (inventor_id) ON DELETE CASCADE,
+  CONSTRAINT fk_user_inventor_user FOREIGN KEY (USER) REFERENCES users (user_id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
@@ -706,10 +706,10 @@ CREATE TABLE IF NOT EXISTS user_app_person (
   USER INT(11) NOT NULL DEFAULT '0',
   app_person BIGINT(20) NOT NULL DEFAULT '0',
   trash_status INT(11) DEFAULT '1',
-  PRIMARY KEY (`user`,`app_person`),
-  KEY `fk_user_app_person` (`app_person`),
-  CONSTRAINT `fk_share_app_person_person` FOREIGN KEY (app_person) REFERENCES `common_app_person` (app_person_id) ON DELETE CASCADE,
-  CONSTRAINT `fk_user_app_person_user` FOREIGN KEY (USER) REFERENCES `users` (user_id) ON DELETE CASCADE
+  PRIMARY KEY (user,app_person),
+  KEY fk_user_app_person (app_person),
+  CONSTRAINT fk_share_app_person_person FOREIGN KEY (app_person) REFERENCES common_app_person (app_person_id) ON DELETE CASCADE,
+  CONSTRAINT fk_user_app_person_user FOREIGN KEY (USER) REFERENCES users (user_id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
@@ -852,8 +852,8 @@ CREATE TABLE IF NOT EXISTS patent_doc_workflow_target (
 	patent_doc BIGINT NOT NULL COMMENT '鏂囨。',
 	PRIMARY KEY (history,target,patent_doc),
 	KEY fk_target_patent_doc_patent_doc(patent_doc),
-	CONSTRAINT `fk_patent_doc_workflow_target_patent_doc` FOREIGN KEY (`patent_doc`) REFERENCES `patent_documents` (`patent_doc_id`) ON DELETE CASCADE,
-	CONSTRAINT `fk_patent_doc_workflow_target_target` FOREIGN KEY (`target`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+	CONSTRAINT fk_patent_doc_workflow_target_patent_doc FOREIGN KEY (patent_doc) REFERENCES patent_documents (patent_doc_id) ON DELETE CASCADE,
+	CONSTRAINT fk_patent_doc_workflow_target_target FOREIGN KEY (target) REFERENCES users (user_id) ON DELETE CASCADE,
 	CONSTRAINT fk_patent_doc_workflow_target_history FOREIGN KEY (history) REFERENCES patent_doc_workflow_history(history_id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
@@ -881,16 +881,16 @@ INSERT INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(18,'�
 REPLACE INTO patent_doc_workflow_action(action_id,action_type_desc) VALUES(17,'鍒嗕韩缁欏ソ鍙�');
 
 
-CREATE TABLE `share_patent_docs` (
-  `patent_doc` BIGINT(20) NOT NULL DEFAULT '0',
-  `share_by` INT(11) NOT NULL DEFAULT '0',
-  `share_to` INT(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`patent_doc`,`share_by`,`share_to`),
-  KEY `fk_share_patent_docs_share_by` (`share_by`),
-  KEY `fk_share_patent_docs_share_to` (`share_to`),
-  CONSTRAINT `fk_share_patent_docs_patent` FOREIGN KEY (`patent_doc`) REFERENCES `patent_documents` (`patent_doc_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_share_patent_docs_share_by` FOREIGN KEY (`share_by`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_share_patent_docs_share_to` FOREIGN KEY (`share_to`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+CREATE TABLE share_patent_docs (
+  patent_doc BIGINT(20) NOT NULL DEFAULT '0',
+  share_by INT(11) NOT NULL DEFAULT '0',
+  share_to INT(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (patent_doc,share_by,share_to),
+  KEY fk_share_patent_docs_share_by (share_by),
+  KEY fk_share_patent_docs_share_to (share_to),
+  CONSTRAINT fk_share_patent_docs_patent FOREIGN KEY (patent_doc) REFERENCES patent_documents (patent_doc_id) ON DELETE CASCADE,
+  CONSTRAINT fk_share_patent_docs_share_by FOREIGN KEY (share_by) REFERENCES users (user_id) ON DELETE CASCADE,
+  CONSTRAINT fk_share_patent_docs_share_to FOREIGN KEY (share_to) REFERENCES users (user_id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
@@ -945,13 +945,13 @@ CREATE TABLE IF NOT EXISTS notice_read (
 	PRIMARY KEY (notice_id,user_id)
 );
 
-CREATE TABLE if not exists `user_fees` (
-  `user` INT(11) NOT NULL DEFAULT '0',
-  `fee` BIGINT(20) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`user`,`fee`),
-  KEY `fk_user_fee_fee` (`fee`),
-  CONSTRAINT `fk_user_fee_fee` FOREIGN KEY (`fee`) REFERENCES `fees` (`fee_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_user_fee_user` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+CREATE TABLE if not exists user_fees (
+  user INT(11) NOT NULL DEFAULT '0',
+  fee BIGINT(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (user,fee),
+  KEY fk_user_fee_fee (fee),
+  CONSTRAINT fk_user_fee_fee FOREIGN KEY (fee) REFERENCES fees (fee_id) ON DELETE CASCADE,
+  CONSTRAINT fk_user_fee_user FOREIGN KEY (user) REFERENCES users (user_id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
@@ -1230,3 +1230,38 @@ CREATE TABLE brand_legal_status (
 INSERT INTO brand_legal_status (legal_status_id,legal_status_name)VALUES
 (1,'新注册'),(2,'审核中'),(3,'初审公告'),
 (4,'核准注册'),(5,'商标驳回'),(6,'驳回复审'),(7,'异议撤三中'),(8,'已无效');
+
+CREATE TABLE brand_management (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  user INT(11) NOT NULL,
+  legal_status INT(11) NOT NULL,
+  category_id INT(11) NOT NULL,
+  app_no VARCHAR(100)  NULL,
+  brand_no VARCHAR(100)  NULL,
+  name VARCHAR(100) NOT NULL,
+  similar_no VARCHAR(300) DEFAULT NULL COMMENT '类似群号',
+  scope VARCHAR(500) DEFAULT NULL,
+  transaction_status INT(11) DEFAULT '0' COMMENT '0 待发布,1 待交易，2 已预订, 3 已付款待变更,4 已变更待合格、5 交易成功',
+  transaction_mode TINYINT(4) DEFAULT '1' COMMENT '1 出售  2转让',
+  price INT(11) NOT NULL,
+  app_person VARCHAR(100) DEFAULT NULL,
+  app_date DATETIME DEFAULT NULL,
+  publish_date DATETIME DEFAULT NULL,
+  originality VARCHAR(500) DEFAULT NULL,
+  case_status VARCHAR(10) DEFAULT NULL,
+  image_url VARCHAR(200) DEFAULT NULL,
+  proxy_file VARCHAR(200) DEFAULT NULL COMMENT '上传委托书保存地址',
+  business_license VARCHAR(200) DEFAULT NULL COMMENT '上传企业营业执照保存地址',
+  entity_license VARCHAR(200) DEFAULT NULL COMMENT '上传事业单位营业执照保存地址',
+  individual_license VARCHAR(200) DEFAULT NULL COMMENT '上传个体工商营业执照保存地址',
+  identity_card VARCHAR(200) DEFAULT NULL COMMENT '上传身份证保存地址',
+  application VARCHAR(200) DEFAULT NULL COMMENT '上传申请书保存地址',
+  create_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (id),
+  KEY fk_brand_management_users (user),
+  KEY fk_brand_management_category (category_id),
+  KEY fk_brand_management_legal_status (legal_status),
+  CONSTRAINT fk_brand_management_category FOREIGN KEY (category_id) REFERENCES brand_category (category_id),
+  CONSTRAINT fk_brand_management_legal_status FOREIGN KEY (legal_status) REFERENCES brand_legal_status (legal_status_id),
+  CONSTRAINT fk_brand_management_users FOREIGN KEY (user) REFERENCES users (user_id)
+) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
