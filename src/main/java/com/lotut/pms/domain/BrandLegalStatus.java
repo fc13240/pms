@@ -1,15 +1,15 @@
 package com.lotut.pms.domain;
 
-public class brandLegalStatus {
+public class BrandLegalStatus {
 	private int legalStatusId;
 	private String legalStatusName;
 	
-	public brandLegalStatus() {
+	public BrandLegalStatus() {
 	}
 
 
 
-	public brandLegalStatus(int legalStatusId, String legalStatusName) {
+	public BrandLegalStatus(int legalStatusId, String legalStatusName) {
 		this.legalStatusId = legalStatusId;
 		this.legalStatusName = legalStatusName;
 	}

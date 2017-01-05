@@ -5,13 +5,9 @@
 <mapper namespace="com.lotut.pms.dao.mapper.BrandManagementMapper">
 	<resultMap type="Brand" id="brandResultMap">
 		<id property="id" column="id"/>
-		<result property="address" column="address"/>
-		<result property="checkStatus" column="check_status"/>
-		<result property="sellStatus" column="sell_status"/>
-		<result property="isRecommend" column="is_recommend"/>
+		<result property="appNo" column="app_no"/>
 		<result property="brandNo" column="brand_no"/>
 		<result property="name" column="name"/>
-		<result property="combinationType" column="combination_type"/>
 		<result property="similarNo" column="similar_no"/>
 		<result property="transactionMode" column="transaction_mode"/>
 		<result property="price" column="price"/>
@@ -19,11 +15,15 @@
 		<result property="appPerson" column="app_person"/>
 		<result property="appDate" column="app_date"/>
 		<result property="publishDate" column="publish_date"/>
-		<result property="startDate" column="start_date"/>
-		<result property="endDate" column="end_date"/>
 		<result property="originality" column="originality"/>
 		<result property="caseStatus" column="case_status"/>
 		<result property="imageUrl" column="image_url"/>
+		<result property="proxyFile" column="proxy_file"/>
+		<result property="businessLicense" column="business_license"/>
+		<result property="entityLicense" column="entity_license"/>
+		<result property="individualLicense" column="individual_license"/>
+		<result property="identityCard" column="identity_card"/>
+		<result property="application" column="application"/>
 		<association property="user" javaType="User">
 			<id property="userId" column="user"/>
 			<result property="username" column="username"/>
@@ -32,123 +32,12 @@
 			<id property="categoryId" column="category_id"/>
 			<result property="categoryName" column="category_name"/>
 		</association>
-	
-	</resultMap>
-	
-	<resultMap type="WeChatOrder" id="wechatOrderResultMap">
-		<id property="id" column="id"/>
-		<result property="wechatOrderId" column="wechat_order_id"/>
-		<result property="wechatName" column="wechat_name"/>
-		<result property="totalFee" column="total_fee"/>
-		<result property="payTime" column="pay_time"/>
-		<association property="brand" javaType="Brand">
-			<id property="id" column="id"/>
-			<result property="name" column="name"/>
-			<result property="brandNo" column="brand_no"/>
+		<association property="brandLegalStatus" javaType="BrandLegalStatus">
+			<id property="legalStatusId" column="legal_status_id"/>
+			<result property="legalStatusName" column="legal_status_name"/>
 		</association>
 	</resultMap>
 
-  	<select id="getUserBrandsByPage" parameterType="Page" resultMap="brandResultMap">
-  		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
-  			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,b.image_url,
-  			   b.originality,b.case_status,bc.category_name,u.username from brands b left join brand_category bc on  b.category_id=bc.category_id 
-  			   left join users u on b.user=u.user_id where  b.sell_status=1 and b.id in (select brand from user_brands where user =#{userId}) limit #{startIndex},#{pageSize}
-  	</select>
-  	
-  	<select id="getBrandsByPage" parameterType="Page" resultMap="brandResultMap">
-  		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
-  			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,b.image_url,
-  			   b.originality,b.case_status,bc.category_name,u.username from brands b left join brand_category bc on  b.category_id=bc.category_id 
-  			   left join users u on b.user=u.user_id where  b.sell_status=1 limit #{startIndex},#{pageSize}
-  	</select>
-  	
-  	
-  	<select id="getBrandsCounts" resultType="int">
-  		select count(*) from brands b left join brand_category bc on  b.category_id=bc.category_id 
-  			   left join users u on b.user=u.user_id where  b.sell_status=1 
-  	</select>
-  	
-  	
-  	<select id="getUserBrandsById"  parameterType="int" resultMap="brandResultMap">
-  		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
-  			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,b.image_url,
-  			   b.originality,b.case_status,bc.category_name from brands b left join brand_category bc on  b.category_id=bc.category_id 
-  			    where b.id=#{brandId} 
-  	</select>
-  	 
-  	
-  	<update id="updateCheckStatus">
-  		update brands set check_status=#{status} where id=#{id}
-  	</update>
-
-  	<update id="updateRecommend">
-  		update brands set  is_recommend=#{status} ,check_status=1 where id=#{id}
-  	</update>
-  	
-  	<select id="searchUserBrandsByPage" parameterType="BrandSearchCondition" resultMap="brandResultMap">
-  		<bind name="keyword_pattern" value="'%' +keyword + '%'"/>
-  		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
-  			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,b.image_url,
-  			   b.originality,b.case_status,bc.category_name,u.username from brands b left join brand_category bc on  b.category_id=bc.category_id 
-  			   left join users u on b.user=u.user_id where b.id in (select brand from user_brands where user =#{userId}) and b.sell_status=1
-  			   <if test="categoryId!=null">
-					and b.category_id=#{categoryId}
-  			   </if>
-  			   <if test="keyword_pattern!=null">
-  			     and (b.name like #{keyword_pattern} or b.brand_no like #{keyword_pattern})
-  			   </if>
-  			   limit #{page.startIndex},#{page.pageSize}
-  	</select>
-  	<select id="getUserBrandsCount" parameterType="int" resultType="int">
-  		select count(*) from brands b where b.id in (select brand from user_brands where user =#{userId}) and b.sell_status=1 
-  	</select>
-  	
-  	<select id="getsearchUserBrandsCount" parameterType="BrandSearchCondition" resultType="int">
-  		<bind name="keyword_pattern" value="'%' +keyword + '%'"/>
-  		select count(*) from brands b where b.id in (select brand from user_brands where user =#{userId}) and b.sell_status=1
-  			   <if test="categoryId!=null">
-					and b.category_id=#{categoryId}
-  			   </if>
-  			   <if test="keyword_pattern!=null">
-  			     and (b.name like #{keyword_pattern} or b.brand_no like #{keyword_pattern})
-  			   </if>
-  	</select>
-  	
-  	
-  	<select id="searchBrandsByPage" parameterType="BrandSearchCondition" resultMap="brandResultMap">
-  		<bind name="keyword_pattern" value="'%' +keyword + '%'"/>
-  		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
-  			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,b.image_url,
-  			   b.originality,b.case_status,bc.category_name,u.username from brands b left join brand_category bc on  b.category_id=bc.category_id 
-  			   left join users u on b.user=u.user_id where b.sell_status=1
-  			   <if test="categoryId!=null">
-					and b.category_id=#{categoryId}
-  			   </if>
-  			   <if test="keyword_pattern!=null">
-  			     and (b.name like #{keyword_pattern} or b.brand_no like #{keyword_pattern})
-  			   </if>
-  			   limit #{page.startIndex},#{page.pageSize}
-  	</select>
-  	
-  	<select id="getsearchBrandsCount" parameterType="BrandSearchCondition" resultType="int">
-  		<bind name="keyword_pattern" value="'%' +keyword + '%'"/>
-  		select count(*) from brands b where b.sell_status=1
-  			   <if test="categoryId!=null">
-					and b.category_id=#{categoryId}
-  			   </if>
-  			   <if test="keyword_pattern!=null">
-  			     and (b.name like #{keyword_pattern} or b.brand_no like #{keyword_pattern})
-  			   </if>
-  	</select>
-
-  	<select id="getAllCategorys" resultType="BrandCategory">
-  		select category_id as categoryId,category_name as categoryName from brand_category
-  	</select>
-  	
-  	<update id="deleteBrand" parameterType="int">
-  		update brands set sell_status=2 where id=#{brandId}
-  	</update>
- 
   	<insert id="addOrEditBrand" parameterType="Brand" useGeneratedKeys="true" keyProperty="id">
 		insert into brands(address,category_id,brand_no,name,
 		combination_type,similar_no,transaction_mode,price,scope,
@@ -187,38 +76,5 @@
 		 	user=#{user.userId},image_url=#{imageUrl},check_status=1,sell_status=1
 	</insert>
 	
-	<insert id="insertUserBrands" parameterType="list">
-		replace into user_brands(user,brand) 
-		values
-		<foreach item="userBrandRecord" collection="list" separator=",">
-
-			(#{userBrandRecord.user}, #{userBrandRecord.brand})
-
-		</foreach>
-	</insert>	
-	
-	<select id="getWeChatUserOrderRecords" parameterType="Page" resultMap="wechatOrderResultMap">
-		select wo.id,wo.wechat_order_id,wo.wechat_name,wo.brand_id,wo.total_fee,wo.pay_time,b.name,b.brand_no from wechat_orders wo 
-			   left join brands b on wo.brand_id=b.id order by wo.pay_time desc limit #{startIndex},#{pageSize}
-	</select>
-	
-	<select id="getWeChatOrderCount" resultType="int">
-		select count(*) from wechat_orders
-	</select>
-	
-	
-	<insert id="insertUserBrand" >
-		replace into user_brands(user,brand) values (#{userId},#{brandId})
-	</insert>
-	
-	<insert id="addBrandCategory">
-		insert ignore into brand_category (category_id,category_name) 
-		values
-		<foreach item="userBrandCategoryRecord" collection="list" separator=",">
-
-			(#{userBrandCategoryRecord.categoryId}, #{userBrandCategoryRecord.categoryName})
-
-		</foreach>
-	</insert>
 </mapper>
   

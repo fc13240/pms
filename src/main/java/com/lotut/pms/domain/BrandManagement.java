@@ -9,6 +9,7 @@ public class BrandManagement {
 	private int id;
 	private BrandCategory brandCategory;
 	private User user;
+	private BrandLegalStatus brandLegalStatus;
 	private String appNo;
 	private String brandNo;
 	private String name;
@@ -26,6 +27,7 @@ public class BrandManagement {
 	private String imageUrl;
 	private String proxyFile;
 	private String businessLicense;
+	private String individualLicense;
 	private String entityLicense;
 	private String identityCard;
 	private String application;
@@ -35,6 +37,19 @@ public class BrandManagement {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getIndividualLicense() {
+		return individualLicense;
+	}
+	public void setIndividualLicense(String individualLicense) {
+		this.individualLicense = individualLicense;
+	}
+	public BrandLegalStatus getBrandLegalStatus() {
+		return brandLegalStatus;
+	}
+	public void setBrandLegalStatus(BrandLegalStatus brandLegalStatus) {
+		this.brandLegalStatus = brandLegalStatus;
 	}
 	public BrandCategory getBrandCategory() {
 		return brandCategory;

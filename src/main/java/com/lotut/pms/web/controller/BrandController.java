@@ -27,6 +27,7 @@ import com.lotut.pms.domain.News;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.WeChatOrder;
+import com.lotut.pms.service.BrandManagementService;
 import com.lotut.pms.service.BrandService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.FileOption;
@@ -37,10 +38,12 @@ import com.lotut.pms.web.util.WebUtils;
 public class BrandController {
 	
 	private BrandService brandService;
+	private BrandManagementService brandManagementService;
 
 	@Autowired
-	public BrandController(BrandService brandService) {
+	public BrandController(BrandService brandService,BrandManagementService brandManagementService) {
 		this.brandService = brandService;
+		this.brandManagementService=brandManagementService;
 	}
 	
 	@RequestMapping(path="/showUploadForm", method=RequestMethod.GET)
