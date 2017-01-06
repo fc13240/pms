@@ -141,7 +141,7 @@
 								  </c:if> 	
 							  </td>
 							  <td>
-							  	 <c:if test="${order.orderStatus.statusId == 4}">
+							  	 <c:if test="${order.orderStatus.statusId == 1}">
 									<div> <a href="javascript:return void" onclick="setUserOrderToSelfServicePay (${order.id})">
 									  <button type="button" style="width:140px;margin-left:15px" class="button button-rounded button-highlight">置为已自助缴费</button>
 									  
