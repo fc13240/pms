@@ -101,6 +101,14 @@
   		select count(*) from brand_management b 
   		where b.id in (select brand from user_brand_management where user =#{userId} and trash_status=1) 
   	</select>
+  	
+  	<insert id="insertUserBrandManagements" parameterType="list">
+		replace into user_brand_management(user, brand) 
+		values
+		<foreach item="userBrandManagementRecord" collection="list" separator=",">
+			(#{userBrandManagementRecord.user}, #{userBrandManagementRecord.brand})
+		</foreach>
+	</insert>
 	
 </mapper>
   

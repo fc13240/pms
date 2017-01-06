@@ -258,27 +258,18 @@ public class BrandController {
 	}
 	
 	@RequestMapping(path="/addBrandManagementShares", method=RequestMethod.GET)
-	public String addBrandManagementShares(@RequestParam("brands")List<Integer> brandIds, @RequestParam("friends")List<Integer> friendIds) {
-		List<Map<String, Integer>> shareBrandRecords = new ArrayList<>();
-		List<Map<String, Integer>> userBrandRecords = new ArrayList<>();
-		int userId = PrincipalUtils.getCurrentUserId();
-		
-		/*for (int patentId: brandIds) {
+	public String shareBrandManagements(@RequestParam("brands")List<Integer> brandManagementIds, @RequestParam("friends")List<Integer> friendIds) {
+		List<Map<String, Integer>> userBrandManagementRecords = new ArrayList<>();
+		for (int brandManagementId: brandManagementIds) {
 			for (int friendId: friendIds) {
-				Map<String, Integer> shareBrandRecord =  new HashMap<String, Integer>();
-				shareBrandRecord.put("patent", patentId);
-				shareBrandRecord.put("shareBy", userId);
-				shareBrandRecord.put("shareTo", friendId);
-				shareBrandRecords.add(sharePatentRecord);
-				
-				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
-				userPatentRecord.put("user", friendId);
-				userPatentRecord.put("patent", patentId);
-				userPatentRecords.add(userPatentRecord);
+				Map<String, Integer> userBrandManagementRecord =  new HashMap<String, Integer>();
+				userBrandManagementRecord.put("user", friendId);
+				userBrandManagementRecord.put("brand", brandManagementId);
+				userBrandManagementRecords.add(userBrandManagementRecord);
 			}
 		}
-		
-		sharePatentService.sharePatents(sharePatentRecords, userPatentRecords);*/
+		brandManagementService.insertUserBrandManagements(userBrandManagementRecords);
 		return "brand_management_list";
 	}
+	
 }
