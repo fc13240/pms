@@ -188,7 +188,6 @@
 			 	 or b.name like #{keyword_pattern} or b.similar_no like #{keyword_pattern} or b.app_person like #{keyword_pattern}
 			 	 or b.scope like #{keyword_pattern})
 		</if>
-		limit #{page.startIndex}, #{page.pageSize}
 		) rs
 		LEFT JOIN user_brand_management ubm ON ubm.brand=rs.id
 		LEFT JOIN users u ON u.user_id=ubm.user

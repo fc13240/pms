@@ -218,8 +218,6 @@ public class UserController {
 	@ResponseBody
 	public void setPageSize(@RequestParam("pageSize")int pageSize, HttpSession session, HttpServletResponse response) throws IOException {
 		session.setAttribute("pageSize", pageSize);
-		//WebUtils.writeJsonStrToResponse(response, "");
-		
 	}
 	
 	@RequestMapping(path="/login", method=RequestMethod.POST)
