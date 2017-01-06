@@ -8,6 +8,7 @@ import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
 import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
+import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.Page;
 
@@ -19,6 +20,10 @@ public interface BrandManagementDao {
 
 	void insertUserBrandManagements(List<Map<String, Integer>> userBrandManagementRecords);
 	
+	void saveBrandRemark(BrandRemark brandRemark);
+	
+	List<BrandRemark> getBrandRemark(int brandId);
+
 	List<BrandCategory> getAllBrandCategory();
 	
 	List<BrandLegalStatus> getAllBrandLegalStatus();

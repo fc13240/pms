@@ -282,7 +282,7 @@
 				  FROM orders o JOIN order_status os ON o.order_status = os.order_status_id
 					LEFT JOIN contact_addresses ca ON o.post_address = ca.id
 					join users u on o.user = u.user_id
-				 WHERE o.order_status in (2,3,4)
+				 WHERE o.order_status in (2,3,4,5)
 			 	<if test="orderStatus != null">
 			 		and o.order_status = #{orderStatus}
 			 	</if>	
@@ -322,7 +322,7 @@
 				  FROM orders o JOIN order_status os ON o.order_status = os.order_status_id
 					LEFT JOIN contact_addresses ca ON o.post_address = ca.id
 					join users u on o.user = u.user_id
-				 WHERE o.order_status in (2,3,4)
+				 WHERE o.order_status in (2,3,4,5)
 			 	<if test="orderStatus != null">
 			 		and o.order_status = #{orderStatus}
 			 	</if>	
@@ -368,5 +368,11 @@
 		SELECT o.order_status orderStatus,count(*) orderCount
 		  FROM orders o 
 		GROUP BY o.order_status;	 		 	
-	</select>	
+	</select>
+	
+	<update id="setUserOrderToSelfServicePay" parameterType="long">
+		update orders set order_status=5 where order_id=#{orderId};
+		update fees SET fee_payment_status=6 WHERE fee_id in
+		(select fee_id from order_items where order_id=#{orderId})
+	</update>	
 </mapper>

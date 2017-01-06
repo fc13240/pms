@@ -12,6 +12,7 @@ import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
 import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
+import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.Page;
 
@@ -47,6 +48,15 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 		brandManagementMapper.insertUserBrandManagements(userBrandManagementRecords);
 	}
 
+	@Override
+	public void saveBrandRemark(BrandRemark brandRemark) {
+		brandManagementMapper.saveBrandRemark(brandRemark);
+	}
+
+	@Override
+	public List<BrandRemark> getBrandRemark(int brandId) {
+		return brandManagementMapper.getBrandRemark(brandId);
+	}
 	@Override
 	public List<BrandManagement> searchUserBrandManagementByPage(BrandManagementSearchCondition searchCondition) {
 		return brandManagementMapper.searchUserBrandManagementByPage(searchCondition);

@@ -111,13 +111,11 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 
 	@Override
 	public List<Order> getAllNeedProcessOrdersBySearch(AdminOrderSearchCondition searchCondition) {
-		// TODO Auto-generated method stub
 		return orderMapper.getAllNeedProcessOrdersBySearch(searchCondition);
 	}
 
 	@Override
 	public int getAllNeedProcessOrdersBySearchCount(AdminOrderSearchCondition searchCondition) {
-		// TODO Auto-generated method stub
 		return orderMapper.getAllNeedProcessOrdersBySearchCount(searchCondition);
 	}
 
@@ -135,6 +133,11 @@ public class OrderMybatisDao extends SqlSessionDaoSupport implements OrderDao {
 	@Override
 	public Map<String, Map<String, String>> searchUserAllOrdersByOrderStatus() {
 		return orderMapper.searchUserAllOrdersByOrderStatus();
+	}
+
+	@Override
+	public void setUserOrderToSelfServicePay(long orderId) {
+		orderMapper.setUserOrderToSelfServicePay(orderId);
 	}
 
 

@@ -48,6 +48,30 @@
 		<association property="brand" resultMap="com.lotut.pms.dao.mapper.BrandManagementMapper.brandManagementResultMap"/>
 			
 	</resultMap>
-	
+
+	<select id="getUserBrandNoticeList" parameterType="Page" resultMap="BrandNoticeResultMap">
+  		SELECT rs.*,u.user_id,u.username FROM (
+		SELECT b.id,bc.category_id,bc.category_name,b.app_no,b.brand_no,b.name,b.image_url,b.app_person,
+			b.app_date,bmn.dispatch_date,bls.legal_status_id,bls.legal_status_name,bmn.star_target_monitor_status,
+			nvl.notice_id AS notice_view_status,bnt.notice_type_id,bnt.notice_type_desc,bmn.notice_id,bmn.notice_name
+		
+		FROM brand_management b
+		LEFT JOIN brand_management_notices bmn ON b.id=bmn.brand		
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
+		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1) 
+		LIMIT #{startIndex},#{pageSize}
+		) rs
+		LEFT JOIN user_brand_management ubm ON ubm.brand=rs.id
+		LEFT JOIN users u ON u.user_id=ubm.user
+  	</select>
+  	
+	<select id="getUserBrandNoticeCount" parameterType="int" resultType="int">
+  		select count(*) from brand_management b 
+  		LEFT JOIN brand_management_notices bmn ON b.id=bmn.brand
+  		where b.id in (select brand from user_brand_management where user =#{userId} and trash_status=1) 
+  	</select>
 	
 </mapper>

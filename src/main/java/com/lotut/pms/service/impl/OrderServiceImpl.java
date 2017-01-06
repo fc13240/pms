@@ -210,6 +210,11 @@ public class OrderServiceImpl implements OrderService {
 		return orderDao.searchUserAllOrdersByOrderStatus();
 	}
 
+	@Override
+	public void setUserOrderToSelfServicePay(long orderId) {
+		orderDao.setUserOrderToSelfServicePay(orderId);
+	}
+
 
 
 }

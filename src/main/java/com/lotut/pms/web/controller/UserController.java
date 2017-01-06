@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Friend;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.UserService;
@@ -287,9 +288,10 @@ public class UserController {
     
     @RequestMapping(path="/searchShareUserDetail",method=RequestMethod.GET)  
     public String searchShareUserDetail(int shareUserId,Model model){  
-    	User user = userService.searchShareUserById(shareUserId);
+    	int userId=PrincipalUtils.getCurrentUserId();
+    	Friend friend = userService.searchShareUserDetail(userId,shareUserId);
     	ContactAddress contactAddress = userService.getUserDefaultContactAddress(shareUserId);
-    	model.addAttribute("user", user);
+    	model.addAttribute("friend", friend);
     	model.addAttribute("contactAddress", contactAddress);
         return "share_user_detail";
     } 

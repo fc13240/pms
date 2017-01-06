@@ -54,6 +54,9 @@
 							<a href="<s:url value='/order/search.html?page.currentPage=1&orderStatus=3'/>">
 							<li>订单完成 (<c:out value='${orderCountsByOrderStatus[(3).intValue()]["orderCount"]}' default="0"/>)</li>
 							</a>
+							<a href="<s:url value='/order/search.html?page.currentPage=1&orderStatus=5'/>">
+							<li>已自助缴费 (<c:out value='${orderCountsByOrderStatus[(5).intValue()]["orderCount"]}' default="0"/>)</li>
+							</a>
 					     </ul>		    
 					    </div>
 					</div>

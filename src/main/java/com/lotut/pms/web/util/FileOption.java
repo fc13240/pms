@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.itextpdf.text.DocumentException;
+
+import net.lingala.zip4j.exception.ZipException;
+
 public class FileOption {
 	public static void fileUpload(int userId,MultipartFile multipartFile,String savePath,String fileName,HttpServletResponse response){
 		try{
@@ -126,6 +130,41 @@ public class FileOption {
 				outputStream.close();
 			}
 			WebUtils.writeJsonStrToResponse(response,saveDatabaseUrl);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void brandManagementFileOption(int userId,MultipartFile multipartFile,String saveDir,HttpServletResponse response,String saveUrl) throws DocumentException {
+		saveDir+=userId+"/";
+		saveUrl+=userId+"/";
+		String filename=multipartFile.getOriginalFilename();
+		String savePath=saveDir + filename;
+		String saveDatabaseUrl=saveUrl+filename+".html";
+		File fileDir = new File(saveDir);
+		try {
+			if(!fileDir.exists()){
+				fileDir.mkdir();
+			}
+			InputStream is = multipartFile.getInputStream();
+			int BUFFER_SIZE = 8*1024;
+			byte [] buffer = new byte[BUFFER_SIZE];
+			try(OutputStream outputStream = new FileOutputStream(savePath);){
+				int bytesRead = -1;
+				while ((bytesRead = is.read(buffer)) != -1) {
+					outputStream.write(buffer, 0, bytesRead);
+				}
+				outputStream.flush();
+				outputStream.close();
+			}
+			if (!filename.endsWith(".pdf")) {
+				String pdfFilePath=saveDir+filename.substring(0,filename.lastIndexOf("."))+".pdf";
+				JpgToPdf.imgToPdf(savePath, pdfFilePath);
+				String savePdfUrl=saveUrl+filename.substring(0,filename.lastIndexOf("."))+".pdf"+".html";
+				WebUtils.writeJsonStrToResponse(response,savePdfUrl);
+			}else{
+			WebUtils.writeJsonStrToResponse(response,saveDatabaseUrl);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

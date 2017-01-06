@@ -8,6 +8,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.UserDao;
 import com.lotut.pms.dao.mapper.UserMapper;
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Friend;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 
@@ -158,6 +159,11 @@ public class UserMybatisDao extends SqlSessionDaoSupport implements UserDao {
 	@Override
 	public ContactAddress getUserDefaultContactAddress(int shareUserId) {
 		return userMapper.getUserDefaultContactAddress(shareUserId);
+	}
+
+	@Override
+	public Friend searchShareUserDetail(int userId, int shareUserId) {
+		return userMapper.searchShareUserDetail(userId, shareUserId);
 	}
 
 

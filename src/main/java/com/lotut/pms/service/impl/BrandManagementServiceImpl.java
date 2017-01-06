@@ -9,6 +9,7 @@ import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
 import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
+import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.BrandManagementService;
@@ -44,6 +45,16 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 		brandManagementDao.insertUserBrandManagements(userBrandManagementRecords);
 	}
 
+	@Override
+	public void saveBrandRemark(BrandRemark brandRemark) {
+		brandManagementDao.saveBrandRemark(brandRemark);
+	}
+
+	@Override
+	public List<BrandRemark> getBrandRemark(int brandId) {
+		return brandManagementDao.getBrandRemark(brandId);
+	}
+	
 	@Override
 	public List<BrandManagement> searchUserBrandManagementByPage(BrandManagementSearchCondition searchCondition) {
 		return brandManagementDao.searchUserBrandManagementByPage(searchCondition);
