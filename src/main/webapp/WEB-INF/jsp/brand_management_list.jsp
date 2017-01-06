@@ -45,73 +45,25 @@
 						  <li><a href="#" class="">商标类别</a></li>
 						</ul>
 					  </div>
-						
 					  <div id="menu_con">
-					  						
-						<div class="tag" style="display:block; margin-left:-20px;"> 
-
-						  <ul class="qxjk-ul"><li>
-							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=1'/>">
-							发明专利 (<c:out value='${patentTypeCount[(1).intValue()]["patentCount"]}' default="0"/>)</a>
+						<div class="tag" style="display:block; margin-left:-20px;">
+						  <ul class="qxjk-ul">
+						  <c:forEach items="${brandLegalStatus}" var="brandLegalStatus">
+						  	<li>
+							<a href="<s:url value='/brand/searchBrandManagement.html?page.currentPage=1&brandLegalStatus=${brandLegalStatus.brandLegalStatus.legalStatusId} }'/>">
+							${brandLegalStatus.brandLegalStatus.legalStatusName} (<c:out value='${brandLegalStatus.brandCount}' default="0"/>)</a>
 							</li>
-							<li>
-							 <a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=2'/>">
-							实用新型 (<c:out value='${patentTypeCount[(2).intValue()]["patentCount"]}' default="0"/>)
-							</a> 
-							</li>
-							
-							<li>
-							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentType=3'/>">外观设计(<c:out value='${patentTypeCount[(3).intValue()]["patentCount"]}' default="0"/>)
-							</a> 							
-							</li>
-
+							</c:forEach>
 						  </ul>
-						
-						
 						</div>
 						<div class="tag"  style="display:none">
 						  <ul class="qxjk-ul">
-						  	<li>	      
-								<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=1'/>">
-								等待申请费 (<c:out value='${patentStatusCount[(1).intValue()]["patentCount"]}' default="0"/>)
-								</a>
-							</li> 
-							
-							<li>
-							   	<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=2'/>">
-								待答复 (<c:out value='${patentStatusCount[(2).intValue()]["patentCount"]}' default="0"/>)
-								</a> 
-							</li>
-							
-							<li>
-								<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=3'/>">
-								等年登印费 (<c:out value='${patentStatusCount[(3).intValue()]["patentCount"]}' default="0"/>)
-								</a>
-							</li>
-							
-							<li>
-								<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=4'/>">
-								待恢复 (<c:out value='${patentStatusCount[(4).intValue()]["patentCount"]}' default="0"/>)
-								</a> 
-							</li>
-							
-							<li>
-							<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=5'/>">
-							失效(<c:out value='${patentStatusCount[(5).intValue()]["patentCount"]}' default="0"/>)
-							</a> 
-							</li>
-							
-							<li>
-								<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=6'/>">
-								专利权维持 (<c:out value='${patentStatusCount[(6).intValue()]["patentCount"]}' default="0"/>)
-								</a>
-							</li>
-							
-							<li>
-								<a href="<s:url value='/patent/search.html?page.currentPage=1&patentStatus=7'/>">
-								其他 (<c:out value='${patentStatusCount[(7).intValue()]["patentCount"]}' default="0"/>)
-								</a>
-							</li>
+						  	<c:forEach items="${brandCategory}" var="brandCategory">
+							  	<li>
+								<a href="<s:url value='/brand/searchBrandManagement.html?page.currentPage=1&brandCategory=${brandCategory.brandCategory.categoryId} }'/>">
+								${brandCategory.brandCategory.categoryName} (<c:out value='${brandCategory.brandCount}' default="0"/>)</a>
+								</li>
+							</c:forEach>
 						  </ul>
 						</div>
 					  </div>

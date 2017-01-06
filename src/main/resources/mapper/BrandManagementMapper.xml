@@ -42,6 +42,17 @@
 			<id property="legalStatusId" column="legal_status_id"/>
 			<result property="legalStatusName" column="legal_status_name"/>
 		</resultMap>
+		
+		
+		
+		<resultMap type="brandCategoryCount" id="BrandCategoryCountResultMap">
+			<result property="brandCount" column="brandCount"/>
+			<association property="brandCategory" resultMap="BrandCategoryResultMap"/>
+		</resultMap>
+		<resultMap type="brandLegalStatusCount" id="BrandLegalStatusCountResultMap">
+			<result property="brandCount" column="brandCount"/>
+			<association property="brandLegalStatus" resultMap="BrandLegalStatusResultMap"/>
+		</resultMap>
 
   	<insert id="addOrEditBrand" parameterType="Brand" useGeneratedKeys="true" keyProperty="id">
 		insert into brands(address,category_id,brand_no,name,
@@ -193,5 +204,28 @@
 		LEFT JOIN users u ON u.user_id=ubm.user
   	</select>
 	
+	
+	<select id="getLegalStatusCount" resultMap="BrandLegalStatusCountResultMap">
+		SELECT bls.legal_status_id,bls.legal_status_name,count(*) brandCount
+		FROM brand_management b
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN users u ON b.user=u.user_id
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1)
+		GROUP BY bls.legal_status_name
+		order by bls.legal_status_id asc;
+	</select>
+	
+	
+	<select id="getBrandCategoryCount" resultMap="BrandCategoryCountResultMap">
+		SELECT bc.category_id,bc.category_name,count(*) brandCount
+		FROM brand_management b
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN users u ON b.user=u.user_id
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1)
+		GROUP BY bc.category_name
+		order bc.category_id asc;
+	</select>
 </mapper>
   

@@ -8,7 +8,9 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.BrandManagementDao;
 import com.lotut.pms.dao.mapper.BrandManagementMapper;
 import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
+import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.Page;
@@ -54,6 +56,17 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 	public int searchUserBrandManagementByCount(BrandManagementSearchCondition searchCondition) {
 		return brandManagementMapper.searchUserBrandManagementByCount(searchCondition);
 	}
+
+	@Override
+	public List<BrandLegalStatusCount> getLegalStatusCount(int userId) {
+		return brandManagementMapper.getLegalStatusCount(userId);
+	}
+
+	@Override
+	public List<BrandCategoryCount> getBrandCategoryCount(int userId) {
+		return brandManagementMapper.getBrandCategoryCount(userId);
+	}
+
 	
 	
 }

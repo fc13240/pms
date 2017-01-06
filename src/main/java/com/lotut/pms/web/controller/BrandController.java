@@ -26,7 +26,9 @@ import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
+import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PatentStatus;
@@ -238,10 +240,14 @@ public class BrandController {
 		}
 		int totalCount = brandManagementService.getUserBrandManagementCount(userId);
 		List<BrandManagement> brands = brandManagementService.getUserBrandManagementByPage(page);
+		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(userId);
+		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(userId);
 		page.setTotalRecords(totalCount);
 		model.addAttribute("brands",brands);
 		model.addAttribute("page",page);
 		addBrandCategoryAndBrandLegalStatusToModel(model);
+		model.addAttribute("brandLegalStatus", brandLegalStatus);
+		model.addAttribute("brandCategory", brandCategory);
 		return "brand_management_list";
 	}
 	 
@@ -288,8 +294,12 @@ public class BrandController {
 		int totalCount=brandManagementService.searchUserBrandManagementByCount(searchCondition);
 		page.setTotalRecords(totalCount);
 		List<BrandManagement> brands =brandManagementService.searchUserBrandManagementByPage(searchCondition);
+		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(userId);
+		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(userId);
 		model.addAttribute("brands",brands);
 		model.addAttribute("page", page);
+		model.addAttribute("brandLegalStatus", brandLegalStatus);
+		model.addAttribute("brandCategory", brandCategory);
 		addBrandCategoryAndBrandLegalStatusToModel(model);
 		return "brand_management_list";
 	}

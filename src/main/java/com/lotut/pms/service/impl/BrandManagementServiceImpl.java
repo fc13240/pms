@@ -5,7 +5,9 @@ import java.util.Map;
 
 import com.lotut.pms.dao.BrandManagementDao;
 import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
+import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.Page;
@@ -52,4 +54,15 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 		return brandManagementDao.searchUserBrandManagementByCount(searchCondition);
 	}
 
+	@Override
+	public List<BrandLegalStatusCount> getLegalStatusCount(int userId) {
+		return brandManagementDao.getLegalStatusCount(userId);
+	}
+
+	@Override
+	public List<BrandCategoryCount> getBrandCategoryCount(int userId) {
+		return brandManagementDao.getBrandCategoryCount(userId);
+	}
+
+	
 }
