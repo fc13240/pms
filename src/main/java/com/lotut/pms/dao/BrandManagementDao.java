@@ -6,6 +6,7 @@ import java.util.Map;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandLegalStatus;
 import com.lotut.pms.domain.BrandManagement;
+import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.Page;
 
 public interface BrandManagementDao {
@@ -19,4 +20,8 @@ public interface BrandManagementDao {
 	List<BrandCategory> getAllBrandCategory();
 	
 	List<BrandLegalStatus> getAllBrandLegalStatus();
+	
+	List<BrandManagement> searchUserBrandManagementByPage(BrandManagementSearchCondition searchCondition);
+	
+	int searchUserBrandManagementByCount(BrandManagementSearchCondition searchCondition);
 }

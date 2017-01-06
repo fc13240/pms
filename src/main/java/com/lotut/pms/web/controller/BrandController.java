@@ -278,8 +278,20 @@ public class BrandController {
 		return "brand_management_list";
 	}
 	
-	@RequestMapping(path="searchBrandManagement")
+	@RequestMapping(path="searchBrandManagement" ,method=RequestMethod.GET)
 	 public String searchBrandManagement(@ModelAttribute("searchCondition")BrandManagementSearchCondition searchCondition,HttpSession session,Model model){
+		Page page =searchCondition.getPage();
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=brandManagementService.searchUserBrandManagementByCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		List<BrandManagement> brandManagements =brandManagementService.searchUserBrandManagementByPage(searchCondition);
+		model.addAttribute("brands",brandManagements);
+		model.addAttribute("page", page);
 		addBrandCategoryAndBrandLegalStatusToModel(model);
 		return "brand_management_list";
 	}

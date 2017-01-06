@@ -121,5 +121,78 @@
 		select legal_status_id,legal_status_name from brand_legal_status order by legal_status_id asc;
 	</select>
 	
+	<select id="searchUserBrandManagementByPage" parameterType="BrandManagementSearchCondition" resultMap="brandManagementResultMap">
+  		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>
+  		SELECT rs.*,u.user_id,u.username FROM (
+		SELECT b.id,b.user,b.app_no,b.brand_no,
+			b.name,b.transaction_status,b.transaction_mode,b.price,b.app_person,
+			b.app_date,b.publish_date,b.image_url,b.proxy_file,b.business_license,
+			b.entity_license,b.individual_license,b.identity_card,b.application,
+			bc.category_id,bc.category_name,bls.legal_status_id,bls.legal_status_name
+		
+		FROM brand_management b
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN users u ON b.user=u.user_id
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1)
+		<if test="brandCategory != null">
+			and b.category_id = #{brandCategory}
+		</if>
+		<if test="brandLegalStatus != null">
+			and b.legal_status = #{brandLegalStatus}
+		</if>
+		<if test="transactionStatus != null">
+			and b.transaction_status = #{transactionStatus}
+		</if>
+		<if test="appDate != null">
+			<![CDATA[ and b.app_date = #{app_date} ]]>
+		</if>
+		<if test="keyword != null">
+			and (b.app_no like #{keyword_pattern} or b.brand_no like #{keyword_pattern}
+			 	 or b.name like #{keyword_pattern} or b.similar_no like #{keyword_pattern} or b.app_person like #{keyword_pattern}
+			 	 or b.scope like #{keyword_pattern})
+		</if>
+		limit #{page.startIndex}, #{page.pageSize}
+		) rs
+		LEFT JOIN user_brand_management ubm ON ubm.brand=rs.id
+		LEFT JOIN users u ON u.user_id=ubm.user
+  	</select>
+	
+	<select id="searchUserBrandManagementByCount" parameterType="BrandManagementSearchCondition" resultMap="int">
+  		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>
+  		SELECT count(*) FROM (
+		SELECT b.id
+		FROM brand_management b
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN users u ON b.user=u.user_id
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1)
+		<if test="brandCategory != null">
+			and b.category_id = #{brandCategory}
+		</if>
+		<if test="brandLegalStatus != null">
+			and b.legal_status = #{brandLegalStatus}
+		</if>
+		<if test="transactionStatus != null">
+			and b.transaction_status = #{transactionStatus}
+		</if>
+		<if test="appDate != null">
+			<![CDATA[ and b.app_date = #{app_date} ]]>
+		</if>
+		<if test="keyword != null">
+			and (b.app_no like #{keyword_pattern} or b.brand_no like #{keyword_pattern}
+			 	 or b.name like #{keyword_pattern} or b.similar_no like #{keyword_pattern} or b.app_person like #{keyword_pattern}
+			 	 or b.scope like #{keyword_pattern})
+		</if>
+		limit #{page.startIndex}, #{page.pageSize}
+		) rs
+		LEFT JOIN user_brand_management ubm ON ubm.brand=rs.id
+		LEFT JOIN users u ON u.user_id=ubm.user
+  	</select>
+	
 </mapper>
   

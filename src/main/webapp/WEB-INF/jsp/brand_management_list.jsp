@@ -177,7 +177,7 @@
 								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="appDate" placeholder="申请日" value="" readonly="readonly" >							  
 							  </td>
 							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/注册号、商标名称、专有权人、类似群号、指定商品" class="t-input form-control"/>							  
+								<input style="width:400px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/注册号、商标名称、专有权人、类似群号、指定商品" class="t-input form-control"/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
