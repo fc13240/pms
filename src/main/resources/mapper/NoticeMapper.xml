@@ -674,11 +674,11 @@
 						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
 						join notice_process_status nps on nps.notice_process_status_id = n.process_status
 			 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1) 
+			 	   and n.star_target_monitor_status=1
 			  order by nvl.user_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
 				limit #{startIndex}, #{pageSize}) as un
 			join user_patents up on un.patent_id = up.patent
 		  	join users u on up.user = u.user_id	
-		  	where un.star_target_monitor_status=1
 	</select>
 	
 	<select id="getUserStarTargetNoticesCount" resultType="int">
@@ -719,6 +719,7 @@
 						join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
 						join notice_process_status nps on nps.notice_process_status_id = n.process_status
 			 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1 )
+			 	   and n.star_target_monitor_status=1
 			 	<if test="keyword != null">
 					and (p.app_no like #{keyword_pattern} or p.patent_name like #{keyword_pattern} or p.app_person like #{keyword_pattern}  or p.patent_status_text like #{keyword_pattern} or p.internal_code like #{keyword_pattern} 
 					or n.notice_name like #{keyword_pattern} or ps.patent_status_desc like #{keyword_pattern})
@@ -727,7 +728,6 @@
 				limit #{page.startIndex}, #{page.pageSize}) as un
 			join user_patents up on un.patent_id = up.patent
 		  	join users u on up.user = u.user_id
-		  	where un.star_target_monitor_status=1	
 		  	<if test="startDispatchDate !=null">
 		  		and un.dispatch_date>=#{startDispatchDate}
 		  	</if>	
