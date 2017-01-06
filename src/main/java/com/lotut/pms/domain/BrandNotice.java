@@ -18,7 +18,7 @@ public class BrandNotice {
 	private String zipfileName;
 	private NoticeProcessStatus processStatus;
 	private User processUser;
-	private NoticeType noticeType;
+	private BrandNoticeType noticeType;
 	private NoticePaperApplyType paperApplyType;
 	private Long noticeViewStatus;
 	private int starTargetMonitorStatus;
@@ -129,11 +129,11 @@ public class BrandNotice {
 		this.processUser = processUser;
 	}
 
-	public NoticeType getNoticeType() {
+	public BrandNoticeType getNoticeType() {
 		return noticeType;
 	}
 
-	public void setNoticeType(NoticeType noticeType) {
+	public void setNoticeType(BrandNoticeType noticeType) {
 		this.noticeType = noticeType;
 	}
 

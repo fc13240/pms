@@ -14,6 +14,12 @@
 		<result property="avatarUrl" column="avatar_url"/>
 	</resultMap>
 	
+	<resultMap type="Friend" id="FriendResultMap">
+		<result property="friendId" column="friend"/>
+		<result property="remarkName" column="remark_name"/>
+		<association property="user" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>		
+	</resultMap>
+	
 	<select id="getAllUsers"  parameterType="Page" resultMap="UserResultMap">
 		select user_id, username, name from users limit #{startIndex}, #{pageSize};
 	</select>
@@ -166,4 +172,11 @@
 	<update id="updateUserAvatarUrl" parameterType="User">
 		update users set avatar_url=#{avatarUrl} where user_id=#{userId}
 	</update>
+	
+	<select id="searchShareUserDetail" resultMap="FriendResultMap">
+		SELECT f.remark_name,u.user_id,u.username,u.name,u.email,u.phone,u.qq,u.weChat,u.avatar_url
+		FROM friends f 
+		LEFT JOIN users u ON f.friend=u.user_id
+		WHERE f.user=#{userId} AND f.friend=#{shareUserId}	
+	</select>
 </mapper>
