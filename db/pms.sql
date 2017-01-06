@@ -1274,4 +1274,4 @@ CREATE TABLE user_brand_management (
   KEY fk_user_brand_management (brand),
   CONSTRAINT fk_user_brand_management_brand FOREIGN KEY (brand) REFERENCES brand_management (id) ON DELETE CASCADE,
   CONSTRAINT fk_user_brand_management_user FOREIGN KEY (user) REFERENCES users (user_id) ON DELETE CASCADE
-) ENGINE=INNODB DEFAULT CHARSET=utf8
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
