@@ -246,7 +246,7 @@
 		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
 		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1)
 		GROUP BY bc.category_name
-		order bc.category_id asc;
+		order by bc.category_id asc;
 	</select>
 
 </mapper>
