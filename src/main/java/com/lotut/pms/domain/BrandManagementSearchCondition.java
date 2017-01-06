@@ -59,7 +59,7 @@ public class BrandManagementSearchCondition {
 		String brandLegalStatusStr =brandLegalStatus == null ? "" :brandLegalStatus.toString();
 		String transactionStatusStr = transactionStatus == null ? "" : transactionStatus.toString();
 		String appDateStr = appDate == null ? "" : formatter.format(appDate);
-		String keywordStr = keyword == null ? "" : keyword;
+		String keywordStr = keyword == null ? "" : keyword.trim();
 		
 		return "brandCategory=" + brandCategoryStr + "&brandLegalStatus=" + brandLegalStatusStr +"&transactionStatus=" + transactionStatusStr + "&appDate="
 				+ appDateStr + "&keyword=" + keywordStr;
