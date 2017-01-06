@@ -21,7 +21,7 @@
 		
 			<!--left begin-->
 		  <div class="col-xs-1 sidebar" style="min-width:100px;">
-			<%@ include file="_left_nav2.jsp" %>
+			<%@ include file="_left_nav_brand_management.jsp" %>
 		  </div>
 		  <!--left end-->
 		  <!--right begin-->
@@ -51,8 +51,8 @@
 						</form>
 					  </div>
 					  <div style="margin-top:20px;width:500px;">
-						<form action="<s:url value='/brand/shareBrands.html'/>" method="get"  id="shareAddForm">
-						  <c:forEach items="${paramValues.brands}" var="patent">
+						<form action="<s:url value='/brand/shareBrandManagements.html'/>" method="get"  id="shareAddForm">
+						  <c:forEach items="${paramValues.brands}" var="brand">
 							<input type="hidden" name="brands" value="<c:out value='${brand}'/>">
 						  </c:forEach>
 						  <table id="simple-table" style="width:500px;" class="table table-striped table-bordered table-hover">
@@ -129,7 +129,7 @@
 		}
 	});
 	
-	function shareBrands() {
+	function shareBrandManagements() {
 		var friendSelected = false;
 
 		var friendCheckboxes = $('tr td input.check-item');
@@ -152,7 +152,7 @@
 	   				
 		} else {
 			var friends = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'friend').join(",");
-			var patents = $("input[name=brands]").val();
+			var brands = $("input[name=brands]").val();
 			$.ajax({
 				url: "<s:url value='/brand/addBrandManagementShares.html'/>?friends=" + friends + "&brands=" + brands, 
 				type: 'GET', 
@@ -172,7 +172,7 @@
 	}
 	
 	$(function() {
-		$('#addShareBtn').click(shareBrands)
+		$('#addShareBtn').click(shareBrandManagements);
 	});
 </script>
 </body>

@@ -1245,8 +1245,8 @@ CREATE TABLE brand_management (
   transaction_mode TINYINT(4) DEFAULT '1' COMMENT '1 出售  2转让',
   price INT(11) NOT NULL,
   app_person VARCHAR(100) DEFAULT NULL,
-  app_date DATETIME DEFAULT NULL,
-  publish_date DATETIME DEFAULT NULL,
+  app_date date DEFAULT NULL,
+  publish_date date DEFAULT NULL,
   originality VARCHAR(500) DEFAULT NULL,
   case_status VARCHAR(10) DEFAULT NULL,
   image_url VARCHAR(200) DEFAULT NULL,
@@ -1274,4 +1274,65 @@ CREATE TABLE user_brand_management (
   KEY fk_user_brand_management (brand),
   CONSTRAINT fk_user_brand_management_brand FOREIGN KEY (brand) REFERENCES brand_management (id) ON DELETE CASCADE,
   CONSTRAINT fk_user_brand_management_user FOREIGN KEY (user) REFERENCES users (user_id) ON DELETE CASCADE
-) ENGINE=INNODB DEFAULT CHARSET=utf8
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+<<<<<<< HEAD
+CREATE TABLE brand_remark(
+	remark_id INT AUTO_INCREMENT PRIMARY KEY,
+	USER INT ,
+	brand_id INT,
+	content VARCHAR(800),
+	remark_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT fk_brand_remark_user FOREIGN KEY(USER) REFERENCES users(user_id) ON DELETE CASCADE,
+	CONSTRAINT fk_brand_remark_brand FOREIGN KEY(brand_id) REFERENCES brand_management(id) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+INSERT INTO fee_payment_status VALUES(6,'已自助缴费');
+INSERT INTO order_status VALUES(5,'已自助缴费');
+
+CREATE TABLE IF NOT EXISTS brand_notice_types (
+	notice_type_id INT AUTO_INCREMENT PRIMARY KEY, 
+	notice_type_desc VARCHAR(30)
+);
+
+INSERT INTO brand_notice_types (notice_type_id, notice_type_desc)
+VALUES
+	(1, '受理书'),
+	(2, '补正通知'),
+	(3, '初审公告'),
+	(4, '商标证书'),
+	(5, '驳回通知'),
+	(6, '其他通知');
+	
+CREATE TABLE IF NOT EXISTS brand_management_notices (
+	notice_id     BIGINT AUTO_INCREMENT PRIMARY KEY, 
+	brand         INT(11) NOT NULL,
+	dispatch_date DATE,
+	notice_name   VARCHAR(100), 
+	notice_type   INT, 
+	notice_sequence VARCHAR(30), 
+	dispatch_sequence VARCHAR(30), 
+	time_limit INT,
+	notice_code VARCHAR(30), 
+	zip_bid VARCHAR(30),
+	dmh_flag VARCHAR(10), 
+	archive_no VARCHAR(30), 
+	zipfile_name VARCHAR(100),
+	process_status INT DEFAULT 1 NOT NULL, 
+	process_user INT,
+	paper_apply_type INT DEFAULT 1 NOT NULL,
+	star_target_monitor_status INT DEFAULT 0 COMMENT '0 表示不监控 1 表示处于监控状态',
+	UNIQUE KEY uk_brand_management_notices_brand_notice_sequence (brand, notice_sequence),
+		
+	CONSTRAINT fk_brand_management_notices_brand FOREIGN KEY idx_fk_brand_management_notices_brand (brand) REFERENCES brand_management(id) ON DELETE CASCADE,
+	CONSTRAINT fk_brand_management_notices_process_status FOREIGN KEY idx_fk_brand_management_notices_process_status (process_status) REFERENCES notice_process_status(notice_process_status_id),
+	CONSTRAINT fk_brand_management_notices_process_user FOREIGN KEY idx_fk_brand_management_notices_process_user (process_user) REFERENCES users(user_id),
+	CONSTRAINT fk_brand_management_notices_notice_type FOREIGN KEY idx_fk_brand_management_notices_type (notice_type) REFERENCES brand_notice_types(notice_type_id),
+	CONSTRAINT fk_brand_management_notices_paper_apply_type FOREIGN KEY idx_fk_brand_management_notices_paper_apply_type (paper_apply_type) REFERENCES notice_paper_apply_types(notice_paper_apply_type_id)
+);
+
+CREATE TABLE IF NOT EXISTS brand_notice_read (
+	notice_id BIGINT NOT NULL,
+	user_id INT NOT NULL,
+	PRIMARY KEY (notice_id,user_id)
+);

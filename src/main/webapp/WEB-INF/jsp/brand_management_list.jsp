@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
-<title>龙图腾专利管家－商标管理！</title>
+<title>龙图腾专利管家－商标管理</title>
 <%@ include file="_css.jsp" %>
 <body>
 <%@ include file="_top.jsp" %>
@@ -129,38 +129,35 @@
 					
 					
 					
-						<form class="form-inline" action="<s:url value='/patent/search.html'/>" method="get">
+						<form class="form-inline" action="<s:url value='/brand/searchBrandManagement.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 						  <div class="t-third">
-
 						  <table class="search-table">
 							  <tr>
-							  <td>专利类型</td>
-							  <td>专利状态</td>
+							  <td>商标类别</td>
+							  <td>法律状态</td>
 							  <td>交易状态</td>
-							  <td>申请日开始</td>
-							  <td></td>
-							  <td>申请日结束</td>
+							  <td>申请日</td>
 							  <td>关键字</td>
-							  <td></td>	
+							  <td></td>
 							  </tr>
 							  <tr>
 							  <td>
-								<select  style="width:100px;" class="selectPointOfInterest form-control" name="patentType">
+								<select  style="width:100px;" class="selectPointOfInterest form-control" name="brandCategory">
 								  <option value="">全部</option>
-								  <c:forEach items="${allPatentTypes}" var="patentType">
-									<option value="<c:out value='${patentType.patentTypeId}'/>">
-									<c:out value="${patentType.typeDescription}"/>
+								  <c:forEach items="${categorys}" var="category">
+									<option value="<c:out value='${category.categoryId}'/>">
+									<c:out value="${category.categoryName}"/>
 									</option>
 								  </c:forEach>
 								</select>
 							  </td>
 							  <td>
-								<select style="width:121px;" class="form-control" name="patentStatus">
+								<select style="width:121px;" class="form-control" name="brandLegalStatus">
 								  <option value="">全部</option>
-								  <c:forEach items="${allPatentStatus}" var="patentStatus">
-									<option value="<c:out value='${patentStatus.patentStatusId}'/>">
-									<c:out value="${patentStatus.statusDescription}"/>
+								  <c:forEach items="${allBrandLegalStatus}" var="brandLegalStatus">
+									<option value="<c:out value='${brandLegalStatus.legalStatusId}'/>">
+									<c:out value="${brandLegalStatus.legalStatusName}"/>
 									</option>
 								  </c:forEach>
 								</select>
@@ -177,14 +174,10 @@
 								</select>
 							  </td>
 							  <td>
-								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="startAppDate" placeholder="申请日开始" value="" readonly="readonly" >							  
-							  </td>
-							  <td>-</td>
-							  <td>
-								<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endAppDateId'})"  id="endAppDateId" name="endAppDate" placeholder="申请日结束" value="" readonly="readonly" >
+								<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startAppDateId'})" id="startAppDateId" name="appDate" placeholder="申请日" value="" readonly="readonly" >							  
 							  </td>
 							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>							  
+								<input style="width:400px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/注册号、商标名称、专有权人、类似群号、指定商品" class="t-input form-control"/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
@@ -316,7 +309,7 @@
 								
 								
 							</td>
-							<td style="text-align:center"><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
+							<td style="text-align:center"><a  href="<s:url value='/brand/showFriends.html'/>?brands=<c:out value='${brand.id}'/>">
 							  分享
 							  </a>&nbsp;
 							  <a target="_blank" href="<s:url value='/patent/showRemarks.html'/>?patentId=<c:out value='${patent.patentId}'/>">
@@ -517,7 +510,7 @@ $(function () {
 		var url = "<s:url value='/brand/getBrandManagementlist.html'/>?currentPage=" + pageNo;
 		
 		<c:if test="${searchCondition != null}">
-			url = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+			url = "<s:url value='/brand/searchBrandManagement.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 		</c:if>
 		
 		

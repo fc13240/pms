@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="lt-left">
-	<div class="lt-left-title">新闻中心</div>
+	<div class="lt-left-title">商标管理</div>
 	
 	<ul style="maring:0px;padding:0px;">
 	
@@ -20,7 +20,7 @@
 		</a>
 	</li> 
 	<li class="active"> 
-		<a href="<s:url value='/news/getNewsTypeList.html'/>">
+		<a href="<s:url value='/brandNotice/getBrandNoticeList.html'/>">
 		<h5>通知书</h5>
 		</a>
 	</li>

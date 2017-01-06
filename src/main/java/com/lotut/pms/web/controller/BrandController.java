@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +26,10 @@ import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandManagement;
+import com.lotut.pms.domain.BrandLegalStatus;
+import com.lotut.pms.domain.BrandManagement;
+import com.lotut.pms.domain.BrandManagementSearchCondition;
+import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
@@ -234,10 +240,9 @@ public class BrandController {
 		int totalCount = brandManagementService.getUserBrandManagementCount(userId);
 		List<BrandManagement> brands = brandManagementService.getUserBrandManagementByPage(page);
 		page.setTotalRecords(totalCount);
-		List<BrandCategory> categorys = brandService.getAllCategorys();
 		model.addAttribute("brands",brands);
 		model.addAttribute("page",page);
-		model.addAttribute("categorys",categorys);
+		addBrandCategoryAndBrandLegalStatusToModel(model);
 		return "brand_management_list";
 	}
 	 
@@ -258,27 +263,51 @@ public class BrandController {
 	}
 	
 	@RequestMapping(path="/addBrandManagementShares", method=RequestMethod.GET)
-	public String addBrandManagementShares(@RequestParam("brands")List<Integer> brandIds, @RequestParam("friends")List<Integer> friendIds) {
-		List<Map<String, Integer>> shareBrandRecords = new ArrayList<>();
-		List<Map<String, Integer>> userBrandRecords = new ArrayList<>();
-		int userId = PrincipalUtils.getCurrentUserId();
-		
-		/*for (int patentId: brandIds) {
+	public String shareBrandManagements(@RequestParam("brands")List<Integer> brandManagementIds, @RequestParam("friends")List<Integer> friendIds) {
+		List<Map<String, Integer>> userBrandManagementRecords = new ArrayList<>();
+		for (int brandManagementId: brandManagementIds) {
 			for (int friendId: friendIds) {
-				Map<String, Integer> shareBrandRecord =  new HashMap<String, Integer>();
-				shareBrandRecord.put("patent", patentId);
-				shareBrandRecord.put("shareBy", userId);
-				shareBrandRecord.put("shareTo", friendId);
-				shareBrandRecords.add(sharePatentRecord);
-				
-				Map<String, Integer> userPatentRecord =  new HashMap<String, Integer>();
-				userPatentRecord.put("user", friendId);
-				userPatentRecord.put("patent", patentId);
-				userPatentRecords.add(userPatentRecord);
+				Map<String, Integer> userBrandManagementRecord =  new HashMap<String, Integer>();
+				userBrandManagementRecord.put("user", friendId);
+				userBrandManagementRecord.put("brand", brandManagementId);
+				userBrandManagementRecords.add(userBrandManagementRecord);
 			}
 		}
-		
-		sharePatentService.sharePatents(sharePatentRecords, userPatentRecords);*/
+		brandManagementService.insertUserBrandManagements(userBrandManagementRecords);
+		return "brand_management_list";
+	}
+	
+	@RequestMapping(path="/saveBrandRemark")
+	public String saveBrandRemark(BrandRemark brandRemark) {
+		User user = PrincipalUtils.getCurrentPrincipal();
+		brandRemark.setUser(user);
+		brandManagementService.saveBrandRemark(brandRemark);
+		return "brand_management_list";
+	}
+	
+	@RequestMapping(path="/getBrandRemark")
+	public String getBrandRemark(int  brandId,Model model) {
+		List<BrandRemark> brandRemarks = brandManagementService.getBrandRemark(brandId);
+		model.addAttribute("brandRemarks",brandRemarks);
+		model.addAttribute("brandId",brandId);
+		return "brand_remarks";
+	}
+	
+	@RequestMapping(path="/searchBrandManagement" ,method=RequestMethod.GET)
+	 public String searchBrandManagement(@ModelAttribute("searchCondition")BrandManagementSearchCondition searchCondition,HttpSession session,Model model){
+		Page page =searchCondition.getPage();
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=brandManagementService.searchUserBrandManagementByCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		List<BrandManagement> brands =brandManagementService.searchUserBrandManagementByPage(searchCondition);
+		model.addAttribute("brands",brands);
+		model.addAttribute("page", page);
+		addBrandCategoryAndBrandLegalStatusToModel(model);
 		return "brand_management_list";
 	}
 	
@@ -337,4 +366,11 @@ public class BrandController {
 	    	int userId=PrincipalUtils.getCurrentUserId();
 	    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
 	    }
+	private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
+		List<BrandCategory> categorys = brandManagementService.getAllBrandCategory();
+		List<BrandLegalStatus> allBrandLegalStatus = brandManagementService.getAllBrandLegalStatus();
+		model.addAttribute("categorys", categorys);
+		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
+	}
+	
 }

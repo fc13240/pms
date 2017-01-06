@@ -51,4 +51,6 @@ public interface OrderDao {
 	Map<String, Map<String, String>> searchUserOrdersByOrderStatus(int userId);
 	
 	Map<String, Map<String, String>> searchUserAllOrdersByOrderStatus();
+	
+	void setUserOrderToSelfServicePay(long orderId);
 }
