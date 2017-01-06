@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Friend;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 
@@ -61,6 +62,8 @@ public interface UserMapper {
 	User searchShareUserById(int shareUserId);
 
 	ContactAddress getUserDefaultContactAddress(int shareUserId);
+
+	Friend searchShareUserDetail(@Param("userId")int userId, @Param("shareUserId")int shareUserId);
 
 
 }

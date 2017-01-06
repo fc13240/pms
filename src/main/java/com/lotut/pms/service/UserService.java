@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Friend;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 
@@ -66,6 +67,8 @@ public interface UserService {
 	User searchShareUserById(int shareUserId);
 
 	ContactAddress getUserDefaultContactAddress(int shareUserId);
+
+	Friend searchShareUserDetail(int userId, int shareUserId);
 
 	//String 	roundPassword();
 

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lotut.pms.dao.UserDao;
 import com.lotut.pms.domain.ContactAddress;
+import com.lotut.pms.domain.Friend;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.UserService;
@@ -194,6 +195,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int updateUserAvatarUrl(User user) {
 		return userDao.updateUserAvatarUrl(user);
+	}
+
+	@Override
+	public Friend searchShareUserDetail(int userId, int shareUserId) {
+		return userDao.searchShareUserDetail(userId, shareUserId);
 	}
 
 }
