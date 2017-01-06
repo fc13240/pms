@@ -319,6 +319,22 @@ public class BrandController {
 		
 	}
 	
+	@RequestMapping(path="/uploadBrandManagementImageFile")
+    public void uploadBrandManagementImageFile(MultipartFile file,HttpServletResponse response) throws IOException{
+    	String fatherPath=Settings.BRAND_IMAGE_PATH;
+    	String saveUrl=Settings.BRAND_IMAGE_URL;
+    	int userId=PrincipalUtils.getCurrentUserId();
+    	long avatarSize =file.getSize();
+    	final long uploadAvatarSize=300*1024;
+    	if(avatarSize>uploadAvatarSize){
+				WebUtils.writeJsonStrToResponse(response, "overLimit");
+    	}else{
+    		
+    		FileOption.brandShowImgFileOption(userId, file, fatherPath, response,saveUrl);
+    	}
+
+    }
+	
 	 @RequestMapping(path="/uploadBrandProxyFile")
 	    public void uploadBrandProxyFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
 	    	String fatherPath=Settings.BRAND_MANAGEMENT_PROXYFILE_PATH;

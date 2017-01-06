@@ -160,6 +160,8 @@ public class FileOption {
 			if (!filename.endsWith(".pdf")) {
 				String pdfFilePath=saveDir+filename.substring(0,filename.lastIndexOf("."))+".pdf";
 				JpgToPdf.imgToPdf(savePath, pdfFilePath);
+				File jpgSaveFile=new File(savePath);
+				jpgSaveFile.delete();
 				String savePdfUrl=saveUrl+filename.substring(0,filename.lastIndexOf("."))+".pdf"+".html";
 				WebUtils.writeJsonStrToResponse(response,savePdfUrl);
 			}else{
