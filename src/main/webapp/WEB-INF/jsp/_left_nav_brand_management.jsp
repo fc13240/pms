@@ -8,7 +8,12 @@
 		<a href="<s:url value='/brand/getBrandManagementlist.html'/>">
 		<h5>我的商标</h5>
 		</a>
-	</li> 		
+	</li>
+	<li class="active"> 
+		<a href="<s:url value='/brand/brandManagementAddForm.html'/>">
+		<h5>商标添加</h5>
+		</a>
+	</li>  		
 	<li class="active"> 
 		<a href="<s:url value='/news/getNewsTypeList.html'/>">
 		<h5>续展监控</h5>

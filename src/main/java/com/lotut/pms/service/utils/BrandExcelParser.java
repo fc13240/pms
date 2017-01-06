@@ -254,9 +254,17 @@ public class BrandExcelParser {
 	}
 	
 	public static void main(String[] args) {
-		Map<Integer,Integer> map=new HashMap<>();
-		map.put(1, 5);
-		map.put(2, 3);
-		System.out.println(map.get(2));
+		String path="/opt/media/brandManagement/entityLicense/";
+		int index=path.lastIndexOf("/entityLicense");
+		
+		String target=path.substring(26);
+		String path2="/opt/";
+		int a=path2.lastIndexOf("/");
+		System.out.println(path.substring(0, path.lastIndexOf("/")));
+		System.out.println(a);
+		System.out.println(path2.length());
+		System.out.println(index);
+		System.out.println(target);
+		
 	}
 }
