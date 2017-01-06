@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 public class BrandManagementSearchCondition {
+	private int userId;
 	private Integer brandCategory;
 	private Integer brandLegalStatus;
 	private Integer transactionStatus;
@@ -17,6 +18,14 @@ public class BrandManagementSearchCondition {
 	private Page page;
 	private static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	
+	
+	
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 	public Integer getBrandCategory() {
 		return brandCategory;
 	}

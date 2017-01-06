@@ -21,8 +21,8 @@ public interface BrandManagementMapper {
 	
 	List<BrandLegalStatus> getAllBrandLegalStatus();
 	
-	List<BrandManagement> searchUserBrandManagementByPage(@Param("searchCondition")BrandManagementSearchCondition searchCondition);
+	List<BrandManagement> searchUserBrandManagementByPage(BrandManagementSearchCondition searchCondition);
 	
-	int searchUserBrandManagementByCount(@Param("searchCondition")BrandManagementSearchCondition searchCondition);
+	int searchUserBrandManagementByCount(BrandManagementSearchCondition searchCondition);
 	
 }

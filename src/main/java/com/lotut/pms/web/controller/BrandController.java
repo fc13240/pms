@@ -287,8 +287,8 @@ public class BrandController {
 		}
 		int totalCount=brandManagementService.searchUserBrandManagementByCount(searchCondition);
 		page.setTotalRecords(totalCount);
-		List<BrandManagement> brandManagements =brandManagementService.searchUserBrandManagementByPage(searchCondition);
-		model.addAttribute("brands",brandManagements);
+		List<BrandManagement> brands =brandManagementService.searchUserBrandManagementByPage(searchCondition);
+		model.addAttribute("brands",brands);
 		model.addAttribute("page", page);
 		addBrandCategoryAndBrandLegalStatusToModel(model);
 		return "brand_management_list";
