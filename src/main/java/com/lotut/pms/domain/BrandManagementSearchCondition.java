@@ -38,10 +38,10 @@ public class BrandManagementSearchCondition {
 	public void setBrandLegalStatus(Integer brandLegalStatus) {
 		this.brandLegalStatus = brandLegalStatus;
 	}
-	public int getTransactionStatus() {
+	public Integer getTransactionStatus() {
 		return transactionStatus;
 	}
-	public void setTransactionStatus(int transactionStatus) {
+	public void setTransactionStatus(Integer transactionStatus) {
 		this.transactionStatus = transactionStatus;
 	}
 	public Date getAppDate() {
