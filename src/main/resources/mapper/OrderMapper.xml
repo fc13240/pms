@@ -282,7 +282,7 @@
 				  FROM orders o JOIN order_status os ON o.order_status = os.order_status_id
 					LEFT JOIN contact_addresses ca ON o.post_address = ca.id
 					join users u on o.user = u.user_id
-				 WHERE o.order_status in (2,3,4)
+				 WHERE o.order_status in (2,3,4,5)
 			 	<if test="orderStatus != null">
 			 		and o.order_status = #{orderStatus}
 			 	</if>	
@@ -322,7 +322,7 @@
 				  FROM orders o JOIN order_status os ON o.order_status = os.order_status_id
 					LEFT JOIN contact_addresses ca ON o.post_address = ca.id
 					join users u on o.user = u.user_id
-				 WHERE o.order_status in (2,3,4)
+				 WHERE o.order_status in (2,3,4,5)
 			 	<if test="orderStatus != null">
 			 		and o.order_status = #{orderStatus}
 			 	</if>	

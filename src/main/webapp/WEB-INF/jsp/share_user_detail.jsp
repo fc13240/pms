@@ -35,22 +35,26 @@
 					<form action=""	method="POST" >
 						<h5>真实姓名/名称：</h5>
 						<input class="ipt form-control" type="text" name="name" id="name"
-							style="height: 40px; width: 300px;" value="${user.name}" readonly="readonly">
-		
+							style="height: 40px; width: 500px;" value="${user.name}" readonly="readonly">
+						<%-- <c:if test="${not empty user.remarkName }">
+						<h5>备注名：</h5>
+							<input class="ipt form-control" type="text" name="name" id="name"
+								style="height: 40px; width: 500px;" value="${user.remarkName}" readonly="readonly">
+						</c:if> --%>
 						<h5>电子邮件：</h5>
 						<input class="email form-control" name="email" id="email" type="email"
-							style="height: 40px; width: 300px;" value="${user.email}" readonly="readonly"> 
+							style="height: 40px; width: 500px;" value="${user.email}" readonly="readonly"> 
 						<br>
 						<h5>手机或电话号：</h5>
-						<input style="width:300px;" class="phone form-control" name="phone" id="phone" type="text"
+						<input style="width:500px;" class="phone form-control" name="phone" id="phone" type="text"
 							value="${user.phone}" readonly="readonly"> 
 						<br>
 						<h5>QQ号：</h5>
-						<input style="width:300px;" class="phone form-control" name="qq" id="qq" type="text"
+						<input style="width:500px;" class="phone form-control" name="qq" id="qq" type="text"
 							value="${user.qq}" readonly="readonly"> 
 						<br>
 						<h5>微信号：</h5>
-						<input style="width:300px;" class="phone form-control" name="weChat" id="weChat" type="text"
+						<input style="width:500px;" class="phone form-control" name="weChat" id="weChat" type="text"
 							value="${user.weChat}" readonly="readonly"> 
 						<br>
 						<div style="height:20px;"></div>
