@@ -145,9 +145,9 @@
 							  <td>
 								<select  style="width:100px;" class="selectPointOfInterest form-control" name="brandCategory">
 								  <option value="">全部</option>
-								  <c:forEach items="${allBrandCategory}" var="brandCategory">
-									<option value="<c:out value='${brandCategory.categoryId}'/>">
-									<c:out value="${brandCategory.categoryName}"/>
+								  <c:forEach items="${categorys}" var="category">
+									<option value="<c:out value='${category.categoryId}'/>">
+									<c:out value="${category.categoryName}"/>
 									</option>
 								  </c:forEach>
 								</select>

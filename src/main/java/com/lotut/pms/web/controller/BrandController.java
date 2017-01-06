@@ -239,10 +239,8 @@ public class BrandController {
 		int totalCount = brandManagementService.getUserBrandManagementCount(userId);
 		List<BrandManagement> brands = brandManagementService.getUserBrandManagementByPage(page);
 		page.setTotalRecords(totalCount);
-		List<BrandCategory> categorys = brandService.getAllCategorys();
 		model.addAttribute("brands",brands);
 		model.addAttribute("page",page);
-		model.addAttribute("categorys",categorys);
 		addBrandCategoryAndBrandLegalStatusToModel(model);
 		return "brand_management_list";
 	}
@@ -297,9 +295,9 @@ public class BrandController {
 	}
 	
 	private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
-		List<BrandCategory> allBrandCategory = brandManagementService.getAllBrandCategory();
+		List<BrandCategory> categorys = brandManagementService.getAllBrandCategory();
 		List<BrandLegalStatus> allBrandLegalStatus = brandManagementService.getAllBrandLegalStatus();
-		model.addAttribute("allBrandCategory", allBrandCategory);
+		model.addAttribute("categorys", categorys);
 		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
 	}
 	
