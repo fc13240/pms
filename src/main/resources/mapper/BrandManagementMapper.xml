@@ -147,7 +147,7 @@
 			and b.transaction_status = #{transactionStatus}
 		</if>
 		<if test="appDate != null">
-			<![CDATA[ and b.app_date = #{app_date} ]]>
+			<![CDATA[ and b.app_date = #{appDate} ]]>
 		</if>
 		<if test="keyword != null">
 			and (b.app_no like #{keyword_pattern} or b.brand_no like #{keyword_pattern}
