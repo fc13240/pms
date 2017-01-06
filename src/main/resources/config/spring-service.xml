@@ -110,4 +110,8 @@
 	<bean id="brandManagementService" class="com.lotut.pms.service.impl.BrandManagementServiceImpl">
 		<constructor-arg ref="brandManagementDao"/>
 	</bean>
+	
+	<bean id="brandNoticeService" class="com.lotut.pms.service.impl.BrandNoticeServiceImpl">
+		<constructor-arg ref="brandNoticeDao"/>
+	</bean>
 </beans>

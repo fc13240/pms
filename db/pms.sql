@@ -1316,3 +1316,9 @@ CREATE TABLE IF NOT EXISTS brand_management_notices (
 	CONSTRAINT fk_brand_management_notices_notice_type FOREIGN KEY idx_fk_brand_management_notices_type (notice_type) REFERENCES brand_notice_types(notice_type_id),
 	CONSTRAINT fk_brand_management_notices_paper_apply_type FOREIGN KEY idx_fk_brand_management_notices_paper_apply_type (paper_apply_type) REFERENCES notice_paper_apply_types(notice_paper_apply_type_id)
 );
+
+CREATE TABLE IF NOT EXISTS brand_notice_read (
+	notice_id BIGINT NOT NULL,
+	user_id INT NOT NULL,
+	PRIMARY KEY (notice_id,user_id)
+);
