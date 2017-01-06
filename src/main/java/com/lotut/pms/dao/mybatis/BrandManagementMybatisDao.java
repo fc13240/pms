@@ -10,6 +10,7 @@ import com.lotut.pms.dao.mapper.BrandManagementMapper;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandLegalStatus;
 import com.lotut.pms.domain.BrandManagement;
+import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.Page;
 
 public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements BrandManagementDao{
@@ -42,6 +43,16 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 	@Override
 	public void insertUserBrandManagements(List<Map<String, Integer>> userBrandManagementRecords) {
 		brandManagementMapper.insertUserBrandManagements(userBrandManagementRecords);
+	}
+
+	@Override
+	public List<BrandManagement> searchUserBrandManagementByPage(BrandManagementSearchCondition searchCondition) {
+		return brandManagementMapper.searchUserBrandManagementByPage(searchCondition);
+	}
+
+	@Override
+	public int searchUserBrandManagementByCount(BrandManagementSearchCondition searchCondition) {
+		return brandManagementMapper.searchUserBrandManagementByCount(searchCondition);
 	}
 	
 	

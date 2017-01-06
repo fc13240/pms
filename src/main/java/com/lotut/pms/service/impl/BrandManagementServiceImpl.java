@@ -7,6 +7,7 @@ import com.lotut.pms.dao.BrandManagementDao;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandLegalStatus;
 import com.lotut.pms.domain.BrandManagement;
+import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.BrandManagementService;
 
@@ -39,6 +40,16 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 	@Override
 	public void insertUserBrandManagements(List<Map<String, Integer>> userBrandManagementRecords) {
 		brandManagementDao.insertUserBrandManagements(userBrandManagementRecords);
+	}
+
+	@Override
+	public List<BrandManagement> searchUserBrandManagementByPage(BrandManagementSearchCondition searchCondition) {
+		return brandManagementDao.searchUserBrandManagementByPage(searchCondition);
+	}
+
+	@Override
+	public int searchUserBrandManagementByCount(BrandManagementSearchCondition searchCondition) {
+		return brandManagementDao.searchUserBrandManagementByCount(searchCondition);
 	}
 
 }

@@ -239,10 +239,8 @@ public class BrandController {
 		int totalCount = brandManagementService.getUserBrandManagementCount(userId);
 		List<BrandManagement> brands = brandManagementService.getUserBrandManagementByPage(page);
 		page.setTotalRecords(totalCount);
-		List<BrandCategory> categorys = brandService.getAllCategorys();
 		model.addAttribute("brands",brands);
 		model.addAttribute("page",page);
-		model.addAttribute("categorys",categorys);
 		addBrandCategoryAndBrandLegalStatusToModel(model);
 		return "brand_management_list";
 	}
@@ -278,16 +276,28 @@ public class BrandController {
 		return "brand_management_list";
 	}
 	
-	@RequestMapping(path="searchBrandManagement")
+	@RequestMapping(path="searchBrandManagement" ,method=RequestMethod.GET)
 	 public String searchBrandManagement(@ModelAttribute("searchCondition")BrandManagementSearchCondition searchCondition,HttpSession session,Model model){
+		Page page =searchCondition.getPage();
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount=brandManagementService.searchUserBrandManagementByCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		List<BrandManagement> brandManagements =brandManagementService.searchUserBrandManagementByPage(searchCondition);
+		model.addAttribute("brands",brandManagements);
+		model.addAttribute("page", page);
 		addBrandCategoryAndBrandLegalStatusToModel(model);
 		return "brand_management_list";
 	}
 	
 	private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
-		List<BrandCategory> allBrandCategory = brandManagementService.getAllBrandCategory();
+		List<BrandCategory> categorys = brandManagementService.getAllBrandCategory();
 		List<BrandLegalStatus> allBrandLegalStatus = brandManagementService.getAllBrandLegalStatus();
-		model.addAttribute("allBrandCategory", allBrandCategory);
+		model.addAttribute("categorys", categorys);
 		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
 	}
 	

@@ -98,5 +98,6 @@
 		<typeAlias alias="BrandManagement" type="com.lotut.pms.domain.BrandManagement"/>
 		<typeAlias alias="BrandNotice" type="com.lotut.pms.domain.BrandNotice"/>
 		<typeAlias alias="BrandNoticeType" type="com.lotut.pms.domain.BrandNoticeType"/>
+		<typeAlias alias="BrandManagementSearchCondition" type="com.lotut.pms.domain.BrandManagementSearchCondition"/>
 	</typeAliases>  
 </configuration>
