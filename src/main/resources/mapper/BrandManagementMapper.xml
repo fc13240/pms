@@ -34,11 +34,11 @@
 		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 	</resultMap>
 	
-		<resultMap property="brandCategory" id="BrandCategoryResultMap">
+		<resultMap type="brandCategory" id="BrandCategoryResultMap">
 			<id property="categoryId" column="category_id"/>
 			<result property="categoryName" column="category_name"/>
 		</resultMap>
-		<resultMap property="brandLegalStatus" id="BrandLegalStatusResultMap">
+		<resultMap type="brandLegalStatus" id="BrandLegalStatusResultMap">
 			<id property="legalStatusId" column="legal_status_id"/>
 			<result property="legalStatusName" column="legal_status_name"/>
 		</resultMap>
