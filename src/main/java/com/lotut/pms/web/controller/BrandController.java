@@ -276,7 +276,7 @@ public class BrandController {
 		return "brand_management_list";
 	}
 	
-	@RequestMapping(path="searchBrandManagement" ,method=RequestMethod.GET)
+	@RequestMapping(path="/searchBrandManagement" ,method=RequestMethod.GET)
 	 public String searchBrandManagement(@ModelAttribute("searchCondition")BrandManagementSearchCondition searchCondition,HttpSession session,Model model){
 		Page page =searchCondition.getPage();
 		int userId = PrincipalUtils.getCurrentUserId();
