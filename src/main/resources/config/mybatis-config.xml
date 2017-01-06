@@ -100,5 +100,7 @@
 		<typeAlias alias="BrandNotice" type="com.lotut.pms.domain.BrandNotice"/>
 		<typeAlias alias="BrandNoticeType" type="com.lotut.pms.domain.BrandNoticeType"/>
 		<typeAlias alias="BrandManagementSearchCondition" type="com.lotut.pms.domain.BrandManagementSearchCondition"/>
+		<typeAlias alias="BrandCategoryCount" type="com.lotut.pms.domain.BrandCategoryCount"/>
+		<typeAlias alias="BrandLegalStatusCount" type="com.lotut.pms.domain.BrandLegalStatusCount"/>
 	</typeAliases>  
 </configuration>
