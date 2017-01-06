@@ -160,7 +160,7 @@
 		LEFT JOIN users u ON u.user_id=ubm.user
   	</select>
 	
-	<select id="searchUserBrandManagementByCount" parameterType="BrandManagementSearchCondition" resultMap="int">
+	<select id="searchUserBrandManagementByCount" parameterType="BrandManagementSearchCondition" resultType="int">
   		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>
