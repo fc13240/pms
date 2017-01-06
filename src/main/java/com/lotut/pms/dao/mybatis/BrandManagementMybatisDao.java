@@ -1,6 +1,7 @@
 package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -36,6 +37,11 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 	@Override
 	public List<BrandLegalStatus> getAllBrandLegalStatus() {
 		return brandManagementMapper.getAllBrandLegalStatus();
+	}
+	
+	@Override
+	public void insertUserBrandManagements(List<Map<String, Integer>> userBrandManagementRecords) {
+		brandManagementMapper.insertUserBrandManagements(userBrandManagementRecords);
 	}
 	
 	

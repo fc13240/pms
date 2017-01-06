@@ -1,6 +1,7 @@
 package com.lotut.pms.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lotut.pms.dao.BrandManagementDao;
 import com.lotut.pms.domain.BrandCategory;
@@ -34,6 +35,10 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 	@Override
 	public List<BrandLegalStatus> getAllBrandLegalStatus() {
 		return brandManagementDao.getAllBrandLegalStatus();
+	}
+	@Override
+	public void insertUserBrandManagements(List<Map<String, Integer>> userBrandManagementRecords) {
+		brandManagementDao.insertUserBrandManagements(userBrandManagementRecords);
 	}
 
 }

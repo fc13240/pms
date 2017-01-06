@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="lt-left">
-	<div class="lt-left-title">新闻中心</div>
+	<div class="lt-left-title">商标管理</div>
 	
 	<ul style="maring:0px;padding:0px;">
 	

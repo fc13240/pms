@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
-<title>龙图腾专利管家－商标管理！</title>
+<title>龙图腾专利管家－商标管理</title>
 <%@ include file="_css.jsp" %>
 <body>
 <%@ include file="_top.jsp" %>
@@ -316,7 +316,7 @@
 								
 								
 							</td>
-							<td style="text-align:center"><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
+							<td style="text-align:center"><a  href="<s:url value='/brand/showFriends.html'/>?brands=<c:out value='${brand.id}'/>">
 							  分享
 							  </a>&nbsp;
 							  <a target="_blank" href="<s:url value='/patent/showRemarks.html'/>?patentId=<c:out value='${patent.patentId}'/>">
