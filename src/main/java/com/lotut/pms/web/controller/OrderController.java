@@ -1,6 +1,7 @@
 package com.lotut.pms.web.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -246,7 +247,7 @@ public class OrderController {
 				return "";
 			}
 	}
-
+	
 	@RequestMapping(path="/updateUserOrderContactAddresses", method=RequestMethod.POST)
 	public String updateUserOrderExpress(HttpServletRequest request,Model model){
 			Enumeration<String> paramNames =  request.getParameterNames();
@@ -279,4 +280,13 @@ public class OrderController {
 		statusDataToModel(model);
 		return "all_order_list";
 	}
+	
+	@RequestMapping(path="/setUserOrderToSelfServicePay", method=RequestMethod.GET)
+	public void setUserOrderToSelfServicePay(@RequestParam("orderId")long orderId,PrintWriter pw){
+			if (PrincipalUtils.isOrderProcessor()) {
+				orderService.setUserOrderToSelfServicePay(orderId);
+			}
+			pw.write("success");
+	}
+
 }

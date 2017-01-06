@@ -96,5 +96,6 @@
 		<typeAlias alias="SalePatentGood" type="com.lotut.pms.domain.SalePatentGood"/>
 		<typeAlias alias="BrandLegalStatus" type="com.lotut.pms.domain.BrandLegalStatus"/>
 		<typeAlias alias="BrandManagement" type="com.lotut.pms.domain.BrandManagement"/>
+		<typeAlias alias="BrandRemark" type="com.lotut.pms.domain.BrandRemark"/>
 	</typeAliases>  
 </configuration>

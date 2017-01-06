@@ -94,6 +94,11 @@
 						        	订单完成 (<c:out value='${feePaymentStatusCount[(5).intValue()]["feeCount"]}' default="0"/>)
 						        </a>
 					        </li> 
+					        <li> 
+						        <a href="<s:url value='/fee/search.html?page.currentPage=1&paymentStatus=6'/>">
+						        	已自助缴费 (<c:out value='${feePaymentStatusCount[(6).intValue()]["feeCount"]}' default="0"/>)
+						        </a>
+					        </li> 
 					      </ul>
 					     
 					    </div>

@@ -39,6 +39,17 @@
 		</association>
 		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 	</resultMap>
+	
+	<resultMap type="BrandRemark" id="BrandRemarkResultMap">
+		<id property="remarkId" column="remark_id"/>
+		<result property="brandId" column="brand_id"/>
+		<result property="content" column="content"/>
+		<result property="remarkTime" column="remark_time"/>
+		<association property="user" javaType="User">
+			<id property="userId" column="user_id"/>
+			<id property="username" column="username"/>
+		</association>
+	</resultMap>
 
   	<insert id="addOrEditBrand" parameterType="Brand" useGeneratedKeys="true" keyProperty="id">
 		insert into brands(address,category_id,brand_no,name,
@@ -109,6 +120,14 @@
 			(#{userBrandManagementRecord.user}, #{userBrandManagementRecord.brand})
 		</foreach>
 	</insert>
+	
+	<insert id="saveBrandRemark" parameterType="BrandRemark">
+		insert into brand_remark(user,brand_id,content) values(#{user.userId},#{brandId},#{content})
+	</insert>
+	
+	<select id="getBrandRemark" parameterType="int" resultMap="BrandRemarkResultMap">
+		select br.remark_id,br.brand_id,br.content,br.remark_time,u.user_id,u.username from brand_remark br left join users u on br.user=u.user_id where br.brand_id=#{brandId}
+	</select>
 	
 </mapper>
   

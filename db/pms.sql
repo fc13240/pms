@@ -1275,3 +1275,16 @@ CREATE TABLE user_brand_management (
   CONSTRAINT fk_user_brand_management_brand FOREIGN KEY (brand) REFERENCES brand_management (id) ON DELETE CASCADE,
   CONSTRAINT fk_user_brand_management_user FOREIGN KEY (user) REFERENCES users (user_id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE brand_remark(
+	remark_id INT AUTO_INCREMENT PRIMARY KEY,
+	USER INT ,
+	brand_id INT,
+	content VARCHAR(800),
+	remark_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT fk_brand_remark_user FOREIGN KEY(USER) REFERENCES users(user_id) ON DELETE CASCADE,
+	CONSTRAINT fk_brand_remark_brand FOREIGN KEY(brand_id) REFERENCES brand_management(id) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+INSERT INTO fee_payment_status VALUES(6,'已自助缴费');
+INSERT INTO order_status VALUES(5,'已自助缴费');

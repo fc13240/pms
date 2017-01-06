@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.lotut.pms.dao.BrandManagementDao;
 import com.lotut.pms.domain.BrandManagement;
+import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.BrandManagementService;
 
@@ -28,6 +29,16 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 	@Override
 	public void insertUserBrandManagements(List<Map<String, Integer>> userBrandManagementRecords) {
 		brandManagementDao.insertUserBrandManagements(userBrandManagementRecords);
+	}
+
+	@Override
+	public void saveBrandRemark(BrandRemark brandRemark) {
+		brandManagementDao.saveBrandRemark(brandRemark);
+	}
+
+	@Override
+	public List<BrandRemark> getBrandRemark(int brandId) {
+		return brandManagementDao.getBrandRemark(brandId);
 	}
 
 }

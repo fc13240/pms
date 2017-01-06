@@ -50,7 +50,9 @@
 						       <a href="<s:url value='/order/adminSearch.html?page.currentPage=1&orderStatus=3'/>">
 						       <li>订单完成 (<c:out value='${orderCountsByOrderStatus[(3).intValue()]["orderCount"]}' default="0"/>)</li>
 						        </a>
-						
+							   <a href="<s:url value='/order/search.html?page.currentPage=1&orderStatus=5'/>">
+								<li>已自助缴费 (<c:out value='${orderCountsByOrderStatus[(5).intValue()]["orderCount"]}' default="0"/>)</li>
+							   </a>
 						      </ul>		    
 						     </div>
 						</div>
@@ -136,7 +138,15 @@
 									<div> <a href="javascript:return void" onclick="setUserOrderToPaidSuccess(${order.id})">
 									  <button type="button" class="button button-rounded button-highlight">订单完成</button>
 									  </a> </div>
-								  </c:if> 								  							  
+								  </c:if> 	
+							  </td>
+							  <td>
+							  	 <c:if test="${order.orderStatus.statusId == 4}">
+									<div> <a href="javascript:return void" onclick="setUserOrderToSelfServicePay (${order.id})">
+									  <button type="button" style="width:140px;margin-left:15px" class="button button-rounded button-highlight">置为已自助缴费</button>
+									  
+									  </a> </div>
+								  </c:if>
 							  </td>
 							  </tr>
 							  </table>
@@ -319,6 +329,15 @@ function setUserOrderToPaid(orderId){
 function setUserOrderToPaidSuccess(orderId){
 	$.ajax({
 		url: "<s:url value='/order/setUserOrderToPaidSuccess.html'/>?orderId=" + orderId, 
+		type: 'get', 
+		success: function() {
+			location.reload();
+		}
+	});
+}
+function setUserOrderToSelfServicePay(orderId){
+	$.ajax({
+		url: "<s:url value='/order/setUserOrderToSelfServicePay.html'/>?orderId=" + orderId, 
 		type: 'get', 
 		success: function() {
 			location.reload();

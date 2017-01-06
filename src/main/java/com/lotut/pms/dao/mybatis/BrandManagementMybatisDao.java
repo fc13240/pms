@@ -8,6 +8,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.BrandManagementDao;
 import com.lotut.pms.dao.mapper.BrandManagementMapper;
 import com.lotut.pms.domain.BrandManagement;
+import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.Page;
 
 public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements BrandManagementDao{
@@ -30,6 +31,16 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 	@Override
 	public void insertUserBrandManagements(List<Map<String, Integer>> userBrandManagementRecords) {
 		brandManagementMapper.insertUserBrandManagements(userBrandManagementRecords);
+	}
+
+	@Override
+	public void saveBrandRemark(BrandRemark brandRemark) {
+		brandManagementMapper.saveBrandRemark(brandRemark);
+	}
+
+	@Override
+	public List<BrandRemark> getBrandRemark(int brandId) {
+		return brandManagementMapper.getBrandRemark(brandId);
 	}
 	
 	

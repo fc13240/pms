@@ -22,8 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Brand;
-import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandManagement;
+import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
@@ -270,6 +271,22 @@ public class BrandController {
 		}
 		brandManagementService.insertUserBrandManagements(userBrandManagementRecords);
 		return "brand_management_list";
+	}
+	
+	@RequestMapping(path="/saveBrandRemark")
+	public String saveBrandRemark(BrandRemark brandRemark) {
+		User user = PrincipalUtils.getCurrentPrincipal();
+		brandRemark.setUser(user);
+		brandManagementService.saveBrandRemark(brandRemark);
+		return "brand_management_list";
+	}
+	
+	@RequestMapping(path="/getBrandRemark")
+	public String getBrandRemark(int  brandId,Model model) {
+		List<BrandRemark> brandRemarks = brandManagementService.getBrandRemark(brandId);
+		model.addAttribute("brandRemarks",brandRemarks);
+		model.addAttribute("brandId",brandId);
+		return "brand_remarks";
 	}
 	
 }
