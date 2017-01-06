@@ -139,6 +139,11 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	
+	<bean id="brandNoticeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lotut.pms.dao.mapper.BrandNoticeMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	
 	
 	
 	
@@ -253,5 +258,10 @@
 	<bean id="brandManagementDao" class="com.lotut.pms.dao.mybatis.BrandManagementMybatisDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 		<property name="brandManagementMapper" ref="brandManagementMapper"/>
+	</bean>	
+	
+	<bean id="brandNoticeDao" class="com.lotut.pms.dao.mybatis.BrandNoticeMybatisDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+		<property name="brandNoticeMapper" ref="brandNoticeMapper"/>
 	</bean>	
 </beans>							
