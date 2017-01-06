@@ -2,6 +2,8 @@ package com.lotut.pms.dao;
 
 import java.util.List;
 
+import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandLegalStatus;
 import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.Page;
 
@@ -11,4 +13,7 @@ public interface BrandManagementDao {
 
 	List<BrandManagement> getUserBrandManagementByPage(Page page);
 	
+	List<BrandCategory> getAllBrandCategory();
+	
+	List<BrandLegalStatus> getAllBrandLegalStatus();
 }

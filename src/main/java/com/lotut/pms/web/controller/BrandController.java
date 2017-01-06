@@ -15,6 +15,7 @@ import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,9 +24,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandManagement;
+import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandLegalStatus;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.PatentStatus;
+import com.lotut.pms.domain.PatentType;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.WeChatOrder;
 import com.lotut.pms.service.BrandManagementService;
@@ -238,6 +243,7 @@ public class BrandController {
 		model.addAttribute("brands",brands);
 		model.addAttribute("page",page);
 		model.addAttribute("categorys",categorys);
+		addBrandCategoryAndBrandLegalStatusToModel(model);
 		return "brand_management_list";
 	}
 	 
@@ -281,4 +287,18 @@ public class BrandController {
 		sharePatentService.sharePatents(sharePatentRecords, userPatentRecords);*/
 		return "brand_management_list";
 	}
+	
+	@RequestMapping(path="searchBrandManagement")
+	 public String searchBrandManagement(@ModelAttribute("searchCondition")BrandManagementSearchCondition searchCondition,HttpSession session,Model model){
+		addBrandCategoryAndBrandLegalStatusToModel(model);
+		return "brand_management_list";
+	}
+	
+	private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
+		List<BrandCategory> allBrandCategory = brandManagementService.getAllBrandCategory();
+		List<BrandLegalStatus> allBrandLegalStatus = brandManagementService.getAllBrandLegalStatus();
+		model.addAttribute("allBrandCategory", allBrandCategory);
+		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
+	}
+	
 }

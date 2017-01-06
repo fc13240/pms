@@ -29,16 +29,19 @@
 			<id property="userId" column="user_id"/>
 			<result property="username" column="username"/>
 		</association>
-		<association property="brandCategory" javaType="BrandCategory">
-			<id property="categoryId" column="category_id"/>
-			<result property="categoryName" column="category_name"/>
-		</association>
-		<association property="brandLegalStatus" javaType="BrandLegalStatus">
-			<id property="legalStatusId" column="legal_status_id"/>
-			<result property="legalStatusName" column="legal_status_name"/>
-		</association>
+		<association property="brandCategory" resultMap="BrandCategoryResultMap"/>
+		<association property="brandLegalStatus" resultMap="BrandLegalStatusResultMap"/>
 		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 	</resultMap>
+	
+		<resultMap property="brandCategory" javaType="BrandCategoryResultMap">
+			<id property="categoryId" column="category_id"/>
+			<result property="categoryName" column="category_name"/>
+		</resultMap>
+		<resultMap property="brandLegalStatus" javaType="BrandLegalStatusResultMap">
+			<id property="legalStatusId" column="legal_status_id"/>
+			<result property="legalStatusName" column="legal_status_name"/>
+		</resultMap>
 
   	<insert id="addOrEditBrand" parameterType="Brand" useGeneratedKeys="true" keyProperty="id">
 		insert into brands(address,category_id,brand_no,name,
@@ -101,6 +104,14 @@
   		select count(*) from brand_management b 
   		where b.id in (select brand from user_brand_management where user =#{userId} and trash_status=1) 
   	</select>
+	
+	<select id="getAllBrandCategory"  resultMap="BrandCategoryResultMap">
+		select category_id,category_name from brand_category order by category_id asc;
+	</select>
+	
+	<select id="getAllBrandLegalStatus"  resultMap="BrandLegalStatusResultMap">
+		select legal_status_id,legal_status_name from brand_legal_status order by legal_status_id asc;
+	</select>
 	
 </mapper>
   
