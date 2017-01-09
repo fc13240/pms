@@ -1000,7 +1000,7 @@ function batchChangeNoticeViewStatus() {
 		}
 	}	
 	$.ajax({
-		url: "<s:url value='/notice/batchChangeNoticeViewStatus.html'/>?notices=" + notices, 
+		url: "<s:url value='/notice/batchChangeBrandNoticeViewStatus.html'/>?notices=" + notices, 
 		type: 'get', 
 		success: function() {
 			$("<div>操作成功</div>").dialog({

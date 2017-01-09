@@ -84,4 +84,11 @@ public class BrandNoticeController {
 		brandManagementService.insertUserBrandManagements(userBrandManagementRecords);
 		return "brand_notice_list";
 	}
+	
+	@RequestMapping(path="/batchChangeBrandNoticeViewStatus", method=RequestMethod.GET)
+	public void batchChangeBrandNoticeViewStatus(@RequestParam("notices")List<Long> noticeIdList) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		brandNoticeService.batchChangeBrandNoticeViewStatus(noticeIdList, userId);
+	}
+	
 }
