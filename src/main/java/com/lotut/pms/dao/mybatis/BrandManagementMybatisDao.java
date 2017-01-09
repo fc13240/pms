@@ -84,6 +84,9 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 	}
 
 	@Override
+	public void brandsTrash(List<Integer> brandManagementIds, int userId) {
+		brandManagementMapper.brandsTrash( brandManagementIds,userId);
+	}
 	public int insertOrUpdateBrand(BrandManagement brandManagement) {
 		return brandManagementMapper.insertOrUpdateBrand(brandManagement);
 	}

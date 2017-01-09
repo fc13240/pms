@@ -471,6 +471,15 @@ public class BrandController {
 		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
 	}
 	
+
+	@RequestMapping(path="/deleteBrandManagement", method=RequestMethod.GET)
+	public void deleteBrandManagement(@RequestParam("brands")List<Integer> brandManagementIds,PrintWriter writer){
+		int userId = PrincipalUtils.getCurrentUserId();
+		brandManagementService.brandsTrash(brandManagementIds,userId);
+		writer.write(1);
+	}
+	
+
 	 @RequestMapping(path="/deleteShareUser", method=RequestMethod.GET)
 		public void deleteShareUser(int brandId,int shareUserId,Model model,
 				HttpServletResponse response) throws IOException{

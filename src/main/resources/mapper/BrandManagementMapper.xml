@@ -248,6 +248,16 @@
 		order by bc.category_id asc;
 	</select>
 	
+
+		<update id="brandsTrash"  >
+		update user_brand_management ubm set ubm.trash_status=2
+		 where ubm.user=#{userId} and ubm.brand in 
+			<foreach item="id" collection="brands"
+			     open="(" separator="," close=")">
+			   #{id}
+			</foreach>		 
+	</update>
+
 	<select id="showBrandManagementDetail" parameterType="int" resultMap="brandManagementResultMap">
 		SELECT b.id,b.user,b.app_no,b.brand_no,b.similar_no,b.scope,
 			b.name,b.transaction_status,b.transaction_mode,b.price,b.app_person,
@@ -270,6 +280,7 @@
 	<delete id="deleteShareUser">
 		delete from user_brand_management where brand = #{brandId} and user=#{shareUserId}	   
 	</delete>
+
 
 	<select id="getUserExcelDate" resultMap="brandManagementResultMap">
 		 select bm.id,bm.app_no,bm.brand_no,bm.name,bm.similar_no,bm.scope,bm.transaction_status,bm.transaction_mode,bm.price,bm.app_person,bm.app_date,bm.publish_date, 

@@ -38,7 +38,10 @@ public interface BrandManagementService {
 	List<BrandLegalStatusCount>  getLegalStatusCount(int userId);
 	
 	List<BrandCategoryCount>  getBrandCategoryCount(int userId);
-	
+
+
+	void brandsTrash(List<Integer> brandManagementIds, int userId);
+
 	int insertOrUpdateBrand(BrandManagement brandManagement);
 	
 	void insertUserBrand(int userId,int brandId);
@@ -48,4 +51,5 @@ public interface BrandManagementService {
 	List<BrandNoticeType> getAllBrandNoticeTypes();
 	
 	void deleteShareUser(int brandId,int shareUserId);
+
 }

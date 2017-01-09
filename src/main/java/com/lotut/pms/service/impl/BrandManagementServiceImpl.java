@@ -87,6 +87,11 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 	}
 
 	@Override
+	public void brandsTrash(List<Integer> brandManagementIds, int userId) {
+		brandManagementDao.brandsTrash(brandManagementIds,userId);
+		
+	}
+
 	public int insertOrUpdateBrand(BrandManagement brandManagement) {
 		return brandManagementDao.insertOrUpdateBrand(brandManagement);
 	}

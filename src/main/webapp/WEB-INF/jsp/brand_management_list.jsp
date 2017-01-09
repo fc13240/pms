@@ -180,7 +180,7 @@
 							</a> 
 						</td>
 						<td>
-							<a href="javascript:return void" onclick="batchDelectPatents()" >
+							<a href="javascript:return void" onclick="batchDelectBrands()" >
 							<button style="margin-left:10px;" class="button button-primary  button-rounded" style="width:80px;" data-toggle="tooltip" data-placement="bottom" title="删除了还可以去回收站还原！">批量删除</button>
 							</a> 
 						</td>
@@ -436,23 +436,26 @@ $(function () {
 		window.open(url);
 	}
 	
-	function batchDelectPatents() {
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		var uniquePatentNos = []
-		if (!patentSelected) {
-			formutil.alertMessage('请选择专利');
-			
+	
+	
+	
+	function batchDelectBrands() {
+		var brandSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		var uniqueBrandNos = [];
+		if (!brandSelected) {
+			formutil.alertMessage('请选择商标');
 			return;
 		}
-		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
-		for (var i = 0; i < patents_checked.length; i++) {
-			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
-				uniquePatentNos.push(patents_checked[i]);
+		var brands_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'brand');
+		for (var i = 0; i < brands_checked.length; i++) {
+			if ($.inArray(brands_checked[i], uniqueBrandNos) == -1) {
+				uniqueBrandNos.push(brands_checked[i]);
 			}
 		}		
-		var patentIds = uniquePatentNos.join(",");
+		var brands = uniqueBrandNos.join(",");
+		
 		$.ajax({
-			url:"<s:url value='/patent/deletePatents.html'/>?patentIds=" + patentIds,
+			url:"<s:url value='/brand/deleteBrandManagement.html'/>?brands=" + brands,
 			type:"get",
 				success: function(data) {
 					formutil.alertMessage('删除操作成功',true);	
