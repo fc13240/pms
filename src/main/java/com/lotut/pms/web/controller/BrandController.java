@@ -1,7 +1,10 @@
 package com.lotut.pms.web.controller;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,58 +47,58 @@ import com.lotut.pms.web.util.FileOption;
 import com.lotut.pms.web.util.WebUtils;
 
 @Controller
-@RequestMapping(path="/brand")
+@RequestMapping(path = "/brand")
 public class BrandController {
-	
+
 	private BrandService brandService;
 	private BrandManagementService brandManagementService;
 	private FriendService friendService;
 
 	@Autowired
-	public BrandController(BrandService brandService,BrandManagementService brandManagementService,FriendService friendService) {
+	public BrandController(BrandService brandService, BrandManagementService brandManagementService,
+			FriendService friendService) {
 		this.brandService = brandService;
 		this.brandManagementService = brandManagementService;
 		this.friendService = friendService;
 	}
-	
-	@RequestMapping(path="/showUploadForm", method=RequestMethod.GET)
+
+	@RequestMapping(path = "/showUploadForm", method = RequestMethod.GET)
 	public String showUploadForm() {
 		return "brand_upload_form";
-	}	
+	}
 
-	@RequestMapping(path="/brandAddForm",method=RequestMethod.POST)
+	@RequestMapping(path = "/brandAddForm")
 	public String brandAddForm(Model model) {
 		List<BrandCategory> categorys = brandService.getAllCategorys();
-		model.addAttribute("categorys",categorys);
+		model.addAttribute("categorys", categorys);
 		return "brand_add_form";
-		
-	}		
 
-	@RequestMapping(path="/brandAdd")
+	}
+
+	@RequestMapping(path = "/brandAdd")
 	public String brandAdd(Brand brand) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		User user = new User();
 		user.setUserId(userId);
 		brand.setUser(user);
-		int brandId=brandService.addOrEditBrand(brand);
+		int brandId = brandService.addOrEditBrand(brand);
 		brandService.insertUserBrand(userId, brand.getId());
 		return "redirect:/brand/list.html";
-	}	
+	}
 
-	@RequestMapping(path="/brandUpdateForm")
-	public String brandUpdateForm(int brandId,Model model) {
+	@RequestMapping(path = "/brandUpdateForm")
+	public String brandUpdateForm(int brandId, Model model) {
 		List<BrandCategory> categorys = brandService.getAllCategorys();
-		
-		
-		Brand brand= brandService.getUserBrandsById(brandId);
-		
-		model.addAttribute("categorys",categorys);
-		model.addAttribute("brand",brand);
-		return "brand_update_form";
-		
-	}		
 
-	@RequestMapping(path="/brandUpdate")
+		Brand brand = brandService.getUserBrandsById(brandId);
+
+		model.addAttribute("categorys", categorys);
+		model.addAttribute("brand", brand);
+		return "brand_update_form";
+
+	}
+
+	@RequestMapping(path = "/brandUpdate")
 	public String brandUpdate(Brand brand) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		User user = new User();
@@ -103,18 +106,19 @@ public class BrandController {
 		brand.setUser(user);
 		brandService.addOrEditBrand(brand);
 		return "redirect:/brand/list.html";
-	}		
-	
-	@RequestMapping(path="/upload", method=RequestMethod.POST)
-	public String uploadBrands(@RequestParam("brandFile")Part brandFile, Model model){
-//			String fileName=brandFile.getSubmittedFileName();
+	}
+
+	@RequestMapping(path = "/upload", method = RequestMethod.POST)
+	public String uploadBrands(@RequestParam("brandFile") Part brandFile, Model model) {
+		// String fileName=brandFile.getSubmittedFileName();
 		try {
-			if (!brandFile.getSubmittedFileName().endsWith(".xls") && !brandFile.getSubmittedFileName().endsWith(".xlsx")) {
+			if (!brandFile.getSubmittedFileName().endsWith(".xls")
+					&& !brandFile.getSubmittedFileName().endsWith(".xlsx")) {
 				throw new RuntimeException("上传的文件不是excel表格");
 			}
 			InputStream is = brandFile.getInputStream();
 			int userId = PrincipalUtils.getCurrentUserId();
-			List<Brand> brands=brandService.uploadBrands(is, userId);
+			List<Brand> brands = brandService.uploadBrands(is, userId);
 			model.addAttribute("message", brands.size());
 			return "brand_upload_success";
 		} catch (Exception e) {
@@ -123,120 +127,119 @@ public class BrandController {
 			return "brand_common_message";
 		}
 	}
-	
-	@RequestMapping(path="list")
-	public String BrandList(HttpSession session,Page page,Model model){
+
+	@RequestMapping(path = "list")
+	public String BrandList(HttpSession session, Page page, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
 		page.setPageSize(WebUtils.getPageSize(session));
-		if(page.getCurrentPage()<1){
+		if (page.getCurrentPage() < 1) {
 			page.setCurrentPage(1);
 		}
 		int totalCount;
-		List<Brand> brands=new ArrayList<Brand>();
-		if(PrincipalUtils.isOrderProcessor()){
+		List<Brand> brands = new ArrayList<Brand>();
+		if (PrincipalUtils.isOrderProcessor()) {
 			brands = brandService.getBrandsByPage(page);
 			totalCount = brandService.getBrandsCounts();
 			page.setTotalRecords(totalCount);
-		}else{
+		} else {
 			brands = brandService.getUserBrandsByPage(page);
 			totalCount = brandService.getUserBrandsCount(userId);
 			page.setTotalRecords(totalCount);
 		}
 		List<BrandCategory> categorys = brandService.getAllCategorys();
-		model.addAttribute("brands",brands);
-		model.addAttribute("page",page);
-		model.addAttribute("categorys",categorys);
+		model.addAttribute("brands", brands);
+		model.addAttribute("page", page);
+		model.addAttribute("categorys", categorys);
 		return "brand_list";
 	}
-	
-	@RequestMapping(path="/updateCheckStatus", method=RequestMethod.GET)
-	public void updateCheckStatus(@RequestParam("status")int status,@RequestParam("id")int id,PrintWriter pw){
+
+	@RequestMapping(path = "/updateCheckStatus", method = RequestMethod.GET)
+	public void updateCheckStatus(@RequestParam("status") int status, @RequestParam("id") int id, PrintWriter pw) {
 		brandService.updateCheckStatus(status, id);
 		pw.write(1);
 	}
-	
-	@RequestMapping(path="/updateRecommend", method=RequestMethod.GET)
-	public void updateRecommend(@RequestParam("status")int status,@RequestParam("id")int id,PrintWriter pw){
+
+	@RequestMapping(path = "/updateRecommend", method = RequestMethod.GET)
+	public void updateRecommend(@RequestParam("status") int status, @RequestParam("id") int id, PrintWriter pw) {
 		brandService.updateRecommend(status, id);
 		pw.write(1);
 	}
-	
-	@RequestMapping(path="/searchUserBrands")
-	public String searchUserBrands(HttpSession session,Model model,BrandSearchCondition searchCondition){
 
-		Page page =searchCondition.getPage();
+	@RequestMapping(path = "/searchUserBrands")
+	public String searchUserBrands(HttpSession session, Model model, BrandSearchCondition searchCondition) {
+
+		Page page = searchCondition.getPage();
 		int userId = PrincipalUtils.getCurrentUserId();
-		if(page.getCurrentPage()<1){
+		if (page.getCurrentPage() < 1) {
 			page.setCurrentPage(1);
 		}
 		searchCondition.setUserId(userId);
-		int totalCount=0;
-		List<Brand> brands =null;
-		List<BrandCategory> categorys=brandService.getAllCategorys();
-		
-		if(PrincipalUtils.isOrderProcessor()||PrincipalUtils.isAdmin()||PrincipalUtils.isPlatform()){
+		int totalCount = 0;
+		List<Brand> brands = null;
+		List<BrandCategory> categorys = brandService.getAllCategorys();
+
+		if (PrincipalUtils.isOrderProcessor() || PrincipalUtils.isAdmin() || PrincipalUtils.isPlatform()) {
 			totalCount = brandService.getsearchBrandsCount(searchCondition);
 			page.setTotalRecords(totalCount);
 			page.setPageSize(WebUtils.getPageSize(session));
 			brands = brandService.searchBrandsByPage(searchCondition);
-		}else{
+		} else {
 			totalCount = brandService.getsearchUserBrandsCount(searchCondition);
 			page.setTotalRecords(totalCount);
 			page.setPageSize(WebUtils.getPageSize(session));
 			brands = brandService.searchUserBrandsByPage(searchCondition);
 		}
-		
-		model.addAttribute("brands",brands);
-		model.addAttribute("searchCondition",searchCondition);
-		model.addAttribute("page",page);
-		model.addAttribute("categorys",categorys);
+
+		model.addAttribute("brands", brands);
+		model.addAttribute("searchCondition", searchCondition);
+		model.addAttribute("page", page);
+		model.addAttribute("categorys", categorys);
 		return "brand_list";
 	}
-	
-	@RequestMapping(path="/deleteBrand")
-	public void deleteBrand(int brandId,PrintWriter pw){
+
+	@RequestMapping(path = "/deleteBrand")
+	public void deleteBrand(int brandId, PrintWriter pw) {
 		brandService.deleteBrand(brandId);
 		pw.write(1);
 	}
-	
-	
-	@RequestMapping(path="/getWechatOrderList")
-	public String getWechatOrderList(HttpSession session,Page page,Model model){
-		if(page.getCurrentPage()<1){
+
+	@RequestMapping(path = "/getWechatOrderList")
+	public String getWechatOrderList(HttpSession session, Page page, Model model) {
+		if (page.getCurrentPage() < 1) {
 			page.setCurrentPage(1);
 		}
 		page.setPageSize(WebUtils.getPageSize(session));
-		List<WeChatOrder> weChatOrders=brandService.getWeChatUserOrderRecords(page);
+		List<WeChatOrder> weChatOrders = brandService.getWeChatUserOrderRecords(page);
 		int totalRecords = brandService.getWeChatOrderCount();
 		page.setTotalRecords(totalRecords);
-		model.addAttribute("weChatOrders",weChatOrders);
-		model.addAttribute("page",page);
+		model.addAttribute("weChatOrders", weChatOrders);
+		model.addAttribute("page", page);
 		return "wechat_order_list";
 	}
-	
-	 @RequestMapping(path="/uploadbrandEntrustFile")
-	    public void uploadUserPhoto(MultipartFile file,HttpServletResponse response) throws IOException{
-	    	String fatherPath=Settings.BRAND_IMAGE_PATH;
-	    	String saveUrl=Settings.BRAND_IMAGE_URL;
-	    	int userId=PrincipalUtils.getCurrentUserId();
-	    	long avatarSize =file.getSize();
-	    	final long uploadAvatarSize=300*1024;
-	    	if(avatarSize>uploadAvatarSize){
-					WebUtils.writeJsonStrToResponse(response, "overLimit");
-	    	}else{
-	    		
-	    		FileOption.brandShowImgFileOption(userId, file, fatherPath, response,saveUrl);
-	    	}
 
-	    }
-	 
-	 @RequestMapping(path="/getBrandManagementlist")
-	 public String getBrandManagementlist(HttpSession session,Page page,Model model){
+	@RequestMapping(path = "/uploadbrandEntrustFile")
+	public void uploadUserPhoto(MultipartFile file, HttpServletResponse response) throws IOException {
+		String fatherPath = Settings.BRAND_IMAGE_PATH;
+		String saveUrl = Settings.BRAND_IMAGE_URL;
+		int userId = PrincipalUtils.getCurrentUserId();
+		long avatarSize = file.getSize();
+		final long uploadAvatarSize = 300 * 1024;
+		if (avatarSize > uploadAvatarSize) {
+			WebUtils.writeJsonStrToResponse(response, "overLimit");
+		} else {
+
+			FileOption.brandShowImgFileOption(userId, file, fatherPath, response, saveUrl);
+		}
+
+	}
+
+	@RequestMapping(path = "getBrandManagementlist")
+	public String getBrandManagementlist(HttpSession session, Page page, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
 		page.setPageSize(WebUtils.getPageSize(session));
-		if(page.getCurrentPage()<1){
+		if (page.getCurrentPage() < 1) {
 			page.setCurrentPage(1);
 		}
 		int totalCount = brandManagementService.getUserBrandManagementCount(userId);
@@ -245,6 +248,8 @@ public class BrandController {
 		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(userId);
 		List<BrandNoticeType> noticeTypes = brandManagementService.getAllBrandNoticeTypes();
 		page.setTotalRecords(totalCount);
+		model.addAttribute("brands", brands);
+		model.addAttribute("page", page);
 		model.addAttribute("brands",brands);
 		model.addAttribute("page",page);
 		model.addAttribute("noticeTypes",noticeTypes);
@@ -253,29 +258,30 @@ public class BrandController {
 		model.addAttribute("brandCategory", brandCategory);
 		return "brand_management_list";
 	}
-	 
-	@RequestMapping(path="showFriends", method=RequestMethod.GET)
+
+	@RequestMapping(path = "showFriends", method = RequestMethod.GET)
 	public String showFriends(Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<User> friends = friendService.getUserFriends(userId);
 		model.addAttribute("friends", friends);
 		return "brand_select_friends";
 	}
-	
-	@RequestMapping(path="searchFriends", method=RequestMethod.GET)
-	public String searchFriends(@RequestParam("keyword")String keyword, Model model) {
+
+	@RequestMapping(path = "searchFriends", method = RequestMethod.GET)
+	public String searchFriends(@RequestParam("keyword") String keyword, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<User> friends = friendService.searchUserFriends(userId, keyword);
 		model.addAttribute("friends", friends);
 		return "brand_select_friends";
 	}
-	
-	@RequestMapping(path="/addBrandManagementShares", method=RequestMethod.GET)
-	public String shareBrandManagements(@RequestParam("brands")List<Integer> brandManagementIds, @RequestParam("friends")List<Integer> friendIds) {
+
+	@RequestMapping(path = "/addBrandManagementShares", method = RequestMethod.GET)
+	public String shareBrandManagements(@RequestParam("brands") List<Integer> brandManagementIds,
+			@RequestParam("friends") List<Integer> friendIds) {
 		List<Map<String, Integer>> userBrandManagementRecords = new ArrayList<>();
-		for (int brandManagementId: brandManagementIds) {
-			for (int friendId: friendIds) {
-				Map<String, Integer> userBrandManagementRecord =  new HashMap<String, Integer>();
+		for (int brandManagementId : brandManagementIds) {
+			for (int friendId : friendIds) {
+				Map<String, Integer> userBrandManagementRecord = new HashMap<String, Integer>();
 				userBrandManagementRecord.put("user", friendId);
 				userBrandManagementRecord.put("brand", brandManagementId);
 				userBrandManagementRecords.add(userBrandManagementRecord);
@@ -284,32 +290,38 @@ public class BrandController {
 		brandManagementService.insertUserBrandManagements(userBrandManagementRecords);
 		return "brand_management_list";
 	}
-	
-	@RequestMapping(path="/saveBrandRemark")
-	public String saveBrandRemark(BrandRemark brandRemark) {
+
+	@RequestMapping(path = "/saveBrandRemark")
+	public void saveBrandRemark(@ModelAttribute("brandRemark") BrandRemark brandRemark, PrintWriter pw) {
 		User user = PrincipalUtils.getCurrentPrincipal();
 		brandRemark.setUser(user);
 		brandManagementService.saveBrandRemark(brandRemark);
-		return "brand_management_list";
+		pw.write("success");
 	}
-	
-	@RequestMapping(path="/getBrandRemark")
-	public String getBrandRemark(int  brandId,Model model) {
+
+	@RequestMapping(path = "/getBrandRemark")
+	public String getBrandRemark(int brandId, Model model) {
 		List<BrandRemark> brandRemarks = brandManagementService.getBrandRemark(brandId);
-		model.addAttribute("brandRemarks",brandRemarks);
-		model.addAttribute("brandId",brandId);
+		model.addAttribute("brandRemarks", brandRemarks);
+		model.addAttribute("brandId", brandId);
 		return "brand_remarks";
 	}
-	
-	@RequestMapping(path="/searchBrandManagement" ,method=RequestMethod.GET)
-	 public String searchBrandManagement(@ModelAttribute("searchCondition")BrandManagementSearchCondition searchCondition,HttpSession session,Model model){
-		Page page =searchCondition.getPage();
+
+	@RequestMapping(path = "/searchBrandManagement", method = RequestMethod.GET)
+	public String searchBrandManagement(
+			@ModelAttribute("searchCondition") BrandManagementSearchCondition searchCondition, HttpSession session,
+			Model model) {
+		Page page = searchCondition.getPage();
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
 		page.setPageSize(WebUtils.getPageSize(session));
-		int totalCount=brandManagementService.searchUserBrandManagementByCount(searchCondition);
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount = brandManagementService.searchUserBrandManagementByCount(searchCondition);
 		page.setTotalRecords(totalCount);
-		List<BrandManagement> brands =brandManagementService.searchUserBrandManagementByPage(searchCondition);
+		List<BrandManagement> brands = brandManagementService.searchUserBrandManagementByPage(searchCondition);
+		page.setTotalRecords(totalCount);
 		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(page.getUserId());
 		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(page.getUserId());
 		model.addAttribute("brands",brands);
@@ -319,6 +331,29 @@ public class BrandController {
 		addBrandCategoryAndBrandLegalStatusToModel(model);
 		return "brand_management_list";
 	}
+
+	@RequestMapping(path = "/downloadBrandExcel")
+	public void downloadBrandExcel(@RequestParam List<Integer> brandIds, HttpServletResponse response)
+			throws IOException {
+		response.setHeader("X-FRAME-OPTIONS", "SAMEORIGIN");
+		response.setContentType("application/vnd.ms-excel");
+		String excelName = PrincipalUtils.getCurrentPrincipal().getUsername() + System.currentTimeMillis() +".xls";
+		String brandExcelPath = brandManagementService.exportExcelUserBrand(brandIds, excelName);
+		response.setHeader("Content-Disposition", "attachment;filename=" + excelName);
+		
+		final int BUFFER_SIZE = 8192;
+		byte[] buffer = new byte[BUFFER_SIZE];
+		try (OutputStream out = response.getOutputStream();
+				BufferedInputStream in = new BufferedInputStream(new FileInputStream(brandExcelPath))) {
+			int bytesRead = -1;
+			while ((bytesRead = in.read(buffer)) != -1) {
+				out.write(buffer, 0, bytesRead);
+			}
+			out.close();
+			in.close();
+		}
+	}
+
 	
 	@RequestMapping(path="/brandManagementAddForm")
 	public String brandManagementAddForm(Model model) {
@@ -425,14 +460,18 @@ public class BrandController {
 	    	int userId=PrincipalUtils.getCurrentUserId();
 	    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
 	    }
-	 
-	 private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
+	private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
+
 		List<BrandCategory> categorys = brandManagementService.getAllBrandCategory();
 		List<BrandLegalStatus> allBrandLegalStatus = brandManagementService.getAllBrandLegalStatus();
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
 	}
-	 
 	
-	
+	 @RequestMapping(path="/deleteShareUser", method=RequestMethod.GET)
+		public void deleteShareUser(int brandId,int shareUserId,Model model,
+				HttpServletResponse response) throws IOException{
+		 	brandManagementService.deleteShareUser(brandId,shareUserId);
+			WebUtils.writeJsonStrToResponse(response, "success");
+		}	
 }

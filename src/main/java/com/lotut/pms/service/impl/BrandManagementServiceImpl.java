@@ -3,6 +3,7 @@ package com.lotut.pms.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.lotut.pms.constants.Settings;
 import com.lotut.pms.dao.BrandManagementDao;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandCategoryCount;
@@ -14,6 +15,7 @@ import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.BrandManagementService;
+import com.lotut.pms.service.utils.BrandExcelGenerrator;
 
 public class BrandManagementServiceImpl implements BrandManagementService{
 	private BrandManagementDao brandManagementDao;
@@ -67,6 +69,14 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 	}
 
 	@Override
+	public String exportExcelUserBrand(List<Integer> brandIds,String excelName) {
+		List<BrandManagement> brands = brandManagementDao.getUserExcelDate(brandIds);
+		String brandExcelPath = Settings.TEMP_DIR + excelName;
+		BrandExcelGenerrator.writeBrandToexcel(brands, brandExcelPath);
+		return brandExcelPath;
+	}
+
+	@Override
 	public List<BrandLegalStatusCount> getLegalStatusCount(int userId) {
 		return brandManagementDao.getLegalStatusCount(userId);
 	}
@@ -93,6 +103,11 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 	
 	public List<BrandNoticeType> getAllBrandNoticeTypes() {
 		return brandManagementDao.getAllBrandNoticeTypes();
+	}
+
+	@Override
+	public void deleteShareUser(int brandId, int shareUserId) {
+		brandManagementDao.deleteShareUser(brandId, shareUserId);
 	}
 
 	

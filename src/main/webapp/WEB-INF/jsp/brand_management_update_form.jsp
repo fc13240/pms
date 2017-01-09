@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
-<title>龙图腾专利管家-商标列表</title>
+<title>龙图腾专利管家-修改商标</title>
 <%@ include file="_css.jsp" %>
 
 </head>
@@ -253,18 +253,22 @@ height:37px;
 											<button type="button" onclick="uploadApplicationClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
 									</tr>
-									<c:if test="${success}">
-										<h5>共享人：</h5>
+									<se:authorize access="hasRole('ROLE_ORDER')">
+									<tr>
+										<th>共享人</th>
+										<td>
 										<c:forEach items="${brand.shareUsers}" var="shareBrand" varStatus="status">	
-											<span class='ss-item' id="shareUser${status.index}">${sharePatent.username}
+											<span class='ss-item' id="shareUser${status.index}">${shareBrand.username}
 												<a class='icon-btn-x' href="javascript: return void;"
-													onclick="deleteShareUser(${brand.id},${brand.user.userId},${shareBrand.userId},${status.index})" >								
+													onclick="deleteShareUser(${brand.id},${shareBrand.userId},${status.index})" >								
 													<img src="<s:url value='/temp/images/remove.png'/>" style="float:left;" />
 												</a>
 											</span>		
 								        </c:forEach>
 										<br>
-									</c:if>	  									
+										</td>
+									</tr>
+									</se:authorize>	  									
 									</tbody>
 								</table>	
 							<div class="form-actions">
@@ -554,7 +558,20 @@ function uploadApplicationClick(){
 	$("#uploadApplicationFileBtn").trigger("click");
 }
 
+function deleteShareUser(brandId,shareUserId,index) {
+	$.ajax({
+		url : "<s:url value='/brand/deleteShareUser.html'/>?brandId="+ brandId +"&shareUserId="+shareUserId,
+		type : "get",
+		success : function(data) {
+			$("#shareUser"+index).remove();
+		},
+		error : function() {
+			alert("操作失败，请稍后再试！");
+		}
+	})
+}
 </script>
+
 <script type="text/javascript">
 var mydateInput = document.getElementById("appDateId");
 var date = new Date();

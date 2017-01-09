@@ -33,6 +33,8 @@ public interface BrandManagementService {
 	
 	int searchUserBrandManagementByCount(BrandManagementSearchCondition searchCondition);
 	
+	String exportExcelUserBrand(List<Integer> brandIds,String excelName);
+
 	List<BrandLegalStatusCount>  getLegalStatusCount(int userId);
 	
 	List<BrandCategoryCount>  getBrandCategoryCount(int userId);
@@ -44,4 +46,6 @@ public interface BrandManagementService {
 	BrandManagement showBrandManagementDetail(int brandId);
 
 	List<BrandNoticeType> getAllBrandNoticeTypes();
+	
+	void deleteShareUser(int brandId,int shareUserId);
 }
