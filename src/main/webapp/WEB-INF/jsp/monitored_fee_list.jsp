@@ -179,6 +179,7 @@
 									  <td>交费截止日结束</td>
 									  <td>关键字</td>
 									  <td></td>
+									  <td></td>
 									</tr>
 									<tr>
 									  <td>
@@ -222,6 +223,9 @@
 									  </td>
 									  <td>
 									  	<button type="submit" class="button button-caution button-rounded">查询</button>
+									  </td>
+									  <td>
+									  	<span style="position:absolute;color:red;right:38px;">咨询QQ：3001816590</span>
 									  </td>
 									</tr>							
 								</table>	  	

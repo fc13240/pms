@@ -271,7 +271,7 @@
 							  修改
 							  </a>
 							  <br>
-							   <a  href="javascript:return void" onclick="delectPatent('<c:out value='${patent.patentId}'/>')">
+							   <a  target="_blank" href="<s:url value='/brand/uploadBrandNoticeForm.html'/>?brandId=${brand.id}">
 							 上传通知书
 							  </a>
 							 
