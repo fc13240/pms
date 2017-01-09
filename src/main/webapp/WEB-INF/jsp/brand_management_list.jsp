@@ -56,8 +56,8 @@
 						  <ul class="qxjk-ul">
 						  <c:forEach items="${brandLegalStatus}" var="brandLegalStatus">
 						  	<li>
-							<a href="<s:url value='/brand/searchBrandManagement.html?page.currentPage=1&brandLegalStatus=${brandLegalStatus.brandLegalStatus.legalStatusId}'/>">
-							${brandLegalStatus.brandLegalStatus.legalStatusName} (<c:out value='${brandLegalStatus.brandCount}' default="0"/>)</a>
+							<a href="<s:url value='/brand/searchBrandManagement.html?page.currentPage=1&brandCategory=&brandLegalStatus=${brandLegalStatus.legalStatusId}&transactionStatus=&appDate=&keyword='/>">
+							${brandLegalStatus.legalStatusName} (<c:out value='${brandLegalStatus.brandCount}' default="0"/>)</a>
 							</li>
 							</c:forEach>
 						  </ul>
@@ -66,8 +66,8 @@
 						  <ul class="qxjk-ul">
 						  	<c:forEach items="${brandCategory}" var="brandCategory">
 							  	<li>
-								<a href="<s:url value='/brand/searchBrandManagement.html?page.currentPage=1&brandCategory=${brandCategory.brandCategory.categoryId}'/>">
-								${brandCategory.brandCategory.categoryName} (<c:out value='${brandCategory.brandCount}' default="0"/>)</a>
+								<a href="<s:url value='/brand/searchBrandManagement.html?page.currentPage=1&brandCategory=${brandCategory.categoryId}&brandLegalStatus=&transactionStatus=&appDate=&keyword='/>">
+								${brandCategory.categoryName} (<c:out value='${brandCategory.brandCount}' default="0"/>)</a>
 								</li>
 							</c:forEach>
 						  </ul>
@@ -273,7 +273,7 @@
 							  <a target="_blank" href="<s:url value='/brand/getBrandRemark.html'/>?brandId=<c:out value='${brand.id}'/>">
 							  备注
 							  </a>&nbsp;
-							   <a target="_blank" href="<s:url value='/patent/showPatentDetail.html'/>?patentId=${patent.patentId}&ownerId=${patent.ownerId}">
+							   <a target="_blank" href="<s:url value='/brand/brandManagementUpdateForm.html'/>?brandId=${brand.id}">
 							  修改
 							  </a>
 							  <br>

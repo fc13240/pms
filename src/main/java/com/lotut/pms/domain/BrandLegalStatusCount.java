@@ -2,15 +2,17 @@ package com.lotut.pms.domain;
 
 public class BrandLegalStatusCount {
 	private Integer brandCount;
-	private BrandLegalStatus brandLegalStatus;
+	private int legalStatusId;
+	private String legalStatusName;
 	
 	
 	
 	public BrandLegalStatusCount() {
 	}
-	public BrandLegalStatusCount(Integer brandCount, BrandLegalStatus brandLegalStatus) {
+	public BrandLegalStatusCount(Integer brandCount, int legalStatusId, String legalStatusName) {
 		this.brandCount = brandCount;
-		this.brandLegalStatus = brandLegalStatus;
+		this.legalStatusId = legalStatusId;
+		this.legalStatusName = legalStatusName;
 	}
 	public Integer getBrandCount() {
 		return brandCount;
@@ -18,11 +20,21 @@ public class BrandLegalStatusCount {
 	public void setBrandCount(Integer brandCount) {
 		this.brandCount = brandCount;
 	}
-	public BrandLegalStatus getBrandLegalStatus() {
-		return brandLegalStatus;
+	public int getLegalStatusId() {
+		return legalStatusId;
 	}
-	public void setBrandLegalStatus(BrandLegalStatus brandLegalStatus) {
-		this.brandLegalStatus = brandLegalStatus;
+	public void setLegalStatusId(int legalStatusId) {
+		this.legalStatusId = legalStatusId;
 	}
+	public String getLegalStatusName() {
+		return legalStatusName;
+	}
+	public void setLegalStatusName(String legalStatusName) {
+		this.legalStatusName = legalStatusName;
+	}
+	
+	
+	
+	
 	
 }

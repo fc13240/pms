@@ -43,4 +43,10 @@ public interface BrandManagementMapper {
 
 	List<BrandNoticeType> getAllBrandNoticeTypes();
 	
+	int insertOrUpdateBrand(BrandManagement brandManagement);
+	
+	void insertUserBrand(@Param("userId")int userId,@Param("brandId")int brandId);
+	
+	BrandManagement showBrandManagementDetail(int brandId);
+	
 }
