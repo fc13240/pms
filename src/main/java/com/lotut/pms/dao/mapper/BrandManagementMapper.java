@@ -2,12 +2,12 @@ package com.lotut.pms.dao.mapper;
 
 import java.util.List;
 import java.util.Map;
-import org.apache.ibatis.annotations.Param;
+
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandLegalStatus;
 import com.lotut.pms.domain.BrandManagement;
-import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
+import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.Page;
 
 public interface BrandManagementMapper {
@@ -29,5 +29,7 @@ public interface BrandManagementMapper {
 	List<BrandManagement> searchUserBrandManagementByPage(BrandManagementSearchCondition searchCondition);
 	
 	int searchUserBrandManagementByCount(BrandManagementSearchCondition searchCondition);
+	
+	List<BrandManagement> getUserExcelDate(List<Integer> brandIds);
 	
 }

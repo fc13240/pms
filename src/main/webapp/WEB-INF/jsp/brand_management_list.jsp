@@ -312,7 +312,7 @@
 							<td style="text-align:center"><a  href="<s:url value='/brand/showFriends.html'/>?brands=<c:out value='${brand.id}'/>">
 							  分享
 							  </a>&nbsp;
-							  <a target="_blank" href="<s:url value='/patent/showRemarks.html'/>?patentId=<c:out value='${patent.patentId}'/>">
+							  <a target="_blank" href="<s:url value='/brand/getBrandRemark.html'/>?brandId=<c:out value='${brand.id}'/>">
 							  备注
 							  </a>&nbsp;
 							   <a target="_blank" href="<s:url value='/patent/showPatentDetail.html'/>?patentId=${patent.patentId}&ownerId=${patent.ownerId}">
@@ -399,7 +399,7 @@
 		</div>
 	</div>	
 </div>
-<iframe id="patentExcelFileFrame" style="display:none"></iframe>	
+<iframe id="brandExcelFileFrame" style="display:none"></iframe>	
 
 <script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 <script type="text/javascript">
@@ -538,15 +538,15 @@ $(function () {
 	}
 	
 	function exportPatents(){
-		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		var brandSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 		
-		if (!patentSelected) {
-			formutil.alertMessage('请选择要导出的专利');
+		if (!brandSelected) {
+			formutil.alertMessage('请选择要导出的商标！');
 			return;
 		}
-		var patents = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
-		var iframe = document.getElementById('patentExcelFileFrame');
-		iframe.src = "<s:url value='/patent/exportPatents.html'/>?patentIds=" + patents;
+		var brandIds = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'brand');
+		var iframe = document.getElementById('brandExcelFileFrame');
+		iframe.src = "<s:url value='/brand/downloadBrandExcel.html'/>?brandIds=" + brandIds;
 		
 	}
 </script>

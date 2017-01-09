@@ -64,6 +64,11 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 	public int searchUserBrandManagementByCount(BrandManagementSearchCondition searchCondition) {
 		return brandManagementMapper.searchUserBrandManagementByCount(searchCondition);
 	}
+
+	@Override
+	public 	List<BrandManagement> getUserExcelDate(List<Integer> brandIds) {
+		return brandManagementMapper.getUserExcelDate(brandIds);
+	}
 	
 	
 }

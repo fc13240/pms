@@ -197,5 +197,29 @@ public class BrandManagement {
 	public void setShareUsers(List<User> shareUsers) {
 		this.shareUsers = shareUsers;
 	}
+	
+	public String getTransactionStatusText() {
+		if(transactionStatus == 0){
+			return "待发布";
+		}
+		else if(transactionStatus == 1){
+			return "待交易";
+		}
+		else if(transactionStatus == 2){
+			return "已预订";
+		}
+		else if(transactionStatus == 3){
+			return "已付款待变更";
+		}
+		else if(transactionStatus == 4){
+			return "已变更待合格";
+		}
+		else if(transactionStatus == 5){
+			return "交易成功";
+		}
+		else {
+			return "其他";
+		}
+	}
 }
 

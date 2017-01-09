@@ -29,4 +29,6 @@ public interface BrandManagementService {
 	List<BrandManagement> searchUserBrandManagementByPage(BrandManagementSearchCondition searchCondition);
 	
 	int searchUserBrandManagementByCount(BrandManagementSearchCondition searchCondition);
+	
+	String exportExcelUserBrand(List<Integer> brandIds,String excelName);
 }
