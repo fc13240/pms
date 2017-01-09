@@ -77,6 +77,20 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 	}
 
 	@Override
+	public int insertOrUpdateBrand(BrandManagement brandManagement) {
+		return brandManagementDao.insertOrUpdateBrand(brandManagement);
+	}
+
+	@Override
+	public void insertUserBrand(int userId, int brandId) {
+		brandManagementDao.insertUserBrand(userId, brandId);
+	}
+
+	@Override
+	public BrandManagement showBrandManagementDetail(int brandId) {
+		return brandManagementDao.showBrandManagementDetail(brandId);
+	}
+	
 	public List<BrandNoticeType> getAllBrandNoticeTypes() {
 		return brandManagementDao.getAllBrandNoticeTypes();
 	}

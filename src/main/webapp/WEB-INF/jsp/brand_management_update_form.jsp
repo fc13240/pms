@@ -100,53 +100,46 @@ height:37px;
 					
 					<div class="hy_zx_r02">
 						<div class="lou-content" style="padding:10px;">
-							<form method="post" action="<s:url value='/brand/brandManageAdd.html'/>">
+							<form method="post" action="<s:url value='/brand/brandManagementUpdate.html'/>">
 								<table class="table_con">
 									<tbody>
 									
 									<tr>
 										<th width="110">商标分类</th>
 										<td>
-											<%-- <input name="id" value="${articleId }" type="hidden"/> --%>
-											<%-- <select name="brandCategory.categoryId" class="form-control" style="width:120px;" required>
-												<option value="">--请选择--</option>
-												  <c:forEach items="${categorys }" var="category">
-												  	<option value="${category.categoryId }">${category.categoryName }</option>
-												  </c:forEach>					
-											</select> 	 --%>
 											<c:forEach items="${categorys}" var="category" varStatus="status">
-											<input <c:if test="${status.count==1}">checked</c:if> type="radio" name="brandCategory.categoryId" value="${category.categoryId}"/>${category.categoryName}
+											<input <c:if test="${brand.brandCategory.categoryId==category.categoryId}">checked</c:if> type="radio" name="brandCategory.categoryId" value="${category.categoryId}"/>${category.categoryName}
 											</c:forEach>
 										</td>
 									</tr>
 									<tr>
 										<th>商标名称</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入商标名称" name="name" required maxlength="50"/>
+											<input class="form-control" style="width:600px;" value="${brand.name}" placeholder="请输入商标名称" name="name" required maxlength="50"/>
 										</td>
 									</tr>
 									<tr>
 										<th>申请号</th>
 										<td>
-										<input class="form-control" style="width:600px;"  name="appNo"  maxlength="30"/>
+										<input class="form-control" style="width:600px;" value="${brand.appNo}" name="appNo"  maxlength="30"/>
 										</td>
 									</tr>
 									<tr>
 										<th>注册号</th>
 										<td>
-										<input class="form-control" style="width:600px;"  name="brandNo"  maxlength="30"/>
+										<input class="form-control" style="width:600px;"  value="${brand.brandNo}" name="brandNo"  maxlength="30"/>
 										</td>
-									</tr>
+									</tr>		
 									<tr>
 										<th>类似群号</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入类似群号" name="similarNo" required maxlength="100"/>
+											<input class="form-control" style="width:600px;" value="${brand.similarNo}" placeholder="请输入类似群号" name="similarNo" required maxlength="100"/>
 										</td>
 									</tr>								
 									<tr>
 										<th>价格</th>
 										<td>
-											<input class="form-control" type="number" placeholder="请输入价格" style="width:600px;"  name="price" maxlength="120" required/>
+											<input class="form-control" type="number" style="width:600px;" value="${brand.price}" placeholder="" name="price" maxlength="120" required/>
 										</td>
 									</tr>
 									<tr>
@@ -154,27 +147,27 @@ height:37px;
 										<td>
 											<select name="transactionMode" class="form-control" style="width:120px;" required>
 												<option value="">--请选择--</option>
-												  	<option value="1" selected="selected">转让</option>
-												  	<option value="2">授权</option>
+												  	<option <c:if test="${brand.transactionMode==1}">selected="selected"</c:if> value="1" >转让</option>
+												  	<option <c:if test="${brand.transactionMode==2}">selected="selected"</c:if> value="2">授权</option>
 											</select> 	
 										</td>
 									</tr>		
 									<tr>
 										<th>专有权人</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入专有权人" name="appPerson" required maxlength="120"/>
+											<input class="form-control" style="width:600px;" value="${brand.appPerson}" placeholder="请输入专有权人" name="appPerson" required maxlength="120"/>
 										</td>
 									</tr>									
 									<tr>
 										<th>指定商品</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="请输入指定商品" name="scope" required maxlength="100"/>
+											<input class="form-control" style="width:600px;" value="${brand.scope}" placeholder="请输入指定商品" name="scope" required maxlength="100"/>
 										</td>
 									</tr>
 									<tr>
 										<th>申请日</th>
 										<td>
-											<input style="width:200px;" type="text" class="form-control" 
+											<input style="width:200px;" type="text"  value="<fmt:formatDate value="${brand.appDate}" pattern='yyyy-MM-dd'/>" class="form-control" 
 												name="appDate"  readonly="readonly" onclick="javascript:$('#app_date_img').click()" id="appDateId" required> 
 											<img style="display:none;" onclick="WdatePicker({el:'appDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" id="app_date_img">
 											
@@ -183,7 +176,7 @@ height:37px;
 									<tr>
 										<th>注册日</th>
 										<td>
-											<input style="width:200px;" type="text" class="form-control" 
+											<input style="width:200px;" type="text"  value="<fmt:formatDate value="${brand.publishDate}" pattern='yyyy-MM-dd'/>" class="form-control" 
 												name="publishDate"  value="" readonly="readonly" onclick="javascript:$('#publish_date_img').click()" id="publishAppDateId" required> 
 											<img style="display:none;" onclick="WdatePicker({el:'publishAppDateId'})" src="<s:url value='/static/datepicker/skin/datePicker.gif'/>" width="25" height="30" id="publish_date_img">
 											
@@ -194,14 +187,14 @@ height:37px;
 										<th>法律状态</th>
 										<td>
 											<c:forEach items="${legalStatuss}" var="legalStatus" varStatus="status">
-											<input <c:if test="${status.count==1}">checked</c:if> type="radio" name="brandLegalStatus.legalStatusId" value="${legalStatus.legalStatusId}"/>${legalStatus.legalStatusName}
+											<input <c:if test="${brand.brandLegalStatus.legalStatusId==legalStatus.legalStatusId}">checked</c:if> type="radio" name="brandLegalStatus.legalStatusId" value="${legalStatus.legalStatusId}"/>${legalStatus.legalStatusName}
 											</c:forEach>
 										</td>
-									</tr>				
+									</tr>			
 									<tr>
 										<th>商标图样</th>
 										<td>
-											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandEntrustFileHidden" name="imageUrl" />
+											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" value="${brand.imageUrl}" id="brandEntrustFileHidden" name="imageUrl" />
 											<input style="width:200px;display:inline;" type="text" id="brandEntrustFileName"  class="selectPointOfInterest form-control" placeholder="请选择图片" readonly="readonly" onclick="$('input[id=brandEntrustFile]').click();" required="required"/>
 											<button type="button" onclick="uploadEntrustClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
@@ -210,7 +203,7 @@ height:37px;
 									<tr>
 										<th>委托书</th>
 										<td>
-											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandProxyFileHidden" name="proxyFile" />
+											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" value="${brand.proxyFile}" id="brandProxyFileHidden" name="proxyFile" />
 											<input style="width:200px;display:inline;" type="text" id="brandProxyFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandProxyFile]').click();" required="required"/>
 											<button type="button" onclick="uploadProxyClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
@@ -219,7 +212,7 @@ height:37px;
 									<tr>
 										<th>企业营业执照</th>
 										<td>
-											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandBusinessLicenseHidden" name="businessLicense" />
+											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" value="${brand.businessLicense}" id="brandBusinessLicenseHidden" name="businessLicense" />
 											<input style="width:200px;display:inline;" type="text" id="brandBusinessLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandBusinessLicenseFile]').click();" required="required"/>
 											<button type="button" onclick="uploadBusinessLicenseClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
@@ -228,7 +221,7 @@ height:37px;
 									<tr>
 										<th>事业单位执照</th>
 										<td>
-											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandEntityLicenseHidden" name="entityLicense" />
+											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" value="${brand.entityLicense}" id="brandEntityLicenseHidden" name="entityLicense" />
 											<input style="width:200px;display:inline;" type="text" id="brandEntityLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandEntityLicenseFile]').click();" required="required"/>
 											<button type="button" onclick="uploadEntityLicenseClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
@@ -237,7 +230,7 @@ height:37px;
 									<tr>
 										<th>个体工商执照</th>
 										<td>
-											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandIndividualLicenseHidden" name="individualLicense" />
+											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" value="${brand.individualLicense}" id="brandIndividualLicenseHidden" name="individualLicense" />
 											<input style="width:200px;display:inline;" type="text" id="brandIndividualLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandIndividualLicenseFile]').click();" required="required"/>
 											<button type="button" onclick="uploadIndividualLicenseClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
@@ -246,7 +239,7 @@ height:37px;
 									<tr>
 										<th>身份证正反面</th>
 										<td>
-											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandIdentityCardHidden" name="identityCard" />
+											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" value="${brand.identityCard}" id="brandIdentityCardHidden" name="identityCard" />
 											<input style="width:200px;display:inline;" type="text" id="brandIdentityCardFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandIdentityCardFile]').click();" required="required"/>
 											<button type="button" onclick="uploadIdentityCardClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
@@ -255,15 +248,28 @@ height:37px;
 									<tr>
 										<th>申请书</th>
 										<td>
-											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandApplicationHidden" name="application" />
+											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" value="${brand.application}" id="brandApplicationHidden" name="application" />
 											<input style="width:200px;display:inline;" type="text" id="brandApplicationFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandApplicationFile]').click();" required="required"/>
 											<button type="button" onclick="uploadApplicationClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
-									</tr>							
+									</tr>
+									<c:if test="${success}">
+										<h5>共享人：</h5>
+										<c:forEach items="${brand.shareUsers}" var="shareBrand" varStatus="status">	
+											<span class='ss-item' id="shareUser${status.index}">${sharePatent.username}
+												<a class='icon-btn-x' href="javascript: return void;"
+													onclick="deleteShareUser(${brand.id},${brand.user.userId},${shareBrand.userId},${status.index})" >								
+													<img src="<s:url value='/temp/images/remove.png'/>" style="float:left;" />
+												</a>
+											</span>		
+								        </c:forEach>
+										<br>
+									</c:if>	  									
 									</tbody>
 								</table>	
 							<div class="form-actions">
 								<button type="submit" style="display:inline;margin-left:500px;" class="t-btn3 button button-primary  button-rounded">提交</button>
+								
 							</div>		
 							</form>
 							<form action="<s:url value='/brand/uploadBrandManagementImageFile.html'/>" id="uploadEntrustFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
