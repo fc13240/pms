@@ -267,7 +267,7 @@
 							  <a target="_blank" href="<s:url value='/patent/showRemarks.html'/>?patentId=<c:out value='${patent.patentId}'/>">
 							  备注
 							  </a>&nbsp;
-							   <a target="_blank" href="<s:url value='/patent/showPatentDetail.html'/>?patentId=${patent.patentId}&ownerId=${patent.ownerId}">
+							   <a target="_blank" href="<s:url value='/brand/brandManagementUpdateForm.html'/>?brandId=${brand.id}">
 							  修改
 							  </a>
 							  <br>

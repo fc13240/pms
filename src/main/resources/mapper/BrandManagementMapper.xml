@@ -38,17 +38,18 @@
 			<id property="categoryId" column="category_id"/>
 			<result property="categoryName" column="category_name"/>
 		</resultMap>
+		
 		<resultMap type="brandLegalStatus" id="BrandLegalStatusResultMap">
 			<id property="legalStatusId" column="legal_status_id"/>
 			<result property="legalStatusName" column="legal_status_name"/>
 		</resultMap>
 		
 		
-		
 		<resultMap type="brandCategoryCount" id="BrandCategoryCountResultMap">
 			<result property="brandCount" column="brandCount"/>
 			<association property="brandCategory" resultMap="BrandCategoryResultMap"/>
 		</resultMap>
+		
 		<resultMap type="brandLegalStatusCount" id="BrandLegalStatusCountResultMap">
 			<result property="brandCount" column="brandCount"/>
 			<association property="brandLegalStatus" resultMap="BrandLegalStatusResultMap"/>
@@ -64,44 +65,30 @@
 			<id property="username" column="username"/>
 		</association>
 	</resultMap>
-
-
-  	<insert id="addOrEditBrand" parameterType="Brand" useGeneratedKeys="true" keyProperty="id">
-		insert into brands(address,category_id,brand_no,name,
-		combination_type,similar_no,transaction_mode,price,scope,
-		app_person,app_date,publish_date,start_date,end_date,originality,case_status,user,check_status,image_url)
-		values(#{address},#{brandCategory.categoryId},#{brandNo},
-		 #{name},#{combinationType},#{similarNo},#{transactionMode},#{price},#{scope},#{appPerson},
-		 #{appDate,javaType=date,jdbcType=DATE},#{publishDate,javaType=date,jdbcType=DATE},#{startDate,javaType=date,jdbcType=DATE},
-		 #{endDate,javaType=date,jdbcType=DATE},#{originality},#{caseStatus},#{user.userId},3,#{imageUrl})
+	
+	<insert id="insertOrUpdateBrand" parameterType="BrandManagement" useGeneratedKeys="true" keyProperty="id">
+		insert into brand_management(legal_status,category_id,app_no,brand_no,name,
+		transaction_status,similar_no,transaction_mode,price,scope,
+		app_person,app_date,publish_date,originality,case_status,user,image_url,proxy_file,business_license,
+		entity_license,individual_license,identity_card,application)
+		values(#{brandLegalStatus.legalStatusId},#{brandCategory.categoryId},#{appNo},#{brandNo},
+		 #{name},#{transactionStatus},#{similarNo},#{transactionMode},#{price},#{scope},#{appPerson},
+		 #{appDate,javaType=date,jdbcType=DATE},#{publishDate,javaType=date,jdbcType=DATE},#{originality},#{caseStatus},#{user.userId},
+		 #{imageUrl},#{proxyFile},#{businessLicense},#{entityLicense},#{individualLicense},#{identityCard},#{application})
 		on duplicate key update 
-			address=#{address},category_id=#{brandCategory.categoryId},
-			name=#{name},combination_type=#{combinationType},
+			legal_status=#{brandLegalStatus.legalStatusId},category_id=#{brandCategory.categoryId},
+			name=#{name},transaction_status=#{transactionStatus},app_no=#{appNo},brand_no=#{brandNo},
 			similar_no=#{similarNo},transaction_mode=#{transactionMode},price=#{price},scope=#{scope},
 			app_person=#{appPerson},app_date=#{appDate,javaType=date,jdbcType=DATE},
 			publish_date=#{publishDate,javaType=date,jdbcType=DATE},
-			start_date=#{startDate,javaType=date,jdbcType=DATE},
-		 	end_date=#{endDate,javaType=date,jdbcType=DATE},originality=#{originality},case_status=#{caseStatus},
-		 	user=#{user.userId},image_url=#{imageUrl},check_status=3
+			originality=#{originality},case_status=#{caseStatus},
+		 	user=#{user.userId},image_url=#{imageUrl},proxy_file=#{proxyFile},business_license=#{businessLicense},
+		 	entity_license=#{entityLicense},individual_license=#{individualLicense},identity_card=#{identityCard},
+		 	application=#{application}
 	</insert> 
- 
-  	<insert id="insertOrUpdateBrand" parameterType="Brand" useGeneratedKeys="true" keyProperty="id">
-		insert into brands(address,category_id,brand_no,name,
-		combination_type,similar_no,transaction_mode,price,scope,
-		app_person,app_date,publish_date,start_date,end_date,originality,case_status,user,check_status,image_url,sell_status)
-		values(#{address},#{brandCategory.categoryId},#{brandNo},
-		 #{name},#{combinationType},#{similarNo},#{transactionMode},#{price},#{scope},#{appPerson},
-		 #{appDate,javaType=date,jdbcType=DATE},#{publishDate,javaType=date,jdbcType=DATE},#{startDate,javaType=date,jdbcType=DATE},
-		 #{endDate,javaType=date,jdbcType=DATE},#{originality},#{caseStatus},#{user.userId},1,#{imageUrl},1)
-		on duplicate key update 
-			address=#{address},category_id=#{brandCategory.categoryId},
-			name=#{name},combination_type=#{combinationType},
-			similar_no=#{similarNo},transaction_mode=#{transactionMode},price=#{price},scope=#{scope},
-			app_person=#{appPerson},app_date=#{appDate,javaType=date,jdbcType=DATE},
-			publish_date=#{publishDate,javaType=date,jdbcType=DATE},
-			start_date=#{startDate,javaType=date,jdbcType=DATE},
-		 	end_date=#{endDate,javaType=date,jdbcType=DATE},originality=#{originality},case_status=#{caseStatus},
-		 	user=#{user.userId},image_url=#{imageUrl},check_status=1,sell_status=1
+	
+	<insert id="insertUserBrand" >
+		replace into user_brand_management(user,brand) values (#{userId},#{brandId})
 	</insert>
 	
 	<select id="getUserBrandManagementByPage" parameterType="Page" resultMap="brandManagementResultMap">
@@ -247,6 +234,21 @@
 		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1)
 		GROUP BY bc.category_name
 		order by bc.category_id asc;
+	</select>
+	
+	<select id="showBrandManagementDetail" parameterType="int" resultMap="brandManagementResultMap">
+		SELECT b.id,b.user,b.app_no,b.brand_no,b.similar_no,b.scope,
+			b.name,b.transaction_status,b.transaction_mode,b.price,b.app_person,
+			b.app_date,b.publish_date,b.image_url,b.proxy_file,b.business_license,
+			b.entity_license,b.individual_license,b.identity_card,b.application,
+			bc.category_id,bc.category_name,bls.legal_status_id,bls.legal_status_name,
+			u.user_id, u.username
+		FROM brand_management b
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN users u ON b.user=u.user_id
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		LEFT JOIN user_brand_management ubm ON ubm.brand=b.id
+		where b.id=#{brandId}
 	</select>
 
 </mapper>

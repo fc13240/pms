@@ -38,4 +38,10 @@ public interface BrandManagementMapper {
 	
 	List<BrandCategoryCount>  getBrandCategoryCount(int userId);
 	
+	int insertOrUpdateBrand(BrandManagement brandManagement);
+	
+	void insertUserBrand(@Param("userId")int userId,@Param("brandId")int brandId);
+	
+	BrandManagement showBrandManagementDetail(int brandId);
+	
 }

@@ -20,7 +20,7 @@
 	<div class="container-fluid" >
 		<div class="row" style="margin-left:-30px;min-width:1100px;">
 			  <div class="col-xs-1 sidebar" style="min-width:100px;">
-				<%@ include file="_left_nav_brand.jsp" %>
+				<%@ include file="_left_nav_brand_management.jsp" %>
 			  </div>
 			  <!--left end-->
 			  <!--right begin-->
@@ -100,7 +100,7 @@ height:37px;
 					
 					<div class="hy_zx_r02">
 						<div class="lou-content" style="padding:10px;">
-							<form method="post" action="<s:url value='/brand/brandAdd.html'/>">
+							<form method="post" action="<s:url value='/brand/brandManageAdd.html'/>">
 								<table class="table_con">
 									<tbody>
 									
@@ -128,25 +128,25 @@ height:37px;
 									<tr>
 										<th>申请号</th>
 										<td>
-										<input class="form-control" style="width:600px;" placeholder="请输入申请号" name="appNo"  maxlength="30"/>
+										<input class="form-control" style="width:600px;"  name="appNo"  maxlength="30"/>
 										</td>
 									</tr>
 									<tr>
 										<th>注册号</th>
 										<td>
-										<input class="form-control" style="width:600px;" placeholder="请输入注册号" name="brandNo"  maxlength="30"/>
+										<input class="form-control" style="width:600px;"  name="brandNo"  maxlength="30"/>
 										</td>
-									</tr>								
+									</tr>
 									<tr>
 										<th>类似群号</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="" name="similarNo" required maxlength="100"/>
+											<input class="form-control" style="width:600px;" placeholder="请输入类似群号" name="similarNo" required maxlength="100"/>
 										</td>
 									</tr>								
 									<tr>
 										<th>价格</th>
 										<td>
-											<input class="form-control" type="number" style="width:600px;" placeholder="" name="price" maxlength="120" required/>
+											<input class="form-control" type="number" placeholder="请输入价格" style="width:600px;"  name="price" maxlength="120" required/>
 										</td>
 									</tr>
 									<tr>
@@ -162,13 +162,13 @@ height:37px;
 									<tr>
 										<th>专有权人</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="" name="appPerson" required maxlength="120"/>
+											<input class="form-control" style="width:600px;" placeholder="请输入专有权人" name="appPerson" required maxlength="120"/>
 										</td>
 									</tr>									
 									<tr>
 										<th>指定商品</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="" name="scope" required maxlength="100"/>
+											<input class="form-control" style="width:600px;" placeholder="请输入指定商品" name="scope" required maxlength="100"/>
 										</td>
 									</tr>
 									<tr>
@@ -193,10 +193,11 @@ height:37px;
 									<tr>
 										<th>法律状态</th>
 										<td>
-											<input class="form-control" style="width:600px;" placeholder="" name="brandLegalStatus.legalStatusName" maxlength="100"/>
+											<c:forEach items="${legalStatuss}" var="legalStatus" varStatus="status">
+											<input <c:if test="${status.count==1}">checked</c:if> type="radio" name="brandLegalStatus.legalStatusId" value="${legalStatus.legalStatusId}"/>${legalStatus.legalStatusName}
+											</c:forEach>
 										</td>
-									</tr>
-									
+									</tr>				
 									<tr>
 										<th>商标图样</th>
 										<td>
@@ -263,7 +264,6 @@ height:37px;
 								</table>	
 							<div class="form-actions">
 								<button type="submit" style="display:inline;margin-left:500px;" class="t-btn3 button button-primary  button-rounded">提交</button>
-								
 							</div>		
 							</form>
 							<form action="<s:url value='/brand/uploadBrandManagementImageFile.html'/>" id="uploadEntrustFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">

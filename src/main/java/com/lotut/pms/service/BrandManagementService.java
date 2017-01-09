@@ -35,4 +35,10 @@ public interface BrandManagementService {
 	List<BrandLegalStatusCount>  getLegalStatusCount(int userId);
 	
 	List<BrandCategoryCount>  getBrandCategoryCount(int userId);
+	
+	int insertOrUpdateBrand(BrandManagement brandManagement);
+	
+	void insertUserBrand(int userId,int brandId);
+	
+	BrandManagement showBrandManagementDetail(int brandId);
 }

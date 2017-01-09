@@ -64,7 +64,7 @@ public class BrandController {
 		return "brand_upload_form";
 	}	
 
-	@RequestMapping(path="/brandAddForm")
+	@RequestMapping(path="/brandAddForm",method=RequestMethod.POST)
 	public String brandAddForm(Model model) {
 		List<BrandCategory> categorys = brandService.getAllCategorys();
 		model.addAttribute("categorys",categorys);
@@ -232,7 +232,7 @@ public class BrandController {
 
 	    }
 	 
-	 @RequestMapping(path="getBrandManagementlist")
+	 @RequestMapping(path="/getBrandManagementlist")
 	 public String getBrandManagementlist(HttpSession session,Page page,Model model){
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
@@ -325,10 +325,44 @@ public class BrandController {
 	@RequestMapping(path="/brandManagementAddForm")
 	public String brandManagementAddForm(Model model) {
 		List<BrandCategory> categorys = brandService.getAllCategorys();
+		List<BrandLegalStatus> legalStatuss = brandManagementService.getAllBrandLegalStatus();
 		model.addAttribute("categorys",categorys);
+		model.addAttribute("legalStatuss",legalStatuss);
 		return "brand_management_add_form";
 		
 	}
+	
+	@RequestMapping(path="/brandManageAdd",method=RequestMethod.POST)
+	public String brandManagementAdd(BrandManagement brandManagement) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		User user = new User();
+		user.setUserId(userId);
+		brandManagement.setUser(user);
+		brandManagementService.insertOrUpdateBrand(brandManagement);
+		brandManagementService.insertUserBrand(userId, brandManagement.getId());
+		return "redirect:/brand/getBrandManagementlist.html";
+		}	
+
+	@RequestMapping(path="/brandManagementUpdateForm")
+	public String brandManagementUpdateForm(int brandId,Model model) {
+		List<BrandCategory> categorys = brandService.getAllCategorys();
+		List<BrandLegalStatus> legalStatuss = brandManagementService.getAllBrandLegalStatus();
+		BrandManagement brand= brandManagementService.showBrandManagementDetail(brandId);
+		model.addAttribute("legalStatuss",legalStatuss);
+		model.addAttribute("categorys",categorys);
+		model.addAttribute("brand",brand);
+		return "brand_management_update_form";
+		}		 
+	
+	@RequestMapping(path="/brandManagementUpdate")
+	public String brandManagementUpdate(BrandManagement brandManagement) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		User user = new User();
+		user.setUserId(userId);
+		brandManagement.setUser(user);
+		brandManagementService.insertOrUpdateBrand(brandManagement);
+		return "redirect:/brand/getBrandManagementlist.html";
+	}		
 	
 	@RequestMapping(path="/uploadBrandManagementImageFile")
     public void uploadBrandManagementImageFile(MultipartFile file,HttpServletResponse response) throws IOException{
@@ -347,7 +381,7 @@ public class BrandController {
     }
 	
 	 @RequestMapping(path="/uploadBrandProxyFile")
-	    public void uploadBrandProxyFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
+	 public void uploadBrandProxyFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
 	    	String fatherPath=Settings.BRAND_MANAGEMENT_PROXYFILE_PATH;
 	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
 	    	int userId=PrincipalUtils.getCurrentUserId();
@@ -355,7 +389,7 @@ public class BrandController {
 	    }
 	 
 	 @RequestMapping(path="/uploadBrandBusinessLicenseFile")
-	    public void uploadBrandBusinessLicenseFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
+	 public void uploadBrandBusinessLicenseFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
 	    	String fatherPath=Settings.BRAND_MANAGEMENT_BUSINESSLICENSE_PATH;
 	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
 	    	int userId=PrincipalUtils.getCurrentUserId();
@@ -363,7 +397,7 @@ public class BrandController {
 	    }
 	 
 	 @RequestMapping(path="/uploadBrandEntityLicenseFile")
-	    public void uploadBrandEntityLicenseFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
+	 public void uploadBrandEntityLicenseFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
 	    	String fatherPath=Settings.BRAND_MANAGEMENT_ENTITYLICENSE_PATH;
 	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
 	    	int userId=PrincipalUtils.getCurrentUserId();
@@ -371,7 +405,7 @@ public class BrandController {
 	    }
 		
 	 @RequestMapping(path="/uploadBrandIndividualLicenseFile")
-	    public void uploadBrandIndividualLicenseFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
+	 public void uploadBrandIndividualLicenseFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
 	    	String fatherPath=Settings.BRAND_MANAGEMENT_INDIVIDUALLICENSE_PATH;
 	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
 	    	int userId=PrincipalUtils.getCurrentUserId();
@@ -379,7 +413,7 @@ public class BrandController {
 	    }
 	 
 	 @RequestMapping(path="/uploadBrandIdentityCardFile")
-	    public void uploadBrandIdentityCardFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
+	 public void uploadBrandIdentityCardFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
 	    	String fatherPath=Settings.BRAND_MANAGEMENT_IDENTTITYCARD_PATH;
 	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
 	    	int userId=PrincipalUtils.getCurrentUserId();
@@ -387,17 +421,20 @@ public class BrandController {
 	    }
 	 
 	 @RequestMapping(path="/uploadBrandApplicationFile")
-	    public void uploadBrandApplicationFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
+	 public void uploadBrandApplicationFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
 	    	String fatherPath=Settings.BRAND_MANAGEMENT_APPLICATION_PATH;
 	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
 	    	int userId=PrincipalUtils.getCurrentUserId();
 	    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
 	    }
-	private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
+	 
+	 private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
 		List<BrandCategory> categorys = brandManagementService.getAllBrandCategory();
 		List<BrandLegalStatus> allBrandLegalStatus = brandManagementService.getAllBrandLegalStatus();
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
 	}
+	 
+	
 	
 }
