@@ -73,5 +73,13 @@
   		LEFT JOIN brand_management_notices bmn ON b.id=bmn.brand
   		where b.id in (select brand from user_brand_management where user =#{userId} and trash_status=1) 
   	</select>
+  	
+  	<insert id="batchChangeBrandNoticeViewStatus" parameterType="list">
+		replace into brand_notice_read(notice_id, user_id) 
+		values
+		<foreach item="noticeIdList" collection="list" separator=",">
+			(#{noticeIdList.noticeId}, #{noticeIdList.userId})
+		</foreach>
+	</insert>
 	
 </mapper>
