@@ -14,6 +14,7 @@ import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
+import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
 
 public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements BrandManagementDao{
@@ -68,6 +69,11 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 	}
 
 	@Override
+	public 	List<BrandManagement> getUserExcelDate(List<Integer> brandIds) {
+		return brandManagementMapper.getUserExcelDate(brandIds);
+	}
+	
+	@Override
 	public List<BrandLegalStatusCount> getLegalStatusCount(int userId) {
 		return brandManagementMapper.getLegalStatusCount(userId);
 	}
@@ -80,7 +86,28 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 	@Override
 	public void brandsTrash(List<Integer> brandManagementIds, int userId) {
 		brandManagementMapper.brandsTrash( brandManagementIds,userId);
-		
+	}
+	public int insertOrUpdateBrand(BrandManagement brandManagement) {
+		return brandManagementMapper.insertOrUpdateBrand(brandManagement);
+	}
+
+	@Override
+	public void insertUserBrand(int userId, int brandId) {
+		brandManagementMapper.insertUserBrand(userId, brandId);
+	}
+
+	@Override
+	public BrandManagement showBrandManagementDetail(int brandId) {
+		return brandManagementMapper.showBrandManagementDetail(brandId);
+	}
+	
+	public List<BrandNoticeType> getAllBrandNoticeTypes() {
+		return brandManagementMapper.getAllBrandNoticeTypes();
+	}
+
+	@Override
+	public void deleteShareUser(int brandId, int shareUserId) {
+		brandManagementMapper.deleteShareUser(brandId, shareUserId);
 	}
 
 	

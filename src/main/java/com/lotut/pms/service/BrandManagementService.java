@@ -11,6 +11,7 @@ import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.BrandNoticeType;
 
 public interface BrandManagementService {
 
@@ -32,13 +33,23 @@ public interface BrandManagementService {
 	
 	int searchUserBrandManagementByCount(BrandManagementSearchCondition searchCondition);
 	
+	String exportExcelUserBrand(List<Integer> brandIds,String excelName);
+
 	List<BrandLegalStatusCount>  getLegalStatusCount(int userId);
 	
 	List<BrandCategoryCount>  getBrandCategoryCount(int userId);
 
+
 	void brandsTrash(List<Integer> brandManagementIds, int userId);
 
+	int insertOrUpdateBrand(BrandManagement brandManagement);
 	
+	void insertUserBrand(int userId,int brandId);
+	
+	BrandManagement showBrandManagementDetail(int brandId);
 
+	List<BrandNoticeType> getAllBrandNoticeTypes();
+	
+	void deleteShareUser(int brandId,int shareUserId);
 
 }

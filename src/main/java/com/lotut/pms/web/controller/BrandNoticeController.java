@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.BrandNotice;
 import com.lotut.pms.domain.Page;
@@ -39,6 +41,12 @@ public class BrandNoticeController {
 		model.addAttribute("notices",notices);
 		model.addAttribute("page",page);
 		return "brand_notice_list";
+	}
+	
+	@RequestMapping(path="/batchChangeBrandNoticeViewStatus", method=RequestMethod.GET)
+	public void batchChangeBrandNoticeViewStatus(@RequestParam("notices")List<Long> noticeIdList) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		brandNoticeService.batchChangeBrandNoticeViewStatus(noticeIdList, userId);
 	}
 	
 }
