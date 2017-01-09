@@ -362,7 +362,7 @@
 							<c:forEach items="${notices}" var="notice" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-								  <input style="text-align:center" type="checkbox" class="check-item" notice="${notice.noticeId}" brand="<c:out value='${notice.brand.id}'/>"></span>
+								  <input style="text-align:center" type="checkbox" class="check-item" brand="<c:out value='${notice.brand.id}'/>"></span>
 								  <span class="lbl"></span></label></td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize}
 								<c:if test="${notice.starTargetMonitorStatus==1 }">
@@ -791,18 +791,18 @@ function batchProcessNotice(processStatus) {
 		var uniquePatentNos = [];
 		if (!patentSelected) {
 			//formutil.alertMessage('请选择专利');
-			formutil.alertMessage('请选择专利');
+			formutil.alertMessage('请选择商标');
 			return;
 		}
-		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'brand');
 		for (var i = 0; i < patents_checked.length; i++) {
 			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
 				uniquePatentNos.push(patents_checked[i]);
 			}
 		}		
-		var patents = uniquePatentNos.join(",");
+		var brands = uniquePatentNos.join(",");
 				
-		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
+		location.href = "<s:url value='/brandNotice/showFriends.html'/>?brands=" + brands;
 	}
 	
 	
