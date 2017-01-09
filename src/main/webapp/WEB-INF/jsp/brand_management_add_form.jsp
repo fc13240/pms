@@ -219,7 +219,7 @@ height:37px;
 										<th>企业营业执照</th>
 										<td>
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandBusinessLicenseHidden" name="businessLicense" />
-											<input style="width:200px;display:inline;" type="text" id="brandBusinessLicenseName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandBusinessLicenseFile]').click();" required="required"/>
+											<input style="width:200px;display:inline;" type="text" id="brandBusinessLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandBusinessLicenseFile]').click();" required="required"/>
 											<button type="button" onclick="uploadBusinessLicenseClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
 									</tr>		
@@ -228,7 +228,7 @@ height:37px;
 										<th>事业单位执照</th>
 										<td>
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandEntityLicenseHidden" name="entityLicense" />
-											<input style="width:200px;display:inline;" type="text" id="brandEntityLicenseName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandEntityLicenseFile]').click();" required="required"/>
+											<input style="width:200px;display:inline;" type="text" id="brandEntityLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandEntityLicenseFile]').click();" required="required"/>
 											<button type="button" onclick="uploadEntityLicenseClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
 									</tr>		
@@ -237,7 +237,7 @@ height:37px;
 										<th>个体工商执照</th>
 										<td>
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandIndividualLicenseHidden" name="individualLicense" />
-											<input style="width:200px;display:inline;" type="text" id="brandIndividualLicenseName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandIndividualLicenseFile]').click();" required="required"/>
+											<input style="width:200px;display:inline;" type="text" id="brandIndividualLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandIndividualLicenseFile]').click();" required="required"/>
 											<button type="button" onclick="uploadIndividualLicenseClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
 									</tr>
@@ -246,7 +246,7 @@ height:37px;
 										<th>身份证正反面</th>
 										<td>
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandIdentityCardHidden" name="identityCard" />
-											<input style="width:200px;display:inline;" type="text" id="brandIdentityCardName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandIdentityCardFile]').click();" required="required"/>
+											<input style="width:200px;display:inline;" type="text" id="brandIdentityCardFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandIdentityCardFile]').click();" required="required"/>
 											<button type="button" onclick="uploadIdentityCardClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
 									</tr>			
@@ -255,7 +255,7 @@ height:37px;
 										<th>申请书</th>
 										<td>
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandApplicationHidden" name="application" />
-											<input style="width:200px;display:inline;" type="text" id="brandApplicationName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandApplicationFile]').click();" required="required"/>
+											<input style="width:200px;display:inline;" type="text" id="brandApplicationFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandApplicationFile]').click();" required="required"/>
 											<button type="button" onclick="uploadApplicationClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
 									</tr>							
@@ -364,7 +364,8 @@ function uploadProxyFile(){
 			success : function (result){
 				$("#brandProxyFileHidden").val(result);
 				$("#brandProxyFileName").val("");
-				alert(result);
+				alert("上传成功");
+				//alert(result);
 			}
 	}
 	uploadForm.ajaxSubmit(option);

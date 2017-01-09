@@ -53,4 +53,7 @@
 	
  			
 	</ul>
+	<span style="color:red;position:absolute;left:24px;bottom:18px;"><h5>QQ交流群：<br/>276618231</h5></span>
+	
+	
 </div>

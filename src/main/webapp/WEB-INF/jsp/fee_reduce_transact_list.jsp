@@ -35,6 +35,7 @@
 					    
 					     <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
 					    </div>
+					  	<span style="color:red;position:absolute;right:25px;top:170px;">咨询QQ：3001816590</span>
 					  </form>
 
     			</div>
