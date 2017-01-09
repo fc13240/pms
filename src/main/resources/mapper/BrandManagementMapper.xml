@@ -270,5 +270,18 @@
 	<delete id="deleteShareUser">
 		delete from user_brand_management where brand = #{brandId} and user=#{shareUserId}	   
 	</delete>
+
+	<select id="getUserExcelDate" resultMap="brandManagementResultMap">
+		 select bm.id,bm.app_no,bm.brand_no,bm.name,bm.similar_no,bm.scope,bm.transaction_status,bm.transaction_mode,bm.price,bm.app_person,bm.app_date,bm.publish_date, 
+		         u.user_id,u.username,bc.category_id,bc.category_name,bls.legal_status_id,bls.legal_status_name from brand_management bm 
+		         left join user_brand_management ubm on bm.id=ubm.brand 
+			     left join users u on ubm.user=u.user_id 
+		         left join brand_category bc on bm.category_id=bc.category_id 
+		         left join brand_legal_status bls on bm.legal_status=bls.legal_status_id
+		         where ubm.trash_status=1 and ubm.brand in 
+		         <foreach collection="brandIds" item="brandId" open="(" close=")" separator=",">
+		         	#{brandId}
+		         </foreach>
+	</select>
 </mapper>
   

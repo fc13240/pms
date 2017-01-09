@@ -9,7 +9,7 @@ public class BrandRemark {
 	private int remarkId;
 	private User user ;
 	private int brandId;
-	private int content;
+	private String content;
 	@DateTimeFormat(iso=ISO.DATE_TIME,pattern="yyyy-MM-dd HH:mm:ss")
 	private Date remarkTime;
 	
@@ -31,10 +31,10 @@ public class BrandRemark {
 	public void setBrandId(int brandId) {
 		this.brandId = brandId;
 	}
-	public int getContent() {
+	public String getContent() {
 		return content;
 	}
-	public void setContent(int content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
 	public Date getRemarkTime() {

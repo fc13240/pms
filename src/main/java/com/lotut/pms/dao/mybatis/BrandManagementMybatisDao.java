@@ -69,6 +69,11 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 	}
 
 	@Override
+	public 	List<BrandManagement> getUserExcelDate(List<Integer> brandIds) {
+		return brandManagementMapper.getUserExcelDate(brandIds);
+	}
+	
+	@Override
 	public List<BrandLegalStatusCount> getLegalStatusCount(int userId) {
 		return brandManagementMapper.getLegalStatusCount(userId);
 	}

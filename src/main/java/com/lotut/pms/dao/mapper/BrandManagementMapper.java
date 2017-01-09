@@ -10,8 +10,8 @@ import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
 import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
-import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
+import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
 
@@ -35,6 +35,8 @@ public interface BrandManagementMapper {
 	
 	int searchUserBrandManagementByCount(BrandManagementSearchCondition searchCondition);
 	
+	List<BrandManagement> getUserExcelDate(@Param("brandIds") List<Integer> brandIds);
+
 	List<BrandLegalStatusCount>  getLegalStatusCount(int userId);
 	
 	List<BrandCategoryCount>  getBrandCategoryCount(int userId);

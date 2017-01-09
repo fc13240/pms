@@ -33,6 +33,8 @@ public interface BrandManagementService {
 	
 	int searchUserBrandManagementByCount(BrandManagementSearchCondition searchCondition);
 	
+	String exportExcelUserBrand(List<Integer> brandIds,String excelName);
+
 	List<BrandLegalStatusCount>  getLegalStatusCount(int userId);
 	
 	List<BrandCategoryCount>  getBrandCategoryCount(int userId);

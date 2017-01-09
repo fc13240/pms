@@ -13,7 +13,7 @@
 <script src="<s:url value='/static/js/sweetalert.min.js'/>"></script>
 <link rel="stylesheet" type="text/css"
 	href="<s:url value='/static/css/sweetalert.css'/>">
-<title>龙图腾专利管家——我的专利</title>
+<title>龙图腾专利管家——商标备注</title>
 <%@ include file="_css.jsp"%>
 <style type="text/css">
 	.textarea {
@@ -37,7 +37,7 @@
 
 				<!--left begin-->
 				<div class="col-xs-1 sidebar" style="min-width: 100px;">
-					<%@ include file="_left_nav2.jsp"%>
+					<%@ include file="_left_nav_brand_management.jsp"%>
 				</div>
 				<!--left end-->
 				<!--right begin-->
@@ -79,14 +79,14 @@
 	</div>
 	<script type="text/javascript">
 		function addBrandRemark() {
-			var patentId = ${brandId};
+			var brandId = ${brandId};
 			var content = document.getElementById('content_area').value;
 			if (content != null && content != "") {
 				$.ajax({
-					url : "<s:url value='/brand/saveBrandRemark.html'/>?content="+ content + "&brandId=" + patentId,
+					url : "<s:url value='/brand/saveBrandRemark.html'/>?content="+ content + "&brandId=" + brandId,
 					type : "post",
 					success : function(date) {
-						formutil.alertMessage('添加备注成功');
+						alert('添加备注成功');
 						location.reload();
 					},
 					error : function() {

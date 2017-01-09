@@ -35,6 +35,8 @@ public interface BrandManagementDao {
 	
 	int searchUserBrandManagementByCount(BrandManagementSearchCondition searchCondition);
 	
+	List<BrandManagement> getUserExcelDate(List<Integer> brandIds);
+
 	List<BrandLegalStatusCount>  getLegalStatusCount(int userId);
 	
 	List<BrandCategoryCount>  getBrandCategoryCount(int userId);

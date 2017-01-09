@@ -15,8 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.itextpdf.text.DocumentException;
 
-import net.lingala.zip4j.exception.ZipException;
-
 public class FileOption {
 	public static void fileUpload(int userId,MultipartFile multipartFile,String savePath,String fileName,HttpServletResponse response){
 		try{
