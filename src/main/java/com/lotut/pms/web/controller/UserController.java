@@ -290,8 +290,14 @@ public class UserController {
     public String searchShareUserDetail(int shareUserId,Model model){  
     	int userId=PrincipalUtils.getCurrentUserId();
     	Friend friend = userService.searchShareUserDetail(userId,shareUserId);
+    	User user = null;
+    	if(friend == null) {
+    		user = userService.searchShareUserById(shareUserId);
+    	}
+    	
     	ContactAddress contactAddress = userService.getUserDefaultContactAddress(shareUserId);
     	model.addAttribute("friend", friend);
+    	model.addAttribute("user", user);
     	model.addAttribute("contactAddress", contactAddress);
         return "share_user_detail";
     } 
