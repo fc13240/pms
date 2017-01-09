@@ -17,6 +17,18 @@
 
 <title>龙图腾专利管家－商标管理</title>
 <%@ include file="_css.jsp" %>
+
+<style type="text/css">
+ .qxjk-ul1 li {
+    width:300px;
+    height: 40px;
+    border-bottom: 1px dashed #ccc;
+	margin:10px 0 0 0;
+	padding: 0 8px;
+	overflow: hidden;
+};
+</style>
+</head>
 <body>
 <%@ include file="_top.jsp" %>
 
