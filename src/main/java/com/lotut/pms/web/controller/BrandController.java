@@ -29,9 +29,8 @@ import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
 import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
-import com.lotut.pms.domain.BrandLegalStatus;
-import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
+import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
@@ -244,9 +243,11 @@ public class BrandController {
 		List<BrandManagement> brands = brandManagementService.getUserBrandManagementByPage(page);
 		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(userId);
 		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(userId);
+		List<BrandNoticeType> noticeTypes = brandManagementService.getAllBrandNoticeTypes();
 		page.setTotalRecords(totalCount);
 		model.addAttribute("brands",brands);
 		model.addAttribute("page",page);
+		model.addAttribute("noticeTypes",noticeTypes);
 		addBrandCategoryAndBrandLegalStatusToModel(model);
 		model.addAttribute("brandLegalStatus", brandLegalStatus);
 		model.addAttribute("brandCategory", brandCategory);
@@ -306,14 +307,11 @@ public class BrandController {
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
 		page.setPageSize(WebUtils.getPageSize(session));
-		if (page.getCurrentPage() <= 0) {
-			page.setCurrentPage(1);
-		}
 		int totalCount=brandManagementService.searchUserBrandManagementByCount(searchCondition);
 		page.setTotalRecords(totalCount);
 		List<BrandManagement> brands =brandManagementService.searchUserBrandManagementByPage(searchCondition);
-		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(userId);
-		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(userId);
+		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(page.getUserId());
+		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(page.getUserId());
 		model.addAttribute("brands",brands);
 		model.addAttribute("page", page);
 		model.addAttribute("brandLegalStatus", brandLegalStatus);

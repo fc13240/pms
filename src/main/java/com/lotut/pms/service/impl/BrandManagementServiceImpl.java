@@ -11,6 +11,7 @@ import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
+import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.BrandManagementService;
 
@@ -88,6 +89,10 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 	@Override
 	public BrandManagement showBrandManagementDetail(int brandId) {
 		return brandManagementDao.showBrandManagementDetail(brandId);
+	}
+	
+	public List<BrandNoticeType> getAllBrandNoticeTypes() {
+		return brandManagementDao.getAllBrandNoticeTypes();
 	}
 
 	

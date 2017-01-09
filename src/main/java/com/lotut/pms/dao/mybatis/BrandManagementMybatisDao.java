@@ -14,6 +14,7 @@ import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
+import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
 
 public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements BrandManagementDao{
@@ -90,6 +91,10 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 	@Override
 	public BrandManagement showBrandManagementDetail(int brandId) {
 		return brandManagementMapper.showBrandManagementDetail(brandId);
+	}
+	
+	public List<BrandNoticeType> getAllBrandNoticeTypes() {
+		return brandManagementMapper.getAllBrandNoticeTypes();
 	}
 
 	

@@ -9,6 +9,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
+<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.min.css'/>" />
+<script src="<s:url value='/static/js/bootstrap.min.js'/>" type="text/javascript"></script>
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>
+
+
 <title>龙图腾专利管家－商标管理</title>
 <%@ include file="_css.jsp" %>
 <body>
@@ -50,8 +56,8 @@
 						  <ul class="qxjk-ul">
 						  <c:forEach items="${brandLegalStatus}" var="brandLegalStatus">
 						  	<li>
-							<a href="<s:url value='/brand/searchBrandManagement.html?page.currentPage=1&brandLegalStatus=${brandLegalStatus.brandLegalStatus.legalStatusId} }'/>">
-							${brandLegalStatus.brandLegalStatus.legalStatusName} (<c:out value='${brandLegalStatus.brandCount}' default="0"/>)</a>
+							<a href="<s:url value='/brand/searchBrandManagement.html?page.currentPage=1&brandCategory=&brandLegalStatus=${brandLegalStatus.legalStatusId}&transactionStatus=&appDate=&keyword='/>">
+							${brandLegalStatus.legalStatusName} (<c:out value='${brandLegalStatus.brandCount}' default="0"/>)</a>
 							</li>
 							</c:forEach>
 						  </ul>
@@ -60,8 +66,8 @@
 						  <ul class="qxjk-ul">
 						  	<c:forEach items="${brandCategory}" var="brandCategory">
 							  	<li>
-								<a href="<s:url value='/brand/searchBrandManagement.html?page.currentPage=1&brandCategory=${brandCategory.brandCategory.categoryId} }'/>">
-								${brandCategory.brandCategory.categoryName} (<c:out value='${brandCategory.brandCount}' default="0"/>)</a>
+								<a href="<s:url value='/brand/searchBrandManagement.html?page.currentPage=1&brandCategory=${brandCategory.categoryId}&brandLegalStatus=&transactionStatus=&appDate=&keyword='/>">
+								${brandCategory.categoryName} (<c:out value='${brandCategory.brandCount}' default="0"/>)</a>
 								</li>
 							</c:forEach>
 						  </ul>
@@ -271,7 +277,7 @@
 							  修改
 							  </a>
 							  <br>
-							   <a  target="_blank" href="<s:url value='/brand/uploadBrandNoticeForm.html'/>?brandId=${brand.id}">
+							   <a style="cursor:pointer;" data-toggle = "modal" data-target = "#uploadNoticeModal">
 							 上传通知书
 							  </a>
 							 
@@ -351,6 +357,58 @@
 		</div>
 	</div>	
 </div>
+
+<!--上传通知书start-->
+<div class = "modal fade" id = "uploadNoticeModal" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true" >
+   
+   <div class = "modal-dialog" >
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true" id="uploadNoticeModalCloseBtn">
+               ×
+            </button>
+            
+            <h4 class = "modal-title" id = "myModalLabel" style="font-size:18px;">
+            	上传通知书(带<span style="color:red;font-size:18px;">*</span>为必填项)
+            </h4>
+         </div>
+         <div class = "modal-body" id="modal-body">
+         	<form action="<s:url value='/brandNotice/saveBrandNotice.html'/>" method="post">
+			<h5><span style="color:red;font-size:18px;">* </span>发文日:</h5>
+			<input class="form-control" style="width:360px;height:34px;"  type="text" onclick="WdatePicker({el:'dispatchDateId'})" id="dispatchDateId" name="dispatchDate" placeholder="发文日" value="" readonly="readonly" required>							  
+			<br/>
+			<h5><span style="color:red;font-size:18px;">* </span>通知类型:</h5>
+			<select style="width:360px;" class="selectPointOfInterest form-control" name="noticeType" required>
+	          <option value="">全部</option>
+	          <c:forEach items="${noticeTypes}" var="noticeType">
+	            <option value="<c:out value='${noticeType.noticeTypeId}'/>">
+	            <c:out value="${noticeType.noticeTypeDescription}"/>
+	            </option>
+	          </c:forEach>
+	        </select>	
+			<br/>		  
+			<h5><span style="color:red;font-size:18px;">* </span>pdf上传:</h5>
+			<form id="notice" action="<s:url value='/brandNotice/uploadNoticePdfFile.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+				<input style="display:none;" id="id_notice_file" name="noticeFile" type="file" />
+				<input style="width:300px;height:33px;display:inline;" type="text" class="lt-input form-control" id="filename" name="filename" placeholder="请选择文件" readonly="readonly" required>
+				<button type="button" onclick="$('input[id=id_notice_file]').click();" class="button button-primary  button-rounded">浏览</button>
+				<button style="margin-left:5px;" type="submit" class="button button-caution button-rounded">上传</button>
+			</form> 
+			<br/>
+				<button style="margin-left:5px;" type="submit" class="button button-caution button-rounded">提交</button>
+			<br/>
+			</form>
+			
+				
+         </div>
+      </div>
+   </div>
+</div>
+<!--上传通知书end-->
+
+
 <iframe id="patentExcelFileFrame" style="display:none"></iframe>	
 
 <script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
@@ -501,6 +559,24 @@ $(function () {
 		iframe.src = "<s:url value='/patent/exportPatents.html'/>?patentIds=" + patents;
 		
 	}
+	
+	jQuery(function($) {
+		$("#notice").validate({
+			rules: {
+				filename: 'required'
+			},
+			messages: {
+				filename: '请选择要上传的通知书PDF文件'
+			},
+			submitHandler: function(form){ 
+				form.submit();     
+			}
+		});
+	});
+
+	$('input[id=id_notice_file]').change(function() {  
+		$('#filename').val($(this).val());  
+	});
 </script>
 <script type="text/javascript">
 	$(function() {
