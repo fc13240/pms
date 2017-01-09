@@ -309,8 +309,8 @@ public class BrandController {
 		int totalCount=brandManagementService.searchUserBrandManagementByCount(searchCondition);
 		page.setTotalRecords(totalCount);
 		List<BrandManagement> brands =brandManagementService.searchUserBrandManagementByPage(searchCondition);
-		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(userId);
-		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(userId);
+		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(page.getUserId());
+		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(page.getUserId());
 		model.addAttribute("brands",brands);
 		model.addAttribute("page", page);
 		model.addAttribute("brandLegalStatus", brandLegalStatus);
