@@ -162,7 +162,7 @@ public class FileOption {
 				JpgToPdf.imgToPdf(savePath, pdfFilePath);
 				File jpgSaveFile=new File(savePath);
 				jpgSaveFile.delete();
-				String savePdfUrl=saveUrl+filename.substring(0,filename.lastIndexOf("."))+".pdf"+".html";
+				String savePdfUrl=saveUrl+filename.substring(1,filename.lastIndexOf("."))+".pdf"+".html";
 				WebUtils.writeJsonStrToResponse(response,savePdfUrl);
 			}else{
 			WebUtils.writeJsonStrToResponse(response,saveDatabaseUrl);

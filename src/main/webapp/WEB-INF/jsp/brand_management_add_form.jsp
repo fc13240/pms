@@ -365,6 +365,7 @@ function uploadProxyFile(){
 				$("#brandProxyFileHidden").val(result);
 				$("#brandProxyFileName").val("");
 				alert("上传成功");
+				//alert(result);
 			}
 	}
 	uploadForm.ajaxSubmit(option);

@@ -332,8 +332,8 @@ public class BrandController {
 	
 	@RequestMapping(path="/uploadBrandManagementImageFile")
     public void uploadBrandManagementImageFile(MultipartFile file,HttpServletResponse response) throws IOException{
-    	String fatherPath=Settings.BRAND_IMAGE_PATH;
-    	String saveUrl=Settings.BRAND_IMAGE_URL;
+    	String fatherPath=Settings.BRAND_MANAGEMENT_IMAGE_PATH;
+    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_IMAGE_PATH.length()-1);
     	int userId=PrincipalUtils.getCurrentUserId();
     	long avatarSize =file.getSize();
     	final long uploadAvatarSize=300*1024;
