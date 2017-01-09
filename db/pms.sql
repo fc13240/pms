@@ -1276,7 +1276,6 @@ CREATE TABLE user_brand_management (
   CONSTRAINT fk_user_brand_management_user FOREIGN KEY (user) REFERENCES users (user_id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-<<<<<<< HEAD
 CREATE TABLE brand_remark(
 	remark_id INT AUTO_INCREMENT PRIMARY KEY,
 	USER INT ,
@@ -1323,7 +1322,6 @@ CREATE TABLE IF NOT EXISTS brand_management_notices (
 	paper_apply_type INT DEFAULT 1 NOT NULL,
 	star_target_monitor_status INT DEFAULT 0 COMMENT '0 表示不监控 1 表示处于监控状态',
 	UNIQUE KEY uk_brand_management_notices_brand_notice_sequence (brand, notice_sequence),
-		
 	CONSTRAINT fk_brand_management_notices_brand FOREIGN KEY idx_fk_brand_management_notices_brand (brand) REFERENCES brand_management(id) ON DELETE CASCADE,
 	CONSTRAINT fk_brand_management_notices_process_status FOREIGN KEY idx_fk_brand_management_notices_process_status (process_status) REFERENCES notice_process_status(notice_process_status_id),
 	CONSTRAINT fk_brand_management_notices_process_user FOREIGN KEY idx_fk_brand_management_notices_process_user (process_user) REFERENCES users(user_id),

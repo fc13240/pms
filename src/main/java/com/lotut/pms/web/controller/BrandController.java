@@ -24,12 +24,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.itextpdf.text.DocumentException;
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
+import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
+import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
@@ -240,10 +244,18 @@ public class BrandController {
 		}
 		int totalCount = brandManagementService.getUserBrandManagementCount(userId);
 		List<BrandManagement> brands = brandManagementService.getUserBrandManagementByPage(page);
+		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(userId);
+		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(userId);
+		List<BrandNoticeType> noticeTypes = brandManagementService.getAllBrandNoticeTypes();
 		page.setTotalRecords(totalCount);
 		model.addAttribute("brands", brands);
 		model.addAttribute("page", page);
+		model.addAttribute("brands",brands);
+		model.addAttribute("page",page);
+		model.addAttribute("noticeTypes",noticeTypes);
 		addBrandCategoryAndBrandLegalStatusToModel(model);
+		model.addAttribute("brandLegalStatus", brandLegalStatus);
+		model.addAttribute("brandCategory", brandCategory);
 		return "brand_management_list";
 	}
 
@@ -309,8 +321,13 @@ public class BrandController {
 		int totalCount = brandManagementService.searchUserBrandManagementByCount(searchCondition);
 		page.setTotalRecords(totalCount);
 		List<BrandManagement> brands = brandManagementService.searchUserBrandManagementByPage(searchCondition);
-		model.addAttribute("brands", brands);
+		page.setTotalRecords(totalCount);
+		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(userId);
+		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(userId);
+		model.addAttribute("brands",brands);
 		model.addAttribute("page", page);
+		model.addAttribute("brandLegalStatus", brandLegalStatus);
+		model.addAttribute("brandCategory", brandCategory);
 		addBrandCategoryAndBrandLegalStatusToModel(model);
 		return "brand_management_list";
 	}
@@ -320,10 +337,9 @@ public class BrandController {
 			throws IOException {
 		response.setHeader("X-FRAME-OPTIONS", "SAMEORIGIN");
 		response.setContentType("application/vnd.ms-excel");
-		String excelName = PrincipalUtils.getCurrentPrincipal().getUsername() + System.currentTimeMillis();
+		String excelName = PrincipalUtils.getCurrentPrincipal().getUsername() + System.currentTimeMillis() +".xls";
 		String brandExcelPath = brandManagementService.exportExcelUserBrand(brandIds, excelName);
-		//response.setContentLength((int)brandExcelPath.length());
-		response.setHeader("Content-Disposition", "attachment;filename=" + brandExcelPath);
+		response.setHeader("Content-Disposition", "attachment;filename=" + excelName);
 		
 		final int BUFFER_SIZE = 8192;
 		byte[] buffer = new byte[BUFFER_SIZE];
@@ -334,11 +350,83 @@ public class BrandController {
 				out.write(buffer, 0, bytesRead);
 			}
 			out.close();
-			// in.close();
+			in.close();
 		}
-
 	}
 
+	
+	@RequestMapping(path="/brandManagementAddForm")
+	public String brandManagementAddForm(Model model) {
+		List<BrandCategory> categorys = brandService.getAllCategorys();
+		model.addAttribute("categorys",categorys);
+		return "brand_management_add_form";
+		
+	}
+	
+	@RequestMapping(path="/uploadBrandManagementImageFile")
+    public void uploadBrandManagementImageFile(MultipartFile file,HttpServletResponse response) throws IOException{
+    	String fatherPath=Settings.BRAND_MANAGEMENT_IMAGE_PATH;
+    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_IMAGE_PATH.length()-1);
+    	int userId=PrincipalUtils.getCurrentUserId();
+    	long avatarSize =file.getSize();
+    	final long uploadAvatarSize=300*1024;
+    	if(avatarSize>uploadAvatarSize){
+				WebUtils.writeJsonStrToResponse(response, "overLimit");
+    	}else{
+    		
+    		FileOption.brandShowImgFileOption(userId, file, fatherPath, response,saveUrl);
+    	}
+
+    }
+	
+	 @RequestMapping(path="/uploadBrandProxyFile")
+	    public void uploadBrandProxyFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
+	    	String fatherPath=Settings.BRAND_MANAGEMENT_PROXYFILE_PATH;
+	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
+	    	int userId=PrincipalUtils.getCurrentUserId();
+	    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
+	    }
+	 
+	 @RequestMapping(path="/uploadBrandBusinessLicenseFile")
+	    public void uploadBrandBusinessLicenseFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
+	    	String fatherPath=Settings.BRAND_MANAGEMENT_BUSINESSLICENSE_PATH;
+	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
+	    	int userId=PrincipalUtils.getCurrentUserId();
+	    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
+	    }
+	 
+	 @RequestMapping(path="/uploadBrandEntityLicenseFile")
+	    public void uploadBrandEntityLicenseFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
+	    	String fatherPath=Settings.BRAND_MANAGEMENT_ENTITYLICENSE_PATH;
+	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
+	    	int userId=PrincipalUtils.getCurrentUserId();
+	    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
+	    }
+		
+	 @RequestMapping(path="/uploadBrandIndividualLicenseFile")
+	    public void uploadBrandIndividualLicenseFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
+	    	String fatherPath=Settings.BRAND_MANAGEMENT_INDIVIDUALLICENSE_PATH;
+	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
+	    	int userId=PrincipalUtils.getCurrentUserId();
+	    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
+	    }
+	 
+	 @RequestMapping(path="/uploadBrandIdentityCardFile")
+	    public void uploadBrandIdentityCardFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
+	    	String fatherPath=Settings.BRAND_MANAGEMENT_IDENTTITYCARD_PATH;
+	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
+	    	int userId=PrincipalUtils.getCurrentUserId();
+	    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
+	    }
+	 
+	 @RequestMapping(path="/uploadBrandApplicationFile")
+	    public void uploadBrandApplicationFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
+	    	String fatherPath=Settings.BRAND_MANAGEMENT_APPLICATION_PATH;
+	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
+	    	int userId=PrincipalUtils.getCurrentUserId();
+	    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
+	    }
+	 
 	private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
 		List<BrandCategory> categorys = brandManagementService.getAllBrandCategory();
 		List<BrandLegalStatus> allBrandLegalStatus = brandManagementService.getAllBrandLegalStatus();

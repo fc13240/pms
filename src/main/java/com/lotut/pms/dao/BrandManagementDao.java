@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
+import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
+import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
 
 public interface BrandManagementDao {
@@ -31,4 +34,10 @@ public interface BrandManagementDao {
 	int searchUserBrandManagementByCount(BrandManagementSearchCondition searchCondition);
 	
 	List<BrandManagement> getUserExcelDate(List<Integer> brandIds);
+
+	List<BrandLegalStatusCount>  getLegalStatusCount(int userId);
+	
+	List<BrandCategoryCount>  getBrandCategoryCount(int userId);
+
+	List<BrandNoticeType> getAllBrandNoticeTypes();
 }

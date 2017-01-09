@@ -34,15 +34,25 @@
 		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 	</resultMap>
 	
-	<resultMap type="brandCategory" id="BrandCategoryResultMap">
-		<id property="categoryId" column="category_id"/>
-		<result property="categoryName" column="category_name"/>
-	</resultMap>
-	
-	<resultMap type="brandLegalStatus" id="BrandLegalStatusResultMap">
-		<id property="legalStatusId" column="legal_status_id"/>
-		<result property="legalStatusName" column="legal_status_name"/>
-	</resultMap>
+		<resultMap type="brandCategory" id="BrandCategoryResultMap">
+			<id property="categoryId" column="category_id"/>
+			<result property="categoryName" column="category_name"/>
+		</resultMap>
+		<resultMap type="brandLegalStatus" id="BrandLegalStatusResultMap">
+			<id property="legalStatusId" column="legal_status_id"/>
+			<result property="legalStatusName" column="legal_status_name"/>
+		</resultMap>
+		
+		
+		
+		<resultMap type="brandCategoryCount" id="BrandCategoryCountResultMap">
+			<result property="brandCount" column="brandCount"/>
+			<association property="brandCategory" resultMap="BrandCategoryResultMap"/>
+		</resultMap>
+		<resultMap type="brandLegalStatusCount" id="BrandLegalStatusCountResultMap">
+			<result property="brandCount" column="brandCount"/>
+			<association property="brandLegalStatus" resultMap="BrandLegalStatusResultMap"/>
+		</resultMap>
 	
 	<resultMap type="BrandRemark" id="BrandRemarkResultMap">
 		<id property="remarkId" column="remark_id"/>
@@ -53,6 +63,11 @@
 			<id property="userId" column="user_id"/>
 			<id property="username" column="username"/>
 		</association>
+	</resultMap>
+	
+	<resultMap type="BrandNoticeType" id="BrandNoticeTypeResultMap">
+		<id property="noticeTypeId" column="notice_type_id"/>
+		<result property="noticeTypeDescription" column="notice_type_desc"/>
 	</resultMap>
 
 
@@ -214,8 +229,34 @@
 		LEFT JOIN user_brand_management ubm ON ubm.brand=rs.id
 		LEFT JOIN users u ON u.user_id=ubm.user
   	</select>
+	
+	
+	<select id="getLegalStatusCount" resultMap="BrandLegalStatusCountResultMap">
+		SELECT bls.legal_status_id,bls.legal_status_name,count(*) brandCount
+		FROM brand_management b
+		LEFT JOIN users u ON b.user=u.user_id
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1)
+		GROUP BY bls.legal_status_name
+		order by bls.legal_status_id asc;
+	</select>
+	
+	
+	<select id="getBrandCategoryCount" resultMap="BrandCategoryCountResultMap">
+		SELECT bc.category_id,bc.category_name,count(*) brandCount
+		FROM brand_management b
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN users u ON b.user=u.user_id
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1)
+		GROUP BY bc.category_name
+		order by bc.category_id asc;
+	</select>
+	
+	<select id="getAllBrandNoticeTypes"  resultMap="BrandNoticeTypeResultMap">
+		select notice_type_id,notice_type_desc from brand_notice_types order by notice_type_id asc
+	</select>
 
-	<select id="getUserExcelDate" parameterType="list" resultMap="brandManagementResultMap">
+	<select id="getUserExcelDate" resultMap="brandManagementResultMap">
 		 select bm.id,bm.app_no,bm.brand_no,bm.name,bm.similar_no,bm.scope,bm.transaction_status,bm.transaction_mode,bm.price,bm.app_person,bm.app_date,bm.publish_date, 
 		         u.user_id,u.username,bc.category_id,bc.category_name,bls.legal_status_id,bls.legal_status_name from brand_management bm 
 		         left join user_brand_management ubm on bm.id=ubm.brand 

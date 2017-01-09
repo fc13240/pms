@@ -4,11 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
+import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.BrandNoticeType;
 
 public interface BrandManagementService {
 
@@ -31,4 +34,10 @@ public interface BrandManagementService {
 	int searchUserBrandManagementByCount(BrandManagementSearchCondition searchCondition);
 	
 	String exportExcelUserBrand(List<Integer> brandIds,String excelName);
+
+	List<BrandLegalStatusCount>  getLegalStatusCount(int userId);
+	
+	List<BrandCategoryCount>  getBrandCategoryCount(int userId);
+
+	List<BrandNoticeType> getAllBrandNoticeTypes();
 }

@@ -44,4 +44,13 @@ public interface Settings {
 	final String BRAND_ROOT_PATH = "/opt/media/brand/";
 	final String BRAND_IMAGE_PATH="/opt/media/brand/showImg/";
 	final String BRAND_IMAGE_URL="/showImg/";
+	final String BRAND_MANAGEMENT_PATH="/opt/media/brandManagement/";
+	final String BRAND_MANAGEMENT_IMAGE_PATH="/opt/media/brandManagement/showImg/";
+	final String BRAND_MANAGEMENT_PROXYFILE_PATH="/opt/media/brandManagement/proxyFile/";
+	final String BRAND_MANAGEMENT_BUSINESSLICENSE_PATH="/opt/media/brandManagement/businessLicense/";
+	final String BRAND_MANAGEMENT_INDIVIDUALLICENSE_PATH="/opt/media/brandManagement/individualLicense/";
+	final String BRAND_MANAGEMENT_ENTITYLICENSE_PATH="/opt/media/brandManagement/entityLicense/";
+	final String BRAND_MANAGEMENT_IDENTTITYCARD_PATH="/opt/media/brandManagement/identityCard/";
+	final String BRAND_MANAGEMENT_APPLICATION_PATH="/opt/media/brandManagement/application/";
+	
 }

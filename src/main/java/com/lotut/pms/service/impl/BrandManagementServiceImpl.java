@@ -6,10 +6,13 @@ import java.util.Map;
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.dao.BrandManagementDao;
 import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
+import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
+import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.BrandManagementService;
 import com.lotut.pms.service.utils.BrandExcelGenerrator;
@@ -73,4 +76,19 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 		return brandExcelPath;
 	}
 
+	@Override
+	public List<BrandLegalStatusCount> getLegalStatusCount(int userId) {
+		return brandManagementDao.getLegalStatusCount(userId);
+	}
+
+	@Override
+	public List<BrandCategoryCount> getBrandCategoryCount(int userId) {
+		return brandManagementDao.getBrandCategoryCount(userId);
+	}
+
+	@Override
+	public List<BrandNoticeType> getAllBrandNoticeTypes() {
+		return brandManagementDao.getAllBrandNoticeTypes();
+	}
+	
 }

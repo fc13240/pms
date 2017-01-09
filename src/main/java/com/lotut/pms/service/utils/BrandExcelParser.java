@@ -1,6 +1,5 @@
 package com.lotut.pms.service.utils;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
@@ -9,10 +8,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -254,9 +251,17 @@ public class BrandExcelParser {
 	}
 	
 	public static void main(String[] args) {
-		Map<Integer,Integer> map=new HashMap<>();
-		map.put(1, 5);
-		map.put(2, 3);
-		System.out.println(map.get(2));
+		String path="/opt/media/brandManagement/entityLicense/";
+		int index=path.lastIndexOf("/entityLicense");
+		
+		String target=path.substring(26);
+		String path2="/opt/";
+		int a=path2.lastIndexOf("/");
+		System.out.println(path.substring(0, path.lastIndexOf("/")));
+		System.out.println(a);
+		System.out.println(path2.length());
+		System.out.println(index);
+		System.out.println(target);
+		
 	}
 }

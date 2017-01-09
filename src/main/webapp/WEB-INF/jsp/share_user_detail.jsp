@@ -30,9 +30,18 @@
 			<div class="lt-right">
 				<div style="height:10px;"></div>
 				<div class="lt-box" style="padding:20px;">
-				<h4>好友${friend.user.username}详细信息</h4>
+				<h4>用户
+				<c:if test="${not empty friend }">
+					${friend.user.username}
+				</c:if>
+				<c:if test="${not empty user}">
+					${user.username}
+				</c:if>
+				详细信息</h4>
+				
 				<br>
 					<form action=""	method="POST" >
+					<c:if test="${not empty friend }">
 						<h5>真实姓名/名称：</h5>
 						<input class="ipt form-control" type="text" name="name" id="name"
 							style="height: 40px; width: 500px;" value="${friend.user.name}" readonly="readonly">
@@ -56,6 +65,28 @@
 						<h5>微信号：</h5>
 						<input style="width:500px;" class="phone form-control" name="weChat" id="weChat" type="text"
 							value="${friend.user.weChat}" readonly="readonly"> 
+					</c:if>
+					<c:if test="${not empty user }">
+						<h5>真实姓名/名称：</h5>
+						<input class="ipt form-control" type="text" name="name" id="name"
+							style="height: 40px; width: 500px;" value="${user.name}" readonly="readonly">
+						
+						<h5>电子邮件：</h5>
+						<input class="email form-control" name="email" id="email" type="email"
+							style="height: 40px; width: 500px;" value="${user.email}" readonly="readonly"> 
+						<br>
+						<h5>手机或电话号：</h5>
+						<input style="width:500px;" class="phone form-control" name="phone" id="phone" type="text"
+							value="${user.phone}" readonly="readonly"> 
+						<br>
+						<h5>QQ号：</h5>
+						<input style="width:500px;" class="phone form-control" name="qq" id="qq" type="text"
+							value="${user.qq}" readonly="readonly"> 
+						<br>
+						<h5>微信号：</h5>
+						<input style="width:500px;" class="phone form-control" name="weChat" id="weChat" type="text"
+							value="${user.weChat}" readonly="readonly"> 
+					</c:if>
 						<br>
 						<div style="height:20px;"></div>
 						<h5 style="font-weight:700;">默认联系地址</h5>
