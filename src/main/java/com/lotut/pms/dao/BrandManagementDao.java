@@ -10,6 +10,7 @@ import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
+import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
 
 public interface BrandManagementDao {
@@ -35,4 +36,6 @@ public interface BrandManagementDao {
 	List<BrandLegalStatusCount>  getLegalStatusCount(int userId);
 	
 	List<BrandCategoryCount>  getBrandCategoryCount(int userId);
+
+	List<BrandNoticeType> getAllBrandNoticeTypes();
 }

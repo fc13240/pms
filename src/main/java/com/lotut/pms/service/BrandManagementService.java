@@ -11,6 +11,7 @@ import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.BrandNoticeType;
 
 public interface BrandManagementService {
 
@@ -35,4 +36,6 @@ public interface BrandManagementService {
 	List<BrandLegalStatusCount>  getLegalStatusCount(int userId);
 	
 	List<BrandCategoryCount>  getBrandCategoryCount(int userId);
+
+	List<BrandNoticeType> getAllBrandNoticeTypes();
 }

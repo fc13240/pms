@@ -66,6 +66,11 @@
 			<id property="username" column="username"/>
 		</association>
 	</resultMap>
+	
+	<resultMap type="BrandNoticeType" id="BrandNoticeTypeResultMap">
+		<id property="noticeTypeId" column="notice_type_id"/>
+		<result property="noticeTypeDescription" column="notice_type_desc"/>
+	</resultMap>
 
 
   	<insert id="addOrEditBrand" parameterType="Brand" useGeneratedKeys="true" keyProperty="id">
@@ -254,6 +259,10 @@
 		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1)
 		GROUP BY bc.category_name
 		order by bc.category_id asc;
+	</select>
+	
+	<select id="getAllBrandNoticeTypes"  resultMap="BrandNoticeTypeResultMap">
+		select notice_type_id,notice_type_desc from brand_notice_types order by notice_type_id asc
 	</select>
 
 </mapper>
