@@ -266,6 +266,9 @@
 	<select id="getAllBrandNoticeTypes"  resultMap="BrandNoticeTypeResultMap">
 		select notice_type_id,notice_type_desc from brand_notice_types order by notice_type_id asc
 	</select>
-
+	
+	<delete id="deleteShareUser">
+		delete from user_brand_management where brand = #{brandId} and user=#{shareUserId}	   
+	</delete>
 </mapper>
   

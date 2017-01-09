@@ -95,5 +95,10 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 		return brandManagementDao.getAllBrandNoticeTypes();
 	}
 
+	@Override
+	public void deleteShareUser(int brandId, int shareUserId) {
+		brandManagementDao.deleteShareUser(brandId, shareUserId);
+	}
+
 	
 }

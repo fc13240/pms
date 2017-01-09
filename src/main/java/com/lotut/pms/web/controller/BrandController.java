@@ -432,7 +432,13 @@ public class BrandController {
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
 	}
-	 
+	
+	 @RequestMapping(path="/deleteShareUser", method=RequestMethod.GET)
+		public void deleteShareUser(int brandId,int shareUserId,Model model,
+				HttpServletResponse response) throws IOException{
+		 	brandManagementService.deleteShareUser(brandId,shareUserId);
+			WebUtils.writeJsonStrToResponse(response, "success");
+		}	
 	
 	
 }

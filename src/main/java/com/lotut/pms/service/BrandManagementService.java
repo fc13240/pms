@@ -44,4 +44,6 @@ public interface BrandManagementService {
 	BrandManagement showBrandManagementDetail(int brandId);
 
 	List<BrandNoticeType> getAllBrandNoticeTypes();
+	
+	void deleteShareUser(int brandId,int shareUserId);
 }

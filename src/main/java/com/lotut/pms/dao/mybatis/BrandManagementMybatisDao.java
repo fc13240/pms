@@ -97,6 +97,11 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 		return brandManagementMapper.getAllBrandNoticeTypes();
 	}
 
+	@Override
+	public void deleteShareUser(int brandId, int shareUserId) {
+		brandManagementMapper.deleteShareUser(brandId, shareUserId);
+	}
+
 	
 	
 }

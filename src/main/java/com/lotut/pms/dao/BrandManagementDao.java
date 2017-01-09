@@ -3,6 +3,8 @@ package com.lotut.pms.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
@@ -44,4 +46,6 @@ public interface BrandManagementDao {
 	BrandManagement showBrandManagementDetail(int brandId);
 
 	List<BrandNoticeType> getAllBrandNoticeTypes();
+	
+	void deleteShareUser(int brandId,int shareUserId);
 }
