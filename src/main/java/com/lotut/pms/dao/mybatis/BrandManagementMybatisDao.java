@@ -77,6 +77,12 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 		return brandManagementMapper.getBrandCategoryCount(userId);
 	}
 
+	@Override
+	public void brandsTrash(List<Integer> brandManagementIds, int userId) {
+		brandManagementMapper.brandsTrash( brandManagementIds,userId);
+		
+	}
+
 	
 	
 }

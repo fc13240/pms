@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
@@ -37,5 +39,7 @@ public interface BrandManagementMapper {
 	List<BrandLegalStatusCount>  getLegalStatusCount(int userId);
 	
 	List<BrandCategoryCount>  getBrandCategoryCount(int userId);
+
+	void brandsTrash(@Param("brands") List<Integer> brandManagementIds,@Param("userId") int userId);
 	
 }

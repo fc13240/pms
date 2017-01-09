@@ -246,6 +246,15 @@
 		GROUP BY bc.category_name
 		order by bc.category_id asc;
 	</select>
+	
+		<update id="brandsTrash"  >
+		update user_brand_management ubm set ubm.trash_status=2
+		 where ubm.user=#{userId} and ubm.brand in 
+			<foreach item="id" collection="brands"
+			     open="(" separator="," close=")">
+			   #{id}
+			</foreach>		 
+	</update>
 
 </mapper>
   

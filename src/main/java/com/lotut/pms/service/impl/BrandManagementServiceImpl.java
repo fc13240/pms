@@ -75,5 +75,13 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 		return brandManagementDao.getBrandCategoryCount(userId);
 	}
 
+	@Override
+	public void brandsTrash(List<Integer> brandManagementIds, int userId) {
+		brandManagementDao.brandsTrash(brandManagementIds,userId);
+		
+	}
+
+	
+
 	
 }
