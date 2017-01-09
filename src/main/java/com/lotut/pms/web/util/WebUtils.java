@@ -60,4 +60,13 @@ public class WebUtils {
 		String picName = (String) session.getAttribute("picName");
 		return picName;
 	}
+	
+	public static String getBrowser(HttpServletRequest request){
+	    String UserAgent = request.getHeader("USER-AGENT").toLowerCase();
+	    if(UserAgent!=null){
+	        if (UserAgent.indexOf("msie") >=0 ) return "IE";
+	        if (UserAgent.indexOf("firefox") >= 0) return "FF";
+	    }
+	    return null;
+	}
 }

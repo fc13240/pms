@@ -197,6 +197,11 @@ height:37px;
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" value="${brand.imageUrl}" id="brandEntrustFileHidden" name="imageUrl" />
 											<input style="width:200px;display:inline;" type="text" id="brandEntrustFileName"  class="selectPointOfInterest form-control" placeholder="请选择图片" readonly="readonly" onclick="$('input[id=brandEntrustFile]').click();" required="required"/>
 											<button type="button" onclick="uploadEntrustClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
+											<se:authorize access="hasRole('ROLE_ORDER')">
+											<c:if test="${not empty brand.imageUrl}">
+											<a href="<s:url value='/brand/downloadImgFile.html'/>?imgUrl=${brand.imageUrl}">下载</a>
+											</c:if>
+											</se:authorize>
 										</td>
 									</tr>
 
@@ -206,6 +211,9 @@ height:37px;
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" value="${brand.proxyFile}" id="brandProxyFileHidden" name="proxyFile" />
 											<input style="width:200px;display:inline;" type="text" id="brandProxyFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandProxyFile]').click();" required="required"/>
 											<button type="button" onclick="uploadProxyClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
+											<c:if test="${not empty brand.proxyFile}">
+											<a href="<s:url value='/brand/downloadProxyFile.html'/>?proxyFile=${brand.proxyFile}">下载</a>
+											</c:if>
 										</td>
 									</tr>		
 									
@@ -215,6 +223,9 @@ height:37px;
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" value="${brand.businessLicense}" id="brandBusinessLicenseHidden" name="businessLicense" />
 											<input style="width:200px;display:inline;" type="text" id="brandBusinessLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandBusinessLicenseFile]').click();" required="required"/>
 											<button type="button" onclick="uploadBusinessLicenseClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
+											<c:if test="${not empty brand.businessLicense}">
+											<a href="<s:url value='/brand/downloadBusinessLicense.html'/>?imgUrl=${brand.businessLicense}">下载</a>
+											</c:if>
 										</td>
 									</tr>		
 									
@@ -224,6 +235,9 @@ height:37px;
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" value="${brand.entityLicense}" id="brandEntityLicenseHidden" name="entityLicense" />
 											<input style="width:200px;display:inline;" type="text" id="brandEntityLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandEntityLicenseFile]').click();" required="required"/>
 											<button type="button" onclick="uploadEntityLicenseClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
+											<c:if test="${not empty brand.imageUrl}">
+											<a href="<s:url value='/brand/downloadImgFile.html'/>?imgUrl=${brand.imageUrl}">下载</a>
+											</c:if>
 										</td>
 									</tr>		
 								
@@ -233,6 +247,7 @@ height:37px;
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" value="${brand.individualLicense}" id="brandIndividualLicenseHidden" name="individualLicense" />
 											<input style="width:200px;display:inline;" type="text" id="brandIndividualLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandIndividualLicenseFile]').click();" required="required"/>
 											<button type="button" onclick="uploadIndividualLicenseClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
+											<button type="button" onclick="uploadIndividualLicenseClick()" class="t-btn3 button button-primary  button-rounded">下载</button>
 										</td>
 									</tr>
 									
@@ -253,22 +268,24 @@ height:37px;
 											<button type="button" onclick="uploadApplicationClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
 									</tr>
-									<se:authorize access="hasRole('ROLE_ORDER')">
+									
 									<tr>
 										<th>共享人</th>
 										<td>
 										<c:forEach items="${brand.shareUsers}" var="shareBrand" varStatus="status">	
 											<span class='ss-item' id="shareUser${status.index}">${shareBrand.username}
+												<se:authorize access="hasRole('ROLE_PLATFORM')">
 												<a class='icon-btn-x' href="javascript: return void;"
 													onclick="deleteShareUser(${brand.id},${shareBrand.userId},${status.index})" >								
 													<img src="<s:url value='/temp/images/remove.png'/>" style="float:left;" />
 												</a>
+												</se:authorize>	
 											</span>		
 								        </c:forEach>
 										<br>
 										</td>
 									</tr>
-									</se:authorize>	  									
+									  									
 									</tbody>
 								</table>	
 							<div class="form-actions">
