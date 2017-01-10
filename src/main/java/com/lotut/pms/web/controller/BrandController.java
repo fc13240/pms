@@ -40,6 +40,8 @@ import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.WeChatOrder;
 import com.lotut.pms.service.BrandManagementService;
@@ -352,6 +354,7 @@ public class BrandController {
 			while ((bytesRead = in.read(buffer)) != -1) {
 				out.write(buffer, 0, bytesRead);
 			}
+			out.flush();
 			out.close();
 			in.close();
 		}
@@ -487,6 +490,57 @@ public class BrandController {
 			WebUtils.writeJsonStrToResponse(response, "success");
 		}	
 	 
+
+		@RequestMapping(path="/brandRecycled", method=RequestMethod.GET)
+		public String patentRecycled(Model model, Page page, HttpSession session){
+			int userId = PrincipalUtils.getCurrentUserId();
+			page.setUserId(userId);
+			page.setPageSize(WebUtils.getPageSize(session));
+			if (page.getCurrentPage() <= 0) {
+				page.setCurrentPage(1);
+			}
+			int totalCount=brandManagementService.getBrandsRecycledCount(userId);
+			page.setTotalRecords(totalCount);
+			List<Brand> brands=brandManagementService.getBrandsRecycled(page);
+			model.addAttribute("brands", brands);
+			model.addAttribute("page", page);
+			return "brand_recycled";
+		}
+		
+		@RequestMapping(path="/searchBrandRecycled", method=RequestMethod.GET)
+		public String searchBrandRecycled(@ModelAttribute("searchCondition")BrandManagementSearchCondition searchCondition, Model model,HttpSession session){
+			Page page=searchCondition.getPage();
+			page.setPageSize(WebUtils.getPageSize(session));
+			searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+			if (page.getCurrentPage() <= 0) {
+				page.setCurrentPage(1);
+			}
+			int totalCount=brandManagementService.SearchBrandsRecycledCount(searchCondition);
+			page.setTotalRecords(totalCount);
+			List<Brand> brands=brandManagementService.SearchBrandsRecycled(searchCondition);
+			model.addAttribute("brands", brands);
+			model.addAttribute("page", page);
+			return "brand_recycled";
+		}
+		
+		@RequestMapping(path="/recoverBrands", method=RequestMethod.GET)
+		public void recoverBrand(@RequestParam("brands") List<Integer> brandManagementIds,PrintWriter writer){
+			int userId = PrincipalUtils.getCurrentUserId();
+			brandManagementService.recoverBrands(brandManagementIds, userId);
+			writer.write(1);
+			
+		}
+		
+		@RequestMapping(path="/deleteForeverBrands", method=RequestMethod.GET)
+		public void deleteForeverBrands(@RequestParam("brands") List<Integer> brandManagementIds,PrintWriter writer){
+			int userId = PrincipalUtils.getCurrentUserId();
+			brandManagementService.deleteForeverBrands(brandManagementIds, userId);
+			writer.write(1);
+		}
+		
+	
+
+
 	 @RequestMapping(path="/downloadImgFile", method=RequestMethod.GET)
 		public void downloadImgFile(String imgUrl, HttpServletResponse response,HttpServletRequest request) throws IOException {
 			response.setContentType("application/octet-stream ");
@@ -518,4 +572,5 @@ public class BrandController {
 			response.setContentLength((int)targetFile.length());
 			WebUtils.writeStreamToResponse(response, new FileInputStream(targetFile));
 		}
+
 }

@@ -411,7 +411,7 @@
 									<a href="<s:url value='/notice/showFriends.html'/>?brands=<c:out value='${notice.brand.id}'/>">
 									  分享
 									  </a>&nbsp;
-									  <a target="_blank" href="<s:url value='/notice/showRemarks.html'/>?noticeId=${notice.noticeId}">
+									  <a target="_blank" href="<s:url value='/brandNotice/getBrandNoticeRemark.html'/>?brandNoticeId=${notice.noticeId}">
 								            备注
 								    </a>
 									  <br/>
@@ -893,12 +893,12 @@ function batchProcessNotice(processStatus) {
 		var noticeSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
 		
 		if (!noticeSelected) {
-			formutil.alertMessage('请选择要导出的通知书');
+			formutil.alertMessage('请选择要导出的商标通知书');
 			return;
 		}
 		var notices = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'notice');
 		var iframe = document.getElementById('noticeExcelFileFrame');
-		iframe.src = "<s:url value='/notice/exportNotices.html'/>?noticeIds=" + notices;
+		iframe.src = "<s:url value='/brandNotice/downloadUserNotice.html'/>?noticeIds=" + notices;
 		
 	}
 	

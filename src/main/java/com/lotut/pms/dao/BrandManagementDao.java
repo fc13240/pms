@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
@@ -14,6 +15,7 @@ import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.PatentSearchCondition;
 
 public interface BrandManagementDao {
 
@@ -55,4 +57,17 @@ public interface BrandManagementDao {
 	
 	void deleteShareUser(int brandId,int shareUserId);
 
+	int getBrandsRecycledCount(int userId);
+
+	List<Brand> getBrandsRecycled(Page page);
+	
+	int SearchBrandsRecycledCount(BrandManagementSearchCondition  searchCondition);
+
+	List<Brand> SearchBrandsRecycled(BrandManagementSearchCondition searchCondition);
+
+	void recoverBrands(List<Integer> brandManagementIds, int userId);
+
+	void deleteForeverBrands(List<Integer> brandManagementIds, int userId);
+
+	
 }

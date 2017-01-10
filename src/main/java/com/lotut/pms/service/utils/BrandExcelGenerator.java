@@ -11,7 +11,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.lotut.pms.domain.BrandManagement;
 
-public class BrandExcelGenerrator {
+public class BrandExcelGenerator {
 	public static void writeBrandToexcel(List<BrandManagement> brands,String resultBrandExcelPath){
 		final String excelName = "商标清单";
 		try {
