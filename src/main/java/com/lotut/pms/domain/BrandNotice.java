@@ -1,6 +1,7 @@
 package com.lotut.pms.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class BrandNotice {
 	private String noticeSequence;
@@ -22,8 +23,26 @@ public class BrandNotice {
 	private NoticePaperApplyType paperApplyType;
 	private Long noticeViewStatus;
 	private int starTargetMonitorStatus;
+	private BrandLegalStatus brandLegalStatus;
+	private List<User> shareUsers;
 	
 	
+
+	public BrandLegalStatus getBrandLegalStatus() {
+		return brandLegalStatus;
+	}
+
+	public void setBrandLegalStatus(BrandLegalStatus brandLegalStatus) {
+		this.brandLegalStatus = brandLegalStatus;
+	}
+
+	public List<User> getShareUsers() {
+		return shareUsers;
+	}
+
+	public void setShareUsers(List<User> shareUsers) {
+		this.shareUsers = shareUsers;
+	}
 
 	public int getStarTargetMonitorStatus() {
 		return starTargetMonitorStatus;
