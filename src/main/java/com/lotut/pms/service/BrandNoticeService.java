@@ -1,9 +1,9 @@
 package com.lotut.pms.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.lotut.pms.domain.BrandNotice;
+import com.lotut.pms.domain.BrandNoticeRemark;
 import com.lotut.pms.domain.Page;
 
 public interface BrandNoticeService {
@@ -12,5 +12,11 @@ public interface BrandNoticeService {
 
 	List<BrandNotice> getUserBrandNoticeList(Page page);
 	
+	String exportNoticeExcel (List<Integer> noticeIds, String excelNoticesName) throws Exception;
+	
+	void saveBrandNoticeRemark(BrandNoticeRemark brandNoticeRemark);
+	
+	List<BrandNoticeRemark> getBrandNoticeListByNoticeId(long brandNoticeId);
+
 	int batchChangeBrandNoticeViewStatus(List<Long> noticeIdList,int userId);
 }

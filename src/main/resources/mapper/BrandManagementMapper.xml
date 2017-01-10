@@ -25,10 +25,10 @@
 		<result property="individualLicense" column="individual_license"/>
 		<result property="identityCard" column="identity_card"/>
 		<result property="application" column="application"/>
-		<association property="user" javaType="User">
+		<!-- <association property="user" javaType="User">
 			<id property="userId" column="user_id"/>
 			<result property="username" column="username"/>
-		</association>
+		</association> -->
 		<association property="brandCategory" resultMap="BrandCategoryResultMap"/>
 		<association property="brandLegalStatus" resultMap="BrandLegalStatusResultMap"/>
 		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
