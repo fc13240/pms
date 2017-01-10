@@ -489,7 +489,7 @@ public class BrandController {
 			WebUtils.writeJsonStrToResponse(response, "success");
 		}	
 	 
-<<<<<<< HEAD
+
 		@RequestMapping(path="/brandRecycled", method=RequestMethod.GET)
 		public String patentRecycled(Model model, Page page, HttpSession session){
 			int userId = PrincipalUtils.getCurrentUserId();
@@ -539,7 +539,7 @@ public class BrandController {
 		
 	
 
-=======
+
 	 @RequestMapping(path="/downloadImgFile", method=RequestMethod.GET)
 		public void downloadImgFile(String imgUrl, HttpServletResponse response,HttpServletRequest request) throws IOException {
 			response.setContentType("application/octet-stream ");
@@ -571,5 +571,5 @@ public class BrandController {
 			response.setContentLength((int)targetFile.length());
 			WebUtils.writeStreamToResponse(response, new FileInputStream(targetFile));
 		}
->>>>>>> 6d7ab61e983cf38692a24433cd51135a9779f13b
+
 }
