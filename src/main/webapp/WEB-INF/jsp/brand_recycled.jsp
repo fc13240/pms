@@ -47,7 +47,7 @@
 							  </tr>
 							  <tr>
 							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="申请号/注册号/商标名称/专有权人/法律状态" class="t-input form-control"/>							  
+								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="商标类别/申请号/注册号/商标名称/专有权人/法律状态" class="t-input form-control"/>							  
 							  </td>
 							  <td>
 							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
