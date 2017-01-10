@@ -9,7 +9,7 @@
 	      <div class="mod-sitemap-wecome f-fl">
 	      
 	      <span></span>
-	      <a href="http://www.lotut.com" style="margin-left:10px;" target="_blank">龙图腾商标专利交易</a>
+	      <a href="http://r.lotut.com" style="margin-left:10px;" target="_blank">龙图腾商标专利交易</a>
 	      <a href="http://g.lotut.com" style="margin-left:10px;">专利管家</a>
 	      <a href="http://hao.lotut.com" style="margin-left:10px;" target="_blank">网址导航</a>
 	      <a href="http://so.lotut.com" style="margin-left:10px;" target="_blank">专利检索</a>
