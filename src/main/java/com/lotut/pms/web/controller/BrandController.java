@@ -1,16 +1,19 @@
 package com.lotut.pms.web.controller;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
@@ -486,6 +489,7 @@ public class BrandController {
 			WebUtils.writeJsonStrToResponse(response, "success");
 		}	
 	 
+<<<<<<< HEAD
 		@RequestMapping(path="/brandRecycled", method=RequestMethod.GET)
 		public String patentRecycled(Model model, Page page, HttpSession session){
 			int userId = PrincipalUtils.getCurrentUserId();
@@ -535,4 +539,37 @@ public class BrandController {
 		
 	
 
+=======
+	 @RequestMapping(path="/downloadImgFile", method=RequestMethod.GET)
+		public void downloadImgFile(String imgUrl, HttpServletResponse response,HttpServletRequest request) throws IOException {
+			response.setContentType("application/octet-stream ");
+			String targetUrl=imgUrl.substring(1, imgUrl.lastIndexOf("."));
+			String downloadFileName = URLEncoder.encode(imgUrl.substring(imgUrl.lastIndexOf("/")+1,imgUrl.lastIndexOf(".")), "UTF8");
+			String filePath = Settings.BRAND_MANAGEMENT_IMAGE_PATH+targetUrl;
+			File targetFile = new File(filePath);
+			if("FF".equals(WebUtils.getBrowser(request))){
+			    //针对火狐浏览器处理
+				downloadFileName =new String(imgUrl.substring(imgUrl.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
+			}
+			response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
+			response.setContentLength((int)targetFile.length());
+			WebUtils.writeStreamToResponse(response, new FileInputStream(targetFile));
+		}
+	 
+	 @RequestMapping(path="/downloadProxyFile", method=RequestMethod.GET)
+		public void downloadproxyFile(String proxyFile, HttpServletResponse response,HttpServletRequest request) throws IOException {
+			response.setContentType("application/octet-stream ");
+			String targetUrl=proxyFile.substring(1, proxyFile.lastIndexOf("."));
+			String downloadFileName = URLEncoder.encode(proxyFile.substring(proxyFile.lastIndexOf("/")+1,proxyFile.lastIndexOf(".")), "UTF8");
+			String filePath = Settings.BRAND_MANAGEMENT_PROXYFILE_PATH+targetUrl;
+			File targetFile = new File(filePath);
+			if("FF".equals(WebUtils.getBrowser(request))){
+			    //针对火狐浏览器处理
+				downloadFileName =new String(proxyFile.substring(proxyFile.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
+			}
+			response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
+			response.setContentLength((int)targetFile.length());
+			WebUtils.writeStreamToResponse(response, new FileInputStream(targetFile));
+		}
+>>>>>>> 6d7ab61e983cf38692a24433cd51135a9779f13b
 }
