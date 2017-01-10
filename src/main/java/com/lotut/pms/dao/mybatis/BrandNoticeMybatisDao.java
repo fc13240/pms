@@ -1,6 +1,7 @@
 package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -40,6 +41,11 @@ public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements Brand
 	@Override
 	public List<BrandNoticeRemark> getBrandNoticeListByNoticeId(long brandNoticeId) {
 		return brandNoticeMapper.getBrandNoticeListByNoticeId(brandNoticeId);
+	}
+	
+	@Override
+	public void batchChangeBrandNoticeViewStatus(List<Map<String, Long>> noticeIdList) {
+		brandNoticeMapper.batchChangeBrandNoticeViewStatus(noticeIdList);
 	}
 	
 }

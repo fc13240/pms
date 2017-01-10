@@ -65,8 +65,8 @@
 			b.app_date,bmn.dispatch_date,bls.legal_status_id,bls.legal_status_name,bmn.star_target_monitor_status,
 			nvl.notice_id AS notice_view_status,bnt.notice_type_id,bnt.notice_type_desc,bmn.notice_id,bmn.notice_name
 		
-		FROM brand_management b
-		LEFT JOIN brand_management_notices bmn ON b.id=bmn.brand		
+		FROM brand_management_notices bmn 
+		LEFT JOIN brand_management b ON bmn.brand=b.id			
 		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
 		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
 		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
@@ -79,8 +79,8 @@
   	</select>
   	
 	<select id="getUserBrandNoticeCount" parameterType="int" resultType="int">
-  		select count(*) from brand_management b 
-  		LEFT JOIN brand_management_notices bmn ON b.id=bmn.brand
+  		select count(*) FROM brand_management_notices bmn 
+		LEFT JOIN brand_management b ON bmn.brand=b.id	
   		where b.id in (select brand from user_brand_management where user =#{userId} and trash_status=1) 
   	</select>
   	
@@ -109,8 +109,17 @@
 		insert into brand_notice_remark(content,brand_notice,user) values(#{content},#{brandNotice},#{user.userId})
 	</insert>
 	
+  	<insert id="batchChangeBrandNoticeViewStatus" parameterType="list">
+		replace into brand_notice_read(notice_id, user_id) 
+		values
+		<foreach item="noticeIdList" collection="list" separator=",">
+			(#{noticeIdList.noticeId}, #{noticeIdList.userId})
+		</foreach>
+	</insert>
+	
 	<select id="getBrandNoticeListByNoticeId" parameterType="long" resultMap="BrandNoticeRemarkMap">
 		select bnr.remark_id,bnr.remark_time,bnr.content,bnr.brand_notice,u.user_id,u.username from brand_notice_remark bnr left join users 
 		u on bnr.user=u.user_id where bnr.brand_notice=#{brandNoticeId}
 	</select>
+
 </mapper>

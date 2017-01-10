@@ -35,7 +35,7 @@
 		</a>
 	</li>
 	<li class="active"> 
-		<a href="<s:url value='/news/getNewsTypeList.html'/>">
+		<a href="<s:url value='/brand/brandRecycled.html?currentPage=1'/>">
 		<h5>回收站</h5>
 		</a>
 	</li>

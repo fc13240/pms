@@ -1,16 +1,19 @@
 package com.lotut.pms.web.controller;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
@@ -37,6 +40,8 @@ import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.Patent;
+import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.WeChatOrder;
 import com.lotut.pms.service.BrandManagementService;
@@ -468,5 +473,104 @@ public class BrandController {
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
 	}
+	
+
+	@RequestMapping(path="/deleteBrandManagement", method=RequestMethod.GET)
+	public void deleteBrandManagement(@RequestParam("brands")List<Integer> brandManagementIds,PrintWriter writer){
+		int userId = PrincipalUtils.getCurrentUserId();
+		brandManagementService.brandsTrash(brandManagementIds,userId);
+		writer.write(1);
+	}
+	
+
+	 @RequestMapping(path="/deleteShareUser", method=RequestMethod.GET)
+		public void deleteShareUser(int brandId,int shareUserId,Model model,
+				HttpServletResponse response) throws IOException{
+		 	brandManagementService.deleteShareUser(brandId,shareUserId);
+			WebUtils.writeJsonStrToResponse(response, "success");
+		}	
+	 
+
+		@RequestMapping(path="/brandRecycled", method=RequestMethod.GET)
+		public String patentRecycled(Model model, Page page, HttpSession session){
+			int userId = PrincipalUtils.getCurrentUserId();
+			page.setUserId(userId);
+			page.setPageSize(WebUtils.getPageSize(session));
+			if (page.getCurrentPage() <= 0) {
+				page.setCurrentPage(1);
+			}
+			int totalCount=brandManagementService.getBrandsRecycledCount(userId);
+			page.setTotalRecords(totalCount);
+			List<Brand> brands=brandManagementService.getBrandsRecycled(page);
+			model.addAttribute("brands", brands);
+			model.addAttribute("page", page);
+			return "brand_recycled";
+		}
+		
+		@RequestMapping(path="/searchBrandRecycled", method=RequestMethod.GET)
+		public String searchBrandRecycled(@ModelAttribute("searchCondition")BrandManagementSearchCondition searchCondition, Model model,HttpSession session){
+			Page page=searchCondition.getPage();
+			page.setPageSize(WebUtils.getPageSize(session));
+			searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+			if (page.getCurrentPage() <= 0) {
+				page.setCurrentPage(1);
+			}
+			int totalCount=brandManagementService.SearchBrandsRecycledCount(searchCondition);
+			page.setTotalRecords(totalCount);
+			List<Brand> brands=brandManagementService.SearchBrandsRecycled(searchCondition);
+			model.addAttribute("brands", brands);
+			model.addAttribute("page", page);
+			return "brand_recycled";
+		}
+		
+		@RequestMapping(path="/recoverBrands", method=RequestMethod.GET)
+		public void recoverBrand(@RequestParam("brands") List<Integer> brandManagementIds,PrintWriter writer){
+			int userId = PrincipalUtils.getCurrentUserId();
+			brandManagementService.recoverBrands(brandManagementIds, userId);
+			writer.write(1);
+			
+		}
+		
+		@RequestMapping(path="/deleteForeverBrands", method=RequestMethod.GET)
+		public void deleteForeverBrands(@RequestParam("brands") List<Integer> brandManagementIds,PrintWriter writer){
+			int userId = PrincipalUtils.getCurrentUserId();
+			brandManagementService.deleteForeverBrands(brandManagementIds, userId);
+			writer.write(1);
+		}
+		
+	
+
+
+	 @RequestMapping(path="/downloadImgFile", method=RequestMethod.GET)
+		public void downloadImgFile(String imgUrl, HttpServletResponse response,HttpServletRequest request) throws IOException {
+			response.setContentType("application/octet-stream ");
+			String targetUrl=imgUrl.substring(1, imgUrl.lastIndexOf("."));
+			String downloadFileName = URLEncoder.encode(imgUrl.substring(imgUrl.lastIndexOf("/")+1,imgUrl.lastIndexOf(".")), "UTF8");
+			String filePath = Settings.BRAND_MANAGEMENT_IMAGE_PATH+targetUrl;
+			File targetFile = new File(filePath);
+			if("FF".equals(WebUtils.getBrowser(request))){
+			    //针对火狐浏览器处理
+				downloadFileName =new String(imgUrl.substring(imgUrl.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
+			}
+			response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
+			response.setContentLength((int)targetFile.length());
+			WebUtils.writeStreamToResponse(response, new FileInputStream(targetFile));
+		}
+	 
+	 @RequestMapping(path="/downloadProxyFile", method=RequestMethod.GET)
+		public void downloadproxyFile(String proxyFile, HttpServletResponse response,HttpServletRequest request) throws IOException {
+			response.setContentType("application/octet-stream ");
+			String targetUrl=proxyFile.substring(1, proxyFile.lastIndexOf("."));
+			String downloadFileName = URLEncoder.encode(proxyFile.substring(proxyFile.lastIndexOf("/")+1,proxyFile.lastIndexOf(".")), "UTF8");
+			String filePath = Settings.BRAND_MANAGEMENT_PROXYFILE_PATH+targetUrl;
+			File targetFile = new File(filePath);
+			if("FF".equals(WebUtils.getBrowser(request))){
+			    //针对火狐浏览器处理
+				downloadFileName =new String(proxyFile.substring(proxyFile.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
+			}
+			response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
+			response.setContentLength((int)targetFile.length());
+			WebUtils.writeStreamToResponse(response, new FileInputStream(targetFile));
+		}
 
 }

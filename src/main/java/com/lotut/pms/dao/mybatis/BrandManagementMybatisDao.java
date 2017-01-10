@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lotut.pms.dao.BrandManagementDao;
 import com.lotut.pms.dao.mapper.BrandManagementMapper;
+import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
@@ -16,6 +17,7 @@ import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.PatentSearchCondition;
 
 public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements BrandManagementDao{
 	private BrandManagementMapper brandManagementMapper;
@@ -84,6 +86,9 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 	}
 
 	@Override
+	public void brandsTrash(List<Integer> brandManagementIds, int userId) {
+		brandManagementMapper.brandsTrash( brandManagementIds,userId);
+	}
 	public int insertOrUpdateBrand(BrandManagement brandManagement) {
 		return brandManagementMapper.insertOrUpdateBrand(brandManagement);
 	}
@@ -101,6 +106,45 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 	public List<BrandNoticeType> getAllBrandNoticeTypes() {
 		return brandManagementMapper.getAllBrandNoticeTypes();
 	}
+
+	@Override
+	public void deleteShareUser(int brandId, int shareUserId) {
+		brandManagementMapper.deleteShareUser(brandId, shareUserId);
+	}
+
+	@Override
+	public int getBrandsRecycledCount(int userId) {
+		return brandManagementMapper.getBrandsRecycledCount(userId);
+	}
+
+	@Override
+	public List<Brand> getBrandsRecycled(Page page) {
+		return brandManagementMapper.getBrandsRecycled(page);
+	}
+
+	@Override
+	public int SearchBrandsRecycledCount(BrandManagementSearchCondition searchCondition) {
+		return brandManagementMapper.SearchBrandsRecycledCount(searchCondition);
+	}
+
+	@Override
+	public List<Brand> SearchBrandsRecycled(BrandManagementSearchCondition searchCondition) {
+		return brandManagementMapper.SearchBrandsRecycled(searchCondition);
+	}
+	
+	@Override
+	public void recoverBrands(List<Integer> brandManagementIds, int userId) {
+		brandManagementMapper.recoverBrands(brandManagementIds,userId);
+		
+	}
+
+	@Override
+	public void deleteForeverBrands(List<Integer> brandManagementIds, int userId) {
+		brandManagementMapper.deleteForeverBrands(brandManagementIds,userId);
+		
+	}
+
+	
 
 	
 	

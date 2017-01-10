@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
-<title>龙图腾专利管家-商标列表</title>
+<title>龙图腾专利管家-添加商标</title>
 <%@ include file="_css.jsp" %>
 
 </head>
@@ -211,7 +211,7 @@ height:37px;
 										<th>委托书</th>
 										<td>
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandProxyFileHidden" name="proxyFile" />
-											<input style="width:200px;display:inline;" type="text" id="brandProxyFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandProxyFile]').click();" required="required"/>
+											<input style="width:200px;display:inline;" type="text" id="brandProxyFileName"  class="selectPointOfInterest form-control" placeholder="请选择pdf或图片" readonly="readonly" onclick="$('input[id=brandProxyFile]').click();" required="required"/>
 											<button type="button" onclick="uploadProxyClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
 									</tr>		
@@ -220,7 +220,7 @@ height:37px;
 										<th>企业营业执照</th>
 										<td>
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandBusinessLicenseHidden" name="businessLicense" />
-											<input style="width:200px;display:inline;" type="text" id="brandBusinessLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandBusinessLicenseFile]').click();" required="required"/>
+											<input style="width:200px;display:inline;" type="text" id="brandBusinessLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择pdf或图片" readonly="readonly" onclick="$('input[id=brandBusinessLicenseFile]').click();" required="required"/>
 											<button type="button" onclick="uploadBusinessLicenseClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
 									</tr>		
@@ -229,7 +229,7 @@ height:37px;
 										<th>事业单位执照</th>
 										<td>
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandEntityLicenseHidden" name="entityLicense" />
-											<input style="width:200px;display:inline;" type="text" id="brandEntityLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandEntityLicenseFile]').click();" required="required"/>
+											<input style="width:200px;display:inline;" type="text" id="brandEntityLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择pdf或图片" readonly="readonly" onclick="$('input[id=brandEntityLicenseFile]').click();" required="required"/>
 											<button type="button" onclick="uploadEntityLicenseClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
 									</tr>		
@@ -238,7 +238,7 @@ height:37px;
 										<th>个体工商执照</th>
 										<td>
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandIndividualLicenseHidden" name="individualLicense" />
-											<input style="width:200px;display:inline;" type="text" id="brandIndividualLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandIndividualLicenseFile]').click();" required="required"/>
+											<input style="width:200px;display:inline;" type="text" id="brandIndividualLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择pdf或图片" readonly="readonly" onclick="$('input[id=brandIndividualLicenseFile]').click();" required="required"/>
 											<button type="button" onclick="uploadIndividualLicenseClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
 									</tr>
@@ -247,7 +247,7 @@ height:37px;
 										<th>身份证正反面</th>
 										<td>
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandIdentityCardHidden" name="identityCard" />
-											<input style="width:200px;display:inline;" type="text" id="brandIdentityCardFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandIdentityCardFile]').click();" required="required"/>
+											<input style="width:200px;display:inline;" type="text" id="brandIdentityCardFileName"  class="selectPointOfInterest form-control" placeholder="请选择pdf或图片" readonly="readonly" onclick="$('input[id=brandIdentityCardFile]').click();" required="required"/>
 											<button type="button" onclick="uploadIdentityCardClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
 									</tr>			
@@ -256,7 +256,7 @@ height:37px;
 										<th>申请书</th>
 										<td>
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandApplicationHidden" name="application" />
-											<input style="width:200px;display:inline;" type="text" id="brandApplicationFileName"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandApplicationFile]').click();" required="required"/>
+											<input style="width:200px;display:inline;" type="text" id="brandApplicationFileName"  class="selectPointOfInterest form-control" placeholder="请选择pdf或图片" readonly="readonly" onclick="$('input[id=brandApplicationFile]').click();" required="required"/>
 											<button type="button" onclick="uploadApplicationClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 										</td>
 									</tr>							
@@ -354,10 +354,10 @@ function uploadProxyFile(){
 			beforeSubmit : function (){
 				var filename = $("#brandProxyFileName").val();
 				var suffix = filename.toLowerCase().substr(filename.lastIndexOf(".")+1);
-				if(suffix=="pdf"||suffix=="jpg"){
+				if(suffix=="pdf"||suffix=="jpg"||suffix=="png"||suffix=="jpeg"){
 					return true;
 				}else{
-					alert("请上传后缀名为pdf或jpg格式的文件！");
+					alert("请上传pdf或格式如jpg、png、jpeg的图片！");
 					return false;
 				}
 			},
@@ -389,10 +389,10 @@ function uploadBusinessLicenseFile(){
 			beforeSubmit : function (){
 				var filename = $("#brandBusinessLicenseFileName").val();
 				var suffix = filename.toLowerCase().substr(filename.lastIndexOf(".")+1);
-				if(suffix=="pdf"||suffix=="jpg"){
+				if(suffix=="pdf"||suffix=="jpg"||suffix=="png"||suffix=="jpeg"){
 					return true;
 				}else{
-					alert("请上传后缀名为pdf或jpg格式的文件！");
+					alert("请上传pdf或格式如jpg、png、jpeg的图片！");
 					return false;
 				}
 			},
@@ -423,10 +423,10 @@ function uploadEntityLicenseFile(){
 			beforeSubmit : function (){
 				var filename = $("#brandEntityLicenseFileName").val();
 				var suffix = filename.toLowerCase().substr(filename.lastIndexOf(".")+1);
-				if(suffix=="pdf"||suffix=="jpg"){
+				if(suffix=="pdf"||suffix=="jpg"||suffix=="png"||suffix=="jpeg"){
 					return true;
 				}else{
-					alert("请上传后缀名为pdf或jpg格式的文件！");
+					alert("请上传pdf或格式如jpg、png、jpeg的图片！");
 					return false;
 				}
 			},
@@ -457,10 +457,10 @@ function uploadIndividualLicenseFile(){
 			beforeSubmit : function (){
 				var filename = $("#brandIndividualLicenseFileName").val();
 				var suffix = filename.toLowerCase().substr(filename.lastIndexOf(".")+1);
-				if(suffix=="pdf"||suffix=="jpg"){
+				if(suffix=="pdf"||suffix=="jpg"||suffix=="png"||suffix=="jpeg"){
 					return true;
 				}else{
-					alert("请上传后缀名为pdf或jpg格式的文件！");
+					alert("请上传pdf或格式如jpg、png、jpeg的图片！");
 					return false;
 				}
 			},
@@ -491,10 +491,10 @@ function uploadIdentityCardFile(){
 			beforeSubmit : function (){
 				var filename = $("#brandIdentityCardFileName").val();
 				var suffix = filename.toLowerCase().substr(filename.lastIndexOf(".")+1);
-				if(suffix=="pdf"||suffix=="jpg"){
+				if(suffix=="pdf"||suffix=="jpg"||suffix=="png"||suffix=="jpeg"){
 					return true;
 				}else{
-					alert("请上传后缀名为pdf或jpg格式的文件！");
+					alert("请上传pdf或格式如jpg、png、jpeg的图片！");
 					return false;
 				}
 			},
@@ -524,10 +524,10 @@ function uploadApplicationFile(){
 			beforeSubmit : function (){
 				var filename = $("#brandApplicationFileName").val();
 				var suffix = filename.toLowerCase().substr(filename.lastIndexOf(".")+1);
-				if(suffix=="pdf"||suffix=="jpg"){
+				if(suffix=="pdf"||suffix=="jpg"||suffix=="png"||suffix=="jpeg"){
 					return true;
 				}else{
-					alert("请上传后缀名为pdf或jpg格式的文件！");
+					alert("请上传pdf或格式如jpg、png、jpeg的图片！");
 					return false;
 				}
 			},

@@ -1,6 +1,7 @@
 package com.lotut.pms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lotut.pms.domain.BrandNotice;
 import com.lotut.pms.domain.BrandNoticeRemark;
@@ -18,4 +19,5 @@ public interface BrandNoticeDao {
 	
 	List<BrandNoticeRemark> getBrandNoticeListByNoticeId(long brandNoticeId);
 
+	void batchChangeBrandNoticeViewStatus(List<Map<String, Long>> noticeIdList);
 }

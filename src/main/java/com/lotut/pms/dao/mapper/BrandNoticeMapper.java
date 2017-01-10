@@ -1,6 +1,7 @@
 package com.lotut.pms.dao.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -20,4 +21,5 @@ public interface BrandNoticeMapper {
 	
 	List<BrandNoticeRemark> getBrandNoticeListByNoticeId(long brandNoticeId);
 
+	void batchChangeBrandNoticeViewStatus(List<Map<String, Long>> noticeIdList);
 }

@@ -2,9 +2,6 @@ package com.lotut.pms.web.controller;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
@@ -12,12 +9,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.lucene.search.suggest.BufferedInputIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lotut.pms.domain.BrandNotice;
@@ -94,4 +91,10 @@ public class BrandNoticeController {
 		brandNoticeService.saveBrandNoticeRemark(brandNoticeRemark);
 		pw.write("success");
 	}
+	@RequestMapping(path="/batchChangeBrandNoticeViewStatus", method=RequestMethod.GET)
+	public void batchChangeBrandNoticeViewStatus(@RequestParam("notices")List<Long> noticeIdList) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		brandNoticeService.batchChangeBrandNoticeViewStatus(noticeIdList, userId);
+	}
+	
 }
