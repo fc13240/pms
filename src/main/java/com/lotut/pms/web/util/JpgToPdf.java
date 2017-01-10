@@ -35,8 +35,8 @@ public class JpgToPdf {
 	}
 	
 	public static void main(String[] args) throws IOException, DocumentException {
-		String imgFilePath="C:\\Users\\xw\\Desktop\\小图\\2-农林渔牧食品-贾海波\\15.jpg";
-		String pdfFilePath="C:\\Users\\xw\\Desktop\\小图\\2-农林渔牧食品-贾海波\\15.pdf";
+		String imgFilePath="C:\\Users\\xw\\Desktop\\小图\\2-农林渔牧食品-贾海波\\FU0QJ06__68[K`LOW{W%3(Y.png";
+		String pdfFilePath="C:\\Users\\xw\\Desktop\\小图\\2-农林渔牧食品-贾海波\\FU0QJ06__68[K`LOW{W%3(Y.pdf";
 		imgToPdf(imgFilePath, pdfFilePath);
 	}
 }
