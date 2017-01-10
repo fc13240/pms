@@ -25,7 +25,7 @@
 		<result property="dispatchSequence" column="dispatch_sequence"/>
 		<result property="dispatchDate" column="dispatch_date"/>
 		<result property="remainDays" column="remain_days"/>
-		<result property="noticeCode" column="noticeCode"/>
+		<result property="noticeCode" column="notice_code"/>
 		<result property="zipBid" column="zip_bid"/>
 		<result property="dmhFlag" column="dmh_flag"/>
 		<result property="archiveNo" column="archive_no"/>
@@ -49,6 +49,16 @@
 			
 	</resultMap>
 
+	<resultMap type="BrandNoticeRemark" id="BrandNoticeRemarkMap">
+		<id column="remarkId" property="remark_id"/>
+		<result property="remarkTime" column="remark_time"/>
+		<result property="content" column="content"/>
+		<result property="brandNotice" column="brand_notice"/>
+		<association property="user" javaType="User">
+			<id property="userId" column="user_id"/>
+			<result property="username" column="username"/>
+		</association>
+	</resultMap>
 	<select id="getUserBrandNoticeList" parameterType="Page" resultMap="BrandNoticeResultMap">
   		SELECT rs.*,u.user_id,u.username FROM (
 		SELECT b.id,bc.category_id,bc.category_name,b.app_no,b.brand_no,b.name,b.image_url,b.app_person,
@@ -73,5 +83,34 @@
   		LEFT JOIN brand_management_notices bmn ON b.id=bmn.brand
   		where b.id in (select brand from user_brand_management where user =#{userId} and trash_status=1) 
   	</select>
+  	
+  	<select id="getUserBrandNoticeExcelData" resultMap="BrandNoticeResultMap">
+		select bmn.notice_id,bm.id,bc.category_id,bc.category_name,bm.app_no,bm.brand_no,bm.name,bm.app_person,bm.app_date,bmn.dispatch_date,
+			   bls.legal_status_id,bls.legal_status_name,bmn.notice_name,bmn.notice_code,u.user_id,u.username,
+			   if(datediff(current_date,bmn.dispatch_date)>=0,datediff(current_date,bmn.dispatch_date),-1) as remain_days,
+			   bnt.notice_type_id,bnt.notice_type_desc,npat.notice_paper_apply_type_id,npat.notice_paper_apply_type_desc,
+			   nps.notice_process_status_id,nps.notice_process_status_desc
+		   from  brand_management bm left join brand_management_notices bmn on bmn.brand=bm.id
+			 left join brand_category bc on bm.category_id=bc.category_id
+			 left join brand_legal_status bls on bm.legal_status=bls.legal_status_id
+			 left join brand_notice_types bnt on bmn.notice_type=bnt.notice_type_id
+			 left join notice_paper_apply_types npat on bmn.paper_apply_type=npat.notice_paper_apply_type_id
+			 left join notice_process_status nps on bmn.process_status=nps.notice_process_status_id
+			 left join user_brand_management ubm on bm.id
+			 left join users u on ubm.user=u.user_id
+			 where bmn.notice_id in 
+			 <foreach collection="noticeIds" item="noticeId" open="(" close=")" separator=",">
+			 	#{noticeId}
+			 </foreach>
+
+  	</select>  	
 	
+	<insert id="saveBrandNoticeRemark" parameterType="BrandNoticeRemark">
+		insert into brand_notice_remark(content,brand_notice,user) values(#{content},#{brandNotice},#{user.userId})
+	</insert>
+	
+	<select id="getBrandNoticeListByNoticeId" parameterType="long" resultMap="BrandNoticeRemarkMap">
+		select bnr.remark_id,bnr.remark_time,bnr.content,bnr.brand_notice,u.user_id,u.username from brand_notice_remark bnr left join users 
+		u on bnr.user=u.user_id where bnr.brand_notice=#{brandNoticeId}
+	</select>
 </mapper>

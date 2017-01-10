@@ -15,7 +15,7 @@ import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.BrandManagementService;
-import com.lotut.pms.service.utils.BrandExcelGenerrator;
+import com.lotut.pms.service.utils.BrandExcelGenerator;
 
 public class BrandManagementServiceImpl implements BrandManagementService{
 	private BrandManagementDao brandManagementDao;
@@ -72,7 +72,7 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 	public String exportExcelUserBrand(List<Integer> brandIds,String excelName) {
 		List<BrandManagement> brands = brandManagementDao.getUserExcelDate(brandIds);
 		String brandExcelPath = Settings.TEMP_DIR + excelName;
-		BrandExcelGenerrator.writeBrandToexcel(brands, brandExcelPath);
+		BrandExcelGenerator.writeBrandToexcel(brands, brandExcelPath);
 		return brandExcelPath;
 	}
 

@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.lotut.pms.dao.BrandNoticeDao;
 import com.lotut.pms.dao.mapper.BrandNoticeMapper;
 import com.lotut.pms.domain.BrandNotice;
+import com.lotut.pms.domain.BrandNoticeRemark;
 import com.lotut.pms.domain.Page;
 
 public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements BrandNoticeDao{
@@ -24,6 +25,21 @@ public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements Brand
 	@Override
 	public List<BrandNotice> getUserBrandNoticeList(Page page) {
 		return brandNoticeMapper.getUserBrandNoticeList(page);
+	}
+
+	@Override
+	public List<BrandNotice> getUserBrandNoticeExcelData(List<Integer> noticeIds) {
+		return brandNoticeMapper.getUserBrandNoticeExcelData(noticeIds);
+	}
+
+	@Override
+	public void saveBrandNoticeRemark(BrandNoticeRemark brandNoticeRemark) {
+		brandNoticeMapper.saveBrandNoticeRemark(brandNoticeRemark);
+	}
+
+	@Override
+	public List<BrandNoticeRemark> getBrandNoticeListByNoticeId(long brandNoticeId) {
+		return brandNoticeMapper.getBrandNoticeListByNoticeId(brandNoticeId);
 	}
 	
 }
