@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.dao.BrandManagementDao;
+import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
@@ -14,6 +15,7 @@ import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
+import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.service.BrandManagementService;
 import com.lotut.pms.service.utils.BrandExcelGenerrator;
 
@@ -87,6 +89,7 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 	}
 
 	@Override
+
 	public void brandsTrash(List<Integer> brandManagementIds, int userId) {
 		brandManagementDao.brandsTrash(brandManagementIds,userId);
 		
@@ -114,6 +117,41 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 	public void deleteShareUser(int brandId, int shareUserId) {
 		brandManagementDao.deleteShareUser(brandId, shareUserId);
 	}
+
+	@Override
+	public int getBrandsRecycledCount(int userId) {
+		return brandManagementDao.getBrandsRecycledCount(userId);
+	}
+
+	@Override
+	public List<Brand> getBrandsRecycled(Page page) {
+		return brandManagementDao.getBrandsRecycled(page);
+	}
+	
+	@Override
+	public int SearchBrandsRecycledCount(BrandManagementSearchCondition searchCondition) {
+		return brandManagementDao.SearchBrandsRecycledCount(searchCondition);
+	}
+
+	@Override
+	public List<Brand> SearchBrandsRecycled(BrandManagementSearchCondition searchCondition) {
+		return brandManagementDao.SearchBrandsRecycled(searchCondition);
+	}
+
+	@Override
+	public void recoverBrands(List<Integer> brandManagementIds, int userId) {
+		brandManagementDao.recoverBrands(brandManagementIds,userId);
+		
+	}
+
+	@Override
+	public void deleteForeverBrands(List<Integer> brandManagementIds, int userId) {
+		brandManagementDao.deleteForeverBrands(brandManagementIds,userId);
+		
+	}
+
+	
+
 
 	
 }
