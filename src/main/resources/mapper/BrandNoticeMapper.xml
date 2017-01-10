@@ -25,7 +25,7 @@
 		<result property="dispatchSequence" column="dispatch_sequence"/>
 		<result property="dispatchDate" column="dispatch_date"/>
 		<result property="remainDays" column="remain_days"/>
-		<result property="noticeCode" column="noticeCode"/>
+		<result property="noticeCode" column="notice_code"/>
 		<result property="zipBid" column="zip_bid"/>
 		<result property="dmhFlag" column="dmh_flag"/>
 		<result property="archiveNo" column="archive_no"/>

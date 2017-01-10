@@ -508,7 +508,7 @@ public class BrandController {
 			response.setContentType("application/octet-stream ");
 			String targetUrl=proxyFile.substring(1, proxyFile.lastIndexOf("."));
 			String downloadFileName = URLEncoder.encode(proxyFile.substring(proxyFile.lastIndexOf("/")+1,proxyFile.lastIndexOf(".")), "UTF8");
-			String filePath = Settings.BRAND_MANAGEMENT_IMAGE_PATH+targetUrl;
+			String filePath = Settings.BRAND_MANAGEMENT_PROXYFILE_PATH+targetUrl;
 			File targetFile = new File(filePath);
 			if("FF".equals(WebUtils.getBrowser(request))){
 			    //针对火狐浏览器处理
