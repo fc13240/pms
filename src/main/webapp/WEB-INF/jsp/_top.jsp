@@ -9,10 +9,11 @@
 	      <div class="mod-sitemap-wecome f-fl">
 	      
 	      <span></span>
-	      <a href="http://r.lotut.com" style="margin-left:10px;" target="_blank">龙图腾商标专利交易</a>
+	      <a href="http://www.lotut.com" style="margin-left:10px;" target="_blank">龙图腾商标专利交易</a>
 	      <a href="http://g.lotut.com" style="margin-left:10px;">专利管家</a>
 	      <a href="http://hao.lotut.com" style="margin-left:10px;" target="_blank">网址导航</a>
 	      <a href="http://so.lotut.com" style="margin-left:10px;" target="_blank">专利检索</a>
+	      <a href="http://s.lotut.com" style="margin-left:10px;" target="_blank">工业设计</a>
 		<!-- <ul>
 			<li><a href="http://www.lotut.com" target="_blank">龙图腾商标专利交易</a></li>
 	        <li><a href="http://g.lotut.com" target="_blank">专利管家</a></li>
@@ -48,7 +49,7 @@
 	      <!-- 主菜单-列表 menu  -->
 	      <ul class="menu">
 	        <li><a href="<s:url value='/patent/list.html?currentPage=1'/>">我的专利</a></li>
-	         <li><a href="<s:url value='/editor/patentDocList.html'/>">专利撰写</a></li>     
+	        <li><a href="<s:url value='/editor/patentDocList.html'/>">专利撰写</a></li>     
 	        <li><a href="<s:url value='/notice/list.html?currentPage=1'/>" >通知书</a></li>
 	        <li><a href="<s:url value='/fee/monitoredFeeList.html?currentPage=1'/>" >专利交费</a></li>
 	        <li><a href="<s:url value='/patent/getUserTransactionPatents.html?currentPage=1'/>" >专利交易</a></li>
