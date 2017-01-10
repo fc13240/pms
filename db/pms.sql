@@ -1334,3 +1334,13 @@ CREATE TABLE IF NOT EXISTS brand_notice_read (
 	user_id INT NOT NULL,
 	PRIMARY KEY (notice_id,user_id)
 );
+
+create table if not exists brand_notice_remark(
+	remark_id int auto_increment primary key,
+	remark_time timestamp default current_timestamp,
+	content varchar(800),
+	brand_notice bigint,
+	user int,
+	constraint fk_brand_notice_remark_brand_notice foreign key (brand_notice) references brand_management_notices(notice_id) on delete cascade,
+	constraint fk_brand_notice_remark_brand_user foreign key (user) references users (user_id) on delete cascade
+);

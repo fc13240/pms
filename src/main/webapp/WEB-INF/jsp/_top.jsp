@@ -13,7 +13,6 @@
 	      <a href="http://g.lotut.com" style="margin-left:10px;">专利管家</a>
 	      <a href="http://hao.lotut.com" style="margin-left:10px;" target="_blank">网址导航</a>
 	      <a href="http://so.lotut.com" style="margin-left:10px;" target="_blank">专利检索</a>
-	      <a href="http://s.lotut.com" style="margin-left:10px;" target="_blank">工业设计</a>
 		<!-- <ul>
 			<li><a href="http://www.lotut.com" target="_blank">龙图腾商标专利交易</a></li>
 	        <li><a href="http://g.lotut.com" target="_blank">专利管家</a></li>
