@@ -9,11 +9,10 @@ import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
 import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
-import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
-import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
+import com.lotut.pms.domain.BrandRemark;
+import com.lotut.pms.domain.Page;
 
 public interface BrandManagementService {
 
@@ -65,6 +64,11 @@ public interface BrandManagementService {
 	void recoverBrands(List<Integer> brandManagementIds, int userId);
 
 	void deleteForeverBrands(List<Integer> brandManagementIds, int userId);
+	
+	List<BrandManagement> getUserMonitorBrand(Page page);
+	
+	int getUserMonitorBrandCount(int userId);
+
 
 
 }

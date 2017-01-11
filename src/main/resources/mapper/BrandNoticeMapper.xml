@@ -47,7 +47,6 @@
 		</association>
 		<association property="brandLegalStatus" resultMap="com.lotut.pms.dao.mapper.BrandManagementMapper.BrandLegalStatusResultMap"/>
 		<association property="brand" resultMap="com.lotut.pms.dao.mapper.BrandManagementMapper.brandManagementResultMap"/>
-		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 			
 	</resultMap>
 
@@ -111,7 +110,7 @@
 	</insert>
 	
   	<insert id="batchChangeBrandNoticeViewStatus" parameterType="list">
-		replace into brand_notice_read(notice_id, user_id) 
+		insert ignore into brand_notice_read(notice_id, user_id) 
 		values
 		<foreach item="noticeIdList" collection="list" separator=",">
 			(#{noticeIdList.noticeId}, #{noticeIdList.userId})
@@ -130,9 +129,9 @@
 		LEFT JOIN brand_management b ON bmn.brand=b.id			
 		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
 		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
-		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
+		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{page.userId}
 		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id
-		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1)  
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{page.userId} and trash_status=1)  
 		<if test="brandCategory != null">
 			AND b.category_id = #{brandCategory}
 		</if>
@@ -142,9 +141,8 @@
 		<if test="dispatchDate != null">
 			AND b.dispatch_date = #{dispatchDate}
 		</if>
-		notice_type
 		<if test="noticeType != null">
-			AND b.notice_type = #{noticeType}
+			AND bmn.notice_type = #{noticeType}
 		</if>
 		<if test="keyword != null">
 			AND (b.app_no LIKE #{keyword_pattern} or b.brand_no like #{keyword_pattern}
@@ -166,9 +164,9 @@
 		LEFT JOIN brand_management b ON bmn.brand=b.id			
 		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
 		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
-		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
+		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{page.userId}
 		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id
-		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1) 
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{page.userId} and trash_status=1) 
 		<if test="brandCategory != null">
 			AND b.category_id = #{brandCategory}
 		</if>
@@ -178,9 +176,8 @@
 		<if test="dispatchDate != null">
 			AND b.dispatch_date = #{dispatchDate}
 		</if>
-		notice_type
 		<if test="noticeType != null">
-			AND b.notice_type = #{noticeType}
+			AND bmn.notice_type = #{noticeType}
 		</if>
 		<if test="keyword != null">
 			AND (b.app_no LIKE #{keyword_pattern} or b.brand_no like #{keyword_pattern}
@@ -200,5 +197,10 @@
 	 		#{noticeId}
 	 	</foreach>
 	</update>
+
+	<select id="getBrandNoticeTypes" resultMap="BrandNoticeTypeResultMap">
+		select notice_type_id,notice_type_desc from brand_notice_types
+	</select>
+
 
 </mapper>

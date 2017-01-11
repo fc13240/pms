@@ -15,7 +15,7 @@
 		</a>
 	</li>  		
 	<li class="active"> 
-		<a href="<s:url value='/news/getNewsTypeList.html'/>">
+		<a href="<s:url value='/brand/getUsermonitorBrands.html?currentPage=1'/>">
 		<h5>续展监控</h5>
 		</a>
 	</li> 

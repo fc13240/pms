@@ -3,19 +3,16 @@ package com.lotut.pms.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
 import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
-import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
+import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.PatentSearchCondition;
 
 public interface BrandManagementDao {
 
@@ -43,9 +40,7 @@ public interface BrandManagementDao {
 	
 	List<BrandCategoryCount>  getBrandCategoryCount(int userId);
 
-
 	void brandsTrash(List<Integer> brandManagementIds, int userId);
-
 	
 	int insertOrUpdateBrand(BrandManagement brandManagement);
 	
@@ -68,6 +63,11 @@ public interface BrandManagementDao {
 	void recoverBrands(List<Integer> brandManagementIds, int userId);
 
 	void deleteForeverBrands(List<Integer> brandManagementIds, int userId);
+	
+	List<BrandManagement> getUserMonitorBrand(Page page);
+	
+	int getUserMonitorBrandCount(int userId);
+
 
 	
 }

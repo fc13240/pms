@@ -17,10 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandCategoryCount;
+import com.lotut.pms.domain.BrandLegalStatus;
+import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandNotice;
 import com.lotut.pms.domain.BrandNoticeRemark;
+import com.lotut.pms.domain.BrandNoticeSearchCondition;
+import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
+import com.lotut.pms.service.BrandManagementService;
 import com.lotut.pms.service.BrandNoticeService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
@@ -29,10 +36,11 @@ import com.lotut.pms.web.util.WebUtils;
 @RequestMapping(path="/brandNotice")
 public class BrandNoticeController {
 	private BrandNoticeService brandNoticeService;
-	
+	private BrandManagementService brandManagementService;
 	@Autowired
-	public BrandNoticeController(BrandNoticeService brandNoticeService) {
+	public BrandNoticeController(BrandNoticeService brandNoticeService,BrandManagementService brandManagementService) {
 		this.brandNoticeService = brandNoticeService;
+		this.brandManagementService=brandManagementService;
 	}
 	
 	@RequestMapping(path="getBrandNoticeList")
@@ -93,18 +101,51 @@ public class BrandNoticeController {
 	}
 	
 	@RequestMapping(path="/batchChangeBrandNoticeViewStatus", method=RequestMethod.GET)
-	public void batchChangeBrandNoticeViewStatus(@RequestParam("notices")List<Long> noticeIdList) {
+	public void batchChangeBrandNoticeViewStatus(@RequestParam("notices")List<Long> noticeIdList,PrintWriter pw) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		brandNoticeService.batchChangeBrandNoticeViewStatus(noticeIdList, userId);
+		pw.write("success");
 	}
 	
+	@RequestMapping(path = "/searchBrandNotice", method = RequestMethod.GET)
+	public String searchBrandNotice(@ModelAttribute("searchCondition") BrandNoticeSearchCondition searchCondition, HttpSession session,
+			Model model) {
+		Page page = searchCondition.getPage();
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount = brandNoticeService.searchBrandNoticeCountByPage(searchCondition);
+		page.setTotalRecords(totalCount);
+		List<BrandNotice> notices = brandNoticeService.searchUserBrandNoticeByPage(searchCondition);
+		page.setTotalRecords(totalCount);
+		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(page.getUserId());
+		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(page.getUserId());
+		model.addAttribute("notices",notices);
+		model.addAttribute("page", page);
+		model.addAttribute("brandLegalStatus", brandLegalStatus);
+		model.addAttribute("brandCategory", brandCategory);
+		addBrandCategoryAndBrandLegalStatusToModel(model);
+		return "brand_notice_list";
+	}
+	
+
 	@RequestMapping(path="/batchAddStarTargetMonitor")
 	public void batchAddStarTargetMonitor(@RequestParam("noticeIds") List<Long> noticeIds,PrintWriter pw){
-		System.out.println("-------------1---------------");
 		brandNoticeService.batchUpdateStarTargetStatus(noticeIds);
-		System.out.println("-------------2---------------");
 		String message = "操作成功";
 		pw.write(message);
 	}
 	
+
+	private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
+		List<BrandCategory> categorys = brandManagementService.getAllBrandCategory();
+		List<BrandLegalStatus> allBrandLegalStatus = brandManagementService.getAllBrandLegalStatus();
+		List<BrandNoticeType> noticeTypes= brandNoticeService.getBrandNoticeTypes();
+		model.addAttribute("categorys", categorys);
+		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
+		model.addAttribute("noticeTypes", noticeTypes);
+	}
 }

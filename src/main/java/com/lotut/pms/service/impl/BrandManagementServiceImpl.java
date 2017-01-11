@@ -11,11 +11,10 @@ import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
 import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
-import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
+import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.service.BrandManagementService;
 import com.lotut.pms.service.utils.BrandExcelGenerator;
 
@@ -148,6 +147,16 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 	public void deleteForeverBrands(List<Integer> brandManagementIds, int userId) {
 		brandManagementDao.deleteForeverBrands(brandManagementIds,userId);
 		
+	}
+
+	@Override
+	public List<BrandManagement> getUserMonitorBrand(Page page) {
+		return brandManagementDao.getUserMonitorBrand(page);
+	}
+
+	@Override
+	public int getUserMonitorBrandCount(int userId) {
+		return brandManagementDao.getUserMonitorBrandCount(userId);
 	}
 
 	

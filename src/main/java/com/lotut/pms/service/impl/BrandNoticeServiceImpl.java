@@ -11,6 +11,8 @@ import com.lotut.pms.constants.Settings;
 import com.lotut.pms.dao.BrandNoticeDao;
 import com.lotut.pms.domain.BrandNotice;
 import com.lotut.pms.domain.BrandNoticeRemark;
+import com.lotut.pms.domain.BrandNoticeSearchCondition;
+import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.BrandNoticeService;
 import com.lotut.pms.service.utils.BrandNoticeExcelGenerator;
@@ -65,6 +67,19 @@ public class BrandNoticeServiceImpl implements BrandNoticeService {
 	@Override
 	public void batchUpdateStarTargetStatus(List<Long> noticeIds) {
 		brandNoticeDao.batchUpdateStarTargetStatus(noticeIds);
-		
+	}	
+
+	public List<BrandNotice> searchUserBrandNoticeByPage(BrandNoticeSearchCondition searchCondition) {
+		return brandNoticeDao.searchUserBrandNoticeByPage(searchCondition);
+	}
+
+	@Override
+	public int searchBrandNoticeCountByPage(BrandNoticeSearchCondition searchCondition) {
+		return brandNoticeDao.searchBrandNoticeCountByPage(searchCondition);
+	}
+
+	@Override
+	public List<BrandNoticeType> getBrandNoticeTypes() {
+		return brandNoticeDao.getBrandNoticeTypes();
 	}
 }

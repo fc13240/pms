@@ -9,6 +9,8 @@ import com.lotut.pms.dao.BrandNoticeDao;
 import com.lotut.pms.dao.mapper.BrandNoticeMapper;
 import com.lotut.pms.domain.BrandNotice;
 import com.lotut.pms.domain.BrandNoticeRemark;
+import com.lotut.pms.domain.BrandNoticeSearchCondition;
+import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
 
 public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements BrandNoticeDao{
@@ -51,7 +53,19 @@ public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements Brand
 	@Override
 	public void batchUpdateStarTargetStatus(List<Long> noticeIds) {
 		brandNoticeMapper.batchUpdateStarTargetStatus(noticeIds);
-		
+	}	
+	public List<BrandNotice> searchUserBrandNoticeByPage(BrandNoticeSearchCondition searchCondition) {
+		return brandNoticeMapper.searchUserBrandNoticeByPage(searchCondition);
+	}
+
+	@Override
+	public int searchBrandNoticeCountByPage(BrandNoticeSearchCondition searchCondition) {
+		return brandNoticeMapper.searchBrandNoticeCountByPage(searchCondition);
+	}
+
+	@Override
+	public List<BrandNoticeType> getBrandNoticeTypes() {
+		return brandNoticeMapper.getBrandNoticeTypes();
 	}
 	
 }
