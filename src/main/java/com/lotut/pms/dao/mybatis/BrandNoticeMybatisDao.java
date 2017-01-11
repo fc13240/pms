@@ -11,6 +11,8 @@ import com.lotut.pms.domain.BrandNotice;
 import com.lotut.pms.domain.BrandNoticeRemark;
 import com.lotut.pms.domain.BrandNoticeSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
+import com.lotut.pms.domain.Notice;
+import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.Page;
 
 public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements BrandNoticeDao{
@@ -52,7 +54,7 @@ public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements Brand
 
 	@Override
 	public void batchUpdateStarTargetStatus(List<Long> noticeIds) {
-		brandNoticeMapper.batchUpdateStarTargetStatus(noticeIds);
+		 brandNoticeMapper.batchUpdateStarTargetStatus(noticeIds);
 	}	
 	public List<BrandNotice> searchUserBrandNoticeByPage(BrandNoticeSearchCondition searchCondition) {
 		return brandNoticeMapper.searchUserBrandNoticeByPage(searchCondition);
@@ -67,5 +69,22 @@ public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements Brand
 	public List<BrandNoticeType> getBrandNoticeTypes() {
 		return brandNoticeMapper.getBrandNoticeTypes();
 	}
+
+	@Override
+	public Map<String, Map<String, String>> getUserStarTargetNoticeCountByRemainDay(int userId) {
+		return brandNoticeMapper.getUserStarTargetNoticeCountByRemainDay(userId);
+	}
+
+	@Override
+	public List<Notice> getUserStarTargetNoticesByPage(Page page) {
+		return brandNoticeMapper.getUserStarTargetNoticesByPage(page);
+	}
+
+	@Override
+	public int getUserStarTargetNoticesCount(int userId) {
+		return brandNoticeMapper.getUserStarTargetNoticesCount(userId);
+	}
+
+
 	
 }
