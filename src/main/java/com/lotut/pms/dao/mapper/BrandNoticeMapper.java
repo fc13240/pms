@@ -25,6 +25,8 @@ public interface BrandNoticeMapper {
 	List<BrandNoticeRemark> getBrandNoticeListByNoticeId(long brandNoticeId);
 
 	void batchChangeBrandNoticeViewStatus(List<Map<String, Long>> noticeIdList);
+
+	void batchUpdateStarTargetStatus(List<Long> noticeIds);
 	
 	List<BrandNotice> searchUserBrandNoticeByPage(BrandNoticeSearchCondition searchCondition);
 	
@@ -33,4 +35,6 @@ public interface BrandNoticeMapper {
 	List<BrandNoticeType> getBrandNoticeTypes();
 	
 	List<BrandNoticeTypeCount> getBrandNoticeCountByNoticeType(int userId);
+
+	void saveBrandNotice(BrandNotice brandNotice);
 }

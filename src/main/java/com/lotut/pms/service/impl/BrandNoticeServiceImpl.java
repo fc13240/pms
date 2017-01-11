@@ -66,6 +66,10 @@ public class BrandNoticeServiceImpl implements BrandNoticeService {
 	}
 
 	@Override
+	public void batchUpdateStarTargetStatus(List<Long> noticeIds) {
+		brandNoticeDao.batchUpdateStarTargetStatus(noticeIds);
+	}	
+
 	public List<BrandNotice> searchUserBrandNoticeByPage(BrandNoticeSearchCondition searchCondition) {
 		return brandNoticeDao.searchUserBrandNoticeByPage(searchCondition);
 	}
@@ -83,5 +87,10 @@ public class BrandNoticeServiceImpl implements BrandNoticeService {
 	@Override
 	public List<BrandNoticeTypeCount> getBrandNoticeCountByNoticeType(int userId) {
 		return brandNoticeDao.getBrandNoticeCountByNoticeType(userId);
+	}
+	
+	@Override
+	public void saveBrandNotice(BrandNotice brandNotice) {
+		brandNoticeDao.saveBrandNotice(brandNotice);
 	}
 }

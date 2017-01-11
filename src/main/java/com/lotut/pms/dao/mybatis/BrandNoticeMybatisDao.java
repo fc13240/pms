@@ -52,6 +52,9 @@ public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements Brand
 	}
 
 	@Override
+	public void batchUpdateStarTargetStatus(List<Long> noticeIds) {
+		brandNoticeMapper.batchUpdateStarTargetStatus(noticeIds);
+	}	
 	public List<BrandNotice> searchUserBrandNoticeByPage(BrandNoticeSearchCondition searchCondition) {
 		return brandNoticeMapper.searchUserBrandNoticeByPage(searchCondition);
 	}
@@ -69,6 +72,11 @@ public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements Brand
 	@Override
 	public List<BrandNoticeTypeCount> getBrandNoticeCountByNoticeType(int userId) {
 		return brandNoticeMapper.getBrandNoticeCountByNoticeType(userId);
+	}
+	
+	@Override
+	public void saveBrandNotice(BrandNotice brandNotice) {
+		brandNoticeMapper.saveBrandNotice(brandNotice);
 	}
 	
 }

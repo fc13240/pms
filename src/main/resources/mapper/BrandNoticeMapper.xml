@@ -117,7 +117,7 @@
 	</insert>
 	
   	<insert id="batchChangeBrandNoticeViewStatus" parameterType="list">
-		replace into brand_notice_read(notice_id, user_id) 
+		insert ignore into brand_notice_read(notice_id, user_id) 
 		values
 		<foreach item="noticeIdList" collection="list" separator=",">
 			(#{noticeIdList.noticeId}, #{noticeIdList.userId})
@@ -198,6 +198,13 @@
 		u on bnr.user=u.user_id where bnr.brand_notice=#{brandNoticeId}
 	</select>
 	
+	<update id="batchUpdateStarTargetStatus" parameterType="list">
+	 	update brand_management_notices  set star_target_monitor_status=1 where notice_id in
+	 	<foreach collection="noticeIds" item="noticeId" open="(" close=")" separator=",">
+	 		#{noticeId}
+	 	</foreach>
+	</update>
+
 	<select id="getBrandNoticeTypes" resultMap="BrandNoticeTypeResultMap">
 		select notice_type_id,notice_type_desc from brand_notice_types
 	</select>
@@ -213,4 +220,8 @@
 		group by bnt.notice_type_id order by bnt.notice_type_id asc 
 	</select>
 	
+	<insert id="saveBrandNotice" parameterType="BrandNotice">
+		insert into brand_management_notices(brand,dispatch_date,zipfile_name,notice_type) values(#{brand.id},#{dispatchDate},#{zipfileName},#{noticeType.noticeTypeId})
+	</insert>
+
 </mapper>

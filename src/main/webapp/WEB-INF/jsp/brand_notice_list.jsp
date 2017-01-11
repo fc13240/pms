@@ -216,7 +216,9 @@
 							<c:forEach items="${notices}" var="notice" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-								  <input style="text-align:center" type="checkbox" class="check-item" brand="<c:out value='${notice.brand.id}'/>"></span>
+
+								  <input style="text-align:center" type="checkbox" class="check-item" notice="${notice.noticeId}" brand="<c:out value='${notice.brand.id}'/>"></span>
+
 								  <span class="lbl"></span></label></td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize}
 								<c:if test="${notice.starTargetMonitorStatus==1 }">
@@ -518,15 +520,6 @@ function batchProcessNotice(processStatus) {
 		$.ajax({
 			url: "<s:url value='/notice/batchChangeNoticeViewStatus.html'/>?notices=" + notices, 
 			type: 'get', 
-			success: function() {
-				
-			}
-		});
-		
-		
-		$.ajax({
-			url: "<s:url value='/notice/processNotices.html'/>?notices=" + notices + "&processStatus=" + processStatus, 
-			type: 'get', 
 			success: function(data) {
 				$("<div>操作成功</div>").dialog({
 					modal: true,
@@ -536,9 +529,8 @@ function batchProcessNotice(processStatus) {
 							location.reload(); 
 						}
 					}	
-				});
 			}
-		});			
+		});		
 		
 	}
 	
@@ -854,9 +846,9 @@ function batchChangeNoticeViewStatus() {
 		}
 	}	
 	$.ajax({
-		url: "<s:url value='/notice/batchChangeBrandNoticeViewStatus.html'/>?notices=" + notices, 
+		url: "<s:url value='/brandNotice/batchChangeBrandNoticeViewStatus.html'/>?notices=" + notices, 
 		type: 'get', 
-		success: function() {
+		success: function(data) {
 			$("<div>操作成功</div>").dialog({
 				modal: true,
 				buttons: {
@@ -961,7 +953,7 @@ tabs.set("nav","menu_con");//执行
 		
 		var noticeIds = uniqueNoticeNos.join(",");
 		$.ajax({
-			url:"<s:url value='/notice/batchAddStarTargetMonitor.html'/>?noticeIds=" + noticeIds,
+			url:"<s:url value='/brandNotice/batchAddStarTargetMonitor.html'/>?noticeIds=" + noticeIds,
 			type:"post",
 			success: function(data) {
 				formutil.alertMessage(data,true);	

@@ -52,5 +52,5 @@ public interface Settings {
 	final String BRAND_MANAGEMENT_ENTITYLICENSE_PATH="/opt/media/brandManagement/entityLicense/";
 	final String BRAND_MANAGEMENT_IDENTTITYCARD_PATH="/opt/media/brandManagement/identityCard/";
 	final String BRAND_MANAGEMENT_APPLICATION_PATH="/opt/media/brandManagement/application/";
-	
+	final String BRAND_MANAGEMENT_NOTICE_PATH="/opt/media/brandManagement/notice/";
 }

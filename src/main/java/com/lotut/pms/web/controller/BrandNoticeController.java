@@ -2,6 +2,7 @@ package com.lotut.pms.web.controller;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
@@ -16,7 +17,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.itextpdf.text.DocumentException;
+import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
@@ -31,6 +35,7 @@ import com.lotut.pms.domain.User;
 import com.lotut.pms.service.BrandManagementService;
 import com.lotut.pms.service.BrandNoticeService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.FileOption;
 import com.lotut.pms.web.util.WebUtils;
 
 @Controller
@@ -101,10 +106,12 @@ public class BrandNoticeController {
 		brandNoticeService.saveBrandNoticeRemark(brandNoticeRemark);
 		pw.write("success");
 	}
+	
 	@RequestMapping(path="/batchChangeBrandNoticeViewStatus", method=RequestMethod.GET)
-	public void batchChangeBrandNoticeViewStatus(@RequestParam("notices")List<Long> noticeIdList) {
+	public void batchChangeBrandNoticeViewStatus(@RequestParam("notices")List<Long> noticeIdList,PrintWriter pw) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		brandNoticeService.batchChangeBrandNoticeViewStatus(noticeIdList, userId);
+		pw.write("success");
 	}
 	
 	@RequestMapping(path = "/searchBrandNotice", method = RequestMethod.GET)
@@ -127,6 +134,15 @@ public class BrandNoticeController {
 		return "brand_notice_list";
 	}
 	
+
+	@RequestMapping(path="/batchAddStarTargetMonitor")
+	public void batchAddStarTargetMonitor(@RequestParam("noticeIds") List<Long> noticeIds,PrintWriter pw){
+		brandNoticeService.batchUpdateStarTargetStatus(noticeIds);
+		String message = "操作成功";
+		pw.write(message);
+	}
+	
+
 	private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<BrandCategory> categorys = brandManagementService.getAllBrandCategory();
@@ -137,5 +153,20 @@ public class BrandNoticeController {
 		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
 		model.addAttribute("noticeTypes", noticeTypes);
 		model.addAttribute("noticeTypeCounts", noticeTypeCounts);
+	}
+	
+	@RequestMapping(path="/uploadBrandNoticeFile")
+	public void uploadBrandNoticeFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
+    	String fatherPath=Settings.BRAND_MANAGEMENT_NOTICE_PATH;
+    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
+    	int userId=PrincipalUtils.getCurrentUserId();
+    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
+    }
+	
+	@RequestMapping(path="/saveBrandNotice")
+	public void saveBrandNotice(@ModelAttribute BrandNotice brandNotice,Model model,PrintWriter pw){
+		User user = PrincipalUtils.getCurrentPrincipal();
+		brandNoticeService.saveBrandNotice(brandNotice);
+		pw.write("success");
 	}
 }
