@@ -29,6 +29,7 @@ import com.lotut.pms.domain.BrandNotice;
 import com.lotut.pms.domain.BrandNoticeRemark;
 import com.lotut.pms.domain.BrandNoticeSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
+import com.lotut.pms.domain.BrandNoticeTypeCount;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.BrandManagementService;
@@ -36,6 +37,30 @@ import com.lotut.pms.service.BrandNoticeService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.FileOption;
 import com.lotut.pms.web.util.WebUtils;
+
+/*
+                   _ooOoo_
+                  o8888888o
+                  88" . "88
+                  (| -_- |)
+                  O\  =  /O
+               ____/`---'\____
+             .'  \\|     |//  `.
+            /  \\|||  :  |||//  \
+           /  _||||| -:- |||||-  \
+           |   | \\\  -  /// |   |
+           | \_|  ''\---/''  |   |
+           \  .-\__  `-`  ___/-. /
+         ___`. .'  /--.--\  `. . __
+      ."" '<  `.___\_<|>_/___.'  >'"".
+     | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+     \  \ `-.   \_ __\ /__ _/   .-` /  /
+======`-.____`-.___\_____/___.-`____.-'======
+                   `=---='
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+         佛祖保佑       永无BUG
+    @author	CaiWei
+*/
 
 @Controller
 @RequestMapping(path="/brandNotice")
@@ -61,6 +86,7 @@ public class BrandNoticeController {
 		page.setTotalRecords(totalCount);
 		model.addAttribute("notices",notices);
 		model.addAttribute("page",page);
+		addBrandCategoryAndBrandLegalStatusToModel(model);
 		return "brand_notice_list";
 	}
 	
@@ -126,12 +152,8 @@ public class BrandNoticeController {
 		page.setTotalRecords(totalCount);
 		List<BrandNotice> notices = brandNoticeService.searchUserBrandNoticeByPage(searchCondition);
 		page.setTotalRecords(totalCount);
-		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(page.getUserId());
-		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(page.getUserId());
 		model.addAttribute("notices",notices);
 		model.addAttribute("page", page);
-		model.addAttribute("brandLegalStatus", brandLegalStatus);
-		model.addAttribute("brandCategory", brandCategory);
 		addBrandCategoryAndBrandLegalStatusToModel(model);
 		return "brand_notice_list";
 	}
@@ -146,12 +168,17 @@ public class BrandNoticeController {
 	
 
 	private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
 		List<BrandCategory> categorys = brandManagementService.getAllBrandCategory();
 		List<BrandLegalStatus> allBrandLegalStatus = brandManagementService.getAllBrandLegalStatus();
 		List<BrandNoticeType> noticeTypes= brandNoticeService.getBrandNoticeTypes();
+		List<BrandNoticeTypeCount> noticeTypeCounts=brandNoticeService.getBrandNoticeCountByNoticeType(userId);
+		int allNoticeCount=brandNoticeService.getAllBrandNoticeCountByUserId(userId);
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
 		model.addAttribute("noticeTypes", noticeTypes);
+		model.addAttribute("noticeTypeCounts", noticeTypeCounts);
+		model.addAttribute("allNoticeCount", allNoticeCount);
 	}
 	
 	@RequestMapping(path="/uploadBrandNoticeFile")

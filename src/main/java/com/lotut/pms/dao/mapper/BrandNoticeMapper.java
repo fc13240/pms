@@ -9,6 +9,7 @@ import com.lotut.pms.domain.BrandNotice;
 import com.lotut.pms.domain.BrandNoticeRemark;
 import com.lotut.pms.domain.BrandNoticeSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
+import com.lotut.pms.domain.BrandNoticeTypeCount;
 import com.lotut.pms.domain.Page;
 
 public interface BrandNoticeMapper {
@@ -32,6 +33,10 @@ public interface BrandNoticeMapper {
 	int searchBrandNoticeCountByPage(BrandNoticeSearchCondition searchCondition);
 	
 	List<BrandNoticeType> getBrandNoticeTypes();
+	
+	List<BrandNoticeTypeCount> getBrandNoticeCountByNoticeType(int userId);
 
 	void saveBrandNotice(BrandNotice brandNotice);
+	
+	int getAllBrandNoticeCountByUserId(int userId);
 }
