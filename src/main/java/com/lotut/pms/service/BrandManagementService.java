@@ -68,6 +68,15 @@ public interface BrandManagementService {
 	List<BrandManagement> getUserMonitorBrand(Page page);
 	
 	int getUserMonitorBrandCount(int userId);
+	
+	void changeBrandMonitorStatus(int userId, List<Long> brandIds);
+	
+	void cancelBrandMonitorStatus(int userId, List<Long> brandIds);
+	
+	List<BrandManagement> searchUserMonitorBrand(BrandManagementSearchCondition searchCondition);
+	
+	int searchUserMonitorBrandCount(BrandManagementSearchCondition searchCondition);
+
 
 
 

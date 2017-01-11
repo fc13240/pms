@@ -71,14 +71,23 @@
 				<!--search form end-->
 				<div class="lt-box">
 					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-					  <div class="ta-top" style="margin-left:8px;">
+					  <div class="ta-top" style="margin-left:8px;margin-top:10px;">
 					  	<table class="search-table">
 					  	<tr>
 					  	<td>
 							<a href="javascript:return void" onclick="batchCancelMonitor()" >
-							<button style="width:100px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="">批量取消续展监控</button>
+							<button style="width:140px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="">批量取消续展监控</button>
 							</a> 
+						</td>
+							<form action="<s:url value='/brand/searchMonitorBrand.html'/>" >
+						<td>
+								<input value="1" name="page.currentPage" type="hidden" />
+								<input name="keyword" class="t-input form-control" style="width:300px;"/>
 						</td>			
+						<td>
+								<button style="width:80px;margin-left:10px;" class="button button-primary  button-rounded" type="submit">查询</button>
+						</td>			
+							</form>
 					  	</tr>
 					  	</table>
 					  </div>
@@ -350,11 +359,11 @@ $(function () {
 
 	});	
 
-	function batchShare() {
+	function batchCancelMonitor() {
 		var brandSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 		var uniqueBrandNos = []
 		if (!brandSelected) {
-			formutil.alertMessage('请选择商标');
+			formutil.alertMessage('请选择需要取消监控的商标');
 			
 			return;
 		}
@@ -364,8 +373,19 @@ $(function () {
 				uniqueBrandNos.push(brands_checked[i]);
 			}
 		}		
-		var brands = uniqueBrandNos.join(",");	
-		location.href = "<s:url value='/brand/showFriends.html'/>?brands=" + brands;
+		var brandIds = uniqueBrandNos.join(",");	
+		$.ajax({
+			type : "POST",
+			url : "<s:url value='/brand/cancelBrandMonitor.html'/>",
+			data : {"brandIds":brandIds},
+			success : function (data){
+				alert("操作成功");
+				window.location.reload();
+			},
+			error : function (){
+				formutil.alertMessage('出现异常错误，请稍后再试');
+			}
+		})
 	}
 	
 	function gotoPage() {
@@ -388,10 +408,10 @@ $(function () {
 			return;
 		}
 		
-		var url = "<s:url value='/brand/getBrandManagementlist.html'/>?currentPage=" + pageNo;
+		var url = "<s:url value='/brand/getUsermonitorBrands.html'/>?currentPage=" + pageNo;
 		
 		<c:if test="${searchCondition != null}">
-			url = "<s:url value='/brand/searchBrandManagement.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+			url = "<s:url value='/brand/searchMonitorBrand.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 		</c:if>
 		
 		

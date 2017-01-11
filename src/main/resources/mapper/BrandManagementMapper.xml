@@ -434,5 +434,36 @@
   	<select id="getUserMonitorBrandCount" parameterType="int" resultType="int">
   		select count(*) from brand_management b left join user_brand_management u on b.id=u.brand where u.user=#{userId} and u.trash_status=1 and u.monitor_status=1 
   	</select>
+  	
+  	<select id="searchUserMonitorBrand" parameterType="BrandManagementSearchCondition" resultMap="brandManagementResultMap">
+  	<bind name="keyword_pattern" value="'%' + keyword + '%'"/>
+  		select ub.id,ub.app_no,ub.brand_no,ub.name,ub.similar_no,ub.scope,ub.transaction_status,ub.transaction_mode,ub.price,ub.app_person,
+			 ub.app_date,ub.publish_date,ub.create_time,ub.monitor_status, 
+			 bc.category_id,bc.category_name,bls.legal_status_id,bls.legal_status_name,u.user_id,u.username 
+			 from (select b.id,b.legal_status,b.category_id,b.app_no,b.brand_no,b.name,b.similar_no,b.scope,b.transaction_status,b.transaction_mode,b.price,
+						b.app_person,b.app_date,b.publish_date,b.create_time,u.monitor_status 
+			         from brand_management b left join user_brand_management u on b.id=u.brand 
+			 where u.user=#{userId} and u.trash_status=1 and u.monitor_status=1 
+			 
+			 <if test="keyword_pattern !=null or keyword_pattern !=''" >
+			 	and (b.app_no like #{keyword_pattern} or b.brand_no like #{keyword_pattern} or b.name like #{keyword_pattern})
+			 </if>
+			 limit #{page.startIndex},#{page.pageSize} 
+			 ) ub left join user_brand_management ubm on ub.id=ubm.brand 
+			 left join brand_category bc on ub.category_id=bc.category_id 
+			 left join brand_legal_status bls on ub.legal_status=bls.legal_status_id 
+			 left join users u on ubm.user=u.user_id
+  	</select>
+  	
+  	<select id="searchUserMonitorBrandCount" parameterType="BrandManagementSearchCondition" resultType="int">
+  	<bind name="keyword_pattern" value="'%' + keyword + '%'"/>
+			 select count(*) from brand_management b left join user_brand_management u on b.id=u.brand 
+			 where u.user=#{userId} and u.trash_status=1 and u.monitor_status=1 
+			 <if test="keyword_pattern !=null or keyword_pattern !=''" >
+			 	and (b.app_no like #{keyword_pattern} or b.brand_no like #{keyword_pattern} or b.name like #{keyword_pattern})
+			 </if>
+  	</select>
+  	
+  	
 </mapper>
   

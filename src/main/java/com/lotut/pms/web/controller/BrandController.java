@@ -40,8 +40,6 @@ import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.Patent;
-import com.lotut.pms.domain.PatentSearchCondition;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.domain.WeChatOrder;
 import com.lotut.pms.service.BrandManagementService;
@@ -593,6 +591,39 @@ public class BrandController {
 		List<BrandManagement> brands = brandManagementService.getUserMonitorBrand(page);
 		model.addAttribute("page", page);
 		model.addAttribute("brands", brands);
+		return "brand_management_monitor_list";
+	}
+	
+	
+	@RequestMapping(path = "/changeBrandMonitorStatus")
+	public void  changeBrandMonitorStatus(@RequestParam List<Long> brandIds,PrintWriter pw){
+		int userId = PrincipalUtils.getCurrentUserId();
+		brandManagementService.changeBrandMonitorStatus(userId, brandIds);
+		pw.write("success");
+	}
+	
+	@RequestMapping(path = "/cancelBrandMonitor")
+	public void  getUsermonitorBrands(@RequestParam List<Long> brandIds,PrintWriter pw){
+		int userId = PrincipalUtils.getCurrentUserId();
+		brandManagementService.cancelBrandMonitorStatus(userId, brandIds);
+		pw.write("success");
+	}
+	
+	@RequestMapping(path="/searchMonitorBrand")
+	public String searchMonitorBrand(@ModelAttribute("searchCondition") BrandManagementSearchCondition searchCondition,HttpSession session,Model model){
+		int userId = PrincipalUtils.getCurrentUserId();
+		searchCondition.setUserId(userId);
+		Page page = searchCondition.getPage();
+		if(page.getCurrentPage()<=0){
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		int totoalCOunt = brandManagementService.searchUserMonitorBrandCount(searchCondition);
+		page.setTotalRecords(totoalCOunt);
+		searchCondition.setPage(page);
+		List<BrandManagement> brands = brandManagementService.searchUserMonitorBrand(searchCondition);
+		model.addAttribute("brands",brands);
+		model.addAttribute("page",page);
 		return "brand_management_monitor_list";
 	}
 }

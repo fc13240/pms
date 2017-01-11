@@ -3,6 +3,8 @@ package com.lotut.pms.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandCategoryCount;
@@ -67,6 +69,15 @@ public interface BrandManagementDao {
 	List<BrandManagement> getUserMonitorBrand(Page page);
 	
 	int getUserMonitorBrandCount(int userId);
+	
+	void changeBrandMonitorStatus(int userId, List<Long> brandIds);
+	
+	void cancelBrandMonitorStatus(int userId, List<Long> brandIds);
+	
+	List<BrandManagement> searchUserMonitorBrand(BrandManagementSearchCondition searchCondition);
+	
+	int searchUserMonitorBrandCount(BrandManagementSearchCondition searchCondition);
+
 
 
 	

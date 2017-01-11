@@ -159,6 +159,26 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 		return brandManagementDao.getUserMonitorBrandCount(userId);
 	}
 
+	@Override
+	public void changeBrandMonitorStatus(int userId, List<Long> brandIds) {
+		brandManagementDao.changeBrandMonitorStatus(userId, brandIds);
+	}
+
+	@Override
+	public void cancelBrandMonitorStatus(int userId, List<Long> brandIds) {
+		brandManagementDao.cancelBrandMonitorStatus(userId, brandIds);
+	}
+
+	@Override
+	public List<BrandManagement> searchUserMonitorBrand(BrandManagementSearchCondition searchCondition) {
+		return brandManagementDao.searchUserMonitorBrand(searchCondition);
+	}
+
+	@Override
+	public int searchUserMonitorBrandCount(BrandManagementSearchCondition searchCondition) {
+		return brandManagementDao.searchUserMonitorBrandCount(searchCondition);
+	}
+
 	
 
 

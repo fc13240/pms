@@ -70,6 +70,14 @@ public interface BrandManagementMapper {
 	List<BrandManagement> getUserMonitorBrand(Page page);
 	
 	int getUserMonitorBrandCount(int userId);
+	
+	void changeBrandMonitorStatus(@Param("userId")int userId, @Param("brandIds") List<Long> brandIds);
+	
+	void cancelBrandMonitorStatus(@Param("userId")int userId, @Param("brandIds") List<Long> brandIds);
+	
+	List<BrandManagement> searchUserMonitorBrand(BrandManagementSearchCondition searchCondition);
+	
+	int searchUserMonitorBrandCount(BrandManagementSearchCondition searchCondition);
 
 	
 

@@ -60,6 +60,13 @@
 			<result property="username" column="username"/>
 		</association>
 	</resultMap>
+	
+	<resultMap type="BrandNoticeTypeCount" id="BrandNoticeTypeCountMap">
+		<result property="noticeTypeId" column="notice_type_id"/>
+		<result property="noticeTypeDescription" column="notice_type_desc"/>
+		<result property="noticeCount" column="noticeCount"/>
+	</resultMap>
+	
 	<select id="getUserBrandNoticeList" parameterType="Page" resultMap="BrandNoticeResultMap">
   		SELECT rs.*,u.user_id,u.username FROM (
 		SELECT b.id,bc.category_id,bc.category_name,b.app_no,b.brand_no,b.name,b.image_url,b.app_person,b.transaction_status,
@@ -191,8 +198,39 @@
 		u on bnr.user=u.user_id where bnr.brand_notice=#{brandNoticeId}
 	</select>
 	
+	<update id="batchUpdateStarTargetStatus" parameterType="list">
+	 	update brand_management_notices  set star_target_monitor_status=1 where notice_id in
+	 	<foreach collection="noticeIds" item="noticeId" open="(" close=")" separator=",">
+	 		#{noticeId}
+	 	</foreach>
+	</update>
+
 	<select id="getBrandNoticeTypes" resultMap="BrandNoticeTypeResultMap">
 		select notice_type_id,notice_type_desc from brand_notice_types
 	</select>
-
+	
+	<select id="getBrandNoticeCountByNoticeType" parameterType="int" resultMap="BrandNoticeTypeCountMap">
+		select bnt.notice_type_id,bnt.notice_type_desc,count(*) noticeCount from brand_management_notices bmn 
+		LEFT JOIN brand_management b ON bmn.brand=b.id			
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
+		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id 
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1) 
+		group by bnt.notice_type_id order by bnt.notice_type_id asc 
+	</select>
+	
+	<insert id="saveBrandNotice" parameterType="BrandNotice">
+		insert into brand_management_notices(brand,dispatch_date,zipfile_name,notice_type) values(#{brand.id},#{dispatchDate},#{zipfileName},#{noticeType.noticeTypeId})
+	</insert>
+	
+	<select id="getAllBrandNoticeCountByUserId" parameterType="int" resultType="int">
+		select count(*) from brand_management_notices bmn 
+		LEFT JOIN brand_management b ON bmn.brand=b.id			
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
+		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id 
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1) 
+	</select>
 </mapper>

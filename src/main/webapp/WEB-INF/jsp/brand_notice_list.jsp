@@ -34,182 +34,28 @@
 					  <div style="height:33px;">
 					    <ul id="nav">
 					     <p>快捷处理：</p>
-					      <li><a href="#" class="selected">专利类型</a></li>
-						  <li><a href="#" class="">通知状态</a></li>
-					      <li><a href="#" class="">通知类型</a></li>
-					      <li><a href="#" class="">纸件申请</a></li>
-					      <li><a href="#" class="">剩余天数</a></li>
+					      <li><a href="#" class="selected">通知类型</a></li>
 					    </ul>
 					  </div>
 					  <div id="menu_con" style="min-width:1100px;">
 					    <div class="tag" style="display:block"> 
-					      <ul class="qxjk-ul">
+					       <ul class="qxjk-ul">
+					       	<c:forEach items="${noticeTypeCounts}" var="noticeTypeCount">
 					      	<li>
-						        <a href="<s:url value='/brandNotice/search.html?page.currentPage=1&patentType=1&noticeProcessStatus=1'/>">
-						        	发明专利 (<c:out value='${patentTypeCount[(1).longValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>
-					        
-					        <li>
-					         <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=2&noticeProcessStatus=1'/>">
-					        	实用新型(<c:out value='${patentTypeCount[(2).longValue()]["noticeCount"]}' default="0"/>)
-					        </a>
-					        </li>
-					        
-					        <li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=3&noticeProcessStatus=1'/>">
-						        	外观设计(<c:out value='${patentTypeCount[(3).longValue()]["noticeCount"]}' default="0"/>)
+						        <a href="<s:url value='/brandNotice/searchBrandNotice.html?page.currentPage=1&brandCategory=&brandLegalStatus=
+						        &noticeType=${noticeTypeCount.noticeTypeId}&dispatchDate=&keyword=
+						        '/>">
+						       		 ${noticeTypeCount.noticeTypeDescription}(<c:out value='${noticeTypeCount.noticeCount}' default="0"/>)
 						        </a>
 					        </li> 
-					        <li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=0&noticeProcessStatus=1'/>">
-						        	无类型(<c:out value='${patentTypeCount[(0).longValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>  
-					      </ul>	
-					     </div>
-						<div class="tag" style="display:none"> 
-					      <ul class="qxjk-ul">
-					      	<li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=1'/>">
-						        	应缴费/答复/处理 (<c:out value='${processStatusCount[(1).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>
-					        
-					        <li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=2'/>">
-						        	初步处理 (<c:out value='${processStatusCount[(2).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>
-					        
-					        <li> 
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=3'/>">
-						        	放弃处理 (<c:out value='${processStatusCount[(3).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>
-					        
-					        <li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=4'/>">
-						       		完成处理 (<c:out value='${processStatusCount[(4).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li> 
-					      </ul>	
-					     </div>
-					    <div class="tag"  style="display:none">
-					      <ul class="qxjk-ul">
-					      	<li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=1&noticeProcessStatus=1'/>">
-						       		 新案受理 (<c:out value='${noticeTypeCount[(1).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li> 
-					        
-					        <li> 
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=2&noticeProcessStatus=1'/>">
-						        	缴费通知 (<c:out value='${noticeTypeCount[(2).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li> 
-					        
-					        <li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=3&noticeProcessStatus=1'/>">
-						       		 补正审查 (<c:out value='${noticeTypeCount[(3).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>
-					        
-					         <li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=4&noticeProcessStatus=1'/>">
-						        	专利授权 (<c:out value='${noticeTypeCount[(4).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li> 
-					        
-					         <li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=5&noticeProcessStatus=1'/>">
-						       		权利丧失 (<c:out value='${noticeTypeCount[(5).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-						     </li>
-						     
-						     <li> 
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=6&noticeProcessStatus=1'/>">
-						        	手续合格 (<c:out value='${noticeTypeCount[(6).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>
-					         <li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=8&noticeProcessStatus=1'/>">
-						        	驳回决定 (<c:out value='${noticeTypeCount[(8).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>					        
-					         <li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=7&noticeProcessStatus=1'/>">
-						        	其他 (<c:out value='${noticeTypeCount[(7).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>
-					        
-					      </ul>
-					    </div>
-					    <div class="tag"  style="display:none">
-					      <ul class="qxjk-ul">
-					      	<li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=1'/>">
-						        	未申请 (<c:out value='${paperApplyTypeCount[(1).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>
-					        
-					        <li>  
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=2'/>">
-						       		 申请纸件 (<c:out value='${paperApplyTypeCount[(2).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>
-					        
-					         <li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=3'/>">
-						       		 处理中 (<c:out value='${paperApplyTypeCount[(3).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>
-					        
-					        <li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=4'/>">
-						        	已发送 (<c:out value='${paperApplyTypeCount[(4).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>
-					        
-					        <li> 
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=5'/>">
-						       		 无纸件 (<c:out value='${paperApplyTypeCount[(5).intValue()]["noticeCount"]}' default="0"/>)
+					        </c:forEach>
+					       <li> 
+						        <a href="<s:url value='/brandNotice/searchBrandNotice.html?page.currentPage=1'/>">
+						        	其他通知 (<c:out value='${allNoticeCount}' default="0"/>)
 						        </a>
 					        </li> 
 					      </ul>
-					    </div>
-					    <div class="tag" style="display:none">
-					      <ul class="qxjk-ul">
-					      	<li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=1&noticeProcessStatus=1'/>">
-						        	已超期 (<c:out value='${remainDayCount[(1).intValue()]["count(*)"]}' default="0"/>)
-						        </a>
-					        </li>
-					        
-					        <li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=2&noticeProcessStatus=1'/>">
-						        	一周内(<c:out value='${remainDayCount[(2).intValue()]["count(*)"]}' default="0"/>)
-						        </a>
-					        </li>
-					        
-			    			<li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=3&noticeProcessStatus=1'/>">
-						        	两周内 (<c:out value='${remainDayCount[(3).intValue()]["count(*)"]}' default="0"/>)
-						        </a>
-					        </li>
-					        
-					        <li> 
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=4&noticeProcessStatus=1'/>">
-						       		 一月内 (<c:out value='${remainDayCount[(4).intValue()]["count(*)"]}' default="0"/>)
-						        </a>
-					        </li> 
-					        <li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=5&noticeProcessStatus=1'/>">
-						        	一月以上 (<c:out value='${remainDayCount[(5).intValue()]["count(*)"]}' default="0"/>)
-						        </a>
-					        </li> 	        
-					      </ul>	
-					    </div>
+					     </div>
 					  </div>
 					</div>				
 				</div>
@@ -335,7 +181,9 @@
 							<c:forEach items="${notices}" var="notice" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
+
 								  <input style="text-align:center" type="checkbox" class="check-item" notice="${notice.noticeId}" brand="<c:out value='${notice.brand.id}'/>"></span>
+
 								  <span class="lbl"></span></label></td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize}
 								<c:if test="${notice.starTargetMonitorStatus==1 }">
@@ -1070,7 +918,7 @@ tabs.set("nav","menu_con");//执行
 		
 		var noticeIds = uniqueNoticeNos.join(",");
 		$.ajax({
-			url:"<s:url value='/notice/batchAddStarTargetMonitor.html'/>?noticeIds=" + noticeIds,
+			url:"<s:url value='/brandNotice/batchAddStarTargetMonitor.html'/>?noticeIds=" + noticeIds,
 			type:"post",
 			success: function(data) {
 				formutil.alertMessage(data,true);	
