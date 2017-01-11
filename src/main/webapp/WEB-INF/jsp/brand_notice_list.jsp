@@ -362,7 +362,7 @@
 							<c:forEach items="${notices}" var="notice" varStatus="status">
 							  <tr>
 								<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
-								  <input style="text-align:center" type="checkbox" class="check-item" brand="<c:out value='${notice.brand.id}'/>"></span>
+								  <input style="text-align:center" type="checkbox" class="check-item" brand="<c:out value='${notice.brand.id}'/>" notice="${notice.noticeId }"></span>
 								  <span class="lbl"></span></label></td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize}
 								<c:if test="${notice.starTargetMonitorStatus==1 }">
@@ -1107,7 +1107,7 @@ tabs.set("nav","menu_con");//执行
 		
 		var noticeIds = uniqueNoticeNos.join(",");
 		$.ajax({
-			url:"<s:url value='/notice/batchAddStarTargetMonitor.html'/>?noticeIds=" + noticeIds,
+			url:"<s:url value='/brandNotice/batchAddStarTargetMonitor.html'/>?noticeIds=" + noticeIds,
 			type:"post",
 			success: function(data) {
 				formutil.alertMessage(data,true);	

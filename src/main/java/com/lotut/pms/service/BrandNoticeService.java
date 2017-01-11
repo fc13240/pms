@@ -19,4 +19,6 @@ public interface BrandNoticeService {
 	List<BrandNoticeRemark> getBrandNoticeListByNoticeId(long brandNoticeId);
 
 	int batchChangeBrandNoticeViewStatus(List<Long> noticeIdList,int userId);
+
+	void batchUpdateStarTargetStatus(List<Long> noticeIds);
 }

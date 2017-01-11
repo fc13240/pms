@@ -193,5 +193,12 @@
 		select bnr.remark_id,bnr.remark_time,bnr.content,bnr.brand_notice,u.user_id,u.username from brand_notice_remark bnr left join users 
 		u on bnr.user=u.user_id where bnr.brand_notice=#{brandNoticeId}
 	</select>
+	
+	<update id="batchUpdateStarTargetStatus" parameterType="list">
+	 	update brand_management_notices  set star_target_monitor_status=1 where notice_id in
+	 	<foreach collection="noticeIds" item="noticeId" open="(" close=")" separator=",">
+	 		#{noticeId}
+	 	</foreach>
+	</update>
 
 </mapper>

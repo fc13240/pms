@@ -91,10 +91,20 @@ public class BrandNoticeController {
 		brandNoticeService.saveBrandNoticeRemark(brandNoticeRemark);
 		pw.write("success");
 	}
+	
 	@RequestMapping(path="/batchChangeBrandNoticeViewStatus", method=RequestMethod.GET)
 	public void batchChangeBrandNoticeViewStatus(@RequestParam("notices")List<Long> noticeIdList) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		brandNoticeService.batchChangeBrandNoticeViewStatus(noticeIdList, userId);
+	}
+	
+	@RequestMapping(path="/batchAddStarTargetMonitor")
+	public void batchAddStarTargetMonitor(@RequestParam("noticeIds") List<Long> noticeIds,PrintWriter pw){
+		System.out.println("-------------1---------------");
+		brandNoticeService.batchUpdateStarTargetStatus(noticeIds);
+		System.out.println("-------------2---------------");
+		String message = "操作成功";
+		pw.write(message);
 	}
 	
 }

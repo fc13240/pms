@@ -61,4 +61,10 @@ public class BrandNoticeServiceImpl implements BrandNoticeService {
 		brandNoticeDao.batchChangeBrandNoticeViewStatus(list);
 		return 1;
 	}
+
+	@Override
+	public void batchUpdateStarTargetStatus(List<Long> noticeIds) {
+		brandNoticeDao.batchUpdateStarTargetStatus(noticeIds);
+		
+	}
 }

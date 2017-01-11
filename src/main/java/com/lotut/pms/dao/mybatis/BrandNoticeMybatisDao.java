@@ -47,5 +47,11 @@ public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements Brand
 	public void batchChangeBrandNoticeViewStatus(List<Map<String, Long>> noticeIdList) {
 		brandNoticeMapper.batchChangeBrandNoticeViewStatus(noticeIdList);
 	}
+
+	@Override
+	public void batchUpdateStarTargetStatus(List<Long> noticeIds) {
+		brandNoticeMapper.batchUpdateStarTargetStatus(noticeIds);
+		
+	}
 	
 }

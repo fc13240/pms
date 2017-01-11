@@ -20,4 +20,6 @@ public interface BrandNoticeDao {
 	List<BrandNoticeRemark> getBrandNoticeListByNoticeId(long brandNoticeId);
 
 	void batchChangeBrandNoticeViewStatus(List<Map<String, Long>> noticeIdList);
+
+	void batchUpdateStarTargetStatus(List<Long> noticeIds);
 }
