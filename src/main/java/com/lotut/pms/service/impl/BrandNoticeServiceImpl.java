@@ -93,4 +93,9 @@ public class BrandNoticeServiceImpl implements BrandNoticeService {
 	public void saveBrandNotice(BrandNotice brandNotice) {
 		brandNoticeDao.saveBrandNotice(brandNotice);
 	}
+
+	@Override
+	public int getAllBrandNoticeCountByUserId(int userId) {
+		return brandNoticeDao.getAllBrandNoticeCountByUserId(userId);
+	}
 }

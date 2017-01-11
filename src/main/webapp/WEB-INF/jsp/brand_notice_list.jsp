@@ -49,46 +49,11 @@
 						        </a>
 					        </li> 
 					        </c:forEach>
-					        <%-- <li> 
-						        <a href="<s:url value='/brandNotice/searchBrandNotice.html?page.currentPage=1&noticeType=2&noticeProcessStatus=1'/>">
-						        	缴费通知 (<c:out value='${noticeTypeCount[(2).intValue()]["noticeCount"]}' default="0"/>)
+					       <li> 
+						        <a href="<s:url value='/brandNotice/searchBrandNotice.html?page.currentPage=1'/>">
+						        	其他通知 (<c:out value='${allNoticeCount}' default="0"/>)
 						        </a>
 					        </li> 
-					        
-					        <li>
-						        <a href="<s:url value='/brandNotice/searchBrandNotice.html?page.currentPage=1&noticeType=3&noticeProcessStatus=1'/>">
-						       		 补正审查 (<c:out value='${noticeTypeCount[(3).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>
-					        
-					         <li>
-						        <a href="<s:url value='/brandNotice/searchBrandNotice.html?page.currentPage=1&noticeType=4&noticeProcessStatus=1'/>">
-						        	专利授权 (<c:out value='${noticeTypeCount[(4).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li> 
-					        
-					         <li>
-						        <a href="<s:url value='/brandNotice/searchBrandNotice.html?page.currentPage=1&noticeType=5&noticeProcessStatus=1'/>">
-						       		权利丧失 (<c:out value='${noticeTypeCount[(5).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-						     </li>
-						     
-						     <li> 
-						        <a href="<s:url value='/brandNotice/searchBrandNotice.html?page.currentPage=1&noticeType=6&noticeProcessStatus=1'/>">
-						        	手续合格 (<c:out value='${noticeTypeCount[(6).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>
-					         <li>
-						        <a href="<s:url value='/brandNotice/searchBrandNotice.html?page.currentPage=1&noticeType=8&noticeProcessStatus=1'/>">
-						        	驳回决定 (<c:out value='${noticeTypeCount[(8).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li>					        
-					         <li>
-						        <a href="<s:url value='/brandNotice/searchBrandNotice.html?page.currentPage=1&noticeType=7&noticeProcessStatus=1'/>">
-						        	其他 (<c:out value='${noticeTypeCount[(7).intValue()]["noticeCount"]}' default="0"/>)
-						        </a>
-					        </li> --%>
-					        
 					      </ul>
 					     </div>
 					  </div>

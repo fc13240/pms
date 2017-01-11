@@ -149,10 +149,12 @@ public class BrandNoticeController {
 		List<BrandLegalStatus> allBrandLegalStatus = brandManagementService.getAllBrandLegalStatus();
 		List<BrandNoticeType> noticeTypes= brandNoticeService.getBrandNoticeTypes();
 		List<BrandNoticeTypeCount> noticeTypeCounts=brandNoticeService.getBrandNoticeCountByNoticeType(userId);
+		int allNoticeCount=brandNoticeService.getAllBrandNoticeCountByUserId(userId);
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
 		model.addAttribute("noticeTypes", noticeTypes);
 		model.addAttribute("noticeTypeCounts", noticeTypeCounts);
+		model.addAttribute("allNoticeCount", allNoticeCount);
 	}
 	
 	@RequestMapping(path="/uploadBrandNoticeFile")

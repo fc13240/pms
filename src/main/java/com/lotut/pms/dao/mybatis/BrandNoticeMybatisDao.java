@@ -78,5 +78,10 @@ public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements Brand
 	public void saveBrandNotice(BrandNotice brandNotice) {
 		brandNoticeMapper.saveBrandNotice(brandNotice);
 	}
+
+	@Override
+	public int getAllBrandNoticeCountByUserId(int userId) {
+		return brandNoticeMapper.getAllBrandNoticeCountByUserId(userId);
+	}
 	
 }

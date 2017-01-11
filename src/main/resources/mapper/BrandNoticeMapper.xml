@@ -223,5 +223,14 @@
 	<insert id="saveBrandNotice" parameterType="BrandNotice">
 		insert into brand_management_notices(brand,dispatch_date,zipfile_name,notice_type) values(#{brand.id},#{dispatchDate},#{zipfileName},#{noticeType.noticeTypeId})
 	</insert>
-
+	
+	<select id="getAllBrandNoticeCountByUserId" parameterType="int" resultType="int">
+		select count(*) from brand_management_notices bmn 
+		LEFT JOIN brand_management b ON bmn.brand=b.id			
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
+		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id 
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1) 
+	</select>
 </mapper>

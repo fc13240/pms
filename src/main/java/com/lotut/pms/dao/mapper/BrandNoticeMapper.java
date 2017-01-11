@@ -37,4 +37,6 @@ public interface BrandNoticeMapper {
 	List<BrandNoticeTypeCount> getBrandNoticeCountByNoticeType(int userId);
 
 	void saveBrandNotice(BrandNotice brandNotice);
+	
+	int getAllBrandNoticeCountByUserId(int userId);
 }
