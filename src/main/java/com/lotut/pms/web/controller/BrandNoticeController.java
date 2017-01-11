@@ -92,9 +92,10 @@ public class BrandNoticeController {
 		pw.write("success");
 	}
 	@RequestMapping(path="/batchChangeBrandNoticeViewStatus", method=RequestMethod.GET)
-	public void batchChangeBrandNoticeViewStatus(@RequestParam("notices")List<Long> noticeIdList) {
+	public void batchChangeBrandNoticeViewStatus(@RequestParam("notices")List<Long> noticeIdList,PrintWriter pw) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		brandNoticeService.batchChangeBrandNoticeViewStatus(noticeIdList, userId);
+		pw.write("success");
 	}
 	
 }

@@ -111,7 +111,7 @@
 	</insert>
 	
   	<insert id="batchChangeBrandNoticeViewStatus" parameterType="list">
-		replace into brand_notice_read(notice_id, user_id) 
+		insert ignore into brand_notice_read(notice_id, user_id) 
 		values
 		<foreach item="noticeIdList" collection="list" separator=",">
 			(#{noticeIdList.noticeId}, #{noticeIdList.userId})
