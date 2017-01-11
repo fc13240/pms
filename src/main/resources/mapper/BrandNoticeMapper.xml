@@ -151,10 +151,10 @@
 		<if test="noticeType != null">
 			AND bmn.notice_type = #{noticeType}
 		</if>
-		<if test="keyword != null">
-			AND (b.app_no LIKE #{keyword_pattern} or b.brand_no like #{keyword_pattern}
-				OR b.name LIKE #{keyword_pattern} or b.similar_no like #{keyword_pattern} or b.app_person like #{keyword_pattern}
-				OR b.scope LIKE #{keyword_pattern})
+		<if test="keyword != null and keyword !=''">
+			AND  b.app_no like #{keyword_pattern} or b.brand_no like #{keyword_pattern}
+				or b.name like #{keyword_pattern} or b.similar_no like #{keyword_pattern} or b.app_person like #{keyword_pattern}
+				or b.scope like #{keyword_pattern}
 		</if>
 		
 		LIMIT #{page.startIndex},#{page.pageSize}
@@ -187,9 +187,9 @@
 			AND bmn.notice_type = #{noticeType}
 		</if>
 		<if test="keyword != null">
-			AND (b.app_no LIKE #{keyword_pattern} or b.brand_no like #{keyword_pattern}
-				OR b.name LIKE #{keyword_pattern} or b.similar_no like #{keyword_pattern} or b.app_person like #{keyword_pattern}
-				OR b.scope LIKE #{keyword_pattern})
+			AND (b.app_no like #{keyword_pattern} or b.brand_no like #{keyword_pattern}
+				or b.name like #{keyword_pattern} or b.similar_no like #{keyword_pattern} or b.app_person like #{keyword_pattern}
+				or b.scope like #{keyword_pattern})
 		</if>
 	</select>
 	
