@@ -1344,3 +1344,5 @@ create table if not exists brand_notice_remark(
 	constraint fk_brand_notice_remark_brand_notice foreign key (brand_notice) references brand_management_notices(notice_id) on delete cascade,
 	constraint fk_brand_notice_remark_brand_user foreign key (user) references users (user_id) on delete cascade
 );
+
+alter table user_brand_management add column monitor_status int default 0 comment '0 未被监控，1 处于监控中';

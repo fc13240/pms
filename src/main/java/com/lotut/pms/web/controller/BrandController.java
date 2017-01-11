@@ -249,15 +249,15 @@ public class BrandController {
 		}
 		int totalCount = brandManagementService.getUserBrandManagementCount(userId);
 		List<BrandManagement> brands = brandManagementService.getUserBrandManagementByPage(page);
-		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(userId);
-		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(userId);
+		List<BrandLegalStatusCount> brandLegalStatus = brandManagementService.getLegalStatusCount(userId);
+		List<BrandCategoryCount> brandCategory = brandManagementService.getBrandCategoryCount(userId);
 		List<BrandNoticeType> noticeTypes = brandManagementService.getAllBrandNoticeTypes();
 		page.setTotalRecords(totalCount);
 		model.addAttribute("brands", brands);
 		model.addAttribute("page", page);
-		model.addAttribute("brands",brands);
-		model.addAttribute("page",page);
-		model.addAttribute("noticeTypes",noticeTypes);
+		model.addAttribute("brands", brands);
+		model.addAttribute("page", page);
+		model.addAttribute("noticeTypes", noticeTypes);
 		addBrandCategoryAndBrandLegalStatusToModel(model);
 		model.addAttribute("brandLegalStatus", brandLegalStatus);
 		model.addAttribute("brandCategory", brandCategory);
@@ -327,9 +327,9 @@ public class BrandController {
 		page.setTotalRecords(totalCount);
 		List<BrandManagement> brands = brandManagementService.searchUserBrandManagementByPage(searchCondition);
 		page.setTotalRecords(totalCount);
-		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(page.getUserId());
-		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(page.getUserId());
-		model.addAttribute("brands",brands);
+		List<BrandLegalStatusCount> brandLegalStatus = brandManagementService.getLegalStatusCount(page.getUserId());
+		List<BrandCategoryCount> brandCategory = brandManagementService.getBrandCategoryCount(page.getUserId());
+		model.addAttribute("brands", brands);
 		model.addAttribute("page", page);
 		model.addAttribute("brandLegalStatus", brandLegalStatus);
 		model.addAttribute("brandCategory", brandCategory);
@@ -342,10 +342,10 @@ public class BrandController {
 			throws IOException {
 		response.setHeader("X-FRAME-OPTIONS", "SAMEORIGIN");
 		response.setContentType("application/vnd.ms-excel");
-		String excelName = PrincipalUtils.getCurrentPrincipal().getUsername() + System.currentTimeMillis() +".xls";
+		String excelName = PrincipalUtils.getCurrentPrincipal().getUsername() + System.currentTimeMillis() + ".xls";
 		String brandExcelPath = brandManagementService.exportExcelUserBrand(brandIds, excelName);
 		response.setHeader("Content-Disposition", "attachment;filename=" + excelName);
-		
+
 		final int BUFFER_SIZE = 8192;
 		byte[] buffer = new byte[BUFFER_SIZE];
 		try (OutputStream out = response.getOutputStream();
@@ -360,18 +360,17 @@ public class BrandController {
 		}
 	}
 
-	
-	@RequestMapping(path="/brandManagementAddForm")
+	@RequestMapping(path = "/brandManagementAddForm")
 	public String brandManagementAddForm(Model model) {
 		List<BrandCategory> categorys = brandService.getAllCategorys();
 		List<BrandLegalStatus> legalStatuss = brandManagementService.getAllBrandLegalStatus();
-		model.addAttribute("categorys",categorys);
-		model.addAttribute("legalStatuss",legalStatuss);
+		model.addAttribute("categorys", categorys);
+		model.addAttribute("legalStatuss", legalStatuss);
 		return "brand_management_add_form";
-		
+
 	}
-	
-	@RequestMapping(path="/brandManageAdd",method=RequestMethod.POST)
+
+	@RequestMapping(path = "/brandManageAdd", method = RequestMethod.POST)
 	public String brandManagementAdd(BrandManagement brandManagement) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		User user = new User();
@@ -380,20 +379,20 @@ public class BrandController {
 		brandManagementService.insertOrUpdateBrand(brandManagement);
 		brandManagementService.insertUserBrand(userId, brandManagement.getId());
 		return "redirect:/brand/getBrandManagementlist.html";
-		}	
+	}
 
-	@RequestMapping(path="/brandManagementUpdateForm")
-	public String brandManagementUpdateForm(int brandId,Model model) {
+	@RequestMapping(path = "/brandManagementUpdateForm")
+	public String brandManagementUpdateForm(int brandId, Model model) {
 		List<BrandCategory> categorys = brandService.getAllCategorys();
 		List<BrandLegalStatus> legalStatuss = brandManagementService.getAllBrandLegalStatus();
-		BrandManagement brand= brandManagementService.showBrandManagementDetail(brandId);
-		model.addAttribute("legalStatuss",legalStatuss);
-		model.addAttribute("categorys",categorys);
-		model.addAttribute("brand",brand);
+		BrandManagement brand = brandManagementService.showBrandManagementDetail(brandId);
+		model.addAttribute("legalStatuss", legalStatuss);
+		model.addAttribute("categorys", categorys);
+		model.addAttribute("brand", brand);
 		return "brand_management_update_form";
-		}		 
-	
-	@RequestMapping(path="/brandManagementUpdate")
+	}
+
+	@RequestMapping(path = "/brandManagementUpdate")
 	public String brandManagementUpdate(BrandManagement brandManagement) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		User user = new User();
@@ -401,71 +400,78 @@ public class BrandController {
 		brandManagement.setUser(user);
 		brandManagementService.insertOrUpdateBrand(brandManagement);
 		return "redirect:/brand/getBrandManagementlist.html";
-	}		
-	
-	@RequestMapping(path="/uploadBrandManagementImageFile")
-    public void uploadBrandManagementImageFile(MultipartFile file,HttpServletResponse response) throws IOException{
-    	String fatherPath=Settings.BRAND_MANAGEMENT_IMAGE_PATH;
-    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_IMAGE_PATH.length()-1);
-    	int userId=PrincipalUtils.getCurrentUserId();
-    	long avatarSize =file.getSize();
-    	final long uploadAvatarSize=300*1024;
-    	if(avatarSize>uploadAvatarSize){
-				WebUtils.writeJsonStrToResponse(response, "overLimit");
-    	}else{
-    		
-    		FileOption.brandShowImgFileOption(userId, file, fatherPath, response,saveUrl);
-    	}
+	}
 
-    }
-	
-	 @RequestMapping(path="/uploadBrandProxyFile")
-	 public void uploadBrandProxyFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
-	    	String fatherPath=Settings.BRAND_MANAGEMENT_PROXYFILE_PATH;
-	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
-	    	int userId=PrincipalUtils.getCurrentUserId();
-	    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
-	    }
-	 
-	 @RequestMapping(path="/uploadBrandBusinessLicenseFile")
-	 public void uploadBrandBusinessLicenseFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
-	    	String fatherPath=Settings.BRAND_MANAGEMENT_BUSINESSLICENSE_PATH;
-	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
-	    	int userId=PrincipalUtils.getCurrentUserId();
-	    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
-	    }
-	 
-	 @RequestMapping(path="/uploadBrandEntityLicenseFile")
-	 public void uploadBrandEntityLicenseFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
-	    	String fatherPath=Settings.BRAND_MANAGEMENT_ENTITYLICENSE_PATH;
-	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
-	    	int userId=PrincipalUtils.getCurrentUserId();
-	    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
-	    }
-		
-	 @RequestMapping(path="/uploadBrandIndividualLicenseFile")
-	 public void uploadBrandIndividualLicenseFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
-	    	String fatherPath=Settings.BRAND_MANAGEMENT_INDIVIDUALLICENSE_PATH;
-	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
-	    	int userId=PrincipalUtils.getCurrentUserId();
-	    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
-	    }
-	 
-	 @RequestMapping(path="/uploadBrandIdentityCardFile")
-	 public void uploadBrandIdentityCardFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
-	    	String fatherPath=Settings.BRAND_MANAGEMENT_IDENTTITYCARD_PATH;
-	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
-	    	int userId=PrincipalUtils.getCurrentUserId();
-	    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
-	    }
-	 
-	 @RequestMapping(path="/uploadBrandApplicationFile")
-	 public void uploadBrandApplicationFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
-	    	String fatherPath=Settings.BRAND_MANAGEMENT_APPLICATION_PATH;
-	    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
-	    	int userId=PrincipalUtils.getCurrentUserId();
-	    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
-	    }
+	@RequestMapping(path = "/uploadBrandManagementImageFile")
+	public void uploadBrandManagementImageFile(MultipartFile file, HttpServletResponse response) throws IOException {
+		String fatherPath = Settings.BRAND_MANAGEMENT_IMAGE_PATH;
+		String saveUrl = fatherPath.substring(Settings.BRAND_MANAGEMENT_IMAGE_PATH.length() - 1);
+		int userId = PrincipalUtils.getCurrentUserId();
+		long avatarSize = file.getSize();
+		final long uploadAvatarSize = 300 * 1024;
+		if (avatarSize > uploadAvatarSize) {
+			WebUtils.writeJsonStrToResponse(response, "overLimit");
+		} else {
+
+			FileOption.brandShowImgFileOption(userId, file, fatherPath, response, saveUrl);
+		}
+
+	}
+
+	@RequestMapping(path = "/uploadBrandProxyFile")
+	public void uploadBrandProxyFile(MultipartFile file, HttpServletResponse response)
+			throws IOException, DocumentException {
+		String fatherPath = Settings.BRAND_MANAGEMENT_PROXYFILE_PATH;
+		String saveUrl = fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length() - 1);
+		int userId = PrincipalUtils.getCurrentUserId();
+		FileOption.brandManagementFileOption(userId, file, fatherPath, response, saveUrl);
+	}
+
+	@RequestMapping(path = "/uploadBrandBusinessLicenseFile")
+	public void uploadBrandBusinessLicenseFile(MultipartFile file, HttpServletResponse response)
+			throws IOException, DocumentException {
+		String fatherPath = Settings.BRAND_MANAGEMENT_BUSINESSLICENSE_PATH;
+		String saveUrl = fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length() - 1);
+		int userId = PrincipalUtils.getCurrentUserId();
+		FileOption.brandManagementFileOption(userId, file, fatherPath, response, saveUrl);
+	}
+
+	@RequestMapping(path = "/uploadBrandEntityLicenseFile")
+	public void uploadBrandEntityLicenseFile(MultipartFile file, HttpServletResponse response)
+			throws IOException, DocumentException {
+		String fatherPath = Settings.BRAND_MANAGEMENT_ENTITYLICENSE_PATH;
+		String saveUrl = fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length() - 1);
+		int userId = PrincipalUtils.getCurrentUserId();
+		FileOption.brandManagementFileOption(userId, file, fatherPath, response, saveUrl);
+	}
+
+	@RequestMapping(path = "/uploadBrandIndividualLicenseFile")
+	public void uploadBrandIndividualLicenseFile(MultipartFile file, HttpServletResponse response)
+			throws IOException, DocumentException {
+		String fatherPath = Settings.BRAND_MANAGEMENT_INDIVIDUALLICENSE_PATH;
+		String saveUrl = fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length() - 1);
+		int userId = PrincipalUtils.getCurrentUserId();
+		FileOption.brandManagementFileOption(userId, file, fatherPath, response, saveUrl);
+	}
+
+	@RequestMapping(path = "/uploadBrandIdentityCardFile")
+	public void uploadBrandIdentityCardFile(MultipartFile file, HttpServletResponse response)
+			throws IOException, DocumentException {
+		String fatherPath = Settings.BRAND_MANAGEMENT_IDENTTITYCARD_PATH;
+		String saveUrl = fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length() - 1);
+		int userId = PrincipalUtils.getCurrentUserId();
+		FileOption.brandManagementFileOption(userId, file, fatherPath, response, saveUrl);
+	}
+
+	@RequestMapping(path = "/uploadBrandApplicationFile")
+	public void uploadBrandApplicationFile(MultipartFile file, HttpServletResponse response)
+			throws IOException, DocumentException {
+		String fatherPath = Settings.BRAND_MANAGEMENT_APPLICATION_PATH;
+		String saveUrl = fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length() - 1);
+		int userId = PrincipalUtils.getCurrentUserId();
+		FileOption.brandManagementFileOption(userId, file, fatherPath, response, saveUrl);
+	}
+
 	private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
 
 		List<BrandCategory> categorys = brandManagementService.getAllBrandCategory();
@@ -473,104 +479,120 @@ public class BrandController {
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
 	}
-	
 
-	@RequestMapping(path="/deleteBrandManagement", method=RequestMethod.GET)
-	public void deleteBrandManagement(@RequestParam("brands")List<Integer> brandManagementIds,PrintWriter writer){
+	@RequestMapping(path = "/deleteBrandManagement", method = RequestMethod.GET)
+	public void deleteBrandManagement(@RequestParam("brands") List<Integer> brandManagementIds, PrintWriter writer) {
 		int userId = PrincipalUtils.getCurrentUserId();
-		brandManagementService.brandsTrash(brandManagementIds,userId);
+		brandManagementService.brandsTrash(brandManagementIds, userId);
 		writer.write(1);
 	}
-	
 
-	 @RequestMapping(path="/deleteShareUser", method=RequestMethod.GET)
-		public void deleteShareUser(int brandId,int shareUserId,Model model,
-				HttpServletResponse response) throws IOException{
-		 	brandManagementService.deleteShareUser(brandId,shareUserId);
-			WebUtils.writeJsonStrToResponse(response, "success");
-		}	
-	 
+	@RequestMapping(path = "/deleteShareUser", method = RequestMethod.GET)
+	public void deleteShareUser(int brandId, int shareUserId, Model model, HttpServletResponse response)
+			throws IOException {
+		brandManagementService.deleteShareUser(brandId, shareUserId);
+		WebUtils.writeJsonStrToResponse(response, "success");
+	}
 
-		@RequestMapping(path="/brandRecycled", method=RequestMethod.GET)
-		public String patentRecycled(Model model, Page page, HttpSession session){
-			int userId = PrincipalUtils.getCurrentUserId();
-			page.setUserId(userId);
-			page.setPageSize(WebUtils.getPageSize(session));
-			if (page.getCurrentPage() <= 0) {
-				page.setCurrentPage(1);
-			}
-			int totalCount=brandManagementService.getBrandsRecycledCount(userId);
-			page.setTotalRecords(totalCount);
-			List<Brand> brands=brandManagementService.getBrandsRecycled(page);
-			model.addAttribute("brands", brands);
-			model.addAttribute("page", page);
-			return "brand_recycled";
+	@RequestMapping(path = "/brandRecycled", method = RequestMethod.GET)
+	public String patentRecycled(Model model, Page page, HttpSession session) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
 		}
-		
-		@RequestMapping(path="/searchBrandRecycled", method=RequestMethod.GET)
-		public String searchBrandRecycled(@ModelAttribute("searchCondition")BrandManagementSearchCondition searchCondition, Model model,HttpSession session){
-			Page page=searchCondition.getPage();
-			page.setPageSize(WebUtils.getPageSize(session));
-			searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
-			if (page.getCurrentPage() <= 0) {
-				page.setCurrentPage(1);
-			}
-			int totalCount=brandManagementService.SearchBrandsRecycledCount(searchCondition);
-			page.setTotalRecords(totalCount);
-			List<Brand> brands=brandManagementService.SearchBrandsRecycled(searchCondition);
-			model.addAttribute("brands", brands);
-			model.addAttribute("page", page);
-			return "brand_recycled";
-		}
-		
-		@RequestMapping(path="/recoverBrands", method=RequestMethod.GET)
-		public void recoverBrand(@RequestParam("brands") List<Integer> brandManagementIds,PrintWriter writer){
-			int userId = PrincipalUtils.getCurrentUserId();
-			brandManagementService.recoverBrands(brandManagementIds, userId);
-			writer.write(1);
-			
-		}
-		
-		@RequestMapping(path="/deleteForeverBrands", method=RequestMethod.GET)
-		public void deleteForeverBrands(@RequestParam("brands") List<Integer> brandManagementIds,PrintWriter writer){
-			int userId = PrincipalUtils.getCurrentUserId();
-			brandManagementService.deleteForeverBrands(brandManagementIds, userId);
-			writer.write(1);
-		}
-		
-	
+		int totalCount = brandManagementService.getBrandsRecycledCount(userId);
+		page.setTotalRecords(totalCount);
+		List<Brand> brands = brandManagementService.getBrandsRecycled(page);
+		model.addAttribute("brands", brands);
+		model.addAttribute("page", page);
+		return "brand_recycled";
+	}
 
-
-	 @RequestMapping(path="/downloadImgFile", method=RequestMethod.GET)
-		public void downloadImgFile(String imgUrl, HttpServletResponse response,HttpServletRequest request) throws IOException {
-			response.setContentType("application/octet-stream ");
-			String targetUrl=imgUrl.substring(1, imgUrl.lastIndexOf("."));
-			String downloadFileName = URLEncoder.encode(imgUrl.substring(imgUrl.lastIndexOf("/")+1,imgUrl.lastIndexOf(".")), "UTF8");
-			String filePath = Settings.BRAND_MANAGEMENT_IMAGE_PATH+targetUrl;
-			File targetFile = new File(filePath);
-			if("FF".equals(WebUtils.getBrowser(request))){
-			    //针对火狐浏览器处理
-				downloadFileName =new String(imgUrl.substring(imgUrl.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
-			}
-			response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
-			response.setContentLength((int)targetFile.length());
-			WebUtils.writeStreamToResponse(response, new FileInputStream(targetFile));
+	@RequestMapping(path = "/searchBrandRecycled", method = RequestMethod.GET)
+	public String searchBrandRecycled(@ModelAttribute("searchCondition") BrandManagementSearchCondition searchCondition,
+			Model model, HttpSession session) {
+		Page page = searchCondition.getPage();
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
 		}
-	 
-	 @RequestMapping(path="/downloadProxyFile", method=RequestMethod.GET)
-		public void downloadproxyFile(String proxyFile, HttpServletResponse response,HttpServletRequest request) throws IOException {
-			response.setContentType("application/octet-stream ");
-			String targetUrl=proxyFile.substring(1, proxyFile.lastIndexOf("."));
-			String downloadFileName = URLEncoder.encode(proxyFile.substring(proxyFile.lastIndexOf("/")+1,proxyFile.lastIndexOf(".")), "UTF8");
-			String filePath = Settings.BRAND_MANAGEMENT_PROXYFILE_PATH+targetUrl;
-			File targetFile = new File(filePath);
-			if("FF".equals(WebUtils.getBrowser(request))){
-			    //针对火狐浏览器处理
-				downloadFileName =new String(proxyFile.substring(proxyFile.lastIndexOf("/")+1).getBytes("UTF-8"),"iso-8859-1");
-			}
-			response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
-			response.setContentLength((int)targetFile.length());
-			WebUtils.writeStreamToResponse(response, new FileInputStream(targetFile));
-		}
+		int totalCount = brandManagementService.SearchBrandsRecycledCount(searchCondition);
+		page.setTotalRecords(totalCount);
+		List<Brand> brands = brandManagementService.SearchBrandsRecycled(searchCondition);
+		model.addAttribute("brands", brands);
+		model.addAttribute("page", page);
+		return "brand_recycled";
+	}
 
+	@RequestMapping(path = "/recoverBrands", method = RequestMethod.GET)
+	public void recoverBrand(@RequestParam("brands") List<Integer> brandManagementIds, PrintWriter writer) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		brandManagementService.recoverBrands(brandManagementIds, userId);
+		writer.write(1);
+
+	}
+
+	@RequestMapping(path = "/deleteForeverBrands", method = RequestMethod.GET)
+	public void deleteForeverBrands(@RequestParam("brands") List<Integer> brandManagementIds, PrintWriter writer) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		brandManagementService.deleteForeverBrands(brandManagementIds, userId);
+		writer.write(1);
+	}
+
+	@RequestMapping(path = "/downloadImgFile", method = RequestMethod.GET)
+	public void downloadImgFile(String imgUrl, HttpServletResponse response, HttpServletRequest request)
+			throws IOException {
+		response.setContentType("application/octet-stream ");
+		String targetUrl = imgUrl.substring(1, imgUrl.lastIndexOf("."));
+		String downloadFileName = URLEncoder
+				.encode(imgUrl.substring(imgUrl.lastIndexOf("/") + 1, imgUrl.lastIndexOf(".")), "UTF8");
+		String filePath = Settings.BRAND_MANAGEMENT_IMAGE_PATH + targetUrl;
+		File targetFile = new File(filePath);
+		if ("FF".equals(WebUtils.getBrowser(request))) {
+			// 针对火狐浏览器处理
+			downloadFileName = new String(imgUrl.substring(imgUrl.lastIndexOf("/") + 1).getBytes("UTF-8"),
+					"iso-8859-1");
+		}
+		response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
+		response.setContentLength((int) targetFile.length());
+		WebUtils.writeStreamToResponse(response, new FileInputStream(targetFile));
+	}
+
+	@RequestMapping(path = "/downloadProxyFile", method = RequestMethod.GET)
+	public void downloadproxyFile(String proxyFile, HttpServletResponse response, HttpServletRequest request)
+			throws IOException {
+		response.setContentType("application/octet-stream ");
+		String targetUrl = proxyFile.substring(1, proxyFile.lastIndexOf("."));
+		String downloadFileName = URLEncoder
+				.encode(proxyFile.substring(proxyFile.lastIndexOf("/") + 1, proxyFile.lastIndexOf(".")), "UTF8");
+		String filePath = Settings.BRAND_MANAGEMENT_PROXYFILE_PATH + targetUrl;
+		File targetFile = new File(filePath);
+		if ("FF".equals(WebUtils.getBrowser(request))) {
+			// 针对火狐浏览器处理
+			downloadFileName = new String(proxyFile.substring(proxyFile.lastIndexOf("/") + 1).getBytes("UTF-8"),
+					"iso-8859-1");
+		}
+		response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
+		response.setContentLength((int) targetFile.length());
+		WebUtils.writeStreamToResponse(response, new FileInputStream(targetFile));
+	}
+
+	@RequestMapping(path = "/getUsermonitorBrands")
+	public String getUsermonitorBrands(HttpSession session,Page page,Model model){
+		int  userId = PrincipalUtils.getCurrentUserId();
+		if(page.getCurrentPage()<=0){
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		page.setUserId(userId);
+		int totalCount = brandManagementService.getUserMonitorBrandCount(userId);
+		page.setTotalRecords(totalCount);
+		List<BrandManagement> brands = brandManagementService.getUserMonitorBrand(page);
+		model.addAttribute("page", page);
+		model.addAttribute("brands", brands);
+		return "brand_management_monitor_list";
+	}
 }
