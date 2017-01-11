@@ -31,10 +31,8 @@ public interface BrandNoticeService {
 	
 	List<BrandNoticeType> getBrandNoticeTypes();
 	
-<<<<<<< HEAD
 	List<BrandNoticeTypeCount> getBrandNoticeCountByNoticeType(int userId);
-=======
+	
 	void saveBrandNotice(BrandNotice brandNotice);
 
->>>>>>> 35afc9a49b83a6bf56f8c0fc5651120b836124ab
 }
