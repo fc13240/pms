@@ -45,7 +45,9 @@
 			<id property="noticeTypeId" column="notice_type_id"/>
 			<result property="noticeTypeDescription" column="notice_type_desc"/>
 		</association>
+		<association property="brandLegalStatus" resultMap="com.lotut.pms.dao.mapper.BrandManagementMapper.BrandLegalStatusResultMap"/>
 		<association property="brand" resultMap="com.lotut.pms.dao.mapper.BrandManagementMapper.brandManagementResultMap"/>
+		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 			
 	</resultMap>
 
@@ -61,10 +63,9 @@
 	</resultMap>
 	<select id="getUserBrandNoticeList" parameterType="Page" resultMap="BrandNoticeResultMap">
   		SELECT rs.*,u.user_id,u.username FROM (
-		SELECT b.id,bc.category_id,bc.category_name,b.app_no,b.brand_no,b.name,b.image_url,b.app_person,
+		SELECT b.id,bc.category_id,bc.category_name,b.app_no,b.brand_no,b.name,b.image_url,b.app_person,b.transaction_status,
 			b.app_date,bmn.dispatch_date,bls.legal_status_id,bls.legal_status_name,bmn.star_target_monitor_status,
 			nvl.notice_id AS notice_view_status,bnt.notice_type_id,bnt.notice_type_desc,bmn.notice_id,bmn.notice_name
-		
 		FROM brand_management_notices bmn 
 		LEFT JOIN brand_management b ON bmn.brand=b.id			
 		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
@@ -116,6 +117,77 @@
 			(#{noticeIdList.noticeId}, #{noticeIdList.userId})
 		</foreach>
 	</insert>
+	
+	<select id="searchUserBrandNoticeByPage" parameterType="BrandNoticeSearchCondition" resultMap="BrandNoticeResultMap">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%'+keyword+'%'"/>
+		</if>
+		SELECT rs.*,u.user_id,u.username FROM (
+		SELECT b.id,bc.category_id,bc.category_name,b.app_no,b.brand_no,b.name,b.image_url,b.app_person,
+			b.app_date,bmn.dispatch_date,bls.legal_status_id,bls.legal_status_name,bmn.star_target_monitor_status,
+			nvl.notice_id AS notice_view_status,bnt.notice_type_id,bnt.notice_type_desc,bmn.notice_id,bmn.notice_name
+		FROM brand_management_notices bmn 
+		LEFT JOIN brand_management b ON bmn.brand=b.id			
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
+		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1)  
+		<if test="brandCategory != null">
+			AND b.category_id = #{brandCategory}
+		</if>
+		<if test="brandLegalStatus != null">
+			AND b.legal_status = #{brandLegalStatus}
+		</if>
+		<if test="dispatchDate != null">
+			AND b.dispatch_date = #{dispatchDate}
+		</if>
+		notice_type
+		<if test="noticeType != null">
+			AND b.notice_type = #{noticeType}
+		</if>
+		<if test="keyword != null">
+			AND (b.app_no LIKE #{keyword_pattern} or b.brand_no like #{keyword_pattern}
+				OR b.name LIKE #{keyword_pattern} or b.similar_no like #{keyword_pattern} or b.app_person like #{keyword_pattern}
+				OR b.scope LIKE #{keyword_pattern})
+		</if>
+		
+		LIMIT #{page.startIndex},#{page.pageSize}
+		) rs
+		LEFT JOIN user_brand_management ubm ON ubm.brand=rs.id
+		LEFT JOIN users u ON u.user_id=ubm.user
+	</select>
+	
+	<select id="searchBrandNoticeCountByPage" parameterType="BrandNoticeSearchCondition" resultType="int">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%'+keyword+'%'"/>
+		</if>
+		SELECT count(*) FROM brand_management_notices bmn 
+		LEFT JOIN brand_management b ON bmn.brand=b.id			
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
+		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1) 
+		<if test="brandCategory != null">
+			AND b.category_id = #{brandCategory}
+		</if>
+		<if test="brandLegalStatus != null">
+			AND b.legal_status = #{brandLegalStatus}
+		</if>
+		<if test="dispatchDate != null">
+			AND b.dispatch_date = #{dispatchDate}
+		</if>
+		notice_type
+		<if test="noticeType != null">
+			AND b.notice_type = #{noticeType}
+		</if>
+		<if test="keyword != null">
+			AND (b.app_no LIKE #{keyword_pattern} or b.brand_no like #{keyword_pattern}
+				OR b.name LIKE #{keyword_pattern} or b.similar_no like #{keyword_pattern} or b.app_person like #{keyword_pattern}
+				OR b.scope LIKE #{keyword_pattern})
+		</if>
+	</select>
 	
 	<select id="getBrandNoticeListByNoticeId" parameterType="long" resultMap="BrandNoticeRemarkMap">
 		select bnr.remark_id,bnr.remark_time,bnr.content,bnr.brand_notice,u.user_id,u.username from brand_notice_remark bnr left join users 
