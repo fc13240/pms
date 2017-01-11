@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.lotut.pms.domain.BrandNotice;
 import com.lotut.pms.domain.BrandNoticeRemark;
+import com.lotut.pms.domain.BrandNoticeSearchCondition;
+import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
 
 public interface BrandNoticeService {
@@ -19,4 +21,10 @@ public interface BrandNoticeService {
 	List<BrandNoticeRemark> getBrandNoticeListByNoticeId(long brandNoticeId);
 
 	int batchChangeBrandNoticeViewStatus(List<Long> noticeIdList,int userId);
+	
+	List<BrandNotice> searchUserBrandNoticeByPage(BrandNoticeSearchCondition searchCondition);
+	
+	int searchBrandNoticeCountByPage(BrandNoticeSearchCondition searchCondition);
+	
+	List<BrandNoticeType> getBrandNoticeTypes();
 }

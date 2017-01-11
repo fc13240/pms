@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Param;
 
 import com.lotut.pms.domain.BrandNotice;
 import com.lotut.pms.domain.BrandNoticeRemark;
+import com.lotut.pms.domain.BrandNoticeSearchCondition;
+import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
 
 public interface BrandNoticeMapper {
@@ -22,4 +24,10 @@ public interface BrandNoticeMapper {
 	List<BrandNoticeRemark> getBrandNoticeListByNoticeId(long brandNoticeId);
 
 	void batchChangeBrandNoticeViewStatus(List<Map<String, Long>> noticeIdList);
+	
+	List<BrandNotice> searchUserBrandNoticeByPage(BrandNoticeSearchCondition searchCondition);
+	
+	int searchBrandNoticeCountByPage(BrandNoticeSearchCondition searchCondition);
+	
+	List<BrandNoticeType> getBrandNoticeTypes();
 }

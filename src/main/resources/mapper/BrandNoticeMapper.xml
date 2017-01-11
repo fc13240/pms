@@ -47,7 +47,6 @@
 		</association>
 		<association property="brandLegalStatus" resultMap="com.lotut.pms.dao.mapper.BrandManagementMapper.BrandLegalStatusResultMap"/>
 		<association property="brand" resultMap="com.lotut.pms.dao.mapper.BrandManagementMapper.brandManagementResultMap"/>
-		<collection property="shareUsers" resultMap="com.lotut.pms.dao.mapper.UserMapper.UserResultMap"/>
 			
 	</resultMap>
 
@@ -142,9 +141,8 @@
 		<if test="dispatchDate != null">
 			AND b.dispatch_date = #{dispatchDate}
 		</if>
-		notice_type
 		<if test="noticeType != null">
-			AND b.notice_type = #{noticeType}
+			AND bmn.notice_type = #{noticeType}
 		</if>
 		<if test="keyword != null">
 			AND (b.app_no LIKE #{keyword_pattern} or b.brand_no like #{keyword_pattern}
@@ -178,9 +176,8 @@
 		<if test="dispatchDate != null">
 			AND b.dispatch_date = #{dispatchDate}
 		</if>
-		notice_type
 		<if test="noticeType != null">
-			AND b.notice_type = #{noticeType}
+			AND bmn.notice_type = #{noticeType}
 		</if>
 		<if test="keyword != null">
 			AND (b.app_no LIKE #{keyword_pattern} or b.brand_no like #{keyword_pattern}
@@ -192,6 +189,10 @@
 	<select id="getBrandNoticeListByNoticeId" parameterType="long" resultMap="BrandNoticeRemarkMap">
 		select bnr.remark_id,bnr.remark_time,bnr.content,bnr.brand_notice,u.user_id,u.username from brand_notice_remark bnr left join users 
 		u on bnr.user=u.user_id where bnr.brand_notice=#{brandNoticeId}
+	</select>
+	
+	<select id="getBrandNoticeTypes" resultMap="BrandNoticeTypeResultMap">
+		select notice_type_id,notice_type_desc from brand_notice_types
 	</select>
 
 </mapper>

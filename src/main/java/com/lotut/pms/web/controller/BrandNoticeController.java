@@ -17,10 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandCategoryCount;
+import com.lotut.pms.domain.BrandLegalStatus;
+import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandNotice;
 import com.lotut.pms.domain.BrandNoticeRemark;
+import com.lotut.pms.domain.BrandNoticeSearchCondition;
+import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
+import com.lotut.pms.service.BrandManagementService;
 import com.lotut.pms.service.BrandNoticeService;
 import com.lotut.pms.util.PrincipalUtils;
 import com.lotut.pms.web.util.WebUtils;
@@ -29,10 +36,11 @@ import com.lotut.pms.web.util.WebUtils;
 @RequestMapping(path="/brandNotice")
 public class BrandNoticeController {
 	private BrandNoticeService brandNoticeService;
-	
+	private BrandManagementService brandManagementService;
 	@Autowired
-	public BrandNoticeController(BrandNoticeService brandNoticeService) {
+	public BrandNoticeController(BrandNoticeService brandNoticeService,BrandManagementService brandManagementService) {
 		this.brandNoticeService = brandNoticeService;
+		this.brandManagementService=brandManagementService;
 	}
 	
 	@RequestMapping(path="getBrandNoticeList")
@@ -97,4 +105,37 @@ public class BrandNoticeController {
 		brandNoticeService.batchChangeBrandNoticeViewStatus(noticeIdList, userId);
 	}
 	
+	@RequestMapping(path = "/searchBrandNotice", method = RequestMethod.GET)
+	public String searchBrandNotice(
+			@ModelAttribute("searchCondition") BrandNoticeSearchCondition searchCondition, HttpSession session,
+			Model model) {
+		Page page = searchCondition.getPage();
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		page.setPageSize(WebUtils.getPageSize(session));
+		if (page.getCurrentPage() <= 0) {
+			page.setCurrentPage(1);
+		}
+		int totalCount = brandNoticeService.searchBrandNoticeCountByPage(searchCondition);
+		page.setTotalRecords(totalCount);
+		List<BrandNotice> brandNotices = brandNoticeService.searchUserBrandNoticeByPage(searchCondition);
+		page.setTotalRecords(totalCount);
+		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(page.getUserId());
+		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(page.getUserId());
+		model.addAttribute("brandNotices",brandNotices);
+		model.addAttribute("page", page);
+		model.addAttribute("brandLegalStatus", brandLegalStatus);
+		model.addAttribute("brandCategory", brandCategory);
+		addBrandCategoryAndBrandLegalStatusToModel(model);
+		return "brand_notice_list";
+	}
+	
+	private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
+		List<BrandCategory> categorys = brandManagementService.getAllBrandCategory();
+		List<BrandLegalStatus> allBrandLegalStatus = brandManagementService.getAllBrandLegalStatus();
+		List<BrandNoticeType> noticeTypes= brandManagementService.getAllBrandNoticeTypes();
+		model.addAttribute("categorys", categorys);
+		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
+		model.addAttribute("brandNoticeTypes", noticeTypes);
+	}
 }

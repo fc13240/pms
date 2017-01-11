@@ -11,7 +11,7 @@ public class BrandNoticeSearchCondition {
 	private Integer brandLegalStatus;
 	private Integer noticeType;
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
-	private Date appDate;
+	private Date dispatchDate;
 	private String keyword;
 	private Page page;
 	
@@ -42,11 +42,12 @@ public class BrandNoticeSearchCondition {
 	public void setNoticeType(Integer noticeType) {
 		this.noticeType = noticeType;
 	}
-	public Date getAppDate() {
-		return appDate;
+	
+	public Date getDispatchDate() {
+		return dispatchDate;
 	}
-	public void setAppDate(Date appDate) {
-		this.appDate = appDate;
+	public void setDispatchDate(Date dispatchDate) {
+		this.dispatchDate = dispatchDate;
 	}
 	public String getKeyword() {
 		return keyword;
@@ -64,12 +65,12 @@ public class BrandNoticeSearchCondition {
 	public String toString() {
 		String brandCategoryStr= brandCategory ==null? "":brandCategory.toString();
 		String brandLegalStatusStr =brandLegalStatus == null ? "" :brandLegalStatus.toString();
-		String appDateStr=appDate==null?"":appDate.toString();
+		String dispatchDateStr=dispatchDate==null?"":dispatchDate.toString();
 		String noticeTypeStr = noticeType == null ? "" : noticeType.toString();
 		String keywordStr = keyword == null ? "" : keyword.trim();
 		
-		return "brandCategory=" + brandCategoryStr + "&brandLegalStatus=" + brandLegalStatusStr +"&noticeType=" + noticeTypeStr + "&appDate="
-				+ appDateStr + "&keyword=" + keywordStr;
+		return "brandCategory=" + brandCategoryStr + "&brandLegalStatus=" + brandLegalStatusStr +"&noticeType=" + noticeTypeStr + "&dispatchDate="
+				+ dispatchDateStr + "&keyword=" + keywordStr;
 	}
 	
 	

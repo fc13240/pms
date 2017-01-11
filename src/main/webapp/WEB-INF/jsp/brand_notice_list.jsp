@@ -45,7 +45,7 @@
 					    <div class="tag" style="display:block"> 
 					      <ul class="qxjk-ul">
 					      	<li>
-						        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=1&noticeProcessStatus=1'/>">
+						        <a href="<s:url value='/brandNotice/search.html?page.currentPage=1&patentType=1&noticeProcessStatus=1'/>">
 						        	发明专利 (<c:out value='${patentTypeCount[(1).longValue()]["noticeCount"]}' default="0"/>)
 						        </a>
 					        </li>
@@ -218,49 +218,37 @@
 				
 				<div class="lt-box" style="padding: 10px 0 0 0;">
 					<div class="search-box">
-						<form action="<s:url value='/notice/search.html'/>" method="get">
+						<form action="<s:url value='/brandNotice/searchBrandNotice.html'/>" method="get">
 						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 						  <div class="t-third" style="clear:both;">
 							<table class="search-table">
 							  <tr>
-							  <td>专利类型</td>
-							  <td>查看状态</td>
-							  <td>通知状态</td>
+							  <td>商标类别</td>
+							  <td>商标状态</td>
 							  <td>通知类型</td>
-							  <td>纸件申请</td>
-							  <td>发文日起始</td>
-							  <td></td>
-							  <td>发文日结束</td>
+							  <td>发文日</td>
 							  <td>关键字</td>
-							  <td></td>	
 							  </tr>
 							  <tr>
 							  <td>
-						        <select style="width:100px;" class="selectPointOfInterest form-control" name="patentType">
-						          <option value="">全部</option>
-						          <c:forEach items="${patentTypes}" var="patentType">
-						            <option value="<c:out value='${patentType.patentTypeId}'/>">
-						            <c:out value="${patentType.typeDescription}"/>
-						            </option>
-						          </c:forEach>
-						        </select>							  
+						        <select  style="width:100px;" class="selectPointOfInterest form-control" name="brandCategory">
+								  <option value="">全部</option>
+								  <c:forEach items="${categorys}" var="category">
+									<option value="<c:out value='${category.categoryId}'/>">
+									<c:out value="${category.categoryName}"/>
+									</option>
+								  </c:forEach>
+								</select>					  
 							  </td>
 							  <td>
-						        <select style="width:100px;" class="selectPointOfInterest form-control" name="noticeViewStatus">
-						          <option value="0">全部</option>
-						          <option value="1">已查看</option>
-						          <option value="2">未查看</option>
-						        </select>							  
-							  </td>
-							  <td>
-						        <select style="width:93px;" class="selectPointOfInterest form-control" name="noticeProcessStatus">
-						          <option value="">全部</option>
-						          <c:forEach items="${noticeProcessStatus}" var="processStatus">
-						            <option value="<c:out value='${processStatus.processStatusId}'/>">
-						            <c:out value="${processStatus.processStatusDescription}"/>
-						            </option>
-						          </c:forEach>
-						        </select>							  
+						        <select style="width:121px;" class="form-control" name="brandLegalStatus">
+								  <option value="">全部</option>
+								  <c:forEach items="${allBrandLegalStatus}" var="brandLegalStatus">
+									<option value="<c:out value='${brandLegalStatus.legalStatusId}'/>">
+									<c:out value="${brandLegalStatus.legalStatusName}"/>
+									</option>
+								  </c:forEach>
+								</select>						  
 							  </td>
 							  <td>
 						        <select style="width:100px;" class="selectPointOfInterest form-control" name="noticeType">
@@ -273,25 +261,10 @@
 						        </select>							  
 							  </td>
 							  <td>
-						        <select style="width:100px;" class="selectPointOfInterest form-control" name="paperApplyType">
-						          <option value="">全部</option>
-						          <c:forEach items="${paperApplyTypes}" var="paperApplyType">
-						            <option value="<c:out value='${paperApplyType.paperTypeId}'/>">
-						            <c:out value="${paperApplyType.paperTypeDescription}"/>
-						            </option>
-						          </c:forEach>
-						        </select>							  
-							  </td>
-							  
-							  <td>
-								<input style="width:108px;" class="selectPointOfInterest form-control"  type="text"  onclick="WdatePicker({el:'startAppDateId'})"  class="form-control" id="startAppDateId"  name="startDispatchDate" placeholder="发文日开始" value="" readonly="readonly" >							  
-							  </td>
-							  <td>-</td>
-							  <td>
-							  <input style="width:108px;" class="selectPointOfInterest form-control" type="text"  onclick="WdatePicker({el:'endAppDateId'})"  class="form-control" id="endAppDateId" name="endDispatchDate" placeholder="发文日结束" value="" readonly="readonly" >
+							  <input style="width:108px;" class="selectPointOfInterest form-control" type="text"  onclick="WdatePicker({el:'endAppDateId'})"  class="form-control" id="endAppDateId" name="dispatchDate" placeholder="发文日" value="" readonly="readonly" >
 							  </td>
 							  <td>
-							  <input name="keyword" style="display:inline;width:250px;" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>
+							  <input name="keyword" style="display:inline;width:250px;" id="keywordId" value="" placeholder="申请号/注册号、商标名称、专有权人、类似群号、指定商品" class="t-input form-control"/>
 							  </td>
 							  <td><button type="submit" class="button button-caution button-rounded">查询</button></td>	
 							  </tr>							  
