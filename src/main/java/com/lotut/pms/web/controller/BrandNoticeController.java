@@ -162,8 +162,8 @@ public class BrandNoticeController {
     	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
     }
 	
-	@RequestMapping(path="/saveBrandNotice")
-	public void saveBrandNotice(@ModelAttribute BrandNotice brandNotice,Model model,PrintWriter pw){
+	@RequestMapping(path="/saveBrandNotice", method=RequestMethod.POST)
+	public void saveBrandNotice(@ModelAttribute("brandNotice") BrandNotice brandNotice,Model model,PrintWriter pw){
 		User user = PrincipalUtils.getCurrentPrincipal();
 		brandNoticeService.saveBrandNotice(brandNotice);
 		pw.write("success");

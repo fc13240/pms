@@ -389,13 +389,13 @@
          </div>
          <div class = "modal-body" id="modal-body" style="margin:0 20px 10px 20px;">
          	<form action="<s:url value='/brandNotice/saveBrandNotice.html'/>" method="post">
-         	    <input type="hidden" name="brand" id="brand" value=""/>
+         	    <input type="hidden" name="brand.id" id="brand" value=""/>
 				<h5><span style="color:red;font-size:18px;">* </span>发文日:</h5>
 				<input class="form-control" style="width:382px;height:34px;"  type="text" onclick="WdatePicker({el:'dispatchDateId'})" id="dispatchDateId" name="dispatchDate" placeholder="发文日" value="" readonly="readonly" required/>							  
 				<br/>
 				
 				<h5><span style="color:red;font-size:18px;">* </span>通知类型:</h5>
-				<select style="width:382px;" class="selectPointOfInterest form-control" name="noticeType" required>
+				<select style="width:382px;" class="selectPointOfInterest form-control" name="noticeType.noticeTypeId" required>
 		          <option value="">全部</option>
 		          <c:forEach items="${noticeTypes}" var="noticeType">
 		            <option value="<c:out value='${noticeType.noticeTypeId}'/>">
@@ -407,7 +407,7 @@
 						  
 				<h5><span style="color:red;font-size:18px;">* </span>pdf上传:</h5>
 				
-				<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandNoticeFileHidden" name="zipfileName" value=""/>
+				<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandNoticeFileHidden" name="zipfileName" value="2016.pdf.html"/>
 				<input style="width:300px;display:inline;" type="text" id="brandNoticeFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandNoticeFile]').click();" required/>
 				<button type="button" onclick="uploadNoticeClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
 				<br/>
