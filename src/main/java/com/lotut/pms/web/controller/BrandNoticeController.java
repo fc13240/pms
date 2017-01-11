@@ -118,11 +118,11 @@ public class BrandNoticeController {
 		}
 		int totalCount = brandNoticeService.searchBrandNoticeCountByPage(searchCondition);
 		page.setTotalRecords(totalCount);
-		List<BrandNotice> brandNotices = brandNoticeService.searchUserBrandNoticeByPage(searchCondition);
+		List<BrandNotice> notices = brandNoticeService.searchUserBrandNoticeByPage(searchCondition);
 		page.setTotalRecords(totalCount);
 		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(page.getUserId());
 		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(page.getUserId());
-		model.addAttribute("brandNotices",brandNotices);
+		model.addAttribute("notices",notices);
 		model.addAttribute("page", page);
 		model.addAttribute("brandLegalStatus", brandLegalStatus);
 		model.addAttribute("brandCategory", brandCategory);
@@ -133,9 +133,9 @@ public class BrandNoticeController {
 	private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
 		List<BrandCategory> categorys = brandManagementService.getAllBrandCategory();
 		List<BrandLegalStatus> allBrandLegalStatus = brandManagementService.getAllBrandLegalStatus();
-		List<BrandNoticeType> noticeTypes= brandManagementService.getAllBrandNoticeTypes();
+		List<BrandNoticeType> noticeTypes= brandNoticeService.getBrandNoticeTypes();
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
-		model.addAttribute("brandNoticeTypes", noticeTypes);
+		model.addAttribute("noticeTypes", noticeTypes);
 	}
 }
