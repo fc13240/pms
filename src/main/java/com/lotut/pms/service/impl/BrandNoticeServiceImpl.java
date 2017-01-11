@@ -13,6 +13,7 @@ import com.lotut.pms.domain.BrandNotice;
 import com.lotut.pms.domain.BrandNoticeRemark;
 import com.lotut.pms.domain.BrandNoticeSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
+import com.lotut.pms.domain.BrandNoticeTypeCount;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.BrandNoticeService;
 import com.lotut.pms.service.utils.BrandNoticeExcelGenerator;
@@ -77,5 +78,10 @@ public class BrandNoticeServiceImpl implements BrandNoticeService {
 	@Override
 	public List<BrandNoticeType> getBrandNoticeTypes() {
 		return brandNoticeDao.getBrandNoticeTypes();
+	}
+
+	@Override
+	public List<BrandNoticeTypeCount> getBrandNoticeCountByNoticeType(int userId) {
+		return brandNoticeDao.getBrandNoticeCountByNoticeType(userId);
 	}
 }
