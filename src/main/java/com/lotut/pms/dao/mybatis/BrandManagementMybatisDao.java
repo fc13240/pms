@@ -13,11 +13,10 @@ import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
 import com.lotut.pms.domain.BrandLegalStatusCount;
 import com.lotut.pms.domain.BrandManagement;
-import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.BrandManagementSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
+import com.lotut.pms.domain.BrandRemark;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.PatentSearchCondition;
 
 public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements BrandManagementDao{
 	private BrandManagementMapper brandManagementMapper;
@@ -142,6 +141,16 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 	public void deleteForeverBrands(List<Integer> brandManagementIds, int userId) {
 		brandManagementMapper.deleteForeverBrands(brandManagementIds,userId);
 		
+	}
+
+	@Override
+	public List<BrandManagement> getUserMonitorBrand(Page page) {
+		return brandManagementMapper.getUserMonitorBrand(page);
+	}
+
+	@Override
+	public int getUserMonitorBrandCount(int userId) {
+		return brandManagementMapper.getUserMonitorBrandCount(userId);
 	}
 
 	

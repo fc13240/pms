@@ -8,9 +8,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
-<meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管家－商标管理</title>
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<link rel="stylesheet" href="<s:url value='/temp/css/bootstrap.min.css'/>" />
+<script src="<s:url value='/static/js/bootstrap.min.js'/>" type="text/javascript"></script>
+<script src="<s:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<s:url value='/static/js/validate_messages_cn.js'/>"></script>
+
+
+<title>龙图腾专利管家－续展监控</title>
 <%@ include file="_css.jsp" %>
+
+<style type="text/css">
+ .qxjk-ul1 li {
+    width:300px;
+    height: 40px;
+    border-bottom: 1px dashed #ccc;
+	margin:10px 0 0 0;
+	padding: 0 8px;
+	overflow: hidden;
+};
+</style>
+</head>
 <body>
 <%@ include file="_top.jsp" %>
 
@@ -34,28 +52,20 @@
 			
 			
 				<div style="height:10px;"></div>
+				<!-- menu begin -->
+				<div class="lt-box">
+
+					
+				
+				
+				</div>
+				<!-- menu end -->
 				<!-- search begin -->
+				
+			
+				
 				<div class="lt-box">
 					<div class="search-box">
-						<form class="form-inline" action="<s:url value='/brand/searchBrandRecycled.html'/>" method="get">
-						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-						  <div class="t-third">
-
-						  <table class="search-table">
-							  <tr>
-							  <td></td>
-							  </tr>
-							  <tr>
-							  <td>
-								<input style="width:300px;height:34px;" name="keyword" id="keywordId" value="" placeholder="商标类别/申请号/注册号/商标名称/专有权人/法律状态" class="t-input form-control"/>							  
-							  </td>
-							  <td>
-							  <button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
-							  </td>
-							  </tr>							  
-						  </table>
-						  </div>
-						</form>
 					</div>
 				</div>
 				<!--search form end-->
@@ -65,13 +75,8 @@
 					  	<table class="search-table">
 					  	<tr>
 					  	<td>
-						  	<a href="javascript:return void"  onclick="recoverBrand()">
-							<button class="button button-caution button-rounded">还原</button> 
-							</a>
-						</td>
-					  	<td>
-							<a href="javascript:return void" onclick="deleteBrandForever()">
-							<button style="margin-left:10px;" class="button button-primary  button-rounded">永久删除</button>
+							<a href="javascript:return void" onclick="batchCancelMonitor()" >
+							<button style="width:100px;margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="">批量取消续展监控</button>
 							</a> 
 						</td>			
 					  	</tr>
@@ -93,6 +98,7 @@
 						  <th width="110" class="hidden-480"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申请日/注册日</th>
 						  <th width="110">法律状态</th>
 						  <th width="130">交易价格/状态</th>
+						  <th width="80">操作</th>
 						</tr>
 					  </thead>
 					  <tbody>
@@ -162,7 +168,25 @@
 								
 								
 							</td>
-							</c:forEach>
+							<td style="text-align:center"><a  href="<s:url value='/brand/showFriends.html'/>?brands=<c:out value='${brand.id}'/>">
+							  分享
+							  </a>&nbsp;
+							  <a target="_blank" href="<s:url value='/brand/getBrandRemark.html'/>?brandId=<c:out value='${brand.id}'/>">
+							  备注
+							  </a>&nbsp;
+							   <a target="_blank" href="<s:url value='/brand/brandManagementUpdateForm.html'/>?brandId=${brand.id}">
+							  修改
+							  </a>
+							  <br>
+							   <a style="cursor:pointer;" data-toggle = "modal" data-target = "#uploadNoticeModal">
+							 上传通知书
+							  </a>
+							 
+							
+							  <br>
+							  </td>
+						  </tr>
+						</c:forEach>
 					  </tbody>
 					</table>
 					<!-- 分页功能 start -->
@@ -193,7 +217,8 @@
 			              </select>
 			              条记录 </span> </div>
 			          </c:if>
-			          <c:if test="${searchCondition != null}">
+			       
+			        <c:if test="${searchCondition != null}">
 			          <div class="col-lg-12"> 共 ${page.totalPages}页${page.totalRecords}条记录    第${page.currentPage} 页 <a href="?page.currentPage=1&${searchCondition}">首页</a>
 			            <c:choose>
 			              <c:when test="${page.currentPage - 1 > 0}"> <a href="?page.currentPage=${page.currentPage - 1}&${searchCondition}">上一页</a> </c:when>
@@ -219,7 +244,6 @@
 			            </select>
 			            条记录 </span> </div>
 			        </c:if>
-			          
 			        </div>					
 				
 				
@@ -234,14 +258,99 @@
 		</div>
 	</div>	
 </div>
+<iframe id="brandExcelFileFrame" style="display:none"></iframe>	
 
+<!--上传通知书start-->
+<div class = "modal fade" id = "uploadNoticeModal" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true" >
+   
+   <div class = "modal-dialog" >
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true" id="uploadNoticeModalCloseBtn">
+               ×
+            </button>
+            
+            <h4 class = "modal-title" id = "myModalLabel" style="font-size:18px;">
+            	上传通知书(带<span style="color:red;font-size:18px;">*</span>为必填项)
+            </h4>
+         </div>
+         <div class = "modal-body" id="modal-body">
+         	<form action="<s:url value='/brandNotice/saveBrandNotice.html'/>" method="post">
+			<h5><span style="color:red;font-size:18px;">* </span>发文日:</h5>
+			<input class="form-control" style="width:360px;height:34px;"  type="text" onclick="WdatePicker({el:'dispatchDateId'})" id="dispatchDateId" name="dispatchDate" placeholder="发文日" value="" readonly="readonly" required>							  
+			<br/>
+			<h5><span style="color:red;font-size:18px;">* </span>通知类型:</h5>
+			<select style="width:360px;" class="selectPointOfInterest form-control" name="noticeType" required>
+	          <option value="">全部</option>
+	          <c:forEach items="${noticeTypes}" var="noticeType">
+	            <option value="<c:out value='${noticeType.noticeTypeId}'/>">
+	            <c:out value="${noticeType.noticeTypeDescription}"/>
+	            </option>
+	          </c:forEach>
+	        </select>	
+			<br/>		  
+			<h5><span style="color:red;font-size:18px;">* </span>pdf上传:</h5>
+			<form id="notice" action="<s:url value='/brandNotice/uploadNoticePdfFile.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
+				<input style="display:none;" id="id_notice_file" name="noticeFile" type="file" />
+				<input style="width:300px;height:33px;display:inline;" type="text" class="lt-input form-control" id="filename" name="filename" placeholder="请选择文件" readonly="readonly" required>
+				<button type="button" onclick="$('input[id=id_notice_file]').click();" class="button button-primary  button-rounded">浏览</button>
+				<button style="margin-left:5px;" type="submit" class="button button-caution button-rounded">上传</button>
+			</form> 
+			<br/>
+				<button style="margin-left:5px;" type="submit" class="button button-caution button-rounded">提交</button>
+			<br/>
+			</form>
+			
+				
+         </div>
+      </div>
+   </div>
+</div>
+<!--上传通知书end-->
+
+<script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 <script type="text/javascript">
+$(function () {
+	  $('[data-toggle="tooltip"]').tooltip()
+	});
 	$(function(){
 		formutil.clickAllCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
 		formutil.clickItemCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
 	});
 	
-	function recoverBrand() {
+	function searchShareUserDetail(shareUserId){
+		var url = "<s:url value='/user/searchShareUserDetail.html'/>?shareUserId=" + shareUserId;
+		window.open(url);
+	}
+	//改变日期显示颜色
+	$(function() {
+	   $(".fee_date").each(function (){
+		 var fee_date=$(this).html();
+		 var value = fee_date.replace(/[^0-9]/ig,"|");
+		 var array_fee_date = value.split("|");
+		 var fee_month=array_fee_date[0];
+		 var fee_day=array_fee_date[1];
+		 var fee_days=Number(fee_month)*30+Number(fee_day);
+
+		 oDate = new Date();
+		 var month=oDate.getMonth()+1;
+		 var day=oDate.getDate();
+		 var current_days=month*30+day;
+		 var Differ=current_days-fee_days;
+		 
+	     if(Differ<31&&Differ>-31){
+	 		$(this).addClass("red");
+
+	 	 }	
+
+		   
+	   });	
+
+	});	
+
+	function batchShare() {
 		var brandSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
 		var uniqueBrandNos = []
 		if (!brandSelected) {
@@ -255,47 +364,9 @@
 				uniqueBrandNos.push(brands_checked[i]);
 			}
 		}		
-		var brands = uniqueBrandNos.join(",");
-		$.ajax({
-			url:"<s:url value='/brand/recoverBrands.html'/>?brands=" + brands,
-			
-			type:"get",
-				success: function(data) {
-					formutil.alertMessage('还原操作成功',true);	
-				},
-				error: function() {
-					formutil.alertMessage('还原操作失败',true);
-				}
-		});
+		var brands = uniqueBrandNos.join(",");	
+		location.href = "<s:url value='/brand/showFriends.html'/>?brands=" + brands;
 	}
-	
-	function deleteBrandForever() {
-		var brandSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
-		var uniqueBrandNos = []
-		if (!brandSelected) {
-			formutil.alertMessage('请选择商标');
-			
-			return;
-		}
-		var brands_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'brand');
-		for (var i = 0; i < brands_checked.length; i++) {
-			if ($.inArray(brands_checked[i], uniqueBrandNos) == -1) {
-				uniqueBrandNos.push(brands_checked[i]);
-			}
-		}		
-		var brands = uniqueBrandNos.join(",");
-		$.ajax({
-			url:"<s:url value='/brand/deleteForeverBrands.html'/>?brands=" + brands,
-			type:"get",
-				success: function(data) {
-					formutil.alertMessage('删除成功',true);	
-				},
-				error: function() {
-					formutil.alertMessage('删除失败',true);
-				}
-		});
-	}
-	
 	
 	function gotoPage() {
 		var pageNo = document.getElementById("page.pageNo").value;
@@ -317,10 +388,10 @@
 			return;
 		}
 		
-		var url = "<s:url value='/brand/brandRecycled.html'/>?currentPage=" + pageNo;
+		var url = "<s:url value='/brand/getBrandManagementlist.html'/>?currentPage=" + pageNo;
 		
 		<c:if test="${searchCondition != null}">
-			url = "<s:url value='/brand/searchBrandRecycled.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+			url = "<s:url value='/brand/searchBrandManagement.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 		</c:if>
 		
 		
@@ -336,18 +407,35 @@
 		}
 	}
 	
-	
 	function processPageEnter(event, pageInput) {
 		var keyCode = event.keyCode ? event.keyCode 
                 : event.which ? event.which 
                         : event.charCode;
 		var isEnterKey = keyCode == 13;
 		if (isEnterKey) {
-			location.href = "<s:url value='/brand/searchBrandRecycled.html'/>?page.currentPage=" + pageInput.value +"&"+"${searchCondition}";
+			location.href = "<s:url value='/patent/search.html'/>?page.currentPage=" + pageInput.value +"&"+"${searchCondition}";
 			$(pageInput).unbind('keydown');
 		}
 	}
+
 	
+	jQuery(function($) {
+		$("#notice").validate({
+			rules: {
+				filename: 'required'
+			},
+			messages: {
+				filename: '请选择要上传的通知书PDF文件'
+			},
+			submitHandler: function(form){ 
+				form.submit();     
+			}
+		});
+	});
+
+	$('input[id=id_notice_file]').change(function() {  
+		$('#filename').val($(this).val());  
+	});
 </script>
 <script type="text/javascript">
 	$(function() {
@@ -414,7 +502,6 @@ var tabs=function(){
     }
 }();
 tabs.set("nav","menu_con");//执行      
-
 </script>
 
 </body>
