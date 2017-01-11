@@ -153,6 +153,26 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 		return brandManagementMapper.getUserMonitorBrandCount(userId);
 	}
 
+	@Override
+	public void changeBrandMonitorStatus(int userId, List<Long> brandIds) {
+		brandManagementMapper.changeBrandMonitorStatus(userId, brandIds);
+	}
+
+	@Override
+	public void cancelBrandMonitorStatus(int userId, List<Long> brandIds) {
+		brandManagementMapper.cancelBrandMonitorStatus(userId, brandIds);
+	}
+
+	@Override
+	public List<BrandManagement> searchUserMonitorBrand(BrandManagementSearchCondition searchCondition) {
+		return brandManagementMapper.searchUserMonitorBrand(searchCondition);
+	}
+
+	@Override
+	public int searchUserMonitorBrandCount(BrandManagementSearchCondition searchCondition) {
+		return brandManagementMapper.searchUserMonitorBrandCount(searchCondition);
+	}
+
 	
 
 	

@@ -170,7 +170,7 @@
 							</a> 
 						</td>
 						<td>
-							<a href="javascript:return void" onclick="batchAddAnnualFeeMonitor()" >
+							<a href="javascript:return void" onclick="batchChangeMonitorStatus()" >
 								<button style="width:120px;margin-left:10px;" class="button button-primary  button-rounded"  data-toggle="tooltip" data-placement="right" title="可以加入续展监控，更快的管理商标哦！">加入续展监控</button>
 							</a> 
 						</td>
@@ -590,6 +590,37 @@ $(function () {
 	$('input[id=id_notice_file]').change(function() {  
 		$('#filename').val($(this).val());  
 	});
+	
+	
+	
+	function batchChangeMonitorStatus() {
+		var brandSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		var uniqueBrandNos = []
+		if (!brandSelected) {
+			formutil.alertMessage('请选择需要加入监控的商标');
+			
+			return;
+		}
+		var brands_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'brand');
+		for (var i = 0; i < brands_checked.length; i++) {
+			if ($.inArray(brands_checked[i], uniqueBrandNos) == -1) {
+				uniqueBrandNos.push(brands_checked[i]);
+			}
+		}		
+		var brandIds = uniqueBrandNos.join(",");
+		$.ajax({
+			type : "POST",
+			url : "<s:url value='/brand/changeBrandMonitorStatus.html'/>",
+			data : {"brandIds":brandIds},
+			success : function (data){
+				alert("操作成功");
+				window.location.reload();
+			},
+			error : function (){
+				formutil.alertMessage('出现异常错误，请稍后再试');
+			}
+		})
+	}
 </script>
 <script type="text/javascript">
 	$(function() {
