@@ -33,4 +33,5 @@ public interface BrandNoticeMapper {
 	
 	List<BrandNoticeType> getBrandNoticeTypes();
 
+	void saveBrandNotice(BrandNotice brandNotice);
 }

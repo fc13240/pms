@@ -29,5 +29,7 @@ public interface BrandNoticeService {
 	int searchBrandNoticeCountByPage(BrandNoticeSearchCondition searchCondition);
 	
 	List<BrandNoticeType> getBrandNoticeTypes();
+	
+	void saveBrandNotice(BrandNotice brandNotice);
 
 }

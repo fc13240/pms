@@ -82,4 +82,9 @@ public class BrandNoticeServiceImpl implements BrandNoticeService {
 	public List<BrandNoticeType> getBrandNoticeTypes() {
 		return brandNoticeDao.getBrandNoticeTypes();
 	}
+	
+	@Override
+	public void saveBrandNotice(BrandNotice brandNotice) {
+		brandNoticeDao.saveBrandNotice(brandNotice);
+	}
 }

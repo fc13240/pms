@@ -201,6 +201,10 @@
 	<select id="getBrandNoticeTypes" resultMap="BrandNoticeTypeResultMap">
 		select notice_type_id,notice_type_desc from brand_notice_types
 	</select>
+	
+	<insert id="saveBrandNotice" parameterType="BrandNotice">
+		insert into brand_management_notices(brand,dispatch_date,zipfile_name,notice_type) values(#{brand.id},#{dispatchDate},#{zipfileName},#{noticeType.noticeTypeId})
+	</insert>
 
 
 </mapper>

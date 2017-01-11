@@ -30,5 +30,7 @@ public interface BrandNoticeDao {
 	int searchBrandNoticeCountByPage(BrandNoticeSearchCondition searchCondition);
 	
 	List<BrandNoticeType> getBrandNoticeTypes();
+	
+	void saveBrandNotice(BrandNotice brandNotice);
 
 }
