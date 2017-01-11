@@ -191,13 +191,7 @@
   		<if test="keyword != null">
 			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
 		</if>
-			 SELECT count(*) FROM (
-			SELECT b.id,b.user,b.app_no,b.brand_no,
-			b.name,b.transaction_status,b.transaction_mode,b.price,b.app_person,
-			b.app_date,b.publish_date,b.image_url,b.proxy_file,b.business_license,
-			b.entity_license,b.individual_license,b.identity_card,b.application,
-			bc.category_id,bc.category_name,bls.legal_status_id,bls.legal_status_name
-			
+			 SELECT count(*) 
 			FROM brand_management b
 			LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
 			LEFT JOIN users u ON b.user=u.user_id
@@ -221,9 +215,7 @@
 			OR b.name LIKE #{keyword_pattern} or b.similar_no like #{keyword_pattern} or b.app_person like #{keyword_pattern}
 			OR b.scope LIKE #{keyword_pattern})
 			</if>
-			) rs
-			LEFT JOIN user_brand_management ubm ON ubm.brand=rs.id
-			LEFT JOIN users u ON u.user_id=ubm.user
+			
   	</select>
 	
 	
