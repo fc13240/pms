@@ -2,6 +2,7 @@ package com.lotut.pms.web.controller;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
@@ -17,7 +18,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.itextpdf.text.DocumentException;
+import com.lotut.pms.constants.Settings;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandCategoryCount;
 import com.lotut.pms.domain.BrandLegalStatus;
@@ -28,12 +32,38 @@ import com.lotut.pms.domain.BrandNoticeSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Notice;
 import com.lotut.pms.domain.NoticeSearchCondition;
+import com.lotut.pms.domain.BrandNoticeTypeCount;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
 import com.lotut.pms.service.BrandManagementService;
 import com.lotut.pms.service.BrandNoticeService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.FileOption;
 import com.lotut.pms.web.util.WebUtils;
+
+/*
+                   _ooOoo_
+                  o8888888o
+                  88" . "88
+                  (| -_- |)
+                  O\  =  /O
+               ____/`---'\____
+             .'  \\|     |//  `.
+            /  \\|||  :  |||//  \
+           /  _||||| -:- |||||-  \
+           |   | \\\  -  /// |   |
+           | \_|  ''\---/''  |   |
+           \  .-\__  `-`  ___/-. /
+         ___`. .'  /--.--\  `. . __
+      ."" '<  `.___\_<|>_/___.'  >'"".
+     | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+     \  \ `-.   \_ __\ /__ _/   .-` /  /
+======`-.____`-.___\_____/___.-`____.-'======
+                   `=---='
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+         佛祖保佑       永无BUG
+    @author	CaiWei
+*/
 
 @Controller
 @RequestMapping(path="/brandNotice")
@@ -59,6 +89,7 @@ public class BrandNoticeController {
 		page.setTotalRecords(totalCount);
 		model.addAttribute("notices",notices);
 		model.addAttribute("page",page);
+		addBrandCategoryAndBrandLegalStatusToModel(model);
 		return "brand_notice_list";
 	}
 	
@@ -124,12 +155,8 @@ public class BrandNoticeController {
 		page.setTotalRecords(totalCount);
 		List<BrandNotice> notices = brandNoticeService.searchUserBrandNoticeByPage(searchCondition);
 		page.setTotalRecords(totalCount);
-		List<BrandLegalStatusCount> brandLegalStatus=brandManagementService.getLegalStatusCount(page.getUserId());
-		List<BrandCategoryCount> brandCategory=brandManagementService.getBrandCategoryCount(page.getUserId());
 		model.addAttribute("notices",notices);
 		model.addAttribute("page", page);
-		model.addAttribute("brandLegalStatus", brandLegalStatus);
-		model.addAttribute("brandCategory", brandCategory);
 		addBrandCategoryAndBrandLegalStatusToModel(model);
 		return "brand_notice_list";
 	}
@@ -144,12 +171,32 @@ public class BrandNoticeController {
 	
 
 	private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
 		List<BrandCategory> categorys = brandManagementService.getAllBrandCategory();
 		List<BrandLegalStatus> allBrandLegalStatus = brandManagementService.getAllBrandLegalStatus();
 		List<BrandNoticeType> noticeTypes= brandNoticeService.getBrandNoticeTypes();
+		List<BrandNoticeTypeCount> noticeTypeCounts=brandNoticeService.getBrandNoticeCountByNoticeType(userId);
+		int allNoticeCount=brandNoticeService.getAllBrandNoticeCountByUserId(userId);
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("allBrandLegalStatus", allBrandLegalStatus);
 		model.addAttribute("noticeTypes", noticeTypes);
+		model.addAttribute("noticeTypeCounts", noticeTypeCounts);
+		model.addAttribute("allNoticeCount", allNoticeCount);
+	}
+	
+	@RequestMapping(path="/uploadBrandNoticeFile")
+	public void uploadBrandNoticeFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
+    	String fatherPath=Settings.BRAND_MANAGEMENT_NOTICE_PATH;
+    	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
+    	int userId=PrincipalUtils.getCurrentUserId();
+    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
+    }
+	
+	@RequestMapping(path="/saveBrandNotice")
+	public void saveBrandNotice(@ModelAttribute BrandNotice brandNotice,Model model,PrintWriter pw){
+		User user = PrincipalUtils.getCurrentPrincipal();
+		brandNoticeService.saveBrandNotice(brandNotice);
+		pw.write("success");
 	}
 	
 	@RequestMapping(path="/noticeStarTargetList", method=RequestMethod.GET)

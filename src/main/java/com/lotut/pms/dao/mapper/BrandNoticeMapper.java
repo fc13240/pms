@@ -11,6 +11,7 @@ import com.lotut.pms.domain.BrandNoticeSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
 import com.lotut.pms.domain.Notice;
 import com.lotut.pms.domain.NoticeSearchCondition;
+import com.lotut.pms.domain.BrandNoticeTypeCount;
 import com.lotut.pms.domain.Page;
 
 public interface BrandNoticeMapper {
@@ -34,6 +35,8 @@ public interface BrandNoticeMapper {
 	int searchBrandNoticeCountByPage(BrandNoticeSearchCondition searchCondition);
 	
 	List<BrandNoticeType> getBrandNoticeTypes();
+	
+	List<BrandNoticeTypeCount> getBrandNoticeCountByNoticeType(int userId);
 
 	Map<String, Map<String, String>> getUserStarTargetNoticeCountByRemainDay(int userId);
 
@@ -41,5 +44,8 @@ public interface BrandNoticeMapper {
 
 	int getUserStarTargetNoticesCount(int userId);
 
+	void saveBrandNotice(BrandNotice brandNotice);
+	
+	int getAllBrandNoticeCountByUserId(int userId);
 
 }

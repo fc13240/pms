@@ -289,7 +289,7 @@
 							  修改
 							  </a>
 							  <br>
-							   <a style="cursor:pointer;" data-toggle = "modal" data-target = "#uploadNoticeModal">
+							   <a style="cursor:pointer;" href="javascript:void(0)" onclick="showUploadNoticeForm(${brand.id})" >
 							 上传通知书
 							  </a>
 							 
@@ -375,7 +375,7 @@
 <div class = "modal fade" id = "uploadNoticeModal" tabindex = "-1" role = "dialog" 
    aria-labelledby = "myModalLabel" aria-hidden = "true" >
    
-   <div class = "modal-dialog" >
+   <div class = "modal-dialog" style="width:550px;">
       <div class = "modal-content">
          
          <div class = "modal-header">
@@ -387,34 +387,39 @@
             	上传通知书(带<span style="color:red;font-size:18px;">*</span>为必填项)
             </h4>
          </div>
-         <div class = "modal-body" id="modal-body">
+         <div class = "modal-body" id="modal-body" style="margin:0 20px 10px 20px;">
          	<form action="<s:url value='/brandNotice/saveBrandNotice.html'/>" method="post">
-			<h5><span style="color:red;font-size:18px;">* </span>发文日:</h5>
-			<input class="form-control" style="width:360px;height:34px;"  type="text" onclick="WdatePicker({el:'dispatchDateId'})" id="dispatchDateId" name="dispatchDate" placeholder="发文日" value="" readonly="readonly" required>							  
-			<br/>
-			<h5><span style="color:red;font-size:18px;">* </span>通知类型:</h5>
-			<select style="width:360px;" class="selectPointOfInterest form-control" name="noticeType" required>
-	          <option value="">全部</option>
-	          <c:forEach items="${noticeTypes}" var="noticeType">
-	            <option value="<c:out value='${noticeType.noticeTypeId}'/>">
-	            <c:out value="${noticeType.noticeTypeDescription}"/>
-	            </option>
-	          </c:forEach>
-	        </select>	
-			<br/>		  
-			<h5><span style="color:red;font-size:18px;">* </span>pdf上传:</h5>
-			<form id="notice" action="<s:url value='/brandNotice/uploadNoticePdfFile.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
-				<input style="display:none;" id="id_notice_file" name="noticeFile" type="file" />
-				<input style="width:300px;height:33px;display:inline;" type="text" class="lt-input form-control" id="filename" name="filename" placeholder="请选择文件" readonly="readonly" required>
-				<button type="button" onclick="$('input[id=id_notice_file]').click();" class="button button-primary  button-rounded">浏览</button>
-				<button style="margin-left:5px;" type="submit" class="button button-caution button-rounded">上传</button>
-			</form> 
-			<br/>
-				<button style="margin-left:5px;" type="submit" class="button button-caution button-rounded">提交</button>
-			<br/>
-			</form>
-			
+         	    <input type="hidden" name="brand" id="brand" value=""/>
+				<h5><span style="color:red;font-size:18px;">* </span>发文日:</h5>
+				<input class="form-control" style="width:382px;height:34px;"  type="text" onclick="WdatePicker({el:'dispatchDateId'})" id="dispatchDateId" name="dispatchDate" placeholder="发文日" value="" readonly="readonly" required/>							  
+				<br/>
 				
+				<h5><span style="color:red;font-size:18px;">* </span>通知类型:</h5>
+				<select style="width:382px;" class="selectPointOfInterest form-control" name="noticeType" required>
+		          <option value="">全部</option>
+		          <c:forEach items="${noticeTypes}" var="noticeType">
+		            <option value="<c:out value='${noticeType.noticeTypeId}'/>">
+		            <c:out value="${noticeType.noticeTypeDescription}"/>
+		            </option>
+		          </c:forEach>
+		        </select>	
+				<br/>
+						  
+				<h5><span style="color:red;font-size:18px;">* </span>pdf上传:</h5>
+				
+				<input type="hidden" class="form-control" style="width:600px;" maxlength="100" id="brandNoticeFileHidden" name="zipfileName" value=""/>
+				<input style="width:300px;display:inline;" type="text" id="brandNoticeFilename"  class="selectPointOfInterest form-control" placeholder="请选择文件" readonly="readonly" onclick="$('input[id=brandNoticeFile]').click();" required/>
+				<button type="button" onclick="uploadNoticeClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
+				<br/>
+				<br/>
+				<button type="submit" style="margin-left:150px;" class="t-btn3 button button-primary  button-rounded">提交</button>
+			</form>	
+			
+			
+			<form action="<s:url value='/brandNotice/uploadBrandNoticeFile.html'/>" id="uploadBrandNoticeFileForm" method="post" enctype="multipart/form-data" class="form-horizontal">
+				<input style="display:none" type="file" id="brandNoticeFile" name="file"/>
+				<button type="button" id="uploadBrandNoticeBtn" style="display:none;" onclick="uploadBrandNoticeFile()" class="t-btn3 button button-primary  button-rounded">上传</button>
+			</form>	
          </div>
       </div>
    </div>
@@ -424,7 +429,8 @@
 <script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
 <script type="text/javascript">
 $(function () {
-	  $('[data-toggle="tooltip"]').tooltip()
+	  $('[data-toggle="tooltip"]').tooltip();
+	  $("#uploadNoticeModal").modal("hide");
 	});
 	$(function(){
 		formutil.clickAllCheckbox('tr th input.patent-check-item', 'tr td input.patent-check-item');
@@ -573,23 +579,44 @@ $(function () {
 		
 	}
 	
-	jQuery(function($) {
-		$("#notice").validate({
-			rules: {
-				filename: 'required'
+	function uploadBrandNoticeFile() {
+		var uploadForm = $("#uploadBrandNoticeFileForm");
+		var option = {
+			dataType : "json",
+			data : {"file":$("#brandNoticeFile").val()},
+			beforeSubmit : function () {
+				var filename = $("#brandNoitceFilename").val();
+				var suffix = filename.toLowerCase().substr(filename.lastIndexOf(".")+1);
+				if(suffix == "pdf") {
+					return true;
+				} else {
+					alert("请选择pdf格式的通知书，再进行上传！");
+					return false;
+				}
 			},
-			messages: {
-				filename: '请选择要上传的通知书PDF文件'
-			},
-			submitHandler: function(form){ 
-				form.submit();     
+			success : function (result) {
+				$("#brandNoticeFileHidden").val(result);
+				$("#brandNoticeFilename").val("");
+				alert("上传成功");
+				
 			}
-		});
-	});
+				
+		}
+		uploadForm.ajaxSubmit(option);
+	}
+	
+	$('input[id=brandNoticeFile]').change(function(){
+		$("#brandNoticeFilename").val($(this).val());
+	})
 
-	$('input[id=id_notice_file]').change(function() {  
-		$('#filename').val($(this).val());  
-	});
+	function uploadNoticeClick(){
+		$("#uploadBrandNoticeBtn").trigger("click");
+	}
+	
+	function showUploadNoticeForm(id) {
+		$('#brand').val(id);
+		$('#uploadNoticeModal').modal('show');		
+	}
 	
 	
 	
