@@ -106,8 +106,7 @@ public class BrandNoticeController {
 	}
 	
 	@RequestMapping(path = "/searchBrandNotice", method = RequestMethod.GET)
-	public String searchBrandNotice(
-			@ModelAttribute("searchCondition") BrandNoticeSearchCondition searchCondition, HttpSession session,
+	public String searchBrandNotice(@ModelAttribute("searchCondition") BrandNoticeSearchCondition searchCondition, HttpSession session,
 			Model model) {
 		Page page = searchCondition.getPage();
 		int userId = PrincipalUtils.getCurrentUserId();

@@ -129,9 +129,9 @@
 		LEFT JOIN brand_management b ON bmn.brand=b.id			
 		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
 		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
-		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
+		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{page.userId}
 		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id
-		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1)  
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{page.userId} and trash_status=1)  
 		<if test="brandCategory != null">
 			AND b.category_id = #{brandCategory}
 		</if>
@@ -164,9 +164,9 @@
 		LEFT JOIN brand_management b ON bmn.brand=b.id			
 		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
 		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
-		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
+		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{page.userId}
 		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id
-		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1) 
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{page.userId} and trash_status=1) 
 		<if test="brandCategory != null">
 			AND b.category_id = #{brandCategory}
 		</if>
