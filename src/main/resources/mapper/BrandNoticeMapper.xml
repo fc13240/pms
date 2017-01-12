@@ -278,16 +278,17 @@
 			 OR b.app_person LIKE #{keyword_pattern} or b.brand_no LIKE #{keyword_pattern}
 			 OR bls.legal_status_name LIKE #{keyword_pattern} or bc.category_name like #{keyword_pattern})
 				</if>
+				<if test="startDispatchDate !=null">
+			  		and bmn.dispatch_date>=#{startDispatchDate}
+			  	</if>	
+			  	<if test="endDispatchDate !=null">
+			  		 and <![CDATA[bmn.dispatch_date<=#{endDispatchDate}]]>
+			  	</if>
 			 
 				limit #{page.startIndex}, #{page.pageSize})  rs
 			LEFT JOIN user_brand_management ubm ON ubm.brand=rs.id
 		    LEFT JOIN users u ON u.user_id=ubm.user	
-		  	<if test="startDispatchDate !=null">
-		  		and rs.dispatch_date>=#{startDispatchDate}
-		  	</if>	
-		  	<if test="endDispatchDate !=null">
-		  		 and <![CDATA[rs.dispatch_date<=#{endDispatchDate}]]>
-		  	</if>
+		  	
 	</select>
 	
 	<select id="searchUserStarTargetNoticesCount" resultType="int">
@@ -312,16 +313,15 @@
 			 OR b.app_person LIKE #{keyword_pattern} or b.brand_no LIKE #{keyword_pattern}
 			 OR bls.legal_status_name LIKE #{keyword_pattern} or bc.category_name like #{keyword_pattern})
 			</if>
+			<if test="startDispatchDate !=null">
+		  		and bmn.dispatch_date>=#{startDispatchDate}
+		  	</if>	
+		  	<if test="endDispatchDate !=null">
+		  		 and <![CDATA[bmn.dispatch_date<=#{endDispatchDate}]]>
+		  	</if>
 			limit #{page.startIndex}, #{page.pageSize})  rs
 			LEFT JOIN user_brand_management ubm ON ubm.brand=rs.id
 		    LEFT JOIN users u ON u.user_id=ubm.user
-		    
-			<if test="startDispatchDate !=null">
-		  		and rs.dispatch_date>=#{startDispatchDate}
-		  	</if>	
-		  	<if test="endDispatchDate !=null">
-		  		 and <![CDATA[rs.dispatch_date<=#{endDispatchDate}]]>
-		  	</if>
 	</select>
 	
 	<select id="getBrandNoticeCountByNoticeType" parameterType="int" resultMap="BrandNoticeTypeCountMap">
