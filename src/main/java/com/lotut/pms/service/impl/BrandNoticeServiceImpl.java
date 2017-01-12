@@ -13,6 +13,8 @@ import com.lotut.pms.domain.BrandNotice;
 import com.lotut.pms.domain.BrandNoticeRemark;
 import com.lotut.pms.domain.BrandNoticeSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
+import com.lotut.pms.domain.Notice;
+import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.BrandNoticeTypeCount;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.service.BrandNoticeService;
@@ -67,7 +69,7 @@ public class BrandNoticeServiceImpl implements BrandNoticeService {
 
 	@Override
 	public void batchUpdateStarTargetStatus(List<Long> noticeIds) {
-		brandNoticeDao.batchUpdateStarTargetStatus(noticeIds);
+		 brandNoticeDao.batchUpdateStarTargetStatus(noticeIds);
 	}	
 
 	public List<BrandNotice> searchUserBrandNoticeByPage(BrandNoticeSearchCondition searchCondition) {
@@ -85,6 +87,22 @@ public class BrandNoticeServiceImpl implements BrandNoticeService {
 	}
 
 	@Override
+	public Map<String, Map<String, String>> getUserStarTargetNoticeCountByRemainDay(int userId) {
+		return brandNoticeDao.getUserStarTargetNoticeCountByRemainDay(userId);
+	}
+
+	@Override
+	public List<Notice> getUserStarTargetNoticesByPage(Page page) {
+		return brandNoticeDao.getUserStarTargetNoticesByPage(page);
+	}
+
+	@Override
+	public int getUserStarTargetNoticesCount(int userId) {
+		return brandNoticeDao.getUserStarTargetNoticesCount(userId);
+	}
+
+	
+	
 	public List<BrandNoticeTypeCount> getBrandNoticeCountByNoticeType(int userId) {
 		return brandNoticeDao.getBrandNoticeCountByNoticeType(userId);
 	}

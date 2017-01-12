@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,6 +30,8 @@ import com.lotut.pms.domain.BrandNotice;
 import com.lotut.pms.domain.BrandNoticeRemark;
 import com.lotut.pms.domain.BrandNoticeSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
+import com.lotut.pms.domain.Notice;
+import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.BrandNoticeTypeCount;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.User;
@@ -202,4 +205,28 @@ public class BrandNoticeController {
 		brandNoticeService.saveBrandNotice(brandNotice);
 		return "redirect:/brandNotice/getBrandNoticeList.html";
 	}
+	
+	@RequestMapping(path="/noticeStarTargetList", method=RequestMethod.GET)
+	public String noticeStarTargetList(Model model,Page page,HttpSession session) {
+		page.setPageSize(WebUtils.getPageSize(session));
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		Map<String,Map<String,String>> remainDayCount=brandNoticeService.getUserStarTargetNoticeCountByRemainDay(userId);
+		List<Notice> userNotices = brandNoticeService.getUserStarTargetNoticesByPage(page);
+		int totalCount=(int)brandNoticeService.getUserStarTargetNoticesCount(userId);
+		page.setTotalRecords(totalCount);
+		
+		//int unreadNoticeCount=brandNoticeService.unreadNoticeCount(userId);
+		User user=PrincipalUtils.getCurrentPrincipal();
+		model.addAttribute("notices", userNotices);
+		model.addAttribute("remainDayCount",remainDayCount);
+		model.addAttribute("page", page);
+		//model.addAttribute("unreadNoticeCount", unreadNoticeCount);
+		model.addAttribute("wayOfPaging","normal");
+		model.addAttribute("user",user);
+		//addSearchTypesDataToModel(model);
+		return "brand_notice_star_target";
+	}
+
+	
 }
