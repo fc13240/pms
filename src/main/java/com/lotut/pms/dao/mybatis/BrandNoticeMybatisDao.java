@@ -77,7 +77,7 @@ public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements Brand
 	}
 
 	@Override
-	public List<Notice> getUserStarTargetNoticesByPage(Page page) {
+	public List<BrandNotice> getUserStarTargetNoticesByPage(Page page) {
 		return brandNoticeMapper.getUserStarTargetNoticesByPage(page);
 	}
 

@@ -92,7 +92,7 @@ public class BrandNoticeServiceImpl implements BrandNoticeService {
 	}
 
 	@Override
-	public List<Notice> getUserStarTargetNoticesByPage(Page page) {
+	public List<BrandNotice> getUserStarTargetNoticesByPage(Page page) {
 		return brandNoticeDao.getUserStarTargetNoticesByPage(page);
 	}
 

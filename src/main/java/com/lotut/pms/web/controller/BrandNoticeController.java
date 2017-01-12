@@ -204,8 +204,11 @@ public class BrandNoticeController {
 		page.setPageSize(WebUtils.getPageSize(session));
 		int userId = PrincipalUtils.getCurrentUserId();
 		page.setUserId(userId);
+		if(page.getCurrentPage()<1){
+			page.setCurrentPage(1);
+		}
 		Map<String,Map<String,String>> remainDayCount=brandNoticeService.getUserStarTargetNoticeCountByRemainDay(userId);
-		List<Notice> userNotices = brandNoticeService.getUserStarTargetNoticesByPage(page);
+		List<BrandNotice> userNotices = brandNoticeService.getUserStarTargetNoticesByPage(page);
 		int totalCount=(int)brandNoticeService.getUserStarTargetNoticesCount(userId);
 		page.setTotalRecords(totalCount);
 		

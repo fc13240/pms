@@ -42,7 +42,7 @@ public interface BrandNoticeDao {
 
 	Map<String, Map<String, String>> getUserStarTargetNoticeCountByRemainDay(int userId);
 
-	List<Notice> getUserStarTargetNoticesByPage(Page page);
+	List<BrandNotice> getUserStarTargetNoticesByPage(Page page);
 
 	int getUserStarTargetNoticesCount(int userId);
 
