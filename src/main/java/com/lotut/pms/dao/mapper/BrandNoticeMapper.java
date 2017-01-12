@@ -30,6 +30,8 @@ public interface BrandNoticeMapper {
 
 	void batchUpdateStarTargetStatus(@Param("noticeIds")List<Long> noticeIds);
 	
+	void batchCancelStarTargetStatus(@Param("noticeIds")List<Long> noticeIds);
+	
 	List<BrandNotice> searchUserBrandNoticeByPage(BrandNoticeSearchCondition searchCondition);
 	
 	int searchBrandNoticeCountByPage(BrandNoticeSearchCondition searchCondition);
@@ -47,5 +49,11 @@ public interface BrandNoticeMapper {
 	void saveBrandNotice(BrandNotice brandNotice);
 	
 	int getAllBrandNoticeCountByUserId(int userId);
+
+	List<BrandNotice> searchUserStarTargetNoticesByPage(NoticeSearchCondition searchCondition);
+
+	int searchUserStarTargetNoticesCount(NoticeSearchCondition searchCondition);
+
+	
 
 }

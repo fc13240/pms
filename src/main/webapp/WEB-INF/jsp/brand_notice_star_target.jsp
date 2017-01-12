@@ -110,9 +110,6 @@
 
 								  <span class="lbl"></span></label></td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize}
-								<c:if test="${notice.starTargetMonitorStatus==1 }">
-							  		<div style="width:25px;heigth:25px;background: red;float:right"><font color="white">星</font></div>
-							  	</c:if>
 								
 								 </td>
 								<td style="text-align:center"><c:out value="${notice.brand.brandCategory.categoryId}"/>
@@ -610,17 +607,17 @@ function batchProcessNotice(processStatus) {
 		var wayOfPaging="${wayOfPaging}";
 		var url = null;
 		if(wayOfPaging=="normal"){
-			url = "<s:url value='/notice/list.html'/>?currentPage=" + pageNo;
+			url = "<s:url value='/brandNotice/noticeStarTargetList.html'/>?currentPage=" + pageNo;
 		}else if(wayOfPaging=="unreadNotice"){
-			url = "<s:url value='/notice/unreadNotice.html'/>?currentPage=" + pageNo;
+			url = "<s:url value='/brandNotice/unreadNotice.html'/>?currentPage=" + pageNo;
 			
 		}else{
-			url = "<s:url value='/notice/list.html'/>?currentPage=" + pageNo;
+			url = "<s:url value='/brandNotice/noticeStarTargetList.html'/>?currentPage=" + pageNo;
 			
 		}
 		
 		<c:if test="${searchCondition != null}">
-				url = "<s:url value='/notice/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+				url = "<s:url value='/brandNotice/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 		</c:if>
 		
 		location.href = url;
@@ -678,9 +675,7 @@ function batchProcessNotice(processStatus) {
 				uniqueNoticeNos.push(notices_checked[i]);
 				
 			}
-			
 		}
-		
 		var noticeIds = uniqueNoticeNos.join(",");
 		$.ajax({
 			url:"<s:url value='/brandNotice/batchCancelStarTargetMonitor.html'/>?noticeIds=" + noticeIds,

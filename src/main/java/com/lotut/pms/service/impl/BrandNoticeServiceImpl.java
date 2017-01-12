@@ -72,6 +72,12 @@ public class BrandNoticeServiceImpl implements BrandNoticeService {
 		 brandNoticeDao.batchUpdateStarTargetStatus(noticeIds);
 	}	
 
+	@Override
+	public void batchCancelStarTargetStatus(List<Long> noticeIds) {
+		brandNoticeDao.batchCancelStarTargetStatus(noticeIds);
+		
+	}
+	
 	public List<BrandNotice> searchUserBrandNoticeByPage(BrandNoticeSearchCondition searchCondition) {
 		return brandNoticeDao.searchUserBrandNoticeByPage(searchCondition);
 	}
@@ -116,4 +122,16 @@ public class BrandNoticeServiceImpl implements BrandNoticeService {
 	public int getAllBrandNoticeCountByUserId(int userId) {
 		return brandNoticeDao.getAllBrandNoticeCountByUserId(userId);
 	}
+
+	@Override
+	public List<BrandNotice> searchUserStarTargetNoticesByPage(NoticeSearchCondition searchCondition) {
+		return brandNoticeDao.searchUserStarTargetNoticesByPage(searchCondition);
+	}
+
+	@Override
+	public int searchUserStarTargetNoticesCount(NoticeSearchCondition searchCondition) {
+		return brandNoticeDao.searchUserStarTargetNoticesCount(searchCondition);
+	}
+
+	
 }

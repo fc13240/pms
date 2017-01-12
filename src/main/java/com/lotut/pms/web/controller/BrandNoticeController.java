@@ -169,6 +169,13 @@ public class BrandNoticeController {
 		pw.write(message);
 	}
 	
+	@RequestMapping(path="batchCancelStarTargetMonitor")
+	public void batchCancelStarTargetMonitor(@RequestParam("noticeIds") List<Long> noticeIds,PrintWriter pw){
+		brandNoticeService.batchCancelStarTargetStatus(noticeIds);
+		String message = "操作成功";
+		pw.write(message);
+	}
+	
 
 	private void addBrandCategoryAndBrandLegalStatusToModel(Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
@@ -227,6 +234,27 @@ public class BrandNoticeController {
 		//model.addAttribute("unreadNoticeCount", unreadNoticeCount);
 		model.addAttribute("wayOfPaging","normal");
 		model.addAttribute("user",user);
+		//addSearchTypesDataToModel(model);
+		return "brand_notice_star_target";
+	}
+	
+	@RequestMapping(path="/searchStarTarget", method=RequestMethod.GET)
+	public String searchStarTarget(@ModelAttribute("searchCondition")NoticeSearchCondition searchCondition, Model model,HttpSession session) throws Exception {
+		Page page=searchCondition.getPage();
+		page.setPageSize(WebUtils.getPageSize(session));
+		searchCondition.setUserId(PrincipalUtils.getCurrentUserId());
+		List<BrandNotice> resultNotices = brandNoticeService.searchUserStarTargetNoticesByPage(searchCondition);
+		Map<String,Map<String,String>> remainDayCount=brandNoticeService.getUserStarTargetNoticeCountByRemainDay(searchCondition.getUserId());
+		int totalCount=(int)brandNoticeService.searchUserStarTargetNoticesCount(searchCondition);
+		
+		//int unreadNoticeCount=brandNoticeService.unreadNoticeCount(searchCondition.getUserId());
+		
+		page.setTotalRecords(totalCount);
+		model.addAttribute("notices", resultNotices);
+		model.addAttribute("remainDayCount",remainDayCount);
+		model.addAttribute("page", page);
+		//model.addAttribute("unreadNoticeCount", unreadNoticeCount);
+		model.addAttribute("wayOfPaging","normal");
 		//addSearchTypesDataToModel(model);
 		return "brand_notice_star_target";
 	}
