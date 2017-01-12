@@ -57,6 +57,13 @@ public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements Brand
 	public void batchUpdateStarTargetStatus(List<Long> noticeIds) {
 		 brandNoticeMapper.batchUpdateStarTargetStatus(noticeIds);
 	}	
+	
+	@Override
+	public void batchCancelStarTargetStatus(List<Long> noticeIds) {
+		 brandNoticeMapper.batchCancelStarTargetStatus(noticeIds);
+		
+	}
+	
 	public List<BrandNotice> searchUserBrandNoticeByPage(BrandNoticeSearchCondition searchCondition) {
 		return brandNoticeMapper.searchUserBrandNoticeByPage(searchCondition);
 	}
@@ -100,5 +107,17 @@ public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements Brand
 	public int getAllBrandNoticeCountByUserId(int userId) {
 		return brandNoticeMapper.getAllBrandNoticeCountByUserId(userId);
 	}
+
+	@Override
+	public List<BrandNotice> searchUserStarTargetNoticesByPage(NoticeSearchCondition searchCondition) {
+		return brandNoticeMapper.searchUserStarTargetNoticesByPage(searchCondition);
+	}
+
+	@Override
+	public int searchUserStarTargetNoticesCount(NoticeSearchCondition searchCondition) {
+		return brandNoticeMapper.searchUserStarTargetNoticesCount(searchCondition);
+	}
+
+	
 	
 }

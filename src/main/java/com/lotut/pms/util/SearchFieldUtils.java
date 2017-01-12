@@ -11,6 +11,11 @@ public class SearchFieldUtils {
 	private static Pattern publishNoPattern = Pattern.compile("^CN\\d{5}.*", Pattern.CASE_INSENSITIVE);
 	private static Pattern datePattern = Pattern.compile("^\\d{4}[-/.]?\\d{2}[-/.]?\\d{2}$", Pattern.CASE_INSENSITIVE);
 	private static int APPNO_NO_DOT_LENGTH = 13;
+	private static Pattern idCardNoPattern = Pattern.compile("^\\d{15}$|^\\d{17}([0-9]|X)$", Pattern.CASE_INSENSITIVE);
+	
+	public static boolean isIdCard(String str) {
+		return isExactMatch(idCardNoPattern, str);
+	}
 	
 	public static boolean isAppNo(String str) {
 		return isExactMatch(appNoPattern, str);
@@ -58,7 +63,8 @@ public class SearchFieldUtils {
 	}
 	
 	public static void main(String[] args) {
-		String str = "88254553.X";
-		System.out.println(isAppNo(str));
+		String str = "32441414414141241X";
+		System.out.println(str.length());
+		System.out.println(isIdCard(str));
 	}
 }

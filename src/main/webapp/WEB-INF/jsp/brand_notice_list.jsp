@@ -913,7 +913,6 @@ tabs.set("nav","menu_con");//执行
 				uniqueNoticeNos.push(notices_checked[i]);
 				
 			}
-			
 		}
 		
 		var noticeIds = uniqueNoticeNos.join(",");

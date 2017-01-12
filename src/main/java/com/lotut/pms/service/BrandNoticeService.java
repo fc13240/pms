@@ -28,6 +28,8 @@ public interface BrandNoticeService {
 
 	void batchUpdateStarTargetStatus(List<Long> noticeIds);
 	
+	void batchCancelStarTargetStatus(List<Long> noticeIds);
+	
 	List<BrandNotice> searchUserBrandNoticeByPage(BrandNoticeSearchCondition searchCondition);
 	
 	int searchBrandNoticeCountByPage(BrandNoticeSearchCondition searchCondition);
@@ -45,6 +47,12 @@ public interface BrandNoticeService {
 	List<BrandNotice> getUserStarTargetNoticesByPage(Page page);
 
 	int getUserStarTargetNoticesCount(int userId);
+
+	List<BrandNotice> searchUserStarTargetNoticesByPage(NoticeSearchCondition searchCondition);
+
+	int searchUserStarTargetNoticesCount(NoticeSearchCondition searchCondition);
+
+	
 
 	
 
