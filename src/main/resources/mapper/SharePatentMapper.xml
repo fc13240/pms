@@ -38,7 +38,7 @@
 	</select>	
 	
 	<insert id="insertUserPatents" parameterType="list">
-		replace into user_patents(user, patent) 
+		insert ignore into user_patents(user, patent) 
 		values
 		<foreach item="userPatentRecord" collection="list" separator=",">
 

@@ -69,15 +69,15 @@
 	</resultMap>
 	
 	<insert id="insertOrUpdateBrand" parameterType="BrandManagement" useGeneratedKeys="true" keyProperty="id">
-		insert into brand_management(legal_status,category_id,app_no,brand_no,name,
+		insert into brand_management(id,legal_status,category_id,app_no,brand_no,name,
 		transaction_status,similar_no,transaction_mode,price,scope,
 		app_person,app_date,publish_date,originality,case_status,user,image_url,proxy_file,business_license,
 		entity_license,individual_license,identity_card,application)
-		values(#{brandLegalStatus.legalStatusId},#{brandCategory.categoryId},#{appNo},#{brandNo},
+		values(#{id},#{brandLegalStatus.legalStatusId},#{brandCategory.categoryId},#{appNo},#{brandNo},
 		 #{name},#{transactionStatus},#{similarNo},#{transactionMode},#{price},#{scope},#{appPerson},
 		 #{appDate,javaType=date,jdbcType=DATE},#{publishDate,javaType=date,jdbcType=DATE},#{originality},#{caseStatus},#{user.userId},
 		 #{imageUrl},#{proxyFile},#{businessLicense},#{entityLicense},#{individualLicense},#{identityCard},#{application})
-		 on duplicate key update 
+		 on duplicate key update id=#{id}, 
 			legal_status=#{brandLegalStatus.legalStatusId},category_id=#{brandCategory.categoryId},
 			name=#{name},transaction_status=#{transactionStatus},app_no=#{appNo},brand_no=#{brandNo},
 			similar_no=#{similarNo},transaction_mode=#{transactionMode},price=#{price},scope=#{scope},

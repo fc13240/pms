@@ -204,9 +204,124 @@
 	 		#{noticeId}
 	 	</foreach>
 	</update>
+	
+	<update id="batchCancelStarTargetStatus">
+	 	update brand_management_notices set star_target_monitor_status=0 where notice_id in
+	 	<foreach collection="noticeIds" item="noticeId" open="(" close=")" separator=",">
+	 		#{noticeId}
+	 	</foreach>
+	</update>
 
 	<select id="getBrandNoticeTypes" resultMap="BrandNoticeTypeResultMap">
 		select notice_type_id,notice_type_desc from brand_notice_types
+	</select>
+
+
+<select id="getUserStarTargetNoticeCountByRemainDay" resultType="map">
+		select 
+			case 
+			<![CDATA[when time_limit - datediff(curdate(), dispatch_date) < 0 then 1]]>
+			when time_limit - datediff(curdate(), dispatch_date) between 0 and 7 then 2
+			when time_limit - datediff(curdate(), dispatch_date) between 8 and 14 then 3
+			when time_limit - datediff(curdate(), dispatch_date) between 15 and 30 then 4
+			else 5
+		end as remain_day_type, count(*)
+  		from brand_management_notices bmn 
+ 		where bmn.brand in (select brand from user_brand_management where user =#{userId} and trash_status=1 ) and bmn.process_status=1
+ 		group by remain_day_type
+	</select>
+	
+	<select id="getUserStarTargetNoticesCount" resultType="int">
+		select count(*) from brand_management_notices  bmn where bmn.brand in (select brand from user_brand_management where user = #{userId} and trash_status=1) and bmn.star_target_monitor_status=1
+	</select>
+	
+	<select id="getUserStarTargetNoticesByPage" parameterType="Page" resultMap="BrandNoticeResultMap">
+		select rs.*,u.user_id,u.username FROM
+		(SELECT 
+		b.id,bc.category_id,bc.category_name,b.app_no,b.brand_no,b.name,b.image_url,b.app_person,b.transaction_status,
+			b.app_date,bmn.dispatch_date,bls.legal_status_id,bls.legal_status_name,bmn.star_target_monitor_status,
+			nvl.notice_id AS notice_view_status,bnt.notice_type_id,bnt.notice_type_desc,bmn.notice_id,bmn.notice_name,
+		IF(bmn.time_limit - DATEDIFF(CURDATE(), bmn.dispatch_date) >= 0, bmn.time_limit - DATEDIFF(CURDATE(), bmn.dispatch_date), -1)  AS remain_days
+		FROM brand_management_notices bmn 
+		LEFT JOIN brand_management b ON bmn.brand=b.id			
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
+		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1) 
+		and bmn.star_target_monitor_status=1
+		LIMIT #{startIndex},#{pageSize}
+		) rs
+		LEFT JOIN user_brand_management ubm ON ubm.brand=rs.id
+		LEFT JOIN users u ON u.user_id=ubm.user
+	</select>
+
+	<select id="searchUserStarTargetNoticesByPage" parameterType="Page" resultMap="BrandNoticeResultMap">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>
+		SELECT rs.*,u.user_id,u.username FROM
+		 (SELECT b.id,bc.category_id,bc.category_name,b.app_no,b.brand_no,b.name,b.image_url,b.app_person,b.transaction_status,
+			        b.app_date,bmn.dispatch_date,bls.legal_status_id,bls.legal_status_name,bmn.star_target_monitor_status,
+			        nvl.notice_id AS notice_view_status,bnt.notice_type_id,bnt.notice_type_desc,bmn.notice_id,bmn.notice_name,
+		IF(bmn.time_limit - DATEDIFF(CURDATE(), bmn.dispatch_date) >= 0, bmn.time_limit - DATEDIFF(CURDATE(), bmn.dispatch_date), -1)  AS remain_days
+		FROM brand_management_notices bmn 
+		LEFT JOIN brand_management b ON bmn.brand=b.id			
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
+		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1) 
+		AND bmn.star_target_monitor_status=1
+			 	<if test="keyword != null">
+					AND  (b.app_no LIKE #{keyword_pattern} or b.name like #{keyword_pattern} 
+			 OR b.app_person LIKE #{keyword_pattern} or b.brand_no LIKE #{keyword_pattern}
+			 OR bls.legal_status_name LIKE #{keyword_pattern} or bc.category_name like #{keyword_pattern})
+				</if>
+			 
+				limit #{page.startIndex}, #{page.pageSize})  rs
+			LEFT JOIN user_brand_management ubm ON ubm.brand=rs.id
+		    LEFT JOIN users u ON u.user_id=ubm.user	
+		  	<if test="startDispatchDate !=null">
+		  		and rs.dispatch_date>=#{startDispatchDate}
+		  	</if>	
+		  	<if test="endDispatchDate !=null">
+		  		 and <![CDATA[rs.dispatch_date<=#{endDispatchDate}]]>
+		  	</if>
+	</select>
+	
+	<select id="searchUserStarTargetNoticesCount" resultType="int">
+		<if test="keyword != null">
+			<bind name="keyword_pattern" value="'%' + keyword + '%'" />
+		</if>	
+		select count(*) from 
+		(SELECT b.id,bc.category_id,bc.category_name,b.app_no,b.brand_no,b.name,b.image_url,b.app_person,b.transaction_status,
+			        b.app_date,bmn.dispatch_date,bls.legal_status_id,bls.legal_status_name,bmn.star_target_monitor_status,
+			        nvl.notice_id AS notice_view_status,bnt.notice_type_id,bnt.notice_type_desc,bmn.notice_id,bmn.notice_name,
+		IF(bmn.time_limit - DATEDIFF(CURDATE(), bmn.dispatch_date) >= 0, bmn.time_limit - DATEDIFF(CURDATE(), bmn.dispatch_date), -1)  AS remain_days
+		FROM brand_management_notices bmn 
+		LEFT JOIN brand_management b ON bmn.brand=b.id			
+		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
+		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
+		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
+		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id
+		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1) 
+		AND bmn.star_target_monitor_status=1
+		 	<if test="keyword != null">
+				and (b.app_no LIKE #{keyword_pattern} or b.name like #{keyword_pattern} 
+			 OR b.app_person LIKE #{keyword_pattern} or b.brand_no LIKE #{keyword_pattern}
+			 OR bls.legal_status_name LIKE #{keyword_pattern} or bc.category_name like #{keyword_pattern})
+			</if>
+			limit #{page.startIndex}, #{page.pageSize})  rs
+			LEFT JOIN user_brand_management ubm ON ubm.brand=rs.id
+		    LEFT JOIN users u ON u.user_id=ubm.user
+		    
+			<if test="startDispatchDate !=null">
+		  		and rs.dispatch_date>=#{startDispatchDate}
+		  	</if>	
+		  	<if test="endDispatchDate !=null">
+		  		 and <![CDATA[rs.dispatch_date<=#{endDispatchDate}]]>
+		  	</if>
 	</select>
 	
 	<select id="getBrandNoticeCountByNoticeType" parameterType="int" resultMap="BrandNoticeTypeCountMap">
@@ -215,9 +330,9 @@
 		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
 		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
 		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
-		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id 
+		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id
 		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1) 
-		group by bnt.notice_type_id order by bnt.notice_type_id asc 
+		group by bnt.notice_type_id order by bnt.notice_type_id asc
 	</select>
 	
 	<insert id="saveBrandNotice" parameterType="BrandNotice">

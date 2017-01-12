@@ -102,11 +102,12 @@ height:37px;
 						<div class="lou-content" style="padding:10px;">
 							<form method="post" action="<s:url value='/brand/brandManagementUpdate.html'/>">
 								<table class="table_con">
-									<tbody>
+									<tbody> 
 									
 									<tr>
 										<th width="110">商标分类</th>
 										<td>
+											<input name="id" type="hidden" value="${brand.id}"/>
 											<c:forEach items="${categorys}" var="category" varStatus="status">
 											<input <c:if test="${brand.brandCategory.categoryId==category.categoryId}">checked</c:if> type="radio" name="brandCategory.categoryId" value="${category.categoryId}"/>${category.categoryName}
 											</c:forEach>

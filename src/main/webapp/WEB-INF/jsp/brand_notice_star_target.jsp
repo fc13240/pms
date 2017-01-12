@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<title>龙图腾专利管家-通知书</title>
+<title>龙图腾专利管家-星标通知</title>
 <%@ include file="_css.jsp" %>
 
 </head>
@@ -29,94 +29,52 @@
 		  <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
 				<div style="height:10px;"></div>
-				<div class="lt-box">
-					<div id="menu">
-					  <div style="height:33px;">
-					    <ul id="nav">
-					     <p>快捷处理：</p>
-					      <li><a href="#" class="selected">通知类型</a></li>
-					    </ul>
-					  </div>
-					  <div id="menu_con" style="min-width:1100px;">
-					    <div class="tag" style="display:block"> 
-					       <ul class="qxjk-ul">
-					       	<c:forEach items="${noticeTypeCounts}" var="noticeTypeCount">
-					      	<li>
-						        <a href="<s:url value='/brandNotice/searchBrandNotice.html?page.currentPage=1&brandCategory=&brandLegalStatus=
-						        &noticeType=${noticeTypeCount.noticeTypeId}&dispatchDate=&keyword=
-						        '/>">
-						       		 ${noticeTypeCount.noticeTypeDescription}(<c:out value='${noticeTypeCount.noticeCount}' default="0"/>)
-						        </a>
-					        </li> 
-					        </c:forEach>
-					       <li> 
-						        <a href="<s:url value='/brandNotice/searchBrandNotice.html?page.currentPage=1'/>">
-						        	其他通知 (<c:out value='${allNoticeCount}' default="0"/>)
-						        </a>
-					        </li> 
-					      </ul>
-					     </div>
-					  </div>
-					</div>				
-				</div>
-				
-				
-				
 				<div class="lt-box" style="padding: 10px 0 0 0;">
 					<div class="search-box">
-						<form action="<s:url value='/brandNotice/searchBrandNotice.html'/>" method="get">
-						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-						  <div class="t-third" style="clear:both;">
-							<table class="search-table">
-							  <tr>
-							  <td>商标类别</td>
-							  <td>商标状态</td>
-							  <td>通知类型</td>
-							  <td>发文日</td>
-							  <td>关键字</td>
-							  </tr>
-							  <tr>
-							  <td>
-						        <select  style="width:100px;" class="selectPointOfInterest form-control" name="brandCategory">
-								  <option value="">全部</option>
-								  <c:forEach items="${categorys}" var="category">
-									<option value="<c:out value='${category.categoryId}'/>">
-									<c:out value="${category.categoryName}"/>
-									</option>
-								  </c:forEach>
-								</select>					  
-							  </td>
-							  <td>
-						        <select style="width:121px;" class="form-control" name="brandLegalStatus">
-								  <option value="">全部</option>
-								  <c:forEach items="${allBrandLegalStatus}" var="brandLegalStatus">
-									<option value="<c:out value='${brandLegalStatus.legalStatusId}'/>">
-									<c:out value="${brandLegalStatus.legalStatusName}"/>
-									</option>
-								  </c:forEach>
-								</select>						  
-							  </td>
-							  <td>
-						        <select style="width:100px;" class="selectPointOfInterest form-control" name="noticeType">
-						          <option value="">全部</option>
-						          <c:forEach items="${noticeTypes}" var="noticeType">
-						            <option value="<c:out value='${noticeType.noticeTypeId}'/>">
-						            <c:out value="${noticeType.noticeTypeDescription}"/>
-						            </option>
-						          </c:forEach>
-						        </select>							  
-							  </td>
-							  <td>
-							  <input style="width:108px;" class="selectPointOfInterest form-control" type="text"  onclick="WdatePicker({el:'endAppDateId'})"  class="form-control" id="endAppDateId" name="dispatchDate" placeholder="发文日" value="" readonly="readonly" >
-							  </td>
-							  <td>
-							  <input name="keyword" style="display:inline;width:250px;" id="keywordId" value="" placeholder="申请号/注册号、商标名称、专有权人、类似群号、指定商品" class="t-input form-control"/>
-							  </td>
-							  <td><button type="submit" class="button button-caution button-rounded">查询</button></td>	
-							  </tr>							  
-							 </table> 
-						  </div>
-						</form>
+						<table class="search-table" width="960px">
+							<form class="form-inline" action="<s:url value='/brandNotice/searchStarTarget.html'/>" method="get">
+							<tr>
+								<td >发文起始日期</td>
+								<td>发文结束日期</td>
+								<td>关键字</td>
+							</tr>
+							<tr>
+								<td width="130px">
+									<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startDispatchDateId',dateFmt:'yyyy-MM-dd'})" id="startDispatchDateId" name="startDispatchDate" placeholder="发文日开始" value="" readonly="readonly" >							  
+								</td>
+								<td width="130px">
+									<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endDispatchDateId',dateFmt:'yyyy-MM-dd'})"  id="endDispatchDateId" name="endDispatchDate" placeholder="发文日结束" value="" readonly="readonly" >						  
+								</td>
+								<td >
+									  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
+									  <div class="t-third">
+			
+									  <table class="search-table">
+										  <tr>
+											  <td>
+												<input name="keyword" style="display:inline;width:400px;" id="keywordId" value="" placeholder="商标类别、申请号/注册号、商标名称、专有权人、法律状态" class="t-input form-control"/>							  
+											  </td>
+											  <td>
+											  	<button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
+											  </td>
+										  </tr>							  
+									  </table>
+									  </div>
+									
+								
+								</td>
+								
+							</tr>
+							</form>
+							<tr>
+								<td>
+							  		<a href="javascript:return void" onclick="batchCancelStarTargetNotice()">
+										<button style="width:140px;" class="button button-caution button-rounded">批量取消星标通知</button>
+									</a>
+						  		</td>
+							
+							</tr>
+						</table>
 					</div>
 				</div>
 				<!--search form end-->
@@ -125,40 +83,6 @@
 					<div class="row">
 					  <div class="col-xs-12">
 						<!-- PAGE CONTENT BEGINS -->
-						<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
-						  <div class="ta-top" style="margin-left:8px;"> 
-						  	<table class="search-table" width="100%">
-					  			<tr>
-					  	
-					  				<td width="6%">
-										<a href="javascript:return void" onclick="batchShare()">
-										<button style="margin-left:10px;width:100px;" class="button button-rounded button-primary">分享给好友</button>
-										</a>
-					  				</td>
-					  				<td width="6%">
-										<a href="javascript:return void" onclick="batchChangeNoticeViewStatus()">
-										<button style="width:100px;margin-left:10px;" class="button button-rounded button-royal">置为已查看</button>
-										</a>
-
-									</td>
-					  				
-					  				<td width="6%">
-										<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportNotices()">表格导出</button>
-									</td>
-					  				<td width="6%">
-										<button style="margin-left:10px;width:140px;" class="button button-rounded button-highlight" onclick="batchAddStarTargetNotices()">批量加入星标通知</button>
-									</td>
-									<td align="right">
-										<span class="span3" style="font-size:18px;font-weight:bold;">
-										<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" id="unreadNoticeCountForA">未查看${unreadNoticeCount}件
-										</a>
-										</span>
-							  		</td>	
-											
-					  			</tr>
-					  		</table>		
-						  </div>
-						  </span> </div>
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
@@ -186,9 +110,6 @@
 
 								  <span class="lbl"></span></label></td>
 								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize}
-								<c:if test="${notice.starTargetMonitorStatus==1 }">
-							  		<div style="width:25px;heigth:25px;background: red;float:right"><font color="white">星</font></div>
-							  	</c:if>
 								
 								 </td>
 								<td style="text-align:center"><c:out value="${notice.brand.brandCategory.categoryId}"/>
@@ -485,6 +406,15 @@ function batchProcessNotice(processStatus) {
 		$.ajax({
 			url: "<s:url value='/notice/batchChangeNoticeViewStatus.html'/>?notices=" + notices, 
 			type: 'get', 
+			success: function() {
+				
+			}
+		});
+		
+		
+		$.ajax({
+			url: "<s:url value='/notice/processNotices.html'/>?notices=" + notices + "&processStatus=" + processStatus, 
+			type: 'get', 
 			success: function(data) {
 				$("<div>操作成功</div>").dialog({
 					modal: true,
@@ -494,8 +424,9 @@ function batchProcessNotice(processStatus) {
 							location.reload(); 
 						}
 					}	
+				});
 			}
-		});		
+		});			
 		
 	}
 	
@@ -602,18 +533,18 @@ function batchProcessNotice(processStatus) {
 		var uniquePatentNos = [];
 		if (!patentSelected) {
 			//formutil.alertMessage('请选择专利');
-			formutil.alertMessage('请选择商标');
+			formutil.alertMessage('请选择专利');
 			return;
 		}
-		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'brand');
+		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
 		for (var i = 0; i < patents_checked.length; i++) {
 			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
 				uniquePatentNos.push(patents_checked[i]);
 			}
 		}		
-		var brands = uniquePatentNos.join(",");
+		var patents = uniquePatentNos.join(",");
 				
-		location.href = "<s:url value='/brandNotice/showFriends.html'/>?brands=" + brands;
+		location.href = "<s:url value='/patent/showFriends.html'/>?patents=" + patents;
 	}
 	
 	
@@ -676,17 +607,17 @@ function batchProcessNotice(processStatus) {
 		var wayOfPaging="${wayOfPaging}";
 		var url = null;
 		if(wayOfPaging=="normal"){
-			url = "<s:url value='/brandNotice/getBrandNoticeList.html'/>?currentPage=" + pageNo;
+			url = "<s:url value='/brandNotice/noticeStarTargetList.html'/>?currentPage=" + pageNo;
 		}else if(wayOfPaging=="unreadNotice"){
-			url = "<s:url value='/notice/unreadNotice.html'/>?currentPage=" + pageNo;
+			url = "<s:url value='/brandNotice/unreadNotice.html'/>?currentPage=" + pageNo;
 			
 		}else{
-			url = "<s:url value='/brandNotice/getBrandNoticeList.html'/>?currentPage=" + pageNo;
+			url = "<s:url value='/brandNotice/noticeStarTargetList.html'/>?currentPage=" + pageNo;
 			
 		}
 		
 		<c:if test="${searchCondition != null}">
-				url = "<s:url value='/brandNotice/searchBrandNotice.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
+				url = "<s:url value='/brandNotice/search.html'/>?page.currentPage=" + pageNo +"&"+"${searchCondition}";
 		</c:if>
 		
 		location.href = url;
@@ -704,12 +635,12 @@ function batchProcessNotice(processStatus) {
 		var noticeSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
 		
 		if (!noticeSelected) {
-			formutil.alertMessage('请选择要导出的商标通知书');
+			formutil.alertMessage('请选择要导出的通知书');
 			return;
 		}
 		var notices = formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'notice');
 		var iframe = document.getElementById('noticeExcelFileFrame');
-		iframe.src = "<s:url value='/brandNotice/downloadUserNotice.html'/>?noticeIds=" + notices;
+		iframe.src = "<s:url value='/notice/exportNotices.html'/>?noticeIds=" + notices;
 		
 	}
 	
@@ -731,7 +662,32 @@ function batchProcessNotice(processStatus) {
 			}
 		});		
 	}
-
+	function batchCancelStarTargetNotice() {
+		var noticeSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+		var uniqueNoticeNos = [];
+		if (!noticeSelected) {
+			formutil.alertMessage('请选择通知书');
+			return;
+		}
+		var notices_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'notice');
+		for (var i = 0; i < notices_checked.length; i++) {
+			if ($.inArray(notices_checked[i], uniqueNoticeNos) == -1) {
+				uniqueNoticeNos.push(notices_checked[i]);
+				
+			}
+		}
+		var noticeIds = uniqueNoticeNos.join(",");
+		$.ajax({
+			url:"<s:url value='/brandNotice/batchCancelStarTargetMonitor.html'/>?noticeIds=" + noticeIds,
+			type:"post",
+			success: function(data) {
+				formutil.alertMessage(data,true);	
+			},
+			error: function() {
+				formutil.alertMessage('批量监控失败');
+			}
+		});
+	}
 		
 </script>
 <script type="text/javascript">
@@ -811,9 +767,9 @@ function batchChangeNoticeViewStatus() {
 		}
 	}	
 	$.ajax({
-		url: "<s:url value='/brandNotice/batchChangeBrandNoticeViewStatus.html'/>?notices=" + notices, 
+		url: "<s:url value='/notice/batchChangeNoticeViewStatus.html'/>?notices=" + notices, 
 		type: 'get', 
-		success: function(data) {
+		success: function() {
 			$("<div>操作成功</div>").dialog({
 				modal: true,
 				buttons: {
@@ -897,36 +853,6 @@ var tabs=function(){
 }();
 tabs.set("nav","menu_con");//执行  
 </script>
-<%@ include file="_footer_js.jsp" %>
-
-<script type="text/javascript">
-	function batchAddStarTargetNotices() {
-		var noticeSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		var uniqueNoticeNos = [];
-		if (!noticeSelected) {
-			formutil.alertMessage('请选择通知书');
-			return;
-		}
-		var notices_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'notice');
-		for (var i = 0; i < notices_checked.length; i++) {
-			if ($.inArray(notices_checked[i], uniqueNoticeNos) == -1) {
-				uniqueNoticeNos.push(notices_checked[i]);
-				
-			}
-		}
-		
-		var noticeIds = uniqueNoticeNos.join(",");
-		$.ajax({
-			url:"<s:url value='/brandNotice/batchAddStarTargetMonitor.html'/>?noticeIds=" + noticeIds,
-			type:"post",
-			success: function(data) {
-				formutil.alertMessage(data,true);	
-			},
-			error: function() {
-				formutil.alertMessage('批量监控失败');
-			}
-		});
-	}
-</script>
+    <%@ include file="_footer_js.jsp" %>
 </body>
 </html>
