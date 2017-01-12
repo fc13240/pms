@@ -626,4 +626,27 @@ public class BrandController {
 		model.addAttribute("page",page);
 		return "brand_management_monitor_list";
 	}
+	
+	@RequestMapping(path="/downloadImage")
+	public void downloadImage(String name,String downloadPath,HttpServletResponse response) throws Exception{
+		downloadPath = downloadPath.substring(1,downloadPath.lastIndexOf("."));
+		String suffix = downloadPath.substring(downloadPath.lastIndexOf(".")+1).toLowerCase();
+		String filePath = Settings.BRAND_MANAGEMENT_IMAGE_PATH + downloadPath;
+		String filename = name +"."+suffix;
+		response.setContentType("image/"+suffix);
+		response.setHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes("utf-8"), "iso-8859-1"));
+		final int BUFFER_SIZE = 8192;
+		byte[] buffer = new byte [BUFFER_SIZE];
+		int byteRead = -1;
+		try( OutputStream out = response.getOutputStream();
+			 BufferedInputStream in = new BufferedInputStream(new FileInputStream(filePath))){
+			while ((byteRead=in.read(buffer))!=-1){
+				out.write(buffer, 0, byteRead);
+			}
+			out.flush();
+			out.close();
+			in.close();
+		}
+
+	}
 }

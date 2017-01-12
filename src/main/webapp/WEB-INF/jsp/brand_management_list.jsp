@@ -233,9 +233,12 @@
 								</a>
 							</td>
 							<td class="hidden-480" style="text-align:center"><c:out value="${brand.name}"/>
-							<br/><a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${brand.imageUrl}" target="_blank">
+							<br/>
+							<c:if test="${not empty brand.imageUrl}">
+								<a href="<s:url value='/brand/downloadImage.html'/>?name=${brand.name }&downloadPath=${brand.imageUrl}" target="_blank">
 									下载图样
 								</a>
+							</c:if>
 							</td>
 							<td style="text-align:center">
 								<c:out value='${brand.appPerson}'/>
