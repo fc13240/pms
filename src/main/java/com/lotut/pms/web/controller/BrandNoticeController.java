@@ -181,6 +181,14 @@ public class BrandNoticeController {
 		model.addAttribute("allNoticeCount", allNoticeCount);
 	}
 	
+	@RequestMapping(path="/showNoticeUploadForm")
+	public String showNoticeUploadForm(int brandId, Model model){
+		List<BrandNoticeType> noticeTypes = brandNoticeService.getBrandNoticeTypes();
+		model.addAttribute("brandId", brandId);
+		model.addAttribute("noticeTypes", noticeTypes);
+		return "brand_notice_upload";
+    }
+	
 	@RequestMapping(path="/uploadBrandNoticeFile")
 	public void uploadBrandNoticeFile(MultipartFile file,HttpServletResponse response) throws IOException, DocumentException{
     	String fatherPath=Settings.BRAND_MANAGEMENT_NOTICE_PATH;
@@ -189,10 +197,9 @@ public class BrandNoticeController {
     	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
     }
 	
-	@RequestMapping(path="/saveBrandNotice", method=RequestMethod.POST)
-	public void saveBrandNotice(@ModelAttribute("brandNotice") BrandNotice brandNotice,Model model,PrintWriter pw){
-		User user = PrincipalUtils.getCurrentPrincipal();
+	@RequestMapping(path="/saveBrandNotice")
+	public String saveBrandNotice(@ModelAttribute("brandNotice") BrandNotice brandNotice,Model model,PrintWriter pw){
 		brandNoticeService.saveBrandNotice(brandNotice);
-		pw.write("success");
+		return "redirect:/brandNotice/getBrandNoticeList.html";
 	}
 }
