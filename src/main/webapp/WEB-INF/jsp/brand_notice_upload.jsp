@@ -13,6 +13,7 @@
 <%@ include file="_css.jsp" %>
 </head>
 <body>
+<script src="<s:url value='/temp/js/jquery_from.js'/>"></script>
 <%@ include file="_top.jsp" %>
 
 <div class="lt-con" style="min-width:1100px;">
@@ -92,7 +93,8 @@
 			dataType : "json",
 			data : {"file":$("#brandNoticeFile").val()},
 			beforeSubmit : function () {
-				var filename = $("#brandNoitceFilename").val();
+				//var filename = $("#brandNoitceFilename").val();
+				var filename = $("#brandNoticeFilename").val();
 				var suffix = filename.toLowerCase().substr(filename.lastIndexOf(".")+1);
 				if(suffix == "pdf") {
 					return true;
