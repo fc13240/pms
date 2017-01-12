@@ -9,6 +9,8 @@ import com.lotut.pms.domain.BrandNotice;
 import com.lotut.pms.domain.BrandNoticeRemark;
 import com.lotut.pms.domain.BrandNoticeSearchCondition;
 import com.lotut.pms.domain.BrandNoticeType;
+import com.lotut.pms.domain.Notice;
+import com.lotut.pms.domain.NoticeSearchCondition;
 import com.lotut.pms.domain.BrandNoticeTypeCount;
 import com.lotut.pms.domain.Page;
 
@@ -26,7 +28,7 @@ public interface BrandNoticeMapper {
 
 	void batchChangeBrandNoticeViewStatus(List<Map<String, Long>> noticeIdList);
 
-	void batchUpdateStarTargetStatus(List<Long> noticeIds);
+	void batchUpdateStarTargetStatus(@Param("noticeIds")List<Long> noticeIds);
 	
 	List<BrandNotice> searchUserBrandNoticeByPage(BrandNoticeSearchCondition searchCondition);
 	
@@ -36,7 +38,14 @@ public interface BrandNoticeMapper {
 	
 	List<BrandNoticeTypeCount> getBrandNoticeCountByNoticeType(int userId);
 
+	Map<String, Map<String, String>> getUserStarTargetNoticeCountByRemainDay(int userId);
+
+	List<BrandNotice> getUserStarTargetNoticesByPage(Page page);
+
+	int getUserStarTargetNoticesCount(int userId);
+
 	void saveBrandNotice(BrandNotice brandNotice);
 	
 	int getAllBrandNoticeCountByUserId(int userId);
+
 }
