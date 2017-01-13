@@ -52,7 +52,7 @@ public interface BrandNoticeService {
 
 	int searchUserStarTargetNoticesCount(NoticeSearchCondition searchCondition);
 
-	
+	String getzipFileNameById(long noticeId);
 
 	
 

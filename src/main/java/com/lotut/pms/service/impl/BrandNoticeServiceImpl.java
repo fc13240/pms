@@ -133,5 +133,10 @@ public class BrandNoticeServiceImpl implements BrandNoticeService {
 		return brandNoticeDao.searchUserStarTargetNoticesCount(searchCondition);
 	}
 
+	@Override
+	public String getzipFileNameById(long noticeId) {
+		return brandNoticeDao.getzipFileNameById(noticeId);
+	}
+
 	
 }

@@ -96,8 +96,8 @@ public class BrandNoticeController {
 	
 	@RequestMapping(path="/downloadUserNotice")
 	public void downloadUserNotice(@RequestParam("noticeIds") List<Integer> noticeIds,HttpServletResponse response) throws Exception{
-		response.setHeader("X-FRAME-OPTION", "SAMEORIGIN");
-		response.setContentType("application/vnd-ms-excel");
+		response.setHeader("X-FRAME-OPTIONS", "SAMEORIGIN");
+		response.setContentType("application/vnd.ms-excel");
 		String excelName = PrincipalUtils.getCurrentPrincipal().getUsername() + System.currentTimeMillis() +".xls";
 		String excelNoticePath = brandNoticeService.exportNoticeExcel(noticeIds,excelName);
 		response.setHeader("Content-Disposition", "attachment;filename=" + excelName);
@@ -258,6 +258,65 @@ public class BrandNoticeController {
 		//addSearchTypesDataToModel(model);
 		return "brand_notice_star_target";
 	}
-
+	
+	@RequestMapping(path="/downloadBrandNotice")
+	public void downloadBrandNotice(long noticeId,HttpServletResponse response ) throws IOException{
+		String noticePDFUrl = brandNoticeService.getzipFileNameById(noticeId);
+		noticePDFUrl = noticePDFUrl.substring(0, noticePDFUrl.lastIndexOf("."));
+		String filePath = Settings.BRAND_MANAGEMENT_PATH+noticePDFUrl;
+		response.setContentType("application/pdf");
+		String filename = noticePDFUrl.substring(noticePDFUrl.lastIndexOf("/")+1).toLowerCase();
+		response.setHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes("utf-8"),"iso-8859-1"));
+		final int BUFFER_SIZE = 8192;
+		byte[] buffer = new byte [BUFFER_SIZE];
+		int byteRead = -1;
+		
+		try(OutputStream out = response.getOutputStream();
+			BufferedInputStream in = new BufferedInputStream(new FileInputStream(filePath))){
+			while((byteRead=in.read(buffer))!= -1){
+				out.write(buffer,0,byteRead);
+			}
+			out.flush();
+			out.close();
+			in.close();
+		}
+	}
+	
+	@RequestMapping(path="/previewBrandNotice")
+	public void previewBrandNotice(long noticeId,HttpServletResponse response ) throws IOException{
+		String noticePDFUrl = brandNoticeService.getzipFileNameById(noticeId);
+		noticePDFUrl = noticePDFUrl.substring(0, noticePDFUrl.lastIndexOf("."));
+		String filePath = Settings.BRAND_MANAGEMENT_PATH+noticePDFUrl;
+		response.setContentType("application/pdf");
+		final int BUFFER_SIZE = 8192;
+		byte[] buffer = new byte [BUFFER_SIZE];
+		int byteRead = -1;
+		
+		try{
+			try(OutputStream out = response.getOutputStream();
+					BufferedInputStream in = new BufferedInputStream(new FileInputStream(filePath))){
+				while((byteRead=in.read(buffer))!= -1){
+					out.write(buffer,0,byteRead);
+				}
+				out.flush();
+				out.close();
+				in.close();
+			}}
+		catch(Exception e){
+			response.setContentType("text/html");
+			PrintWriter out = response.getWriter();
+			out.write("<html><head><title>通知书预览</title></head><body><h1>没有可预览的通知书</h1></body></html>");
+			out.flush();
+			out.close();
+ 		}
+	}
+	
+	public static void main(String[] args) {
+		String noticePDFUrl = "/notice/2/《诛仙》全集.pdf.html";
+		noticePDFUrl = noticePDFUrl.substring(0, noticePDFUrl.lastIndexOf("."));
+		String filename = noticePDFUrl.substring(noticePDFUrl.lastIndexOf("/")+1).toLowerCase();
+		System.out.println(filename);
+		
+	}
 	
 }

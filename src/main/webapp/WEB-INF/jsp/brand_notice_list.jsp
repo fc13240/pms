@@ -198,7 +198,12 @@
 									<br/><c:out value="${notice.brand.brandNo}"/>
 								</td>
 								<td style="text-align:center"><c:out value="${notice.brand.name}"/>
-									<br/><a>下载图样</a>
+									<br/>
+									<c:if test="${not empty notice.brand.imageUrl}">
+										<a href="<s:url value='/brand/downloadImage.html'/>?name=${notice.brand.name }&downloadPath=${notice.brand.imageUrl}">
+											下载图样
+										</a>
+									</c:if>
 								</td> 
 								<td style="text-align:center">
 									<c:out value="${notice.brand.appPerson}"/><br/>
@@ -224,8 +229,17 @@
 									  	</c:choose>
 									</span>
 									<br/>
-									<span><a><c:out value="${notice.noticeType.noticeTypeDescription}"/></a></span>
-								
+									<span>
+									<c:choose>
+										<c:when test="${not empty notice.zipfileName }">
+											<a href="<s:url value='/brandNotice/previewBrandNotice.html'/>?noticeId=${notice.noticeId }" onclick="changeNoticeReadStatus(${notice.noticeId})" target="_blank"><c:out value="${notice.noticeType.noticeTypeDescription}"/></a>
+										</c:when>
+										<c:otherwise>
+											${notice.noticeType.noticeTypeDescription}
+										</c:otherwise>
+									
+									</c:choose>
+									</span>
 								</td >
 								
 								<td style="text-align:center">
@@ -236,11 +250,12 @@
 								            备注
 								    </a>
 									  <br/>
-									  <a target="_blank" href="">
+									 <!--  <a target="_blank" href="">
 									  查看
-									  </a>&nbsp;
-									  <a href="<s:url value='/notice/download.html'/>?notice=${notice.noticeId}" onclick="changeNoticeReadStatus(${notice.noticeId})"> 下载 </a> 
-									  
+									  </a> -->&nbsp;
+									  <c:if test="${not empty notice.zipfileName }">
+									  <a href="<s:url value='/brandNotice/downloadBrandNotice.html'/>?noticeId=${notice.noticeId}" onclick="changeNoticeReadStatus(${notice.noticeId})"> 下载 </a> 
+									  </c:if>
 								 </td>
 							  </tr>
 							</c:forEach>
