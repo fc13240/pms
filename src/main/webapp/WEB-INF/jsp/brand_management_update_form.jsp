@@ -234,7 +234,6 @@ height:37px;
 											<input type="hidden" class="form-control" style="width:600px;" maxlength="100" value="${brand.individualLicense}" id="brandIndividualLicenseHidden" name="individualLicense" />
 											<input style="width:200px;display:inline;" type="text" id="brandIndividualLicenseFileName"  class="selectPointOfInterest form-control" placeholder="请选择pdf或图片" readonly="readonly" onclick="$('input[id=brandIndividualLicenseFile]').click();" required="required"/>
 											<button type="button" onclick="uploadIndividualLicenseClick()" class="t-btn3 button button-primary  button-rounded">上传</button>
-											<button type="button" onclick="uploadIndividualLicenseClick()" class="t-btn3 button button-primary  button-rounded">下载</button>
 										</td>
 									</tr>
 									
