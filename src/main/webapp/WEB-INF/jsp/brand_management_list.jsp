@@ -215,6 +215,9 @@
 							  <span class="lbl"></span></label></td>
 							<td class="center" style="text-align:center"> 
 							${status.count + (page.currentPage-1)*page.pageSize}
+							<c:if test="${brand.monitorStatus==1 }">
+							  		<div style="width:25px;heigth:25px;background: red;float:right"><font color="white">监</font></div>
+							  	</c:if>
 							</td>
 							<td style="text-align:center"><c:out value="${brand.brandCategory.categoryId }"/>
 							<br/><c:out value="${brand.brandCategory.categoryName }"/></td>

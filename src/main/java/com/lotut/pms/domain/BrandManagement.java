@@ -35,8 +35,15 @@ public class BrandManagement {
 	private String identityCard;
 	private String application;
 	private List<User> shareUsers;
+	private int monitorStatus;
 	
 	
+	public int getMonitorStatus() {
+		return monitorStatus;
+	}
+	public void setMonitorStatus(int monitorStatus) {
+		this.monitorStatus = monitorStatus;
+	}
 	public int getTransactionStatus() {
 		return transactionStatus;
 	}

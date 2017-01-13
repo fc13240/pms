@@ -25,6 +25,7 @@
 		<result property="individualLicense" column="individual_license"/>
 		<result property="identityCard" column="identity_card"/>
 		<result property="application" column="application"/>
+		<result property="monitorStatus" column="monitor_status"/>
 		<!-- <association property="user" javaType="User">
 			<id property="userId" column="user_id"/>
 			<result property="username" column="username"/>
@@ -104,13 +105,14 @@
 			b.name,b.transaction_status,b.transaction_mode,b.price,b.app_person,
 			b.app_date,b.publish_date,b.image_url,b.proxy_file,b.business_license,
 			b.entity_license,b.individual_license,b.identity_card,b.application,
-			bc.category_id,bc.category_name,bls.legal_status_id,bls.legal_status_name
-		
+			bc.category_id,bc.category_name,bls.legal_status_id,bls.legal_status_name,
+			ubm.monitor_status
 		FROM brand_management b
 		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
 		LEFT JOIN users u ON b.user=u.user_id
 		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
-		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1) 
+		left join user_brand_management ubm on b.id=ubm.brand
+		where ubm.trash_status=1 and ubm.user=#{userId}
 		LIMIT #{startIndex},#{pageSize}
 		) rs
 		LEFT JOIN user_brand_management ubm ON ubm.brand=rs.id
@@ -156,8 +158,8 @@
 				b.name,b.transaction_status,b.transaction_mode,b.price,b.app_person,
 				b.app_date,b.publish_date,b.image_url,b.proxy_file,b.business_license,
 				b.entity_license,b.individual_license,b.identity_card,b.application,
-				bc.category_id,bc.category_name,bls.legal_status_id,bls.legal_status_name
-				
+				bc.category_id,bc.category_name,bls.legal_status_id,bls.legal_status_name,
+				ubm.monitor_status
 				FROM brand_management b
 				LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
 				LEFT JOIN users u ON b.user=u.user_id
