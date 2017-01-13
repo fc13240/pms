@@ -70,7 +70,7 @@
 	<select id="getUserBrandNoticeList" parameterType="Page" resultMap="BrandNoticeResultMap">
   		SELECT rs.*,u.user_id,u.username FROM (
 		SELECT b.id,bc.category_id,bc.category_name,b.app_no,b.brand_no,b.name,b.image_url,b.app_person,b.transaction_status,
-			b.app_date,bmn.dispatch_date,bls.legal_status_id,bls.legal_status_name,bmn.star_target_monitor_status,
+			b.app_date,bmn.dispatch_date,bls.legal_status_id,bls.legal_status_name,bmn.star_target_monitor_status,bmn.zipfile_name,
 			nvl.notice_id AS notice_view_status,bnt.notice_type_id,bnt.notice_type_desc,bmn.notice_id,bmn.notice_name
 		FROM brand_management_notices bmn 
 		LEFT JOIN brand_management b ON bmn.brand=b.id			
@@ -129,7 +129,7 @@
 			<bind name="keyword_pattern" value="'%'+keyword+'%'"/>
 		</if>
 		SELECT rs.*,u.user_id,u.username FROM (
-		SELECT b.id,bc.category_id,bc.category_name,b.app_no,b.brand_no,b.name,b.image_url,b.app_person,
+		SELECT b.id,bc.category_id,bc.category_name,b.app_no,b.brand_no,b.name,b.image_url,b.app_person,bmn.zipfile_name,
 			b.app_date,bmn.dispatch_date,bls.legal_status_id,bls.legal_status_name,bmn.star_target_monitor_status,
 			nvl.notice_id AS notice_view_status,bnt.notice_type_id,bnt.notice_type_desc,bmn.notice_id,bmn.notice_name
 		FROM brand_management_notices bmn 
@@ -347,5 +347,9 @@
 		LEFT JOIN brand_notice_read nvl ON bmn.notice_id=nvl.notice_id AND nvl.user_id = #{userId}
 		LEFT JOIN brand_notice_types bnt ON bmn.notice_type=bnt.notice_type_id 
 		WHERE b.id IN (SELECT brand FROM user_brand_management  WHERE USER =#{userId} and trash_status=1) 
+	</select>
+	
+	<select id="getzipFileNameById" parameterType="long" resultType="string">
+		select zipfile_name from brand_management_notices where notice_id=#{noticeId}
 	</select>
 </mapper>

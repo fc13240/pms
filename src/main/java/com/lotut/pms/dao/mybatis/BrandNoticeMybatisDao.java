@@ -118,6 +118,11 @@ public class BrandNoticeMybatisDao extends SqlSessionDaoSupport implements Brand
 		return brandNoticeMapper.searchUserStarTargetNoticesCount(searchCondition);
 	}
 
+	@Override
+	public String getzipFileNameById(long noticeId) {
+		return brandNoticeMapper.getzipFileNameById(noticeId);
+	}
+
 	
 	
 }

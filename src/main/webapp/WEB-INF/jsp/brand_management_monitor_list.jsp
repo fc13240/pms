@@ -82,7 +82,7 @@
 							<form action="<s:url value='/brand/searchMonitorBrand.html'/>" >
 						<td>
 								<input value="1" name="page.currentPage" type="hidden" />
-								<input name="keyword" class="t-input form-control" style="width:300px;"/>
+								<input name="keyword" class="t-input form-control" style="width:300px;" placeholder="申请号/注册号/商标名称"/>
 						</td>			
 						<td>
 								<button style="width:80px;margin-left:10px;" class="button button-primary  button-rounded" type="submit">查询</button>
@@ -122,18 +122,21 @@
 							<td style="text-align:center"><c:out value="${brand.brandCategory.categoryId }"/>
 							<br/><c:out value="${brand.brandCategory.categoryName }"/></td>
 							<td style="text-align:center">
-								<a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${brand.appNo}" target="_blank">
+								<%-- <a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${brand.appNo}" target="_blank"> --%>
 									<c:out value="${brand.appNo}"/>
-								</a>
+								<!-- </a> -->
 								<br/>
 								<a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${brand.brandNo}" target="_blank">
 									<c:out value="${brand.brandNo}"/>
 								</a>
 							</td>
 							<td class="hidden-480" style="text-align:center"><c:out value="${brand.name}"/>
-							<br/><a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${brand.imageUrl}" target="_blank">
+							<br/>
+							<c:if test="${not empty brand.imageUrl}">
+								<a href="<s:url value='/brand/downloadImage.html'/>?name=${brand.name }&downloadPath=${brand.imageUrl}" target="_blank">
 									下载图样
 								</a>
+							</c:if>
 							</td>
 							<td style="text-align:center">
 								<c:out value='${brand.appPerson}'/>

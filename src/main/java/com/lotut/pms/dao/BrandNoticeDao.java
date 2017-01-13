@@ -51,6 +51,8 @@ public interface BrandNoticeDao {
 	List<BrandNotice> searchUserStarTargetNoticesByPage(NoticeSearchCondition searchCondition);
 
 	int searchUserStarTargetNoticesCount(NoticeSearchCondition searchCondition);
+	
+	String getzipFileNameById(long noticeId);
 
 	
 
