@@ -151,9 +151,6 @@
 									<a href="javascript:window.open('<s:url value='/patent/getOverviewPatent.html'/>?appNo=${notice.patent.appNo}')" target="_blank">
 										<c:out value="${notice.patent.appNo}"/>
 									</a>
-<%-- 									<a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${notice.patent.appNo}" target="_blank">
-										<c:out value="${notice.patent.appNo}"/>
-									</a> --%>
 								</td>
 								<td style="text-align:center"><c:out value="${notice.patent.name}"/></td>
 								<td style="text-align:center"><c:out value="${notice.patent.appPerson}"/></td> 
