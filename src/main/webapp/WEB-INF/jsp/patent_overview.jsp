@@ -21,12 +21,15 @@
 <div id="centerDiv" class="lt-con" >
 <div style="margin-top:250px;"></div>
 <div>
-<a href="#baseInfo" style="font-size:medium;margin-right: 100px;">基本信息</a>
-<a href="#noticeInfo" style="font-size:medium;margin-right: 100px;">通知信息</a>
-<a href="#transactionInfo" style="font-size:medium;margin-right: 100px;">交易信息</a>
-<a href="<s:url value='/fee/grabFees.html?patent=${patent.patentId }'/>" target="_blank" style="font-size:medium;margin-right: 100px;">缴&nbsp;&nbsp;费</a>
-<a href="http://cpquery.sipo.gov.cn/txnQueryDeliveryData.do?select-key:shenqingh=${patent.appNo }&select-key:zhuanlilx=&select-key:gonggaobj=&select-key:backPage=&inner-flag:open-type=window&inner-flag:flowno=" style="font-size:medium;margin-right: 100px;" target="_blank">发文信息</a>
-<a href="javascript:void(0);" onclick="searchAppNo('${patent.appNo}')"style="font-size:medium">授权公告</a>
+<a href="#baseInfo" style="font-size:medium;margin-right: 80px;">基本信息</a>
+<a href="http://cpquery.sipo.gov.cn/txnQueryDeliveryData.do?select-key:shenqingh=${patent.appNo }&select-key:zhuanlilx=&select-key:gonggaobj=&select-key:backPage=&inner-flag:open-type=window&inner-flag:flowno=" style="font-size:medium;margin-right: 80px;" target="_blank">发文信息</a>
+<a href="javascript:void(0);" onclick="searchAppNo('${patent.appNo}')" style="font-size:medium;margin-right: 80px;">专利公告</a>
+<a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>" style="font-size:medium;margin-right: 80px;">分享</a>
+<a href="<s:url value='/fee/grabFees.html?patent=${patent.patentId }'/>" target="_blank" style="font-size:medium;margin-right: 110px;">缴&nbsp;&nbsp;费</a>
+<a href="<s:url value='/patent/showRemarks.html'/>?patentId=<c:out value='${patent.patentId}'/>" onclick=""style="font-size:medium;margin-right: 80px;">备注</a>
+<a href="<s:url value='/patent/showPatentDetail.html'/>?patentId=${patent.patentId}&ownerId=${patent.ownerId}" style="font-size:medium;margin-right: 80px;">修改</a>
+<a href="javascript:void(0);" onclick="delectPatent('<c:out value='${patent.patentId}'/>')" style="font-size:medium">删除</a>
+
 
 </div>
 <%-- <p>${patent.patentType.typeDescription }专利：${patent.name }(${patent.appNo })&nbsp;${patent.patentStatusText }</p> --%>
@@ -411,6 +414,22 @@ function changeNoticeReadStatus(noticeId){
 				alert("发生未知错误，请稍后重试！");
 			}
 		})
+	}
+	
+	function  delectPatent(patentIds){
+		$.ajax({
+			url:"<s:url value='/patent/deletePatents.html'/>?patentIds=" + patentIds,
+			type:"get",
+				success: function(data) {
+					//formutil.alertMessage('删除操作成功',true);
+					alert("删除成功，即将关闭页面！")
+					window.opener.location.reload(); 
+					window.close();
+				},
+				error: function() {
+					formutil.alertMessage('删除操作失败',true);
+				}
+		});
 	}
 </script>
 </html>
