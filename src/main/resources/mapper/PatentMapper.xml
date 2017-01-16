@@ -1047,7 +1047,7 @@ where spg.patent_id in
 							     			   and share_by=#{userId}
 						  ) su on u.user_id=su.share_to
 				where p.app_no=#{appNo} and up.user=#{userId} -->
-		select p.patent_id,p.app_no,pt.patent_type_id,pt.patent_type_desc,p.patent_name,p.internal_code,p.app_person,p.app_date,
+		select p.patent_id,p.app_no,pt.patent_type_id,pt.patent_type_desc,p.patent_name,p.internal_code,p.app_person,p.app_date,p.patent_owner,
 			   p.patent_status_text,p.create_time,u.user_id,u.username 
 			from patents p left join patent_types pt on p.patent_type=pt.patent_type_id 
 			join (

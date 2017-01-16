@@ -268,7 +268,7 @@
 							<td style="text-align:center">
 								<c:choose>
 									<c:when test="${isTraderUser==false }">
-										<a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${patent.appNo}" target="_blank">
+										 <a href="javascript:window.open('<s:url value='/patent/getOverviewPatent.html'/>?appNo=${patent.appNo}')" target="_blank">
 											<c:out value="${patent.appNo}"/>
 										 </a>
 									</c:when>
