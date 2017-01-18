@@ -146,7 +146,7 @@
 			AND b.legal_status = #{brandLegalStatus}
 		</if>
 		<if test="dispatchDate != null">
-			AND b.dispatch_date = #{dispatchDate}
+			AND bmn.dispatch_date = #{dispatchDate}
 		</if>
 		<if test="noticeType != null">
 			AND bmn.notice_type = #{noticeType}
@@ -181,7 +181,7 @@
 			AND b.legal_status = #{brandLegalStatus}
 		</if>
 		<if test="dispatchDate != null">
-			AND b.dispatch_date = #{dispatchDate}
+			AND bmn.dispatch_date = #{dispatchDate}
 		</if>
 		<if test="noticeType != null">
 			AND bmn.notice_type = #{noticeType}

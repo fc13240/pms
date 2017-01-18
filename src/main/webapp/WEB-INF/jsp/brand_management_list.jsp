@@ -222,13 +222,9 @@
 							<td style="text-align:center"><c:out value="${brand.brandCategory.categoryId }"/>
 							<br/><c:out value="${brand.brandCategory.categoryName }"/></td>
 							<td style="text-align:center">
-								<a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${brand.appNo}" target="_blank">
 									<c:out value="${brand.appNo}"/>
-								</a>
 								<br/>
-								<a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${brand.brandNo}" target="_blank">
 									<c:out value="${brand.brandNo}"/>
-								</a>
 							</td>
 							<td class="hidden-480" style="text-align:center"><c:out value="${brand.name}"/>
 							<br/>
@@ -259,8 +255,8 @@
 							</td>
 							
 							<td style="text-align:center" width="120px">
-								<c:if test="${brand.transactionMode==1 }">出售价</c:if>
-								<c:if test="${brand.transactionMode==2 }">转让价</c:if>
+								<c:if test="${brand.transactionMode==1 }">转让价</c:if>
+								<c:if test="${brand.transactionMode==2 }">授权价</c:if>
 								${brand.price }元<br/>
 								<c:if test="${brand.transactionStatus==1}">
 									待交易
