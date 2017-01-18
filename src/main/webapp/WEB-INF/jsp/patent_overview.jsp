@@ -22,7 +22,17 @@
 <div style="margin-top:250px;"></div>
 <div>
 <a href="#baseInfo" style="font-size:medium;margin-right: 80px;">基本信息</a>
-<a href="http://cpquery.sipo.gov.cn/txnQueryDeliveryData.do?select-key:shenqingh=${patent.appNo }&select-key:zhuanlilx=&select-key:gonggaobj=&select-key:backPage=&inner-flag:open-type=window&inner-flag:flowno=" style="font-size:medium;margin-right: 80px;" target="_blank">发文信息</a>
+<a href="http://cpquery.sipo.gov.cn/txnQueryFeeData.do?select-key:shenqingh=${patent.appNo}&select-key:gonggaobj=0&select-
+
+key:zhuanlilx=1&select-key:backPage=http%3A%2F%2Fcpquery.sipo.gov.cn%2FtxnQueryOrdinaryPatents.do%3Fselect-key%3Ashenqingh
+
+%3D2017100200389%26select-key%3Azhuanlimc%3D%26select-key%3Ashenqingrxm%3D%26select-key%3Azhuanlilx%3D%26select-key
+
+%3Ashenqingr_from%3D%26select-key%3Ashenqingr_to%3D%26verycode%3D13%26inner-flag%3Aopen-type%3Dwindow%26inner-flag%3Aflowno
+
+%3D1484538249539&inner-flag:open-type=window&inner-flag:flowno=1484538251659" style="font-size:medium;margin-right: 100px;" 
+
+target="_blank">费用信息</a>
 <a href="javascript:void(0);" onclick="searchAppNo('${patent.appNo}')" style="font-size:medium;margin-right: 80px;">专利公告</a>
 <a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>" style="font-size:medium;margin-right: 80px;">分享</a>
 <a href="<s:url value='/fee/grabFees.html?patent=${patent.patentId }'/>" target="_blank" style="font-size:medium;margin-right: 110px;">缴&nbsp;&nbsp;费</a>

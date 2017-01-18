@@ -1,14 +1,10 @@
 package com.lotut.pms.domain;
 
-import java.sql.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
+import java.sql.Timestamp;
 
 public class BrandNoticeRemark {
 	private int remarkId;
-	@DateTimeFormat(iso=ISO.DATE_TIME,pattern="yyyy-MM-dd")
-	private Date remarkTime;
+	private Timestamp remarkTime;
 	private long brandNotice;
 	private String content;
 	private User user;
@@ -18,10 +14,10 @@ public class BrandNoticeRemark {
 	public void setRemarkId(int remarkId) {
 		this.remarkId = remarkId;
 	}
-	public Date getRemarkTime() {
+	public Timestamp getRemarkTime() {
 		return remarkTime;
 	}
-	public void setRemarkTime(Date remarkTime) {
+	public void setRemarkTime(Timestamp remarkTime) {
 		this.remarkTime = remarkTime;
 	}
 	public long getBrandNotice() {
