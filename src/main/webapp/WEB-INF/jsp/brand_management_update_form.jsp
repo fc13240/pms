@@ -260,12 +260,12 @@ height:37px;
 										<td>
 										<c:forEach items="${brand.shareUsers}" var="shareBrand" varStatus="status">	
 											<span class='ss-item' id="shareUser${status.index}">${shareBrand.username}
-												<%-- <se:authorize access="hasRole('ROLE_PLATFORM')"> --%>
+												<se:authorize access="hasRole('ROLE_PLATFORM')">
 												<a class='icon-btn-x' href="javascript: return void;"
 													onclick="deleteShareUser(${brand.id},${shareBrand.userId},${status.index})" >								
 													<img src="<s:url value='/temp/images/remove.png'/>" style="" />
 												</a>
-												<%-- </se:authorize>	 --%>
+												 </se:authorize>	
 											</span>		
 								        </c:forEach>
 										<br>
