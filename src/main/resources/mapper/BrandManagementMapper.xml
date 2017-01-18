@@ -253,18 +253,18 @@
 	</update>
 
 	<select id="showBrandManagementDetail" parameterType="int" resultMap="brandManagementResultMap">
-		SELECT b.id,b.user,b.app_no,b.brand_no,b.similar_no,b.scope,
+		SELECT rs.*, u.user_id,u.username from (SELECT b.id,b.user,b.app_no,b.brand_no,b.similar_no,b.scope,
 			b.name,b.transaction_status,b.transaction_mode,b.price,b.app_person,
 			b.app_date,b.publish_date,b.image_url,b.proxy_file,b.business_license,
 			b.entity_license,b.individual_license,b.identity_card,b.application,
-			bc.category_id,bc.category_name,bls.legal_status_id,bls.legal_status_name,
-			u.user_id, u.username
+			bc.category_id,bc.category_name,bls.legal_status_id,bls.legal_status_name
 		FROM brand_management b
 		LEFT JOIN brand_category bc ON  b.category_id=bc.category_id 
 		LEFT JOIN users u ON b.user=u.user_id
 		LEFT JOIN brand_legal_status bls ON b.legal_status=bls.legal_status_id
-		LEFT JOIN user_brand_management ubm ON ubm.brand=b.id
-		where b.id=#{brandId}
+		where b.id=#{brandId}) rs 
+		LEFT JOIN user_brand_management ubm ON ubm.brand=rs.id
+		LEFT JOIN users u ON u.user_id=ubm.user
 	</select>
 		
 	<select id="getAllBrandNoticeTypes"  resultMap="BrandNoticeTypeResultMap">
