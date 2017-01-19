@@ -1315,7 +1315,7 @@ CREATE TABLE IF NOT EXISTS brand_management_notices (
 	notice_code VARCHAR(30), 
 	zip_bid VARCHAR(30),
 	dmh_flag VARCHAR(10), 
-	archive_no VARCHAR(30), 
+	archive_no VARCHAR(30),  
 	zipfile_name VARCHAR(100),
 	process_status INT DEFAULT 1 NOT NULL, 
 	process_user INT,
