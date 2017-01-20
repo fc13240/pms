@@ -13,6 +13,8 @@
 
 	<http use-expressions="true">
 		<intercept-url pattern="/loginForm.html" access="permitAll"/>
+		<intercept-url pattern="/contentImg/**" access="permitAll"/>
+		<intercept-url pattern="/smallImg/**" access="permitAll"/>
 		<intercept-url pattern="/alipay/notify.html" access="isAnonymous()"/>
 		<intercept-url pattern="/unionPay/backRcvResponse.html" access="isAnonymous()"/>
 		<intercept-url pattern="/patentDocUnionPay/backRcvResponse.html" access="isAnonymous()"/>
