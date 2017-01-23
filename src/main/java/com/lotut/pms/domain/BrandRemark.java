@@ -7,7 +7,6 @@ public class BrandRemark {
 	private User user ;
 	private int brandId;
 	private String content;
-	//@DateTimeFormat(iso=ISO.DATE_TIME,pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp remarkTime;
 	
 	public int getRemarkId() {
