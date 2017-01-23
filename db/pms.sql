@@ -1116,7 +1116,7 @@ CREATE TABLE IF NOT EXISTS news_comments (
 
 ALTER TABLE sell_patent_goods ADD COLUMN recommend_status TINYINT DEFAULT 0 COMMENT '0鏈帹鑽�  1宸叉帹鑽�';
 ALTER TABLE users MODIFY username VARCHAR(60);
-
+ALTER TABLE news_comments  MODIFY  content  VARCHAR(50)
 CREATE TABLE brand_category (
 	category_id  int NOT NULL AUTO_INCREMENT ,
 	category_name  varchar(100) NOT NULL ,
