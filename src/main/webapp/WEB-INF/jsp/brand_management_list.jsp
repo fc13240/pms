@@ -575,7 +575,6 @@ $(function () {
 			}
 		}		
 		var brands = uniqueBrandNos.join(",");
-		alert(brands);
 		$.ajax({
 			type : "post",
 			url : "<s:url value='/brand/batchTransation.html'/>",
@@ -586,7 +585,6 @@ $(function () {
 				window.location.reload();
 			},
 			error : function(){
-				
 				formutil.alertMessage('出现异常，请稍后再试！');
 			}
 		})
