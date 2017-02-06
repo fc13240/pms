@@ -84,7 +84,7 @@ public class BrandController {
 		User user = new User();
 		user.setUserId(userId);
 		brand.setUser(user);
-		int brandId = brandService.addOrEditBrand(brand);
+		brandService.addOrEditBrand(brand);
 		brandService.insertUserBrand(userId, brand.getId());
 		return "redirect:/brand/list.html";
 	}
@@ -579,9 +579,9 @@ public class BrandController {
 	}
 
 	@RequestMapping(path = "/getUsermonitorBrands")
-	public String getUsermonitorBrands(HttpSession session,Page page,Model model){
-		int  userId = PrincipalUtils.getCurrentUserId();
-		if(page.getCurrentPage()<=0){
+	public String getUsermonitorBrands(HttpSession session, Page page, Model model) {
+		int userId = PrincipalUtils.getCurrentUserId();
+		if (page.getCurrentPage() <= 0) {
 			page.setCurrentPage(1);
 		}
 		page.setPageSize(WebUtils.getPageSize(session));
@@ -593,28 +593,28 @@ public class BrandController {
 		model.addAttribute("brands", brands);
 		return "brand_management_monitor_list";
 	}
-	
-	
+
 	@RequestMapping(path = "/changeBrandMonitorStatus")
-	public void  changeBrandMonitorStatus(@RequestParam List<Long> brandIds,PrintWriter pw){
+	public void changeBrandMonitorStatus(@RequestParam List<Long> brandIds, PrintWriter pw) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		brandManagementService.changeBrandMonitorStatus(userId, brandIds);
 		pw.write("success");
 	}
-	
+
 	@RequestMapping(path = "/cancelBrandMonitor")
-	public void  getUsermonitorBrands(@RequestParam List<Long> brandIds,PrintWriter pw){
+	public void getUsermonitorBrands(@RequestParam List<Long> brandIds, PrintWriter pw) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		brandManagementService.cancelBrandMonitorStatus(userId, brandIds);
 		pw.write("success");
 	}
-	
-	@RequestMapping(path="/searchMonitorBrand")
-	public String searchMonitorBrand(@ModelAttribute("searchCondition") BrandManagementSearchCondition searchCondition,HttpSession session,Model model){
+
+	@RequestMapping(path = "/searchMonitorBrand")
+	public String searchMonitorBrand(@ModelAttribute("searchCondition") BrandManagementSearchCondition searchCondition,
+			HttpSession session, Model model) {
 		int userId = PrincipalUtils.getCurrentUserId();
 		searchCondition.setUserId(userId);
 		Page page = searchCondition.getPage();
-		if(page.getCurrentPage()<=0){
+		if (page.getCurrentPage() <= 0) {
 			page.setCurrentPage(1);
 		}
 		page.setPageSize(WebUtils.getPageSize(session));
@@ -622,25 +622,26 @@ public class BrandController {
 		page.setTotalRecords(totoalCOunt);
 		searchCondition.setPage(page);
 		List<BrandManagement> brands = brandManagementService.searchUserMonitorBrand(searchCondition);
-		model.addAttribute("brands",brands);
-		model.addAttribute("page",page);
+		model.addAttribute("brands", brands);
+		model.addAttribute("page", page);
 		return "brand_management_monitor_list";
 	}
-	
-	@RequestMapping(path="/downloadImage")
-	public void downloadImage(String name,String downloadPath,HttpServletResponse response) throws Exception{
-		downloadPath = downloadPath.substring(1,downloadPath.lastIndexOf("."));
-		String suffix = downloadPath.substring(downloadPath.lastIndexOf(".")+1).toLowerCase();
+
+	@RequestMapping(path = "/downloadImage")
+	public void downloadImage(String name, String downloadPath, HttpServletResponse response) throws Exception {
+		downloadPath = downloadPath.substring(1, downloadPath.lastIndexOf("."));
+		String suffix = downloadPath.substring(downloadPath.lastIndexOf(".") + 1).toLowerCase();
 		String filePath = Settings.BRAND_MANAGEMENT_IMAGE_PATH + downloadPath;
-		String filename = name +"."+suffix;
-		response.setContentType("image/"+suffix);
-		response.setHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes("utf-8"), "iso-8859-1"));
+		String filename = name + "." + suffix;
+		response.setContentType("image/" + suffix);
+		response.setHeader("Content-Disposition",
+				"attachment;filename=" + new String(filename.getBytes("utf-8"), "iso-8859-1"));
 		final int BUFFER_SIZE = 8192;
-		byte[] buffer = new byte [BUFFER_SIZE];
+		byte[] buffer = new byte[BUFFER_SIZE];
 		int byteRead = -1;
-		try( OutputStream out = response.getOutputStream();
-			 BufferedInputStream in = new BufferedInputStream(new FileInputStream(filePath))){
-			while ((byteRead=in.read(buffer))!=-1){
+		try (OutputStream out = response.getOutputStream();
+				BufferedInputStream in = new BufferedInputStream(new FileInputStream(filePath))) {
+			while ((byteRead = in.read(buffer)) != -1) {
 				out.write(buffer, 0, byteRead);
 			}
 			out.flush();
@@ -649,12 +650,12 @@ public class BrandController {
 		}
 
 	}
-	
+
 	@RequestMapping(path = "/publishGoods")
-	public String deleteBrand(@RequestParam("brandId")int brandId) {
-		BrandManagement brandManagement=brandManagementService.showBrandManagementDetail(brandId);
-		
-		Brand brand=new Brand();
+	public String deleteBrand(@RequestParam("brandId") int brandId) {
+		BrandManagement brandManagement = brandManagementService.showBrandManagementDetail(brandId);
+
+		Brand brand = new Brand();
 		User user = new User();
 		int userId = PrincipalUtils.getCurrentUserId();
 		user.setUserId(userId);
@@ -669,9 +670,44 @@ public class BrandController {
 		brand.setScope(brandManagement.getScope());
 		brand.setAppDate(brandManagement.getAppDate());
 		brand.setOriginality(brandManagement.getOriginality());
-		int Id = brandService.addOrEditBrand(brand);
+		brand.setPublishDate(brandManagement.getPublishDate());
+		brand.setImageUrl(brandManagement.getImageUrl());
+		brandService.addOrEditBrand(brand);
 		brandService.insertUserBrand(userId, brand.getId());
 		brandManagementService.changeBrandTransactionStatus(brandId);
 		return "redirect:/brand/getBrandManagementlist.html";
+	}
+
+	@RequestMapping(path = "/batchTransation")
+	public void batchTransation(@RequestParam("brands") List<Integer> brands, PrintWriter pw) {
+		for (int i = 0; i < brands.size(); i++) {
+			System.out.println(brands.get(i));
+		}
+		for (int i = 0; i < brands.size(); i++) {
+			int brandId = brands.get(i);
+			BrandManagement brandManagement = brandManagementService.showBrandManagementDetail(brandId);
+			Brand brand = new Brand();
+			User user = new User();
+			int userId = PrincipalUtils.getCurrentUserId();
+			user.setUserId(userId);
+			brand.setUser(user);
+			brand.setBrandCategory(brandManagement.getBrandCategory());
+			brand.setName(brandManagement.getName());
+			brand.setBrandNo(brandManagement.getBrandNo());
+			brand.setSimilarNo(brandManagement.getSimilarNo());
+			brand.setPrice(brandManagement.getPrice());
+			brand.setTransactionMode(brandManagement.getTransactionMode());
+			brand.setAppPerson(brandManagement.getAppPerson());
+			brand.setScope(brandManagement.getScope());
+			brand.setAppDate(brandManagement.getAppDate());
+			brand.setOriginality(brandManagement.getOriginality());
+			brand.setPublishDate(brandManagement.getPublishDate());
+			brand.setImageUrl(brandManagement.getImageUrl());
+			brandService.addOrEditBrand(brand);
+			brandService.insertUserBrand(userId, brand.getId());
+			brandManagementService.changeBrandTransactionStatus(brandId);
+
+			pw.write("success");
+		}
 	}
 }

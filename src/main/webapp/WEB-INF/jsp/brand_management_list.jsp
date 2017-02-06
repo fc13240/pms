@@ -184,6 +184,10 @@
 							<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportPatents()">表格导出</button>
 							
 						</td>					
+						<td>
+							<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="batchTransaction()">批量发布交易</button>
+							
+						</td>					
 											
 					  	</tr>
 					  	</table>
@@ -552,6 +556,38 @@ $(function () {
 			},
 			error : function (){
 				formutil.alertMessage('出现异常错误，请稍后再试');
+			}
+		})
+	}
+	
+	function batchTransaction(){
+		var brandSelected = formutil.anyCheckboxItemSelected('tr td input.patent-check-item');
+		var uniqueBrandNos = []
+		if (!brandSelected) {
+			formutil.alertMessage('请选择商标');
+			
+			return;
+		}
+		var brands_checked=formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'brand');
+		for (var i = 0; i < brands_checked.length; i++) {
+			if ($.inArray(brands_checked[i], uniqueBrandNos) == -1) {
+				uniqueBrandNos.push(brands_checked[i]);
+			}
+		}		
+		var brands = uniqueBrandNos.join(",");
+		alert(brands);
+		$.ajax({
+			type : "post",
+			url : "<s:url value='/brand/batchTransation.html'/>",
+			data : {"brands":brands},
+			async :false,
+			success : function (data){
+				alert("操作成功");
+				window.location.reload();
+			},
+			error : function(){
+				
+				formutil.alertMessage('出现异常，请稍后再试！');
 			}
 		})
 	}
