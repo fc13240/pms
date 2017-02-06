@@ -78,6 +78,8 @@ public interface BrandManagementMapper {
 	List<BrandManagement> searchUserMonitorBrand(BrandManagementSearchCondition searchCondition);
 	
 	int searchUserMonitorBrandCount(BrandManagementSearchCondition searchCondition);
+	
+	void changeBrandTransactionStatus(int brandId);
 
 	
 

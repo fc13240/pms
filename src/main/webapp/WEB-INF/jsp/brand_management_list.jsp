@@ -273,7 +273,11 @@
 			 	                 <c:if test="${brand.transactionStatus==5}">
 				                  	<font color="red">交易成功</font>
 			 	                  </c:if>
-								
+								<c:if test="${brand.transactionStatus==0}">
+	 			                  	   <a target="_blank" href="<s:url value='/brand/publishGoods.html'/>?brandId=<c:out value='${brand.id}'/>">
+					                  	<button class="t-btn2" value="1" data-toggle="tooltip" data-placement="bottom" title="加入r.lotut.com商城">发布交易</button> 
+				 	                  </a>
+								</c:if>
 								
 							</td>
 							<td style="text-align:center"><a  href="<s:url value='/brand/showFriends.html'/>?brands=<c:out value='${brand.id}'/>">

@@ -173,6 +173,11 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 		return brandManagementMapper.searchUserMonitorBrandCount(searchCondition);
 	}
 
+	@Override
+	public void changeBrandTransactionStatus(int brandId) {
+		brandManagementMapper.changeBrandTransactionStatus(brandId);
+	}
+
 	
 
 	

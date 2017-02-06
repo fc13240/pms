@@ -649,4 +649,29 @@ public class BrandController {
 		}
 
 	}
+	
+	@RequestMapping(path = "/publishGoods")
+	public String deleteBrand(@RequestParam("brandId")int brandId) {
+		BrandManagement brandManagement=brandManagementService.showBrandManagementDetail(brandId);
+		
+		Brand brand=new Brand();
+		User user = new User();
+		int userId = PrincipalUtils.getCurrentUserId();
+		user.setUserId(userId);
+		brand.setUser(user);
+		brand.setBrandCategory(brandManagement.getBrandCategory());
+		brand.setName(brandManagement.getName());
+		brand.setBrandNo(brandManagement.getBrandNo());
+		brand.setSimilarNo(brandManagement.getSimilarNo());
+		brand.setPrice(brandManagement.getPrice());
+		brand.setTransactionMode(brandManagement.getTransactionMode());
+		brand.setAppPerson(brandManagement.getAppPerson());
+		brand.setScope(brandManagement.getScope());
+		brand.setAppDate(brandManagement.getAppDate());
+		brand.setOriginality(brandManagement.getOriginality());
+		int Id = brandService.addOrEditBrand(brand);
+		brandService.insertUserBrand(userId, brand.getId());
+		brandManagementService.changeBrandTransactionStatus(brandId);
+		return "redirect:/brand/getBrandManagementlist.html";
+	}
 }

@@ -179,6 +179,11 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 		return brandManagementDao.searchUserMonitorBrandCount(searchCondition);
 	}
 
+	@Override
+	public void changeBrandTransactionStatus(int brandId) {
+		brandManagementDao.changeBrandTransactionStatus(brandId);
+	}
+
 	
 
 

@@ -78,7 +78,7 @@ public interface BrandManagementDao {
 	
 	int searchUserMonitorBrandCount(BrandManagementSearchCondition searchCondition);
 
-
-
+	void changeBrandTransactionStatus(int brandId);
+	
 	
 }

@@ -76,6 +76,8 @@ public interface BrandManagementService {
 	List<BrandManagement> searchUserMonitorBrand(BrandManagementSearchCondition searchCondition);
 	
 	int searchUserMonitorBrandCount(BrandManagementSearchCondition searchCondition);
+	
+	void changeBrandTransactionStatus(int brandId);
 
 
 
