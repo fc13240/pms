@@ -30,7 +30,7 @@
 		</a>
 	</li>
 	<li class="active"> 
-		<a href="<s:url value='/news/getNewsTypeList.html'/>">
+		<a href="<s:url value='/brand/list.html'/>">
 		<h5>商标交易</h5>
 		</a>
 	</li>

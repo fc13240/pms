@@ -6,7 +6,7 @@
 	
 	<li class="active"> 
 		<a href="<s:url value='/brand/list.html'/>">
-		<h5>商标列表</h5>
+		<h5>交易列表</h5>
 		</a>
 	</li> 	
 	<li class="active">
