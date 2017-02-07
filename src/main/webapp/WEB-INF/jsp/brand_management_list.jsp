@@ -185,7 +185,7 @@
 							
 						</td>					
 						<td>
-							<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="batchTransaction()">批量发布交易</button>
+							<button style="margin-left:10px;width:120px;" class="button button-rounded button-highlight" onclick="batchTransaction()">批量发布交易</button>
 							
 						</td>					
 											
