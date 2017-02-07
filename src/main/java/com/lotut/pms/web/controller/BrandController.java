@@ -203,6 +203,8 @@ public class BrandController {
 
 	@RequestMapping(path = "/deleteBrand")
 	public void deleteBrand(int brandId, PrintWriter pw) {
+		Brand brand=brandService.getUserBrandsById(brandId);
+		brandManagementService.changeBrandTransactionStatusTo0(brand.getName());
 		brandService.deleteBrand(brandId);
 		pw.write(1);
 	}

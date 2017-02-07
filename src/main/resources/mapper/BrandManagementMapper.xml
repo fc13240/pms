@@ -469,5 +469,9 @@
   	<update id="changeBrandTransactionStatus"  parameterType="int">
   		update brand_management set transaction_status=1 where id=#{brandId}
   	</update>
+  	
+  	<update id="changeBrandTransactionStatusTo0"  parameterType="string">
+  		update brand_management set transaction_status=0 where name=#{name}
+  	</update>
 </mapper>
   

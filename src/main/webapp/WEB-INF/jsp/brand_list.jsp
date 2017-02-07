@@ -297,15 +297,7 @@ function deleteBrands(brandId){
 	})
 }
 
-function deleteBrands(brandId){
-	$.ajax({
-		url:"<s:url value='/brand/deleteBrand.html'/>",
-		data:{"brandId":brandId},
-		success:function(){
-			location.reload();
-		}
-	})
-}
+
 function updateBrand(id){
 	window.open("<s:url value='/brand/brandUpdateForm.html'/>?brandId="+id)
 }

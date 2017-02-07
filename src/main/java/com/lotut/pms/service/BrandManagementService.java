@@ -79,7 +79,7 @@ public interface BrandManagementService {
 	
 	void changeBrandTransactionStatus(int brandId);
 
-
+	void changeBrandTransactionStatusTo0(String name);
 
 
 }
