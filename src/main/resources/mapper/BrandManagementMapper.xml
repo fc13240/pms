@@ -96,7 +96,7 @@
 	</resultMap>
 	
 	<insert id="insertUserBrand" >
-		replace into user_brand_management(user,brand) values (#{userId},#{brandId})
+		insert ignore into user_brand_management(user,brand) values (#{userId},#{brandId})
 	</insert>
 	
 	<select id="getUserBrandManagementByPage" parameterType="Page" resultMap="brandManagementResultMap">
@@ -125,7 +125,7 @@
   	</select>
   	
   	<insert id="insertUserBrandManagements" parameterType="list">
-		replace into user_brand_management(user, brand) 
+		insert ignore into user_brand_management(user, brand) 
 		values
 		<foreach item="userBrandManagementRecord" collection="list" separator=",">
 			(#{userBrandManagementRecord.user}, #{userBrandManagementRecord.brand})

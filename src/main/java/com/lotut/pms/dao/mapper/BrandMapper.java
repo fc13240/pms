@@ -52,4 +52,6 @@ public interface BrandMapper {
 	List<Brand> searchBrandsByPage(BrandSearchCondition brandSearchCondition);
 	
 	int getsearchBrandsCount(BrandSearchCondition brandSearchCondition);
+	
+	void deleteUserBrand(@Param("userId")int userId,@Param("brandId")int brandId);
 }

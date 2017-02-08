@@ -203,9 +203,10 @@ public class BrandController {
 
 	@RequestMapping(path = "/deleteBrand")
 	public void deleteBrand(int brandId, PrintWriter pw) {
+		int userId=PrincipalUtils.getCurrentUserId();
 		Brand brand=brandService.getUserBrandsById(brandId);
 		brandManagementService.changeBrandTransactionStatusTo0(brand.getName());
-		brandService.deleteBrand(brandId);
+		brandService.deleteUserBrand(userId, brandId);
 		pw.write(1);
 	}
 
@@ -674,17 +675,14 @@ public class BrandController {
 		brand.setOriginality(brandManagement.getOriginality());
 		brand.setPublishDate(brandManagement.getPublishDate());
 		brand.setImageUrl(brandManagement.getImageUrl());
-		brandService.addOrEditBrand(brand);
-		brandService.insertUserBrand(userId, brand.getId());
-		brandManagementService.changeBrandTransactionStatus(brandId);
+		brandService.addOrEditBrand(brand);//将商标管理值取出来存到商标交易表中
+		brandService.insertUserBrand(userId, brand.getId());//关联商标用户
+		brandManagementService.changeBrandTransactionStatus(brandId);//设置商标管理表数据未待交易
 		return "redirect:/brand/getBrandManagementlist.html";
 	}
 
 	@RequestMapping(path = "/batchTransation")
 	public void batchTransation(@RequestParam("brands") List<Integer> brands, PrintWriter pw) {
-		for (int i = 0; i < brands.size(); i++) {
-			System.out.println(brands.get(i));
-		}
 		for (int i = 0; i < brands.size(); i++) {
 			int brandId = brands.get(i);
 			BrandManagement brandManagement = brandManagementService.showBrandManagementDetail(brandId);

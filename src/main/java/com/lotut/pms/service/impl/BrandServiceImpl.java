@@ -151,4 +151,9 @@ public class BrandServiceImpl implements BrandService{
 	public int getsearchBrandsCount(BrandSearchCondition brandSearchCondition) {
 		return brandDao.getsearchBrandsCount(brandSearchCondition);
 	}
+
+	@Override
+	public void deleteUserBrand(int userId, int brandId) {
+		brandDao.deleteUserBrand(userId, brandId);
+	}
 }
