@@ -20,6 +20,7 @@ import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -681,7 +682,8 @@ public class BrandController {
 		return "redirect:/brand/getBrandManagementlist.html";
 	}
 
-	@RequestMapping(path = "/batchTransation")
+	@Transactional
+	@RequestMapping(path = "/batchTransation", method=RequestMethod.POST)
 	public void batchTransation(@RequestParam("brands") List<Integer> brands, PrintWriter pw) {
 		for (int i = 0; i < brands.size(); i++) {
 			int brandId = brands.get(i);
