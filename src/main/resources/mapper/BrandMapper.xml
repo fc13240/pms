@@ -188,7 +188,7 @@
 	</insert>
 	
 	<insert id="insertUserBrands" parameterType="list">
-		insert ignore into user_brands(user,brand) 
+		replace into user_brands(user,brand) 
 		values
 		<foreach item="userBrandRecord" collection="list" separator=",">
 
@@ -208,11 +208,11 @@
 	
 	
 	<insert id="insertUserBrand" >
-		insert ignore into user_brands(user,brand) values (#{userId},#{brandId})
+		replace into user_brands(user,brand) values (#{userId},#{brandId})
 	</insert>
 	
 	<insert id="addBrandCategory">
-		insert ignore into brand_category (category_id,category_name) 
+		replace into brand_category (category_id,category_name) 
 		values
 		<foreach item="userBrandCategoryRecord" collection="list" separator=",">
 
