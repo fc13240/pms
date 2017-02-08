@@ -203,10 +203,12 @@ public class BrandController {
 	}
 
 	@RequestMapping(path = "/deleteBrand")
+	@Transactional
 	public void deleteBrand(int brandId, PrintWriter pw) {
 		int userId=PrincipalUtils.getCurrentUserId();
 		Brand brand=brandService.getUserBrandsById(brandId);
 		brandManagementService.changeBrandTransactionStatusTo0(brand.getName());
+		brandService.deleteBrand(brandId);
 		brandService.deleteUserBrand(userId, brandId);
 		pw.write(1);
 	}
@@ -656,6 +658,7 @@ public class BrandController {
 	}
 
 	@RequestMapping(path = "/publishGoods")
+	@Transactional
 	public String deleteBrand(@RequestParam("brandId") int brandId) {
 		BrandManagement brandManagement = brandManagementService.showBrandManagementDetail(brandId);
 
@@ -681,6 +684,7 @@ public class BrandController {
 		brandManagementService.changeBrandTransactionStatus(brandId);//设置商标管理表数据未待交易
 		return "redirect:/brand/getBrandManagementlist.html";
 	}
+
 
 	@Transactional
 	@RequestMapping(path = "/batchTransation", method=RequestMethod.POST)
