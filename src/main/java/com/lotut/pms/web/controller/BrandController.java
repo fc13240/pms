@@ -659,7 +659,7 @@ public class BrandController {
 
 	@RequestMapping(path = "/publishGoods")
 	@Transactional
-	public String deleteBrand(@RequestParam("brandId") int brandId) {
+	public String publishGoods(@RequestParam("brandId") int brandId) {
 		BrandManagement brandManagement = brandManagementService.showBrandManagementDetail(brandId);
 
 		Brand brand = new Brand();
