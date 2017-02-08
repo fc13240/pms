@@ -202,8 +202,8 @@ public class BrandController {
 		return "brand_list";
 	}
 
-	@RequestMapping(path = "/deleteBrand")
 	@Transactional
+	@RequestMapping(path = "/deleteBrand")
 	public void deleteBrand(int brandId, PrintWriter pw) {
 		int userId=PrincipalUtils.getCurrentUserId();
 		Brand brand=brandService.getUserBrandsById(brandId);

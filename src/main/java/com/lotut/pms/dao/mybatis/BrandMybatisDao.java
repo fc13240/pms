@@ -126,6 +126,6 @@ public class BrandMybatisDao extends SqlSessionDaoSupport implements BrandDao{
 
 	@Override
 	public void deleteBrandById(int brandId) {
-		brandMapper.deleteBrand(brandId);
+		brandMapper.deleteBrandById(brandId);
 	}
 }
