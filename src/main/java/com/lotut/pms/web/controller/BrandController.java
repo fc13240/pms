@@ -203,12 +203,12 @@ public class BrandController {
 	}
 
 	@RequestMapping(path = "/deleteBrand")
-	@Transactional
 	public void deleteBrand(int brandId, PrintWriter pw) {
 		int userId=PrincipalUtils.getCurrentUserId();
 		Brand brand=brandService.getUserBrandsById(brandId);
 		brandManagementService.changeBrandTransactionStatusTo0(brand.getName());
 		brandService.deleteUserBrand(userId, brandId);
+		brandService.deleteBrand(brandId);
 		brandService.deleteBrandById(brandId);
 		pw.write(1);
 	}
@@ -658,7 +658,6 @@ public class BrandController {
 	}
 
 	@RequestMapping(path = "/publishGoods")
-	@Transactional
 	public String publishGoods(@RequestParam("brandId") int brandId) {
 		BrandManagement brandManagement = brandManagementService.showBrandManagementDetail(brandId);
 
@@ -688,7 +687,6 @@ public class BrandController {
 
 	
 	@RequestMapping(path = "/batchTransation")
-	@Transactional
 	public void batchTransation(@RequestParam("brands") List<Integer> brands, PrintWriter pw) {
 		for (int i = 0; i < brands.size(); i++) {
 			int brandId = brands.get(i);
