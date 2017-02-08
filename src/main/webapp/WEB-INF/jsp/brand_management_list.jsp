@@ -180,7 +180,7 @@
 							
 						</td>					
 						<td>
-							<button style="margin-left:10px;width:120px;" class="button button-rounded button-highlight" onclick="batchTransaction()">批量发布交易</button>
+							<button style="margin-left:10px;width:120px;" class="button button-rounded button-highlight" onclick="batchTransaction()" data-toggle="tooltip" data-placement="right" title="可以将您的商标发布到 r.lotut.com交易网买卖哦！您也可以去交易管理页面修改您的价格和类别哦！">批量发布交易</button>
 							
 						</td>					
 											
