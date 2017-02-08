@@ -54,4 +54,6 @@ public interface BrandMapper {
 	int getsearchBrandsCount(BrandSearchCondition brandSearchCondition);
 	
 	void deleteUserBrand(@Param("userId")int userId,@Param("brandId")int brandId);
+	
+	void deleteBrandById(int brandId);
 }

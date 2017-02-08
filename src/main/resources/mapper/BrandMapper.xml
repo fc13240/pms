@@ -224,5 +224,9 @@
 	<delete id="deleteUserBrand">
 		delete from user_brands where user=#{userId} and brand=#{brandId}
 	</delete>
+	
+	<delete id="deleteBrandById" parameterType="int">
+  		delete from brands where id=#{brandId}
+  	</delete>
 </mapper>
   

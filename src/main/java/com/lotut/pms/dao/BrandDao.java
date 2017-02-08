@@ -52,4 +52,6 @@ public interface BrandDao {
 	int getsearchBrandsCount(BrandSearchCondition brandSearchCondition);
 	
 	void deleteUserBrand(int userId,int brandId);
+	
+	void deleteBrandById(int brandId);
 }

@@ -209,6 +209,7 @@ public class BrandController {
 		Brand brand=brandService.getUserBrandsById(brandId);
 		brandManagementService.changeBrandTransactionStatusTo0(brand.getName());
 		brandService.deleteBrand(brandId);
+		brandService.deleteBrandById(brandId);
 		brandService.deleteUserBrand(userId, brandId);
 		pw.write(1);
 	}
