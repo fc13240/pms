@@ -156,4 +156,9 @@ public class BrandServiceImpl implements BrandService{
 	public void deleteUserBrand(int userId, int brandId) {
 		brandDao.deleteUserBrand(userId, brandId);
 	}
+
+	@Override
+	public void deleteBrandById(int brandId) {
+		brandDao.deleteBrandById(brandId);
+	}
 }
