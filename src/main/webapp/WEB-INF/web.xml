@@ -86,16 +86,7 @@
         <url-pattern>*.html</url-pattern>  
     </servlet-mapping>  	
     
-    <!--防止sql注入-->
-  <filter>
-      <filter-name>XssFilter</filter-name>
-      <filter-class>com.lotut.pms.util.XssFilter</filter-class>
-  </filter>
-  <filter-mapping>
-      <filter-name>XssFilter</filter-name>
-      <url-pattern>/*</url-pattern>
-  </filter-mapping>
- 	 <!--防止sql注入结束-->
+
  	 <filter>  
         <filter-name>characterEncodingFilter</filter-name>  
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
@@ -125,7 +116,16 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>    
-
+	    <!--防止sql注入-->
+  <filter>
+      <filter-name>XssFilter</filter-name>
+      <filter-class>com.lotut.pms.util.XssFilter</filter-class>
+  </filter>
+  <filter-mapping>
+      <filter-name>XssFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+  </filter-mapping>
+ 	 <!--防止sql注入结束-->
 	<session-config>  
         <session-timeout>60</session-timeout>  
     </session-config>   
