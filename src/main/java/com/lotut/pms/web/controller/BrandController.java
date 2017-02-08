@@ -212,7 +212,7 @@ public class BrandController {
 		brandService.deleteUserBrand(userId, brandId);
 		pw.write(1);
 	}
-
+	
 	@RequestMapping(path = "/getWechatOrderList")
 	public String getWechatOrderList(HttpSession session, Page page, Model model) {
 		if (page.getCurrentPage() < 1) {
@@ -686,8 +686,9 @@ public class BrandController {
 	}
 
 
+	
+	@RequestMapping(path = "/batchTransation")
 	@Transactional
-	@RequestMapping(path = "/batchTransation", method=RequestMethod.POST)
 	public void batchTransation(@RequestParam("brands") List<Integer> brands, PrintWriter pw) {
 		for (int i = 0; i < brands.size(); i++) {
 			int brandId = brands.get(i);
@@ -713,7 +714,11 @@ public class BrandController {
 			brandService.insertUserBrand(userId, brand.getId());
 			brandManagementService.changeBrandTransactionStatus(brandId);
 
-			pw.write("success");
+			
 		}
+		pw.write("success");
 	}
+	
+	
+
 }
