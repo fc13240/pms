@@ -198,7 +198,7 @@ public class FeeCrawler {
 		return b2.toString().split(",");
 	}
 	
-	public String grabFeeHtml(String appNo, boolean isUnpublisedPatent) {
+	public  String grabFeeHtml(String appNo, boolean isUnpublisedPatent) {
 		final String host = "cpquery.sipo.gov.cn";
 		final String feeQueryPath = "/txnQueryFeeData.do";
 		URIBuilder uriBuilder = new URIBuilder()
@@ -271,11 +271,12 @@ public class FeeCrawler {
 //	}
 	
 	public static void main(String[] args) {
-		List<Patent> patents = new ArrayList<>();
+		/*List<Patent> patents = new ArrayList<>();
 		Patent p = new Patent();
 		p.setAppNo("2016205340019");
 		patents.add(p);
 		FeeCrawler fc = new FeeCrawler(patents);
-		fc.grabFees();
+		fc.grabFees();*/
+		//System.out.println(grabFeeHtml("2016205340019",true));
 	}
 }
