@@ -1056,7 +1056,7 @@ where spg.patent_id in
 						select p.patent_id 
 					from patents p 
 						left join user_patents up on p.patent_id=up.patent 
-					where p.app_no=#{appNo} and up.user=#{userId}) ) upid on p.patent_id=upid.patent 
+					where p.app_no=#{appNo} and up.user=#{userId} AND up.trash_status=1) ) upid on p.patent_id=upid.patent 
 			left join users u on upid.user=u.user_id 
 			<!-- left join ( 
 				select share_to from share_patents 
