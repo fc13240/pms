@@ -82,7 +82,7 @@ public class FeeCrawler {
 		while (retryCount > 0) {
 			try {
 				try {
-					String html = grabFeeHtml(patent.getAppNo(), false);
+					String html = grabFeeHtml2(patent.getAppNo(), false);
 					if (html != null) {
 						feeRecordsMap = parseHtml(html);
 					}
@@ -91,7 +91,7 @@ public class FeeCrawler {
 						return feeRecordsMap;
 					}
 				} catch (EmptyFeeRecordException e) {
-					String html = grabFeeHtml(patent.getAppNo(), true);
+					String html = grabFeeHtml2(patent.getAppNo(), true);
 					if (html != null) {
 						feeRecordsMap = parseHtml(html);
 					}
@@ -198,7 +198,7 @@ public class FeeCrawler {
 		return b2.toString().split(",");
 	}
 	
-	public  String grabFeeHtml(String appNo, boolean isUnpublisedPatent) {
+	public static  String grabFeeHtml(String appNo, boolean isUnpublisedPatent) {
 		final String host = "cpquery.sipo.gov.cn";
 		final String feeQueryPath = "/txnQueryFeeData.do";
 		URIBuilder uriBuilder = new URIBuilder()
@@ -217,6 +217,30 @@ public class FeeCrawler {
 				uri = uriBuilder.build();
 			}
 			
+			ResponseHandler<String> feeResponseHanlder = new FeeResponseHandler();
+	        try (CloseableHttpClient httpClient = HttpClients.createDefault();) {
+				HttpGet httpget = new HttpGet(uri);
+				String html = httpClient.execute(httpget, feeResponseHanlder);
+				return html;
+	        }
+		} catch (Exception e) {
+			throw new FeeRetrieveError(e);
+		}
+	}
+	
+	
+	public static  String grabFeeHtml2(String appNo, boolean isUnpublisedPatent) {
+		final String host = "116.62.53.170:8080/company_patent_manage";
+		final String feeQueryPath = "/spiderFee/getFeeByAppNo.html";
+		URIBuilder uriBuilder = new URIBuilder()
+				.setScheme("http")
+				.setHost(host)
+				.setPath(feeQueryPath)
+				.setParameter("appNo", appNo);
+		
+		try {
+			URI uri = null;
+				uri = uriBuilder.build();
 			ResponseHandler<String> feeResponseHanlder = new FeeResponseHandler();
 	        try (CloseableHttpClient httpClient = HttpClients.createDefault();) {
 				HttpGet httpget = new HttpGet(uri);
@@ -277,6 +301,6 @@ public class FeeCrawler {
 		patents.add(p);
 		FeeCrawler fc = new FeeCrawler(patents);
 		fc.grabFees();*/
-		//System.out.println(grabFeeHtml("2016205340019",true));
+		//System.out.println(grabFeeHtml2("2016205340019",true));
 	}
 }
