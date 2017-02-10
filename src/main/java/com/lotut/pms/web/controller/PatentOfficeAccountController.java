@@ -167,6 +167,8 @@ public class PatentOfficeAccountController {
 		return "add_patent_success";
 	}
     
+    
+    //获取自动更新流（从阿里外包服务器）
     public InputStream  grabInputStream(String username,String password) {
 		CloseableHttpResponse response = null;
 		InputStream is = null;
