@@ -1,7 +1,9 @@
 package com.lotut.pms.service.utils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +11,9 @@ import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -302,5 +306,11 @@ public class FeeCrawler {
 		FeeCrawler fc = new FeeCrawler(patents);
 		fc.grabFees();*/
 		//System.out.println(grabFeeHtml2("2016205340019",true));
+		//System.out.println(grabInputStream("341222198912126576","1234566"));
 	}
+	
+	
+	
+	
+	
 }

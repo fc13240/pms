@@ -1,13 +1,22 @@
 package com.lotut.pms.web.controller;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,4 +155,50 @@ public class PatentOfficeAccountController {
 				}
         }
     }
+    
+    
+    @RequestMapping(path="/autoUpdatePatents2", method=RequestMethod.GET)
+	public String autoUpdatePatents2(@ModelAttribute PatentOfficeAccount account) throws Exception{
+		InputStream is=grabInputStream(account.getUsername(),account.getPassword());
+		boolean check=patentService.uploadPatents(is,account.getUserId());
+		if(check){
+			patentOfficeAccountService.updatePatentsTime(account.getAccountId());
+		}
+		return "add_patent_success";
+	}
+    
+    public InputStream  grabInputStream(String username,String password) {
+		CloseableHttpResponse response = null;
+		InputStream is = null;
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		final String host = "116.62.53.170:8080/company_patent_manage";
+		final String feeQueryPath = "/spiderFee/getInputStreamByAutoUpdate.html";
+		URIBuilder uriBuilder = new URIBuilder()
+				.setScheme("http")
+				.setHost(host)
+				.setPath(feeQueryPath)
+				.setParameter("username", username).setParameter("password", password);
+			URI uri = null;
+				try {
+					uri = uriBuilder.build();
+					HttpGet httpGet = new HttpGet(uri);
+					try {
+						response = httpClient.execute(httpGet);
+						 HttpEntity entity = response.getEntity();
+						 if(entity != null){
+							 is = entity.getContent();
+							 return is;
+						 }
+					} catch (ClientProtocolException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} catch (URISyntaxException e) {
+					e.printStackTrace();
+				}
+				return is;
+	    
+	}
+   
 }
