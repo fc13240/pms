@@ -33,7 +33,7 @@
 
 						<form id="brand" action="<s:url value='/brand/upload.html'/>" method="post" enctype="multipart/form-data" class="form-horizontal">  
 						<input style="display:none;"  id="brandFile" name="brandFile" type="file" />
-						<input class="selectPointOfInterest form-control"  style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
+						<input class="selectPointOfInterest form-control"  onclick="$('input[id=brandFile]').click();" style="width:300px;display:inline;" type="text" id="filename" name="filename" placeholder="请选择文件" readonly="readonly">
 						<button type="button" onclick="$('input[id=brandFile]').click();" class="t-btn3 button button-primary  button-rounded">浏览</button>
 						<button style="margin-left:5px;" type="submit" class="t-btn2 button button-caution button-rounded">上传</button>
 						</form> 

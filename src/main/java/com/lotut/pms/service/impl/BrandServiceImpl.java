@@ -12,9 +12,12 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lotut.pms.dao.BrandDao;
+import com.lotut.pms.dao.BrandManagementDao;
 import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandAndBrandCategory;
 import com.lotut.pms.domain.BrandCategory;
+import com.lotut.pms.domain.BrandLegalStatus;
+import com.lotut.pms.domain.BrandManagement;
 import com.lotut.pms.domain.BrandSearchCondition;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.WeChatOrder;
@@ -23,9 +26,11 @@ import com.lotut.pms.service.utils.BrandExcelParser;
 
 public class BrandServiceImpl implements BrandService{
 	private BrandDao brandDao;
+	private BrandManagementDao brandManagementDao;
 
-	public BrandServiceImpl(BrandDao brandDao) {
+	public BrandServiceImpl(BrandDao brandDao,BrandManagementDao brandManagementDao) {
 		this.brandDao = brandDao;
+		this.brandManagementDao=brandManagementDao;
 	}
 
 	@Override
@@ -88,8 +93,30 @@ public class BrandServiceImpl implements BrandService{
 	@Transactional
 	public boolean  addOrUpdateBrands(List<Brand> brands,List<BrandCategory> brandCategorys,int userId) {
 		brandDao.addBrandCategory(brandCategorys);
-		for (Brand brand: brands) {
-			 brandDao.insertOrUpdateBrand(brand);
+		for (int i = 0; i < brands.size(); i++) {
+			 Brand brand=brands.get(i);
+			 brandDao.insertOrUpdateBrand(brands.get(i));
+			 BrandManagement brandManagement=new BrandManagement();
+			 BrandLegalStatus legalStatus=new BrandLegalStatus();
+			 legalStatus.setLegalStatusId(1);
+			 brandManagement.setId(brand.getId());
+			 brandManagement.setUser(brand.getUser());
+			 brandManagement.setBrandCategory(brand.getBrandCategory());
+			 brandManagement.setName(brand.getName());
+			 brandManagement.setBrandNo(brand.getBrandNo());
+			 brandManagement.setSimilarNo(brand.getSimilarNo());
+			 brandManagement.setPrice(brand.getPrice());
+			 brandManagement.setTransactionMode(brand.getTransactionMode());
+			 brandManagement.setAppPerson(brand.getAppPerson());
+			 brandManagement.setScope(brand.getScope());
+			 brandManagement.setAppDate(brand.getAppDate());
+			 brandManagement.setOriginality(brand.getOriginality());
+			 brandManagement.setPublishDate(brand.getPublishDate());
+			 brandManagement.setImageUrl(brand.getImageUrl());
+			 brandManagement.setBrandLegalStatus(legalStatus);
+			 brandManagement.setTransactionStatus(1);
+			 brandManagementDao.insertOrUpdateBrand(brandManagement);
+			 brandManagementDao.insertUserBrand(userId, brandManagement.getId());
 		}
 		List<Map<String, Integer>> userBrandList = new ArrayList<>();
 		for (Brand brand: brands) {

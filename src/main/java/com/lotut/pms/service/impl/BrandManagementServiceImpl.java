@@ -185,8 +185,8 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 	}
 
 	@Override
-	public void changeBrandTransactionStatusTo0(String name) {
-		brandManagementDao.changeBrandTransactionStatusTo0(name);
+	public void changeBrandTransactionStatusTo0(int id) {
+		brandManagementDao.changeBrandTransactionStatusTo0(id);
 	}
 
 	
