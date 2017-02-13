@@ -96,7 +96,7 @@
 	</resultMap>
 	
 	<insert id="insertUserBrand" >
-		replace into user_brand_management(user,brand) values (#{userId},#{brandId})
+		insert ignore into user_brand_management(user,brand) values (#{userId},#{brandId})
 	</insert>
 	
 	<select id="getUserBrandManagementByPage" parameterType="Page" resultMap="brandManagementResultMap">

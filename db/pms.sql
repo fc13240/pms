@@ -1350,3 +1350,4 @@ alter table news add column click  INT DEFAULT 0 comment '新闻阅读量';
 ALTER TABLE brands MODIFY COLUMN brand_no VARCHAR(100) NULL;
 ALTER TABLE brands AUTO_INCREMENT = 2400;
 ALTER TABLE brand_management AUTO_INCREMENT = 2400;
+ ALTER TABLE brand_management ADD UNIQUE bm_brand_no(brand_no);

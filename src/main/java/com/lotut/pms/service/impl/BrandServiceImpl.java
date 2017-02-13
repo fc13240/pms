@@ -116,7 +116,9 @@ public class BrandServiceImpl implements BrandService{
 			 brandManagement.setBrandLegalStatus(legalStatus);
 			 brandManagement.setTransactionStatus(1);
 			 brandManagementDao.insertOrUpdateBrand(brandManagement);
+			 if(brandManagement.getId()!=0){
 			 brandManagementDao.insertUserBrand(userId, brandManagement.getId());
+			 }
 		}
 		List<Map<String, Integer>> userBrandList = new ArrayList<>();
 		for (Brand brand: brands) {
