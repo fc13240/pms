@@ -196,7 +196,7 @@
 		var target = document.getElementById('simple-table');
 		var spinner = new Spinner(opts).spin(target);		
 		$.ajax({
-			url: "<s:url value='/patentOfficeAccount/autoUpdatePatents.html'/>?username="+username + "&password="+password+"&accountId="+accountId+"&userId="+userId,
+			url: "<s:url value='/patentOfficeAccount/autoUpdatePatents2.html'/>?username="+username + "&password="+password+"&accountId="+accountId+"&userId="+userId,
 			type: 'get', 
 			success: function() {
 				spinner.stop();
