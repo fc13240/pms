@@ -57,14 +57,15 @@ public class PatentOfficeAccountController {
 		}
 		if (PrincipalUtils.isOrderProcessor()) {
 			accountType=1;
+			
 			List<PatentOfficeAccount> accounts = patentOfficeAccountService.getAllAccountByPage(page);
 			int totalRecords = patentOfficeAccountService.getAllAccountCount();
 			page.setTotalRecords(totalRecords);
 			model.addAttribute("accounts", accounts);
 			model.addAttribute("accountType", accountType);
+			model.addAttribute("userId", PrincipalUtils.getCurrentUserId());
 			model.addAttribute("page", page);
 		}else{
-			
 			int userId = PrincipalUtils.getCurrentUserId();
 			page.setUserId(userId);
 			List<PatentOfficeAccount> accounts = patentOfficeAccountService.getUserAccounts(page);
@@ -72,9 +73,9 @@ public class PatentOfficeAccountController {
 			page.setTotalRecords(totalRecords);
 			model.addAttribute("accounts", accounts);
 			model.addAttribute("accountType", accountType);
+			model.addAttribute("userId", PrincipalUtils.getCurrentUserId());
 			model.addAttribute("page", page);
 		}
-		
 		return "patent_office_account_list";
 		
 	}

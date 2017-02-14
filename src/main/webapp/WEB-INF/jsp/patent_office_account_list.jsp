@@ -78,9 +78,12 @@
 			                  		验证登录 
 			                  	</a>&nbsp;
 			                  	</c:if>
+			                  	<c:if test="${userId == account.userId}">
 			                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
 			                  		自动更新
-			                  	</a>&nbsp;
+			                  	</a>
+			                  	</c:if>
+			                  	&nbsp;
 			                  	<c:if test="${accountType==0}">
 
 								<a href="<s:url value='/patentOfficeAccount/detail.html'/>?accountId=<c:out value='${account.accountId}'/>"> 编辑 </a>	                  	
@@ -198,7 +201,7 @@
 		$.ajax({
 			url: "<s:url value='/patentOfficeAccount/autoUpdatePatents2.html'/>?username="+username + "&password="+password+"&accountId="+accountId+"&userId="+userId,
 			type: 'get', 
-			success: function() {
+			success: function(result) {
 				spinner.stop();
 				formutil.alertMessage('更新成功！',true);
 			},

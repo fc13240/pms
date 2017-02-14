@@ -34,7 +34,6 @@ public class PatentExcelParser {
 		try (Workbook wb = new HSSFWorkbook(fileInputStream); ) {
 			Sheet patentSheet = wb.getSheetAt(0);
 			List<Patent> patentRecords = parseSheet(patentSheet,userId);
-			
 			return patentRecords;
 		}
 	}
