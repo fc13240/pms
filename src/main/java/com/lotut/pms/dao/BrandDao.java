@@ -54,4 +54,10 @@ public interface BrandDao {
 	void deleteUserBrand(int userId,int brandId);
 	
 	void deleteBrandById(int brandId);
+	
+	void changeBrandTransactionStatus(Brand brand);
+	
+	Brand getBrandsByBrandId(int id);
+	
+	void changeSellStatus(int sellStatus,int id);
 }

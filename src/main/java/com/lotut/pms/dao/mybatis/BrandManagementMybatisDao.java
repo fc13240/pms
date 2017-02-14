@@ -183,6 +183,11 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 		brandManagementMapper.changeBrandTransactionStatusTo0(name);
 	}
 
+	@Override
+	public void changeBrandTransactionStatusByBrandNo(BrandManagement brandManagement) {
+		brandManagementMapper.changeBrandTransactionStatusByBrandNo(brandManagement);
+	}
+
 	
 
 	

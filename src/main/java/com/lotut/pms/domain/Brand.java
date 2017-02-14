@@ -32,6 +32,7 @@ public class Brand {
 	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd")
 	private Date endDate;
 	private String imageUrl;
+	private int transactionStatus;
 
 	public int getId() {
 		return id;
@@ -164,6 +165,12 @@ public class Brand {
 	}
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+	public int getTransactionStatus() {
+		return transactionStatus;
+	}
+	public void setTransactionStatus(int transactionStatus) {
+		this.transactionStatus = transactionStatus;
 	}
 	
 	

@@ -66,13 +66,9 @@
 							  <th class="center" width="20px">序号</th>
 							  <th width="">商标名称</th>
 							  <th width="">注册号</th>
-							 <!--  <th width="">组合类型 </th> -->
 							  <th width="">类别</th>
-							  <!-- <th width="">商品列表</th>
-							  <th width="">类似群组</th>
-							  <th width="">有效期限</th> -->
 							  <th width="">价格</th>
-							  <th width="">上下架状态</th>
+							  <th width="150px">交易状态</th>
 							  <th width="">审核状态</th>
 							  <th width="">推荐状态</th>
 							  <th width="350px">操作</th>
@@ -84,20 +80,19 @@
 									<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
 									<td style="text-align:center">${brand.name }</td>
 									<td style="text-align:center">${brand.brandNo }</td>
-									<%-- <td style="text-align:center">${brand.combinationType }</td> --%>
 									<td style="text-align:center">${brand.brandCategory.categoryName }</td>
-									<%-- <td style="text-align:center">${brand.scope }</td>
-									<td style="text-align:center">${brand.similarNo }</td>
-									<td style="text-align:center"><fmt:formatDate value="${brand.startDate }" pattern="yyyy年MM月dd日"/>至<fmt:formatDate value="${brand.endDate }" pattern="yyyy年MM月dd日"/></td> --%>
 									<td style="text-align:center">${brand.price }</td>
-									<td style="text-align:center"><c:if test="${brand.sellStatus==1 }">
-											<font color="red">出售中</font>
-										</c:if> 
-										<c:if test="${brand.sellStatus==2 }">
-											<font color="black">下架</font>
-										</c:if>  
-									</td>
 									<td style="text-align:center">
+										<select style="width:140px;" class="selectPointOfInterest form-control" onchange="changeTransactionStatus(${brand.id },this.value)">
+											<!-- <option value="0"></option> -->
+											<option value="1" <c:if test="${brand.transactionStatus==1 }">selected="selected"</c:if>>待交易</option>
+											<option value="2" <c:if test="${brand.transactionStatus==2 }">selected="selected"</c:if>>已预订</option>
+											<option value="3" <c:if test="${brand.transactionStatus==3 }">selected="selected"</c:if>>已付款待变更</option>
+											<option value="4" <c:if test="${brand.transactionStatus==4 }">selected="selected"</c:if>>已变更待合格</option>
+											<option value="5" <c:if test="${brand.transactionStatus==5 }">selected="selected"</c:if>>交易成功</option>
+										</select>
+									</td>
+									<td style="text-align:center;">
 										<c:if test="${brand.checkStatus==1 }">
 											<font color="black">审核通过</font>
 										</c:if> 
@@ -311,6 +306,19 @@ function updateRecommendStatus(id,checkStatus){
 		}
 	});
 	
+}
+
+function changeTransactionStatus(brandId,transactionStatus){
+	$.ajax({
+		type : "get",
+		url :"<s:url value='/brand/changeBrandTransactionStatus.html?id='/>"+brandId+"&transactionStatus="+transactionStatus,
+		success : function (data){
+			
+		},error :function (){
+			alert("出现未知错误，请稍后再试！");
+		}
+		
+	})
 }
 </script>
 </body>

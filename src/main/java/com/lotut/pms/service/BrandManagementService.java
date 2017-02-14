@@ -81,5 +81,6 @@ public interface BrandManagementService {
 
 	void changeBrandTransactionStatusTo0(String name);
 
-
+	void changeBrandTransactionStatusByBrandNo(BrandManagement brandManagement);
+	
 }

@@ -1348,3 +1348,5 @@ create table if not exists brand_notice_remark(
 alter table user_brand_management add column monitor_status int default 0 comment '0 未被监控，1 处于监控中';
 alter table news add column click  INT DEFAULT 0 comment '新闻阅读量';
 ALTER TABLE brands MODIFY COLUMN brand_no VARCHAR(100) NULL;
+
+ALTER TABLE brands ADD COLUMN transaction_status INT DEFAULT 1 COMMENT '0 待发布,1 待交易,2 已预订, 3 已付款待变更,4 已变更待合格, 5 交易成功';
