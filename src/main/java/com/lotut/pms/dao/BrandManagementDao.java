@@ -80,11 +80,7 @@ public interface BrandManagementDao {
 
 	void changeBrandTransactionStatus(int brandId);
 	
-<<<<<<< HEAD
-	void changeBrandTransactionStatusTo0(String name);
-	
 	void changeBrandTransactionStatusByBrandNo(BrandManagement brandManagement);
-=======
+
 	void changeBrandTransactionStatusTo0(int id);
->>>>>>> fd4362f0ebf0a7a0d949bb28b4666b71f9926094
 }

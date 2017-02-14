@@ -189,7 +189,4 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 	}
 
 	
-
-	
-	
 }
