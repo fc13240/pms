@@ -716,12 +716,24 @@ public class BrandController {
 			brandService.addOrEditBrand(brand);
 			brandService.insertUserBrand(userId, brand.getId());
 			brandManagementService.changeBrandTransactionStatus(brandId);
-
-			
 		}
 		pw.write("success");
 	}
 	
-	
-
+	@RequestMapping(path="/changeBrandTransactionStatus")
+	public void changeBrandTransactionStatus(@ModelAttribute Brand brand,PrintWriter pw){ 
+		brandService.changeBrandTransactionStatus(brand);
+		Brand modifyBrand =  brandService.getBrandsByBrandId(brand.getId());
+		if(brand.getTransactionStatus()==1){
+			brandService.changeSellStatus(1, brand.getId());
+		}else if(brand.getTransactionStatus()>1){
+			brandService.changeSellStatus(2, brand.getId());
+		}
+		BrandManagement bm = new BrandManagement();
+		bm.setBrandNo(modifyBrand.getBrandNo());
+		bm.setName(modifyBrand.getName());
+		bm.setTransactionStatus(brand.getTransactionStatus());
+		brandManagementService.changeBrandTransactionStatusByBrandNo(bm);
+		pw.write("success");
+	}
 }

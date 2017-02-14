@@ -24,6 +24,7 @@
 		<result property="originality" column="originality"/>
 		<result property="caseStatus" column="case_status"/>
 		<result property="imageUrl" column="image_url"/>
+		<result property="transactionStatus" column="transaction_status"/>
 		<association property="user" javaType="User">
 			<id property="userId" column="user"/>
 			<result property="username" column="username"/>
@@ -51,14 +52,14 @@
   	<select id="getUserBrandsByPage" parameterType="Page" resultMap="brandResultMap">
   		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
   			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,b.image_url,
-  			   b.originality,b.case_status,bc.category_name,u.username from brands b left join brand_category bc on  b.category_id=bc.category_id 
+  			   b.originality,b.case_status,bc.category_name,u.username,b.transaction_status from brands b left join brand_category bc on  b.category_id=bc.category_id 
   			   left join users u on b.user=u.user_id where  b.sell_status=1 and b.id in (select brand from user_brands where user =#{userId}) limit #{startIndex},#{pageSize}
   	</select>
   	
   	<select id="getBrandsByPage" parameterType="Page" resultMap="brandResultMap">
   		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
   			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,b.image_url,
-  			   b.originality,b.case_status,bc.category_name,u.username from brands b left join brand_category bc on  b.category_id=bc.category_id 
+  			   b.originality,b.case_status,bc.category_name,u.username,b.transaction_status from brands b left join brand_category bc on  b.category_id=bc.category_id 
   			   left join users u on b.user=u.user_id where  b.sell_status=1 limit #{startIndex},#{pageSize}
   	</select>
   	
@@ -72,7 +73,7 @@
   	<select id="getUserBrandsById"  parameterType="int" resultMap="brandResultMap">
   		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
   			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,b.image_url,
-  			   b.originality,b.case_status,bc.category_name from brands b left join brand_category bc on  b.category_id=bc.category_id 
+  			   b.originality,b.case_status,bc.category_name,b.transaction_status from brands b left join brand_category bc on  b.category_id=bc.category_id 
   			    where b.id=#{brandId} 
   	</select>
   	 
@@ -89,7 +90,7 @@
   		<bind name="keyword_pattern" value="'%' +keyword + '%'"/>
   		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
   			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,b.image_url,
-  			   b.originality,b.case_status,bc.category_name,u.username from brands b left join brand_category bc on  b.category_id=bc.category_id 
+  			   b.originality,b.case_status,bc.category_name,u.username,b.transaction_status from brands b left join brand_category bc on  b.category_id=bc.category_id 
   			   left join users u on b.user=u.user_id where b.id in (select brand from user_brands where user =#{userId}) and b.sell_status=1
   			   <if test="categoryId!=null">
 					and b.category_id=#{categoryId}
@@ -119,7 +120,7 @@
   		<bind name="keyword_pattern" value="'%' +keyword + '%'"/>
   		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
   			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,b.image_url,
-  			   b.originality,b.case_status,bc.category_name,u.username from brands b left join brand_category bc on  b.category_id=bc.category_id 
+  			   b.originality,b.case_status,bc.category_name,u.username,b.transaction_status from brands b left join brand_category bc on  b.category_id=bc.category_id 
   			   left join users u on b.user=u.user_id where b.sell_status=1
   			   <if test="categoryId!=null">
 					and b.category_id=#{categoryId}
@@ -228,5 +229,17 @@
 	<delete id="deleteBrandById" parameterType="int">
   		delete from brands where id=#{brandId}
   	</delete>
+  	
+  	<update id="changeBrandTransactionStatus" parameterType="Brand">
+		update brands set transaction_status=#{transactionStatus} where id=#{id}
+  	</update>
+  	
+  	<select id="getBrandsByBrandId" parameterType="int" resultType="Brand">
+  		select id,name,brand_no as brandNo from brands where id=#{id}
+  	</select>
+  	
+  	<update id="changeSellStatus">
+  		update brands set sell_status=#{sellStatus} where id=#{id}
+  	</update>
 </mapper>
   

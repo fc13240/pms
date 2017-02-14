@@ -83,5 +83,5 @@ public interface BrandManagementMapper {
 
 	void changeBrandTransactionStatusTo0(@Param("id")int id);
 
-	
+	void changeBrandTransactionStatusByBrandNo(BrandManagement brandManagement);
 }

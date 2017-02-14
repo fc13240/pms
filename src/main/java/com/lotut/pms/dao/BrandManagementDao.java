@@ -80,5 +80,7 @@ public interface BrandManagementDao {
 
 	void changeBrandTransactionStatus(int brandId);
 	
+	void changeBrandTransactionStatusByBrandNo(BrandManagement brandManagement);
+
 	void changeBrandTransactionStatusTo0(int id);
 }

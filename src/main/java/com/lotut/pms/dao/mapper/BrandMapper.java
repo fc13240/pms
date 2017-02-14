@@ -56,4 +56,10 @@ public interface BrandMapper {
 	void deleteUserBrand(@Param("userId")int userId,@Param("brandId")int brandId);
 	
 	void deleteBrandById(int brandId);
+	
+	void changeBrandTransactionStatus(Brand brand);
+	
+	Brand getBrandsByBrandId(int id);
+	
+	void changeSellStatus(@Param("sellStatus") int sellStatus,@Param("id") int id);
 }

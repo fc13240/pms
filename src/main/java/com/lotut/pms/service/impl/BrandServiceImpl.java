@@ -190,4 +190,19 @@ public class BrandServiceImpl implements BrandService{
 	public void deleteBrandById(int brandId) {
 		brandDao.deleteBrandById(brandId);
 	}
+
+	@Override
+	public void changeBrandTransactionStatus(Brand brand) {
+		brandDao.changeBrandTransactionStatus(brand);
+	}
+
+	@Override
+	public Brand getBrandsByBrandId(int id) {
+		return brandDao.getBrandsByBrandId(id);
+	}
+
+	@Override
+	public void changeSellStatus(int sellStatus, int id) {
+		brandDao.changeSellStatus(sellStatus, id);
+	}
 }
