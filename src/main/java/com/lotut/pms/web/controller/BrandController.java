@@ -207,7 +207,7 @@ public class BrandController {
 	public void deleteBrand(int brandId, PrintWriter pw) {
 		int userId=PrincipalUtils.getCurrentUserId();
 		Brand brand=brandService.getUserBrandsById(brandId);
-		brandManagementService.changeBrandTransactionStatusTo0(brand.getName());
+		brandManagementService.changeBrandTransactionStatusTo0(brand.getId());
 		brandService.deleteUserBrand(userId, brandId);
 		brandService.deleteBrand(brandId);
 		brandService.deleteBrandById(brandId);
@@ -668,6 +668,7 @@ public class BrandController {
 		int userId = PrincipalUtils.getCurrentUserId();
 		user.setUserId(userId);
 		brand.setUser(user);
+		brand.setId(brandManagement.getId());
 		brand.setBrandCategory(brandManagement.getBrandCategory());
 		brand.setName(brandManagement.getName());
 		brand.setBrandNo(brandManagement.getBrandNo());
@@ -699,6 +700,7 @@ public class BrandController {
 			int userId = PrincipalUtils.getCurrentUserId();
 			user.setUserId(userId);
 			brand.setUser(user);
+			brand.setId(brandManagement.getId());
 			brand.setBrandCategory(brandManagement.getBrandCategory());
 			brand.setName(brandManagement.getName());
 			brand.setBrandNo(brandManagement.getBrandNo());

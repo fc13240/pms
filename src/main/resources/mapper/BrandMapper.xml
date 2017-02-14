@@ -151,10 +151,10 @@
   	</update>
  
   	<insert id="addOrEditBrand" parameterType="Brand" useGeneratedKeys="true" keyProperty="id">
-		insert into brands(address,category_id,brand_no,name,
+		insert into brands(id,address,category_id,brand_no,name,
 		combination_type,similar_no,transaction_mode,price,scope,
 		app_person,app_date,publish_date,start_date,end_date,originality,case_status,user,check_status,image_url)
-		values(#{address},#{brandCategory.categoryId},#{brandNo},
+		values(#{id},#{address},#{brandCategory.categoryId},#{brandNo},
 		 #{name},#{combinationType},#{similarNo},#{transactionMode},#{price},#{scope},#{appPerson},
 		 #{appDate,javaType=date,jdbcType=DATE},#{publishDate,javaType=date,jdbcType=DATE},#{startDate,javaType=date,jdbcType=DATE},
 		 #{endDate,javaType=date,jdbcType=DATE},#{originality},#{caseStatus},#{user.userId},3,#{imageUrl})
@@ -170,10 +170,10 @@
 	</insert> 
  
   	<insert id="insertOrUpdateBrand" parameterType="Brand" useGeneratedKeys="true" keyProperty="id">
-		insert into brands(address,category_id,brand_no,name,
+		insert into brands(id,address,category_id,brand_no,name,
 		combination_type,similar_no,transaction_mode,price,scope,
 		app_person,app_date,publish_date,start_date,end_date,originality,case_status,user,check_status,image_url,sell_status)
-		values(#{address},#{brandCategory.categoryId},#{brandNo},
+		values(#{id},#{address},#{brandCategory.categoryId},#{brandNo},
 		 #{name},#{combinationType},#{similarNo},#{transactionMode},#{price},#{scope},#{appPerson},
 		 #{appDate,javaType=date,jdbcType=DATE},#{publishDate,javaType=date,jdbcType=DATE},#{startDate,javaType=date,jdbcType=DATE},
 		 #{endDate,javaType=date,jdbcType=DATE},#{originality},#{caseStatus},#{user.userId},1,#{imageUrl},1)
@@ -213,7 +213,7 @@
 	</insert>
 	
 	<insert id="addBrandCategory">
-		replace into brand_category (category_id,category_name) 
+		insert ignore into brand_category (category_id,category_name) 
 		values
 		<foreach item="userBrandCategoryRecord" collection="list" separator=",">
 

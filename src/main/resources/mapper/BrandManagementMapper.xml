@@ -78,9 +78,9 @@
 		 #{name},#{transactionStatus},#{similarNo},#{transactionMode},#{price},#{scope},#{appPerson},
 		 #{appDate,javaType=date,jdbcType=DATE},#{publishDate,javaType=date,jdbcType=DATE},#{originality},#{caseStatus},#{user.userId},
 		 #{imageUrl},#{proxyFile},#{businessLicense},#{entityLicense},#{individualLicense},#{identityCard},#{application})
-		 on duplicate key update id=#{id}, 
+		 on duplicate key update  
 			legal_status=#{brandLegalStatus.legalStatusId},category_id=#{brandCategory.categoryId},
-			name=#{name},transaction_status=#{transactionStatus},app_no=#{appNo},brand_no=#{brandNo},
+			name=#{name},transaction_status=#{transactionStatus},app_no=#{appNo},
 			similar_no=#{similarNo},transaction_mode=#{transactionMode},price=#{price},scope=#{scope},
 			app_person=#{appPerson},app_date=#{appDate,javaType=date,jdbcType=DATE},
 			publish_date=#{publishDate,javaType=date,jdbcType=DATE},
@@ -470,8 +470,8 @@
   		update brand_management set transaction_status=1 where id=#{brandId}
   	</update>
   	
-  	<update id="changeBrandTransactionStatusTo0"  parameterType="string">
-  		update brand_management set transaction_status=0 where name=#{name}
+  	<update id="changeBrandTransactionStatusTo0"  parameterType="int">
+  		update brand_management set transaction_status=0 where id=#{id}
   	</update>
   	
   	<update id="changeBrandTransactionStatusByBrandNo" parameterType="BrandManagement">

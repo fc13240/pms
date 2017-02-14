@@ -179,8 +179,8 @@ public class BrandManagementMybatisDao extends SqlSessionDaoSupport implements B
 	}
 
 	@Override
-	public void changeBrandTransactionStatusTo0(String name) {
-		brandManagementMapper.changeBrandTransactionStatusTo0(name);
+	public  void changeBrandTransactionStatusTo0(int id){
+		brandManagementMapper.changeBrandTransactionStatusTo0(id);
 	}
 
 	@Override

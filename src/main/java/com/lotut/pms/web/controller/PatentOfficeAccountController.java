@@ -179,7 +179,7 @@ public class PatentOfficeAccountController {
 				.setScheme("http")
 				.setHost(host)
 				.setPath(feeQueryPath)
-				.setParameter("username", username).setParameter("password", password);
+				.setParameter("userName", username).setParameter("passWord", password);
 			URI uri = null;
 				try {
 					uri = uriBuilder.build();
