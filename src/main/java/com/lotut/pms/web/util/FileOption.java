@@ -134,12 +134,16 @@ public class FileOption {
 	}
 	
 	public static void brandManagementFileOption(int userId,MultipartFile multipartFile,String saveDir,HttpServletResponse response,String saveUrl) throws DocumentException {
+		Date now = new Date(); 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式
+		String time = dateFormat.format(now); 
 		saveDir+=userId+"/";
 		saveUrl+=userId+"/";
-		String filename=multipartFile.getOriginalFilename();
+		String filename=time+"_"+multipartFile.getOriginalFilename();
 		String savePath=saveDir + filename;
-		String saveDatabaseUrl=saveUrl+filename+".html";
+		String saveDatabaseUrl=saveUrl+filename;
 		File fileDir = new File(saveDir);
+		
 		try {
 			if(!fileDir.exists()){
 				fileDir.mkdir();
@@ -160,7 +164,7 @@ public class FileOption {
 				JpgToPdf.imgToPdf(savePath, pdfFilePath);
 				File jpgSaveFile=new File(savePath);
 				jpgSaveFile.delete();
-				String savePdfUrl=saveUrl+filename.substring(1,filename.lastIndexOf("."))+".pdf"+".html";
+				String savePdfUrl=saveUrl+filename.substring(0,filename.lastIndexOf("."))+".pdf";
 				WebUtils.writeJsonStrToResponse(response,savePdfUrl);
 			}else{
 			WebUtils.writeJsonStrToResponse(response,saveDatabaseUrl);
@@ -218,8 +222,8 @@ public class FileOption {
 	
 	
 	public static void main(String[] args) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String ymd = sdf.format(new Date());
-		System.out.println(ymd);
+		String url="opt/media/brandProxy/2.jpg.html";
+		String savePdfUrl=url.substring(0,url.lastIndexOf("."))+".pdf"+".html";
+		System.out.println(savePdfUrl);
 	}
 }

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -736,4 +737,65 @@ public class BrandController {
 		brandManagementService.changeBrandTransactionStatusByBrandNo(bm);
 		pw.write("success");
 	}
+	
+	
+	@RequestMapping(path="/downloadFile")
+	public void downloadFile(int brandId,HttpServletResponse response, HttpServletRequest request) throws Exception{ 
+		String rootPath=Settings.BRAND_MANAGEMENT_PATH;
+		BrandManagement brand=brandManagementService.showBrandManagementDetail(brandId);
+		String proxyFile=brand.getProxyFile();
+		String businessLicense=brand.getBusinessLicense();
+		String individualLicense=brand.getIndividualLicense();
+		String entityLicense=brand.getEntityLicense();
+		String identityCard=brand.getIdentityCard();
+		String application=brand.getApplication();
+		String proxyFileUrl="";
+		String businessLicenseUrl ="";
+		String entityLicenseUrl ="";
+		String identityCardUrl ="";
+		String applicationUrl ="";
+		String individualLicenseUrl="";
+		proxyFileUrl = rootPath+proxyFile;
+		businessLicenseUrl = rootPath+businessLicense;
+		individualLicenseUrl =rootPath+ individualLicense;
+		entityLicenseUrl = rootPath+entityLicense;
+		identityCardUrl = rootPath+identityCard;
+		applicationUrl = rootPath+application;
+		List<File> files=new ArrayList<>();
+		if(proxyFile.length()!=0){
+		files.add(new File(proxyFileUrl));
+		}
+		if(businessLicense.length()!=0){
+			files.add(new File(businessLicenseUrl));
+		}
+		if(individualLicense.length()!=0){
+			files.add(new File(individualLicenseUrl));
+			}
+		if(identityCard.length()!=0){
+			files.add(new File(identityCardUrl));
+			}
+		if(entityLicense.length()!=0){
+			files.add(new File(entityLicenseUrl));
+			}
+		if(application.length()!=0){
+			files.add(new File(applicationUrl));
+			}
+		String zipPath=brandId+"_"+"商标证书";
+		String targetPath=Settings.BRAND_MANAGEMENT_PATH+zipPath+".zip";
+		WebUtils.packZip(files, targetPath);
+		String downloadFileName = URLEncoder
+				.encode(zipPath+".zip", "UTF8");
+		if ("FF".equals(WebUtils.getBrowser(request))) {
+			// 针对火狐浏览器处理
+			downloadFileName = new String((zipPath+".zip").getBytes("UTF-8"),
+					"iso-8859-1");
+		}
+		
+		response.setContentType("application/octet-stream ");
+		response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
+		File targetFile=new File(targetPath);
+		response.setContentLength((int) targetFile.length());
+		WebUtils.writeStreamToResponse(response, new FileInputStream(targetFile));
+	}
+	
 }
