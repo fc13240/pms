@@ -135,11 +135,11 @@ public class FileOption {
 	
 	public static void brandManagementFileOption(int userId,MultipartFile multipartFile,String saveDir,HttpServletResponse response,String saveUrl) throws DocumentException {
 		Date now = new Date(); 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");//可以方便地修改日期格式
 		String time = dateFormat.format(now); 
 		saveDir+=userId+"/";
 		saveUrl+=userId+"/";
-		String filename=time+"_"+multipartFile.getOriginalFilename();
+		String filename=time+multipartFile.getOriginalFilename();
 		String savePath=saveDir + filename;
 		String saveDatabaseUrl=saveUrl+filename;
 		File fileDir = new File(saveDir);
