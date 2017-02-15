@@ -1,5 +1,7 @@
 package com.lotut.pms.service.impl;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -192,6 +194,51 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 	@Override
 	public void changeBrandTransactionStatusByBrandNo(BrandManagement brandManagement) {
 		brandManagementDao.changeBrandTransactionStatusByBrandNo(brandManagement);
+	}
+
+	@Override
+	public List<File> packZip(int brandId) {
+		String rootPath=Settings.BRAND_MANAGEMENT_PATH;
+		BrandManagement brand=brandManagementDao.showBrandManagementDetail(brandId);
+		String proxyFile=brand.getProxyFile();
+		String businessLicense=brand.getBusinessLicense();
+		String individualLicense=brand.getIndividualLicense();
+		String entityLicense=brand.getEntityLicense();
+		String identityCard=brand.getIdentityCard();
+		String application=brand.getApplication();
+		String proxyFileUrl="";
+		String businessLicenseUrl ="";
+		String entityLicenseUrl ="";
+		String identityCardUrl ="";
+		String applicationUrl ="";
+		String individualLicenseUrl="";
+		proxyFileUrl = rootPath+proxyFile;
+		businessLicenseUrl = rootPath+businessLicense;
+		individualLicenseUrl =rootPath+ individualLicense;
+		entityLicenseUrl = rootPath+entityLicense;
+		identityCardUrl = rootPath+identityCard;
+		applicationUrl = rootPath+application;
+		List<File> files=new ArrayList<>();
+		if(proxyFile.length()!=0){
+		files.add(new File(proxyFileUrl));
+		}
+		if(businessLicense.length()!=0){
+			files.add(new File(businessLicenseUrl));
+		}
+		if(individualLicense.length()!=0){
+			files.add(new File(individualLicenseUrl));
+			}
+		if(identityCard.length()!=0){
+			files.add(new File(identityCardUrl));
+			}
+		if(entityLicense.length()!=0){
+			files.add(new File(entityLicenseUrl));
+			}
+		if(application.length()!=0){
+			files.add(new File(applicationUrl));
+			}
+		
+		return files;
 	}
 
 	

@@ -741,45 +741,7 @@ public class BrandController {
 	
 	@RequestMapping(path="/downloadFile")
 	public void downloadFile(int brandId,HttpServletResponse response, HttpServletRequest request) throws Exception{ 
-		String rootPath=Settings.BRAND_MANAGEMENT_PATH;
-		BrandManagement brand=brandManagementService.showBrandManagementDetail(brandId);
-		String proxyFile=brand.getProxyFile();
-		String businessLicense=brand.getBusinessLicense();
-		String individualLicense=brand.getIndividualLicense();
-		String entityLicense=brand.getEntityLicense();
-		String identityCard=brand.getIdentityCard();
-		String application=brand.getApplication();
-		String proxyFileUrl="";
-		String businessLicenseUrl ="";
-		String entityLicenseUrl ="";
-		String identityCardUrl ="";
-		String applicationUrl ="";
-		String individualLicenseUrl="";
-		proxyFileUrl = rootPath+proxyFile;
-		businessLicenseUrl = rootPath+businessLicense;
-		individualLicenseUrl =rootPath+ individualLicense;
-		entityLicenseUrl = rootPath+entityLicense;
-		identityCardUrl = rootPath+identityCard;
-		applicationUrl = rootPath+application;
-		List<File> files=new ArrayList<>();
-		if(proxyFile.length()!=0){
-		files.add(new File(proxyFileUrl));
-		}
-		if(businessLicense.length()!=0){
-			files.add(new File(businessLicenseUrl));
-		}
-		if(individualLicense.length()!=0){
-			files.add(new File(individualLicenseUrl));
-			}
-		if(identityCard.length()!=0){
-			files.add(new File(identityCardUrl));
-			}
-		if(entityLicense.length()!=0){
-			files.add(new File(entityLicenseUrl));
-			}
-		if(application.length()!=0){
-			files.add(new File(applicationUrl));
-			}
+		List<File> files=brandManagementService.packZip(brandId);
 		String zipPath=brandId+"_"+"商标证书";
 		String targetPath=Settings.BRAND_MANAGEMENT_PATH+zipPath+".zip";
 		WebUtils.packZip(files, targetPath);

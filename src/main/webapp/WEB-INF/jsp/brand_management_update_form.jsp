@@ -359,6 +359,41 @@ function uploadEntrustClick(){
 }
 
 ///上传委托书
+function uploadProxyFile(){
+	var uploadForm=$("#uploadProxyFileForm");
+	var option={
+			dataType : "json",
+			data : {"file":$("#brandProxyFile").val()},
+			beforeSubmit : function (){
+				var filename = $("#brandProxyFileName").val();
+				var suffix = filename.toLowerCase().substr(filename.lastIndexOf(".")+1);
+				if(suffix=="pdf"||suffix=="jpg"||suffix=="png"||suffix=="jpeg"){
+					return true;
+				}else{
+					alert("请上传pdf或格式如jpg、png、jpeg的图片！");
+					return false;
+				}
+			},
+			success : function (result){
+				$("#brandProxyFileHidden").val(result);
+				$("#brandProxyFileName").val("");
+				alert("上传成功");
+				//alert(result);
+			}
+	}
+	uploadForm.ajaxSubmit(option);
+}
+
+$('input[id=brandProxyFile]').change(function(){
+	$("#brandProxyFileName").val($(this).val());
+})
+
+function uploadProxyClick(){
+	$("#uploadProxyFileBtn").trigger("click");
+}
+
+///上传企业营业执照
+
 function uploadBusinessLicenseFile(){
 	var uploadForm=$("#uploadBusinessLicenseFileForm");
 	var option={

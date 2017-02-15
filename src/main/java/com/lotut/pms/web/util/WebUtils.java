@@ -91,7 +91,6 @@ public class WebUtils {
 	       //File[] file1 = {new File("d:/a.txt"),new File("d:/b.txt"),new File("d:/aa.txt"),new File("d:/bb.txt")};   
 	  
 	       for(int i=0;i<file1.size();i++) {
-	    	   if(file1.get(i)!=null){
 	  
 	           FileInputStream fis = new FileInputStream(file1.get(i));   
 	  
@@ -112,10 +111,7 @@ public class WebUtils {
 	           fis.close();   
 	  
 	       }   
-	  
-	        out.close();   
-	       }
-		
+	       out.close();   
 	}
 	
 	public static void main(String[] args) throws Exception {   

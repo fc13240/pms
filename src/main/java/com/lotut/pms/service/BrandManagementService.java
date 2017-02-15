@@ -1,5 +1,6 @@
 package com.lotut.pms.service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -82,5 +83,7 @@ public interface BrandManagementService {
 	void changeBrandTransactionStatusTo0(int id);
 
 	void changeBrandTransactionStatusByBrandNo(BrandManagement brandManagement);
+	
+	List<File> packZip(int brandId);
 	
 }
