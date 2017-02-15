@@ -79,16 +79,8 @@ public class WebUtils {
 	
 	public static void packZip(List<File> file1,String strZipName) throws IOException{
 		byte[] buffer = new byte[1024];   
-		  
-	       //生成的ZIP文件名为Demo.zip   
-	  
-	      //  strZipName = "d:/Demo.zip";   
 	  
 	       ZipOutputStream out = new ZipOutputStream(new FileOutputStream(strZipName));   
-	  
-	       //需要同时下载的两个文件result.txt ，source.txt   
-	  
-	       //File[] file1 = {new File("d:/a.txt"),new File("d:/b.txt"),new File("d:/aa.txt"),new File("d:/bb.txt")};   
 	  
 	       for(int i=0;i<file1.size();i++) {
 	  
@@ -110,8 +102,10 @@ public class WebUtils {
 	  
 	           fis.close();   
 	  
-	       }   
-	       out.close();   
+	          
+	       }
+	       out.close(); 
+		
 	}
 	
 	public static void main(String[] args) throws Exception {   
