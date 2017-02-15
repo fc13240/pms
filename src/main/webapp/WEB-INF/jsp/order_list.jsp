@@ -166,9 +166,17 @@
 							<tr>
 							  <td class="center">${status.count}</td>
 							                <td>
-							                
-							
-							<a href="http://so.lotut.com/index.php/fee/search?keyword=${fee.patent.appNo}" target="_black">${fee.patent.appNo}</a>
+							<a href="http://cpquery.sipo.gov.cn/txnQueryFeeData.do?select-key:shenqingh=${fee.patent.appNo}&select-key:gonggaobj=0&select-
+
+																key:zhuanlilx=1&select-key:backPage=http%3A%2F%2Fcpquery.sipo.gov.cn%2FtxnQueryOrdinaryPatents.do%3Fselect-key%3Ashenqingh
+																
+																%3D2017100200389%26select-key%3Azhuanlimc%3D%26select-key%3Ashenqingrxm%3D%26select-key%3Azhuanlilx%3D%26select-key
+																
+																%3Ashenqingr_from%3D%26select-key%3Ashenqingr_to%3D%26verycode%3D13%26inner-flag%3Aopen-type%3Dwindow%26inner-flag%3Aflowno
+																
+																%3D1484538249539&inner-flag:open-type=window&inner-flag:flowno=1484538251659" style="font-size:medium;margin-right: 100px;" 
+																
+																target="_blank">${fee.patent.appNo}</a>
 							</td>
 							<td>${fee.patent.name}</td>
 							<td>${fee.patent.firstAppPerson}</td>
