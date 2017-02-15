@@ -53,20 +53,20 @@
   		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
   			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,b.image_url,
   			   b.originality,b.case_status,bc.category_name,u.username,b.transaction_status from brands b left join brand_category bc on  b.category_id=bc.category_id 
-  			   left join users u on b.user=u.user_id where  b.sell_status=1 and b.id in (select brand from user_brands where user =#{userId}) limit #{startIndex},#{pageSize}
+  			   left join users u on b.user=u.user_id where  b.id in (select brand from user_brands where user =#{userId}) limit #{startIndex},#{pageSize}
   	</select>
   	
   	<select id="getBrandsByPage" parameterType="Page" resultMap="brandResultMap">
   		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
   			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,b.image_url,
   			   b.originality,b.case_status,bc.category_name,u.username,b.transaction_status from brands b left join brand_category bc on  b.category_id=bc.category_id 
-  			   left join users u on b.user=u.user_id where  b.sell_status=1 limit #{startIndex},#{pageSize}
+  			   left join users u on b.user=u.user_id limit #{startIndex},#{pageSize}
   	</select>
   	
   	
   	<select id="getBrandsCounts" resultType="int">
   		select count(*) from brands b left join brand_category bc on  b.category_id=bc.category_id 
-  			   left join users u on b.user=u.user_id where  b.sell_status=1 
+  			   left join users u on b.user=u.user_id 
   	</select>
   	
   	
@@ -91,7 +91,7 @@
   		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
   			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,b.image_url,
   			   b.originality,b.case_status,bc.category_name,u.username,b.transaction_status from brands b left join brand_category bc on  b.category_id=bc.category_id 
-  			   left join users u on b.user=u.user_id where b.id in (select brand from user_brands where user =#{userId}) and b.sell_status=1
+  			   left join users u on b.user=u.user_id where b.id in (select brand from user_brands where user =#{userId})
   			   <if test="categoryId!=null">
 					and b.category_id=#{categoryId}
   			   </if>
@@ -101,12 +101,12 @@
   			   limit #{page.startIndex},#{page.pageSize}
   	</select>
   	<select id="getUserBrandsCount" parameterType="int" resultType="int">
-  		select count(*) from brands b where b.id in (select brand from user_brands where user =#{userId}) and b.sell_status=1 
+  		select count(*) from brands b where b.id in (select brand from user_brands where user =#{userId})
   	</select>
   	
   	<select id="getsearchUserBrandsCount" parameterType="BrandSearchCondition" resultType="int">
   		<bind name="keyword_pattern" value="'%' +keyword + '%'"/>
-  		select count(*) from brands b where b.id in (select brand from user_brands where user =#{userId}) and b.sell_status=1
+  		select count(*) from brands b where b.id in (select brand from user_brands where user =#{userId})
   			   <if test="categoryId!=null">
 					and b.category_id=#{categoryId}
   			   </if>
@@ -121,7 +121,7 @@
   		select b.id,b.user,b.address,b.check_status,b.sell_status,b.is_recommend,b.category_id,b.brand_no,b.name,b.combination_type,
   			   b.similar_no,b.scope,b.transaction_mode,b.price,b.app_person,b.app_date,b.publish_date,b.start_date,b.end_date,b.image_url,
   			   b.originality,b.case_status,bc.category_name,u.username,b.transaction_status from brands b left join brand_category bc on  b.category_id=bc.category_id 
-  			   left join users u on b.user=u.user_id where b.sell_status=1
+  			   left join users u on b.user=u.user_id where 1=1
   			   <if test="categoryId!=null">
 					and b.category_id=#{categoryId}
   			   </if>
@@ -133,7 +133,7 @@
   	
   	<select id="getsearchBrandsCount" parameterType="BrandSearchCondition" resultType="int">
   		<bind name="keyword_pattern" value="'%' +keyword + '%'"/>
-  		select count(*) from brands b where b.sell_status=1
+  		select count(*) from brands b where 1=1
   			   <if test="categoryId!=null">
 					and b.category_id=#{categoryId}
   			   </if>
