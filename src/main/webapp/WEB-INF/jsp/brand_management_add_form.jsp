@@ -134,7 +134,7 @@ height:37px;
 									<tr>
 										<th>注册号</th>
 										<td>
-										<input class="form-control" style="width:600px;"  name="brandNo"  maxlength="30"/>
+										<input class="form-control" style="width:600px;"  placeholder="请输入注册号号" name="brandNo"  maxlength="30" required/>
 										</td>
 									</tr>
 									<tr>

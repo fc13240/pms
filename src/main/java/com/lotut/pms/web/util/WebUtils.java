@@ -83,7 +83,7 @@ public class WebUtils {
 	       ZipOutputStream out = new ZipOutputStream(new FileOutputStream(strZipName));   
 	  
 	       for(int i=0;i<file1.size();i++) {
-	  
+	    	   
 	           FileInputStream fis = new FileInputStream(file1.get(i));   
 	  
 	           out.putNextEntry(new ZipEntry(file1.get(i).getName()));   

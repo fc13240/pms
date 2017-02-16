@@ -125,12 +125,12 @@ height:37px;
 										<input class="form-control" style="width:600px;" value="${brand.appNo}" name="appNo"  maxlength="30"/>
 										</td>
 									</tr>
-									<tr>
+									<%-- <tr>
 										<th>注册号</th>
 										<td>
 										<input class="form-control" style="width:600px;"  value="${brand.brandNo}" name="brandNo"  maxlength="30"/>
 										</td>
-									</tr>		
+									</tr>		 --%>
 									<tr>
 										<th>类似群号</th>
 										<td>
