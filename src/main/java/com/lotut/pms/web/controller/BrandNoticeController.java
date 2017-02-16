@@ -209,7 +209,7 @@ public class BrandNoticeController {
     	String fatherPath=Settings.BRAND_MANAGEMENT_NOTICE_PATH;
     	String saveUrl=fatherPath.substring(Settings.BRAND_MANAGEMENT_PATH.length()-1);
     	int userId=PrincipalUtils.getCurrentUserId();
-    	FileOption.brandManagementFileOption(userId, file, fatherPath, response,saveUrl);
+    	FileOption.brandManagementNoticeFileOption(userId, file, fatherPath, response,saveUrl);
     }
 	
 	@RequestMapping(path="/saveBrandNotice")
