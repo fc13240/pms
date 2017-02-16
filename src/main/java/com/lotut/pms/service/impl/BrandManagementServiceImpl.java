@@ -219,22 +219,22 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 		identityCardUrl = rootPath+identityCard;
 		applicationUrl = rootPath+application;
 		List<File> files=new ArrayList<>();
-		if(proxyFile.length()!=0){
+		if(proxyFile.length()!=0 || proxyFile !=""){
 		files.add(new File(proxyFileUrl));
 		}
-		if(businessLicense.length()!=0){
+		if(businessLicense.length()!=0 || businessLicense !=""){
 			files.add(new File(businessLicenseUrl));
 		}
-		if(individualLicense.length()!=0){
+		if(individualLicense.length()!=0 || individualLicense!=""){
 			files.add(new File(individualLicenseUrl));
 			}
-		if(identityCard.length()!=0){
+		if(identityCard.length()!=0 || identityCard!=""){
 			files.add(new File(identityCardUrl));
 			}
-		if(entityLicense.length()!=0){
+		if(entityLicense.length()!=0 ||entityLicense!=""){
 			files.add(new File(entityLicenseUrl));
 			}
-		if(application.length()!=0){
+		if(application.length()!=0 || application!=""){
 			files.add(new File(applicationUrl));
 			}
 		

@@ -155,7 +155,7 @@ public class BrandManagement {
 	}
 	public String getImageUrl() {
 		if(this.imageUrl==null){
-			this.imageUrl="";
+			return "";
 		}
 		return imageUrl;
 	}
@@ -164,7 +164,7 @@ public class BrandManagement {
 	}
 	public String getProxyFile() {
 		if(this.proxyFile==null){
-			this.proxyFile="";
+			return "";
 		}
 		return proxyFile;
 	}
@@ -173,7 +173,7 @@ public class BrandManagement {
 	}
 	public String getBusinessLicense() {
 		if(this.businessLicense==null){
-			this.businessLicense="";
+			return "";
 		}
 		return businessLicense;
 	}
@@ -182,7 +182,7 @@ public class BrandManagement {
 	}
 	public String getEntityLicense() {
 		if(this.entityLicense==null){
-			this.entityLicense="";
+			return "";
 		}
 		return entityLicense;
 	}
@@ -191,7 +191,7 @@ public class BrandManagement {
 	}
 	public String getIdentityCard() {
 		if(this.identityCard==null){
-			this.identityCard="";
+			return "";
 		}
 		return identityCard;
 	}
@@ -200,7 +200,7 @@ public class BrandManagement {
 	}
 	public String getApplication() {
 		if(this.application==null){
-			this.application="";
+			return "";
 		}
 		return application;
 	}
