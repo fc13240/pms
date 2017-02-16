@@ -232,7 +232,7 @@
 							<c:out value="${brand.name}"/>
 							</a>
 							</c:if>
-							<c:if test="${brand.imageUrl == '' && brand.proxyFile == '' && brand.businessLicense == '' && brand.individualLicense == '' && brand.entityLicense == '' && 
+							<c:if test="${brand.proxyFile == '' && brand.businessLicense == '' && brand.individualLicense == '' && brand.entityLicense == '' && 
 								brand.identityCard == '' && brand.application == '' }">
 								<c:out value="${brand.name}"/>
 							</c:if>
