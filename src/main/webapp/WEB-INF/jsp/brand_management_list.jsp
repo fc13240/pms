@@ -560,7 +560,7 @@ $(function () {
 				window.location.reload();
 			},
 			error : function (){
-				formutil.alertMessage('出现异常错误，请稍后再试');
+				formutil.alertMessage('选中的包含已加入的商标，请重新选择后再加入');
 			}
 		})
 	}
