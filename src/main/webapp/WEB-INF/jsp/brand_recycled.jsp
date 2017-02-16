@@ -107,18 +107,11 @@
 							<td style="text-align:center"><c:out value="${brand.brandCategory.categoryId }"/>
 							<br/><c:out value="${brand.brandCategory.categoryName }"/></td>
 							<td style="text-align:center">
-								<a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${brand.appNo}" target="_blank">
 									<c:out value="${brand.appNo}"/>
-								</a>
 								<br/>
-								<a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${brand.brandNo}" target="_blank">
 									<c:out value="${brand.brandNo}"/>
-								</a>
 							</td>
 							<td class="hidden-480" style="text-align:center"><c:out value="${brand.name}"/>
-							<br/><a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${brand.imageUrl}" target="_blank">
-									下载图样
-								</a>
 							</td>
 							<td style="text-align:center">
 								<c:out value='${brand.appPerson}'/>
