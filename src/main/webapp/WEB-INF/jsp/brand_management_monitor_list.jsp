@@ -126,9 +126,9 @@
 									<c:out value="${brand.appNo}"/>
 								<!-- </a> -->
 								<br/>
-								<a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${brand.brandNo}" target="_blank">
+								<%-- <a href="<s:url value='/patent/getOverviewPatent.html'/>?appNo=${brand.brandNo}" target="_blank"> --%>
 									<c:out value="${brand.brandNo}"/>
-								</a>
+								<!-- </a> -->
 							</td>
 							<td class="hidden-480" style="text-align:center"><c:out value="${brand.name}"/>
 							<br/>

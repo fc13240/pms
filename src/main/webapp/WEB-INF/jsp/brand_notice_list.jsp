@@ -850,8 +850,8 @@ function changeNoticeReadStatus(noticeId){
 			type: 'get', 
 			dataType:"text",
 			success: function(totalCount) {
-				$("#unreadNoticeCountForA").text("未查看"+totalCount+"件");
-				$("#readStatusSpan"+noticeId).html("已查看");
+				/* $("#unreadNoticeCountForA").text("未查看"+totalCount+"件");
+				$("#readStatusSpan"+noticeId).html("已查看"); */
 			}
 		});		
 	}, 100);	
