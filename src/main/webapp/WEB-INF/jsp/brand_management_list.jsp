@@ -238,8 +238,8 @@
 							</c:if>
 							<br/>
 							<c:if test="${not empty brand.imageUrl}">
-								<a href="<s:url value='/brand/downloadImage.html'/>?name=${brand.name }&downloadPath=${brand.imageUrl}" target="_blank">
-									下载图样
+								<a href="<s:url value='/brand/downloadFile.html'/>?brandId=${brand.id}" target="_blank">
+									下载
 								</a>
 							</c:if>
 							</td>
