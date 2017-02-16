@@ -174,6 +174,43 @@ public class FileOption {
 		}
 	}
 	
+	public static void brandManagementNoticeFileOption(int userId,MultipartFile multipartFile,String saveDir,HttpServletResponse response,String saveUrl) throws DocumentException {
+		saveDir+=userId+"/";
+		saveUrl+=userId+"/";
+		String filename=multipartFile.getOriginalFilename();
+		String savePath=saveDir + filename;
+		String saveDatabaseUrl=saveUrl+filename+".html";
+		File fileDir = new File(saveDir);
+		try {
+			if(!fileDir.exists()){
+				fileDir.mkdir();
+			}
+			InputStream is = multipartFile.getInputStream();
+			int BUFFER_SIZE = 8*1024;
+			byte [] buffer = new byte[BUFFER_SIZE];
+			try(OutputStream outputStream = new FileOutputStream(savePath);){
+				int bytesRead = -1;
+				while ((bytesRead = is.read(buffer)) != -1) {
+					outputStream.write(buffer, 0, bytesRead);
+				}
+				outputStream.flush();
+				outputStream.close();
+			}
+			if (!filename.endsWith(".pdf")) {
+				String pdfFilePath=saveDir+filename.substring(0,filename.lastIndexOf("."))+".pdf";
+				JpgToPdf.imgToPdf(savePath, pdfFilePath);
+				File jpgSaveFile=new File(savePath);
+				jpgSaveFile.delete();
+				String savePdfUrl=saveUrl+filename.substring(1,filename.lastIndexOf("."))+".pdf"+".html";
+				WebUtils.writeJsonStrToResponse(response,savePdfUrl);
+			}else{
+			WebUtils.writeJsonStrToResponse(response,saveDatabaseUrl);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private static boolean deleteDir(File dir) {
 		if (dir.isDirectory()) {
 			String[] children = dir.list();
