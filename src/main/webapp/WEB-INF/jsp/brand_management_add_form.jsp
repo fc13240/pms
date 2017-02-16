@@ -397,7 +397,7 @@ function uploadBusinessLicenseFile(){
 				}
 			},
 			success : function (result){
-				$("#brandBusinessLicenseFileHidden").val(result);
+				$("#brandBusinessLicenseHidden").val(result);
 				$("#brandBusinessLicenseFileName").val("");
 				alert("上传成功");
 			}
@@ -431,7 +431,7 @@ function uploadEntityLicenseFile(){
 				}
 			},
 			success : function (result){
-				$("#brandEntityLicenseFileHidden").val(result);
+				$("#brandEntityLicenseHidden").val(result);
 				$("#brandEntityLicenseFileName").val("");
 				alert("上传成功");
 			}
@@ -465,7 +465,7 @@ function uploadIndividualLicenseFile(){
 				}
 			},
 			success : function (result){
-				$("#brandIndividualLicenseFileHidden").val(result);
+				$("#brandIndividualLicenseHidden").val(result);
 				$("#brandIndividualLicenseFileName").val("");
 				alert("上传成功");
 			}
@@ -499,7 +499,7 @@ function uploadIdentityCardFile(){
 				}
 			},
 			success : function (result){
-				$("#brandIdentityCardFileHidden").val(result);
+				$("#brandIdentityCardHidden").val(result);
 				$("#brandIdentityCardFileName").val("");
 				alert("上传成功");
 			}
@@ -532,7 +532,7 @@ function uploadApplicationFile(){
 				}
 			},
 			success : function (result){
-				$("#brandApplicationFileHidden").val(result);
+				$("#brandApplicationHidden").val(result);
 				$("#brandApplicationFileName").val("");
 				alert("上传成功");
 			}

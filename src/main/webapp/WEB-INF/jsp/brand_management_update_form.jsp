@@ -410,7 +410,7 @@ function uploadBusinessLicenseFile(){
 				}
 			},
 			success : function (result){
-				$("#brandBusinessLicenseFileHidden").val(result);
+				$("#brandBusinessLicenseHidden").val(result);
 				$("#brandBusinessLicenseFileName").val("");
 				alert("上传成功");
 			}
@@ -444,7 +444,7 @@ function uploadEntityLicenseFile(){
 				}
 			},
 			success : function (result){
-				$("#brandEntityLicenseFileHidden").val(result);
+				$("#brandEntityLicenseHidden").val(result);
 				$("#brandEntityLicenseFileName").val("");
 				alert("上传成功");
 			}
@@ -478,7 +478,7 @@ function uploadIndividualLicenseFile(){
 				}
 			},
 			success : function (result){
-				$("#brandIndividualLicenseFileHidden").val(result);
+				$("#brandIndividualLicenseHidden").val(result);
 				$("#brandIndividualLicenseFileName").val("");
 				alert("上传成功");
 			}
@@ -512,7 +512,7 @@ function uploadIdentityCardFile(){
 				}
 			},
 			success : function (result){
-				$("#brandIdentityCardFileHidden").val(result);
+				$("#brandIdentityCardHidden").val(result);
 				$("#brandIdentityCardFileName").val("");
 				alert("上传成功");
 			}
@@ -545,7 +545,7 @@ function uploadApplicationFile(){
 				}
 			},
 			success : function (result){
-				$("#brandApplicationFileHidden").val(result);
+				$("#brandApplicationHidden").val(result);
 				$("#brandApplicationFileName").val("");
 				alert("上传成功");
 			}
@@ -561,20 +561,7 @@ function uploadApplicationClick(){
 	$("#uploadApplicationFileBtn").trigger("click");
 }
 
-function deleteShareUser(brandId,shareUserId,index) {
-	$.ajax({
-		url : "<s:url value='/brand/deleteShareUser.html'/>?brandId="+ brandId +"&shareUserId="+shareUserId,
-		type : "get",
-		success : function(data) {
-			$("#shareUser"+index).remove();
-		},
-		error : function() {
-			alert("操作失败，请稍后再试！");
-		}
-	})
-}
 </script>
-
 <script type="text/javascript">
 var mydateInput = document.getElementById("appDateId");
 var date = new Date();

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -736,4 +737,27 @@ public class BrandController {
 		brandManagementService.changeBrandTransactionStatusByBrandNo(bm);
 		pw.write("success");
 	}
+	
+	
+	@RequestMapping(path="/downloadFile")
+	public void downloadFile(int brandId,HttpServletResponse response, HttpServletRequest request) throws Exception{ 
+		List<File> files=brandManagementService.packZip(brandId);
+		String zipPath=brandId+"_"+"商标证书";
+		String targetPath=Settings.BRAND_MANAGEMENT_PATH+zipPath+".zip";
+		WebUtils.packZip(files, targetPath);
+		String downloadFileName = URLEncoder
+				.encode(zipPath+".zip", "UTF8");
+		if ("FF".equals(WebUtils.getBrowser(request))) {
+			// 针对火狐浏览器处理
+			downloadFileName = new String((zipPath+".zip").getBytes("UTF-8"),
+					"iso-8859-1");
+		}
+		
+		response.setContentType("application/octet-stream ");
+		response.setHeader("Content-Disposition", "attachment;filename=" + downloadFileName);
+		File targetFile=new File(targetPath);
+		response.setContentLength((int) targetFile.length());
+		WebUtils.writeStreamToResponse(response, new FileInputStream(targetFile));
+	}
+	
 }
