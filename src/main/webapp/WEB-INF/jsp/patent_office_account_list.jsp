@@ -73,11 +73,9 @@
 			                <td style="text-align:center"><c:out value="${account.password}"/></td>
 			                <td style="text-align:center"><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			                <td style="text-align:center">
-			                	<c:if test="${accountType==0}">
 			                	<a href="JavaScript:void(0)" onclick="checkLogin('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
 			                  		验证登录 
 			                  	</a>&nbsp;
-			                  	</c:if>
 			                  	<c:if test="${userId == account.userId}">
 			                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
 			                  		自动更新
