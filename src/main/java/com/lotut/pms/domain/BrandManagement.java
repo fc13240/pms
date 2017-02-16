@@ -154,36 +154,54 @@ public class BrandManagement {
 		this.caseStatus = caseStatus;
 	}
 	public String getImageUrl() {
+		if(this.imageUrl==null){
+			this.imageUrl="";
+		}
 		return imageUrl;
 	}
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
 	public String getProxyFile() {
+		if(this.proxyFile==null){
+			this.proxyFile="";
+		}
 		return proxyFile;
 	}
 	public void setProxyFile(String proxyFile) {
 		this.proxyFile = proxyFile;
 	}
 	public String getBusinessLicense() {
+		if(this.businessLicense==null){
+			this.businessLicense="";
+		}
 		return businessLicense;
 	}
 	public void setBusinessLicense(String businessLicense) {
 		this.businessLicense = businessLicense;
 	}
 	public String getEntityLicense() {
+		if(this.entityLicense==null){
+			this.entityLicense="";
+		}
 		return entityLicense;
 	}
 	public void setEntityLicense(String entityLicense) {
 		this.entityLicense = entityLicense;
 	}
 	public String getIdentityCard() {
+		if(this.identityCard==null){
+			this.identityCard="";
+		}
 		return identityCard;
 	}
 	public void setIdentityCard(String identityCard) {
 		this.identityCard = identityCard;
 	}
 	public String getApplication() {
+		if(this.application==null){
+			this.application="";
+		}
 		return application;
 	}
 	public void setApplication(String application) {
