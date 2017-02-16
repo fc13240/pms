@@ -148,12 +148,6 @@
 					  				<td width="6%">
 										<button style="margin-left:10px;width:140px;" class="button button-rounded button-highlight" onclick="batchAddStarTargetNotices()">批量加入星标通知</button>
 									</td>
-									<td align="right">
-										<span class="span3" style="font-size:18px;font-weight:bold;">
-										<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" id="unreadNoticeCountForA">未查看${unreadNoticeCount}件
-										</a>
-										</span>
-							  		</td>	
 											
 					  			</tr>
 					  		</table>		
