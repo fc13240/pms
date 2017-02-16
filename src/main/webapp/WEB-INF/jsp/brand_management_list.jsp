@@ -226,14 +226,14 @@
 									<c:out value="${brand.brandNo}"/>
 							</td>
 							<td class="hidden-480" style="text-align:center">
-							<c:if test="${brand.proxyFile != null || brand.businessLicense != null || brand.individualLicense != null || brand.entityLicense != null || 
-								brand.identityCard != null || brand.application != null }">
+							<c:if test="${brand.proxyFile != '' || brand.businessLicense != '' || brand.individualLicense != '' || brand.entityLicense != '' || 
+								brand.identityCard != '' || brand.application != '' }">
 							<a href="<s:url value='/brand/downloadFile.html'/>?brandId=${brand.id}" target="_blank">
 							<c:out value="${brand.name}"/>
 							</a>
 							</c:if>
-							<c:if test="${brand.proxyFile == null && brand.businessLicense == null && brand.individualLicense == null && brand.entityLicense == null && 
-								brand.identityCard == null && brand.application == null }">
+							<c:if test="${brand.imageUrl == '' && brand.proxyFile == '' && brand.businessLicense == '' && brand.individualLicense == '' && brand.entityLicense == '' && 
+								brand.identityCard == '' && brand.application == '' }">
 								<c:out value="${brand.name}"/>
 							</c:if>
 							<br/>
