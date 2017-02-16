@@ -237,9 +237,9 @@
 								</td >
 								
 								<td style="text-align:center">
-									<a href="<s:url value='/notice/showFriends.html'/>?brands=<c:out value='${notice.brand.id}'/>">
+									<%-- <a href="<s:url value='/notice/showFriends.html'/>?brands=<c:out value='${notice.brand.id}'/>">
 									  分享
-									  </a>&nbsp;
+									  </a>&nbsp; --%>
 									  <a target="_blank" href="<s:url value='/brandNotice/getBrandNoticeRemark.html'/>?brandNoticeId=${notice.noticeId}">
 								            备注
 								    </a>
