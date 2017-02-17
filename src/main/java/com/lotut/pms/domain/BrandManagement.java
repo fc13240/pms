@@ -57,9 +57,6 @@ public class BrandManagement {
 		this.id = id;
 	}
 	
-	public String getIndividualLicense() {
-		return individualLicense;
-	}
 	public void setIndividualLicense(String individualLicense) {
 		this.individualLicense = individualLicense;
 	}
@@ -153,9 +150,17 @@ public class BrandManagement {
 	public void setCaseStatus(String caseStatus) {
 		this.caseStatus = caseStatus;
 	}
+	
+	public String getIndividualLicense() {
+		if(this.individualLicense==null){
+			this.setIndividualLicense("");;
+		}
+		return individualLicense;
+	}
+	
 	public String getImageUrl() {
 		if(this.imageUrl==null){
-			return "";
+			this.setImageUrl("");;
 		}
 		return imageUrl;
 	}
@@ -164,7 +169,7 @@ public class BrandManagement {
 	}
 	public String getProxyFile() {
 		if(this.proxyFile==null){
-			return "";
+			this.setProxyFile("");
 		}
 		return proxyFile;
 	}
@@ -173,7 +178,7 @@ public class BrandManagement {
 	}
 	public String getBusinessLicense() {
 		if(this.businessLicense==null){
-			return "";
+			this.setBusinessLicense("");
 		}
 		return businessLicense;
 	}
@@ -182,7 +187,7 @@ public class BrandManagement {
 	}
 	public String getEntityLicense() {
 		if(this.entityLicense==null){
-			return "";
+			this.setEntityLicense("");
 		}
 		return entityLicense;
 	}
@@ -191,7 +196,7 @@ public class BrandManagement {
 	}
 	public String getIdentityCard() {
 		if(this.identityCard==null){
-			return "";
+			this.setIdentityCard("");
 		}
 		return identityCard;
 	}
@@ -200,7 +205,7 @@ public class BrandManagement {
 	}
 	public String getApplication() {
 		if(this.application==null){
-			return "";
+			this.setApplication("");
 		}
 		return application;
 	}
@@ -251,7 +256,11 @@ public class BrandManagement {
 		BrandManagement m = new BrandManagement();
 		System.out.println(m.getProxyFile());
 		String d= null;
-		System.out.println(d.length());
+		String p=m.getProxyFile();
+		m.setProxyFile(null);
+		
+		//System.out.println(d.length());
+		System.out.println(m);
 	}
 }
 
