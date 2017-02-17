@@ -79,12 +79,18 @@ public class BrandManagement {
 		this.user = user;
 	}
 	public String getAppNo() {
+		if(this.appNo!=null){
+			return appNo.trim();
+		}
 		return appNo;
 	}
 	public void setAppNo(String appNo) {
 		this.appNo = appNo;
 	}
 	public String getBrandNo() {
+		if(this.brandNo!=null){
+			return brandNo.trim();
+		}
 		return brandNo;
 	}
 	public void setBrandNo(String brandNo) {
@@ -97,6 +103,9 @@ public class BrandManagement {
 		this.name = name;
 	}
 	public String getSimilarNo() {
+		if(this.similarNo!=null){
+			return similarNo.trim();
+		}
 		return similarNo;
 	}
 	public void setSimilarNo(String similarNo) {
