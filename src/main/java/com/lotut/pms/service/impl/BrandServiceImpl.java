@@ -115,6 +115,25 @@ public class BrandServiceImpl implements BrandService{
 			 brandManagement.setImageUrl(brand.getImageUrl());
 			 brandManagement.setBrandLegalStatus(legalStatus);
 			 brandManagement.setTransactionStatus(1);
+			 if(brandManagement.getIdentityCard()==null){
+				 brandManagement.setIdentityCard("");
+			 }
+			 if(brandManagement.getBusinessLicense()==""){
+				 brandManagement.setBusinessLicense("");
+			 }
+			 if(brandManagement.getEntityLicense()==null){
+				 brandManagement.setEntityLicense("");
+			 }
+			 if(brandManagement.getProxyFile()==null){
+				 brandManagement.setProxyFile("");
+			 }
+			 if(brandManagement.getIndividualLicense()==null){
+				 brandManagement.setIndividualLicense("");
+			 }
+			 if(brandManagement.getApplication()==null){
+				 brandManagement.setApplication("");
+			 }
+			
 			 brandManagementDao.insertOrUpdateBrand(brandManagement);
 			 if(brandManagement.getId()!=0){
 			 brandManagementDao.insertUserBrand(userId, brandManagement.getId());

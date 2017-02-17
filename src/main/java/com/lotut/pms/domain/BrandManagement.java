@@ -246,5 +246,12 @@ public class BrandManagement {
 			return "其他";
 		}
 	}
+	
+	public static void main(String[] args) {
+		BrandManagement m = new BrandManagement();
+		System.out.println(m.getProxyFile());
+		String d= null;
+		System.out.println(d.length());
+	}
 }
 

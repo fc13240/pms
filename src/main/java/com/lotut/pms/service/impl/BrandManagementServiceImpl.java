@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.util.StringUtils;
+
 import com.lotut.pms.constants.Settings;
 import com.lotut.pms.dao.BrandManagementDao;
 import com.lotut.pms.domain.Brand;
@@ -219,22 +221,22 @@ public class BrandManagementServiceImpl implements BrandManagementService{
 		identityCardUrl = rootPath+identityCard;
 		applicationUrl = rootPath+application;
 		List<File> files=new ArrayList<>();
-		if(proxyFile.length()!=0 || proxyFile !=""){
+		if(StringUtils.isEmpty(proxyFile)==false){
 		files.add(new File(proxyFileUrl));
 		}
-		if(businessLicense.length()!=0 || businessLicense !=""){
+		if(StringUtils.isEmpty(businessLicense)==false){
 			files.add(new File(businessLicenseUrl));
 		}
-		if(individualLicense.length()!=0 || individualLicense!=""){
+		if(StringUtils.isEmpty(individualLicense)==false){
 			files.add(new File(individualLicenseUrl));
 			}
-		if(identityCard.length()!=0 || identityCard!=""){
+		if(StringUtils.isEmpty(identityCard)==false){
 			files.add(new File(identityCardUrl));
 			}
-		if(entityLicense.length()!=0 ||entityLicense!=""){
+		if(StringUtils.isEmpty(entityLicense)==false){
 			files.add(new File(entityLicenseUrl));
 			}
-		if(application.length()!=0 || application!=""){
+		if(StringUtils.isEmpty(application)==false){
 			files.add(new File(applicationUrl));
 			}
 		
