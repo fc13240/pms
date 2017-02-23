@@ -339,7 +339,7 @@ function gotoPageForEnter(event) {
 function setUserOrderToPaid(orderId){
 	$.ajax({
 		url: "<s:url value='/order/setUserOrderToPaid.html'/>?orderId=" + orderId, 
-		type: 'get', 
+		type: 'get',
 		success: function() {
 			location.reload();
 		}
@@ -358,7 +358,7 @@ function setUserOrderToPaidSuccess(orderId){
 function setUserOrderToSelfServicePay(orderId){
 	$.ajax({
 		url: "<s:url value='/order/setUserOrderToSelfServicePay.html'/>?orderId=" + orderId, 
-		type: 'get', 
+		type: 'get',
 		success: function() {
 			location.reload();
 		}
