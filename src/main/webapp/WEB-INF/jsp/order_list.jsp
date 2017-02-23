@@ -121,6 +121,9 @@
 						<span style="margin-left:100px;">
 							<button type="submit" style="margin-top:3px;width:120px" class="button button-rounded button-highlight">导出费用清单</button>
 						</span>
+						<span style="margin-left:100px;">
+							<button type="button" style="width:140px;margin-left:15px" class="button button-rounded button-highlight" onclick="setUserOrderToSelfServicePay (${order.id})">置为已自助缴费</button>
+						</span>
 				      </div>
 				      <table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <tr>
@@ -391,6 +394,15 @@
 				location.reload();
 			}
 		});		
+	}
+	function setUserOrderToSelfServicePay(orderId){
+		$.ajax({
+			url: "<s:url value='/order/setUserOrderToSelfServicePay.html'/>?orderId=" + orderId, 
+			type: 'get', 
+			success: function() {
+				location.reload();
+			}
+		});
 	}
 </script>
 </body>

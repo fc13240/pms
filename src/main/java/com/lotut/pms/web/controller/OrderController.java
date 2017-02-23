@@ -283,9 +283,9 @@ public class OrderController {
 	
 	@RequestMapping(path="/setUserOrderToSelfServicePay", method=RequestMethod.GET)
 	public void setUserOrderToSelfServicePay(@RequestParam("orderId")long orderId,PrintWriter pw){
-			if (PrincipalUtils.isOrderProcessor()) {
-				orderService.setUserOrderToSelfServicePay(orderId);
-			}
+			//if (PrincipalUtils.isOrderProcessor()) {
+			orderService.setUserOrderToSelfServicePay(orderId);
+			//}
 			pw.write("success");
 	}
 
