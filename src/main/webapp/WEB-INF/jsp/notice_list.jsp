@@ -743,9 +743,9 @@ function changePaperApplyType(notice, selectElement) {
 					Ok: function() {
 						$(this).dialog("close");
 					}
-				}	
+				},
+				
 			});
-			
 		}
 	});			
 }
