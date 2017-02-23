@@ -519,7 +519,7 @@
 								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td>
 								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this);">
-									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
+									<c:forEach items="${paperApplyTypes}" var="paperApplyType" begin="${notice.paperApplyType.paperTypeId -1}"> 
 										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
 									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
 									  	>
@@ -549,7 +549,7 @@
 								<c:if test="${notice.patent.ownerId==user.userId}">
 								<td style="text-align:center">
 								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this)">
-									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
+									<c:forEach items="${paperApplyTypes}" var="paperApplyType" begin="${notice.paperApplyType.paperTypeId -1}"> 
 										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
 									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
 									  	>
