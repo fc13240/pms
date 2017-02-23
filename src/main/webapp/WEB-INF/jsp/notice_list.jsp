@@ -746,6 +746,7 @@ function changePaperApplyType(notice, selectElement) {
 				},
 				
 			});
+			location.reload();
 		}
 	});			
 }
@@ -790,7 +791,6 @@ function changeRoleUserPaperApplyType(notice,selectElement) {
 					}
 				}	
 			});
-			
 		}
 	});			
 }
