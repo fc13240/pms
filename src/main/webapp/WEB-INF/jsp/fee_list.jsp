@@ -80,6 +80,9 @@
 						  <button class="button button-primary  button-rounded" style="font-weight:500;font-size:16px;">立即交费</button>
 						  </a>
 						  </span>
+						  <span style="color:red;">
+						   		风险提示：请用户认真核对查询费用信息，龙图腾对费用信息造成的不良后果不承担任何法律责任；
+						   </span>
 						</th>
 					  </tr>
 					  <tr>
