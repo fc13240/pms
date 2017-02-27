@@ -174,7 +174,7 @@ public class PatentOfficeAccountController {
 		CloseableHttpResponse response = null;
 		InputStream is = null;
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-		final String host = "www.yhzlpt.com";
+		final String host = "60.174.195.212:8145/spms";
 		final String feeQueryPath = "/spiderFee/getInputStreamByAutoUpdate.html";
 		URIBuilder uriBuilder = new URIBuilder()
 				.setScheme("http")
