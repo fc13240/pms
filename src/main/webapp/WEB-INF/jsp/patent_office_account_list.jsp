@@ -43,8 +43,12 @@
 							           </a>
 						            <%-- </c:if>  --%>
 					          </div>
-			          	</span> 
+			          	</span>
+			          	
 			          </div>
+			          <span style="color:red;">
+						   		友情提示：尊敬的用户，自动更新开放时间调整为夜间21:00-24:00
+						   </span> 
 			        <table id="simple-table" class="table table-striped table-bordered table-hover" >
 			          <thead>
 			            <tr class="simple_bag">
@@ -289,12 +293,11 @@
 <script type="text/javascript">
 window._SS=setInterval(function(){
 	var t=new Date();
-	if(t.getHours()>=21&&t.getMinutes()>10){
+	if(t.getHours()>=21&&t.getHours()<=24){
 		$(".show-hide").show();
-	}
-	if(t.getHours()>=23&&t.getMinutes()>=40){
-	clearInterval(window._SS);
-	$(".show-hide").hide();
+	}else{
+		clearInterval(window._SS);
+		$(".show-hide").hide();
 	}
 	},0.5*1000);
 </script>
