@@ -300,6 +300,7 @@ window._SS=setInterval(function(){
 		$(".show-hide").hide();
 	}
 	},0.5*1000);
+	
 </script>
 </body>
 </html>
