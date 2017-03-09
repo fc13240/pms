@@ -53,7 +53,7 @@
 				   allowImageUpload : true,
 				   afterBlur: function(){this.sync();},
 				   syncType:"auto",
-				   items:[
+				   /* items:[
 				          'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
 				          'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
 				          'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
@@ -62,7 +62,7 @@
 				          'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
 				          'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
 				          'anchor', 'link', 'unlink'
-				  		],
+				  		], */
 				   afterCreate : function() {
 						var self = this;
 						K.ctrl(document, 13, function() {
