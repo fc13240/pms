@@ -37,14 +37,18 @@
 					<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> 
 						<span class="input-group-btn" >
 					          <div class="ta-top" style="margin:8px;">
-						          <c:if test="${accountType==0}"> 
+						          <%-- <c:if test="${accountType==0}"> --%> 
 							          <a href="<s:url value='/patentOfficeAccount/add_form.html'/>">
 							            <button style="width:220px;" class="button button-primary  button-rounded">添加中国专利电子申请的账户</button>  
 							           </a>
-						            </c:if> 
+						            <%-- </c:if>  --%>
 					          </div>
-			          	</span> 
+			          	</span>
+			          	
 			          </div>
+			          <span style="color:red;">
+						   		友情提示：尊敬的用户，自动更新开放时间调整为夜间21:00-24:00
+						   </span> 
 			        <table id="simple-table" class="table table-striped table-bordered table-hover" >
 			          <thead>
 			            <tr class="simple_bag">
@@ -73,16 +77,16 @@
 			                <td style="text-align:center"><c:out value="${account.password}"/></td>
 			                <td style="text-align:center"><fmt:formatDate value="${account.patentUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			                <td style="text-align:center">
-			                	<a href="JavaScript:void(0)" onclick="checkLogin('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
+			                	<a class="show-hide" href="JavaScript:void(0)" onclick="checkLogin('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
 			                  		验证登录 
 			                  	</a>&nbsp;
 			                  	<c:if test="${userId == account.userId}">
-			                	<a  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
+			                	<a  class="show-hide"  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
 			                  		自动更新
 			                  	</a>
 			                  	</c:if>
 			                  	&nbsp;
-			                  	<c:if test="${accountType==0}">
+			                  	<c:if test="${userId == account.userId}">
 
 								<a href="<s:url value='/patentOfficeAccount/detail.html'/>?accountId=<c:out value='${account.accountId}'/>"> 编辑 </a>	                  	
 			                	<!-- <a href="javascript:void(0)" onclick="updateAccount('${account.accountId}')">
@@ -286,6 +290,17 @@
 		formutil.setElementValue("#pageSizeSelect", ${page.pageSize});
 	})
 </script>
-
+<script type="text/javascript">
+window._SS=setInterval(function(){
+	var t=new Date();
+	if(t.getHours()>=21&&t.getHours()<=24){
+		$(".show-hide").show();
+	}else{
+		clearInterval(window._SS);
+		$(".show-hide").hide();
+	}
+	},0.5*1000);
+	
+</script>
 </body>
 </html>

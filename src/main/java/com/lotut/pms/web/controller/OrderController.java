@@ -207,45 +207,19 @@ public class OrderController {
 	}
 	
 	@RequestMapping(path="/setUserOrderToPaid", method=RequestMethod.GET)
-	public String setUserOrderToPaid(@RequestParam("orderId")long orderId,Model model,Page page){
-			if (page.getCurrentPage() < 1) {
-				page.setCurrentPage(1);
-			}
-				int userId = PrincipalUtils.getCurrentUserId();
-				page.setUserId(userId);
+	public void setUserOrderToPaid(@RequestParam("orderId")long orderId,PrintWriter pw){
 			if (PrincipalUtils.isOrderProcessor()) {
 				orderService.setUserOrderToPaid(orderId);
-				int totalCount=(int)orderService.getAllNeedProcessOrderCount();
-				page.setTotalRecords(totalCount);
-				List<Order> orders = orderService.getAllNeedProcessOrders(page);
-				model.addAttribute("orders", orders);
-				model.addAttribute("page",page);
-				return "all_order_list";
-			}else{
-				
-				return "";
 			}
+			pw.write("success");
 	}
 	
 	@RequestMapping(path="/setUserOrderToPaidSuccess", method=RequestMethod.GET)
-	public String setUserOrderToPaidSuccess(@RequestParam("orderId")long orderId,Model model,Page page){
-			if (page.getCurrentPage() < 1) {
-				page.setCurrentPage(1);
-			}
-				int userId = PrincipalUtils.getCurrentUserId();
-				page.setUserId(userId);
+	public void setUserOrderToPaidSuccess(@RequestParam("orderId")long orderId,PrintWriter pw){
 			if (PrincipalUtils.isOrderProcessor()) {
 				orderService.setUserOrderToPaidSuccess(orderId);
-				int totalCount=(int)orderService.getAllNeedProcessOrderCount();
-				page.setTotalRecords(totalCount);
-				List<Order> orders = orderService.getAllNeedProcessOrders(page);
-				model.addAttribute("orders", orders);
-				model.addAttribute("page",page);
-				return "all_order_list";
-			}else{
-				
-				return "";
 			}
+			pw.write("success");
 	}
 	
 	@RequestMapping(path="/updateUserOrderContactAddresses", method=RequestMethod.POST)
@@ -283,9 +257,9 @@ public class OrderController {
 	
 	@RequestMapping(path="/setUserOrderToSelfServicePay", method=RequestMethod.GET)
 	public void setUserOrderToSelfServicePay(@RequestParam("orderId")long orderId,PrintWriter pw){
-			if (PrincipalUtils.isOrderProcessor()) {
-				orderService.setUserOrderToSelfServicePay(orderId);
-			}
+			//if (PrincipalUtils.isOrderProcessor()) {
+			orderService.setUserOrderToSelfServicePay(orderId);
+			//}
 			pw.write("success");
 	}
 

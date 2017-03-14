@@ -19,11 +19,11 @@
 		<h5>返回商标管理</h5>
 		</a>
 	</li>	
-	<%-- <li class="active">
+	<li class="active">
 		<a href="<s:url value='/brand/brandAddForm.html'/>">
 		<h5>商标添加</h5>
 		</a>
-	</li> --%>
+	</li>
 	<%-- <se:authorize access="hasAnyRole('ROLE_TRADER','ROLE_PLATFORM')">
 	<li class="active">
 		<a href="<s:url value='/brand/getWechatOrderList.html'/>">

@@ -134,12 +134,12 @@ public class PatentOfficeAccountController {
 		WebUtils.writeJsonStrToResponse(response, success);
 	}
 	
-	//@Scheduled(cron = "0 0 0 * * ?")
+	/*//@Scheduled(cron = "0 0 0 * * ?")*/
 	/*cron = "0 50 13 * * ?"*/ //下午1点50
 	/*cron = "0 0 0 * * ?"*/ //晚上12点
 	/*cron = "0 0 0/1 * * ?"*/ //每隔1小时更新
 	/*cron = "0/8 * * * * ?"*/ //每隔8秒更新
-    public void autoUpdatePatentOfficeData(){
+   /* public void autoUpdatePatentOfficeData(){
 		List<PatentOfficeAccount> accounts = patentOfficeAccountService.getAllAccount();
 		for(PatentOfficeAccount account: accounts){  
 				try {
@@ -155,7 +155,7 @@ public class PatentOfficeAccountController {
 					e.printStackTrace();
 				}
         }
-    }
+    }*/
     
     
     @RequestMapping(path="/autoUpdatePatents2", method=RequestMethod.GET)
@@ -169,12 +169,12 @@ public class PatentOfficeAccountController {
 	}
     
     
-    //获取自动更新流（从阿里外包服务器）
+    //获取自动更新流（从龙图腾文件服务器）
     public InputStream  grabInputStream(String username,String password) {
 		CloseableHttpResponse response = null;
 		InputStream is = null;
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-		final String host = "116.62.53.170:8080/company_patent_manage";
+		final String host = "60.174.195.212:8145/spms";
 		final String feeQueryPath = "/spiderFee/getInputStreamByAutoUpdate.html";
 		URIBuilder uriBuilder = new URIBuilder()
 				.setScheme("http")
@@ -201,7 +201,6 @@ public class PatentOfficeAccountController {
 					e.printStackTrace();
 				}
 				return is;
-	    
 	}
    
 }

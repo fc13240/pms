@@ -1354,3 +1354,6 @@ ALTER TABLE brands AUTO_INCREMENT = 2400;
 ALTER TABLE brand_management AUTO_INCREMENT = 2400;
 ALTER TABLE brand_management ADD UNIQUE bm_brand_no(brand_no);
 ALTER TABLE brands ADD COLUMN creat_time   TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+insert into news_type(type_name) values ("美妆时间");
+insert into news_type(type_name) values ("美装时间");
+insert into news_type(type_name) values ("美食时间");

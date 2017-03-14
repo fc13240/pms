@@ -167,6 +167,12 @@
 							</td>
 						</tr>
 					  </table>
+					  <span style="color:red;">
+						   		<span>风险提示：1、请用户认真核对订单信息，龙图腾对订单是否正确不承担任何法律责任；</span>
+						   		<br/><span style="margin-left: 70px;">2、龙图腾会在3个工作日内按照订单上的信息向知识产权局缴纳，5个工作日后，请用户核对专利局是否收到订单费用，如果有疑问请立即与龙图腾反馈，否则由此产生的后果均由用户自己承担。</span>
+						   		<br/><span style="margin-left: 70px;">龙图腾客服联系方式：黄群QQ3001816590，电话：0551-65771310。</span>
+					   </span>
+					   <br/>
 					  <span style="margin-left:10px;margin-bottom:10px;">
 					  <button type="button" class="button button-caution button-rounded" id="ajaxOrderBtn">提交订单</button>
 					  </span>
