@@ -169,12 +169,12 @@ public class PatentOfficeAccountController {
 	}
     
     
-    //获取自动更新流（从龙图腾文件服务器）
+    //获取自动更新流（从从阿里云服务器）
     public InputStream  grabInputStream(String username,String password) {
 		CloseableHttpResponse response = null;
 		InputStream is = null;
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-		final String host = "60.174.195.212:8145/spms";
+		final String host = "www.yhzlpt.com";
 		final String feeQueryPath = "/spiderFee/getInputStreamByAutoUpdate.html";
 		URIBuilder uriBuilder = new URIBuilder()
 				.setScheme("http")
