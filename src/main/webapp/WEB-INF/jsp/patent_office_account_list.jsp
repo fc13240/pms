@@ -332,7 +332,7 @@
 <script type="text/javascript">
  window._SS=setInterval(function(){
 	var t=new Date();
-	if(t.getHours()>=1&&t.getHours()<=24){
+	if(t.getHours()>=21&&t.getHours()<=24){
 		$(".show-hide").show();
 	}else{
 		clearInterval(window._SS);
