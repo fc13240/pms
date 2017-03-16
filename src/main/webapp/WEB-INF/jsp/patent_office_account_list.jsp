@@ -239,20 +239,7 @@
 		
 	}
 	
-	function excute(username,password,accountId,userId){	
-		 $.ajax({
-				url: "<s:url value='/patentOfficeAccount/autoUpdatePatents2.html'/>?username="+username + "&password="+password+"&accountId="+accountId+"&userId="+userId,
-				type: 'get', 
-				success: function(result) {
-					spinner.stop();
-					formutil.alertMessage('更新成功！',true);
-				},
-				error:function(){
-					spinner.stop();
-					formutil.alertMessage('更新失败，请稍后重试！');
-				}
-			});	
-	}
+	
 	function checkLogin(username,password,accountId,userId) {
 		$.ajax({
 			url: "<s:url value='/patentOfficeAccount/checkLogin.html'/>?username="+username + "&password="+password+"&accountId="+accountId+"&userId="+userId,
