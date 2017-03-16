@@ -2,6 +2,7 @@ package com.lotut.pms.web.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -20,7 +20,6 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -75,6 +74,10 @@ public class PatentOfficeAccountController {
 			model.addAttribute("accountType", accountType);
 			model.addAttribute("userId", PrincipalUtils.getCurrentUserId());
 			model.addAttribute("page", page);
+		}
+		if(session.getAttribute("buttonClickCount") ==null){
+			session.setAttribute("buttonClickCount", 0);
+		}else{
 		}
 		return "patent_office_account_list";
 		
@@ -202,5 +205,16 @@ public class PatentOfficeAccountController {
 				}
 				return is;
 	}
+    
+    
+    @RequestMapping(path="/countClickNumber")
+    public void setClickNumber(HttpSession session,PrintWriter pw){
+    	int count = (int)session.getAttribute("buttonClickCount");
+    	++count;
+    	session.setAttribute("buttonClickCount", count);
+    	String number = session.getAttribute("buttonClickCount").toString();
+    	pw.write(number);
+    }
+    
    
 }

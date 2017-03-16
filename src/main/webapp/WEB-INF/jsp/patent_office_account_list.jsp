@@ -47,7 +47,7 @@
 			          	
 			          </div>
 			          <span style="color:red;">
-						   		友情提示：尊敬的用户，自动更新开放时间调整为夜间21:00-24:00
+						   		友情提示：尊敬的用户，自动更新开放时间调整为夜间21:00-24:00,一天只可以更新十次哦
 						   </span> 
 			        <table id="simple-table" class="table table-striped table-bordered table-hover" >
 			          <thead>
@@ -81,7 +81,11 @@
 			                  		验证登录 
 			                  	</a>&nbsp;
 			                  	<c:if test="${userId == account.userId}">
-			                	<a  class="show-hide"  href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')">
+			                  	<%-- ${sessionScope.buttonClickCount<=4 } --%>
+			                	<a  id="auto-update" class="show-hide auto-update" <c:if test="${sessionScope.buttonClickCount<10 }"> href="JavaScript:void(0)" onclick="autoUpdatePatents('${account.username}','${account.password}','${account.accountId}','${account.userId}')" </c:if>
+			                		<c:if test="${sessionScope.buttonClickCount>=10 }">style="color: grey"</c:if>
+			                	
+			                	>
 			                  		自动更新
 			                  	</a>
 			                  	</c:if>
@@ -199,21 +203,48 @@
 				  left: '600px' // Left position relative to parent in px
 				};
 		var target = document.getElementById('simple-table');
-		var spinner = new Spinner(opts).spin(target);		
+		var spinner = new Spinner(opts).spin(target);
 		$.ajax({
-			url: "<s:url value='/patentOfficeAccount/autoUpdatePatents2.html'/>?username="+username + "&password="+password+"&accountId="+accountId+"&userId="+userId,
-			type: 'get', 
-			success: function(result) {
-				spinner.stop();
-				formutil.alertMessage('更新成功！',true);
-			},
-			error:function(){
-				spinner.stop();
-				formutil.alertMessage('更新失败，请稍后重试！');
+			type:"get",
+			url : "<s:url value='/patentOfficeAccount/countClickNumber.html'/>",
+			async: false,
+			success : function(result){
+				if(result>=10){
+						$(".auto-update").each(function(index, element){
+							 var a=$(this);
+							a.css("color","grey");
+							 a.removeAttr("href");
+							 a.removeAttr("click");
+						});
+						formutil.alertMessage('注意哦！一天之内只可以连续更新十次！',true);
+				}else{
+					excute(username,password,accountId,userId)
+				}
+			},error : function(){
+				
 			}
-		});		
+		})
+		
+	
+		
+		/*	 */
+		
 	}
 	
+	function excute(username,password,accountId,userId){	
+		 $.ajax({
+				url: "<s:url value='/patentOfficeAccount/autoUpdatePatents2.html'/>?username="+username + "&password="+password+"&accountId="+accountId+"&userId="+userId,
+				type: 'get', 
+				success: function(result) {
+					spinner.stop();
+					formutil.alertMessage('更新成功！',true);
+				},
+				error:function(){
+					spinner.stop();
+					formutil.alertMessage('更新失败，请稍后重试！');
+				}
+			});	
+	}
 	function checkLogin(username,password,accountId,userId) {
 		$.ajax({
 			url: "<s:url value='/patentOfficeAccount/checkLogin.html'/>?username="+username + "&password="+password+"&accountId="+accountId+"&userId="+userId,
@@ -291,9 +322,9 @@
 	})
 </script>
 <script type="text/javascript">
-window._SS=setInterval(function(){
+ window._SS=setInterval(function(){
 	var t=new Date();
-	if(t.getHours()>=21&&t.getHours()<=24){
+	if(t.getHours()>=1&&t.getHours()<=24){
 		$(".show-hide").show();
 	}else{
 		clearInterval(window._SS);
