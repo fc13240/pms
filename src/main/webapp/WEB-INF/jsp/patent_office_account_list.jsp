@@ -218,16 +218,24 @@
 						});
 						formutil.alertMessage('注意哦！一天之内只可以连续更新十次！',true);
 				}else{
-					excute(username,password,accountId,userId)
+					$.ajax({
+						url: "<s:url value='/patentOfficeAccount/autoUpdatePatents2.html'/>?username="+username + "&password="+password+"&accountId="+accountId+"&userId="+userId,
+						type: 'get', 
+						success: function(result) {
+							spinner.stop();
+							formutil.alertMessage('更新成功！',true);
+						},
+						error:function(){
+							spinner.stop();
+							formutil.alertMessage('更新失败，请稍后重试！');
+						}
+					});	
 				}
 			},error : function(){
 				
 			}
 		})
 		
-	
-		
-		/*	 */
 		
 	}
 	
