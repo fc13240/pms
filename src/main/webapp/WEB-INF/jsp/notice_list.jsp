@@ -188,24 +188,24 @@
 					        
 					        <li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=2&noticeProcessStatus=1'/>">
-						        	一周内(<c:out value='${remainDayCount[(2).intValue()]["count(*)"]}' default="0"/>)
+						        	已发文一周内(<c:out value='${remainDayCount[(2).intValue()]["count(*)"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 			    			<li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=3&noticeProcessStatus=1'/>">
-						        	两周内 (<c:out value='${remainDayCount[(3).intValue()]["count(*)"]}' default="0"/>)
+						        	已发文两周内 (<c:out value='${remainDayCount[(3).intValue()]["count(*)"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 					        <li> 
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=4&noticeProcessStatus=1'/>">
-						       		 一月内 (<c:out value='${remainDayCount[(4).intValue()]["count(*)"]}' default="0"/>)
+						       		 已发文一月内 (<c:out value='${remainDayCount[(4).intValue()]["count(*)"]}' default="0"/>)
 						        </a>
 					        </li> 
 					        <li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=5&noticeProcessStatus=1'/>">
-						        	一月以上 (<c:out value='${remainDayCount[(5).intValue()]["count(*)"]}' default="0"/>)
+						        	已发文一月以上 (<c:out value='${remainDayCount[(5).intValue()]["count(*)"]}' default="0"/>)
 						        </a>
 					        </li> 	        
 					      </ul>	
