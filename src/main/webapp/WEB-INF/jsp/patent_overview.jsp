@@ -104,7 +104,7 @@ target="_blank">费用信息</a>
 			<th class="center" style="text-align: center">通知书名称</th>
 			<th class="center" style="text-align: center">发文序号</th>
 			<th class="center" style="text-align: center">是否查看</th>
-			<th class="center" style="text-align: center">已过天数</th>
+			<th class="center" style="text-align: center">已发文天数</th>
 			<th class="center" style="text-align: center" width="175px">是否处理</th>
 			<th class="center" style="text-align: center" width="105px">纸件申请</th>
 			<th class="center" style="text-align: center">操作</th>
