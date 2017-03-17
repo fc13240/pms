@@ -94,5 +94,16 @@ public interface NoticeMapper {
 	
 	void batchCancelStarTargetStatus(@Param("noticeIds")List<Long> noticeIds);
 	
+	@MapKey("date_type")
+	Map<String, Integer> getNoticesDateType(int userId);
+	
+	List<Notice> getTodayNotices(Page pge);
+	
+	List<Notice> getWillOverdeadLine(Page pge);
+	
+	int getTodayNoticesCount(int userId);
+	
+	int getWillOverdeadLineCount(int userId);
+	
 	
 }

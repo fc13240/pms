@@ -203,6 +203,31 @@ public class NoticeMybatisDao extends SqlSessionDaoSupport implements NoticeDao 
 	@Override
 	public void batchCancelStarTargetStatus(List<Long> noticeIds) {
 		noticeMapper.batchCancelStarTargetStatus(noticeIds);
+	}
+
+	@Override
+	public Map<String, Integer> getNoticesDateType(int userId) {
+		return noticeMapper.getNoticesDateType(userId);
+	}
+
+	@Override
+	public List<Notice> getTodayNotices(Page pge) {
+		return noticeMapper.getTodayNotices(pge);
+	}
+
+	@Override
+	public List<Notice> getWillOverdeadLine(Page pge) {
+		return noticeMapper.getWillOverdeadLine(pge);
+	}
+
+	@Override
+	public int getTodayNoticesCount(int userId) {
+		return noticeMapper.getTodayNoticesCount(userId);
+	}
+
+	@Override
+	public int getWillOverdeadLineCount(int userId) {
+		return noticeMapper.getWillOverdeadLineCount(userId);
 	}	
 
 	

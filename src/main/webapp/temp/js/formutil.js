@@ -109,3 +109,19 @@ formutil.alertMessage = function(message, needReload) {
 formutil.setElementValue = function(elemSelector, value) {
 	$(elemSelector).val(value);	
 }
+
+formutil.alertAndEntryUrl = function(message, needReload,url) {
+	needReload = needReload || false;
+	
+	$("<div>" + message + "</div>").dialog({
+		modal: true,
+		buttons: {
+			Ok: function() {
+				$(this).dialog("close");
+				if (needReload) {
+					window.location.href=url;
+				}
+			}
+		}	
+	});		
+}

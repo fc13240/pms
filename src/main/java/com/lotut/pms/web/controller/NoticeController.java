@@ -229,10 +229,15 @@ public class NoticeController {
 		List<NoticeType> noticeTypes = noticeService.getAllNoticeType();
 		List<NoticePaperApplyType> paperApplyTypes = noticeService.getAllNoticePaperApplyType();
 		
+		int userId = PrincipalUtils.getCurrentUserId();
+		Map<String, Integer> noticeDateType = noticeService.getNoticesDateType(userId);
+		
 		model.addAttribute("patentTypes", patentTypes);
 		model.addAttribute("noticeProcessStatus", noticeProcessStatus);
 		model.addAttribute("noticeTypes", noticeTypes);
 		model.addAttribute("paperApplyTypes", paperApplyTypes);
+		model.addAttribute("noticeDateType", noticeDateType);
+		System.out.println(noticeDateType);
 	}
 	
 	@RequestMapping(path="/batchChangePaperType", method=RequestMethod.GET)
@@ -326,7 +331,7 @@ public class NoticeController {
 		model.addAttribute("unreadNoticeCount", unreadNoticeCount);
 		model.addAttribute("wayOfPaging","unreadNotice");
 		addSearchTypesDataToModel(model);
-		return "notice_list";
+		return "notice_unread_list";
 	}
 	
 	
@@ -404,5 +409,69 @@ public class NoticeController {
 		noticeService.batchCancelStarTargetStatus(noticeIds);
 		String message = "操作成功";
 		pw.write(message);
+	}
+	
+	@RequestMapping(path="/getTodayNotices", method=RequestMethod.GET)
+	public String getTodayNotices(Model model,Page page,HttpSession session) {
+		page.setPageSize(WebUtils.getPageSize(session));
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		Map<Integer,Map<String,Long>> patentTypeCount=noticeService.getUserNoticeCountByType(userId);
+		Map<String,Map<String,String>> noticeTypeCount=noticeService.getUserNoticeCountByNoticeType(userId);
+		Map<String,Map<String,String>> processStatusCount=noticeService.getUserNoticeCountByProcessStatus(userId);
+		Map<String, Map<String, String>> paperApplyTypeCount=noticeService.getUserNoticeCountByPaperApplyType(userId);
+		Map<String,Map<String,String>> remainDayCount=noticeService.getUserNoticeCountByRemainDay(userId);
+		List<Notice> userNotices = noticeService.getTodayNotices(page);
+		int totalCount=(int)noticeService.getTodayNoticesCount(userId);
+		page.setTotalRecords(totalCount);
+		int unreadNoticeCount=noticeService.unreadNoticeCount(userId);
+		User user=PrincipalUtils.getCurrentPrincipal();
+		model.addAttribute("notices", userNotices);
+		model.addAttribute("patentTypeCount",patentTypeCount);
+		model.addAttribute("noticeTypeCount",noticeTypeCount);
+		model.addAttribute("processStatusCount",processStatusCount);
+		model.addAttribute("paperApplyTypeCount",paperApplyTypeCount);
+		model.addAttribute("remainDayCount",remainDayCount);
+		model.addAttribute("page", page);
+		model.addAttribute("unreadNoticeCount", unreadNoticeCount);
+		model.addAttribute("wayOfPaging","normal");
+		model.addAttribute("user",user);
+		addSearchTypesDataToModel(model);
+		return "notice_today_list";
+	}
+	
+	@RequestMapping(path="/getWillOverdeadLine", method=RequestMethod.GET)
+	public String getWillOverdeadLine(Model model,Page page,HttpSession session) {
+		if(page==null){
+			page = new Page();
+		}
+		if (page.getCurrentPage() < 1) {
+			page.setCurrentPage(1);
+		}
+		page.setPageSize(WebUtils.getPageSize(session));
+		int userId = PrincipalUtils.getCurrentUserId();
+		page.setUserId(userId);
+		Map<Integer,Map<String,Long>> patentTypeCount=noticeService.getUserNoticeCountByType(userId);
+		Map<String,Map<String,String>> noticeTypeCount=noticeService.getUserNoticeCountByNoticeType(userId);
+		Map<String,Map<String,String>> processStatusCount=noticeService.getUserNoticeCountByProcessStatus(userId);
+		Map<String, Map<String, String>> paperApplyTypeCount=noticeService.getUserNoticeCountByPaperApplyType(userId);
+		Map<String,Map<String,String>> remainDayCount=noticeService.getUserNoticeCountByRemainDay(userId);
+		List<Notice> userNotices = noticeService.getWillOverdeadLine(page);
+		int totalCount=(int)noticeService.getWillOverdeadLineCount(userId);
+		page.setTotalRecords(totalCount);
+		int unreadNoticeCount=noticeService.unreadNoticeCount(userId);
+		User user=PrincipalUtils.getCurrentPrincipal();
+		model.addAttribute("notices", userNotices);
+		model.addAttribute("patentTypeCount",patentTypeCount);
+		model.addAttribute("noticeTypeCount",noticeTypeCount);
+		model.addAttribute("processStatusCount",processStatusCount);
+		model.addAttribute("paperApplyTypeCount",paperApplyTypeCount);
+		model.addAttribute("remainDayCount",remainDayCount);
+		model.addAttribute("page", page);
+		model.addAttribute("unreadNoticeCount", unreadNoticeCount);
+		model.addAttribute("wayOfPaging","normal");
+		model.addAttribute("user",user);
+		addSearchTypesDataToModel(model);
+		return "notice_will_over_list";
 	}
 }
