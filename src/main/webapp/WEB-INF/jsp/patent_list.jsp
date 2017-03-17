@@ -203,11 +203,13 @@
 					  <div class="ta-top" style="margin-left:8px;">
 					  	<table class="search-table">
 					  	<tr>
-					  	<!-- <td>
+					  	<se:authorize access="hasAnyRole('ROLE_CUSTOMER_SUPPORT')">
+					  	<td>
 						  	<a href="javascript:return void"  onclick="batchGrabFees()">
-							<button class="button button-caution button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以在线缴纳专利费哦！">在线交费</button> 
+							<button class="button button-caution button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以在线缴纳专利费哦！">批量交费</button> 
 							</a>
-						</td> -->
+						</td>
+						</se:authorize>
 					  	<td>
 							<a href="javascript:return void" onclick="batchShare()" >
 							<button style="margin-left:10px;" class="button button-primary  button-rounded" data-toggle="tooltip" data-placement="bottom" title="可以把专利批量分享给好友哦！">批量分享</button>

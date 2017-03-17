@@ -178,7 +178,7 @@
 					        </li> 
 					      </ul>
 					    </div>
-					    <div class="tag" style="display:none">
+					    <%-- <div class="tag" style="display:none">
 					      <ul class="qxjk-ul">
 					      	<li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=1&noticeProcessStatus=1'/>">
@@ -209,7 +209,7 @@
 						        </a>
 					        </li> 	        
 					      </ul>	
-					    </div>
+					    </div> --%>
 					  </div>
 					</div>				
 				</div>
