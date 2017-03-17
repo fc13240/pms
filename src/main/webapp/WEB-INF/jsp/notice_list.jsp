@@ -38,7 +38,7 @@
 						  <li><a href="#" class="">通知状态</a></li>
 					      <li><a href="#" class="">通知类型</a></li>
 					      <li><a href="#" class="">纸件申请</a></li>
-					      <li><a href="#" class="">剩余天数</a></li>
+					      <li><a href="#" class="">已发文天数</a></li>
 					    </ul>
 					  </div>
 					  <div id="menu_con" style="min-width:1100px;">
@@ -182,7 +182,7 @@
 					      <ul class="qxjk-ul">
 					      	<li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=1&noticeProcessStatus=1'/>">
-						        	已超期 (<c:out value='${remainDayCount[(1).intValue()]["count(*)"]}' default="0"/>)
+						        	今日发文(<c:out value='${remainDayCount[(1).intValue()]["count(*)"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
@@ -381,7 +381,7 @@
 							  <th width="100px">发文日</th>
 							  <th>案件状态/通知书</th>
 							  <th width="160px">通知查看/天数/处理</th>
-							 <!--  <th>剩余天数</th>  -->
+							 <!--  <th>已发文天数</th>  -->
 							  <th width="100px">纸件申请</th>
 							  <!--<th>下载</th>-->
 							  <th width="80px">操作</th>
@@ -426,7 +426,7 @@
 								</td>
 								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center" class="date_status">
-								<span class="readStatus" id="readStatusSpan${notice.noticeId}" style="float:left;padding-left:30px">
+								<span class="readStatus" id="readStatusSpan${notice.noticeId}" style="float:left;padding-left:30px;margin-left: 30px;">
 									<c:choose>
 										<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
 										<c:otherwise>未查看
@@ -434,10 +434,11 @@
 								  	</c:choose>
 								<br>
 								</span>
-								<span class="qixian" style="padding-left:0px;">
+								<br/>
+								<span class="qixian" style="float:left;padding-left:40px;">
 										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-											<c:otherwise>剩余
+											<c:when test="${notice.remainDays == -1}"> 今天发文 </c:when>
+											<c:otherwise>已发文
 										  	<c:out value="${notice.remainDays}"/>天
 											</c:otherwise>
 									  	</c:choose>
@@ -468,8 +469,8 @@
 								</span>
 								<span class="qixian" style="padding-left:0px;">
 										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-											<c:otherwise>剩余
+											<c:when test="${notice.remainDays == -1}"> 今日发文</c:when>
+											<c:otherwise>已发文
 										  	<c:out value="${notice.remainDays}"/>天
 											</c:otherwise>
 									  	</c:choose>
@@ -498,8 +499,8 @@
 								</span>
 								<span class="qixian" style="padding-left:0px;">
 										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-											<c:otherwise>剩余
+											<c:when test="${notice.remainDays == -1}"> 今日发文</c:when>
+											<c:otherwise>已发文
 										  	<c:out value="${notice.remainDays}"/>天
 											</c:otherwise>
 									  	</c:choose>

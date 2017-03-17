@@ -80,11 +80,11 @@
 		select count(*) from notices n where patent in (select patent from user_patents where user = #{userId} and trash_status=1) 
 	</select>
 	
-	<select id="getUserNoticesByPage" parameterType="Page" resultMap="NoticeResultMap">
+	<!-- <select id="getUserNoticesByPage" parameterType="Page" resultMap="NoticeResultMap">
 		select un.*, u.user_id as share_user_id,  u.username as share_username
 			from (select p.patent_id, p.app_no, p.patent_name, p.patent_owner,p.app_person, ps.patent_status_id,p.patent_status_text,p.internal_code, ps.patent_status_desc as patent_status_description,
 					n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
-					if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+					if(n.timeLimit- datediff(curdate(), n.dispatch_date) > 0,n.timeLimit- datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 					n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,n.star_target_monitor_status,
 					npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
 					nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username,
@@ -100,29 +100,30 @@
 					limit #{startIndex}, #{pageSize}) as un
 				join user_patents up on un.patent_id = up.patent
 			  	join users u on up.user = u.user_id	
-		<!-- select sp.notice_id,sp.patent_id,sp.app_no,sp.patent_name,sp.patent_owner,sp.app_person,sp.patent_status_text,sp.internal_code,sp.notice_name,sp.notice_sequence,
-			sp.dispatch_sequence,sp.dispatch_sequence,sp.dispatch_date,sp.remain_days,sp.notice_code,sp.zip_bid,sp.dmh_flag,sp.archive_no,sp.zipfile_name,sp.process_user_id,
-			sp.process_username,pt.*,npat.notice_paper_apply_type_id as paper_type_id, npat.notice_paper_apply_type_desc as paper_type_description,u.user_id as share_user_id,
-			u.username as share_username,sp.notice_process_status_id,sp.notice_process_status_desc,sp.notice_view_status,sp.annual_fee_monitor_status,ps.patent_status_desc as patent_status_description
-			from (select p.patent_id, p.app_no, p.patent_name, p.patent_owner,p.app_person,p.patent_status_text,p.patent_type,p.patent_status,
-			p.internal_code,n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,n.paper_apply_type,
-			if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
-			n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,n.process_user as process_user_id, pu.username as process_username,
-			nps.*,nvl.notice_id as notice_view_status,up.annual_fee_monitor_status
-			from patents p
-			join notices n on n.patent = p.patent_id
-			left join notice_read nvl on n.notice_id=nvl.notice_id and nvl.user_id = #{userId}
-			left join user_patents up on p.patent_id=up.patent
-			left join notice_process_status nps on n.process_status=nps.notice_process_status_id
-			left join users pu on n.process_user=pu.user_id
-			where up.user=#{userId} and up.trash_status=1
-			order by nvl.user_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
-			limit #{startIndex},#{pageSize}) sp left join user_patents up on sp.patent_id = up.patent
-			left join patent_types pt on sp.patent_type=pt.patent_type_id
-			left join notice_paper_apply_types npat on sp.paper_apply_type=npat.notice_paper_apply_type_id
-			left join users u on up.user=u.user_id
-			left join patent_status ps on sp.patent_status=ps.patent_status_id -->
+	</select> -->
+	
+	<select id="getUserNoticesByPage" parameterType="Page" resultMap="NoticeResultMap">
+		select un.*, u.user_id as share_user_id,  u.username as share_username
+			from (select p.patent_id, p.app_no, p.patent_name, p.patent_owner,p.app_person, ps.patent_status_id,p.patent_status_text,p.internal_code, ps.patent_status_desc as patent_status_description,
+					n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
+					if(datediff(curdate(), n.dispatch_date) >0,datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+					n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,n.star_target_monitor_status,
+					npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
+					nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username,
+					nvl.notice_id AS notice_view_status
+					from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
+							join notices n on n.patent = p.patent_id
+							LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id and nvl.user_id = #{userId} 
+							left join users pu on pu.user_id = n.process_user
+							join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
+							join notice_process_status nps on nps.notice_process_status_id = n.process_status
+				 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1) 
+				  order by nvl.user_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
+					limit #{startIndex}, #{pageSize}) as un
+				join user_patents up on un.patent_id = up.patent
+			  	join users u on up.user = u.user_id	
 	</select>
+	
 	<!-- 通知书处理状态 -->
 	<update id="updateProcessStatus">
 		update notices set process_status = #{processStatus} 
@@ -154,7 +155,7 @@
 		select p.patent_id, p.app_no, p.patent_name,p.patent_owner,p.patent_status_text, p.app_person,p.internal_code, ps.patent_status_id, ps.patent_status_desc as patent_status_description, 
 			u.user_id as share_user_id,  u.username as share_username, 
 			n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
-			if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+			if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 			n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name, 
 			npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
 			nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username
@@ -173,7 +174,7 @@
 		select p.patent_id, p.app_no, p.patent_name,p.patent_status_text, p.app_person,p.internal_code, ps.patent_status_id, ps.patent_status_desc as patent_status_description, 
 			u.user_id as share_user_id,  u.username as share_username, 
 			n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
-			if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+			if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 			n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 			npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
 			nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username
@@ -236,19 +237,19 @@
 			<if test="timeLimitType != null">
 					<choose>
 			 		<when test="timeLimitType == 1">
-			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) = -1
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) = -1
 			 		</when>
 			 		<when test="timeLimitType == 2">
-			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) between 0 and 7
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 0 and 7
 			 		</when>
 			 		<when test="timeLimitType == 3">
-			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) between 8 and 14
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 8 and 14
 			 		</when>
 			 		<when test="timeLimitType == 4">
-			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) between 15 and 30
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 15 and 30
 			 		</when>
 			 		<otherwise>
-			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) > 30
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) > 30
 			 		</otherwise>	 				 				 				 		
 			 	   </choose>
 		</if> 
@@ -272,7 +273,7 @@
 		select un.*, u.user_id as share_user_id,  u.username as share_username
 		from (select p.patent_id, p.app_no, p.patent_name,p.patent_status_text, p.app_person,p.internal_code, ps.patent_status_id, ps.patent_status_desc as patent_status_description,
 				n.notice_id,n.notice_name, n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
-				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+				if(datediff(curdate(), n.dispatch_date) >0,datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,n.star_target_monitor_status,
 				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
 				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username,
@@ -322,19 +323,19 @@
 				<if test="timeLimitType != null">
 					<choose>
 			 		<when test="timeLimitType == 1">
-			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) = -1
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) = -1
 			 		</when>
 			 		<when test="timeLimitType == 2">
-			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) between 0 and 7
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 0 and 7
 			 		</when>
 			 		<when test="timeLimitType == 3">
-			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) between 8 and 14
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 8 and 14
 			 		</when>
 			 		<when test="timeLimitType == 4">
-			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) between 15 and 30
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 15 and 30
 			 		</when>
 			 		<otherwise>
-			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) > 30
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) > 30
 			 		</otherwise>	 				 				 				 		
 			 	   </choose>
 			 	 </if>
@@ -365,7 +366,7 @@
 			u.username as share_username,sp.notice_process_status_id,sp.notice_process_status_desc,sp.notice_view_status,sp.annual_fee_monitor_status,sp.patent_status_description
 			from (select p.patent_id, p.app_no, p.patent_name, p.patent_owner,p.app_person,p.patent_status_text,p.patent_type,ps.patent_status_desc as patent_status_description,
 			p.internal_code,n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,n.paper_apply_type,
-			if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+			if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 			n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,n.process_user as process_user_id, pu.username as process_username,
 			nps.*,nvl.notice_id as notice_view_status,up.annual_fee_monitor_status
 			from patents p
@@ -413,19 +414,19 @@
 				<if test="timeLimitType != null">
 					<choose>
 			 		<when test="timeLimitType == 1">
-			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) = -1
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) = -1
 			 		</when>
 			 		<when test="timeLimitType == 2">
-			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) between 0 and 7
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 0 and 7
 			 		</when>
 			 		<when test="timeLimitType == 3">
-			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) between 8 and 14
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 8 and 14
 			 		</when>
 			 		<when test="timeLimitType == 4">
-			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) between 15 and 30
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 15 and 30
 			 		</when>
 			 		<otherwise>
-			 			and IF(n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date) >= 0, n.time_limit - DATEDIFF(CURDATE(), n.dispatch_date), -1) > 30
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) > 30
 			 		</otherwise>	 				 				 				 		
 			 	   </choose>
 			 	 </if>
@@ -544,10 +545,10 @@
 	<select id="getUserNoticeCountByRemainDay" resultType="map">
 		select 
 			case 
-			<![CDATA[when time_limit - datediff(curdate(), dispatch_date) < 0 then 1]]>
-			when time_limit - datediff(curdate(), dispatch_date) between 0 and 7 then 2
-			when time_limit - datediff(curdate(), dispatch_date) between 8 and 14 then 3
-			when time_limit - datediff(curdate(), dispatch_date) between 15 and 30 then 4
+			<![CDATA[when datediff(curdate(), dispatch_date)  = 0 then 1]]>
+			when datediff(curdate(), dispatch_date)  between 1 and 7 then 2
+			when datediff(curdate(), dispatch_date)  between 8 and 14 then 3
+			when datediff(curdate(), dispatch_date)  between 15 and 30 then 4
 			else 5
 		end as remain_day_type, count(*)
   		from notices n 
@@ -574,7 +575,7 @@
 		select un.*, u.user_id as share_user_id,  u.username as share_username
 		from (select p.patent_id, p.app_no, p.patent_name, p.app_person, ps.patent_status_id,p.patent_status_text,p.internal_code, ps.patent_status_desc as patent_status_description,
 				n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
-				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+				if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
 				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username
@@ -606,7 +607,7 @@
 		select un.*, u.user_id as share_user_id,  u.username as share_username
 		from (select p.patent_id, p.app_no, p.patent_name,p.patent_status_text, p.app_person,p.internal_code,ps.patent_status_id, ps.patent_status_desc as patent_status_description,
 				n.notice_id,n.notice_name, n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
-				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+				if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
 				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username,
@@ -662,7 +663,7 @@
 		select un.*, u.user_id as share_user_id,  u.username as share_username
 		from (select p.patent_id, p.app_no, p.patent_name, p.patent_owner,p.app_person, ps.patent_status_id,p.patent_status_text,p.internal_code, ps.patent_status_desc as patent_status_description,
 				n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,n.star_target_monitor_status,
-				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+				if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,
 				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
 				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username,
@@ -688,10 +689,10 @@
 	<select id="getUserStarTargetNoticeCountByRemainDay" resultType="map">
 		select 
 			case 
-			<![CDATA[when time_limit - datediff(curdate(), dispatch_date) < 0 then 1]]>
-			when time_limit - datediff(curdate(), dispatch_date) between 0 and 7 then 2
-			when time_limit - datediff(curdate(), dispatch_date) between 8 and 14 then 3
-			when time_limit - datediff(curdate(), dispatch_date) between 15 and 30 then 4
+			<![CDATA[datediff(curdate(), dispatch_date) = 0 then 1]]>
+			when datediff(curdate(), dispatch_date)  between 1 and 7 then 2
+			when datediff(curdate(), dispatch_date)  between 8 and 14 then 3
+			when datediff(curdate(), dispatch_date)  between 15 and 30 then 4
 			else 5
 		end as remain_day_type, count(*)
   		from notices n 
@@ -707,7 +708,7 @@
 		select un.*, u.user_id as share_user_id,  u.username as share_username
 		from (select p.patent_id, p.app_no, p.patent_name,p.patent_status_text, p.app_person,p.internal_code, ps.patent_status_id, ps.patent_status_desc as patent_status_description,
 				n.notice_id,n.notice_name, n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
-				if(n.time_limit - datediff(curdate(), n.dispatch_date) >= 0, n.time_limit - datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+				if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1)  as remain_days,
 				n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,n.star_target_monitor_status,
 				npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
 				nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username,
