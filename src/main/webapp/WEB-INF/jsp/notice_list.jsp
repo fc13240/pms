@@ -1291,11 +1291,11 @@ tabs.set("nav","menu_con");//执行
 	
 </script>
 <script type="text/javascript">
-$(window).load(function(){
+/* $(window).load(function(){
 	var url="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>";
 	var count = ${noticeDateType[1]["count"] };
 	formutil.alertAndEntryUrl("请注意   您有"+count+"件未处理的通知书将要超期，请尽快处理，否则影响专利申请进程",true,url);
-}) 
+})  */
 </script>
 </body>
 </html>
