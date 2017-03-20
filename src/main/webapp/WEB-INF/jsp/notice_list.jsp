@@ -1293,8 +1293,8 @@ tabs.set("nav","menu_con");//执行
 <script type="text/javascript">
  $(window).load(function(){
 	 var location_href = window.location.href;
-	 var substring_location = location_href.substring(location_href.lastIndexOf("/")+1,location_href.lastIndexOf("/")+5);
-	 if(substring_location=="list"){
+	 var substring_location = location_href.substring(location_href.lastIndexOf("/")+1,location_href.lastIndexOf("/")+24);
+	 if(substring_location=="list.html?currentPage=1"){
 		var url="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>";
 		var count = ${noticeDateType[1]["count"] };
 		formutil.alertAndEntryUrl("请注意   您有"+count+"件未处理的通知书将要超期，请尽快处理，否则影响专利申请进程",true,url);
