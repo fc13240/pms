@@ -425,7 +425,7 @@
 								
 								<td style="text-align:center" width="120px;"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/>
 								<br/>
-								<span class="qixian" style="float:left;padding-left:10px;">
+								<span class="qixian" style="float:left;padding-left:18px;">
 										<c:choose>
 											<c:when test="${notice.remainDays == -1}"> 今天发文 </c:when>
 											<c:otherwise>已发文
