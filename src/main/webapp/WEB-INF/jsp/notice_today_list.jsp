@@ -356,9 +356,9 @@
 									</td>
 									<td align="right">
 										<span class="span3" style="font-size:18px;font-weight:bold;">
-											<a href="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>" >将要超期&nbsp;${noticeDateType[1]["count"] }件</a>
-											<a href="<s:url value='/notice/getTodayNotices.html?currentPage=1'/>" >今天发文&nbsp;${noticeDateType[2]["count"] }</a>
-											<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" id="unreadNoticeCountForA">未查看&nbsp;${unreadNoticeCount}件
+											<a href="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>" >将要超期${noticeDateType[1]["count"] }件</a>&nbsp;&nbsp;
+											<a href="<s:url value='/notice/getTodayNotices.html?currentPage=1'/>" >今天发文${noticeDateType[2]["count"] }</a>&nbsp;&nbsp;
+											<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" id="unreadNoticeCountForA">未查看${unreadNoticeCount}件
 											</a>
 										</span>
 
