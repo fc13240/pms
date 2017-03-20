@@ -777,10 +777,12 @@
 	
 	<select id="getNoticesDateType" parameterType="int" resultType="map">
 		(select 1 as date_type ,count(*) as count from notices n where time_limit -datediff(current_date(),dispatch_date) <![CDATA[<= 7]]>
-		  and n.patent in (select patent from user_patents where user =#{userId} and trash_status=1) )
+		  and n.patent in (select patent from user_patents where user =#{userId} and trash_status=1)
+		  and n.process_status=1 )
 		  union all
 		(select 2 as date_type ,count(*) as count from notices n where dispatch_date=current_date()
-		and n.patent in (select patent from user_patents where user =#{userId} and trash_status=1))
+			and n.patent in (select patent from user_patents where user =#{userId} and trash_status=1)
+			and n.process_status=1)
 	</select>
 	
 	<select id="getTodayNotices" parameterType="Page" resultMap="NoticeResultMap">
