@@ -240,7 +240,7 @@
 			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) = -1
 			 		</when>
 			 		<when test="timeLimitType == 2">
-			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 0 and 7
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 1 and 7
 			 		</when>
 			 		<when test="timeLimitType == 3">
 			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 8 and 14
@@ -326,7 +326,7 @@
 			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) = -1
 			 		</when>
 			 		<when test="timeLimitType == 2">
-			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 0 and 7
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 1 and 7
 			 		</when>
 			 		<when test="timeLimitType == 3">
 			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 8 and 14
@@ -417,7 +417,7 @@
 			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) = -1
 			 		</when>
 			 		<when test="timeLimitType == 2">
-			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 0 and 7
+			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 1 and 7
 			 		</when>
 			 		<when test="timeLimitType == 3">
 			 			and if(datediff(curdate(), n.dispatch_date) > 0,datediff(curdate(), n.dispatch_date), -1) between 8 and 14
