@@ -1312,6 +1312,8 @@ tabs.set("nav","menu_con");//执行
 		var url="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>";
 		var count = ${noticeDateType[1]["count"] };
 		formutil.alertAndEntryUrl("<font color='red'>请注意:</font>您有"+count+"件未处理的通知书将要超期，请尽快处理，否则影响专利申请进程",true,url);
+	 }else{
+		 
 	 }
 })  
 </script>
