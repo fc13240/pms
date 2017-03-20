@@ -116,7 +116,10 @@ formutil.alertAndEntryUrl = function(message, needReload,url) {
 	$("<div>" + message + "</div>").dialog({
 		modal: true,
 		buttons: {
-			Ok: function() {
+			"稍后处理": function() {
+		          $( this ).dialog( "close" );
+		        },
+			"立即确认": function() {
 				$(this).dialog("close");
 				if (needReload) {
 					window.location.href=url;
