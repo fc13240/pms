@@ -352,4 +352,29 @@ public class NoticeServiceImpl implements NoticeService {
 	public void batchCancelStarTargetStatus(List<Long> noticeIds) {
 		noticeDao.batchCancelStarTargetStatus(noticeIds);
 	}
+
+	@Override
+	public Map<String, Integer> getNoticesDateType(int userId) {
+		return noticeDao.getNoticesDateType(userId);
+	}
+
+	@Override
+	public List<Notice> getTodayNotices(Page pge) {
+		return noticeDao.getTodayNotices(pge);
+	}
+
+	@Override
+	public List<Notice> getWillOverdeadLine(Page pge) {
+		return noticeDao.getWillOverdeadLine(pge);
+	}
+
+	@Override
+	public int getTodayNoticesCount(int userId) {
+		return noticeDao.getTodayNoticesCount(userId);
+	}
+
+	@Override
+	public int getWillOverdeadLineCount(int userId) {
+		return noticeDao.getWillOverdeadLineCount(userId);
+	}
 }

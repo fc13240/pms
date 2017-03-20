@@ -773,4 +773,71 @@
 	 		#{noticeId}
 	 	</foreach>
 	</update>
+	
+	
+	<select id="getNoticesDateType" parameterType="int" resultType="map">
+		(select 1 as date_type ,count(*) as count from notices n where time_limit -datediff(current_date(),dispatch_date) <![CDATA[<= 7]]>
+		  and n.patent in (select patent from user_patents where user =#{userId} and trash_status=1) )
+		  union all
+		(select 2 as date_type ,count(*) as count from notices n where dispatch_date=current_date()
+		and n.patent in (select patent from user_patents where user =#{userId} and trash_status=1))
+	</select>
+	
+	<select id="getTodayNotices" parameterType="Page" resultMap="NoticeResultMap">
+		select un.*, u.user_id as share_user_id,  u.username as share_username
+			from (select p.patent_id, p.app_no, p.patent_name, p.patent_owner,p.app_person, ps.patent_status_id,p.patent_status_text,p.internal_code, ps.patent_status_desc as patent_status_description,
+					n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
+					if(datediff(curdate(), n.dispatch_date) >0,datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+					n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,n.star_target_monitor_status,
+					npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
+					nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username,
+					nvl.notice_id AS notice_view_status
+					from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
+							join notices n on n.patent = p.patent_id
+							LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id and nvl.user_id = #{userId} 
+							left join users pu on pu.user_id = n.process_user
+							join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
+							join notice_process_status nps on nps.notice_process_status_id = n.process_status
+				 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1) 
+				  and n.dispatch_date=current_date()
+				  order by nvl.user_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
+					limit #{startIndex}, #{pageSize}) as un
+				join user_patents up on un.patent_id = up.patent
+			  	join users u on up.user = u.user_id	
+	</select>
+	
+	<select id="getTodayNoticesCount" parameterType="int" resultType="int">
+		select count(*) from notices n where patent in (select patent from user_patents where user = #{userId} and trash_status=1) 
+			and n.dispatch_date=current_date()
+	</select>
+	
+	<select id="getWillOverdeadLine" parameterType="Page" resultMap="NoticeResultMap">
+		select un.*, u.user_id as share_user_id,  u.username as share_username
+			from (select p.patent_id, p.app_no, p.patent_name, p.patent_owner,p.app_person, ps.patent_status_id,p.patent_status_text,p.internal_code, ps.patent_status_desc as patent_status_description,
+					n.notice_id,n.notice_name,  n.notice_sequence, n.dispatch_sequence, n.dispatch_date,
+					if(datediff(curdate(), n.dispatch_date) >0,datediff(curdate(), n.dispatch_date), -1)  as remain_days,
+					n.notice_code, n.zip_bid, n.dmh_flag, n.archive_no, n.zipfile_name,n.star_target_monitor_status,
+					npt.notice_paper_apply_type_id as paper_type_id, npt.notice_paper_apply_type_desc as paper_type_description, 
+					nps.notice_process_status_id, nps.notice_process_status_desc, n.process_user as process_user_id, pu.username as process_username,
+					nvl.notice_id AS notice_view_status
+					from patents p left join patent_status ps on p.patent_status = ps.patent_status_id
+							join notices n on n.patent = p.patent_id
+							LEFT JOIN notice_read nvl ON n.notice_id=nvl.notice_id and nvl.user_id = #{userId} 
+							left join users pu on pu.user_id = n.process_user
+							join notice_paper_apply_types npt on n.paper_apply_type = npt.notice_paper_apply_type_id
+							join notice_process_status nps on nps.notice_process_status_id = n.process_status
+				 where n.patent in (select patent from user_patents where user = #{userId} and trash_status=1) 
+				  and n.time_limit -datediff(current_date(),n.dispatch_date) <![CDATA[<= 7]]>
+				  order by nvl.user_id,nps.notice_process_status_id, n.dispatch_date desc, p.app_no
+					limit #{startIndex}, #{pageSize}) as un
+				join user_patents up on un.patent_id = up.patent
+			  	join users u on up.user = u.user_id	
+	</select>
+	
+	<select id="getWillOverdeadLineCount" parameterType="int" resultType="int">
+		select count(*) from notices n where patent in (select patent from user_patents where user = #{userId} and trash_status=1) 
+			and n.time_limit -datediff(current_date(),n.dispatch_date) <![CDATA[<= 7]]>
+	</select>
+	
+	
 </mapper>

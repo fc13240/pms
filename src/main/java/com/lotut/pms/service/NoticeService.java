@@ -89,4 +89,14 @@ public interface NoticeService {
 	void batchUpdateStarTargetStatus(List<Long> noticeIds);
 	
 	void batchCancelStarTargetStatus(List<Long> noticeIds);
+	
+	Map<String, Integer> getNoticesDateType(int userId);
+	
+	List<Notice> getTodayNotices(Page pge);
+	
+	List<Notice> getWillOverdeadLine(Page pge);
+	
+	int getTodayNoticesCount(int userId);
+	
+	int getWillOverdeadLineCount(int userId);
 }

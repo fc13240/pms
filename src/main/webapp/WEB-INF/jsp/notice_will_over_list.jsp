@@ -38,7 +38,7 @@
 						  <li><a href="#" class="">通知状态</a></li>
 					      <li><a href="#" class="">通知类型</a></li>
 					      <li><a href="#" class="">纸件申请</a></li>
-					      <!-- <li><a href="#" class="">已发文天数</a></li> -->
+					      <li><a href="#" class="">已发文天数</a></li>
 					    </ul>
 					  </div>
 					  <div id="menu_con" style="min-width:1100px;">
@@ -178,7 +178,7 @@
 					        </li> 
 					      </ul>
 					    </div>
-					    <%-- <div class="tag" style="display:none">
+					    <div class="tag" style="display:none">
 					      <ul class="qxjk-ul">
 					      	<li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=1&noticeProcessStatus=1'/>">
@@ -188,28 +188,28 @@
 					        
 					        <li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=2&noticeProcessStatus=1'/>">
-						        	已发文一周内(<c:out value='${remainDayCount[(2).intValue()]["count(*)"]}' default="0"/>)
+						        	一周内(<c:out value='${remainDayCount[(2).intValue()]["count(*)"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 			    			<li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=3&noticeProcessStatus=1'/>">
-						        	已发文两周内 (<c:out value='${remainDayCount[(3).intValue()]["count(*)"]}' default="0"/>)
+						        	两周内 (<c:out value='${remainDayCount[(3).intValue()]["count(*)"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 					        <li> 
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=4&noticeProcessStatus=1'/>">
-						       		 已发文一月内 (<c:out value='${remainDayCount[(4).intValue()]["count(*)"]}' default="0"/>)
+						       		 一月内 (<c:out value='${remainDayCount[(4).intValue()]["count(*)"]}' default="0"/>)
 						        </a>
 					        </li> 
 					        <li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=5&noticeProcessStatus=1'/>">
-						        	已发文一月以上 (<c:out value='${remainDayCount[(5).intValue()]["count(*)"]}' default="0"/>)
+						        	一月以上 (<c:out value='${remainDayCount[(5).intValue()]["count(*)"]}' default="0"/>)
 						        </a>
 					        </li> 	        
 					      </ul>	
-					    </div> --%>
+					    </div>
 					  </div>
 					</div>				
 				</div>
@@ -357,10 +357,10 @@
 									<td align="right">
 										<span class="span3" style="font-size:18px;font-weight:bold;">
 										<a href="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>" >将要超期( ${noticeDateType[1]["count"] }件)</a>
-										<a href="<s:url value='/notice/getTodayNotices.html?currentPage=1'/>" >今天发文( ${noticeDateType[2]["count"] }件)</a>
+										<a href="<s:url value='/notice/getTodayNotices.html?currentPage=1'/>" >今天发文( ${noticeDateType[2]["count"] })</a>
 										</span>
 									<span class="span3" style="font-size:18px;font-weight:bold;">
-										<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" id="unreadNoticeCountForA">未查看(${unreadNoticeCount}件)
+										<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" id="unreadNoticeCountForA">未查看${unreadNoticeCount}件
 										</a>
 										</span>
 							  		</td>	
@@ -1289,13 +1289,6 @@ tabs.set("nav","menu_con");//执行
 		});
 	}
 	
-</script>
-<script type="text/javascript">
-/* $(window).load(function(){
-	var url="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>";
-	var count = ${noticeDateType[1]["count"] };
-	formutil.alertAndEntryUrl("请注意   您有"+count+"件未处理的通知书将要超期，请尽快处理，否则影响专利申请进程",true,url);
-})  */
 </script>
 </body>
 </html>
