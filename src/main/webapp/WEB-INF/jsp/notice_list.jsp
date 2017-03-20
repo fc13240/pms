@@ -38,7 +38,7 @@
 						  <li><a href="#" class="">通知状态</a></li>
 					      <li><a href="#" class="">通知类型</a></li>
 					      <li><a href="#" class="">纸件申请</a></li>
-					      <li><a href="#" class="">已发文天数</a></li>
+					      <!-- <li><a href="#" class="">已发文天数</a></li> -->
 					    </ul>
 					  </div>
 					  <div id="menu_con" style="min-width:1100px;">
@@ -178,7 +178,7 @@
 					        </li> 
 					      </ul>
 					    </div>
-					    <div class="tag" style="display:none">
+					    <%-- <div class="tag" style="display:none">
 					      <ul class="qxjk-ul">
 					      	<li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=1&noticeProcessStatus=1'/>">
@@ -209,7 +209,7 @@
 						        </a>
 					        </li> 	        
 					      </ul>	
-					    </div>
+					    </div> --%>
 					  </div>
 					</div>				
 				</div>

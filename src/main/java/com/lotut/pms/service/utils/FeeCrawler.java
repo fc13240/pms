@@ -235,7 +235,7 @@ public class FeeCrawler {
 	
 	public static  String grabFeeHtml2(String appNo, boolean isUnpublisedPatent) {
 		final String host = "so.lotut.com";
-		final String feeQueryPath = "/spiderFee/getFeeByAppNo.html";
+		final String feeQueryPath = "/spms/spiderFee/getFeeByAppNo.html";
 		URIBuilder uriBuilder = new URIBuilder()
 				.setScheme("http")
 				.setHost(host)
