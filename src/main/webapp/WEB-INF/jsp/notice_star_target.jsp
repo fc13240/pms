@@ -29,87 +29,276 @@
 		  <div class="col-xs-offset-1 col-xs-11">
 			<div class="lt-right">
 				<div style="height:10px;"></div>
+				<div class="lt-box">
+					<div id="menu">
+					  <div style="height:33px;">
+					    <ul id="nav">
+					     <p>快捷处理：</p>
+					      <li><a href="#" class="selected">专利类型</a></li>
+						  <li><a href="#" class="">通知状态</a></li>
+					      <li><a href="#" class="">通知类型</a></li>
+					      <li><a href="#" class="">纸件申请</a></li>
+					      <!-- <li><a href="#" class="">已发文天数</a></li> -->
+					    </ul>
+					  </div>
+					  <div id="menu_con" style="min-width:1100px;">
+					    <div class="tag" style="display:block"> 
+					      <ul class="qxjk-ul">
+					      	<li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=1&noticeProcessStatus=1'/>">
+						        	发明专利 (<c:out value='${patentTypeCount[(1).longValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li>
+					         <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=2&noticeProcessStatus=1'/>">
+					        	实用新型(<c:out value='${patentTypeCount[(2).longValue()]["noticeCount"]}' default="0"/>)
+					        </a>
+					        </li>
+					        
+					        <li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=3&noticeProcessStatus=1'/>">
+						        	外观设计(<c:out value='${patentTypeCount[(3).longValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li> 
+					        <li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&patentType=0&noticeProcessStatus=1'/>">
+						        	无类型(<c:out value='${patentTypeCount[(0).longValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li>  
+					      </ul>	
+					     </div>
+						<div class="tag" style="display:none"> 
+					      <ul class="qxjk-ul">
+					      	<li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=1'/>">
+						        	应缴费/答复/处理 (<c:out value='${processStatusCount[(1).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=2'/>">
+						        	初步处理 (<c:out value='${processStatusCount[(2).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li> 
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=3'/>">
+						        	放弃处理 (<c:out value='${processStatusCount[(3).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeProcessStatus=4'/>">
+						       		完成处理 (<c:out value='${processStatusCount[(4).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li> 
+					      </ul>	
+					     </div>
+					    <div class="tag"  style="display:none">
+					      <ul class="qxjk-ul">
+					      	<li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=1&noticeProcessStatus=1'/>">
+						       		 新案受理 (<c:out value='${noticeTypeCount[(1).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li> 
+					        
+					        <li> 
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=2&noticeProcessStatus=1'/>">
+						        	缴费通知 (<c:out value='${noticeTypeCount[(2).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li> 
+					        
+					        <li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=3&noticeProcessStatus=1'/>">
+						       		 补正审查 (<c:out value='${noticeTypeCount[(3).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					         <li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=4&noticeProcessStatus=1'/>">
+						        	专利授权 (<c:out value='${noticeTypeCount[(4).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li> 
+					        
+					         <li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=5&noticeProcessStatus=1'/>">
+						       		权利丧失 (<c:out value='${noticeTypeCount[(5).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+						     </li>
+						     
+						     <li> 
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=6&noticeProcessStatus=1'/>">
+						        	手续合格 (<c:out value='${noticeTypeCount[(6).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					         <li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=8&noticeProcessStatus=1'/>">
+						        	驳回决定 (<c:out value='${noticeTypeCount[(8).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li>					        
+					         <li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&noticeType=7&noticeProcessStatus=1'/>">
+						        	其他 (<c:out value='${noticeTypeCount[(7).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					      </ul>
+					    </div>
+					    <div class="tag"  style="display:none">
+					      <ul class="qxjk-ul">
+					      	<li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=1'/>">
+						        	未申请 (<c:out value='${paperApplyTypeCount[(1).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li>  
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=2'/>">
+						       		 申请纸件 (<c:out value='${paperApplyTypeCount[(2).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					         <li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=3'/>">
+						       		 处理中 (<c:out value='${paperApplyTypeCount[(3).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=4'/>">
+						        	已发送 (<c:out value='${paperApplyTypeCount[(4).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li> 
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&paperApplyType=5'/>">
+						       		 无纸件 (<c:out value='${paperApplyTypeCount[(5).intValue()]["noticeCount"]}' default="0"/>)
+						        </a>
+					        </li> 
+					      </ul>
+					    </div>
+					    <%-- <div class="tag" style="display:none">
+					      <ul class="qxjk-ul">
+					      	<li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=1&noticeProcessStatus=1'/>">
+						        	今日发文(<c:out value='${remainDayCount[(1).intValue()]["count(*)"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=2&noticeProcessStatus=1'/>">
+						        	已发文一周内(<c:out value='${remainDayCount[(2).intValue()]["count(*)"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+			    			<li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=3&noticeProcessStatus=1'/>">
+						        	已发文两周内 (<c:out value='${remainDayCount[(3).intValue()]["count(*)"]}' default="0"/>)
+						        </a>
+					        </li>
+					        
+					        <li> 
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=4&noticeProcessStatus=1'/>">
+						       		 已发文一月内 (<c:out value='${remainDayCount[(4).intValue()]["count(*)"]}' default="0"/>)
+						        </a>
+					        </li> 
+					        <li>
+						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=5&noticeProcessStatus=1'/>">
+						        	已发文一月以上 (<c:out value='${remainDayCount[(5).intValue()]["count(*)"]}' default="0"/>)
+						        </a>
+					        </li> 	        
+					      </ul>	
+					    </div> --%>
+					  </div>
+					</div>				
+				</div>
+				
+				
+				
 				<div class="lt-box" style="padding: 10px 0 0 0;">
 					<div class="search-box">
-						<table class="search-table" width="960px">
-							<form class="form-inline" action="<s:url value='/notice/searchStarTarget.html'/>" method="get">
-							<tr>
-								<td >发文起始日期</td>
-								<td>发文结束日期</td>
-								<td>关键字</td>
-							</tr>
-							<tr>
-								<td width="130px">
-									<input class="form-control" style="width:108px;height:34px;"  type="text" onclick="WdatePicker({el:'startDispatchDateId',dateFmt:'yyyy-MM-dd'})" id="startDispatchDateId" name="startDispatchDate" placeholder="发文日开始" value="" readonly="readonly" >							  
-								</td>
-								<td width="130px">
-									<input class="lt-input form-control" style="width:108px;height:34px;" type="text" onclick="WdatePicker({el:'endDispatchDateId',dateFmt:'yyyy-MM-dd'})"  id="endDispatchDateId" name="endDispatchDate" placeholder="发文日结束" value="" readonly="readonly" >						  
-								</td>
-								<td >
-									  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-									  <div class="t-third">
-			
-									  <table class="search-table">
-										  <tr>
-											  <td>
-												<input name="keyword" style="display:inline;width:300px;" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>							  
-											  </td>
-											  <td>
-											  	<button class="button button-caution button-rounded" type="submit" style="width:80px;">查询</button>
-											  </td>
-										  </tr>							  
-									  </table>
-									  </div>
-									
-								
-								</td>
-								
-							</tr>
-							</form>
-							<tr>
-								<td>
-							  		<a href="javascript:return void" onclick="batchCancelStarTargetNotice()">
-										<button style="width:140px;" class="button button-caution button-rounded">批量取消星标通知</button>
-									</a>
-						  		</td>
-							
-							</tr>
-						</table>
-					</div>
-				
-				
-					<%-- <div class="search-box">
+						<form action="<s:url value='/notice/search.html'/>" method="get">
+						  <input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
 						  <div class="t-third" style="clear:both;">
-			
-						  
-						  
-						  
-						  <table class="search-table" width="100%">
-						  	<tr>
-						  		<td>
-							  		<a href="javascript:return void" onclick="batchCancelStarTargetNotice()">
-										<button style="width:140px;" class="button button-caution button-rounded">批量取消星标通知</button>
-									</a>
-						  		</td>
-						  		<td>
-						  		  <form action="<s:url value='/notice/searchStarTarget.html'/>" method="get">
-						  			<input type="hidden" id="default.page.nextPage" name="page.currentPage" value="1"/>
-							  		<table class="search-table">
-									  <tr>	
-									  	<td>
-									  		<input name="keyword" style="display:inline;width:300px;" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>
-									  	</td>
-									  	<td><button type="submit" class="button button-caution button-rounded">查询</button></td>	
-									  </tr>							  
-								 	</table> 
-								   </form>
-						  		</td>
-						  	</tr>
-						  </table>
-							
+							<table class="search-table">
+							  <tr>
+							  <td>专利类型</td>
+							  <td>查看状态</td>
+							  <td>通知状态</td>
+							  <td>通知类型</td>
+							  <td>纸件申请</td>
+							  <td>发文日起始</td>
+							  <td></td>
+							  <td>发文日结束</td>
+							  <td>关键字</td>
+							  <td></td>	
+							  </tr>
+							  <tr>
+							  <td>
+						        <select style="width:100px;" class="selectPointOfInterest form-control" name="patentType">
+						          <option value="">全部</option>
+						          <c:forEach items="${patentTypes}" var="patentType">
+						            <option value="<c:out value='${patentType.patentTypeId}'/>">
+						            <c:out value="${patentType.typeDescription}"/>
+						            </option>
+						          </c:forEach>
+						        </select>							  
+							  </td>
+							  <td>
+						        <select style="width:100px;" class="selectPointOfInterest form-control" name="noticeViewStatus">
+						          <option value="0">全部</option>
+						          <option value="1">已查看</option>
+						          <option value="2">未查看</option>
+						        </select>							  
+							  </td>
+							  <td>
+						        <select style="width:93px;" class="selectPointOfInterest form-control" name="noticeProcessStatus">
+						          <option value="">全部</option>
+						          <c:forEach items="${noticeProcessStatus}" var="processStatus">
+						            <option value="<c:out value='${processStatus.processStatusId}'/>">
+						            <c:out value="${processStatus.processStatusDescription}"/>
+						            </option>
+						          </c:forEach>
+						        </select>							  
+							  </td>
+							  <td>
+						        <select style="width:100px;" class="selectPointOfInterest form-control" name="noticeType">
+						          <option value="">全部</option>
+						          <c:forEach items="${noticeTypes}" var="noticeType">
+						            <option value="<c:out value='${noticeType.noticeTypeId}'/>">
+						            <c:out value="${noticeType.noticeTypeDescription}"/>
+						            </option>
+						          </c:forEach>
+						        </select>							  
+							  </td>
+							  <td>
+						        <select style="width:100px;" class="selectPointOfInterest form-control" name="paperApplyType">
+						          <option value="">全部</option>
+						          <c:forEach items="${paperApplyTypes}" var="paperApplyType">
+						            <option value="<c:out value='${paperApplyType.paperTypeId}'/>">
+						            <c:out value="${paperApplyType.paperTypeDescription}"/>
+						            </option>
+						          </c:forEach>
+						        </select>							  
+							  </td>
+							  
+							  <td>
+								<input style="width:108px;" class="selectPointOfInterest form-control"  type="text"  onclick="WdatePicker({el:'startAppDateId'})"  class="form-control" id="startAppDateId"  name="startDispatchDate" placeholder="发文日开始" value="" readonly="readonly" >							  
+							  </td>
+							  <td>-</td>
+							  <td>
+							  <input style="width:108px;" class="selectPointOfInterest form-control" type="text"  onclick="WdatePicker({el:'endAppDateId'})"  class="form-control" id="endAppDateId" name="endDispatchDate" placeholder="发文日结束" value="" readonly="readonly" >
+							  </td>
+							  <td>
+							  <input name="keyword" style="display:inline;width:250px;" id="keywordId" value="" placeholder="申请号/名称/申请人/内部编码/案件状态" class="t-input form-control"/>
+							  </td>
+							  <td><button type="submit" class="button button-caution button-rounded">查询</button></td>	
+							  </tr>							  
+							 </table> 
 						  </div>
-						
-					</div> --%>
+						</form>
+					</div>
 				</div>
 				<!--search form end-->
 				<div class="lt-box">
@@ -117,6 +306,68 @@
 					<div class="row">
 					  <div class="col-xs-12">
 						<!-- PAGE CONTENT BEGINS -->
+						<div style="background:#f5fafe;border-top: solid 1px #eee;border-left: solid 1px #eee;border-right: solid 1px #eee;height:50px;"> <span class="input-group-btn" >
+						  <div class="ta-top" style="margin-left:8px;"> 
+						  	<table class="search-table" width="100%">
+					  			<tr>
+					  				<td width="6%">
+									  	<a href="javascript:return void" onclick="batchGrabFees()">
+										<button class="button button-caution button-rounded">在线交费</button>
+										</a>
+					  				</td>
+					  				<td width="6%">
+										<a href="javascript:return void" onclick="batchShare()">
+										<button style="margin-left:10px;width:110px;" class="button button-rounded button-primary">分享给好友</button>
+										</a>
+					  				</td>
+					  				<td width="6%">
+										<a href="javascript:return void" onclick="batchChangeNoticeViewStatus()">
+										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">置为已查看</button>
+										</a>
+
+									</td>
+					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
+					  				<td width="6%">
+										<a href="javascript:return void" onclick="batchProcessNotice(2)">
+										<button style="width:120px;margin-left:10px;" class="button button-rounded button-highlight">置为初步处理</button>
+										</a> 
+					  				</td>
+					  				</se:authorize>			
+					  				<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">		  				
+					  				<td width="6%">
+									  	<a href="javascript:return void" onclick="batchProcessNotice(4)">
+										<button style="width:120px;margin-left:10px;" class="button button-action button-rounded">置为完成处理</button>
+										</a> 
+									</td>	
+									</se:authorize>
+					  				
+					  				<se:authorize access="hasAnyRole('ROLE_BATCH_PAPER')">
+					  				<td width="6%">
+										<a href="javascript:return void" onclick="batchChangeNoticePaperType(2)">
+										<button style="width:120px;margin-left:10px;" class="button button-rounded button-royal">申请纸件</button>
+										</a>
+					  				</td>
+					  				</se:authorize>		
+					  				<td width="6%">
+										<button style="margin-left:10px;" class="button button-rounded button-highlight" onclick="exportNotices()">表格导出</button>
+									</td>
+					  				<td width="6%">
+										<button style="margin-left:10px;width:140px;" class="button button-rounded button-highlight" onclick="batchAddStarTargetNotices()">批量加入星标通知</button>
+									</td>
+									<td align="right">
+										<span class="span3" style="font-size:18px;font-weight:bold;">
+											<a href="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>" >将要超期&nbsp;${noticeDateType[1]["count"] }件</a>
+											<a href="<s:url value='/notice/getTodayNotices.html?currentPage=1'/>" >今天发文&nbsp;${noticeDateType[2]["count"] }</a>
+											<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" id="unreadNoticeCountForA">未查看&nbsp;${unreadNoticeCount}件
+											</a>
+										</span>
+
+							  		</td>	
+											
+					  			</tr>
+					  		</table>		
+						  </div>
+						  </span> </div>
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 						  <thead>
 							<tr class="simple_bag">
@@ -130,11 +381,11 @@
 							  <th>第一申请人 </th>
 							  <!-- <th class="center">案件状态 </th> -->
 							  <th>内部编码/共享人</th>
-							  <th width="100px">发文日</th>
+							  <th width="100px">发文日/天数</th>
 							  <th>案件状态/通知书</th>
-							  <th width="160px">通知查看/天数/处理</th>
-							 <!--  <th>剩余天数</th>  -->
-							  <!-- <th width="100px">纸件申请</th> -->
+							  <th width="160px">通知查看/处理</th>
+							 <!--  <th>已发文天数</th>  -->
+							  <th width="100px">纸件申请</th>
 							  <!--<th>下载</th>-->
 							  <th width="80px">操作</th>
 							</tr>
@@ -144,9 +395,13 @@
 							  <tr>
 								<td class="center" style="text-align:center"><label class="pos-rel"> <span class="batch-share-item">
 								  <input style="text-align:center" type="checkbox" class="check-item" notice="${notice.noticeId}" patent="<c:out value='${notice.patent.patentId}'/>"></span>
-								  <span class="lbl">
-								  </span></label></td>
-								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize} </td>
+								  <span class="lbl"></span></label></td>
+								<td class="center" style="text-align:center"> ${status.count + (page.currentPage-1)*page.pageSize}
+								<c:if test="${notice.starTargetMonitorStatus==1 }">
+							  		<div style="width:25px;heigth:25px;background: red;float:right"><font color="white">星</font></div>
+							  	</c:if>
+								
+								 </td>
 								<td style="text-align:center">
 									<a href="javascript:window.open('<s:url value='/patent/getOverviewPatent.html'/>?appNo=${notice.patent.appNo}')" target="_blank">
 										<c:out value="${notice.patent.appNo}"/>
@@ -167,14 +422,25 @@
 								</td>
 					
 								
-								<td style="text-align:center"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
+								<td style="text-align:center" width="120px;"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/>
+								<br/>
+								<span class="qixian" style="float:left;padding-left:18px;">
+										<c:choose>
+											<c:when test="${notice.remainDays == -1}"> 今天发文 </c:when>
+											<c:otherwise>已发文
+										  	<c:out value="${notice.remainDays}"/>天
+											</c:otherwise>
+									  	</c:choose>
+									<br>
+								</span> 
+								</td>
 								<td style="text-align:center"><span>${notice.patent.patentStatusText}</span><br/><a id="download" href="javascript: void(0);" onClick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}');changeNoticeReadStatus(${notice.noticeId})">
 								  <c:out value="${notice.name}"/>
 								  </a> 
 								</td>
 								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<td style="text-align:center" class="date_status">
-								<span class="readStatus" id="readStatusSpan${notice.noticeId}" style="float:left;padding-left:30px">
+								<span class="readStatus" id="readStatusSpan${notice.noticeId}" style="float:left;padding-left:30px;margin-left: 30px;">
 									<c:choose>
 										<c:when test="${not empty notice.noticeViewStatus }"> 已查看 </c:when>
 										<c:otherwise>未查看
@@ -182,15 +448,16 @@
 								  	</c:choose>
 								<br>
 								</span>
-								<span class="qixian" style="padding-left:0px;">
+								<%-- <br/>
+								<span class="qixian" style="float:left;padding-left:40px;">
 										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-											<c:otherwise>剩余
+											<c:when test="${notice.remainDays == -1}"> 今天发文 </c:when>
+											<c:otherwise>已发文
 										  	<c:out value="${notice.remainDays}"/>天
 											</c:otherwise>
 									  	</c:choose>
 									<br>
-								</span> 
+								</span>  --%>
 								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this);changeNoticeReadStatus(${notice.noticeId})">
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
@@ -201,6 +468,8 @@
 								  </select>
 								</td >
 								</se:authorize>
+								
+								
 								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS','ROLE_USER') and not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
 								<c:if test="${notice.patent.ownerId!=user.userId}">
 								<td style="text-align:center" class="date_status">
@@ -214,8 +483,8 @@
 								</span>
 								<span class="qixian" style="padding-left:0px;">
 										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-											<c:otherwise>剩余
+											<c:when test="${notice.remainDays == -1}"> 今日发文</c:when>
+											<c:otherwise>已发文
 										  	<c:out value="${notice.remainDays}"/>天
 											</c:otherwise>
 									  	</c:choose>
@@ -244,8 +513,8 @@
 								</span>
 								<span class="qixian" style="padding-left:0px;">
 										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 已超期 </c:when>
-											<c:otherwise>剩余
+											<c:when test="${notice.remainDays == -1}"> 今日发文</c:when>
+											<c:otherwise>已发文
 										  	<c:out value="${notice.remainDays}"/>天
 											</c:otherwise>
 									  	</c:choose>
@@ -257,6 +526,64 @@
 									  >
 									  <c:out value="${processStatus.processStatusDescription}"/>
 									  </option>
+									</c:forEach>
+								  </select>
+								</td>
+								</c:if>
+								</se:authorize>
+								<se:authorize access="hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT')">
+								<td>
+								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this);">
+									<c:forEach items="${paperApplyTypes}" var="paperApplyType" begin="${notice.paperApplyType.paperTypeId -1}"> 
+										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
+									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
+									  	>
+									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
+									  	</option>
+									</c:forEach>
+								  </select>
+								</td>
+								</se:authorize>
+								
+								
+								<se:authorize access="hasAnyRole('ROLE_TECH','ROLE_PROCESS') and  not hasAnyRole('ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_CUSTOMER_SUPPORT') ">
+								<td style="text-align:center">
+								  <select class="form-control" disabled="disabled">
+									<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
+										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
+									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
+									  	>
+									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
+									  	</option>
+									</c:forEach>
+								  </select>
+								</td>
+								</se:authorize>
+								
+								<se:authorize access="hasRole('ROLE_USER') and  not hasAnyRole('ROLE_TECH','ROLE_PLATFORM','ROLE_PROXY_ORG','ROLE_PROCESS','ROLE_CUSTOMER_SUPPORT')">
+								<c:if test="${notice.patent.ownerId==user.userId}">
+								<td style="text-align:center">
+								  <select class="form-control" onChange="javascript:changePaperApplyType('${notice.noticeId}', this)">
+									<c:forEach items="${paperApplyTypes}" var="paperApplyType" begin="${notice.paperApplyType.paperTypeId -1}"> 
+										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
+									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
+									  	>
+									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
+									  	</option>
+									</c:forEach>
+								  </select>
+								</td>
+								</c:if>
+								
+								<c:if test="${notice.patent.ownerId!=user.userId}">
+								<td style="text-align:center">
+								  <select id="roleUser" class="form-control" onClick=selectClick() onChange="javascript:changeRoleUserPaperApplyType('${notice.noticeId}', this)">
+										<c:forEach items="${paperApplyTypes}" var="paperApplyType"> 
+										<option value="<c:out value='${paperApplyType.paperTypeId}'/>" 
+									  	<c:if test="${paperApplyType.paperTypeId==notice.paperApplyType.paperTypeId}">selected="selected"</c:if>
+									  	>
+									  	<c:out value="${paperApplyType.paperTypeDescription}"/>
+									  	</option>
 									</c:forEach>
 								  </select>
 								</td>
@@ -431,9 +758,10 @@ function changePaperApplyType(notice, selectElement) {
 					Ok: function() {
 						$(this).dialog("close");
 					}
-				}	
+				},
+				
 			});
-			
+			location.reload();
 		}
 	});			
 }
@@ -478,7 +806,6 @@ function changeRoleUserPaperApplyType(notice,selectElement) {
 					}
 				}	
 			});
-			
 		}
 	});			
 }
@@ -622,7 +949,7 @@ function batchProcessNotice(processStatus) {
 		formutil.clickItemCheckbox('tr th input.check-item', 'tr td input.check-item');
 	});
 	
-	$(function(){
+	/* $(function(){
 		//date_status  treatment_status qixian
 		
 		
@@ -639,7 +966,7 @@ function batchProcessNotice(processStatus) {
 		   });	
 		
 		
-	});	
+	});	 */
 	function batchShare() {
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
 		var uniquePatentNos = [];
@@ -774,62 +1101,7 @@ function batchProcessNotice(processStatus) {
 			}
 		});		
 	}
-	function batchCancelStarTargetNotice() {
-		/* var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		var uniquePatentNos = [];
-		if (!patentSelected) {
-			formutil.alertMessage('请选择通知书');
-			return;
-		}
-		var patents_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'patent');
-		for (var i = 0; i < patents_checked.length; i++) {
-			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
-				uniquePatentNos.push(patents_checked[i]);
-				
-			}
-			
-		}
-		var patentIds = uniquePatentNos.join(",");
-		$.ajax({
-			url:"<s:url value='/patent/batchCancelAnnualFeeMonitor.html'/>?patentIds=" + patentIds,
-			type:"post",
-			async:false,
-			success: function(data) {
-				formutil.alertMessage(data,true);
-				window.location.reload();
-			},
-			error: function() {
-				formutil.alertMessage('批量取消监控失败');
-			}
-		}); */
-		
-		var noticeSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
-		var uniqueNoticeNos = [];
-		if (!noticeSelected) {
-			formutil.alertMessage('请选择通知书');
-			return;
-		}
-		var notices_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'notice');
-		for (var i = 0; i < notices_checked.length; i++) {
-			if ($.inArray(notices_checked[i], uniqueNoticeNos) == -1) {
-				uniqueNoticeNos.push(notices_checked[i]);
-				
-			}
-			
-		}
-		
-		var noticeIds = uniqueNoticeNos.join(",");
-		$.ajax({
-			url:"<s:url value='/notice/batchCancelStarTargetMonitor.html'/>?noticeIds=" + noticeIds,
-			type:"post",
-			success: function(data) {
-				formutil.alertMessage(data,true);	
-			},
-			error: function() {
-				formutil.alertMessage('批量监控失败');
-			}
-		});
-	}
+
 		
 </script>
 <script type="text/javascript">
@@ -995,6 +1267,38 @@ var tabs=function(){
 }();
 tabs.set("nav","menu_con");//执行  
 </script>
-    <%@ include file="_footer_js.jsp" %>
+<%@ include file="_footer_js.jsp" %>
+
+<script type="text/javascript">
+	function batchAddStarTargetNotices() {
+		var noticeSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
+		var uniqueNoticeNos = [];
+		if (!noticeSelected) {
+			formutil.alertMessage('请选择通知书');
+			return;
+		}
+		var notices_checked=formutil.getAllCheckedCheckboxValues('tr td input.check-item', 'notice');
+		for (var i = 0; i < notices_checked.length; i++) {
+			if ($.inArray(notices_checked[i], uniqueNoticeNos) == -1) {
+				uniqueNoticeNos.push(notices_checked[i]);
+				
+			}
+			
+		}
+		
+		var noticeIds = uniqueNoticeNos.join(",");
+		$.ajax({
+			url:"<s:url value='/notice/batchAddStarTargetMonitor.html'/>?noticeIds=" + noticeIds,
+			type:"post",
+			success: function(data) {
+				formutil.alertMessage(data,true);	
+			},
+			error: function() {
+				formutil.alertMessage('批量监控失败');
+			}
+		});
+	}
+	
+</script>
 </body>
 </html>
