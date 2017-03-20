@@ -1305,7 +1305,9 @@ tabs.set("nav","menu_con");//执行
 <script type="text/javascript">
  $(window).load(function(){
 	 var location_href = window.location.href;
-	 var substring_location = location_href.substring(location_href.lastIndexOf("/")+1,location_href.lastIndexOf("/")+24);
+	 var substring_location = location_href.substring(location_href.lastIndexOf("/")+1);
+	 alert(substring_location);
+	 alert(substring_location=="list.html?currentPage=1");
 	 if(substring_location=="list.html?currentPage=1"){
 		var url="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>";
 		var count = ${noticeDateType[1]["count"] };
