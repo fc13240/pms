@@ -382,9 +382,9 @@
 							  <th>第一申请人 </th>
 							  <!-- <th class="center">案件状态 </th> -->
 							  <th>内部编码/共享人</th>
-							  <th width="100px">发文日</th>
+							  <th width="100px">发文日/天数</th>
 							  <th>案件状态/通知书</th>
-							  <th width="160px">通知查看/天数/处理</th>
+							  <th width="160px">通知查看/处理</th>
 							 <!--  <th>已发文天数</th>  -->
 							  <th width="100px">纸件申请</th>
 							  <!--<th>下载</th>-->
@@ -423,7 +423,18 @@
 								</td>
 					
 								
-								<td style="text-align:center"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
+								<td style="text-align:center" width="120px;"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/>
+								<br/>
+								<span class="qixian" style="float:left;padding-left:10px;">
+										<c:choose>
+											<c:when test="${notice.remainDays == -1}"> 今天发文 </c:when>
+											<c:otherwise>已发文
+										  	<c:out value="${notice.remainDays}"/>天
+											</c:otherwise>
+									  	</c:choose>
+									<br>
+								</span> 
+								</td>
 								<td style="text-align:center"><span>${notice.patent.patentStatusText}</span><br/><a id="download" href="javascript: void(0);" onClick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}');changeNoticeReadStatus(${notice.noticeId})">
 								  <c:out value="${notice.name}"/>
 								  </a> 
@@ -438,7 +449,7 @@
 								  	</c:choose>
 								<br>
 								</span>
-								<br/>
+								<%-- <br/>
 								<span class="qixian" style="float:left;padding-left:40px;">
 										<c:choose>
 											<c:when test="${notice.remainDays == -1}"> 今天发文 </c:when>
@@ -447,7 +458,7 @@
 											</c:otherwise>
 									  	</c:choose>
 									<br>
-								</span> 
+								</span>  --%>
 								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this);changeNoticeReadStatus(${notice.noticeId})">
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
@@ -939,7 +950,7 @@ function batchProcessNotice(processStatus) {
 		formutil.clickItemCheckbox('tr th input.check-item', 'tr td input.check-item');
 	});
 	
-	$(function(){
+	/* $(function(){
 		//date_status  treatment_status qixian
 		
 		
@@ -956,7 +967,7 @@ function batchProcessNotice(processStatus) {
 		   });	
 		
 		
-	});	
+	});	 */
 	function batchShare() {
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
 		var uniquePatentNos = [];
