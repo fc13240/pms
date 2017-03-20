@@ -38,7 +38,7 @@
 						  <li><a href="#" class="">通知状态</a></li>
 					      <li><a href="#" class="">通知类型</a></li>
 					      <li><a href="#" class="">纸件申请</a></li>
-					      <li><a href="#" class="">已发文天数</a></li>
+					      <!-- <li><a href="#" class="">已发文天数</a></li> -->
 					    </ul>
 					  </div>
 					  <div id="menu_con" style="min-width:1100px;">
@@ -178,7 +178,7 @@
 					        </li> 
 					      </ul>
 					    </div>
-					    <div class="tag" style="display:none">
+					    <%-- <div class="tag" style="display:none">
 					      <ul class="qxjk-ul">
 					      	<li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=1&noticeProcessStatus=1'/>">
@@ -188,28 +188,28 @@
 					        
 					        <li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=2&noticeProcessStatus=1'/>">
-						        	一周内(<c:out value='${remainDayCount[(2).intValue()]["count(*)"]}' default="0"/>)
+						        	已发文一周内(<c:out value='${remainDayCount[(2).intValue()]["count(*)"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 			    			<li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=3&noticeProcessStatus=1'/>">
-						        	两周内 (<c:out value='${remainDayCount[(3).intValue()]["count(*)"]}' default="0"/>)
+						        	已发文两周内 (<c:out value='${remainDayCount[(3).intValue()]["count(*)"]}' default="0"/>)
 						        </a>
 					        </li>
 					        
 					        <li> 
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=4&noticeProcessStatus=1'/>">
-						       		 一月内 (<c:out value='${remainDayCount[(4).intValue()]["count(*)"]}' default="0"/>)
+						       		 已发文一月内 (<c:out value='${remainDayCount[(4).intValue()]["count(*)"]}' default="0"/>)
 						        </a>
 					        </li> 
 					        <li>
 						        <a href="<s:url value='/notice/search.html?page.currentPage=1&timeLimitType=5&noticeProcessStatus=1'/>">
-						        	一月以上 (<c:out value='${remainDayCount[(5).intValue()]["count(*)"]}' default="0"/>)
+						        	已发文一月以上 (<c:out value='${remainDayCount[(5).intValue()]["count(*)"]}' default="0"/>)
 						        </a>
 					        </li> 	        
 					      </ul>	
-					    </div>
+					    </div> --%>
 					  </div>
 					</div>				
 				</div>
@@ -356,13 +356,12 @@
 									</td>
 									<td align="right">
 										<span class="span3" style="font-size:18px;font-weight:bold;">
-										<a href="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>" >将要超期( ${noticeDateType[1]["count"] }件)</a>
-										<a href="<s:url value='/notice/getTodayNotices.html?currentPage=1'/>" >今天发文( ${noticeDateType[2]["count"] })</a>
+											<a href="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>" >将要超期&nbsp;${noticeDateType[1]["count"] }件</a>
+											<a href="<s:url value='/notice/getTodayNotices.html?currentPage=1'/>" >今天发文&nbsp;${noticeDateType[2]["count"] }</a>
+											<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" id="unreadNoticeCountForA">未查看&nbsp;${unreadNoticeCount}件
+											</a>
 										</span>
-									<span class="span3" style="font-size:18px;font-weight:bold;">
-										<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" id="unreadNoticeCountForA">未查看${unreadNoticeCount}件
-										</a>
-										</span>
+
 							  		</td>	
 											
 					  			</tr>
@@ -382,9 +381,9 @@
 							  <th>第一申请人 </th>
 							  <!-- <th class="center">案件状态 </th> -->
 							  <th>内部编码/共享人</th>
-							  <th width="100px">发文日</th>
+							  <th width="100px">发文日/天数</th>
 							  <th>案件状态/通知书</th>
-							  <th width="160px">通知查看/天数/处理</th>
+							  <th width="160px">通知查看/处理</th>
 							 <!--  <th>已发文天数</th>  -->
 							  <th width="100px">纸件申请</th>
 							  <!--<th>下载</th>-->
@@ -423,7 +422,18 @@
 								</td>
 					
 								
-								<td style="text-align:center"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/></td>
+								<td style="text-align:center" width="120px;"><fmt:formatDate value="${notice.dispatchDate}" pattern="yyyy-MM-dd"/>
+								<br/>
+								<span class="qixian" style="float:left;padding-left:18px;">
+										<c:choose>
+											<c:when test="${notice.remainDays == -1}"> 今天发文 </c:when>
+											<c:otherwise>已发文
+										  	<c:out value="${notice.remainDays}"/>天
+											</c:otherwise>
+									  	</c:choose>
+									<br>
+								</span> 
+								</td>
 								<td style="text-align:center"><span>${notice.patent.patentStatusText}</span><br/><a id="download" href="javascript: void(0);" onClick="javascript:window.open('<s:url value="/notice/preview.html"/>?notice=${notice.noticeId}');changeNoticeReadStatus(${notice.noticeId})">
 								  <c:out value="${notice.name}"/>
 								  </a> 
@@ -438,7 +448,7 @@
 								  	</c:choose>
 								<br>
 								</span>
-								<br/>
+								<%-- <br/>
 								<span class="qixian" style="float:left;padding-left:40px;">
 										<c:choose>
 											<c:when test="${notice.remainDays == -1}"> 今天发文 </c:when>
@@ -447,7 +457,7 @@
 											</c:otherwise>
 									  	</c:choose>
 									<br>
-								</span> 
+								</span>  --%>
 								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this);changeNoticeReadStatus(${notice.noticeId})">
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
@@ -939,7 +949,7 @@ function batchProcessNotice(processStatus) {
 		formutil.clickItemCheckbox('tr th input.check-item', 'tr td input.check-item');
 	});
 	
-	$(function(){
+	/* $(function(){
 		//date_status  treatment_status qixian
 		
 		
@@ -956,7 +966,7 @@ function batchProcessNotice(processStatus) {
 		   });	
 		
 		
-	});	
+	});	 */
 	function batchShare() {
 		var patentSelected = formutil.anyCheckboxItemSelected('tr td input.check-item');
 		var uniquePatentNos = [];
