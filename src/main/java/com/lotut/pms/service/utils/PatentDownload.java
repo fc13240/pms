@@ -25,6 +25,8 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import com.lotut.pms.service.utils.PatentExcelStream;
+
 
 public class PatentDownload {
 	private static final String LOGIN_URL = "http://cpquery.sipo.gov.cn/txn999999.ajax?usertype=2";
@@ -116,5 +118,49 @@ public class PatentDownload {
 	            throw new IOException("Unexpected response status: " + status);
 	        }
 	    }	
-	}	
+	}
+	
+	
+	public static PatentExcelStream downloadPatentExcelFile2(String username,String password) throws Exception {
+		RequestConfig globalConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build();
+		try (CloseableHttpClient httpClient = HttpClients.custom().setDefaultRequestConfig(globalConfig).build();) {
+			boolean loginSuccess = login(httpClient,username,password);
+			System.out.println(loginSuccess);
+
+			if (!loginSuccess) {
+				throw new IOException("Cannot login, retry later");
+			}
+
+			HttpGet patentDownloadRequest = new HttpGet(PATENT_DOWNLOAD_PATH);
+			patentDownloadRequest.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");  
+			patentDownloadRequest.setHeader("Accept-Language", "zh-cn,zh;q=0.5");  
+			patentDownloadRequest.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:7.0.1) Gecko/20100101 Firefox/7.0.1)");  
+			patentDownloadRequest.setHeader("Accept-Encoding", "gzip, deflate");  
+			patentDownloadRequest.setHeader("Accept-Charset", "GB2312,utf-8;q=0.7,*;q=0.7");  
+			patentDownloadRequest.setHeader("Host", "cpquery.sipo.gov.cn");  
+			patentDownloadRequest.setHeader("Connection", "Keep-Alive");
+			ResponseHandler<PatentExcelStream> patentDownloadHandler = new ExcelResponseHandler2();
+			PatentExcelStream pes = httpClient.execute(patentDownloadRequest, patentDownloadHandler);
+			return pes;
+		}
+	}
+	
+	private static class ExcelResponseHandler2 implements ResponseHandler<PatentExcelStream> {
+	    @Override
+	    public PatentExcelStream handleResponse(
+	            final HttpResponse response) throws IOException {
+	        int status = response.getStatusLine().getStatusCode();
+	        if (status >= 200 && status < 300) {
+	        	HttpEntity entity = response.getEntity();
+	        	if (entity.getContentLength() == 0) {
+	        		throw new IOException("Empty content");
+	        	}
+	        	ByteArrayOutputStream out = new ByteArrayOutputStream();
+	        	entity.writeTo(out);
+	        	return new PatentExcelStream(new ByteArrayInputStream(out.toByteArray()), entity.getContentLength());
+	        } else {
+	            throw new IOException("Unexpected response status: " + status);
+	        }
+	    }	
+	}
 }
