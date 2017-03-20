@@ -689,7 +689,7 @@
 	<select id="getUserStarTargetNoticeCountByRemainDay" resultType="map">
 		select 
 			case 
-			<![CDATA[datediff(curdate(), dispatch_date) = 0 then 1]]>
+			<![CDATA[when datediff(curdate(), dispatch_date) = 0 then 1]]>
 			when datediff(curdate(), dispatch_date)  between 1 and 7 then 2
 			when datediff(curdate(), dispatch_date)  between 8 and 14 then 3
 			when datediff(curdate(), dispatch_date)  between 15 and 30 then 4
