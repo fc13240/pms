@@ -356,11 +356,11 @@
 									</td>
 									<td align="right">
 										<span class="span3" style="font-size:18px;font-weight:bold;">
-										<a href="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>" >将要超期( ${noticeDateType[1]["count"] }件)</a>
-										<a href="<s:url value='/notice/getTodayNotices.html?currentPage=1'/>" >今天发文( ${noticeDateType[2]["count"] }件)</a>
+										<a href="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>" >将要超期&nbsp;${noticeDateType[1]["count"] }件</a>
+										<a href="<s:url value='/notice/getTodayNotices.html?currentPage=1'/>" >今天发文&nbsp;${noticeDateType[2]["count"] }件</a>
 										</span>
 									<span class="span3" style="font-size:18px;font-weight:bold;">
-										<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" id="unreadNoticeCountForA">未查看(${unreadNoticeCount}件)
+										<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" id="unreadNoticeCountForA">未查看&nbsp;${unreadNoticeCount}件
 										</a>
 										</span>
 							  		</td>	
@@ -1297,7 +1297,7 @@ tabs.set("nav","menu_con");//执行
 	 if(substring_location=="list.html?currentPage=1"){
 		var url="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>";
 		var count = ${noticeDateType[1]["count"] };
-		formutil.alertAndEntryUrl("请注意   您有"+count+"件未处理的通知书将要超期，请尽快处理，否则影响专利申请进程",true,url);
+		formutil.alertAndEntryUrl("<font color='red'>请注意:</font>您有"+count+"件未处理的通知书将要超期，请尽快处理，否则影响专利申请进程",true,url);
 	 }
 })  
 </script>
