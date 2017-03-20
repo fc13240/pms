@@ -122,6 +122,7 @@ formutil.alertAndEntryUrl = function(message, needReload,url) {
 					window.location.href=url;
 				}
 			}
+	
 		}	
 	});		
 }
