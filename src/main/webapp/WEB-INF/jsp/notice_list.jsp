@@ -483,15 +483,7 @@
 								  	</c:choose>
 								<br>
 								</span>
-								<span class="qixian" style="padding-left:0px;">
-										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 今日发文</c:when>
-											<c:otherwise>已发文
-										  	<c:out value="${notice.remainDays}"/>天
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span>   
+								
 								  <select  class="treatment_status selectPointOfInterest form-control" disabled="disabled">
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
@@ -513,15 +505,7 @@
 								  	</c:choose>
 								<br>
 								</span>
-								<span class="qixian" style="padding-left:0px;">
-										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 今日发文</c:when>
-											<c:otherwise>已发文
-										  	<c:out value="${notice.remainDays}"/>天
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span>   
+							
 								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
