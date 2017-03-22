@@ -23,7 +23,7 @@ public class OrderServiceImpl implements OrderService {
 	private OrderDao orderDao;
 	private FeeDao feeDao;
 	
-	private static final int SERVICE_FEE = 0;
+	private static final double SERVICE_FEE = 0.1;
 	private static final int EXPRESS_FEE = 10;
 	private static final int EMS_EXPRESS_FEE = 20;
 	private static final double INVOCIE_RATE = 0.1;
@@ -45,8 +45,8 @@ public class OrderServiceImpl implements OrderService {
 			patentFeeAmount += fee.getAmount();
 		}
 		
-		totalAmount += (patentFeeAmount + SERVICE_FEE);
-		order.setServiceFee(SERVICE_FEE);
+		totalAmount += (patentFeeAmount + (int)(SERVICE_FEE*patentFeeAmount));
+		order.setServiceFee((int)SERVICE_FEE*patentFeeAmount);
 		
 		boolean needPost = order.getPostAddress().getId()!=0;
 		boolean isEmsExpress = express == 1;
@@ -55,11 +55,11 @@ public class OrderServiceImpl implements OrderService {
 			if(isEmsExpress){
 				totalAmount += EMS_EXPRESS_FEE;
 				order.setExpressFee(EMS_EXPRESS_FEE);
-				order.setServiceFee(SERVICE_FEE);
+				order.setServiceFee((int)SERVICE_FEE*patentFeeAmount);
 			}else{
 				totalAmount += EXPRESS_FEE;
 				order.setExpressFee(EXPRESS_FEE);
-				order.setServiceFee(SERVICE_FEE);
+				order.setServiceFee((int)SERVICE_FEE*patentFeeAmount);
 			}
 	
 			if (needCompanyInvoice) {
