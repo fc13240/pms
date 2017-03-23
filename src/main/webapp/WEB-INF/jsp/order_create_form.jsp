@@ -48,7 +48,8 @@
 							  value="${address.id}" required="required"  
 							  <c:if test="${varsStatus.count==1}">checked="checked" class="clicked"</c:if>> 
 							  ${address.receiver} ${address.provinceName} ${address.cityName} ${address.districtName}
-							  ${address.detailAddress} ${address.phone} </td>
+							  ${address.detailAddress} ${address.phone} 
+							 </td>
 						  </tr>
 						</c:forEach>
 						<tr>
@@ -306,7 +307,7 @@
 	}
 	$(function(){
 		$(".clicked").trigger('click')
-	})
+	});
 </script>
 
 
