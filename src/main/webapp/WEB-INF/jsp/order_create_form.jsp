@@ -42,20 +42,22 @@
 						  	<a href="<s:url value='/user/contactAddressAddForm.html'/>" target="_blank" ><font color=red>添加地址</font></a>
 						  </td>
 						</tr>
-						<c:forEach items="${contactAddresses}" var="address">
+						<c:forEach items="${contactAddresses}" var="address" varStatus="varsStatus">
 						  <tr>
 							<td><input type="radio"  name="postAddress.id" onclick="show();hint()"
-							  value="${address.id}" required="required"> 
+							  value="${address.id}" required="required"  
+							  <c:if test="${varsStatus.count==1}">checked="checked" class="clicked"</c:if>> 
 							  ${address.receiver} ${address.provinceName} ${address.cityName} ${address.districtName}
 							  ${address.detailAddress} ${address.phone} </td>
 						  </tr>
 						</c:forEach>
 						<tr>
 						  <td><input type="radio" id="postAddressId" name="postAddress.id" value="0"  onclick="hide();hint()"
-							required="required" checked="checked"> 不需要邮寄专利局收费收据 
+							required="required" > 不需要邮寄专利局收费收据 
 							<span style="color:red;">
 							<c:if test="${empty contactAddresses}">没有联系地址信息，需要邮寄请添加联系地址后再重新支付&nbsp;&nbsp;&nbsp;</c:if>
-							</span> </td>
+							</span>
+						  </td>
 						</tr>
 						<tr>
 						  <td><span style="font-size:15px;font-weight:bold">支付方式</span></td>
@@ -302,6 +304,11 @@
 	function payRedirect(orderId,payWay){
 		window.location.href="<s:url value='/order/payRedirect.html'/>?orderId="+orderId+"&payWay="+payWay;
 	}
+	$(function(){
+		$(".clicked").trigger('click')
+	})
 </script>
+
+
 </body>
 </html>
