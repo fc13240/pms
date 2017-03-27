@@ -179,8 +179,8 @@ public class PatentOfficeAccountController {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		//final String host = "www.yhzlpt.com"; //阿里云外包
 		//final String host = "60.174.195.212:8145"; //公司内部文件服务器
-		final String host = "60.174.195.212:8146"; //公司内部windows服务器
-		//final String host = "so.lotut.com";
+		//final String host = "60.174.195.212:8146"; //公司内部windows服务器
+		final String host = "so.lotut.com";
 		final String feeQueryPath = "/spms/spiderFee/getInputStreamByAutoUpdate.html";
 		URIBuilder uriBuilder = new URIBuilder()
 				.setScheme("http")
