@@ -1,5 +1,7 @@
 package com.lotut.pms.service.impl;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,21 @@ public class OrderServiceImpl implements OrderService {
 		this.feeDao = feeDao;
 	}
 
+	public int changeDoubleToInt(double d) {
+
+        DecimalFormat dfi = new DecimalFormat("#");
+
+        RoundingMode roundingMode = RoundingMode.UP;
+
+        dfi.setRoundingMode(roundingMode);
+
+        int parseInt = Integer.parseInt(dfi.format(d));
+
+        return parseInt;
+    }
+	
+	
+	
 	@Override
 	@Transactional
 	public long createOrder(Order order, List<Fee> fees,Integer express,Integer nationalInvoice,
@@ -45,8 +62,8 @@ public class OrderServiceImpl implements OrderService {
 			patentFeeAmount += fee.getAmount();
 		}
 		
-		totalAmount += (patentFeeAmount + (new Double(SERVICE_FEE*patentFeeAmount)).intValue());
-		order.setServiceFee((new Double(SERVICE_FEE*patentFeeAmount)).intValue());
+		totalAmount += (patentFeeAmount + changeDoubleToInt(SERVICE_FEE*patentFeeAmount));
+		order.setServiceFee(changeDoubleToInt(SERVICE_FEE*patentFeeAmount));
 		
 		boolean needPost = order.getPostAddress().getId()!=0;
 		boolean isEmsExpress = express == 1;
@@ -55,18 +72,18 @@ public class OrderServiceImpl implements OrderService {
 			if(isEmsExpress){
 				totalAmount += EMS_EXPRESS_FEE;
 				order.setExpressFee(EMS_EXPRESS_FEE);
-				order.setServiceFee((new Double(SERVICE_FEE*patentFeeAmount)).intValue());
+				order.setServiceFee(changeDoubleToInt(SERVICE_FEE*patentFeeAmount));
 			}else{
 				totalAmount += EXPRESS_FEE;
 				order.setExpressFee(EXPRESS_FEE);
-				order.setServiceFee((new Double(SERVICE_FEE*patentFeeAmount)).intValue());
+				order.setServiceFee(changeDoubleToInt(SERVICE_FEE*patentFeeAmount));
 			}
 	
 			if (needCompanyInvoice) {
 				int invoiceFee = (int) (patentFeeAmount * INVOCIE_RATE);
 				totalAmount += invoiceFee;
 				order.setInvoiceFee(invoiceFee);
-				order.setServiceFee((new Double(SERVICE_FEE*patentFeeAmount)).intValue());
+				order.setServiceFee(changeDoubleToInt(SERVICE_FEE*patentFeeAmount));
 			}
 		} 
 		
