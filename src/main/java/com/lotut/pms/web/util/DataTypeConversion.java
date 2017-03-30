@@ -4,7 +4,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class DataTypeConversion {
-	public static int changeDoubleToInt(double d) {
+	public static  int changeDoubleToInt(double d) {
 
         DecimalFormat dfi = new DecimalFormat("#");
 
@@ -17,9 +17,8 @@ public class DataTypeConversion {
         return parseInt;
     }
 	
-	public static void main(String[] args) {
-		double d = 1.35;
-		int i=changeDoubleToInt(d);
+	/*public static void main(String[] args) {
+		int i=changeDoubleToInt(0.09);
 		System.out.println(i);
-	}
+	}*/
 }
