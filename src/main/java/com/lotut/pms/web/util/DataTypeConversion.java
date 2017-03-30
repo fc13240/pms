@@ -4,7 +4,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class DataTypeConversion {
-	public  int changeDoubleToInt(double d) {
+	public static  int changeDoubleToInt(double d) {
 
         DecimalFormat dfi = new DecimalFormat("#");
 
