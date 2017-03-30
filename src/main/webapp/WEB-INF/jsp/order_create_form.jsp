@@ -42,6 +42,8 @@
 						  	<a href="<s:url value='/user/contactAddressAddForm.html'/>" target="_blank" ><font color=red>添加地址</font></a>
 						  </td>
 						</tr>
+						
+						<c:if test="${not empty contactAddresses}">
 						<c:forEach items="${contactAddresses}" var="address" varStatus="varsStatus">
 						  <tr>
 							<td><input type="radio"  name="postAddress.id" onclick="show();hint()"
@@ -52,14 +54,23 @@
 							 </td>
 						  </tr>
 						</c:forEach>
+						
 						<tr>
 						  <td><input type="radio" id="postAddressId" name="postAddress.id" value="0"  onclick="hide();hint()"
 							required="required" > 不需要邮寄专利局收费收据 
-							<span style="color:red;">
-							<c:if test="${empty contactAddresses}">没有联系地址信息，需要邮寄请添加联系地址后再重新支付&nbsp;&nbsp;&nbsp;</c:if>
-							</span>
 						  </td>
 						</tr>
+						</c:if>
+						
+						<c:if test="${empty contactAddresses}">
+							<td><input type="radio" id="postAddressId" name="postAddress.id" value="0" checked="checked" onclick="hide();hint()"
+							required="required" > 不需要邮寄专利局收费收据 
+							<span style="color:red;">
+							没有联系地址信息，需要邮寄请添加联系地址后再重新支付&nbsp;&nbsp;&nbsp;
+							</span>
+						  </td>
+						</c:if>
+						
 						<tr>
 						  <td><span style="font-size:15px;font-weight:bold">支付方式</span></td>
 						</tr>
