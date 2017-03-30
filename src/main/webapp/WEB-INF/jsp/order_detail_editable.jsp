@@ -225,7 +225,7 @@
 									  <td style="text-align:center">￥${order.invoiceFee}</td>
 									</tr>
 									<tr>
-									  <td colspan="5" style="font-weight: bold;">商品总额:￥${order.totalAmount}</td>
+									  <td colspan="5" style="font-weight: bold;">商品总额:￥${order.totalAmount+order.serviceFee}</td>
 									</tr>
 								  </tbody>
 								</table></td>

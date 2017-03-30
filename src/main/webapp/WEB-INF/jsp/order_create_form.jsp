@@ -153,7 +153,7 @@
 			                        		官费：￥<span id="patentFee">${totalAmount}</span>
 			                        	</span>
 			                         	<span style="margin-left:15px;">
-			                        		服务费：￥<span id="serviceFee">${totalAmount*0.01}</span>
+			                        		服务费：￥<span id="serviceFee">${serviceAmount}</span>
 			                        	</span>   
 			                         	<span style="margin-left:15px;">
 			                        		快递费：￥<span id="expressFee">0</span>
@@ -164,7 +164,7 @@
 			                        </td>
 								</tr>
 								<tr>
-									<td colspan="10">总价: ￥<span id="totalAmount">${totalAmount+totalAmount*0.01}</span>
+									<td colspan="10">总价: ￥<span id="totalAmount">${totalAmount+serviceAmount}</span>
 									</td>
 								</tr>
 							</td>
@@ -218,28 +218,28 @@
 				expressFee.text(expressFeeAmount);
 				invoiceFee.text(parseInt(patentAmount * 0.1));
 				totalAmount.text(baseFee + expressFeeAmount + parseInt(patentAmount * 0.1));
-				serviceFee.text(parseInt(patentAmount * 0.01));
+				//serviceFee.text(parseInt(patentAmount * 0.01));
 			} else if (isEmsExpress) {
 				expressFee.text(expressFeeAmount);
 				invoiceFee.text(0);
 				totalAmount.text(baseFee + expressFeeAmount);
-				serviceFee.text(parseInt(patentAmount * 0.01));
+				//serviceFee.text(parseInt(patentAmount * 0.01));
 			} else if (needCompanyInvoice) {
 				expressFee.text(10);
 				invoiceFee.text(parseInt(patentAmount * 0.1));
 				totalAmount.text(baseFee + normalExpressFee + parseInt(patentAmount * 0.1));
-				serviceFee.text(parseInt(patentAmount * 0.01));
+				//serviceFee.text(parseInt(patentAmount * 0.01));
 			} else {
 				expressFee.text(10);
 				invoiceFee.text(0);
 				totalAmount.text(baseFee + normalExpressFee);
-				serviceFee.text(parseInt(patentAmount * 0.01));
+				//serviceFee.text(parseInt(patentAmount * 0.01));
 			}
 		} else {
 			expressFee.text(0);
 			invoiceFee.text(0);
 			totalAmount.text(baseFee);
-			serviceFee.text(parseInt(patentAmount * 0.01));
+			//serviceFee.text(parseInt(patentAmount * 0.01));
 		}
 		
 
@@ -267,7 +267,7 @@
 		expressFee.text(0);
 		invoiceFee.text(0);
 		totalAmount.text(baseFee);
-		serviceFee.text(parseInt(patentAmount * 0.01));
+		//serviceFee.text(parseInt(patentAmount * 0.01));
 		$("#invoice").val("");
 	}
 

@@ -20,6 +20,7 @@ import com.lotut.pms.domain.OrderStatus;
 import com.lotut.pms.domain.Page;
 import com.lotut.pms.domain.PaymentMethod;
 import com.lotut.pms.service.OrderService;
+import com.lotut.pms.web.util.DataTypeConversion;
 
 public class OrderServiceImpl implements OrderService {
 	private OrderDao orderDao;
@@ -34,21 +35,6 @@ public class OrderServiceImpl implements OrderService {
 		this.orderDao = orderDao;
 		this.feeDao = feeDao;
 	}
-
-	public int changeDoubleToInt(double d) {
-
-        DecimalFormat dfi = new DecimalFormat("#");
-
-        RoundingMode roundingMode = RoundingMode.UP;
-
-        dfi.setRoundingMode(roundingMode);
-
-        int parseInt = Integer.parseInt(dfi.format(d));
-
-        return parseInt;
-    }
-	
-	
 	
 	@Override
 	@Transactional
@@ -62,8 +48,8 @@ public class OrderServiceImpl implements OrderService {
 			patentFeeAmount += fee.getAmount();
 		}
 		
-		totalAmount += (patentFeeAmount + changeDoubleToInt(SERVICE_FEE*patentFeeAmount));
-		order.setServiceFee(changeDoubleToInt(SERVICE_FEE*patentFeeAmount));
+		totalAmount += (patentFeeAmount + DataTypeConversion.changeDoubleToInt(SERVICE_FEE*patentFeeAmount));
+		order.setServiceFee(DataTypeConversion.changeDoubleToInt(SERVICE_FEE*patentFeeAmount));
 		
 		boolean needPost = order.getPostAddress().getId()!=0;
 		boolean isEmsExpress = express == 1;
@@ -72,18 +58,18 @@ public class OrderServiceImpl implements OrderService {
 			if(isEmsExpress){
 				totalAmount += EMS_EXPRESS_FEE;
 				order.setExpressFee(EMS_EXPRESS_FEE);
-				order.setServiceFee(changeDoubleToInt(SERVICE_FEE*patentFeeAmount));
+				order.setServiceFee(DataTypeConversion.changeDoubleToInt(SERVICE_FEE*patentFeeAmount));
 			}else{
 				totalAmount += EXPRESS_FEE;
 				order.setExpressFee(EXPRESS_FEE);
-				order.setServiceFee(changeDoubleToInt(SERVICE_FEE*patentFeeAmount));
+				order.setServiceFee(DataTypeConversion.changeDoubleToInt(SERVICE_FEE*patentFeeAmount));
 			}
 	
 			if (needCompanyInvoice) {
 				int invoiceFee = (int) (patentFeeAmount * INVOCIE_RATE);
 				totalAmount += invoiceFee;
 				order.setInvoiceFee(invoiceFee);
-				order.setServiceFee(changeDoubleToInt(SERVICE_FEE*patentFeeAmount));
+				order.setServiceFee(DataTypeConversion.changeDoubleToInt(SERVICE_FEE*patentFeeAmount));
 			}
 		} 
 		
