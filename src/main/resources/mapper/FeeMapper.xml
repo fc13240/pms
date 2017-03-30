@@ -370,6 +370,10 @@
 		and fee in
 		 <foreach item="feeId" collection="feeIdList" open="(" separator="," close=")">
 			 #{feeId}
+		 </foreach>;
+		 update fees set fee_monitor_status=1 where  fee_id in
+		 <foreach item="feeId" collection="feeIdList" open="(" separator="," close=")">
+			 #{feeId}
 		 </foreach>
 	</delete>
 	
