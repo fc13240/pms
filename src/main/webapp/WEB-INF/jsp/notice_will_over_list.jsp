@@ -1030,7 +1030,7 @@ function batchProcessNotice(processStatus) {
 		var wayOfPaging="${wayOfPaging}";
 		var url = null;
 		if(wayOfPaging=="normal"){
-			url = "<s:url value='/notice/list.html'/>?currentPage=" + pageNo;
+			url = "<s:url value='/notice/getWillOverdeadLine.html'/>?currentPage=" + pageNo;
 		}else if(wayOfPaging=="unreadNotice"){
 			url = "<s:url value='/notice/unreadNotice.html'/>?currentPage=" + pageNo;
 			
