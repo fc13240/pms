@@ -1,7 +1,6 @@
 package com.lotut.pms.dao.mybatis;
 
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 

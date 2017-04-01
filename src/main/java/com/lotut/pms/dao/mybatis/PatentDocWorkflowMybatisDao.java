@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.lotut.pms.dao.OrderDao;
 import com.lotut.pms.dao.PatentDocWorkflowDao;
-import com.lotut.pms.dao.mapper.OrderMapper;
 import com.lotut.pms.dao.mapper.PatentDocWorkflowMapper;
 import com.lotut.pms.domain.PatentDocOrder;
 import com.lotut.pms.domain.PatentDocOrderItem;

@@ -25,8 +25,6 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import com.lotut.pms.service.utils.PatentExcelStream;
-
 
 public class PatentDownload {
 	private static final String LOGIN_URL = "http://cpquery.sipo.gov.cn/txn999999.ajax?usertype=2";

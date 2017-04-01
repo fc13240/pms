@@ -1,9 +1,7 @@
 package com.lotut.pms.service.utils;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,9 +9,7 @@ import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -23,8 +19,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
 import com.lotut.pms.domain.Patent;
-import com.mchange.v2.cfg.PropertiesConfigSource.Parse;
 
 public class FeeCrawler {
 	private List<Patent> patents;

@@ -2,7 +2,6 @@ package com.lotut.pms.dao.imp;
 
 import static com.mongodb.client.model.Filters.in;
 import static org.elasticsearch.index.query.FilterBuilders.termFilter;
-import static org.elasticsearch.index.query.FilterBuilders.termsFilter;
 import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
 import static org.elasticsearch.index.query.QueryBuilders.matchPhraseQuery;
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;

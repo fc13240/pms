@@ -1,7 +1,5 @@
 package com.lotut.pms.util;
 
-import javax.print.attribute.standard.MediaName;
-
 import com.lotut.pms.domain.PatentDoc;
 
 public abstract class PatentDocFeeCalculatorBack {

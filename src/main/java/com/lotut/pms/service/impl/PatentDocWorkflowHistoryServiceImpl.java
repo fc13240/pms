@@ -8,7 +8,6 @@ import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lotut.pms.constants.PatentDocWorkflowAction;
 import com.lotut.pms.dao.PatentDocWorkflowHistoryDao;
 import com.lotut.pms.domain.PatentDocWorkflowHistory;
 import com.lotut.pms.service.PatentDocWorkflowHistoryService;

@@ -1,6 +1,5 @@
 package com.lotut.pms.service.utils;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
@@ -18,7 +17,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import com.lotut.pms.domain.Patent;
 import com.lotut.pms.service.exception.DateFormatException;
-import com.lotut.pms.util.PrincipalUtils;
 
 public class PatentExcelParser {
 	

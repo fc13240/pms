@@ -1,25 +1,18 @@
 package com.lotut.pms.web.controller;
 
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lotut.pms.service.utils.FeeCrawler;
 import com.lotut.pms.service.utils.PatentDownload;
 import com.lotut.pms.service.utils.PatentExcelStream;
-import com.lotut.pms.web.util.WebUtils;
 
 @Controller
 @RequestMapping(path="/spiderFee")

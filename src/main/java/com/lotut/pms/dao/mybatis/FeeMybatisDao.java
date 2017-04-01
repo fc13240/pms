@@ -10,7 +10,6 @@ import com.lotut.pms.dao.mapper.FeeMapper;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.FeeSearchCondition;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.User;
 
 public class FeeMybatisDao extends SqlSessionDaoSupport implements FeeDao {
 	private FeeMapper feeMapper;

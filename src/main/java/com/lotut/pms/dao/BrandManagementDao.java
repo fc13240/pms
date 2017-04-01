@@ -3,8 +3,6 @@ package com.lotut.pms.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.lotut.pms.domain.Brand;
 import com.lotut.pms.domain.BrandCategory;
 import com.lotut.pms.domain.BrandCategoryCount;

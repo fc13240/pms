@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-import com.lotut.pms.constants.PatentDocWorkflowAction;
-
 public class PatentDocWorkflowHistory {
 	private long historyId;
 	private long patentDocId;

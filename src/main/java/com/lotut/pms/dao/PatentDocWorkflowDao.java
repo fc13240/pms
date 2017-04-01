@@ -2,8 +2,6 @@ package com.lotut.pms.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.lotut.pms.domain.PatentDocOrder;
 import com.lotut.pms.domain.PatentDocOrderItem;
 
