@@ -216,10 +216,10 @@ height:37px;
 					var fileName=$("#newsThumbnail").val();
 					var suffix=fileName.substr(fileName.lastIndexOf(".")+1);
 					suffix =suffix.toLowerCase();
-					if(suffix=="jpg"||suffix=="jpeg"||suffix=="png"){
+					if(suffix=="jpg"||suffix=="jpeg"||suffix=="png"||suffix=="gif"){
 						return true;
 					}else{
-						alert("请上传图片格式为jpg、jpeg、png");
+						alert("请上传图片格式为jpg、jpeg、png.gif");
 						return false;
 					}
 				},

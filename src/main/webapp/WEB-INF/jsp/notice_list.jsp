@@ -483,15 +483,7 @@
 								  	</c:choose>
 								<br>
 								</span>
-								<span class="qixian" style="padding-left:0px;">
-										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 今日发文</c:when>
-											<c:otherwise>已发文
-										  	<c:out value="${notice.remainDays}"/>天
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span>   
+								
 								  <select  class="treatment_status selectPointOfInterest form-control" disabled="disabled">
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
@@ -513,15 +505,7 @@
 								  	</c:choose>
 								<br>
 								</span>
-								<span class="qixian" style="padding-left:0px;">
-										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 今日发文</c:when>
-											<c:otherwise>已发文
-										  	<c:out value="${notice.remainDays}"/>天
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span>   
+							
 								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
@@ -1304,17 +1288,20 @@ tabs.set("nav","menu_con");//执行
 </script>
 <script type="text/javascript">
  $(window).load(function(){
-	 var location_href = window.location.href;
-	 var substring_location = location_href.substring(location_href.lastIndexOf("/")+1);
-	 alert(substring_location);
-	 alert(substring_location=="list.html?currentPage=1");
-	 if(substring_location=="list.html?currentPage=1"){
-		var url="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>";
-		var count = ${noticeDateType[1]["count"] };
-		formutil.alertAndEntryUrl("<font color='red'>请注意:</font>您有"+count+"件未处理的通知书将要超期，请尽快处理，否则影响专利申请进程",true,url);
-	 }else{
-		 
-	 }
+	 var noticeWillDeadLine = ${noticeDateType[1]["count"] };
+		if(noticeWillDeadLine=="" || noticeWillDeadLine==0 )
+			return;
+		else{
+			 var location_href = window.location.href;
+			 var substring_location = location_href.substring(location_href.lastIndexOf("/")+1);
+			 if(substring_location=="list.html?currentPage=1"){
+				var url="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>";
+				var count = ${noticeDateType[1]["count"] };
+				formutil.alertAndEntryUrl("<font color='red'>请注意:</font>您有"+count+"件未处理的通知书将要超期，请尽快处理，否则影响专利申请进程",true,url);
+			 }else{
+				 
+			 }
+		}
 })  
 </script>
 </body>

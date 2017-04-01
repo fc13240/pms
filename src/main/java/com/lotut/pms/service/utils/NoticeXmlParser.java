@@ -6,10 +6,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+
 import com.lotut.pms.domain.Notice;
 import com.lotut.pms.domain.NoticeType;
 import com.lotut.pms.domain.Patent;

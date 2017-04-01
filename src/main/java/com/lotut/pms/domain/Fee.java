@@ -22,7 +22,16 @@ public class Fee {
 	private Patent patent;
 	private long orderId;
 	private List<User> shareUsers;
+	private int serviceAmount;
 
+
+	public int getServiceAmount() {
+		return serviceAmount;
+	}
+
+	public void setServiceAmount(int serviceAmount) {
+		this.serviceAmount = serviceAmount;
+	}
 
 	public long getFeeId() {
 		return feeId;

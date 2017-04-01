@@ -19,16 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alipay.config.AlipayConfig;
 import com.alipay.util.AlipayNotify;
 import com.alipay.util.AlipaySubmit;
-import com.lotut.pms.constants.PatentDocWorkflowAction;
-import com.lotut.pms.domain.Order;
 import com.lotut.pms.domain.PatentDocOrder;
-import com.lotut.pms.domain.PatentDocWorkflowHistory;
-import com.lotut.pms.service.FeeService;
-import com.lotut.pms.service.OrderService;
-import com.lotut.pms.service.PatentDocService;
 import com.lotut.pms.service.PatentDocWorkflowHistoryService;
 import com.lotut.pms.service.PatentDocWorkflowService;
-import com.lotut.pms.util.PrincipalUtils;
 
 @Controller
 @RequestMapping(path="/patentDocAlipay")

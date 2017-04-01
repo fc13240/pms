@@ -1,18 +1,7 @@
 package com.lotut.pms.web.util;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;  
-import java.util.List;  
-  
-import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;  
-import org.apache.commons.httpclient.Header;  
-import org.apache.commons.httpclient.HttpClient;  
-import org.apache.commons.httpclient.HttpException;  
-import org.apache.commons.httpclient.HttpStatus;  
-import org.apache.commons.httpclient.UsernamePasswordCredentials;  
-import org.apache.commons.httpclient.auth.AuthScope;  
-import org.apache.commons.httpclient.methods.GetMethod;  
-import org.apache.commons.httpclient.params.HttpMethodParams;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -23,7 +12,6 @@ import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.PlainConnectionSocketFactory;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;

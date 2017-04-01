@@ -356,9 +356,9 @@
 									</td>
 									<td align="right">
 										<span class="span3" style="font-size:18px;font-weight:bold;">
-											<a href="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>" >将要超期${noticeDateType[1]["count"] }件</a>&nbsp;&nbsp;
-											<a href="<s:url value='/notice/getTodayNotices.html?currentPage=1'/>" >今天发文${noticeDateType[2]["count"] }</a>&nbsp;&nbsp;
-											<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" id="unreadNoticeCountForA">未查看${unreadNoticeCount}件
+											<a href="<s:url value='/notice/getWillOverdeadLine.html?currentPage=1'/>" >将要超期&nbsp;${noticeDateType[1]["count"] }件</a>
+											<a href="<s:url value='/notice/getTodayNotices.html?currentPage=1'/>" >今天发文&nbsp;${noticeDateType[2]["count"] }件</a>
+											<a href="<s:url value='/notice/unreadNotice.html'/>?page.currentPage=1" id="unreadNoticeCountForA">未查看&nbsp;${unreadNoticeCount}件
 											</a>
 										</span>
 
@@ -481,15 +481,7 @@
 								  	</c:choose>
 								<br>
 								</span>
-								<span class="qixian" style="padding-left:0px;">
-										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 今日发文</c:when>
-											<c:otherwise>已发文
-										  	<c:out value="${notice.remainDays}"/>天
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span>   
+								
 								  <select  class="treatment_status selectPointOfInterest form-control" disabled="disabled">
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>
@@ -511,15 +503,7 @@
 								  	</c:choose>
 								<br>
 								</span>
-								<span class="qixian" style="padding-left:0px;">
-										<c:choose>
-											<c:when test="${notice.remainDays == -1}"> 今日发文</c:when>
-											<c:otherwise>已发文
-										  	<c:out value="${notice.remainDays}"/>天
-											</c:otherwise>
-									  	</c:choose>
-									<br>
-									</span>   
+								
 								  <select  class="treatment_status selectPointOfInterest form-control" onChange="javascript:processNotice('${notice.noticeId}', this)">
 									<c:forEach items="${noticeProcessStatus}" var="processStatus"> <option value="<c:out value='${processStatus.processStatusId}'/>" 
 									  <c:if test="${processStatus.processStatusId==notice.processStatus.processStatusId}">selected="selected"</c:if>

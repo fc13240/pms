@@ -15,6 +15,8 @@
  */
 package com.unionpay.acp.sdk;
 
+import static com.unionpay.acp.sdk.SDKUtil.isEmpty;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -40,8 +42,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import static com.unionpay.acp.sdk.SDKUtil.isEmpty;
 
 public class CertUtil {
 	/** 证书容器. */

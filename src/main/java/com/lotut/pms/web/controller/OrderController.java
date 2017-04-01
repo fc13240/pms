@@ -34,6 +34,7 @@ import com.lotut.pms.service.FeeService;
 import com.lotut.pms.service.OrderService;
 import com.lotut.pms.service.UserService;
 import com.lotut.pms.util.PrincipalUtils;
+import com.lotut.pms.web.util.DataTypeConversion;
 import com.lotut.pms.web.util.WebUtils;
 
 @Controller
@@ -56,10 +57,16 @@ public class OrderController {
 		int userId = PrincipalUtils.getCurrentUserId();
 		List<ContactAddress> contactAddresses = userService.getUserContactAddresses(userId);
 		List<Fee> fees = feeService.getFeesByIds(feeIds);
+		int totalAmount=0;
+		int serviceAmount=0;
+		for(Fee fee:fees){
+			totalAmount+=fee.getAmount();
+		}
+		serviceAmount=DataTypeConversion.changeDoubleToInt(totalAmount*0.01);
 		orderService.changeMonitorStatus(feeIds, MONITORSTATUS);
 		model.addAttribute("contactAddresses", contactAddresses);
 		model.addAttribute("fees", fees);
-		
+		model.addAttribute("serviceAmount", serviceAmount);
 		return "order_create_form";
 	}
 	
@@ -189,18 +196,22 @@ public class OrderController {
 	
 	@RequestMapping(path="/detail/{orderId}", method=RequestMethod.GET)
 	public String getOrderDetail(@PathVariable long orderId,Model model){
-		
+		Order order = orderService.getOrderById(orderId);
+		int totalAmount=0;
+		int serviceAmount=0;
+		for(Fee fee:order.getFeeList()){
+			totalAmount+=fee.getAmount();
+		}
+		serviceAmount=DataTypeConversion.changeDoubleToInt(totalAmount*0.01);
+		order.setServiceFee(serviceAmount);
 		if (PrincipalUtils.isOrderProcessor()) {
-			Order order = orderService.getOrderById(orderId);
 			List<Map<String, String>> provinces = userService.getAllProvinces();
 			model.addAttribute("provinces", provinces);
 			model.addAttribute("order", order);
-			
 			return "order_detail_editable";
 		}else{
-			Order order = orderService.getOrderById(orderId);
+			order.setServiceFee(serviceAmount);
 			model.addAttribute("order", order);
-			
 			return "order_detail";
 		}
 		

@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Param;
 import com.lotut.pms.domain.Fee;
 import com.lotut.pms.domain.FeeSearchCondition;
 import com.lotut.pms.domain.Page;
-import com.lotut.pms.domain.User;
 
 public interface FeeMapper {
 	

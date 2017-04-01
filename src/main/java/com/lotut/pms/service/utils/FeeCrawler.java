@@ -1,9 +1,7 @@
 package com.lotut.pms.service.utils;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,9 +9,7 @@ import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -25,7 +21,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.lotut.pms.domain.Patent;
-import com.mchange.v2.cfg.PropertiesConfigSource.Parse;
 
 public class FeeCrawler {
 	private List<Patent> patents;
@@ -33,6 +28,10 @@ public class FeeCrawler {
 	private Map<Patent, List<List<String>>> shouldPayRecordsMap = new HashMap<>();
 	private Map<Patent, List<List<String>>> paidRecordsMap = new HashMap<>();
 	private List<Patent> emptyFeePatents = new ArrayList<>();
+	
+	public FeeCrawler() {
+		super();
+	}
 	
 	public FeeCrawler(List<Patent> patents) {
 		this.patents = patents;
@@ -234,10 +233,10 @@ public class FeeCrawler {
 	
 	
 	public static  String grabFeeHtml2(String appNo, boolean isUnpublisedPatent) {
-		//final String host = "www.yhzlpt.com"; //阿里云
+		final String host = "www.yhzlpt.com"; //阿里云
 		//final String host = "60.174.195.212:8145"; //公司内部文件服务器
 		//final String host = "60.174.195.212:8146"; //公司内部windows服务器
-		final String host = "so.lotut.com";
+		//final String host = "so.lotut.com";
 		final String feeQueryPath = "/spms/spiderFee/getFeeByAppNo.html";
 		URIBuilder uriBuilder = new URIBuilder()
 				.setScheme("http")
@@ -313,7 +312,71 @@ public class FeeCrawler {
 	}
 	
 	
+	public String getFeeHtml(String appNo) {
+		Map<String, List<List<String>>> feeRecordsMap = new HashMap<>();
+		int retryCount = 3;
+		String html =null;
+		while (retryCount > 0) {
+			try {
+				try {
+					 html = spiderFee(appNo, false);
+					if (html != null) {
+						feeRecordsMap = parseHtml(html);
+					}
+					
+					if (!feeRecordsMap.isEmpty()) {
+						return html;
+					}
+				} catch (EmptyFeeRecordException e) {
+					html = spiderFee(appNo, true);
+					if (html != null) {
+						feeRecordsMap = parseHtml(html);
+					}
+					
+					if (!feeRecordsMap.isEmpty()) {
+						return html;
+					}
+				} 
+			} catch (Exception e) {
+				retryCount--;
+				if (retryCount == 0) {
+					throw new FeeRetrieveError(e);
+				}
+			}
+		}
+		return html;
+	}
 	
+	
+	public String spiderFee(String appNo, boolean isUnpublisedPatent) {
+		final String host = "cpquery.sipo.gov.cn";
+		final String feeQueryPath = "/txnQueryFeeData.do";
+		URIBuilder uriBuilder = new URIBuilder()
+				.setScheme("http")
+				.setHost(host)
+				.setPath(feeQueryPath)
+				.setParameter("select-key:shenqingh", appNo);
+		
+		try {
+			URI uri = null;
+			
+			if (isUnpublisedPatent) {
+				// 查询未公开专利时需要添加'select-key:gonggaobj'参数
+				uri = uriBuilder.setParameter("select-key:gonggaobj", "0").build();
+			} else {
+				uri = uriBuilder.build();
+			}
+			
+			ResponseHandler<String> feeResponseHanlder = new FeeResponseHandler();
+	        try (CloseableHttpClient httpClient = HttpClients.createDefault();) {
+				HttpGet httpget = new HttpGet(uri);
+				String html = httpClient.execute(httpget, feeResponseHanlder);
+				return html;
+	        }
+		} catch (Exception e) {
+			throw new FeeRetrieveError(e);
+		}
+	}
 	
 	
 }

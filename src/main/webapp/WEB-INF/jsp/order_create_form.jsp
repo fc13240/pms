@@ -42,21 +42,35 @@
 						  	<a href="<s:url value='/user/contactAddressAddForm.html'/>" target="_blank" ><font color=red>添加地址</font></a>
 						  </td>
 						</tr>
-						<c:forEach items="${contactAddresses}" var="address">
+						
+						<c:if test="${not empty contactAddresses}">
+						<c:forEach items="${contactAddresses}" var="address" varStatus="varsStatus">
 						  <tr>
 							<td><input type="radio"  name="postAddress.id" onclick="show();hint()"
-							  value="${address.id}" required="required"> 
+							  value="${address.id}" required="required"  
+							  <c:if test="${varsStatus.count==1}">checked="checked" class="clicked"</c:if>> 
 							  ${address.receiver} ${address.provinceName} ${address.cityName} ${address.districtName}
-							  ${address.detailAddress} ${address.phone} </td>
+							  ${address.detailAddress} ${address.phone} 
+							 </td>
 						  </tr>
 						</c:forEach>
+						
 						<tr>
 						  <td><input type="radio" id="postAddressId" name="postAddress.id" value="0"  onclick="hide();hint()"
-							required="required" checked="checked"> 不需要邮寄专利局收费收据 
-							<span style="color:red;">
-							<c:if test="${empty contactAddresses}">没有联系地址信息，需要邮寄请添加联系地址后再重新支付&nbsp;&nbsp;&nbsp;</c:if>
-							</span> </td>
+							required="required" > 不需要邮寄专利局收费收据 
+						  </td>
 						</tr>
+						</c:if>
+						
+						<c:if test="${empty contactAddresses}">
+							<td><input type="radio" id="postAddressId" name="postAddress.id" value="0" checked="checked" onclick="hide();hint()"
+							required="required" > 不需要邮寄专利局收费收据 
+							<span style="color:red;">
+							没有联系地址信息，需要邮寄请添加联系地址后再重新支付&nbsp;&nbsp;&nbsp;
+							</span>
+						  </td>
+						</c:if>
+						
 						<tr>
 						  <td><span style="font-size:15px;font-weight:bold">支付方式</span></td>
 						</tr>
@@ -150,7 +164,7 @@
 			                        		官费：￥<span id="patentFee">${totalAmount}</span>
 			                        	</span>
 			                         	<span style="margin-left:15px;">
-			                        		服务费：￥<span id="serviceFee">0</span>
+			                        		服务费：￥<span id="serviceFee">${serviceAmount}</span>
 			                        	</span>   
 			                         	<span style="margin-left:15px;">
 			                        		快递费：￥<span id="expressFee">0</span>
@@ -161,7 +175,7 @@
 			                        </td>
 								</tr>
 								<tr>
-									<td colspan="10">总价: ￥<span id="totalAmount">${totalAmount}</span>
+									<td colspan="10">总价: ￥<span id="totalAmount">${totalAmount+serviceAmount}</span>
 									</td>
 								</tr>
 							</td>
@@ -201,6 +215,7 @@
 		var serviceFeeAmount = parseInt($("#serviceFee").text());
 		var baseFee = patentAmount + serviceFeeAmount;
 		var expressFee = $("#expressFee");
+		var serviceFee = $("#serviceFee");
 		var expressFeeAmount = 20;
 		var normalExpressFee = 10;
 		var invoiceFee = $("#invoiceFee");
@@ -213,24 +228,29 @@
 			if (isEmsExpress && needCompanyInvoice) {
 				expressFee.text(expressFeeAmount);
 				invoiceFee.text(parseInt(patentAmount * 0.1));
-				totalAmount.text(baseFee + expressFeeAmount + parseInt(patentAmount * 0.1));	
+				totalAmount.text(baseFee + expressFeeAmount + parseInt(patentAmount * 0.1));
+				//serviceFee.text(parseInt(patentAmount * 0.01));
 			} else if (isEmsExpress) {
 				expressFee.text(expressFeeAmount);
 				invoiceFee.text(0);
 				totalAmount.text(baseFee + expressFeeAmount);
+				//serviceFee.text(parseInt(patentAmount * 0.01));
 			} else if (needCompanyInvoice) {
 				expressFee.text(10);
 				invoiceFee.text(parseInt(patentAmount * 0.1));
-				totalAmount.text(baseFee + normalExpressFee + parseInt(patentAmount * 0.1));				
+				totalAmount.text(baseFee + normalExpressFee + parseInt(patentAmount * 0.1));
+				//serviceFee.text(parseInt(patentAmount * 0.01));
 			} else {
 				expressFee.text(10);
 				invoiceFee.text(0);
-				totalAmount.text(baseFee + normalExpressFee);	
+				totalAmount.text(baseFee + normalExpressFee);
+				//serviceFee.text(parseInt(patentAmount * 0.01));
 			}
 		} else {
 			expressFee.text(0);
 			invoiceFee.text(0);
-			totalAmount.text(baseFee);			
+			totalAmount.text(baseFee);
+			//serviceFee.text(parseInt(patentAmount * 0.01));
 		}
 		
 
@@ -251,12 +271,14 @@
 		var serviceFeeAmount = parseInt($("#serviceFee").text());
 		var baseFee = patentAmount + serviceFeeAmount;
 		var expressFee = $("#expressFee");
+		var serviceFee = $("#serviceFee");
 		var expressFeeAmount = 20;
 		var invoiceFee = $("#invoiceFee");
 		var totalAmount = $("#totalAmount");
 		expressFee.text(0);
 		invoiceFee.text(0);
 		totalAmount.text(baseFee);
+		//serviceFee.text(parseInt(patentAmount * 0.01));
 		$("#invoice").val("");
 	}
 
@@ -294,6 +316,11 @@
 	function payRedirect(orderId,payWay){
 		window.location.href="<s:url value='/order/payRedirect.html'/>?orderId="+orderId+"&payWay="+payWay;
 	}
+	$(function(){
+		$(".clicked").trigger('click')
+	});
 </script>
+
+
 </body>
 </html>

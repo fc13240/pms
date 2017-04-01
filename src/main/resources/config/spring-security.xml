@@ -10,7 +10,7 @@
 	<http pattern="/static/**" security="none" />
 	<http pattern="/temp/**" security="none" />
 	<http pattern="/plugins/**" security="none" />
-
+	<http pattern="/spiderFee/**" security="none" />
 	<http use-expressions="true">
 		<intercept-url pattern="/loginForm.html" access="permitAll"/>
 		<intercept-url pattern="/contentImg/**" access="permitAll"/>

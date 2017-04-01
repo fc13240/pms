@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SearchFieldUtils {
@@ -63,8 +64,19 @@ public class SearchFieldUtils {
 	}
 	
 	public static void main(String[] args) {
-		String str = "32441414414141241X";
-		System.out.println(str.length());
-		System.out.println(isIdCard(str));
+		String line = "what are you doing 3000 ! ok？";
+		String regex="(\\D*)(\\d+)(.*)";
+		Pattern p =Pattern.compile(regex);
+		Matcher m =p.matcher(line);
+		if(m.find()){
+			System.out.println(m.group(1));
+			System.out.println(m.group(2));
+			System.out.println(m.group(3));
+		}
+		String windows="windows 10";
+		boolean is=Pattern.matches(".*windows.*", "windows 11");
+		boolean are=Pattern.matches("industr(?:y|ies)", "industry");
+		System.out.println(is);
+		System.out.println(are);
 	}
 }
