@@ -233,8 +233,8 @@ public class FeeCrawler {
 	
 	
 	public static  String grabFeeHtml2(String appNo, boolean isUnpublisedPatent) {
-		final String host = "www.yhzlpt.com"; //阿里云
-		//final String host = "60.174.195.212:8145"; //公司内部文件服务器
+		//final String host = "www.yhzlpt.com"; //阿里云
+		final String host = "60.174.195.212:8145"; //公司内部文件服务器
 		//final String host = "60.174.195.212:8146"; //公司内部windows服务器
 		//final String host = "so.lotut.com";
 		final String feeQueryPath = "/spms/spiderFee/getFeeByAppNo.html";
