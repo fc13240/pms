@@ -580,7 +580,8 @@
 								<a href="<s:url value='/notice/showFriends.html'/>?patents=<c:out value='${notice.patent.patentId}'/>">
 								  分享
 								  </a><br/>
-								  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${notice.patent.patentId}'/>">
+								  <%-- <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${notice.patent.patentId}'/>"> --%>
+								  <a target="_blank" href="javascript:grabHostFees(${notice.patent.patentId})">
 								  交费
 								  </a>
 								   <a target="_blank" href="<s:url value='/notice/showRemarks.html'/>?noticeId=${notice.noticeId}">
@@ -987,9 +988,13 @@ function batchProcessNotice(processStatus) {
 			if ($.inArray(patents_checked[i], uniquePatentNos) == -1) {
 				uniquePatentNos.push(patents_checked[i]);
 			}
-		}		
+		}
+		
+		//缴费地址服务器
+		// 1 : 阿里云（116） 2 : 文件服务器 （60） 3: 搜索服务器（157）
+		var hostPort=1;
 		var patents = uniquePatentNos.join(",");		
-		window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patents);		
+		window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patents+"&hostPort="+hostPort);		
 		
 	}	
 	function batchFee() {
@@ -1284,7 +1289,6 @@ tabs.set("nav","menu_con");//执行
 			}
 		});
 	}
-	
 </script>
 <script type="text/javascript">
  $(window).load(function(){
@@ -1302,7 +1306,8 @@ tabs.set("nav","menu_con");//执行
 				 
 			 }
 		}
-})  
+})
+
 </script>
 </body>
 </html>

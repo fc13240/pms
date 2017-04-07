@@ -19,5 +19,3 @@
 <link rel="stylesheet" href="<s:url value='/temp/css/buttons.css'/>" class="ace-main-stylesheet" id="main-ace-style" />
 <link rel="stylesheet" media="screen" href="<s:url value='/temp/css/jquery-ui.min.css'/>" />
 <script src="<s:url value='/static/datepicker/WdatePicker.js'/>"></script>
-
-

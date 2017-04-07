@@ -68,12 +68,12 @@ public class FeeServiceImpl implements FeeService {
 	}
 
 	@Override
-	public Map<String, List<?>> batchGrabFees(List<Long> patentIds) {
+	public Map<String, List<?>> batchGrabFees(int hostPort,List<Long> patentIds) {
 		feeDao.deleteUnmonitoredFeesByPatentIds(patentIds, PrincipalUtils.getCurrentUserId());
 		Map<String, List<?>> grabResultMap = new HashMap<>();
 		List<Patent> patents = patentDao.getPatentsByIds(patentIds);
 		FeeCrawler crawler = new FeeCrawler(patents);
-		crawler.grabFees();
+		crawler.grabFees(hostPort);
 		Map<Patent, List<List<String>>> shouldPayRecordsMap = crawler.getShouldPayRecordsMap();
 		List<Patent> failedPatents = crawler.getFailedPatents();
 		List<Patent> emptyFeePatents = crawler.getEmptyFeePatents();
@@ -89,14 +89,14 @@ public class FeeServiceImpl implements FeeService {
 	
 	@Override
 	@Transactional
-	public Map<String, Object> grabFees(long patentId) {
+	public Map<String, Object> grabFees(int hostPort,long patentId) {
 		Map<String, Object> grabResultMap = new HashMap<>();
 		List<Long> patentIds = new ArrayList<>();
 		patentIds.add(patentId);
 		feeDao.deleteUnmonitoredFeesByPatentIds(patentIds, PrincipalUtils.getCurrentUserId());
 		List<Patent> patents = patentDao.getPatentsByIds(patentIds);
 		FeeCrawler crawler = new FeeCrawler(patents);
-		crawler.grabFees();
+		crawler.grabFees(hostPort);
 		Map<Patent, List<List<String>>> shouldPayRecordsMap = crawler.getShouldPayRecordsMap();
 		Map<Patent, List<List<String>>> paidRecordsMap = crawler.getPaidRecordsMap();
 		getShouldPayRecords(shouldPayRecordsMap);

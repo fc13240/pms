@@ -65,4 +65,15 @@
 	      <!-- 主菜单-列表 menu end / --> 
 	    </div>
 	</div>	
-</div>	
+</div>
+
+<script type="text/javascript">
+
+function grabHostFees(patentId){
+	//缴费地址服务器
+	// 1 : 阿里云（116） 2 : 文件服务器 （60） 3: 搜索服务器（157）
+	var hostPort=1;
+	window.open("<s:url value='/fee/grabFees.html'/>?patent="+patentId+"&hostPort="+hostPort);
+}
+
+</script>	

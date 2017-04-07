@@ -29,6 +29,14 @@ public class FeeCrawler {
 	private Map<Patent, List<List<String>>> paidRecordsMap = new HashMap<>();
 	private List<Patent> emptyFeePatents = new ArrayList<>();
 	
+	public static final String ALI_HOST = "116.62.53.170:80/";
+	public static final String DOCUMENT_HOST = "60.174.195.212:8145";
+	public static final String SEARCH_HOST = "so.lotut.com";
+	//windows 主机
+	public static final String WINDOWS_HOST = "60.174.195.212:8146";
+	//本机
+	public static final String LOCALHOST_HOST = "cpquery.sipo.gov.cn";
+	
 	public FeeCrawler() {
 		super();
 	}
@@ -53,10 +61,10 @@ public class FeeCrawler {
 		return emptyFeePatents;
 	}
 	
-	public void grabFees() {
+	public void grabFees(int hostPort) {
 		for (Patent patent: patents) {
 			try {
-				Map<String, List<List<String>>> feeRecordsMap = getFeeRecords(patent);
+				Map<String, List<List<String>>> feeRecordsMap = getFeeRecords(hostPort,patent);
 				boolean hasFeeRecords = (feeRecordsMap.get("shouldPay") != null && !feeRecordsMap.get("shouldPay").isEmpty()) ||
 						(feeRecordsMap.get("paid") != null && !feeRecordsMap.get("paid").isEmpty());
 				if (hasFeeRecords) {
@@ -78,14 +86,14 @@ public class FeeCrawler {
 		
 	
 	
-	private Map<String, List<List<String>>> getFeeRecords(Patent patent) {
+	private Map<String, List<List<String>>> getFeeRecords(int hostPort,Patent patent) {
 		Map<String, List<List<String>>> feeRecordsMap = new HashMap<>();
 		int retryCount = 3;
 		
 		while (retryCount > 0) {
 			try {
 				try {
-					String html = grabFeeHtml2(patent.getAppNo(), false);
+					String html = grabFeeHtml2(hostPort,patent.getAppNo(), false);
 					if (html != null) {
 						feeRecordsMap = parseHtml(html);
 					}
@@ -94,7 +102,7 @@ public class FeeCrawler {
 						return feeRecordsMap;
 					}
 				} catch (EmptyFeeRecordException e) {
-					String html = grabFeeHtml2(patent.getAppNo(), true);
+					String html = grabFeeHtml2(hostPort,patent.getAppNo(), true);
 					if (html != null) {
 						feeRecordsMap = parseHtml(html);
 					}
@@ -232,12 +240,22 @@ public class FeeCrawler {
 	}
 	
 	
-	public static  String grabFeeHtml2(String appNo, boolean isUnpublisedPatent) {
-		final String host = "www.yhzlpt.com"; //阿里云
-		//final String host = "60.174.195.212:8145"; //公司内部文件服务器
-		//final String host = "60.174.195.212:8146"; //公司内部windows服务器
-		//final String host = "so.lotut.com";
-		final String feeQueryPath = "/spms/spiderFee/getFeeByAppNo.html";
+	public static  String grabFeeHtml2(int hostPort,String appNo, boolean isUnpublisedPatent) {
+		String host;
+		
+		String feeQueryPath = "/spms/spiderFee/getFeeByAppNo.html";
+		if(hostPort == 1){
+			host = ALI_HOST;
+		}else if(hostPort == 2){
+			host = DOCUMENT_HOST;
+		}else if(hostPort == 3){
+			host = SEARCH_HOST;
+		}else if(hostPort == 4){
+			host = WINDOWS_HOST;
+		}else{
+			host = LOCALHOST_HOST;
+			feeQueryPath = "/txnQueryFeeData.do";
+		}
 		URIBuilder uriBuilder = new URIBuilder()
 				.setScheme("http")
 				.setHost(host)

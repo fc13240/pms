@@ -336,7 +336,8 @@
 							<td style="text-align:center"><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
 							  分享
 							  </a>&nbsp;
-							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
+							  <%-- <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>"> --%>
+							  <a target="_blank" href="javascript:grabHostFees(${patent.patentId})">
 							  交费
 							  </a>
 							  <br>
@@ -553,8 +554,10 @@ $(function () {
 		}
 			
 		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
-		
-		 window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patentNos);		
+		//缴费地址服务器
+		// 1 : 阿里云（116） 2 : 文件服务器 （60） 3: 搜索服务器（157）
+		var hostPort=1;
+		 window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patentNos+"&hostPort="+hostPort);		
 		
 	}	
 	

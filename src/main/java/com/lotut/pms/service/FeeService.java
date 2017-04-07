@@ -9,9 +9,9 @@ import com.lotut.pms.domain.FeeSearchCondition;
 import com.lotut.pms.domain.Page;
 
 public interface FeeService {
-	Map<String, List<?>> batchGrabFees(List<Long> patentIds);
+	Map<String, List<?>> batchGrabFees(int hostPort,List<Long> patentIds);
 	
-	Map<String, Object> grabFees(long patentId);
+	Map<String, Object> grabFees(int hostPort,long patentId);
 	
 	//CS:分页
 	List<Fee> getUserMonitoredFees(int userId);

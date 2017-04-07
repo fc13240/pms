@@ -164,7 +164,8 @@
 							<td style="text-align:center"><a  href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>">
 							  分享
 							  </a>&nbsp;
-							  <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>">
+							  <%-- <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${patent.patentId}'/>"> --%>
+							  <a target="_blank" href="javascript:grabHostFees(${patent.patentId})">
 							  交费
 							  </a>
 							  <br>

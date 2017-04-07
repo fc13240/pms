@@ -35,7 +35,8 @@ key:zhuanlilx=1&select-key:backPage=http%3A%2F%2Fcpquery.sipo.gov.cn%2FtxnQueryO
 target="_blank">费用信息</a>
 <a href="javascript:void(0);" onclick="searchAppNo('${patent.appNo}')" style="font-size:medium;margin-right: 80px;">专利公告</a>
 <a href="<s:url value='/patent/showFriends.html'/>?patents=<c:out value='${patent.patentId}'/>" style="font-size:medium;margin-right: 80px;">分享</a>
-<a href="<s:url value='/fee/grabFees.html?patent=${patent.patentId }'/>" target="_blank" style="font-size:medium;margin-right: 110px;">缴&nbsp;&nbsp;费</a>
+<%-- <a href="<s:url value='/fee/grabFees.html?patent=${patent.patentId }'/>" target="_blank" style="font-size:medium;margin-right: 110px;">缴&nbsp;&nbsp;费</a> --%>
+<a href="javascript:grabHostFees(${patent.patentId})" target="_blank" style="font-size:medium;margin-right: 110px;">缴&nbsp;&nbsp;费</a>
 <a href="<s:url value='/patent/showRemarks.html'/>?patentId=<c:out value='${patent.patentId}'/>" onclick=""style="font-size:medium;margin-right: 80px;">备注</a>
 <a href="<s:url value='/patent/showPatentDetail.html'/>?patentId=${patent.patentId}&ownerId=${patent.ownerId}" style="font-size:medium;margin-right: 80px;">修改</a>
 <a href="javascript:void(0);" onclick="delectPatent('<c:out value='${patent.patentId}'/>')" style="font-size:medium">删除</a>
