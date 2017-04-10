@@ -50,7 +50,7 @@
 				            </option>
 				          </c:forEach>
 				        </select>
-				        <span style="color:red;">*必填</span>
+				        <%-- <span style="color:red;">*必填</span> --%>
 				        <br>	
 				        	
 				       	<h5>专利名称:</h5>
