@@ -556,7 +556,7 @@ $(function () {
 		var patentNos = formutil.getAllCheckedCheckboxValues('tr td input.patent-check-item', 'patent');
 		//缴费地址服务器
 		// 1 : 阿里云（116） 2 : 文件服务器 （60） 3: 搜索服务器（157）
-		var hostPort=1;
+		var hostPort=5;
 		 window.open("<s:url value='/fee/batchGrabFees.html'/>?patents=" + patentNos+"&hostPort="+hostPort);		
 		
 	}	
