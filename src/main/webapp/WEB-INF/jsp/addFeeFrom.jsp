@@ -37,12 +37,12 @@
 					  
 						<h5>申请号：</h5>
 						<input style="width:400px;display:inline;" class="selectPointOfInterest form-control" name="appNo" id="appNo"  type="text" onblur="loadPatent()" required maxLength="30"/>
-						<span id="appNoTip">[ 注：不要输入字母(X除外)和小数点 ]</span>
+						<span id="appNoTip"><span style="color:red;">*必填</span>[ 注：不要输入字母(X除外)和小数点 ]</span>
 						<span id=appNoError style="color: black; display: none;font-weight:700;" >请输入正确的申请号</span>
 						<br>
 						
 						<h5>专利类型:</h5>
-				        <select style="width:400px;" class="selectPointOfInterest form-control" name="patentType" id="patentType" onblur="loadFeeTypes()" required >
+				        <select style="width:400px; display:inline;" class="selectPointOfInterest form-control" name="patentType" id="patentType" onblur="loadFeeTypes()" required >
 				          <option value="">请选择</option>
 				          <c:forEach items="${allPatentTypes}" var="patentType">
 				            <option value="<c:out value='${patentType.patentTypeId}'/>">
@@ -50,6 +50,7 @@
 				            </option>
 				          </c:forEach>
 				        </select>
+				        <%-- <span style="color:red;">*必填</span> --%>
 				        <br>	
 				        	
 				       	<h5>专利名称:</h5>
