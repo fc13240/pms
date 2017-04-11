@@ -241,7 +241,7 @@ public class FeeCrawler {
 	
 	
 	public static  String grabFeeHtml2(int hostPort,String appNo, boolean isUnpublisedPatent) {
-		String host;
+		String host=null;
 		
 		String feeQueryPath = "/spms/spiderFee/getFeeByAppNo.html";
 		if(hostPort == 1){
@@ -252,9 +252,9 @@ public class FeeCrawler {
 			host = SEARCH_HOST;
 		}else if(hostPort == 4){
 			host = WINDOWS_HOST;
-		}else{
-			host = LOCALHOST_HOST;
-			feeQueryPath = "/txnQueryFeeData.do";
+		}else if(hostPort == 5){
+			FeeCrawler fc =new FeeCrawler();
+			return fc.getFeeHtml(appNo);
 		}
 		URIBuilder uriBuilder = new URIBuilder()
 				.setScheme("http")
