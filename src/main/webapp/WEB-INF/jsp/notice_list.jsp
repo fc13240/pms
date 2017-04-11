@@ -581,7 +581,7 @@
 								  分享
 								  </a><br/>
 								  <%-- <a target="_blank" href="<s:url value='/fee/grabFees.html'/>?patent=<c:out value='${notice.patent.patentId}'/>"> --%>
-								  <a target="_blank" href="javascript:grabHostFees(${notice.patent.patentId})">
+								  <a href="javascript:grabHostFees(${notice.patent.patentId})">
 								  交费
 								  </a>
 								   <a target="_blank" href="<s:url value='/notice/showRemarks.html'/>?noticeId=${notice.noticeId}">
