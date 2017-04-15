@@ -76,6 +76,7 @@ public class OrderController {
 			@RequestParam("companyInvoice") Integer companyInvoice,HttpServletResponse response) throws IOException {
 		final int ALIPAY = 1;
 		final int UNIONPAY = 2;
+		final int WEIXINPAY = 3;
 		User user = PrincipalUtils.getCurrentPrincipal();
 		order.setOwner(user);
 		List<Fee> fees = feeService.getFeesByIds(Arrays.asList(feeIds));
@@ -87,6 +88,8 @@ public class OrderController {
 			resultMap.put("payWay", (long)ALIPAY);
 		}else if(order.getPaymentMethod().getPaymentMethodId() == UNIONPAY){
 			resultMap.put("payWay", (long)UNIONPAY);
+		}else if(order.getPaymentMethod().getPaymentMethodId() == WEIXINPAY){
+			resultMap.put("payWay", (long)WEIXINPAY);
 		}
 		
 		WebUtils.writeJsonStrToResponse(response, resultMap);
@@ -95,17 +98,18 @@ public class OrderController {
 	public String payRedirect(long orderId,int payWay,Model model ) {
 		final int ALIPAY = 1;
 		final int UNIONPAY = 2;
+		final int WEIXINPAY = 3;
 		model.addAttribute("orderId", orderId);
 		if(ALIPAY==payWay){
 			return "redirect:/alipay/pay.html";
 		}else if(UNIONPAY==payWay){
 			return "redirect:/unionPay/pay.html";
+		}else if(WEIXINPAY == payWay){
+			return "redirect:/weixinPay/pay.html";
 		}else{
 			return null;
 		}
 	}
-	
-	
 	
 	
 	@RequestMapping(path="/list")

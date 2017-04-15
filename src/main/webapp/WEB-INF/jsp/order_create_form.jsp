@@ -79,6 +79,8 @@
 							<img src="<s:url value='/temp/images/aliPay.png'/>" alt="支付宝" width="120px;" height="50px" >
 							<input type="radio" name="paymentMethod.paymentMethodId" value="2" required="required">
 							<img src="<s:url value='/temp/images/unionPay.png'/>" alt="银联" width="120px;" height="50px">
+							<input type="radio" name="paymentMethod.paymentMethodId" value="3" required="required">
+							<img src="<s:url value='/static/weixin/wePayLogo2.png'/>" alt="微信" width="120px;" height="50px">
 						 </td>
 						</tr>
 						
